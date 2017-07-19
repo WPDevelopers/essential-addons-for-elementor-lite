@@ -185,17 +185,8 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 					'eael-creative-button--wayra' 		=> esc_html__( 'Wayra', 	'essential-addons-elementor' ),
 					'eael-creative-button--tamaya' 		=> esc_html__( 'Tamaya', 	'essential-addons-elementor' ),
 					'eael-creative-button--rayen' 		=> esc_html__( 'Rayen', 	'essential-addons-elementor' ),
-					'eael-creative-button--pipaluk' 	=> esc_html__( 'Pipaluk', 	'essential-addons-elementor' ),
-					'eael-creative-button--moema' 		=> esc_html__( 'Moema', 	'essential-addons-elementor' ),
-					'eael-creative-button--wave' 		=> esc_html__( 'Wave', 		'essential-addons-elementor' ),
-					'eael-creative-button--aylen' 		=> esc_html__( 'Aylen', 	'essential-addons-elementor' ),
-					'eael-creative-button--saqui' 		=> esc_html__( 'Saqui', 	'essential-addons-elementor' ),
-					'eael-creative-button--wapasha' 	=> esc_html__( 'Wapasha', 	'essential-addons-elementor' ),
-					'eael-creative-button--nuka' 		=> esc_html__( 'Nuka', 		'essential-addons-elementor' ),
-					'eael-creative-button--antiman' 	=> esc_html__( 'Antiman', 	'essential-addons-elementor' ),
-					'eael-creative-button--quidel' 		=> esc_html__( 'Quidel', 	'essential-addons-elementor' ),
-					'eael-creative-button--shikoba' 	=> esc_html__( 'Shikoba', 	'essential-addons-elementor' ),
 				],
+				'description' => 'More effects on <a href="https://essential-addons.com/elementor/buy.php">Pro version</a>'
 			]
 		);
 
