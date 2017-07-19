@@ -41,11 +41,9 @@ add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
 
 function essential_addons_el_enqueue(){
-   wp_enqueue_style('essential_addons_elementor-slick-css',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.css');
    wp_enqueue_style('essential_addons_elementor-css',ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css');
    wp_enqueue_script('essential_addons_elementor-fancy-text-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/fancy-text.js', array('jquery'),'1.0', true);
    wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
-   wp_enqueue_script('essential_addons_elementor-slick-js',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.min.js', array('jquery'),'1.0', true);
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
