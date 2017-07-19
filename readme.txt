@@ -38,6 +38,12 @@ Bundle of elements for Elementor Page Builder. Lots of useful and premium elemen
 
 ### More elements on <a href="https://essential-addons.com/elementor/buy.php">Premium Version</a>
 
+* Lightbox & Modal
+* Instagram Feed/Gallery
+* Testimonial Slider
+* Image Comparison
+* Interactive Promo
+
 
 == Installation ==
 
