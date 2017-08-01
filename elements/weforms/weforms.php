@@ -98,7 +98,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		);
 
   		$this->add_responsive_control(
-  			'eael_contact_form_width',
+  			'eael_weform_width',
   			[
   				'label' => esc_html__( 'Form Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -120,7 +120,7 @@ class Widget_Eael_WeForm extends Widget_Base {
   		);
 
   		$this->add_responsive_control(
-  			'eael_contact_form_max_width',
+  			'eael_weform_max_width',
   			[
   				'label' => esc_html__( 'Form Max Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -143,7 +143,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->add_responsive_control(
-			'eael_contact_form_margin',
+			'eael_weform_margin',
 			[
 				'label' => esc_html__( 'Form Margin', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
@@ -155,7 +155,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		);		
 		
 		$this->add_responsive_control(
-			'eael_contact_form_padding',
+			'eael_weform_padding',
 			[
 				'label' => esc_html__( 'Form Padding', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
@@ -168,7 +168,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->add_control(
-			'eael_contact_form_border_radius',
+			'eael_weform_border_radius',
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
@@ -184,7 +184,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'eael_contact_form_border',
+				'name' => 'eael_weform_border',
 				'selector' => '{{WRAPPER}} .eael-weform-container',
 			]
 		);
@@ -193,7 +193,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'eael_contact_form_box_shadow',
+				'name' => 'eael_weform_box_shadow',
 				'selector' => '{{WRAPPER}} .eael-weform-container',
 			]
 		);
@@ -203,7 +203,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 
 		$this->start_controls_section(
-			'eael_section_contact_form_field_styles',
+			'eael_section_weform_field_styles',
 			[
 				'label' => esc_html__( 'Form Fields Styles', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
@@ -211,19 +211,25 @@ class Widget_Eael_WeForm extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_contact_form_input_background',
+			'eael_weform_input_background',
 			[
 				'label' => esc_html__( 'Input Field Background', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
 		
 
   		$this->add_responsive_control(
-  			'eael_contact_form_input_width',
+  			'eael_weform_input_width',
   			[
   				'label' => esc_html__( 'Input Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -239,13 +245,18 @@ class Widget_Eael_WeForm extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-text' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"]' => 'width: {{SIZE}}{{UNIT}};',
 				],
   			]
   		);
 		
   		$this->add_responsive_control(
-  			'eael_contact_form_textarea_width',
+  			'eael_weform_textarea_width',
   			[
   				'label' => esc_html__( 'Textarea Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -261,19 +272,25 @@ class Widget_Eael_WeForm extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea' => 'width: {{SIZE}}{{UNIT}};',
 				],
   			]
   		);	
 		
 		$this->add_responsive_control(
-			'eael_contact_form_input_padding',
+			'eael_weform_input_padding',
 			[
 				'label' => esc_html__( 'Fields Padding', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -281,14 +298,20 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->add_control(
-			'eael_contact_form_input_border_radius',
+			'eael_weform_input_border_radius',
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'separator' => 'before',
 				'size_units' => [ 'px' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -297,8 +320,14 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'eael_contact_form_input_border',
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea',
+				'name' => 'eael_weform_input_border',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea',
 			]
 		);
 		
@@ -306,13 +335,19 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'eael_contact_form_input_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea',
+				'name' => 'eael_weform_input_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea',
 			]
 		);
 
 		$this->add_control(
-			'eael_contact_form_focus_heading',
+			'eael_weform_focus_heading',
 			[
 				'type' => Controls_Manager::HEADING,
 				'label' => esc_html__( 'Focus State Style', 'essential-addons-elementor' ),
@@ -324,18 +359,30 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'eael_contact_form_input_focus_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-text:focus, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea:focus',
+				'name' => 'eael_weform_input_focus_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea:focus',
 			]
 		);
 
 		$this->add_control(
-			'eael_contact_form_input_focus_border',
+			'eael_weform_input_focus_border',
 			[
 				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'body {{WRAPPER}} .eael-weform-container input.wpcf7-text:focus, body {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea:focus' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"]:focus, 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea:focus' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -346,7 +393,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->start_controls_section(
-			'eael_section_contact_form_typography',
+			'eael_section_weform_typography',
 			[
 				'label' => esc_html__( 'Color & Typography', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
@@ -355,29 +402,35 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->add_control(
-			'eael_contact_form_label_color',
+			'eael_weform_label_color',
 			[
 				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container, {{WRAPPER}} .eael-weform-container .wpcf7-form label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container, {{WRAPPER}} .eael-weform-container .wpuf-label label' => 'color: {{VALUE}};',
 				],
 			]
 		);
 		
 		$this->add_control(
-			'eael_contact_form_field_color',
+			'eael_weform_field_color',
 			[
 				'label' => esc_html__( 'Field Font Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea' => 'color: {{VALUE}};',
 				],
 			]
 		);
 		
 		$this->add_control(
-			'eael_contact_form_placeholder_color',
+			'eael_weform_placeholder_color',
 			[
 				'label' => esc_html__( 'Placeholder Font Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
@@ -391,7 +444,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->add_control(
-			'eael_contact_form_label_heading',
+			'eael_weform_label_heading',
 			[
 				'type' => Controls_Manager::HEADING,
 				'label' => esc_html__( 'Label Typography', 'essential-addons-elementor' ),
@@ -402,14 +455,14 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'eael_contact_form_label_typography',
-				'selector' => '{{WRAPPER}} .eael-weform-container, {{WRAPPER}} .eael-weform-container .wpcf7-form label',
+				'name' => 'eael_weform_label_typography',
+				'selector' => '{{WRAPPER}} .eael-weform-container, {{WRAPPER}} .eael-weform-container .wpuf-label label',
 			]
 		);
 		
 		
 		$this->add_control(
-			'eael_contact_form_heading_input_field',
+			'eael_weform_heading_input_field',
 			[
 				'type' => Controls_Manager::HEADING,
 				'label' => esc_html__( 'Input Fields Typography', 'essential-addons-elementor' ),
@@ -420,8 +473,14 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'eael_contact_form_input_field_typography',
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-text, {{WRAPPER}} .eael-weform-container textarea.wpcf7-textarea',
+				'name' => 'eael_weform_input_field_typography',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"], 
+					 {{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields textarea',
 			]
 		);
 		
@@ -430,7 +489,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->start_controls_section(
-			'eael_section_contact_form_submit_button_styles',
+			'eael_section_weform_submit_button_styles',
 			[
 				'label' => esc_html__( 'Submit Button Styles', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
@@ -438,7 +497,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		);
 
   		$this->add_responsive_control(
-  			'eael_contact_form_submit_btn_width',
+  			'eael_weform_submit_btn_width',
   			[
   				'label' => esc_html__( 'Button Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -454,13 +513,13 @@ class Widget_Eael_WeForm extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'width: {{SIZE}}{{UNIT}};',
 				],
   			]
   		);
   		
 		$this->add_responsive_control(
-			'eael_contact_form_submit_btn_alignment',
+			'eael_weform_submit_btn_alignment',
 			[
 				'label' => esc_html__( 'Button Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
@@ -484,57 +543,57 @@ class Widget_Eael_WeForm extends Widget_Base {
 					],
 				],
 				'default' => 'default',
-				'prefix_class' => 'eael-weform-btn-align-',
+				'prefix_class' => 'eael-contact-form-btn-align-',
 			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_contact_form_submit_btn_typography',
+             'name' => 'eael_weform_submit_btn_typography',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-submit',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]',
 			]
 		);
 		
 		$this->add_responsive_control(
-			'eael_contact_form_submit_btn_margin',
+			'eael_weform_submit_btn_margin',
 			[
 				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 		
 		
 		$this->add_responsive_control(
-			'eael_contact_form_submit_btn_padding',
+			'eael_weform_submit_btn_padding',
 			[
 				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 		
 		
 		
-		$this->start_controls_tabs( 'eael_contact_form_submit_button_tabs' );
+		$this->start_controls_tabs( 'eael_weform_submit_button_tabs' );
 
 		$this->start_controls_tab( 'normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
 
 		$this->add_control(
-			'eael_contact_form_submit_btn_text_color',
+			'eael_weform_submit_btn_text_color',
 			[
 				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -542,12 +601,12 @@ class Widget_Eael_WeForm extends Widget_Base {
 
 		
 		$this->add_control(
-			'eael_contact_form_submit_btn_background_color',
+			'eael_weform_submit_btn_background_color',
 			[
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -555,13 +614,13 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'eael_contact_form_submit_btn_border',
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-submit',
+				'name' => 'eael_weform_submit_btn_border',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]',
 			]
 		);
 		
 		$this->add_control(
-			'eael_contact_form_submit_btn_border_radius',
+			'eael_weform_submit_btn_border_radius',
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
@@ -571,7 +630,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'border-radius: {{SIZE}}px;',
 				],
 			]
 		);
@@ -580,37 +639,37 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		$this->end_controls_tab();
 
-		$this->start_controls_tab( 'eael_contact_form_submit_btn_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ] );
+		$this->start_controls_tab( 'eael_weform_submit_btn_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ] );
 
 		$this->add_control(
-			'eael_contact_form_submit_btn_hover_text_color',
+			'eael_weform_submit_btn_hover_text_color',
 			[
 				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'eael_contact_form_submit_btn_hover_background_color',
+			'eael_weform_submit_btn_hover_background_color',
 			[
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'eael_contact_form_submit_btn_hover_border_color',
+			'eael_weform_submit_btn_hover_border_color',
 			[
 				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container input.wpcf7-submit:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -623,8 +682,8 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'eael_contact_form_submit_btn_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-weform-container input.wpcf7-submit',
+				'name' => 'eael_weform_submit_btn_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]',
 			]
 		);
 		
