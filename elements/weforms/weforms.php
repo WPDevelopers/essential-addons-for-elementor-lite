@@ -26,7 +26,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 
 		
   		$this->start_controls_section(
-  			'eael_section_wpcf7_form',
+  			'eael_section_weform',
   			[
   				'label' => esc_html__( 'Select Form', 'essential-addons-elementor' )
   			]
@@ -38,6 +38,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 			'wpuf_contact_form',
 			[
 				'label' => esc_html__( 'Select weForm', 'essential-addons-elementor' ),
+				'description' => esc_html__( 'Please save and refresh the page after selecting the form', 'essential-addons-elementor' ),
 				'label_block' => true,
 				'type' => Controls_Manager::SELECT,
 				'options' => eael_select_weform(),
@@ -49,7 +50,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 		
 		
 		$this->start_controls_section(
-			'eael_section_contact_form_styles',
+			'eael_section_weform_styles',
 			[
 				'label' => esc_html__( 'Form Container Styles', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
@@ -57,18 +58,18 @@ class Widget_Eael_WeForm extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_contact_form_background',
+			'eael_weform_background',
 			[
 				'label' => esc_html__( 'Form Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-weform-container' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-weform-container' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
 		
 		$this->add_responsive_control(
-			'eael_contact_form_alignment',
+			'eael_weform_alignment',
 			[
 				'label' => esc_html__( 'Form Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
@@ -92,7 +93,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 					],
 				],
 				'default' => 'default',
-				'prefix_class' => 'eael-weform-align-',
+				'prefix_class' => 'eael-contact-form-align-',
 			]
 		);
 
