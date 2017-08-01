@@ -189,3 +189,23 @@ function eael_select_contact_form(){
 }
 }
 
+
+
+// Get weForms
+
+
+function eael_select_weform(){
+    $wpuf_form_list = get_posts(array(
+        'post_type' => 'wpuf_contact_form',
+        'showposts' => 999,
+    ));
+    $posts = array();
+    
+    if ( ! empty( $wpuf_form_list ) && ! is_wp_error( $wpuf_form_list ) ){
+    foreach ( $wpuf_form_list as $post ) {
+        $options[ $post->ID ] = $post->post_title;
+    } 
+    return $options;
+    }
+}
+
