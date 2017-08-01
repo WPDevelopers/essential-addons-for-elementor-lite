@@ -1,9 +1,9 @@
 === Essential Addons for Elementor Lite ===
-Contributors: Codetic
+Contributors: Codetic, re_enter_rupok
 Tags: elementor, elements, widgets, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -19,7 +19,7 @@ Bundle of elements for Elementor Page Builder. Lots of useful and premium elemen
 
 ### Features
 
-* 8+ Stunning Elements
+* 9+ Stunning Elements
 * Fully Customizable
 * Unlimited Design Options
 * Lightweight and Fast
@@ -35,6 +35,7 @@ Bundle of elements for Elementor Page Builder. Lots of useful and premium elemen
 * Team Members
 * WooCommerce Product Grid
 * Contact Form 7
+* weForms
 
 ### More elements on <a href="https://essential-addons.com/elementor/buy.php">Premium Version</a>
 
@@ -52,7 +53,7 @@ Note : This plugin works with Elementor. Make sure you have <a href="https://wor
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. You can type "EA" on your element tabs within Cornerstone editor and all the avialable elements will appear.
+3. You can type "EA" on your element tabs within Elementor editor and all the avialable elements will appear.
 4. Also you can see them under the category "Essential Addons for Elementor" on your element/widget list.
 
 == Frequently Asked Questions ==
@@ -71,10 +72,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Screenshots ==
 
-None yet
 
 
 == Changelog ==
+
+= 1.0.1 =
+
+- Element added for weForms (https://wordpress.org/plugins/weforms/)
 
 = 1.0.0 =
 
@@ -82,3 +86,7 @@ Initial stable realese
 
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+
+- Element added for weForms (https://wordpress.org/plugins/weforms/)

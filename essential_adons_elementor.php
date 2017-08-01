@@ -4,7 +4,7 @@
  * Description: Elements bundle for Elementor page builder plugin for WordPress. <a href="https://essential-addons.com/elementor/buy.php">Get Premium version</a>
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
