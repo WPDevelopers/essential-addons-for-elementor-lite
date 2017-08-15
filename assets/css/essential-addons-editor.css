@@ -1,0 +1,21 @@
+.elementor-panel .pro-feature, .elementor-panel .pro-feature a {
+	color: #a4afb7;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.8;
+	font-style: normal;
+}
+
+.elementor-panel .pro-feature a {
+  text-decoration: underline;
+  color: #f54 !important;
+}
+
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle {
+	color: #f54;
+}
+
+.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
+	display: none!important;
+}

@@ -52,3 +52,12 @@ function essential_addons_el_enqueue(){
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
+
+// Editor CSS
+
+add_action( 'elementor/editor/before_enqueue_scripts', function() {
+   
+   wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
+   wp_enqueue_style( 'essential_addons_elementor_editor-css' );
+   
+} );
