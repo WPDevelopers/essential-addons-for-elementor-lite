@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Essential Addons for Elementor Lite
+ * Plugin Name: Essential Addons Elementor
  * Description: Elements bundle for Elementor page builder plugin for WordPress. <a href="https://essential-addons.com/elementor/buy.php">Get Premium version</a>
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
@@ -22,6 +22,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
 function add_eael_elements(){
 
    // load elements
+   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/post-grid/post-grid.php';
    require_once ESSENTIAL_ADDONS_EL_PATH.'elements/post-timeline/post-timeline.php';
    require_once ESSENTIAL_ADDONS_EL_PATH.'elements/fancy-text/fancy-text.php';
    require_once ESSENTIAL_ADDONS_EL_PATH.'elements/creative-button/creative-button.php';

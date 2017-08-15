@@ -1,21 +1,22 @@
-=== Essential Addons for Elementor Lite ===
+=== Essential Addons Elementor ===
 Contributors: Codetic, re_enter_rupok
 Tags: elementor, elements, widgets, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Essential bundle of elements for Elementor Page Builder. 
+Elementor elements bundle for Elementor WordPress Page Builder. 
 
 == Description ==
 
-Bundle of elements for Elementor Page Builder. Lots of useful and premium elements to complete your website quickly.
+Elementor elements  bundle for Elementor WordPress Page Builder. Lots of useful and premium elements to complete your website quickly.
 
 
 <a href="https://codetic.net/essential-addons-elementor/" rel="nofollow">Check the demos</a>
 
+### <a href="https://wordpress.org/plugins/elementor/" rel="nofollow">Elementor</a> page builder is required for this plugin.
 
 ### Features
 
@@ -27,24 +28,27 @@ Bundle of elements for Elementor Page Builder. Lots of useful and premium elemen
 
 ### Available Elements
 
-* Post Timeline
-* Fancy Text
-* Creative Buttons
-* Countdown
-* Testimonials
-* Team Members
-* WooCommerce Product Grid
-* Contact Form 7
-* weForms
+* <a href="https://www.codetic.net/essential-addons-elementor/post-grid/" target="_blank">Post Grid (Masonry)</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/post-timeline/" target="_blank">Post Timeline</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/fancy-text/" target="_blank">Fancy Text</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/creative-buttons/" target="_blank">Creative Buttons</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/countdown/" target="_blank">Countdown</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/team-members/" target="_blank">Team Members</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/testimonials/" target="_blank">Testimonials</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/woo-product-grid/" target="_blank">WooCommerce Product Grid</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/contact-form-7/" target="_blank">Contact Form 7</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/weforms/" target="_blank">weForms</a>
+
 
 ### More elements on <a href="https://essential-addons.com/elementor/buy.php">Premium Version</a>
 
-* Lightbox & Modal
-* Instagram Feed/Gallery
-* Testimonial Slider
-* Image Comparison
-* Interactive Promo
+* <a href="https://www.codetic.net/essential-addons-elementor/post-block/" target="_blank">Post Block (Flex)</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/lightbox-modal/" target="_blank">Lightbox & Modal</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/testimonial-slider/" target="_blank">Testimonial Slider</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/image-comparison/" target="_blank">Image Comparison</a>
+* <a href="https://www.codetic.net/essential-addons-elementor/interactive-promo/" target="_blank">Interactive Promo</a>
 
+More coming soon...
 
 == Installation ==
 
@@ -76,6 +80,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 1.0.2 =
+
+- Post Grid (Masonry) element added</a>
+- Few minor improvement
+
+
 = 1.0.1 =
 
 - Element added for weForms (https://wordpress.org/plugins/weforms/)
@@ -87,6 +97,7 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.2 =
 
-- Element added for weForms (https://wordpress.org/plugins/weforms/)
+- Post Grid (Masonry) element added</a>
+- Few minor improvement
