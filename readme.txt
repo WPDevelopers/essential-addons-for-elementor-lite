@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok
 Tags: elementor, elements, widgets, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -80,9 +80,9 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 1.0.2 =
+= 1.1.0 =
 
-- Post Grid (Masonry) element added</a>
+- Post Grid (Masonry) element added
 - Few minor improvement
 
 
@@ -99,5 +99,5 @@ Initial stable realese
 
 = 1.0.2 =
 
-- Post Grid (Masonry) element added</a>
+- Post Grid (Masonry) element added
 - Few minor improvement
