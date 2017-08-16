@@ -1,6 +1,6 @@
 === Essential Addons Elementor ===
 Contributors: Codetic, re_enter_rupok
-Tags: elementor, elements, widgets, page builder, builder, visual editor, wordpress page builder
+Tags: elementor, elements, addons, elementor addon, widgets, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8
 Stable tag: 1.1.0
