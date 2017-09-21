@@ -18,13 +18,6 @@ class Eael_Admin_Settings {
 	   'team-members'       => true,
 	   'testimonials'       => true,
 	   'weforms'            => true,
-	   'img-comparison'     => false,
-	   'instagram-gallery'  => false,
-	   'interactive-promo'  => false,
-	   'lightbox'           => false,
-	   'post-block'         => false,
-	   'testimonial-slider' => false,
-	   'static-product'     => false,
 	);
 
 	private $eael_settings;
@@ -226,7 +219,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Image Comparison', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Image Comparison', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="img-comparison" name="img-comparison" <?php checked( 1, $this->eael_get_settings['img-comparison'], true ); ?> disabled >
+				                        <input type="checkbox" id="img-comparison" name="img-comparison" disabled >
 				                        <label for="img-comparison" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
@@ -234,7 +227,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Instagram Gallery', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Instagram Gallery', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="instagram-gallery" name="instagram-gallery" <?php checked( 1, $this->eael_get_settings['instagram-gallery'], true ); ?> disabled >
+				                        <input type="checkbox" id="instagram-gallery" name="instagram-gallery" disabled >
 				                        <label for="instagram-gallery" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
@@ -242,7 +235,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Interactive Promo', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Interactive Promo', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="interactive-promo" name="interactive-promo" <?php checked( 1, $this->eael_get_settings['interactive-promo'], true ); ?> disabled >
+				                        <input type="checkbox" id="interactive-promo" name="interactive-promo" disabled >
 				                        <label for="interactive-promo" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
@@ -250,7 +243,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Lightbox', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Lightbox', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="lightbox" name="lightbox" <?php checked( 1, $this->eael_get_settings['lightbox'], true ); ?> disabled >
+				                        <input type="checkbox" id="lightbox" name="lightbox" disabled >
 				                        <label for="lightbox" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
@@ -258,7 +251,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Post Block', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Post Block', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="post-block" name="post-block" <?php checked( 1, $this->eael_get_settings['post-block'], true ); ?> disabled >
+				                        <input type="checkbox" id="post-block" name="post-block" disabled >
 				                        <label for="post-block" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
@@ -268,7 +261,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Testimonial Slider', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Testimonial Slider', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="testimonial-slider" name="testimonial-slider" <?php checked( 1, $this->eael_get_settings['testimonial-slider'], true ); ?> disabled >
+				                        <input type="checkbox" id="testimonial-slider" name="testimonial-slider" disabled >
 				                        <label for="testimonial-slider" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
@@ -276,7 +269,7 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Static Product', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Static Product', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="static-product" name="static-product" <?php checked( 1, $this->eael_get_settings['static-product'], true ); ?> disabled >
+				                        <input type="checkbox" id="static-product" name="static-product" disabled >
 				                        <label for="static-product" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
