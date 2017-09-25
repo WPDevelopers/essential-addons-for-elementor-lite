@@ -220,7 +220,7 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_creative_button_typography',
+            'name' => 'eael_creative_button_typography',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .eael-creative-button',
 			]

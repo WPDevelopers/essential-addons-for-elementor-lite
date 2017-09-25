@@ -76,6 +76,8 @@ function add_eael_elements(){
    if ( function_exists( 'WeForms' ) && $is_component_active['weforms'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/weforms/weforms.php';
    }
+
+   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/infobox/infobox.php';
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
