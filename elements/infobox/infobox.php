@@ -36,14 +36,14 @@ class Widget_Eael_Info_Box extends Widget_Base {
   		$this->add_control(
 		  'eael_infobox_img_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Infobox Type', 'domain' ),
+		   	'label'       	=> esc_html__( 'Infobox Type', 'essential-addons-elementor' ),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'img-on-top',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'img-on-top'  			=> esc_html__( 'Image On Top', 'domain' ),
-		     		'img-on-left' 			=> esc_html__( 'Image On Left', 'domain' ),
-		     		'img-beside-title' 	=> esc_html__( 'Image Beside Title', 'domain' ),
+		     		'img-on-top'  			=> esc_html__( 'Image On Top', 'essential-addons-elementor' ),
+		     		'img-on-left' 			=> esc_html__( 'Image On Left', 'essential-addons-elementor' ),
+		     		'img-beside-title' 	=> esc_html__( 'Image Beside Title', 'essential-addons-elementor' ),
 		     	],
 		  	]
 		);
@@ -177,35 +177,35 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->start_controls_section( 
 			'eael_infobox_content',
 			[
-				'label' => esc_html__( 'Infobox Content', 'domain' ),
+				'label' => esc_html__( 'Infobox Content', 'essential-addons-elementor' ),
 			]
 		);
 		$this->add_control( 
 			'eael_infobox_title',
 			[
-				'label' => esc_html__( 'Infobox Title', 'domain' ),
+				'label' => esc_html__( 'Infobox Title', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'This is an icon box', 'domain' )
+				'default' => esc_html__( 'This is an icon box', 'essential-addons-elementor' )
 			]
 		);
 		$this->add_control( 
 			'eael_infobox_text',
 			[
-				'label' => esc_html__( 'Infobox Text', 'domain' ),
+				'label' => esc_html__( 'Infobox Text', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'label_block' => true,
-				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'domain' )
+				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-addons-elementor' )
 			]
 		);
 		$this->add_control(
 			'eael_show_infobox_content',
 			[
-				'label' => __( 'Show Content', 'domain' ),
+				'label' => __( 'Show Content', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
-				'label_on' => __( 'Show', 'domain' ),
-				'label_off' => __( 'Hide', 'domain' ),
+				'label_on' => __( 'Show', 'essential-addons-elementor' ),
+				'label_off' => __( 'Hide', 'essential-addons-elementor' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -253,14 +253,14 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->add_control(
 		  'eael_infobox_img_shape',
 		  	[
-		   	'label'     	=> esc_html__( 'Image Shape', 'domain' ),
+		   	'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'circle',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'square'  	=> esc_html__( 'Square', 'domain' ),
-		     		'circle' 	=> esc_html__( 'Circle', 'domain' ),
-		     		'radius' 	=> esc_html__( 'Radius', 'domain' ),
+		     		'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+		     		'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+		     		'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
 		     	],
 		     	'prefix_class' => 'eael-infobox-shape-',
 		     	'condition' => [
@@ -290,7 +290,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->add_control(
     		'eael_infobox_icon_size',
     		[
-        		'label' => __( 'Icon Size', 'domain' ),
+        		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
        		'type' => Controls_Manager::SLIDER,
         		'default' => [
             	'size' => 40,
@@ -324,15 +324,15 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->add_control(
 		  'eael_infobox_icon_bg_shape',
 		  	[
-		   	'label'     	=> esc_html__( 'Background Shape', 'domain' ),
+		   	'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'none',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'none'  		=> esc_html__( 'None', 'domain' ),
-		     		'circle' 	=> esc_html__( 'Circle', 'domain' ),
-		     		'radius' 	=> esc_html__( 'Radius', 'domain' ),
-		     		'square' 	=> esc_html__( 'Square', 'domain' ),
+		     		'none'  		=> esc_html__( 'None', 'essential-addons-elementor' ),
+		     		'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+		     		'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+		     		'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
 		     	],
 		     	'prefix_class' => 'eael-infobox-icon-bg-shape-',
 		     	'condition' => [
@@ -461,7 +461,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		<?php endif; ?>
 		<?php if( 'img-on-left' == $settings['eael_infobox_img_type'] ) : ?>
 		<div class="eael-infobox icon-on-left">
-			<div class="infobox-icon <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'domain' ); endif; ?>">
+			<div class="infobox-icon <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 				<?php if( 'img' == $settings['eael_infobox_img_or_icon'] ) : ?>
 				<figure>
 					<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="Icon Image">
@@ -471,7 +471,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				<i class="<?php echo esc_attr( $settings['eael_infobox_icon'] ); ?>"></i>
 				<?php endif; ?>
 			</div>
-			<div class="infobox-content <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'domain' ); endif; ?>">
+			<div class="infobox-content <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
 					<p><?php echo $settings['eael_infobox_text']; ?></p>
@@ -482,7 +482,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		<?php if( 'img-beside-title' == $settings['eael_infobox_img_type'] ) : ?>
 		<div class="eael-infobox icon-beside-title">
 			<div class="infobox-content">
-				<h4 class="title <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'domain' ); endif; ?>">
+				<h4 class="title <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 					<?php if( 'img' == $settings['eael_infobox_img_or_icon'] ) : ?>
 					<figure>
 						<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="Icon Image">
