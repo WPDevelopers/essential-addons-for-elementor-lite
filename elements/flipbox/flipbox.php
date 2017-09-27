@@ -314,6 +314,47 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
+		 * Tab Style (Flip Box Background Style)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_flipbox_bg_style_settings',
+			[
+				'label' => esc_html__( 'Background Style', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'eael_flipbox_front_bg_color',
+			[
+				'label' => esc_html__( 'Front Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#14bcc8',
+				'selectors' => [
+					'{{WRAPPER}} .eael-flipbox .eael-vertical-flip .front' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-flipbox .eael-horizontal-flip .front' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_flipbox_back_bg_color',
+			[
+				'label' => esc_html__( 'Back Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ff7e70',
+				'selectors' => [
+					'{{WRAPPER}} .eael-flipbox .eael-vertical-flip .back' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .eael-flipbox .eael-horizontal-flip .back' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
 		 * Tab Style (Flip Box Title Style)
 		 * -------------------------------------------
 		 */

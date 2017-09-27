@@ -79,6 +79,7 @@ function add_eael_elements(){
 
    require_once ESSENTIAL_ADDONS_EL_PATH.'elements/infobox/infobox.php';
    require_once ESSENTIAL_ADDONS_EL_PATH.'elements/flipbox/flipbox.php';
+   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/call-to-action/call-to-action.php';
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
