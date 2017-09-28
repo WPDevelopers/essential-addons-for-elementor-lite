@@ -1,13 +1,24 @@
 /**
  *=============================================================
- * Eael Admin Settings Page Styles 
+ * Essential Addons Elementor Admin Settings Page Styles 
  *============================================================= 
  */
 
 /* General Style */
+
+
 .eael-settings-tabs {
 	padding-top: 15px;
 }
+
+.eael-settings-tab h4 {
+	font-size: 22px;
+}
+
+.eael-settings-tab p {
+	font-size: 14px;
+}
+
 .eael-settings-tabs ul {
 	width: 100%;
 	height: auto;
@@ -18,7 +29,8 @@
 }
 .eael-settings-tabs ul li a {
 	padding: 15px 20px;
-	background: #f9f9f9;
+	background: #ECF0F1;
+	color: #646464;
 	font-size: 16px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -35,20 +47,14 @@
 	position: relative;
 }
 .eael-settings-tabs ul li.ui-tabs-active a {
-	background: #f2f2f2;
+	background: #fff;
 	outline: none;
 	box-shadow: none;
-}
-.section-title {
-	display: block;
-	padding: 15px 10px 15px 20px;
-	font-size: 20px;
-	background: #f2f2f2;
-	border-radius: 20px;
+	color: #343434;
 }
 p.title {
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 700;
 	color: #333;
 	text-transform: uppercase;
 	margin-bottom: 0px;
@@ -153,6 +159,7 @@ textarea.eael-form-control {
   }
 }
 /* Footer Style */
+
 .eael-settings-footer {
 	padding: 20px 25px 15px 25px;
 	background: #fff;
@@ -165,8 +172,86 @@ textarea.eael-form-control {
 .eael-settings-footer p.submit {
 	margin-top: 0px;
 }
-.eael-settings-footer .button {
-	padding: 0 25px 1px;
-	height: 40px;
+
+.eael-settings-tab img {
+	max-width: 100%;
+}
+.button.eael-btn {
+	background-color: #0099CC;
+	color: #fff;
+	padding: 6px 20px;
+	border: none;
+	box-shadow: none;
+	font-size: 14px;
+	height: auto;
+	text-transform: uppercase;
+	text-shadow: none;
+	letter-spacing: .05em;
 }
 
+.button.eael-btn:hover, .button.eael-btn:focus {
+	background-color: #1E96F1;
+	color: #fff;
+}
+
+.eael-save-btn-wrap {
+	margin: 30px 0 20px;
+}
+
+.eael-save-btn-wrap .eael-btn {
+	background-color: #3CCD94;
+	color: #fff;
+	padding: 10px 20px
+}
+.eael-save-btn-wrap .eael-btn:hover, .eael-save-btn-wrap .eael-btn:focus {
+	background-color: #02CC7B;
+	color: #fff;
+}
+
+.eael-btn.eael-demo-btn {
+	background-color: #E74C3C;
+	color: #fff;
+}
+.eael-btn.eael-demo-btn:hover, .eael-btn.eael-demo-btn:focus {
+	background-color: #f54;
+	color: #fff;
+}
+
+.eael-btn.eael-license-btn {
+	background-color: #0dc9c3;
+}
+.eael-btn.eael-license-btn:hover, .eael-btn.eael-license-btn:focus {
+	background-color: #08d1ca;
+}
+.eael-btn.eael-demo-btn, .eael-btn.eael-license-btn {
+	padding: 20px;
+	display: block;
+	max-width: 250px;
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.premium-elements-title {
+	margin: 50px 0 30px;
+}
+
+.premium-elements-title img {
+	width: 75px;
+	float: left;
+}
+
+.premium-elements-title .section-title {
+	color: #157EFB;
+	margin: 35px 5px 0;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 20px;
+	border-bottom: 6px double #157EFB;
+	padding-bottom: 10px;
+	display: inline-block;
+}
+
+.go-premium .eael-btn.eael-license-btn {
+	margin-top: 30px;
+}

@@ -74,12 +74,12 @@ class Eael_Admin_Settings {
 	public function create_eael_admin_menu() {
 
 		add_menu_page( 
-			'Essential Addon Elementor Lite', 
-			'Essential Addon Elementor Lite', 
+			'Essential Addons Elementor', 
+			'Essential Addons Elementor', 
 			'manage_options', 
 			'eael-settings', 
 			array( $this, 'eael_admin_settings_page' ), 
-			'dashicons-admin-generic', 
+			plugins_url( '/', __FILE__ ).'/assets/images/ea-icon.png',
 			199  
 		);
 
@@ -119,11 +119,21 @@ class Eael_Admin_Settings {
 				      <li><a href="#general"><i class="fa fa-cogs"></i> General</a></li>
 				      <li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
 				      <li><a href="#custom-css"><i class="fa fa-code"></i> Custom Code</a></li>
-				      <li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Pro</a></li>
+				      <li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
 				      <li><a href="#support"><i class="fa fa-ticket"></i> Support</a></li>
 			    	</ul>
 			    	<div id="general" class="eael-settings-tab">
-			      	<p>General Settings</p>
+						<div class="row">
+			      			<div class="col-half">
+
+			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/eael-featured.png'; ?>">
+			      			</div>
+			      			<div class="col-half">
+			      				<a href="https://essential-addons.com/elementor/" target="_blank" class="button eael-btn eael-demo-btn">Explore Demos</a>
+			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
+
+			    			</div>
+			    		</div>
 			    	</div>
 			    	<div id="elements" class="eael-settings-tab">
 			      	<div class="row">
@@ -250,7 +260,10 @@ class Eael_Admin_Settings {
 					      	</table>
 			      		</div>
 			      		<div class="col-full">
-			      			<h2 class="section-title">Pro Version Components!</h2>
+			      			<div class="premium-elements-title">
+			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/lock-icon.png'; ?>">
+			      				<h2 class="section-title">Premium Elements</h2>
+			      			</div>
 			      			<table class="form-table">
 									<tr>
 										<td>
@@ -313,49 +326,60 @@ class Eael_Admin_Settings {
 										</td>
 									</tr>
 					      	</table>
+						  	<div class="eael-save-btn-wrap">
+						  		<input type="submit" value="Save settings" class="button eael-btn"/>
+						  	</div>
 			      		</div>
 			      	</div>
 			    	</div>
 			    	<div id="custom-css" class="eael-settings-tab">
 			      	<div class="row">
 			      		<div class="col-half">
-			      			<p class="title">Custom Css</p>
-			      			<p class="desc">Add your custom css code here.</p>
+			      			<p class="title">Custom CSS</p>
+			      			<p class="desc">Add your custom CSS code here without <code>style</code> tag.</p>
 								<textarea name="eael-custom-css" id="eael-custom-css" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-css'] ) ) : echo $this->eael_get_settings['eael-custom-css']; else : $this->eael_get_settings['eael-custom-css'] = ''; endif; ?></textarea>
 			      		</div>
 			      	</div>
 			      	<div class="row">
 			      		<div class="col-half">
-			      			<p class="title">Custom Js</p>
-			      			<p class="desc">Add your custom javascript code here.</p>
+			      			<p class="title">Custom JavaScript</p>
+			      			<p class="desc">Add your custom JavaScript code here without <code>script</code> tag.</p>
 			      			<textarea name="eael-custom-js" id="eael-custom-js" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-js'] ) ) : echo $this->eael_get_settings['eael-custom-js']; else: $this->eael_get_settings['eael-custom-js'] = ''; endif;  ?></textarea>
 			      		</div>
 			      	</div>
+				  	<div class="eael-save-btn-wrap">
+				  		<input type="submit" value="Save settings" class="button eael-btn"/>
+				  	</div>
 			    	</div>
 			    	<div id="go-pro" class="eael-settings-tab">
-			      	<div class="col-half">
-			      		<h4>Why upgrade to Premium Version of the plugin?!</h4>
-			      		<p>The premium version helps us to continue development of this plugin incorporating even more features and enhancements along with offering more responsive support. Following are some of the reasons why you may want to upgrade to the premium version of this plugin.</p>
-			      		<a href="#" class="button button-primary">Purhcase Premium Version</a>
-			      	</div>
+			    		<div class="row go-premium">
+			      			<div class="col-half">
+			      				<h4>Why upgrade to Premium Version?</h4>
+			      				<p>The premium version helps us to continue development of the product incorporating even more features and enhancements.</p>
+
+			      				<p>You will also get world class support from our dedicated team, 24/7.</p>
+
+			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
+			      			</div>
+			      			<div class="col-half">
+			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/unlock-gif.gif'; ?>">
+			      			</div>
+			      		</div>
 			    	</div>
 			    	<div id="support" class="eael-settings-tab">
 			      	<div class="row">
 			      		<div class="col-half">
-				      		<h4>Need any help? Open a ticket!</h4>
-				      		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi maxime quis deleniti iure placeat ducimus voluptate perspiciatis nam eveniet eos accusantium maiores nulla temporibus fuga sunt tenetur error, delectus veniam.</p>
-				      		<a href="#" class="button button-primary">Get Help</a>
+				      		<h4>Need help? Open a support ticket!</h4>
+				      		<p>You can always get support from the community.</p>
+				      		<a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" target="_blank" class="button eael-btn">Get Help</a>
 				      	</div>
-				      	<div class="col-half">
-				      		<h4>Need any help? Open a ticket!</h4>
-				      		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi maxime quis deleniti iure placeat ducimus voluptate perspiciatis nam eveniet eos accusantium maiores nulla temporibus fuga sunt tenetur error, delectus veniam.</p>
-				      		<a href="#" class="button button-primary">Get Help</a>
+			      		<div class="col-half">
+				      		<h4>Need Premium Support?</h4>
+				      		<p>Purchasing a license entitles you to receive premium support.</p>
+				      		<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn">Get a license</a>
 				      	</div>
 			      	</div>
 			    	</div>
-			  	</div>
-			  	<div class="eael-settings-footer">
-			  		<input type="submit" value="Save settings" class="button button-primary"/>
 			  	</div>
 		  	</form>
 		</div>
