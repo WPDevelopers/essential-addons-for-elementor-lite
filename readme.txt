@@ -2,8 +2,8 @@
 Contributors: Codetic, re_enter_rupok
 Tags: elementor, elements, addons, elementor addon, widgets, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 1.1.0
+Tested up to: 4.8.2
+Stable tag: 2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -11,42 +11,49 @@ Elementor elements bundle for Elementor WordPress Page Builder.
 
 == Description ==
 
-Elementor elements  bundle for Elementor WordPress Page Builder. Lots of useful and premium elements to complete your website quickly.
+Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful and premium elements to complete your website quickly. Stunning design and neat and clean code. Option to enable/disable certain elements to improve page loading. No extra resources to slow down your website.
 
 
-<a href="https://codetic.net/essential-addons-elementor/" rel="nofollow">Check the demos</a>
+<a href="https://essential-addons.com/elementor/" rel="nofollow">Check the demos</a>
 
 ### <a href="https://wordpress.org/plugins/elementor/" rel="nofollow">Elementor</a> page builder is required for this plugin.
 
 ### Features
 
-* 9+ Stunning Elements
+* 14+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
+* Elements Control option
 * Lightweight and Fast
 
 
 ### Available Elements
 
-* <a href="https://www.codetic.net/essential-addons-elementor/post-grid/" target="_blank">Post Grid (Masonry)</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/post-timeline/" target="_blank">Post Timeline</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/fancy-text/" target="_blank">Fancy Text</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/creative-buttons/" target="_blank">Creative Buttons</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/countdown/" target="_blank">Countdown</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/team-members/" target="_blank">Team Members</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/testimonials/" target="_blank">Testimonials</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/woo-product-grid/" target="_blank">WooCommerce Product Grid</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/contact-form-7/" target="_blank">Contact Form 7</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/weforms/" target="_blank">weForms</a>
+* <a href="https://essential-addons.com/elementor/post-grid/" target="_blank">Post Grid (Masonry)</a>
+* <a href="https://essential-addons.com/elementor/post-timeline/" target="_blank">Post Timeline</a>
+* <a href="https://essential-addons.com/elementor/fancy-text/" target="_blank">Fancy Text</a>
+* <a href="https://essential-addons.com/elementor/creative-buttons/" target="_blank">Creative Buttons</a>
+* <a href="https://essential-addons.com/elementor/countdown/" target="_blank">Countdown</a>
+* <a href="https://essential-addons.com/elementor/team-members/" target="_blank">Team Members</a>
+* <a href="https://essential-addons.com/elementor/testimonials/" target="_blank">Testimonials</a>
+* <a href="https://essential-addons.com/elementor/woo-product-grid/" target="_blank">WooCommerce Product Grid</a>
+* <a href="https://essential-addons.com/elementor/contact-form-7/" target="_blank">Contact Form 7</a>
+* <a href="https://essential-addons.com/elementor/weforms/" target="_blank">weForms</a>
+* <a href="https://essential-addons.com/elementor/info-box/" target="_blank">Info Box</a>
+* <a href="https://essential-addons.com/elementor/flip-box/" target="_blank">Flip Box</a>
+* <a href="https://essential-addons.com/elementor/dual-color-headline/" target="_blank">Dual Color Headline</a>
+* <a href="https://essential-addons.com/elementor/call-to-action/" target="_blank">Call to Action</a>
 
 
 ### More elements on <a href="https://essential-addons.com/elementor/buy.php">Premium Version</a>
 
-* <a href="https://www.codetic.net/essential-addons-elementor/post-block/" target="_blank">Post Block (Flex)</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/lightbox-modal/" target="_blank">Lightbox & Modal</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/testimonial-slider/" target="_blank">Testimonial Slider</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/image-comparison/" target="_blank">Image Comparison</a>
-* <a href="https://www.codetic.net/essential-addons-elementor/interactive-promo/" target="_blank">Interactive Promo</a>
+* <a href="https://essential-addons.com/elementor/post-block/" target="_blank">Post Block (Flex)</a>
+* <a href="https://essential-addons.com/elementor/lightbox-modal/" target="_blank">Lightbox & Modal</a>
+* <a href="https://essential-addons.com/elementor/testimonial-slider/" target="_blank">Testimonial Slider</a>
+* <a href="https://essential-addons.com/elementor/image-comparison/" target="_blank">Image Comparison</a>
+* <a href="https://essential-addons.com/elementor/interactive-promo/" target="_blank">Interactive Promo</a>
+* <a href="https://essential-addons.com/elementor/instagram-feed/" target="_blank">Interactive Promo</a>
+* <a href="https://essential-addons.com/elementor/static-product/" target="_blank">Static Product</a>
 
 More coming soon...
 
@@ -80,6 +87,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 2.0 =
+
+- Options Panel added
+- Elements control added. Now you can enable/disable certain elements.
+- Info Box element added.
+- Flip Box element added.
+- Dual color headline element added.
+- Few minor bug fixes and improvements. 
+
 = 1.1.0 =
 
 - Post Grid (Masonry) element added
@@ -97,7 +113,11 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 1.0.2 =
+= 2.0 =
 
-- Post Grid (Masonry) element added
-- Few minor improvement
+- Options Panel added
+- Elements control added. Now you can enable/disable certain elements.
+- Info Box element added.
+- Flip Box element added.
+- Dual color headline element added.
+- Few minor bug fixes and improvements. 
