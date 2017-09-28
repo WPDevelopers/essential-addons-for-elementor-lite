@@ -24,7 +24,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	protected function _register_controls() {
 
   		/**
-  		 * Infobox Image Settings
+  		 * Call to Action Content Settings
   		 */
   		$this->start_controls_section(
   			'eael_section_cta_content_settings',
@@ -303,9 +303,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 
 	protected function render( ) {
 		
-   	$settings = $this->get_settings();
-      $infobox_image = $this->get_settings( 'eael_infobox_image' );
-	  	$infobox_image_url = Group_Control_Image_Size::get_attachment_image_src( $infobox_image['id'], 'thumbnail', $settings );	
+   	$settings = $this->get_settings();	
 	  	$target = $settings['eael_cta_btn_link']['url'] ? 'target="_blank"' : '';
 	  	if( 'cta-lite' == $settings['eael_cta_color_type'] ) {
 	  		$cta_class = 'bg-lite';

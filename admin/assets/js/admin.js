@@ -36,6 +36,10 @@
 		var teamMembers 		= $( '#team-members' ).attr( 'checked' ) ? 1 : 0;
 		var testimonials 		= $( '#testimonials' ).attr( 'checked' ) ? 1 : 0;
 		var weForms 			= $( '#weforms' ).attr( 'checked' ) ? 1 : 0;
+		var callToAction 		= $( '#call-to-action' ).attr( 'checked' ) ? 1 : 0;
+		var flipBox 			= $( '#flip-box' ).attr( 'checked' ) ? 1 : 0;
+		var infoBox 			= $( '#info-box' ).attr( 'checked' ) ? 1 : 0;
+		var dualHeader 		= $( '#dual-header' ).attr( 'checked' ) ? 1 : 0;
 
 		var customCss 			= $( '#eael-custom-css' ).val();
 		var customJs 			= $( '#eael-custom-js' ).val();
@@ -55,6 +59,10 @@
 				teamMembers: teamMembers, 
 				testimonials: testimonials, 
 				weForms: weForms,
+				callToAction: callToAction,
+				flipBox: flipBox,
+				infoBox: infoBox,
+				dualHeader: dualHeader,
 				customCss: customCss,
 				customJs: customJs,
 			},

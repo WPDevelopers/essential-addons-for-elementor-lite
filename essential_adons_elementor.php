@@ -27,19 +27,16 @@ function add_eael_elements(){
       'count-down'         => true,
       'creative-btn'       => true,
       'fancy-text'         => true,
-      'img-comparison'     => true,
-      'instagram-gallery'  => true,
-      'interactive-promo'  => true,
-      'lightbox'           => true,
-      'post-block'         => true,
       'post-grid'          => true,
       'post-timeline'      => true,
       'product-grid'       => true,
       'team-members'       => true,
-      'testimonial-slider' => true,
       'testimonials'       => true,
       'weforms'            => true,
-      'static-product'     => true,
+      'call-to-action'     => true,
+      'flip-box'           => true,
+      'info-box'           => true,
+      'dual-header'        => true,
    );
    $is_component_active = get_option( 'eael_save_settings', $eael_default_settings );
    // load elements
@@ -77,9 +74,22 @@ function add_eael_elements(){
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/weforms/weforms.php';
    }
 
-   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/infobox/infobox.php';
-   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/flipbox/flipbox.php';
-   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/call-to-action/call-to-action.php';
+   if( $is_component_active['info-box'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/infobox/infobox.php';
+   }
+
+   if( $is_component_active['flip-box'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/flipbox/flipbox.php';
+   }
+   
+   if( $is_component_active['call-to-action'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/call-to-action/call-to-action.php';
+   }
+
+   if( $is_component_active['dual-header'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/dual-color-header/dual-color-header.php';
+   }
+   
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
