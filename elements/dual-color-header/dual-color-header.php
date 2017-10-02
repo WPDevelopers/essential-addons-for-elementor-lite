@@ -97,7 +97,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 				'label' => esc_html__( 'Title ( First Part )', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'Dual Header', 'essential-addons-elementor' )
+				'default' => esc_html__( 'Dual Heading', 'essential-addons-elementor' )
 			]
 		);
 
@@ -119,63 +119,6 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 				'label_block' => true,
 				'default' => esc_html__( 'Insert a meaningful line to evaluate the headline.', 'essential-addons-elementor' )
 			]
-		);
-
-		$this->end_controls_section();
-
-		/**
-		 * -------------------------------------------
-		 * Dual Header Style 
-		 * -------------------------------------------
-		 */
-		$this->start_controls_section(
-			'eael_section_dch_general_style_settings',
-			[
-				'label' => esc_html__( 'Dual Header Style', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-    		'eael_dch_margin_top',
-    		[
-        		'label' => __( 'Margin Top', 'essential-addons-elementor' ),
-       		'type' => Controls_Manager::SLIDER,
-        		'default' => [
-            	'size' => 0,
-        		],
-        		'range' => [
-            	'px' => [
-                	'min' => 0,
-                	'max' => 200,
-                	'step' => 1,
-            	]
-        		],
-        		'selectors' => [
-            	'{{WRAPPER}} .eael-dual-header' => 'margin-top: {{SIZE}}px;',
-        		],
-    		]
-		);
-
-		$this->add_control(
-    		'eael_dch_margin_bottom',
-    		[
-        		'label' => __( 'Margin Bottom', 'essential-addons-elementor' ),
-       		'type' => Controls_Manager::SLIDER,
-        		'default' => [
-            	'size' => 50,
-        		],
-        		'range' => [
-            	'px' => [
-                	'min' => 10,
-                	'max' => 200,
-                	'step' => 1,
-            	]
-        		],
-        		'selectors' => [
-            	'{{WRAPPER}} .eael-dual-header' => 'margin-bottom: {{SIZE}}px;',
-        		],
-    		]
 		);
 
 		$this->add_responsive_control(
@@ -200,6 +143,130 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 				],
 				'default' => 'center',
 				'prefix_class' => 'eael-dual-header-content-align-'
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Tab Style ( Dual Heading Style )
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_dch_style_settings',
+			[
+				'label' => esc_html__( 'Dual Heading Styles', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_dch_container_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-dual-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_dch_container_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-dual-header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_border_type',
+			[
+				'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
+					'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
+					'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
+					'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
+					'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
+				],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-dual-header' => 'border-style: {{VALUE}};',
+	 			],
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_border_thickness',
+			[
+				'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header' => 'border-width: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_border_radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 500,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'separator' => 'after',
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header' => 'border-color: {{VALUE}};',
+				],
+			]
+
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'eael_dch_shadow',
+				'selector' => '{{WRAPPER}} .eael-dual-header',
 			]
 		);
 

@@ -234,6 +234,130 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Tab Style (Info Box Style)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_infobox_style_settings',
+			[
+				'label' => esc_html__( 'Info Box Styles', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'eael_infobox_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_infobox_container_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_infobox_container_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-infobox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_control(
+			'eael_infobox_border_type',
+			[
+				'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
+					'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
+					'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
+					'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
+					'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
+				],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-infobox' => 'border-style: {{VALUE}};',
+	 			],
+			]
+		);
+
+		$this->add_control(
+			'eael_infobox_border_thickness',
+			[
+				'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'border-width: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_infobox_border_radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 500,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_infobox_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'separator' => 'after',
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'border-color: {{VALUE}};',
+				],
+			]
+
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'eael_infobox_shadow',
+				'selector' => '{{WRAPPER}} .eael-infobox',
+			]
+		);
+
+		$this->end_controls_section();
 		/**
 		 * -------------------------------------------
 		 * Tab Style (Info Box Image)

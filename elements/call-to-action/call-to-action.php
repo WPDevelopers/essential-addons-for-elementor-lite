@@ -73,13 +73,12 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		  	[
 		   	'label'       	=> esc_html__( 'Color Style', 'essential-addons-elementor' ),
 		     	'type' 			=> Controls_Manager::SELECT,
-		     	'default' 		=> 'cta-lite',
+		     	'default' 		=> 'cta-bg-color',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'cta-lite'  		=> esc_html__( 'Lite', 'essential-addons-elementor' ),
-		     		'cta-dark' 			=> esc_html__( 'Dark', 'essential-addons-elementor' ),
-		     		'cta-bg-img' 		=> esc_html__( 'Background Image', 'essential-addons-elementor' ),
-		     		'cta-bg-img-fixed' => esc_html__( 'Background Fixed Image', 'essential-addons-elementor' ),
+		     		'cta-bg-color'  		=> esc_html__( 'Background Color', 'essential-addons-elementor' ),
+		     		'cta-bg-img' 			=> esc_html__( 'Background Image', 'essential-addons-elementor' ),
+		     		'cta-bg-img-fixed' 	=> esc_html__( 'Background Fixed Image', 'essential-addons-elementor' ),
 		     	],
 		  	]
 		);
@@ -164,6 +163,131 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 				]
 			]
 		);
+
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Tab Style (Cta Title Style)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_cta_style_settings',
+			[
+				'label' => esc_html__( 'Call to Action Styles', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#f4f4f4',
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cta_container_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-call-to-action' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cta_container_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-call-to-action' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_border_type',
+			[
+				'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
+					'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
+					'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
+					'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
+					'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
+				],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-call-to-action' => 'border-style: {{VALUE}};',
+	 			],
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_border_thickness',
+			[
+				'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action' => 'border-width: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_border_radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 500,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'separator' => 'after',
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action' => 'border-color: {{VALUE}};',
+				],
+			]
+
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'eael_cta_shadow',
+				'selector' => '{{WRAPPER}} .eael-call-to-action',
+			]
+		);
+
 
 		$this->end_controls_section();
 
@@ -263,36 +387,183 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		     	],
 		  	]
 		);
-		
+
+		$this->add_responsive_control(
+			'eael_cta_btn_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-call-to-action .cta-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cta_btn_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-call-to-action .cta-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_cta_btn_typography',
+	         'name' => 'eael_cta_btn_typography',
 				'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
 			]
 		);
 
-		$this->add_control(
-			'eael_cta_btn_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#f9f9f9',
-				'selectors' => [
-					'{{WRAPPER}} .eael-call-to-action .cta-button' => 'background: {{VALUE}};',
-				],
-			]
-		);
+		$this->start_controls_tabs( 'eael_cta_button_tabs' );
 
-		$this->add_control(
-			'eael_cta_btn_hover_color',
+			// Normal State Tab
+			$this->start_controls_tab( 'eael_cta_btn_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
+
+			$this->add_control(
+				'eael_cta_btn_normal_text_color',
+				[
+					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#4d4d4d',
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'color: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_normal_bg_color',
+				[
+					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#f9f9f9',
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'background: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_border_type',
+				[
+					'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::SELECT,
+					'default' => 'none',
+					'options' => [
+						'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
+						'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
+						'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
+						'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
+						'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
+					],
+					'selectors' => [
+		 					'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-style: {{VALUE}};',
+		 			],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_border_thickness',
+				[
+					'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'max' => 50,
+						],
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-width: {{SIZE}}px;',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_border_radius',
+				[
+					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'max' => 100,
+						],
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-radius: {{SIZE}}px;',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_normal_border_color',
+				[
+					'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-color: {{VALUE}};',
+					],
+				]
+
+			);
+
+			$this->end_controls_tab();
+
+			// Hover State Tab
+			$this->start_controls_tab( 'eael_cta_btn_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ] );
+
+			$this->add_control(
+				'eael_cta_btn_hover_text_color',
+				[
+					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#f9f9f9',
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button:hover' => 'color: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_hover_bg_color',
+				[
+					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#3F51B5',
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button:after' => 'background: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_hover_border_color',
+				[
+					'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-call-to-action .cta-button:hover' => 'border-color: {{VALUE}};',
+					],
+				]
+
+			);
+
+			$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
 			[
-				'label' => esc_html__( 'Hover Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#3F51B5',
-				'selectors' => [
-					'{{WRAPPER}} .eael-call-to-action .cta-button:after' => 'background: {{VALUE}};',
-				],
+				'name' => 'eael_cta_button_shadow',
+				'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
+				'separator' => 'before'
 			]
 		);
 
@@ -305,10 +576,8 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		
    	$settings = $this->get_settings();	
 	  	$target = $settings['eael_cta_btn_link']['url'] ? 'target="_blank"' : '';
-	  	if( 'cta-lite' == $settings['eael_cta_color_type'] ) {
+	  	if( 'cta-bg-color' == $settings['eael_cta_color_type'] ) {
 	  		$cta_class = 'bg-lite';
-	  	}else if( 'cta-dark' == $settings['eael_cta_color_type'] ) {
-	  		$cta_class = 'bg-dark';
 	  	}else if( 'cta-bg-img' == $settings['eael_cta_color_type'] ) {
 	  		$cta_class = 'bg-img';
 	  	}else if( 'cta-bg-img-fixed' == $settings['eael_cta_color_type'] ) {

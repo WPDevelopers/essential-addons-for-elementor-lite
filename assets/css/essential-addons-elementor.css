@@ -1803,6 +1803,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   position: relative;
   z-index: 0;
   text-align: center;
+  -webkit-perspective: 1000px;
   perspective: 1000px;
 }
 .eael-flipbox .eael-vertical-flip .front {
@@ -1913,6 +1914,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   position: relative;
   z-index: 0;
   text-align: center;
+  -webkit-perspective: 1000px;
   perspective: 1000px;
 }
 .eael-flipbox .eael-horizontal-flip .front {
@@ -2076,10 +2078,6 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 .eael-call-to-action.bg-lite {
   background: #f4f4f4;
 }
-.eael-call-to-action.bg-dark {
-  background: #3F51B5;
-  color: #fff;
-}
 .eael-call-to-action.bg-img {
   background-image: url( '../img/bg.jpg' );
   background-repeat: no-repeat;
@@ -2089,7 +2087,6 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   z-index: 0;
   color: rgba( 255,255,255, 0.7 );
 }
-.eael-call-to-action.bg-dark .icon,
 .eael-call-to-action.bg-img .icon {
   color: #fff;
 }
