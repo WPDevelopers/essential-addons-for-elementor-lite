@@ -1,13 +1,13 @@
-=== Essential Addons Elementor ===
+=== Elementor Essential Addons ===
 Contributors: Codetic, re_enter_rupok
-Tags: elementor, elements, addons, elementor addon, widgets, page builder, builder, visual editor, wordpress page builder
+Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8.2
 Stable tag: 2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor elements bundle for Elementor WordPress Page Builder. 
+Ultimate elements library for Elementor WordPress Page Builder. Premium elements with endless customization options.
 
 == Description ==
 
