@@ -121,14 +121,14 @@ add_action( 'elementor/editor/before_enqueue_scripts', function() {
 
 // Action menus
 
-function plugin_add_settings_link( $links ) {
+function eael_add_settings_link( $links ) {
     $settings_link = sprintf( '<a href="admin.php?page=eael-settings">' . __( 'Settings' ) . '</a>' );
     $go_pro_link = sprintf( '<a href="https://essential-addons.com/elementor/buy.php" target="_blank" style="color: #39b54a; font-weight: bold;">' . __( 'Go Pro' ) . '</a>' );
     array_push( $links, $settings_link, $go_pro_link );
    return $links;
 }
 $plugin = plugin_basename( __FILE__ );
-add_filter( "plugin_action_links_$plugin", 'plugin_add_settings_link' );
+add_filter( "plugin_action_links_$plugin", 'eael_add_settings_link' );
 
 
 
