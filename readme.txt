@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -87,6 +87,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 2.1 =
+
+* More options added to CTA and Info Box elements
+* Flip box animation improved
+* Options panel improved and community support links added
+
 = 2.0 =
 
 - Options Panel added
@@ -113,11 +119,8 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.0 =
+= 2.1 =
 
-- Options Panel added
-- Elements control added. Now you can enable/disable certain elements.
-- Info Box element added.
-- Flip Box element added.
-- Dual color headline element added.
-- Few minor bug fixes and improvements. 
+* More options added to CTA and Info Box elements
+* Flip box animation improved
+* Options panel improved and community support links added
