@@ -269,3 +269,25 @@ textarea.eael-form-control {
 	font-size: 1.2em;
 	font-weight: bold;
 }
+
+.essential-addons-community-link {
+	background-color: #475A96;
+	margin: 15px 0;
+	display: inline-block;
+	border-radius: 3px;
+}
+
+.essential-addons-community-link:hover {
+	background-color: #3351b2;
+}
+
+.essential-addons-community-link a {
+	color: #fff;
+	text-decoration: none;
+	padding: 15px 20px;
+	font-size: 1.4em;
+	display: flex;
+	align-items: center;
+	align-content: center;
+}
+

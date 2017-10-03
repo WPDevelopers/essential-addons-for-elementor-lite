@@ -383,6 +383,13 @@ class Eael_Admin_Settings {
 				      		<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn">Get a license</a>
 				      	</div>
 			      	</div>
+			      	<div class="row">
+			      		<div class="col-half">
+			      			<div class="essential-addons-community-link">
+			      				<a href="https://www.facebook.com/groups/essentialaddons/" target="_blank"><i class="fa fa-facebook-official fa-2x fa-fw" aria-hidden="true"></i> <span>Join the Facebook Community</span></a>
+			      			</div>
+			      		</div>
+			      	</div>
 			    	</div>
 			  	</div>
 		  	</form>
