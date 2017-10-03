@@ -255,3 +255,17 @@ textarea.eael-form-control {
 .go-premium .eael-btn.eael-license-btn {
 	margin-top: 30px;
 }
+
+.eael-notice {
+	background-color: #F7F6D4;
+	padding: 10px 15px;
+	border-radius: 5px;
+	box-shadow: 0 0 15px 0 rgba(0,0,0, .15);
+	max-width: 90%;
+	color: #9A7223;
+}
+
+.eael-notice h5 {
+	font-size: 1.2em;
+	font-weight: bold;
+}

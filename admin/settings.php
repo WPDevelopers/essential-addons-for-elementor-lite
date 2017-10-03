@@ -131,7 +131,11 @@ class Eael_Admin_Settings {
 			      			<div class="col-half">
 			      				<a href="https://essential-addons.com/elementor/" target="_blank" class="button eael-btn eael-demo-btn">Explore Demos</a>
 			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
-
+			      				
+			      				<div class="eael-notice">
+			      					<h5>Troubleshooting Info</h5>
+			      					<p>After update, if you see any element is not working properly, go to <strong>Elements</strong> Tab, toggle the element and save changes.</p>
+			      				</div>
 			    			</div>
 			    		</div>
 			    	</div>
