@@ -119,6 +119,7 @@ add_action( 'elementor/editor/before_enqueue_scripts', function() {
    
 } );
 
+// Action menus
 
 function plugin_add_settings_link( $links ) {
     $settings_link = sprintf( '<a href="admin.php?page=eael-settings">' . __( 'Settings' ) . '</a>' );
