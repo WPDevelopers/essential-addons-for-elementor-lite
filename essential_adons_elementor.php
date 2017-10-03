@@ -118,3 +118,23 @@ add_action( 'elementor/editor/before_enqueue_scripts', function() {
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
    
 } );
+
+
+// Redirect to options page
+
+register_activation_hook(__FILE__, 'eael_activate');
+add_action('admin_init', 'eael_redirect');
+
+function eael_activate() {
+    add_option('eael_do_activation_redirect', true);
+}
+
+function eael_redirect() {
+    if (get_option('eael_do_activation_redirect', false)) {
+        delete_option('eael_do_activation_redirect');
+        if(!isset($_GET['activate-multi']))
+        {
+            wp_redirect("admin.php?page=eael-settings");
+        }
+    }
+}
