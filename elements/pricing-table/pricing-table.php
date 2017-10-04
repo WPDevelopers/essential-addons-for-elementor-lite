@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 class Widget_Eael_Pricing_Table extends Widget_Base {
 
 	public function get_name() {
-		return 'eael-info-box';
+		return 'eael-pricing-table';
 	}
 
 	public function get_title() {
