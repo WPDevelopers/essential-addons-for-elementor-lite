@@ -89,6 +89,8 @@ function add_eael_elements(){
    if( $is_component_active['dual-header'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/dual-color-header/dual-color-header.php';
    }
+
+   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/pricing-table/pricing-table.php';
    
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');

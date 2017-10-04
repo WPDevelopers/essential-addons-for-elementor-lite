@@ -582,6 +582,8 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	  		$cta_class = 'bg-img';
 	  	}else if( 'cta-bg-img-fixed' == $settings['eael_cta_color_type'] ) {
 	  		$cta_class = 'bg-img bg-fixed';
+	  	}else {
+	  		$cta_class = '';
 	  	}
 	  	// Is Basic Cta Content Center or Not
 	  	if( 'cta-center' == $settings['eael_cta_content_type'] ) {

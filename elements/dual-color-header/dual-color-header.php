@@ -333,9 +333,6 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 			[
 				'label' => esc_html__( 'Title Style &amp; Typography', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
-				'condition' => [
-		     		'eael_show_dch_icon_content' => 'yes'
-		     	]
 			]
 		);
 
@@ -366,7 +363,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#1abc9c',
 				'selectors' => [
-					'{{WRAPPER}} .eael-dual-header.dh-colored .title span.lead, .eael-dual-header.dh-colored-reverse .title span.lead' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header.dh-colored .title span.lead, {{WRAPPER}} .eael-dual-header.dh-colored-reverse .title span.lead' => 'color: {{VALUE}};',
 				],
 			]
 		);
