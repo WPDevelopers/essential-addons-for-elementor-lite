@@ -37,6 +37,7 @@ function add_eael_elements(){
       'flip-box'           => true,
       'info-box'           => true,
       'dual-header'        => true,
+      'price-table'        => true,
    );
    $is_component_active = get_option( 'eael_save_settings', $eael_default_settings );
    // load elements
@@ -89,9 +90,9 @@ function add_eael_elements(){
    if( $is_component_active['dual-header'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/dual-color-header/dual-color-header.php';
    }
-
-   require_once ESSENTIAL_ADDONS_EL_PATH.'elements/pricing-table/pricing-table.php';
-   
+   if( $is_component_active['price-table'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/pricing-table/pricing-table.php';
+   }
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 

@@ -22,6 +22,7 @@ class Eael_Admin_Settings {
 	   'flip-box'     		=> true,
 	   'info-box'     		=> true,
 	   'dual-header'     	=> true,
+	   'price-table'     	=> true,
 	);
 
 	private $eael_settings;
@@ -260,6 +261,14 @@ class Eael_Admin_Settings {
 				                        <label for="dual-header"></label>
 				                    	</div>
 										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Pricing Table', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Pricing Table', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->eael_get_settings['price-table'], true ); ?> >
+				                        <label for="price-table"></label>
+				                    	</div>
+										</td>
 									</tr>
 					      	</table>
 			      		</div>
@@ -422,6 +431,7 @@ class Eael_Admin_Settings {
 				'flip-box' 				=> intval( $_POST['flipBox'] ? 1 : 0 ),
 				'info-box' 				=> intval( $_POST['infoBox'] ? 1 : 0 ),
 				'dual-header' 			=> intval( $_POST['dualHeader'] ? 1 : 0 ),
+				'price-table' 			=> intval( $_POST['priceTable'] ? 1 : 0 ),
 
 				'eael-custom-css'		=> wp_unslash( $_POST['customCss'] ),
 				'eael-custom-js'		=> wp_unslash( $_POST['customJs'] ),

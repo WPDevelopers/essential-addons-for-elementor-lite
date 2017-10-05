@@ -871,71 +871,14 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 	</div>
 	<?php elseif( 'style-3' === $settings['eael_pricing_table_style'] ) : ?>
 	<div class="eael-pricing style-3">
-		<div class="eael-pricing-item <?php echo esc_attr( $featured_class ); ?>">
-			<?php if( 'top' === $settings['eael_pricing_table_style_3_price_position'] ) : ?>
-		    <div class="eael-pricing-tag on-top">
-		        <span class="price-tag"><?php echo $settings['eael_pricing_table_price'] ?></span> <span class="price-period">/ <?php echo $settings['eael_pricing_table_price_period']; ?></span>
-		    </div>
-		 	<?php endif; ?>
-		    <div class="header">
-		        <h2 class="title"><?php echo $settings['eael_pricing_table_title']; ?></h2>
-		        <span class="subtitle"><?php echo $settings['eael_pricing_table_sub_title']; ?></span>
-		    </div>
-		    <div class="body">
-		        <ul>
-	            	<?php 
-	            		foreach( $settings['eael_pricing_table_items'] as $item ) : 
-	            		if( 'yes' === $item['eael_pricing_table_icon_mood'] ) : $icon_mood = ''; else : $icon_mood = 'disable-item'; endif;
-	            	?>
-	                	<li class="<?php echo esc_attr( $icon_mood ); ?>">
-	                		<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
-	                		<span class="li-icon"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span> 
-	                		<?php endif; ?>
-	                		<?php echo $item['eael_pricing_table_item']; ?>
-	                	</li>
-	               <?php endforeach; ?> 
-	            </ul>
-		    </div>
-		    <?php if( 'bottom' === $settings['eael_pricing_table_style_3_price_position'] ) : ?>
-		    <div class="eael-pricing-tag">
-		        <span class="price-tag"><?php echo $settings['eael_pricing_table_price'] ?></span> <span class="price-period">/ <?php echo $settings['eael_pricing_table_price_period']; ?></span>
-		    </div>
-		 	<?php endif; ?>
-		    <div class="footer">
-		        <a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> class="eael-pricing-button"><?php echo $settings['eael_pricing_table_btn']; ?></a>
-		    </div>
+		<div class="only-in-pro">
+			<h2 class="title"><?php echo esc_html__( 'Available in Pro Version!', 'essential-addons-elementor' ); ?></h2>
 		</div>
 	</div>
 	<?php elseif( 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
 	<div class="eael-pricing style-4">
-		<div class="eael-pricing-item <?php echo esc_attr( $featured_class ); ?>">
-		    <div class="eael-pricing-image">
-		        <div class="eael-pricing-tag">
-		            <span class="price-tag"><?php echo $settings['eael_pricing_table_price'] ?></span> <span class="price-period">/ <?php echo $settings['eael_pricing_table_price_period']; ?></span>
-		        </div>
-		    </div>
-		    <div class="header">
-		        <h2 class="title"><?php echo $settings['eael_pricing_table_title']; ?></h2>
-		        <span class="subtitle"><?php echo $settings['eael_pricing_table_sub_title']; ?></span>
-		    </div>
-		    <div class="body">
-		        <ul>
-	            	<?php 
-	            		foreach( $settings['eael_pricing_table_items'] as $item ) : 
-	            		if( 'yes' === $item['eael_pricing_table_icon_mood'] ) : $icon_mood = ''; else : $icon_mood = 'disable-item'; endif;
-	            	?>
-	                	<li class="<?php echo esc_attr( $icon_mood ); ?>">
-	                		<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
-	                		<span class="li-icon"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span> 
-	                		<?php endif; ?>
-	                		<?php echo $item['eael_pricing_table_item']; ?>
-	                	</li>
-	               <?php endforeach; ?> 
-	            </ul>
-		    </div>
-		    <div class="footer">
-		        <a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> class="eael-pricing-button"><?php echo $settings['eael_pricing_table_btn']; ?></a>
-		    </div>
+		<div class="only-in-pro">
+			<h2 class="title"><?php echo esc_html__( 'Available in Pro Version!', 'essential-addons-elementor' ); ?></h2>
 		</div>
 	</div>
 	<?php endif; ?>

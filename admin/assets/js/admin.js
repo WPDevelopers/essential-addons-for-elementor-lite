@@ -40,6 +40,7 @@
 		var flipBox 			= $( '#flip-box' ).attr( 'checked' ) ? 1 : 0;
 		var infoBox 			= $( '#info-box' ).attr( 'checked' ) ? 1 : 0;
 		var dualHeader 		= $( '#dual-header' ).attr( 'checked' ) ? 1 : 0;
+		var priceTable 		= $( '#price-table' ).attr( 'checked' ) ? 1 : 0;
 
 		var customCss 			= $( '#eael-custom-css' ).val();
 		var customJs 			= $( '#eael-custom-js' ).val();
@@ -63,6 +64,7 @@
 				flipBox: flipBox,
 				infoBox: infoBox,
 				dualHeader: dualHeader,
+				priceTable: priceTable,
 				customCss: customCss,
 				customJs: customJs,
 			},

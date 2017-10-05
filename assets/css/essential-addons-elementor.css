@@ -1815,6 +1815,8 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   -webkit-perspective: 1000px;
   -moz-perspective: 1000px;
   perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 .eael-flipbox .eael-vertical-flip .front {
   width: 100%;
@@ -1875,9 +1877,9 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   -moz-transform: rotateY(180deg);
 }
 .eael-flipbox .eael-vertical-flip.flip-left.flip .front {
-  transform: rotateY(180deg) scale(1.1);
-  -webkit-transform: rotateY(180deg) scale(1.1);
-  -moz-transform: rotateY(180deg) scale(1.1);
+  transform: rotateX(0deg) rotateY(180deg) scale(1.1);
+  -webkit-transform: rotateX(0deg) rotateY(180deg) scale(1.1);
+  -moz-transform: rotateX(0deg) rotateY(180deg) scale(1.1);
 }
 .eael-flipbox .eael-vertical-flip.flip-left.flip .back {
   transform: rotateX(0deg) rotateY(0deg);
@@ -2970,3 +2972,25 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   margin: 0;
   width: 100%;
 } 
+
+/* Only In Pro */
+.only-in-pro {
+  width: 100%;
+  -webkit-display: flex;  
+  display: flex; 
+  -webkit-align-items: center;
+   align-items: center; 
+   -webkit-justify-content: center;
+   justify-content: center;
+   padding: 15px;
+   min-width: 200px;
+   background: #EF5350;
+   color: #fff;
+   text-align: center;
+}
+.only-in-pro .title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  line-height: 40px;
+  margin: 0px;
+}
