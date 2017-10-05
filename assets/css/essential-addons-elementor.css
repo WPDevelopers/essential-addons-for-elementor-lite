@@ -2629,7 +2629,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   background: #E25A77;
   color: #fff;
   top: 35px;
-  right: -15px;
+  right: -16px;
   z-index: 10;
   font-size: 10px;
   font-weight: 600;
@@ -2640,7 +2640,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   content: "";
   position: absolute;
   top: 20px;
-  right: -15px;
+  right: -16px;
   width: 0;
   height: 0;
   border-bottom: 15px solid #bf4a63;
@@ -2762,8 +2762,8 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   width: auto;
   background: rgba( 0,0,0,0.6 );
   color: #fff;
-  top: 40px;
-  right: 40px;
+  top: 15px;
+  right: 15px;
   z-index: 10;
   font-size: 13px;
   font-weight: 600;

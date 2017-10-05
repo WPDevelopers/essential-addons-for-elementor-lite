@@ -14,7 +14,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'fa fa-info';
+		return 'eicon-info-box';
 	}
 
    public function get_categories() {
@@ -243,7 +243,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_style_settings',
 			[
-				'label' => esc_html__( 'Info Box Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Info Box Style', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -284,39 +284,13 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_infobox_border_type',
-			[
-				'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
-					'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
-					'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
-					'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
-					'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
-				],
-				'selectors' => [
-	 					'{{WRAPPER}} .eael-infobox' => 'border-style: {{VALUE}};',
-	 			],
-			]
-		);
-
-		$this->add_control(
-			'eael_infobox_border_thickness',
-			[
-				'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'max' => 50,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-infobox' => 'border-width: {{SIZE}}px;',
-				],
-			]
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+				[
+					'name' => 'eael_infobox_border',
+					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+					'selector' => '{{WRAPPER}} .eael-infobox',
+				]
 		);
 
 		$this->add_control(
@@ -333,20 +307,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 					'{{WRAPPER}} .eael-infobox' => 'border-radius: {{SIZE}}px;',
 				],
 			]
-		);
-
-		$this->add_control(
-			'eael_infobox_border_color',
-			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'separator' => 'after',
-				'selectors' => [
-					'{{WRAPPER}} .eael-infobox' => 'border-color: {{VALUE}};',
-				],
-			]
-
 		);
 
 		$this->add_group_control(
@@ -491,16 +451,16 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_title_style_settings',
 			[
-				'label' => esc_html__( 'Title Typography &amp; Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_control(
+			'eael_infobox_title_heading',
 			[
-             'name' => 'eael_infobox_title_typography',
-				'selector' => '{{WRAPPER}} .eael-infobox .infobox-content .title',
+				'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
 			]
 		);
 
@@ -516,26 +476,20 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->end_controls_section();
-
-		/**
-		 * -------------------------------------------
-		 * Tab Style (Info Box Content Style)
-		 * -------------------------------------------
-		 */
-		$this->start_controls_section(
-			'eael_section_infobox_content_style_settings',
-			[
-				'label' => esc_html__( 'Content Typography &amp; Color', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_infobox_content_typography',
-				'selector' => '{{WRAPPER}} .eael-infobox .infobox-content p',
+             'name' => 'eael_infobox_title_typography',
+				'selector' => '{{WRAPPER}} .eael-infobox .infobox-content .title',
+			]
+		);
+
+		$this->add_control(
+			'eael_infobox_content_heading',
+			[
+				'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before'
 			]
 		);
 
@@ -548,6 +502,14 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-infobox .infobox-content p' => 'color: {{VALUE}};',
 				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+             'name' => 'eael_infobox_content_typography',
+				'selector' => '{{WRAPPER}} .eael-infobox .infobox-content p',
 			]
 		);
 		

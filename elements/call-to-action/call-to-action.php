@@ -14,7 +14,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'fa fa-paper-plane-o';
+		return 'eicon-call-to-action';
 	}
 
    public function get_categories() {
@@ -174,7 +174,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_cta_style_settings',
 			[
-				'label' => esc_html__( 'Call to Action Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Call to Action Style', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -215,38 +215,12 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_cta_border_type',
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
 			[
-				'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
-					'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
-					'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
-					'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
-					'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
-				],
-				'selectors' => [
-	 					'{{WRAPPER}} .eael-call-to-action' => 'border-style: {{VALUE}};',
-	 			],
-			]
-		);
-
-		$this->add_control(
-			'eael_cta_border_thickness',
-			[
-				'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'max' => 50,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-call-to-action' => 'border-width: {{SIZE}}px;',
-				],
+				'name' => 'eael_cta_border',
+				'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+				'selector' => '{{WRAPPER}} .eael-call-to-action',
 			]
 		);
 
@@ -264,20 +238,6 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 					'{{WRAPPER}} .eael-call-to-action' => 'border-radius: {{SIZE}}px;',
 				],
 			]
-		);
-
-		$this->add_control(
-			'eael_cta_border_color',
-			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'separator' => 'after',
-				'selectors' => [
-					'{{WRAPPER}} .eael-call-to-action' => 'border-color: {{VALUE}};',
-				],
-			]
-
 		);
 
 		$this->add_group_control(
@@ -299,16 +259,16 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_cta_title_style_settings',
 			[
-				'label' => esc_html__( 'Title Typography &amp; Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color &amp; Typography ', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_control(
+			'eael_cta_title_heading',
 			[
-             'name' => 'eael_cta_title_typography',
-				'selector' => '{{WRAPPER}} .eael-call-to-action .title',
+				'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
 			]
 		);
 
@@ -324,26 +284,20 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 			]
 		);
 
-		$this->end_controls_section();
-
-		/**
-		 * -------------------------------------------
-		 * Tab Style (Cta Content Style)
-		 * -------------------------------------------
-		 */
-		$this->start_controls_section(
-			'eael_section_cta_content_style_settings',
-			[
-				'label' => esc_html__( 'Content Typography &amp; Color', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
-			]
-		);
-		
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_cta_content_typography',
-				'selector' => '{{WRAPPER}} .eael-call-to-action p',
+             'name' => 'eael_cta_title_typography',
+				'selector' => '{{WRAPPER}} .eael-call-to-action .title',
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_content_heading',
+			[
+				'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before'
 			]
 		);
 
@@ -359,11 +313,19 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+             'name' => 'eael_cta_content_typography',
+				'selector' => '{{WRAPPER}} .eael-call-to-action p',
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
 		 * -------------------------------------------
-		 * Tab Style (Buttont Style)
+		 * Tab Style (Button Style)
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
@@ -448,38 +410,12 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 				]
 			);
 
-			$this->add_control(
-				'eael_cta_btn_border_type',
+			$this->add_group_control(
+				Group_Control_Border::get_type(),
 				[
-					'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::SELECT,
-					'default' => 'none',
-					'options' => [
-						'none' 	=> esc_html__( 'None', 'essential-addons-elementor' ),
-						'solid' 	=> esc_html__( 'Solid', 'essential-addons-elementor' ),
-						'dashed' => esc_html__( 'Dashed', 'essential-addons-elementor' ),
-						'dotted' => esc_html__( 'Dotted', 'essential-addons-elementor' ),
-						'double' => esc_html__( 'Double', 'essential-addons-elementor' ),
-					],
-					'selectors' => [
-		 					'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-style: {{VALUE}};',
-		 			],
-				]
-			);
-
-			$this->add_control(
-				'eael_cta_btn_border_thickness',
-				[
-					'label' => esc_html__( 'Border Size', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::SLIDER,
-					'range' => [
-						'px' => [
-							'max' => 50,
-						],
-					],
-					'selectors' => [
-						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-width: {{SIZE}}px;',
-					],
+					'name' => 'eael_cat_btn_normal_border',
+					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+					'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
 				]
 			);
 
@@ -497,19 +433,6 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-radius: {{SIZE}}px;',
 					],
 				]
-			);
-
-			$this->add_control(
-				'eael_cta_btn_normal_border_color',
-				[
-					'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::COLOR,
-					'default' => '',
-					'selectors' => [
-						'{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-color: {{VALUE}};',
-					],
-				]
-
 			);
 
 			$this->end_controls_tab();
