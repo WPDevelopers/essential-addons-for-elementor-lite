@@ -51,7 +51,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_infobox_img_or_icon',
 			[
-				'label' => esc_html__( 'Image Or Icon', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Image or Icon', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
@@ -64,7 +64,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						'icon' => 'fa fa-info-circle',
 					],
 				],
-				'default' => 'img',
+				'default' => 'icon',
 			]
 		);
 		/**
@@ -161,7 +161,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						'icon' => 'fa fa-align-right',
 					],
 				],
-				'default' => 'left',
+				'default' => 'center',
 				'prefix_class' => 'eael-infobox-icon-align-',
 				'condition' => [
 					'eael_infobox_img_or_icon' => 'icon'
@@ -229,7 +229,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						'icon' => 'fa fa-align-right',
 					],
 				],
-				'default' => 'left',
+				'default' => 'center',
 				'prefix_class' => 'eael-infobox-content-align-',
 			]
 		);

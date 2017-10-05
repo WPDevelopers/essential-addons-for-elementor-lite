@@ -510,6 +510,15 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_pricing_table_pricing_period_heading',
+			[
+				'label' => esc_html__( 'Pricing Period', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before'
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
