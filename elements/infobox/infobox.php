@@ -300,7 +300,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
-						'max' => 500,
+						'max' => 50,
 					],
 				],
 				'selectors' => [
