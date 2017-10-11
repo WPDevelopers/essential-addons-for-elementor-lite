@@ -84,48 +84,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Image_Size::get_type(),
-			[
-				'name' => 'thumbnail',
-				'default' => 'full',
-				'condition' => [
-					'eael_infobox_image[url]!' => '',
-				],
-				'condition' => [
-					'eael_infobox_img_or_icon' => 'img'
-				]
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_infobox_img_alignment',
-			[
-				'label' => esc_html__( 'Image Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-right',
-					],
-				],
-				'default' => 'left',
-				'prefix_class' => 'eael-infobox-img-align-',
-				'condition' => [
-					'eael_infobox_img_or_icon' => 'img',
-					'eael_infobox_img_type!' => 'img-on-left',
-				]
-			]
-		);
+		
 		/**
 		 * Condition: 'eael_infobox_img_or_icon' => 'icon'
 		 */
@@ -351,6 +310,71 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		     		'eael_infobox_img_or_icon' => 'img'
 		     	]
 		  	]
+		);
+
+		$this->add_control(
+			'eael_infobox_image_resizer',
+			[
+				'label' => esc_html__( 'Image Resizer', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => '100'
+				],
+				'range' => [
+					'px' => [
+						'max' => 500,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px;',
+				],
+				'condition' => [
+		     		'eael_infobox_img_or_icon' => 'img'
+		     	]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[
+				'name' => 'thumbnail',
+				'default' => 'full',
+				'condition' => [
+					'eael_infobox_image[url]!' => '',
+				],
+				'condition' => [
+					'eael_infobox_img_or_icon' => 'img'
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_infobox_img_alignment',
+			[
+				'label' => esc_html__( 'Image Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+				],
+				'default' => 'left',
+				'prefix_class' => 'eael-infobox-img-align-',
+				'condition' => [
+					'eael_infobox_img_or_icon' => 'img',
+					'eael_infobox_img_type!' => 'img-on-left',
+				]
+			]
 		);
 
 		$this->end_controls_section();
