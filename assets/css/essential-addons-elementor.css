@@ -2586,7 +2586,6 @@ h2.eael-elements-flip-box-heading {
   border: none;
 }
 
-
 /* Media Query */
 @media only screen and ( min-width: 768px ) and (max-width: 992px) {
   .eael-pricing {
@@ -2630,6 +2629,10 @@ h2.eael-elements-flip-box-heading {
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .price-tag:before {
   left: 30px;
 }
+.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .eael-pricing-tag {
+  padding-right: 30px;
+}
+
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .header,
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon,
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .footer, 
@@ -2638,21 +2641,41 @@ h2.eael-elements-flip-box-heading {
   padding-left: 30px;
   padding-right: 30px;
 }
+.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .header,
+.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon,
+.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .footer, 
+.eael-pricing-content-align-right .eael-pricing.style-4 .eael-pricing-item .header,
+.eael-pricing-content-align-right .eael-pricing.style-4 .eael-pricing-item .footer {
+  padding-right: 30px;
+  padding-left: 30px;
+}
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .body ul li,
 .eael-pricing-content-align-left .eael-pricing.style-4 .eael-pricing-item .body ul li {
   padding-left: 30px;
+}
+.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .body ul li,
+.eael-pricing-content-align-right .eael-pricing.style-4 .eael-pricing-item .body ul li {
+  padding-right: 30px;
 }
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item .header:after {
   -webkit-transform: translateX( -80% );
   transform: translateX( -80% );
 }
-.eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item:hover .header:after {
+.eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item .header:after {
+  -webkit-transform: translateX( 80% );
+  transform: translateX( 80% );
+}
+.eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item:hover .header:after,
+.eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item:hover .header:after {
   -webkit-transform: translateX( 0% );
   transform: translateX( 0% );
 }
 .eael-pricing-content-align-left .eael-pricing.style-1 .eael-pricing-item .header:after,
+.eael-pricing-content-align-right .eael-pricing.style-1 .eael-pricing-item .header:after,
 .eael-pricing-content-align-left .eael-pricing.style-1 .eael-pricing-item .eael-pricing-tag:after,
-.eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .eael-pricing-tag:after {
+.eael-pricing-content-align-right .eael-pricing.style-1 .eael-pricing-item .eael-pricing-tag:after,
+.eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .eael-pricing-tag:after,
+.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .eael-pricing-tag:after {
   margin: 0;
   width: 100%;
 } 
@@ -2683,7 +2706,6 @@ h2.eael-elements-flip-box-heading {
 .eael-pricing-content-align-center.eael-pricing-button-align-left .eael-pricing.style-4 .footer {
   padding-left: 30px;
 }
-
 /* Only In Pro */
 .only-in-pro {
   width: 100%;
