@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Essential Addons Elementor
+ * Plugin Name: Essential Addons Elementor [Lite]
  * Description: Elements bundle for Elementor page builder plugin for WordPress. <a href="https://essential-addons.com/elementor/buy.php">Get Premium version</a>
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.1
+ * Version: 2.2.0
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor

@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 2.1
+Stable tag: 2.2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,12 +20,12 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 14+ Stunning Elements (Free)
+* 15+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
 * Lightweight and Fast
-
+* Extra-ordinary support
 
 ### Available Elements
 
@@ -43,6 +43,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * <a href="https://essential-addons.com/elementor/flip-box/" target="_blank">Flip Box</a>
 * <a href="https://essential-addons.com/elementor/dual-color-headline/" target="_blank">Dual Color Headline</a>
 * <a href="https://essential-addons.com/elementor/call-to-action/" target="_blank">Call to Action</a>
+* <a href="https://essential-addons.com/elementor/pricing-table/" target="_blank">Pricing-table</a>
 
 
 ### More elements on <a href="https://essential-addons.com/elementor/buy.php">Premium Version</a>
@@ -54,6 +55,8 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * <a href="https://essential-addons.com/elementor/interactive-promo/" target="_blank">Interactive Promo</a>
 * <a href="https://essential-addons.com/elementor/instagram-feed/" target="_blank">Interactive Promo</a>
 * <a href="https://essential-addons.com/elementor/static-product/" target="_blank">Static Product</a>
+* <a href="https://essential-addons.com/elementor/flip-carousel/" target="_blank">Flip Carousel</a>
+
 
 More coming soon...
 
@@ -87,11 +90,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 2.2.0 =
+
+- Pricing Table Element added
+- Flipbox element animation improved and more options added
+- Post Timeline responsiveness improved
+- Few minor improvements
+
 = 2.1 =
 
-* More options added to CTA and Info Box elements
-* Flip box animation improved
-* Options panel improved and community support links added
+- More options added to CTA and Info Box elements
+- Flip box animation improved
+- Options panel improved and community support links added
 
 = 2.0 =
 
@@ -119,8 +129,9 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.1 =
+= 2.2.0 =
 
-* More options added to CTA and Info Box elements
-* Flip box animation improved
-* Options panel improved and community support links added
+- Pricing Table Element added
+- Flipbox element animation improved and more options added
+- Post Timeline responsiveness improved
+- Few minor improvements/
