@@ -560,7 +560,7 @@
     margin: 30px 40px 30px auto;
     position: relative;
     height: 320px;
-    width: 480px;
+    width: calc(100% - 40px);
 }
 .eael-timeline-post:nth-child(even) .eael-timeline-post-inner {
     float: left;
@@ -599,7 +599,8 @@
     line-height: 1.6em;
 }
 .eael-timeline-post-image {
-    background-size: 100% auto;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
     display: block;
     height: 100%;
@@ -693,6 +694,18 @@
     opacity: 1;
 }
 
+.eael-timeline-post::after {
+  height: 100%;
+}
+
+.eael-post-timeline .eael-timeline-post:nth-last-child(2)::after {
+  height: 245px;
+}
+
+.eael-post-timeline .eael-timeline-post:last-child::after {
+  display: none;
+}
+
 /* Responsive Style for Post Timeline */
 
 @media only screen and (max-width: 1366px) {
@@ -706,7 +719,6 @@
 @media only screen and (max-width: 1169px) {
     .eael-timeline-post-inner {
         height: 320px;
-        width: 420px;
     }
 }
 @media only screen and (max-width: 992px) {
@@ -728,7 +740,6 @@
     .eael-timeline-post-inner {
         height: 320px;
         padding-bottom: 30px;
-        width: 420px;
     }
     .eael-timeline-post-title {
         bottom: 50px;
@@ -780,7 +791,6 @@
         display: block;
         float: none;
         margin: 0 auto;
-        width: 90%;
     }
 }
 @media only screen and (max-width: 479px) {

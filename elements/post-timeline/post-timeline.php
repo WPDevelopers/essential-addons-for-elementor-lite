@@ -289,7 +289,7 @@ class Widget_PostTimeline extends Widget_Base {
 			[
 				'label' => __( 'Border & Arrow Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default'=> '#ffffff',
+				'default'=> '#e5eaed',
 				'selectors' => [
 					'{{WRAPPER}} .eael-timeline-post-inner' => 'border-color: {{VALUE}};',
 					'{{WRAPPER}} .eael-timeline-post-inner::after' => 'border-left-color: {{VALUE}};',
