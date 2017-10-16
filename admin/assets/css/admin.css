@@ -5,10 +5,35 @@
  */
 
 /* General Style */
+.eael-header-bar {
+	height: auto;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid rgba( 0,0,0,0.1 );
+	-webkit-display: flex;
+	display: flex;
+	-webkit-justify-content: flex-end;
+	justify-content: flex-end;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.eael-header-bar .title {
+	font-size: 28px;
+	font-weight: 600;
+	margin: 0px;
+	line-height: 1;
+}
 
-
+.eael-header-left, 
+.eael-header-right {
+	-webkit-flex-grow: 1;
+	flex-grow: 1;
+}
+.eael-header-right {
+	text-align: right;
+}
 .eael-settings-tabs {
-	padding-top: 15px;
+	padding-top: 5px;
 }
 
 .eael-settings-tab h4 {
@@ -179,7 +204,7 @@ textarea.eael-form-control {
 .button.eael-btn {
 	background-color: #0099CC;
 	color: #fff;
-	padding: 6px 20px;
+	padding: 10px 20px;
 	border: none;
 	box-shadow: none;
 	font-size: 14px;
@@ -188,7 +213,6 @@ textarea.eael-form-control {
 	text-shadow: none;
 	letter-spacing: .05em;
 }
-
 .button.eael-btn:hover, .button.eael-btn:focus {
 	background-color: #1E96F1;
 	color: #fff;
@@ -232,30 +256,6 @@ textarea.eael-form-control {
 	font-size: 15px;
 }
 
-.premium-elements-title {
-	margin: 50px 0 30px;
-}
-
-.premium-elements-title img {
-	width: 75px;
-	float: left;
-}
-
-.premium-elements-title .section-title {
-	color: #157EFB;
-	margin: 35px 5px 0;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-size: 20px;
-	border-bottom: 6px double #157EFB;
-	padding-bottom: 10px;
-	display: inline-block;
-}
-
-.go-premium .eael-btn.eael-license-btn {
-	margin-top: 30px;
-}
-
 .eael-notice {
 	background-color: #F7F6D4;
 	padding: 10px 15px;
@@ -290,4 +290,18 @@ textarea.eael-form-control {
 	align-items: center;
 	align-content: center;
 }
-
+/* Header Button */
+.eael-header-bar .eael-btn {
+	background-color: #3CCD94;
+}
+.eael-header-bar .eael-btn:hover, .eael-header-bar .eael-btn:focus {
+	background-color: #02CC7B;
+}
+.eael-save-btn-wrap .eael-btn.save-now,
+.eael-header-bar .eael-btn.save-now {
+	background: #E74C3C;
+}
+.eael-save-btn-wrap .eael-btn.save-now:hover,
+.eael-header-bar .eael-btn.save-now:hover {
+	background: #ff5544;
+}

@@ -112,9 +112,16 @@ class Eael_Admin_Settings {
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 		?>
 		<div class="wrap">
-		  	<h2><?php _e( 'Essential Elementor Addon Settings', 'essential-addons-elementor' ); ?></h2> <hr>
 		  	<div class="response-wrap"></div>
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
+		  		<div class="eael-header-bar">
+					<div class="eael-header-left">
+						<h4 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h4>
+					</div>
+					<div class="eael-header-right">
+						<input type="submit" value="Save settings" class="button eael-btn"/>
+					</div>
+				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul>
 				      <li><a href="#general"><i class="fa fa-cogs"></i> General</a></li>

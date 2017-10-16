@@ -18,9 +18,17 @@
 	// Adding link id after the url
 	$('.eael-settings-tabs ul li a').click(function () {
 		var tabUrl = $(this).attr( 'href' );
-	   window.location.hash = tabUrl;
-	   return false;
+	  	window.location.hash = tabUrl;
+	   	$('html, body').scrollTop(tabUrl);
 	});
+
+	// Save Button reacting on any changes
+	var headerSaveBtn = $( '.eael-header-bar .eael-btn' );
+	var footerSaveBtn = $( '.eael-save-btn-wrap .eael-btn' );
+	$('.eael-checkbox input[type="checkbox"]').on( 'click', function() {
+		headerSaveBtn.addClass( 'save-now' );
+		footerSaveBtn.addClass( 'save-now' );
+	} );
 
 	// Saving Data With Ajax Request
 	$( 'form#eael-settings' ).on( 'submit', function(e) {
@@ -74,6 +82,8 @@
 				  'Click OK to continue',
 				  'success'
 				);
+				headerSaveBtn.removeClass( 'save-now' );
+				footerSaveBtn.removeClass( 'save-now' );
 			},
 			error: function() {
 				swal(
