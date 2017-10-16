@@ -6,7 +6,33 @@
 
 /* General Style */
 
+.eael-header-bar {
+	height: auto;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid rgba( 0,0,0,0.1 );
+	-webkit-display: flex;
+	display: flex;
+	-webkit-justify-content: flex-end;
+	justify-content: flex-end;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.eael-header-bar .title {
+	font-size: 28px;
+	font-weight: 600;
+	margin: 0px;
+	line-height: 1;
+}
 
+.eael-header-left, 
+.eael-header-right {
+	-webkit-flex-grow: 1;
+	flex-grow: 1;
+}
+.eael-header-right {
+	text-align: right;
+}
 .eael-settings-tabs {
 	padding-top: 15px;
 }
@@ -291,3 +317,18 @@ textarea.eael-form-control {
 	align-content: center;
 }
 
+/* Header Button */
+.eael-header-bar .eael-btn {
+	background-color: #3CCD94;
+}
+.eael-header-bar .eael-btn:hover, .eael-header-bar .eael-btn:focus {
+	background-color: #02CC7B;
+}
+.eael-save-btn-wrap .eael-btn.save-now,
+.eael-header-bar .eael-btn.save-now {
+	background: #E74C3C;
+}
+.eael-save-btn-wrap .eael-btn.save-now:hover,
+.eael-header-bar .eael-btn.save-now:hover {
+	background: #ff5544;
+}
