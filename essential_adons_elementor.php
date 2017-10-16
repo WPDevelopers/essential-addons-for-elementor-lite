@@ -96,10 +96,7 @@ function add_eael_elements(){
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
-/**
- * Loading all essentail scripts
- * @return [type] [description]
- */
+
 function essential_addons_el_enqueue(){
    $is_component_active = get_option( 'eael_save_settings' );
    wp_enqueue_style('essential_addons_elementor-css',ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css');
@@ -116,9 +113,8 @@ function essential_addons_el_enqueue(){
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
 
-/**
- * Editor Styles
- */
+// Editor CSS
+
 add_action( 'elementor/editor/before_enqueue_scripts', function() {
    
    wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
@@ -126,11 +122,8 @@ add_action( 'elementor/editor/before_enqueue_scripts', function() {
    
 } );
 
-/**
- * Action Menu
- * @param  [type] $links [description]
- * @return [type]        [description]
- */
+// Action menus
+
 function eael_add_settings_link( $links ) {
     $settings_link = sprintf( '<a href="admin.php?page=eael-settings">' . __( 'Settings' ) . '</a>' );
     $go_pro_link = sprintf( '<a href="https://essential-addons.com/elementor/buy.php" target="_blank" style="color: #39b54a; font-weight: bold;">' . __( 'Go Pro' ) . '</a>' );
@@ -142,15 +135,15 @@ add_filter( "plugin_action_links_$plugin", 'eael_add_settings_link' );
 
 
 
-/**
- * Redirect to option page
- */
+// Redirect to options page
+
 register_activation_hook(__FILE__, 'eael_activate');
+add_action('admin_init', 'eael_redirect');
+
 function eael_activate() {
     add_option('eael_do_activation_redirect', true);
 }
 
-add_action('admin_init', 'eael_redirect');
 function eael_redirect() {
     if (get_option('eael_do_activation_redirect', false)) {
         delete_option('eael_do_activation_redirect');
@@ -160,34 +153,3 @@ function eael_redirect() {
         }
     }
 }
-
-/**
- * Showing an admin notice after installing the plugin
- */
-register_activation_hook( __FILE__, 'eael_admin_notice_on_plugin_activation' );
-
-/**
- * Setup a transient
- * @return [type] [description]
- */
-function eael_admin_notice_on_plugin_activation() {
-  set_transient( 'eael-admin-notice', true, 5 );
-}
-
-/**
- * Create and admin notice
- * @return [type] [description]
- */
-function eael_admin_notice(){
-
-  if( get_transient( 'eael-admin-notice' ) ){
-     ?>
-    <div class="updated notice is-dismissible">
-        <p>Custom admin notice after plugin activation.</p>
-    </div>
-    <?php
-        /* Delete transient after showing message once! */ 
-        delete_transient( 'eael-admin-notice' );
-    }
-}
-add_action( 'admin_notices', 'eael_admin_notice' );

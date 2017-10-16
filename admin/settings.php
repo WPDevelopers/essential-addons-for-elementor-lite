@@ -6,31 +6,23 @@
 if( ! defined( 'ABSPATH' ) ) exit(); // Exit if accessed directly
 
 class Eael_Admin_Settings {
-
+	protected $is_pro = FALSE;
 	private $eael_default_settings = array(
-	   'contact-form-7'     => true,
+		'contact-form-7'     => true,
 	   'count-down'         => true,
 	   'creative-btn'       => true,
 	   'fancy-text'         => true,
-	   'img-comparison'     => true,
-	   'instagram-gallery'  => true,
-	   'interactive-promo'  => true,
-	   'lightbox'           => true,
-	   'post-block'         => true,
 	   'post-grid'          => true,
 	   'post-timeline'      => true,
 	   'product-grid'       => true,
 	   'team-members'       => true,
-	   'testimonial-slider' => true,
 	   'testimonials'       => true,
 	   'weforms'            => true,
-	   'static-product'     => true,
 	   'call-to-action'     => true,
 	   'flip-box'     		=> true,
 	   'info-box'     		=> true,
 	   'dual-header'     	=> true,
 	   'price-table'     	=> true,
-	   'flip-carousel'     	=> true,
 	);
 
 	private $eael_settings;
@@ -120,21 +112,15 @@ class Eael_Admin_Settings {
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 		?>
 		<div class="wrap">
+		  	<h2><?php _e( 'Essential Elementor Addon Settings', 'essential-addons-elementor' ); ?></h2> <hr>
+		  	<div class="response-wrap"></div>
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
-		  		<div class="eael-header-bar">
-					<div class="eael-header-left">
-						<h4 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h4>
-					</div>
-					<div class="eael-header-right">
-						<input type="submit" value="Save settings" class="button eael-btn"/>
-					</div>
-				</div>
-			  	<div class="response-wrap"></div>
 			  	<div class="eael-settings-tabs">
 			    	<ul>
 				      <li><a href="#general"><i class="fa fa-cogs"></i> General</a></li>
 				      <li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
 				      <li><a href="#custom-css"><i class="fa fa-code"></i> Custom Code</a></li>
+				      <li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
 				      <li><a href="#support"><i class="fa fa-ticket"></i> Support</a></li>
 			    	</ul>
 			    	<div id="general" class="eael-settings-tab">
@@ -145,8 +131,8 @@ class Eael_Admin_Settings {
 			      			</div>
 			      			<div class="col-half">
 			      				<a href="https://essential-addons.com/elementor/" target="_blank" class="button eael-btn eael-demo-btn">Explore Demos</a>
-			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get another License</a>
-
+			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
+			      				
 			      				<div class="eael-notice">
 			      					<h5>Troubleshooting Info</h5>
 			      					<p>After update, if you see any element is not working properly, go to <strong>Elements</strong> Tab, toggle the element and save changes.</p>
@@ -155,246 +141,264 @@ class Eael_Admin_Settings {
 			    		</div>
 			    	</div>
 			    	<div id="elements" class="eael-settings-tab">
-				      	<div class="row">
-				      		<div class="col-full">
-				      			<table class="form-table">
-										<tr>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Contact Form 7', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Contact Form 7', 'essential-addons-elementor' ); ?></p>
-					                        		<input type="checkbox" id="contact-form-7" name="contact-form-7" <?php checked( 1, $this->eael_get_settings['contact-form-7'], true ); ?> >
-					                        		<label for="contact-form-7"></label>
-					                    		</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Count Down', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Count Down', 'essential-addons-elementor' ); ?></p>
-					                        		<input type="checkbox" id="count-down" name="count-down" <?php checked( 1, $this->eael_get_settings['count-down'], true ); ?> >
-					                        		<label for="count-down"></label>
-					                    		</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Creative Button', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Creative Button', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="creative-btn" name="creative-btn" <?php checked( 1, $this->eael_get_settings['creative-btn'], true ); ?> >
-					                        <label for="creative-btn"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Fancy Text', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Fancy Text', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="fancy-text" name="fancy-text" <?php checked( 1, $this->eael_get_settings['fancy-text'], true ); ?> >
-					                        <label for="fancy-text"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Image Comparison', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Image Comparison', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="img-comparison" name="img-comparison" <?php checked( 1, $this->eael_get_settings['img-comparison'], true ); ?> >
-					                        <label for="img-comparison"></label>
-					                    	</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Instagram Gallery', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Instagram Gallery', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="instagram-gallery" name="instagram-gallery" <?php checked( 1, $this->eael_get_settings['instagram-gallery'], true ); ?> >
-					                        <label for="instagram-gallery"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Interactive Promo', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Interactive Promo', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="interactive-promo" name="interactive-promo" <?php checked( 1, $this->eael_get_settings['interactive-promo'], true ); ?> >
-					                        <label for="interactive-promo"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Lightbox', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Lightbox', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="lightbox" name="lightbox" <?php checked( 1, $this->eael_get_settings['lightbox'], true ); ?> >
-					                        <label for="lightbox"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Post Block', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Post Block', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="post-block" name="post-block" <?php checked( 1, $this->eael_get_settings['post-block'], true ); ?> >
-					                        <label for="post-block"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Post Grid', 'essential-addons-elementor' ); ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Post Grid', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="post-grid" name="post-grid" <?php checked( 1, $this->eael_get_settings['post-grid'], true ); ?> >
-					                        <label for="post-grid"></label>
-					                    	</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Post Timeline', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Post Timeline', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="post-timeline" name="post-timeline" <?php checked( 1, $this->eael_get_settings['post-timeline'], true ); ?> >
-					                        <label for="post-timeline"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Product Grid', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Product Grid', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="product-grid" name="product-grid" <?php checked( 1, $this->eael_get_settings['product-grid'], true ); ?> >
-					                        <label for="product-grid"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Team Member', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Team Member', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="team-members" name="team-members" <?php checked( 1, $this->eael_get_settings['team-members'], true ); ?> >
-					                        <label for="team-members"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Testimonial Slider', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Testimonial Slider', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="testimonial-slider" name="testimonial-slider" <?php checked( 1, $this->eael_get_settings['testimonial-slider'], true ); ?> >
-					                        <label for="testimonial-slider"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Testimonials', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Testimonials', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="testimonials" name="testimonials" <?php checked( 1, $this->eael_get_settings['testimonials'], true ); ?> >
-					                        <label for="testimonials"></label>
-					                    	</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'We-Forms', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate WeForms', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="weforms" name="weforms" <?php checked( 1, $this->eael_get_settings['weforms'], true ); ?> >
-					                        <label for="weforms"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Static Product', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Static Product', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="static-product" name="static-product" <?php checked( 1, $this->eael_get_settings['static-product'], true ); ?> >
-					                        <label for="static-product"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Call To Action', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactive Call To Action', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="call-to-action" name="call-to-action" <?php checked( 1, $this->eael_get_settings['call-to-action'], true ); ?> >
-					                        <label for="call-to-action"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Flip Box', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactive Flip Box', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="flip-box" name="flip-box" <?php checked( 1, $this->eael_get_settings['flip-box'], true ); ?> >
-					                        <label for="flip-box"></label>
-					                    	</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Info Box', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactive Info Box', 'essential-addons-elementor' ); ?></p>
-					                        <input type="checkbox" id="info-box" name="info-box" <?php checked( 1, $this->eael_get_settings['info-box'], true ); ?> >
-					                        <label for="info-box"></label>
-					                    	</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Dual Color Header', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactive Dual Color Header', 'essential-addons-elementor' ); ?></p>
-					                        		<input type="checkbox" id="dual-header" name="dual-header" <?php checked( 1, $this->eael_get_settings['dual-header'], true ); ?> >
-					                        		<label for="dual-header"></label>
-					                    		</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Pricing Table', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactive Pricing Table', 'essential-addons-elementor' ); ?></p>
-					                        		<input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->eael_get_settings['price-table'], true ); ?> >
-					                        		<label for="price-table"></label>
-					                    		</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Flip Carousel', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactive Flip Carousel', 'essential-addons-elementor' ); ?></p>
-					                        		<input type="checkbox" id="flip-carousel" name="flip-carousel" <?php checked( 1, $this->eael_get_settings['flip-carousel'], true ); ?> >
-					                        		<label for="flip-carousel"></label>
-					                    		</div>
-											</td>
-										</tr>
-						      	</table>
-							  	<div class="eael-save-btn-wrap">
-							  		<input type="submit" value="Save settings" class="button eael-btn"/>
-							  	</div>
-				      		</div>
-				      	</div>
+			      	<div class="row">
+			      		<div class="col-full">
+			      			<table class="form-table">
+									<tr>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Contact Form 7', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Contact Form 7', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="contact-form-7" name="contact-form-7" <?php checked( 1, $this->eael_get_settings['contact-form-7'], true ); ?> >
+				                        <label for="contact-form-7"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Count Down', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Count Down', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="count-down" name="count-down" <?php checked( 1, $this->eael_get_settings['count-down'], true ); ?> >
+				                        <label for="count-down"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Creative Button', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Creative Button', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="creative-btn" name="creative-btn" <?php checked( 1, $this->eael_get_settings['creative-btn'], true ); ?> >
+				                        <label for="creative-btn"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Fancy Text', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Fancy Text', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="fancy-text" name="fancy-text" <?php checked( 1, $this->eael_get_settings['fancy-text'], true ); ?> >
+				                        <label for="fancy-text"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Post Grid', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Post Grid', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="post-grid" name="post-grid" <?php checked( 1, $this->eael_get_settings['post-grid'], true ); ?> >
+				                        <label for="post-grid"></label>
+				                    	</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Post Timeline', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Post Timeline', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="post-timeline" name="post-timeline" <?php checked( 1, $this->eael_get_settings['post-timeline'], true ); ?> >
+				                        <label for="post-timeline"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Product Grid', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Product Grid', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="product-grid" name="product-grid" <?php checked( 1, $this->eael_get_settings['product-grid'], true ); ?> >
+				                        <label for="product-grid"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Team Member', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Team Member', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="team-members" name="team-members" <?php checked( 1, $this->eael_get_settings['team-members'], true ); ?> >
+				                        <label for="team-members"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Testimonials', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Testimonials', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="testimonials" name="testimonials" <?php checked( 1, $this->eael_get_settings['testimonials'], true ); ?> >
+				                        <label for="testimonials"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'We-Forms', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive WeForms', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="weforms" name="weforms" <?php checked( 1, $this->eael_get_settings['weforms'], true ); ?> >
+				                        <label for="weforms"></label>
+				                    	</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Call To Action', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Call To Action', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="call-to-action" name="call-to-action" <?php checked( 1, $this->eael_get_settings['call-to-action'], true ); ?> >
+				                        <label for="call-to-action"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Flip Box', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Flip Box', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="flip-box" name="flip-box" <?php checked( 1, $this->eael_get_settings['flip-box'], true ); ?> >
+				                        <label for="flip-box"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Info Box', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Info Box', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="info-box" name="info-box" <?php checked( 1, $this->eael_get_settings['info-box'], true ); ?> >
+				                        <label for="info-box"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Dual Color Header', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Dual Color Header', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="dual-header" name="dual-header" <?php checked( 1, $this->eael_get_settings['dual-header'], true ); ?> >
+				                        <label for="dual-header"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Pricing Table', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Pricing Table', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->eael_get_settings['price-table'], true ); ?> >
+				                        <label for="price-table"></label>
+				                    	</div>
+										</td>
+									</tr>
+					      	</table>
+			      		</div>
+			      		<div class="col-full">
+			      			<div class="premium-elements-title">
+			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/lock-icon.png'; ?>">
+			      				<h2 class="section-title">Premium Elements</h2>
+			      			</div>
+			      			<table class="form-table">
+									<tr>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Image Comparison', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Image Comparison', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="img-comparison" name="img-comparison" disabled >
+				                        <label for="img-comparison" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Instagram Gallery', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Instagram Gallery', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="instagram-gallery" name="instagram-gallery" disabled >
+				                        <label for="instagram-gallery" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Interactive Promo', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Interactive Promo', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="interactive-promo" name="interactive-promo" disabled >
+				                        <label for="interactive-promo" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Lightbox', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Lightbox', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="lightbox" name="lightbox" disabled >
+				                        <label for="lightbox" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Post Block', 'essential-addons-elementor' ); ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Post Block', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="post-block" name="post-block" disabled >
+				                        <label for="post-block" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Testimonial Slider', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Testimonial Slider', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="testimonial-slider" name="testimonial-slider" disabled >
+				                        <label for="testimonial-slider" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Static Product', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Static Product', 'essential-addons-elementor' ); ?></p>
+				                        <input type="checkbox" id="static-product" name="static-product" disabled >
+				                        <label for="static-product" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                    	</div>
+										</td>
+									</tr>
+					      	</table>
+						  	<div class="eael-save-btn-wrap">
+						  		<input type="submit" value="Save settings" class="button eael-btn"/>
+						  	</div>
+			      		</div>
+			      	</div>
 			    	</div>
 			    	<div id="custom-css" class="eael-settings-tab">
-				      	<div class="row">
-				      		<div class="col-half">
-				      			<p class="title">Custom CSS</p>
-				      			<p class="desc">Add your custom CSS code here without <code>style</code> tag.</p>
-								<textarea name="eael-custom-css" id="eael-custom-css" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-css'] ) ) : echo $this->eael_get_settings['eael-custom-css']; else : $this->eael_get_settings['eael-custom-css'] = ''; endif; ?>
-								</textarea>
-				      		</div>
-				      	</div>
-				      	<div class="row">
-				      		<div class="col-half">
-				      			<p class="title">Custom JavaScript</p>
-				      			<p class="desc">Add your custom JavaScript code here without <code>script</code> tag.</p>
-				      			<textarea name="eael-custom-js" id="eael-custom-js" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-js'] ) ) : echo $this->eael_get_settings['eael-custom-js']; else: $this->eael_get_settings['eael-custom-js'] = ''; endif;  ?>
-				      			</textarea>
-				      		</div>
-				      	</div>
-					  	<div class="eael-save-btn-wrap">
-					  		<input type="submit" value="Save settings" class="button eael-btn"/>
-					  	</div>
+			      	<div class="row">
+			      		<div class="col-half">
+			      			<p class="title">Custom CSS</p>
+			      			<p class="desc">Add your custom CSS code here without <code>style</code> tag.</p>
+								<textarea name="eael-custom-css" id="eael-custom-css" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-css'] ) ) : echo $this->eael_get_settings['eael-custom-css']; else : $this->eael_get_settings['eael-custom-css'] = ''; endif; ?></textarea>
+			      		</div>
+			      	</div>
+			      	<div class="row">
+			      		<div class="col-half">
+			      			<p class="title">Custom JavaScript</p>
+			      			<p class="desc">Add your custom JavaScript code here without <code>script</code> tag.</p>
+			      			<textarea name="eael-custom-js" id="eael-custom-js" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-js'] ) ) : echo $this->eael_get_settings['eael-custom-js']; else: $this->eael_get_settings['eael-custom-js'] = ''; endif;  ?></textarea>
+			      		</div>
+			      	</div>
+				  	<div class="eael-save-btn-wrap">
+				  		<input type="submit" value="Save settings" class="button eael-btn"/>
+				  	</div>
+			    	</div>
+			    	<div id="go-pro" class="eael-settings-tab">
+			    		<div class="row go-premium">
+			      			<div class="col-half">
+			      				<h4>Why upgrade to Premium Version?</h4>
+			      				<p>The premium version helps us to continue development of the product incorporating even more features and enhancements.</p>
+
+			      				<p>You will also get world class support from our dedicated team, 24/7.</p>
+
+			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
+			      			</div>
+			      			<div class="col-half">
+			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/unlock-gif.gif'; ?>">
+			      			</div>
+			      		</div>
 			    	</div>
 			    	<div id="support" class="eael-settings-tab">
-				      	<div class="row">
-				      		<div class="col-half">
-					      		<h4>Need any help? Open a ticket!</h4>
-					      		<p>Purchasing a license entitles you to receive premium support. Feel free to get in touch if you need any assistance.</p>
-					      		<a href="https://essential-addons.com/cornerstone/support/" target="_blank" class="button eael-btn">Get Help</a>
-					      	</div>
+			      	<div class="row">
+			      		<div class="col-half">
+				      		<h4>Need help? Open a support ticket!</h4>
+				      		<p>You can always get support from the community.</p>
+				      		<a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" target="_blank" class="button eael-btn">Get Help</a>
 				      	</div>
-				      	<div class="row">
-				      		<div class="col-half">
-				      			<div class="essential-addons-community-link">
-				      				<a href="https://www.facebook.com/groups/essentialaddons/" target="_blank"><i class="fa fa-facebook-official fa-2x fa-fw" aria-hidden="true"></i> <span>Join the Facebook Community</span></a>
-				      			</div>
-				      		</div>
+			      		<div class="col-half">
+				      		<h4>Need Premium Support?</h4>
+				      		<p>Purchasing a license entitles you to receive premium support.</p>
+				      		<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn">Get a license</a>
 				      	</div>
+			      	</div>
+			      	<div class="row">
+			      		<div class="col-half">
+			      			<div class="essential-addons-community-link">
+			      				<a href="https://www.facebook.com/groups/essentialaddons/" target="_blank"><i class="fa fa-facebook-official fa-2x fa-fw" aria-hidden="true"></i> <span>Join the Facebook Community</span></a>
+			      			</div>
+			      		</div>
+			      	</div>
 			    	</div>
 			  	</div>
 		  	</form>
@@ -415,27 +419,19 @@ class Eael_Admin_Settings {
 			$this->eael_settings = array(
 				'contact-form-7' 		=> intval( $_POST['contactForm7'] ? 1 : 0 ),
 				'count-down' 			=> intval( $_POST['countDown'] ? 1 : 0 ),
-				'creative-btn' 			=> intval( $_POST['creativeBtn'] ? 1 : 0 ),
+				'creative-btn' 		=> intval( $_POST['creativeBtn'] ? 1 : 0 ),
 				'fancy-text' 			=> intval( $_POST['fancyText'] ? 1 : 0 ),
-				'img-comparison' 		=> intval( $_POST['imgComparison'] ? 1 : 0 ),
-				'instagram-gallery' 	=> intval( $_POST['instagramGallery'] ? 1 : 0 ),
-				'interactive-promo' 	=> intval( $_POST['interactivePromo'] ? 1 : 0 ),
-				'lightbox' 				=> intval( $_POST['lightBox'] ? 1 : 0 ),
-				'post-block' 			=> intval( $_POST['postBlock'] ? 1 : 0 ),
 				'post-grid' 			=> intval( $_POST['postGrid'] ? 1 : 0 ),
 				'post-timeline' 		=> intval( $_POST['postTimeline'] ? 1 : 0 ),
-				'product-grid' 			=> intval( $_POST['productGrid'] ? 1 : 0 ),
-				'team-members' 			=> intval( $_POST['teamMembers'] ? 1 : 0 ),
-				'testimonial-slider' 	=> intval( $_POST['testimoniSlider'] ? 1 : 0 ),
-				'testimonials' 			=> intval( $_POST['testimonials'] ? 1 : 0 ),
+				'product-grid' 		=> intval( $_POST['productGrid'] ? 1 : 0 ),
+				'team-members' 		=> intval( $_POST['teamMembers'] ? 1 : 0 ),
+				'testimonials' 		=> intval( $_POST['testimonials'] ? 1 : 0 ),
 				'weforms' 				=> intval( $_POST['weForms'] ? 1 : 0 ),
-				'static-product' 		=> intval( $_POST['staticProduct'] ? 1 : 0 ),
 				'call-to-action' 		=> intval( $_POST['callToAction'] ? 1 : 0 ),
 				'flip-box' 				=> intval( $_POST['flipBox'] ? 1 : 0 ),
 				'info-box' 				=> intval( $_POST['infoBox'] ? 1 : 0 ),
 				'dual-header' 			=> intval( $_POST['dualHeader'] ? 1 : 0 ),
 				'price-table' 			=> intval( $_POST['priceTable'] ? 1 : 0 ),
-				'flip-carousel' 		=> intval( $_POST['flipCarousel'] ? 1 : 0 ),
 
 				'eael-custom-css'		=> wp_unslash( $_POST['customCss'] ),
 				'eael-custom-js'		=> wp_unslash( $_POST['customJs'] ),
