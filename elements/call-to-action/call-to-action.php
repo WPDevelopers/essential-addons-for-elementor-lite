@@ -345,6 +345,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
 		     		'default'  			=> esc_html__( 'Default', 'essential-addons-elementor' ),
+		     		'top-to-bottom'  	=> esc_html__( 'Top to Bottom', 'essential-addons-elementor' ),
 		     		'left-to-right'  	=> esc_html__( 'Left to Right', 'essential-addons-elementor' ),
 		     	],
 		  	]
@@ -460,6 +461,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 					'default' => '#3F51B5',
 					'selectors' => [
 						'{{WRAPPER}} .eael-call-to-action .cta-button:after' => 'background: {{VALUE}};',
+						'{{WRAPPER}} .eael-call-to-action .cta-button:hover' => 'background: {{VALUE}};',
 					],
 				]
 			);
@@ -492,6 +494,55 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 
 		$this->end_controls_section();
 
+		/**
+		 * -------------------------------------------
+		 * Tab Style (Button Style)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_cta_icon_style_settings',
+			[
+				'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_cta_type' => 'cta-icon-flex'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_section_cta_icon_size',
+			[
+				'label' => esc_html__( 'Font Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 80
+				],
+				'range' => [
+					'px' => [
+						'max' => 160,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'font-size: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_section_cta_icon_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#444',
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 
@@ -517,6 +568,8 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	  	// Button Effect
 	  	if( 'left-to-right' == $settings['eael_cta_btn_effect_type'] ) {
 	  		$cta_btn_effect = 'effect-2';
+	  	}elseif( 'top-to-bottom' == $settings['eael_cta_btn_effect_type'] ) {
+	  		$cta_btn_effect = 'effect-1';
 	  	}else {
 	  		$cta_btn_effect = '';
 	  	}

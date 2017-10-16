@@ -3,24 +3,20 @@
 	// Init jQuery Ui Tabs
 	$( ".eael-settings-tabs" ).tabs();
 
-	$( '.eael-get-pro' ).on( 'click', function() {
-		swal({
-	  		title: '<h2><span>Go</span> Premium',
-	  		type: 'warning',
-	  		html:
-	    		'Purchase our <b><a href="https://essential-addons.com/elementor/buy.php" rel="nofollow">premium version</a></b> to unlock these pro components!',
-	  		showCloseButton: true,
-	  		showCancelButton: false,
-	  		focusConfirm: true,
-		});
-	} );
-
 	// Adding link id after the url
-	$('.eael-settings-tabs ul li a').click(function () {
+	$('.eael-settings-tabs ul li a').click(function(e) {
 		var tabUrl = $(this).attr( 'href' );
-	   window.location.hash = tabUrl;
-	   return false;
+	   	window.location.hash = tabUrl;
+	   	$('html, body').scrollTop(tabUrl);
 	});
+
+	// Save Button reacting on any changes
+	var headerSaveBtn = $( '.eael-header-bar .eael-btn' );
+	var footerSaveBtn = $( '.eael-save-btn-wrap .eael-btn' );
+	$('.eael-checkbox input[type="checkbox"]').on( 'click', function() {
+		headerSaveBtn.addClass( 'save-now' );
+		footerSaveBtn.addClass( 'save-now' );
+	} );
 
 	// Saving Data With Ajax Request
 	$( 'form#eael-settings' ).on( 'submit', function(e) {
@@ -30,17 +26,25 @@
 		var countDown 			= $( '#count-down' ).attr( 'checked' ) ? 1 : 0;
 		var creativeBtn 		= $( '#creative-btn' ).attr( 'checked' ) ? 1 : 0;
 		var fancyText 			= $( '#fancy-text' ).attr( 'checked' ) ? 1 : 0;
+		var imgComparison 		= $( '#img-comparison' ).attr( 'checked' ) ? 1 : 0;
+		var instagramGallery 	= $( '#instagram-gallery' ).attr( 'checked' ) ? 1 : 0;
+		var interactivePromo 	= $( '#interactive-promo' ).attr( 'checked' ) ? 1 : 0;
+		var lightBox 			= $( '#lightbox' ).attr( 'checked' ) ? 1 : 0;
+		var postBlock 			= $( '#post-block' ).attr( 'checked' ) ? 1 : 0;
 		var postGrid 			= $( '#post-grid' ).attr( 'checked' ) ? 1 : 0;
 		var postTimeline 		= $( '#post-timeline' ).attr( 'checked' ) ? 1 : 0;
 		var productGrid 		= $( '#product-grid' ).attr( 'checked' ) ? 1 : 0;
 		var teamMembers 		= $( '#team-members' ).attr( 'checked' ) ? 1 : 0;
+		var testimoniSlider 	= $( '#testimonial-slider' ).attr( 'checked' ) ? 1 : 0;
 		var testimonials 		= $( '#testimonials' ).attr( 'checked' ) ? 1 : 0;
 		var weForms 			= $( '#weforms' ).attr( 'checked' ) ? 1 : 0;
+		var staticProduct 		= $( '#static-product' ).attr( 'checked' ) ? 1 : 0;
 		var callToAction 		= $( '#call-to-action' ).attr( 'checked' ) ? 1 : 0;
 		var flipBox 			= $( '#flip-box' ).attr( 'checked' ) ? 1 : 0;
 		var infoBox 			= $( '#info-box' ).attr( 'checked' ) ? 1 : 0;
-		var dualHeader 		= $( '#dual-header' ).attr( 'checked' ) ? 1 : 0;
-		var priceTable 		= $( '#price-table' ).attr( 'checked' ) ? 1 : 0;
+		var dualHeader 			= $( '#dual-header' ).attr( 'checked' ) ? 1 : 0;
+		var priceTable 			= $( '#price-table' ).attr( 'checked' ) ? 1 : 0;
+		var flipCarousel 		= $( '#flip-carousel' ).attr( 'checked' ) ? 1 : 0;
 
 		var customCss 			= $( '#eael-custom-css' ).val();
 		var customJs 			= $( '#eael-custom-js' ).val();
@@ -54,17 +58,25 @@
 				countDown: countDown, 
 				creativeBtn: creativeBtn, 
 				fancyText: fancyText, 
+				imgComparison: imgComparison, 
+				instagramGallery: instagramGallery, 
+				interactivePromo: interactivePromo, 
+				lightBox: lightBox, 
+				postBlock: postBlock, 
 				postGrid: postGrid, 
 				postTimeline: postTimeline, 
 				productGrid: productGrid, 
 				teamMembers: teamMembers, 
+				testimoniSlider: testimoniSlider, 
 				testimonials: testimonials, 
 				weForms: weForms,
+				staticProduct: staticProduct,
 				callToAction: callToAction,
 				flipBox: flipBox,
 				infoBox: infoBox,
 				dualHeader: dualHeader,
 				priceTable: priceTable,
+				flipCarousel: flipCarousel,
 				customCss: customCss,
 				customJs: customJs,
 			},
@@ -74,6 +86,8 @@
 				  'Click OK to continue',
 				  'success'
 				);
+				headerSaveBtn.removeClass( 'save-now' );
+				footerSaveBtn.removeClass( 'save-now' );
 			},
 			error: function() {
 				swal(
