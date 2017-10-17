@@ -1604,19 +1604,13 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
     margin-top: 0px;
     line-height: 28px;
 }
-.eael-infobox-img-align-left .eael-infobox .infobox-icon,
-.eael-infobox-icon-align-left .eael-infobox .infobox-icon,
-.eael-infobox-content-align-left .eael-infobox .infobox-content {
+.eael-infobox-content-align-left .eael-infobox {
     text-align: left;
 }
-.eael-infobox-img-align-right .eael-infobox .infobox-icon,
-.eael-infobox-icon-align-right .eael-infobox .infobox-icon,
-.eael-infobox-content-align-right .eael-infobox .infobox-content {
+.eael-infobox-content-align-right .eael-infobox {
     text-align: right;
 }
-.eael-infobox-img-align-center .eael-infobox .infobox-icon,
-.eael-infobox-icon-align-center .eael-infobox .infobox-icon,
-.eael-infobox-content-align-center .eael-infobox .infobox-content {
+.eael-infobox-content-align-center .eael-infobox {
     text-align: center;
 }
 .eael-infobox-shape-circle .eael-infobox .infobox-icon img {

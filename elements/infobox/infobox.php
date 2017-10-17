@@ -162,6 +162,9 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				],
 				'default' => 'center',
 				'prefix_class' => 'eael-infobox-content-align-',
+				'condition' => [
+					'eael_infobox_img_type' => 'img-on-top'
+				]
 			]
 		);
 		$this->end_controls_section();
@@ -321,35 +324,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'eael_infobox_img_alignment',
-			[
-				'label' => esc_html__( 'Image Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-right',
-					],
-				],
-				'default' => 'center',
-				'prefix_class' => 'eael-infobox-img-align-',
-				'condition' => [
-					'eael_infobox_img_or_icon' => 'img',
-					'eael_infobox_img_type!' => 'img-on-left',
-				]
-			]
-		);
-
 		$this->end_controls_section();
 
 		/**
@@ -434,35 +408,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'condition' => [
 					'eael_infobox_img_type!' => 'img-on-left',
 					'eael_infobox_icon_bg_shape!' => 'none',
-				]
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_infobox_icon_alignment',
-			[
-				'label' => esc_html__( 'Icon Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-right',
-					],
-				],
-				'default' => 'center',
-				'prefix_class' => 'eael-infobox-icon-align-',
-				'condition' => [
-					'eael_infobox_img_or_icon' => 'icon',
-					'eael_infobox_img_type' => 'img-on-top'
 				]
 			]
 		);
