@@ -1690,8 +1690,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
     padding-left: 45px;
 }
 /* Infobox Style (Icon Beside Title) */
-
-.eael-infobox.icon-beside-title {} .eael-infobox.icon-beside-title figure {
+.eael-infobox.icon-beside-title figure {
     position: absolute;
     display: block;
     width: 55px;
@@ -1701,11 +1700,24 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
     z-index: 1;
     font-size: 45px;
 }
+.eael-infobox.icon-beside-title figure img {
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.eael-infobox-shape-circle .eael-infobox.icon-beside-title figure img {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.eael-infobox-shape-radius .eael-infobox.icon-beside-title figure img {
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+}
 .eael-infobox.icon-beside-title .infobox-content .title {
     position: relative;
     display: block;
+    min-height: 55px;
     padding-left: 65px;
-    line-height: 45px;
+    line-height: 27px;
     margin-bottom: 20px;
 }
 .eael-infobox.icon-beside-title .infobox-content .title.eael-icon-only {

@@ -100,34 +100,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'eael_infobox_icon_alignment',
-			[
-				'label' => esc_html__( 'Icon Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-right',
-					],
-				],
-				'default' => 'center',
-				'prefix_class' => 'eael-infobox-icon-align-',
-				'condition' => [
-					'eael_infobox_img_or_icon' => 'icon'
-				]
-			]
-		);
-
 		$this->end_controls_section();
 
 		/**
@@ -298,7 +270,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		  	[
 		   	'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
 		     	'type' 			=> Controls_Manager::SELECT,
-		     	'default' 		=> 'circle',
+		     	'default' 		=> 'square',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
 		     		'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
@@ -318,7 +290,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'label' => esc_html__( 'Image Resizer', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
-					'size' => '100'
+					'size' => 100
 				],
 				'range' => [
 					'px' => [
@@ -329,7 +301,8 @@ class Widget_Eael_Info_Box extends Widget_Base {
 					'{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px;',
 				],
 				'condition' => [
-		     		'eael_infobox_img_or_icon' => 'img'
+		     		'eael_infobox_img_or_icon' => 'img',
+		     		'eael_infobox_img_type' => 'img-on-top'
 		     	]
 			]
 		);
@@ -343,7 +316,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 					'eael_infobox_image[url]!' => '',
 				],
 				'condition' => [
-					'eael_infobox_img_or_icon' => 'img'
+					'eael_infobox_img_or_icon' => 'img',
 				]
 			]
 		);
@@ -368,7 +341,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						'icon' => 'fa fa-align-right',
 					],
 				],
-				'default' => 'left',
+				'default' => 'center',
 				'prefix_class' => 'eael-infobox-img-align-',
 				'condition' => [
 					'eael_infobox_img_or_icon' => 'img',
@@ -465,6 +438,35 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_infobox_icon_alignment',
+			[
+				'label' => esc_html__( 'Icon Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+				],
+				'default' => 'center',
+				'prefix_class' => 'eael-infobox-icon-align-',
+				'condition' => [
+					'eael_infobox_img_or_icon' => 'icon',
+					'eael_infobox_img_type' => 'img-on-top'
+				]
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -544,9 +546,10 @@ class Widget_Eael_Info_Box extends Widget_Base {
 
 	protected function render( ) {
 		
-   	$settings = $this->get_settings();
-      $infobox_image = $this->get_settings( 'eael_infobox_image' );
-	  	$infobox_image_url = Group_Control_Image_Size::get_attachment_image_src( $infobox_image['id'], 'thumbnail', $settings );	
+   		$settings = $this->get_settings();
+      	$infobox_image = $this->get_settings( 'eael_infobox_image' );
+	  	$infobox_image_url = Group_Control_Image_Size::get_attachment_image_src( $infobox_image['id'], 'thumbnail', $settings );
+	  	if( empty( $infobox_image_url ) ) : $infobox_image_url = $infobox_image['url']; else: $infobox_image_url = $infobox_image_url; endif;	
 	
 	?>
 		<?php if( 'img-on-top' == $settings['eael_infobox_img_type'] ) : ?>
