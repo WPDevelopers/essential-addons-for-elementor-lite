@@ -181,6 +181,47 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_cta_container_width',
+			[
+				'label' => esc_html__( 'Set max width for the container?', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'yes', 'essential-addons-elementor' ),
+				'label_off' => __( 'no', 'essential-addons-elementor' ),
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cta_container_width_value',
+			[
+				'label' => __( 'Container Max Width (% or px)', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 1170,
+					'unit' => 'px',
+				],
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+		            'px' => [
+		                'min' => 0,
+		                'max' => 1500,
+		                'step' => 5,
+		            ],
+					'%' => [
+						'min' => 1,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action' => 'max-width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_cta_container_width' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_cta_bg_color',
 			[
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
