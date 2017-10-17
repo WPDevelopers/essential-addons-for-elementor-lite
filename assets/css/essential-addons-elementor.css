@@ -2294,8 +2294,7 @@ h2.eael-elements-flip-box-heading {
   margin: 20px 0px 10px 0px;
   font-size: 36px;
 }
-.eael-dual-header.dh-colored .title span.lead,
-.eael-dual-header.dh-colored-reverse .title span.lead {
+.eael-dual-header .title span.lead {
   color: #1abc9c;
 }
 
