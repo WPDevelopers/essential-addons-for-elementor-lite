@@ -389,7 +389,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 		<?php endif; ?>
-		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></h2>
+		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
 	</div>
 	<?php endif; ?>
@@ -400,14 +400,14 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 		<?php endif; ?>
 	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
-	   <h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></h2>
+	   <h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 	</div>
 	<?php endif; ?>
 
 	<?php if( 'dch-subtext-on-top' == $settings['eael_dch_type'] ) : ?>
 	<div class="eael-dual-header">
 	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
-			<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></h2>
+			<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 		<?php endif; ?>
