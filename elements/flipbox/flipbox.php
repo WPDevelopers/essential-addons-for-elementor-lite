@@ -103,6 +103,9 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-elements-flip-box-icon-image img' => 'width: {{SIZE}}px;',
 				],
+				'condition' => [
+					'eael_flipbox_img_or_icon' => 'img'
+				]
 			]
 		);
 
@@ -238,7 +241,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'icon' => 'fa fa-align-right',
 					],
 				],
-				'default' => 'left',
+				'default' => 'center',
 				'prefix_class' => 'eael-flipbox-content-align-',
 			]
 		);
@@ -668,9 +671,10 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 
 	protected function render( ) {
 		
-   	$settings = $this->get_settings();
-      $flipbox_image = $this->get_settings( 'eael_flipbox_image' );
-	  	$flipbox_image_url = Group_Control_Image_Size::get_attachment_image_src( $flipbox_image['id'], 'thumbnail', $settings );	
+   		$settings = $this->get_settings();
+      	$flipbox_image = $this->get_settings( 'eael_flipbox_image' );
+	  	$flipbox_image_url = Group_Control_Image_Size::get_attachment_image_src( $flipbox_image['id'], 'thumbnail', $settings );
+	  	if( empty( $flipbox_image_url ) ) : $flipbox_image_url = $flipbox_image['url']; else: $flipbox_image_url = $flipbox_image_url; endif;
 
 	?>
 	
