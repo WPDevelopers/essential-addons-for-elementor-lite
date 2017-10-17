@@ -550,7 +550,8 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	protected function render( ) {
 		
    	$settings = $this->get_settings();	
-	  	$target = $settings['eael_cta_btn_link']['url'] ? 'target="_blank"' : '';
+	  	$target = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
+	  	$nofollow = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 	  	if( 'cta-bg-color' == $settings['eael_cta_color_type'] ) {
 	  		$cta_class = 'bg-lite';
 	  	}else if( 'cta-bg-img' == $settings['eael_cta_color_type'] ) {
@@ -582,7 +583,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	<div class="eael-call-to-action <?php echo esc_attr( $cta_class ); ?> <?php echo esc_attr( $cta_alignment ); ?>">
 	    <h2 class="title"><?php echo $settings['eael_cta_title']; ?></h2>
 	    <p><?php echo $settings['eael_cta_content']; ?></p>
-	    <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
+	    <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
 	</div>		
 	<?php endif; ?>
 	<?php if( 'cta-flex' == $settings['eael_cta_type'] ) : ?>
@@ -592,7 +593,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	        <p><?php echo $settings['eael_cta_content']; ?></p>
 	    </div>
 	    <div class="action">
-	        <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
+	        <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
 	    </div>
 	</div>
 	<?php endif; ?>
