@@ -549,7 +549,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 
 	protected function render( ) {
 		
-   	$settings = $this->get_settings();	
+   		$settings = $this->get_settings();	
 	  	$target = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
 	  	$nofollow = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 	  	if( 'cta-bg-color' == $settings['eael_cta_color_type'] ) {

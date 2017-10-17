@@ -332,7 +332,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
             'name' => 'eael_dch_first_title_typography',
-				'selector' => '{{WRAPPER}} .eael-dual-header .title, .eael-dual-header .title span.lead',
+				'selector' => '{{WRAPPER}} .eael-dual-header .title, {{WRAPPER}} .eael-dual-header .title span',
 			]
 		);
 
@@ -376,7 +376,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 	?>
 	<?php if( 'dch-default' == $settings['eael_dch_type'] ) : ?>
 	<div class="eael-dual-header">
-		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></h2>
+		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
 	   <?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
