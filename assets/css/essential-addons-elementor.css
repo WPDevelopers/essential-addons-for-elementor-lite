@@ -2076,6 +2076,12 @@ h2.eael-elements-flip-box-heading {
 .eael-call-to-action.cta-center {
   text-align: center;
 }
+.eael-call-to-action.cta-right {
+  text-align: right;
+}
+.eael-call-to-action.cta-left {
+  text-align: left;
+}
 .eael-call-to-action.bg-lite {
   background: #f4f4f4;
 }

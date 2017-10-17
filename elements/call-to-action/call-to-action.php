@@ -59,8 +59,9 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 		     	'default' 		=> 'cta-default',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'cta-default'  	=> esc_html__( 'Default', 'essential-addons-elementor' ),
+		     		'cta-default'  	=> esc_html__( 'Left', 'essential-addons-elementor' ),
 		     		'cta-center' 		=> esc_html__( 'Center', 'essential-addons-elementor' ),
+		     		'cta-right' 		=> esc_html__( 'Right', 'essential-addons-elementor' ),
 		     	],
 		     	'condition'    => [
 		     		'eael_cta_type' => 'cta-basic'
@@ -560,10 +561,12 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	  		$cta_class = '';
 	  	}
 	  	// Is Basic Cta Content Center or Not
-	  	if( 'cta-center' == $settings['eael_cta_content_type'] ) {
-	  		$cta_center = 'cta-center';
+	  	if( 'cta-center' === $settings['eael_cta_content_type'] ) {
+	  		$cta_alignment = 'cta-center';
+	  	}elseif( 'cta-right' === $settings['eael_cta_content_type'] ) {
+	  		$cta_alignment = 'cta-right';
 	  	}else {
-	  		$cta_center = '';
+	  		$cta_alignment = 'cta-left';
 	  	}
 	  	// Button Effect
 	  	if( 'left-to-right' == $settings['eael_cta_btn_effect_type'] ) {
@@ -576,7 +579,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	
 	?>
 	<?php if( 'cta-basic' == $settings['eael_cta_type'] ) : ?>
-	<div class="eael-call-to-action <?php echo esc_attr( $cta_class ); ?> <?php echo esc_attr( $cta_center ); ?>">
+	<div class="eael-call-to-action <?php echo esc_attr( $cta_class ); ?> <?php echo esc_attr( $cta_alignment ); ?>">
 	    <h2 class="title"><?php echo $settings['eael_cta_title']; ?></h2>
 	    <p><?php echo $settings['eael_cta_content']; ?></p>
 	    <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
