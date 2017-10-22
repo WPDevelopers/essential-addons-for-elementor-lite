@@ -1,9 +1,9 @@
 === Elementor Essential Addons ===
-Contributors: Codetic, re_enter_rupok
+Contributors: Codetic, re_enter_rupok, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.8.2
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -90,6 +90,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 2.2.1 =
+
+- (Clear cache after update)
+
+- Several improvements for CTA, Info Box, Flip box and dual heading elements
+- Call to action width control and button control added
+- Pricing table options improved
+- Admin page improved and optimized
+
+
+
 = 2.2.0 =
 
 - Pricing Table Element added
@@ -129,9 +140,9 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.2.0 =
+= 2.2.1 =
 
-- Pricing Table Element added
-- Flipbox element animation improved and more options added
-- Post Timeline responsiveness improved
-- Few minor improvements/
+- Several improvements for CTA, Info Box, Flip box and dual heading elements
+- Call to action width control and button control added
+- Pricing table options improved
+- Admin page improved and optimized
