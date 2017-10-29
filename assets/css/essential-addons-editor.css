@@ -19,6 +19,7 @@
 .elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
 	display: none!important;
 }
-.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title {
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title {
 	color: #f54;
 }

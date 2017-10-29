@@ -87,6 +87,31 @@ class Widget_Eael_Countdown extends Widget_Base {
   			]
   		);
 
+  		$this->add_control(
+		  'eael_section_countdown_style',
+		  	[
+		   	'label'       	=> esc_html__( 'Countdown Style', 'essential-addons-elementor' ),
+		     	'type' 			=> Controls_Manager::SELECT,
+		     	'default' 		=> 'style-1',
+		     	'label_block' 	=> false,
+		     	'options' 		=> [
+		     		'style-1'  	=> esc_html__( 'Style 1', 'essential-addons-elementor' ),
+		     		'style-2' 	=> esc_html__( 'Style 2 (Pro)', 'essential-addons-elementor' ),
+		     		'style-3' 	=> esc_html__( 'Style 3 (Pro)', 'essential-addons-elementor' ),
+		     	],
+		  	]
+		);
+
+		$this->add_control(
+			'eael_section_countdown_style_pro_alert',
+			[
+				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_section_countdown_style' => ['style-2', 'style-3'],
+				]
+			]
+		);
 
 		$this->add_control(
 			'eael_countdown_days',
@@ -453,12 +478,14 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$get_due_date =  esc_attr($settings['eael_countdown_due_time']);
 		$due_date = date("M d Y G:i:s", strtotime($get_due_date));
 		
-	
+		if( 'style-1' === $settings['eael_section_countdown_style'] || 'style-2' === $settings['eael_section_countdown_style'] || 'style-3' === $settings['eael_section_countdown_style'] ) {
+			$eael_countdown_style = 'style-1';
+		}
 	?>
 
 	<div class="eael-countdown-wrapper">
 		<div class="eael-countdown-container <?php echo esc_attr($settings['eael_countdown_label_view'] ); ?> <?php echo esc_attr($settings['eael_countdown_separator'] ); ?>">		
-			<ul id="eael-countdown-<?php echo esc_attr($this->get_id()); ?>" class="eael-countdown-items" data-date="<?php echo esc_attr($due_date) ; ?>">
+			<ul id="eael-countdown-<?php echo esc_attr($this->get_id()); ?>" class="eael-countdown-items <?php echo esc_attr( $eael_countdown_style ); ?>" data-date="<?php echo esc_attr($due_date) ; ?>">
 			    <?php if ( ! empty( $settings['eael_countdown_days'] ) ) : ?><li class="eael-countdown-item"><div class="eael-countdown-days"><span data-days class="eael-countdown-digits">00</span><?php if ( ! empty( $settings['eael_countdown_days_label'] ) ) : ?><span class="eael-countdown-label"><?php echo esc_attr($settings['eael_countdown_days_label'] ); ?></span><?php endif; ?></div></li><?php endif; ?>
 			    <?php if ( ! empty( $settings['eael_countdown_hours'] ) ) : ?><li class="eael-countdown-item"><div class="eael-countdown-hours"><span data-hours class="eael-countdown-digits">00</span><?php if ( ! empty( $settings['eael_countdown_hours_label'] ) ) : ?><span class="eael-countdown-label"><?php echo esc_attr($settings['eael_countdown_hours_label'] ); ?></span><?php endif; ?></div></li><?php endif; ?>
 			   <?php if ( ! empty( $settings['eael_countdown_minutes'] ) ) : ?><li class="eael-countdown-item"><div class="eael-countdown-minutes"><span data-minutes class="eael-countdown-digits">00</span><?php if ( ! empty( $settings['eael_countdown_minutes_label'] ) ) : ?><span class="eael-countdown-label"><?php echo esc_attr($settings['eael_countdown_minutes_label'] ); ?></span><?php endif; ?></div></li><?php endif; ?>
