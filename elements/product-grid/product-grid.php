@@ -122,10 +122,9 @@ class Widget_Eael_Product_Grid extends Widget_Base {
         $this->start_controls_section(
 			'eael_section_pro',
 			[
-				'label' => __( 'Go Premium', 'essential-addons-elementor' )
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-
 
         $this->add_control(
             'eael_control_get_pro',
@@ -143,8 +142,7 @@ class Widget_Eael_Product_Grid extends Widget_Base {
             ]
         );
 
-
-		$this->end_controls_section();
+        $this->end_controls_section();
 		
 		$this->start_controls_section(
 			'eael_product_grid_styles',

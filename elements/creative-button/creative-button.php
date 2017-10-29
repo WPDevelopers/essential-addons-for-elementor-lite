@@ -164,10 +164,9 @@ class Widget_Eael_Creative_Button extends Widget_Base {
         $this->start_controls_section(
 			'eael_section_pro',
 			[
-				'label' => __( 'Go Premium', 'essential-addons-elementor' )
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-
 
         $this->add_control(
             'eael_control_get_pro',
@@ -185,8 +184,7 @@ class Widget_Eael_Creative_Button extends Widget_Base {
             ]
         );
 
-
-		$this->end_controls_section();
+        $this->end_controls_section();
 
   		// Style Controls
 		$this->start_controls_section(
@@ -204,14 +202,24 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 				'type' => Controls_Manager::SELECT,
 				'default' => 'eael-creative-button--default',
 				'options' => [
-					'eael-creative-button--default' 	=> esc_html__( 'Default', 	'essential-addons-elementor' ),
-					'eael-creative-button--winona' 		=> esc_html__( 'Winona', 	'essential-addons-elementor' ),
-					'eael-creative-button--ujarak' 		=> esc_html__( 'Ujarak', 	'essential-addons-elementor' ),
-					'eael-creative-button--wayra' 		=> esc_html__( 'Wayra', 	'essential-addons-elementor' ),
-					'eael-creative-button--tamaya' 		=> esc_html__( 'Tamaya', 	'essential-addons-elementor' ),
-					'eael-creative-button--rayen' 		=> esc_html__( 'Rayen', 	'essential-addons-elementor' ),
+					'eael-creative-button--default' 	=> esc_html__( 'Default', 		'essential-addons-elementor' ),
+					'eael-creative-button--winona' 		=> esc_html__( 'Winona', 		'essential-addons-elementor' ),
+					'eael-creative-button--ujarak' 		=> esc_html__( 'Ujarak', 		'essential-addons-elementor' ),
+					'eael-creative-button--wayra' 		=> esc_html__( 'Wayra', 		'essential-addons-elementor' ),
+					'eael-creative-button--tamaya' 		=> esc_html__( 'Tamaya', 		'essential-addons-elementor' ),
+					'eael-creative-button--rayen' 		=> esc_html__( 'Rayen', 		'essential-addons-elementor' ),
+					'eael-creative-button--pro-1' 	=> esc_html__( 'Pipaluk (Pro)', 'essential-addons-elementor' ),
+					'eael-creative-button--pro-2' 	=> esc_html__( 'Moema (Pro)', 	'essential-addons-elementor' ),
+					'eael-creative-button--pro-3' 	=> esc_html__( 'Wave (Pro)', 	'essential-addons-elementor' ),
+					'eael-creative-button--pro-4' 	=> esc_html__( 'Aylen (Pro)', 	'essential-addons-elementor' ),
+					'eael-creative-button--pro-5' 	=> esc_html__( 'Saqui (Pro)', 	'essential-addons-elementor' ),
+					'eael-creative-button--pro-6' 	=> esc_html__( 'Wapasha (Pro)', 'essential-addons-elementor' ),
+					'eael-creative-button--pro-7' 	=> esc_html__( 'Nuka (Pro)', 	'essential-addons-elementor' ),
+					'eael-creative-button--pro-8' 	=> esc_html__( 'Antiman (Pro)', 'essential-addons-elementor' ),
+					'eael-creative-button--pro-9' 	=> esc_html__( 'Quidel (Pro)', 	'essential-addons-elementor' ),
+					'eael-creative-button--pro-10' 	=> esc_html__( 'Shikoba (Pro)', 'essential-addons-elementor' ),
 				],
-				'description' => 'More effects on <a href="https://essential-addons.com/elementor/buy.php">Pro version</a>'
+				'description' => '10 more effects on <a href="https://essential-addons.com/elementor/buy.php">Pro version</a>'
 			]
 		);
 

@@ -49,9 +49,19 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		  	]
 		);
 
+		$this->add_control(
+			'eael_pricing_table_style_pro_alert',
+			[
+				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_pricing_table_style' => ['style-3', 'style-4'],
+				]
+			]
+		);
 
 		/**
-		 * Condition: 'eael_pricing_table_style' => [ 'style-3', 'style-4' ], 'eael_pricing_table_featured' => 'yes'
+		 * Condition: 'eael_pricing_table_featured' => 'yes'
 		 */
 		$this->add_control(
 			'eael_pricing_table_icon_enabled',
@@ -100,26 +110,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'default' => 'fa fa-home',
 				'condition' => [
 					'eael_pricing_table_style' => 'style-2'
-				]
-			]
-		);
-
-		/**
-		 * Condition: 'eael_pricing_table_style' => 'style-4'
-		 */
-		$this->add_control(
-			'eael_pricing_table_style_4_image',
-			[
-				'label' => esc_html__( 'Header Image', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::MEDIA,
-				'default' => [
-					'url' => Utils::get_placeholder_image_src(),
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-pricing-image' => 'background-image: url({{URL}});',
-				],
-				'condition' => [
-					'eael_pricing_table_style' => 'style-4'
 				]
 			]
 		);
@@ -176,26 +166,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-pricing-item .price-tag:before' => 'left: -{{SIZE}}px;',
 				],
 			]
-		);
-
-		/**
-		 * Condition: 'eael_pricing_table_style' => 'style-3'
-		 */
-		$this->add_control(
-		  'eael_pricing_table_style_3_price_position',
-		  	[
-		   	'label'       	=> esc_html__( 'Pricing Position', 'essential-addons-elementor' ),
-		     	'type' 			=> Controls_Manager::SELECT,
-		     	'default' 		=> 'bottom',
-		     	'label_block' 	=> false,
-		     	'options' 		=> [
-		     		'top'  		=> esc_html__( 'On Top', 'essential-addons-elementor' ),
-		     		'bottom' 	=> esc_html__( 'At Bottom', 'essential-addons-elementor' ),
-		     	],
-		     	'condition' => [
-		     		'eael_pricing_table_style' => 'style-3'
-		     	]
-		  	]
 		);
 
 		$this->add_control( 
@@ -368,7 +338,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		);
 
 		/**
-		 * Condition: 'eael_pricing_table_style' => [ 'style-3', 'style-4' ], 'eael_pricing_table_featured' => 'yes'
+		 * Condition: 'eael_pricing_table_featured' => 'yes'
 		 */
 		$this->add_control( 
 			'eael_pricing_table_featured_tag_text',
@@ -382,13 +352,37 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 				],
 				'condition' => [
-					'eael_pricing_table_style' => [ 'style-3', 'style-4' ],
 					'eael_pricing_table_featured' => 'yes'
 				]
 			]
 		);
 
   		$this->end_controls_section();
+
+  		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+			]
+		);
+
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => __( '', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-unlock-alt',
+					],
+				],
+				'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+            ]
+        );
+
+        $this->end_controls_section();
 
 		/**
 		 * -------------------------------------------
@@ -412,21 +406,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'background-color: {{VALUE}};',
 				],
-			]
-		);
-
-		$this->add_control(
-			'eael_pricing_table_featured_bg_color',
-			[
-				'label' => esc_html__( 'Featured Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured .header' => 'background-color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_pricing_table_style' => 'style-4'
-				]
 			]
 		);
 
@@ -589,7 +568,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item .header' => 'background: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_pricing_table_style' => ['style-2', 'style-4']
+					'eael_pricing_table_style' => ['style-2']
 				]
 			]
 		);
@@ -605,21 +584,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				],
 				'condition' => [
 					'eael_pricing_table_style' => ['style-1']
-				]
-			]
-		);
-
-		$this->add_control(
-			'eael_pricing_table_style_3_title_line_color',
-			[
-				'label' => esc_html__( 'Line Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#E25A77',
-				'selectors' => [
-					'{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item .header:after' => 'background: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_pricing_table_style' => ['style-3']
 				]
 			]
 		);
@@ -783,7 +747,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'label' => esc_html__( 'Ribbon Style', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
-					'eael_pricing_table_style' => [ 'style-1', 'style-3', 'style-4' ]
+					'eael_pricing_table_style' => [ 'style-1' ]
 				]
 			]
 		);
@@ -845,7 +809,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'font-size: {{SIZE}}px;',
 				],
 				'condition' => [
-					'eael_pricing_table_style' => ['style-3', 'style-4'],
 					'eael_pricing_table_featured' => 'yes'
 				],
 			]
@@ -862,7 +825,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'color: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_pricing_table_style' => ['style-3', 'style-4'],
 					'eael_pricing_table_featured' => 'yes'
 				],
 			]
@@ -880,7 +842,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'background: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_pricing_table_style' => ['style-3', 'style-4'],
 					'eael_pricing_table_featured' => 'yes'
 				],
 			]
@@ -1270,7 +1231,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 		if( 'yes' === $settings['eael_pricing_table_featured'] ) : $featured_class = 'featured'; else : $featured_class = ''; endif;
 	?>
-	<?php if( 'style-1' === $settings['eael_pricing_table_style'] ) : ?>
+	<?php if( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] || 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
 	<div class="eael-pricing style-1">
 	    <div class="eael-pricing-item <?php echo esc_attr( $featured_class ); ?>">
 	        <div class="header">
@@ -1347,18 +1308,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		    	</a>
 		    </div>
 	    </div>
-	</div>
-	<?php elseif( 'style-3' === $settings['eael_pricing_table_style'] ) : ?>
-	<div class="eael-pricing style-3">
-		<div class="only-in-pro">
-			<h2 class="title"><?php echo esc_html__( 'Available in Pro Version!', 'essential-addons-elementor' ); ?></h2>
-		</div>
-	</div>
-	<?php elseif( 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
-	<div class="eael-pricing style-4">
-		<div class="only-in-pro">
-			<h2 class="title"><?php echo esc_html__( 'Available in Pro Version!', 'essential-addons-elementor' ); ?></h2>
-		</div>
 	</div>
 	<?php endif; ?>
 	<?php

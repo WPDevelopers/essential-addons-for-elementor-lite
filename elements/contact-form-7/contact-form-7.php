@@ -51,10 +51,9 @@ class Widget_Eael_Contact_Form extends Widget_Base {
         $this->start_controls_section(
 			'eael_section_pro',
 			[
-				'label' => __( 'Go Premium', 'essential-addons-elementor' )
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-
 
         $this->add_control(
             'eael_control_get_pro',
@@ -71,7 +70,6 @@ class Widget_Eael_Contact_Form extends Widget_Base {
                 'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
             ]
         );
-
 
 		$this->end_controls_section();
 
