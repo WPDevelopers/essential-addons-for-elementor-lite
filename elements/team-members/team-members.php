@@ -247,7 +247,21 @@ class Widget_Eael_Team_Member extends Widget_Base {
 				'options' => [
 					'eael-team-members-simple' 		=> esc_html__( 'Simple Style', 		'essential-addons-elementor' ),
 					'eael-team-members-overlay' 	=> esc_html__( 'Overlay Style', 	'essential-addons-elementor' ),
+					'eael-team-members-pro-style-3' 	=> esc_html__( 'Centered Style', 	'essential-addons-elementor' ),
+					'eael-team-members-pro-style-4' 		=> esc_html__( 'Circle Style', 	'essential-addons-elementor' ),
+					'eael-team-members-pro-style-5' => esc_html__( 'Social on Bottom', 	'essential-addons-elementor' ),
 				],
+			]
+		);
+
+		$this->add_control(
+			'eael_team_members_preset_pro_alert',
+			[
+				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_team_members_preset' => ['eael-team-members-pro-style-3', 'eael-team-members-pro-style-4', 'eael-team-members-pro-style-5'],
+				]
 			]
 		);
 
@@ -692,6 +706,7 @@ class Widget_Eael_Team_Member extends Widget_Base {
       $settings = $this->get_settings();
       $team_member_image = $this->get_settings( 'eael_team_member_image' );
 	  $team_member_image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );	
+	  if( empty( $team_member_image_url ) ) : $team_member_image_url = $team_member_image['url']; else: $team_member_image_url = $team_member_image_url; endif;
 	  $team_member_classes = $this->get_settings('eael_team_members_preset') . " " . $this->get_settings('eael_team_members_image_rounded');
 	
 	?>

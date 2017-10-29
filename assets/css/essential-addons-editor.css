@@ -21,6 +21,7 @@
 }
 .elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
 .elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
-.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title {
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
 	color: #f54;
 }
