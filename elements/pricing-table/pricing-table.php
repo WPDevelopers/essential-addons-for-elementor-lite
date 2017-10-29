@@ -159,6 +159,25 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_pricing_table_price_cur_alignment',
+			[
+				'label' => esc_html__( 'Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 12
+				],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing-item .price-tag:before' => 'left: -{{SIZE}}px;',
+				],
+			]
+		);
+
 		/**
 		 * Condition: 'eael_pricing_table_style' => 'style-3'
 		 */
