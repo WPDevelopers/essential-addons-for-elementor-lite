@@ -160,10 +160,10 @@
 .eael-product-carousel .slick-dotted.slick-slider {
     margin-bottom: 30px;
 }
-/*
-====  FANCY TEXT STYLES ======
-*/
 
+/**
+ * Fancy Text Style
+ */
 .eael-fancy-text-strings {
     display: inline-block;
 }
@@ -209,8 +209,19 @@
         opacity: 1;
     }
 }
-/* Creative Button styles */
+/* Style 2 */
+.eael-fancy-text-container.style-2 {
+  font-size: 24px;
+}
+.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
+  background: #ff5544;
+  color: #fff;
+  padding: 10px 25px;
+}
 
+/**
+ * Creative Button styles
+ */
 .eael-creative-button-align-center {
     text-align: center;
 }

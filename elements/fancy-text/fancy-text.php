@@ -96,7 +96,31 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
   				'label' => esc_html__( 'Fancy Text Settings', 'essential-addons-elementor' )
   			]
   		);
-		
+
+  		$this->add_control(
+			'eael_fancy_text_style',
+			[
+				'label' => esc_html__( 'Style Type', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'style-1',
+				'options' => [
+					'style-1' => esc_html__( 'Style 1', 'essential-addons-elementor' ),
+					'style-2' => esc_html__( 'Style 2', 'essential-addons-elementor' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_fancy_text_style_pro_alert',
+			[
+				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_fancy_text_style' => ['style-2'],
+				]
+			]
+		);
+
 		$this->add_responsive_control(
 			'eael_fancy_text_alignment',
 			[
@@ -402,10 +426,12 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 		
       $settings = $this->get_settings();
 		
-
+      if( 'style-1' === $settings['eael_fancy_text_style'] || 'style-2' === $settings['eael_fancy_text_style'] ) {
+      	$eael_fancy_text_style = 'style-1';
+      }
 	?>
 
-	<div class="eael-fancy-text-container">			
+	<div class="eael-fancy-text-container <?php echo esc_attr( $eael_fancy_text_style ); ?>">			
 			<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?><span class="eael-fancy-text-prefix"><?php echo wp_kses(($settings['eael_fancy_text_prefix'] ), true ); ?> </span><?php endif; ?>
 			
 			<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
