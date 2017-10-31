@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Admin Settings Page
  */
@@ -6,40 +6,48 @@
 if( ! defined( 'ABSPATH' ) ) exit(); // Exit if accessed directly
 
 class Eael_Admin_Settings {
-	protected $is_pro = FALSE;
-	private $eael_default_settings = array(
-		'contact-form-7'     => true,
-	   'count-down'         => true,
-	   'creative-btn'       => true,
-	   'fancy-text'         => true,
-	   'post-grid'          => true,
-	   'post-timeline'      => true,
-	   'product-grid'       => true,
-	   'team-members'       => true,
-	   'testimonials'       => true,
-	   'weforms'            => true,
-	   'call-to-action'     => true,
-	   'flip-box'     		=> true,
-	   'info-box'     		=> true,
-	   'dual-header'     	=> true,
-	   'price-table'     	=> true,
-	);
 
+	protected $is_pro = FALSE;
+
+	/**
+	 * Contains Default Component keys
+	 * @var array
+	 * @since 2.3.0
+	 */
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards' ];
+
+	/**
+	 * Will Contain All Components Default Values
+	 * @var array
+	 * @since 2.3.0
+	 */
+	private $eael_default_settings;
+
+	/**
+	 * Will Contain User End Settings Value
+	 * @var array
+	 * @since 2.3.0
+	 */
 	private $eael_settings;
+
+	/**
+	 * Will Contains Settings Values Fetched From DB
+	 * @var array
+	 * @since 2.3.0
+	 */
 	private $eael_get_settings;
 
 	/**
 	 * Initializing all default hooks and functions
-	 * @param 
+	 * @param
 	 * @return void
 	 * @since 1.1.2
 	 */
 	public function __construct() {
 
-		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ) );	
+		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ) );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
-		add_action( 'wp_ajax_nopriv_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
 		add_action( 'wp_head', array( $this, 'eael_add_custom_code_in_wp_head' ), 9999 );
 		add_action( 'wp_footer', array( $this, 'eael_add_custom_js_in_wp_footer' ), 9999 );
 
@@ -68,27 +76,27 @@ class Eael_Admin_Settings {
 
 	/**
 	 * Create an admin menu.
-	 * @param 
+	 * @param
 	 * @return void
-	 * @since 1.1.2 
+	 * @since 1.1.2
 	 */
 	public function create_eael_admin_menu() {
 
-		add_menu_page( 
-			'Essential Addons Elementor', 
-			'Essential Addons Elementor', 
-			'manage_options', 
-			'eael-settings', 
-			array( $this, 'eael_admin_settings_page' ), 
+		add_menu_page(
+			'Essential Addons Elementor',
+			'Essential Addons Elementor',
+			'manage_options',
+			'eael-settings',
+			array( $this, 'eael_admin_settings_page' ),
 			plugins_url( '/', __FILE__ ).'/assets/images/ea-icon.png',
-			199  
+			199
 		);
 
 	}
 
 	/**
 	 * Create settings page.
-	 * @param 
+	 * @param
 	 * @return void
 	 * @since 1.1.2
 	 */
@@ -103,6 +111,7 @@ class Eael_Admin_Settings {
 	    * This section will handle the "eael_save_settings" array. If any new settings options is added
 	    * then it will matches with the older array and then if it founds anything new then it will update the entire array.
 	    */
+	   $this->eael_default_settings = array_fill_keys( $this->eael_default_keys, true );
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 	   $eael_new_settings = array_diff_key( $this->eael_default_settings, $this->eael_get_settings );
 	   if( ! empty( $eael_new_settings ) ) {
@@ -139,7 +148,7 @@ class Eael_Admin_Settings {
 			      			<div class="col-half">
 			      				<a href="https://essential-addons.com/elementor/" target="_blank" class="button eael-btn eael-demo-btn">Explore Demos</a>
 			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
-			      				
+
 			      				<div class="eael-notice">
 			      					<h5>Troubleshooting Info</h5>
 			      					<p>After update, if you see any element is not working properly, go to <strong>Elements</strong> Tab, toggle the element and save changes.</p>
@@ -411,50 +420,55 @@ class Eael_Admin_Settings {
 		  	</form>
 		</div>
 		<?php
-		
+
 	}
 
 	/**
 	 * Saving data with ajax request
-	 * @param 
-	 * @return  array in json
-	 * @since 1.1.2 
+	 * @param
+	 * @return  array
+	 * @since 1.1.2
 	 */
 	public function eael_save_settings_with_ajax() {
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			$this->eael_settings = array(
-				'contact-form-7' 		=> intval( $_POST['contactForm7'] ? 1 : 0 ),
-				'count-down' 			=> intval( $_POST['countDown'] ? 1 : 0 ),
-				'creative-btn' 		=> intval( $_POST['creativeBtn'] ? 1 : 0 ),
-				'fancy-text' 			=> intval( $_POST['fancyText'] ? 1 : 0 ),
-				'post-grid' 			=> intval( $_POST['postGrid'] ? 1 : 0 ),
-				'post-timeline' 		=> intval( $_POST['postTimeline'] ? 1 : 0 ),
-				'product-grid' 		=> intval( $_POST['productGrid'] ? 1 : 0 ),
-				'team-members' 		=> intval( $_POST['teamMembers'] ? 1 : 0 ),
-				'testimonials' 		=> intval( $_POST['testimonials'] ? 1 : 0 ),
-				'weforms' 				=> intval( $_POST['weForms'] ? 1 : 0 ),
-				'call-to-action' 		=> intval( $_POST['callToAction'] ? 1 : 0 ),
-				'flip-box' 				=> intval( $_POST['flipBox'] ? 1 : 0 ),
-				'info-box' 				=> intval( $_POST['infoBox'] ? 1 : 0 ),
-				'dual-header' 			=> intval( $_POST['dualHeader'] ? 1 : 0 ),
-				'price-table' 			=> intval( $_POST['priceTable'] ? 1 : 0 ),
-
-				'eael-custom-css'		=> wp_unslash( $_POST['customCss'] ),
-				'eael-custom-js'		=> wp_unslash( $_POST['customJs'] ),
-			);
-			update_option( 'eael_save_settings', $this->eael_settings );
-			return true;
-			die();
+		if( isset( $_POST['fields'] ) ) {
+			parse_str( $_POST['fields'], $settings );
+		}else {
+			return;
 		}
+
+		$this->eael_settings = array(
+		    'contact-form-7' 	=> intval( $settings['contact-form-7'] ? 1 : 0 ),
+		    'count-down' 		=> intval( $settings['count-down'] ? 1 : 0 ),
+		    'creative-btn' 		=> intval( $settings['creative-btn'] ? 1 : 0 ),
+		    'fancy-text' 		=> intval( $settings['fancy-text'] ? 1 : 0 ),
+		    'post-grid' 		=> intval( $settings['post-grid'] ? 1 : 0 ),
+		    'post-timeline' 	=> intval( $settings['post-timeline'] ? 1 : 0 ),
+		    'product-grid' 		=> intval( $settings['product-grid'] ? 1 : 0 ),
+		    'team-members' 		=> intval( $settings['team-members'] ? 1 : 0 ),
+		    'testimonials' 		=> intval( $settings['testimonials'] ? 1 : 0 ),
+		    'weforms' 			=> intval( $settings['weforms'] ? 1 : 0 ),
+		    'call-to-action' 	=> intval( $settings['call-to-action'] ? 1 : 0 ),
+		    'flip-box' 			=> intval( $settings['flip-box'] ? 1 : 0 ),
+		    'info-box' 			=> intval( $settings['info-box'] ? 1 : 0 ),
+		    'dual-header' 		=> intval( $settings['dual-header'] ? 1 : 0 ),
+		    'price-table' 		=> intval( $settings['price-table'] ? 1 : 0 ),
+
+		    'eael-custom-css' 	=> wp_unslash( $settings['eael-custom-css'] ),
+		    'eael-custom-js' 	=> wp_unslash( $settings['eael-custom-js'] ),
+		);
+		update_option( 'eael_save_settings', $this->eael_settings );
+		return true;
+		die();
+
 
 	}
 
 	/**
 	 * Saving custom css in the header
-	 * @param 
+	 * @param
 	 * @return  string
-	 * @since 1.1.2 
+	 * @since 1.1.2
 	 */
 	public function eael_add_custom_code_in_wp_head() {
 
@@ -463,15 +477,15 @@ class Eael_Admin_Settings {
 		<style>
 			<?php echo( $this->eael_get_settings['eael-custom-css'] ); ?>
 		</style>
-		<?php 
+		<?php
 
-	} 
+	}
 
 	/**
 	 * Saving custom js in the footer
-	 * @param 
+	 * @param
 	 * @return  string
-	 * @since 1.1.2 
+	 * @since 1.1.2
 	 */
 	public function eael_add_custom_js_in_wp_footer() {
 
@@ -484,7 +498,7 @@ class Eael_Admin_Settings {
 		</script>
 		<?php
 
-	} 
+	}
 
 }
 

@@ -22,29 +22,15 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 
 function add_eael_elements(){
 
-   $eael_default_settings = array(
-      'contact-form-7'     => true,
-      'count-down'         => true,
-      'creative-btn'       => true,
-      'fancy-text'         => true,
-      'post-grid'          => true,
-      'post-timeline'      => true,
-      'product-grid'       => true,
-      'team-members'       => true,
-      'testimonials'       => true,
-      'weforms'            => true,
-      'call-to-action'     => true,
-      'flip-box'           => true,
-      'info-box'           => true,
-      'dual-header'        => true,
-      'price-table'        => true,
-   );
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards' ];
+   $eael_default_settings = array_fill_keys( $eael_default_keys, true );
+
    $is_component_active = get_option( 'eael_save_settings', $eael_default_settings );
    // load elements
    if( $is_component_active['post-grid'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/post-grid/post-grid.php';
    }
-   if( $is_component_active['post-timeline'] ) { 
+   if( $is_component_active['post-timeline'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/post-timeline/post-timeline.php';
    }
    if( $is_component_active['fancy-text'] ) {
@@ -82,7 +68,7 @@ function add_eael_elements(){
    if( $is_component_active['flip-box'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/flipbox/flipbox.php';
    }
-   
+
    if( $is_component_active['call-to-action'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/call-to-action/call-to-action.php';
    }
@@ -104,11 +90,11 @@ function essential_addons_el_enqueue(){
    if( $is_component_active['fancy-text'] ) {
       wp_enqueue_script('essential_addons_elementor-fancy-text-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/fancy-text.js', array('jquery'),'1.0', true);
    }
-   
+
    if( $is_component_active['count-down'] ) {
       wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
    }
-   
+
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
@@ -116,10 +102,10 @@ add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 // Editor CSS
 
 add_action( 'elementor/editor/before_enqueue_scripts', function() {
-   
+
    wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
-   
+
 } );
 
 // Action menus

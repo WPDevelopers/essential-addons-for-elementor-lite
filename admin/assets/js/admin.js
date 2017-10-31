@@ -34,47 +34,12 @@
 	$( 'form#eael-settings' ).on( 'submit', function(e) {
 		e.preventDefault();
 
-		var contactForm7 		= $( '#contact-form-7' ).attr( 'checked' ) ? 1 : 0;
-		var countDown 			= $( '#count-down' ).attr( 'checked' ) ? 1 : 0;
-		var creativeBtn 		= $( '#creative-btn' ).attr( 'checked' ) ? 1 : 0;
-		var fancyText 			= $( '#fancy-text' ).attr( 'checked' ) ? 1 : 0;
-		var postGrid 			= $( '#post-grid' ).attr( 'checked' ) ? 1 : 0;
-		var postTimeline 		= $( '#post-timeline' ).attr( 'checked' ) ? 1 : 0;
-		var productGrid 		= $( '#product-grid' ).attr( 'checked' ) ? 1 : 0;
-		var teamMembers 		= $( '#team-members' ).attr( 'checked' ) ? 1 : 0;
-		var testimonials 		= $( '#testimonials' ).attr( 'checked' ) ? 1 : 0;
-		var weForms 			= $( '#weforms' ).attr( 'checked' ) ? 1 : 0;
-		var callToAction 		= $( '#call-to-action' ).attr( 'checked' ) ? 1 : 0;
-		var flipBox 			= $( '#flip-box' ).attr( 'checked' ) ? 1 : 0;
-		var infoBox 			= $( '#info-box' ).attr( 'checked' ) ? 1 : 0;
-		var dualHeader 		= $( '#dual-header' ).attr( 'checked' ) ? 1 : 0;
-		var priceTable 		= $( '#price-table' ).attr( 'checked' ) ? 1 : 0;
-
-		var customCss 			= $( '#eael-custom-css' ).val();
-		var customJs 			= $( '#eael-custom-js' ).val();
-
 		$.ajax( {
 			url: settings.ajaxurl,
 			type: 'post',
-			data: { 
+			data: {
 				action: 'save_settings_with_ajax',
-				contactForm7: contactForm7, 
-				countDown: countDown, 
-				creativeBtn: creativeBtn, 
-				fancyText: fancyText, 
-				postGrid: postGrid, 
-				postTimeline: postTimeline, 
-				productGrid: productGrid, 
-				teamMembers: teamMembers, 
-				testimonials: testimonials, 
-				weForms: weForms,
-				callToAction: callToAction,
-				flipBox: flipBox,
-				infoBox: infoBox,
-				dualHeader: dualHeader,
-				priceTable: priceTable,
-				customCss: customCss,
-				customJs: customJs,
+				fields: $( 'form#eael-settings' ).serialize(),
 			},
 			success: function( response ) {
 				swal(
@@ -93,7 +58,7 @@
 				);
 			}
 		} );
-		
+
 	} );
 
 } )( jQuery );
