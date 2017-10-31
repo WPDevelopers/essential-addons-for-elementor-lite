@@ -756,7 +756,8 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				],
 				'range' => [
 					'px' => [
-						'max' => 500,
+						'min' => 0,
+						'max' => 100,
 					],
 				],
 				'selectors' => [
