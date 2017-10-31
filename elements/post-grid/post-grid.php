@@ -125,6 +125,38 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+            'eael_post_grid_show_load_more',
+            [
+                'label' => __( 'Show Load More', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => __( 'Yes', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-check',
+					],
+					'0' => [
+						'title' => __( 'No', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-ban',
+					]
+				],
+				'default' => '1'
+            ]
+        );
+
+        $this->add_control(
+			'eael_post_grid_show_load_more_text',
+			[
+				'label' => esc_html__( 'Label Text', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'label_block' => false,
+				'default' => esc_html__( 'Load More', 'essential-addons-elementor' ),
+				'condition' => [
+					'eael_post_grid_show_load_more' => '1',
+				]
+			]
+		);
+
         $this->add_control(
             'eael_show_image',
             [
@@ -340,7 +372,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -348,7 +380,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-grid-post-holder',
 			]
 		);
-		
+
 
 		$this->end_controls_section();
 
@@ -554,6 +586,207 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+            'eael_section_load_more_btn',
+            [
+                'label' => __( 'Load More Button Style', 'essential-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                	'eael_post_grid_show_load_more' => '1'
+                ]
+            ]
+        );
+
+		$this->add_responsive_control(
+			'eael_post_grid_load_more_btn_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-load-more-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_post_grid_load_more_btn_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-load-more-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+	         'name' => 'eael_post_grid_load_more_btn_typography',
+				'selector' => '{{WRAPPER}} .eael-load-more-button',
+			]
+		);
+
+		$this->start_controls_tabs( 'eael_post_grid_load_more_btn_tabs' );
+
+			// Normal State Tab
+			$this->start_controls_tab( 'eael_post_grid_load_more_btn_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
+
+			$this->add_control(
+				'eael_post_grid_load_more_btn_normal_text_color',
+				[
+					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-load-more-button' => 'color: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_cta_btn_normal_bg_color',
+				[
+					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-load-more-button' => 'background: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_group_control(
+				Group_Control_Border::get_type(),
+				[
+					'name' => 'eael_post_grid_load_more_btn_normal_border',
+					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+					'selector' => '{{WRAPPER}} .eael-load-more-button',
+				]
+			);
+
+			$this->add_control(
+				'eael_post_grid_load_more_btn_border_radius',
+				[
+					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'max' => 100,
+						],
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eael-load-more-button' => 'border-radius: {{SIZE}}px;',
+					],
+				]
+			);
+
+			$this->end_controls_tab();
+
+			// Hover State Tab
+			$this->start_controls_tab( 'eael_post_grid_load_more_btn_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ] );
+
+			$this->add_control(
+				'eael_post_grid_load_more_btn_hover_text_color',
+				[
+					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-load-more-button:hover' => 'color: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_post_grid_load_more_btn_hover_bg_color',
+				[
+					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-load-more-button:hover' => 'background: {{VALUE}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'eael_post_grid_load_more_btn_hover_border_color',
+				[
+					'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '',
+					'selectors' => [
+						'{{WRAPPER}} .eael-load-more-button:hover' => 'border-color: {{VALUE}};',
+					],
+				]
+
+			);
+
+			$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'eael_post_grid_load_more_btn_shadow',
+				'selector' => '{{WRAPPER}} .eael-load-more-button',
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_post_grid_load_more_loader_pos_title',
+			[
+				'label' => esc_html__( 'Loader Position', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_post_grid_loader_pos_left',
+			[
+				'label' => esc_html__( 'From Left', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 15
+				],
+				'range' => [
+					'px' => [
+						'max' => 500,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-load-more-button.button--loading .button__loader' => 'left: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_post_grid_loader_pos_top',
+			[
+				'label' => esc_html__( 'From Top', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 15
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-load-more-button.button--loading .button__loader' => 'top: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 
@@ -563,6 +796,22 @@ class Widget_Eael_Post_Grid extends Widget_Base {
         $post_args = eael_get_post_settings($settings);
 
         $posts = eael_get_post_data($post_args);
+
+        // Sending Essential Info to load-more.js
+        $load_js_data = array(
+	      'siteurl'	 		=> home_url( '/' ),
+	      'gridType'		=> 'post-grid',
+	      'totalPosts' 		=> wp_count_posts()->publish,
+	      'perPage' 		=> $settings['eael_posts_count'],
+	      'excerptLength' 	=> $settings['eael_excerpt_length'],
+	      'showImage'		=> $settings['eael_show_image'],
+	      'showTitle'		=> $settings['eael_show_title'],
+	      'showExcerpt'		=> $settings['eael_show_excerpt'],
+	      'showMeta'		=> $settings['eael_show_meta'],
+	      'metaPosition'	=> $settings['eael_post_grid_meta_position'],
+	      'btnText'			=> $settings['eael_post_grid_show_load_more_text'],
+	   );
+	   wp_localize_script( 'essential_addons_elementor-load-more-js', 'settings', $load_js_data );
 
         ?>
 
@@ -613,7 +862,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 			                    			<div class="eael-entry-content">
 					                            <?php if($settings['eael_show_excerpt']){ ?>
 					                            <div class="eael-grid-post-excerpt">
-					                                <p><?php echo  eael_get_excerpt_by_id(get_the_ID(), 40);?></p>
+					                                <p><?php echo  eael_get_excerpt_by_id(get_the_ID(),$settings['eael_excerpt_length']);?></p>
 					                            </div>
 					                            <?php } ?>
 			                    			</div>
@@ -642,6 +891,15 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		    ?>
 		    </div>
 		</div>
+		<?php if( 1 == $settings['eael_post_grid_show_load_more'] ) : ?>
+		<!-- Load More Button -->
+		<div class="eael-load-more-button-wrap">
+			<button class="eael-load-more-button" id="eael-load-more-btn">
+				<div class="eael-btn-loader button__loader"></div>
+		  		<span><?php echo esc_html__( $settings['eael_post_grid_show_load_more_text'], 'essential-addons-elementor' ); ?></span>
+			</button>
+		</div>
+		<?php endif; ?>
 
 
 <script type="text/javascript">
@@ -658,7 +916,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
     });
 
   });
-    
+
 }(jQuery));
 
 </script>

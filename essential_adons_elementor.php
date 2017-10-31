@@ -90,9 +90,14 @@ function essential_addons_el_enqueue(){
    if( $is_component_active['fancy-text'] ) {
       wp_enqueue_script('essential_addons_elementor-fancy-text-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/fancy-text.js', array('jquery'),'1.0', true);
    }
-
    if( $is_component_active['count-down'] ) {
       wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
+   }
+   if( $is_component_active['post-grid'] ) {
+      wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
+   }
+   if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
+      wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
    }
 
 }

@@ -7,7 +7,7 @@ if( ! defined( 'ABSPATH' ) ) exit(); // Exit if accessed directly
 
 class Eael_Admin_Settings {
 
-	protected $is_pro = FALSE;
+	private $is_pro = false;
 
 	/**
 	 * Contains Default Component keys
@@ -300,7 +300,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Image Comparison', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Image Comparison', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="img-comparison" name="img-comparison" disabled >
-				                        <label for="img-comparison" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="img-comparison" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 										<td>
@@ -308,7 +308,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Instagram Gallery', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Instagram Gallery', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="instagram-gallery" name="instagram-gallery" disabled >
-				                        <label for="instagram-gallery" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="instagram-gallery" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 										<td>
@@ -316,7 +316,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Interactive Promo', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Interactive Promo', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="interactive-promo" name="interactive-promo" disabled >
-				                        <label for="interactive-promo" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="interactive-promo" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 										<td>
@@ -324,7 +324,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Lightbox', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Lightbox', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="lightbox" name="lightbox" disabled >
-				                        <label for="lightbox" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="lightbox" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 										<td>
@@ -332,7 +332,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Post Block', 'essential-addons-elementor' ); ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Post Block', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="post-block" name="post-block" disabled >
-				                        <label for="post-block" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="post-block" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 									</tr>
@@ -342,7 +342,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Testimonial Slider', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Testimonial Slider', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="testimonial-slider" name="testimonial-slider" disabled >
-				                        <label for="testimonial-slider" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="testimonial-slider" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 										<td>
@@ -350,7 +350,7 @@ class Eael_Admin_Settings {
 												<p class="title"><?php _e( 'Static Product', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Static Product', 'essential-addons-elementor' ); ?></p>
 				                        <input type="checkbox" id="static-product" name="static-product" disabled >
-				                        <label for="static-product" class="<?php if( (bool) $is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+				                        <label for="static-product" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 				                    	</div>
 										</td>
 									</tr>
