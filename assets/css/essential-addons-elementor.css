@@ -1611,8 +1611,6 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 }
 .eael-load-more-button {
   position: relative;
-  background: #29d8d8;
-  color: #fff;
   text-transform: uppercase;
   margin: 0 auto;
   display: block;

@@ -538,7 +538,7 @@ class Widget_PostTimeline extends Widget_Base {
 				[
 					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::COLOR,
-					'default' => '',
+					'default' => '#fff',
 					'selectors' => [
 						'{{WRAPPER}} .eael-load-more-button' => 'color: {{VALUE}};',
 					],
@@ -550,7 +550,7 @@ class Widget_PostTimeline extends Widget_Base {
 				[
 					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::COLOR,
-					'default' => '',
+					'default' => '#29d8d8',
 					'selectors' => [
 						'{{WRAPPER}} .eael-load-more-button' => 'background: {{VALUE}};',
 					],
@@ -592,7 +592,7 @@ class Widget_PostTimeline extends Widget_Base {
 				[
 					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::COLOR,
-					'default' => '',
+					'default' => '#fff',
 					'selectors' => [
 						'{{WRAPPER}} .eael-load-more-button:hover' => 'color: {{VALUE}};',
 					],
@@ -604,7 +604,7 @@ class Widget_PostTimeline extends Widget_Base {
 				[
 					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::COLOR,
-					'default' => '',
+					'default' => '#27bdbd',
 					'selectors' => [
 						'{{WRAPPER}} .eael-load-more-button:hover' => 'background: {{VALUE}};',
 					],
