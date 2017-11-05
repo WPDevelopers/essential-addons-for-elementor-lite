@@ -14,9 +14,9 @@ Ultimate elements library for Elementor WordPress Page Builder. Premium elements
 Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful and premium elements to complete your website quickly. Stunning design and neat and clean code. Option to enable/disable certain elements to improve page loading. No extra resources to slow down your website.
 
 
-[https://essential-addons.com/elementor/](Check the Demos)
+[Check the Demos](https://essential-addons.com/elementor/)
 
-### [https://wordpress.org/plugins/elementor/](Elementor) page builder is required for this plugin.
+### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 ### Features
 
@@ -29,43 +29,43 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Available Elements
 
-* [https://essential-addons.com/elementor/post-grid/](Post Grid)
-* [https://essential-addons.com/elementor/post-timeline/](Post Timeline)
-* [https://essential-addons.com/elementor/fancy-text/](Fancy Text)
-* [https://essential-addons.com/elementor/creative-buttons/](Creative Buttons)
-* [https://essential-addons.com/elementor/countdown/](Countdown)
-* [https://essential-addons.com/elementor/team-members/](Team Members)
-* [https://essential-addons.com/elementor/testimonials/](Testimonials)
-* [https://essential-addons.com/elementor/woo-product-grid/](WooCommerce Product Grid)
-* [https://essential-addons.com/elementor/contact-form-7/](Contact Form 7)
-* [https://essential-addons.com/elementor/ninja-forms/](Ninja Forms)
-* [https://essential-addons.com/elementor/weforms/](weForms)
-* [https://essential-addons.com/elementor/info-box/](Info Box)
-* [https://essential-addons.com/elementor/flip-box/](Flip Box)
-* [https://essential-addons.com/elementor/dual-color-headline/](Dual Color Headline)
-* [https://essential-addons.com/elementor/call-to-action/](Call to Action)
-* [https://essential-addons.com/elementor/pricing-table/](Pricing Table)
+* [Post Grid](https://essential-addons.com/elementor/post-grid/)
+* [Post Timeline](https://essential-addons.com/elementor/post-timeline/)
+* [Fancy Text](https://essential-addons.com/elementor/fancy-text/ )
+* [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/)
+* [Countdown](https://essential-addons.com/elementor/countdown/ )
+* [Team Members](https://essential-addons.com/elementor/team-members/)
+* [Testimonials](https://essential-addons.com/elementor/testimonials/)
+* [WooCommerce Product Grid](https://essential-addons.com/elementor/woo-product-grid/)
+* [Contact Form 7](https://essential-addons.com/elementor/contact-form-7/)
+* [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/)
+* [weForms](https://essential-addons.com/elementor/weforms/)
+* [Info Box](https://essential-addons.com/elementor/info-box/)
+* [Flip Box](https://essential-addons.com/elementor/flip-box/)
+* [Dual Color Headline](https://essential-addons.com/elementor/dual-color-headline/)
+* [Call to Action](https://essential-addons.com/elementor/call-to-action/)
+* [Pricing Table](https://essential-addons.com/elementor/pricing-table/)
 
 
 
 ### More elements on [https://essential-addons.com/elementor/buy.php](Premium Version)
 
-* [https://essential-addons.com/elementor/post-block/](Post Block (Flex))
-* [https://essential-addons.com/elementor/lightbox-modal/](Lightbox & Modal)
-* [https://essential-addons.com/elementor/testimonial-slider/](Testimonial Slider)
-* [https://essential-addons.com/elementor/image-comparison/](Image Comparison)
-* [https://essential-addons.com/elementor/interactive-promo/](Interactive Promo)
-* [https://essential-addons.com/elementor/instagram-feed/](Instagram Gallery & Feed)
-* [https://essential-addons.com/elementor/static-product/](Static Product)
-* [https://essential-addons.com/elementor/flip-carousel/](Flip Carousel)
-* [https://essential-addons.com/elementor/interactive-cards/](Interactive Cards)
+* [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
+* [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
+* [Testimonial Slider](https://essential-addons.com/elementor/testimonial-slider/)
+* [Image Comparison](https://essential-addons.com/elementor/image-comparison/)
+* [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ )
+* [Instagram Gallery & Feed](https://essential-addons.com/elementor/instagram-feed/)
+* [Static Product](https://essential-addons.com/elementor/static-product/)
+* [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/)
+* [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/)
 
 
 More coming soon (weekly update) ...
 
 == Installation ==
 
-Note : This plugin works with Elementor. Make sure you have [https://wordpress.org/plugins/elementor/](Elementor) installed.
+Note : This plugin works with Elementor. Make sure you have [Elementor](https://wordpress.org/plugins/elementor/) installed.
 
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
