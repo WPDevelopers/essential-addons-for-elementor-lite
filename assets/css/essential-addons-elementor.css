@@ -1422,6 +1422,33 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 .eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
     max-width: 100%;
 }
+/* Ninja Form Styles */
+
+.eael-ninja-container input, .eael-ninja-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-align-center .eael-ninja-container, .eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-align-left .eael-ninja-container, .eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-align-right .eael-ninja-container, .eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: right;
+  width: auto;
+}
+
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"], .eael-ninja-container .nf-field .nf-field-element input[type="password"], .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"], .eael-ninja-container .nf-field .nf-field-element input[type="url"], .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"], .eael-ninja-container .nf-field .nf-field-element textarea {
+  max-width: 100%;
+}
 /* Post Grid Style */
 
 .eael-grid-post {

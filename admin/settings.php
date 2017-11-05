@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -249,41 +249,51 @@ class Eael_Admin_Settings {
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Call To Action', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Call To Action', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="call-to-action" name="call-to-action" <?php checked( 1, $this->eael_get_settings['call-to-action'], true ); ?> >
-				                        <label for="call-to-action"></label>
-				                    	</div>
+				                        	<input type="checkbox" id="call-to-action" name="call-to-action" <?php checked( 1, $this->eael_get_settings['call-to-action'], true ); ?> >
+				                        	<label for="call-to-action"></label>
+				                    		</div>
 										</td>
 										<td>
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Flip Box', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Flip Box', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="flip-box" name="flip-box" <?php checked( 1, $this->eael_get_settings['flip-box'], true ); ?> >
-				                        <label for="flip-box"></label>
-				                    	</div>
+				                        	<input type="checkbox" id="flip-box" name="flip-box" <?php checked( 1, $this->eael_get_settings['flip-box'], true ); ?> >
+				                        	<label for="flip-box"></label>
+				                    		</div>
 										</td>
 										<td>
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Info Box', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Info Box', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="info-box" name="info-box" <?php checked( 1, $this->eael_get_settings['info-box'], true ); ?> >
-				                        <label for="info-box"></label>
-				                    	</div>
+				                        	<input type="checkbox" id="info-box" name="info-box" <?php checked( 1, $this->eael_get_settings['info-box'], true ); ?> >
+				                        	<label for="info-box"></label>
+				                    		</div>
 										</td>
 										<td>
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Dual Color Header', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Dual Color Header', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="dual-header" name="dual-header" <?php checked( 1, $this->eael_get_settings['dual-header'], true ); ?> >
-				                        <label for="dual-header"></label>
-				                    	</div>
+				                        	<input type="checkbox" id="dual-header" name="dual-header" <?php checked( 1, $this->eael_get_settings['dual-header'], true ); ?> >
+				                        	<label for="dual-header"></label>
+				                    		</div>
 										</td>
 										<td>
 											<div class="eael-checkbox">
 												<p class="title"><?php _e( 'Pricing Table', 'essential-addons-elementor' ) ?></p>
 												<p class="desc"><?php _e( 'Activate / Deactive Pricing Table', 'essential-addons-elementor' ); ?></p>
-				                        <input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->eael_get_settings['price-table'], true ); ?> >
-				                        <label for="price-table"></label>
-				                    	</div>
+				                       	 		<input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->eael_get_settings['price-table'], true ); ?> >
+				                        		<label for="price-table"></label>
+				                    		</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Ninja Form', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Ninja Form', 'essential-addons-elementor' ); ?></p>
+				                       	 		<input type="checkbox" id="ninja-form" name="ninja-form" <?php checked( 1, $this->eael_get_settings['ninja-form'], true ); ?> >
+				                        		<label for="ninja-form"></label>
+				                    		</div>
 										</td>
 									</tr>
 					      	</table>
@@ -453,6 +463,7 @@ class Eael_Admin_Settings {
 		    'info-box' 			=> intval( $settings['info-box'] ? 1 : 0 ),
 		    'dual-header' 		=> intval( $settings['dual-header'] ? 1 : 0 ),
 		    'price-table' 		=> intval( $settings['price-table'] ? 1 : 0 ),
+		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
 
 		    'eael-custom-css' 	=> wp_unslash( $settings['eael-custom-css'] ),
 		    'eael-custom-js' 	=> wp_unslash( $settings['eael-custom-js'] ),

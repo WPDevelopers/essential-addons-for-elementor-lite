@@ -123,7 +123,7 @@ class Widget_PostTimeline extends Widget_Base {
 						'icon' => 'fa fa-ban',
 					]
 				],
-				'default' => '1'
+				'default' => '0'
             ]
         );
 
@@ -697,25 +697,29 @@ class Widget_PostTimeline extends Widget_Base {
         $post_args = eael_get_post_settings($settings);
 
         $posts = eael_get_post_data($post_args);
+        /* Get Post Categories */
+        $post_categories = $this->get_settings( 'category' );
+        if( !empty( $post_categories ) ) {
+        	foreach ( $post_categories as $key=>$value ) {
+	        	$categories[] = $value;
+	        }
+	        $categories_id_string = implode( ',' , $categories );
 
-        // Sending Essential Info to load-more.js
-        $load_js_data = array(
-	      'siteurl'	 		=> home_url( '/' ),
-	      'gridType'		=> 'post-timeline',
-	      'totalPosts' 		=> wp_count_posts()->publish,
-	      'perPage' 		=> $settings['eael_posts_count'],
-	      'excerptLength' 	=> $settings['eael_excerpt_length'],
-	      'showImage'		=> $settings['eael_show_image'],
-	      'showTitle'		=> $settings['eael_show_title'],
-	      'showExcerpt'		=> $settings['eael_show_excerpt'],
-	      'btnText'			=> $settings['eael_post_timeline_load_more_text'],
-	   );
-	   wp_localize_script( 'essential_addons_elementor-load-more-js', 'settings', $load_js_data );
+	        /* Get All Post Count */
+	        $total_post = 0;
+	        foreach( $categories as $cat ) {
+	        	$category = get_category( $cat );
+	        	$total_post = $total_post + $category->category_count;
+	        }
+        }else {
+        	$categories_id_string = '';
+        	$total_post = wp_count_posts()->publish;
+        }
 
         ?>
 
 		<div id="eael-post-timeline-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-timeline">
-		    <div class="eael-post-timeline eael-post-timeline-grid">
+		    <div class="eael-post-timeline eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
 		    <?php
 		        if(count($posts)){
 		            global $post;
@@ -756,13 +760,128 @@ class Widget_PostTimeline extends Widget_Base {
 		<?php if( 1 == $settings['eael_post_timeline_show_load_more'] ) : ?>
 		<!-- Load More Button -->
 		<div class="eael-load-more-button-wrap">
-			<button class="eael-load-more-button" id="eael-load-more-btn">
+			<button class="eael-load-more-button" id="eael-load-more-btn-<?php echo $this->get_id(); ?>">
 				<div class="eael-btn-loader button__loader"></div>
 		  		<span><?php echo esc_html__( $settings['eael_post_timeline_load_more_text'], 'essential-addons-elementor' ); ?></span>
 			</button>
 		</div>
 		<?php endif; ?>
+<!-- Send Ajax Request with Rest API -->
+<script>
+(function($) {
+	'use strict';
 
+	var siteUrl 			= '<?php echo home_url( '/' ); ?>';
+	var perPage 			= parseInt( <?php echo $settings['eael_posts_count'] ?>, 10 );
+	var offset 				= parseInt( perPage, 10 );
+	var totalPosts 			= <?php echo $total_post; ?>;
+	var postOrder			= '<?php echo $settings['eael_post_order'] ?>';
+	var loadMoreBtn 		= $( '#eael-load-more-btn-<?php echo $this->get_id(); ?>' );
+	var postContainer 	= $( '.eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>' );
+
+	// Elementor Settings
+	var showImage 		= <?php echo $settings['eael_show_image']; ?>;
+	var showTitle 		= <?php echo $settings['eael_show_title']; ?>;
+	var showExcerpt 	= <?php echo $settings['eael_show_excerpt']; ?>;
+	var excerptLength 	= parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 );
+	var btnText			= '<?php echo $settings['eael_post_timeline_load_more_text']; ?>';
+	var categories 		= '<?php echo $categories_id_string; ?>';
+
+	loadMoreBtn.on( 'click', function( e ) {
+		e.preventDefault();
+		$(this).addClass( 'button--loading' );
+		$(this).find( 'span' ).html('Loading...');
+
+		// Rest Api Url Settings
+		if( categories == '' ) {
+			var restUrl = siteUrl+'wp-json/wp/v2/posts?per_page='+perPage+'&offset='+offset+'&order='+postOrder+'&_embed';
+		}else {
+			var restUrl = siteUrl+'wp-json/wp/v2/posts?categories='+categories+'&per_page='+perPage+'&offset='+offset+'&order='+postOrder+'&_embed';
+		}
+
+		$.ajax({
+			url: restUrl,
+			type: 'GET',
+			success: function( res ) {
+				createPostHtml( res );
+				loadMoreBtn.removeClass( 'button--loading' );
+				loadMoreBtn.find( 'span' ).html( btnText );
+
+				offset = offset + perPage;
+				if( offset >= totalPosts ) {
+					loadMoreBtn.remove();
+				}
+			},
+			error: function( err ) {
+				console.log( 'Something went wrong!' );
+			}
+		});
+	} );
+	/**
+	 * Create Html Post Timeline
+	 */
+	function createPostHtml( data ) {
+		var html = '';
+		for( var i = 0; i < data.length; i++ ) {
+			// Get Image
+			if( data[i]._links['wp:featuredmedia'] ) {
+				var feature_image = 'style="background-image: url('+data[i]._embedded['wp:featuredmedia'][0].source_url+');"';
+			}else {
+				var feature_image = '';
+			}
+			// Get Date
+			var getPostDate = new Date( data[i].date );
+
+			html += '<article class="eael-timeline-post eael-timeline-column">';
+				html += '<div class="eael-timeline-bullet"></div>';
+					html += '<div class="eael-timeline-post-inner">';
+						html += '<a class="eael-timeline-post-link" href="'+data[i].link+'" title="'+data[i].title.rendered+'">';
+							html += '<time datetime="'+get_post_date( getPostDate )+'">'+get_post_date( getPostDate )+'</time>';
+							html += '<div class="eael-timeline-post-image" '+feature_image+' ></div>';
+							if( showExcerpt == 1 ) {
+								html += '<div class="eael-timeline-post-excerpt">';
+									html += ''+data[i].excerpt.rendered.split( /\s+/ ).slice( 0, excerptLength ).join( " " )+'...';
+								html += '</div>';
+							}
+							if( showTitle == 1 ) {
+								html += '<div class="eael-timeline-post-title">';
+									html += '<h2>'+data[i].title.rendered+'</h2>';
+								html += '</div>';
+							}
+						html += '</a>';
+					html += '</div>';
+				html += '</div>';
+			html += '</article>';
+		}
+		postContainer.append( html );
+	}
+	/**
+	 * Get Date
+	 */
+	function get_post_date( date ) {
+		var getDate = new Date( date );
+		var month = new Array();
+		month[0] = "January";
+		month[1] = "February";
+		month[2] = "March";
+		month[3] = "April";
+		month[4] = "May";
+		month[5] = "June";
+		month[6] = "July";
+		month[7] = "August";
+		month[8] = "September";
+		month[9] = "October";
+		month[10] = "November";
+		month[11] = "December";
+		var dayNum = getDate.getDate();
+		var monthName = month[ getDate.getMonth() ];
+		var getYear = getDate.getFullYear();
+
+		var returnYear = monthName + ' ' + dayNum + ', ' + getYear;
+		return returnYear;
+	}
+})(jQuery);
+</script>
 
         <?php
 	}
