@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Essential Addons Elementor [Lite]
+ * Plugin Name: Essential Addons for Elementor
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.2.1
+ * Version: 2.2.2
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor

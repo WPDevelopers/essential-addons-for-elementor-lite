@@ -2,8 +2,8 @@
 Contributors: Codetic, re_enter_rupok, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
-Tested up to: 4.8.2
-Stable tag: 2.2.1
+Tested up to: 4.8.3
+Stable tag: 2.2.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -14,13 +14,13 @@ Ultimate elements library for Elementor WordPress Page Builder. Premium elements
 Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful and premium elements to complete your website quickly. Stunning design and neat and clean code. Option to enable/disable certain elements to improve page loading. No extra resources to slow down your website.
 
 
-<a href="https://essential-addons.com/elementor/" rel="nofollow">Check the demos</a>
+[https://essential-addons.com/elementor/](Check the Demos)
 
-### <a href="https://wordpress.org/plugins/elementor/" rel="nofollow">Elementor</a> page builder is required for this plugin.
+### [https://wordpress.org/plugins/elementor/](Elementor) page builder is required for this plugin.
 
 ### Features
 
-* 15+ Stunning Elements (Free)
+* 16+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -29,40 +29,43 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Available Elements
 
-* <a href="https://essential-addons.com/elementor/post-grid/" target="_blank">Post Grid (Masonry)</a>
-* <a href="https://essential-addons.com/elementor/post-timeline/" target="_blank">Post Timeline</a>
-* <a href="https://essential-addons.com/elementor/fancy-text/" target="_blank">Fancy Text</a>
-* <a href="https://essential-addons.com/elementor/creative-buttons/" target="_blank">Creative Buttons</a>
-* <a href="https://essential-addons.com/elementor/countdown/" target="_blank">Countdown</a>
-* <a href="https://essential-addons.com/elementor/team-members/" target="_blank">Team Members</a>
-* <a href="https://essential-addons.com/elementor/testimonials/" target="_blank">Testimonials</a>
-* <a href="https://essential-addons.com/elementor/woo-product-grid/" target="_blank">WooCommerce Product Grid</a>
-* <a href="https://essential-addons.com/elementor/contact-form-7/" target="_blank">Contact Form 7</a>
-* <a href="https://essential-addons.com/elementor/weforms/" target="_blank">weForms</a>
-* <a href="https://essential-addons.com/elementor/info-box/" target="_blank">Info Box</a>
-* <a href="https://essential-addons.com/elementor/flip-box/" target="_blank">Flip Box</a>
-* <a href="https://essential-addons.com/elementor/dual-color-headline/" target="_blank">Dual Color Headline</a>
-* <a href="https://essential-addons.com/elementor/call-to-action/" target="_blank">Call to Action</a>
-* <a href="https://essential-addons.com/elementor/pricing-table/" target="_blank">Pricing-table</a>
+* [https://essential-addons.com/elementor/post-grid/](Post Grid)
+* [https://essential-addons.com/elementor/post-timeline/](Post Timeline)
+* [https://essential-addons.com/elementor/fancy-text/](Fancy Text)
+* [https://essential-addons.com/elementor/creative-buttons/](Creative Buttons)
+* [https://essential-addons.com/elementor/countdown/](Countdown)
+* [https://essential-addons.com/elementor/team-members/](Team Members)
+* [https://essential-addons.com/elementor/testimonials/](Testimonials)
+* [https://essential-addons.com/elementor/woo-product-grid/](WooCommerce Product Grid)
+* [https://essential-addons.com/elementor/contact-form-7/](Contact Form 7)
+* [https://essential-addons.com/elementor/ninja-forms/](Ninja Forms)
+* [https://essential-addons.com/elementor/weforms/](weForms)
+* [https://essential-addons.com/elementor/info-box/](Info Box)
+* [https://essential-addons.com/elementor/flip-box/](Flip Box)
+* [https://essential-addons.com/elementor/dual-color-headline/](Dual Color Headline)
+* [https://essential-addons.com/elementor/call-to-action/](Call to Action)
+* [https://essential-addons.com/elementor/pricing-table/](Pricing Table)
 
 
-### More elements on <a href="https://essential-addons.com/elementor/buy.php">Premium Version</a>
 
-* <a href="https://essential-addons.com/elementor/post-block/" target="_blank">Post Block (Flex)</a>
-* <a href="https://essential-addons.com/elementor/lightbox-modal/" target="_blank">Lightbox & Modal</a>
-* <a href="https://essential-addons.com/elementor/testimonial-slider/" target="_blank">Testimonial Slider</a>
-* <a href="https://essential-addons.com/elementor/image-comparison/" target="_blank">Image Comparison</a>
-* <a href="https://essential-addons.com/elementor/interactive-promo/" target="_blank">Interactive Promo</a>
-* <a href="https://essential-addons.com/elementor/instagram-feed/" target="_blank">Interactive Promo</a>
-* <a href="https://essential-addons.com/elementor/static-product/" target="_blank">Static Product</a>
-* <a href="https://essential-addons.com/elementor/flip-carousel/" target="_blank">Flip Carousel</a>
+### More elements on [https://essential-addons.com/elementor/buy.php](Premium Version)
+
+* [https://essential-addons.com/elementor/post-block/](Post Block (Flex))
+* [https://essential-addons.com/elementor/lightbox-modal/](Lightbox & Modal)
+* [https://essential-addons.com/elementor/testimonial-slider/](Testimonial Slider)
+* [https://essential-addons.com/elementor/image-comparison/](Image Comparison)
+* [https://essential-addons.com/elementor/interactive-promo/](Interactive Promo)
+* [https://essential-addons.com/elementor/instagram-feed/](Instagram Gallery & Feed)
+* [https://essential-addons.com/elementor/static-product/](Static Product)
+* [https://essential-addons.com/elementor/flip-carousel/](Flip Carousel)
+* [https://essential-addons.com/elementor/interactive-cards/](Interactive Cards)
 
 
-More coming soon...
+More coming soon (weekly update) ...
 
 == Installation ==
 
-Note : This plugin works with Elementor. Make sure you have <a href="https://wordpress.org/plugins/elementor/" rel="nofollow">Elementor</a> installed.
+Note : This plugin works with Elementor. Make sure you have [https://wordpress.org/plugins/elementor/](Elementor) installed.
 
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
@@ -89,6 +92,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.2.2 =
+
+- Ninja Forms element added
+- Load more functionality added to Post elements (Post Grid & Post Timeline)
+- Few presets added for Team Members, Countdown, Fancy Text
+- Few minor improvements
+
 
 = 2.2.1 =
 
@@ -140,9 +151,9 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.2.1 =
+= 2.2.2 =
 
-- Several improvements for CTA, Info Box, Flip box and dual heading elements
-- Call to action width control and button control added
-- Pricing table options improved
-- Admin page improved and optimized
+- Ninja Forms element added
+- Load more functionality added to Post elements (Post Grid & Post Timeline)
+- Few presets added for Team Members, Countdown, Fancy Text
+- Few minor improvements
