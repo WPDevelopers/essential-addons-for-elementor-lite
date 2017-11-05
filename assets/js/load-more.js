@@ -13,6 +13,7 @@
 		}
 		// Settings Values
 		var settingsValue = {
+			postType: settings.postType,
 			perPage: settings.perPage,
 			postOrder: settings.postOrder,
 			showImage: settings.showImage,
@@ -34,9 +35,9 @@
 
 			// Rest Api Url Settings
 			if( settings.categories == '' ) {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/posts?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'s?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}else {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/posts?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'s?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}
 
 			$.ajax({

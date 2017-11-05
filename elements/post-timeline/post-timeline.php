@@ -717,7 +717,6 @@ class Widget_PostTimeline extends Widget_Base {
         }
 
         ?>
-
 		<div id="eael-post-timeline-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-timeline">
 		    <div class="eael-post-timeline eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
 		    <?php
@@ -780,6 +779,7 @@ jQuery(document).ready(function($) {
 	}
 
 	var settings = {
+		postType: '<?php echo $settings['eael_post_type']; ?>',
 		perPage: parseInt( <?php echo $settings['eael_posts_count'] ?>, 10 ),
 		postOrder: '<?php echo $settings['eael_post_order'] ?>',
 		showImage: <?php echo $settings['eael_show_image']; ?>,

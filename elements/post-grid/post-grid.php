@@ -919,6 +919,7 @@ jQuery(document).ready(function($) {
 	}
 
 	var settings = {
+		postType: '<?php echo $settings['eael_post_type']; ?>',
 		perPage: parseInt( <?php echo $settings['eael_posts_count'] ?>, 10 ),
 		postOrder: '<?php echo $settings['eael_post_order'] ?>',
 		showImage: <?php echo $settings['eael_show_image']; ?>,
