@@ -70,6 +70,7 @@
 		 * Create Html Post Block
 		 */
 		function createPostHtml( data ) {
+
 			if( optionsValue.postStyle === 'timeline' ) {
 				var html = '';
 				for (var i = 0; i < data.length; i++) {
@@ -176,6 +177,7 @@
 				}
 				optionsValue.postContainer.append( html );
 			}
+
 		}
 
 	}

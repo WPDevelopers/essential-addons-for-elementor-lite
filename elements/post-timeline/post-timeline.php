@@ -771,7 +771,6 @@ class Widget_PostTimeline extends Widget_Base {
 jQuery(document).ready(function($) {
 
 	'use strict';
-
 	var options = {
 		siteUrl: '<?php echo home_url( '/' ); ?>',
 		totalPosts: <?php echo $total_post; ?>,

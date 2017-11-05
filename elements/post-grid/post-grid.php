@@ -910,7 +910,6 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 jQuery(document).ready(function($) {
 
 	'use strict';
-
 	var options = {
 		siteUrl: '<?php echo home_url( '/' ); ?>',
 		totalPosts: <?php echo $total_post; ?>,
@@ -934,25 +933,16 @@ jQuery(document).ready(function($) {
 
 	loadMore( options, settings );
 
+	// Load Masonry Js
+  	$(window).load(function(){
+    	$('.eael-post-grid').masonry({
+      		itemSelector: '.eael-grid-post',
+      		percentPosition: true,
+      		columnWidth: '.eael-post-grid-column'
+    	});
+	});
+
 });
-</script>
-
-<script type="text/javascript">
-
-(function ($) {
-    'use strict';
-
-  $(window).load(function(){
-
-    $('.eael-post-grid').masonry({
-      itemSelector: '.eael-grid-post',
-      percentPosition: true,
-      columnWidth: '.eael-post-grid-column'
-    });
-
-  });
-
-}(jQuery));
 
 </script>
 
