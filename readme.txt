@@ -48,7 +48,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 
 
-### More elements on [https://essential-addons.com/elementor/buy.php](Premium Version)
+### More elements on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
