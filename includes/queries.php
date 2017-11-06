@@ -1,7 +1,11 @@
 <?php
 
-
-function eael_get_post_data($args){
+/**
+ * Get Post Data
+ * @param  array $args
+ * @return array
+ */
+function eael_get_post_data( $args ) {
     $defaults = array(
         'posts_per_page'   => 5,
         'offset'           => 0,
@@ -16,34 +20,60 @@ function eael_get_post_data($args){
         'post_type'        => 'post',
         'post_mime_type'   => '',
         'post_parent'      => '',
-        'author'	   => '',
-        'author_name'	   => '',
+        'author'       => '',
+        'author_name'      => '',
         'post_status'      => 'publish',
         'suppress_filters' => true
     );
 
-    $atts = wp_parse_args($args,$defaults);
+    $atts = wp_parse_args( $args, $defaults );
 
-    $posts = get_posts($atts);
+    $posts = get_posts( $atts );
 
     return $posts;
 }
 
-
+/**
+ * Get All POst Types
+ * @return array
+ */
 function eael_get_post_types(){
-    
+
     $eael_cpts = get_post_types( array( 'public'   => true, 'show_in_nav_menus' => true ) );
     $eael_exclude_cpts = array( 'elementor_library', 'attachment', 'product' );
 
     foreach ( $eael_exclude_cpts as $exclude_cpt ) {
         unset($eael_cpts[$exclude_cpt]);
     }
-    
+
     $post_types = array_merge($eael_cpts);
     return $post_types;
 }
 
+/**
+ * Add REST API support to an already registered post type.
+ */
+add_action( 'init', 'eael_custom_post_type_rest_support', 25 );
+function eael_custom_post_type_rest_support() {
+    global $wp_post_types;
 
+    $post_types = eael_get_post_types();
+    foreach( $post_types as $post_type ) {
+        $post_type_name = $post_type;
+        if( isset( $wp_post_types[ $post_type_name ] ) ) {
+            $wp_post_types[$post_type_name]->show_in_rest = true;
+            $wp_post_types[$post_type_name]->rest_base = $post_type_name;
+            $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+        }
+    }
+
+}
+
+/**
+ * Post Settings Parameter
+ * @param  array $settings
+ * @return array
+ */
 function eael_get_post_settings($settings){
     $post_args['post_type'] = $settings['eael_post_type'];
 
@@ -59,6 +89,12 @@ function eael_get_post_settings($settings){
     return $post_args;
 }
 
+/**
+ * Getting Excerpts By Post Id
+ * @param  int $post_id
+ * @param  int $excerpt_length
+ * @return string
+ */
 function eael_get_excerpt_by_id($post_id,$excerpt_length){
     $the_post = get_post($post_id); //Gets post ID
 
@@ -80,6 +116,10 @@ function eael_get_excerpt_by_id($post_id,$excerpt_length){
      return $the_excerpt;
 }
 
+/**
+ * Get Post Thumbnail Size
+ * @return array
+ */
 function eael_get_thumbnail_sizes(){
     $sizes = get_intermediate_image_sizes();
     foreach($sizes as $s){
@@ -89,6 +129,10 @@ function eael_get_thumbnail_sizes(){
     return $ret;
 }
 
+/**
+ * POst Orderby Options
+ * @return array
+ */
 function eael_get_post_orderby_options(){
     $orderby = array(
         'ID' => 'Post ID',
@@ -105,73 +149,85 @@ function eael_get_post_orderby_options(){
     return $orderby;
 }
 
+/**
+ * Get Post Categories
+ * @return array
+ */
 function eael_post_type_categories(){
-    $terms = get_terms( array( 
+    $terms = get_terms( array(
         'taxonomy' => 'category',
         'hide_empty' => true,
     ));
-    
+
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
     foreach ( $terms as $term ) {
         $options[ $term->term_id ] = $term->name;
     }
     }
-    
+
     return $options;
 }
 
-
-//Product Queries
-
+/**
+ * WooCommerce Product Query
+ * @return array
+ */
 function eael_woocommerce_product_categories(){
     $terms = get_terms( array(
         'taxonomy' => 'product_cat',
         'hide_empty' => true,
     ));
-    
+
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
     foreach ( $terms as $term ) {
         $options[ $term->slug ] = $term->name;
     }
     return $options;
     }
-    
-    
 }
 
+/**
+ * WooCommerce Get Product By Id
+ * @return array
+ */
 function eael_woocommerce_product_get_product_by_id(){
     $postlist = get_posts(array(
         'post_type' => 'product',
         'showposts' => 9999,
     ));
     $posts = array();
-    
+
     if ( ! empty( $postlist ) && ! is_wp_error( $postlist ) ){
     foreach ( $postlist as $post ) {
         $options[ $post->ID ] = $post->post_title;
     }
     return $options;
-    
+
     }
 }
 
+/**
+ * WooCommerce Get Product Category By Id
+ * @return array
+ */
 function eael_woocommerce_product_categories_by_id(){
     $terms = get_terms( array(
         'taxonomy' => 'product_cat',
         'hide_empty' => true,
     ));
-    
+
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
     foreach ( $terms as $term ) {
         $options[ $term->term_id ] = $term->name;
     }
     return $options;
     }
-    
+
 }
 
-// Get Contact Form 7 forms
-
+/**
+ * Get Contact Form 7 [ if exists ]
+ */
 if ( function_exists( 'wpcf7' ) ) {
 function eael_select_contact_form(){
     $wpcf7_form_list = get_posts(array(
@@ -179,33 +235,33 @@ function eael_select_contact_form(){
         'showposts' => 999,
     ));
     $posts = array();
-    
+
     if ( ! empty( $wpcf7_form_list ) && ! is_wp_error( $wpcf7_form_list ) ){
     foreach ( $wpcf7_form_list as $post ) {
         $options[ $post->ID ] = $post->post_title;
-    } 
+    }
     return $options;
     }
 }
 }
 
+/**
+ * Get WeForms Form List
+ * @return array
+ */
+function eael_select_weform() {
 
-
-// Get weForms
-
-
-function eael_select_weform(){
-    $wpuf_form_list = get_posts(array(
+    $wpuf_form_list = get_posts( array(
         'post_type' => 'wpuf_contact_form',
         'showposts' => 999,
     ));
     $posts = array();
-    
-    if ( ! empty( $wpuf_form_list ) && ! is_wp_error( $wpuf_form_list ) ){
-    foreach ( $wpuf_form_list as $post ) {
-        $options[ $post->ID ] = $post->post_title;
-    } 
-    return $options;
-    }
-}
 
+    if ( ! empty( $wpuf_form_list ) && ! is_wp_error( $wpuf_form_list ) ) {
+        foreach ( $wpuf_form_list as $post ) {
+            $options[ $post->ID ] = $post->post_title;
+        }
+        return $options;
+    }
+
+}

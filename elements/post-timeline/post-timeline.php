@@ -713,7 +713,7 @@ class Widget_PostTimeline extends Widget_Base {
 	        }
         }else {
         	$categories_id_string = '';
-        	$total_post = wp_count_posts()->publish;
+        	$total_post = wp_count_posts( $settings['eael_post_type'] )->publish;
         }
 
         ?>

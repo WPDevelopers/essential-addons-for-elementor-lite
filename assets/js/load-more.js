@@ -35,9 +35,9 @@
 
 			// Rest Api Url Settings
 			if( settings.categories == '' ) {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'s?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}else {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'s?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}
 
 			$.ajax({
@@ -92,7 +92,7 @@
 				    html += '<div class="eael-timeline-post-image" ' + feature_image + ' ></div>';
 				    if ( settingsValue.showExcerpt == 1 ) {
 				        html += '<div class="eael-timeline-post-excerpt">';
-				        html += '' + data[i].excerpt.rendered.split(/\s+/).slice(0, settingsValue.excerptLength).join(" ") + '...';
+				        html += '' + data[i].excerpt.rendered.split(/\s+/).slice(0, settingsValue.excerptLength).join(" ");
 				        html += '</div>';
 				    }
 				    if ( settingsValue.showTitle == 1 ) {
