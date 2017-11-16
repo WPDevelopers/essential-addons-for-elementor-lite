@@ -1,9 +1,9 @@
 === Elementor Essential Addons ===
-Contributors: Codetic, re_enter_rupok, robicse11128
+Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
-Tested up to: 4.8.3
-Stable tag: 2.2.2
+Tested up to: 4.9
+Stable tag: 2.2.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,7 +20,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 16+ Stunning Elements (Free)
+* 17+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -38,6 +38,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Testimonials](https://essential-addons.com/elementor/testimonials/)
 * [WooCommerce Product Grid](https://essential-addons.com/elementor/woo-product-grid/)
 * [Contact Form 7](https://essential-addons.com/elementor/contact-form-7/)
+* [Gravity Forms](https://essential-addons.com/elementor/gravity-forms/)
 * [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/)
 * [weForms](https://essential-addons.com/elementor/weforms/)
 * [Info Box](https://essential-addons.com/elementor/info-box/)
@@ -59,6 +60,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Static Product](https://essential-addons.com/elementor/static-product/)
 * [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/)
 * [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/)
+* [Content Timeline](https://essential-addons.com/elementor/content-timeline/)
 
 
 More coming soon (weekly update) ...
@@ -92,6 +94,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.2.3 =
+
+- Gravity Forms element added
+- Post Grid and Post Timeline load more improved
+- Load more functionality added for pages and any custom post types
+- Custom CSS/JS options removed from options panel
+- Few minor improvements
 
 = 2.2.2 =
 
