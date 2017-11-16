@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -48,8 +48,6 @@ class Eael_Admin_Settings {
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ) );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
-		add_action( 'wp_head', array( $this, 'eael_add_custom_code_in_wp_head' ), 9999 );
-		add_action( 'wp_footer', array( $this, 'eael_add_custom_js_in_wp_footer' ), 9999 );
 
 	}
 
@@ -135,7 +133,6 @@ class Eael_Admin_Settings {
 			    	<ul>
 				      <li><a href="#general"><i class="fa fa-cogs"></i> General</a></li>
 				      <li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
-				      <li><a href="#custom-css"><i class="fa fa-code"></i> Custom Code</a></li>
 				      <li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
 				      <li><a href="#support"><i class="fa fa-ticket"></i> Support</a></li>
 			    	</ul>
@@ -295,6 +292,14 @@ class Eael_Admin_Settings {
 				                        		<label for="ninja-form"></label>
 				                    		</div>
 										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Gravity Form', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Gravity Form', 'essential-addons-elementor' ); ?></p>
+				                       	 		<input type="checkbox" id="gravity-form" name="gravity-form" <?php checked( 1, $this->eael_get_settings['gravity-form'], true ); ?> >
+				                        		<label for="gravity-form"></label>
+				                    		</div>
+										</td>
 									</tr>
 					      	</table>
 			      		</div>
@@ -415,6 +420,18 @@ class Eael_Admin_Settings {
 							                <label for="interactive-cards" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 							            </div>
 							        </td>
+							        <td>
+							            <div class="eael-checkbox">
+							                <p class="title">
+							                    <?php _e( 'Content Timeline', 'essential-addons-elementor' ) ?>
+							                </p>
+							                <p class="desc">
+							                    <?php _e( 'Activate / Deactive Content Timeline', 'essential-addons-elementor' ); ?>
+							                </p>
+							                <input type="checkbox" id="content-timeline" name="content-timeline" disabled>
+							                <label for="content-timeline" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+							            </div>
+							        </td>
 							    </tr>
 							</table>
 						  	<div class="eael-save-btn-wrap">
@@ -422,25 +439,6 @@ class Eael_Admin_Settings {
 						  	</div>
 			      		</div>
 			      	</div>
-			    	</div>
-			    	<div id="custom-css" class="eael-settings-tab">
-			      	<div class="row">
-			      		<div class="col-half">
-			      			<p class="title">Custom CSS</p>
-			      			<p class="desc">Add your custom CSS code here without <code>style</code> tag.</p>
-								<textarea name="eael-custom-css" id="eael-custom-css" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-css'] ) ) : echo $this->eael_get_settings['eael-custom-css']; else : $this->eael_get_settings['eael-custom-css'] = ''; endif; ?></textarea>
-			      		</div>
-			      	</div>
-			      	<div class="row">
-			      		<div class="col-half">
-			      			<p class="title">Custom JavaScript</p>
-			      			<p class="desc">Add your custom JavaScript code here without <code>script</code> tag.</p>
-			      			<textarea name="eael-custom-js" id="eael-custom-js" class="eael-form-control" rows="10"><?php if( !empty( $this->eael_get_settings['eael-custom-js'] ) ) : echo $this->eael_get_settings['eael-custom-js']; else: $this->eael_get_settings['eael-custom-js'] = ''; endif;  ?></textarea>
-			      		</div>
-			      	</div>
-				  	<div class="eael-save-btn-wrap">
-				  		<input type="submit" value="Save settings" class="button eael-btn"/>
-				  	</div>
 			    	</div>
 			    	<div id="go-pro" class="eael-settings-tab">
 			    		<div class="row go-premium">
@@ -516,50 +514,12 @@ class Eael_Admin_Settings {
 		    'dual-header' 		=> intval( $settings['dual-header'] ? 1 : 0 ),
 		    'price-table' 		=> intval( $settings['price-table'] ? 1 : 0 ),
 		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
-
-		    'eael-custom-css' 	=> wp_unslash( $settings['eael-custom-css'] ),
-		    'eael-custom-js' 	=> wp_unslash( $settings['eael-custom-js'] ),
+		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
 		return true;
 		die();
 
-
-	}
-
-	/**
-	 * Saving custom css in the header
-	 * @param
-	 * @return  string
-	 * @since 1.1.2
-	 */
-	public function eael_add_custom_code_in_wp_head() {
-
-		$this->eael_get_settings = get_option( 'eael_save_settings', false );
-		?>
-		<style>
-			<?php echo( $this->eael_get_settings['eael-custom-css'] ); ?>
-		</style>
-		<?php
-
-	}
-
-	/**
-	 * Saving custom js in the footer
-	 * @param
-	 * @return  string
-	 * @since 1.1.2
-	 */
-	public function eael_add_custom_js_in_wp_footer() {
-
-		$this->eael_get_settings = get_option( 'eael_save_settings', false );
-		?>
-		<script>
-			( function($) {
-				<?php echo ( $this->eael_get_settings['eael-custom-js'] ); ?>
-			} )(jQuery);
-		</script>
-		<?php
 
 	}
 

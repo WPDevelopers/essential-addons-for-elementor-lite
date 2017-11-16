@@ -246,6 +246,20 @@ function eael_select_contact_form(){
 }
 
 /**
+ * Get Gravity Form [ if exists ]
+ */
+
+function eael_select_gravity_form() {
+
+    $forms = RGFormsModel::get_forms( null, 'title' );
+    foreach( $forms as $form ) {
+      $options[ $form->id ] = $form->title;
+    }
+    return $options;
+
+}
+
+/**
  * Get WeForms Form List
  * @return array
  */
