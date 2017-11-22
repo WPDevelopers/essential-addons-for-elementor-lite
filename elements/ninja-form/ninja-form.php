@@ -31,15 +31,13 @@ class Widget_Eael_NinjaForm extends Widget_Base {
   			]
   		);
 
-
-
 		$this->add_control(
-			'eael_ninja_form_shortcode',
+			'eael_ninja_form',
 			[
-				'label' => esc_html__( 'Ninja Form Shortcode', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'label' => esc_html__( 'Select ninja form', 'essential-addons-elementor' ),
 				'label_block' => true,
-				'description' => esc_html__( 'Please save and refresh the page after selecting the form', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => eael_select_ninja_form(),
 			]
 		);
 
@@ -696,9 +694,9 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 	?>
 
 
-	<?php if ( ! empty( $settings['eael_ninja_form_shortcode'] ) ) : ?>
+	<?php if ( ! empty( $settings['eael_ninja_form'] ) ) : ?>
 		<div class="eael-ninja-container">
-			<?php echo do_shortcode( $settings['eael_ninja_form_shortcode'] ); ?>
+			<?php echo do_shortcode( '[ninja_form id="'.$settings['eael_ninja_form'].'"]' ); ?>
 		</div>
 	<?php endif; ?>
 
