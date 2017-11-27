@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.2.3
+ * Version: 2.2.4
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
@@ -151,3 +151,24 @@ function eael_redirect() {
         }
     }
 }
+        
+/**
+ * This function allows (if user allows) to share non-sensitive usage data of the plugin 
+ */
+
+if( ! class_exists( 'Plugin_Usage_Tracker') ) {
+  require_once dirname( __FILE__ ) . '/includes/class-plugin-usage-tracker.php';
+}
+if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' ) ) {
+  function essential_addons_elementor_lite_start_plugin_tracking() {
+    $wisdom = new Plugin_Usage_Tracker(
+      __FILE__,
+      'https://wpdeveloper.net',
+      array('essential_addons_elementor_settings'),
+      true,
+      true,
+      1
+    );
+  }
+  essential_addons_elementor_lite_start_plugin_tracking();
+}   
