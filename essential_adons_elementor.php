@@ -151,3 +151,27 @@ function eael_redirect() {
         }
     }
 }
+
+// admin notice 
+
+require  __DIR__ . '/admin/lib/persist-admin-notices-dismissal.php';
+add_action( 'admin_init', array( 'PAnD', 'init' ) );
+
+function eael_update_notice() {
+  if ( ! PAnD::is_admin_notice_active( 'disable-done-notice-forever' ) ) {
+    return;
+  }
+  
+  ?>
+  <div data-dismissible="disable-done-notice-forever" class="updated notice notice-success is-dismissible eael-update-notice">
+      <h2><?php _e( 'Cyber Monday Sale: 40% Off on Essential Elementor Addons for First 25 Orders', 'essential-addons-elementor' ); ?></h2>
+      <p><?php _e( 'We are running a whopping 40% discount on our all packages. This is our biggest discount ever, and we are not sure if we will ever do it! Hurry Up!', 'essential-addons-elementor' ); ?></p>
+      <a href="https://wpdeveloper.net/in/WP40"><?php _e( 'Grab the deal', 'essential-addons-elementor' ); ?></a>
+  </div>
+  <?php
+}
+add_action( 'admin_init', array( 'PAnD', 'init' ) );
+add_action( 'admin_notices', 'eael_update_notice' );
+
+
+
