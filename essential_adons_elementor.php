@@ -151,6 +151,7 @@ function eael_redirect() {
         }
     }
 }
+<<<<<<< HEAD
 
 // admin notice 
 
@@ -175,3 +176,5 @@ add_action( 'admin_notices', 'eael_update_notice' );
 
 
 
+=======
+>>>>>>> parent of 5032353... update notice added

@@ -46,18 +46,9 @@ class Eael_Admin_Settings {
 	public function __construct() {
 
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ) );
-		add_action( 'init', array( $this, 'enqueue_eael_admin_style' ) );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
 
-	}
-
-	/**
-	 * Register and enqueue a custom stylesheet in the WordPress admin.
-	 */
-	function enqueue_eael_admin_style() {
-		wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
-		wp_enqueue_script( 'essential_addons_dismiss-js', plugins_url( '/', __FILE__ ).'lib/dismiss-notice.js', array( '', 'essential_addons_dismisscore-js' ), '', true );
 	}
 
 	/**
@@ -69,6 +60,7 @@ class Eael_Admin_Settings {
 	public function enqueue_eael_admin_scripts() {
 
 		if( isset( $_GET['page'] ) && $_GET['page'] == 'eael-settings' ) {
+			wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
 			wp_enqueue_style( 'font-awesome-css', plugins_url( '/', __FILE__ ).'assets/vendor/font-awesome/css/font-awesome.min.css' );
 			wp_enqueue_style( 'essential_addons_elementor-sweetalert2-css', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/css/sweetalert2.min.css' );
 
@@ -79,7 +71,6 @@ class Eael_Admin_Settings {
 		}
 
 	}
-
 
 	/**
 	 * Create an admin menu.
