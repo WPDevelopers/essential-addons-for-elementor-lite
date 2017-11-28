@@ -282,6 +282,12 @@ textarea.eael-form-control {
 	margin-top: 30px;
 }
 
+.go-premium img {
+	width: 100%;
+	max-width: 400px;
+	display: block;
+	float: right;
+}
 .eael-notice {
 	background-color: #F7F6D4;
 	padding: 10px 15px;
