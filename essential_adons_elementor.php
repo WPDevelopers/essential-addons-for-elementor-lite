@@ -85,7 +85,6 @@ function add_eael_elements(){
    if( class_exists( 'GFForms' ) && $is_component_active['gravity-form'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/gravity-form/gravity-form.php';
    }
-
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 

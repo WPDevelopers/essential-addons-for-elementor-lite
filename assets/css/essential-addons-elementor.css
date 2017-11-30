@@ -1449,6 +1449,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"], .eael-ninja-container .nf-field .nf-field-element input[type="password"], .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"], .eael-ninja-container .nf-field .nf-field-element input[type="url"], .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"], .eael-ninja-container .nf-field .nf-field-element textarea {
   max-width: 100%;
 }
+
 /* Post Grid Style */
 
 .eael-grid-post {
