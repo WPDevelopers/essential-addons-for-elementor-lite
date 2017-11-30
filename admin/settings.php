@@ -144,7 +144,7 @@ class Eael_Admin_Settings {
 			      			</div>
 			      			<div class="col-half">
 			      				<a href="https://essential-addons.com/elementor/" target="_blank" class="button eael-btn eael-demo-btn">Explore Demos</a>
-			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
+			      				<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
 
 			      				<div class="eael-notice">
 			      					<h5>Troubleshooting Info</h5>
@@ -448,7 +448,7 @@ class Eael_Admin_Settings {
 
 			      				<p>You will also get world class support from our dedicated team, 24/7.</p>
 
-			      				<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
+			      				<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
 			      			</div>
 			      			<div class="col-half">
 			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/unlock-gif.gif'; ?>">
@@ -465,7 +465,7 @@ class Eael_Admin_Settings {
 			      		<div class="col-half">
 				      		<h4>Need Premium Support?</h4>
 				      		<p>Purchasing a license entitles you to receive premium support.</p>
-				      		<a href="https://essential-addons.com/elementor/buy.php" target="_blank" class="button eael-btn">Get a license</a>
+				      		<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn">Get a license</a>
 				      	</div>
 			      	</div>
 			      	<div class="row">
