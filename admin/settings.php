@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -300,6 +300,14 @@ class Eael_Admin_Settings {
 				                        		<label for="gravity-form"></label>
 				                    		</div>
 										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Caldera Form', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactivate Caldera Form', 'essential-addons-elementor' ); ?></p>
+				                       	 		<input type="checkbox" id="caldera-form" name="caldera-form" <?php checked( 1, $this->eael_get_settings['caldera-form'], true ); ?> >
+				                        		<label for="caldera-form"></label>
+				                    		</div>
+										</td>
 									</tr>
 					      	</table>
 			      		</div>
@@ -515,6 +523,7 @@ class Eael_Admin_Settings {
 		    'price-table' 		=> intval( $settings['price-table'] ? 1 : 0 ),
 		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
 		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
+		    'caldera-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
 		return true;

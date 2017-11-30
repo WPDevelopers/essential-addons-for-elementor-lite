@@ -22,7 +22,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 
 function add_eael_elements(){
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form' ];
    $eael_default_settings = array_fill_keys( $eael_default_keys, true );
 
    $is_component_active = get_option( 'eael_save_settings', $eael_default_settings );
@@ -84,6 +84,9 @@ function add_eael_elements(){
    }
    if( class_exists( 'GFForms' ) && $is_component_active['gravity-form'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/gravity-form/gravity-form.php';
+   }
+   if( class_exists( 'Caldera_Forms' ) && $is_component_active['caldera-form'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/caldera-forms/caldera-forms.php';
    }
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
