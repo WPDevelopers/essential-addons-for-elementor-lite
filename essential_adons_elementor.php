@@ -18,6 +18,7 @@ define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 
 function add_eael_elements(){
@@ -152,4 +153,26 @@ function eael_redirect() {
             wp_redirect("admin.php?page=eael-settings");
         }
     }
+}
+
+/**
+ * This function allows you to track usage of your plugin
+ * Place in your main plugin file
+ * Refer to https://wisdomplugin.com/support for help
+ */
+if( ! class_exists( 'Plugin_Usage_Tracker') ) {
+    require_once dirname( __FILE__ ) . '/includes/class-plugin-usage-tracker.php';
+}
+if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' ) ) {
+    function essential_addons_elementor_lite_start_plugin_tracking() {
+        $wisdom = new Plugin_Usage_Tracker(
+            __FILE__,
+            'https://wpdeveloper.net',
+            array('eael_save_settings'),
+            true,
+            true,
+            1
+        );
+    }
+    essential_addons_elementor_lite_start_plugin_tracking();
 }

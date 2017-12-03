@@ -524,6 +524,7 @@ class Eael_Admin_Settings {
 		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
 		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
 		    'caldera-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
+		    'wisdom_registered_setting' => 1,
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
 		return true;
