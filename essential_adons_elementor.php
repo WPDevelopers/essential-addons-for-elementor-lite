@@ -168,7 +168,7 @@ if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' )
         $wisdom = new Plugin_Usage_Tracker(
             __FILE__,
             'https://wpdeveloper.net',
-            array('eael_save_settings'),
+            array(),
             true,
             true,
             1
