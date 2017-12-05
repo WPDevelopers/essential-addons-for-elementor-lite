@@ -156,6 +156,7 @@ class Eael_Admin_Settings {
 			    	<div id="elements" class="eael-settings-tab">
 			      	<div class="row">
 			      		<div class="col-full">
+			      			<p class="eael-elements-control-notice">You can disable the elements you are not using on your site. That will disable all associated assets of those widgets to improve your site loading.</p>
 			      			<table class="form-table">
 									<tr>
 										<td>

@@ -93,6 +93,14 @@ p.desc {
 	padding-bottom: 15px;
 	border-bottom: 1px solid rgba( 0,0,0,0.1 );
 }
+.eael-settings-tab p.eael-elements-control-notice {
+	color: #42418e;
+	font-size: 16px;
+	border: 1px solid #42418e;
+	padding: 10px;
+	text-align: center;
+	display: block;
+}
 .eael-form-control {
 	width: 100%;
 }
