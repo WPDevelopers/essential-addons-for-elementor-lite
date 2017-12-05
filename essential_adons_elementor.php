@@ -155,11 +155,8 @@ function eael_redirect() {
     }
 }
 
-/**
- * This function allows you to track usage of your plugin
- * Place in your main plugin file
- * Refer to https://wisdomplugin.com/support for help
- */
+// Optional usage tracker
+
 if( ! class_exists( 'Plugin_Usage_Tracker') ) {
     require_once dirname( __FILE__ ) . '/includes/class-plugin-usage-tracker.php';
 }
