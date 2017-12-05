@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.2.5
+ * Version: 2.2.6
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor

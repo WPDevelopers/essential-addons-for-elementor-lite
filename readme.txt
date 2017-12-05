@@ -2,8 +2,8 @@
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
-Tested up to: 4.9
-Stable tag: 2.2.5
+Tested up to: 4.9.1
+Stable tag: 2.2.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,7 +20,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 17+ Stunning Elements (Free)
+* 18+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -40,6 +40,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Contact Form 7](https://essential-addons.com/elementor/contact-form-7/)
 * [Gravity Forms](https://essential-addons.com/elementor/gravity-forms/)
 * [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/)
+* [Caldera Forms](https://essential-addons.com/elementor/caldera-forms/)
 * [weForms](https://essential-addons.com/elementor/weforms/)
 * [Info Box](https://essential-addons.com/elementor/info-box/)
 * [Flip Box](https://essential-addons.com/elementor/flip-box/)
@@ -61,6 +62,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/)
 * [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/)
 * [Content Timeline](https://essential-addons.com/elementor/content-timeline/)
+* [Data Table](https://essential-addons.com/elementor/table/)
 
 
 More coming soon (weekly update) ...
