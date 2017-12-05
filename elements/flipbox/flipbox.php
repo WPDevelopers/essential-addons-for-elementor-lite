@@ -718,7 +718,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 	                        </div>
 	                        <h2 class="eael-elements-flip-box-heading"><?php echo esc_html__( $settings['eael_flipbox_front_title'], 'essential-addons-elementor' ); ?></h2>
 	                        <div class="eael-elements-flip-box-content">
-	                           <p><?php echo esc_html__( $settings['eael_flipbox_front_text'], 'essential-addons-elementor' ); ?></p>
+	                           <p><?php echo __( $settings['eael_flipbox_front_text'], 'essential-addons-elementor' ); ?></p>
 	                        </div>
 	                    </div>
 	                </div>
@@ -730,7 +730,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 	                    <div class="eael-elements-flip-box-padding">
 	                        <h2 class="eael-elements-flip-box-heading"><?php echo esc_html__( $settings['eael_flipbox_back_title'], 'essential-addons-elementor' ); ?></h2>
 	                        <div class="eael-elements-flip-box-content">
-	                           <p><?php echo esc_html__( $settings['eael_flipbox_back_text'], 'essential-addons-elementor' ); ?></p>
+	                           <p><?php echo __( $settings['eael_flipbox_back_text'], 'essential-addons-elementor' ); ?></p>
 	                        </div>
 	                    </div>
 	                </div>
