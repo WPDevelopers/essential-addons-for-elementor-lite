@@ -448,10 +448,10 @@ class Eael_Admin_Settings {
 							                    <?php _e( 'Data Table', 'essential-addons-elementor' ) ?>
 							                </p>
 							                <p class="desc">
-							                    <?php _e( 'Activate / Deactivate Content Timeline', 'essential-addons-elementor' ); ?>
+							                    <?php _e( 'Activate / Deactivate Data Table', 'essential-addons-elementor' ); ?>
 							                </p>
-							                <input type="checkbox" id="content-timeline" name="content-timeline" disabled>
-							                <label for="content-timeline" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+							                <input type="checkbox" id="data-table" name="data-table" disabled>
+							                <label for="data-table" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 							            </div>
 							        </td>
 							    </tr>
