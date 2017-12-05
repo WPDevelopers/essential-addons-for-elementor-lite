@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.9.1
-Stable tag: 2.2.6
+Stable tag: 2.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -97,7 +97,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 2.2.6 =
+= 2.3.0 =
 
 - Caldera Forms element added
 - HTML support added for Flip Box content

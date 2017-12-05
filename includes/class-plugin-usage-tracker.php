@@ -584,7 +584,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 					$notice_text = __( 'Thank you for installing our plugin. We would like to track its usage on your site. We don\'t record any sensitive data, only information regarding the WordPress environment and plugin settings, which we will use to help us make improvements to the plugin. Tracking is completely optional.', 'plugin-usage-tracker' );
 				} else {
 					// If we have option 1 for marketing, we include reference to sending product information here
-					$notice_text = __( 'Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>25% discount coupon</strong> for Pro upgrade if you allow us to collect non-sensitive diagnostic data and plugin usage information. It\'s completely optional. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker' );
+					$notice_text = __( 'Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>25% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker' );
 				}
 				// And we allow you to filter the text anyway
 				$notice_text = apply_filters( 'wisdom_notice_text_' . esc_attr( $this->plugin_name ), $notice_text ); ?>
@@ -592,7 +592,7 @@ if( ! class_exists( 'Plugin_Usage_Tracker') ) {
 				<div class="notice notice-info updated put-dismiss-notice">
 					<p><?php echo __( $notice_text ); ?></p>
 					<div class="eael-insights-data" style="display: none;">
-						<p><?php echo __( 'Your site URL, email address, WordPress & PHP version, plugins & themes. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, I promise.' ); ?></p>
+						<p><?php echo __( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, I promise.' ); ?></p>
 					</div>
 					<p>
 						<a href="<?php echo esc_url( $url_yes ); ?>" class="button-primary"><?php _e( 'Allow', 'plugin-usage-tracker' ); ?></a>
