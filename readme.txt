@@ -95,6 +95,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 2.2.6 =
+
+- Caldera Forms element added
+- HTML support added for Flip Box content
+- Few minor bug fixed and improvements
+
 = 2.2.5 =
 
 - Few minor bug fixed and improvements

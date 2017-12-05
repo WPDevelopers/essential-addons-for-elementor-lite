@@ -387,7 +387,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_flipbox_imgae_style_settings',
+			'eael_section_flipbox_image_style_settings',
 			[
 				'label' => esc_html__( 'Image Style', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,

@@ -441,6 +441,20 @@ class Eael_Admin_Settings {
 							            </div>
 							        </td>
 							    </tr>
+							    <tr>
+							        <td>
+							            <div class="eael-checkbox">
+							                <p class="title">
+							                    <?php _e( 'Data Table', 'essential-addons-elementor' ) ?>
+							                </p>
+							                <p class="desc">
+							                    <?php _e( 'Activate / Deactivate Content Timeline', 'essential-addons-elementor' ); ?>
+							                </p>
+							                <input type="checkbox" id="content-timeline" name="content-timeline" disabled>
+							                <label for="content-timeline" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+							            </div>
+							        </td>
+							    </tr>
 							</table>
 						  	<div class="eael-save-btn-wrap">
 						  		<input type="submit" value="Save settings" class="button eael-btn"/>
