@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -309,6 +309,22 @@ class Eael_Admin_Settings {
 				                        		<label for="caldera-form"></label>
 				                    		</div>
 										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Twitter Feed', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactivate Twitter Feed', 'essential-addons-elementor' ); ?></p>
+				                       	 		<input type="checkbox" id="twitter-feed" name="twitter-feed" <?php checked( 1, $this->eael_get_settings['twitter-feed'], true ); ?> >
+				                        		<label for="twitter-feed"></label>
+				                    		</div>
+										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Facebook Feed', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactivate Facebook Feed', 'essential-addons-elementor' ); ?></p>
+				                       	 		<input type="checkbox" id="facebook-feed" name="facebook-feed" <?php checked( 1, $this->eael_get_settings['facebook-feed'], true ); ?> >
+				                        		<label for="facebook-feed"></label>
+				                    		</div>
+										</td>
 									</tr>
 					      	</table>
 			      		</div>
@@ -539,6 +555,8 @@ class Eael_Admin_Settings {
 		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
 		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
 		    'caldera-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
+		    'twitter-feed' 		=> intval( $settings['twitter-form'] ? 1 : 0 ),
+		    'facebook-feed' 	=> intval( $settings['facebook-form'] ? 1 : 0 ),
 		    'wisdom_registered_setting' => 1,
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
