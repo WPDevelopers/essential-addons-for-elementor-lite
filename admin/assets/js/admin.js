@@ -8,7 +8,7 @@
 	  		title: '<h2><span>Go</span> Premium',
 	  		type: 'warning',
 	  		html:
-	    		'Purchase our <b><a href="https://essential-addons.com/elementor/buy.php" rel="nofollow">premium version</a></b> to unlock these pro components!',
+	    		'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
 	  		showCloseButton: true,
 	  		showCancelButton: false,
 	  		focusConfirm: true,
