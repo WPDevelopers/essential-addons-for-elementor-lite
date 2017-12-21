@@ -144,6 +144,7 @@ class Eael_Admin_Settings {
 			      			</div>
 			      			<div class="col-half">
 			      				<a href="https://essential-addons.com/elementor/" target="_blank" class="button eael-btn eael-demo-btn">Explore Demos</a>
+			      				<a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank" class="button eael-btn eael-review-btn">Leave a review</a>
 			      				<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn eael-license-btn">Get Pro License</a>
 
 			      				<div class="eael-notice">

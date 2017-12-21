@@ -251,19 +251,20 @@ textarea.eael-form-control {
 	color: #fff;
 }
 
+
 .eael-btn.eael-license-btn {
 	background-color: #0dc9c3;
 }
 .eael-btn.eael-license-btn:hover, .eael-btn.eael-license-btn:focus {
 	background-color: #08d1ca;
 }
-.eael-btn.eael-demo-btn, .eael-btn.eael-license-btn {
-	padding: 20px;
+.eael-btn.eael-demo-btn, .eael-btn.eael-license-btn, .eael-btn.eael-review-btn {
+	padding: 10px;
 	display: block;
 	max-width: 250px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	text-align: center;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .premium-elements-title {

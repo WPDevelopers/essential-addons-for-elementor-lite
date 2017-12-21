@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.3.0
+ * Version: 2.3.1
  * Author URI: http://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
@@ -110,7 +110,7 @@ function essential_addons_el_enqueue(){
    if( $is_component_active['count-down'] ) {
       wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
    }
-   if( $is_component_active['post-grid'] ) {
+   if( $is_component_active['post-grid'] || $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
       wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
    }
    if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
