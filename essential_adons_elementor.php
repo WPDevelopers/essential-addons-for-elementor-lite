@@ -142,7 +142,7 @@ add_action( 'elementor/editor/before_enqueue_scripts', function() {
 
 function eael_add_settings_link( $links ) {
     $settings_link = sprintf( '<a href="admin.php?page=eael-settings">' . __( 'Settings' ) . '</a>' );
-    $go_pro_link = sprintf( '<a href="https://essential-addons.com/elementor/buy.php" target="_blank" style="color: #39b54a; font-weight: bold;">' . __( 'Go Pro' ) . '</a>' );
+    $go_pro_link = sprintf( '<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __( 'Go Pro' ) . '</a>' );
     array_push( $links, $settings_link, $go_pro_link );
    return $links;
 }
