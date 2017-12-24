@@ -580,8 +580,8 @@ class Eael_Admin_Settings {
 		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
 		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
 		    'caldera-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
-		    'twitter-feed' 		=> intval( $settings['twitter-form'] ? 1 : 0 ),
-		    'facebook-feed' 	=> intval( $settings['facebook-form'] ? 1 : 0 ),
+		    'twitter-feed' 		=> intval( $settings['twitter-feed'] ? 1 : 0 ),
+		    'facebook-feed' 	=> intval( $settings['facebook-feed'] ? 1 : 0 ),
 		    'wisdom_registered_setting' => 1,
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
