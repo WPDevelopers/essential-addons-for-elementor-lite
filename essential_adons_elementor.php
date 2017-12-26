@@ -23,7 +23,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 
 function add_eael_elements(){
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table' ];
    $eael_default_settings = array_fill_keys( $eael_default_keys, true );
 
    $is_component_active = get_option( 'eael_save_settings', $eael_default_settings );
@@ -92,9 +92,11 @@ function add_eael_elements(){
    if( $is_component_active['twitter-feed'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/twitter-feed/twitter-feed.php';
    }
-
    if( $is_component_active['facebook-feed'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/facebook-feed/facebook-feed.php';
+   }
+   if( $is_component_active['data-table'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/data-table/data-table.php';
    }
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
