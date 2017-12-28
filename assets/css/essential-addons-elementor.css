@@ -3277,7 +3277,7 @@ table.eael-data-table thead .sorting_disabled.sorting:after {
 }
 .eael-data-table-th-img {
   display: inline-block;
-  margin: -4px 7px 0px 0px;
+  margin: 0px;
   line-height: 1;
 
 }

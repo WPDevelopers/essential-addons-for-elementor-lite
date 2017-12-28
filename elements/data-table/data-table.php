@@ -104,19 +104,10 @@ class Widget_Eael_Data_Table extends Widget_Base {
 					],
 					[
 						'name' => 'eael_data_table_header_col_img_size',
-						'label' => esc_html__( 'Image Size', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::SLIDER,
-						'default' => [
-							'size' => 25,
-						],
-						'range' => [
-							'px' => [
-								'max' => 100,
-							],
-						],
-						'selectors' => [
-							'{{WRAPPER}} .eael-data-table-th-img' => 'width: {{SIZE}}px;',
-						],
+						'label' => esc_html__( 'Image Size(px)', 'essential-addons-elementor' ),
+						'default' => '25',
+						'type' => Controls_Manager::TEXT,
+						'label_block' => false,
 						'condition' => [
 							'eael_data_table_header_col_img_enabled' => 'true',
 						]
@@ -565,7 +556,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
             ]
         );
 
-		$this->end_controls_section();
+        $this->end_controls_section();
 
 	}
 
@@ -618,7 +609,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			            		<i class="data-header-icon <?php echo esc_attr( $header_title['eael_data_table_header_col_icon'] ); ?>"></i>
 			            	<?php endif; ?>
 			            	<?php if( $header_title['eael_data_table_header_col_img_enabled'] == 'true' ) : ?>
-			            		<img src="<?php echo esc_url( $header_title['eael_data_table_header_col_img']['url'] ) ?>" class="eael-data-table-th-img" alt="<?php echo esc_attr( $header_title['eael_data_table_header_col'] ); ?>">
+			            		<img src="<?php echo esc_url( $header_title['eael_data_table_header_col_img']['url'] ) ?>" class="eael-data-table-th-img" style="width:<?php echo $header_title['eael_data_table_header_col_img_size'] ?>px" alt="<?php echo esc_attr( $header_title['eael_data_table_header_col'] ); ?>">
 			            	<?php endif; ?>
 			            	<?php echo esc_html__( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?>
 			            </th>
