@@ -38,22 +38,11 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		  	[
 				'label' => __( 'Enable Table Sorting', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
-				'default' => 'false',
+				'default' => 'true',
 				'label_on' => esc_html__( 'Yes', 'essential-addons-elementor' ),
 				'label_off' => esc_html__( 'No', 'essential-addons-elementor' ),
 				'return_value' => 'true',
 		  	]
-		);
-
-		$this->add_control(
-			'eael_section_data_table_enabled_pro_alert',
-			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'condition' => [
-					'eael_section_data_table_enabled' => 'true',
-				]
-			]
 		);
 
   		$this->add_control(
@@ -76,10 +65,61 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						'label_block' => false,
 					],
 					[
+						'name' => 'eael_data_table_header_col_icon_enabled',
+						'label' => esc_html__( 'Enable Header Icon', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::SWITCHER,
+						'label_on' => __( 'yes', 'essential-addons-elementor' ),
+						'label_off' => __( 'no', 'essential-addons-elementor' ),
+						'default' => 'false',
+						'return_value' => 'true',
+					],
+					[
 						'name' => 'eael_data_table_header_col_icon',
 						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::ICON,
 						'default' => '',
+						'condition' => [
+							'eael_data_table_header_col_icon_enabled' => 'true'
+						]
+					],
+					[
+						'name' => 'eael_data_table_header_col_img_enabled',
+						'label' => esc_html__( 'Enable Header Image', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::SWITCHER,
+						'label_on' => __( 'yes', 'essential-addons-elementor' ),
+						'label_off' => __( 'no', 'essential-addons-elementor' ),
+						'default' => 'false',
+						'return_value' => 'true',
+					],
+					[
+						'name' => 'eael_data_table_header_col_img',
+						'label' => esc_html__( 'Image', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::MEDIA,
+						'default' => [
+							'url' => Utils::get_placeholder_image_src(),
+						],
+						'condition' => [
+							'eael_data_table_header_col_img_enabled' => 'true',
+						]
+					],
+					[
+						'name' => 'eael_data_table_header_col_img_size',
+						'label' => esc_html__( 'Image Size', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::SLIDER,
+						'default' => [
+							'size' => 25,
+						],
+						'range' => [
+							'px' => [
+								'max' => 100,
+							],
+						],
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table-th-img' => 'width: {{SIZE}}px;',
+						],
+						'condition' => [
+							'eael_data_table_header_col_img_enabled' => 'true',
+						]
 					],
 
 				],
@@ -332,6 +372,31 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_data_table_header_title_alignment',
+			[
+				'label' => esc_html__( 'Title Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+				],
+				'default' => 'left',
+				'prefix_class' => 'eael-dt-th-align-',
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -450,6 +515,31 @@ class Widget_Eael_Data_Table extends Widget_Base {
 
 		$this->end_controls_tabs();
 
+		$this->add_responsive_control(
+			'eael_data_table_content_alignment',
+			[
+				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+				],
+				'default' => 'left',
+				'prefix_class' => 'eael-dt-td-align-',
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -475,7 +565,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
             ]
         );
 
-        $this->end_controls_section();
+		$this->end_controls_section();
 
 	}
 
@@ -524,7 +614,12 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			        <tr class="table-header">
 			        	<?php foreach( $settings['eael_data_table_header_cols_data'] as $header_title ) : ?>
 			            <th class="sorting">
-			            	<i class="data-header-icon <?php echo esc_attr( $header_title['eael_data_table_header_col_icon'] ); ?>"></i>
+			            	<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' ) : ?>
+			            		<i class="data-header-icon <?php echo esc_attr( $header_title['eael_data_table_header_col_icon'] ); ?>"></i>
+			            	<?php endif; ?>
+			            	<?php if( $header_title['eael_data_table_header_col_img_enabled'] == 'true' ) : ?>
+			            		<img src="<?php echo esc_url( $header_title['eael_data_table_header_col_img']['url'] ) ?>" class="eael-data-table-th-img" alt="<?php echo esc_attr( $header_title['eael_data_table_header_col'] ); ?>">
+			            	<?php endif; ?>
 			            	<?php echo esc_html__( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?>
 			            </th>
 			        	<?php endforeach; ?>
@@ -552,6 +647,23 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			        <?php endfor; ?>
 			    </tbody>
 			</table>
+
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					<?php if( $settings['eael_section_data_table_enabled'] == 'true' ) : ?>
+						$("#eael-data-table-<?php echo $this->get_id(); ?>").tablesorter();
+					<?php endif; ?>
+				});
+			</script>
+			<?php if( $settings['eael_section_data_table_enabled'] != 'true' ) : ?>
+				<style>
+					table#eael-data-table-<?php echo $this->get_id(); ?> .sorting:after,
+					table#eael-data-table-<?php echo $this->get_id(); ?> .sorting_desc:after,
+					table#eael-data-table-<?php echo $this->get_id(); ?> .sorting_asc:after {
+						display: none;
+					}
+				</style>
+			<?php endif; ?>
 		</div>
 	  	<?php
 	}
