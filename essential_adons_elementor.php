@@ -213,9 +213,10 @@ if ( current_user_can( 'install_plugins' ) )
   global $current_user ;
         $user_id = $current_user->ID;
         /* Check that the user hasn't already clicked to ignore the message */
-  if ( ! get_user_meta($user_id, 'eael_ignore_notice231') ) {
+  if ( ! get_user_meta($user_id, 'eael_ignore_notice232') ) {
         echo '<div class="eael-admin-notice updated"><p>';
-        printf(__('We love to have you in our <strong>Essential Addons</strong> family. <span class="dashicons dashicons-heart" style="color: #f00;"></span> Show your love by leaving a review and encourage for more features. <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley"></span> Leave a Review</a>
+        echo '<img style="width: 15px; padding-right: 6px; float: left" src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/gift-icon.png'. '" > '; 
+        printf(__('<strong>Happy New Year!!</strong> Enjoy <strong>25&#37;</strong> discount on <strong>Essential Addons for Elementor Pro.</strong> Use the coupon <strong>"NewYear"</strong><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-tickets-alt" style="margin-top: -1px;margin-left: 10px;"></span> Grab the Deal</a>
            <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> No Thanks</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
         echo "</p></div>";
   }
@@ -229,6 +230,6 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice231', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice232', 'true', true);
   }
 }
