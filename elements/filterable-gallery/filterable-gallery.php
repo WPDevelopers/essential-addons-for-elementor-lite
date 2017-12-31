@@ -440,12 +440,12 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				[
 					'name' => 'eael_fg_control_normal_border',
 					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-					'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
+					'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul li > a.control',
 				]
 			);
 
 			$this->add_control(
-				'eael_fg_control_border_radius',
+				'eael_fg_control_normal_border_radius',
 				[
 					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::SLIDER,
@@ -501,17 +501,32 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				]
 			);
 
-			$this->add_control(
-				'eael_fg_control_active_border_color',
+			$this->add_group_control(
+				Group_Control_Border::get_type(),
 				[
-					'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::COLOR,
-					'default' => '',
+					'name' => 'eael_fg_control_active_border',
+					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+					'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul li > a.control.mixitup-control-active',
+				]
+			);
+
+			$this->add_control(
+				'eael_fg_control_active_border_radius',
+				[
+					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::SLIDER,
+					'default' => [
+						'size' => 20
+					],
+					'range' => [
+						'px' => [
+							'max' => 30,
+						],
+					],
 					'selectors' => [
-						'{{WRAPPER}} .eael-filter-gallery-control ul li a.control.mixitup-control-active' => 'border-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-filter-gallery-control ul li a.control.mixitup-control-active' => 'border-radius: {{SIZE}}px;',
 					],
 				]
-
 			);
 
 			$this->add_group_control(
@@ -526,6 +541,10 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			$this->end_controls_tab();
 
 		$this->end_controls_tabs();
+
+
+
+		$this->end_controls_section();
 
 
 
