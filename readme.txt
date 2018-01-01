@@ -110,6 +110,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 2.4.0 =
+
+- Data Table element added
+- Filterable Gallery added
+- Few minor bug fixed and improvements
+
 = 2.3.1 =
 
 - Facebook Feed element added
