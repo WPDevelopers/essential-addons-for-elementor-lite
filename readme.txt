@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.0
 Tested up to: 4.9.1
-Stable tag: 2.3.1
+Stable tag: 2.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,7 +20,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 20+ Stunning Elements (Free)
+* 22+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -49,6 +49,8 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Pricing Table](https://essential-addons.com/elementor/pricing-table/)
 * [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/)
 * [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/)
+* [Data Table](https://essential-addons.com/elementor/table/)
+* [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
 
 
 
@@ -67,6 +69,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Data Table](https://essential-addons.com/elementor/table/)
 * [Facebook Feed Carousel](https://essential-addons.com/elementor/facebook-feed/)
 * [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/)
+* [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
 
 More coming soon (weekly update) ...
 
