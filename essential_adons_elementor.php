@@ -186,12 +186,12 @@ function eael_redirect() {
 
 // Optional usage tracker
 
-if( ! class_exists( 'Plugin_Usage_Tracker') ) {
+if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
     require_once dirname( __FILE__ ) . '/includes/class-plugin-usage-tracker.php';
 }
 if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' ) ) {
     function essential_addons_elementor_lite_start_plugin_tracking() {
-        $wisdom = new Plugin_Usage_Tracker(
+        $wisdom = new Eael_Plugin_Usage_Tracker(
             __FILE__,
             'https://wpdeveloper.net',
             array(),
@@ -202,6 +202,7 @@ if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' )
     }
     essential_addons_elementor_lite_start_plugin_tracking();
 }
+
 
 // admin notice
 
