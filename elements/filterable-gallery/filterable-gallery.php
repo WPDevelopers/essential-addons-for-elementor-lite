@@ -14,7 +14,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'nicon nicon-image-gallery';
+		return 'eicon-gallery-grid';
 	}
 
    public function get_categories() {
