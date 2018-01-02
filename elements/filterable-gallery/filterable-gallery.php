@@ -1005,7 +1005,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
             <?php endif; ?>
 			// Magnific Popup
 			<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
-               	$('.eael-popup-link').magnificPopup({
+               	$('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?> .eael-popup-link').magnificPopup({
                 	type: 'image',
                   	gallery:{
                     	enabled: <?php if( 'true' == $settings['eael_fg_show_popup_gallery'] ) : echo 'true'; else: echo 'false'; endif; ?>
