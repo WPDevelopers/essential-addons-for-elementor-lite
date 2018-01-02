@@ -734,7 +734,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			[
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#f2f2f2',
+				'default' => '#f9f9f9',
 				'selectors' => [
 					'{{WRAPPER}} .eael-filter-gallery-container.eael-cards .item-content' => 'background-color: {{VALUE}};',
 				],
@@ -784,7 +784,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			[
 				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#F56A6A',
+				'default' => '#303133',
 				'selectors' => [
 					'{{WRAPPER}} .eael-filter-gallery-container.eael-cards .item-content .title a' => 'color: {{VALUE}};',
 				],
@@ -796,7 +796,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			[
 				'label' => esc_html__( 'Hover Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#3F51B5',
+				'default' => '#23527c',
 				'selectors' => [
 					'{{WRAPPER}} .eael-filter-gallery-container.eael-cards .item-content .title a:hover' => 'color: {{VALUE}};',
 				],
