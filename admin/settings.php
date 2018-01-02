@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -512,6 +512,18 @@ class Eael_Admin_Settings {
 							                </p>
 							                <input type="checkbox" id="facebook-feed-carousel" name="facebook-feed-carousel" disabled>
 							                <label for="facebook-feed-carousel" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+							            </div>
+							        </td>
+							        <td>
+							            <div class="eael-checkbox">
+							                <p class="title">
+							                    <?php _e( 'Dynamic Filter Gallery', 'essential-addons-elementor' ) ?>
+							                </p>
+							                <p class="desc">
+							                    <?php _e( 'Activate / Deactivate Dynamic Filter Gallery', 'essential-addons-elementor' ); ?>
+							                </p>
+							                <input type="checkbox" id="dynamic-filter-gallery" name="dynamic-filter-gallery" disabled>
+							                <label for="dynamic-filter-gallery" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 							            </div>
 							        </td>
 							    </tr>
