@@ -45,6 +45,17 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		  	]
 		);
 
+		$this->add_control(
+			'eael_section_data_table_enabled_pro_alert',
+			[
+				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_section_data_table_enabled' => 'true',
+				]
+			]
+		);
+
   		$this->add_control(
 			'eael_data_table_header_cols_data',
 			[
@@ -646,15 +657,6 @@ class Widget_Eael_Data_Table extends Widget_Base {
 					<?php endif; ?>
 				});
 			</script>
-			<?php if( $settings['eael_section_data_table_enabled'] != 'true' ) : ?>
-				<style>
-					table#eael-data-table-<?php echo $this->get_id(); ?> .sorting:after,
-					table#eael-data-table-<?php echo $this->get_id(); ?> .sorting_desc:after,
-					table#eael-data-table-<?php echo $this->get_id(); ?> .sorting_asc:after {
-						display: none;
-					}
-				</style>
-			<?php endif; ?>
 		</div>
 	  	<?php
 	}

@@ -3281,7 +3281,11 @@ table.eael-data-table thead .sorting_disabled.sorting:after {
   line-height: 1;
 
 }
-
+table.eael-data-table thead .sorting:after,
+table.eael-data-table thead .sorting_desc:after,
+table.eael-data-table thead .sorting_asc:after {
+    display: none;
+}
 /**
  * Magnific Popup
  */
