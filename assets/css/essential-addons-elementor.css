@@ -3873,16 +3873,20 @@ img.mfp-img {
     width: 100%;
   }
   .eael-tiles.eael-col-2 .item {
-    width: calc( ( 100% / 2 ) - .1px );
+    width: 50%;
+    float: left;
   }
   .eael-tiles.eael-col-3 .item {
-    width: calc( ( 100% / 3 ) - .1px );
+    width: 33.33%;
+    float: left;
   }
   .eael-tiles.eael-col-4 .item {
-    width: calc( ( 100% / 4 ) - .1px );
+    width: 25%;
+    float: left;
   }
   .eael-tiles.eael-col-5 .item {
-    width: calc( ( 100% / 5 ) - .1px );
+    width: 20%;
+    float: left;
   }
 }
 
@@ -3900,8 +3904,4 @@ img.mfp-img {
 /*  Magnific Gallery Fix */
 .dialog-widget {
   display: none !important;
-}
-
-/* Grid Variations */
-.eael-col-3 {
 }
