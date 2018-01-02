@@ -977,9 +977,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
         <script>
             jQuery(document).ready( function($) {
 
-            // var containerEl = document.querySelector('[data-ref~="mixitup-container-<?php echo esc_attr( $this->get_id() ); ?>"]');
             var containerEl = document.querySelector('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>');
-
             var mixer = mixitup(containerEl, {
             	controls: {
                     scope: 'local'
