@@ -3691,7 +3691,7 @@ img.mfp-img {
     position: relative;
     overflow: hidden;
 }
-.eael-filter-gallery-container .item:before {
+.eael-filter-gallery-container:not(.eael-cards) .item:before {
     content: '';
     display: inline-block;
     padding-top: 56.25%;
