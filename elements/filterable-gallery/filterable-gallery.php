@@ -916,13 +916,13 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
    		}
 
 	?>
-		<div class="eael-filter-gallery-wrapper">
+		<div id="eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-filter-gallery-wrapper">
 			<div class="eael-filter-gallery-control">
 	            <ul>
 	                <li><a href="javascript:;" class="control" data-filter="all">All</a></li>
 	                <?php foreach( $settings['eael_fg_controls'] as $control ) : ?>
 	                <?php $sorter_filter = $this->sorter_class( $control['eael_fg_control'] ); ?>
-						<li><a href="javascript:;" class="control" data-filter=".<?php echo esc_attr( $sorter_filter ); ?>"><?php echo $control['eael_fg_control']; ?></a></li>
+						<li><a href="javascript:;" class="control" data-filter=".<?php echo esc_attr( $sorter_filter ); ?>-<?php echo esc_attr( $this->get_id() ); ?>"><?php echo $control['eael_fg_control']; ?></a></li>
 	                <?php endforeach; ?>
 	            </ul>
 	        </div>
@@ -930,7 +930,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		        <div class="eael-filter-gallery-container <?php echo esc_attr( $settings['eael_fg_grid_style'] ); ?> <?php echo esc_attr( $settings['eael_fg_columns'] ); ?>" data-ref="mixitup-container-<?php echo esc_attr( $this->get_id() ); ?>">
 		        	<?php foreach( $settings['eael_fg_gallery_items'] as $gallery ) : ?>
 		        	<?php $sorter_class = $this->sorter_class( $gallery['eael_fg_gallery_control_name'] ); ?>
-		            <div class="item <?php echo esc_attr( $sorter_class ) ?>" data-ref="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>" data-item-bg="<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>">
+		            <div class="item <?php echo esc_attr( $sorter_class ) ?>-<?php echo esc_attr( $this->get_id() ); ?>" data-ref="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>" data-item-bg="<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>">
 		                <div class="caption <?php echo esc_attr( $settings['eael_fg_grid_hover_style'] ); ?> ">
 		                	<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
 		                    <a href="<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-popup-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
@@ -949,37 +949,41 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 	    	<?php elseif( $settings['eael_fg_grid_style'] == 'eael-cards' ) : ?>
 				<div class="eael-filter-gallery-container <?php echo esc_attr( $settings['eael_fg_grid_style'] ); ?> <?php echo esc_attr( $settings['eael_fg_columns'] ); ?>" data-ref="mixitup-container-<?php echo esc_attr( $this->get_id() ); ?>">
 		        	<?php foreach( $settings['eael_fg_gallery_items'] as $gallery ) : ?>
-		        	<?php $sorter_class = $this->sorter_class( $gallery['eael_fg_gallery_control_name'] ); ?>
-		            <div class="item <?php echo esc_attr( $sorter_class ) ?>" data-ref="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>">
-						<div class="item-img" style="background-image:url('<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>')">
-			            	<div class="caption <?php echo esc_attr( $settings['eael_fg_grid_hover_style'] ); ?> ">
-			                	<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
-			                    <a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-popup-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
-			                	<?php endif; ?>
-			                    <?php if( 'true' == $gallery['eael_fg_gallery_link'] ) :
-									$eael_gallery_link = $gallery['eael_fg_gallery_img_link']['url'];
-					        		$target = $gallery['eael_fg_gallery_img_link']['is_external'] ? 'target="_blank"' : '';
-					        		$nofollow = $gallery['eael_fg_gallery_img_link']['nofollow'] ? 'rel="nofollow"' : '';
-					        	?>
-					        	<a href="<?php echo esc_url( $eael_gallery_link ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><i class="<?php echo esc_attr( $settings['eael_section_fg_link_icon'] ); ?>"></i></a>
-			                    <?php endif; ?>
-			                </div>
-						</div>
-						<div class="item-content">
-							<h2 class="title"><a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php esc_html_e( $gallery['eael_fg_gallery_item_name'], 'essential-addons-elementor' ); ?></a></h2>
-							<p><?php echo $gallery['eael_fg_gallery_item_content']; ?></p>
-						</div>
-		        	</div>
-		        <?php endforeach; ?>
+			        	<?php $sorter_class = $this->sorter_class( $gallery['eael_fg_gallery_control_name'] ); ?>
+			            <div class="item <?php echo esc_attr( $sorter_class ) ?>-<?php echo esc_attr( $this->get_id() ); ?>" data-ref="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>">
+							<div class="item-img" style="background-image:url('<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>')">
+				            	<div class="caption <?php echo esc_attr( $settings['eael_fg_grid_hover_style'] ); ?> ">
+				                	<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
+				                    <a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-popup-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
+				                	<?php endif; ?>
+				                    <?php if( 'true' == $gallery['eael_fg_gallery_link'] ) :
+										$eael_gallery_link = $gallery['eael_fg_gallery_img_link']['url'];
+						        		$target = $gallery['eael_fg_gallery_img_link']['is_external'] ? 'target="_blank"' : '';
+						        		$nofollow = $gallery['eael_fg_gallery_img_link']['nofollow'] ? 'rel="nofollow"' : '';
+						        	?>
+						        	<a href="<?php echo esc_url( $eael_gallery_link ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><i class="<?php echo esc_attr( $settings['eael_section_fg_link_icon'] ); ?>"></i></a>
+				                    <?php endif; ?>
+				                </div>
+							</div>
+							<div class="item-content">
+								<h2 class="title"><a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php esc_html_e( $gallery['eael_fg_gallery_item_name'], 'essential-addons-elementor' ); ?></a></h2>
+								<p><?php echo $gallery['eael_fg_gallery_item_content']; ?></p>
+							</div>
+			        	</div>
+		        	<?php endforeach; ?>
 				</div>
 	    	<?php endif; ?>
-
+		</div>
         <script>
             jQuery(document).ready( function($) {
 
-            var containerEl = document.querySelector('[data-ref~="mixitup-container-<?php echo esc_attr( $this->get_id() ); ?>"]');
+            // var containerEl = document.querySelector('[data-ref~="mixitup-container-<?php echo esc_attr( $this->get_id() ); ?>"]');
+            var containerEl = document.querySelector('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>');
 
             var mixer = mixitup(containerEl, {
+            	controls: {
+                    scope: 'local'
+                },
                 selectors: {
                     target: '[data-ref~="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>"]'
                 },
@@ -990,6 +994,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
                     easing: 'cubic-bezier(0.245, 0.045, 0.955, 1)',
                 }
             });
+
             // Set Background Image
             <?php if( $settings['eael_fg_grid_style'] == 'eael-hoverer' || $settings['eael_fg_grid_style'] == 'eael-tiles' ) : ?>
 				var postColumn = $( '.eael-filter-gallery-container .item' );
