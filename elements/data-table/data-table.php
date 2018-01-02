@@ -649,14 +649,6 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			        <?php endfor; ?>
 			    </tbody>
 			</table>
-
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					<?php if( $settings['eael_section_data_table_enabled'] == 'true' ) : ?>
-						$("#eael-data-table-<?php echo $this->get_id(); ?>").tablesorter();
-					<?php endif; ?>
-				});
-			</script>
 		</div>
 	  	<?php
 	}
