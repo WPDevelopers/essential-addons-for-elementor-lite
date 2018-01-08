@@ -234,7 +234,7 @@ function eael_nag_ignore() {
 
 
 new WP_Review_Me( array(
-  'days_after' => 0,
+  'days_after' => 7,
   'type'       => 'plugin',
   'slug'       => 'essential-addons-for-elementor-lite',
   'rating'     => 5,
