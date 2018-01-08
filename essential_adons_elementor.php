@@ -246,7 +246,7 @@ if ( function_exists( 'eael_set_review_trigger_date' ) ) {
     function eael_set_review_trigger_date() {
 
         // Number of days you want the notice delayed by.
-        $delayindays = 1;
+        $delayindays = 7;
 
         // Create timestamp for when plugin was activated.
         $triggerdate = mktime( 0, 0, 0, date('m')  , date('d') + $delayindays, date('Y') );
