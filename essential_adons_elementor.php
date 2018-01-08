@@ -20,7 +20,6 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'admin/review.php';
 
 function add_eael_elements(){
 
@@ -231,13 +230,3 @@ function eael_nag_ignore() {
              add_user_meta($user_id, 'eael_ignore_notice240', 'true', true);
   }
 }
-
-
-new WP_Review_Me( array(
-  'days_after' => 0,
-  'type'       => 'plugin',
-  'slug'       => 'essential-addons-for-elementor-lite',
-  'rating'     => 5,
-  'message'    => 'Hey! It&#039;s been a little while that you&#039;ve been using <strong>Essential Addons for Elementor</strong>. You might not realize it, but user reviews are such a great help to us. We would be so grateful if you could take a minute to leave a review on WordPress.org. Many thanks in advance :)',
-  'link_label' => 'Click here to review'
-) );
