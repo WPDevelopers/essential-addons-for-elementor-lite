@@ -230,3 +230,30 @@ function eael_nag_ignore() {
              add_user_meta($user_id, 'eael_ignore_notice240', 'true', true);
   }
 }
+
+// review notice
+include( dirname( __FILE__ ) . '/admin/notice.php' );
+
+if ( function_exists( 'eael_set_review_trigger_date' ) ) {
+
+    register_activation_hook( __FILE__,  'eael_set_review_trigger_date' );
+
+    /**
+     * Set Trigger Date.
+     *
+     * @since  1.0.0
+     */
+    function eael_set_review_trigger_date() {
+
+        // Number of days you want the notice delayed by.
+        $delayindays = 1;
+
+        // Create timestamp for when plugin was activated.
+        $triggerdate = mktime( 0, 0, 0, date('m')  , date('d') + $delayindays, date('Y') );
+
+        // If our option doesn't exist already, we'll create it with today's timestamp.
+        if ( ! get_option( 'eael_activation_date' ) ) {
+            add_option( 'eael_activation_date', $triggerdate, '', 'yes' );
+        }
+    }
+}
