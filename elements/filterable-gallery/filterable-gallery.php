@@ -933,7 +933,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		            <div class="item <?php echo esc_attr( $sorter_class ) ?>-<?php echo esc_attr( $this->get_id() ); ?>" data-ref="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>" data-item-bg="<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>">
 		                <div class="caption <?php echo esc_attr( $settings['eael_fg_grid_hover_style'] ); ?> ">
 		                	<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
-		                    <a href="<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-popup-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
+		                    <a href="<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-magnific-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
 		                	<?php endif; ?>
 		                    <?php if( 'true' == $gallery['eael_fg_gallery_link'] ) :
 								$eael_gallery_link = $gallery['eael_fg_gallery_img_link']['url'];
@@ -954,7 +954,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 							<div class="item-img" style="background-image:url('<?php echo esc_attr( $gallery['eael_fg_gallery_img']['url'] ); ?>')">
 				            	<div class="caption <?php echo esc_attr( $settings['eael_fg_grid_hover_style'] ); ?> ">
 				                	<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
-				                    <a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-popup-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
+				                    <a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" class="eael-magnific-link"><i class="<?php echo esc_attr( $settings['eael_section_fg_zoom_icon'] ); ?>"></i></a>
 				                	<?php endif; ?>
 				                    <?php if( 'true' == $gallery['eael_fg_gallery_link'] ) :
 										$eael_gallery_link = $gallery['eael_fg_gallery_img_link']['url'];
@@ -1003,11 +1003,16 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
             <?php endif; ?>
 			// Magnific Popup
 			<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
-               	$('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?> .eael-popup-link').magnificPopup({
+               	$('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?> .eael-magnific-link').magnificPopup({
                 	type: 'image',
                   	gallery:{
                     	enabled: <?php if( 'true' == $settings['eael_fg_show_popup_gallery'] ) : echo 'true'; else: echo 'false'; endif; ?>
-                  	}
+                  	},
+                  	callbacks: {
+						close: function() {
+							$( '#elementor-lightbox' ).hide();
+					   	}
+					}
                 });
             <?php endif; ?>
 

@@ -3902,6 +3902,6 @@ img.mfp-img {
 }
 
 /*  Magnific Gallery Fix */
-.dialog-widget {
-  display: none !important;
+.mfp-wrap ~ div.dialog-widget {
+    display: none!important;
 }
