@@ -153,9 +153,8 @@ textarea.eael-form-control {
   height: 1em;
   left: 0.1em;
   transition: background 0.1s 0.1s ease;
-  background: #F25F5C;
+  background: #CBCFD0;
   border-radius: 50px;
-  box-shadow: inset 0px 1px 1px rgba(171, 66, 63, 0.5);
 }
 .eael-checkbox label:after {
   content: '';
@@ -167,7 +166,7 @@ textarea.eael-form-control {
   top: .1em;
   transition: all 0.2s ease;
   box-shadow: 0 0 0 5px #fcfff4 inset;
-  background: #F25F5C;
+  background: #CBCFD0;
   z-index: 2;
   animation: switch-off .3s ease-out;
 }
