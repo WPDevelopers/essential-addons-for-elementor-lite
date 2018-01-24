@@ -1,9 +1,9 @@
 === Elementor Essential Addons ===
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
-Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder
+Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.1
-Stable tag: 2.4.0
+Tested up to: 4.9.2
+Stable tag: 2.4.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -109,6 +109,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.4.1 =
+
+- Lightbox Gallery conflict fixed with Elementor
+- Filterable Gallery control alignment fixed for mobile
+- Accessibility improvements
+- Data Table element improvements
+- Few minor bug fixed and improvements
 
 = 2.4.0 =
 
