@@ -1,7 +1,17 @@
 ( function( $ ) {
 	'use strict';
-	// Init jQuery Ui Tabs
-	$( ".eael-settings-tabs" ).tabs();
+
+	/**
+	 * Eael Tabs
+	 */
+	$( '.eael-tabs li a' ).on( 'click', function(e) {
+		e.preventDefault();
+		$( '.eael-tabs li a' ).removeClass( 'active' );
+		$(this).addClass( 'active' );
+		var tab = $(this).attr( 'href' );
+		$( '.eael-settings-tab' ).removeClass( 'active' );
+		$( '.eael-settings-tabs' ).find( tab ).addClass( 'active' );
+	});
 
 	$( '.eael-get-pro' ).on( 'click', function() {
 		swal({
@@ -16,11 +26,11 @@
 	} );
 
 	// Adding link id after the url
-	$('.eael-settings-tabs ul li a').click(function () {
-		var tabUrl = $(this).attr( 'href' );
-	  	window.location.hash = tabUrl;
-	   	$('html, body').scrollTop(tabUrl);
-	});
+	// $('.eael-settings-tabs ul li a').click(function () {
+	// 	var tabUrl = $(this).attr( 'href' );
+	//   	window.location.hash = tabUrl;
+	//    	$('html, body').scrollTop(tabUrl);
+	// });
 
 	// Save Button reacting on any changes
 	var headerSaveBtn = $( '.eael-header-bar .eael-btn' );
@@ -31,7 +41,7 @@
 	} );
 
 	// Saving Data With Ajax Request
-	$( 'form#eael-settings' ).on( 'submit', function(e) {
+	$( '.js-eael-settings-save' ).on( 'click', function(e) {
 		e.preventDefault();
 
 		$.ajax( {
