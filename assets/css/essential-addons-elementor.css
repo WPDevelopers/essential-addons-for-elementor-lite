@@ -3645,6 +3645,9 @@ img.mfp-img {
 .eael-filter-gallery-control {
     width: 100%;
 }
+.eael-filter-gallery-control ul, .eael-filter-gallery-control ul li {
+    text-align: center;
+}
 .eael-filter-gallery-control ul {
   margin: 0px 0px 20px 0px;
   padding: 0px;
