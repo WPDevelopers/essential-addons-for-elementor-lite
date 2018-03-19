@@ -356,3 +356,125 @@ textarea.eael-form-control {
 .eael-header-bar .eael-btn.save-now:hover {
 	background: #ff5544;
 }
+
+/* Admin Blocks */
+
+.eael-admin-general-wrapper {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: center;
+}
+.eael-admin-general-wrapper .eael-admin-general-inner {
+	max-width: 70em;
+	height: auto;
+	flex: 1 1 70%;
+}
+.eael-admin-general-wrapper .eael-sidebar {
+	flex: 1 1 200px;
+	padding: 20px;
+}
+.eael-admin-block-wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	margin: -10px;
+}
+.eael-admin-block-wrapper .eael-admin-block {
+	background-color: #fff;
+	flex: 1 1 auto;
+	min-width: 250px;
+	width: 300px;
+	margin: 10px 10px 25px 10px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.eael-admin-block-large,
+.eael-sidebar-widget {
+	background: #fff;
+	margin-bottom: 25px;
+	padding: 1em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.eael-admin-block-header {
+	max-height: 4em;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	background-color: #fff;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+	display: flex;
+	align-content: center;
+	align-items: center;
+}
+.eael-admin-block-header-icon {
+	width: 42px;
+	box-shadow: 1px 0 0 0 rgba(0,0,0,0.1);
+	padding: 10px;
+}
+.eael-admin-block-header-icon svg {
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+}
+.eael-admin-block-review .eael-admin-block-header-icon svg {
+	width: 100%;
+}
+.eael-admin-block-support .eael-admin-block-header-icon {
+	width: 30px;
+}
+.eael-settings-tab .eael-admin-title {
+	margin: 1em 0;
+	padding: 0 1.26582em;
+	font-size: 1.185em;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.eael-admin-block-content {
+	overflow: hidden;
+	position: relative;
+	padding: 1em 1.5em 1.5em;
+	background-color: #fff;
+}
+.eael-preview-img {
+	width: 100%;
+}
+
+.eael-admin-sidebar {
+	flex: 1 1 200px;
+	padding: 20px;
+}
+.eael-sidebar-block {
+	margin: calc(10% + 1.5em) auto;
+}
+.eael-sidebar-block .eael-admin-sidebar-logo {
+	max-width: 150px;
+	display: block;
+	margin: 0 auto;
+}
+.eael-sidebar-block .eael-admin-sidebar-logo > img, .eael-sidebar-block .eael-admin-sidebar-logo > svg {
+	width: 100%;
+	display: block;
+	margin: 10px auto;
+}
+.eael-admin-sidebar-cta a {
+	font-size: 1em;
+	color: rgba(35,40,45,0.45);
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: .065em;
+	text-align: center;
+	margin: 20px auto;
+	display: block;
+	border: 1px solid rgba(35,40,45,0.185);
+	border-radius: 4px;
+	padding: 15px;
+	width: 200px;
+	outline: none;
+	box-shadow: none;
+	transition: all .3s;
+}
+
+.eael-admin-sidebar-cta a:hover {
+	color: #23282d;
+	box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.715);
+}
