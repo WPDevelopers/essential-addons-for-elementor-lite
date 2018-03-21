@@ -2,8 +2,8 @@
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.2
-Stable tag: 2.4.2
+Tested up to: 4.9.4
+Stable tag: 2.4.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -26,6 +26,8 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * Elements Control option
 * Lightweight and Fast
 * Extra-ordinary support
+
+>You can enable/disable certain elements and that will eliminate all associated assets of disabled elements. So it won't slow down your website.
 
 ### Available Elements
 
@@ -78,7 +80,17 @@ More coming soon (weekly update) ...
 
 Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options.  
 
+### Documentation and Support
 
+- For documentation and tutorials go to our [Documentation](https://essential-addons.com/elementor/docs/). 
+- If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite).
+- For more information about features, FAQs and documentation, check out our website at [Essential Addons for Elementor](https://essential-addons.com/elementor/).
+
+### Liked Essential Addons?
+
+- Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/).
+- Learn from our tutorials on [Youtube Channel](https://wpdeveloper.net/go/youtube-channel).
+- Or rate us on [WordPress](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/?rate=5#new-post) :)
 
 == Installation ==
 
@@ -109,6 +121,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.4.3 =
+
+- Pricing Table improved
+- Documentation and other helpful content added to admin area
+- Few minor bugfix and improvements
 
 = 2.4.2 =
 
