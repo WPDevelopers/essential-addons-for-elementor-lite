@@ -254,7 +254,7 @@ function eael_admin_notice() {
     if ( ! get_user_meta($user_id, 'eael_ignore_notice243') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 36px;">';
       echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-heart.svg'. '" ></p><p> ';
-      printf(__('<strong>20000+</strong> users using <strong>Essential Addons for Elementor.</strong> Use the promo code <strong>20K</strong> to get <strong>20&#37; </strong> discount on pro upgrade. <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Grab the Deal</a>
+      printf(__('<strong>20,000+</strong> users using <strong>Essential Addons for Elementor.</strong> Use the promo code <strong>20K</strong> to get <strong>20&#37; </strong> discount on pro upgrade. <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Grab the Deal</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> Dismiss</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
