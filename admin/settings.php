@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'img-accordion' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -380,20 +380,20 @@ class Eael_Admin_Settings {
 										<tr>
 											<td>
 												<div class="eael-checkbox">
-													<p class="title"><?php _e( 'Data Table', 'essential-addons-elementor' ) ?></p>
-													<p class="desc"><?php _e( 'Activate / Deactivate Data Table', 'essential-addons-elementor' ); ?></p>
-					                       	 		<input type="checkbox" id="data-table" name="data-table" <?php checked( 1, $this->eael_get_settings['data-table'], true ); ?> >
-					                        		<label for="data-table"></label>
-					                    		</div>
-											</td>
-											<td>
-												<div class="eael-checkbox">
 													<p class="title"><?php _e( 'Filterable Gallery', 'essential-addons-elementor' ) ?></p>
 													<p class="desc"><?php _e( 'Activate / Deactivate Filterable Gallery', 'essential-addons-elementor' ); ?></p>
 					                       	 		<input type="checkbox" id="filter-gallery" name="filter-gallery" <?php checked( 1, $this->eael_get_settings['filter-gallery'], true ); ?> >
 					                        		<label for="filter-gallery"></label>
 					                    		</div>
 											</td>
+											<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Image Accordion', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Image Accordion', 'essential-addons-elementor' ); ?></p>
+					                        	<input type="checkbox" id="image-accordion" name="image-accordion" <?php checked( 1, $this->eael_get_settings['image-accordion'], true ); ?> >
+					                        	<label for="image-accordion"></label>
+					                    	</div>
+										</td>
 										</tr>
 						      	</table>
 				      		</div>
@@ -664,6 +664,7 @@ class Eael_Admin_Settings {
 		    'facebook-feed' 	=> intval( $settings['facebook-feed'] ? 1 : 0 ),
 		    'data-table' 		=> intval( $settings['data-table'] ? 1 : 0 ),
 		    'filter-gallery' 	=> intval( $settings['filter-gallery'] ? 1 : 0 ),
+		    'image-accordion' 		=> intval( $settings['image-accordion'] ? 1 : 0 ),
 		    'wisdom_registered_setting' => 1,
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
