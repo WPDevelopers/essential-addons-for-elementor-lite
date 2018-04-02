@@ -101,7 +101,7 @@ class Eael_Admin_Settings {
 		$js_info = array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' )
 		);
-		wp_localize_script( 'essential_addons_elementor-admin-js', 'settings', $js_info );
+		wp_localize_script( 'essential_addons_elementor-admin-js', 'js_eael_lite_settings', $js_info );
 
 	   /**
 	    * This section will handle the "eael_save_settings" array. If any new settings options is added
