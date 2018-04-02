@@ -222,7 +222,6 @@ class Widget_Eael_Twitter_Feed extends Widget_Base {
 		);
 
   		$this->end_controls_section();
-
   		$this->start_controls_section(
 			'eael_section_pro',
 			[
@@ -647,7 +646,7 @@ class Widget_Eael_Twitter_Feed extends Widget_Base {
 						eael_twitter_feed_masonry();
 					<?php endif; ?>
 						loadingFeed.removeClass( 'show-loading' );
-				}, 3000 );
+				}, 4000 );
 			},
 			error: function() {
 				console.log('error loading');
