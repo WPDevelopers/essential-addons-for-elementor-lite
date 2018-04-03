@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'img-accordion' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'img-accordion', 'content-ticker' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -394,6 +394,14 @@ class Eael_Admin_Settings {
 					                        	<label for="image-accordion"></label>
 					                    	</div>
 										</td>
+										<td>
+											<div class="eael-checkbox">
+												<p class="title"><?php _e( 'Content Ticker', 'essential-addons-elementor' ) ?></p>
+												<p class="desc"><?php _e( 'Activate / Deactive Content Ticker', 'essential-addons-elementor' ); ?></p>
+					                        	<input type="checkbox" id="content-ticker" name="content-ticker" <?php checked( 1, $this->eael_get_settings['content-ticker'], true ); ?> >
+					                        	<label for="content-ticker"></label>
+					                    	</div>
+										</td>
 										</tr>
 						      	</table>
 				      		</div>
@@ -665,6 +673,7 @@ class Eael_Admin_Settings {
 		    'data-table' 		=> intval( $settings['data-table'] ? 1 : 0 ),
 		    'filter-gallery' 	=> intval( $settings['filter-gallery'] ? 1 : 0 ),
 		    'image-accordion' 		=> intval( $settings['image-accordion'] ? 1 : 0 ),
+		    'content-ticker' 		=> intval( $settings['content-ticker'] ? 1 : 0 ),
 		    'wisdom_registered_setting' => 1,
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );
