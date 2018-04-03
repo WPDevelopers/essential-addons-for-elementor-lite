@@ -584,6 +584,18 @@ class Eael_Admin_Settings {
 								                <label for="dynamic-filter-gallery" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 								            </div>
 								        </td>
+								        <td>
+								            <div class="eael-checkbox">
+								                <p class="title">
+								                    <?php _e( 'Post List', 'essential-addons-elementor' ) ?>
+								                </p>
+								                <p class="desc">
+								                    <?php _e( 'Activate / Deactivate Post List', 'essential-addons-elementor' ); ?>
+								                </p>
+								                <input type="checkbox" id="post-list" name="dynamic-filter-gallery" disabled>
+								                <label for="post-list" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+								            </div>
+								        </td>
 								    </tr>
 								</table>
 							  	<div class="eael-save-btn-wrap">
