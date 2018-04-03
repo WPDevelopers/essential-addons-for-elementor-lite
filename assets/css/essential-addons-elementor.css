@@ -1709,7 +1709,6 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 /* Image/Icon On Top */
 .eael-infobox {}
 .eael-infobox .infobox-icon {
-  width: 100%;
   height: auto;
   margin-bottom: 30px;
 }
@@ -1786,21 +1785,17 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 /* Image/Icon On Left */
 .eael-infobox.icon-on-left {
   position: relative;
-  z-index: 0
+  z-index: 0;
+  display: flex;
 }
 .eael-infobox.icon-on-left .infobox-icon {
-  position: absolute;
-  width: 35px;
-  height: 100px;
-  top: 0px;
-  left: 0px;
-  z-index: 0;
+  flex: 0 0 auto;
+  text-align: left;
 }
 .eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
   background: none;
   border: 0px;
   text-align: left;
-  width: auto;
   height: auto;
   display: block;
 }
@@ -1809,21 +1804,22 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   transform: translateY(0%);
 }
 .eael-infobox.icon-on-left .infobox-content {
-  padding-left: 50px;
+  padding-left: 15px;
+  flex: 1 1 auto;
 }
-.eael-infobox.icon-on-left .infobox-content .title {}
+.eael-infobox.icon-on-left .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
 /* Image/Icon On Right */
 .eael-infobox.icon-on-right {
   position: relative;
-  z-index: 0
+  z-index: 0;
+  display: flex;
+  flex-direction: row-reverse;
 }
 .eael-infobox.icon-on-right .infobox-icon {
-  position: absolute;
-  width: 35px;
-  height: 100px;
-  top: 0px;
-  right: 0px;
-  z-index: 0;
+  flex: 0 0 auto;
   text-align: right;
 }
 .eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
@@ -1839,10 +1835,15 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   transform: translateY(0%);
 }
 .eael-infobox.icon-on-right .infobox-content {
-  padding-right: 50px;
+  padding-right: 15px;
   text-align: right;
+  flex: 1 1 auto;
+  box-sizing: border-box;
 }
-.eael-infobox.icon-on-right .infobox-content .title {}
+.eael-infobox.icon-on-right .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
 /* Imgae Circle On Top */
 .eael-infobox-shape-circle .eael-infobox .infobox-icon img {
   border-radius: 50%;

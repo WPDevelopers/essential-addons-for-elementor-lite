@@ -472,7 +472,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
         		'label' => __( 'Icon Margin Right', 'essential-addons-elementor' ),
        			'type' => Controls_Manager::SLIDER,
         		'default' => [
-            		'size' => 50,
+            		'size' => 15,
         		],
         		'range' => [
             		'px' => [
@@ -496,7 +496,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
         		'label' => __( 'Icon Margin Left', 'essential-addons-elementor' ),
        			'type' => Controls_Manager::SLIDER,
         		'default' => [
-            		'size' => 50,
+            		'size' => 15,
         		],
         		'range' => [
             		'px' => [
@@ -507,7 +507,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
         		],
         		'selectors' => [
             		'{{WRAPPER}} .eael-infobox.icon-on-right .infobox-content' => 'padding-right: {{SIZE}}px;',
-            		'{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'width: {{SIZE}}px;',
         		],
         		'condition' => [
 					'eael_infobox_img_type' => 'img-on-right',
