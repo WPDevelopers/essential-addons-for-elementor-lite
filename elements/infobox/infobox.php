@@ -105,7 +105,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			[
 				'label' => __( 'Infobox Clickable', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
-				'default' => 'yes',
+				'default' => 'no',
 				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
 				'label_off' => __( 'No', 'essential-addons-elementor' ),
 				'return_value' => 'yes',
