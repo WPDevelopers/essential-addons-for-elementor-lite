@@ -78,20 +78,11 @@
 	box-shadow: none;
 	color: #343434;
 }
-p.title {
+p.eael-el-title {
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: 600;
 	color: #333;
-	text-transform: uppercase;
-	margin-bottom: 0px;
-	line-height: 20px;
-}
-p.desc {
-	font-size: 12px;
-	color: #4d4d4d;
-	margin-bottom: 15px !important;
-	padding-bottom: 15px;
-	border-bottom: 1px solid rgba( 0,0,0,0.1 );
+	margin: .5em;
 }
 .eael-settings-tab p.eael-elements-control-notice {
 	color: #42418e;
@@ -132,8 +123,19 @@ textarea.eael-form-control {
 	height: auto;
 }
 /* Checkbox Style */
+
+.eael-checkbox-container {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+}
 .eael-checkbox {
-  font-size: 24px;
+	min-width: 250px;
+	font-size: 24px;
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	margin: 10px;
 }
 .eael-checkbox input[type=checkbox] {
   visibility: hidden;
