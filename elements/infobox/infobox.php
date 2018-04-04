@@ -418,6 +418,30 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		);
 
 		$this->add_control(
+    		'eael_infobox_icon_margin_bottom',
+    		[
+        		'label' => __( 'Icon Margin Bottom', 'essential-addons-elementor' ),
+       			'type' => Controls_Manager::SLIDER,
+        		'default' => [
+            		'size' => 30,
+        		],
+        		'range' => [
+            		'px' => [
+                		'min' => 0,
+                		'max' => 200,
+                		'step' => 1,
+            		]
+        		],
+        		'selectors' => [
+            		'{{WRAPPER}} .eael-infobox .infobox-icon' => 'margin-bottom: {{SIZE}}px;',
+        		],
+        		'condition' => [
+					'eael_infobox_img_type' => 'img-on-top',
+				]
+    		]
+		);
+
+		$this->add_control(
     		'eael_infobox_icon_bg_size',
     		[
         		'label' => __( 'Icon Background Size', 'essential-addons-elementor' ),
@@ -438,30 +462,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
         		'condition' => [
 					'eael_infobox_icon_bg_shape!' => 'none',
 					'eael_infobox_img_type!' => ['img-on-left', 'img-on-right'],
-				]
-    		]
-		);
-
-		$this->add_control(
-    		'eael_infobox_icon_margin_bottom',
-    		[
-        		'label' => __( 'Icon Margin Bottom', 'essential-addons-elementor' ),
-       			'type' => Controls_Manager::SLIDER,
-        		'default' => [
-            		'size' => 30,
-        		],
-        		'range' => [
-            		'px' => [
-                		'min' => 0,
-                		'max' => 200,
-                		'step' => 1,
-            		]
-        		],
-        		'selectors' => [
-            		'{{WRAPPER}} .eael-infobox .infobox-icon' => 'margin-bottom: {{SIZE}}px;',
-        		],
-        		'condition' => [
-					'eael_infobox_img_type' => 'img-on-top',
 				]
     		]
 		);
@@ -563,30 +563,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-    		'eael_infobox_icon_margin_bottom_size',
-    		[
-        		'label' => __( 'Icon Margin Bottom', 'essential-addons-elementor' ),
-       			'type' => Controls_Manager::SLIDER,
-        		'default' => [
-            		'size' => 0,
-        		],
-        		'range' => [
-            		'px' => [
-                		'min' => 0,
-                		'max' => 300,
-                		'step' => 1,
-            		]
-        		],
-        		'selectors' => [
-            		'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap' => 'margin-bottom: {{SIZE}}px;',
-        		],
-        		'condition' => [
-					'eael_infobox_icon_bg_shape' => 'none',
-				]
-    		]
-		);
-
 		$this->end_controls_section();
 
 		/**
@@ -628,6 +604,27 @@ class Widget_Eael_Info_Box extends Widget_Base {
              'name' => 'eael_infobox_title_typography',
 				'selector' => '{{WRAPPER}} .eael-infobox .infobox-content .title',
 			]
+		);
+
+		$this->add_control(
+    		'eael_infobox_title_margin_bottom',
+    		[
+        		'label' => __( 'Title Margin Bottom', 'essential-addons-elementor' ),
+       			'type' => Controls_Manager::SLIDER,
+        		'default' => [
+            		'size' => 30,
+        		],
+        		'range' => [
+            		'px' => [
+                		'min' => 0,
+                		'max' => 300,
+                		'step' => 1,
+            		]
+        		],
+        		'selectors' => [
+            		'{{WRAPPER}} .eael-infobox .infobox-content .title' => 'margin-bottom: {{SIZE}}px;',
+        		],
+    		]
 		);
 
 		$this->add_control(
