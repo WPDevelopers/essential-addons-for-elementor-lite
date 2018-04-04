@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 4.9.4
-Stable tag: 2.4.3
+Stable tag: 2.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,7 +20,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 22+ Stunning Elements (Free)
+* 24+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -53,10 +53,12 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/)
 * [Data Table](https://essential-addons.com/elementor/table/)
 * [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
+* [Image Accordion](https://essential-addons.com/elementor/image-accordion/)
+* [Content Ticket](https://essential-addons.com/elementor/content-ticker/)
 
 
 
-### More elements on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (15+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
@@ -72,6 +74,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Facebook Feed Carousel](https://essential-addons.com/elementor/facebook-feed/)
 * [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/)
 * [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
+* [Smart Post List](https://essential-addons.com/elementor/post-list/)
 
 More coming soon (weekly update) ...
 
@@ -121,6 +124,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.5.0 =
+
+- Image Accordion Element added
+- Content Ticker element added
+- Info Box element updated with flexbox layout
+- Twitter Feed element improved
+- Few minor bugfix and improvements
 
 = 2.4.3 =
 

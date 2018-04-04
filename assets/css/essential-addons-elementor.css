@@ -4007,6 +4007,9 @@ img.mfp-img {
   background-repeat: no-repeat;
   transition: flex .4s;
 }
+.eael-img-accordion a:focus{
+    outline: none;
+}
 .eael-grow-accordion {
   flex: 3;
 }
