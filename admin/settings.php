@@ -316,6 +316,11 @@ class Eael_Admin_Settings {
 										<p class="eael-el-title"><?php _e( 'Filterable Gallery', 'essential-addons-elementor' ) ?></p>
 									</div>
 									<div class="eael-checkbox">
+									 	<input type="checkbox" id="data-table" name="data-table" <?php checked( 1, $this->eael_get_settings['data-table'], true ); ?> >
+										<label for="data-table"></label>
+										<p class="eael-el-title"><?php _e( 'Data Table', 'essential-addons-elementor' ) ?></p>
+									</div>
+									<div class="eael-checkbox">
 										<input type="checkbox" id="image-accordion" name="image-accordion" <?php checked( 1, $this->eael_get_settings['image-accordion'], true ); ?> >
 										<label for="image-accordion"></label>
 										<p class="eael-el-title"><?php _e( 'Image Accordion', 'essential-addons-elementor' ) ?></p>
@@ -401,13 +406,6 @@ class Eael_Admin_Settings {
 									    <label for="content-timeline" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 									    <p class="eael-el-title">
 									        <?php _e( 'Content Timeline', 'essential-addons-elementor' ) ?>
-									    </p>
-									</div>
-									<div class="eael-checkbox">
-									    <input type="checkbox" id="data-table" name="data-table" disabled>
-									    <label for="data-table" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
-									    <p class="eael-el-title">
-									        <?php _e( 'Data Table', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
 									<div class="eael-checkbox">

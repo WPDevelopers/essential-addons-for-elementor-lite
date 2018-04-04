@@ -38,7 +38,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		  	[
 				'label' => __( 'Enable Table Sorting', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
-				'default' => 'true',
+				'default' => 'false',
 				'label_on' => esc_html__( 'Yes', 'essential-addons-elementor' ),
 				'label_off' => esc_html__( 'No', 'essential-addons-elementor' ),
 				'return_value' => 'true',
