@@ -1710,7 +1710,6 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 .eael-infobox {}
 .eael-infobox .infobox-icon {
   height: auto;
-  margin-bottom: 30px;
 }
 .eael-infobox .infobox-icon .infobox-icon-wrap {
   display: block;
