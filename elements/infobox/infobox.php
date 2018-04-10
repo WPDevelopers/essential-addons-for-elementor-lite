@@ -629,7 +629,9 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			<div class="infobox-content">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
+					<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
 					<p><?php echo $settings['eael_infobox_text']; ?></p>
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 			<?php if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?></a><?php endif; ?>
@@ -653,7 +655,9 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			<div class="infobox-content <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
+					<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
 					<p><?php echo $settings['eael_infobox_text']; ?></p>
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -677,7 +681,9 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			<div class="infobox-content <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
+					<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
 					<p><?php echo $settings['eael_infobox_text']; ?></p>
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>
