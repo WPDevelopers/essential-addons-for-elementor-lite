@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'img-accordion', 'content-ticker' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'img-accordion', 'content-ticker', 'tooltip' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -330,6 +330,21 @@ class Eael_Admin_Settings {
 										<label for="content-ticker"></label>
 										<p class="eael-el-title"><?php _e( 'Content Ticker', 'essential-addons-elementor' ) ?></p>
 									</div>
+									<div class="eael-checkbox">
+										<input type="checkbox" id="tooltip" name="tooltip" <?php checked( 1, $this->eael_get_settings['tooltip'], true ); ?> >
+										<label for="tooltip"></label>
+										<p class="eael-el-title"><?php _e( 'Tooltip', 'essential-addons-elementor' ) ?></p>
+									</div>
+									<div class="eael-checkbox">
+										<input type="checkbox" id="adv-accordion" name="adv-accordion" <?php checked( 1, $this->eael_get_settings['adv-accordion'], true ); ?> >
+										<label for="adv-accordion"></label>
+										<p class="eael-el-title"><?php _e( 'Advance Accordion', 'essential-addons-elementor' ) ?></p>
+									</div>
+									<div class="eael-checkbox">
+										<input type="checkbox" id="adv-tabs" name="adv-tabs" <?php checked( 1, $this->eael_get_settings['adv-tabs'], true ); ?> >
+										<label for="adv-tabs"></label>
+										<p class="eael-el-title"><?php _e( 'Advance Tabs', 'essential-addons-elementor' ) ?></p>
+									</div>
 								</div><!--./checkbox-container-->
 				      		</div>
 				      		<div class="col-full">
@@ -523,8 +538,11 @@ class Eael_Admin_Settings {
 		    'facebook-feed' 	=> intval( $settings['facebook-feed'] ? 1 : 0 ),
 		    'data-table' 		=> intval( $settings['data-table'] ? 1 : 0 ),
 		    'filter-gallery' 	=> intval( $settings['filter-gallery'] ? 1 : 0 ),
-		    'image-accordion' 		=> intval( $settings['image-accordion'] ? 1 : 0 ),
-		    'content-ticker' 		=> intval( $settings['content-ticker'] ? 1 : 0 ),
+		    'image-accordion' 	=> intval( $settings['image-accordion'] ? 1 : 0 ),
+		    'content-ticker' 	=> intval( $settings['content-ticker'] ? 1 : 0 ),
+		    'tooltip' 			=> intval( $settings['tooltip'] ? 1 : 0 ),
+		    'adv-accordion' 	=> intval( $settings['adv-accordion'] ? 1 : 0 ),
+		    'adv-tabs' 			=> intval( $settings['adv-tabs'] ? 1 : 0 ),
 		    'wisdom_registered_setting' => 1,
 		);
 		update_option( 'eael_save_settings', $this->eael_settings );

@@ -4172,3 +4172,343 @@ img.mfp-img {
 .eael-ticker-wrap .eael-typed-strings {
   padding: 0px 0px 0px 15px;
 }
+/**
+ * Tooltip
+ */
+.eael-tooltip-text {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 24px;
+  font-size: .93rem;
+  color: #333;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.eael-tooltip-text a,
+.eael-tooltip-text a:hover,
+.eael-tooltip-text a:visited {
+  color: #333;
+}
+/* START TOOLTIP STYLES */
+.eael-tooltip[tooltip] {
+  position: relative; /* opinion 1 */
+  display: inline-block;
+  width: auto;
+}
+
+/* Applies to all tooltips */
+.eael-tooltip[tooltip]::before,
+.eael-tooltip[tooltip]::after {
+  text-transform: none; /* opinion 2 */
+  font-size: .93em; /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+.eael-tooltip[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001; /* absurdity 1 */
+}
+.eael-tooltip[tooltip]::after {
+  content: attr(tooltip); /* magic! */
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  min-width: 3em;
+  max-width: 30em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 12px 24px;
+  border-radius: .3ch;
+  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000; /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+.eael-tooltip[tooltip]:hover::before,
+.eael-tooltip[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+.eael-tooltip[tooltip='']::before,
+.eael-tooltip[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+.eael-tooltip[tooltip]:not([flow])::before,
+.eael-tooltip[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+.eael-tooltip[tooltip]:not([flow])::after,
+.eael-tooltip[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+.eael-tooltip[tooltip]:not([flow])::before,
+.eael-tooltip[tooltip]:not([flow])::after,
+.eael-tooltip[tooltip][flow^="up"]::before,
+.eael-tooltip[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+.eael-tooltip[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+.eael-tooltip[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+.eael-tooltip[tooltip][flow^="down"]::before,
+.eael-tooltip[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+.eael-tooltip[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+.eael-tooltip[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+.eael-tooltip[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+.eael-tooltip[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes eael-tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes eael-tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */
+.eael-tooltip[tooltip]:not([flow]):hover::before,
+.eael-tooltip[tooltip]:not([flow]):hover::after,
+.eael-tooltip[tooltip][flow^="up"]:hover::before,
+.eael-tooltip[tooltip][flow^="up"]:hover::after,
+.eael-tooltip[tooltip][flow^="down"]:hover::before,
+.eael-tooltip[tooltip][flow^="down"]:hover::after {
+  animation: eael-tooltips-vert 300ms ease-out forwards;
+}
+
+.eael-tooltip[tooltip][flow^="left"]:hover::before,
+.eael-tooltip[tooltip][flow^="left"]:hover::after,
+.eael-tooltip[tooltip][flow^="right"]:hover::before,
+.eael-tooltip[tooltip][flow^="right"]:hover::after {
+  animation: eael-tooltips-horz 300ms ease-out forwards;
+}
+.eael-tooltip-align-left {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+.eael-tooltip-align-right {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.eael-tooltip-align-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.eael-tooltip-align-justify .eael-tooltip[tooltip] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/**
+ * Advance Tabs
+ */
+.eael-advance-tabs > .eael-tab-navs {
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1;
+}
+.eael-advance-tabs .eael-tab-navs li {
+  flex: 1 1 auto;
+  cursor: pointer;
+}
+.eael-advance-tabs .eael-tab-navs li a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 15px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+}
+.eael-advance-tabs .eael-tab-navs li a:hover,
+.eael-advance-tabs .eael-tab-navs li a.active {
+  position: relative;
+  z-index: 0;
+}
+.eael-advance-tabs .eael-tab-navs li a:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+  z-index: 1;
+  width: 0px;
+  height: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #444;
+  border-bottom: 0px;
+  display: none;
+}
+.eael-advance-tabs .eael-tab-navs li a.active:after {
+  display: block;
+}
+.eael-advance-tabs .eael-tab-contents .eael-tab-content {
+  display: none;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  opacity: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  border: 1px solid #eee;
+  margin-top: -1px;
+}
+.eael-advance-tabs .eael-tab-contents .eael-tab-content.active {
+  display: block;
+  opacity: 1;
+  animation: fadeIn linear 0.3s;
+}
+
+/* Inline Icon */
+.eael-tab-inline-icon li a .fa {
+  margin-right: 10px;
+  line-height: 1;
+}
+.eael-tab-top-icon li a {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.eael-tab-top-icon li a .fa,
+.eael-tab-top-icon li a .eael-tab-title {
+  flex: 1 1 100%;
+  line-height: 1;
+}
+.eael-tab-top-icon li a .eael-tab-title {
+  margin-top: 10px;
+}
+/**
+ * Advance Accordion
+ */
+.eael-adv-accordion {
+  width: auto;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+.eael-adv-accordion .eael-accordion-list {}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
+  padding: 15px;
+  border: 1px solid rgba(0,0,0,0.02);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+  transform: rotate(0deg);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+  transform: rotate(90deg);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+.fa-accordion-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
+  display: none;
+  border: 1px solid #eee;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.7;
+  opacity: 0;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
+  margin: 0;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
+  display: block;
+  opacity: 1;
+}
+
+@keyframes rotate-90 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}
