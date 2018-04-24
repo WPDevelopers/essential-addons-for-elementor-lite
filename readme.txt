@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 4.9.4
-Stable tag: 2.5.0
+Stable tag: 2.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,7 +20,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 24+ Stunning Elements (Free)
+* 27+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -55,6 +55,9 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
 * [Image Accordion](https://essential-addons.com/elementor/image-accordion/)
 * [Content Ticket](https://essential-addons.com/elementor/content-ticker/)
+* [Tooltip](https://essential-addons.com/elementor/tooltip/)
+* [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/)
+* [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
 
 
 
@@ -124,6 +127,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.6.0 =
+
+- Tooltip element added
+- Advanced Tabs element added
+- Advanced Accordion element added
+- Info box improved
+- Few minor bugfix and improvements
 
 = 2.5.0 =
 

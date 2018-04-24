@@ -338,12 +338,12 @@ class Eael_Admin_Settings {
 									<div class="eael-checkbox">
 										<input type="checkbox" id="adv-accordion" name="adv-accordion" <?php checked( 1, $this->eael_get_settings['adv-accordion'], true ); ?> >
 										<label for="adv-accordion"></label>
-										<p class="eael-el-title"><?php _e( 'Advance Accordion', 'essential-addons-elementor' ) ?></p>
+										<p class="eael-el-title"><?php _e( 'Advanced Accordion', 'essential-addons-elementor' ) ?></p>
 									</div>
 									<div class="eael-checkbox">
 										<input type="checkbox" id="adv-tabs" name="adv-tabs" <?php checked( 1, $this->eael_get_settings['adv-tabs'], true ); ?> >
 										<label for="adv-tabs"></label>
-										<p class="eael-el-title"><?php _e( 'Advance Tabs', 'essential-addons-elementor' ) ?></p>
+										<p class="eael-el-title"><?php _e( 'Advanced Tabs', 'essential-addons-elementor' ) ?></p>
 									</div>
 								</div><!--./checkbox-container-->
 				      		</div>
