@@ -136,6 +136,31 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 		);
   		$this->end_controls_section();
   		/**
+  		 * Go Premium For More Features
+  		 */
+  		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+			]
+		);
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => __( '', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-unlock-alt',
+					],
+				],
+				'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+            ]
+        );
+        $this->end_controls_section();
+  		/**
 		 * -------------------------------------------
 		 * Tab Style Advance Accordion Generel Style
 		 * -------------------------------------------
@@ -605,10 +630,10 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 	<div class="eael-adv-accordion" id="eael-adv-accordion-<?php echo esc_attr( $this->get_id() ); ?>">
 		<?php foreach( $settings['eael_adv_accordion_tab'] as $tab ) : ?>
 		<div class="eael-accordion-list">
-			<div class="eael-accordion-header">
+			<div class="eael-accordion-header<?php if( $tab['eael_adv_accordion_tab_default_active'] == 'yes' ) : echo ' active-default'; endif; ?>">
 				<span><?php if( $tab['eael_adv_accordion_tab_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $tab['eael_adv_accordion_tab_title_icon'] ); ?> fa-accordion-icon"></i><?php endif; ?>  <?php echo $tab['eael_adv_accordion_tab_title']; ?></span> <?php if( $settings['eael_adv_accordion_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $settings['eael_adv_accordion_icon'] ); ?> fa-toggle"></i> <?php endif; ?>
 			</div>
-			<div class="eael-accordion-content">
+			<div class="eael-accordion-content<?php if( $tab['eael_adv_accordion_tab_default_active'] == 'yes' ) : echo ' active-default'; endif; ?>">
 				<p><?php echo do_shortcode($tab['eael_adv_accordion_tab_content']); ?></p>
 			</div>
 		</div>
@@ -617,18 +642,26 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 	<script>
 		jQuery(document).ready(function($) {
 			var $eaelAdvAccordion = $('#eael-adv-accordion-<?php echo esc_attr( $this->get_id() ); ?>');
-			var $eaelAccordionList = $eaelAdvAccordion.find('.eael-accordion-list .eael-accordion-header');
+			var $eaelAccordionList = $eaelAdvAccordion.find('.eael-accordion-list');
+			var $eaelAccordionListHeader = $eaelAdvAccordion.find('.eael-accordion-list .eael-accordion-header');
 			var $eaelAccordioncontent = $eaelAdvAccordion.find('.eael-accordion-content');
+			$eaelAccordionList.each(function(i) {
+				if( $(this).find('.eael-accordion-header').hasClass('active-default') ) {
+					$(this).find('.eael-accordion-header').addClass('active');
+					$(this).find('.eael-accordion-content').addClass('active').css('display', 'block').slideDown(<?php echo esc_attr( $settings['eael_adv_accordion_toggle_speed'] ); ?>);
+				}
+			});
 			<?php if( 'accordion' == $settings['eael_adv_accordion_type'] ) : ?>
-			$eaelAccordionList.on('click', function() {
+			$eaelAccordionListHeader.on('click', function() {
 				// Check if 'active' class is already exists
 				if( $(this).hasClass('active') ) {
 					$(this).removeClass('active');
 					$(this).next('.eael-accordion-content').removeClass('active').slideUp(<?php echo esc_attr( $settings['eael_adv_accordion_toggle_speed'] ); ?>);
 				}else {
-					$eaelAccordionList.removeClass('active');
+					$eaelAccordionListHeader.removeClass('active');
+					$eaelAccordionListHeader.next('.eael-accordion-content').removeClass('active').slideUp(<?php echo esc_attr( $settings['eael_adv_accordion_toggle_speed'] ); ?>);
+
 					$(this).toggleClass('active');
-					$eaelAccordionList.next('.eael-accordion-content').removeClass('active').slideUp(<?php echo esc_attr( $settings['eael_adv_accordion_toggle_speed'] ); ?>);
 					$(this).next('.eael-accordion-content').slideToggle(<?php echo esc_attr( $settings['eael_adv_accordion_toggle_speed'] ); ?>, function() {
 						$(this).toggleClass('active');
 					});
@@ -636,7 +669,7 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 			});
 			<?php endif; ?>
 			<?php if( 'toggle' == $settings['eael_adv_accordion_type'] ) : ?>
-			$eaelAccordionList.on('click', function() {
+			$eaelAccordionListHeader.on('click', function() {
 				// Check if 'active' class is already exists
 				if( $(this).hasClass('active') ) {
 					$(this).removeClass('active');
