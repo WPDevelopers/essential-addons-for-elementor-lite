@@ -615,7 +615,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		</ul>
 		<div class="eael-tab-contents">
 			<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];?>
-			<div class="eael-tab-content <?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>" id="eael-adv-tab-<?php echo esc_attr($eael_adv_tab_content_id); ?>">
+			<div class="eael-tab-content clearfix <?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>" id="eael-adv-tab-<?php echo esc_attr($eael_adv_tab_content_id); ?>">
 				<?php echo do_shortcode( $tab['eael_adv_tabs_tab_content'] ); ?>
 			</div>
 			<?php $eael_adv_tab_content_id++; endforeach;?>

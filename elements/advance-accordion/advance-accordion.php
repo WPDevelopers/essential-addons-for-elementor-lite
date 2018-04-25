@@ -103,6 +103,13 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 				],
 				'fields' => [
 					[
+						'name' => 'eael_adv_accordion_tab_default_active',
+						'label' => esc_html__( 'Active as Default', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::SWITCHER,
+						'default' => 'no',
+						'return_value' => 'yes',
+					],
+					[
 						'name' => 'eael_adv_accordion_tab_icon_show',
 						'label' => esc_html__( 'Enable Tab Icon', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SWITCHER,
@@ -293,6 +300,17 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 	 					'{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+		$this->add_responsive_control(
+			'eael_adv_accordion_tab_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
 		);
@@ -492,7 +510,6 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .eael-adv-accordion' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'background-color: {{VALUE}};',
 				],
 			]
@@ -633,7 +650,7 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 			<div class="eael-accordion-header<?php if( $tab['eael_adv_accordion_tab_default_active'] == 'yes' ) : echo ' active-default'; endif; ?>">
 				<span><?php if( $tab['eael_adv_accordion_tab_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $tab['eael_adv_accordion_tab_title_icon'] ); ?> fa-accordion-icon"></i><?php endif; ?>  <?php echo $tab['eael_adv_accordion_tab_title']; ?></span> <?php if( $settings['eael_adv_accordion_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $settings['eael_adv_accordion_icon'] ); ?> fa-toggle"></i> <?php endif; ?>
 			</div>
-			<div class="eael-accordion-content<?php if( $tab['eael_adv_accordion_tab_default_active'] == 'yes' ) : echo ' active-default'; endif; ?>">
+			<div class="eael-accordion-content clearfix<?php if( $tab['eael_adv_accordion_tab_default_active'] == 'yes' ) : echo ' active-default'; endif; ?>">
 				<p><?php echo do_shortcode($tab['eael_adv_accordion_tab_content']); ?></p>
 			</div>
 		</div>
