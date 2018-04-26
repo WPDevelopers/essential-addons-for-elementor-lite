@@ -132,7 +132,6 @@ class Eael_Admin_Settings {
 				      	<li><a href="#general" class="active"><i class="fa fa-cogs"></i> General</a></li>
 				      	<li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
 				      	<li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
-				      	<li><a href="#support"><i class="fa fa-ticket"></i> Support</a></li>
 			    	</ul>
 			    	<div id="general" class="eael-settings-tab active">
 						<div class="row eael-admin-general-wrapper">
@@ -448,7 +447,7 @@ class Eael_Admin_Settings {
 									    <input type="checkbox" id="post-list" name="dynamic-filter-gallery" disabled>
 									    <label for="post-list" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 									    <p class="eael-el-title">
-									        <?php _e( 'Post List', 'essential-addons-elementor' ) ?>
+									        <?php _e( 'Smart Post List', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
 								</div><!--./checkbox-container-->
@@ -472,27 +471,6 @@ class Eael_Admin_Settings {
 			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/unlock-gif.gif'; ?>">
 			      			</div>
 			      		</div>
-			    	</div>
-			    	<div id="support" class="eael-settings-tab">
-				      	<div class="row">
-				      		<div class="col-half">
-					      		<h4>Need help? Open a support ticket!</h4>
-					      		<p>You can always get support from the community.</p>
-					      		<a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" target="_blank" class="button eael-btn">Get Help</a>
-					      	</div>
-				      		<div class="col-half">
-					      		<h4>Need Premium Support?</h4>
-					      		<p>Purchasing a license entitles you to receive premium support.</p>
-					      		<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn">Get a license</a>
-					      	</div>
-				      	</div>
-				      	<div class="row">
-				      		<div class="col-half">
-				      			<div class="essential-addons-community-link">
-				      				<a href="https://www.facebook.com/groups/essentialaddons/" target="_blank"><i class="fa fa-facebook-official fa-2x fa-fw" aria-hidden="true"></i> <span>Join the Facebook Community</span></a>
-				      			</div>
-				      		</div>
-				      	</div>
 			    	</div>
 			  	</div>
 		  	</form>

@@ -54,7 +54,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Data Table](https://essential-addons.com/elementor/table/)
 * [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
 * [Image Accordion](https://essential-addons.com/elementor/image-accordion/)
-* [Content Ticket](https://essential-addons.com/elementor/content-ticker/)
+* [Content Ticker](https://essential-addons.com/elementor/content-ticker/)
 * [Tooltip](https://essential-addons.com/elementor/tooltip/)
 * [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/)
 * [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
