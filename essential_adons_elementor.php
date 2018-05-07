@@ -48,10 +48,7 @@ function eael_activated_modules() {
  *
  * @since v1.0.0
  */
-function add_eael_elements(){
-
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'img-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs' ];
-   $eael_default_settings = array_fill_keys( $eael_default_keys, true );
+function add_eael_elements() {
 
    $is_component_active = eael_activated_modules();
 
