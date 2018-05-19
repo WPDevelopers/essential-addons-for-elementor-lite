@@ -189,7 +189,17 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		     			'condition' => [
 							'eael_data_table_content_row_type' => 'col'
 						]
-					]
+					],
+					[
+						'name' => 'eael_data_table_content_row_colspan',
+						'label' => esc_html__( 'Colspan', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::NUMBER,
+						'default' => '1',
+						'min' => 1,
+						'condition' => [
+							'eael_data_table_content_row_type' => 'col'
+						]
+					]	
 				],
 				'title_field' => '{{eael_data_table_content_row_type}}::{{eael_data_table_content_row_title}}',
 			]
@@ -603,7 +613,8 @@ class Widget_Eael_Data_Table extends Widget_Base {
 	  				'title' => $content_row['eael_data_table_content_row_title'],
 	  				'link_url' => $content_row['eael_data_table_content_row_title_link']['url'],
 	  				'link_target' => $target,
-	  				'nofollow' => $nofollow
+	  				'nofollow' => $nofollow,
+					'colspan' => $content_row['eael_data_table_content_row_colspan']
 	  			];
 	  		}
 	  	}
@@ -635,11 +646,11 @@ class Widget_Eael_Data_Table extends Widget_Base {
 									if( $table_tr[$i]['id'] == $table_td[$j]['row_id'] ) {
 										?>
 										<?php if( !empty( $table_td[$j]['link_url'] ) ) : ?>
-											<td>
+											<td<?php echo $table_td[$j]['colspan'] > 1 ? ' colspan="'.$table_td[$j]['colspan'].'"' : ''; ?>>
 												<a href="<?php echo esc_attr( $table_td[$j]['link_url'] ); ?>" <?php echo $table_td[$j]['link_target'] ?> <?php echo $table_td[$j]['nofollow'] ?>><?php echo $table_td[$j]['title']; ?></a>
 											</td>
 										<?php else: ?>
-											<td><?php echo $table_td[$j]['title']; ?></td>
+											<td<?php echo $table_td[$j]['colspan'] > 1 ? ' colspan="'.$table_td[$j]['colspan'].'"' : ''; ?>><?php echo $table_td[$j]['title']; ?></td>
 										<?php endif; ?>
 										<?php
 									}
