@@ -146,16 +146,49 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'label' => esc_html__( 'Infobox Title', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
+				'dynamic' => [
+					'active' => true
+				],
 				'default' => esc_html__( 'This is an icon box', 'essential-addons-elementor' )
 			]
 		);
 		$this->add_control(
+            'eael_infobox_text_type',
+            [
+                'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'options'               => [
+                    'content'       => __( 'Content', 'essential-addons-elementor' ),
+                    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+                ],
+                'default'               => 'content',
+            ]
+        );
+
+        $this->add_control(
+            'eael_primary_templates',
+            [
+                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'options'               => eael_get_page_templates(),
+				'condition'             => [
+					'eael_infobox_text_type'      => 'template',
+				],
+            ]
+        );
+		$this->add_control(
 			'eael_infobox_text',
 			[
-				'label' => esc_html__( 'Infobox Text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'label' => esc_html__( 'Infobox Content', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-addons-elementor' )
+				'dynamic' => [
+					'active' => true
+				],
+				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-addons-elementor' ),
+				'condition' => [
+					'eael_infobox_text_type' => 'content'
+				]
 			]
 		);
 		$this->add_control(
@@ -604,7 +637,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 
 	protected function render( ) {
 
-   		$settings = $this->get_settings();
+   		$settings = $this->get_settings_for_display();
       	$infobox_image = $this->get_settings( 'eael_infobox_image' );
 	  	$infobox_image_url = Group_Control_Image_Size::get_attachment_image_src( $infobox_image['id'], 'thumbnail', $settings );
 	  	if( empty( $infobox_image_url ) ) : $infobox_image_url = $infobox_image['url']; else: $infobox_image_url = $infobox_image_url; endif;
@@ -629,9 +662,18 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			<div class="infobox-content">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
-					<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
-					<p><?php echo $settings['eael_infobox_text']; ?></p>
-					<?php endif; ?>
+					<?php if( 'content' === $settings['eael_infobox_text_type'] ) : ?>
+						<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
+							<p><?php echo $settings['eael_infobox_text']; ?></p>
+						<?php endif; ?>
+					<?php elseif( 'template' === $settings['eael_infobox_text_type'] ) :
+						if ( !empty( $settings['eael_primary_templates'] ) ) {
+                            $pp_template_id = $settings['eael_primary_templates'];
+                            $pp_frontend = new Frontend;
+
+                            echo $pp_frontend->get_builder_content( $pp_template_id, true );
+                        }
+					endif; ?>
 				<?php endif; ?>
 			</div>
 			<?php if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?></a><?php endif; ?>
@@ -655,9 +697,18 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			<div class="infobox-content <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
-					<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
-					<p><?php echo $settings['eael_infobox_text']; ?></p>
-					<?php endif; ?>
+					<?php if( 'content' === $settings['eael_infobox_text_type'] ) : ?>
+						<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
+							<p><?php echo $settings['eael_infobox_text']; ?></p>
+						<?php endif; ?>
+					<?php elseif( 'template' === $settings['eael_infobox_text_type'] ) :
+						if ( !empty( $settings['eael_primary_templates'] ) ) {
+                            $pp_template_id = $settings['eael_primary_templates'];
+                            $pp_frontend = new Frontend;
+
+                            echo $pp_frontend->get_builder_content( $pp_template_id, true );
+                        }
+					endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -681,9 +732,18 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			<div class="infobox-content <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
 				<h4 class="title"><?php echo $settings['eael_infobox_title']; ?></h4>
 				<?php if( 'yes' == $settings['eael_show_infobox_content'] ) : ?>
-					<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
-					<p><?php echo $settings['eael_infobox_text']; ?></p>
-					<?php endif; ?>
+					<?php if( 'content' === $settings['eael_infobox_text_type'] ) : ?>
+						<?php if ( ! empty( $settings['eael_infobox_text'] ) ) : ?>
+							<p><?php echo $settings['eael_infobox_text']; ?></p>
+						<?php endif; ?>
+					<?php elseif( 'template' === $settings['eael_infobox_text_type'] ) :
+						if ( !empty( $settings['eael_primary_templates'] ) ) {
+                            $pp_template_id = $settings['eael_primary_templates'];
+                            $pp_frontend = new Frontend;
+
+                            echo $pp_frontend->get_builder_content( $pp_template_id, true );
+                        }
+					endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>

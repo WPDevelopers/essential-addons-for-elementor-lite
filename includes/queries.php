@@ -310,3 +310,22 @@ function eael_select_caldera_form() {
     return $options;
 }
 
+
+// Get all elementor page templates
+if ( !function_exists('eael_get_page_templates') ) {
+    function eael_get_page_templates(){
+        $page_templates = get_posts( array(
+            'post_type'         => 'elementor_library',
+            'posts_per_page'    => -1
+        ));
+
+        $options = array();
+
+        if ( ! empty( $page_templates ) && ! is_wp_error( $page_templates ) ){
+            foreach ( $page_templates as $post ) {
+                $options[ $post->ID ] = $post->post_title;
+            }
+        }
+        return $options;
+    }
+}
