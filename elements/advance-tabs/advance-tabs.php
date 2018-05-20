@@ -95,13 +95,34 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'name' => 'eael_adv_tabs_tab_title',
 						'label' => esc_html__( 'Tab Title', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::TEXT,
-						'default' => esc_html__( 'Tab Title', 'essential-addons-elementor' )
+						'default' => esc_html__( 'Tab Title', 'essential-addons-elementor' ),
+						'dynamic' => [ 'active' => true ]
 					],
+					[
+		                'name'					=> 'eael_adv_tabs_text_type',
+		                'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+		                'type'                  => Controls_Manager::SELECT,
+		                'options'               => [
+		                    'content'       => __( 'Content', 'essential-addons-elementor' ),
+		                    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+		                ],
+		                'default'               => 'content',
+		            ],
+		            [
+		                'name'					=> 'eael_primary_templates',
+		                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+		                'type'                  => Controls_Manager::SELECT,
+		                'options'               => eael_get_page_templates(),
+						'condition'             => [
+							'eael_adv_tabs_text_type'      => 'template',
+						],
+		            ],
 				  	[
 						'name' => 'eael_adv_tabs_tab_content',
 						'label' => esc_html__( 'Tab Content', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::WYSIWYG,
-						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' )
+						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' ),
+						'dynamic' => [ 'active' => true ]
 					],
 				],
 				'title_field' => '{{eael_adv_tabs_tab_title}}',
@@ -602,7 +623,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 
 	protected function render() {
 
-   		$settings = $this->get_settings();
+   		$settings = $this->get_settings_for_display();
    		$eael_find_default_tab = array();
    		$eael_adv_tab_id = 1;
    		$eael_adv_tab_content_id = 1;
@@ -616,7 +637,17 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		<div class="eael-tab-contents">
 			<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];?>
 			<div class="eael-tab-content clearfix <?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>" id="eael-adv-tab-<?php echo esc_attr($eael_adv_tab_content_id); ?>">
-				<?php echo do_shortcode( $tab['eael_adv_tabs_tab_content'] ); ?>
+				<?php if( 'content' == $tab['eael_adv_tabs_text_type'] ) : ?>
+					<?php echo do_shortcode( $tab['eael_adv_tabs_tab_content'] ); ?>
+				<?php elseif( 'template' == $tab['eael_adv_tabs_text_type'] ) : ?>
+					<?php
+						if ( !empty( $tab['eael_primary_templates'] ) ) {
+							$eael_template_id = $tab['eael_primary_templates'];
+							$eael_frontend = new Frontend;
+							echo $eael_frontend->get_builder_content( $eael_template_id, true );
+						}
+					?>
+				<?php endif; ?>
 			</div>
 			<?php $eael_adv_tab_content_id++; endforeach;?>
 		</div>
