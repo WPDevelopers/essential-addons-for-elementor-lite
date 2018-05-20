@@ -156,7 +156,10 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 						'label' => esc_html__( 'Tab Content', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::WYSIWYG,
 						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' ),
-						'dynamic' => [ 'active' => true ]
+						'dynamic' => [ 'active' => true ],
+						'condition'             => [
+							'eael_adv_accordion_text_type'      => 'content',
+						],
 					],
 				],
 				'title_field' => '{{eael_adv_accordion_tab_title}}',
