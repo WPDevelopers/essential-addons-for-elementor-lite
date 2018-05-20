@@ -668,10 +668,10 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						<?php endif; ?>
 					<?php elseif( 'template' === $settings['eael_infobox_text_type'] ) :
 						if ( !empty( $settings['eael_primary_templates'] ) ) {
-                            $pp_template_id = $settings['eael_primary_templates'];
-                            $pp_frontend = new Frontend;
+                            $eael_template_id = $settings['eael_primary_templates'];
+                            $eael_frontend = new Frontend;
 
-                            echo $pp_frontend->get_builder_content( $pp_template_id, true );
+                            echo $eael_frontend->get_builder_content( $eael_template_id, true );
                         }
 					endif; ?>
 				<?php endif; ?>
@@ -703,10 +703,10 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						<?php endif; ?>
 					<?php elseif( 'template' === $settings['eael_infobox_text_type'] ) :
 						if ( !empty( $settings['eael_primary_templates'] ) ) {
-                            $pp_template_id = $settings['eael_primary_templates'];
-                            $pp_frontend = new Frontend;
+                            $eael_template_id = $settings['eael_primary_templates'];
+                            $eael_frontend = new Frontend;
 
-                            echo $pp_frontend->get_builder_content( $pp_template_id, true );
+                            echo $eael_frontend->get_builder_content( $eael_template_id, true );
                         }
 					endif; ?>
 				<?php endif; ?>
@@ -738,10 +738,10 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						<?php endif; ?>
 					<?php elseif( 'template' === $settings['eael_infobox_text_type'] ) :
 						if ( !empty( $settings['eael_primary_templates'] ) ) {
-                            $pp_template_id = $settings['eael_primary_templates'];
-                            $pp_frontend = new Frontend;
+                            $eael_template_id = $settings['eael_primary_templates'];
+                            $eael_frontend = new Frontend;
 
-                            echo $pp_frontend->get_builder_content( $pp_template_id, true );
+                            echo $eael_frontend->get_builder_content( $eael_template_id, true );
                         }
 					endif; ?>
 				<?php endif; ?>

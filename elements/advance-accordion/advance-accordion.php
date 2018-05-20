@@ -129,13 +129,34 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 						'name' => 'eael_adv_accordion_tab_title',
 						'label' => esc_html__( 'Tab Title', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::TEXT,
-						'default' => esc_html__( 'Tab Title', 'essential-addons-elementor' )
+						'default' => esc_html__( 'Tab Title', 'essential-addons-elementor' ),
+						'dynamic' => [ 'active' => true ]
 					],
+		            [
+		                'name'					=> 'eael_adv_accordion_text_type',
+		                'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+		                'type'                  => Controls_Manager::SELECT,
+		                'options'               => [
+		                    'content'       => __( 'Content', 'essential-addons-elementor' ),
+		                    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+		                ],
+		                'default'               => 'content',
+		            ],
+		            [
+		                'name'					=> 'eael_primary_templates',
+		                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+		                'type'                  => Controls_Manager::SELECT,
+		                'options'               => eael_get_page_templates(),
+						'condition'             => [
+							'eael_adv_accordion_text_type'      => 'template',
+						],
+		            ],
 				  	[
 						'name' => 'eael_adv_accordion_tab_content',
-						'label' => esc_html__( 'Tab Title', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Tab Content', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::WYSIWYG,
-						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' )
+						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' ),
+						'dynamic' => [ 'active' => true ]
 					],
 				],
 				'title_field' => '{{eael_adv_accordion_tab_title}}',
@@ -642,7 +663,7 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 
 	protected function render() {
 
-   		$settings = $this->get_settings();
+   		$settings = $this->get_settings_for_display();
 	?>
 	<div class="eael-adv-accordion" id="eael-adv-accordion-<?php echo esc_attr( $this->get_id() ); ?>">
 		<?php foreach( $settings['eael_adv_accordion_tab'] as $tab ) : ?>
@@ -651,7 +672,15 @@ class Widget_Eael_Adv_Accordion extends Widget_Base {
 				<span><?php if( $tab['eael_adv_accordion_tab_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $tab['eael_adv_accordion_tab_title_icon'] ); ?> fa-accordion-icon"></i><?php endif; ?>  <?php echo $tab['eael_adv_accordion_tab_title']; ?></span> <?php if( $settings['eael_adv_accordion_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $settings['eael_adv_accordion_icon'] ); ?> fa-toggle"></i> <?php endif; ?>
 			</div>
 			<div class="eael-accordion-content clearfix<?php if( $tab['eael_adv_accordion_tab_default_active'] == 'yes' ) : echo ' active-default'; endif; ?>">
-				<p><?php echo do_shortcode($tab['eael_adv_accordion_tab_content']); ?></p>
+				<?php if( 'content' == $tab['eael_adv_accordion_text_type'] ) : ?>
+					<p><?php echo do_shortcode($tab['eael_adv_accordion_tab_content']); ?></p>
+				<?php elseif( 'template' == $tab['eael_adv_accordion_text_type'] ) :
+					if ( !empty( $tab['eael_primary_templates'] ) ) {
+						$eael_template_id = $tab['eael_primary_templates'];
+						$eael_frontend = new Frontend;
+						echo $eael_frontend->get_builder_content( $eael_template_id, true );
+					}
+				endif; ?>
 			</div>
 		</div>
 		<?php endforeach; ?>
