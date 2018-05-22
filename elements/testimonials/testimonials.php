@@ -21,11 +21,11 @@ class Widget_Eael_Testimonial extends Widget_Base {
    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-	
-	
+
+
 	protected function _register_controls() {
 
-		
+
   		$this->start_controls_section(
   			'eael_section_testimonial_image',
   			[
@@ -40,7 +40,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
-		);		
+		);
 
 		$this->add_control(
 			'eael_testimonial_image',
@@ -88,7 +88,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'default' => esc_html__( 'John Doe', 'essential-addons-elementor' ),
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_testimonial_company_title',
 			[
@@ -97,16 +97,16 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'default' => esc_html__( 'Codetic', 'essential-addons-elementor' ),
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_testimonial_description',
 			[
 				'label' => esc_html__( 'Testimonial Description', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'default' => esc_html__( 'Add testimonial description here. Edit and place your own text.', 'essential-addons-elementor' ),
 			]
 		);
-		
+
 
 		$this->end_controls_section();
 
@@ -131,10 +131,10 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'default' => '1',
                 'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
             ]
-        );	
+        );
 
         $this->end_controls_section();
-		
+
 		$this->start_controls_section(
 			'eael_section_testimonial_styles_general',
 			[
@@ -224,17 +224,17 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->end_controls_section();
-		
-		
+
+
 		$this->start_controls_section(
 			'eael_section_testimonial_image_styles',
 			[
 				'label' => esc_html__( 'Testimonial Image Style', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
-		);		
+		);
 
 		$this->add_responsive_control(
 			'eael_testimonial_image_width',
@@ -352,7 +352,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -381,7 +381,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -409,7 +409,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -437,7 +437,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -454,10 +454,10 @@ class Widget_Eael_Testimonial extends Widget_Base {
 
 
 	protected function render( ) {
-		
+
       $settings = $this->get_settings();
       $testimonial_image = $this->get_settings( 'eael_testimonial_image' );
-	  $testimonial_image_url = Group_Control_Image_Size::get_attachment_image_src( $testimonial_image['id'], 'thumbnail', $settings );	
+	  $testimonial_image_url = Group_Control_Image_Size::get_attachment_image_src( $testimonial_image['id'], 'thumbnail', $settings );
 	  $testimonial_classes = $this->get_settings('eael_testimonial_image_rounded') . " " . $this->get_settings('eael_testimonial_alignment');
 
 
@@ -481,16 +481,16 @@ class Widget_Eael_Testimonial extends Widget_Base {
 	</div>
 </div>
 
-	
+
 	<?php
-	
+
 	}
 
 	protected function content_template() {
-		
+
 		?>
-		
-	
+
+
 		<?php
 	}
 }

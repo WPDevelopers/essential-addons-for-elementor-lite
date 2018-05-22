@@ -33,28 +33,18 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
       );
 
       $this->add_control(
-        'eael_img_accordion_type',
-          [
-          'label'         => esc_html__( 'Accordion Style', 'essential-addons-elementor' ),
-            'type'      => Controls_Manager::SELECT,
-            'default'     => 'on-hover',
-            'label_block'   => false,
-            'options'     => [
-              'on-hover'   => esc_html__( 'On Hover', 'essential-addons-elementor' ),
-              'on-click'   => esc_html__( 'On Click', 'essential-addons-elementor' ),
-            ],
-          ]
-      );
-      $this->add_control(
-        'eael_img_accordion_type_pro_alert',
+      'eael_img_accordion_type',
         [
-          'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
-          'type' => Controls_Manager::HEADING,
-          'condition' => [
-            'eael_img_accordion_type' => 'on-click',
-          ]
+        'label'         => esc_html__( 'Accordion Style', 'essential-addons-elementor' ),
+          'type'      => Controls_Manager::SELECT,
+          'default'     => 'on-hover',
+          'label_block'   => false,
+          'options'     => [
+            'on-hover'   => esc_html__( 'On Hover', 'essential-addons-elementor' ),
+            'on-click'   => esc_html__( 'On Click', 'essential-addons-elementor' ),
+          ],
         ]
-      );
+    );
 
       $this->add_control(
         'eael_img_accordions',
@@ -82,12 +72,13 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
               'label' => esc_html__( 'Title', 'essential-addons-elementor' ),
               'type' => Controls_Manager::TEXT,
               'label_block' => true,
-              'default' => esc_html__( 'Accordion item title', 'essential-addons-elementor' )
+              'default' => esc_html__( 'Accordion item title', 'essential-addons-elementor' ),
+              'dynamic' => [ 'active' => true ]
             ],
             [
               'name' => 'eael_accordion_content',
               'label' => esc_html__( 'Content', 'essential-addons-elementor' ),
-              'type' => Controls_Manager::TEXTAREA,
+              'type' => Controls_Manager::WYSIWYG,
               'label_block' => true,
               'default' => esc_html__( 'Accordion content goes here!', 'essential-addons-elementor' )
             ],
@@ -108,6 +99,32 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
       );
 
       $this->end_controls_section();
+
+      /**
+       * Go Premium For More Features
+       */
+      $this->start_controls_section(
+      'eael_section_pro',
+      [
+        'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+      ]
+    );
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+          '1' => [
+            'title' => __( '', 'essential-addons-elementor' ),
+            'icon' => 'fa fa-unlock-alt',
+          ],
+        ],
+        'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+            ]
+        );
+        $this->end_controls_section();
 
       /**
        * -------------------------------------------
@@ -306,37 +323,12 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
 
       $this->end_controls_section();
 
-      $this->start_controls_section(
-        'eael_section_pro',
-          [
-            'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-          ]
-        );
-
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-          '1' => [
-            'title' => __( '', 'essential-addons-elementor' ),
-            'icon' => 'fa fa-unlock-alt',
-          ],
-        ],
-        'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
-
-      $this->end_controls_section();
-
   }
 
 
   protected function render( ) {
 
-      $settings = $this->get_settings();
+      $settings = $this->get_settings_for_display();
 
       if( !empty($settings['eael_img_accordions']) ) :
       ?>
@@ -356,6 +348,7 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
           </a>
         <?php endforeach; ?>
       </div>
+        <?php if( 'on-hover' === $settings['eael_img_accordion_type'] ) : ?>
         <style>
           #eael-img-accordion-<?php echo $this->get_id(); ?> a:hover {
             flex: 3;
@@ -367,6 +360,24 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
             transition: all .3s .3s;
           }
         </style>
+        <?php endif; ?>
+        <?php if( 'on-click' === $settings['eael_img_accordion_type'] ) : ?>
+        <script>
+          jQuery(document).ready(function($) {
+            $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').on('click', function(e) {
+              e.preventDefault();
+              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').css('flex', '1');
+              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').find('.overlay-inner').removeClass('overlay-inner-show');
+              $(this).find('.overlay-inner').addClass('overlay-inner-show');
+              $(this).css('flex', '3');
+            });
+            $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').on('blur', function(e) {
+              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').css('flex', '1');
+              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').find('.overlay-inner').removeClass('overlay-inner-show');
+            });
+          });
+        </script>
+        <?php endif; ?>
       <?php endif; ?>
       <?php
 

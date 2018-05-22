@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
@@ -20,7 +20,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-	
+
 	protected function _register_controls() {
 
   		/**
@@ -142,7 +142,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 		/**
 		 * Flipbox Content
 		 */
-		$this->start_controls_section( 
+		$this->start_controls_section(
 			'eael_flipbox_content',
 			[
 				'label' => esc_html__( 'Flipbox Content', 'essential-addons-elementor' ),
@@ -170,7 +170,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 		/**
 		 * Condition: 'eael_flipbox_front_or_back_content' => 'front'
 		 */
-		$this->add_control( 
+		$this->add_control(
 			'eael_flipbox_front_title',
 			[
 				'label' => esc_html__( 'Front Title', 'essential-addons-elementor' ),
@@ -182,13 +182,13 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				]
 			]
 		);
-		$this->add_control( 
+		$this->add_control(
 			'eael_flipbox_front_text',
 			[
 				'label' => esc_html__( 'Front Text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				'default' => esc_html__( 'This is front-end content.', 'essential-addons-elementor' ),
+				'default' => __( 'This is front-end content.', 'essential-addons-elementor' ),
 				'condition' => [
 					'eael_flipbox_front_or_back_content' => 'front'
 				]
@@ -197,7 +197,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 		/**
 		 * Condition: 'eael_flipbox_front_or_back_content' => 'back'
 		 */
-		$this->add_control( 
+		$this->add_control(
 			'eael_flipbox_back_title',
 			[
 				'label' => esc_html__( 'Back Title', 'essential-addons-elementor' ),
@@ -209,13 +209,13 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				]
 			]
 		);
-		$this->add_control( 
+		$this->add_control(
 			'eael_flipbox_back_text',
 			[
 				'label' => esc_html__( 'Back Text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				'default' => esc_html__( 'This is back-end content.', 'essential-addons-elementor' ),
+				'default' => __( 'This is back-end content.', 'essential-addons-elementor' ),
 				'condition' => [
 					'eael_flipbox_front_or_back_content' => 'back'
 				]
@@ -246,14 +246,15 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 			]
 		);
 		$this->end_controls_section();
-
-		$this->start_controls_section(
+		/**
+  		 * Go Premium For More Features
+  		 */
+  		$this->start_controls_section(
 			'eael_section_pro',
 			[
 				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-
         $this->add_control(
             'eael_control_get_pro',
             [
@@ -269,9 +270,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
                 'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
             ]
         );
-
         $this->end_controls_section();
-
 		/**
 		 * -------------------------------------------
 		 * Tab Style (Flipbox Style)
@@ -387,7 +386,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_flipbox_image_style_settings',
+			'eael_section_flipbox_imgae_style_settings',
 			[
 				'label' => esc_html__( 'Image Style', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
@@ -541,7 +540,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				'default' => 'front',
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_flipbox_front_title_heading',
 			[
@@ -688,21 +687,21 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				]
 			]
 		);
-		
+
 		$this->end_controls_section();
 
 	}
 
 
 	protected function render( ) {
-		
+
    		$settings = $this->get_settings();
       	$flipbox_image = $this->get_settings( 'eael_flipbox_image' );
 	  	$flipbox_image_url = Group_Control_Image_Size::get_attachment_image_src( $flipbox_image['id'], 'thumbnail', $settings );
 	  	if( empty( $flipbox_image_url ) ) : $flipbox_image_url = $flipbox_image['url']; else: $flipbox_image_url = $flipbox_image_url; endif;
 
 	?>
-	
+
 	<div class="eael-elements-progression-flip-box-container eael-animate-flip eael-<?php echo esc_attr( $settings['eael_flipbox_type'] ); ?>">
 	    <div class="eael-elements-flip-box-flip-card">
 	        <div class="eael-elements-flip-box-front-container">
@@ -743,10 +742,10 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 	}
 
 	protected function content_template() {
-		
+
 		?>
-		
-	
+
+
 		<?php
 	}
 }
