@@ -1661,20 +1661,29 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   opacity: 0;
 }
 
-.button--loading {
-  padding-left: 50px!important;
+.eael-load-more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .eael-load-more-button .button__loader {
-  float: left;
-  position: absolute;
-  left: -50px;
-  top: 10px;
+  left: -100%;
+  top: auto;
+  margin-right: 5px;
   transition: all .2s;
- }
+}
 
-.button--loading .button__loader {
-  left: 15px;
+.eael-load-more-button > span {
+  margin-left: -20px;
+}
+
+.eael-load-more-button.button--loading > span {
+  margin-left: 0;
+}
+
+.eael-load-more-button.button--loading .button__loader {
+  left: 0;
 }
 
 .eael-btn-loader, .eael-btn-loader:after {

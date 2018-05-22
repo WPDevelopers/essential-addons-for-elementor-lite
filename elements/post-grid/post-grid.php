@@ -681,7 +681,14 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 					],
 				]
 			);
-
+			$this->add_group_control(
+				Group_Control_Box_Shadow::get_type(),
+				[
+					'name' => 'eael_post_grid_load_more_btn_shadow',
+					'selector' => '{{WRAPPER}} .eael-load-more-button',
+					'separator' => 'before'
+				]
+			);
 			$this->end_controls_tab();
 
 			// Hover State Tab
@@ -723,68 +730,17 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				]
 
 			);
-
+			$this->add_group_control(
+				Group_Control_Box_Shadow::get_type(),
+				[
+					'name' => 'eael_post_grid_load_more_btn_hover_shadow',
+					'selector' => '{{WRAPPER}} .eael-load-more-button:hover',
+					'separator' => 'before'
+				]
+			);
 			$this->end_controls_tab();
 
 		$this->end_controls_tabs();
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'eael_post_grid_load_more_btn_shadow',
-				'selector' => '{{WRAPPER}} .eael-load-more-button',
-				'separator' => 'before'
-			]
-		);
-
-		$this->add_control(
-			'eael_post_grid_load_more_loader_pos_title',
-			[
-				'label' => esc_html__( 'Loader Position', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
-
-		$this->add_control(
-			'eael_post_grid_loader_pos_left',
-			[
-				'label' => esc_html__( 'From Left', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 15
-				],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-load-more-button.button--loading .button__loader' => 'left: {{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_post_grid_loader_pos_top',
-			[
-				'label' => esc_html__( 'From Top', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 15
-				],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-load-more-button.button--loading .button__loader' => 'top: {{SIZE}}px;',
-				],
-			]
-		);
 
 		$this->end_controls_section();
 
