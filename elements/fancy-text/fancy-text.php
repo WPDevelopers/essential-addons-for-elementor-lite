@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 
 class Widget_Eael_Fancy_Text extends Widget_Base {
-	
+
 
 	public function get_name() {
 		return 'eael-fancy-text';
@@ -35,14 +35,15 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
   			]
   		);
 
-		
+
 		$this->add_control(
 			'eael_fancy_text_prefix',
-			[	
+			[
 				'label' => esc_html__( 'Prefix Text', 'essential-addons-elementor' ),
 				'placeholder' => esc_html__( 'Place your prefix text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'default' => esc_html__( 'This is the ', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
 			]
 		);
 
@@ -68,6 +69,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 						'label' => esc_html__( 'Fancy String', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::TEXT,
 						'label_block' => true,
+						'dynamic' => [ 'active' => true ]
 					],
 				],
 				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
@@ -80,15 +82,16 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 			[
 				'label' => esc_html__( 'Suffix Text', 'essential-addons-elementor' ),
 				'placeholder' => esc_html__( 'Place your suffix text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'default' => esc_html__( ' of the sentence.', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
 			]
 		);
-		
-		
+
+
 
 		$this->end_controls_section();
-		
+
 		// Settings Control
   		$this->start_controls_section(
   			'eael_fancy_text_settings',
@@ -146,7 +149,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_transition_type',
 			[
@@ -166,7 +169,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 
 		$this->add_control(
 			'eael_fancy_text_speed',
@@ -179,7 +182,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_delay',
 			[
@@ -188,7 +191,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'default' => '2500'
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_loop',
 			[
@@ -201,7 +204,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_cursor',
 			[
@@ -214,10 +217,10 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
-		
+
+
 		$this->end_controls_section();
-		
+
         $this->start_controls_section(
 			'eael_section_pro',
 			[
@@ -242,7 +245,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
         );
 
         $this->end_controls_section();
-		
+
 		$this->start_controls_section(
 			'eael_fancy_text_prefix_styles',
 			[
@@ -250,7 +253,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_prefix_color',
 			[
@@ -270,12 +273,12 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-fancy-text-prefix',
 			]
 		);
-		
-		
+
+
 		$this->end_controls_section();
-		
-		
-		
+
+
+
 		$this->start_controls_section(
 			'eael_fancy_text_strings_styles',
 			[
@@ -283,7 +286,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_strings_color',
 			[
@@ -303,7 +306,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-fancy-text-strings, {{WRAPPER}} .typed-cursor',
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_strings_background_color',
 			[
@@ -315,7 +318,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_cursor_color',
 			[
@@ -329,7 +332,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_responsive_control(
 			'eael_fancy_text_strings_padding',
 			[
@@ -341,7 +344,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
+
 		$this->add_responsive_control(
 			'eael_fancy_text_strings_margin',
 			[
@@ -354,7 +357,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 			]
 		);
 
-		
+
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
@@ -363,8 +366,8 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-fancy-text-strings',
 			]
 		);
-		
-		
+
+
 		$this->add_control(
 			'eael_fancy_text_strings_border_radius',
 			[
@@ -381,12 +384,12 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				],
 			]
 		);
-		
-		
+
+
 		$this->end_controls_section();
-		
-		
-		
+
+
+
 		$this->start_controls_section(
 			'eael_fancy_text_suffix_styles',
 			[
@@ -394,7 +397,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_fancy_text_suffix_color',
 			[
@@ -414,44 +417,44 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-fancy-text-suffix',
 			]
 		);
-		
-		
+
+
 		$this->end_controls_section();
-		
+
 	}
 
 
 	protected function render( ) {
-		
-		
-      $settings = $this->get_settings();
-		
+
+
+      $settings = $this->get_settings_for_display();
+
       if( 'style-1' === $settings['eael_fancy_text_style'] || 'style-2' === $settings['eael_fancy_text_style'] ) {
       	$eael_fancy_text_style = 'style-1';
       }
 	?>
 
-	<div class="eael-fancy-text-container <?php echo esc_attr( $eael_fancy_text_style ); ?>">			
+	<div class="eael-fancy-text-container <?php echo esc_attr( $eael_fancy_text_style ); ?>">
 			<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?><span class="eael-fancy-text-prefix"><?php echo wp_kses(($settings['eael_fancy_text_prefix'] ), true ); ?> </span><?php endif; ?>
-			
+
 			<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
 			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"></span>
 			<?php endif; ?>
-			
+
 			<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
-			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"><?php 
+			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"><?php
 				$eael_fancy_text_strings_list = "";
 				foreach ( $settings['eael_fancy_text_strings'] as $item ) {
-				           $eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', '; 
+				           $eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
 				}
 				echo rtrim($eael_fancy_text_strings_list, ", "); ?></span>
 			<?php endif; ?>
-			
+
 			<?php if ( ! empty( $settings['eael_fancy_text_suffix'] ) ) : ?><span class="eael-fancy-text-suffix"> <?php echo wp_kses(($settings['eael_fancy_text_suffix'] ), true ); ?> </span><?php endif; ?>
 	</div><!-- close .eael-fancy-text-container -->
-	
+
 	<div class="clearfix"></div>
-	
+
 	<?php if ( $settings['eael_fancy_text_transition_type']  == 'typing' ) : ?>
 	<script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -468,7 +471,7 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 	});
 	</script>
 	<?php endif; ?>
-	
+
 	<?php if ( $settings['eael_fancy_text_transition_type']  != 'typing' ) : ?>
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
@@ -484,16 +487,16 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 		});
 		</script>
 	<?php endif; ?>
-	
+
 	<?php
-	
+
 	}
 
 	protected function content_template() {
-		
+
 		?>
-		
-	
+
+
 		<?php
 	}
 }

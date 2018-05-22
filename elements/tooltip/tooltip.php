@@ -62,12 +62,13 @@ class Widget_Eael_Tooltip extends Widget_Base {
 			'eael_tooltip_content',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
 				'default' => esc_html__( 'Hover Me!', 'essential-addons-elementor' ),
 				'condition' => [
 					'eael_tooltip_type' => [ 'text' ]
-				]
+				],
+				'dynamic' => [ 'active' => true ]
 			]
 		);
 		$this->add_control(
@@ -200,9 +201,10 @@ class Widget_Eael_Tooltip extends Widget_Base {
 			'eael_tooltip_hover_content',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
 				'default' => esc_html__( 'Tooltip content', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
 			]
 		);
 		$this->add_control(
@@ -236,31 +238,6 @@ class Widget_Eael_Tooltip extends Widget_Base {
 			]
 		);
   		$this->end_controls_section();
-  		/**
-  		 * Go Premium For More Features
-  		 */
-  		$this->start_controls_section(
-			'eael_section_pro',
-			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-			]
-		);
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
-					],
-				],
-				'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
-        $this->end_controls_section();
 
   		/**
 		 * -------------------------------------------
@@ -425,6 +402,31 @@ class Widget_Eael_Tooltip extends Widget_Base {
 			]
 		);
 		$this->end_controls_section();
+		/**
+  		 * Go Premium For More Features
+  		 */
+  		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+			]
+		);
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => __( '', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-unlock-alt',
+					],
+				],
+				'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+            ]
+        );
+        $this->end_controls_section();
 
 		/**
 		 * -------------------------------------------
@@ -592,7 +594,7 @@ class Widget_Eael_Tooltip extends Widget_Base {
 
 	protected function render( ) {
 
-   		$settings = $this->get_settings();
+   		$settings = $this->get_settings_for_display();
    		$target = $settings['eael_tooltip_link']['is_external'] ? 'target="_blank"' : '';
 	  	$nofollow = $settings['eael_tooltip_link']['nofollow'] ? 'rel="nofollow"' : '';
 	?>

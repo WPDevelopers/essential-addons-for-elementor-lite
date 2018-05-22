@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
@@ -20,7 +20,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-	
+
 	protected function _register_controls() {
 
   		/**
@@ -99,27 +99,55 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control( 
+		$this->add_control(
 			'eael_cta_title',
 			[
 				'label' => esc_html__( 'Title', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'The Ultimate Addons For Elementor', 'essential-addons-elementor' )
+				'default' => esc_html__( 'The Ultimate Addons For Elementor', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
 			]
 		);
-		$this->add_control( 
+		$this->add_control(
+            'eael_cta_title_content_type',
+            [
+                'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'options'               => [
+                    'content'       => __( 'Content', 'essential-addons-elementor' ),
+                    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+                ],
+                'default'               => 'content',
+            ]
+        );
+
+        $this->add_control(
+            'eael_primary_templates',
+            [
+                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'options'               => eael_get_page_templates(),
+				'condition'             => [
+					'eael_cta_title_content_type'      => 'template',
+				],
+            ]
+        );
+		$this->add_control(
 			'eael_cta_content',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
 				'default' => esc_html__( 'Add a strong one liner supporting the heading above and giving users a reason to click on the button below.', 'essential-addons-elementor' ),
-				'separator' => 'after'
+				'separator' => 'after',
+				'condition' => [
+					'eael_cta_title_content_type' => 'content'
+				]
 			]
 		);
 
-		$this->add_control( 
+		$this->add_control(
 			'eael_cta_btn_text',
 			[
 				'label' => esc_html__( 'Button Text', 'essential-addons-elementor' ),
@@ -129,7 +157,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control( 
+		$this->add_control(
 			'eael_cta_btn_link',
 			[
 				'label' => esc_html__( 'Button Link', 'essential-addons-elementor' ),
@@ -167,13 +195,15 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 
 		$this->end_controls_section();
 
-		$this->start_controls_section(
+		/**
+  		 * Go Premium For More Features
+  		 */
+  		$this->start_controls_section(
 			'eael_section_pro',
 			[
 				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-
         $this->add_control(
             'eael_control_get_pro',
             [
@@ -189,8 +219,7 @@ class Widget_Eael_Cta_Box extends Widget_Base {
                 'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
             ]
         );
-
-		$this->end_controls_section();
+        $this->end_controls_section();
 
 		/**
 		 * -------------------------------------------
@@ -614,8 +643,8 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 
 
 	protected function render( ) {
-		
-   		$settings = $this->get_settings();	
+
+   		$settings = $this->get_settings_for_display();
 	  	$target = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
 	  	$nofollow = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 	  	if( 'cta-bg-color' == $settings['eael_cta_color_type'] ) {
@@ -643,20 +672,40 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	  	}else {
 	  		$cta_btn_effect = '';
 	  	}
-	
+
 	?>
 	<?php if( 'cta-basic' == $settings['eael_cta_type'] ) : ?>
 	<div class="eael-call-to-action <?php echo esc_attr( $cta_class ); ?> <?php echo esc_attr( $cta_alignment ); ?>">
 	    <h2 class="title"><?php echo $settings['eael_cta_title']; ?></h2>
+	    <?php if( 'content' == $settings['eael_cta_title_content_type'] ) : ?>
 	    <p><?php echo $settings['eael_cta_content']; ?></p>
+		<?php elseif( 'template' == $settings['eael_cta_title_content_type'] ) : ?>
+			<?php
+				if ( !empty( $settings['eael_primary_templates'] ) ) {
+                    $eael_template_id = $settings['eael_primary_templates'];
+                    $eael_frontend = new Frontend;
+					echo $eael_frontend->get_builder_content( $eael_template_id, true );
+                }
+			?>
+		<?php endif; ?>
 	    <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
-	</div>		
+	</div>
 	<?php endif; ?>
 	<?php if( 'cta-flex' == $settings['eael_cta_type'] ) : ?>
 	<div class="eael-call-to-action cta-flex <?php echo esc_attr( $cta_class ); ?>">
 	    <div class="content">
 	        <h2 class="title"><?php echo $settings['eael_cta_title']; ?></h2>
-	        <p><?php echo $settings['eael_cta_content']; ?></p>
+	        <?php if( 'content' == $settings['eael_cta_title_content_type'] ) : ?>
+		    <p><?php echo $settings['eael_cta_content']; ?></p>
+			<?php elseif( 'template' == $settings['eael_cta_title_content_type'] ) : ?>
+				<?php
+					if ( !empty( $settings['eael_primary_templates'] ) ) {
+	                    $eael_template_id = $settings['eael_primary_templates'];
+	                    $eael_frontend = new Frontend;
+						echo $eael_frontend->get_builder_content( $eael_template_id, true );
+	                }
+				?>
+			<?php endif; ?>
 	    </div>
 	    <div class="action">
 	        <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
@@ -670,7 +719,17 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	    </div>
 	    <div class="content">
 	        <h2 class="title"><?php echo $settings['eael_cta_title']; ?></h2>
-	        <p><?php echo $settings['eael_cta_content']; ?></p>
+	        <?php if( 'content' == $settings['eael_cta_title_content_type'] ) : ?>
+		    <p><?php echo $settings['eael_cta_content']; ?></p>
+			<?php elseif( 'template' == $settings['eael_cta_title_content_type'] ) : ?>
+				<?php
+					if ( !empty( $settings['eael_primary_templates'] ) ) {
+	                    $eael_template_id = $settings['eael_primary_templates'];
+	                    $eael_frontend = new Frontend;
+						echo $eael_frontend->get_builder_content( $eael_template_id, true );
+	                }
+				?>
+			<?php endif; ?>
 	    </div>
 	    <div class="action">
 	       <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
@@ -681,10 +740,10 @@ class Widget_Eael_Cta_Box extends Widget_Base {
 	}
 
 	protected function content_template() {
-		
+
 		?>
-		
-	
+
+
 		<?php
 	}
 }
