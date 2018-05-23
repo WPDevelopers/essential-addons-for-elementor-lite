@@ -20,7 +20,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-	
+
 	protected function _register_controls() {
 
   		/**
@@ -49,21 +49,6 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 		  	]
 		);
 
-		// $this->add_control(
-		//   'eael_dch_color_type',
-		//   	[
-		//    	'label'       	=> esc_html__( 'Color Style', 'essential-addons-elementor' ),
-		//      	'type' 			=> Controls_Manager::SELECT,
-		//      	'default' 		=> 'dch-colored',
-		//      	'label_block' 	=> false,
-		//      	'options' 		=> [
-		//      		'dch-basic'  					=> esc_html__( 'Basic', 'essential-addons-elementor' ),
-		//      		'dch-colored'  				=> esc_html__( 'Colored', 'essential-addons-elementor' ),
-		//      		'dch-colored-reverse'  		=> esc_html__( 'Reverse Color', 'essential-addons-elementor' ),
-		//      	],
-		//   	]
-		// );
-
 		$this->add_control(
 			'eael_show_dch_icon_content',
 			[
@@ -91,31 +76,33 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 			]
 		);
 
-		$this->add_control( 
+		$this->add_control(
 			'eael_dch_first_title',
 			[
 				'label' => esc_html__( 'Title ( First Part )', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'Dual Heading', 'essential-addons-elementor' )
+				'default' => esc_html__( 'Dual Heading', 'essential-addons-elementor' ),
+				'dynamic' => [ 'action' => true ]
 			]
 		);
 
-		$this->add_control( 
+		$this->add_control(
 			'eael_dch_last_title',
 			[
 				'label' => esc_html__( 'Title ( Last Part )', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'Example', 'essential-addons-elementor' )
+				'default' => esc_html__( 'Example', 'essential-addons-elementor' ),
+				'dynamic' => [ 'action' => true ]
 			]
 		);
 
-		$this->add_control( 
+		$this->add_control(
 			'eael_dch_subtext',
 			[
 				'label' => esc_html__( 'Sub Text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXTAREA,
+				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
 				'default' => esc_html__( 'Insert a meaningful line to evaluate the headline.', 'essential-addons-elementor' )
 			]
@@ -395,14 +382,14 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 	}
 
 	protected function render( ) {
-		
-   	$settings = $this->get_settings();
+
+   	$settings = $this->get_settings_for_display();
 
 	?>
 	<?php if( 'dch-default' == $settings['eael_dch_type'] ) : ?>
 	<div class="eael-dual-header">
 		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
-	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
+	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	   <?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 		<?php endif; ?>
@@ -415,7 +402,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 		<?php endif; ?>
 		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
-	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
+	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	</div>
 	<?php endif; ?>
 
@@ -424,14 +411,14 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 		<?php endif; ?>
-	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
+	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	   <h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 	</div>
 	<?php endif; ?>
 
 	<?php if( 'dch-subtext-on-top' == $settings['eael_dch_type'] ) : ?>
 	<div class="eael-dual-header">
-	   <span class="subtext"><?php esc_html_e( $settings['eael_dch_subtext'], 'essential-addons-elementor' ); ?></span>
+	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 			<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
@@ -444,7 +431,7 @@ class Widget_Eael_Dual_Color_Header extends Widget_Base {
 
 	protected function content_template() {
 		?>
-		
+
 		<?php
 	}
 }
