@@ -86,6 +86,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'label' => esc_html__( 'User Name', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__( 'John Doe', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
 			]
 		);
 
@@ -95,6 +96,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'label' => esc_html__( 'Company Name', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__( 'Codetic', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
 			]
 		);
 
@@ -455,7 +457,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 
 	protected function render( ) {
 
-      $settings = $this->get_settings();
+      $settings = $this->get_settings_for_display();
       $testimonial_image = $this->get_settings( 'eael_testimonial_image' );
 	  $testimonial_image_url = Group_Control_Image_Size::get_attachment_image_src( $testimonial_image['id'], 'thumbnail', $settings );
 	  $testimonial_classes = $this->get_settings('eael_testimonial_image_rounded') . " " . $this->get_settings('eael_testimonial_alignment');

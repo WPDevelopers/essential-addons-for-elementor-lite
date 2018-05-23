@@ -658,6 +658,16 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 	</div>
 	<script>
 		jQuery(document).ready(function($) {
+			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav ul li').each( function(index) {
+				if( index == 0 ) {
+					$(this).removeClass('inactive').addClass('active');
+				}
+			} );
+			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-content div').each( function(index) {
+				if( index == 0 ) {
+					$(this).removeClass('inactive').addClass('active');
+				}
+			} );
 			$('.eael-tabs-nav ul li').click(function(){
 
 			  var currentTabIndex = $(this).index();
@@ -665,11 +675,11 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 			  var tabsNav = $(tabsContainer).children('.eael-tabs-nav').children('ul').children('li');
 			  var tabsContent = $(tabsContainer).children('.eael-tabs-content').children('div');
 
-			  $(tabsNav).removeClass('active');
-			  $(this).addClass('active');
+			  $(tabsNav).removeClass('active').addClass('inactive');
+			  $(this).addClass('active').removeClass('inactive');
 
-			  $(tabsContent).removeClass('active');
-			  $(tabsContent).eq(currentTabIndex).addClass('active');
+			  $(tabsContent).removeClass('active').addClass('inactive');
+			  $(tabsContent).eq(currentTabIndex).addClass('active').removeClass('inactive');
 
 			})
 		});
