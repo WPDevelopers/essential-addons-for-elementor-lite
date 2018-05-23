@@ -45,7 +45,7 @@ class Eael_Admin_Settings {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ) );
+		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ), 600 );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
 
@@ -78,14 +78,13 @@ class Eael_Admin_Settings {
 	 */
 	public function create_eael_admin_menu() {
 
-		add_menu_page(
+		add_submenu_page(
+			'elementor',
 			'Essential Addons Elementor',
 			'Essential Addons Elementor',
 			'manage_options',
 			'eael-settings',
-			array( $this, 'eael_admin_settings_page' ),
-			plugins_url( '/', __FILE__ ).'/assets/images/ea-icon.png',
-			199
+			array( $this, 'eael_admin_settings_page' )
 		);
 
 	}
