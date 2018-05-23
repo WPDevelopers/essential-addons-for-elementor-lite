@@ -157,7 +157,6 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
             ]
         );
         $this->end_controls_section();
-
   		/**
 		 * -------------------------------------------
 		 * Tab Style Advance Tabs Generel Style
@@ -235,7 +234,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
             	'name' => 'eael_adv_tabs_tab_title_typography',
-				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a',
+				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
 			]
 		);
 		$this->add_responsive_control(
@@ -256,7 +255,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					]
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a .fa' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li .fa' => 'font-size: {{SIZE}}{{UNIT}};',
 				]
 			]
 		);
@@ -278,8 +277,8 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					]
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-tab-inline-icon li a .fa' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-tab-top-icon li a .fa' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tab-inline-icon li .fa' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tab-top-icon li .fa' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				]
 			]
 		);
@@ -290,7 +289,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-	 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
 		);
@@ -301,7 +300,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-	 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
 		);
@@ -316,7 +315,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#f1f1f1',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a' => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
 						],
 					]
 				);
@@ -327,7 +326,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
 						],
 					]
 				);
@@ -338,7 +337,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a .fa' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li .fa' => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'eael_adv_tabs_icon_show' => 'yes'
@@ -350,7 +349,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					[
 						'name' => 'eael_adv_tabs_tab_border',
 						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a',
+						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
 					]
 				);
 				$this->add_responsive_control(
@@ -360,7 +359,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em', '%' ],
 						'selectors' => [
-			 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			 			],
 					]
 				);
@@ -374,7 +373,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#f1f1f1',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a:hover' => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
 						],
 					]
 				);
@@ -385,7 +384,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a:hover' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'color: {{VALUE}};',
 						],
 					]
 				);
@@ -396,7 +395,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a:hover .fa' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover .fa' => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'eael_adv_tabs_icon_show' => 'yes'
@@ -408,7 +407,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					[
 						'name' => 'eael_adv_tabs_tab_border_hover',
 						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a:hover',
+						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
 					]
 				);
 				$this->add_responsive_control(
@@ -418,7 +417,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em', '%' ],
 						'selectors' => [
-			 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			 			],
 					]
 				);
@@ -432,7 +431,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#444',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active' => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
 						],
 					]
 				);
@@ -443,7 +442,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'color: {{VALUE}};',
 						],
 					]
 				);
@@ -454,7 +453,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active .fa' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active .fa' => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'eael_adv_tabs_icon_show' => 'yes'
@@ -466,7 +465,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					[
 						'name' => 'eael_adv_tabs_tab_border_active',
 						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active',
+						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
 					]
 				);
 				$this->add_responsive_control(
@@ -476,7 +475,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em', '%' ],
 						'selectors' => [
-			 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			 			],
 					]
 				);
@@ -503,7 +502,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -514,7 +513,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#333',
 				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -522,7 +521,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
             	'name' => 'eael_adv_tabs_content_typography',
-				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content',
+				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
 			]
 		);
 		$this->add_responsive_control(
@@ -532,7 +531,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-	 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
 		);
@@ -543,7 +542,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-	 					'{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
 		);
@@ -552,14 +551,14 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 			[
 				'name' => 'eael_adv_tabs_content_border',
 				'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content',
+				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
 			]
 		);
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'eael_adv_tabs_content_shadow',
-				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tab-contents .eael-tab-content',
+				'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
 				'separator' => 'before'
 			]
 		);
@@ -600,7 +599,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active:after' => 'border-width: {{SIZE}}px; bottom: -{{SIZE}}px',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:after' => 'border-width: {{SIZE}}px; bottom: -{{SIZE}}px',
 				],
 				'condition' => [
 					'eael_adv_tabs_tab_caret_show' => 'yes'
@@ -614,7 +613,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#444',
 				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tab-navs li a.active:after' => 'border-top-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:after' => 'border-top-color: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_adv_tabs_tab_caret_show' => 'yes'
@@ -632,67 +631,52 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
    		$eael_adv_tab_content_id = 1;
 	?>
 	<div class="eael-advance-tabs" id="eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?>">
-		<ul class="eael-tab-navs <?php echo esc_attr( $settings['eael_adv_tab_icon_position'] ); ?>">
-			<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : ?>
-			<li><a hreg="javascript:;" data-eael-tab-id="eael-adv-tab-<?php echo esc_attr($eael_adv_tab_id); ?>" class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>"><?php if( $settings['eael_adv_tabs_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_title_icon'] ); ?>"></i><?php endif; ?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></a></li>
-			<?php $eael_adv_tab_id++; endforeach; ?>
-		</ul>
-		<div class="eael-tab-contents">
-			<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];?>
-			<div class="eael-tab-content clearfix <?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>" id="eael-adv-tab-<?php echo esc_attr($eael_adv_tab_content_id); ?>">
-				<?php if( 'content' == $tab['eael_adv_tabs_text_type'] ) : ?>
-					<?php echo do_shortcode( $tab['eael_adv_tabs_tab_content'] ); ?>
-				<?php elseif( 'template' == $tab['eael_adv_tabs_text_type'] ) : ?>
-					<?php
-						if ( !empty( $tab['eael_primary_templates'] ) ) {
-							$eael_template_id = $tab['eael_primary_templates'];
-							$eael_frontend = new Frontend;
-							echo $eael_frontend->get_builder_content( $eael_template_id, true );
-						}
-					?>
-				<?php endif; ?>
-			</div>
-			<?php $eael_adv_tab_content_id++; endforeach;?>
-		</div>
+  		<div class="eael-tabs-nav">
+    		<ul class="<?php echo esc_attr( $settings['eael_adv_tab_icon_position'] ); ?>">
+	    	<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : ?>
+	      		<li class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>"><?php if( $settings['eael_adv_tabs_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_title_icon'] ); ?>"></i><?php endif; ?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
+	      	<?php endforeach; ?>
+    		</ul>
+  		</div>
+  		<div class="eael-tabs-content">
+  			<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];?>
+    			<div class="clearfix <?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>">
+      				<?php if( 'content' == $tab['eael_adv_tabs_text_type'] ) : ?>
+						<?php echo do_shortcode( $tab['eael_adv_tabs_tab_content'] ); ?>
+					<?php elseif( 'template' == $tab['eael_adv_tabs_text_type'] ) : ?>
+						<?php
+							if ( !empty( $tab['eael_primary_templates'] ) ) {
+								$eael_template_id = $tab['eael_primary_templates'];
+								$eael_frontend = new Frontend;
+								echo $eael_frontend->get_builder_content( $eael_template_id, true );
+							}
+						?>
+					<?php endif; ?>
+    			</div>
+			<?php endforeach; ?>
+  		</div>
 	</div>
 	<script>
 		jQuery(document).ready(function($) {
-			var $eaelTab = $('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?>');
-			var $eaelTabNavLi = $eaelTab.find('.eael-tab-navs li');
-			var $eaelTabNavs = $eaelTab.find('.eael-tab-navs li a');
+			$('.eael-tabs-nav ul li').click(function(){
 
-			var $eaelTabContents = $eaelTab.find('.eael-tab-contents');
-			<?php
-			if( in_array('active', $eael_find_default_tab) ) {
-				// Do nothing
-			}else {
-			?>
-				$eaelTabNavLi.each( function(i) {
-					if( i < 1 ) {
-						$(this).find('a').removeClass('inactive').addClass('active');
-					}
-				} );
-				$eaelTabContents.find('.eael-tab-content').each( function(i) {
-					if( i < 1 ) {
-						$(this).removeClass('inactive').addClass('active');
-					}
-				} );
-			<?php
-			}
-			?>
-			$eaelTabNavs.on('click', function(e) {
-				e.preventDefault();
-				$eaelTabNavs.removeClass('active');
-				var $eaelTabCotnentId = $(this).data('eael-tab-id');
-				$(this).addClass('active');
-				$eaelTabContents.find('.eael-tab-content').removeClass('inactive active');
-				$eaelTabContents.find('#'+$eaelTabCotnentId).addClass('active');
-			});
+			  var currentTabIndex = $(this).index();
+			  var tabsContainer = $(this).closest('.eael-advance-tabs');
+			  var tabsNav = $(tabsContainer).children('.eael-tabs-nav').children('ul').children('li');
+			  var tabsContent = $(tabsContainer).children('.eael-tabs-content').children('div');
+
+			  $(tabsNav).removeClass('active');
+			  $(this).addClass('active');
+
+			  $(tabsContent).removeClass('active');
+			  $(tabsContent).eq(currentTabIndex).addClass('active');
+
+			})
 		});
 	</script>
 	<?php if( $settings['eael_adv_tabs_tab_caret_show'] !== 'yes' ) : ?>
 	<style>
-		#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tab-navs li a.active:after {
+		#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li.active:after {
 			display: none;
 		}
 	</style>
