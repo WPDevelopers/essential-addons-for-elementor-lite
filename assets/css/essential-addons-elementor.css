@@ -4181,9 +4181,7 @@ img.mfp-img {
 .eael-ticker-wrap .eael-typed-strings {
   padding: 0px 0px 0px 15px;
 }
-/**
- * Advance Tabs
- */
+
 /**
  * Advance Tabs
  */
@@ -4201,10 +4199,14 @@ img.mfp-img {
   z-index: 1;
 }
 .eael-advance-tabs .eael-tabs-nav > ul li {
-  position: relative;
-  padding: 1em 1.5em;
-  background: #fff;
-  flex-grow: 1;
+    position: relative;
+    padding: 1em 1.5em;
+    flex: 1 1 auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .eael-advance-tabs .eael-tabs-nav > ul li:after {
   content: "";
@@ -4224,6 +4226,9 @@ img.mfp-img {
 }
 .eael-advance-tabs .eael-tabs-nav > ul li.active:after {
   display: block;
+}
+.eael-tabs-content {
+    display: flex;
 }
 .eael-advance-tabs .eael-tabs-content > div {
   display: none;
@@ -4253,6 +4258,37 @@ img.mfp-img {
 .eael-tab-top-icon li a .eael-tab-title {
   margin-top: 10px;
 }
+
+/* Vertical Tabs */
+
+.eael-advance-tabs.eael-tabs-vertical {
+  display: flex;
+}
+
+.eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul {
+  flex-flow: column wrap;
+}
+.eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul > li {
+  width: 100%;
+}
+
+.eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul li::after {
+  bottom: auto !important;
+  right: -10px;
+  top: calc(50% - 10px) !important;
+  left: auto !important;
+  border-left: 10px solid #444;
+  border-right: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
 /**
  * Advance Accordion
  */

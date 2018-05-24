@@ -80,8 +80,8 @@ class Eael_Admin_Settings {
 
 		add_submenu_page(
 			'elementor',
-			'Essential Addons Elementor',
-			'Essential Addons Elementor',
+			'Essential Addons',
+			'Essential Addons',
 			'manage_options',
 			'eael-settings',
 			array( $this, 'eael_admin_settings_page' )
