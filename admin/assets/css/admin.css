@@ -173,12 +173,12 @@ textarea.eael-form-control {
   animation: switch-off .3s ease-out;
 }
 .eael-checkbox input[type=checkbox]:checked + label:before {
-  background: #70C1B3;
+  background: #7E86F9;
   box-shadow: inset 0px 1px 1px rgba(84, 152, 140, 0.5);
 }
 .eael-checkbox input[type=checkbox]:checked + label:after {
   left: 1.2em;
-  background: #70C1B3;
+  background: #7E86F9;
   animation: switch-on .3s ease-out;
 }
 
