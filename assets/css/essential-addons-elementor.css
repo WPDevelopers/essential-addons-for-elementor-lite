@@ -4234,6 +4234,9 @@ img.mfp-img {
   display: none;
   opacity: 0;
 }
+.eael-tabs-content > div p {
+  margin-top: 0;
+}
 .eael-advance-tabs .eael-tabs-content > div.active {
   display: block;
   padding: 1em;
@@ -4267,8 +4270,6 @@ img.mfp-img {
 
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav {
   flex: 0 0 auto;
-  display: flex;
-  align-items: stretch;
 }
 
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul {
@@ -4289,6 +4290,14 @@ img.mfp-img {
   border-bottom: 10px solid transparent;
 }
 
+@media only screen and (max-width: 767px) {
+.eael-advance-tabs .eael-tabs-nav > ul {
+  flex-wrap: wrap;
+}
+.eael-advance-tabs .eael-tabs-nav > ul li {
+  flex: 1 100%;
+}
+}
 /**
  * Advance Accordion
  */
@@ -4297,7 +4306,6 @@ img.mfp-img {
   height: auto;
   transition: all 0.3s ease-in-out;
 }
-.eael-adv-accordion .eael-accordion-list {}
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header {
   padding: 15px;
   border: 1px solid rgba(0,0,0,0.02);
