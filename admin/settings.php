@@ -443,10 +443,31 @@ class Eael_Admin_Settings {
 									    </p>
 									</div>
 									<div class="eael-checkbox">
-									    <input type="checkbox" id="post-list" name="dynamic-filter-gallery" disabled>
+									    <input type="checkbox" id="post-list" name="post-list" disabled>
 									    <label for="post-list" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 									    <p class="eael-el-title">
 									        <?php _e( 'Smart Post List', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="adv-google-map" name="adv-google-map" disabled>
+									    <label for="adv-google-map" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Advanced Google Map', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="toggle" name="toggle" disabled>
+									    <label for="toggle" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Content Toggle', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="mailchimp" name="mailchimp" disabled>
+									    <label for="mailchimp" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Mailchimp', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
 								</div><!--./checkbox-container-->
@@ -465,9 +486,6 @@ class Eael_Admin_Settings {
 			      				<p>You will also get world class support from our dedicated team, 24/7.</p>
 
 			      				<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
-			      			</div>
-			      			<div class="col-half">
-			      				<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/unlock-gif.gif'; ?>">
 			      			</div>
 			      		</div>
 			    	</div>
