@@ -470,9 +470,11 @@ class Widget_Eael_Testimonial extends Widget_Base {
 
 	<div class="eael-testimonial-image">
 		<span class="eael-testimonial-quote"></span>
-		<figure>
-			<img src="<?php echo esc_url($testimonial_image_url);?>" alt="<?php echo $settings['eael_testimonial_name'];?>">
-		</figure>
+		<?php if( 'yes' == $settings['eael_testimonial_enable_avatar'] ) : ?>
+			<figure>
+				<img src="<?php echo esc_url($testimonial_image_url);?>" alt="<?php echo $settings['eael_testimonial_name'];?>">
+			</figure>
+		<?php endif; ?>
 	</div>
 
 	<div class="eael-testimonial-content">
