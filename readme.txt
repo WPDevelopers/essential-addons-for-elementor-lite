@@ -2,7 +2,7 @@
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.4
+Tested up to: 4.9.6
 Stable tag: 2.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -61,7 +61,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 
 
-### More elements (15+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (17+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
@@ -78,6 +78,8 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/)
 * [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
 * [Smart Post List](https://essential-addons.com/elementor/post-list/)
+* [Mailchimp](https://essential-addons.com/elementor/mailchimp/)
+* [Content Toggle](https://essential-addons.com/elementor/content-toggle/)
 
 More coming soon (weekly update) ...
 

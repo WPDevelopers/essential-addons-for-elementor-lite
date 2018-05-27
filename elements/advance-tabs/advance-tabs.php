@@ -507,8 +507,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					[
 						'name' => 'eael_adv_tabs_tab_border_active',
 						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
-						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default',
+						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active, {{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default',
 					]
 				);
 				$this->add_responsive_control(
@@ -750,7 +749,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 	</script>
 	<?php if( $settings['eael_adv_tabs_tab_caret_show'] !== 'yes' ) : ?>
 	<style>
-		#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li.active:after {
+		#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li.active:after, #eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li.active-default:after {
 			display: none;
 		}
 	</style>
