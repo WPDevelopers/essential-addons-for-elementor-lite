@@ -96,7 +96,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'label' => __( 'Set as Default', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SWITCHER,
 						'default' => 'inactive',
-						'return_value' => 'active',
+						'return_value' => 'active-default',
 				  	],
 					[
 						'name' => 'eael_adv_tabs_tab_title_icon',
@@ -471,6 +471,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'default' => '#444',
 						'selectors' => [
 							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default' => 'background-color: {{VALUE}};',
 						],
 					]
 				);
@@ -482,6 +483,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-deafult' => 'color: {{VALUE}};',
 						],
 					]
 				);
@@ -493,6 +495,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active .fa' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default .fa' => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'eael_adv_tabs_icon_show' => 'yes'
@@ -505,6 +508,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'name' => 'eael_adv_tabs_tab_border_active',
 						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
 						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
+						'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default',
 					]
 				);
 				$this->add_responsive_control(
@@ -515,6 +519,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'size_units' => [ 'px', 'em', '%' ],
 						'selectors' => [
 			 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			 					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			 			],
 					]
 				);
@@ -700,29 +705,47 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 	<script>
 		jQuery(document).ready(function($) {
 			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav ul li').each( function(index) {
-				if( index == 0 ) {
-					$(this).removeClass('inactive').addClass('active');
+				if( $(this).hasClass('active-default') ) {
+					$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li').removeClass('active').addClass('inactive');
+					$(this).removeClass('inactive');
+				}else {
+					if( index == 0 ) {
+						$(this).removeClass('inactive').addClass('active');
+
+					}
 				}
+
 			} );
 			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-content div').each( function(index) {
-				if( index == 0 ) {
-					$(this).removeClass('inactive').addClass('active');
+				if( $(this).hasClass('active-default') ) {
+					$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-content > div').removeClass('active');
+				}else {
+					if( index == 0 ) {
+						$(this).removeClass('inactive').addClass('active');
+					}
 				}
+
 			} );
-			$('.eael-tabs-nav ul li').click(function(){
+			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav ul li').click(function(){
 
-			  var currentTabIndex = $(this).index();
-			  var tabsContainer = $(this).closest('.eael-advance-tabs');
-			  var tabsNav = $(tabsContainer).children('.eael-tabs-nav').children('ul').children('li');
-			  var tabsContent = $(tabsContainer).children('.eael-tabs-content').children('div');
+			 	var currentTabIndex = $(this).index();
+			  	var tabsContainer = $(this).closest('.eael-advance-tabs');
+			  	var tabsNav = $(tabsContainer).children('.eael-tabs-nav').children('ul').children('li');
+			  	var tabsContent = $(tabsContainer).children('.eael-tabs-content').children('div');
 
-			  $(tabsNav).removeClass('active').addClass('inactive');
-			  $(this).addClass('active').removeClass('inactive');
+			  	$(this).parent('li').addClass('active');
 
-			  $(tabsContent).removeClass('active').addClass('inactive');
-			  $(tabsContent).eq(currentTabIndex).addClass('active').removeClass('inactive');
+			  	$(tabsNav).removeClass('active active-default').addClass('inactive');
+			  	$(this).addClass('active').removeClass('inactive');
 
-			})
+			  	$(tabsContent).removeClass('active').addClass('inactive');
+			  	$(tabsContent).eq(currentTabIndex).addClass('active').removeClass('inactive');
+
+			  	$(tabsContent).each( function(index) {
+					$(this).removeClass('active-default');
+				});
+
+			});
 		});
 	</script>
 	<?php if( $settings['eael_adv_tabs_tab_caret_show'] !== 'yes' ) : ?>
