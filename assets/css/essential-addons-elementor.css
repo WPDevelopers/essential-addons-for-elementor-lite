@@ -4276,7 +4276,8 @@ img.mfp-img {
   flex-flow: column wrap;
 }
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul > li {
-  width: 100%;
+    width: 100%;
+    justify-content: start;
 }
 
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul li::after {
