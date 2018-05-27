@@ -3,7 +3,7 @@ Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 4.9.4
-Stable tag: 2.6.0
+Stable tag: 2.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -127,6 +127,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.0 =
+
+- Dynamic field support added to all elements
+- Saved Templates option added to content area (all possible elements)
+- Advanced Tabs vertical layout added
+- Lots of minor bugfix and improvements
 
 = 2.6.0 =
 
