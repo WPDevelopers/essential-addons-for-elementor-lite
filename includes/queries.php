@@ -248,15 +248,31 @@ function eael_select_contact_form(){
 /**
  * Get Gravity Form [ if exists ]
  */
+if ( !function_exists('eael_select_gravity_form') ) {
+    function eael_select_gravity_form() {
+        if ( class_exists( 'GFCommon' ) ) {
+            $options = array();
 
-function eael_select_gravity_form() {
+            $gravity_forms = RGFormsModel::get_forms( null, 'title' );
 
-    $forms = RGFormsModel::get_forms( null, 'title' );
-    foreach( $forms as $form ) {
-      $options[ $form->id ] = $form->title;
+            if ( ! empty( $gravity_forms ) && ! is_wp_error( $gravity_forms ) ) {
+
+                $i = 0;
+
+                foreach ( $gravity_forms as $form ) {   
+                    if ( $i == 0 ) {
+                        $options[0] = esc_html__( 'Select Gravity Form', 'essential-addons-elementor' );
+                    }
+                    $options[ $form->id ] = $form->title;
+                    $i++;
+                }
+            }
+        } else {
+            $options = array();
+        }
+
+        return $options;
     }
-    return $options;
-
 }
 
 /**
