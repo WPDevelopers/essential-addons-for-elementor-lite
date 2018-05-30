@@ -601,16 +601,16 @@ class Widget_Eael_Tooltip extends Widget_Base {
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>
 			<<?php echo esc_attr( $settings['eael_tooltip_content_tag'] ); ?> class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><?php echo esc_html__( $settings['eael_tooltip_content'], 'essential-addons-elementor' ); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_attr( $settings['eael_tooltip_content_tag'] ); ?>>
-  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo esc_attr( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
 			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content'] ); ?>"></i><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
-  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo esc_attr( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'image' ) : ?>
 			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><img src="<?php echo esc_url( $settings['eael_tooltip_img_content']['url'] ); ?>" alt="<?php echo esc_attr( $settings['eael_tooltip_hover_content'] ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
-  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo esc_attr( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'shortcode' ) : ?>
 			<div class="eael-tooltip-content"><?php echo do_shortcode( $settings['eael_tooltip_shortcode_content'] ); ?></div>
-  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo esc_attr( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php endif; ?>
 	</div>
 	<?php
