@@ -300,14 +300,31 @@ function eael_select_weform() {
  * Get Ninja Form List
  * @return array
  */
-function eael_select_ninja_form() {
-    global $wpdb;
-    $eael_nf_table_name = $wpdb->prefix.'nf3_forms';
-    $forms = $wpdb->get_results( "SELECT id, title FROM $eael_nf_table_name" );
-    foreach( $forms as $form ) {
-        $options[$form->id] = $form->title;
+if ( !function_exists('eael_select_ninja_form') ) {
+    function eael_select_ninja_form() {
+        if ( class_exists( 'Ninja_Forms' ) ) {
+            $options = array();
+
+            $contact_forms = Ninja_Forms()->form()->get_forms();
+
+            if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
+
+                $i = 0;
+
+                foreach ( $contact_forms as $form ) {   
+                    if ( $i == 0 ) {
+                        $options[0] = esc_html__( 'Select Ninja Form', 'essential-addons-elementor' );
+                    }
+                    $options[ $form->get_id() ] = $form->get_setting( 'title' );
+                    $i++;
+                }
+            }
+        } else {
+            $options = array();
+        }
+
+        return $options;
     }
-    return $options;
 }
 
 /**

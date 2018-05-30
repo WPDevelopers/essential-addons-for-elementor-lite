@@ -1542,6 +1542,32 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"], .eael-ninja-container .nf-field .nf-field-element input[type="password"], .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"], .eael-ninja-container .nf-field .nf-field-element input[type="url"], .eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"], .eael-ninja-container .nf-field .nf-field-element textarea {
   max-width: 100%;
 }
+.eael-ninja-form .nf-form-title {
+  display: none;
+}
+.eael-ninja-form-title-yes .nf-form-title {
+  display: block;
+}
+.eael-ninja-form .title-description-hide .nf-form-title {
+  display: none;
+}
+.eael-ninja-form.title-description-hide .nf-form-title {
+  display: none;
+}
+.eael-ninja-form .nf-field-label {
+  display: none;
+}
+.eael-ninja-form-labels-yes .nf-field-label {
+  display: block;
+}
+.eael-ninja-form .submit-container input[type=button] {
+  border: 0;
+  border-radius: 0;
+}
+
+.eael-ninja-form-button-full-width .submit-container input[type=button] {
+  width: 100%;
+}
 
 /**
  * Gravity Form

@@ -229,112 +229,6 @@ class Widget_Eael_Contact_Form extends Widget_Base {
         );
 
 		$this->end_controls_section();
-		
-        /*-----------------------------------------------------------------------------------*/
-        /*	STYLE TAB
-        /*-----------------------------------------------------------------------------------*/
-
-        /**
-         * Style Tab: Title & Description
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_fields_title_description',
-            [
-                'label'                 => __( 'Title & Description', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'heading_alignment',
-            [
-                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::CHOOSE,
-				'options'               => [
-					'left'      => [
-						'title' => __( 'Left', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-left',
-					],
-					'center'    => [
-						'title' => __( 'Center', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-center',
-					],
-					'right'     => [
-						'title' => __( 'Right', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-right',
-					],
-				],
-				'default'               => '',
-				'selectors'             => [
-					'{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-heading' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
-        
-        $this->add_control(
-            'title_heading',
-            [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::HEADING,
-				'separator'             => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'title_text_color',
-            [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'title_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title',
-            ]
-        );
-        
-        $this->add_control(
-            'description_heading',
-            [
-                'label'                 => __( 'Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::HEADING,
-				'separator'             => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'description_text_color',
-            [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'description_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description',
-            ]
-        );
-        
-        $this->end_controls_section();
 
         /**
          * Style Tab: Form Container
@@ -488,6 +382,112 @@ class Widget_Eael_Contact_Form extends Widget_Base {
 			]
 		);
 
+        $this->end_controls_section();
+
+        /*-----------------------------------------------------------------------------------*/
+        /*  STYLE TAB
+        /*-----------------------------------------------------------------------------------*/
+
+        /**
+         * Style Tab: Title & Description
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_fields_title_description',
+            [
+                'label'                 => __( 'Title & Description', 'essential-addons-elementor' ),
+                'tab'                   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'heading_alignment',
+            [
+                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::CHOOSE,
+                'options'               => [
+                    'left'      => [
+                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-left',
+                    ],
+                    'center'    => [
+                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-center',
+                    ],
+                    'right'     => [
+                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-right',
+                    ],
+                ],
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-heading' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'title_heading',
+            [
+                'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+                'separator'             => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'title_text_color',
+            [
+                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'title_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title',
+            ]
+        );
+        
+        $this->add_control(
+            'description_heading',
+            [
+                'label'                 => __( 'Description', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+                'separator'             => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'description_text_color',
+            [
+                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'description_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description',
+            ]
+        );
+        
         $this->end_controls_section();
         
         /**
