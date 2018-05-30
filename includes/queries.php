@@ -331,16 +331,31 @@ if ( !function_exists('eael_select_ninja_form') ) {
  * Get Caldera Form List
  * @return array
  */
-function eael_select_caldera_form() {
-    global $wpdb;
-    $eael_cf_table_name = $wpdb->prefix.'cf_forms';
-    $forms = $wpdb->get_results( "SELECT * FROM $eael_cf_table_name" );
-    foreach( $forms as $form ) {
-        $unserialize = unserialize( $form->config );
-        $form_title = $unserialize['name'];
-        $options[$form->form_id] = $form_title;
+if ( !function_exists('eael_select_caldera_form') ) {
+    function eael_select_caldera_form() {
+        if ( class_exists( 'Caldera_Forms' ) ) {
+            $options = array();
+
+            $contact_forms = Caldera_Forms_Forms::get_forms( true, true );
+
+            if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
+
+            $i = 0;
+
+            foreach ( $contact_forms as $form ) {   
+                if ( $i == 0 ) {
+                    $options[0] = esc_html__( 'Select Caldera Form', 'essential-addons-elementor' );
+                }
+                $options[ $form['ID'] ] = $form['name'];
+                $i++;
+            }
+            }
+        } else {
+            $options = array();
+        }
+
+        return $options;
     }
-    return $options;
 }
 
 

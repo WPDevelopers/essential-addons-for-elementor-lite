@@ -217,15 +217,15 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 					],
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-left',
+						'icon' => 'eicon-h-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-center',
+						'icon' => 'eicon-h-align-center',
 					],
 					'right' => [
 						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-right',
+						'icon' => 'eicon-h-align-right',
 					],
 				],
 				'default' => 'default',
