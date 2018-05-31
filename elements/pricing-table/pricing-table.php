@@ -138,7 +138,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_onsale',
 			[
-				'label' => __( 'On Sale', 'essential-addons-elementor' ),
+				'label' => __( 'On Sale?', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'no',
 				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
@@ -567,13 +567,13 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
-		 * Tab Style (Pricing Table Title Style)
+		 * Style (Header)
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'eael_section_pricing_table_title_style_settings',
+			'eael_section_pricing_table_header_style_settings',
 			[
-				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Header', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -677,38 +677,26 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 
 		);
 
-		$this->add_control(
-			'eael_pricing_table_price_tag_heading',
+		$this->end_controls_section();
+
+
+		/**
+		 * -------------------------------------------
+		 * Style (Pricing)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_pricing_table_title_style_settings',
 			[
-				'label' => esc_html__( 'Price Tag Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' =>  'before'
+				'label' => esc_html__( 'Pricing', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
 
-		$this->add_control(
-			'eael_pricing_table_pricing_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-pricing-item .price-tag' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            'name' => 'eael_pricing_table_price_tag_typography',
-				'selector' => '{{WRAPPER}} .eael-pricing-item .price-tag',
-			]
-		);
 		$this->add_control(
 			'eael_pricing_table_price_tag_onsale_heading',
 			[
-				'label' => esc_html__( 'Price Tag Style (On Sale)', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'On Sale Price', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' =>  'before'
 			]
@@ -733,10 +721,40 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-pricing-item .muted-price',
 			]
 		);
+
+		$this->add_control(
+			'eael_pricing_table_price_tag_heading',
+			[
+				'label' => esc_html__( 'Normal Price', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' =>  'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_pricing_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing-item .price-tag' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+            'name' => 'eael_pricing_table_price_tag_typography',
+				'selector' => '{{WRAPPER}} .eael-pricing-item .price-tag',
+			]
+		);
+
 		$this->add_control(
 			'eael_pricing_table_price_currency_heading',
 			[
-				'label' => esc_html__( 'Price Currency Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Currency', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' =>  'before'
 			]
@@ -765,7 +783,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_pricing_period_heading',
 			[
-				'label' => esc_html__( 'Pricing Period Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Pricing Period', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -791,12 +809,19 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_pricing_table_price_list_heading',
+
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Style (Feature List)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_pricing_table_style_featured_list_settings',
 			[
-				'label' => esc_html__( 'Feature List Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' =>  'before'
+				'label' => esc_html__( 'Feature List', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -824,13 +849,13 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
-		 * Tab Style (Pricing Table Featured Tag Style)
+		 * Style (Ribbon)
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
 			'eael_section_pricing_table_style_3_featured_tag_settings',
 			[
-				'label' => esc_html__( 'Ribbon Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Ribbon', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1111,8 +1136,6 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
-
-
 		$this->add_control(
 			'eael_pricing_table_icon_color',
 			[
@@ -1191,7 +1214,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_pricing_table_btn_style_settings',
 			[
-				'label' => esc_html__( 'Button Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
