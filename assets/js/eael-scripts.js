@@ -39,7 +39,7 @@
                 $(this).find('.eael-magnific-link').magnificPopup({
                     type: 'image',
                     gallery:{
-                        enabled: true
+                        enabled: galleryEnabled
                     },
                     callbacks: {
                         close: function() {
