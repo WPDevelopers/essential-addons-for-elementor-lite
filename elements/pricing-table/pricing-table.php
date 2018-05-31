@@ -696,7 +696,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_price_tag_onsale_heading',
 			[
-				'label' => esc_html__( 'On Sale Price', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Original Price', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' =>  'before'
 			]
@@ -725,7 +725,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_price_tag_heading',
 			[
-				'label' => esc_html__( 'Normal Price', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Sale Price', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' =>  'before'
 			]
@@ -780,6 +780,18 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_pricing_table_price_cur_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-pricing-item .price-currency' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+		
 		$this->add_control(
 			'eael_pricing_table_pricing_period_heading',
 			[
