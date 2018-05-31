@@ -135,10 +135,13 @@ class Eael_Admin_Settings {
 			    	<div id="general" class="eael-settings-tab active">
 						<div class="row eael-admin-general-wrapper">
 			      			<div class="eael-admin-general-inner">
-			      				<div class="eael-admin-block-large">
-			      					<img class="eael-preview-img" src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/eael-featured.png'; ?>">
-			      				</div><!--preview image end-->
 				      			<div class="eael-admin-block-wrapper">
+
+				      				<div class="eael-admin-block eael-admin-block-banner">
+				      					<a href="https://essential-addons.com/elementor/" target="_blank">
+				      						<img class="eael-preview-img" src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/eael-featured.png'; ?>">
+				      					</a>
+				      				</div><!--preview image end-->
 									<div class="eael-admin-block eael-admin-block-docs">
 										<header class="eael-admin-block-header">
 											<div class="eael-admin-block-header-icon">
@@ -183,7 +186,7 @@ class Eael_Admin_Settings {
 											<h4 class="eael-admin-title">Show your Love</h4>
 										</header>
 										<div class="eael-admin-block-content">
-											<p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2 minutes to review the theme and spread the love to encourage us to keep it going.</p>
+											<p>We love to have you in Essential Addons family. We are making it more awesome everyday. Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going.</p>
 
 											<a href="https://wpdeveloper.net/review-essential-addons-elementor" class="review-flexia button button-primary" target="_blank">Leave a Review</a>
 										</div>

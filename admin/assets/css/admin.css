@@ -401,6 +401,9 @@ textarea.eael-form-control {
 	padding: 1em;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
+.eael-admin-block-wrapper .eael-admin-block.eael-admin-block-banner {
+	padding: 8px;
+}
 .eael-admin-block-header {
 	max-height: 4em;
 	overflow: hidden;
@@ -443,6 +446,9 @@ textarea.eael-form-control {
 }
 .eael-preview-img {
 	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	object-fit: cover;
 }
 
 .eael-admin-sidebar {
