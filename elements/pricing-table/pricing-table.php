@@ -1357,7 +1357,11 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				$pricing = '<del class="muted-price">'.$settings['eael_pricing_table_price'].'<span class="muted-price-currency">'.$settings['eael_pricing_table_price_cur'].'</span></del> '.$settings['eael_pricing_table_onsale_price'].'<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>';
 			}
 		}else {
-			$pricing = '<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_price'];
+			if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) {
+				$pricing = '<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_price'];
+			}else if( $settings['eael_pricing_table_price_cur_placement'] == 'right' ) {
+				$pricing = $settings['eael_pricing_table_price'].'<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>';
+			}
 		}
 	?>
 	<?php if( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] || 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
