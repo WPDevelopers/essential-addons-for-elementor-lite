@@ -177,9 +177,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
 		     		'left'  	=> esc_html__( 'Left', 'essential-addons-elementor' ),
-		     		'left-sup'  	=> esc_html__( 'Left (Sup)', 'essential-addons-elementor' ),
 		     		'right'  	=> esc_html__( 'Right', 'essential-addons-elementor' ),
-		     		'right-sup'  	=> esc_html__( 'Right (Sup)', 'essential-addons-elementor' ),
 		     	],
 		  	]
 		);
@@ -1359,7 +1357,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				$pricing = '<del class="muted-price">'.$settings['eael_pricing_table_price'].'<span class="muted-price-currency">'.$settings['eael_pricing_table_price_cur'].'</span></del> '.$settings['eael_pricing_table_onsale_price'].'<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>';
 			}
 		}else {
-			$pricing = $settings['eael_pricing_table_price'];
+			$pricing = '<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_price'];
 		}
 	?>
 	<?php if( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] || 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
