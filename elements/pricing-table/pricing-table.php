@@ -135,7 +135,29 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'default' => esc_html__( '99', 'essential-addons-elementor' )
 			]
 		);
-
+		$this->add_control(
+			'eael_pricing_table_onsale',
+			[
+				'label' => __( 'On Sale', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'no',
+				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
+				'label_off' => __( 'No', 'essential-addons-elementor' ),
+				'return_value' => 'yes',
+			]
+		);
+		$this->add_control(
+			'eael_pricing_table_onsale_price',
+			[
+				'label' => esc_html__( 'Sale Price', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'label_block' => false,
+				'default' => esc_html__( '89', 'essential-addons-elementor' ),
+				'condition' => [
+					'eael_pricing_table_onsale' => 'yes'
+				]
+			]
+		);
   		$this->add_control(
 			'eael_pricing_table_price_cur',
 			[
@@ -685,7 +707,34 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-pricing-item .price-tag',
 			]
 		);
+		$this->add_control(
+			'eael_pricing_table_price_tag_onsale_heading',
+			[
+				'label' => esc_html__( 'Price Tag Style (On Sale)', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' =>  'before'
+			]
+		);
 
+		$this->add_control(
+			'eael_pricing_table_pricing_onsale_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#999',
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing-item .muted-price' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+            'name' => 'eael_pricing_table_price_tag_onsale_typography',
+				'selector' => '{{WRAPPER}} .eael-pricing-item .muted-price',
+			]
+		);
 		$this->add_control(
 			'eael_pricing_table_price_currency_heading',
 			[
@@ -1302,6 +1351,16 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		$target = $settings['eael_pricing_table_btn_link']['is_external'] ? 'target="_blank"' : '';
 		$nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 		if( 'yes' === $settings['eael_pricing_table_featured'] ) : $featured_class = 'featured '.$settings['eael_pricing_table_featured_styles']; else : $featured_class = ''; endif;
+
+		if( 'yes' === $settings['eael_pricing_table_onsale'] ) {
+			if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) {
+				$pricing = '<del class="muted-price"><span class="muted-price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_price'].'</del> <span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_onsale_price'];
+			}else if( $settings['eael_pricing_table_price_cur_placement'] == 'right' ) {
+				$pricing = '<del class="muted-price">'.$settings['eael_pricing_table_price'].'<span class="muted-price-currency">'.$settings['eael_pricing_table_price_cur'].'</span></del> '.$settings['eael_pricing_table_onsale_price'].'<span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>';
+			}
+		}else {
+			$pricing = $settings['eael_pricing_table_price'];
+		}
 	?>
 	<?php if( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] || 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
 	<div class="eael-pricing style-1">
@@ -1310,7 +1369,8 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 	            <h2 class="title"><?php echo $settings['eael_pricing_table_title']; ?></h2>
 	        </div>
 	        <div class="eael-pricing-tag">
-	            <span class="price-tag"><?php if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) : ?><span class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></span> <?php endif; ?><?php if( $settings['eael_pricing_table_price_cur_placement'] == 'left-sup' ) : ?><sup class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></sup> <?php endif; ?> <?php echo $settings['eael_pricing_table_price'] ?> <?php if( $settings['eael_pricing_table_price_cur_placement'] == 'right' ) : ?><span class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></span><?php endif; ?><?php if( $settings['eael_pricing_table_price_cur_placement'] == 'right-sup' ) : ?><sup class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></sup><?php endif; ?></span> <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
+	            <span class="price-tag"><?php echo $pricing; ?></span>
+	            <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
 	        </div>
 	        <div class="body">
 	            <ul>
@@ -1351,7 +1411,8 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 	            <span class="subtitle"><?php echo $settings['eael_pricing_table_sub_title']; ?></span>
 	        </div>
 	        <div class="eael-pricing-tag">
-	            <span class="price-tag"><?php if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) : ?><span class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></span> <?php endif; ?><?php if( $settings['eael_pricing_table_price_cur_placement'] == 'left-sup' ) : ?><sup class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></sup> <?php endif; ?> <?php echo $settings['eael_pricing_table_price'] ?> <?php if( $settings['eael_pricing_table_price_cur_placement'] == 'right' ) : ?><span class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></span><?php endif; ?><?php if( $settings['eael_pricing_table_price_cur_placement'] == 'right-sup' ) : ?><sup class="price-currency"><?php echo $settings['eael_pricing_table_price_cur']; ?></sup><?php endif; ?></span> <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
+	            <span class="price-tag"><?php echo $pricing; ?></span>
+	            <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
 	        </div>
 	        <div class="body">
 	            <ul>
