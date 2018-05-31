@@ -17,9 +17,15 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		return 'eicon-gallery-grid';
 	}
 
-   public function get_categories() {
+  	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+
+	public function get_script_depends() {
+        return [
+            'eael-scripts'
+        ];
+    }
 
 	protected function _register_controls() {
 		/**
@@ -916,7 +922,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
    		}
 
 	?>
-		<div id="eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-filter-gallery-wrapper">
+		<div id="eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-filter-gallery-wrapper" data-grid-style="<?php echo $settings['eael_fg_grid_style']; ?>" data-duration="<?php if( !empty( $settings['eael_fg_filter_duration'] ) ) : echo $settings['eael_fg_filter_duration']; else: echo '500'; endif; ?>" data-effects="<?php echo $fg_animation; ?>" data-popup="<?php echo $settings['eael_fg_show_popup']; ?>" data-gallery-enabled="<?php if( 'true' == $settings['eael_fg_show_popup_gallery'] ) : echo 'true'; else: echo 'false'; endif; ?>">
 			<div class="eael-filter-gallery-control">
 	            <ul>
 	                <li><a href="javascript:;" class="control" data-filter="all">All</a></li>
@@ -974,50 +980,6 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				</div>
 	    	<?php endif; ?>
 		</div>
-        <script>
-            jQuery(document).ready( function($) {
-
-            var containerEl = document.querySelector('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>');
-            var mixer = mixitup(containerEl, {
-            	controls: {
-                    scope: 'local'
-                },
-                selectors: {
-                    target: '[data-ref~="mixitup-target-<?php echo esc_attr( $this->get_id() ); ?>"]'
-                },
-                animation: {
-                    enable: true,
-                    duration: '<?php if( !empty( $settings['eael_fg_filter_duration'] ) ) : echo $settings['eael_fg_filter_duration']; else: echo '500'; endif; ?>',
-                    effects: '<?php echo $fg_animation; ?>',
-                    easing: 'cubic-bezier(0.245, 0.045, 0.955, 1)',
-                }
-            });
-
-            // Set Background Image
-            <?php if( $settings['eael_fg_grid_style'] == 'eael-hoverer' || $settings['eael_fg_grid_style'] == 'eael-tiles' ) : ?>
-				var postColumn = $( '.eael-filter-gallery-container .item' );
-				postColumn.each( function() {
-					let dataBg = $(this).attr( 'data-item-bg' );
-					$(this).css( 'background-image', 'url( '+ dataBg +' )' );
-				} );
-            <?php endif; ?>
-			// Magnific Popup
-			<?php if( 'true' == $settings['eael_fg_show_popup'] ) : ?>
-               	$('#eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?> .eael-magnific-link').magnificPopup({
-                	type: 'image',
-                  	gallery:{
-                    	enabled: <?php if( 'true' == $settings['eael_fg_show_popup_gallery'] ) : echo 'true'; else: echo 'false'; endif; ?>
-                  	},
-                  	callbacks: {
-						close: function() {
-							$( '#elementor-lightbox' ).hide();
-					   	}
-					}
-                });
-            <?php endif; ?>
-
-            });
-        </script>
 	<?php
 	}
 
