@@ -47,7 +47,7 @@
 					createPostHtml( res );
 					if( optionsValue.postStyle === 'grid' ) {
 						$( '.eael-post-grid' ).masonry( 'destroy' );
-						setInterval(function() {
+						setTimeout(function() {
 							$('.eael-post-grid').masonry({
 						    	itemSelector: '.eael-grid-post',
 						    	percentPosition: true,
