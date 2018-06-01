@@ -53,7 +53,7 @@
 						    	percentPosition: true,
 						    	columnWidth: '.eael-post-grid-column'
 						    });
-						}, 10);
+						}, 100);
 					}
 					optionsValue.loadMoreBtn.removeClass( 'button--loading' );
 					optionsValue.loadMoreBtn.find( 'span' ).html( settingsValue.btnText );
