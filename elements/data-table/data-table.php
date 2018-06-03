@@ -633,7 +633,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			            	<?php if( $header_title['eael_data_table_header_col_img_enabled'] == 'true' ) : ?>
 			            		<img src="<?php echo esc_url( $header_title['eael_data_table_header_col_img']['url'] ) ?>" class="eael-data-table-th-img" style="width:<?php echo $header_title['eael_data_table_header_col_img_size'] ?>px" alt="<?php echo esc_attr( $header_title['eael_data_table_header_col'] ); ?>">
 			            	<?php endif; ?>
-			            	<?php echo esc_html__( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?>
+			            	<?php $header_title['eael_data_table_header_col']; ?>
 			            </th>
 			        	<?php endforeach; ?>
 			        </tr>
