@@ -181,12 +181,12 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						'type' => Controls_Manager::URL,
 						'label_block' => true,
 						'default' => [
-		        			'url' => '',
-		        			'is_external' => '',
-		     			],
-		     			'show_external' => true,
-		     			'separator' => 'before',
-		     			'condition' => [
+		        				'url' => '',
+		        				'is_external' => '',
+		     				],
+		     				'show_external' => true,
+		     				'separator' => 'before',
+		     				'condition' => [
 							'eael_data_table_content_row_type' => 'col'
 						]
 					],
