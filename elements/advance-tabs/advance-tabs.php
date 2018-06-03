@@ -77,7 +77,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_adv_tabs_content_settings',
   			[
-  				'label' => esc_html__( 'Content Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Content', 'essential-addons-elementor' )
   			]
   		);
   		$this->add_control(
@@ -98,11 +98,46 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'default' => 'inactive',
 						'return_value' => 'active-default',
 				  	],
+                    [
+						'name'        => 'eael_adv_tabs_icon_type',
+						'label'       => esc_html__( 'Icon Type', 'essential-addons-elementor' ),
+                        'type'        => Controls_Manager::CHOOSE,
+                        'label_block' => false,
+                        'options'     => [
+                            'none' => [
+                                'title' => esc_html__( 'None', 'essential-addons-elementor' ),
+                                'icon'  => 'fa fa-ban',
+                            ],
+                            'icon' => [
+                                'title' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+                                'icon'  => 'fa fa-gear',
+                            ],
+                            'image' => [
+                                'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
+                                'icon'  => 'fa fa-picture-o',
+                            ],
+                        ],
+                        'default'       => 'icon',
+					],
 					[
 						'name' => 'eael_adv_tabs_tab_title_icon',
 						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::ICON,
-						'default' => 'fa fa-home',
+						'default' => 'fa fa-home',				
+						'condition' => [
+							'eael_adv_tabs_icon_type' => 'icon'
+						]
+					],
+					[
+						'name' => 'eael_adv_tabs_tab_title_image',
+						'label' => esc_html__( 'Image', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::MEDIA,
+						'default' => [
+							'url' => Utils::get_placeholder_image_src(),
+						],
+						'condition' => [
+							'eael_adv_tabs_icon_type' => 'image'
+						]
 					],
 					[
 						'name' => 'eael_adv_tabs_tab_title',
@@ -178,7 +213,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_adv_tabs_style_settings',
 			[
-				'label' => esc_html__( 'General Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'General', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -239,7 +274,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_adv_tabs_tab_style_settings',
 			[
-				'label' => esc_html__( 'Tab Title Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Tab Title', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -289,12 +324,13 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 				'range' => [
 					'px' => [
 						'min' => 0,
-						'max' => 100,
+						'max' => 200,
 						'step' => 1,
 					]
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li .fa' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li img' => 'width: {{SIZE}}{{UNIT}};',
 				]
 			]
 		);
@@ -316,8 +352,8 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 					]
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-tab-inline-icon li .fa' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-tab-top-icon li .fa' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tab-inline-icon li i, {{WRAPPER}} .eael-tab-inline-icon li img' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tab-top-icon li i, {{WRAPPER}} .eael-tab-top-icon li img' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				]
 			]
 		);
@@ -376,7 +412,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333',
 						'selectors' => [
-							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li .fa' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li i' => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'eael_adv_tabs_icon_show' => 'yes'
@@ -534,7 +570,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_adv_tabs_tab_content_style_settings',
 			[
-				'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -615,7 +651,7 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_adv_tabs_tab_caret_style_settings',
 			[
-				'label' => esc_html__( 'Caret Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Caret', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -679,7 +715,13 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
   		<div class="eael-tabs-nav">
     		<ul class="<?php echo esc_attr( $settings['eael_adv_tab_icon_position'] ); ?>">
 	    	<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : ?>
-	      		<li class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>"><?php if( $settings['eael_adv_tabs_icon_show'] === 'yes' ) : ?><i class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_title_icon'] ); ?>"></i><?php endif; ?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
+	      		<li class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>"><?php if( $settings['eael_adv_tabs_icon_show'] === 'yes' ) : 
+	      				if( $tab['eael_adv_tabs_icon_type'] === 'icon' ) : ?>
+	      					<i class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_title_icon'] ); ?>"></i>
+	      				<?php elseif( $tab['eael_adv_tabs_icon_type'] === 'image' ) : ?>
+	      					<img src="<?php echo esc_attr( $tab['eael_adv_tabs_tab_title_image']['url'] ); ?>">
+	      				<?php endif; ?>
+	      		<?php endif; ?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
 	      	<?php endforeach; ?>
     		</ul>
   		</div>
