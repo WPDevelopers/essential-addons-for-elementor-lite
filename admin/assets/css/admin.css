@@ -468,6 +468,10 @@ textarea.eael-form-control {
 	height: 100%;
 	vertical-align: middle;
 	object-fit: cover;
+	transition: all .3s;
+}
+.eael-preview-img:hover{
+	opacity: .9;
 }
 
 .eael-admin-sidebar {
