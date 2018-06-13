@@ -115,12 +115,14 @@ class Eael_Admin_Settings {
 	   }
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 		?>
-		<div class="wrap">
-			<div class="response-wrap"></div>
+		<div class="eael-settings-wrap">
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
-						<h4 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h4>
+						<div class="eael-admin-logo-inline">
+							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+						</div>
+						<h2 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h2>
 					</div>
 					<div class="eael-header-right">
 						<input type="submit" value="Save settings" class="button eael-btn js-eael-settings-save"/>
