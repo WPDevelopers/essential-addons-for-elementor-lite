@@ -972,7 +972,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				                </div>
 							</div>
 							<div class="item-content">
-								<h2 class="title"><a href="<?php echo esc_url( $gallery['eael_fg_gallery_img']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php esc_html_e( $gallery['eael_fg_gallery_item_name'], 'essential-addons-elementor' ); ?></a></h2>
+								<h2 class="title"><a href="<?php echo esc_url( $gallery['eael_fg_gallery_img_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?>><?php esc_html_e( $gallery['eael_fg_gallery_item_name'], 'essential-addons-elementor' ); ?></a></h2>
 								<p><?php echo $gallery['eael_fg_gallery_item_content']; ?></p>
 							</div>
 			        	</div>

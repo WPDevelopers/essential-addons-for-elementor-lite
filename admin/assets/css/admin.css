@@ -6,9 +6,12 @@
 
 /* General Style */
 
+.eael-settings-wrap {
+	padding: 15px;
+}
 .eael-header-bar {
 	height: auto;
-	padding: 20px;
+	padding: 10px;
 	background: #fff;
 	border: 1px solid rgba( 0,0,0,0.1 );
 	-webkit-display: flex;
@@ -18,8 +21,24 @@
 	-webkit-align-items: center;
 	align-items: center;
 }
+
+.eael-settings-wrap .eael-header-left {
+	display: flex;
+	align-content: center;
+	align-items: center;
+}
+.eael-header-bar .eael-admin-logo-inline {
+	width: 32px;
+	box-shadow: 1px 0 0 0 rgba(0,0,0,0.1);
+	padding: 10px 10px 5px;
+	margin-right: 10px;
+}
+.eael-header-bar .eael-admin-logo-inline img{
+	width: 100%;
+}
 .eael-header-bar .title {
-	font-size: 28px;
+	font-size: 24px;
+	color: #444;
 	font-weight: 600;
 	margin: 0px;
 	line-height: 1;
@@ -449,6 +468,10 @@ textarea.eael-form-control {
 	height: 100%;
 	vertical-align: middle;
 	object-fit: cover;
+	transition: all .3s;
+}
+.eael-preview-img:hover{
+	opacity: .9;
 }
 
 .eael-admin-sidebar {
