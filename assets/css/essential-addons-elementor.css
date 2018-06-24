@@ -3990,7 +3990,7 @@ img.mfp-img {
     flex-flow: 1 1 100%;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 1;
     top: 0px;
     left: 0px;
     right: 0px;
@@ -4271,11 +4271,6 @@ img.mfp-img {
 }
 
 @media screen and (max-width: 800px) {
-  body {
-    font-size: 1rem;
-    line-height: 1.25;
-  }
-
   .eael-img-accordion {
     flex-direction: column;
   }
