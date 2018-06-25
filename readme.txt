@@ -7,7 +7,7 @@ Stable tag: 2.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Ultimate elements library for Elementor WordPress Page Builder. Premium elements with endless customization options.
+Ultimate elements library for Elementor WordPress Page Builder. 53+ Premium elements with endless customization options.
 
 == Description ==
 
@@ -20,7 +20,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 27+ Stunning Elements (Free)
+* 32+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -29,10 +29,12 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 >You can enable/disable certain elements and that will eliminate all associated assets of disabled elements. So it won't slow down your website.
 
-### Available Elements
+### Available Elements (Free)
 
 * [Post Grid](https://essential-addons.com/elementor/post-grid/)
 * [Post Timeline](https://essential-addons.com/elementor/post-timeline/)
+* [Post Carousel](https://essential-addons.com/elementor/post-carousel/)
+* [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/)
 * [Fancy Text](https://essential-addons.com/elementor/fancy-text/ )
 * [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/)
 * [Countdown](https://essential-addons.com/elementor/countdown/ )
@@ -43,6 +45,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Gravity Forms](https://essential-addons.com/elementor/gravity-forms/)
 * [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/)
 * [Caldera Forms](https://essential-addons.com/elementor/caldera-forms/)
+* [WPForms](https://essential-addons.com/elementor/wpforms/)
 * [weForms](https://essential-addons.com/elementor/weforms/)
 * [Info Box](https://essential-addons.com/elementor/info-box/)
 * [Flip Box](https://essential-addons.com/elementor/flip-box/)
@@ -58,10 +61,11 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Tooltip](https://essential-addons.com/elementor/tooltip/)
 * [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/)
 * [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
+* [Fancy Divider](https://essential-addons.com/elementor/divider/)
+* [Counter](https://essential-addons.com/elementor/counter/)
 
 
-
-### More elements (17+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (21+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
@@ -80,6 +84,10 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Smart Post List](https://essential-addons.com/elementor/post-list/)
 * [Mailchimp](https://essential-addons.com/elementor/mailchimp/)
 * [Content Toggle](https://essential-addons.com/elementor/content-toggle/)
+* [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/)
+* [Price Menu](https://essential-addons.com/elementor/price-menu/)
+* [Image Hotspot](https://essential-addons.com/elementor/image-hotspot/)
+* [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/)
 
 More coming soon (weekly update) ...
 
