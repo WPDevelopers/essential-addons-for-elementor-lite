@@ -390,8 +390,8 @@ if ( !function_exists('eael_get_page_templates') ) {
 }
 
 // Get all Authors
-if ( !function_exists('eael_get_auhtors') ) {
-    function eael_get_auhtors() {
+if ( !function_exists('eael_get_authors') ) {
+    function eael_get_authors() {
 
         $options = array();
 

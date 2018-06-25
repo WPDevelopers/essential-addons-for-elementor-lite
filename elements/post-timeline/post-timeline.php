@@ -62,7 +62,7 @@ class Widget_PostTimeline extends Widget_Base {
                 'type'              => Controls_Manager::SELECT2,
 				'label_block'       => true,
 				'multiple'          => true,
-				'options'           => eael_get_auhtors(),
+				'options'           => eael_get_authors(),
             ]
         );
 
