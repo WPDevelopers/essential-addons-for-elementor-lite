@@ -23,7 +23,9 @@ function eael_get_post_data( $args ) {
         'author'       => '',
         'author_name'      => '',
         'post_status'      => 'publish',
-        'suppress_filters' => true
+        'suppress_filters' => true,
+        'tag__in'          => '',
+        'post__not_in'     => '',
     );
 
     $atts = wp_parse_args( $args, $defaults );
@@ -81,10 +83,19 @@ function eael_get_post_settings($settings){
         $post_args['category'] = $settings['category'];
     }
 
+    $eael_tiled_post_author = '';
+    $eael_tiled_post_authors = $settings['eael_post_authors'];
+    if ( !empty( $eael_tiled_post_authors) ) {
+        $eael_tiled_post_author = implode( ",", $eael_tiled_post_authors );
+    }
+
     $post_args['posts_per_page'] = $settings['eael_posts_count'];
     $post_args['offset'] = $settings['eael_post_offset'];
     $post_args['orderby'] = $settings['eael_post_orderby'];
     $post_args['order'] = $settings['eael_post_order'];
+    $post_args['tag__in'] = $settings['eael_post_tags'];
+    $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
+    $post_args['author'] = $eael_tiled_post_author;
 
     return $post_args;
 }
@@ -375,5 +386,60 @@ if ( !function_exists('eael_get_page_templates') ) {
             }
         }
         return $options;
+    }
+}
+
+// Get all Authors
+if ( !function_exists('eael_get_auhtors') ) {
+    function eael_get_auhtors() {
+
+        $options = array();
+
+        $users = get_users();
+
+        foreach ( $users as $user ) {
+            $options[ $user->ID ] = $user->display_name;
+        }
+
+        return $options;
+    }
+}
+
+// Get all Authors
+if ( !function_exists('eael_get_tags') ) {
+    function eael_get_tags() {
+
+        $options = array();
+
+        $tags = get_tags();
+
+        foreach ( $tags as $tag ) {
+            $options[ $tag->term_id ] = $tag->name;
+        }
+
+        return $options;
+    }
+}
+
+// Get all Posts
+if ( !function_exists('eael_get_posts') ) {
+    function eael_get_posts() {
+
+        $post_list = get_posts( array(
+            'post_type'         => 'post',
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'posts_per_page'    => -1,
+        ) );
+
+        $posts = array();
+
+        if ( ! empty( $post_list ) && ! is_wp_error( $post_list ) ) {
+            foreach ( $post_list as $post ) {
+               $posts[ $post->ID ] = $post->post_title;
+            }
+        }
+
+        return $posts;
     }
 }
