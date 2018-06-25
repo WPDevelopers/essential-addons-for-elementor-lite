@@ -114,6 +114,9 @@ function add_eael_elements() {
    if( class_exists( 'Caldera_Forms' ) && $is_component_active['caldera-form'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/caldera-forms/caldera-forms.php';
    }
+   if( class_exists( 'WPForms' ) && $is_component_active['wpforms'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/wpforms/wpforms.php';
+   }
    if( $is_component_active['twitter-feed'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/twitter-feed/twitter-feed.php';
    }
@@ -150,9 +153,9 @@ add_action('elementor/widgets/widgets_registered','add_eael_elements');
  * @since v1.0.0
  */
 function essential_addons_el_enqueue(){
-   $is_component_active = eael_activated_modules();
-   wp_enqueue_style('essential_addons_elementor-css',ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css');
-   wp_enqueue_style('essential_addons_elementor-slick-css',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.css');
+    $is_component_active = eael_activated_modules();
+    wp_enqueue_style('essential_addons_elementor-css',ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css');
+    wp_enqueue_style('essential_addons_elementor-slick-css',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.css');
 
     wp_enqueue_script('eael-scripts',ESSENTIAL_ADDONS_EL_URL.'assets/js/eael-scripts.js', array('jquery'),'1.0', true);
     if ( class_exists( 'GFCommon' ) ) {
@@ -162,35 +165,38 @@ function essential_addons_el_enqueue(){
             }
         };
     }
-   if( $is_component_active['fancy-text'] ) {
+    if ( function_exists( 'wpforms' ) ) {
+     wpforms()->frontend->assets_css();
+    }
+    if( $is_component_active['fancy-text'] ) {
       wp_enqueue_script('essential_addons_elementor-fancy-text-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/fancy-text.js', array('jquery'),'1.0', true);
-   }
-   if( $is_component_active['count-down'] ) {
+    }
+    if( $is_component_active['count-down'] ) {
       wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
-   }
-   if( $is_component_active['post-grid'] || $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
+    }
+    if( $is_component_active['post-grid'] || $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
       wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
-   }
-   if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
+    }
+    if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
       wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
-   }
-   if( $is_component_active['twitter-feed']) {
+    }
+    if( $is_component_active['twitter-feed']) {
       wp_enqueue_script('essential_addons_elementor-codebird-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/codebird.js', array('jquery'),'1.0', true);
-   }
-   if( $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
+    }
+    if( $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
       wp_enqueue_script('essential_addons_elementor-doT-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/doT.min.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_elementor-moment-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/moment.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_elementor-socialfeed-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/jquery.socialfeed.js', array('jquery'),'1.0', true);
-   }
+    }
 
-   if( $is_component_active['filter-gallery'] ) {
+    if( $is_component_active['filter-gallery'] ) {
       wp_enqueue_script('essential_addons_mixitup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/mixitup.min.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
-   }
+    }
 
-   if( $is_component_active['content-ticker'] ) {
+    if( $is_component_active['content-ticker'] ) {
       wp_enqueue_script('essential_addons_elementor-slick-js',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.min.js', array('jquery'),'1.0', true);
-   }
+    }
 
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
