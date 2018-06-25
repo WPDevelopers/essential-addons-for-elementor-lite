@@ -53,6 +53,39 @@ class Widget_PostTimeline extends Widget_Base {
                        'eael_post_type' => 'post'
                 ]
             ]
+		);
+		
+		$this->add_control(
+            'eael_post_authors',
+            [
+                'label'             => __( 'Authors', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_auhtors(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_tags',
+            [
+                'label'             => __( 'Tags', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_tags(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_exclude_posts',
+            [
+                'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_posts(),
+            ]
         );
 
 
