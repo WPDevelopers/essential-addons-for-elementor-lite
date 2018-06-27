@@ -36,7 +36,16 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
   			[
   				'label' => esc_html__( 'Filterable Gallery Settings', 'essential-addons-elementor' )
   			]
-  		);
+		);
+		
+		$this->add_control(
+			'eael_fg_all_label_text',
+			[
+				'label'		=> esc_html__( 'Gallery All Label', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::TEXT,
+				'default'	=> 'All',
+			]
+		);
 
 		$this->add_control(
 			'eael_fg_filter_duration',
@@ -925,7 +934,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		<div id="eael-filter-gallery-wrapper-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-filter-gallery-wrapper" data-grid-style="<?php echo $settings['eael_fg_grid_style']; ?>" data-duration="<?php if( !empty( $settings['eael_fg_filter_duration'] ) ) : echo $settings['eael_fg_filter_duration']; else: echo '500'; endif; ?>" data-effects="<?php echo $fg_animation; ?>" data-popup="<?php echo $settings['eael_fg_show_popup']; ?>" data-gallery-enabled="<?php if( 'true' == $settings['eael_fg_show_popup_gallery'] ) : echo 'true'; else: echo 'false'; endif; ?>">
 			<div class="eael-filter-gallery-control">
 	            <ul>
-	                <li><a href="javascript:;" class="control" data-filter="all">All</a></li>
+	                <li><a href="javascript:;" class="control" data-filter="all"><?php echo ( isset($settings['eael_fg_all_label_text']) && ! empty($settings['eael_fg_all_label_text']) ? esc_attr($settings['eael_fg_all_label_text']) : 'All'); ?></a></li>
 	                <?php foreach( $settings['eael_fg_controls'] as $control ) : ?>
 	                <?php $sorter_filter = $this->sorter_class( $control['eael_fg_control'] ); ?>
 						<li><a href="javascript:;" class="control" data-filter=".<?php echo esc_attr( $sorter_filter ); ?>-<?php echo esc_attr( $this->get_id() ); ?>"><?php echo $control['eael_fg_control']; ?></a></li>
