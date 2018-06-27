@@ -13,6 +13,12 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 		return esc_html__( 'EA Advanced Tabs', 'essential-addons-elementor' );
 	}
 
+	public function get_script_depends() {
+        return [
+            'eael-scripts'
+        ];
+    }
+
 	public function get_icon() {
 		return 'eicon-tabs';
 	}
@@ -709,11 +715,24 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
    		$settings = $this->get_settings_for_display();
    		$eael_find_default_tab = array();
    		$eael_adv_tab_id = 1;
-   		$eael_adv_tab_content_id = 1;
+		$eael_adv_tab_content_id = 1;
+		   
+		$this->add_render_attribute(
+			'eael_tab_wrapper',
+			[
+				'id'				=> "eael-advance-tabs-{$this->get_id()}",
+				'class'				=> [ 'eael-advance-tabs', $settings['eael_adv_tab_layout'] ],
+				'data-tabid'		=> $this->get_id()
+			]
+		);
+		if($settings['eael_adv_tabs_tab_caret_show'] != 'yes')
+			$this->add_render_attribute('eael_tab_wrapper', 'class', 'active-caret-on');
+
+		$this->add_render_attribute( 'eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']) );
 	?>
-	<div id="eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-advance-tabs <?php echo esc_attr( $settings['eael_adv_tab_layout'] ); ?>">
+	<div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
   		<div class="eael-tabs-nav">
-    		<ul class="<?php echo esc_attr( $settings['eael_adv_tab_icon_position'] ); ?>">
+		  <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
 	    	<?php foreach( $settings['eael_adv_tabs_tab'] as $tab ) : ?>
 	      		<li class="<?php echo esc_attr( $tab['eael_adv_tabs_tab_show_as_default'] ); ?>"><?php if( $settings['eael_adv_tabs_icon_show'] === 'yes' ) : 
 	      				if( $tab['eael_adv_tabs_icon_type'] === 'icon' ) : ?>
@@ -743,59 +762,6 @@ class Widget_Eael_Adv_Tabs extends Widget_Base {
 			<?php endforeach; ?>
   		</div>
 	</div>
-	<script>
-		jQuery(document).ready(function($) {
-			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav ul li').each( function(index) {
-				if( $(this).hasClass('active-default') ) {
-					$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li').removeClass('active').addClass('inactive');
-					$(this).removeClass('inactive');
-				}else {
-					if( index == 0 ) {
-						$(this).removeClass('inactive').addClass('active');
-
-					}
-				}
-
-			} );
-			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-content div').each( function(index) {
-				if( $(this).hasClass('active-default') ) {
-					$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-content > div').removeClass('active');
-				}else {
-					if( index == 0 ) {
-						$(this).removeClass('inactive').addClass('active');
-					}
-				}
-
-			} );
-			$('#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav ul li').click(function(){
-
-			 	var currentTabIndex = $(this).index();
-			  	var tabsContainer = $(this).closest('.eael-advance-tabs');
-			  	var tabsNav = $(tabsContainer).children('.eael-tabs-nav').children('ul').children('li');
-			  	var tabsContent = $(tabsContainer).children('.eael-tabs-content').children('div');
-
-			  	$(this).parent('li').addClass('active');
-
-			  	$(tabsNav).removeClass('active active-default').addClass('inactive');
-			  	$(this).addClass('active').removeClass('inactive');
-
-			  	$(tabsContent).removeClass('active').addClass('inactive');
-			  	$(tabsContent).eq(currentTabIndex).addClass('active').removeClass('inactive');
-
-			  	$(tabsContent).each( function(index) {
-					$(this).removeClass('active-default');
-				});
-
-			});
-		});
-	</script>
-	<?php if( $settings['eael_adv_tabs_tab_caret_show'] !== 'yes' ) : ?>
-	<style>
-		#eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li.active:after, #eael-advance-tabs-<?php echo esc_attr( $this->get_id() ); ?> .eael-tabs-nav > ul li.active-default:after {
-			display: none;
-		}
-	</style>
-	<?php endif; ?>
 	<?php
 	}
 
