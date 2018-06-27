@@ -17,6 +17,12 @@ class Widget_PostTimeline extends Widget_Base {
 		return 'eicon-post-list';
 	}
 
+	public function get_script_depends() {
+        return [
+            'eael-scripts'
+        ];
+    }
+
 	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
@@ -703,11 +709,38 @@ class Widget_PostTimeline extends Widget_Base {
         }else {
         	$categories_id_string = '';
         	$total_post = wp_count_posts( $settings['eael_post_type'] )->publish;
-        }
+		}
+		
+		$this->add_render_attribute(
+			'eael_post_timeline_wrapper',
+			[
+				'id'		=> "eael-post-timeline-{$this->get_id()}",
+				'class'		=> 'eael-post-timeline',
+				'data-url'	=> home_url( '/' ),
+				'data-total_posts'	=> $total_post,
+				'data-timeline_id'	=> $this->get_id(),
+				'data-post_type'	=> $settings['eael_post_type'],
+				'data-posts_per_page'	=> $settings['eael_posts_count'],
+				'data-post_order'		=> $settings['eael_post_order'],
+				'data-show_images'	=> $settings['eael_show_image'],
+				'data-show_title'	=> $settings['eael_show_title'],
+				'data-show_excerpt'	=> $settings['eael_show_excerpt'],
+				'data-excerpt_length'	=> $settings['eael_excerpt_length'],
+				'data-btn_text'			=> $settings['eael_post_timeline_load_more_text'],
+				'data-categories'		=> $categories_id_string
+			]
+		);
+
+		$this->add_render_attribute(
+			'eael_post_timeline',
+			[
+				'class'	=> [ 'eael-post-timeline', "eael-post-appender-{$this->get_id()}" ]
+			]
+		);
 
         ?>
-		<div id="eael-post-timeline-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-timeline">
-		    <div class="eael-post-timeline eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
+		<div <?php echo $this->get_render_attribute_string('eael_post_timeline_wrapper'); ?>>
+		    <div <?php echo $this->get_render_attribute_string('eael_post_timeline'); ?>>
 		    <?php
 		        if(count($posts)){
 		            global $post;
@@ -753,38 +786,7 @@ class Widget_PostTimeline extends Widget_Base {
 		  		<span><?php echo esc_html__( $settings['eael_post_timeline_load_more_text'], 'essential-addons-elementor' ); ?></span>
 			</button>
 		</div>
-		<?php endif; ?>
-<!-- Loading Lode More Js -->
-<script>
-jQuery(document).ready(function($) {
-
-	'use strict';
-	var options = {
-		siteUrl: '<?php echo home_url( '/' ); ?>',
-		totalPosts: <?php echo $total_post; ?>,
-		loadMoreBtn: $( '#eael-load-more-btn-<?php echo $this->get_id(); ?>' ),
-		postContainer: $( '.eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>' ),
-		postStyle: 'timeline',
-	}
-
-	var settings = {
-		postType: '<?php echo $settings['eael_post_type']; ?>',
-		perPage: parseInt( <?php echo $settings['eael_posts_count'] ?>, 10 ),
-		postOrder: '<?php echo $settings['eael_post_order'] ?>',
-		showImage: <?php echo $settings['eael_show_image']; ?>,
-		showTitle: <?php echo $settings['eael_show_title']; ?>,
-		showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
-		excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
-		btnText: '<?php echo $settings['eael_post_timeline_load_more_text']; ?>',
-		categories: '<?php echo $categories_id_string; ?>',
-	}
-
-	loadMore( options, settings );
-
-});
-</script>
-
-        <?php
+		<?php endif;
 	}
 
 	protected function content_template() {

@@ -98,8 +98,50 @@
         });
     }
 
+    /* ------------------------------ */
+    /* Post Timeline
+    /* ------------------------------ */
+    var postTimelineHandler = function ($scope, $) {
+        var $_this = $scope.find('.eael-post-timeline'),
+            $currentTimelineId = '#' + $_this.attr('id'),
+            $site_url       = $_this.data('url'),
+            $total_posts    = $_this.data('total_posts'),
+            $timeline_id    = $_this.data('timeline_id'),
+            $post_type      = $_this.data('post_type'),
+            $posts_per_page     = $_this.data('posts_per_page'),
+            $post_order         = $_this.data('post_order'),
+            $show_images        = $_this.data('show_images'),
+            $show_title         = $_this.data('show_title'),
+            $show_excerpt       = $_this.data('show_excerpt'),
+            $excerpt_length     = $_this.data('excerpt_length'),
+            $btn_text       = $_this.data('btn_text'),
+            $categories     = $_this.data('categories');
+
+        var options = {
+            siteUrl: $site_url,
+            totalPosts: $total_posts,
+            loadMoreBtn: $( '#eael-load-more-btn-'+$timeline_id ),
+            postContainer: $( '.eael-post-appender-'+$timeline_id ),
+            postStyle: 'timeline',
+        }
+    
+        var settings = {
+            postType: $post_type,
+            perPage: parseInt( $posts_per_page, 10 ),
+            postOrder: $post_order,
+            showImage: $show_images,
+            showTitle: $show_title,
+            showExcerpt: $show_excerpt,
+            excerptLength: parseInt( $excerpt_length, 10 ),
+            btnText: $btn_text,
+            categories: $categories
+        }
+        loadMore( options, settings );
+    }
+
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
     });
 }(jQuery));
