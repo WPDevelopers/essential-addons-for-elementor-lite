@@ -4450,6 +4450,12 @@ img.mfp-img {
   border-bottom: 0px;
   display: none;
 }
+
+.eael-advance-tabs.active-caret-on .eael-tabs-nav > ul li.active:after,
+.eael-advance-tabs.active-caret-on .eael-tabs-nav > ul li.active-default:after{
+  display: none;
+}
+
 .eael-advance-tabs .eael-tabs-nav > ul li.active:after,
 .eael-advance-tabs .eael-tabs-nav > ul li.active-default:after {
   display: block;
