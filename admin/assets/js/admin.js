@@ -31,36 +31,50 @@
 	$('.eael-checkbox input[type="checkbox"]').on( 'click', function() {
 		headerSaveBtn.addClass( 'save-now' );
 		footerSaveBtn.addClass( 'save-now' );
+		headerSaveBtn.removeAttr('disabled').css('cursor', 'pointer');
+		footerSaveBtn.removeAttr('disabled').css('cursor', 'pointer');
 	} );
 
 	// Saving Data With Ajax Request
 	$( '.js-eael-settings-save' ).on( 'click', function(e) {
 		e.preventDefault();
 
-		$.ajax( {
-			url: js_eael_lite_settings.ajaxurl,
-			type: 'post',
-			data: {
-				action: 'save_settings_with_ajax',
-				fields: $( 'form#eael-settings' ).serialize(),
-			},
-			success: function( response ) {
-				swal(
-				  'Settings Saved!',
-				  'Click OK to continue',
-				  'success'
-				);
-				headerSaveBtn.removeClass( 'save-now' );
-				footerSaveBtn.removeClass( 'save-now' );
-			},
-			error: function() {
-				swal(
-				  'Oops...',
-				  'Something went wrong!',
-				  'error'
-				);
-			}
-		} );
+		var _this = $(this);
+
+		if( $(this).hasClass('save-now') ) {
+			$.ajax( {
+				url: js_eael_lite_settings.ajaxurl,
+				type: 'post',
+				data: {
+					action: 'save_settings_with_ajax',
+					fields: $( 'form#eael-settings' ).serialize(),
+				},
+				beforeSend: function() {
+					_this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
+				},
+				success: function( response ) {
+					setTimeout(function() {
+						_this.html('Save Settings');
+						swal(
+						'Settings Saved!',
+						'Click OK to continue',
+						'success'
+						);
+						headerSaveBtn.removeClass( 'save-now' );
+						footerSaveBtn.removeClass( 'save-now' );
+					}, 2000);
+				},
+				error: function() {
+					swal(
+					  'Oops...',
+					  'Something went wrong!',
+					  'error'
+					);
+				}
+			} );
+		}else {
+			$(this).attr('disabled', 'true').css('cursor', 'not-allowed');
+		}
 
 	} );
 
