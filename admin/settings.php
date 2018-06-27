@@ -125,7 +125,7 @@ class Eael_Admin_Settings {
 						<h2 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h2>
 					</div>
 					<div class="eael-header-right">
-						<input type="submit" value="Save settings" class="button eael-btn js-eael-settings-save"/>
+					<button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
 					</div>
 				</div>
 			  	<div class="eael-settings-tabs">
@@ -482,7 +482,7 @@ class Eael_Admin_Settings {
 									</div>
 								</div><!--./checkbox-container-->
 							  	<div class="eael-save-btn-wrap">
-							  		<input type="submit" value="Save settings" class="button eael-btn js-eael-settings-save"/>
+								  <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
 							  	</div>
 				      		</div>
 				      	</div>
