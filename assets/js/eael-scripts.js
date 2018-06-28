@@ -1,5 +1,5 @@
 (function ($) {
-	"use strict";
+    "use strict";
 
     var FilterGallery = function( $scope, $ ) {
         var filtergallery_elem = $scope.find('.eael-filter-gallery-wrapper').eq(0);
@@ -63,21 +63,21 @@
                 $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
                 $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
         // Facebook Feed Init
-    	function eael_facebook_feeds() {
+        function eael_facebook_feeds() {
             var $access_token = ($app_id+'|'+$app_secret).toString();
             var $id_name = $name.toString();
-    		$( '#eael-facebook-feed-'+ $carouselId +'.eael-facebook-feed-layout-container' ).socialfeed({
+            $( '#eael-facebook-feed-'+ $carouselId +'.eael-facebook-feed-layout-container' ).socialfeed({
 
-			    facebook:{
-			       accounts:[$id_name],
-			       limit: $limit,
+                facebook:{
+                   accounts:[$id_name],
+                   limit: $limit,
                    access_token: $access_token
-			    },
+                },
 
-	            // GENERAL SETTINGS
-	            length: $length,
-	            show_media: $media,
-	            template_html: '<div class="eael-social-feed-element {{? !it.moderation_passed}}hidden{{?}}" dt-create="{{=it.dt_create}}\" social-feed-id = "{{=it.id}}">\
+                // GENERAL SETTINGS
+                length: $length,
+                show_media: $media,
+                template_html: '<div class="eael-social-feed-element {{? !it.moderation_passed}}hidden{{?}}" dt-create="{{=it.dt_create}}\" social-feed-id = "{{=it.id}}">\
                 {{=it.attachment}}\
                 <div class="eael-content">\
                     <a class="pull-left auth-img" href="{{=it.author_link}}" target="_blank">\
@@ -96,16 +96,16 @@
                     </div>\
                 </div>\
             </div>',
-	        });
+            });
         }
         
         // Facebook Feed Masonry View
-		function eael_facebook_feed_masonry() {
+        function eael_facebook_feed_masonry() {
             $('.eael-facebook-feed-layout-container').masonry({
-			    itemSelector: '.eael-social-feed-element',
-			    percentPosition: true,
-			    columnWidth: '.eael-social-feed-element'
-			});
+                itemSelector: '.eael-social-feed-element',
+                percentPosition: true,
+                columnWidth: '.eael-social-feed-element'
+            });
         }
 
         $.ajax({
@@ -149,19 +149,19 @@
         var $app_secret = $app_secret.toString();
         
         function eael_twitter_feeds() {
-    		$( '#eael-twitter-feed-'+ $carouselId +'.eael-twitter-feed-layout-container' ).socialfeed({
-	            // TWITTER
-			    twitter:{
-			       accounts: [ $id_name , $hash_tag_name ],
-			       limit: $limit,
-			       consumer_key: $key_name,
-			       consumer_secret: $app_secret,
-			    },
+            $( '#eael-twitter-feed-'+ $carouselId +'.eael-twitter-feed-layout-container' ).socialfeed({
+                // TWITTER
+                twitter:{
+                   accounts: [ $id_name , $hash_tag_name ],
+                   limit: $limit,
+                   consumer_key: $key_name,
+                   consumer_secret: $app_secret,
+                },
 
-	            // GENERAL SETTINGS
-	            length: $length,
-	            show_media: $media,
-	            template_html: '<div class="eael-social-feed-element {{? !it.moderation_passed}}hidden{{?}}" dt-create="{{=it.dt_create}}" social-feed-id = "{{=it.id}}">\
+                // GENERAL SETTINGS
+                length: $length,
+                show_media: $media,
+                template_html: '<div class="eael-social-feed-element {{? !it.moderation_passed}}hidden{{?}}" dt-create="{{=it.dt_create}}" social-feed-id = "{{=it.id}}">\
                 <div class="eael-content">\
                     <a class="pull-left auth-img" href="{{=it.author_link}}" target="_blank">\
                         <img class="media-object" src="{{=it.author_picture}}">\
@@ -180,26 +180,26 @@
                 </div>\
                 {{=it.attachment}}\
             </div>',
-	        });
-    	}
+            });
+        }
 
-		
-		//Twitter Feed masonry View
-		
-		function eael_twitter_feed_masonry() {
-			$('.eael-twitter-feed-layout-container').masonry({
-			    itemSelector: '.eael-social-feed-element',
-			    percentPosition: true,
-			    columnWidth: '.eael-social-feed-element'
-			});
-		}
+        
+        //Twitter Feed masonry View
+        
+        function eael_twitter_feed_masonry() {
+            $('.eael-twitter-feed-layout-container').masonry({
+                itemSelector: '.eael-social-feed-element',
+                percentPosition: true,
+                columnWidth: '.eael-social-feed-element'
+            });
+        }
 
-		$.ajax({
-		   	url: eael_twitter_feeds(),
-		   	beforeSend: function() {
-		   		loadingFeed.addClass( 'show-loading' );
-		   	},
-		   	success: function() {
+        $.ajax({
+            url: eael_twitter_feeds(),
+            beforeSend: function() {
+                loadingFeed.addClass( 'show-loading' );
+            },
+            success: function() {
                 if($feed_type == 'masonry') {
                     setTimeout(function() {
                         eael_twitter_feed_masonry();
@@ -207,15 +207,106 @@
                      
                 }
                 loadingFeed.removeClass( 'show-loading' );
-			},
-			error: function() {
-				console.log('error loading');
-			}
+            },
+            error: function() {
+                console.log('error loading');
+            }
         });
                 
      }
 
+    var AdvanceTabHandler = function ($scope, $) {
+        console.log('running');
+        var $currentTab = $scope.find('.eael-advance-tabs'),
+            $currentTabId = '#' + $currentTab.attr('id').toString();
+
+            $($currentTabId + ' .eael-tabs-nav ul li').each( function(index) {
+                if( $(this).hasClass('active-default') ) {
+                    $($currentTabId + ' .eael-tabs-nav > ul li').removeClass('active').addClass('inactive');
+                    $(this).removeClass('inactive');
+                }else {
+                    if( index == 0 ) {
+                        $(this).removeClass('inactive').addClass('active');
+            
+                    }
+                }
+            } );
+
+            $($currentTabId + ' .eael-tabs-content div').each( function(index) {
+                if( $(this).hasClass('active-default') ) {
+                    $($currentTabId + ' .eael-tabs-content > div').removeClass('active');
+                }else {
+                    if( index == 0 ) {
+                        $(this).removeClass('inactive').addClass('active');
+                    }
+                }
+            } );
+
+            $($currentTabId + ' .eael-tabs-nav ul li').click(function(){
+                var currentTabIndex = $(this).index();
+                var tabsContainer = $(this).closest('.eael-advance-tabs');
+                var tabsNav = $(tabsContainer).children('.eael-tabs-nav').children('ul').children('li');
+                var tabsContent = $(tabsContainer).children('.eael-tabs-content').children('div');
+            
+                $(this).parent('li').addClass('active');
+            
+                $(tabsNav).removeClass('active active-default').addClass('inactive');
+                $(this).addClass('active').removeClass('inactive');
+            
+                $(tabsContent).removeClass('active').addClass('inactive');
+                $(tabsContent).eq(currentTabIndex).addClass('active').removeClass('inactive');
+            
+                $(tabsContent).each( function(index) {
+                    $(this).removeClass('active-default');
+            });
+        });
+    }
+
+    /* ------------------------------ */
+    /* Post Timeline
+    /* ------------------------------ */
+    var postTimelineHandler = function ($scope, $) {
+        var $_this = $scope.find('.eael-post-timeline'),
+            $currentTimelineId = '#' + $_this.attr('id'),
+            $site_url       = $_this.data('url'),
+            $total_posts    = $_this.data('total_posts'),
+            $timeline_id    = $_this.data('timeline_id'),
+            $post_type      = $_this.data('post_type'),
+            $posts_per_page     = $_this.data('posts_per_page'),
+            $post_order         = $_this.data('post_order'),
+            $show_images        = $_this.data('show_images'),
+            $show_title         = $_this.data('show_title'),
+            $show_excerpt       = $_this.data('show_excerpt'),
+            $excerpt_length     = $_this.data('excerpt_length'),
+            $btn_text       = $_this.data('btn_text'),
+            $categories     = $_this.data('categories');
+
+        var options = {
+            siteUrl: $site_url,
+            totalPosts: $total_posts,
+            loadMoreBtn: $( '#eael-load-more-btn-'+$timeline_id ),
+            postContainer: $( '.eael-post-appender-'+$timeline_id ),
+            postStyle: 'timeline',
+        }
+    
+        var settings = {
+            postType: $post_type,
+            perPage: parseInt( $posts_per_page, 10 ),
+            postOrder: $post_order,
+            showImage: $show_images,
+            showTitle: $show_title,
+            showExcerpt: $show_excerpt,
+            excerptLength: parseInt( $excerpt_length, 10 ),
+            btnText: $btn_text,
+            categories: $categories
+        }
+        loadMore( options, settings );
+    }
+
     $(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
