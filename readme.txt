@@ -33,8 +33,6 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 * [Post Grid](https://essential-addons.com/elementor/post-grid/)
 * [Post Timeline](https://essential-addons.com/elementor/post-timeline/)
-* [Post Carousel](https://essential-addons.com/elementor/post-carousel/)
-* [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/)
 * [Fancy Text](https://essential-addons.com/elementor/fancy-text/ )
 * [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/)
 * [Countdown](https://essential-addons.com/elementor/countdown/ )
@@ -61,8 +59,6 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Tooltip](https://essential-addons.com/elementor/tooltip/)
 * [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/)
 * [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
-* [Fancy Divider](https://essential-addons.com/elementor/divider/)
-* [Counter](https://essential-addons.com/elementor/counter/)
 
 
 ### More elements (21+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
@@ -87,7 +83,11 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/)
 * [Price Menu](https://essential-addons.com/elementor/price-menu/)
 * [Image Hotspot](https://essential-addons.com/elementor/image-hotspot/)
+* [Fancy Divider](https://essential-addons.com/elementor/divider/)
+* [Counter](https://essential-addons.com/elementor/counter/)
 * [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/)
+* [Post Carousel](https://essential-addons.com/elementor/post-carousel/)
+* [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/)
 
 More coming soon (weekly update) ...
 
@@ -137,6 +137,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.2 =
+
+- WPForms element added
+- Author, Tags and Exclude posts options added to Post elements (Post Grid, Post Timeline)
+- "All" text change option for Filterable Gallery
+- Social feeds elements updated
+- Advanced Tabs scripts improved
+- Post Timeline scripts improved
+- Cell colspan feature added to Data Table
+- Few minor bugfix and improvements
 
 = 2.7.1 =
 
