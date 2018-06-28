@@ -369,6 +369,41 @@ if ( !function_exists('eael_select_caldera_form') ) {
     }
 }
 
+/**
+ * Get WPForms List
+ * @return array
+ */
+if ( !function_exists('eael_select_wpforms_forms') ) {
+    function eael_select_wpforms_forms() {
+        if ( class_exists( 'WPForms' ) ) {
+            $options = array();
+
+            $args = array(
+                'post_type'         => 'wpforms',
+                'posts_per_page'    => -1
+            );
+
+            $contact_forms = get_posts( $args );
+
+            if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
+
+            $i = 0;
+
+            foreach ( $contact_forms as $post ) {   
+                if ( $i == 0 ) {
+                    $options[0] = esc_html__( 'Select a WPForm', 'essential-addons-elementor' );
+                }
+                $options[ $post->ID ] = $post->post_title;
+                $i++;
+            }
+            }
+        } else {
+            $options = array();
+        }
+
+        return $options;
+    }
+}
 
 // Get all elementor page templates
 if ( !function_exists('eael_get_page_templates') ) {
@@ -390,8 +425,8 @@ if ( !function_exists('eael_get_page_templates') ) {
 }
 
 // Get all Authors
-if ( !function_exists('eael_get_auhtors') ) {
-    function eael_get_auhtors() {
+if ( !function_exists('eael_get_authors') ) {
+    function eael_get_authors() {
 
         $options = array();
 

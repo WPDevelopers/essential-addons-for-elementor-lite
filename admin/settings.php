@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -125,7 +125,7 @@ class Eael_Admin_Settings {
 						<h2 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h2>
 					</div>
 					<div class="eael-header-right">
-						<input type="submit" value="Save settings" class="button eael-btn js-eael-settings-save"/>
+					<button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
 					</div>
 				</div>
 			  	<div class="eael-settings-tabs">
@@ -304,6 +304,11 @@ class Eael_Admin_Settings {
 										<p class="eael-el-title"><?php _e( 'Caldera Form', 'essential-addons-elementor' ) ?></p>
 									</div>
 									<div class="eael-checkbox">
+									 	<input type="checkbox" id="wpforms" name="wpforms" <?php checked( 1, $this->eael_get_settings['wpforms'], true ); ?> >
+										<label for="wpforms"></label>
+										<p class="eael-el-title"><?php _e( 'WPForms', 'essential-addons-elementor' ) ?></p>
+									</div>
+									<div class="eael-checkbox">
 									 	<input type="checkbox" id="twitter-feed" name="twitter-feed" <?php checked( 1, $this->eael_get_settings['twitter-feed'], true ); ?> >
 										<label for="twitter-feed"></label>
 										<p class="eael-el-title"><?php _e( 'Twitter Feed', 'essential-addons-elementor' ) ?></p>
@@ -475,9 +480,37 @@ class Eael_Admin_Settings {
 									        <?php _e( 'Mailchimp', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="divider" name="divider" disabled>
+									    <label for="divider" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Divider', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="price-menu" name="price-menu" disabled>
+									    <label for="price-menu" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Price Menu', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="image-hotspots" name="image-hotspots" disabled>
+									    <label for="image-hotspots" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Image Hotspots', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="one-page-navigation" name="one-page-navigation" disabled>
+									    <label for="one-page-navigation" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'One Page Navigation', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
 								</div><!--./checkbox-container-->
 							  	<div class="eael-save-btn-wrap">
-							  		<input type="submit" value="Save settings" class="button eael-btn js-eael-settings-save"/>
+								  <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
 							  	</div>
 				      		</div>
 				      	</div>
@@ -533,7 +566,8 @@ class Eael_Admin_Settings {
 		    'price-table' 		=> intval( $settings['price-table'] ? 1 : 0 ),
 		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
 		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
-		    'caldera-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
+		    'caldera-form' 		=> intval( $settings['caldera-form'] ? 1 : 0 ),
+		    'wpforms' 			=> intval( $settings['wpforms'] ? 1 : 0 ),
 		    'twitter-feed' 		=> intval( $settings['twitter-feed'] ? 1 : 0 ),
 		    'facebook-feed' 	=> intval( $settings['facebook-feed'] ? 1 : 0 ),
 		    'data-table' 		=> intval( $settings['data-table'] ? 1 : 0 ),
