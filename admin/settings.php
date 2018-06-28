@@ -480,6 +480,34 @@ class Eael_Admin_Settings {
 									        <?php _e( 'Mailchimp', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="divider" name="divider" disabled>
+									    <label for="divider" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Divider', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="price-menu" name="price-menu" disabled>
+									    <label for="price-menu" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Price Menu', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="image-hotspots" name="image-hotspots" disabled>
+									    <label for="image-hotspots" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Image Hotspots', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="one-page-navigation" name="one-page-navigation" disabled>
+									    <label for="one-page-navigation" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'One Page Navigation', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
 								</div><!--./checkbox-container-->
 							  	<div class="eael-save-btn-wrap">
 								  <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
