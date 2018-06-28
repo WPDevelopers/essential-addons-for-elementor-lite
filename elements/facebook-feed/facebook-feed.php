@@ -60,7 +60,7 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 				'label' => esc_html__( 'App Secret', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
-				'default' => 'e14ec8e0c0d4918d0133d2cf2aca2de9',
+				'default' => '23345fce6a2d09fe968f7b44d45c3d72',
 				'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App Secret.</a> Create or select an app and grab the App ID',
 			]
 		);
@@ -112,6 +112,26 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
 				'default' => '400'
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_facebook_feed_column_spacing',
+			[
+				'label' => esc_html__( 'Column spacing', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 10,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-social-feed-element' => 'padding: {{SIZE}}px;',
+				],
 			]
 		);
 
@@ -210,9 +230,8 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 			]
 		);
 
-  		$this->end_controls_section();
-
-  		$this->start_controls_section(
+		  $this->end_controls_section();
+		  $this->start_controls_section(
 			'eael_section_pro',
 			[
 				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
@@ -570,79 +589,29 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 
 	protected function render( ) {
 
-      	$settings = $this->get_settings();
+		$settings = $this->get_settings();
 
-      	if( 'list' == $settings['eael_facebook_feed_type'] ) {
-      		$feed_class = 'list-view';
-      	}elseif( 'masonry' == $settings['eael_facebook_feed_type'] ) {
-      		$feed_class = 'masonry-view';
-      	}
-
-
-    	// Get the specific template
-    	if( 'masonry' == $settings['eael_facebook_feed_type'] ) {
-    		$template = 'masonry.php';
-    	}else {
-    		$template = 'list.php';
-    	}
-
-
+		if( 'list' == $settings['eael_facebook_feed_type'] ) {
+			$feed_class = 'list-view';
+		}elseif( 'masonry' == $settings['eael_facebook_feed_type'] ) {
+			$feed_class = 'masonry-view';
+		}
+		  
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-ac-name', $settings['eael_facebook_feed_ac_name'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-post-limit', $settings['eael_facebook_feed_post_limit'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-app-id', $settings['eael_facebook_feed_app_id'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-app-secret', $settings['eael_facebook_feed_app_secret'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-content-length', $settings['eael_facebook_feed_content_length'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-media', $settings['eael_facebook_feed_media'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-type', $settings['eael_facebook_feed_type'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-id', esc_attr($this->get_id()) ); 
 	?>
-	<div class="eael-facebook-feed-wrapper">
-		<div class="eael-facebook-feed-container <?php echo esc_attr( $feed_class ); ?>"></div>
+	<div class="eael-facebook-feed-wrapper eael-facebook-feed-layout-wrapper" <?php echo $this->get_render_attribute_string( 'eael-facebook-feed' ); ?> >
+		<div id="eael-facebook-feed-<?php echo esc_attr($this->get_id()); ?>" class="eael-facebook-feed-container eael-facebook-feed-layout-container <?php echo esc_attr( $feed_class ); ?>"></div>
 		<div class="eael-loading-feed"><div class="loader"></div></div>
 	</div>
-	<script>
-    jQuery( document ).ready( function($) {
-    	var loadingFeed = $( '.eael-loading-feed' );
-    	/**
-    	 * Facebook Feed Init
-    	 */
-    	function eael_facebook_feeds() {
 
-    		$( '.eael-facebook-feed-container' ).socialfeed({
-			    facebook:{
-			       accounts: ['<?php echo $settings['eael_facebook_feed_ac_name']; ?>'],
-			       limit: <?php echo $settings['eael_facebook_feed_post_limit']; ?>,
-			       access_token: '<?php echo $settings['eael_facebook_feed_app_id']; ?>|<?php echo $settings['eael_facebook_feed_app_secret']; ?>'
-			    },
-
-	            // GENERAL SETTINGS
-	            length: <?php if( !empty( $settings['eael_facebook_feed_content_length'] ) ) : echo $settings['eael_facebook_feed_content_length']; else: echo '400'; endif; ?>,
-	            show_media: <?php if( !empty( $settings['eael_facebook_feed_media'] ) ) : echo $settings['eael_facebook_feed_media']; else: echo 'false'; endif; ?>,
-	            template: '<?php echo plugins_url( '/', __FILE__ ) . 'templates/'.$template;  ?>',
-	        });
-    	}
-		/**
-		 * Facebook Feed Masonry View
-		 */
-		function eael_facebook_feed_masonry() {
-			$('.eael-facebook-feed-container').masonry({
-			    itemSelector: '.eael-social-feed-element',
-			    percentPosition: true,
-			    columnWidth: '.eael-social-feed-element'
-			});
-		}
-
-		$.ajax({
-		   	url: eael_facebook_feeds(),
-		   	beforeSend: function() {
-		   		loadingFeed.addClass( 'show-loading' );
-		   	},
-		   	success: function() {
-				<?php  if( 'masonry' == $settings['eael_facebook_feed_type'] ) : ?>
-					eael_facebook_feed_masonry();
-				<?php endif; ?>
-				loadingFeed.removeClass( 'show-loading' );
-			},
-			error: function() {
-				console.log('error loading');
-			}
-		});
-
-    });
-
-	</script>
+	
 
 	<?php
 		echo '<style>';
