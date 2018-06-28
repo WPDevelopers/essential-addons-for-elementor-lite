@@ -125,6 +125,26 @@ class Widget_Eael_Twitter_Feed extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_twitter_feed_column_spacing',
+			[
+				'label' => esc_html__( 'Column spacing', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 10,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-social-feed-element' => 'padding: {{SIZE}}px;',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_twitter_feed_post_limit',
 			[
@@ -221,8 +241,8 @@ class Widget_Eael_Twitter_Feed extends Widget_Base {
 			]
 		);
 
-  		$this->end_controls_section();
-  		$this->start_controls_section(
+		$this->end_controls_section();
+		$this->start_controls_section(
 			'eael_section_pro',
 			[
 				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
@@ -588,76 +608,21 @@ class Widget_Eael_Twitter_Feed extends Widget_Base {
       		$feed_class = 'masonry-view';
       	}
 
-      	// Get the specific template
-    	if( 'masonry' == $settings['eael_twitter_feed_type'] ) {
-    		$template = 'masonry.php';
-    	}else {
-    		$template = 'list.php';
-    	}
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-ac-name', $settings['eael_twitter_feed_ac_name'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-post-limit', $settings['eael_twitter_feed_post_limit'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-hashtag-name', $settings['eael_twitter_feed_hashtag_name'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-consumer-key', $settings['eael_twitter_feed_consumer_key'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-consumer-secret', $settings['eael_twitter_feed_consumer_secret'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-content-length', $settings['eael_twitter_feed_content_length'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-media', $settings['eael_twitter_feed_media'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-type', $settings['eael_twitter_feed_type'] );
+		$this->add_render_attribute( 'eael-twitter-feed', 'data-twitter-feed-id', esc_attr($this->get_id()) );  
 
 	?>
-	<div class="eael-twitter-feed-wrapper">
-		<div class="eael-twitter-feed-container <?php echo esc_attr( $feed_class ); ?>"></div>
+	<div class="eael-twitter-feed-wrapper eael-twitter-feed-layout-wrapper" <?php echo $this->get_render_attribute_string( 'eael-twitter-feed' ); ?>>
+		<div id="eael-twitter-feed-<?php echo esc_attr($this->get_id()); ?>" class="eael-twitter-feed-container eael-twitter-feed-layout-container <?php echo esc_attr( $feed_class ); ?>"></div>
 		<div class="eael-loading-feed"><div class="loader"></div></div>
 	</div>
-	<script>
-    jQuery( document ).ready( function($) {
-    	var loadingFeed = $( '.eael-loading-feed' );
-
-    	/**
-    	 * Twitter Feed Init
-    	 */
-    	function eael_twitter_feeds() {
-    		$( '.eael-twitter-feed-container' ).socialfeed({
-	            // TWITTER
-			    twitter:{
-			       accounts: ['<?php echo $settings['eael_twitter_feed_ac_name']; ?>', '<?php echo $settings['eael_twitter_feed_hashtag_name']; ?>'],
-			       limit: <?php echo $settings['eael_twitter_feed_post_limit']; ?>,
-			       consumer_key: '<?php echo $settings['eael_twitter_feed_consumer_key']; ?>',
-			       consumer_secret: '<?php echo $settings['eael_twitter_feed_consumer_secret']; ?>',
-			    },
-
-	            // GENERAL SETTINGS
-	            length: <?php if( !empty( $settings['eael_twitter_feed_content_length'] ) ) : echo $settings['eael_twitter_feed_content_length']; else: echo '400'; endif; ?>,
-	            show_media: <?php if( !empty( $settings['eael_twitter_feed_media'] ) ) : echo $settings['eael_twitter_feed_media']; else: echo 'false'; endif; ?>,
-	            template: '<?php echo plugins_url( '/', __FILE__ ) . 'templates/'.$template;  ?>',
-	        });
-    	}
-
-		/**
-		 * Twitter Feed masonry View
-		 */
-		function eael_twitter_feed_masonry() {
-			$('.eael-twitter-feed-container').masonry({
-			    itemSelector: '.eael-social-feed-element',
-			    percentPosition: true,
-			    columnWidth: '.eael-social-feed-element'
-			});
-		}
-
-		$.ajax({
-		   	url: eael_twitter_feeds(),
-		   	beforeSend: function() {
-		   		loadingFeed.addClass( 'show-loading' );
-		   	},
-		   	success: function() {
-				setInterval( function() {
-					<?php  if( 'masonry' == $settings['eael_twitter_feed_type'] ) : ?>
-						eael_twitter_feed_masonry();
-					<?php endif; ?>
-						loadingFeed.removeClass( 'show-loading' );
-				}, 4000 );
-			},
-			error: function() {
-				console.log('error loading');
-			}
-		});
-
-    });
-
-
-	</script>
-
 
 	<?php
 		echo '<style>';
