@@ -101,7 +101,7 @@
         
         // Facebook Feed Masonry View
         function eael_facebook_feed_masonry() {
-            $('.eael-facebook-feed-layout-container').masonry({
+            $('.eael-facebook-feed-layout-container.masonry-view').masonry({
                 itemSelector: '.eael-social-feed-element',
                 percentPosition: true,
                 columnWidth: '.eael-social-feed-element'
@@ -187,7 +187,7 @@
         //Twitter Feed masonry View
         
         function eael_twitter_feed_masonry() {
-            $('.eael-twitter-feed-layout-container').masonry({
+            $('.eael-twitter-feed-layout-container.masonry-view').masonry({
                 itemSelector: '.eael-social-feed-element',
                 percentPosition: true,
                 columnWidth: '.eael-social-feed-element'
