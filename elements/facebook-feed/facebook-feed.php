@@ -49,7 +49,7 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 				'label' => esc_html__( 'App ID', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
-				'default' => '138195606893948',
+				'default' => '',
 				'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App ID.</a> Create or select an app and grab the App ID',
 			]
 		);
@@ -60,7 +60,7 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 				'label' => esc_html__( 'App Secret', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
-				'default' => '23345fce6a2d09fe968f7b44d45c3d72',
+				'default' => '',
 				'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App Secret.</a> Create or select an app and grab the App ID',
 			]
 		);
