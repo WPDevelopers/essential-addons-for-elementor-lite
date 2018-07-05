@@ -230,7 +230,6 @@ add_filter( "plugin_action_links_$plugin", 'eael_add_settings_link' );
  */
 function eael_activate() {
     add_option('eael_do_activation_redirect', true);
-    add_option('eael_do_activation_reviews', true);
 }
 register_activation_hook(__FILE__, 'eael_activate');
 
@@ -401,6 +400,9 @@ function eael_review_notice_message(){
     ?>
     
     <div class="eael-review-notice">
+        <div class="eael-review-thumbnail">
+            <img src="<?php echo plugins_url( 'admin/assets/images/ea-icon-color.png', __FILE__ ) ?>" alt="">
+        </div>
         <div class="eael-review-text">
             <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
             <p><?php _e( 'Something to write', 'essential-addons-elementor' ) ?></p>

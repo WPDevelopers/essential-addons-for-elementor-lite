@@ -59,6 +59,7 @@ class Eael_Admin_Settings {
 	 */
 	public function enqueue_eael_admin_scripts() {
 
+		wp_enqueue_style( 'essential_addons_elementor-notice-css', plugins_url( '/', __FILE__ ).'assets/css/eael-notice.css' );
 		if( isset( $_GET['page'] ) && $_GET['page'] == 'eael-settings' ) {
 			wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
 			wp_enqueue_style( 'font-awesome-css', plugins_url( '/', __FILE__ ).'assets/vendor/font-awesome/css/font-awesome.min.css' );
