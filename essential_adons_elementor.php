@@ -230,6 +230,7 @@ add_filter( "plugin_action_links_$plugin", 'eael_add_settings_link' );
  */
 function eael_activate() {
     add_option('eael_do_activation_redirect', true);
+    add_option('eael_do_activation_reviews', true);
 }
 register_activation_hook(__FILE__, 'eael_activate');
 
@@ -353,15 +354,15 @@ function eael_nag_ignore() {
 add_action('admin_init', 'eael_nag_ignore');
 
 /**
- * @review_dismis()
- * @review_prending()
+ * @review_dismiss()
+ * @review_pending()
  * @eael_review_notice_message()
  * Make all the above functions working.
  */
 function eael_review_notice(){
-    
-    review_dismis();
-    review_prending();
+
+    review_dismiss();
+    review_pending();
 
     $activation_time 	= get_site_option( 'eael_active_time' );
     $review_dismissal	= get_site_option( 'eael_review_dismiss' );
@@ -371,16 +372,25 @@ function eael_review_notice(){
         return;
     }
 
-    if ( ! $activation_time ) {
-        $activation_time = time();
-        add_site_option( 'eael_active_time', $activation_time );
+    /**
+     * It will fire when user activate the plugin. 
+     * after deactivation and again activation the time will be update.
+     */
+    if( get_option( 'eael_do_activation_reviews', false ) ) {
+        delete_option('eael_do_activation_reviews');
+        if ( ! $activation_time ) {
+            add_site_option( 'eael_active_time', time() );
+        } else {
+            update_site_option( 'eael_active_time', time() );
+        }
     }
-    $daysinseconds = 604800;
+    
+        
+    $daysinseconds = 604800; // 7 Days in seconds.
     if( 'yes' == $maybe_later ) {
         $daysinseconds = 1296000; // 15 Days in seconds.
     }
 
-    // 604800 = 7 Days in seconds.
     if ( time() - $activation_time > $daysinseconds ) {
         add_action( 'admin_notices' , 'eael_review_notice_message' );
     }
@@ -404,7 +414,19 @@ function eael_review_notice_message(){
         <div class="eael-review-text">
             <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
             <p><?php _e( 'Something to write', 'essential-addons-elementor' ) ?></p>
-            <ul class="eael-review-ul">
+            <ul class="analytify-review-ul">
+                <li>
+                    <a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/#postform" target="_blank">
+                        <span class="dashicons dashicons-external"></span>
+                        <?php _e( 'Sure! I\'d love to!', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $dismiss_url ?>">
+                        <span class="dashicons dashicons-smiley"></span>
+                        <?php _e( 'I\'ve already left a review', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
                 <li>
                     <a href="<?php echo $later_url ?>">
                         <span class="dashicons dashicons-calendar-alt"></span>
@@ -425,9 +447,9 @@ function eael_review_notice_message(){
 }
 
 /**
- * For Dismis! 
+ * For Dismiss! 
  */
-function review_dismis(){
+function review_dismiss(){
 
     if ( ! is_admin() ||
         ! current_user_can( 'manage_options' ) ||
@@ -445,7 +467,7 @@ function review_dismis(){
 /**
  * For Maybe Later Update.
  */
-function review_prending() {
+function review_pending() {
 
     if ( ! is_admin() ||
         ! current_user_can( 'manage_options' ) ||
