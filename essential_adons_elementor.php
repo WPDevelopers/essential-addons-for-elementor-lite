@@ -372,20 +372,10 @@ function eael_review_notice(){
         return;
     }
 
-    /**
-     * It will fire when user activate the plugin. 
-     * after deactivation and again activation the time will be update.
-     */
-    if( get_option( 'eael_do_activation_reviews', false ) ) {
-        delete_option('eael_do_activation_reviews');
-        if ( ! $activation_time ) {
-            add_site_option( 'eael_active_time', time() );
-        } else {
-            update_site_option( 'eael_active_time', time() );
-        }
+    if ( ! $activation_time ) {
+        add_site_option( 'eael_active_time', time() );
     }
     
-        
     $daysinseconds = 604800; // 7 Days in seconds.
     if( 'yes' == $maybe_later ) {
         $daysinseconds = 1296000; // 15 Days in seconds.
@@ -482,3 +472,12 @@ function review_pending() {
     update_site_option( 'eael_maybe_later', 'yes' );
 
 }
+
+/**
+ * Remove Reviews Metadata on plugin Deactivation.
+ */
+function eael_deactivate() {
+    delete_option('eael_active_time');
+    delete_option('eael_maybe_later');
+}
+register_deactivation_hook(__FILE__, 'eael_deactivate');
