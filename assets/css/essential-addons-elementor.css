@@ -1894,6 +1894,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 }
 .eael-infobox:hover .infobox-icon .infobox-icon-wrap {
   transform: scale(1.1);
+  transform-origin: 0 0;
 }
 /* For Content Alignment */
 .eael-infobox-content-align-left .eael-infobox .infobox-icon,
