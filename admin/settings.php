@@ -584,7 +584,6 @@ class Eael_Admin_Settings {
 		return true;
 		die();
 
-
 	}
 
 }
