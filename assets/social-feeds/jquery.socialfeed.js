@@ -307,23 +307,37 @@ if (typeof Object.create !== 'function') {
                     var proceed = function(request_url){
                         Utility.request(request_url, Feed.facebook.utility.getPosts);
                     };
-                    var fields = '?fields=id,from,name,message,created_time,story,description,link';
-                       fields += (options.show_media === true)?',picture,object_id':'';
-                    var request_url, limit = '&limit=' + options.facebook.limit,
+                    // var fields = '?fields=id,from,name,message,created_time,story,description,link';
+                    var fields = '?fields=id,name,link,posts{description,from,created_time,message,story,link,name,id}';
+                    if( options.show_media === true ) {
+                        fields = '?fields=id,name,link,posts{description,from,created_time,message,story,link,name,id,picture,object_id}';
+                    }
+                    if( options.facebook.limit && options.show_media === true ) {
+                        fields = '?fields=id,name,link,posts.limit('+ options.facebook.limit +'){description,from,created_time,message,story,link,name,id,picture,object_id}';
+                    } else if( options.facebook.limit ) {
+                        fields = '?fields=id,name,link,posts.limit('+ options.facebook.limit +'){description,from,created_time,message,story,link,name,id}';
+                    }
+                    var request_url,
                         query_extention = '&access_token=' + options.facebook.access_token + '&callback=?';
                     switch (account[0]) {
                         case '@':
                             var username = account.substr(1);
                             Feed.facebook.utility.getUserId(username, function(userdata) {
                                 if (userdata.id !== '') {
-                                    request_url = Feed.facebook.graph + 'v2.12/' + userdata.id + '/posts'+ fields + limit + query_extention;
+                                    request_url = Feed.facebook.graph + 'v2.12/' + userdata.id + '/posts'+ fields + query_extention;
                                     proceed(request_url);
                                 }
                             });
                             break;
+                        case '#':
+                            var userid = account.substr(1);
+                            query_extention = '&access_token=' + options.facebook.access_token;
+                            request_url = Feed.facebook.graph + 'v3.0/' + userid + '/'+ fields + query_extention;
+                            proceed(request_url);
+                            break;
                         case '!':
                             var page = account.substr(1);
-                            request_url = Feed.facebook.graph + 'v2.12/' + page + '/feed'+ fields + limit + query_extention;
+                            request_url = Feed.facebook.graph + 'v2.12/' + page + '/feed'+ fields + query_extention;
                             proceed(request_url);
                             break;
                         default:
@@ -362,26 +376,30 @@ if (typeof Object.create !== 'function') {
 
                     },
                     getPosts: function(json) {
-                        if (json['data']) {
-                            json['data'].forEach(function(element) {
-                                var post = new SocialFeedPost('facebook', Feed.facebook.utility.unifyPostData(element));
+                        if(json) {
+                            var userid = json['id'];
+                            var name = json['name'];
+                            var link = json['link'];
+                        }
+                        if (json['posts']['data']) {
+                            json['posts']['data'].forEach(function(element) {
+                                var post = new SocialFeedPost('facebook', Feed.facebook.utility.unifyPostData(element, userid, name, link));
                                 post.render();
                             });
                         }
                     },
-                    unifyPostData: function(element) {
+                    unifyPostData: function(element, userid = '', name = '', link = '') {
                         var post = {},
                             text = (element.message) ? element.message : element.story;
-
                         post.id = element.id;
                         post.dt_create = moment(element.created_time);
-                        post.author_link = 'http://facebook.com/' + element.from.id;
-                        post.author_picture = Feed.facebook.graph + element.from.id + '/picture';
-                        post.author_name = element.from.name;
+                        post.author_link = 'http://facebook.com/' + userid;
+                        post.author_picture = Feed.facebook.graph + userid + '/picture';
+                        post.author_name = name;
                         post.name = element.name || "";
                         post.message = (text) ? text : '';
                         post.description = (element.description) ? element.description : '';
-                        post.link = (element.link) ? element.link : 'http://facebook.com/' + element.from.id;
+                        post.link = (element.link) ? element.link : 'http://facebook.com/' + element.id;
 
                         if (options.show_media === true) {
                             if (element.picture) {

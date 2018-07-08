@@ -34,11 +34,11 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 		$this->add_control(
 			'eael_facebook_feed_ac_name',
 			[
-				'label' => esc_html__( 'Account Name', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Account ID', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
-				'default' => '@Codetic',
-				'description' => esc_html__( 'Use @ sign with your account name.', 'essential-addons-elementor' ),
+				'default' => '#12345679',
+				'description' => esc_html__( 'Use # sign with your account ID.', 'essential-addons-elementor' ),
 
 			]
 		);
