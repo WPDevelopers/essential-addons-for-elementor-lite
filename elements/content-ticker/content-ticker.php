@@ -189,9 +189,9 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
             [
                 'label' => __( 'Categories', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT2,
-        'label_block' => true,
-        'multiple' => true,
-        'options' => eael_post_type_categories(),
+                'label_block' => true,
+                'multiple' => true,
+                'options' => eael_post_type_categories(),
                 'condition' => [
                        'eael_post_type' => 'post'
                 ]

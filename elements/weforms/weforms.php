@@ -42,6 +42,7 @@ class Widget_Eael_WeForm extends Widget_Base {
 				'label_block' => true,
 				'type' => Controls_Manager::SELECT,
 				'options' => eael_select_weform(),
+				'default'	=> '0',
 			]
 		);
 
