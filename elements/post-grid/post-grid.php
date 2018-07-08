@@ -114,7 +114,6 @@ class Widget_Eael_Post_Grid extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'options' => eael_get_post_orderby_options(),
                 'default' => 'date',
-
             ]
         );
 

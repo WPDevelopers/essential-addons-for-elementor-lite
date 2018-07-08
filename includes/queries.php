@@ -171,9 +171,9 @@ function eael_post_type_categories(){
     ));
 
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-    foreach ( $terms as $term ) {
-        $options[ $term->term_id ] = $term->name;
-    }
+        foreach ( $terms as $term ) {
+            $options[ $term->term_id ] = $term->name;
+        }
     }
 
     return $options;
@@ -190,10 +190,10 @@ function eael_woocommerce_product_categories(){
     ));
 
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-    foreach ( $terms as $term ) {
-        $options[ $term->slug ] = $term->name;
-    }
-    return $options;
+        foreach ( $terms as $term ) {
+            $options[ $term->slug ] = $term->name;
+        }
+        return $options;
     }
 }
 
@@ -206,13 +206,13 @@ function eael_woocommerce_product_get_product_by_id(){
         'post_type' => 'product',
         'showposts' => 9999,
     ));
-    $posts = array();
+    $options = array();
 
     if ( ! empty( $postlist ) && ! is_wp_error( $postlist ) ){
-    foreach ( $postlist as $post ) {
-        $options[ $post->ID ] = $post->post_title;
-    }
-    return $options;
+        foreach ( $postlist as $post ) {
+            $options[ $post->ID ] = $post->post_title;
+        }
+        return $options;
 
     }
 }
@@ -228,10 +228,10 @@ function eael_woocommerce_product_categories_by_id(){
     ));
 
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-    foreach ( $terms as $term ) {
-        $options[ $term->term_id ] = $term->name;
-    }
-    return $options;
+        foreach ( $terms as $term ) {
+            $options[ $term->term_id ] = $term->name;
+        }
+        return $options;
     }
 
 }
@@ -240,20 +240,22 @@ function eael_woocommerce_product_categories_by_id(){
  * Get Contact Form 7 [ if exists ]
  */
 if ( function_exists( 'wpcf7' ) ) {
-function eael_select_contact_form(){
-    $wpcf7_form_list = get_posts(array(
-        'post_type' => 'wpcf7_contact_form',
-        'showposts' => 999,
-    ));
-    $posts = array();
-
-    if ( ! empty( $wpcf7_form_list ) && ! is_wp_error( $wpcf7_form_list ) ){
-    foreach ( $wpcf7_form_list as $post ) {
-        $options[ $post->ID ] = $post->post_title;
+    function eael_select_contact_form(){
+        $wpcf7_form_list = get_posts(array(
+            'post_type' => 'wpcf7_contact_form',
+            'showposts' => 999,
+        ));
+        $options = array();
+        $options[0] = esc_html__( 'Select a Contact Form', 'essential-addons-elementor' );
+        if ( ! empty( $wpcf7_form_list ) && ! is_wp_error( $wpcf7_form_list ) ){
+            foreach ( $wpcf7_form_list as $post ) {
+                $options[ $post->ID ] = $post->post_title;
+            }
+        } else {
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-elementor' );
+        }
+        return $options;
     }
-    return $options;
-    }
-}
 }
 
 /**
@@ -261,25 +263,20 @@ function eael_select_contact_form(){
  */
 if ( !function_exists('eael_select_gravity_form') ) {
     function eael_select_gravity_form() {
+        $options = array();
         if ( class_exists( 'GFCommon' ) ) {
-            $options = array();
-
             $gravity_forms = RGFormsModel::get_forms( null, 'title' );
 
             if ( ! empty( $gravity_forms ) && ! is_wp_error( $gravity_forms ) ) {
 
-                $i = 0;
-
+                $options[0] = esc_html__( 'Select Gravity Form', 'essential-addons-elementor' );
                 foreach ( $gravity_forms as $form ) {   
-                    if ( $i == 0 ) {
-                        $options[0] = esc_html__( 'Select Gravity Form', 'essential-addons-elementor' );
-                    }
                     $options[ $form->id ] = $form->title;
-                    $i++;
                 }
+
+            } else {
+                $options[0] = esc_html__( 'Create a Form First', 'essential-addons-elementor' );
             }
-        } else {
-            $options = array();
         }
 
         return $options;
@@ -296,15 +293,19 @@ function eael_select_weform() {
         'post_type' => 'wpuf_contact_form',
         'showposts' => 999,
     ));
-    $posts = array();
 
+    $options = array();
+    
     if ( ! empty( $wpuf_form_list ) && ! is_wp_error( $wpuf_form_list ) ) {
+        $options[0] = esc_html__( 'Select weForm', 'essential-addons-elementor' );
         foreach ( $wpuf_form_list as $post ) {
             $options[ $post->ID ] = $post->post_title;
         }
-        return $options;
+    } else {
+        $options[0] = esc_html__( 'Create a Form First', 'essential-addons-elementor' );
     }
-
+    
+    return $options;
 }
 
 /**
@@ -313,25 +314,20 @@ function eael_select_weform() {
  */
 if ( !function_exists('eael_select_ninja_form') ) {
     function eael_select_ninja_form() {
+        $options = array();
         if ( class_exists( 'Ninja_Forms' ) ) {
-            $options = array();
-
             $contact_forms = Ninja_Forms()->form()->get_forms();
 
             if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
 
-                $i = 0;
+                $options[0] = esc_html__( 'Select Ninja Form', 'essential-addons-elementor' );
 
                 foreach ( $contact_forms as $form ) {   
-                    if ( $i == 0 ) {
-                        $options[0] = esc_html__( 'Select Ninja Form', 'essential-addons-elementor' );
-                    }
                     $options[ $form->get_id() ] = $form->get_setting( 'title' );
-                    $i++;
                 }
             }
         } else {
-            $options = array();
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-elementor' );
         }
 
         return $options;
@@ -344,25 +340,19 @@ if ( !function_exists('eael_select_ninja_form') ) {
  */
 if ( !function_exists('eael_select_caldera_form') ) {
     function eael_select_caldera_form() {
+        $options = array();
         if ( class_exists( 'Caldera_Forms' ) ) {
-            $options = array();
 
             $contact_forms = Caldera_Forms_Forms::get_forms( true, true );
 
             if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
-
-            $i = 0;
-
-            foreach ( $contact_forms as $form ) {   
-                if ( $i == 0 ) {
-                    $options[0] = esc_html__( 'Select Caldera Form', 'essential-addons-elementor' );
+                $options[0] = esc_html__( 'Select Caldera Form', 'essential-addons-elementor' );
+                foreach ( $contact_forms as $form ) {   
+                    $options[ $form['ID'] ] = $form['name'];
                 }
-                $options[ $form['ID'] ] = $form['name'];
-                $i++;
-            }
             }
         } else {
-            $options = array();
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-elementor' );
         }
 
         return $options;
@@ -375,8 +365,8 @@ if ( !function_exists('eael_select_caldera_form') ) {
  */
 if ( !function_exists('eael_select_wpforms_forms') ) {
     function eael_select_wpforms_forms() {
+        $options = array();
         if ( class_exists( 'WPForms' ) ) {
-            $options = array();
 
             $args = array(
                 'post_type'         => 'wpforms',
@@ -386,19 +376,13 @@ if ( !function_exists('eael_select_wpforms_forms') ) {
             $contact_forms = get_posts( $args );
 
             if ( ! empty( $contact_forms ) && ! is_wp_error( $contact_forms ) ) {
-
-            $i = 0;
-
-            foreach ( $contact_forms as $post ) {   
-                if ( $i == 0 ) {
-                    $options[0] = esc_html__( 'Select a WPForm', 'essential-addons-elementor' );
+                $options[0] = esc_html__( 'Select a WPForm', 'essential-addons-elementor' );
+                foreach ( $contact_forms as $post ) {   
+                    $options[ $post->ID ] = $post->post_title;
                 }
-                $options[ $post->ID ] = $post->post_title;
-                $i++;
-            }
             }
         } else {
-            $options = array();
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-elementor' );
         }
 
         return $options;
