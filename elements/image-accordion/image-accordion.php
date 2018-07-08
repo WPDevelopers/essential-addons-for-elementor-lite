@@ -239,11 +239,12 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
       $this->add_control(
         'eael_accordion_img_hover_color',
         [
-          'label' => esc_html__( 'Hover Color', 'essential-addons-elementor' ),
+          'label' => esc_html__( 'Hover Overlay Color', 'essential-addons-elementor' ),
           'type' => Controls_Manager::COLOR,
           'default' => 'rgba(0, 0, 0, .5)',
           'selectors' => [
-            '{{WRAPPER}} .eael-img-accordion a:hover .overlay' => 'background-color: {{VALUE}};',
+            '{{WRAPPER}} .eael-img-accordion a:hover::after' => 'background-color: {{VALUE}};',
+            '{{WRAPPER}} .eael-img-accordion a.overlay-active:after' => 'background-color: {{VALUE}};',
           ],
         ]
       );
@@ -367,6 +368,7 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
             $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').on('click', function(e) {
               e.preventDefault();
               $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').css('flex', '1');
+              $(this).find('.overlay').parent('a').addClass('overlay-active');
               $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').find('.overlay-inner').removeClass('overlay-inner-show');
               $(this).find('.overlay-inner').addClass('overlay-inner-show');
               $(this).css('flex', '3');
@@ -374,6 +376,7 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
             $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').on('blur', function(e) {
               $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').css('flex', '1');
               $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').find('.overlay-inner').removeClass('overlay-inner-show');
+              $(this).find('.overlay').parent('a').removeClass('overlay-active');
             });
           });
         </script>
