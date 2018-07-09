@@ -121,7 +121,7 @@ class Eael_Admin_Settings {
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-logo.png'; ?>">
 						</div>
 						<h2 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h2>
 					</div>
@@ -199,7 +199,7 @@ class Eael_Admin_Settings {
 			      			<div class="eael-admin-sidebar">
 			      				<div class="eael-sidebar-block">
 			      					<div class="eael-admin-sidebar-logo">
-			      						<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+			      						<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-logo.png'; ?>">
 			      					</div>
 			      					<div class="eael-admin-sidebar-cta">
 			      						<?php printf( __( '<a href="%s" target="_blank">Upgrade to Pro</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/in/upgrade-essential-addons-elementor' ); ?>
