@@ -405,7 +405,7 @@ function eael_review_notice_message(){
         </div>
         <div class="eael-review-text">
             <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
-            <p><?php _e( 'Something to write', 'essential-addons-elementor' ) ?></p>
+            <p><?php _e( 'We hope you\'ve enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?', 'essential-addons-elementor' ) ?></p>
             <ul class="eael-review-ul">
                 <li>
                     <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
@@ -423,6 +423,12 @@ function eael_review_notice_message(){
                     <a href="<?php echo $later_url ?>">
                         <span class="dashicons dashicons-calendar-alt"></span>
                         <?php _e( 'Maybe Later', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://essential-addons.com/elementor/support/" target="_blank">
+                        <span class="dashicons dashicons-sos"></span>
+                        <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
