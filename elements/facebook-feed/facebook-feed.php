@@ -42,39 +42,6 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'eael_facebook_feed_access_token',
-		// 	[
-		// 		'label' => esc_html__( 'Page', 'essential-addons-elementor' ),
-		// 		'label_block' => false,
-		// 		'type' => Controls_Manager::SELECT,
-		// 		'default' => '0',
-		// 		'options' => $this->page_list()
-		// 	]
-		// );
-
-		// $this->add_control(
-		// 	'eael_facebook_feed_app_id',
-		// 	[
-		// 		'label' => esc_html__( 'App ID', 'essential-addons-elementor' ),
-		// 		'type' => Controls_Manager::TEXT,
-		// 		'label_block' => false,
-		// 		'default' => '',
-		// 		'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App ID.</a> Create or select an app and grab the App ID',
-		// 	]
-		// );
-
-		// $this->add_control(
-		// 	'eael_facebook_feed_app_secret',
-		// 	[
-		// 		'label' => esc_html__( 'App Secret', 'essential-addons-elementor' ),
-		// 		'type' => Controls_Manager::TEXT,
-		// 		'label_block' => false,
-		// 		'default' => '',
-		// 		'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App Secret.</a> Create or select an app and grab the App ID',
-		// 	]
-		// );
-
   		$this->end_controls_section();
 
 		$this->start_controls_section(

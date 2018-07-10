@@ -307,7 +307,6 @@ if (typeof Object.create !== 'function') {
                     var proceed = function(request_url){
                         Utility.request(request_url, Feed.facebook.utility.getPosts);
                     };
-                    // var fields = '?fields=id,from,name,message,created_time,story,description,link';
                     var fields = '?fields=id,name,link,posts{description,from,created_time,message,story,link,name,id}';
                     if( options.show_media === true ) {
                         fields = '?fields=id,name,link,posts{description,from,created_time,message,story,link,name,id,picture,object_id}';
@@ -319,20 +318,12 @@ if (typeof Object.create !== 'function') {
                     }
                     var request_url,
                         query_extention = '&access_token=' + options.facebook.access_token;
-                        switch (account[0]) {
-                            case '@':
-                                var username = account.substr(1);
-                                    request_url = Feed.facebook.graph + 'v3.0/' + username + fields + query_extention;
-                                    proceed(request_url);
-                                break;
-                            // case '!':
-                            //     // query_extention = '&access_token=EAAQMTSaUIRQBAOCRUxKcNt8gK1S0Fk2ZCs0N4lbNZABocvLkf9ZAdkhkVWZA20xbdPN3I7rafP429yyZBvD86j4DdWF6IIln5NpKCFvIh6lpFgpreWQXU0WAfPSw80lHpVaqC8HIiyAZCe38PX3QgoSBvZBEBIvYpaG5wlZBiJqRoasd8JdwJNltckFvfQZBDppHdRxCSJw9EwgZDZD';
-                            //     // var page = account.substr(1);
-                            //     // request_url = Feed.facebook.graph + 'v3.0/' + page + fields + query_extention;
-                            //     // proceed(request_url);
-                            //     break;
-                            // default:
-                            //     // proceed(request_url);
+                    switch (account[0]) {
+                        case '@':
+                            var username = account.substr(1);
+                                request_url = Feed.facebook.graph + 'v3.0/' + username + fields + query_extention;
+                                proceed(request_url);
+                            break;
                     }
                 },
                 utility: {
