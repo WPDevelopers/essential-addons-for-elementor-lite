@@ -374,11 +374,13 @@ textarea.eael-form-control {
 	background-color: #02CC7B;
 }
 .eael-save-btn-wrap .eael-btn.save-now,
-.eael-header-bar .eael-btn.save-now {
+.eael-header-bar .eael-btn.save-now,
+.eael-fb-feed-btn.save-now {
 	background: #E74C3C;
 }
 .eael-save-btn-wrap .eael-btn.save-now:hover,
-.eael-header-bar .eael-btn.save-now:hover {
+.eael-header-bar .eael-btn.save-now:hover,
+.eael-fb-feed-btn.save-now:hover {
 	background: #ff5544;
 }
 
@@ -512,4 +514,31 @@ textarea.eael-form-control {
 .eael-admin-sidebar-cta a:hover {
 	color: #23282d;
 	box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.715);
+}
+
+/* Facebook Settings CSS */
+
+#social-networks input {
+	padding: 10px;
+}
+#eaelFBbtn, #eaelFBbtnOwnApp {
+	cursor: pointer;
+	display: none;
+	/* color: red; */
+
+}
+
+.page-list-with-access > ul {
+	list-style: none;
+}
+.page-list-with-access > ul > li {
+	display: block;
+	cursor: pointer;
+	padding: 5px 0px;
+}
+.eael-fb-own-app-settings {
+	display: none;
+}
+.eael-fb-own-app-settings.eael-active, #eaelFBbtn.eael-active, #eaelFBbtnOwnApp.eael-active {
+	display: block;
 }
