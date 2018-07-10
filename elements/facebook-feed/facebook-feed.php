@@ -34,36 +34,46 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 		$this->add_control(
 			'eael_facebook_feed_ac_name',
 			[
-				'label' => esc_html__( 'Account ID', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
+				'label' => esc_html__( 'Page', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
 				'label_block' => false,
-				'default' => '#12345679',
-				'description' => esc_html__( 'Use # sign with your account ID.', 'essential-addons-elementor' ),
-
+				'default' => '0',
+				'options' => $this->page_list(),
 			]
 		);
 
-		$this->add_control(
-			'eael_facebook_feed_app_id',
-			[
-				'label' => esc_html__( 'App ID', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
-				'label_block' => false,
-				'default' => '',
-				'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App ID.</a> Create or select an app and grab the App ID',
-			]
-		);
+		// $this->add_control(
+		// 	'eael_facebook_feed_access_token',
+		// 	[
+		// 		'label' => esc_html__( 'Page', 'essential-addons-elementor' ),
+		// 		'label_block' => false,
+		// 		'type' => Controls_Manager::SELECT,
+		// 		'default' => '0',
+		// 		'options' => $this->page_list()
+		// 	]
+		// );
 
-		$this->add_control(
-			'eael_facebook_feed_app_secret',
-			[
-				'label' => esc_html__( 'App Secret', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
-				'label_block' => false,
-				'default' => '',
-				'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App Secret.</a> Create or select an app and grab the App ID',
-			]
-		);
+		// $this->add_control(
+		// 	'eael_facebook_feed_app_id',
+		// 	[
+		// 		'label' => esc_html__( 'App ID', 'essential-addons-elementor' ),
+		// 		'type' => Controls_Manager::TEXT,
+		// 		'label_block' => false,
+		// 		'default' => '',
+		// 		'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App ID.</a> Create or select an app and grab the App ID',
+		// 	]
+		// );
+
+		// $this->add_control(
+		// 	'eael_facebook_feed_app_secret',
+		// 	[
+		// 		'label' => esc_html__( 'App Secret', 'essential-addons-elementor' ),
+		// 		'type' => Controls_Manager::TEXT,
+		// 		'label_block' => false,
+		// 		'default' => '',
+		// 		'description' => '<a href="https://developers.facebook.com/apps/" target="_blank">Get App Secret.</a> Create or select an app and grab the App ID',
+		// 	]
+		// );
 
   		$this->end_controls_section();
 
@@ -596,49 +606,57 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 		}elseif( 'masonry' == $settings['eael_facebook_feed_type'] ) {
 			$feed_class = 'masonry-view';
 		}
-		  
-		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-ac-name', $settings['eael_facebook_feed_ac_name'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-ac-name', '@' . $settings['eael_facebook_feed_ac_name'] );
+		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-ac-token', $this->access_token( $settings['eael_facebook_feed_ac_name'] ) );
 		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-post-limit', $settings['eael_facebook_feed_post_limit'] );
-		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-app-id', $settings['eael_facebook_feed_app_id'] );
-		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-app-secret', $settings['eael_facebook_feed_app_secret'] );
+		// $this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-app-id', $settings['eael_facebook_feed_app_id'] );
+		// $this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-app-secret', $settings['eael_facebook_feed_app_secret'] );
 		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-content-length', $settings['eael_facebook_feed_content_length'] );
 		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-media', $settings['eael_facebook_feed_media'] );
 		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-type', $settings['eael_facebook_feed_type'] );
 		$this->add_render_attribute( 'eael-facebook-feed', 'data-facebook-feed-id', esc_attr($this->get_id()) ); 
+		if( $settings['eael_facebook_feed_ac_name'] === '0' ) :
+			echo '<div class="eael-facebook-feed-wrapper eael-facebook-feed-layout-wrapper eael-warning">Select a page first</div>';
+			echo '<style>';
+				echo '.eael-facebook-feed-wrapper.eael-facebook-feed-layout-wrapper.eael-warning { padding: 10px; background: orange; margin: 10px; box-sizing: border-box; }';
+			echo '</style>';
+			
+		else :
 	?>
-	<div class="eael-facebook-feed-wrapper eael-facebook-feed-layout-wrapper" <?php echo $this->get_render_attribute_string( 'eael-facebook-feed' ); ?> >
+	<div class="eael-facebook-feed-wrapper eael-facebook-feed-layout-wrapper" 
+		<?php echo $this->get_render_attribute_string( 'eael-facebook-feed' ); ?> >
 		<div id="eael-facebook-feed-<?php echo esc_attr($this->get_id()); ?>" class="eael-facebook-feed-container eael-facebook-feed-layout-container <?php echo esc_attr( $feed_class ); ?>"></div>
 		<div class="eael-loading-feed"><div class="loader"></div></div>
-	</div>
-
-	
+	</div>	
 
 	<?php
 		echo '<style>';
 		// Show Avatar
+		$id = "#eael-facebook-feed-" . esc_attr( $this->get_id() );
+
 		if( $settings['eael_facebook_feed_show_avatar'] == 'true' ) {
-			echo '.eael-social-feed-element .auth-img { display: block; }';
+			echo $id . ' .eael-social-feed-element .auth-img { display: block; }';
 		}else {
-			echo '.eael-social-feed-element .auth-img { display: none; }';
+			echo $id . ' .eael-social-feed-element .auth-img { display: none; }';
 		}
 		// Show Date
 		if( $settings['eael_facebook_feed_show_date'] == 'true' ) {
-			echo '.eael-social-feed-element .social-feed-date { display: block;  }';
+			echo $id . ' .eael-social-feed-element .social-feed-date { display: block;  }';
 		}else {
-			echo '.eael-social-feed-element .social-feed-date { display: none;  }';
+			echo $id . ' .eael-social-feed-element .social-feed-date { display: none;  }';
 		}
 		//  Show Read More
 		 if( $settings['eael_facebook_feed_show_read_more'] == 'true' ) {
-		 	echo '.eael-social-feed-element .read-more-link { display: block }';
+		 	echo $id . ' .eael-social-feed-element .read-more-link { display: block }';
 		 }else {
-		 	echo '.eael-social-feed-element .read-more-link { display: none !important; }';
+		 	echo $id . ' .eael-social-feed-element .read-more-link { display: none !important; }';
 		 }
 
 		 //  Show Icon
 		 if( $settings['eael_facebook_feed_show_icon'] == 'true' ) {
-		 	echo '.eael-social-feed-element .social-feed-icon { display: inline-block }';
+		 	echo $id . ' .eael-social-feed-element .social-feed-icon { display: inline-block }';
 		 }else {
-		 	echo '.eael-social-feed-element .social-feed-icon { display: none !important; }';
+		 	echo $id . ' .eael-social-feed-element .social-feed-icon { display: none !important; }';
 		 }
 
 		// Masonry Grid
@@ -648,22 +666,51 @@ class Widget_Eael_Facebook_Feed extends Widget_Base {
 			$width = '33.33%';
 		}else if( $settings['eael_facebook_feed_type_col_type'] == 'col-4' ) {
 			$width = '25%';
-			echo '.eael-social-feed-element .social-feed-date { text-align: left; width: 100%; margin-bottom: 8px;}';
+			echo $id . ' .eael-social-feed-element .social-feed-date { text-align: left; width: 100%; margin-bottom: 8px;}';
 		}
-		echo '.eael-facebook-feed-container.masonry-view .eael-social-feed-element { width: '.$width.' }
-		.eael-social-feed-element .media-object { width: 30px; }';
+		echo $id . '.eael-facebook-feed-container.masonry-view .eael-social-feed-element { width: '.$width.' }
+		'. $id .' .eael-social-feed-element .media-object { width: 30px; }';
 
 		echo '</style>';
+		endif;
 	}
 
-	protected function content_template() {''
+	protected function content_template() {
 
-		?>
+	}
 
+	protected function page_list(){
+		$pages = get_option( 'eael_facebook_feed_settings' );
+		$pages = json_decode( $pages['pages'] );
+		$options = array();
+		if( ! empty( $pages->accounts->data ) ) {
+			$options[0] = esc_html__( 'Select a Page', 'essential-addons-elementor' );
+			foreach( $pages->accounts->data as $page ) {
+				if( isset( $page->username ) ) {
+					$options[ $page->username ] = $page->name;
+				} else {
+					$options[ $page->name ] = $page->name;
+				}
+			}
+		} else {
+			$options[0] = esc_html__( 'Setup your facebook feed setting EAE settings panel', 'essential-addons-elementor' );
+		}
 
-		<?php
+		return $options;
+	}
+
+	protected function access_token( $username ){
+		$pages = get_option( 'eael_facebook_feed_settings' );
+		$pages = json_decode( $pages['pages'] );
+		if( ! empty( $pages->accounts->data ) ) {
+			foreach( $pages->accounts->data as $page ) {
+				if( ( isset( $page->username ) && $page->username == $username ) || ( isset( $page->name ) && $page->name == $username ) ) {
+					return $page->access_token;
+				}
+			}
+		} 
+		return false;
 	}
 }
-
 
 Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_Facebook_Feed() );

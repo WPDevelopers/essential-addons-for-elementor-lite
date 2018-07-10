@@ -318,30 +318,21 @@ if (typeof Object.create !== 'function') {
                         fields = '?fields=id,name,link,posts.limit('+ options.facebook.limit +'){description,from,created_time,message,story,link,name,id}';
                     }
                     var request_url,
-                        query_extention = '&access_token=' + options.facebook.access_token + '&callback=?';
-                    switch (account[0]) {
-                        case '@':
-                            var username = account.substr(1);
-                            Feed.facebook.utility.getUserId(username, function(userdata) {
-                                if (userdata.id !== '') {
-                                    request_url = Feed.facebook.graph + 'v2.12/' + userdata.id + '/posts'+ fields + query_extention;
+                        query_extention = '&access_token=' + options.facebook.access_token;
+                        switch (account[0]) {
+                            case '@':
+                                var username = account.substr(1);
+                                    request_url = Feed.facebook.graph + 'v3.0/' + username + fields + query_extention;
                                     proceed(request_url);
-                                }
-                            });
-                            break;
-                        case '#':
-                            var userid = account.substr(1);
-                            query_extention = '&access_token=' + options.facebook.access_token;
-                            request_url = Feed.facebook.graph + 'v3.0/' + userid + '/'+ fields + query_extention;
-                            proceed(request_url);
-                            break;
-                        case '!':
-                            var page = account.substr(1);
-                            request_url = Feed.facebook.graph + 'v2.12/' + page + '/feed'+ fields + query_extention;
-                            proceed(request_url);
-                            break;
-                        default:
-                            proceed(request_url);
+                                break;
+                            // case '!':
+                            //     // query_extention = '&access_token=EAAQMTSaUIRQBAOCRUxKcNt8gK1S0Fk2ZCs0N4lbNZABocvLkf9ZAdkhkVWZA20xbdPN3I7rafP429yyZBvD86j4DdWF6IIln5NpKCFvIh6lpFgpreWQXU0WAfPSw80lHpVaqC8HIiyAZCe38PX3QgoSBvZBEBIvYpaG5wlZBiJqRoasd8JdwJNltckFvfQZBDppHdRxCSJw9EwgZDZD';
+                            //     // var page = account.substr(1);
+                            //     // request_url = Feed.facebook.graph + 'v3.0/' + page + fields + query_extention;
+                            //     // proceed(request_url);
+                            //     break;
+                            // default:
+                            //     // proceed(request_url);
                     }
                 },
                 utility: {
@@ -376,30 +367,26 @@ if (typeof Object.create !== 'function') {
 
                     },
                     getPosts: function(json) {
-                        if(json) {
-                            var userid = json['id'];
-                            var name = json['name'];
-                            var link = json['link'];
-                        }
                         if (json['posts']['data']) {
                             json['posts']['data'].forEach(function(element) {
-                                var post = new SocialFeedPost('facebook', Feed.facebook.utility.unifyPostData(element, userid, name, link));
+                                var post = new SocialFeedPost('facebook', Feed.facebook.utility.unifyPostData(element));
                                 post.render();
                             });
                         }
                     },
-                    unifyPostData: function(element, userid = '', name = '', link = '') {
+                    unifyPostData: function(element) {
                         var post = {},
                             text = (element.message) ? element.message : element.story;
+
                         post.id = element.id;
                         post.dt_create = moment(element.created_time);
-                        post.author_link = 'http://facebook.com/' + userid;
-                        post.author_picture = Feed.facebook.graph + userid + '/picture';
-                        post.author_name = name;
+                        post.author_link = 'http://facebook.com/' + element.from.id;
+                        post.author_picture = Feed.facebook.graph + element.from.id + '/picture';
+                        post.author_name = element.from.name;
                         post.name = element.name || "";
                         post.message = (text) ? text : '';
                         post.description = (element.description) ? element.description : '';
-                        post.link = (element.link) ? element.link : 'http://facebook.com/' + element.id;
+                        post.link = (element.link) ? element.link : 'http://facebook.com/' + element.from.id;
 
                         if (options.show_media === true) {
                             if (element.picture) {

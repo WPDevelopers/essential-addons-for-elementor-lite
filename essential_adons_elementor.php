@@ -205,10 +205,8 @@ add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
  * Editor Css
  */
 add_action( 'elementor/editor/before_enqueue_scripts', function() {
-
    wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
-
 } );
 
 /**
@@ -481,5 +479,6 @@ function review_pending() {
 function eael_deactivate() {
     delete_option('eael_active_time');
     delete_option('eael_maybe_later');
+    delete_option('eael_facebook_feed_settings');
 }
 register_deactivation_hook(__FILE__, 'eael_deactivate');
