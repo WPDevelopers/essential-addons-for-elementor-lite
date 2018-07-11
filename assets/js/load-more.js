@@ -9,7 +9,7 @@
 			totalPosts: options.totalPosts,
 			loadMoreBtn: options.loadMoreBtn,
 			postContainer: options.postContainer,
-			postStyle: options.postStyle, // block, grid, timeline
+			postStyle: options.postStyle, // block, grid, timeline, 
 		}
 		// Settings Values
 		var settingsValue = {
@@ -44,11 +44,13 @@
 				url: restUrl,
 				type: 'GET',
 				success: function( res ) {
-					createPostHtml( res );
+					// createPostHtml( res );
+					var html = createPostHtml( res );
 					if( optionsValue.postStyle === 'grid' ) {
-						$( '.eael-post-grid' ).masonry( 'destroy' );
 						setTimeout(function() {
-							$('.eael-post-grid').masonry({
+							var $content = $( html );
+							optionsValue.postContainer.append( $content ).masonry( 'appended', $content );
+							optionsValue.postContainer.masonry({
 						    	itemSelector: '.eael-grid-post',
 						    	percentPosition: true,
 						    	columnWidth: '.eael-post-grid-column'
@@ -178,7 +180,9 @@
 					html += '</div>';
 					html += '</article>';
 				}
-				optionsValue.postContainer.append( html );
+				
+				// optionsValue.postContainer.append( html )
+				return html;
 			}
 
 		}
