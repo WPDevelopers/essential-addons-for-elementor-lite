@@ -373,9 +373,9 @@ function eael_review_notice(){
         add_site_option( 'eael_active_time', time() );
     }
     
-    $daysinseconds = 604800; // 7 Days in seconds.
+    $daysinseconds = 259200; // 3 Days in seconds.
     if( 'yes' == $maybe_later ) {
-        $daysinseconds = 1296000; // 15 Days in seconds.
+        $daysinseconds = 604800 ; // 7 Days in seconds.
     }
 
     if ( time() - $activation_time > $daysinseconds ) {
@@ -399,14 +399,14 @@ function eael_review_notice_message(){
     
     <div class="eael-review-notice">
         <div class="eael-review-thumbnail">
-            <img src="<?php echo plugins_url( 'admin/assets/images/ea-icon-color.png', __FILE__ ) ?>" alt="">
+            <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
         </div>
         <div class="eael-review-text">
             <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
-            <p><?php _e( 'Something to write', 'essential-addons-elementor' ) ?></p>
-            <ul class="analytify-review-ul">
+            <p><?php _e( 'We hope you\'ve enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?', 'essential-addons-elementor' ) ?></p>
+            <ul class="eael-review-ul">
                 <li>
-                    <a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/#postform" target="_blank">
+                    <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
                         <span class="dashicons dashicons-external"></span>
                         <?php _e( 'Sure! I\'d love to!', 'essential-addons-elementor' ) ?>
                     </a>
@@ -421,6 +421,12 @@ function eael_review_notice_message(){
                     <a href="<?php echo $later_url ?>">
                         <span class="dashicons dashicons-calendar-alt"></span>
                         <?php _e( 'Maybe Later', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://essential-addons.com/elementor/support/" target="_blank">
+                        <span class="dashicons dashicons-sos"></span>
+                        <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>

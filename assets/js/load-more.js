@@ -9,7 +9,7 @@
 			totalPosts: options.totalPosts,
 			loadMoreBtn: options.loadMoreBtn,
 			postContainer: options.postContainer,
-			postStyle: options.postStyle, // block, grid, timeline
+			postStyle: options.postStyle, // block, grid, timeline, 
 		}
 		// Settings Values
 		var settingsValue = {
@@ -33,22 +33,34 @@
 			$(this).addClass( 'button--loading' );
 			$(this).find( 'span' ).html( 'Loading...' );
 
+			var postType;
+			postType = settings.postType + 's';
+			if( offset <= 0 ) {
+				optionsValue.loadMoreBtn.remove();
+				return;
+			}
+
 			// Rest Api Url Settings
 			if( settings.categories == '' ) {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'/wp-json/wp/v2/'+postType+'?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}else {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'/wp-json/wp/v2/'+postType+'?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}
+
+			postType = '';
+
+			// console.log( optionsValue.otherSite );
 
 			$.ajax({
 				url: restUrl,
 				type: 'GET',
 				success: function( res ) {
-					createPostHtml( res );
+					var html = createPostHtml( res );
 					if( optionsValue.postStyle === 'grid' ) {
-						$( '.eael-post-grid' ).masonry( 'destroy' );
 						setTimeout(function() {
-							$('.eael-post-grid').masonry({
+							var $content = $( html );
+							optionsValue.postContainer.append( $content ).masonry( 'appended', $content );
+							optionsValue.postContainer.masonry({
 						    	itemSelector: '.eael-grid-post',
 						    	percentPosition: true,
 						    	columnWidth: '.eael-post-grid-column'
@@ -178,7 +190,9 @@
 					html += '</div>';
 					html += '</article>';
 				}
-				optionsValue.postContainer.append( html );
+				
+				// optionsValue.postContainer.append( html )
+				return html;
 			}
 
 		}

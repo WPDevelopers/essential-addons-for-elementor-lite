@@ -6,6 +6,7 @@
  * @return array
  */
 function eael_get_post_data( $args ) {
+    
     $defaults = array(
         'posts_per_page'   => 5,
         'offset'           => 0,
@@ -47,29 +48,43 @@ function eael_get_post_types(){
     foreach ( $eael_exclude_cpts as $exclude_cpt ) {
         unset($eael_cpts[$exclude_cpt]);
     }
-
     $post_types = array_merge($eael_cpts);
+
     return $post_types;
 }
+
 
 /**
  * Add REST API support to an already registered post type.
  */
-add_action( 'init', 'eael_custom_post_type_rest_support', 25 );
-function eael_custom_post_type_rest_support() {
-    global $wp_post_types;
+// add_action( 'init', 'eael_custom_post_type_rest_support', 25 );
+// function eael_custom_post_type_rest_support() {
+//     global $wp_post_types;
 
-    $post_types = eael_get_post_types();
-    foreach( $post_types as $post_type ) {
-        $post_type_name = $post_type;
-        if( isset( $wp_post_types[ $post_type_name ] ) ) {
-            $wp_post_types[$post_type_name]->show_in_rest = true;
-            $wp_post_types[$post_type_name]->rest_base = $post_type_name;
-            $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
-        }
+//     $post_types = eael_get_post_types();
+//     foreach( $post_types as $post_type ) {
+//         $post_type_name = $post_type;
+//         if( isset( $wp_post_types[ $post_type_name ] ) ) {
+//             $wp_post_types[$post_type_name]->show_in_rest = true;
+//             $wp_post_types[$post_type_name]->rest_base = $post_type_name;
+//             $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+//         }
+//     }
+
+// }
+
+/**
+ * Remote Categories ID 
+ * @param array $categorie_names || @param string $category_name
+ * @return string
+ */
+function get_remote_categories_id( $name ){
+    if( is_array( $name ) && count( $name ) > 0 ) {
+        return 'Hello World';
     }
-
+    return false;
 }
+
 
 /**
  * Post Settings Parameter
@@ -78,8 +93,11 @@ function eael_custom_post_type_rest_support() {
  */
 function eael_get_post_settings($settings){
     $post_args['post_type'] = $settings['eael_post_type'];
+    
 
-    if($settings['eael_post_type'] == 'post'){
+    $post_args['category_id_string'] = $settings['category_id_string'];
+
+    if($settings['eael_post_type'] == 'post' || $settings['eael_post_type_other'] == 'post' ){
         $post_args['category'] = $settings['category'];
     }
 
@@ -106,25 +124,29 @@ function eael_get_post_settings($settings){
  * @param  int $excerpt_length
  * @return string
  */
-function eael_get_excerpt_by_id($post_id,$excerpt_length){
-    $the_post = get_post($post_id); //Gets post ID
-
+function eael_get_excerpt_by_id($post_id = false, $excerpt_length, $post = false){
+    if( $post_id && ! $post ) {
+        $the_post = get_post($post_id); //Gets post ID
+    } else {
+        $the_post = $post;
+    }
+    
     $the_excerpt = null;
-    if ($the_post)
-    {
+    if ($the_post instanceof \WP_Post) {
         $the_excerpt = $the_post->post_excerpt ? $the_post->post_excerpt : $the_post->post_content;
+    } else {
+        $the_excerpt = $the_post->excerpt->rendered ? $the_post->excerpt->rendered : $the_post->content->rendered;
     }
 
     $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
     $words = explode(' ', $the_excerpt, $excerpt_length + 1);
 
-     if(count($words) > $excerpt_length) :
-         array_pop($words);
-         array_push($words, '…');
-         $the_excerpt = implode(' ', $words);
-     endif;
-
-     return $the_excerpt;
+    if(count($words) > $excerpt_length) :
+        array_pop($words);
+        array_push($words, '…');
+        $the_excerpt = implode(' ', $words);
+    endif;
+    return $the_excerpt;
 }
 
 /**
@@ -462,3 +484,18 @@ if ( !function_exists('eael_get_posts') ) {
         return $posts;
     }
 }
+
+/**
+ * This is our callback function that embeds our phrase in a WP_REST_Response
+ */
+function prefix_get_endpoint_phrase( $rules ) {
+    // return rest_ensure_response( 'Hello World, this is the WordPress REST API' );
+
+    var_dump( $rules );
+
+    return $rules;
+
+}
+
+add_filter( 'post_rewrite_rules', 'prefix_get_endpoint_phrase' );
+ 
