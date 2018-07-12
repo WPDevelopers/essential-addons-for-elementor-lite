@@ -63,6 +63,40 @@ class Eael_Admin_Settings {
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ), 600 );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
+		add_action( 'wp_ajax_add_action_with_ajax', array( $this, 'add_action_with_ajax' ) );
+
+	}
+
+	public function add_action_with_ajax(){
+
+		global $wp_version;
+		$post_types = [];
+		$remoteargs = array(
+			'timeout'     => 5,
+			'redirection' => 5,
+			'httpversion' => '1.0',
+			'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+			'blocking'    => true,
+			'headers'     => array(),
+			'cookies'     => array(),
+			'sslverify'   => false,
+		);
+		$otherurl = $_POST['url'];
+
+		$otherurl = $otherurl . 'wp-json/wp/v2/types';
+
+		$response = wp_remote_get( $otherurl, $remoteargs );    
+		$response = json_decode( $response['body'] );
+		// echo '<pre>', print_r( $response, 1 ), '</pre>';
+		foreach( $response as $type ){
+			$post_types[ $type->rest_base ] = $type->name;
+		}
+		$eael_exclude_cpts = array( 'elementor_library', 'media', 'product' );
+		foreach ( $eael_exclude_cpts as $exclude_cpt ) {
+			unset($post_types[$exclude_cpt]);
+		}
+		// echo '<pre>', print_r( $post_types, 1 ), '</pre>';
+		echo json_encode( $post_types );
 
 		add_action( 'wp_ajax_save_facebook_feed_settings', array( $this, 'eael_save_facebook_feed_settings' ) );
 
@@ -183,7 +217,7 @@ class Eael_Admin_Settings {
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-logo.svg'; ?>">
 						</div>
 						<h2 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h2>
 					</div>
@@ -264,7 +298,7 @@ class Eael_Admin_Settings {
 			      			<div class="eael-admin-sidebar">
 			      				<div class="eael-sidebar-block">
 			      					<div class="eael-admin-sidebar-logo">
-			      						<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+			      						<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-logo.svg'; ?>">
 			      					</div>
 			      					<div class="eael-admin-sidebar-cta">
 			      						<?php printf( __( '<a href="%s" target="_blank">Upgrade to Pro</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/in/upgrade-essential-addons-elementor' ); ?>
