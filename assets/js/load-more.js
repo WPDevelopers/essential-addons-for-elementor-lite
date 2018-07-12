@@ -5,7 +5,6 @@
 
 		// Default Values for Load More Js
 		var optionsValue = {
-			siteUrl: options.siteUrl,
 			totalPosts: options.totalPosts,
 			loadMoreBtn: options.loadMoreBtn,
 			postContainer: options.postContainer,
@@ -33,32 +32,38 @@
 			$(this).addClass( 'button--loading' );
 			$(this).find( 'span' ).html( 'Loading...' );
 
-			var postType;
-			postType = settings.postType + 's';
-			if( offset <= 0 ) {
-				optionsValue.loadMoreBtn.remove();
-				return;
-			}
+			$.ajax( {
+				url: eaelPostGrid.ajaxurl,
+				type: 'post',
+				data: {
+					action: 'load_more',
+					showImage : settingsValue.showImage,
+					showExcerpt : settingsValue.showExcerpt,
+					showTitle : settingsValue.showTitle,
+					showMeta : settingsValue.showMeta,
+					metaPosition : settingsValue.metaPosition,
+					excerptLength : settingsValue.excerptLength,
 
-			// Rest Api Url Settings
-			if( settings.categories == '' ) {
-				var restUrl = optionsValue.siteUrl+'/wp-json/wp/v2/'+postType+'?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
-			}else {
-				var restUrl = optionsValue.siteUrl+'/wp-json/wp/v2/'+postType+'?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
-			}
-
-			postType = '';
-
-			// console.log( optionsValue.otherSite );
-
-			$.ajax({
-				url: restUrl,
-				type: 'GET',
-				success: function( res ) {
-					var html = createPostHtml( res );
+					eael_post_type: settingsValue.postType,
+					// eael_post_authors: settingsValue.postType,
+					eael_posts_count : settingsValue.perPage,
+					eael_post_offset : offset,
+					category_id_string: settingsValue.categories,
+					// category: settingsValue.postType,
+					// eael_post_orderby: settingsValue.orderBy,
+					eael_post_order: settingsValue.postOrder,
+					// eael_post_tags: settingsValue.postTags,
+					// eael_post_exclude_posts: settingsValue.exPosts,
+				},
+				beforeSend: function() {
+					// _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
+				},
+				success: function( response ) {
+					console.log( response );
 					if( optionsValue.postStyle === 'grid' ) {
 						setTimeout(function() {
-							var $content = $( html );
+							var $content = $( response );
+							optionsValue.postContainer.masonry();
 							optionsValue.postContainer.append( $content ).masonry( 'appended', $content );
 							optionsValue.postContainer.masonry({
 						    	itemSelector: '.eael-grid-post',
@@ -74,11 +79,42 @@
 					if( offset >= optionsValue.totalPosts ) {
 						optionsValue.loadMoreBtn.remove();
 					}
+
 				},
-				error: function( err ) {
-					console.log( 'Something went wrong!' );
+				error: function() {
+					
 				}
-			});
+			} );
+
+			// $.ajax({
+			// 	url: restUrl,
+			// 	type: 'GET',
+			// 	success: function( res ) {
+			// 		var html = createPostHtml( res );
+					// if( optionsValue.postStyle === 'grid' ) {
+					// 	setTimeout(function() {
+					// 		var $content = $( html );
+					// 		optionsValue.postContainer.masonry();
+					// 		optionsValue.postContainer.append( $content ).masonry( 'appended', $content );
+					// 		optionsValue.postContainer.masonry({
+					// 	    	itemSelector: '.eael-grid-post',
+					// 	    	percentPosition: true,
+					// 	    	columnWidth: '.eael-post-grid-column'
+					// 	    });
+					// 	}, 100);
+					// }
+					// optionsValue.loadMoreBtn.removeClass( 'button--loading' );
+					// optionsValue.loadMoreBtn.find( 'span' ).html( settingsValue.btnText );
+
+					// offset = offset + settingsValue.perPage;
+					// if( offset >= optionsValue.totalPosts ) {
+					// 	optionsValue.loadMoreBtn.remove();
+					// }
+			// 	},
+			// 	error: function( err ) {
+			// 		console.log( 'Something went wrong!' );
+			// 	}
+			// });
 		} );
 
 		/**
