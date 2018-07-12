@@ -6,6 +6,7 @@
 		// Default Values for Load More Js
 		var optionsValue = {
 			siteUrl: options.siteUrl,
+			otherSite: options.otherSite,
 			totalPosts: options.totalPosts,
 			loadMoreBtn: options.loadMoreBtn,
 			postContainer: options.postContainer,
@@ -33,18 +34,28 @@
 			$(this).addClass( 'button--loading' );
 			$(this).find( 'span' ).html( 'Loading...' );
 
+			var postType;
+			postType = settings.postType + 's';
+			if( offset <= 0 ) {
+				optionsValue.loadMoreBtn.remove();
+				return;
+			}
+
 			// Rest Api Url Settings
 			if( settings.categories == '' ) {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+postType+'?per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}else {
-				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+settings.postType+'?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
+				var restUrl = optionsValue.siteUrl+'wp-json/wp/v2/'+postType+'?categories='+settingsValue.categories+'&per_page='+settingsValue.perPage+'&offset='+offset+'&order='+settingsValue.postOrder+'&_embed';
 			}
+
+			postType = '';
+
+			// console.log( optionsValue.otherSite );
 
 			$.ajax({
 				url: restUrl,
 				type: 'GET',
 				success: function( res ) {
-					// createPostHtml( res );
 					var html = createPostHtml( res );
 					if( optionsValue.postStyle === 'grid' ) {
 						setTimeout(function() {
@@ -61,6 +72,8 @@
 					optionsValue.loadMoreBtn.find( 'span' ).html( settingsValue.btnText );
 
 					offset = offset + settingsValue.perPage;
+					// console.log(optionsValue.totalPosts);
+					// console.log(offset);
 					if( offset >= optionsValue.totalPosts ) {
 						optionsValue.loadMoreBtn.remove();
 					}

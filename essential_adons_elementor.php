@@ -210,6 +210,12 @@ add_action( 'elementor/editor/before_enqueue_scripts', function() {
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
 
 } );
+/**
+ * Editor JS
+ */
+add_action( 'elementor/editor/after_enqueue_scripts', function() {
+    wp_enqueue_script('post-editor-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/post-grid-editor.js', array('jquery'),'1.0', true);
+} );
 
 /**
  * Creates an Action Menu
