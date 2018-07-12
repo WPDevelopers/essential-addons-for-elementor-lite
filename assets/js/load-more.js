@@ -34,10 +34,6 @@
 			$(this).addClass( 'button--loading' );
 			$(this).find( 'span' ).html( 'Loading...' );
 
-
-			console.log( 'Total Post: ', optionsValue.totalPosts );
-			console.log( 'Offset: ', offset );
-
 			$.ajax( {
 				url: eaelPostGrid.ajaxurl,
 				type: 'post',
@@ -55,7 +51,7 @@
 					eael_posts_count : settingsValue.perPage,
 					eael_post_offset : offset,
 					category: settingsValue.categories,
-					eael_post_tags: settingsValue.tags,
+					eael_post_tags: settingsValue.tags ? settingsValue.tags : [],
 
 					eael_post_orderby: settingsValue.orderBy,
 					eael_post_order: settingsValue.postOrder,

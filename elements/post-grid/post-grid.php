@@ -786,49 +786,16 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 	protected function render( ) {
 		$settings = $this->get_settings();
-		/* Get Post Categories */
-		$total_post = 0;
 		$post_categories = $this->get_settings( 'category' );
 		$post_tags = $this->get_settings( 'eael_post_tags' );
-		if( !empty( $post_categories ) ) {
-			$categories_id_string = implode( ',' , $post_categories );
-			$terms = get_terms( array(
-				'taxonomy' => 'category',
-				'hide_empty' => true,
-				'include' => $categories_id_string
-			) );
-			/* Get All Post Count */
-			foreach( $terms as $term ) {
-				$total_post = $total_post + $term->count;
-			}
-			$settings['category_id_string'] = $categories_id_string;
-		}elseif( ! empty( $post_tags ) ){
-			$post_tags_strings = implode( ',' , $post_tags );
-			$terms = get_terms( array(
-				'taxonomy' => 'post_tag',
-				'hide_empty' => true,
-				'include' => $post_tags_strings
-			) );
-			/* Get All Post Count */
-			foreach( $terms as $term ) {
-				$total_post = $total_post + $term->count;
-			}
-			$settings['tag_id_string'] = $post_tags_strings;
-		}else {
-			$categories_id_string = $post_tags_strings = $settings['category_id_string'] = $settings['tag_id_string'] = '';
-			$total_post = wp_count_posts( $settings['eael_post_type'] )->publish;
-		}
-
-		dump( $total_post );
-
-        $post_args = eael_get_post_settings($settings);
+		$post_args = eael_get_post_settings($settings);
+		$total_post = total_post_count( $post_args );
 		$posts = eael_get_post_data($post_args);
 	?>
-
 		<div id="eael-post-grid-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-grid-container <?php echo esc_attr($settings['eael_post_grid_columns'] ); ?>">
 		    <div class="eael-post-grid eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
 		    <?php
-		        if( is_array( $posts ) && count( $posts ) ){
+		        if( is_array( $posts ) && count( $posts ) > 0 ){
 					global $post;
 		            ?>
 		                <?php
@@ -903,8 +870,6 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		    <div class="clearfix"></div>
 		</div>
 		<?php 
-		var_dump( $settings['eael_post_tags'] );
-		// echo $settings['eael_posts_count'];
 			if( 1 == $settings['eael_post_grid_show_load_more'] ) : 
 				if( $settings['eael_posts_count'] != '-1' ) : 
 		?>
@@ -941,8 +906,8 @@ jQuery(document).ready(function($) {
 		metaPosition: '<?php echo $settings['eael_post_grid_meta_position']; ?>',
 		excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
 		btnText: '<?php echo $settings['eael_post_grid_show_load_more_text']; ?>',
-		categories: '<?php echo $categories_id_string; ?>',
-		eael_post_tags: '<?php is_array( $settings['eael_post_tags'] ) ? $settings['eael_post_tags'] : []; ?>',
+		categories: '<?php is_array( $post_categories ) ? $post_categories : []; ?>',
+		eael_post_tags: '<?php is_array( $post_tags ) ? $post_tags : []; ?>',
 	}
 
 	loadMore( options, settings );
