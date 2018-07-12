@@ -55,38 +55,6 @@ function eael_get_post_types(){
 
 
 /**
- * Add REST API support to an already registered post type.
- */
-// add_action( 'init', 'eael_custom_post_type_rest_support', 25 );
-// function eael_custom_post_type_rest_support() {
-//     global $wp_post_types;
-
-//     $post_types = eael_get_post_types();
-//     foreach( $post_types as $post_type ) {
-//         $post_type_name = $post_type;
-//         if( isset( $wp_post_types[ $post_type_name ] ) ) {
-//             $wp_post_types[$post_type_name]->show_in_rest = true;
-//             $wp_post_types[$post_type_name]->rest_base = $post_type_name;
-//             $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
-//         }
-//     }
-
-// }
-
-/**
- * Remote Categories ID 
- * @param array $categorie_names || @param string $category_name
- * @return string
- */
-function get_remote_categories_id( $name ){
-    if( is_array( $name ) && count( $name ) > 0 ) {
-        return 'Hello World';
-    }
-    return false;
-}
-
-
-/**
  * Post Settings Parameter
  * @param  array $settings
  * @return array
@@ -97,7 +65,7 @@ function eael_get_post_settings($settings){
 
     $post_args['category_id_string'] = $settings['category_id_string'];
 
-    if($settings['eael_post_type'] == 'post' || $settings['eael_post_type_other'] == 'post' ){
+    if($settings['eael_post_type'] == 'post' ){
         $post_args['category'] = $settings['category'];
     }
 
@@ -486,16 +454,79 @@ if ( !function_exists('eael_get_posts') ) {
 }
 
 /**
- * This is our callback function that embeds our phrase in a WP_REST_Response
+ * Load More
  */
-function prefix_get_endpoint_phrase( $rules ) {
-    // return rest_ensure_response( 'Hello World, this is the WordPress REST API' );
 
-    var_dump( $rules );
+function eael_load_more_ajax(){
+    $post_args = eael_get_post_settings( $_POST );
 
-    return $rules;
+    $posts = eael_get_post_data( $post_args );
+    if( is_array( $posts ) && count( $posts ) > 0 ) : 
+    ob_start();
+    foreach( $posts as $post ) : 
+        setup_postdata( $post );
+    ?>
+        <article class="eael-grid-post eael-post-grid-column">
+            <div class="eael-grid-post-holder">
+                <div class="eael-grid-post-holder-inner">
 
+                    <?php if ($thumbnail_exists = has_post_thumbnail( $post->ID )): ?>
+                    <div class="eael-entry-media">
+                        <div class="eael-entry-overlay">
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            <a href="<?php echo get_permalink(); ?>"></a>
+                        </div>
+                        <div class="eael-entry-thumbnail">
+                            <?php if($_POST['showImage'] == 1){ ?>
+                            <!-- <img src="<?php // echo wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])?>"> -->
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <div class="eael-entry-wrapper">
+                        <header class="eael-entry-header">
+                            <?php if($_POST['showTitle']){ ?>
+                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo get_the_title(); ?>"><?php echo get_the_title( $post->ID ); ?></a></h2>
+                            <?php } ?>
+
+                            <?php if($_POST['showMeta'] && $_POST['metaPosition'] == 'meta-entry-header'){ ?>
+                            <div class="eael-entry-meta">
+                                <span class="eael-posted-by"><?php the_author_posts_link(); ?></span>
+                                <span class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></span>
+                            </div>
+                            <?php } ?>
+                        </header>
+
+                        <div class="eael-entry-content">
+                            <?php if($_POST['showExcerpt']){ ?>
+                            <div class="eael-grid-post-excerpt">
+                                <p><?php echo  eael_get_excerpt_by_id(get_the_ID(), $_POST['excerptLength']);?></p>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <?php if($_POST['showMeta'] && $_POST['metaPosition'] == 'meta-entry-footer'){ ?>
+                    <div class="eael-entry-footer">
+                        <div class="eael-author-avatar">
+                            <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 96 ); ?> </a>
+                        </div>
+                        <div class="eael-entry-meta">
+                            <div class="eael-posted-by"><?php the_author_posts_link(); ?></div>
+                            <div class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </article>
+    <?php
+        endforeach;
+        wp_reset_postdata();
+        echo ob_get_clean();
+    endif;
+    die();
 }
-
-add_filter( 'post_rewrite_rules', 'prefix_get_endpoint_phrase' );
- 
+add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
