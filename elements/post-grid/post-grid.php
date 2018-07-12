@@ -786,30 +786,42 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 	protected function render( ) {
 		$settings = $this->get_settings();
-
 		/* Get Post Categories */
 		$total_post = 0;
 		$post_categories = $this->get_settings( 'category' );
+		$post_tags = $this->get_settings( 'eael_post_tags' );
 		if( !empty( $post_categories ) ) {
-			foreach ( $post_categories as $key=>$value ) {
-				$categories[] = $value;
-			}
-			$categories_id_string = implode( ',' , $categories );
-
+			$categories_id_string = implode( ',' , $post_categories );
+			$terms = get_terms( array(
+				'taxonomy' => 'category',
+				'hide_empty' => true,
+				'include' => $categories_id_string
+			) );
 			/* Get All Post Count */
-			foreach( $categories as $cat ) {
-				$category = get_category( $cat );
-				$total_post = $total_post + $category->category_count;
+			foreach( $terms as $term ) {
+				$total_post = $total_post + $term->count;
 			}
 			$settings['category_id_string'] = $categories_id_string;
+		}elseif( ! empty( $post_tags ) ){
+			$post_tags_strings = implode( ',' , $post_tags );
+			$terms = get_terms( array(
+				'taxonomy' => 'post_tag',
+				'hide_empty' => true,
+				'include' => $post_tags_strings
+			) );
+			/* Get All Post Count */
+			foreach( $terms as $term ) {
+				$total_post = $total_post + $term->count;
+			}
+			$settings['tag_id_string'] = $post_tags_strings;
 		}else {
-			$categories_id_string = '';
-			$settings['category_id_string'] = $categories_id_string;
+			$categories_id_string = $post_tags_strings = $settings['category_id_string'] = $settings['tag_id_string'] = '';
 			$total_post = wp_count_posts( $settings['eael_post_type'] )->publish;
 		}
 
-        $post_args = eael_get_post_settings($settings);
+		dump( $total_post );
 
+        $post_args = eael_get_post_settings($settings);
 		$posts = eael_get_post_data($post_args);
 	?>
 
@@ -844,7 +856,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 											<div class="eael-entry-wrapper">
 												<header class="eael-entry-header">
 													<?php if($settings['eael_show_title']){ ?>
-													<h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+													<h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_ID(); echo '-'; the_title(); ?></a></h2>
 													<?php } ?>
 
 													<?php if($settings['eael_show_meta'] && $settings['eael_post_grid_meta_position'] == 'meta-entry-header'){ ?>
@@ -891,6 +903,8 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		    <div class="clearfix"></div>
 		</div>
 		<?php 
+		var_dump( $settings['eael_post_tags'] );
+		// echo $settings['eael_posts_count'];
 			if( 1 == $settings['eael_post_grid_show_load_more'] ) : 
 				if( $settings['eael_posts_count'] != '-1' ) : 
 		?>
@@ -908,7 +922,6 @@ jQuery(document).ready(function($) {
 
 	'use strict';
 	var options = {
-		siteUrl: '<?php echo esc_url( home_url( '/' ) ); ?>',
 		totalPosts: <?php echo $total_post; ?>,
 		loadMoreBtn: $( '#eael-load-more-btn-<?php echo $this->get_id(); ?>' ),
 		postContainer: $( '.eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>' ),
@@ -917,16 +930,19 @@ jQuery(document).ready(function($) {
 
 	var settings = {
 		postType: '<?php echo $settings['eael_post_type']; ?>',
-		perPage: parseInt( <?php echo $settings['eael_posts_count'] ?>, 10 ),
-		postOrder: '<?php echo $settings['eael_post_order'] ?>',
+		perPage: <?php echo $settings['eael_posts_count'] != '' ? $settings['eael_posts_count'] : 0; ?>,
+		postOrder: '<?php echo $settings['eael_post_order']; ?>',
+		orderBy: '<?php echo $settings['eael_post_orderby']; ?>',
 		showImage: <?php echo $settings['eael_show_image']; ?>,
 		showTitle: <?php echo $settings['eael_show_title']; ?>,
 		showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
 		showMeta: <?php echo $settings['eael_show_meta']; ?>,
+
 		metaPosition: '<?php echo $settings['eael_post_grid_meta_position']; ?>',
 		excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
 		btnText: '<?php echo $settings['eael_post_grid_show_load_more_text']; ?>',
 		categories: '<?php echo $categories_id_string; ?>',
+		eael_post_tags: '<?php is_array( $settings['eael_post_tags'] ) ? $settings['eael_post_tags'] : []; ?>',
 	}
 
 	loadMore( options, settings );
@@ -941,15 +957,12 @@ jQuery(document).ready(function($) {
 	});
 
 });
-
 </script>
 
-        <?php
+		<?php
 	}
 
-	protected function content_template() {
-
-	}
+	protected function content_template() {}
 
 }
 Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_Post_Grid() );

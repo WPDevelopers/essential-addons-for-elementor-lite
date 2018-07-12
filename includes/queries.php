@@ -61,27 +61,31 @@ function eael_get_post_types(){
  */
 function eael_get_post_settings($settings){
     $post_args['post_type'] = $settings['eael_post_type'];
-    
-
-    $post_args['category_id_string'] = $settings['category_id_string'];
+    $post_args['posts_per_page'] = $settings['eael_posts_count'];
 
     if($settings['eael_post_type'] == 'post' ){
         $post_args['category'] = $settings['category'];
+        $post_args['tax_query'] = array(
+            array(
+                'taxonomy' => 'post_tag',
+                'terms'    => is_array( $settings['eael_post_tags'] ) ? $settings['eael_post_tags'] : [],
+                'operator' => 'IN',
+            )
+        );
+        // $post_args['tag__in'] = is_array( $settings['eael_post_tags'] ) ? $settings['eael_post_tags'] : [];
+        // $post_args['post__not_in'] = is_array( $settings['eael_post_exclude_posts'] ) ? $settings['eael_post_exclude_posts'] : [];
     }
 
     $eael_tiled_post_author = '';
     $eael_tiled_post_authors = $settings['eael_post_authors'];
     if ( !empty( $eael_tiled_post_authors) ) {
         $eael_tiled_post_author = implode( ",", $eael_tiled_post_authors );
+        $post_args['author'] = $eael_tiled_post_author;
     }
 
-    $post_args['posts_per_page'] = $settings['eael_posts_count'];
     $post_args['offset'] = $settings['eael_post_offset'];
     $post_args['orderby'] = $settings['eael_post_orderby'];
     $post_args['order'] = $settings['eael_post_order'];
-    $post_args['tag__in'] = $settings['eael_post_tags'];
-    $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
-    $post_args['author'] = $eael_tiled_post_author;
 
     return $post_args;
 }
@@ -460,17 +464,18 @@ if ( !function_exists('eael_get_posts') ) {
 function eael_load_more_ajax(){
     $post_args = eael_get_post_settings( $_POST );
 
-    $posts = eael_get_post_data( $post_args );
-    if( is_array( $posts ) && count( $posts ) > 0 ) : 
+    $posts = new WP_Query( $post_args );
+    // print_r( $posts ); die();
+    
+    // var_dump( wp_count_posts( $_POST['eael_post_type'] )->publish ); die();
+    while( $posts->have_posts() ) : $posts->the_post();
+    // print_r( $post_args );
     ob_start();
-    foreach( $posts as $post ) : 
-        setup_postdata( $post );
     ?>
         <article class="eael-grid-post eael-post-grid-column">
             <div class="eael-grid-post-holder">
                 <div class="eael-grid-post-holder-inner">
-
-                    <?php if ($thumbnail_exists = has_post_thumbnail( $post->ID )): ?>
+                    <?php if ($thumbnail_exists = has_post_thumbnail()): ?>
                     <div class="eael-entry-media">
                         <div class="eael-entry-overlay">
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
@@ -478,7 +483,7 @@ function eael_load_more_ajax(){
                         </div>
                         <div class="eael-entry-thumbnail">
                             <?php if($_POST['showImage'] == 1){ ?>
-                            <!-- <img src="<?php // echo wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])?>"> -->
+                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])?>">
                             <?php } ?>
                         </div>
                     </div>
@@ -487,7 +492,7 @@ function eael_load_more_ajax(){
                     <div class="eael-entry-wrapper">
                         <header class="eael-entry-header">
                             <?php if($_POST['showTitle']){ ?>
-                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo get_the_title(); ?>"><?php echo get_the_title( $post->ID ); ?></a></h2>
+                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php the_title(); ?>"><?php the_ID(); echo '-'; the_title(); ?></a></h2>
                             <?php } ?>
 
                             <?php if($_POST['showMeta'] && $_POST['metaPosition'] == 'meta-entry-header'){ ?>
@@ -522,11 +527,23 @@ function eael_load_more_ajax(){
             </div>
         </article>
     <?php
-        endforeach;
-        wp_reset_postdata();
-        echo ob_get_clean();
-    endif;
+    endwhile;
+    // wp_reset_postdata();
+    // wp_reset_query();
+    echo ob_get_clean();
     die();
 }
-add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
 add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
+add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+
+function dump( $data, $var = true, $die = false ){
+    if( ! $var ) {
+        var_dump( $data );
+    } else {
+        echo '<pre>', print_r( $data, 1 ), '</pre>';
+    }
+
+    if( $die ) {
+        die( 'die from dump' );
+    }
+}
