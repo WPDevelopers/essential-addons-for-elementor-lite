@@ -64,16 +64,23 @@ function eael_get_post_settings($settings){
     $post_args['posts_per_page'] = $settings['eael_posts_count'];
 
     if($settings['eael_post_type'] == 'post' ){
-        $post_args['category'] = $settings['category'];
-        $post_args['tax_query'] = array(
-            array(
+        $tags = $categories = [];
+        if( ! empty( $settings['eael_post_tags'] ) ) {
+            $tags = [[
                 'taxonomy' => 'post_tag',
-                'terms'    => is_array( $settings['eael_post_tags'] ) ? $settings['eael_post_tags'] : [],
-                'operator' => 'IN',
-            )
-        );
-        // $post_args['tag__in'] = is_array( $settings['eael_post_tags'] ) ? $settings['eael_post_tags'] : [];
-        // $post_args['post__not_in'] = is_array( $settings['eael_post_exclude_posts'] ) ? $settings['eael_post_exclude_posts'] : [];
+                'field' => 'id',
+                'terms' => $settings['eael_post_tags'],
+            ]];
+        }
+        if( ! empty( $settings['category'] ) ) {
+            $categories = [[
+                'taxonomy' => 'category',
+                'field' => 'id',
+                'terms' => $settings['category'],
+            ]];
+        }
+        $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
+        $post_args['tax_query'] = array_merge($relation, $tags, $categories);
     }
 
     $eael_tiled_post_author = '';
@@ -458,18 +465,21 @@ if ( !function_exists('eael_get_posts') ) {
 }
 
 /**
+ * POST Count
+ */
+function total_post_count( $args ) {
+    $posts = new WP_Query( $args );
+    return $posts->post_count;
+}
+
+/**
  * Load More
  */
 
 function eael_load_more_ajax(){
     $post_args = eael_get_post_settings( $_POST );
-
     $posts = new WP_Query( $post_args );
-    // print_r( $posts ); die();
-    
-    // var_dump( wp_count_posts( $_POST['eael_post_type'] )->publish ); die();
     while( $posts->have_posts() ) : $posts->the_post();
-    // print_r( $post_args );
     ob_start();
     ?>
         <article class="eael-grid-post eael-post-grid-column">
@@ -492,7 +502,7 @@ function eael_load_more_ajax(){
                     <div class="eael-entry-wrapper">
                         <header class="eael-entry-header">
                             <?php if($_POST['showTitle']){ ?>
-                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php the_title(); ?>"><?php the_ID(); echo '-'; the_title(); ?></a></h2>
+                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_ID(); echo '-'; the_title(); ?></a></h2>
                             <?php } ?>
 
                             <?php if($_POST['showMeta'] && $_POST['metaPosition'] == 'meta-entry-header'){ ?>
@@ -528,8 +538,8 @@ function eael_load_more_ajax(){
         </article>
     <?php
     endwhile;
-    // wp_reset_postdata();
-    // wp_reset_query();
+    wp_reset_postdata();
+    wp_reset_query();
     echo ob_get_clean();
     die();
 }
