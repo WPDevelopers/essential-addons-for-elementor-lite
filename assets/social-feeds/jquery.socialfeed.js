@@ -307,27 +307,23 @@ if (typeof Object.create !== 'function') {
                     var proceed = function(request_url){
                         Utility.request(request_url, Feed.facebook.utility.getPosts);
                     };
-                    var fields = '?fields=id,from,name,message,created_time,story,description,link';
-                       fields += (options.show_media === true)?',picture,object_id':'';
-                    var request_url, limit = '&limit=' + options.facebook.limit,
-                        query_extention = '&access_token=' + options.facebook.access_token + '&callback=?';
+                    var fields = '?fields=id,name,link,posts{description,from,created_time,message,story,link,name,id}';
+                    if( options.show_media === true ) {
+                        fields = '?fields=id,name,link,posts{description,from,created_time,message,story,link,name,id,picture,object_id}';
+                    }
+                    if( options.facebook.limit && options.show_media === true ) {
+                        fields = '?fields=id,name,link,posts.limit('+ options.facebook.limit +'){description,from,created_time,message,story,link,name,id,picture,object_id}';
+                    } else if( options.facebook.limit ) {
+                        fields = '?fields=id,name,link,posts.limit('+ options.facebook.limit +'){description,from,created_time,message,story,link,name,id}';
+                    }
+                    var request_url,
+                        query_extention = '&access_token=' + options.facebook.access_token;
                     switch (account[0]) {
                         case '@':
                             var username = account.substr(1);
-                            Feed.facebook.utility.getUserId(username, function(userdata) {
-                                if (userdata.id !== '') {
-                                    request_url = Feed.facebook.graph + 'v2.12/' + userdata.id + '/posts'+ fields + limit + query_extention;
-                                    proceed(request_url);
-                                }
-                            });
+                                request_url = Feed.facebook.graph + 'v3.0/' + username + fields + query_extention;
+                                proceed(request_url);
                             break;
-                        case '!':
-                            var page = account.substr(1);
-                            request_url = Feed.facebook.graph + 'v2.12/' + page + '/feed'+ fields + limit + query_extention;
-                            proceed(request_url);
-                            break;
-                        default:
-                            proceed(request_url);
                     }
                 },
                 utility: {
@@ -362,8 +358,8 @@ if (typeof Object.create !== 'function') {
 
                     },
                     getPosts: function(json) {
-                        if (json['data']) {
-                            json['data'].forEach(function(element) {
+                        if (json['posts']['data']) {
+                            json['posts']['data'].forEach(function(element) {
                                 var post = new SocialFeedPost('facebook', Feed.facebook.utility.unifyPostData(element));
                                 post.render();
                             });

@@ -6,6 +6,7 @@
  * @return array
  */
 function eael_get_post_data( $args ) {
+    
     $defaults = array(
         'posts_per_page'   => 5,
         'offset'           => 0,
@@ -47,55 +48,78 @@ function eael_get_post_types(){
     foreach ( $eael_exclude_cpts as $exclude_cpt ) {
         unset($eael_cpts[$exclude_cpt]);
     }
-
     $post_types = array_merge($eael_cpts);
+
     return $post_types;
 }
 
-/**
- * Add REST API support to an already registered post type.
- */
-add_action( 'init', 'eael_custom_post_type_rest_support', 25 );
-function eael_custom_post_type_rest_support() {
-    global $wp_post_types;
-
-    $post_types = eael_get_post_types();
-    foreach( $post_types as $post_type ) {
-        $post_type_name = $post_type;
-        if( isset( $wp_post_types[ $post_type_name ] ) ) {
-            $wp_post_types[$post_type_name]->show_in_rest = true;
-            $wp_post_types[$post_type_name]->rest_base = $post_type_name;
-            $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
-        }
-    }
-
-}
 
 /**
  * Post Settings Parameter
  * @param  array $settings
  * @return array
  */
-function eael_get_post_settings($settings){
+function eael_get_post_settings( $settings ){
     $post_args['post_type'] = $settings['eael_post_type'];
+    $post_args['posts_per_page'] = $settings['eael_posts_count'] ? $settings['eael_posts_count'] : 4;
+    $post_args['post_style'] = $settings['post_style'] ? $settings['post_style'] : 'grid';
 
-    if($settings['eael_post_type'] == 'post'){
-        $post_args['category'] = $settings['category'];
+    if( $settings['eael_post_type'] == 'post' ){
+        $tags = $categories = [];
+        if( ! empty( $settings['eael_post_tags'] ) ) {
+            $tags = [[
+                'taxonomy' => 'post_tag',
+                'field' => 'term_id',
+                'terms' => $settings['eael_post_tags'],
+            ]];
+        }
+        if( ! empty( $settings['category'] ) ) {
+            $categories = [[
+                'taxonomy' => 'category',
+                'field' => 'term_id',
+                'terms' => $settings['category'],
+            ]];
+        }
+        $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
+        $post_args['tax_query'] = array_merge($relation, $tags, $categories);
+        if( ! empty( $settings['eael_post_exclude_posts'] ) ) {
+            $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
+        } else {
+            // $post_args['post__not_in'] = [];
+        }
     }
 
     $eael_tiled_post_author = '';
-    $eael_tiled_post_authors = $settings['eael_post_authors'];
+    $eael_tiled_post_authors = ! empty( $settings['eael_post_authors'] ) ? $settings['eael_post_authors'] : '';
     if ( !empty( $eael_tiled_post_authors) ) {
         $eael_tiled_post_author = implode( ",", $eael_tiled_post_authors );
+        $post_args['author'] = $eael_tiled_post_author;
     }
 
-    $post_args['posts_per_page'] = $settings['eael_posts_count'];
-    $post_args['offset'] = $settings['eael_post_offset'];
+    $post_args['offset'] = intval( $settings['eael_post_offset'] );
     $post_args['orderby'] = $settings['eael_post_orderby'];
     $post_args['order'] = $settings['eael_post_order'];
-    $post_args['tag__in'] = $settings['eael_post_tags'];
-    $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
-    $post_args['author'] = $eael_tiled_post_author;
+
+    if( $settings['post_style'] != 'ticker' ) {
+
+        $post_args['eael_show_image'] = $settings['eael_show_image'];
+        $post_args['image_size'] = $settings['image_size'];
+        
+        $post_args['eael_show_title'] = $settings['eael_show_title'];
+        
+        if( $settings['post_style'] != 'timeline' ) {
+            $post_args['eael_show_meta'] = $settings['eael_show_meta'];
+            $post_args['eael_post_grid_meta_position'] = $settings['eael_post_grid_meta_position'];
+        }
+
+        $post_args['eael_show_excerpt'] = $settings['eael_show_excerpt'];
+        $post_args['eael_excerpt_length'] = $settings['eael_excerpt_length'];
+
+    } else {
+        $post_args['eael_ticker_tag_text'] = $settings['eael_ticker_tag_text'];
+    }
+    
+    $post_args['post_status'] = 'publish';
 
     return $post_args;
 }
@@ -106,12 +130,11 @@ function eael_get_post_settings($settings){
  * @param  int $excerpt_length
  * @return string
  */
-function eael_get_excerpt_by_id($post_id,$excerpt_length){
-    $the_post = get_post($post_id); //Gets post ID
+function eael_get_excerpt_by_id( $post_id, $excerpt_length ){
+    $the_post = get_post( $post_id ); //Gets post ID
 
     $the_excerpt = null;
-    if ($the_post)
-    {
+    if( $the_post ){
         $the_excerpt = $the_post->post_excerpt ? $the_post->post_excerpt : $the_post->post_content;
     }
 
@@ -460,5 +483,215 @@ if ( !function_exists('eael_get_posts') ) {
         }
 
         return $posts;
+    }
+}
+
+/**
+ * POST Count
+ */
+function total_post_count( $args ) {
+    $posts = new WP_Query( $args );
+    return $posts->post_count;
+}
+
+/**
+ * Load More
+ */
+
+function eael_load_more_ajax(){
+    
+    if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
+        $post_args = eael_get_post_settings( $_POST );
+    } else {
+        $post_args = array_shift( func_get_args() );
+    }
+    
+    $posts = new WP_Query( $post_args );
+
+    $return = array();
+    $return['count'] = $posts->found_posts;
+
+    ob_start();
+    if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) {
+        if( !empty($post_args['eael_ticker_tag_text']) ) : 
+            ?>
+            <div class="ticker-badge">
+                <span><?php echo $post_args['eael_ticker_tag_text']; ?></span>
+            </div>
+            <?php
+        endif;
+        echo '<div class="eael-ticker">';
+    }
+    while( $posts->have_posts() ) : $posts->the_post();
+    if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'grid' ) :
+        if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) : 
+    ?>
+        <article class="eael-grid-post eael-post-grid-column">
+            <div class="eael-grid-post-holder">
+                <div class="eael-grid-post-holder-inner">
+                    <?php if ($thumbnail_exists = has_post_thumbnail()): ?>
+                    <div class="eael-entry-media">
+                        <div class="eael-entry-overlay">
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            <a href="<?php echo get_permalink(); ?>"></a>
+                        </div>
+                        <div class="eael-entry-thumbnail">
+                            <?php if($post_args['eael_show_image'] == 1){ ?>
+                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>">
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <div class="eael-entry-wrapper">
+                        <header class="eael-entry-header">
+                            <?php if($post_args['eael_show_title']){ ?>
+                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+                            <?php } ?>
+
+                            <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-header'){ ?>
+                            <div class="eael-entry-meta">
+                                <span class="eael-posted-by"><?php the_author_posts_link(); ?></span>
+                                <span class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></span>
+                            </div>
+                            <?php } ?>
+                        </header>
+
+                        <div class="eael-entry-content">
+                            <?php if($post_args['eael_show_excerpt']){ ?>
+                            <div class="eael-grid-post-excerpt">
+                                <p><?php echo  eael_get_excerpt_by_id(get_the_ID(), $post_args['eael_excerpt_length']);?></p>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-footer'){ ?>
+                    <div class="eael-entry-footer">
+                        <div class="eael-author-avatar">
+                            <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 96 ); ?> </a>
+                        </div>
+                        <div class="eael-entry-meta">
+                            <div class="eael-posted-by"><?php the_author_posts_link(); ?></div>
+                            <div class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </article>
+    <?php
+    else : 
+    ?>
+        <article class="eael-grid-post eael-post-grid-column">
+            <div class="eael-grid-post-holder">
+                <div class="eael-grid-post-holder-inner">
+                    <?php if ($thumbnail_exists = has_post_thumbnail()): ?>
+                    <div class="eael-entry-media">
+                        <div class="eael-entry-overlay">
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            <a href="<?php echo get_permalink(); ?>"></a>
+                        </div>
+                        <div class="eael-entry-thumbnail">
+                            <?php if($post_args['eael_show_image'] == 1){ ?>
+                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>">
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <div class="eael-entry-wrapper">
+                        <header class="eael-entry-header">
+                            <?php if($post_args['eael_show_title']){ ?>
+                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+                            <?php } ?>
+
+                            <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-header'){ ?>
+                            <div class="eael-entry-meta">
+                                <span class="eael-posted-by"><?php the_author_posts_link(); ?></span>
+                                <span class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></span>
+                            </div>
+                            <?php } ?>
+                        </header>
+
+                        <div class="eael-entry-content">
+                            <?php if($post_args['eael_show_excerpt']){ ?>
+                            <div class="eael-grid-post-excerpt">
+                                <p><?php echo eael_get_excerpt_by_id(get_the_ID(),$post_args['eael_excerpt_length']);?></p>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-footer'){ ?>
+                    <div class="eael-entry-footer">
+                        <div class="eael-author-avatar">
+                            <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 96 ); ?> </a>
+                        </div>
+                        <div class="eael-entry-meta">
+                            <div class="eael-posted-by"><?php the_author_posts_link(); ?></div>
+                            <div class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </article>
+    <?php
+        endif;
+    elseif( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'timeline' ) : 
+        ?>
+        <article class="eael-timeline-post eael-timeline-column">
+            <div class="eael-timeline-bullet"></div>
+            <div class="eael-timeline-post-inner">
+                <a class="eael-timeline-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>">
+                    <time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time>
+                    <div class="eael-timeline-post-image" <?php if( $post_args['eael_show_image'] == 1 ){ ?> style="background-image: url('<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>');" <?php } ?>></div>
+                    <?php if($post_args['eael_show_excerpt']){ ?>
+                        <div class="eael-timeline-post-excerpt">
+                            <p><?php echo eael_get_excerpt_by_id( get_the_ID(), $post_args['eael_excerpt_length'] );?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php if($post_args['eael_show_title']){ ?>
+                        <div class="eael-timeline-post-title">
+                            <h2><?php the_title(); ?></h2>
+                        </div>
+                    <?php } ?>
+                </a>
+            </div>
+        </article>
+        <?php
+    elseif( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) : 
+        echo '<div><a href="'. get_the_permalink() .'" class="ticker-content">'. get_the_title() .'</a></div>';
+    endif;
+    endwhile;
+    wp_reset_postdata();
+    wp_reset_query();
+
+    if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) {
+        echo '</div>';
+    }
+    $return['content'] = ob_get_clean();
+    if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
+        echo $return['content'];
+    } else {
+        return $return;
+    }
+}
+add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
+add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+
+function dump( $data, $code = false, $var = true, $die = false ){
+    if( ! $var ) {
+        var_dump( $data );
+    } elseif ( $code ){
+        echo '<pre><xmp>', $data, '</xmp></pre>';
+    } else {
+        echo '<pre>', print_r( $data, 1 ), '</pre>';
+    }
+
+    if( $die ) {
+        die( 'die from dump' );
     }
 }
