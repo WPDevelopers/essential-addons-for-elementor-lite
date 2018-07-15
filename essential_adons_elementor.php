@@ -178,7 +178,11 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
     }
     if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
-      wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
+        wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
+        $eael_js_settings = array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        );
+        wp_localize_script( 'essential_addons_elementor-load-more-js', 'eaelPostGrid', $eael_js_settings );
     }
     if( $is_component_active['twitter-feed']) {
       wp_enqueue_script('essential_addons_elementor-codebird-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/codebird.js', array('jquery'),'1.0', true);
@@ -205,10 +209,8 @@ add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
  * Editor Css
  */
 add_action( 'elementor/editor/before_enqueue_scripts', function() {
-
    wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
-
 } );
 
 /**
@@ -487,5 +489,6 @@ function review_pending() {
 function eael_deactivate() {
     delete_option('eael_active_time');
     delete_option('eael_maybe_later');
+    delete_option('eael_facebook_feed_settings');
 }
 register_deactivation_hook(__FILE__, 'eael_deactivate');
