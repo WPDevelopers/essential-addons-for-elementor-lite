@@ -54,14 +54,11 @@
 					eael_excerpt_length : settingsValue.excerptLength,
 
 					eael_post_type: settingsValue.postType,
-					// eael_post_exclude_posts: JSON.parse( settingsValue.excludePosts ),
-					eael_post_exclude_posts: settingsValue.excludePosts ,
+					eael_post_exclude_posts: JSON.parse( settingsValue.excludePosts ),
 					eael_posts_count : settingsValue.perPage,
 					eael_post_offset : offset,
-					category: settingsValue.categories,
-					// category: JSON.parse( settingsValue.categories ),
-					eael_post_tags: settingsValue.tags ,
-					// eael_post_tags: JSON.parse( settingsValue.tags ),
+					categories: JSON.parse( settingsValue.categories ),
+					eael_post_tags: JSON.parse( settingsValue.tags ),
 
 					eael_post_orderby: settingsValue.orderBy,
 					eael_post_order: settingsValue.postOrder,
