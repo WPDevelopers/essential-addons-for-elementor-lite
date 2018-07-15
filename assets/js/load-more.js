@@ -30,7 +30,7 @@
 			offset: parseInt( settings.offset , 10 ),
 		}
 
-		var offset = settingsValue.offset ? settingsValue.offset : settingsValue.perPage;
+		var offset = settingsValue.offset + settingsValue.perPage;
 
 		optionsValue.loadMoreBtn.on( 'click', function( e ) {
 			e.preventDefault();
@@ -54,11 +54,15 @@
 					eael_excerpt_length : settingsValue.excerptLength,
 
 					eael_post_type: settingsValue.postType,
-					eael_post_exclude_posts: JSON.parse( settingsValue.excludePosts ),
 					eael_posts_count : settingsValue.perPage,
 					eael_post_offset : offset,
-					categories: JSON.parse( settingsValue.categories ),
-					eael_post_tags: JSON.parse( settingsValue.tags ),
+					
+					// categories: JSON.parse( settingsValue.categories ),
+					category: settingsValue.categories ,
+					// eael_post_tags: JSON.parse( settingsValue.tags ),
+					eael_post_tags: settingsValue.tags ,
+					// eael_post_exclude_posts: JSON.parse( settingsValue.excludePosts ),
+					eael_post_exclude_posts: settingsValue.excludePosts,
 
 					eael_post_orderby: settingsValue.orderBy,
 					eael_post_order: settingsValue.postOrder,
@@ -67,6 +71,7 @@
 					// _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
 				},
 				success: function( response ) {
+					console.log( response );
 					var $content = $( response );
 					if( optionsValue.postStyle === 'grid' ) {
 						setTimeout(function() {

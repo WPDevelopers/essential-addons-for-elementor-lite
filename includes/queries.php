@@ -59,33 +59,33 @@ function eael_get_post_types(){
  * @param  array $settings
  * @return array
  */
-function eael_get_post_settings( $settings, $options = false ){
+function eael_get_post_settings( $settings ){
     $post_args['post_type'] = $settings['eael_post_type'];
     $post_args['posts_per_page'] = $settings['eael_posts_count'] ? $settings['eael_posts_count'] : 4;
     $post_args['post_style'] = $settings['post_style'] ? $settings['post_style'] : 'grid';
 
-    if($settings['eael_post_type'] == 'post' ){
+    if( $settings['eael_post_type'] == 'post' ){
         $tags = $categories = [];
         if( ! empty( $settings['eael_post_tags'] ) ) {
             $tags = [[
                 'taxonomy' => 'post_tag',
-                'field' => 'id',
+                'field' => 'term_id',
                 'terms' => $settings['eael_post_tags'],
             ]];
         }
         if( ! empty( $settings['category'] ) ) {
             $categories = [[
                 'taxonomy' => 'category',
-                'field' => 'id',
+                'field' => 'term_id',
                 'terms' => $settings['category'],
             ]];
         }
         $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
         $post_args['tax_query'] = array_merge($relation, $tags, $categories);
         if( ! empty( $settings['eael_post_exclude_posts'] ) ) {
-            $post_args['post__not_in'] = ! empty( $settings['eael_post_exclude_posts'] ) 
-                                         ? $settings['eael_post_exclude_posts'] 
-                                         : [];
+            $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
+        } else {
+            // $post_args['post__not_in'] = [];
         }
     }
 
@@ -499,13 +499,15 @@ function total_post_count( $args ) {
  */
 
 function eael_load_more_ajax(){
+    
     if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
         $post_args = eael_get_post_settings( $_POST );
     } else {
         $post_args = array_shift( func_get_args() );
     }
-
+    
     $posts = new WP_Query( $post_args );
+
     $return = array();
     $return['count'] = $posts->found_posts;
 
@@ -664,13 +666,12 @@ function eael_load_more_ajax(){
         echo '<div><a href="'. get_the_permalink() .'" class="ticker-content">'. get_the_title() .'</a></div>';
     endif;
     endwhile;
+    wp_reset_postdata();
+    wp_reset_query();
 
     if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) {
         echo '</div>';
     }
-
-    wp_reset_postdata();
-    wp_reset_query();
     $return['content'] = ob_get_clean();
     if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
         echo $return['content'];

@@ -109,7 +109,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
             [
                 'label' => __( 'Post Offset', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::NUMBER,
-                'default' => 0
+                'default' => '0'
             ]
         );
 
@@ -802,7 +802,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		 * Setup the post arguments.
 		 */
 		$settings['post_style'] = 'grid';
-		$post_args = eael_get_post_settings( $settings, true );
+		$post_args = eael_get_post_settings( $settings );
 		/**
 		 * Get posts from database.
 		 */
@@ -863,14 +863,14 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
 				showMeta: <?php echo $settings['eael_show_meta']; ?>,
 
-				offset: <?php echo ! empty( $settings['eael_post_offset'] ) ? ( intval( $settings['eael_post_offset'] ) + intval( $settings['eael_posts_count'] ) ) : 0; ?>,
+				offset: <?php echo intval( $settings['eael_post_offset'] ); ?>,
 
 				metaPosition: '<?php echo $settings['eael_post_grid_meta_position']; ?>',
 				excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
 				btnText: '<?php echo $settings['eael_post_grid_show_load_more_text']; ?>',
-				categories: '<?php echo is_array( $post_categories ) ? json_encode( $post_categories ) : '[]'; ?>',
-				eael_post_tags: '<?php echo is_array( $post_tags ) ? json_encode( $post_tags ) : '[]'; ?>',
-				exclude_posts: '<?php echo is_array( $exclude_posts ) ? json_encode( $exclude_posts ) : '[]'; ?>',
+				categories: <?php echo json_encode( $post_categories ); ?>,
+				eael_post_tags: <?php echo json_encode( $post_tags ); ?>,
+				exclude_posts: <?php echo json_encode( $exclude_posts ); ?>,
 			}
 
 			loadMore( options, settings );
