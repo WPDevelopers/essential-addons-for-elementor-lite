@@ -52,19 +52,19 @@
     }
 
     var FacebookFeedHandler = function ($scope, $) {
+
         var loadingFeed = $scope.find( '.eael-loading-feed' );
         var $fbCarousel            = $scope.find('.eael-facebook-feed-layout-wrapper').eq(0),
-                $name         = ($fbCarousel.data("facebook-feed-ac-name") !== undefined) ? $fbCarousel.data("facebook-feed-ac-name") : '',
-                $limit         = ($fbCarousel.data("facebook-feed-post-limit") !== undefined) ? $fbCarousel.data("facebook-feed-post-limit") : '',
-                $app_id         = ($fbCarousel.data("facebook-feed-app-id") !== undefined) ? $fbCarousel.data("facebook-feed-app-id") : '',
-                $app_secret         = ($fbCarousel.data("facebook-feed-app-secret") !== undefined) ? $fbCarousel.data("facebook-feed-app-secret") : '',
-                $length         = ($fbCarousel.data("facebook-feed-content-length") !== undefined) ? $fbCarousel.data("facebook-feed-content-length") : 400,
-                $media         = ($fbCarousel.data("facebook-feed-media") !== undefined) ? $fbCarousel.data("facebook-feed-media") : false,
-                $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
-                $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
+            $name         = ($fbCarousel.data("facebook-feed-ac-name") !== undefined) ? $fbCarousel.data("facebook-feed-ac-name") : '',
+            $token         = ($fbCarousel.data("facebook-feed-ac-token") !== undefined) ? $fbCarousel.data("facebook-feed-ac-token") : '',
+            $limit         = ($fbCarousel.data("facebook-feed-post-limit") !== undefined) ? $fbCarousel.data("facebook-feed-post-limit") : '',
+            $length         = ($fbCarousel.data("facebook-feed-content-length") !== undefined) ? $fbCarousel.data("facebook-feed-content-length") : 400,
+            $media         = ($fbCarousel.data("facebook-feed-media") !== undefined) ? $fbCarousel.data("facebook-feed-media") : false,
+            $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
+            $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
         // Facebook Feed Init
         function eael_facebook_feeds() {
-            var $access_token = ($app_id+'|'+$app_secret).toString();
+            var $access_token = $token;
             var $id_name = $name.toString();
             $( '#eael-facebook-feed-'+ $carouselId +'.eael-facebook-feed-layout-container' ).socialfeed({
 
@@ -133,15 +133,15 @@
     var TwitterFeedHandler = function ($scope, $) {
         var loadingFeed = $scope.find( '.eael-loading-feed' );
         var $twitterFeed            = $scope.find('.eael-twitter-feed-layout-wrapper').eq(0),
-                $name               = ($twitterFeed.data("twitter-feed-ac-name") !== undefined) ? $twitterFeed.data("twitter-feed-ac-name") : '',
-                $limit              = ($twitterFeed.data("twitter-feed-post-limit") !== undefined) ? $twitterFeed.data("twitter-feed-post-limit") : '',
-                $hash_tag           = ($twitterFeed.data("twitter-feed-hashtag-name") !== undefined) ? $twitterFeed.data("twitter-feed-hashtag-name") : '',
-                $key                = ($twitterFeed.data("twitter-feed-consumer-key") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-key") : '',
-                $app_secret         = ($twitterFeed.data("twitter-feed-consumer-secret") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-secret") : '',
-                $length             = ($twitterFeed.data("twitter-feed-content-length") !== undefined) ? $twitterFeed.data("twitter-feed-content-length") : 400,
-                $media              = ($twitterFeed.data("twitter-feed-media") !== undefined) ? $twitterFeed.data("twitter-feed-media") : false,
-                $feed_type          = ($twitterFeed.data("twitter-feed-type") !== undefined) ? $twitterFeed.data("twitter-feed-type") : false,  
-                $carouselId         = ($twitterFeed.data("twitter-feed-id") !== undefined) ? $twitterFeed.data("twitter-feed-id") : ' '; 
+            $name               = ($twitterFeed.data("twitter-feed-ac-name") !== undefined) ? $twitterFeed.data("twitter-feed-ac-name") : '',
+            $limit              = ($twitterFeed.data("twitter-feed-post-limit") !== undefined) ? $twitterFeed.data("twitter-feed-post-limit") : '',
+            $hash_tag           = ($twitterFeed.data("twitter-feed-hashtag-name") !== undefined) ? $twitterFeed.data("twitter-feed-hashtag-name") : '',
+            $key                = ($twitterFeed.data("twitter-feed-consumer-key") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-key") : '',
+            $app_secret         = ($twitterFeed.data("twitter-feed-consumer-secret") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-secret") : '',
+            $length             = ($twitterFeed.data("twitter-feed-content-length") !== undefined) ? $twitterFeed.data("twitter-feed-content-length") : 400,
+            $media              = ($twitterFeed.data("twitter-feed-media") !== undefined) ? $twitterFeed.data("twitter-feed-media") : false,
+            $feed_type          = ($twitterFeed.data("twitter-feed-type") !== undefined) ? $twitterFeed.data("twitter-feed-type") : false,  
+            $carouselId         = ($twitterFeed.data("twitter-feed-id") !== undefined) ? $twitterFeed.data("twitter-feed-id") : ' '; 
 
         var $id_name = $name.toString(); 
         var $hash_tag_name = $hash_tag.toString();    
@@ -268,38 +268,53 @@
     var postTimelineHandler = function ($scope, $) {
         var $_this = $scope.find('.eael-post-timeline'),
             $currentTimelineId = '#' + $_this.attr('id'),
-            $site_url       = $_this.data('url'),
-            $total_posts    = $_this.data('total_posts'),
+            $total_posts    = parseInt( $_this.data('total_posts'), 10 ),
             $timeline_id    = $_this.data('timeline_id'),
-            $post_type      = $_this.data('post_type'),
-            $posts_per_page     = $_this.data('posts_per_page'),
+
+            $post_type          = $_this.data('post_type'),
+            $posts_per_page     = parseInt( $_this.data('posts_per_page'), 10 ),
             $post_order         = $_this.data('post_order'),
+            $post_orderby       = $_this.data('post_orderby'),
+            $post_offset        = parseInt( $_this.data('post_offset'), 10 ),
+
             $show_images        = $_this.data('show_images'),
+            $image_size         = $_this.data('image_size'),
             $show_title         = $_this.data('show_title'),
+            
             $show_excerpt       = $_this.data('show_excerpt'),
-            $excerpt_length     = $_this.data('excerpt_length'),
+            $excerpt_length     = parseInt( $_this.data('excerpt_length'), 10 ),
+
             $btn_text       = $_this.data('btn_text'),
-            $categories     = $_this.data('categories');
+
+            $categories     = $_this.data('categories'),
+            $tags           = $_this.data('tags'),
+            $exclude_posts  = $_this.data('exclude_posts');
 
         var options = {
-            siteUrl: $site_url,
             totalPosts: $total_posts,
-            loadMoreBtn: $( '#eael-load-more-btn-'+$timeline_id ),
-            postContainer: $( '.eael-post-appender-'+$timeline_id ),
+            loadMoreBtn: $( '#eael-load-more-btn-' + $timeline_id ),
+            postContainer: $( '.eael-post-appender-' + $timeline_id ),
             postStyle: 'timeline',
         }
     
         var settings = {
             postType: $post_type,
-            perPage: parseInt( $posts_per_page, 10 ),
+            perPage: $posts_per_page,
             postOrder: $post_order,
+            orderBy: $post_orderby,
+            offset: $post_offset > 0 ? $post_offset + $posts_per_page : 0,
+
             showImage: $show_images,
+            imageSize: $image_size,
             showTitle: $show_title,
             showExcerpt: $show_excerpt,
             excerptLength: parseInt( $excerpt_length, 10 ),
             btnText: $btn_text,
-            categories: $categories
+            categories: $categories,
+            eael_post_tags: $tags,
+            exclude_posts: $exclude_posts,
         }
+
         loadMore( options, settings );
     }
 
@@ -311,4 +326,5 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
     });
+
 }(jQuery));

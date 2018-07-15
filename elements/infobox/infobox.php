@@ -182,6 +182,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'label' => esc_html__( 'Infobox Content', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
+				
 				'dynamic' => [
 					'active' => true
 				],
