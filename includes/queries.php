@@ -661,7 +661,7 @@ function eael_load_more_ajax(){
         </article>
         <?php
     elseif( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) : 
-        echo '<div><a href="'.get_the_permalink().'" class="ticker-content">'. get_the_title() .'</a></div>';
+        echo '<div><a href="'. get_the_permalink() .'" class="ticker-content">'. get_the_title() .'</a></div>';
     endif;
     endwhile;
 
