@@ -271,11 +271,11 @@
             $total_posts    = parseInt( $_this.data('total_posts'), 10 ),
             $timeline_id    = $_this.data('timeline_id'),
 
-            $post_type      = $_this.data('post_type'),
+            $post_type          = $_this.data('post_type'),
             $posts_per_page     = parseInt( $_this.data('posts_per_page'), 10 ),
             $post_order         = $_this.data('post_order'),
-            $post_orderby         = $_this.data('post_orderby'),
-            $post_offset         = parseInt( $_this.data('post_offset'), 10 ),
+            $post_orderby       = $_this.data('post_orderby'),
+            $post_offset        = parseInt( $_this.data('post_offset'), 10 ),
 
             $show_images        = $_this.data('show_images'),
             $image_size         = $_this.data('image_size'),
