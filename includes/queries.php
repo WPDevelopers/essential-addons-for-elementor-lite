@@ -1,40 +1,5 @@
 <?php
 
-/**
- * Get Post Data
- * @param  array $args
- * @return array
- */
-function eael_get_post_data( $args ) {
-    
-    $defaults = array(
-        'posts_per_page'   => 5,
-        'offset'           => 0,
-        'category'         => '',
-        'category_name'    => '',
-        'orderby'          => 'date',
-        'order'            => 'DESC',
-        'include'          => '',
-        'exclude'          => '',
-        'meta_key'         => '',
-        'meta_value'       => '',
-        'post_type'        => 'post',
-        'post_mime_type'   => '',
-        'post_parent'      => '',
-        'author'       => '',
-        'author_name'      => '',
-        'post_status'      => 'publish',
-        'suppress_filters' => true,
-        'tag__in'          => '',
-        'post__not_in'     => '',
-    );
-
-    $atts = wp_parse_args( $args, $defaults );
-
-    $posts = get_posts( $atts );
-
-    return $posts;
-}
 
 /**
  * Get All POst Types
@@ -145,7 +110,7 @@ function eael_get_excerpt_by_id( $post_id, $excerpt_length ){
          $the_excerpt = implode(' ', $words);
      endif;
 
-     return $the_excerpt;
+    return $the_excerpt;
 }
 
 /**
@@ -679,17 +644,3 @@ function eael_load_more_ajax(){
 }
 add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
 add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
-
-function dump( $data, $code = false, $var = true, $die = false ){
-    if( ! $var ) {
-        var_dump( $data );
-    } elseif ( $code ){
-        echo '<pre><xmp>', $data, '</xmp></pre>';
-    } else {
-        echo '<pre>', print_r( $data, 1 ), '</pre>';
-    }
-
-    if( $die ) {
-        die( 'die from dump' );
-    }
-}
