@@ -31,6 +31,21 @@ class Eael_Admin_Settings {
 	private $eael_settings;
 
 	/**
+	 * Facebook Feed Properties
+	 * @var array
+	 * @since 2.3.0
+	 */
+	private $eael_fb_settings;
+	private $eael_fb_default_settings = [ 
+		'own-app' => 0, 
+		'app-id' => 0, 
+		'app-secret' => '', 
+		'pages' => '' 
+	];
+	public 	$eael_fb_settings_keys = [ 'own-app', 'app-id', 'app-secret', 'pages' ];
+	private $eael_fb_get_settings;
+
+	/**
 	 * Will Contains Settings Values Fetched From DB
 	 * @var array
 	 * @since 2.3.0
@@ -48,6 +63,42 @@ class Eael_Admin_Settings {
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ), 600 );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
+		add_action( 'wp_ajax_add_action_with_ajax', array( $this, 'add_action_with_ajax' ) );
+
+	}
+
+	public function add_action_with_ajax(){
+
+		global $wp_version;
+		$post_types = [];
+		$remoteargs = array(
+			'timeout'     => 5,
+			'redirection' => 5,
+			'httpversion' => '1.0',
+			'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+			'blocking'    => true,
+			'headers'     => array(),
+			'cookies'     => array(),
+			'sslverify'   => false,
+		);
+		$otherurl = $_POST['url'];
+
+		$otherurl = $otherurl . 'wp-json/wp/v2/types';
+
+		$response = wp_remote_get( $otherurl, $remoteargs );    
+		$response = json_decode( $response['body'] );
+		// echo '<pre>', print_r( $response, 1 ), '</pre>';
+		foreach( $response as $type ){
+			$post_types[ $type->rest_base ] = $type->name;
+		}
+		$eael_exclude_cpts = array( 'elementor_library', 'media', 'product' );
+		foreach ( $eael_exclude_cpts as $exclude_cpt ) {
+			unset($post_types[$exclude_cpt]);
+		}
+		// echo '<pre>', print_r( $post_types, 1 ), '</pre>';
+		echo json_encode( $post_types );
+
+		add_action( 'wp_ajax_save_facebook_feed_settings', array( $this, 'eael_save_facebook_feed_settings' ) );
 
 	}
 
@@ -59,6 +110,7 @@ class Eael_Admin_Settings {
 	 */
 	public function enqueue_eael_admin_scripts() {
 
+		wp_enqueue_style( 'essential_addons_elementor-notice-css', plugins_url( '/', __FILE__ ).'assets/css/eael-notice.css' );
 		if( isset( $_GET['page'] ) && $_GET['page'] == 'eael-settings' ) {
 			wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
 			wp_enqueue_style( 'font-awesome-css', plugins_url( '/', __FILE__ ).'assets/vendor/font-awesome/css/font-awesome.min.css' );
@@ -67,6 +119,11 @@ class Eael_Admin_Settings {
 			wp_enqueue_script( 'essential_addons_core-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/core.js', array( 'jquery' ), '1.0', true );
 			wp_enqueue_script( 'essential_addons_sweetalert2-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'essential_addons_core-js' ), '1.0', true );
 		}
+
+		$eael_admin_js_settings = array(
+			'eael_fb_access_token' => get_option('eael_fb_access_token'),
+		);
+		wp_localize_script( 'essential_addons_elementor-admin-js', 'eaelAdmin', $eael_admin_js_settings );
 
 	}
 
@@ -110,17 +167,57 @@ class Eael_Admin_Settings {
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 	   $eael_new_settings = array_diff_key( $this->eael_default_settings, $this->eael_get_settings );
 	   if( ! empty( $eael_new_settings ) ) {
-	   	$eael_updated_settings = array_merge( $this->eael_get_settings, $eael_new_settings );
-	   	update_option( 'eael_save_settings', $eael_updated_settings );
+			$eael_updated_settings = array_merge( $this->eael_get_settings, $eael_new_settings );
+			update_option( 'eael_save_settings', $eael_updated_settings );
 	   }
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
+
+	   /**
+		* Facebook Settings
+		*/
+		// $this->eael_fb_default_settings = array_fill_keys( $this->eael_fb_settings_keys, true );
+		$this->eael_fb_get_settings = get_option( 'eael_facebook_feed_settings', $this->eael_fb_default_settings );
+		if( isset( $_GET['access_token'] ) ) {
+			global $wp_version;
+			$args = array(
+				'timeout'     => 5,
+				'redirection' => 5,
+				'httpversion' => '1.0',
+				'user-agent'  => 'WordPress/'. $wp_version .' /EAE - 2.7.2; ' . home_url(),
+				'headers'     => array(),
+				'sslverify'   => true
+			); 
+			$res = wp_remote_get( 'https://graph.facebook.com/v3.0/me?fields=id,name,accounts.limit(100){name,username,picture{url},access_token}&access_token=' . strval( $_GET['access_token'] ), $args );
+			$this->eael_fb_get_settings['pages'] = $res['body'];
+			update_option( 'eael_facebook_feed_settings', $this->eael_fb_get_settings );?>
+			<script>
+				(function($){
+					$(document).ready(function(){
+						swal(
+							'Save Your Settings!',
+							'Click OK to continue',
+							'success'
+						);
+					});
+				})(jQuery);
+			</script>
+			<?php
+		}
+		// echo '<pre>', var_dump( $this->eael_get_settings ), '</pre>';
+		
+		// $eael_fb_new_settings = array_diff_key( $this->eael_fb_default_settings, $this->eael_fb_get_settings );
+		// if( ! empty( $eael_fb_new_settings ) ) {
+		// 	$eael_fb_updated_settings = array_merge( $this->eael_fb_get_settings, $eael_fb_new_settings );
+		// 	update_option( 'eael_facebook_feed_settings', $eael_fb_updated_settings );
+		// }
+		$this->eael_fb_get_settings = get_option( 'eael_facebook_feed_settings', $this->eael_fb_default_settings );
 		?>
 		<div class="eael-settings-wrap">
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+							<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-logo.svg'; ?>">
 						</div>
 						<h2 class="title"><?php _e( 'Essential Addons Settings', 'essential-addons-elementor' ); ?></h2>
 					</div>
@@ -132,7 +229,10 @@ class Eael_Admin_Settings {
 			    	<ul class="eael-tabs">
 				      	<li><a href="#general" class="active"><i class="fa fa-cogs"></i> General</a></li>
 				      	<li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
-				      	<li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
+						<li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
+						<?php  // if( 1 == $this->eael_get_settings['facebook-feed'] ) : ?>
+						<li><a href="#social-networks"><i class="fa fa-bolt"></i> Facebook Feed Settings </a></li>
+						<?php // endif; ?>
 			    	</ul>
 			    	<div id="general" class="eael-settings-tab active">
 						<div class="row eael-admin-general-wrapper">
@@ -198,7 +298,7 @@ class Eael_Admin_Settings {
 			      			<div class="eael-admin-sidebar">
 			      				<div class="eael-sidebar-block">
 			      					<div class="eael-admin-sidebar-logo">
-			      						<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-icon-color.png'; ?>">
+			      						<img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/ea-logo.svg'; ?>">
 			      					</div>
 			      					<div class="eael-admin-sidebar-cta">
 			      						<?php printf( __( '<a href="%s" target="_blank">Upgrade to Pro</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/in/upgrade-essential-addons-elementor' ); ?>
@@ -526,7 +626,35 @@ class Eael_Admin_Settings {
 			      				<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
 			      			</div>
 			      		</div>
-			    	</div>
+					</div>
+					<?php // if( 1 == $this->eael_get_settings['facebook-feed'] ) : ?>
+					<div id="social-networks" class="eael-settings-tab">
+						<div class="row2">
+							<div class="eael-checkbox eael-own-app">
+								<input type="checkbox" id="eael-fb-feed-own-app" name="eael-fb-feed[own-app]" <?php checked( 1, $this->eael_fb_get_settings['own-app'], true ); ?>>
+								<label for="eael-fb-feed-own-app"></label>
+								<p class="eael-el-title"><?php _e( 'Own App', 'essential-addons-elementor' ); ?></p>
+							</div>
+							<div class="eael-fb-own-app-settings <?php echo esc_attr( $this->eael_fb_get_settings['own-app'] ? 'active' : '' ); ?>">
+								<p>
+									<label for="eael-fb-feed-app-id"><?php _e( 'App ID', 'essential-addons-elementor' ); ?></label>
+									<input id="eael-fb-feed-app-id" type="text" class="widefat" name="eael-fb-feed[app-id]" <?php $this->value( $this->eael_fb_get_settings['app-id'] ); ?>>
+								</p>
+								<p>
+									<label for="eael-fb-feed-app-secret"><?php _e( 'App Secret', 'essential-addons-elementor' ); ?></label>
+									<input id="eael-fb-feed-app-secret" type="text" class="widefat" name="eael-fb-feed[app-secret]" <?php $this->value( $this->eael_fb_get_settings['app-secret'] ); ?>>
+								</p>
+							</div>
+							<p>
+								<a id="eaelFBbtn" class="button eael-btn eael-license-btn eael-active" href="<?php echo esc_url( 'https://www.facebook.com/dialog/oauth?scope=manage_pages&client_id=487530858350247&redirect_uri=https://fb.essential-addons.com/callback.php&state=' . admin_url('admin.php?page=eael-settings') ); ?>"> <?php ! empty( $this->eael_fb_get_settings['pages'] ) ? _e( 'Reset Your Access Token', 'essential-addons-elementor' ) : _e( 'Get a Access Token', 'essential-addons-elementor' ); ?></a>
+								
+								<!-- <a id="eaelFBbtnOwnApp" class="button eael-btn eael-license-btn" href="<?php // echo esc_url( 'https://www.facebook.com/dialog/oauth?scope=manage_pages&client_id=487530858350247&redirect_uri=https://fb.essential-addons.com/ready.php?state=' . admin_url('admin.php?page=eael-settings') );?>">Get Your App Access Token</a> -->
+
+							</p>
+							<input id="eael-fb-feed-pages" type="hidden" class="widefat" name="eael-fb-feed[pages]" <?php $this->value( $this->eael_fb_get_settings['pages'] ); ?>>
+						</div>
+					</div>
+					<?php // endif; ?>
 			  	</div>
 		  	</form>
 		</div>
@@ -583,7 +711,34 @@ class Eael_Admin_Settings {
 		return true;
 		die();
 
+	}
 
+	public function eael_save_facebook_feed_settings(){
+		if( isset( $_POST['fields'] ) ) {
+			parse_str( $_POST['fields'], $settings );
+			$settings = $settings['eael-fb-feed'];
+		}else {
+			return;
+		}
+
+		$this->eael_fb_settings = array(
+		    'own-app' => intval( $settings['own-app'] ? 1 : 0 ),
+		    'app-id' => intval( $settings['app-id'] ? $settings['app-id'] : '' ),
+		    'app-secret' => strval( $settings['app-secret'] ? $settings['app-secret'] : '' ),
+		    'pages' => strval( $settings['pages'] ? $settings['pages'] : '' ),
+		);
+		update_option( 'eael_facebook_feed_settings', $this->eael_fb_settings );
+		return true;
+		die();
+	}
+
+	public function value( $data ){
+
+		if( empty( $data ) ) {
+			return;
+		}
+
+		echo " value='$data'";
 	}
 
 }
