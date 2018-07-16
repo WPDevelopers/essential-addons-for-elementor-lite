@@ -868,9 +868,9 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				metaPosition: '<?php echo $settings['eael_post_grid_meta_position']; ?>',
 				excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
 				btnText: '<?php echo $settings['eael_post_grid_show_load_more_text']; ?>',
-				categories: <?php echo json_encode( $post_categories ); ?>,
-				eael_post_tags: <?php echo json_encode( $post_tags ); ?>,
-				exclude_posts: <?php echo json_encode( $exclude_posts ); ?>,
+				categories: <?php echo json_encode( ! empty( $post_categories ) ? $post_categories : [] ); ?>,
+				eael_post_tags: <?php echo json_encode( ! empty( $post_tags ) ? $post_tags : [] ); ?>,
+				exclude_posts: <?php echo json_encode( ! empty( $exclude_posts ) ? $exclude_posts : [] ); ?>,
 			}
 
 			loadMore( options, settings );

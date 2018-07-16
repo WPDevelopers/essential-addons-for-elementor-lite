@@ -71,7 +71,6 @@
 					// _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
 				},
 				success: function( response ) {
-					console.log( response );
 					var $content = $( response );
 					if( optionsValue.postStyle === 'grid' ) {
 						setTimeout(function() {

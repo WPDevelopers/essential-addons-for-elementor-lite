@@ -82,20 +82,18 @@ function eael_get_post_settings( $settings ){
         }
         $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
         $post_args['tax_query'] = array_merge($relation, $tags, $categories);
-        if( ! empty( $settings['eael_post_exclude_posts'] ) ) {
+        if( isset( $settings['eael_post_exclude_posts'] ) && ! empty( $settings['eael_post_exclude_posts'] ) ) {
             $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
-        } else {
-            // $post_args['post__not_in'] = [];
         }
     }
 
-    $eael_tiled_post_author = '';
-    $eael_tiled_post_authors = ! empty( $settings['eael_post_authors'] ) ? $settings['eael_post_authors'] : '';
-    if ( !empty( $eael_tiled_post_authors) ) {
+    if( isset( $settings['eael_post_authors'] ) && ! empty( $settings['eael_post_authors'] ) && is_array( $settings['eael_post_authors'] ) ) {
+        $eael_tiled_post_author = '';
+        $eael_tiled_post_authors = $settings['eael_post_authors'];
         $eael_tiled_post_author = implode( ",", $eael_tiled_post_authors );
         $post_args['author'] = $eael_tiled_post_author;
     }
-
+    
     $post_args['offset'] = intval( $settings['eael_post_offset'] );
     $post_args['orderby'] = $settings['eael_post_orderby'];
     $post_args['order'] = $settings['eael_post_order'];
@@ -138,7 +136,7 @@ function eael_get_excerpt_by_id( $post_id, $excerpt_length ){
         $the_excerpt = $the_post->post_excerpt ? $the_post->post_excerpt : $the_post->post_content;
     }
 
-    $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
+    $the_excerpt = strip_tags( strip_shortcodes( $the_excerpt ) ); //Strips tags and images
     $words = explode(' ', $the_excerpt, $excerpt_length + 1);
 
      if(count($words) > $excerpt_length) :
@@ -666,12 +664,12 @@ function eael_load_more_ajax(){
         echo '<div><a href="'. get_the_permalink() .'" class="ticker-content">'. get_the_title() .'</a></div>';
     endif;
     endwhile;
-    wp_reset_postdata();
-    wp_reset_query();
-
+    
     if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) {
         echo '</div>';
     }
+    wp_reset_postdata();
+    wp_reset_query();
     $return['content'] = ob_get_clean();
     if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
         echo $return['content'];
