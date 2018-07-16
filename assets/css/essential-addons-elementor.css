@@ -3591,6 +3591,28 @@ table.eael-data-table thead .sorting_desc:after,
 table.eael-data-table thead .sorting_asc:after {
     display: none;
 }
+
+.th-mobile-screen {
+    display: none;
+}
+
+@media (max-width: 39.9375em) {
+.th-mobile-screen {
+    display: inline-block;
+    padding: 0 .6em;
+    width: 50%;
+}
+.eael-data-table thead {
+    display: none;
+}
+.eael-data-table tbody tr td {
+    display: block;
+    float: none;
+    clear: left;
+    width: 100%;
+}
+}
+
 /**
  * Magnific Popup
  */
