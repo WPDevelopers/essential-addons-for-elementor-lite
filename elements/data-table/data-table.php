@@ -54,7 +54,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		$this->add_control(
 			'eael_section_data_table_enabled_pro_alert',
 			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Table Sorting available in pro version!', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'condition' => [
 					'eael_section_data_table_enabled' => 'true',
@@ -90,7 +90,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 					],
 					[
 						'name'	=> 'data_table_header_colspan_pro_alert',
-						'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Column Span available in pro version!', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::HEADING,
 						'condition' => [
 							'eael_data_table_header_col_span!' => '',
@@ -130,7 +130,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 					],
 					[
 						'name'	=> 'data_table_header_img_pro_alert',
-						'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Image icon available in pro version!', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::HEADING,
 						'condition' => [
 							'eael_data_table_header_icon_type' => 'image',
@@ -222,7 +222,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 					],
 					[
 						'name'	=> 'data_table_content_rowspan_pro_alert',
-						'label'	=> esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+						'label'	=> esc_html__( 'Row Span available in pro version!', 'essential-addons-elementor' ),
 						'type'	=> Controls_Manager::HEADING,
 						'condition' => [
 							'eael_data_table_content_row_rowspan!' => '',
@@ -254,7 +254,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 					],
 					[
 						'name'	=> 'data_table_content_template_pro_alert',
-						'label'	=> esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+						'label'	=> esc_html__( 'Templates option available in pro version!', 'essential-addons-elementor' ),
 						'type'	=> Controls_Manager::HEADING,
 						'condition' => [
 							'eael_data_table_content_type' => 'template'
@@ -499,10 +499,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
-							'{{WRAPPER}} .eael-data-table thead tr th' => 'color: {{VALUE}};',
-							'{{WRAPPER}} table.dataTable thead .sorting:after' => 'color: {{VALUE}};',
-							'{{WRAPPER}} table.dataTable thead .sorting_asc:after' => 'color: {{VALUE}};',
-							'{{WRAPPER}} table.dataTable thead .sorting_desc:after' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-data-table thead tr th' => 'color: {{VALUE}};'
 						],
 					]
 				);
@@ -540,9 +537,6 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-data-table thead tr th:hover' => 'color: {{VALUE}};',
-							'{{WRAPPER}} table.dataTable thead .sorting:after:hover' => 'color: {{VALUE}};',
-							'{{WRAPPER}} table.dataTable thead .sorting_asc:after:hover' => 'color: {{VALUE}};',
-							'{{WRAPPER}} table.dataTable thead .sorting_desc:after:hover' => 'color: {{VALUE}};',
 						],
 					]
 				);
