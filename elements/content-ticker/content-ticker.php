@@ -65,103 +65,13 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'default' => esc_html__( 'Trending Today', 'essential-addons-elementor' ),
 			]
 		);
-		$this->add_control(
-			'eael_ticker_autoplay',
-			[
-				'label' => esc_html__( 'Autoplay', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'true',
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
-				'return_value' => 'true',
-			]
-		);
-		$this->add_control(
-			'eael_ticker_autoplay_speed',
-			[
-				'label' => esc_html__( 'Autoplay Speed(ms)', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
-				'label_block' => false,
-				'default' => esc_html__( '3000', 'essential-addons-elementor' ),
-			]
-		);
-		$this->add_control(
-			'eael_ticker_slide_speed',
-			[
-				'label' => esc_html__( 'Slide Speed(ms)', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
-				'label_block' => false,
-				'default' => esc_html__( '300', 'essential-addons-elementor' ),
-			]
-		);
-		$this->add_control(
-			'eael_ticker_arrow',
-			[
-				'label' => esc_html__( 'Show Nav Arrow', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'true',
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
-				'return_value' => 'true',
-			]
-		);
-		$this->add_control(
-			'eael_ticker_pause_on_hover',
-			[
-				'label' => esc_html__( 'Pause On Hover', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'true',
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
-				'return_value' => 'true',
-			]
-		);
-		$this->add_control(
-			'eael_ticker_fade',
-			[
-				'label' => esc_html__( 'Fade Effect', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'true',
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
-				'return_value' => 'true',
-			]
-		);
-		$this->add_control(
-			'eael_ticker_easing',
-				[
-				'label'         => esc_html__( 'Easing', 'essential-addons-elementor' ),
-					'type'      => Controls_Manager::SELECT,
-					'default'     => 'ease',
-					'label_block'   => false,
-					'options'     => [
-						'ease'          => esc_html__( 'Ease', 'essential-addons-elementor' ),
-						'ease-in'       => esc_html__( 'Ease In', 'essential-addons-elementor' ),
-						'ease-in-out'   => esc_html__( 'Ease In Out', 'essential-addons-elementor' ),
-					],
-				]
-		);
-		$this->add_control(
-			'eael_ticker_prev_icon',
-			[
-				'label' => esc_html__( 'Prev Icon', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::ICON,
-				'default' => 'fa fa-angle-left',
-			]
-		);
-		$this->add_control(
-			'eael_ticker_next_icon',
-			[
-				'label' => esc_html__( 'Next Icon', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::ICON,
-				'default' => 'fa fa-angle-right',
-			]
-		);
+
+		
 		$this->end_controls_section();
 
 		/**
-			 * Content Ticker Dynamic Content Settings
-			 */
+		 * Content Ticker Dynamic Content Settings
+		 */
 		$this->start_controls_section(
 			'eael_section_ticker_dynamic_content-settings',
 			[
@@ -197,6 +107,38 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+            'eael_post_authors',
+            [
+                'label'             => __( 'Authors', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_authors(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_tags',
+            [
+                'label'             => __( 'Tags', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_tags(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_exclude_posts',
+            [
+                'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_posts(),
+            ]
+        );
 
 		$this->add_control(
 			'eael_posts_count',
@@ -242,7 +184,6 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 
 		/**
 		 * -------------------------------------------
@@ -326,6 +267,216 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 			[
 				'name' => 'eael_ticker_shadow',
 				'selector' => '{{WRAPPER}} .eael-ticker-wrap',
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+         * Content Tab: Carousel Settings
+         */
+        $this->start_controls_section(
+            'section_additional_options',
+            [
+                'label'                 => __( 'Carousel Settings', 'essential-addons-elementor' ),
+            ]
+        );
+        
+        $this->add_control(
+            'carousel_effect',
+            [
+                'label'                 => __( 'Effect', 'essential-addons-elementor' ),
+                'description'           => __( 'Sets transition effect', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'default'               => 'slide',
+                'options'               => [
+                    'slide'     => __( 'Slide', 'essential-addons-elementor' ),
+                    'fade'      => __( 'Fade', 'essential-addons-elementor' ),
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'items',
+            [
+                'label'                 => __( 'Visible Items', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'default'               => [ 'size' => 1 ],
+                'tablet_default'        => [ 'size' => 1 ],
+                'mobile_default'        => [ 'size' => 1 ],
+                'range'                 => [
+                    'px' => [
+                        'min'   => 1,
+                        'max'   => 10,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => '',
+                'condition'             => [
+                    'carousel_effect'   => 'slide',
+                ],
+                'separator'             => 'before',
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'margin',
+            [
+                'label'                 => __( 'Items Gap', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'default'               => [ 'size' => 10 ],
+                'range'                 => [
+                    'px' => [
+                        'min'   => 0,
+                        'max'   => 100,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => '',
+                'condition'             => [
+                    'carousel_effect'   => 'slide',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'slider_speed',
+            [
+                'label'                 => __( 'Slider Speed', 'essential-addons-elementor' ),
+                'description'           => __( 'Duration of transition between slides (in ms)', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'default'               => [ 'size' => 400 ],
+                'range'                 => [
+                    'px' => [
+                        'min'   => 100,
+                        'max'   => 3000,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => '',
+                'separator'             => 'before',
+            ]
+        );
+        
+        $this->add_control(
+            'autoplay',
+            [
+                'label'                 => __( 'Autoplay', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'default'               => 'yes',
+                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                'return_value'          => 'yes',
+                'separator'             => 'before',
+            ]
+        );
+        
+        $this->add_control(
+            'autoplay_speed',
+            [
+                'label'                 => __( 'Autoplay Speed', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'default'               => [ 'size' => 2000 ],
+                'range'                 => [
+                    'px' => [
+                        'min'   => 500,
+                        'max'   => 5000,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => '',
+                'condition'         => [
+                    'autoplay'      => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'infinite_loop',
+            [
+                'label'                 => __( 'Infinite Loop', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'default'               => 'yes',
+                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                'return_value'          => 'yes',
+            ]
+        );
+        
+        $this->add_control(
+            'grab_cursor',
+            [
+                'label'                 => __( 'Grab Cursor', 'essential-addons-elementor' ),
+                'description'           => __( 'Shows grab cursor when you hover over the slider', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'default'               => '',
+                'label_on'          => __( 'Show', 'essential-addons-elementor' ),
+                'label_off'         => __( 'Hide', 'essential-addons-elementor' ),
+                'return_value'      => 'yes',
+                'separator'             => 'before',
+            ]
+        );
+        
+        $this->add_control(
+            'navigation_heading',
+            [
+                'label'                 => __( 'Navigation', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+                'separator'             => 'before',
+            ]
+        );
+        
+        $this->add_control(
+            'arrows',
+            [
+                'label'                 => __( 'Arrows', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'default'               => 'yes',
+                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                'return_value'          => 'yes',
+            ]
+        );
+        
+        $this->add_control(
+            'direction',
+            [
+                'label'                 => __( 'Direction', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'default'               => 'left',
+                'options'               => [
+                    'left'       => __( 'Left', 'essential-addons-elementor' ),
+                    'right'      => __( 'Right', 'essential-addons-elementor' ),
+                ],
+				'separator'             => 'before',
+				'condition'             => [
+                    'carousel_effect'   => 'slide',
+                ],
+            ]
+        );
+
+		$this->end_controls_section();
+		
+		$this->start_controls_section(
+			'eael_section_pro',
+			[
+				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+			]
+		);
+
+		$this->add_control(
+			'eael_control_get_pro',
+			[	
+				'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'1' => [
+						'title' => __( '', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-unlock-alt',
+					],
+				],
+				'default' => '1',
+				'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 			]
 		);
 
@@ -515,30 +666,224 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 			]
 		);
 		$this->end_controls_section();
-		$this->start_controls_section(
-			'eael_section_pro',
+
+		/**
+         * Style Tab: Arrows
+         */
+        $this->start_controls_section(
+            'section_arrows_style',
+            [
+                'label'                 => __( 'Arrows', 'essential-addons-elementor' ),
+                'tab'                   => Controls_Manager::TAB_STYLE,
+                'condition'             => [
+                    'arrows'        => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'arrow',
+            [
+                'label'                 => __( 'Choose Arrow', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::ICON,
+                'label_block'           => true,
+                'default'               => 'fa fa-angle-right',
+                'include'               => [
+                    'fa fa-angle-right',
+                    'fa fa-angle-double-right',
+                    'fa fa-chevron-right',
+                    'fa fa-chevron-circle-right',
+                    'fa fa-arrow-right',
+                    'fa fa-long-arrow-right',
+                    'fa fa-caret-right',
+                    'fa fa-caret-square-o-right',
+                    'fa fa-arrow-circle-right',
+                    'fa fa-arrow-circle-o-right',
+                    'fa fa-toggle-right',
+                    'fa fa-hand-o-right',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'arrows_size',
+            [
+                'label'                 => __( 'Arrows Size', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'default'               => [ 'size' => '22' ],
+                'range'                 => [
+                    'px' => [
+                        'min'   => 15,
+                        'max'   => 100,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'left_arrow_position',
+            [
+                'label'                 => __( 'Align Left Arrow', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px' => [
+                        'min'   => -100,
+                        'max'   => 40,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+				'selectors'         => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
+				],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'right_arrow_position',
+            [
+                'label'                 => __( 'Align Right Arrow', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px' => [
+                        'min'   => -100,
+                        'max'   => 40,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+				'selectors'         => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
+				],
+            ]
+        );
+
+        $this->start_controls_tabs( 'tabs_arrows_style' );
+
+        $this->start_controls_tab(
+            'tab_arrows_normal',
+            [
+                'label'                 => __( 'Normal', 'essential-addons-elementor' ),
+            ]
+        );
+
+        $this->add_control(
+            'arrows_bg_color_normal',
+            [
+                'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'arrows_color_normal',
+            [
+                'label'                 => __( 'Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
 			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+				'name'                  => 'arrows_border_normal',
+				'label'                 => __( 'Border', 'essential-addons-elementor' ),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'
 			]
 		);
 
 		$this->add_control(
-			'eael_control_get_pro',
-			[	
-				'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
-					],
+			'arrows_border_radius_normal',
+			[
+				'label'                 => __( 'Border Radius', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => [ 'px', '%' ],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'default' => '1',
-				'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 			]
 		);
+        
+        $this->end_controls_tab();
 
-		$this->end_controls_section();
+        $this->start_controls_tab(
+            'tab_arrows_hover',
+            [
+                'label'                 => __( 'Hover', 'essential-addons-elementor' ),
+            ]
+        );
+
+        $this->add_control(
+            'arrows_bg_color_hover',
+            [
+                'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'arrows_color_hover',
+            [
+                'label'                 => __( 'Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'arrows_border_color_hover',
+            [
+                'label'                 => __( 'Border Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+        
+        $this->end_controls_tab();
+        
+        $this->end_controls_tabs();
+
+		$this->add_responsive_control(
+			'arrows_padding',
+			[
+				'label'                 => __( 'Padding', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => [ 'px', '%' ],
+				'selectors'             => [
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'separator'             => 'before',
+			]
+		);
+        
+        $this->end_controls_section();
+
+		
 	}
 
 
@@ -553,34 +898,121 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		/**
 		 * Get posts from database.
 		 */
-		$posts = eael_load_more_ajax( $post_args );
+		$posts = eael_get_post_data( $post_args );
 		/**
 		 * Render the content
 		 */
-		if( isset( $posts['content'] ) && ! empty( $posts['content'] ) ) : ?>
-			<div class="eael-ticker-wrap" id="eael-ticker-wrap-<?php echo $this->get_id(); ?>">
-				<?php echo $posts['content']; ?>
+		$this->add_render_attribute( 'content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker' );
+        
+		$this->add_render_attribute( 'content-ticker', 'class', 'swiper-container eael-content-ticker' );
+		$this->add_render_attribute( 'content-ticker', 'class', 'swiper-container-'.esc_attr( $this->get_id() ) );
+		$this->add_render_attribute( 'content-ticker', 'data-pagination', '.swiper-pagination-'.esc_attr( $this->get_id() ) );
+		$this->add_render_attribute( 'content-ticker', 'data-arrow-next', '.swiper-button-next-'.esc_attr( $this->get_id() ) );
+		$this->add_render_attribute( 'content-ticker', 'data-arrow-prev', '.swiper-button-prev-'.esc_attr( $this->get_id() ) );
+  
+		if ( $settings['direction'] == 'right' ) {
+			$this->add_render_attribute( 'content-ticker', 'dir', 'rtl' );
+		}
+  
+		if ( ! empty( $settings['items']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-items', $settings['items']['size'] );
+	  }
+	  if ( ! empty( $settings['items_tablet']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-items-tablet', $settings['items_tablet']['size'] );
+	  }
+	  if ( ! empty( $settings['items_mobile']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-items-mobile', $settings['items_mobile']['size'] );
+	  }
+	  if ( ! empty( $settings['margin']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-margin', $settings['margin']['size'] );
+	  }
+	  if ( ! empty( $settings['margin_tablet']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size'] );
+	  }
+	  if ( ! empty( $settings['margin_mobile']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size'] );
+	  }
+	  if ( $settings['carousel_effect'] ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-effect', $settings['carousel_effect'] );
+	  }
+	  if ( ! empty( $settings['slider_speed']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-speed', $settings['slider_speed']['size'] );
+	  }
+	  if ( $settings['autoplay'] == 'yes' && ! empty( $settings['autoplay_speed']['size'] ) ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-autoplay', $settings['autoplay_speed']['size'] );
+	  } else {
+		  $this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
+	  }
+	  if ( $settings['infinite_loop'] == 'yes' ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-loop', '1' );
+	  }
+	  if ( $settings['grab_cursor'] == 'yes' ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-grab-cursor', '1' );
+	  }
+	  if ( $settings['arrows'] == 'yes' ) {
+		  $this->add_render_attribute( 'content-ticker', 'data-arrows', '1' );
+	  }
+  
+		?>
+  
+  
+		<?php if(  'dynamic' === $settings['eael_ticker_type'] || 'custom' === $settings['eael_ticker_type'] ) : ?>
+		  <?php if(count($posts)) : global $post; ?>
+		  <div class="eael-ticker-wrap" id="eael-ticker-wrap-<?php echo $this->get_id(); ?>">
+			<?php if( !empty($settings['eael_ticker_tag_text']) ) : ?>
+			<div class="ticker-badge">
+			  <span><?php echo $settings['eael_ticker_tag_text']; ?></span>
 			</div>
-			<script>
-				jQuery(document).ready(function($) {
-					$('#eael-ticker-wrap-<?php echo $this->get_id(); ?> .eael-ticker').slick({
-						autoplay: <?php if( !empty($settings['eael_ticker_autoplay']) ) : echo $settings['eael_ticker_autoplay']; else: echo 'false'; endif; ?>,
-						autoplaySpeed: <?php echo $settings['eael_ticker_autoplay_speed']; ?>,
-						arrows: <?php if( !empty($settings['eael_ticker_arrow']) ) : echo $settings['eael_ticker_arrow']; else: echo 'false'; endif; ?>,
-						cssEase: 'ease',
-						fade: <?php if( !empty($settings['eael_ticker_fade']) ) : echo $settings['eael_ticker_fade']; else: echo 'false'; endif; ?>,
-						easing: '<?php echo $settings['eael_ticker_easing']; ?>',
-						pauseOnHover: <?php if( !empty($settings['eael_ticker_pause_on_hover']) ) : echo $settings['eael_ticker_pause_on_hover']; else: echo 'false'; endif; ?>,
-						prevArrow: '<button type="button" class="eael-slick-prev"><i class="<?php echo $settings['eael_ticker_prev_icon']; ?>"></i></button>',
-						nextArrow: '<button type="button" class="eael-slick-next"><i class="<?php echo $settings['eael_ticker_next_icon']; ?>"></i></button>',
-						speed: <?php echo $settings['eael_ticker_slide_speed']; ?>,
-						useCSS: true
-					});
-				});
-			</script>
-		<?php else : echo '<p>Something went wrong.</p>'; endif; ?>
+			<?php endif; ?>          
+			
+			<div  <?php echo $this->get_render_attribute_string( 'content-ticker-wrap' ); ?> >
+			  <div <?php echo $this->get_render_attribute_string( 'content-ticker' ); ?> >
+				  <div class="swiper-wrapper">
+				  <?php foreach( $posts as $post ) : setup_postdata( $post );
+				  echo '<div class="swiper-slide"><a href="'.get_the_permalink().'" class="ticker-content">'.get_the_title().'</a></div>';
+				  endforeach; ?>
+				  </div>
+			  </div>
+			  <?php
+				  $this->render_arrows();
+			  ?>
+			</div>
+		  </div>
+			<?php endif; ?>
+		<?php endif ?>
 		<?php
 	}
+
+	/**
+	 * Render logo carousel arrows output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @access protected
+	 */
+    protected function render_arrows() {
+        $settings = $this->get_settings_for_display();
+
+        if ( $settings['arrows'] == 'yes' ) { ?>
+            <?php
+                if ( $settings['arrow'] ) {
+                    $pa_next_arrow = $settings['arrow'];
+                    $pa_prev_arrow = str_replace("right","left",$settings['arrow']);
+                }
+                else {
+                    $pa_next_arrow = 'fa fa-angle-right';
+                    $pa_prev_arrow = 'fa fa-angle-left';
+                }
+            ?>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
+                <i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
+            </div>
+            <div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
+                <i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
+            </div>
+        <?php }
+    }
 
 	protected function content_template() {}
 }
