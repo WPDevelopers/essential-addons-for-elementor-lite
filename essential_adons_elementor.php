@@ -198,10 +198,6 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
     }
 
-    if( $is_component_active['content-ticker'] ) {
-      wp_enqueue_script('essential_addons_elementor-slick-js',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.min.js', array('jquery'),'1.0', true);
-    }
-
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
