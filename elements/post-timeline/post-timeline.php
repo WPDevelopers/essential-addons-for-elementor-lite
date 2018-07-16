@@ -744,9 +744,9 @@ class Widget_PostTimeline extends Widget_Base {
 
 				'data-btn_text'			=> $settings['eael_post_timeline_load_more_text'],
 
-				'data-categories'		=> json_encode( $post_categories ),
-				'data-tags'		=> json_encode( $post_tags ),
-				'data-exclude_posts'		=> json_encode( $exclude_posts )
+				'data-categories'		=> json_encode( ! empty( $post_categories ) ? $post_categories : [] ),
+				'data-tags'				=> json_encode( ! empty( $post_tags ) ? $post_tags : [] ),
+				'data-exclude_posts'	=> json_encode( ! empty( $exclude_posts ) ? $exclude_posts : [] ),
 			]
 		);
 
