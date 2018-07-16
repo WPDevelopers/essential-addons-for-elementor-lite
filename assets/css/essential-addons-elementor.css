@@ -1894,6 +1894,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 }
 .eael-infobox:hover .infobox-icon .infobox-icon-wrap {
   transform: scale(1.1);
+  transform-origin: 0 0;
 }
 /* For Content Alignment */
 .eael-infobox-content-align-left .eael-infobox .infobox-icon,
@@ -4249,24 +4250,20 @@ img.mfp-img {
   left: 0;
   transition: background-color .4s;
 }
+.eael-img-accordion .overlay .overlay-inner {
+  z-index: 1;
+}
 .eael-img-accordion a:after {
   content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
   z-index: 0;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
   transition: all 0.3s ease-in-out;
-}
-.eael-img-accordion a:hover::after {
-  background-color: transparent;
-}
-.eael-img-accordion a:hover .overlay {
-  background-color: rgba(0, 0, 0, .5);
 }
 
 .eael-img-accordion .overlay-inner * {

@@ -178,7 +178,11 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
     }
     if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
-      wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
+        wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
+        $eael_js_settings = array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        );
+        wp_localize_script( 'essential_addons_elementor-load-more-js', 'eaelPostGrid', $eael_js_settings );
     }
     if( $is_component_active['twitter-feed']) {
       wp_enqueue_script('essential_addons_elementor-codebird-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/codebird.js', array('jquery'),'1.0', true);
@@ -205,10 +209,8 @@ add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
  * Editor Css
  */
 add_action( 'elementor/editor/before_enqueue_scripts', function() {
-
    wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
-
 } );
 
 /**
@@ -351,3 +353,142 @@ function eael_nag_ignore() {
   }
 }
 add_action('admin_init', 'eael_nag_ignore');
+
+/**
+ * @review_dismiss()
+ * @review_pending()
+ * @eael_review_notice_message()
+ * Make all the above functions working.
+ */
+function eael_review_notice(){
+
+    review_dismiss();
+    review_pending();
+
+    $activation_time 	= get_site_option( 'eael_active_time' );
+    $review_dismissal	= get_site_option( 'eael_review_dismiss' );
+    $maybe_later	    = get_site_option( 'eael_maybe_later' );
+
+    if ( 'yes' == $review_dismissal ) {
+        return;
+    }
+
+    if ( ! $activation_time ) {
+        add_site_option( 'eael_active_time', time() );
+    }
+    
+    $daysinseconds = 259200; // 3 Days in seconds.
+    if( 'yes' == $maybe_later ) {
+        $daysinseconds = 604800 ; // 7 Days in seconds.
+    }
+
+    if ( time() - $activation_time > $daysinseconds ) {
+        add_action( 'admin_notices' , 'eael_review_notice_message' );
+    }
+
+}
+add_action( 'admin_init', 'eael_review_notice' );
+
+/**
+ * For the notice preview.
+ */
+function eael_review_notice_message(){
+    $scheme      = (parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY )) ? '&' : '?';
+    $url         = $_SERVER['REQUEST_URI'] . $scheme . 'eael_review_dismiss=yes';
+    $dismiss_url = wp_nonce_url( $url, 'eael-review-nonce' );
+
+    $_later_link = $_SERVER['REQUEST_URI'] . $scheme . 'eael_review_later=yes';
+    $later_url   = wp_nonce_url( $_later_link, 'eael-review-nonce' );
+    ?>
+    
+    <div class="eael-review-notice">
+        <div class="eael-review-thumbnail">
+            <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
+        </div>
+        <div class="eael-review-text">
+            <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
+            <p><?php _e( 'We hope you\'ve enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?', 'essential-addons-elementor' ) ?></p>
+            <ul class="eael-review-ul">
+                <li>
+                    <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
+                        <span class="dashicons dashicons-external"></span>
+                        <?php _e( 'Sure! I\'d love to!', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $dismiss_url ?>">
+                        <span class="dashicons dashicons-smiley"></span>
+                        <?php _e( 'I\'ve already left a review', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $later_url ?>">
+                        <span class="dashicons dashicons-calendar-alt"></span>
+                        <?php _e( 'Maybe Later', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://essential-addons.com/elementor/support/" target="_blank">
+                        <span class="dashicons dashicons-sos"></span>
+                        <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $dismiss_url ?>">
+                        <span class="dashicons dashicons-dismiss"></span>
+                        <?php _e( 'Never show again', 'essential-addons-elementor' ) ?>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <?php
+}
+
+/**
+ * For Dismiss! 
+ */
+function review_dismiss(){
+
+    if ( ! is_admin() ||
+        ! current_user_can( 'manage_options' ) ||
+        ! isset( $_GET['_wpnonce'] ) ||
+        ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'eael-review-nonce' ) ||
+        ! isset( $_GET['eael_review_dismiss'] ) ) {
+
+        return;
+    }
+
+    add_site_option( 'eael_review_dismiss', 'yes' );
+    
+}
+
+/**
+ * For Maybe Later Update.
+ */
+function review_pending() {
+
+    if ( ! is_admin() ||
+        ! current_user_can( 'manage_options' ) ||
+        ! isset( $_GET['_wpnonce'] ) ||
+        ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'eael-review-nonce' ) ||
+        ! isset( $_GET['eael_review_later'] ) ) {
+
+        return;
+    }
+    // Reset Time to current time.
+    update_site_option( 'eael_active_time', time() );
+    update_site_option( 'eael_maybe_later', 'yes' );
+
+}
+
+/**
+ * Remove Reviews Metadata on plugin Deactivation.
+ */
+function eael_deactivate() {
+    delete_option('eael_active_time');
+    delete_option('eael_maybe_later');
+    delete_option('eael_facebook_feed_settings');
+}
+register_deactivation_hook(__FILE__, 'eael_deactivate');
