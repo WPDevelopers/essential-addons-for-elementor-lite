@@ -371,14 +371,29 @@
             });
     };
 
+    /* ------------------------------ */
+    /* Data Table
+    /* ------------------------------ */
+    var dataTable = function($scope, $) {
+        var $th = $scope.find('.eael-data-table').find('th');
+        var $tbody = $scope.find('.eael-data-table').find('tbody');
+
+        $tbody.find('tr').each(function(i, item) {
+            $(item).find('td').each(function(index, item){
+               $(this)
+                .prepend('<b class="th-mobile-screen">' + $th.eq(index).html() + '</b>');
+            });
+        });
+    } // end of Data Table
+
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
-        elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-content-ticker.default', ContentTicker);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);
     });
 
 }(jQuery));
