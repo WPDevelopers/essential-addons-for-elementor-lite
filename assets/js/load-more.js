@@ -48,24 +48,22 @@
 					image_size : settingsValue.imageSize,
 					eael_show_title : settingsValue.showTitle,
 					eael_show_meta : settingsValue.showMeta,
-					eael_post_grid_meta_position : settingsValue.metaPosition,
+					meta_position : settingsValue.metaPosition,
 					
 					eael_show_excerpt : settingsValue.showExcerpt,
 					eael_excerpt_length : settingsValue.excerptLength,
 
-					eael_post_type: settingsValue.postType,
-					eael_posts_count : settingsValue.perPage,
-					eael_post_offset : offset,
+					post_type: settingsValue.postType,
+					posts_per_page : settingsValue.perPage,
+					offset : offset,
 					
-					// categories: JSON.parse( settingsValue.categories ),
 					category: settingsValue.categories ,
-					// eael_post_tags: JSON.parse( settingsValue.tags ),
 					eael_post_tags: settingsValue.tags ,
-					// eael_post_exclude_posts: JSON.parse( settingsValue.excludePosts ),
-					eael_post_exclude_posts: settingsValue.excludePosts,
+					post__not_in: settingsValue.excludePosts,
 
-					eael_post_orderby: settingsValue.orderBy,
-					eael_post_order: settingsValue.postOrder,
+					orderby: settingsValue.orderBy,
+					order: settingsValue.postOrder,
+					grid_style: settingsValue.grid_style,
 				},
 				beforeSend: function() {
 					// _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');

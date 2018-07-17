@@ -84,7 +84,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 
 
 		$this->add_control(
-			'eael_post_type',
+			'post_type',
 			[
 				'label' => __( 'Post Type', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -102,7 +102,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'multiple' => true,
 				'options' => eael_post_type_categories(),
 				'condition' => [
-					'eael_post_type' => 'post'
+					'post_type' => 'post'
 				]
 			]
 		);
@@ -126,22 +126,42 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'label_block'       => true,
 				'multiple'          => true,
 				'options'           => eael_get_tags(),
+				'condition' => [
+					'post_type' => 'post'
+				]
             ]
         );
 
         $this->add_control(
-            'eael_post_exclude_posts',
+            'post__not_in',
             [
                 'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
                 'type'              => Controls_Manager::SELECT2,
 				'label_block'       => true,
 				'multiple'          => true,
 				'options'           => eael_get_posts(),
+				'condition' => [
+					'post_type' => 'post'
+				]
+            ]
+		);
+		
+        $this->add_control(
+            'page__not_in',
+            [
+                'label'             => __( 'Exclude Pages', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_pages(),
+				'condition' => [
+					'post_type' => 'page'
+				]
             ]
         );
 
 		$this->add_control(
-			'eael_posts_count',
+			'posts_per_page',
 			[
 				'label' => __( 'Number of Posts', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::NUMBER,
@@ -151,7 +171,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 
 
 		$this->add_control(
-			'eael_post_offset',
+			'offset',
 			[
 					'label' => __( 'Post Offset', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::NUMBER,
@@ -160,7 +180,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_post_orderby',
+			'orderby',
 			[
 					'label' => __( 'Order By', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::SELECT,
@@ -171,7 +191,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_post_order',
+			'order',
 			[
 				'label' => __( 'Order', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -882,8 +902,6 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
         
         $this->end_controls_section();
-
-		
 	}
 
 
@@ -898,7 +916,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		/**
 		 * Get posts from database.
 		 */
-		$posts = eael_get_post_data( $post_args );
+		$posts = eael_load_more_ajax( $post_args );
 		/**
 		 * Render the content
 		 */
@@ -915,49 +933,46 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		}
   
 		if ( ! empty( $settings['items']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-items', $settings['items']['size'] );
-	  }
-	  if ( ! empty( $settings['items_tablet']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-items-tablet', $settings['items_tablet']['size'] );
-	  }
-	  if ( ! empty( $settings['items_mobile']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-items-mobile', $settings['items_mobile']['size'] );
-	  }
-	  if ( ! empty( $settings['margin']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-margin', $settings['margin']['size'] );
-	  }
-	  if ( ! empty( $settings['margin_tablet']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size'] );
-	  }
-	  if ( ! empty( $settings['margin_mobile']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size'] );
-	  }
-	  if ( $settings['carousel_effect'] ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-effect', $settings['carousel_effect'] );
-	  }
-	  if ( ! empty( $settings['slider_speed']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-speed', $settings['slider_speed']['size'] );
-	  }
-	  if ( $settings['autoplay'] == 'yes' && ! empty( $settings['autoplay_speed']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-autoplay', $settings['autoplay_speed']['size'] );
-	  } else {
-		  $this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
-	  }
-	  if ( $settings['infinite_loop'] == 'yes' ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-loop', '1' );
-	  }
-	  if ( $settings['grab_cursor'] == 'yes' ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-grab-cursor', '1' );
-	  }
-	  if ( $settings['arrows'] == 'yes' ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-arrows', '1' );
-	  }
+			$this->add_render_attribute( 'content-ticker', 'data-items', $settings['items']['size'] );
+		}
+		if ( ! empty( $settings['items_tablet']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-items-tablet', $settings['items_tablet']['size'] );
+		}
+		if ( ! empty( $settings['items_mobile']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-items-mobile', $settings['items_mobile']['size'] );
+		}
+		if ( ! empty( $settings['margin']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-margin', $settings['margin']['size'] );
+		}
+		if ( ! empty( $settings['margin_tablet']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size'] );
+		}
+		if ( ! empty( $settings['margin_mobile']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size'] );
+		}
+		if ( $settings['carousel_effect'] ) {
+			$this->add_render_attribute( 'content-ticker', 'data-effect', $settings['carousel_effect'] );
+		}
+		if ( ! empty( $settings['slider_speed']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-speed', $settings['slider_speed']['size'] );
+		}
+		if ( $settings['autoplay'] == 'yes' && ! empty( $settings['autoplay_speed']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-autoplay', $settings['autoplay_speed']['size'] );
+		} else {
+			$this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
+		}
+		if ( $settings['infinite_loop'] == 'yes' ) {
+			$this->add_render_attribute( 'content-ticker', 'data-loop', true );
+		}
+		if ( $settings['grab_cursor'] == 'yes' ) {
+			$this->add_render_attribute( 'content-ticker', 'data-grab-cursor', true );
+		}
+		if ( $settings['arrows'] == 'yes' ) {
+			$this->add_render_attribute( 'content-ticker', 'data-arrows', '1' );
+		}
   
 		?>
-  
-  
 		<?php if(  'dynamic' === $settings['eael_ticker_type'] || 'custom' === $settings['eael_ticker_type'] ) : ?>
-		  <?php if(count($posts)) : global $post; ?>
 		  <div class="eael-ticker-wrap" id="eael-ticker-wrap-<?php echo $this->get_id(); ?>">
 			<?php if( !empty($settings['eael_ticker_tag_text']) ) : ?>
 			<div class="ticker-badge">
@@ -968,19 +983,21 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 			<div  <?php echo $this->get_render_attribute_string( 'content-ticker-wrap' ); ?> >
 			  <div <?php echo $this->get_render_attribute_string( 'content-ticker' ); ?> >
 				  <div class="swiper-wrapper">
-				  <?php foreach( $posts as $post ) : setup_postdata( $post );
-				  echo '<div class="swiper-slide"><a href="'.get_the_permalink().'" class="ticker-content">'.get_the_title().'</a></div>';
-				  endforeach; ?>
+				  	<?php 
+						if( 'dynamic' === $settings['eael_ticker_type'] ) {
+							if( ! empty( $posts['content'] ) ) {
+								echo $posts['content'];
+							} else {
+								echo ' <div class="swiper-slide"><a href="#" class="ticker-content">'. __( 'Something went wrong!', 'essential-addons-elementor' ) .'</a></div>';
+							}
+						}
+					?>
 				  </div>
 			  </div>
-			  <?php
-				  $this->render_arrows();
-			  ?>
+			  <?php $this->render_arrows(); ?>
 			</div>
 		  </div>
-			<?php endif; ?>
-		<?php endif ?>
-		<?php
+		<?php endif;
 	}
 
 	/**
