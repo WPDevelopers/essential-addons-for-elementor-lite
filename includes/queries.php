@@ -17,71 +17,62 @@ function eael_get_post_types(){
 
     return $post_types;
 }
-
-
 /**
  * Post Settings Parameter
  * @param  array $settings
  * @return array
  */
 function eael_get_post_settings( $settings ){
-    $post_args['post_type'] = $settings['eael_post_type'];
-    $post_args['posts_per_page'] = $settings['eael_posts_count'] ? $settings['eael_posts_count'] : 4;
-    $post_args['post_style'] = $settings['post_style'] ? $settings['post_style'] : 'grid';
+    $tags = $categories = [];
+    foreach( $settings as $key => $value ) {
+        if( in_array( $key, posts_args() ) ) {
+            switch( $key ){
+                case 'eael_post_tags' : 
+                    if( ! empty( $settings['eael_post_tags'] ) ) {
+                        $tags = [[
+                            'taxonomy' => 'post_tag',
+                            'field' => 'term_id',
+                            'terms' => $settings['eael_post_tags'],
+                        ]];
+                    }
+                    break;
+                case 'category' : 
+                    if( ! empty( $settings['category'] ) ) {
+                        $categories = [[
+                            'taxonomy' => 'category',
+                            'field' => 'term_id',
+                            'terms' => $settings['category'],
+                        ]];
+                    }
+                    break;
+                case 'eael_post_authors' : 
+                    if( isset( $settings['eael_post_authors'] ) && ! empty( $settings['eael_post_authors'] ) && is_array( $settings['eael_post_authors'] ) ) {
+                        $post_args['author'] = implode( ",", $settings['eael_post_authors'] );
+                    }
+                    break;
+                case 'page__not_in' : 
+                    if( isset( $settings['page__not_in'] ) && ! empty( $settings['page__not_in'] ) && is_array( $settings['page__not_in'] ) ) {
+                        $post_args['post__not_in'] = $value;
+                    }
+                    break;
+                default : 
+                    if( isset( $settings[ $key ] ) && ! empty( $settings[ $key ] ) ) {
+                        $post_args[ $key ] = $value;
+                    }
+                    break;
+            }
+        }
+    }
 
-    if( $settings['eael_post_type'] == 'post' ){
-        $tags = $categories = [];
-        if( ! empty( $settings['eael_post_tags'] ) ) {
-            $tags = [[
-                'taxonomy' => 'post_tag',
-                'field' => 'term_id',
-                'terms' => $settings['eael_post_tags'],
-            ]];
-        }
-        if( ! empty( $settings['category'] ) ) {
-            $categories = [[
-                'taxonomy' => 'category',
-                'field' => 'term_id',
-                'terms' => $settings['category'],
-            ]];
-        }
+    if( isset( $post_args['post_type'] ) && $post_args['post_type'] == 'post' ) {
         $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
         $post_args['tax_query'] = array_merge($relation, $tags, $categories);
-        if( isset( $settings['eael_post_exclude_posts'] ) && ! empty( $settings['eael_post_exclude_posts'] ) ) {
-            $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
-        }
-    }
-
-    if( isset( $settings['eael_post_authors'] ) && ! empty( $settings['eael_post_authors'] ) && is_array( $settings['eael_post_authors'] ) ) {
-        $eael_tiled_post_author = '';
-        $eael_tiled_post_authors = $settings['eael_post_authors'];
-        $eael_tiled_post_author = implode( ",", $eael_tiled_post_authors );
-        $post_args['author'] = $eael_tiled_post_author;
     }
     
-    $post_args['offset'] = intval( $settings['eael_post_offset'] );
-    $post_args['orderby'] = $settings['eael_post_orderby'];
-    $post_args['order'] = $settings['eael_post_order'];
+    $post_args['posts_per_page'] = $post_args['posts_per_page'] ? $post_args['posts_per_page'] : 4;
+    $post_args['post_style'] = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
 
-    if( $settings['post_style'] != 'ticker' ) {
-
-        $post_args['eael_show_image'] = $settings['eael_show_image'];
-        $post_args['image_size'] = $settings['image_size'];
-        
-        $post_args['eael_show_title'] = $settings['eael_show_title'];
-        
-        if( $settings['post_style'] != 'timeline' ) {
-            $post_args['eael_show_meta'] = $settings['eael_show_meta'];
-            $post_args['eael_post_grid_meta_position'] = $settings['eael_post_grid_meta_position'];
-        }
-
-        $post_args['eael_show_excerpt'] = $settings['eael_show_excerpt'];
-        $post_args['eael_excerpt_length'] = $settings['eael_excerpt_length'];
-
-    } else {
-        $post_args['eael_ticker_tag_text'] = $settings['eael_ticker_tag_text'];
-    }
-    
+    if( isset( $post_args['offset'] ) ) $post_args['offset'] = intval( $post_args['offset'] );
     $post_args['post_status'] = 'publish';
 
     return $post_args;
@@ -449,12 +440,27 @@ if ( !function_exists('eael_get_posts') ) {
     }
 }
 
-/**
- * POST Count
- */
-function total_post_count( $args ) {
-    $posts = new WP_Query( $args );
-    return $posts->post_count;
+// Get all Pages
+if ( !function_exists('eael_get_pages') ) {
+    function eael_get_pages() {
+
+        $page_list = get_posts( array(
+            'post_type'         => 'page',
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'posts_per_page'    => -1,
+        ) );
+
+        $pages = array();
+
+        if ( ! empty( $page_list ) && ! is_wp_error( $page_list ) ) {
+            foreach ( $page_list as $page ) {
+               $pages[ $page->ID ] = $page->post_title;
+            }
+        }
+
+        return $pages;
+    }
 }
 
 /**
@@ -475,164 +481,14 @@ function eael_load_more_ajax(){
     $return['count'] = $posts->found_posts;
 
     ob_start();
-    if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) {
-        if( !empty($post_args['eael_ticker_tag_text']) ) : 
-            ?>
-            <div class="ticker-badge">
-                <span><?php echo $post_args['eael_ticker_tag_text']; ?></span>
-            </div>
-            <?php
-        endif;
-        echo '<div class="eael-ticker">';
-    }
+
     while( $posts->have_posts() ) : $posts->the_post();
-    if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'grid' ) :
-        if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) : 
-    ?>
-        <article class="eael-grid-post eael-post-grid-column">
-            <div class="eael-grid-post-holder">
-                <div class="eael-grid-post-holder-inner">
-                    <?php if ($thumbnail_exists = has_post_thumbnail()): ?>
-                    <div class="eael-entry-media">
-                        <div class="eael-entry-overlay">
-                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                            <a href="<?php echo get_permalink(); ?>"></a>
-                        </div>
-                        <div class="eael-entry-thumbnail">
-                            <?php if($post_args['eael_show_image'] == 1){ ?>
-                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>">
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-
-                    <div class="eael-entry-wrapper">
-                        <header class="eael-entry-header">
-                            <?php if($post_args['eael_show_title']){ ?>
-                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
-                            <?php } ?>
-
-                            <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-header'){ ?>
-                            <div class="eael-entry-meta">
-                                <span class="eael-posted-by"><?php the_author_posts_link(); ?></span>
-                                <span class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></span>
-                            </div>
-                            <?php } ?>
-                        </header>
-
-                        <div class="eael-entry-content">
-                            <?php if($post_args['eael_show_excerpt']){ ?>
-                            <div class="eael-grid-post-excerpt">
-                                <p><?php echo  eael_get_excerpt_by_id(get_the_ID(), $post_args['eael_excerpt_length']);?></p>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-
-                    <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-footer'){ ?>
-                    <div class="eael-entry-footer">
-                        <div class="eael-author-avatar">
-                            <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 96 ); ?> </a>
-                        </div>
-                        <div class="eael-entry-meta">
-                            <div class="eael-posted-by"><?php the_author_posts_link(); ?></div>
-                            <div class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </article>
-    <?php
-    else : 
-    ?>
-        <article class="eael-grid-post eael-post-grid-column">
-            <div class="eael-grid-post-holder">
-                <div class="eael-grid-post-holder-inner">
-                    <?php if ($thumbnail_exists = has_post_thumbnail()): ?>
-                    <div class="eael-entry-media">
-                        <div class="eael-entry-overlay">
-                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                            <a href="<?php echo get_permalink(); ?>"></a>
-                        </div>
-                        <div class="eael-entry-thumbnail">
-                            <?php if($post_args['eael_show_image'] == 1){ ?>
-                            <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>">
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-
-                    <div class="eael-entry-wrapper">
-                        <header class="eael-entry-header">
-                            <?php if($post_args['eael_show_title']){ ?>
-                            <h2 class="eael-entry-title"><a class="eael-grid-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
-                            <?php } ?>
-
-                            <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-header'){ ?>
-                            <div class="eael-entry-meta">
-                                <span class="eael-posted-by"><?php the_author_posts_link(); ?></span>
-                                <span class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></span>
-                            </div>
-                            <?php } ?>
-                        </header>
-
-                        <div class="eael-entry-content">
-                            <?php if($post_args['eael_show_excerpt']){ ?>
-                            <div class="eael-grid-post-excerpt">
-                                <p><?php echo eael_get_excerpt_by_id(get_the_ID(),$post_args['eael_excerpt_length']);?></p>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-
-                    <?php if($post_args['eael_show_meta'] && $post_args['eael_post_grid_meta_position'] == 'meta-entry-footer'){ ?>
-                    <div class="eael-entry-footer">
-                        <div class="eael-author-avatar">
-                            <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 96 ); ?> </a>
-                        </div>
-                        <div class="eael-entry-meta">
-                            <div class="eael-posted-by"><?php the_author_posts_link(); ?></div>
-                            <div class="eael-posted-on"><time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time></div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </article>
-    <?php
-        endif;
-    elseif( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'timeline' ) : 
-        ?>
-        <article class="eael-timeline-post eael-timeline-column">
-            <div class="eael-timeline-bullet"></div>
-            <div class="eael-timeline-post-inner">
-                <a class="eael-timeline-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>">
-                    <time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time>
-                    <div class="eael-timeline-post-image" <?php if( $post_args['eael_show_image'] == 1 ){ ?> style="background-image: url('<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>');" <?php } ?>></div>
-                    <?php if($post_args['eael_show_excerpt']){ ?>
-                        <div class="eael-timeline-post-excerpt">
-                            <p><?php echo eael_get_excerpt_by_id( get_the_ID(), $post_args['eael_excerpt_length'] );?></p>
-                        </div>
-                    <?php } ?>
-
-                    <?php if($post_args['eael_show_title']){ ?>
-                        <div class="eael-timeline-post-title">
-                            <h2><?php the_title(); ?></h2>
-                        </div>
-                    <?php } ?>
-                </a>
-            </div>
-        </article>
-        <?php
-    elseif( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) : 
-        echo '<div><a href="'. get_the_permalink() .'" class="ticker-content">'. get_the_title() .'</a></div>';
-    endif;
+        /**
+         * All content html here.
+         */
+        include ESSENTIAL_ADDONS_EL_PATH . 'includes/templates/content.php';
     endwhile;
-    
-    if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'ticker' ) {
-        echo '</div>';
-    }
+
     wp_reset_postdata();
     wp_reset_query();
     $return['content'] = ob_get_clean();
@@ -644,3 +500,40 @@ function eael_load_more_ajax(){
 }
 add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
 add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+
+/**
+ * For All Settings Key Need To Display
+ *
+ * @return array
+ */
+function posts_args(){
+    return array(
+        // for content-ticker
+        'eael_ticker_type',
+        'eael_ticker_custom_contents',
+        
+        // common
+        'meta_position',
+        'eael_show_meta',
+        'image_size',
+        'eael_show_image',
+        'eael_show_title',
+        'eael_show_excerpt',
+        'eael_excerpt_length',
+        'eael_show_read_more',
+        'eael_read_more_text',
+
+        // query_args
+        'post_type',
+        'posts_per_page',
+        'post_style',
+        'eael_post_tags',
+        'category',
+        'post__not_in',
+        'page__not_in',
+        'eael_post_authors',
+        'offset',
+        'orderby',
+        'order',
+    );
+}
