@@ -31,7 +31,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 
 		$this->add_control(
-            'eael_post_type',
+            'post_type',
             [
                 'label' => __( 'Post Type', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT,
@@ -50,7 +50,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'multiple' => true,
 				'options' => eael_post_type_categories(),
                 'condition' => [
-					   'eael_post_type' => 'post'
+					   'post_type' => 'post'
                 ]
             ]
 		);
@@ -75,13 +75,13 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'multiple'          => true,
 				'options'           => eael_get_tags(),
 				'condition' => [
-					'eael_post_type' => 'post'
+					'post_type' => 'post'
 			 	]
             ]
         );
 
         $this->add_control(
-            'eael_post_exclude_posts',
+            'post__not_in',
             [
                 'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
                 'type'              => Controls_Manager::SELECT2,
@@ -89,13 +89,27 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'multiple'          => true,
 				'options'           => eael_get_posts(),
 				'condition' => [
-					'eael_post_type' => 'post'
+					'post_type' => 'post'
+			 	]
+            ]
+		);
+		
+        $this->add_control(
+            'page__not_in',
+            [
+                'label'             => __( 'Exclude Pages', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_pages(),
+				'condition' => [
+					'post_type' => 'page'
 			 	]
             ]
         );
 
         $this->add_control(
-            'eael_posts_count',
+            'posts_per_page',
             [
                 'label' => __( 'Number of Posts', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::NUMBER,
@@ -105,7 +119,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 
         $this->add_control(
-            'eael_post_offset',
+            'offset',
             [
                 'label' => __( 'Post Offset', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::NUMBER,
@@ -114,7 +128,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
         );
 
         $this->add_control(
-            'eael_post_orderby',
+            'orderby',
             [
                 'label' => __( 'Order By', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT,
@@ -124,7 +138,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
         );
 
         $this->add_control(
-            'eael_post_order',
+            'order',
             [
                 'label' => __( 'Order', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT,
@@ -299,7 +313,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
         );
 
 		$this->add_control(
-			'eael_post_grid_meta_position',
+			'meta_position',
 			[
 				'label' => esc_html__( 'Meta Position', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -795,9 +809,12 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		 */
 		$post_tags = $this->get_settings( 'eael_post_tags' );
 		/**
-		 * Collect excluded posts from user
+		 * Collect excluded posts or page from user
 		 */
-		$exclude_posts = $this->get_settings('eael_post_exclude_posts');
+		$exclude_posts = $this->get_settings('post__not_in');
+		$exclude_pages = $this->get_settings('page__not_in');
+
+		$excluded = $settings['post_type'] == 'post' ? $exclude_posts : $exclude_pages;
 		/**
 		 * Setup the post arguments.
 		 */
@@ -827,9 +844,9 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		<?php 
 			if( 1 == $settings['eael_post_grid_show_load_more'] ) : 
 				if( 
-					$settings['eael_posts_count'] != '-1' 
-					&& $total_post != $settings['eael_posts_count'] 
-					&& $total_post > intval( $settings['eael_post_offset'] ) + intval( ! empty( $settings['eael_posts_count'] ) ? $settings['eael_posts_count'] : 4 ) 
+					$settings['posts_per_page'] != '-1' 
+					&& $total_post != $settings['posts_per_page'] 
+					&& $total_post > intval( $settings['offset'] ) + intval( ! empty( $settings['posts_per_page'] ) ? $settings['posts_per_page'] : 4 ) 
 				) : 
 		?>
 		<!-- Load More Button -->
@@ -853,19 +870,19 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 			}
 
 			var settings = {
-				postType: '<?php echo $settings['eael_post_type']; ?>',
-				perPage: <?php echo $settings['eael_posts_count'] != '' ? $settings['eael_posts_count'] : '4'; ?>,
-				postOrder: '<?php echo $settings['eael_post_order']; ?>',
-				orderBy: '<?php echo $settings['eael_post_orderby']; ?>',
+				postType: '<?php echo $settings['post_type']; ?>',
+				perPage: <?php echo $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4'; ?>,
+				postOrder: '<?php echo $settings['order']; ?>',
+				orderBy: '<?php echo $settings['orderby']; ?>',
 				showImage: <?php echo $settings['eael_show_image']; ?>,
 				imageSize: '<?php echo $settings['image_size']; ?>',
 				showTitle: <?php echo $settings['eael_show_title']; ?>,
 				showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
 				showMeta: <?php echo $settings['eael_show_meta']; ?>,
 
-				offset: <?php echo intval( $settings['eael_post_offset'] ); ?>,
+				offset: <?php echo intval( $settings['offset'] ); ?>,
 
-				metaPosition: '<?php echo $settings['eael_post_grid_meta_position']; ?>',
+				metaPosition: '<?php echo $settings['meta_position']; ?>',
 				excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
 				btnText: '<?php echo $settings['eael_post_grid_show_load_more_text']; ?>',
 				categories: <?php echo json_encode( ! empty( $post_categories ) ? $post_categories : [] ); ?>,
