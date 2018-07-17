@@ -475,8 +475,6 @@ function eael_load_more_ajax(){
         $args = func_get_args();
         $post_args = $args[0];
     }
-
-    dump( $post_args );
     
     $posts = new WP_Query( $post_args );
 
