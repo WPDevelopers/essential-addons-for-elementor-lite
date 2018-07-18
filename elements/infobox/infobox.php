@@ -55,14 +55,18 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
-					'img' => [
-						'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-picture-o',
+					'none' => [
+						'title' => esc_html__( 'None', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-ban',
 					],
 					'icon' => [
 						'title' => esc_html__( 'Icon', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-info-circle',
 					],
+					'img' => [
+						'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-picture-o',
+					]
 				],
 				'default' => 'icon',
 			]
@@ -182,14 +186,13 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'label' => esc_html__( 'Infobox Content', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				
 				'dynamic' => [
 					'active' => true
 				],
 				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-addons-elementor' ),
-				'condition' => [
-					'eael_infobox_text_type' => 'content'
-				]
+				'condition'             => [
+					'eael_infobox_text_type'      => 'content',
+				],
 			]
 		);
 		$this->add_control(
@@ -230,6 +233,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				]
 			]
 		);
+		
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -356,24 +360,92 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-		  'eael_infobox_img_shape',
-		  	[
-		   	'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
-		     	'type' 			=> Controls_Manager::SELECT,
-		     	'default' 		=> 'square',
-		     	'label_block' 	=> false,
-		     	'options' 		=> [
-		     		'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
-		     		'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-		     		'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-		     	],
-		     	'prefix_class' => 'eael-infobox-shape-',
-		     	'condition' => [
-		     		'eael_infobox_img_or_icon' => 'img'
-		     	]
-		  	]
-		);
+		$this->start_controls_tabs('eael_infobox_image_style');
+			
+			$this->start_controls_tab(
+				'eael_infobox_image_icon_normal',
+				[
+					'label'		=> __( 'Normal', 'essential-addons-elementor' )
+				]
+			);
+
+				$this->add_group_control(
+					Group_Control_Border::get_type(),
+						[
+							'name' => 'eael_infobox_image_border',
+							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon img'
+						]
+				);
+		
+				$this->add_control(
+				'eael_infobox_img_shape',
+					[
+					'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
+						'type' 			=> Controls_Manager::SELECT,
+						'default' 		=> 'square',
+						'label_block' 	=> false,
+						'options' 		=> [
+							'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+							'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+							'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+						],
+						'prefix_class' => 'eael-infobox-shape-',
+						'condition' => [
+							'eael_infobox_img_or_icon' => 'img'
+						]
+					]
+				);
+
+
+			$this->end_controls_tab();
+
+			$this->start_controls_tab(
+				'eael_infobox_image_icon_hover',
+				[
+					'label'		=> __( 'Hover', 'essential-addons-elementor' )
+				]
+			);
+
+				$this->add_control(
+					'eael_infobox_image_icon_hover_animation',
+					[
+						'label' => esc_html__( 'Animation', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HOVER_ANIMATION
+					]
+				);
+
+				$this->add_group_control(
+					Group_Control_Border::get_type(),
+						[
+							'name' => 'eael_infobox_hover_image_border',
+							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon img'
+						]
+				);
+		
+				$this->add_control(
+				'eael_infobox_hover_img_shape',
+					[
+					'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
+						'type' 			=> Controls_Manager::SELECT,
+						'default' 		=> 'square',
+						'label_block' 	=> false,
+						'options' 		=> [
+							'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+							'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+							'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+						],
+						'prefix_class' => 'eael-infobox-hover-img-shape-',
+						'condition' => [
+							'eael_infobox_img_or_icon' => 'img'
+						]
+					]
+				);
+
+			$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'eael_infobox_image_resizer',
@@ -440,7 +512,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
     		'eael_infobox_icon_size',
     		[
         		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
@@ -461,8 +533,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
     		]
 		);
 
-
-		$this->add_control(
+		$this->add_responsive_control(
     		'eael_infobox_icon_bg_size',
     		[
         		'label' => __( 'Icon Background Size', 'essential-addons-elementor' ),
@@ -481,8 +552,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
             		'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
         		],
         		'condition' => [
-					'eael_infobox_icon_bg_shape!' => 'none',
-					'eael_infobox_img_type!' => ['img-on-left', 'img-on-right'],
+					'eael_infobox_icon_bg_shape!' => 'none'
 				]
     		]
 		);
@@ -499,54 +569,161 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_infobox_icon_color',
-			[
-				'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#4d4d4d',
-				'selectors' => [
-					'{{WRAPPER}} .eael-infobox .infobox-icon i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-infobox.icon-beside-title .infobox-content .title figure i' => 'color: {{VALUE}};',
-				],
-			]
-		);
+			$this->start_controls_tabs( 'eael_infobox_icon_style_controls' );
 
-		$this->add_control(
-		  'eael_infobox_icon_bg_shape',
-		  	[
-		   	'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
-		     	'type' 			=> Controls_Manager::SELECT,
-		     	'default' 		=> 'none',
-		     	'label_block' 	=> false,
-		     	'options' 		=> [
-		     		'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
-		     		'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-		     		'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-		     		'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
-		     	],
-		     	'prefix_class' => 'eael-infobox-icon-bg-shape-',
-		     	'condition' => [
-					'eael_infobox_img_type!' => ['img-on-left', 'img-on-right'],
-				]
-		  	]
-		);
+				$this->start_controls_tab(
+					'eael_infobox_icon_normal',
+					[
+						'label'		=> esc_html__( 'Normal', 'essential-addons-elementor' ),
+					]
+				);
 
-		$this->add_control(
-			'eael_infobox_icon_bg_color',
-			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#f4f4f4',
-				'selectors' => [
-					'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap' => 'background: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_infobox_img_type!' => ['img-on-left', 'img-on-right'],
-					'eael_infobox_icon_bg_shape!' => 'none',
-				]
-			]
-		);
+					$this->add_control(
+						'eael_infobox_icon_color',
+						[
+							'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
+							'type' => Controls_Manager::COLOR,
+							'default' => '#4d4d4d',
+							'selectors' => [
+								'{{WRAPPER}} .eael-infobox .infobox-icon i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eael-infobox.icon-beside-title .infobox-content .title figure i' => 'color: {{VALUE}};',
+							],
+						]
+					);
+			
+					$this->add_control(
+						'eael_infobox_icon_bg_color',
+						[
+							'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+							'type' => Controls_Manager::COLOR,
+							'default' => '',
+							'selectors' => [
+								'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap' => 'background: {{VALUE}};',
+							],
+							'condition' => [
+								'eael_infobox_icon_bg_shape!' => 'none',
+							]
+						]
+					);
+			
+					$this->add_control(
+					'eael_infobox_icon_bg_shape',
+						[
+						'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+							'type' 			=> Controls_Manager::SELECT,
+							'default' 		=> 'none',
+							'label_block' 	=> false,
+							'options' 		=> [
+								'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
+								'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+								'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+								'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+							],
+							'prefix_class' => 'eael-infobox-icon-bg-shape-'
+						]
+					);
+			
+					$this->add_group_control(
+						Group_Control_Border::get_type(),
+							[
+								'name' => 'eael_infobox_icon_border',
+								'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+								'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon-wrap'
+							]
+					);
+			
+					$this->add_group_control(
+						Group_Control_Box_Shadow::get_type(),
+						[
+							'name' => 'eael_infobox_icon_shadow',
+							'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon-wrap',
+						]
+					);
+
+				$this->end_controls_tab();
+
+
+				$this->start_controls_tab(
+					'eael_infobox_icon_hover',
+					[
+						'label'		=> esc_html__( 'Hover', 'essential-addons-elementor' ),
+					]
+				);
+
+				$this->add_control(
+					'eael_infobox_icon_hover_animation',
+					[
+						'label' => esc_html__( 'Animation', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HOVER_ANIMATION
+					]
+				);
+
+				$this->add_control(
+					'eael_infobox_icon_hover_color',
+					[
+						'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#4d4d4d',
+						'selectors' => [
+							'{{WRAPPER}} .eael-infobox:hover .infobox-icon i' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-infobox.icon-beside-title:hover .infobox-content .title figure i' => 'color: {{VALUE}};',
+						],
+					]
+				);
+		
+				$this->add_control(
+					'eael_infobox_icon_hover_bg_color',
+					[
+						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '',
+						'selectors' => [
+							'{{WRAPPER}} .eael-infobox:hover .infobox-icon .infobox-icon-wrap' => 'background: {{VALUE}};',
+						],
+						'condition' => [
+							'eael_infobox_img_type!' => ['img-on-left', 'img-on-right'],
+							'eael_infobox_icon_bg_shape!' => 'none',
+						]
+					]
+				);
+		
+				$this->add_control(
+				  'eael_infobox_icon_hover_bg_shape',
+					  [
+					   'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+						 'type' 			=> Controls_Manager::SELECT,
+						 'default' 		=> 'none',
+						 'label_block' 	=> false,
+						 'options' 		=> [
+							 'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
+							 'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+							 'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+							 'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+						 ],
+						 'prefix_class' => 'eael-infobox-icon-hover-bg-shape-',
+					  ]
+				);
+		
+				$this->add_group_control(
+					Group_Control_Border::get_type(),
+						[
+							'name' => 'eael_infobox_hover_icon_border',
+							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon-wrap'
+						]
+				);
+		
+				$this->add_group_control(
+					Group_Control_Box_Shadow::get_type(),
+					[
+						'name' => 'eael_infobox_icon_hover_shadow',
+						'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon-wrap',
+					]
+				);
+
+				$this->end_controls_tab();
+
+			$this->end_controls_tabs();
 
 		$this->end_controls_section();
 
@@ -644,13 +821,33 @@ class Widget_Eael_Info_Box extends Widget_Base {
 	  	if( empty( $infobox_image_url ) ) : $infobox_image_url = $infobox_image['url']; else: $infobox_image_url = $infobox_image_url; endif;
 
 	  	$target = $settings['eael_show_infobox_clickable_link']['is_external'] ? 'target="_blank"' : '';
-	  	$nofollow = $settings['eael_show_infobox_clickable_link']['nofollow'] ? 'rel="nofollow"' : '';
+		$nofollow = $settings['eael_show_infobox_clickable_link']['nofollow'] ? 'rel="nofollow"' : '';
+		  
+		$this->add_render_attribute(
+			'infobox_icon',
+			[
+				'class' => ['infobox-icon']
+			]
+		);
+
+		if( $settings['eael_infobox_icon_hover_animation'] ) {
+			$this->add_render_attribute('infobox_icon', 'class', 'elementor-animation-' . $settings['eael_infobox_icon_hover_animation']);
+		}
+
+		if( $settings['eael_infobox_image_icon_hover_animation'] ) {
+			$this->add_render_attribute('infobox_icon', 'class', 'elementor-animation-' . $settings['eael_infobox_image_icon_hover_animation']);
+		}
+		
+		if( 'icon' == $settings['eael_infobox_img_or_icon'] ) {
+			$this->add_render_attribute('infobox_icon', 'class', 'eael-icon-only');
+		}
 
 	?>
+
 		<?php if( 'img-on-top' == $settings['eael_infobox_img_type'] ) : ?>
 		<div class="eael-infobox">
 			<?php if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?><a href="<?php echo esc_url( $settings['eael_show_infobox_clickable_link']['url'] ) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>> <?php endif;?>
-			<div class="infobox-icon">
+			<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
 				<?php if( 'img' == $settings['eael_infobox_img_or_icon'] ) : ?>
 					<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="Icon Image">
 				<?php endif; ?>
@@ -683,7 +880,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		<?php if( 'img-on-left' == $settings['eael_infobox_img_type'] ) : ?>
 		<?php if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?><a href="<?php echo esc_url( $settings['eael_show_infobox_clickable_link']['url'] ) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>> <?php endif;?>
 		<div class="eael-infobox icon-on-left">
-			<div class="infobox-icon <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
+			<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
 				<?php if( 'img' == $settings['eael_infobox_img_or_icon'] ) : ?>
 				<figure>
 					<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="Icon Image">
@@ -718,7 +915,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		<?php if( 'img-on-right' == $settings['eael_infobox_img_type'] ) : ?>
 		<?php if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?><a href="<?php echo esc_url( $settings['eael_show_infobox_clickable_link']['url'] ) ?>" <?php echo $target; ?> <?php echo $nofollow; ?>> <?php endif;?>
 		<div class="eael-infobox icon-on-right">
-			<div class="infobox-icon <?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : echo esc_attr( 'eael-icon-only', 'essential-addons-elementor' ); endif; ?>">
+			<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
 				<?php if( 'img' == $settings['eael_infobox_img_or_icon'] ) : ?>
 				<figure>
 					<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="Icon Image">
@@ -753,13 +950,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 	<?php
 	}
 
-	protected function content_template() {
-
-		?>
-
-
-		<?php
-	}
+	protected function content_template() {}
 }
 
 
