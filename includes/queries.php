@@ -56,7 +56,7 @@ function eael_get_post_settings( $settings ){
                     }
                     break;
                 default : 
-                    if( isset( $settings[ $key ] ) && ! empty( $settings[ $key ] ) ) {
+                    if( isset( $settings[ $key ] ) ) {
                         $post_args[ $key ] = $value;
                     }
                     break;
@@ -472,7 +472,8 @@ function eael_load_more_ajax(){
     if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
         $post_args = eael_get_post_settings( $_POST );
     } else {
-        $post_args = array_shift( func_get_args() );
+        $args = func_get_args();
+        $post_args = $args[0];
     }
     
     $posts = new WP_Query( $post_args );
