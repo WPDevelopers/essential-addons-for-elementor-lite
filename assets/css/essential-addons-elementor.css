@@ -109,6 +109,7 @@
     position: relative;
     z-index: 1;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
 }
 .eael-creative-button:focus {
@@ -3168,6 +3169,7 @@ h2.eael-elements-flip-box-heading {
 .eael-social-feed-element {
     transition: 0.25s;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     margin:-1px;
     margin-top:25px;
     color: #333;
@@ -3420,9 +3422,6 @@ table.eael-data-table thead .headerSortUp:after {
 .eael-data-table thead tr th:last-child {
   border: 0px;
 }
-.eael-data-table tbody tr {
-
-}
 .eael-data-table tbody tr.even {
   transition: background 0.4s ease-in-out;
 }
@@ -3526,7 +3525,9 @@ table.eael-data-table thead .sorting_asc:after {
   z-index: 1043;
   position: fixed;
   outline: none !important;
-  -webkit-backface-visibility: hidden; }
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
 .mfp-container {
   text-align: center;
