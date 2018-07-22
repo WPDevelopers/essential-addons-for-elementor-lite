@@ -483,6 +483,5 @@ function review_pending() {
 function eael_deactivate() {
     delete_option('eael_active_time');
     delete_option('eael_maybe_later');
-    delete_option('eael_facebook_feed_settings');
 }
 register_deactivation_hook(__FILE__, 'eael_deactivate');
