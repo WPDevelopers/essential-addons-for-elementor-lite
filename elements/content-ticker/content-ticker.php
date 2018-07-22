@@ -48,7 +48,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		$this->add_control(
 			'eael_ticker_type_pro_alert',
 			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Custom Content available in pro version only!', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'condition' => [
 					'eael_ticker_type' => 'custom',
@@ -84,7 +84,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 
 
 		$this->add_control(
-			'eael_post_type',
+			'post_type',
 			[
 				'label' => __( 'Post Type', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -102,7 +102,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'multiple' => true,
 				'options' => eael_post_type_categories(),
 				'condition' => [
-					'eael_post_type' => 'post'
+					'post_type' => 'post'
 				]
 			]
 		);
@@ -126,22 +126,42 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'label_block'       => true,
 				'multiple'          => true,
 				'options'           => eael_get_tags(),
+				'condition' => [
+					'post_type' => 'post'
+				]
             ]
         );
 
         $this->add_control(
-            'eael_post_exclude_posts',
+            'post__not_in',
             [
                 'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
                 'type'              => Controls_Manager::SELECT2,
 				'label_block'       => true,
 				'multiple'          => true,
 				'options'           => eael_get_posts(),
+				'condition' => [
+					'post_type' => 'post'
+				]
+            ]
+		);
+		
+        $this->add_control(
+            'page__not_in',
+            [
+                'label'             => __( 'Exclude Pages', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_pages(),
+				'condition' => [
+					'post_type' => 'page'
+				]
             ]
         );
 
 		$this->add_control(
-			'eael_posts_count',
+			'posts_per_page',
 			[
 				'label' => __( 'Number of Posts', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::NUMBER,
@@ -151,7 +171,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 
 
 		$this->add_control(
-			'eael_post_offset',
+			'offset',
 			[
 					'label' => __( 'Post Offset', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::NUMBER,
@@ -160,7 +180,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_post_orderby',
+			'orderby',
 			[
 					'label' => __( 'Order By', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::SELECT,
@@ -171,7 +191,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_post_order',
+			'order',
 			[
 				'label' => __( 'Order', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -185,92 +205,6 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 
 		$this->end_controls_section();
 
-		/**
-		 * -------------------------------------------
-		 * Tab Style (Content Ticker)
-		 * -------------------------------------------
-		 */
-		$this->start_controls_section(
-			'eael_section_ticker_style_settings',
-			[
-				'label' => esc_html__( 'Content Ticker Style', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
-			]
-		);
-
-		$this->add_control(
-			'eael_ticker_bg_color',
-			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#f9f9f9',
-				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_ticker_container_padding',
-			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-						'{{WRAPPER}} .eael-ticker-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_ticker_container_margin',
-			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-						'{{WRAPPER}} .eael-ticker-wrap' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'eael_ticker_border',
-				'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-				'selector' => '{{WRAPPER}} .eael-ticker-wrap',
-			]
-		);
-
-		$this->add_control(
-			'eael_ticker_border_radius',
-			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 0,
-				],
-				'range' => [
-					'px' => [
-						'max' => 500,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap' => 'border-radius: {{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'eael_ticker_shadow',
-				'selector' => '{{WRAPPER}} .eael-ticker-wrap',
-			]
-		);
-
-		$this->end_controls_section();
 
 		/**
          * Content Tab: Carousel Settings
@@ -278,7 +212,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
         $this->start_controls_section(
             'section_additional_options',
             [
-                'label'                 => __( 'Carousel Settings', 'essential-addons-elementor' ),
+                'label'                 => __( 'Animation Settings', 'essential-addons-elementor' ),
             ]
         );
         
@@ -490,38 +424,42 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_ticker_typography_settings',
 			[
-				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Ticker Content', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
+
 		$this->add_control(
-			'eael_ticker_content_text',
+			'eael_ticker_content_bg',
 			[
-				'label' => esc_html__( 'Ticker Content', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before'
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-ticker-wrap .eael-ticker' => 'background-color: {{VALUE}};',
+				],
 			]
 		);
 
 		$this->add_control(
 			'eael_ticker_content_color',
 			[
-				'label' => esc_html__( 'Title Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#222222',
 				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content a' => 'color: {{VALUE}};',
 				],
 			]
 		);
 		$this->add_control(
 			'eael_ticker_hover_content_color',
 			[
-				'label' => esc_html__( 'Title Hover Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Text Hover Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#f44336',
 				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content a:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -530,77 +468,20 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'eael_ticker_content_typography',
-				'selector' =>'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content',
+				'selector' =>'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content a',
 
 			]
 		);
 
-		$this->add_control(
-			'eael_ticker_nav_icon_style',
+		$this->add_responsive_control(
+			'eael_ticker_content_padding',
 			[
-				'label' => esc_html__( 'Navigation', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
-
-		$this->add_control(
-			'eael_ticker_nav_icon_color',
-			[
-				'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#222',
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-prev' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-next' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-ticker-wrap .eael-ticker .ticker-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-			]
-		);
-
-		$this->add_control(
-			'eael_ticker_nav_icon_hover_color',
-			[
-				'label' => esc_html__( 'Icon Hover Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-prev:hover' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-next:hover' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_ticker_nav_icon_bg_color',
-			[
-				'label' => esc_html__( 'Icon Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-prev' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-next' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-		$this->add_control(
-			'eael_ticker_nav_icon_bg_color_hover',
-			[
-				'label' => esc_html__( 'Icon Background Hover Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#222',
-				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-prev:hover' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-next:hover' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'eael_ticker_nav_icon_border',
-				'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-				'selector' => '{{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-prev, {{WRAPPER}} .eael-ticker-wrap .slick-slider .eael-slick-next',
 			]
 		);
 
@@ -620,7 +501,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#222222',
 				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge span' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -650,7 +531,19 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_ticker_tag_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -661,7 +554,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-ticker-wrap .ticker-badge' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -713,7 +606,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
                 'default'               => [ 'size' => '22' ],
                 'range'                 => [
                     'px' => [
-                        'min'   => 15,
+                        'min'   => 5,
                         'max'   => 100,
                         'step'  => 1,
                     ],
@@ -733,13 +626,13 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
                 'range'                 => [
                     'px' => [
                         'min'   => -100,
-                        'max'   => 40,
+                        'max'   => 100,
                         'step'  => 1,
                     ],
                 ],
                 'size_units'            => [ 'px' ],
 				'selectors'         => [
-					'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'right: {{SIZE}}{{UNIT}};',
 				],
             ]
         );
@@ -752,7 +645,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
                 'range'                 => [
                     'px' => [
                         'min'   => -100,
-                        'max'   => 40,
+                        'max'   => 100,
                         'step'  => 1,
                     ],
                 ],
@@ -882,8 +775,6 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		);
         
         $this->end_controls_section();
-
-		
 	}
 
 
@@ -898,7 +789,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		/**
 		 * Get posts from database.
 		 */
-		$posts = eael_get_post_data( $post_args );
+		$posts = eael_load_more_ajax( $post_args );
 		/**
 		 * Render the content
 		 */
@@ -915,49 +806,46 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		}
   
 		if ( ! empty( $settings['items']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-items', $settings['items']['size'] );
-	  }
-	  if ( ! empty( $settings['items_tablet']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-items-tablet', $settings['items_tablet']['size'] );
-	  }
-	  if ( ! empty( $settings['items_mobile']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-items-mobile', $settings['items_mobile']['size'] );
-	  }
-	  if ( ! empty( $settings['margin']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-margin', $settings['margin']['size'] );
-	  }
-	  if ( ! empty( $settings['margin_tablet']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size'] );
-	  }
-	  if ( ! empty( $settings['margin_mobile']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size'] );
-	  }
-	  if ( $settings['carousel_effect'] ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-effect', $settings['carousel_effect'] );
-	  }
-	  if ( ! empty( $settings['slider_speed']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-speed', $settings['slider_speed']['size'] );
-	  }
-	  if ( $settings['autoplay'] == 'yes' && ! empty( $settings['autoplay_speed']['size'] ) ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-autoplay', $settings['autoplay_speed']['size'] );
-	  } else {
-		  $this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
-	  }
-	  if ( $settings['infinite_loop'] == 'yes' ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-loop', '1' );
-	  }
-	  if ( $settings['grab_cursor'] == 'yes' ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-grab-cursor', '1' );
-	  }
-	  if ( $settings['arrows'] == 'yes' ) {
-		  $this->add_render_attribute( 'content-ticker', 'data-arrows', '1' );
-	  }
+			$this->add_render_attribute( 'content-ticker', 'data-items', $settings['items']['size'] );
+		}
+		if ( ! empty( $settings['items_tablet']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-items-tablet', $settings['items_tablet']['size'] );
+		}
+		if ( ! empty( $settings['items_mobile']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-items-mobile', $settings['items_mobile']['size'] );
+		}
+		if ( ! empty( $settings['margin']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-margin', $settings['margin']['size'] );
+		}
+		if ( ! empty( $settings['margin_tablet']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-margin-tablet', $settings['margin_tablet']['size'] );
+		}
+		if ( ! empty( $settings['margin_mobile']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-margin-mobile', $settings['margin_mobile']['size'] );
+		}
+		if ( $settings['carousel_effect'] ) {
+			$this->add_render_attribute( 'content-ticker', 'data-effect', $settings['carousel_effect'] );
+		}
+		if ( ! empty( $settings['slider_speed']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-speed', $settings['slider_speed']['size'] );
+		}
+		if ( $settings['autoplay'] == 'yes' && ! empty( $settings['autoplay_speed']['size'] ) ) {
+			$this->add_render_attribute( 'content-ticker', 'data-autoplay', $settings['autoplay_speed']['size'] );
+		} else {
+			$this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
+		}
+		if ( $settings['infinite_loop'] == 'yes' ) {
+			$this->add_render_attribute( 'content-ticker', 'data-loop', true );
+		}
+		if ( $settings['grab_cursor'] == 'yes' ) {
+			$this->add_render_attribute( 'content-ticker', 'data-grab-cursor', true );
+		}
+		if ( $settings['arrows'] == 'yes' ) {
+			$this->add_render_attribute( 'content-ticker', 'data-arrows', '1' );
+		}
   
 		?>
-  
-  
 		<?php if(  'dynamic' === $settings['eael_ticker_type'] || 'custom' === $settings['eael_ticker_type'] ) : ?>
-		  <?php if(count($posts)) : global $post; ?>
 		  <div class="eael-ticker-wrap" id="eael-ticker-wrap-<?php echo $this->get_id(); ?>">
 			<?php if( !empty($settings['eael_ticker_tag_text']) ) : ?>
 			<div class="ticker-badge">
@@ -968,23 +856,25 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 			<div  <?php echo $this->get_render_attribute_string( 'content-ticker-wrap' ); ?> >
 			  <div <?php echo $this->get_render_attribute_string( 'content-ticker' ); ?> >
 				  <div class="swiper-wrapper">
-				  <?php foreach( $posts as $post ) : setup_postdata( $post );
-				  echo '<div class="swiper-slide"><a href="'.get_the_permalink().'" class="ticker-content">'.get_the_title().'</a></div>';
-				  endforeach; ?>
+				  	<?php 
+						if( 'dynamic' === $settings['eael_ticker_type'] ) {
+							if( ! empty( $posts['content'] ) ) {
+								echo $posts['content'];
+							} else {
+								echo ' <div class="swiper-slide"><a href="#" class="ticker-content">'. __( 'Something went wrong!', 'essential-addons-elementor' ) .'</a></div>';
+							}
+						}
+					?>
 				  </div>
 			  </div>
-			  <?php
-				  $this->render_arrows();
-			  ?>
+			  <?php $this->render_arrows(); ?>
 			</div>
 		  </div>
-			<?php endif; ?>
-		<?php endif ?>
-		<?php
+		<?php endif;
 	}
 
 	/**
-	 * Render logo carousel arrows output on the frontend.
+	 * Render Content Ticker arrows output on the frontend.
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
@@ -996,20 +886,22 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
         if ( $settings['arrows'] == 'yes' ) { ?>
             <?php
                 if ( $settings['arrow'] ) {
-                    $pa_next_arrow = $settings['arrow'];
-                    $pa_prev_arrow = str_replace("right","left",$settings['arrow']);
+                    $ticker_next_arrow = $settings['arrow'];
+                    $ticker_prev_arrow = str_replace("right","left",$settings['arrow']);
                 }
                 else {
-                    $pa_next_arrow = 'fa fa-angle-right';
-                    $pa_prev_arrow = 'fa fa-angle-left';
+                    $ticker_next_arrow = 'fa fa-angle-right';
+                    $ticker_prev_arrow = 'fa fa-angle-left';
                 }
             ?>
             <!-- Add Arrows -->
-            <div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
-                <i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
-            </div>
-            <div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
-                <i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
+            <div class="content-ticker-pagination">
+	            <div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
+	                <i class="<?php echo esc_attr( $ticker_next_arrow ); ?>"></i>
+	            </div>
+	            <div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
+	                <i class="<?php echo esc_attr( $ticker_prev_arrow ); ?>"></i>
+	            </div>
             </div>
         <?php }
     }
