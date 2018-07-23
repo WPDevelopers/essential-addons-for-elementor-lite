@@ -17,6 +17,12 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		return 'eicon-table';
 	}
 
+	public function get_script_depends() {
+        return [
+			'eael-scripts'
+        ];
+    }
+
    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
@@ -34,28 +40,28 @@ class Widget_Eael_Data_Table extends Widget_Base {
   		);
 
   		$this->add_control(
-		  'eael_section_data_table_enabled',
-		  	[
+			'eael_section_data_table_enabled',
+			[
 				'label' => __( 'Enable Table Sorting', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'false',
 				'label_on' => esc_html__( 'Yes', 'essential-addons-elementor' ),
 				'label_off' => esc_html__( 'No', 'essential-addons-elementor' ),
 				'return_value' => 'true',
-		  	]
+			]
 		);
 
 		$this->add_control(
 			'eael_section_data_table_enabled_pro_alert',
 			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Table Sorting available in pro version!', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 				'condition' => [
 					'eael_section_data_table_enabled' => 'true',
 				]
 			]
 		);
-
+		
   		$this->add_control(
 			'eael_data_table_header_cols_data',
 			[
@@ -76,6 +82,21 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						'label_block' => false,
 					],
 					[
+						'name' => 'eael_data_table_header_col_span',
+						'label' => esc_html__( 'Column Span', 'essential-addons-elementor' ),
+						'default' => '',
+						'type' => Controls_Manager::NUMBER,
+						'label_block' => false,
+					],
+					[
+						'name'	=> 'data_table_header_colspan_pro_alert',
+						'label' => esc_html__( 'Column Span available in pro version!', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+						'condition' => [
+							'eael_data_table_header_col_span!' => '',
+						]
+					],
+					[
 						'name' => 'eael_data_table_header_col_icon_enabled',
 						'label' => esc_html__( 'Enable Header Icon', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SWITCHER,
@@ -85,43 +106,57 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						'return_value' => 'true',
 					],
 					[
-						'name' => 'eael_data_table_header_col_icon',
-						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::ICON,
-						'default' => '',
+						'name'	=> 'eael_data_table_header_icon_type',
+						'label'	=> esc_html__( 'Header Icon Type', 'essential-addons-elementor' ),
+						'type'	=> Controls_Manager::CHOOSE,
+						'options'               => [
+							'none'        => [
+								'title'   => esc_html__( 'None', 'essential-addons-elementor' ),
+								'icon'    => 'fa fa-ban',
+							],
+							'icon'        => [
+								'title'   => esc_html__( 'Icon', 'essential-addons-elementor' ),
+								'icon'    => 'fa fa-star',
+							],
+							'image'       => [
+								'title'   => esc_html__( 'Image', 'essential-addons-elementor' ),
+								'icon'    => 'fa fa-picture-o',
+							],
+						],
+						'default'               => 'icon',
 						'condition' => [
 							'eael_data_table_header_col_icon_enabled' => 'true'
 						]
 					],
 					[
-						'name' => 'eael_data_table_header_col_img_enabled',
-						'label' => esc_html__( 'Enable Header Image', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::SWITCHER,
-						'label_on' => __( 'yes', 'essential-addons-elementor' ),
-						'label_off' => __( 'no', 'essential-addons-elementor' ),
-						'default' => 'false',
-						'return_value' => 'true',
-					],
-					[
-						'name' => 'eael_data_table_header_col_img',
-						'label' => esc_html__( 'Image', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::MEDIA,
-						'default' => [
-							'url' => Utils::get_placeholder_image_src(),
-						],
+						'name'	=> 'data_table_header_img_pro_alert',
+						'label' => esc_html__( 'Image icon available in pro version!', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
 						'condition' => [
-							'eael_data_table_header_col_img_enabled' => 'true',
+							'eael_data_table_header_icon_type' => 'image',
 						]
 					],
 					[
-						'name' => 'eael_data_table_header_col_img_size',
-						'label' => esc_html__( 'Image Size(px)', 'essential-addons-elementor' ),
-						'default' => '25',
-						'type' => Controls_Manager::TEXT,
-						'label_block' => false,
+						'name' => 'eael_data_table_header_col_icon',
+						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::ICON,
+						'default' => '',
 						'condition' => [
-							'eael_data_table_header_col_img_enabled' => 'true',
+							'eael_data_table_header_col_icon_enabled' => 'true',
+							'eael_data_table_header_icon_type'	=> 'icon'
 						]
+					],
+					[
+						'name'			=> 'eael_data_table_header_css_class',
+						'label'			=> esc_html__( 'CSS Class', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::TEXT,
+						'label_block' 	=> false,
+					],
+					[
+						'name'			=> 'eael_data_table_header_css_id',
+						'label'			=> esc_html__( 'CSS ID', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::TEXT,
+						'label_block'	=> false,
 					],
 
 				],
@@ -166,13 +201,85 @@ class Widget_Eael_Data_Table extends Widget_Base {
 						]
 					],
 					[
+						'name'			=> 'eael_data_table_content_row_colspan',
+						'label'			=> esc_html__( 'Col Span', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::NUMBER,
+						'default' 		=> '1',
+						'min'			=> '1',
+						'label_block'	=> false,
+						'condition' 	=> [
+							'eael_data_table_content_row_type' => 'col'
+						]
+					],
+					[
+						'name'			=> 'eael_data_table_content_row_rowspan',
+						'label'			=> esc_html__( 'Row Span', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::NUMBER,
+						'label_block'	=> false,
+						'condition' 	=> [
+							'eael_data_table_content_row_type' => 'col'
+						]
+					],
+					[
+						'name'	=> 'data_table_content_rowspan_pro_alert',
+						'label'	=> esc_html__( 'Row Span available in pro version!', 'essential-addons-elementor' ),
+						'type'	=> Controls_Manager::HEADING,
+						'condition' => [
+							'eael_data_table_content_row_rowspan!' => '',
+							'eael_data_table_content_row_type' => 'col'
+						]
+					],
+					[
+						'name'		=> 'eael_data_table_content_type',
+						'label'		=> esc_html__( 'Content Type', 'essential-addons-elementor' ),
+						'type'	=> Controls_Manager::CHOOSE,
+						'options'               => [
+							'textarea'        => [
+								'title'   => esc_html__( 'Textarea', 'essential-addons-elementor' ),
+								'icon'    => 'fa fa-text-width',
+							],
+							'editor'       => [
+								'title'   => esc_html__( 'Editor', 'essential-addons-elementor' ),
+								'icon'    => 'fa fa-pencil',
+							],
+							'template'        => [
+								'title'   => esc_html__( 'Templates', 'essential-addons-elementor' ),
+								'icon'    => 'fa fa-file',
+							]
+						],
+						'default'	=> 'textarea',
+						'condition' => [
+							'eael_data_table_content_row_type' => 'col'
+						]
+					],
+					[
+						'name'	=> 'data_table_content_template_pro_alert',
+						'label'	=> esc_html__( 'Templates option available in pro version!', 'essential-addons-elementor' ),
+						'type'	=> Controls_Manager::HEADING,
+						'condition' => [
+							'eael_data_table_content_type' => 'template'
+						]
+					],
+					[
 						'name' => 'eael_data_table_content_row_title',
 						'label' => esc_html__( 'Cell Text', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::TEXTAREA,
-						'label_block' => false,
+						'label_block' => true,
 						'default' => esc_html__( 'Content', 'essential-addons-elementor' ),
 						'condition' => [
-							'eael_data_table_content_row_type' => 'col'
+							'eael_data_table_content_row_type' => 'col',
+							'eael_data_table_content_type' => 'textarea'
+						]
+					],
+					[
+						'name' => 'eael_data_table_content_row_content',
+						'label' => esc_html__( 'Cell Text', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::WYSIWYG,
+						'label_block' => true,
+						'default' => esc_html__( 'Content', 'essential-addons-elementor' ),
+						'condition' => [
+							'eael_data_table_content_row_type' => 'col',
+							'eael_data_table_content_type' => 'editor'
 						]
 					],
 					[
@@ -186,22 +293,31 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		     				],
 		     				'show_external' => true,
 		     				'separator' => 'before',
-		     				'condition' => [
+		     			'condition' => [
+							'eael_data_table_content_row_type' => 'col',
+							'eael_data_table_content_type' => 'textarea'
+						],
+					],
+					[
+						'name'			=> 'eael_data_table_content_row_css_class',
+						'label'			=> esc_html__( 'CSS Class', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::TEXT,
+						'label_block'	=> false,
+						'condition' 	=> [
 							'eael_data_table_content_row_type' => 'col'
 						]
 					],
 					[
-						'name' => 'eael_data_table_content_row_colspan',
-						'label' => esc_html__( 'Colspan', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::NUMBER,
-						'default' => 1,
-						'min'     => 1,
-						'condition' => [
+						'name'			=> 'eael_data_table_content_row_css_id',
+						'label'			=> esc_html__( 'CSS ID', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::TEXT,
+						'label_block'	=> false,
+						'condition' 	=> [
 							'eael_data_table_content_row_type' => 'col'
 						]
 					]
 				],
-				'title_field' => '{{eael_data_table_content_row_type}}::{{eael_data_table_content_row_title}}',
+				'title_field' => '{{eael_data_table_content_row_type}}::{{eael_data_table_content_row_title || eael_data_table_content_row_content}}',
 			]
 		);
 
@@ -219,6 +335,32 @@ class Widget_Eael_Data_Table extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
+
+		$this->add_responsive_control(
+            'table_width',
+            [
+                'label'                 => __( 'Width', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'default'               => [
+                    'size' => 100,
+                    'unit' => '%',
+                ],
+                'size_units'            => [ '%', 'px' ],
+                'range'                 => [
+                    '%' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                    'px' => [
+                        'min' => 1,
+                        'max' => 1200,
+                    ],
+                ],
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-data-table' => 'max-width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
 		$this->add_control(
 			'eael_data_table_bg_color',
@@ -334,9 +476,6 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			[
 				'label' => esc_html__( 'Header Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 7,
-				],
 				'range' => [
 					'px' => [
 						'max' => 50,
@@ -349,32 +488,82 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_data_table_header_title_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-data-table thead tr th' => 'color: {{VALUE}};',
-					'{{WRAPPER}} table.dataTable thead .sorting:after' => 'color: {{VALUE}};',
-					'{{WRAPPER}} table.dataTable thead .sorting_asc:after' => 'color: {{VALUE}};',
-					'{{WRAPPER}} table.dataTable thead .sorting_desc:after' => 'color: {{VALUE}};',
-				],
-			]
-		);
+		$this->start_controls_tabs('eael_data_table_header_title_clrbg');
 
-		$this->add_control(
-			'eael_data_table_header_title_bg_color',
-			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#4a4893',
-				'selectors' => [
-					'{{WRAPPER}} .eael-data-table thead tr th' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
+			$this->start_controls_tab( 'eael_data_table_header_title_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
+
+				$this->add_control(
+					'eael_data_table_header_title_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table thead tr th' => 'color: {{VALUE}};'
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_header_title_bg_color',
+					[
+						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#4a4893',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table thead tr th' => 'background-color: {{VALUE}};',
+						],
+					]
+				);
+				
+				$this->add_group_control(
+					Group_Control_Border::get_type(),
+						[
+							'name' => 'eael_data_table_header_border',
+							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'selector' => '{{WRAPPER}} .eael-data-table thead tr th',
+						]
+				);
+
+			$this->end_controls_tab();
+			
+			$this->start_controls_tab( 'eael_data_table_header_title_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ] );
+
+				$this->add_control(
+					'eael_data_table_header_title_hover_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table thead tr th:hover' => 'color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_header_title_hover_bg_color',
+					[
+						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table thead tr th:hover' => 'background-color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_group_control(
+					Group_Control_Border::get_type(),
+						[
+							'name' => 'eael_data_table_header_hover_border',
+							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'selector' => '{{WRAPPER}} .eael-data-table thead tr th:hover',
+						]
+				);
+
+			$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
@@ -424,53 +613,156 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_data_table_content_color_odd',
-			[
-				'label' => esc_html__( 'Color ( Odd Row )', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#6d7882',
-				'selectors' => [
-					'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td' => 'color: {{VALUE}};',
-				],
-			]
-		);
+		$this->start_controls_tabs('eael_data_table_content_row_cell_styles');
 
-		$this->add_control(
-			'eael_data_table_content_bg_odd_color',
-			[
-				'label' => esc_html__( 'Background Color (Odd Row)', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
+			$this->start_controls_tab('eael_data_table_odd_cell_style', ['label' => esc_html__( 'Normal', 'essential-addons-elementor')]);
 
-		$this->add_control(
-			'eael_data_table_content_color_even',
-			[
-				'label' => esc_html__( 'Color ( Even Row )', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#6d7882',
-				'selectors' => [
-					'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td' => 'color: {{VALUE}};',
-				],
-			]
-		);
+				$this->add_control(
+					'eael_data_table_content_odd_style_heading',
+					[
+						'label' => esc_html__( 'ODD Cell', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+					]
+				);
 
-		$this->add_control(
-			'eael_data_table_content_bg_even_color',
-			[
-				'label' => esc_html__( 'Background Color (Even Row)', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
+				$this->add_control(
+					'eael_data_table_content_color_odd',
+					[
+						'label' => esc_html__( 'Color ( Odd Row )', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#6d7882',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td' => 'color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_bg_odd',
+					[
+						'label' => esc_html__( 'Background ( Odd Row )', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#f2f2f2',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td' => 'background: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_even_style_heading',
+					[
+						'label' => esc_html__( 'Even Cell', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_even_color',
+					[
+						'label' => esc_html__( 'Color ( Even Row )', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#6d7882',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td' => 'color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_bg_even_color',
+					[
+						'label' => esc_html__( 'Background Color (Even Row)', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td' => 'background-color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_group_control(
+					Group_Control_Border::get_type(),
+						[
+							'name' => 'eael_data_table_cell_border',
+							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'selector' => '{{WRAPPER}} .eael-data-table tbody tr td',
+						]
+				);
+
+				$this->add_responsive_control(
+					'eael_data_table_each_cell_padding',
+					[
+						'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::DIMENSIONS,
+						'size_units' => [ 'px', 'em' ],
+						'selectors' => [
+								 '{{WRAPPER}} .eael-data-table tbody tr td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						 ],
+					]
+				);
+
+			$this->end_controls_tab();
+			
+			$this->start_controls_tab('eael_data_table_odd_cell_hover_style', ['label' => esc_html__( 'Hover', 'essential-addons-elementor')]);
+
+				$this->add_control(
+					'eael_data_table_content_hover_color_odd',
+					[
+						'label' => esc_html__( 'Color ( Odd Row )', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td:hover' => 'color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_hover_bg_odd',
+					[
+						'label' => esc_html__( 'Background ( Odd Row )', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td:hover' => 'background: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_even_hover_style_heading',
+					[
+						'label' => esc_html__( 'Even Cell', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_hover_color_even',
+					[
+						'label' => esc_html__( 'Color ( Even Row )', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#6d7882',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td:hover' => 'color: {{VALUE}};',
+						],
+					]
+				);
+
+				$this->add_control(
+					'eael_data_table_content_bg_even_hover_color',
+					[
+						'label' => esc_html__( 'Background Color (Even Row)', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '',
+						'selectors' => [
+							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td:hover' => 'background-color: {{VALUE}};',
+						],
+					]
+				);
+
+			$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
@@ -554,31 +846,6 @@ class Widget_Eael_Data_Table extends Widget_Base {
 
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'eael_section_pro',
-			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-			]
-		);
-
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
-					],
-				],
-				'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
-
-        $this->end_controls_section();
-
 	}
 
 
@@ -605,37 +872,57 @@ class Widget_Eael_Data_Table extends Widget_Base {
 	  			$nofollow = $content_row['eael_data_table_content_row_title_link']['nofollow'] ? 'rel="nofollow"' : '';
 
 	  			$table_tr_keys = array_keys( $table_tr );
-	  			$last_key = end( $table_tr_keys );
+				  $last_key = end( $table_tr_keys );
+				  
+				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : $content_row['eael_data_table_content_row_title'];
 
 	  			$table_td[] = [
-	  				'row_id' => $table_tr[$last_key]['id'],
-	  				'type' => $content_row['eael_data_table_content_row_type'],
-	  				'title' => $content_row['eael_data_table_content_row_title'],
-	  				'link_url' => $content_row['eael_data_table_content_row_title_link']['url'],
-	  				'link_target' => $target,
-	  				'nofollow' => $nofollow,
-					'colspan' => $content_row['eael_data_table_content_row_colspan']
+	  				'row_id'		=> $table_tr[$last_key]['id'],
+	  				'type'			=> $content_row['eael_data_table_content_row_type'],
+	  				'content_type'	=> $content_row['eael_data_table_content_type'],
+	  				'title'			=> $tbody_content,
+	  				'link_url'		=> $content_row['eael_data_table_content_row_title_link']['url'],
+	  				'link_target'	=> $target,
+	  				'nofollow'		=> $nofollow,
+					'colspan'		=> $content_row['eael_data_table_content_row_colspan'],
+					'rowspan'		=> $content_row['eael_data_table_content_row_rowspan'],
+					'tr_class'		=> $content_row['eael_data_table_content_row_css_class'],
+					'tr_id'			=> $content_row['eael_data_table_content_row_css_id']
 	  			];
 	  		}
 	  	}
-
-	  	$table_th_count = count($settings['eael_data_table_header_cols_data']);
+		$table_th_count = count($settings['eael_data_table_header_cols_data']);
+		$this->add_render_attribute('eael_data_table_wrap', [
+			'class'	=> 'eael-data-table-wrap',
+			'data-table_enabled'	=> $settings['eael_section_data_table_enabled'] ? 'true': 'false',
+			'data-table_id'			=> esc_attr($this->get_id())
+		]);
+		$this->add_render_attribute('eael_data_table', [
+			'class'	=> 'tablesorter eael-data-table',
+			'id'	=> 'eael-data-table-'.esc_attr($this->get_id())
+		]);
 	  	?>
-		<div class="eael-data-table-wrap">
-			<table id="eael-data-table-<?php echo $this->get_id(); ?>" class="tablesorter eael-data-table">
+		<div <?php echo $this->get_render_attribute_string('eael_data_table_wrap'); ?>>
+			<table <?php echo $this->get_render_attribute_string('eael_data_table'); ?>>
 			    <thead>
 			        <tr class="table-header">
-			        	<?php foreach( $settings['eael_data_table_header_cols_data'] as $header_title ) : ?>
-			            <th class="sorting">
-			            	<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' ) : ?>
-			            		<i class="data-header-icon <?php echo esc_attr( $header_title['eael_data_table_header_col_icon'] ); ?>"></i>
+						<?php $i = 0; foreach( $settings['eael_data_table_header_cols_data'] as $header_title ) :
+							$this->add_render_attribute('th_class'.$i, [
+								'class'	=> [ 'sorting', $header_title['eael_data_table_header_css_class'] ],
+								'id'	=> $header_title['eael_data_table_header_css_id']
+							]);
+						?>
+			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
+							<?php
+								if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) :
+									$this->add_render_attribute('table_header_col_icon'.$i, [
+										'class'	=> [ 'data-header-icon', esc_attr( $header_title['eael_data_table_header_col_icon'] )]
+									]);
+							?>
+			            		<i <?php echo $this->get_render_attribute_string('table_header_col_icon'.$i); ?>></i>
 			            	<?php endif; ?>
-			            	<?php if( $header_title['eael_data_table_header_col_img_enabled'] == 'true' ) : ?>
-			            		<img src="<?php echo esc_url( $header_title['eael_data_table_header_col_img']['url'] ) ?>" class="eael-data-table-th-img" style="width:<?php echo $header_title['eael_data_table_header_col_img_size'] ?>px" alt="<?php echo esc_attr( $header_title['eael_data_table_header_col'] ); ?>">
-			            	<?php endif; ?>
-			            	<?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?>
-			            </th>
-			        	<?php endforeach; ?>
+							<?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?></th>
+			        	<?php $i++; endforeach; ?>
 			        </tr>
 			    </thead>
 			  	<tbody>
@@ -644,13 +931,22 @@ class Widget_Eael_Data_Table extends Widget_Base {
 							<?php
 								for( $j = 0; $j < count( $table_td ); $j++ ) {
 									if( $table_tr[$i]['id'] == $table_td[$j]['row_id'] ) {
+
+										$this->add_render_attribute('table_inside_td'.$i.$j,
+											[
+												'colspan' => $table_td[$j]['colspan'] > 1 ? $table_td[$j]['colspan'] : '',
+												'rowspan' => $table_td[$j]['rowspan'] > 1 ? $table_td[$j]['rowspan'] : '',
+												'class'		=> $table_td[$j]['tr_class'],
+												'id'		=> $table_td[$j]['tr_id']
+											]
+										);
 										?>
-										<?php if( !empty( $table_td[$j]['link_url'] ) ) : ?>
-											<td<?php echo $table_td[$j]['colspan'] > 1 ? ' colspan="'.$table_td[$j]['colspan'].'"' : ''; ?>>
-												<a href="<?php echo esc_attr( $table_td[$j]['link_url'] ); ?>" <?php echo $table_td[$j]['link_target'] ?> <?php echo $table_td[$j]['nofollow'] ?>><?php echo $table_td[$j]['title']; ?></a>
+										<?php if( !empty( $table_td[$j]['link_url'] ) && $table_td[$j]['content_type'] == 'textarea' ) : ?>
+											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
+												<a href="<?php echo esc_url( $table_td[$j]['link_url'] ); ?>" <?php echo $table_td[$j]['link_target'] ?> <?php echo $table_td[$j]['nofollow'] ?>><?php echo wp_kses_post($table_td[$j]['title']); ?></a>
 											</td>
 										<?php else: ?>
-											<td<?php echo $table_td[$j]['colspan'] > 1 ? ' colspan="'.$table_td[$j]['colspan'].'"' : ''; ?>><?php echo $table_td[$j]['title']; ?></td>
+											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>><?php echo $table_td[$j]['title']; ?></td>
 										<?php endif; ?>
 										<?php
 									}
@@ -664,13 +960,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 	  	<?php
 	}
 
-	protected function content_template() {
-
-		?>
-
-
-		<?php
-	}
+	protected function content_template() { }
 }
 
 

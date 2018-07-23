@@ -1,39 +1,5 @@
 <?php
 
-/**
- * Get Post Data
- * @param  array $args
- * @return array
- */
-function eael_get_post_data( $args ) {
-    $defaults = array(
-        'posts_per_page'   => 5,
-        'offset'           => 0,
-        'category'         => '',
-        'category_name'    => '',
-        'orderby'          => 'date',
-        'order'            => 'DESC',
-        'include'          => '',
-        'exclude'          => '',
-        'meta_key'         => '',
-        'meta_value'       => '',
-        'post_type'        => 'post',
-        'post_mime_type'   => '',
-        'post_parent'      => '',
-        'author'       => '',
-        'author_name'      => '',
-        'post_status'      => 'publish',
-        'suppress_filters' => true,
-        'tag__in'          => '',
-        'post__not_in'     => '',
-    );
-
-    $atts = wp_parse_args( $args, $defaults );
-
-    $posts = get_posts( $atts );
-
-    return $posts;
-}
 
 /**
  * Get All POst Types
@@ -47,55 +13,67 @@ function eael_get_post_types(){
     foreach ( $eael_exclude_cpts as $exclude_cpt ) {
         unset($eael_cpts[$exclude_cpt]);
     }
-
     $post_types = array_merge($eael_cpts);
+
     return $post_types;
 }
-
-/**
- * Add REST API support to an already registered post type.
- */
-add_action( 'init', 'eael_custom_post_type_rest_support', 25 );
-function eael_custom_post_type_rest_support() {
-    global $wp_post_types;
-
-    $post_types = eael_get_post_types();
-    foreach( $post_types as $post_type ) {
-        $post_type_name = $post_type;
-        if( isset( $wp_post_types[ $post_type_name ] ) ) {
-            $wp_post_types[$post_type_name]->show_in_rest = true;
-            $wp_post_types[$post_type_name]->rest_base = $post_type_name;
-            $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
-        }
-    }
-
-}
-
 /**
  * Post Settings Parameter
  * @param  array $settings
  * @return array
  */
-function eael_get_post_settings($settings){
-    $post_args['post_type'] = $settings['eael_post_type'];
-
-    if($settings['eael_post_type'] == 'post'){
-        $post_args['category'] = $settings['category'];
+function eael_get_post_settings( $settings ){
+    $tags = $categories = [];
+    foreach( $settings as $key => $value ) {
+        if( in_array( $key, posts_args() ) ) {
+            switch( $key ){
+                case 'eael_post_tags' : 
+                    if( ! empty( $settings['eael_post_tags'] ) ) {
+                        $tags = [[
+                            'taxonomy' => 'post_tag',
+                            'field' => 'term_id',
+                            'terms' => $settings['eael_post_tags'],
+                        ]];
+                    }
+                    break;
+                case 'category' : 
+                    if( ! empty( $settings['category'] ) ) {
+                        $categories = [[
+                            'taxonomy' => 'category',
+                            'field' => 'term_id',
+                            'terms' => $settings['category'],
+                        ]];
+                    }
+                    break;
+                case 'eael_post_authors' : 
+                    if( isset( $settings['eael_post_authors'] ) && ! empty( $settings['eael_post_authors'] ) && is_array( $settings['eael_post_authors'] ) ) {
+                        $post_args['author'] = implode( ",", $settings['eael_post_authors'] );
+                    }
+                    break;
+                case 'page__not_in' : 
+                    if( isset( $settings['page__not_in'] ) && ! empty( $settings['page__not_in'] ) && is_array( $settings['page__not_in'] ) ) {
+                        $post_args['post__not_in'] = $value;
+                    }
+                    break;
+                default : 
+                    if( isset( $settings[ $key ] ) ) {
+                        $post_args[ $key ] = $value;
+                    }
+                    break;
+            }
+        }
     }
 
-    $eael_tiled_post_author = '';
-    $eael_tiled_post_authors = $settings['eael_post_authors'];
-    if ( !empty( $eael_tiled_post_authors) ) {
-        $eael_tiled_post_author = implode( ",", $eael_tiled_post_authors );
+    if( isset( $post_args['post_type'] ) && $post_args['post_type'] == 'post' ) {
+        $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
+        $post_args['tax_query'] = array_merge($relation, $tags, $categories);
     }
+    
+    $post_args['posts_per_page'] = $post_args['posts_per_page'] ? $post_args['posts_per_page'] : 4;
+    $post_args['post_style'] = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
 
-    $post_args['posts_per_page'] = $settings['eael_posts_count'];
-    $post_args['offset'] = $settings['eael_post_offset'];
-    $post_args['orderby'] = $settings['eael_post_orderby'];
-    $post_args['order'] = $settings['eael_post_order'];
-    $post_args['tag__in'] = $settings['eael_post_tags'];
-    $post_args['post__not_in'] = $settings['eael_post_exclude_posts'];
-    $post_args['author'] = $eael_tiled_post_author;
+    if( isset( $post_args['offset'] ) ) $post_args['offset'] = intval( $post_args['offset'] );
+    $post_args['post_status'] = 'publish';
 
     return $post_args;
 }
@@ -106,16 +84,15 @@ function eael_get_post_settings($settings){
  * @param  int $excerpt_length
  * @return string
  */
-function eael_get_excerpt_by_id($post_id,$excerpt_length){
-    $the_post = get_post($post_id); //Gets post ID
+function eael_get_excerpt_by_id( $post_id, $excerpt_length ){
+    $the_post = get_post( $post_id ); //Gets post ID
 
     $the_excerpt = null;
-    if ($the_post)
-    {
+    if( $the_post ){
         $the_excerpt = $the_post->post_excerpt ? $the_post->post_excerpt : $the_post->post_content;
     }
 
-    $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
+    $the_excerpt = strip_tags( strip_shortcodes( $the_excerpt ) ); //Strips tags and images
     $words = explode(' ', $the_excerpt, $excerpt_length + 1);
 
      if(count($words) > $excerpt_length) :
@@ -124,7 +101,7 @@ function eael_get_excerpt_by_id($post_id,$excerpt_length){
          $the_excerpt = implode(' ', $words);
      endif;
 
-     return $the_excerpt;
+    return $the_excerpt;
 }
 
 /**
@@ -461,4 +438,103 @@ if ( !function_exists('eael_get_posts') ) {
 
         return $posts;
     }
+}
+
+// Get all Pages
+if ( !function_exists('eael_get_pages') ) {
+    function eael_get_pages() {
+
+        $page_list = get_posts( array(
+            'post_type'         => 'page',
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'posts_per_page'    => -1,
+        ) );
+
+        $pages = array();
+
+        if ( ! empty( $page_list ) && ! is_wp_error( $page_list ) ) {
+            foreach ( $page_list as $page ) {
+               $pages[ $page->ID ] = $page->post_title;
+            }
+        }
+
+        return $pages;
+    }
+}
+
+/**
+ * Load More
+ */
+
+function eael_load_more_ajax(){
+    
+    if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
+        $post_args = eael_get_post_settings( $_POST );
+    } else {
+        $args = func_get_args();
+        $post_args = $args[0];
+    }
+    
+    $posts = new WP_Query( $post_args );
+
+    $return = array();
+    $return['count'] = $posts->found_posts;
+
+    ob_start();
+
+    while( $posts->have_posts() ) : $posts->the_post();
+        /**
+         * All content html here.
+         */
+        include ESSENTIAL_ADDONS_EL_PATH . 'includes/templates/content.php';
+    endwhile;
+
+    wp_reset_postdata();
+    wp_reset_query();
+    $return['content'] = ob_get_clean();
+    if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
+        echo $return['content'];
+    } else {
+        return $return;
+    }
+}
+add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
+add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+
+/**
+ * For All Settings Key Need To Display
+ *
+ * @return array
+ */
+function posts_args(){
+    return array(
+        // for content-ticker
+        'eael_ticker_type',
+        'eael_ticker_custom_contents',
+        
+        // common
+        'meta_position',
+        'eael_show_meta',
+        'image_size',
+        'eael_show_image',
+        'eael_show_title',
+        'eael_show_excerpt',
+        'eael_excerpt_length',
+        'eael_show_read_more',
+        'eael_read_more_text',
+
+        // query_args
+        'post_type',
+        'posts_per_page',
+        'post_style',
+        'eael_post_tags',
+        'category',
+        'post__not_in',
+        'page__not_in',
+        'eael_post_authors',
+        'offset',
+        'orderby',
+        'order',
+    );
 }

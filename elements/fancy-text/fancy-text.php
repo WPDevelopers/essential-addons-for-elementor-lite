@@ -450,22 +450,27 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 	?>
 
 	<div class="eael-fancy-text-container <?php echo esc_attr( $eael_fancy_text_style ); ?>">
-			<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?><span class="eael-fancy-text-prefix"><?php echo wp_kses(($settings['eael_fancy_text_prefix'] ), $this->allowed_html ); ?> </span><?php endif; ?>
+		<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?>
+			<span class="eael-fancy-text-prefix"><?php echo wp_kses(($settings['eael_fancy_text_prefix'] ), $this->allowed_html ); ?> </span>
+		<?php endif; ?>
 
-			<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
+		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
 			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"></span>
-			<?php endif; ?>
+		<?php endif; ?>
 
-			<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
+		<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
 			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"><?php
 				$eael_fancy_text_strings_list = "";
 				foreach ( $settings['eael_fancy_text_strings'] as $item ) {
-				           $eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
+					$eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
 				}
-				echo rtrim($eael_fancy_text_strings_list, ", "); ?></span>
-			<?php endif; ?>
+				echo rtrim($eael_fancy_text_strings_list, ", "); ?>
+			</span>
+		<?php endif; ?>
 
-			<?php if ( ! empty( $settings['eael_fancy_text_suffix'] ) ) : ?><span class="eael-fancy-text-suffix"> <?php echo wp_kses(($settings['eael_fancy_text_suffix'] ), $this->allowed_html ); ?> </span><?php endif; ?>
+		<?php if ( ! empty( $settings['eael_fancy_text_suffix'] ) ) : ?>
+			<span class="eael-fancy-text-suffix"> <?php echo wp_kses(($settings['eael_fancy_text_suffix'] ), $this->allowed_html ); ?></span>
+		<?php endif; ?>
 	</div><!-- close .eael-fancy-text-container -->
 
 	<div class="clearfix"></div>
@@ -496,8 +501,8 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 				separator: ",",
 				speed: <?php echo esc_attr($settings['eael_fancy_text_delay'] ); ?>,
 				complete: function () {
-				        // Overrides default empty function
-				    }
+					// Overrides default empty function
+				}
 			});
 		});
 		</script>

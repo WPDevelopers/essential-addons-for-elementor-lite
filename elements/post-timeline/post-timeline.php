@@ -37,13 +37,12 @@ class Widget_PostTimeline extends Widget_Base {
 
 
 		$this->add_control(
-            'eael_post_type',
+            'post_type',
             [
                 'label' => __( 'Post Type', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT,
                 'options' => eael_get_post_types(),
                 'default' => 'post',
-
             ]
         );
 
@@ -56,7 +55,7 @@ class Widget_PostTimeline extends Widget_Base {
 				'multiple' => true,
 				'options' => eael_post_type_categories(),
                 'condition' => [
-                       'eael_post_type' => 'post'
+                       'post_type' => 'post'
                 ]
             ]
 		);
@@ -80,23 +79,43 @@ class Widget_PostTimeline extends Widget_Base {
 				'label_block'       => true,
 				'multiple'          => true,
 				'options'           => eael_get_tags(),
+				'condition' => [
+					'post_type' => 'post'
+			 	]
             ]
         );
 
         $this->add_control(
-            'eael_post_exclude_posts',
+            'post__not_in',
             [
                 'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
                 'type'              => Controls_Manager::SELECT2,
 				'label_block'       => true,
 				'multiple'          => true,
 				'options'           => eael_get_posts(),
+				'condition' => [
+					'post_type' => 'post'
+			 	]
+            ]
+        );
+
+        $this->add_control(
+            'page__not_in',
+            [
+                'label'             => __( 'Exclude Pages', 'essential-addons-elementor' ),
+                'type'              => Controls_Manager::SELECT2,
+				'label_block'       => true,
+				'multiple'          => true,
+				'options'           => eael_get_pages(),
+				'condition' => [
+					'post_type' => 'page'
+			 	]
             ]
         );
 
 
         $this->add_control(
-            'eael_posts_count',
+            'posts_per_page',
             [
                 'label' => __( 'Number of Posts', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::NUMBER,
@@ -105,7 +124,7 @@ class Widget_PostTimeline extends Widget_Base {
         );
 
         $this->add_control(
-            'eael_post_offset',
+            'offset',
             [
                 'label' => __( 'Post Offset', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::NUMBER,
@@ -114,7 +133,7 @@ class Widget_PostTimeline extends Widget_Base {
         );
 
         $this->add_control(
-            'eael_post_orderby',
+            'orderby',
             [
                 'label' => __( 'Order By', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT,
@@ -125,7 +144,7 @@ class Widget_PostTimeline extends Widget_Base {
         );
 
         $this->add_control(
-            'eael_post_order',
+            'order',
             [
                 'label' => __( 'Order', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::SELECT,
@@ -687,47 +706,63 @@ class Widget_PostTimeline extends Widget_Base {
 
 
 	protected function render( ) {
-        $settings = $this->get_settings();
 
-        $post_args = eael_get_post_settings($settings);
+		$settings = $this->get_settings();
+		/**
+		 * Collect categories from user.
+		 */
+		$post_categories = $this->get_settings( 'category' );
+		/**
+		 * Collect tags from user.
+		 */
+		$post_tags = $this->get_settings( 'eael_post_tags' );
+		/**
+		 * Collect excluded posts or page from user
+		 */
+		$exclude_posts = $this->get_settings('post__not_in');
+		$exclude_pages = $this->get_settings('page__not_in');
 
-        $posts = eael_get_post_data($post_args);
-        /* Get Post Categories */
-        $post_categories = $this->get_settings( 'category' );
-        if( !empty( $post_categories ) ) {
-        	foreach ( $post_categories as $key=>$value ) {
-	        	$categories[] = $value;
-	        }
-	        $categories_id_string = implode( ',' , $categories );
-
-	        /* Get All Post Count */
-	        $total_post = 0;
-	        foreach( $categories as $cat ) {
-	        	$category = get_category( $cat );
-	        	$total_post = $total_post + $category->category_count;
-	        }
-        }else {
-        	$categories_id_string = '';
-        	$total_post = wp_count_posts( $settings['eael_post_type'] )->publish;
-		}
+		$excluded = $settings['post_type'] == 'post' ? $exclude_posts : $exclude_pages;
+		/**
+		 * Setup the post arguments.
+		 */
+		$settings['post_style'] = 'timeline';
+		$post_args = eael_get_post_settings( $settings, true );
+		/**
+		 * Get posts from database.
+		 */
+		$posts = eael_load_more_ajax( $post_args );
+		/**
+		 * Set total posts.
+		 */
+		$total_post = $posts['count'];
 		
 		$this->add_render_attribute(
 			'eael_post_timeline_wrapper',
 			[
 				'id'		=> "eael-post-timeline-{$this->get_id()}",
 				'class'		=> 'eael-post-timeline',
-				'data-url'	=> home_url( '/' ),
 				'data-total_posts'	=> $total_post,
 				'data-timeline_id'	=> $this->get_id(),
-				'data-post_type'	=> $settings['eael_post_type'],
-				'data-posts_per_page'	=> $settings['eael_posts_count'],
-				'data-post_order'		=> $settings['eael_post_order'],
+				
+				'data-post_type'	=> $settings['post_type'],
+				'data-posts_per_page'	=> $settings['posts_per_page'] ? $settings['posts_per_page'] : 4,
+				'data-post_order'		=> $settings['order'],
+				'data-post_orderby'		=> $settings['orderby'],
+				'data-post_offset'		=> $settings['offset'],
+
 				'data-show_images'	=> $settings['eael_show_image'],
+				'data-image_size'	=> $settings['image_size'],
 				'data-show_title'	=> $settings['eael_show_title'],
+
 				'data-show_excerpt'	=> $settings['eael_show_excerpt'],
 				'data-excerpt_length'	=> $settings['eael_excerpt_length'],
+
 				'data-btn_text'			=> $settings['eael_post_timeline_load_more_text'],
-				'data-categories'		=> $categories_id_string
+
+				'data-categories'		=> json_encode( ! empty( $post_categories ) ? $post_categories : [] ),
+				'data-tags'				=> json_encode( ! empty( $post_tags ) ? $post_tags : [] ),
+				'data-exclude_posts'	=> json_encode( ! empty( $exclude_posts ) ? $exclude_posts : [] ),
 			]
 		);
 
@@ -741,44 +776,23 @@ class Widget_PostTimeline extends Widget_Base {
         ?>
 		<div <?php echo $this->get_render_attribute_string('eael_post_timeline_wrapper'); ?>>
 		    <div <?php echo $this->get_render_attribute_string('eael_post_timeline'); ?>>
-		    <?php
-		        if(count($posts)){
-		            global $post;
-		            ?>
-		                <?php
-		                    foreach($posts as $post){
-		                        setup_postdata($post);
-		                    ?>
-		                    <article class="eael-timeline-post eael-timeline-column">
-		                        <div class="eael-timeline-bullet"></div>
-		                        <div class="eael-timeline-post-inner">
-		                            <a class="eael-timeline-post-link" href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>">
-			                            <time datetime="<?php echo get_the_date(); ?>"><?php echo get_the_date(); ?></time>
-			                            <div class="eael-timeline-post-image" <?php if($settings['eael_show_image'] == 1){ ?> style="background-image: url('<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size'])?>');" <?php } ?>></div>
-			                            <?php if($settings['eael_show_excerpt']){ ?>
-			                            <div class="eael-timeline-post-excerpt">
-			                                <p><?php echo  eael_get_excerpt_by_id(get_the_ID(),$settings['eael_excerpt_length']);?></p>
-			                            </div>
-			                            <?php } ?>
-
-			                            <?php if($settings['eael_show_title']){ ?>
-			                            <div class="eael-timeline-post-title">
-			                                <h2><?php the_title(); ?></h2>
-			                            </div>
-			                            <?php } ?>
-		                            </a>
-		                        </div>
-		                    </article>
-		                    <?php
-		                    }
-		                    wp_reset_postdata();
-		                ?>
-		            <?php
-		        }
-		    ?>
+				<?php
+					if( ! empty( $posts['content'] ) ){
+						echo $posts['content'];
+					} else {
+						echo '<p>Something went wrong.</p>';
+					}
+				?>
 		    </div>
 		</div>
-		<?php if( 1 == $settings['eael_post_timeline_show_load_more'] ) : ?>
+		<?php 
+			if( 1 == $settings['eael_post_timeline_show_load_more'] ) : 
+				if( 
+					$settings['posts_per_page'] != '-1' 
+					&& $total_post != $settings['posts_per_page'] 
+					&& $total_post > intval( $settings['offset'] ) + intval( ! empty( $settings['posts_per_page'] ) ? $settings['posts_per_page'] : 4 ) 
+				) : 
+		?>
 		<!-- Load More Button -->
 		<div class="eael-load-more-button-wrap">
 			<button class="eael-load-more-button" id="eael-load-more-btn-<?php echo $this->get_id(); ?>">
@@ -786,13 +800,9 @@ class Widget_PostTimeline extends Widget_Base {
 		  		<span><?php echo esc_html__( $settings['eael_post_timeline_load_more_text'], 'essential-addons-elementor' ); ?></span>
 			</button>
 		</div>
-		<?php endif;
+		<?php endif; endif;
 	}
 
-	protected function content_template() {
-		?>
-
-		<?php
-	}
+	protected function content_template() { }
 }
 Plugin::instance()->widgets_manager->register_widget_type( new Widget_PostTimeline() );

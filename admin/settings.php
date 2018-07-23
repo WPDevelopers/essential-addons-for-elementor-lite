@@ -48,6 +48,42 @@ class Eael_Admin_Settings {
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ), 600 );
 		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
+		add_action( 'wp_ajax_add_action_with_ajax', array( $this, 'add_action_with_ajax' ) );
+
+	}
+
+	public function add_action_with_ajax(){
+
+		global $wp_version;
+		$post_types = [];
+		$remoteargs = array(
+			'timeout'     => 5,
+			'redirection' => 5,
+			'httpversion' => '1.0',
+			'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+			'blocking'    => true,
+			'headers'     => array(),
+			'cookies'     => array(),
+			'sslverify'   => false,
+		);
+		$otherurl = $_POST['url'];
+
+		$otherurl = $otherurl . 'wp-json/wp/v2/types';
+
+		$response = wp_remote_get( $otherurl, $remoteargs );    
+		$response = json_decode( $response['body'] );
+		// echo '<pre>', print_r( $response, 1 ), '</pre>';
+		foreach( $response as $type ){
+			$post_types[ $type->rest_base ] = $type->name;
+		}
+		$eael_exclude_cpts = array( 'elementor_library', 'media', 'product' );
+		foreach ( $eael_exclude_cpts as $exclude_cpt ) {
+			unset($post_types[$exclude_cpt]);
+		}
+		// echo '<pre>', print_r( $post_types, 1 ), '</pre>';
+		echo json_encode( $post_types );
+
+		add_action( 'wp_ajax_save_facebook_feed_settings', array( $this, 'eael_save_facebook_feed_settings' ) );
 
 	}
 
@@ -111,11 +147,11 @@ class Eael_Admin_Settings {
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 	   $eael_new_settings = array_diff_key( $this->eael_default_settings, $this->eael_get_settings );
 	   if( ! empty( $eael_new_settings ) ) {
-	   	$eael_updated_settings = array_merge( $this->eael_get_settings, $eael_new_settings );
-	   	update_option( 'eael_save_settings', $eael_updated_settings );
+			$eael_updated_settings = array_merge( $this->eael_get_settings, $eael_new_settings );
+			update_option( 'eael_save_settings', $eael_updated_settings );
 	   }
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
-		?>
+	?>
 		<div class="eael-settings-wrap">
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
 		  		<div class="eael-header-bar">
@@ -133,7 +169,7 @@ class Eael_Admin_Settings {
 			    	<ul class="eael-tabs">
 				      	<li><a href="#general" class="active"><i class="fa fa-cogs"></i> General</a></li>
 				      	<li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
-				      	<li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
+						<li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
 			    	</ul>
 			    	<div id="general" class="eael-settings-tab active">
 						<div class="row eael-admin-general-wrapper">
@@ -527,7 +563,7 @@ class Eael_Admin_Settings {
 			      				<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" class="button eael-btn eael-license-btn">Get Premium Version</a>
 			      			</div>
 			      		</div>
-			    	</div>
+					</div>
 			  	</div>
 		  	</form>
 		</div>
