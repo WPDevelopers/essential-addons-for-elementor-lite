@@ -26,7 +26,11 @@
 /**
  * Fancy Text Style
  */
-.eael-fancy-text-strings {
+
+.eael-fancy-text-container p {
+    margin: 0;
+}
+.eael-fancy-text-strings, .eael-fancy-text-prefix, .eael-fancy-text-suffix {
     display: inline-block;
 }
 .morphext>.animated {
