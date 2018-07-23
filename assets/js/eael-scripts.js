@@ -52,19 +52,19 @@
     }
 
     var FacebookFeedHandler = function ($scope, $) {
-
         var loadingFeed = $scope.find( '.eael-loading-feed' );
         var $fbCarousel            = $scope.find('.eael-facebook-feed-layout-wrapper').eq(0),
-            $name         = ($fbCarousel.data("facebook-feed-ac-name") !== undefined) ? $fbCarousel.data("facebook-feed-ac-name") : '',
-            $token         = ($fbCarousel.data("facebook-feed-ac-token") !== undefined) ? $fbCarousel.data("facebook-feed-ac-token") : '',
-            $limit         = ($fbCarousel.data("facebook-feed-post-limit") !== undefined) ? $fbCarousel.data("facebook-feed-post-limit") : '',
-            $length         = ($fbCarousel.data("facebook-feed-content-length") !== undefined) ? $fbCarousel.data("facebook-feed-content-length") : 400,
-            $media         = ($fbCarousel.data("facebook-feed-media") !== undefined) ? $fbCarousel.data("facebook-feed-media") : false,
-            $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
-            $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
+                $name         = ($fbCarousel.data("facebook-feed-ac-name") !== undefined) ? $fbCarousel.data("facebook-feed-ac-name") : '',
+                $limit         = ($fbCarousel.data("facebook-feed-post-limit") !== undefined) ? $fbCarousel.data("facebook-feed-post-limit") : '',
+                $app_id         = ($fbCarousel.data("facebook-feed-app-id") !== undefined) ? $fbCarousel.data("facebook-feed-app-id") : '',
+                $app_secret         = ($fbCarousel.data("facebook-feed-app-secret") !== undefined) ? $fbCarousel.data("facebook-feed-app-secret") : '',
+                $length         = ($fbCarousel.data("facebook-feed-content-length") !== undefined) ? $fbCarousel.data("facebook-feed-content-length") : 400,
+                $media         = ($fbCarousel.data("facebook-feed-media") !== undefined) ? $fbCarousel.data("facebook-feed-media") : false,
+                $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
+                $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
         // Facebook Feed Init
         function eael_facebook_feeds() {
-            var $access_token = $token;
+            var $access_token = ($app_id+'|'+$app_secret).toString();
             var $id_name = $name.toString();
             $( '#eael-facebook-feed-'+ $carouselId +'.eael-facebook-feed-layout-container' ).socialfeed({
 
@@ -129,6 +129,7 @@
         
 
     };
+
 
     var TwitterFeedHandler = function ($scope, $) {
         var loadingFeed = $scope.find( '.eael-loading-feed' );
@@ -385,6 +386,100 @@
         });
     } // end of Data Table
 
+    var FancyText = function ($scope, $) { 
+        var $fancyText              = $scope.find('.eael-fancy-text-container').eq(0),
+            $id                     = ($fancyText.data("fancy-text-id") !== undefined) ? $fancyText.data("fancy-text-id") : '',
+            $fancy_text             = ($fancyText.data("fancy-text")  !== undefined) ? $fancyText.data("fancy-text") : '',
+            $transition_type        = ($fancyText.data("fancy-text-transition-type")  !== undefined) ? $fancyText.data("fancy-text-transition-type") : '',
+            $fancy_text_speed       = ($fancyText.data("fancy-text-speed") !== undefined) ? $fancyText.data("fancy-text-speed") : '',
+            $fancy_text_delay       = ($fancyText.data("fancy-text-delay")     !== undefined) ? $fancyText.data("fancy-text-delay") : '',  
+            $fancy_text_cursor      = ($fancyText.data("fancy-text-cursor")     !== undefined) ? true : false,    
+            $fancy_text_loop        = ($fancyText.data("fancy-text-loop")     !== undefined) ? true : false;    
+            $fancy_text = $fancy_text.split("|");
+            
+        if ( $transition_type  == 'typing' ) {
+            $("#eael-fancy-text-" + $id).typed({
+                strings: $fancy_text,
+                typeSpeed: $fancy_text_speed,
+                backSpeed: 0,
+                startDelay: 300,
+                backDelay: $fancy_text_delay,
+                showCursor: $fancy_text_cursor,
+                loop: $fancy_text_loop,
+            });
+        }
+
+        if ( $transition_type  != 'typing' ) {
+            $("#eael-fancy-text-" + $id).Morphext({
+             animation: $transition_type,
+				separator: ", ",
+				speed: $fancy_text_delay,
+				complete: function () {
+				        // Overrides default empty function
+				    }
+			});
+        }
+    }
+
+    var ImageAccordion = function ($scope, $) {
+        var $imageAccordion         = $scope.find('.eael-img-accordion').eq(0),
+            $id                     = ($imageAccordion.data("img-accordion-id") !== undefined) ? $imageAccordion.data("img-accordion-id") : '',
+            $type             = ($imageAccordion.data("img-accordion-type")  !== undefined) ? $imageAccordion.data("img-accordion-type") : '';
+           
+
+        if( 'on-click' === $type ) {
+            $('#eael-img-accordion-'+ $id +' a').on('click', function(e) {
+                e.preventDefault();
+                $('#eael-img-accordion-'+ $id +' a').css('flex', '1');
+                $(this).find('.overlay').parent('a').addClass('overlay-active');
+                $('#eael-img-accordion-'+ $id +' a').find('.overlay-inner').removeClass('overlay-inner-show');
+                $(this).find('.overlay-inner').addClass('overlay-inner-show');
+                $(this).css('flex', '3');
+            });
+            $('#eael-img-accordion-'+ $id +' a').on('blur', function(e) {
+                $('#eael-img-accordion-'+ $id +' a').css('flex', '1');
+                $('#eael-img-accordion-'+ $id +' a').find('.overlay-inner').removeClass('overlay-inner-show');
+                $(this).find('.overlay').parent('a').removeClass('overlay-active');
+            });
+        }
+    }
+
+    var CountDown = function ($scope, $) {
+        var $coundDown           = $scope.find('.eael-countdown-wrapper').eq(0),
+        $countdown_id            = ($coundDown.data("countdown-id") !== undefined) ? $coundDown.data("countdown-id") : '',
+        $expire_type             = ($coundDown.data("expire-type")  !== undefined) ? $coundDown.data("expire-type") : '',
+        $expiry_text             = ($coundDown.data("expiry-text")  !== undefined) ? $coundDown.data("expiry-text") : '',
+        $redirect_url            = ($coundDown.data("redirect-url") !== undefined) ? $coundDown.data("redirect-url") : '',
+        $template                = ($coundDown.data("template")     !== undefined) ? $coundDown.data("template") : '';
+        
+        jQuery(document).ready(function($) {
+            'use strict';
+            var countDown = $("#eael-countdown-" + $countdown_id);
+    
+            countDown.countdown({
+                end: function() {
+                    if( $expire_type == 'text'){
+                        countDown.html( '<div class="eael-countdown-finish-text">' + $expiry_text + '</div>');
+                    }
+                    else if ( $expire_type === 'url'){
+                        var editMode = $('body').find('#elementor').length;
+                        if( editMode > 0 ) {
+                            countDown.html("Your Page will be redirected to given URL (only on Frontend).");
+                        } else {
+                            window.location.href = $redirect_url;
+                        }   
+                    }
+                    else if ( $expire_type === 'template'){
+                        countDown.html( $template );
+                    } else {
+                        //do nothing!
+                    }
+                }
+            });
+        });
+
+    }
+    
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
@@ -393,6 +488,9 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-content-ticker.default', ContentTicker);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-fancy-text.default', FancyText);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-image-accordion.default', ImageAccordion);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-countdown.default', CountDown);
     });
 
 }(jQuery));

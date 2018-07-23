@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.7.2
+ * Version: 2.7.3
  * Author URI: https://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
@@ -483,6 +483,5 @@ function review_pending() {
 function eael_deactivate() {
     delete_option('eael_active_time');
     delete_option('eael_maybe_later');
-    delete_option('eael_facebook_feed_settings');
 }
 register_deactivation_hook(__FILE__, 'eael_deactivate');

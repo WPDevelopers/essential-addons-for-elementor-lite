@@ -438,18 +438,38 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 
 	}
 
+	public function fancy_text($settings) {
+		$fancy_text = array();
+		foreach ( $settings as $item ) {
+			if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) )  {
+				$fancy_text[] = $item['eael_fancy_text_strings_text_field'] ;
+			}
+		}
+		$fancy_text = implode("|",$fancy_text);
+		return $fancy_text;
+	}
 
 	protected function render( ) {
 
 
-      $settings = $this->get_settings_for_display();
+	  $settings = $this->get_settings_for_display();
+	  $fancy_text = $this->fancy_text($settings['eael_fancy_text_strings']);
 
       if( 'style-1' === $settings['eael_fancy_text_style'] || 'style-2' === $settings['eael_fancy_text_style'] ) {
       	$eael_fancy_text_style = 'style-1';
-      }
+	  }
+	  $this->add_render_attribute( 'fancy-text', 'class', 'eael-fancy-text-container' );
+	  $this->add_render_attribute( 'fancy-text', 'class', esc_attr( $eael_fancy_text_style ) );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-id', esc_attr($this->get_id()) );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text', $fancy_text );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-transition-type', $settings['eael_fancy_text_transition_type'] );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-speed', $settings['eael_fancy_text_speed'] );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-delay', $settings['eael_fancy_text_delay'] );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-cursor', $settings['eael_fancy_text_cursor'] );
+	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-loop', $settings['eael_fancy_text_loop'] );
 	?>
 
-	<div class="eael-fancy-text-container <?php echo esc_attr( $eael_fancy_text_style ); ?>">
+	<div  <?php echo $this->get_render_attribute_string( 'fancy-text' ); ?> >
 		<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?>
 			<span class="eael-fancy-text-prefix"><?php echo wp_kses(($settings['eael_fancy_text_prefix'] ), $this->allowed_html ); ?> </span>
 		<?php endif; ?>
@@ -474,39 +494,6 @@ class Widget_Eael_Fancy_Text extends Widget_Base {
 	</div><!-- close .eael-fancy-text-container -->
 
 	<div class="clearfix"></div>
-
-	<?php if ( $settings['eael_fancy_text_transition_type']  == 'typing' ) : ?>
-	<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		'use strict';
-		$("#eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>").typed({
-		strings: [<?php foreach ( $settings['eael_fancy_text_strings'] as $item ) : ?><?php if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) ) : ?>"<?php echo esc_attr($item['eael_fancy_text_strings_text_field'] ); ?>",<?php endif; ?><?php endforeach; ?>],
-			typeSpeed: <?php echo esc_attr($settings['eael_fancy_text_speed'] ); ?>,
-			backSpeed: 0,
-			startDelay: 300,
-			backDelay: <?php echo esc_attr($settings['eael_fancy_text_delay'] ); ?>,
-			showCursor: <?php if ( ! empty( $settings['eael_fancy_text_cursor'] ) ) : ?>true<?php else: ?>false<?php endif; ?>,
-			loop: <?php if ( ! empty( $settings['eael_fancy_text_loop'] ) ) : ?>true<?php else: ?>false<?php endif; ?>,
-		});
-	});
-	</script>
-	<?php endif; ?>
-
-	<?php if ( $settings['eael_fancy_text_transition_type']  != 'typing' ) : ?>
-		<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			'use strict';
-			$("#eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>").Morphext({
-				animation: "<?php echo esc_attr($settings['eael_fancy_text_transition_type'] ); ?>",
-				separator: ",",
-				speed: <?php echo esc_attr($settings['eael_fancy_text_delay'] ); ?>,
-				complete: function () {
-					// Overrides default empty function
-				}
-			});
-		});
-		</script>
-	<?php endif; ?>
 
 	<?php
 
