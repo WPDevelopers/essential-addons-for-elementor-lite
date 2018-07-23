@@ -5,7 +5,7 @@ function eael_elementor_init(){
     Plugin::instance()->elements_manager->add_category(
         'essential-addons-elementor',
         [
-            'title'  => 'Essential Addons for Elementor',
+            'title'  => 'Essential Addons',
             'icon' => 'font'
         ],
         1

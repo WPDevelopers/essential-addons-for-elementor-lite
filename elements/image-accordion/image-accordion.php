@@ -331,9 +331,13 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
 
       $settings = $this->get_settings_for_display();
 
+      $this->add_render_attribute( 'eael-image-accordion', 'class', 'eael-img-accordion' );
+      $this->add_render_attribute( 'eael-image-accordion', 'data-img-accordion-id', esc_attr($this->get_id()) );
+      $this->add_render_attribute( 'eael-image-accordion', 'data-img-accordion-type', $settings['eael_img_accordion_type'] );
+
       if( !empty($settings['eael_img_accordions']) ) :
       ?>
-      <div class="eael-img-accordion" id="eael-img-accordion-<?php echo $this->get_id(); ?>">
+      <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion' ); ?> id="eael-img-accordion-<?php echo $this->get_id(); ?>">
         <?php foreach( $settings['eael_img_accordions'] as $img_accordion ) :
             $eael_accordion_link = $img_accordion['eael_accordion_title_link']['url'];
             $target = $img_accordion['eael_accordion_title_link']['is_external'] ? 'target="_blank"' : '';
@@ -361,25 +365,6 @@ class Widget_Eael_Image_Accordion extends Widget_Base {
             transition: all .3s .3s;
           }
         </style>
-        <?php endif; ?>
-        <?php if( 'on-click' === $settings['eael_img_accordion_type'] ) : ?>
-        <script>
-          jQuery(document).ready(function($) {
-            $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').on('click', function(e) {
-              e.preventDefault();
-              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').css('flex', '1');
-              $(this).find('.overlay').parent('a').addClass('overlay-active');
-              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').find('.overlay-inner').removeClass('overlay-inner-show');
-              $(this).find('.overlay-inner').addClass('overlay-inner-show');
-              $(this).css('flex', '3');
-            });
-            $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').on('blur', function(e) {
-              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').css('flex', '1');
-              $('#eael-img-accordion-<?php echo $this->get_id(); ?> a').find('.overlay-inner').removeClass('overlay-inner-show');
-              $(this).find('.overlay').parent('a').removeClass('overlay-active');
-            });
-          });
-        </script>
         <?php endif; ?>
       <?php endif; ?>
       <?php
