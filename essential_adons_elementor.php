@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.7.2
+ * Version: 2.7.3
  * Author URI: https://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
@@ -155,8 +155,6 @@ add_action('elementor/widgets/widgets_registered','add_eael_elements');
 function essential_addons_el_enqueue(){
     $is_component_active = eael_activated_modules();
     wp_enqueue_style('essential_addons_elementor-css',ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css');
-    wp_enqueue_style('essential_addons_elementor-slick-css',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.css');
-
     wp_enqueue_script('eael-scripts',ESSENTIAL_ADDONS_EL_URL.'assets/js/eael-scripts.js', array('jquery'),'1.0', true);
     if ( class_exists( 'GFCommon' ) ) {
         foreach( eael_select_gravity_form() as $form_id => $form_name ){
@@ -178,7 +176,11 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
     }
     if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
-      wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
+        wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
+        $eael_js_settings = array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        );
+        wp_localize_script( 'essential_addons_elementor-load-more-js', 'eaelPostGrid', $eael_js_settings );
     }
     if( $is_component_active['twitter-feed']) {
       wp_enqueue_script('essential_addons_elementor-codebird-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/codebird.js', array('jquery'),'1.0', true);
@@ -194,10 +196,6 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
     }
 
-    if( $is_component_active['content-ticker'] ) {
-      wp_enqueue_script('essential_addons_elementor-slick-js',ESSENTIAL_ADDONS_EL_URL.'assets/slick/slick.min.js', array('jquery'),'1.0', true);
-    }
-
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
@@ -205,10 +203,8 @@ add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
  * Editor Css
  */
 add_action( 'elementor/editor/before_enqueue_scripts', function() {
-
    wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
    wp_enqueue_style( 'essential_addons_elementor_editor-css' );
-
 } );
 
 /**

@@ -130,18 +130,19 @@
 
     };
 
+
     var TwitterFeedHandler = function ($scope, $) {
         var loadingFeed = $scope.find( '.eael-loading-feed' );
         var $twitterFeed            = $scope.find('.eael-twitter-feed-layout-wrapper').eq(0),
-                $name               = ($twitterFeed.data("twitter-feed-ac-name") !== undefined) ? $twitterFeed.data("twitter-feed-ac-name") : '',
-                $limit              = ($twitterFeed.data("twitter-feed-post-limit") !== undefined) ? $twitterFeed.data("twitter-feed-post-limit") : '',
-                $hash_tag           = ($twitterFeed.data("twitter-feed-hashtag-name") !== undefined) ? $twitterFeed.data("twitter-feed-hashtag-name") : '',
-                $key                = ($twitterFeed.data("twitter-feed-consumer-key") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-key") : '',
-                $app_secret         = ($twitterFeed.data("twitter-feed-consumer-secret") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-secret") : '',
-                $length             = ($twitterFeed.data("twitter-feed-content-length") !== undefined) ? $twitterFeed.data("twitter-feed-content-length") : 400,
-                $media              = ($twitterFeed.data("twitter-feed-media") !== undefined) ? $twitterFeed.data("twitter-feed-media") : false,
-                $feed_type          = ($twitterFeed.data("twitter-feed-type") !== undefined) ? $twitterFeed.data("twitter-feed-type") : false,  
-                $carouselId         = ($twitterFeed.data("twitter-feed-id") !== undefined) ? $twitterFeed.data("twitter-feed-id") : ' '; 
+            $name               = ($twitterFeed.data("twitter-feed-ac-name") !== undefined) ? $twitterFeed.data("twitter-feed-ac-name") : '',
+            $limit              = ($twitterFeed.data("twitter-feed-post-limit") !== undefined) ? $twitterFeed.data("twitter-feed-post-limit") : '',
+            $hash_tag           = ($twitterFeed.data("twitter-feed-hashtag-name") !== undefined) ? $twitterFeed.data("twitter-feed-hashtag-name") : '',
+            $key                = ($twitterFeed.data("twitter-feed-consumer-key") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-key") : '',
+            $app_secret         = ($twitterFeed.data("twitter-feed-consumer-secret") !== undefined) ? $twitterFeed.data("twitter-feed-consumer-secret") : '',
+            $length             = ($twitterFeed.data("twitter-feed-content-length") !== undefined) ? $twitterFeed.data("twitter-feed-content-length") : 400,
+            $media              = ($twitterFeed.data("twitter-feed-media") !== undefined) ? $twitterFeed.data("twitter-feed-media") : false,
+            $feed_type          = ($twitterFeed.data("twitter-feed-type") !== undefined) ? $twitterFeed.data("twitter-feed-type") : false,  
+            $carouselId         = ($twitterFeed.data("twitter-feed-id") !== undefined) ? $twitterFeed.data("twitter-feed-id") : ' '; 
 
         var $id_name = $name.toString(); 
         var $hash_tag_name = $hash_tag.toString();    
@@ -268,47 +269,168 @@
     var postTimelineHandler = function ($scope, $) {
         var $_this = $scope.find('.eael-post-timeline'),
             $currentTimelineId = '#' + $_this.attr('id'),
-            $site_url       = $_this.data('url'),
-            $total_posts    = $_this.data('total_posts'),
+            $total_posts    = parseInt( $_this.data('total_posts'), 10 ),
             $timeline_id    = $_this.data('timeline_id'),
-            $post_type      = $_this.data('post_type'),
-            $posts_per_page     = $_this.data('posts_per_page'),
+
+            $post_type          = $_this.data('post_type'),
+            $posts_per_page     = parseInt( $_this.data('posts_per_page'), 10 ),
             $post_order         = $_this.data('post_order'),
+            $post_orderby       = $_this.data('post_orderby'),
+            $post_offset        = parseInt( $_this.data('post_offset'), 10 ),
+
             $show_images        = $_this.data('show_images'),
+            $image_size         = $_this.data('image_size'),
             $show_title         = $_this.data('show_title'),
+            
             $show_excerpt       = $_this.data('show_excerpt'),
-            $excerpt_length     = $_this.data('excerpt_length'),
+            $excerpt_length     = parseInt( $_this.data('excerpt_length'), 10 ),
+
             $btn_text       = $_this.data('btn_text'),
-            $categories     = $_this.data('categories');
+
+            $categories     = $_this.data('categories'),
+            $tags           = $_this.data('tags'),
+            $exclude_posts  = $_this.data('exclude_posts');
 
         var options = {
-            siteUrl: $site_url,
             totalPosts: $total_posts,
-            loadMoreBtn: $( '#eael-load-more-btn-'+$timeline_id ),
-            postContainer: $( '.eael-post-appender-'+$timeline_id ),
+            loadMoreBtn: $( '#eael-load-more-btn-' + $timeline_id ),
+            postContainer: $( '.eael-post-appender-' + $timeline_id ),
             postStyle: 'timeline',
         }
     
         var settings = {
             postType: $post_type,
-            perPage: parseInt( $posts_per_page, 10 ),
+            perPage: $posts_per_page,
             postOrder: $post_order,
+            orderBy: $post_orderby,
+            offset: $post_offset > 0 ? $post_offset + $posts_per_page : 0,
+
             showImage: $show_images,
+            imageSize: $image_size,
             showTitle: $show_title,
             showExcerpt: $show_excerpt,
             excerptLength: parseInt( $excerpt_length, 10 ),
             btnText: $btn_text,
-            categories: $categories
+            categories: $categories,
+            eael_post_tags: $tags,
+            exclude_posts: $exclude_posts,
         }
+
         loadMore( options, settings );
     }
 
+    var ContentTicker = function ($scope, $) {
+        var $contentTicker              = $scope.find('.eael-content-ticker').eq(0),
+            $items                      = ($contentTicker.data("items") !== undefined) ? $contentTicker.data("items") : 1,
+            $items_tablet               = ($contentTicker.data("items-tablet") !== undefined) ? $contentTicker.data("items-tablet") : 1,
+            $items_mobile               = ($contentTicker.data("items-mobile") !== undefined) ? $contentTicker.data("items-mobile") : 1,
+            $margin                     = ($contentTicker.data("margin") !== undefined) ? $contentTicker.data("margin") : 10,
+            $margin_tablet              = ($contentTicker.data("margin-tablet") !== undefined) ? $contentTicker.data("margin-tablet") : 10,
+            $margin_mobile              = ($contentTicker.data("margin-mobile") !== undefined) ? $contentTicker.data("margin-mobile") : 10,
+            $effect                     = ($contentTicker.data("effect") !== undefined) ? $contentTicker.data("effect") : 'slide',
+            $speed                      = ($contentTicker.data("speed") !== undefined) ? $contentTicker.data("speed") : 400,
+            $autoplay                   = ($contentTicker.data("autoplay") !== undefined) ? $contentTicker.data("autoplay") : 5000,
+            $loop                       = ($contentTicker.data("loop") !== undefined) ? $contentTicker.data("loop") : false,
+            $grab_cursor                = ($contentTicker.data("grab-cursor") !== undefined) ? $contentTicker.data("grab-cursor") : false,
+            $pagination                 = ($contentTicker.data("pagination") !== undefined) ? $contentTicker.data("pagination") : '.swiper-pagination',
+            $arrow_next                 = ($contentTicker.data("arrow-next") !== undefined) ? $contentTicker.data("arrow-next") : '.swiper-button-next',
+            $arrow_prev                 = ($contentTicker.data("arrow-prev") !== undefined) ? $contentTicker.data("arrow-prev") : '.swiper-button-prev',
+            mySwiper = new Swiper($contentTicker, {
+                direction:              'horizontal',
+                loop:                   $loop,
+                speed:                  $speed,
+                effect:                 $effect,
+                slidesPerView:          $items,
+                spaceBetween:           $margin,
+                grabCursor:             $grab_cursor,
+                paginationClickable:    true,
+                autoHeight:             true,
+                autoplay: {
+                    delay: $autoplay,
+                },
+                pagination: {
+                    el: $pagination,
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: $arrow_next,
+                    prevEl: $arrow_prev,
+                },
+                breakpoints: {
+                    // when window width is <= 480px
+                    480: {
+                        slidesPerView:  $items_mobile,
+                        spaceBetween:   $margin_mobile
+                    },
+                    // when window width is <= 640px
+                    768: {
+                        slidesPerView:  $items_tablet,
+                        spaceBetween:   $margin_tablet
+                    }
+                }
+            });
+    };
+
+    /* ------------------------------ */
+    /* Data Table
+    /* ------------------------------ */
+    var dataTable = function($scope, $) {
+        var $th = $scope.find('.eael-data-table').find('th');
+        var $tbody = $scope.find('.eael-data-table').find('tbody');
+
+        $tbody.find('tr').each(function(i, item) {
+            $(item).find('td').each(function(index, item){
+               $(this)
+                .prepend('<b class="th-mobile-screen">' + $th.eq(index).html() + '</b>');
+            });
+        });
+    } // end of Data Table
+
+    var CountDown = function ($scope, $) {
+        var $coundDown           = $scope.find('.eael-countdown-wrapper').eq(0),
+        $countdown_id            = ($coundDown.data("countdown-id") !== undefined) ? $coundDown.data("countdown-id") : '',
+        $expire_type             = ($coundDown.data("expire-type")  !== undefined) ? $coundDown.data("expire-type") : '',
+        $expiry_text             = ($coundDown.data("expiry-text")  !== undefined) ? $coundDown.data("expiry-text") : '',
+        $redirect_url            = ($coundDown.data("redirect-url") !== undefined) ? $coundDown.data("redirect-url") : '',
+        $template                = ($coundDown.data("template")     !== undefined) ? $coundDown.data("template") : '';
+        
+        jQuery(document).ready(function($) {
+            'use strict';
+            var countDown = $("#eael-countdown-" + $countdown_id);
+    
+            countDown.countdown({
+                end: function() {
+                    if( $expire_type == 'text'){
+                        countDown.html( '<div class="eael-countdown-finish-text">' + $expiry_text + '</div>');
+                    }
+                    else if ( $expire_type === 'url'){
+                        var editMode = $('body').find('#elementor').length;
+                        if( editMode > 0 ) {
+                            countDown.html("Your Page will be redirected to given URL (only on Frontend).");
+                        } else {
+                            window.location.href = $redirect_url;
+                        }   
+                    }
+                    else if ( $expire_type === 'template'){
+                        countDown.html( $template );
+                    } else {
+                        //do nothing!
+                    }
+                }
+            });
+        });
+
+    }
+    
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
-        elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-content-ticker.default', ContentTicker);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-countdown.default', CountDown);
     });
+
 }(jQuery));

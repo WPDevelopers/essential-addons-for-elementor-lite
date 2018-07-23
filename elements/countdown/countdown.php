@@ -29,7 +29,7 @@ class Widget_Eael_Countdown extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_countdown_settings_general',
   			[
-  				'label' => esc_html__( 'Countdown Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Timer Settings', 'essential-addons-elementor' )
   			]
   		);
 		
@@ -80,6 +80,7 @@ class Widget_Eael_Countdown extends Widget_Base {
 
 		$this->end_controls_section();
 
+
   		$this->start_controls_section(
   			'eael_section_countdown_settings_content',
   			[
@@ -96,22 +97,12 @@ class Widget_Eael_Countdown extends Widget_Base {
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
 		     		'style-1'  	=> esc_html__( 'Style 1', 'essential-addons-elementor' ),
-		     		'style-2' 	=> esc_html__( 'Style 2 (Pro)', 'essential-addons-elementor' ),
-		     		'style-3' 	=> esc_html__( 'Style 3 (Pro)', 'essential-addons-elementor' ),
+		     		'style-2' 	=> esc_html__( 'Style 2', 'essential-addons-elementor' ),
+		     		'style-3' 	=> esc_html__( 'Style 3', 'essential-addons-elementor' ),
 		     	],
 		  	]
 		);
 
-		$this->add_control(
-			'eael_section_countdown_style_pro_alert',
-			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'condition' => [
-					'eael_section_countdown_style' => ['style-2', 'style-3'],
-				]
-			]
-		);
 
 		$this->add_control(
 			'eael_countdown_days',
@@ -253,7 +244,69 @@ class Widget_Eael_Countdown extends Widget_Base {
 
 
 		$this->end_controls_section();
+		
 
+		$this->start_controls_section(
+			'countdown_on_expire_settings',
+			[
+				'label' => esc_html__( 'Expire Action' , 'essential-addons-elementor' )
+			]
+		);
+
+		$this->add_control(
+			'countdown_expire_type',
+			[
+				'label'			=> esc_html__('Expire Type', 'essential-addons-elementor'),
+				'label_block'	=> false,
+				'type'			=> Controls_Manager::SELECT,
+                'description'   => esc_html__('Choose whether if you want to set a message or a redirect link', 'essential-addons-elementor'),
+				'options'		=> [
+					'none'		=> esc_html__('None', 'essential-addons-elementor'),
+					'text'		=> esc_html__('Message', 'essential-addons-elementor'),
+					'url'		=> esc_html__('Redirection Link', 'essential-addons-elementor'),
+					'template'		=> esc_html__('Saved Templates', 'essential-addons-elementor')
+				],
+				'default'		=> 'none'
+			]
+		);
+
+		$this->add_control(
+			'countdown_expiry_text',
+			[
+				'label'			=> esc_html__('On Expiry Text', 'essential-addons-elementor'),
+				'type'			=> Controls_Manager::WYSIWYG,
+				'default'		=> esc_html__('Countdown is finished!','essential-addons-elementor'),
+				'condition'		=> [
+					'countdown_expire_type' => 'text'
+				]
+			]
+		);
+
+		$this->add_control(
+			'countdown_expiry_redirection',
+			[
+				'label'			=> esc_html__('Redirect To (URL)', 'essential-addons-elementor'),
+				'type'			=> Controls_Manager::TEXT,
+				'condition'		=> [
+					'countdown_expire_type' => 'url'
+				],
+				'default'		=> '#'
+			]
+		);
+
+		$this->add_control(
+            'countdown_expiry_templates',
+            [
+                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SELECT,
+                'options'               => eael_get_page_templates(),
+				'condition'             => [
+					'countdown_expire_type'      => 'template',
+				],
+            ]
+        );
+
+		$this->end_controls_section();
 
         $this->start_controls_section(
 			'eael_section_pro',
@@ -279,7 +332,7 @@ class Widget_Eael_Countdown extends Widget_Base {
         );
 
         $this->end_controls_section();	
-		
+        
 		$this->start_controls_section(
 			'eael_section_countdown_styles_general',
 			[
@@ -293,7 +346,7 @@ class Widget_Eael_Countdown extends Widget_Base {
 			[
 				'label' => esc_html__( 'Box Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#262625',
+				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-countdown-item > div' => 'background: {{VALUE}};',
 				],
@@ -318,6 +371,9 @@ class Widget_Eael_Countdown extends Widget_Base {
 					'{{WRAPPER}} .eael-countdown-item > div' => 'margin-right:{{SIZE}}px; margin-left:{{SIZE}}px;',
 					'{{WRAPPER}} .eael-countdown-container' => 'margin-right: -{{SIZE}}px; margin-left: -{{SIZE}}px;',
 				],
+				'condition' => [
+					'eael_section_countdown_style' => ['style-1', 'style-3']
+				]
 			]
 		);
 		
@@ -372,7 +428,15 @@ class Widget_Eael_Countdown extends Widget_Base {
 				],
 			]
 		);
-		
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'eael_countdown_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-countdown-item > div',
+			]
+		);
+
 		$this->end_controls_section();
 		
 		
@@ -426,7 +490,7 @@ class Widget_Eael_Countdown extends Widget_Base {
 			[
 				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#ffffff',
+				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-countdown-label' => 'color: {{VALUE}};',
 				],
@@ -455,15 +519,310 @@ class Widget_Eael_Countdown extends Widget_Base {
 			]
 		);
 
-
 		$this->add_control(
-			'eael_countdown_individual_heading',
+			'eael_countdown_days_label_heading',
 			[
-				'label' => __( 'Get Pro version to avail this feature.', 'essential-addons-elementor' ),
+				'label' => __( 'Days', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
 
+		$this->add_control(
+			'eael_countdown_days_background_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-days' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_days_digit_color',
+			[
+				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-days .eael-countdown-digits' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_days_label_color',
+			[
+				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-days .eael-countdown-label' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_days_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-days' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_hours_label_heading',
+			[
+				'label' => __( 'Hours', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_hours_background_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-hours' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_hours_digit_color',
+			[
+				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-hours .eael-countdown-digits' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_hours_label_color',
+			[
+				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-hours .eael-countdown-label' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_hours_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-hours' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_minutes_label_heading',
+			[
+				'label' => __( 'Minutes', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_minutes_background_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-minutes' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_minutes_digit_color',
+			[
+				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-minutes .eael-countdown-digits' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_minutes_label_color',
+			[
+				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-minutes .eael-countdown-label' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_minutes_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-minutes' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_seconds_label_heading',
+			[
+				'label' => __( 'Seconds', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_seconds_background_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-seconds' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_seconds_digit_color',
+			[
+				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-seconds .eael-countdown-digits' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_seconds_label_color',
+			[
+				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-seconds .eael-countdown-label' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_seconds_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-seconds' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+
+		$this->end_controls_section();
+
+		
+		$this->start_controls_section(
+			'eael_section_countdown_expire_style',
+			[
+				'label' => esc_html__( 'Expire Message', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_expire_message_color',
+			[
+				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-finish-text' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'countdown_expire_type' => 'text',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+             'name' => 'eael_countdown_expire_message_typography',
+				'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+				'selector' => '{{WRAPPER}} .eael-countdown-finish-text',
+				'condition' => [
+					'countdown_expire_type' => 'text',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_countdown_expire_message_alignment',
+			[
+				'label' => esc_html__( 'Text Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+				],
+				'default' => 'left',
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-finish-text' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_countdown_expire_message_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-finish-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'countdown_expire_type' => 'text',
+				],
+			]
+		);
 
 		$this->end_controls_section();
 		
@@ -477,14 +836,43 @@ class Widget_Eael_Countdown extends Widget_Base {
 		
 		$get_due_date =  esc_attr($settings['eael_countdown_due_time']);
 		$due_date = date("M d Y G:i:s", strtotime($get_due_date));
-		
-		if( 'style-1' === $settings['eael_section_countdown_style'] || 'style-2' === $settings['eael_section_countdown_style'] || 'style-3' === $settings['eael_section_countdown_style'] ) {
+		if( 'style-1' === $settings['eael_section_countdown_style'] ) {
 			$eael_countdown_style = 'style-1';
+		}elseif( 'style-2' === $settings['eael_section_countdown_style'] ) {
+			$eael_countdown_style = 'style-2';
+		}elseif( 'style-3' === $settings['eael_section_countdown_style'] ) {
+			$eael_countdown_style = 'style-3';
 		}
+
+		if( 'template' == $settings['countdown_expire_type'] ) {
+			if ( !empty( $settings['countdown_expiry_templates'] ) ) {
+				$eael_template_id = $settings['countdown_expiry_templates'];
+				$eael_frontend = new Frontend;
+				$template =  $eael_frontend->get_builder_content( $eael_template_id, true );
+			}
+		}
+		
+		$this->add_render_attribute( 'eael-countdown', 'class', 'eael-countdown-wrapper' );
+		$this->add_render_attribute( 'eael-countdown', 'data-countdown-id', esc_attr($this->get_id()) );
+		$this->add_render_attribute( 'eael-countdown', 'data-expire-type', $settings['countdown_expire_type'] );
+
+        if ( $settings['countdown_expire_type'] == 'text' ) {
+           	$this->add_render_attribute( 'eael-countdown', 'data-expiry-text', $settings['countdown_expiry_text'] );
+        }
+        elseif ( $settings['countdown_expire_type'] == 'url' ) {
+			$this->add_render_attribute( 'eael-countdown', 'data-redirect-url', $settings['countdown_expiry_redirection'] );
+        }
+        elseif ( $settings['countdown_expire_type'] == 'template' ) {
+			$this->add_render_attribute( 'eael-countdown', 'data-template', esc_attr($template) );
+        }
+        else {
+           //do nothing
+        }
+
 	?>
 
-	<div class="eael-countdown-wrapper">
-		<div class="eael-countdown-container <?php echo esc_attr($settings['eael_countdown_label_view'] ); ?> <?php echo esc_attr($settings['eael_countdown_separator'] ); ?>">		
+	<div <?php echo $this->get_render_attribute_string( 'eael-countdown' ); ?>>
+		<div class="eael-countdown-container <?php echo esc_attr($settings['eael_countdown_label_view'] ); ?> <?php echo esc_attr($settings['eael_countdown_separator'] ); ?>">
 			<ul id="eael-countdown-<?php echo esc_attr($this->get_id()); ?>" class="eael-countdown-items <?php echo esc_attr( $eael_countdown_style ); ?>" data-date="<?php echo esc_attr($due_date) ; ?>">
 			    <?php if ( ! empty( $settings['eael_countdown_days'] ) ) : ?><li class="eael-countdown-item"><div class="eael-countdown-days"><span data-days class="eael-countdown-digits">00</span><?php if ( ! empty( $settings['eael_countdown_days_label'] ) ) : ?><span class="eael-countdown-label"><?php echo esc_attr($settings['eael_countdown_days_label'] ); ?></span><?php endif; ?></div></li><?php endif; ?>
 			    <?php if ( ! empty( $settings['eael_countdown_hours'] ) ) : ?><li class="eael-countdown-item"><div class="eael-countdown-hours"><span data-hours class="eael-countdown-digits">00</span><?php if ( ! empty( $settings['eael_countdown_hours_label'] ) ) : ?><span class="eael-countdown-label"><?php echo esc_attr($settings['eael_countdown_hours_label'] ); ?></span><?php endif; ?></div></li><?php endif; ?>
@@ -494,14 +882,6 @@ class Widget_Eael_Countdown extends Widget_Base {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-
-
-	<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		'use strict';
-		$("#eael-countdown-<?php echo esc_attr($this->get_id()); ?>").countdown();
-	});
-	</script>
 	
 	<?php
 	
