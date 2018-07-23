@@ -2,8 +2,9 @@
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.6
-Stable tag: 2.7.2
+Tested up to: 4.9.7
+Requires PHP: 5.6
+Stable tag: 2.7.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -137,6 +138,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.3 =
+- Countdown element improved and Expire action added
+- Post Grid and Post Timeline query optimized and load more improved
+- Post Grid Masonry improved 
+- Info Box layout improved and more options added
+- Content Ticker improved
+- Data Table responsiveness improved
+- Image Accordion improved
+- Fancy Text line breaking issue fixed
+- All form elements improved and optimized
+- Few minor bugfix and improvements
+
 
 = 2.7.2 =
 
