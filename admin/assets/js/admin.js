@@ -25,7 +25,6 @@
 	} );
 
 	// Save Button reacting on any changes
-	var FBbtnURL = $('#eaelFBbtn').attr('href');
 	var headerSaveBtn = $( '.eael-header-bar .eael-btn' );
 	var footerSaveBtn = $( '.eael-save-btn-wrap .eael-btn' );
 	$('.eael-checkbox input[type="checkbox"]').on( 'click', function( e ) {
@@ -35,10 +34,9 @@
 		footerSaveBtn.removeAttr('disabled').css('cursor', 'pointer');
 	} );
 
-	var path = window.location.href.split('&');
 	// Saving Data With Ajax Request
-	$( '.js-eael-settings-save' ).on( 'click', function(e) {
-		e.preventDefault();
+	$( '.js-eael-settings-save' ).on( 'click', function(event) {
+		event.preventDefault();
 
 		var _this = $(this);
 
@@ -64,7 +62,6 @@
 						headerSaveBtn.removeClass( 'save-now' );
 						footerSaveBtn.removeClass( 'save-now' );
 					}, 2000);
-					window.location.replace( path[0] );
 				},
 				error: function() {
 					swal(
@@ -79,14 +76,5 @@
 		}
 	} );
 
-	if( path[1] ) {
-		var acc = path[1].split('=');
-		if( acc[0] == 'access_token' ) {
-			headerSaveBtn.addClass( 'save-now' );
-			footerSaveBtn.addClass( 'save-now' );
-			headerSaveBtn.removeAttr('disabled').css('cursor', 'pointer');
-			footerSaveBtn.removeAttr('disabled').css('cursor', 'pointer');
-		}
-	}
 
 } )( jQuery );
