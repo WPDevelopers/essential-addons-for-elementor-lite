@@ -393,8 +393,6 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 		
 		
       $settings = $this->get_settings();
-      $creative_button_image = $this->get_settings( 'creative_button_image' );
-	  $button_padding = $this->get_settings( 'eael_creative_button_padding' ); 
 
 	?>
 
