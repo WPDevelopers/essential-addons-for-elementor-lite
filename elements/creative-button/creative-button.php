@@ -240,6 +240,13 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 				'label' => esc_html__( 'Button Padding', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} a#eael-creative-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--winona::after' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--winona > span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--tamaya::before' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--rayen > span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 		
@@ -255,6 +262,11 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} a#eael-creative-button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--tamaya::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--tamaya::after' => 'color: {{VALUE}};',
+				],
 			]
 		);
 		
@@ -266,6 +278,14 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#333333',
+				'selectors' => [
+					'{{WRAPPER}} a#eael-creative-button' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--ujarak:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--wayra:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--tamaya::before' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--tamaya::after' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--rayen:hover' => 'background-color: {{VALUE}};',
+				],
 			]
 		);
 		
@@ -307,6 +327,10 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} a#eael-creative-button:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--winona::after' => 'color: {{VALUE}};',
+				],
 			]
 		);
 
@@ -316,6 +340,13 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#f54',
+				'selectors' => [
+					'{{WRAPPER}} a#eael-creative-button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--ujarak::before' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--wayra:hover::before' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--tamaya:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a#eael-creative-button.eael-creative-button--rayen::before' => 'background-color: {{VALUE}};',
+				],
 			]
 		);
 
@@ -368,7 +399,7 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 	?>
 
 
-<a id="eael-creative-button-<?php echo esc_attr($this->get_id()); ?>" class="eael-creative-button <?php echo esc_attr($settings['creative_button_effect'] ); ?>"
+<a id="eael-creative-button" class="eael-creative-button <?php echo esc_attr($settings['creative_button_effect'] ); ?>"
     href="<?php echo esc_attr($settings['creative_button_link_url'] ); ?>" target="<?php echo esc_attr($settings['creative_button_link_target'] ); ?>" data-text="<?php echo esc_attr($settings['creative_button_secondary_text'] ); ?>">
 	<span>
 		<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
@@ -382,85 +413,6 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 		<?php endif; ?>
 	</span>
 </a>
-
-<style type="text/css">
-
-	a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?> {
-	    color: <?php echo esc_attr($settings['eael_creative_button_text_color'] ); ?>;
-	    padding: <?php echo $button_padding['top'] . $button_padding['unit'] .' '.  $button_padding['right'] . $button_padding['unit'] .' '.  $button_padding['bottom'] . $button_padding['unit'] .' '.  $button_padding['left'] . $button_padding['unit'] ?>;
-	    background-color: <?php echo esc_attr($settings['eael_creative_button_background_color'] ); ?>;
-	}
-
-	a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>:hover {
-	    color: <?php echo esc_attr($settings['eael_creative_button_hover_text_color'] ); ?>;
-	    background-color: <?php echo esc_attr($settings['eael_creative_button_hover_background_color'] ); ?>;
-	}
-
-
-<?php if ( $settings['creative_button_effect'] == 'eael-creative-button--winona' ): ?>
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--winona::after, 
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--winona > span {
-        padding: <?php echo $button_padding['top'] . $button_padding['unit'] .' '.  $button_padding['right'] . $button_padding['unit'] .' '.  $button_padding['bottom'] . $button_padding['unit'] .' '.  $button_padding['left'] . $button_padding['unit'] ?>;
-    }
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--winona::after {
-        color: <?php echo esc_attr($settings['eael_creative_button_hover_text_color'] ); ?>;
-    }    
-
-<?php elseif ( $settings['creative_button_effect'] == 'eael-creative-button--ujarak' ): ?>
-
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--ujarak:hover {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_background_color'] ); ?>;
-    } 
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--ujarak::before {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_hover_background_color'] ); ?>;
-    }   
-
-<?php elseif ( $settings['creative_button_effect'] == 'eael-creative-button--wayra' ): ?>
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--wayra:hover {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_background_color'] ); ?>;
-    }  
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--wayra:hover::before {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_hover_background_color'] ); ?>;
-    }     
-
-<?php elseif ( $settings['creative_button_effect'] == 'eael-creative-button--tamaya' ): ?>
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--tamaya::before, 
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--tamaya::after {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_background_color'] ); ?>;
-        color: <?php echo esc_attr($settings['eael_creative_button_text_color'] ); ?>;
-    }
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--tamaya:hover {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_hover_background_color'] ); ?>;
-    }
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--tamaya::before {
-        padding: <?php echo $button_padding['top'] . $button_padding['unit'] .' '.  $button_padding['right'] . $button_padding['unit'] .' '.  $button_padding['bottom'] . $button_padding['unit'] .' '.  $button_padding['left'] . $button_padding['unit'] ?>;
-    }
-
-<?php elseif ( $settings['creative_button_effect'] == 'eael-creative-button--rayen' ): ?>
-
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--rayen:hover {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_background_color'] ); ?>;
-    }
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--rayen::before {
-        background-color: <?php echo esc_attr($settings['eael_creative_button_hover_background_color'] ); ?>;
-    }
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--rayen::before, 
-    a#eael-creative-button-<?php echo esc_attr($this->get_id()); ?>.eael-creative-button--rayen > span {
-        padding: <?php echo $button_padding['top'] . $button_padding['unit'] .' '.  $button_padding['right'] . $button_padding['unit'] .' '.  $button_padding['bottom'] . $button_padding['unit'] .' '.  $button_padding['left'] . $button_padding['unit'] ?>;
-    }
-
-<?php else: ?>
-
-
-<?php endif; ?>
-
-</style>
 
 
 	<?php
