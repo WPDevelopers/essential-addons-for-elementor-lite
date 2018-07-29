@@ -62,13 +62,13 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 
 
 		$this->add_control(
-			'creative_button_link',
+			'creative_button_link_url',
 			[
 				'label' => esc_html__( 'Link URL', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::URL,
 				'label_block' => true,
 				'default' => [
-        			'url' => 'http://',
+        			'url' => '#',
         			'is_external' => '',
      			],
      			'show_external' => true,
@@ -404,14 +404,14 @@ class Widget_Eael_Creative_Button extends Widget_Base {
 		
 		
 	  $settings = $this->get_settings();
-	  $target = $settings['creative_button_link']['is_external'] ? 'target="_blank"' : '';
-	  $nofollow = $settings['creative_button_link']['nofollow'] ? 'rel="nofollow"' : '';
+	  $target = $settings['creative_button_link_url']['is_external'] ? 'target="_blank"' : '';
+	  $nofollow = $settings['creative_button_link_url']['nofollow'] ? 'rel="nofollow"' : '';
 
 	?>
 
 	<div class="eael-creative-button-wrapper">	
 		<a class="eael-creative-button <?php echo esc_attr($settings['creative_button_effect'] ); ?>"
-			href="<?php echo esc_attr($settings['creative_button_link']['url'] ); ?>" <?php echo $target; ?> <?php $nofollow; ?> data-text="<?php echo esc_attr($settings['creative_button_secondary_text'] ); ?>">
+			href="<?php echo esc_attr($settings['creative_button_link_url']['url'] ); ?>" <?php echo $target; ?> <?php $nofollow; ?> data-text="<?php echo esc_attr($settings['creative_button_secondary_text'] ); ?>">
 			<span>
 				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
 					<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
