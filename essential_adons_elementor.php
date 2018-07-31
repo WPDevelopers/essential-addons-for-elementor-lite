@@ -401,7 +401,7 @@ function eael_review_notice_message(){
     
     <div class="eael-review-notice">
         <div class="eael-review-thumbnail">
-            <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.png', __FILE__ ) ?>" alt="">
+            <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
         </div>
         <div class="eael-review-text">
             <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
