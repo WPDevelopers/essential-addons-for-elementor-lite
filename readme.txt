@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 4.9.7
 Requires PHP: 5.6
-Stable tag: 2.7.3
+Stable tag: 2.7.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -138,6 +138,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.4 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Button elements improved
+- Fancy Text element improved
+- Image Accordion improved
+- Few minor bugfix and improvements
 
 = 2.7.3 =
 - Countdown element improved and Expire action added
