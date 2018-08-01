@@ -287,8 +287,8 @@
 
             $btn_text       = $_this.data('btn_text'),
 
-            $categories     = $_this.data('categories'),
-            $tags           = $_this.data('tags'),
+            $tax_query     = $_this.data('tax_query'),
+            $post__in     = $_this.data('post__in'),
             $exclude_posts  = $_this.data('exclude_posts');
 
         var options = {
@@ -303,7 +303,7 @@
             perPage: $posts_per_page,
             postOrder: $post_order,
             orderBy: $post_orderby,
-            offset: $post_offset > 0 ? $post_offset + $posts_per_page : 0,
+            offset: $post_offset,
 
             showImage: $show_images,
             imageSize: $image_size,
@@ -311,8 +311,8 @@
             showExcerpt: $show_excerpt,
             excerptLength: parseInt( $excerpt_length, 10 ),
             btnText: $btn_text,
-            categories: $categories,
-            eael_post_tags: $tags,
+            tax_query: $tax_query,
+            post__in: $post__in,
             exclude_posts: $exclude_posts,
         }
 
