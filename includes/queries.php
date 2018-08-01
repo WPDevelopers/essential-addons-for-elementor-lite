@@ -1,21 +1,23 @@
 <?php
 
-
 /**
  * Get All POst Types
  * @return array
  */
 function eael_get_post_types(){
 
-    $eael_cpts = get_post_types( array( 'public'   => true, 'show_in_nav_menus' => true ) );
-    $eael_exclude_cpts = array( 'elementor_library', 'attachment', 'product' );
+    $eael_cpts = get_post_types( array( 'public'   => true, 'show_in_nav_menus' => true ), 'object' );
+    $eael_exclude_cpts = array( 'elementor_library', 'attachment' );
 
     foreach ( $eael_exclude_cpts as $exclude_cpt ) {
         unset($eael_cpts[$exclude_cpt]);
     }
     $post_types = array_merge($eael_cpts);
+    foreach( $post_types as $type ) {
+        $types[ $type->name ] = $type->label;
+    }
 
-    return $post_types;
+    return $types;
 }
 
 /**
