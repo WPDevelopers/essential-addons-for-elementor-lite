@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 class Widget_Eael_Content_Ticker extends Widget_Base {
 
+	use \Elementor\ElementsCommonFunctions;
+
 	public function get_name() {
 		return 'eael-content-ticker';
 	}
@@ -70,140 +72,10 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
-		 * Content Ticker Dynamic Content Settings
+		 * Query Controls
+		 * @source includes/elementor-helper.php
 		 */
-		$this->start_controls_section(
-			'eael_section_ticker_dynamic_content-settings',
-			[
-				'label' => __( 'Dynamic Content Settings', 'essential-addons-elementor' ),
-				'condition' => [
-					'eael_ticker_type' => ['dynamic', 'custom']
-				]
-			]
-		);
-
-
-		$this->add_control(
-			'post_type',
-			[
-				'label' => __( 'Post Type', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => eael_get_post_types(),
-				'default' => 'post',
-			]
-		);
-
-		$this->add_control(
-			'category',
-			[
-				'label' => __( 'Categories', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT2,
-				'label_block' => true,
-				'multiple' => true,
-				'options' => eael_post_type_categories(),
-				'condition' => [
-					'post_type' => 'post'
-				]
-			]
-		);
-
-		$this->add_control(
-            'eael_post_authors',
-            [
-                'label'             => __( 'Authors', 'essential-addons-elementor' ),
-                'type'              => Controls_Manager::SELECT2,
-				'label_block'       => true,
-				'multiple'          => true,
-				'options'           => eael_get_authors(),
-            ]
-        );
-
-        $this->add_control(
-            'eael_post_tags',
-            [
-                'label'             => __( 'Tags', 'essential-addons-elementor' ),
-                'type'              => Controls_Manager::SELECT2,
-				'label_block'       => true,
-				'multiple'          => true,
-				'options'           => eael_get_tags(),
-				'condition' => [
-					'post_type' => 'post'
-				]
-            ]
-        );
-
-        $this->add_control(
-            'post__not_in',
-            [
-                'label'             => __( 'Exclude Posts', 'essential-addons-elementor' ),
-                'type'              => Controls_Manager::SELECT2,
-				'label_block'       => true,
-				'multiple'          => true,
-				'options'           => eael_get_posts(),
-				'condition' => [
-					'post_type' => 'post'
-				]
-            ]
-		);
-		
-        $this->add_control(
-            'page__not_in',
-            [
-                'label'             => __( 'Exclude Pages', 'essential-addons-elementor' ),
-                'type'              => Controls_Manager::SELECT2,
-				'label_block'       => true,
-				'multiple'          => true,
-				'options'           => eael_get_pages(),
-				'condition' => [
-					'post_type' => 'page'
-				]
-            ]
-        );
-
-		$this->add_control(
-			'posts_per_page',
-			[
-				'label' => __( 'Number of Posts', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::NUMBER,
-				'default' => '4'
-			]
-		);
-
-
-		$this->add_control(
-			'offset',
-			[
-					'label' => __( 'Post Offset', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::NUMBER,
-					'default' => '0'
-			]
-		);
-
-		$this->add_control(
-			'orderby',
-			[
-					'label' => __( 'Order By', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::SELECT,
-					'options' => eael_get_post_orderby_options(),
-					'default' => 'date',
-
-			]
-		);
-
-		$this->add_control(
-			'order',
-			[
-				'label' => __( 'Order', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
-					'asc' => 'Ascending',
-					'desc' => 'Descending'
-				],
-				'default' => 'desc',
-			]
-		);
-
-		$this->end_controls_section();
+		$this->query_controls();
 
 
 		/**
@@ -779,17 +651,19 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 
 
 	protected function render( ) {
-		
 		$settings = $this->get_settings();
+
 		/**
 		 * Setup the post arguments.
 		 */
 		$settings['post_style'] = 'ticker';
-		$post_args = eael_get_post_settings( $settings, true );
+		$post_args = eael_get_post_settings( $settings );
+		$query_args = EAE_Helper::get_query_args( 'eaeposts', $this->get_settings() );
+		$query_args = array_merge( $query_args, $post_args );
 		/**
 		 * Get posts from database.
 		 */
-		$posts = eael_load_more_ajax( $post_args );
+		$posts = eael_load_more_ajax( $query_args );
 		/**
 		 * Render the content
 		 */
