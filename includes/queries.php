@@ -1,21 +1,45 @@
 <?php
 
-
 /**
  * Get All POst Types
  * @return array
  */
 function eael_get_post_types(){
 
-    $eael_cpts = get_post_types( array( 'public'   => true, 'show_in_nav_menus' => true ) );
-    $eael_exclude_cpts = array( 'elementor_library', 'attachment', 'product' );
+    $eael_cpts = get_post_types( array( 'public'   => true, 'show_in_nav_menus' => true ), 'object' );
+    $eael_exclude_cpts = array( 'elementor_library', 'attachment' );
 
     foreach ( $eael_exclude_cpts as $exclude_cpt ) {
         unset($eael_cpts[$exclude_cpt]);
     }
     $post_types = array_merge($eael_cpts);
+    foreach( $post_types as $type ) {
+        $types[ $type->name ] = $type->label;
+    }
 
-    return $post_types;
+    return $types;
+}
+
+/**
+ * Get all types of post.
+ * @return array
+ */
+function eael_get_all_types_post(){
+    $posts_args = array(
+        'post_type' => 'any',
+        'post_style' => 'all_types',
+        'post_status' => 'publish',
+        'posts_per_page' => '-1',
+    );
+    $posts = eael_load_more_ajax( $posts_args );
+
+    $post_list = [];
+
+    foreach( $posts as $post ) {
+        $post_list[ $post->ID ] = $post->post_title;
+    }
+
+    return $post_list;
 }
 /**
  * Post Settings Parameter
@@ -23,56 +47,13 @@ function eael_get_post_types(){
  * @return array
  */
 function eael_get_post_settings( $settings ){
-    $tags = $categories = [];
     foreach( $settings as $key => $value ) {
         if( in_array( $key, posts_args() ) ) {
-            switch( $key ){
-                case 'eael_post_tags' : 
-                    if( ! empty( $settings['eael_post_tags'] ) ) {
-                        $tags = [[
-                            'taxonomy' => 'post_tag',
-                            'field' => 'term_id',
-                            'terms' => $settings['eael_post_tags'],
-                        ]];
-                    }
-                    break;
-                case 'category' : 
-                    if( ! empty( $settings['category'] ) ) {
-                        $categories = [[
-                            'taxonomy' => 'category',
-                            'field' => 'term_id',
-                            'terms' => $settings['category'],
-                        ]];
-                    }
-                    break;
-                case 'eael_post_authors' : 
-                    if( isset( $settings['eael_post_authors'] ) && ! empty( $settings['eael_post_authors'] ) && is_array( $settings['eael_post_authors'] ) ) {
-                        $post_args['author'] = implode( ",", $settings['eael_post_authors'] );
-                    }
-                    break;
-                case 'page__not_in' : 
-                    if( isset( $settings['page__not_in'] ) && ! empty( $settings['page__not_in'] ) && is_array( $settings['page__not_in'] ) ) {
-                        $post_args['post__not_in'] = $value;
-                    }
-                    break;
-                default : 
-                    if( isset( $settings[ $key ] ) ) {
-                        $post_args[ $key ] = $value;
-                    }
-                    break;
-            }
+            $post_args[ $key ] = $value;
         }
     }
 
-    if( isset( $post_args['post_type'] ) && $post_args['post_type'] == 'post' ) {
-        $relation = ! empty( $categories ) && ! empty( $tags ) ? [ 'relation' => 'OR' ] : [];
-        $post_args['tax_query'] = array_merge($relation, $tags, $categories);
-    }
-    
-    $post_args['posts_per_page'] = $post_args['posts_per_page'] ? $post_args['posts_per_page'] : 4;
     $post_args['post_style'] = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
-
-    if( isset( $post_args['offset'] ) ) $post_args['offset'] = intval( $post_args['offset'] );
     $post_args['post_status'] = 'publish';
 
     return $post_args;
@@ -463,44 +444,64 @@ if ( !function_exists('eael_get_pages') ) {
     }
 }
 
+
 /**
- * Load More
+ * This function is responsible for get the post data. 
+ * It will return HTML markup with AJAX call and with normal call.
+ *
+ * @return string of an html markup with AJAX call.
+ * @return array of content and found posts count without AJAX call.
  */
+if( ! function_exists( 'eael_load_more_ajax' ) ) :
+    function eael_load_more_ajax(){
 
-function eael_load_more_ajax(){
-    
-    if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
-        $post_args = eael_get_post_settings( $_POST );
-    } else {
-        $args = func_get_args();
-        $post_args = $args[0];
-    }
-    
-    $posts = new WP_Query( $post_args );
+        if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
+            $post_args = eael_get_post_settings( $_POST );
+            $post_args = array_merge( \Elementor\EAE_Helper::get_query_args( 'eaeposts', $_POST ), $post_args );
 
-    $return = array();
-    $return['count'] = $posts->found_posts;
+            if( isset( $_POST['tax_query'] ) && count( $_POST['tax_query'] ) > 1 ) {
+                $post_args['tax_query']['relation'] = 'OR';
+            }
+        } else {
+            $args = func_get_args();
+            $post_args = $args[0];
+        }
 
-    ob_start();
-
-    while( $posts->have_posts() ) : $posts->the_post();
+        
+        $posts = new WP_Query( $post_args );
         /**
-         * All content html here.
+         * For returning all types of post as an array
+         * @return array;
          */
-        include ESSENTIAL_ADDONS_EL_PATH . 'includes/templates/content.php';
-    endwhile;
+        if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'all_types' ) {
+            return $posts->posts;
+        }
 
-    wp_reset_postdata();
-    wp_reset_query();
-    $return['content'] = ob_get_clean();
-    if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
-        echo $return['content'];
-    } else {
-        return $return;
+        $return = array();
+        $return['count'] = $posts->found_posts;
+
+        ob_start();
+
+        while( $posts->have_posts() ) : $posts->the_post();
+            $isPrinted = false;
+            /**
+             * All content html here.
+             */
+            include ESSENTIAL_ADDONS_EL_PATH . 'includes/templates/content.php';
+        endwhile;
+        $return['content'] = ob_get_clean();
+        wp_reset_postdata();
+        wp_reset_query();
+        if( isset( $_POST['action'] ) && $_POST['action'] == 'load_more' ) {
+            echo $return['content'];
+            die();
+        } else {
+            return $return;
+        }
     }
-}
-add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
-add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+    add_action( 'wp_ajax_nopriv_load_more', 'eael_load_more_ajax' );
+    add_action( 'wp_ajax_load_more', 'eael_load_more_ajax' );
+endif;
 
 /**
  * For All Settings Key Need To Display
@@ -512,6 +513,8 @@ function posts_args(){
         // for content-ticker
         'eael_ticker_type',
         'eael_ticker_custom_contents',
+
+        'eael_post_grid_columns',
         
         // common
         'meta_position',
@@ -523,16 +526,18 @@ function posts_args(){
         'eael_excerpt_length',
         'eael_show_read_more',
         'eael_read_more_text',
+        'show_load_more',
+        'show_load_more_text',
 
         // query_args
         'post_type',
+        'post__in',
         'posts_per_page',
         'post_style',
-        'eael_post_tags',
-        'category',
+        'tax_query',
         'post__not_in',
-        'page__not_in',
         'eael_post_authors',
+        'eaeposts_authors',
         'offset',
         'orderby',
         'order',
