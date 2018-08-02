@@ -323,10 +323,10 @@ function eael_admin_notice() {
     global $current_user ;
     $user_id = $current_user->ID;
     /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice272') ) {
+    if ( ! get_user_meta($user_id, 'eael_ignore_notice275') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 36px;">';
       echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-heart.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> crossed <strong>40,000+</strong> active installs. Use the coupon code <strong>40K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Grab the Deal</a>
+      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>50,000+</strong> websites. Use the coupon code <strong>CELEBRATE50K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Grab the Deal</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> Dismiss</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
@@ -343,7 +343,7 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice272', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice275', 'true', true);
   }
 }
 add_action('admin_init', 'eael_nag_ignore');
