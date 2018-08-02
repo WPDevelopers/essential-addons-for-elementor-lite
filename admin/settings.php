@@ -98,9 +98,8 @@ class Eael_Admin_Settings {
 		wp_enqueue_style( 'essential_addons_elementor-notice-css', plugins_url( '/', __FILE__ ).'assets/css/eael-notice.css' );
 		if( isset( $_GET['page'] ) && $_GET['page'] == 'eael-settings' ) {
 			wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
-			wp_enqueue_style( 'font-awesome-css', plugins_url( '/', __FILE__ ).'assets/vendor/font-awesome/css/font-awesome.min.css' );
 			wp_enqueue_style( 'essential_addons_elementor-sweetalert2-css', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/css/sweetalert2.min.css' );
-			wp_enqueue_script( 'essential_addons_elementor-admin-js', plugins_url( '/', __FILE__ ).'assets/js/admin.js', array( 'jquery', 'jquery-ui-tabs' ), '1.0', true );
+			wp_enqueue_script( 'essential_addons_elementor-admin-js', plugins_url( '/', __FILE__ ).'assets/js/admin.js', array( 'jquery'), '1.0', true );
 			wp_enqueue_script( 'essential_addons_core-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/core.js', array( 'jquery' ), '1.0', true );
 			wp_enqueue_script( 'essential_addons_sweetalert2-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'essential_addons_core-js' ), '1.0', true );
 		}
@@ -167,9 +166,9 @@ class Eael_Admin_Settings {
 				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul class="eael-tabs">
-				      	<li><a href="#general" class="active"><i class="fa fa-cogs"></i> General</a></li>
-				      	<li><a href="#elements"><i class="fa fa-cubes"></i> Elements</a></li>
-						<li><a href="#go-pro"><i class="fa fa-bolt"></i> Go Premium</a></li>
+				      	<li><a href="#general" class="active"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-settings.svg'; ?>"><span>General</span></a></li>
+				      	<li><a href="#elements"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-modules.svg'; ?>"><span>Elements</span></a></li>
+						<li><a href="#go-pro"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-upgrade.svg'; ?>"><span>Go Premium</span></a></li>
 			    	</ul>
 			    	<div id="general" class="eael-settings-tab active">
 						<div class="row eael-admin-general-wrapper">
