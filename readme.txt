@@ -1,10 +1,10 @@
 === Elementor Essential Addons ===
-Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
+Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 4.9.7
 Requires PHP: 5.6
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -136,6 +136,15 @@ Your existing elements/content will work with premium version. So you won't lose
 == Screenshots ==
 
 
+
+== Changelog ==
+
+= 2.7.5 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Post elements improved and optimized
+- Info Box element improved
+- Flip Box element improved
+- Few minor bugfix and improvements
 
 == Changelog ==
 
@@ -322,9 +331,9 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.2.2 =
+= 2.7.5 =
 
-- Ninja Forms element added
-- Load more functionality added to Post elements (Post Grid & Post Timeline)
-- Few presets added for Team Members, Countdown, Fancy Text
-- Few minor improvements
+- Post elements improved and optimized
+- Info Box element improved
+- Flip Box element improved
+- Few minor bugfix and improvements
