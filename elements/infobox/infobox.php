@@ -21,11 +21,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
 
-	public function get_unique_selector() {
-		return '.elementor-element-' . $this->get_id() . ' > .elementor-widget-container > .eael-infobox';
-	}
-
-
 	protected function _register_controls() {
 
   		/**
