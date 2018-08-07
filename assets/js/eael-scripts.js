@@ -375,15 +375,31 @@
     /* Data Table
     /* ------------------------------ */
     var dataTable = function($scope, $) {
-        var $th = $scope.find('.eael-data-table').find('th');
-        var $tbody = $scope.find('.eael-data-table').find('tbody');
+        var $_this = $scope.find('.eael-data-table-wrap'),
+            $enable_table = $_this.data('table_enabled'),
+            $id = $_this.data('table_id');
+        
+        if( true == $enable_table ) $("#eael-data-table-"+$id).tablesorter();
+        if( $enable_table != true ) {
+            $('table#eael-data-table-'+$id+' .sorting').addClass('sorting-none');
+            $('table#eael-data-table-'+$id+' .sorting_desc').addClass('sorting-none');
+            $('table#eael-data-table-'+$id+' .sorting_asc').addClass('sorting-none');
+        }
 
-        $tbody.find('tr').each(function(i, item) {
-            $(item).find('td').each(function(index, item){
-               $(this)
-                .prepend('<b class="th-mobile-screen">' + $th.eq(index).html() + '</b>');
+        var responsive = $_this.data('custom_responsive');
+        if( true == responsive ) {
+            var $th = $scope.find('.eael-data-table').find('th');
+            var $tbody = $scope.find('.eael-data-table').find('tbody');
+
+            $tbody.find('tr').each(function(i, item) {
+                $(item).find('td .td-content-wrapper').each(function(index, item){
+                $(this)
+                    .prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + '</div>');
+                });
             });
-        });
+        }
+
+
     } // end of Data Table
 
     var FancyText = function ($scope, $) { 
