@@ -26,9 +26,9 @@ function eael_get_post_types(){
  */
 function eael_get_all_types_post(){
     $posts_args = array(
-        'post_type' => 'any',
-        'post_style' => 'all_types',
-        'post_status' => 'publish',
+        'post_type'      => 'any',
+        'post_style'     => 'all_types',
+        'post_status'    => 'publish',
         'posts_per_page' => '-1',
     );
     $posts = eael_load_more_ajax( $posts_args );
@@ -53,7 +53,7 @@ function eael_get_post_settings( $settings ){
         }
     }
 
-    $post_args['post_style'] = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
+    $post_args['post_style']  = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
     $post_args['post_status'] = 'publish';
 
     return $post_args;
@@ -104,15 +104,15 @@ function eael_get_thumbnail_sizes(){
  */
 function eael_get_post_orderby_options(){
     $orderby = array(
-        'ID' => 'Post ID',
-        'author' => 'Post Author',
-        'title' => 'Title',
-        'date' => 'Date',
-        'modified' => 'Last Modified Date',
-        'parent' => 'Parent Id',
-        'rand' => 'Random',
+        'ID'            => 'Post ID',
+        'author'        => 'Post Author',
+        'title'         => 'Title',
+        'date'          => 'Date',
+        'modified'      => 'Last Modified Date',
+        'parent'        => 'Parent Id',
+        'rand'          => 'Random',
         'comment_count' => 'Comment Count',
-        'menu_order' => 'Menu Order',
+        'menu_order'    => 'Menu Order',
     );
 
     return $orderby;
@@ -124,7 +124,7 @@ function eael_get_post_orderby_options(){
  */
 function eael_post_type_categories(){
     $terms = get_terms( array(
-        'taxonomy' => 'category',
+        'taxonomy'   => 'category',
         'hide_empty' => true,
     ));
 
@@ -143,7 +143,7 @@ function eael_post_type_categories(){
  */
 function eael_woocommerce_product_categories(){
     $terms = get_terms( array(
-        'taxonomy' => 'product_cat',
+        'taxonomy'   => 'product_cat',
         'hide_empty' => true,
     ));
 
@@ -181,7 +181,7 @@ function eael_woocommerce_product_get_product_by_id(){
  */
 function eael_woocommerce_product_categories_by_id(){
     $terms = get_terms( array(
-        'taxonomy' => 'product_cat',
+        'taxonomy'   => 'product_cat',
         'hide_empty' => true,
     ));
 
@@ -543,3 +543,146 @@ function posts_args(){
         'order',
     );
 }
+
+// add_action(	'elementor/element/parse_css', function( $post_css, $element ) {
+//     /**
+//      * @var \Elementor\Post_CSS_File $post_css
+//      * @var \Elementor\Element_Base  $element
+//      */
+//     if( 'eael-info-box' === $element->get_name() ) {
+//         $styles = [];
+
+//         $infobox = [
+//             'eael_infobox_bg_color'                   => '_background_color',
+//             'eael_infobox_container_padding'          => '_padding',
+//             'eael_infobox_container_padding_tablet'   => '_padding_tablet',
+//             'eael_infobox_container_padding_mobile'   => '_padding_mobile',
+//             'eael_infobox_container_margin'           => '_margin',
+//             'eael_infobox_container_margin_tablet'    => '_margin_tablet',
+//             'eael_infobox_container_margin_mobile'    => '_margin_mobile',
+//             'eael_infobox_border_border'              => '_border_border',
+//             'eael_infobox_border_width'               => '_border_width',
+//             'eael_infobox_border_color'               => '_border_color',
+//             'eael_infobox_border_radius'              => '_border_radius',
+//             'eael_infobox_shadow_box_shadow_type'     => '_box_shadow_box_shadow_type',
+//             'eael_infobox_shadow_box_shadow'          => '_box_shadow_box_shadow',
+//             'eael_infobox_shadow_box_shadow_position' => '_box_shadow_box_shadow_position',
+//         ];
+
+//         $rules = [
+//             '_background_color'           => 'background-color',
+//             '_padding'                    => 'padding',
+//             '_padding_tablet'             => [ 'padding', 'tablet' ],
+//             '_padding_mobile'             => [ 'padding', 'mobile' ],
+//             '_margin'                     => 'margin',
+//             '_margin_tablet'              => [ 'margin', 'tablet' ],
+//             '_margin_mobile'              => [ 'margin', 'tablet' ],
+//             '_border_border'              => 'border-style',
+//             '_border_width'               => 'border-width',
+//             '_border_color'               => 'border-color',
+//             '_border_radius'              => 'border-radius',
+//             '_box_shadow_box_shadow_type' => 'typeyes',
+//         ];
+
+//         $settings = $element->get_settings();
+
+//         // dump( $settings );
+
+//         $prev_value = get_post_meta( get_the_ID(), '_elementor_data', true );
+//         $meta_value = json_decode( $prev_value );
+
+//         // if( ! empty( $settings['eael_infobox_bg_color'] ) ) {
+//         //     \set_elements_data( $meta_value, $element->get_id(), '_background_color', $settings['eael_infobox_bg_color'] );
+//         //     $bgcolor = $settings['eael_infobox_bg_color'];
+//         // }
+//         // if( ! empty( $settings['_background_color'] ) ) {
+//         //     \set_elements_data( $meta_value, $element->get_id(), '_background_color', $settings['_background_color'] );
+//         //     $bgcolor = $settings['_background_color'];
+//         // }
+
+
+//         foreach( $infobox as $key => $value ) {
+//             if( ! empty( $settings[ $key ] ) ) {
+//                 \set_elements_data( $meta_value, $element->get_id(), $value, $settings[ $key ] );
+//                 $data[ $value ] = $settings[ $key ];
+//             }
+//             \remove_elements_data( $meta_value, $element->get_id(), $key );
+//         }
+
+//         update_post_meta( get_the_ID(), '_elementor_data', json_encode( $meta_value ), $prev_value );
+
+//         foreach( $rules as $key => $value ){
+//             switch( $value ) {
+//                 case is_array( $value ) :
+//                     // $raw_css[ $value[0] ] = $data[ $key ];
+//                     // $post_css->get_stylesheet()->add_rules( $element->get_unique_selector(), $raw_css, [ 'max' => $value[ 1 ] ] );
+//                     break;
+//                 case 'typeyes' && isset( $data[ '_box_shadow_box_shadow_type' ] ) && 'yes' === $data[ '_box_shadow_box_shadow_type' ] :
+//                     $styles[ 'box-shadow' ] = "{$data[ $key ][ 'horizontal' ]} {$data[ $key ][ 'vertical' ]} {$data[ $key ][ 'blur' ]} {$data[ $key ][ 'spread' ]} {$data[ $key ][ 'color' ]} {$data[ '_box_shadow_box_shadow_position' ]}";
+//                     break;
+//                 default :
+//                     // echo '<br>'; var_dump( $key );
+//                     // echo '>>'; var_dump( $data[ $key ] );
+//                     if( isset( $data[ $key ] ) ) {
+//                         $styles[ $value ] = $data[ $key ];
+//                     }
+//                     break;
+//             }
+//         }
+        
+//         update_post_meta( get_the_ID(), '_elementor_data', json_encode( $meta_value ), $prev_value );
+//         $post_css->get_stylesheet()->add_rules( $element->get_unique_selector(), $styles );
+
+//     }
+
+//  }, 10, 2 );
+
+// function set_elements_data( &$elements, $id = null, $key = '', $value = '' ){
+//     if( ! is_array( $elements ) || empty( $elements ) ) return;
+
+//     foreach( $elements as $element ){
+//         if( $element->id == $id ) {
+//             $element->settings->{$key} = $value;
+//         }
+
+//         if( ! empty( $element->elements ) ) {
+//             set_elements_data( $element->elements, $id, $key, $value );
+//         }
+//     }
+
+//     return $elements;
+// }
+
+// function remove_elements_data( &$elements, $id = null, $key = '' ){
+//     if( ! is_array( $elements ) || empty( $elements ) || empty( $key ) ) return;
+
+//     foreach( $elements as $element ){
+//         if( $element->id == $id ) {
+//             unset( $element->settings->{$key} );
+//         }
+
+//         if( ! empty( $element->elements ) ) {
+//             remove_elements_data( $element->elements, $id, $key );
+//         }
+//     }
+
+//     return $elements;
+// }
+
+// function get_elements_data( $elements, $id = null, $key = '' ){
+//     $data = '';
+//     if( ! is_array( $elements ) || empty( $elements ) || empty( $key ) ) return;
+
+//     foreach( $elements as $element ){
+//         if( $element->id == $id ) {
+//             return $element->settings->{$key};
+//         } else {
+//             get_elements_data( $element->elements, $id, $key );
+//         }
+
+//         // if( ! empty( $element->elements ) && count( $element->elements ) > 0 ) {
+//         // }
+//     }
+
+//     // return $data;
+// }
