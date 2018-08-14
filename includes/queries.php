@@ -26,9 +26,9 @@ function eael_get_post_types(){
  */
 function eael_get_all_types_post(){
     $posts_args = array(
-        'post_type' => 'any',
-        'post_style' => 'all_types',
-        'post_status' => 'publish',
+        'post_type'      => 'any',
+        'post_style'     => 'all_types',
+        'post_status'    => 'publish',
         'posts_per_page' => '-1',
     );
     $posts = eael_load_more_ajax( $posts_args );
@@ -53,7 +53,7 @@ function eael_get_post_settings( $settings ){
         }
     }
 
-    $post_args['post_style'] = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
+    $post_args['post_style']  = isset( $post_args['post_style'] ) ? $post_args['post_style'] : 'grid';
     $post_args['post_status'] = 'publish';
 
     return $post_args;
@@ -104,15 +104,15 @@ function eael_get_thumbnail_sizes(){
  */
 function eael_get_post_orderby_options(){
     $orderby = array(
-        'ID' => 'Post ID',
-        'author' => 'Post Author',
-        'title' => 'Title',
-        'date' => 'Date',
-        'modified' => 'Last Modified Date',
-        'parent' => 'Parent Id',
-        'rand' => 'Random',
+        'ID'            => 'Post ID',
+        'author'        => 'Post Author',
+        'title'         => 'Title',
+        'date'          => 'Date',
+        'modified'      => 'Last Modified Date',
+        'parent'        => 'Parent Id',
+        'rand'          => 'Random',
         'comment_count' => 'Comment Count',
-        'menu_order' => 'Menu Order',
+        'menu_order'    => 'Menu Order',
     );
 
     return $orderby;
@@ -124,7 +124,7 @@ function eael_get_post_orderby_options(){
  */
 function eael_post_type_categories(){
     $terms = get_terms( array(
-        'taxonomy' => 'category',
+        'taxonomy'   => 'category',
         'hide_empty' => true,
     ));
 
@@ -143,7 +143,7 @@ function eael_post_type_categories(){
  */
 function eael_woocommerce_product_categories(){
     $terms = get_terms( array(
-        'taxonomy' => 'product_cat',
+        'taxonomy'   => 'product_cat',
         'hide_empty' => true,
     ));
 
@@ -181,7 +181,7 @@ function eael_woocommerce_product_get_product_by_id(){
  */
 function eael_woocommerce_product_categories_by_id(){
     $terms = get_terms( array(
-        'taxonomy' => 'product_cat',
+        'taxonomy'   => 'product_cat',
         'hide_empty' => true,
     ));
 
