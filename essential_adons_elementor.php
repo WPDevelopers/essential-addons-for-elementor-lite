@@ -196,6 +196,11 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
     }
 
+    if( $is_component_active['price-table'] ) {
+		wp_enqueue_style('essential_addons_elementor-tooltipster',ESSENTIAL_ADDONS_EL_URL.'assets/css/tooltipster.bundle.min.css');
+		wp_enqueue_script('essential_addons_elementor-tooltipster-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/tooltipster.bundle.min.js', array('jquery'),'1.0', true);
+	}
+
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
 
