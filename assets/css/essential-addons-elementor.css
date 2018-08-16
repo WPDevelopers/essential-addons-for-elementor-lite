@@ -91,31 +91,20 @@
 .eael-creative-button-align-center {
     text-align: center;
 }
-.eael-creative-button-align-center .eael-creative-button {
-    float: none;
-    display: inline-block;
-}
-.eael-creative-button-align-left .eael-creative-button {
-    float: left;
-}
-.eael-creative-button-align-right .eael-creative-button {
-    float: right;
-}
-.eael-creative-button-align-justify .eael-creative-button {
-    display: block;
-    float: none;
-}
-.eael-creative-button {
-    float: left;
+.eael-creative-button-wrapper {
+    display: flex;
+  }
+  
+  .eael-creative-button {
+    flex: 0 0 auto;
     min-width: 150px;
     text-align: center;
     vertical-align: middle;
     position: relative;
     z-index: 1;
     -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
-}
+  }
 .eael-creative-button:focus {
     outline: none;
 }

@@ -17,7 +17,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		return 'eicon-info-box';
 	}
 
-   public function get_categories() {
+	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
 
@@ -1387,6 +1387,37 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			$this->end_controls_tabs();
 
 		$this->end_controls_section();
+		
+		$this->start_controls_section(
+			'_section_style',
+			[
+				'label' => esc_html__( 'Info Box Advanced', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_ADVANCED,
+				'name' => 'advanced',
+			]
+		);  // \Elementor\Controls_Manager::TAB_ADVANCED
+
+		$this->add_responsive_control(
+			'_margin',
+			[
+				'label' => __( '', 'elementor' ),
+				'name' => '_margin',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_infobox_container_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->end_controls_section();
 
 	}
 
@@ -1396,7 +1427,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 	 * 
 	 * @param	$settings
 	 */
-	protected function eael_infobox_before($settings) {
+	protected function eael_infobox_before( $settings ) {
 
 		$this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 
@@ -1565,12 +1596,19 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		echo ob_get_clean();
 	}
 
-
 	protected function render() {
-		$this->eael_infobox_before( $this->get_settings_for_display() );
-		$this->render_infobox_icon( $this->get_settings_for_display() );
-		$this->render_infobox_content( $this->get_settings_for_display() );
-		$this->eael_infobox_after( $this->get_settings_for_display() );
+		// dump( $this->get_settings_for_display() );
+
+		$settings = $this->get_settings_for_display();
+
+		// $bgcolor = $this->get_settings_for_display( 'eael_infobox_bg_color' );
+
+		// $settings['_background_color'] = $bgcolor;
+
+		$this->eael_infobox_before( $settings );
+		$this->render_infobox_icon( $settings );
+		$this->render_infobox_content( $settings );
+		$this->eael_infobox_after( $settings );
 	}
 
 	protected function content_template() {}

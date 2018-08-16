@@ -24,9 +24,9 @@
 			metaPosition: settings.metaPosition,
 			excerptLength: settings.excerptLength,
 			btnText: settings.btnText,
-			categories: settings.categories,
-			tags: settings.eael_post_tags,
+			tax_query: settings.tax_query,
 			excludePosts: settings.exclude_posts,
+			post__in: settings.post__in,
 			offset: parseInt( settings.offset , 10 ),
 		}
 
@@ -57,8 +57,10 @@
 					posts_per_page : settingsValue.perPage,
 					offset : offset,
 					
-					category: settingsValue.categories ,
-					eael_post_tags: settingsValue.tags ,
+					tax_query: settingsValue.tax_query,
+
+					post__in: settingsValue.post__in,
+
 					post__not_in: settingsValue.excludePosts,
 
 					orderby: settingsValue.orderBy,
