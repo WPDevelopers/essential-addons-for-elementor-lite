@@ -2977,6 +2977,30 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
     margin: 0px;
 }
 
+/* ---- Pricing Table Tooltip ----*/
+div.tooltipster-sidetip.tooltipster-base.tooltipster-right .tooltipster-arrow {
+	position: absolute;
+	top: 50%;
+}
+
+div.tooltipster-sidetip.tooltipster-top div.tooltipster-box {
+	margin-bottom: 0px !important;
+}
+
+div.tooltipster-sidetip.tooltipster-bottom div.tooltipster-box {
+	margin-top: 0px !important;
+}
+
+.tooltipster-base.tooltipster-sidetip.tooltipster-top .tooltipster-arrow {
+	top: auto;
+	bottom: -8px;
+}
+
+div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
+	top: -8px;
+	bottom: auto;
+}
+
 /**
  * Caldera Contact Form Styler
  */
