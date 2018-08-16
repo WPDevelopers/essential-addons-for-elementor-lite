@@ -271,11 +271,23 @@ class Widget_Eael_Countdown extends Widget_Base {
 		);
 
 		$this->add_control(
+			'countdown_expiry_text_title',
+			[
+				'label'			=> esc_html__('On Expiry Title', 'essential-addons-elementor'),
+				'type'			=> Controls_Manager::TEXTAREA,
+				'default'		=> esc_html__('Countdown is finished!','essential-addons-elementor'),
+				'condition'		=> [
+					'countdown_expire_type' => 'text'
+				]
+			]
+		);
+
+		$this->add_control(
 			'countdown_expiry_text',
 			[
-				'label'			=> esc_html__('On Expiry Text', 'essential-addons-elementor'),
+				'label'			=> esc_html__('On Expiry Content', 'essential-addons-elementor'),
 				'type'			=> Controls_Manager::WYSIWYG,
-				'default'		=> esc_html__('Countdown is finished!','essential-addons-elementor'),
+				'default'		=> esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s','essential-addons-elementor'),
 				'condition'		=> [
 					'countdown_expire_type' => 'text'
 				]
@@ -308,31 +320,31 @@ class Widget_Eael_Countdown extends Widget_Base {
 
 		$this->end_controls_section();
 
-        $this->start_controls_section(
+		$this->start_controls_section(
 			'eael_section_pro',
 			[
 				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
+		
+		$this->add_control(
+			'eael_control_get_pro',
+			[
+				'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
 					'1' => [
 						'title' => __( '', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-unlock-alt',
 					],
 				],
 				'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
+				'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+			]
+		);
+		
+		$this->end_controls_section();
 
-        $this->end_controls_section();	
-        
 		$this->start_controls_section(
 			'eael_section_countdown_styles_general',
 			[
@@ -698,9 +710,9 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_background_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'		=> esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default'	=> '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-seconds' => 'background-color: {{VALUE}};',
 				],
@@ -710,9 +722,9 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_digit_color',
 			[
-				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'		=> esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default'	=> '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-countdown-seconds .eael-countdown-digits' => 'color: {{VALUE}};',
 				],
@@ -722,10 +734,10 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_label_color',
 			[
-				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
+				'label'		=> esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default'	=> '',
+				'selectors'	=> [
 					'{{WRAPPER}} .eael-countdown-seconds .eael-countdown-label' => 'color: {{VALUE}};',
 				],
 			]
@@ -734,10 +746,10 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
+				'label'		=> esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default' 	=> '',
+				'selectors'	=> [
 					'{{WRAPPER}} .eael-countdown-item > div.eael-countdown-seconds' => 'border-color: {{VALUE}};',
 				],
 			]
@@ -750,35 +762,11 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_countdown_expire_style',
 			[
-				'label' => esc_html__( 'Expire Message', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
-			]
-		);
-
-		$this->add_control(
-			'eael_countdown_expire_message_color',
-			[
-				'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-countdown-finish-text' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'countdown_expire_type' => 'text',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-             'name' => 'eael_countdown_expire_message_typography',
-				'scheme' => Scheme_Typography::TYPOGRAPHY_2,
-				'selector' => '{{WRAPPER}} .eael-countdown-finish-text',
-				'condition' => [
-					'countdown_expire_type' => 'text',
-				],
+				'label'	=> esc_html__( 'Expire Message', 'essential-addons-elementor' ),
+				'tab'	=> Controls_Manager::TAB_STYLE,
+				'condition'	=> [
+					'countdown_expire_type'	=> 'text'
+				]
 			]
 		);
 
@@ -804,7 +792,91 @@ class Widget_Eael_Countdown extends Widget_Base {
 				],
 				'default' => 'left',
 				'selectors' => [
-					'{{WRAPPER}} .eael-countdown-finish-text' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-countdown-finish-message' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'heading_eael_countdown_expire_title',
+			[
+				'label'		=> __( 'Title Style', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::HEADING,
+				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_expire_title_color',
+			[
+				'label'		=> esc_html__( 'Title Color', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default'	=> '',
+				'selectors'	=> [
+					'{{WRAPPER}} .eael-countdown-finish-message .expiry-title' => 'color: {{VALUE}};',
+				],
+				'condition'	=> [
+					'countdown_expire_type' => 'text',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+             'name'			=> 'eael_countdown_expire_title_typography',
+				'scheme'	=> Scheme_Typography::TYPOGRAPHY_2,
+				'selector'	=> '{{WRAPPER}} .eael-countdown-finish-message .expiry-title',
+				'condition'	=> [
+					'countdown_expire_type' => 'text',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_expire_title_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-countdown-finish-message .expiry-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+				],
+			]
+		);
+
+		$this->add_control(
+			'heading_eael_countdown_expire_message',
+			[
+				'label'		=> __( 'Content Style', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::HEADING,
+				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_countdown_expire_message_color',
+			[
+				'label'		=> esc_html__( 'Text Color', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default'	=> '',
+				'selectors'	=> [
+					'{{WRAPPER}} .eael-countdown-finish-text' => 'color: {{VALUE}};',
+				],
+				'condition'	=> [
+					'countdown_expire_type' => 'text',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+             'name'			=> 'eael_countdown_expire_message_typography',
+				'scheme'	=> Scheme_Typography::TYPOGRAPHY_2,
+				'selector'	=> '.eael-countdown-finish-text',
+				'condition'	=> [
+					'countdown_expire_type' => 'text',
 				],
 			]
 		);
@@ -812,11 +884,12 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_expire_message_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors' => [
-					'{{WRAPPER}} .eael-countdown-finish-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'label'			=> esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type'			=> Controls_Manager::DIMENSIONS,
+				'size_units'	=> [ 'px', '%', 'em' ],
+				'separator'		=> 'before',
+				'selectors'		=> [
+					'{{WRAPPER}} .eael-countdown-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
 					'countdown_expire_type' => 'text',
@@ -857,7 +930,13 @@ class Widget_Eael_Countdown extends Widget_Base {
 		$this->add_render_attribute( 'eael-countdown', 'data-expire-type', $settings['countdown_expire_type'] );
 
         if ( $settings['countdown_expire_type'] == 'text' ) {
-           	$this->add_render_attribute( 'eael-countdown', 'data-expiry-text', $settings['countdown_expiry_text'] );
+			if( ! empty($settings['countdown_expiry_text']) ) {
+				$this->add_render_attribute( 'eael-countdown', 'data-expiry-text', wp_kses_post($settings['countdown_expiry_text']) );
+			}
+			   
+			if( ! empty($settings['countdown_expiry_text_title']) ) {
+				$this->add_render_attribute('eael-countdown', 'data-expiry-title', wp_kses_post($settings['countdown_expiry_text_title']) );
+			}
         }
         elseif ( $settings['countdown_expire_type'] == 'url' ) {
 			$this->add_render_attribute( 'eael-countdown', 'data-redirect-url', $settings['countdown_expiry_redirection'] );
