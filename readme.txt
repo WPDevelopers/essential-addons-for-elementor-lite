@@ -2,13 +2,13 @@
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.7
+Tested up to: 4.9.8
 Requires PHP: 5.6
-Stable tag: 2.7.5
+Stable tag: 2.7.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Ultimate elements library for Elementor WordPress Page Builder. 53+ Premium elements with endless customization options.
+Ultimate elements library for Elementor WordPress Page Builder. 54+ Premium elements with endless customization options.
 
 == Description ==
 
@@ -62,7 +62,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
 
 
-### More elements (25+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (26+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
@@ -89,6 +89,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/)
 * [Post Carousel](https://essential-addons.com/elementor/post-carousel/)
 * [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/)
+* [Protected Content](https://essential-addons.com/elementor/protected-content/)
 
 More coming soon (weekly update) ...
 
@@ -138,6 +139,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.6 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Tooltip option added to Pricing Table widget
+- Testimonial element improved with more layout options
+- Flip Box element improved with more options
+- Countdown element improved
+- Post queries optimized for all post elements
+- Few minor bugfix and improvements
 
 = 2.7.5 =
 - (Make sure to clear cache nad hrad refresh the page after update)
