@@ -460,45 +460,72 @@
         }
     }
 
-    var CountDown = function ($scope, $) {
-        var $coundDown           = $scope.find('.eael-countdown-wrapper').eq(0),
-        $countdown_id            = ($coundDown.data("countdown-id") !== undefined) ? $coundDown.data("countdown-id") : '',
-        $expire_type             = ($coundDown.data("expire-type")  !== undefined) ? $coundDown.data("expire-type") : '',
-        $expiry_text             = ($coundDown.data("expiry-text")  !== undefined) ? $coundDown.data("expiry-text") : '',
-        $redirect_url            = ($coundDown.data("redirect-url") !== undefined) ? $coundDown.data("redirect-url") : '',
-        $template                = ($coundDown.data("template")     !== undefined) ? $coundDown.data("template") : '';
-        
-        jQuery(document).ready(function($) {
-            'use strict';
-            var countDown = $("#eael-countdown-" + $countdown_id);
-    
-            countDown.countdown({
-                end: function() {
-                    if( $expire_type == 'text'){
-                        countDown.html( '<div class="eael-countdown-finish-text">' + $expiry_text + '</div>');
-                    }
-                    else if ( $expire_type === 'url'){
-                        var editMode = $('body').find('#elementor').length;
-                        if( editMode > 0 ) {
-                            countDown.html("Your Page will be redirected to given URL (only on Frontend).");
-                        } else {
-                            window.location.href = $redirect_url;
-                        }   
-                    }
-                    else if ( $expire_type === 'template'){
-                        countDown.html( $template );
-                    } else {
-                        //do nothing!
-                    }
-                }
-            });
-        });
+	var CountDown = function ($scope, $) {
+		var $coundDown           = $scope.find('.eael-countdown-wrapper').eq(0),
+		$countdown_id            = ($coundDown.data("countdown-id") !== undefined) ? $coundDown.data("countdown-id") : '',
+		$expire_type             = ($coundDown.data("expire-type")  !== undefined) ? $coundDown.data("expire-type") : '',
+		$expiry_text             = ($coundDown.data("expiry-text")  !== undefined) ? $coundDown.data("expiry-text") : '',
+		$expiry_title			 = ($coundDown.data("expiry-title") !== undefined) ? $coundDown.data('expiry-title') : '',
+		$redirect_url            = ($coundDown.data("redirect-url") !== undefined) ? $coundDown.data("redirect-url") : '',
+		$template                = ($coundDown.data("template")     !== undefined) ? $coundDown.data("template") : '';
+		
+		jQuery(document).ready(function($) {
+			'use strict';
+			var countDown = $("#eael-countdown-" + $countdown_id);
+	
+			countDown.countdown({
+				end: function() {
+					if( $expire_type == 'text'){
+						countDown.html( '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' + $expiry_title + '</h4>' + '<div class="eael-countdown-finish-text">' + $expiry_text + '</div></div>');
+					}
+					else if ( $expire_type === 'url'){
+						var editMode = $('body').find('#elementor').length;
+						if( editMode > 0 ) {
+							countDown.html("Your Page will be redirected to given URL (only on Frontend).");
+						} else {
+							window.location.href = $redirect_url;
+						}	
+					}
+					else if ( $expire_type === 'template'){
+						countDown.html( $template );
+					} else {
+						//do nothing!
+					}
+				}
+			});
+		});
+	}
 
-    }
+    var PricingTooltip = function($scope, $) {
+		if( $.fn.tooltipster ) {
+			var $tooltip = $scope.find('.tooltip'), i;
+
+			for( i = 0; i < $tooltip.length; i++) {
+				var $currentTooltip = $( '#' + $($tooltip[i]).attr('id') ),
+					$tooltipSide	= ( $currentTooltip.data('side') !== undefined ) ? $currentTooltip.data('side') : false,
+					$tooltipTrigger	= ( $currentTooltip.data('trigger') !== undefined ) ? $currentTooltip.data('trigger') : 'hover',
+					$animation		= ( $currentTooltip.data('animation') !== undefined ) ? $currentTooltip.data('animation') : 'fade',
+					$anim_duration	= ( $currentTooltip.data('animation_duration') !== undefined ) ? $currentTooltip.data('animation_duration') : 300,
+					$theme 			= ( $currentTooltip.data('theme') !== undefined ) ? $currentTooltip.data('theme') : 'default',
+					$arrow			= ( 'yes' == $currentTooltip.data('arrow') ) ? true : false;
+
+				$currentTooltip.tooltipster({
+					animation: $animation,
+					trigger: $tooltipTrigger,
+					side: $tooltipSide,
+					delay: $anim_duration,
+					arrow: $arrow,
+					theme: 'tooltipster-' + $theme
+				});
+
+			}
+		}
+	}
     
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-pricing-table.default', PricingTooltip);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
