@@ -583,6 +583,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 	protected function render() {
 
 	  $settings = $this->get_settings_for_display();
+	  $rating = $this->get_settings_for_display('eael_testimonial_enable_rating');
 
 	  $this->add_render_attribute(
 		  'eael_testimonial_wrap',
@@ -597,7 +598,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 		  ]
 	  );
 
-	if ( ! empty( $this->get_settings_for_display('eael_testimonial_enable_rating') ) )
+	if ( $rating == 'yes' )
 		$this->add_render_attribute('eael_testimonial_wrap', 'class', $this->get_settings('eael_testimonial_rating_number'));
 
 	$this->add_render_attribute('eael_testimonial_user', 'class', 'eael-testimonial-user');
