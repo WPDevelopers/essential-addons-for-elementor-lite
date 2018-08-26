@@ -374,8 +374,10 @@ if ( !function_exists('eael_get_authors') ) {
 
         $users = get_users();
 
-        foreach ( $users as $user ) {
-            $options[ $user->ID ] = $user->display_name;
+        if($users) {
+            foreach( $users as $user ) {
+                $options[ $user->ID ] = $user->display_name;
+            }
         }
 
         return $options;

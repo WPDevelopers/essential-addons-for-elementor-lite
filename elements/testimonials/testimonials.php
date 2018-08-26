@@ -155,8 +155,8 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
+						'title'	=> __( '', 'essential-addons-elementor' ),
+						'icon'	=> 'fa fa-unlock-alt',
 					],
 				],
 				'default' => '1',
@@ -547,8 +547,9 @@ class Widget_Eael_Testimonial extends Widget_Base {
 	}
 
 	protected function render_testimonial_rating() {
+		$settings = $this->get_settings_for_display('eael_testimonial_enable_rating');
 
-		if ( ! empty( $this->get_settings_for_display('eael_testimonial_enable_rating') ) ) :
+		if ( $settings == 'yes' ) :
 			ob_start();
 		?>
 		<ul class="testimonial-star-rating">
@@ -582,6 +583,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 	protected function render() {
 
 	  $settings = $this->get_settings_for_display();
+	  $rating = $this->get_settings_for_display('eael_testimonial_enable_rating');
 
 	  $this->add_render_attribute(
 		  'eael_testimonial_wrap',
@@ -596,7 +598,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 		  ]
 	  );
 
-	if ( ! empty( $this->get_settings_for_display('eael_testimonial_enable_rating') ) )
+	if ( $rating == 'yes' )
 		$this->add_render_attribute('eael_testimonial_wrap', 'class', $this->get_settings('eael_testimonial_rating_number'));
 
 	$this->add_render_attribute('eael_testimonial_user', 'class', 'eael-testimonial-user');
@@ -617,7 +619,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				<div class="clearfix">
 					<?php $this->render_user_name_and_company(); ?>
 				</div>
-				<?php $this->render_testimonial_rating(); ?>
+				<?php $this->render_testimonial_rating( $settings ); ?>
 			</div>
 			<?php $this->render_testimonial_image(); ?>
 		<?php } ?>
@@ -632,7 +634,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				<div class="clearfix">
 					<?php $this->render_user_name_and_company(); ?>
 				</div>
-				<?php $this->render_testimonial_rating(); ?>
+				<?php $this->render_testimonial_rating( $settings ); ?>
 			</div>
 		<?php } ?>
 
@@ -642,7 +644,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 				<?php
 					// $this->testimonial_quote();
 					$this->testimonial_desc();
-					$this->render_testimonial_rating();
+					$this->render_testimonial_rating( $settings );
 					$this->render_user_name_and_company();
 				?>
 			</div>
@@ -656,7 +658,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating();
+					$this->render_testimonial_rating( $settings );
 				?>
 				<div class="bio-text clearfix">
 					<?php $this->render_user_name_and_company(); ?>
@@ -672,7 +674,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating();
+					$this->render_testimonial_rating( $settings );
 				?>
 				<div class="bio-text-right"><?php $this->render_user_name_and_company(); ?></div>
 			</div>
@@ -682,7 +684,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content eael-testimonial-inline-bio">
 				<?php $this->render_testimonial_image(); ?>
 				<div class="bio-text"><?php $this->render_user_name_and_company(); ?></div>
-				<?php $this->render_testimonial_rating(); ?>
+				<?php $this->render_testimonial_rating( $settings ); ?>
 			</div>
 			<div class="eael-testimonial-content">
 				<?php $this->testimonial_desc(); ?>
@@ -696,7 +698,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content eael-testimonial-inline-bio">
 				<?php $this->render_testimonial_image(); ?>
 				<div class="bio-text"><?php $this->render_user_name_and_company(); ?></div>
-				<?php $this->render_testimonial_rating(); ?>
+				<?php $this->render_testimonial_rating( $settings ); ?>
 			</div>
 		<?php } ?>
 
