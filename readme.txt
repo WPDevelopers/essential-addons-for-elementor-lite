@@ -3,8 +3,8 @@ Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 4.9.8
-Requires PHP: 5.6
-Stable tag: 2.7.6
+Requires PHP: 5.4
+Stable tag: 2.7.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -139,6 +139,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.7 =
+- Testimonial error fixed
+- Pricing Table tooltip issue fixed
+- Compatibility with PHP 5.4 fixed
 
 = 2.7.6 =
 - (Make sure to clear cache nad hrad refresh the page after update)
