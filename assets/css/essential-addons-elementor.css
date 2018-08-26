@@ -1151,6 +1151,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
     box-shadow: none;
     padding: 0;
 }
+
 .eael-product-carousel.eael-product-simple .woocommerce li.product .entry-wrap,
 .eael-product-carousel.eael-product-reveal .woocommerce li.product .entry-wrap {
     background-color: transparent;
