@@ -245,8 +245,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 						'name' => 'eael_pricing_table_icon_mood',
 						'label' => esc_html__( 'Item Active?', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SWITCHER,
-						'return_value' => 'yes',
-						'default' => 'yes',
+						'return_value' => 'yes'
 					],
 					[
 						'name' => 'eael_pricing_table_list_icon_color',
@@ -953,6 +952,18 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .body ul li' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_list_disable_item_color',
+			[
+				'label' => esc_html__( 'Disable item color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing .eael-pricing-item ul li.disable-item' => 'color: {{VALUE}};',
 				],
 			]
 		);
