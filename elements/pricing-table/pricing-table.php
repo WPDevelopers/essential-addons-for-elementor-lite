@@ -245,7 +245,8 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 						'name' => 'eael_pricing_table_icon_mood',
 						'label' => esc_html__( 'Item Active?', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SWITCHER,
-						'return_value' => 'yes'
+						'return_value' => 'yes',
+						'default'	=> 'yes'
 					],
 					[
 						'name' => 'eael_pricing_table_list_icon_color',
@@ -1649,7 +1650,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			<?php
 				foreach( $settings['eael_pricing_table_items'] as $item ) :
 				
-					if( 'yes' === $item['eael_pricing_table_icon_mood'] ) {
+					if( 'yes' !== $item['eael_pricing_table_icon_mood'] ) {
 						$this->add_render_attribute('pricing_feature_item'.$counter, 'class', 'disable-item');
 					}
 					
