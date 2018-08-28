@@ -544,6 +544,48 @@ class Eael_Admin_Settings {
 									        <?php _e( 'One Page Navigation', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="counter" name="counter" disabled>
+									    <label for="counter" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Counter', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="post-carousel" name="post-carousel" disabled>
+									    <label for="post-carousel" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Post Carousel', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="team-member-carousel" name="team-member-carousel" disabled>
+									    <label for="team-member-carousel" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Team Member Carousel', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="logo-carousel" name="logo-carousel" disabled>
+									    <label for="logo-carousel" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Logo Carousel', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="progress-bar" name="progress-bar" disabled>
+									    <label for="progress-bar" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Progress Bar', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="protected-content" name="protected-content" disabled>
+									    <label for="protected-content" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Protected Content', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
 								</div><!--./checkbox-container-->
 							  	<div class="eael-save-btn-wrap">
 								  <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
