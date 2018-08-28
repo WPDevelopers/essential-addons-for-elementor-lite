@@ -148,6 +148,16 @@ function add_eael_elements() {
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
 /**
+ * Registering a Group Control for All Posts Element
+ */
+function eae_posts_register_control( $controls_manager ){
+	include_once ESSENTIAL_ADDONS_EL_PATH . 'includes/eae-posts-group-control.php';
+    $controls_manager->add_group_control( 'eaeposts', new Elementor\EAE_Posts_Group_Control() );
+}
+
+add_action( 'elementor/controls/controls_registered', 'eae_posts_register_control' );
+
+/**
  * Load module's scripts and styles if any module is active.
  *
  * @since v1.0.0
