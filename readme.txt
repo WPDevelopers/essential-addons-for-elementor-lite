@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 4.9.8
 Requires PHP: 5.4
-Stable tag: 2.7.7
+Stable tag: 2.7.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -139,6 +139,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.8 =
+- Group control error fixed
+- Pricing Table active feature issue fixed
+- Few minor bugfix and improvements
 
 = 2.7.7 =
 - Testimonial error fixed
