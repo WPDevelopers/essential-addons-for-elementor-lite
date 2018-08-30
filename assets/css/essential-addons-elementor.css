@@ -4681,6 +4681,7 @@ img.mfp-img {
 }
 .eael-tabs-content {
   display: flex;
+  flex: 1 1 auto;
 }
 .eael-advance-tabs .eael-tabs-content > div {
   display: none;
