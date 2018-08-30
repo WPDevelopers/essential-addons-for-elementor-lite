@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: Codetic
- * Version: 2.7.3
+ * Version: 2.7.8
  * Author URI: https://www.codetic.net
  *
  * Text Domain: essential-addons-elementor
@@ -148,6 +148,16 @@ function add_eael_elements() {
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
 /**
+ * Registering a Group Control for All Posts Element
+ */
+function eae_posts_register_control( $controls_manager ){
+	include_once ESSENTIAL_ADDONS_EL_PATH . 'includes/eae-posts-group-control.php';
+    $controls_manager->add_group_control( 'eaeposts', new Elementor\EAE_Posts_Group_Control() );
+}
+
+add_action( 'elementor/controls/controls_registered', 'eae_posts_register_control' );
+
+/**
  * Load module's scripts and styles if any module is active.
  *
  * @since v1.0.0
@@ -195,6 +205,11 @@ function essential_addons_el_enqueue(){
       wp_enqueue_script('essential_addons_mixitup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/mixitup.min.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
     }
+
+    if( $is_component_active['price-table'] ) {
+		wp_enqueue_style('essential_addons_elementor-tooltipster',ESSENTIAL_ADDONS_EL_URL.'assets/css/tooltipster.bundle.min.css');
+		wp_enqueue_script('essential_addons_elementor-tooltipster-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/tooltipster.bundle.min.js', array('jquery'),'1.0', true);
+	}
 
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
@@ -323,11 +338,11 @@ function eael_admin_notice() {
     global $current_user ;
     $user_id = $current_user->ID;
     /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice272') ) {
-      echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 36px;">';
-      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-heart.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> crossed <strong>40,000+</strong> active installs. Use the coupon code <strong>40K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Grab the Deal</a>
-        <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> Dismiss</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
+    if ( ! get_user_meta($user_id, 'eael_ignore_notice275') ) {
+      echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
+      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
+      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>50,000+</strong> websites. Use the coupon code <strong>CELEBRATE50K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
+        <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
   }
@@ -343,7 +358,7 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice272', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice275', 'true', true);
   }
 }
 add_action('admin_init', 'eael_nag_ignore');

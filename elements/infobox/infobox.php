@@ -17,7 +17,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		return 'eicon-info-box';
 	}
 
-   public function get_categories() {
+	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
 
@@ -75,6 +75,41 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				'default' => 'icon',
 			]
 		);
+
+		$this->add_responsive_control(
+			'icon_vertical_position',
+			[
+				'label'                 => __( 'Icon Position', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::CHOOSE,
+				'default'               => 'top',
+				'condition'			=> [
+					'eael_infobox_img_type!'	=> 'img-on-top'
+				],
+				'options'               => [
+					'top'          => [
+						'title'    => __( 'Top', 'essential-addons-elementor' ),
+						'icon'     => 'eicon-v-align-top',
+					],
+					'middle'       => [
+						'title'    => __( 'Middle', 'essential-addons-elementor' ),
+						'icon'     => 'eicon-v-align-middle',
+					],
+					'bottom'       => [
+						'title'    => __( 'Bottom', 'essential-addons-elementor' ),
+						'icon'     => 'eicon-v-align-bottom',
+					],
+				],
+				'selectors'             => [
+					'{{WRAPPER}} .eael-infobox .infobox-icon'	=> 'align-self: {{VALUE}};'
+				],
+				'selectors_dictionary'  => [
+					'top'          => 'baseline',
+					'middle'       => 'center',
+					'bottom'       => 'flex-end',
+				],
+			]
+		);
+
 		/**
 		 * Condition: 'eael_infobox_img_or_icon' => 'img'
 		 */
@@ -115,39 +150,10 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			'eael_infobox_number',
 			[
 				'label' => esc_html__( 'Number', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::NUMBER,
+				'type' => Controls_Manager::TEXT,
 				'condition' => [
 					'eael_infobox_img_or_icon' => 'number'
 				]
-			]
-		);
-
-		$this->add_control(
-			'eael_show_infobox_clickable',
-			[
-				'label' => __( 'Infobox Clickable', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SWITCHER,
-				'default' => 'no',
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
-				'return_value' => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'eael_show_infobox_clickable_link',
-			[
-				'label' => esc_html__( 'Infobox Link', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::URL,
-				'label_block' => true,
-				'default' => [
-        			'url' => 'http://',
-        			'is_external' => '',
-     			],
-     			'show_external' => true,
-     			'condition' => [
-     				'eael_show_infobox_clickable' => 'yes'
-     			]
 			]
 		);
 
@@ -261,10 +267,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_infobox_button',
 			[
-				'label' => esc_html__( 'Infobox Button', 'essential-addons-elementor' ),
-				'condition' => [
-					'eael_show_infobox_clickable!' => 'yes'
-				]
+				'label' => esc_html__( 'Link', 'essential-addons-elementor' )
 			]
 		);
 
@@ -273,13 +276,45 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			[
 				'label' => __( 'Show Infobox Button', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
+				'label_off' => __( 'No', 'essential-addons-elementor' ),
+				'condition'	=> [
+					'eael_show_infobox_clickable!'	=> 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_show_infobox_clickable',
+			[
+				'label' => __( 'Infobox Clickable', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
 				'default' => 'no',
 				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
 				'label_off' => __( 'No', 'essential-addons-elementor' ),
 				'return_value' => 'yes',
+				'condition'	=> [
+					'eael_show_infobox_button!'	=> 'yes'
+				]
 			]
 		);
 
+		$this->add_control(
+			'eael_show_infobox_clickable_link',
+			[
+				'label' => esc_html__( 'Infobox Link', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::URL,
+				'label_block' => true,
+				'default' => [
+        			'url' => 'http://',
+        			'is_external' => '',
+     			],
+     			'show_external' => true,
+     			'condition' => [
+     				'eael_show_infobox_clickable' => 'yes'
+     			]
+			]
+		);
 
 		$this->add_control(
 			'infobox_button_text',
@@ -363,17 +398,15 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				],
 			]
 		);
-
 		$this->end_controls_section();
 
-		
 		$this->start_controls_section(
 			'eael_section_pro',
 			[
 				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
 			]
 		);
-		
+
 		$this->add_control(
 			'eael_control_get_pro',
 			[
@@ -387,90 +420,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				],
 				'default' => '1',
 				'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-			]
-		);
-		
-		$this->end_controls_section();
-
-		/**
-		 * -------------------------------------------
-		 * Tab Style (Info Box Style)
-		 * -------------------------------------------
-		 */
-		$this->start_controls_section(
-			'eael_section_infobox_style_settings',
-			[
-				'label' => esc_html__( 'Info Box Style', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
-			]
-		);
-
-		$this->add_control(
-			'eael_infobox_bg_color',
-			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eael-infobox' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_infobox_container_padding',
-			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-	 					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-	 			],
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_infobox_container_margin',
-			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-	 					'{{WRAPPER}} .eael-infobox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-	 			],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-				[
-					'name' => 'eael_infobox_border',
-					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
-					'selector' => '{{WRAPPER}} .eael-infobox',
-				]
-		);
-
-		$this->add_control(
-			'eael_infobox_border_radius',
-			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'max' => 50,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-infobox' => 'border-radius: {{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'eael_infobox_shadow',
-				'selector' => '{{WRAPPER}} .eael-infobox',
 			]
 		);
 
@@ -501,6 +450,30 @@ class Widget_Eael_Info_Box extends Widget_Base {
 				]
 			);
 
+				$this->add_control(
+					'eael_infobox_image_icon_bg_color',
+					[
+						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '',
+						'selectors' => [
+							'{{WRAPPER}} .eael-infobox .infobox-icon img' => 'background-color: {{VALUE}};',
+						]
+					]
+				);
+
+				$this->add_responsive_control(
+					'eael_infobox_image_icon_padding',
+					[
+						'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::DIMENSIONS,
+						'size_units' => [ 'px', 'em', '%' ],
+						'selectors' => [
+							'{{WRAPPER}} .eael-infobox .infobox-icon img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						 ],
+					]
+				);
+
 				$this->add_group_control(
 					Group_Control_Border::get_type(),
 						[
@@ -529,7 +502,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 					]
 				);
 
-
 			$this->end_controls_tab();
 
 			$this->start_controls_tab(
@@ -538,6 +510,16 @@ class Widget_Eael_Info_Box extends Widget_Base {
 					'label'		=> __( 'Hover', 'essential-addons-elementor' )
 				]
 			);
+
+				$this->add_group_control(
+					Group_Control_Box_Shadow::get_type(),
+					[
+						'name' => 'eael_infobox_image_icon_hover_shadow',
+						'selectors' => [
+							'{{WRAPPER}} .eael-infobox .infobox-icon:hover img' => 'background-color: {{VALUE}};',
+						]
+					]
+				);
 
 				$this->add_control(
 					'eael_infobox_image_icon_hover_animation',
@@ -645,25 +627,12 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-    		'eael_infobox_number_icon_size',
-    		[
-        		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
-       		'type' => Controls_Manager::SLIDER,
-        		'default' => [
-            	'size' => 40,
-        		],
-        		'range' => [
-            	'px' => [
-                	'min' => 20,
-                	'max' => 100,
-                	'step' => 1,
-            	]
-        		],
-        		'selectors' => [
-            	'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-number' => 'font-size: {{SIZE}}px;',
-        		],
-    		]
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+			'name' => 'eael_infobox_number_icon_typography',
+				'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-number',
+			]
 		);
 
 		$this->add_responsive_control(
@@ -954,6 +923,23 @@ class Widget_Eael_Info_Box extends Widget_Base {
 							],
 						]
 					);
+
+					$this->add_control(
+						'eael_infobox_icon_bg_shape',
+						[
+						'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+							'type' 			=> Controls_Manager::SELECT,
+							'default' 		=> 'none',
+							'label_block' 	=> false,
+							'options' 		=> [
+								'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
+								'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
+								'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+								'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+							],
+							'prefix_class' => 'eael-infobox-icon-bg-shape-'
+						]
+					);
 			
 					$this->add_control(
 						'eael_infobox_icon_bg_color',
@@ -967,23 +953,6 @@ class Widget_Eael_Info_Box extends Widget_Base {
 							'condition' => [
 								'eael_infobox_icon_bg_shape!' => 'none',
 							]
-						]
-					);
-			
-					$this->add_control(
-					'eael_infobox_icon_bg_shape',
-						[
-						'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
-							'type' 			=> Controls_Manager::SELECT,
-							'default' 		=> 'none',
-							'label_block' 	=> false,
-							'options' 		=> [
-								'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
-								'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-								'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-								'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
-							],
-							'prefix_class' => 'eael-infobox-icon-bg-shape-'
 						]
 					);
 			
@@ -1310,6 +1279,42 @@ class Widget_Eael_Info_Box extends Widget_Base {
 						]
 					);
 
+					$this->add_responsive_control(
+						'eael_infobox_content_margin',
+						[
+							'label' => esc_html__( 'Content Only Margin', 'essential-addons-elementor' ),
+							'type' => Controls_Manager::DIMENSIONS,
+							'size_units' => [ 'px', 'em', '%' ],
+							'selectors' => [
+									'{{WRAPPER}} .eael-infobox .infobox-content p' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+							],
+						]
+					);
+
+					$this->add_control(
+						'eael_infobox_content_background',
+						[
+							'label' => esc_html__( 'Content Only Background', 'essential-addons-elementor' ),
+							'type' => Controls_Manager::COLOR,
+							'default' => '',
+							'selectors' => [
+								'{{WRAPPER}} .eael-infobox .infobox-content' => 'background: {{VALUE}};',
+							],
+						]
+					);
+
+					$this->add_responsive_control(
+						'eael_infobox_content_only_padding',
+						[
+							'label' => esc_html__( 'Content Only Padding', 'essential-addons-elementor' ),
+							'type' => Controls_Manager::DIMENSIONS,
+							'size_units' => [ 'px', 'em', '%' ],
+							'selectors' => [
+								'{{WRAPPER}} .eael-infobox .infobox-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+							],
+						]
+					);
+
 					$this->add_control(
 						'eael_infobox_content_color',
 						[
@@ -1382,6 +1387,37 @@ class Widget_Eael_Info_Box extends Widget_Base {
 			$this->end_controls_tabs();
 
 		$this->end_controls_section();
+		
+		$this->start_controls_section(
+			'_section_style',
+			[
+				'label' => esc_html__( 'Info Box Advanced', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_ADVANCED,
+				'name' => 'advanced',
+			]
+		);  // \Elementor\Controls_Manager::TAB_ADVANCED
+
+		$this->add_responsive_control(
+			'_margin',
+			[
+				'label' => __( '', 'elementor' ),
+				'name' => '_margin',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_infobox_container_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+	 					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->end_controls_section();
 
 	}
 
@@ -1391,7 +1427,7 @@ class Widget_Eael_Info_Box extends Widget_Base {
 	 * 
 	 * @param	$settings
 	 */
-	protected function eael_infobox_before($settings) {
+	protected function eael_infobox_before( $settings ) {
 
 		$this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 
@@ -1560,12 +1596,19 @@ class Widget_Eael_Info_Box extends Widget_Base {
 		echo ob_get_clean();
 	}
 
-
 	protected function render() {
-		$this->eael_infobox_before( $this->get_settings_for_display() );
-		$this->render_infobox_icon( $this->get_settings_for_display() );
-		$this->render_infobox_content( $this->get_settings_for_display() );
-		$this->eael_infobox_after( $this->get_settings_for_display() );
+		// dump( $this->get_settings_for_display() );
+
+		$settings = $this->get_settings_for_display();
+
+		// $bgcolor = $this->get_settings_for_display( 'eael_infobox_bg_color' );
+
+		// $settings['_background_color'] = $bgcolor;
+
+		$this->eael_infobox_before( $settings );
+		$this->render_infobox_icon( $settings );
+		$this->render_infobox_content( $settings );
+		$this->eael_infobox_after( $settings );
 	}
 
 	protected function content_template() {}
