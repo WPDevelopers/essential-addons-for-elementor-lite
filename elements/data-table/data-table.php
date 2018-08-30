@@ -50,7 +50,17 @@ class Widget_Eael_Data_Table extends Widget_Base {
 				'return_value' => 'true',
 		  	]
 		);
-		
+
+		$this->add_control(
+			'eael_pricing_table_style_pro_alert',
+			[
+				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_section_data_table_enabled' => 'true',
+				]
+			]
+		);		
 
   		$this->add_control(
 			'eael_data_table_header_cols_data',
@@ -973,7 +983,6 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		$table_th_count = count($settings['eael_data_table_header_cols_data']);
 		$this->add_render_attribute('eael_data_table_wrap', [
 			'class'	=> 'eael-data-table-wrap',
-			'data-table_enabled'	=> $settings['eael_section_data_table_enabled'] ? 'true': 'false',
 			'data-table_id'			=> esc_attr($this->get_id()),
 			'data-custom_responsive'	=> $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
 		]);
@@ -997,7 +1006,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 			        <tr class="table-header">
 						<?php $i = 0; foreach( $settings['eael_data_table_header_cols_data'] as $header_title ) :
 							$this->add_render_attribute('th_class'.$i, [
-								'class'		=> [ 'sorting', $header_title['eael_data_table_header_css_class'] ],
+								'class'		=> [ $header_title['eael_data_table_header_css_class'] ],
 								'id'		=> $header_title['eael_data_table_header_css_id'],
 								'colspan'	=> $header_title['eael_data_table_header_col_span']
 							]);
