@@ -1,14 +1,14 @@
 === Elementor Essential Addons ===
-Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128
+Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.7
-Requires PHP: 5.6
-Stable tag: 2.7.3
+Tested up to: 4.9.8
+Requires PHP: 5.4
+Stable tag: 2.7.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Ultimate elements library for Elementor WordPress Page Builder. 53+ Premium elements with endless customization options.
+Ultimate elements library for Elementor WordPress Page Builder. 54+ Premium elements with endless customization options.
 
 == Description ==
 
@@ -62,7 +62,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
 
 
-### More elements (25+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (26+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
@@ -89,6 +89,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/)
 * [Post Carousel](https://essential-addons.com/elementor/post-carousel/)
 * [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/)
+* [Protected Content](https://essential-addons.com/elementor/protected-content/)
 
 More coming soon (weekly update) ...
 
@@ -138,6 +139,41 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.7.8 =
+- Group control error fixed
+- Pricing Table active feature issue fixed
+- Few minor bugfix and improvements
+
+= 2.7.7 =
+- Testimonial error fixed
+- Pricing Table tooltip issue fixed
+- Compatibility with PHP 5.4 fixed
+
+= 2.7.6 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Tooltip option added to Pricing Table widget
+- Testimonial element improved with more layout options
+- Flip Box element improved with more options
+- Countdown element improved
+- Post queries optimized for all post elements
+- Few minor bugfix and improvements
+
+= 2.7.5 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Post elements improved and optimized
+- Info Box element improved
+- Flip Box element improved
+- Few minor bugfix and improvements
+
+== Changelog ==
+
+= 2.7.4 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Button elements improved
+- Fancy Text element improved
+- Image Accordion improved
+- Few minor bugfix and improvements
 
 = 2.7.3 =
 - Countdown element improved and Expire action added
@@ -315,9 +351,9 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.2.2 =
+= 2.7.5 =
 
-- Ninja Forms element added
-- Load more functionality added to Post elements (Post Grid & Post Timeline)
-- Few presets added for Team Members, Countdown, Fancy Text
-- Few minor improvements
+- Post elements improved and optimized
+- Info Box element improved
+- Flip Box element improved
+- Few minor bugfix and improvements
