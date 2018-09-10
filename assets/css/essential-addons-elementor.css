@@ -2090,20 +2090,20 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 /*---------------------------*/
 /* 26. Flipbox Style
 /*---------------------------*/
-.eael-elements-progression-flip-box-container {
+.eael-elements-flip-box-container {
 	position:relative;
 	height:300px;
 	width:100%;
 }
 
-.eael-elements-progression-flip-box-container .flipbox-button {
+.eael-elements-flip-box-container .flipbox-button {
 	display: inline-block;
 	-webkit-transition: all 400ms;
     -o-transition: all 400ms;
     transition: all 400ms;
 }
 
-.eael-elements-progression-flip-box-container a {
+.eael-elements-flip-box-container a {
 	display:block;
 }
 
@@ -2192,12 +2192,12 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 }
 
 /*--- Floating Button Styles ---*/
-.eael-elements-progression-button-floating-container {
+.eael-elements-button-floating-container {
 	position:fixed;
 	z-index:100;
 }
 
-.eael-elements-progression-button-floating-container .eael-elements-button {
+.eael-elements-button-floating-container .eael-elements-button {
 	margin-top:0px;
 	font-size:14px;
 	position:relative;
@@ -2220,7 +2220,7 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 }
 
 /*--- CSS3 Transitions ---*/
-.eael-elements-progression-flip-box-container {
+.eael-elements-flip-box-container {
 	perspective: 1000px;
 }
 
@@ -2248,30 +2248,30 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 }
 
 /*--- Flip ---*/
-.eael-animate-flip.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-up .eael-elements-flip-box-rear-container {
 	transform: rotateX(180deg);
 }
 
-.eael-animate-flip.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-down .eael-elements-flip-box-rear-container {
 	transform: rotateX(-180deg);
 }
 
-.eael-animate-flip.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-left .eael-elements-flip-box-rear-container {
 	transform: rotateY(-180deg);
 }
 
-.eael-animate-flip.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-right .eael-elements-flip-box-rear-container {
 	transform: rotateY(180deg);
 }
 
 
 /*--- Slide ---*/
-.eael-animate-push.eael-elements-progression-flip-box-container,
-.eael-animate-slide.eael-elements-progression-flip-box-container {
+.eael-animate-push.eael-elements-flip-box-container,
+.eael-animate-slide.eael-elements-flip-box-container {
 	overflow:hidden;
 }
 
@@ -2285,8 +2285,8 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	top:100%; 
 }
 
-.eael-animate-push.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	top:0;
 }
 
@@ -2296,8 +2296,8 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	bottom:100%;
 }
 
-.eael-animate-push.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	top:auto;
 	bottom:0;
 }
@@ -2307,8 +2307,8 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	left:100%;
 }
 
-.eael-animate-push.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	left:0;
 }
 
@@ -2318,27 +2318,27 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	right:100%;
 }
 
-.eael-animate-push.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	left:auto;
 	right:0;
 }
 
 
 /*--- Push + Slide Above ---*/
-.eael-animate-push.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	top:-100%;
 }
 
-.eael-animate-push.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	top:100%;
 }
 
-.eael-animate-push.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	left:-100%;
 }
 
-.eael-animate-push.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	left:100%;
 }
 
@@ -2349,18 +2349,18 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	z-index:3;
 }
 
-.eael-animate-zoom-in.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-zoom-in.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	opacity:1;
 	transform: scale(1);
 }
 
 /*--- Zoom Out ---*/
-.eael-animate-zoom-out.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-zoom-out.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	opacity:0;
 	transform: scale(0.75);
 }
 
-.eael-animate-fade.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-fade.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	opacity:0;
 }
 
