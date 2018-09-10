@@ -5,7 +5,7 @@
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
  * Version: 2.7.9
- * Author URI: https://www.wpdeveloper.net
+ * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
 */
