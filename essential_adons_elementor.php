@@ -3,9 +3,9 @@
  * Plugin Name: Essential Addons for Elementor
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
- * Author: Codetic
+ * Author: WPDeveloper
  * Version: 2.7.9
- * Author URI: https://www.codetic.net
+ * Author URI: https://www.wpdeveloper.net
  *
  * Text Domain: essential-addons-elementor
 */
