@@ -946,7 +946,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 	  	// Storing Data table content values
 	  	foreach( $settings['eael_data_table_content_rows'] as $content_row ) {
 
-	  		$row_id = rand(10, 1000);
+	  		$row_id = uniqid();
 	  		if( $content_row['eael_data_table_content_row_type'] == 'row' ) {
 	  			$table_tr[] = [
 	  				'id' => $row_id,
