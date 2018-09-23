@@ -21,7 +21,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 
 ### Features
 
-* 28+ Stunning Elements (Free)
+* 29+ Stunning Elements (Free)
 * Fully Customizable
 * Unlimited Design Options
 * Elements Control option
@@ -60,9 +60,10 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Tooltip](https://essential-addons.com/elementor/tooltip/)
 * [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/)
 * [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
+* [Progress Bar](https://essential-addons.com/elementor/progress-bar/)
 
 
-### More elements (26+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (27+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 * [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
 * [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
@@ -70,6 +71,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Image Comparison](https://essential-addons.com/elementor/image-comparison/)
 * [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ )
 * [Instagram Gallery & Feed](https://essential-addons.com/elementor/instagram-feed/)
+* [Advanced Google Map](https://essential-addons.com/elementor/advanced-google-map/)
 * [Static Product](https://essential-addons.com/elementor/static-product/)
 * [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/)
 * [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/)
@@ -83,7 +85,7 @@ Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful 
 * [Content Toggle](https://essential-addons.com/elementor/content-toggle/)
 * [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/)
 * [Price Menu](https://essential-addons.com/elementor/price-menu/)
-* [Image Hotspot](https://essential-addons.com/elementor/image-hotspot/)
+* [Image Hotspots](https://essential-addons.com/elementor/image-hotspots/)
 * [Fancy Divider](https://essential-addons.com/elementor/divider/)
 * [Counter](https://essential-addons.com/elementor/counter/)
 * [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/)
