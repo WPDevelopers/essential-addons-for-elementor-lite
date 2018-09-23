@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.7.10
+ * Version: 2.7.11
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
