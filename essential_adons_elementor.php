@@ -194,6 +194,10 @@ function essential_addons_el_enqueue(){
     if( $is_component_active['filter-gallery'] ) {
       wp_enqueue_script('essential_addons_mixitup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/mixitup.min.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
+
+      wp_register_script('essential_addons_isotope-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/isotope.pkgd.min.js', array('jquery'),'1.0', true);
+
+	    wp_register_script('jquery-resize', ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.resize.min.js', array('jquery'), '1.0', true);
     }
 
     if( $is_component_active['price-table'] ) {
