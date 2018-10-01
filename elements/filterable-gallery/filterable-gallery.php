@@ -1774,9 +1774,9 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			$html = '<div class="eael-filterable-gallery-item-wrap '.$item['controls'].'">
 				<div class="gallery-grid-item">';
 
-					if( $settings['eael_fg_caption_style'] == 'card' && $item['video_gallery_switch'] != true ) {
-						$html .= '<a href="'.esc_url($item['image']).'" class="eael-magnific-link media-content-wrap">';
-					}
+				if($settings['eael_fg_caption_style'] === 'card' && $item['video_gallery_switch'] === 'false' && $settings['eael_fg_show_popup'] === 'media') {
+					$html .= '<a href="'.esc_url($item['image']).'" class="eael-magnific-link media-content-wrap">';
+				}
 					$html .= '<div class="gallery-item-thumbnail-wrap">
 							<img src="'.$item['image'].'" alt="'.$item['title'].'">';
 
