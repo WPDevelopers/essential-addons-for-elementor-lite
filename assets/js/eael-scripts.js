@@ -3,6 +3,18 @@
 
     var isEditMode = false;
 
+	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
+		var $rom = [];
+
+		var $counter = $init_show + $render;
+		for(var i = $init_show; i < $counter; i++) {
+			var $item = $($gallery_items[i]);
+				$item = $item[0];
+			$rom.push($item);
+		}
+		return $rom;
+	}
+
     var filterableGalleryHandler = function( $scope, $ ) {
 
 		
