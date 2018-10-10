@@ -3,6 +3,7 @@
 
     var isEditMode = false;
 
+
 	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
 		var $rom = [];
 
@@ -15,15 +16,13 @@
 		return $rom;
 	}
 
-    var filterableGalleryHandler = function( $scope, $ ) {
+	var filterableGalleryHandler = function( $scope, $ ) {
 
-		
 		var $gallery	= $scope.find('.eael-filter-gallery-container').eq(0),
 			$settings	= $gallery.data('settings');
 			
 			var $gallery_items = $gallery.data('gallery-items'),
-                $init_show = $gallery.data('init-show') ? $gallery.data('init-show') : 9;
-                
+				$init_show = $gallery.data('init-show') ? $gallery.data('init-show') : 9;
 
 		if( !isEditMode ) {
 			var $layout_mode = 'fitRows';
@@ -78,6 +77,7 @@
 					}
 				});
 		}
+
 		
 		// Load more button
 		$scope.find('.eael-gallery-load-more').on('click', function(e) {
@@ -105,7 +105,9 @@
 			});
 		});
 
-	}
+	};
+
+   
 
     var FacebookFeedHandler = function ($scope, $) {
         var loadingFeed = $scope.find( '.eael-loading-feed' );

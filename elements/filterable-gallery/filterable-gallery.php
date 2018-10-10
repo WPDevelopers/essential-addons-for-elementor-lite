@@ -117,7 +117,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				'type' => Controls_Manager::SELECT,
 				'default' => 'hoverer',
 				'options' => [
-					'hoverer'	=> __( 'Hoverer', 'essential-addons-elementor' ),
+					'hoverer'	=> __( 'Overlay', 'essential-addons-elementor' ),
 					'card'		=> __( 'Card', 'essential-addons-elementor' ),
 				],
 			]
@@ -147,7 +147,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				'label' => esc_html__( 'Hover Transition', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
-					'size' => 300,
+					'size' => 100,
 				],
 				'range' => [
 					'px' => [
@@ -209,7 +209,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_fg_control_settings',
   			[
-  				'label' => esc_html__( 'Gallery Control Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Filterable Controls', 'essential-addons-elementor' )
   			]
 		);
 
@@ -240,7 +240,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				'type' => Controls_Manager::REPEATER,
 				'seperator' => 'before',
 				'default' => [
-					[ 'eael_fg_control' => 'Item' ],
+					[ 'eael_fg_control' => 'Gallery Item' ],
 				],
 				'fields' => [
 					[
@@ -248,7 +248,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						'label' => esc_html__( 'List Item', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::TEXT,
 						'label_block' => true,
-						'default' => esc_html__( 'Item', 'essential-addons-elementor' )
+						'default' => esc_html__( 'Gallery Item', 'essential-addons-elementor' )
 					],
 				],
 				'title_field' => '{{eael_fg_control}}',
@@ -263,7 +263,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_fg_grid_settings',
   			[
-  				'label' => esc_html__( 'Gallery Item Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Gallery Items', 'essential-addons-elementor' )
   			]
   		);
 
@@ -295,7 +295,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						'label'		=> esc_html__( 'Video Link', 'essential-addons-elementor' ),
 						'type'		=> Controls_Manager::TEXT,
 						'label_block'	=> true,
-						'default'		=> '#',
+						'default'		=> 'https://www.youtube.com/watch?v=kB4U67tiQLA',
 						'condition'		=> [
 							'fg_video_gallery_switch'	=> 'true'
 						]
@@ -305,7 +305,8 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						'label' => esc_html__( 'Control Name', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::TEXT,
 						'label_block' => true,
-						'description' => esc_html__( 'User the gallery control name form Control Settings. use the exact name that matches with its associate name.', 'essential-addons-elementor' )
+						'default'		=> '',
+						'description' => __( 'Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-elementor' )
 					],
 					[
 						'name' => 'eael_fg_gallery_item_name',
@@ -341,18 +342,6 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						]
 					],
 					[
-						'name'		=> 'eael_fg_gallery_link',
-						'label'		=> __( 'Gallery Link Button?', 'essential-addons-elementor' ),
-						'type'		=> Controls_Manager::SWITCHER,
-						'default'	=> 'true',
-						'label_on'	=> esc_html__( 'Yes', 'essential-addons-elementor' ),
-						'label_off'	=> esc_html__( 'No', 'essential-addons-elementor' ),
-						'return_value' => 'true',
-						'condition'	=> [
-							'fg_video_gallery_switch!'	=> 'true'
-						]
-					],
-					[
 						'name'		=> 'eael_fg_gallery_lightbox',
 						'label'		=> __( 'Gallery Lightbox Button?', 'essential-addons-elementor' ),
 						'type'		=> Controls_Manager::SWITCHER,
@@ -364,6 +353,18 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 							'fg_video_gallery_switch!'	=> 'true'
 						]
 				  	],
+					[
+						'name'		=> 'eael_fg_gallery_link',
+						'label'		=> __( 'Gallery Link Button?', 'essential-addons-elementor' ),
+						'type'		=> Controls_Manager::SWITCHER,
+						'default'	=> 'true',
+						'label_on'	=> esc_html__( 'Yes', 'essential-addons-elementor' ),
+						'label_off'	=> esc_html__( 'No', 'essential-addons-elementor' ),
+						'return_value' => 'true',
+						'condition'	=> [
+							'fg_video_gallery_switch!'	=> 'true'
+						]
+					],
 				  	[
 						'name' => 'eael_fg_gallery_img_link',
 						'type' => Controls_Manager::URL,
@@ -719,11 +720,11 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::SLIDER,
 					'default' => [
-						'size' => 20
+						'size' => 0
 					],
 					'range' => [
 						'px' => [
-							'max' => 30,
+							'max' => 100,
 						],
 					],
 					'selectors' => [
@@ -763,7 +764,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				[
 					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::COLOR,
-					'default' => '#3F51B5',
+					'default' => '#333',
 					'selectors' => [
 						'{{WRAPPER}} .eael-filter-gallery-control ul li.control.active' => 'background: {{VALUE}};',
 					],
@@ -785,11 +786,11 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::SLIDER,
 					'default' => [
-						'size' => 20
+						'size' => 0
 					],
 					'range' => [
 						'px' => [
-							'max' => 30,
+							'max' => 100,
 						],
 					],
 					'selectors' => [
@@ -810,7 +811,6 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			$this->end_controls_tab();
 
 		$this->end_controls_tabs();
-
 
 
 		$this->end_controls_section();
@@ -1168,7 +1168,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			[
 				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#f2f2f2',
+				'default' => '#f1f2f9',
 				'selectors' => [
 					'{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap.caption-style-card' => 'background-color: {{VALUE}};',
 				],
@@ -1399,7 +1399,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
-					'size' => 0,
+					'size' => 100,
 				],
 				'range' => [
 					'px' => [
@@ -1468,7 +1468,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				[
 					'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
 					'type'                  => Controls_Manager::COLOR,
-					'default'               => '',
+					'default'               => '#333',
 					'selectors'             => [
 						'{{WRAPPER}} .eael-gallery-load-more' => 'background-color: {{VALUE}}',
 					],
@@ -1484,7 +1484,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				[
 					'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
 					'type'                  => Controls_Manager::COLOR,
-					'default'               => '',
+					'default'               => '#fff',
 					'selectors'             => [
 						'{{WRAPPER}} .eael-gallery-load-more' => 'color: {{VALUE}}',
 					],
@@ -1680,6 +1680,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			$this->end_controls_tabs();
 			
 		$this->end_controls_section();
+
 	}
 
 	public function sorter_class( $string ) {
@@ -1698,10 +1699,10 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			?>
 			<div class="eael-filter-gallery-control">
 				<ul>
-					<li class="control" class="active" data-filter="*"><?php echo $all_text; ?></li>
+					<li class="control active" data-filter="*"><?php echo $all_text; ?></li>
 					<?php foreach( $settings['eael_fg_controls'] as $control ) :
 						$sorter_filter = $this->sorter_class( $control['eael_fg_control'] ); ?>
-						<li class="control" data-filter=".<?php echo esc_attr( $sorter_filter ); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
+						<li class="control" data-filter=".eael-cf-<?php echo esc_attr( $sorter_filter ); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
@@ -1771,12 +1772,16 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		$caption_style = $settings['eael_fg_caption_style'] == 'card' ? 'caption-style-card' : 'caption-style-hoverer';
 
 		foreach( $gallery as $item ) {
-			$html = '<div class="eael-filterable-gallery-item-wrap '.$item['controls'].'">
+			if($item['controls'] != '') {
+				$html = '<div class="eael-filterable-gallery-item-wrap eael-cf-'.$item['controls'].'">
 				<div class="gallery-grid-item">';
-
-				if($settings['eael_fg_caption_style'] === 'card' && $item['video_gallery_switch'] === 'false' && $settings['eael_fg_show_popup'] === 'media') {
-					$html .= '<a href="'.esc_url($item['image']).'" class="eael-magnific-link media-content-wrap">';
-				}
+			}else {
+				$html = '<div class="eael-filterable-gallery-item-wrap">
+				<div class="gallery-grid-item">';
+			}
+					if($settings['eael_fg_caption_style'] === 'card' && $item['video_gallery_switch'] === 'false' && $settings['eael_fg_show_popup'] === 'media') {
+						$html .= '<a href="'.esc_url($item['image']).'" class="eael-magnific-link media-content-wrap">';
+					}
 					$html .= '<div class="gallery-item-thumbnail-wrap">
 							<img src="'.$item['image'].'" alt="'.$item['title'].'">';
 

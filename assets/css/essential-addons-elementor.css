@@ -2659,7 +2659,6 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 /**
  * Pricing Table
  */
-
 .eael-pricing {
     -webkit-display: flex;
     display: flex;
@@ -4165,6 +4164,10 @@ img.mfp-img {
 /*------------------------------*/
 /* Filterable Gallery
 /*------------------------------*/
+
+/*------------------------------*/
+/* 37. Filterable Gallery
+/*------------------------------*/
 .eael-filter-gallery-control {
 	width: 100%;
 }
@@ -4213,6 +4216,12 @@ img.mfp-img {
 	content: '';
 	display: inline-block;
 	width: 100%;
+}
+
+.eael-filter-gallery-container:not(.eael-cards) .item:before {
+	content: '';
+	display: inline-block;
+	padding-top: 56.25%;
 }
 
 .eael-filter-gallery-container .item .caption {
@@ -4410,8 +4419,11 @@ img.mfp-img {
 }
 
 .eael-filter-gallery-control > ul li {
-    font-size: 16px;
-    padding: 10px 15px;
+    font-size: 13px;
+    line-height: 1.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 15px;
     cursor: pointer;
 	margin: 0 5px;
 	font-weight: normal;
@@ -4864,8 +4876,6 @@ img.mfp-img {
 			clear: left;
 		}
 	}
-
-
 
 
 
