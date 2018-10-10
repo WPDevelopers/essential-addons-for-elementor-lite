@@ -1,55 +1,113 @@
 (function ($) {
     "use strict";
 
-    var FilterGallery = function( $scope, $ ) {
-        var filtergallery_elem = $scope.find('.eael-filter-gallery-wrapper').eq(0);
+    var isEditMode = false;
 
-        $(filtergallery_elem).each(function() {
-            var gridStyle = $(this).data('grid-style'),
-                ref = $(this).find('.item').data('ref'),
-                duration = $(this).data('duration'),
-                effects = $(this).data('effects'),
-                popup = $(this).data('popup'),
-                galleryEnabled = $(this).data('gallery-enabled');
-            var mixer = mixitup( $(this), {
-                controls: {
-                    scope: 'local'
-                },
-                selectors: {
-                    target: '[data-ref~="'+ref+'"]'
-                },
-                animation: {
-                    enable: true,
-                    duration: ''+duration+'',
-                    effects: ''+effects+'',
-                    easing: 'cubic-bezier(0.245, 0.045, 0.955, 1)',
-                }
-            } );
 
-            // Set Background Image
-            if( gridStyle == 'eael-hoverer' || gridStyle == 'eael-tiles' ) {
-                var postColumn = $(this).find( '.eael-filter-gallery-container .item' );
-                postColumn.each( function() {
-                    let dataBg = $(this).attr( 'data-item-bg' );
-                    $(this).css( 'background-image', 'url( '+ dataBg +' )' );
-                } );
-            }
-            // Magnific Popup
-            if( true == popup ) {
-                $(this).find('.eael-magnific-link').magnificPopup({
-                    type: 'image',
-                    gallery:{
-                        enabled: galleryEnabled
-                    },
-                    callbacks: {
-                        close: function() {
-                            $( '#elementor-lightbox' ).hide();
-                        }
-                    }
-                });
-            }
-        });
-    }
+	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
+		var $rom = [];
+
+		var $counter = $init_show + $render;
+		for(var i = $init_show; i < $counter; i++) {
+			var $item = $($gallery_items[i]);
+				$item = $item[0];
+			$rom.push($item);
+		}
+		return $rom;
+	}
+
+	var filterableGalleryHandler = function( $scope, $ ) {
+
+		var $gallery	= $scope.find('.eael-filter-gallery-container').eq(0),
+			$settings	= $gallery.data('settings');
+			
+			var $gallery_items = $gallery.data('gallery-items'),
+				$init_show = $gallery.data('init-show') ? $gallery.data('init-show') : 9;
+
+		if( !isEditMode ) {
+			var $layout_mode = 'fitRows';
+
+				if( $settings.grid_style ) {
+					$layout_mode = 'masonry';
+				}
+
+				var $isotope_args = {
+					itemSelector:   '.eael-filterable-gallery-item-wrap',
+					layoutMode		: $layout_mode,
+					percentPosition : true,
+					stagger: 30,
+					transitionDuration: $settings.duration + 'ms',
+				}
+
+				var $isotope_gallery = {};
+				
+				$scope.imagesLoaded(function(e) {
+					$isotope_gallery = $gallery.isotope($isotope_args);
+				});
+				
+				$scope.on('click', '.control', function() {
+					var $this = $(this),
+						filterValue = $this.attr('data-filter');
+
+					$this.siblings().removeClass('active');
+					$this.addClass('active');
+					$isotope_gallery.isotope({ filter: filterValue });
+				});
+
+				if( $settings.popup == 'media' ) {
+					$scope.find('.eael-magnific-link').magnificPopup({
+						type: 'image',
+						gallery:{
+							enabled: $settings.gallery_enabled
+						},
+						callbacks: {
+							close: function() {
+								$( '#elementor-lightbox' ).hide();
+							}
+						}
+					});
+				}
+
+				$scope.find('.eael-magnific-video-link').magnificPopup({
+					type: 'iframe',
+					callbacks: {
+						close: function() {
+							$( '#elementor-lightbox' ).hide();
+						}
+					}
+				});
+		}
+
+		
+		// Load more button
+		$scope.find('.eael-gallery-load-more').on('click', function(e) {
+			e.preventDefault();
+
+			var $this = $(this),
+				$init_show = $scope
+						.find('.eael-filter-gallery-container')
+							.find('.eael-filterable-gallery-item-wrap')
+								.length,
+				total_items = $gallery.data('total-gallery-items'),
+				images_per_page = $gallery.data('images-per-page'),
+				nomore_text		= $gallery.data('nomore-item-text'),
+				$items = getGalleryItem($gallery_items, $scope, images_per_page, $init_show);
+
+				if( $init_show == total_items ) {
+					$this.html('<div class="no-more-items-text">'+nomore_text+'</div>');
+					setTimeout(function(){
+						$this.fadeOut('slow');
+					}, 600);
+				}
+
+			$scope.imagesLoaded(function(e) {
+				$gallery.isotope('insert', $items);
+			});
+		});
+
+	};
+
+   
 
     var FacebookFeedHandler = function ($scope, $) {
         var loadingFeed = $scope.find( '.eael-loading-feed' );
@@ -563,7 +621,11 @@
 	}
     
     $(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', FilterGallery);
+        if(elementorFrontend.isEditMode()) {
+            isEditMode = true;
+        }
+        
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-filterable-gallery.default', filterableGalleryHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-tabs.default', AdvanceTabHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-accordion.default', AdvAccordionHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-pricing-table.default', PricingTooltip);
