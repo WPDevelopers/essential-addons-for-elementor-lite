@@ -543,5 +543,6 @@ function posts_args(){
         'offset',
         'orderby',
         'order',
+        'eael_post_grid_hover_animation'
     );
 }
