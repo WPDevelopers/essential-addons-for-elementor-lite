@@ -1906,6 +1906,19 @@ opacity: 1; }
 	}
 }
 
+.eael-author-avatar > a {
+    display: block;
+}
+
+.eael-entry-footer {
+    overflow: hidden;
+    display: flex;
+}
+
+.eael-entry-footer > div {
+    display: inline-block;
+    float: left;
+}
 
 
 /**
