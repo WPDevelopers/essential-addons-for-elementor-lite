@@ -5362,3 +5362,36 @@ img.mfp-img {
     top: 100%;
   }
 }
+
+
+/*------------------------------*/
+/* Progress Bar
+/*------------------------------*/
+.ldBar{position:relative;}.ldBar.label-center > .ldBar-label{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);text-shadow:0 0 3px #fff}.ldBar-label:after{content:"%";display:inline}.ldBar.no-percent .ldBar-label:after{content:""}
+.eael-progress-bar-container {
+	overflow: hidden;
+}
+.eael-progress-bar-container .progress-title,
+.eael-progress-bar-container .ldBar-label {
+    font-family: "Roboto", Sans-serif;
+    font-weight: 600;
+}
+.progress-title h1,
+.progress-title h2,
+.progress-title h3,
+.progress-title h4,
+.progress-title h5,
+.progress-title h6,
+.progress-title p {
+	margin: 0;
+}
+.eael-progress-bar-container.center .ldBar{
+	margin: 0 auto;
+}
+div[data-preset="line"] .ldBar-label,
+div[data-preset="rainbow"] .ldBar-label {
+    text-align: right;
+    position: absolute;
+    top: -20px;
+    right:  0;
+}
