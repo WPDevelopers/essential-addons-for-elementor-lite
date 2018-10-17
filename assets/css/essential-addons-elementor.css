@@ -1648,6 +1648,10 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 /*-----------------------------*/
 /* 20. Post Grid Style
 /*-----------------------------*/
+.eael-post-grid {
+    margin: 0 -10px;
+}
+
 .eael-grid-post {
 	float: left;
 	padding: 10px;
