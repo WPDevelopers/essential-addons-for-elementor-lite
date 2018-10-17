@@ -667,7 +667,7 @@ trait ElementsCommonFunctions {
 				'label' => __( 'Button Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
+					'flex-start' => [
 						'title' => __( 'Left', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-align-left',
 					],
@@ -675,13 +675,14 @@ trait ElementsCommonFunctions {
 						'title' => __( 'Center', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-align-center',
 					],
-					'right' => [
+					'flex-end' => [
 						'title' => __( 'Right', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-align-right',
 					]
-				],
+                ],
+                'default'   => 'center',
 				'selectors' => [
-					'{{WRAPPER}} .eael-load-more-button-wrap' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-load-more-button-wrap' => 'justify-content: {{VALUE}};',
 				]
 			]
 		);
