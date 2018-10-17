@@ -4,6 +4,11 @@
     var isEditMode = false;
 
 
+    function mybe_note_undefined($selector, $data_atts) {
+		return ($selector.data($data_atts) !== undefined) ? $selector.data($data_atts) : '';
+	}
+
+
 	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
 		var $rom = [];
 
@@ -618,7 +623,117 @@
 
 			}
 		}
-	}
+    }
+    
+    var ProgressBar = function ($scope, $) {
+		var $progressBar             = $scope.find('.eael-progress-bar-container').eq(0),
+			$layout = mybe_note_undefined($progressBar, "layout"),
+			$id = mybe_note_undefined($progressBar, "id"),
+			$number = mybe_note_undefined($progressBar, "number"),
+
+			$line_stroke_color = mybe_note_undefined($progressBar, "line-stroke-color"),
+			$line_stroke_width = mybe_note_undefined($progressBar, "line-stroke-width"),
+			$line_stroke_trail_color = mybe_note_undefined($progressBar, "line-stroke-trail-color"),
+			$line_stroke_trail_width = mybe_note_undefined($progressBar, "line-stroke-trail-width"),
+			$line_direction = mybe_note_undefined($progressBar, "line-direction"),
+
+			$fan_stroke_color = mybe_note_undefined($progressBar, "fan-stroke-color"),
+			$fan_stroke_width = mybe_note_undefined($progressBar, "fan-stroke-width"),
+			$fan_stroke_trail_color = mybe_note_undefined($progressBar, "fan-stroke-trail-color"),
+			$fan_stroke_trail_width = mybe_note_undefined($progressBar, "fan-stroke-trail-width"),
+			$fan_direction = mybe_note_undefined($progressBar, "fan-direction"),
+			
+			$circle_stroke_color = mybe_note_undefined($progressBar, "circle-stroke-color"),
+			$circle_stroke_width = mybe_note_undefined($progressBar, "circle-stroke-width"),
+			$circle_stroke_trail_color = mybe_note_undefined($progressBar, "circle-stroke-trail-color"),
+			$circle_stroke_trail_width = mybe_note_undefined($progressBar, "circle-stroke-trail-width"),
+			$circle_direction = mybe_note_undefined($progressBar, "circle-direction"),
+            
+			$bubble_circle_color = mybe_note_undefined($progressBar, "bubble-circle-color"),
+			$bubble_bg_color = mybe_note_undefined($progressBar, "bubble-bg-color"),
+			$bubble_circle_width = mybe_note_undefined($progressBar, "bubble-circle-width"),
+			$bubble_direction = mybe_note_undefined($progressBar, "bubble-direction"),
+
+			$rainbow_stroke_width = mybe_note_undefined($progressBar, "rainbow-stroke-width"),
+			$rainbow_stroke_trail_width = mybe_note_undefined($progressBar, "rainbow-stroke-trail-width"),
+			$rainbow_color_one = mybe_note_undefined($progressBar, "rainbow-color-one"),
+			$rainbow_color_two = mybe_note_undefined($progressBar, "rainbow-color-two"),
+			$rainbow_color_three = mybe_note_undefined($progressBar, "rainbow-color-three"),
+			$rainbow_color_four = mybe_note_undefined($progressBar, "rainbow-color-four"),
+			$rainbow_color_five = mybe_note_undefined($progressBar, "rainbow-color-five"),
+			$rainbow_direction = mybe_note_undefined($progressBar, "rainbow-direction");
+
+             
+            if('rainbow' == $layout){
+                var bar = new ldBar("#myItem"+ $id, {
+                    "type": 'stroke', 
+                    "path": 'M0 10L100 10', 
+                    "stroke": 'data:ldbar/res,gradient(0,1,'+ $rainbow_color_one +','+ $rainbow_color_two +','+ $rainbow_color_three +','+ $rainbow_color_four +','+ $rainbow_color_five +')',
+                    "aspect-ratio": 'none', 
+                    "stroke-width": $rainbow_stroke_width,
+                    "stroke-trail-width": $rainbow_stroke_trail_width,
+                    "stroke-dir": $rainbow_direction
+                  }).set($number);
+            }
+            else if('line' == $layout){
+                var bar = new ldBar("#myItem"+ $id, {
+                    "type": 'stroke',
+					"path": 'M0 10L100 10',
+                    "stroke": $line_stroke_color,
+                    "stroke-width": $line_stroke_width,
+                    "stroke-trail": $line_stroke_trail_color,
+                    "stroke-trail-width": $line_stroke_trail_width,
+                    "aspect-ratio": 'none',
+                    "stroke-dir": $line_direction 
+                  }).set($number);
+            }
+            else if('fan' == $layout){
+                var bar = new ldBar("#myItem"+ $id, {
+                    "type": 'stroke',
+                    "path": 'M10 90A40 40 0 0 1 90 90',
+                    "fill-dir": $fan_direction,
+                    "fill":  $fan_stroke_color, 
+                    "fill-background": $fan_stroke_trail_color, 
+                    "fill-background-extrude": $fan_stroke_width, 
+                    "stroke-dir": 'normal',
+                    "stroke": $fan_stroke_color,
+                    "stroke-width": $fan_stroke_width,
+                    "stroke-trail": $fan_stroke_trail_color,
+                    "stroke-trail-width": $fan_stroke_trail_width
+                  }).set($number);
+            }
+            else if('circle' == $layout){
+                var bar = new ldBar("#myItem"+ $id, {
+                    "type": 'stroke',
+                    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
+                    "fill-dir": $circle_direction,
+                    "fill":  $circle_stroke_color, 
+                    "fill-background": $circle_stroke_trail_color, 
+                    "fill-background-extrude": $circle_stroke_width, 
+                    "stroke-dir": 'normal',
+                    "stroke": $circle_stroke_color,
+                    "stroke-width": $circle_stroke_width,
+                    "stroke-trail": $circle_stroke_trail_color,
+                    "stroke-trail-width": $circle_stroke_trail_width
+                  }).set($number);
+            }
+            else if('bubble' == $layout){
+                var bar = new ldBar("#myItem"+ $id, {
+                    "type": 'fill',
+                    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
+                    "fill-dir": $bubble_direction,
+                    "fill": 'data:ldbar/res,bubble('+ $bubble_bg_color +','+ $bubble_circle_color +')',
+                    "pattern-size": $bubble_circle_width,
+                    "fill-background": '#ddd',
+                    "fill-background-extrude": 2,
+                    "stroke-dir": 'normal',
+                    "stroke": '#25b',
+                    "stroke-width": '3',
+                    "stroke-trail": '#ddd',
+                    "stroke-trail-width": 0.5
+                  }).set($number);
+            }
+    }
     
     $(window).on('elementor/frontend/init', function () {
         if(elementorFrontend.isEditMode()) {
@@ -637,6 +752,7 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-fancy-text.default', FancyText);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-image-accordion.default', ImageAccordion);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-countdown.default', CountDown);
+        elementorFrontend.hooks.addAction('frontend/element_ready/eael-progress-bar.default', ProgressBar);
     });
 
 }(jQuery));
