@@ -456,7 +456,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
             ]
         );
         $this->end_controls_section();
-
+        
 		/**
 		 * -------------------------------------------
 		 * Tab Style (Flipbox Style)
@@ -639,22 +639,15 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				]
 		);
 
-		$this->add_control(
-			'eael_flipbox_icon_border_padding',
+		$this->add_responsive_control(
+			'eael_flipbox_icon_padding',
 			[
-				'label' => esc_html__( 'Border Padding', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-				],
+				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-icon-image' => 'padding: {{SIZE}}px;',
-				],
-				'condition' => [
-					'eael_flipbox_img_or_icon' => 'icon'
-				]
+	 				'{{WRAPPER}} .eael-elements-flip-box-icon-image' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+	 			],
 			]
 		);
 
@@ -663,20 +656,27 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> [ 'px', '%' ],
 				'range' => [
 					'px' => [
-						'max' => 50,
+						'min'	=> 0,
+						'step'	=> 1,
+						'max'	=> 500,
 					],
+					'%'	=> [
+						'min'	=> 0,
+						'step'	=> 3,
+						'max'	=> 100
+					]
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-icon-image' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-elements-flip-box-icon-image'	=> 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'eael_flipbox_img_or_icon' => 'icon'
 				]
 			]
 		);
-
 		$this->end_controls_section();
 
 		/**
@@ -695,7 +695,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_flipbox_front_back_content_toggler',
 			[
-				'label' => esc_html__( 'Front or Rear Content', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Front or Back Content', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
@@ -704,7 +704,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'icon' => 'fa fa-arrow-left',
 					],
 					'back' => [
-						'title' => esc_html__( 'Rear Content', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Back Content', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-arrow-right',
 					],
 				],
@@ -712,11 +712,89 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 			]
 		);
 
+		/**
+		 * Icon
+		 */
+		$this->add_control(
+			'eael_flipbox_front_icon_heading',
+			[
+				'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+		/**
+		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
+		 */
+		$this->add_control(
+			'eael_flipbox_front_icon_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_flipbox_front_back_content_toggler' => 'front'
+				]
+			]
+		);
+
+		/**
+		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
+		 */
+		$this->add_control(
+			'eael_flipbox_back_icon_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-elements-flip-box-rear-container .flipbox-back-image-icon i' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_flipbox_front_back_content_toggler' => 'back'
+				]
+			]
+		);
+
+		/**
+		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
+		 */
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+            	'name' => 'eael_flipbox_front_icon_typography',
+				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i',
+				'condition' => [
+					'eael_flipbox_front_back_content_toggler' => 'front'
+				],
+			]
+		);
+
+		/**
+		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
+		 */
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+            	'name' => 'eael_flipbox_back_icon_typography',
+				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .flipbox-back-image-icon i',
+				'condition' => [
+					'eael_flipbox_front_back_content_toggler' => 'back'
+				],
+			]
+		);
+
+		/**
+		 * Title
+		 */
 		$this->add_control(
 			'eael_flipbox_front_title_heading',
 			[
 				'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
+				'separator' => 'before'
 			]
 		);
 		/**
@@ -891,7 +969,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em' ],
 						'selectors' => [
-			 				'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+			 				'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
 			 			],
 					]
 				);
@@ -903,7 +981,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em' ],
 						'selectors' => [
-			 				'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+			 				'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
 			 			],
 					]
 				);
@@ -915,7 +993,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#ffffff',
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button' => 'color: {{VALUE}};',
 						],
 					]
 				);
@@ -927,7 +1005,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#000000',
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button' => 'background: {{VALUE}};',
+							'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button' => 'background: {{VALUE}};',
 						],
 					]
 				);
@@ -946,7 +1024,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 							],
 						],
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button'	=> 'border-radius: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button'	=> 'border-radius: {{SIZE}}{{UNIT}};',
 						],
 					]
 				);
@@ -955,7 +1033,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 					Group_Control_Typography::get_type(),
 					[
 		            	'name'		=> 'eael_flipbox_button_typography',
-						'selector'	=> '{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button'
+						'selector'	=> '{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button'
 					]
 				);
 			$this->end_controls_tab();
@@ -973,7 +1051,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#ffffff',
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button:hover' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button:hover' => 'color: {{VALUE}};',
 						],
 					]
 				);
@@ -985,7 +1063,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#000000',
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-progression-flip-box-container .flipbox-button:hover' => 'background: {{VALUE}};',
+							'{{WRAPPER}} .eael-elements-flip-box-container .flipbox-button:hover' => 'background: {{VALUE}};',
 						],
 					]
 				);
@@ -1091,7 +1169,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 	  		'eael_flipbox_main_wrap',
 	  		[
 	  			'class'	=> [
-	  				'eael-elements-progression-flip-box-container',
+	  				'eael-elements-flip-box-container',
 	  				'eael-animate-flip',
 	  				'eael-'.esc_attr( $settings['eael_flipbox_type'] )
 	  			]

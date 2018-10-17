@@ -3,9 +3,9 @@
  * Plugin Name: Essential Addons for Elementor
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
- * Author: Codetic
- * Version: 2.7.5
- * Author URI: https://www.codetic.net
+ * Author: WPDeveloper
+ * Version: 2.7.11
+ * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
 */
@@ -149,6 +149,16 @@ function add_eael_elements() {
    }
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
+
+/**
+ * Registering a Group Control for All Posts Element
+ */
+function eae_posts_register_control( $controls_manager ){
+	include_once ESSENTIAL_ADDONS_EL_PATH . 'includes/eae-posts-group-control.php';
+    $controls_manager->add_group_control( 'eaeposts', new Elementor\EAE_Posts_Group_Control() );
+}
+
+add_action( 'elementor/controls/controls_registered', 'eae_posts_register_control' );
 
 /**
  * Load module's scripts and styles if any module is active.
@@ -339,10 +349,10 @@ function eael_admin_notice() {
     global $current_user ;
     $user_id = $current_user->ID;
     /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice275') ) {
+    if ( ! get_user_meta($user_id, 'eael_ignore_notice279') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
       echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>50,000+</strong> websites. Use the coupon code <strong>CELEBRATE50K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
+      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>60,000+</strong> websites. Use the coupon code <strong>CELEBRATE60K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
@@ -359,7 +369,7 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice275', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice279', 'true', true);
   }
 }
 add_action('admin_init', 'eael_nag_ignore');
