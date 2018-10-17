@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 4.9.8
 Requires PHP: 5.4
-Stable tag: 2.7.11
+Stable tag: 2.8.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -157,6 +157,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.8.0 =
+- Progress Bar widget added
+- Video card support added to Filterable Gallery
+- Multiple hover effects added to Post Grid
+- Icon changing option added to Post Grid
+- Few minor bugfix and improvements
 
 = 2.7.11 =
 - Nested Accordion support added (as saved template)
@@ -383,9 +390,10 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.7.5 =
+= 2.8.0 =
 
-- Post elements improved and optimized
-- Info Box element improved
-- Flip Box element improved
+- Progress Bar widget added
+- Video card support added to Filterable Gallery
+- Multiple hover effects added to Post Grid
+- Icon changing option added to Post Grid
 - Few minor bugfix and improvements
