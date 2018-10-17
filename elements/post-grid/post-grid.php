@@ -492,6 +492,8 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 					exclude_posts: <?php echo json_encode( ! empty( $settings['post__not_in'] ) ? $settings['post__not_in'] : [] ); ?>,
 					post__in: <?php echo json_encode( ! empty( $settings['post__in'] ) ? $settings['post__in'] : [] ); ?>,
+					hover_animation: '<?php echo $settings['eael_post_grid_hover_animation']; ?>',
+					hover_icon: '<?php echo $settings['eael_post_grid_bg_hover_icon']; ?>'
 				}
 
 				eaelLoadMore( options, settings );
