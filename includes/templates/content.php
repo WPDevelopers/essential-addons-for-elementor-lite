@@ -51,7 +51,7 @@ if( isset( $post_args['post_style'] ) ) :
             <div class="eael-grid-post-holder-inner">
                 <?php if ( $thumbnail_exists = has_post_thumbnail() && $post_args['eael_show_image'] == 1 ): ?>
                 <div class="eael-entry-media<?php echo esc_attr($post_hover_style); ?>">
-                
+
                     <?php if('none' !== $post_args['eael_post_grid_hover_animation']) : ?>
                     <div class="eael-entry-overlay<?php echo ' '.esc_attr($post_args['eael_post_grid_hover_animation']); ?>">
                         <?php if( ! empty($post_args['eael_post_grid_bg_hover_icon']) ) : ?>

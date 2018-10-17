@@ -530,6 +530,7 @@ function posts_args(){
         'eael_read_more_text',
         'show_load_more',
         'show_load_more_text',
+        'eael_post_grid_bg_hover_icon',
 
         // query_args
         'post_type',
