@@ -15,7 +15,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'fa fa-spinner';
+		return 'fa fa-tasks';
 	}
 
     public function get_categories() {
