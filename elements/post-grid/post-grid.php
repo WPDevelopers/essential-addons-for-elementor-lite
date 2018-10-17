@@ -332,7 +332,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'type'		=> Controls_Manager::ICON,
 				'default'	=> 'fa fa-long-arrow-right',
 				'condition'	=> [
-					'eael_post_block_hover_animation!'	=> 'none'
+					'eael_post_grid_hover_animation!'	=> 'none'
 				]
 			]
 		);
@@ -368,17 +368,22 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 			[
 				'label' => __( 'Icon font size', 'plugin-domain' ),
 				'type' => Controls_Manager::SLIDER,
-				'size_units' => 'px',
+				'default' => [
+					'unit' => 'px',
+					'size' => 18,
+				],
+				'size_units' => [ 'px', 'em' ],
 				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 100,
 						'step' => 1,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
 					]
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 18,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-grid-post .eael-entry-overlay > i' => 'font-size: {{SIZE}}{{UNIT}};',
