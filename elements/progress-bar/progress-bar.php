@@ -1066,7 +1066,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base {
 
         $this->add_render_attribute('inside-progressbar',[
             'style' => 'height:'.$height,
-            'class' => [ 'ldBar', 'auto', $class ],
+            'class' => [ 'inside-progressbar', 'ldBar', 'auto', $class ],
             'id'    => 'myItem'.esc_attr($this->get_id()),
             'data-preset'   => $settings['progress_bar_layout'],
         ]);

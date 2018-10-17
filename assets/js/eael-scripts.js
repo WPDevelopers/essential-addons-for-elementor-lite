@@ -626,11 +626,12 @@
     }
     
     var ProgressBar = function ($scope, $) {
+
 		var $progressBar             = $scope.find('.eael-progress-bar-container').eq(0),
 			$layout = mybe_note_undefined($progressBar, "layout"),
 			$id = mybe_note_undefined($progressBar, "id"),
 			$number = mybe_note_undefined($progressBar, "number"),
-
+			$class = '.elementor-element-' + $scope.data('id'),
 			$line_stroke_color = mybe_note_undefined($progressBar, "line-stroke-color"),
 			$line_stroke_width = mybe_note_undefined($progressBar, "line-stroke-width"),
 			$line_stroke_trail_color = mybe_note_undefined($progressBar, "line-stroke-trail-color"),
@@ -665,7 +666,7 @@
 
              
             if('rainbow' == $layout){
-                var bar = new ldBar("#myItem"+ $id, {
+                var bar = new ldBar($class + ' .inside-progressbar', {
                     "type": 'stroke', 
                     "path": 'M0 10L100 10', 
                     "stroke": 'data:ldbar/res,gradient(0,1,'+ $rainbow_color_one +','+ $rainbow_color_two +','+ $rainbow_color_three +','+ $rainbow_color_four +','+ $rainbow_color_five +')',
@@ -676,7 +677,7 @@
                   }).set($number);
             }
             else if('line' == $layout){
-                var bar = new ldBar("#myItem"+ $id, {
+                var bar = new ldBar($class + ' .inside-progressbar', {
                     "type": 'stroke',
 					"path": 'M0 10L100 10',
                     "stroke": $line_stroke_color,
@@ -688,7 +689,7 @@
                   }).set($number);
             }
             else if('fan' == $layout){
-                var bar = new ldBar("#myItem"+ $id, {
+                var bar = new ldBar($class + ' .inside-progressbar', {
                     "type": 'stroke',
                     "path": 'M10 90A40 40 0 0 1 90 90',
                     "fill-dir": $fan_direction,
@@ -703,7 +704,7 @@
                   }).set($number);
             }
             else if('circle' == $layout){
-                var bar = new ldBar("#myItem"+ $id, {
+                var bar = new ldBar($class + ' .inside-progressbar', {
                     "type": 'stroke',
                     "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
                     "fill-dir": $circle_direction,
@@ -718,7 +719,7 @@
                   }).set($number);
             }
             else if('bubble' == $layout){
-                var bar = new ldBar("#myItem"+ $id, {
+                var bar = new ldBar($class + ' .inside-progressbar', {
                     "type": 'fill',
                     "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
                     "fill-dir": $bubble_direction,
