@@ -659,7 +659,32 @@ trait ElementsCommonFunctions {
 			);
 			$this->end_controls_tab();
 
-		$this->end_controls_tabs();
+        $this->end_controls_tabs();
+        
+        $this->add_responsive_control(
+			'eael_post_grid_loadmore_button_alignment',
+			[
+				'label' => __( 'Button Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-load-more-button-wrap' => 'text-align: {{VALUE}};',
+				]
+			]
+		);
 
 		$this->end_controls_section();
 

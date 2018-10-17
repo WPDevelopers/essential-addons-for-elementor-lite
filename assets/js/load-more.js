@@ -1,15 +1,16 @@
 (function($) {
 	'use strict';
 
-	window.loadMore = function( options, settings ) {
+	window.eaelLoadMore = function( options, settings ) {
 
 		// Default Values for Load More Js
 		var optionsValue = {
 			totalPosts: options.totalPosts,
 			loadMoreBtn: options.loadMoreBtn,
-			postContainer: options.postContainer,
+			postContainer: $(options.postContainer),
 			postStyle: options.postStyle, // block, grid, timeline, 
 		}
+
 		// Settings Values
 		var settingsValue = {
 			postType: settings.postType,
@@ -24,10 +25,15 @@
 			metaPosition: settings.metaPosition,
 			excerptLength: settings.excerptLength,
 			btnText: settings.btnText,
+
 			tax_query: settings.tax_query,
-			excludePosts: settings.exclude_posts,
+
 			post__in: settings.post__in,
+			excludePosts: settings.exclude_posts,
 			offset: parseInt( settings.offset , 10 ),
+			grid_style: settings.grid_style || '',
+			hover_animation: settings.hover_animation,
+			hover_icon: settings.hover_icon
 		}
 
 		var offset = settingsValue.offset + settingsValue.perPage;
@@ -56,16 +62,18 @@
 					post_type: settingsValue.postType,
 					posts_per_page : settingsValue.perPage,
 					offset : offset,
-					
+
 					tax_query: settingsValue.tax_query,
 
-					post__in: settingsValue.post__in,
-
 					post__not_in: settingsValue.excludePosts,
+					
+					post__in: settingsValue.post__in,
 
 					orderby: settingsValue.orderBy,
 					order: settingsValue.postOrder,
 					grid_style: settingsValue.grid_style,
+					eael_post_grid_hover_animation: settingsValue.hover_animation,
+					eael_post_grid_bg_hover_icon: settingsValue.hover_icon
 				},
 				beforeSend: function() {
 					// _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
@@ -82,7 +90,7 @@
 						    	columnWidth: '.eael-post-grid-column'
 						    });
 						}, 100);
-					} else if( optionsValue.postStyle === 'timeline' ) {
+					} else {
 						optionsValue.postContainer.append( $content );
 					}
 					optionsValue.loadMoreBtn.removeClass( 'button--loading' );
@@ -100,5 +108,7 @@
 				}
 			} );
 		} );
-	}
+	}; // end of eaelLoadMore
+
+
 })(jQuery);
