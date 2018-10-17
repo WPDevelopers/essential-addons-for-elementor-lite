@@ -393,7 +393,7 @@ class Eael_Admin_Settings {
 									<div class="eael-checkbox">
 										<input type="checkbox" id="progress-bar" name="progress-bar" <?php checked( 1, $this->eael_get_settings['progress-bar'], true ); ?> >
 										<label for="progress-bar"></label>
-										<p class="eael-el-title"><?php _e( 'Progressbar', 'essential-addons-elementor' ) ?></p>
+										<p class="eael-el-title"><?php _e( 'Progress Bar', 'essential-addons-elementor' ) ?></p>
 									</div>
 								</div><!--./checkbox-container-->
 				      		</div>
