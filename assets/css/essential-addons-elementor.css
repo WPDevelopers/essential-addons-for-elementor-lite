@@ -1764,6 +1764,10 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	padding-right: 7px;
 }
 
+.eael-load-more-button-wrap {
+    display: flex;
+}
+
 .eael-load-more-button {
 	display: flex;
 	align-items: center;
