@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -145,6 +145,7 @@ class Eael_Admin_Settings {
 	   $this->eael_default_settings = array_fill_keys( $this->eael_default_keys, true );
 	   $this->eael_get_settings = get_option( 'eael_save_settings', $this->eael_default_settings );
 	   $eael_new_settings = array_diff_key( $this->eael_default_settings, $this->eael_get_settings );
+
 	   if( ! empty( $eael_new_settings ) ) {
 			$eael_updated_settings = array_merge( $this->eael_get_settings, $eael_new_settings );
 			update_option( 'eael_save_settings', $eael_updated_settings );
@@ -389,6 +390,11 @@ class Eael_Admin_Settings {
 										<label for="adv-tabs"></label>
 										<p class="eael-el-title"><?php _e( 'Advanced Tabs', 'essential-addons-elementor' ) ?></p>
 									</div>
+									<div class="eael-checkbox">
+										<input type="checkbox" id="progress-bar" name="progress-bar" <?php checked( 1, $this->eael_get_settings['progress-bar'], true ); ?> >
+										<label for="progress-bar"></label>
+										<p class="eael-el-title"><?php _e( 'Progressbar', 'essential-addons-elementor' ) ?></p>
+									</div>
 								</div><!--./checkbox-container-->
 				      		</div>
 				      		<div class="col-full">
@@ -626,37 +632,15 @@ class Eael_Admin_Settings {
 			return;
 		}
 
-		$this->eael_settings = array(
-		    'contact-form-7' 	=> intval( $settings['contact-form-7'] ? 1 : 0 ),
-		    'count-down' 		=> intval( $settings['count-down'] ? 1 : 0 ),
-		    'creative-btn' 		=> intval( $settings['creative-btn'] ? 1 : 0 ),
-		    'fancy-text' 		=> intval( $settings['fancy-text'] ? 1 : 0 ),
-		    'post-grid' 		=> intval( $settings['post-grid'] ? 1 : 0 ),
-		    'post-timeline' 	=> intval( $settings['post-timeline'] ? 1 : 0 ),
-		    'product-grid' 		=> intval( $settings['product-grid'] ? 1 : 0 ),
-		    'team-members' 		=> intval( $settings['team-members'] ? 1 : 0 ),
-		    'testimonials' 		=> intval( $settings['testimonials'] ? 1 : 0 ),
-		    'weforms' 			=> intval( $settings['weforms'] ? 1 : 0 ),
-		    'call-to-action' 	=> intval( $settings['call-to-action'] ? 1 : 0 ),
-		    'flip-box' 			=> intval( $settings['flip-box'] ? 1 : 0 ),
-		    'info-box' 			=> intval( $settings['info-box'] ? 1 : 0 ),
-		    'dual-header' 		=> intval( $settings['dual-header'] ? 1 : 0 ),
-		    'price-table' 		=> intval( $settings['price-table'] ? 1 : 0 ),
-		    'ninja-form' 		=> intval( $settings['ninja-form'] ? 1 : 0 ),
-		    'gravity-form' 		=> intval( $settings['gravity-form'] ? 1 : 0 ),
-		    'caldera-form' 		=> intval( $settings['caldera-form'] ? 1 : 0 ),
-		    'wpforms' 			=> intval( $settings['wpforms'] ? 1 : 0 ),
-		    'twitter-feed' 		=> intval( $settings['twitter-feed'] ? 1 : 0 ),
-		    'facebook-feed' 	=> intval( $settings['facebook-feed'] ? 1 : 0 ),
-		    'data-table' 		=> intval( $settings['data-table'] ? 1 : 0 ),
-		    'filter-gallery' 	=> intval( $settings['filter-gallery'] ? 1 : 0 ),
-		    'image-accordion' 	=> intval( $settings['image-accordion'] ? 1 : 0 ),
-		    'content-ticker' 	=> intval( $settings['content-ticker'] ? 1 : 0 ),
-		    'tooltip' 			=> intval( $settings['tooltip'] ? 1 : 0 ),
-		    'adv-accordion' 	=> intval( $settings['adv-accordion'] ? 1 : 0 ),
-		    'adv-tabs' 			=> intval( $settings['adv-tabs'] ? 1 : 0 ),
-		    'wisdom_registered_setting' => 1,
-		);
+		$this->eael_settings = [];
+
+		foreach( $this->eael_default_keys as $key ){
+			if( isset( $settings[ $key ] ) ) {
+				$this->eael_settings[ $key ] = 1;
+			} else {
+				$this->eael_settings[ $key ] = 0;
+			}
+		}
 		update_option( 'eael_save_settings', $this->eael_settings );
 		return true;
 		die();
