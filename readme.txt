@@ -1,94 +1,106 @@
-=== Elementor Essential Addons ===
+=== Essential Addons for Elementor ===
 Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.7
-Requires PHP: 5.6
-Stable tag: 2.7.5
+Tested up to: 4.9.8
+Requires PHP: 5.4
+Stable tag: 2.7.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Ultimate elements library for Elementor WordPress Page Builder. 53+ Premium elements with endless customization options.
+Ultimate elements library for Elementor WordPress Page Builder. 54+ Premium elements with endless customization options.
 
 == Description ==
 
-Ultimate elements  library for Elementor WordPress Page Builder. Lots of useful and premium elements to complete your website quickly. Stunning design and neat and clean code. Option to enable/disable certain elements to improve page loading. No extra resources to slow down your website.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 54+ creative elements. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
 
 [Check the Demos](https://essential-addons.com/elementor/)
 
+
+### 100+ Ready Blocks
+Use pre-made templates and sections which comes with Essential Addons and design your website to stand out from the crowd.
+
+### Completely Customizable
+Each element comes with bunch of options to control every possible things. You can achieve nearly any design with your imagination.
+
+### Light Weight & Instant Loading
+No extra resources or messy codes to slow down your website. Optimized for super fast loading and instant Live editing.
+
+### Elements Control option
+Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
+
+### Expert Support
+We have extra-ordinary support team ready to help you. Ask your questions in the support forum, or contact us directly through live chat and contact form.
+
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
-### Features
 
-* 28+ Stunning Elements (Free)
-* Fully Customizable
-* Unlimited Design Options
-* Elements Control option
-* Lightweight and Fast
-* Extra-ordinary support
+### 29+ FREE WIDGETS AND COUNTING
 
->You can enable/disable certain elements and that will eliminate all associated assets of disabled elements. So it won't slow down your website.
+We have designed 29 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
-### Available Elements (Free)
-
-* [Post Grid](https://essential-addons.com/elementor/post-grid/)
-* [Post Timeline](https://essential-addons.com/elementor/post-timeline/)
-* [Fancy Text](https://essential-addons.com/elementor/fancy-text/ )
-* [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/)
-* [Countdown](https://essential-addons.com/elementor/countdown/ )
-* [Team Members](https://essential-addons.com/elementor/team-members/)
-* [Testimonials](https://essential-addons.com/elementor/testimonials/)
-* [WooCommerce Product Grid](https://essential-addons.com/elementor/woo-product-grid/)
-* [Contact Form 7](https://essential-addons.com/elementor/contact-form-7/)
-* [Gravity Forms](https://essential-addons.com/elementor/gravity-forms/)
-* [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/)
-* [Caldera Forms](https://essential-addons.com/elementor/caldera-forms/)
-* [WPForms](https://essential-addons.com/elementor/wpforms/)
-* [weForms](https://essential-addons.com/elementor/weforms/)
-* [Info Box](https://essential-addons.com/elementor/info-box/)
-* [Flip Box](https://essential-addons.com/elementor/flip-box/)
-* [Dual Color Headline](https://essential-addons.com/elementor/dual-color-headline/)
-* [Call to Action](https://essential-addons.com/elementor/call-to-action/)
-* [Pricing Table](https://essential-addons.com/elementor/pricing-table/)
-* [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/)
-* [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/)
-* [Data Table](https://essential-addons.com/elementor/table/)
-* [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
-* [Image Accordion](https://essential-addons.com/elementor/image-accordion/)
-* [Content Ticker](https://essential-addons.com/elementor/content-ticker/)
-* [Tooltip](https://essential-addons.com/elementor/tooltip/)
-* [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/)
-* [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/)
+1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
+2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
+3. [Fancy Text](https://essential-addons.com/elementor/fancy-text/ ) - Design your page using animated text with 8 eye-catching effects
+4. [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/) - Quickly add modern buttons with hover effect in your post or page
+5. [Countdown](https://essential-addons.com/elementor/countdown/ ) - Include a countdown time to boost your click-through rates
+6. [Team Members](https://essential-addons.com/elementor/team-members/) - Feature your team members with few clicks
+7. [Testimonials](https://essential-addons.com/elementor/testimonials/) - Showcase what other said about your brand & Increase Your Credibility
+8. [WooCommerce Product Grid](https://essential-addons.com/elementor/woo-product-grid/) - Display your WooCommerce Product anywhere you want without extra efforts 
+9. [Contact Form 7](https://essential-addons.com/elementor/contact-form-7/) - Design your contact form container, fields and anything you want
+10. [Gravity Forms](https://essential-addons.com/elementor/gravity-forms/) - Completely customizable and you can control any styling.
+11. [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/) - Easily create your form style just the way you want
+12. [Caldera Forms](https://essential-addons.com/elementor/caldera-forms/) - Design effective mobile-friendly forms
+13. [WPForms](https://essential-addons.com/elementor/wpforms/) - Create powerful WordPress forms in minutes
+14 [weForms](https://essential-addons.com/elementor/weforms/) - Get the fastest form building experience 
+15. [Info Box](https://essential-addons.com/elementor/info-box/) - Design beautiful info box from predefined styles
+16. [Flip Box](https://essential-addons.com/elementor/flip-box/) - Use animated Flip Boxes to highlight any content inside your page in a great way
+17. [Dual Color Headline](https://essential-addons.com/elementor/dual-color-headline/) - Emphasize on a single word in a sentence by highlighting it with a different color
+18. [Call to Action](https://essential-addons.com/elementor/call-to-action/) - Design call-to-action buttons before a blink
+19. [Pricing Table](https://essential-addons.com/elementor/pricing-table/) - Create Pricing Tables within minutes that converts
+20 [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook posts from your page or group to improve engagement
+21. [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/) - Showcase your latest tweets to your visitor
+22. [Data Table](https://essential-addons.com/elementor/table/) - Insert visually attractive data table anywhere you want
+23. [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Easily display custom content in any pages
+24. [Image Accordion](https://essential-addons.com/elementor/image-accordion/) - Highlight your images with amazing hover effects
+25. [Content Ticker](https://essential-addons.com/elementor/content-ticker/) - Use slider and ticker effect and more on dynamic & custom content
+26. [Tooltip](https://essential-addons.com/elementor/tooltip/) - Set tooltip for Icon, Image, Text or shortcodes
+27. [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/) - Include tab to put information in different styles. Supports nested tabs.
+28. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
+29. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 
 
-### More elements (25+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (27+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
-* [Post Block (Flex)](https://essential-addons.com/elementor/post-block/)
-* [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/)
-* [Testimonial Slider](https://essential-addons.com/elementor/testimonial-slider/)
-* [Image Comparison](https://essential-addons.com/elementor/image-comparison/)
-* [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ )
-* [Instagram Gallery & Feed](https://essential-addons.com/elementor/instagram-feed/)
-* [Static Product](https://essential-addons.com/elementor/static-product/)
-* [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/)
-* [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/)
-* [Content Timeline](https://essential-addons.com/elementor/content-timeline/)
-* [Data Table](https://essential-addons.com/elementor/table/)
-* [Facebook Feed Carousel](https://essential-addons.com/elementor/facebook-feed/)
-* [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/)
-* [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/)
-* [Smart Post List](https://essential-addons.com/elementor/post-list/)
-* [Mailchimp](https://essential-addons.com/elementor/mailchimp/)
-* [Content Toggle](https://essential-addons.com/elementor/content-toggle/)
-* [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/)
-* [Price Menu](https://essential-addons.com/elementor/price-menu/)
-* [Image Hotspot](https://essential-addons.com/elementor/image-hotspot/)
-* [Fancy Divider](https://essential-addons.com/elementor/divider/)
-* [Counter](https://essential-addons.com/elementor/counter/)
-* [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/)
-* [Post Carousel](https://essential-addons.com/elementor/post-carousel/)
-* [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/)
+1. [Post Block (Flex)](https://essential-addons.com/elementor/post-block/) - Display your blog posts with variety of styles with the power of modern CSS Flexbox
+2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
+3. [Testimonial Slider](https://essential-addons.com/elementor/testimonial-slider/) - Highlight how you customers love your business with sliders
+4. [Image Comparison](https://essential-addons.com/elementor/image-comparison/) - Let your viewers compare between two images 
+5. [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ ) - Showcare your content heading in amazing way
+6. [Instagram Gallery & Feed](https://essential-addons.com/elementor/instagram-feed/) - Display your Instagram presence to leverage social proof
+7. [Advanced Google Map](https://essential-addons.com/elementor/advanced-google-map/) - Create powerful map with Polylines, Polygons, Overlay, Panorama and with Routes. Unlimited map themes.
+8. [Static Product](https://essential-addons.com/elementor/static-product/) - Present your static product just the way you want
+9. [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/) - Feature your content using uniques carousel style
+10. [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/) - Create fascinating visual effect for your content that support images, text or videos.
+11. [Content Timeline](https://essential-addons.com/elementor/content-timeline/) - Create memory lane with your content with cool scrolling animation
+12. [Data Table](https://essential-addons.com/elementor/table/) - Deliver your informations using advanced and attractive data table
+13. [Facebook Feed Carousel](https://essential-addons.com/elementor/facebook-feed/) - Put your Facebook feed in incredible carousel
+14. [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/) - Exhibit the twitter feed in interactive styles 
+15. [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Create filterable gallery from custom content or any post type.
+16. [Smart Post List](https://essential-addons.com/elementor/post-list/) - Design your blog page with modern post list
+17. [Mailchimp](https://essential-addons.com/elementor/mailchimp/) - Design your mailchimp form within Elementor with ease
+18. [Content Toggle](https://essential-addons.com/elementor/content-toggle/) - Show saved template or any content within Primary and Secondary content area
+19. [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/) - Create beautiful one page websites using this module
+20. [Price Menu](https://essential-addons.com/elementor/price-menu/) - Make beautiful Pricing menu for your brands without any hassle!
+21. [Image Hotspots](https://essential-addons.com/elementor/image-hotspots/) - Help you to add multiple hotspot icons with tooltip in a image
+22. [Fancy Divider](https://essential-addons.com/elementor/divider/) - Separate your section with fancy divider
+23. [Counter](https://essential-addons.com/elementor/counter/) - Put spotlight in important data using Counter element
+24. [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/) - Display your team members in carousel
+25. [Post Carousel](https://essential-addons.com/elementor/post-carousel/) - Even you can create carousel from your posts
+26. [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/) - Highlight brands/product logos in carousel
+27. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
+
 
 More coming soon (weekly update) ...
 
@@ -135,9 +147,49 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Screenshots ==
 
+1. Overview of few widgets
+2. Elements control panel
+3. Countdown widget
+4. Team Member widget
+5. Data Table preview
+6. Form widget
+7. Pricing Table preview 
 
 
 == Changelog ==
+
+= 2.7.11 =
+- Nested Accordion support added (as saved template)
+- Few minor bugfix and improvements
+
+= 2.7.10 =
+- Table layout breaking issue fixed for larger data tables
+- Few minor bugfix and improvements
+
+= 2.7.9 =
+- Table script issue fixed
+- Advanced Tab content width issue fixed
+- Flipbox icon styling option added
+- Few minor bugfix and improvements
+
+= 2.7.8 =
+- Group control error fixed
+- Pricing Table active feature issue fixed
+- Few minor bugfix and improvements
+
+= 2.7.7 =
+- Testimonial error fixed
+- Pricing Table tooltip issue fixed
+- Compatibility with PHP 5.4 fixed
+
+= 2.7.6 =
+- (Make sure to clear cache nad hrad refresh the page after update)
+- Tooltip option added to Pricing Table widget
+- Testimonial element improved with more layout options
+- Flip Box element improved with more options
+- Countdown element improved
+- Post queries optimized for all post elements
+- Few minor bugfix and improvements
 
 = 2.7.5 =
 - (Make sure to clear cache nad hrad refresh the page after update)

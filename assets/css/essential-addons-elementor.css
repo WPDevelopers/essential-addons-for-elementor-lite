@@ -2107,20 +2107,20 @@ opacity: 1; }
 /*---------------------------*/
 /* 26. Flipbox Style
 /*---------------------------*/
-.eael-elements-progression-flip-box-container {
+.eael-elements-flip-box-container {
 	position:relative;
 	height:300px;
 	width:100%;
 }
 
-.eael-elements-progression-flip-box-container .flipbox-button {
+.eael-elements-flip-box-container .flipbox-button {
 	display: inline-block;
 	-webkit-transition: all 400ms;
     -o-transition: all 400ms;
     transition: all 400ms;
 }
 
-.eael-elements-progression-flip-box-container a {
+.eael-elements-flip-box-container a {
 	display:block;
 }
 
@@ -2209,12 +2209,12 @@ opacity: 1; }
 }
 
 /*--- Floating Button Styles ---*/
-.eael-elements-progression-button-floating-container {
+.eael-elements-button-floating-container {
 	position:fixed;
 	z-index:100;
 }
 
-.eael-elements-progression-button-floating-container .eael-elements-button {
+.eael-elements-button-floating-container .eael-elements-button {
 	margin-top:0px;
 	font-size:14px;
 	position:relative;
@@ -2237,7 +2237,7 @@ opacity: 1; }
 }
 
 /*--- CSS3 Transitions ---*/
-.eael-elements-progression-flip-box-container {
+.eael-elements-flip-box-container {
 	perspective: 1000px;
 }
 
@@ -2265,30 +2265,30 @@ opacity: 1; }
 }
 
 /*--- Flip ---*/
-.eael-animate-flip.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-up .eael-elements-flip-box-rear-container {
 	transform: rotateX(180deg);
 }
 
-.eael-animate-flip.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-down .eael-elements-flip-box-rear-container {
 	transform: rotateX(-180deg);
 }
 
-.eael-animate-flip.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-left .eael-elements-flip-box-rear-container {
 	transform: rotateY(-180deg);
 }
 
-.eael-animate-flip.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-right .eael-elements-flip-box-rear-container {
 	transform: rotateY(180deg);
 }
 
 
 /*--- Slide ---*/
-.eael-animate-push.eael-elements-progression-flip-box-container,
-.eael-animate-slide.eael-elements-progression-flip-box-container {
+.eael-animate-push.eael-elements-flip-box-container,
+.eael-animate-slide.eael-elements-flip-box-container {
 	overflow:hidden;
 }
 
@@ -2302,8 +2302,8 @@ opacity: 1; }
 	top:100%; 
 }
 
-.eael-animate-push.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	top:0;
 }
 
@@ -2313,8 +2313,8 @@ opacity: 1; }
 	bottom:100%;
 }
 
-.eael-animate-push.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	top:auto;
 	bottom:0;
 }
@@ -2324,8 +2324,8 @@ opacity: 1; }
 	left:100%;
 }
 
-.eael-animate-push.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	left:0;
 }
 
@@ -2335,27 +2335,27 @@ opacity: 1; }
 	right:100%;
 }
 
-.eael-animate-push.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	left:auto;
 	right:0;
 }
 
 
 /*--- Push + Slide Above ---*/
-.eael-animate-push.eael-animate-up.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	top:-100%;
 }
 
-.eael-animate-push.eael-animate-down.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	top:100%;
 }
 
-.eael-animate-push.eael-animate-left.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	left:-100%;
 }
 
-.eael-animate-push.eael-animate-right.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	left:100%;
 }
 
@@ -2366,18 +2366,18 @@ opacity: 1; }
 	z-index:3;
 }
 
-.eael-animate-zoom-in.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-zoom-in.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
 	opacity:1;
 	transform: scale(1);
 }
 
 /*--- Zoom Out ---*/
-.eael-animate-zoom-out.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-zoom-out.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	opacity:0;
 	transform: scale(0.75);
 }
 
-.eael-animate-fade.eael-elements-progression-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-fade.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
 	opacity:0;
 }
 
@@ -5054,6 +5054,7 @@ img.mfp-img {
 }
 .eael-tabs-content {
   display: flex;
+  flex: 1 1 auto;
 }
 .eael-advance-tabs .eael-tabs-content > div {
   display: none;
@@ -5123,74 +5124,80 @@ img.mfp-img {
   flex: 1 100%;
 }
 }
-/**
- * Advance Accordion
- */
+
+/*------------------------------*/
+/* Advance Accordion
+/*------------------------------*/
 .eael-adv-accordion {
-  width: auto;
-  height: auto;
-  transition: all 0.3s ease-in-out;
+    width: auto;
+    height: auto;
+    transition: all 0.3s ease-in-out;
 }
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header {
-  padding: 15px;
-  border: 1px solid rgba(0,0,0,0.02);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+    padding: 15px;
+    border: 1px solid rgba(0,0,0,0.02);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  transform: rotate(0deg);
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
+    transform: rotate(0deg);
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
 }
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
-  transform: rotate(90deg);
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
+    transform: rotate(90deg);
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
 }
+
 .fa-accordion-icon {
-  display: inline-block;
-  margin-right: 10px;
+    display: inline-block;
+    margin-right: 10px;
 }
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content {
-  display: none;
-  border: 1px solid #eee;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  line-height: 1.7;
-  opacity: 0;
+    display: none;
+    border: 1px solid #eee;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.7;
 }
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
+    margin: 0;
 }
+
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
-  display: block;
-  opacity: 1;
+    display: block;
 }
 
 @keyframes rotate-90 {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(-180deg);
+    }
 }
 @keyframes fadeIn {
-  0% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
+    0% {
+        opacity: 1;
+        transition: all 0.3s ease-in-out;
+    }
+    100% {
+        opacity: 1;
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 /**
