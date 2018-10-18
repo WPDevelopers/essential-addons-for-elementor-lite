@@ -579,13 +579,6 @@ class Eael_Admin_Settings {
 									    </p>
 									</div>
 									<div class="eael-checkbox">
-									    <input type="checkbox" id="progress-bar" name="progress-bar" disabled>
-									    <label for="progress-bar" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
-									    <p class="eael-el-title">
-									        <?php _e( 'Progress Bar', 'essential-addons-elementor' ) ?>
-									    </p>
-									</div>
-									<div class="eael-checkbox">
 									    <input type="checkbox" id="protected-content" name="protected-content" disabled>
 									    <label for="protected-content" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 									    <p class="eael-el-title">
