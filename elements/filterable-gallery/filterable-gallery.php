@@ -1686,7 +1686,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 	public function sorter_class( $string ) {
 		$sorter_class = strtolower( $string );
 		$sorter_class = str_replace(' ', '-', $sorter_class);
-		$sorter_class = str_replace(',-', ' ', $sorter_class);
+		$sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
 		$sorter_class = str_replace(',', ' ', $sorter_class);
 		return $sorter_class;
 	}
