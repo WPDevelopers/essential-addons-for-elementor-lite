@@ -427,7 +427,7 @@
             exclude_posts: $exclude_posts,
         }
 
-        loadMore( options, settings );
+        eaelLoadMore( options, settings );
     }
 
     var ContentTicker = function ($scope, $) {
