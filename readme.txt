@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 4.9.8
 Requires PHP: 5.4
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -157,6 +157,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.8.1 =
+- Image Accordion styling issue fixed
+- Post Grid load more issue fixed
+- Post Timeline load more issue fixed
+- Few minor bugfix and improvements
 
 = 2.8.0 =
 - Progress Bar widget added
