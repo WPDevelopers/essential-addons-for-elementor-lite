@@ -1774,6 +1774,12 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
 	justify-content: center;
 }
 
+.eael-load-more-button {
+    padding: 1em 2em;
+    border: 0px solid;
+    font-size: 16px;
+}
+
 .eael-load-more-button .button__loader {
 	left: -100%;
 	top: auto;

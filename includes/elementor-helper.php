@@ -59,7 +59,7 @@ trait ElementsCommonFunctions {
 
         if( 'eael-content-timeline' === $this->get_name() ) {
             $this->start_controls_section(
-                'eael_section_post_timeline_filters',
+                'eael_section_timeline__filters',
                 [
                     'label' => __( 'Dynamic Content Settings', 'essential-addons-elementor' ),
                     'condition' => [
@@ -71,7 +71,7 @@ trait ElementsCommonFunctions {
 
         if( 'eael-content-timeline' !== $this->get_name() && 'eael-content-ticker' !== $this->get_name() ) {
             $this->start_controls_section(
-                'eael_section_post_timeline_filters',
+                'eael_section_post__filters',
                 [
                     'label' => __( 'Query', 'essential-addons-elementor' ),
                 ]
