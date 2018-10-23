@@ -2178,12 +2178,6 @@ opacity: 1; }
 	height:300px;
 	width:100%;
 }
-/* 
-.eael-elements-flip-box-icon-image img,
-.flipbox-back-image-icon img {
-	border-radius: 50%;
-	overflow: hidden;
-} */
 
 .eael-elements-flip-box-container .flipbox-button {
 	display: inline-block;
