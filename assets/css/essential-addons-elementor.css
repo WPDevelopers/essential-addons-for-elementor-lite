@@ -2460,8 +2460,10 @@ opacity: 1; }
 	text-align: center;
 }
 
-.eael-flipbox-img-circle .eael-elements-flip-box-icon-image img {
-	border-radius: 50%;
+.eael-flipbox-img-circle .eael-elements-flip-box-icon-image img,
+.eael-flipbox-img-circle .flipbox-back-image-icon img {
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 
@@ -4247,10 +4249,6 @@ img.mfp-img {
 /*------------------------------*/
 /* Filterable Gallery
 /*------------------------------*/
-
-/*------------------------------*/
-/* 37. Filterable Gallery
-/*------------------------------*/
 .eael-filter-gallery-control {
 	width: 100%;
 }
@@ -4720,6 +4718,35 @@ img.mfp-img {
 .gallery-grid-item:hover .video-popup-bg {
 	visibility: visible;
 	opacity: 1;
+}
+
+.gallery-item-thumbnail-wrap > .gallery-item-caption-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+}
+
+.gallery-item-caption-wrap.card-hover-bg {
+    visibility: hidden;
+	opacity: 0;
+	transition: 800ms;
+}
+
+.gallery-item-thumbnail-wrap:hover .gallery-item-caption-wrap.card-hover-bg {
+    visibility: visible;
+    opacity: 1;
+}
+
+.gallery-item-caption-wrap .gallery-item-buttons > a > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 /* ---------------------- Gallery Column CSS ----------------------- */

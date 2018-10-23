@@ -601,6 +601,7 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-elements-flip-box-icon-image img' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .flipbox-back-image-icon img' => 'border-radius: {{SIZE}}px;',
 				],
 				'condition' => [
 					'eael_flipbox_img_or_icon' => 'img',

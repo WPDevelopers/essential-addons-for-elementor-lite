@@ -98,7 +98,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_fg_grid_item_height',
 			[
-				'label'		=> esc_html__( 'Gird item height', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Image Height', 'essential-addons-elementor' ),
 				'type'		=> Controls_Manager::TEXT,
 				'default'	=> '300',
 				'condition'	=> [
@@ -147,7 +147,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				'label' => esc_html__( 'Hover Transition', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
-					'size' => 100,
+					'size' => 500,
 				],
 				'range' => [
 					'px' => [
@@ -1046,6 +1046,36 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
+		 * Tab Style (Filterable Gallery card Style)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_fg_item_card_hover_style',
+			[
+				'label'		=> esc_html__( 'Item Hover Style', 'essential-addons-elementor' ),
+				'tab'		=> Controls_Manager::TAB_STYLE,
+				'condition'	=> [
+					'eael_fg_caption_style'	=> 'card'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_fg_item_card_hover_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => 'rgba(0,0,0,0.7)',
+				'selectors' => [
+					'{{WRAPPER}} .gallery-item-caption-wrap.card-hover-bg' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
 		 * Tab Style (Video item Style)
 		 * -------------------------------------------
 		 */
@@ -1365,9 +1395,35 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_fg_item_icon_size',
+			'eael_fg_item_icon_exact_size',
 			[
 				'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em' ],
+				'range' => [
+					'px' => [
+						'min'	=> 50,
+						'max'	=> 120,
+					],
+					'em' => [
+						'min'	=> 10,
+						'max'	=> 50,
+					]
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 50
+				],
+				'selectors' => [
+					'{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_fg_item_icon_size',
+			[
+				'label' => esc_html__( 'Icon Font Size', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em' ],
 				'range' => [
@@ -1377,6 +1433,10 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 					'em' => [
 						'max' => 50,
 					]
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 18
 				],
 				'selectors' => [
 					'{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -1764,6 +1824,33 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		return $gallery_store;
 	}
 
+	protected function eael_render_fg_buttons($settings, $item) {
+		$html = '<div class="gallery-item-buttons">';
+						
+		if( ! empty($settings['eael_section_fg_zoom_icon']) && ($item['show_lightbox'] == true) ) {
+			$html .='<a href="'.esc_url($item['image']).'" class="eael-magnific-link"><i class="'.$settings['eael_section_fg_zoom_icon'].'" aria-hidden="true"></i></a>';
+		}
+
+		if( $item['maybe_link'] == 'true' ) {
+			$a_string = 'href="'.esc_url($item['link']['url']).'"';
+
+			if($item['link']['nofollow']) {
+				$a_string .= 'rel="nofollow"';
+			}
+
+			if($item['link']['is_external']) {
+				$a_string .= 'target="_blank"';
+			}
+
+			if( ! empty($settings['eael_section_fg_link_icon']) ) {
+				$html .= '<a '.$a_string.'><i class="'.$settings['eael_section_fg_link_icon'].'" aria-hidden="true"></i></a>';
+			}
+		}
+
+		$html .= '</div>';
+		return $html;
+	}
+
 	protected function render_gallery_items( $init_show = 0 ) {
 		$settings = $this->get_settings_for_display();
 		$gallery = $this->gallery_item_store();
@@ -1784,6 +1871,12 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 					}
 					$html .= '<div class="gallery-item-thumbnail-wrap">
 							<img src="'.$item['image'].'" alt="'.$item['title'].'">';
+
+							if( $settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
+								$html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer '.$settings['eael_fg_grid_hover_style'].'">';
+								$html .= ($this->eael_render_fg_buttons($settings, $item));
+								$html .= '</div>';
+							}
 
 						if( isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true') ) {
 							$icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
@@ -1825,31 +1918,8 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 								<h5 class="fg-item-title">'.$item['title'].'</h5>
 								<p class="fg-item-content">'.$item['content'].'</p>
 							';
-							if( $settings['eael_fg_show_popup'] == 'buttons') {
-						
-								$html .= '<div class="gallery-item-buttons">';
-						
-								if( ! empty($settings['eael_section_fg_zoom_icon']) && ($item['show_lightbox'] == true) ) {
-									$html .='<a href="'.esc_url($item['image']).'" class="eael-magnific-link"><i class="'.$settings['eael_section_fg_zoom_icon'].'" aria-hidden="true"></i></a>';
-								}
-						
-								if( $item['maybe_link'] == 'true' ) {
-									$a_string = 'href="'.esc_url($item['link']['url']).'"';
-						
-									if($item['link']['nofollow']) {
-										$a_string .= 'rel="nofollow"';
-									}
-						
-									if($item['link']['is_external']) {
-										$a_string .= 'target="_blank"';
-									}
-						
-									if( ! empty($settings['eael_section_fg_link_icon']) ) {
-										$html .= '<a '.$a_string.'><i class="'.$settings['eael_section_fg_link_icon'].'" aria-hidden="true"></i></a>';
-									}
-								}
-						
-								$html .= '</div>';
+							if( $settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
+								$html .= ($this->eael_render_fg_buttons($settings, $item));
 							}
 						$html .= '</div></div>';
 						}
