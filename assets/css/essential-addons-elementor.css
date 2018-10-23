@@ -2178,6 +2178,12 @@ opacity: 1; }
 	height:300px;
 	width:100%;
 }
+/* 
+.eael-elements-flip-box-icon-image img,
+.flipbox-back-image-icon img {
+	border-radius: 50%;
+	overflow: hidden;
+} */
 
 .eael-elements-flip-box-container .flipbox-button {
 	display: inline-block;
@@ -2460,8 +2466,10 @@ opacity: 1; }
 	text-align: center;
 }
 
-.eael-flipbox-img-circle .eael-elements-flip-box-icon-image img {
-	border-radius: 50%;
+.eael-flipbox-img-circle .eael-elements-flip-box-icon-image img,
+.eael-flipbox-img-circle .flipbox-back-image-icon img {
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 
