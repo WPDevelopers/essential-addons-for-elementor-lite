@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 4.9.8
 Requires PHP: 5.4
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -157,6 +157,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.8.2 =
+- Filterable Gallery card hover effect issue fixed
+- Flibox image styling issue fixed
+- Few minor bugfix and improvements
 
 = 2.8.1 =
 - Image Accordion styling issue fixed

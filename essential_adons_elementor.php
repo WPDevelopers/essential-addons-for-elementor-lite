@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.8.1
+ * Version: 2.8.2
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -352,7 +352,7 @@ function eael_admin_notice() {
     if ( ! get_user_meta($user_id, 'eael_ignore_notice280') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
       echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>70,000+</strong> websites. Use the coupon code <strong>ACTIVE70K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
+      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>80,000+</strong> websites. Use the coupon code <strong>ACTIVE80K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
