@@ -1434,6 +1434,10 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						'max' => 50,
 					]
 				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 18
+				],
 				'selectors' => [
 					'{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
