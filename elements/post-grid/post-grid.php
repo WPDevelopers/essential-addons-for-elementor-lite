@@ -24,15 +24,17 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 	}
 
 	protected function _register_controls() {
+
 		/**
 		 * Query And Layout Controls!
 		 * @source includes/elementor-helper.php
 		 */
 		$this->query_controls();
 		$this->layout_controls();
-		$this->eae_go_premium();
 
-
+		/**
+		 * Grid Style Controls!
+		 */
         $this->start_controls_section(
             'eael_section_post_grid_style',
             [
@@ -49,19 +51,6 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'default' => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .eael-grid-post-holder' => 'background-color: {{VALUE}}',
-				]
-
-			]
-		);
-
-        $this->add_control(
-			'eael_thumbnail_overlay_color',
-			[
-				'label' => __( 'Thumbnail Overlay Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => 'rgba(0,0,0, .75)',
-				'selectors' => [
-					'{{WRAPPER}} .eael-entry-overlay' => 'background-color: {{VALUE}}',
 				]
 
 			]
@@ -134,7 +123,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default'=> '#303133',
 				'selectors' => [
-					'{{WRAPPER}} .eael-entry-title, {{WRAPPER}} .eael-entry-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-entry-title a' => 'color: {{VALUE}};',
 				]
 
 			]
@@ -242,7 +231,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'eael_post_grid_excerpt_typography',
-				'label' => __( 'excerpt Typography', 'essential-addons-elementor' ),
+				'label' => __( 'Excerpt Typography', 'essential-addons-elementor' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
 				'selector' => '{{WRAPPER}} .eael-grid-post-excerpt p',
 			]
@@ -295,6 +284,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-entry-footer' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .eael-entry-meta'	=> 'justify-content: {{VALUE}};'
 				],
 			]
 		);
@@ -302,22 +292,126 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'eael_post_grid_meta_typography',
-				'label' => __( 'Excerpt Typography', 'essential-addons-elementor' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
-				'selector' => '{{WRAPPER}} .eael-entry-meta > div',
+				'name'		=> 'eael_post_grid_meta_typography',
+				'label'		=> __( 'Meta Typography', 'essential-addons-elementor' ),
+				'scheme'	=> Scheme_Typography::TYPOGRAPHY_3,
+				'selector'	=> '{{WRAPPER}} .eael-entry-meta > div, {{WRAPPER}} .eael-entry-meta > span',
 			]
 		);
 
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+            'eael_section_hover_card_styles',
+            [
+				'label' => __( 'Hover Card Style', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
+            ]
+		);
+		
+		$this->add_control(
+			'eael_post_grid_hover_animation',
+			[
+				'label' => esc_html__( 'Animation', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'fade-in',
+				'options' => [
+					'none'		=> esc_html__( 'None', 'essential-addons-elementor' ),
+					'fade-in'	=> esc_html__( 'FadeIn', 'essential-addons-elementor' ),
+					'zoom-in'	=> esc_html__( 'ZoomIn', 'essential-addons-elementor' ),
+					'slide-up'	=> esc_html__( 'SlideUp', 'essential-addons-elementor' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_post_grid_bg_hover_icon',
+			[
+				'label'		=> __( 'Post Hover Icon', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::ICON,
+				'default'	=> 'fa fa-long-arrow-right',
+				'condition'	=> [
+					'eael_post_grid_hover_animation!'	=> 'none'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_post_grid_hover_bg_color',
+			[
+				'label' => __( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => 'rgba(0,0,0, .75)',
+				'selectors' => [
+					'{{WRAPPER}} .eael-grid-post .eael-entry-overlay' => 'background-color: {{VALUE}}',
+				]
+
+			]
+		);
+
+        $this->add_control(
+			'eael_post_grid_hover_icon_color',
+			[
+				'label' => __( 'Icon Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .eael-grid-post .eael-entry-overlay > i' => 'color: {{VALUE}}',
+				]
+
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_post_grid_hover_icon_fontsize',
+			[
+				'label' => __( 'Icon font size', 'plugin-domain' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'unit' => 'px',
+					'size' => 18,
+				],
+				'size_units' => [ 'px', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-grid-post .eael-entry-overlay > i' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
+		 * Load More Button Style Controls!
+		 */
 		$this->load_more_button_style();
 
 	}
 
 
-	protected function render( ) {
+	protected function render() {
+
+		/**
+		 * Query And Layout Controls!
+		 * @source includes/elementor-helper.php
+		 */
+		$this->query_controls();
+		$this->layout_controls();
+		$this->eae_go_premium();
+
+
         $settings = $this->get_settings();
 		/**
 		 * Setup the post arguments.
@@ -338,14 +432,14 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		 * Set total posts.
 		 */
 		$total_post = $posts['count'];
-	?>
+		?>
 		<div id="eael-post-grid-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-grid-container <?php echo esc_attr($settings['eael_post_grid_columns'] ); ?>">
 		    <div class="eael-post-grid eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
 			<?php
 		        if( ! empty( $posts['content'] ) ){
 					echo $posts['content'];
 		        } else {
-					echo '<p>Something went wrong.</p>';
+					echo '<p class="text-danger">Something went wrong.</p>';
 				}
 		    ?>
 		    </div>
@@ -354,7 +448,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		<?php 
 			if( 1 == $settings['show_load_more'] ) : 
 				if( 
-					$settings['posts_per_page'] != '-1' 
+					$settings['posts_per_page'] != '-1'
 					&& $total_post != $settings['posts_per_page'] 
 					&& $total_post > intval( $settings['offset'] ) + intval( ! empty( $settings['posts_per_page'] ) ? $settings['posts_per_page'] : 4 ) 
 				) : 
@@ -366,59 +460,58 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 				<span><?php echo esc_html__( $settings['show_load_more_text'], 'essential-addons-elementor' ); ?></span>
 			</button>
 		</div>
-		<?php endif; endif; ?>
 		<!-- Loading Lode More Js -->
 		<script>
-		jQuery(document).ready(function($) {
+			jQuery(document).ready(function($) {
+				'use strict';
+				var options = {
+					totalPosts: <?php echo $total_post; ?>,
+					loadMoreBtn: $( '#eael-load-more-btn-<?php echo $this->get_id(); ?>' ),
+					postContainer: $( '.eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>' ),
+					postStyle: 'grid',
+				}
 
-			'use strict';
-			var options = {
-				totalPosts: <?php echo $total_post; ?>,
-				loadMoreBtn: $( '#eael-load-more-btn-<?php echo $this->get_id(); ?>' ),
-				postContainer: $( '.eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>' ),
-				postStyle: 'grid',
-			}
+				var settings = {
+					postType: '<?php echo $settings['post_type']; ?>',
+					perPage: <?php echo $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4'; ?>,
+					postOrder: '<?php echo $settings['order']; ?>',
+					orderBy: '<?php echo $settings['orderby']; ?>',
+					showImage: <?php echo $settings['eael_show_image']; ?>,
+					imageSize: '<?php echo $settings['image_size']; ?>',
+					showTitle: <?php echo $settings['eael_show_title']; ?>,
+					showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
+					showMeta: <?php echo $settings['eael_show_meta']; ?>,
 
-			var settings = {
-				postType: '<?php echo $settings['post_type']; ?>',
-				perPage: <?php echo $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4'; ?>,
-				postOrder: '<?php echo $settings['order']; ?>',
-				orderBy: '<?php echo $settings['orderby']; ?>',
-				showImage: <?php echo $settings['eael_show_image']; ?>,
-				imageSize: '<?php echo $settings['image_size']; ?>',
-				showTitle: <?php echo $settings['eael_show_title']; ?>,
-				showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
-				showMeta: <?php echo $settings['eael_show_meta']; ?>,
+					offset: <?php echo intval( $settings['offset'] ); ?>,
 
-				offset: <?php echo intval( $settings['offset'] ); ?>,
+					metaPosition: '<?php echo $settings['meta_position']; ?>',
+					excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
+					btnText: '<?php echo $settings['show_load_more_text']; ?>',
+					
+					tax_query: <?php echo json_encode( ! empty( $tax_query ) ? $tax_query : [] ); ?>,
 
-				metaPosition: '<?php echo $settings['meta_position']; ?>',
-				excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
-				btnText: '<?php echo $settings['show_load_more_text']; ?>',
-				
-				tax_query: <?php echo json_encode( ! empty( $tax_query ) ? $tax_query : [] ); ?>,
+					exclude_posts: <?php echo json_encode( ! empty( $settings['post__not_in'] ) ? $settings['post__not_in'] : [] ); ?>,
+					post__in: <?php echo json_encode( ! empty( $settings['post__in'] ) ? $settings['post__in'] : [] ); ?>,
+					hover_animation: '<?php echo $settings['eael_post_grid_hover_animation']; ?>',
+					hover_icon: '<?php echo $settings['eael_post_grid_bg_hover_icon']; ?>'
+				}
 
-				exclude_posts: <?php echo json_encode( ! empty( $settings['post__not_in'] ) ? $settings['post__not_in'] : [] ); ?>,
-				post__in: <?php echo json_encode( ! empty( $settings['post__in'] ) ? $settings['post__in'] : [] ); ?>,
-			}
+				eaelLoadMore( options, settings );
 
-			loadMore( options, settings );
-
-			// Load Masonry Js
-			$(window).load(function(){
-				$('.eael-post-grid').masonry({
-					itemSelector: '.eael-grid-post',
-					percentPosition: true,
-					columnWidth: '.eael-post-grid-column'
+				// Load Masonry Js
+				$(window).load(function(){
+					$('.eael-post-grid:not(.eael-post-carousel)').masonry({
+						itemSelector: '.eael-grid-post',
+						percentPosition: true,
+						columnWidth: '.eael-post-grid-column'
+					});
 				});
-			});
-		});
-		</script>
 
-		<?php
+			});
+		</script>
+		<?php endif; endif; 
 	}
 
 	protected function content_template() {}
-
 }
 Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_Post_Grid() );

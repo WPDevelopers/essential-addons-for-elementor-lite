@@ -59,7 +59,7 @@ trait ElementsCommonFunctions {
 
         if( 'eael-content-timeline' === $this->get_name() ) {
             $this->start_controls_section(
-                'eael_section_post_timeline_filters',
+                'eael_section_timeline__filters',
                 [
                     'label' => __( 'Dynamic Content Settings', 'essential-addons-elementor' ),
                     'condition' => [
@@ -71,7 +71,7 @@ trait ElementsCommonFunctions {
 
         if( 'eael-content-timeline' !== $this->get_name() && 'eael-content-ticker' !== $this->get_name() ) {
             $this->start_controls_section(
-                'eael_section_post_timeline_filters',
+                'eael_section_post__filters',
                 [
                     'label' => __( 'Query', 'essential-addons-elementor' ),
                 ]
@@ -659,7 +659,33 @@ trait ElementsCommonFunctions {
 			);
 			$this->end_controls_tab();
 
-		$this->end_controls_tabs();
+        $this->end_controls_tabs();
+        
+        $this->add_responsive_control(
+			'eael_post_grid_loadmore_button_alignment',
+			[
+				'label' => __( 'Button Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'flex-start' => [
+						'title' => __( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'flex-end' => [
+						'title' => __( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					]
+                ],
+                'default'   => 'center',
+				'selectors' => [
+					'{{WRAPPER}} .eael-load-more-button-wrap' => 'justify-content: {{VALUE}};',
+				]
+			]
+		);
 
 		$this->end_controls_section();
 
