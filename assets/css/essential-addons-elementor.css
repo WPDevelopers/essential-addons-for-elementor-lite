@@ -4337,6 +4337,11 @@ img.mfp-img {
 	transition: transform .4s;
 }
 
+.gallery-item-caption-over {
+    width: 100%;
+    height: auto;
+}
+
 /*--- Caption Animation ---*/
 .eael-filter-gallery-container .item .caption.eael-zoom-in,
 .eael-filter-gallery-container.eael-cards .item .item-img .caption.eael-zoom-in  {
