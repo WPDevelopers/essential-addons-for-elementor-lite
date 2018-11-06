@@ -265,7 +265,17 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
   			[
   				'label' => esc_html__( 'Gallery Items', 'essential-addons-elementor' )
   			]
-  		);
+		);
+		  
+		$this->add_control(
+			'photo_gallery',
+			[
+				'label'                 => __( 'Enable Photo Gallery', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::SWITCHER,
+				'default'               => 'yes',
+                'frontend_available'    => true,
+			]
+		);
 
   		$this->add_control(
 			'eael_fg_gallery_items',
@@ -1950,8 +1960,6 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			$filter_duration = 500;
 		}
 
-		$popup_show = false;
-		
 		$this->add_render_attribute(
 			'gallery',
 			[
@@ -1964,7 +1972,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			'grid_style'		=> $settings['eael_fg_grid_style'],
 			'popup'				=> $settings['eael_fg_show_popup'],
 			'duration'			=> $filter_duration,
-			'gallery_enabled'	=> $popup_show
+			'gallery_enabled'	=> $settings['photo_gallery']
 		];
 
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
@@ -1995,7 +2003,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			<?php $this->render_filters(); ?>
 			<div <?php echo $this->get_render_attribute_string('gallery-items-wrap'); ?>>
 				<?php
-					$init_show = $settings['eael_fg_items_to_show'];
+					$init_show = absint($settings['eael_fg_items_to_show']);
 
 					for( $i = 0; $i < $init_show; $i++ ) {
 						if( array_key_exists($i, $this->render_gallery_items() ) ) {
@@ -2034,7 +2042,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
                     
 					var $layout_mode = 'fitRows';
 					
-					if( $settings.grid_style == 'masonry' ) {
+					if( 'masonry'  == $settings.grid_style ) {
 						$layout_mode = 'masonry';
 					}
 
@@ -2060,6 +2068,28 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						$this.siblings().removeClass('active');
 						$this.addClass('active');
 						$isotope_gallery.isotope({ filter: filterValue });
+					});
+
+					var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
+					$scope.find('.eael-magnific-link').magnificPopup({
+						type: 'image',
+						gallery:{
+							enabled: $gallery_enabled
+						},
+						callbacks: {
+							close: function() {
+								$( '#elementor-lightbox' ).hide();
+							}
+						}
+					});
+
+					$scope.find('.eael-magnific-video-link').magnificPopup({
+						type: 'iframe',
+						callbacks: {
+							close: function() {
+								$( '#elementor-lightbox' ).hide();
+							}
+						}
 					});
 
 				});
