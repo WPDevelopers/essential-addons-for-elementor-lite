@@ -1919,20 +1919,29 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						
 						if($settings['eael_fg_grid_hover_style'] !== 'eael-none') {
 						
-						$html .= '<div class="gallery-item-caption-wrap '.$caption_style.' '.$settings['eael_fg_grid_hover_style'].'">';
-						
-						if( 'hoverer' == $settings['eael_fg_caption_style'] ) {
-							$html .= '<div class="gallery-item-hoverer-bg"></div>';
-						}
-						$html .= '<div class="gallery-item-caption-over">';
-						$html .= '
-								<h5 class="fg-item-title">'.$item['title'].'</h5>
-								<p class="fg-item-content">'.$item['content'].'</p>
-							';
-							if( $settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
-								$html .= ($this->eael_render_fg_buttons($settings, $item));
+							if(isset($item['title']) && ! empty($item['title']) || isset($item['content']) && ! empty($item['content']) ) {
+
+								$html .= '<div class="gallery-item-caption-wrap '.$caption_style.' '.$settings['eael_fg_grid_hover_style'].'">';
+								
+									if( 'hoverer' == $settings['eael_fg_caption_style'] ) {
+										$html .= '<div class="gallery-item-hoverer-bg"></div>';
+									}
+									
+									$html .= '<div class="gallery-item-caption-over">';
+
+									if( ! empty($item['title']) ) {
+										$html .= '<h5 class="fg-item-title">'.$item['title'].'</h5>';
+									}
+									if( ! empty($item['content']) ) {
+										$html .='<p class="fg-item-content">'.$item['content'].'</p>';
+									}
+
+										if( $settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
+											$html .= ($this->eael_render_fg_buttons($settings, $item));
+										}
+									$html .= '</div>';
+								$html .= '</div>';
 							}
-						$html .= '</div></div>';
 						}
 					
 					}
