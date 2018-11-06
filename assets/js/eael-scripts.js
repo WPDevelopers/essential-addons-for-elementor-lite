@@ -32,9 +32,9 @@
 		if( !isEditMode ) {
 			var $layout_mode = 'fitRows';
 
-				if( $settings.grid_style ) {
-					$layout_mode = 'masonry';
-				}
+                if( 'masonry'  == $settings.grid_style ) {
+                    $layout_mode = 'masonry';
+                }
 
 				var $isotope_args = {
 					itemSelector:   '.eael-filterable-gallery-item-wrap',
@@ -59,19 +59,18 @@
 					$isotope_gallery.isotope({ filter: filterValue });
 				});
 
-				if( $settings.popup == 'media' ) {
-					$scope.find('.eael-magnific-link').magnificPopup({
-						type: 'image',
-						gallery:{
-							enabled: $settings.gallery_enabled
-						},
-						callbacks: {
-							close: function() {
-								$( '#elementor-lightbox' ).hide();
-							}
-						}
-					});
-				}
+                var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
+                $scope.find('.eael-magnific-link').magnificPopup({
+                    type: 'image',
+                    gallery:{
+                        enabled: $gallery_enabled
+                    },
+                    callbacks: {
+                        close: function() {
+                            $( '#elementor-lightbox' ).hide();
+                        }
+                    }
+                });
 
 				$scope.find('.eael-magnific-video-link').magnificPopup({
 					type: 'iframe',
