@@ -5011,6 +5011,9 @@ screen and (max-height: 300px) {
 	height: auto;
 }
 
+a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
+	text-decoration: none;
+}
 
 /*--- Caption Animation ---*/
 .eael-filter-gallery-container .item .caption.eael-zoom-in,
@@ -5340,10 +5343,12 @@ screen and (max-height: 300px) {
 	transition: 0.6s all ease;
 }
 
-.gallery-item-caption-wrap .gallery-item-buttons>a {
+.gallery-item-caption-wrap .gallery-item-buttons > a {
 	padding: 5px 15px;
 	display: inline-block;
 	border-radius: 50%;
+	outline: none;
+	text-decoration: none;
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
