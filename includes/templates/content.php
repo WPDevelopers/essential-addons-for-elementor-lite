@@ -72,6 +72,11 @@ if( isset( $post_args['post_style'] ) ) :
                 </div>
                 <?php endif; ?>
 
+                <?php
+                    if($post_args['eael_show_title'] 
+                    ||$post_args['eael_show_meta']
+                    ||$post_args['eael_show_excerpt']) :
+                ?>
                 <div class="eael-entry-wrapper">
                     <header class="eael-entry-header">
                         <?php if($post_args['eael_show_title']){ ?>
@@ -107,6 +112,8 @@ if( isset( $post_args['post_style'] ) ) :
                     </div>
                 <?php } ?>
             </div>
+            <?php endif; ?>
+
         </div>
     </article>
 <?php endif;  //$post_args['post_style'] == 'post_carousel' ?>
