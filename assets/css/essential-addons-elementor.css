@@ -4847,8 +4847,9 @@ img.mfp-img {
 
 button.mfp-close,
 button.mfp-close:hover {
-    display: inline-block;
-    background: transparent;
+    display: inline-block !important;
+	background: transparent;
+	width: auto !important;
 }
 
 .mfp-arrow,
