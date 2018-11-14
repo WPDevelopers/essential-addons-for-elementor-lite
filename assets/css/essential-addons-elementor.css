@@ -4845,6 +4845,17 @@ img.mfp-img {
 	cursor: pointer;
 }
 
+button.mfp-close,
+button.mfp-close:hover {
+    display: inline-block;
+    background: transparent;
+}
+
+.mfp-arrow,
+.mfp-arrow:hover {
+	background: transparent;
+}
+
 @media screen and (max-width: 800px) and (orientation: landscape),
 screen and (max-height: 300px) {
     /**
