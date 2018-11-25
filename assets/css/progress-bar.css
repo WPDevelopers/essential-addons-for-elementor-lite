@@ -1,0 +1,94 @@
+@-webkit-keyframes animateStripe {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(35px, 0);
+    }
+
+}
+
+@keyframes animateStripe {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(35px, 0);
+    }
+
+}
+
+@-webkit-keyframes animateStripeRTL {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(35px, 0);
+    }
+
+}
+
+@keyframes animateStripeRTL {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(35px, 0);
+    }
+
+}
+
+.eael-progressbar {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 20px;
+    background-color: #eee;
+}
+
+.eael-progressbar .eael-progressbar-fill {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: inherit;
+    height: 20px;
+    background-color: #000;
+    -webkit-transition: width 1s;
+    -o-transition: width 1s;
+    transition: width 1s;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.eael-progressbar .eael-progressbar-fill.init-zero {
+    width: 0% !important;
+}
+
+.eael-progressbar.eael-progressbar-stripe .eael-progressbar-fill:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -35px;
+    width: calc(100% + 70px);
+    height: 100%;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-size: 35px 35px;
+}
+
+.eael-progressbar.eael-progressbar-animate .eael-progressbar-fill:after {
+    -webkit-animation: animateStripe 2s linear infinite;
+    animation: animateStripe 2s linear infinite
+}
+
+.eael-progressbar.eael-progressbar-animate-rtl .eael-progressbar-fill:after {
+    -webkit-animation: animateStripeRTL 2s linear infinite;
+    animation: animateStripeRTL 2s linear infinite
+}
