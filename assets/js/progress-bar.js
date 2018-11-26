@@ -140,11 +140,11 @@
 
 	$.fn.eaelProgressBar = function() {
 		var $this = $(this)
-		var props = []
+		// var props = []
 
-		jQuery.each($this.data(), function(index, value) {
-			props[index] = value
-		})
+		// jQuery.each($this.data(), function(index, value) {
+		// 	props[index] = value
+		// })
 
 		// events
 		// $this.one('inview', function() {
@@ -156,6 +156,16 @@
 
 		$this.one('inview', function() {
 			$('.eael-progressbar-fill', $this).removeClass('init-zero')
+
+			$('.eael-progressbar-count', $this).prop('counter', 0).animate({
+				counter: $('.eael-progressbar-count', $this).data('count')
+			}, {
+				duration: 1000,
+				easing: 'linear',
+				step: function(now) {
+					$(this).text(Math.ceil(now))
+				}
+			})
 		})
 	}
 }(jQuery))
