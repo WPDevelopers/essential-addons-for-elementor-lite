@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) {
 
 class Widget_Eael_Progress_Bar extends Widget_Base
 {
-
     public function get_name()
     {
         return 'eael-progress-bar';
@@ -62,9 +61,42 @@ class Widget_Eael_Progress_Bar extends Widget_Base
         );
 
         $this->add_control(
+            'progress_bar_title',
+            [
+                'label' => __('Title', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => __('Progress Bar Title', 'essential-addons-elementor'),
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'title_html_tag',
+            [
+                'label' => __('Title HTML Tag', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'div',
+                'options' => [
+                    'h1' => __('H1', 'essential-addons-elementor'),
+                    'h2' => __('H2', 'essential-addons-elementor'),
+                    'h3' => __('H3', 'essential-addons-elementor'),
+                    'h4' => __('H4', 'essential-addons-elementor'),
+                    'h5' => __('H5', 'essential-addons-elementor'),
+                    'h6' => __('H6', 'essential-addons-elementor'),
+                    'div' => __('div', 'essential-addons-elementor'),
+                    'span' => __('span', 'essential-addons-elementor'),
+                    'p' => __('p', 'essential-addons-elementor'),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'progress_bar_value',
             [
-                'label' => __('Value', 'essential-addons-elementor'),
+                'label' => __('Counter Value', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['%'],
                 'range' => [
@@ -78,10 +110,20 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                     'unit' => '%',
                     'size' => 50,
                 ],
-                'separator' => 'before',
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-fill' => 'width: {{SIZE}}{{UNIT}}',
                 ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_show_count',
+            [
+                'label' => esc_html__('Display Count', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
             ]
         );
 
@@ -204,6 +246,59 @@ class Widget_Eael_Progress_Bar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'progress_bar_line_fill_stripe_animate',
+            [
+                'label' => __('Stripe Animation', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'normal' => __('Left To Right', 'plugin-domain'),
+                    'reverse' => __('Right To Left', 'plugin-domain'),
+                    'none' => __('Disabled', 'plugin-domain'),
+                ],
+                'default' => 'none',
+                'condition' => [
+                    'progress_bar_line_fill_stripe' => 'yes',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Fill
+         */
+        $this->start_controls_section(
+            'eael_progress_bar_section_style_typography',
+            [
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'progress_bar_layout' => 'line',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'progress_bar_title_typography',
+                'label' => __('Title Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-progress-bar-title',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'progress_bar_count_typography',
+                'label' => __('Count Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-progressbar-count-wrap',
+            ]
+        );
+
         $this->end_controls_section();
 
     }
@@ -219,22 +314,34 @@ class Widget_Eael_Progress_Bar extends Widget_Base
             if ($settings['progress_bar_line_fill_stripe'] == 'yes') {
                 $wrap_classes[] = 'eael-progressbar-stripe';
             }
+
+            if ($settings['progress_bar_line_fill_stripe_animate'] == 'normal') {
+                $wrap_classes[] = 'eael-progressbar-animate';
+            } else if ($settings['progress_bar_line_fill_stripe_animate'] == 'reverse') {
+                $wrap_classes[] = 'eael-progressbar-animate-rtl';
+            }
         }
 
         $this->add_render_attribute('eael-progressbar', [
             'class' => $wrap_classes,
-            'data-value' => $settings['progress_bar_value']['size'],
         ]);
 
-        ?>
+        $this->add_render_attribute('inside-progressbar', [
+            'class' => ['eael-progressbar-count'],
+            'data-count' => $settings['progress_bar_value']['size'],
+        ]);
 
-            <div <?php echo $this->get_render_attribute_string('eael-progressbar'); ?>>
-                <span class="eael-progressbar-fill init-zero"></span>
-            </div>
+        if ($settings['progress_bar_title']) {
+            printf('<%1$s class="%2$s">', $settings['title_html_tag'], 'eael-progress-bar-title');
+            echo $settings['progress_bar_title'];
+            printf('</%1$s>', $settings['title_html_tag']);
+        }
 
-        <?php
+        echo '<div ' . $this->get_render_attribute_string('eael-progressbar') . '>
+            ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span ' . $this->get_render_attribute_string('inside-progressbar') . '>0</span><span class="postfix">' . $settings['progress_bar_value']['unit'] . '</span></span>' : '') . '
+            <span class="eael-progressbar-fill init-zero"></span>
+        </div>';
     }
-
 }
 
 Plugin::instance()->widgets_manager->register_widget_type(new Widget_Eael_Progress_Bar());
