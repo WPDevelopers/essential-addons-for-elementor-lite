@@ -1,10 +1,11 @@
 (function($) {
+	// inView
 	var inviewObjects = [],
 		viewportSize, viewportOffset,
 		d = document,
 		w = window,
 		documentElement = d.documentElement,
-		timer;
+		timer
 
 	$.event.special.inview = {
 		add: function(data) {
@@ -12,89 +13,76 @@
 				data: data,
 				$element: $(this),
 				element: this
-			});
-			// Use setInterval in order to also make sure this captures elements within
-			// "overflow:scroll" elements or elements that appeared in the dom tree due to
-			// dom manipulation and reflow
-			// old: $(window).scroll(checkInView);
-			//
-			// By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-			// intervals while the user scrolls. Therefore the inview event might fire a bit late there
-			//
-			// Don't waste cycles with an interval until we get at least one element that
-			// has bound to the inview event.
+			})
+
 			if (!timer && inviewObjects.length) {
-				timer = setInterval(checkInView, 250);
+				timer = setInterval(checkInView, 250)
 			}
 		},
 
 		remove: function(data) {
 			for (var i = 0; i < inviewObjects.length; i++) {
-				var inviewObject = inviewObjects[i];
+				var inviewObject = inviewObjects[i]
 				if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-					inviewObjects.splice(i, 1);
-					break;
+					inviewObjects.splice(i, 1)
+					break
 				}
 			}
 
-			// Clear interval when we no longer have any elements listening
 			if (!inviewObjects.length) {
-				clearInterval(timer);
-				timer = null;
+				clearInterval(timer)
+				timer = null
 			}
 		}
-	};
+	}
 
 	function getViewportSize() {
 		var mode, domObject, size = {
 			height: w.innerHeight,
 			width: w.innerWidth
-		};
+		}
 
-		// if this is correct then return it. iPad has compat Mode, so will
-		// go into check clientHeight/clientWidth (which has the wrong value).
 		if (!size.height) {
-			mode = d.compatMode;
+			mode = d.compatMode
 			if (mode || !$.support.boxModel) { // IE, Gecko
 				domObject = mode === 'CSS1Compat' ?
 					documentElement : // Standards
-					d.body; // Quirks
+					d.body // Quirks
 				size = {
 					height: domObject.clientHeight,
 					width: domObject.clientWidth
-				};
+				}
 			}
 		}
 
-		return size;
+		return size
 	}
 
 	function getViewportOffset() {
 		return {
 			top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
 			left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-		};
+		}
 	}
 
 	function checkInView() {
 		if (!inviewObjects.length) {
-			return;
+			return
 		}
 
 		var i = 0,
 			$elements = $.map(inviewObjects, function(inviewObject) {
 				var selector = inviewObject.data.selector,
-					$element = inviewObject.$element;
-				return selector ? $element.find(selector) : $element;
-			});
+					$element = inviewObject.$element
+				return selector ? $element.find(selector) : $element
+			})
 
-		viewportSize = viewportSize || getViewportSize();
-		viewportOffset = viewportOffset || getViewportOffset();
+		viewportSize = viewportSize || getViewportSize()
+		viewportOffset = viewportOffset || getViewportOffset()
 
 		for (; i < inviewObjects.length; i++) {
-			// Ignore elements that are not in the DOM tree
 			if (!$.contains(documentElement, $elements[i][0])) {
-				continue;
+				continue
 			}
 
 			var $element = $($elements[i]),
@@ -103,15 +91,10 @@
 					width: $element[0].offsetWidth
 				},
 				elementOffset = $element.offset(),
-				inView = $element.data('inview');
+				inView = $element.data('inview')
 
-			// Don't ask me why because I haven't figured out yet:
-			// viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-			// Even though it sounds weird:
-			// It seems that the execution of this function is interferred by the onresize/onscroll event
-			// where viewportOffset and viewportSize are unset
 			if (!viewportOffset || !viewportSize) {
-				return;
+				return
 			}
 
 			if (elementOffset.top + elementSize.height > viewportOffset.top &&
@@ -119,25 +102,25 @@
 				elementOffset.left + elementSize.width > viewportOffset.left &&
 				elementOffset.left < viewportOffset.left + viewportSize.width) {
 				if (!inView) {
-					$element.data('inview', true).trigger('inview', [true]);
+					$element.data('inview', true).trigger('inview', [true])
 				}
 			} else if (inView) {
-				$element.data('inview', false).trigger('inview', [false]);
+				$element.data('inview', false).trigger('inview', [false])
 			}
 		}
 	}
 
 	$(w).on("scroll resize scrollstop", function() {
-		viewportSize = viewportOffset = null;
-	});
+		viewportSize = viewportOffset = null
+	})
 
-	// IE < 9 scrolls to focused elements without firing the "scroll" event
 	if (!documentElement.addEventListener && documentElement.attachEvent) {
 		documentElement.attachEvent("onfocusin", function() {
-			viewportOffset = null;
-		});
+			viewportOffset = null
+		})
 	}
 
+	// eaelProgressBar
 	$.fn.eaelProgressBar = function() {
 		var $this = $(this)
 		var $layout = $($this).data('layout')
@@ -148,53 +131,38 @@
 				$('.eael-progressbar-line-fill', $this).css({
 					'width': $num + '%',
 				})
-
-				$('.eael-progressbar-line-count', $this).prop({
-					'counter': 0
-				}).animate({
-					counter: $num
-				}, {
-					duration: 1000,
-					step: function(now) {
-						$(this).text(Math.ceil(now))
-					}
-				})
-			} else if ($layout == 'circle') {
-				$('.eael-progressbar-circle-half-left', $this).prop({
-					'counter': 0
-				}).animate({
-					counter: $num
-				}, {
-					duration: 1000,
-					easing: "swing",
-					step: function(counter) {
-						var rotate = counter * 3.6
-						$(this).css({
-							transform: "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css('clip', 'rect(auto, auto, auto, auto)')
-							$('.eael-progressbar-circle-half-right', $this).css('visibility', 'visible')
-						}
-						$('.eael-progressbar-circle-count', $this).text(Math.ceil(counter))
-					}
-				})
 			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).prop({
-					'counter': 0
-				}).animate({
-					counter: $num
-				}, {
-					duration: 1000,
-					easing: "swing",
-					step: function(counter) {
-						$(this).css({
-							transform: "rotate(" + (counter * 1.8) + "deg)",
-						})
-						$('.eael-progressbar-half-circle-count', $this).text(Math.ceil(counter))
-					}
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
 				})
 			}
+
+			// counter
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: 1500,
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'-webkit-transform': "rotate(" + rotate + "deg)",
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'clip-path': 'inset(0 0 0 0)',
+								'clip-path': 'inset(0 0 0 0)'
+							})
+							$('.eael-progressbar-circle-half-right', $this).css('visibility', 'visible')
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
 		})
 	}
 }(jQuery))
