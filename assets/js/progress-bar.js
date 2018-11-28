@@ -140,32 +140,61 @@
 
 	$.fn.eaelProgressBar = function() {
 		var $this = $(this)
-		// var props = []
-
-		// jQuery.each($this.data(), function(index, value) {
-		// 	props[index] = value
-		// })
-
-		// events
-		// $this.one('inview', function() {
-		// 	var value = props['value'] || '0'
-		// 	$('.eael-progressbar-fill', $this).css({
-		// 		'width': value + '%',
-		// 	})
-		// })
+		var $layout = $($this).data('layout')
+		var $num = $($this).data('count')
 
 		$this.one('inview', function() {
-			$('.eael-progressbar-fill', $this).removeClass('init-zero')
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
 
-			$('.eael-progressbar-count', $this).prop('counter', 0).animate({
-				counter: $('.eael-progressbar-count', $this).data('count')
-			}, {
-				duration: 1000,
-				easing: 'linear',
-				step: function(now) {
-					$(this).text(Math.ceil(now))
-				}
-			})
+				$('.eael-progressbar-line-count', $this).prop({
+					'counter': 0
+				}).animate({
+					counter: $num
+				}, {
+					duration: 1000,
+					step: function(now) {
+						$(this).text(Math.ceil(now))
+					}
+				})
+			} else if ($layout == 'circle') {
+				$('.eael-progressbar-circle-half-left', $this).prop({
+					'counter': 0
+				}).animate({
+					counter: $num
+				}, {
+					duration: 1000,
+					easing: "swing",
+					step: function(counter) {
+						var rotate = counter * 3.6
+						$(this).css({
+							transform: "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css('clip', 'rect(auto, auto, auto, auto)')
+							$('.eael-progressbar-circle-half-right', $this).css('visibility', 'visible')
+						}
+						$('.eael-progressbar-circle-count', $this).text(Math.ceil(counter))
+					}
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).prop({
+					'counter': 0
+				}).animate({
+					counter: $num
+				}, {
+					duration: 1000,
+					easing: "swing",
+					step: function(counter) {
+						$(this).css({
+							transform: "rotate(" + (counter * 1.8) + "deg)",
+						})
+						$('.eael-progressbar-half-circle-count', $this).text(Math.ceil(counter))
+					}
+				})
+			}
 		})
 	}
 }(jQuery))
