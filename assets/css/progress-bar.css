@@ -125,6 +125,13 @@
     height: 200px;
 }
 
+.eael-progressbar-circle-shadow {
+    width: 220px;
+    height: 220px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
 .eael-progressbar-circle-pie {
     position: absolute;
     top: 0;
@@ -135,7 +142,7 @@
     clip-path: inset(0 0 0 50%);
 }
 
-.eael-progressbar-circle-shadow {
+.eael-progressbar-circle-inner {
     height: 100%;
     width: 100%;
     border-width: 12px;
@@ -171,7 +178,7 @@
     visibility: hidden;
 }
 
-.eael-progressbar-circle-inner {
+.eael-progressbar-circle-inner-content {
     position: absolute;
     top: 50%;
     width: 100%;
@@ -208,7 +215,7 @@
     transition: transform 1500ms, -webkit-transform 1500ms;
 }
 
-.eael-progressbar-half-circle .eael-progressbar-circle-inner {
+.eael-progressbar-half-circle .eael-progressbar-circle-inner-content {
     top: initial;
     bottom: 0;
     -webkit-transform: translateY(0);
