@@ -5770,7 +5770,6 @@ screen and (max-height: 300px) {
 /*----------------------------*/
 /* 29. Content Ticker
 /*----------------------------*/
-
 .eael-ticker-wrap {
 	overflow: hidden;
 	display: flex;
@@ -5789,8 +5788,13 @@ screen and (max-height: 300px) {
 	flex: 1 1 auto;
 }
 
-.eael-ticker-wrap .eael-ticker .ticker-content {
+.eael-ticker-wrap .eael-ticker .ticker-content{
 	padding: 8px 12px;
+	line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p{
+	margin: 0;
 }
 
 .eael-ticker-wrap .swiper-button-prev {
@@ -5805,7 +5809,7 @@ screen and (max-height: 300px) {
 }
 
 .eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-	opacity: 1 !important;
+	opacity:1 !important;
 }
 
 .eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
