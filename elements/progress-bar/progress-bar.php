@@ -127,7 +127,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Prefix', 'essential-addons-elementor'),
                 'condition' => [
-                    'progress_bar_layout' => ['half_circle'],
+                    'progress_bar_layout' => 'half_circle',
                 ],
                 'separator' => 'before',
             ]
@@ -140,7 +140,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Postfix', 'essential-addons-elementor'),
                 'condition' => [
-                    'progress_bar_layout' => ['half_circle'],
+                    'progress_bar_layout' => 'half_circle',
                 ],
                 'separator' => 'before',
             ]
@@ -247,7 +247,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'name' => 'progress_bar_line_fill_color',
                 'label' => __('Color', 'essential-addons-elementor'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-progressbar-fill',
+                'selector' => '{{WRAPPER}} .eael-progressbar-line-fill',
                 'separator' => 'before',
             ]
         );
@@ -255,10 +255,8 @@ class Widget_Eael_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_fill_stripe',
             [
-                'label' => __('Stripe', 'essential-addons-elementor'),
+                'label' => __('Show Stripe', 'essential-addons-elementor'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __('Enable', 'essential-addons-elementor'),
-                'label_off' => __('Disable', 'essential-addons-elementor'),
                 'return_value' => 'yes',
                 'default' => 'no',
                 'separator' => 'before',
@@ -319,7 +317,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                     '{{WRAPPER}} .eael-progressbar-circle' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-progressbar-half-circle' => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}} / 2 * 1{{UNIT}});',
                     '{{WRAPPER}} .eael-progressbar-half-circle-after' => 'width: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-progressbar-circle-shadow' => 'width: calc({{SIZE}} + 20 * 1{{UNIT}}); height: calc({{SIZE}} + 20 * 1{{UNIT}});',
+                    '{{WRAPPER}} .eael-progressbar-circle-shadow' => 'width: calc({{SIZE}}{{UNIT}} + 20px); height: calc({{SIZE}}{{UNIT}} + 20px);',
                 ],
             ]
         );
@@ -387,14 +385,6 @@ class Widget_Eael_Progress_Bar extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'hr',
-            [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
-                'style' => 'thick',
-            ]
-        );
-
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -402,8 +392,9 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'label' => __('Box Shadow', 'essential-addons-elementor'),
                 'selector' => '{{WRAPPER}} .eael-progressbar-circle-shadow',
                 'condition' => [
-                    'progress_bar_layout' => ['circle'],
+                    'progress_bar_layout' => 'circle',
                 ],
+                'separator' => 'before',
             ]
         );
 
@@ -460,7 +451,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-progressbar-count' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-progressbar-count-wrap' => 'color: {{VALUE}}',
                 ],
                 'separator' => 'after',
             ]
@@ -472,9 +463,9 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'name' => 'progress_bar_after_typography',
                 'label' => __('Prefix/Postfix', 'essential-addons-elementor'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .eael-progressbar-half-circle-after',
+                'selector' => '{{WRAPPER}} .eael-progressbar-half-circle-after span',
                 'condition' => [
-                    'progress_bar_layout' => ['half_circle'],
+                    'progress_bar_layout' => 'half_circle',
                 ],
             ]
         );
@@ -489,7 +480,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                     '{{WRAPPER}} .eael-progressbar-half-circle-after' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
-                    'progress_bar_layout' => ['half_circle'],
+                    'progress_bar_layout' => 'half_circle',
                 ],
             ]
         );
@@ -502,6 +493,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $wrap_classes = ['eael-progressbar'];
+        $circle_wrapper = [];
 
         if ($settings['progress_bar_layout'] == 'line') {
             $wrap_classes[] = 'eael-progressbar-line';
@@ -532,6 +524,11 @@ class Widget_Eael_Progress_Bar extends Widget_Base
             </div>';
         } else if ($settings['progress_bar_layout'] == 'circle') {
             $wrap_classes[] = 'eael-progressbar-circle';
+            $circle_wrapper[] = 'eael-progressbar-circle-wrap';
+
+            $this->add_render_attribute('eael-progressbar-circle-wrap', [
+                'class' => $circle_wrapper,
+            ]);
 
             $this->add_render_attribute('eael-progressbar-circle', [
                 'class' => $wrap_classes,
@@ -539,27 +536,30 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'data-count' => $settings['progress_bar_value']['size'],
             ]);
 
-            if ($settings['progress_bar_circle_box_shadow_box_shadow']) {
-                echo '<div class="eael-progressbar-circle-shadow">';
-            }
+            echo '<div ' . $this->get_render_attribute_string('eael-progressbar-circle-wrap') . '>
+                ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '<div class="eael-progressbar-circle-shadow">' : '') . '
 
-            echo '<div ' . $this->get_render_attribute_string('eael-progressbar-circle') . '>
-                <div class="eael-progressbar-circle-pie">
-                    <div class="eael-progressbar-circle-half-left eael-progressbar-circle-half"></div>
-                    <div class="eael-progressbar-circle-half-right eael-progressbar-circle-half"></div>
+                <div ' . $this->get_render_attribute_string('eael-progressbar-circle') . '>
+                    <div class="eael-progressbar-circle-pie">
+                        <div class="eael-progressbar-circle-half-left eael-progressbar-circle-half"></div>
+                        <div class="eael-progressbar-circle-half-right eael-progressbar-circle-half"></div>
+                    </div>
+                    <div class="eael-progressbar-circle-inner"></div>
+                    <div class="eael-progressbar-circle-inner-content">
+                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
+                        ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_value']['unit'] . '</span></span>' : '') . '
+                    </div>
                 </div>
-                <div class="eael-progressbar-circle-inner"></div>
-                <div class="eael-progressbar-circle-inner-content">
-                    ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
-                    ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_value']['unit'] . '</span></span>' : '') . '
-                </div>
+
+                ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '</div>' : '') . '
             </div>';
-
-            if ($settings['progress_bar_circle_box_shadow_box_shadow']) {
-                echo '</div>';
-            }
         } else if ($settings['progress_bar_layout'] == 'half_circle') {
             $wrap_classes[] = 'eael-progressbar-half-circle';
+            $circle_wrapper[] = 'eael-progressbar-circle-wrap';
+
+            $this->add_render_attribute('eael-progressbar-circle-wrap', [
+                'class' => $circle_wrapper,
+            ]);
 
             $this->add_render_attribute('eael-progressbar-half-circle', [
                 'class' => $wrap_classes,
@@ -567,21 +567,23 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'data-count' => $settings['progress_bar_value']['size'],
             ]);
 
-            echo '<div ' . $this->get_render_attribute_string('eael-progressbar-half-circle') . '>
-                <div class="eael-progressbar-circle">
-                    <div class="eael-progressbar-circle-pie">
-                        <div class="eael-progressbar-circle-half"></div>
+            echo '<div ' . $this->get_render_attribute_string('eael-progressbar-circle-wrap') . '>
+                <div ' . $this->get_render_attribute_string('eael-progressbar-half-circle') . '>
+                    <div class="eael-progressbar-circle">
+                        <div class="eael-progressbar-circle-pie">
+                            <div class="eael-progressbar-circle-half"></div>
+                        </div>
+                        <div class="eael-progressbar-circle-inner"></div>
                     </div>
-                    <div class="eael-progressbar-circle-inner"></div>
+                    <div class="eael-progressbar-circle-inner-content">
+                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
+                        ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_value']['unit'] . '</span></span>' : '') . '
+                    </div>
                 </div>
-                <div class="eael-progressbar-circle-inner-content">
-                    ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
-                    ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_value']['unit'] . '</span></span>' : '') . '
+                <div class="eael-progressbar-half-circle-after">
+                    ' . ($settings['progress_bar_prefix_label'] ? sprintf('<span class="eael-progressbar-prefix-label">%1$s</span>', $settings['progress_bar_prefix_label']) : '') . '
+                    ' . ($settings['progress_bar_postfix_label'] ? sprintf('<span class="eael-progressbar-postfix-label">%1$s</span>', $settings['progress_bar_postfix_label']) : '') . '
                 </div>
-            </div>
-            <div class="eael-progressbar-half-circle-after">
-                ' . ($settings['progress_bar_prefix_label'] ? sprintf('<span class="eael-progressbar-prefix-label">%1$s</span>', $settings['progress_bar_prefix_label']) : '') . '
-                ' . ($settings['progress_bar_postfix_label'] ? sprintf('<span class="eael-progressbar-postfix-label">%1$s</span>', $settings['progress_bar_postfix_label']) : '') . '
             </div>';
         }
     }

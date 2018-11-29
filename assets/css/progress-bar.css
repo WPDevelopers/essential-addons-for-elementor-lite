@@ -119,6 +119,9 @@
 }
 
 /*Circle*/
+.eael-progressbar-circle-wrap > div {
+    margin: 0 auto;
+}
 .eael-progressbar-circle {
     position: relative;
     width: 200px;
@@ -228,15 +231,11 @@
     position: relative;
     font-size: 12px;
     font-weight: 400;
-}
-
-.eael-progressbar-prefix-label {
-    position: absolute;
+    clear: both;
 }
 
 .eael-progressbar-postfix-label {
-    position: absolute;
-    right: 0;
+    float: right;
 }
 
 /*Title*/
