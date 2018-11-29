@@ -1,10 +1,12 @@
 /*Animation*/
 @-webkit-keyframes animateStripe {
     0% {
+        -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
     }
 
     100% {
+        -webkit-transform: translate(35px, 0);
         transform: translate(35px, 0);
     }
 
@@ -12,10 +14,12 @@
 
 @keyframes animateStripe {
     0% {
+        -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
     }
 
     100% {
+        -webkit-transform: translate(35px, 0);
         transform: translate(35px, 0);
     }
 
@@ -23,10 +27,12 @@
 
 @-webkit-keyframes animateStripeRTL {
     0% {
+        -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
     }
 
     100% {
+        -webkit-transform: translate(-35px, 0);
         transform: translate(-35px, 0);
     }
 
@@ -34,10 +40,12 @@
 
 @keyframes animateStripeRTL {
     0% {
+        -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
     }
 
     100% {
+        -webkit-transform: translate(-35px, 0);
         transform: translate(-35px, 0);
     }
 
@@ -47,12 +55,17 @@
     position: relative;
 }
 
+.eael-progressbar-title {
+    font-size: 20px;
+    font-weight: 400;
+}
+
 /*Line*/
 .eael-progressbar-line {
     position: relative;
     display: block;
     width: 100%;
-    height: 15px;
+    height: 12px;
     background-color: #eee;
 }
 
@@ -62,7 +75,7 @@
     top: 50%;
     left: 0;
     width: 0%;
-    height: 15px;
+    height: 12px;
     background-color: #000;
     -webkit-transition: width 1500ms;
     -o-transition: width 1500ms;
@@ -100,14 +113,16 @@
     position: absolute;
     right: 0;
     bottom: calc(100% + 5px);
+    font-size: 16px;
+    font-weight: 400;
     line-height: 1;
 }
 
 /*Circle*/
 .eael-progressbar-circle {
     position: relative;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
 }
 
 .eael-progressbar-circle-pie {
@@ -123,7 +138,9 @@
 .eael-progressbar-circle-shadow {
     height: 100%;
     width: 100%;
-    border: 12px solid #eee;
+    border-width: 12px;
+    border-style: solid;
+    border-color: #eee;
     border-radius: 50%;
 }
 
@@ -133,7 +150,9 @@
     top: 0;
     height: 100%;
     width: 100%;
-    border: 12px solid #000;
+    border-width: 12px;
+    border-style: solid;
+    border-color: #000;
     border-radius: 50%;
     -webkit-clip-path: inset(0 50% 0 0);
     clip-path: inset(0 50% 0 0);
@@ -141,11 +160,13 @@
 
 .eael-progressbar-circle-half-left {
     -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
     transform: rotate(0deg);
 }
 
 .eael-progressbar-circle-half-right {
     -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
     transform: rotate(180deg);
     visibility: hidden;
 }
@@ -154,6 +175,8 @@
     position: absolute;
     top: 50%;
     width: 100%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     text-align: center;
 }
@@ -161,8 +184,8 @@
 /*Half Circle*/
 .eael-progressbar-half-circle {
     position: relative;
-    width: 220px;
-    height: 110px;
+    width: 200px;
+    height: 100px;
     overflow: hidden;
 }
 
@@ -175,14 +198,49 @@
     -webkit-clip-path: inset(50% 0 0 0);
     clip-path: inset(50% 0 0 0);
     -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
     transform: rotate(0deg);
     -webkit-transition: transform 1500ms;
     -o-transition: transform 1500ms;
+    -webkit-transition: -webkit-transform 1500ms;
+    transition: -webkit-transform 1500ms;
     transition: transform 1500ms;
+    transition: transform 1500ms, -webkit-transform 1500ms;
 }
 
 .eael-progressbar-half-circle .eael-progressbar-circle-inner {
     top: initial;
     bottom: 0;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
     transform: translateY(0);
+}
+
+/*Label*/
+.eael-progressbar-half-circle-after {
+    position: relative;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.eael-progressbar-prefix-label {
+    position: absolute;
+}
+
+.eael-progressbar-postfix-label {
+    position: absolute;
+    right: 0;
+}
+
+/*Title*/
+.eael-progressbar-circle .eael-progressbar-title,
+.eael-progressbar-half-circle .eael-progressbar-title {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.eael-progressbar-circle .eael-progressbar-count-wrap,
+.eael-progressbar-half-circle .eael-progressbar-count-wrap {
+    font-size: 28px;
+    font-weight: 700;
 }
