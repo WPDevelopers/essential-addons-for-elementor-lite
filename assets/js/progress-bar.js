@@ -137,7 +137,6 @@
 				})
 			}
 
-			// counter
 			$('.eael-progressbar-count', $this).prop({
 				'counter': 0
 			}).animate({
@@ -148,15 +147,15 @@
 					if ($layout == 'circle') {
 						var rotate = (counter * 3.6)
 						$('.eael-progressbar-circle-half-left', $this).css({
-							'-webkit-transform': "rotate(" + rotate + "deg)",
 							'transform': "rotate(" + rotate + "deg)",
 						})
 						if (rotate > 180) {
 							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0 0 0 0)',
-								'clip-path': 'inset(0 0 0 0)'
+								'clip-path': 'inset(0)'
 							})
-							$('.eael-progressbar-circle-half-right', $this).css('visibility', 'visible')
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
 						}
 					}
 
