@@ -132,7 +132,7 @@ class EAEL_Version_Rollback {
      */
     public function run() {
         $this->apply_package();
-        // $this->upgrade();
+        $this->upgrade();
     }
     
 }
