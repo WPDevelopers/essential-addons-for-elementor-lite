@@ -14,11 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 define( 'ESSENTIAL_ADDONS_EL_URL', plugins_url( '/', __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
+define( 'ESSENTIAL_ADDONS_EL_ROOT', __FILE__ );
+define( 'ESSENTIAL_ADDONS_VERSION', '2.8.4' );
+define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.8.3' );
+define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 
 
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 
 /**
