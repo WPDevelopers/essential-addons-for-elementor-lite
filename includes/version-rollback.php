@@ -75,6 +75,11 @@ class EAEL_Version_Rollback {
 		<?php
     }
 
+    /**
+     * Create package for upgrade
+     * 
+     * @access protected
+     */
     protected function apply_package() {
         
         $update_plugins = get_transient( 'update_plugins' );
@@ -95,6 +100,11 @@ class EAEL_Version_Rollback {
 
     }
 
+    /**
+     * Upgrade plugin
+     * 
+     * @access protected
+     */
     protected function upgrade() {
 
         require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
@@ -115,11 +125,14 @@ class EAEL_Version_Rollback {
 
     }
 
+    /**
+     * Trigger plugin upgrader action.
+     * 
+     * @access protected
+     */
     public function run() {
         $this->apply_package();
         $this->upgrade();
     }
     
-    
-
 }
