@@ -169,7 +169,7 @@ class Eael_Admin_Settings {
 			    	<ul class="eael-tabs">
 				      	<li><a href="#general" class="active"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-settings.svg'; ?>"><span>General</span></a></li>
 				      	<li><a href="#elements"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-modules.svg'; ?>"><span>Elements</span></a></li>
-				      	<li><a href="#version-control"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-modules.svg'; ?>"><span>Version Controll</span></a></li>
+				      	<li><a href="#version-control"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-rollback.svg'; ?>"><span>Version Controll</span></a></li>
 						<li><a href="#go-pro"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-upgrade.svg'; ?>"><span>Go Premium</span></a></li>
 			    	</ul>
 					<?php

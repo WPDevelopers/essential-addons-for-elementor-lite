@@ -153,7 +153,7 @@
         </div>
         <div class="col-full">
             <div class="premium-elements-title">
-                <img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/lock-icon.png'; ?>">
+                <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/images/lock-icon.png'; ?>">
                 <h4 class="section-title">Premium Elements</h4>
             </div>
             <div class="eael-checkbox-container">

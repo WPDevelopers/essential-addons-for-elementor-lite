@@ -4,15 +4,32 @@
             <div class="eael-admin-block-wrapper">
                 <div class="eael-admin-block eael-admin-block-community">
                     <header class="eael-admin-block-header">
-                        <h4 class="eael-admin-title">Essential Addons Elementor</h4>
-                        <br>
-                        <p>Thank you for using Essential Addons Elementor. we hope you enjoy using it.</p>
+                        <div class="eael-admin-block-header-icon">
+                            <svg height="496pt" viewBox="0 0 496 496.00305" width="496pt" xmlns="http://www.w3.org/2000/svg"><path d="m401.003906 140.25c-32.378906-25.8125-70.34375-43.691406-110.863281-52.207031-32.539063-4.480469-65.300781-7.164063-98.136719-8.042969v-72l-184 160 184 160v-72c36.101563-1.714844 72.003906 6.296875 103.953125 23.203125 41.132813 22.195313 74.398438 56.566406 95.246094 98.398437 12.191406 26.382813 18.425781 55.128907 18.257813 84.191407.058593 8.757812-.425782 17.511719-1.457032 26.207031 50.359375-42.546875 79.589844-104.992188 80-170.917969-.855468-69.046875-32.820312-134.019531-87-176.832031zm0 0" fill="#c2fb3b"/><path d="m406.027344 134.035156c-33.34375-26.613281-72.457032-45.042968-114.207032-53.816406-30.4375-4.339844-61.089843-6.996094-91.816406-7.953125v-64.265625c0-3.132812-1.828125-5.980469-4.679687-7.277344-2.855469-1.300781-6.203125-.816406-8.570313 1.238282l-184 160c-1.746094 1.519531-2.753906 3.722656-2.753906 6.039062 0 2.320312 1.007812 4.523438 2.753906 6.042969l184 160c2.367188 2.054687 5.714844 2.539062 8.570313 1.238281 2.851562-1.296875 4.679687-4.144531 4.679687-7.28125v-64c32.0625-.582031 63.746094 7.03125 92.039063 22.128906 39.726562 21.34375 71.855469 54.484375 91.960937 94.847656 11.730469 25.308594 17.707032 52.90625 17.496094 80.800782.054688 8.433594-.414062 16.859375-1.410156 25.234375-.410156 3.285156 1.246094 6.484375 4.171875 8.046875 2.921875 1.5625 6.5 1.160156 9.007812-1.007813 51.945313-44.195312 82.132813-108.769531 82.734375-176.96875-.664062-71.507812-33.765625-138.84375-89.976562-183.046875zm11.375 334.144532c.050781-2.082032.074218-4.214844.074218-6.402344.210938-30.246094-6.277343-60.164063-19.007812-87.597656-21.535156-43.378907-55.988281-79.015626-98.617188-102-32.148437-17.128907-68.246093-25.46875-104.648437-24.179688h-3.3125c-4.375.0625-7.886719 3.628906-7.886719 8v54.449219l-163.808594-142.449219 163.808594-142.445312v54.445312c0 4.347656 3.464844 7.898438 7.808594 8 32.332031.882812 64.597656 3.503906 96.648438 7.859375 39.304687 8.25 76.132812 25.582031 107.542968 50.613281 52.421875 41.191406 83.320313 103.945313 84 170.609375-.058594 56.664063-22.566406 110.996094-62.601562 151.097657zm0 0"/></svg>
+                        </div>
+                        <h4 class="eael-admin-title">Rollback to Previous Version</h4>
                     </header>
                     <div class="eael-admin-block-content">
-                        <h4>Rollback to Previous Version</h4>
-                        <p>Rollback Version</p>
-                        <div><?php echo  sprintf( '<a target="_blank" href="%s" class="button eael-version-rollback elementor-button-spinner">Reinstall Version 2.8.3</a>', wp_nonce_url( admin_url( 'admin-post.php?action=eael_version_rollback' ), 'eael_version_rollback' ) ); ?> </div>
-                        <p><span style="color: red;">Warning: Please backup your database before making the rollback.</span></p>
+                        <h3>Rollback Version</h3>
+                        <div><?php echo  sprintf( '<a target="_blank" href="%s" class="button eael-btn eael-version-rollback elementor-button-spinner">Reinstall Version 2.8.3</a>', wp_nonce_url( admin_url( 'admin-post.php?action=eael_version_rollback' ), 'eael_version_rollback' ) ); ?> </div>
+                        <div class="warning">
+                            <div class="eael-admin-block-header-icon">
+                                <?xml version="1.0" encoding="iso-8859-1"?>
+                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 451.74 451.74" style="enable-background:new 0 0 451.74 451.74;" xml:space="preserve">
+                                <path style="fill:#E24C4B;" d="M446.324,367.381L262.857,41.692c-15.644-28.444-58.311-28.444-73.956,0L5.435,367.381
+                                    c-15.644,28.444,4.267,64,36.978,64h365.511C442.057,429.959,461.968,395.825,446.324,367.381z"/>
+                                <path style="fill:#FFFFFF;" d="M225.879,63.025l183.467,325.689H42.413L225.879,63.025L225.879,63.025z"/>
+                                <g>
+                                    <path style="fill:#3F4448;" d="M196.013,212.359l11.378,75.378c1.422,8.533,8.533,15.644,18.489,15.644l0,0
+                                        c8.533,0,17.067-7.111,18.489-15.644l11.378-75.378c2.844-18.489-11.378-34.133-29.867-34.133l0,0
+                                        C207.39,178.225,194.59,193.87,196.013,212.359z"/>
+                                    <circle style="fill:#3F4448;" cx="225.879" cy="336.092" r="17.067"/>
+                                </g>
+                                </svg>
+                            </div>
+                            <h5 class="eael-admin-title">Warning: Please backup your database before making the rollback.</h5>
+                        </div>
                     </div>
                 </div>
             </div><!--admin block-wrapper end-->
