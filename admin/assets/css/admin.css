@@ -585,3 +585,16 @@ textarea.eael-form-control {
 .eael-fb-own-app-settings.eael-active, #eaelFBbtn.eael-active, #eaelFBbtnOwnApp.eael-active {
 	display: block;
 }
+
+.warning {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: #D8000C;
+  	background-color: #FFBABA;
+	overflow: hidden;
+}
+
+.warning > * {
+    float: left;
+}
