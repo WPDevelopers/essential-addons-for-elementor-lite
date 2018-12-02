@@ -121,6 +121,27 @@ class Widget_Eael_Progress_Bar extends Widget_Base
         );
 
         $this->add_control(
+            'progress_bar_animation_duration',
+            [
+                'label' => __('Animation Duration', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 1000,
+                        'max' => 10000,
+                        'step' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 1500,
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
             'progress_bar_prefix_label',
             [
                 'label' => __('Prefix Label', 'essential-addons-elementor'),
@@ -512,6 +533,12 @@ class Widget_Eael_Progress_Bar extends Widget_Base
                 'class' => $wrap_classes,
                 'data-layout' => $settings['progress_bar_layout'],
                 'data-count' => $settings['progress_bar_value']['size'],
+                'data-duration' => $settings['progress_bar_animation_duration']['size'],
+            ]);
+
+            $this->add_render_attribute('eael-progressbar-line-fill', [
+                'class' => 'eael-progressbar-line-fill',
+                'style' => '-webkit-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;-o-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;',
             ]);
 
             if ($settings['progress_bar_title']) {
@@ -520,23 +547,19 @@ class Widget_Eael_Progress_Bar extends Widget_Base
 
             echo '<div ' . $this->get_render_attribute_string('eael-progressbar-line') . '>
                 ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_value']['unit'] . '</span></span>' : '') . '
-                <span class="eael-progressbar-line-fill"></span>
+                <span ' . $this->get_render_attribute_string('eael-progressbar-line-fill') . '></span>
             </div>';
         } else if ($settings['progress_bar_layout'] == 'circle') {
             $wrap_classes[] = 'eael-progressbar-circle';
-            $circle_wrapper[] = 'eael-progressbar-circle-wrap';
-
-            $this->add_render_attribute('eael-progressbar-circle-wrap', [
-                'class' => $circle_wrapper,
-            ]);
 
             $this->add_render_attribute('eael-progressbar-circle', [
                 'class' => $wrap_classes,
                 'data-layout' => $settings['progress_bar_layout'],
                 'data-count' => $settings['progress_bar_value']['size'],
+                'data-duration' => $settings['progress_bar_animation_duration']['size'],
             ]);
 
-            echo '<div ' . $this->get_render_attribute_string('eael-progressbar-circle-wrap') . '>
+            echo '<div class="eael-progressbar-circle-wrap">
                 ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '<div class="eael-progressbar-circle-shadow">' : '') . '
 
                 <div ' . $this->get_render_attribute_string('eael-progressbar-circle') . '>
@@ -555,23 +578,24 @@ class Widget_Eael_Progress_Bar extends Widget_Base
             </div>';
         } else if ($settings['progress_bar_layout'] == 'half_circle') {
             $wrap_classes[] = 'eael-progressbar-half-circle';
-            $circle_wrapper[] = 'eael-progressbar-circle-wrap';
 
-            $this->add_render_attribute('eael-progressbar-circle-wrap', [
-                'class' => $circle_wrapper,
+            $this->add_render_attribute('eael-progressbar-circle-half', [
+                'class' => 'eael-progressbar-circle-half',
+                'style' => '-webkit-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;-o-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;',
             ]);
 
             $this->add_render_attribute('eael-progressbar-half-circle', [
                 'class' => $wrap_classes,
                 'data-layout' => $settings['progress_bar_layout'],
                 'data-count' => $settings['progress_bar_value']['size'],
+                'data-duration' => $settings['progress_bar_animation_duration']['size'],
             ]);
 
-            echo '<div ' . $this->get_render_attribute_string('eael-progressbar-circle-wrap') . '>
+            echo '<div class="eael-progressbar-circle-wrap">
                 <div ' . $this->get_render_attribute_string('eael-progressbar-half-circle') . '>
                     <div class="eael-progressbar-circle">
                         <div class="eael-progressbar-circle-pie">
-                            <div class="eael-progressbar-circle-half"></div>
+                            <div ' . $this->get_render_attribute_string('eael-progressbar-circle-half') . '></div>
                         </div>
                         <div class="eael-progressbar-circle-inner"></div>
                     </div>
