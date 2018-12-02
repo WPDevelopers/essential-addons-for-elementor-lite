@@ -123,8 +123,9 @@
 	// eaelProgressBar
 	$.fn.eaelProgressBar = function() {
 		var $this = $(this)
-		var $layout = $($this).data('layout')
-		var $num = $($this).data('count')
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
 
 		$this.one('inview', function() {
 			if ($layout == 'line') {
@@ -142,7 +143,8 @@
 			}).animate({
 				counter: $num
 			}, {
-				duration: 1500,
+				duration: $duration,
+				easing: 'linear',
 				step: function(counter) {
 					if ($layout == 'circle') {
 						var rotate = (counter * 3.6)

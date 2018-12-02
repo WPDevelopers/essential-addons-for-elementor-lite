@@ -77,12 +77,12 @@
     width: 0%;
     height: 12px;
     background-color: #000;
-    -webkit-transition: width 1500ms;
-    -o-transition: width 1500ms;
-    transition: width 1500ms;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    -webkit-transition: width 1500ms linear;
+    -o-transition: width 1500ms linear;
+    transition: width 1500ms linear;
     overflow: hidden;
 }
 
@@ -122,6 +122,7 @@
 .eael-progressbar-circle-wrap > div {
     margin: 0 auto;
 }
+
 .eael-progressbar-circle {
     position: relative;
     width: 200px;
@@ -210,12 +211,11 @@
     -webkit-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: transform 1500ms;
-    -o-transition: transform 1500ms;
-    -webkit-transition: -webkit-transform 1500ms;
-    transition: -webkit-transform 1500ms;
-    transition: transform 1500ms;
-    transition: transform 1500ms, -webkit-transform 1500ms;
+    -webkit-transition: -webkit-transform 1500ms linear;
+    transition: -webkit-transform 1500ms linear;
+    -o-transition: transform 1500ms linear;
+    transition: transform 1500ms linear;
+    transition: transform 1500ms linear, -webkit-transform 1500ms linear;
 }
 
 .eael-progressbar-half-circle .eael-progressbar-circle-inner-content {
