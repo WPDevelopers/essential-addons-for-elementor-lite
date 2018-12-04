@@ -115,7 +115,7 @@ class EAEL_Version_Rollback {
             'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this->plugin_name ),
 			'plugin' => $this->plugin_name,
 			'nonce'  => 'upgrade-plugin_' . $this->plugin_name,
-			'title'  => '<img src="' . $logo_url . '" alt="Essential Addons Elementor">' . __( 'Rolling Back to Version ' . ESSENTIAL_ADDONS_STABLE_VERSION, 'premium-addons-for-elementor' ),
+			'title'  => '<img src="' . $logo_url . '" alt="Essential Addons Elementor">' . __( 'Rolling Back to Version ' . ESSENTIAL_ADDONS_STABLE_VERSION, 'essential-addons-elementor' ),
         ];
 
         $this->print_inline_style();
