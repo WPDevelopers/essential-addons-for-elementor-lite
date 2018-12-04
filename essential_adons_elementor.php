@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.8.3
+ * Version: 2.8.4
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -349,7 +349,7 @@ function eael_admin_notice() {
     global $current_user ;
     $user_id = $current_user->ID;
     /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice280') ) {
+    if ( ! get_user_meta($user_id, 'eael_ignore_notice284') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
       echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
       printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>80,000+</strong> websites. Use the coupon code <strong>ACTIVE80K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
@@ -369,7 +369,7 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice280', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice284', 'true', true);
   }
 }
 add_action('admin_init', 'eael_nag_ignore');
