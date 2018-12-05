@@ -109,7 +109,7 @@ class EAEL_Version_Rollback {
 
         require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
-        // $logo_url = ESSENTIAL_ADDONS_EL_URL . 'admin/assets/images/ea-logo.png';
+        $logo_url = ESSENTIAL_ADDONS_EL_URL . 'admin/assets/images/ea-logo.png';
 
         $upgrader_args = [
             'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this->plugin_name ),
@@ -132,7 +132,7 @@ class EAEL_Version_Rollback {
      */
     public function run() {
         $this->apply_package();
-        // $this->upgrade();
+        $this->upgrade();
     }
     
 }
