@@ -200,11 +200,8 @@ if( ! class_exists('EAEL_Rollback') ) {
          * 
          * Adds a rollback button into the eael version control tab with appropriate query strings.
          */
-        public function eael_plugin_actions_link() {
-            if( is_multisite() && ( ! is_network_admin() && ! is_main_site() ) ) return;
-            if( ! isset($this->plugins_data['Version']) ) return;
-
-
+        public function eael_plugin_upgrade_confirmation() {
+            
         }
 
 
