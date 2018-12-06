@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -583,6 +583,13 @@ class Eael_Admin_Settings {
 									    <label for="protected-content" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 									    <p class="eael-el-title">
 									        <?php _e( 'Protected Content', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="offcanvas" name="offcanvas" disabled>
+									    <label for="offcanvas" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Offcanvas Content', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
 								</div><!--./checkbox-container-->
