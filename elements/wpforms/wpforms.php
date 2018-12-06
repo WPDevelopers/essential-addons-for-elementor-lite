@@ -1404,7 +1404,7 @@ class Widget_Eael_WpForms extends Widget_Base {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-default' );
         }
         
-        if ( class_exists( 'WPForms' ) ) {
+        if ( class_exists( '\WPForms\WPForms' ) ) {
             if ( ! empty( $settings['contact_form_list'] ) ) { ?>
                 <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
                     <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
