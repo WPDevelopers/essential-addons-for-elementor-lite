@@ -213,8 +213,8 @@ class Eael_Admin_Settings {
 											<h4 class="eael-admin-title">Need Help?</h4>
 										</header>
 										<div class="eael-admin-block-content">
-											<p>Stuck with something? Get help from the community on <a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" target="_blank">WordPress Support Forum</a> or <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank">Facebook Community.</a> In case of emergency, initiate a live chat at <a href="https://essential-addons.com/elementor/" target="_blank">Essential Addons website.</a></p>
-											<a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" class="button button-primary" target="_blank">Get Community Support</a>
+											<p>Stuck with something? Get help from the community on <a href="https://community.wpdeveloper.net/" target="_blank">WPDeveloper Forum</a> or <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank">Facebook Community.</a> In case of emergency, initiate a live chat at <a href="https://essential-addons.com/elementor/" target="_blank">Essential Addons website.</a></p>
+											<a href="https://community.wpdeveloper.net/support-forum/forum/essential-addons-for-elementor/" class="button button-primary" target="_blank">Get Community Support</a>
 										</div>
 									</div>
 									<div class="eael-admin-block eael-admin-block-review">
