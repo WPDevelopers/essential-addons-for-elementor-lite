@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 4.9.8
 Requires PHP: 5.4
-Stable tag: 2.8.3
+Stable tag: 2.8.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -157,6 +157,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.8.5 =
+
+- WPForms appearing issue fixed
+- Few minor bugfix and improvements
+
+= 2.8.4 =
+
+- Filterable Gallery default style improved
+- Few minor bugfix and improvements
 
 = 2.8.3 =
 - Filterable Gallery improved with better scripts

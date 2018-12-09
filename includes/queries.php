@@ -324,7 +324,7 @@ if ( !function_exists('eael_select_caldera_form') ) {
 if ( !function_exists('eael_select_wpforms_forms') ) {
     function eael_select_wpforms_forms() {
         $options = array();
-        if ( class_exists( 'WPForms' ) ) {
+        if ( class_exists( '\WPForms\WPForms' ) ) {
 
             $args = array(
                 'post_type'         => 'wpforms',

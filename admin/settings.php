@@ -14,7 +14,7 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'twitter-feed-carousel', 'facebook-feed-carousel', 'data-table', 'filter-gallery', 'dynamic-filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -213,8 +213,8 @@ class Eael_Admin_Settings {
 											<h4 class="eael-admin-title">Need Help?</h4>
 										</header>
 										<div class="eael-admin-block-content">
-											<p>Stuck with something? Get help from the community on <a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" target="_blank">WordPress Support Forum</a> or <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank">Facebook Community.</a> In case of emergency, initiate a live chat at <a href="https://essential-addons.com/elementor/" target="_blank">Essential Addons website.</a></p>
-											<a href="https://wordpress.org/support/plugin/essential-addons-for-elementor-lite" class="button button-primary" target="_blank">Get Community Support</a>
+											<p>Stuck with something? Get help from the community on <a href="https://community.wpdeveloper.net/" target="_blank">WPDeveloper Forum</a> or <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank">Facebook Community.</a> In case of emergency, initiate a live chat at <a href="https://essential-addons.com/elementor/" target="_blank">Essential Addons website.</a></p>
+											<a href="https://community.wpdeveloper.net/support-forum/forum/essential-addons-for-elementor/" class="button button-primary" target="_blank">Get Community Support</a>
 										</div>
 									</div>
 									<div class="eael-admin-block eael-admin-block-review">
@@ -583,6 +583,13 @@ class Eael_Admin_Settings {
 									    <label for="protected-content" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
 									    <p class="eael-el-title">
 									        <?php _e( 'Protected Content', 'essential-addons-elementor' ) ?>
+									    </p>
+									</div>
+									<div class="eael-checkbox">
+									    <input type="checkbox" id="offcanvas" name="offcanvas" disabled>
+									    <label for="offcanvas" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+									    <p class="eael-el-title">
+									        <?php _e( 'Offcanvas Content', 'essential-addons-elementor' ) ?>
 									    </p>
 									</div>
 								</div><!--./checkbox-container-->
