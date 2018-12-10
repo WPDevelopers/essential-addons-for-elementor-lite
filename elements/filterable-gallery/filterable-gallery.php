@@ -265,7 +265,17 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
   			[
   				'label' => esc_html__( 'Gallery Items', 'essential-addons-elementor' )
   			]
-  		);
+		);
+		  
+		$this->add_control(
+			'photo_gallery',
+			[
+				'label'                 => __( 'Enable Photo Gallery', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::SWITCHER,
+				'default'               => 'yes',
+                'frontend_available'    => true,
+			]
+		);
 
   		$this->add_control(
 			'eael_fg_gallery_items',
@@ -1747,6 +1757,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 		$sorter_class = strtolower( $string );
 		$sorter_class = str_replace(' ', '-', $sorter_class);
 		$sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
+		$sorter_class = str_replace('.', '-', $sorter_class);
 		$sorter_class = str_replace(',', ' ', $sorter_class);
 		return $sorter_class;
 	}
@@ -1908,20 +1919,29 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						
 						if($settings['eael_fg_grid_hover_style'] !== 'eael-none') {
 						
-						$html .= '<div class="gallery-item-caption-wrap '.$caption_style.' '.$settings['eael_fg_grid_hover_style'].'">';
-						
-						if( 'hoverer' == $settings['eael_fg_caption_style'] ) {
-							$html .= '<div class="gallery-item-hoverer-bg"></div>';
-						}
-						$html .= '<div class="gallery-item-caption-over">';
-						$html .= '
-								<h5 class="fg-item-title">'.$item['title'].'</h5>
-								<p class="fg-item-content">'.$item['content'].'</p>
-							';
-							if( $settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
-								$html .= ($this->eael_render_fg_buttons($settings, $item));
+							if(isset($item['title']) && ! empty($item['title']) || isset($item['content']) && ! empty($item['content']) ) {
+
+								$html .= '<div class="gallery-item-caption-wrap '.$caption_style.' '.$settings['eael_fg_grid_hover_style'].'">';
+								
+									if( 'hoverer' == $settings['eael_fg_caption_style'] ) {
+										$html .= '<div class="gallery-item-hoverer-bg"></div>';
+									}
+									
+									$html .= '<div class="gallery-item-caption-over">';
+
+									if( ! empty($item['title']) ) {
+										$html .= '<h5 class="fg-item-title">'.$item['title'].'</h5>';
+									}
+									if( ! empty($item['content']) ) {
+										$html .='<p class="fg-item-content">'.$item['content'].'</p>';
+									}
+
+										if( $settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
+											$html .= ($this->eael_render_fg_buttons($settings, $item));
+										}
+									$html .= '</div>';
+								$html .= '</div>';
 							}
-						$html .= '</div></div>';
 						}
 					
 					}
@@ -1949,8 +1969,6 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			$filter_duration = 500;
 		}
 
-		$popup_show = false;
-		
 		$this->add_render_attribute(
 			'gallery',
 			[
@@ -1963,7 +1981,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			'grid_style'		=> $settings['eael_fg_grid_style'],
 			'popup'				=> $settings['eael_fg_show_popup'],
 			'duration'			=> $filter_duration,
-			'gallery_enabled'	=> $popup_show
+			'gallery_enabled'	=> $settings['photo_gallery']
 		];
 
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
@@ -1994,7 +2012,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			<?php $this->render_filters(); ?>
 			<div <?php echo $this->get_render_attribute_string('gallery-items-wrap'); ?>>
 				<?php
-					$init_show = $settings['eael_fg_items_to_show'];
+					$init_show = absint($settings['eael_fg_items_to_show']);
 
 					for( $i = 0; $i < $init_show; $i++ ) {
 						if( array_key_exists($i, $this->render_gallery_items() ) ) {
@@ -2033,7 +2051,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
                     
 					var $layout_mode = 'fitRows';
 					
-					if( $settings.grid_style == 'masonry' ) {
+					if( 'masonry'  == $settings.grid_style ) {
 						$layout_mode = 'masonry';
 					}
 
@@ -2059,6 +2077,28 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						$this.siblings().removeClass('active');
 						$this.addClass('active');
 						$isotope_gallery.isotope({ filter: filterValue });
+					});
+
+					var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
+					$scope.find('.eael-magnific-link').magnificPopup({
+						type: 'image',
+						gallery:{
+							enabled: $gallery_enabled
+						},
+						callbacks: {
+							close: function() {
+								$( '#elementor-lightbox' ).hide();
+							}
+						}
+					});
+
+					$scope.find('.eael-magnific-video-link').magnificPopup({
+						type: 'iframe',
+						callbacks: {
+							close: function() {
+								$( '#elementor-lightbox' ).hide();
+							}
+						}
 					});
 
 				});
