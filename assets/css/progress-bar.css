@@ -119,10 +119,6 @@
 }
 
 /*Circle*/
-.eael-progressbar-circle-wrap > div {
-    margin: 0 auto;
-}
-
 .eael-progressbar-circle {
     position: relative;
     width: 200px;
@@ -249,4 +245,20 @@
 .eael-progressbar-half-circle .eael-progressbar-count-wrap {
     font-size: 28px;
     font-weight: 700;
+}
+
+/*alignment*/
+.eael-progressbar-line-container.left,
+.eael-progressbar-circle-container.left > div {
+    margin: 0 auto 0 0;
+}
+
+.eael-progressbar-line-container.center,
+.eael-progressbar-circle-container.center > div {
+    margin: 0 auto;
+}
+
+.eael-progressbar-line-container.right,
+.eael-progressbar-circle-container.right > div {
+    margin: 0 0 0 auto;
 }
