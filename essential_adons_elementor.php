@@ -220,7 +220,6 @@ function essential_addons_el_enqueue(){
     
     if( $is_component_active['progress-bar'] ) {
 		  wp_enqueue_script('essential_addons_elementor-eael-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
-      wp_enqueue_style('essential_addons_elementor-progress-bar', ESSENTIAL_ADDONS_EL_URL.'assets/css/progress-bar.css');
 	}
 
 }
