@@ -46,12 +46,12 @@ class Widget_Eael_Progress_Bar extends Widget_Base {
 				'type' => Controls_Manager::SELECT,
 				'options' => [
 					'line' => __('Line', 'essential-addons-elementor'),
-					'line_rainbow' => __('Line Rainbow', 'essential-addons-elementor'),
+					'line_rainbow' => __('Line Rainbow (Pro)', 'essential-addons-elementor'),
 					'circle' => __('Circle', 'essential-addons-elementor'),
-					'circle_fill' => __('Circle Fill', 'essential-addons-elementor'),
+					'circle_fill' => __('Circle Fill (Pro)', 'essential-addons-elementor'),
 					'half_circle' => __('Half Circle', 'essential-addons-elementor'),
-					'half_circle_fill' => __('Half Circle Fill', 'essential-addons-elementor'),
-					'box' => __('Box', 'essential-addons-elementor'),
+					'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-elementor'),
+					'box' => __('Box (Pro)', 'essential-addons-elementor'),
 				],
 				'default' => 'line',
 			]
