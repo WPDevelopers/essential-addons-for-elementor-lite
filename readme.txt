@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.8
+Tested up to: 5.0.0
 Requires PHP: 5.4
-Stable tag: 2.8.5
+Stable tag: 2.8.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -157,6 +157,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.8.6 =
+
+- Progress Bar revamped with faster and better script and styles
+- Few minor bugfix and improvements
 
 = 2.8.5 =
 
@@ -416,10 +421,7 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.8.0 =
+= 2.8.6 =
 
-- Progress Bar widget added
-- Video card support added to Filterable Gallery
-- Multiple hover effects added to Post Grid
-- Icon changing option added to Post Grid
+- Progress Bar revamped with faster and better script and styles
 - Few minor bugfix and improvements
