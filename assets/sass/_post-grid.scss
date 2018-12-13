@@ -1,0 +1,312 @@
+/*-----------------------------*/
+/* 15. Post Grid Style
+/*-----------------------------*/
+
+.eael-post-grid {
+	margin: 0 -10px;
+}
+
+.eael-grid-post {
+	float: left;
+	padding: 10px;
+}
+
+.eael-post-carousel .eael-grid-post {
+	float: none;
+	padding: 0;
+}
+
+.eael-grid-post-holder {
+	border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.eael-grid-post-holder-inner {
+	height: 100%;
+}
+
+.eael-entry-media {
+	position: relative;
+}
+
+.eael-entry-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	-webkit-transition: opacity .2s ease-in-out, -webkit-transform .25s cubic-bezier(.19, 1, .22, 1);
+	-moz-transition: opacity .2s ease-in-out, -moz-transform .25s cubic-bezier(.19, 1, .22, 1);
+	transition: opacity .2s ease-in-out, transform .25s cubic-bezier(.19, 1, .22, 1);
+}
+
+.eael-entry-overlay>a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+}
+
+.eael-entry-title {
+	margin: 10px 0 5px;
+	font-size: 1.2em;
+}
+
+.eael-entry-thumbnail img {
+	width: 100%;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+.eael-entry-thumbnail>img {
+	height: 100%;
+}
+
+.eael-entry-footer .eael-author-avatar {
+	width: 50px;
+}
+
+.eael-entry-footer .eael-author-avatar .avatar {
+	border-radius: 50%;
+}
+
+.eael-post-grid .eael-entry-footer .eael-entry-meta {
+	padding-left: 8px;
+	text-align: left;
+}
+
+.eael-grid-post .eael-entry-meta {
+	display: flex;
+	flex-direction: row;
+}
+
+.eael-grid-post .eael-entry-footer .eael-entry-meta {
+	flex-direction: column;
+}
+
+.eael-entry-meta>div {
+	font-size: 12px;
+	line-height: 1.2;
+	padding-bottom: 5px;
+}
+
+.eael-grid-post-excerpt p {
+	margin: 0;
+	font-size: 14px;
+}
+
+.eael-entry-meta .eael-entry-footer .eael-posted-by {
+	display: block;
+}
+
+.eael-grid-post .eael-entry-wrapper,
+.eael-grid-post .eael-entry-footer {
+	padding: 15px;
+}
+
+.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on {
+	padding-left: 5px;
+}
+
+.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on::before {
+	content: '\f111';
+	font-family: FontAwesome;
+	color: inherit;
+	opacity: .4;
+	font-size: .8em;
+	padding-right: 7px;
+}
+
+.eael-load-more-button-wrap {
+	display: flex;
+}
+
+.eael-load-more-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.eael-load-more-button {
+	padding: 1em 2em;
+	border: 0px solid;
+	font-size: 16px;
+}
+
+.eael-load-more-button .button__loader {
+	left: -100%;
+	top: auto;
+	margin-right: 5px;
+	transition: all .2s;
+}
+
+.eael-load-more-button>span {
+	margin-left: -20px;
+}
+
+.eael-load-more-button.button--loading>span {
+	margin-left: 0;
+}
+
+.eael-load-more-button.button--loading .button__loader {
+	left: 0;
+}
+
+.eael-btn-loader,
+.eael-btn-loader:after {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+}
+
+.eael-btn-loader {
+	font-size: 10px;
+	position: relative;
+	text-indent: -9999em;
+	border-top: 4px solid rgba(255, 255, 255, 0.2);
+	border-right: 4px solid rgba(255, 255, 255, 0.2);
+	border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+	border-left: 4px solid #ffffff;
+	transform: translateZ(0);
+	animation: loaderSpin 1.1s infinite linear;
+}
+
+@keyframes loaderSpin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+/*--- Post Grid Thumbnail Hover Effects ---*/
+
+.eael-entry-medianone {
+	position: relative;
+}
+
+.eael-entry-overlay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.eael-entry-overlay>i {
+	color: #fff;
+}
+
+/*--- fade in ---*/
+.eael-entry-overlay.fade-in {
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
+}
+
+.eael-entry-medianone:hover .eael-entry-overlay.fade-in {
+	visibility: visible;
+	opacity: 1;
+}
+
+.eael-entry-medianone:hover .eael-entry-overlay.fade-in>i {
+	transform: translate(0);
+	opacity: 1;
+}
+
+/*--- zoom in --- */
+.eael-entry-overlay.zoom-in {
+	transform: scale(.9);
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
+}
+
+.eael-entry-medianone:hover .eael-entry-overlay.zoom-in {
+	visibility: visible;
+	opacity: 1;
+	transform: scale(1);
+}
+
+/*--- slide up ---*/
+.eael-entry-overlay.slide-up {
+	transform: translateY(100%);
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
+}
+
+.eael-entry-medianone:hover .eael-entry-overlay.slide-up {
+	transform: translateY(0);
+	visibility: visible;
+	opacity: 1;
+}
+
+.eael-entry-medianone {
+	overflow: hidden;
+}
+
+/*--- Post Grid & Carousel Hover Styles ---*/
+.eael-entry-media.grid-hover-style-fade-in .eael-entry-overlay {
+	opacity: 0;
+}
+
+.eael-entry-media.grid-hover-style-fade-in:hover .eael-entry-overlay {
+	opacity: 1;
+}
+
+.eael-entry-media.grid-hover-style-none .eael-entry-overlay {
+	display: none;
+}
+
+.eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
+	transform: scale(.4);
+	opacity: 0;
+}
+
+.eael-entry-media.grid-hover-style-zoom-in:hover .eael-entry-overlay {
+	transform: scale(1);
+	opacity: 1;
+}
+
+.eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay {
+	transform: translateY(-100%);
+}
+
+.eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay>i {
+	transform: translateY(-100px);
+	transition-delay: 100ms;
+	transition-duration: 300ms;
+}
+
+.eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay {
+	transform: translate(0);
+}
+
+.eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay>i {
+	transform: translateY(0);
+}
+
+.eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay {
+	transform: translateY(100%);
+	visibility: hidden;
+	opacity: 0;
+}
+
+.eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay>i {
+	transform: translateY(100px);
+	transition-delay: 100ms;
+	transition-duration: 300ms;
+}
+
+.eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay {
+	transform: translate(0);
+	visibility: visible;
+	opacity: 1;
+}
+
+.eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay>i {
+	transform: translateY(0);
+}
