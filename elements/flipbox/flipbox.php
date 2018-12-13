@@ -692,251 +692,211 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
+		
+		$this->start_controls_tabs('eael_section_flipbox_typo_style_settings');
+			$this->start_controls_tab('eael_section_flipbox_typo_style_front_settings', [
+				'label' => esc_html__( 'Front Content', 'essential-addons-elementor' )
+			]);
 
-		$this->add_responsive_control(
-			'eael_flipbox_front_back_content_toggler',
-			[
-				'label' => esc_html__( 'Front or Back Content', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'options' => [
-					'front' => [
-						'title' => esc_html__( 'Front Content', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-arrow-left',
-					],
-					'back' => [
-						'title' => esc_html__( 'Back Content', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-arrow-right',
-					],
-				],
-				'default' => 'front',
-			]
-		);
+				/**
+				 * Icon
+				 */
+				$this->add_control(
+					'eael_flipbox_front_icon_heading',
+					[
+						'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+					]
+				);
 
-		/**
-		 * Icon
-		 */
-		$this->add_control(
-			'eael_flipbox_front_icon_heading',
-			[
-				'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-			]
-		);
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
-		 */
-		$this->add_control(
-			'eael_flipbox_front_icon_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'front'
-				]
-			]
-		);
+				$this->add_control(
+					'eael_flipbox_front_icon_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i' => 'color: {{VALUE}};',
+						]
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
-		 */
-		$this->add_control(
-			'eael_flipbox_back_icon_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-rear-container .flipbox-back-image-icon i' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'back'
-				]
-			]
-		);
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					[
+		            	'name' => 'eael_flipbox_front_icon_typography',
+						'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i',
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
-		 */
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            	'name' => 'eael_flipbox_front_icon_typography',
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i',
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'front'
-				],
-			]
-		);
+				/**
+				 * Title
+				 */
+				$this->add_control(
+					'eael_flipbox_front_title_heading',
+					[
+						'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+						'separator' => 'before'
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
-		 */
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            	'name' => 'eael_flipbox_back_icon_typography',
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .flipbox-back-image-icon i',
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'back'
-				],
-			]
-		);
+				$this->add_control(
+					'eael_flipbox_front_title_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-heading' => 'color: {{VALUE}};',
+						]
+					]
+				);
 
-		/**
-		 * Title
-		 */
-		$this->add_control(
-			'eael_flipbox_front_title_heading',
-			[
-				'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
-		 */
-		$this->add_control(
-			'eael_flipbox_front_title_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-heading' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'front'
-				]
-			]
-		);
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					[
+		            	'name' => 'eael_flipbox_front_title_typography',
+						'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-heading'
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
-		 */
-		$this->add_control(
-			'eael_flipbox_back_title_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-heading' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'back'
-				]
-			]
-		);
+				/**
+				 * Content
+				 */
+				$this->add_control(
+					'eael_flipbox_front_content_heading',
+					[
+						'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+						'separator' => 'before'
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
-		 */
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            	'name' => 'eael_flipbox_front_title_typography',
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-heading',
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'front'
-				],
-			]
-		);
+				$this->add_control(
+					'eael_flipbox_front_content_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-content' => 'color: {{VALUE}};',
+						]
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
-		 */
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            	'name' => 'eael_flipbox_back_title_typography',
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-heading',
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'back'
-				],
-			]
-		);
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					[
+		            	'name' => 'eael_flipbox_front_content_typography',
+						'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-content'
+					]
+				);
+				
+			$this->end_controls_tab();
 
-		/**
-		 * Content
-		 */
-		$this->add_control(
-			'eael_flipbox_content_heading',
-			[
-				'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
+			$this->start_controls_tab('eael_section_flipbox_typo_style_back_settings', [
+				'label' => esc_html__( 'Back Content', 'essential-addons-elementor' )
+			]);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
-		 */
-		$this->add_control(
-			'eael_flipbox_front_content_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-content' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'front'
-				]
-			]
-		);
+				/**
+				 * Icon
+				 */
+				$this->add_control(
+					'eael_flipbox_back_icon_heading',
+					[
+						'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
-		 */
-		$this->add_control(
-			'eael_flipbox_back_content_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-content' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'back'
-				]
-			]
-		);
+				$this->add_control(
+					'eael_flipbox_back_icon_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-elements-flip-box-rear-container .flipbox-back-image-icon i' => 'color: {{VALUE}};',
+						]
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'front'
-		 */
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            	'name' => 'eael_flipbox_front_content_typography',
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-content',
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'front'
-				]
-			]
-		);
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					[
+		            	'name' => 'eael_flipbox_back_icon_typography',
+						'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .flipbox-back-image-icon i'
+					]
+				);
 
-		/**
-		 * Condition: 'eael_flipbox_front_back_content_toggler' => 'back'
-		 */
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-            	'name' => 'eael_flipbox_back_content_typography',
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-content',
-				'condition' => [
-					'eael_flipbox_front_back_content_toggler' => 'back'
-				]
-			]
-		);
+				/**
+				 * Title
+				 */
+				$this->add_control(
+					'eael_flipbox_back_title_heading',
+					[
+						'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+						'separator' => 'before'
+					]
+				);
+
+				$this->add_control(
+					'eael_flipbox_back_title_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-heading' => 'color: {{VALUE}};',
+						]
+					]
+				);
+
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					[
+		            	'name' => 'eael_flipbox_back_title_typography',
+						'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-heading'
+					]
+				);
+
+				/**
+				 * Content
+				 */
+				$this->add_control(
+					'eael_flipbox_back_content_heading',
+					[
+						'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::HEADING,
+						'separator' => 'before'
+					]
+				);
+
+				$this->add_control(
+					'eael_flipbox_back_content_color',
+					[
+						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'type' => Controls_Manager::COLOR,
+						'default' => '#fff',
+						'selectors' => [
+							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-content' => 'color: {{VALUE}};',
+						]
+					]
+				);
+
+				$this->add_group_control(
+					Group_Control_Typography::get_type(),
+					[
+		            	'name' => 'eael_flipbox_back_content_typography',
+						'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-content'
+					]
+				);
+
+			$this->end_controls_tab();
+		$this->end_controls_tabs();
+
 		$this->end_controls_section();
 
 		/**
