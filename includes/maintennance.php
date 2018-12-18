@@ -17,11 +17,11 @@ class EAEL_Version_Maintennance {
      */
     protected $upgrade_to_version;
 
-    public function get_instance() {
+    public static function get_instance() {
         if( is_null(self::$_instance) ) {
             self::$_instance = new self();
         }
-        return $_instance;
+        return self::$_instance;
     }
 
     public function __construct() {
