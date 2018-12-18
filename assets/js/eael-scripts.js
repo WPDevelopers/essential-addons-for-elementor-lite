@@ -512,7 +512,7 @@
             $fancy_text_speed       = ($fancyText.data("fancy-text-speed") !== undefined) ? $fancyText.data("fancy-text-speed") : '',
             $fancy_text_delay       = ($fancyText.data("fancy-text-delay")     !== undefined) ? $fancyText.data("fancy-text-delay") : '',  
             $fancy_text_cursor      = ($fancyText.data("fancy-text-cursor")     !== undefined) ? true : false,    
-            $fancy_text_loop        = ($fancyText.data("fancy-text-loop")     !== undefined) ? true : false;    
+            $fancy_text_loop   = ($fancyText.data("fancy-text-loop")     !== undefined) ? ($fancyText.data("fancy-text-loop") == 'yes' ? true : false) : false;
             $fancy_text = $fancy_text.split("|");
             
         if ( $transition_type  == 'typing' ) {
