@@ -14,7 +14,7 @@
                     <div class="eael-admin-block-content">
                         <h3>Rollback Version</h3>
                         <div><?php
-                            $vh = sprintf( '<a target="_blank" href="%s" class="button eael-btn eael-version-rollback elementor-button-spinner">Reinstall Version 2.8.3</a>', wp_nonce_url( admin_url( 'admin-post.php?action=eael_version_rollback' ), 'eael_version_rollback' ));
+                            $vh = sprintf( '<a target="_blank" href="%s" class="button eael-btn eael-version-rollback elementor-button-spinner">Reinstall Version</a>', wp_nonce_url( admin_url( 'admin-post.php?action=eael_version_rollback' ), 'eael_version_rollback' ));
                             echo apply_filters('insert_eael_versions_html', $vh ); 
                         ?> </div>
                         <div class="warning">
