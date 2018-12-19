@@ -69,8 +69,8 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::SELECT,
 						'options' => [
 							'none'	=> __( 'None', 'essential-addons-elementor' ),
-							'img'	=> __( 'Image', 'esential-addons-elementor' ),
-							'icon'	=> __( 'Icon', 'esential-addons-elementor' )
+							'img'	=> __( 'Image', 'essential-addons-elementor' ),
+							'icon'	=> __( 'Icon', 'essential-addons-elementor' )
 						],
 						'default' => 'icon',
 					]
@@ -154,8 +154,8 @@ class Widget_Eael_Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::SELECT,
 						'options' => [
 							'none'	=> __( 'None', 'essential-addons-elementor' ),
-							'img'	=> __( 'Image', 'esential-addons-elementor' ),
-							'icon'	=> __( 'Icon', 'esential-addons-elementor' )
+							'img'	=> __( 'Image', 'essential-addons-elementor' ),
+							'icon'	=> __( 'Icon', 'essential-addons-elementor' )
 						],
 						'default' => 'icon'
 					]
