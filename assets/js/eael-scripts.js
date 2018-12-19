@@ -3,113 +3,102 @@
 
     var isEditMode = false;
 
-
     function mybe_note_undefined($selector, $data_atts) {
 		return ($selector.data($data_atts) !== undefined) ? $selector.data($data_atts) : '';
 	}
 
+	/*=================================*/
+    /* 01. Filterable Gallery
+    /*=================================*/
+    var filterableGalleryHandler = function($scope, $) {
+        if (!isEditMode) {
+            var $gallery = $('.eael-filter-gallery-container', $scope),
+                $settings = $gallery.data('settings'),
+                $gallery_items = $gallery.data('gallery-items'),
+                $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+                $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false);
+            
+            // init isotope
+            var $isotope_gallery = $gallery.isotope({
+                itemSelector: '.eael-filterable-gallery-item-wrap',
+                layoutMode: $layout_mode,
+                percentPosition: true,
+                stagger: 30,
+                transitionDuration: $settings.duration + 'ms',
+            });
 
-	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
-		var $rom = [];
+            // layout gal - not necessary, just in case
+            $isotope_gallery.imagesLoaded().progress(function() {
+                $isotope_gallery.isotope('layout');
+            });
 
-		var $counter = $init_show + $render;
-		for(var i = $init_show; i < $counter; i++) {
-			var $item = $($gallery_items[i]);
-				$item = $item[0];
-			$rom.push($item);
-		}
-		return $rom;
-	}
+            // filter
+            $scope.on('click', '.control', function() {
+                var $this = $(this),
+                    $filterValue = $this.data('filter');
 
-	var filterableGalleryHandler = function( $scope, $ ) {
+                $this.siblings().removeClass('active');
+                $this.addClass('active');
+                $isotope_gallery.isotope({
+                    filter: $filterValue
+                });
+            });
 
-		var $gallery	= $scope.find('.eael-filter-gallery-container').eq(0),
-			$settings	= $gallery.data('settings');
-			
-			var $gallery_items = $gallery.data('gallery-items'),
-				$init_show = $gallery.data('init-show') ? $gallery.data('init-show') : 9;
+            // popup
+            $('.eael-magnific-link', $scope).magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: $gallery_enabled,
+                },
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                }
+            });
 
-		if( !isEditMode ) {
-			var $layout_mode = 'fitRows';
+            $('.eael-magnific-video-link', $scope).magnificPopup({
+                type: 'iframe',
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                }
+            });
 
-                if( 'masonry'  == $settings.grid_style ) {
-                    $layout_mode = 'masonry';
+            // Load more button
+            $scope.on('click', '.eael-gallery-load-more', function(e) {
+                e.preventDefault();
+
+                var $this = $(this),
+                    $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
+                    $total_items = $gallery.data('total-gallery-items'),
+                    $images_per_page = $gallery.data('images-per-page'),
+                    $nomore_text = $gallery.data('nomore-item-text'),
+                    $items = [];
+
+                if ($init_show == $total_items) {
+                    $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
+                    setTimeout(function() {
+                        $this.fadeOut('slow');
+                    }, 600);
                 }
 
-				var $isotope_args = {
-					itemSelector:   '.eael-filterable-gallery-item-wrap',
-					layoutMode		: $layout_mode,
-					percentPosition : true,
-					stagger: 30,
-					transitionDuration: $settings.duration + 'ms',
-				}
+                // new items html
+                for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
+                    $items.push($($gallery_items[i])[0]);
+                }
 
-				var $isotope_gallery = {};
-				
-				$scope.imagesLoaded(function(e) {
-					$isotope_gallery = $gallery.isotope($isotope_args);
-				});
-				
-				$scope.on('click', '.control', function() {
-					var $this = $(this),
-						filterValue = $this.attr('data-filter');
-
-					$this.siblings().removeClass('active');
-					$this.addClass('active');
-					$isotope_gallery.isotope({ filter: filterValue });
-				});
-
-                var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
-                $scope.find('.eael-magnific-link').magnificPopup({
-                    type: 'image',
-                    gallery:{
-                        enabled: $gallery_enabled
-                    },
-                    callbacks: {
-                        close: function() {
-                            $( '#elementor-lightbox' ).hide();
-                        }
-                    }
+                // append items
+                $gallery.append($items)
+                $isotope_gallery.isotope('appended', $items)
+                $isotope_gallery.imagesLoaded().progress(function() {
+                    $isotope_gallery.isotope('layout')
                 });
+            });
+        }
 
-				$scope.find('.eael-magnific-video-link').magnificPopup({
-					type: 'iframe',
-					callbacks: {
-						close: function() {
-							$( '#elementor-lightbox' ).hide();
-						}
-					}
-				});
-		}
-
-		
-		// Load more button
-		$scope.find('.eael-gallery-load-more').on('click', function(e) {
-			e.preventDefault();
-
-			var $this = $(this),
-				$init_show = $scope
-						.find('.eael-filter-gallery-container')
-							.find('.eael-filterable-gallery-item-wrap')
-								.length,
-				total_items = $gallery.data('total-gallery-items'),
-				images_per_page = $gallery.data('images-per-page'),
-				nomore_text		= $gallery.data('nomore-item-text'),
-				$items = getGalleryItem($gallery_items, $scope, images_per_page, $init_show);
-
-				if( $init_show == total_items ) {
-					$this.html('<div class="no-more-items-text">'+nomore_text+'</div>');
-					setTimeout(function(){
-						$this.fadeOut('slow');
-					}, 600);
-				}
-
-			$scope.imagesLoaded(function(e) {
-				$gallery.isotope('insert', $items);
-			});
-		});
-
-	};
+    }
 
    
 
