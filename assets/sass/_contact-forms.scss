@@ -1,0 +1,94 @@
+/*--------------------------------*/
+/* 10. Contact forms common
+/*--------------------------------*/
+
+.eael-contact-form input[type=text],
+.eael-contact-form input[type=email],
+.eael-contact-form input[type=url],
+.eael-contact-form input[type=tel],
+.eael-contact-form input[type=date],
+.eael-contact-form input[type=number],
+.eael-contact-form textarea {
+	background: #fff;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	float: none;
+	height: auto;
+	margin: 0;
+	outline: 0;
+	width: auto;
+}
+
+.eael-contact-form input[type=submit] {
+	border: 0;
+	float: none;
+	height: auto;
+	margin: 0;
+	padding: 10px 20px;
+	width: auto;
+	-webkit-transition: all 0.25s linear 0s;
+	transition: all 0.25s linear 0s;
+}
+
+.eael-contact-form.placeholder-hide input::-webkit-input-placeholder,
+.eael-contact-form.placeholder-hide textarea::-webkit-input-placeholder {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.eael-contact-form.placeholder-hide input::-moz-placeholder,
+.eael-contact-form.placeholder-hide textarea::-moz-placeholder {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.eael-contact-form.placeholder-hide input:-ms-input-placeholder,
+.eael-contact-form.placeholder-hide textarea:-ms-input-placeholder {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.eael-contact-form.placeholder-hide input:-moz-placeholder,
+.eael-contact-form.placeholder-hide textarea:-moz-placeholder {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.eael-custom-radio-checkbox input[type=checkbox],
+.eael-custom-radio-checkbox input[type=radio] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border-style: solid;
+	border-width: 0;
+	outline: none;
+	min-width: 1px;
+	width: 15px;
+	height: 15px;
+	background: #ddd;
+	padding: 3px;
+}
+
+.eael-custom-radio-checkbox input[type=checkbox]:before,
+.eael-custom-radio-checkbox input[type=radio]:before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+
+.eael-custom-radio-checkbox input[type=checkbox]:checked:before,
+.eael-custom-radio-checkbox input[type=radio]:checked:before {
+	background: #999;
+	-webkit-transition: all 0.25s linear 0s;
+	transition: all 0.25s linear 0s;
+}
+
+.eael-custom-radio-checkbox input[type=radio] {
+	border-radius: 50%;
+}
+
+.eael-custom-radio-checkbox input[type=radio]:before {
+	border-radius: 50%;
+}
