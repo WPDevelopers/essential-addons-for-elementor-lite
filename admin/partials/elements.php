@@ -339,6 +339,13 @@
                         <?php _e( 'Protected Content', 'essential-addons-elementor' ) ?>
                     </p>
                 </div>
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="offcanvas" name="offcanvas" disabled>
+                    <label for="offcanvas" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+                    <p class="eael-el-title">
+                        <?php _e( 'Offcanvas Content', 'essential-addons-elementor' ) ?>
+                    </p>
+                </div>
             </div><!--./checkbox-container-->
             <div class="eael-save-btn-wrap">
                 <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
