@@ -164,7 +164,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
             ]
         );
         
-        $this->add_control(
+		$this->add_control(
             'autoplay',
             [
                 'label'                 => __( 'Autoplay', 'essential-addons-elementor' ),
@@ -191,6 +191,21 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
                     ],
                 ],
                 'size_units'            => '',
+                'condition'         => [
+                    'autoplay'      => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'pause_on_hover',
+            [
+                'label'                 => __( 'Pause On Hover', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'default'               => '',
+                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                'return_value'          => 'yes',
                 'condition'         => [
                     'autoplay'      => 'yes',
                 ],
@@ -708,6 +723,9 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		} else {
 			$this->add_render_attribute( 'content-ticker', 'data-autoplay', '999999' );
 		}
+		if( $settings['pause_on_hover'] == 'yes' ) {
+            $this->add_render_attribute( 'content-ticker', 'data-pause-on-hover', 'true' );
+        }
 		if ( $settings['infinite_loop'] == 'yes' ) {
 			$this->add_render_attribute( 'content-ticker', 'data-loop', true );
 		}
