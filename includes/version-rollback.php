@@ -44,8 +44,6 @@ class EAEL_Version_Rollback {
             $this->{$key} = $value;
         }
 
-        // $this->upgrade();
-
     }
 
     /**
@@ -110,19 +108,21 @@ class EAEL_Version_Rollback {
         require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
         $logo_url = ESSENTIAL_ADDONS_EL_URL . 'admin/assets/images/ea-logo.png';
+        $title =  '<img src="' . $logo_url . '" alt="Essential Addons Elementor">';
+        $title .=  sprintf(__( "Rolling Back to %s", 'essential-addons-elementor' ), $this->plugin_version);
 
         $upgrader_args = [
             'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this->plugin_name ),
-			'plugin' => $this->plugin_name,
-			'nonce'  => 'upgrade-plugin_' . $this->plugin_name,
-			'title'  => '<img src="' . $logo_url . '" alt="Essential Addons Elementor">' . __( 'Rolling Back', 'essential-addons-elementor' ),
+            'plugin' => $this->plugin_name,
+            'nonce'  => 'upgrade-plugin_' . $this->plugin_name,
+            'title'  => $title
         ];
 
         $this->print_inline_style();
 
         $upgrader = new \Plugin_Upgrader( new \Plugin_Upgrader_Skin( $upgrader_args ) );
-		$upgrader->upgrade( $this->plugin_name );
-
+        $upgrader->upgrade( $this->plugin_name );
+        
     }
 
     /**
