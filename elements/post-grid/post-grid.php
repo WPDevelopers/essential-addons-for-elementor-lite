@@ -366,7 +366,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_post_grid_hover_icon_fontsize',
 			[
-				'label' => __( 'Icon font size', 'plugin-domain' ),
+				'label' => __( 'Icon font size', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'unit' => 'px',
