@@ -8,6 +8,7 @@
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
+ * Domain Path: /languages
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly

@@ -391,9 +391,9 @@ class Widget_Eael_Progress_Bar extends Widget_Base {
 				'label' => __('Stripe Animation', 'essential-addons-elementor'),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'normal' => __('Left To Right', 'plugin-domain'),
-					'reverse' => __('Right To Left', 'plugin-domain'),
-					'none' => __('Disabled', 'plugin-domain'),
+					'normal' => __('Left To Right', 'essential-addons-elementor'),
+					'reverse' => __('Right To Left', 'essential-addons-elementor'),
+					'none' => __('Disabled', 'essential-addons-elementor'),
 				],
 				'default' => 'none',
 				'condition' => [
