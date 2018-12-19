@@ -1,0 +1,120 @@
+/*----------------------------*/
+/* 07. Team Members Styles
+/*----------------------------*/
+.eael-team-item {
+	overflow: hidden;
+	position: relative;
+}
+
+.team-avatar-rounded figure img {
+	border-radius: 50%;
+	height: auto;
+}
+
+.eael-team-image>figure {
+	margin: 0;
+	padding: 0;
+}
+
+.eael-team-image>figure img {
+	display: block;
+	margin: 0 auto;
+}
+
+.eael-team-item .eael-team-content {
+	padding: 10px;
+}
+
+.eael-team-item .eael-team-member-name {
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 0.05em;
+	margin: 5px 0;
+	text-transform: uppercase;
+}
+
+.eael-team-item .eael-team-member-position {
+	font-size: 14px;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+	margin: 5px 0 10px;
+	text-transform: uppercase;
+}
+
+.eael-team-item .eael-team-content,
+.eael-team-item .eael-team-content .eael-team-text {
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.eael-team-content>ul {
+	margin: 0;
+	padding: 0;
+}
+
+.eael-team-content li {
+	display: inline-block;
+	list-style: outside none none;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.eael-team-content li a {
+	font-size: 2.5rem;
+}
+
+.eael-team-align-left .eael-team-item .eael-team-member-name,
+.eael-team-align-left .eael-team-item .eael-team-member-position,
+.eael-team-align-left .eael-team-item .eael-team-text,
+.eael-team-align-left .eael-team-item .eael-team-content p,
+.eael-team-align-left .eael-team-item .eael-team-content ul,
+.eael-team-align-left .eael-team-item .eael-team-content li {
+	text-align: left;
+}
+
+.eael-team-align-right .eael-team-item .eael-team-member-name,
+.eael-team-align-right .eael-team-item .eael-team-member-position,
+.eael-team-align-right .eael-team-item .eael-team-text,
+.eael-team-align-right .eael-team-item .eael-team-content p,
+.eael-team-align-right .eael-team-item .eael-team-content ul,
+.eael-team-align-right .eael-team-item .eael-team-content li {
+	text-align: right;
+}
+
+.eael-team-align-centered .eael-team-item .eael-team-member-name,
+.eael-team-align-centered .eael-team-item .eael-team-member-position,
+.eael-team-align-centered .eael-team-item .eael-team-text,
+.eael-team-align-centered .eael-team-item .eael-team-content p,
+.eael-team-align-centered .eael-team-item .eael-team-content ul,
+.eael-team-align-centered .eael-team-item .eael-team-content li {
+	text-align: center;
+}
+
+.eael-team-item.eael-team-members-overlay .eael-team-content {
+	bottom: 10px;
+	left: 10px;
+	margin-bottom: 0;
+	padding-top: 15%;
+	opacity: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	-webkit-transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+	transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
+.eael-team-item.eael-team-members-overlay:hover .eael-team-content {
+	opacity: 1;
+}
+
+.eael-team-member-social-link>a {
+	display: inline-block;
+	-webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+	transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
+.eael-team-member-social-link>a:focus {
+	outline: none;
+}

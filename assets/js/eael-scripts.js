@@ -3,113 +3,102 @@
 
     var isEditMode = false;
 
-
     function mybe_note_undefined($selector, $data_atts) {
 		return ($selector.data($data_atts) !== undefined) ? $selector.data($data_atts) : '';
 	}
 
+	/*=================================*/
+    /* 01. Filterable Gallery
+    /*=================================*/
+    var filterableGalleryHandler = function($scope, $) {
+        if (!isEditMode) {
+            var $gallery = $('.eael-filter-gallery-container', $scope),
+                $settings = $gallery.data('settings'),
+                $gallery_items = $gallery.data('gallery-items'),
+                $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+                $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false);
+            
+            // init isotope
+            var $isotope_gallery = $gallery.isotope({
+                itemSelector: '.eael-filterable-gallery-item-wrap',
+                layoutMode: $layout_mode,
+                percentPosition: true,
+                stagger: 30,
+                transitionDuration: $settings.duration + 'ms',
+            });
 
-	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
-		var $rom = [];
+            // layout gal - not necessary, just in case
+            $isotope_gallery.imagesLoaded().progress(function() {
+                $isotope_gallery.isotope('layout');
+            });
 
-		var $counter = $init_show + $render;
-		for(var i = $init_show; i < $counter; i++) {
-			var $item = $($gallery_items[i]);
-				$item = $item[0];
-			$rom.push($item);
-		}
-		return $rom;
-	}
+            // filter
+            $scope.on('click', '.control', function() {
+                var $this = $(this),
+                    $filterValue = $this.data('filter');
 
-	var filterableGalleryHandler = function( $scope, $ ) {
+                $this.siblings().removeClass('active');
+                $this.addClass('active');
+                $isotope_gallery.isotope({
+                    filter: $filterValue
+                });
+            });
 
-		var $gallery	= $scope.find('.eael-filter-gallery-container').eq(0),
-			$settings	= $gallery.data('settings');
-			
-			var $gallery_items = $gallery.data('gallery-items'),
-				$init_show = $gallery.data('init-show') ? $gallery.data('init-show') : 9;
+            // popup
+            $('.eael-magnific-link', $scope).magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: $gallery_enabled,
+                },
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                }
+            });
 
-		if( !isEditMode ) {
-			var $layout_mode = 'fitRows';
+            $('.eael-magnific-video-link', $scope).magnificPopup({
+                type: 'iframe',
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                }
+            });
 
-                if( 'masonry'  == $settings.grid_style ) {
-                    $layout_mode = 'masonry';
+            // Load more button
+            $scope.on('click', '.eael-gallery-load-more', function(e) {
+                e.preventDefault();
+
+                var $this = $(this),
+                    $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
+                    $total_items = $gallery.data('total-gallery-items'),
+                    $images_per_page = $gallery.data('images-per-page'),
+                    $nomore_text = $gallery.data('nomore-item-text'),
+                    $items = [];
+
+                if ($init_show == $total_items) {
+                    $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
+                    setTimeout(function() {
+                        $this.fadeOut('slow');
+                    }, 600);
                 }
 
-				var $isotope_args = {
-					itemSelector:   '.eael-filterable-gallery-item-wrap',
-					layoutMode		: $layout_mode,
-					percentPosition : true,
-					stagger: 30,
-					transitionDuration: $settings.duration + 'ms',
-				}
+                // new items html
+                for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
+                    $items.push($($gallery_items[i])[0]);
+                }
 
-				var $isotope_gallery = {};
-				
-				$scope.imagesLoaded(function(e) {
-					$isotope_gallery = $gallery.isotope($isotope_args);
-				});
-				
-				$scope.on('click', '.control', function() {
-					var $this = $(this),
-						filterValue = $this.attr('data-filter');
-
-					$this.siblings().removeClass('active');
-					$this.addClass('active');
-					$isotope_gallery.isotope({ filter: filterValue });
-				});
-
-                var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
-                $scope.find('.eael-magnific-link').magnificPopup({
-                    type: 'image',
-                    gallery:{
-                        enabled: $gallery_enabled
-                    },
-                    callbacks: {
-                        close: function() {
-                            $( '#elementor-lightbox' ).hide();
-                        }
-                    }
+                // append items
+                $gallery.append($items)
+                $isotope_gallery.isotope('appended', $items)
+                $isotope_gallery.imagesLoaded().progress(function() {
+                    $isotope_gallery.isotope('layout')
                 });
+            });
+        }
 
-				$scope.find('.eael-magnific-video-link').magnificPopup({
-					type: 'iframe',
-					callbacks: {
-						close: function() {
-							$( '#elementor-lightbox' ).hide();
-						}
-					}
-				});
-		}
-
-		
-		// Load more button
-		$scope.find('.eael-gallery-load-more').on('click', function(e) {
-			e.preventDefault();
-
-			var $this = $(this),
-				$init_show = $scope
-						.find('.eael-filter-gallery-container')
-							.find('.eael-filterable-gallery-item-wrap')
-								.length,
-				total_items = $gallery.data('total-gallery-items'),
-				images_per_page = $gallery.data('images-per-page'),
-				nomore_text		= $gallery.data('nomore-item-text'),
-				$items = getGalleryItem($gallery_items, $scope, images_per_page, $init_show);
-
-				if( $init_show == total_items ) {
-					$this.html('<div class="no-more-items-text">'+nomore_text+'</div>');
-					setTimeout(function(){
-						$this.fadeOut('slow');
-					}, 600);
-				}
-
-			$scope.imagesLoaded(function(e) {
-				$gallery.isotope('insert', $items);
-			});
-		});
-
-	};
+    }
 
    
 
@@ -526,7 +515,7 @@
             $fancy_text_speed       = ($fancyText.data("fancy-text-speed") !== undefined) ? $fancyText.data("fancy-text-speed") : '',
             $fancy_text_delay       = ($fancyText.data("fancy-text-delay")     !== undefined) ? $fancyText.data("fancy-text-delay") : '',  
             $fancy_text_cursor      = ($fancyText.data("fancy-text-cursor")     !== undefined) ? true : false,    
-            $fancy_text_loop        = ($fancyText.data("fancy-text-loop")     !== undefined) ? true : false;    
+            $fancy_text_loop   = ($fancyText.data("fancy-text-loop")     !== undefined) ? ($fancyText.data("fancy-text-loop") == 'yes' ? true : false) : false;
             $fancy_text = $fancy_text.split("|");
             
         if ( $transition_type  == 'typing' ) {
@@ -639,114 +628,7 @@
     }
     
     var ProgressBar = function ($scope, $) {
-
-		var $progressBar             = $scope.find('.eael-progress-bar-container').eq(0),
-			$layout = mybe_note_undefined($progressBar, "layout"),
-			$id = mybe_note_undefined($progressBar, "id"),
-			$number = mybe_note_undefined($progressBar, "number"),
-			$class = '.elementor-element-' + $scope.data('id'),
-			$line_stroke_color = mybe_note_undefined($progressBar, "line-stroke-color"),
-			$line_stroke_width = mybe_note_undefined($progressBar, "line-stroke-width"),
-			$line_stroke_trail_color = mybe_note_undefined($progressBar, "line-stroke-trail-color"),
-			$line_stroke_trail_width = mybe_note_undefined($progressBar, "line-stroke-trail-width"),
-			$line_direction = mybe_note_undefined($progressBar, "line-direction"),
-
-			$fan_stroke_color = mybe_note_undefined($progressBar, "fan-stroke-color"),
-			$fan_stroke_width = mybe_note_undefined($progressBar, "fan-stroke-width"),
-			$fan_stroke_trail_color = mybe_note_undefined($progressBar, "fan-stroke-trail-color"),
-			$fan_stroke_trail_width = mybe_note_undefined($progressBar, "fan-stroke-trail-width"),
-			$fan_direction = mybe_note_undefined($progressBar, "fan-direction"),
-			
-			$circle_stroke_color = mybe_note_undefined($progressBar, "circle-stroke-color"),
-			$circle_stroke_width = mybe_note_undefined($progressBar, "circle-stroke-width"),
-			$circle_stroke_trail_color = mybe_note_undefined($progressBar, "circle-stroke-trail-color"),
-			$circle_stroke_trail_width = mybe_note_undefined($progressBar, "circle-stroke-trail-width"),
-			$circle_direction = mybe_note_undefined($progressBar, "circle-direction"),
-            
-			$bubble_circle_color = mybe_note_undefined($progressBar, "bubble-circle-color"),
-			$bubble_bg_color = mybe_note_undefined($progressBar, "bubble-bg-color"),
-			$bubble_circle_width = mybe_note_undefined($progressBar, "bubble-circle-width"),
-			$bubble_direction = mybe_note_undefined($progressBar, "bubble-direction"),
-
-			$rainbow_stroke_width = mybe_note_undefined($progressBar, "rainbow-stroke-width"),
-			$rainbow_stroke_trail_width = mybe_note_undefined($progressBar, "rainbow-stroke-trail-width"),
-			$rainbow_color_one = mybe_note_undefined($progressBar, "rainbow-color-one"),
-			$rainbow_color_two = mybe_note_undefined($progressBar, "rainbow-color-two"),
-			$rainbow_color_three = mybe_note_undefined($progressBar, "rainbow-color-three"),
-			$rainbow_color_four = mybe_note_undefined($progressBar, "rainbow-color-four"),
-			$rainbow_color_five = mybe_note_undefined($progressBar, "rainbow-color-five"),
-			$rainbow_direction = mybe_note_undefined($progressBar, "rainbow-direction");
-
-             
-            if('rainbow' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke', 
-                    "path": 'M0 10L100 10', 
-                    "stroke": 'data:ldbar/res,gradient(0,1,'+ $rainbow_color_one +','+ $rainbow_color_two +','+ $rainbow_color_three +','+ $rainbow_color_four +','+ $rainbow_color_five +')',
-                    "aspect-ratio": 'none', 
-                    "stroke-width": $rainbow_stroke_width,
-                    "stroke-trail-width": $rainbow_stroke_trail_width,
-                    "stroke-dir": $rainbow_direction
-                  }).set($number);
-            }
-            else if('line' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke',
-					"path": 'M0 10L100 10',
-                    "stroke": $line_stroke_color,
-                    "stroke-width": $line_stroke_width,
-                    "stroke-trail": $line_stroke_trail_color,
-                    "stroke-trail-width": $line_stroke_trail_width,
-                    "aspect-ratio": 'none',
-                    "stroke-dir": $line_direction 
-                  }).set($number);
-            }
-            else if('fan' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke',
-                    "path": 'M10 90A40 40 0 0 1 90 90',
-                    "fill-dir": $fan_direction,
-                    "fill":  $fan_stroke_color, 
-                    "fill-background": $fan_stroke_trail_color, 
-                    "fill-background-extrude": $fan_stroke_width, 
-                    "stroke-dir": 'normal',
-                    "stroke": $fan_stroke_color,
-                    "stroke-width": $fan_stroke_width,
-                    "stroke-trail": $fan_stroke_trail_color,
-                    "stroke-trail-width": $fan_stroke_trail_width
-                  }).set($number);
-            }
-            else if('circle' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke',
-                    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
-                    "fill-dir": $circle_direction,
-                    "fill":  $circle_stroke_color, 
-                    "fill-background": $circle_stroke_trail_color, 
-                    "fill-background-extrude": $circle_stroke_width, 
-                    "stroke-dir": 'normal',
-                    "stroke": $circle_stroke_color,
-                    "stroke-width": $circle_stroke_width,
-                    "stroke-trail": $circle_stroke_trail_color,
-                    "stroke-trail-width": $circle_stroke_trail_width
-                  }).set($number);
-            }
-            else if('bubble' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'fill',
-                    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
-                    "fill-dir": $bubble_direction,
-                    "fill": 'data:ldbar/res,bubble('+ $bubble_bg_color +','+ $bubble_circle_color +')',
-                    "pattern-size": $bubble_circle_width,
-                    "fill-background": '#ddd',
-                    "fill-background-extrude": 2,
-                    "stroke-dir": 'normal',
-                    "stroke": '#25b',
-                    "stroke-width": '3',
-                    "stroke-trail": '#ddd',
-                    "stroke-trail-width": 0.5
-                  }).set($number);
-            }
+        jQuery('.eael-progressbar', $scope).eaelProgressBar()
     }
     
     $(window).on('elementor/frontend/init', function () {
