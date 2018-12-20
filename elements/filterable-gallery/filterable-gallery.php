@@ -2082,26 +2082,27 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 					 });
 
 			        // popup
-					 $('.eael-magnific-link', $scope).magnificPopup({
-					     type: 'image',
-					     gallery: {
-					         enabled: $gallery_enabled,
-					     },
-					     callbacks: {
-					         close: function() {
-					             $('#elementor-lightbox').hide();
-					         }
-					     }
-					 });
+					$('.eael-magnific-link', $scope).magnificPopup({
+						type: 'image',
+							gallery: {
+								enabled: $gallery_enabled,
+							},
+						callbacks: {
+							close: function() {
+						    	$('#elementor-lightbox').hide();
+						 	}
+						}
+					});
 
-					 $('.eael-magnific-video-link', $scope).magnificPopup({
-					     type: 'iframe',
-					     callbacks: {
-					         close: function() {
-					             $('#elementor-lightbox').hide();
-					         }
-					     }
-					 });
+					$($scope).magnificPopup({
+			        	delegate: '.eael-magnific-video-link',
+					    type: 'iframe',
+					    callbacks: {
+					        close: function() {
+					            $('#elementor-lightbox').hide();
+					        }
+					    }
+					});
 
 					 // Load more button
 				    $scope.on('click', '.eael-gallery-load-more', function(e) {
@@ -2131,7 +2132,20 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 				        $isotope_gallery.isotope('appended', $items)
 				        $isotope_gallery.imagesLoaded().progress(function() {
 				            $isotope_gallery.isotope('layout')
-				        });
+				        })
+
+				        // reinit magnificPopup
+				        $('.eael-magnific-link', $scope).magnificPopup({
+				            type: 'image',
+				            gallery: {
+				                enabled: $gallery_enabled
+				            },
+				            callbacks: {
+				                close: function() {
+				                    $('#elementor-lightbox').hide();
+				                }
+				            }
+				        })
 				    });
 
 				});
