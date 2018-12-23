@@ -57,7 +57,8 @@
                 }
             });
 
-            $('.eael-magnific-video-link', $scope).magnificPopup({
+            $($scope).magnificPopup({
+                delegate: '.eael-magnific-video-link',
                 type: 'iframe',
                 callbacks: {
                     close: function() {
@@ -94,7 +95,20 @@
                 $isotope_gallery.isotope('appended', $items)
                 $isotope_gallery.imagesLoaded().progress(function() {
                     $isotope_gallery.isotope('layout')
-                });
+                })
+
+                // reinit magnificPopup
+                $('.eael-magnific-link', $scope).magnificPopup({
+                    type: 'image',
+                    gallery: {
+                        enabled: $gallery_enabled
+                    },
+                    callbacks: {
+                        close: function() {
+                            $('#elementor-lightbox').hide();
+                        }
+                    }
+                })
             });
         }
 
