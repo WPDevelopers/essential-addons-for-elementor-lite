@@ -266,12 +266,13 @@
                 loadingFeed.addClass( 'show-loading' );
             },
             success: function() {
-                if($feed_type == 'masonry') {
-                    setTimeout(function() {
-                        eael_twitter_feed_masonry();
-                    }, 2000);
-                     
-                }
+                $('.eael-twitter-feed-layout-container').bind("DOMSubtreeModified", function() {
+                    if ($feed_type == 'masonry') {
+                        setTimeout(function() {
+                            eael_twitter_feed_masonry();
+                        }, 150);
+                    }
+                })
                 loadingFeed.removeClass( 'show-loading' );
             },
             error: function() {
