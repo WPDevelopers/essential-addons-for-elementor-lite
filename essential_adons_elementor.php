@@ -435,7 +435,7 @@ function eael_review_notice_message(){
         </div>
         <div class="eael-review-text">
             <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
-            <p><?php _e( 'We hope you\'ve enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?', 'essential-addons-elementor' ) ?></p>
+            <p><?php _e( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) ?></p>
             <ul class="eael-review-ul">
                 <li>
                     <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
