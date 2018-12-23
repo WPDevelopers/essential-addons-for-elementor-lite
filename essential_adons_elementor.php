@@ -434,19 +434,18 @@ function eael_review_notice_message(){
             <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
         </div>
         <div class="eael-review-text">
-            <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
             <p><?php _e( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) ?></p>
             <ul class="eael-review-ul">
                 <li>
                     <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
                         <span class="dashicons dashicons-external"></span>
-                        <?php _e( 'Sure! I\'d love to!', 'essential-addons-elementor' ) ?>
+                        <?php _e( 'Ok, you deserve it!', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo $dismiss_url ?>">
                         <span class="dashicons dashicons-smiley"></span>
-                        <?php _e( 'I\'ve already left a review', 'essential-addons-elementor' ) ?>
+                        <?php _e( 'I already did', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
@@ -456,7 +455,7 @@ function eael_review_notice_message(){
                     </a>
                 </li>
                 <li>
-                    <a href="https://essential-addons.com/elementor/support/" target="_blank">
+                    <a href="https://wpdeveloper.net/support/" target="_blank">
                         <span class="dashicons dashicons-sos"></span>
                         <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
                     </a>
