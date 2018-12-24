@@ -1764,18 +1764,8 @@ body:not(.x-ethos):not(.x-integrity):not(.x-renew):not(.x-icon) .eael-product-ca
   width: auto;
 }
 
-.eael-contact-form-7-wrapper {
-	overflow: hidden;
-}
-
-form.wpcf7-form {
-	display: inline-block;
-	margin: 0 auto;
-	float: none;
-	width: 500px;
-}
-
-.eael-contact-form-7 textarea, .eael-contact-form-7 input[type="text"],
+.eael-contact-form-7 textarea,
+.eael-contact-form-7 input[type="text"],
 .eael-contact-form-7 input[type="password"],
 .eael-contact-form-7 input[type="datetime"],
 .eael-contact-form-7 input[type="datetime-local"],
@@ -1790,8 +1780,12 @@ form.wpcf7-form {
 .eael-contact-form-7 input[type="tel"],
 .eael-contact-form-7 input[type="color"],
 .eael-contact-form-7 .uneditable-input {
-	-webkit-transition: border linear 0.2s,box-shadow linear 0.2s;
-	transition: border linear 0.2s,box-shadow linear 0.2s;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-transition: border linear 0.2s, -webkit-box-shadow linear 0.2s;
+  transition: border linear 0.2s, -webkit-box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s, -webkit-box-shadow linear 0.2s;
 }
 
 .eael-contact-form-7 .wpcf7-form::before,
@@ -6378,13 +6372,13 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
           flex: 1 1 auto;
 }
 
-.eael-ticker-wrap .eael-ticker .ticker-content{
-	padding: 8px 12px;
-	line-height: 1.8;
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
 }
 
-.eael-ticker-wrap .eael-ticker .ticker-content p{
-	margin: 0;
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
 }
 
 .eael-ticker-wrap .swiper-button-prev {
