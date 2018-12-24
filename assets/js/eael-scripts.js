@@ -25,6 +25,7 @@
                 percentPosition: true,
                 stagger: 30,
                 transitionDuration: $settings.duration + 'ms',
+                filter: $('.eael-filter-gallery-control .control.active', $scope).data('filter')
             });
 
             // layout gal - not necessary, just in case
