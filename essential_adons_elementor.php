@@ -359,8 +359,8 @@ function eael_admin_notice() {
     /* Check that the user hasn't already clicked to ignore the message */
     if ( ! get_user_meta($user_id, 'eael_ignore_notice286') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
-      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>100,000+</strong> websites. Use the coupon code <strong>ACTIVE100K</strong> to redeem a <strong>30&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
+      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-christmas-gift.svg'. '" ></p><p> ';
+      printf(__('<strong>Make XMas Much Merrier.</strong> Use the coupon code <strong>Christmas2018</strong> to redeem a <strong>40&#37; </strong> discount on <strong>Essential Addons for Elementor Unlimited</strong>. <a href="https://wpdeveloper.net/in/ea-christmas-deal" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
