@@ -25,6 +25,7 @@
                 percentPosition: true,
                 stagger: 30,
                 transitionDuration: $settings.duration + 'ms',
+                filter: $('.eael-filter-gallery-control .control.active', $scope).data('filter')
             });
 
             // layout gal - not necessary, just in case
@@ -57,7 +58,8 @@
                 }
             });
 
-            $('.eael-magnific-video-link', $scope).magnificPopup({
+            $($scope).magnificPopup({
+                delegate: '.eael-magnific-video-link',
                 type: 'iframe',
                 callbacks: {
                     close: function() {
@@ -94,7 +96,20 @@
                 $isotope_gallery.isotope('appended', $items)
                 $isotope_gallery.imagesLoaded().progress(function() {
                     $isotope_gallery.isotope('layout')
-                });
+                })
+
+                // reinit magnificPopup
+                $('.eael-magnific-link', $scope).magnificPopup({
+                    type: 'image',
+                    gallery: {
+                        enabled: $gallery_enabled
+                    },
+                    callbacks: {
+                        close: function() {
+                            $('#elementor-lightbox').hide();
+                        }
+                    }
+                })
             });
         }
 
@@ -252,12 +267,13 @@
                 loadingFeed.addClass( 'show-loading' );
             },
             success: function() {
-                if($feed_type == 'masonry') {
-                    setTimeout(function() {
-                        eael_twitter_feed_masonry();
-                    }, 2000);
-                     
-                }
+                $('.eael-twitter-feed-layout-container').bind("DOMSubtreeModified", function() {
+                    if ($feed_type == 'masonry') {
+                        setTimeout(function() {
+                            eael_twitter_feed_masonry();
+                        }, 150);
+                    }
+                })
                 loadingFeed.removeClass( 'show-loading' );
             },
             error: function() {
