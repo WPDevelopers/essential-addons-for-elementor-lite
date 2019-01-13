@@ -7051,7 +7051,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-progressbar-line .eael-progressbar-count-wrap {
   position: absolute;
   right: 0;
-  bottom: calc(100% +5px);
+  bottom: calc(100% + 5px);
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
@@ -7208,7 +7208,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   position: absolute;
   top: 0;
   left: -35px;
-  width: calc(100% +70px);
+  width: calc(100% + 70px);
   height: 100%;
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
