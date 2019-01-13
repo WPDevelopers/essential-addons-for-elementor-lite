@@ -2,7 +2,6 @@
 $color_0: #eeeeee;
 $color_1: #000000;
 $color_2: rgba(255, 255, 255, .15);
-
 @-webkit-keyframes animateStripe {
     0% {
         transform: translate(0, 0);
@@ -11,6 +10,7 @@ $color_2: rgba(255, 255, 255, .15);
         transform: translate(35px, 0);
     }
 }
+
 @keyframes animateStripe {
     0% {
         transform: translate(0, 0);
@@ -19,6 +19,7 @@ $color_2: rgba(255, 255, 255, .15);
         transform: translate(35px, 0);
     }
 }
+
 @-webkit-keyframes animateStripeRTL {
     0% {
         transform: translate(0, 0);
@@ -27,6 +28,7 @@ $color_2: rgba(255, 255, 255, .15);
         transform: translate(-35px, 0);
     }
 }
+
 @keyframes animateStripeRTL {
     0% {
         transform: translate(0, 0);
@@ -35,13 +37,16 @@ $color_2: rgba(255, 255, 255, .15);
         transform: translate(-35px, 0);
     }
 }
+
 .eael-progressbar {
     position: relative;
 }
+
 .eael-progressbar-title {
     font-size: 20px;
     font-weight: 400;
 }
+
 .eael-progressbar-line {
     position: relative;
     display: block;
@@ -51,12 +56,13 @@ $color_2: rgba(255, 255, 255, .15);
     .eael-progressbar-count-wrap {
         position: absolute;
         right: 0;
-        bottom: calc(100% +5px);
+        bottom: calc(100% + 5px);
         font-size: 16px;
         font-weight: 400;
         line-height: 1;
     }
 }
+
 .eael-progressbar-line-fill {
     display: inline-block;
     position: absolute;
@@ -69,6 +75,7 @@ $color_2: rgba(255, 255, 255, .15);
     transition: width 1500ms linear;
     overflow: hidden;
 }
+
 .eael-progressbar-circle {
     position: relative;
     width: 200px;
@@ -82,12 +89,14 @@ $color_2: rgba(255, 255, 255, .15);
         font-weight: 700;
     }
 }
+
 .eael-progressbar-circle-shadow {
     width: 220px;
     height: 220px;
     padding: 10px;
     border-radius: 50%;
 }
+
 .eael-progressbar-circle-pie {
     position: absolute;
     top: 0;
@@ -96,6 +105,7 @@ $color_2: rgba(255, 255, 255, .15);
     height: 100%;
     clip-path: inset(0 0 0 50%);
 }
+
 .eael-progressbar-circle-inner {
     height: 100%;
     width: 100%;
@@ -104,6 +114,7 @@ $color_2: rgba(255, 255, 255, .15);
     border-color: $color_0;
     border-radius: 50%;
 }
+
 .eael-progressbar-circle-half {
     position: absolute;
     left: 0;
@@ -116,13 +127,16 @@ $color_2: rgba(255, 255, 255, .15);
     border-radius: 50%;
     clip-path: inset(0 50% 0 0);
 }
+
 .eael-progressbar-circle-half-left {
     transform: rotate(0deg);
 }
+
 .eael-progressbar-circle-half-right {
     transform: rotate(180deg);
     visibility: hidden;
 }
+
 .eael-progressbar-circle-inner-content {
     position: absolute;
     top: 50%;
@@ -130,6 +144,7 @@ $color_2: rgba(255, 255, 255, .15);
     transform: translateY(-50%);
     text-align: center;
 }
+
 .eael-progressbar-half-circle {
     position: relative;
     width: 200px;
@@ -157,31 +172,37 @@ $color_2: rgba(255, 255, 255, .15);
         font-weight: 700;
     }
 }
+
 .eael-progressbar-half-circle-after {
     position: relative;
     font-size: 12px;
     font-weight: 400;
     clear: both;
 }
+
 .eael-progressbar-postfix-label {
     float: right;
 }
+
 .eael-progressbar-line-stripe .eael-progressbar-line-fill:after {
     content: '';
     position: absolute;
     top: 0;
     left: -35px;
-    width: calc(100% +70px);
+    width: calc(100% + 70px);
     height: 100%;
     background-image: linear-gradient(45deg, $color_2 25%, transparent 25%, transparent 50%, $color_2 50%, $color_2 75%, transparent 75%, transparent);
     background-size: 35px 35px;
 }
+
 .eael-progressbar-line-animate .eael-progressbar-line-fill:after {
     animation: animateStripe 2s linear infinite;
 }
+
 .eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
     animation: animateStripeRTL 2s linear infinite;
 }
-.eael-progressbar-circle-wrap > div {
+
+.eael-progressbar-circle-wrap>div {
     margin: 0 auto;
 }
