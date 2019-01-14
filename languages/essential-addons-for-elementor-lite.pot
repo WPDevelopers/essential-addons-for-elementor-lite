@@ -1,0 +1,5293 @@
+# Copyright (C) 2018 WPDeveloper
+# This file is distributed under the same license as the Essential Addons for Elementor plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Essential Addons for Elementor 2.8.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/essential-addons-for-elementor-lite\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2018-12-19T10:21:22+00:00\n"
+"PO-Revision-Date: 2018-12-19T10:21:22+00:00\n"
+"X-Generator: WP-CLI 2.0.1\n"
+"X-Domain: essential-addons-elementor\n"
+
+#. Plugin Name of the plugin
+msgid "Essential Addons for Elementor"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://essential-addons.com/elementor/"
+msgstr ""
+
+#. Description of the plugin
+msgid "The ultimate elements library for Elementor page builder plugin for WordPress."
+msgstr ""
+
+#. Author of the plugin
+msgid "WPDeveloper"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpdeveloper.net/"
+msgstr ""
+
+#: essential_adons_elementor.php:323
+msgid "<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue."
+msgstr ""
+
+#: essential_adons_elementor.php:324
+msgid "Activate Elementor"
+msgstr ""
+
+#: essential_adons_elementor.php:330
+msgid "<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue."
+msgstr ""
+
+#: essential_adons_elementor.php:331
+msgid "Install Elementor"
+msgstr ""
+
+#: essential_adons_elementor.php:430
+msgid "Leave A Review?"
+msgstr ""
+
+#: essential_adons_elementor.php:431
+msgid "We hope you've enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?"
+msgstr ""
+
+#: essential_adons_elementor.php:436
+msgid "Sure! I'd love to!"
+msgstr ""
+
+#: essential_adons_elementor.php:442
+msgid "I've already left a review"
+msgstr ""
+
+#: essential_adons_elementor.php:448
+msgid "Maybe Later"
+msgstr ""
+
+#: essential_adons_elementor.php:454
+msgid "I need help!"
+msgstr ""
+
+#: essential_adons_elementor.php:460
+msgid "Never show again"
+msgstr ""
+
+#: includes/elementor-helper.php:33
+msgid "Exclude"
+msgstr ""
+
+#: includes/elementor-helper.php:52
+#: includes/elementor-helper.php:64
+msgid "Dynamic Content Settings"
+msgstr ""
+
+#: includes/elementor-helper.php:76
+msgid "Query"
+msgstr ""
+
+#: includes/elementor-helper.php:93
+msgid "Posts Per Page"
+msgstr ""
+
+#: includes/elementor-helper.php:102
+msgid "Offset"
+msgstr ""
+
+#: includes/elementor-helper.php:111
+msgid "Order By"
+msgstr ""
+
+#: includes/elementor-helper.php:122
+msgid "Order"
+msgstr ""
+
+#: includes/elementor-helper.php:144
+#: elements/pricing-table/pricing-table.php:515
+#: elements/image-accordion/image-accordion.php:109
+#: elements/product-grid/product-grid.php:125
+#: elements/infobox/infobox.php:406
+#: elements/facebook-feed/facebook-feed.php:237
+#: elements/flipbox/flipbox.php:440
+#: elements/dual-color-header/dual-color-header.php:141
+#: elements/team-members/team-members.php:210
+#: elements/countdown/countdown.php:326
+#: elements/filterable-gallery/filterable-gallery.php:537
+#: elements/tooltip/tooltip.php:411
+#: elements/fancy-text/fancy-text.php:242
+#: elements/progress-bar/progress-bar.php:184
+#: elements/call-to-action/call-to-action.php:204
+#: elements/advance-tabs/advance-tabs.php:195
+#: elements/testimonials/testimonials.php:147
+#: elements/twitter-feed/twitter-feed.php:248
+#: elements/content-ticker/content-ticker.php:269
+#: elements/contact-form-7/contact-form-7.php:211
+#: elements/weforms/weforms.php:55
+#: elements/advance-accordion/advance-accordion.php:183
+#: elements/data-table/data-table.php:332
+#: elements/creative-button/creative-button.php:129
+msgid "Go Premium for More Features"
+msgstr ""
+
+#: includes/elementor-helper.php:151
+#: elements/pricing-table/pricing-table.php:522
+#: elements/image-accordion/image-accordion.php:115
+#: elements/product-grid/product-grid.php:132
+#: elements/infobox/infobox.php:413
+#: elements/facebook-feed/facebook-feed.php:244
+#: elements/flipbox/flipbox.php:446
+#: elements/dual-color-header/dual-color-header.php:148
+#: elements/team-members/team-members.php:217
+#: elements/countdown/countdown.php:333
+#: elements/filterable-gallery/filterable-gallery.php:544
+#: elements/tooltip/tooltip.php:417
+#: elements/fancy-text/fancy-text.php:249
+#: elements/progress-bar/progress-bar.php:191
+#: elements/call-to-action/call-to-action.php:210
+#: elements/advance-tabs/advance-tabs.php:201
+#: elements/testimonials/testimonials.php:154
+#: elements/twitter-feed/twitter-feed.php:255
+#: elements/content-ticker/content-ticker.php:276
+#: elements/contact-form-7/contact-form-7.php:218
+#: elements/weforms/weforms.php:62
+#: elements/advance-accordion/advance-accordion.php:189
+#: elements/data-table/data-table.php:338
+#: elements/creative-button/creative-button.php:136
+msgid "Unlock more possibilities"
+msgstr ""
+
+#: includes/elementor-helper.php:177
+#: elements/facebook-feed/facebook-feed.php:73
+#: elements/twitter-feed/twitter-feed.php:84
+msgid "Layout Settings"
+msgstr ""
+
+#: includes/elementor-helper.php:185
+msgid "Number of Columns"
+msgstr ""
+
+#: includes/elementor-helper.php:189
+msgid "Single Column"
+msgstr ""
+
+#: includes/elementor-helper.php:190
+msgid "Two Columns"
+msgstr ""
+
+#: includes/elementor-helper.php:191
+msgid "Three Columns"
+msgstr ""
+
+#: includes/elementor-helper.php:192
+msgid "Four Columns"
+msgstr ""
+
+#: includes/elementor-helper.php:193
+msgid "Five Columns"
+msgstr ""
+
+#: includes/elementor-helper.php:194
+msgid "Six Columns"
+msgstr ""
+
+#: includes/elementor-helper.php:204
+msgid "Post Block Style Preset"
+msgstr ""
+
+#: includes/elementor-helper.php:208
+#: elements/pricing-table/pricing-table.php:44
+#: elements/pricing-table/pricing-table.php:353
+#: elements/wpforms/wpforms.php:209
+#: elements/flipbox/flipbox.php:580
+#: elements/dual-color-header/dual-color-header.php:44
+#: elements/team-members/team-members.php:303
+#: elements/gravity-form/gravity-form.php:286
+#: elements/call-to-action/call-to-action.php:443
+#: elements/testimonials/testimonials.php:185
+#: elements/testimonials/testimonials.php:204
+#: elements/contact-form-7/contact-form-7.php:264
+#: elements/caldera-forms/caldera-forms.php:352
+#: elements/ninja-form/ninja-form.php:215
+#: elements/weforms/weforms.php:104
+#: elements/weforms/weforms.php:554
+#: elements/creative-button/creative-button.php:167
+msgid "Default"
+msgstr ""
+
+#: includes/elementor-helper.php:209
+#: elements/filterable-gallery/filterable-gallery.php:120
+msgid "Overlay"
+msgstr ""
+
+#: includes/elementor-helper.php:226
+#: elements/facebook-feed/facebook-feed.php:213
+#: elements/twitter-feed/twitter-feed.php:223
+msgid "Show Read More"
+msgstr ""
+
+#: includes/elementor-helper.php:230
+#: includes/elementor-helper.php:268
+#: includes/elementor-helper.php:304
+#: includes/elementor-helper.php:414
+#: includes/elementor-helper.php:433
+#: includes/elementor-helper.php:467
+#: elements/pricing-table/pricing-table.php:144
+#: elements/wpforms/wpforms.php:53
+#: elements/wpforms/wpforms.php:891
+#: elements/infobox/infobox.php:279
+#: elements/infobox/infobox.php:293
+#: elements/gravity-form/gravity-form.php:99
+#: elements/gravity-form/gravity-form.php:190
+#: elements/gravity-form/gravity-form.php:1095
+#: elements/filterable-gallery/filterable-gallery.php:299
+#: elements/filterable-gallery/filterable-gallery.php:359
+#: elements/filterable-gallery/filterable-gallery.php:371
+#: elements/content-ticker/content-ticker.php:173
+#: elements/content-ticker/content-ticker.php:206
+#: elements/content-ticker/content-ticker.php:241
+#: elements/contact-form-7/contact-form-7.php:810
+#: elements/contact-form-7/contact-form-7.php:862
+#: elements/caldera-forms/caldera-forms.php:57
+#: elements/caldera-forms/caldera-forms.php:903
+#: elements/ninja-form/ninja-form.php:57
+#: elements/ninja-form/ninja-form.php:923
+#: elements/data-table/data-table.php:47
+#: elements/data-table/data-table.php:849
+msgid "Yes"
+msgstr ""
+
+#: includes/elementor-helper.php:234
+#: includes/elementor-helper.php:272
+#: includes/elementor-helper.php:308
+#: includes/elementor-helper.php:418
+#: includes/elementor-helper.php:437
+#: includes/elementor-helper.php:471
+#: elements/pricing-table/pricing-table.php:145
+#: elements/wpforms/wpforms.php:54
+#: elements/wpforms/wpforms.php:892
+#: elements/infobox/infobox.php:280
+#: elements/infobox/infobox.php:294
+#: elements/gravity-form/gravity-form.php:100
+#: elements/gravity-form/gravity-form.php:191
+#: elements/gravity-form/gravity-form.php:1096
+#: elements/filterable-gallery/filterable-gallery.php:300
+#: elements/filterable-gallery/filterable-gallery.php:360
+#: elements/filterable-gallery/filterable-gallery.php:372
+#: elements/content-ticker/content-ticker.php:174
+#: elements/content-ticker/content-ticker.php:207
+#: elements/content-ticker/content-ticker.php:242
+#: elements/contact-form-7/contact-form-7.php:811
+#: elements/contact-form-7/contact-form-7.php:863
+#: elements/caldera-forms/caldera-forms.php:58
+#: elements/caldera-forms/caldera-forms.php:904
+#: elements/ninja-form/ninja-form.php:58
+#: elements/ninja-form/ninja-form.php:924
+#: elements/data-table/data-table.php:48
+#: elements/data-table/data-table.php:850
+msgid "No"
+msgstr ""
+
+#: includes/elementor-helper.php:248
+#: includes/elementor-helper.php:283
+msgid "Label Text"
+msgstr ""
+
+#: includes/elementor-helper.php:251
+msgid "Read More"
+msgstr ""
+
+#: includes/elementor-helper.php:264
+msgid "Show Load More"
+msgstr ""
+
+#: includes/elementor-helper.php:286
+#: elements/filterable-gallery/filterable-gallery.php:436
+msgid "Load More"
+msgstr ""
+
+#: includes/elementor-helper.php:300
+msgid "Show Image"
+msgstr ""
+
+#: includes/elementor-helper.php:334
+msgid "Show Circle Image / Icon"
+msgstr ""
+
+#: includes/elementor-helper.php:338
+#: elements/infobox/infobox.php:71
+#: elements/flipbox/flipbox.php:72
+#: elements/flipbox/flipbox.php:157
+#: elements/filterable-gallery/filterable-gallery.php:337
+#: elements/tooltip/tooltip.php:50
+#: elements/tooltip/tooltip.php:123
+#: elements/advance-tabs/advance-tabs.php:122
+#: elements/advance-tabs/advance-tabs.php:139
+#: elements/data-table/data-table.php:113
+#: elements/data-table/data-table.php:134
+msgid "Image"
+msgstr ""
+
+#: includes/elementor-helper.php:342
+#: includes/elementor-helper.php:395
+#: elements/pricing-table/pricing-table.php:108
+#: elements/infobox/infobox.php:67
+#: elements/infobox/infobox.php:137
+#: elements/infobox/infobox.php:356
+#: elements/flipbox/flipbox.php:73
+#: elements/flipbox/flipbox.php:96
+#: elements/flipbox/flipbox.php:158
+#: elements/flipbox/flipbox.php:181
+#: elements/dual-color-header/dual-color-header.php:70
+#: elements/team-members/team-members.php:143
+#: elements/tooltip/tooltip.php:42
+#: elements/tooltip/tooltip.php:112
+#: elements/call-to-action/call-to-action.php:93
+#: elements/advance-tabs/advance-tabs.php:118
+#: elements/advance-tabs/advance-tabs.php:130
+#: elements/advance-accordion/advance-accordion.php:128
+#: elements/data-table/data-table.php:109
+#: elements/data-table/data-table.php:124
+#: elements/creative-button/creative-button.php:81
+msgid "Icon"
+msgstr ""
+
+#: includes/elementor-helper.php:346
+msgid "Bullet"
+msgstr ""
+
+#: includes/elementor-helper.php:360
+msgid "Icon Image"
+msgstr ""
+
+#: includes/elementor-helper.php:373
+msgid "Icon Image Size"
+msgstr ""
+
+#: includes/elementor-helper.php:410
+msgid "Show Title"
+msgstr ""
+
+#: includes/elementor-helper.php:429
+msgid "Show excerpt"
+msgstr ""
+
+#: includes/elementor-helper.php:448
+msgid "Excerpt Words"
+msgstr ""
+
+#: includes/elementor-helper.php:463
+msgid "Show Meta"
+msgstr ""
+
+#: includes/elementor-helper.php:482
+msgid "Meta Position"
+msgstr ""
+
+#: includes/elementor-helper.php:486
+msgid "Entry Header"
+msgstr ""
+
+#: includes/elementor-helper.php:487
+msgid "Entry Footer"
+msgstr ""
+
+#: includes/elementor-helper.php:510
+msgid "Load More Button Style"
+msgstr ""
+
+#: includes/elementor-helper.php:521
+#: elements/pricing-table/pricing-table.php:565
+#: elements/pricing-table/pricing-table.php:1186
+#: elements/pricing-table/pricing-table.php:1504
+#: elements/image-accordion/image-accordion.php:170
+#: elements/wpforms/wpforms.php:706
+#: elements/wpforms/wpforms.php:1209
+#: elements/infobox/infobox.php:468
+#: elements/infobox/infobox.php:1411
+#: elements/facebook-feed/facebook-feed.php:286
+#: elements/facebook-feed/facebook-feed.php:370
+#: elements/flipbox/flipbox.php:646
+#: elements/flipbox/flipbox.php:941
+#: elements/dual-color-header/dual-color-header.php:191
+#: elements/team-members/team-members.php:409
+#: elements/gravity-form/gravity-form.php:646
+#: elements/gravity-form/gravity-form.php:1417
+#: elements/countdown/countdown.php:415
+#: elements/countdown/countdown.php:887
+#: elements/filterable-gallery/filterable-gallery.php:587
+#: elements/filterable-gallery/filterable-gallery.php:661
+#: elements/filterable-gallery/filterable-gallery.php:844
+#: elements/filterable-gallery/filterable-gallery.php:934
+#: elements/filterable-gallery/filterable-gallery.php:1221
+#: elements/filterable-gallery/filterable-gallery.php:1386
+#: elements/filterable-gallery/filterable-gallery.php:1616
+#: elements/tooltip/tooltip.php:279
+#: elements/tooltip/tooltip.php:496
+#: elements/fancy-text/fancy-text.php:354
+#: elements/call-to-action/call-to-action.php:293
+#: elements/call-to-action/call-to-action.php:453
+#: elements/advance-tabs/advance-tabs.php:229
+#: elements/advance-tabs/advance-tabs.php:369
+#: elements/advance-tabs/advance-tabs.php:615
+#: elements/testimonials/testimonials.php:315
+#: elements/twitter-feed/twitter-feed.php:297
+#: elements/twitter-feed/twitter-feed.php:381
+#: elements/content-ticker/content-ticker.php:351
+#: elements/content-ticker/content-ticker.php:402
+#: elements/content-ticker/content-ticker.php:639
+#: elements/contact-form-7/contact-form-7.php:565
+#: elements/contact-form-7/contact-form-7.php:1182
+#: elements/caldera-forms/caldera-forms.php:708
+#: elements/caldera-forms/caldera-forms.php:1218
+#: elements/ninja-form/ninja-form.php:724
+#: elements/ninja-form/ninja-form.php:1244
+#: elements/weforms/weforms.php:600
+#: elements/advance-accordion/advance-accordion.php:218
+#: elements/advance-accordion/advance-accordion.php:331
+#: elements/advance-accordion/advance-accordion.php:589
+#: elements/data-table/data-table.php:452
+#: elements/data-table/data-table.php:675
+msgid "Padding"
+msgstr ""
+
+#: includes/elementor-helper.php:533
+#: elements/pricing-table/pricing-table.php:577
+#: elements/pricing-table/pricing-table.php:894
+#: elements/pricing-table/pricing-table.php:1516
+#: elements/image-accordion/image-accordion.php:182
+#: elements/wpforms/wpforms.php:404
+#: elements/wpforms/wpforms.php:454
+#: elements/infobox/infobox.php:602
+#: elements/infobox/infobox.php:665
+#: elements/infobox/infobox.php:896
+#: elements/infobox/infobox.php:1265
+#: elements/facebook-feed/facebook-feed.php:298
+#: elements/facebook-feed/facebook-feed.php:382
+#: elements/flipbox/flipbox.php:929
+#: elements/dual-color-header/dual-color-header.php:203
+#: elements/team-members/team-members.php:397
+#: elements/gravity-form/gravity-form.php:997
+#: elements/countdown/countdown.php:839
+#: elements/filterable-gallery/filterable-gallery.php:599
+#: elements/filterable-gallery/filterable-gallery.php:673
+#: elements/filterable-gallery/filterable-gallery.php:856
+#: elements/filterable-gallery/filterable-gallery.php:1398
+#: elements/filterable-gallery/filterable-gallery.php:1657
+#: elements/tooltip/tooltip.php:290
+#: elements/tooltip/tooltip.php:507
+#: elements/fancy-text/fancy-text.php:366
+#: elements/call-to-action/call-to-action.php:305
+#: elements/call-to-action/call-to-action.php:465
+#: elements/advance-tabs/advance-tabs.php:240
+#: elements/advance-tabs/advance-tabs.php:380
+#: elements/advance-tabs/advance-tabs.php:626
+#: elements/testimonials/testimonials.php:303
+#: elements/twitter-feed/twitter-feed.php:309
+#: elements/twitter-feed/twitter-feed.php:393
+#: elements/content-ticker/content-ticker.php:414
+#: elements/contact-form-7/contact-form-7.php:1487
+#: elements/caldera-forms/caldera-forms.php:238
+#: elements/caldera-forms/caldera-forms.php:300
+#: elements/ninja-form/ninja-form.php:413
+#: elements/ninja-form/ninja-form.php:463
+#: elements/weforms/weforms.php:587
+#: elements/advance-accordion/advance-accordion.php:229
+#: elements/advance-accordion/advance-accordion.php:342
+#: elements/advance-accordion/advance-accordion.php:600
+msgid "Margin"
+msgstr ""
+
+#: includes/elementor-helper.php:552
+#: elements/pricing-table/pricing-table.php:1535
+#: elements/wpforms/wpforms.php:550
+#: elements/wpforms/wpforms.php:928
+#: elements/wpforms/wpforms.php:1155
+#: elements/product-grid/product-grid.php:339
+#: elements/infobox/infobox.php:449
+#: elements/infobox/infobox.php:679
+#: elements/infobox/infobox.php:910
+#: elements/infobox/infobox.php:1118
+#: elements/infobox/infobox.php:1231
+#: elements/flipbox/flipbox.php:923
+#: elements/team-members/team-members.php:593
+#: elements/gravity-form/gravity-form.php:596
+#: elements/gravity-form/gravity-form.php:1132
+#: elements/gravity-form/gravity-form.php:1363
+#: elements/filterable-gallery/filterable-gallery.php:692
+#: elements/filterable-gallery/filterable-gallery.php:1528
+#: elements/tooltip/tooltip.php:300
+#: elements/call-to-action/call-to-action.php:484
+#: elements/advance-tabs/advance-tabs.php:391
+#: elements/content-ticker/content-ticker.php:536
+#: elements/contact-form-7/contact-form-7.php:510
+#: elements/contact-form-7/contact-form-7.php:899
+#: elements/contact-form-7/contact-form-7.php:1129
+#: elements/caldera-forms/caldera-forms.php:552
+#: elements/caldera-forms/caldera-forms.php:940
+#: elements/caldera-forms/caldera-forms.php:1164
+#: elements/ninja-form/ninja-form.php:567
+#: elements/ninja-form/ninja-form.php:960
+#: elements/ninja-form/ninja-form.php:1190
+#: elements/weforms/weforms.php:613
+#: elements/advance-accordion/advance-accordion.php:353
+#: elements/data-table/data-table.php:464
+#: elements/data-table/data-table.php:595
+#: elements/data-table/data-table.php:767
+#: elements/creative-button/creative-button.php:268
+msgid "Normal"
+msgstr ""
+
+#: includes/elementor-helper.php:557
+#: includes/elementor-helper.php:619
+#: elements/pricing-table/pricing-table.php:1540
+#: elements/pricing-table/pricing-table.php:1594
+#: elements/wpforms/wpforms.php:383
+#: elements/wpforms/wpforms.php:432
+#: elements/wpforms/wpforms.php:487
+#: elements/wpforms/wpforms.php:569
+#: elements/wpforms/wpforms.php:805
+#: elements/wpforms/wpforms.php:861
+#: elements/wpforms/wpforms.php:1174
+#: elements/wpforms/wpforms.php:1281
+#: elements/wpforms/wpforms.php:1326
+#: elements/infobox/infobox.php:1124
+#: elements/infobox/infobox.php:1170
+#: elements/gravity-form/gravity-form.php:458
+#: elements/gravity-form/gravity-form.php:489
+#: elements/gravity-form/gravity-form.php:528
+#: elements/gravity-form/gravity-form.php:615
+#: elements/gravity-form/gravity-form.php:861
+#: elements/gravity-form/gravity-form.php:914
+#: elements/gravity-form/gravity-form.php:1065
+#: elements/gravity-form/gravity-form.php:1382
+#: elements/gravity-form/gravity-form.php:1469
+#: elements/gravity-form/gravity-form.php:1542
+#: elements/gravity-form/gravity-form.php:1677
+#: elements/countdown/countdown.php:860
+#: elements/filterable-gallery/filterable-gallery.php:697
+#: elements/filterable-gallery/filterable-gallery.php:763
+#: elements/filterable-gallery/filterable-gallery.php:1555
+#: elements/filterable-gallery/filterable-gallery.php:1708
+#: elements/tooltip/tooltip.php:315
+#: elements/tooltip/tooltip.php:358
+#: elements/tooltip/tooltip.php:529
+#: elements/call-to-action/call-to-action.php:489
+#: elements/call-to-action/call-to-action.php:543
+#: elements/advance-tabs/advance-tabs.php:406
+#: elements/advance-tabs/advance-tabs.php:464
+#: elements/advance-tabs/advance-tabs.php:523
+#: elements/advance-tabs/advance-tabs.php:597
+#: elements/content-ticker/content-ticker.php:319
+#: elements/contact-form-7/contact-form-7.php:441
+#: elements/contact-form-7/contact-form-7.php:472
+#: elements/contact-form-7/contact-form-7.php:529
+#: elements/contact-form-7/contact-form-7.php:745
+#: elements/contact-form-7/contact-form-7.php:819
+#: elements/contact-form-7/contact-form-7.php:1148
+#: elements/contact-form-7/contact-form-7.php:1254
+#: elements/contact-form-7/contact-form-7.php:1318
+#: elements/contact-form-7/contact-form-7.php:1382
+#: elements/contact-form-7/contact-form-7.php:1443
+#: elements/caldera-forms/caldera-forms.php:211
+#: elements/caldera-forms/caldera-forms.php:272
+#: elements/caldera-forms/caldera-forms.php:490
+#: elements/caldera-forms/caldera-forms.php:571
+#: elements/caldera-forms/caldera-forms.php:817
+#: elements/caldera-forms/caldera-forms.php:873
+#: elements/caldera-forms/caldera-forms.php:1183
+#: elements/caldera-forms/caldera-forms.php:1289
+#: elements/caldera-forms/caldera-forms.php:1342
+#: elements/ninja-form/ninja-form.php:392
+#: elements/ninja-form/ninja-form.php:441
+#: elements/ninja-form/ninja-form.php:499
+#: elements/ninja-form/ninja-form.php:586
+#: elements/ninja-form/ninja-form.php:834
+#: elements/ninja-form/ninja-form.php:890
+#: elements/ninja-form/ninja-form.php:1209
+#: elements/ninja-form/ninja-form.php:1296
+#: elements/ninja-form/ninja-form.php:1358
+#: elements/ninja-form/ninja-form.php:1458
+#: elements/weforms/weforms.php:618
+#: elements/weforms/weforms.php:672
+#: elements/advance-accordion/advance-accordion.php:368
+#: elements/advance-accordion/advance-accordion.php:433
+#: elements/advance-accordion/advance-accordion.php:498
+#: elements/advance-accordion/advance-accordion.php:571
+#: elements/data-table/data-table.php:772
+#: elements/data-table/data-table.php:789
+#: elements/creative-button/creative-button.php:273
+#: elements/creative-button/creative-button.php:338
+msgid "Text Color"
+msgstr ""
+
+#: includes/elementor-helper.php:569
+#: includes/elementor-helper.php:631
+#: elements/pricing-table/pricing-table.php:553
+#: elements/pricing-table/pricing-table.php:713
+#: elements/pricing-table/pricing-table.php:1099
+#: elements/pricing-table/pricing-table.php:1144
+#: elements/pricing-table/pricing-table.php:1310
+#: elements/pricing-table/pricing-table.php:1552
+#: elements/pricing-table/pricing-table.php:1606
+#: elements/image-accordion/image-accordion.php:158
+#: elements/wpforms/wpforms.php:557
+#: elements/wpforms/wpforms.php:1162
+#: elements/wpforms/wpforms.php:1269
+#: elements/infobox/infobox.php:456
+#: elements/infobox/infobox.php:699
+#: elements/infobox/infobox.php:779
+#: elements/infobox/infobox.php:947
+#: elements/infobox/infobox.php:1010
+#: elements/infobox/infobox.php:1136
+#: elements/infobox/infobox.php:1182
+#: elements/facebook-feed/facebook-feed.php:274
+#: elements/facebook-feed/facebook-feed.php:358
+#: elements/dual-color-header/dual-color-header.php:179
+#: elements/team-members/team-members.php:611
+#: elements/gravity-form/gravity-form.php:603
+#: elements/gravity-form/gravity-form.php:811
+#: elements/gravity-form/gravity-form.php:1370
+#: elements/gravity-form/gravity-form.php:1457
+#: elements/countdown/countdown.php:545
+#: elements/countdown/countdown.php:601
+#: elements/countdown/countdown.php:657
+#: elements/countdown/countdown.php:713
+#: elements/filterable-gallery/filterable-gallery.php:575
+#: elements/filterable-gallery/filterable-gallery.php:709
+#: elements/filterable-gallery/filterable-gallery.php:775
+#: elements/filterable-gallery/filterable-gallery.php:922
+#: elements/filterable-gallery/filterable-gallery.php:1076
+#: elements/filterable-gallery/filterable-gallery.php:1103
+#: elements/filterable-gallery/filterable-gallery.php:1209
+#: elements/filterable-gallery/filterable-gallery.php:1362
+#: elements/filterable-gallery/filterable-gallery.php:1539
+#: elements/filterable-gallery/filterable-gallery.php:1692
+#: elements/post-grid/post-grid.php:343
+#: elements/tooltip/tooltip.php:304
+#: elements/tooltip/tooltip.php:347
+#: elements/tooltip/tooltip.php:518
+#: elements/progress-bar/progress-bar.php:474
+#: elements/call-to-action/call-to-action.php:80
+#: elements/call-to-action/call-to-action.php:281
+#: elements/call-to-action/call-to-action.php:501
+#: elements/call-to-action/call-to-action.php:555
+#: elements/advance-tabs/advance-tabs.php:586
+#: elements/twitter-feed/twitter-feed.php:285
+#: elements/twitter-feed/twitter-feed.php:369
+#: elements/content-ticker/content-ticker.php:307
+#: elements/content-ticker/content-ticker.php:372
+#: elements/content-ticker/content-ticker.php:543
+#: elements/content-ticker/content-ticker.php:599
+#: elements/contact-form-7/contact-form-7.php:517
+#: elements/contact-form-7/contact-form-7.php:692
+#: elements/contact-form-7/contact-form-7.php:1136
+#: elements/contact-form-7/contact-form-7.php:1242
+#: elements/contact-form-7/contact-form-7.php:1367
+#: elements/contact-form-7/contact-form-7.php:1428
+#: elements/caldera-forms/caldera-forms.php:559
+#: elements/caldera-forms/caldera-forms.php:767
+#: elements/caldera-forms/caldera-forms.php:1171
+#: elements/caldera-forms/caldera-forms.php:1277
+#: elements/caldera-forms/caldera-forms.php:1331
+#: elements/ninja-form/ninja-form.php:574
+#: elements/ninja-form/ninja-form.php:784
+#: elements/ninja-form/ninja-form.php:1197
+#: elements/ninja-form/ninja-form.php:1284
+#: elements/weforms/weforms.php:631
+#: elements/weforms/weforms.php:683
+#: elements/advance-accordion/advance-accordion.php:559
+#: elements/data-table/data-table.php:484
+#: elements/data-table/data-table.php:524
+#: elements/data-table/data-table.php:898
+#: elements/creative-button/creative-button.php:289
+#: elements/creative-button/creative-button.php:351
+msgid "Background Color"
+msgstr ""
+
+#: includes/elementor-helper.php:582
+#: elements/pricing-table/pricing-table.php:1447
+#: elements/pricing-table/pricing-table.php:1565
+#: elements/image-accordion/image-accordion.php:195
+#: elements/wpforms/wpforms.php:582
+#: elements/wpforms/wpforms.php:768
+#: elements/wpforms/wpforms.php:1187
+#: elements/infobox/infobox.php:481
+#: elements/infobox/infobox.php:536
+#: elements/infobox/infobox.php:732
+#: elements/infobox/infobox.php:813
+#: elements/infobox/infobox.php:963
+#: elements/infobox/infobox.php:1044
+#: elements/facebook-feed/facebook-feed.php:311
+#: elements/facebook-feed/facebook-feed.php:395
+#: elements/flipbox/flipbox.php:635
+#: elements/dual-color-header/dual-color-header.php:216
+#: elements/team-members/team-members.php:340
+#: elements/team-members/team-members.php:423
+#: elements/gravity-form/gravity-form.php:759
+#: elements/gravity-form/gravity-form.php:824
+#: elements/gravity-form/gravity-form.php:1395
+#: elements/countdown/countdown.php:428
+#: elements/filterable-gallery/filterable-gallery.php:612
+#: elements/filterable-gallery/filterable-gallery.php:722
+#: elements/filterable-gallery/filterable-gallery.php:788
+#: elements/filterable-gallery/filterable-gallery.php:869
+#: elements/filterable-gallery/filterable-gallery.php:1016
+#: elements/filterable-gallery/filterable-gallery.php:1234
+#: elements/filterable-gallery/filterable-gallery.php:1461
+#: elements/filterable-gallery/filterable-gallery.php:1572
+#: elements/post-grid/post-grid.php:75
+#: elements/tooltip/tooltip.php:336
+#: elements/tooltip/tooltip.php:379
+#: elements/call-to-action/call-to-action.php:318
+#: elements/call-to-action/call-to-action.php:514
+#: elements/advance-tabs/advance-tabs.php:252
+#: elements/advance-tabs/advance-tabs.php:432
+#: elements/advance-tabs/advance-tabs.php:490
+#: elements/advance-tabs/advance-tabs.php:551
+#: elements/advance-tabs/advance-tabs.php:638
+#: elements/testimonials/testimonials.php:329
+#: elements/twitter-feed/twitter-feed.php:322
+#: elements/twitter-feed/twitter-feed.php:406
+#: elements/content-ticker/content-ticker.php:568
+#: elements/contact-form-7/contact-form-7.php:640
+#: elements/contact-form-7/contact-form-7.php:705
+#: elements/contact-form-7/contact-form-7.php:1161
+#: elements/contact-form-7/contact-form-7.php:1398
+#: elements/contact-form-7/contact-form-7.php:1473
+#: elements/caldera-forms/caldera-forms.php:584
+#: elements/caldera-forms/caldera-forms.php:780
+#: elements/caldera-forms/caldera-forms.php:1196
+#: elements/caldera-forms/caldera-forms.php:1354
+#: elements/ninja-form/ninja-form.php:599
+#: elements/ninja-form/ninja-form.php:797
+#: elements/ninja-form/ninja-form.php:1222
+#: elements/advance-accordion/advance-accordion.php:241
+#: elements/advance-accordion/advance-accordion.php:394
+#: elements/advance-accordion/advance-accordion.php:459
+#: elements/advance-accordion/advance-accordion.php:524
+#: elements/advance-accordion/advance-accordion.php:612
+#: elements/data-table/data-table.php:497
+#: elements/data-table/data-table.php:536
+#: elements/data-table/data-table.php:666
+#: elements/data-table/data-table.php:925
+msgid "Border"
+msgstr ""
+
+#: includes/elementor-helper.php:590
+#: elements/pricing-table/pricing-table.php:598
+#: elements/pricing-table/pricing-table.php:1208
+#: elements/pricing-table/pricing-table.php:1470
+#: elements/pricing-table/pricing-table.php:1573
+#: elements/image-accordion/image-accordion.php:203
+#: elements/wpforms/wpforms.php:302
+#: elements/wpforms/wpforms.php:593
+#: elements/wpforms/wpforms.php:1001
+#: elements/wpforms/wpforms.php:1027
+#: elements/wpforms/wpforms.php:1197
+#: elements/product-grid/product-grid.php:178
+#: elements/infobox/infobox.php:1102
+#: elements/facebook-feed/facebook-feed.php:319
+#: elements/facebook-feed/facebook-feed.php:403
+#: elements/flipbox/flipbox.php:522
+#: elements/flipbox/flipbox.php:595
+#: elements/flipbox/flipbox.php:658
+#: elements/flipbox/flipbox.php:977
+#: elements/dual-color-header/dual-color-header.php:224
+#: elements/team-members/team-members.php:348
+#: elements/team-members/team-members.php:442
+#: elements/team-members/team-members.php:631
+#: elements/gravity-form/gravity-form.php:379
+#: elements/gravity-form/gravity-form.php:770
+#: elements/gravity-form/gravity-form.php:1205
+#: elements/gravity-form/gravity-form.php:1231
+#: elements/gravity-form/gravity-form.php:1405
+#: elements/countdown/countdown.php:436
+#: elements/filterable-gallery/filterable-gallery.php:620
+#: elements/filterable-gallery/filterable-gallery.php:730
+#: elements/filterable-gallery/filterable-gallery.php:796
+#: elements/filterable-gallery/filterable-gallery.php:877
+#: elements/filterable-gallery/filterable-gallery.php:1469
+#: elements/filterable-gallery/filterable-gallery.php:1586
+#: elements/post-grid/post-grid.php:83
+#: elements/tooltip/tooltip.php:396
+#: elements/fancy-text/fancy-text.php:389
+#: elements/call-to-action/call-to-action.php:326
+#: elements/call-to-action/call-to-action.php:522
+#: elements/advance-tabs/advance-tabs.php:259
+#: elements/advance-tabs/advance-tabs.php:439
+#: elements/advance-tabs/advance-tabs.php:497
+#: elements/advance-tabs/advance-tabs.php:558
+#: elements/testimonials/testimonials.php:348
+#: elements/twitter-feed/twitter-feed.php:330
+#: elements/twitter-feed/twitter-feed.php:414
+#: elements/content-ticker/content-ticker.php:425
+#: elements/content-ticker/content-ticker.php:578
+#: elements/contact-form-7/contact-form-7.php:357
+#: elements/contact-form-7/contact-form-7.php:651
+#: elements/contact-form-7/contact-form-7.php:972
+#: elements/contact-form-7/contact-form-7.php:998
+#: elements/contact-form-7/contact-form-7.php:1170
+#: elements/caldera-forms/caldera-forms.php:445
+#: elements/caldera-forms/caldera-forms.php:595
+#: elements/caldera-forms/caldera-forms.php:1013
+#: elements/caldera-forms/caldera-forms.php:1039
+#: elements/caldera-forms/caldera-forms.php:1206
+#: elements/ninja-form/ninja-form.php:308
+#: elements/ninja-form/ninja-form.php:610
+#: elements/ninja-form/ninja-form.php:1033
+#: elements/ninja-form/ninja-form.php:1059
+#: elements/ninja-form/ninja-form.php:1232
+#: elements/weforms/weforms.php:198
+#: elements/weforms/weforms.php:328
+#: elements/weforms/weforms.php:650
+#: elements/advance-accordion/advance-accordion.php:248
+#: elements/advance-accordion/advance-accordion.php:401
+#: elements/advance-accordion/advance-accordion.php:466
+#: elements/advance-accordion/advance-accordion.php:531
+#: elements/creative-button/creative-button.php:314
+msgid "Border Radius"
+msgstr ""
+
+#: includes/elementor-helper.php:614
+#: elements/pricing-table/pricing-table.php:305
+#: elements/pricing-table/pricing-table.php:1589
+#: elements/wpforms/wpforms.php:1262
+#: elements/product-grid/product-grid.php:383
+#: elements/infobox/infobox.php:510
+#: elements/infobox/infobox.php:751
+#: elements/infobox/infobox.php:982
+#: elements/infobox/infobox.php:1164
+#: elements/infobox/infobox.php:1341
+#: elements/flipbox/flipbox.php:1005
+#: elements/team-members/team-members.php:655
+#: elements/gravity-form/gravity-form.php:1450
+#: elements/filterable-gallery/filterable-gallery.php:1681
+#: elements/tooltip/tooltip.php:343
+#: elements/call-to-action/call-to-action.php:538
+#: elements/advance-tabs/advance-tabs.php:449
+#: elements/content-ticker/content-ticker.php:592
+#: elements/contact-form-7/contact-form-7.php:1235
+#: elements/caldera-forms/caldera-forms.php:1270
+#: elements/ninja-form/ninja-form.php:1277
+#: elements/weforms/weforms.php:667
+#: elements/advance-accordion/advance-accordion.php:415
+#: elements/data-table/data-table.php:504
+#: elements/data-table/data-table.php:686
+#: elements/data-table/data-table.php:784
+#: elements/creative-button/creative-button.php:333
+msgid "Hover"
+msgstr ""
+
+#: includes/elementor-helper.php:643
+#: elements/pricing-table/pricing-table.php:1618
+#: elements/wpforms/wpforms.php:975
+#: elements/wpforms/wpforms.php:1293
+#: elements/product-grid/product-grid.php:412
+#: elements/gravity-form/gravity-form.php:982
+#: elements/gravity-form/gravity-form.php:1179
+#: elements/gravity-form/gravity-form.php:1481
+#: elements/countdown/countdown.php:581
+#: elements/countdown/countdown.php:637
+#: elements/countdown/countdown.php:693
+#: elements/countdown/countdown.php:749
+#: elements/filterable-gallery/filterable-gallery.php:1724
+#: elements/call-to-action/call-to-action.php:568
+#: elements/content-ticker/content-ticker.php:623
+#: elements/contact-form-7/contact-form-7.php:946
+#: elements/contact-form-7/contact-form-7.php:1266
+#: elements/caldera-forms/caldera-forms.php:987
+#: elements/caldera-forms/caldera-forms.php:1301
+#: elements/ninja-form/ninja-form.php:1007
+#: elements/ninja-form/ninja-form.php:1308
+#: elements/weforms/weforms.php:401
+#: elements/weforms/weforms.php:694
+#: elements/creative-button/creative-button.php:367
+msgid "Border Color"
+msgstr ""
+
+#: includes/elementor-helper.php:667
+#: elements/pricing-table/pricing-table.php:652
+#: elements/weforms/weforms.php:549
+#: elements/creative-button/creative-button.php:191
+msgid "Button Alignment"
+msgstr ""
+
+#: includes/elementor-helper.php:671
+#: elements/pricing-table/pricing-table.php:179
+#: elements/pricing-table/pricing-table.php:279
+#: elements/pricing-table/pricing-table.php:632
+#: elements/pricing-table/pricing-table.php:657
+#: elements/wpforms/wpforms.php:213
+#: elements/wpforms/wpforms.php:352
+#: elements/wpforms/wpforms.php:526
+#: elements/wpforms/wpforms.php:1091
+#: elements/infobox/infobox.php:241
+#: elements/flipbox/flipbox.php:321
+#: elements/dual-color-header/dual-color-header.php:119
+#: elements/team-members/team-members.php:307
+#: elements/gravity-form/gravity-form.php:290
+#: elements/gravity-form/gravity-form.php:427
+#: elements/gravity-form/gravity-form.php:572
+#: elements/gravity-form/gravity-form.php:1295
+#: elements/countdown/countdown.php:781
+#: elements/filterable-gallery/filterable-gallery.php:510
+#: elements/filterable-gallery/filterable-gallery.php:1038
+#: elements/filterable-gallery/filterable-gallery.php:1326
+#: elements/post-grid/post-grid.php:152
+#: elements/post-grid/post-grid.php:208
+#: elements/post-grid/post-grid.php:269
+#: elements/tooltip/tooltip.php:141
+#: elements/tooltip/tooltip.php:218
+#: elements/fancy-text/fancy-text.php:149
+#: elements/progress-bar/progress-bar.php:231
+#: elements/progress-bar/progress-bar.php:428
+#: elements/call-to-action/call-to-action.php:62
+#: elements/testimonials/testimonials.php:208
+#: elements/post-timeline/post-timeline.php:186
+#: elements/post-timeline/post-timeline.php:242
+#: elements/content-ticker/content-ticker.php:254
+#: elements/contact-form-7/contact-form-7.php:268
+#: elements/contact-form-7/contact-form-7.php:410
+#: elements/contact-form-7/contact-form-7.php:1062
+#: elements/caldera-forms/caldera-forms.php:174
+#: elements/caldera-forms/caldera-forms.php:356
+#: elements/caldera-forms/caldera-forms.php:528
+#: elements/caldera-forms/caldera-forms.php:1103
+#: elements/ninja-form/ninja-form.php:219
+#: elements/ninja-form/ninja-form.php:361
+#: elements/ninja-form/ninja-form.php:543
+#: elements/ninja-form/ninja-form.php:1123
+#: elements/weforms/weforms.php:108
+#: elements/weforms/weforms.php:558
+#: elements/data-table/data-table.php:400
+#: elements/data-table/data-table.php:561
+#: elements/data-table/data-table.php:810
+#: elements/creative-button/creative-button.php:196
+msgid "Left"
+msgstr ""
+
+#: includes/elementor-helper.php:675
+#: elements/pricing-table/pricing-table.php:636
+#: elements/pricing-table/pricing-table.php:661
+#: elements/wpforms/wpforms.php:217
+#: elements/wpforms/wpforms.php:356
+#: elements/wpforms/wpforms.php:530
+#: elements/wpforms/wpforms.php:1095
+#: elements/infobox/infobox.php:245
+#: elements/flipbox/flipbox.php:325
+#: elements/dual-color-header/dual-color-header.php:123
+#: elements/team-members/team-members.php:311
+#: elements/gravity-form/gravity-form.php:294
+#: elements/gravity-form/gravity-form.php:431
+#: elements/gravity-form/gravity-form.php:576
+#: elements/gravity-form/gravity-form.php:1299
+#: elements/countdown/countdown.php:785
+#: elements/filterable-gallery/filterable-gallery.php:514
+#: elements/filterable-gallery/filterable-gallery.php:1042
+#: elements/filterable-gallery/filterable-gallery.php:1330
+#: elements/post-grid/post-grid.php:156
+#: elements/post-grid/post-grid.php:212
+#: elements/post-grid/post-grid.php:273
+#: elements/tooltip/tooltip.php:145
+#: elements/fancy-text/fancy-text.php:153
+#: elements/progress-bar/progress-bar.php:235
+#: elements/progress-bar/progress-bar.php:432
+#: elements/call-to-action/call-to-action.php:63
+#: elements/testimonials/testimonials.php:212
+#: elements/post-timeline/post-timeline.php:190
+#: elements/post-timeline/post-timeline.php:246
+#: elements/contact-form-7/contact-form-7.php:272
+#: elements/contact-form-7/contact-form-7.php:414
+#: elements/contact-form-7/contact-form-7.php:1066
+#: elements/caldera-forms/caldera-forms.php:178
+#: elements/caldera-forms/caldera-forms.php:360
+#: elements/caldera-forms/caldera-forms.php:532
+#: elements/caldera-forms/caldera-forms.php:1107
+#: elements/ninja-form/ninja-form.php:223
+#: elements/ninja-form/ninja-form.php:365
+#: elements/ninja-form/ninja-form.php:547
+#: elements/ninja-form/ninja-form.php:1127
+#: elements/weforms/weforms.php:112
+#: elements/weforms/weforms.php:562
+#: elements/data-table/data-table.php:404
+#: elements/data-table/data-table.php:565
+#: elements/data-table/data-table.php:814
+#: elements/creative-button/creative-button.php:200
+msgid "Center"
+msgstr ""
+
+#: includes/elementor-helper.php:679
+#: elements/pricing-table/pricing-table.php:180
+#: elements/pricing-table/pricing-table.php:287
+#: elements/pricing-table/pricing-table.php:640
+#: elements/pricing-table/pricing-table.php:665
+#: elements/wpforms/wpforms.php:221
+#: elements/wpforms/wpforms.php:360
+#: elements/wpforms/wpforms.php:534
+#: elements/wpforms/wpforms.php:1099
+#: elements/infobox/infobox.php:249
+#: elements/flipbox/flipbox.php:329
+#: elements/dual-color-header/dual-color-header.php:127
+#: elements/team-members/team-members.php:315
+#: elements/gravity-form/gravity-form.php:298
+#: elements/gravity-form/gravity-form.php:435
+#: elements/gravity-form/gravity-form.php:580
+#: elements/gravity-form/gravity-form.php:1303
+#: elements/countdown/countdown.php:789
+#: elements/filterable-gallery/filterable-gallery.php:518
+#: elements/filterable-gallery/filterable-gallery.php:1046
+#: elements/filterable-gallery/filterable-gallery.php:1334
+#: elements/post-grid/post-grid.php:160
+#: elements/post-grid/post-grid.php:216
+#: elements/post-grid/post-grid.php:277
+#: elements/tooltip/tooltip.php:149
+#: elements/tooltip/tooltip.php:219
+#: elements/fancy-text/fancy-text.php:157
+#: elements/progress-bar/progress-bar.php:239
+#: elements/progress-bar/progress-bar.php:436
+#: elements/call-to-action/call-to-action.php:64
+#: elements/testimonials/testimonials.php:216
+#: elements/post-timeline/post-timeline.php:194
+#: elements/post-timeline/post-timeline.php:250
+#: elements/content-ticker/content-ticker.php:255
+#: elements/contact-form-7/contact-form-7.php:276
+#: elements/contact-form-7/contact-form-7.php:418
+#: elements/contact-form-7/contact-form-7.php:1070
+#: elements/caldera-forms/caldera-forms.php:182
+#: elements/caldera-forms/caldera-forms.php:364
+#: elements/caldera-forms/caldera-forms.php:536
+#: elements/caldera-forms/caldera-forms.php:1111
+#: elements/ninja-form/ninja-form.php:227
+#: elements/ninja-form/ninja-form.php:369
+#: elements/ninja-form/ninja-form.php:551
+#: elements/ninja-form/ninja-form.php:1131
+#: elements/weforms/weforms.php:116
+#: elements/weforms/weforms.php:566
+#: elements/data-table/data-table.php:408
+#: elements/data-table/data-table.php:569
+#: elements/data-table/data-table.php:818
+#: elements/creative-button/creative-button.php:204
+msgid "Right"
+msgstr ""
+
+#: includes/eae-posts-group-control.php:44
+msgid "Source"
+msgstr ""
+
+#: includes/eae-posts-group-control.php:49
+msgid "Search & Select"
+msgstr ""
+
+#: includes/eae-posts-group-control.php:61
+msgid "Author"
+msgstr ""
+
+#: includes/eae-posts-group-control.php:83
+msgid "Manual Selection"
+msgstr ""
+
+#: includes/queries.php:207
+msgid "Select a Contact Form"
+msgstr ""
+
+#: includes/queries.php:213
+#: includes/queries.php:236
+#: includes/queries.php:263
+#: includes/queries.php:288
+#: includes/queries.php:313
+#: includes/queries.php:343
+msgid "Create a Form First"
+msgstr ""
+
+#: includes/queries.php:230
+msgid "Select Gravity Form"
+msgstr ""
+
+#: includes/queries.php:258
+#: elements/weforms/weforms.php:40
+msgid "Select weForm"
+msgstr ""
+
+#: includes/queries.php:281
+msgid "Select Ninja Form"
+msgstr ""
+
+#: includes/queries.php:307
+msgid "Select Caldera Form"
+msgstr ""
+
+#: includes/queries.php:337
+msgid "Select a WPForm"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:13
+msgid "EA Pricing Table"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:32
+#: elements/filterable-gallery/filterable-gallery.php:40
+msgid "Settings"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:39
+msgid "Pricing Style"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:45
+msgid "Pricing Style 2"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:46
+msgid "Pricing Style 3"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:47
+msgid "Pricing Style 4"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:55
+#: elements/team-members/team-members.php:260
+#: elements/fancy-text/fancy-text.php:134
+msgid "Only available in pro version!"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:69
+#: elements/pricing-table/pricing-table.php:239
+msgid "List Icon"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:79
+#: elements/image-accordion/image-accordion.php:72
+#: elements/image-accordion/image-accordion.php:270
+#: elements/wpforms/wpforms.php:62
+#: elements/wpforms/wpforms.php:92
+#: elements/wpforms/wpforms.php:374
+#: elements/flipbox/flipbox.php:360
+#: elements/gravity-form/gravity-form.php:108
+#: elements/gravity-form/gravity-form.php:138
+#: elements/gravity-form/gravity-form.php:449
+#: elements/progress-bar/progress-bar.php:74
+#: elements/progress-bar/progress-bar.php:564
+#: elements/call-to-action/call-to-action.php:105
+#: elements/contact-form-7/contact-form-7.php:108
+#: elements/contact-form-7/contact-form-7.php:432
+#: elements/caldera-forms/caldera-forms.php:66
+#: elements/caldera-forms/caldera-forms.php:199
+#: elements/ninja-form/ninja-form.php:66
+#: elements/ninja-form/ninja-form.php:82
+#: elements/ninja-form/ninja-form.php:383
+msgid "Title"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:82
+msgid "Startup"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:92
+msgid "Sub Title"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:95
+msgid "A tagline here."
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:125
+#: elements/pricing-table/pricing-table.php:132
+#: elements/gravity-form/gravity-form.php:1016
+msgid "Price"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:135
+msgid "99"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:141
+msgid "On Sale?"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:152
+#: elements/pricing-table/pricing-table.php:836
+msgid "Sale Price"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:155
+msgid "89"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:164
+msgid "Price Currency"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:167
+msgid "$"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:174
+msgid "Currency Placement"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:188
+msgid "Price Period (per)"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:191
+msgid "month"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:198
+msgid "Period Separator"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:201
+msgid "/"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:213
+msgid "Feature"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:232
+#: elements/filterable-gallery/filterable-gallery.php:248
+msgid "List Item"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:235
+msgid "Pricing table list item"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:246
+msgid "Item Active?"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:253
+#: elements/pricing-table/pricing-table.php:1421
+#: elements/infobox/infobox.php:686
+#: elements/infobox/infobox.php:766
+#: elements/infobox/infobox.php:917
+#: elements/infobox/infobox.php:997
+#: elements/dual-color-header/dual-color-header.php:287
+#: elements/team-members/team-members.php:598
+#: elements/post-grid/post-grid.php:356
+#: elements/advance-tabs/advance-tabs.php:417
+#: elements/advance-tabs/advance-tabs.php:475
+#: elements/advance-tabs/advance-tabs.php:535
+#: elements/advance-accordion/advance-accordion.php:379
+#: elements/advance-accordion/advance-accordion.php:444
+#: elements/advance-accordion/advance-accordion.php:509
+msgid "Icon Color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:259
+msgid "Enable Tooltip?"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:266
+msgid "Tooltip Content"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:268
+msgid "I'm a awesome tooltip!!"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:275
+msgid "Tooltip Side"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:283
+#: elements/infobox/infobox.php:90
+#: elements/tooltip/tooltip.php:220
+msgid "Top"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:291
+#: elements/infobox/infobox.php:98
+#: elements/tooltip/tooltip.php:221
+msgid "Bottom"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:302
+msgid "Tooltip Trigger"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:306
+msgid "Click"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:315
+msgid "Tooltip Animation"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:318
+#: elements/fancy-text/fancy-text.php:176
+#: elements/content-ticker/content-ticker.php:100
+msgid "Fade"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:319
+msgid "Grow"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:320
+#: elements/fancy-text/fancy-text.php:183
+msgid "Swing"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:321
+#: elements/content-ticker/content-ticker.php:99
+msgid "Slide"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:322
+msgid "Fall"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:331
+#: elements/progress-bar/progress-bar.php:135
+msgid "Animation Duration"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:340
+#: elements/pricing-table/pricing-table.php:1230
+msgid "Tooltip Arrow"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:350
+msgid "Tooltip Theme"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:354
+msgid "Noir"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:355
+msgid "Light"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:356
+msgid "Punk"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:357
+msgid "Shadow"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:358
+msgid "Borderless"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:378
+msgid "Footer"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:385
+#: elements/flipbox/flipbox.php:406
+#: elements/filterable-gallery/filterable-gallery.php:478
+#: elements/filterable-gallery/filterable-gallery.php:1644
+msgid "Button Icon"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:393
+#: elements/infobox/infobox.php:82
+#: elements/infobox/infobox.php:367
+#: elements/flipbox/flipbox.php:418
+#: elements/filterable-gallery/filterable-gallery.php:490
+#: elements/advance-tabs/advance-tabs.php:65
+#: elements/creative-button/creative-button.php:89
+msgid "Icon Position"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:397
+#: elements/infobox/infobox.php:371
+#: elements/flipbox/flipbox.php:423
+#: elements/filterable-gallery/filterable-gallery.php:495
+#: elements/creative-button/creative-button.php:93
+msgid "Before"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:398
+#: elements/infobox/infobox.php:372
+#: elements/flipbox/flipbox.php:422
+#: elements/filterable-gallery/filterable-gallery.php:494
+#: elements/creative-button/creative-button.php:94
+msgid "After"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:409
+#: elements/infobox/infobox.php:384
+#: elements/creative-button/creative-button.php:106
+msgid "Icon Spacing"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:429
+#: elements/infobox/infobox.php:322
+#: elements/flipbox/flipbox.php:391
+#: elements/filterable-gallery/filterable-gallery.php:434
+#: elements/call-to-action/call-to-action.php:153
+#: elements/call-to-action/call-to-action.php:156
+#: elements/creative-button/creative-button.php:42
+msgid "Button Text"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:432
+msgid "Choose Plan"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:439
+#: elements/tooltip/tooltip.php:176
+#: elements/call-to-action/call-to-action.php:163
+msgid "Button Link"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:458
+#: elements/pricing-table/pricing-table.php:990
+msgid "Ribbon"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:465
+msgid "Featured?"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:475
+msgid "Ribbon Style"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:479
+#: elements/countdown/countdown.php:99
+#: elements/fancy-text/fancy-text.php:125
+msgid "Style 1"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:480
+#: elements/countdown/countdown.php:100
+#: elements/fancy-text/fancy-text.php:126
+msgid "Style 2"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:481
+#: elements/countdown/countdown.php:101
+msgid "Style 3"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:495
+msgid "Featured Tag Text"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:498
+msgid "Featured"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:545
+msgid "Pricing Table Style"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:590
+#: elements/pricing-table/pricing-table.php:1200
+#: elements/gravity-form/gravity-form.php:937
+msgid "Border Type"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:627
+#: elements/infobox/infobox.php:236
+#: elements/flipbox/flipbox.php:316
+#: elements/filterable-gallery/filterable-gallery.php:1032
+#: elements/filterable-gallery/filterable-gallery.php:1320
+#: elements/tooltip/tooltip.php:136
+#: elements/data-table/data-table.php:805
+msgid "Content Alignment"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:684
+#: elements/data-table/data-table.php:38
+msgid "Header"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:692
+#: elements/infobox/infobox.php:1237
+#: elements/facebook-feed/facebook-feed.php:442
+#: elements/flipbox/flipbox.php:738
+#: elements/flipbox/flipbox.php:839
+#: elements/dual-color-header/dual-color-header.php:314
+#: elements/countdown/countdown.php:803
+#: elements/post-grid/post-grid.php:113
+#: elements/call-to-action/call-to-action.php:366
+#: elements/post-timeline/post-timeline.php:160
+#: elements/twitter-feed/twitter-feed.php:453
+msgid "Title Style"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:700
+#: elements/pricing-table/pricing-table.php:764
+#: elements/pricing-table/pricing-table.php:816
+#: elements/pricing-table/pricing-table.php:845
+#: elements/pricing-table/pricing-table.php:874
+#: elements/pricing-table/pricing-table.php:915
+#: elements/pricing-table/pricing-table.php:951
+#: elements/pricing-table/pricing-table.php:1075
+#: elements/pricing-table/pricing-table.php:1174
+#: elements/image-accordion/image-accordion.php:279
+#: elements/image-accordion/image-accordion.php:308
+#: elements/wpforms/wpforms.php:938
+#: elements/wpforms/wpforms.php:1054
+#: elements/infobox/infobox.php:1245
+#: elements/infobox/infobox.php:1321
+#: elements/facebook-feed/facebook-feed.php:450
+#: elements/facebook-feed/facebook-feed.php:479
+#: elements/facebook-feed/facebook-feed.php:509
+#: elements/facebook-feed/facebook-feed.php:575
+#: elements/flipbox/flipbox.php:715
+#: elements/flipbox/flipbox.php:747
+#: elements/flipbox/flipbox.php:779
+#: elements/flipbox/flipbox.php:816
+#: elements/flipbox/flipbox.php:848
+#: elements/flipbox/flipbox.php:880
+#: elements/flipbox/flipbox.php:953
+#: elements/flipbox/flipbox.php:1011
+#: elements/dual-color-header/dual-color-header.php:363
+#: elements/gravity-form/gravity-form.php:1142
+#: elements/gravity-form/gravity-form.php:1258
+#: elements/filterable-gallery/filterable-gallery.php:955
+#: elements/filterable-gallery/filterable-gallery.php:995
+#: elements/filterable-gallery/filterable-gallery.php:1259
+#: elements/filterable-gallery/filterable-gallery.php:1300
+#: elements/filterable-gallery/filterable-gallery.php:1374
+#: elements/progress-bar/progress-bar.php:317
+#: elements/progress-bar/progress-bar.php:370
+#: elements/call-to-action/call-to-action.php:374
+#: elements/call-to-action/call-to-action.php:403
+#: elements/call-to-action/call-to-action.php:631
+#: elements/twitter-feed/twitter-feed.php:461
+#: elements/twitter-feed/twitter-feed.php:490
+#: elements/twitter-feed/twitter-feed.php:520
+#: elements/twitter-feed/twitter-feed.php:586
+#: elements/content-ticker/content-ticker.php:383
+#: elements/content-ticker/content-ticker.php:555
+#: elements/content-ticker/content-ticker.php:611
+#: elements/contact-form-7/contact-form-7.php:909
+#: elements/contact-form-7/contact-form-7.php:1025
+#: elements/caldera-forms/caldera-forms.php:950
+#: elements/caldera-forms/caldera-forms.php:1066
+#: elements/caldera-forms/caldera-forms.php:1398
+#: elements/ninja-form/ninja-form.php:970
+#: elements/ninja-form/ninja-form.php:1086
+#: elements/ninja-form/ninja-form.php:1392
+#: elements/data-table/data-table.php:469
+#: elements/data-table/data-table.php:509
+#: elements/data-table/data-table.php:883
+msgid "Color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:729
+#: elements/pricing-table/pricing-table.php:998
+msgid "Line Color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:752
+msgid "Subtitle Style"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:799
+msgid "Pricing"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:807
+msgid "Original Price"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:865
+msgid "Currency"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:906
+msgid "Pricing Period"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:943
+msgid "Feature List"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:963
+msgid "Disable item color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1017
+msgid "Line Height"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1043
+#: elements/call-to-action/call-to-action.php:612
+msgid "Font Size"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1136
+#: admin/settings.php:381
+msgid "Tooltip"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1156
+msgid "Arrow Background"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1189
+msgid "Refresh your browser after saving the padding value for see changes."
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1239
+#: elements/tooltip/tooltip.php:554
+msgid "Arrow Size"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1284
+msgid "Icon Settings"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1295
+msgid "Show Background"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1298
+#: elements/wpforms/wpforms.php:65
+#: elements/wpforms/wpforms.php:80
+#: elements/wpforms/wpforms.php:120
+#: elements/wpforms/wpforms.php:133
+#: elements/wpforms/wpforms.php:159
+#: elements/infobox/infobox.php:228
+#: elements/dual-color-header/dual-color-header.php:58
+#: elements/gravity-form/gravity-form.php:111
+#: elements/gravity-form/gravity-form.php:126
+#: elements/gravity-form/gravity-form.php:166
+#: elements/gravity-form/gravity-form.php:178
+#: elements/gravity-form/gravity-form.php:216
+#: elements/gravity-form/gravity-form.php:236
+#: elements/content-ticker/content-ticker.php:219
+#: elements/contact-form-7/contact-form-7.php:147
+#: elements/contact-form-7/contact-form-7.php:173
+#: elements/contact-form-7/contact-form-7.php:193
+#: elements/caldera-forms/caldera-forms.php:94
+#: elements/caldera-forms/caldera-forms.php:107
+#: elements/caldera-forms/caldera-forms.php:133
+#: elements/ninja-form/ninja-form.php:69
+#: elements/ninja-form/ninja-form.php:110
+#: elements/ninja-form/ninja-form.php:123
+#: elements/ninja-form/ninja-form.php:149
+#: elements/ninja-form/ninja-form.php:169
+msgid "Show"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1299
+#: elements/wpforms/wpforms.php:66
+#: elements/wpforms/wpforms.php:81
+#: elements/wpforms/wpforms.php:121
+#: elements/wpforms/wpforms.php:134
+#: elements/wpforms/wpforms.php:160
+#: elements/infobox/infobox.php:229
+#: elements/dual-color-header/dual-color-header.php:59
+#: elements/gravity-form/gravity-form.php:112
+#: elements/gravity-form/gravity-form.php:127
+#: elements/gravity-form/gravity-form.php:167
+#: elements/gravity-form/gravity-form.php:179
+#: elements/gravity-form/gravity-form.php:217
+#: elements/gravity-form/gravity-form.php:237
+#: elements/content-ticker/content-ticker.php:220
+#: elements/contact-form-7/contact-form-7.php:148
+#: elements/contact-form-7/contact-form-7.php:174
+#: elements/contact-form-7/contact-form-7.php:194
+#: elements/caldera-forms/caldera-forms.php:95
+#: elements/caldera-forms/caldera-forms.php:108
+#: elements/caldera-forms/caldera-forms.php:134
+#: elements/ninja-form/ninja-form.php:70
+#: elements/ninja-form/ninja-form.php:111
+#: elements/ninja-form/ninja-form.php:124
+#: elements/ninja-form/ninja-form.php:150
+#: elements/ninja-form/ninja-form.php:170
+msgid "Hide"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1328
+msgid "Background Hover Color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1345
+#: elements/infobox/infobox.php:851
+#: elements/dual-color-header/dual-color-header.php:266
+#: elements/team-members/team-members.php:564
+#: elements/filterable-gallery/filterable-gallery.php:1410
+#: elements/advance-tabs/advance-tabs.php:323
+#: elements/advance-accordion/advance-accordion.php:287
+#: elements/advance-accordion/advance-accordion.php:640
+msgid "Icon Size"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1364
+msgid "Icon Area Width"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1383
+msgid "Icon Area Height"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1402
+msgid "Icon Alignment"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1433
+#: elements/team-members/team-members.php:660
+msgid "Icon Hover Color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1455
+#: elements/facebook-feed/facebook-feed.php:521
+#: elements/filterable-gallery/filterable-gallery.php:967
+#: elements/filterable-gallery/filterable-gallery.php:1271
+#: elements/twitter-feed/twitter-feed.php:532
+msgid "Hover Color"
+msgstr ""
+
+#: elements/pricing-table/pricing-table.php:1496
+#: elements/flipbox/flipbox.php:361
+msgid "Button"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:13
+msgid "EA Image Accordion"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:31
+msgid "Image Accordion Settings"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:38
+msgid "Accordion Style"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:43
+msgid "On Hover"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:44
+msgid "On Click"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:63
+#: elements/call-to-action/call-to-action.php:81
+#: elements/call-to-action/call-to-action.php:181
+msgid "Background Image"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:75
+msgid "Accordion item title"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:80
+#: elements/image-accordion/image-accordion.php:299
+#: elements/infobox/infobox.php:189
+#: elements/tooltip/tooltip.php:64
+#: elements/tooltip/tooltip.php:203
+#: elements/call-to-action/call-to-action.php:118
+#: elements/call-to-action/call-to-action.php:139
+#: elements/advance-tabs/advance-tabs.php:86
+#: elements/advance-tabs/advance-tabs.php:160
+#: elements/advance-tabs/advance-tabs.php:579
+#: elements/advance-accordion/advance-accordion.php:147
+#: elements/data-table/data-table.php:179
+#: elements/data-table/data-table.php:268
+#: elements/data-table/data-table.php:279
+msgid "Content"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:83
+msgid "Accordion content goes here!"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:87
+msgid "Title Link"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:137
+msgid "Image Accordion Style"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:145
+#: elements/progress-bar/progress-bar.php:294
+#: elements/progress-bar/progress-bar.php:346
+msgid "Height"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:230
+#: elements/team-members/team-members.php:271
+#: elements/post-timeline/post-timeline.php:54
+msgid "Overlay Color"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:242
+msgid "Hover Overlay Color"
+msgstr ""
+
+#: elements/image-accordion/image-accordion.php:262
+#: elements/product-grid/product-grid.php:193
+#: elements/infobox/infobox.php:1223
+#: elements/facebook-feed/facebook-feed.php:434
+#: elements/flipbox/flipbox.php:691
+#: elements/dual-color-header/dual-color-header.php:306
+#: elements/team-members/team-members.php:459
+#: elements/countdown/countdown.php:458
+#: elements/testimonials/testimonials.php:365
+#: elements/twitter-feed/twitter-feed.php:445
+msgid "Color &amp; Typography"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:13
+msgid "EA WPForms"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:33
+#: admin/settings.php:346
+msgid "WPForms"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:40
+#: elements/gravity-form/gravity-form.php:86
+#: elements/contact-form-7/contact-form-7.php:86
+#: elements/ninja-form/ninja-form.php:44
+#: elements/weforms/weforms.php:31
+msgid "Select Form"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:51
+#: elements/gravity-form/gravity-form.php:97
+#: elements/caldera-forms/caldera-forms.php:55
+#: elements/ninja-form/ninja-form.php:55
+msgid "Custom Title & Description"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:77
+#: elements/wpforms/wpforms.php:105
+#: elements/wpforms/wpforms.php:423
+#: elements/team-members/team-members.php:92
+#: elements/gravity-form/gravity-form.php:123
+#: elements/gravity-form/gravity-form.php:151
+#: elements/gravity-form/gravity-form.php:480
+#: elements/contact-form-7/contact-form-7.php:132
+#: elements/contact-form-7/contact-form-7.php:463
+#: elements/caldera-forms/caldera-forms.php:79
+#: elements/caldera-forms/caldera-forms.php:260
+#: elements/ninja-form/ninja-form.php:95
+#: elements/ninja-form/ninja-form.php:432
+msgid "Description"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:117
+#: elements/wpforms/wpforms.php:479
+#: elements/gravity-form/gravity-form.php:163
+#: elements/gravity-form/gravity-form.php:517
+#: elements/contact-form-7/contact-form-7.php:144
+#: elements/contact-form-7/contact-form-7.php:734
+#: elements/caldera-forms/caldera-forms.php:91
+#: elements/caldera-forms/caldera-forms.php:482
+#: elements/ninja-form/ninja-form.php:107
+#: elements/ninja-form/ninja-form.php:488
+msgid "Labels"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:130
+#: elements/wpforms/wpforms.php:850
+#: elements/gravity-form/gravity-form.php:175
+#: elements/gravity-form/gravity-form.php:1054
+#: elements/contact-form-7/contact-form-7.php:799
+#: elements/caldera-forms/caldera-forms.php:104
+#: elements/caldera-forms/caldera-forms.php:862
+#: elements/ninja-form/ninja-form.php:120
+#: elements/ninja-form/ninja-form.php:879
+msgid "Placeholder"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:148
+#: elements/wpforms/wpforms.php:1315
+#: elements/gravity-form/gravity-form.php:205
+#: elements/gravity-form/gravity-form.php:1523
+#: elements/contact-form-7/contact-form-7.php:162
+#: elements/contact-form-7/contact-form-7.php:1287
+#: elements/caldera-forms/caldera-forms.php:122
+#: elements/caldera-forms/caldera-forms.php:1379
+#: elements/ninja-form/ninja-form.php:138
+#: elements/ninja-form/ninja-form.php:1439
+msgid "Errors"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:155
+#: elements/gravity-form/gravity-form.php:212
+#: elements/gravity-form/gravity-form.php:1531
+#: elements/contact-form-7/contact-form-7.php:169
+#: elements/contact-form-7/contact-form-7.php:1295
+#: elements/caldera-forms/caldera-forms.php:129
+#: elements/caldera-forms/caldera-forms.php:1387
+#: elements/ninja-form/ninja-form.php:145
+#: elements/ninja-form/ninja-form.php:1447
+msgid "Error Messages"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:185
+#: elements/gravity-form/gravity-form.php:262
+#: elements/contact-form-7/contact-form-7.php:240
+#: elements/caldera-forms/caldera-forms.php:328
+#: elements/ninja-form/ninja-form.php:191
+msgid "Form Container"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:193
+#: elements/gravity-form/gravity-form.php:270
+#: elements/contact-form-7/contact-form-7.php:248
+#: elements/caldera-forms/caldera-forms.php:336
+#: elements/ninja-form/ninja-form.php:199
+#: elements/weforms/weforms.php:88
+msgid "Form Background Color"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:204
+#: elements/gravity-form/gravity-form.php:281
+#: elements/contact-form-7/contact-form-7.php:259
+#: elements/caldera-forms/caldera-forms.php:347
+#: elements/ninja-form/ninja-form.php:210
+#: elements/weforms/weforms.php:99
+msgid "Form Alignment"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:232
+#: elements/gravity-form/gravity-form.php:309
+#: elements/contact-form-7/contact-form-7.php:287
+#: elements/caldera-forms/caldera-forms.php:375
+#: elements/ninja-form/ninja-form.php:238
+#: elements/weforms/weforms.php:128
+msgid "Form Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:254
+#: elements/gravity-form/gravity-form.php:331
+#: elements/contact-form-7/contact-form-7.php:309
+#: elements/caldera-forms/caldera-forms.php:397
+#: elements/ninja-form/ninja-form.php:260
+#: elements/weforms/weforms.php:150
+msgid "Form Max Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:277
+#: elements/gravity-form/gravity-form.php:354
+#: elements/contact-form-7/contact-form-7.php:332
+#: elements/caldera-forms/caldera-forms.php:420
+#: elements/ninja-form/ninja-form.php:283
+#: elements/weforms/weforms.php:173
+msgid "Form Margin"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:289
+#: elements/gravity-form/gravity-form.php:366
+#: elements/contact-form-7/contact-form-7.php:344
+#: elements/caldera-forms/caldera-forms.php:432
+#: elements/ninja-form/ninja-form.php:295
+#: elements/weforms/weforms.php:185
+msgid "Form Padding"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:340
+#: elements/gravity-form/gravity-form.php:415
+#: elements/contact-form-7/contact-form-7.php:398
+#: elements/caldera-forms/caldera-forms.php:159
+#: elements/ninja-form/ninja-form.php:349
+msgid "Title & Description"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:348
+#: elements/wpforms/wpforms.php:522
+#: elements/wpforms/wpforms.php:1087
+#: elements/dual-color-header/dual-color-header.php:114
+#: elements/gravity-form/gravity-form.php:423
+#: elements/gravity-form/gravity-form.php:568
+#: elements/gravity-form/gravity-form.php:1291
+#: elements/filterable-gallery/filterable-gallery.php:506
+#: elements/fancy-text/fancy-text.php:145
+#: elements/progress-bar/progress-bar.php:227
+#: elements/progress-bar/progress-bar.php:424
+#: elements/contact-form-7/contact-form-7.php:406
+#: elements/contact-form-7/contact-form-7.php:1057
+#: elements/caldera-forms/caldera-forms.php:170
+#: elements/caldera-forms/caldera-forms.php:524
+#: elements/caldera-forms/caldera-forms.php:1099
+#: elements/ninja-form/ninja-form.php:357
+#: elements/ninja-form/ninja-form.php:539
+#: elements/ninja-form/ninja-form.php:1119
+#: elements/data-table/data-table.php:394
+msgid "Alignment"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:396
+#: elements/wpforms/wpforms.php:445
+#: elements/wpforms/wpforms.php:499
+#: elements/wpforms/wpforms.php:739
+#: elements/wpforms/wpforms.php:817
+#: elements/wpforms/wpforms.php:1241
+#: elements/gravity-form/gravity-form.php:471
+#: elements/gravity-form/gravity-form.php:502
+#: elements/gravity-form/gravity-form.php:543
+#: elements/gravity-form/gravity-form.php:783
+#: elements/gravity-form/gravity-form.php:873
+#: elements/gravity-form/gravity-form.php:927
+#: elements/gravity-form/gravity-form.php:1498
+#: elements/filterable-gallery/filterable-gallery.php:1603
+#: elements/post-grid/post-grid.php:174
+#: elements/progress-bar/progress-bar.php:555
+#: elements/post-timeline/post-timeline.php:152
+#: elements/post-timeline/post-timeline.php:208
+#: elements/contact-form-7/contact-form-7.php:454
+#: elements/contact-form-7/contact-form-7.php:485
+#: elements/contact-form-7/contact-form-7.php:664
+#: elements/contact-form-7/contact-form-7.php:782
+#: elements/contact-form-7/contact-form-7.php:834
+#: elements/contact-form-7/contact-form-7.php:1214
+#: elements/contact-form-7/contact-form-7.php:1459
+#: elements/caldera-forms/caldera-forms.php:227
+#: elements/caldera-forms/caldera-forms.php:288
+#: elements/caldera-forms/caldera-forms.php:502
+#: elements/caldera-forms/caldera-forms.php:740
+#: elements/caldera-forms/caldera-forms.php:829
+#: elements/caldera-forms/caldera-forms.php:1250
+#: elements/caldera-forms/caldera-forms.php:1365
+#: elements/ninja-form/ninja-form.php:405
+#: elements/ninja-form/ninja-form.php:454
+#: elements/ninja-form/ninja-form.php:514
+#: elements/ninja-form/ninja-form.php:757
+#: elements/ninja-form/ninja-form.php:846
+#: elements/ninja-form/ninja-form.php:1325
+#: elements/ninja-form/ninja-form.php:1370
+#: elements/ninja-form/ninja-form.php:1424
+msgid "Typography"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:514
+#: elements/gravity-form/gravity-form.php:560
+#: elements/contact-form-7/contact-form-7.php:500
+#: elements/caldera-forms/caldera-forms.php:516
+#: elements/ninja-form/ninja-form.php:531
+msgid "Input & Textarea"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:605
+#: elements/gravity-form/gravity-form.php:658
+#: elements/contact-form-7/contact-form-7.php:577
+#: elements/caldera-forms/caldera-forms.php:607
+#: elements/ninja-form/ninja-form.php:622
+msgid "Text Indent"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:630
+#: elements/gravity-form/gravity-form.php:682
+#: elements/contact-form-7/contact-form-7.php:601
+#: elements/caldera-forms/caldera-forms.php:632
+#: elements/ninja-form/ninja-form.php:647
+#: elements/weforms/weforms.php:259
+msgid "Input Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:649
+#: elements/gravity-form/gravity-form.php:701
+#: elements/caldera-forms/caldera-forms.php:651
+#: elements/ninja-form/ninja-form.php:667
+msgid "Input Height"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:668
+#: elements/gravity-form/gravity-form.php:720
+#: elements/contact-form-7/contact-form-7.php:620
+#: elements/caldera-forms/caldera-forms.php:670
+#: elements/ninja-form/ninja-form.php:686
+#: elements/weforms/weforms.php:286
+msgid "Textarea Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:687
+#: elements/gravity-form/gravity-form.php:739
+#: elements/caldera-forms/caldera-forms.php:689
+#: elements/ninja-form/ninja-form.php:705
+msgid "Textarea Height"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:719
+#: elements/wpforms/wpforms.php:825
+#: elements/gravity-form/gravity-form.php:627
+#: elements/gravity-form/gravity-form.php:881
+#: elements/contact-form-7/contact-form-7.php:542
+#: elements/contact-form-7/contact-form-7.php:759
+#: elements/contact-form-7/contact-form-7.php:1333
+#: elements/caldera-forms/caldera-forms.php:720
+#: elements/caldera-forms/caldera-forms.php:837
+#: elements/ninja-form/ninja-form.php:737
+#: elements/ninja-form/ninja-form.php:854
+#: elements/ninja-form/ninja-form.php:1404
+msgid "Spacing"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:760
+#: elements/gravity-form/gravity-form.php:804
+#: elements/contact-form-7/contact-form-7.php:685
+#: elements/caldera-forms/caldera-forms.php:760
+#: elements/ninja-form/ninja-form.php:777
+msgid "Focus"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:797
+#: elements/gravity-form/gravity-form.php:853
+#: elements/caldera-forms/caldera-forms.php:809
+#: elements/ninja-form/ninja-form.php:826
+msgid "Field Description"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:881
+#: elements/gravity-form/gravity-form.php:1085
+#: elements/contact-form-7/contact-form-7.php:852
+#: elements/caldera-forms/caldera-forms.php:893
+#: elements/ninja-form/ninja-form.php:913
+msgid "Radio & Checkbox"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:889
+#: elements/gravity-form/gravity-form.php:1093
+#: elements/contact-form-7/contact-form-7.php:860
+#: elements/caldera-forms/caldera-forms.php:901
+#: elements/ninja-form/ninja-form.php:921
+msgid "Custom Styles"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:900
+#: elements/facebook-feed/facebook-feed.php:556
+#: elements/gravity-form/gravity-form.php:1104
+#: elements/filterable-gallery/filterable-gallery.php:458
+#: elements/progress-bar/progress-bar.php:447
+#: elements/twitter-feed/twitter-feed.php:567
+#: elements/contact-form-7/contact-form-7.php:871
+#: elements/caldera-forms/caldera-forms.php:912
+#: elements/ninja-form/ninja-form.php:932
+msgid "Size"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:953
+#: elements/gravity-form/gravity-form.php:1157
+#: elements/contact-form-7/contact-form-7.php:924
+#: elements/caldera-forms/caldera-forms.php:965
+#: elements/ninja-form/ninja-form.php:985
+msgid "Border Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:990
+#: elements/gravity-form/gravity-form.php:1194
+#: elements/contact-form-7/contact-form-7.php:961
+#: elements/caldera-forms/caldera-forms.php:1002
+#: elements/ninja-form/ninja-form.php:1022
+msgid "Checkbox"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1016
+#: elements/gravity-form/gravity-form.php:1220
+#: elements/contact-form-7/contact-form-7.php:987
+#: elements/caldera-forms/caldera-forms.php:1028
+#: elements/ninja-form/ninja-form.php:1048
+msgid "Radio Buttons"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1044
+#: elements/gravity-form/gravity-form.php:1248
+#: elements/contact-form-7/contact-form-7.php:1015
+#: elements/caldera-forms/caldera-forms.php:1056
+#: elements/ninja-form/ninja-form.php:1076
+msgid "Checked"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1079
+#: elements/gravity-form/gravity-form.php:1283
+#: elements/contact-form-7/contact-form-7.php:1049
+#: elements/caldera-forms/caldera-forms.php:1091
+#: elements/ninja-form/ninja-form.php:1111
+msgid "Submit Button"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1117
+#: elements/wpforms/wpforms.php:1131
+#: elements/gravity-form/gravity-form.php:1321
+#: elements/gravity-form/gravity-form.php:1335
+#: elements/progress-bar/progress-bar.php:266
+#: elements/contact-form-7/contact-form-7.php:1087
+#: elements/contact-form-7/contact-form-7.php:1101
+#: elements/caldera-forms/caldera-forms.php:1126
+#: elements/caldera-forms/caldera-forms.php:1140
+#: elements/ninja-form/ninja-form.php:1148
+#: elements/ninja-form/ninja-form.php:1162
+#: elements/data-table/data-table.php:368
+#: elements/data-table/data-table.php:858
+#: elements/creative-button/creative-button.php:218
+msgid "Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1121
+#: elements/gravity-form/gravity-form.php:1325
+#: elements/contact-form-7/contact-form-7.php:1091
+#: elements/caldera-forms/caldera-forms.php:1130
+#: elements/ninja-form/ninja-form.php:1152
+msgid "Full Width"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1122
+#: elements/gravity-form/gravity-form.php:1326
+#: elements/content-ticker/content-ticker.php:45
+#: elements/contact-form-7/contact-form-7.php:1092
+#: elements/caldera-forms/caldera-forms.php:1131
+#: elements/ninja-form/ninja-form.php:1153
+msgid "Custom"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1221
+#: elements/gravity-form/gravity-form.php:1429
+#: elements/contact-form-7/contact-form-7.php:1194
+#: elements/caldera-forms/caldera-forms.php:1230
+#: elements/ninja-form/ninja-form.php:1256
+msgid "Margin Top"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1341
+#: elements/gravity-form/gravity-form.php:1630
+#: elements/ninja-form/ninja-form.php:1500
+msgid "Error Field Input Border Color"
+msgstr ""
+
+#: elements/wpforms/wpforms.php:1356
+#: elements/gravity-form/gravity-form.php:1645
+msgid "Error Field Input Border Width"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:16
+msgid "EA Product Grid"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:34
+msgid "Product Settings"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:41
+msgid "Filter By"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:45
+msgid "Recent Products"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:46
+msgid "Featured Products"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:47
+msgid "Best Selling Products"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:48
+msgid "Sale Products"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:49
+msgid "Top Rated Products"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:57
+#: elements/filterable-gallery/filterable-gallery.php:67
+msgid "Columns"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:61
+#: elements/testimonials/testimonials.php:129
+msgid "1"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:62
+#: elements/testimonials/testimonials.php:130
+msgid "2"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:63
+#: elements/testimonials/testimonials.php:131
+msgid "3"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:64
+#: elements/testimonials/testimonials.php:132
+msgid "4"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:65
+#: elements/testimonials/testimonials.php:133
+msgid "5"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:66
+msgid "6"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:74
+msgid "Products Count"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:87
+msgid "Product Categories"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:113
+msgid "Show Product Rating?"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:150
+msgid "Products Styles"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:158
+#: elements/team-members/team-members.php:286
+msgid "Content Background Color"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:201
+msgid "Product Title"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:209
+msgid "Product Title Color"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:229
+msgid "Product Price"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:238
+msgid "Product Price Color"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:258
+msgid "Star Rating"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:266
+msgid "Rating Color"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:287
+msgid "Sale Badge"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:295
+msgid "Sale Badge Color"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:307
+msgid "Sale Badge Background"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:331
+msgid "Add to Cart Button Styles"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:344
+#: elements/product-grid/product-grid.php:388
+msgid "Button Color"
+msgstr ""
+
+#: elements/product-grid/product-grid.php:356
+#: elements/product-grid/product-grid.php:400
+msgid "Button Background Color"
+msgstr ""
+
+#: elements/infobox/infobox.php:13
+msgid "EA Info Box"
+msgstr ""
+
+#: elements/infobox/infobox.php:32
+#: elements/infobox/infobox.php:119
+msgid "Infobox Image"
+msgstr ""
+
+#: elements/infobox/infobox.php:39
+msgid "Infobox Type"
+msgstr ""
+
+#: elements/infobox/infobox.php:44
+msgid "Image/Icon On Top"
+msgstr ""
+
+#: elements/infobox/infobox.php:45
+msgid "Image/Icon On Left"
+msgstr ""
+
+#: elements/infobox/infobox.php:46
+msgid "Image/Icon On Right"
+msgstr ""
+
+#: elements/infobox/infobox.php:54
+msgid "Image or Icon"
+msgstr ""
+
+#: elements/infobox/infobox.php:59
+#: elements/infobox/infobox.php:719
+#: elements/infobox/infobox.php:800
+#: elements/infobox/infobox.php:935
+#: elements/infobox/infobox.php:1031
+#: elements/flipbox/flipbox.php:71
+#: elements/flipbox/flipbox.php:156
+#: elements/flipbox/flipbox.php:358
+#: elements/gravity-form/gravity-form.php:941
+#: elements/countdown/countdown.php:264
+#: elements/filterable-gallery/filterable-gallery.php:133
+#: elements/filterable-gallery/filterable-gallery.php:173
+#: elements/post-grid/post-grid.php:320
+#: elements/advance-tabs/advance-tabs.php:114
+#: elements/data-table/data-table.php:105
+msgid "None"
+msgstr ""
+
+#: elements/infobox/infobox.php:63
+#: elements/infobox/infobox.php:152
+msgid "Number"
+msgstr ""
+
+#: elements/infobox/infobox.php:94
+msgid "Middle"
+msgstr ""
+
+#: elements/infobox/infobox.php:168
+#: elements/infobox/infobox.php:210
+msgid "Infobox Content"
+msgstr ""
+
+#: elements/infobox/infobox.php:174
+msgid "Infobox Title"
+msgstr ""
+
+#: elements/infobox/infobox.php:180
+msgid "This is an icon box"
+msgstr ""
+
+#: elements/infobox/infobox.php:186
+#: elements/tooltip/tooltip.php:37
+#: elements/call-to-action/call-to-action.php:57
+#: elements/call-to-action/call-to-action.php:115
+#: elements/advance-tabs/advance-tabs.php:157
+#: elements/advance-accordion/advance-accordion.php:144
+#: elements/data-table/data-table.php:233
+msgid "Content Type"
+msgstr ""
+
+#: elements/infobox/infobox.php:190
+#: elements/countdown/countdown.php:267
+#: elements/call-to-action/call-to-action.php:119
+#: elements/advance-tabs/advance-tabs.php:161
+#: elements/advance-accordion/advance-accordion.php:148
+msgid "Saved Templates"
+msgstr ""
+
+#: elements/infobox/infobox.php:199
+#: elements/countdown/countdown.php:312
+#: elements/call-to-action/call-to-action.php:128
+#: elements/advance-tabs/advance-tabs.php:167
+#: elements/advance-accordion/advance-accordion.php:154
+#: elements/data-table/data-table.php:256
+msgid "Choose Template"
+msgstr ""
+
+#: elements/infobox/infobox.php:216
+msgid "Write a short description, that will describe the title or something informational and useful."
+msgstr ""
+
+#: elements/infobox/infobox.php:225
+msgid "Show Content"
+msgstr ""
+
+#: elements/infobox/infobox.php:270
+#: elements/flipbox/flipbox.php:347
+#: elements/flipbox/flipbox.php:369
+#: elements/team-members/team-members.php:190
+#: elements/data-table/data-table.php:287
+msgid "Link"
+msgstr ""
+
+#: elements/infobox/infobox.php:277
+msgid "Show Infobox Button"
+msgstr ""
+
+#: elements/infobox/infobox.php:290
+msgid "Infobox Clickable"
+msgstr ""
+
+#: elements/infobox/infobox.php:305
+msgid "Infobox Link"
+msgstr ""
+
+#: elements/infobox/infobox.php:327
+#: elements/creative-button/creative-button.php:46
+msgid "Enter button text"
+msgstr ""
+
+#: elements/infobox/infobox.php:328
+#: elements/creative-button/creative-button.php:47
+msgid "Enter button text here"
+msgstr ""
+
+#: elements/infobox/infobox.php:338
+#: elements/creative-button/creative-button.php:67
+msgid "Link URL"
+msgstr ""
+
+#: elements/infobox/infobox.php:341
+msgid "Enter link URL for the button"
+msgstr ""
+
+#: elements/infobox/infobox.php:346
+msgid "Enter heading for the button"
+msgstr ""
+
+#: elements/infobox/infobox.php:436
+#: elements/flipbox/flipbox.php:562
+msgid "Image Style"
+msgstr ""
+
+#: elements/infobox/infobox.php:489
+#: elements/infobox/infobox.php:544
+msgid "Image Shape"
+msgstr ""
+
+#: elements/infobox/infobox.php:494
+#: elements/infobox/infobox.php:549
+#: elements/infobox/infobox.php:722
+#: elements/infobox/infobox.php:803
+#: elements/infobox/infobox.php:938
+#: elements/infobox/infobox.php:1034
+msgid "Square"
+msgstr ""
+
+#: elements/infobox/infobox.php:495
+#: elements/infobox/infobox.php:550
+#: elements/infobox/infobox.php:720
+#: elements/infobox/infobox.php:801
+#: elements/infobox/infobox.php:936
+#: elements/infobox/infobox.php:1032
+#: elements/flipbox/flipbox.php:578
+#: elements/progress-bar/progress-bar.php:50
+msgid "Circle"
+msgstr ""
+
+#: elements/infobox/infobox.php:496
+#: elements/infobox/infobox.php:551
+#: elements/infobox/infobox.php:721
+#: elements/infobox/infobox.php:802
+#: elements/infobox/infobox.php:937
+#: elements/infobox/infobox.php:1033
+#: elements/flipbox/flipbox.php:579
+msgid "Radius"
+msgstr ""
+
+#: elements/infobox/infobox.php:527
+#: elements/infobox/infobox.php:758
+#: elements/infobox/infobox.php:989
+#: elements/post-grid/post-grid.php:316
+msgid "Animation"
+msgstr ""
+
+#: elements/infobox/infobox.php:567
+#: elements/flipbox/flipbox.php:109
+#: elements/flipbox/flipbox.php:193
+msgid "Image Resizer"
+msgstr ""
+
+#: elements/infobox/infobox.php:622
+msgid "Number Icon Style"
+msgstr ""
+
+#: elements/infobox/infobox.php:641
+#: elements/infobox/infobox.php:872
+msgid "Icon Background Size"
+msgstr ""
+
+#: elements/infobox/infobox.php:714
+#: elements/infobox/infobox.php:795
+#: elements/infobox/infobox.php:930
+#: elements/infobox/infobox.php:1026
+msgid "Background Shape"
+msgstr ""
+
+#: elements/infobox/infobox.php:840
+#: elements/flipbox/flipbox.php:623
+#: elements/flipbox/flipbox.php:707
+#: elements/flipbox/flipbox.php:808
+#: elements/dual-color-header/dual-color-header.php:255
+#: elements/call-to-action/call-to-action.php:601
+msgid "Icon Style"
+msgstr ""
+
+#: elements/infobox/infobox.php:1071
+msgid "Button Styles"
+msgstr ""
+
+#: elements/infobox/infobox.php:1090
+#: elements/creative-button/creative-button.php:250
+msgid "Button Padding"
+msgstr ""
+
+#: elements/infobox/infobox.php:1276
+#: elements/facebook-feed/facebook-feed.php:470
+#: elements/flipbox/flipbox.php:770
+#: elements/flipbox/flipbox.php:871
+#: elements/dual-color-header/dual-color-header.php:39
+#: elements/countdown/countdown.php:851
+#: elements/tooltip/tooltip.php:250
+#: elements/call-to-action/call-to-action.php:39
+#: elements/call-to-action/call-to-action.php:394
+#: elements/twitter-feed/twitter-feed.php:481
+#: elements/advance-accordion/advance-accordion.php:551
+#: elements/data-table/data-table.php:588
+msgid "Content Style"
+msgstr ""
+
+#: elements/infobox/infobox.php:1285
+msgid "Content Only Margin"
+msgstr ""
+
+#: elements/infobox/infobox.php:1297
+msgid "Content Only Background"
+msgstr ""
+
+#: elements/infobox/infobox.php:1309
+msgid "Content Only Padding"
+msgstr ""
+
+#: elements/infobox/infobox.php:1347
+#: elements/countdown/countdown.php:812
+#: elements/post-grid/post-grid.php:122
+#: elements/progress-bar/progress-bar.php:573
+#: elements/post-timeline/post-timeline.php:169
+msgid "Title Color"
+msgstr ""
+
+#: elements/infobox/infobox.php:1359
+msgid "Content Color"
+msgstr ""
+
+#: elements/infobox/infobox.php:1371
+msgid "Transition"
+msgstr ""
+
+#: elements/infobox/infobox.php:1372
+msgid "Transition will applied to ms (ex: 300ms)."
+msgstr ""
+
+#: elements/infobox/infobox.php:1394
+msgid "Info Box Advanced"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:14
+msgid "EA Facebook Feed"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:30
+#: elements/twitter-feed/twitter-feed.php:30
+msgid "Account Settings"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:37
+#: elements/twitter-feed/twitter-feed.php:37
+msgid "Account Name"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:41
+#: elements/twitter-feed/twitter-feed.php:41
+msgid "Use @ sign with your account name."
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:49
+msgid "App ID"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:60
+msgid "App Secret"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:80
+#: elements/twitter-feed/twitter-feed.php:91
+msgid "Content Layout"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:84
+#: elements/twitter-feed/twitter-feed.php:95
+msgid "List"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:85
+#: elements/filterable-gallery/filterable-gallery.php:93
+#: elements/twitter-feed/twitter-feed.php:96
+msgid "Masonry"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:93
+#: elements/twitter-feed/twitter-feed.php:104
+msgid "Column Grid"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:111
+#: elements/twitter-feed/twitter-feed.php:121
+msgid "Content Length"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:121
+#: elements/twitter-feed/twitter-feed.php:131
+msgid "Column spacing"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:141
+#: elements/twitter-feed/twitter-feed.php:151
+msgid "Post Limit"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:151
+#: elements/twitter-feed/twitter-feed.php:161
+msgid "Show Media Elements"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:153
+#: elements/facebook-feed/facebook-feed.php:174
+#: elements/facebook-feed/facebook-feed.php:203
+#: elements/facebook-feed/facebook-feed.php:215
+#: elements/facebook-feed/facebook-feed.php:226
+#: elements/call-to-action/call-to-action.php:242
+#: elements/twitter-feed/twitter-feed.php:163
+#: elements/twitter-feed/twitter-feed.php:184
+#: elements/twitter-feed/twitter-feed.php:213
+#: elements/twitter-feed/twitter-feed.php:225
+#: elements/twitter-feed/twitter-feed.php:237
+#: elements/data-table/data-table.php:94
+msgid "yes"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:154
+#: elements/facebook-feed/facebook-feed.php:175
+#: elements/facebook-feed/facebook-feed.php:204
+#: elements/facebook-feed/facebook-feed.php:216
+#: elements/facebook-feed/facebook-feed.php:227
+#: elements/call-to-action/call-to-action.php:243
+#: elements/twitter-feed/twitter-feed.php:164
+#: elements/twitter-feed/twitter-feed.php:185
+#: elements/twitter-feed/twitter-feed.php:214
+#: elements/twitter-feed/twitter-feed.php:226
+#: elements/twitter-feed/twitter-feed.php:238
+#: elements/data-table/data-table.php:95
+msgid "no"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:165
+#: elements/twitter-feed/twitter-feed.php:175
+msgid "Card Settings"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:172
+#: elements/twitter-feed/twitter-feed.php:182
+msgid "Show Avatar"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:184
+#: elements/twitter-feed/twitter-feed.php:194
+msgid "Avatar Style"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:201
+#: elements/twitter-feed/twitter-feed.php:211
+msgid "Show Date"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:224
+#: elements/dual-color-header/dual-color-header.php:55
+#: elements/twitter-feed/twitter-feed.php:235
+msgid "Show Icon"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:266
+#: elements/filterable-gallery/filterable-gallery.php:567
+#: elements/twitter-feed/twitter-feed.php:277
+#: elements/advance-accordion/advance-accordion.php:211
+#: elements/data-table/data-table.php:360
+msgid "General Style"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:350
+#: elements/twitter-feed/twitter-feed.php:361
+msgid "Card Style"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:500
+#: elements/twitter-feed/twitter-feed.php:511
+msgid "Link Style"
+msgstr ""
+
+#: elements/facebook-feed/facebook-feed.php:548
+#: elements/twitter-feed/twitter-feed.php:559
+msgid "Preloader Style"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:15
+msgid "EA Flip Box"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:34
+msgid "Flipbox Settings"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:41
+msgid "Flipbox Type"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:46
+msgid "Flip Left"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:47
+msgid "Flip Right"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:48
+msgid "Flip Top"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:49
+msgid "Flip Bottom"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:50
+msgid "Zoom In"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:51
+msgid "Zoom Out"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:61
+msgid "Front"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:68
+#: elements/flipbox/flipbox.php:153
+#: elements/advance-tabs/advance-tabs.php:109
+msgid "Icon Type"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:82
+#: elements/flipbox/flipbox.php:167
+msgid "Flipbox Image"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:146
+msgid "Back"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:237
+msgid "Flipbox Content"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:243
+msgid "Front or Back Content"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:248
+#: elements/flipbox/flipbox.php:698
+msgid "Front Content"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:252
+#: elements/flipbox/flipbox.php:799
+msgid "Back Content"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:265
+msgid "Front Title"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:268
+#: elements/flipbox/flipbox.php:295
+msgid "Elementor Flipbox"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:277
+msgid "Front Text"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:280
+msgid "This is front-end content."
+msgstr ""
+
+#: elements/flipbox/flipbox.php:292
+msgid "Back Title"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:304
+msgid "Back Text"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:307
+msgid "This is back-end content."
+msgstr ""
+
+#: elements/flipbox/flipbox.php:354
+msgid "Link Type"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:359
+msgid "Box"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:396
+msgid "Get Started"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:468
+msgid "Filp Box Style"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:476
+msgid "Front Background Color"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:488
+msgid "Back Background Color"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:500
+msgid "Fornt / Back Content Padding"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:514
+msgid "Border Style"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:573
+msgid "Image Type"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:910
+#: elements/call-to-action/call-to-action.php:430
+msgid "Button Style"
+msgstr ""
+
+#: elements/flipbox/flipbox.php:965
+#: elements/flipbox/flipbox.php:1023
+#: elements/fancy-text/fancy-text.php:328
+#: elements/progress-bar/progress-bar.php:255
+msgid "Background"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:13
+msgid "EA Dual Color Heading"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:32
+#: elements/countdown/countdown.php:87
+#: elements/tooltip/tooltip.php:31
+#: elements/call-to-action/call-to-action.php:32
+#: elements/advance-accordion/advance-accordion.php:98
+msgid "Content Settings"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:45
+msgid "Icon on top"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:46
+msgid "Icon &amp; sub-text on top"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:47
+msgid "Sub-text on top"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:82
+msgid "Title ( First Part )"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:85
+msgid "Dual Heading"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:93
+msgid "Title ( Last Part )"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:96
+msgid "Example"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:104
+msgid "Sub Text"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:107
+msgid "Insert a meaningful line to evaluate the headline."
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:171
+msgid "Dual Heading Style"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:322
+msgid "Main Color"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:334
+msgid "Dual Color"
+msgstr ""
+
+#: elements/dual-color-header/dual-color-header.php:354
+msgid "Sub-title Style "
+msgstr ""
+
+#: elements/team-members/team-members.php:14
+msgid "EA Team Member"
+msgstr ""
+
+#: elements/team-members/team-members.php:32
+msgid "Team Member Image"
+msgstr ""
+
+#: elements/team-members/team-members.php:40
+msgid "Team Member Avatar"
+msgstr ""
+
+#: elements/team-members/team-members.php:66
+msgid "Team Member Content"
+msgstr ""
+
+#: elements/team-members/team-members.php:74
+msgid "Name"
+msgstr ""
+
+#: elements/team-members/team-members.php:76
+#: elements/testimonials/testimonials.php:87
+msgid "John Doe"
+msgstr ""
+
+#: elements/team-members/team-members.php:83
+msgid "Job Position"
+msgstr ""
+
+#: elements/team-members/team-members.php:85
+msgid "Software Engineer"
+msgstr ""
+
+#: elements/team-members/team-members.php:94
+msgid "Add team member description here. Remove the text if not necessary."
+msgstr ""
+
+#: elements/team-members/team-members.php:105
+msgid "Social Profiles"
+msgstr ""
+
+#: elements/team-members/team-members.php:112
+msgid "Display Social Profiles?"
+msgstr ""
+
+#: elements/team-members/team-members.php:197
+msgid "Place URL here"
+msgstr ""
+
+#: elements/team-members/team-members.php:235
+msgid "Team Member Styles"
+msgstr ""
+
+#: elements/team-members/team-members.php:244
+msgid "Style Preset"
+msgstr ""
+
+#: elements/team-members/team-members.php:248
+msgid "Simple Style"
+msgstr ""
+
+#: elements/team-members/team-members.php:249
+msgid "Overlay Style"
+msgstr ""
+
+#: elements/team-members/team-members.php:250
+msgid "Centered Style"
+msgstr ""
+
+#: elements/team-members/team-members.php:251
+msgid "Circle Style"
+msgstr ""
+
+#: elements/team-members/team-members.php:252
+msgid "Social on Bottom"
+msgstr ""
+
+#: elements/team-members/team-members.php:298
+msgid "Set Alignment"
+msgstr ""
+
+#: elements/team-members/team-members.php:327
+msgid "Content Padding"
+msgstr ""
+
+#: elements/team-members/team-members.php:362
+msgid "Team Member Image Style"
+msgstr ""
+
+#: elements/team-members/team-members.php:370
+#: elements/testimonials/testimonials.php:255
+msgid "Image Width"
+msgstr ""
+
+#: elements/team-members/team-members.php:431
+#: elements/testimonials/testimonials.php:337
+msgid "Rounded Avatar?"
+msgstr ""
+
+#: elements/team-members/team-members.php:467
+msgid "Member Name"
+msgstr ""
+
+#: elements/team-members/team-members.php:475
+msgid "Member Name Color"
+msgstr ""
+
+#: elements/team-members/team-members.php:495
+msgid "Member Job Position"
+msgstr ""
+
+#: elements/team-members/team-members.php:503
+msgid "Job Position Color"
+msgstr ""
+
+#: elements/team-members/team-members.php:523
+msgid "Member Description"
+msgstr ""
+
+#: elements/team-members/team-members.php:531
+msgid "Description Color"
+msgstr ""
+
+#: elements/team-members/team-members.php:555
+msgid "Social Profiles Style"
+msgstr ""
+
+#: elements/team-members/team-members.php:581
+msgid "Social Profiles Spacing"
+msgstr ""
+
+#: elements/team-members/team-members.php:672
+msgid "Hover Background Color"
+msgstr ""
+
+#: elements/team-members/team-members.php:684
+msgid "Hover Border Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:32
+msgid "EA Gravity Forms"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:79
+msgid "Gravity Forms"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:187
+msgid "Use Ajax"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:189
+msgid "Use ajax to submit the form"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:232
+#: elements/gravity-form/gravity-form.php:1557
+#: elements/contact-form-7/contact-form-7.php:189
+#: elements/contact-form-7/contact-form-7.php:1416
+#: elements/ninja-form/ninja-form.php:165
+#: elements/ninja-form/ninja-form.php:1473
+msgid "Validation Errors"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:906
+msgid "Section Field"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:942
+msgid "Solid"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:943
+msgid "Double"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:944
+msgid "Dotted"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:945
+msgid "Dashed"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:957
+msgid "Border Height"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1024
+msgid "Price Label Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1036
+msgid "Price Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1569
+#: elements/ninja-form/ninja-form.php:1485
+msgid "Error Description Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1584
+msgid "Error Border Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1600
+msgid "Error Field Background Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1615
+msgid "Error Field Label Color"
+msgstr ""
+
+#: elements/gravity-form/gravity-form.php:1669
+msgid "Thank You Message"
+msgstr ""
+
+#: elements/countdown/countdown.php:14
+msgid "EA Countdown"
+msgstr ""
+
+#: elements/countdown/countdown.php:32
+msgid "Timer Settings"
+msgstr ""
+
+#: elements/countdown/countdown.php:39
+msgid "Countdown Due Date"
+msgstr ""
+
+#: elements/countdown/countdown.php:42
+msgid "Set the due date and time"
+msgstr ""
+
+#: elements/countdown/countdown.php:49
+msgid "Label Position"
+msgstr ""
+
+#: elements/countdown/countdown.php:53
+msgid "Block"
+msgstr ""
+
+#: elements/countdown/countdown.php:54
+#: elements/advance-tabs/advance-tabs.php:71
+msgid "Inline"
+msgstr ""
+
+#: elements/countdown/countdown.php:62
+msgid "Left spacing for Labels"
+msgstr ""
+
+#: elements/countdown/countdown.php:64
+msgid "Use when you select inline labels"
+msgstr ""
+
+#: elements/countdown/countdown.php:94
+msgid "Countdown Style"
+msgstr ""
+
+#: elements/countdown/countdown.php:110
+msgid "Display Days"
+msgstr ""
+
+#: elements/countdown/countdown.php:120
+msgid "Custom Label for Days"
+msgstr ""
+
+#: elements/countdown/countdown.php:122
+#: elements/countdown/countdown.php:537
+msgid "Days"
+msgstr ""
+
+#: elements/countdown/countdown.php:123
+#: elements/countdown/countdown.php:147
+#: elements/countdown/countdown.php:170
+#: elements/countdown/countdown.php:193
+msgid "Leave blank to hide"
+msgstr ""
+
+#: elements/countdown/countdown.php:134
+msgid "Display Hours"
+msgstr ""
+
+#: elements/countdown/countdown.php:144
+msgid "Custom Label for Hours"
+msgstr ""
+
+#: elements/countdown/countdown.php:146
+#: elements/countdown/countdown.php:593
+msgid "Hours"
+msgstr ""
+
+#: elements/countdown/countdown.php:157
+msgid "Display Minutes"
+msgstr ""
+
+#: elements/countdown/countdown.php:167
+msgid "Custom Label for Minutes"
+msgstr ""
+
+#: elements/countdown/countdown.php:169
+#: elements/countdown/countdown.php:649
+msgid "Minutes"
+msgstr ""
+
+#: elements/countdown/countdown.php:180
+msgid "Display Seconds"
+msgstr ""
+
+#: elements/countdown/countdown.php:190
+msgid "Custom Label for Seconds"
+msgstr ""
+
+#: elements/countdown/countdown.php:192
+#: elements/countdown/countdown.php:705
+msgid "Seconds"
+msgstr ""
+
+#: elements/countdown/countdown.php:203
+msgid "Countdown Separator"
+msgstr ""
+
+#: elements/countdown/countdown.php:211
+msgid "Display Separator"
+msgstr ""
+
+#: elements/countdown/countdown.php:221
+msgid "Separator Color"
+msgstr ""
+
+#: elements/countdown/countdown.php:252
+msgid "Expire Action"
+msgstr ""
+
+#: elements/countdown/countdown.php:259
+msgid "Expire Type"
+msgstr ""
+
+#: elements/countdown/countdown.php:262
+msgid "Choose whether if you want to set a message or a redirect link"
+msgstr ""
+
+#: elements/countdown/countdown.php:265
+msgid "Message"
+msgstr ""
+
+#: elements/countdown/countdown.php:266
+msgid "Redirection Link"
+msgstr ""
+
+#: elements/countdown/countdown.php:276
+msgid "On Expiry Title"
+msgstr ""
+
+#: elements/countdown/countdown.php:278
+msgid "Countdown is finished!"
+msgstr ""
+
+#: elements/countdown/countdown.php:288
+msgid "On Expiry Content"
+msgstr ""
+
+#: elements/countdown/countdown.php:290
+msgid "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+msgstr ""
+
+#: elements/countdown/countdown.php:300
+msgid "Redirect To (URL)"
+msgstr ""
+
+#: elements/countdown/countdown.php:351
+msgid "Countdown Styles"
+msgstr ""
+
+#: elements/countdown/countdown.php:359
+msgid "Box Background Color"
+msgstr ""
+
+#: elements/countdown/countdown.php:371
+msgid "Space Between Boxes"
+msgstr ""
+
+#: elements/countdown/countdown.php:395
+msgid "Space Below Container"
+msgstr ""
+
+#: elements/countdown/countdown.php:466
+msgid "Countdown Digits"
+msgstr ""
+
+#: elements/countdown/countdown.php:474
+msgid "Digits Color"
+msgstr ""
+
+#: elements/countdown/countdown.php:495
+msgid "Countdown Labels"
+msgstr ""
+
+#: elements/countdown/countdown.php:503
+#: elements/countdown/countdown.php:569
+#: elements/countdown/countdown.php:625
+#: elements/countdown/countdown.php:681
+#: elements/countdown/countdown.php:737
+#: elements/caldera-forms/caldera-forms.php:1422
+#: elements/weforms/weforms.php:432
+msgid "Label Color"
+msgstr ""
+
+#: elements/countdown/countdown.php:529
+msgid "Individual Box Styling"
+msgstr ""
+
+#: elements/countdown/countdown.php:557
+#: elements/countdown/countdown.php:613
+#: elements/countdown/countdown.php:669
+#: elements/countdown/countdown.php:725
+msgid "Digit Color"
+msgstr ""
+
+#: elements/countdown/countdown.php:765
+msgid "Expire Message"
+msgstr ""
+
+#: elements/countdown/countdown.php:776
+msgid "Text Alignment"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:13
+msgid "EA Filterable Gallery"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:47
+msgid "Items to show"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:57
+msgid "Animation Duration (ms)"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:88
+#: elements/progress-bar/progress-bar.php:38
+#: elements/progress-bar/progress-bar.php:45
+#: elements/advance-tabs/advance-tabs.php:43
+msgid "Layout"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:92
+msgid "Grid"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:101
+msgid "Image Height"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:116
+msgid "Caption Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:121
+msgid "Card"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:129
+msgid "Hover Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:134
+msgid "Slide In Up"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:135
+msgid "Fade In"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:136
+msgid "Zoom In "
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:147
+msgid "Hover Transition"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:169
+msgid "Link to"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:174
+msgid "Media"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:175
+msgid "Buttons"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:183
+msgid "Lightbox Icon"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:195
+msgid "Link Icon"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:212
+msgid "Filterable Controls"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:219
+msgid "Enable Filter"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:228
+msgid "Gallery All Label"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:251
+msgid "Gallery Item"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:266
+msgid "Gallery Items"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:273
+msgid "Enable Photo Gallery"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:296
+msgid "Video Gallery?"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:305
+msgid "Video Link"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:315
+msgid "Control Name"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:319
+msgid "Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:323
+msgid "Item Name"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:326
+msgid "Gallery item name"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:330
+msgid "Item Content"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:333
+msgid "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, provident."
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:345
+msgid "Video play icon"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:356
+msgid "Gallery Lightbox Button?"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:368
+msgid "Gallery Link Button?"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:405
+#: elements/filterable-gallery/filterable-gallery.php:412
+#: elements/filterable-gallery/filterable-gallery.php:1495
+msgid "Load More Button"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:422
+msgid "Images Per Page"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:446
+msgid "No More Items Text"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:448
+msgid "No more items!"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:462
+msgid "Extra Small"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:463
+msgid "Small"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:464
+msgid "Medium"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:465
+msgid "Large"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:466
+msgid "Extra Large"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:654
+msgid "Control Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:758
+#: elements/advance-tabs/advance-tabs.php:507
+#: elements/advance-accordion/advance-accordion.php:480
+msgid "Active"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:836
+msgid "Item Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:911
+#: elements/filterable-gallery/filterable-gallery.php:1065
+msgid "Item Hover Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:946
+#: elements/filterable-gallery/filterable-gallery.php:1250
+msgid "Title Typography"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:986
+#: elements/filterable-gallery/filterable-gallery.php:1291
+msgid "Content Typography"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1095
+msgid "Video item hover"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1115
+msgid "Background transition"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1135
+msgid "Icon size"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1158
+msgid "Hover icon scale"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1170
+msgid "Icon transition"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1198
+msgid "Item Card Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1354
+msgid "Icons Style"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1436
+msgid "Icon Font Size"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1507
+msgid "Top Spacing"
+msgstr ""
+
+#: elements/filterable-gallery/filterable-gallery.php:1767
+msgid "All"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:15
+msgid "EA Post Grid"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:41
+msgid "Post Grid Style"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:49
+msgid "Post Background Color"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:62
+msgid "Spacing Between Items"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:105
+#: elements/weforms/weforms.php:423
+msgid "Color & Typography"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:135
+msgid "Title Hover Color"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:148
+#: elements/post-timeline/post-timeline.php:182
+#: elements/data-table/data-table.php:556
+msgid "Title Alignment"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:183
+#: elements/post-timeline/post-timeline.php:217
+msgid "Excerpt Style"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:192
+#: elements/post-timeline/post-timeline.php:226
+msgid "Excerpt Color"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:204
+#: elements/post-timeline/post-timeline.php:238
+msgid "Excerpt Alignment"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:220
+#: elements/post-grid/post-grid.php:281
+#: elements/tooltip/tooltip.php:153
+#: elements/post-timeline/post-timeline.php:254
+msgid "Justified"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:234
+msgid "Excerpt Typography"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:244
+msgid "Meta Style"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:253
+msgid "Meta Color"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:265
+msgid "Meta Alignment"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:296
+msgid "Meta Typography"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:308
+msgid "Hover Card Style"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:321
+msgid "FadeIn"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:322
+msgid "ZoomIn"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:323
+msgid "SlideUp"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:331
+msgid "Post Hover Icon"
+msgstr ""
+
+#: elements/post-grid/post-grid.php:369
+msgid "Icon font size"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:13
+msgid "EA Tooltip"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:46
+msgid "Text"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:54
+#: elements/tooltip/tooltip.php:100
+msgid "Shortcode"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:67
+msgid "Hover Me!"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:77
+msgid "Content Tag"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:82
+#: elements/progress-bar/progress-bar.php:87
+msgid "H1"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:83
+#: elements/progress-bar/progress-bar.php:88
+msgid "H2"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:84
+#: elements/progress-bar/progress-bar.php:89
+msgid "H3"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:85
+#: elements/progress-bar/progress-bar.php:90
+msgid "H4"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:86
+#: elements/progress-bar/progress-bar.php:91
+msgid "H5"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:87
+#: elements/progress-bar/progress-bar.php:92
+msgid "H6"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:88
+msgid "DIV"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:89
+msgid "SPAN"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:90
+msgid "P"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:103
+msgid "[shortcode-here]"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:164
+msgid "Enable Link"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:197
+msgid "Tooltip Settings"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:206
+msgid "Tooltip content"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:213
+msgid "Hover Direction"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:228
+msgid "Hover Speed"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:231
+msgid "300"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:257
+msgid "Content Max Width"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:439
+msgid "Tooltip Style"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:446
+msgid "Tooltip Width"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:471
+msgid "Tooltip Max Width"
+msgstr ""
+
+#: elements/tooltip/tooltip.php:580
+msgid "Arrow Color"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:16
+msgid "EA Fancy Text"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:49
+#: admin/settings.php:271
+msgid "Fancy Text"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:57
+msgid "Prefix Text"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:58
+msgid "Place your prefix text"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:60
+msgid "This is the "
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:68
+msgid "Fancy Text Strings"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:72
+msgid "first string"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:75
+msgid "second string"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:78
+msgid "third string"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:84
+msgid "Fancy String"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:98
+msgid "Suffix Text"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:99
+msgid "Place your suffix text"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:101
+msgid " of the sentence."
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:114
+msgid "Fancy Text Settings"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:121
+msgid "Style Type"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:171
+msgid "Animation Type"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:175
+msgid "Typing"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:177
+msgid "Fade Up"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:178
+msgid "Fade Down"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:179
+msgid "Fade Left"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:180
+msgid "Fade Right"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:181
+msgid "Zoom"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:182
+msgid "Bounce"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:192
+msgid "Typing Speed"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:204
+msgid "Delay on Change"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:213
+msgid "Loop the Typing"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:226
+msgid "Display Type Cursor"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:267
+msgid "Prefix Text Styles"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:275
+msgid "Prefix Text Color"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:300
+msgid "Fancy Text Styles"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:308
+msgid "Fancy Text Color"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:340
+msgid "Typing Cursor Color"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:411
+msgid "Suffix Text Styles"
+msgstr ""
+
+#: elements/fancy-text/fancy-text.php:419
+msgid "Suffix Text Color"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:15
+msgid "EA Progress Bar"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:48
+msgid "Line"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:49
+msgid "Line Rainbow (Pro)"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:51
+msgid "Circle Fill (Pro)"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:52
+msgid "Half Circle"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:53
+msgid "Half Circle Fill (Pro)"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:54
+msgid "Box (Pro)"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:63
+msgid "Only Available in Pro Version!"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:76
+#: admin/settings.php:396
+msgid "Progress Bar"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:84
+msgid "Title HTML Tag"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:93
+msgid "div"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:94
+msgid "span"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:95
+msgid "p"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:104
+msgid "Counter Value"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:125
+msgid "Display Count"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:156
+msgid "Prefix Label"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:158
+msgid "Prefix"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:169
+msgid "Postfix Label"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:171
+msgid "Postfix"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:216
+#: elements/progress-bar/progress-bar.php:413
+#: elements/advance-tabs/advance-tabs.php:222
+msgid "General"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:335
+msgid "Fill"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:380
+msgid "Show Stripe"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:391
+msgid "Stripe Animation"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:394
+msgid "Left To Right"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:395
+msgid "Right To Left"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:396
+msgid "Disabled"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:487
+msgid "Stroke Width"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:512
+msgid "Stroke Color"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:524
+msgid "Fill Color"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:538
+msgid "Box Shadow"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:587
+#: admin/settings.php:557
+msgid "Counter"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:596
+msgid "Counter Color"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:610
+msgid "Prefix/Postfix"
+msgstr ""
+
+#: elements/progress-bar/progress-bar.php:622
+msgid "Prefix/Postfix Color"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:13
+msgid "EA Call to Action"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:44
+msgid "Basic"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:45
+msgid "Flex Grid"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:46
+msgid "Flex Grid with Icon"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:75
+msgid "Color Style"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:82
+msgid "Background Fixed Image"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:108
+msgid "The Ultimate Addons For Elementor"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:142
+msgid "Add a strong one liner supporting the heading above and giving users a reason to click on the button below."
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:232
+msgid "Call to Action Style"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:240
+msgid "Set max width for the container?"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:251
+msgid "Container Max Width (% or px)"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:358
+msgid "Color &amp; Typography "
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:438
+#: elements/content-ticker/content-ticker.php:94
+msgid "Effect"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:444
+msgid "Top to Bottom"
+msgstr ""
+
+#: elements/call-to-action/call-to-action.php:445
+msgid "Left to Right"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:13
+msgid "EA Advanced Tabs"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:37
+#: elements/advance-accordion/advance-accordion.php:37
+msgid "General Settings"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:48
+msgid "Horizontal"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:49
+msgid "Vertical"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:56
+msgid "Enable Icon"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:70
+msgid "Stacked"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:95
+msgid "Tab Title 1"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:96
+msgid "Tab Title 2"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:97
+msgid "Tab Title 3"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:102
+msgid "Set as Default"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:150
+#: elements/advance-tabs/advance-tabs.php:152
+#: elements/advance-tabs/advance-tabs.php:283
+#: elements/advance-accordion/advance-accordion.php:137
+#: elements/advance-accordion/advance-accordion.php:139
+msgid "Tab Title"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:176
+#: elements/advance-accordion/advance-accordion.php:163
+msgid "Tab Content"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:178
+#: elements/advance-accordion/advance-accordion.php:165
+msgid "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur."
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:297
+msgid "Title Min Width"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:346
+#: elements/advance-accordion/advance-accordion.php:309
+msgid "Icon Gap"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:395
+#: elements/advance-tabs/advance-tabs.php:453
+#: elements/advance-tabs/advance-tabs.php:511
+#: elements/advance-accordion/advance-accordion.php:357
+#: elements/advance-accordion/advance-accordion.php:422
+#: elements/advance-accordion/advance-accordion.php:487
+msgid "Tab Background Color"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:660
+msgid "Caret"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:667
+msgid "Show Caret on Active Tab"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:676
+msgid "Caret Size"
+msgstr ""
+
+#: elements/advance-tabs/advance-tabs.php:698
+#: elements/advance-accordion/advance-accordion.php:665
+msgid "Caret Color"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:14
+msgid "EA Testimonial"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:32
+msgid "Testimonial Image"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:39
+msgid "Display Avatar?"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:48
+msgid "Testimonial Avatar"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:78
+msgid "Testimonial Content"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:85
+#: elements/testimonials/testimonials.php:373
+msgid "User Name"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:95
+#: elements/testimonials/testimonials.php:401
+msgid "Company Name"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:97
+msgid "Codetic"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:105
+msgid "Testimonial Description"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:107
+msgid "Add testimonial description here. Edit and place your own text."
+msgstr ""
+
+#: elements/testimonials/testimonials.php:115
+msgid "Display Rating?"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:125
+msgid "Rating Number"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:173
+msgid "Testimonial Styles"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:181
+msgid "Select Style"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:186
+msgid "Classic"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:187
+msgid "Content | Icon/Image | Bio"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:188
+msgid "Icon/Image | Content"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:189
+msgid "Content | Icon/Image"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:190
+msgid "Content Top | Icon Title Inline"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:191
+msgid "Content Bottom | Icon Title Inline"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:199
+msgid "Layout Alignment"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:231
+msgid "Display User & Company Block?"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:244
+msgid "Testimonial Image Style"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:281
+msgid "Image Max Width"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:381
+msgid "User Name Color"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:410
+msgid "Company Color"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:430
+msgid "Testimonial Text"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:439
+msgid "Testimonial Text Color"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:461
+msgid "Quotation Style"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:469
+msgid "Quotation Mark Color"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:489
+msgid "Quotation Postion From Top"
+msgstr ""
+
+#: elements/testimonials/testimonials.php:511
+msgid "Quotation Postion From Right"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:15
+msgid "EA Post Timeline"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:46
+msgid "Timeline Style"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:56
+msgid "Leave blank or Clear to use default gradient overlay"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:68
+msgid "Timeline Bullet Color"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:81
+msgid "Timeline Bullet Border Color"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:94
+msgid "Timeline Vertical Line Color"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:107
+msgid "Border & Arrow Color"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:122
+msgid "Date Background Color"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:136
+msgid "Date Text Color"
+msgstr ""
+
+#: elements/post-timeline/post-timeline.php:268
+msgid "excerpt Typography"
+msgstr ""
+
+#: elements/twitter-feed/twitter-feed.php:14
+msgid "EA Twitter Feed"
+msgstr ""
+
+#: elements/twitter-feed/twitter-feed.php:49
+msgid "Hashtag Name"
+msgstr ""
+
+#: elements/twitter-feed/twitter-feed.php:52
+msgid "Use # sign with your hashtag name."
+msgstr ""
+
+#: elements/twitter-feed/twitter-feed.php:60
+msgid "Consumer Key"
+msgstr ""
+
+#: elements/twitter-feed/twitter-feed.php:71
+msgid "Consumer Secret"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:15
+msgid "EA Content Ticker"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:33
+msgid "Ticker Settings"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:39
+msgid "Ticker Type"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:44
+msgid "Dynamic"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:53
+msgid "Custom Content available in pro version only!"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:64
+msgid "Tag Text"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:67
+msgid "Trending Today"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:87
+msgid "Animation Settings"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:95
+msgid "Sets transition effect"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:108
+msgid "Visible Items"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:131
+msgid "Items Gap"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:151
+msgid "Slider Speed"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:152
+msgid "Duration of transition between slides (in ms)"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:170
+msgid "Autoplay"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:183
+msgid "Autoplay Speed"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:203
+msgid "Infinite Loop"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:215
+msgid "Grab Cursor"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:216
+msgid "Shows grab cursor when you hover over the slider"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:229
+msgid "Navigation"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:238
+#: elements/content-ticker/content-ticker.php:441
+msgid "Arrows"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:250
+msgid "Direction"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:299
+msgid "Ticker Content"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:330
+msgid "Text Hover Color"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:365
+msgid "Tag Style"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:452
+msgid "Choose Arrow"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:476
+msgid "Arrows Size"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:496
+msgid "Align Left Arrow"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:515
+msgid "Align Right Arrow"
+msgstr ""
+
+#: elements/content-ticker/content-ticker.php:738
+msgid "Something went wrong!"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:32
+msgid "EA Contact Form 7"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:79
+msgid "Contact Form"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:97
+msgid "Form Title"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:99
+#: elements/contact-form-7/contact-form-7.php:123
+msgid "On"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:100
+#: elements/contact-form-7/contact-form-7.php:124
+msgid "Off"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:121
+msgid "Form Description"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:807
+msgid "Show Placeholder"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:1308
+msgid "Alert"
+msgstr ""
+
+#: elements/contact-form-7/contact-form-7.php:1357
+msgid "Fields"
+msgstr ""
+
+#: elements/caldera-forms/caldera-forms.php:13
+msgid "EA Caldera Forms"
+msgstr ""
+
+#: elements/caldera-forms/caldera-forms.php:37
+msgid "Caldera Forms"
+msgstr ""
+
+#: elements/caldera-forms/caldera-forms.php:44
+#: admin/settings.php:341
+msgid "Caldera Form"
+msgstr ""
+
+#: elements/caldera-forms/caldera-forms.php:1323
+#: elements/ninja-form/ninja-form.php:1350
+msgid "Success Message"
+msgstr ""
+
+#: elements/caldera-forms/caldera-forms.php:1413
+msgid "Error Fields"
+msgstr ""
+
+#: elements/caldera-forms/caldera-forms.php:1435
+msgid "Input Border"
+msgstr ""
+
+#: elements/ninja-form/ninja-form.php:13
+msgid "EA Ninja Forms"
+msgstr ""
+
+#: elements/ninja-form/ninja-form.php:37
+msgid "Ninja Forms"
+msgstr ""
+
+#: elements/ninja-form/ninja-form.php:1384
+msgid "Required Fields Notice"
+msgstr ""
+
+#: elements/weforms/weforms.php:14
+msgid "EA weForm"
+msgstr ""
+
+#: elements/weforms/weforms.php:41
+msgid "Please save and refresh the page after selecting the form"
+msgstr ""
+
+#: elements/weforms/weforms.php:80
+msgid "Form Container Styles"
+msgstr ""
+
+#: elements/weforms/weforms.php:233
+msgid "Form Fields Styles"
+msgstr ""
+
+#: elements/weforms/weforms.php:241
+msgid "Input Field Background"
+msgstr ""
+
+#: elements/weforms/weforms.php:308
+msgid "Fields Padding"
+msgstr ""
+
+#: elements/weforms/weforms.php:378
+msgid "Focus State Style"
+msgstr ""
+
+#: elements/weforms/weforms.php:443
+msgid "Field Font Color"
+msgstr ""
+
+#: elements/weforms/weforms.php:460
+msgid "Placeholder Font Color"
+msgstr ""
+
+#: elements/weforms/weforms.php:475
+msgid "Label Typography"
+msgstr ""
+
+#: elements/weforms/weforms.php:493
+msgid "Input Fields Typography"
+msgstr ""
+
+#: elements/weforms/weforms.php:519
+msgid "Submit Button Styles"
+msgstr ""
+
+#: elements/weforms/weforms.php:527
+msgid "Button Width"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:13
+msgid "EA Advanced Accordion"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:43
+msgid "Accordion Type"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:48
+msgid "Accordion"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:49
+msgid "Toggle"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:56
+msgid "Enable Toggle Icon"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:65
+msgid "Toggle Icon"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:84
+msgid "Toggle Speed (ms)"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:107
+msgid "Accordion Tab Title 1"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:108
+msgid "Accordion Tab Title 2"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:109
+msgid "Accordion Tab Title 3"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:114
+msgid "Active as Default"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:121
+msgid "Enable Tab Icon"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:273
+msgid "Tab Style"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:632
+msgid "Toggle Caret Style"
+msgstr ""
+
+#: elements/advance-accordion/advance-accordion.php:679
+msgid "Caret Color (Active)"
+msgstr ""
+
+#: elements/data-table/data-table.php:13
+msgid "EA Data Table"
+msgstr ""
+
+#: elements/data-table/data-table.php:45
+msgid "Enable Table Sorting"
+msgstr ""
+
+#: elements/data-table/data-table.php:56
+msgid "Sorting feature is available in pro version!"
+msgstr ""
+
+#: elements/data-table/data-table.php:78
+msgid "Column Name"
+msgstr ""
+
+#: elements/data-table/data-table.php:85
+msgid "Column Span"
+msgstr ""
+
+#: elements/data-table/data-table.php:92
+msgid "Enable Header Icon"
+msgstr ""
+
+#: elements/data-table/data-table.php:101
+msgid "Header Icon Type"
+msgstr ""
+
+#: elements/data-table/data-table.php:145
+msgid "Image Size(px)"
+msgstr ""
+
+#: elements/data-table/data-table.php:155
+#: elements/data-table/data-table.php:303
+msgid "CSS Class"
+msgstr ""
+
+#: elements/data-table/data-table.php:161
+#: elements/data-table/data-table.php:312
+msgid "CSS ID"
+msgstr ""
+
+#: elements/data-table/data-table.php:198
+msgid "Row Type"
+msgstr ""
+
+#: elements/data-table/data-table.php:203
+msgid "Row"
+msgstr ""
+
+#: elements/data-table/data-table.php:204
+msgid "Column"
+msgstr ""
+
+#: elements/data-table/data-table.php:209
+msgid "Col Span"
+msgstr ""
+
+#: elements/data-table/data-table.php:221
+msgid "Row Span"
+msgstr ""
+
+#: elements/data-table/data-table.php:237
+msgid "Textarea"
+msgstr ""
+
+#: elements/data-table/data-table.php:241
+msgid "Editor"
+msgstr ""
+
+#: elements/data-table/data-table.php:245
+msgid "Templates"
+msgstr ""
+
+#: elements/data-table/data-table.php:265
+#: elements/data-table/data-table.php:276
+msgid "Cell Text"
+msgstr ""
+
+#: elements/data-table/data-table.php:426
+msgid "Header Style"
+msgstr ""
+
+#: elements/data-table/data-table.php:435
+msgid "Header Border Radius"
+msgstr ""
+
+#: elements/data-table/data-table.php:600
+msgid "ODD Cell"
+msgstr ""
+
+#: elements/data-table/data-table.php:608
+#: elements/data-table/data-table.php:691
+msgid "Color ( Odd Row )"
+msgstr ""
+
+#: elements/data-table/data-table.php:620
+#: elements/data-table/data-table.php:702
+msgid "Background ( Odd Row )"
+msgstr ""
+
+#: elements/data-table/data-table.php:632
+#: elements/data-table/data-table.php:713
+msgid "Even Cell"
+msgstr ""
+
+#: elements/data-table/data-table.php:641
+#: elements/data-table/data-table.php:721
+msgid "Color ( Even Row )"
+msgstr ""
+
+#: elements/data-table/data-table.php:653
+#: elements/data-table/data-table.php:733
+msgid "Background Color (Even Row)"
+msgstr ""
+
+#: elements/data-table/data-table.php:757
+msgid "Link Color"
+msgstr ""
+
+#: elements/data-table/data-table.php:837
+msgid "Responsive Options"
+msgstr ""
+
+#: elements/data-table/data-table.php:846
+msgid "Enable Responsive Table"
+msgstr ""
+
+#: elements/data-table/data-table.php:847
+msgid "If enabled, table header will be automatically responsive for mobile."
+msgstr ""
+
+#: elements/creative-button/creative-button.php:16
+msgid "EA Creative Button"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:34
+msgid "Button Content"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:54
+msgid "Button Secondary Text"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:58
+msgid "Enter button secondary text"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:59
+msgid "Enter button secondary text here"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:155
+msgid "Button Effects &amp; Styles"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:163
+msgid "Set Button Effect"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:168
+msgid "Winona"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:169
+msgid "Ujarak"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:170
+msgid "Wayra"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:171
+msgid "Tamaya"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:172
+msgid "Rayen"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:173
+msgid "Pipaluk (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:174
+msgid "Moema (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:175
+msgid "Wave (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:176
+msgid "Aylen (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:177
+msgid "Saqui (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:178
+msgid "Wapasha (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:179
+msgid "Nuka (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:180
+msgid "Antiman (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:181
+msgid "Quidel (Pro)"
+msgstr ""
+
+#: elements/creative-button/creative-button.php:182
+msgid "Shikoba (Pro)"
+msgstr ""
+
+#: admin/settings.php:162
+msgid "Essential Addons Settings"
+msgstr ""
+
+#: admin/settings.php:165
+#: admin/settings.php:597
+msgid "Save settings"
+msgstr ""
+
+#: admin/settings.php:241
+msgid "<a href=\"%s\" target=\"_blank\">Upgrade to Pro</a>"
+msgstr ""
+
+#: admin/settings.php:255
+msgid "Contact Form 7"
+msgstr ""
+
+#: admin/settings.php:261
+msgid "Count Down"
+msgstr ""
+
+#: admin/settings.php:266
+msgid "Creative Button"
+msgstr ""
+
+#: admin/settings.php:276
+msgid "Post Grid"
+msgstr ""
+
+#: admin/settings.php:281
+msgid "Post Timeline"
+msgstr ""
+
+#: admin/settings.php:286
+msgid "Product Grid"
+msgstr ""
+
+#: admin/settings.php:291
+msgid "Team Member"
+msgstr ""
+
+#: admin/settings.php:296
+msgid "Testimonials"
+msgstr ""
+
+#: admin/settings.php:301
+msgid "weForms"
+msgstr ""
+
+#: admin/settings.php:306
+msgid "Call To Action"
+msgstr ""
+
+#: admin/settings.php:311
+msgid "Flip Box"
+msgstr ""
+
+#: admin/settings.php:316
+msgid "Info Box"
+msgstr ""
+
+#: admin/settings.php:321
+msgid "Dual Color Header"
+msgstr ""
+
+#: admin/settings.php:326
+msgid "Pricing Table"
+msgstr ""
+
+#: admin/settings.php:331
+msgid "Ninja Form"
+msgstr ""
+
+#: admin/settings.php:336
+msgid "Gravity Form"
+msgstr ""
+
+#: admin/settings.php:351
+msgid "Twitter Feed"
+msgstr ""
+
+#: admin/settings.php:356
+msgid "Facebook Feed"
+msgstr ""
+
+#: admin/settings.php:361
+msgid "Filterable Gallery"
+msgstr ""
+
+#: admin/settings.php:366
+msgid "Data Table"
+msgstr ""
+
+#: admin/settings.php:371
+msgid "Image Accordion"
+msgstr ""
+
+#: admin/settings.php:376
+msgid "Content Ticker"
+msgstr ""
+
+#: admin/settings.php:386
+msgid "Advanced Accordion"
+msgstr ""
+
+#: admin/settings.php:391
+msgid "Advanced Tabs"
+msgstr ""
+
+#: admin/settings.php:410
+msgid "Image Comparison"
+msgstr ""
+
+#: admin/settings.php:417
+msgid "Instagram Gallery"
+msgstr ""
+
+#: admin/settings.php:424
+msgid "Interactive Promo"
+msgstr ""
+
+#: admin/settings.php:431
+msgid "Lightbox"
+msgstr ""
+
+#: admin/settings.php:438
+msgid "Post Block"
+msgstr ""
+
+#: admin/settings.php:445
+msgid "Testimonial Slider"
+msgstr ""
+
+#: admin/settings.php:452
+msgid "Static Product"
+msgstr ""
+
+#: admin/settings.php:459
+msgid "Flip Carousel"
+msgstr ""
+
+#: admin/settings.php:466
+msgid "Interactive Cards"
+msgstr ""
+
+#: admin/settings.php:473
+msgid "Content Timeline"
+msgstr ""
+
+#: admin/settings.php:480
+msgid "Twitter Feed Carousel"
+msgstr ""
+
+#: admin/settings.php:487
+msgid "Facebook Feed Carousel"
+msgstr ""
+
+#: admin/settings.php:494
+msgid "Dynamic Filter Gallery"
+msgstr ""
+
+#: admin/settings.php:501
+msgid "Smart Post List"
+msgstr ""
+
+#: admin/settings.php:508
+msgid "Advanced Google Map"
+msgstr ""
+
+#: admin/settings.php:515
+msgid "Content Toggle"
+msgstr ""
+
+#: admin/settings.php:522
+msgid "Mailchimp"
+msgstr ""
+
+#: admin/settings.php:529
+msgid "Divider"
+msgstr ""
+
+#: admin/settings.php:536
+msgid "Price Menu"
+msgstr ""
+
+#: admin/settings.php:543
+msgid "Image Hotspots"
+msgstr ""
+
+#: admin/settings.php:550
+msgid "One Page Navigation"
+msgstr ""
+
+#: admin/settings.php:564
+msgid "Post Carousel"
+msgstr ""
+
+#: admin/settings.php:571
+msgid "Team Member Carousel"
+msgstr ""
+
+#: admin/settings.php:578
+msgid "Logo Carousel"
+msgstr ""
+
+#: admin/settings.php:585
+msgid "Protected Content"
+msgstr ""
+
+#: admin/settings.php:592
+msgid "Offcanvas Content"
+msgstr ""
