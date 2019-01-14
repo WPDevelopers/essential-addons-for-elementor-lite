@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, mdsabuz, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 4.9.8
+Tested up to: 5.0.2
 Requires PHP: 5.4
-Stable tag: 2.8.0
+Stable tag: 2.8.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -12,7 +12,7 @@ Ultimate elements library for Elementor WordPress Page Builder. 54+ Premium elem
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 54+ creative elements. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 57+ creative elements. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
 
 [Check the Demos](https://essential-addons.com/elementor/)
@@ -53,13 +53,13 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 11. [Ninja Forms](https://essential-addons.com/elementor/ninja-forms/) - Easily create your form style just the way you want
 12. [Caldera Forms](https://essential-addons.com/elementor/caldera-forms/) - Design effective mobile-friendly forms
 13. [WPForms](https://essential-addons.com/elementor/wpforms/) - Create powerful WordPress forms in minutes
-14 [weForms](https://essential-addons.com/elementor/weforms/) - Get the fastest form building experience 
+14. [weForms](https://essential-addons.com/elementor/weforms/) - Get the fastest form building experience 
 15. [Info Box](https://essential-addons.com/elementor/info-box/) - Design beautiful info box from predefined styles
 16. [Flip Box](https://essential-addons.com/elementor/flip-box/) - Use animated Flip Boxes to highlight any content inside your page in a great way
 17. [Dual Color Headline](https://essential-addons.com/elementor/dual-color-headline/) - Emphasize on a single word in a sentence by highlighting it with a different color
 18. [Call to Action](https://essential-addons.com/elementor/call-to-action/) - Design call-to-action buttons before a blink
 19. [Pricing Table](https://essential-addons.com/elementor/pricing-table/) - Create Pricing Tables within minutes that converts
-20 [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook posts from your page or group to improve engagement
+20. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook posts from your page or group to improve engagement
 21. [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/) - Showcase your latest tweets to your visitor
 22. [Data Table](https://essential-addons.com/elementor/table/) - Insert visually attractive data table anywhere you want
 23. [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Easily display custom content in any pages
@@ -71,7 +71,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 29. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 
 
-### More elements (27+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (28+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 1. [Post Block (Flex)](https://essential-addons.com/elementor/post-block/) - Display your blog posts with variety of styles with the power of modern CSS Flexbox
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
@@ -100,7 +100,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 25. [Post Carousel](https://essential-addons.com/elementor/post-carousel/) - Even you can create carousel from your posts
 26. [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/) - Highlight brands/product logos in carousel
 27. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
-
+28. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
 
 More coming soon (weekly update) ...
 
@@ -157,6 +157,48 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.8.7 =
+
+- Added : Version rollback option
+- Fixed : Data Table border issue 
+- Fixed : EA Flipbox font color doesn't change for the rear one
+- Fixed : EA Fancy text loop settings not working
+- Fixed : Filterable gallery layout issue
+- Fixed : Filterable Gallery newly added items video not playing
+- Fixed : Twitter feed masonry layout issue
+- Few minor bugfix and improvements
+
+= 2.8.6 =
+
+- Progress Bar revamped with faster and better script and styles
+- Few minor bugfix and improvements
+
+= 2.8.5 =
+
+- WPForms appearing issue fixed
+- Few minor bugfix and improvements
+
+= 2.8.4 =
+
+- Filterable Gallery default style improved
+- Few minor bugfix and improvements
+
+= 2.8.3 =
+- Filterable Gallery improved with better scripts
+- Image Gallery issue fixed for Filterable Gallery
+- Few minor bugfix and improvements
+
+= 2.8.2 =
+- Filterable Gallery card hover effect issue fixed
+- Flibox image styling issue fixed
+- Few minor bugfix and improvements
+
+= 2.8.1 =
+- Image Accordion styling issue fixed
+- Post Grid load more issue fixed
+- Post Timeline load more issue fixed
+- Few minor bugfix and improvements
 
 = 2.8.0 =
 - Progress Bar widget added
@@ -390,10 +432,7 @@ Initial stable realese
 
 == Upgrade Notice ==
 
-= 2.8.0 =
+= 2.8.6 =
 
-- Progress Bar widget added
-- Video card support added to Filterable Gallery
-- Multiple hover effects added to Post Grid
-- Icon changing option added to Post Grid
+- Progress Bar revamped with faster and better script and styles
 - Few minor bugfix and improvements

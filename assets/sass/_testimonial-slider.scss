@@ -1,0 +1,385 @@
+/*----------------------------*/
+/* 08. Testimonials Styles
+/*----------------------------*/
+.eael-testimonial-slider {
+	position: relative;
+}
+
+.testimonial-star-rating {
+	padding: 0;
+	margin: 0;
+}
+
+.testimonial-star-rating li {
+	list-style: none;
+	display: inline-block;
+}
+
+.testimonial-star-rating li i {
+	color: #d8d8d8;
+}
+
+.rating-five .testimonial-star-rating li i {
+	color: #f2b01e;
+}
+
+.rating-one .testimonial-star-rating li:first-child i {
+	color: #f2b01e;
+}
+
+.rating-two .testimonial-star-rating li:nth-child(1) i,
+.rating-two .testimonial-star-rating li:nth-child(2) i {
+	color: #f2b01e;
+}
+
+.rating-three .testimonial-star-rating li:nth-child(1) i,
+.rating-three .testimonial-star-rating li:nth-child(2) i,
+.rating-three .testimonial-star-rating li:nth-child(3) i {
+	color: #f2b01e;
+}
+
+.rating-four .testimonial-star-rating li:nth-child(1) i,
+.rating-four .testimonial-star-rating li:nth-child(2) i,
+.rating-four .testimonial-star-rating li:nth-child(3) i,
+.rating-four .testimonial-star-rating li:nth-child(4) i {
+	color: #f2b01e;
+}
+
+
+/*--- Default styles ---*/
+.eael-testimonial-image img {
+	max-width: 100%;
+}
+
+.eael-testimonial-image {
+	padding: 10px 0px 0px 0px;
+}
+
+.eael-testimonial-image>figure {
+	display: block;
+	margin: 0;
+}
+
+.testimonial-avatar-rounded figure img {
+	border-radius: 50%;
+	height: auto;
+}
+
+.eael-testimonial-content {
+	margin: 0;
+	padding: 10px;
+}
+
+.eael-testimonial-item>figure {
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.eael-testimonial-item .center-text {
+	text-align: center;
+}
+
+.eael-testimonial-item .right-text {
+	text-align: right;
+}
+
+.eael-testimonial-item .left-text {
+	text-align: left;
+}
+
+.eael-testimonial-item .justify-text {
+	text-align: justify;
+}
+
+.eael-testimonial-content .eael-testimonial-text {
+	font-size: 100%;
+	font-style: italic;
+	line-height: 1.5;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	word-wrap: break-word;
+}
+
+.eael-testimonial-content .eael-testimonial-user {
+	display: inline-block;
+	font-family: inherit;
+	font-size: 105%;
+	font-style: italic;
+	font-weight: normal;
+	line-height: 1.5;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: 5px;
+}
+
+.eael-testimonial-content .eael-testimonial-user-company {
+	display: inline-block;
+	font-family: inherit;
+	font-size: 90%;
+	font-style: italic;
+	font-weight: lighter;
+	line-height: 1.75;
+	margin-bottom: 0;
+	margin-top: 1px;
+}
+
+.eael-testimonial-image {
+	position: relative;
+}
+
+.eael-testimonial-item .eael-testimonial-quote::after {
+	color: inherit!important;
+	content: "\f10e";
+	font-family: "FontAwesome";
+	font-size: 200%;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-centered .eael-testimonial-image figure img {
+	margin: 0 auto;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-left .eael-testimonial-image figure img,
+.eael-testimonial-slider.default-style .eael-testimonial-align-right .eael-testimonial-image figure img,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-left .eael-testimonial-image figure img,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-right .eael-testimonial-image figure img,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-left .eael-testimonial-image figure img,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-right .eael-testimonial-image figure img {
+	margin: 0;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-right .eael-testimonial-image figure,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-right .eael-testimonial-image figure,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-right .eael-testimonial-image figure {
+	text-align: right;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-left .eael-testimonial-image figure,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-left .eael-testimonial-image figure,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-left .eael-testimonial-image figure {
+	text-align: left;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-right .default-style-testimonial-content,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-right .testimonial-classic-style-content,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-right .middle-style-content,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-right .eael-testimonial-text {
+	text-align: right;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-center .default-style-testimonial-content,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-center .testimonial-classic-style-content,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-center .middle-style-content,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-center .eael-testimonial-text {
+	text-align: center;
+}
+
+.eael-testimonial-slider.default-style .eael-testimonial-align-left .default-style-testimonial-content,
+.eael-testimonial-slider.classic-style .eael-testimonial-align-left .testimonial-classic-style-content,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-left .middle-style-content,
+.eael-testimonial-slider.middle-style .eael-testimonial-align-left .eael-testimonial-text {
+	text-align: left;
+}
+
+.eael-testimonial-slider.icon-img-left-content .eael-testimonial-text>p,
+.eael-testimonial-slider.icon-img-right-content .eael-testimonial-text>p {
+	margin: 0px;
+}
+
+
+/*--- Left align ---*/
+.icon-img-left-content .eael-testimonial-image {
+	float: left;
+	width: 30%;
+}
+
+.icon-img-left-content .eael-testimonial-content {
+	float: left;
+	width: 70%;
+	text-align: left;
+}
+
+.icon-img-left-content.eael-testimonial-item {
+	overflow: hidden;
+	position: relative;
+}
+
+.icon-img-left-content .eael-testimonial-quote {
+	position: absolute;
+	right: 0;
+}
+
+.icon-img-left-content .eael-testimonial-text {
+	margin-top: 0;
+}
+
+
+/*--- Center align ---*/
+.eael-testimonial-align-centered .eael-testimonial-user,
+.eael-testimonial-align-centered .eael-testimonial-user-company {
+	float: none;
+	text-align: center;
+}
+
+.eael-testimonial-align-centered .eael-testimonial-image>figure img {
+	display: block;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+
+/* .eael-testimonial-align-centered .testimonial-star-rating{
+	text-align: center;
+} */
+
+
+/*--- Right align ---*/
+.icon-img-right-content .eael-testimonial-image {
+	float: right;
+	width: 30%;
+}
+
+.icon-img-right-content .eael-testimonial-content {
+	float: right;
+	width: 70%;
+	text-align: right;
+}
+
+.icon-img-right-content.eael-testimonial-item {
+	overflow: hidden;
+	position: relative;
+}
+
+.icon-img-right-content .eael-testimonial-quote {
+	position: absolute;
+}
+
+.icon-img-right-content .eael-testimonial-text {
+	margin-top: 0;
+}
+
+.eael-testimonial-item {
+	position: relative;
+}
+
+.classic-style.testimonial-alignment-center .eael-testimonial-image,
+.default-style.testimonial-alignment-center .eael-testimonial-image {
+	text-align: center;
+}
+
+.classic-style.testimonial-alignment-right .eael-testimonial-image,
+.default-style.testimonial-alignment-right .eael-testimonial-image {
+	text-align: right;
+}
+
+.classic-style.testimonial-alignment-center .eael-testimonial-image>figure,
+.default-style.testimonial-alignment-center .eael-testimonial-image>figure {
+	text-align: center;
+}
+
+.eael-testimonial-slider.icon-img-left-content .eael-testimonial-align-centered .eael-testimonial-content {
+	text-align: center;
+}
+
+.eael-testimonial-slider.icon-img-left-content .eael-testimonial-align-left .eael-testimonial-content {
+	text-align: left;
+}
+
+.eael-testimonial-slider.icon-img-left-content .eael-testimonial-align-right .eael-testimonial-content {
+	text-align: right;
+}
+
+.eael-testimonial-slider.icon-img-right-content .eael-testimonial-align-centered .eael-testimonial-content {
+	text-align: center;
+}
+
+.eael-testimonial-slider.icon-img-right-content .eael-testimonial-align-left .eael-testimonial-content {
+	text-align: left;
+}
+
+.eael-testimonial-slider.icon-img-right-content .eael-testimonial-align-right .eael-testimonial-content {
+	text-align: right;
+}
+
+span.eael-testimonial-quote {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+/*--- Image align ---*/
+.eael-testimonial-item.left .eael-testimonial-image {
+	text-align: left;
+}
+
+.eael-testimonial-item.center .eael-testimonial-image {
+	text-align: center;
+}
+
+.eael-testimonial-item.right .eael-testimonial-image {
+	text-align: right;
+}
+
+
+/*--- Float title image style ---*/
+.eael-testimonial-inline-bio .eael-testimonial-image {
+	float: left;
+}
+
+.eael-testimonial-inline-bio .bio-text {
+	padding-top: 10px;
+}
+
+.eael-testimonial-content.eael-testimonial-inline-bio {
+	overflow: hidden;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.eael-testimonial-inline-bio .testimonial-star-rating,
+.eael-testimonial-inline-bio .bio-text {
+	float: left;
+	width: 65%;
+}
+
+.eael-testimonial-content.eael-testimonial-inline-bio {
+	text-align: left !important;
+}
+
+/*--- Float inline style ---*/
+.testimonial-inline-style .eael-testimonial-image {
+	float: left;
+	max-width: 100%;
+	padding: 0;
+	margin-right: 15px;
+}
+
+.testimonial-inline-style {
+	overflow: hidden;
+	text-align: left;
+}
+
+.content-top-icon-title-inline .eael-testimonial-text,
+.content-top-icon-title-inline .eael-testimonial-align-left .eael-testimonial-text {
+	text-align: left;
+}
+
+.content-top-icon-title-inline .eael-testimonial-align-centered .eael-testimonial-text {
+	text-align: center;
+}
+
+.content-top-icon-title-inline .eael-testimonial-align-right .eael-testimonial-text {
+	text-align: right;
+}
+
+.content-bottom-icon-title-inline .eael-testimonial-text,
+.content-bottom-icon-title-inline .eael-testimonial-align-left .eael-testimonial-text {
+	text-align: left;
+}
+
+.content-bottom-icon-title-inline .eael-testimonial-align-centered .eael-testimonial-text {
+	text-align: center;
+}
+
+.content-bottom-icon-title-inline .eael-testimonial-align-right .eael-testimonial-text {
+	text-align: right;
+}

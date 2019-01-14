@@ -4,10 +4,11 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.8.0
+ * Version: 2.8.7
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
+ * Domain Path: /languages
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -136,7 +137,7 @@ function add_eael_elements() {
    if( class_exists( 'Caldera_Forms' ) && $is_component_active['caldera-form'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/caldera-forms/caldera-forms.php';
    }
-   if( class_exists( 'WPForms' ) && $is_component_active['wpforms'] ) {
+   if( class_exists( '\WPForms\WPForms' ) && $is_component_active['wpforms'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/wpforms/wpforms.php';
    }
    if( $is_component_active['twitter-feed'] ) {
@@ -380,10 +381,10 @@ function eael_admin_notice() {
     global $current_user ;
     $user_id = $current_user->ID;
     /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice280') ) {
+    if ( ! get_user_meta($user_id, 'eael_ignore_notice287') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
-      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>70,000+</strong> websites. Use the coupon code <strong>ACTIVE70K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
+      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-christmas-gift.svg'. '" ></p><p> ';
+      printf(__('<strong>Make XMas Much Merrier.</strong> Use the coupon code <strong>Christmas2018</strong> to redeem a <strong>40&#37; </strong> discount on <strong>Essential Addons for Elementor Unlimited</strong>. <a href="https://wpdeveloper.net/in/ea-christmas-deal" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
@@ -400,7 +401,7 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice280', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice287', 'true', true);
   }
 }
 add_action('admin_init', 'eael_nag_ignore');
@@ -457,19 +458,18 @@ function eael_review_notice_message(){
             <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
         </div>
         <div class="eael-review-text">
-            <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
-            <p><?php _e( 'We hope you\'ve enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?', 'essential-addons-elementor' ) ?></p>
+            <p><?php _e( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) ?></p>
             <ul class="eael-review-ul">
                 <li>
                     <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
                         <span class="dashicons dashicons-external"></span>
-                        <?php _e( 'Sure! I\'d love to!', 'essential-addons-elementor' ) ?>
+                        <?php _e( 'Ok, you deserve it!', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo $dismiss_url ?>">
                         <span class="dashicons dashicons-smiley"></span>
-                        <?php _e( 'I\'ve already left a review', 'essential-addons-elementor' ) ?>
+                        <?php _e( 'I already did', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
@@ -479,7 +479,7 @@ function eael_review_notice_message(){
                     </a>
                 </li>
                 <li>
-                    <a href="https://essential-addons.com/elementor/support/" target="_blank">
+                    <a href="https://wpdeveloper.net/support/" target="_blank">
                         <span class="dashicons dashicons-sos"></span>
                         <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
                     </a>

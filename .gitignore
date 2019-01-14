@@ -1,4 +1,7 @@
-
+elements/.DS_Store
 .DS_Store
 .phpintel
-.vscode
+assets/js/ewr.php
+node_modules
+package-lock.json
+.sass-cache
