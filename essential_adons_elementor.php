@@ -3,22 +3,30 @@
  * Plugin Name: Essential Addons for Elementor
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
- * Author: Codetic
- * Version: 2.7.5
- * Author URI: https://www.codetic.net
+ * Author: WPDeveloper
+ * Version: 2.8.7
+ * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
+ * Domain Path: /languages
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 define( 'ESSENTIAL_ADDONS_EL_URL', plugins_url( '/', __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
+define( 'ESSENTIAL_ADDONS_EL_ROOT', __FILE__ );
+define( 'ESSENTIAL_ADDONS_VERSION', '2.8.4' );
+define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.8.3' );
+define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 
 
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/eael-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 
 /**
@@ -28,7 +36,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
 
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
@@ -114,7 +122,7 @@ function add_eael_elements() {
    if( class_exists( 'Caldera_Forms' ) && $is_component_active['caldera-form'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/caldera-forms/caldera-forms.php';
    }
-   if( class_exists( 'WPForms' ) && $is_component_active['wpforms'] ) {
+   if( class_exists( '\WPForms\WPForms' ) && $is_component_active['wpforms'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/wpforms/wpforms.php';
    }
    if( $is_component_active['twitter-feed'] ) {
@@ -144,8 +152,21 @@ function add_eael_elements() {
    if( $is_component_active['adv-tabs'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/advance-tabs/advance-tabs.php';
    }
+   if( $is_component_active['progress-bar'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/progress-bar/progress-bar.php';
+   }
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
+
+/**
+ * Registering a Group Control for All Posts Element
+ */
+function eae_posts_register_control( $controls_manager ){
+	include_once ESSENTIAL_ADDONS_EL_PATH . 'includes/eae-posts-group-control.php';
+    $controls_manager->add_group_control( 'eaeposts', new Elementor\EAE_Posts_Group_Control() );
+}
+
+add_action( 'elementor/controls/controls_registered', 'eae_posts_register_control' );
 
 /**
  * Load module's scripts and styles if any module is active.
@@ -194,7 +215,20 @@ function essential_addons_el_enqueue(){
     if( $is_component_active['filter-gallery'] ) {
       wp_enqueue_script('essential_addons_mixitup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/mixitup.min.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
+
+      wp_register_script('essential_addons_isotope-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/isotope.pkgd.min.js', array('jquery'),'1.0', true);
+
+	    wp_register_script('jquery-resize', ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.resize.min.js', array('jquery'), '1.0', true);
     }
+
+    if( $is_component_active['price-table'] ) {
+		wp_enqueue_style('essential_addons_elementor-tooltipster',ESSENTIAL_ADDONS_EL_URL.'assets/css/tooltipster.bundle.min.css');
+		wp_enqueue_script('essential_addons_elementor-tooltipster-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/tooltipster.bundle.min.js', array('jquery'),'1.0', true);
+    }
+    
+    if( $is_component_active['progress-bar'] ) {
+		  wp_enqueue_script('essential_addons_elementor-eael-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
+	}
 
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
@@ -323,10 +357,10 @@ function eael_admin_notice() {
     global $current_user ;
     $user_id = $current_user->ID;
     /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice275') ) {
+    if ( ! get_user_meta($user_id, 'eael_ignore_notice287') ) {
       echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
-      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-bolt.svg'. '" ></p><p> ';
-      printf(__('<strong>Essential Addons for Elementor</strong> now powering <strong>50,000+</strong> websites. Use the coupon code <strong>CELEBRATE50K</strong> to redeem a <strong>25&#37; </strong> discount on Pro. <a href="https://wpdeveloper.net/in/eael-pricing" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
+      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-christmas-gift.svg'. '" ></p><p> ';
+      printf(__('<strong>Make XMas Much Merrier.</strong> Use the coupon code <strong>Christmas2018</strong> to redeem a <strong>40&#37; </strong> discount on <strong>Essential Addons for Elementor Unlimited</strong>. <a href="https://wpdeveloper.net/in/ea-christmas-deal" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
         <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
       echo "</p></div>";
     }
@@ -343,7 +377,7 @@ function eael_nag_ignore() {
         $user_id = $current_user->ID;
         /* If user clicks to ignore the notice, add that to their user meta */
         if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice275', 'true', true);
+             add_user_meta($user_id, 'eael_ignore_notice287', 'true', true);
   }
 }
 add_action('admin_init', 'eael_nag_ignore');
@@ -400,19 +434,18 @@ function eael_review_notice_message(){
             <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
         </div>
         <div class="eael-review-text">
-            <h3><?php _e( 'Leave A Review?', 'essential-addons-elementor' ) ?></h3>
-            <p><?php _e( 'We hope you\'ve enjoyed using Essential Addons for Elementor! Would you consider leaving us a review on WordPress.org?', 'essential-addons-elementor' ) ?></p>
+            <p><?php _e( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) ?></p>
             <ul class="eael-review-ul">
                 <li>
                     <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
                         <span class="dashicons dashicons-external"></span>
-                        <?php _e( 'Sure! I\'d love to!', 'essential-addons-elementor' ) ?>
+                        <?php _e( 'Ok, you deserve it!', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo $dismiss_url ?>">
                         <span class="dashicons dashicons-smiley"></span>
-                        <?php _e( 'I\'ve already left a review', 'essential-addons-elementor' ) ?>
+                        <?php _e( 'I already did', 'essential-addons-elementor' ) ?>
                     </a>
                 </li>
                 <li>
@@ -422,7 +455,7 @@ function eael_review_notice_message(){
                     </a>
                 </li>
                 <li>
-                    <a href="https://essential-addons.com/elementor/support/" target="_blank">
+                    <a href="https://wpdeveloper.net/support/" target="_blank">
                         <span class="dashicons dashicons-sos"></span>
                         <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
                     </a>

@@ -246,14 +246,122 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 						'label' => esc_html__( 'Item Active?', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SWITCHER,
 						'return_value' => 'yes',
-						'default' => 'yes',
+						'default'	=> 'yes'
 					],
 					[
 						'name' => 'eael_pricing_table_list_icon_color',
 						'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#00C853',
-					]
+					],
+					[
+						'name'			=> 'eael_pricing_item_tooltip',
+						'label'			=> esc_html__( 'Enable Tooltip?', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::SWITCHER,
+						'return_value'	=> 'yes',
+						'default'		=> false
+					],
+					[
+						'name'			=> 'eael_pricing_item_tooltip_content',
+						'label'			=> esc_html__( 'Tooltip Content', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::TEXTAREA,
+						'default'		=> __( "I'm a awesome tooltip!!", 'essential-addons-elementor' ),
+						'condition'		=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
+					[
+						'name'			=> 'eael_pricing_item_tooltip_side',
+						'label'			=> esc_html__( 'Tooltip Side', 'essential-addons-elementor' ),
+						'type'          => Controls_Manager::CHOOSE,
+						'options' => [
+							'left'       => [
+								'title'    => __( 'Left', 'essential-addons-elementor' ),
+								'icon'     => 'eicon-h-align-left',
+							],
+							'top'          => [
+								'title'    => __( 'Top', 'essential-addons-elementor' ),
+								'icon'     => 'eicon-v-align-top',
+							],
+							'right'       => [
+								'title'    => __( 'Right', 'essential-addons-elementor' ),
+								'icon'     => 'eicon-h-align-right',
+							],
+							'bottom'       => [
+								'title'    => __( 'Bottom', 'essential-addons-elementor' ),
+								'icon'     => 'eicon-v-align-bottom',
+							],
+						],
+						'default'		=> 'top',
+						'condition'		=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
+					[
+						'name'			=> 'eael_pricing_item_tooltip_trigger',
+						'label'			=> esc_html__( 'Tooltip Trigger', 'essential-addons-elementor' ),
+						'type'          => Controls_Manager::SELECT2,
+						'options'	=> [
+							'hover'	=> __( 'Hover', 'essential-addons-elementor' ),
+							'click'	=> __( 'Click', 'essential-addons-elementor' ),
+						],
+						'default'	=> 'hover',
+						'condition'	=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
+					[
+						'name'			=> 'eael_pricing_item_tooltip_animation',
+						'label'			=> esc_html__( 'Tooltip Animation', 'essential-addons-elementor' ),
+						'type'          => Controls_Manager::SELECT2,
+						'options'	=> [
+							'fade'	=> __( 'Fade', 'essential-addons-elementor' ),
+							'grow'	=> __( 'Grow', 'essential-addons-elementor' ),
+							'swing'	=> __( 'Swing', 'essential-addons-elementor' ),
+							'slide'	=> __( 'Slide', 'essential-addons-elementor' ),
+							'fall'	=> __( 'Fall', 'essential-addons-elementor' ),
+						],
+						'default'	=> 'fade',
+						'condition'	=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
+					[
+						'name'	=> 'pricing_item_tooltip_animation_duration',
+						'label'	=> esc_html__( 'Animation Duration', 'essential-addons-elementor' ),
+						'type'	=> Controls_Manager::TEXT,
+						'default'	=> 300,
+						'condition'	=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
+					[
+						'name'			=> 'eael_pricing_table_toolip_arrow',
+						'label'			=> esc_html__( 'Tooltip Arrow', 'essential-addons-elementor' ),
+						'type'			=> Controls_Manager::SWITCHER,
+						'return_value'	=> 'yes',
+						'default'		=> 'yes',
+						'condition'	=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
+					[
+						'name'			=> 'eael_pricing_item_tooltip_theme',
+						'label'			=> esc_html__( 'Tooltip Theme', 'essential-addons-elementor' ),
+						'type'          => Controls_Manager::SELECT2,
+						'options'	=> [
+							'default'	=> __( 'Default', 'essential-addons-elementor' ),
+							'noir'		=> __( 'Noir', 'essential-addons-elementor' ),
+							'light'		=> __( 'Light', 'essential-addons-elementor' ),
+							'punk'		=> __( 'Punk', 'essential-addons-elementor' ),
+							'shadow'	=> __( 'Shadow', 'essential-addons-elementor' ),
+							'borderless'=> __( 'Borderless', 'essential-addons-elementor' ),
+						],
+						'default'	=> 'noir',
+						'condition'	=> [
+							'eael_pricing_item_tooltip'	=> 'yes'
+						]
+					],
 				],
 				'title_field' => '{{eael_pricing_table_item}}',
 			]
@@ -849,6 +957,18 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_pricing_table_list_disable_item_color',
+			[
+				'label' => esc_html__( 'Disable item color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing .eael-pricing-item ul li.disable-item' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1003,6 +1123,153 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 			]
 		);
 
+		$this->end_controls_section();
+
+		/**
+		 * -------------------------------------------
+		 * Tab Style (Tooltip Style)
+		 * -------------------------------------------
+		 */
+		$this->start_controls_section(
+			'eael_section_pricing_table_tooltip_style',
+			[
+				'label' => esc_html__( 'Tooltip', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_tooltip_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'div.tooltipster-base.tooltipster-sidetip .tooltipster-box' => 'background-color: {{VALUE}}'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_tooltip_arrow_bg',
+			[
+				'label'		=> esc_html__( 'Arrow Background', 'essential-addons-elementor' ),
+				'type'		=> Controls_Manager::COLOR,
+				'default'	=> '#3d3d3d',
+				'selectors' => [
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-top .tooltipster-arrow-border,
+					div.tooltipster-base.tooltipster-sidetip.tooltipster-top .tooltipster-arrow-background' => 'border-top-color: {{VALUE}};',
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-right .tooltipster-arrow-border, .tooltipster-base.tooltipster-sidetip.tooltipster-right .tooltipster-arrow-background' 	=> 'border-right-color: {{VALUE}};',
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-left .tooltipster-arrow-border,
+					div.tooltipster-base.tooltipster-sidetip.tooltipster-left .tooltipster-arrow-background' => 'border-left-color: {{VALUE}};',
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-border,
+					div.tooltipster-base.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-background' => 'border-bottom-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_tooltip_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'div.tooltipster-base.tooltipster-sidetip .tooltipster-box .tooltipster-content' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_pricing_table_tooltip_padding',
+			[
+				'label'	=> esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type'	=> Controls_Manager::DIMENSIONS,
+				'size_units'	=> 'px',
+				'description'	=> __( 'Refresh your browser after saving the padding value for see changes.', 'essential-addons-elementor' ),
+				'selectors'		=> [
+	 				'div.tooltipster-base.tooltipster-sidetip .tooltipster-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'		=> 'eael_pricing_table_tooltip_border',
+				'label'		=> esc_html__( 'Border Type', 'essential-addons-elementor' ),
+				'selector'	=> '.tooltipster-base.tooltipster-sidetip .tooltipster-box'
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_tooltip_border_radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> [ 'px', '%' ],
+				'range' => [
+					'%'	=> [
+						'max'	=> 100,
+						'step'	=> 1
+					],
+					'px' => [
+						'max'	=> 200,
+						'step'	=> 1
+					],
+				],
+				'selectors' => [
+					'.tooltipster-base.tooltipster-sidetip .tooltipster-box' => 'border-radius: {{SIZE}}{{UNIT}};'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_tooltip_arrow_heading',
+			[
+				'label'		=> __( 'Tooltip Arrow', 'essential-addons-elementor' ),
+				'separator'	=> 'before',
+				'type'		=> Controls_Manager::HEADING
+			]
+		);
+
+		$this->add_control(
+			'eael_pricing_table_tooltip_arrow_size',
+			[
+				'label' => esc_html__( 'Arrow Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'max'	=> 45,
+						'step'	=> 1
+					],
+				],
+				'selectors' => [
+
+					// Right Position Arrow
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-right .tooltipster-arrow' => 'width: calc( {{SIZE}}px * 2); height: calc( {{SIZE}}px * 2); margin-top: calc( (-{{SIZE}}px * 2) / 2 ); left: calc( (-{{SIZE}}px * 2) / 2 );',
+					'div.tooltipster-sidetip.tooltipster-right .tooltipster-box'	=> 'margin-left: calc({{SIZE}}px - 10px);',
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-right .tooltipster-arrow-background,.tooltipster-sidetip.tooltipster-right .tooltipster-arrow-border' => 'border: {{SIZE}}px solid transparent;',
+
+					// Left Position Arrow
+					'.tooltipster-sidetip.tooltipster-base.tooltipster-left .tooltipster-arrow'	=> 'width: calc( {{SIZE}}px * 2); height: calc( {{SIZE}}px * 2); margin-top: calc( (-{{SIZE}}px * 2) / 2 ); right: calc( (-{{SIZE}}px * 2) / 2 );',
+					'div.tooltipster-sidetip.tooltipster-left .tooltipster-box'	=> 'margin-right: calc({{SIZE}}px - 1px);',
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-left .tooltipster-arrow-background, .tooltipster-sidetip.tooltipster-left .tooltipster-arrow-border' => 'border: {{SIZE}}px solid transparent;',
+
+					// Top Position Arrow
+					'.tooltipster-sidetip.tooltipster-base.tooltipster-top .tooltipster-arrow'	=> 'width: calc( {{SIZE}}px * 2); height: calc( {{SIZE}}px * 2); margin-left: calc( (-{{SIZE}}px * 2) / 2 ); left: 40%;top: 100%;',
+					'div.tooltipster-sidetip.tooltipster-top .tooltipster-box'	=> 'margin-bottom: -1px;',
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-top .tooltipster-arrow-background, .tooltipster-sidetip.tooltipster-top .tooltipster-arrow-border' => 'border: {{SIZE}}px solid transparent;',
+
+					// Bottom Position Arrow
+					'.tooltipster-sidetip.tooltipster-base.tooltipster-bottom .tooltipster-arrow'	=> 'width: calc( {{SIZE}}px * 2); height: calc( {{SIZE}}px * 2); margin-left: calc( (-{{SIZE}}px * 2) / 2 ); left: 40%; top: auto; bottom: 88%;',
+
+					'div.tooltipster-base.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-background,
+					.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-border' => 'border: {{SIZE}}px solid transparent;',
+
+				],
+			]
+		);
 		$this->end_controls_section();
 
 		/**
@@ -1372,11 +1639,72 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+	}
 
+	protected function render_feature_list( $settings ) {
+		if( empty($settings['eael_pricing_table_items']) ) return;
+
+		$counter = 0;
+		?>
+		<ul>
+			<?php
+				foreach( $settings['eael_pricing_table_items'] as $item ) :
+				
+					if( 'yes' !== $item['eael_pricing_table_icon_mood'] ) {
+						$this->add_render_attribute('pricing_feature_item'.$counter, 'class', 'disable-item');
+					}
+					
+					if( 'yes' === $item['eael_pricing_item_tooltip'] ) {
+						$this->add_render_attribute('pricing_feature_item'.$counter,
+							[
+								'class' => 'tooltip',
+								'title'	=> $item['eael_pricing_item_tooltip_content'],
+								'id'	=> $this->get_id() . $counter
+							]
+						);
+					}
+
+					if( 'yes' == $item['eael_pricing_item_tooltip'] ) {
+						
+						if( $item['eael_pricing_item_tooltip_side'] ) {
+							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-side', $item['eael_pricing_item_tooltip_side'] );
+						}
+						
+						if( $item['eael_pricing_item_tooltip_trigger'] ) {
+							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger'] );
+						}
+						
+						if( $item['eael_pricing_item_tooltip_animation'] ) {
+							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation', $item['eael_pricing_item_tooltip_animation'] );
+						}
+						
+						if( ! empty( $item['pricing_item_tooltip_animation_duration'] ) ) {
+							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration'] );
+						}
+
+						if( ! empty( $item['eael_pricing_table_toolip_arrow'] ) ) {
+							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow'] );
+						}
+
+						if( ! empty( $item['eael_pricing_item_tooltip_theme'] ) ) {
+							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-theme', $item['eael_pricing_item_tooltip_theme'] );
+						}
+
+					}
+			?>
+				<li <?php echo $this->get_render_attribute_string('pricing_feature_item'.$counter); ?>>
+					<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
+					<span class="li-icon" style="color:<?php echo esc_attr( $item['eael_pricing_table_list_icon_color'] ); ?>"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span>
+					<?php endif; ?>
+					<?php echo $item['eael_pricing_table_item']; ?>
+				</li>
+			<?php $counter++; endforeach; ?>
+		</ul>
+		<?php
 	}
 
 
-	protected function render( ) {
+	protected function render() {
 
    	$settings = $this->get_settings();
       $pricing_table_image = $this->get_settings( 'eael_pricing_table_image' );
@@ -1410,19 +1738,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 	            <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
 	        </div>
 	        <div class="body">
-	            <ul>
-	            	<?php
-	            		foreach( $settings['eael_pricing_table_items'] as $item ) :
-	            		if( 'yes' === $item['eael_pricing_table_icon_mood'] ) : $icon_mood = ''; else : $icon_mood = 'disable-item'; endif;
-	            	?>
-	                	<li class="<?php echo esc_attr( $icon_mood ); ?>">
-	                		<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
-	                		<span class="li-icon" style="color:<?php echo esc_attr( $item['eael_pricing_table_list_icon_color'] ); ?>"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span>
-	                		<?php endif; ?>
-	                		<?php echo $item['eael_pricing_table_item']; ?>
-	                	</li>
-	               <?php endforeach; ?>
-	            </ul>
+	            <?php $this->render_feature_list( $settings ); ?>
 	        </div>
 	        <div class="footer">
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
@@ -1452,19 +1768,7 @@ class Widget_Eael_Pricing_Table extends Widget_Base {
 	            <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
 	        </div>
 	        <div class="body">
-	            <ul>
-	            	<?php
-	            		foreach( $settings['eael_pricing_table_items'] as $item ) :
-	            		if( 'yes' === $item['eael_pricing_table_icon_mood'] ) : $icon_mood = ''; else : $icon_mood = 'disable-item'; endif;
-	            	?>
-	                	<li class="<?php echo esc_attr( $icon_mood ); ?>">
-	                		<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
-	                		<span class="li-icon" style="color:<?php echo esc_attr( $item['eael_pricing_table_list_icon_color'] ); ?>"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span>
-	                		<?php endif; ?>
-	                		<?php echo $item['eael_pricing_table_item']; ?>
-	                	</li>
-	               <?php endforeach; ?>
-	            </ul>
+	            <?php $this->render_feature_list( $settings ); ?>
 	        </div>
 	        <div class="footer">
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">

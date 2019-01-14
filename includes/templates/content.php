@@ -38,28 +38,45 @@ if( isset( $post_args['post_style'] ) ) :
             </a>
         </div>
     </article>
-<?php 
-    endif;
-    /**
-     * Content timeline
-     */
+<?php endif; ?>
+
+
+<?php
     if( $post_args['post_style'] == 'grid' ) :
+        $post_hover_style = !empty($post_args['eael_post_grid_hover_style']) ? ' grid-hover-style-'.$post_args['eael_post_grid_hover_style'] : 'none';
+        $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size']);
 ?>
     <article class="eael-grid-post eael-post-grid-column">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">
                 <?php if ( $thumbnail_exists = has_post_thumbnail() && $post_args['eael_show_image'] == 1 ): ?>
-                <div class="eael-entry-media">
-                    <div class="eael-entry-overlay">
-                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                <div class="eael-entry-media<?php echo esc_attr($post_hover_style); ?>">
+
+                    <?php if('none' !== $post_args['eael_post_grid_hover_animation']) : ?>
+                    <div class="eael-entry-overlay<?php echo ' '.esc_attr($post_args['eael_post_grid_hover_animation']); ?>">
+                        <?php if( ! empty($post_args['eael_post_grid_bg_hover_icon']) ) : ?>
+                            <i class="<?php echo esc_attr($post_args['eael_post_grid_bg_hover_icon']); ?>" aria-hidden="true"></i>
+                        <?php else : ?>
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        <?php endif; ?>
                         <a href="<?php echo get_permalink(); ?>"></a>
                     </div>
-                    <div class="eael-entry-thumbnail">
-                        <img src="<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>">
-                    </div>
+                    <?php endif; ?>
+
+                    <?php if( ! empty($post_carousel_image) ) : ?>
+                        <div class="eael-entry-thumbnail">
+                            <img src="<?php echo esc_url($post_carousel_image); ?>">
+                        </div>
+                    <?php endif; ?>
+
                 </div>
                 <?php endif; ?>
 
+                <?php
+                    if($post_args['eael_show_title'] 
+                    ||$post_args['eael_show_meta']
+                    ||$post_args['eael_show_excerpt']) :
+                ?>
                 <div class="eael-entry-wrapper">
                     <header class="eael-entry-header">
                         <?php if($post_args['eael_show_title']){ ?>
@@ -95,9 +112,11 @@ if( isset( $post_args['post_style'] ) ) :
                     </div>
                 <?php } ?>
             </div>
+            <?php endif; ?>
+
         </div>
     </article>
-<?php 
-    endif;
-endif;
-?>
+<?php endif;  //$post_args['post_style'] == 'post_carousel' ?>
+
+
+<?php endif; ?>

@@ -1,0 +1,28 @@
+{
+  "name": "essential-addons-for-elementor-lite",
+  "version": "1.0.0",
+  "description": "=== Essential Addons for Elementor === Contributors: Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, manik08cse Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form Requires at least: 4.0 Tested up to: 4.9.8 Requires PHP: 5.4 Stable tag: 2.8.3 License: GPLv3 License URI: https://opensource.org/licenses/GPL-3.0",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupok/essential-addons-elementor-lite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rupok/essential-addons-elementor-lite/issues"
+  },
+  "homepage": "https://github.com/rupok/essential-addons-elementor-lite#readme",
+  "devDependencies": {
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-compass": "^2.1.0",
+    "gulp-notify": "^3.2.0"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}
