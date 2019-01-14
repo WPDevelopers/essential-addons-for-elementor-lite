@@ -1,0 +1,66 @@
+
+/*----------------------------*/
+/* 28. Swiper
+/*----------------------------*/
+.swiper-container-wrap .swiper-slide,
+.swiper-container .swiper-slide {
+	text-align: center;
+}
+
+.swiper-container-wrap .swiper-slide img,
+.swiper-container .swiper-slide img {
+	width: auto;
+}
+
+.swiper-container-wrap-dots-outside .swiper-pagination,
+.swiper-container-dots-outside .swiper-pagination {
+	position: static;
+}
+
+.swiper-container-wrap .swiper-button-next,
+.swiper-container-wrap .swiper-button-prev,
+.swiper-container .swiper-button-next,
+.swiper-container .swiper-button-prev {
+	background: transparent;
+	font-size: 20px;
+	height: auto;
+	line-height: 1;
+	margin: 0;
+	text-align: center;
+	transform: translateY(-50%);
+	width: auto;
+}
+
+.swiper-container-wrap .swiper-button-next .fa,
+.swiper-container-wrap .swiper-button-prev .fa,
+.swiper-container .swiper-button-next .fa,
+.swiper-container .swiper-button-prev .fa {
+	vertical-align: top;
+}
+
+.swiper-container-wrap .swiper-pagination {
+	bottom: 10px;
+	left: 0;
+	width: 100%;
+}
+
+.swiper-container-wrap-dots-outside .swiper-pagination {
+	position: static;
+}
+
+.swiper-container-wrap .swiper-pagination-bullet {
+	background: #ccc;
+	margin: 0 4px;
+	opacity: 1;
+	height: 8px;
+	width: 8px;
+}
+
+.swiper-container-wrap .swiper-pagination-bullet-active {
+	background: #000;
+}
+
+.swiper-container-3d .swiper-slide {
+	transition-property: all;
+	-webkit-transition-property: all;
+}

@@ -1,0 +1,77 @@
+
+/*------------------------------*/
+/* 31. Advance Accordion
+/*------------------------------*/
+
+.eael-adv-accordion {
+	width: auto;
+	height: auto;
+	transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
+	padding: 15px;
+	border: 1px solid rgba(0, 0, 0, 0.02);
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1;
+	transition: all 0.3s ease-in-out;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+	transform: rotate(0deg);
+	z-index: 10;
+	transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+	transform: rotate(90deg);
+	z-index: 10;
+	transition: all 0.3s ease-in-out;
+}
+
+.fa-accordion-icon {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
+	display: none;
+	border: 1px solid #eee;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 1rem;
+	line-height: 1.7;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
+	margin: 0;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
+	display: block;
+}
+
+@keyframes rotate-90 {
+	0% {
+		transform: rotateY(0deg);
+	}
+	100% {
+		transform: rotateY(-180deg);
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 1;
+		transition: all 0.3s ease-in-out;
+	}
+	100% {
+		opacity: 1;
+		transition: all 0.3s ease-in-out;
+	}
+}

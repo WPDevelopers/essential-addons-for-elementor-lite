@@ -122,7 +122,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 		$this->add_control(
 		  'eael_testimonial_rating_number',
 		  [
-		     'label'       => __( 'Rating Number', 'your-plugin' ),
+		     'label'       => __( 'Rating Number', 'essential-addons-elementor' ),
 		     'type' => Controls_Manager::SELECT,
 		     'default' => 'rating-five',
 		     'options' => [
@@ -178,7 +178,7 @@ class Widget_Eael_Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_style',
 			[
-				'label'		=> __( 'Select Style', 'your-plugin' ),
+				'label'		=> __( 'Select Style', 'essential-addons-elementor' ),
 				'type'		=> Controls_Manager::SELECT,
 				'default'	=> 'default-style',
 				'options'	=> [
