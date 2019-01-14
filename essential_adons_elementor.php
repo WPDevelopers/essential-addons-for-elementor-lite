@@ -28,6 +28,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/eael-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
+require_once ESSENTIAL_ADDONS_EL_PATH .'includes/extensions.php';
 
 /**
  * This function will return true for all activated modules
@@ -36,8 +37,8 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
-
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles' ];
+   
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
    $eael_new_settings      = array_diff_key( $eael_default_settings, $eael_get_settings );
@@ -50,6 +51,20 @@ function eael_activated_modules() {
    return $eael_get_settings = get_option( 'eael_save_settings', $eael_default_settings );
 
 }
+
+/**
+ * Load acivate or deactivate Modules
+ *
+ * @since v1.0.0
+ */
+function add_eael_extensions() {
+	$is_component_active = eael_activated_modules();
+
+	if( $is_component_active['section-particles'] ) {
+		require_once ESSENTIAL_ADDONS_EL_PATH .'extensions/eael-particle-section/eael-particle-section.php';
+	}
+}
+add_eael_extensions();
 
 /**
  * Acivate or Deactivate Modules
@@ -227,7 +242,16 @@ function essential_addons_el_enqueue(){
     }
     
     if( $is_component_active['progress-bar'] ) {
-		  wp_enqueue_script('essential_addons_elementor-eael-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
+		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/loading-bar.min.js', array('jquery'),'1.0', true);
+   }
+   if( $is_component_active['section-particles'] ) {
+		wp_enqueue_script(
+         'particles-js', ESSENTIAL_ADDONS_EL_URL.'assets/js/particles.js',
+         ['jquery'], '1.0', true
+      );
+
+		$preset_themes = require ESSENTIAL_ADDONS_EL_PATH.'extensions/eael-particle-section/particle-themes.php';
+		wp_localize_script( 'particles-js', 'ParticleThemesData', $preset_themes );
 	}
 
 }
