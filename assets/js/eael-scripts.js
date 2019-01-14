@@ -747,7 +747,97 @@
                     "stroke-trail-width": 0.5
                   }).set($number);
             }
-    }
+    };
+
+    /*=================================*/
+	/* 36. Section Particles
+	/*=================================*/
+	var EaelParticlesHandler = function($scope,$){
+		var target    = $scope,
+		    sectionId = target.data('id'),
+		    editMode  = elementorFrontend.isEditMode(),
+			settings;
+
+		
+		if ( editMode ) {
+			settings = generateEditorSettings( sectionId );
+		}
+			
+		if (!editMode || ! settings ) {
+			return false;
+		}
+		
+		if(settings.switch == 'yes') {
+			target.addClass('eael-particles-section');
+			if(settings.themeSource === 'presets' || settings.themeSource === 'custom' && '' !== settings.selected_theme) {
+				generateParticles();
+			}
+		} else {
+			target.removeClass('eael-particles-section');
+		}
+		
+		
+		function generateEditorSettings(targetId){
+			var editorElements          = null,
+				sectionData             = {},
+				settings                = {};
+		
+			if ( ! window.elementor.hasOwnProperty( 'elements' ) ) {
+				return false;
+			}
+				
+			editorElements = window.elementor.elements;
+			
+			if ( ! editorElements.models ) {
+				return false;
+			}
+			
+			$.each(editorElements.models,function(index,elem){
+				if( targetId == elem.id){
+					sectionData = elem.attributes.settings.attributes;
+
+				} else if( elem.id == target.closest( '.elementor-top-section' ).data( 'id' ) ) {
+					$.each(elem.attributes.elements.models,function(index,col){
+						$.each(col.attributes.elements.models,function(index,subSec){
+							sectionData = subSec.attributes.settings.attributes;
+						});
+					});
+				}
+			});
+			
+			settings.switch = sectionData[ 'eael_particle_switch' ];
+			settings.zIndex = sectionData[ 'eael_particles_zindex' ];
+			settings.themeSource = sectionData['eael_particle_theme_from'];
+
+
+			if(settings.themeSource == 'presets') {
+				settings.selected_theme = (ParticleThemesData[sectionData[ 'eael_particle_preset_themes' ]]);
+			}
+
+			if( (settings.themeSource == 'custom') && ('' !== sectionData[ 'eael_particles_custom_style' ]) ){
+				settings.selected_theme = sectionData[ 'eael_particles_custom_style' ];
+			}
+			
+			if ( 0 !== settings.length ) {
+				return settings;
+			}
+
+			return false;   
+		}
+		
+		function generateParticles(){
+			target.attr('id','eael-section-particles-'+ sectionId);
+			if(typeof particlesJS !== 'undefined' && $.isFunction(particlesJS)) {
+				particlesJS("eael-section-particles-" + sectionId, JSON.parse(settings.selected_theme));
+				target.children('canvas.particles-js-canvas-el').css({
+					zIndex: settings.zIndex,
+					position: 'absolute',
+					top:0
+				});
+			}
+		}
+		
+	};
     
     $(window).on('elementor/frontend/init', function () {
         if(elementorFrontend.isEditMode()) {
@@ -767,6 +857,7 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-image-accordion.default', ImageAccordion);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-countdown.default', CountDown);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-progress-bar.default', ProgressBar);
+        elementorFrontend.hooks.addAction( 'frontend/element_ready/section', EaelParticlesHandler );
     });
 
 }(jQuery));
