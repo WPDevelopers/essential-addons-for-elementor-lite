@@ -206,30 +206,33 @@ class Widget_Eael_Contact_Form extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-			'eael_section_pro',
-			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-			]
-		);
-
+            'eael_section_pro',
+            [
+                'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+            ]
+        );
+        
         $this->add_control(
             'eael_control_get_pro',
             [
                 'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
-					],
-				],
-				'default' => '1',
+                    '1' => [
+                        'title' => __( '', 'essential-addons-elementor' ),
+                        'icon' => 'fa fa-unlock-alt',
+                    ],
+                ],
+                'default' => '1',
                 'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
             ]
         );
+        
+        $this->end_controls_section();
 
-		$this->end_controls_section();
-
+        /*-----------------------------------------------------------------------------------*/
+        /*	STYLE TAB
+        /*-----------------------------------------------------------------------------------*/
         /**
          * Style Tab: Form Container
          * -------------------------------------------------
@@ -242,16 +245,15 @@ class Widget_Eael_Contact_Form extends Widget_Base {
             ]
         );
 
-		$this->add_control(
-			'eael_contact_form_background',
-			[
-				'label' => esc_html__( 'Form Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'background: {{VALUE}};',
-				],
-			]
-		);
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'eael_contact_form_background',
+                'label'     => __( 'Background', 'plugin-domain' ),
+                'types'     => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-contact-form',
+            ]
+        );
 		
 		$this->add_responsive_control(
 			'eael_contact_form_alignment',
@@ -297,6 +299,10 @@ class Widget_Eael_Contact_Form extends Widget_Base {
 						'max' => 80,
 					],
 				],
+				'default'   => [
+				        'unit'  => 'px',
+                        'size'  => '500'
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .eael-contact-form' => 'width: {{SIZE}}{{UNIT}};',
 				],
@@ -320,7 +326,7 @@ class Widget_Eael_Contact_Form extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7-wrapper' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
   			]
   		);
@@ -383,10 +389,6 @@ class Widget_Eael_Contact_Form extends Widget_Base {
 		);
 
         $this->end_controls_section();
-
-        /*-----------------------------------------------------------------------------------*/
-        /*  STYLE TAB
-        /*-----------------------------------------------------------------------------------*/
 
         /**
          * Style Tab: Title & Description
@@ -1100,10 +1102,6 @@ class Widget_Eael_Contact_Form extends Widget_Base {
             [
                 'label'                 => __( 'Width', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
-                'default'               => [
-                    'size'      => '100',
-                    'unit'      => 'px'
-                ],
                 'range'                 => [
                     'px'        => [
                         'min'   => 0,
@@ -1509,6 +1507,7 @@ class Widget_Eael_Contact_Form extends Widget_Base {
         $this->add_render_attribute( 'contact-form', 'class', [
 				'eael-contact-form',
 				'eael-contact-form-7',
+                'eael-contact-form-'.esc_attr($this->get_id())
 			]
 		);
         
@@ -1538,22 +1537,24 @@ class Widget_Eael_Contact_Form extends Widget_Base {
         
         if ( function_exists( 'wpcf7' ) ) {
             if ( ! empty( $settings['contact_form_list'] ) ) { ?>
-                <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
-                    <?php if ( $settings['form_title'] == 'yes' || $settings['form_description'] == 'yes' ) { ?>
-                        <div class="eael-contact-form-7-heading">
-                            <?php if ( $settings['form_title'] == 'yes' && $settings['form_title_text'] != '' ) { ?>
-                                <h3 class="eael-contact-form-title eael-contact-form-7-title">
-                                    <?php echo esc_attr( $settings['form_title_text'] ); ?>
-                                </h3>
-                            <?php } ?>
-                            <?php if ( $settings['form_description'] == 'yes' && $settings['form_description_text'] != '' ) { ?>
-                                <div class="eael-contact-form-description eael-contact-form-7-description">
-                                    <?php echo $this->parse_text_editor( $settings['form_description_text'] ); ?>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <?php echo do_shortcode( '[contact-form-7 id="' . $settings['contact_form_list'] . '" ]' ); ?>
+                <div class="eael-contact-form-7-wrapper">
+                    <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
+                        <?php if ( $settings['form_title'] == 'yes' || $settings['form_description'] == 'yes' ) { ?>
+                            <div class="eael-contact-form-7-heading">
+                                <?php if ( $settings['form_title'] == 'yes' && $settings['form_title_text'] != '' ) { ?>
+                                    <h3 class="eael-contact-form-title eael-contact-form-7-title">
+                                        <?php echo esc_attr( $settings['form_title_text'] ); ?>
+                                    </h3>
+                                <?php } ?>
+                                <?php if ( $settings['form_description'] == 'yes' && $settings['form_description_text'] != '' ) { ?>
+                                    <div class="eael-contact-form-description eael-contact-form-7-description">
+                                        <?php echo $this->parse_text_editor( $settings['form_description_text'] ); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <?php echo do_shortcode( '[contact-form-7 id="' . $settings['contact_form_list'] . '" ]' ); ?>
+                    </div>
                 </div>
                 <?php
             }

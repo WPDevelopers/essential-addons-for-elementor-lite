@@ -74,14 +74,15 @@
 }
 .eael-settings-tabs ul li a {
 	padding: 15px 20px;
-	background: #ECF0F1;
-	color: #646464;
-	font-size: 16px;
+	background: #f8fafb;
+	color: #516378;
+	font-size: 15px;
 	font-weight: 600;
-	text-transform: uppercase;
 	text-decoration: none;
-	border: 1px solid rgba( 0,0,0,0.1 );
-	border-bottom: none;
+	border-top: 2px solid #f8fafb;
+}
+.eael-settings-tabs ul li:first-child a {
+	border-left: 1px solid rgba( 0,0,0,0.1 )
 }
 .eael-settings-tabs ul li a:focus {
 	outline: none;
@@ -229,6 +230,7 @@ textarea.eael-form-control {
 }
 .eael-tabs li a.active {
 	background-color: #fff;
+	border-top: 2px solid #6648FE;
 }
 /* Footer Style */
 
@@ -584,4 +586,20 @@ textarea.eael-form-control {
 }
 .eael-fb-own-app-settings.eael-active, #eaelFBbtn.eael-active, #eaelFBbtnOwnApp.eael-active {
 	display: block;
+}
+
+.warning {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: #D8000C;
+  	background-color: #FFBABA;
+	overflow: hidden;
+}
+
+.warning > * {
+    float: left;
+}
+#eael_plugins_versions {
+	height: 36px;
 }

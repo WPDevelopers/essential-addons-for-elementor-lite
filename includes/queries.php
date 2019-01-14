@@ -324,7 +324,7 @@ if ( !function_exists('eael_select_caldera_form') ) {
 if ( !function_exists('eael_select_wpforms_forms') ) {
     function eael_select_wpforms_forms() {
         $options = array();
-        if ( class_exists( 'WPForms' ) ) {
+        if ( class_exists( '\WPForms\WPForms' ) ) {
 
             $args = array(
                 'post_type'         => 'wpforms',
@@ -374,8 +374,10 @@ if ( !function_exists('eael_get_authors') ) {
 
         $users = get_users();
 
-        foreach ( $users as $user ) {
-            $options[ $user->ID ] = $user->display_name;
+        if($users) {
+            foreach( $users as $user ) {
+                $options[ $user->ID ] = $user->display_name;
+            }
         }
 
         return $options;
@@ -528,6 +530,7 @@ function posts_args(){
         'eael_read_more_text',
         'show_load_more',
         'show_load_more_text',
+        'eael_post_grid_bg_hover_icon',
 
         // query_args
         'post_type',
@@ -541,5 +544,6 @@ function posts_args(){
         'offset',
         'orderby',
         'order',
+        'eael_post_grid_hover_animation'
     );
 }
