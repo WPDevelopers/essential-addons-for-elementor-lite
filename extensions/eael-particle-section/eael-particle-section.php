@@ -163,6 +163,9 @@ class EAEL_Particle_Section extends Module_Base {
                         position: absolute;
                         top:0;
                     }
+                    .elementor-section .elementor-container {
+                        z-index: 99;
+                    }
                 </style>
 
                 <script>
