@@ -60,7 +60,7 @@ class Widget_Eael_Progress_Bar extends Widget_Base {
         $this->add_control(
             'eael_pricing_table_style_pro_alert',
             [
-                'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Only Available in Pro Version!', 'essential-addons-elementor' ),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'progress_bar_layout' => ['line_rainbow', 'circle_fill', 'half_circle_fill', 'box'],
@@ -391,9 +391,9 @@ class Widget_Eael_Progress_Bar extends Widget_Base {
 				'label' => __('Stripe Animation', 'essential-addons-elementor'),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'normal' => __('Left To Right', 'plugin-domain'),
-					'reverse' => __('Right To Left', 'plugin-domain'),
-					'none' => __('Disabled', 'plugin-domain'),
+					'normal' => __('Left To Right', 'essential-addons-elementor'),
+					'reverse' => __('Right To Left', 'essential-addons-elementor'),
+					'none' => __('Disabled', 'essential-addons-elementor'),
 				],
 				'default' => 'none',
 				'condition' => [

@@ -3,113 +3,117 @@
 
     var isEditMode = false;
 
-
     function mybe_note_undefined($selector, $data_atts) {
 		return ($selector.data($data_atts) !== undefined) ? $selector.data($data_atts) : '';
 	}
 
+	/*=================================*/
+    /* 01. Filterable Gallery
+    /*=================================*/
+    var filterableGalleryHandler = function($scope, $) {
+        if (!isEditMode) {
+            var $gallery = $('.eael-filter-gallery-container', $scope),
+                $settings = $gallery.data('settings'),
+                $gallery_items = $gallery.data('gallery-items'),
+                $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+                $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false);
+            
+            // init isotope
+            var $isotope_gallery = $gallery.isotope({
+                itemSelector: '.eael-filterable-gallery-item-wrap',
+                layoutMode: $layout_mode,
+                percentPosition: true,
+                stagger: 30,
+                transitionDuration: $settings.duration + 'ms',
+                filter: $('.eael-filter-gallery-control .control.active', $scope).data('filter')
+            });
 
-	function getGalleryItem($gallery_items, $scope, $render, $init_show) {
-		var $rom = [];
+            // layout gal - not necessary, just in case
+            $isotope_gallery.imagesLoaded().progress(function() {
+                $isotope_gallery.isotope('layout');
+            });
 
-		var $counter = $init_show + $render;
-		for(var i = $init_show; i < $counter; i++) {
-			var $item = $($gallery_items[i]);
-				$item = $item[0];
-			$rom.push($item);
-		}
-		return $rom;
-	}
+            // filter
+            $scope.on('click', '.control', function() {
+                var $this = $(this),
+                    $filterValue = $this.data('filter');
 
-	var filterableGalleryHandler = function( $scope, $ ) {
+                $this.siblings().removeClass('active');
+                $this.addClass('active');
+                $isotope_gallery.isotope({
+                    filter: $filterValue
+                });
+            });
 
-		var $gallery	= $scope.find('.eael-filter-gallery-container').eq(0),
-			$settings	= $gallery.data('settings');
-			
-			var $gallery_items = $gallery.data('gallery-items'),
-				$init_show = $gallery.data('init-show') ? $gallery.data('init-show') : 9;
+            // popup
+            $('.eael-magnific-link', $scope).magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: $gallery_enabled,
+                },
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                }
+            });
 
-		if( !isEditMode ) {
-			var $layout_mode = 'fitRows';
+            $($scope).magnificPopup({
+                delegate: '.eael-magnific-video-link',
+                type: 'iframe',
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                }
+            });
 
-                if( 'masonry'  == $settings.grid_style ) {
-                    $layout_mode = 'masonry';
+            // Load more button
+            $scope.on('click', '.eael-gallery-load-more', function(e) {
+                e.preventDefault();
+
+                var $this = $(this),
+                    $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
+                    $total_items = $gallery.data('total-gallery-items'),
+                    $images_per_page = $gallery.data('images-per-page'),
+                    $nomore_text = $gallery.data('nomore-item-text'),
+                    $items = [];
+
+                if ($init_show == $total_items) {
+                    $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
+                    setTimeout(function() {
+                        $this.fadeOut('slow');
+                    }, 600);
                 }
 
-				var $isotope_args = {
-					itemSelector:   '.eael-filterable-gallery-item-wrap',
-					layoutMode		: $layout_mode,
-					percentPosition : true,
-					stagger: 30,
-					transitionDuration: $settings.duration + 'ms',
-				}
+                // new items html
+                for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
+                    $items.push($($gallery_items[i])[0]);
+                }
 
-				var $isotope_gallery = {};
-				
-				$scope.imagesLoaded(function(e) {
-					$isotope_gallery = $gallery.isotope($isotope_args);
-				});
-				
-				$scope.on('click', '.control', function() {
-					var $this = $(this),
-						filterValue = $this.attr('data-filter');
+                // append items
+                $gallery.append($items)
+                $isotope_gallery.isotope('appended', $items)
+                $isotope_gallery.imagesLoaded().progress(function() {
+                    $isotope_gallery.isotope('layout')
+                })
 
-					$this.siblings().removeClass('active');
-					$this.addClass('active');
-					$isotope_gallery.isotope({ filter: filterValue });
-				});
-
-                var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
-                $scope.find('.eael-magnific-link').magnificPopup({
+                // reinit magnificPopup
+                $('.eael-magnific-link', $scope).magnificPopup({
                     type: 'image',
-                    gallery:{
+                    gallery: {
                         enabled: $gallery_enabled
                     },
                     callbacks: {
                         close: function() {
-                            $( '#elementor-lightbox' ).hide();
+                            $('#elementor-lightbox').hide();
                         }
                     }
-                });
+                })
+            });
+        }
 
-				$scope.find('.eael-magnific-video-link').magnificPopup({
-					type: 'iframe',
-					callbacks: {
-						close: function() {
-							$( '#elementor-lightbox' ).hide();
-						}
-					}
-				});
-		}
-
-		
-		// Load more button
-		$scope.find('.eael-gallery-load-more').on('click', function(e) {
-			e.preventDefault();
-
-			var $this = $(this),
-				$init_show = $scope
-						.find('.eael-filter-gallery-container')
-							.find('.eael-filterable-gallery-item-wrap')
-								.length,
-				total_items = $gallery.data('total-gallery-items'),
-				images_per_page = $gallery.data('images-per-page'),
-				nomore_text		= $gallery.data('nomore-item-text'),
-				$items = getGalleryItem($gallery_items, $scope, images_per_page, $init_show);
-
-				if( $init_show == total_items ) {
-					$this.html('<div class="no-more-items-text">'+nomore_text+'</div>');
-					setTimeout(function(){
-						$this.fadeOut('slow');
-					}, 600);
-				}
-
-			$scope.imagesLoaded(function(e) {
-				$gallery.isotope('insert', $items);
-			});
-		});
-
-	};
+    }
 
    
 
@@ -263,12 +267,13 @@
                 loadingFeed.addClass( 'show-loading' );
             },
             success: function() {
-                if($feed_type == 'masonry') {
-                    setTimeout(function() {
-                        eael_twitter_feed_masonry();
-                    }, 2000);
-                     
-                }
+                $('.eael-twitter-feed-layout-container').bind("DOMSubtreeModified", function() {
+                    if ($feed_type == 'masonry') {
+                        setTimeout(function() {
+                            eael_twitter_feed_masonry();
+                        }, 150);
+                    }
+                })
                 loadingFeed.removeClass( 'show-loading' );
             },
             error: function() {
@@ -430,56 +435,70 @@
     }
 
     var ContentTicker = function ($scope, $) {
-        var $contentTicker              = $scope.find('.eael-content-ticker').eq(0),
-            $items                      = ($contentTicker.data("items") !== undefined) ? $contentTicker.data("items") : 1,
-            $items_tablet               = ($contentTicker.data("items-tablet") !== undefined) ? $contentTicker.data("items-tablet") : 1,
-            $items_mobile               = ($contentTicker.data("items-mobile") !== undefined) ? $contentTicker.data("items-mobile") : 1,
-            $margin                     = ($contentTicker.data("margin") !== undefined) ? $contentTicker.data("margin") : 10,
-            $margin_tablet              = ($contentTicker.data("margin-tablet") !== undefined) ? $contentTicker.data("margin-tablet") : 10,
-            $margin_mobile              = ($contentTicker.data("margin-mobile") !== undefined) ? $contentTicker.data("margin-mobile") : 10,
-            $effect                     = ($contentTicker.data("effect") !== undefined) ? $contentTicker.data("effect") : 'slide',
-            $speed                      = ($contentTicker.data("speed") !== undefined) ? $contentTicker.data("speed") : 400,
-            $autoplay                   = ($contentTicker.data("autoplay") !== undefined) ? $contentTicker.data("autoplay") : 5000,
-            $loop                       = ($contentTicker.data("loop") !== undefined) ? $contentTicker.data("loop") : false,
-            $grab_cursor                = ($contentTicker.data("grab-cursor") !== undefined) ? $contentTicker.data("grab-cursor") : false,
-            $pagination                 = ($contentTicker.data("pagination") !== undefined) ? $contentTicker.data("pagination") : '.swiper-pagination',
-            $arrow_next                 = ($contentTicker.data("arrow-next") !== undefined) ? $contentTicker.data("arrow-next") : '.swiper-button-next',
-            $arrow_prev                 = ($contentTicker.data("arrow-prev") !== undefined) ? $contentTicker.data("arrow-prev") : '.swiper-button-prev',
-            mySwiper = new Swiper($contentTicker, {
-                direction:              'horizontal',
-                loop:                   $loop,
-                speed:                  $speed,
-                effect:                 $effect,
-                slidesPerView:          $items,
-                spaceBetween:           $margin,
-                grabCursor:             $grab_cursor,
-                paginationClickable:    true,
-                autoHeight:             true,
-                autoplay: {
-                    delay: $autoplay,
-                },
-                pagination: {
-                    el: $pagination,
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: $arrow_next,
-                    prevEl: $arrow_prev,
-                },
-                breakpoints: {
-                    // when window width is <= 480px
-                    480: {
-                        slidesPerView:  $items_mobile,
-                        spaceBetween:   $margin_mobile
-                    },
-                    // when window width is <= 640px
-                    768: {
-                        slidesPerView:  $items_tablet,
-                        spaceBetween:   $margin_tablet
-                    }
-                }
-            });
-    };
+		var $contentTicker  = $scope.find('.eael-content-ticker').eq(0),
+		    $items          = ($contentTicker.data("items") !== undefined) ? $contentTicker.data("items") : 1,
+		    $items_tablet   = ($contentTicker.data("items-tablet") !== undefined) ? $contentTicker.data("items-tablet") : 1,
+		    $items_mobile   = ($contentTicker.data("items-mobile") !== undefined) ? $contentTicker.data("items-mobile") : 1,
+		    $margin         = ($contentTicker.data("margin") !== undefined) ? $contentTicker.data("margin") : 10,
+		    $margin_tablet  = ($contentTicker.data("margin-tablet") !== undefined) ? $contentTicker.data("margin-tablet") : 10,
+		    $margin_mobile  = ($contentTicker.data("margin-mobile") !== undefined) ? $contentTicker.data("margin-mobile") : 10,
+		    $effect         = ($contentTicker.data("effect") !== undefined) ? $contentTicker.data("effect") : 'slide',
+		    $speed          = ($contentTicker.data("speed") !== undefined) ? $contentTicker.data("speed") : 400,
+		    $autoplay       = ($contentTicker.data("autoplay") !== undefined) ? $contentTicker.data("autoplay") : 5000,
+		    $loop           = ($contentTicker.data("loop") !== undefined) ? $contentTicker.data("loop") : false,
+		    $grab_cursor    = ($contentTicker.data("grab-cursor") !== undefined) ? $contentTicker.data("grab-cursor") : false,
+		    $pagination     = ($contentTicker.data("pagination") !== undefined) ? $contentTicker.data("pagination") : '.swiper-pagination',
+		    $arrow_next     = ($contentTicker.data("arrow-next") !== undefined) ? $contentTicker.data("arrow-next") : '.swiper-button-next',
+		    $arrow_prev     = ($contentTicker.data("arrow-prev") !== undefined) ? $contentTicker.data("arrow-prev") : '.swiper-button-prev',
+		    $pause_on_hover = ($contentTicker.data('pause-on-hover') !== undefined ? $contentTicker.data('pause-on-hover') : ''),
+			$contentTickerOptions = {
+				direction          : 'horizontal',
+				loop               : $loop,
+				speed              : $speed,
+				effect             : $effect,
+				slidesPerView      : $items,
+				spaceBetween       : $margin,
+				grabCursor         : $grab_cursor,
+				paginationClickable: true,
+				autoHeight         : true,
+				autoplay: {
+					delay: $autoplay,
+				},
+				pagination: {
+					el: $pagination,
+					clickable: true,
+				},
+				navigation: {
+					nextEl: $arrow_next,
+					prevEl: $arrow_prev,
+				},
+				breakpoints: {
+					// when window width is <= 480px
+					480: {
+						slidesPerView: $items_mobile,
+						spaceBetween : $margin_mobile
+					},
+					// when window width is <= 640px
+					768: {
+						slidesPerView: $items_tablet,
+						spaceBetween : $margin_tablet
+					}
+				}
+			};
+
+		var $contentTickerSlider = new Swiper($contentTicker, $contentTickerOptions);
+		if($autoplay === 0) {
+			$contentTickerSlider.autoplay.stop();
+		}
+		if($pause_on_hover && $autoplay !== 0) {
+			$contentTicker.on('mouseenter', function() {
+				$contentTickerSlider.autoplay.stop();
+			});
+			$contentTicker.on('mouseleave', function() {
+				$contentTickerSlider.autoplay.start();
+			});
+		}
+	};
 
     /* ------------------------------ */
     /* Data Table
@@ -512,7 +531,7 @@
             $fancy_text_speed       = ($fancyText.data("fancy-text-speed") !== undefined) ? $fancyText.data("fancy-text-speed") : '',
             $fancy_text_delay       = ($fancyText.data("fancy-text-delay")     !== undefined) ? $fancyText.data("fancy-text-delay") : '',  
             $fancy_text_cursor      = ($fancyText.data("fancy-text-cursor")     !== undefined) ? true : false,    
-            $fancy_text_loop        = ($fancyText.data("fancy-text-loop")     !== undefined) ? true : false;    
+            $fancy_text_loop   = ($fancyText.data("fancy-text-loop")     !== undefined) ? ($fancyText.data("fancy-text-loop") == 'yes' ? true : false) : false;
             $fancy_text = $fancy_text.split("|");
             
         if ( $transition_type  == 'typing' ) {

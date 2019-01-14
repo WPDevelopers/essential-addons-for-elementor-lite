@@ -1770,10 +1770,13 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 			?>
 			<div class="eael-filter-gallery-control">
 				<ul>
-					<li class="control active" data-filter="*"><?php echo $all_text; ?></li>
-					<?php foreach( $settings['eael_fg_controls'] as $control ) :
+					<?php if ($settings['eael_fg_all_label_text']) { ?>
+						<li class="control active" data-filter="*"><?php echo $all_text; ?></li>
+					<?php } ?>
+
+					<?php foreach( $settings['eael_fg_controls'] as $key => $control ) :
 						$sorter_filter = $this->sorter_class( $control['eael_fg_control'] ); ?>
-						<li class="control" data-filter=".eael-cf-<?php echo esc_attr( $sorter_filter ); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
+						<li class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {echo 'active';} ?>" data-filter=".eael-cf-<?php echo esc_attr( $sorter_filter ); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
@@ -2038,68 +2041,116 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 	 */
 	protected function render_editor_script() { ?>
 		<script type="text/javascript">
-			jQuery( document ).ready(function( $ ) {
+			jQuery(document).ready(function($) {
 				$('.eael-filter-gallery-container').each(function() {
 					var $node_id = '<?php echo $this->get_id(); ?>',
-						$scope 		= $( '[data-id="' + $node_id + '"]' ),
-						$gallery 	= $(this),
-						$settings 	= $gallery.data('settings');
+						$scope = $('[data-id="' + $node_id + '"]'),
+						$gallery = $(this),
+						$settings = $gallery.data('settings'),
+				        $gallery_items = $gallery.data('gallery-items'),
+						$layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+						$gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false);
 
-					if ( $gallery.closest( $scope ).length < 1 ) {
+					if ($gallery.closest($scope).length < 1) {
         				return;
         			}
-                    
-					var $layout_mode = 'fitRows';
-					
-					if( 'masonry'  == $settings.grid_style ) {
-						$layout_mode = 'masonry';
-					}
 
-					var $isotope_args = {
-                        itemSelector:   '.eael-filterable-gallery-item-wrap',
-                        layoutMode		: $layout_mode,
-                        percentPosition : true,
-                    };
+			         // init isotope
+					 var $isotope_gallery = $gallery.isotope({
+					     itemSelector: '.eael-filterable-gallery-item-wrap',
+					     layoutMode: $layout_mode,
+					     percentPosition: true,
+					     filter: $('.eael-filter-gallery-control .control.active', $scope).data('filter')
+					 });
 
-					var $isotope_gallery = {};
-			
-					$gallery.imagesLoaded( function(e) {
-                        $isotope_gallery = $gallery.isotope( $isotope_args );
-                        $gallery.find('.eael-filterable-gallery-item-wrap').resize( function() {
-							$gallery.isotope( 'layout' );
-						});
+					 // not necessary, just in case
+					 $isotope_gallery.imagesLoaded().progress(function() {
+					     $isotope_gallery.isotope('layout');
+					 });
+
+					 // resize
+					 $('.eael-filterable-gallery-item-wrap', $gallery).resize(function() {
+						$isotope_gallery.isotope('layout');
 					});
 
-					$scope.on('click', '.control', function() {
-						var $this = $(this),
-							filterValue = $this.attr('data-filter');
+					 // filter
+					 $scope.on('click', '.control', function() {
+					     var $this = $(this),
+					         $filterValue = $this.data('filter');
 
-						$this.siblings().removeClass('active');
-						$this.addClass('active');
-						$isotope_gallery.isotope({ filter: filterValue });
-					});
+					     $this.siblings().removeClass('active');
+					     $this.addClass('active');
+					     $isotope_gallery.isotope({
+					         filter: $filterValue
+					     });
+					 });
 
-					var $gallery_enabled = ($settings.gallery_enabled) == 'yes' ? true : false;
-					$scope.find('.eael-magnific-link').magnificPopup({
+			        // popup
+					$('.eael-magnific-link', $scope).magnificPopup({
 						type: 'image',
-						gallery:{
-							enabled: $gallery_enabled
-						},
+							gallery: {
+								enabled: $gallery_enabled,
+							},
 						callbacks: {
 							close: function() {
-								$( '#elementor-lightbox' ).hide();
-							}
+						    	$('#elementor-lightbox').hide();
+						 	}
 						}
 					});
 
-					$scope.find('.eael-magnific-video-link').magnificPopup({
-						type: 'iframe',
-						callbacks: {
-							close: function() {
-								$( '#elementor-lightbox' ).hide();
-							}
-						}
+					$($scope).magnificPopup({
+			        	delegate: '.eael-magnific-video-link',
+					    type: 'iframe',
+					    callbacks: {
+					        close: function() {
+					            $('#elementor-lightbox').hide();
+					        }
+					    }
 					});
+
+					 // Load more button
+				    $scope.on('click', '.eael-gallery-load-more', function(e) {
+				        e.preventDefault();
+
+				        var $this = $(this),
+				            $init_show = $('.eael-filter-gallery-container', $scope).children('.eael-filterable-gallery-item-wrap').length,
+				            $total_items = $gallery.data('total-gallery-items'),
+				            $images_per_page = $gallery.data('images-per-page'),
+				            $nomore_text = $gallery.data('nomore-item-text'),
+				            $items = [];
+
+				        if ($init_show == $total_items) {
+				            $this.html('<div class="no-more-items-text">' + $nomore_text + '</div>');
+				            setTimeout(function() {
+				                $this.fadeOut('slow');
+				            }, 600);
+				        }
+
+				        // new items html
+					    for (var i = $init_show; i < ($init_show + $images_per_page); i++) {
+					        $items.push($($gallery_items[i])[0]);
+					    }
+
+				        // append items
+				        $gallery.append($items)
+				        $isotope_gallery.isotope('appended', $items)
+				        $isotope_gallery.imagesLoaded().progress(function() {
+				            $isotope_gallery.isotope('layout')
+				        })
+
+				        // reinit magnificPopup
+				        $('.eael-magnific-link', $scope).magnificPopup({
+				            type: 'image',
+				            gallery: {
+				                enabled: $gallery_enabled
+				            },
+				            callbacks: {
+				                close: function() {
+				                    $('#elementor-lightbox').hide();
+				                }
+				            }
+				        })
+				    });
 
 				});
 			});
