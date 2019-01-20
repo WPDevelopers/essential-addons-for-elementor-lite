@@ -5,7 +5,8 @@ class WPDeveloper_Notice {
      *
      * @var array
      */
-    const ADMIN_UPDATE_NOTICE_KEY = 'wpdeveloper_update_notice';
+    const ADMIN_UPDATE_NOTICE_KEY = 'wpdeveloper_notices_seen';
+    public $redirect_url = '/wp-admin';
     /**
      * All Data
      *
@@ -231,17 +232,16 @@ class WPDeveloper_Notice {
                 $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] = $later_time;
             }
             if( isset( $dismiss ) && $dismiss == true ) { 
+                $user_notices = $this->get_user_notices();
+                if( ! $user_notices ) {
+                    $user_notices = [];
+                }
+                $user_notices[ $this->notice_id ][ $this->plugin_name ][] = $clicked_from;
 
-                $notice_id = "wpdev_notice_" . $this->version;
-
-                $admin_notices = [
-                    'plugin_name' => $this->plugin_name,
-                    $this->notice_id => [ $clicked_from ]
-                ];
-
-                update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $admin_notices);
+                update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
             }
             $this->update_options_data( $options_data[ $this->plugin_name ] );
+            wp_safe_redirect( $this->redirect_url );
         }
     }
     /**
@@ -373,11 +373,9 @@ class WPDeveloper_Notice {
         if( empty( $notices ) ) {
             return true;
         } else {
-            if( $notices[ 'plugin_name' ] == $this->plugin_name ) {
-                if( isset( $notices[ $this->notice_id ] ) ) {
-                    if( in_array( $notice, $notices[ $this->notice_id ] ) ) {
-                        return false;
-                    }
+            if( isset( $notices[ $this->notice_id ] ) && isset( $notices[ $this->notice_id ][ $this->plugin_name ] ) ) {
+                if( in_array( $notice, $notices[ $this->notice_id ][ $this->plugin_name ] ) ) {
+                    return false;
                 }
             }
         }
@@ -538,6 +536,7 @@ class WPDeveloper_Notice {
     }
 
 	private function get_user_notices() {
+        // dump( get_current_user_id(),false );
 		return get_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, true );
     }
     
