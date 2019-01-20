@@ -309,12 +309,10 @@ class WPDeveloper_Notice {
     public function upsale_notice(){
         do_action( 'wpdeveloper_before_upsale_notice' );
             do_action('wpdeveloper_upsale_notice');
-            $this->get_thumbnail( 'upsale' );
             $this->get_message( 'upsale' );
         do_action( 'wpdeveloper_after_upsale_notice' );
         // $this->upsale_button_script();
     }
-
     /**
      * This methods is responsible for get notice image.
      *
@@ -579,7 +577,7 @@ class WPDeveloper_Notice {
 }
 
 // Initialization.
-$notice = new WPDeveloper_Notice(ESSENTIAL_ADDONS_BASENAME, ESSENTIAL_ADDONS_VERSION );
+$notice = new WPDeveloper_Notice(ESSENTIAL_ADDONS_BASENAME, ESSENTIAL_ADDONS_VERSION);
 $scheme      = (parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY )) ? '&' : '?';
 $url = $_SERVER['REQUEST_URI'] . $scheme;
 $notice->links = [
