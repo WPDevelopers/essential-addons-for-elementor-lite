@@ -82,9 +82,16 @@ class WPDeveloper_Notice {
         //     'upsale' => true,
         // ]
     );
-
+    /**
+     * Notice ID for users.
+     * @var string
+     */
     private $notice_id;
-
+    /**
+     * Upsale Notice Arguments
+     * @var array
+     */
+    public $upsale_args;
     /**
      * Revoke this function when the object is created.
      *
@@ -97,28 +104,14 @@ class WPDeveloper_Notice {
         $this->timestamp = current_time( 'timestamp' );
         $this->notice_id = 'wpdeveloper_notice_' . str_replace( '.', '_', $this->version );
 
+        require dirname( __FILE__ ) . '/class-wpdev-core-install.php';
+
         if ( ! function_exists( 'get_plugins' ) ) {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
         if( ! function_exists( 'wp_get_current_user' ) ) {
             require_once ABSPATH . 'wp-includes/pluggable.php';
         }
-    }
-
-    private function current_notice_start_time(){
-        $current_notice = $this->next_notice();
-        $current_notice_start_time = '';
-
-        $current_notice_start = $this->get_options_data('current_notice_start');
-
-        if( ! $current_notice_start ) {
-            $current_notice_start = $this->get_args( 'current_notice_start' );
-            if( ! $current_notice_start ) {
-                $current_notice_start = $this->timestamp;
-            }
-        }
-
-        return $current_notice_start;
     }
 
     public function init(){
@@ -145,7 +138,6 @@ class WPDeveloper_Notice {
                 /**
                  * TODO: automatic maybe later setup with time.
                  */        
-                
 
                 if( $this->timestamp >= $current_notice_end ) {
                     $this->maybe_later( $current_notice );
@@ -161,6 +153,13 @@ class WPDeveloper_Notice {
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
                         if( $current_notice === 'upsale' ) {
+                            $upsale_args = $this->get_upsale_args();
+                            $plugins = get_plugins();
+                            $pkey = $upsale_args['slug'] . '/' . $upsale_args['file'];
+
+                            if( isset( $plugins[ $pkey ] ) ) {
+                                return;
+                            }
                             add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
                         } else {
                             add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -180,7 +179,6 @@ class WPDeveloper_Notice {
     private function maybe_later( $notice ){
         $options_data = $this->get_options_data();
         $options_data[ $this->plugin_name ]['notice_will_show'][ $notice ] = $this->makeTime( $this->timestamp, $this->maybe_later_time );
-        // $options_data[ $this->plugin_name ]['current_notice_start'][ $notice ] = $this->current_notice_start_time();
         $this->update_options_data( $options_data[ $this->plugin_name ] );
     }
     /**
@@ -307,6 +305,20 @@ class WPDeveloper_Notice {
         do_action( 'wpdeveloper_after_upsale_notice' );
         $this->upsale_button_script();
     }
+
+    private function get_upsale_args(){
+        return $this->upsale_args;
+    }
+
+    private function upsale_button(){
+        $upsale_args = $this->get_upsale_args();
+        $plugin_slug = ( isset( $upsale_args['slug'] )) ? $upsale_args['slug'] : '' ;
+        if( empty( $plugin_slug ) ) {
+            return;
+        }
+
+        echo '<button data-slug="'. $plugin_slug .'" id="plugin-install-core" class="button button-primary">'. __( 'Install Now!' ) .'</button>';
+    }
     /**
      * This methods is responsible for get notice image.
      *
@@ -332,6 +344,9 @@ class WPDeveloper_Notice {
         if( isset( $this->data['message'] ) && isset( $this->data['message'][ $msg_for ] ) ) {
             echo '<div class="wpdeveloper-notice-message">';
                 echo $this->data['message'][ $msg_for ];
+                if( $msg_for === 'upsale' ) {
+                    $this->upsale_button();
+                }
                 $this->dismissible_notice( $msg_for );
             echo '</div>';
         }
@@ -579,9 +594,50 @@ class WPDeveloper_Notice {
     }
     
     public function upsale_button_script(){
+        $upsale_args = $this->get_upsale_args();
+
+        $plugin_slug = ( isset( $upsale_args['slug'] ) ) ? $upsale_args['slug'] : '';
+        $plugin_file = ( isset( $upsale_args['file'] ) ) ? $upsale_args['file'] : '';
+        $page_slug = ( isset( $upsale_args['page_slug'] ) ) ? $upsale_args['page_slug'] : '';
+
         ?>
         <script type="text/javascript">
             jQuery(document).ready( function($) {
+                <?php if( ! empty( $plugin_slug ) && ! empty( $plugin_file ) ) : ?>
+                $('#plugin-install-core').on('click', function (e) {
+                    var self = $(this);
+                    e.preventDefault();
+                    self.addClass('install-now updating-message');
+                    self.text('<?php echo esc_js( 'Installing...' ); ?>');
+
+                    $.ajax({
+                        url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                        type: 'POST',
+                        data: {
+                            action: 'wpdeveloper_upsale_core_install',
+                            _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_core_install'); ?>',
+                            slug : '<?php echo $plugin_slug; ?>',
+                            file : '<?php echo $plugin_file; ?>'
+                        },
+                        success: function(response) {
+                            self.text('<?php echo esc_js( 'Installed' ); ?>');
+                            <?php if( ! empty( $page_slug ) ) : ?>
+                                window.location.href = '<?php echo admin_url( "admin.php?page={$page_slug}" ); ?>';
+                            <?php endif; ?>
+                        },
+                        error: function(error) {
+                            self.removeClass('install-now updating-message');
+                            alert( error );
+                        },
+                        complete: function() {
+                            self.attr('disabled', 'disabled');
+                            self.removeClass('install-now updating-message');
+                        }
+                    });
+                });
+
+                <?php endif; ?>
+
                 $('.wpdeveloper-upsale-notice').on('click', 'button.notice-dismiss', function (e) {
                     e.preventDefault();
                     $.ajax({
@@ -660,7 +716,7 @@ $notice->links = [
  * Message message for showing.
  */
 $notice->classes( 'upsale', 'error notice is-dismissible' );
-$notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free! <button id="wpsp-install-core" class="button button-primary">Install Now!</button>', 'essential-addons-elementor' ) .'</p>' );
+$notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free!', 'essential-addons-elementor' ) .'</p>' );
 
 /**
  * This is review message and thumbnail.
@@ -679,6 +735,12 @@ $notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
  * Notice will show again in 7 days
  */
 $notice->maybe_later_time = '7 Day';
+
+$notice->upsale_args = array(
+    'slug' => 'twitter-cards-meta',
+    // 'page_slug' => 'wp-schedule-posts',
+    'file' => 'twitter-cards-meta.php'
+);
 
 $notice->options_args = array(
     'notice_seen' => [
