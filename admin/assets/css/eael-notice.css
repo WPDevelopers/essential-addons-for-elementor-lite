@@ -73,3 +73,12 @@
 	left: 0;
 	top: -2px;
 }
+
+.wpdeveloper-notice-message {
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+}
+.wpdeveloper-notice-message + .notice-dismiss {
+	top: 5px;
+}
