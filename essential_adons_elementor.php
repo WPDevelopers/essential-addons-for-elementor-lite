@@ -542,3 +542,5 @@ function eael_deactivate() {
     delete_option('eael_maybe_later');
 }
 register_deactivation_hook(__FILE__, 'eael_deactivate');
+
+require_once dirname( __FILE__ ) . '/includes/class-wpdev-notices.php';
