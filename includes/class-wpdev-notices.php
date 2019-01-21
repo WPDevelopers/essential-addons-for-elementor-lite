@@ -123,30 +123,19 @@ class WPDeveloper_Notice {
 
     public function init(){
         add_action( 'activate_' . $this->plugin_name, array( $this, 'first_install_track' ) );
-        add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );        
-        // add_action( 'admin_init', array( $this, 'clicked' ) );
-
+        add_action( 'upgrader_process_complete', array( $this, 'upgrade_completed' ), 10, 2);
+        add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );
+        add_action( 'wp_ajax_wpdeveloper_upsale_notice_dissmiss', array( $this, 'upsale_notice_dissmiss' ) );
         add_action( 'wpdeveloper_before_notice', array( $this, 'before' ) );
         add_action( 'wpdeveloper_after_notice', array( $this, 'after' ) );
         add_action( 'wpdeveloper_before_upsale_notice', array( $this, 'before_upsale' ) );
         add_action( 'wpdeveloper_after_upsale_notice', array( $this, 'after' ) );
         add_action( 'wpdeveloper_notices', array( $this, 'content' ) );
-
         if( current_user_can( 'install_plugins' ) ) {
             $this->clicked();
             $current_notice = $this->next_notice();
             $deserve_notice = $this->deserve_notice( $current_notice );
             $options_data = $this->get_options_data();
-
-            if( isset( $this->options_args['notice_will_show']['upsale'] ) ) {
-                $upsale = $this->options_args['notice_will_show']['upsale'];
-                if( isset( $upsale['class'] ) && ! class_exists( $upsale['class'] ) ) {
-                    add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
-                }
-                if( isset( $upsale['function'] ) && ! class_exists( $upsale['function'] ) ) {
-                    add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
-                }
-            }
 
             $notice_time = isset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] ) 
                 ? $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] : $this->timestamp;
@@ -157,6 +146,7 @@ class WPDeveloper_Notice {
                  * TODO: automatic maybe later setup with time.
                  */        
                 
+
                 if( $this->timestamp >= $current_notice_end ) {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
@@ -170,7 +160,11 @@ class WPDeveloper_Notice {
 
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
-                        add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+                        if( $current_notice === 'upsale' ) {
+                            add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
+                        } else {
+                            add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+                        }
                     }
                 }
             }
@@ -311,7 +305,7 @@ class WPDeveloper_Notice {
             do_action('wpdeveloper_upsale_notice');
             $this->get_message( 'upsale' );
         do_action( 'wpdeveloper_after_upsale_notice' );
-        // $this->upsale_button_script();
+        $this->upsale_button_script();
     }
     /**
      * This methods is responsible for get notice image.
@@ -375,6 +369,8 @@ class WPDeveloper_Notice {
                 if( in_array( $notice, $notices[ $this->notice_id ][ $this->plugin_name ] ) ) {
                     return false;
                 }
+            } else {
+                return true;
             }
         }
     }
@@ -443,11 +439,12 @@ class WPDeveloper_Notice {
      *
      * @return void
      */
-    public function first_install_track(){
-        $args = array(
-            'time' => $this->timestamp,
-            // 'current_notice_start' => $this->timestamp,
-        );
+    public function first_install_track( $args = array() ){
+        if( empty( $args ) ) {
+            $args = array(
+                'time' => $this->timestamp,
+            );
+        }
         $options_data = $this->get_options_data();
         $args = wp_parse_args( $args, $this->get_args() );
 
@@ -461,14 +458,15 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function first_install_end(){
-        $args = array(
-            'first_install' => 'deactivated'
-        );
-        $options_data = $this->get_options_data();
-        if( isset( $options_data[ $this->plugin_name ] ) ) {
-            $args = wp_parse_args( $args, $options_data[ $this->plugin_name ] );
-            $this->update_options_data( $args );
-        }
+        // $args = array(
+        //     'first_install' => 'deactivated'
+        // );
+        // $options_data = $this->get_options_data();
+        // if( isset( $options_data[ $this->plugin_name ] ) ) {
+        //     $args = wp_parse_args( $args, $options_data[ $this->plugin_name ] );
+        //     $this->update_options_data( $args );
+        // }
+        delete_option( 'wpdeveloper_plugins_data' );
     }
     /**
      * Get all options from database!
@@ -533,39 +531,75 @@ class WPDeveloper_Notice {
         return false;
     }
 
+    public function upgrade_completed( $upgrader_object, $options ) {
+        // If an update has taken place and the updated type is plugins and the plugins element exists
+        if( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
+            // Iterate through the plugins being updated and check if ours is there
+            foreach( $options['plugins'] as $plugin ) {
+                if( $plugin == $this->plugin_name ) {
+                    $this->first_install_track( array(
+                        'update_time' => $this->timestamp
+                    ) );
+                }
+            }
+        }
+    }
+    /**
+     * This function is responsible for get_user_notices
+     * @return void
+     */
 	private function get_user_notices() {
-        // dump( get_current_user_id(),false );
 		return get_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, true );
+    }
+
+    public function upsale_notice_dissmiss(){
+        $dismiss = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
+
+        if( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'wpdeveloper_upsale_notice_dissmiss' ) ) {
+            return;
+        }
+
+        if( ! isset( $_POST['action'] ) || ( $_POST['action'] !== 'wpdeveloper_upsale_notice_dissmiss' ) ) {
+            return;
+        }
+        
+        if( $dismiss ) { 
+            $user_notices = $this->get_user_notices();
+            if( ! $user_notices ) {
+                $user_notices = [];
+            }
+            $user_notices[ $this->notice_id ][ $this->plugin_name ][] = 'upsale';
+
+            update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
+            echo 'success';
+        } else {
+            echo 'failed';
+        }
+        die();
     }
     
     public function upsale_button_script(){
         ?>
         <script type="text/javascript">
             jQuery(document).ready( function($) {
-                $('#wpsp-install-core').on('click', function (e) {
-                    var self = $(this);
+                $('.wpdeveloper-upsale-notice').on('click', 'button.notice-dismiss', function (e) {
                     e.preventDefault();
-                    self.addClass('install-now updating-message');
-                    self.text('<?php echo esc_js( 'Installing...' ); ?>');
-
                     $.ajax({
                         url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
                         type: 'post',
                         data: {
-                            action: 'wpdev_install_upsale_plugin',
-                            _wpnonce: '<?php echo wp_create_nonce('wpdev_install_upsale_plugin'); ?>'
+                            action: 'wpdeveloper_upsale_notice_dissmiss',
+                            _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_notice_dissmiss'); ?>',
+                            dismiss: true
                         },
                         success: function(response) {
-                            self.text('<?php echo esc_js( 'Installed' ); ?>');
-                            window.location.href = '<?php echo admin_url( 'admin.php?page=wp-scheduled-posts' ); ?>';
+                            console.log('Success fully saved!');
                         },
                         error: function(error) {
-                            self.removeClass('install-now updating-message');
-                            alert( error );
+                            console.log('Something went wrong!');
                         },
                         complete: function() {
-                            self.attr('disabled', 'disabled');
-                            self.removeClass('install-now updating-message');
+                            console.log('Its Complete.');
                         }
                     });
                 });
@@ -636,28 +670,24 @@ $notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ES
 
 /**
  * Current Notice End Time.
- * Notice will dismiss in 10 minutes if user does nothing.
+ * Notice will dismiss in 1 days if user does nothing.
  */
-$notice->cne_time = '10 Minutes';
+$notice->cne_time = '2 Day';
+$notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
 /**
  * Current Notice Maybe Later Time.
- * Notice will show again in 1 hour
+ * Notice will show again in 7 days
  */
-$notice->maybe_later_time = '1 Hour';
+$notice->maybe_later_time = '7 Day';
 
 $notice->options_args = array(
     'notice_seen' => [
         'review' => false,
+        'upsale' => false,
     ],
    'notice_will_show' => [
-        'review' => $notice->timestamp,
-        /**
-         * upsale notice will show immidietly if the class or function is not exists.
-         */
-        'upsale' => [
-            'class' => 'Wp_Scheduled_Posts', // if the class is not exists. 
-            // 'function' => 'Wp_Scheduled_Posts', // if the function is not exists. 
-        ]
+        'review' => $notice->makeTime( $notice->timestamp, '4 Day' ), // after 4 days
+        'upsale' => $notice->makeTime( $notice->timestamp, '2 Hour' ), // will be after 2 hours
    ]
 );
 
