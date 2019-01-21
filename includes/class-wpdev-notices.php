@@ -123,15 +123,14 @@ class WPDeveloper_Notice {
 
     public function init(){
         add_action( 'activate_' . $this->plugin_name, array( $this, 'first_install_track' ) );
-        add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );        
-        // add_action( 'admin_init', array( $this, 'clicked' ) );
+        add_action( 'upgrader_process_complete', array( $this, 'upgrade_completed' ), 10, 2);
+        add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );
         add_action( 'wp_ajax_wpdeveloper_upsale_notice_dissmiss', array( $this, 'upsale_notice_dissmiss' ) );
         add_action( 'wpdeveloper_before_notice', array( $this, 'before' ) );
         add_action( 'wpdeveloper_after_notice', array( $this, 'after' ) );
         add_action( 'wpdeveloper_before_upsale_notice', array( $this, 'before_upsale' ) );
         add_action( 'wpdeveloper_after_upsale_notice', array( $this, 'after' ) );
         add_action( 'wpdeveloper_notices', array( $this, 'content' ) );
-
         if( current_user_can( 'install_plugins' ) ) {
             $this->clicked();
             $current_notice = $this->next_notice();
@@ -147,6 +146,7 @@ class WPDeveloper_Notice {
                  * TODO: automatic maybe later setup with time.
                  */        
                 
+
                 if( $this->timestamp >= $current_notice_end ) {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
@@ -369,6 +369,8 @@ class WPDeveloper_Notice {
                 if( in_array( $notice, $notices[ $this->notice_id ][ $this->plugin_name ] ) ) {
                     return false;
                 }
+            } else {
+                return true;
             }
         }
     }
@@ -437,11 +439,12 @@ class WPDeveloper_Notice {
      *
      * @return void
      */
-    public function first_install_track(){
-        $args = array(
-            'time' => $this->timestamp,
-            // 'current_notice_start' => $this->timestamp,
-        );
+    public function first_install_track( $args = array() ){
+        if( empty( $args ) ) {
+            $args = array(
+                'time' => $this->timestamp,
+            );
+        }
         $options_data = $this->get_options_data();
         $args = wp_parse_args( $args, $this->get_args() );
 
@@ -455,10 +458,10 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function first_install_end(){
-        $args = array(
-            'first_install' => 'deactivated'
-        );
-        $options_data = $this->get_options_data();
+        // $args = array(
+        //     'first_install' => 'deactivated'
+        // );
+        // $options_data = $this->get_options_data();
         // if( isset( $options_data[ $this->plugin_name ] ) ) {
         //     $args = wp_parse_args( $args, $options_data[ $this->plugin_name ] );
         //     $this->update_options_data( $args );
@@ -528,6 +531,23 @@ class WPDeveloper_Notice {
         return false;
     }
 
+    public function upgrade_completed( $upgrader_object, $options ) {
+        // If an update has taken place and the updated type is plugins and the plugins element exists
+        if( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
+            // Iterate through the plugins being updated and check if ours is there
+            foreach( $options['plugins'] as $plugin ) {
+                if( $plugin == $this->plugin_name ) {
+                    $this->first_install_track( array(
+                        'update_time' => $this->timestamp
+                    ) );
+                }
+            }
+        }
+    }
+    /**
+     * This function is responsible for get_user_notices
+     * @return void
+     */
 	private function get_user_notices() {
 		return get_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, true );
     }
@@ -548,7 +568,7 @@ class WPDeveloper_Notice {
             if( ! $user_notices ) {
                 $user_notices = [];
             }
-            $user_notices[ $this->notice_id ][ $this->plugin_name ][] = $clicked_from;
+            $user_notices[ $this->notice_id ][ $this->plugin_name ][] = 'upsale';
 
             update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
             echo 'success';
@@ -650,13 +670,13 @@ $notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ES
 
 /**
  * Current Notice End Time.
- * Notice will dismiss in 10 minutes if user does nothing.
+ * Notice will dismiss in 1 days if user does nothing.
  */
 $notice->cne_time = '1 Day';
 $notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
 /**
  * Current Notice Maybe Later Time.
- * Notice will show again in 1 hour
+ * Notice will show again in 7 days
  */
 $notice->maybe_later_time = '7 Day';
 
