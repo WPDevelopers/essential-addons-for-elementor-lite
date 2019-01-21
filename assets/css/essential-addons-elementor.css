@@ -7371,3 +7371,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
             transform: none;
   }
 }
+.eael-particles-section .elementor-section .elementor-container {
+  z-index: 99;
+}
