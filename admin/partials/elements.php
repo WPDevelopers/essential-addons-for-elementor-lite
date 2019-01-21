@@ -346,6 +346,27 @@
                         <?php _e( 'Offcanvas Content', 'essential-addons-elementor' ) ?>
                     </p>
                 </div>
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="advanced-menu" name="advanced-menu" disabled>
+                    <label for="advanced-menu" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+                    <p class="eael-el-title">
+                        <?php _e( 'Advanced Menu', 'essential-addons-elementor' ) ?>
+                    </p>
+                </div>
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="image-scroller" name="image-scroller" disabled>
+                    <label for="image-scroller" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+                    <p class="eael-el-title">
+                        <?php _e( 'Image Scroller', 'essential-addons-elementor' ) ?>
+                    </p>
+                </div>
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="woo-collections" name="woo-collections" disabled>
+                    <label for="woo-collections" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+                    <p class="eael-el-title">
+                        <?php _e( 'WooCommerce Product Collections', 'essential-addons-elementor' ) ?>
+                    </p>
+                </div>
             </div><!--./checkbox-container-->
             <div class="eael-save-btn-wrap">
                 <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>

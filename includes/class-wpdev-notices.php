@@ -660,7 +660,7 @@ $notice->links = [
  * Message message for showing.
  */
 $notice->classes( 'upsale', 'error notice is-dismissible' );
-$notice->message( 'upsale', '<p><strong>WP Scheduled Posts Pro</strong> requires <strong>WP Scheduled Posts</strong> core plugin to be installed. Please get the plugin now! <button id="wpsp-install-core" class="button button-primary">Install Now!</button></p>' );
+$notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free! <button id="wpsp-install-core" class="button button-primary">Install Now!</button>', 'essential-addons-elementor' ) .'</p>' );
 
 /**
  * This is review message and thumbnail.
