@@ -28,6 +28,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/eael-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
+require_once ESSENTIAL_ADDONS_EL_PATH .'includes/extensions.php';
 
 /**
  * This function will return true for all activated modules
@@ -36,8 +37,8 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar' ];
-
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles' ];
+   
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
    $eael_new_settings      = array_diff_key( $eael_default_settings, $eael_get_settings );
@@ -50,6 +51,20 @@ function eael_activated_modules() {
    return $eael_get_settings = get_option( 'eael_save_settings', $eael_default_settings );
 
 }
+
+/**
+ * Load acivate or deactivate Modules
+ *
+ * @since v1.0.0
+ */
+function add_eael_extensions() {
+	$is_component_active = eael_activated_modules();
+
+	if( $is_component_active['section-particles'] ) {
+		require_once ESSENTIAL_ADDONS_EL_PATH .'extensions/eael-particle-section/eael-particle-section.php';
+	}
+}
+add_eael_extensions();
 
 /**
  * Acivate or Deactivate Modules
@@ -227,7 +242,16 @@ function essential_addons_el_enqueue(){
     }
     
     if( $is_component_active['progress-bar'] ) {
-		  wp_enqueue_script('essential_addons_elementor-eael-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
+		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/loading-bar.min.js', array('jquery'),'1.0', true);
+   }
+   if( $is_component_active['section-particles'] ) {
+		wp_enqueue_script(
+         'particles-js', ESSENTIAL_ADDONS_EL_URL.'assets/js/particles.js',
+         ['jquery'], '1.0', true
+      );
+
+		$preset_themes = require ESSENTIAL_ADDONS_EL_PATH.'extensions/eael-particle-section/particle-themes.php';
+		wp_localize_script( 'particles-js', 'ParticleThemesData', $preset_themes );
 	}
 
 }
@@ -346,175 +370,4 @@ function eael_init() {
    }
 }
 add_action( 'plugins_loaded', 'eael_init' );
-
-/**
- * Admin Notice
- *
- * @since v1.0.0
- */
-function eael_admin_notice() {
-  if ( current_user_can( 'install_plugins' ) ) {
-    global $current_user ;
-    $user_id = $current_user->ID;
-    /* Check that the user hasn't already clicked to ignore the message */
-    if ( ! get_user_meta($user_id, 'eael_ignore_notice287') ) {
-      echo '<div class="eael-admin-notice updated" style="display: flex; align-items: center; padding-left: 0; border-left-color: #EF4B53"><p style="width: 32px;">';
-      echo '<img style="width: 100%; display: block;"  src="' . plugins_url( '/', __FILE__ ).'admin/assets/images/icon-christmas-gift.svg'. '" ></p><p> ';
-      printf(__('<strong>Make XMas Much Merrier.</strong> Use the coupon code <strong>Christmas2018</strong> to redeem a <strong>40&#37; </strong> discount on <strong>Essential Addons for Elementor Unlimited</strong>. <a href="https://wpdeveloper.net/in/ea-christmas-deal" target="_blank" style="text-decoration: none;"><span class="dashicons dashicons-smiley" style="margin-left: 10px;"></span> Apply Coupon</a>
-        <a href="%1$s" style="text-decoration: none; margin-left: 10px;"><span class="dashicons dashicons-dismiss"></span> I\'m good with free version</a>'),  admin_url( 'admin.php?page=eael-settings&eael_nag_ignore=0' ));
-      echo "</p></div>";
-    }
-  }
-}
-add_action('admin_notices', 'eael_admin_notice');
-
-
-/**
- * Nag Ignore
- */
-function eael_nag_ignore() {
-  global $current_user;
-        $user_id = $current_user->ID;
-        /* If user clicks to ignore the notice, add that to their user meta */
-        if ( isset($_GET['eael_nag_ignore']) && '0' == $_GET['eael_nag_ignore'] ) {
-             add_user_meta($user_id, 'eael_ignore_notice287', 'true', true);
-  }
-}
-add_action('admin_init', 'eael_nag_ignore');
-
-/**
- * @review_dismiss()
- * @review_pending()
- * @eael_review_notice_message()
- * Make all the above functions working.
- */
-function eael_review_notice(){
-
-    review_dismiss();
-    review_pending();
-
-    $activation_time 	= get_site_option( 'eael_active_time' );
-    $review_dismissal	= get_site_option( 'eael_review_dismiss' );
-    $maybe_later	    = get_site_option( 'eael_maybe_later' );
-
-    if ( 'yes' == $review_dismissal ) {
-        return;
-    }
-
-    if ( ! $activation_time ) {
-        add_site_option( 'eael_active_time', time() );
-    }
-    
-    $daysinseconds = 259200; // 3 Days in seconds.
-    if( 'yes' == $maybe_later ) {
-        $daysinseconds = 604800 ; // 7 Days in seconds.
-    }
-
-    if ( time() - $activation_time > $daysinseconds ) {
-        add_action( 'admin_notices' , 'eael_review_notice_message' );
-    }
-
-}
-add_action( 'admin_init', 'eael_review_notice' );
-
-/**
- * For the notice preview.
- */
-function eael_review_notice_message(){
-    $scheme      = (parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY )) ? '&' : '?';
-    $url         = $_SERVER['REQUEST_URI'] . $scheme . 'eael_review_dismiss=yes';
-    $dismiss_url = wp_nonce_url( $url, 'eael-review-nonce' );
-
-    $_later_link = $_SERVER['REQUEST_URI'] . $scheme . 'eael_review_later=yes';
-    $later_url   = wp_nonce_url( $_later_link, 'eael-review-nonce' );
-    ?>
-    
-    <div class="eael-review-notice">
-        <div class="eael-review-thumbnail">
-            <img src="<?php echo plugins_url( 'admin/assets/images/ea-logo.svg', __FILE__ ) ?>" alt="">
-        </div>
-        <div class="eael-review-text">
-            <p><?php _e( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) ?></p>
-            <ul class="eael-review-ul">
-                <li>
-                    <a href="https://wpdeveloper.net/review-essential-addons-elementor" target="_blank">
-                        <span class="dashicons dashicons-external"></span>
-                        <?php _e( 'Ok, you deserve it!', 'essential-addons-elementor' ) ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo $dismiss_url ?>">
-                        <span class="dashicons dashicons-smiley"></span>
-                        <?php _e( 'I already did', 'essential-addons-elementor' ) ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo $later_url ?>">
-                        <span class="dashicons dashicons-calendar-alt"></span>
-                        <?php _e( 'Maybe Later', 'essential-addons-elementor' ) ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://wpdeveloper.net/support/" target="_blank">
-                        <span class="dashicons dashicons-sos"></span>
-                        <?php _e( 'I need help!', 'essential-addons-elementor' ) ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo $dismiss_url ?>">
-                        <span class="dashicons dashicons-dismiss"></span>
-                        <?php _e( 'Never show again', 'essential-addons-elementor' ) ?>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    
-    <?php
-}
-
-/**
- * For Dismiss! 
- */
-function review_dismiss(){
-
-    if ( ! is_admin() ||
-        ! current_user_can( 'manage_options' ) ||
-        ! isset( $_GET['_wpnonce'] ) ||
-        ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'eael-review-nonce' ) ||
-        ! isset( $_GET['eael_review_dismiss'] ) ) {
-
-        return;
-    }
-
-    add_site_option( 'eael_review_dismiss', 'yes' );
-    
-}
-
-/**
- * For Maybe Later Update.
- */
-function review_pending() {
-
-    if ( ! is_admin() ||
-        ! current_user_can( 'manage_options' ) ||
-        ! isset( $_GET['_wpnonce'] ) ||
-        ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'eael-review-nonce' ) ||
-        ! isset( $_GET['eael_review_later'] ) ) {
-
-        return;
-    }
-    // Reset Time to current time.
-    update_site_option( 'eael_active_time', time() );
-    update_site_option( 'eael_maybe_later', 'yes' );
-
-}
-
-/**
- * Remove Reviews Metadata on plugin Deactivation.
- */
-function eael_deactivate() {
-    delete_option('eael_active_time');
-    delete_option('eael_maybe_later');
-}
-register_deactivation_hook(__FILE__, 'eael_deactivate');
+require_once dirname( __FILE__ ) . '/includes/class-wpdev-notices.php';
