@@ -390,6 +390,14 @@ textarea.eael-form-control {
 	font-weight: bold;
 }
 
+.wpdeveloper-notice-message {
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+}
+.wpdeveloper-notice-message + .notice-dismiss {
+	top: 5px;
+}
 .essential-addons-community-link {
 	background-color: #475A96;
 	margin: 15px 0;
