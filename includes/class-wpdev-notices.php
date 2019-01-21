@@ -433,7 +433,7 @@ class WPDeveloper_Notice {
                             $output .= '<a '. $class .' href="'. esc_url( $link ) .'" '. $target .'>';
                         }
                         if( isset( $link_value['icon_class'] ) ) {
-                            $output .= '<span class="dashicons dashicons-external"></span>';
+                            $output .= '<span class="'. $link_value['icon_class'] .'"></span>';
                         }
                         if( isset( $link_value['icon_img'] ) ) {
                             $output .= '<img src="'. $link_value['icon_img'] .'" />';
