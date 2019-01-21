@@ -330,7 +330,6 @@ textarea.eael-form-control {
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
-}
 
 @-webkit-keyframes rotate {
     from {-webkit-transform: rotate(0deg);}
