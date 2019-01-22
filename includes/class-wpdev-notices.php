@@ -217,7 +217,6 @@ class WPDeveloper_Notice {
                 case 'upsale' : 
                     $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
                     break;
-
             }
         
             if( isset( $later ) && $later == true ) { 
@@ -229,13 +228,39 @@ class WPDeveloper_Notice {
                     $user_notices = [];
                 }
                 $user_notices[ $this->notice_id ][ $this->plugin_name ][] = $clicked_from;
-
+                unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] );
                 update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
             }
             $this->update_options_data( $options_data[ $this->plugin_name ] );
-            wp_safe_redirect( $this->redirect_url );
+            /**
+             * TODO: will update later.
+             */
+            wp_safe_redirect( $this->redirect_to() );
         }
     }
+    /**
+     * For Redirecting Current Page without Arguments!
+     *
+     * @return void
+     */
+    private function redirect_to(){
+        $request_uri  = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
+        $query_string = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
+        parse_str( $query_string, $current_url );
+
+        $unset_array = array( 'dismiss', 'notice_action', '_wpnonce', 'later' );
+
+        foreach( $unset_array as $value ) {
+            if( isset( $current_url[ $value ] ) ) {
+                unset( $current_url[ $value ] );
+            }
+        }
+
+        $current_url = http_build_query($current_url);
+        $redirect_url = $request_uri . '?' . $current_url;
+        return $redirect_url;
+    }
+
     /**
      * Before Notice
      * @return void
@@ -388,7 +413,6 @@ class WPDeveloper_Notice {
         } else {
             $return_notice = $options_data[ $this->plugin_name ]['notice_will_show'];
         }
-
         $deserve_notice_timestamp = INF;
         $deserve_notice = '';
         foreach( $return_notice as $notice => $timestamp ) {
@@ -408,6 +432,8 @@ class WPDeveloper_Notice {
             if( isset( $notices[ $this->notice_id ] ) && isset( $notices[ $this->notice_id ][ $this->plugin_name ] ) ) {
                 if( in_array( $notice, $notices[ $this->notice_id ][ $this->plugin_name ] ) ) {
                     return false;
+                } else {
+                    return true;
                 }
             } else {
                 return true;
@@ -755,7 +781,6 @@ $notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ES
  * Notice will dismiss in 1 days if user does nothing.
  */
 $notice->cne_time = '2 Day';
-$notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
 /**
  * Current Notice Maybe Later Time.
  * Notice will show again in 7 days
