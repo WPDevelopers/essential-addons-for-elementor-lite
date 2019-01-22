@@ -6,7 +6,6 @@ class WPDeveloper_Notice {
      * @var array
      */
     const ADMIN_UPDATE_NOTICE_KEY = 'wpdeveloper_notices_seen';
-    public $redirect_url = '/wp-admin';
     /**
      * All Data
      *
