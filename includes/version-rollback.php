@@ -5,6 +5,7 @@ if( !defined( 'ABSPATH' ) ) exit; //Exit if accessed directly
 /**
  * EAEL version rollback class
  * 
+ * 
  * @since 2.8.5
  */
 class EAEL_Version_Rollback {
