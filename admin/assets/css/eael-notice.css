@@ -85,3 +85,13 @@
 .wpdeveloper-upsale-notice #plugin-install-core {
 	margin-left: 10px;
 }
+.notice.notice-has-thumbnail {
+	padding-left: 0px;
+}
+
+.wpdeveloper-upsale-notice {
+	display: flex;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-thumbnail {
+	padding: 0;
+}
