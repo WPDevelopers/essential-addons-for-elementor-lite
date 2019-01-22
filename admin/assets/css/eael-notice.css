@@ -82,3 +82,14 @@
 .wpdeveloper-notice-message + .notice-dismiss {
 	top: 5px;
 }
+
+.notice.notice-has-thumbnail {
+	padding-left: 0px;
+}
+
+.wpdeveloper-upsale-notice {
+	display: flex;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-thumbnail {
+	padding: 0;
+}
