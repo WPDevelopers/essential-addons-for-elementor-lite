@@ -249,6 +249,10 @@ class WPDeveloper_Notice {
             }
         }
 
+        if( $this->has_thumbnail( $current_notice ) ) {
+            $classes .= 'notice-has-thumbnail';
+        }
+
         echo '<div class="'. $classes .' wpdeveloper-'. $current_notice .'-notice">';
     }
     /**
@@ -296,11 +300,16 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function before_upsale(){
-        echo '<div class="error notice is-dismissible wpdeveloper-upsale-notice">';
+        $classes = '';
+        if( $this->has_thumbnail('upsale') ) {
+            $classes = 'notice-has-thumbnail';
+        }
+        echo '<div class="error notice is-dismissible wpdeveloper-upsale-notice '. $classes .'">';
     }
     public function upsale_notice(){
         do_action( 'wpdeveloper_before_upsale_notice' );
             do_action('wpdeveloper_upsale_notice');
+            $this->get_thumbnail( 'upsale' );
             $this->get_message( 'upsale' );
         do_action( 'wpdeveloper_after_upsale_notice' );
         $this->upsale_button_script();
@@ -334,6 +343,22 @@ class WPDeveloper_Notice {
         }
         echo $output;
     }
+    /**
+     * Has Thumbnail Check
+     *
+     * @param string $msg_for
+     * @return boolean
+     */
+    protected function has_thumbnail( $msg_for = '' ){
+        if( empty( $msg_for ) ) {
+            return false;
+        }
+        if( isset( $this->data['thumbnail'] ) && isset( $this->data['thumbnail'][ $msg_for ] ) ) {
+           return true;
+        }
+        return false;
+    }
+
     /**
      * This method is responsible for get messages.
      *
@@ -717,6 +742,7 @@ $notice->links = [
  */
 $notice->classes( 'upsale', 'error notice is-dismissible' );
 $notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free!', 'essential-addons-elementor' ) .'</p>' );
+$notice->thumbnail( 'upsale', plugins_url( 'admin/assets/images/ea-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
 
 /**
  * This is review message and thumbnail.
