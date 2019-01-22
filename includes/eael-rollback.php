@@ -121,7 +121,6 @@ if( ! class_exists('EAEL_Rollback') ) {
          * @access private
          */
         private function setup_plugin_vars() {
-            $this->set_svn_versions_data($svn_tags);
             $this->versions_select('plugin');
         }
 
@@ -141,33 +140,6 @@ if( ! class_exists('EAEL_Rollback') ) {
                 $this->current_version = $this->plugins_data['Version'];
                 return $this->plugins_data;
             }
-        }
-
-        /**
-         * Set SVN Version Data
-         * 
-         * @param $html
-         * 
-         * @return array|bool
-         */
-        public function set_svn_versions_data( $html ) {
-            if( ! $html ) return false;
-
-            $DOM = new DOMDocument;
-            $DOM->loadHTML( $html );
-
-            $versions = [];
-            $items = $DOM->getElementsByTagName('a');
-
-            foreach( $items as $item ) {
-                $href = str_replace( '/', '', $item->getAttribute('href') ); // Remove trailing slash
-
-                if( strpos( $href, 'http' ) === false && '..' !== $href ) {
-                    $versions[] = $href;
-                }
-            }
-
-            return $versions;
         }
 
         /**
