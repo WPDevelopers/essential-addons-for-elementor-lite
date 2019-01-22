@@ -74,15 +74,17 @@
 	top: -2px;
 }
 
-.wpdeveloper-notice-message {
+.wpdeveloper-upsale-notice .wpdeveloper-notice-message {
 	display: flex;
 	align-items: center;
 	padding: 10px 0;
 }
-.wpdeveloper-notice-message + .notice-dismiss {
-	top: 5px;
+.wpdeveloper-upsale-notice .wpdeveloper-notice-message + .notice-dismiss {
+	top: 10px;
 }
-
+.wpdeveloper-upsale-notice #plugin-install-core {
+	margin-left: 10px;
+}
 .notice.notice-has-thumbnail {
 	padding-left: 0px;
 }
