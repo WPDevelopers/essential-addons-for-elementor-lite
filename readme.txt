@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.0.3
 Requires PHP: 5.4
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -168,6 +168,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.9.1 =
+
+- Fixed: Conflict with wp_mail function
 
 = 2.9.0 =
 
