@@ -103,7 +103,7 @@ class WPDeveloper_Notice {
         add_action( 'activate_' . $this->plugin_name, array( $this, 'first_install_track' ) );
         add_action( 'upgrader_process_complete', array( $this, 'upgrade_completed' ), 10, 2);
         add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );
-        add_action( 'admin_init', array( $this, 'hooks' ) );
+        add_action( 'init', array( $this, 'hooks' ) );
     }
     /**
      * All Hooks
@@ -520,6 +520,7 @@ class WPDeveloper_Notice {
                 'time' => $this->timestamp,
             );
         }
+
         $options_data = $this->get_options_data();
         $args = wp_parse_args( $args, $this->get_args() );
 
@@ -796,9 +797,9 @@ $notice->links = [
  * classes for wrapper, 
  * Message message for showing.
  */
-$notice->classes( 'upsale', 'error notice is-dismissible' );
+$notice->classes( 'upsale', 'notice is-dismissible' );
 $notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free!', 'essential-addons-elementor' ) .'</p>' );
-$notice->thumbnail( 'upsale', plugins_url( 'admin/assets/images/ea-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
+$notice->thumbnail( 'upsale', plugins_url( 'admin/assets/images/wpsp-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
 
 /**
  * This is review message and thumbnail.
@@ -808,9 +809,9 @@ $notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ES
 
 /**
  * Current Notice End Time.
- * Notice will dismiss in 1 days if user does nothing.
+ * Notice will dismiss in 3 days if user does nothing.
  */
-$notice->cne_time = '2 Day';
+$notice->cne_time = '3 Day';
 /**
  * Current Notice Maybe Later Time.
  * Notice will show again in 7 days
@@ -818,9 +819,9 @@ $notice->cne_time = '2 Day';
 $notice->maybe_later_time = '7 Day';
 
 $notice->upsale_args = array(
-    'slug' => 'twitter-cards-meta',
-    // 'page_slug' => 'wp-schedule-posts',
-    'file' => 'twitter-cards-meta.php'
+    'slug' => 'wp-scheduled-posts',
+    'page_slug' => 'wpsp-schedule-calendar',
+    'file' => 'wp-scheduled-posts.php'
 );
 
 $notice->text_domain = 'essential-addons-elementor';
