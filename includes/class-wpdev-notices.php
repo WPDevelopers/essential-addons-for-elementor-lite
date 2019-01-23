@@ -611,6 +611,17 @@ class WPDeveloper_Notice {
         return false;
     }
     /**
+     * Resetting data on update.
+     * @return void
+     */
+    private function set_args_on_update(){
+        $args = $this->get_args();
+        $options_data = $this->get_options_data();
+        $set_data = $options_data[ $this->plugin_name ];
+        $args = wp_parse_args( $set_data, $args );
+        $this->update_options_data( $args );
+    }
+    /**
      * When upgrade is complete. it will fired.
      * @param  WP_Upgrader $upgrader_object
      * @param array $options
@@ -618,14 +629,17 @@ class WPDeveloper_Notice {
      */
     public function upgrade_completed( $upgrader_object, $options ) {
         // If an update has taken place and the updated type is plugins and the plugins element exists
-        if( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
-            // Iterate through the plugins being updated and check if ours is there
-            foreach( $options['plugins'] as $plugin ) {
-                if( $plugin == $this->plugin_name ) {
-                    $this->first_install_track( array(
-                        'update_time' => $this->timestamp
-                    ) );
+        if( isset( $options['action'] ) && $options['action'] == 'update' && $options['type'] == 'plugin' ) {
+            if( ! isset( $options['plugin'] ) && isset( $options['plugins'] ) ) {
+                foreach( $options['plugins'] as $plugin ) {
+                    if( $plugin == $this->plugin_name ) {
+                        $this->set_args_on_update();
+                    }
                 }
+            }
+
+            if( isset( $options['plugin'] ) && $options['plugin'] == $this->plugin_name ) {
+                $this->set_args_on_update();
             }
         }
     }
