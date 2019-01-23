@@ -24,14 +24,6 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
             add_action( 'wp_ajax_wpdeveloper_upsale_core_install', array( $this, 'core_install' ) );
         }
         /**
-         * Show the plugin installation notice
-         *
-         * @return void
-         */
-        
-
-
-        /**
          * Fail if plugin installtion/activation fails
          *
          * @param  Object $thing
@@ -45,7 +37,7 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
         }
 
         /**
-         * Install WPSP
+         * Install Upsale Plugin
          *
          * @return void
          */
@@ -68,7 +60,6 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
 
             wp_send_json_success();
         }
-
         /**
          * Install and activate a plugin
          *
