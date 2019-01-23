@@ -100,8 +100,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function init(){
-        add_action( 'activate_' . $this->plugin_name, array( $this, 'first_install_track' ) );
-        add_action( 'upgrader_process_complete', array( $this, 'upgrade_completed' ), 10, 2);
+        add_action( 'init', array( $this, 'first_install_track') );
         add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );
         add_action( 'init', array( $this, 'hooks' ) );
     }
@@ -515,16 +514,19 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function first_install_track( $args = array() ){
+        if( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
         if( empty( $args ) ) {
             $args = array(
                 'time' => $this->timestamp,
+                'version' => $this->version,
             );
         }
-
         $options_data = $this->get_options_data();
         $args = wp_parse_args( $args, $this->get_args() );
-
-        if( ! isset( $options_data[ $this->plugin_name ] ) ) {
+        if( ! isset( $options_data[ $this->plugin_name ] ) 
+            || ( isset( $options_data[ $this->plugin_name ]['version'] ) && version_compare( $options_data[ $this->plugin_name ]['version'], $this->version, '!=' ) ) ) {
             $this->update_options_data( $args );
         }
     }
@@ -655,16 +657,16 @@ class WPDeveloper_Notice {
      * the dismiss button clicked in upsale notice.
      */
     public function upsale_notice_dissmiss(){
-        $dismiss = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
-
+        
         if( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'wpdeveloper_upsale_notice_dissmiss' ) ) {
             return;
         }
-
+        
         if( ! isset( $_POST['action'] ) || ( $_POST['action'] !== 'wpdeveloper_upsale_notice_dissmiss' ) ) {
             return;
         }
         
+        $dismiss = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
         if( $dismiss ) { 
             $user_notices = $this->get_user_notices();
             if( ! $user_notices ) {
