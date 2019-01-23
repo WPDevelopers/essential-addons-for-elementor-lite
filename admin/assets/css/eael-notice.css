@@ -80,7 +80,7 @@
 	padding: 10px 0;
 }
 .wpdeveloper-upsale-notice .wpdeveloper-notice-message + .notice-dismiss {
-	top: 10px;
+	top: 18px;
 }
 .wpdeveloper-upsale-notice #plugin-install-core {
 	margin-left: 10px;
@@ -94,4 +94,5 @@
 }
 .wpdeveloper-upsale-notice .wpdeveloper-notice-thumbnail {
 	padding: 0;
+	width: 80px;
 }
