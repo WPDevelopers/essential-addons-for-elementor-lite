@@ -740,9 +740,9 @@ $notice->links = [
  * classes for wrapper, 
  * Message message for showing.
  */
-$notice->classes( 'upsale', 'error notice is-dismissible' );
+$notice->classes( 'upsale', 'notice is-dismissible' );
 $notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free!', 'essential-addons-elementor' ) .'</p>' );
-$notice->thumbnail( 'upsale', plugins_url( 'admin/assets/images/ea-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
+$notice->thumbnail( 'upsale', plugins_url( 'admin/assets/images/wpsp-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
 
 /**
  * This is review message and thumbnail.
@@ -754,7 +754,7 @@ $notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ES
  * Current Notice End Time.
  * Notice will dismiss in 1 days if user does nothing.
  */
-$notice->cne_time = '2 Day';
+$notice->cne_time = '3 Day';
 $notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
 /**
  * Current Notice Maybe Later Time.
@@ -763,9 +763,9 @@ $notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
 $notice->maybe_later_time = '7 Day';
 
 $notice->upsale_args = array(
-    'slug' => 'twitter-cards-meta',
-    // 'page_slug' => 'wp-schedule-posts',
-    'file' => 'twitter-cards-meta.php'
+    'slug' => 'wp-scheduled-posts',
+    'page_slug' => 'wpsp-schedule-calendar',
+    'file' => 'wp-scheduled-posts.php'
 );
 
 $notice->options_args = array(
