@@ -602,3 +602,6 @@ textarea.eael-form-control {
 #eael_plugins_versions {
 	height: 36px;
 }
+.eael-notice-text {
+	padding-left: 10px;
+}
