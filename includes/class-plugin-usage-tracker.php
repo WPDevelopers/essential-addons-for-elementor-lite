@@ -85,7 +85,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			// add_action( 'admin_init', array( $this, 'do_tracking' ) );
 			 
 			// Display the admin notice on activation
-			add_action( 'admin_notices', array( $this, 'optin_notice' ) );
+			add_action( 'wpdeveloper_notices', array( $this, 'optin_notice' ) );
 			add_action( 'admin_notices', array( $this, 'marketing_notice' ) );
 
 			// Deactivation
@@ -623,7 +623,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				}
 				// And we allow you to filter the text anyway
 				$notice_text = apply_filters( 'wisdom_notice_text_' . esc_attr( $this->plugin_name ), $notice_text ); ?>
-							
+					
 				<div class="notice notice-info updated put-dismiss-notice">
 					<p><?php echo __( $notice_text ); ?></p>
 					<div class="eael-insights-data" style="display: none;">
@@ -641,9 +641,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				</div>
 			<?php
 			}
-			
 		}
-		
 		/**
 		 * Display the marketing notice to users if enabled
 		 * Only displays after the user has opted in to tracking
