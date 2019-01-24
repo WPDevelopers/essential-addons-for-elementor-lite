@@ -74,6 +74,9 @@
 	top: -2px;
 }
 
+.wpdeveloper-notice-message {
+	padding: 10px 0;
+}
 .wpdeveloper-upsale-notice .wpdeveloper-notice-message {
 	display: flex;
 	align-items: center;
