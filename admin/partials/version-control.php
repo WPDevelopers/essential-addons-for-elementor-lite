@@ -44,7 +44,7 @@
                                 </g>
                                 </svg>
                             </div>
-                            <h5 class="eael-admin-title">Warning: Please backup your database before making the rollback.</h5>
+                            <p class="eael-notice-text">Usually you should not loose any data on the rollback process. But it's always good to have a backup of your database.</p>
                         </div>
                     </div>
                 </div>
