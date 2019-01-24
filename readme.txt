@@ -75,7 +75,7 @@ Extensions:
 1. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
 
 
-### More elements (28+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (30+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 1. [Post Block (Flex)](https://essential-addons.com/elementor/post-block/) - Display your blog posts with variety of styles with the power of modern CSS Flexbox
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
