@@ -21,13 +21,6 @@ if( ! class_exists('EAEL_Rollback') ) {
         private static $instance;
 
         /**
-         * Plugin repo url.
-         * 
-         * @var string
-         */
-        public $plugins_repo = 'http://plugins.svn.wordpress.org';
-
-        /**
 		 * Plugin file.
 		 *
 		 * @var string
@@ -47,6 +40,9 @@ if( ! class_exists('EAEL_Rollback') ) {
 		 * @var array
 		 */
 		public $versions = [
+            '2.9.1',
+            '2.9.0',
+            '2.8.7',
             '2.8.6',
             '2.8.5',
             '2.8.4',
@@ -128,8 +124,6 @@ if( ! class_exists('EAEL_Rollback') ) {
          * @access private
          */
         private function setup_plugin_vars() {
-            $svn_tags = $this->get_svn_tags();
-            $this->set_svn_versions_data($svn_tags);
             $this->versions_select('plugin');
         }
 
@@ -149,55 +143,6 @@ if( ! class_exists('EAEL_Rollback') ) {
                 $this->current_version = $this->plugins_data['Version'];
                 return $this->plugins_data;
             }
-        }
-
-        /**
-         * Get Subversion Tags
-         * 
-         * cURL wp.org repo to get the proper tags
-         * 
-         * @param $type
-         * @param $slug
-         * @return null|string
-         */
-        public function get_svn_tags() {
-            $url = $this->plugins_repo . '/' . $this->plugin_slug . '/tags/';
-
-            $response = wp_remote_get($url);
-
-            // If we have an error
-            if( wp_remote_retrieve_response_code( $response ) !== 200) return null;
-
-            // Return response body
-            return wp_remote_retrieve_body( $response );
-        }
-
-        /**
-         * Set SVN Version Data
-         * 
-         * @param $html
-         * 
-         * @return array|bool
-         */
-        public function set_svn_versions_data( $html ) {
-            if( ! $html ) return false;
-
-            $DOM = new DOMDocument;
-            $DOM->loadHTML( $html );
-
-            $versions = [];
-            $items = $DOM->getElementsByTagName('a');
-
-            foreach( $items as $item ) {
-                $href = str_replace( '/', '', $item->getAttribute('href') ); // Remove trailing slash
-
-                if( strpos( $href, 'http' ) === false && '..' !== $href ) {
-                    $versions[] = $href;
-                }
-            }
-
-            // $this->versions = array_reverse( $versions );
-            return $versions;
         }
 
         /**
@@ -232,16 +177,6 @@ if( ! class_exists('EAEL_Rollback') ) {
             $vh .= '</select>';
 
             return $vh;
-        }
-
-
-        /**
-         * Plugin Action Link
-         * 
-         * Adds a rollback button into the eael version control tab with appropriate query strings.
-         */
-        public function eael_plugin_upgrade_confirmation() {
-            
         }
 
 

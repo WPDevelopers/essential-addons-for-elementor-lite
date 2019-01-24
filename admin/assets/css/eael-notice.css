@@ -73,3 +73,29 @@
 	left: 0;
 	top: -2px;
 }
+
+.wpdeveloper-notice-message {
+	padding: 10px 0;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-message {
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-message + .notice-dismiss {
+	top: 18px;
+}
+.wpdeveloper-upsale-notice #plugin-install-core {
+	margin-left: 10px;
+}
+.notice.notice-has-thumbnail {
+	padding-left: 0px;
+}
+
+.wpdeveloper-upsale-notice {
+	display: flex;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-thumbnail {
+	padding: 0;
+	width: 80px;
+}
