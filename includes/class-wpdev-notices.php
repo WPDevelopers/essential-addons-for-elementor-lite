@@ -672,7 +672,7 @@ $notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ES
  * Current Notice End Time.
  * Notice will dismiss in 1 days if user does nothing.
  */
-$notice->cne_time = '1 Day';
+$notice->cne_time = '2 Day';
 $notice->redirect_url = admin_url( 'admin.php?page=eael-settings' );
 /**
  * Current Notice Maybe Later Time.
