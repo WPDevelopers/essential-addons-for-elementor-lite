@@ -107,7 +107,7 @@ class WPDeveloper_Notice {
      */
     public function init(){
         add_action( 'init', array( $this, 'first_install_track') );
-        add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );
+        add_action( 'deactivate_' . $this->plugin_file, array( $this, 'first_install_end' ) );
         add_action( 'init', array( $this, 'hooks' ) );
     }
     /**
@@ -123,13 +123,15 @@ class WPDeveloper_Notice {
         add_action( 'wpdeveloper_notices', array( $this, 'content' ) );
         if( current_user_can( 'install_plugins' ) ) {
             add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
-            if( isset( $_GET['plugin'] ) ) {
+            if( isset( $_GET['plugin'] ) &&  $_GET['plugin'] == $this->plugin_name ) {
                 /**
                  * Redirect User To the Current URL, but without set query arguments.
                  */
                 wp_safe_redirect( $this->redirect_to() );
             }
-            $current_notice = $this->next_notice();
+            $return_notice = $this->next_notice();
+            $current_notice = current( $return_notice );
+            $next_notice = next( $return_notice ); 
 
             $deserve_notice = $this->deserve_notice( $current_notice );
             $options_data = $this->get_options_data();
@@ -137,31 +139,23 @@ class WPDeveloper_Notice {
 
             $notice_time = isset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] ) 
                 ? $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] : $this->timestamp;
+            $next_notice_time = $options_data[ $this->plugin_name ]['notice_will_show'][ $next_notice ];
             $current_notice_end  = $this->makeTime( $notice_time, $this->cne_time );
 
             if( $deserve_notice ) {
                 /**
                  * TODO: automatic maybe later setup with time.
-                 */        
-
-                if( $this->timestamp >= $current_notice_end ) {
+                 */
+                if( ( $this->timestamp >= $current_notice_end ) || ( $this->timestamp >= $next_notice_time ) ) {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
                 }
-                
-                if( isset( $options_data[ $this->plugin_name ]['current_notice_start'] ) ) {
-                    $current_notice_start = $options_data[ $this->plugin_name ]['current_notice_start'];
-                } else {
-                    $current_notice_start = $this->timestamp;
-                }
-
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
                         if( $current_notice === 'upsale' ) {
                             $upsale_args = $this->get_upsale_args();
                             $plugins = get_plugins();
                             $pkey = $upsale_args['slug'] . '/' . $upsale_args['file'];
-
                             if( isset( $plugins[ $pkey ] ) ) {
                                 return;
                             }
@@ -206,13 +200,10 @@ class WPDeveloper_Notice {
         // }
         if( isset( $_GET['plugin'] ) && $_GET['plugin'] === $this->plugin_name ) {
             $options_data = $this->get_options_data();
-            $clicked_from = $this->next_notice();
+            $clicked_from = current( $this->next_notice() );
             extract($_GET);
 
             $later_time = '';
-
-            // dump( $_GET );
-            // die;
 
             switch( $clicked_from ) {
 
@@ -280,7 +271,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function before(){
-        $current_notice = $this->next_notice();
+        $current_notice = current( $this->next_notice() );
         $classes = 'notice notice-info put-dismiss-notice';
         if( isset( $this->data['classes'] ) ) {
             if( isset( $this->data['classes'][ $current_notice ] ) ) {
@@ -307,7 +298,7 @@ class WPDeveloper_Notice {
      */
     public function content(){
         $options_data = $this->get_options_data();
-        $notice = $this->next_notice();
+        $notice = current( $this->next_notice() );
 
         switch( $notice ) {
             case 'opt_in' :
@@ -431,15 +422,18 @@ class WPDeveloper_Notice {
         } else {
             $return_notice = $options_data[ $this->plugin_name ]['notice_will_show'];
         }
-        $deserve_notice_timestamp = INF;
-        $deserve_notice = '';
-        foreach( $return_notice as $notice => $timestamp ) {
-            if( $timestamp <= $deserve_notice_timestamp ) {
-                $deserve_notice_timestamp = $timestamp;
-                $deserve_notice = $notice;
-            }
-        }
-        return $deserve_notice;
+        $return_notice = array_flip( $return_notice );
+        ksort( $return_notice );
+
+        // $deserve_notice_timestamp = INF;
+        // $deserve_notice = '';
+        // foreach( $return_notice as $notice => $timestamp ) {
+        //     if( $timestamp <= $deserve_notice_timestamp ) {
+        //         $deserve_notice_timestamp = $timestamp;
+        //         $deserve_notice = $notice;
+        //     }
+        // }
+        return $return_notice;
     }
     /**
      * Which notice is deserve to show in next slot.
@@ -467,7 +461,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function admin_notices(){
-        $current_notice = $this->next_notice();
+        $current_notice = current( $this->next_notice() );
         do_action( 'wpdeveloper_notice_clicked' );
         if( $current_notice == 'opt_in' ) {
             do_action( 'wpdeveloper_notices' );
