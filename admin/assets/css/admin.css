@@ -330,7 +330,6 @@ textarea.eael-form-control {
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
-}
 
 @-webkit-keyframes rotate {
     from {-webkit-transform: rotate(0deg);}
@@ -390,14 +389,6 @@ textarea.eael-form-control {
 	font-weight: bold;
 }
 
-.wpdeveloper-notice-message {
-	display: flex;
-	align-items: center;
-	padding: 10px 0;
-}
-.wpdeveloper-notice-message + .notice-dismiss {
-	top: 5px;
-}
 .essential-addons-community-link {
 	background-color: #475A96;
 	margin: 15px 0;
@@ -610,4 +601,7 @@ textarea.eael-form-control {
 }
 #eael_plugins_versions {
 	height: 36px;
+}
+.eael-notice-text {
+	padding-left: 10px;
 }

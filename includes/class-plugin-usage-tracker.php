@@ -85,7 +85,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			// add_action( 'admin_init', array( $this, 'do_tracking' ) );
 			 
 			// Display the admin notice on activation
-			// add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
+			add_action( 'wpdeveloper_notices', array( $this, 'optin_notice' ) );
 			add_action( 'admin_notices', array( $this, 'marketing_notice' ) );
 
 			// Deactivation
@@ -622,10 +622,9 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					$notice_text = __( 'Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>25% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker' );
 				}
 				// And we allow you to filter the text anyway
-				// ob_start();
 				$notice_text = apply_filters( 'wisdom_notice_text_' . esc_attr( $this->plugin_name ), $notice_text ); ?>
 					
-				<!-- <div class="notice notice-info updated put-dismiss-notice"> -->
+				<div class="notice notice-info updated put-dismiss-notice">
 					<p><?php echo __( $notice_text ); ?></p>
 					<div class="eael-insights-data" style="display: none;">
 						<p><?php echo __( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, I promise.' ); ?></p>
@@ -639,13 +638,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		                    jQuery('.eael-insights-data').slideToggle('fast');
 		                });
 		                </script>";?>
-				<!-- </div> -->
+				</div>
 			<?php
-			// echo ob_get_clean();
 			}
-			
 		}
-		
 		/**
 		 * Display the marketing notice to users if enabled
 		 * Only displays after the user has opted in to tracking
