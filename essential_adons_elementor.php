@@ -335,9 +335,11 @@ function eael_init() {
     */
    if( ! function_exists( 'eael_is_elementor_active' ) ) :
       function eael_is_elementor_active() {
-         $file_path = 'elementor/elementor.php';
-         $installed_plugins = get_plugins();
-         return isset( $installed_plugins[$file_path] );
+         if ( did_action( 'elementor/loaded' ) ) {
+            return true;
+         }
+
+         return false;
       }
    endif;
 
