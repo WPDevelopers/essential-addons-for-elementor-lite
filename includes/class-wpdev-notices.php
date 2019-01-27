@@ -123,7 +123,7 @@ class WPDeveloper_Notice {
         add_action( 'wpdeveloper_notices', array( $this, 'content' ) );
         if( current_user_can( 'install_plugins' ) ) {
             add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
-            if( isset( $_GET['plugin'] ) ) {
+            if( isset( $_GET['plugin'] ) &&  $_GET['plugin'] == $this->plugin_name ) {
                 /**
                  * Redirect User To the Current URL, but without set query arguments.
                  */
