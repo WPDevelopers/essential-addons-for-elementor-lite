@@ -154,6 +154,9 @@ class WPDeveloper_Notice {
                     if( $notice_time <= $this->timestamp ) {
                         if( $current_notice === 'upsale' ) {
                             $upsale_args = $this->get_upsale_args();
+                            if ( ! function_exists( 'get_plugins' ) ) {
+                                include ABSPATH . '/wp-admin/includes/plugin.php';
+                            }
                             $plugins = get_plugins();
                             $pkey = $upsale_args['slug'] . '/' . $upsale_args['file'];
                             if( isset( $plugins[ $pkey ] ) ) {
