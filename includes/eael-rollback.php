@@ -40,6 +40,9 @@ if( ! class_exists('EAEL_Rollback') ) {
 		 * @var array
 		 */
 		public $versions = [
+            '2.9.1',
+            '2.9.0',
+            '2.8.7',
             '2.8.6',
             '2.8.5',
             '2.8.4',
