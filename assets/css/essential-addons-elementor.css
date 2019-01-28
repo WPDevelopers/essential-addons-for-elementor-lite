@@ -7444,6 +7444,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
             transform: none;
   }
 }
-.elementor-section .elementor-container {
+.elementor-section.eael-particles-section .elementor-container {
   z-index: 99;
 }
