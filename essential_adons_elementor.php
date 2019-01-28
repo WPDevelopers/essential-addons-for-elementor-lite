@@ -335,11 +335,12 @@ function eael_init() {
     */
    if( ! function_exists( 'eael_is_elementor_active' ) ) :
       function eael_is_elementor_active() {
-         if ( did_action( 'elementor/loaded' ) ) {
-            return true;
-         }
-
-         return false;
+         $file_path = 'elementor/elementor.php';
+         if ( ! function_exists( 'get_plugins' ) ) {
+            include ABSPATH . '/wp-admin/includes/plugin.php';
+			}
+         $installed_plugins = get_plugins();
+         return isset( $installed_plugins[$file_path] );
       }
    endif;
 
