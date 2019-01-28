@@ -425,17 +425,12 @@ class WPDeveloper_Notice {
         } else {
             $return_notice = $options_data[ $this->plugin_name ]['notice_will_show'];
         }
-        $return_notice = array_flip( $return_notice );
-        ksort( $return_notice );
 
-        // $deserve_notice_timestamp = INF;
-        // $deserve_notice = '';
-        // foreach( $return_notice as $notice => $timestamp ) {
-        //     if( $timestamp <= $deserve_notice_timestamp ) {
-        //         $deserve_notice_timestamp = $timestamp;
-        //         $deserve_notice = $notice;
-        //     }
-        // }
+        if( is_array( $return_notice ) ) {
+            $return_notice = array_flip( $return_notice );
+            ksort( $return_notice );
+        }
+
         return $return_notice;
     }
     /**
