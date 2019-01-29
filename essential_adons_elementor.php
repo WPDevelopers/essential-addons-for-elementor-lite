@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.9.2
+ * Version: 2.9.3
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'ESSENTIAL_ADDONS_EL_URL', plugins_url( '/', __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_ROOT', __FILE__ );
-define( 'ESSENTIAL_ADDONS_VERSION', '2.9.1' );
-define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.1' );
+define( 'ESSENTIAL_ADDONS_VERSION', '2.9.3' );
+define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.3' );
 define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 
 
@@ -336,6 +336,9 @@ function eael_init() {
    if( ! function_exists( 'eael_is_elementor_active' ) ) :
       function eael_is_elementor_active() {
          $file_path = 'elementor/elementor.php';
+         if ( ! function_exists( 'get_plugins' ) ) {
+            include ABSPATH . '/wp-admin/includes/plugin.php';
+			}
          $installed_plugins = get_plugins();
          return isset( $installed_plugins[$file_path] );
       }

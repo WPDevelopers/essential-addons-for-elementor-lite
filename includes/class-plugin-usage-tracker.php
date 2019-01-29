@@ -85,7 +85,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			// add_action( 'admin_init', array( $this, 'do_tracking' ) );
 			 
 			// Display the admin notice on activation
-			add_action( 'wpdeveloper_notices', array( $this, 'optin_notice' ) );
+			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
 			add_action( 'admin_notices', array( $this, 'marketing_notice' ) );
 
 			// Deactivation
