@@ -108,6 +108,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function hooks(){
+        add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
         add_action( 'wp_ajax_wpdeveloper_upsale_notice_dissmiss', array( $this, 'upsale_notice_dissmiss' ) );
         add_action( 'wpdeveloper_before_notice', array( $this, 'before' ) );
         add_action( 'wpdeveloper_after_notice', array( $this, 'after' ) );
@@ -115,8 +116,8 @@ class WPDeveloper_Notice {
         add_action( 'wpdeveloper_after_upsale_notice', array( $this, 'after' ) );
         add_action( 'wpdeveloper_notices', array( $this, 'content' ) );
         if( current_user_can( 'install_plugins' ) ) {
-            add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
             if( isset( $_GET['plugin'] ) &&  $_GET['plugin'] == $this->plugin_name ) {
+                do_action( 'wpdeveloper_notice_clicked' );
                 /**
                  * Redirect User To the Current URL, but without set query arguments.
                  */
@@ -196,10 +197,7 @@ class WPDeveloper_Notice {
      * When links are clicked, this function will invoked.
      * @return void
      */
-    public function clicked(){
-        // if( ! isset( $_GET['plugin'] ) || ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'wpdeveloper-nonce' ) ) {
-        //     return;
-        // }
+    public function clicked(){        
         if( isset( $_GET['plugin'] ) && $_GET['plugin'] === $this->plugin_name ) {
             $options_data = $this->get_options_data();
             $clicked_from = current( $this->next_notice() );
@@ -456,7 +454,6 @@ class WPDeveloper_Notice {
      */
     public function admin_notices(){
         $current_notice = current( $this->next_notice() );
-        do_action( 'wpdeveloper_notice_clicked' );
         if( $current_notice == 'opt_in' ) {
             do_action( 'wpdeveloper_notices' );
             return;
