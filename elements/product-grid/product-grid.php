@@ -494,7 +494,7 @@ class Widget_Eael_Product_Grid extends Widget_Base {
 
 		echo '<div class="eael-product-grid ' . $grid_layout . '">
 			<div class="woocommerce">
-				<ul class="products columns-' . $settings['eael_product_grid_column'] . '">';
+				<ul class="products eael-product-columns-' . $settings['eael_product_grid_column'] . '">';
 					$query = new \WP_Query($args);
 					if ($query->have_posts()) {
 						while ($query->have_posts()): $query->the_post();

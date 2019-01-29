@@ -6,12 +6,18 @@ global $product;
 
 // Ensure visibility.
 if (empty($product) || !$product->is_visible()) {
-	return;
+    return;
 }
 
 ?>
 <li <?php wc_product_class('product');?>>
-	<?php if ($grid_layout == 'eael-product-simple' || $grid_layout == 'eael-product-default' || $grid_layout == 'eael-product-reveal') {
+	<?php if ($grid_layout == 'eael-product-default') {
+		do_action('woocommerce_before_shop_loop_item');
+		do_action('woocommerce_before_shop_loop_item_title');
+		do_action('woocommerce_shop_loop_item_title');
+		do_action('woocommerce_after_shop_loop_item_title');
+		do_action('woocommerce_after_shop_loop_item');
+	} elseif ($grid_layout == 'eael-product-simple' || $grid_layout == 'eael-product-reveal') {
 		echo '<a href="' . get_the_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
 			' . $product->get_image('woocommerce_thumbnail') . '
 			<h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
