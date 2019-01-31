@@ -14,7 +14,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 	
 	class Eael_Plugin_Usage_Tracker {
 		
-		private $wisdom_version = '1.1.2';
+		private $wpins_version = '1.1.2';
 		private $home_url = '';
 		private $plugin_file = '';
 		private $plugin_name = '';
@@ -82,7 +82,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing
-			// add_action( 'admin_init', array( $this, 'do_tracking' ) );
+			add_action( 'admin_init', array( $this, 'force_tracking' ) );
 			 
 			// Display the admin notice on activation
 			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
@@ -109,6 +109,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			}
 		}
 		
+		public function force_tracking(){
+			$this->do_tracking( true );
+		}
+
 		/**
 		 * This is our function to get everything going
 		 * Check that user has opted in
@@ -192,7 +196,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				'site_version'		=> get_bloginfo( 'version' ),
 				'site_language'		=> get_bloginfo( 'language' ),
 				'charset'			=> get_bloginfo( 'charset' ),
-				'wisdom_version'	=> $this->wisdom_version,
+				'wpins_version'	=> $this->wpins_version,
 				'php_version'		=> phpversion(),
 				'multisite'			=> is_multisite(),
 				'file_location'		=> __FILE__
@@ -266,7 +270,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				foreach( $options as $option ) {
 					$fields = get_option( $option );
 					// Check for permission to send this option
-					if( isset( $fields['wisdom_registered_setting'] ) ) {
+					if( isset( $fields['wpins_registered_setting'] ) ) {
 						foreach( $fields as $key=>$value ) {
 							$plugin_options[$key] = $value;
 						}
@@ -323,11 +327,11 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			$body['deactivated_date'] = time();
 			
 			// Add deactivation form data
-			if( false !== get_option( 'wisdom_deactivation_reason_' . $this->plugin_name ) ) {
-				$body['deactivation_reason'] = get_option( 'wisdom_deactivation_reason_' . $this->plugin_name );
+			if( false !== get_option( 'wpins_deactivation_reason_' . $this->plugin_name ) ) {
+				$body['deactivation_reason'] = get_option( 'wpins_deactivation_reason_' . $this->plugin_name );
 			}
-			if( false !== get_option( 'wisdom_deactivation_details_' . $this->plugin_name ) ) {
-				$body['deactivation_details'] = get_option( 'wisdom_deactivation_details_' . $this->plugin_name );
+			if( false !== get_option( 'wpins_deactivation_details_' . $this->plugin_name ) ) {
+				$body['deactivation_details'] = get_option( 'wpins_deactivation_details_' . $this->plugin_name );
 			}
 			
 			$this->send_data( $body );
@@ -345,8 +349,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$this->set_is_tracking_allowed( false, $this->plugin_name );
 				return false;
 			}
-			// The wisdom_allow_tracking option is an array of plugins that are being tracked
-			$allow_tracking = get_option( 'wisdom_allow_tracking' );
+			// The wpins_allow_tracking option is an array of plugins that are being tracked
+			$allow_tracking = get_option( 'wpins_allow_tracking' );
 			// If this plugin is in the array, then tracking is allowed
 			if( isset( $allow_tracking[$this->plugin_name] ) ) {
 				return true;
@@ -365,8 +369,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			if( empty( $plugin ) ) {
 				$plugin = $this->plugin_name;
 			}
-			// The wisdom_allow_tracking option is an array of plugins that are being tracked
-			$allow_tracking = get_option( 'wisdom_allow_tracking' );
+			// The wpins_allow_tracking option is an array of plugins that are being tracked
+			$allow_tracking = get_option( 'wpins_allow_tracking' );
 			
 			// If the user has decided to opt out
 			if( $this->has_user_opted_out() ) {
@@ -387,7 +391,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					unset( $allow_tracking[$plugin] );
 				}
 			}
-			update_option( 'wisdom_allow_tracking', $allow_tracking );
+			update_option( 'wpins_allow_tracking', $allow_tracking );
 		}
 		
 		/**
@@ -396,13 +400,13 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 * @return Boolean
 		 */
 		public function has_user_opted_out() {
-			// Iterate through the options that are being tracked looking for wisdom_opt_out setting
+			// Iterate through the options that are being tracked looking for wpins_opt_out setting
 			if( ! empty( $this->options ) ) {
 				foreach( $this->options as $option_name ) {
 					// Check each option
 					$options = get_option( $option_name );
 					// If we find the setting, return true
-					if( ! empty( $options['wisdom_opt_out'] ) ) {
+					if( ! empty( $options['wpins_opt_out'] ) ) {
 						return true;
 					}
 				}
@@ -416,7 +420,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 */
 		public function get_is_time_to_track() {
 			// Let's see if we're due to track this plugin yet
-			$track_times = get_option( 'wisdom_last_track_time', array() );
+			$track_times = get_option( 'wpins_last_track_time', array() );
 			if( ! isset( $track_times[$this->plugin_name] ) ) {
 				// If we haven't set a time for this plugin yet, then we must track it
 				return true;
@@ -435,10 +439,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 */
 		public function set_track_time() {
 			// We've tracked, so record the time
-			$track_times = get_option( 'wisdom_last_track_time', array() );
+			$track_times = get_option( 'wpins_last_track_time', array() );
 			// Set different times according to plugin, in case we are tracking multiple plugins
 			$track_times[$this->plugin_name] = time();
-			update_option( 'wisdom_last_track_time', $track_times );
+			update_option( 'wpins_last_track_time', $track_times );
 		}
 		
 		/**
@@ -450,7 +454,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			if( empty( $plugin ) ) {
 				$plugin = $this->plugin_name;
 			}
-			$block_notice = get_option( 'wisdom_block_notice' );
+			$block_notice = get_option( 'wpins_block_notice' );
 			if( empty( $block_notice ) || ! is_array( $block_notice ) ) {
 				// If nothing exists in the option yet, start a new array with the plugin name
 				$block_notice = array( $plugin => $plugin );
@@ -458,7 +462,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				// Else add the plugin name to the array
 				$block_notice[$plugin] = $plugin;
 			}
-			update_option( 'wisdom_block_notice', $block_notice );
+			update_option( 'wpins_block_notice', $block_notice );
 		}
 		
 		/**
@@ -466,8 +470,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 * @since 1.0.0
 		 */
 		public function get_can_collect_email() {
-			// The wisdom_collect_email option is an array of plugins that are being tracked
-			$collect_email = get_option( 'wisdom_collect_email' );
+			// The wpins_collect_email option is an array of plugins that are being tracked
+			$collect_email = get_option( 'wpins_collect_email' );
 			// If this plugin is in the array, then we can collect the email address
 			if( isset( $collect_email[$this->plugin_name] ) ) {
 				return true;
@@ -486,8 +490,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			if( empty( $plugin ) ) {
 				$plugin = $this->plugin_name;
 			}
-			// The wisdom_collect_email option is an array of plugins that are being tracked
-			$collect_email = get_option( 'wisdom_collect_email' );
+			// The wpins_collect_email option is an array of plugins that are being tracked
+			$collect_email = get_option( 'wpins_collect_email' );
 			// If the user has agreed to allow tracking or if opt-in is not required
 			if( $can_collect ) {
 				if( empty( $collect_email ) || ! is_array( $collect_email ) ) {
@@ -502,7 +506,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					unset( $collect_email[$plugin] );
 				}
 			}
-			update_option( 'wisdom_collect_email', $collect_email );
+			update_option( 'wpins_collect_email', $collect_email );
 		}
 		
 		/**
@@ -511,8 +515,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 * @return Email address
 		 */
 		public function get_admin_email() {
-			// The wisdom_collect_email option is an array of plugins that are being tracked
-			$email = get_option( 'wisdom_admin_emails' );
+			// The wpins_collect_email option is an array of plugins that are being tracked
+			$email = get_option( 'wpins_admin_emails' );
 			// If this plugin is in the array, then we can collect the email address
 			if( isset( $email[$this->plugin_name] ) ) {
 				return $email[$this->plugin_name];
@@ -540,8 +544,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					$email = $current_user->user_email;
 				}
 			}
-			// The wisdom_admin_emails option is an array of admin email addresses
-			$admin_emails = get_option( 'wisdom_admin_emails' );
+			// The wpins_admin_emails option is an array of admin email addresses
+			$admin_emails = get_option( 'wpins_admin_emails' );
 			if( empty( $admin_emails ) || ! is_array( $admin_emails ) ) {
 				// If nothing exists in the option yet, start a new array with the plugin name
 				$admin_emails = array( $plugin => sanitize_email( $email ) );
@@ -549,7 +553,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				// Else add the email address to the array, if not already set
 				$admin_emails[$plugin] = sanitize_email( $email );
 			}
-			update_option( 'wisdom_admin_emails', $admin_emails );
+			update_option( 'wpins_admin_emails', $admin_emails );
 		}
 		
 		/**
@@ -572,8 +576,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			}
 			
 			// Check whether to block the notice, e.g. because we're in a local environment
-			// wisdom_block_notice works the same as wisdom_allow_tracking, an array of plugin names
-			$block_notice = get_option( 'wisdom_block_notice' );
+			// wpins_block_notice works the same as wpins_allow_tracking, an array of plugin names
+			$block_notice = get_option( 'wpins_block_notice' );
 			if( isset( $block_notice[$this->plugin_name] ) ) {
 				return;
 			}
@@ -622,7 +626,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					$notice_text = __( 'Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>25% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker' );
 				}
 				// And we allow you to filter the text anyway
-				$notice_text = apply_filters( 'wisdom_notice_text_' . esc_attr( $this->plugin_name ), $notice_text ); ?>
+				$notice_text = apply_filters( 'wpins_notice_text_' . esc_attr( $this->plugin_name ), $notice_text ); ?>
 					
 				<div class="notice notice-info updated put-dismiss-notice">
 					<p><?php echo __( $notice_text ); ?></p>
@@ -671,7 +675,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				) );
 				
 				$marketing_text = __( 'Thank you for opting in to tracking. Would you like to receive occasional news about this plugin, including details of new features and special offers?', 'plugin-usage-tracker' );
-				$marketing_text = apply_filters( 'wisdom_marketing_text_' . esc_attr( $this->plugin_name ), $marketing_text ); ?>
+				$marketing_text = apply_filters( 'wpins_marketing_text_' . esc_attr( $this->plugin_name ), $marketing_text ); ?>
 				
 				<div class="notice notice-info updated put-dismiss-notice">
 					<p><?php echo '<strong>' . esc_html( $plugin_name ) . '</strong>'; ?></p>
@@ -732,7 +736,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 */
 		public function form_filterable_text() {
 			$form = $this->form_default_text();
-			return apply_filters( 'wisdom_form_text_' . esc_attr( $this->plugin_name ), $form );
+			return apply_filters( 'wpins_form_text_' . esc_attr( $this->plugin_name ), $form );
 		}
 		
 		/**
@@ -836,7 +840,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 								'action': 'goodbye_form',
 								'values': values,
 								'details': details,
-								'security': "<?php echo wp_create_nonce ( 'wisdom_goodbye_form' ); ?>",
+								'security': "<?php echo wp_create_nonce ( 'wpins_goodbye_form' ); ?>",
 								'dataType': "json"
 							}
 							$.post(
@@ -863,14 +867,14 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 * @since 1.0.0
 		 */
 		public function goodbye_form_callback() {
-			check_ajax_referer( 'wisdom_goodbye_form', 'security' );
+			check_ajax_referer( 'wpins_goodbye_form', 'security' );
 			if( isset( $_POST['values'] ) ) {
 				$values = json_encode( wp_unslash( $_POST['values'] ) );
-				update_option( 'wisdom_deactivation_reason_' . $this->plugin_name, $values );
+				update_option( 'wpins_deactivation_reason_' . $this->plugin_name, $values );
 			}
 			if( isset( $_POST['details'] ) ) {
 				$details = sanitize_text_field( $_POST['details'] );
-				update_option( 'wisdom_deactivation_details_' . $this->plugin_name, $details );
+				update_option( 'wpins_deactivation_details_' . $this->plugin_name, $details );
 			}
 			$this->do_tracking(); // Run this straightaway
 			echo 'success';
