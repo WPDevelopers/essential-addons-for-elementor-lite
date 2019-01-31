@@ -23,6 +23,12 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		private $include_goodbye_form = true;
 		private $marketing = false;
 		private $collect_email = false;
+		/**
+		 * for matching the deactivation form header color with plugins appearance.
+		 * @var string
+		 */
+		private $header_bg  = '#3A56FF'; 
+		private $text_color = '#FFFFFF';
 		
 		/**
 		 * Class constructor
@@ -80,7 +86,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 			// Hook our do_tracking function to the daily action
 			add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
-			
+
 			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing
@@ -756,15 +762,15 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$form = $this->form_default_text();
 			}
 			// Build the HTML to go in the form
-			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
+			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong> <span>x</span></div>';
 			$html .= '<div class="put-goodbye-form-body"><p>' . esc_html( $form['body'] ) . '</p>';
 			if( is_array( $form['options'] ) ) {
-				$html .= '<div class="put-goodbye-options"><p>';
+				$html .= '<div class="put-goodbye-options"><ul>';
 				foreach( $form['options'] as $option ) {
-					$html .= '<input type="checkbox" name="put-goodbye-options[]" id="' . str_replace( " ", "", esc_attr( $option ) ) . '" value="' . esc_attr( $option ) . '"> <label for="' . str_replace( " ", "", esc_attr( $option ) ) . '">' . esc_attr( $option ) . '</label><br>';
+					$html .= '<li><input type="checkbox" name="put-goodbye-options[]" id="' . str_replace( " ", "", esc_attr( $option ) ) . '" value="' . esc_attr( $option ) . '"> <label for="' . str_replace( " ", "", esc_attr( $option ) ) . '">' . esc_attr( $option ) . '</label></li>';
 				}
-				$html .= '</p><label for="put-goodbye-reasons">' . esc_html( $form['details'] ) .'</label><textarea name="put-goodbye-reasons" id="put-goodbye-reasons" rows="2" style="width:100%"></textarea>';
-				$html .= '</div><!-- .put-goodbye-options -->';
+				$html .= '<li><label for="put-goodbye-reasons">' . esc_html( $form['details'] ) .'</label><textarea name="put-goodbye-reasons" id="put-goodbye-reasons" rows="2" style="width:100%"></textarea></li>';
+				$html .= '</ul></div><!-- .put-goodbye-options -->';
 			}
 			$html .= '</div><!-- .put-goodbye-form-body -->';
 			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'plugin-usage-tracker' ) . '</p>';
@@ -786,22 +792,52 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				}
 				.put-form-active .put-goodbye-form-wrapper {
 					display: block;
+					width: calc(100% - 40px);
+					height: calc(100% - 40px);
+					position: fixed;
+					left: 20px;
+					top: 20px;
 				}
 				.put-goodbye-form {
 					display: none;
 				}
 				.put-form-active .put-goodbye-form {
 					position: absolute;
-				    bottom: 30px;
-				    left: 0;
+					bottom: 30px;
+					left: 50%;
 					max-width: 400px;
-				    background: #fff;
+					background: #fff;
 					white-space: normal;
+					margin-left: -200px;
+					top: 50%;
+					margin-top: -200px;
+					height: fit-content;
+					border-radius: 5px;
+					overflow: hidden;
 				}
 				.put-goodbye-form-head {
-					background: #0073aa;
-					color: #fff;
-					padding: 8px 18px;
+					background: <?php echo $this->header_bg; ?>;
+					color: <?php echo $this->text_color; ?>;
+					padding: 20px;
+					letter-spacing: 3px;
+					position: relative;
+				}
+				.put-goodbye-form-head > span {
+					position: absolute;
+					right: 10px;
+					top: 50%;
+					cursor: pointer;
+					font-size: 12px;
+					display: inline-block;
+					width: 30px;
+					height: 30px;
+					margin-top: -15px;
+					border: 1px solid #ffff;
+					border-radius: 100%;
+					text-align: center;
+					line-height: 26px;
+					padding: 0px 0px 0px 4px;
+					box-sizing: border-box;
 				}
 				.put-goodbye-form-body {
 					padding: 8px 18px;
@@ -819,6 +855,19 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				.put-goodbye-form-footer {
 					padding: 8px 18px;
 				}
+				.put-goodbye-form-footer > p {
+					display: flex;
+					align-items: center;
+				}
+				.put-goodbye-form-footer .button {
+					/* background-color: <?php echo $this->header_bg; ?>; */
+					/* color: <?php echo $this->text_color; ?>; */
+					padding: 10px 30px;
+					border: 0px;
+					height: auto;
+					flex: 1;
+					text-align: center;
+				}
 			</style>
 			<script>
 				jQuery(document).ready(function($){
@@ -828,6 +877,9 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 						$('body').toggleClass('put-form-active');
 						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeIn();
 						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").html( '<?php echo $html; ?>' + '<div class="put-goodbye-form-footer"><p><a id="put-submit-form" class="button primary" href="#"><?php _e( 'Submit and Deactivate', 'plugin-usage-tracker' ); ?></a>&nbsp;<a class="secondary button" href="'+url+'"><?php _e( 'Just Deactivate', 'plugin-usage-tracker' ); ?></a></p></div>');
+						$('.put-goodbye-form-head > span, .put-goodbye-form-wrapper').on('click', function(){
+							$('body').removeClass('put-form-active');
+						});
 						$('#put-submit-form').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
 							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .put-goodbye-form-body").fadeOut();
