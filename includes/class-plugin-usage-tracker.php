@@ -79,6 +79,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			}
 
 			// Hook our do_tracking function to the daily action
+			add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
+			
 			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing
@@ -555,13 +557,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			}
 			update_option( 'wpins_admin_emails', $admin_emails );
 		}
-		
-		/**
-		 * Display the admin notice to users to allow them to opt in
-		 *
-		 * @since 1.0.0
-		 */
-		public function optin_notice() {
+
+		public function clicked(){
 			// Check for plugin args
 			if( isset( $_GET['plugin'] ) && isset( $_GET['plugin_action'] ) ) {
 				$plugin = sanitize_text_field( $_GET['plugin'] );
@@ -574,7 +571,14 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				}
 				$this->update_block_notice( $plugin );
 			}
-			
+		}
+		
+		/**
+		 * Display the admin notice to users to allow them to opt in
+		 *
+		 * @since 1.0.0
+		 */
+		public function optin_notice() {
 			// Check whether to block the notice, e.g. because we're in a local environment
 			// wpins_block_notice works the same as wpins_allow_tracking, an array of plugin names
 			$block_notice = get_option( 'wpins_block_notice' );
