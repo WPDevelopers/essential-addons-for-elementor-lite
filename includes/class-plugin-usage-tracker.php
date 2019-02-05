@@ -598,7 +598,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 			// @credit EDD
 			// Don't bother asking user to opt in if they're in local dev
-			if ( stristr( network_site_url( '/' ), 'local' ) !== false || stristr( network_site_url( '/' ), 'localhost' ) !== false || stristr( network_site_url( '/' ), ':8888' ) !== false ) {
+			if ( stristr( network_site_url( '/' ), 'dev' ) !== false || stristr( network_site_url( '/' ), 'localhost' ) !== false || stristr( network_site_url( '/' ), ':8888' ) !== false ) {
 				$this->update_block_notice();
 			} else {
 				
@@ -762,7 +762,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$form = $this->form_default_text();
 			}
 			// Build the HTML to go in the form
-			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong> <span>x</span></div>';
+			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong> <span class="gdbye-close">x</span></div>';
 			$html .= '<div class="put-goodbye-form-body"><p>' . esc_html( $form['body'] ) . '</p>';
 			if( is_array( $form['options'] ) ) {
 				$html .= '<div class="put-goodbye-options"><ul>';
@@ -792,11 +792,13 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				}
 				.put-form-active .put-goodbye-form-wrapper {
 					display: block;
-					width: calc(100% - 40px);
-					height: calc(100% - 40px);
+					width: 100%;
+					height: 100%;
 					position: fixed;
-					left: 20px;
-					top: 20px;
+					left: 0px;
+					top: 0px;
+					background: rgba(0, 0, 0, .8);
+					z-index: 9999;
 				}
 				.put-goodbye-form {
 					display: none;
@@ -805,10 +807,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					position: absolute;
 					bottom: 30px;
 					left: 50%;
-					max-width: 400px;
+					max-width: 600px;
 					background: #fff;
 					white-space: normal;
-					margin-left: -200px;
+					margin-left: -300px;
 					top: 50%;
 					margin-top: -200px;
 					height: fit-content;
@@ -816,8 +818,9 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					overflow: hidden;
 				}
 				.put-goodbye-form-head {
-					background: <?php echo $this->header_bg; ?>;
-					color: <?php echo $this->text_color; ?>;
+					/* background: <?php echo $this->header_bg; ?>; */
+					/* color: <?php echo $this->text_color; ?>; */
+					color: #000;
 					padding: 20px;
 					letter-spacing: 3px;
 					position: relative;
@@ -877,9 +880,6 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 						$('body').toggleClass('put-form-active');
 						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeIn();
 						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").html( '<?php echo $html; ?>' + '<div class="put-goodbye-form-footer"><p><a id="put-submit-form" class="button primary" href="#"><?php _e( 'Submit and Deactivate', 'plugin-usage-tracker' ); ?></a>&nbsp;<a class="secondary button" href="'+url+'"><?php _e( 'Just Deactivate', 'plugin-usage-tracker' ); ?></a></p></div>');
-						$('.put-goodbye-form-head > span, .put-goodbye-form-wrapper').on('click', function(){
-							$('body').removeClass('put-form-active');
-						});
 						$('#put-submit-form').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
 							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .put-goodbye-form-body").fadeOut();
@@ -913,6 +913,12 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
 							$('body').removeClass('put-form-active');
 						});
+					});
+
+					$('.put-goodbye-form-head > span.gdbye-close, .put-goodbye-form-wrapper').on('click', function( e ){
+						if( e.toElement.offsetParent === null || e.toElement.className === 'gdbye-close' ) {
+							$('body').removeClass('put-form-active');
+						}
 					});
 				});
 			</script>
