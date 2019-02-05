@@ -1340,6 +1340,102 @@ span.eael-testimonial-quote {
 /*--------------------------*/
 /* 09. Product Styles
 /*--------------------------*/
+.eael-product-grid .woocommerce ul.products,
+.eael-post-grid .woocommerce ul.products {
+  display: grid;
+  grid-gap: 25px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.eael-product-grid .woocommerce ul.products:before, .eael-product-grid .woocommerce ul.products:after,
+.eael-post-grid .woocommerce ul.products:before,
+.eael-post-grid .woocommerce ul.products:after {
+  display: none;
+}
+.eael-product-grid .woocommerce ul.products .product,
+.eael-post-grid .woocommerce ul.products .product {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.eael-product-grid .woocommerce ul.products.eael-product-columns-1,
+.eael-post-grid .woocommerce ul.products.eael-product-columns-1 {
+  grid-template-columns: 100%;
+}
+.eael-product-grid .woocommerce ul.products.eael-product-columns-2,
+.eael-post-grid .woocommerce ul.products.eael-product-columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media screen and (max-width: 480px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-2,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-2 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.eael-product-grid .woocommerce ul.products.eael-product-columns-3,
+.eael-post-grid .woocommerce ul.products.eael-product-columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media screen and (max-width: 767px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-3,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-3,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-3 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.eael-product-grid .woocommerce ul.products.eael-product-columns-4,
+.eael-post-grid .woocommerce ul.products.eael-product-columns-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media screen and (max-width: 767px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-4,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-4,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-4 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.eael-product-grid .woocommerce ul.products.eael-product-columns-5,
+.eael-post-grid .woocommerce ul.products.eael-product-columns-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+@media screen and (max-width: 767px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-5,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-5,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-5 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.eael-product-grid .woocommerce ul.products.eael-product-columns-6,
+.eael-post-grid .woocommerce ul.products.eael-product-columns-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+@media screen and (max-width: 767px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-6,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .eael-product-grid .woocommerce ul.products.eael-product-columns-6,
+  .eael-post-grid .woocommerce ul.products.eael-product-columns-6 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product {
@@ -1444,17 +1540,16 @@ span.eael-testimonial-quote {
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button {
-  display: inline-block;
-  height: 40px;
+  display: block;
   font-size: 14px;
   font-weight: 400;
-  line-height: 40px;
+  line-height: 38px;
   text-align: center;
   text-transform: uppercase;
   color: #fff;
   background-color: #333;
-  padding: 0 30px;
-  margin: 15px 0;
+  padding: 0;
+  margin: 15px;
   -webkit-border-radius: 0;
           border-radius: 0;
 }
@@ -1598,7 +1693,7 @@ span.eael-testimonial-quote {
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button:after,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button:after {
-  content: '\f217';
+  content: "\f217";
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 14px;
   line-height: 38px;
@@ -1614,7 +1709,7 @@ span.eael-testimonial-quote {
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button.loading:after,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button.loading:after {
-  content: '\f110';
+  content: "\f110";
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 14px;
@@ -1634,7 +1729,7 @@ span.eael-testimonial-quote {
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:after,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:after {
-  content: '\f06e';
+  content: "\f06e";
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 14px;
   line-height: 38px;
