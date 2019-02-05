@@ -791,31 +791,25 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					display: none;
 				}
 				.put-form-active .put-goodbye-form-wrapper {
-					display: block;
+					display: flex !important;
+					align-items: center;
+					justify-content: center;
 					width: 100%;
 					height: 100%;
 					position: fixed;
 					left: 0px;
 					top: 0px;
-					background: rgba(0, 0, 0, .8);
 					z-index: 9999;
 				}
 				.put-goodbye-form {
 					display: none;
 				}
 				.put-form-active .put-goodbye-form {
-					position: absolute;
-					bottom: 30px;
-					left: 50%;
+					position: static !important;
 					max-width: 600px;
-					background: #fff;
-					white-space: normal;
-					margin-left: -300px;
-					top: 50%;
-					margin-top: -200px;
-					height: fit-content;
 					border-radius: 5px;
 					overflow: hidden;
+					display: block;
 				}
 				.put-goodbye-form-head {
 					/* background: <?php echo $this->header_bg; ?>; */
