@@ -109,10 +109,11 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			// Hook our do_tracking function to the daily action
 			add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
 
-			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
+			add_action( 'put_do_weekly_action', array( $this, 'force_tracking' ) );
+			// add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing
-			add_action( 'admin_init', array( $this, 'force_tracking' ) );
+			// add_action( 'admin_init', array( $this, 'force_tracking' ) );
 			 
 			// Display the admin notice on activation
 			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
