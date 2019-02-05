@@ -14,7 +14,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 	
 	class Eael_Plugin_Usage_Tracker {
 		
-		private $wpins_version = '1.1.2';
+		private $wpins_version = '1.1.3';
 		private $home_url = '';
 		private $plugin_file = '';
 		private $plugin_name = '';
@@ -68,8 +68,30 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			$this->init();
 			
 		}
+		/**
+		 * Migrate to the new Insights
+		 * @return void
+		 */
+		public function migrate_plan(){
+			$old_key = array_flip( [ 'wisdom_allow_tracking', 'wisdom_last_track_time', 'wisdom_block_notice', 'wisdom_collect_email', 'wisdom_admin_emails', 'wisdom_deactivation_reason_' . $this->plugin_name, 'wisdom_deactivation_details_' . $this->plugin_name ] );
+			$new_key = [ 'wpins_allow_tracking', 'wpins_last_track_time', 'wpins_block_notice', 'wpins_collect_email', 'wpins_admin_emails', 'wpins_deactivation_reason_' . $this->plugin_name, 'wpins_deactivation_details_' . $this->plugin_name ];
+
+			foreach( $old_key as $key => $value ) {
+				$old_data = get_option( $key );
+				if( ! $old_data ) {
+					continue;
+				}
+				update_option( $new_key[ $value ], $old_data );
+				delete_option( $key );
+			}
+		}
 		
 		public function init() {
+
+			if( version_compare( $this->wpins_version, '1.1.2', '>' ) ) {
+				$this->migrate_plan();
+			}
+
 			// Check marketing
 			if( $this->marketing == 3 ) {
 				$this->set_can_collect_email( true, $this->plugin_name );
