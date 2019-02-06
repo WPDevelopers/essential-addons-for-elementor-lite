@@ -91,10 +91,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		 * @return void
 		 */
 		public function force_track_for_one_time(){
-			$is_tracked = get_option('eae_force_tracked');
+			$is_tracked = get_option( 'wpins_'. $this->plugin_name .'_force_tracked' );
 			if( ! $is_tracked ) {
 				$this->do_tracking( true );
-				update_option( 'eae_force_tracked', true );
+				update_option( 'wpins_'. $this->plugin_name .'_force_tracked', true );
 			}
 		}
 		
