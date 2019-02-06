@@ -751,7 +751,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 
 				// Insert an onClick action to allow form before deactivating
-				$deactivation_link = str_replace( '<a ', '<div class="put-goodbye-form-wrapper"><span class="put-goodbye-form" id="put-goodbye-form-' . esc_attr( $this->plugin_name ) . '"></span></div><a onclick="javascript:event.preventDefault();" id="put-goodbye-link-' . esc_attr( $this->plugin_name ) . '" ', $deactivation_link );
+				$deactivation_link = str_replace( '<a ', '<div class="put-goodbye-form-wrapper"><div class="put-goodbye-form-bg"></div><span class="put-goodbye-form" id="put-goodbye-form-' . esc_attr( $this->plugin_name ) . '"></span></div><a onclick="javascript:event.preventDefault();" id="put-goodbye-link-' . esc_attr( $this->plugin_name ) . '" ', $deactivation_link );
 				$links['deactivate'] = $deactivation_link;
 			}
 			return $links;
@@ -816,7 +816,6 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			$html .= '</div><!-- .put-goodbye-form-body -->';
 			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'plugin-usage-tracker' ) . '</p>';
 			?>
-			<div class="put-goodbye-form-bg"></div>
 			<style type="text/css">
 				.put-form-active .put-goodbye-form-bg {
 					background: rgba( 0, 0, 0, .5 );
@@ -825,10 +824,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					left: 0;
 					width: 100%;
 					height: 100%;
+					z-index: 9;
 				}
 				.put-goodbye-form-wrapper {
 					position: relative;
-					z-index: 999;
 					display: none;
 				}
 				.put-form-active .put-goodbye-form-wrapper {
@@ -840,18 +839,18 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					position: fixed;
 					left: 0px;
 					top: 0px;
-					z-index: 9999;
 				}
 				.put-goodbye-form {
 					display: none;
 				}
 				.put-form-active .put-goodbye-form {
-					position: static !important;
+					position: relative !important;
 					max-width: 400px;
 				    background: #fff;
 					white-space: normal;
 					overflow: hidden;
 					display: block;
+					z-index: 999999;
 				}
 				.put-goodbye-form-head {
 					background: #0073aa;
@@ -925,11 +924,10 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 						});
 					});
 
-					$('.put-goodbye-form-wrapper').on('click', function( e ){
-						if( e.toElement.offsetParent === null || e.toElement.className === 'gdbye-close' ) {
-							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
-							$('body').removeClass('put-form-active');
-						}
+					// If we click outside the form, the form will close
+					$('.put-goodbye-form-bg').on('click',function(){
+						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
+						$('body').removeClass('put-form-active');
 					});
 				});
 			</script>
