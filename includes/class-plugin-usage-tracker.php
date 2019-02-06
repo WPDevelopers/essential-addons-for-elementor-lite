@@ -632,7 +632,12 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 			// @credit EDD
 			// Don't bother asking user to opt in if they're in local dev
-			if ( stristr( network_site_url( '/' ), 'dev' ) !== false || stristr( network_site_url( '/' ), 'localhost' ) !== false || stristr( network_site_url( '/' ), ':8888' ) !== false ) {
+			$is_local = false;
+			if( stristr( network_site_url( '/' ), '.test' ) !== false || stristr( network_site_url( '/' ), 'localhost' ) !== false || stristr( network_site_url( '/' ), ':8888' ) !== false ) {
+				$is_local = true;
+			}
+			$is_local = apply_filters( 'wpins_is_local_' . $this->plugin_name, $is_local );
+			if ( $is_local ) {
 				$this->update_block_notice();
 			} else {
 				
@@ -743,6 +748,8 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			}
 			if( isset( $links['deactivate'] ) && $this->include_goodbye_form ) {
 				$deactivation_link = $links['deactivate'];
+
+
 				// Insert an onClick action to allow form before deactivating
 				$deactivation_link = str_replace( '<a ', '<div class="put-goodbye-form-wrapper"><span class="put-goodbye-form" id="put-goodbye-form-' . esc_attr( $this->plugin_name ) . '"></span></div><a onclick="javascript:event.preventDefault();" id="put-goodbye-link-' . esc_attr( $this->plugin_name ) . '" ', $deactivation_link );
 				$links['deactivate'] = $deactivation_link;
@@ -796,7 +803,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$form = $this->form_default_text();
 			}
 			// Build the HTML to go in the form
-			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong> <span class="gdbye-close">x</span></div>';
+			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
 			$html .= '<div class="put-goodbye-form-body"><p>' . esc_html( $form['body'] ) . '</p>';
 			if( is_array( $form['options'] ) ) {
 				$html .= '<div class="put-goodbye-options"><ul>';
@@ -840,50 +847,28 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				}
 				.put-form-active .put-goodbye-form {
 					position: static !important;
-					max-width: 600px;
-					min-width: 600px;
-					border-radius: 5px;
+					max-width: 400px;
+				    background: #fff;
+					white-space: normal;
 					overflow: hidden;
 					display: block;
-					background-color: #fff;
 				}
 				.put-goodbye-form-head {
-					color: #000;
-					padding: 20px;
-					letter-spacing: 3px;
-					position: relative;
-				}
-				.put-goodbye-form-head > span {
-					position: absolute;
-					right: 10px;
-					top: 50%;
-					cursor: pointer;
-					font-size: 12px;
-					display: inline-block;
-					width: 30px;
-					height: 30px;
-					margin-top: -15px;
-					border: 1px solid #ffff;
-					border-radius: 100%;
-					text-align: center;
-					line-height: 26px;
-					padding: 0px 0px 0px 4px;
-					box-sizing: border-box;
-				}
-				.put-goodbye-options textarea {
-					display: block;
+					background: #0073aa;
+					color: #fff;
+					padding: 8px 18px;
 				}
 				.put-goodbye-form-body {
 					padding: 8px 18px;
 					color: #444;
 				}
 				.deactivating-spinner {
-					display: none;
-					padding-bottom: 20px !important;
+ 					display: none;
+					 padding-bottom: 20px !important;
 				}
 				.deactivating-spinner .spinner {
 					float: none;
-					margin: 4px 4px 0px 18px;
+					margin: 4px 4px 0 18px;
 					vertical-align: bottom;
 					visibility: visible;
 				}
@@ -895,8 +880,6 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					align-items: center;
 				}
 				.put-goodbye-form-footer .button {
-					/* background-color: <?php echo $this->header_bg; ?>; */
-					/* color: <?php echo $this->text_color; ?>; */
 					padding: 10px 30px;
 					border: 0px;
 					height: auto;
@@ -940,15 +923,11 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 								}
 							);
 						});
-						// If we click outside the form, the form will close
-						$('.put-goodbye-form-bg').on('click',function(){
-							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
-							$('body').removeClass('put-form-active');
-						});
 					});
 
-					$('.put-goodbye-form-head > span.gdbye-close, .put-goodbye-form-wrapper').on('click', function( e ){
+					$('.put-goodbye-form-wrapper').on('click', function( e ){
 						if( e.toElement.offsetParent === null || e.toElement.className === 'gdbye-close' ) {
+							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
 							$('body').removeClass('put-form-active');
 						}
 					});
