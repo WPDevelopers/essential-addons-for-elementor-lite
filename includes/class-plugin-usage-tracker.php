@@ -85,18 +85,27 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				delete_option( $key );
 			}
 		}
+		/**
+		 * This function is fired for one time in a life time!
+		 * if the data is not removed.
+		 * @return void
+		 */
+		public function force_track_for_one_time(){
+			$is_tracked = get_option('eae_force_tracked');
+			if( ! $is_tracked ) {
+				$this->do_tracking( true );
+				update_option( 'eae_force_tracked', true );
+			}
+		}
 		
 		public function init() {
-
 			if( version_compare( $this->wpins_version, '1.1.2', '>' ) ) {
 				$this->migrate_plan();
 			}
-
 			// Check marketing
 			if( $this->marketing == 3 ) {
 				$this->set_can_collect_email( true, $this->plugin_name );
 			}
-			
 			// Check whether opt-in is required
 			// If not, then tracking is allowed
 			if( ! $this->require_optin ) {
@@ -105,15 +114,13 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$this->update_block_notice();
 				$this->do_tracking( true );
 			}
-
 			// Hook our do_tracking function to the daily action
 			add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
 
-			add_action( 'put_do_weekly_action', array( $this, 'force_tracking' ) );
-			// add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
+			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
-			// Use this action for local testing
-			// add_action( 'admin_init', array( $this, 'force_tracking' ) );
+			// Use this action for local testing and for one time force tracking in a life time.
+			add_action( 'admin_init', array( $this, 'force_track_for_one_time' ) );
 			 
 			// Display the admin notice on activation
 			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
@@ -139,7 +146,12 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				wp_schedule_event( time(), 'daily', 'put_do_weekly_action' );
 			}
 		}
-		
+		/**
+		 * This function is responsible for force tracking the plugin, 
+		 * if users are allowed to do!
+		 *
+		 * @return void
+		 */
 		public function force_tracking(){
 			$this->do_tracking( true );
 		}
@@ -178,7 +190,6 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 			// Send the data
 			$this->send_data( $body );
-
 		}
 		
 		/**
@@ -227,7 +238,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				'site_version'		=> get_bloginfo( 'version' ),
 				'site_language'		=> get_bloginfo( 'language' ),
 				'charset'			=> get_bloginfo( 'charset' ),
-				'wpins_version'	=> $this->wpins_version,
+				'wpins_version'		=> $this->wpins_version,
 				'php_version'		=> phpversion(),
 				'multisite'			=> is_multisite(),
 				'file_location'		=> __FILE__
@@ -830,13 +841,13 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				.put-form-active .put-goodbye-form {
 					position: static !important;
 					max-width: 600px;
+					min-width: 600px;
 					border-radius: 5px;
 					overflow: hidden;
 					display: block;
+					background-color: #fff;
 				}
 				.put-goodbye-form-head {
-					/* background: <?php echo $this->header_bg; ?>; */
-					/* color: <?php echo $this->text_color; ?>; */
 					color: #000;
 					padding: 20px;
 					letter-spacing: 3px;
@@ -859,16 +870,20 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					padding: 0px 0px 0px 4px;
 					box-sizing: border-box;
 				}
+				.put-goodbye-options textarea {
+					display: block;
+				}
 				.put-goodbye-form-body {
 					padding: 8px 18px;
 					color: #444;
 				}
 				.deactivating-spinner {
 					display: none;
+					padding-bottom: 20px !important;
 				}
 				.deactivating-spinner .spinner {
 					float: none;
-					margin: 4px 4px 0 18px;
+					margin: 4px 4px 0px 18px;
 					vertical-align: bottom;
 					visibility: visible;
 				}
