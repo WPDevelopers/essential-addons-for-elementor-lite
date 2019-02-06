@@ -23,6 +23,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		private $include_goodbye_form = true;
 		private $marketing = false;
 		private $collect_email = false;
+		private $pro_plugin_name = 'Essential Addons for Elementor Pro';
 		/**
 		 * for matching the deactivation form header color with plugins appearance.
 		 * @var string
@@ -121,6 +122,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 			// Use this action for local testing and for one time force tracking in a life time.
 			add_action( 'admin_init', array( $this, 'force_track_for_one_time' ) );
+			add_action( 'admin_init', array( $this, 'force_tracking' ) );
 			 
 			// Display the admin notice on activation
 			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
@@ -766,16 +768,23 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			$form = array();
 			$form['heading'] = __( 'Sorry to see you go', 'plugin-usage-tracker' );
 			$form['body'] = __( 'Before you deactivate the plugin, would you quickly give us your reason for doing so?', 'plugin-usage-tracker' );
+
 			$form['options'] = array(
-				__( 'Set up is too difficult', 'plugin-usage-tracker' ),
-				__( 'Lack of documentation', 'plugin-usage-tracker' ),
-				__( 'Not the features I wanted', 'plugin-usage-tracker' ),
-				__( 'Found a better plugin', 'plugin-usage-tracker' ),
-				__( 'Installed by mistake', 'plugin-usage-tracker' ),
-				__( 'Only required temporarily', 'plugin-usage-tracker' ),
-				__( 'Didn\'t work', 'plugin-usage-tracker' )
+				__( 'I no longer need the plugin', 'plugin-usage-tracker' ),
+				[
+					'label' => __( 'I found a better plugin', 'plugin-usage-tracker' ),
+					'extra_field' => __( 'Please share which plugin', 'plugin-usage-tracker' )
+				],
+				__( "I couldn't get the plugin to work", 'plugin-usage-tracker' ),
+				__( 'It\'s a temporary deactivation', 'plugin-usage-tracker' ),
+				__( 'I have '. $this->pro_plugin_name, 'plugin-usage-tracker' ),
+				[
+					'label' => __( 'Other', 'plugin-usage-tracker' ),
+					'extra_field' => __( 'Please share the reason', 'plugin-usage-tracker' ),
+					'type' => 'textarea'
+				]
 			);
-			$form['details'] = __( 'Details (optional)', 'plugin-usage-tracker' );
+
 			return $form;
 		}
 		
@@ -806,11 +815,25 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
 			$html .= '<div class="put-goodbye-form-body"><p>' . esc_html( $form['body'] ) . '</p>';
 			if( is_array( $form['options'] ) ) {
-				$html .= '<div class="put-goodbye-options"><ul>';
+				$html .= '<div id="put-goodbye-options" class="put-goodbye-options"><ul>';
 				foreach( $form['options'] as $option ) {
-					$html .= '<li><input type="checkbox" name="put-goodbye-options[]" id="' . str_replace( " ", "", esc_attr( $option ) ) . '" value="' . esc_attr( $option ) . '"> <label for="' . str_replace( " ", "", esc_attr( $option ) ) . '">' . esc_attr( $option ) . '</label></li>';
+					if( is_array( $option ) ) {
+						$id = strtolower( str_replace( " ", "_", esc_attr( $option['label'] ) ) );
+						$html .= '<li class="has-goodbye-extra">';
+						$html .= '<input type="radio" name="put-goodbye-options" id="' . $id . '" value="' . esc_attr( $option['label'] ) . '">';
+						$html .= '<div><label for="' . $id . '">' . esc_attr( $option['label'] ) . '</label>';
+						if( isset( $option[ 'extra_field' ] ) && ! isset( $option['type'] )) {
+							$html .= '<input type="text" style="display: none" name="'. $id .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '">';
+						}
+						if( isset( $option[ 'extra_field' ] ) && isset( $option['type'] )) {
+							$html .= '<'. $option['type'] .' style="display: none" type="text" name="'. $id .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '"></' . $option['type'] . '>';
+						}
+						$html .= '</div></li>';
+					} else {
+						$id = strtolower( str_replace( " ", "_", esc_attr( $option ) ) );
+						$html .= '<li><input type="radio" name="put-goodbye-options" id="' . $id . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
+					}
 				}
-				$html .= '<li><label for="put-goodbye-reasons">' . esc_html( $form['details'] ) .'</label><textarea name="put-goodbye-reasons" id="put-goodbye-reasons" rows="2" style="width:100%"></textarea></li>';
 				$html .= '</ul></div><!-- .put-goodbye-options -->';
 			}
 			$html .= '</div><!-- .put-goodbye-form-body -->';
@@ -901,18 +924,22 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 							// Fade in spinner
 							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .deactivating-spinner").fadeIn();
 							e.preventDefault();
-							var values = new Array();
-							$.each($("input[name='put-goodbye-options[]']:checked"), function(){
-								values.push($(this).val());
-							});
-							var details = $('#put-goodbye-reasons').val();
+							var checkedInput = $("input[name='put-goodbye-options']:checked"),
+								checkedInputVal = checkedInput.val(),
+								details = $('input[name="'+ checkedInput[0].id +'"], textarea[name="'+ checkedInput[0].id +'"]').val();
+
+							if( typeof details === 'undefinded' ) {
+								details = '';
+							}
+
 							var data = {
 								'action': 'goodbye_form',
-								'values': values,
+								'values': checkedInputVal,
 								'details': details,
 								'security': "<?php echo wp_create_nonce ( 'wpins_goodbye_form' ); ?>",
 								'dataType': "json"
 							}
+
 							$.post(
 								ajaxurl,
 								data,
@@ -922,13 +949,19 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 								}
 							);
 						});
+						$('#put-goodbye-options > ul ').on('click', 'li label, li > input', function( e ){
+							var parent = $(this).parents('li');
+							parent.siblings().find('label').next('input, textarea').css('display', 'none');
+							parent.find('label').next('input, textarea').css('display', 'block');
+						});
+						// If we click outside the form, the form will close
+						$('.put-goodbye-form-bg').on('click',function(){
+							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
+							$('body').removeClass('put-form-active');
+						});
 					});
 
-					// If we click outside the form, the form will close
-					$('.put-goodbye-form-bg').on('click',function(){
-						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
-						$('body').removeClass('put-form-active');
-					});
+					
 				});
 			</script>
 		<?php }
@@ -940,7 +973,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 		public function goodbye_form_callback() {
 			check_ajax_referer( 'wpins_goodbye_form', 'security' );
 			if( isset( $_POST['values'] ) ) {
-				$values = json_encode( wp_unslash( $_POST['values'] ) );
+				$values = $_POST['values'];
 				update_option( 'wpins_deactivation_reason_' . $this->plugin_name, $values );
 			}
 			if( isset( $_POST['details'] ) ) {
