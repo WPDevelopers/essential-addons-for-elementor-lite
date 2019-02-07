@@ -325,7 +325,6 @@ if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' )
     essential_addons_elementor_lite_start_plugin_tracking();
 }
 
-
 function eael_init() {
     if ( class_exists( 'Caldera_Forms' ) ) {
         add_filter( 'caldera_forms_force_enqueue_styles_early', '__return_true' );
@@ -374,3 +373,50 @@ function eael_init() {
 }
 add_action( 'plugins_loaded', 'eael_init' );
 require_once dirname( __FILE__ ) . '/includes/class-wpdev-notices.php';
+
+/**
+ * EAE Pro Activation
+ */
+if( ! function_exists( 'eae_pro_filter_action_links' ) ) :
+   add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', 'eae_pro_filter_action_links');
+   function eae_pro_filter_action_links( $links ) {
+      if( ! function_exists( 'get_plugins' ) ) {
+         include ABSPATH . '/wp-admin/includes/plugin.php';
+      }
+      $activate_plugins = get_option( 'active_plugins' );
+      if( in_array( plugin_basename( __FILE__ ), $activate_plugins ) ) {
+         $pro_plugin_base_name = 'essential-addons-elementor/essential_adons_elementor.php';
+         if( isset( $links['activate'] ) ) {
+            $activate_link = $links['activate'];
+            // Insert an onClick action to allow form before deactivating
+            $activation_link = str_replace( '<a ', '<a id="eae-pro-activation" onclick="javascript:event.preventDefault();"', $activate_link );
+            $links['activate'] = $activation_link;
+         }
+         return $links;
+      }
+   }
+endif;
+
+if( ! function_exists( 'plugins_footer_for_pro' ) ) :
+   add_action( 'admin_footer-plugins.php', 'plugins_footer_for_pro' );
+   function plugins_footer_for_pro(){
+      ?>
+      <script>
+         jQuery(document).ready(function( $ ){
+            $('#eae-pro-activation').on('click', function( e ){
+               e.preventDefault();
+               swal({
+                  title: '<h2>Please <span style="color: red">Deactivate</span> <br><br> Free Version</h2>',
+                  type: 'error',
+                  html:
+                     'You don\'t need the <span style="color: #1abc9c;font-weight: 700;">Free Version</span> to use the <span style="color: #00629a;font-weight: 700;">Premium</span> one.',
+                  showCloseButton: true,
+                  showCancelButton: false,
+                  focusConfirm: false,
+               }).catch(swal.noop);
+            });
+         });
+      </script>
+      <?php
+   }
+endif;

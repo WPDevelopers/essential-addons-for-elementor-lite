@@ -46,7 +46,10 @@ class Eael_Admin_Settings {
 	public function __construct() {
 
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ), 600 );
-		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
+		
+		// add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_eael_admin_scripts' ) );
+
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
 		add_action( 'wp_ajax_add_action_with_ajax', array( $this, 'add_action_with_ajax' ) );
 
@@ -93,10 +96,14 @@ class Eael_Admin_Settings {
 	 * @return void
 	 * @since 1.1.2
 	 */
-	public function enqueue_eael_admin_scripts() {
-
+	public function enqueue_eael_admin_scripts( $hook ) {
 		wp_enqueue_style( 'essential_addons_elementor-notice-css', plugins_url( '/', __FILE__ ).'assets/css/eael-notice.css' );
-		if( isset( $_GET['page'] ) && $_GET['page'] == 'eael-settings' ) {
+		if( isset( $hook ) && $hook == 'plugins.php' ) {
+			wp_enqueue_style( 'essential_addons_elementor-sweetalert2-css', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/css/sweetalert2.min.css' );
+			wp_enqueue_script( 'essential_addons_core-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/core.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'essential_addons_sweetalert2-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'essential_addons_core-js' ), '1.0', true );
+		}
+		if( isset( $hook ) && $hook == 'elementor_page_eael-settings' ) {
 			wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
 			wp_enqueue_style( 'essential_addons_elementor-sweetalert2-css', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/css/sweetalert2.min.css' );
 			wp_enqueue_script( 'essential_addons_elementor-admin-js', plugins_url( '/', __FILE__ ).'assets/js/admin.js', array( 'jquery'), '1.0', true );
