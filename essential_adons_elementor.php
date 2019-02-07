@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.9.4
+ * Version: 2.9.5
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'ESSENTIAL_ADDONS_EL_URL', plugins_url( '/', __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_ROOT', __FILE__ );
-define( 'ESSENTIAL_ADDONS_VERSION', '2.9.4' );
-define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.4' );
+define( 'ESSENTIAL_ADDONS_VERSION', '2.9.5' );
+define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.5' );
 define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 
 
@@ -37,7 +37,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles' ];
    
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
@@ -315,7 +315,7 @@ if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' )
     function essential_addons_elementor_lite_start_plugin_tracking() {
         $wisdom = new Eael_Plugin_Usage_Tracker(
             __FILE__,
-            'http://wisdom.test',
+            'http://app.wpdeveloper.net',
             array(),
             true,
             true,

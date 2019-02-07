@@ -753,7 +753,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 
 				// Insert an onClick action to allow form before deactivating
-				$deactivation_link = str_replace( '<a ', '<div class="put-goodbye-form-wrapper"><div class="put-goodbye-form-bg"></div><span class="put-goodbye-form" id="put-goodbye-form-' . esc_attr( $this->plugin_name ) . '"></span></div><a onclick="javascript:event.preventDefault();" id="put-goodbye-link-' . esc_attr( $this->plugin_name ) . '" ', $deactivation_link );
+				$deactivation_link = str_replace( '<a ', '<div class="eael-put-goodbye-form-wrapper"><div class="eael-put-goodbye-form-bg"></div><span class="eael-put-goodbye-form" id="eael-put-goodbye-form-' . esc_attr( $this->plugin_name ) . '"></span></div><a onclick="javascript:event.preventDefault();" id="eael-put-goodbye-link-' . esc_attr( $this->plugin_name ) . '" ', $deactivation_link );
 				$links['deactivate'] = $deactivation_link;
 			}
 			return $links;
@@ -812,15 +812,15 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$form = $this->form_default_text();
 			}
 			// Build the HTML to go in the form
-			$html = '<div class="put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
-			$html .= '<div class="put-goodbye-form-body"><p>' . esc_html( $form['body'] ) . '</p>';
+			$html = '<div class="eael-put-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
+			$html .= '<div class="eael-put-goodbye-form-body"><p class="eael-put-goodbye-form-caption">' . esc_html( $form['body'] ) . '</p>';
 			if( is_array( $form['options'] ) ) {
-				$html .= '<div id="put-goodbye-options" class="put-goodbye-options"><ul>';
+				$html .= '<div id="eael-put-goodbye-options" class="eael-put-goodbye-options"><ul>';
 				foreach( $form['options'] as $option ) {
 					if( is_array( $option ) ) {
 						$id = strtolower( str_replace( " ", "_", esc_attr( $option['label'] ) ) );
 						$html .= '<li class="has-goodbye-extra">';
-						$html .= '<input type="radio" name="put-goodbye-options" id="' . $id . '" value="' . esc_attr( $option['label'] ) . '">';
+						$html .= '<input type="radio" name="eael-put-goodbye-options" id="' . $id . '" value="' . esc_attr( $option['label'] ) . '">';
 						$html .= '<div><label for="' . $id . '">' . esc_attr( $option['label'] ) . '</label>';
 						if( isset( $option[ 'extra_field' ] ) && ! isset( $option['type'] )) {
 							$html .= '<input type="text" style="display: none" name="'. $id .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '">';
@@ -831,17 +831,17 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 						$html .= '</div></li>';
 					} else {
 						$id = strtolower( str_replace( " ", "_", esc_attr( $option ) ) );
-						$html .= '<li><input type="radio" name="put-goodbye-options" id="' . $id . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
+						$html .= '<li><input type="radio" name="eael-put-goodbye-options" id="' . $id . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
 					}
 				}
-				$html .= '</ul></div><!-- .put-goodbye-options -->';
+				$html .= '</ul></div><!-- .eael-put-goodbye-options -->';
 			}
-			$html .= '</div><!-- .put-goodbye-form-body -->';
+			$html .= '</div><!-- .eael-put-goodbye-form-body -->';
 			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'plugin-usage-tracker' ) . '</p>';
 			?>
 			<style type="text/css">
-				.put-form-active .put-goodbye-form-bg {
-					background: rgba( 0, 0, 0, .5 );
+				.eael-put-form-active .eael-put-goodbye-form-bg {
+					background: rgba( 0, 0, 0, .8 );
 					position: fixed;
 					top: 0;
 					left: 0;
@@ -849,11 +849,11 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					height: 100%;
 					z-index: 9;
 				}
-				.put-goodbye-form-wrapper {
+				.eael-put-goodbye-form-wrapper {
 					position: relative;
 					display: none;
 				}
-				.put-form-active .put-goodbye-form-wrapper {
+				.eael-put-form-active .eael-put-goodbye-form-wrapper {
 					display: flex !important;
 					align-items: center;
 					justify-content: center;
@@ -863,26 +863,50 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					left: 0px;
 					top: 0px;
 				}
-				.put-goodbye-form {
+				.eael-put-goodbye-form {
 					display: none;
 				}
-				.put-form-active .put-goodbye-form {
+				.eael-put-form-active .eael-put-goodbye-form {
 					position: relative !important;
-					max-width: 400px;
+					width: 550px;
+					max-width: 80%;
 				    background: #fff;
+					box-shadow: 2px 8px 23px 3px rgba(0,0,0,.2);
+					border-radius: 3px;
 					white-space: normal;
 					overflow: hidden;
 					display: block;
 					z-index: 999999;
 				}
-				.put-goodbye-form-head {
-					background: #0073aa;
-					color: #fff;
-					padding: 8px 18px;
+				.eael-put-goodbye-form-head {
+					background: #fff;
+					color: #495157;
+					padding: 18px;
+					box-shadow: 0 0 8px rgba(0,0,0,.1);
+					font-size: 15px;
 				}
-				.put-goodbye-form-body {
+				.eael-put-goodbye-form .eael-put-goodbye-form-head strong {
+					font-size: 15px;
+				}
+				.eael-put-goodbye-form-body {
 					padding: 8px 18px;
-					color: #444;
+					color: #333;
+				}
+				.eael-put-goodbye-form-body label {
+					color: #6d7882;
+					padding-left: 5px;
+				}
+				.eael-put-goodbye-form-body .eael-put-goodbye-form-caption {
+					font-weight: 500;
+					font-size: 15px;
+					color: #495157;
+					line-height: 1.4;
+				}
+				.eael-put-goodbye-form-body #eael-put-goodbye-options {
+					padding-top: 5px;
+				}
+				.eael-put-goodbye-form-body #eael-put-goodbye-options ul > li {
+					margin-bottom: 15px;
 				}
 				.deactivating-spinner {
  					display: none;
@@ -894,37 +918,59 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 					vertical-align: bottom;
 					visibility: visible;
 				}
-				.put-goodbye-form-footer {
+				.eael-put-goodbye-form-footer {
 					padding: 8px 18px;
+					margin-bottom: 15px;
 				}
-				.put-goodbye-form-footer > p {
+				.eael-put-goodbye-form-footer > .eael-put-goodbye-form-buttons {
 					display: flex;
 					align-items: center;
+					justify-content: space-between;
 				}
-				.put-goodbye-form-footer .button {
-					padding: 10px 30px;
-					border: 0px;
-					height: auto;
-					flex: 1;
-					text-align: center;
+				.eael-put-goodbye-form-footer .eael-put-submit-btn {
+					background-color: #d30c5c;
+					-webkit-border-radius: 3px;
+					border-radius: 3px;
+					color: #fff;
+					line-height: 1;
+					padding: 15px 20px;
+					font-size: 13px;
+				}
+				.eael-put-goodbye-form-footer .eael-put-deactivate-btn {
+					font-size: 13px;
+					color: #a4afb7;
+					background: none;
+					float: right;
+					padding-right: 10px;
+					width: auto;
+					text-decoration: underline;
+				}
+				#eael-put-goodbye-options ul li > div {
+					display: inline;
+					padding-left: 3px;
+				}
+				#eael-put-goodbye-options ul li > div > input, #eael-put-goodbye-options ul li > div > textarea {
+					margin: 10px 18px;
+					padding: 8px;
+					width: 80%;
 				}
 			</style>
 			<script>
 				jQuery(document).ready(function($){
-					$("#put-goodbye-link-<?php echo esc_attr( $this->plugin_name ); ?>").on("click",function(){
+					$("#eael-put-goodbye-link-<?php echo esc_attr( $this->plugin_name ); ?>").on("click",function(){
 						// We'll send the user to this deactivation link when they've completed or dismissed the form
-						var url = document.getElementById("put-goodbye-link-<?php echo esc_attr( $this->plugin_name ); ?>");
-						$('body').toggleClass('put-form-active');
-						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeIn();
-						$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").html( '<?php echo $html; ?>' + '<div class="put-goodbye-form-footer"><p><a id="put-submit-form" class="button primary" href="#"><?php _e( 'Submit and Deactivate', 'plugin-usage-tracker' ); ?></a>&nbsp;<a class="secondary button" href="'+url+'"><?php _e( 'Just Deactivate', 'plugin-usage-tracker' ); ?></a></p></div>');
+						var url = document.getElementById("eael-put-goodbye-link-<?php echo esc_attr( $this->plugin_name ); ?>");
+						$('body').toggleClass('eael-put-form-active');
+						$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeIn();
+						$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").html( '<?php echo $html; ?>' + '<div class="eael-put-goodbye-form-footer"><div class="eael-put-goodbye-form-buttons"><a id="put-submit-form" class="eael-put-submit-btn" href="#"><?php _e( 'Submit and Deactivate', 'plugin-usage-tracker' ); ?></a>&nbsp;<a class="eael-put-deactivate-btn" href="'+url+'"><?php _e( 'Just Deactivate', 'plugin-usage-tracker' ); ?></a></div></div>');
 						$('#put-submit-form').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
-							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .put-goodbye-form-body").fadeOut();
-							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .put-goodbye-form-footer").fadeOut();
+							$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .eael-put-goodbye-form-body").fadeOut();
+							$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .eael-put-goodbye-form-footer").fadeOut();
 							// Fade in spinner
-							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .deactivating-spinner").fadeIn();
+							$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .deactivating-spinner").fadeIn();
 							e.preventDefault();
-							var checkedInput = $("input[name='put-goodbye-options']:checked"),
+							var checkedInput = $("input[name='eael-put-goodbye-options']:checked"),
 								checkedInputVal = checkedInput.val(),
 								details = $('input[name="'+ checkedInput[0].id +'"], textarea[name="'+ checkedInput[0].id +'"]').val();
 
@@ -949,15 +995,15 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 								}
 							);
 						});
-						$('#put-goodbye-options > ul ').on('click', 'li label, li > input', function( e ){
+						$('#eael-put-goodbye-options > ul ').on('click', 'li label, li > input', function( e ){
 							var parent = $(this).parents('li');
 							parent.siblings().find('label').next('input, textarea').css('display', 'none');
 							parent.find('label').next('input, textarea').css('display', 'block');
 						});
 						// If we click outside the form, the form will close
-						$('.put-goodbye-form-bg').on('click',function(){
-							$("#put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
-							$('body').removeClass('put-form-active');
+						$('.eael-put-goodbye-form-bg').on('click',function(){
+							$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?>").fadeOut();
+							$('body').removeClass('eael-put-form-active');
 						});
 					});
 
