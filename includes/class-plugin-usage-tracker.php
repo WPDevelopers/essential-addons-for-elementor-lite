@@ -970,12 +970,18 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 							// Fade in spinner
 							$("#eael-put-goodbye-form-<?php echo esc_attr( $this->plugin_name ); ?> .deactivating-spinner").fadeIn();
 							e.preventDefault();
-							var checkedInput = $("input[name='eael-put-goodbye-options']:checked"),
-								checkedInputVal = checkedInput.val(),
+							var checkedInput = $("input[name='eael-put-goodbye-options']:checked"), 
+								checkedInputVal, details;
+							if( checkedInput.length > 0 ) {
+								checkedInputVal = checkedInput.val();
 								details = $('input[name="'+ checkedInput[0].id +'"], textarea[name="'+ checkedInput[0].id +'"]').val();
+							}
 
-							if( typeof details === 'undefinded' ) {
+							if( typeof details === 'undefined' ) {
 								details = '';
+							}
+							if( typeof checkedInputVal === 'undefined' ) {
+								checkedInputVal = 'No Reason';
 							}
 
 							var data = {
