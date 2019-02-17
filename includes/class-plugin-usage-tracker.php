@@ -122,7 +122,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 
 			// Use this action for local testing and for one time force tracking in a life time.
 			add_action( 'admin_init', array( $this, 'force_track_for_one_time' ) );
-			add_action( 'admin_init', array( $this, 'force_tracking' ) );
+			// add_action( 'admin_init', array( $this, 'force_tracking' ) );
 			 
 			// Display the admin notice on activation
 			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
