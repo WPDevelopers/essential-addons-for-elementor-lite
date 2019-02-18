@@ -100,6 +100,8 @@ class WPDeveloper_Notice {
 
         if( ! class_exists( 'WPDeveloper_Core_Installer' ) ) {
             require_once dirname( __FILE__ ) . '/class-wpdev-core-install.php';
+
+            new WPDeveloper_Core_Installer( $this->plugin_name );
         }
     }
     /**
@@ -363,7 +365,7 @@ class WPDeveloper_Notice {
         if( empty( $plugin_slug ) ) {
             return;
         }
-        echo '<button data-slug="'. $plugin_slug .'" id="plugin-install-core" class="button button-primary">'. __( 'Install Now!', $this->text_domain ) .'</button>';
+        echo '<button data-slug="'. $plugin_slug .'" id="plugin-install-core-'. $this->plugin_name .'" class="button button-primary">'. __( 'Install Now!', $this->text_domain ) .'</button>';
     }
     /**
      * This methods is responsible for get notice image.
@@ -723,7 +725,7 @@ class WPDeveloper_Notice {
         <script type="text/javascript">
             jQuery(document).ready( function($) {
                 <?php if( ! empty( $plugin_slug ) && ! empty( $plugin_file ) ) : ?>
-                $('#plugin-install-core').on('click', function (e) {
+                $('#plugin-install-core-<?php echo $this->plugin_name; ?>').on('click', function (e) {
                     var self = $(this);
                     e.preventDefault();
                     self.addClass('install-now updating-message');
@@ -733,8 +735,8 @@ class WPDeveloper_Notice {
                         url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
                         type: 'POST',
                         data: {
-                            action: 'wpdeveloper_upsale_core_install',
-                            _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_core_install'); ?>',
+                            action: 'wpdeveloper_upsale_core_install_<?php echo $this->plugin_name; ?>',
+                            _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_core_install_' . $this->plugin_name); ?>',
                             slug : '<?php echo $plugin_slug; ?>',
                             file : '<?php echo $plugin_file; ?>'
                         },

@@ -5,11 +5,18 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
      */
     class WPDeveloper_Core_Installer {
         /**
+         * Plugin Base Name
+         *
+         * @var string
+         */
+        private $plugin_basename;
+        /**
          * Instantiate the class
          *
          * @param string $affiliate
          */
-        function __construct() {
+        function __construct( $plugin_basename = '' ) {
+            $this->plugin_basename = $plugin_basename;
             add_action( 'init', array( $this, 'init_hooks' ) );
         }
         /**
@@ -21,7 +28,7 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
             if ( ! current_user_can( 'manage_options' ) ) {
                 return;
             }
-            add_action( 'wp_ajax_wpdeveloper_upsale_core_install', array( $this, 'core_install' ) );
+            add_action( 'wp_ajax_wpdeveloper_upsale_core_install_' . $this->plugin_basename, array( $this, 'core_install' ) );
         }
         /**
          * Fail if plugin installtion/activation fails
@@ -42,7 +49,7 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
          * @return void
          */
         public function core_install() {
-            check_ajax_referer( 'wpdeveloper_upsale_core_install' );
+            check_ajax_referer( 'wpdeveloper_upsale_core_install_' . $this->plugin_basename );
 
             if ( ! current_user_can( 'manage_options' ) ) {
                 wp_send_json_error( __( 'You don\'t have permission to install the plugins' ) );
@@ -92,9 +99,4 @@ if ( ! class_exists( 'WPDeveloper_Core_Installer' ) ) :
             return activate_plugin( $plugin_basename );
         }
     }
-    /**
-     * Initiate The Core Installer
-     */
-    new WPDeveloper_Core_Installer();
 endif;
-
