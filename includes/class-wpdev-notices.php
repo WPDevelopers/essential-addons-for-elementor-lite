@@ -59,13 +59,6 @@ class WPDeveloper_Notice {
      */
     public $options_args = array(
         // 'first_install' => true,
-        // 'notice_seen' => [
-        //     'opt_in' => false,
-        //     'first_install' => false,
-        //     'update' => false,
-        //     'review' => false,
-        //     'upsale' => false
-        // ],
         // 'notice_will_show' => [
         //     'opt_in' => true,
         //     'first_install' => false,
@@ -94,7 +87,7 @@ class WPDeveloper_Notice {
         $this->plugin_file = $plugin_file;
         $this->plugin_name = basename( $plugin_file, '.php' );
         $this->version = $version;
-        $this->timestamp = current_time( 'timestamp' );
+        $this->timestamp = intval( current_time( 'timestamp' ) );
         $this->notice_id = 'wpdeveloper_notice_' . str_replace( '.', '_', $this->version );
 
         if( ! class_exists( 'WPDeveloper_Core_Installer' ) ) {
@@ -107,7 +100,7 @@ class WPDeveloper_Notice {
      */
     public function init(){
         add_action( 'init', array( $this, 'first_install_track') );
-        add_action( 'deactivate_' . $this->plugin_name, array( $this, 'first_install_end' ) );
+        add_action( 'deactivate_' . $this->plugin_file, array( $this, 'first_install_end' ) );
         add_action( 'init', array( $this, 'hooks' ) );
     }
     /**
@@ -115,6 +108,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function hooks(){
+        add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
         add_action( 'wp_ajax_wpdeveloper_upsale_notice_dissmiss', array( $this, 'upsale_notice_dissmiss' ) );
         add_action( 'wpdeveloper_before_notice', array( $this, 'before' ) );
         add_action( 'wpdeveloper_after_notice', array( $this, 'after' ) );
@@ -122,14 +116,16 @@ class WPDeveloper_Notice {
         add_action( 'wpdeveloper_after_upsale_notice', array( $this, 'after' ) );
         add_action( 'wpdeveloper_notices', array( $this, 'content' ) );
         if( current_user_can( 'install_plugins' ) ) {
-            add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
-            if( isset( $_GET['plugin'] ) ) {
+            if( isset( $_GET['plugin'] ) &&  $_GET['plugin'] == $this->plugin_name ) {
+                do_action( 'wpdeveloper_notice_clicked' );
                 /**
                  * Redirect User To the Current URL, but without set query arguments.
                  */
                 wp_safe_redirect( $this->redirect_to() );
             }
-            $current_notice = $this->next_notice();
+            $return_notice = $this->next_notice();
+            $current_notice = current( $return_notice );
+            $next_notice = next( $return_notice ); 
 
             $deserve_notice = $this->deserve_notice( $current_notice );
             $options_data = $this->get_options_data();
@@ -137,32 +133,33 @@ class WPDeveloper_Notice {
 
             $notice_time = isset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] ) 
                 ? $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] : $this->timestamp;
+            $next_notice_time = $next_notice ? $options_data[ $this->plugin_name ]['notice_will_show'][ $next_notice ] : $this->timestamp;
             $current_notice_end  = $this->makeTime( $notice_time, $this->cne_time );
+
+            if( ! $deserve_notice ) {
+                unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] );
+                $this->update_options_data( $options_data[ $this->plugin_name ] );
+            }
 
             if( $deserve_notice ) {
                 /**
                  * TODO: automatic maybe later setup with time.
-                 */        
-
-                if( $this->timestamp >= $current_notice_end ) {
+                 */
+                if( ( $this->timestamp >= $current_notice_end ) || ( $this->timestamp > $next_notice_time ) ) {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
                 }
-                
-                if( isset( $options_data[ $this->plugin_name ]['current_notice_start'] ) ) {
-                    $current_notice_start = $options_data[ $this->plugin_name ]['current_notice_start'];
-                } else {
-                    $current_notice_start = $this->timestamp;
-                }
-
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
                         if( $current_notice === 'upsale' ) {
                             $upsale_args = $this->get_upsale_args();
+                            if ( ! function_exists( 'get_plugins' ) ) {
+                                include ABSPATH . '/wp-admin/includes/plugin.php';
+                            }
                             $plugins = get_plugins();
                             $pkey = $upsale_args['slug'] . '/' . $upsale_args['file'];
-
                             if( isset( $plugins[ $pkey ] ) ) {
+                                $this->update( $current_notice );
                                 return;
                             }
                             add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
@@ -181,7 +178,7 @@ class WPDeveloper_Notice {
      * @return integer
      */
     public function makeTime( $current, $time ) {
-        return strtotime( date('Y-m-d H:i:s', $current) . " +$time" );
+        return intval( strtotime( date('Y-m-d H:i:s', $current) . " +$time" ) );
     }
     /**
      * Automatice Maybe Later.
@@ -200,19 +197,13 @@ class WPDeveloper_Notice {
      * When links are clicked, this function will invoked.
      * @return void
      */
-    public function clicked(){
-        // if( ! isset( $_GET['plugin'] ) || ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'wpdeveloper-nonce' ) ) {
-        //     return;
-        // }
+    public function clicked(){        
         if( isset( $_GET['plugin'] ) && $_GET['plugin'] === $this->plugin_name ) {
             $options_data = $this->get_options_data();
-            $clicked_from = $this->next_notice();
+            $clicked_from = current( $this->next_notice() );
             extract($_GET);
 
             $later_time = '';
-
-            // dump( $_GET );
-            // die;
 
             switch( $clicked_from ) {
 
@@ -242,13 +233,7 @@ class WPDeveloper_Notice {
                 $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] = $later_time;
             }
             if( isset( $dismiss ) && $dismiss == true ) { 
-                $user_notices = $this->get_user_notices();
-                if( ! $user_notices ) {
-                    $user_notices = [];
-                }
-                $user_notices[ $this->notice_id ][ $this->plugin_name ][] = $clicked_from;
-                unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] );
-                update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
+                $this->update( $clicked_from );
             }
             $this->update_options_data( $options_data[ $this->plugin_name ] );
         }
@@ -263,7 +248,7 @@ class WPDeveloper_Notice {
         $query_string = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
         parse_str( $query_string, $current_url );
 
-        $unset_array = array( 'dismiss', 'plugin', '_wpnonce', 'later', 'plugin_action' );
+        $unset_array = array( 'dismiss', 'plugin', '_wpnonce', 'later', 'plugin_action', 'marketing_optin' );
 
         foreach( $unset_array as $value ) {
             if( isset( $current_url[ $value ] ) ) {
@@ -280,7 +265,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function before(){
-        $current_notice = $this->next_notice();
+        $current_notice = current( $this->next_notice() );
         $classes = 'notice notice-info put-dismiss-notice';
         if( isset( $this->data['classes'] ) ) {
             if( isset( $this->data['classes'][ $current_notice ] ) ) {
@@ -307,7 +292,7 @@ class WPDeveloper_Notice {
      */
     public function content(){
         $options_data = $this->get_options_data();
-        $notice = $this->next_notice();
+        $notice = current( $this->next_notice() );
 
         switch( $notice ) {
             case 'opt_in' :
@@ -431,15 +416,13 @@ class WPDeveloper_Notice {
         } else {
             $return_notice = $options_data[ $this->plugin_name ]['notice_will_show'];
         }
-        $deserve_notice_timestamp = INF;
-        $deserve_notice = '';
-        foreach( $return_notice as $notice => $timestamp ) {
-            if( $timestamp <= $deserve_notice_timestamp ) {
-                $deserve_notice_timestamp = $timestamp;
-                $deserve_notice = $notice;
-            }
+
+        if( is_array( $return_notice ) ) {
+            $return_notice = array_flip( $return_notice );
+            ksort( $return_notice );
         }
-        return $deserve_notice;
+
+        return $return_notice;
     }
     /**
      * Which notice is deserve to show in next slot.
@@ -448,6 +431,9 @@ class WPDeveloper_Notice {
      */
     private function deserve_notice( $notice ) {        
         $notices = $this->get_user_notices();
+        if( $notice === false ) {
+            return false;
+        }
         if( empty( $notices ) ) {
             return true;
         } else {
@@ -467,8 +453,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function admin_notices(){
-        $current_notice = $this->next_notice();
-        do_action( 'wpdeveloper_notice_clicked' );
+        $current_notice = current( $this->next_notice() );
         if( $current_notice == 'opt_in' ) {
             do_action( 'wpdeveloper_notices' );
             return;
@@ -668,7 +653,27 @@ class WPDeveloper_Notice {
      * @return void
      */
 	private function get_user_notices() {
-		return get_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, true );
+        $notices = get_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, true );
+		return ! $notices ? array() : $notices;
+    }
+    /**
+     * This function is responsible for update meta information.
+     *
+     * @param string $notice
+     * @return void
+     */
+    private function update( $notice ){
+        if( empty( $notice ) ) {
+            return;
+        }
+        $options_data = $this->get_options_data();
+        $user_notices = $this->get_user_notices();
+        $user_notices[ $this->notice_id ][ $this->plugin_name ][] = $notice;
+        // Remove the upsale from notice_will_show field in options DB.
+        unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $notice ] );
+        $this->update_options_data( $options_data[ $this->plugin_name ] );
+        // Set users meta, not to show again current_version notice.
+        update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
     }
     /**
      * This function is responsible for do action when 
@@ -686,17 +691,7 @@ class WPDeveloper_Notice {
         
         $dismiss = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
         if( $dismiss ) { 
-            $user_notices = $this->get_user_notices();
-            if( ! $user_notices ) {
-                $user_notices = [];
-            }
-            $user_notices[ $this->notice_id ][ $this->plugin_name ][] = 'upsale';
-            // Remove the upsale from notice_will_show field in options DB.
-            $options_data = $this->get_options_data();
-            unset( $options_data[ $this->plugin_name ]['notice_will_show'][ 'upsale' ] );
-            $this->update_options_data( $options_data[ $this->plugin_name ] );
-            // Set users meta, not to show again current_version notice.
-            update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
+            $this->update( 'upsale' );
             echo 'success';
         } else {
             echo 'failed';
@@ -861,11 +856,6 @@ $notice->upsale_args = array(
 $notice->text_domain = 'essential-addons-elementor';
 
 $notice->options_args = array(
-    'notice_seen' => [
-        'review' => false,
-        'upsale' => false,
-        'opt_in' => false,
-    ],
    'notice_will_show' => [
         'opt_in' => $notice->timestamp,
         'review' => $notice->makeTime( $notice->timestamp, '4 Day' ), // after 4 days
