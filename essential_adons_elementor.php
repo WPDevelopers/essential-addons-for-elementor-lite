@@ -242,7 +242,7 @@ function essential_addons_el_enqueue(){
     }
     
     if( $is_component_active['progress-bar'] ) {
-		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/loading-bar.min.js', array('jquery'),'1.0', true);
+		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
    }
    if( $is_component_active['section-particles'] ) {
 		wp_enqueue_script(
