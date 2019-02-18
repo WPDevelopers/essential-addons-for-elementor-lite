@@ -107,6 +107,11 @@
                         }
                     }
                 }
+
+                .eael-feature-list-img {
+                    font-size: 8px;
+                    line-height: 1;
+                }
             }
 
 
@@ -168,6 +173,12 @@
                         -ms-transform: rotate(-43deg);
                         -webkit-transform: rotate(-43deg);
                         transform: rotate(-43deg);
+                    }
+
+                    img {
+                        -ms-transform: rotate(-45deg);
+                        -webkit-transform: rotate(-45deg);
+                        transform: rotate(-45deg);
                     }
                 }
             }
