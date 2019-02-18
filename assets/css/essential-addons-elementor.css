@@ -7636,6 +7636,10 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
 }
+.elementor-widget-eael-feature-list .eael-feature-list-items .eael-feature-list-item .eael-feature-list-icon-box .eael-feature-list-img {
+  font-size: 8px;
+  line-height: 1;
+}
 .elementor-widget-eael-feature-list .eael-feature-list-items .eael-feature-list-item .eael-feature-list-content-box {
   margin: 0 0 0 20px;
 }
@@ -7670,6 +7674,11 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   -ms-transform: rotate(-43deg);
   -webkit-transform: rotate(-43deg);
   transform: rotate(-43deg);
+}
+.elementor-widget-eael-feature-list .eael-feature-list-items.rhombus .eael-feature-list-icon-box .eael-feature-list-icon img {
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.rhombus .eael-feature-list-content-box .eael-feature-list-title {
   margin-top: 15px;

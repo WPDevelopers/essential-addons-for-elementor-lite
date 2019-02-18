@@ -60,10 +60,41 @@ class Widget_Eael_Feature_List extends Widget_Base {
 				],
 				'fields'      => [
 					[
+						'name'        => 'eael_feature_list_icon_type',
+						'label'       => esc_html__( 'Icon Type', 'essential-addons-elementor' ),
+						'type'        => Controls_Manager::CHOOSE,
+						'options'     => [
+							'icon'  => [
+								'title' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+								'icon'  => 'fa fa-star',
+							],
+							'image' => [
+								'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
+								'icon'  => 'fa fa-picture-o',
+							],
+						],
+						'default'     => 'icon',
+						'label_block' => false,
+					],
+					[
 						'name'    => 'eael_feature_list_icon',
 						'label'   => esc_html__( 'Icon', 'essential-addons-elementor' ),
 						'type'    => Controls_Manager::ICON,
-						'default' => 'fa fa-plus'
+						'default' => 'fa fa-plus',
+						'condition' => [
+							'eael_feature_list_icon_type' => 'icon'
+						]
+					],
+					[
+						'name'      => 'eael_feature_list_img',
+						'label'     => esc_html__( 'Image', 'essential-addons-elementor' ),
+						'type'      => Controls_Manager::MEDIA,
+						'default'   => [
+							'url' => Utils::get_placeholder_image_src(),
+						],
+						'condition' => [
+							'eael_feature_list_icon_type' => 'image'
+						]
 					],
 					[
 						'name'    => 'eael_feature_list_title',
@@ -300,8 +331,8 @@ class Widget_Eael_Feature_List extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .connector-type-classic .connector'                                                                                                          => 'border-width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.-icon-position-left .connector-type-modern .eael-feature-list-item:before, {{WRAPPER}}.-icon-position-left .connector-type-modern .eael-feature-list-item:after'  => 'border-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .connector-type-classic .connector'                                                                                                                                => 'border-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.-icon-position-left .connector-type-modern .eael-feature-list-item:before, {{WRAPPER}}.-icon-position-left .connector-type-modern .eael-feature-list-item:after'   => 'border-width: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}}.-icon-position-right .connector-type-modern .eael-feature-list-item:before, {{WRAPPER}}.-icon-position-right .connector-type-modern .eael-feature-list-item:after' => 'border-width: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
@@ -381,8 +412,8 @@ class Widget_Eael_Feature_List extends Widget_Base {
 				],
 				'selectors'       => [
 					'{{WRAPPER}}.-icon-position-left .eael-feature-list-content-box, {{WRAPPER}}.-icon-position-right .eael-feature-list-content-box, {{WRAPPER}}.-icon-position-top .eael-feature-list-content-box' => 'margin: {{SIZE}}{{UNIT}};',
-					'(mobile){{WRAPPER}}.-mobile-icon-position-left .eael-feature-list-content-box' => 'margin: {{SIZE}}{{UNIT}} 0 0 0 !important;',
-					'(mobile){{WRAPPER}}.-mobile-icon-position-right .eael-feature-list-content-box' => 'margin: {{SIZE}}{{UNIT}} 0 0 0 !important;',
+					'(mobile){{WRAPPER}}.-mobile-icon-position-left .eael-feature-list-content-box'                                                                                                                  => 'margin: {{SIZE}}{{UNIT}} 0 0 0 !important;',
+					'(mobile){{WRAPPER}}.-mobile-icon-position-right .eael-feature-list-content-box'                                                                                                                 => 'margin: {{SIZE}}{{UNIT}} 0 0 0 !important;',
 				],
 			]
 		);
@@ -403,6 +434,7 @@ class Widget_Eael_Feature_List extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-feature-list-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-feature-list-img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -478,8 +510,8 @@ class Widget_Eael_Feature_List extends Widget_Base {
 		$this->add_control(
 			'eael_feature_list_heading_title',
 			[
-				'label'     => esc_html__( 'Title', 'essential-addons-elementor' ),
-				'type'      => Controls_Manager::HEADING,
+				'label' => esc_html__( 'Title', 'essential-addons-elementor' ),
+				'type'  => Controls_Manager::HEADING,
 			]
 		);
 
@@ -605,10 +637,11 @@ class Widget_Eael_Feature_List extends Widget_Base {
 			$connector = 'left: calc(100% - ' . $connector_width . 'px) !important; right: 0;';
 		}
 
+
 		?>
 
         <ul <?php echo $this->get_render_attribute_string( 'eael_feature_list' ); ?>>
-			<?php
+			<?php $i = 0;
 			foreach ( $settings['eael_feature_list'] as $index => $item ) :
 
 				$list_icon_setting_key = $this->get_repeater_setting_key( 'eael_feature_list_icon', 'eael_feature_list', $index );
@@ -650,13 +683,28 @@ class Widget_Eael_Feature_List extends Widget_Base {
 					<?php if ( $feature_has_icon ) : ?>
 
                         <div class="eael-feature-list-icon-box">
-                            <<?php echo implode( ' ', [
-                                $feature_icon_tag,
-                                $feature_icon_attributes,
-                                $feature_link_attributes
-                            ] ); ?>>
-                                <i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
-                            </<?php echo $feature_icon_tag; ?>>
+                        <<?php echo implode( ' ', [
+							$feature_icon_tag,
+							$feature_icon_attributes,
+							$feature_link_attributes
+						] ); ?>>
+
+                        <?php if ($item['eael_feature_list_icon_type'] == 'icon') { ?>
+                            <i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
+                        <?php } ?>
+
+                        <?php if ($item['eael_feature_list_icon_type'] == 'image') {
+							$this->add_render_attribute('feature_list_image'.$i, [
+								'src'	=> esc_url( $item['eael_feature_list_img']['url'] ),
+								'class'	=> 'eael-feature-list-img',
+								'alt'	=> esc_attr( $item['eael_feature_list_title'] )
+							]);
+
+                            ?>
+                            <img <?php echo $this->get_render_attribute_string('feature_list_image'.$i); ?>>
+                        <?php } ?>
+
+                        </<?php echo $feature_icon_tag; ?>>
                         </div>
 
 					<?php endif; ?>
@@ -672,7 +720,7 @@ class Widget_Eael_Feature_List extends Widget_Base {
                     </div>
 
                 </li>
-			<?php endforeach; ?>
+			<?php $i++; endforeach; ?>
         </ul>
 		<?php
 	}
