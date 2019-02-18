@@ -313,7 +313,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 }
 if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' ) ) {
     function essential_addons_elementor_lite_start_plugin_tracking() {
-        $wisdom = new Eael_Plugin_Usage_Tracker(
+        $wpins = new Eael_Plugin_Usage_Tracker(
             __FILE__,
             'http://app.wpdeveloper.net',
             array(),

@@ -679,7 +679,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 						<p><?php echo __( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, I promise.' ); ?></p>
 					</div>
 					<p>
-						<a href="<?php echo esc_url( $url_yes ); ?>" class="button-primary"><?php _e( 'Allow', 'plugin-usage-tracker' ); ?></a>
+						<a href="<?php echo esc_url( $url_yes ); ?>" class="button-primary"><?php _e( 'Sure, I\'d like to help', 'plugin-usage-tracker' ); ?></a>
 						<a href="<?php echo esc_url( $url_no ); ?>" class="button-secondary"><?php _e( 'No Thanks', 'plugin-usage-tracker' ); ?></a>
 					</p>
 		            <?php echo "<script type='text/javascript'>jQuery('.insights-data-we-collect').on('click', function(e) {
