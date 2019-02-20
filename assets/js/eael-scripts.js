@@ -843,6 +843,50 @@
 		}
 		
 	};
+
+    /*=================================*/
+    /* 37. Section Tooltip
+    /*=================================*/
+
+    var EaelSectionTooltip = function($scope, $) {
+        var $tooltip = $scope.find('.eael-section-tooltip'), i;
+        var $currentTooltip = $( '#' + $($tooltip[i]).attr('id') );
+            // $tooltipSide	= ( $currentTooltip.data('side') !== undefined ) ? $currentTooltip.data('side') : false,
+            // $tooltipTrigger	= ( $currentTooltip.data('trigger') !== undefined ) ? $currentTooltip.data('trigger') : 'hover',
+            // $animation		= ( $currentTooltip.data('animation') !== undefined ) ? $currentTooltip.data('animation') : 'fade',
+            // $anim_duration	= ( $currentTooltip.data('animation_duration') !== undefined ) ? $currentTooltip.data('animation_duration') : 300,
+            // $theme 			= ( $currentTooltip.data('theme') !== undefined ) ? $currentTooltip.data('theme') : 'default',
+            // $arrow			= ( 'yes' == $currentTooltip.data('arrow') ) ? true : false;
+
+        // $currentTooltip.tooltipster({
+        //     animation: $animation,
+        //     trigger: $tooltipTrigger,
+        //     side: $tooltipSide,
+        //     delay: $anim_duration,
+        //     arrow: $arrow,
+        //     theme: 'tooltipster-' + $theme
+        // });
+
+        // new Tippy( $currentTooltip ,{
+        //     position:'top',
+        //     animation:'scale',
+        //     arrow:'true'
+        // });
+
+        // tippy( $($scope), {
+        //     position:'top',
+        //     animation:'scale',
+        //     arrow:'true'
+        // });
+
+        tippy('.eael-section-tooltip', {
+            placement:'top',
+            animation:'scale',
+            arrow:'true'
+        })
+    }
+
+
     
     $(window).on('elementor/frontend/init', function () {
         if(elementorFrontend.isEditMode()) {
@@ -863,6 +907,7 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-countdown.default', CountDown);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-progress-bar.default', ProgressBar);
         elementorFrontend.hooks.addAction( 'frontend/element_ready/section', EaelParticlesHandler );
+        elementorFrontend.hooks.addAction( 'frontend/element_ready/section', EaelSectionTooltip );
     });
 
 }(jQuery));
