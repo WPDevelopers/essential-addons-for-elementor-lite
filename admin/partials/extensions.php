@@ -12,6 +12,15 @@
                 </div>
 
             </div>
+            <div class="eael-checkbox-container">
+
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="section-tooltip" name="section-tooltip" <?php checked( 1, $this->eael_get_settings['section-tooltip'], true ); ?> >
+                    <label for="section-tooltip"></label>
+                    <p class="eael-el-title"><?php _e( 'Section Tooltip', 'essential-addons-elementor' ) ?></p>
+                </div>
+
+            </div>
             <h3>Premium Extensions</h3>
             <div class="eael-checkbox-container">
 
