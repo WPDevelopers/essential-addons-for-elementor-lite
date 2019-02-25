@@ -1,3 +1,9 @@
-.elementor-section.eael-particles-section .elementor-container {
+.elementor-section.eael-particles-section .elementor-container,
+.elementor-section .elementor-container {
     z-index: 99;
+}
+
+.elementor-section.eael-particles-section > canvas{
+    position: absolute;
+    top:0;
 }
