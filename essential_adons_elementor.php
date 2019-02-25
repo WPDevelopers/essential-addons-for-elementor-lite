@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.9.3
+ * Version: 2.9.6
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'ESSENTIAL_ADDONS_EL_URL', plugins_url( '/', __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ESSENTIAL_ADDONS_EL_ROOT', __FILE__ );
-define( 'ESSENTIAL_ADDONS_VERSION', '2.9.3' );
-define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.3' );
+define( 'ESSENTIAL_ADDONS_VERSION', '2.9.6' );
+define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.6' );
 define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 
 
@@ -28,7 +28,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/eael-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
-require_once ESSENTIAL_ADDONS_EL_PATH .'includes/extensions.php';
+require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
 
 /**
  * This function will return true for all activated modules
@@ -37,7 +37,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH .'includes/extensions.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'wisdom_registered_setting', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list' ];
    
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
@@ -170,6 +170,9 @@ function add_eael_elements() {
    if( $is_component_active['progress-bar'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/progress-bar/progress-bar.php';
    }
+   if( $is_component_active['feature-list'] ) {
+      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/feature-list/feature-list.php';
+   }
 }
 add_action('elementor/widgets/widgets_registered','add_eael_elements');
 
@@ -242,7 +245,7 @@ function essential_addons_el_enqueue(){
     }
     
     if( $is_component_active['progress-bar'] ) {
-		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/loading-bar.min.js', array('jquery'),'1.0', true);
+		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
    }
    if( $is_component_active['section-particles'] ) {
 		wp_enqueue_script(
@@ -313,9 +316,9 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 }
 if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' ) ) {
     function essential_addons_elementor_lite_start_plugin_tracking() {
-        $wisdom = new Eael_Plugin_Usage_Tracker(
+        $wpins = new Eael_Plugin_Usage_Tracker(
             __FILE__,
-            'https://wpdeveloper.net',
+            'http://app.wpdeveloper.net',
             array(),
             true,
             true,
@@ -324,7 +327,6 @@ if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' )
     }
     essential_addons_elementor_lite_start_plugin_tracking();
 }
-
 
 function eael_init() {
     if ( class_exists( 'Caldera_Forms' ) ) {
@@ -374,3 +376,50 @@ function eael_init() {
 }
 add_action( 'plugins_loaded', 'eael_init' );
 require_once dirname( __FILE__ ) . '/includes/class-wpdev-notices.php';
+
+/**
+ * EAE Pro Activation
+ */
+if( ! function_exists( 'eae_pro_filter_action_links' ) ) :
+   add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', 'eae_pro_filter_action_links');
+   function eae_pro_filter_action_links( $links ) {
+      if( ! function_exists( 'get_plugins' ) ) {
+         include ABSPATH . '/wp-admin/includes/plugin.php';
+      }
+      $activate_plugins = get_option( 'active_plugins' );
+      if( in_array( plugin_basename( __FILE__ ), $activate_plugins ) ) {
+         $pro_plugin_base_name = 'essential-addons-elementor/essential_adons_elementor.php';
+         if( isset( $links['activate'] ) ) {
+            $activate_link = $links['activate'];
+            // Insert an onClick action to allow form before deactivating
+            $activation_link = str_replace( '<a ', '<a id="eae-pro-activation" onclick="javascript:event.preventDefault();"', $activate_link );
+            $links['activate'] = $activation_link;
+         }
+         return $links;
+      }
+   }
+endif;
+
+if( ! function_exists( 'plugins_footer_for_pro' ) ) :
+   add_action( 'admin_footer-plugins.php', 'plugins_footer_for_pro' );
+   function plugins_footer_for_pro(){
+      ?>
+      <script>
+         jQuery(document).ready(function( $ ){
+            $('#eae-pro-activation').on('click', function( e ){
+               e.preventDefault();
+               swal({
+                  title: '<h2>Please <span style="color: red">Deactivate</span> <br><br> Free Version</h2>',
+                  type: 'error',
+                  html:
+                     'You don\'t need the <span style="color: #1abc9c;font-weight: 700;">Free Version</span> to use the <span style="color: #00629a;font-weight: 700;">Premium</span> one.',
+                  showCloseButton: true,
+                  showCancelButton: false,
+                  focusConfirm: false,
+               }).catch(swal.noop);
+            });
+         });
+      </script>
+      <?php
+   }
+endif;
