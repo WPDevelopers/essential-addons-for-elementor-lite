@@ -159,16 +159,11 @@ class WPDeveloper_Notice {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
                 }
-
-                // dump( $current_notice );
-                // dump( date('Y-m-d h:i:s', $this->timestamp) );
                 
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
                         if( $current_notice === 'upsale' ) {
-                            // dump( date('Y-m-d h:i:s', $notice_time) );
                             $upsale_args = $this->get_upsale_args();
-                            // dump( $upsale_args );
                             if( empty( $upsale_args  ) ) {
                                 unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] );
                                 $this->update_options_data( $options_data[ $this->plugin_name ] );
