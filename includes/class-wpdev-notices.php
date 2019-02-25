@@ -159,20 +159,31 @@ class WPDeveloper_Notice {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
                 }
+
+                // dump( $current_notice );
+                // dump( date('Y-m-d h:i:s', $this->timestamp) );
+                
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
                         if( $current_notice === 'upsale' ) {
+                            // dump( date('Y-m-d h:i:s', $notice_time) );
                             $upsale_args = $this->get_upsale_args();
-                            if ( ! function_exists( 'get_plugins' ) ) {
-                                include ABSPATH . '/wp-admin/includes/plugin.php';
+                            // dump( $upsale_args );
+                            if( empty( $upsale_args  ) ) {
+                                unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] );
+                                $this->update_options_data( $options_data[ $this->plugin_name ] );
+                            } else {
+                                if ( ! function_exists( 'get_plugins' ) ) {
+                                    include ABSPATH . '/wp-admin/includes/plugin.php';
+                                }
+                                $plugins = get_plugins();
+                                $pkey = $upsale_args['slug'] . '/' . $upsale_args['file'];
+                                if( isset( $plugins[ $pkey ] ) ) {
+                                    $this->update( $current_notice );
+                                    return;
+                                }
+                                add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
                             }
-                            $plugins = get_plugins();
-                            $pkey = $upsale_args['slug'] . '/' . $upsale_args['file'];
-                            if( isset( $plugins[ $pkey ] ) ) {
-                                $this->update( $current_notice );
-                                return;
-                            }
-                            add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
                         } else {
                             add_action( 'admin_notices', array( $this, 'admin_notices' ) );
                         }
