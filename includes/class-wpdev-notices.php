@@ -832,15 +832,6 @@ $notice->links = [
 ];
 
 /**
- * This is upsale notice settings
- * classes for wrapper, 
- * Message message for showing.
- */
-$notice->classes( 'upsale', 'notice is-dismissible' );
-$notice->message( 'upsale', '<p>'. __( 'Get the missing Drag & Drop Post Calendar feature for WordPress for Free!', 'essential-addons-elementor' ) .'</p>' );
-$notice->thumbnail( 'upsale', plugins_url( 'admin/assets/images/wpsp-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
-
-/**
  * This is review message and thumbnail.
  */
 $notice->message( 'review', '<p>'. __( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) .'</p>' );
@@ -857,19 +848,12 @@ $notice->cne_time = '3 Day';
  */
 $notice->maybe_later_time = '7 Day';
 
-$notice->upsale_args = array(
-    'slug' => 'wp-scheduled-posts',
-    'page_slug' => 'wpsp-schedule-calendar',
-    'file' => 'wp-scheduled-posts.php'
-);
-
 $notice->text_domain = 'essential-addons-elementor';
 
 $notice->options_args = array(
    'notice_will_show' => [
         'opt_in' => $notice->timestamp,
         'review' => $notice->makeTime( $notice->timestamp, '4 Day' ), // after 4 days
-        'upsale' => $notice->makeTime( $notice->timestamp, '2 Hour' ), // will be after 2 hours
    ]
 );
 
