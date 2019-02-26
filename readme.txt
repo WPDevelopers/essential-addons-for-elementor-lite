@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, mdsabuz, manik08cse
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 5.0.3
+Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.9.6
+Stable tag: 2.9.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -168,6 +168,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.9.7 =
+
+- Particles extension revamped
 
 = 2.9.6 =
 
