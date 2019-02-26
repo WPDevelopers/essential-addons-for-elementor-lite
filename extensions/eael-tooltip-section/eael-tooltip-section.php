@@ -408,17 +408,17 @@ class EAEL_Tooltip_Section extends Module_Base {
 			$element->add_render_attribute( '_wrapper', [
 				'id'                   => 'eael-section-tooltip-' . $element->get_id(),
 				'class'                => 'eael-section-tooltip',
-//				'data-tippy'           => $settings['eael_tooltip_section_content'],
-//				'data-tippy-animation' => $settings['eael_tooltip_section_animation'],
-//				'data-tippy-duration'  => $settings['eael_tooltip_section_duration'],
-//				'data-tippy-arrow'     => $settings['eael_tooltip_section_arrow'],
-//				'data-tippy-delay'     => $settings['eael_tooltip_section_delay'],
-//				'data-tippy-size'      => $settings['eael_tooltip_section_size'],
-//				'data-tippy-placement' => $settings['eael_tooltip_section_position'],
-//				'data-tippy-trigger'   => $settings['eael_tooltip_section_trigger'],
-//
-//				'data-tippy-distance' => $settings['eael_tooltip_section_distance'],
-//				'data-tippy-theme'    => $settings['eael_tooltip_section_theme'],
+				'data-tippy'           => $settings['eael_tooltip_section_content'],
+				'data-tippy-animation' => $settings['eael_tooltip_section_animation'],
+				'data-tippy-duration'  => $settings['eael_tooltip_section_duration'],
+				'data-tippy-arrow'     => $settings['eael_tooltip_section_arrow'],
+				'data-tippy-delay'     => $settings['eael_tooltip_section_delay'],
+				'data-tippy-size'      => $settings['eael_tooltip_section_size'],
+				'data-tippy-placement' => $settings['eael_tooltip_section_position'],
+				'data-tippy-trigger'   => $settings['eael_tooltip_section_trigger'],
+
+				'data-tippy-distance' => $settings['eael_tooltip_section_distance'],
+				'data-tippy-theme'    => $settings['eael_tooltip_section_theme'],
 			] );
 
 			$bg_color = $settings['eael_tooltip_section_background_color'];
