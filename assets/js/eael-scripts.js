@@ -848,44 +848,102 @@
     /* 37. Section Tooltip
     /*=================================*/
 
-    var EaelSectionTooltip = function($scope, $) {
-        var $tooltip = $scope.find('.eael-section-tooltip'), i;
-        var $currentTooltip = $( '#' + $($tooltip[i]).attr('id') );
-            // $tooltipSide	= ( $currentTooltip.data('side') !== undefined ) ? $currentTooltip.data('side') : false,
-            // $tooltipTrigger	= ( $currentTooltip.data('trigger') !== undefined ) ? $currentTooltip.data('trigger') : 'hover',
-            // $animation		= ( $currentTooltip.data('animation') !== undefined ) ? $currentTooltip.data('animation') : 'fade',
-            // $anim_duration	= ( $currentTooltip.data('animation_duration') !== undefined ) ? $currentTooltip.data('animation_duration') : 300,
-            // $theme 			= ( $currentTooltip.data('theme') !== undefined ) ? $currentTooltip.data('theme') : 'default',
-            // $arrow			= ( 'yes' == $currentTooltip.data('arrow') ) ? true : false;
+    var EaelSectionTooltip = function ($scope, $) {
 
-        // $currentTooltip.tooltipster({
-        //     animation: $animation,
-        //     trigger: $tooltipTrigger,
-        //     side: $tooltipSide,
-        //     delay: $anim_duration,
-        //     arrow: $arrow,
-        //     theme: 'tooltipster-' + $theme
-        // });
+        var target = $scope,
+            sectionId = target.data('id'),
+            editMode = elementorFrontend.isEditMode(),
+            settings;
 
-        // new Tippy( $currentTooltip ,{
-        //     position:'top',
-        //     animation:'scale',
-        //     arrow:'true'
-        // });
+        if (editMode) {
 
-        // tippy( $($scope), {
-        //     position:'top',
-        //     animation:'scale',
-        //     arrow:'true'
-        // });
+            var editorElements = null,
+                sectionData = {},
+                settings = {};
 
-        tippy('.eael-section-tooltip', {
-            placement:'top',
-            animation:'scale',
-            arrow:'true'
-        })
+            if (!window.elementor.hasOwnProperty('elements')) {
+                return false;
+            }
+
+            editorElements = window.elementor.elements;
+
+
+            if (!editorElements.models) {
+                return false;
+            }
+
+            $.each(editorElements.models, function (index, elem) {
+
+                var columns = elem.attributes.elements;
+
+                $.each(columns.models, function (inde, column) {
+                    var widgets = column.attributes.elements;
+
+                    $.each(widgets.models, function (ind, widget) {
+
+                        if (sectionId == widget.id) {
+                            sectionData = widget.attributes.settings.attributes;
+                        }
+
+                    });
+                });
+            });
+
+            settings.switch = sectionData['eael_tooltip_section_enable'];
+            settings.content = sectionData['eael_tooltip_section_content'];
+            settings.position = sectionData['eael_tooltip_section_position'];
+            settings.animation = sectionData['eael_tooltip_section_animation'];
+            settings.arrow = sectionData['eael_tooltip_section_arrow'];
+            settings.duration = sectionData['eael_tooltip_section_duration'];
+            settings.delay = sectionData['eael_tooltip_section_delay'];
+            settings.size = sectionData['eael_tooltip_section_size'];
+            settings.trigger = sectionData['eael_tooltip_section_trigger'];
+            settings.theme = sectionData['eael_tooltip_section_theme'];
+
+            if (settings.switch == 'yes') {
+
+                target.addClass('eael-section-tooltip');
+                generateTooltip();
+
+            } else {
+                target.removeClass('eael-section-tooltip');
+            }
+
+            if (0 !== settings.length) {
+                return settings;
+            }
+
+        }
+
+        if (!editMode || !settings) {
+            return false;
+        }
+
+        function generateTooltip() {
+
+            target.attr('id', 'eael-section-tooltip-' + sectionId);
+            var $currentTooltip = '#' + target.attr('id');
+
+            var tooltipOptions = {
+                content: settings.content,
+                placement: settings.position,
+                animation: settings.animation,
+                arrow: settings.arrow,
+                duration: settings.duration,
+                delay: settings.content,
+                size: settings.size,
+                // trigger: settings.trigger,
+                animateFill: false,
+                // theme: settings.theme,
+                interactive: true,
+                onShow(instance){
+                    instance.setContent(settings.content)
+                }
+            };
+
+            tippy( $currentTooltip, tooltipOptions);
+        }
     }
-
 
     
     $(window).on('elementor/frontend/init', function () {
@@ -906,8 +964,8 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-image-accordion.default', ImageAccordion);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-countdown.default', CountDown);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-progress-bar.default', ProgressBar);
-        elementorFrontend.hooks.addAction( 'frontend/element_ready/section', EaelParticlesHandler );
-        elementorFrontend.hooks.addAction( 'frontend/element_ready/section', EaelSectionTooltip );
+        elementorFrontend.hooks.addAction('frontend/element_ready/section', EaelParticlesHandler);
+        elementorFrontend.hooks.addAction('frontend/element_ready/widget', EaelSectionTooltip);
     });
 
 }(jQuery));
