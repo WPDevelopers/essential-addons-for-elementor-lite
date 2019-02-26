@@ -41,8 +41,11 @@
 32. Tooltip
 33. Progress Bar
 34. Image accordion
+35. Feature List
 -------------------------------------------------------*/
 
+@import "variables";
+@import "mixins";
 @import "general";
 @import "general-slider";
 @import "fancy-text";
@@ -78,3 +81,4 @@
 @import "progress-bar";
 @import "img-accordion";
 @import "particles";
+@import "feature-list";
