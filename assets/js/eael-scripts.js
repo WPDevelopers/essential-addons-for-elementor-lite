@@ -28,10 +28,20 @@
                 filter: $('.eael-filter-gallery-control .control.active', $scope).data('filter')
             });
 
-            // layout gal - not necessary, just in case
-            $isotope_gallery.imagesLoaded().progress(function() {
-                $isotope_gallery.isotope('layout');
-            });
+            // layout gal, while images are loadin
+	        $isotope_gallery.imagesLoaded().progress(function() {
+	            $isotope_gallery.isotope('layout');
+			});
+			
+			// layout gal, on click tabs
+			$isotope_gallery.on('arrangeComplete', function() {
+				$isotope_gallery.isotope('layout');
+			});
+			
+			// layout gal, after window loaded
+			$(window).on('load', function() {
+				$isotope_gallery.isotope('layout');
+			});
 
             // filter
             $scope.on('click', '.control', function() {
