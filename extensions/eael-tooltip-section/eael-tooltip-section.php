@@ -96,11 +96,13 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'type'               => Controls_Manager::SELECT,
 				'default'            => 'scale',
 				'options'            => [
-					'shift-away'   => __( 'Shift Away', 'essential-addons-elementor' ),
-					'shift-toward' => __( 'Shift Toward', 'essential-addons-elementor' ),
-					'fade'         => __( 'Fade', 'essential-addons-elementor' ),
-					'scale'        => __( 'Scale', 'essential-addons-elementor' ),
-					'perspective'  => __( 'Perspective', 'essential-addons-elementor' ),
+					'shift-away'         => __( 'Shift Away', 'essential-addons-elementor' ),
+					'shift-toward'       => __( 'Shift Toward', 'essential-addons-elementor' ),
+					'scale'              => __( 'Scale', 'essential-addons-elementor' ),
+					'shift-with-inertia' => __( 'Shift with inertia', 'essential-addons-elementor' ),
+					'scale-with-inertia' => __( 'Scale with inertia', 'essential-addons-elementor' ),
+					'fade'               => __( 'Fade', 'essential-addons-elementor' ),
+					'perspective'        => __( 'Perspective', 'essential-addons-elementor' ),
 				],
 				'frontend_available' => true,
 				'condition'          => [
@@ -237,7 +239,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 				],
 				'label_block' => false,
 				'selectors'   => [
-					'.ee-tooltip.ee-tooltip-{{ID}}' => 'max-width: {{SIZE}}{{UNIT}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 				'condition'   => [
 					'eael_tooltip_section_enable!' => '',
@@ -300,7 +302,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 					],
 				],
 				'selectors' => [
-					'.ee-tooltip.ee-tooltip-{{ID}}' => 'text-align: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'text-align: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_tooltip_section_enable!' => '',
@@ -315,7 +317,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'.ee-tooltip.ee-tooltip-{{ID}}' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'eael_tooltip_section_enable!' => '',
@@ -330,7 +332,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'.ee-tooltip.ee-tooltip-{{ID}}' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'eael_tooltip_section_enable!' => '',
@@ -342,7 +344,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'eael_tooltip_section_typography',
-				'selector'  => '.ee-tooltip.ee-tooltip-{{ID}}',
+				'selector'  => '.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip',
 				'scheme'    => Scheme_Typography::TYPOGRAPHY_3,
 				'separator' => 'after',
 				'condition' => [
@@ -357,9 +359,14 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'label'     => __( 'Background Color', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
-//				'selectors' => [
-//					'#eael-section-tooltip-{{ID}}.tippy-tooltip' => 'background-color: {{VALUE}};',
-//				],
+				'selectors' => [
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip, .tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip .tippy-backdrop' => 'background-color: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=top] .tippy-tooltip .tippy-arrow'                                               => 'border-top-color: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=bottom] .tippy-tooltip .tippy-arrow'                                            => 'border-bottom-color: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=left] .tippy-tooltip .tippy-arrow'                                              => 'border-left-color: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=right] .tippy-tooltip .tippy-arrow'                                             => 'border-right-color: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip.light-theme .tippy-roundarrow'                                                => 'fill: {{VALUE}};',
+				],
 				'condition' => [
 					'eael_tooltip_section_enable!' => '',
 				],
@@ -372,7 +379,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'label'     => __( 'Color', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.ee-tooltip.ee-tooltip-{{ID}}' => 'color: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_tooltip_section_enable!' => '',
@@ -384,7 +391,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'      => 'eael_tooltip_section_box_shadow',
-				'selector'  => '.ee-tooltip.ee-tooltip-{{ID}}',
+				'selector'  => '.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip',
 				'separator' => '',
 			]
 		);
@@ -400,8 +407,6 @@ class EAEL_Tooltip_Section extends Module_Base {
 	public function before_render( $element ) {
 
 		$settings = $element->get_settings_for_display();
-
-//		echo '<pre>', print_r($settings), '</pre>';
 
 		if ( $element->get_settings( 'eael_tooltip_section_enable' ) == 'yes' ) {
 
@@ -679,18 +684,18 @@ class EAEL_Tooltip_Section extends Module_Base {
 
 		?>
 
-<!--        <script>-->
-<!---->
-<!--                    // tippy('#eael-section-tooltip-14476e7', tooltipOptions);-->
-<!---->
-<!--                    tippy('.eael-section-tooltip', {-->
-<!--                        content: 'hello',-->
-<!--                        animation: 'scale',-->
-<!--                        duration: 0,-->
-<!--                        arrow: true,-->
-<!--                        delay: [1000, 200],-->
-<!--                    });-->
-<!--        </script>-->
+        <!--        <script>-->
+        <!---->
+        <!--                    // tippy('#eael-section-tooltip-14476e7', tooltipOptions);-->
+        <!---->
+        <!--                    tippy('.eael-section-tooltip', {-->
+        <!--                        content: 'hello',-->
+        <!--                        animation: 'scale',-->
+        <!--                        duration: 0,-->
+        <!--                        arrow: true,-->
+        <!--                        delay: [1000, 200],-->
+        <!--                    });-->
+        <!--        </script>-->
 
 	<?php }
 }
