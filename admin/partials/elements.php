@@ -105,11 +105,6 @@
                     <p class="eael-el-title"><?php _e( 'Twitter Feed', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="facebook-feed" name="facebook-feed" <?php checked( 1, $this->eael_get_settings['facebook-feed'], true ); ?> >
-                    <label for="facebook-feed"></label>
-                    <p class="eael-el-title"><?php _e( 'Facebook Feed', 'essential-addons-elementor' ) ?></p>
-                </div>
-                <div class="eael-checkbox">
                     <input type="checkbox" id="filter-gallery" name="filter-gallery" <?php checked( 1, $this->eael_get_settings['filter-gallery'], true ); ?> >
                     <label for="filter-gallery"></label>
                     <p class="eael-el-title"><?php _e( 'Filterable Gallery', 'essential-addons-elementor' ) ?></p>
