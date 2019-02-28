@@ -115,86 +115,6 @@
 
     }
 
-   
-
-    var FacebookFeedHandler = function ($scope, $) {
-        var loadingFeed = $scope.find( '.eael-loading-feed' );
-        var $fbCarousel            = $scope.find('.eael-facebook-feed-layout-wrapper').eq(0),
-                $name         = ($fbCarousel.data("facebook-feed-ac-name") !== undefined) ? $fbCarousel.data("facebook-feed-ac-name") : '',
-                $limit         = ($fbCarousel.data("facebook-feed-post-limit") !== undefined) ? $fbCarousel.data("facebook-feed-post-limit") : '',
-                $app_id         = ($fbCarousel.data("facebook-feed-app-id") !== undefined) ? $fbCarousel.data("facebook-feed-app-id") : '',
-                $app_secret         = ($fbCarousel.data("facebook-feed-app-secret") !== undefined) ? $fbCarousel.data("facebook-feed-app-secret") : '',
-                $length         = ($fbCarousel.data("facebook-feed-content-length") !== undefined) ? $fbCarousel.data("facebook-feed-content-length") : 400,
-                $media         = ($fbCarousel.data("facebook-feed-media") !== undefined) ? $fbCarousel.data("facebook-feed-media") : false,
-                $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
-                $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
-        // Facebook Feed Init
-        function eael_facebook_feeds() {
-            var $access_token = ($app_id+'|'+$app_secret).toString();
-            var $id_name = $name.toString();
-            $( '#eael-facebook-feed-'+ $carouselId +'.eael-facebook-feed-layout-container' ).socialfeed({
-
-                facebook:{
-                   accounts:[$id_name],
-                   limit: $limit,
-                   access_token: $access_token
-                },
-
-                // GENERAL SETTINGS
-                length: $length,
-                show_media: $media,
-                template_html: '<div class="eael-social-feed-element {{? !it.moderation_passed}}hidden{{?}}" dt-create="{{=it.dt_create}}\" social-feed-id = "{{=it.id}}">\
-                {{=it.attachment}}\
-                <div class="eael-content">\
-                    <a class="pull-left auth-img" href="{{=it.author_link}}" target="_blank">\
-                        <img class="media-object" src="{{=it.author_picture}}">\
-                    </a>\
-                    <div class="media-body">\
-                        <p>\
-                            <i class="fa fa-{{=it.social_network}} social-feed-icon"></i>\
-                            <span class="author-title">{{=it.author_name}}</span>\
-                            <span class="muted pull-right social-feed-date"> {{=it.time_ago}}</span>\
-                        </p>\
-                        <div class="text-wrapper">\
-                            <p class="social-feed-text">{{=it.text}} </p>\
-                            <p><a href="{{=it.link}}" target="_blank" class="read-more-link">Read More</a></p>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>',
-            });
-        }
-        
-        // Facebook Feed Masonry View
-        function eael_facebook_feed_masonry() {
-            $('.eael-facebook-feed-layout-container.masonry-view').masonry({
-                itemSelector: '.eael-social-feed-element',
-                percentPosition: true,
-                columnWidth: '.eael-social-feed-element'
-            });
-        }
-
-        $.ajax({
-            url: eael_facebook_feeds(),
-            beforeSend: function() {
-                loadingFeed.addClass( 'show-loading' );
-            },
-            success: function() {
-                if($feed_type == 'masonry') {
-                    setTimeout(function() {
-                        eael_facebook_feed_masonry();
-                    }, 2000);
-                     
-                }                
-             loadingFeed.removeClass( 'show-loading' );
-         },
-         error: function() {
-             console.log('error loading');
-         }
-     });
-        
-
-    };
 
 
     var TwitterFeedHandler = function ($scope, $) {
@@ -738,7 +658,6 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-accordion.default', AdvAccordionHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-pricing-table.default', PricingTooltip);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
-        elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-content-ticker.default', ContentTicker);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);

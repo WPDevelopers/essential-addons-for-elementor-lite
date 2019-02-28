@@ -4333,10 +4333,6 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   background-color: red !important;
 }
 
-.eael-facebook-feed-wrapper::before,
-.eael-facebook-feed-wrapper::after,
-.eael-facebook-feed-container::before,
-.eael-facebook-feed-container::after,
 .eael-twitter-feed-wrapper::before,
 .eael-twitter-feed-wrapper::after,
 .eael-twitter-feed-container::before,
@@ -4607,8 +4603,7 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 }
 
 /*--- Masonry View ---*/
-.eael-twitter-feed-container.masonry-view .eael-social-feed-element,
-.eael-facebook-feed-container.masonry-view .eael-social-feed-element {
+.eael-twitter-feed-container.masonry-view .eael-social-feed-element {
   width: 33.33%;
   margin-top: 0px;
   float: left;
@@ -4635,14 +4630,12 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 
 /*--- Media Query ---*/
 @media only screen and (min-width: 768px) and (max-width: 992px) {
-  .eael-twitter-feed-container.masonry-view .eael-social-feed-element,
-  .eael-facebook-feed-container.masonry-view .eael-social-feed-element {
+  .eael-twitter-feed-container.masonry-view .eael-social-feed-element {
     width: 50% !important;
   }
 }
 @media only screen and (max-width: 480px) {
-  .eael-twitter-feed-container.masonry-view .eael-social-feed-element,
-  .eael-facebook-feed-container.masonry-view .eael-social-feed-element {
+  .eael-twitter-feed-container.masonry-view .eael-social-feed-element {
     width: 100% !important;
   }
 }

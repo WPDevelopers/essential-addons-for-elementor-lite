@@ -24,9 +24,6 @@ define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/eael-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
 
@@ -37,7 +34,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list' ];
    
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
@@ -143,9 +140,7 @@ function add_eael_elements() {
    if( $is_component_active['twitter-feed'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/twitter-feed/twitter-feed.php';
    }
-   if( $is_component_active['facebook-feed'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/facebook-feed/facebook-feed.php';
-   }
+
    if( $is_component_active['data-table'] ) {
       require_once ESSENTIAL_ADDONS_EL_PATH.'elements/data-table/data-table.php';
    }
@@ -211,7 +206,7 @@ function essential_addons_el_enqueue(){
     if( $is_component_active['count-down'] ) {
       wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
     }
-    if( $is_component_active['post-grid'] || $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
+    if( $is_component_active['post-grid'] || $is_component_active['twitter-feed'] ) {
       wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
     }
     if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
@@ -224,7 +219,7 @@ function essential_addons_el_enqueue(){
     if( $is_component_active['twitter-feed']) {
       wp_enqueue_script('essential_addons_elementor-codebird-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/codebird.js', array('jquery'),'1.0', true);
     }
-    if( $is_component_active['twitter-feed'] || $is_component_active['facebook-feed'] ) {
+    if( $is_component_active['twitter-feed'] ) {
       wp_enqueue_script('essential_addons_elementor-doT-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/doT.min.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_elementor-moment-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/moment.js', array('jquery'),'1.0', true);
       wp_enqueue_script('essential_addons_elementor-socialfeed-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/jquery.socialfeed.js', array('jquery'),'1.0', true);
