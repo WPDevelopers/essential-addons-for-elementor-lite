@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.9.7
+Stable tag: 2.9.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -166,6 +166,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.9.8 - 28/02/2019 =
+
+- Facebook Feed removed as it doesn't work with new API
+- Version rollback feature removed
+- Few minor bugfix and improvements
 
 = 2.9.7 - 25/02/2019 =
 
