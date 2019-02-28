@@ -24,9 +24,6 @@ define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/version-rollback.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/maintennance.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/eael-rollback.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
 require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
 
