@@ -177,14 +177,12 @@ class Eael_Admin_Settings {
 				      	<li><a href="#general" class="active"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-settings.svg'; ?>"><span>General</span></a></li>
 				      	<li><a href="#elements"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-modules.svg'; ?>"><span>Elements</span></a></li>
 						<li><a href="#extensions"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-extensions.svg'; ?>"><span>Extensions</span></a></li>
-				      	<li><a href="#version-control"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-version-control.svg'; ?>"><span>Version Control</span></a></li>
 						<li><a href="#go-pro"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-upgrade.svg'; ?>"><span>Go Premium</span></a></li>
 			    	</ul>
 					<?php
 						include('partials/general.php');
 						include('partials/elements.php');
 						include('partials/extensions.php');
-						include('partials/version-control.php');
 						include('partials/go-pro.php');
 					?>
 			  	</div>
