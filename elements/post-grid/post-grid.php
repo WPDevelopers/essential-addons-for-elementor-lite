@@ -402,16 +402,6 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 
 
 	protected function render() {
-
-		/**
-		 * Query And Layout Controls!
-		 * @source includes/elementor-helper.php
-		 */
-		$this->query_controls();
-		$this->layout_controls();
-		$this->eae_go_premium();
-
-
         $settings = $this->get_settings();
 		/**
 		 * Setup the post arguments.
