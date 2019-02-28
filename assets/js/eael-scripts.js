@@ -204,7 +204,6 @@
      }
 
     var AdvanceTabHandler = function ($scope, $) {
-        console.log('running');
         var $currentTab = $scope.find('.eael-advance-tabs'),
             $currentTabId = '#' + $currentTab.attr('id').toString();
 
@@ -621,7 +620,7 @@
                 settings = settings;
             }
         } else {
-            if (theme !== '') {
+            if (typeof theme != 'undefined' && theme !== '')  {
                 particlesJS('eael-section-particles-' + sectionId, theme);
             }
         }
