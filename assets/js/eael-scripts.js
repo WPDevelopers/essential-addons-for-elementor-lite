@@ -882,7 +882,6 @@
                             settings.size = sectionData["eael_tooltip_section_size"];
                             settings.trigger = sectionData["eael_tooltip_section_trigger"];
 
-                            settings.theme = sectionData["eael_tooltip_section_theme"];
                             settings.distance = sectionData["eael_tooltip_section_distance"];
                             settings.maxWidth = sectionData["eael_tooltip_section_width"];
 
@@ -917,7 +916,6 @@
                                 size: settings.size,
                                 trigger: settings.trigger,
                                 animateFill: false,
-                                theme: settings.theme,
                                 flipOnUpdate: true,
                                 interactive: true,
                                 maxWidth: settings.maxWidth,
@@ -936,7 +934,6 @@
                                     settings.size = sectionData["eael_tooltip_section_size"];
                                     settings.trigger = sectionData["eael_tooltip_section_trigger"];
 
-                                    settings.theme = sectionData["eael_tooltip_section_theme"];
                                     settings.distance = sectionData["eael_tooltip_section_distance"];
                                     settings.maxWidth = sectionData["eael_tooltip_section_width"];
 
@@ -950,7 +947,6 @@
                                         delay: settings.delay,
                                         size: settings.size,
                                         trigger: settings.trigger,
-                                        theme: settings.theme,
                                         maxWidth: settings.maxWidth
                                     });
 
