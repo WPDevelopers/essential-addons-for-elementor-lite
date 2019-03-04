@@ -870,13 +870,14 @@
 
                     $.each(widgets.models, function(ind, widget) {
 
-                        if (sectionId == widget.id) {
+                        if ( sectionId == widget.id ) {
                             sectionData = widget.attributes.settings.attributes;
                             settings.switch = sectionData["eael_tooltip_section_enable"];
                             settings.content = sectionData["eael_tooltip_section_content"];
                             settings.position = sectionData["eael_tooltip_section_position"];
                             settings.animation = sectionData["eael_tooltip_section_animation"];
                             settings.arrow = sectionData["eael_tooltip_section_arrow"];
+                            settings.arrowType = sectionData["eael_tooltip_section_arrow_type"];
                             settings.duration = sectionData["eael_tooltip_section_duration"];
                             settings.delay = sectionData["eael_tooltip_section_delay"];
                             settings.size = sectionData["eael_tooltip_section_size"];
@@ -885,7 +886,7 @@
                             settings.distance = sectionData["eael_tooltip_section_distance"];
                             settings.maxWidth = sectionData["eael_tooltip_section_width"];
 
-                            if (settings.switch == "yes") {
+                            if ( settings.switch == "yes" ) {
                                 target.addClass("eael-section-tooltip");
                                 generateTooltip();
                             } else {
@@ -910,6 +911,7 @@
                                 placement: settings.position,
                                 animation: settings.animation,
                                 arrow: settings.arrow,
+                                arrowType: settings.arrowType,
                                 duration: settings.duration,
                                 distance: settings.distance,
                                 delay: settings.content,
@@ -929,6 +931,7 @@
                                     settings.position = sectionData["eael_tooltip_section_position"];
                                     settings.animation = sectionData["eael_tooltip_section_animation"];
                                     settings.arrow = sectionData["eael_tooltip_section_arrow"];
+                                    settings.arrowType = sectionData["eael_tooltip_section_arrow_type"];
                                     settings.duration = sectionData["eael_tooltip_section_duration"];
                                     settings.delay = sectionData["eael_tooltip_section_delay"];
                                     settings.size = sectionData["eael_tooltip_section_size"];
@@ -942,6 +945,7 @@
                                         placement: settings.position,
                                         animation: settings.animation,
                                         arrow: settings.arrow,
+                                        arrowType: settings.arrowType,
                                         duration: settings.duration,
                                         distance: settings.distance,
                                         delay: settings.delay,

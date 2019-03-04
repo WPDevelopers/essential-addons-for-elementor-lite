@@ -110,6 +110,40 @@ class EAEL_Tooltip_Section extends Module_Base {
 		);
 
 		$element->add_control(
+			'eael_tooltip_section_arrow',
+			[
+				'label'              => __( 'Arrow', 'essential-addons-elementor' ),
+				'type'               => Controls_Manager::SWITCHER,
+				'label_on'           => __( 'Show', 'essential-addons-elementor' ),
+				'label_off'          => __( 'Hide', 'essential-addons-elementor' ),
+				'return_value'       => true,
+				'default'            => true,
+				'frontend_available' => true,
+				'condition'          => [
+					'eael_tooltip_section_enable!' => '',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_tooltip_section_arrow_type',
+			[
+				'label'              => __( 'Arrow Type', 'essential-addons-elementor' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => 'sharp',
+				'options'            => [
+					'sharp' => __( 'Sharp', 'essential-addons-elementor' ),
+					'round' => __( 'Round', 'essential-addons-elementor' ),
+				],
+				'frontend_available' => true,
+				'condition'          => [
+					'eael_tooltip_section_enable!' => '',
+					'eael_tooltip_section_arrow!'  => '',
+				],
+			]
+		);
+
+		$element->add_control(
 			'eael_tooltip_section_trigger',
 			[
 				'label'              => __( 'Trigger', 'essential-addons-elementor' ),
@@ -119,40 +153,6 @@ class EAEL_Tooltip_Section extends Module_Base {
 					'click'      => __( 'Click', 'essential-addons-elementor' ),
 					'mouseenter' => __( 'Hover', 'essential-addons-elementor' ),
 				],
-				'frontend_available' => true,
-				'condition'          => [
-					'eael_tooltip_section_enable!' => '',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_tooltip_section_size',
-			[
-				'label'              => __( 'Size', 'essential-addons-elementor' ),
-				'type'               => Controls_Manager::SELECT,
-				'default'            => 'regular',
-				'options'            => [
-					'small'   => __( 'Small', 'essential-addons-elementor' ),
-					'regular' => __( 'Regular', 'essential-addons-elementor' ),
-					'large'   => __( 'Large', 'essential-addons-elementor' ),
-				],
-				'frontend_available' => true,
-				'condition'          => [
-					'eael_tooltip_section_enable!' => '',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_tooltip_section_arrow',
-			[
-				'label'              => __( 'Arrow', 'essential-addons-elementor' ),
-				'type'               => Controls_Manager::SWITCHER,
-				'label_on'           => __( 'Show', 'essential-addons-elementor' ),
-				'label_off'          => __( 'Hide', 'essential-addons-elementor' ),
-				'return_value'       => true,
-				'default'            => true,
 				'frontend_available' => true,
 				'condition'          => [
 					'eael_tooltip_section_enable!' => '',
@@ -192,6 +192,24 @@ class EAEL_Tooltip_Section extends Module_Base {
 			]
 		);
 
+		$element->add_control(
+			'eael_tooltip_section_size',
+			[
+				'label'              => __( 'Size', 'essential-addons-elementor' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => 'regular',
+				'options'            => [
+					'small'   => __( 'Small', 'essential-addons-elementor' ),
+					'regular' => __( 'Regular', 'essential-addons-elementor' ),
+					'large'   => __( 'Large', 'essential-addons-elementor' ),
+				],
+				'frontend_available' => true,
+				'condition'          => [
+					'eael_tooltip_section_enable!' => '',
+				],
+			]
+		);
+
 		$element->end_controls_tab();
 
 		$element->start_controls_tab( 'eael_tooltip_section_styles', [
@@ -200,76 +218,6 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'eael_tooltip_section_enable!' => '',
 			],
 		] );
-
-		$element->add_control(
-			'eael_tooltip_section_distance',
-			[
-				'label'       => __( 'Distance', 'essential-addons-elementor' ),
-				'type'        => Controls_Manager::NUMBER,
-				'min'         => 05,
-				'max'         => 50,
-				'step'        => 2,
-				'default'     => 10,
-				'label_block' => false,
-				'condition'   => [
-					'eael_tooltip_section_enable!' => '',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_tooltip_section_width',
-			[
-				'label'       => __( 'Max Width', 'essential-addons-elementor' ),
-				'type'        => Controls_Manager::SLIDER,
-				'default'     => [
-					'size' => '350',
-				],
-				'range'       => [
-					'px' => [
-						'min' => 0,
-						'max' => 500,
-					],
-				],
-				'label_block' => false,
-				'selectors'   => [
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'max-width: {{SIZE}}{{UNIT}};',
-				],
-				'condition'   => [
-					'eael_tooltip_section_enable!' => '',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_tooltip_section_padding',
-			[
-				'label'      => __( 'Padding', 'essential-addons-elementor' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition'  => [
-					'eael_tooltip_section_enable!' => '',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_tooltip_section_border_radius',
-			[
-				'label'      => __( 'Border Radius', 'essential-addons-elementor' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition'  => [
-					'eael_tooltip_section_enable!' => '',
-				],
-			]
-		);
 
 		$element->add_group_control(
 			Group_Control_Typography::get_type(),
@@ -296,7 +244,7 @@ class EAEL_Tooltip_Section extends Module_Base {
 					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=bottom] .tippy-tooltip .tippy-arrow'                                            => 'border-bottom-color: {{VALUE}};',
 					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=left] .tippy-tooltip .tippy-arrow'                                              => 'border-left-color: {{VALUE}};',
 					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=right] .tippy-tooltip .tippy-arrow'                                             => 'border-right-color: {{VALUE}};',
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip .tippy-roundarrow'                                                => 'fill: {{VALUE}};',
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip .tippy-roundarrow'                                                            => 'fill: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_tooltip_section_enable!' => '',
@@ -327,12 +275,55 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'default'   => '',
 				'selectors' => [
 					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'border: 1px solid {{VALUE}};',
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=top] .tippy-tooltip .tippy-arrow:after' => 'border-top-color: {{VALUE}};',
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=bottom] .tippy-tooltip .tippy-arrow:after' => 'border-bottom-color: {{VALUE}};',
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=left] .tippy-tooltip .tippy-arrow:after' => 'border-left-color: {{VALUE}};',
-					'.tippy-popper[data-tippy-popper-id="{{ID}}"][x-placement^=right] .tippy-tooltip .tippy-arrow:after' => 'border-right-color: {{VALUE}};',
 				],
 				'condition' => [
+					'eael_tooltip_section_enable!' => '',
+					'eael_tooltip_section_arrow'   => '',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_tooltip_section_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'eael_tooltip_section_enable!' => '',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_tooltip_section_distance',
+			[
+				'label'       => __( 'Distance', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 05,
+				'max'         => 50,
+				'step'        => 2,
+				'default'     => 10,
+				'label_block' => false,
+				'condition'   => [
+					'eael_tooltip_section_enable!' => '',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_tooltip_section_padding',
+			[
+				'label'      => __( 'Padding', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
 					'eael_tooltip_section_enable!' => '',
 				],
 			]
@@ -344,6 +335,33 @@ class EAEL_Tooltip_Section extends Module_Base {
 				'name'      => 'eael_tooltip_section_box_shadow',
 				'selector'  => '.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip',
 				'separator' => '',
+				'condition' => [
+					'eael_tooltip_section_enable!' => '',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_tooltip_section_width',
+			[
+				'label'       => __( 'Max Width', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::SLIDER,
+				'default'     => [
+					'size' => '350',
+				],
+				'range'       => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+					],
+				],
+				'label_block' => false,
+				'selectors'   => [
+					'.tippy-popper[data-tippy-popper-id="{{ID}}"] .tippy-tooltip' => 'max-width: {{SIZE}}{{UNIT}};',
+				],
+				'condition'   => [
+					'eael_tooltip_section_enable!' => '',
+				],
 			]
 		);
 
@@ -362,19 +380,8 @@ class EAEL_Tooltip_Section extends Module_Base {
 		if ( $element->get_settings( 'eael_tooltip_section_enable' ) == 'yes' ) {
 
 			$element->add_render_attribute( '_wrapper', [
-				'id'                   => 'eael-section-tooltip-' . $element->get_id(),
-				'class'                => 'eael-section-tooltip',
-//				'data-tippy'           => $settings['eael_tooltip_section_content'],
-//				'data-tippy-animation' => $settings['eael_tooltip_section_animation'],
-//				'data-tippy-duration'  => $settings['eael_tooltip_section_duration'],
-//				'data-tippy-arrow'     => $settings['eael_tooltip_section_arrow'],
-//				'data-tippy-delay'     => $settings['eael_tooltip_section_delay'],
-//				'data-tippy-size'      => $settings['eael_tooltip_section_size'],
-//				'data-tippy-placement' => $settings['eael_tooltip_section_position'],
-//				'data-tippy-trigger'   => $settings['eael_tooltip_section_trigger'],
-//
-//				'data-tippy-distance' => $settings['eael_tooltip_section_distance'],
-//				'data-tippy-theme'    => $settings['eael_tooltip_section_theme'],
+				'id'    => 'eael-section-tooltip-' . $element->get_id(),
+				'class' => 'eael-section-tooltip',
 			] );
 		}
 
@@ -385,22 +392,21 @@ class EAEL_Tooltip_Section extends Module_Base {
 		$data     = $element->get_data();
 		$settings = $element->get_settings_for_display();
 
-		$content = $settings['eael_tooltip_section_content'];
-		$position = $settings["eael_tooltip_section_position"];
+		$content   = $settings['eael_tooltip_section_content'];
+		$position  = $settings["eael_tooltip_section_position"];
 		$animation = $settings['eael_tooltip_section_animation'];
-		$duration = $settings["eael_tooltip_section_duration"];
-		$distance = $settings["eael_tooltip_section_distance"];
-		$delay = $settings["eael_tooltip_section_delay"];
-		$arrow = $settings["eael_tooltip_section_arrow"];
-		$size = $settings["eael_tooltip_section_size"];
-		$trigger = $settings["eael_tooltip_section_trigger"];
-		$width = $settings["eael_tooltip_section_width"];
+		$duration  = $settings["eael_tooltip_section_duration"];
+		$distance  = $settings["eael_tooltip_section_distance"];
+		$delay     = $settings["eael_tooltip_section_delay"];
+		$arrow     = $settings["eael_tooltip_section_arrow"];
+		$arrowType = $settings["eael_tooltip_section_arrow_type"];
+		$size      = $settings["eael_tooltip_section_size"];
+		$trigger   = $settings["eael_tooltip_section_trigger"];
+		$width     = $settings["eael_tooltip_section_width"];
 
-//		echo '<pre>', var_dump($width), '</pre>';
+		if ( $settings['eael_tooltip_section_enable'] == 'yes' ) {
 
-		if( $element->get_settings('eael_tooltip_section_enable') == 'yes' ){
-
-		?>
+			?>
 
             <script>
 
@@ -410,7 +416,8 @@ class EAEL_Tooltip_Section extends Module_Base {
                     content: '<?php echo $content; ?>',
                     placement: '<?php echo $position; ?>',
                     animation: '<?php echo $animation; ?>',
-                    arrow: <?php echo $arrow; ?>,
+                    arrow: '<?php echo $arrow; ?>',
+                    arrowType: '<?php echo $arrowType; ?>',
                     duration: '<?php echo $duration; ?>',
                     distance: '<?php echo $distance; ?>',
                     delay: '<?php echo $delay; ?>',
@@ -423,17 +430,17 @@ class EAEL_Tooltip_Section extends Module_Base {
                     zIndex: 999,
                 };
 
-                tippy( $currentTooltip, {
+                tippy($currentTooltip, {
                     ...tooltipOptions,
                     onShow(instance) {
                         var tippyPopper = instance.popper;
-                        jQuery( tippyPopper ).attr('data-tippy-popper-id', '<?php echo $data['id']; ?>');
+                        jQuery(tippyPopper).attr('data-tippy-popper-id', '<?php echo $data['id']; ?>');
                     }
                 });
 
             </script>
 
-	<?php
+			<?php
 
 		}
 	}
