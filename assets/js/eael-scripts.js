@@ -940,22 +940,34 @@
                                     settings.distance = sectionData["eael_tooltip_section_distance"];
                                     settings.maxWidth = sectionData["eael_tooltip_section_width"];
 
-                                    instance.set({
-                                        content: settings.content,
-                                        placement: settings.position,
-                                        animation: settings.animation,
-                                        arrow: settings.arrow,
-                                        arrowType: settings.arrowType,
-                                        duration: settings.duration,
-                                        distance: settings.distance,
-                                        delay: settings.delay,
-                                        size: settings.size,
-                                        trigger: settings.trigger,
-                                        maxWidth: settings.maxWidth
-                                    });
+                                    // Get tooltip enable/disable status
+                                    settings.switch = sectionData["eael_tooltip_section_enable"];
 
-                                    var tippyPopper = instance.popper;
-                                    $( tippyPopper ).attr('data-tippy-popper-id', sectionId);
+                                    // Disable tooltip
+                                    if( settings.switch !== 'yes' ) {
+
+                                        instance.destroy();
+
+                                    } else {
+
+                                        instance.set({
+                                            content: settings.content,
+                                            placement: settings.position,
+                                            animation: settings.animation,
+                                            arrow: settings.arrow,
+                                            arrowType: settings.arrowType,
+                                            duration: settings.duration,
+                                            distance: settings.distance,
+                                            delay: settings.delay,
+                                            size: settings.size,
+                                            trigger: settings.trigger,
+                                            maxWidth: settings.maxWidth
+                                        });
+
+                                        var tippyPopper = instance.popper;
+                                        $( tippyPopper ).attr('data-tippy-popper-id', sectionId);
+
+                                    }
                                 }
                             });
                         }
