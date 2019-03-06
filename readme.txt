@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.9.7
+Stable tag: 2.9.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -36,7 +36,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 29+ FREE WIDGETS AND COUNTING
+### 28+ FREE WIDGETS AND COUNTING
 
 We have designed 29 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -59,23 +59,22 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 17. [Dual Color Headline](https://essential-addons.com/elementor/dual-color-headline/) - Emphasize on a single word in a sentence by highlighting it with a different color
 18. [Call to Action](https://essential-addons.com/elementor/call-to-action/) - Design call-to-action buttons before a blink
 19. [Pricing Table](https://essential-addons.com/elementor/pricing-table/) - Create Pricing Tables within minutes that converts
-20. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook posts from your page or group to improve engagement
-21. [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/) - Showcase your latest tweets to your visitor
-22. [Data Table](https://essential-addons.com/elementor/table/) - Insert visually attractive data table anywhere you want
-23. [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Easily display custom content in any pages
-24. [Image Accordion](https://essential-addons.com/elementor/image-accordion/) - Highlight your images with amazing hover effects
-25. [Content Ticker](https://essential-addons.com/elementor/content-ticker/) - Use slider and ticker effect and more on dynamic & custom content
-26. [Tooltip](https://essential-addons.com/elementor/tooltip/) - Set tooltip for Icon, Image, Text or shortcodes
-27. [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/) - Include tab to put information in different styles. Supports nested tabs.
-28. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
-29. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
+20. [Twitter Feed](https://essential-addons.com/elementor/twitter-feed/) - Showcase your latest tweets to your visitor
+21. [Data Table](https://essential-addons.com/elementor/table/) - Insert visually attractive data table anywhere you want
+22. [Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Easily display custom content in any pages
+23. [Image Accordion](https://essential-addons.com/elementor/image-accordion/) - Highlight your images with amazing hover effects
+24. [Content Ticker](https://essential-addons.com/elementor/content-ticker/) - Use slider and ticker effect and more on dynamic & custom content
+25. [Tooltip](https://essential-addons.com/elementor/tooltip/) - Set tooltip for Icon, Image, Text or shortcodes
+26. [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/) - Include tab to put information in different styles. Supports nested tabs.
+27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
+28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 
 Extensions: 
 
 1. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
 
 
-### More elements (30+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
+### More elements (29+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
 
 1. [Post Block (Flex)](https://essential-addons.com/elementor/post-block/) - Display your blog posts with variety of styles with the power of modern CSS Flexbox
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
@@ -89,24 +88,23 @@ Extensions:
 10. [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/) - Create fascinating visual effect for your content that support images, text or videos.
 11. [Content Timeline](https://essential-addons.com/elementor/content-timeline/) - Create memory lane with your content with cool scrolling animation
 12. [Data Table](https://essential-addons.com/elementor/table/) - Deliver your informations using advanced and attractive data table
-13. [Facebook Feed Carousel](https://essential-addons.com/elementor/facebook-feed/) - Put your Facebook feed in incredible carousel
-14. [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/) - Exhibit the twitter feed in interactive styles 
-15. [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Create filterable gallery from custom content or any post type.
-16. [Smart Post List](https://essential-addons.com/elementor/post-list/) - Design your blog page with modern post list
-17. [Mailchimp](https://essential-addons.com/elementor/mailchimp/) - Design your mailchimp form within Elementor with ease
-18. [Content Toggle](https://essential-addons.com/elementor/content-toggle/) - Show saved template or any content within Primary and Secondary content area
-19. [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/) - Create beautiful one page websites using this module
-20. [Price Menu](https://essential-addons.com/elementor/price-menu/) - Make beautiful Pricing menu for your brands without any hassle!
-21. [Image Hotspots](https://essential-addons.com/elementor/image-hotspots/) - Help you to add multiple hotspot icons with tooltip in a image
-22. [Fancy Divider](https://essential-addons.com/elementor/divider/) - Separate your section with fancy divider
-23. [Counter](https://essential-addons.com/elementor/counter/) - Put spotlight in important data using Counter element
-24. [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/) - Display your team members in carousel
-25. [Post Carousel](https://essential-addons.com/elementor/post-carousel/) - Even you can create carousel from your posts
-26. [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/) - Highlight brands/product logos in carousel
-27. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
-28. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
-29. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
-30. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
+13. [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/) - Exhibit the twitter feed in interactive styles 
+14. [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Create filterable gallery from custom content or any post type.
+15. [Smart Post List](https://essential-addons.com/elementor/post-list/) - Design your blog page with modern post list
+16. [Mailchimp](https://essential-addons.com/elementor/mailchimp/) - Design your mailchimp form within Elementor with ease
+17. [Content Toggle](https://essential-addons.com/elementor/content-toggle/) - Show saved template or any content within Primary and Secondary content area
+18. [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/) - Create beautiful one page websites using this module
+19. [Price Menu](https://essential-addons.com/elementor/price-menu/) - Make beautiful Pricing menu for your brands without any hassle!
+20. [Image Hotspots](https://essential-addons.com/elementor/image-hotspots/) - Help you to add multiple hotspot icons with tooltip in a image
+21. [Fancy Divider](https://essential-addons.com/elementor/divider/) - Separate your section with fancy divider
+22. [Counter](https://essential-addons.com/elementor/counter/) - Put spotlight in important data using Counter element
+23. [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/) - Display your team members in carousel
+24. [Post Carousel](https://essential-addons.com/elementor/post-carousel/) - Even you can create carousel from your posts
+25. [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/) - Highlight brands/product logos in carousel
+26. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
+27. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
+28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
+29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
 
 Extensions: 
 
@@ -169,39 +167,45 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 2.9.7 =
+= 2.9.8 - 28/02/2019 =
+
+- Facebook Feed removed as it doesn't work with new API
+- Version rollback feature removed
+- Few minor bugfix and improvements
+
+= 2.9.7 - 25/02/2019 =
 
 - Particles extension revamped
 
-= 2.9.6 =
+= 2.9.6 - 17/02/2019=
 
 - Admin side performance improved
 - Few minor bugfix and improvements
 
-= 2.9.5 =
+= 2.9.5 - 07/02/2019 =
 
 - Fixed: Product grid featured products loop not working
 - Few minor bugfix and improvements
 
-= 2.9.4 =
+= 2.9.4 - 29/01/2019 =
 
 - Product Grid layout issue fixed
 - Few minor bugfix and improvements
 
-= 2.9.3 =
+= 2.9.3 - 27/01/2019 =
 
 - Fixed: Fatal error Call to undefined function get_plugins()
 - Fixed: View Details for other plugins in plugins page
 
-= 2.9.2 =
+= 2.9.2 - 25/01/2019 =
 
 - Few minor bugfix and improvements
 
-= 2.9.1 =
+= 2.9.1 - 23/01/2019 =
 
 - Fixed: Conflict with wp_mail function
 
-= 2.9.0 =
+= 2.9.0 - 23/01/2019 =
 
 - Added : Section Particles effect
 - Added: Filterable gallery capability to remove All label
@@ -209,7 +213,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: invalid calc funciton in progressbar
 - Few minor bugfix and improvements
 
-= 2.8.7 =
+= 2.8.7 - 24/12/2018 =
 
 - Added : Version rollback option
 - Fixed : Data Table border issue 
@@ -220,70 +224,80 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed : Twitter feed masonry layout issue
 - Few minor bugfix and improvements
 
-= 2.8.6 =
+= 2.8.6 - 10/12/2018 =
 
 - Progress Bar revamped with faster and better script and styles
 - Few minor bugfix and improvements
 
-= 2.8.5 =
+= 2.8.5 - 06/12/2018 =
 
 - WPForms appearing issue fixed
 - Few minor bugfix and improvements
 
-= 2.8.4 =
+= 2.8.4 - 04/12/2018 =
 
 - Filterable Gallery default style improved
 - Few minor bugfix and improvements
 
-= 2.8.3 =
+= 2.8.3 - 11/11/2018 =
+
 - Filterable Gallery improved with better scripts
 - Image Gallery issue fixed for Filterable Gallery
 - Few minor bugfix and improvements
 
-= 2.8.2 =
+= 2.8.2 - 23/10/2018 =
+
 - Filterable Gallery card hover effect issue fixed
 - Flibox image styling issue fixed
 - Few minor bugfix and improvements
 
-= 2.8.1 =
+= 2.8.1 - 18/10/2018 =
+
 - Image Accordion styling issue fixed
 - Post Grid load more issue fixed
 - Post Timeline load more issue fixed
 - Few minor bugfix and improvements
 
-= 2.8.0 =
+= 2.8.0 - 17/10/2018 =
+
 - Progress Bar widget added
 - Video card support added to Filterable Gallery
 - Multiple hover effects added to Post Grid
 - Icon changing option added to Post Grid
 - Few minor bugfix and improvements
 
-= 2.7.11 =
+= 2.7.11 - 23/09/2018 =
+
 - Nested Accordion support added (as saved template)
 - Few minor bugfix and improvements
 
-= 2.7.10 =
+= 2.7.10 - 16/09/2018 =
+
 - Table layout breaking issue fixed for larger data tables
 - Few minor bugfix and improvements
 
-= 2.7.9 =
+= 2.7.9  - 10/09/2018 =
+
 - Table script issue fixed
 - Advanced Tab content width issue fixed
 - Flipbox icon styling option added
 - Few minor bugfix and improvements
 
-= 2.7.8 =
+= 2.7.8 - 28/08/2018 =
+
 - Group control error fixed
 - Pricing Table active feature issue fixed
 - Few minor bugfix and improvements
 
-= 2.7.7 =
+= 2.7.7 - 26/08/2018 =
+
 - Testimonial error fixed
 - Pricing Table tooltip issue fixed
 - Compatibility with PHP 5.4 fixed
 
-= 2.7.6 =
-- (Make sure to clear cache nad hrad refresh the page after update)
+= 2.7.6 - 17/08/2018 =
+
+- (Make sure to clear cache and hard refresh the page after update)
 - Tooltip option added to Pricing Table widget
 - Testimonial element improved with more layout options
 - Flip Box element improved with more options
@@ -291,23 +305,23 @@ Your existing elements/content will work with premium version. So you won't lose
 - Post queries optimized for all post elements
 - Few minor bugfix and improvements
 
-= 2.7.5 =
-- (Make sure to clear cache nad hrad refresh the page after update)
+= 2.7.5 - 02/08/2018 =
+
 - Post elements improved and optimized
 - Info Box element improved
 - Flip Box element improved
 - Few minor bugfix and improvements
 
-== Changelog ==
+= 2.7.4 - 23/07/2018 =
 
-= 2.7.4 =
 - (Make sure to clear cache nad hrad refresh the page after update)
 - Button elements improved
 - Fancy Text element improved
 - Image Accordion improved
 - Few minor bugfix and improvements
 
-= 2.7.3 =
+= 2.7.3 - 22/07/2018 =
+
 - Countdown element improved and Expire action added
 - Post Grid and Post Timeline query optimized and load more improved
 - Post Grid Masonry improved 
@@ -319,8 +333,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - All form elements improved and optimized
 - Few minor bugfix and improvements
 
-
-= 2.7.2 =
+= 2.7.2 - 01/07/2018 =
 
 - WPForms element added
 - Author, Tags and Exclude posts options added to Post elements (Post Grid, Post Timeline)
@@ -331,7 +344,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Cell colspan feature added to Data Table
 - Few minor bugfix and improvements
 
-= 2.7.1 =
+= 2.7.1 - 03/06/2018 =
 
 - "On Sale Price" option added to Pricing Table element
 - Testimonial avatar display issue fixed
@@ -344,14 +357,14 @@ Your existing elements/content will work with premium version. So you won't lose
 - Filterable Gallery improved with less script dependency
 - Few minor bugfix and improvements
 
-= 2.7.0 =
+= 2.7.0 - 27/05/2018 =
 
 - Dynamic field support added to all elements
 - Saved Templates option added to content area (all possible elements)
 - Advanced Tabs vertical layout added
 - Lots of minor bugfix and improvements
 
-= 2.6.0 =
+= 2.6.0 - 24/04/2018 =
 
 - Tooltip element added
 - Advanced Tabs element added
@@ -359,7 +372,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Info box improved
 - Few minor bugfix and improvements
 
-= 2.5.0 =
+= 2.5.0 - 04/04/2018 =
 
 - Image Accordion Element added
 - Content Ticker element added
@@ -367,19 +380,19 @@ Your existing elements/content will work with premium version. So you won't lose
 - Twitter Feed element improved
 - Few minor bugfix and improvements
 
-= 2.4.3 =
+= 2.4.3 - 21/03/2018 =
 
 - Pricing Table improved
 - Documentation and other helpful content added to admin area
 - Few minor bugfix and improvements
 
-= 2.4.2 =
+= 2.4.2 - 15/02/2018 =
 
 - Filterable Galley control improved
 - Element saving improved
 - Few minor bugfix and improvements
 
-= 2.4.1 =
+= 2.4.1 - 24/01/2018 =
 
 - Lightbox Gallery conflict fixed with Elementor
 - Filterable Gallery control alignment fixed for mobile
@@ -387,37 +400,36 @@ Your existing elements/content will work with premium version. So you won't lose
 - Data Table element improvements
 - Few minor bug fixed and improvements
 
-= 2.4.0 =
+= 2.4.0 - 01/01/2018 =
 
 - Data Table element added
 - Filterable Gallery added
 - Few minor bug fixed and improvements
 
-= 2.3.1 =
+= 2.3.1 - 21/12/2017 =
 
 - Facebook Feed element added
 - Twitter Feed element added
 - Few minor bug fixed and improvements
 
-= 2.3.0 =
+= 2.3.0 - 05/12/2017 =
 
 - Caldera Forms element added
 - HTML support added for Flip Box content
 - Few minor bug fixed and improvements
 
-= 2.2.5 =
+= 2.2.5 - 05/11/2017 =
 
 - Few minor bug fixed and improvements
 - Admin notice removed
 
-= 2.2.4 =
+= 2.2.4 - 28/11/2017 =
 
 - Ninja Form selector improved
 - Info box revamped. Now have more control.
 - Few minor improvements
 
-
-= 2.2.3 =
+= 2.2.3 - 16/11/2017 =
 
 - Gravity Forms element added
 - Post Grid and Post Timeline load more improved
@@ -425,39 +437,34 @@ Your existing elements/content will work with premium version. So you won't lose
 - Custom CSS/JS options removed from options panel
 - Few minor improvements
 
-= 2.2.2 =
+= 2.2.2 - 05/11/2017 =
 
 - Ninja Forms element added
 - Load more functionality added to Post elements (Post Grid & Post Timeline)
 - Few presets added for Team Members, Countdown, Fancy Text
 - Few minor improvements
 
-
-= 2.2.1 =
-
-- (Clear cache after update)
+= 2.2.1 - 22/10/2017 =
 
 - Several improvements for CTA, Info Box, Flip box and dual heading elements
 - Call to action width control and button control added
 - Pricing table options improved
 - Admin page improved and optimized
 
-
-
-= 2.2.0 =
+= 2.2.0 - 15/10/2017 =
 
 - Pricing Table Element added
 - Flipbox element animation improved and more options added
 - Post Timeline responsiveness improved
 - Few minor improvements
 
-= 2.1 =
+= 2.1 - 03/10/2017 =
 
 - More options added to CTA and Info Box elements
 - Flip box animation improved
 - Options panel improved and community support links added
 
-= 2.0 =
+= 2.0 - 28/09/2017 =
 
 - Options Panel added
 - Elements control added. Now you can enable/disable certain elements.
@@ -466,24 +473,20 @@ Your existing elements/content will work with premium version. So you won't lose
 - Dual color headline element added.
 - Few minor bug fixes and improvements. 
 
-= 1.1.0 =
+= 1.1.0 - 15/08/2017 =
 
 - Post Grid (Masonry) element added
 - Few minor improvement
 
-
-= 1.0.1 =
+= 1.0.1 - 01/08/2017 =
 
 - Element added for weForms (https://wordpress.org/plugins/weforms/)
 
-= 1.0.0 =
+= 1.0.0 - 20/07/2017 =
 
 Initial stable realese
 
 
 == Upgrade Notice ==
 
-= 2.8.6 =
 
-- Progress Bar revamped with faster and better script and styles
-- Few minor bugfix and improvements
