@@ -45,7 +45,6 @@ if( ! class_exists( 'Essential_Addons_EL') ) {
          $this->inclulde_files();
 
          add_action( 'elementor/controls/controls_registered', array($this, 'eae_posts_register_control') );
-         $this->add_eael_extensions();
 
          $plugin = plugin_basename( __FILE__ );
          add_filter( "plugin_action_links_$plugin", array($this, 'eael_add_settings_link') );
@@ -125,19 +124,6 @@ if( ! class_exists( 'Essential_Addons_EL') ) {
       }
 
       
-
-      /**
-       * Load acivate or deactivate Modules
-      *
-      * @since v1.0.0
-      */
-      public function add_eael_extensions() {
-         $is_component_active = $this->eael_activated_modules();
-
-         if( $is_component_active['section-particles'] ) {
-            require_once ESSENTIAL_ADDONS_EL_PATH .'extensions/eael-particle-section/eael-particle-section.php';
-         }
-      }
 
       /**
        * Registering a Group Control for All Posts Element
