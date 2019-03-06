@@ -37,7 +37,7 @@ require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
  */
 function eael_activated_modules() {
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list', 'section-tooltip' ];
+   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list' ];
    
    $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
    $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
@@ -62,10 +62,6 @@ function add_eael_extensions() {
 
 	if( $is_component_active['section-particles'] ) {
 		require_once ESSENTIAL_ADDONS_EL_PATH .'extensions/eael-particle-section/eael-particle-section.php';
-	}
-
-	if( $is_component_active['section-tooltip'] ) {
-		require_once ESSENTIAL_ADDONS_EL_PATH .'extensions/eael-tooltip-section/eael-tooltip-section.php';
 	}
 }
 add_eael_extensions();
@@ -260,11 +256,6 @@ function essential_addons_el_enqueue(){
 		$preset_themes = require ESSENTIAL_ADDONS_EL_PATH.'extensions/eael-particle-section/particle-themes.php';
 		wp_localize_script( 'particles-js', 'ParticleThemesData', $preset_themes );
     }
-	if( $is_component_active['section-tooltip'] ) {
-		wp_enqueue_style('essential_addons_tippy',ESSENTIAL_ADDONS_EL_URL.'assets/css/tippy.css');
-		wp_enqueue_script('essential_addons_popper-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/popper.min.js', array('jquery'),'1.0', false);
-		wp_enqueue_script('essential_addons_tippy-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/tippy.min.js', array('jquery'),'1.0', false);
-	}
 
 }
 add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
