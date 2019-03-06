@@ -149,6 +149,11 @@
                     <label for="progress-bar"></label>
                     <p class="eael-el-title"><?php _e( 'Progress Bar', 'essential-addons-elementor' ) ?></p>
                 </div>
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="feature-list" name="progress-bar" <?php checked( 1, $this->eael_get_settings['feature-list'], true ); ?> >
+                    <label for="feature-list"></label>
+                    <p class="eael-el-title"><?php _e( 'Feature List', 'essential-addons-elementor' ) ?></p>
+                </div>
             </div><!--./checkbox-container-->
         </div>
         <div class="col-full">
