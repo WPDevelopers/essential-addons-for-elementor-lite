@@ -105,11 +105,6 @@
                     <p class="eael-el-title"><?php _e( 'Twitter Feed', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="facebook-feed" name="facebook-feed" <?php checked( 1, $this->eael_get_settings['facebook-feed'], true ); ?> >
-                    <label for="facebook-feed"></label>
-                    <p class="eael-el-title"><?php _e( 'Facebook Feed', 'essential-addons-elementor' ) ?></p>
-                </div>
-                <div class="eael-checkbox">
                     <input type="checkbox" id="filter-gallery" name="filter-gallery" <?php checked( 1, $this->eael_get_settings['filter-gallery'], true ); ?> >
                     <label for="filter-gallery"></label>
                     <p class="eael-el-title"><?php _e( 'Filterable Gallery', 'essential-addons-elementor' ) ?></p>
@@ -148,6 +143,11 @@
                     <input type="checkbox" id="progress-bar" name="progress-bar" <?php checked( 1, $this->eael_get_settings['progress-bar'], true ); ?> >
                     <label for="progress-bar"></label>
                     <p class="eael-el-title"><?php _e( 'Progress Bar', 'essential-addons-elementor' ) ?></p>
+                </div>
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="feature-list" name="progress-bar" <?php checked( 1, $this->eael_get_settings['feature-list'], true ); ?> >
+                    <label for="feature-list"></label>
+                    <p class="eael-el-title"><?php _e( 'Feature List', 'essential-addons-elementor' ) ?></p>
                 </div>
             </div><!--./checkbox-container-->
         </div>
