@@ -173,21 +173,6 @@ if( ! class_exists( 'Essential_Addons_Scripts' ) ) {
                     array('jquery'),'1.0', true
                 );
             }
-            
-            if( $is_component_active['section-particles'] ) {
-                wp_enqueue_script(
-                    'particles-js',
-                    ESSENTIAL_ADDONS_EL_URL.'assets/js/particles.js',
-                    ['jquery'], '1.0', true
-                );
-
-                $preset_themes = require ESSENTIAL_ADDONS_EL_PATH.'extensions/eael-particle-section/particle-themes.php';
-                wp_localize_script(
-                    'particles-js',
-                    'ParticleThemesData',
-                    $preset_themes
-                );
-            }
 
         }
     }
