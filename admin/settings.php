@@ -15,7 +15,7 @@ class Eael_Admin_Settings {
 	 * @since 2.3.0
 	 */
 
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list'];
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'feature-list'];
 
 	/**
 	 * Will Contain All Components Default Values
