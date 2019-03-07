@@ -14,7 +14,8 @@ class Eael_Admin_Settings {
 	 * @var array
 	 * @since 2.3.0
 	 */
-	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'interactive-promo', 'post-grid', 'post-block', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table','ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'facebook-feed', 'data-table', 'filter-gallery', 'image-accordion', 'content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list'];
+
+	public $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list'];
 
 	/**
 	 * Will Contain All Components Default Values
@@ -46,7 +47,10 @@ class Eael_Admin_Settings {
 	public function __construct() {
 
 		add_action( 'admin_menu', array( $this, 'create_eael_admin_menu' ), 600 );
-		add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
+		
+		// add_action( 'init', array( $this, 'enqueue_eael_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_eael_admin_scripts' ) );
+
 		add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'eael_save_settings_with_ajax' ) );
 		add_action( 'wp_ajax_add_action_with_ajax', array( $this, 'add_action_with_ajax' ) );
 
@@ -93,10 +97,14 @@ class Eael_Admin_Settings {
 	 * @return void
 	 * @since 1.1.2
 	 */
-	public function enqueue_eael_admin_scripts() {
-
+	public function enqueue_eael_admin_scripts( $hook ) {
 		wp_enqueue_style( 'essential_addons_elementor-notice-css', plugins_url( '/', __FILE__ ).'assets/css/eael-notice.css' );
-		if( isset( $_GET['page'] ) && $_GET['page'] == 'eael-settings' ) {
+		if( isset( $hook ) && $hook == 'plugins.php' ) {
+			wp_enqueue_style( 'essential_addons_elementor-sweetalert2-css', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/css/sweetalert2.min.css' );
+			wp_enqueue_script( 'essential_addons_core-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/core.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'essential_addons_sweetalert2-js', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'essential_addons_core-js' ), '1.0', true );
+		}
+		if( isset( $hook ) && $hook == 'elementor_page_eael-settings' ) {
 			wp_enqueue_style( 'essential_addons_elementor-admin-css', plugins_url( '/', __FILE__ ).'assets/css/admin.css' );
 			wp_enqueue_style( 'essential_addons_elementor-sweetalert2-css', plugins_url( '/', __FILE__ ).'assets/vendor/sweetalert2/css/sweetalert2.min.css' );
 			wp_enqueue_script( 'essential_addons_elementor-admin-js', plugins_url( '/', __FILE__ ).'assets/js/admin.js', array( 'jquery'), '1.0', true );
@@ -170,14 +178,12 @@ class Eael_Admin_Settings {
 				      	<li><a href="#general" class="active"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-settings.svg'; ?>"><span>General</span></a></li>
 				      	<li><a href="#elements"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-modules.svg'; ?>"><span>Elements</span></a></li>
 						<li><a href="#extensions"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-extensions.svg'; ?>"><span>Extensions</span></a></li>
-				      	<li><a href="#version-control"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-version-control.svg'; ?>"><span>Version Control</span></a></li>
 						<li><a href="#go-pro"><img src="<?php echo plugins_url( '/', __FILE__ ).'assets/images/icon-upgrade.svg'; ?>"><span>Go Premium</span></a></li>
 			    	</ul>
 					<?php
 						include('partials/general.php');
 						include('partials/elements.php');
 						include('partials/extensions.php');
-						include('partials/version-control.php');
 						include('partials/go-pro.php');
 					?>
 			  	</div>
