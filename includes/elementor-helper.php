@@ -1,6 +1,9 @@
 <?php
+
 namespace Elementor;
 use Elementor\Group_Control_Base;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function eael_elementor_init(){
     Plugin::instance()->elements_manager->add_category(
