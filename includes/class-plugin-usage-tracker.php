@@ -110,16 +110,16 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 				$this->do_tracking( true );
 			}
 			// Hook our do_tracking function to the daily action
-			add_action( 'wpdeveloper_notice_clicked', array( $this, 'clicked' ) );
+			add_action( 'wpdeveloper_notice_clicked_for_' . $this->plugin_name, array( $this, 'clicked' ) );
 
 			add_action( 'put_do_weekly_action', array( $this, 'do_tracking' ) );
 
 			// Use this action for local testing and for one time force tracking in a life time.
 			add_action( 'admin_init', array( $this, 'force_track_for_one_time' ) );
-			add_action( 'admin_init', array( $this, 'force_tracking' ) );
-			 
+			// add_action( 'admin_init', array( $this, 'force_tracking' ) );
+			
 			// Display the admin notice on activation
-			add_action( 'wpdeveloper_optin_notice', array( $this, 'optin_notice' ) );
+			add_action( 'wpdeveloper_optin_notice_for_' . $this->plugin_name, array( $this, 'optin_notice' ) );
 			add_action( 'admin_notices', array( $this, 'marketing_notice' ) );
 
 			// Deactivation
@@ -629,7 +629,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 			// @credit EDD
 			// Don't bother asking user to opt in if they're in local dev
 			$is_local = false;
-			if( stristr( network_site_url( '/' ), '.test' ) !== false || stristr( network_site_url( '/' ), 'localhost' ) !== false || stristr( network_site_url( '/' ), ':8888' ) !== false ) {
+			if( stristr( network_site_url( '/' ), '.dev' ) !== false || stristr( network_site_url( '/' ), 'localhost' ) !== false || stristr( network_site_url( '/' ), ':8888' ) !== false ) {
 				$is_local = true;
 			}
 			$is_local = apply_filters( 'wpins_is_local_' . $this->plugin_name, $is_local );
@@ -679,7 +679,7 @@ if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
 						<p><?php echo __( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, I promise.' ); ?></p>
 					</div>
 					<p>
-						<a href="<?php echo esc_url( $url_yes ); ?>" class="button-primary"><?php _e( 'Allow', 'plugin-usage-tracker' ); ?></a>
+						<a href="<?php echo esc_url( $url_yes ); ?>" class="button-primary"><?php _e( 'Sure, I\'d like to help', 'plugin-usage-tracker' ); ?></a>
 						<a href="<?php echo esc_url( $url_no ); ?>" class="button-secondary"><?php _e( 'No Thanks', 'plugin-usage-tracker' ); ?></a>
 					</p>
 		            <?php echo "<script type='text/javascript'>jQuery('.insights-data-we-collect').on('click', function(e) {
