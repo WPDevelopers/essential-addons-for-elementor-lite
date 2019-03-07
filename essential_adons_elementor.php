@@ -97,7 +97,6 @@ if( ! class_exists( 'Essential_Addons_EL') ) {
          require_once $this->include_path('class-eae-elements.php');
          require_once $this->include_path('class-plugin-usage-tracker.php');
          require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
-         require_once $this->include_path('extensions.php');
          require_once dirname( __FILE__ ) . '/includes/class-wpdev-notices.php';
       }
 
@@ -108,7 +107,7 @@ if( ! class_exists( 'Essential_Addons_EL') ) {
       */
       public static function eael_activated_modules() {
 
-         $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list' ];
+         $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'img-comparison', 'instagram-gallery', 'interactive-promo',  'lightbox', 'post-block', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonial-slider', 'testimonials', 'testimonials', 'weforms', 'static-product', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'flip-carousel', 'interactive-cards', 'ninja-form', 'gravity-form', 'caldera-form', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'feature-list' ];
          
          $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
          $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
