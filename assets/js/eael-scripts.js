@@ -115,86 +115,6 @@
 
     }
 
-   
-
-    var FacebookFeedHandler = function ($scope, $) {
-        var loadingFeed = $scope.find( '.eael-loading-feed' );
-        var $fbCarousel            = $scope.find('.eael-facebook-feed-layout-wrapper').eq(0),
-                $name         = ($fbCarousel.data("facebook-feed-ac-name") !== undefined) ? $fbCarousel.data("facebook-feed-ac-name") : '',
-                $limit         = ($fbCarousel.data("facebook-feed-post-limit") !== undefined) ? $fbCarousel.data("facebook-feed-post-limit") : '',
-                $app_id         = ($fbCarousel.data("facebook-feed-app-id") !== undefined) ? $fbCarousel.data("facebook-feed-app-id") : '',
-                $app_secret         = ($fbCarousel.data("facebook-feed-app-secret") !== undefined) ? $fbCarousel.data("facebook-feed-app-secret") : '',
-                $length         = ($fbCarousel.data("facebook-feed-content-length") !== undefined) ? $fbCarousel.data("facebook-feed-content-length") : 400,
-                $media         = ($fbCarousel.data("facebook-feed-media") !== undefined) ? $fbCarousel.data("facebook-feed-media") : false,
-                $feed_type     = ($fbCarousel.data("facebook-feed-type") !== undefined) ? $fbCarousel.data("facebook-feed-type") : false,
-                $carouselId         = ($fbCarousel.data("facebook-feed-id") !== undefined) ? $fbCarousel.data("facebook-feed-id") : ' ';
-        // Facebook Feed Init
-        function eael_facebook_feeds() {
-            var $access_token = ($app_id+'|'+$app_secret).toString();
-            var $id_name = $name.toString();
-            $( '#eael-facebook-feed-'+ $carouselId +'.eael-facebook-feed-layout-container' ).socialfeed({
-
-                facebook:{
-                   accounts:[$id_name],
-                   limit: $limit,
-                   access_token: $access_token
-                },
-
-                // GENERAL SETTINGS
-                length: $length,
-                show_media: $media,
-                template_html: '<div class="eael-social-feed-element {{? !it.moderation_passed}}hidden{{?}}" dt-create="{{=it.dt_create}}\" social-feed-id = "{{=it.id}}">\
-                {{=it.attachment}}\
-                <div class="eael-content">\
-                    <a class="pull-left auth-img" href="{{=it.author_link}}" target="_blank">\
-                        <img class="media-object" src="{{=it.author_picture}}">\
-                    </a>\
-                    <div class="media-body">\
-                        <p>\
-                            <i class="fa fa-{{=it.social_network}} social-feed-icon"></i>\
-                            <span class="author-title">{{=it.author_name}}</span>\
-                            <span class="muted pull-right social-feed-date"> {{=it.time_ago}}</span>\
-                        </p>\
-                        <div class="text-wrapper">\
-                            <p class="social-feed-text">{{=it.text}} </p>\
-                            <p><a href="{{=it.link}}" target="_blank" class="read-more-link">Read More</a></p>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>',
-            });
-        }
-        
-        // Facebook Feed Masonry View
-        function eael_facebook_feed_masonry() {
-            $('.eael-facebook-feed-layout-container.masonry-view').masonry({
-                itemSelector: '.eael-social-feed-element',
-                percentPosition: true,
-                columnWidth: '.eael-social-feed-element'
-            });
-        }
-
-        $.ajax({
-            url: eael_facebook_feeds(),
-            beforeSend: function() {
-                loadingFeed.addClass( 'show-loading' );
-            },
-            success: function() {
-                if($feed_type == 'masonry') {
-                    setTimeout(function() {
-                        eael_facebook_feed_masonry();
-                    }, 2000);
-                     
-                }                
-             loadingFeed.removeClass( 'show-loading' );
-         },
-         error: function() {
-             console.log('error loading');
-         }
-     });
-        
-
-    };
 
 
     var TwitterFeedHandler = function ($scope, $) {
@@ -284,7 +204,6 @@
      }
 
     var AdvanceTabHandler = function ($scope, $) {
-        console.log('running');
         var $currentTab = $scope.find('.eael-advance-tabs'),
             $currentTabId = '#' + $currentTab.attr('id').toString();
 
@@ -644,205 +563,89 @@
     }
     
     var ProgressBar = function ($scope, $) {
-
-		var $progressBar             = $scope.find('.eael-progress-bar-container').eq(0),
-			$layout = mybe_note_undefined($progressBar, "layout"),
-			$id = mybe_note_undefined($progressBar, "id"),
-			$number = mybe_note_undefined($progressBar, "number"),
-			$class = '.elementor-element-' + $scope.data('id'),
-			$line_stroke_color = mybe_note_undefined($progressBar, "line-stroke-color"),
-			$line_stroke_width = mybe_note_undefined($progressBar, "line-stroke-width"),
-			$line_stroke_trail_color = mybe_note_undefined($progressBar, "line-stroke-trail-color"),
-			$line_stroke_trail_width = mybe_note_undefined($progressBar, "line-stroke-trail-width"),
-			$line_direction = mybe_note_undefined($progressBar, "line-direction"),
-
-			$fan_stroke_color = mybe_note_undefined($progressBar, "fan-stroke-color"),
-			$fan_stroke_width = mybe_note_undefined($progressBar, "fan-stroke-width"),
-			$fan_stroke_trail_color = mybe_note_undefined($progressBar, "fan-stroke-trail-color"),
-			$fan_stroke_trail_width = mybe_note_undefined($progressBar, "fan-stroke-trail-width"),
-			$fan_direction = mybe_note_undefined($progressBar, "fan-direction"),
-			
-			$circle_stroke_color = mybe_note_undefined($progressBar, "circle-stroke-color"),
-			$circle_stroke_width = mybe_note_undefined($progressBar, "circle-stroke-width"),
-			$circle_stroke_trail_color = mybe_note_undefined($progressBar, "circle-stroke-trail-color"),
-			$circle_stroke_trail_width = mybe_note_undefined($progressBar, "circle-stroke-trail-width"),
-			$circle_direction = mybe_note_undefined($progressBar, "circle-direction"),
-            
-			$bubble_circle_color = mybe_note_undefined($progressBar, "bubble-circle-color"),
-			$bubble_bg_color = mybe_note_undefined($progressBar, "bubble-bg-color"),
-			$bubble_circle_width = mybe_note_undefined($progressBar, "bubble-circle-width"),
-			$bubble_direction = mybe_note_undefined($progressBar, "bubble-direction"),
-
-			$rainbow_stroke_width = mybe_note_undefined($progressBar, "rainbow-stroke-width"),
-			$rainbow_stroke_trail_width = mybe_note_undefined($progressBar, "rainbow-stroke-trail-width"),
-			$rainbow_color_one = mybe_note_undefined($progressBar, "rainbow-color-one"),
-			$rainbow_color_two = mybe_note_undefined($progressBar, "rainbow-color-two"),
-			$rainbow_color_three = mybe_note_undefined($progressBar, "rainbow-color-three"),
-			$rainbow_color_four = mybe_note_undefined($progressBar, "rainbow-color-four"),
-			$rainbow_color_five = mybe_note_undefined($progressBar, "rainbow-color-five"),
-			$rainbow_direction = mybe_note_undefined($progressBar, "rainbow-direction");
-
-             
-            if('rainbow' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke', 
-                    "path": 'M0 10L100 10', 
-                    "stroke": 'data:ldbar/res,gradient(0,1,'+ $rainbow_color_one +','+ $rainbow_color_two +','+ $rainbow_color_three +','+ $rainbow_color_four +','+ $rainbow_color_five +')',
-                    "aspect-ratio": 'none', 
-                    "stroke-width": $rainbow_stroke_width,
-                    "stroke-trail-width": $rainbow_stroke_trail_width,
-                    "stroke-dir": $rainbow_direction
-                  }).set($number);
-            }
-            else if('line' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke',
-					"path": 'M0 10L100 10',
-                    "stroke": $line_stroke_color,
-                    "stroke-width": $line_stroke_width,
-                    "stroke-trail": $line_stroke_trail_color,
-                    "stroke-trail-width": $line_stroke_trail_width,
-                    "aspect-ratio": 'none',
-                    "stroke-dir": $line_direction 
-                  }).set($number);
-            }
-            else if('fan' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke',
-                    "path": 'M10 90A40 40 0 0 1 90 90',
-                    "fill-dir": $fan_direction,
-                    "fill":  $fan_stroke_color, 
-                    "fill-background": $fan_stroke_trail_color, 
-                    "fill-background-extrude": $fan_stroke_width, 
-                    "stroke-dir": 'normal',
-                    "stroke": $fan_stroke_color,
-                    "stroke-width": $fan_stroke_width,
-                    "stroke-trail": $fan_stroke_trail_color,
-                    "stroke-trail-width": $fan_stroke_trail_width
-                  }).set($number);
-            }
-            else if('circle' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'stroke',
-                    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
-                    "fill-dir": $circle_direction,
-                    "fill":  $circle_stroke_color, 
-                    "fill-background": $circle_stroke_trail_color, 
-                    "fill-background-extrude": $circle_stroke_width, 
-                    "stroke-dir": 'normal',
-                    "stroke": $circle_stroke_color,
-                    "stroke-width": $circle_stroke_width,
-                    "stroke-trail": $circle_stroke_trail_color,
-                    "stroke-trail-width": $circle_stroke_trail_width
-                  }).set($number);
-            }
-            else if('bubble' == $layout){
-                var bar = new ldBar($class + ' .inside-progressbar', {
-                    "type": 'fill',
-                    "path": 'M50 10A40 40 0 0 1 50 90A40 40 0 0 1 50 10',
-                    "fill-dir": $bubble_direction,
-                    "fill": 'data:ldbar/res,bubble('+ $bubble_bg_color +','+ $bubble_circle_color +')',
-                    "pattern-size": $bubble_circle_width,
-                    "fill-background": '#ddd',
-                    "fill-background-extrude": 2,
-                    "stroke-dir": 'normal',
-                    "stroke": '#25b',
-                    "stroke-width": '3',
-                    "stroke-trail": '#ddd',
-                    "stroke-trail-width": 0.5
-                  }).set($number);
-            }
+        $('.eael-progressbar', $scope).eaelProgressBar()
     };
 
     /*=================================*/
 	/* 36. Section Particles
 	/*=================================*/
-	var EaelParticlesHandler = function($scope,$){
-		var target    = $scope,
-		    sectionId = target.data('id'),
-		    editMode  = elementorFrontend.isEditMode(),
-			settings;
+    var EaelParticlesHandler = function ($scope, $) {
+        var sectionId = $scope.data('id'),
+            editMode = elementorFrontend.isEditMode(),
+            theme = $scope.data('theme'),
+            settings;
 
-		
-		if ( editMode ) {
-			settings = generateEditorSettings( sectionId );
-		}
-			
-		if (!editMode || ! settings ) {
-			return false;
-		}
-		
-		if(settings.switch == 'yes') {
-			target.addClass('eael-particles-section');
-			if(settings.themeSource === 'presets' || settings.themeSource === 'custom' && '' !== settings.selected_theme) {
-				generateParticles();
-			}
-		} else {
-			target.removeClass('eael-particles-section');
-		}
-		
-		
-		function generateEditorSettings(targetId){
-			var editorElements          = null,
-				sectionData             = {},
-				settings                = {};
-		
-			if ( ! window.elementor.hasOwnProperty( 'elements' ) ) {
-				return false;
-			}
-				
-			editorElements = window.elementor.elements;
-			
-			if ( ! editorElements.models ) {
-				return false;
-			}
-			
-			$.each(editorElements.models,function(index,elem){
-				if( targetId == elem.id){
-					sectionData = elem.attributes.settings.attributes;
+        $scope.addClass('eael-particles-section');
 
-				} else if( elem.id == target.closest( '.elementor-top-section' ).data( 'id' ) ) {
-					$.each(elem.attributes.elements.models,function(index,col){
-						$.each(col.attributes.elements.models,function(index,subSec){
-							sectionData = subSec.attributes.settings.attributes;
-						});
-					});
-				}
-			});
-			
-			settings.switch = sectionData[ 'eael_particle_switch' ];
-			settings.zIndex = sectionData[ 'eael_particles_zindex' ];
-			settings.themeSource = sectionData['eael_particle_theme_from'];
+        if (editMode) {
+            var editorElements = null,
+                particleArgs = {},
+                settings = {};
 
+            if (!window.elementor.hasOwnProperty('elements')) {
+                return false;
+            }
 
-			if(settings.themeSource == 'presets') {
-				settings.selected_theme = (ParticleThemesData[sectionData[ 'eael_particle_preset_themes' ]]);
-			}
+            editorElements = window.elementor.elements;
 
-			if( (settings.themeSource == 'custom') && ('' !== sectionData[ 'eael_particles_custom_style' ]) ){
-				settings.selected_theme = sectionData[ 'eael_particles_custom_style' ];
-			}
-			
-			if ( 0 !== settings.length ) {
-				return settings;
-			}
+            if (!editorElements.models) {
+                return false;
+            }
 
-			return false;   
-		}
-		
-		function generateParticles(){
-			target.attr('id','eael-section-particles-'+ sectionId);
-			if(typeof particlesJS !== 'undefined' && $.isFunction(particlesJS)) {
-				particlesJS("eael-section-particles-" + sectionId, JSON.parse(settings.selected_theme));
-				target.children('canvas.particles-js-canvas-el').css({
-					zIndex: settings.zIndex,
-					position: 'absolute',
-					top:0
-				});
-			}
-		}
-		
-	};
+            $.each(editorElements.models, function (i, el) {
+                if (sectionId == el.id) {
+                    particleArgs = el.attributes.settings.attributes;
+
+                } else if (el.id == $scope.closest('.elementor-top-section').data('id')) {
+                    $.each(el.attributes.elements.models, function (i, col) {
+                        $.each(col.attributes.elements.models, function (i, subSec) {
+                            particleArgs = subSec.attributes.settings.attributes;
+                        });
+                    });
+                }
+            });
+
+            settings.switch = particleArgs['eael_particle_switch'];
+            settings.themeSource = particleArgs['eael_particle_theme_from'];
+
+            if (settings.themeSource == 'presets') {
+                settings.selected_theme = (ParticleThemesData[particleArgs['eael_particle_preset_themes']]);
+            }
+
+            if ((settings.themeSource == 'custom') && ('' !== particleArgs['eael_particles_custom_style'])) {
+                settings.selected_theme = particleArgs['eael_particles_custom_style'];
+            }
+
+            if (0 !== settings.length) {
+                settings = settings;
+            }
+        } else {
+            if (typeof theme != 'undefined' && theme !== '')  {
+                particlesJS('eael-section-particles-' + sectionId, theme);
+            }
+        }
+
+        if (!editMode || !settings) {
+            return false;
+        }
+
+        if (settings.switch == 'yes') {
+
+            if (settings.themeSource === 'presets' || settings.themeSource === 'custom' && '' !== settings.selected_theme) {
+                $scope.attr('id', 'eael-section-particles-' + sectionId);
+                if (typeof particlesJS !== 'undefined' && $.isFunction(particlesJS)) {
+                    particlesJS("eael-section-particles-" + sectionId, JSON.parse(settings.selected_theme));
+                    $scope.children('canvas.particles-js-canvas-el').css({
+                        position: 'absolute',
+                        top: 0
+                    });
+                }
+            }
+        } else {
+            $scope.removeClass('eael-particles-section');
+        }
+
+    };
     
     $(window).on('elementor/frontend/init', function () {
         if(elementorFrontend.isEditMode()) {
@@ -854,7 +657,6 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-adv-accordion.default', AdvAccordionHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-pricing-table.default', PricingTooltip);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-post-timeline.default', postTimelineHandler);
-        elementorFrontend.hooks.addAction('frontend/element_ready/eael-facebook-feed.default', FacebookFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-twitter-feed.default', TwitterFeedHandler);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-content-ticker.default', ContentTicker);
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);
