@@ -217,6 +217,7 @@ class Eael_Admin_Settings {
 			}
 		}
 		update_option( 'eael_save_settings', $this->eael_settings );
+		do_action('eael_generate_editor_scripts');
 		return true;
 		die();
 
