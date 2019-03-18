@@ -7,7 +7,7 @@ use MatthiasMullie\Minify;
 
 trait Enqueue_Handler
 {
-    public function eael_generate_editor_scripts()
+    public function generate_editor_scripts()
     {
         $active_components = Essential_Addons_EL::eael_activated_modules();
         $paths = array();
@@ -33,7 +33,7 @@ trait Enqueue_Handler
                     break;
             }
         }
-        // error_log(print_r(implode(',', $paths), true));
+
         $minifier = new Minify\JS($paths);
         $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.js');
 

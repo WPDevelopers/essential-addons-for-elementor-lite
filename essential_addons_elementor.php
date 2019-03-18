@@ -287,7 +287,7 @@ final class Essential_Addons_Elementor {
 
    public function __construct() {
       // add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));
-      add_action('eael_generate_editor_scripts', array($this, 'eael_generate_editor_scripts'));
+      add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
    }
 }
 add_action('plugins_loaded', function() {
