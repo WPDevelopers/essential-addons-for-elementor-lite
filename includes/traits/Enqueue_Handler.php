@@ -31,6 +31,37 @@ trait Enqueue_Handler
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/countdown/countdown.min.js';
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
                     break;
+                
+                case 'data-table':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
+
+                case 'filterable-gallery':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
+
+                case 'image-accordion':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
+
+                case 'post-timeline':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/load-more/load-more.js';
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
+
+                case 'price-table':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
+
+                case 'progress-bar':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
+
+                case 'twitter-feed':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
+                    break;
             }
         }
 
