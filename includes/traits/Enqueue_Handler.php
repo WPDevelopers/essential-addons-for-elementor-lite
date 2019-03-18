@@ -28,12 +28,12 @@ trait Enqueue_Handler
                     break;
 
                 case 'count-down':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/count-down/countdown.min.js';
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/countdown/countdown.min.js';
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
                     break;
             }
         }
-        error_log(print_r(implode(',', $paths), true));
+        // error_log(print_r(implode(',', $paths), true));
         $minifier = new Minify\JS($paths);
         $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.js');
 

@@ -42,11 +42,11 @@ if( ! class_exists( 'Essential_Addons_Scripts' ) ) {
                 ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css'
             );
 
-            // wp_enqueue_script(
-            //     'eael-scripts',
-            //     ESSENTIAL_ADDONS_EL_URL.'assets/js/eael-scripts.js',
-            //     array('jquery'),'1.0', true
-            // );
+            wp_enqueue_script(
+                'eael-scripts',
+                content_url() . '/eael.js',
+                array('jquery'),'1.0', true
+            );
 
             if ( class_exists( 'GFCommon' ) ) {
                 foreach( eael_select_gravity_form() as $form_id => $form_name ){
