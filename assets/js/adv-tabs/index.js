@@ -66,7 +66,9 @@ var AdvanceTabHandler = function($scope, $) {
         });
     });
 };
-elementorFrontend.hooks.addAction(
-    "frontend/element_ready/eael-adv-tabs.default",
-    AdvanceTabHandler
-);
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
