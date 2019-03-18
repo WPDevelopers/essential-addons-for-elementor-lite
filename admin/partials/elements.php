@@ -4,148 +4,148 @@
             <p class="eael-elements-control-notice">You can disable the elements you are not using on your site. That will disable all associated assets of those widgets to improve your site loading.</p>
             <div class="eael-checkbox-container">
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="contact-form-7" name="contact-form-7" <?php checked( 1, $this->eael_get_settings['contact-form-7'], true ); ?> >
+                    <input type="checkbox" id="contact-form-7" name="contact-form-7" <?php checked( 1, $this->get_settings('contact-form-7'), true ); ?> >
                     <label for="contact-form-7"></label>
                     <p class="eael-el-title"><?php _e( 'Contact Form 7', 'essential-addons-elementor' ); ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="count-down" name="count-down" <?php checked( 1, $this->eael_get_settings['count-down'], true ); ?> >
+                    <input type="checkbox" id="count-down" name="count-down" <?php checked( 1, $this->get_settings('count-down'), true ); ?> >
                     <label for="count-down"></label>
 
                     <p class="eael-el-title"><?php _e( 'Count Down', 'essential-addons-elementor' ); ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="creative-btn" name="creative-btn" <?php checked( 1, $this->eael_get_settings['creative-btn'], true ); ?> >
+                    <input type="checkbox" id="creative-btn" name="creative-btn" <?php checked( 1, $this->get_settings('creative-btn'), true ); ?> >
                     <label for="creative-btn"></label>
                     <p class="eael-el-title"><?php _e( 'Creative Button', 'essential-addons-elementor' ); ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="fancy-text" name="fancy-text" <?php checked( 1, $this->eael_get_settings['fancy-text'], true ); ?> >
+                    <input type="checkbox" id="fancy-text" name="fancy-text" <?php checked( 1, $this->get_settings('fancy-text'), true ); ?> >
                     <label for="fancy-text"></label>
                     <p class="eael-el-title"><?php _e( 'Fancy Text', 'essential-addons-elementor' ); ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="post-grid" name="post-grid" <?php checked( 1, $this->eael_get_settings['post-grid'], true ); ?> >
+                    <input type="checkbox" id="post-grid" name="post-grid" <?php checked( 1, $this->get_settings('post-grid'), true ); ?> >
                     <label for="post-grid"></label>
                     <p class="eael-el-title"><?php _e( 'Post Grid', 'essential-addons-elementor' ); ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="post-timeline" name="post-timeline" <?php checked( 1, $this->eael_get_settings['post-timeline'], true ); ?> >
+                    <input type="checkbox" id="post-timeline" name="post-timeline" <?php checked( 1, $this->get_settings('post-timeline'), true ); ?> >
                     <label for="post-timeline"></label>
                     <p class="eael-el-title"><?php _e( 'Post Timeline', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="product-grid" name="product-grid" <?php checked( 1, $this->eael_get_settings['product-grid'], true ); ?> >
+                    <input type="checkbox" id="product-grid" name="product-grid" <?php checked( 1, $this->get_settings('product-grid'), true ); ?> >
                         <label for="product-grid"></label>
                     <p class="eael-el-title"><?php _e( 'Product Grid', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="team-members" name="team-members" <?php checked( 1, $this->eael_get_settings['team-members'], true ); ?> >
+                    <input type="checkbox" id="team-members" name="team-members" <?php checked( 1, $this->get_settings('team-members'), true ); ?> >
                     <label for="team-members"></label>
                     <p class="eael-el-title"><?php _e( 'Team Member', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                            <input type="checkbox" id="testimonials" name="testimonials" <?php checked( 1, $this->eael_get_settings['testimonials'], true ); ?> >
+                            <input type="checkbox" id="testimonials" name="testimonials" <?php checked( 1, $this->get_settings('testimonials'), true ); ?> >
                     <label for="testimonials"></label>
                     <p class="eael-el-title"><?php _e( 'Testimonials', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="weforms" name="weforms" <?php checked( 1, $this->eael_get_settings['weforms'], true ); ?> >
+                    <input type="checkbox" id="weforms" name="weforms" <?php checked( 1, $this->get_settings('weforms'), true ); ?> >
                     <label for="weforms"></label>
                     <p class="eael-el-title"><?php _e( 'weForms', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="call-to-action" name="call-to-action" <?php checked( 1, $this->eael_get_settings['call-to-action'], true ); ?> >
+                    <input type="checkbox" id="call-to-action" name="call-to-action" <?php checked( 1, $this->get_settings('call-to-action'), true ); ?> >
                     <label for="call-to-action"></label>
                     <p class="eael-el-title"><?php _e( 'Call To Action', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="flip-box" name="flip-box" <?php checked( 1, $this->eael_get_settings['flip-box'], true ); ?> >
+                    <input type="checkbox" id="flip-box" name="flip-box" <?php checked( 1, $this->get_settings('flip-box'), true ); ?> >
                     <label for="flip-box"></label>
                     <p class="eael-el-title"><?php _e( 'Flip Box', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="info-box" name="info-box" <?php checked( 1, $this->eael_get_settings['info-box'], true ); ?> >
+                    <input type="checkbox" id="info-box" name="info-box" <?php checked( 1, $this->get_settings('info-box'), true ); ?> >
                     <label for="info-box"></label>
                     <p class="eael-el-title"><?php _e( 'Info Box', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="dual-header" name="dual-header" <?php checked( 1, $this->eael_get_settings['dual-header'], true ); ?> >
+                    <input type="checkbox" id="dual-header" name="dual-header" <?php checked( 1, $this->get_settings('dual-header'), true ); ?> >
                     <label for="dual-header"></label>
                     <p class="eael-el-title"><?php _e( 'Dual Color Header', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->eael_get_settings['price-table'], true ); ?> >
+                    <input type="checkbox" id="price-table" name="price-table" <?php checked( 1, $this->get_settings('price-table'), true ); ?> >
                     <label for="price-table"></label>
                     <p class="eael-el-title"><?php _e( 'Pricing Table', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="ninja-form" name="ninja-form" <?php checked( 1, $this->eael_get_settings['ninja-form'], true ); ?> >
+                    <input type="checkbox" id="ninja-form" name="ninja-form" <?php checked( 1, $this->get_settings('ninja-form'), true ); ?> >
                     <label for="ninja-form"></label>
                     <p class="eael-el-title"><?php _e( 'Ninja Form', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="gravity-form" name="gravity-form" <?php checked( 1, $this->eael_get_settings['gravity-form'], true ); ?> >
+                    <input type="checkbox" id="gravity-form" name="gravity-form" <?php checked( 1, $this->get_settings('gravity-form'), true ); ?> >
                     <label for="gravity-form"></label>
                     <p class="eael-el-title"><?php _e( 'Gravity Form', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="caldera-form" name="caldera-form" <?php checked( 1, $this->eael_get_settings['caldera-form'], true ); ?> >
+                    <input type="checkbox" id="caldera-form" name="caldera-form" <?php checked( 1, $this->get_settings('caldera-form'), true ); ?> >
                     <label for="caldera-form"></label>
                     <p class="eael-el-title"><?php _e( 'Caldera Form', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="wpforms" name="wpforms" <?php checked( 1, $this->eael_get_settings['wpforms'], true ); ?> >
+                    <input type="checkbox" id="wpforms" name="wpforms" <?php checked( 1, $this->get_settings('wpforms'), true ); ?> >
                     <label for="wpforms"></label>
                     <p class="eael-el-title"><?php _e( 'WPForms', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="twitter-feed" name="twitter-feed" <?php checked( 1, $this->eael_get_settings['twitter-feed'], true ); ?> >
+                    <input type="checkbox" id="twitter-feed" name="twitter-feed" <?php checked( 1, $this->get_settings('twitter-feed'), true ); ?> >
                     <label for="twitter-feed"></label>
                     <p class="eael-el-title"><?php _e( 'Twitter Feed', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="filter-gallery" name="filter-gallery" <?php checked( 1, $this->eael_get_settings['filter-gallery'], true ); ?> >
+                    <input type="checkbox" id="filter-gallery" name="filter-gallery" <?php checked( 1, $this->get_settings('filter-gallery'), true ); ?> >
                     <label for="filter-gallery"></label>
                     <p class="eael-el-title"><?php _e( 'Filterable Gallery', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="data-table" name="data-table" <?php checked( 1, $this->eael_get_settings['data-table'], true ); ?> >
+                    <input type="checkbox" id="data-table" name="data-table" <?php checked( 1, $this->get_settings('data-table'), true ); ?> >
                     <label for="data-table"></label>
                     <p class="eael-el-title"><?php _e( 'Data Table', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="image-accordion" name="image-accordion" <?php checked( 1, $this->eael_get_settings['image-accordion'], true ); ?> >
+                    <input type="checkbox" id="image-accordion" name="image-accordion" <?php checked( 1, $this->get_settings('image-accordion'), true ); ?> >
                     <label for="image-accordion"></label>
                     <p class="eael-el-title"><?php _e( 'Image Accordion', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="content-ticker" name="content-ticker" <?php checked( 1, $this->eael_get_settings['content-ticker'], true ); ?> >
+                    <input type="checkbox" id="content-ticker" name="content-ticker" <?php checked( 1, $this->get_settings('content-ticker'), true ); ?> >
                     <label for="content-ticker"></label>
                     <p class="eael-el-title"><?php _e( 'Content Ticker', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="tooltip" name="tooltip" <?php checked( 1, $this->eael_get_settings['tooltip'], true ); ?> >
+                    <input type="checkbox" id="tooltip" name="tooltip" <?php checked( 1, $this->get_settings('tooltip'), true ); ?> >
                     <label for="tooltip"></label>
                     <p class="eael-el-title"><?php _e( 'Tooltip', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="adv-accordion" name="adv-accordion" <?php checked( 1, $this->eael_get_settings['adv-accordion'], true ); ?> >
+                    <input type="checkbox" id="adv-accordion" name="adv-accordion" <?php checked( 1, $this->get_settings('adv-accordion'), true ); ?> >
                     <label for="adv-accordion"></label>
                     <p class="eael-el-title"><?php _e( 'Advanced Accordion', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="adv-tabs" name="adv-tabs" <?php checked( 1, $this->eael_get_settings['adv-tabs'], true ); ?> >
+                    <input type="checkbox" id="adv-tabs" name="adv-tabs" <?php checked( 1, $this->get_settings('adv-tabs'), true ); ?> >
                     <label for="adv-tabs"></label>
                     <p class="eael-el-title"><?php _e( 'Advanced Tabs', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="progress-bar" name="progress-bar" <?php checked( 1, $this->eael_get_settings['progress-bar'], true ); ?> >
+                    <input type="checkbox" id="progress-bar" name="progress-bar" <?php checked( 1, $this->get_settings('progress-bar'), true ); ?> >
                     <label for="progress-bar"></label>
                     <p class="eael-el-title"><?php _e( 'Progress Bar', 'essential-addons-elementor' ) ?></p>
                 </div>
                 <div class="eael-checkbox">
-                    <input type="checkbox" id="feature-list" name="progress-bar" <?php checked( 1, $this->eael_get_settings['feature-list'], true ); ?> >
+                    <input type="checkbox" id="feature-list" name="feature-list" <?php checked( 1, $this->get_settings('feature-list'), true ); ?> >
                     <label for="feature-list"></label>
                     <p class="eael-el-title"><?php _e( 'Feature List', 'essential-addons-elementor' ) ?></p>
                 </div>
