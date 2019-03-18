@@ -79,16 +79,12 @@
 	.eael-img-accordion {
 		flex-direction: column;
 	}
+
 	.eael-img-accordion a:hover {
 		flex: 1;
 	}
+
 	.eael-img-accordion a:hover .overlay {
 		background-color: transparent;
-	}
-	.eael-img-accordion .overlay h2,
-	.eael-img-accordion .overlay p {
-		opacity: 1;
-		visibility: visible;
-		transform: none;
 	}
 }

@@ -271,3 +271,24 @@ function eael_activate() {
     add_option('eael_do_activation_redirect', true);
 }
 register_activation_hook(__FILE__, 'eael_activate');
+
+// New ERA
+
+/**
+ * Including composer autoload.
+ *
+ * @since    x.x.x
+ */
+require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+
+final class Essential_Addons_Elementor {
+   use Essential_Addons_Elementor\Traits\Enqueue_Handler;
+
+   public function __construct() {
+      // add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));
+      add_action('eael_generate_editor_scripts', array($this, 'eael_generate_editor_scripts'));
+   }
+}
+add_action('plugins_loaded', function() {
+   new Essential_Addons_Elementor;
+});
