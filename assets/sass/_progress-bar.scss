@@ -206,3 +206,22 @@ $color_2: rgba(255, 255, 255, .15);
 .eael-progressbar-circle-wrap>div {
     margin: 0 auto;
 }
+
+/*alignment*/
+.eael-progressbar-line-container.left,
+.eael-progressbar-circle-container.left > div,
+.eael-progressbar-box-container.left > div {
+    margin: 0 auto 0 0;
+}
+
+.eael-progressbar-line-container.center,
+.eael-progressbar-circle-container.center > div,
+.eael-progressbar-box-container.center > div {
+    margin: 0 auto;
+}
+
+.eael-progressbar-line-container.right,
+.eael-progressbar-circle-container.right > div,
+.eael-progressbar-box-container.right > div {
+    margin: 0 0 0 auto;
+}

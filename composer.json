@@ -1,0 +1,11 @@
+{
+    "name": "rupok/essential-addons-for-elementor-lite",
+    "autoload": {
+        "psr-4": {
+            "Essential_Addons_Elementor\\Traits\\": "includes/traits/"
+        }
+    },
+    "require": {
+        "matthiasmullie/minify": "^1.3"
+    }
+}
