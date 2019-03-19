@@ -1,15 +1,15 @@
 <?php
 
-namespace Essential_Addons_Elementor\Traits;
+namespace EssentialAddonsElementor\Traits;
 
 use Essential_Addons_EL;
 use MatthiasMullie\Minify;
 
-trait Enqueue_Handler
+trait Enqueue
 {
     public function generate_editor_scripts()
     {
-        $active_components = Essential_Addons_EL::eael_activated_modules();
+        $active_components = $this->get_settings();
         $paths = array();
 
         foreach ($active_components as $key => $component) {
@@ -68,5 +68,26 @@ trait Enqueue_Handler
         $minifier = new Minify\JS($paths);
         $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.js');
 
+    }
+
+    public function scripts_to_be_enq() {
+        wp_enqueue_style(
+            'essential_addons_elementor-css',
+            ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css'
+        );
+
+        if ( class_exists( 'GFCommon' ) ) {
+            foreach( eael_select_gravity_form() as $form_id => $form_name ){
+                if ( $form_id != '0' ) {
+                    gravity_form_enqueue_scripts( $form_id );
+                }
+            };
+        }
+
+        if ( function_exists( 'wpforms' ) ) {
+            wpforms()->frontend->assets_css();
+        }
+
+        // localize script
     }
 }

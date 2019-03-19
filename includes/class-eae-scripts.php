@@ -35,7 +35,7 @@ if( ! class_exists( 'Essential_Addons_Scripts' ) ) {
          * @since v1.0.0
          */
         public function essential_addons_el_enqueue(){
-            $is_component_active = Essential_Addons_EL::eael_activated_modules();
+            $is_component_active = $this->get_settings();
 
             wp_enqueue_style(
                 'essential_addons_elementor-css',
