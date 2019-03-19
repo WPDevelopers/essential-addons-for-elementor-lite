@@ -2,9 +2,9 @@
     "name": "rupok/essential-addons-for-elementor-lite",
     "autoload": {
         "psr-4": {
-            "Essential_Addons_Elementor\\Admin\\": "admin",
-            "Essential_Addons_Elementor\\Classes\\": "includes/classes/",
-            "Essential_Addons_Elementor\\Traits\\": "includes/traits/"
+            "EssentialAddonsElementor\\Admin\\": "admin",
+            "EssentialAddonsElementor\\Classes\\": "includes/classes/",
+            "EssentialAddonsElementor\\Traits\\": "includes/traits/"
         }
     },
     "require": {

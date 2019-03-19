@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 class Widget_Eael_Content_Ticker extends Widget_Base {
 
-	use \Elementor\ElementsCommonFunctions;
+	use \EssentialAddonsElementor\Traits\ElementsHelper;
 
 	public function get_name() {
 		return 'eael-content-ticker';
@@ -673,7 +673,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		 */
 		$settings['post_style'] = 'ticker';
 		$post_args = eael_get_post_settings( $settings );
-		$query_args = EAE_Helper::get_query_args( 'eaeposts', $this->get_settings() );
+		$query_args = $this->get_query_args( 'eaeposts', $this->get_settings() );
 		$query_args = array_merge( $query_args, $post_args );
 		/**
 		 * Get posts from database.
