@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 }
 // Exit if accessed directly
 
+use \EssentialAddonsElementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tracker;
+
 trait Core
 {
     /**
@@ -130,5 +132,22 @@ trait Core
         }
         $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
         printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
+    }
+
+    /**
+     * Optional usage tracker
+     *
+     * @since v1.0.0
+     */
+    public function start_plugin_tracking()
+    {
+        $wpins = new Plugin_Usage_Tracker(
+            __FILE__,
+            'http://app.wpdeveloper.net',
+            array(),
+            true,
+            true,
+            1
+        );
     }
 }
