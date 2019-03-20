@@ -4,6 +4,8 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 class Widget_Eael_Data_Table extends Widget_Base {
+	use \EssentialAddonsElementor\Traits\Query;
+
 	public $unique_id = null;
 	public function get_name() {
 		return 'eael-data-table';
@@ -255,7 +257,7 @@ class Widget_Eael_Data_Table extends Widget_Base {
 		                'name'					=> 'eael_primary_templates_for_tables',
 		                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
 		                'type'                  => Controls_Manager::SELECT,
-		                'options'               => eael_get_page_templates(),
+		                'options'               => $this->eael_get_page_templates(),
 						'condition'             => [
 							'eael_data_table_content_type'      => 'template',
 						],

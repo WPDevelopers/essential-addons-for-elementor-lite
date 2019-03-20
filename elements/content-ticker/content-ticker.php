@@ -4,7 +4,7 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 class Widget_Eael_Content_Ticker extends Widget_Base {
-
+	use \EssentialAddonsElementor\Traits\Query;
 	use \EssentialAddonsElementor\Traits\ElementsHelper;
 
 	public function get_name() {

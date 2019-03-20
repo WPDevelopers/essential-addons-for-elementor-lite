@@ -6,19 +6,16 @@ if (!defined('ABSPATH')) {
     exit();
 } // Exit if accessed directly
 
-use EssentialAddonsElementor\Traits\ElementsHelper;
 use \WP_Query;
 
-trait Queries
+trait Query
 {
-
-/**
- * Get All POst Types
- * @return array
- */
+    /**
+     * Get All POst Types
+     * @return array
+     */
     function eael_get_post_types()
     {
-
         $eael_cpts = get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'object');
         $eael_exclude_cpts = array('elementor_library', 'attachment');
 
@@ -33,10 +30,10 @@ trait Queries
         return $types;
     }
 
-/**
- * Get all types of post.
- * @return array
- */
+    /**
+     * Get all types of post.
+     * @return array
+     */
     function eael_get_all_types_post()
     {
         $posts_args = array(
@@ -55,11 +52,11 @@ trait Queries
 
         return $post_list;
     }
-/**
- * Post Settings Parameter
- * @param  array $settings
- * @return array
- */
+    /**
+     * Post Settings Parameter
+     * @param  array $settings
+     * @return array
+     */
     function eael_get_post_settings($settings)
     {
         foreach ($settings as $key => $value) {
@@ -74,12 +71,12 @@ trait Queries
         return $post_args;
     }
 
-/**
- * Getting Excerpts By Post Id
- * @param  int $post_id
- * @param  int $excerpt_length
- * @return string
- */
+    /**
+     * Getting Excerpts By Post Id
+     * @param  int $post_id
+     * @param  int $excerpt_length
+     * @return string
+     */
     function eael_get_excerpt_by_id($post_id, $excerpt_length)
     {
         $the_post = get_post($post_id); //Gets post ID
@@ -101,10 +98,10 @@ trait Queries
         return $the_excerpt;
     }
 
-/**
- * Get Post Thumbnail Size
- * @return array
- */
+    /**
+     * Get Post Thumbnail Size
+     * @return array
+     */
     function eael_get_thumbnail_sizes()
     {
         $sizes = get_intermediate_image_sizes();
@@ -115,10 +112,10 @@ trait Queries
         return $ret;
     }
 
-/**
- * POst Orderby Options
- * @return array
- */
+    /**
+     * POst Orderby Options
+     * @return array
+     */
     function eael_get_post_orderby_options()
     {
         $orderby = array(
@@ -136,10 +133,10 @@ trait Queries
         return $orderby;
     }
 
-/**
- * Get Post Categories
- * @return array
- */
+    /**
+     * Get Post Categories
+     * @return array
+     */
     function eael_post_type_categories()
     {
         $terms = get_terms(array(
@@ -156,10 +153,10 @@ trait Queries
         return $options;
     }
 
-/**
- * WooCommerce Product Query
- * @return array
- */
+    /**
+     * WooCommerce Product Query
+     * @return array
+     */
     function eael_woocommerce_product_categories()
     {
         $terms = get_terms(array(
@@ -175,10 +172,10 @@ trait Queries
         }
     }
 
-/**
- * WooCommerce Get Product By Id
- * @return array
- */
+    /**
+     * WooCommerce Get Product By Id
+     * @return array
+     */
     function eael_woocommerce_product_get_product_by_id()
     {
         $postlist = get_posts(array(
@@ -196,10 +193,10 @@ trait Queries
         }
     }
 
-/**
- * WooCommerce Get Product Category By Id
- * @return array
- */
+    /**
+     * WooCommerce Get Product Category By Id
+     * @return array
+     */
     function eael_woocommerce_product_categories_by_id()
     {
         $terms = get_terms(array(
@@ -216,9 +213,9 @@ trait Queries
 
     }
 
-/**
- * Get Contact Form 7 [ if exists ]
- */
+    /**
+     * Get Contact Form 7 [ if exists ]
+     */
     function eael_select_contact_form()
     {
 
@@ -240,9 +237,9 @@ trait Queries
         return $options;
     }
 
-/**
- * Get Gravity Form [ if exists ]
- */
+    /**
+     * Get Gravity Form [ if exists ]
+     */
     function eael_select_gravity_form()
     {
         $options = array();
@@ -264,10 +261,10 @@ trait Queries
         return $options;
     }
 
-/**
- * Get WeForms Form List
- * @return array
- */
+    /**
+     * Get WeForms Form List
+     * @return array
+     */
     function eael_select_weform()
     {
 
@@ -290,10 +287,10 @@ trait Queries
         return $options;
     }
 
-/**
- * Get Ninja Form List
- * @return array
- */
+    /**
+     * Get Ninja Form List
+     * @return array
+     */
     function eael_select_ninja_form()
     {
         $options = array();
@@ -315,10 +312,10 @@ trait Queries
         return $options;
     }
 
-/**
- * Get Caldera Form List
- * @return array
- */
+    /**
+     * Get Caldera Form List
+     * @return array
+     */
     function eael_select_caldera_form()
     {
         $options = array();
@@ -339,10 +336,10 @@ trait Queries
         return $options;
     }
 
-/**
- * Get WPForms List
- * @return array
- */
+    /**
+     * Get WPForms List
+     * @return array
+     */
     function eael_select_wpforms_forms()
     {
         $options = array();
@@ -368,7 +365,7 @@ trait Queries
         return $options;
     }
 
-// Get all elementor page templates
+    // Get all elementor page templates
     function eael_get_page_templates()
     {
         $page_templates = get_posts(array(
@@ -386,7 +383,7 @@ trait Queries
         return $options;
     }
 
-// Get all Authors
+    // Get all Authors
     function eael_get_authors()
     {
 
@@ -403,7 +400,7 @@ trait Queries
         return $options;
     }
 
-// Get all Authors
+    // Get all Authors
     function eael_get_tags()
     {
 
@@ -418,7 +415,7 @@ trait Queries
         return $options;
     }
 
-// Get all Posts
+    // Get all Posts
     function eael_get_posts()
     {
 
@@ -440,7 +437,7 @@ trait Queries
         return $posts;
     }
 
-// Get all Pages
+    // Get all Pages
     function eael_get_pages()
     {
 
@@ -462,13 +459,13 @@ trait Queries
         return $pages;
     }
 
-/**
- * This function is responsible for get the post data.
- * It will return HTML markup with AJAX call and with normal call.
- *
- * @return string of an html markup with AJAX call.
- * @return array of content and found posts count without AJAX call.
- */
+    /**
+     * This function is responsible for get the post data.
+     * It will return HTML markup with AJAX call and with normal call.
+     *
+     * @return string of an html markup with AJAX call.
+     * @return array of content and found posts count without AJAX call.
+     */
     function eael_load_more_ajax()
     {
 
@@ -516,11 +513,11 @@ trait Queries
         }
     }
 
-/**
- * For All Settings Key Need To Display
- *
- * @return array
- */
+    /**
+     * For All Settings Key Need To Display
+     *
+     * @return array
+     */
     function posts_args()
     {
         return array(

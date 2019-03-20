@@ -92,8 +92,8 @@ final class EssentialAddonsElementor
     use EssentialAddonsElementor\Traits\Ajax;
     use EssentialAddonsElementor\Traits\Enqueue;
     use EssentialAddonsElementor\Traits\Admin;
-    use EssentialAddonsElementor\Traits\ElementsHelper;
     use EssentialAddonsElementor\Traits\ElementorHelper;
+    use EssentialAddonsElementor\Traits\ElementsHelper;
     use EssentialAddonsElementor\Traits\Elements;
 
     public $plugin_basename;
@@ -148,17 +148,11 @@ final class EssentialAddonsElementor
             'progress-bar',
             'feature-list',
         ];
-
-        // Elementor Helper - Leave them for now
-        add_filter("plugin_action_links_$this->plugin_basename", array($this, 'eael_add_settings_link'));
-        add_action('admin_init', array($this, 'eael_redirect'));
-        add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
-        add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', array($this, 'eae_pro_filter_action_links'));
         
-        if (!did_action('elementor/loaded')) {
-            add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
-        }
+        // Core
+        
 
+        // Elementor Helper
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'eae_before_enqueue_scripts'));
         add_action('elementor/controls/controls_registered', array($this, 'eae_posts_register_control'));
 
@@ -183,13 +177,16 @@ final class EssentialAddonsElementor
             add_action('admin_menu', array($this, 'admin_menu'), 600);
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
-        }
-    }
 
-    public function eae_posts_register_control($controls_manager)
-    {
-        // include_once ESSENTIAL_ADDONS_EL_PATH . 'includes/classes/eae-posts-group-control.php';
-        $controls_manager->add_group_control('eaeposts', new EssentialAddonsElementor\Classes\EAE_Posts_Group_Control());
+            // Core Helper - Leave them for now
+            add_filter("plugin_action_links_$this->plugin_basename", array($this, 'eael_add_settings_link'));
+            add_action('admin_init', array($this, 'eael_redirect'));
+            add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
+            add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', array($this, 'eae_pro_filter_action_links'));
+            if (!did_action('elementor/loaded')) {
+                add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
+            }
+        }
     }
 
 }

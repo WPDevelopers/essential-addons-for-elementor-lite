@@ -5,22 +5,23 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-        use \Elementor\Controls_Manager as Controls_Manager;
-        use \Elementor\Group_Control_Base as Group_Control_Base;
-        
-if (class_exists('Elementor\Plugin')):
+use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Group_Control_Base as Group_Control_Base;
+
+if (class_exists('Elementor\Plugin')) {
     class EAE_Posts_Group_Control extends Group_Control_Base
-{
-    use \EssentialAddonsElementor\Traits\Queries;       
+    {
+        use \EssentialAddonsElementor\Traits\Query;
+
         protected static $fields;
 
         public static function get_type()
-    {
+        {
             return 'eaeposts';
         }
 
         protected function init_fields()
-    {
+        {
             $fields = [];
 
             $fields['post_type'] = [
@@ -58,7 +59,7 @@ if (class_exists('Elementor\Plugin')):
         }
 
         protected function prepare_fields($fields)
-    {
+        {
 
             $post_types = $this->eael_get_post_types();
 
@@ -120,7 +121,7 @@ if (class_exists('Elementor\Plugin')):
          * @return array
          */
         public function get_authors()
-    {
+        {
             $user_query = new \WP_User_Query(
                 [
                     'who' => 'authors',
@@ -142,10 +143,10 @@ if (class_exists('Elementor\Plugin')):
         }
 
         protected function get_default_options()
-    {
+        {
             return [
                 'popover' => false,
             ];
         }
     }
-endif;
+}
