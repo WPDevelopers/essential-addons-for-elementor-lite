@@ -4,8 +4,8 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Widget_Eael_Post_Grid extends Widget_Base {
+	use \EssentialAddonsElementor\Traits\Query;
 	use \EssentialAddonsElementor\Traits\ElementsHelper;
-	
 
 	public function get_name() {
 		return 'eael-post-grid';

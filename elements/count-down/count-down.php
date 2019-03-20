@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 
 class Widget_Eael_Countdown extends Widget_Base {
+	use \EssentialAddonsElementor\Traits\Query;
 
 	public function get_name() {
 		return 'eael-countdown';
@@ -311,7 +312,7 @@ class Widget_Eael_Countdown extends Widget_Base {
             [
                 'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SELECT,
-                'options'               => eael_get_page_templates(),
+                'options'               => $this->eael_get_page_templates(),
 				'condition'             => [
 					'countdown_expire_type'      => 'template',
 				],

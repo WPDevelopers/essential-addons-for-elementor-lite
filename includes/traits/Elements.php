@@ -11,7 +11,7 @@ trait Elements
     public function elements_path($file)
     {
         $file = ltrim($file, '/');
-        $file = ESSENTIAL_ADDONS_EL_PATH . 'elements/' . $file . '/' . $file . '.php';
+        $file = $this->plugin_path . 'elements/' . $file . '/' . $file . '.php';
         if (file_exists($file)) {
             return $file;
         }
@@ -102,6 +102,8 @@ trait Elements
 
         $is_component_active = $this->get_settings();
         $ea_elements = apply_filters('add_eae_element', $elements);
+        print_r($is_component_active);
+        print_r($ea_elements);
 
         foreach ($ea_elements as $element) {
             if (isset($element['condition'])) {

@@ -6,12 +6,16 @@ if (!defined('ABSPATH')) {
     exit;
 }
 // Exit if accessed directly
-use \EssentialAddonsElementor\Classes\EAE_Posts_Group_Control;
 use \Elementor\Controls_Manager as Controls_Manager;
-        use \Elementor\Group_Control_Base as Group_Control_Base;
+use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
+use \Elementor\Utils as Utils;
+use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Border as Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
+// use \EssentialAddonsElementor\Classes\EAE_Posts_Group_Control;
+
 trait ElementsHelper
 {
-
     /**
      * For Exclude Option
      */
@@ -70,7 +74,7 @@ trait ElementsHelper
         }
 
         $this->add_group_control(
-            EAE_Posts_Group_Control::get_type(),
+            'eaeposts',
             [
                 'name' => 'eaeposts',
             ]
@@ -101,7 +105,7 @@ trait ElementsHelper
             [
                 'label' => __('Order By', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SELECT,
-                'options' => eael_get_post_orderby_options(),
+                'options' => $this->eael_get_post_orderby_options(),
                 'default' => 'date',
 
             ]
@@ -684,7 +688,8 @@ trait ElementsHelper
 
     }
 
-    public function get_query_args( $control_id, $settings ) {
+    public function get_query_args($control_id, $settings)
+    {
         $defaults = [
             $control_id . '_post_type' => 'post',
             $control_id . '_posts_ids' => [],
@@ -694,9 +699,9 @@ trait ElementsHelper
             'offset' => 0,
         ];
 
-        $settings = wp_parse_args( $settings, $defaults );
+        $settings = wp_parse_args($settings, $defaults);
 
-        $post_type = $settings[ $control_id . '_post_type' ];
+        $post_type = $settings[$control_id . '_post_type'];
 
         $query_args = [
             'orderby' => $settings['orderby'],
@@ -705,13 +710,13 @@ trait ElementsHelper
             'post_status' => 'publish', // Hide drafts/private posts for admins
         ];
 
-        if ( 'by_id' === $post_type ) {
+        if ('by_id' === $post_type) {
             $query_args['post_type'] = 'any';
-            $query_args['post__in']  = $settings[ $control_id . '_posts_ids' ];
+            $query_args['post__in'] = $settings[$control_id . '_posts_ids'];
 
-            if ( empty( $query_args['post__in'] ) ) {
+            if (empty($query_args['post__in'])) {
                 // If no selection - return an empty query
-                $query_args['post__in'] = [ 0 ];
+                $query_args['post__in'] = [0];
             }
         } else {
             $query_args['post_type'] = $post_type;
@@ -720,32 +725,32 @@ trait ElementsHelper
 
             $query_args['offset'] = $settings['offset'];
 
-            $taxonomies = get_object_taxonomies( $post_type, 'objects' );
+            $taxonomies = get_object_taxonomies($post_type, 'objects');
 
-            foreach ( $taxonomies as $object ) {
+            foreach ($taxonomies as $object) {
                 $setting_key = $control_id . '_' . $object->name . '_ids';
 
-                if ( ! empty( $settings[ $setting_key ] ) ) {
+                if (!empty($settings[$setting_key])) {
                     $query_args['tax_query'][] = [
                         'taxonomy' => $object->name,
                         'field' => 'term_id',
-                        'terms' => $settings[ $setting_key ],
+                        'terms' => $settings[$setting_key],
                     ];
                 }
             }
         }
 
-        if ( ! empty( $settings[ $control_id . '_authors' ] ) ) {
-            $query_args['author__in'] = $settings[ $control_id . '_authors' ];
+        if (!empty($settings[$control_id . '_authors'])) {
+            $query_args['author__in'] = $settings[$control_id . '_authors'];
         }
 
         $post__not_in = [];
-        if ( ! empty( $settings['post__not_in'] ) ) {
-            $post__not_in = array_merge( $post__not_in, $settings['post__not_in'] );
+        if (!empty($settings['post__not_in'])) {
+            $post__not_in = array_merge($post__not_in, $settings['post__not_in']);
             $query_args['post__not_in'] = $post__not_in;
         }
 
-        if( isset( $query_args['tax_query'] ) && count( $query_args['tax_query'] ) > 1 ) {
+        if (isset($query_args['tax_query']) && count($query_args['tax_query']) > 1) {
             $query_args['tax_query']['relation'] = 'OR';
         }
 
