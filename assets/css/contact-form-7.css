@@ -35,11 +35,7 @@
 .eael-contact-form-7 input[type="color"],
 .eael-contact-form-7 .uneditable-input {
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -webkit-transition: border linear 0.2s, -webkit-box-shadow linear 0.2s;
-  transition: border linear 0.2s, -webkit-box-shadow linear 0.2s;
-  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-  transition: border linear 0.2s, box-shadow linear 0.2s, -webkit-box-shadow linear 0.2s; }
+  transition: border linear 0.2s, box-shadow linear 0.2s; }
 
 .eael-contact-form-7 .wpcf7-form::before,
 .eael-contact-form-7 .wpcf7-form::after {
@@ -73,3 +69,5 @@
 
 .eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
   width: 100%; }
+
+/*# sourceMappingURL=contact-form-7.css.map */

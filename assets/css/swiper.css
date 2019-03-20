@@ -23,9 +23,7 @@
   line-height: 1;
   margin: 0;
   text-align: center;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   width: auto; }
 
 .swiper-container-wrap .swiper-button-next .fa,
@@ -53,6 +51,7 @@
   background: #000; }
 
 .swiper-container-3d .swiper-slide {
-  -o-transition-property: all;
   transition-property: all;
   -webkit-transition-property: all; }
+
+/*# sourceMappingURL=swiper.css.map */

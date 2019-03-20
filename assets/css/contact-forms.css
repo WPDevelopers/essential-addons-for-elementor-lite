@@ -25,7 +25,6 @@
   padding: 10px 20px;
   width: auto;
   -webkit-transition: all 0.25s linear 0s;
-  -o-transition: all 0.25s linear 0s;
   transition: all 0.25s linear 0s; }
 
 .eael-contact-form.placeholder-hide input::-webkit-input-placeholder,
@@ -74,13 +73,12 @@
 .eael-custom-radio-checkbox input[type=radio]:checked:before {
   background: #999;
   -webkit-transition: all 0.25s linear 0s;
-  -o-transition: all 0.25s linear 0s;
   transition: all 0.25s linear 0s; }
 
 .eael-custom-radio-checkbox input[type=radio] {
-  -webkit-border-radius: 50%;
-          border-radius: 50%; }
+  border-radius: 50%; }
 
 .eael-custom-radio-checkbox input[type=radio]:before {
-  -webkit-border-radius: 50%;
-          border-radius: 50%; }
+  border-radius: 50%; }
+
+/*# sourceMappingURL=contact-forms.css.map */

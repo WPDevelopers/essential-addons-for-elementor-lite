@@ -4,8 +4,8 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Widget_Eael_Post_Grid extends Widget_Base {
-
-	use \Elementor\ElementsCommonFunctions;
+	use \EssentialAddonsElementor\Traits\Query;
+	use \EssentialAddonsElementor\Traits\ElementsHelper;
 
 	public function get_name() {
 		return 'eael-post-grid';
@@ -408,7 +408,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		 */
 		$settings['post_style'] = 'grid';
 		$post_args = eael_get_post_settings( $settings );
-		$query_args = EAE_Helper::get_query_args( 'eaeposts', $this->get_settings() );
+		$query_args = $this->get_query_args( 'eaeposts', $this->get_settings() );
 		$settings = $query_args = array_merge( $query_args, $post_args );
 
 		if( isset( $query_args['tax_query'] ) ) {

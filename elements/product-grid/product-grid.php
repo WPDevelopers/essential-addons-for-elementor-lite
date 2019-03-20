@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 class Widget_Eael_Product_Grid extends Widget_Base
 {
+    use \EssentialAddonsElementor\Traits\Query;
 
     public function get_name()
     {
@@ -92,7 +93,7 @@ class Widget_Eael_Product_Grid extends Widget_Base
                 'type' => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'multiple' => true,
-                'options' => eael_woocommerce_product_categories(),
+                'options' => $this->eael_woocommerce_product_categories(),
             ]
         );
 

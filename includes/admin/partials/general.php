@@ -5,7 +5,7 @@
 
                 <div class="eael-admin-block eael-admin-block-banner">
                     <a href="https://essential-addons.com/elementor/" target="_blank">
-                        <img class="eael-preview-img" src="<?php echo plugins_url( '/', __FILE__ ).'../assets/images/eael-featured.png'; ?>">
+                        <img class="eael-preview-img" src="<?php echo $this->plugin_url . '/assets/admin/images/eael-featured.png'; ?>">
                     </a>
                 </div><!--preview image end-->
                 <div class="eael-admin-block eael-admin-block-docs">
@@ -62,7 +62,7 @@
         <div class="eael-admin-sidebar">
             <div class="eael-sidebar-block">
                 <div class="eael-admin-sidebar-logo">
-                    <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/images/ea-logo.svg'; ?>">
+                    <img src="<?php echo $this->plugin_url . '/assets/admin/images/ea-logo.svg'; ?>">
                 </div>
                 <div class="eael-admin-sidebar-cta">
                     <?php printf( __( '<a href="%s" target="_blank">Upgrade to Pro</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/in/upgrade-essential-addons-elementor' ); ?>
