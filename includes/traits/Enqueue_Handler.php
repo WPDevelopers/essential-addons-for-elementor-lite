@@ -127,6 +127,10 @@ trait Enqueue_Handler
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/testimonials.scss';
                     break;
 
+                case 'weforms':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/weform.css';
+                break;
+
                 case 'call-to-action':
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/call-to-action.css';
                     break;
@@ -159,16 +163,20 @@ trait Enqueue_Handler
                         $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/caldera-form.css';
                     break;
 
-                case 'weforms':
+                case 'wpforms':
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/weform.css';
                 break;
-        
-                case 'data-table':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/data-table.css';
-                    break;
+
+                case 'twitter-feed':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/social-feeds.css';
+                break;
 
                 case 'filter-gallery':
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/filterable-gallery.css';
+                    break;
+
+                case 'data-table':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/data-table.css';
                     break;
 
                 case 'image-accordion':
@@ -201,5 +209,8 @@ trait Enqueue_Handler
 
             }
         }
+
+        $minifier = new Minify\CSS($paths);
+        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.css');
     }
 }
