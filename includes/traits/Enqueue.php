@@ -7,62 +7,55 @@ use MatthiasMullie\Minify;
 
 trait Enqueue
 {
-    public function generate_editor_scripts($elements)
+    public function generate_editor_style($elements)
     {
-        // $active_components = $this->get_settings();
         $paths = array();
 
-        foreach ($elements as $key => $component) {
-            switch ($key) {
-                case 'adv-accordion':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'adv-tabs':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'fancy-text':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/fancy-text/fancy-text.js';
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'count-down':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/countdown/countdown.min.js';
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-                
-                case 'data-table':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'filterable-gallery':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'image-accordion':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'post-timeline':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/vendor/load-more/load-more.js';
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'price-table':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'progress-bar':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
-
-                case 'twitter-feed':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
-                    break;
+        foreach( $elements as $element ) {
+            $file = $this->plugin_path . "assets/css/$element.css";
+            if( file_exists($file) ) {
+                $paths[] = $file;
             }
+        }
+        
+        $minifier = new Minify\CSS($paths);
+        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.css');
+    }
+
+    public function generate_editor_scripts($elements)
+    {
+        $paths = array();
+
+        foreach ($elements as $element) {
+            if($element == 'fancy-text') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/fancy-text/fancy-text.js';
+            }elseif($element == 'count-down') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/countdown/countdown.min.js';
+            }elseif($element == 'filterable-gallery') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                $paths[] = $this->plugin_path . 'assets/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
+            }elseif($element == 'post-timeline') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
+            }elseif($element == 'price-table') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/tooltipster/tooltipster.bundle.min.js';
+            }elseif($element == 'progress-bar') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/progress-bar/progress-bar.js';
+            }elseif($element == 'twitter-feed') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                $paths[] = $this->plugin_path . 'assets/social-feeds/codebird.js';
+                $paths[] = $this->plugin_path . 'assets/social-feeds/doT.min.js';
+                $paths[] = $this->plugin_path . 'assets/social-feeds/moment.js';
+                $paths[] = $this->plugin_path . 'assets/social-feeds/jquery.socialfeed.js';
+            }elseif($element == 'post-grid') {
+                $paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                $paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
+            }
+
+            $file = $this->plugin_path . 'assets/js/' . $element . '/index.js';
+            if( file_exists($file) ) {
+                $paths[] = $file;
+            }
+
         }
 
         $minifier = new Minify\JS($paths);
