@@ -1,31 +1,23 @@
 @-webkit-keyframes animateStripe {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); }
+    transform: translate(0, 0); }
   100% {
-    -webkit-transform: translate(35px, 0);
-            transform: translate(35px, 0); } }
+    transform: translate(35px, 0); } }
 @keyframes animateStripe {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); }
+    transform: translate(0, 0); }
   100% {
-    -webkit-transform: translate(35px, 0);
-            transform: translate(35px, 0); } }
+    transform: translate(35px, 0); } }
 @-webkit-keyframes animateStripeRTL {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); }
+    transform: translate(0, 0); }
   100% {
-    -webkit-transform: translate(-35px, 0);
-            transform: translate(-35px, 0); } }
+    transform: translate(-35px, 0); } }
 @keyframes animateStripeRTL {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); }
+    transform: translate(0, 0); }
   100% {
-    -webkit-transform: translate(-35px, 0);
-            transform: translate(-35px, 0); } }
+    transform: translate(-35px, 0); } }
 .eael-progressbar {
   position: relative; }
 
@@ -55,11 +47,7 @@
   width: 0;
   height: 12px;
   background-color: #000000;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-  -webkit-transition: width 1500ms linear;
-  -o-transition: width 1500ms linear;
+  transform: translateY(-50%);
   transition: width 1500ms linear;
   overflow: hidden; }
 
@@ -78,8 +66,7 @@
   width: 220px;
   height: 220px;
   padding: 10px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%; }
+  border-radius: 50%; }
 
 .eael-progressbar-circle-pie {
   position: absolute;
@@ -87,8 +74,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-clip-path: inset(0 0 0 50%);
-          clip-path: inset(0 0 0 50%); }
+  clip-path: inset(0 0 0 50%); }
 
 .eael-progressbar-circle-inner {
   height: 100%;
@@ -96,8 +82,7 @@
   border-width: 12px;
   border-style: solid;
   border-color: #eeeeee;
-  -webkit-border-radius: 50%;
-          border-radius: 50%; }
+  border-radius: 50%; }
 
 .eael-progressbar-circle-half {
   position: absolute;
@@ -108,29 +93,21 @@
   border-width: 12px;
   border-style: solid;
   border-color: #000000;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  -webkit-clip-path: inset(0 50% 0 0);
-          clip-path: inset(0 50% 0 0); }
+  border-radius: 50%;
+  clip-path: inset(0 50% 0 0); }
 
 .eael-progressbar-circle-half-left {
-  -webkit-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-          transform: rotate(0deg); }
+  transform: rotate(0deg); }
 
 .eael-progressbar-circle-half-right {
-  -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
   visibility: hidden; }
 
 .eael-progressbar-circle-inner-content {
   position: absolute;
   top: 50%;
   width: 100%;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   text-align: center; }
 
 .eael-progressbar-half-circle {
@@ -139,25 +116,15 @@
   height: 100px;
   overflow: hidden; }
   .eael-progressbar-half-circle .eael-progressbar-circle-pie {
-    -webkit-clip-path: inset(0 0 50% 0);
-            clip-path: inset(0 0 50% 0); }
+    clip-path: inset(0 0 50% 0); }
   .eael-progressbar-half-circle .eael-progressbar-circle-half {
-    -webkit-clip-path: inset(50% 0 0 0);
-            clip-path: inset(50% 0 0 0);
-    -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transition: -webkit-transform 1500ms linear;
-    transition: -webkit-transform 1500ms linear;
-    -o-transition: transform 1500ms linear;
-    transition: transform 1500ms linear;
-    transition: transform 1500ms linear, -webkit-transform 1500ms linear; }
+    clip-path: inset(50% 0 0 0);
+    transform: rotate(0deg);
+    transition: transform 1500ms linear; }
   .eael-progressbar-half-circle .eael-progressbar-circle-inner-content {
     top: initial;
     bottom: 0;
-    -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0); }
+    transform: translateY(0); }
   .eael-progressbar-half-circle .eael-progressbar-title {
     font-size: 16px;
     font-weight: 400; }
@@ -181,19 +148,14 @@
   left: -35px;
   width: calc(100% + 70px);
   height: 100%;
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  -webkit-background-size: 35px 35px;
-          background-size: 35px 35px; }
+  background-size: 35px 35px; }
 
 .eael-progressbar-line-animate .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripe 2s linear infinite;
-          animation: animateStripe 2s linear infinite; }
+  animation: animateStripe 2s linear infinite; }
 
 .eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripeRTL 2s linear infinite;
-          animation: animateStripeRTL 2s linear infinite; }
+  animation: animateStripeRTL 2s linear infinite; }
 
 .eael-progressbar-circle-wrap > div {
   margin: 0 auto; }
@@ -213,3 +175,5 @@
 .eael-progressbar-circle-container.right > div,
 .eael-progressbar-box-container.right > div {
   margin: 0 0 0 auto; }
+
+/*# sourceMappingURL=progress-bar.css.map */

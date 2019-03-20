@@ -56,11 +56,10 @@
 
 .eael-entry-footer {
   overflow: hidden;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex; }
 
 .eael-entry-footer > div {
   display: inline-block;
   float: left; }
+
+/*# sourceMappingURL=post-grid-column.css.map */

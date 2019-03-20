@@ -48,8 +48,7 @@
   margin: 0; }
 
 .testimonial-avatar-rounded figure img {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   height: auto; }
 
 .eael-testimonial-content {
@@ -306,3 +305,5 @@ span.eael-testimonial-quote {
 
 .content-bottom-icon-title-inline .eael-testimonial-align-right .eael-testimonial-text {
   text-align: right; }
+
+/*# sourceMappingURL=testimonials.css.map */

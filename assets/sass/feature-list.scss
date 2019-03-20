@@ -2,6 +2,48 @@
 /* 35. Feature List
 /*----------------------------*/
 
+// Color system
+
+$white: #fff !default;
+
+$border-radius: .25rem !default;
+
+$transition-base: all .2s ease-in-out !default;
+
+$enable-rounded: true !default;
+$enable-transitions: true !default;
+$enable-prefers-reduced-motion-media-query: true !default;
+
+
+// Border Radius
+
+@mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
+  @if $enable-rounded {
+    border-radius: $radius;
+  } @else if $fallback-border-radius != false {
+    border-radius: $fallback-border-radius;
+  }
+}
+
+
+// Transition
+
+@mixin transition($transition...) {
+  @if $enable-transitions {
+    @if length($transition) == 0 {
+      transition: $transition-base;
+    } @else {
+      transition: $transition;
+    }
+  }
+
+  @if $enable-prefers-reduced-motion-media-query {
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
 .elementor-widget-eael-feature-list {
 
     &.-icon-position-left .connector-type-modern.rhombus,
