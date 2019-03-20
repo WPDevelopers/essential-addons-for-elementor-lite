@@ -148,13 +148,6 @@ final class EssentialAddonsElementor
             'progress-bar',
             'feature-list',
         ];
-        
-        // Core
-        
-
-        // Elementor Helper
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'eae_before_enqueue_scripts'));
-        add_action('elementor/controls/controls_registered', array($this, 'eae_posts_register_control'));
 
         // Query
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
@@ -163,7 +156,12 @@ final class EssentialAddonsElementor
         // Enqueue
         add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
 
+        // Elementor Helper
+        add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
+        
         // Elements
+        add_action( 'elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories') );
         add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
 
         // add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));

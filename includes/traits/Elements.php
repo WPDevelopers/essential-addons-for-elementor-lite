@@ -102,8 +102,6 @@ trait Elements
 
         $is_component_active = $this->get_settings();
         $ea_elements = apply_filters('add_eae_element', $elements);
-        print_r($is_component_active);
-        print_r($ea_elements);
 
         foreach ($ea_elements as $element) {
             if (isset($element['condition'])) {

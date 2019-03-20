@@ -7,12 +7,12 @@ use MatthiasMullie\Minify;
 
 trait Enqueue
 {
-    public function generate_editor_scripts()
+    public function generate_editor_scripts($elements)
     {
-        $active_components = $this->get_settings();
+        // $active_components = $this->get_settings();
         $paths = array();
 
-        foreach ($active_components as $key => $component) {
+        foreach ($elements as $key => $component) {
             switch ($key) {
                 case 'adv-accordion':
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/js/' . $key . '/index.js';
