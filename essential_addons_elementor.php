@@ -155,6 +155,7 @@ final class EssentialAddonsElementor
 
         // Enqueue
         add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
+        add_action('eael_generate_editor_scripts', array($this, 'generate_editor_style'));
 
         // Elementor Helper
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));

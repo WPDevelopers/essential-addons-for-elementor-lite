@@ -1,0 +1,10 @@
+/*--------------------------*/
+/* 01. General Styles
+/*--------------------------*/
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
+  clear: both; }
+
+/*# sourceMappingURL=general.css.map */
