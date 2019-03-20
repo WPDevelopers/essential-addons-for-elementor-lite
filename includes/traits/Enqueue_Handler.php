@@ -107,26 +107,6 @@ trait Enqueue_Handler
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/fancy-text.css';
                     break;
 
-                case 'img-comparison':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
-                case 'instagram-gallery':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
-                case 'interactive-promo':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
-                case 'lightbox':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
-                case 'post-block':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
                 case 'post-grid':
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/post-grid.css';
                     break;
@@ -143,20 +123,8 @@ trait Enqueue_Handler
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/team-members.css';
                     break;
 
-                case 'testimonial-slider':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/testimonial-slider.css';
-                    break;
-
                 case 'testimonials':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
-                case 'weforms':
-                        $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/weform.css';
-                    break;
-
-                case 'static-product':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/testimonials.scss';
                     break;
 
                 case 'call-to-action':
@@ -179,14 +147,6 @@ trait Enqueue_Handler
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/pricing-table.css';
                     break;
 
-                case 'flip-carousel':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/flipbox.css';
-                    break;
-
-                case 'interactive-cards':
-                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/';
-                    break;
-
                 case 'ninja-form':
                         $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/ninja-form.css';
                     break;
@@ -198,6 +158,10 @@ trait Enqueue_Handler
                 case 'caldera-form':
                         $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/caldera-form.css';
                     break;
+
+                case 'weforms':
+                    $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/weform.css';
+                break;
         
                 case 'data-table':
                     $paths[] = ESSENTIAL_ADDONS_EL_PATH . 'assets/css/data-table.css';
