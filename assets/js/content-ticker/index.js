@@ -111,7 +111,9 @@ var ContentTicker = function($scope, $) {
         });
     }
 };
-elementorFrontend.hooks.addAction(
-    "frontend/element_ready/eael-content-ticker.default",
-    ContentTicker
-);
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-content-ticker.default",
+        ContentTicker
+    );
+});
