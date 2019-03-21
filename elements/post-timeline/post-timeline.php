@@ -285,7 +285,7 @@ class Widget_PostTimeline extends Widget_Base {
 		 * Setup the post arguments.
 		 */
 		$settings['post_style'] = 'timeline';
-		$post_args = eael_get_post_settings( $settings );
+		$post_args = $this->eael_get_post_settings( $settings );
 		$query_args = $this->get_query_args( 'eaeposts', $this->get_settings() );
 		$settings = $query_args = array_merge( $query_args, $post_args );
 
@@ -295,7 +295,7 @@ class Widget_PostTimeline extends Widget_Base {
 		/**
 		 * Get posts from database.
 		 */
-		$posts = eael_load_more_ajax( $query_args );
+		$posts = $this->eael_load_more_ajax( $query_args );
 		/**
 		 * Set total posts.
 		 */
