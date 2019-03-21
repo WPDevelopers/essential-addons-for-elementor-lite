@@ -131,15 +131,13 @@ class EssentialAddonsElementor
     public function eael_editor_scripts() {
         wp_register_script(
             'eael-script',
-            content_url('essential-addons/eael.js'),
+            content_url('uploads/essential-addons/eael.min.js'),
             ['jquery'],
             true
         );
         wp_register_style(
             'eael-style',
-            content_url('essential-addons/eael.css'),
-            ['jquery'],
-            true
+            content_url('uploads/essential-addons/eael.min.css')
         );
         wp_enqueue_script( 'eael-script' );
         wp_enqueue_style( 'eael-style' );
