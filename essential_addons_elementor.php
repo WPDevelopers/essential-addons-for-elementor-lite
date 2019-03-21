@@ -13,71 +13,7 @@
 
 if (!defined('ABSPATH')) {
     exit;
-}
-// Exit if accessed directly
-
-if (!class_exists('Essential_Addons_EL')) {
-    class Essential_Addons_EL
-    {
-        /**
-         * Constract of this class
-         */
-        public function __construct()
-        {
-            $this->inclulde_files();
-
-            if (!class_exists('Eael_Plugin_Usage_Tracker')) {
-                require_once dirname(__FILE__) . '/includes/class-plugin-usage-tracker.php';
-            }
-            $this->essential_addons_elementor_lite_start_plugin_tracking();
-
-        }
-
-        public function inclulde_files()
-        {
-
-            require_once dirname(__FILE__) . '/includes/class-wpdev-notices.php';
-        }
-
-        /**
-         * Optional usage tracker
-         *
-         * @since v1.0.0
-         */
-        public function essential_addons_elementor_lite_start_plugin_tracking()
-        {
-            $wpins = new Eael_Plugin_Usage_Tracker(
-                __FILE__,
-                'http://app.wpdeveloper.net',
-                array(),
-                true,
-                true,
-                1
-            );
-        }
-
-    }
-
-    function run_essential_addons()
-    {
-        new Essential_Addons_EL;
-    }
-    add_action('plugins_loaded', 'run_essential_addons', 25);
-
-}
-
-/**
- * Activation redirects
- *
- * @since v1.0.0
- */
-function eael_activate()
-{
-    add_option('eael_do_activation_redirect', true);
-}
-register_activation_hook(__FILE__, 'eael_activate');
-
-//////////////////////////////// New ERA ///////////////////////////////////////////////
+} // Exit if accessed directly
 
 /**
  * Including composer autoload.
@@ -86,7 +22,7 @@ register_activation_hook(__FILE__, 'eael_activate');
  */
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
-final class EssentialAddonsElementor
+class EssentialAddonsElementor
 {
     use EssentialAddonsElementor\Traits\Core;
     use EssentialAddonsElementor\Traits\Ajax;
@@ -148,12 +84,9 @@ final class EssentialAddonsElementor
             'progress-bar',
             'feature-list',
         ];
-        
-        // Core
 
-        // Elementor Helper
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'eae_before_enqueue_scripts'));
-        add_action('elementor/controls/controls_registered', array($this, 'eae_posts_register_control'));
+        // Start plugin tracking
+        $this->start_plugin_tracking();
 
         // Query
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
@@ -163,7 +96,12 @@ final class EssentialAddonsElementor
         add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
         add_action('eael_generate_editor_scripts', array($this, 'generate_editor_style'));
 
+        // Elementor Helper
+        add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
+
         // Elements
+        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
 
         add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));
@@ -174,6 +112,7 @@ final class EssentialAddonsElementor
 
         // Admin
         if (is_admin()) {
+            add_action('admin_init', array($this, 'admin_notice'));
             add_action('admin_menu', array($this, 'admin_menu'), 600);
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
@@ -210,3 +149,14 @@ final class EssentialAddonsElementor
 add_action('plugins_loaded', function () {
     new EssentialAddonsElementor;
 });
+
+/**
+ * Activation redirects
+ *
+ * @since v1.0.0
+ */
+function eael_activate()
+{
+    update_option('eael_do_activation_redirect', true);
+}
+register_activation_hook(__FILE__, 'eael_activate');

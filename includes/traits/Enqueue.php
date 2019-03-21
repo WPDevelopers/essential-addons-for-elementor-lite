@@ -9,65 +9,79 @@ trait Enqueue
 {
     public function generate_editor_style($elements)
     {
-        $paths = array();
-
-        foreach( $elements as $element ) {
-            $file = $this->plugin_path . "assets/css/$element.css";
-            if( file_exists($file) ) {
-                $paths[] = $file;
-            }
-        }
         
-        $minifier = new Minify\CSS($paths);
-        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'essential-addons/eael.css');
     }
 
     public function generate_editor_scripts($elements)
     {
-        $paths = array();
+        $js_paths = array();
 
         foreach ($elements as $element) {
             if($element == 'fancy-text') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/fancy-text/fancy-text.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/fancy-text/fancy-text.js';
             }elseif($element == 'count-down') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/countdown/countdown.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/countdown/countdown.min.js';
             }elseif($element == 'filterable-gallery') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                $paths[] = $this->plugin_path . 'assets/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
             }elseif($element == 'post-timeline') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
             }elseif($element == 'price-table') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/tooltipster/tooltipster.bundle.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/tooltipster/tooltipster.bundle.min.js';
             }elseif($element == 'progress-bar') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/progress-bar/progress-bar.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/progress-bar/progress-bar.js';
             }elseif($element == 'twitter-feed') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                $paths[] = $this->plugin_path . 'assets/social-feeds/codebird.js';
-                $paths[] = $this->plugin_path . 'assets/social-feeds/doT.min.js';
-                $paths[] = $this->plugin_path . 'assets/social-feeds/moment.js';
-                $paths[] = $this->plugin_path . 'assets/social-feeds/jquery.socialfeed.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/social-feeds/codebird.js';
+                $js_paths[] = $this->plugin_path . 'assets/social-feeds/doT.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/social-feeds/moment.js';
+                $js_paths[] = $this->plugin_path . 'assets/social-feeds/jquery.socialfeed.js';
             }elseif($element == 'post-grid') {
-                $paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                $paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
             }
 
             $file = $this->plugin_path . 'assets/js/' . $element . '/index.js';
             if( file_exists($file) ) {
-                $paths[] = $file;
+                $js_paths[] = $file;
             }
 
         }
 
-        $minifier = new Minify\JS($paths);
-        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'essential-addons/eael.js');
+        $minifier = new Minify\JS($js_paths);
+        $file = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'uploads/essential-addons/';
+        
+        if(file_exists($file)) {
+            file_put_contents($file.'eael.min.js', $minifier->minify());
+        }else {
+            wp_mkdir_p($file);
+        }
+
+        $css_paths = array();
+
+        foreach( $elements as $element ) {
+            $file = $this->plugin_path . "assets/css/$element.css";
+            if( file_exists($file) ) {
+                $css_paths[] = $file;
+            }
+        }
+        
+        $minifier = new Minify\CSS($css_paths);
+        $file = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'uploads/essential-addons/';
+        
+        if(file_exists($file)) {
+            file_put_contents($file.'eael.min.css', $minifier->minify());
+        }else {
+            wp_mkdir_p($file);
+        }
 
     }
 
     public function scripts_to_be_enq() {
-        wp_enqueue_style(
-            'essential_addons_elementor-css',
-            ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css'
-        );
+        // wp_enqueue_style(
+        //     'essential_addons_elementor-css',
+        //     ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css'
+        // );
 
         if ( class_exists( 'GFCommon' ) ) {
             foreach( eael_select_gravity_form() as $form_id => $form_name ){

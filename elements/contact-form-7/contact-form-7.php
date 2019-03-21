@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Contact Form 7 Element
  */
 class Widget_Eael_Contact_Form extends Widget_Base {
-    
+    use \EssentialAddonsElementor\Traits\Query;
     /**
 	 * Retrieve contact form 7 widget name.
 	 *
@@ -86,7 +86,7 @@ class Widget_Eael_Contact_Form extends Widget_Base {
 				'label'                 => esc_html__( 'Select Form', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::SELECT,
 				'label_block'           => true,
-				'options'               => eael_select_contact_form(),
+				'options'               => $this->eael_select_contact_form(),
                 'default'               => '0',
 			]
 		);
