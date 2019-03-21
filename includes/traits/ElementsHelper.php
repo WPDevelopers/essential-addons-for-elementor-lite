@@ -12,7 +12,7 @@ use \Elementor\Utils as Utils;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-// use \EssentialAddonsElementor\Classes\EAE_Posts_Group_Control;
+// use \EssentialAddonsElementor\Classes\Group_Control_EA_Posts;
 
 trait ElementsHelper
 {

@@ -1,4 +1,12 @@
 <?php
+namespace EssentialAddonsElementor\Classes;
+
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly.
+
+use EssentialAddonsElementor\Classes\WPDeveloper_Core_Installer;
+
 class WPDeveloper_Notice {
     /**
      * Admin Notice Key
@@ -98,11 +106,7 @@ class WPDeveloper_Notice {
 
         $this->do_notice_action = 'wpdeveloper_notices_for_' . $this->plugin_name;
 
-        if( ! class_exists( 'WPDeveloper_Core_Installer' ) ) {
-            require_once dirname( __FILE__ ) . '/class-wpdev-core-install.php';
-
-            new WPDeveloper_Core_Installer( $this->plugin_name );
-        }
+        new WPDeveloper_Core_Installer( $this->plugin_name );
     }
     /**
      * Initiate The Plugin
@@ -792,75 +796,3 @@ class WPDeveloper_Notice {
         <?php
     }
 }
-
-// Initialization.
-$notice = new WPDeveloper_Notice(ESSENTIAL_ADDONS_BASENAME, ESSENTIAL_ADDONS_VERSION);
-$scheme      = (parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY )) ? '&' : '?';
-$url = $_SERVER['REQUEST_URI'] . $scheme;
-$notice->links = [
-   'review' => array(
-        'later' => array(
-            'link' => 'https://wpdeveloper.net/review-essential-addons-elementor',
-            'target' => '_blank',
-            'label' => __( 'Ok, you deserve it!', 'essential-addons-elementor' ),
-            'icon_class' => 'dashicons dashicons-external',
-        ),
-        'allready' => array(
-            'link' => $url,
-            'label' => __( 'I already did', 'essential-addons-elementor' ),
-            'icon_class' => 'dashicons dashicons-smiley',
-            'data_args' => [
-                'dismiss' => true,
-            ]
-        ),
-        'maybe_later' => array(
-            'link' => $url,
-            'label' => __( 'Maybe Later', 'essential-addons-elementor' ),
-            'icon_class' => 'dashicons dashicons-calendar-alt',
-            'data_args' => [
-                'later' => true,
-            ]
-        ),
-        'support' => array(
-            'link' => 'https://wpdeveloper.net/support',
-            'label' => __( 'I need help', 'essential-addons-elementor' ),
-            'icon_class' => 'dashicons dashicons-sos',
-        ),
-        'never_show_again' => array(
-            'link' => $url,
-            'label' => __( 'Never show again', 'essential-addons-elementor' ),
-            'icon_class' => 'dashicons dashicons-dismiss',
-            'data_args' => [
-                'dismiss' => true,
-            ]
-        ),
-    )
-];
-
-/**
- * This is review message and thumbnail.
- */
-$notice->message( 'review', '<p>'. __( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor' ) .'</p>' );
-$notice->thumbnail( 'review', plugins_url( 'admin/assets/images/ea-logo.svg', ESSENTIAL_ADDONS_BASENAME ) );
-
-/**
- * Current Notice End Time.
- * Notice will dismiss in 3 days if user does nothing.
- */
-$notice->cne_time = '3 Day';
-/**
- * Current Notice Maybe Later Time.
- * Notice will show again in 7 days
- */
-$notice->maybe_later_time = '7 Day';
-
-$notice->text_domain = 'essential-addons-elementor';
-
-$notice->options_args = array(
-   'notice_will_show' => [
-        'opt_in' => $notice->timestamp,
-        'review' => $notice->makeTime( $notice->timestamp, '4 Day' ), // after 4 days
-   ]
-);
-
-$notice->init();
