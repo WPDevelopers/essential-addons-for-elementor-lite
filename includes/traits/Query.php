@@ -60,7 +60,7 @@ trait Query
     function eael_get_post_settings($settings)
     {
         foreach ($settings as $key => $value) {
-            if (in_array($key, posts_args())) {
+            if (in_array($key, $this->posts_args())) {
                 $post_args[$key] = $value;
             }
         }
