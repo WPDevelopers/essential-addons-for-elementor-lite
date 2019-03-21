@@ -23,7 +23,7 @@ trait Elements
      *
      * @since v1.0.0
      */
-    public function add_eael_elements()
+    public function add_eael_elements($widgets_manager)
     {
 
         $elements = [

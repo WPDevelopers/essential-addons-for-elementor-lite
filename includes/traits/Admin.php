@@ -42,14 +42,14 @@ trait Admin
 
         if (isset($hook) && $hook == 'plugins.php') {
             wp_enqueue_style('sweetalert2-css', $this->plugin_url . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, $this->plugin_version);
-            wp_enqueue_script('sweetalert2-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'essential_addons_core-js'), $this->plugin_version, true);
+            wp_enqueue_script('sweetalert2-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), $this->plugin_version, true);
             wp_enqueue_script('sweetalert2-core-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), $this->plugin_version, true);
         } // check this
 
         if (isset($hook) && $hook == 'elementor_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', $this->plugin_url . '/assets/admin/css/admin.css', false, $this->plugin_version);
             wp_enqueue_style('sweetalert2-css', $this->plugin_url . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, $this->plugin_version);
-            wp_enqueue_script('sweetalert2-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'essential_addons_core-js'), $this->plugin_version, true);
+            wp_enqueue_script('sweetalert2-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), $this->plugin_version, true);
             wp_enqueue_script('sweetalert2-core-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), $this->plugin_version, true);
             wp_enqueue_script('essential_addons_elementor-admin-js', $this->plugin_url . '/assets/admin/js/admin.js', array('jquery'), $this->plugin_version, true);
 
