@@ -94,17 +94,14 @@ class EssentialAddonsElementor
 
         // Enqueue
         add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
-        add_action('eael_generate_editor_scripts', array($this, 'generate_editor_style'));
 
         // Elementor Helper
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
+        add_action('elementor/frontend/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
-
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));
 
         if (class_exists('Caldera_Forms')) {
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
