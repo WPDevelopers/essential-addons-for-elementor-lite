@@ -19,7 +19,7 @@ trait Enqueue
         }
         
         $minifier = new Minify\CSS($paths);
-        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.css');
+        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'essential-addons/eael.css');
     }
 
     public function generate_editor_scripts($elements)
@@ -59,7 +59,7 @@ trait Enqueue
         }
 
         $minifier = new Minify\JS($paths);
-        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'eael.js');
+        $minifier->minify(WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'essential-addons/eael.js');
 
     }
 
