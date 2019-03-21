@@ -20,7 +20,9 @@ var dataTable = function($scope, $) {
         });
     }
 };
-elementorFrontend.hooks.addAction(
-    "frontend/element_ready/eael-data-table.default",
-    dataTable
-);
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-data-table.default",
+        dataTable
+    );
+});

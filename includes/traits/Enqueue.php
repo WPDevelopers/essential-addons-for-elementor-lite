@@ -7,11 +7,6 @@ use MatthiasMullie\Minify;
 
 trait Enqueue
 {
-    public function generate_editor_style($elements)
-    {
-        
-    }
-
     public function generate_editor_scripts($elements)
     {
         $js_paths = array();
@@ -48,6 +43,7 @@ trait Enqueue
             }
 
             $js_file = $this->plugin_path . 'assets/js/' . $element . '/index.js';
+            $js_paths[] = $this->plugin_path . 'assets/js/scripts.js';
             if( file_exists($js_file) ) {
                 $js_paths[] = $js_file;
             }
@@ -64,26 +60,5 @@ trait Enqueue
         
         $minifier = new Minify\CSS($css_paths);
         file_put_contents($file.'eael.min.css', $minifier->minify());
-    }
-
-    public function scripts_to_be_enq() {
-        // wp_enqueue_style(
-        //     'essential_addons_elementor-css',
-        //     ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css'
-        // );
-
-        if ( class_exists( 'GFCommon' ) ) {
-            foreach( eael_select_gravity_form() as $form_id => $form_name ){
-                if ( $form_id != '0' ) {
-                    gravity_form_enqueue_scripts( $form_id );
-                }
-            };
-        }
-
-        if ( function_exists( 'wpforms' ) ) {
-            wpforms()->frontend->assets_css();
-        }
-
-        // localize script
     }
 }

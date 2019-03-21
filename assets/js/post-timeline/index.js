@@ -45,7 +45,9 @@ var postTimelineHandler = function($scope, $) {
 
     eaelLoadMore(options, settings);
 };
-elementorFrontend.hooks.addAction(
-    "frontend/element_ready/eael-post-timeline.default",
-    postTimelineHandler
-);
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-timeline.default",
+        postTimelineHandler
+    );
+});
