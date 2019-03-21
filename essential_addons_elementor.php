@@ -104,7 +104,7 @@ class EssentialAddonsElementor
         add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
 
-        // add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'eael_editor_scripts'));
 
         if (class_exists('Caldera_Forms')) {
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
@@ -126,6 +126,23 @@ class EssentialAddonsElementor
                 add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
             }
         }
+    }
+
+    public function eael_editor_scripts() {
+        wp_register_script(
+            'eael-script',
+            content_url('essential-addons/eael.js'),
+            ['jquery'],
+            true
+        );
+        wp_register_style(
+            'eael-style',
+            content_url('essential-addons/eael.css'),
+            ['jquery'],
+            true
+        );
+        wp_enqueue_script( 'eael-script' );
+        wp_enqueue_style( 'eael-style' );
     }
 
 }
