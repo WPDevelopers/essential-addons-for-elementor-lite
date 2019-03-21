@@ -4,6 +4,7 @@ namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Widget_Eael_WpForms extends Widget_Base {
+    use \EssentialAddonsElementor\Traits\Query;
     
     public function get_name() {
         return 'eael-wpforms';
@@ -40,7 +41,7 @@ class Widget_Eael_WpForms extends Widget_Base {
                 'label'             => esc_html__( 'Select Form', 'essential-addons-elementor' ),
                 'type'              => Controls_Manager::SELECT,
                 'label_block'       => true,
-                'options'           => eael_select_wpforms_forms(),
+                'options'           => $this->eael_select_wpforms_forms(),
                 'default'           => '0',
             ]
         );
