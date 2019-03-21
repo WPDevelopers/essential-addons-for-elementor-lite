@@ -15,6 +15,12 @@ trait Enqueue
     public function generate_editor_scripts($elements)
     {
         $js_paths = array();
+        $css_paths = array();
+        $file = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'uploads/essential-addons/';
+
+        if(!file_exists($file)) {
+            wp_mkdir_p($file);
+        }
 
         foreach ($elements as $element) {
             if($element == 'fancy-text') {
@@ -41,40 +47,23 @@ trait Enqueue
                 $js_paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
             }
 
-            $file = $this->plugin_path . 'assets/js/' . $element . '/index.js';
-            if( file_exists($file) ) {
-                $js_paths[] = $file;
+            $js_file = $this->plugin_path . 'assets/js/' . $element . '/index.js';
+            if( file_exists($js_file) ) {
+                $js_paths[] = $js_file;
+            }
+
+            $css_file = $this->plugin_path . "assets/css/$element.css";
+            if( file_exists($css_file) ) {
+                $css_paths[] = $css_file;
             }
 
         }
 
         $minifier = new Minify\JS($js_paths);
-        $file = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'uploads/essential-addons/';
-        
-        if(file_exists($file)) {
-            file_put_contents($file.'eael.min.js', $minifier->minify());
-        }else {
-            wp_mkdir_p($file);
-        }
-
-        $css_paths = array();
-
-        foreach( $elements as $element ) {
-            $file = $this->plugin_path . "assets/css/$element.css";
-            if( file_exists($file) ) {
-                $css_paths[] = $file;
-            }
-        }
+        file_put_contents($file.'eael.min.js', $minifier->minify());
         
         $minifier = new Minify\CSS($css_paths);
-        $file = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'uploads/essential-addons/';
-        
-        if(file_exists($file)) {
-            file_put_contents($file.'eael.min.css', $minifier->minify());
-        }else {
-            wp_mkdir_p($file);
-        }
-
+        file_put_contents($file.'eael.min.css', $minifier->minify());
     }
 
     public function scripts_to_be_enq() {
