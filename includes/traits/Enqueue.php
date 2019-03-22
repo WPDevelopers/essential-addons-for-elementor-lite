@@ -30,6 +30,7 @@ trait Enqueue
             }elseif($element == 'price-table') {
                 $js_paths[] = $this->plugin_path . 'assets/js/vendor/tooltipster/tooltipster.bundle.min.js';
             }elseif($element == 'progress-bar') {
+                $js_paths[] = $this->plugin_path . 'assets/js/vendor/inview/inview.min.js';
                 $js_paths[] = $this->plugin_path . 'assets/js/vendor/progress-bar/progress-bar.js';
             }elseif($element == 'twitter-feed') {
                 $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';

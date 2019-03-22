@@ -54,18 +54,6 @@
         if(elementorFrontend.isEditMode()) {
             isEditMode = true;
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     });
 
 }(jQuery));
