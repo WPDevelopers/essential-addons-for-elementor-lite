@@ -672,7 +672,7 @@ class Widget_Eael_Content_Ticker extends Widget_Base {
 		 * Setup the post arguments.
 		 */
 		$settings['post_style'] = 'ticker';
-		$post_args = eael_get_post_settings( $settings );
+		$post_args = $this->eael_get_post_settings( $settings );
 		$query_args = $this->get_query_args( 'eaeposts', $this->get_settings() );
 		$query_args = array_merge( $query_args, $post_args );
 		/**
