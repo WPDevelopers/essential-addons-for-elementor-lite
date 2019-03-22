@@ -6,7 +6,7 @@ use MatthiasMullie\Minify;
 
 trait Generator
 {
-    public function generate_editor_scripts($elements, $post_id = null)
+    public function generate_scripts($elements, $output = null)
     {
         $js_paths = array();
         $css_paths = array();
@@ -54,14 +54,33 @@ trait Generator
         }
 
         $minifier = new Minify\JS($js_paths);
-        file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($post_id ? $post_id : 'eael') . '.min.js', $minifier->minify());
+        file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.js', $minifier->minify());
 
         $minifier = new Minify\CSS($css_paths);
-        file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($post_id ? $post_id : 'eael') . '.min.css', $minifier->minify());
+        file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.css', $minifier->minify());
     }
 
-    public function generate_post_scripts($editor_data)
+    public function generate_post_scripts($post_id)
     {
-        error_log($editor_data);
+        $post_data = get_metadata('post', $post_id, '_elementor_data');
+        $elements = array();
+
+        if (!empty($post_data)) {
+            $sections = json_decode($post_data[0]);
+
+            foreach ($sections as $section) {
+                foreach ($section->elements as $element) {
+                    foreach ($element->elements as $widget) {
+                        $elements[] = $widget->widgetType;
+                    }
+                }
+            }
+            
+            $elements = array_map(function($val) {
+                return preg_replace('/^eael-/', '', $val);
+            }, $elements);
+
+            error_log(print_r($elements, true));
+        }
     }
 }
