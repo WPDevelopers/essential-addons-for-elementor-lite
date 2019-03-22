@@ -26,6 +26,7 @@ class EssentialAddonsElementor
 {
     use EssentialAddonsElementor\Traits\Core;
     use EssentialAddonsElementor\Traits\Ajax;
+    use EssentialAddonsElementor\Traits\Generator;
     use EssentialAddonsElementor\Traits\Enqueue;
     use EssentialAddonsElementor\Traits\Admin;
     use EssentialAddonsElementor\Traits\ElementorHelper;
@@ -36,6 +37,9 @@ class EssentialAddonsElementor
     public $plugin_path;
     public $plugin_url;
     public $plugin_version;
+    public $wp_upload;
+    public $asset_path;
+    public $asset_url;
     public $registered_elements;
 
     public function __construct()
@@ -52,6 +56,12 @@ class EssentialAddonsElementor
         $this->plugin_url = plugins_url('/', __FILE__);
 
         $this->plugin_version = '2.9.8';
+
+        $this->wp_upload = wp_upload_dir();
+
+        $this->asset_path = $this->wp_upload['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor';
+
+        $this->asset_url = $this->wp_upload['baseurl'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor';
 
         $this->registered_elements = [
             'contact-form-7',
@@ -92,12 +102,16 @@ class EssentialAddonsElementor
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
 
-        // Enqueue
+        // Generator
         add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
+        add_action('elementor/editor/after_save', array($this, 'generate_post_scripts'));
+
+        // Enqueue
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
 
         // Elementor Helper
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
-        add_action('elementor/frontend/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
@@ -119,25 +133,11 @@ class EssentialAddonsElementor
             add_action('admin_init', array($this, 'eael_redirect'));
             add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
             add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', array($this, 'eae_pro_filter_action_links'));
+
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
             }
         }
-    }
-
-    public function eael_editor_scripts() {
-        wp_register_script(
-            'eael-script',
-            content_url('uploads/essential-addons/eael.min.js'),
-            ['jquery'],
-            true
-        );
-        wp_register_style(
-            'eael-style',
-            content_url('uploads/essential-addons/eael.min.css')
-        );
-        wp_enqueue_script( 'eael-script' );
-        wp_enqueue_style( 'eael-style' );
     }
 
 }

@@ -10,8 +10,8 @@ const cleancss = require('gulp-clean-css');
  */
 var compassConfig = {
 	config_file: 'config.rb',
-	css: 'assets/css/', // Must match css_dir value in config.rb.
-	sass: 'assets/sass/', // Must match sass_dir value in config.rb
+	css: 'assets/front-end/css/', // Must match css_dir value in config.rb.
+	sass: 'assets/front-end/sass/', // Must match sass_dir value in config.rb
 	sourcemap: false
 };
 
