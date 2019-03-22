@@ -29,6 +29,7 @@ trait Generator
                 $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js';
             } elseif ($element == 'progress-bar') {
                 $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/progress-bar/progress-bar.js';
+                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/inview/inview.min.js';
             } elseif ($element == 'twitter-feed') {
                 $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js';
                 $js_paths[] = $this->plugin_path . 'assets/front-end/social-feeds/codebird.js';

@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
 
 class Widget_Eael_WeForm extends Widget_Base {
 
+	use \EssentialAddonsElementor\Traits\Query;
+	
 	public function get_name() {
 		return 'eael-weform';
 	}
@@ -37,12 +39,12 @@ class Widget_Eael_WeForm extends Widget_Base {
 		$this->add_control(
 			'wpuf_contact_form',
 			[
-				'label' => esc_html__( 'Select weForm', 'essential-addons-elementor' ),
+				'label'       => esc_html__( 'Select weForm', 'essential-addons-elementor' ),
 				'description' => esc_html__( 'Please save and refresh the page after selecting the form', 'essential-addons-elementor' ),
 				'label_block' => true,
-				'type' => Controls_Manager::SELECT,
-				'options' => eael_select_weform(),
-				'default'	=> '0',
+				'type'        => Controls_Manager::SELECT,
+				'options'     => $this->eael_select_weform(),
+				'default'     => '0',
 			]
 		);
 

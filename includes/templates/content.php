@@ -94,7 +94,7 @@ if( isset( $post_args['post_style'] ) ) :
                     <?php if($post_args['eael_show_excerpt']){ ?>
                         <div class="eael-entry-content">
                             <div class="eael-grid-post-excerpt">
-                                <p><?php echo eael_get_excerpt_by_id(get_the_ID(),$post_args['eael_excerpt_length']);?></p>
+                                <p><?php echo $this->eael_get_excerpt_by_id(get_the_ID(),$post_args['eael_excerpt_length']);?></p>
                             </div>
                         </div>
                     <?php } ?>
