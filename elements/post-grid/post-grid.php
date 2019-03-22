@@ -417,7 +417,7 @@ class Widget_Eael_Post_Grid extends Widget_Base {
 		/**
 		 * Get posts from database.
 		 */
-		$posts = eael_load_more_ajax( $query_args );
+		$posts = $this->eael_load_more_ajax( $query_args );
 		/**
 		 * Set total posts.
 		 */
