@@ -2,63 +2,89 @@
 
 namespace EssentialAddonsElementor\Traits;
 
-use Essential_Addons_EL;
-use MatthiasMullie\Minify;
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
+use \Elementor\Plugin;
 
 trait Enqueue
 {
-    public function generate_editor_scripts($elements)
+    public $js_file, $css_file, $post_id;
+
+    public function enqueue_scripts()
     {
-        $js_paths = array();
-        $css_paths = array();
-        $file = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'uploads/essential-addons/';
-
-        if(!file_exists($file)) {
-            wp_mkdir_p($file);
+        // Gravity Form Compatibility
+        if (class_exists('GFCommon')) {
+            foreach (eael_select_gravity_form() as $form_id => $form_name) {
+                if ($form_id != '0') {
+                    gravity_form_enqueue_scripts($form_id);
+                }
+            };
         }
 
-        foreach ($elements as $element) {
-            if($element == 'fancy-text') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/fancy-text/fancy-text.js';
-            }elseif($element == 'count-down') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/countdown/countdown.min.js';
-            }elseif($element == 'filterable-gallery') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
-            }elseif($element == 'post-timeline') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
-            }elseif($element == 'price-table') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/tooltipster/tooltipster.bundle.min.js';
-            }elseif($element == 'progress-bar') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/progress-bar/progress-bar.js';
-            }elseif($element == 'twitter-feed') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/social-feeds/codebird.js';
-                $js_paths[] = $this->plugin_path . 'assets/social-feeds/doT.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/social-feeds/moment.js';
-                $js_paths[] = $this->plugin_path . 'assets/social-feeds/jquery.socialfeed.js';
-            }elseif($element == 'post-grid') {
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/isotope/isotope.pkgd.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/js/vendor/load-more/load-more.js';
-            }
-
-            $js_file = $this->plugin_path . 'assets/js/' . $element . '/index.js';
-            $js_paths[] = $this->plugin_path . 'assets/js/scripts.js';
-            if( file_exists($js_file) ) {
-                $js_paths[] = $js_file;
-            }
-
-            $css_file = $this->plugin_path . "assets/css/$element.css";
-            if( file_exists($css_file) ) {
-                $css_paths[] = $css_file;
-            }
-
+        // WPforms compatibility
+        if (function_exists('wpforms')) {
+            wpforms()->frontend->assets_css();
         }
 
-        $minifier = new Minify\JS($js_paths);
-        file_put_contents($file.'eael.min.js', $minifier->minify());
-        
-        $minifier = new Minify\CSS($css_paths);
-        file_put_contents($file.'eael.min.css', $minifier->minify());
+        // My Assets
+        if (Plugin::$instance->preview->is_preview_mode()) {
+            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . 'eael.min.js')) {
+                $js_file = $this->asset_url . DIRECTORY_SEPARATOR . 'eael.min.js';
+            } else {
+                $js_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+            }
+
+            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . 'eael.min.css')) {
+                $css_file = $this->asset_url . DIRECTORY_SEPARATOR . 'eael.min.css';
+            } else {
+                $css_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+            }
+
+            wp_enqueue_script(
+                'eael-backend',
+                $js_file,
+                ['jquery'],
+                $this->plugin_version,
+                true
+            );
+
+            wp_enqueue_style(
+                'eael-backend',
+                $css_file,
+                false,
+                $this->plugin_version
+            );
+        } else if (!is_admin() && is_singular()) {
+            $this->post_id = get_the_ID();
+
+            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $this->post_id . '.min.js')) {
+                $js_file = $this->asset_url . DIRECTORY_SEPARATOR . $this->post_id . '.min.js';
+            } else {
+                $js_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+            }
+
+            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $this->post_id . '.min.css')) {
+                $css_file = $this->asset_url . DIRECTORY_SEPARATOR . $this->post_id . '.min.css';
+            } else {
+                $css_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+            }
+
+            wp_enqueue_script(
+                'eael-front-end',
+                $js_file,
+                ['jquery'],
+                $this->plugin_version,
+                true
+            );
+
+            wp_enqueue_style(
+                'eael-front-end',
+                $css_file,
+                false,
+                $this->plugin_version
+            );
+        }
     }
 }
