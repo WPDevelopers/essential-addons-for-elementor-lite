@@ -15,7 +15,7 @@ trait Generator
             wp_mkdir_p($this->asset_path);
         }
 
-        foreach ($elements as $element) {
+        foreach ((array) $elements as $element) {
             if ($element == 'fancy-text') {
                 $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/fancy-text/fancy-text.js';
             } elseif ($element == 'count-down') {
@@ -69,19 +69,32 @@ trait Generator
         if (!empty($post_data)) {
             $sections = json_decode($post_data[0]);
 
-            foreach ($sections as $section) {
-                foreach ($section->elements as $element) {
-                    foreach ($element->elements as $widget) {
-                        $elements[] = $widget->widgetType;
+            foreach ((array) $sections as $section) {
+                foreach ((array) $section->elements as $element) {
+                    foreach ((array) $element->elements as $widget) {
+                        if (@$widget->widgetType) {
+                            $elements[] = $widget->widgetType;
+                        } else {
+                            foreach ((array) $widget as $inner_section) {
+                                foreach ((array) $inner_section as $inner_elements) {
+                                    foreach ((array) $inner_elements->elements as $inner_widget) {
+                                        if ($inner_widget->widgetType) {
+                                            $elements[] = $inner_widget->widgetType;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
-            
-            $elements = array_map(function($val) {
-                return preg_replace('/^eael-/', '', $val);
-            }, $elements);
 
-            error_log(print_r($elements, true));
+            $elements = array_intersect($this->registered_elements, array_map(function ($val) {
+                return preg_replace('/^eael-/', '', $val);
+            }, $elements));
+
+            
+            $this->generate_scripts($elements, $post_id);
         }
     }
 }
