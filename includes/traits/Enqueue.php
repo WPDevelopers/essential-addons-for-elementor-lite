@@ -51,11 +51,20 @@ trait Enqueue
             );
 
             wp_enqueue_style(
+                'eael-editor-css',
+                $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael-editor.css',
+                false,
+                $this->plugin_version
+            );
+
+            wp_enqueue_style(
                 'eael-backend',
                 $css_file,
                 false,
                 $this->plugin_version
             );
+
+            // localize script
         } else if (!is_admin() && is_singular()) {
             $this->post_id = get_the_ID();
 
@@ -85,6 +94,8 @@ trait Enqueue
                 false,
                 $this->plugin_version
             );
+
+            // localize script
         }
     }
 }

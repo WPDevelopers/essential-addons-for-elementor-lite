@@ -103,7 +103,7 @@ class EssentialAddonsElementor
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
 
         // Generator
-        add_action('eael_generate_editor_scripts', array($this, 'generate_editor_scripts'));
+        add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));
         add_action('elementor/editor/after_save', array($this, 'generate_post_scripts'));
 
         // Enqueue
@@ -111,10 +111,9 @@ class EssentialAddonsElementor
 
         // Elementor Helper
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
-        add_action('elementor/editor/before_enqueue_scripts', array($this, 'before_enqueue_scripts')); // todo
+        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
 
         // Elements
-        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
 
         if (class_exists('Caldera_Forms')) {
