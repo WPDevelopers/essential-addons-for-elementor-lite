@@ -11,6 +11,47 @@ use \WP_Query;
 trait Query
 {
     /**
+     * For All Settings Key Need To Display
+     *
+     * @return array
+     */
+    public $post_args = array(
+        // for content-ticker
+        'eael_ticker_type',
+        'eael_ticker_custom_contents',
+
+        'eael_post_grid_columns',
+
+        // common
+        'meta_position',
+        'eael_show_meta',
+        'image_size',
+        'eael_show_image',
+        'eael_show_title',
+        'eael_show_excerpt',
+        'eael_excerpt_length',
+        'eael_show_read_more',
+        'eael_read_more_text',
+        'show_load_more',
+        'show_load_more_text',
+        'eael_post_grid_bg_hover_icon',
+
+        // query_args
+        'post_type',
+        'post__in',
+        'posts_per_page',
+        'post_style',
+        'tax_query',
+        'post__not_in',
+        'eael_post_authors',
+        'eaeposts_authors',
+        'offset',
+        'orderby',
+        'order',
+        'eael_post_grid_hover_animation',
+    );
+
+    /**
      * Get All POst Types
      * @return array
      */
@@ -60,7 +101,7 @@ trait Query
     function eael_get_post_settings($settings)
     {
         foreach ($settings as $key => $value) {
-            if (in_array($key, $this->posts_args())) {
+            if (in_array($key, $this->post_args)) {
                 $post_args[$key] = $value;
             }
         }
@@ -468,7 +509,6 @@ trait Query
      */
     function eael_load_more_ajax()
     {
-
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
             $post_args = eael_get_post_settings($_POST);
             $post_args = array_merge($this->get_query_args('eaeposts', $_POST), $post_args);
@@ -511,49 +551,5 @@ trait Query
         } else {
             return $return;
         }
-    }
-
-    /**
-     * For All Settings Key Need To Display
-     *
-     * @return array
-     */
-    function posts_args()
-    {
-        return array(
-            // for content-ticker
-            'eael_ticker_type',
-            'eael_ticker_custom_contents',
-
-            'eael_post_grid_columns',
-
-            // common
-            'meta_position',
-            'eael_show_meta',
-            'image_size',
-            'eael_show_image',
-            'eael_show_title',
-            'eael_show_excerpt',
-            'eael_excerpt_length',
-            'eael_show_read_more',
-            'eael_read_more_text',
-            'show_load_more',
-            'show_load_more_text',
-            'eael_post_grid_bg_hover_icon',
-
-            // query_args
-            'post_type',
-            'post__in',
-            'posts_per_page',
-            'post_style',
-            'tax_query',
-            'post__not_in',
-            'eael_post_authors',
-            'eaeposts_authors',
-            'offset',
-            'orderby',
-            'order',
-            'eael_post_grid_hover_animation',
-        );
     }
 }
