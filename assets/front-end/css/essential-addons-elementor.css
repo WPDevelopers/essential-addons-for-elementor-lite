@@ -50,7 +50,8 @@ ______                    _   _       _               _     _
 .clearfix::after {
   content: " ";
   display: table;
-  clear: both; }
+  clear: both;
+}
 
 /*---------------------------------------*/
 /* 02. Common styles for slider elements
@@ -65,22 +66,26 @@ ______                    _   _       _               _     _
 .eael-post-carousel.nav-top-right,
 .eael-product-carousel.nav-top-left,
 .eael-product-carousel.nav-top-right {
-  padding-top: 40px; }
+  padding-top: 40px;
+}
 
 /*----------------------------*/
 /* 28. Swiper
 /*----------------------------*/
 .swiper-container-wrap .swiper-slide,
 .swiper-container .swiper-slide {
-  text-align: center; }
+  text-align: center;
+}
 
 .swiper-container-wrap .swiper-slide img,
 .swiper-container .swiper-slide img {
-  width: auto; }
+  width: auto;
+}
 
 .swiper-container-wrap-dots-outside .swiper-pagination,
 .swiper-container-dots-outside .swiper-pagination {
-  position: static; }
+  position: static;
+}
 
 .swiper-container-wrap .swiper-button-next,
 .swiper-container-wrap .swiper-button-prev,
@@ -93,35 +98,42 @@ ______                    _   _       _               _     _
   margin: 0;
   text-align: center;
   transform: translateY(-50%);
-  width: auto; }
+  width: auto;
+}
 
 .swiper-container-wrap .swiper-button-next .fa,
 .swiper-container-wrap .swiper-button-prev .fa,
 .swiper-container .swiper-button-next .fa,
 .swiper-container .swiper-button-prev .fa {
-  vertical-align: top; }
+  vertical-align: top;
+}
 
 .swiper-container-wrap .swiper-pagination {
   bottom: 10px;
   left: 0;
-  width: 100%; }
+  width: 100%;
+}
 
 .swiper-container-wrap-dots-outside .swiper-pagination {
-  position: static; }
+  position: static;
+}
 
 .swiper-container-wrap .swiper-pagination-bullet {
   background: #ccc;
   margin: 0 4px;
   opacity: 1;
   height: 8px;
-  width: 8px; }
+  width: 8px;
+}
 
 .swiper-container-wrap .swiper-pagination-bullet-active {
-  background: #000; }
+  background: #000;
+}
 
 .swiper-container-3d .swiper-slide {
   transition-property: all;
-  -webkit-transition-property: all; }
+  -webkit-transition-property: all;
+}
 
 /*--------------------------------*/
 /* 10. Contact forms common
@@ -140,7 +152,8 @@ ______                    _   _       _               _     _
   height: auto;
   margin: 0;
   outline: 0;
-  width: auto; }
+  width: auto;
+}
 
 .eael-contact-form input[type=submit] {
   border: 0;
@@ -150,27 +163,32 @@ ______                    _   _       _               _     _
   padding: 10px 20px;
   width: auto;
   -webkit-transition: all 0.25s linear 0s;
-  transition: all 0.25s linear 0s; }
+  transition: all 0.25s linear 0s;
+}
 
 .eael-contact-form.placeholder-hide input::-webkit-input-placeholder,
 .eael-contact-form.placeholder-hide textarea::-webkit-input-placeholder {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+}
 
 .eael-contact-form.placeholder-hide input::-moz-placeholder,
 .eael-contact-form.placeholder-hide textarea::-moz-placeholder {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+}
 
 .eael-contact-form.placeholder-hide input:-ms-input-placeholder,
 .eael-contact-form.placeholder-hide textarea:-ms-input-placeholder {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+}
 
 .eael-contact-form.placeholder-hide input:-moz-placeholder,
 .eael-contact-form.placeholder-hide textarea:-moz-placeholder {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+}
 
 .eael-custom-radio-checkbox input[type=checkbox],
 .eael-custom-radio-checkbox input[type=radio] {
@@ -183,7 +201,8 @@ ______                    _   _       _               _     _
   width: 15px;
   height: 15px;
   background: #ddd;
-  padding: 3px; }
+  padding: 3px;
+}
 
 .eael-custom-radio-checkbox input[type=checkbox]:before,
 .eael-custom-radio-checkbox input[type=radio]:before {
@@ -192,18 +211,20 @@ ______                    _   _       _               _     _
   height: 100%;
   padding: 0;
   margin: 0;
-  display: block; }
+  display: block;
+}
 
 .eael-custom-radio-checkbox input[type=checkbox]:checked:before,
 .eael-custom-radio-checkbox input[type=radio]:checked:before {
   background: #999;
   -webkit-transition: all 0.25s linear 0s;
-  transition: all 0.25s linear 0s; }
+  transition: all 0.25s linear 0s;
+}
 
 .eael-custom-radio-checkbox input[type=radio] {
-  border-radius: 50%; }
+  border-radius: 50%;
+}
 
 .eael-custom-radio-checkbox input[type=radio]:before {
-  border-radius: 50%; }
-
-/*# sourceMappingURL=essential-addons-elementor.css.map */
+  border-radius: 50%;
+}
