@@ -337,7 +337,7 @@ class Widget_Eael_Filterable_Gallery extends Widget_Base {
 						'label' => esc_html__( 'Image', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::MEDIA,
 						'default' => [
-							'url' => ESSENTIAL_ADDONS_EL_URL . 'assets/img/flexia-preview.jpg',
+							'url' => ESSENTIAL_ADDONS_EL_URL . 'front-end/assets/img/flexia-preview.jpg',
 						],
 					],
 					[
