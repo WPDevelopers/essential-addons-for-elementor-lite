@@ -26,7 +26,7 @@ if( isset( $post_args['post_style'] ) ) :
                 <div class="eael-timeline-post-image" <?php if( $post_args['eael_show_image'] == 1 ){ ?> style="background-image: url('<?php echo wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size'])?>');" <?php } ?>></div>
                 <?php if($post_args['eael_show_excerpt']){ ?>
                     <div class="eael-timeline-post-excerpt">
-                        <p><?php echo eael_get_excerpt_by_id( get_the_ID(), $post_args['eael_excerpt_length'] );?></p>
+                        <p><?php echo $this->eael_get_excerpt_by_id( get_the_ID(), $post_args['eael_excerpt_length'] );?></p>
                     </div>
                 <?php } ?>
 
@@ -94,7 +94,7 @@ if( isset( $post_args['post_style'] ) ) :
                     <?php if($post_args['eael_show_excerpt']){ ?>
                         <div class="eael-entry-content">
                             <div class="eael-grid-post-excerpt">
-                                <p><?php echo eael_get_excerpt_by_id(get_the_ID(),$post_args['eael_excerpt_length']);?></p>
+                                <p><?php echo $this->eael_get_excerpt_by_id(get_the_ID(),$post_args['eael_excerpt_length']);?></p>
                             </div>
                         </div>
                     <?php } ?>

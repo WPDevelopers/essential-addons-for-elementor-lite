@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Widget_Eael_Caldera_Form extends Widget_Base {
     
+    use \EssentialAddonsElementor\Traits\Query;
+
     public function get_name() {
         return 'eael-caldera-form';
     }
@@ -44,7 +46,7 @@ class Widget_Eael_Caldera_Form extends Widget_Base {
 				'label'                 => esc_html__( 'Caldera Form', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::SELECT,
 				'label_block'           => true,
-				'options'               => eael_select_caldera_form(),
+				'options'               => $this->eael_select_caldera_form(),
                 'default'               => '0',
 			]
 		);

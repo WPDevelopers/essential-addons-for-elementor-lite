@@ -362,7 +362,7 @@ trait Query
         $options = array();
         if (class_exists('Caldera_Forms')) {
 
-            $contact_forms = Caldera_Forms_Forms::get_forms(true, true);
+            $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
                 $options[0] = esc_html__('Select Caldera Form', 'essential-addons-elementor');
