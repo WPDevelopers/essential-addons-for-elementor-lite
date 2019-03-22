@@ -66,18 +66,22 @@ trait Enqueue
 
             // localize script
         } else if (!is_admin() && is_singular()) {
-            $this->post_id = get_the_ID();
+            $post_id = get_the_ID();
 
-            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $this->post_id . '.min.js')) {
-                $js_file = $this->asset_url . DIRECTORY_SEPARATOR . $this->post_id . '.min.js';
+            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $post_id . '.min.js')) {
+                $js_file = $this->asset_url . DIRECTORY_SEPARATOR . $post_id . '.min.js';
+                error_log('found');
             } else {
                 $js_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+                $this->generate_post_scripts($post_id);
+                error_log('nfound');
             }
 
-            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $this->post_id . '.min.css')) {
-                $css_file = $this->asset_url . DIRECTORY_SEPARATOR . $this->post_id . '.min.css';
+            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $post_id . '.min.css')) {
+                $css_file = $this->asset_url . DIRECTORY_SEPARATOR . $post_id . '.min.css';
             } else {
                 $css_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+                $this->generate_post_scripts($post_id);
             }
 
             wp_enqueue_script(

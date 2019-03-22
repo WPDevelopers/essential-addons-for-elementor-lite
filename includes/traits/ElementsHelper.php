@@ -4,15 +4,14 @@ namespace EssentialAddonsElementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit;
-}
-// Exit if accessed directly
+} // Exit if accessed directly
+
 use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
-use \Elementor\Utils as Utils;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-// use \EssentialAddonsElementor\Classes\Group_Control_EA_Posts;
+use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
+use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Utils as Utils;
 
 trait ElementsHelper
 {
