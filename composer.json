@@ -9,7 +9,8 @@
         "psr-4": {
             "EssentialAddonsElementor\\Admin\\": "admin",
             "EssentialAddonsElementor\\Classes\\": "includes/classes/",
-            "EssentialAddonsElementor\\Traits\\": "includes/traits/"
+            "EssentialAddonsElementor\\Traits\\": "includes/traits/",
+            "EssentialAddonsElementor\\Elements\\": "elements/"
         }
     },
     "require": {
