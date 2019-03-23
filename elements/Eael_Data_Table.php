@@ -12,6 +12,8 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Group_Control_Background as Group_Control_Background;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Utils as Utils;
+use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_Data_Table extends Widget_Base {
 	use \EssentialAddonsElementor\Traits\Query;
