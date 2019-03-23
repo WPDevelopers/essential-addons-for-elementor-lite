@@ -1,12 +1,19 @@
 <?php
-namespace Elementor;
+namespace EssentialAddonsElementor\Elements;
 
+// If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
 }
 
-// If this file is called directly, abort.
-class Widget_Eael_Image_Accordion extends Widget_Base
+use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Background as Group_Control_Background;
+use \Elementor\Scheme_Typography as Scheme_Typography;
+use \Elementor\Widget_Base as Widget_Base;
+
+class Eael_Image_Accordion extends Widget_Base
 {
     public function get_name()
     {
@@ -350,5 +357,3 @@ class Widget_Eael_Image_Accordion extends Widget_Base
         }
     }
 }
-
-Plugin::instance()->widgets_manager->register_widget_type(new Widget_Eael_Image_Accordion());

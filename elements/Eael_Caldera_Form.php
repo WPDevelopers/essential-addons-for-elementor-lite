@@ -1,17 +1,28 @@
 <?php
-namespace Elementor;
+namespace EssentialAddonsElementor\Elements;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// If this file is called directly, abort.
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-class Widget_Eael_NinjaForm extends Widget_Base {
-    use \EssentialAddonsElementor\Traits\Query;
+use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Background as Group_Control_Background;
+use \Elementor\Scheme_Typography as Scheme_Typography;
+use \Elementor\Widget_Base as Widget_Base;
+
+class Eael_Caldera_Form extends Widget_Base {
     
+    use \EssentialAddonsElementor\Traits\Query;
+
     public function get_name() {
-        return 'eael-ninja';
+        return 'eael-caldera-form';
     }
 
     public function get_title() {
-        return __( 'EA Ninja Forms', 'essential-addons-elementor' );
+        return __( 'EA Caldera Forms', 'essential-addons-elementor' );
     }
 
     public function get_categories() {
@@ -25,28 +36,28 @@ class Widget_Eael_NinjaForm extends Widget_Base {
     protected function _register_controls() {
 
         /*-----------------------------------------------------------------------------------*/
-        /*	CONTENT TAB
+        /*	Content Tab
         /*-----------------------------------------------------------------------------------*/
         
         /**
-         * Content Tab: Ninja Forms
+         * Content Tab: Caldera Forms
          * -------------------------------------------------
          */
         $this->start_controls_section(
             'section_info_box',
             [
-                'label'                 => __( 'Ninja Forms', 'essential-addons-elementor' ),
+                'label'                 => __( 'Caldera Forms', 'essential-addons-elementor' ),
             ]
         );
 		
 		$this->add_control(
 			'contact_form_list',
 			[
-				'label'       => esc_html__( 'Select Form', 'essential-addons-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'label_block' => true,
-				'options'     => $this->eael_select_ninja_form(),
-				'default'     => '0',
+				'label'                 => esc_html__( 'Caldera Form', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::SELECT,
+				'label_block'           => true,
+				'options'               => $this->eael_select_caldera_form(),
+                'default'               => '0',
 			]
 		);
         
@@ -58,22 +69,6 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
                 'label_off'             => __( 'No', 'essential-addons-elementor' ),
                 'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'form_title',
-            [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-                'prefix_class'          => 'eael-ninja-form-title-',
-                'condition'             => [
-                    'custom_title_description!'   => 'yes',
-                ],
             ]
         );
 		
@@ -111,7 +106,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'label_on'              => __( 'Show', 'essential-addons-elementor' ),
                 'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
                 'return_value'          => 'yes',
-                'prefix_class'          => 'eael-ninja-form-labels-',
+                'prefix_class'          => 'eael-caldera-form-labels-',
             ]
         );
         
@@ -155,30 +150,183 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 					'hide'          => 'none',
 				],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-error-wrap .nf-error-required-error' => 'display: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-caldera-form .has-error .parsley-required' => 'display: {{VALUE}} !important;',
+                ],
+            ]
+        );
+        
+        $this->end_controls_section();
+
+        /*-----------------------------------------------------------------------------------*/
+        /*	Style Tab
+        /*-----------------------------------------------------------------------------------*/
+
+        /**
+         * Style Tab: Form Title & Description
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_form_title_style',
+            [
+                'label'                 => __( 'Title & Description', 'essential-addons-elementor' ),
+                'tab'                   => Controls_Manager::TAB_STYLE,
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'heading_alignment',
+            [
+                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::CHOOSE,
+				'options'               => [
+					'left'      => [
+						'title' => __( 'Left', 'essential-addons-elementor' ),
+						'icon'  => 'fa fa-align-left',
+					],
+					'center'    => [
+						'title' => __( 'Center', 'essential-addons-elementor' ),
+						'icon'  => 'fa fa-align-center',
+					],
+					'right'     => [
+						'title' => __( 'Right', 'essential-addons-elementor' ),
+						'icon'  => 'fa fa-align-right',
+					],
+				],
+				'default'               => '',
+				'selectors'             => [
+					'{{WRAPPER}} .eael-caldera-form-heading' => 'text-align: {{VALUE}};',
+				],
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+			]
+		);
+        
+        $this->add_control(
+            'title_heading',
+            [
+                'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+				'separator'             => 'before',
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
                 ],
             ]
         );
 
         $this->add_control(
-            'validation_errors',
+            'form_title_text_color',
             [
-                'label'                 => __( 'Validation Errors', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SELECT,
-                'default'               => 'show',
-                'options'               => [
-                    'show'          => __( 'Show', 'essential-addons-elementor' ),
-                    'hide'          => __( 'Hide', 'essential-addons-elementor' ),
-                ],
-                'selectors_dictionary'  => [
-					'show'          => 'block',
-					'hide'          => 'none',
-				],
+                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-form-errors .nf-error-field-errors' => 'display: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-contact-form-title' => 'color: {{VALUE}}',
+                ],
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
                 ],
             ]
         );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'form_title_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'selector'              => '{{WRAPPER}} .eael-contact-form-title',
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+			'form_title_margin',
+			[
+				'label'                 => __( 'Margin', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => [ 'px', 'em', '%' ],
+                'allowed_dimensions'    => 'vertical',
+				'placeholder'           => [
+					'top'      => '',
+					'right'    => 'auto',
+					'bottom'   => '',
+					'left'     => 'auto',
+				],
+				'selectors'             => [
+					'{{WRAPPER}} .eael-contact-form-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+			]
+		);
+        
+        $this->add_control(
+            'description_heading',
+            [
+                'label'                 => __( 'Description', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+				'separator'             => 'before',
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'form_description_text_color',
+            [
+                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-description' => 'color: {{VALUE}}',
+                ],
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'form_description_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-contact-form-description',
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+			'form_description_margin',
+			[
+				'label'                 => __( 'Margin', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => [ 'px', 'em', '%' ],
+                'allowed_dimensions'    => 'vertical',
+				'placeholder'           => [
+					'top'      => '',
+					'right'    => 'auto',
+					'bottom'   => '',
+					'left'     => 'auto',
+				],
+				'selectors'             => [
+					'{{WRAPPER}} .eael-contact-form-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition'             => [
+                    'custom_title_description'   => 'yes',
+                ],
+			]
+		);
         
         $this->end_controls_section();
 
@@ -336,149 +484,6 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 
         $this->end_controls_section();
 
-        /*-----------------------------------------------------------------------------------*/
-        /*	STYLE TAB
-        /*-----------------------------------------------------------------------------------*/
-
-        /**
-         * Style Tab: Form Title & Description
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_form_title_style',
-            [
-                'label'                 => __( 'Title & Description', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'heading_alignment',
-            [
-                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::CHOOSE,
-				'options'               => [
-					'left'      => [
-						'title' => __( 'Left', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-left',
-					],
-					'center'    => [
-						'title' => __( 'Center', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-center',
-					],
-					'right'     => [
-						'title' => __( 'Right', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-right',
-					],
-				],
-				'default'               => '',
-				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .nf-form-title h3, {{WRAPPER}} .eael-ninja-form-heading' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
-        
-        $this->add_control(
-            'title_heading',
-            [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::HEADING,
-				'separator'             => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'form_title_text_color',
-            [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-form-title h3, {{WRAPPER}} .eael-contact-form-title' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'form_title_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-form-title h3, {{WRAPPER}} .eael-contact-form-title',
-            ]
-        );
-        
-        $this->add_responsive_control(
-			'form_title_margin',
-			[
-				'label'                 => __( 'Margin', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => [ 'px', 'em', '%' ],
-                'allowed_dimensions'    => 'vertical',
-				'placeholder'           => [
-					'top'      => '',
-					'right'    => 'auto',
-					'bottom'   => '',
-					'left'     => 'auto',
-				],
-				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .nf-form-title h3, {{WRAPPER}} .eael-contact-form-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-        
-        $this->add_control(
-            'description_heading',
-            [
-                'label'                 => __( 'Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::HEADING,
-				'separator'             => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'form_description_text_color',
-            [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .eael-contact-form-description' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'form_description_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .eael-contact-form-description',
-            ]
-        );
-        
-        $this->add_responsive_control(
-			'form_description_margin',
-			[
-				'label'                 => __( 'Margin', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => [ 'px', 'em', '%' ],
-                'allowed_dimensions'    => 'vertical',
-				'placeholder'           => [
-					'top'      => '',
-					'right'    => 'auto',
-					'bottom'   => '',
-					'left'     => 'auto',
-				],
-				'selectors'             => [
-					'{{WRAPPER}} .eael-contact-form-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-        
-        $this->end_controls_section();
-
         /**
          * Style Tab: Labels
          * -------------------------------------------------
@@ -488,9 +493,6 @@ class Widget_Eael_NinjaForm extends Widget_Base {
             [
                 'label'                 => __( 'Labels', 'essential-addons-elementor' ),
                 'tab'                   => Controls_Manager::TAB_STYLE,
-                'condition'             => [
-                    'labels_switch' => 'yes',
-                ],
             ]
         );
 
@@ -500,10 +502,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field-label label' => 'color: {{VALUE}}',
-                ],
-                'condition'             => [
-                    'labels_switch' => 'yes',
+                    '{{WRAPPER}} .eael-caldera-form .form-group label' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -513,10 +512,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
             [
                 'name'                  => 'typography_label',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field-label label',
-                'condition'             => [
-                    'labels_switch' => 'yes',
-                ],
+                'selector'              => '{{WRAPPER}} .eael-caldera-form .form-group label',
             ]
         );
         
@@ -555,7 +551,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 				],
 				'default'               => '',
 				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -576,7 +572,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -588,7 +584,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -600,7 +596,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 				'label'                 => __( 'Border', 'essential-addons-elementor' ),
 				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select',
 				'separator'             => 'before',
 			]
 		);
@@ -612,13 +608,13 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
         
         $this->add_responsive_control(
-            'text_indent',
+            'field_text_indent',
             [
                 'label'                 => __( 'Text Indent', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
@@ -636,9 +632,9 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select' => 'text-indent: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select' => 'text-indent: {{SIZE}}{{UNIT}}',
                 ],
-				'separator'             => 'before',
+                'separator'             => 'before'
             ]
         );
         
@@ -656,9 +652,8 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field select' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group select' => 'width: {{SIZE}}{{UNIT}}',
                 ],
-				'separator'             => 'before',
             ]
         );
         
@@ -676,7 +671,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field select' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group select' => 'height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -695,7 +690,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field textarea' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group textarea' => 'width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -714,7 +709,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field textarea' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group textarea' => 'height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -726,9 +721,8 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'separator'             => 'before',
 			]
 		);
         
@@ -746,7 +740,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field-container' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group' => 'margin-bottom: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -756,7 +750,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
             [
                 'name'                  => 'field_typography',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select',
+                'selector'              => '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select',
 				'separator'             => 'before',
             ]
         );
@@ -765,7 +759,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'                  => 'field_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field input[type="text"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="email"], {{WRAPPER}} .eael-ninja-form .nf-field input[type="tel"], {{WRAPPER}} .eael-ninja-form .nf-field textarea, {{WRAPPER}} .eael-ninja-form .nf-field select',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .form-group textarea, {{WRAPPER}} .eael-caldera-form .form-group select',
 				'separator'             => 'before',
 			]
 		);
@@ -786,7 +780,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input:focus, {{WRAPPER}} .eael-ninja-form .nf-field textarea:focus' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-caldera-form .form-group textarea:focus' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -796,9 +790,9 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 			[
 				'name'                  => 'focus_input_border',
 				'label'                 => __( 'Border', 'essential-addons-elementor' ),
-				'placeholder'       => '1px',
+				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field input:focus, {{WRAPPER}} .eael-ninja-form .nf-field textarea:focus',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-caldera-form .form-group textarea:focus',
 			]
 		);
 
@@ -806,7 +800,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'                  => 'focus_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field input:focus, {{WRAPPER}} .eael-ninja-form .nf-field textarea:focus',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-caldera-form .form-group textarea:focus',
 				'separator'             => 'before',
 			]
 		);
@@ -835,7 +829,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field .nf-field-description' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .help-block' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -845,7 +839,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
             [
                 'name'                  => 'field_description_typography',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-field .nf-field-description',
+                'selector'              => '{{WRAPPER}} .eael-caldera-form .help-block',
             ]
         );
         
@@ -863,7 +857,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field .nf-field-description' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form .help-block' => 'padding-top: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -891,10 +885,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input::-webkit-input-placeholder, {{WRAPPER}} .eael-ninja-form .nf-field textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input::-moz-input-placeholder, {{WRAPPER}} .eael-ninja-form .nf-field textarea::-moz-input-placeholder' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input:-ms-input-placeholder, {{WRAPPER}} .eael-ninja-form .nf-field textarea:-ms-input-placeholder' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-ninja-form .nf-field input:-moz-placeholder, {{WRAPPER}} .eael-ninja-form .nf-field textarea:-moz-placeholder' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input::-webkit-input-placeholder, {{WRAPPER}} .eael-caldera-form .form-group textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'placeholder_switch'   => 'yes',
@@ -945,7 +936,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -981,7 +972,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         );
         
         $this->add_responsive_control(
-            'radio_checkbox_border_width',
+            'checkbox_border_width',
             [
                 'label'                 => __( 'Border Width', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
@@ -1003,7 +994,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         );
 
         $this->add_control(
-            'radio_checkbox_border_color',
+            'checkbox_border_color',
             [
                 'label'                 => __( 'Border Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
@@ -1134,9 +1125,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 					],
 				],
 				'default'               => '',
-				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .submit-container'   => 'text-align: {{VALUE}};',
-				],
+				'prefix_class'          => 'eael-caldera-form-button-',
                 'condition'             => [
                     'button_width_type' => 'custom',
                 ],
@@ -1153,7 +1142,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                     'full-width'    => __( 'Full Width', 'essential-addons-elementor' ),
                     'custom'        => __( 'Custom', 'essential-addons-elementor' ),
                 ],
-                'prefix_class'          => 'eael-ninja-form-button-',
+                'prefix_class'          => 'eael-caldera-form-button-',
             ]
         );
         
@@ -1162,10 +1151,6 @@ class Widget_Eael_NinjaForm extends Widget_Base {
             [
                 'label'                 => __( 'Width', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
-                'default'               => [
-                    'size'      => '130',
-                    'unit'      => 'px'
-                ],
                 'range'                 => [
                     'px'        => [
                         'min'   => 0,
@@ -1175,7 +1160,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]' => 'width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
                     'button_width_type' => 'custom',
@@ -1199,7 +1184,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1211,7 +1196,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1221,9 +1206,9 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 			[
 				'name'                  => 'button_border_normal',
 				'label'                 => __( 'Border', 'essential-addons-elementor' ),
-				'placeholder'       => '1px',
+				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]',
 			]
 		);
 
@@ -1234,7 +1219,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1246,7 +1231,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1265,10 +1250,29 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'margin-top: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]' => 'margin-top: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'button_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'selector'              => '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]',
+				'separator'             => 'before',
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'                  => 'button_box_shadow',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"], {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]',
+				'separator'             => 'before',
+			]
+		);
         
         $this->end_controls_tab();
 
@@ -1286,7 +1290,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"]:hover, {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]:hover' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1298,7 +1302,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"]:hover, {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]:hover' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1310,7 +1314,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]:hover' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .form-group input[type="submit"]:hover, {{WRAPPER}} .eael-caldera-form .form-group input[type="button"]:hover' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1318,26 +1322,6 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         $this->end_controls_tab();
         
         $this->end_controls_tabs();
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'button_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'scheme'            => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]',
-				'separator'             => 'before',
-            ]
-        );
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'                  => 'button_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]',
-				'separator'             => 'before',
-			]
-		);
         
         $this->end_controls_section();
 
@@ -1354,77 +1338,44 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         );
 
         $this->add_control(
+            'success_message_bg_color',
+            [
+                'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-caldera-form .caldera-grid .alert-success' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'success_message_text_color',
             [
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-response-msg' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .caldera-grid .alert-success' => 'color: {{VALUE}}',
                 ],
             ]
         );
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'                  => 'success_message_border',
+				'label'                 => __( 'Border', 'essential-addons-elementor' ),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form .caldera-grid .alert-success',
+			]
+		);
         
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
                 'name'                  => 'success_message_typography',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-response-msg',
-            ]
-        );
-        
-        $this->end_controls_section();
-
-        /**
-         * Style Tab: Required Fields Notice
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_required_notice_style',
-            [
-                'label'                 => __( 'Required Fields Notice', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'required_notice_text_color',
-            [
-                'label'                 => __( 'Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-form-fields-required' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'required_notice_spacing',
-            [
-                'label'                 => __( 'Spacing', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SLIDER,
-                'range'                 => [
-                    'px'        => [
-                        'min'   => 0,
-                        'max'   => 100,
-                        'step'  => 1,
-                    ],
-                ],
-                'size_units'            => [ 'px', 'em', '%' ],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-form-fields-required' => 'margin-bottom: {{SIZE}}{{UNIT}}',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'required_notice_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'scheme'            => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-ninja-form .nf-form-fields-required',
+                'selector'              => '{{WRAPPER}} .eael-caldera-form .caldera-grid .alert-success',
             ]
         );
         
@@ -1456,11 +1407,11 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         $this->add_control(
             'error_message_text_color',
             [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-error-wrap .nf-error-required-error' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .has-error .help-block' => 'color: {{VALUE}}',
                 ],
 				'condition'             => [
 					'error_messages' => 'show',
@@ -1469,46 +1420,36 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         );
         
         $this->add_control(
-            'validation_errors_heading',
+            'error_fields_heading',
             [
-                'label'                 => __( 'Validation Errors', 'essential-addons-elementor' ),
+                'label'                 => __( 'Error Fields', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::HEADING,
                 'separator'             => 'before',
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
             ]
         );
 
         $this->add_control(
-            'validation_error_description_color',
+            'error_fields_label_color',
             [
-                'label'                 => __( 'Error Description Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Label Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-form-errors .nf-error-field-errors' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-caldera-form .has-error .control-label' => 'color: {{VALUE}}',
                 ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
             ]
         );
 
-        $this->add_control(
-            'validation_error_field_input_border_color',
-            [
-                'label'                 => __( 'Error Field Input Border Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-error .ninja-forms-field' => 'border-color: {{VALUE}}',
-                ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
-            ]
-        );
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'                  => 'error_field_border',
+				'label'                 => __( 'Input Border', 'essential-addons-elementor' ),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .eael-caldera-form .has-error input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-caldera-form .has-error textarea',
+			]
+		);
         
         $this->end_controls_section();
 
@@ -1519,12 +1460,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         
         $this->add_render_attribute( 'contact-form', 'class', [
 				'eael-contact-form',
-				'eael-ninja-form',
-			]
-		);
-        
-        $this->add_render_attribute( 'contact-form', 'id', [
-				'eael-ninja-form-' . get_the_ID(),
+				'eael-caldera-form',
 			]
 		);
         
@@ -1550,19 +1486,19 @@ class Widget_Eael_NinjaForm extends Widget_Base {
         }
         else {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-default' );
-        }       
-        if ( class_exists( 'Ninja_Forms' ) ) {
+        }
+        if ( class_exists( 'Caldera_Forms' ) ) {
             if ( ! empty( $settings['contact_form_list'] ) ) { ?>
                 <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
                     <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
-                        <div class="eael-ninja-form-heading">
+                        <div class="eael-caldera-form-heading">
                             <?php if ( $settings['form_title_custom'] != '' ) { ?>
-                                <h3 class="eael-contact-form-title eael-ninja-form-title">
+                                <h3 class="eael-contact-form-title eael-caldera-form-title">
                                     <?php echo esc_attr( $settings['form_title_custom'] ); ?>
                                 </h3>
                             <?php } ?>
                             <?php if ( $settings['form_description_custom'] != '' ) { ?>
-                                <div class="eael-contact-form-description eael-ninja-form-description">
+                                <div class="eael-contact-form-description eael-caldera-form-description">
                                     <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
                                 </div>
                             <?php } ?>
@@ -1571,7 +1507,7 @@ class Widget_Eael_NinjaForm extends Widget_Base {
                     <?php
                         $eael_form_id = $settings['contact_form_list'];
 
-                        echo do_shortcode( '[ninja_form id="' . $eael_form_id . '" ]' );
+                        echo do_shortcode( '[caldera_form id="' . $eael_form_id . '" ]' );
                     ?>
                 </div>
                 <?php
@@ -1582,5 +1518,3 @@ class Widget_Eael_NinjaForm extends Widget_Base {
     protected function _content_template() {}
 
 }
-
-Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_NinjaForm() );
