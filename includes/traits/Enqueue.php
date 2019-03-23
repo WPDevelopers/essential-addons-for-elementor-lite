@@ -65,6 +65,9 @@ trait Enqueue
             );
 
             // localize script
+            wp_localize_script('eael-backend', 'localize', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+            ));
         } else if (!is_admin() && is_singular()) {
             $post_id = get_the_ID();
 
@@ -100,6 +103,9 @@ trait Enqueue
             );
 
             // localize script
+            wp_localize_script('eael-front-end', 'localize', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+            ));
         }
     }
 }

@@ -45,7 +45,7 @@
 			$(this).find( 'span' ).html( 'Loading...' );
 
 			$.ajax( {
-				url: eaelPostGrid.ajaxurl,
+				url: localize.ajaxurl,
 				type: 'post',
 				data: {
 					action: 'load_more',
