@@ -16,7 +16,7 @@ trait Enqueue
     {
         // Gravity Form Compatibility
         if (class_exists('GFCommon')) {
-            foreach (eael_select_gravity_form() as $form_id => $form_name) {
+            foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
                 }
