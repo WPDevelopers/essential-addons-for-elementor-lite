@@ -1,9 +1,19 @@
 <?php
-namespace Elementor;
+namespace EssentialAddonsElementor\Elements;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // If this file is called directly, abort.
+// If this file is called directly, abort.
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-class Widget_Eael_Tooltip extends Widget_Base {
+use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Background as Group_Control_Background;
+use \Elementor\Scheme_Typography as Scheme_Typography;
+use \Elementor\Widget_Base as Widget_Base;
+
+class Eael_Tooltip extends Widget_Base {
 
 	public function get_name() {
 		return 'eael-tooltip';
@@ -618,6 +628,3 @@ class Widget_Eael_Tooltip extends Widget_Base {
 
 	protected function content_template() {}
 }
-
-
-Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_Tooltip() );

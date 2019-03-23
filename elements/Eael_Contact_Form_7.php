@@ -1,39 +1,44 @@
 <?php
-namespace Elementor;
+namespace EssentialAddonsElementor\Elements;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+// If this file is called directly, abort.
+if (!defined('ABSPATH')) {
+    exit;
 }
 
-/**
- * Gravity Forms Widget
- */
-class Widget_Eael_GravityForm extends Widget_Base {
-    
+use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Background as Group_Control_Background;
+use \Elementor\Scheme_Typography as Scheme_Typography;
+use \Elementor\Widget_Base as Widget_Base;
+
+class Eael_Contact_Form_7 extends Widget_Base {
+    use \EssentialAddonsElementor\Traits\Query;
     /**
-	 * Retrieve gravity forms widget name.
+	 * Retrieve contact form 7 widget name.
 	 *
 	 * @access public
 	 *
 	 * @return string Widget name.
 	 */
     public function get_name() {
-        return 'eael-gravity-form';
+        return 'eael-contact-form-7';
     }
 
     /**
-	 * Retrieve gravity forms widget title.
+	 * Retrieve contact form 7 widget title.
 	 *
 	 * @access public
 	 *
 	 * @return string Widget title.
 	 */
     public function get_title() {
-        return __( 'EA Gravity Forms', 'essential-addons-elementor' );
+        return __( 'EA Contact Form 7', 'essential-addons-elementor' );
     }
 
     /**
-	 * Retrieve the list of categories the gravity forms widget belongs to.
+	 * Retrieve the list of categories the contact form 7 widget belongs to.
 	 *
 	 * Used to determine where to display the widget in the editor.
 	 *
@@ -46,7 +51,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
     }
 
     /**
-	 * Retrieve gravity forms widget icon.
+	 * Retrieve contact form 7 widget icon.
 	 *
 	 * @access public
 	 *
@@ -57,7 +62,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
     }
 
     /**
-	 * Register gravity forms widget controls.
+	 * Register contact form 7 widget controls.
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
@@ -76,7 +81,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
         $this->start_controls_section(
             'section_info_box',
             [
-                'label'                 => __( 'Gravity Forms', 'essential-addons-elementor' ),
+                'label'                 => __( 'Contact Form', 'essential-addons-elementor' ),
             ]
         );
 		
@@ -86,73 +91,54 @@ class Widget_Eael_GravityForm extends Widget_Base {
 				'label'                 => esc_html__( 'Select Form', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::SELECT,
 				'label_block'           => true,
-				'options'               => eael_select_gravity_form(),
+				'options'               => $this->eael_select_contact_form(),
                 'default'               => '0',
 			]
 		);
         
         $this->add_control(
-            'custom_title_description',
-            [
-                'label'                 => __( 'Custom Title & Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                'label_off'             => __( 'No', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
             'form_title',
             [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                'label'                 => __( 'Form Title', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                'label_on'              => __( 'On', 'essential-addons-elementor' ),
+                'label_off'             => __( 'Off', 'essential-addons-elementor' ),
                 'return_value'          => 'yes',
-                'condition'             => [
-                    'custom_title_description!'   => 'yes',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'form_description',
-            [
-                'label'                 => __( 'Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-                'condition'             => [
-                    'custom_title_description!'   => 'yes',
-                ],
             ]
         );
 		
 		$this->add_control(
-			'form_title_custom',
+			'form_title_text',
 			[
 				'label'                 => esc_html__( 'Title', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::TEXT,
 				'label_block'           => true,
                 'default'               => '',
                 'condition'             => [
-                    'custom_title_description'   => 'yes',
+                    'form_title'   => 'yes',
                 ],
 			]
 		);
+        
+        $this->add_control(
+            'form_description',
+            [
+                'label'                 => __( 'Form Description', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'label_on'              => __( 'On', 'essential-addons-elementor' ),
+                'label_off'             => __( 'Off', 'essential-addons-elementor' ),
+                'return_value'          => 'yes',
+            ]
+        );
 		
 		$this->add_control(
-			'form_description_custom',
+			'form_description_text',
 			[
 				'label'                 => esc_html__( 'Description', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::TEXTAREA,
                 'default'               => '',
                 'condition'             => [
-                    'custom_title_description'   => 'yes',
+                    'form_description'   => 'yes',
                 ],
 			]
 		);
@@ -165,30 +151,6 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'default'               => 'yes',
                 'label_on'              => __( 'Show', 'essential-addons-elementor' ),
                 'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'placeholder_switch',
-            [
-                'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'form_ajax',
-            [
-                'label'                 => __( 'Use Ajax', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'description'           => __( 'Use ajax to submit the form', 'essential-addons-elementor' ),
-                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                'label_off'             => __( 'No', 'essential-addons-elementor' ),
                 'return_value'          => 'yes',
             ]
         );
@@ -221,7 +183,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 					'hide'          => 'none',
 				],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip' => 'display: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -241,8 +203,33 @@ class Widget_Eael_GravityForm extends Widget_Base {
 					'hide'          => 'none',
 				],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'display: {{VALUE}} !important;',
                 ],
+            ]
+        );
+        
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'eael_section_pro',
+            [
+                'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+            ]
+        );
+        
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    '1' => [
+                        'title' => __( '', 'essential-addons-elementor' ),
+                        'icon' => 'fa fa-unlock-alt',
+                    ],
+                ],
+                'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
             ]
         );
         
@@ -251,7 +238,6 @@ class Widget_Eael_GravityForm extends Widget_Base {
         /*-----------------------------------------------------------------------------------*/
         /*	STYLE TAB
         /*-----------------------------------------------------------------------------------*/
-
         /**
          * Style Tab: Form Container
          * -------------------------------------------------
@@ -264,19 +250,18 @@ class Widget_Eael_GravityForm extends Widget_Base {
             ]
         );
 
-		$this->add_control(
-			'eael_gravity_form_background',
-			[
-				'label' => esc_html__( 'Form Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'background: {{VALUE}};',
-				],
-			]
-		);
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'eael_contact_form_background',
+                'label'     => __( 'Background', 'plugin-domain' ),
+                'types'     => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-contact-form',
+            ]
+        );
 		
 		$this->add_responsive_control(
-			'eael_gravity_form_alignment',
+			'eael_contact_form_alignment',
 			[
 				'label' => esc_html__( 'Form Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
@@ -304,7 +289,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 		);
 
   		$this->add_responsive_control(
-  			'eael_gravity_form_width',
+  			'eael_contact_form_width',
   			[
   				'label' => esc_html__( 'Form Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -319,6 +304,10 @@ class Widget_Eael_GravityForm extends Widget_Base {
 						'max' => 80,
 					],
 				],
+				'default'   => [
+				        'unit'  => 'px',
+                        'size'  => '500'
+                ],
 				'selectors' => [
 					'{{WRAPPER}} .eael-contact-form' => 'width: {{SIZE}}{{UNIT}};',
 				],
@@ -326,7 +315,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
   		);
 
   		$this->add_responsive_control(
-  			'eael_gravity_form_max_width',
+  			'eael_contact_form_max_width',
   			[
   				'label' => esc_html__( 'Form Max Width', 'essential-addons-elementor' ),
   				'type' => Controls_Manager::SLIDER,
@@ -342,14 +331,14 @@ class Widget_Eael_GravityForm extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7-wrapper' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
   			]
   		);
 		
 		
 		$this->add_responsive_control(
-			'eael_gravity_form_margin',
+			'eael_contact_form_margin',
 			[
 				'label' => esc_html__( 'Form Margin', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
@@ -361,7 +350,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 		);		
 		
 		$this->add_responsive_control(
-			'eael_gravity_form_padding',
+			'eael_contact_form_padding',
 			[
 				'label' => esc_html__( 'Form Padding', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
@@ -374,7 +363,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 		
 		
 		$this->add_control(
-			'eael_gravity_form_border_radius',
+			'eael_contact_form_border_radius',
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
@@ -390,7 +379,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'eael_gravity_form_border',
+				'name' => 'eael_contact_form_border',
 				'selector' => '{{WRAPPER}} .eael-contact-form',
 			]
 		);
@@ -399,18 +388,19 @@ class Widget_Eael_GravityForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'eael_gravity_form_box_shadow',
+				'name' => 'eael_contact_form_box_shadow',
 				'selector' => '{{WRAPPER}} .eael-contact-form',
 			]
 		);
 
         $this->end_controls_section();
+
         /**
-         * Style Tab: Title and Description
+         * Style Tab: Title & Description
          * -------------------------------------------------
          */
         $this->start_controls_section(
-            'section_general_style',
+            'section_fields_title_description',
             [
                 'label'                 => __( 'Title & Description', 'essential-addons-elementor' ),
                 'tab'                   => Controls_Manager::TAB_STYLE,
@@ -421,34 +411,34 @@ class Widget_Eael_GravityForm extends Widget_Base {
             'heading_alignment',
             [
                 'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::CHOOSE,
-				'options'               => [
-					'left'      => [
-						'title' => __( 'Left', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-left',
-					],
-					'center'    => [
-						'title' => __( 'Center', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-center',
-					],
-					'right'     => [
-						'title' => __( 'Right', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-right',
-					],
-				],
-				'default'               => '',
-				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_heading' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
+                'type'                  => Controls_Manager::CHOOSE,
+                'options'               => [
+                    'left'      => [
+                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-left',
+                    ],
+                    'center'    => [
+                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-center',
+                    ],
+                    'right'     => [
+                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-right',
+                    ],
+                ],
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-heading' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
         
         $this->add_control(
             'title_heading',
             [
                 'label'                 => __( 'Title', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::HEADING,
-				'separator'             => 'before',
+                'separator'             => 'before',
             ]
         );
 
@@ -459,7 +449,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_title, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-title' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -470,7 +460,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'name'                  => 'title_typography',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_title, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-title',
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title',
             ]
         );
         
@@ -479,7 +469,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
             [
                 'label'                 => __( 'Description', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::HEADING,
-				'separator'             => 'before',
+                'separator'             => 'before',
             ]
         );
 
@@ -490,7 +480,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_description, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-description' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -501,55 +491,12 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'name'                  => 'description_typography',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_wrapper .gform_description, {{WRAPPER}} .eael-gravity-form .eael-gravity-form-description',
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description',
             ]
         );
         
         $this->end_controls_section();
-
-        /**
-         * Style Tab: Labels
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_label_style',
-            [
-                'label'                 => __( 'Labels', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-                'condition'             => [
-                    'labels_switch'   => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'text_color_label',
-            [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield label' => 'color: {{VALUE}}',
-                ],
-                'condition'             => [
-                    'labels_switch'   => 'yes',
-                ],
-            ]
-        );
         
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'typography_label',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield label',
-                'condition'             => [
-                    'labels_switch'   => 'yes',
-                ],
-            ]
-        );
-        
-        $this->end_controls_section();
-
         /**
          * Style Tab: Input & Textarea
          * -------------------------------------------------
@@ -561,32 +508,6 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'tab'                   => Controls_Manager::TAB_STYLE,
             ]
         );
-        
-        $this->add_responsive_control(
-            'input_alignment',
-            [
-                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::CHOOSE,
-				'options'               => [
-					'left'      => [
-						'title' => __( 'Left', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-left',
-					],
-					'center'    => [
-						'title' => __( 'Center', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-center',
-					],
-					'right'     => [
-						'title' => __( 'Right', 'essential-addons-elementor' ),
-						'icon'  => 'fa fa-align-right',
-					],
-				],
-				'default'               => '',
-				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
 
         $this->start_controls_tabs( 'tabs_fields_style' );
 
@@ -598,13 +519,13 @@ class Widget_Eael_GravityForm extends Widget_Base {
         );
 
         $this->add_control(
-            'field_bg_color',
+            'field_bg',
             [
                 'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -616,16 +537,21 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select' => 'color: {{VALUE}}',
                 ],
+				'separator'         => 'before',
             ]
         );
         
         $this->add_responsive_control(
-            'field_spacing',
+            'input_spacing',
             [
                 'label'                 => __( 'Spacing', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
+                'default'               => [
+                    'size'      => '20',
+                    'unit'      => 'px'
+                ],
                 'range'                 => [
                     'px'        => [
                         'min'   => 0,
@@ -635,7 +561,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form p:not(:last-of-type) .wpcf7-form-control-wrap' => 'margin-bottom: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -647,7 +573,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -671,7 +597,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select' => 'text-indent: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select' => 'text-indent: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -682,7 +608,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'label'                 => __( 'Input Width', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
-                    'px' => [
+                    'px'        => [
                         'min'   => 0,
                         'max'   => 1200,
                         'step'  => 1,
@@ -690,26 +616,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield select' => 'width: {{SIZE}}{{UNIT}}',
-                ],
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'input_height',
-            [
-                'label'                 => __( 'Input Height', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SLIDER,
-                'range'                 => [
-                    'px' => [
-                        'min'   => 0,
-                        'max'   => 80,
-                        'step'  => 1,
-                    ],
-                ],
-                'size_units'            => [ 'px', 'em', '%' ],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="url"], {{WRAPPER}} .eael-gravity-form .gfield select' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select' => 'width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -720,7 +627,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'label'                 => __( 'Textarea Width', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
-                    'px' => [
+                    'px'        => [
                         'min'   => 0,
                         'max'   => 1200,
                         'step'  => 1,
@@ -728,26 +635,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield textarea' => 'width: {{SIZE}}{{UNIT}}',
-                ],
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'textarea_height',
-            [
-                'label'                 => __( 'Textarea Height', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SLIDER,
-                'range'                 => [
-                    'px' => [
-                        'min'   => 0,
-                        'max'   => 400,
-                        'step'  => 1,
-                    ],
-                ],
-                'size_units'            => [ 'px', 'em', '%' ],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield textarea' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea' => 'width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -759,7 +647,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 				'label'                 => __( 'Border', 'essential-addons-elementor' ),
 				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select',
 				'separator'             => 'before',
 			]
 		);
@@ -771,7 +659,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -782,7 +670,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'name'                  => 'field_typography',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select',
 				'separator'             => 'before',
             ]
         );
@@ -791,7 +679,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'                  => 'field_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select',
 				'separator'             => 'before',
 			]
 		);
@@ -804,15 +692,15 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'label'                 => __( 'Focus', 'essential-addons-elementor' ),
             ]
         );
-
+        
         $this->add_control(
-            'field_bg_color_focus',
+            'field_bg_focus',
             [
                 'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input:focus, {{WRAPPER}} .eael-gravity-form .gfield textarea:focus' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input:focus, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form textarea:focus' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -820,11 +708,12 @@ class Widget_Eael_GravityForm extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name'                  => 'focus_input_border',
+				'name'                  => 'input_border_focus',
 				'label'                 => __( 'Border', 'essential-addons-elementor' ),
 				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input:focus, {{WRAPPER}} .eael-gravity-form .gfield textarea:focus',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input:focus, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form textarea:focus',
+                'separator'             => 'before',
 			]
 		);
 
@@ -832,7 +721,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'                  => 'focus_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input:focus, {{WRAPPER}} .eael-gravity-form .gfield textarea:focus',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input:focus, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form textarea:focus',
 				'separator'             => 'before',
 			]
 		);
@@ -844,39 +733,35 @@ class Widget_Eael_GravityForm extends Widget_Base {
         $this->end_controls_section();
 
         /**
-         * Style Tab: Field Description
-         * -------------------------------------------------
+         * Style Tab: Label Section
          */
         $this->start_controls_section(
-            'section_field_description_style',
+            'section_label_style',
             [
-                'label'                 => __( 'Field Description', 'essential-addons-elementor' ),
+                'label'                 => __( 'Labels', 'essential-addons-elementor' ),
                 'tab'                   => Controls_Manager::TAB_STYLE,
+                'condition'             => [
+                    'labels_switch'   => 'yes',
+                ],
             ]
         );
 
         $this->add_control(
-            'field_description_text_color',
+            'text_color_label',
             [
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield .gfield_description' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label' => 'color: {{VALUE}}',
+                ],
+                'condition'             => [
+                    'labels_switch'   => 'yes',
                 ],
             ]
         );
         
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'field_description_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .gfield_description',
-            ]
-        );
-        
         $this->add_responsive_control(
-            'field_description_spacing',
+            'label_spacing',
             [
                 'label'                 => __( 'Spacing', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
@@ -889,33 +774,10 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield .gfield_description' => 'padding-top: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label' => 'margin-bottom: {{SIZE}}{{UNIT}}',
                 ],
-            ]
-        );
-        
-        $this->end_controls_section();
-
-        /**
-         * Style Tab: Section Field
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_field_style',
-            [
-                'label'                 => __( 'Section Field', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'section_field_text_color',
-            [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield.gsection .gsection_title' => 'color: {{VALUE}}',
+                'condition'             => [
+                    'labels_switch'   => 'yes',
                 ],
             ]
         );
@@ -923,121 +785,12 @@ class Widget_Eael_GravityForm extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'                  => 'section_field_typography',
+                'name'                  => 'typography_label',
                 'label'                 => __( 'Typography', 'essential-addons-elementor' ),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield.gsection .gsection_title',
-				'separator'             => 'before',
-            ]
-        );
-        
-        $this->add_control(
-            'section_field_border_type',
-            [
-                'label'                 => __( 'Border Type', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SELECT,
-                'default'               => 'solid',
-                'options'               => [
-                    'none'      => __( 'None', 'essential-addons-elementor' ),
-                    'solid'     => __( 'Solid', 'essential-addons-elementor' ),
-                    'double'    => __( 'Double', 'essential-addons-elementor' ),
-                    'dotted'    => __( 'Dotted', 'essential-addons-elementor' ),
-                    'dashed'    => __( 'Dashed', 'essential-addons-elementor' ),
-                ],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield.gsection' => 'border-bottom-style: {{VALUE}}',
-                ],
-				'separator'             => 'before',
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'section_field_border_height',
-            [
-                'label'                 => __( 'Border Height', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SLIDER,
-                'default'               => [
-                    'size'  => 1,
-                ],
-                'range'                 => [
-                    'px' => [
-                        'min'   => 1,
-                        'max'   => 20,
-                        'step'  => 1,
-                    ],
-                ],
-                'size_units'            => [ 'px' ],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield.gsection' => 'border-bottom-width: {{SIZE}}{{UNIT}}',
-                ],
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label',
                 'condition'             => [
-                    'section_field_border_type!'   => 'none',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'section_field_border_color',
-            [
-                'label'                 => __( 'Border Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield.gsection' => 'border-bottom-color: {{VALUE}}',
-                ],
-                'condition'             => [
-                    'section_field_border_type!'   => 'none',
-                ],
-            ]
-        );
-
-		$this->add_responsive_control(
-			'section_field_margin',
-			[
-				'label'                 => __( 'Margin', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::DIMENSIONS,
-				'size_units'            => [ 'px', 'em', '%' ],
-				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gfield.gsection' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'separator'             => 'before',
-			]
-		);
-        
-        $this->end_controls_section();
-
-        /**
-         * Style Tab: Section Field
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_price_style',
-            [
-                'label'                 => __( 'Price', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'price_label_color',
-            [
-                'label'                 => __( 'Price Label Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .ginput_product_price_label' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'price_text_color',
-            [
-                'label'                 => __( 'Price Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .ginput_product_price' => 'color: {{VALUE}}',
+                    'labels_switch'   => 'yes',
                 ],
             ]
         );
@@ -1045,17 +798,25 @@ class Widget_Eael_GravityForm extends Widget_Base {
         $this->end_controls_section();
 
         /**
-         * Style Tab: Placeholder
-         * -------------------------------------------------
+         * Style Tab: Placeholder Section
          */
         $this->start_controls_section(
             'section_placeholder_style',
             [
                 'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
                 'tab'                   => Controls_Manager::TAB_STYLE,
-                'condition'             => [
-                    'placeholder_switch'   => 'yes',
-                ],
+            ]
+        );
+        
+        $this->add_control(
+            'placeholder_switch',
+            [
+                'label'                 => __( 'Show Placeholder', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SWITCHER,
+                'default'               => 'yes',
+                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                'return_value'          => 'yes',
             ]
         );
 
@@ -1065,7 +826,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield input::-webkit-input-placeholder, {{WRAPPER}} .eael-gravity-form .gfield textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control::-webkit-input-placeholder' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'placeholder_switch'   => 'yes',
@@ -1073,8 +834,21 @@ class Widget_Eael_GravityForm extends Widget_Base {
             ]
         );
         
-        $this->end_controls_section();
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'typography_placeholder',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control::-webkit-input-placeholder',
+                'condition'             => [
+                    'placeholder_switch'   => 'yes',
+                ],
+            ]
+        );
         
+        $this->end_controls_section();
+
         /**
          * Style Tab: Radio & Checkbox
          * -------------------------------------------------
@@ -1116,7 +890,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1275,7 +1049,6 @@ class Widget_Eael_GravityForm extends Widget_Base {
 
         /**
          * Style Tab: Submit Button
-         * -------------------------------------------------
          */
         $this->start_controls_section(
             'section_submit_button_style',
@@ -1290,6 +1063,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 			[
 				'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::CHOOSE,
+				'default'               => 'left',
 				'options'               => [
 					'left'        => [
 						'title'   => __( 'Left', 'essential-addons-elementor' ),
@@ -1304,10 +1078,9 @@ class Widget_Eael_GravityForm extends Widget_Base {
 						'icon'    => 'eicon-h-align-right',
 					],
 				],
-				'default'               => '',
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_footer'   => 'text-align: {{VALUE}};',
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'display:inline-block;'
+					'{{WRAPPER}} .eael-contact-form-7 .wpcf7-form p:nth-last-of-type(1)'   => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'display:inline-block;'
 				],
                 'condition'             => [
                     'button_width_type' => 'custom',
@@ -1325,7 +1098,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                     'full-width'    => __( 'Full Width', 'essential-addons-elementor' ),
                     'custom'        => __( 'Custom', 'essential-addons-elementor' ),
                 ],
-                'prefix_class'          => 'eael-gravity-form-button-',
+                'prefix_class'          => 'eael-contact-form-7-button-',
             ]
         );
         
@@ -1334,10 +1107,6 @@ class Widget_Eael_GravityForm extends Widget_Base {
             [
                 'label'                 => __( 'Width', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::SLIDER,
-                'default'               => [
-                    'size'      => '100',
-                    'unit'      => 'px'
-                ],
                 'range'                 => [
                     'px'        => [
                         'min'   => 0,
@@ -1345,9 +1114,9 @@ class Widget_Eael_GravityForm extends Widget_Base {
                         'step'  => 1,
                     ],
                 ],
-                'size_units'            => [ 'px', '%' ],
+                'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
                     'button_width_type' => 'custom',
@@ -1371,7 +1140,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1383,7 +1152,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1393,9 +1162,8 @@ class Widget_Eael_GravityForm extends Widget_Base {
 			[
 				'name'                  => 'button_border_normal',
 				'label'                 => __( 'Border', 'essential-addons-elementor' ),
-				'placeholder'           => '1px',
 				'default'               => '1px',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]',
 			]
 		);
 
@@ -1406,7 +1174,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1418,7 +1186,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1437,10 +1205,30 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'margin-top: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]' => 'margin-top: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'button_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]',
+				'separator'             => 'before',
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'                  => 'button_box_shadow',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]',
+				'separator'             => 'before',
+			]
+		);
         
         $this->end_controls_tab();
 
@@ -1458,7 +1246,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]:hover' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1470,7 +1258,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]:hover' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1482,7 +1270,7 @@ class Widget_Eael_GravityForm extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]:hover' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1491,31 +1279,10 @@ class Widget_Eael_GravityForm extends Widget_Base {
         
         $this->end_controls_tabs();
         
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'                  => 'button_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
-                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]',
-				'separator'             => 'before',
-            ]
-        );
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'                  => 'button_box_shadow',
-				'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]',
-				'separator'             => 'before',
-			]
-		);
-        
         $this->end_controls_section();
 
         /**
          * Style Tab: Errors
-         * -------------------------------------------------
          */
         $this->start_controls_section(
             'section_error_style',
@@ -1536,20 +1303,115 @@ class Widget_Eael_GravityForm extends Widget_Base {
             ]
         );
 
+        $this->start_controls_tabs( 'tabs_error_messages_style' );
+
+        $this->start_controls_tab(
+            'tab_error_messages_alert',
+            [
+                'label'                 => __( 'Alert', 'essential-addons-elementor' ),
+				'condition'             => [
+					'error_messages' => 'show',
+				],
+            ]
+        );
+
         $this->add_control(
-            'error_message_text_color',
+            'error_alert_text_color',
             [
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield .validation_message' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip' => 'color: {{VALUE}}',
                 ],
 				'condition'             => [
 					'error_messages' => 'show',
 				],
             ]
         );
+        
+        $this->add_responsive_control(
+            'error_alert_spacing',
+            [
+                'label'                 => __( 'Spacing', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 100,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px', 'em', '%' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip' => 'margin-top: {{SIZE}}{{UNIT}}',
+                ],
+				'condition'             => [
+					'error_messages' => 'show',
+				],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'tab_error_messages_fields',
+            [
+                'label'                 => __( 'Fields', 'essential-addons-elementor' ),
+				'condition'             => [
+					'error_messages' => 'show',
+				],
+            ]
+        );
+
+        $this->add_control(
+            'error_field_bg_color',
+            [
+                'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid' => 'background: {{VALUE}}',
+                ],
+				'condition'             => [
+					'error_messages' => 'show',
+				],
+            ]
+        );
+
+        $this->add_control(
+            'error_field_color',
+            [
+                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::COLOR,
+                'default'               => '',
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid' => 'color: {{VALUE}}',
+                ],
+				'condition'             => [
+					'error_messages' => 'show',
+				],
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'                  => 'error_field_border',
+				'label'                 => __( 'Border', 'essential-addons-elementor' ),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid',
+				'separator'             => 'before',
+				'condition'             => [
+					'error_messages' => 'show',
+				],
+			]
+		);
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
         
         $this->add_control(
             'validation_errors_heading',
@@ -1564,44 +1426,13 @@ class Widget_Eael_GravityForm extends Widget_Base {
         );
 
         $this->add_control(
-            'validation_error_description_color',
-            [
-                'label'                 => __( 'Error Description Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .validation_error' => 'color: {{VALUE}}',
-                ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
-            ]
-        );
-
-        $this->add_control(
-            'validation_error_border_color',
-            [
-                'label'                 => __( 'Error Border Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper .validation_error' => 'border-top-color: {{VALUE}}; border-bottom-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-gravity-form .gfield_error' => 'border-top-color: {{VALUE}}; border-bottom-color: {{VALUE}}',
-                ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
-            ]
-        );
-
-        $this->add_control(
             'validation_errors_bg_color',
             [
-                'label'                 => __( 'Error Field Background Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Background Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield_error' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'background: {{VALUE}}',
                 ],
 				'condition'             => [
 					'validation_errors' => 'show',
@@ -1610,87 +1441,69 @@ class Widget_Eael_GravityForm extends Widget_Base {
         );
 
         $this->add_control(
-            'validation_error_field_label_color',
-            [
-                'label'                 => __( 'Error Field Label Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gfield_error .gfield_label' => 'color: {{VALUE}}',
-                ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
-            ]
-        );
-
-        $this->add_control(
-            'validation_error_field_input_border_color',
-            [
-                'label'                 => __( 'Error Field Input Border Color', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::COLOR,
-                'default'               => '',
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper li.gfield_error input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .gform_wrapper li.gfield_error textarea' => 'border-color: {{VALUE}}',
-                ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
-            ]
-        );
-
-        $this->add_control(
-            'validation_error_field_input_border_width',
-            [
-                'label'                 => __( 'Error Field Input Border Width', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::NUMBER,
-                'default'               => 1,
-                'min'                   => 1,
-                'max'                   => 10,
-                'step'                  => 1,
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_wrapper li.gfield_error input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .gform_wrapper li.gfield_error textarea' => 'border-width: {{VALUE}}px',
-                ],
-				'condition'             => [
-					'validation_errors' => 'show',
-				],
-            ]
-        );
-        
-        $this->end_controls_section();
-
-        /**
-         * Style Tab: Thank You Message
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_ty_style',
-            [
-                'label'                 => __( 'Thank You Message', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'ty_message_text_color',
+            'validation_errors_color',
             [
                 'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'color: {{VALUE}}',
                 ],
+				'condition'             => [
+					'validation_errors' => 'show',
+				],
             ]
         );
         
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'validation_errors_typography',
+                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors',
+				'separator'             => 'before',
+				'condition'             => [
+					'validation_errors' => 'show',
+				],
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'                  => 'validation_errors_border',
+				'label'                 => __( 'Border', 'essential-addons-elementor' ),
+				'placeholder'           => '1px',
+				'default'               => '1px',
+				'selector'              => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors',
+				'separator'             => 'before',
+				'condition'             => [
+					'validation_errors' => 'show',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'validation_errors_margin',
+			[
+				'label'                 => __( 'Margin', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::DIMENSIONS,
+				'size_units'            => [ 'px', 'em', '%' ],
+				'selectors'             => [
+					'{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'             => [
+					'validation_errors' => 'show',
+				],
+			]
+		);
+        
         $this->end_controls_section();
+
     }
 
     /**
-	 * Render gravity forms widget output on the frontend.
-	 *
-	 * Written in PHP and used to generate the final HTML.
-	 *
 	 * @access protected
 	 */
     protected function render() {
@@ -1698,7 +1511,8 @@ class Widget_Eael_GravityForm extends Widget_Base {
         
         $this->add_render_attribute( 'contact-form', 'class', [
 				'eael-contact-form',
-				'eael-gravity-form',
+				'eael-contact-form-7',
+                'eael-contact-form-'.esc_attr($this->get_id())
 			]
 		);
         
@@ -1706,64 +1520,54 @@ class Widget_Eael_GravityForm extends Widget_Base {
             $this->add_render_attribute( 'contact-form', 'class', 'labels-hide' );
         }
         
-        if ( $settings['placeholder_switch'] != 'yes' ) {
-            $this->add_render_attribute( 'contact-form', 'class', 'placeholder-hide' );
-        }
-        
-        if ( $settings['custom_title_description'] == 'yes' ) {
-            $this->add_render_attribute( 'contact-form', 'class', 'title-description-hide' );
+        if ( $settings['placeholder_switch'] == 'yes' ) {
+            $this->add_render_attribute( 'contact-form', 'class', 'placeholder-show' );
         }
         
         if ( $settings['custom_radio_checkbox'] == 'yes' ) {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-custom-radio-checkbox' );
         }
-
-        if ( $settings['eael_gravity_form_alignment'] == 'left' ) {
+        if ( $settings['eael_contact_form_alignment'] == 'left' ) {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-left' );
         }
-        elseif ( $settings['eael_gravity_form_alignment'] == 'center' ) {
+        elseif ( $settings['eael_contact_form_alignment'] == 'center' ) {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-center' );
         }
-        elseif ( $settings['eael_gravity_form_alignment'] == 'right' ) {
+        elseif ( $settings['eael_contact_form_alignment'] == 'right' ) {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-right' );
         }
         else {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-default' );
         }
-
-        if ( class_exists( 'GFCommon' ) ) {
+        
+        if ( function_exists( 'wpcf7' ) ) {
             if ( ! empty( $settings['contact_form_list'] ) ) { ?>
-                <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
-                    <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
-                        <div class="eael-gravity-form-heading">
-                            <?php if ( $settings['form_title_custom'] != '' ) { ?>
-                                <h3 class="eael-contact-form-title eael-gravity-form-title">
-                                    <?php echo esc_attr( $settings['form_title_custom'] ); ?>
-                                </h3>
-                            <?php } ?>
-                            <?php if ( $settings['form_description_custom'] != '' ) { ?>
-                                <div class="eael-contact-form-description eael-gravity-form-description">
-                                    <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <?php
-                        $eael_form_id = $settings['contact_form_list'];
-                        $eael_form_title = $settings['form_title'];
-                        $eael_form_description = $settings['form_description'];
-                        $eael_form_ajax = $settings['form_ajax'];
-
-                        gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
-                    ?>
+                <div class="eael-contact-form-7-wrapper">
+                    <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
+                        <?php if ( $settings['form_title'] == 'yes' || $settings['form_description'] == 'yes' ) { ?>
+                            <div class="eael-contact-form-7-heading">
+                                <?php if ( $settings['form_title'] == 'yes' && $settings['form_title_text'] != '' ) { ?>
+                                    <h3 class="eael-contact-form-title eael-contact-form-7-title">
+                                        <?php echo esc_attr( $settings['form_title_text'] ); ?>
+                                    </h3>
+                                <?php } ?>
+                                <?php if ( $settings['form_description'] == 'yes' && $settings['form_description_text'] != '' ) { ?>
+                                    <div class="eael-contact-form-description eael-contact-form-7-description">
+                                        <?php echo $this->parse_text_editor( $settings['form_description_text'] ); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <?php echo do_shortcode( '[contact-form-7 id="' . $settings['contact_form_list'] . '" ]' ); ?>
+                    </div>
                 </div>
                 <?php
             }
         }
     }
 
+    /**
+	 * @access protected
+	 */
     protected function _content_template() {}
-
 }
-
-Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_GravityForm() );

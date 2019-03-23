@@ -439,12 +439,5 @@ class Eael_Dual_Color_Header extends Widget_Base {
 	<?php
 	}
 
-	protected function content_template() {
-		?>
-
-		<?php
-	}
+	protected function content_template() {}
 }
-
-
-Plugin::instance()->widgets_manager->register_widget_type( new Widget_Eael_Dual_Color_Header() );
