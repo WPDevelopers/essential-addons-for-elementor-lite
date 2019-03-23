@@ -110,7 +110,7 @@ trait Elements
             ],
             [
                 'name' => 'content-ticker',
-                'class' => 'Eael_Content_Tickersss',
+                'class' => 'Eael_Content_Ticker',
             ],
             [
                 'name' => 'tooltip',

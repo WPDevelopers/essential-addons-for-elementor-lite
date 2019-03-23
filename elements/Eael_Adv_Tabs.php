@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Utils as Utils;
 
 class Eael_Adv_Tabs extends Widget_Base
 {
@@ -784,8 +785,5 @@ if (!empty($tab['eael_primary_templates'])) {
 	<?php
 }
 
-    protected function content_template()
-    {}
+    protected function content_template(){}
 }
-
-Plugin::instance()->widgets_manager->register_widget_type(new Widget_Eael_Adv_Tabs());
