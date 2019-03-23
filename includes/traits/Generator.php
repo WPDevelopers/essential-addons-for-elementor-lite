@@ -6,6 +6,58 @@ use MatthiasMullie\Minify;
 
 trait Generator
 {
+
+    public $dependencies = array(
+            'fancy-text'    => array(
+                'assets/front-end/js/vendor/fancy-text/fancy-text.js'
+            ),
+            'count-down'    => array(
+                'assets/front-end/js/vendor/countdown/countdown.min.js'
+            ),
+            'filter-gallery' => array(
+                'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js'
+            ),
+            'post-timeline'      => array(
+                'assets/front-end/js/vendor/load-more/load-more.js'
+            ),
+            'price-table'        => array(
+                'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js'
+            ),
+            'progress-bar'       => array(
+                'assets/front-end/js/vendor/progress-bar/progress-bar.js',
+                'assets/front-end/js/vendor/inview/inview.min.js'
+            ),
+            'twitter-feed'       => array(
+                'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                'assets/front-end/social-feeds/codebird.js',
+                'assets/front-end/social-feeds/doT.min.js',
+                'assets/front-end/social-feeds/moment.js',
+                'assets/front-end/social-feeds/jquery.socialfeed.js'
+            ),
+            'post-grid'          => array(
+                'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                'assets/front-end/js/vendor/load-more/load-more.js'
+            ),
+        );
+
+    public function add_dependency(array $elements, array $paths) {
+        if($this->dependencies) {
+            foreach($elements as $element) {
+                if(isset($this->dependencies[$element])) {
+                    if(\is_array($this->dependencies[$element])) {
+                        foreach($this->dependencies[$element] as $path) {
+                            $paths[] = $path;
+                        }
+                    }else {
+                        $paths[] = $this->dependencies[$element];
+                    }
+                }
+            }
+        }
+        return array_unique($paths);
+    }
+
     public function generate_scripts($elements, $output = null)
     {
         $js_paths = array();
@@ -15,32 +67,9 @@ trait Generator
             wp_mkdir_p($this->asset_path);
         }
 
-        foreach ((array) $elements as $element) {
-            if ($element == 'fancy-text') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/fancy-text/fancy-text.js';
-            } elseif ($element == 'count-down') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/countdown/countdown.min.js';
-            } elseif ($element == 'filterable-gallery') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js';
-            } elseif ($element == 'post-timeline') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/load-more/load-more.js';
-            } elseif ($element == 'price-table') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js';
-            } elseif ($element == 'progress-bar') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/progress-bar/progress-bar.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/inview/inview.min.js';
-            } elseif ($element == 'twitter-feed') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/social-feeds/codebird.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/social-feeds/doT.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/social-feeds/moment.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/social-feeds/jquery.socialfeed.js';
-            } elseif ($element == 'post-grid') {
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js';
-                $js_paths[] = $this->plugin_path . 'assets/front-end/js/vendor/load-more/load-more.js';
-            }
+        $js_paths[] = $this->add_dependency($elements, $js_paths);
 
+        foreach ((array) $elements as $element) {
             $js_file = $this->plugin_path . 'assets/front-end/js/' . $element . '/index.js';
             $js_paths[] = $this->plugin_path . 'assets/front-end/js/base.js';
             if (file_exists($js_file)) {
@@ -93,8 +122,9 @@ trait Generator
                 return preg_replace('/^eael-/', '', $val);
             }, $elements));
 
-            
-            $this->generate_scripts($elements, $post_id);
+            if($elements) {
+                $this->generate_scripts($elements, $post_id);
+            }
         }
     }
 }
