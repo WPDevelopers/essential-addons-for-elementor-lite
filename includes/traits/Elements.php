@@ -8,16 +8,6 @@ if (!defined('ABSPATH')) {
 
 trait Elements
 {
-    public function elements_path($file)
-    {
-        $file = ltrim($file, '/');
-        $file = $this->plugin_path . 'elements/' . $file . '/' . $file . '.php';
-        if (file_exists($file)) {
-            return $file;
-        }
-        return false;
-    }
-
     /**
      * Acivate or Deactivate Modules
      *
