@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 /**
  * Including composer autoload.
  *
- * @since x.x.x
+ * @since 3.0.0
  */
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
@@ -29,7 +29,6 @@ class EssentialAddonsElementor
     use EssentialAddonsElementor\Traits\Generator;
     use EssentialAddonsElementor\Traits\Enqueue;
     use EssentialAddonsElementor\Traits\Admin;
-    use EssentialAddonsElementor\Traits\ElementorHelper;
     use EssentialAddonsElementor\Traits\ElementsHelper;
     use EssentialAddonsElementor\Traits\Elements;
 
@@ -45,9 +44,6 @@ class EssentialAddonsElementor
     public function __construct()
     {
         define('ESSENTIAL_ADDONS_EL_URL', plugins_url('/', __FILE__));
-        define('ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path(__FILE__));
-        define('ESSENTIAL_ADDONS_VERSION', '2.9.8');
-        define('ESSENTIAL_ADDONS_BASENAME', plugin_basename(__FILE__));
 
         $this->plugin_basename = plugin_basename(__FILE__);
 
