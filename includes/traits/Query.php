@@ -537,10 +537,7 @@ trait Query
 
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
-            /**
-             * All content html here.
-             */
-            include ESSENTIAL_ADDONS_EL_PATH . 'includes/templates/content.php';
+            get_template_part($this->plugin_path . 'includes/templates', 'content');
         endwhile;
         $return['content'] = ob_get_clean();
         wp_reset_postdata();
