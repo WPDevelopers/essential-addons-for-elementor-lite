@@ -16,7 +16,8 @@ use \Elementor\Widget_Base as Widget_Base;
 /**
  * Gravity Forms Widget
  */
-class Eael_GravityForms extends Widget_Base {
+class Eael_GravityForm extends Widget_Base {
+    use \EssentialAddonsElementor\Traits\Query;
     
     /**
 	 * Retrieve gravity forms widget name.
@@ -94,7 +95,7 @@ class Eael_GravityForms extends Widget_Base {
 				'label'                 => esc_html__( 'Select Form', 'essential-addons-elementor' ),
 				'type'                  => Controls_Manager::SELECT,
 				'label_block'           => true,
-				'options'               => eael_select_gravity_form(),
+				'options'               => $this->eael_select_gravity_form(),
                 'default'               => '0',
 			]
 		);
