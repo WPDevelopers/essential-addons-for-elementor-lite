@@ -16,6 +16,7 @@ use \Elementor\Widget_Base as Widget_Base;
 /**
  * Gravity Forms Widget
  */
+
 class Eael_GravityForm extends Widget_Base {
     use \EssentialAddonsElementor\Traits\Query;
     
