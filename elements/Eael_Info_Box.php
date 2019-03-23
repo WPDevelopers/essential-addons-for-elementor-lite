@@ -1608,14 +1608,7 @@ class Eael_Info_Box extends Widget_Base {
 	}
 
 	protected function render() {
-		// dump( $this->get_settings_for_display() );
-
 		$settings = $this->get_settings_for_display();
-
-		// $bgcolor = $this->get_settings_for_display( 'eael_infobox_bg_color' );
-
-		// $settings['_background_color'] = $bgcolor;
-
 		$this->eael_infobox_before( $settings );
 		$this->render_infobox_icon( $settings );
 		$this->render_infobox_content( $settings );
