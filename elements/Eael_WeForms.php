@@ -14,7 +14,7 @@ use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
 
-class Eael_WeForm extends Widget_Base {
+class Eael_WeForms extends Widget_Base {
 
 	use \EssentialAddonsElementor\Traits\Query;
 	
