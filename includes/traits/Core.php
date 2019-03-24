@@ -24,11 +24,11 @@ trait Core
     public function set_global_vars()
     {
         $GLOBALS['Essential_Addons_Elementor'] = array(
-            'plugin_basename' => $this->plugin_basename,
-            'plugin_path' => $this->plugin_path,
-            'plugin_url' => $this->plugin_url,
-            'asset_path' => $this->asset_path,
-            'asset_url' => $this->asset_url,
+            'plugin_basename' => EAEL_PLUGIN_BASENAME,
+            'plugin_path' => EAEL_PLUGIN_PATH,
+            'plugin_url' => EAEL_PLUGIN_URL,
+            'asset_path' => EAEL_ASSET_PATH,
+            'asset_url' => EAEL_ASSET_URL,
             'registered_elements' => $this->registered_elements,
         );
     }
