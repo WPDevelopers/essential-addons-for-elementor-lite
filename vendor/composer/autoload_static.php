@@ -87,7 +87,7 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
         'Essential_Addons_Elementor\\Traits\\Elements' => __DIR__ . '/../..' . '/includes/traits/Elements.php',
         'Essential_Addons_Elementor\\Traits\\Enqueue' => __DIR__ . '/../..' . '/includes/traits/Enqueue.php',
         'Essential_Addons_Elementor\\Traits\\Generator' => __DIR__ . '/../..' . '/includes/traits/Generator.php',
-        'Essential_Addons_Elementor\\Traits\\Helper' => __DIR__ . '/../..' . '/includes/traits/Elements_Helper.php',
+        'Essential_Addons_Elementor\\Traits\\Helper' => __DIR__ . '/../..' . '/includes/traits/Helper.php',
         'MatthiasMullie\\Minify\\CSS' => __DIR__ . '/..' . '/matthiasmullie/minify/src/CSS.php',
         'MatthiasMullie\\Minify\\Exception' => __DIR__ . '/..' . '/matthiasmullie/minify/src/Exception.php',
         'MatthiasMullie\\Minify\\Exceptions\\BasicException' => __DIR__ . '/..' . '/matthiasmullie/minify/src/Exceptions/BasicException.php',

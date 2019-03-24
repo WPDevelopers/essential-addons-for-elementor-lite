@@ -40,8 +40,8 @@ class Eael_Post_Grid extends Widget_Base {
 		 * Query And Layout Controls!
 		 * @source includes/elementor-helper.php
 		 */
-		$this->query_controls();
-		$this->layout_controls();
+		$this->eael_query_controls();
+		$this->eael_layout_controls();
 
 		/**
 		 * Grid Style Controls!
@@ -407,7 +407,7 @@ class Eael_Post_Grid extends Widget_Base {
 		/**
 		 * Load More Button Style Controls!
 		 */
-		$this->load_more_button_style();
+		$this->eael_load_more_button_style();
 
 	}
 
@@ -419,7 +419,7 @@ class Eael_Post_Grid extends Widget_Base {
 		 */
 		$settings['post_style'] = 'grid';
 		$post_args = $this->eael_get_post_settings( $settings );
-		$query_args = $this->get_query_args( 'eaeposts', $this->get_settings() );
+		$query_args = $this->eael_get_query_args( 'eaeposts', $this->get_settings() );
 		$settings = $query_args = array_merge( $query_args, $post_args );
 
 		if( isset( $query_args['tax_query'] ) ) {
