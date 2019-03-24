@@ -25,20 +25,12 @@ require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 class Essential_Addons_Elementor
 {
     use Essential_Addons_Elementor\Traits\Core;
-    // use Essential_Addons_Elementor\Traits\Ajax;
     use Essential_Addons_Elementor\Traits\Generator;
     use Essential_Addons_Elementor\Traits\Enqueue;
     use Essential_Addons_Elementor\Traits\Admin;
     use Essential_Addons_Elementor\Traits\Elements_Helper;
     use Essential_Addons_Elementor\Traits\Elements;
-
-    // public $plugin_basename;
-    // public $plugin_path;
-    // public $plugin_url;
-    // public $plugin_version;
-    // public $wp_upload;
-    // public $asset_path;
-    // public $asset_url;
+    
     public $registered_elements;
 
     public function __construct()
@@ -81,9 +73,6 @@ class Essential_Addons_Elementor
             'progress-bar',
             'feature-list',
         ];
-
-        // define global vars
-        // $this->set_global_vars();
 
         // Start plugin tracking
         $this->start_plugin_tracking();

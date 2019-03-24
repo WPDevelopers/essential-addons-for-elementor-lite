@@ -36,7 +36,7 @@ class ComposerAutoloaderInite6e2cbae70c835106a2f6367baecac5f
         }
 
         $loader->setClassMapAuthoritative(true);
-        $loader->setApcuPrefix('AAJ5yplxgXI584XwY4eI2');
+        $loader->setApcuPrefix('k2pN2niidbIJ7XfUvNf6s');
         $loader->register(true);
 
         return $loader;
