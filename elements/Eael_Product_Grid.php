@@ -16,7 +16,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_Product_Grid extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Elements_Helper;
+    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {

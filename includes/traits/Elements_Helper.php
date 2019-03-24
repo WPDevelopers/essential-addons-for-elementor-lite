@@ -13,59 +13,8 @@ use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Utils as Utils;
 
-trait Elements_Helper
-{
-
-    /**
-     * This function is responsible for get the post data.
-     * It will return HTML markup with AJAX call and with normal call.
-     *
-     * @return string of an html markup with AJAX call.
-     * @return array of content and found posts count without AJAX call.
-     */
-    function eael_load_more_ajax()
-    {
-        if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            $post_args = eael_get_post_settings($_POST);
-            $post_args = array_merge($this->get_query_args('eaeposts', $_POST), $post_args);
-
-            if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
-                $post_args['tax_query']['relation'] = 'OR';
-            }
-        } else {
-            $args = func_get_args();
-            $post_args = $args[0];
-        }
-
-        $posts = new \WP_Query($post_args);
-        /**
-         * For returning all types of post as an array
-         * @return array;
-         */
-        if (isset($post_args['post_style']) && $post_args['post_style'] == 'all_types') {
-            return $posts->posts;
-        }
-
-        $return = array();
-        $return['count'] = $posts->found_posts;
-
-        ob_start();
-
-        while ($posts->have_posts()): $posts->the_post();
-            $isPrinted = false;
-            get_template_part(EAEL_PLUGIN_PATH . 'includes/templates', 'content');
-        endwhile;
-        $return['content'] = ob_get_clean();
-        wp_reset_postdata();
-        wp_reset_query();
-        if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            echo $return['content'];
-            die();
-        } else {
-            return $return;
-        }
-    }
-
+trait Helper
+{    
     /**
      * For Exclude Option
      */
@@ -1298,6 +1247,56 @@ trait Elements_Helper
         }
 
         return $pages;
+    }
+
+    /**
+     * This function is responsible for get the post data.
+     * It will return HTML markup with AJAX call and with normal call.
+     *
+     * @return string of an html markup with AJAX call.
+     * @return array of content and found posts count without AJAX call.
+     */
+    function eael_load_more_ajax()
+    {
+        if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
+            $post_args = eael_get_post_settings($_POST);
+            $post_args = array_merge($this->get_query_args('eaeposts', $_POST), $post_args);
+
+            if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
+                $post_args['tax_query']['relation'] = 'OR';
+            }
+        } else {
+            $args = func_get_args();
+            $post_args = $args[0];
+        }
+
+        $posts = new \WP_Query($post_args);
+        /**
+         * For returning all types of post as an array
+         * @return array;
+         */
+        if (isset($post_args['post_style']) && $post_args['post_style'] == 'all_types') {
+            return $posts->posts;
+        }
+
+        $return = array();
+        $return['count'] = $posts->found_posts;
+
+        ob_start();
+
+        while ($posts->have_posts()): $posts->the_post();
+            $isPrinted = false;
+            include(EAEL_PLUGIN_PATH . 'includes/templates/content.php');
+        endwhile;
+        $return['content'] = ob_get_clean();
+        wp_reset_postdata();
+        wp_reset_query();
+        if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
+            echo $return['content'];
+            die();
+        } else {
+            return $return;
+        }
     }
 
 }
