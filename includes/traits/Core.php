@@ -81,7 +81,7 @@ trait Core
         <?php
 }
 
-    public function eae_pro_filter_action_links($links)
+    public function eael_pro_filter_action_links($links)
     {
         if (!function_exists('get_plugins')) {
             include ABSPATH . '/wp-admin/includes/plugin.php';

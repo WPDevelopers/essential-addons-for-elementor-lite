@@ -30,7 +30,7 @@ class Essential_Addons_Elementor
     use Essential_Addons_Elementor\Traits\Admin;
     use Essential_Addons_Elementor\Traits\Helper;
     use Essential_Addons_Elementor\Traits\Elements;
-    
+
     public $registered_elements;
 
     public function __construct()
@@ -99,16 +99,17 @@ class Essential_Addons_Elementor
 
         // Admin
         if (is_admin()) {
+            // Admin
             add_action('admin_init', array($this, 'admin_notice'));
             add_action('admin_menu', array($this, 'admin_menu'), 600);
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
 
-            // Core Helper - Leave them for now
-            add_filter("plugin_action_links_EAEL_PLUGIN_BASENAME", array($this, 'eael_add_settings_link'));
+            // Core
+            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_add_settings_link'));
+            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_pro_filter_action_links'));
             add_action('admin_init', array($this, 'eael_redirect'));
             add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
-            add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', array($this, 'eae_pro_filter_action_links'));
 
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
