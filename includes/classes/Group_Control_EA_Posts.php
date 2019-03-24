@@ -10,7 +10,7 @@ use \Elementor\Group_Control_Base as Group_Control_Base;
 
 class Group_Control_EA_Posts extends Group_Control_Base
 {
-    use \Essential_Addons_Elementor\Traits\Query;
+    use \Essential_Addons_Elementor\Traits\Elements_Helper;
 
     protected static $fields;
 
