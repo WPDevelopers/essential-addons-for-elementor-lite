@@ -17,7 +17,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_WeForms extends Widget_Base {
 
-	use \Essential_Addons_Elementor\Traits\Query;
+	use \Essential_Addons_Elementor\Traits\Elements_Helper;
 	
 	public function get_name() {
 		return 'eael-weform';
