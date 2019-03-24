@@ -85,8 +85,6 @@ trait Generator
 
         }
 
-        // echo '<pre>', var_dump($js_paths), '</pre>';
-
         $minifier = new Minify\JS($js_paths);
         file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.js', $minifier->minify());
 
