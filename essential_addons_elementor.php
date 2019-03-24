@@ -25,6 +25,7 @@ require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 class Essential_Addons_Elementor
 {
     use Essential_Addons_Elementor\Traits\Core;
+    // use Essential_Addons_Elementor\Traits\Ajax;
     use Essential_Addons_Elementor\Traits\Generator;
     use Essential_Addons_Elementor\Traits\Enqueue;
     use Essential_Addons_Elementor\Traits\Admin;
@@ -90,12 +91,11 @@ class Essential_Addons_Elementor
             'feature-list',
         ];
 
+        // define global vars
+        $this->set_global_vars();
+
         // Start plugin tracking
         $this->start_plugin_tracking();
-
-        // Query
-        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
-        add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
 
         // Generator
         add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));
@@ -104,12 +104,14 @@ class Essential_Addons_Elementor
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
 
-        // Elementor Helper
-        add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
-        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
+        // Ajax
+        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
+        add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
 
         // Elements
         add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
+        add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
+        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
 
         if (class_exists('Caldera_Forms')) {
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');

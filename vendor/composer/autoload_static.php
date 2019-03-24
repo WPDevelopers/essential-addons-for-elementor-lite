@@ -83,6 +83,7 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
         'Essential_Addons_Elementor\\Elements\\Eael_WeForms' => __DIR__ . '/../..' . '/elements/Eael_WeForms.php',
         'Essential_Addons_Elementor\\Elements\\Eael_WpForms' => __DIR__ . '/../..' . '/elements/Eael_WpForms.php',
         'Essential_Addons_Elementor\\Traits\\Admin' => __DIR__ . '/../..' . '/includes/traits/Admin.php',
+        'Essential_Addons_Elementor\\Traits\\Ajax' => __DIR__ . '/../..' . '/includes/traits/Ajax.php',
         'Essential_Addons_Elementor\\Traits\\Core' => __DIR__ . '/../..' . '/includes/traits/Core.php',
         'Essential_Addons_Elementor\\Traits\\Elements' => __DIR__ . '/../..' . '/includes/traits/Elements.php',
         'Essential_Addons_Elementor\\Traits\\Elements_Helper' => __DIR__ . '/../..' . '/includes/traits/Elements_Helper.php',
