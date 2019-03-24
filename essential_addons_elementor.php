@@ -28,7 +28,7 @@ class Essential_Addons_Elementor
     use Essential_Addons_Elementor\Traits\Generator;
     use Essential_Addons_Elementor\Traits\Enqueue;
     use Essential_Addons_Elementor\Traits\Admin;
-    use Essential_Addons_Elementor\Traits\Elements_Helper;
+    use Essential_Addons_Elementor\Traits\Helper;
     use Essential_Addons_Elementor\Traits\Elements;
     
     public $registered_elements;
