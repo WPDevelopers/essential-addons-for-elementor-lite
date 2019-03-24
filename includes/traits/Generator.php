@@ -11,17 +11,17 @@ trait Generator
         'fancy-text' => array(
             'assets/front-end/js/vendor/fancy-text/fancy-text.js',
         ),
-        'count-down' => array(
+        'countdown' => array(
             'assets/front-end/js/vendor/countdown/countdown.min.js',
         ),
-        'filter-gallery' => array(
+        'filterable-gallery' => array(
             'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
             'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
         ),
         'post-timeline' => array(
             'assets/front-end/js/vendor/load-more/load-more.js',
         ),
-        'price-table' => array(
+        'pricing-table' => array(
             'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
         ),
         'progress-bar' => array(
@@ -126,6 +126,8 @@ trait Generator
             $elements = array_intersect($this->registered_elements, array_map(function ($val) {
                 return preg_replace('/^eael-/', '', $val);
             }, $elements));
+
+            error_log(print_r($elements, 1));
 
             if ($elements) {
                 $this->generate_scripts($elements, $post_id);

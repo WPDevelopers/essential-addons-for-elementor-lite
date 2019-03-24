@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Background as Group_Control_Background;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Border as Group_Control_Border;
+use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
 
 class Eael_Pricing_Table extends Widget_Base {
 
