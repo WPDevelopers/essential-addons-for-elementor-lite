@@ -71,7 +71,6 @@ trait Generator
         }
 
         if ($this->add_dependency($elements, $js_paths)) {
-            error_log(print_r($this->add_dependency($elements, $js_paths), 1));
             $js_paths[] = $this->add_dependency($elements, $js_paths);
         }
 
