@@ -21,6 +21,18 @@ trait Core
         return $this->registered_elements;
     }
 
+    public function set_global_vars()
+    {
+        $GLOBALS['Essential_Addons_Elementor'] = array(
+            'plugin_basename' => $this->plugin_basename,
+            'plugin_path' => $this->plugin_path,
+            'plugin_url' => $this->plugin_url,
+            'asset_path' => $this->asset_path,
+            'asset_url' => $this->asset_url,
+            'registered_elements' => $this->registered_elements,
+        );
+    }
+
     /**
      * Return saved settings
      *
@@ -79,7 +91,7 @@ trait Core
         });
         </script>
         <?php
-    }
+}
 
     public function eae_pro_filter_action_links($links)
     {
