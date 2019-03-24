@@ -42,7 +42,6 @@ trait Elements
      */
     public function add_eael_elements($widgets_manager)
     {
-
         $elements = [
             [
                 'name' => 'post-grid',
@@ -191,18 +190,17 @@ trait Elements
         ];
 
         $is_component_active = $this->get_settings();
-        $ea_elements = apply_filters('add_eae_element', $elements);
 
-        foreach ($ea_elements as $element) {
+        foreach ($elements as $element) {
             if (isset($element['condition'])) {
                 if (($element['condition'][0]($element['condition'][1])) && $is_component_active[$element['name']]) {
                     $element_class = '\Essential_Addons_Elementor\Elements\\' . $element['class'];
-                    $widgets_manager->register_widget_type(new $element_class(array(), array('Hello')));
+                    $widgets_manager->register_widget_type(new $element_class);
                 }
             } else {
                 if ($is_component_active[$element['name']]) {
                     $element_class = '\Essential_Addons_Elementor\Elements\\' . $element['class'];
-                    $widgets_manager->register_widget_type(new $element_class(array(), array('Hello')));
+                    $widgets_manager->register_widget_type(new $element_class);
                 }
             }
         }
