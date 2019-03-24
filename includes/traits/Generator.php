@@ -66,9 +66,11 @@ trait Generator
         if (!file_exists($this->asset_path)) {
             wp_mkdir_p($this->asset_path);
         }
-
-        $js_paths[] = $this->add_dependency($elements, $js_paths);
-
+        
+        if($this->add_dependency($elements, $js_paths)) {
+            $js_paths[] = $this->add_dependency($elements, $js_paths);
+        }
+        
         foreach ((array) $elements as $element) {
             $js_file = $this->plugin_path . 'assets/front-end/js/' . $element . '/index.js';
             $js_paths[] = $this->plugin_path . 'assets/front-end/js/base.js';
@@ -82,6 +84,8 @@ trait Generator
             }
 
         }
+
+        // echo '<pre>', var_dump($js_paths), '</pre>';
 
         $minifier = new Minify\JS($js_paths);
         file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.js', $minifier->minify());
