@@ -14,10 +14,9 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Utils as Utils;
 use \Essential_Addons_Elementor\Traits\Ajax;
 
-global $Essential_Addons_Elementor;
-
 trait Elements_Helper
 {
+
     /**
      * This function is responsible for get the post data.
      * It will return HTML markup with AJAX call and with normal call.
@@ -55,7 +54,7 @@ trait Elements_Helper
 
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
-            get_template_part($Essential_Addons_Elementor['plugin_path'] . 'includes/templates', 'content');
+            get_template_part(ESSENTIAL_ADDONS_EL_URL . 'includes/templates', 'content');
         endwhile;
         $return['content'] = ob_get_clean();
         wp_reset_postdata();
