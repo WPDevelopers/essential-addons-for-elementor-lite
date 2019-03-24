@@ -21,18 +21,6 @@ trait Core
         return $this->registered_elements;
     }
 
-    public function set_global_vars()
-    {
-        $GLOBALS['Essential_Addons_Elementor'] = array(
-            'plugin_basename' => EAEL_PLUGIN_BASENAME,
-            'plugin_path' => EAEL_PLUGIN_PATH,
-            'plugin_url' => EAEL_PLUGIN_URL,
-            'asset_path' => EAEL_ASSET_PATH,
-            'asset_url' => EAEL_ASSET_URL,
-            'registered_elements' => $this->registered_elements,
-        );
-    }
-
     /**
      * Return saved settings
      *

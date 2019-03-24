@@ -40,7 +40,6 @@ return array(
     'Essential_Addons_Elementor\\Elements\\Eael_WeForms' => $baseDir . '/elements/Eael_WeForms.php',
     'Essential_Addons_Elementor\\Elements\\Eael_WpForms' => $baseDir . '/elements/Eael_WpForms.php',
     'Essential_Addons_Elementor\\Traits\\Admin' => $baseDir . '/includes/traits/Admin.php',
-    'Essential_Addons_Elementor\\Traits\\Ajax' => $baseDir . '/includes/traits/Ajax.php',
     'Essential_Addons_Elementor\\Traits\\Core' => $baseDir . '/includes/traits/Core.php',
     'Essential_Addons_Elementor\\Traits\\Elements' => $baseDir . '/includes/traits/Elements.php',
     'Essential_Addons_Elementor\\Traits\\Elements_Helper' => $baseDir . '/includes/traits/Elements_Helper.php',
