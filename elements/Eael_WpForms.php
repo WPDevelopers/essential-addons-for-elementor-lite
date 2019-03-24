@@ -15,7 +15,7 @@ use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_WpForms extends Widget_Base {
-    use \Essential_Addons_Elementor\Traits\Elements_Helper;
+    use \Essential_Addons_Elementor\Traits\Helper;
     
     public function get_name() {
         return 'eael-wpforms';

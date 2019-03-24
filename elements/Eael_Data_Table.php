@@ -16,7 +16,7 @@ use \Elementor\Utils as Utils;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_Data_Table extends Widget_Base {
-	use \Essential_Addons_Elementor\Traits\Elements_Helper;
+	use \Essential_Addons_Elementor\Traits\Helper;
 
 	public $unique_id = null;
 	public function get_name() {
