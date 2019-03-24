@@ -68,10 +68,10 @@ class Eael_Image_Accordion extends Widget_Base
                 'type' => Controls_Manager::REPEATER,
                 'seperator' => 'before',
                 'default' => [
-                    ['eael_accordion_bg' => ESSENTIAL_ADDONS_EL_URL . 'assets/img/accordion.png'],
-                    ['eael_accordion_bg' => ESSENTIAL_ADDONS_EL_URL . 'assets/img/accordion.png'],
-                    ['eael_accordion_bg' => ESSENTIAL_ADDONS_EL_URL . 'assets/img/accordion.png'],
-                    ['eael_accordion_bg' => ESSENTIAL_ADDONS_EL_URL . 'assets/img/accordion.png'],
+                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . 'front-end/assets/img/accordion.png'],
+                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . 'front-end/assets/img/accordion.png'],
+                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . 'front-end/assets/img/accordion.png'],
+                    ['eael_accordion_bg' => EAEL_PLUGIN_URL . 'front-end/assets/img/accordion.png'],
                 ],
                 'fields' => [
                     [
@@ -80,7 +80,7 @@ class Eael_Image_Accordion extends Widget_Base
                         'type' => Controls_Manager::MEDIA,
                         'label_block' => true,
                         'default' => [
-                            'url' => ESSENTIAL_ADDONS_EL_URL . 'assets/img/accordion.png',
+                            'url' => EAEL_PLUGIN_URL . 'front-end/assets/img/accordion.png',
                         ],
                     ],
                     [

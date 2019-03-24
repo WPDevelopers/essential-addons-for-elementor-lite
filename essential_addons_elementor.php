@@ -32,32 +32,23 @@ class Essential_Addons_Elementor
     use Essential_Addons_Elementor\Traits\Elements_Helper;
     use Essential_Addons_Elementor\Traits\Elements;
 
-    public $plugin_basename;
-    public $plugin_path;
-    public $plugin_url;
-    public $plugin_version;
-    public $wp_upload;
-    public $asset_path;
-    public $asset_url;
+    // public $plugin_basename;
+    // public $plugin_path;
+    // public $plugin_url;
+    // public $plugin_version;
+    // public $wp_upload;
+    // public $asset_path;
+    // public $asset_url;
     public $registered_elements;
 
     public function __construct()
     {
-        define('ESSENTIAL_ADDONS_EL_URL', plugins_url('/', __FILE__));
-
-        $this->plugin_basename = plugin_basename(__FILE__);
-
-        $this->plugin_path = plugin_dir_path(__FILE__);
-
-        $this->plugin_url = plugins_url('/', __FILE__);
-
-        $this->plugin_version = '3.0.0';
-
-        $this->wp_upload = wp_upload_dir();
-
-        $this->asset_path = $this->wp_upload['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor';
-
-        $this->asset_url = $this->wp_upload['baseurl'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor';
+        define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
+        define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
+        define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
+        define('EAEL_PLUGIN_VERSION', '3.0.0');
+        define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
+        define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
 
         $this->registered_elements = [
             'contact-form-7',
@@ -92,7 +83,7 @@ class Essential_Addons_Elementor
         ];
 
         // define global vars
-        $this->set_global_vars();
+        // $this->set_global_vars();
 
         // Start plugin tracking
         $this->start_plugin_tracking();
@@ -125,7 +116,7 @@ class Essential_Addons_Elementor
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
 
             // Core Helper - Leave them for now
-            add_filter("plugin_action_links_$this->plugin_basename", array($this, 'eael_add_settings_link'));
+            add_filter("plugin_action_links_EAEL_PLUGIN_BASENAME", array($this, 'eael_add_settings_link'));
             add_action('admin_init', array($this, 'eael_redirect'));
             add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
             add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', array($this, 'eae_pro_filter_action_links'));
