@@ -197,12 +197,12 @@ trait Elements
             if (isset($element['condition'])) {
                 if (($element['condition'][0]($element['condition'][1])) && $is_component_active[$element['name']]) {
                     $element_class = '\Essential_Addons_Elementor\Elements\\' . $element['class'];
-                    $widgets_manager->register_widget_type(new $element_class);
+                    $widgets_manager->register_widget_type(new $element_class(array(), array('Hello')));
                 }
             } else {
                 if ($is_component_active[$element['name']]) {
                     $element_class = '\Essential_Addons_Elementor\Elements\\' . $element['class'];
-                    $widgets_manager->register_widget_type(new $element_class);
+                    $widgets_manager->register_widget_type(new $element_class(array(), array('Hello')));
                 }
             }
         }
