@@ -34,12 +34,14 @@ trait Enqueue
                 $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael.min.js';
             } else {
                 $js_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+                $this->generate_scripts($this->get_settings());
             }
 
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.css')) {
                 $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael.min.css';
             } else {
                 $css_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+                $this->generate_scripts($this->get_settings());
             }
 
             wp_enqueue_script(
@@ -71,15 +73,15 @@ trait Enqueue
         } else if (is_singular()) {
             $post_id = get_the_ID();
 
-            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $post_id . '.min.js')) {
-                $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . $post_id . '.min.js';
+            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js')) {
+                $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js';
             } else {
                 $js_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
                 $this->generate_post_scripts($post_id);
             }
 
-            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $post_id . '.min.css')) {
-                $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . $post_id . '.min.css';
+            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css')) {
+                $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css';
             } else {
                 $css_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
                 $this->generate_post_scripts($post_id);

@@ -25,10 +25,10 @@ require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 class Essential_Addons_Elementor
 {
     use Essential_Addons_Elementor\Traits\Core;
+    use Essential_Addons_Elementor\Traits\Helper;
     use Essential_Addons_Elementor\Traits\Generator;
     use Essential_Addons_Elementor\Traits\Enqueue;
     use Essential_Addons_Elementor\Traits\Admin;
-    use Essential_Addons_Elementor\Traits\Helper;
     use Essential_Addons_Elementor\Traits\Elements;
 
     public $registered_elements;
@@ -43,37 +43,123 @@ class Essential_Addons_Elementor
         define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
         define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
 
-        // define elements
+        // define elements classmap
         $this->registered_elements = [
-            'contact-form-7',
-            'countdown',
-            'creative-button',
-            'fancy-text',
-            'post-grid',
-            'post-timeline',
-            'product-grid',
-            'team-member',
-            'testimonial',
-            'weform',
-            'cta-box',
-            'flip-box',
-            'info-box',
-            'dual-color-header',
-            'pricing-table',
-            'ninja-form',
-            'gravity-form',
-            'caldera-form',
-            'wpforms',
-            'twitter-feed',
-            'data-table',
-            'filterable-gallery',
-            'image-accordion',
-            'content-ticker',
-            'tooltip',
-            'adv-accordion',
-            'adv-tabs',
-            'progress-bar',
-            'feature-list',
+            'post-grid' => [
+                'class' => 'Eael_Post_Grid',
+            ],
+            'post-timeline' => [
+                'class' => 'Eael_Post_Timeline',
+            ],
+            'fancy-text' => [
+                'class' => 'Eael_Fancy_Text',
+            ],
+            'creative-button' => [
+                'class' => 'Eael_Creative_Button',
+            ],
+            'countdown' => [
+                'class' => 'Eael_Countdown',
+            ],
+            'team-member' => [
+                'class' => 'Eael_Team_Member',
+            ],
+            'testimonial' => [
+                'class' => 'Eael_Testimonial',
+            ],
+            'info-box' => [
+                'class' => 'Eael_Info_Box',
+            ],
+            'flip-box' => [
+                'class' => 'Eael_Flip_Box',
+            ],
+            'cta-box' => [
+                'class' => 'Eael_Cta_Box',
+            ],
+            'dual-color-header' => [
+                'class' => 'Eael_Dual_Color_Header',
+            ],
+            'pricing-table' => [
+                'class' => 'Eael_Pricing_Table',
+            ],
+            'twitter-feed' => [
+                'class' => 'Eael_Twitter_Feed',
+            ],
+            'data-table' => [
+                'class' => 'Eael_Data_Table',
+            ],
+            'filterable-gallery' => [
+                'class' => 'Eael_Filterable_Gallery',
+            ],
+            'image-accordion' => [
+                'class' => 'Eael_Image_Accordion',
+            ],
+            'content-ticker' => [
+                'class' => 'Eael_Content_Ticker',
+            ],
+            'tooltip' => [
+                'class' => 'Eael_Tooltip',
+            ],
+            'adv-accordion' => [
+                'class' => 'Eael_Adv_Accordion',
+            ],
+            'adv-tabs' => [
+                'class' => 'Eael_Adv_Tabs',
+            ],
+            'progress-bar' => [
+                'class' => 'Eael_Progress_Bar',
+            ],
+            'feature-list' => [
+                'class' => 'Eael_Feature_List',
+            ],
+            'product-grid' => [
+                'class' => 'Eael_Product_Grid',
+                'condition' => [
+                    'function_exists',
+                    'WC',
+                ],
+            ],
+            'contact-form-7' => [
+                'class' => 'Eael_Contact_Form_7',
+                'condition' => [
+                    'function_exists',
+                    'wpcf7',
+                ],
+            ],
+            'weform' => [
+                'class' => 'Eael_WeForms',
+                'condition' => [
+                    'function_exists',
+                    'WeForms',
+                ],
+            ],
+            'ninja-form' => [
+                'class' => 'Eael_NinjaForms',
+                'condition' => [
+                    'function_exists',
+                    'Ninja_Forms',
+                ],
+            ],
+            'gravity-form' => [
+                'class' => 'Eael_GravityForms',
+                'condition' => [
+                    'class_exists',
+                    'GFForms',
+                ],
+            ],
+            'caldera-form' => [
+                'class' => 'Eael_Caldera_Forms',
+                'condition' => [
+                    'class_exists',
+                    'Caldera_Forms',
+                ],
+            ],
+            'wpforms' => [
+                'class' => 'Eael_WpForms',
+                'condition' => [
+                    'class_exists',
+                    '\WPForms\WPForms',
+                ],
+            ],
         ];
 
         // Start plugin tracking
@@ -91,7 +177,7 @@ class Essential_Addons_Elementor
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
 
         // Elements
-        add_action('elementor/widgets/widgets_registered', array($this, 'add_eael_elements'));
+        add_action('elementor/widgets/widgets_registered', array($this, 'eael_add_elements'));
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
         add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
 
@@ -118,7 +204,6 @@ class Essential_Addons_Elementor
             }
         }
     }
-
 }
 add_action('plugins_loaded', function () {
     new Essential_Addons_Elementor;
