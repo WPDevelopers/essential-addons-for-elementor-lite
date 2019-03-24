@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -15,7 +15,7 @@ use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_Contact_Form_7 extends Widget_Base {
-    use \EssentialAddonsElementor\Traits\Query;
+    use \Essential_Addons_Elementor\Traits\Query;
     /**
 	 * Retrieve contact form 7 widget name.
 	 *

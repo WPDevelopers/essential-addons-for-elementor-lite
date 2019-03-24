@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialAddonsElementor\Traits;
+namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -13,7 +13,7 @@ use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Utils as Utils;
 
-trait ElementsHelper
+trait Elements_Helper
 {
     /**
      * For Exclude Option

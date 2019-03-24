@@ -5,7 +5,7 @@
  * @version 1.1.2
  */
 
-namespace EssentialAddonsElementor\Classes;
+namespace Essential_Addons_Elementor\Classes;
 
 if (!defined('ABSPATH')) {
     exit;

@@ -1,8 +1,6 @@
-elements/.DS_Store
+.sass-cache
+node_modules
 .DS_Store
 .phpintel
-assets/js/ewr.php
-node_modules
 package-lock.json
-.sass-cache
-/vendor/
+composer.lock

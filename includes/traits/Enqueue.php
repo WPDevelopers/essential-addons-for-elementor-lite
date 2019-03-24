@@ -1,6 +1,6 @@
 <?php
 
-namespace EssentialAddonsElementor\Traits;
+namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit;

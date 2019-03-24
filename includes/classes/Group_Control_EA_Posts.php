@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Classes;
+namespace Essential_Addons_Elementor\Classes;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -10,7 +10,7 @@ use \Elementor\Group_Control_Base as Group_Control_Base;
 
 class Group_Control_EA_Posts extends Group_Control_Base
 {
-    use \EssentialAddonsElementor\Traits\Query;
+    use \Essential_Addons_Elementor\Traits\Query;
 
     protected static $fields;
 

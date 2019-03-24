@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ use \Elementor\Utils as Utils;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_Data_Table extends Widget_Base {
-	use \EssentialAddonsElementor\Traits\Query;
+	use \Essential_Addons_Elementor\Traits\Query;
 
 	public $unique_id = null;
 	public function get_name() {

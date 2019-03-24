@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -17,7 +17,7 @@ use \Elementor\Widget_Base as Widget_Base;
  * Gravity Forms Widget
  */
 class Eael_GravityForm extends Widget_Base {
-    use \EssentialAddonsElementor\Traits\Query;
+    use \Essential_Addons_Elementor\Traits\Query;
     
     /**
 	 * Retrieve gravity forms widget name.
