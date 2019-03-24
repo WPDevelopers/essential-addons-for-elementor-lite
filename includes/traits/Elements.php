@@ -46,7 +46,7 @@ trait Elements
         $elements = [
             [
                 'name' => 'post-grid',
-                'class' => 'Eael_Adv_Accordion',
+                'class' => 'Eael_Post_Grid',
             ],
             [
                 'name' => 'post-timeline',
@@ -57,19 +57,19 @@ trait Elements
                 'class' => 'Eael_Fancy_Text',
             ],
             [
-                'name' => 'creative-btn',
+                'name' => 'creative-button',
                 'class' => 'Eael_Creative_Button',
             ],
             [
-                'name' => 'count-down',
+                'name' => 'countdown',
                 'class' => 'Eael_Countdown',
             ],
             [
-                'name' => 'team-members',
+                'name' => 'team-member',
                 'class' => 'Eael_Team_Member',
             ],
             [
-                'name' => 'testimonials',
+                'name' => 'testimonial',
                 'class' => 'Eael_Testimonial',
             ],
             [
@@ -81,15 +81,15 @@ trait Elements
                 'class' => 'Eael_Flip_Box',
             ],
             [
-                'name' => 'call-to-action',
+                'name' => 'cta-box',
                 'class' => 'Eael_Cta_Box',
             ],
             [
-                'name' => 'dual-header',
+                'name' => 'dual-color-header',
                 'class' => 'Eael_Dual_Color_Header',
             ],
             [
-                'name' => 'price-table',
+                'name' => 'pricing-table',
                 'class' => 'Eael_Pricing_Table',
             ],
             [
@@ -101,7 +101,7 @@ trait Elements
                 'class' => 'Eael_Data_Table',
             ],
             [
-                'name' => 'filter-gallery',
+                'name' => 'filterable-gallery',
                 'class' => 'Eael_Filterable_Gallery',
             ],
             [
@@ -149,7 +149,7 @@ trait Elements
                 ],
             ],
             [
-                'name' => 'weforms',
+                'name' => 'weform',
                 'class' => 'Eael_WeForms',
                 'condition' => [
                     'function_exists',
