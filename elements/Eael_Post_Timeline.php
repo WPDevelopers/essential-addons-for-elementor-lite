@@ -14,7 +14,6 @@ use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
 class Eael_Post_Timeline extends Widget_Base {
-	use \Essential_Addons_Elementor\Traits\Query;
 	use \Essential_Addons_Elementor\Traits\Elements_Helper;
 
 	public function get_name() {

@@ -17,7 +17,7 @@ use \Elementor\Widget_Base as Widget_Base;
  * Gravity Forms Widget
  */
 class Eael_GravityForm extends Widget_Base {
-    use \Essential_Addons_Elementor\Traits\Query;
+    use \Essential_Addons_Elementor\Traits\Elements_Helper;
     
     /**
 	 * Retrieve gravity forms widget name.
