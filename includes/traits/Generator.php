@@ -48,10 +48,10 @@ trait Generator
                 if (isset($this->dependencies[$element])) {
                     if (\is_array($this->dependencies[$element])) {
                         foreach ($this->dependencies[$element] as $path) {
-                            $paths[] = $this->plugin_path . $path;
+                            $paths[] = EAEL_PLUGIN_PATH . $path;
                         }
                     } else {
-                        $paths[] = $this->plugin_path . $this->dependencies[$element];
+                        $paths[] = EAEL_PLUGIN_PATH . $this->dependencies[$element];
                     }
                 }
             }
@@ -63,11 +63,11 @@ trait Generator
     {
         $js_paths = array();
         $css_paths = array(
-            'general' => $this->plugin_path . "assets/front-end/css/general.css",
+            'general' => EAEL_PLUGIN_PATH . "assets/front-end/css/general.css",
         );
 
-        if (!file_exists($this->asset_path)) {
-            wp_mkdir_p($this->asset_path);
+        if (!file_exists(EAEL_ASSET_PATH)) {
+            wp_mkdir_p(EAEL_ASSET_PATH);
         }
 
         if ($this->add_dependency($elements, $js_paths)) {
@@ -75,13 +75,13 @@ trait Generator
         }
 
         foreach ((array) $elements as $element) {
-            $js_file = $this->plugin_path . 'assets/front-end/js/' . $element . '/index.js';
-            $js_paths[] = $this->plugin_path . 'assets/front-end/js/base.js';
+            $js_file = EAEL_PLUGIN_PATH . 'assets/front-end/js/' . $element . '/index.js';
+            $js_paths[] = EAEL_PLUGIN_PATH . 'assets/front-end/js/base.js';
             if (file_exists($js_file)) {
                 $js_paths[] = $js_file;
             }
 
-            $css_file = $this->plugin_path . "assets/front-end/css/$element.css";
+            $css_file = EAEL_PLUGIN_PATH . "assets/front-end/css/$element.css";
             if (file_exists($css_file)) {
                 $css_paths[] = $css_file;
             }
@@ -89,10 +89,10 @@ trait Generator
         }
 
         $minifier = new Minify\JS($js_paths);
-        file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.js', $minifier->minify());
+        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.js', $minifier->minify());
 
         $minifier = new Minify\CSS($css_paths);
-        file_put_contents($this->asset_path . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.css', $minifier->minify());
+        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.css', $minifier->minify());
     }
 
     public function generate_post_scripts($post_id)

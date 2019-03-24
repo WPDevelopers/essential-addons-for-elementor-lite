@@ -30,38 +30,38 @@ trait Enqueue
 
         // My Assets
         if (Plugin::$instance->preview->is_preview_mode()) {
-            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . 'eael.min.js')) {
-                $js_file = $this->asset_url . DIRECTORY_SEPARATOR . 'eael.min.js';
+            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.js')) {
+                $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael.min.js';
             } else {
-                $js_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+                $js_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
             }
 
-            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . 'eael.min.css')) {
-                $css_file = $this->asset_url . DIRECTORY_SEPARATOR . 'eael.min.css';
+            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.css')) {
+                $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael.min.css';
             } else {
-                $css_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+                $css_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
             }
 
             wp_enqueue_script(
                 'eael-backend',
                 $js_file,
                 ['jquery'],
-                $this->plugin_version,
+                EAEL_PLUGIN_VERSION,
                 true
             );
 
             wp_enqueue_style(
                 'eael-editor-css',
-                $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael-editor.css',
+                EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael-editor.css',
                 false,
-                $this->plugin_version
+                EAEL_PLUGIN_VERSION
             );
 
             wp_enqueue_style(
                 'eael-backend',
                 $css_file,
                 false,
-                $this->plugin_version
+                EAEL_PLUGIN_VERSION
             );
 
             // localize script
@@ -71,17 +71,17 @@ trait Enqueue
         } else if (!is_admin() && is_singular()) {
             $post_id = get_the_ID();
 
-            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $post_id . '.min.js')) {
-                $js_file = $this->asset_url . DIRECTORY_SEPARATOR . $post_id . '.min.js';
+            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $post_id . '.min.js')) {
+                $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . $post_id . '.min.js';
             } else {
-                $js_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+                $js_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
                 $this->generate_post_scripts($post_id);
             }
 
-            if (file_exists($this->asset_path . DIRECTORY_SEPARATOR . $post_id . '.min.css')) {
-                $css_file = $this->asset_url . DIRECTORY_SEPARATOR . $post_id . '.min.css';
+            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $post_id . '.min.css')) {
+                $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . $post_id . '.min.css';
             } else {
-                $css_file = $this->plugin_url . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+                $css_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
                 $this->generate_post_scripts($post_id);
             }
 
@@ -89,7 +89,7 @@ trait Enqueue
                 'eael-front-end',
                 $js_file,
                 ['jquery'],
-                $this->plugin_version,
+                EAEL_PLUGIN_VERSION,
                 true
             );
 
@@ -97,7 +97,7 @@ trait Enqueue
                 'eael-front-end',
                 $css_file,
                 false,
-                $this->plugin_version
+                EAEL_PLUGIN_VERSION
             );
 
             // localize script

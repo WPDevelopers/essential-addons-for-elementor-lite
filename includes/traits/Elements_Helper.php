@@ -55,7 +55,7 @@ trait Elements_Helper
 
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
-            get_template_part($Essential_Addons_Elementor['plugin_path'] . 'includes/templates', 'content');
+            get_template_part(EAEL_PLUGIN_PATH . 'includes/templates', 'content');
         endwhile;
         $return['content'] = ob_get_clean();
         wp_reset_postdata();

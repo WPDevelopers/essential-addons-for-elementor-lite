@@ -38,20 +38,20 @@ trait Admin
      */
     public function admin_enqueue_scripts($hook)
     {
-        wp_enqueue_style('essential_addons_elementor-notice-css', $this->plugin_url . '/assets/admin/css/eael-notice.css', false, $this->plugin_version);
+        wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/eael-notice.css', false, EAEL_PLUGIN_VERSION);
 
         if (isset($hook) && $hook == 'plugins.php') {
-            wp_enqueue_style('sweetalert2-css', $this->plugin_url . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, $this->plugin_version);
-            wp_enqueue_script('sweetalert2-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), $this->plugin_version, true);
-            wp_enqueue_script('sweetalert2-core-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), $this->plugin_version, true);
+            wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
+            wp_enqueue_script('sweetalert2-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), EAEL_PLUGIN_VERSION, true);
+            wp_enqueue_script('sweetalert2-core-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
         } // check this
 
         if (isset($hook) && $hook == 'elementor_page_eael-settings') {
-            wp_enqueue_style('essential_addons_elementor-admin-css', $this->plugin_url . '/assets/admin/css/admin.css', false, $this->plugin_version);
-            wp_enqueue_style('sweetalert2-css', $this->plugin_url . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, $this->plugin_version);
-            wp_enqueue_script('sweetalert2-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), $this->plugin_version, true);
-            wp_enqueue_script('sweetalert2-core-js', $this->plugin_url . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), $this->plugin_version, true);
-            wp_enqueue_script('essential_addons_elementor-admin-js', $this->plugin_url . '/assets/admin/js/admin.js', array('jquery'), $this->plugin_version, true);
+            wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);
+            wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
+            wp_enqueue_script('sweetalert2-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), EAEL_PLUGIN_VERSION, true);
+            wp_enqueue_script('sweetalert2-core-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
+            wp_enqueue_script('essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . '/assets/admin/js/admin.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
 
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
@@ -73,7 +73,7 @@ trait Admin
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="' . $this->plugin_url . '/assets/admin/images/ea-logo.svg' . '">
+							<img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/ea-logo.svg' . '">
 						</div>
 						<h2 class="title">' . __('Essential Addons Settings', 'essential-addons-elementor') . '</h2>
 					</div>
@@ -83,15 +83,15 @@ trait Admin
 				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul class="eael-tabs">
-				      	<li><a href="#general" class="active"><img src="' . $this->plugin_url . '/assets/admin/images/icon-settings.svg' . '"><span>General</span></a></li>
-				      	<li><a href="#elements"><img src="' . $this->plugin_url . '/assets/admin/images/icon-modules.svg' . '"><span>Elements</span></a></li>
-						<li><a href="#extensions"><img src="' . $this->plugin_url . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
-						<li><a href="#go-pro"><img src="' . $this->plugin_url . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
+				      	<li><a href="#general" class="active"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg' . '"><span>General</span></a></li>
+				      	<li><a href="#elements"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg' . '"><span>Elements</span></a></li>
+						<li><a href="#extensions"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
+						<li><a href="#go-pro"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
                     </ul>';
-                    include_once $this->plugin_path . 'includes/templates/admin/general.php';
-                    include_once $this->plugin_path . 'includes/templates/admin/elements.php';
-                    include_once $this->plugin_path . 'includes/templates/admin/extensions.php';
-                    include_once $this->plugin_path . 'includes/templates/admin/go-pro.php';
+                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/general.php';
+                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/elements.php';
+                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/extensions.php';
+                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/go-pro.php';
                 echo '</div>
             </form>
         </div>';
@@ -124,7 +124,7 @@ trait Admin
 
     public function admin_notice()
     {
-        $notice = new WPDeveloper_Notice($this->plugin_basename, $this->plugin_version);
+        $notice = new WPDeveloper_Notice(EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION);
         $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
         $url = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
@@ -171,7 +171,7 @@ trait Admin
          * This is review message and thumbnail.
          */
         $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor') . '</p>');
-        $notice->thumbnail('review', plugins_url('assets/admin/images/ea-logo.svg', $this->plugin_basename));
+        $notice->thumbnail('review', plugins_url('assets/admin/images/ea-logo.svg', EAEL_PLUGIN_BASENAME));
 
         /**
          * Current Notice End Time.
