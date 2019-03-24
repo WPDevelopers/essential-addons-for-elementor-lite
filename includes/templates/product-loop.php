@@ -1,6 +1,8 @@
 <?php
 
-defined('ABSPATH') || exit;
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 global $product;
 
@@ -10,6 +12,7 @@ if (empty($product) || !$product->is_visible()) {
 }
 
 ?>
+
 <li <?php wc_product_class('product');?>>
 	<?php if ($grid_layout == 'eael-product-default') {
 		do_action('woocommerce_before_shop_loop_item');
