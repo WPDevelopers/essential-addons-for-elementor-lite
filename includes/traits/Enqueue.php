@@ -68,7 +68,7 @@ trait Enqueue
             wp_localize_script('eael-backend', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
             ));
-        } else if (!is_admin() && is_singular()) {
+        } else if (is_singular()) {
             $post_id = get_the_ID();
 
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $post_id . '.min.js')) {
