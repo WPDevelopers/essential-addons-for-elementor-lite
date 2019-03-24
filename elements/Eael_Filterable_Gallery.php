@@ -1531,7 +1531,7 @@ class Eael_Filterable_Gallery extends Widget_Base {
 				]
 			);
 
-			$this->start_controls_tabs( 'tabs_load_more_button_style' );
+			$this->start_controls_tabs( 'tabs_eael_load_more_button_style' );
 
 			$this->start_controls_tab(
 				'tab_load_more_button_normal',

@@ -44,7 +44,7 @@ return array(
     'Essential_Addons_Elementor\\Traits\\Elements' => $baseDir . '/includes/traits/Elements.php',
     'Essential_Addons_Elementor\\Traits\\Enqueue' => $baseDir . '/includes/traits/Enqueue.php',
     'Essential_Addons_Elementor\\Traits\\Generator' => $baseDir . '/includes/traits/Generator.php',
-    'Essential_Addons_Elementor\\Traits\\Helper' => $baseDir . '/includes/traits/Elements_Helper.php',
+    'Essential_Addons_Elementor\\Traits\\Helper' => $baseDir . '/includes/traits/Helper.php',
     'MatthiasMullie\\Minify\\CSS' => $vendorDir . '/matthiasmullie/minify/src/CSS.php',
     'MatthiasMullie\\Minify\\Exception' => $vendorDir . '/matthiasmullie/minify/src/Exception.php',
     'MatthiasMullie\\Minify\\Exceptions\\BasicException' => $vendorDir . '/matthiasmullie/minify/src/Exceptions/BasicException.php',

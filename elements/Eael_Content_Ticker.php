@@ -85,7 +85,7 @@ class Eael_Content_Ticker extends Widget_Base {
 		 * Query Controls
 		 * @source includes/elementor-helper.php
 		 */
-		$this->query_controls();
+		$this->eael_query_controls();
 
 
 		/**
@@ -683,7 +683,7 @@ class Eael_Content_Ticker extends Widget_Base {
 		 */
 		$settings['post_style'] = 'ticker';
 		$post_args = $this->eael_get_post_settings( $settings );
-		$query_args = $this->get_query_args( 'eaeposts', $this->get_settings() );
+		$query_args = $this->eael_get_query_args( 'eaeposts', $this->get_settings() );
 		$query_args = array_merge( $query_args, $post_args );
 		/**
 		 * Get posts from database.

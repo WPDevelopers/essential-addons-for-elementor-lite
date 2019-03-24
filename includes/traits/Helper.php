@@ -14,31 +14,54 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Utils as Utils;
 
 trait Helper
-{    
+{
     /**
-     * For Exclude Option
+     * For All Settings Key Need To Display
+     *
      */
-    public function add_exclude_controls()
-    {
-        $this->add_control(
-            'post__not_in',
-            [
-                'label' => __('Exclude', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => $this->eael_get_all_types_post(),
-                'label_block' => true,
-                'post_type' => '',
-                'multiple' => true,
-                'condition' => [
-                    'eaeposts_post_type!' => 'by_id',
-                ],
-            ]
-        );
-    }
+    public $post_args = array(
+        // content ticker
+        'eael_ticker_type',
+        'eael_ticker_custom_contents',
 
-    protected function query_controls()
-    {
+        // post grid
+        'eael_post_grid_columns',
 
+        // common
+        'meta_position',
+        'eael_show_meta',
+        'image_size',
+        'eael_show_image',
+        'eael_show_title',
+        'eael_show_excerpt',
+        'eael_excerpt_length',
+        'eael_show_read_more',
+        'eael_read_more_text',
+        'show_load_more',
+        'show_load_more_text',
+        'eael_post_grid_bg_hover_icon',
+
+        // query_args
+        'post_type',
+        'post__in',
+        'posts_per_page',
+        'post_style',
+        'tax_query',
+        'post__not_in',
+        'eael_post_authors',
+        'eaeposts_authors',
+        'offset',
+        'orderby',
+        'order',
+        'eael_post_grid_hover_animation',
+    );
+
+    /**
+     * Query Controls
+     *
+     */
+    protected function eael_query_controls()
+    {
         if ('eael-content-ticker' === $this->get_name()) {
             $this->start_controls_section(
                 'eael_section_content_ticker_filters',
@@ -79,7 +102,20 @@ trait Helper
             ]
         );
 
-        $this->add_exclude_controls();
+        $this->add_control(
+            'post__not_in',
+            [
+                'label' => __('Exclude', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_get_all_types_post(),
+                'label_block' => true,
+                'post_type' => '',
+                'multiple' => true,
+                'condition' => [
+                    'eaeposts_post_type!' => 'by_id',
+                ],
+            ]
+        );
 
         $this->add_control(
             'posts_per_page',
@@ -125,47 +161,14 @@ trait Helper
         );
 
         $this->end_controls_section();
-
     }
 
     /**
-     * Go Premium
+     * Layout Controls For Post Block
+     *
      */
-    protected function eae_go_premium()
+    protected function eael_layout_controls()
     {
-        $this->start_controls_section(
-            'eael_section_pro',
-            [
-                'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
-            ]
-        );
-
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    '1' => [
-                        'title' => __('', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-unlock-alt',
-                    ],
-                ],
-                'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
-            ]
-        );
-
-        $this->end_controls_section();
-    }
-
-    /**
-     * Layout Controls For All Post Block!
-     * if needed!
-     */
-    protected function layout_controls()
-    {
-
         $this->start_controls_section(
             'eael_section_post_timeline_layout',
             [
@@ -490,16 +493,14 @@ trait Helper
         }
 
         $this->end_controls_section();
-
     }
 
     /**
      * Load More Button Style
-     * with Hover!
+     *
      */
-    protected function load_more_button_style()
+    protected function eael_load_more_button_style()
     {
-
         $this->start_controls_section(
             'eael_section_load_more_btn',
             [
@@ -684,10 +685,41 @@ trait Helper
         );
 
         $this->end_controls_section();
-
     }
 
-    public function get_query_args($control_id, $settings)
+    /**
+     * Go Premium
+     *
+     */
+    protected function eael_go_premium()
+    {
+        $this->start_controls_section(
+            'eael_section_pro',
+            [
+                'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_control_get_pro',
+            [
+                'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    '1' => [
+                        'title' => __('', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-unlock-alt',
+                    ],
+                ],
+                'default' => '1',
+                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function eael_get_query_args($control_id, $settings)
     {
         $defaults = [
             $control_id . '_post_type' => 'post',
@@ -756,55 +788,11 @@ trait Helper
         return $query_args;
     }
 
-
-
-
-    /**
-     * For All Settings Key Need To Display
-     *
-     * @return array
-     */
-    public $post_args = array(
-        // for content-ticker
-        'eael_ticker_type',
-        'eael_ticker_custom_contents',
-
-        'eael_post_grid_columns',
-
-        // common
-        'meta_position',
-        'eael_show_meta',
-        'image_size',
-        'eael_show_image',
-        'eael_show_title',
-        'eael_show_excerpt',
-        'eael_excerpt_length',
-        'eael_show_read_more',
-        'eael_read_more_text',
-        'show_load_more',
-        'show_load_more_text',
-        'eael_post_grid_bg_hover_icon',
-
-        // query_args
-        'post_type',
-        'post__in',
-        'posts_per_page',
-        'post_style',
-        'tax_query',
-        'post__not_in',
-        'eael_post_authors',
-        'eaeposts_authors',
-        'offset',
-        'orderby',
-        'order',
-        'eael_post_grid_hover_animation',
-    );
-
     /**
      * Get All POst Types
      * @return array
      */
-    function eael_get_post_types()
+    public function eael_get_post_types()
     {
         $eael_cpts = get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'object');
         $eael_exclude_cpts = array('elementor_library', 'attachment');
@@ -824,7 +812,7 @@ trait Helper
      * Get all types of post.
      * @return array
      */
-    function eael_get_all_types_post()
+    public function eael_get_all_types_post()
     {
         $posts_args = array(
             'post_type' => 'any',
@@ -842,12 +830,13 @@ trait Helper
 
         return $post_list;
     }
+
     /**
      * Post Settings Parameter
      * @param  array $settings
      * @return array
      */
-    function eael_get_post_settings($settings)
+    public function eael_get_post_settings($settings)
     {
         foreach ($settings as $key => $value) {
             if (in_array($key, $this->post_args)) {
@@ -867,7 +856,7 @@ trait Helper
      * @param  int $excerpt_length
      * @return string
      */
-    function eael_get_excerpt_by_id($post_id, $excerpt_length)
+    public function eael_get_excerpt_by_id($post_id, $excerpt_length)
     {
         $the_post = get_post($post_id); //Gets post ID
 
@@ -890,9 +879,10 @@ trait Helper
 
     /**
      * Get Post Thumbnail Size
+     *
      * @return array
      */
-    function eael_get_thumbnail_sizes()
+    public function eael_get_thumbnail_sizes()
     {
         $sizes = get_intermediate_image_sizes();
         foreach ($sizes as $s) {
@@ -904,9 +894,10 @@ trait Helper
 
     /**
      * POst Orderby Options
+     *
      * @return array
      */
-    function eael_get_post_orderby_options()
+    public function eael_get_post_orderby_options()
     {
         $orderby = array(
             'ID' => 'Post ID',
@@ -925,9 +916,10 @@ trait Helper
 
     /**
      * Get Post Categories
+     *
      * @return array
      */
-    function eael_post_type_categories()
+    public function eael_post_type_categories()
     {
         $terms = get_terms(array(
             'taxonomy' => 'category',
@@ -945,9 +937,10 @@ trait Helper
 
     /**
      * WooCommerce Product Query
+     *
      * @return array
      */
-    function eael_woocommerce_product_categories()
+    public function eael_woocommerce_product_categories()
     {
         $terms = get_terms(array(
             'taxonomy' => 'product_cat',
@@ -964,9 +957,10 @@ trait Helper
 
     /**
      * WooCommerce Get Product By Id
+     *
      * @return array
      */
-    function eael_woocommerce_product_get_product_by_id()
+    public function eael_woocommerce_product_get_product_by_id()
     {
         $postlist = get_posts(array(
             'post_type' => 'product',
@@ -985,9 +979,10 @@ trait Helper
 
     /**
      * WooCommerce Get Product Category By Id
+     *
      * @return array
      */
-    function eael_woocommerce_product_categories_by_id()
+    public function eael_woocommerce_product_categories_by_id()
     {
         $terms = get_terms(array(
             'taxonomy' => 'product_cat',
@@ -1006,10 +1001,10 @@ trait Helper
     /**
      * Get Contact Form 7 [ if exists ]
      */
-    function eael_select_contact_form()
+    public function eael_select_contact_form()
     {
-
         $options = array();
+
         if (function_exists('wpcf7')) {
             $wpcf7_form_list = get_posts(array(
                 'post_type' => 'wpcf7_contact_form',
@@ -1029,10 +1024,13 @@ trait Helper
 
     /**
      * Get Gravity Form [ if exists ]
+     *
+     * @return array
      */
-    function eael_select_gravity_form()
+    public function eael_select_gravity_form()
     {
         $options = array();
+
         if (class_exists('GFCommon')) {
             $gravity_forms = RGFormsModel::get_forms(null, 'title');
 
@@ -1053,11 +1051,11 @@ trait Helper
 
     /**
      * Get WeForms Form List
+     *
      * @return array
      */
-    function eael_select_weform()
+    public function eael_select_weform()
     {
-
         $wpuf_form_list = get_posts(array(
             'post_type' => 'wpuf_contact_form',
             'showposts' => 999,
@@ -1079,11 +1077,13 @@ trait Helper
 
     /**
      * Get Ninja Form List
+     *
      * @return array
      */
-    function eael_select_ninja_form()
+    public function eael_select_ninja_form()
     {
         $options = array();
+
         if (class_exists('Ninja_Forms')) {
             $contact_forms = Ninja_Forms()->form()->get_forms();
 
@@ -1104,13 +1104,14 @@ trait Helper
 
     /**
      * Get Caldera Form List
+     *
      * @return array
      */
-    function eael_select_caldera_form()
+    public function eael_select_caldera_form()
     {
         $options = array();
-        if (class_exists('Caldera_Forms')) {
 
+        if (class_exists('Caldera_Forms')) {
             $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
@@ -1128,13 +1129,14 @@ trait Helper
 
     /**
      * Get WPForms List
+     *
      * @return array
      */
-    function eael_select_wpforms_forms()
+    public function eael_select_wpforms_forms()
     {
         $options = array();
-        if (class_exists('\WPForms\WPForms')) {
 
+        if (class_exists('\WPForms\WPForms')) {
             $args = array(
                 'post_type' => 'wpforms',
                 'posts_per_page' => -1,
@@ -1155,8 +1157,12 @@ trait Helper
         return $options;
     }
 
-    // Get all elementor page templates
-    function eael_get_page_templates()
+    /**
+     * Get all elementor page templates
+     *
+     * @return array
+     */
+    public function eael_get_page_templates()
     {
         $page_templates = get_posts(array(
             'post_type' => 'elementor_library',
@@ -1173,12 +1179,14 @@ trait Helper
         return $options;
     }
 
-    // Get all Authors
-    function eael_get_authors()
+    /**
+     * Get all Authors
+     *
+     * @return array
+     */
+    public function eael_get_authors()
     {
-
         $options = array();
-
         $users = get_users();
 
         if ($users) {
@@ -1190,12 +1198,14 @@ trait Helper
         return $options;
     }
 
-    // Get all Authors
-    function eael_get_tags()
+    /**
+     * Get all Tags
+     *
+     * @return array
+     */
+    public function eael_get_tags()
     {
-
         $options = array();
-
         $tags = get_tags();
 
         foreach ($tags as $tag) {
@@ -1205,10 +1215,13 @@ trait Helper
         return $options;
     }
 
-    // Get all Posts
-    function eael_get_posts()
+    /**
+     * Get all Posts
+     *
+     * @return array
+     */
+    public function eael_get_posts()
     {
-
         $post_list = get_posts(array(
             'post_type' => 'post',
             'orderby' => 'date',
@@ -1227,10 +1240,13 @@ trait Helper
         return $posts;
     }
 
-    // Get all Pages
-    function eael_get_pages()
+    /**
+     * Get all Pages
+     *
+     * @return array
+     */
+    public function eael_get_pages()
     {
-
         $page_list = get_posts(array(
             'post_type' => 'page',
             'orderby' => 'date',
@@ -1256,11 +1272,11 @@ trait Helper
      * @return string of an html markup with AJAX call.
      * @return array of content and found posts count without AJAX call.
      */
-    function eael_load_more_ajax()
+    public function eael_load_more_ajax()
     {
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
             $post_args = eael_get_post_settings($_POST);
-            $post_args = array_merge($this->get_query_args('eaeposts', $_POST), $post_args);
+            $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args);
 
             if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
                 $post_args['tax_query']['relation'] = 'OR';
@@ -1271,6 +1287,7 @@ trait Helper
         }
 
         $posts = new \WP_Query($post_args);
+
         /**
          * For returning all types of post as an array
          * @return array;
@@ -1285,15 +1302,16 @@ trait Helper
         ob_start();
 
         while ($posts->have_posts()): $posts->the_post();
-            $isPrinted = false;
-            include(EAEL_PLUGIN_PATH . 'includes/templates/content.php');
+            include EAEL_PLUGIN_PATH . 'includes/templates/content.php';
         endwhile;
+
         $return['content'] = ob_get_clean();
+
         wp_reset_postdata();
         wp_reset_query();
+
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            echo $return['content'];
-            die();
+            wp_send_json($return['content']);
         } else {
             return $return;
         }
