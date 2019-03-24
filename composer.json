@@ -7,10 +7,10 @@
     },
     "autoload": {
         "psr-4": {
-            "EssentialAddonsElementor\\Admin\\": "admin",
-            "EssentialAddonsElementor\\Classes\\": "includes/classes/",
-            "EssentialAddonsElementor\\Traits\\": "includes/traits/",
-            "EssentialAddonsElementor\\Elements\\": "elements/"
+            "Essential_Addons_Elementor\\Admin\\": "admin",
+            "Essential_Addons_Elementor\\Classes\\": "includes/classes/",
+            "Essential_Addons_Elementor\\Traits\\": "includes/traits/",
+            "Essential_Addons_Elementor\\Elements\\": "elements/"
         }
     },
     "require": {

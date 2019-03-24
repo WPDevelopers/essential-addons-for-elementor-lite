@@ -1,12 +1,12 @@
 <?php
 
-namespace EssentialAddonsElementor\Traits;
+namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit();
 } // Exit if accessed directly
 
-use EssentialAddonsElementor\Classes\Group_Control_EA_Posts as Group_Control_EA_Posts;
+use Essential_Addons_Elementor\Classes\Group_Control_EA_Posts as Group_Control_EA_Posts;
 
 trait Elements
 {
@@ -196,12 +196,12 @@ trait Elements
         foreach ($ea_elements as $element) {
             if (isset($element['condition'])) {
                 if (($element['condition'][0]($element['condition'][1])) && $is_component_active[$element['name']]) {
-                    $element_class = '\EssentialAddonsElementor\Elements\\' . $element['class'];
+                    $element_class = '\Essential_Addons_Elementor\Elements\\' . $element['class'];
                     $widgets_manager->register_widget_type(new $element_class);
                 }
             } else {
                 if ($is_component_active[$element['name']]) {
-                    $element_class = '\EssentialAddonsElementor\Elements\\' . $element['class'];
+                    $element_class = '\Essential_Addons_Elementor\Elements\\' . $element['class'];
                     $widgets_manager->register_widget_type(new $element_class);
                 }
             }

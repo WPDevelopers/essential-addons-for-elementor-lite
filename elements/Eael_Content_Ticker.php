@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -15,8 +15,8 @@ use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_Content_Ticker extends Widget_Base {
-	use \EssentialAddonsElementor\Traits\Query;
-	use \EssentialAddonsElementor\Traits\ElementsHelper;
+	use \Essential_Addons_Elementor\Traits\Query;
+	use \Essential_Addons_Elementor\Traits\Elements_Helper;
 
 	public function get_name() {
 		return 'eael-content-ticker';

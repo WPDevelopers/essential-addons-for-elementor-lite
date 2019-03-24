@@ -1,13 +1,13 @@
 <?php
 
-namespace EssentialAddonsElementor\Traits;
+namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 // Exit if accessed directly
 
-use \EssentialAddonsElementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tracker;
+use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tracker;
 
 trait Core
 {

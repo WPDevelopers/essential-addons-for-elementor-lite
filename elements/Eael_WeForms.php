@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -17,7 +17,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 
 class Eael_WeForms extends Widget_Base {
 
-	use \EssentialAddonsElementor\Traits\Query;
+	use \Essential_Addons_Elementor\Traits\Query;
 	
 	public function get_name() {
 		return 'eael-weform';

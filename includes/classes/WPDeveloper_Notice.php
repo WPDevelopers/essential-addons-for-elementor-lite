@@ -1,11 +1,11 @@
 <?php
-namespace EssentialAddonsElementor\Classes;
+namespace Essential_Addons_Elementor\Classes;
 
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly.
 
-use EssentialAddonsElementor\Classes\WPDeveloper_Core_Installer;
+use Essential_Addons_Elementor\Classes\WPDeveloper_Core_Installer;
 
 class WPDeveloper_Notice {
     /**

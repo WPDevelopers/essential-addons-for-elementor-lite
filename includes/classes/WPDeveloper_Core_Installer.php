@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Classes;
+namespace Essential_Addons_Elementor\Classes;
 
 if (!defined('ABSPATH')) {
     exit;

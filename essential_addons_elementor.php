@@ -22,15 +22,14 @@ if (!defined('ABSPATH')) {
  */
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
-class EssentialAddonsElementor
+class Essential_Addons_Elementor
 {
-    use EssentialAddonsElementor\Traits\Core;
-    use EssentialAddonsElementor\Traits\Ajax;
-    use EssentialAddonsElementor\Traits\Generator;
-    use EssentialAddonsElementor\Traits\Enqueue;
-    use EssentialAddonsElementor\Traits\Admin;
-    use EssentialAddonsElementor\Traits\ElementsHelper;
-    use EssentialAddonsElementor\Traits\Elements;
+    use Essential_Addons_Elementor\Traits\Core;
+    use Essential_Addons_Elementor\Traits\Generator;
+    use Essential_Addons_Elementor\Traits\Enqueue;
+    use Essential_Addons_Elementor\Traits\Admin;
+    use Essential_Addons_Elementor\Traits\Elements_Helper;
+    use Essential_Addons_Elementor\Traits\Elements;
 
     public $plugin_basename;
     public $plugin_path;
@@ -137,7 +136,7 @@ class EssentialAddonsElementor
 
 }
 add_action('plugins_loaded', function () {
-    new EssentialAddonsElementor;
+    new Essential_Addons_Elementor;
 });
 
 /**

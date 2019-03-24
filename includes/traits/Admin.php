@@ -1,12 +1,12 @@
 <?php
-namespace EssentialAddonsElementor\Traits;
+namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit();
 }
 // Exit if accessed directly
 
-use EssentialAddonsElementor\Classes\WPDeveloper_Notice;
+use Essential_Addons_Elementor\Classes\WPDeveloper_Notice;
 
 trait Admin
 {
@@ -88,13 +88,38 @@ trait Admin
 						<li><a href="#extensions"><img src="' . $this->plugin_url . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
 						<li><a href="#go-pro"><img src="' . $this->plugin_url . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
                     </ul>';
-        include_once $this->plugin_path . 'includes/templates/admin/general.php';
-        include_once $this->plugin_path . 'includes/templates/admin/elements.php';
-        include_once $this->plugin_path . 'includes/templates/admin/extensions.php';
-        include_once $this->plugin_path . 'includes/templates/admin/go-pro.php';
-        echo '</div>
+                    include_once $this->plugin_path . 'includes/templates/admin/general.php';
+                    include_once $this->plugin_path . 'includes/templates/admin/elements.php';
+                    include_once $this->plugin_path . 'includes/templates/admin/extensions.php';
+                    include_once $this->plugin_path . 'includes/templates/admin/go-pro.php';
+                echo '</div>
             </form>
         </div>';
+    }
+
+    /**
+     * Saving data with ajax request
+     * @param
+     * @return  array
+     * @since 1.1.2
+     */
+    public function save_settings()
+    {
+        check_ajax_referer('essential-addons-elementor', 'security');
+
+        if (!isset($_POST['fields'])) {
+            return;
+        }
+
+        parse_str($_POST['fields'], $settings);
+
+        // update new settings
+        $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
+
+        // Build assets files
+        do_action('eael_generate_editor_scripts', array_keys($settings));
+
+        wp_send_json($updated);
     }
 
     public function admin_notice()
@@ -146,7 +171,7 @@ trait Admin
          * This is review message and thumbnail.
          */
         $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor') . '</p>');
-        $notice->thumbnail('review', plugins_url('admin/assets/images/ea-logo.svg', $this->plugin_basename));
+        $notice->thumbnail('review', plugins_url('assets/admin/images/ea-logo.svg', $this->plugin_basename));
 
         /**
          * Current Notice End Time.

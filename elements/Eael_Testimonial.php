@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {

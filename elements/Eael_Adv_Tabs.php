@@ -1,5 +1,5 @@
 <?php
-namespace EssentialAddonsElementor\Elements;
+namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -15,7 +15,7 @@ use \Elementor\Utils as Utils;
 
 class Eael_Adv_Tabs extends Widget_Base
 {
-    use \EssentialAddonsElementor\Traits\Query;
+    use \Essential_Addons_Elementor\Traits\Query;
 
     public function get_name()
     {
