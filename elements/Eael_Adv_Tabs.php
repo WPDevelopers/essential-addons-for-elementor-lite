@@ -15,7 +15,7 @@ use \Elementor\Utils as Utils;
 
 class Eael_Adv_Tabs extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Elements_Helper;
+    use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {

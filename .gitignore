@@ -4,3 +4,4 @@ node_modules
 .phpintel
 package-lock.json
 composer.lock
+vendor
