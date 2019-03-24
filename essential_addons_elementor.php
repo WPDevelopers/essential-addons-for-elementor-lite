@@ -35,6 +35,7 @@ class Essential_Addons_Elementor
 
     public function __construct()
     {
+        // define plugins constants
         define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
         define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
         define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
@@ -42,6 +43,7 @@ class Essential_Addons_Elementor
         define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
         define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
 
+        // define elements
         $this->registered_elements = [
             'contact-form-7',
             'countdown',
@@ -127,8 +129,6 @@ add_action('plugins_loaded', function () {
  *
  * @since v1.0.0
  */
-function eael_activate()
-{
+register_activation_hook(__FILE__, function () {
     update_option('eael_do_activation_redirect', true);
-}
-register_activation_hook(__FILE__, 'eael_activate');
+});
