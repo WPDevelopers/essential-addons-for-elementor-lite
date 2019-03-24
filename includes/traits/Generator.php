@@ -48,10 +48,10 @@ trait Generator
                 if (isset($this->dependencies[$element])) {
                     if (\is_array($this->dependencies[$element])) {
                         foreach ($this->dependencies[$element] as $path) {
-                            $paths[] = $path;
+                            $paths[] = $this->plugin_path . $path;
                         }
                     } else {
-                        $paths[] = $this->dependencies[$element];
+                        $paths[] = $this->plugin_path . $this->dependencies[$element];
                     }
                 }
             }
@@ -71,6 +71,7 @@ trait Generator
         }
 
         if ($this->add_dependency($elements, $js_paths)) {
+            error_log(print_r($this->add_dependency($elements, $js_paths), 1));
             $js_paths[] = $this->add_dependency($elements, $js_paths);
         }
 
