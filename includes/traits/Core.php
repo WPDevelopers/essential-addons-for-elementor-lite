@@ -18,7 +18,7 @@ trait Core
      */
     public function get_registered_elements()
     {
-        return $this->registered_elements;
+        return array_keys($this->registered_elements);
     }
 
     /**
@@ -28,9 +28,9 @@ trait Core
      */
     public function get_settings($element = null)
     {
-        $elements = get_option('eael_save_settings', array_fill_keys($this->registered_elements, true));
+        $elements = get_option('eael_save_settings', array_fill_keys(array_keys($this->registered_elements), true));
 
-        return (isset($element) ? $elements[$element] : $elements);
+        return (isset($element) ? $elements[$element] : array_keys(array_filter($elements)));
     }
 
     /**
