@@ -50,7 +50,7 @@ class Essential_Addons_Elementor
 
         $this->plugin_url = plugins_url('/', __FILE__);
 
-        $this->plugin_version = '2.9.8';
+        $this->plugin_version = '3.0.0';
 
         $this->wp_upload = wp_upload_dir();
 
