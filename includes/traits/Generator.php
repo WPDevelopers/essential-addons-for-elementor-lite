@@ -58,7 +58,7 @@ trait Generator
         foreach ($elements as $element) {
             if (isset($this->dependencies[$element])) {
                 foreach ($this->dependencies[$element] as $path) {
-                    $paths[] = EAEL_PLUGIN_PATH . $path;
+                    $paths[] = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . $path;
                 }
             }
         }
