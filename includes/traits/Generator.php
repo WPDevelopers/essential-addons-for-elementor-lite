@@ -56,6 +56,9 @@ trait Generator
     public $css_dependencies = [
         'post-grid' => [
             'assets/front-end/css/product-grid.css'
+        ],
+        'product-grid' => [
+            'assets/front-end/css/product-grid.css'
         ]
     ];
 
@@ -67,7 +70,6 @@ trait Generator
     public function add_dependency(array $elements, array $deps)
     {
         $paths = [];
-
         foreach ($elements as $element) {
             if (isset($deps[$element])) {
                 foreach ($deps[$element] as $path) {
@@ -75,7 +77,6 @@ trait Generator
                 }
             }
         }
-        
         return array_unique($paths);
     }
 
@@ -113,8 +114,6 @@ trait Generator
             $css_paths = array_merge($css_paths, $this->add_dependency($elements, $this->css_dependencies));
         }
 
-        error_log(print_r($css_paths, 1));
-
         foreach ((array) $elements as $element) {
             $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
             if (file_exists($js_file)) {
@@ -147,10 +146,13 @@ trait Generator
         if (!empty($post_data)) {
             $sections = json_decode($post_data[0]);
 
+            
+
             foreach ((array) $sections as $section) {
                 foreach ((array) $section->elements as $element) {
                     foreach ((array) $element->elements as $widget) {
                         if (@$widget->widgetType) {
+                            $widget->widgetType = ($widget->widgetType == 'eicon-woocommerce') ? 'product-grid' : $widget->widgetType; 
                             $elements[] = $widget->widgetType;
                         } else {
                             foreach ((array) $widget as $inner_section) {
