@@ -56,6 +56,9 @@ trait Generator
     public $css_dependencies = [
         'post-grid' => [
             'assets/front-end/css/product-grid.css'
+        ],
+        'filterable-gallery' => [
+            'assets/front-end/css/magnific-popup.css'
         ]
     ];
 
@@ -112,8 +115,6 @@ trait Generator
         if ($this->add_dependency($elements, $this->css_dependencies)) {
             $css_paths = array_merge($css_paths, $this->add_dependency($elements, $this->css_dependencies));
         }
-
-        error_log(print_r($css_paths, 1));
 
         foreach ((array) $elements as $element) {
             $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
