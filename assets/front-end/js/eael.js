@@ -2407,7 +2407,6 @@
             hover_animation: settings.hover_animation,
             hover_icon: settings.hover_icon
         };
-
         var offset = settingsValue.offset + settingsValue.perPage;
         optionsValue.loadMoreBtn.on("click", function(e) {
             e.preventDefault();
