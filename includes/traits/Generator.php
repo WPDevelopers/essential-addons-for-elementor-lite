@@ -14,7 +14,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public $dependencies = array(
+    public $js_dependencies = array(
         'fancy-text' => array(
             'assets/front-end/js/vendor/fancy-text/fancy-text.js',
         ),
@@ -49,19 +49,33 @@ trait Generator
     );
 
     /**
+     * Define css dependencies
+     * 
+     * @since 3.0.0
+     */
+    public $css_dependencies = [
+        'post-grid' => [
+            'assets/front-end/css/product-grid.css'
+        ]
+    ];
+
+    /**
      * Collect dependencies for modules
      *
      * @since 3.0.0
      */
-    public function add_dependency(array $elements, array $paths)
+    public function add_dependency(array $elements, array $deps)
     {
+        $paths = [];
+
         foreach ($elements as $element) {
-            if (isset($this->dependencies[$element])) {
-                foreach ($this->dependencies[$element] as $path) {
+            if (isset($deps[$element])) {
+                foreach ($deps[$element] as $path) {
                     $paths[] = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . $path;
                 }
             }
         }
+        
         return array_unique($paths);
     }
 
@@ -90,9 +104,16 @@ trait Generator
         );
 
         // collect library scripts
-        if ($this->add_dependency($elements, $js_paths)) {
-            $js_paths[] = $this->add_dependency($elements, $js_paths);
+        if ($this->add_dependency($elements, $this->js_dependencies)) {
+            $js_paths = array_merge($js_paths, $this->add_dependency($elements, $this->js_dependencies));
         }
+
+        // collect library styles
+        if ($this->add_dependency($elements, $this->css_dependencies)) {
+            $css_paths[] = $this->add_dependency($elements, $this->css_dependencies);
+        }
+
+        // error_log(print_r($css_paths, 1));
 
         foreach ((array) $elements as $element) {
             $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
