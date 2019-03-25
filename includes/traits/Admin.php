@@ -88,10 +88,10 @@ trait Admin
 						<li><a href="#extensions"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
 						<li><a href="#go-pro"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
                     </ul>';
-                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/general.php';
-                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/elements.php';
-                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/extensions.php';
-                    include_once EAEL_PLUGIN_PATH . 'includes/templates/admin/go-pro.php';
+                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
                 echo '</div>
             </form>
         </div>';
