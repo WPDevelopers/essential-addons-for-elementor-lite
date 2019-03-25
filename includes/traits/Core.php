@@ -142,7 +142,7 @@ trait Core
     public function start_plugin_tracking()
     {
         $wpins = new Plugin_Usage_Tracker(
-            __FILE__,
+            EAEL_PLUGIN_FILE,
             'http://app.wpdeveloper.net',
             array(),
             true,
