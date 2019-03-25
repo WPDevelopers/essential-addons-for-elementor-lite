@@ -7533,16 +7533,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
             transform: none;
   }
 }
-.elementor-section.eael-particles-section .elementor-container,
-.elementor-section .elementor-container {
-  z-index: 99;
-}
-
-.elementor-section.eael-particles-section > canvas {
-  position: absolute;
-  top: 0;
-}
-
 /*----------------------------*/
 /* 35. Feature List
 /*----------------------------*/
