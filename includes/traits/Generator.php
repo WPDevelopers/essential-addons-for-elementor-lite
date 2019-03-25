@@ -167,8 +167,8 @@ trait Generator
             }
             
             $elements = array_map(function($val) {
-                ($val == 'eicon-woocommerce' ? 'product-grid' : $val);
-            });
+                return ($val == 'eicon-woocommerce' ? 'product-grid' : $val);
+            }, $elements);
 
             $elements = array_intersect(array_keys($this->registered_elements), array_map(function ($val) {
                 return preg_replace('/^eael-/', '', $val);
