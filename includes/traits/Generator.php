@@ -57,8 +57,8 @@ trait Generator
         'post-grid' => [
             'assets/front-end/css/product-grid.css'
         ],
-        'product-grid' => [
-            'assets/front-end/css/product-grid.css'
+        'filterable-gallery' => [
+            'assets/front-end/css/magnific-popup.css'
         ]
     ];
 
@@ -145,7 +145,7 @@ trait Generator
 
         if (!empty($post_data)) {
             $sections = json_decode($post_data[0]);
-            
+
             foreach ((array) $sections as $section) {
                 foreach ((array) $section->elements as $element) {
                     foreach ((array) $element->elements as $widget) {
