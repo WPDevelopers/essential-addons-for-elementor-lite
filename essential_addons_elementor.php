@@ -36,6 +36,7 @@ class Essential_Addons_Elementor
     public function __construct()
     {
         // define plugins constants
+        define('EAEL_PLUGIN_FILE', __FILE__);
         define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
         define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
         define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
