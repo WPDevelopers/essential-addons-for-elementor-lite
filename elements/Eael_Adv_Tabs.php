@@ -773,7 +773,7 @@ class Eael_Adv_Tabs extends Widget_Base
 						<?php
 if (!empty($tab['eael_primary_templates'])) {
             $eael_template_id = $tab['eael_primary_templates'];
-            $eael_frontend = new Frontend;
+            $eael_frontend = new \Elementor\Frontend;
             echo $eael_frontend->get_builder_content($eael_template_id, true);
         }
         ?>
