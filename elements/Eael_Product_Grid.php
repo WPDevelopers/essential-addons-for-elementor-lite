@@ -513,17 +513,17 @@ class Eael_Product_Grid extends Widget_Base
         echo '<div class="eael-product-grid ' . $grid_layout . '">
 			<div class="woocommerce">
 				<ul class="products eael-product-columns-' . $settings['eael_product_grid_column'] . '">';
-        $query = new \WP_Query($args);
-        if ($query->have_posts()) {
-            while ($query->have_posts()): $query->the_post();
-                include ESSENTIAL_ADDONS_EL_PATH . 'includes/templates/product-loop.php';
-            endwhile;
-        } else {
-            echo __('No products found');
-        }
-        wp_reset_postdata();
-        unset($woocommerce_loop);
-        echo '</ul>
+                    $query = new \WP_Query($args);
+                    if ($query->have_posts()) {
+                        while ($query->have_posts()): $query->the_post();
+                            include EAEL_PLUGIN_PATH . 'includes/templates/product-loop.php';
+                        endwhile;
+                    } else {
+                        echo __('No products found');
+                    }
+                    wp_reset_postdata();
+                    unset($woocommerce_loop);
+                echo '</ul>
 			</div>
 		</div>';
     }
