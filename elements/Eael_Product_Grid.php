@@ -516,7 +516,7 @@ class Eael_Product_Grid extends Widget_Base
                     $query = new \WP_Query($args);
                     if ($query->have_posts()) {
                         while ($query->have_posts()): $query->the_post();
-                            include EAEL_PLUGIN_PATH . 'includes/templates/product-loop.php';
+                            include EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/product-loop.php';
                         endwhile;
                     } else {
                         echo __('No products found');

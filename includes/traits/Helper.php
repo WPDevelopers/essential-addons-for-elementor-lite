@@ -1303,7 +1303,7 @@ trait Helper
         ob_start();
 
         while ($posts->have_posts()): $posts->the_post();
-            include EAEL_PLUGIN_PATH . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
+            include EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
         endwhile;
 
         $return['content'] = ob_get_clean();
