@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use \Elementor\Frontend;
 use \Elementor\Controls_Manager as Controls_Manager;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
