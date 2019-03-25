@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use \Elementor\Frontend;
 use \Elementor\Controls_Manager as Controls_Manager;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
@@ -773,7 +774,7 @@ class Eael_Adv_Tabs extends Widget_Base
 						<?php
 if (!empty($tab['eael_primary_templates'])) {
             $eael_template_id = $tab['eael_primary_templates'];
-            $eael_frontend = new \Elementor\Frontend;
+            $eael_frontend = new Frontend;
             echo $eael_frontend->get_builder_content($eael_template_id, true);
         }
         ?>

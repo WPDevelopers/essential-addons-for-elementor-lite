@@ -46,7 +46,7 @@ class Eael_Twitter_Feed extends Widget_Base {
 			[
 				'label' => esc_html__( 'Account Name', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => '@Codetic_',
+				'default' => '@wpdevteam',
 				'label_block' => false,
 				'description' => esc_html__( 'Use @ sign with your account name.', 'essential-addons-elementor' ),
 
