@@ -145,14 +145,11 @@ trait Generator
 
         if (!empty($post_data)) {
             $sections = json_decode($post_data[0]);
-
             
-
             foreach ((array) $sections as $section) {
                 foreach ((array) $section->elements as $element) {
                     foreach ((array) $element->elements as $widget) {
                         if (@$widget->widgetType) {
-                            $widget->widgetType = ($widget->widgetType == 'eicon-woocommerce') ? 'product-grid' : $widget->widgetType; 
                             $elements[] = $widget->widgetType;
                         } else {
                             foreach ((array) $widget as $inner_section) {
