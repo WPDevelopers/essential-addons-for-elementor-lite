@@ -1274,8 +1274,9 @@ trait Helper
      */
     public function eael_load_more_ajax()
     {
+
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            $post_args = eael_get_post_settings($_POST);
+            $post_args = $this->eael_get_post_settings($_POST);
             $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args);
 
             if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
