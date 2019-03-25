@@ -21,6 +21,12 @@
                     <p class="eael-el-title"><?php _e( 'Section Particles', 'essential-addons-elementor' ) ?></p>
                 </div>
 
+                <div class="eael-checkbox">
+                    <input type="checkbox" id="eael-tooltip-section" name="eael-tooltip-section" disabled>
+                    <label for="eael-tooltip-section" class="<?php if( (bool) $this->is_pro === false ) : echo 'eael-get-pro'; endif; ?>"></label>
+                    <p class="eael-el-title"><?php _e( 'Advance Tooltip', 'essential-addons-elementor' ) ?></p>
+                </div>
+
             </div>
             <!-- Content Element Ends -->
 
