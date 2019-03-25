@@ -482,15 +482,11 @@ class Eael_Post_Grid extends Widget_Base {
 					showTitle: <?php echo $settings['eael_show_title']; ?>,
 					showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
 					showMeta: <?php echo $settings['eael_show_meta']; ?>,
-
 					offset: <?php echo intval( $settings['offset'] ); ?>,
-
 					metaPosition: '<?php echo $settings['meta_position']; ?>',
 					excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
 					btnText: '<?php echo $settings['show_load_more_text']; ?>',
-					
 					tax_query: <?php echo json_encode( ! empty( $tax_query ) ? $tax_query : [] ); ?>,
-
 					exclude_posts: <?php echo json_encode( ! empty( $settings['post__not_in'] ) ? $settings['post__not_in'] : [] ); ?>,
 					post__in: <?php echo json_encode( ! empty( $settings['post__in'] ) ? $settings['post__in'] : [] ); ?>,
 					hover_animation: '<?php echo $settings['eael_post_grid_hover_animation']; ?>',
