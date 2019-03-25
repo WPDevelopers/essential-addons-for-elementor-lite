@@ -1274,8 +1274,9 @@ trait Helper
      */
     public function eael_load_more_ajax()
     {
+
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            $post_args = eael_get_post_settings($_POST);
+            $post_args = $this->eael_get_post_settings($_POST);
             $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args);
 
             if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
@@ -1302,7 +1303,7 @@ trait Helper
         ob_start();
 
         while ($posts->have_posts()): $posts->the_post();
-            include EAEL_PLUGIN_PATH . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
+            include EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
         endwhile;
 
         $return['content'] = ob_get_clean();

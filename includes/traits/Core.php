@@ -95,8 +95,8 @@ trait Core
                 $activation_link = str_replace('<a ', '<a id="eae-pro-activation" onclick="javascript:event.preventDefault();"', $activate_link);
                 $links['activate'] = $activation_link;
             }
-            return $links;
         }
+        return $links;
     }
 
     public function eael_is_elementor_active()

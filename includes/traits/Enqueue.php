@@ -31,16 +31,16 @@ trait Enqueue
         // My Assets
         if (Plugin::$instance->preview->is_preview_mode()) {
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.js')) {
-                $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael.min.js';
+                $js_file = EAEL_ASSET_URL . '/eael.min.js';
             } else {
-                $js_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
                 $this->generate_scripts($this->get_settings());
             }
 
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.css')) {
-                $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael.min.css';
+                $css_file = EAEL_ASSET_URL . '/eael.min.css';
             } else {
-                $css_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+                $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
                 $this->generate_scripts($this->get_settings());
             }
 
@@ -54,7 +54,7 @@ trait Enqueue
 
             wp_enqueue_style(
                 'eael-editor-css',
-                EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael-editor.css',
+                EAEL_PLUGIN_URL . '/assets/front-end/css/eael-editor.css',
                 false,
                 EAEL_PLUGIN_VERSION
             );
@@ -74,16 +74,16 @@ trait Enqueue
             $post_id = get_the_ID();
 
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js')) {
-                $js_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js';
+                $js_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.js';
             } else {
-                $js_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/js/eael.min.js';
+                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
                 $this->generate_post_scripts($post_id);
             }
 
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css')) {
-                $css_file = EAEL_ASSET_URL . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css';
+                $css_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.css';
             } else {
-                $css_file = EAEL_PLUGIN_URL . DIRECTORY_SEPARATOR . 'assets/front-end/css/eael.min.css';
+                $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
                 $this->generate_post_scripts($post_id);
             }
 
