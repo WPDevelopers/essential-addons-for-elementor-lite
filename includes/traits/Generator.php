@@ -83,10 +83,10 @@ trait Generator
 
         // collect eael js
         $js_paths = array(
-            EAEL_PLUGIN_PATH . 'assets/front-end/js/general.js',
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/general.js',
         );
         $css_paths = array(
-            EAEL_PLUGIN_PATH . "assets/front-end/css/general.css",
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general.css",
         );
 
         // collect library scripts
@@ -95,12 +95,12 @@ trait Generator
         }
 
         foreach ((array) $elements as $element) {
-            $js_file = EAEL_PLUGIN_PATH . 'assets/front-end/js/' . $element . '/index.js';
+            $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
             if (file_exists($js_file)) {
                 $js_paths[] = $js_file;
             }
 
-            $css_file = EAEL_PLUGIN_PATH . "assets/front-end/css/$element.css";
+            $css_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css";
             if (file_exists($css_file)) {
                 $css_paths[] = $css_file;
             }
