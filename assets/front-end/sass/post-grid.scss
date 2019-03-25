@@ -311,9 +311,7 @@
 	transform: translateY(0);
 }
 
-/*-----------------------------*/
-/* 16. Post Grid Column
-/*-----------------------------*/
+/*--- Post Grid Column Styles ---*/
 .eael-col-1 .eael-post-grid-column {
 	float: none;
 	width: 100%;
@@ -344,8 +342,6 @@
 	width: 16.6666%;
 }
 
-
-/*--- Post Grid Column Styles ---*/
 @media only screen and (max-width: 979px) {
 	.eael-col-1 .eael-post-grid-column,
 	.eael-col-2 .eael-post-grid-column,
@@ -393,5 +389,3 @@
 	display: inline-block;
 	float: left;
 }
-
-// @import './product-grid';
