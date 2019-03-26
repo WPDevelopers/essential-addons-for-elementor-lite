@@ -50,16 +50,16 @@ trait Generator
 
     /**
      * Define css dependencies
-     * 
+     *
      * @since 3.0.0
      */
     public $css_dependencies = [
         'post-grid' => [
-            'assets/front-end/css/product-grid.css'
+            'assets/front-end/css/product-grid.css',
         ],
         'filterable-gallery' => [
-            'assets/front-end/css/magnific-popup.css'
-        ]
+            'assets/front-end/css/magnific-popup.css',
+        ],
     ];
 
     /**
@@ -67,7 +67,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function add_dependency(array $elements, array $deps)
+    public function generate_dependency(array $elements, array $deps)
     {
         $paths = [];
 
@@ -78,8 +78,52 @@ trait Generator
                 }
             }
         }
-        
+
         return array_unique($paths);
+    }
+
+    /**
+     * Search elements in a post.
+     *
+     * @since 3.0.0
+     */
+    public function widgets_in_post($post_id)
+    {
+        $elements = array();
+
+        $post_data = get_metadata('post', $post_id, '_elementor_data');
+
+        if (empty($post_data)) {
+            return $elements;
+        }
+
+        $sections = json_decode($post_data[0]);
+
+        foreach ((array) $sections as $section) {
+            foreach ((array) $section->elements as $element) {
+                foreach ((array) $element->elements as $widget) {
+                    if (@$widget->widgetType) {
+                        $elements[] = $widget->widgetType;
+                    } else {
+                        foreach ((array) $widget as $inner_section) {
+                            foreach ((array) $inner_section as $inner_elements) {
+                                foreach ((array) $inner_elements->elements as $inner_widget) {
+                                    if ($inner_widget->widgetType) {
+                                        $elements[] = $inner_widget->widgetType;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $elements = array_intersect(array_keys($this->registered_elements), array_map(function ($val) {
+            return str_replace(['eael-', 'eicon-woocommerce'], ['', 'post-grid'], $val);
+        }, $elements));
+
+        return $elements;
     }
 
     /**
@@ -87,7 +131,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_scripts($elements, $output = null)
+    public function generate_scripts($elements, $file_name = null)
     {
         if (empty($elements)) {
             return;
@@ -107,14 +151,10 @@ trait Generator
         );
 
         // collect library scripts
-        if ($this->add_dependency($elements, $this->js_dependencies)) {
-            $js_paths = array_merge($js_paths, $this->add_dependency($elements, $this->js_dependencies));
-        }
+        $js_paths = array_merge($js_paths, $this->generate_dependency($elements, $this->js_dependencies));
 
         // collect library styles
-        if ($this->add_dependency($elements, $this->css_dependencies)) {
-            $css_paths = array_merge($css_paths, $this->add_dependency($elements, $this->css_dependencies));
-        }
+        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, $this->css_dependencies));
 
         foreach ((array) $elements as $element) {
             $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
@@ -129,10 +169,10 @@ trait Generator
         }
 
         $minifier = new Minify\JS($js_paths);
-        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.js', $minifier->minify());
+        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.js', $minifier->minify());
 
         $minifier = new Minify\CSS($css_paths);
-        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($output ? $output : 'eael') . '.min.css', $minifier->minify());
+        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.css', $minifier->minify());
     }
 
     /**
@@ -142,40 +182,12 @@ trait Generator
      */
     public function generate_post_scripts($post_id)
     {
-        $post_data = get_metadata('post', $post_id, '_elementor_data');
-        $elements = array();
+        $elements = $this->widgets_in_post($post_id);
 
-        if (!empty($post_data)) {
-            $sections = json_decode($post_data[0]);
-
-            foreach ((array) $sections as $section) {
-                foreach ((array) $section->elements as $element) {
-                    foreach ((array) $element->elements as $widget) {
-                        if (@$widget->widgetType) {
-                            $elements[] = $widget->widgetType;
-                        } else {
-                            foreach ((array) $widget as $inner_section) {
-                                foreach ((array) $inner_section as $inner_elements) {
-                                    foreach ((array) $inner_elements->elements as $inner_widget) {
-                                        if ($inner_widget->widgetType) {
-                                            $elements[] = $inner_widget->widgetType;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            $elements = array_map(function($val) {
-                return ($val == 'eicon-woocommerce' ? 'product-grid' : $val);
-            }, $elements);
-
-            $elements = array_intersect(array_keys($this->registered_elements), array_map(function ($val) {
-                return preg_replace('/^eael-/', '', $val);
-            }, $elements));
-
+        if (empty($elements)) {
+            unlink(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css');
+            unlink(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js');
+        } else {
             $this->generate_scripts($elements, 'eael-' . $post_id);
         }
     }
