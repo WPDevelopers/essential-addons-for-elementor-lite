@@ -73,6 +73,10 @@ trait Enqueue
         } else if (is_singular()) {
             $post_id = get_the_ID();
 
+            if(empty($this->widgets_in_post($post_id))) {
+                return;
+            }
+
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js')) {
                 $js_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.js';
             } else {
