@@ -1,7 +1,7 @@
 .sass-cache
-node_modules
+/node_modules
 .DS_Store
 .phpintel
 package-lock.json
 composer.lock
-vendor
+/vendor
