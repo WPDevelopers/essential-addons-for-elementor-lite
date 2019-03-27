@@ -165,10 +165,7 @@ class Essential_Addons_Elementor
 
         // Start plugin tracking
         $this->start_plugin_tracking();
-
-        // Migrate old users to new plugin data structure
-        add_action('init', array($this, 'migrate_plugin'));
-
+        
         // Generator
         add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));
         add_action('elementor/editor/after_save', array($this, 'generate_post_scripts'));

@@ -8,13 +8,11 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Group_Control_Background as Group_Control_Background;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
-use \Elementor\Utils as Utils;
 use \Elementor\Scheme_Color as Scheme_Color;
+use \Elementor\Scheme_Typography as Scheme_Typography;
+use \Elementor\Utils as Utils;
+use \Elementor\Widget_Base as Widget_Base;
 
 class Eael_Feature_List extends Widget_Base {
 
