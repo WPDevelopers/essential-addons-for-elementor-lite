@@ -195,8 +195,6 @@ trait Generator
             }
         }
 
-        // error_log(print_r($js_paths, 1));
-
         $minifier = new Minify\JS($js_paths);
         file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.js', $minifier->minify());
 
