@@ -18,17 +18,17 @@ trait Generator
         'fancy-text' => array(
             'assets/front-end/js/vendor/fancy-text/fancy-text.js',
         ),
-        'countdown' => array(
-            'assets/front-end/js/vendor/countdown/countdown.min.js',
+        'count-down' => array(
+            'assets/front-end/js/vendor/count-down/count-down.min.js',
         ),
-        'filterable-gallery' => array(
+        'filter-gallery' => array(
             'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
             'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
         ),
         'post-timeline' => array(
             'assets/front-end/js/vendor/load-more/load-more.js',
         ),
-        'pricing-table' => array(
+        'price-table' => array(
             'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
         ),
         'progress-bar' => array(
@@ -57,7 +57,7 @@ trait Generator
         'post-grid' => [
             'assets/front-end/css/product-grid.css',
         ],
-        'filterable-gallery' => [
+        'filter-gallery' => [
             'assets/front-end/css/magnific-popup.css',
         ],
     ];
@@ -70,7 +70,6 @@ trait Generator
     public function generate_dependency(array $elements, array $deps)
     {
         $paths = [];
-
         foreach ($elements as $element) {
             if (isset($deps[$element])) {
                 foreach ($deps[$element] as $path) {
@@ -119,9 +118,37 @@ trait Generator
             }
         }
 
-        $elements = array_intersect(array_keys($this->registered_elements), array_map(function ($val) {
-            return str_replace(['eael-', 'eicon-woocommerce'], ['', 'post-grid'], $val);
-        }, $elements));
+        $elements = array_map(function ($val) {
+            return str_replace(['eael-'], [''], $val);
+        }, $elements);
+        
+        $elements = array_map(function ($val) {
+            return str_replace([
+                'eicon-woocommerce',
+                'countdown',
+                'creative-button',
+                'team-member',
+                'testimonial',
+                'weform',
+                'cta-box',
+                'dual-color-header',
+                'pricing-table',
+                'filterable-gallery'
+            ], [
+                'product-grid',
+                'count-down',
+                'creative-btn',
+                'team-members',
+                'testimonials',
+                'weforms',
+                'call-to-action',
+                'dual-header',
+                'price-table',
+                'filter-gallery'
+            ], $val);
+        }, $elements);
+
+        $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
         return $elements;
     }
