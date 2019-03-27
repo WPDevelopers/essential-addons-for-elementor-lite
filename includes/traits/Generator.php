@@ -59,7 +59,7 @@ trait Generator
         ],
         'filter-gallery' => [
             'assets/front-end/css/magnific-popup.css',
-        ]
+        ],
     ];
 
     /**
@@ -77,7 +77,7 @@ trait Generator
                 }
             }
         }
-        
+
         return array_unique($paths);
     }
 
@@ -118,9 +118,37 @@ trait Generator
             }
         }
 
-        $elements = array_intersect(array_keys($this->registered_elements), array_map(function ($val) {
-            return str_replace(['eael-', 'eicon-woocommerce'], ['', 'post-grid'], $val);
-        }, $elements));
+        $elements = array_map(function ($val) {
+            return str_replace(['eael-'], [''], $val);
+        }, $elements);
+        
+        $elements = array_map(function ($val) {
+            return str_replace([
+                'eicon-woocommerce',
+                'countdown',
+                'creative-button',
+                'team-member',
+                'testimonial',
+                'weform',
+                'cta-box',
+                'dual-color-header',
+                'pricing-table',
+                'filterable-gallery'
+            ], [
+                'product-grid',
+                'count-down',
+                'creative-btn',
+                'team-members',
+                'testimonials',
+                'weforms',
+                'call-to-action',
+                'dual-header',
+                'price-table',
+                'filter-gallery'
+            ], $val);
+        }, $elements);
+
+        $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
         return $elements;
     }
@@ -166,6 +194,8 @@ trait Generator
                 $css_paths[] = $css_file;
             }
         }
+
+        // error_log(print_r($js_paths, 1));
 
         $minifier = new Minify\JS($js_paths);
         file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.js', $minifier->minify());
