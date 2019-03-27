@@ -72,8 +72,9 @@ trait Enqueue
             ));
         } else if (is_singular()) {
             $post_id = get_the_ID();
+            $elements = $this->widgets_in_post($post_id);
 
-            if(empty($this->widgets_in_post($post_id))) {
+            if(empty($elements)) {
                 return;
             }
 
