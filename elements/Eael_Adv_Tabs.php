@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Frontend;
 use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Frontend;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Utils as Utils;
+use \Elementor\Widget_Base as Widget_Base;
 
 class Eael_Adv_Tabs extends Widget_Base
 {
