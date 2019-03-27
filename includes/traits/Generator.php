@@ -59,7 +59,7 @@ trait Generator
         ],
         'filterable-gallery' => [
             'assets/front-end/css/magnific-popup.css',
-        ],
+        ]
     ];
 
     /**
@@ -70,7 +70,6 @@ trait Generator
     public function generate_dependency(array $elements, array $deps)
     {
         $paths = [];
-
         foreach ($elements as $element) {
             if (isset($deps[$element])) {
                 foreach ($deps[$element] as $path) {
