@@ -82,14 +82,14 @@ trait Enqueue
                 $js_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.js';
             } else {
                 $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-                $this->generate_post_scripts($post_id);
+                $this->generate_post_scripts($post_id, $elements);
             }
 
             if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css')) {
                 $css_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.css';
             } else {
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                $this->generate_post_scripts($post_id);
+                $this->generate_post_scripts($post_id, $elements);
             }
 
             wp_enqueue_script(

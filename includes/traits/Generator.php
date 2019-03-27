@@ -207,13 +207,23 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_post_scripts($post_id)
+    public function generate_post_scripts($post_id, $elements = null)
     {
-        $elements = $this->widgets_in_post($post_id);
+        if(!is_array($elements)) {
+            $elements = $this->widgets_in_post($post_id);   
+        }
 
         if (empty($elements)) {
-            unlink(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css');
-            unlink(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js');
+            $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css';
+            $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js';
+
+            if(file_exists($css_path)) {
+                unlink($css_path);
+            }
+            
+            if(file_exists($js_path)) {
+                unlink($js_path);
+            }
         } else {
             $this->generate_scripts($elements, 'eael-' . $post_id);
         }
