@@ -55,16 +55,16 @@ class Essential_Addons_Elementor
             'fancy-text' => [
                 'class' => 'Eael_Fancy_Text',
             ],
-            'creative-button' => [
+            'creative-btn' => [
                 'class' => 'Eael_Creative_Button',
             ],
-            'countdown' => [
+            'count-down' => [
                 'class' => 'Eael_Countdown',
             ],
-            'team-member' => [
+            'team-members' => [
                 'class' => 'Eael_Team_Member',
             ],
-            'testimonial' => [
+            'testimonials' => [
                 'class' => 'Eael_Testimonial',
             ],
             'info-box' => [
@@ -73,13 +73,13 @@ class Essential_Addons_Elementor
             'flip-box' => [
                 'class' => 'Eael_Flip_Box',
             ],
-            'cta-box' => [
+            'call-to-action' => [
                 'class' => 'Eael_Cta_Box',
             ],
-            'dual-color-header' => [
+            'dual-header' => [
                 'class' => 'Eael_Dual_Color_Header',
             ],
-            'pricing-table' => [
+            'price-table' => [
                 'class' => 'Eael_Pricing_Table',
             ],
             'twitter-feed' => [
@@ -88,7 +88,7 @@ class Essential_Addons_Elementor
             'data-table' => [
                 'class' => 'Eael_Data_Table',
             ],
-            'filterable-gallery' => [
+            'filter-gallery' => [
                 'class' => 'Eael_Filterable_Gallery',
             ],
             'image-accordion' => [
@@ -126,7 +126,7 @@ class Essential_Addons_Elementor
                     'wpcf7',
                 ],
             ],
-            'weform' => [
+            'weforms' => [
                 'class' => 'Eael_WeForms',
                 'condition' => [
                     'function_exists',
@@ -165,9 +165,6 @@ class Essential_Addons_Elementor
 
         // Start plugin tracking
         $this->start_plugin_tracking();
-
-        // Migrate old users to new plugin data structure
-        add_action('init', array($this, 'migrate_plugin'));
 
         // Generator
         add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));

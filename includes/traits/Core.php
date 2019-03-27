@@ -11,55 +11,6 @@ use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tra
 
 trait Core
 {
-    /**
-     *  Migrate new plugin with old data structure.
-     *
-     * @since 3.0.0
-     */
-    public function migrate_plugin()
-    {
-        $options = get_option('eael_save_settings');
-
-        if (array_key_exists('countdown', $options)) {
-            return;
-        }
-
-        foreach($options as $key => $val) {
-            // remove old key
-            unset($options[$key]);
-
-            // generate new key => val
-            $key = str_replace(
-                [
-                    'count-down',
-                    'creative-btn',
-                    'team-members',
-                    'testimonials',
-                    'weforms',
-                    'call-to-action',
-                    'dual-header',
-                    'price-table',
-                    'filter-gallery',
-                ],
-                [
-                    'countdown',
-                    'creative-button',
-                    'team-member',
-                    'testimonial',
-                    'weform',
-                    'cta-box',
-                    'dual-color-header',
-                    'pricing-table',
-                    'filterable-gallery',
-                ],
-                $key
-            );
-
-            $options[$key] = $val;
-        }
-
-        update_option('eael_save_settings', $options);
-    }
 
     /**
      *  Return array of registered elements.
