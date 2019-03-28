@@ -1,0 +1,90 @@
+/*------------------------------*/
+/* 34. Image accordion
+/*------------------------------*/
+.eael-img-accordion {
+  display: flex;
+  height: 50vh;
+}
+
+.eael-img-accordion a {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: flex .4s;
+}
+
+.eael-grow-accordion {
+  flex: 3;
+}
+
+.eael-img-accordion .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color .4s;
+}
+
+.eael-img-accordion .overlay .overlay-inner {
+  z-index: 1;
+}
+
+.eael-img-accordion a:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-img-accordion .overlay-inner * {
+  visibility: hidden;
+  opacity: 0;
+  transform-style: preserve-3d;
+}
+
+.eael-img-accordion .overlay h2 {
+  color: #fff;
+  transform: translate3d(0, -60px, 0);
+}
+
+.eael-img-accordion .overlay p {
+  color: #fff;
+  transform: translate3d(0, 60px, 0);
+}
+
+.eael-img-accordion .overlay-inner-show * {
+  opacity: 1;
+  visibility: visible;
+  transform: none !important;
+  transition: all .3s .3s;
+}
+
+@media screen and (max-width: 800px) {
+  .eael-img-accordion {
+    flex-direction: column;
+  }
+
+  .eael-img-accordion a:hover {
+    flex: 1;
+  }
+
+  .eael-img-accordion a:hover .overlay {
+    background-color: transparent;
+  }
+}
