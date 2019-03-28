@@ -49,14 +49,19 @@ trait Elements
         }
 
         foreach ($active_elements as $active_element) {
+
+            if( ! isset( $this->registered_elements[ $active_element ] ) ) {
+                continue;
+            }
+
             if (isset($this->registered_elements[$active_element]['condition'])) {
                 if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
                     continue;
                 }
             }
-
+            
             $element_class = '\Essential_Addons_Elementor\Elements\\' . $this->registered_elements[$active_element]['class'];
-            $widgets_manager->register_widget_type(new $element_class);
+            $widgets_manager->register_widget_type( new $element_class );
         }
     }
 
