@@ -32,15 +32,15 @@ trait Generator
             'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
         ),
         'progress-bar' => array(
-            'assets/front-end/js/vendor/progress-bar/progress-bar.js',
+            'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
             'assets/front-end/js/vendor/inview/inview.min.js',
         ),
         'twitter-feed' => array(
             'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/social-feeds/codebird.js',
-            'assets/front-end/social-feeds/doT.min.js',
-            'assets/front-end/social-feeds/moment.js',
-            'assets/front-end/social-feeds/jquery.socialfeed.js',
+            'assets/front-end/js/vendor/social-feeds/codebird.js',
+            'assets/front-end/js/vendor/social-feeds/doT.min.js',
+            'assets/front-end/js/vendor/social-feeds/moment.js',
+            'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
         ),
         'post-grid' => array(
             'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
