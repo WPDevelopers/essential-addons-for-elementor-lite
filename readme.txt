@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, mdsabuz, manik08cse
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.9.8
+Stable tag: 2.10.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -166,6 +166,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.10.0 - 27/03/2019 =
+
+- Refractored plugin structure for improved performance
+- Only one minified JS and one CSS file (if required for the widget) will be used on the page where EA element is being used
+- No extra asset will be loaded if you don't use EA on any page
+- Massive performance improved minimizing the dependencies
+- Lots minor bugfix and improvements
 
 = 2.9.8 - 28/02/2019 =
 
