@@ -175,8 +175,7 @@
     right: 5px;
     top: 30px;
   }
-  .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern.-icon-position-right .eael-feature-list-item img-comparison
-  .connector {
+  .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern.-icon-position-right .eael-feature-list-item .connector {
     display: none;
   }
 }
