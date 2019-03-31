@@ -2,8 +2,7 @@
     "name": "rupok/essential-addons-for-elementor-lite",
     "config": {
         "optimize-autoloader": true,
-        "classmap-authoritative": true,
-        "apcu-autoloader": true
+        "classmap-authoritative": true
     },
     "autoload": {
         "psr-4": {
