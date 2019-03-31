@@ -89,25 +89,28 @@ trait Generator
     public function widgets_in_post($post_id)
     {
         $elements = array();
+        $sections = json_decode(get_post_meta($post_id, '_elementor_data', true));
 
-        $post_data = get_metadata('post', $post_id, '_elementor_data');
-
-        if (empty($post_data)) {
+        if (empty($sections)) {
             return $elements;
         }
 
-        $sections = json_decode($post_data[0]);
-
         foreach ((array) $sections as $section) {
             foreach ((array) $section->elements as $element) {
+                if (empty($element->elements)) {
+                    continue;
+                }
                 foreach ((array) $element->elements as $widget) {
                     if (@$widget->widgetType) {
                         $elements[] = $widget->widgetType;
                     } else {
                         foreach ((array) $widget as $inner_section) {
                             foreach ((array) $inner_section as $inner_elements) {
+                                if (empty($inner_elements->elements)) {
+                                    continue;
+                                }
                                 foreach ((array) $inner_elements->elements as $inner_widget) {
-                                    if ($inner_widget->widgetType) {
+                                    if (@$inner_widget->widgetType) {
                                         $elements[] = $inner_widget->widgetType;
                                     }
                                 }
@@ -119,10 +122,8 @@ trait Generator
         }
 
         $elements = array_map(function ($val) {
-            return str_replace(['eael-'], [''], $val);
-        }, $elements);
-        
-        $elements = array_map(function ($val) {
+            $val = str_replace(['eael-'], [''], $val);
+
             return str_replace([
                 'eicon-woocommerce',
                 'countdown',
@@ -133,7 +134,7 @@ trait Generator
                 'cta-box',
                 'dual-color-header',
                 'pricing-table',
-                'filterable-gallery'
+                'filterable-gallery',
             ], [
                 'product-grid',
                 'count-down',
@@ -144,7 +145,7 @@ trait Generator
                 'call-to-action',
                 'dual-header',
                 'price-table',
-                'filter-gallery'
+                'filter-gallery',
             ], $val);
         }, $elements);
 
@@ -209,19 +210,19 @@ trait Generator
      */
     public function generate_post_scripts($post_id, $elements = null)
     {
-        if(!is_array($elements)) {
-            $elements = $this->widgets_in_post($post_id);   
+        if (!is_array($elements)) {
+            $elements = $this->widgets_in_post($post_id);
         }
 
         if (empty($elements)) {
             $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css';
             $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js';
 
-            if(file_exists($css_path)) {
+            if (file_exists($css_path)) {
                 unlink($css_path);
             }
-            
-            if(file_exists($js_path)) {
+
+            if (file_exists($js_path)) {
                 unlink($js_path);
             }
         } else {
