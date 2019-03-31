@@ -780,7 +780,7 @@ class WPDeveloper_Notice {
                             dismiss: true
                         },
                         success: function(response) {
-                            console.log('Success fully saved!');
+                            console.log('Successfully saved!');
                         },
                         error: function(error) {
                             console.log('Something went wrong!');

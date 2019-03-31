@@ -44,11 +44,16 @@ trait Elements
     {
         $active_elements = $this->get_settings();
 
-        if(empty($active_elements)) {
+        if (empty($active_elements)) {
             return;
         }
 
         foreach ($active_elements as $active_element) {
+
+            if (!isset($this->registered_elements[$active_element])) {
+                continue;
+            }
+
             if (isset($this->registered_elements[$active_element]['condition'])) {
                 if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
                     continue;
