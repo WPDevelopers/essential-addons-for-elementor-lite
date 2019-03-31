@@ -67,7 +67,7 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
         'Essential_Addons_Elementor\\Elements\\Eael_Feature_List' => __DIR__ . '/../..' . '/elements/Eael_Feature_List.php',
         'Essential_Addons_Elementor\\Elements\\Eael_Filterable_Gallery' => __DIR__ . '/../..' . '/elements/Eael_Filterable_Gallery.php',
         'Essential_Addons_Elementor\\Elements\\Eael_Flip_Box' => __DIR__ . '/../..' . '/elements/Eael_Flip_Box.php',
-        'Essential_Addons_Elementor\\Elements\\Eael_GravityForm' => __DIR__ . '/../..' . '/elements/Eael_GravityForms.php',
+        'Essential_Addons_Elementor\\Elements\\Eael_GravityForms' => __DIR__ . '/../..' . '/elements/Eael_GravityForms.php',
         'Essential_Addons_Elementor\\Elements\\Eael_Image_Accordion' => __DIR__ . '/../..' . '/elements/Eael_Image_Accordion.php',
         'Essential_Addons_Elementor\\Elements\\Eael_Info_Box' => __DIR__ . '/../..' . '/elements/Eael_Info_Box.php',
         'Essential_Addons_Elementor\\Elements\\Eael_NinjaForms' => __DIR__ . '/../..' . '/elements/Eael_NinjaForms.php',
