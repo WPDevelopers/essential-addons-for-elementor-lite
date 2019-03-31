@@ -1032,7 +1032,7 @@ trait Helper
         $options = array();
 
         if (class_exists('GFCommon')) {
-            $gravity_forms = RGFormsModel::get_forms(null, 'title');
+            $gravity_forms = \RGFormsModel::get_forms(null, 'title');
 
             if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
 

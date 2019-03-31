@@ -24,7 +24,7 @@ return array(
     'Essential_Addons_Elementor\\Elements\\Eael_Feature_List' => $baseDir . '/elements/Eael_Feature_List.php',
     'Essential_Addons_Elementor\\Elements\\Eael_Filterable_Gallery' => $baseDir . '/elements/Eael_Filterable_Gallery.php',
     'Essential_Addons_Elementor\\Elements\\Eael_Flip_Box' => $baseDir . '/elements/Eael_Flip_Box.php',
-    'Essential_Addons_Elementor\\Elements\\Eael_GravityForm' => $baseDir . '/elements/Eael_GravityForms.php',
+    'Essential_Addons_Elementor\\Elements\\Eael_GravityForms' => $baseDir . '/elements/Eael_GravityForms.php',
     'Essential_Addons_Elementor\\Elements\\Eael_Image_Accordion' => $baseDir . '/elements/Eael_Image_Accordion.php',
     'Essential_Addons_Elementor\\Elements\\Eael_Info_Box' => $baseDir . '/elements/Eael_Info_Box.php',
     'Essential_Addons_Elementor\\Elements\\Eael_NinjaForms' => $baseDir . '/elements/Eael_NinjaForms.php',
