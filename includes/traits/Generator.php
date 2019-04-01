@@ -89,7 +89,7 @@ trait Generator
     public function widgets_in_post($post_id)
     {
         $elements = array();
-        $sections = json_decode(get_post_meta($post_id, '_elementor_data', true));
+        $sections = json_decode((string) get_post_meta($post_id, '_elementor_data', true));
 
         if (empty($sections)) {
             return $elements;
