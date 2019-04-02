@@ -4,417 +4,217 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.9.8
+ * Version: 2.10.1
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
  * Domain Path: /languages
-*/
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-define( 'ESSENTIAL_ADDONS_EL_URL', plugins_url( '/', __FILE__ ) );
-define( 'ESSENTIAL_ADDONS_EL_PATH', plugin_dir_path( __FILE__ ) );
-define( 'ESSENTIAL_ADDONS_EL_ROOT', __FILE__ );
-define( 'ESSENTIAL_ADDONS_VERSION', '2.9.8' );
-define( 'ESSENTIAL_ADDONS_STABLE_VERSION', '2.9.8' );
-define( 'ESSENTIAL_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
-
-
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/elementor-helper.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/queries.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/class-plugin-usage-tracker.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'admin/settings.php';
-require_once ESSENTIAL_ADDONS_EL_PATH.'includes/extensions.php';
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 /**
- * This function will return true for all activated modules
+ * Including composer autoload.
  *
- * @since   v2.4.1
+ * @since 3.0.0
  */
-function eael_activated_modules() {
+require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
-   $eael_default_keys = [ 'contact-form-7', 'count-down', 'creative-btn', 'fancy-text', 'post-grid', 'post-timeline', 'product-grid', 'team-members', 'testimonials', 'weforms', 'call-to-action', 'flip-box', 'info-box', 'dual-header', 'price-table', 'ninja-form', 'gravity-form', 'caldera-form', 'wpforms', 'twitter-feed', 'data-table', 'filter-gallery', 'image-accordion','content-ticker', 'tooltip', 'adv-accordion', 'adv-tabs', 'progress-bar', 'section-particles', 'feature-list' ];
-   
-   $eael_default_settings  = array_fill_keys( $eael_default_keys, true );
-   $eael_get_settings      = get_option( 'eael_save_settings', $eael_default_settings );
-   $eael_new_settings      = array_diff_key( $eael_default_settings, $eael_get_settings );
+class Essential_Addons_Elementor
+{
+    use Essential_Addons_Elementor\Traits\Core;
+    use Essential_Addons_Elementor\Traits\Helper;
+    use Essential_Addons_Elementor\Traits\Generator;
+    use Essential_Addons_Elementor\Traits\Enqueue;
+    use Essential_Addons_Elementor\Traits\Admin;
+    use Essential_Addons_Elementor\Traits\Elements;
 
-   if( ! empty( $eael_new_settings ) ) {
-      $eael_updated_settings = array_merge( $eael_get_settings, $eael_new_settings );
-      update_option( 'eael_save_settings', $eael_updated_settings );
-   }
+    public $registered_elements;
 
-   return $eael_get_settings = get_option( 'eael_save_settings', $eael_default_settings );
+    public function __construct()
+    {
+        // define plugins constants
+        define('EAEL_PLUGIN_FILE', __FILE__);
+        define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
+        define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
+        define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
+        define('EAEL_PLUGIN_VERSION', '2.10.1');
+        define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
+        define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 
-}
+        // define elements classmap
+        $this->registered_elements = [
+            'post-grid' => [
+                'class' => 'Eael_Post_Grid',
+            ],
+            'post-timeline' => [
+                'class' => 'Eael_Post_Timeline',
+            ],
+            'fancy-text' => [
+                'class' => 'Eael_Fancy_Text',
+            ],
+            'creative-btn' => [
+                'class' => 'Eael_Creative_Button',
+            ],
+            'count-down' => [
+                'class' => 'Eael_Countdown',
+            ],
+            'team-members' => [
+                'class' => 'Eael_Team_Member',
+            ],
+            'testimonials' => [
+                'class' => 'Eael_Testimonial',
+            ],
+            'info-box' => [
+                'class' => 'Eael_Info_Box',
+            ],
+            'flip-box' => [
+                'class' => 'Eael_Flip_Box',
+            ],
+            'call-to-action' => [
+                'class' => 'Eael_Cta_Box',
+            ],
+            'dual-header' => [
+                'class' => 'Eael_Dual_Color_Header',
+            ],
+            'price-table' => [
+                'class' => 'Eael_Pricing_Table',
+            ],
+            'twitter-feed' => [
+                'class' => 'Eael_Twitter_Feed',
+            ],
+            'data-table' => [
+                'class' => 'Eael_Data_Table',
+            ],
+            'filter-gallery' => [
+                'class' => 'Eael_Filterable_Gallery',
+            ],
+            'image-accordion' => [
+                'class' => 'Eael_Image_Accordion',
+            ],
+            'content-ticker' => [
+                'class' => 'Eael_Content_Ticker',
+            ],
+            'tooltip' => [
+                'class' => 'Eael_Tooltip',
+            ],
+            'adv-accordion' => [
+                'class' => 'Eael_Adv_Accordion',
+            ],
+            'adv-tabs' => [
+                'class' => 'Eael_Adv_Tabs',
+            ],
+            'progress-bar' => [
+                'class' => 'Eael_Progress_Bar',
+            ],
+            'feature-list' => [
+                'class' => 'Eael_Feature_List',
+            ],
+            'product-grid' => [
+                'class' => 'Eael_Product_Grid',
+                'condition' => [
+                    'function_exists',
+                    'WC',
+                ],
+            ],
+            'contact-form-7' => [
+                'class' => 'Eael_Contact_Form_7',
+                'condition' => [
+                    'function_exists',
+                    'wpcf7',
+                ],
+            ],
+            'weforms' => [
+                'class' => 'Eael_WeForms',
+                'condition' => [
+                    'function_exists',
+                    'WeForms',
+                ],
+            ],
+            'ninja-form' => [
+                'class' => 'Eael_NinjaForms',
+                'condition' => [
+                    'function_exists',
+                    'Ninja_Forms',
+                ],
+            ],
+            'gravity-form' => [
+                'class' => 'Eael_GravityForms',
+                'condition' => [
+                    'class_exists',
+                    'GFForms',
+                ],
+            ],
+            'caldera-form' => [
+                'class' => 'Eael_Caldera_Forms',
+                'condition' => [
+                    'class_exists',
+                    'Caldera_Forms',
+                ],
+            ],
+            'wpforms' => [
+                'class' => 'Eael_WpForms',
+                'condition' => [
+                    'class_exists',
+                    '\WPForms\WPForms',
+                ],
+            ],
+        ];
 
-/**
- * Load acivate or deactivate Modules
- *
- * @since v1.0.0
- */
-function add_eael_extensions() {
-	$is_component_active = eael_activated_modules();
+        // Start plugin tracking
+        $this->start_plugin_tracking();
 
-	if( $is_component_active['section-particles'] ) {
-		require_once ESSENTIAL_ADDONS_EL_PATH .'extensions/eael-particle-section/eael-particle-section.php';
-	}
-}
-add_eael_extensions();
+        // Generator
+        add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));
+        add_action('elementor/editor/after_save', array($this, 'generate_post_scripts'));
 
-/**
- * Acivate or Deactivate Modules
- *
- * @since v1.0.0
- */
-function add_eael_elements() {
+        // Enqueue
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
 
-   $is_component_active = eael_activated_modules();
+        // Ajax
+        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
+        add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
 
-   // load elements
-   if( $is_component_active['post-grid'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/post-grid/post-grid.php';
-   }
-   if( $is_component_active['post-timeline'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/post-timeline/post-timeline.php';
-   }
-   if( $is_component_active['fancy-text'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/fancy-text/fancy-text.php';
-   }
-   if( $is_component_active['creative-btn'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/creative-button/creative-button.php';
-   }
-   if( $is_component_active['count-down'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/countdown/countdown.php';
-   }
-   if( $is_component_active['team-members'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/team-members/team-members.php';
-   }
-   if( $is_component_active['testimonials'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/testimonials/testimonials.php';
-   }
+        // Elements
+        add_action('elementor/widgets/widgets_registered', array($this, 'eael_add_elements'));
+        add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
+        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
 
-   if ( function_exists( 'WC' ) && $is_component_active['product-grid'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/product-grid/product-grid.php';
-   }
+        if (class_exists('Caldera_Forms')) {
+            add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
+        }
 
-   if ( function_exists( 'wpcf7' ) && $is_component_active['contact-form-7'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/contact-form-7/contact-form-7.php';
-   }
+        // Admin
+        if (is_admin()) {
+            // Admin
+            $this->admin_notice();
+            add_action('admin_menu', array($this, 'admin_menu'), 600);
+            add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+            add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
 
-   if ( function_exists( 'WeForms' ) && $is_component_active['weforms'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/weforms/weforms.php';
-   }
+            // Core
+            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_add_settings_link'));
+            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_pro_filter_action_links'));
+            add_action('admin_init', array($this, 'eael_redirect'));
+            add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
 
-   if( $is_component_active['info-box'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/infobox/infobox.php';
-   }
-
-   if( $is_component_active['flip-box'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/flipbox/flipbox.php';
-   }
-
-   if( $is_component_active['call-to-action'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/call-to-action/call-to-action.php';
-   }
-
-   if( $is_component_active['dual-header'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/dual-color-header/dual-color-header.php';
-   }
-   if( $is_component_active['price-table'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/pricing-table/pricing-table.php';
-   }
-   if( function_exists( 'Ninja_Forms' ) && $is_component_active['ninja-form'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/ninja-form/ninja-form.php';
-   }
-   if( class_exists( 'GFForms' ) && $is_component_active['gravity-form'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/gravity-form/gravity-form.php';
-   }
-   if( class_exists( 'Caldera_Forms' ) && $is_component_active['caldera-form'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/caldera-forms/caldera-forms.php';
-   }
-   if( class_exists( '\WPForms\WPForms' ) && $is_component_active['wpforms'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/wpforms/wpforms.php';
-   }
-   if( $is_component_active['twitter-feed'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/twitter-feed/twitter-feed.php';
-   }
-
-   if( $is_component_active['data-table'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/data-table/data-table.php';
-   }
-   if( $is_component_active['filter-gallery'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/filterable-gallery/filterable-gallery.php';
-   }
-   if( $is_component_active['image-accordion'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/image-accordion/image-accordion.php';
-   }
-   if( $is_component_active['content-ticker'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/content-ticker/content-ticker.php';
-   }
-   if( $is_component_active['tooltip'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/tooltip/tooltip.php';
-   }
-   if( $is_component_active['adv-accordion'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/advance-accordion/advance-accordion.php';
-   }
-   if( $is_component_active['adv-tabs'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/advance-tabs/advance-tabs.php';
-   }
-   if( $is_component_active['progress-bar'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/progress-bar/progress-bar.php';
-   }
-   if( $is_component_active['feature-list'] ) {
-      require_once ESSENTIAL_ADDONS_EL_PATH.'elements/feature-list/feature-list.php';
-   }
-}
-add_action('elementor/widgets/widgets_registered','add_eael_elements');
-
-/**
- * Registering a Group Control for All Posts Element
- */
-function eae_posts_register_control( $controls_manager ){
-	include_once ESSENTIAL_ADDONS_EL_PATH . 'includes/eae-posts-group-control.php';
-    $controls_manager->add_group_control( 'eaeposts', new Elementor\EAE_Posts_Group_Control() );
-}
-
-add_action( 'elementor/controls/controls_registered', 'eae_posts_register_control' );
-
-/**
- * Load module's scripts and styles if any module is active.
- *
- * @since v1.0.0
- */
-function essential_addons_el_enqueue(){
-    $is_component_active = eael_activated_modules();
-    wp_enqueue_style('essential_addons_elementor-css',ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-elementor.css');
-    wp_enqueue_script('eael-scripts',ESSENTIAL_ADDONS_EL_URL.'assets/js/eael-scripts.js', array('jquery'),'1.0', true);
-    if ( class_exists( 'GFCommon' ) ) {
-        foreach( eael_select_gravity_form() as $form_id => $form_name ){
-            if ( $form_id != '0' ) {
-                gravity_form_enqueue_scripts( $form_id );
+            if (!did_action('elementor/loaded')) {
+                add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
             }
-        };
+        }
     }
-    if ( function_exists( 'wpforms' ) ) {
-     wpforms()->frontend->assets_css();
-    }
-    if( $is_component_active['fancy-text'] ) {
-      wp_enqueue_script('essential_addons_elementor-fancy-text-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/fancy-text.js', array('jquery'),'1.0', true);
-    }
-    if( $is_component_active['count-down'] ) {
-      wp_enqueue_script('essential_addons_elementor-countdown-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/countdown.min.js', array('jquery'),'1.0', true);
-    }
-    if( $is_component_active['post-grid'] || $is_component_active['twitter-feed'] ) {
-      wp_enqueue_script('essential_addons_elementor-masonry-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/masonry.min.js', array('jquery'),'1.0', true);
-    }
-    if(  $is_component_active['post-grid'] || $is_component_active['post-timeline'] ) {
-        wp_enqueue_script('essential_addons_elementor-load-more-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/load-more.js', array('jquery'),'1.0', true);
-        $eael_js_settings = array(
-            'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        );
-        wp_localize_script( 'essential_addons_elementor-load-more-js', 'eaelPostGrid', $eael_js_settings );
-    }
-    if( $is_component_active['twitter-feed']) {
-      wp_enqueue_script('essential_addons_elementor-codebird-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/codebird.js', array('jquery'),'1.0', true);
-    }
-    if( $is_component_active['twitter-feed'] ) {
-      wp_enqueue_script('essential_addons_elementor-doT-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/doT.min.js', array('jquery'),'1.0', true);
-      wp_enqueue_script('essential_addons_elementor-moment-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/moment.js', array('jquery'),'1.0', true);
-      wp_enqueue_script('essential_addons_elementor-socialfeed-js',ESSENTIAL_ADDONS_EL_URL.'assets/social-feeds/jquery.socialfeed.js', array('jquery'),'1.0', true);
-    }
-
-    if( $is_component_active['filter-gallery'] ) {
-      wp_enqueue_script('essential_addons_mixitup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/mixitup.min.js', array('jquery'),'1.0', true);
-      wp_enqueue_script('essential_addons_magnific-popup-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.magnific-popup.min.js', array('jquery'),'1.0', true);
-
-      wp_register_script('essential_addons_isotope-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/isotope.pkgd.min.js', array('jquery'),'1.0', true);
-
-	    wp_register_script('jquery-resize', ESSENTIAL_ADDONS_EL_URL.'assets/js/jquery.resize.min.js', array('jquery'), '1.0', true);
-    }
-
-    if( $is_component_active['price-table'] ) {
-		wp_enqueue_style('essential_addons_elementor-tooltipster',ESSENTIAL_ADDONS_EL_URL.'assets/css/tooltipster.bundle.min.css');
-		wp_enqueue_script('essential_addons_elementor-tooltipster-js',ESSENTIAL_ADDONS_EL_URL.'assets/js/tooltipster.bundle.min.js', array('jquery'),'1.0', true);
-    }
-    
-    if( $is_component_active['progress-bar'] ) {
-		wp_enqueue_script('essential_addons_elementor-progress-bar',ESSENTIAL_ADDONS_EL_URL.'assets/js/progress-bar.js', array('jquery'),'1.0', true);
-   }
-   if( $is_component_active['section-particles'] ) {
-		wp_enqueue_script(
-         'particles-js', ESSENTIAL_ADDONS_EL_URL.'assets/js/particles.js',
-         ['jquery'], '1.0', true
-      );
-
-		$preset_themes = require ESSENTIAL_ADDONS_EL_PATH.'extensions/eael-particle-section/particle-themes.php';
-		wp_localize_script( 'particles-js', 'ParticleThemesData', $preset_themes );
-	}
-
 }
-add_action( 'wp_enqueue_scripts', 'essential_addons_el_enqueue' );
-
-/**
- * Editor Css
- */
-add_action( 'elementor/editor/before_enqueue_scripts', function() {
-   wp_register_style( 'essential_addons_elementor_editor-css', ESSENTIAL_ADDONS_EL_URL.'assets/css/essential-addons-editor.css');
-   wp_enqueue_style( 'essential_addons_elementor_editor-css' );
-} );
-
-/**
- * Creates an Action Menu
- */
-function eael_add_settings_link( $links ) {
-    $settings_link = sprintf( '<a href="admin.php?page=eael-settings">' . __( 'Settings' ) . '</a>' );
-    $go_pro_link = sprintf( '<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __( 'Go Pro' ) . '</a>' );
-    array_push( $links, $settings_link, $go_pro_link );
-   return $links;
-}
-$plugin = plugin_basename( __FILE__ );
-add_filter( "plugin_action_links_$plugin", 'eael_add_settings_link' );
+add_action('plugins_loaded', function () {
+    new Essential_Addons_Elementor;
+});
 
 /**
  * Activation redirects
  *
  * @since v1.0.0
  */
-function eael_activate() {
-    add_option('eael_do_activation_redirect', true);
-}
-register_activation_hook(__FILE__, 'eael_activate');
-
-/**
- * Redirect to options page
- *
- * @since v1.0.0
- */
-function eael_redirect() {
-    if (get_option('eael_do_activation_redirect', false)) {
-        delete_option('eael_do_activation_redirect');
-        if(!isset($_GET['activate-multi']))
-        {
-            wp_redirect("admin.php?page=eael-settings");
-        }
-    }
-}
-add_action('admin_init', 'eael_redirect');
-
-/**
- * Optional usage tracker
- *
- * @since v1.0.0
- */
-if( ! class_exists( 'Eael_Plugin_Usage_Tracker') ) {
-    require_once dirname( __FILE__ ) . '/includes/class-plugin-usage-tracker.php';
-}
-if( ! function_exists( 'essential_addons_elementor_lite_start_plugin_tracking' ) ) {
-    function essential_addons_elementor_lite_start_plugin_tracking() {
-        $wpins = new Eael_Plugin_Usage_Tracker(
-            __FILE__,
-            'http://app.wpdeveloper.net',
-            array(),
-            true,
-            true,
-            1
-        );
-    }
-    essential_addons_elementor_lite_start_plugin_tracking();
-}
-
-function eael_init() {
-    if ( class_exists( 'Caldera_Forms' ) ) {
-        add_filter( 'caldera_forms_force_enqueue_styles_early', '__return_true' );
-    }
-   /**
-    * Check if Elementor is Installed or not
-    */
-   if( ! function_exists( 'eael_is_elementor_active' ) ) :
-      function eael_is_elementor_active() {
-         $file_path = 'elementor/elementor.php';
-         if ( ! function_exists( 'get_plugins' ) ) {
-            include ABSPATH . '/wp-admin/includes/plugin.php';
-			}
-         $installed_plugins = get_plugins();
-         return isset( $installed_plugins[$file_path] );
-      }
-   endif;
-
-   /**
-    * This notice will appear if Elementor is not installed or activated or both
-    */
-   function eael_is_failed_to_load() {
-      $elementor = 'elementor/elementor.php';
-      if( eael_is_elementor_active() ) {
-         if( ! current_user_can( 'activate_plugins' ) ) {
-            return;
-         }
-         $activation_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor );
-         $message = __( '<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-elementor' );
-         $button_text = __( 'Activate Elementor', 'essential-addons-elementor' );
-      } else {
-         if( ! current_user_can( 'activate_plugins' ) ) {
-            return;
-         }
-         $activation_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
-         $message = sprintf( __( '<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-elementor' ), '<strong>', '</strong>' );
-         $button_text = __( 'Install Elementor', 'essential-addons-elementor' );
-      }
-      $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
-      printf( '<div class="error"><p>%1$s</p>%2$s</div>', __( $message ), $button );
-   }
-
-   if( ! did_action( 'elementor/loaded' ) ) {
-      add_action( 'admin_notices', 'eael_is_failed_to_load' );
-   }
-}
-add_action( 'plugins_loaded', 'eael_init' );
-require_once dirname( __FILE__ ) . '/includes/class-wpdev-notices.php';
-
-/**
- * EAE Pro Activation
- */
-if( ! function_exists( 'eae_pro_filter_action_links' ) ) :
-   add_filter('plugin_action_links_essential-addons-elementor/essential_adons_elementor.php', 'eae_pro_filter_action_links');
-   function eae_pro_filter_action_links( $links ) {
-      if( ! function_exists( 'get_plugins' ) ) {
-         include ABSPATH . '/wp-admin/includes/plugin.php';
-      }
-      $activate_plugins = get_option( 'active_plugins' );
-      if( in_array( plugin_basename( __FILE__ ), $activate_plugins ) ) {
-         $pro_plugin_base_name = 'essential-addons-elementor/essential_adons_elementor.php';
-         if( isset( $links['activate'] ) ) {
-            $activate_link = $links['activate'];
-            // Insert an onClick action to allow form before deactivating
-            $activation_link = str_replace( '<a ', '<a id="eae-pro-activation" onclick="javascript:event.preventDefault();"', $activate_link );
-            $links['activate'] = $activation_link;
-         }
-         return $links;
-      }
-   }
-endif;
-
-if( ! function_exists( 'plugins_footer_for_pro' ) ) :
-   add_action( 'admin_footer-plugins.php', 'plugins_footer_for_pro' );
-   function plugins_footer_for_pro(){
-      ?>
-      <script>
-         jQuery(document).ready(function( $ ){
-            $('#eae-pro-activation').on('click', function( e ){
-               e.preventDefault();
-               swal({
-                  title: '<h2>Please <span style="color: red">Deactivate</span> <br><br> Free Version</h2>',
-                  type: 'error',
-                  html:
-                     'You don\'t need the <span style="color: #1abc9c;font-weight: 700;">Free Version</span> to use the <span style="color: #00629a;font-weight: 700;">Premium</span> one.',
-                  showCloseButton: true,
-                  showCancelButton: false,
-                  focusConfirm: false,
-               }).catch(swal.noop);
-            });
-         });
-      </script>
-      <?php
-   }
-endif;
+register_activation_hook(__FILE__, function () {
+    update_option('eael_do_activation_redirect', true);
+});
