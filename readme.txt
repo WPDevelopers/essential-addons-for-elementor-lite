@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, robicse11128, priyomukul, mahfuz01, mdsabuz, manik08cse
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.9.9
+Stable tag: 2.10.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -68,7 +68,11 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 26. [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/) - Include tab to put information in different styles. Supports nested tabs.
 27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
-29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with icon and images beautifully
+29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
+
+Extensions: 
+
+1. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
 
 
 ### More elements (29+) on [Premium Version](https://essential-addons.com/elementor/buy.php)
@@ -102,6 +106,10 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 27. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
 29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
+
+Extensions: 
+
+1. [Parallax Scrolling](https://essential-addons.com/elementor/parallax-scrolling/) - Add creative parallax scrolling effects to your section, your visitors will love it.
 
 
 More coming soon (weekly update) ...
@@ -160,11 +168,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 2.9.9 - 07/03/2019 =
-
-- Added : Feature List element
-- Particles extension removed
+= 2.10.1 - 31/03/2019 =
+- Feature List element added
+- Fixed few errors and conflicts
+- Advanced Tabs responsiveness improved
 - Few minor bugfix and improvements
+
+= 2.10.0 - 27/03/2019 =
+
+- Refractored plugin structure for improved performance
+- Only one minified JS and one CSS file (if required for the widget) will be used on the page where EA element is being used
+- No extra asset will be loaded if you don't use EA on any page
+- Massive performance improved minimizing the dependencies
+- Lots minor bugfix and improvements
 
 = 2.9.8 - 28/02/2019 =
 
@@ -176,7 +192,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 - Particles extension revamped
 
-= 2.9.6 - 17/02/2019 =
+= 2.9.6 - 17/02/2019=
 
 - Admin side performance improved
 - Few minor bugfix and improvements
