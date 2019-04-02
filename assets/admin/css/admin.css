@@ -1,0 +1,626 @@
+/**
+ *=============================================================
+ * Essential Addons Elementor Admin Settings Page Styles
+ *=============================================================
+ */
+
+/* General Style */
+.eael-settings-wrap {
+    padding: 15px;
+}
+.eael-header-bar {
+    height: auto;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    -webkit-display: flex;
+    display: flex;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.eael-settings-wrap .eael-header-left {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.eael-header-bar .eael-admin-logo-inline {
+    width: 32px;
+    box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
+    padding: 10px 10px 5px;
+    margin-right: 10px;
+}
+.eael-header-bar .eael-admin-logo-inline img {
+    width: 100%;
+}
+.eael-header-bar .title {
+    font-size: 24px;
+    color: #444;
+    font-weight: 600;
+    margin: 0px;
+    line-height: 1;
+}
+
+.eael-header-left,
+.eael-header-right {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+.eael-header-right {
+    text-align: right;
+}
+.eael-settings-tabs {
+    padding-top: 15px;
+}
+
+.eael-settings-tab h4 {
+    font-size: 22px;
+}
+
+.eael-settings-tab p {
+    font-size: 14px;
+}
+
+.eael-settings-tabs ul {
+    width: 100%;
+    height: auto;
+    margin: 25px 0px 20px 0px;
+}
+.eael-settings-tabs ul li {
+    display: inline-block;
+}
+.eael-settings-tabs ul li a {
+    padding: 15px 20px;
+    background: #f8fafb;
+    color: #516378;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-top: 2px solid #f8fafb;
+}
+.eael-settings-tabs ul li:first-child a {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+.eael-settings-tabs ul li a:focus {
+    outline: none;
+    box-shadow: none;
+}
+.eael-settings-tabs ul li a img {
+    width: 20px;
+    margin: 0 5px -3px 0;
+}
+.eael-settings-tab {
+    background: #fff;
+    padding: 15px 25px;
+    margin-top: -8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+    position: relative;
+}
+.eael-settings-tabs ul li.ui-tabs-active a {
+    background: #fff;
+    outline: none;
+    box-shadow: none;
+    color: #343434;
+}
+p.eael-el-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin: 0.5em;
+}
+.eael-settings-tab p.eael-elements-control-notice {
+    color: #42418e;
+    font-size: 16px;
+    border: 1px solid #42418e;
+    padding: 10px;
+    text-align: center;
+    display: block;
+}
+.eael-form-control {
+    width: 100%;
+}
+textarea.eael-form-control {
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5d5d5d;
+}
+.row {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    padding: 15px 0px;
+}
+.col-full {
+    width: 100%;
+    height: auto;
+}
+.col-half {
+    width: 49%;
+    height: auto;
+}
+.col-one-third {
+    width: 32%;
+    height: auto;
+}
+
+/* Checkbox Style */
+.eael-checkbox-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+.eael-checkbox {
+    min-width: 250px;
+    font-size: 24px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.eael-checkbox input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+}
+.eael-checkbox label {
+    width: 2em;
+    height: 1em;
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+.eael-checkbox label:before {
+    content: "";
+    position: absolute;
+    width: 2em;
+    height: 1em;
+    left: 0.1em;
+    transition: background 0.1s 0.1s ease;
+    background: #cbcfd0;
+    border-radius: 50px;
+}
+.eael-checkbox label:after {
+    content: "";
+    position: absolute;
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 100%;
+    left: 0.2em;
+    top: 0.1em;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 0 5px #fcfff4 inset;
+    background: #cbcfd0;
+    z-index: 2;
+    animation: switch-off 0.3s ease-out;
+}
+.eael-checkbox input[type="checkbox"]:checked + label:before {
+    background: #7e86f9;
+    box-shadow: inset 0px 1px 1px rgba(84, 152, 140, 0.5);
+}
+.eael-checkbox input[type="checkbox"]:checked + label:after {
+    left: 1.2em;
+    background: #7e86f9;
+    animation: switch-on 0.3s ease-out;
+}
+
+@keyframes switch-on {
+    50% {
+        transform: scaleX(1.3);
+    }
+}
+
+@keyframes switch-off {
+    50% {
+        transform: scaleX(1.3);
+    }
+}
+
+/* Eael Tab Toggles */
+.eael-settings-tab {
+    display: none;
+}
+.eael-settings-tab.active {
+    display: block;
+}
+.eael-tabs li a.active {
+    background-color: #fff;
+    border-top: 2px solid #6648fe;
+}
+
+/* Footer Style */
+.eael-settings-footer {
+    padding: 20px 25px 15px 25px;
+    background: #fff;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.eael-settings-footer .submit {
+    padding: 0px;
+}
+.eael-settings-footer p.submit {
+    margin-top: 0px;
+}
+
+.eael-settings-tab img {
+    max-width: 100%;
+}
+.button.eael-btn {
+    background-color: #0099cc;
+    color: #fff;
+    padding: 6px 20px;
+    border: none;
+    box-shadow: none;
+    font-size: 14px;
+    height: auto;
+    text-transform: uppercase;
+    text-shadow: none;
+    letter-spacing: 0.05em;
+}
+
+.button.eael-btn:hover,
+.button.eael-btn:focus {
+    background-color: #1e96f1;
+    color: #fff;
+}
+
+.eael-save-btn-wrap {
+    margin: 30px 0 20px;
+}
+
+.eael-save-btn-wrap .eael-btn {
+    background-color: #3ccd94;
+    color: #fff;
+    padding: 10px 20px;
+}
+.eael-save-btn-wrap .eael-btn:hover,
+.eael-save-btn-wrap .eael-btn:focus {
+    background-color: #02cc7b;
+    color: #fff;
+}
+
+.eael-btn.eael-demo-btn {
+    background-color: #42418e;
+    color: #fff;
+}
+.eael-btn.eael-demo-btn:hover,
+.eael-btn.eael-demo-btn:focus {
+    background-color: #ff0188;
+    color: #fff;
+}
+
+.eael-btn.eael-license-btn {
+    background-color: #0dc9c3;
+}
+.eael-btn.eael-license-btn:hover,
+.eael-btn.eael-license-btn:focus {
+    background-color: #08d1ca;
+}
+.eael-btn.eael-demo-btn,
+.eael-btn.eael-license-btn,
+.eael-btn.eael-review-btn {
+    padding: 10px;
+    display: block;
+    max-width: 250px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 13px;
+}
+#eael-spinner {
+    width: 18px;
+    display: inline-block;
+    float: left;
+    margin: 3px 5px 0 0;
+
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1.2s;
+    -webkit-animation-name: rotate;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-transition-property: -moz-transform;
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 1.2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+
+    transition-property: transform;
+    animation-name: rotate;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.premium-elements-title {
+    margin: 50px 0 30px;
+}
+
+.premium-elements-title img {
+    width: 75px;
+    float: left;
+}
+
+.premium-elements-title .section-title {
+    color: #157efb;
+    margin: 35px 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 20px;
+    border-bottom: 6px double #157efb;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.go-premium .eael-btn.eael-license-btn {
+    margin-top: 30px;
+}
+
+.go-premium img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    float: right;
+}
+.eael-notice {
+    background-color: #f7f6d4;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
+    max-width: 90%;
+    color: #9a7223;
+}
+
+.eael-notice h5 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.essential-addons-community-link {
+    background-color: #475a96;
+    margin: 15px 0;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+.essential-addons-community-link:hover {
+    background-color: #3351b2;
+}
+
+.essential-addons-community-link a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+/* Header Button */
+.eael-header-bar .eael-btn {
+    background-color: #3ccd94;
+}
+.eael-header-bar .eael-btn:hover,
+.eael-header-bar .eael-btn:focus {
+    background-color: #02cc7b;
+}
+.eael-save-btn-wrap .eael-btn.save-now,
+.eael-header-bar .eael-btn.save-now,
+.eael-fb-feed-btn.save-now {
+    background: #e74c3c;
+}
+.eael-save-btn-wrap .eael-btn.save-now:hover,
+.eael-header-bar .eael-btn.save-now:hover,
+.eael-fb-feed-btn.save-now:hover {
+    background: #ff5544;
+}
+
+/* Admin Blocks */
+.eael-admin-general-wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+}
+.eael-admin-general-wrapper .eael-admin-general-inner {
+    max-width: 70em;
+    height: auto;
+    flex: 1 1 70%;
+}
+.eael-admin-general-wrapper .eael-sidebar {
+    flex: 1 1 200px;
+    padding: 20px;
+}
+.eael-admin-block-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: -10px;
+}
+.eael-admin-block-wrapper .eael-admin-block {
+    background-color: #fff;
+    flex: 1 1 auto;
+    min-width: 250px;
+    width: 300px;
+    margin: 10px 10px 25px 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+.eael-admin-block-large,
+.eael-sidebar-widget {
+    background: #fff;
+    margin-bottom: 25px;
+    padding: 1em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+.eael-admin-block-wrapper .eael-admin-block.eael-admin-block-banner {
+    padding: 8px;
+}
+.eael-admin-block-header {
+    max-height: 4em;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.eael-admin-block-header-icon {
+    width: 42px;
+    box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+.eael-admin-block-header-icon svg {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+.eael-admin-block-review .eael-admin-block-header-icon svg {
+    width: 100%;
+}
+.eael-admin-block-support .eael-admin-block-header-icon {
+    width: 30px;
+}
+.eael-settings-tab .eael-admin-title {
+    margin: 1em 0;
+    padding: 0 1.26582em;
+    font-size: 1.185em;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.eael-admin-block-content {
+    overflow: hidden;
+    position: relative;
+    padding: 1em 1.5em 1.5em;
+    background-color: #fff;
+}
+.eael-preview-img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    object-fit: cover;
+    transition: all 0.3s;
+}
+.eael-preview-img:hover {
+    opacity: 0.9;
+}
+
+.eael-admin-sidebar {
+    flex: 1 1 200px;
+    padding: 20px;
+}
+.eael-sidebar-block {
+    margin: calc(10% + 1.5em) auto;
+}
+.eael-sidebar-block .eael-admin-sidebar-logo {
+    max-width: 150px;
+    display: block;
+    margin: 0 auto;
+}
+.eael-sidebar-block .eael-admin-sidebar-logo > img,
+.eael-sidebar-block .eael-admin-sidebar-logo > svg {
+    width: 100%;
+    display: block;
+    margin: 10px auto;
+}
+.eael-admin-sidebar-cta a {
+    font-size: 1em;
+    color: rgba(35, 40, 45, 0.45);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.065em;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    border: 1px solid rgba(35, 40, 45, 0.185);
+    border-radius: 4px;
+    padding: 15px;
+    width: 200px;
+    outline: none;
+    box-shadow: none;
+    transition: all 0.3s;
+}
+
+.eael-admin-sidebar-cta a:hover {
+    color: #23282d;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.715);
+}
+
+/* Facebook Settings CSS */
+#social-networks input {
+    padding: 10px;
+}
+#eaelFBbtn,
+#eaelFBbtnOwnApp {
+    cursor: pointer;
+    display: none;
+    /* color: red; */
+}
+
+.page-list-with-access > ul {
+    list-style: none;
+}
+.page-list-with-access > ul > li {
+    display: block;
+    cursor: pointer;
+    padding: 5px 0px;
+}
+.eael-fb-own-app-settings {
+    display: none;
+}
+.eael-fb-own-app-settings.eael-active,
+#eaelFBbtn.eael-active,
+#eaelFBbtnOwnApp.eael-active {
+    display: block;
+}
+
+.warning {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 3px 3px 3px 3px;
+    color: #d8000c;
+    background-color: #ffbaba;
+    overflow: hidden;
+}
+
+.warning > * {
+    float: left;
+}
+#eael_plugins_versions {
+    height: 36px;
+}
+.eael-notice-text {
+    padding-left: 10px;
+}
