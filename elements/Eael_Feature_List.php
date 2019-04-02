@@ -363,12 +363,15 @@ class Eael_Feature_List extends Widget_Base
 		);
 
 		$this->add_group_control(
-			Group_Control_Background::get_type(),
+			Group_Control_Background:: get_type(),
 			[
-				'name' => 'eael_feature_list_icon_background',
-				'types' => [ 'classic', 'gradient' ],
+				'name'    => 'eael_feature_list_icon_background',
+				'types'   => [ 'classic', 'gradient' ],
+				'exclude' => [
+                    'image',
+                ],
 				'color' => [
-					'default'   => '#3858f4',
+					'default' => '#3858f4',
 				],
 				'selector' => '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon-box .eael-feature-list-icon-inner',
 			]
