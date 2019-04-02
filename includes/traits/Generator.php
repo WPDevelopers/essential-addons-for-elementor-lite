@@ -96,6 +96,9 @@ trait Generator
         }
 
         foreach ((array) $sections as $section) {
+            if (empty($section->elements)) {
+                continue;
+            }
             foreach ((array) $section->elements as $element) {
                 if (empty($element->elements)) {
                     continue;
@@ -105,6 +108,10 @@ trait Generator
                         $elements[] = $widget->widgetType;
                     } else {
                         foreach ((array) $widget as $inner_section) {
+                            if (empty($inner_section)) {
+                                continue;
+                            }
+
                             foreach ((array) $inner_section as $inner_elements) {
                                 if (empty($inner_elements->elements)) {
                                     continue;
