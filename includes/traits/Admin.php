@@ -119,7 +119,7 @@ trait Admin
         $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
 
         // Build assets files
-        $ths->generate_scripts(array_keys($settings));
+        $this->generate_scripts(array_keys($settings));
 
         wp_send_json($updated);
     }

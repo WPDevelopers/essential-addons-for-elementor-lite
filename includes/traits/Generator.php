@@ -34,12 +34,13 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_dependency(array $elements, array $deps)
+    public function generate_dependency(array $elements, $type)
     {
         $paths = [];
+
         foreach ($elements as $element) {
-            if (isset($deps[$element])) {
-                foreach ($deps[$element] as $path) {
+            if (!empty($this->registered_elements[$element]['dependency'][$type])) {
+                foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
                     $paths[] = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . $path;
                 }
             }
@@ -75,8 +76,8 @@ trait Generator
         );
 
         // collect library scripts & styles
-        $js_paths = array_merge($js_paths, $this->generate_dependency($elements, $this->js_dependencies));
-        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, $this->css_dependencies));
+        $js_paths = array_merge($js_paths, $this->generate_dependency($elements, 'js'));
+        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css'));
 
         foreach ((array) $elements as $element) {
             if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js')) {
