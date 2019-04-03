@@ -66,7 +66,7 @@
                         );
                         headerSaveBtn.removeClass("save-now");
                         footerSaveBtn.removeClass("save-now");
-                    }, 2000);
+                    }, 1000);
                 },
                 error: function() {
                     swal("Oops...", "Something went wrong!", "error");
@@ -103,7 +103,7 @@
                         "Click OK to continue",
                         "success"
                     );
-                }, 2000);
+                }, 500);
             },
             error: function () {
                 swal("Oops...", "Something went wrong!", "error");
