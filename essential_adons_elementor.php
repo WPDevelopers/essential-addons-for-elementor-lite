@@ -22,6 +22,11 @@ if (!defined('ABSPATH')) {
  */
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
+/**
+ * Skeleton of Essential Addons
+ * 
+ * @since 3.0.0
+ */
 class Essential_Addons_Elementor
 {
     use Essential_Addons_Elementor\Traits\Core;
@@ -33,6 +38,11 @@ class Essential_Addons_Elementor
 
     public $registered_elements;
 
+    /**
+     * Constructor of plugin class
+     * 
+     * @since 3.0.0
+     */
     public function __construct()
     {
         // define plugins constants
@@ -162,7 +172,9 @@ class Essential_Addons_Elementor
                 ],
             ],
         ];
+    }
 
+    public function run() {
         // Start plugin tracking
         $this->start_plugin_tracking();
 
@@ -206,15 +218,51 @@ class Essential_Addons_Elementor
         }
     }
 }
+
+
+/**
+ * Global instance of Essential Addons
+ * 
+ * @since 3.0.0
+ */
+$GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
+
+/**
+ * Run plugin
+ * 
+ * @since 3.0.0
+ */
 add_action('plugins_loaded', function () {
-    new Essential_Addons_Elementor;
+    global $Essential_Addons_Elementor;
+    $Essential_Addons_Elementor->run();
 });
 
 /**
- * Activation redirects
+ * Activation hook
  *
- * @since v1.0.0
+ * @since v3.0.0
  */
 register_activation_hook(__FILE__, function () {
-    update_option('eael_do_activation_redirect', true);
+    global $Essential_Addons_Elementor;
+    $Essential_Addons_Elementor->plugin_activation_hook();
+});
+
+/**
+ * Deactivation hook
+ *
+ * @since v3.0.0
+ */
+register_deactivation_hook(__FILE__, function () {
+    global $Essential_Addons_Elementor;
+    $Essential_Addons_Elementor->plugin_deactivation_hook();
+});
+
+/**
+ * Upgrade hook
+ *
+ * @since v3.0.0
+ */
+add_action('upgrader_process_complete', function () {
+    global $Essential_Addons_Elementor;
+    $Essential_Addons_Elementor->plugin_upgrade_hook();
 });
