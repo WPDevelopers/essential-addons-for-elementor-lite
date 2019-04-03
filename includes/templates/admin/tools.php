@@ -10,7 +10,7 @@
                         <h4 class="eael-admin-title">Clear Cache</h4>
                     </header>
                     <div class="eael-admin-block-content">
-                        <p>Essential Addons styles & scripts are saved in Uploads folder. This option will recreate all those files according to your most recent changes.</a></p>
+                        <p>Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those cached files.</p>
                         <a href="#" id="eael-regenerate-files" class="button eael-btn" target="_blank">Clear Cache</a>
                     </div>
                 </div>
