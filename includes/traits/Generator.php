@@ -68,7 +68,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function collect_elements($widget) {
+    public function collect_transient_elements($widget) {
         $this->transient_elements[] = $widget->get_name();
     }
 
