@@ -59,18 +59,29 @@ class Essential_Addons_Elementor
         $this->registered_elements = [
             'post-grid' => [
                 'class' => 'Eael_Post_Grid',
+                'dependency'    => [
+                    'css'   => [
+                        'assets/front-end/css/product-grid.css',
+                    ],
+                    'js'    => [
+                        'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                        'assets/front-end/js/vendor/load-more/load-more.js',
+                    ]
+                ]
             ],
             'post-timeline' => [
                 'class' => 'Eael_Post_Timeline',
+                'dependency'    => [
+                    'js'    => [
+                        'assets/front-end/js/vendor/load-more/load-more.js',
+                    ]
+                ]
             ],
             'fancy-text' => [
                 'class' => 'Eael_Fancy_Text',
-                'dependency' => [
-                    'css' => [
-
-                    ],
-                    'js' => [
-
+                'dependency'    => [
+                    'js'    => [
+                        'assets/front-end/js/vendor/fancy-text/fancy-text.js',
                     ]
                 ]
             ],
@@ -78,7 +89,12 @@ class Essential_Addons_Elementor
                 'class' => 'Eael_Creative_Button',
             ],
             'count-down' => [
-                'class' => 'Eael_Countdown',
+                'class'      => 'Eael_Countdown',
+                'dependency' => [
+                    'js'    => [
+                        'assets/front-end/js/vendor/count-down/count-down.min.js'
+                    ]
+                ]
             ],
             'team-members' => [
                 'class' => 'Eael_Team_Member',
@@ -99,16 +115,39 @@ class Essential_Addons_Elementor
                 'class' => 'Eael_Dual_Color_Header',
             ],
             'price-table' => [
-                'class' => 'Eael_Pricing_Table',
+                'class'      => 'Eael_Pricing_Table',
+                'dependency' => [
+                    'js'    => [
+                        'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
+                    ]
+                ]
             ],
             'twitter-feed' => [
-                'class' => 'Eael_Twitter_Feed',
+                'class'      => 'Eael_Twitter_Feed',
+                'dependency' => [
+                    'js'    => [
+                        'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                        'assets/front-end/js/vendor/social-feeds/codebird.js',
+                        'assets/front-end/js/vendor/social-feeds/doT.min.js',
+                        'assets/front-end/js/vendor/social-feeds/moment.js',
+                        'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
+                    ]
+                ]
             ],
             'data-table' => [
                 'class' => 'Eael_Data_Table',
             ],
             'filter-gallery' => [
-                'class' => 'Eael_Filterable_Gallery',
+                'class'      => 'Eael_Filterable_Gallery',
+                'dependency' => [
+                    'css'   => [
+                        'assets/front-end/css/magnific-popup.css',
+                    ],
+                    'js'    => [
+                        'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                        'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
+                    ]
+                ]
             ],
             'image-accordion' => [
                 'class' => 'Eael_Image_Accordion',
@@ -126,27 +165,33 @@ class Essential_Addons_Elementor
                 'class' => 'Eael_Adv_Tabs',
             ],
             'progress-bar' => [
-                'class' => 'Eael_Progress_Bar',
+                'class'      => 'Eael_Progress_Bar',
+                'dependency' => [
+                    'js'    => [
+                        'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
+                        'assets/front-end/js/vendor/inview/inview.min.js',
+                    ]
+                ]
             ],
             'feature-list' => [
                 'class' => 'Eael_Feature_List',
             ],
             'product-grid' => [
-                'class' => 'Eael_Product_Grid',
+                'class'     => 'Eael_Product_Grid',
                 'condition' => [
                     'function_exists',
                     'WC',
                 ],
             ],
             'contact-form-7' => [
-                'class' => 'Eael_Contact_Form_7',
+                'class'     => 'Eael_Contact_Form_7',
                 'condition' => [
                     'function_exists',
                     'wpcf7',
                 ],
             ],
             'weforms' => [
-                'class' => 'Eael_WeForms',
+                'class'     => 'Eael_WeForms',
                 'condition' => [
                     'function_exists',
                     'WeForms',
