@@ -85,12 +85,14 @@ trait Admin
 			    	<ul class="eael-tabs">
 				      	<li><a href="#general" class="active"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg' . '"><span>General</span></a></li>
 				      	<li><a href="#elements"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg' . '"><span>Elements</span></a></li>
-						<li><a href="#extensions"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
+                        <li><a href="#extensions"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
+                        <li><a href="#tools"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/wrench.svg' . '"><span>Tools</span></a></li>
 						<li><a href="#go-pro"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
                     </ul>';
                     include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
                     include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
                     include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
                     include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
                 echo '</div>
             </form>
@@ -120,6 +122,10 @@ trait Admin
         do_action('eael_generate_editor_scripts', array_keys($settings));
 
         wp_send_json($updated);
+    }
+
+    public function regenerate_files() {
+        // print_r($_POST);
     }
 
     public function admin_notice()
