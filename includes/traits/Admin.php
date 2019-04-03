@@ -86,7 +86,7 @@ trait Admin
 				      	<li><a href="#general" class="active"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg' . '"><span>General</span></a></li>
 				      	<li><a href="#elements"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg' . '"><span>Elements</span></a></li>
                         <li><a href="#extensions"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
-                        <li><a href="#tools"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/wrench.svg' . '"><span>Tools</span></a></li>
+                        <li><a href="#tools"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/tools.svg' . '"><span>Tools</span></a></li>
 						<li><a href="#go-pro"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
                     </ul>';
                     include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
