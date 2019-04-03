@@ -124,6 +124,10 @@ trait Admin
         wp_send_json($updated);
     }
 
+    public function regenerate_files() {
+        // print_r($_POST);
+    }
+
     public function admin_notice()
     {
         $notice = new WPDeveloper_Notice(EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION);

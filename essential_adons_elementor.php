@@ -205,6 +205,7 @@ class Essential_Addons_Elementor
             add_action('admin_menu', array($this, 'admin_menu'), 600);
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
+            add_action('wp_ajax_regenerate_files_with_ajax', array($this, 'regenerate_files'));
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_add_settings_link'));

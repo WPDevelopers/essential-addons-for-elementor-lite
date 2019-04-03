@@ -78,4 +78,24 @@
                 .css("cursor", "not-allowed");
         }
     });
+
+    $('#eael-regenerate-files').on('click', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "regenerate_files_with_ajax",
+                security: localize.nonce,
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
+
+    });
+
 })(jQuery);
