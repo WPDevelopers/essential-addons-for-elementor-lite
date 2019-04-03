@@ -72,6 +72,11 @@ trait Generator
         $this->transient_elements[] = $widget->get_name();
     }
 
+    /**
+     * Mark post was updated
+     *
+     * @since 3.0.0
+     */
     public function set_transient_status($post_id) {
         update_post_meta($post_id, 'eael_has_transient_elements', true);
     }
@@ -103,6 +108,8 @@ trait Generator
     public function generate_scripts($elements, $file_name = null)
     {
         if (empty($elements)) {
+            $this->remove_files();
+
             return;
         }
 
@@ -119,21 +126,17 @@ trait Generator
             EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general.css",
         );
 
-        // collect library scripts
+        // collect library scripts & styles
         $js_paths = array_merge($js_paths, $this->generate_dependency($elements, $this->js_dependencies));
-
-        // collect library styles
         $css_paths = array_merge($css_paths, $this->generate_dependency($elements, $this->css_dependencies));
 
         foreach ((array) $elements as $element) {
-            $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
-            if (file_exists($js_file)) {
-                $js_paths[] = $js_file;
+            if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js')) {
+                $js_paths[] = $path;
             }
 
-            $css_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css";
-            if (file_exists($css_file)) {
-                $css_paths[] = $css_file;
+            if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css")) {
+                $css_paths[] = $path;
             }
         }
 
@@ -204,18 +207,10 @@ trait Generator
             $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
             if (empty($elements)) {
-                $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $query->queried_object_id . '.min.css';
-                $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $query->queried_object_id . '.min.js';
-
-                if (file_exists($css_path)) {
-                    unlink($css_path);
-                }
-
-                if (file_exists($js_path)) {
-                    unlink($js_path);
-                }
+                $this->remove_files($query->queried_object_id);
             } else {
                 $this->generate_scripts($elements, 'eael-' . $query->queried_object_id);
+                update_post_meta($query->queried_object_id, 'eael_has_transient_elements', false);
             }
         }
     }
