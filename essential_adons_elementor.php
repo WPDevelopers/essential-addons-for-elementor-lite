@@ -24,7 +24,7 @@ require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 /**
  * Skeleton of Essential Addons
- * 
+ *
  * @since 3.0.0
  */
 class Essential_Addons_Elementor
@@ -37,10 +37,11 @@ class Essential_Addons_Elementor
     use Essential_Addons_Elementor\Traits\Elements;
 
     public $registered_elements;
+    public $transient_elements;
 
     /**
      * Constructor of plugin class
-     * 
+     *
      * @since 3.0.0
      */
     public function __construct()
@@ -172,15 +173,20 @@ class Essential_Addons_Elementor
                 ],
             ],
         ];
+
+        $this->transient_elements = array();
     }
 
-    public function run() {
+    public function run()
+    {
         // Start plugin tracking
         $this->start_plugin_tracking();
 
         // Generator
+        add_action('elementor/frontend/before_render', array($this, 'collect_elements'));
         add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));
-        add_action('elementor/editor/after_save', array($this, 'generate_post_scripts'));
+        add_action('loop_end', array($this, 'generate_post_scripts'));
+        add_action('elementor/editor/after_save', array($this, 'set_transient_status'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
@@ -193,10 +199,6 @@ class Essential_Addons_Elementor
         add_action('elementor/widgets/widgets_registered', array($this, 'eael_add_elements'));
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
         add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
-
-        if (class_exists('Caldera_Forms')) {
-            add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
-        }
 
         // Admin
         if (is_admin()) {
@@ -219,17 +221,16 @@ class Essential_Addons_Elementor
     }
 }
 
-
 /**
  * Global instance of Essential Addons
- * 
+ *
  * @since 3.0.0
  */
 $GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
 
 /**
  * Run plugin
- * 
+ *
  * @since 3.0.0
  */
 add_action('plugins_loaded', function () {
