@@ -33,6 +33,25 @@ trait Core
     }
 
     /**
+     * Remove files
+     *
+     * @since 3.0.0
+     */
+    public function remove_files($post_id = null)
+    {
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.js';
+
+        if (file_exists($css_path)) {
+            unlink($css_path);
+        }
+
+        if (file_exists($js_path)) {
+            unlink($js_path);
+        }
+    }
+    
+    /**
      * Remove files in dir
      *
      * @since 3.0.0
@@ -50,7 +69,6 @@ trait Core
 
             unlink($path . DIRECTORY_SEPARATOR . $item);
         }
-
     }
 
     /**
