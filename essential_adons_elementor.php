@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.10.0
+ * Version: 2.10.2
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -51,7 +51,7 @@ class Essential_Addons_Elementor
         define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
         define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
         define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
-        define('EAEL_PLUGIN_VERSION', '2.10.0');
+        define('EAEL_PLUGIN_VERSION', '2.10.2');
         define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
         define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 
@@ -245,8 +245,8 @@ class Essential_Addons_Elementor
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
 
         // Ajax
-        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
+        add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
 
         // Elements
         add_action('elementor/widgets/widgets_registered', array($this, 'eael_add_elements'));
