@@ -125,7 +125,12 @@ trait Admin
     }
 
     public function regenerate_files() {
-        // print_r($_POST);
+        check_ajax_referer('essential-addons-elementor', 'security');
+
+        // clear cache files
+        $this->empty_dir(EAEL_ASSET_PATH);
+
+        wp_send_json(true);
     }
 
     public function admin_notice()
