@@ -119,12 +119,12 @@ trait Admin
         $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
 
         // Build assets files
-        do_action('eael_generate_editor_scripts', array_keys($settings));
+        $ths->generate_scripts(array_keys($settings));
 
         wp_send_json($updated);
     }
 
-    public function regenerate_files() {
+    public function clear_cache_files() {
         check_ajax_referer('essential-addons-elementor', 'security');
 
         // clear cache files

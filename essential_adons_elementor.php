@@ -65,6 +65,14 @@ class Essential_Addons_Elementor
             ],
             'fancy-text' => [
                 'class' => 'Eael_Fancy_Text',
+                'dependency' => [
+                    'css' => [
+
+                    ],
+                    'js' => [
+
+                    ]
+                ]
             ],
             'creative-btn' => [
                 'class' => 'Eael_Creative_Button',
@@ -174,7 +182,8 @@ class Essential_Addons_Elementor
             ],
         ];
 
-        $this->transient_elements = array();
+        // initialize transient elements
+        $this->transient_elements = [];
     }
 
     public function run()
@@ -183,10 +192,9 @@ class Essential_Addons_Elementor
         $this->start_plugin_tracking();
 
         // Generator
-        add_action('elementor/frontend/before_render', array($this, 'collect_elements'));
-        add_action('eael_generate_editor_scripts', array($this, 'generate_scripts'));
-        add_action('loop_end', array($this, 'generate_post_scripts'));
+        add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
         add_action('elementor/editor/after_save', array($this, 'set_transient_status'));
+        add_action('loop_end', array($this, 'generate_post_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
@@ -207,7 +215,7 @@ class Essential_Addons_Elementor
             add_action('admin_menu', array($this, 'admin_menu'), 600);
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
-            add_action('wp_ajax_regenerate_files_with_ajax', array($this, 'regenerate_files'));
+            add_action('wp_ajax_clear_cache_files_with_ajax', array($this, 'clear_cache_files'));
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_add_settings_link'));
