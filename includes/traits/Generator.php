@@ -127,12 +127,12 @@ trait Generator
 
         foreach ((array) $elements as $element) {
             $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
-            if (file_exists($js_file)) {
+            if (is_readable($js_file)) {
                 $js_paths[] = $js_file;
             }
 
             $css_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css";
-            if (file_exists($css_file)) {
+            if (is_readable($css_file)) {
                 $css_paths[] = $css_file;
             }
         }
@@ -216,6 +216,7 @@ trait Generator
                 }
             } else {
                 $this->generate_scripts($elements, 'eael-' . $query->queried_object_id);
+                update_post_meta($query->queried_object_id, 'eael_has_transient_elements', false);
             }
         }
     }
