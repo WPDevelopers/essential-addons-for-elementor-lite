@@ -11,7 +11,7 @@
                     </header>
                     <div class="eael-admin-block-content">
                         <p>Essential Addons styles & scripts are saved in Uploads folder. This option will recreate all those files according to your most srecent changes.</a></p>
-                        <a href="#" class="button eael-btn elementor-button-spinner" target="_blank">Regenerate Files</a>
+                        <a href="#" id="eael-regenerate-files" class="button eael-btn elementor-button-spinner" target="_blank">Regenerate Files</a>
                     </div>
                 </div>
             </div><!--admin block-wrapper end-->
