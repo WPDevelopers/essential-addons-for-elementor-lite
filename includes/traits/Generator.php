@@ -10,58 +10,6 @@ use \Elementor\Plugin;
 
 trait Generator
 {
-    /**
-     * Define js dependencies
-     *
-     * @since 3.0.0
-     */
-    public $js_dependencies = array(
-        'fancy-text' => array(
-            'assets/front-end/js/vendor/fancy-text/fancy-text.js',
-        ),
-        'count-down' => array(
-            'assets/front-end/js/vendor/count-down/count-down.min.js',
-        ),
-        'filter-gallery' => array(
-            'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
-        ),
-        'post-timeline' => array(
-            'assets/front-end/js/vendor/load-more/load-more.js',
-        ),
-        'price-table' => array(
-            'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
-        ),
-        'progress-bar' => array(
-            'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
-            'assets/front-end/js/vendor/inview/inview.min.js',
-        ),
-        'twitter-feed' => array(
-            'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/js/vendor/social-feeds/codebird.js',
-            'assets/front-end/js/vendor/social-feeds/doT.min.js',
-            'assets/front-end/js/vendor/social-feeds/moment.js',
-            'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
-        ),
-        'post-grid' => array(
-            'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/js/vendor/load-more/load-more.js',
-        ),
-    );
-
-    /**
-     * Define css dependencies
-     *
-     * @since 3.0.0
-     */
-    public $css_dependencies = [
-        'post-grid' => [
-            'assets/front-end/css/product-grid.css',
-        ],
-        'filter-gallery' => [
-            'assets/front-end/css/magnific-popup.css',
-        ],
-    ];
 
     /**
      * Collect elements in a page or post
