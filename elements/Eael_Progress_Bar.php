@@ -383,6 +383,9 @@ class Eael_Progress_Bar extends Widget_Base
                 'name' => 'progress_bar_line_fill_color',
                 'label' => __('Color', 'essential-addons-elementor'),
                 'types' => ['classic', 'gradient'],
+                'exclude'               => [
+                    'image',
+                ],
                 'selector' => '{{WRAPPER}} .eael-progressbar-line-fill',
                 'separator' => 'before',
             ]

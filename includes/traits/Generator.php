@@ -5,160 +5,48 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use MatthiasMullie\Minify;
+use \MatthiasMullie\Minify;
+use \Elementor\Plugin;
 
 trait Generator
 {
+
     /**
-     * Define js dependencies
+     * Collect elements in a page or post
      *
      * @since 3.0.0
      */
-    public $js_dependencies = array(
-        'fancy-text' => array(
-            'assets/front-end/js/vendor/fancy-text/fancy-text.js',
-        ),
-        'count-down' => array(
-            'assets/front-end/js/vendor/count-down/count-down.min.js',
-        ),
-        'filter-gallery' => array(
-            'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
-        ),
-        'post-timeline' => array(
-            'assets/front-end/js/vendor/load-more/load-more.js',
-        ),
-        'price-table' => array(
-            'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
-        ),
-        'progress-bar' => array(
-            'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
-            'assets/front-end/js/vendor/inview/inview.min.js',
-        ),
-        'twitter-feed' => array(
-            'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/js/vendor/social-feeds/codebird.js',
-            'assets/front-end/js/vendor/social-feeds/doT.min.js',
-            'assets/front-end/js/vendor/social-feeds/moment.js',
-            'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
-        ),
-        'post-grid' => array(
-            'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-            'assets/front-end/js/vendor/load-more/load-more.js',
-        ),
-    );
+    public function collect_transient_elements($widget) {
+        $this->transient_elements[] = $widget->get_name();
+    }
 
     /**
-     * Define css dependencies
+     * Mark post was updated
      *
      * @since 3.0.0
      */
-    public $css_dependencies = [
-        'post-grid' => [
-            'assets/front-end/css/product-grid.css',
-        ],
-        'filter-gallery' => [
-            'assets/front-end/css/magnific-popup.css',
-        ],
-    ];
-
-    /**
+    public function set_transient_status($post_id) {
+        update_post_meta($post_id, 'eael_has_transient_elements', true);
+    }
+    
+     /**
      * Collect dependencies for modules
      *
      * @since 3.0.0
      */
-    public function generate_dependency(array $elements, array $deps)
+    public function generate_dependency(array $elements, $type)
     {
         $paths = [];
+
         foreach ($elements as $element) {
-            if (isset($deps[$element])) {
-                foreach ($deps[$element] as $path) {
+            if (!empty($this->registered_elements[$element]['dependency'][$type])) {
+                foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
                     $paths[] = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . $path;
                 }
             }
         }
 
         return array_unique($paths);
-    }
-
-    /**
-     * Search elements in a post.
-     *
-     * @since 3.0.0
-     */
-    public function widgets_in_post($post_id)
-    {
-        $elements = array();
-        $sections = json_decode((string) get_post_meta($post_id, '_elementor_data', true));
-
-        if (empty($sections)) {
-            return $elements;
-        }
-
-        foreach ((array) $sections as $section) {
-            if (empty($section->elements)) {
-                continue;
-            }
-            foreach ((array) $section->elements as $element) {
-                if (empty($element->elements)) {
-                    continue;
-                }
-                foreach ((array) $element->elements as $widget) {
-                    if (@$widget->widgetType) {
-                        $elements[] = $widget->widgetType;
-                    } else {
-                        foreach ((array) $widget as $inner_section) {
-                            if (empty($inner_section)) {
-                                continue;
-                            }
-
-                            foreach ((array) $inner_section as $inner_elements) {
-                                if (empty($inner_elements->elements)) {
-                                    continue;
-                                }
-                                foreach ((array) $inner_elements->elements as $inner_widget) {
-                                    if (@$inner_widget->widgetType) {
-                                        $elements[] = $inner_widget->widgetType;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        $elements = array_map(function ($val) {
-            $val = str_replace(['eael-'], [''], $val);
-
-            return str_replace([
-                'eicon-woocommerce',
-                'countdown',
-                'creative-button',
-                'team-member',
-                'testimonial',
-                'weform',
-                'cta-box',
-                'dual-color-header',
-                'pricing-table',
-                'filterable-gallery',
-            ], [
-                'product-grid',
-                'count-down',
-                'creative-btn',
-                'team-members',
-                'testimonials',
-                'weforms',
-                'call-to-action',
-                'dual-header',
-                'price-table',
-                'filter-gallery',
-            ], $val);
-        }, $elements);
-
-        $elements = array_intersect(array_keys($this->registered_elements), $elements);
-
-        return $elements;
     }
 
     /**
@@ -169,6 +57,8 @@ trait Generator
     public function generate_scripts($elements, $file_name = null)
     {
         if (empty($elements)) {
+            $this->remove_files();
+
             return;
         }
 
@@ -185,21 +75,17 @@ trait Generator
             EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general.css",
         );
 
-        // collect library scripts
-        $js_paths = array_merge($js_paths, $this->generate_dependency($elements, $this->js_dependencies));
-
-        // collect library styles
-        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, $this->css_dependencies));
+        // collect library scripts & styles
+        $js_paths = array_merge($js_paths, $this->generate_dependency($elements, 'js'));
+        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css'));
 
         foreach ((array) $elements as $element) {
-            $js_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js';
-            if (file_exists($js_file)) {
-                $js_paths[] = $js_file;
+            if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js')) {
+                $js_paths[] = $path;
             }
 
-            $css_file = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css";
-            if (file_exists($css_file)) {
-                $css_paths[] = $css_file;
+            if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css")) {
+                $css_paths[] = $path;
             }
         }
 
@@ -211,29 +97,70 @@ trait Generator
     }
 
     /**
+     * Check if cache files exists
+     *
+     * @since 3.0.0
+     */
+    public function has_cache_files($post_id = null)
+    {
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.js';
+
+        if (is_readable($css_path) && is_readable($js_path)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Generate single post scripts
      *
      * @since 3.0.0
      */
-    public function generate_post_scripts($post_id, $elements = null)
+    public function generate_post_scripts($query)
     {
-        if (!is_array($elements)) {
-            $elements = $this->widgets_in_post($post_id);
+        if (Plugin::$instance->preview->is_preview_mode()) {
+            return;
         }
 
-        if (empty($elements)) {
-            $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css';
-            $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js';
+        if (get_post_meta($query->queried_object_id, 'eael_has_transient_elements', true) || !$this->has_cache_files($query->queried_object_id)) {
+            $elements = array_map(function ($val) {
+                $val = str_replace(['eael-'], [''], $val);
 
-            if (file_exists($css_path)) {
-                unlink($css_path);
-            }
+                return str_replace([
+                    'eicon-woocommerce',
+                    'countdown',
+                    'creative-button',
+                    'team-member',
+                    'testimonial',
+                    'weform',
+                    'cta-box',
+                    'dual-color-header',
+                    'pricing-table',
+                    'filterable-gallery',
+                ], [
+                    'product-grid',
+                    'count-down',
+                    'creative-btn',
+                    'team-members',
+                    'testimonials',
+                    'weforms',
+                    'call-to-action',
+                    'dual-header',
+                    'price-table',
+                    'filter-gallery',
+                ], $val);
+            }, $this->transient_elements);
 
-            if (file_exists($js_path)) {
-                unlink($js_path);
+            $elements = array_intersect(array_keys($this->registered_elements), $elements);
+
+            if (empty($elements)) {
+                $this->remove_files($query->queried_object_id);
+            } else {
+                $this->generate_scripts($elements, 'eael-' . $query->queried_object_id);
+                update_post_meta($query->queried_object_id, 'eael_has_transient_elements', false);
             }
-        } else {
-            $this->generate_scripts($elements, 'eael-' . $post_id);
         }
     }
 }
