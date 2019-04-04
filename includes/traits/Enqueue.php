@@ -10,11 +10,9 @@ use \Elementor\Plugin;
 
 trait Enqueue
 {
-    public $js_file, $css_file, $post_id;
-
     public function enqueue_scripts()
     {
-        // Gravity Form Compatibility
+        // Gravity forms Compatibility
         if (class_exists('GFCommon')) {
             foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
                 if ($form_id != '0') {
@@ -28,19 +26,20 @@ trait Enqueue
             wpforms()->frontend->assets_css();
         }
 
+        // Caldera forms compatibility
+        if (class_exists('Caldera_Forms')) {
+            add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
+        }
+
         // My Assets
         if (Plugin::$instance->preview->is_preview_mode()) {
-            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.js')) {
+            if ($this->has_cache_files()) {
+                $css_file = EAEL_ASSET_URL . '/eael.min.css';
                 $js_file = EAEL_ASSET_URL . '/eael.min.js';
             } else {
-                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-                $this->generate_scripts($this->get_settings());
-            }
-
-            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael.min.css')) {
-                $css_file = EAEL_ASSET_URL . '/eael.min.css';
-            } else {
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
+                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+
                 $this->generate_scripts($this->get_settings());
             }
 
@@ -72,24 +71,13 @@ trait Enqueue
             ));
         } else if (is_singular()) {
             $post_id = get_the_ID();
-            $elements = $this->widgets_in_post($post_id);
 
-            if (empty($elements)) {
-                return;
-            }
-
-            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.js')) {
+            if ($this->has_cache_files($post_id)) {
+                $css_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.css';
                 $js_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.js';
             } else {
-                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-                $this->generate_post_scripts($post_id, $elements);
-            }
-
-            if (file_exists(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . 'eael-' . $post_id . '.min.css')) {
-                $css_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.css';
-            } else {
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                $this->generate_post_scripts($post_id, $elements);
+                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
             }
 
             wp_enqueue_script(
