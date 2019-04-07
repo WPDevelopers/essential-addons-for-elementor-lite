@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.10.0
+Stable tag: 2.10.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -36,7 +36,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 28+ FREE WIDGETS AND COUNTING
+### 29+ FREE WIDGETS AND COUNTING
 
 We have designed 29 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -68,6 +68,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 26. [Advanced Tabs](https://essential-addons.com/elementor/advanced-tabs/) - Include tab to put information in different styles. Supports nested tabs.
 27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
+29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
 
 Extensions: 
 
@@ -166,6 +167,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.10.2 - 04/04/2019 =
+- Feature List element improved
+- Dynamic file regenrating tools added
+- Nexted dynamic templates design issue fixed
+- Few minor bugfix and improvements
+
+= 2.10.1 - 31/03/2019 =
+- Feature List element added
+- Fixed few errors and conflicts
+- Advanced Tabs responsiveness improved
+- Few minor bugfix and improvements
 
 = 2.10.0 - 27/03/2019 =
 

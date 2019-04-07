@@ -1,10 +1,5 @@
 {
     "name": "rupok/essential-addons-for-elementor-lite",
-    "config": {
-        "optimize-autoloader": true,
-        "classmap-authoritative": true,
-        "apcu-autoloader": true
-    },
     "autoload": {
         "psr-4": {
             "Essential_Addons_Elementor\\Admin\\": "admin",

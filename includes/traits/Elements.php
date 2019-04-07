@@ -44,13 +44,13 @@ trait Elements
     {
         $active_elements = $this->get_settings();
 
-        if(empty($active_elements)) {
+        if (empty($active_elements)) {
             return;
         }
 
         foreach ($active_elements as $active_element) {
 
-            if( ! isset( $this->registered_elements[ $active_element ] ) ) {
+            if (!isset($this->registered_elements[$active_element])) {
                 continue;
             }
 
@@ -59,9 +59,9 @@ trait Elements
                     continue;
                 }
             }
-            
+
             $element_class = '\Essential_Addons_Elementor\Elements\\' . $this->registered_elements[$active_element]['class'];
-            $widgets_manager->register_widget_type( new $element_class );
+            $widgets_manager->register_widget_type(new $element_class);
         }
     }
 
