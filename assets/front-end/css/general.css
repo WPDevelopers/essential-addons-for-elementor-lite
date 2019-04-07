@@ -107,7 +107,7 @@
   height: auto;
   margin: 0;
   outline: 0;
-  width: auto;
+  width: 100%;
 }
 
 .eael-contact-form input[type=submit] {
