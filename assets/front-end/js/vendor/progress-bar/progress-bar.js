@@ -1,5 +1,4 @@
 (function($) {
-	// eaelProgressBar
 	$.fn.eaelProgressBar = function() {
 		var $this = $(this)
 		var $layout = $this.data('layout')

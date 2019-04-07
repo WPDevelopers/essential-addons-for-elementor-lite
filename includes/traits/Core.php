@@ -4,8 +4,7 @@ namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
     exit;
-}
-// Exit if accessed directly
+} // Exit if accessed directly
 
 use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tracker;
 
@@ -31,6 +30,73 @@ trait Core
         $elements = get_option('eael_save_settings', array_fill_keys(array_keys($this->registered_elements), true));
 
         return (isset($element) ? $elements[$element] : array_keys(array_filter($elements)));
+    }
+
+    /**
+     * Remove files
+     *
+     * @since 3.0.0
+     */
+    public function remove_files($post_id = null)
+    {
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.js';
+
+        if (file_exists($css_path)) {
+            unlink($css_path);
+        }
+
+        if (file_exists($js_path)) {
+            unlink($js_path);
+        }
+    }
+    
+    /**
+     * Remove files in dir
+     *
+     * @since 3.0.0
+     */
+    public function empty_dir($path)
+    {
+        if (!is_dir($path) || !file_exists($path)) {
+            return;
+        }
+
+        foreach (scandir($path) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+
+            unlink($path . DIRECTORY_SEPARATOR . $item);
+        }
+    }
+
+    /**
+     * Plugin activation hook
+     */
+    public function plugin_activation_hook()
+    {
+        // remove old cache files
+        $this->empty_dir(EAEL_ASSET_PATH);
+
+        // Redirect to options page
+        update_option('eael_do_activation_redirect', true);
+    }
+
+    /**
+     * Plugin deactivation hook
+     */
+    public function plugin_deactivation_hook()
+    {
+        $this->empty_dir(EAEL_ASSET_PATH);
+    }
+
+    /**
+     * Plugin activation hook
+     */
+    public function plugin_upgrade_hook()
+    {
+        $this->empty_dir(EAEL_ASSET_PATH);
     }
 
     /**
