@@ -5,8 +5,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \MatthiasMullie\Minify;
 use \Elementor\Plugin;
+use \MatthiasMullie\Minify;
 
 trait Generator
 {
@@ -16,7 +16,8 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function collect_transient_elements($widget) {
+    public function collect_transient_elements($widget)
+    {
         $this->transient_elements[] = $widget->get_name();
     }
 
@@ -25,11 +26,12 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function set_transient_status($post_id) {
+    public function set_transient_status($post_id)
+    {
         update_post_meta($post_id, 'eael_has_transient_elements', true);
     }
-    
-     /**
+
+    /**
      * Collect dependencies for modules
      *
      * @since 3.0.0
