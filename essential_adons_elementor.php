@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  *
  * @since 3.0.0
  */
-require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+$GLOBALS['Essential_Addons_Elementor_Loader'] = require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 /**
  * Skeleton of Essential Addons
@@ -56,7 +56,7 @@ class Essential_Addons_Elementor
         define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 
         // define elements classmap
-        $this->registered_elements = [
+        $this->registered_elements = apply_filters('eael_registered_elements', [
             'post-grid' => [
                 'class' => 'Eael_Post_Grid',
                 'dependency' => [
@@ -225,7 +225,7 @@ class Essential_Addons_Elementor
                     '\WPForms\WPForms',
                 ],
             ],
-        ];
+        ]);
 
         // initialize transient elements
         $this->transient_elements = [];
@@ -238,8 +238,8 @@ class Essential_Addons_Elementor
 
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('elementor/editor/after_save', array($this, 'set_transient_status'));
-        add_action('loop_end', array($this, 'generate_post_scripts'));
+        // add_action('elementor/editor/after_save', array($this, 'set_transient_status'));
+        add_action('loop_end', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
