@@ -169,7 +169,7 @@ trait Generator
                 $this->generate_scripts($elements, 'eael-' . $queried_object);
             }
 
-            if (!$this->has_cache_files()) {
+            if (!$this->has_cache_files($queried_object)) {
                 $this->generate_scripts($elements, 'eael-' . $queried_object);
             }
 
