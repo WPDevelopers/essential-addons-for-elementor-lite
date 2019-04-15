@@ -71,14 +71,9 @@ trait Enqueue
             ));
         } else if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
+            $elements = (array) get_metadata((is_singular() ? 'post' : 'term'), $queried_object, 'eael_transient_elements', true);
 
-            if (is_singular()) {
-                $elements = (array) get_post_meta($queried_object, 'eael_transient_elements', true);
-            } else if (is_archive()) {
-                $elements = (array) get_term_meta($queried_object, 'eael_transient_elements', true);
-            }
-
-            if(empty($elements)) {
+            if (empty($elements)) {
                 return;
             }
 

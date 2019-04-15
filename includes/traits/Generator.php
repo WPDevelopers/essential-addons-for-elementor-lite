@@ -148,24 +148,14 @@ trait Generator
 
         if ($wp_query->is_singular || $wp_query->is_archive) {
             $queried_object = get_queried_object_id();
-
-            if ($wp_query->is_singular) {
-                $old_elements = (array) get_post_meta($queried_object, 'eael_transient_elements', true);
-            } else if ($wp_query->is_archive) {
-                $old_elements = (array) get_term_meta($queried_object, 'eael_transient_elements', true);
-            }
+            $old_elements = (array) get_metadata(($wp_query->is_singular ? 'post' : 'term'), $queried_object, 'eael_transient_elements', true);
 
             // sort two arr for compare
             sort($elements);
             sort($old_elements);
 
             if ($old_elements != $elements) {
-                if ($wp_query->is_singular) {
-                    update_post_meta($queried_object, 'eael_transient_elements', $elements);
-                } else if ($wp_query->is_archive) {
-                    update_term_meta($queried_object, 'eael_transient_elements', $elements);
-                }
-
+                update_metadata(($wp_query->is_singular ? 'post' : 'term'), $queried_object, 'eael_transient_elements', $elements);
                 $this->generate_scripts($elements, 'eael-' . $queried_object);
             }
 
