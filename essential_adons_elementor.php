@@ -238,7 +238,6 @@ class Essential_Addons_Elementor
 
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        // add_action('elementor/editor/after_save', array($this, 'set_transient_status'));
         add_action('loop_end', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
