@@ -69,6 +69,46 @@ trait Enqueue
             wp_localize_script('eael-backend', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
             ));
+        } else if (is_singular() || is_archive()) {
+            $queried_object = get_queried_object_id();
+
+            if (is_singular()) {
+                $elements = (array) get_post_meta($queried_object, 'eael_transient_elements', true);
+            } else if (is_archive()) {
+                $elements = (array) get_term_meta($queried_object, 'eael_transient_elements', true);
+            }
+
+            if(empty($elements)) {
+                return;
+            }
+
+            if ($this->has_cache_files($queried_object)) {
+                $css_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.css';
+                $js_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.js';
+            } else {
+                $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
+                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+            }
+
+            wp_enqueue_style(
+                'eael-front-end',
+                $css_file,
+                false,
+                EAEL_PLUGIN_VERSION
+            );
+
+            wp_enqueue_script(
+                'eael-front-end',
+                $js_file,
+                ['jquery'],
+                EAEL_PLUGIN_VERSION,
+                true
+            );
+
+            // localize script
+            wp_localize_script('eael-front-end', 'localize', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+            ));
         }
     }
 }
