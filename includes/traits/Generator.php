@@ -157,11 +157,18 @@ trait Generator
             if ($old_elements != $elements) {
                 update_metadata(($wp_query->is_singular ? 'post' : 'term'), $queried_object, 'eael_transient_elements', $elements);
                 
-                if (empty($elements)) {
-                    $this->remove_files($queried_object);
-                } else {
+                // if not empty elements, regenerate cache files
+                if (!empty($elements)) {
                     $this->generate_scripts($elements, 'eael-' . $queried_object);
+
+                    // load generated files - fallback
+                    $this->enqueue_protocols($queried_object);
                 }
+            }
+
+            // if no elements, remove cache files
+            if (empty($elements)) {
+                $this->remove_files($queried_object);
             }
         }
     }

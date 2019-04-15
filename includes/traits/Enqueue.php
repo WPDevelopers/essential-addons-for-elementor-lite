@@ -77,35 +77,45 @@ trait Enqueue
                 return;
             }
 
-            if ($this->has_cache_files($queried_object)) {
-                $css_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.css';
-                $js_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.js';
-            } else {
-                $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-
-                $this->generate_scripts($elements, 'eael-' . $queried_object);
-            }
-
-            wp_enqueue_style(
-                'eael-front-end',
-                $css_file,
-                false,
-                EAEL_PLUGIN_VERSION
-            );
-
-            wp_enqueue_script(
-                'eael-front-end',
-                $js_file,
-                ['jquery'],
-                EAEL_PLUGIN_VERSION,
-                true
-            );
-
-            // localize script
-            wp_localize_script('eael-front-end', 'localize', array(
-                'ajaxurl' => admin_url('admin-ajax.php'),
-            ));
+            $this->enqueue_protocols($queried_object);
         }
+    }
+
+    public function enqueue_protocols($queried_object)
+    {
+        if ($this->has_cache_files($queried_object)) {
+            $css_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.css';
+            $js_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.js';
+        } else {
+            $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
+            $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+        }
+
+        wp_register_style(
+            'eael-front-test',
+            $css_file,
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_enqueue_style(
+            'eael-front-end',
+            $css_file,
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_enqueue_script(
+            'eael-front-end',
+            $js_file,
+            ['jquery'],
+            EAEL_PLUGIN_VERSION,
+            true
+        );
+
+        // localize script
+        wp_localize_script('eael-front-end', 'localize', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+        ));
     }
 }
