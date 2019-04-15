@@ -60,8 +60,7 @@ trait Elements
                 }
             }
 
-            $element_class = '\Essential_Addons_Elementor\Elements\\' . $this->registered_elements[$active_element]['class'];
-            $widgets_manager->register_widget_type(new $element_class);
+            $widgets_manager->register_widget_type(new $this->registered_elements[$active_element]['class']);
         }
     }
 
