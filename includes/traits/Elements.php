@@ -50,15 +50,15 @@ trait Elements
 
         foreach ($active_elements as $active_element) {
 
-            if (!isset($this->registered_elements[$active_element])) {
-                continue;
-            }
+            // if (!isset($this->registered_elements[$active_element])) {
+            //     continue;
+            // }
 
-            if (isset($this->registered_elements[$active_element]['condition'])) {
-                if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
-                    continue;
-                }
-            }
+            // if (isset($this->registered_elements[$active_element]['condition'])) {
+            //     if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
+            //         continue;
+            //     }
+            // }
 
             $widgets_manager->register_widget_type(new $this->registered_elements[$active_element]['class']);
         }

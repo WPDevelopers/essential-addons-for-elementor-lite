@@ -275,12 +275,6 @@ class Essential_Addons_Elementor
     }
 }
 
-/**
- * Global instance of Essential Addons
- *
- * @since 3.0.0
- */
-$GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
 
 /**
  * Run plugin
@@ -288,6 +282,14 @@ $GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
  * @since 3.0.0
  */
 add_action('plugins_loaded', function () {
+
+    /**
+     * Global instance of Essential Addons
+     *
+     * @since 3.0.0
+     */
+    $GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
+
     global $Essential_Addons_Elementor;
     $Essential_Addons_Elementor->run();
 });
