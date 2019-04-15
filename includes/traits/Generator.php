@@ -156,15 +156,12 @@ trait Generator
 
             if ($old_elements != $elements) {
                 update_metadata(($wp_query->is_singular ? 'post' : 'term'), $queried_object, 'eael_transient_elements', $elements);
-                $this->generate_scripts($elements, 'eael-' . $queried_object);
-            }
-
-            if (!$this->has_cache_files($queried_object)) {
-                $this->generate_scripts($elements, 'eael-' . $queried_object);
-            }
-
-            if (empty($elements)) {
-                $this->remove_files($queried_object);
+                
+                if (empty($elements)) {
+                    $this->remove_files($queried_object);
+                } else {
+                    $this->generate_scripts($elements, 'eael-' . $queried_object);
+                }
             }
         }
     }
