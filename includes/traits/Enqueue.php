@@ -83,6 +83,8 @@ trait Enqueue
             } else {
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
                 $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+
+                $this->generate_scripts($elements, 'eael-' . $queried_object);
             }
 
             wp_enqueue_style(
