@@ -29,7 +29,7 @@ trait Core
     {
         $elements = get_option('eael_save_settings', array_fill_keys(array_keys($this->registered_elements), true));
 
-        return (isset($element) ? $elements[$element] : array_keys(array_filter($elements)));
+        return (isset($element) ? (isset($elements[$element]) ? $elements[$element] : 0) : array_keys(array_filter($elements)));
     }
 
     /**
@@ -50,7 +50,7 @@ trait Core
             unlink($js_path);
         }
     }
-    
+
     /**
      * Remove files in dir
      *
