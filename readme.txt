@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.10.1
+Stable tag: 2.10.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -167,6 +167,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.10.2 - 04/04/2019 =
+- Feature List element improved
+- Dynamic file regenrating tools added
+- Nexted dynamic templates design issue fixed
+- Few minor bugfix and improvements
 
 = 2.10.1 - 31/03/2019 =
 - Feature List element added
