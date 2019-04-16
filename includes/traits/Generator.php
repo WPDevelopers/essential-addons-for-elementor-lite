@@ -93,10 +93,10 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function has_cache_files($post_id = null)
+    public function has_cache_files($post_id = null, $post_type = null)
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.js';
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id . '-' : 'eael') . ($post_type ? $post_type : '') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id . '-' : 'eael') . ($post_type ? $post_type : '') . '.min.js';
 
         if (is_readable($css_path) && is_readable($js_path)) {
             return true;
@@ -148,22 +148,28 @@ trait Generator
 
         if ($wp_query->is_singular || $wp_query->is_archive) {
             $queried_object = get_queried_object_id();
-            $old_elements = (array) get_metadata(($wp_query->is_singular ? 'post' : 'term'), $queried_object, 'eael_transient_elements', true);
+            $post_type = ($wp_query->is_singular ? 'post' : 'term');
+            $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
             // sort two arr for compare
             sort($elements);
             sort($old_elements);
 
             if ($old_elements != $elements) {
-                update_metadata(($wp_query->is_singular ? 'post' : 'term'), $queried_object, 'eael_transient_elements', $elements);
-                
+                update_metadata($post_type, $queried_object, 'eael_transient_elements', $elements);
+
                 // if not empty elements, regenerate cache files
                 if (!empty($elements)) {
-                    $this->generate_scripts($elements, 'eael-' . $queried_object);
+                    $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
 
                     // load generated files - fallback
-                    $this->enqueue_protocols($queried_object);
+                    $this->enqueue_protocols($queried_object, $post_type);
                 }
+            }
+
+            // if no cache files, generate new
+            if (!$this->has_cache_files($queried_object, $post_type)) {
+                $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
             }
 
             // if no elements, remove cache files
