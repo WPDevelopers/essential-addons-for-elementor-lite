@@ -18,7 +18,7 @@ trait Enqueue
                 if ($form_id != '0') {
                     gravity_form_enqueue_scripts($form_id);
                 }
-            };
+            }
         }
 
         // WPforms compatibility
