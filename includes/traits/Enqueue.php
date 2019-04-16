@@ -71,32 +71,27 @@ trait Enqueue
             ));
         } else if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
-            $elements = (array) get_metadata((is_singular() ? 'post' : 'term'), $queried_object, 'eael_transient_elements', true);
+            $post_type = (is_singular() ? 'post' : 'term');
+            $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
             if (empty($elements)) {
                 return;
             }
 
-            $this->enqueue_protocols($queried_object);
+            $this->enqueue_protocols($queried_object, $post_type);
         }
     }
 
-    public function enqueue_protocols($queried_object)
+    // rules how css will be enqueued on front-end
+    public function enqueue_protocols($queried_object, $post_type)
     {
-        if ($this->has_cache_files($queried_object)) {
-            $css_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.css';
-            $js_file = EAEL_ASSET_URL . '/eael-' . $queried_object . '.min.js';
+        if ($this->has_cache_files($queried_object, $post_type)) {
+            $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
+            $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
         } else {
             $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
             $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
         }
-
-        wp_register_style(
-            'eael-front-test',
-            $css_file,
-            false,
-            EAEL_PLUGIN_VERSION
-        );
 
         wp_enqueue_style(
             'eael-front-end',
