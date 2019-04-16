@@ -72,13 +72,13 @@ class Plugin_Usage_Tracker
         $old_key = array_flip(['wisdom_allow_tracking', 'wisdom_last_track_time', 'wisdom_block_notice', 'wisdom_collect_email', 'wisdom_admin_emails', 'wisdom_deactivation_reason_' . $this->plugin_name, 'wisdom_deactivation_details_' . $this->plugin_name]);
         $new_key = ['wpins_allow_tracking', 'wpins_last_track_time', 'wpins_block_notice', 'wpins_collect_email', 'wpins_admin_emails', 'wpins_deactivation_reason_' . $this->plugin_name, 'wpins_deactivation_details_' . $this->plugin_name];
 
-        foreach ($old_key as $key => $value) {
-            $old_data = get_option($key);
-            if (!$old_data) {
+        foreach ( $old_key as $key => $value) {
+            $old_data = get_option( $key );
+            if ( ! $old_data ) {
                 continue;
             }
             update_option($new_key[$value], $old_data);
-            delete_option($key);
+            delete_option( $key );
         }
     }
     /**
@@ -97,8 +97,11 @@ class Plugin_Usage_Tracker
 
     public function init()
     {
-        if (version_compare($this->wpins_version, '1.1.2', '>')) {
+        $is_migrated = get_option('wpins_' . $this->plugin_name . '_migrated');
+
+        if ( version_compare($this->wpins_version, '1.1.2', '>') && ! $is_migrated ) {
             $this->migrate_plan();
+            update_option('wpins_' . $this->plugin_name . '_migrated', true);
         }
         // Check marketing
         if ($this->marketing == 3) {
