@@ -93,10 +93,10 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function has_cache_files($post_id = null, $post_type = null)
+    public function has_cache_files($post_type = null, $post_id = null)
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id . '-' : 'eael') . ($post_type ? $post_type : '') . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id . '-' : 'eael') . ($post_type ? $post_type : '') . '.min.js';
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
 
         if (is_readable($css_path) && is_readable($js_path)) {
             return true;
@@ -168,7 +168,7 @@ trait Generator
             }
 
             // if no cache files, generate new
-            if (!$this->has_cache_files($queried_object, $post_type)) {
+            if (!$this->has_cache_files($post_type, $queried_object)) {
                 $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
             }
 

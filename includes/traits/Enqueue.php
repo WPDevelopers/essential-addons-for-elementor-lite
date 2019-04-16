@@ -78,14 +78,14 @@ trait Enqueue
                 return;
             }
 
-            $this->enqueue_protocols($queried_object, $post_type);
+            $this->enqueue_protocols($post_type, $queried_object);
         }
     }
 
     // rules how css will be enqueued on front-end
-    public function enqueue_protocols($queried_object, $post_type)
+    public function enqueue_protocols($post_type, $queried_object)
     {
-        if ($this->has_cache_files($queried_object, $post_type)) {
+        if ($this->has_cache_files($post_type, $queried_object)) {
             $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
             $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
         } else {
