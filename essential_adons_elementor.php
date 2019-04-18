@@ -233,6 +233,8 @@ class Essential_Addons_Elementor
 
     public function run()
     {
+        do_action('eael_before_loaded');
+
         // Start plugin tracking
         $this->start_plugin_tracking();
 

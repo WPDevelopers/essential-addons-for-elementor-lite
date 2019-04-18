@@ -63,6 +63,11 @@ trait Elements
             //         continue;
             //     }
             // }
+            if (isset($active_element['condition'])) {
+                if ($active_element['condition'][0]($active_element['condition'][1]) == false) {
+                    continue;
+                }
+            }
 
             $widgets_manager->register_widget_type(new $active_element['class']);
         }
