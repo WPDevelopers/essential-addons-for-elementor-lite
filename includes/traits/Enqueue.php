@@ -6,8 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Plugin;
-
 trait Enqueue
 {
     public function enqueue_scripts()
@@ -32,7 +30,7 @@ trait Enqueue
         }
 
         // My Assets
-        if (Plugin::$instance->preview->is_preview_mode()) {
+        if ($this->is_preview_mode()) {
             if ($this->has_cache_files()) {
                 $css_file = EAEL_ASSET_URL . '/eael.min.css';
                 $js_file = EAEL_ASSET_URL . '/eael.min.js';

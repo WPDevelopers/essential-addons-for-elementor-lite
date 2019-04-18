@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Plugin;
 use \MatthiasMullie\Minify;
 
 trait Generator
@@ -112,7 +111,7 @@ trait Generator
      */
     public function generate_frontend_scripts($wp_query)
     {
-        if (Plugin::$instance->preview->is_preview_mode()) {
+        if ($this->is_preview_mode()) {
             return;
         }
 
