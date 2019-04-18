@@ -42,14 +42,18 @@ trait Elements
      */
     public function eael_add_elements($widgets_manager)
     {
-        $active_elements = $this->get_settings();
+        $active_elements = $this->registered_elements;
 
+        
         if (empty($active_elements)) {
             return;
         }
 
-        foreach ($active_elements as $active_element) {
 
+        
+        
+        foreach ($active_elements as $active_element) {
+            
             // if (!isset($this->registered_elements[$active_element])) {
             //     continue;
             // }
@@ -60,7 +64,7 @@ trait Elements
             //     }
             // }
 
-            $widgets_manager->register_widget_type(new $this->registered_elements[$active_element]['class']);
+            $widgets_manager->register_widget_type(new $active_element['class']);
         }
     }
 
