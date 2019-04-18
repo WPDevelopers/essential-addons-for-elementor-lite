@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 2.10.3
+Stable tag: 2.10.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -167,6 +167,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 2.10.4 - 18/04/2019 =
+- Fixed: Fatal error for flatsome theme 
+- Few minor bugfix and improvements
 
 = 2.10.3 - 16/04/2019 =
 - Fixed: assets not loading on archive pages
