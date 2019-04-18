@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Plugin;
 use \MatthiasMullie\Minify;
 
 trait Generator

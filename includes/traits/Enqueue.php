@@ -6,8 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Plugin;
-
 trait Enqueue
 {
     public function enqueue_scripts()
