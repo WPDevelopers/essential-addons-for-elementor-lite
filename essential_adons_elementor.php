@@ -38,6 +38,16 @@ class Essential_Addons_Elementor
 
     public $registered_elements;
     public $transient_elements;
+    private static $instance = null;
+
+    
+    public static function instance() {
+        if(self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
 
     /**
      * Constructor of plugin class
@@ -46,6 +56,10 @@ class Essential_Addons_Elementor
      */
     public function __construct()
     {
+        // before load hook
+        do_action('eael_before_loaded');
+        error_log(print_r(did_action('eael_before_loaded'), 1));
+
         // define plugins constants
         define('EAEL_PLUGIN_FILE', __FILE__);
         define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -289,7 +303,7 @@ add_action('plugins_loaded', function () {
      *
      * @since 3.0.0
      */
-    $GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
+    $GLOBALS['Essential_Addons_Elementor'] = Essential_Addons_Elementor::instance();
 
     global $Essential_Addons_Elementor;
     $Essential_Addons_Elementor->run();
