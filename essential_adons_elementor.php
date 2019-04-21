@@ -58,7 +58,7 @@ class Essential_Addons_Elementor
         // define elements classmap
         $this->registered_elements = apply_filters('eael_registered_elements', [
             'post-grid' => [
-                'class' => 'Eael_Post_Grid',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Grid',
                 'dependency' => [
                     'css' => [
                         'assets/front-end/css/product-grid.css',
@@ -70,7 +70,7 @@ class Essential_Addons_Elementor
                 ],
             ],
             'post-timeline' => [
-                'class' => 'Eael_Post_Timeline',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Timeline',
                 'dependency' => [
                     'js' => [
                         'assets/front-end/js/vendor/load-more/load-more.js',
@@ -78,7 +78,7 @@ class Essential_Addons_Elementor
                 ],
             ],
             'fancy-text' => [
-                'class' => 'Eael_Fancy_Text',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Fancy_Text',
                 'dependency' => [
                     'js' => [
                         'assets/front-end/js/vendor/fancy-text/fancy-text.js',
@@ -86,10 +86,10 @@ class Essential_Addons_Elementor
                 ],
             ],
             'creative-btn' => [
-                'class' => 'Eael_Creative_Button',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Creative_Button',
             ],
             'count-down' => [
-                'class' => 'Eael_Countdown',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Countdown',
                 'dependency' => [
                     'js' => [
                         'assets/front-end/js/vendor/count-down/count-down.min.js',
@@ -97,25 +97,25 @@ class Essential_Addons_Elementor
                 ],
             ],
             'team-members' => [
-                'class' => 'Eael_Team_Member',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Team_Member',
             ],
             'testimonials' => [
-                'class' => 'Eael_Testimonial',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Testimonial',
             ],
             'info-box' => [
-                'class' => 'Eael_Info_Box',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Info_Box',
             ],
             'flip-box' => [
-                'class' => 'Eael_Flip_Box',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Flip_Box',
             ],
             'call-to-action' => [
-                'class' => 'Eael_Cta_Box',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Cta_Box',
             ],
             'dual-header' => [
-                'class' => 'Eael_Dual_Color_Header',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Dual_Color_Header',
             ],
             'price-table' => [
-                'class' => 'Eael_Pricing_Table',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Pricing_Table',
                 'dependency' => [
                     'js' => [
                         'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
@@ -123,7 +123,7 @@ class Essential_Addons_Elementor
                 ],
             ],
             'twitter-feed' => [
-                'class' => 'Eael_Twitter_Feed',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Twitter_Feed',
                 'dependency' => [
                     'js' => [
                         'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
@@ -135,10 +135,10 @@ class Essential_Addons_Elementor
                 ],
             ],
             'data-table' => [
-                'class' => 'Eael_Data_Table',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Data_Table',
             ],
             'filter-gallery' => [
-                'class' => 'Eael_Filterable_Gallery',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Filterable_Gallery',
                 'dependency' => [
                     'css' => [
                         'assets/front-end/css/magnific-popup.css',
@@ -150,22 +150,22 @@ class Essential_Addons_Elementor
                 ],
             ],
             'image-accordion' => [
-                'class' => 'Eael_Image_Accordion',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Image_Accordion',
             ],
             'content-ticker' => [
-                'class' => 'Eael_Content_Ticker',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Content_Ticker',
             ],
             'tooltip' => [
-                'class' => 'Eael_Tooltip',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Tooltip',
             ],
             'adv-accordion' => [
-                'class' => 'Eael_Adv_Accordion',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Adv_Accordion',
             ],
             'adv-tabs' => [
-                'class' => 'Eael_Adv_Tabs',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Adv_Tabs',
             ],
             'progress-bar' => [
-                'class' => 'Eael_Progress_Bar',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Progress_Bar',
                 'dependency' => [
                     'js' => [
                         'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
@@ -174,52 +174,52 @@ class Essential_Addons_Elementor
                 ],
             ],
             'feature-list' => [
-                'class' => 'Eael_Feature_List',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Feature_List',
             ],
             'product-grid' => [
-                'class' => 'Eael_Product_Grid',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Product_Grid',
                 'condition' => [
                     'function_exists',
                     'WC',
                 ],
             ],
             'contact-form-7' => [
-                'class' => 'Eael_Contact_Form_7',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Contact_Form_7',
                 'condition' => [
                     'function_exists',
                     'wpcf7',
                 ],
             ],
             'weforms' => [
-                'class' => 'Eael_WeForms',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_WeForms',
                 'condition' => [
                     'function_exists',
                     'WeForms',
                 ],
             ],
             'ninja-form' => [
-                'class' => 'Eael_NinjaForms',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_NinjaForms',
                 'condition' => [
                     'function_exists',
                     'Ninja_Forms',
                 ],
             ],
             'gravity-form' => [
-                'class' => 'Eael_GravityForms',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_GravityForms',
                 'condition' => [
                     'class_exists',
                     'GFForms',
                 ],
             ],
             'caldera-form' => [
-                'class' => 'Eael_Caldera_Forms',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_Caldera_Forms',
                 'condition' => [
                     'class_exists',
                     'Caldera_Forms',
                 ],
             ],
             'wpforms' => [
-                'class' => 'Eael_WpForms',
+                'class' => '\Essential_Addons_Elementor\Elements\Eael_WpForms',
                 'condition' => [
                     'class_exists',
                     '\WPForms\WPForms',
@@ -233,6 +233,8 @@ class Essential_Addons_Elementor
 
     public function run()
     {
+        do_action('eael_before_loaded');
+
         // Start plugin tracking
         $this->start_plugin_tracking();
 
@@ -274,12 +276,6 @@ class Essential_Addons_Elementor
     }
 }
 
-/**
- * Global instance of Essential Addons
- *
- * @since 3.0.0
- */
-$GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
 
 /**
  * Run plugin
@@ -287,6 +283,14 @@ $GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
  * @since 3.0.0
  */
 add_action('plugins_loaded', function () {
+
+    /**
+     * Global instance of Essential Addons
+     *
+     * @since 3.0.0
+     */
+    $GLOBALS['Essential_Addons_Elementor'] = new Essential_Addons_Elementor;
+
     global $Essential_Addons_Elementor;
     $Essential_Addons_Elementor->run();
 });

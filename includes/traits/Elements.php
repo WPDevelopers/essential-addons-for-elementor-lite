@@ -42,26 +42,34 @@ trait Elements
      */
     public function eael_add_elements($widgets_manager)
     {
-        $active_elements = $this->get_settings();
+        $active_elements = $this->registered_elements;
 
+        
         if (empty($active_elements)) {
             return;
         }
 
+
+        
+        
         foreach ($active_elements as $active_element) {
+            
+            // if (!isset($this->registered_elements[$active_element])) {
+            //     continue;
+            // }
 
-            if (!isset($this->registered_elements[$active_element])) {
-                continue;
-            }
-
-            if (isset($this->registered_elements[$active_element]['condition'])) {
-                if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
+            // if (isset($this->registered_elements[$active_element]['condition'])) {
+            //     if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
+            //         continue;
+            //     }
+            // }
+            if (isset($active_element['condition'])) {
+                if ($active_element['condition'][0]($active_element['condition'][1]) == false) {
                     continue;
                 }
             }
 
-            $element_class = '\Essential_Addons_Elementor\Elements\\' . $this->registered_elements[$active_element]['class'];
-            $widgets_manager->register_widget_type(new $element_class);
+            $widgets_manager->register_widget_type(new $active_element['class']);
         }
     }
 
