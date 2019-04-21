@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 2.10.2
+ * Version: 2.10.3
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -51,7 +51,7 @@ class Essential_Addons_Elementor
         define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
         define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
         define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
-        define('EAEL_PLUGIN_VERSION', '2.10.2');
+        define('EAEL_PLUGIN_VERSION', '2.10.3');
         define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
         define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 
@@ -240,7 +240,6 @@ class Essential_Addons_Elementor
 
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        // add_action('elementor/editor/after_save', array($this, 'set_transient_status'));
         add_action('loop_end', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
