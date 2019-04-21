@@ -19,6 +19,27 @@ class Group_Control_EA_Posts extends Group_Control_Base
         return 'eaeposts';
     }
 
+    public static function on_export_remove_setting_from_element($element, $control_id)
+    {
+        unset($element['settings'][$control_id . '_posts_ids']);
+        unset($element['settings'][$control_id . '_authors']);
+
+        foreach (Utils::get_post_types() as $post_type => $label) {
+            $taxonomy_filter_args = [
+                'show_in_nav_menus' => true,
+                'object_type' => [$post_type],
+            ];
+
+            $taxonomies = get_taxonomies($taxonomy_filter_args, 'objects');
+
+            foreach ($taxonomies as $taxonomy => $object) {
+                unset($element['settings'][$control_id . '_' . $taxonomy . '_ids']);
+            }
+        }
+
+        return $element;
+    }
+
     protected function init_fields()
     {
         $fields = [];
