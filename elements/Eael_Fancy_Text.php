@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Repeater;
 
 class Eael_Fancy_Text extends Widget_Base {
 
@@ -69,35 +70,39 @@ class Eael_Fancy_Text extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_fancy_text_strings',
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'eael_fancy_text_strings_text_field',
 			[
-				'label' => esc_html__( 'Fancy Text Strings', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::REPEATER,
-				'default' => [
-					[
-						'eael_fancy_text_strings_text_field' => esc_html__( 'first string', 'essential-addons-elementor' ),
-					],
-					[
-						'eael_fancy_text_strings_text_field' => esc_html__( 'second string', 'essential-addons-elementor' ),
-					],
-					[
-						'eael_fancy_text_strings_text_field' => esc_html__( 'third string', 'essential-addons-elementor' ),
-					],
-				],
-				'fields' => [
-					[
-						'name' => 'eael_fancy_text_strings_text_field',
-						'label' => esc_html__( 'Fancy String', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::TEXT,
-						'label_block' => true,
-						'dynamic' => [ 'active' => true ]
-					],
-				],
-				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
+				'label'			=> esc_html__( 'Fancy String', 'essential-addons-elementor' ),
+				'type'			=> Controls_Manager::TEXT,
+				'label_block'	=> true,
+				'dynamic'		=> [ 'active' => true ]
 			]
 		);
 
+		$this->add_control(
+			'eael_fancy_text_strings',
+			[
+				'label'       => __( 'Fancy Text Strings', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::REPEATER,
+				'show_label'  => true,
+				'fields'      => array_values( $repeater->get_controls() ),
+				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
+				'default'     => [
+					[
+						'eael_fancy_text_strings_text_field' => __( 'First string', 'essential-addons-elementor' ),
+					],
+					[
+						'eael_fancy_text_strings_text_field' => __( 'Second tring', 'essential-addons-elementor' ),
+					],
+					[
+						'eael_fancy_text_strings_text_field' => __( 'Third tring', 'essential-addons-elementor' ),
+					]
+				],
+			]
+		);
 
 		$this->add_control(
 			'eael_fancy_text_suffix',
@@ -109,8 +114,6 @@ class Eael_Fancy_Text extends Widget_Base {
 				'dynamic' => [ 'active' => true ]
 			]
 		);
-
-
 
 		$this->end_controls_section();
 
