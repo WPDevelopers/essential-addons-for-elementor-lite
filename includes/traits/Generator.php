@@ -5,7 +5,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Plugin;
 use \MatthiasMullie\Minify;
 
 trait Generator
@@ -20,16 +19,6 @@ trait Generator
     {
         $this->transient_elements[] = $widget->get_name();
     }
-
-    /**
-     * Mark post was updated
-     *
-     * @since 3.0.0
-     */
-    // public function set_transient_status($post_id)
-    // {
-    //     update_post_meta($post_id, 'eael_has_transient_elements', true);
-    // }
 
     /**
      * Collect dependencies for modules
@@ -103,10 +92,10 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function has_cache_files($post_id = null)
+    public function has_cache_files($post_type = null, $post_id = null)
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_id ? 'eael-' . $post_id : 'eael') . '.min.js';
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
 
         if (is_readable($css_path) && is_readable($js_path)) {
             return true;
@@ -122,7 +111,7 @@ trait Generator
      */
     public function generate_frontend_scripts($wp_query)
     {
-        if (Plugin::$instance->preview->is_preview_mode()) {
+        if ($this->is_preview_mode()) {
             return;
         }
 
@@ -156,93 +145,35 @@ trait Generator
 
         $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
-        if ($wp_query->is_singular) {
-            $post_id = get_queried_object_id();
-            $old_elements = get_post_meta($post_id, 'eael_transient_elements', true);
+        if ($wp_query->is_singular || $wp_query->is_archive) {
+            $queried_object = get_queried_object_id();
+            $post_type = ($wp_query->is_singular ? 'post' : 'term');
+            $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
-            if (empty($elements)) {
-                $this->remove_files($post_id);
-            } else {
-                if (sort($old_elements) != sort($elements)) {
-                    update_post_meta($post_id, 'eael_transient_elements', $elements);
-                    $this->generate_scripts($elements, 'eael-' . $post_id);
+            // sort two arr for compare
+            sort($elements);
+            sort($old_elements);
+
+            if ($old_elements != $elements) {
+                update_metadata($post_type, $queried_object, 'eael_transient_elements', $elements);
+
+                // if not empty elements, regenerate cache files
+                if (!empty($elements)) {
+                    $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
+
+                    // load generated files - fallback
+                    $this->enqueue_protocols($queried_object, $post_type);
                 }
-
-                if (!$this->has_cache_files($post_id)) {
-                    $this->generate_scripts($elements, 'eael-' . $post_id);
-                }
-
-                if ($this->has_cache_files($post_id)) {
-                    $css_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.css';
-                    $js_file = EAEL_ASSET_URL . '/eael-' . $post_id . '.min.js';
-                } else {
-                    $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                    $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-                }
-
-                wp_enqueue_script(
-                    'eael-front-end',
-                    $js_file,
-                    ['jquery'],
-                    EAEL_PLUGIN_VERSION,
-                    true
-                );
-
-                wp_enqueue_style(
-                    'eael-front-end',
-                    $css_file,
-                    false,
-                    EAEL_PLUGIN_VERSION
-                );
-
-                // localize script
-                wp_localize_script('eael-front-end', 'localize', array(
-                    'ajaxurl' => admin_url('admin-ajax.php'),
-                ));
             }
-        } else if ($wp_query->is_archive) {
-            $term_id = get_queried_object_id();
-            $old_elements = get_term_meta($term_id, 'eael_transient_elements', true);
 
+            // if no cache files, generate new
+            if (!$this->has_cache_files($post_type, $queried_object)) {
+                $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
+            }
+
+            // if no elements, remove cache files
             if (empty($elements)) {
-                $this->remove_files($term_id);
-            } else {
-                if (sort($old_elements) != sort($elements)) {
-                    update_term_meta($term_id, 'eael_transient_elements', $elements);
-                    $this->generate_scripts($elements, 'eael-' . $term_id);
-                }
-
-                if (!$this->has_cache_files($term_id)) {
-                    $this->generate_scripts($elements, 'eael-' . $term_id);
-                }
-
-                if ($this->has_cache_files($term_id)) {
-                    $css_file = EAEL_ASSET_URL . '/eael-' . $term_id . '.min.css';
-                    $js_file = EAEL_ASSET_URL . '/eael-' . $term_id . '.min.js';
-                } else {
-                    $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                    $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-                }
-
-                wp_enqueue_script(
-                    'eael-front-end',
-                    $js_file,
-                    ['jquery'],
-                    EAEL_PLUGIN_VERSION,
-                    true
-                );
-
-                wp_enqueue_style(
-                    'eael-front-end',
-                    $css_file,
-                    false,
-                    EAEL_PLUGIN_VERSION
-                );
-
-                // localize script
-                wp_localize_script('eael-front-end', 'localize', array(
-                    'ajaxurl' => admin_url('admin-ajax.php'),
-                ));
+                $this->remove_files($queried_object);
             }
         }
     }

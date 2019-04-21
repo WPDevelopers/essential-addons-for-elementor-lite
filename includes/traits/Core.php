@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use \Elementor\User as User;
 use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tracker;
 
 trait Core
@@ -29,7 +30,7 @@ trait Core
     {
         $elements = get_option('eael_save_settings', array_fill_keys(array_keys($this->registered_elements), true));
 
-        return (isset($element) ? $elements[$element] : array_keys(array_filter($elements)));
+        return (isset($element) ? (isset($elements[$element]) ? $elements[$element] : 0) : array_keys(array_filter($elements)));
     }
 
     /**
@@ -50,7 +51,7 @@ trait Core
             unlink($js_path);
         }
     }
-    
+
     /**
      * Remove files in dir
      *
@@ -97,6 +98,22 @@ trait Core
     public function plugin_upgrade_hook()
     {
         $this->empty_dir(EAEL_ASSET_PATH);
+    }
+
+    /**
+     * Check if elementor preview mode or not
+     */
+    public function is_preview_mode()
+    {
+        if (!User::is_current_user_can_edit()) {
+            return false;
+        }
+
+        if (!isset($_GET['elementor-preview'])) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
