@@ -1162,13 +1162,24 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_page_templates()
+    public function eael_get_page_templates($type = null)
     {
-        $page_templates = get_posts(array(
+        $args = [
             'post_type' => 'elementor_library',
             'posts_per_page' => -1,
-        ));
+        ];
 
+        if ($type) {
+            $args['tax_query'] = [
+                [
+                    'taxonomy' => 'elementor_library_type',
+                    'field' => 'slug',
+                    'terms' => $type,
+                ],
+            ];
+        }
+
+        $page_templates = get_posts($args);
         $options = array();
 
         if (!empty($page_templates) && !is_wp_error($page_templates)) {
