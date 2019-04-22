@@ -73,34 +73,6 @@ trait Core
     }
 
     /**
-     * Plugin activation hook
-     */
-    public function plugin_activation_hook()
-    {
-        // remove old cache files
-        $this->empty_dir(EAEL_ASSET_PATH);
-
-        // Redirect to options page
-        update_option('eael_do_activation_redirect', true);
-    }
-
-    /**
-     * Plugin deactivation hook
-     */
-    public function plugin_deactivation_hook()
-    {
-        $this->empty_dir(EAEL_ASSET_PATH);
-    }
-
-    /**
-     * Plugin activation hook
-     */
-    public function plugin_upgrade_hook()
-    {
-        $this->empty_dir(EAEL_ASSET_PATH);
-    }
-
-    /**
      * Check if elementor preview mode or not
      */
     public function is_preview_mode()
