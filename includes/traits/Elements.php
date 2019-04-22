@@ -68,7 +68,7 @@ trait Elements
                     continue;
                 }
             }
-
+            
             $widgets_manager->register_widget_type(new $active_element['class']);
         }
     }
