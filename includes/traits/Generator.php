@@ -32,7 +32,7 @@ trait Generator
         foreach ($elements as $element) {
             if (!empty($this->registered_elements[$element]['dependency'][$type])) {
                 foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
-                    $paths[] = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . $path;
+                    $paths[] = $path;
                 }
             }
         }
