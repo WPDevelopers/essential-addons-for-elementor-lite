@@ -640,3 +640,10 @@ textarea.eael-form-control {
 .eael-notice-text {
     padding-left: 10px;
 }
+.pro-label {
+    font-size: 9px;
+    color: red;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
