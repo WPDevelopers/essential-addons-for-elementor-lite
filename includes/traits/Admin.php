@@ -20,14 +20,16 @@ trait Admin
      */
     public function admin_menu()
     {
-        add_submenu_page(
-            'elementor',
-            'Essential Addons',
-            'Essential Addons',
+
+        add_menu_page(
+			__( 'Essential Addons', 'Essential Addons' ),
+			__( 'Essential Addons', 'elementor' ),
             'manage_options',
             'eael-settings',
-            array($this, 'eael_admin_settings_page')
-        );
+			[ $this, 'eael_admin_settings_page' ],
+			EAEL_PLUGIN_URL.'/assets/admin/images/ea_color.svg',
+			'58.6'
+		);
     }
 
     /**
@@ -38,6 +40,8 @@ trait Admin
      */
     public function admin_enqueue_scripts($hook)
     {
+
+
         wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/eael-notice.css', false, EAEL_PLUGIN_VERSION);
 
         if (isset($hook) && $hook == 'plugins.php') {
@@ -46,7 +50,7 @@ trait Admin
             wp_enqueue_script('sweetalert2-core-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
         } // check this
 
-        if (isset($hook) && $hook == 'elementor_page_eael-settings') {
+        if (isset($hook) && $hook == 'toplevel_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);
             wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
             wp_enqueue_script('sweetalert2-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), EAEL_PLUGIN_VERSION, true);
