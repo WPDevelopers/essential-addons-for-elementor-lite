@@ -45,33 +45,33 @@
                     'title' => __( 'Feature List', 'essential-addons-elementor' )
                 ],
                 [
-                    'key'    => '',
-                    'title'  => __( 'Offcanvas', '' ),
+                    'key'    => 'offcanvas',
+                    'title'  => __( 'Offcanvas', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
-                    'key'    => '',
-                    'title'  => __( 'Advanced Menu', '' ),
+                    'key'    => 'advanced-menu',
+                    'title'  => __( 'Advanced Menu', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
-                    'key'    => '',
-                    'title'  => __( 'Toggle', '' ),
+                    'key'    => 'toggle',
+                    'title'  => __( 'Toggle', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
-                    'key'    => '',
-                    'title'  => __( 'Testimonial Slider', '' ),
+                    'key'    => 'testimonial-slider',
+                    'title'  => __( 'Testimonial Slider', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
-                    'key'    => '',
-                    'title'  => __( 'Static Product', '' ),
+                    'key'    => 'static-product',
+                    'title'  => __( 'Static Product', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
-                    'key'    => '',
-                    'title'  => __( 'Advanced Tabs', '' ),
+                    'key'    => 'adv-tabs',
+                    'title'  => __( 'Advanced Tabs', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
@@ -102,47 +102,47 @@
                 ],
                 [
                     'key'    => 'post-block',
-                    'title'  => __( 'Post Block', '' ),
+                    'title'  => __( 'Post Block', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'post-carousel',
-                    'title'  => __( 'Post Carousel', '' ),
+                    'title'  => __( 'Post Carousel', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'post-timeline',
-                    'title'  => __( 'Post Timeline', '' ),
+                    'title'  => __( 'Post Timeline', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'post-list',
-                    'title'  => __( 'Post List', '' ),
+                    'title'  => __( 'Post List', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'instagram-gallery',
-                    'title'  => __( 'Instagram Gallery', '' ),
+                    'title'  => __( 'Instagram Gallery', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'product-grid',
-                    'title'  => __( 'Woo Product Grid', '' ),
+                    'title'  => __( 'Woo Product Grid', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'woo-collections',
-                    'title'  => __( 'Woo Product Collections', '' ),
+                    'title'  => __( 'Woo Product Collections', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'content-timeline',
-                    'title'  => __( 'Content Timeline', '' ),
+                    'title'  => __( 'Content Timeline', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'dynamic-filter-gallery',
-                    'title'  => __( 'Dynamic Filter Gallery', '' ),
+                    'title'  => __( 'Dynamic Filter Gallery', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ]
             ]
@@ -172,87 +172,87 @@
                 ],
                 [
                     'key'    => 'interactive-promo',
-                    'title'  => __( 'Interactive Promo', '' ),
+                    'title'  => __( 'Interactive Promo', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'count-down',
-                    'title'  => __( 'Count Down', '' ),
+                    'title'  => __( 'Count Down', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'counter',
-                    'title'  => __( 'Counter', '' ),
+                    'title'  => __( 'Counter', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'lightbox',
-                    'title'  => __( 'Lightbox', '' ),
+                    'title'  => __( 'Lightbox', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'protected-content',
-                    'title'  => __( 'Protected Content', '' ),
+                    'title'  => __( 'Protected Content', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'img-comparison',
-                    'title'  => __( 'Image Comparison', '' ),
+                    'title'  => __( 'Image Comparison', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'flip-carousel',
-                    'title'  => __( 'Flip Carousel', '' ),
+                    'title'  => __( 'Flip Carousel', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'logo-carousel',
-                    'title'  => __( 'Logo Carousel', '' ),
+                    'title'  => __( 'Logo Carousel', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'interactive-cards',
-                    'title'  => __( 'Interactive Cards', '' ),
+                    'title'  => __( 'Interactive Cards', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'filter-gallery',
-                    'title'  => __( 'Filterable Gallery', '' ),
+                    'title'  => __( 'Filterable Gallery', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'image-accordion',
-                    'title'  => __( 'Image Accordion', '' ),
+                    'title'  => __( 'Image Accordion', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'one-page-navigation',
-                    'title'  => __( 'One Page Navigation', '' ),
+                    'title'  => __( 'One Page Navigation', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'image-hotspots',
-                    'title'  => __( 'Image Hotspots', '' ),
+                    'title'  => __( 'Image Hotspots', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'divider',
-                    'title'  => __( 'Divider', '' ),
+                    'title'  => __( 'Divider', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'progress-bar',
-                    'title'  => __( 'Progress Bar', '' ),
+                    'title'  => __( 'Progress Bar', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'image-scroller',
-                    'title'  => __( 'Image Scroller', '' ),
+                    'title'  => __( 'Image Scroller', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'dismissible-section',
-                    'title'  => __( 'Dismissible Section', '' ),
+                    'title'  => __( 'Dismissible Section', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ]
             ]
@@ -270,7 +270,7 @@
                 ],
                 [
                     'key'    => 'price-menu',
-                    'title'  => __( 'Price menu', '' ),
+                    'title'  => __( 'Price menu', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ]
             ]
@@ -304,7 +304,7 @@
                 ],
                 [
                     'key'    => 'mailchimp',
-                    'title'  => __( 'Mailchimp', '' ),
+                    'title'  => __( 'Mailchimp', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ]
             ]
@@ -318,12 +318,12 @@
                 ],
                 [
                     'key'    => 'twitter-feed-carousel',
-                    'title'  => __( 'Twitter Feed Carousel', '' ),
+                    'title'  => __( 'Twitter Feed Carousel', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
                     'key'    => 'facebook-feed-carousel',
-                    'title'  => __( 'Facebook Feed Carousel', '' ),
+                    'title'  => __( 'Facebook Feed Carousel', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ]
             ]
