@@ -338,15 +338,13 @@
         <div class="col-full">
         <?php
             foreach($elements as $element) :
-                ob_start();
+                // ob_start();
         ?>
         <h4><?php echo $element['title']; ?></h4>
             <div class="eael-checkbox-container">
                 <?php
                     foreach($element['elements'] as $item) {
-                        
                         $status = isset($item['is_pro']) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
-
                         $label_class = isset($item['is_pro']) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? 'eael-get-pro' : '';
                     ?>
                     <div class="eael-checkbox">
@@ -360,7 +358,7 @@
                 <?php } ?>
             </div>
             <?php
-                echo ob_get_clean();
+                // echo ob_get_clean();
                 endforeach;
             ?>
         </div>
