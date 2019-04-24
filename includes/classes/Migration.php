@@ -18,7 +18,7 @@ class Migration
     public static function plugin_activation_hook()
     {
         // remove old cache files
-        self::empty_dir(EAEL_ASSET_PATH);
+        (new self)->empty_dir(EAEL_ASSET_PATH);
 
         // Redirect to options page
         update_option('eael_do_activation_redirect', true);
@@ -31,7 +31,7 @@ class Migration
      */
     public static function plugin_deactivation_hook()
     {
-        self::empty_dir(EAEL_ASSET_PATH);
+        (new self)->empty_dir(EAEL_ASSET_PATH);
     }
 
     /**
@@ -41,6 +41,6 @@ class Migration
      */
     public static function plugin_upgrade_hook()
     {
-        self::empty_dir(EAEL_ASSET_PATH);
+        (new self)->empty_dir(EAEL_ASSET_PATH);
     }
 }

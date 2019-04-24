@@ -70,16 +70,6 @@ trait Generator
         $js_paths = array_merge($js_paths, $this->generate_dependency($elements, 'js'));
         $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css'));
 
-        foreach ((array) $elements as $element) {
-            if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/' . $element . '/index.js')) {
-                $js_paths[] = $path;
-            }
-
-            if (is_readable($path = EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/$element.css")) {
-                $css_paths[] = $path;
-            }
-        }
-
         $minifier = new Minify\JS($js_paths);
         file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.js', $minifier->minify());
 
