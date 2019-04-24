@@ -59,17 +59,23 @@
                 success: function(response) {
                     setTimeout(function() {
                         _this.html("Save Settings");
-                        swal(
-                            "Settings Saved!",
-                            "Click OK to continue",
-                            "success"
-                        );
+                        Swal.fire({
+                            type: 'success',
+                            title: "Settings Saved!",
+                            footer: "Have Fun :-)",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                         headerSaveBtn.removeClass("save-now");
                         footerSaveBtn.removeClass("save-now");
-                    }, 1000);
+                    }, 500);
                 },
                 error: function() {
-                    swal("Oops...", "Something went wrong!", "error");
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
                 }
             });
         } else {
