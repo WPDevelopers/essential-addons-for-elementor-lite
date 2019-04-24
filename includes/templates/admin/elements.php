@@ -37,7 +37,7 @@
                     'title' => __( 'Advanced Accordion', 'essential-addons-elementor' )
                 ],
                 [
-                    'key'   => 'adv-accordion',
+                    'key'   => 'adv-tabs',
                     'title' => __( 'Advanced Tabs', 'essential-addons-elementor' )
                 ],
                 [
@@ -67,11 +67,6 @@
                 [
                     'key'    => 'static-product',
                     'title'  => __( 'Static Product', 'essential-addons-elementor' ),
-                    'is_pro' => true
-                ],
-                [
-                    'key'    => 'adv-tabs',
-                    'title'  => __( 'Advanced Tabs', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
@@ -108,11 +103,6 @@
                 [
                     'key'    => 'post-carousel',
                     'title'  => __( 'Post Carousel', 'essential-addons-elementor' ),
-                    'is_pro' => true
-                ],
-                [
-                    'key'    => 'post-timeline',
-                    'title'  => __( 'Post Timeline', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
@@ -168,11 +158,6 @@
                 [
                     'key'    => 'interactive-promo',
                     'title'  => __( 'Interactive Promo', 'essential-addons-elementor' ),
-                    'is_pro' => true
-                ],
-                [
-                    'key'    => 'count-down',
-                    'title'  => __( 'Count Down', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
@@ -361,6 +346,10 @@
                 // echo ob_get_clean();
                 endforeach;
             ?>
+
+            <div class="eael-save-btn-wrap">
+                <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
+            </div>
         </div>
     </div>
 </div>

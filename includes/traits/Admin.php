@@ -27,7 +27,7 @@ trait Admin
             'manage_options',
             'eael-settings',
 			[ $this, 'eael_admin_settings_page' ],
-			EAEL_PLUGIN_URL.'/assets/admin/images/ea_color.svg',
+			EAEL_PLUGIN_URL.'/assets/admin/images/ea_white.svg',
 			'58.6'
 		);
     }
@@ -52,6 +52,9 @@ trait Admin
 
         if (isset($hook) && $hook == 'toplevel_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);
+            if( defined('EAEL_PRO_PLUGIN_BASENAME') ) {
+                wp_enqueue_style('eael_pro-admin-css', EAEL_PRO_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PRO_PLUGIN_VERSION);
+            }
             wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
             wp_enqueue_script('sweetalert2-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array('jquery', 'sweetalert2-core-js'), EAEL_PLUGIN_VERSION, true);
             wp_enqueue_script('sweetalert2-core-js', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/js/core.js', array('jquery'), EAEL_PLUGIN_VERSION, true);
@@ -72,35 +75,43 @@ trait Admin
      */
     public function eael_admin_settings_page()
     {
-        echo '<div class="eael-settings-wrap">
+       ?>
+        <div class="eael-settings-wrap">
 		  	<form action="" method="POST" id="eael-settings" name="eael-settings">
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/ea-logo.svg' . '">
+							<img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/ea-logo.svg'; ?>">
 						</div>
-						<h2 class="title">' . __('Essential Addons Settings', 'essential-addons-elementor') . '</h2>
+						<h2 class="title"><?php echo __('Essential Addons Settings', 'essential-addons-elementor'); ?></h2>
 					</div>
 					<div class="eael-header-right">
-					<button type="submit" class="button eael-btn js-eael-settings-save">' . __('Save settings', 'essential-addons-elementor') . '</button>
+					<button type="submit" class="button eael-btn js-eael-settings-save"><?php echo __('Save settings', 'essential-addons-elementor'); ?></button>
 					</div>
 				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul class="eael-tabs">
-				      	<li><a href="#general" class="active"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg' . '"><span>General</span></a></li>
-				      	<li><a href="#elements"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg' . '"><span>Elements</span></a></li>
-                        <li><a href="#extensions"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg' . '"><span>Extensions</span></a></li>
-                        <li><a href="#tools"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/tools.svg' . '"><span>Tools</span></a></li>
-						<li><a href="#go-pro"><img src="' . EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg' . '"><span>Go Premium</span></a></li>
-                    </ul>';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-                    include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-                echo '</div>
+				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg'; ?>"><span><?php echo __('General', 'essential-addons-elementor'); ?></span></a></li>
+				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg'; ?>"><span><?php echo __( 'Elements', 'essential-addons-elementor' ); ?></span></a></li>
+                        <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>"><span><?php echo __( 'Extensions', 'essential-addons-elementor' ); ?></span></a></li>
+                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/tools.svg'; ?>"><span><?php echo __( 'Tools', 'essential-addons-elementor' ); ?></span></a></li>
+                        <?php if(!defined('EAEL_PRO_PLUGIN_BASENAME')) : ?>
+                        <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>"><span><?php echo __('Go Premium', 'essential-addons-elementor' ); ?></span></a></li>
+                        <?php endif; ?>
+                    </ul>
+                    <?php 
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+                        if(!defined('EAEL_PRO_PLUGIN_BASENAME')) {
+                            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+                        }
+                    ?>
+                </div>
             </form>
-        </div>';
+        </div>
+        <?php
     }
 
     /**
