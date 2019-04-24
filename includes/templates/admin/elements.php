@@ -111,11 +111,6 @@
                     'is_pro' => true
                 ],
                 [
-                    'key'    => 'instagram-gallery',
-                    'title'  => __( 'Instagram Gallery', 'essential-addons-elementor' ),
-                    'is_pro' => true
-                ],
-                [
                     'key'    => 'product-grid',
                     'title'  => __( 'Woo Product Grid', 'essential-addons-elementor' ),
                     'is_pro' => true
@@ -310,7 +305,12 @@
                     'key'    => 'facebook-feed-carousel',
                     'title'  => __( 'Facebook Feed Carousel', 'essential-addons-elementor' ),
                     'is_pro' => true
-                ]
+                ],
+                [
+                    'key'    => 'instagram-gallery',
+                    'title'  => __( 'Instagram Feed', 'essential-addons-elementor' ),
+                    'is_pro' => true
+                ],
             ]
         ]
     ];
@@ -323,13 +323,12 @@
         <div class="col-full">
         <?php
             foreach($elements as $element) :
-                ob_start();
+                // ob_start();
         ?>
         <h4><?php echo $element['title']; ?></h4>
             <div class="eael-checkbox-container">
                 <?php
                     foreach($element['elements'] as $item) {
-                        
                         $status = isset($item['is_pro']) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
                         $label_class = isset($item['is_pro']) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? 'eael-get-pro' : '';
                     ?>
@@ -344,7 +343,7 @@
                 <?php } ?>
             </div>
             <?php
-                echo ob_get_clean();
+                // echo ob_get_clean();
                 endforeach;
             ?>
 

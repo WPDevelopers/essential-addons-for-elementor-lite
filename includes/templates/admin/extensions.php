@@ -5,7 +5,7 @@
             'extensions' => [
                 [
                     'key'    => 'section-parallax',
-                    'title'  => __( 'Parallax Scrolling', 'essential-addons-elementor' ),
+                    'title'  => __( 'Parallax', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ],
                 [
@@ -15,7 +15,7 @@
                 ],
                 [
                     'key'    => 'eael-tooltip-section',
-                    'title'  => __( 'Advance Tooltip', 'essential-addons-elementor' ),
+                    'title'  => __( 'Advanced Tooltip', 'essential-addons-elementor' ),
                     'is_pro' => true
                 ]
             ]
