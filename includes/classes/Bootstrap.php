@@ -54,11 +54,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Grid',
                 'dependency' => [
                     'css' => [
-                        'assets/front-end/css/product-grid.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid.css',
                     ],
                     'js' => [
-                        'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                        'assets/front-end/js/vendor/load-more/load-more.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.js',
                     ],
                 ],
             ],
@@ -66,7 +66,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Timeline',
                 'dependency' => [
                     'js' => [
-                        'assets/front-end/js/vendor/load-more/load-more.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.js',
                     ],
                 ],
             ],
@@ -74,7 +74,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Fancy_Text',
                 'dependency' => [
                     'js' => [
-                        'assets/front-end/js/vendor/fancy-text/fancy-text.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/fancy-text/fancy-text.js',
                     ],
                 ],
             ],
@@ -85,7 +85,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Countdown',
                 'dependency' => [
                     'js' => [
-                        'assets/front-end/js/vendor/count-down/count-down.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/count-down/count-down.min.js',
                     ],
                 ],
             ],
@@ -111,7 +111,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Pricing_Table',
                 'dependency' => [
                     'js' => [
-                        'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
                     ],
                 ],
             ],
@@ -119,11 +119,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Twitter_Feed',
                 'dependency' => [
                     'js' => [
-                        'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                        'assets/front-end/js/vendor/social-feeds/codebird.js',
-                        'assets/front-end/js/vendor/social-feeds/doT.min.js',
-                        'assets/front-end/js/vendor/social-feeds/moment.js',
-                        'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/codebird.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/doT.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/moment.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
                     ],
                 ],
             ],
@@ -134,11 +134,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Filterable_Gallery',
                 'dependency' => [
                     'css' => [
-                        'assets/front-end/css/magnific-popup.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup.css',
                     ],
                     'js' => [
-                        'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                        'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
                     ],
                 ],
             ],
@@ -161,8 +161,8 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Progress_Bar',
                 'dependency' => [
                     'js' => [
-                        'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
-                        'assets/front-end/js/vendor/inview/inview.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/inview/inview.min.js',
                     ],
                 ],
             ],
