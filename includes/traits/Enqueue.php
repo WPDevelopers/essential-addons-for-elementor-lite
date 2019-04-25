@@ -91,6 +91,9 @@ trait Enqueue
             $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
         }
 
+        $css_file = str_replace( 'http:', '', $css_file );
+        $js_file = str_replace( 'http:', '', $js_file );
+
         wp_enqueue_style(
             'eael-front-end',
             $css_file,
