@@ -14,10 +14,7 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
         ),
         'E' => 
         array (
-            'Essential_Addons_Elementor\\Traits\\' => 34,
-            'Essential_Addons_Elementor\\Elements\\' => 36,
-            'Essential_Addons_Elementor\\Classes\\' => 35,
-            'Essential_Addons_Elementor\\Admin\\' => 33,
+            'Essential_Addons_Elementor\\' => 27,
         ),
     );
 
@@ -30,21 +27,9 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
         array (
             0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
         ),
-        'Essential_Addons_Elementor\\Traits\\' => 
+        'Essential_Addons_Elementor\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/includes/traits',
-        ),
-        'Essential_Addons_Elementor\\Elements\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/elements',
-        ),
-        'Essential_Addons_Elementor\\Classes\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/includes/classes',
-        ),
-        'Essential_Addons_Elementor\\Admin\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/admin',
+            0 => __DIR__ . '/../..' . '/includes',
         ),
     );
 
