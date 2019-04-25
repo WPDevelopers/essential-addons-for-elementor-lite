@@ -105,11 +105,23 @@
             success: function(response) {
                 setTimeout(function() {
                     _this.html("Clear Cache");
-                    swal("Cache Cleared!", "Click OK to continue", "success");
+
+                    Swal.fire({
+                        type: 'success',
+                        title: "Cache Cleared!",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 }, 1000);
             },
             error: function() {
-                swal("Ops!", "Something went wrong!", "error");
+                Swal.fire({
+                    type: 'error',
+                    title: "Ops!",
+                    footer: "Something went wrong!",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             }
         });
     });
