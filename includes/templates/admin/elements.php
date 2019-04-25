@@ -334,15 +334,15 @@
             <div class="eael-checkbox-container">
                 <?php
                     foreach($element['elements'] as $item) {
-                        $status = isset($item['is_pro']) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
-                        $label_class = isset($item['is_pro']) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? 'eael-get-pro' : '';
+                        $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
+                        $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
                     ?>
                     <div class="eael-checkbox">
                         <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?> >
                         <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
                         <p class="eael-el-title">
                             <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
-                            <?php echo isset( $item['is_pro'] ) && ! defined('EAEL_PRO_PLUGIN_BASENAME') ? '<sup class="pro-label">Pro</sup>' : ''; ?>
+                            <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
                         </p>
                     </div>
                 <?php } ?>
