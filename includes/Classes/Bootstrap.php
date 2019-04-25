@@ -24,6 +24,9 @@ class Bootstrap
     // transient elements container
     public $transient_elements;
 
+    // identify whether pro is enabled
+    public $pro_enabled;
+
     /**
      * Singleton instance
      *
@@ -47,6 +50,8 @@ class Bootstrap
     {
         // before init hook
         do_action('eael_before_init');
+
+        $this->pro_enabled = apply_filters('eael_pro_enabled', false);
 
         // elements classmap
         $this->registered_elements = apply_filters('eael_registered_elements', [

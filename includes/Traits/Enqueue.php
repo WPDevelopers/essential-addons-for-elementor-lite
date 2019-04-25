@@ -43,21 +43,21 @@ trait Enqueue
 
             wp_enqueue_style(
                 'eael-editor-css',
-                EAEL_PLUGIN_URL . '/assets/front-end/css/eael-editor.css',
+                $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/front-end/css/eael-editor.css'),
                 false,
                 EAEL_PLUGIN_VERSION
             );
 
             wp_enqueue_style(
                 'eael-backend',
-                $css_file,
+                $this->safe_protocol($css_file),
                 false,
                 EAEL_PLUGIN_VERSION
             );
 
             wp_enqueue_script(
                 'eael-backend',
-                $js_file,
+                $this->safe_protocol($js_file),
                 ['jquery'],
                 EAEL_PLUGIN_VERSION,
                 true
@@ -91,19 +91,16 @@ trait Enqueue
             $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
         }
 
-        $css_file = str_replace( 'http:', '', $css_file );
-        $js_file = str_replace( 'http:', '', $js_file );
-
         wp_enqueue_style(
             'eael-front-end',
-            $css_file,
+            $this->safe_protocol($css_file),
             false,
             EAEL_PLUGIN_VERSION
         );
 
         wp_enqueue_script(
             'eael-front-end',
-            $js_file,
+            $this->safe_protocol($js_file),
             ['jquery'],
             EAEL_PLUGIN_VERSION,
             true
