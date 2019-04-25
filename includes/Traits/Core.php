@@ -88,6 +88,10 @@ trait Core
         return true;
     }
 
+    public function safe_protocol($url) {
+        return str_replace(['http:', 'https:'], '', $url);
+    }
+
     /**
      * Creates an Action Menu
      */
