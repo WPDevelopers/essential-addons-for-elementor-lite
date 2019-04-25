@@ -53,20 +53,24 @@ class Eael_Progress_Bar extends Widget_Base
             ]
         );
 
+        // Progressbar Layout Options
+        $options = apply_filters(
+            'add_eael_progressbar_layout',[
+            'line'             => __('Line', 'essential-addons-elementor'),
+            'line_rainbow'     => __('Line Rainbow (Pro)', 'essential-addons-elementor'),
+            'circle'           => __('Circle', 'essential-addons-elementor'),
+            'circle_fill'      => __('Circle Fill (Pro)', 'essential-addons-elementor'),
+            'half_circle'      => __('Half Circle', 'essential-addons-elementor'),
+            'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-elementor'),
+            'box'              => __('Box (Pro)', 'essential-addons-elementor'),
+        ]);
+
         $this->add_control(
             'progress_bar_layout',
             [
-                'label' => __('Layout', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'line' => __('Line', 'essential-addons-elementor'),
-                    'line_rainbow' => __('Line Rainbow (Pro)', 'essential-addons-elementor'),
-                    'circle' => __('Circle', 'essential-addons-elementor'),
-                    'circle_fill' => __('Circle Fill (Pro)', 'essential-addons-elementor'),
-                    'half_circle' => __('Half Circle', 'essential-addons-elementor'),
-                    'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-elementor'),
-                    'box' => __('Box (Pro)', 'essential-addons-elementor'),
-                ],
+                'label'   => __('Layout', 'essential-addons-elementor'),
+                'type'    => Controls_Manager::SELECT,
+                'options' => $options,
                 'default' => 'line',
             ]
         );
