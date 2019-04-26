@@ -96,6 +96,11 @@
                     'title' => __( 'Content Ticker', 'essential-addons-elementor' )
                 ],
                 [
+                    'key'   => 'adv-google-map',
+                    'title' => __( 'Advanced Google Map', 'essential-addons-elementor' ),
+                    'is_pro' => true
+                ],
+                [
                     'key'    => 'post-block',
                     'title'  => __( 'Post Block', 'essential-addons-elementor' ),
                     'is_pro' => true

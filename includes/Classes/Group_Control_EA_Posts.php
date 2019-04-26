@@ -50,13 +50,13 @@ class Group_Control_EA_Posts extends Group_Control_Base
         ];
 
         $fields['posts_ids'] = [
-            'label' => __('Search & Select', 'essential-addons-elementor'),
-            'type' => Controls_Manager::SELECT2,
-            'post_type' => '',
-            'options' => $this->eael_get_all_types_post(),
+            'label'       => __('Search & Select', 'essential-addons-elementor'),
+            'type'        => Controls_Manager::SELECT2,
+            'post_type'   => '',
+            'options'     => $this->eael_get_all_types_post(),
             'label_block' => true,
-            'multiple' => true,
-            'condition' => [
+            'multiple'    => true,
+            'condition'   => [
                 'post_type' => 'by_id',
             ],
         ];

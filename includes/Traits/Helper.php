@@ -56,6 +56,29 @@ trait Helper
         'eael_post_grid_hover_animation',
     );
 
+        /**
+     * Get all types of post.
+     * @return array
+     */
+    public function eael_get_all_types_post()
+    {
+        $posts_args = array(
+            'post_type' => 'any',
+            'post_style' => 'all_types',
+            'post_status' => 'publish',
+            'posts_per_page' => '-1',
+        );
+        $posts = $this->eael_load_more_ajax($posts_args);
+
+        $post_list = [];
+
+        foreach ($posts as $post) {
+            $post_list[$post->ID] = $post->post_title;
+        }
+
+        return $post_list;
+    }
+
     /**
      * Query Controls
      *
@@ -105,13 +128,13 @@ trait Helper
         $this->add_control(
             'post__not_in',
             [
-                'label' => __('Exclude', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => $this->eael_get_all_types_post(),
+                'label'       => __('Exclude', 'essential-addons-elementor'),
+                'type'        => Controls_Manager::SELECT2,
+                'options'     => $this->eael_get_all_types_post(),
                 'label_block' => true,
-                'post_type' => '',
-                'multiple' => true,
-                'condition' => [
+                'post_type'   => '',
+                'multiple'    => true,
+                'condition'   => [
                     'eaeposts_post_type!' => 'by_id',
                 ],
             ]
@@ -806,29 +829,6 @@ trait Helper
         }
 
         return $types;
-    }
-
-    /**
-     * Get all types of post.
-     * @return array
-     */
-    public function eael_get_all_types_post()
-    {
-        $posts_args = array(
-            'post_type' => 'any',
-            'post_style' => 'all_types',
-            'post_status' => 'publish',
-            'posts_per_page' => '-1',
-        );
-        $posts = $this->eael_load_more_ajax($posts_args);
-
-        $post_list = [];
-
-        foreach ($posts as $post) {
-            $post_list[$post->ID] = $post->post_title;
-        }
-
-        return $post_list;
     }
 
     /**
