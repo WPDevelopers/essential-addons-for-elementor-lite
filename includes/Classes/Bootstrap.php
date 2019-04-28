@@ -25,7 +25,7 @@ class Bootstrap
     public $transient_elements;
 
     // identify whether pro is enabled
-    public $pro_enabled;
+    public static $pro_enabled;
 
     /**
      * Singleton instance
@@ -51,7 +51,7 @@ class Bootstrap
         // before init hook
         do_action('eael_before_init');
 
-        $this->pro_enabled = apply_filters('eael_pro_enabled', false);
+        self::$pro_enabled = apply_filters('eael_pro_enabled', false);
 
         // elements classmap
         $this->registered_elements = apply_filters('eael_registered_elements', [
@@ -383,7 +383,7 @@ class Bootstrap
         $this->register_hooks();
     }
 
-    public function register_hooks()
+    protected function register_hooks()
     {
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
