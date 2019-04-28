@@ -55,22 +55,29 @@ class Eael_Progress_Bar extends Widget_Base
 
         // Progressbar Layout Options
         $options = apply_filters(
-            'add_eael_progressbar_layout',[
-            'line'             => __('Line', 'essential-addons-elementor'),
-            'line_rainbow'     => __('Line Rainbow (Pro)', 'essential-addons-elementor'),
-            'circle'           => __('Circle', 'essential-addons-elementor'),
-            'circle_fill'      => __('Circle Fill (Pro)', 'essential-addons-elementor'),
-            'half_circle'      => __('Half Circle', 'essential-addons-elementor'),
-            'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-elementor'),
-            'box'              => __('Box (Pro)', 'essential-addons-elementor'),
-        ]);
+            'add_eael_progressbar_layout',
+            [
+                'layouts'   => [
+                    'line'             => __('Line', 'essential-addons-elementor'),
+                    'line_rainbow'     => __('Line Rainbow (Pro)', 'essential-addons-elementor'),
+                    'circle'           => __('Circle', 'essential-addons-elementor'),
+                    'circle_fill'      => __('Circle Fill (Pro)', 'essential-addons-elementor'),
+                    'half_circle'      => __('Half Circle', 'essential-addons-elementor'),
+                    'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-elementor'),
+                    'box'              => __('Box (Pro)', 'essential-addons-elementor'),
+                ],
+                'conditions'    => [
+                    'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'
+                ]
+            ]
+        );
 
         $this->add_control(
             'progress_bar_layout',
             [
                 'label'   => __('Layout', 'essential-addons-elementor'),
                 'type'    => Controls_Manager::SELECT,
-                'options' => $options,
+                'options' => $options['layouts'],
                 'default' => 'line',
             ]
         );
@@ -81,7 +88,7 @@ class Eael_Progress_Bar extends Widget_Base
                 'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
-                    'progress_bar_layout' => ['line_rainbow', 'circle_fill', 'half_circle_fill', 'box'],
+                    'progress_bar_layout' => $options['conditions']
                 ],
             ]
         );

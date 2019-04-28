@@ -463,16 +463,18 @@ trait Helper
             ]
         );
 
+        $excerpt_feature = apply_filters( 'eael_excerpt_length', '<span class="pro-feature"> Pro Feature. Get <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> </span>' );
+
         $this->add_control(
             'eael_excerpt_length',
             [
-                'label' => __('Excerpt Words', 'essential-addons-elementor'),
-                'type' => Controls_Manager::NUMBER,
-                'default' => '10',
+                'label'     => __('Excerpt Words', 'essential-addons-elementor'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => '10',
                 'condition' => [
                     'eael_show_excerpt' => '1',
                 ],
-                'description' => '<span class="pro-feature"> Pro Feature. Get <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> </span>',
+                'description' => $excerpt_feature,
             ]
         );
 

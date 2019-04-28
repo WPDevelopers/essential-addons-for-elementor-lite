@@ -40,27 +40,38 @@ class Eael_Content_Ticker extends Widget_Base {
 				'label' => esc_html__( 'Ticker Settings', 'essential-addons-elementor' )
 			]
 		);
-		$this->add_control(
-		'eael_ticker_type',
+
+		$ticker_options = apply_filters(
+			'eael_ticker_options',
 			[
-			'label'         => esc_html__( 'Ticker Type', 'essential-addons-elementor' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'     => 'dynamic',
-				'label_block'   => false,
-				'options'     => [
+				'options'	=> [
 					'dynamic'     => esc_html__( 'Dynamic', 'essential-addons-elementor' ),
 					'custom'      => esc_html__( 'Custom', 'essential-addons-elementor' ),
 				],
+				'conditions'	=> [
+					'custom'
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_ticker_type',
+			[
+				'label'       => esc_html__( 'Ticker Type', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'dynamic',
+				'label_block' => false,
+				'options'     => $ticker_options['options']
 			]
 		);
 
 		$this->add_control(
 			'eael_ticker_type_pro_alert',
 			[
-				'label' => esc_html__( 'Custom Content available in pro version only!', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Custom Content available in pro version only!', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => [
-					'eael_ticker_type' => 'custom',
+					'eael_ticker_type' => $ticker_options['conditions'],
 				]
 			]
 		);
