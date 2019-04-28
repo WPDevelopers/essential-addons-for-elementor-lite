@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
+use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Eael_Data_Table extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -53,7 +54,7 @@ class Eael_Data_Table extends Widget_Base {
 
 		do_action('eael_section_data_table_enabled', $this);
 
-		// if(!$this->pro_enabled) {
+		if(!Bootstrap::pro_enabled()) {
 			$this->add_control(
 				'eael_pricing_table_style_pro_alert',
 				[
@@ -64,7 +65,7 @@ class Eael_Data_Table extends Widget_Base {
 					]
 				]
 			);
-		// }
+		}
 
   		$this->add_control(
 			'eael_data_table_header_cols_data',
