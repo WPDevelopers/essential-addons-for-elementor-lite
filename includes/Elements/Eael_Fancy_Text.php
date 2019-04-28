@@ -123,28 +123,36 @@ class Eael_Fancy_Text extends Widget_Base {
   			[
   				'label' => esc_html__( 'Fancy Text Settings', 'essential-addons-elementor' )
   			]
-  		);
-
+		);
+		
+		$style_options = apply_filters(
+			'fancy_text_style_types',
+			[
+				'styles'	=> [
+					'style-1' => esc_html__( 'Style 1', 'essential-addons-elementor' ),
+					'style-2' => esc_html__( 'Style 2 (Pro)', 'essential-addons-elementor' ),
+				],
+				'conditions'	=> ['style-2']
+			]
+		);
+		
   		$this->add_control(
 			'eael_fancy_text_style',
 			[
-				'label' => esc_html__( 'Style Type', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
+				'label'   => esc_html__( 'Style Type', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
-				'options' => [
-					'style-1' => esc_html__( 'Style 1', 'essential-addons-elementor' ),
-					'style-2' => esc_html__( 'Style 2', 'essential-addons-elementor' ),
-				],
+				'options' => $style_options['styles']
 			]
 		);
 
 		$this->add_control(
 			'eael_fancy_text_style_pro_alert',
 			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => [
-					'eael_fancy_text_style' => ['style-2'],
+					'eael_fancy_text_style' => $style_options['conditions'],
 				]
 			]
 		);

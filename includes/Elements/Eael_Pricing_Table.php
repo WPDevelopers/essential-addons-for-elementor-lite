@@ -41,31 +41,39 @@ class Eael_Pricing_Table extends Widget_Base {
   			[
   				'label' => esc_html__( 'Settings', 'essential-addons-elementor' )
   			]
-  		);
+		  );
+		  
+		$pricing_style = apply_filters(
+			'eael_pricing_table_styles',
+			[
+				'styles'	=> [
+					'style-1'  	=> esc_html__( 'Default', 'essential-addons-elementor' ),
+					'style-2' 	=> esc_html__( 'Pricing Style 2', 'essential-addons-elementor' ),
+					'style-3' 	=> esc_html__( 'Pricing Style 3 (Pro)', 'essential-addons-elementor' ),
+					'style-4' 	=> esc_html__( 'Pricing Style 4 (Pro)', 'essential-addons-elementor' ),
+				],
+				'conditions'	=> ['style-3', 'style-4']
+			]
+		);
 
   		$this->add_control(
-		  'eael_pricing_table_style',
+		  	'eael_pricing_table_style',
 		  	[
-		   	'label'       	=> esc_html__( 'Pricing Style', 'essential-addons-elementor' ),
-		     	'type' 			=> Controls_Manager::SELECT,
-		     	'default' 		=> 'style-1',
-		     	'label_block' 	=> false,
-		     	'options' 		=> [
-		     		'style-1'  	=> esc_html__( 'Default', 'essential-addons-elementor' ),
-		     		'style-2' 	=> esc_html__( 'Pricing Style 2', 'essential-addons-elementor' ),
-		     		'style-3' 	=> esc_html__( 'Pricing Style 3', 'essential-addons-elementor' ),
-		     		'style-4' 	=> esc_html__( 'Pricing Style 4', 'essential-addons-elementor' ),
-		     	],
+				'label'       => esc_html__( 'Pricing Style', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'style-1',
+				'label_block' => false,
+				'options'     => $pricing_style['styles']
 		  	]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_style_pro_alert',
 			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => [
-					'eael_pricing_table_style' => ['style-3', 'style-4'],
+					'eael_pricing_table_style' => $pricing_style['conditions'],
 				]
 			]
 		);
