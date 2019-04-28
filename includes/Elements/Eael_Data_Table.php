@@ -51,27 +51,20 @@ class Eael_Data_Table extends Widget_Base {
   			]
   		);
 
-  		$this->add_control(
-		  	'eael_section_data_table_enabled',
-		  	[
-				'label'        => __( 'Enable Table Sorting', 'essential-addons-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => esc_html__( 'No', 'essential-addons-elementor' ),
-				'return_value' => 'true',
-		  	]
-		);
+		do_action('eael_section_data_table_enabled', $this);
 
-		$this->add_control(
-			'eael_pricing_table_style_pro_alert',
-			[
-				'label'     => esc_html__( 'Sorting feature is available in pro version!', 'essential-addons-elementor' ),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => [
-					'eael_section_data_table_enabled' => 'true',
+		// if(!$this->pro_enabled) {
+			$this->add_control(
+				'eael_pricing_table_style_pro_alert',
+				[
+					'label'     => esc_html__( 'Sorting feature is available in pro version!', 'essential-addons-elementor' ),
+					'type'      => Controls_Manager::HEADING,
+					'condition' => [
+						'eael_section_data_table_enabled' => 'true',
+					]
 				]
-			]
-		);		
+			);
+		// }
 
   		$this->add_control(
 			'eael_data_table_header_cols_data',
