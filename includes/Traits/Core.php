@@ -22,6 +22,16 @@ trait Core
     }
 
     /**
+     *  Check if pro version enabled.
+     *
+     * @since 3.0.0
+     */
+    public static function pro_enabled()
+    {
+        return self::$pro_enabled;
+    }
+
+    /**
      * Return saved settings
      *
      * @since 3.0.0
@@ -88,7 +98,8 @@ trait Core
         return true;
     }
 
-    public function safe_protocol($url) {
+    public function safe_protocol($url)
+    {
         return str_replace(['http:', 'https:'], '', $url);
     }
 
