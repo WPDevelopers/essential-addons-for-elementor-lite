@@ -15,14 +15,12 @@
     });
 
     $(".eael-get-pro").on("click", function() {
-        swal({
+        Swal.fire({
+            type: 'warning',
             title: "<h2><span>Go</span> Premium",
-            type: "warning",
-            html:
-                'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
-            showCloseButton: true,
-            showCancelButton: false,
-            focusConfirm: true
+            html: 'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
+            showConfirmButton: false,
+            timer: 3000
         });
     });
 
