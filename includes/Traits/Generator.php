@@ -105,32 +105,23 @@ trait Generator
             return;
         }
 
-        $elements = array_map(function ($val) {
+        $replace = [
+            'eicon-woocommerce' => 'product-grid',
+            'countdown' => 'count-down',
+            'creative-button' => 'creative-btn',
+            'team-member' => 'team-members',
+            'testimonial' => 'testimonials',
+            'weform' => 'weforms',
+            'cta-box' => 'call-to-action',
+            'dual-color-header' => 'dual-header',
+            'pricing-table' => 'price-table',
+            'filterable-gallery' => 'filter-gallery',
+        ];
+
+        $elements = array_map(function ($val) use ($replace) {
             $val = str_replace(['eael-'], [''], $val);
 
-            return str_replace([
-                'eicon-woocommerce',
-                'countdown',
-                'creative-button',
-                'team-member',
-                'testimonial',
-                'weform',
-                'cta-box',
-                'dual-color-header',
-                'pricing-table',
-                'filterable-gallery',
-            ], [
-                'product-grid',
-                'count-down',
-                'creative-btn',
-                'team-members',
-                'testimonials',
-                'weforms',
-                'call-to-action',
-                'dual-header',
-                'price-table',
-                'filter-gallery',
-            ], $val);
+            return (array_key_exists($val, $replace) ? $replace[$val] : $val);
         }, $this->transient_elements);
 
         $elements = array_intersect(array_keys($this->registered_elements), $elements);
@@ -143,6 +134,8 @@ trait Generator
             // sort two arr for compare
             sort($elements);
             sort($old_elements);
+
+            error_log(print_r($elements, 1));
 
             if ($old_elements != $elements) {
                 update_metadata($post_type, $queried_object, 'eael_transient_elements', $elements);
