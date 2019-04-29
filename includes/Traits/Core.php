@@ -28,7 +28,7 @@ trait Core
      */
     public static function pro_enabled()
     {
-        return self::$pro_enabled;
+        return self::$instance->pro_enabled;
     }
 
     /**
