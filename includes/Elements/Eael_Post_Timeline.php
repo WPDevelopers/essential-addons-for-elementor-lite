@@ -10,6 +10,7 @@ use \Elementor\Controls_Manager as Controls_Manager;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Eael_Post_Timeline extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -44,7 +45,10 @@ class Eael_Post_Timeline extends Widget_Base {
 		 */
 		$this->eael_query_controls();
 		$this->eael_layout_controls();
-		$this->eael_go_premium();
+
+		if(!Bootstrap::pro_enabled()) {
+			$this->eael_go_premium();
+		}
 
 
         $this->start_controls_section(
