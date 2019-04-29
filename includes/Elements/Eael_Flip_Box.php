@@ -14,6 +14,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
+use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Eael_Flip_Box extends Widget_Base {
 
@@ -430,31 +431,32 @@ class Eael_Flip_Box extends Widget_Base {
 
 		$this->end_controls_section();
 
-		/**
-  		 * Go Premium For More Features
-  		 */
-  		$this->start_controls_section(
-			'eael_section_pro',
-			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-			]
-		);
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
+		if(!Bootstrap::pro_enabled()) {
+			$this->start_controls_section(
+				'eael_section_pro',
+				[
+					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+				]
+			);
+		
+			$this->add_control(
+				'eael_control_get_pro',
+				[
+					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => [
+						'1' => [
+							'title' => __( '', 'essential-addons-elementor' ),
+							'icon' => 'fa fa-unlock-alt',
+						],
 					],
-				],
-				'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
-        $this->end_controls_section();
+					'default' => '1',
+					'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+				]
+			);
+			
+			$this->end_controls_section();
+		}
         
 		/**
 		 * -------------------------------------------

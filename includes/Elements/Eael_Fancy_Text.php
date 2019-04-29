@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Repeater;
+use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Eael_Fancy_Text extends Widget_Base {
 
@@ -62,11 +63,11 @@ class Eael_Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_prefix',
 			[
-				'label' => esc_html__( 'Prefix Text', 'essential-addons-elementor' ),
+				'label'       => esc_html__( 'Prefix Text', 'essential-addons-elementor' ),
 				'placeholder' => esc_html__( 'Place your prefix text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::WYSIWYG,
-				'default' => esc_html__( 'This is the ', 'essential-addons-elementor' ),
-				'dynamic' => [ 'active' => true ]
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( 'This is the ', 'essential-addons-elementor' ),
+				'dynamic'     => [ 'active' => true ]
 			]
 		);
 
@@ -107,11 +108,11 @@ class Eael_Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_suffix',
 			[
-				'label' => esc_html__( 'Suffix Text', 'essential-addons-elementor' ),
+				'label'       => esc_html__( 'Suffix Text', 'essential-addons-elementor' ),
 				'placeholder' => esc_html__( 'Place your suffix text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::WYSIWYG,
-				'default' => esc_html__( ' of the sentence.', 'essential-addons-elementor' ),
-				'dynamic' => [ 'active' => true ]
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( ' of the sentence.', 'essential-addons-elementor' ),
+				'dynamic'     => [ 'active' => true ]
 			]
 		);
 
@@ -254,30 +255,34 @@ class Eael_Fancy_Text extends Widget_Base {
 
 		$this->end_controls_section();
 
-        $this->start_controls_section(
-			'eael_section_pro',
-			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-			]
-		);
-
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
+       
+		if(!Bootstrap::pro_enabled()) {
+			$this->start_controls_section(
+				'eael_section_pro',
+				[
+					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+				]
+			);
+	
+			$this->add_control(
+				'eael_control_get_pro',
+				[
+					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => [
+						'1' => [
+							'title' => __( '', 'essential-addons-elementor' ),
+							'icon' => 'fa fa-unlock-alt',
+						],
 					],
-				],
-				'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
+					'default' => '1',
+					'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+				]
+			);
+			
+			$this->end_controls_section();
+		}
 
-        $this->end_controls_section();
 
 		$this->start_controls_section(
 			'eael_fancy_text_prefix_styles',
