@@ -116,6 +116,7 @@ trait Generator
             'dual-color-header' => 'dual-header',
             'pricing-table' => 'price-table',
             'filterable-gallery' => 'filter-gallery',
+            'one-page-nav' => 'one-page-navigation',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
