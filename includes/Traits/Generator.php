@@ -86,7 +86,7 @@ trait Generator
     {
         $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
         $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
-
+        error_log(print_r($js_path, 1));
         if (is_readable($css_path) && is_readable($js_path)) {
             return true;
         }
@@ -117,6 +117,8 @@ trait Generator
             'pricing-table' => 'price-table',
             'filterable-gallery' => 'filter-gallery',
             'one-page-nav' => 'one-page-navigation',
+            'interactive-card' => 'interactive-cards',
+            'image-comparison' => 'img-comparison',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
@@ -128,6 +130,8 @@ trait Generator
         $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
         if ($wp_query->is_singular || $wp_query->is_archive) {
+            error_log(print_r($wp_query->is_singular, 1));
+            error_log(print_r($wp_query->is_archive, 1));
             $queried_object = get_queried_object_id();
             $post_type = ($wp_query->is_singular ? 'post' : 'term');
             $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
@@ -135,8 +139,6 @@ trait Generator
             // sort two arr for compare
             sort($elements);
             sort($old_elements);
-
-            error_log(print_r($elements, 1));
 
             if ($old_elements != $elements) {
                 update_metadata($post_type, $queried_object, 'eael_transient_elements', $elements);
