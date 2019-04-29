@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Eael_Dual_Color_Header extends Widget_Base {
 
@@ -144,30 +145,32 @@ class Eael_Dual_Color_Header extends Widget_Base {
 
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'eael_section_pro',
-			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
-			]
-		);
-
-        $this->add_control(
-            'eael_control_get_pro',
-            [
-                'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-unlock-alt',
+		if(!Bootstrap::pro_enabled()) {
+			$this->start_controls_section(
+				'eael_section_pro',
+				[
+					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+				]
+			);
+		
+			$this->add_control(
+				'eael_control_get_pro',
+				[
+					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => [
+						'1' => [
+							'title' => __( '', 'essential-addons-elementor' ),
+							'icon' => 'fa fa-unlock-alt',
+						],
 					],
-				],
-				'default' => '1',
-                'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
-            ]
-        );
-
-        $this->end_controls_section();
+					'default' => '1',
+					'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+				]
+			);
+			
+			$this->end_controls_section();
+		}
 
 		/**
 		 * -------------------------------------------
@@ -390,7 +393,7 @@ class Eael_Dual_Color_Header extends Widget_Base {
 
 	}
 
-	protected function render( ) {
+	protected function render() {
 
    	$settings = $this->get_settings_for_display();
 
