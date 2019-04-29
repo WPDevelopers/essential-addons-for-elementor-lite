@@ -472,24 +472,21 @@ class Eael_Fancy_Text extends Widget_Base {
 		return $fancy_text;
 	}
 
-	protected function render( ) {
+	protected function render() {
 
 
-	  $settings = $this->get_settings_for_display();
-	  $fancy_text = $this->fancy_text($settings['eael_fancy_text_strings']);
-
-      if( 'style-1' === $settings['eael_fancy_text_style'] || 'style-2' === $settings['eael_fancy_text_style'] ) {
-      	$eael_fancy_text_style = 'style-1';
-	  }
-	  $this->add_render_attribute( 'fancy-text', 'class', 'eael-fancy-text-container' );
-	  $this->add_render_attribute( 'fancy-text', 'class', esc_attr( $eael_fancy_text_style ) );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-id', esc_attr($this->get_id()) );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text', $fancy_text );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-transition-type', $settings['eael_fancy_text_transition_type'] );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-speed', $settings['eael_fancy_text_speed'] );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-delay', $settings['eael_fancy_text_delay'] );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-cursor', $settings['eael_fancy_text_cursor'] );
-	  $this->add_render_attribute( 'fancy-text', 'data-fancy-text-loop', $settings['eael_fancy_text_loop'] );
+		$settings = $this->get_settings_for_display();
+		$fancy_text = $this->fancy_text($settings['eael_fancy_text_strings']);
+		if(!Bootstrap::pro_enabled()) { $settings['eael_fancy_text_style'] = 'style-1'; }
+		$this->add_render_attribute( 'fancy-text', 'class', 'eael-fancy-text-container' );
+		$this->add_render_attribute( 'fancy-text', 'class', esc_attr($settings['eael_fancy_text_style']) );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-id', esc_attr($this->get_id()) );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text', $fancy_text );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-transition-type', $settings['eael_fancy_text_transition_type'] );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-speed', $settings['eael_fancy_text_speed'] );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-delay', $settings['eael_fancy_text_delay'] );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-cursor', $settings['eael_fancy_text_cursor'] );
+		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-loop', $settings['eael_fancy_text_loop'] );
 	?>
 
 	<div  <?php echo $this->get_render_attribute_string( 'fancy-text' ); ?> >

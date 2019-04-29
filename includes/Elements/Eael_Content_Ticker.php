@@ -96,6 +96,7 @@ class Eael_Content_Ticker extends Widget_Base {
 		 */
 		$this->eael_query_controls();
 
+		do_action('eael_ticker_custom_content_controls', $this);
 
 		/**
          * Content Tab: Carousel Settings
@@ -758,32 +759,31 @@ class Eael_Content_Ticker extends Widget_Base {
 		}
   
 		?>
-		<?php if(  'dynamic' === $settings['eael_ticker_type'] || 'custom' === $settings['eael_ticker_type'] ) : ?>
-		  <div class="eael-ticker-wrap" id="eael-ticker-wrap-<?php echo $this->get_id(); ?>">
+		<div class="eael-ticker-wrap" id="eael-ticker-wrap-<?php echo $this->get_id(); ?>">
 			<?php if( !empty($settings['eael_ticker_tag_text']) ) : ?>
 			<div class="ticker-badge">
-			  <span><?php echo $settings['eael_ticker_tag_text']; ?></span>
+				<span><?php echo $settings['eael_ticker_tag_text']; ?></span>
 			</div>
 			<?php endif; ?>          
-			
-			<div  <?php echo $this->get_render_attribute_string( 'content-ticker-wrap' ); ?> >
-			  <div <?php echo $this->get_render_attribute_string( 'content-ticker' ); ?> >
-				  <div class="swiper-wrapper">
-				  	<?php 
-						if( 'dynamic' === $settings['eael_ticker_type'] ) {
-							if( ! empty( $posts['content'] ) ) {
-								echo $posts['content'];
-							} else {
-								echo ' <div class="swiper-slide"><a href="#" class="ticker-content">'. __( 'Something went wrong!', 'essential-addons-elementor' ) .'</a></div>';
+			<div <?php echo $this->get_render_attribute_string( 'content-ticker-wrap' ); ?> >
+				<div <?php echo $this->get_render_attribute_string( 'content-ticker' ); ?> >
+					<div class="swiper-wrapper">
+						<?php 
+							if( 'dynamic' === $settings['eael_ticker_type'] ) {
+								if( ! empty( $posts['content'] ) ) {
+									echo $posts['content'];
+								} else {
+									echo ' <div class="swiper-slide"><a href="#" class="ticker-content">'. __( 'Something went wrong!', 'essential-addons-elementor' ) .'</a></div>';
+								}
 							}
-						}
-					?>
-				  </div>
-			  </div>
-			  <?php $this->render_arrows(); ?>
+							do_action( 'render_content_ticker_custom_content', $settings );
+						?>
+					</div>
+				</div>
+				<?php $this->render_arrows(); ?>
 			</div>
-		  </div>
-		<?php endif;
+		</div>
+		<?php
 	}
 
 	/**
