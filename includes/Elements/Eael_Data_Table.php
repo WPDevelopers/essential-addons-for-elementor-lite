@@ -988,10 +988,13 @@ class Eael_Data_Table extends Widget_Base {
 		}  
 		$table_th_count = count($settings['eael_data_table_header_cols_data']);
 		$this->add_render_attribute('eael_data_table_wrap', [
-			'class'	=> 'eael-data-table-wrap',
-			'data-table_id'			=> esc_attr($this->get_id()),
-			'data-custom_responsive'	=> $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
+			'class'                  => 'eael-data-table-wrap',
+			'data-table_id'          => esc_attr($this->get_id()),
+			'data-custom_responsive' => $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
 		]);
+		if($settings['eael_section_data_table_enabled']){
+			$this->add_render_attribute('eael_data_table_wrap', 'data-table_enabled', 'true');
+		}
 		$this->add_render_attribute('eael_data_table', [
 			'class'	=> [ 'tablesorter eael-data-table', esc_attr($settings['table_alignment']) ],
 			'id'	=> 'eael-data-table-'.esc_attr($this->get_id())
@@ -1016,6 +1019,10 @@ class Eael_Data_Table extends Widget_Base {
 								'id'		=> $header_title['eael_data_table_header_css_id'],
 								'colspan'	=> $header_title['eael_data_table_header_col_span']
 							]);
+
+							if(Bootstrap::pro_enabled()) {
+								$this->add_render_attribute('th_class'.$i, 'class', 'sorting' );
+							}
 						?>
 			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
 							<?php
