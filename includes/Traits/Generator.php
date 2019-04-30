@@ -106,17 +106,17 @@ trait Generator
         }
 
         $replace = [
-            'eicon-woocommerce' => 'product-grid',
-            'countdown' => 'count-down',
-            'creative-button' => 'creative-btn',
-            'team-member' => 'team-members',
-            'testimonial' => 'testimonials',
-            'weform' => 'weforms',
-            'cta-box' => 'call-to-action',
-            'dual-color-header' => 'dual-header',
-            'pricing-table' => 'price-table',
+            'eicon-woocommerce'  => 'product-grid',
+            'countdown'          => 'count-down',
+            'creative-button'    => 'creative-btn',
+            'team-member'        => 'team-members',
+            'testimonial'        => 'testimonials',
+            'weform'             => 'weforms',
+            'cta-box'            => 'call-to-action',
+            'dual-color-header'  => 'dual-header',
+            'pricing-table'      => 'price-table',
             'filterable-gallery' => 'filter-gallery',
-            'one-page-nav' => 'one-page-navigation',
+            'one-page-nav'       => 'one-page-navigation',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
