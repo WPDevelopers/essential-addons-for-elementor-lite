@@ -8,12 +8,12 @@ if (!defined('ABSPATH')) {
 
 trait Product_Loop
 {
-    public function template_product_loop($args)
+    public function template_product_loop($args, $post_object)
     {
-        global $product;
+        $product = wc_get_product($post_object->ID);
 
-        echo '<li>';
-            if ($args['eael_product_grid_style_preset'] == 'eael-product-simple' || $args['eael_product_grid_style_preset'] == 'eael-product-reveal') {
+        if ($args['eael_product_grid_style_preset'] == 'eael-product-simple' || $args['eael_product_grid_style_preset'] == 'eael-product-reveal') {
+            echo '<li>';
                 echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                     ' . $product->get_image('woocommerce_thumbnail') . '
                     <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
@@ -23,7 +23,9 @@ trait Product_Loop
                 </a>';
 
                 woocommerce_template_loop_add_to_cart();
-            } else if ($args['eael_product_grid_style_preset'] == 'eael-product-overlay') {
+            echo '</li>';
+        } else if ($args['eael_product_grid_style_preset'] == 'eael-product-overlay') {
+            echo '<li>';
                 echo '<div class="overlay">
                     ' . $product->get_image('woocommerce_thumbnail') . '
                     <div class="button-wrap clearfix">
@@ -35,13 +37,11 @@ trait Product_Loop
                 ' . ($args['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '
                 ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-elementor') . '</span>' : '') . '
                 <span class="price">' . $product->get_price_html() . '</span>';
-            } else {
-                do_action('woocommerce_before_shop_loop_item');
-                do_action('woocommerce_before_shop_loop_item_title');
-                do_action('woocommerce_shop_loop_item_title');
-                do_action('woocommerce_after_shop_loop_item_title');
-                do_action('woocommerce_after_shop_loop_item');
-            }
-        echo '</li>';
+            echo '</li>';
+        } else {
+            setup_postdata($GLOBALS['post'] = $post_object);
+            wc_get_template_part('content', 'product');
+            wp_reset_postdata();
+        }
     }
 }
