@@ -16,6 +16,8 @@ use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Eael_Pricing_Table extends Widget_Base {
 
+	use \Essential_Addons_Elementor\Traits\Helper;
+
 	public function get_name() {
 		return 'eael-pricing-table';
 	}
@@ -105,6 +107,7 @@ class Eael_Pricing_Table extends Widget_Base {
 		/**
 		 * Condition: 'eael_pricing_table_style' => 'style-2'
 		 */
+		$subtitles_fields = apply_filters('pricing_table_subtitle_field_for', [ 'style-2' ]);
 		$this->add_control(
 			'eael_pricing_table_sub_title',
 			[
@@ -113,7 +116,7 @@ class Eael_Pricing_Table extends Widget_Base {
 				'label_block' => false,
 				'default' => esc_html__( 'A tagline here.', 'essential-addons-elementor' ),
 				'condition' => [
-					'eael_pricing_table_style' => [ 'style-2', 'style-3', 'style-4' ]
+					'eael_pricing_table_style' => $subtitles_fields
 				]
 			]
 		);
@@ -132,6 +135,8 @@ class Eael_Pricing_Table extends Widget_Base {
 				]
 			]
 		);
+
+		do_action('add_pricing_table_settings_control', $this);
 
   		$this->end_controls_section();
 
@@ -200,6 +205,8 @@ class Eael_Pricing_Table extends Widget_Base {
 		     	],
 		  	]
 		);
+
+		do_action('pricing_table_currency_position', $this);
 
 		$this->add_control(
 			'eael_pricing_table_price_period',
@@ -445,20 +452,20 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_btn',
 			[
-				'label' => esc_html__( 'Button Text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
+				'label'       => esc_html__( 'Button Text', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'Choose Plan', 'essential-addons-elementor' ),
+				'default'     => esc_html__( 'Choose Plan', 'essential-addons-elementor' ),
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_btn_link',
 			[
-				'label' => esc_html__( 'Button Link', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::URL,
+				'label'       => esc_html__( 'Button Link', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::URL,
 				'label_block' => true,
-				'default' => [
+				'default'     => [
         			'url' => '#',
         			'is_external' => '',
      			],
@@ -481,18 +488,18 @@ class Eael_Pricing_Table extends Widget_Base {
   		$this->add_control(
 			'eael_pricing_table_featured',
 			[
-				'label' => esc_html__( 'Featured?', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SWITCHER,
+				'label'        => esc_html__( 'Featured?', 'essential-addons-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'default' => 'no',
+				'default'      => 'no',
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_featured_styles',
 			[
-				'label' => esc_html__( 'Ribbon Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
+				'label'   => esc_html__( 'Ribbon Style', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'ribbon-1',
 				'options' => [
 					'ribbon-1' => esc_html__( 'Style 1', 'essential-addons-elementor' ),
@@ -511,11 +518,11 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_featured_tag_text',
 			[
-				'label' => esc_html__( 'Featured Tag Text', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::TEXT,
+				'label'       => esc_html__( 'Featured Tag Text', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::TEXT,
 				'label_block' => false,
-				'default' => esc_html__( 'Featured', 'essential-addons-elementor' ),
-				'selectors' => [
+				'default'     => esc_html__( 'Featured', 'essential-addons-elementor' ),
+				'selectors'   => [
 					'{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 				],
@@ -539,8 +546,8 @@ class Eael_Pricing_Table extends Widget_Base {
 			$this->add_control(
 				'eael_control_get_pro',
 				[
-					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
-					'type' => Controls_Manager::CHOOSE,
+					'label'   => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'type'    => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
 							'title' => __( '', 'essential-addons-elementor' ),
@@ -564,16 +571,16 @@ class Eael_Pricing_Table extends Widget_Base {
 			'eael_section_pricing_table_style_settings',
 			[
 				'label' => esc_html__( 'Pricing Table Style', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
+				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'     => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'background-color: {{VALUE}};',
 				],
@@ -583,10 +590,10 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_pricing_table_container_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
+				'selectors'  => [
 	 					'{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
@@ -595,10 +602,10 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_pricing_table_container_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
+				'selectors'  => [
 	 					'{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
@@ -607,8 +614,8 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'eael_pricing_table_border',
-				'label' => esc_html__( 'Border Type', 'essential-addons-elementor' ),
+				'name'     => 'eael_pricing_table_border',
+				'label'    => esc_html__( 'Border Type', 'essential-addons-elementor' ),
 				'selector' => '{{WRAPPER}} .eael-pricing .eael-pricing-item',
 			]
 		);
@@ -616,8 +623,8 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
+				'label'   => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 4,
 				],
@@ -635,7 +642,7 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'eael_pricing_table_shadow',
+				'name'      => 'eael_pricing_table_shadow',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing .eael-pricing-item',
 				],
@@ -645,13 +652,13 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_pricing_table_content_alignment',
 			[
-				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
+				'label'       => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => true,
-				'options' => [
+				'options'     => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-align-left',
+						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
@@ -670,10 +677,10 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_pricing_table_content_button_alignment',
 			[
-				'label' => esc_html__( 'Button Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
+				'label'       => esc_html__( 'Button Alignment', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => true,
-				'options' => [
+				'options'     => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
 						'icon' => 'fa fa-align-left',
@@ -703,7 +710,7 @@ class Eael_Pricing_Table extends Widget_Base {
 			'eael_section_pricing_table_header_style_settings',
 			[
 				'label' => esc_html__( 'Header', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
+				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
 
@@ -718,9 +725,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_title_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'     => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .header .title' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item:hover .header:after' => 'background: {{VALUE}};',
@@ -731,9 +738,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_style_2_title_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#C8E6C9',
+				'label'     => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#C8E6C9',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .header' => 'background: {{VALUE}};',
 					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item .header' => 'background: {{VALUE}};',
@@ -747,9 +754,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_style_1_title_line_color',
 			[
-				'label' => esc_html__( 'Line Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#dbdbdb',
+				'label'     => esc_html__( 'Line Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#dbdbdb',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after' => 'background: {{VALUE}};',
 				],
@@ -762,16 +769,16 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_pricing_table_title_typography',
-				'selector' => '{{WRAPPER}} .eael-pricing-item .header .title',
+             'name'     => 'eael_pricing_table_title_typography',
+             'selector' => '{{WRAPPER}} .eael-pricing-item .header .title',
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_subtitle_heading',
 			[
-				'label' => esc_html__( 'Subtitle Style', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Subtitle Style', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [
 					'eael_pricing_table_style!' => 'style-1'
@@ -782,9 +789,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_subtitle_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'     => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .header .subtitle' => 'color: {{VALUE}};',
 				],
@@ -797,9 +804,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             	'name' => 'eael_pricing_table_subtitle_typography',
-				'selector' => '{{WRAPPER}} .eael-pricing-item .header .subtitle',
-				'condition' => [
+             	'name'      => 'eael_pricing_table_subtitle_typography',
+             	'selector'  => '{{WRAPPER}} .eael-pricing-item .header .subtitle',
+             	'condition' => [
 					'eael_pricing_table_style!' => 'style-1'
 				]
 			]
@@ -818,25 +825,25 @@ class Eael_Pricing_Table extends Widget_Base {
 			'eael_section_pricing_table_title_style_settings',
 			[
 				'label' => esc_html__( 'Pricing', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE
+				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_price_tag_onsale_heading',
 			[
-				'label' => esc_html__( 'Original Price', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' =>  'before'
+				'label'     => esc_html__( 'Original Price', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before'
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_pricing_onsale_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#999',
+				'label'     => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#999',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .muted-price' => 'color: {{VALUE}};',
 				],
@@ -846,7 +853,7 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-            'name' => 'eael_pricing_table_price_tag_onsale_typography',
+				'name'     => 'eael_pricing_table_price_tag_onsale_typography',
 				'selector' => '{{WRAPPER}} .eael-pricing-item .muted-price',
 			]
 		);
@@ -854,18 +861,18 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_price_tag_heading',
 			[
-				'label' => esc_html__( 'Sale Price', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' =>  'before'
+				'label'     => esc_html__( 'Sale Price', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before'
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_pricing_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'     => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .price-tag' => 'color: {{VALUE}};',
 				],
@@ -875,26 +882,26 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-            'name' => 'eael_pricing_table_price_tag_typography',
-				'selector' => '{{WRAPPER}} .eael-pricing-item .price-tag',
+            	'name'     => 'eael_pricing_table_price_tag_typography',
+            	'selector' => '{{WRAPPER}} .eael-pricing-item .price-tag',
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_price_currency_heading',
 			[
-				'label' => esc_html__( 'Currency', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' =>  'before'
+				'label'     => esc_html__( 'Currency', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before'
 			]
 		);
 
 		$this->add_control(
 			'eael_pricing_table_pricing_curr_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#00C853',
+				'label'     => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#00C853',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .price-tag .price-currency' => 'color: {{VALUE}};',
 				],
@@ -904,18 +911,18 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-            'name' => 'eael_pricing_table_price_cur_typography',
-				'selector' => '{{WRAPPER}} .eael-pricing-item .price-currency',
+            	'name'     => 'eael_pricing_table_price_cur_typography',
+            	'selector' => '{{WRAPPER}} .eael-pricing-item .price-currency',
 			]
 		);
 
 		$this->add_responsive_control(
 			'eael_pricing_table_price_cur_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
+				'selectors'  => [
 	 					'{{WRAPPER}} .eael-pricing-item .price-currency' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	 			],
 			]
@@ -924,8 +931,8 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_pricing_period_heading',
 			[
-				'label' => esc_html__( 'Pricing Period', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Pricing Period', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
 		);
@@ -933,9 +940,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'eael_pricing_table_pricing_period_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
+				'label'     => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-item .price-period' => 'color: {{VALUE}};',
 				],
@@ -945,7 +952,7 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-            'name' => 'eael_pricing_table_price_preiod_typography',
+            	'name' => 'eael_pricing_table_price_preiod_typography',
 				'selector' => '{{WRAPPER}} .eael-pricing-item .price-period',
 			]
 		);
@@ -1662,69 +1669,6 @@ class Eael_Pricing_Table extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function render_feature_list( $settings ) {
-		if( empty($settings['eael_pricing_table_items']) ) return;
-
-		$counter = 0;
-		?>
-		<ul>
-			<?php
-				foreach( $settings['eael_pricing_table_items'] as $item ) :
-				
-					if( 'yes' !== $item['eael_pricing_table_icon_mood'] ) {
-						$this->add_render_attribute('pricing_feature_item'.$counter, 'class', 'disable-item');
-					}
-					
-					if( 'yes' === $item['eael_pricing_item_tooltip'] ) {
-						$this->add_render_attribute('pricing_feature_item'.$counter,
-							[
-								'class' => 'tooltip',
-								'title'	=> $item['eael_pricing_item_tooltip_content'],
-								'id'	=> $this->get_id() . $counter
-							]
-						);
-					}
-
-					if( 'yes' == $item['eael_pricing_item_tooltip'] ) {
-						
-						if( $item['eael_pricing_item_tooltip_side'] ) {
-							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-side', $item['eael_pricing_item_tooltip_side'] );
-						}
-						
-						if( $item['eael_pricing_item_tooltip_trigger'] ) {
-							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger'] );
-						}
-						
-						if( $item['eael_pricing_item_tooltip_animation'] ) {
-							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation', $item['eael_pricing_item_tooltip_animation'] );
-						}
-						
-						if( ! empty( $item['pricing_item_tooltip_animation_duration'] ) ) {
-							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration'] );
-						}
-
-						if( ! empty( $item['eael_pricing_table_toolip_arrow'] ) ) {
-							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow'] );
-						}
-
-						if( ! empty( $item['eael_pricing_item_tooltip_theme'] ) ) {
-							$this->add_render_attribute( 'pricing_feature_item'.$counter, 'data-theme', $item['eael_pricing_item_tooltip_theme'] );
-						}
-
-					}
-			?>
-				<li <?php echo $this->get_render_attribute_string('pricing_feature_item'.$counter); ?>>
-					<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
-					<span class="li-icon" style="color:<?php echo esc_attr( $item['eael_pricing_table_list_icon_color'] ); ?>"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span>
-					<?php endif; ?>
-					<?php echo $item['eael_pricing_table_item']; ?>
-				</li>
-			<?php $counter++; endforeach; ?>
-		</ul>
-		<?php
-	}
-
-
 	protected function render() {
 
    	$settings = $this->get_settings();
@@ -1733,6 +1677,9 @@ class Eael_Pricing_Table extends Widget_Base {
 		$target = $settings['eael_pricing_table_btn_link']['is_external'] ? 'target="_blank"' : '';
 		$nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 		if( 'yes' === $settings['eael_pricing_table_featured'] ) : $featured_class = 'featured '.$settings['eael_pricing_table_featured_styles']; else : $featured_class = ''; endif;
+
+		// $featured_class = ('yes' === $settings['eael_pricing_table_featured']) ? 'featured '.$settings['eael_pricing_table_featured_styles'] : '';
+		// dump($featured_class);
 
 		if( 'yes' === $settings['eael_pricing_table_onsale'] ) {
 			if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) {
@@ -1748,7 +1695,7 @@ class Eael_Pricing_Table extends Widget_Base {
 			}
 		}
 	?>
-	<?php if( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] || 'style-4' === $settings['eael_pricing_table_style'] ) : ?>
+	<?php if( 'style-1' === $settings['eael_pricing_table_style'] ) : ?>
 	<div class="eael-pricing style-1">
 	    <div class="eael-pricing-item <?php echo esc_attr( $featured_class ); ?>">
 	        <div class="header">
@@ -1759,7 +1706,7 @@ class Eael_Pricing_Table extends Widget_Base {
 	            <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
 	        </div>
 	        <div class="body">
-	            <?php $this->render_feature_list( $settings ); ?>
+	            <?php $this->render_feature_list($settings, $this); ?>
 	        </div>
 	        <div class="footer">
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
@@ -1774,7 +1721,8 @@ class Eael_Pricing_Table extends Widget_Base {
 		    </div>
 	    </div>
 	</div>
-	<?php elseif( 'style-2' === $settings['eael_pricing_table_style'] ) : ?>
+	<?php endif; ?>
+	<?php if( 'style-2' === $settings['eael_pricing_table_style'] ) : ?>
 	<div class="eael-pricing style-2">
 	    <div class="eael-pricing-item <?php echo esc_attr( $featured_class ); ?>">
 	        <div class="eael-pricing-icon">
@@ -1789,7 +1737,7 @@ class Eael_Pricing_Table extends Widget_Base {
 	            <span class="price-period"><?php echo $settings['eael_pricing_table_period_separator']; ?> <?php echo $settings['eael_pricing_table_price_period']; ?></span>
 	        </div>
 	        <div class="body">
-	            <?php $this->render_feature_list( $settings ); ?>
+	            <?php $this->render_feature_list($settings, $this); ?>
 	        </div>
 	        <div class="footer">
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
@@ -1806,6 +1754,7 @@ class Eael_Pricing_Table extends Widget_Base {
 	</div>
 	<?php endif; ?>
 	<?php
+		do_action('add_pricing_table_style_block', $settings, $this, $pricing, $target, $nofollow);
 	}
 
 	protected function content_template() {}
