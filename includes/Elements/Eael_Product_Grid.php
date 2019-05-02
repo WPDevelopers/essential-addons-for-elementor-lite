@@ -14,6 +14,7 @@ use \Elementor\Widget_Base as Widget_Base;
 class Eael_Product_Grid extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Template\Content\Product_Loop;
 
     public function get_name()
     {
@@ -442,17 +443,16 @@ class Eael_Product_Grid extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings();
-        $show_rating = $settings['eael_product_grid_rating'];
 
-        if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple') {
-            $grid_layout = 'eael-product-simple';
-        } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-reveal') {
-            $grid_layout = 'eael-product-reveal';
-        } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-overlay') {
-            $grid_layout = 'eael-product-overlay';
-        } else {
-            $grid_layout = 'eael-product-default';
-        }
+        // if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple') {
+        //     $grid_layout = 'eael-product-simple';
+        // } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-reveal') {
+        //     $grid_layout = 'eael-product-reveal';
+        // } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-overlay') {
+        //     $grid_layout = 'eael-product-overlay';
+        // } else {
+        //     $grid_layout = 'eael-product-default';
+        // }
 
         $args = [
             'post_type' => 'product',
@@ -504,26 +504,21 @@ class Eael_Product_Grid extends Widget_Base
             $args['order'] = 'DESC';
         }
 
-        global $woocommerce_loop;
-        $woocommerce_loop['loop'] = $woocommerce_loop['columns'] = $settings['eael_product_grid_column'];
-
-        echo '<div class="eael-product-grid ' . $grid_layout . '">
+        echo '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">
 			<div class="woocommerce">
 				<ul class="products eael-product-columns-' . $settings['eael_product_grid_column'] . '">';
-                    $query = new \WP_Query($args);
-                    if ($query->have_posts()) {
-                        while ($query->have_posts()): $query->the_post();
-                            include EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/product-loop.php';
-                        endwhile;
+                    $products = get_posts($args);
+
+                    if ($products) {
+                        foreach ($products as $product) {
+                            $this->template_product_loop($settings, $product);
+                        }
                     } else {
                         echo __('No products found');
                     }
-                    wp_reset_postdata();
-                    unset($woocommerce_loop);
                 echo '</ul>
 			</div>
 		</div>';
     }
 
-    protected function content_template(){}
 }
