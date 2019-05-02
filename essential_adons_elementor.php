@@ -67,6 +67,6 @@ register_deactivation_hook(__FILE__, function () {
  *
  * @since v3.0.0
  */
-add_action('upgrader_process_complete', function () {
-    \Essential_Addons_Elementor\Classes\Migration::plugin_upgrade_hook();
-});
+add_action('upgrader_process_complete', function ($upgrader_object, $options) {
+    \Essential_Addons_Elementor\Classes\Migration::plugin_upgrade_hook($upgrader_object, $options);
+}, 10, 2);

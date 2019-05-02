@@ -39,8 +39,14 @@ class Migration
      *
      * @since 3.0.0
      */
-    public static function plugin_upgrade_hook()
+    public static function plugin_upgrade_hook($upgrader_object, $options)
     {
-        (new self)->empty_dir(EAEL_ASSET_PATH);
+        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
+            foreach ($options['plugins'] as $plugin) {
+                if ($plugin == EAEL_PLUGIN_BASENAME) {
+                    (new self)->empty_dir(EAEL_ASSET_PATH);
+                }
+            }
+        }
     }
 }
