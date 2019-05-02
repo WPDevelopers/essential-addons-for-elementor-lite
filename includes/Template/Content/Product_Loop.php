@@ -42,7 +42,8 @@ trait Product_Loop
             setup_postdata($GLOBALS['post'] = $post_object);
             wc_get_template_part('content', 'product');
             wp_reset_postdata();
-            unset($GLOBALS['product']);
         }
+
+        unset($GLOBALS['product']);
     }
 }
