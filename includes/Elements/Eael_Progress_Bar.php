@@ -238,11 +238,7 @@ class Eael_Progress_Bar extends Widget_Base
         /**
          * Style Tab: General(Line)
          */
-        if(Bootstrap::pro_enabled()) {
-            $style_condition = ['line', 'line_rainbow'];
-        }else {
-            $style_condition = ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'];
-        }
+        $style_condition = apply_filters('eael_progressbar_general_style_condition', ['line', 'line_rainbow']);
 
         $this->start_controls_section(
             'progress_bar_section_style_general_line',
@@ -431,16 +427,7 @@ class Eael_Progress_Bar extends Widget_Base
             ]
         );
 
-        if(Bootstrap::pro_enabled()) {
-            $fill_stripe_animate_condition = [
-                'progress_bar_layout'           => 'line',
-                'progress_bar_line_fill_stripe' => 'yes',
-            ];
-        }else {
-            $fill_stripe_animate_condition = [
-                'progress_bar_line_fill_stripe' => 'yes',
-            ];
-        }
+        $fill_stripe_animate_condition = apply_filters( 'eael_progressbar_line_fill_stripe_condition', ['progress_bar_line_fill_stripe' => 'yes']);
 
         $this->add_control(
             'progress_bar_line_fill_stripe_animate',
@@ -462,13 +449,7 @@ class Eael_Progress_Bar extends Widget_Base
         /**
          * Style Tab: General(Circle)
          */
-        if(Bootstrap::pro_enabled()) {
-            $circle_general_condition = ['circle', 'circle_fill', 'half_circle', 'half_circle_fill'];
-        }else {
-            $circle_general_condition = ['circle', 'half_circle'];
-        }
-
-        // echo '<pre>', print_r($circle_general_condition, 1), '</pre>';
+        $circle_general_condition = apply_filters('eael_circle_style_general_condition', ['circle', 'half_circle']);
 
         $this->start_controls_section(
             'progress_bar_section_style_general_circle',
