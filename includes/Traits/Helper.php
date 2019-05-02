@@ -478,7 +478,7 @@ trait Helper
             ]
         );
 
-        if ('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
+        if('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
 
             $this->add_control(
                 'eael_show_meta',
@@ -1330,5 +1330,68 @@ trait Helper
             return $return;
         }
     }
+
+    protected function render_feature_list($settings, $obj)
+    {
+		if( empty($settings['eael_pricing_table_items']) ) return;
+
+		$counter = 0;
+		?>
+		<ul>
+			<?php
+				foreach( $settings['eael_pricing_table_items'] as $item ) :
+				
+					if( 'yes' !== $item['eael_pricing_table_icon_mood'] ) {
+						$obj->add_render_attribute('pricing_feature_item'.$counter, 'class', 'disable-item');
+					}
+					
+					if( 'yes' === $item['eael_pricing_item_tooltip'] ) {
+						$obj->add_render_attribute('pricing_feature_item'.$counter,
+							[
+								'class' => 'tooltip',
+								'title'	=> $item['eael_pricing_item_tooltip_content'],
+								'id'	=> $obj->get_id() . $counter
+							]
+						);
+					}
+
+					if( 'yes' == $item['eael_pricing_item_tooltip'] ) {
+						
+						if( $item['eael_pricing_item_tooltip_side'] ) {
+							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-side', $item['eael_pricing_item_tooltip_side'] );
+						}
+						
+						if( $item['eael_pricing_item_tooltip_trigger'] ) {
+							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger'] );
+						}
+						
+						if( $item['eael_pricing_item_tooltip_animation'] ) {
+							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation', $item['eael_pricing_item_tooltip_animation'] );
+						}
+						
+						if( ! empty( $item['pricing_item_tooltip_animation_duration'] ) ) {
+							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration'] );
+						}
+
+						if( ! empty( $item['eael_pricing_table_toolip_arrow'] ) ) {
+							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow'] );
+						}
+
+						if( ! empty( $item['eael_pricing_item_tooltip_theme'] ) ) {
+							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-theme', $item['eael_pricing_item_tooltip_theme'] );
+						}
+
+					}
+			?>
+				<li <?php echo $obj->get_render_attribute_string('pricing_feature_item'.$counter); ?>>
+					<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
+					<span class="li-icon" style="color:<?php echo esc_attr( $item['eael_pricing_table_list_icon_color'] ); ?>"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span>
+					<?php endif; ?>
+					<?php echo $item['eael_pricing_table_item']; ?>
+				</li>
+			<?php $counter++; endforeach; ?>
+		</ul>
+		<?php
+	}
 
 }
