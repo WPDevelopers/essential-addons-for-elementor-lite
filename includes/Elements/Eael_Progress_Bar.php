@@ -238,13 +238,19 @@ class Eael_Progress_Bar extends Widget_Base
         /**
          * Style Tab: General(Line)
          */
+        if(Bootstrap::pro_enabled()) {
+            $style_condition = ['line', 'line_rainbow'];
+        }else {
+            $style_condition = ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'];
+        }
+
         $this->start_controls_section(
             'progress_bar_section_style_general_line',
             [
                 'label'     => __('General', 'essential-addons-elementor'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'progress_bar_layout' => ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'],
+                    'progress_bar_layout' => $style_condition,
                 ],
             ]
         );
@@ -280,10 +286,10 @@ class Eael_Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_style_bg',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'label'     => __('Background', 'essential-addons-elementor'),
+                'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'progress_bar_layout' => ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'],
+                    'progress_bar_layout' => $style_condition, // ['line', 'line_rainbow'] ( Pro Only )
                 ],
             ]
         );
@@ -363,7 +369,7 @@ class Eael_Progress_Bar extends Widget_Base
                 'label' => __('Fill', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'progress_bar_layout' => ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'],
+                    'progress_bar_layout' => $style_condition, // will here ['line', 'line_rainbow'] ( Pro Only )
                 ],
             ]
         );
@@ -391,15 +397,23 @@ class Eael_Progress_Bar extends Widget_Base
             ]
         );
 
+        if(Bootstrap::pro_enabled()){
+            $line_fill_color_condition = [
+                'progress_bar_layout' => 'line',
+            ];
+        }else {
+            $line_fill_color_condition = [];
+        }
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'progress_bar_line_fill_color',
-                'label' => __('Color', 'essential-addons-elementor'),
-                'types' => ['classic', 'gradient'],
-                'exclude'               => [
+                'name'    => 'progress_bar_line_fill_color',
+                'label'   => __('Color', 'essential-addons-elementor'),
+                'types'   => ['classic', 'gradient'],
+                'exclude' => [
                     'image',
                 ],
+                'condition' => $line_fill_color_condition,
                 'selector' => '{{WRAPPER}} .eael-progressbar-line-fill',
                 'separator' => 'before',
             ]
@@ -408,13 +422,25 @@ class Eael_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_fill_stripe',
             [
-                'label' => __('Show Stripe', 'essential-addons-elementor'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label'        => __('Show Stripe', 'essential-addons-elementor'),
+                'type'         => \Elementor\Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => 'no',
-                'separator' => 'before',
+                'condition'     => $line_fill_color_condition,
+                'default'      => 'no',
+                'separator'    => 'before',
             ]
         );
+
+        if(Bootstrap::pro_enabled()) {
+            $fill_stripe_animate_condition = [
+                'progress_bar_layout'           => 'line',
+                'progress_bar_line_fill_stripe' => 'yes',
+            ];
+        }else {
+            $fill_stripe_animate_condition = [
+                'progress_bar_line_fill_stripe' => 'yes',
+            ];
+        }
 
         $this->add_control(
             'progress_bar_line_fill_stripe_animate',
@@ -422,14 +448,12 @@ class Eael_Progress_Bar extends Widget_Base
                 'label' => __('Stripe Animation', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'normal' => __('Left To Right', 'essential-addons-elementor'),
+                    'normal'  => __('Left To Right', 'essential-addons-elementor'),
                     'reverse' => __('Right To Left', 'essential-addons-elementor'),
-                    'none' => __('Disabled', 'essential-addons-elementor'),
+                    'none'    => __('Disabled', 'essential-addons-elementor'),
                 ],
-                'default' => 'none',
-                'condition' => [
-                    'progress_bar_line_fill_stripe' => 'yes',
-                ],
+                'default'   => 'none',
+                'condition' => $fill_stripe_animate_condition
             ]
         );
 
@@ -438,13 +462,21 @@ class Eael_Progress_Bar extends Widget_Base
         /**
          * Style Tab: General(Circle)
          */
+        if(Bootstrap::pro_enabled()) {
+            $circle_general_condition = ['circle', 'circle_fill', 'half_circle', 'half_circle_fill'];
+        }else {
+            $circle_general_condition = ['circle', 'half_circle'];
+        }
+
+        // echo '<pre>', print_r($circle_general_condition, 1), '</pre>';
+
         $this->start_controls_section(
             'progress_bar_section_style_general_circle',
             [
-                'label' => __('General', 'essential-addons-elementor'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'label'     => __('General', 'essential-addons-elementor'),
+                'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'progress_bar_layout' => ['circle', 'half_circle'],
+                    'progress_bar_layout' => $circle_general_condition,
                 ],
             ]
         );
@@ -475,13 +507,13 @@ class Eael_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_size',
             [
-                'label' => __('Size', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
+                'label'      => __('Size', 'essential-addons-elementor'),
+                'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
-                'range' => [
+                'range'      => [
                     'px' => [
-                        'min' => 50,
-                        'max' => 500,
+                        'min'  => 50,
+                        'max'  => 500,
                         'step' => 1,
                     ],
                 ],
@@ -490,10 +522,10 @@ class Eael_Progress_Bar extends Widget_Base
                     'size' => 200,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-progressbar-circle' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-progressbar-half-circle' => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}} / 2 * 1{{UNIT}});',
+                    '{{WRAPPER}} .eael-progressbar-circle'            => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-progressbar-half-circle'       => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}} / 2 * 1{{UNIT}});',
                     '{{WRAPPER}} .eael-progressbar-half-circle-after' => 'width: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-progressbar-circle-shadow' => 'width: calc({{SIZE}}{{UNIT}} + 20px); height: calc({{SIZE}}{{UNIT}} + 20px);',
+                    '{{WRAPPER}} .eael-progressbar-circle-shadow'     => 'width: calc({{SIZE}}{{UNIT}} + 20px); height: calc({{SIZE}}{{UNIT}} + 20px);',
                 ],
                 'separator' => 'before',
             ]
@@ -515,13 +547,13 @@ class Eael_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_stroke_width',
             [
-                'label' => __('Stroke Width', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
+                'label'      => __('Stroke Width', 'essential-addons-elementor'),
+                'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
-                'range' => [
+                'range'      => [
                     'px' => [
-                        'min' => 0,
-                        'max' => 100,
+                        'min'  => 0,
+                        'max'  => 100,
                         'step' => 1,
                     ],
                 ],
@@ -540,24 +572,34 @@ class Eael_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_stroke_color',
             [
-                'label' => __('Stroke Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#eee',
+                'label'     => __('Stroke Color', 'essential-addons-elementor'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#eee',
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-circle-inner' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
 
+        if(Bootstrap::pro_enabled()) {
+            $circle_fill_color_condition = [
+                '{{WRAPPER}} .eael-progressbar-circle-half' => 'border-color: {{VALUE}}',
+                '{{WRAPPER}} .eael-progressbar-circle-fill .eael-progressbar-circle-half' => 'background-color: {{VALUE}}',
+                '{{WRAPPER}} .eael-progressbar-half-circle-fill .eael-progressbar-circle-half' => 'background-color: {{VALUE}}',
+            ];
+        }else {
+            $circle_fill_color_condition = [
+                '{{WRAPPER}} .eael-progressbar-circle-half' => 'border-color: {{VALUE}}',
+            ];
+        }
+
         $this->add_control(
             'progress_bar_circle_fill_color',
             [
-                'label' => __('Fill Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#000',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-progressbar-circle-half' => 'border-color: {{VALUE}}',
-                ],
+                'label'     => __('Fill Color', 'essential-addons-elementor'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#000',
+                'selectors' => $circle_fill_color_condition,
                 'separator' => 'before',
             ]
         );
@@ -565,9 +607,9 @@ class Eael_Progress_Bar extends Widget_Base
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'progress_bar_circle_box_shadow',
-                'label' => __('Box Shadow', 'essential-addons-elementor'),
-                'selector' => '{{WRAPPER}} .eael-progressbar-circle-shadow',
+                'name'      => 'progress_bar_circle_box_shadow',
+                'label'     => __('Box Shadow', 'essential-addons-elementor'),
+                'selector'  => '{{WRAPPER}} .eael-progressbar-circle-shadow',
                 'condition' => [
                     'progress_bar_layout' => 'circle',
                 ],
@@ -576,6 +618,9 @@ class Eael_Progress_Bar extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        // Import progress bar style controlls
+        do_action( 'add_progress_bar_control', $this );
 
         /**
          * Style Tab: Typography
@@ -591,9 +636,9 @@ class Eael_Progress_Bar extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'progress_bar_title_typography',
-                'label' => __('Title', 'essential-addons-elementor'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'name'     => 'progress_bar_title_typography',
+                'label'    => __('Title', 'essential-addons-elementor'),
+                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-progressbar-title',
             ]
         );
