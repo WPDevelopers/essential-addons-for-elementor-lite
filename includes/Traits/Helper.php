@@ -20,15 +20,93 @@ trait Helper
      *
      */
     public $post_args = array(
-        // content ticker
+        // // content ticker
+        // 'eael_ticker_type',
+        // 'eael_ticker_custom_contents',
+
+        // // post grid
+        // 'eael_post_grid_columns',
+
+        // // common
+        // 'meta_position',
+        // 'eael_show_meta',
+        // 'image_size',
+        // 'eael_show_image',
+        // 'eael_show_title',
+        // 'eael_show_excerpt',
+        // 'eael_excerpt_length',
+        // 'eael_show_read_more',
+        // 'eael_read_more_text',
+        // 'show_load_more',
+        // 'show_load_more_text',
+        // 'eael_post_grid_bg_hover_icon',
+
+        // // query_args
+        // 'post_type',
+        // 'post__in',
+        // 'posts_per_page',
+        // 'post_style',
+        // 'tax_query',
+        // 'post__not_in',
+        // 'eael_post_authors',
+        // 'eaeposts_authors',
+        // 'offset',
+        // 'orderby',
+        // 'order',
+        // 'eael_post_grid_hover_animation',
+
+        // for content-ticker
         'eael_ticker_type',
         'eael_ticker_custom_contents',
 
-        // post grid
-        'eael_post_grid_columns',
-
-        // common
+        // for content-timeline
+        'eael_content_timeline_choose',
+        'eael_show_image_or_icon',
+        'eael_show_image_or_icon',
+        'eael_coustom_content_posts',
+        'eael_icon_image',
+        'eael_content_timeline_circle_icon',
+        
+        // for post-block
+        'grid_style',
         'meta_position',
+        'show_load_more',
+        'show_load_more_text',
+        'eael_post_block_hover_animation',
+        'eael_post_block_bg_hover_icon',
+
+        // for post-carousel
+        
+        // for post-grid
+        'meta_position',
+        'eael_post_grid_hover_icon',
+        
+        // for post-list
+        'featured_posts',
+        'eael_post_list_featured_area',
+        'eael_post_list_featured_meta',
+        'eael_post_list_featured_title',
+        'eael_post_list_featured_excerpt',
+        'eael_post_list_featured_excerpt_length',
+        'eael_post_list_post_feature_image',
+        'eael_post_list_post_title',
+        'eael_post_list_post_meta',
+        'eael_post_list_post_excerpt',
+        'eael_post_list_post_excerpt_length',
+        'eael_post_list_pagination',
+        'eael_post_list_pagination_next_icon',
+        'eael_post_list_pagination_prev_icon',
+        'eael_post_list_topbar',
+        'eael_post_list_pagination',
+        'eael_post_list_topbar_title',
+        'eael_post_list_terms',
+        'eael_post_list_topbar_term_all_text',
+
+        // for post-timeline
+        
+        // common
+        'show_load_more',
+        'show_load_more_text',
         'eael_show_meta',
         'image_size',
         'eael_show_image',
@@ -37,10 +115,21 @@ trait Helper
         'eael_excerpt_length',
         'eael_show_read_more',
         'eael_read_more_text',
-        'show_load_more',
-        'show_load_more_text',
-        'eael_post_grid_bg_hover_icon',
 
+        'eael_post_grid_columns',
+
+        // for dynamic filter gallery
+        'eael_fg_grid_style',
+        'eael_fg_grid_hover_style',
+        'eael_fg_show_popup',
+        'eael_section_fg_zoom_icon',
+        'eael_section_fg_link_icon',
+        'eael_post_excerpt',
+        'eael_fg_show_popup_styles',
+        'control_id',
+        'eael_fg_loadmore_btn_text',
+        'show_gallery_filter_controls',
+        
         // query_args
         'post_type',
         'post__in',
@@ -53,10 +142,17 @@ trait Helper
         'offset',
         'orderby',
         'order',
-        'eael_post_grid_hover_animation',
+        'eael_post_grid_bg_hover_icon',
+        'eael_post_grid_hover_style',
+
+        // post-list
+        'eael_enable_ajax_post_search',
+        'eael_post_list_layout_type',
+        'eael_post_list_author_meta',
+        'eael_post_list_post_cat'
     );
 
-        /**
+    /**
      * Get all types of post.
      * @return array
      */
@@ -128,13 +224,13 @@ trait Helper
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'essential-addons-elementor'),
-                'type'        => Controls_Manager::SELECT2,
-                'options'     => $this->eael_get_all_types_post(),
+                'label' => __('Exclude', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_get_all_types_post(),
                 'label_block' => true,
-                'post_type'   => '',
-                'multiple'    => true,
-                'condition'   => [
+                'post_type' => '',
+                'multiple' => true,
+                'condition' => [
                     'eaeposts_post_type!' => 'by_id',
                 ],
             ]
@@ -463,14 +559,14 @@ trait Helper
             ]
         );
 
-        $excerpt_feature = apply_filters( 'eael_excerpt_length', '<span class="pro-feature"> Pro Feature. Get <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> </span>' );
+        $excerpt_feature = apply_filters('eael_excerpt_length', '<span class="pro-feature"> Pro Feature. Get <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> </span>');
 
         $this->add_control(
             'eael_excerpt_length',
             [
-                'label'     => __('Excerpt Words', 'essential-addons-elementor'),
-                'type'      => Controls_Manager::NUMBER,
-                'default'   => '10',
+                'label' => __('Excerpt Words', 'essential-addons-elementor'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => '10',
                 'condition' => [
                     'eael_show_excerpt' => '1',
                 ],
@@ -478,7 +574,7 @@ trait Helper
             ]
         );
 
-        if('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
+        if ('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
 
             $this->add_control(
                 'eael_show_meta',
@@ -1310,12 +1406,30 @@ trait Helper
             return $posts->posts;
         }
 
+        // Pro
+        if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'advanced_slider' ) {
+            return $posts;
+        }
+
         $return = array();
         $return['count'] = $posts->found_posts;
 
+        if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'list' ) {
+            $post_args['is_pro'] = true; // fix
+            $iterator = $feature_counter = 0;
+
+            foreach( $posts->posts as $post ) {
+                if( isset( $post_args['featured_posts'] ) && $post->ID != $post_args['featured_posts'] ) {
+                    $normal_posts[] = $post;
+                }
+            }
+            $posts->posts = array_merge( empty( $post_args['featured_posts'] ) ? [] : [ $post_args['featured_posts'] ], $normal_posts);
+        }
+
         ob_start();
-        $iterator = $feature_counter = 0; // should be improved in future versions
+        // $iterator = $feature_counter = 0; // should be improved in future versions
         while ($posts->have_posts()): $posts->the_post();
+            $isPrinted = false;
             include ($post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH) . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
         endwhile;
 
@@ -1325,7 +1439,13 @@ trait Helper
         wp_reset_query();
 
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            wp_send_json($return['content']);
+            if ($_POST['post_style'] == 'list') {
+                echo json_encode($return);
+                die();
+            }
+
+            echo $return['content'];
+            die();
         } else {
             return $return;
         }
@@ -1333,65 +1453,67 @@ trait Helper
 
     protected function render_feature_list($settings, $obj)
     {
-		if( empty($settings['eael_pricing_table_items']) ) return;
+        if (empty($settings['eael_pricing_table_items'])) {
+            return;
+        }
 
-		$counter = 0;
-		?>
+        $counter = 0;
+        ?>
 		<ul>
 			<?php
-				foreach( $settings['eael_pricing_table_items'] as $item ) :
-				
-					if( 'yes' !== $item['eael_pricing_table_icon_mood'] ) {
-						$obj->add_render_attribute('pricing_feature_item'.$counter, 'class', 'disable-item');
-					}
-					
-					if( 'yes' === $item['eael_pricing_item_tooltip'] ) {
-						$obj->add_render_attribute('pricing_feature_item'.$counter,
-							[
-								'class' => 'tooltip',
-								'title'	=> $item['eael_pricing_item_tooltip_content'],
-								'id'	=> $obj->get_id() . $counter
-							]
-						);
-					}
+foreach ($settings['eael_pricing_table_items'] as $item):
 
-					if( 'yes' == $item['eael_pricing_item_tooltip'] ) {
-						
-						if( $item['eael_pricing_item_tooltip_side'] ) {
-							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-side', $item['eael_pricing_item_tooltip_side'] );
-						}
-						
-						if( $item['eael_pricing_item_tooltip_trigger'] ) {
-							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger'] );
-						}
-						
-						if( $item['eael_pricing_item_tooltip_animation'] ) {
-							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation', $item['eael_pricing_item_tooltip_animation'] );
-						}
-						
-						if( ! empty( $item['pricing_item_tooltip_animation_duration'] ) ) {
-							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration'] );
-						}
+            if ('yes' !== $item['eael_pricing_table_icon_mood']) {
+                $obj->add_render_attribute('pricing_feature_item' . $counter, 'class', 'disable-item');
+            }
 
-						if( ! empty( $item['eael_pricing_table_toolip_arrow'] ) ) {
-							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow'] );
-						}
+            if ('yes' === $item['eael_pricing_item_tooltip']) {
+                $obj->add_render_attribute('pricing_feature_item' . $counter,
+                    [
+                        'class' => 'tooltip',
+                        'title' => $item['eael_pricing_item_tooltip_content'],
+                        'id' => $obj->get_id() . $counter,
+                    ]
+                );
+            }
 
-						if( ! empty( $item['eael_pricing_item_tooltip_theme'] ) ) {
-							$obj->add_render_attribute( 'pricing_feature_item'.$counter, 'data-theme', $item['eael_pricing_item_tooltip_theme'] );
-						}
+            if ('yes' == $item['eael_pricing_item_tooltip']) {
 
-					}
-			?>
-				<li <?php echo $obj->get_render_attribute_string('pricing_feature_item'.$counter); ?>>
-					<?php if( 'show' === $settings['eael_pricing_table_icon_enabled'] ) : ?>
-					<span class="li-icon" style="color:<?php echo esc_attr( $item['eael_pricing_table_list_icon_color'] ); ?>"><i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i></span>
-					<?php endif; ?>
+                if ($item['eael_pricing_item_tooltip_side']) {
+                    $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
+                }
+
+                if ($item['eael_pricing_item_tooltip_trigger']) {
+                    $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
+                }
+
+                if ($item['eael_pricing_item_tooltip_animation']) {
+                    $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
+                }
+
+                if (!empty($item['pricing_item_tooltip_animation_duration'])) {
+                    $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
+                }
+
+                if (!empty($item['eael_pricing_table_toolip_arrow'])) {
+                    $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
+                }
+
+                if (!empty($item['eael_pricing_item_tooltip_theme'])) {
+                    $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
+                }
+
+            }
+            ?>
+					<li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
+						<?php if ('show' === $settings['eael_pricing_table_icon_enabled']): ?>
+						<span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>"><i class="<?php echo esc_attr($item['eael_pricing_table_list_icon']); ?>"></i></span>
+						<?php endif;?>
 					<?php echo $item['eael_pricing_table_item']; ?>
 				</li>
-			<?php $counter++; endforeach; ?>
+			<?php $counter++;endforeach;?>
 		</ul>
 		<?php
-	}
+}
 
 }

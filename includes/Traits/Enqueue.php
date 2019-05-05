@@ -97,7 +97,7 @@ trait Enqueue
             false,
             EAEL_PLUGIN_VERSION
         );
-        error_log(print_r($this->pro_enabled, 1));
+        
         if($this->pro_enabled) {
             wp_enqueue_style(
                 'eael-pro-front-end',
