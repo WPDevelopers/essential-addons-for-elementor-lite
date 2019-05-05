@@ -1314,7 +1314,7 @@ trait Helper
         $return['count'] = $posts->found_posts;
 
         ob_start();
-
+        $iterator = $feature_counter = 0; // should be improved in future versions
         while ($posts->have_posts()): $posts->the_post();
             include ($post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH) . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
         endwhile;
