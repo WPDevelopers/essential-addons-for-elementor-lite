@@ -97,6 +97,15 @@ trait Enqueue
             false,
             EAEL_PLUGIN_VERSION
         );
+        error_log(print_r($this->pro_enabled, 1));
+        if($this->pro_enabled) {
+            wp_enqueue_style(
+                'eael-pro-front-end',
+                $this->safe_protocol(EAEL_PRO_PLUGIN_URL . '/assets/front-end/css/eael-pro.css'),
+                false,
+                EAEL_PLUGIN_VERSION
+            );
+        }
 
         wp_enqueue_script(
             'eael-front-end',
