@@ -86,7 +86,7 @@ trait Generator
     {
         $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
         $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
-        
+
         if (is_readable($css_path) && is_readable($js_path)) {
             return true;
         }
@@ -106,19 +106,20 @@ trait Generator
         }
 
         $replace = [
-            'eicon-woocommerce'  => 'product-grid',
-            'countdown'          => 'count-down',
-            'creative-button'    => 'creative-btn',
-            'team-member'        => 'team-members',
-            'testimonial'        => 'testimonials',
-            'weform'             => 'weforms',
-            'cta-box'            => 'call-to-action',
-            'dual-color-header'  => 'dual-header',
-            'pricing-table'      => 'price-table',
+            'eicon-woocommerce' => 'product-grid',
+            'countdown' => 'count-down',
+            'creative-button' => 'creative-btn',
+            'team-member' => 'team-members',
+            'testimonial' => 'testimonials',
+            'weform' => 'weforms',
+            'cta-box' => 'call-to-action',
+            'dual-color-header' => 'dual-header',
+            'pricing-table' => 'price-table',
             'filterable-gallery' => 'filter-gallery',
-            'one-page-nav'       => 'one-page-navigation',
-            'interactive-card'   => 'interactive-cards',
-            'image-comparison'   => 'img-comparison',
+            'one-page-nav' => 'one-page-navigation',
+            'interactive-card' => 'interactive-cards',
+            'image-comparison' => 'img-comparison',
+            'dynamic-filterable-gallery' => 'dynamic-filter-gallery',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
