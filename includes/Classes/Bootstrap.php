@@ -59,8 +59,8 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Grid',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-grid.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
