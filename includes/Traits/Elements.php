@@ -77,11 +77,6 @@ trait Elements
                 continue;
             }
 
-            // if (isset($this->registered_elements[$active_element]['condition'])) {
-            //     if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
-            //         continue;
-            //     }
-            // }
             new $this->registered_extensions[$active_element]['class'];
         }
     }
