@@ -444,16 +444,6 @@ class Eael_Product_Grid extends Widget_Base
     {
         $settings = $this->get_settings();
 
-        // if ($settings['eael_product_grid_style_preset'] == 'eael-product-simple') {
-        //     $grid_layout = 'eael-product-simple';
-        // } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-reveal') {
-        //     $grid_layout = 'eael-product-reveal';
-        // } else if ($settings['eael_product_grid_style_preset'] == 'eael-product-overlay') {
-        //     $grid_layout = 'eael-product-overlay';
-        // } else {
-        //     $grid_layout = 'eael-product-default';
-        // }
-
         $args = [
             'post_type' => 'product',
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
