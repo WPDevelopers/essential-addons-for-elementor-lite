@@ -3,21 +3,11 @@
         <div class="eael-admin-general-inner">
             <div class="eael-admin-block-wrapper">
 
-                <?php if( defined('EAEL_PRO_PLUGIN_BASENAME') ) : ?>
-                <div class="eael-admin-block eael-admin-block-license">
-                    <header class="eael-admin-block-header">
-                        <div class="eael-admin-block-header-icon">
-                            <svg height="36px" version="1.1" viewBox="0 0 32 32" width="36px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="rgba(20,216,161, .75)" id="icon-92-inbox-download"><path d="M16,16 L12.75,12.75 L12,13.5 L16.5,18 L21,13.5 L20.25,12.75 L17,16 L17,5 L16,5 L16,16 L16,16 L16,16 Z M21,18 L27.7750244,18 L27.7750244,18 L23.4000244,11 L18,11 L18,10 L24,10 L29,18 L29,19 L29,27 L4,27 L4,18 L9,10 L15,10 L15,11 L9.59997559,11 L5.22497559,18 L12,18 L12,20 C12,21.1045695 12.8958578,22 13.9973917,22 L19.0026083,22 C20.1057373,22 21,21.1122704 21,20 L21,18 L21,18 Z" id="inbox-download"/></g></g></svg>
-                        </div>
-                        <h4 class="eael-admin-title">Automatic Update</h4>
-                    </header>
-                    <div class="eael-admin-block-content">
-                        <?php do_action( 'eael_licensing' ); ?>
-                    </div>
-                </div>
-                <?php endif; ?>
+                    <?php
+                        do_action('add_admin_license_markup');
 
-                    <?php if( !defined('EAEL_PRO_PLUGIN_BASENAME') ) : ?>
+                        if( !defined('EAEL_PRO_PLUGIN_BASENAME') ) :
+                    ?>
                     <div class="eael-admin-block eael-admin-block-banner">
                         <a href="https://essential-addons.com/elementor/" target="_blank">
                             <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/eael-featured.png'; ?>">
@@ -58,13 +48,14 @@
                         </header>
                         <div class="eael-admin-block-content">
 
-                        <?php if( !defined('EAEL_PRO_PLUGIN_BASENAME') )  : ?>
+                        <?php if( !defined('EAEL_PRO_PLUGIN_BASENAME') ): ?>
                             <p>Stuck with something? Get help from the community on <a href="https://community.wpdeveloper.net/" target="_blank">WPDeveloper Forum</a> or <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank">Facebook Community.</a> In case of emergency, initiate a live chat at <a href="https://essential-addons.com/elementor/" target="_blank">Essential Addons website.</a></p>
                             <a href="https://community.wpdeveloper.net/support-forum/forum/essential-addons-for-elementor/" class="button button-primary" target="_blank">Get Community Support</a>
-                        <?php else : ?>
-                            <p>Stuck with something? Get help from live chat or support ticket.</p>
-                            <a href="https://wpdeveloper.net" class="button button-primary" target="_blank">Initiate a Chat</a>
-                        <?php endif; ?>
+                        <?php
+                            else :
+                                do_action('eael_premium_support_link');
+                            endif;
+                        ?>
 
                         </div>
                     </div>
@@ -83,21 +74,11 @@
                             <a href="https://wpdeveloper.net/review-essential-addons-elementor" class="review-flexia button button-primary" target="_blank">Leave a Review</a>
                         </div>
                     </div>
-                    <?php else : ?>
-                    <div class="eael-admin-block eael-admin-block-community">
-                        <header class="eael-admin-block-header">
-                            <div class="eael-admin-block-header-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 41.82"><defs><style>.cls-1{fill:#00aeff;}</style></defs><title>Like</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><g id="thumb-up"><path class="cls-1" d="M0,41.82H8.36V16.73H0Zm46-23a4.19,4.19,0,0,0-4.18-4.18H28.65L30.74,5V4.39a4.39,4.39,0,0,0-.84-2.3L27.6,0,13.8,13.8a3.51,3.51,0,0,0-1.25,2.93V37.64a4.19,4.19,0,0,0,4.18,4.18H35.55a4.13,4.13,0,0,0,3.76-2.51l6.27-14.85A3.56,3.56,0,0,0,45.79,23V18.82H46Z"/></g></g></g><head xmlns=""/></svg>
-                            </div>
-                            <h4 class="eael-admin-title">Join the Community</h4>
-                        </header>
-                        <div class="eael-admin-block-content">
-                            <p>Join the Facebook community and discuss with fellow developers and users. Best way to connect with people and get feedback on your projects.</p>
-
-                            <a href="https://www.facebook.com/groups/essentialaddons" class="review-flexia button button-primary" target="_blank">Join Facebook Community</a>
-                        </div>
-                    </div>
-                    <?php endif; ?>
+                    <?php
+                        else :
+                            do_action('eael_additional_support_links');
+                        endif;
+                    ?>
             </div><!--admin block-wrapper end-->
         </div>
         <div class="eael-admin-sidebar">
@@ -107,10 +88,10 @@
                 </div>
                 <div class="eael-admin-sidebar-cta">
                     <?php
-                        if( defined('EAEL_PRO_PLUGIN_BASENAME') ) {
-                            printf( __( '<a href="%s" target="_blank">Manage License</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/account' );
-                        }else {
+                        if( !defined('EAEL_PRO_PLUGIN_BASENAME') ) {
                             printf( __( '<a href="%s" target="_blank">Upgrade to Pro</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/in/upgrade-essential-addons-elementor' );
+                        }else {
+                            do_action('eael_manage_license_action_link');
                         }
                     ?>
                 </div>
