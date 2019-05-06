@@ -1358,7 +1358,7 @@ trait Helper
         ?>
 		<ul>
 			<?php
-foreach ($settings['eael_pricing_table_items'] as $item):
+            foreach ($settings['eael_pricing_table_items'] as $item):
 
             if ('yes' !== $item['eael_pricing_table_icon_mood']) {
                 $obj->add_render_attribute('pricing_feature_item' . $counter, 'class', 'disable-item');
