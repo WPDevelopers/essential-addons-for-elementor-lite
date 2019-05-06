@@ -21,6 +21,9 @@ class Bootstrap
     // registered elements container
     public $registered_elements;
 
+    // registered elements container
+    public $registered_extensions;
+
     // transient elements container
     public $transient_elements;
 
@@ -372,6 +375,9 @@ class Bootstrap
             ],
         ]);
 
+        $this->registered_extensions = apply_filters('eael_registered_extensions', []);
+
+
         // initialize transient container
         $this->transient_elements = [];
 
@@ -384,6 +390,7 @@ class Bootstrap
 
     protected function register_hooks()
     {
+
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
         add_action('loop_end', array($this, 'generate_frontend_scripts'));
@@ -399,6 +406,9 @@ class Bootstrap
         add_action('elementor/widgets/widgets_registered', array($this, 'eael_add_elements'));
         add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
         add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
+
+        // Extension
+        $this->eael_add_extensions();
 
         // Admin
         if (is_admin()) {
