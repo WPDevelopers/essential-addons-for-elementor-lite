@@ -19,94 +19,16 @@ trait Helper
      * For All Settings Key Need To Display
      *
      */
-    public $post_args = array(
-        // // content ticker
-        // 'eael_ticker_type',
-        // 'eael_ticker_custom_contents',
-
-        // // post grid
-        // 'eael_post_grid_columns',
-
-        // // common
-        // 'meta_position',
-        // 'eael_show_meta',
-        // 'image_size',
-        // 'eael_show_image',
-        // 'eael_show_title',
-        // 'eael_show_excerpt',
-        // 'eael_excerpt_length',
-        // 'eael_show_read_more',
-        // 'eael_read_more_text',
-        // 'show_load_more',
-        // 'show_load_more_text',
-        // 'eael_post_grid_bg_hover_icon',
-
-        // // query_args
-        // 'post_type',
-        // 'post__in',
-        // 'posts_per_page',
-        // 'post_style',
-        // 'tax_query',
-        // 'post__not_in',
-        // 'eael_post_authors',
-        // 'eaeposts_authors',
-        // 'offset',
-        // 'orderby',
-        // 'order',
-        // 'eael_post_grid_hover_animation',
-
-        // for content-ticker
+    public $post_args = [
+        // content ticker
         'eael_ticker_type',
         'eael_ticker_custom_contents',
 
-        // for content-timeline
-        'eael_content_timeline_choose',
-        'eael_show_image_or_icon',
-        'eael_show_image_or_icon',
-        'eael_coustom_content_posts',
-        'eael_icon_image',
-        'eael_content_timeline_circle_icon',
-        
-        // for post-block
-        'grid_style',
-        'meta_position',
-        'show_load_more',
-        'show_load_more_text',
-        'eael_post_block_hover_animation',
-        'eael_post_block_bg_hover_icon',
+        // post grid
+        'eael_post_grid_columns',
 
-        // for post-carousel
-        
-        // for post-grid
-        'meta_position',
-        'eael_post_grid_hover_icon',
-        
-        // for post-list
-        'featured_posts',
-        'eael_post_list_featured_area',
-        'eael_post_list_featured_meta',
-        'eael_post_list_featured_title',
-        'eael_post_list_featured_excerpt',
-        'eael_post_list_featured_excerpt_length',
-        'eael_post_list_post_feature_image',
-        'eael_post_list_post_title',
-        'eael_post_list_post_meta',
-        'eael_post_list_post_excerpt',
-        'eael_post_list_post_excerpt_length',
-        'eael_post_list_pagination',
-        'eael_post_list_pagination_next_icon',
-        'eael_post_list_pagination_prev_icon',
-        'eael_post_list_topbar',
-        'eael_post_list_pagination',
-        'eael_post_list_topbar_title',
-        'eael_post_list_terms',
-        'eael_post_list_topbar_term_all_text',
-
-        // for post-timeline
-        
         // common
-        'show_load_more',
-        'show_load_more_text',
+        'meta_position',
         'eael_show_meta',
         'image_size',
         'eael_show_image',
@@ -115,21 +37,9 @@ trait Helper
         'eael_excerpt_length',
         'eael_show_read_more',
         'eael_read_more_text',
+        'show_load_more',
+        'show_load_more_text',
 
-        'eael_post_grid_columns',
-
-        // for dynamic filter gallery
-        'eael_fg_grid_style',
-        'eael_fg_grid_hover_style',
-        'eael_fg_show_popup',
-        'eael_section_fg_zoom_icon',
-        'eael_section_fg_link_icon',
-        'eael_post_excerpt',
-        'eael_fg_show_popup_styles',
-        'control_id',
-        'eael_fg_loadmore_btn_text',
-        'show_gallery_filter_controls',
-        
         // query_args
         'post_type',
         'post__in',
@@ -142,15 +52,7 @@ trait Helper
         'offset',
         'orderby',
         'order',
-        'eael_post_grid_bg_hover_icon',
-        'eael_post_grid_hover_style',
-
-        // post-list
-        'eael_enable_ajax_post_search',
-        'eael_post_list_layout_type',
-        'eael_post_list_author_meta',
-        'eael_post_list_post_cat'
-    );
+    ];
 
     /**
      * Get all types of post.
@@ -1406,28 +1308,23 @@ trait Helper
             return $posts->posts;
         }
 
-        // Pro
-        if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'advanced_slider' ) {
-            return $posts;
-        }
-
         $return = array();
         $return['count'] = $posts->found_posts;
 
-        if( isset( $post_args['post_style'] ) && $post_args['post_style'] == 'list' ) {
+        if (isset($post_args['post_style']) && $post_args['post_style'] == 'list') {
             $post_args['is_pro'] = true; // fix
             $iterator = $feature_counter = 0;
 
-            foreach( $posts->posts as $post ) {
-                if( isset( $post_args['featured_posts'] ) && $post->ID != $post_args['featured_posts'] ) {
+            foreach ($posts->posts as $post) {
+                if (isset($post_args['featured_posts']) && $post->ID != $post_args['featured_posts']) {
                     $normal_posts[] = $post;
                 }
             }
-            $posts->posts = array_merge( empty( $post_args['featured_posts'] ) ? [] : [ $post_args['featured_posts'] ], $normal_posts);
+            $posts->posts = array_merge(empty($post_args['featured_posts']) ? [] : [$post_args['featured_posts']], $normal_posts);
         }
 
         ob_start();
-        // $iterator = $feature_counter = 0; // should be improved in future versions
+        
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
             include ($post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH) . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
@@ -1505,12 +1402,12 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 
             }
             ?>
-					<li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
-						<?php if ('show' === $settings['eael_pricing_table_icon_enabled']): ?>
-						<span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>"><i class="<?php echo esc_attr($item['eael_pricing_table_list_icon']); ?>"></i></span>
-						<?php endif;?>
-					<?php echo $item['eael_pricing_table_item']; ?>
-				</li>
+            <li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
+                <?php if ('show' === $settings['eael_pricing_table_icon_enabled']): ?>
+                    <span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>"><i class="<?php echo esc_attr($item['eael_pricing_table_list_icon']); ?>"></i></span>
+                <?php endif;?>
+                <?php echo $item['eael_pricing_table_item']; ?>
+            </li>
 			<?php $counter++;endforeach;?>
 		</ul>
 		<?php
