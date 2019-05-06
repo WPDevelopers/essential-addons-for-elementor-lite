@@ -82,7 +82,7 @@ trait Enqueue
 
     // rules how css will be enqueued on front-end
     public function enqueue_protocols($post_type, $queried_object)
-    {
+    {   do_action('eael_wp_enque');
         if ($this->has_cache_files($post_type, $queried_object)) {
             $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
             $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';

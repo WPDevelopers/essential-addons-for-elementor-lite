@@ -54,6 +54,7 @@ class Bootstrap
         // before init hook
         do_action('eael_before_init');
 
+        // check for pro version
         $this->pro_enabled = apply_filters('eael_pro_enabled', false);
 
         // elements classmap
@@ -385,10 +386,15 @@ class Bootstrap
         $this->start_plugin_tracking();
 
         // Register hooks
-        $this->register_hooks();
+        $this->extender_hooks();
+        $this->functional_hooks();
     }
 
-    protected function register_hooks()
+    protected function extender_hooks() {
+        $this->post_args = apply_filters('eael_post_args', $this->post_args);
+    }
+
+    protected function functional_hooks()
     {
 
         // Generator
