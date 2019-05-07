@@ -64,9 +64,10 @@ trait Enqueue
             );
 
             // localize script
-            wp_localize_script('eael-backend', 'localize', array(
-                'ajaxurl' => admin_url('admin-ajax.php'),
-            ));
+            $this->localize_scripts = apply_filters('eael_localize_front_script', [
+                'ajaxurl' => admin_url('admin-ajax.php')
+            ]);
+            wp_localize_script('eael-backend', 'localize', $this->localize_scripts);
         } else if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
             $post_type = (is_singular() ? 'post' : 'term');
