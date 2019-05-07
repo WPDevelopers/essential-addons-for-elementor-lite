@@ -116,8 +116,9 @@ trait Enqueue
         );
 
         // localize script
-        wp_localize_script('eael-front-end', 'localize', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-        ));
+        $this->localize_scripts = apply_filters('eael_localize_front_script', [
+            'ajaxurl' => admin_url('admin-ajax.php')
+        ]);
+        wp_localize_script('eael-front-end', 'localize', $this->localize_scripts);
     }
 }
