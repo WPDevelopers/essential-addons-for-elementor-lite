@@ -67,18 +67,14 @@ trait Elements
     protected function eael_add_extensions() {
         $active_elements = $this->get_settings();
 
-        if (empty($active_elements)) {
-            return;
+        if (empty($active_elements)) return;
+
+        foreach($this->registered_extensions as $key => $extension) {
+            if( !in_array($key, $active_elements) ) continue;
+
+            new $extension['class'];
         }
 
-        foreach ($active_elements as $active_element) {
-
-            if (!isset($this->registered_extensions[$active_element])) {
-                continue;
-            }
-
-            new $this->registered_extensions[$active_element]['class'];
-        }
     }
 
 }

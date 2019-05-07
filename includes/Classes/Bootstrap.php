@@ -30,6 +30,9 @@ class Bootstrap
     // identify whether pro is enabled
     public $pro_enabled;
 
+    // script localization
+    public $localize_scripts;
+
     /**
      * Singleton instance
      *
