@@ -30,9 +30,20 @@ trait Generator
         $paths = [];
 
         foreach ($elements as $element) {
-            if (!empty($this->registered_elements[$element]['dependency'][$type])) {
-                foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
-                    $paths[] = $path;
+            if (isset($this->registered_elements[$element])) {
+                if (!empty($this->registered_elements[$element]['dependency'][$type])) {
+                    foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
+                        $paths[] = $path;
+                    }
+                }
+            }
+
+            if (isset($this->registered_extensions[$element])) {
+                error_log(print_r($this->registered_extensions[$element], 1));
+                if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
+                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
+                        $paths[] = $path;
+                    }
                 }
             }
         }
