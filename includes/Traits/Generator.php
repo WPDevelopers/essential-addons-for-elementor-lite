@@ -38,10 +38,10 @@ trait Generator
                 }
             }
 
-            if (isset($this->registered_extensions[$element])) {
-                error_log(print_r($this->registered_extensions[$element], 1));
-                if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
-                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
+            foreach($this->registered_extensions as $key => $extension) {
+                if( !in_array($key, $this->get_settings()) ) continue;
+                if( ! empty($extension['dependency'][$type]) ) {
+                    foreach ($extension['dependency'][$type] as $path) {
                         $paths[] = $path;
                     }
                 }
