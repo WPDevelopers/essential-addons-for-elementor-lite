@@ -156,7 +156,7 @@ textarea.eael-form-control {
 }
 .eael-checkbox {
     display: flex;
-    flex: 0 0 300px;
+    flex-basis: calc(25% - 20px);
     flex-flow: row-reverse;
     justify-content: space-between;
     align-items: center;
@@ -165,8 +165,8 @@ textarea.eael-form-control {
     padding: 15px;
     box-sizing: border-box;
     border-radius: 3px;
-    border: 1px solid rgba(0,0,0, .05);
-    box-shadow: 0px 6px 20px 0px rgba(194,204,222,0.3);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 6px 20px 0px rgba(194, 204, 222, 0.3);
 }
 .eael-checkbox input[type="checkbox"] {
     visibility: hidden;
@@ -205,12 +205,12 @@ textarea.eael-form-control {
     animation: switch-off 0.3s ease-out;
 }
 .eael-checkbox input[type="checkbox"]:checked + label::before {
-    background: rgba(54,214,107, .8);
+    background: rgba(54, 214, 107, 0.8);
     border: 1px solid #36d66b;
 }
 .eael-checkbox input[type="checkbox"]:checked + label::after {
     left: 1.2em;
-    background: rgba(54,214,107, .8);
+    background: rgba(54, 214, 107, 0.8);
     animation: switch-on 0.3s ease-out;
 }
 
@@ -641,8 +641,11 @@ textarea.eael-form-control {
 }
 .pro-label {
     font-size: 9px;
-    color: red;
+    color: #fff;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
+    background-color: #ff0000;
+    padding: 3px 5px;
+    border-radius: 20px;
 }
