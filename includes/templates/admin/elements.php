@@ -345,9 +345,12 @@ use Essential_Addons_Elementor\Classes\Bootstrap;
                             <?php echo isset( $item['is_pro'] ) && !Bootstrap::pro_enabled() ? '<sup class="pro-label">Pro</sup>' : ''; ?>
                             <?php
                                 if( $item['key'] === 'mailchimp' && Bootstrap::pro_enabled() ) {
-                                    echo '<span><a href="#" id="eael-popup-mailchimp-api-modal">'.__('Settings', 'essential-addons-elementor').'</a></span>';
+                                    echo '
+                                    <span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="mailchimp-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                    <input type="hidden" name="mailchimp-api" id="mailchimp-api-hidden" class="mailchimp-api" placeholder="Set API Key" value="'.get_option('eael_save_mailchimp_api').'">
+                                    ';
                                 }elseif( $item['key'] === 'adv-google-map' && Bootstrap::pro_enabled() ) {
-                                    echo '<span><a href="#" id="eael-popup-api-modal">'.__('Settings', 'essential-addons-elementor').'</a></span>';
+                                    echo '<span style="font-size: 12px; font-style:italic;"><a href="#" id="eael-popup-api-modal">'.__('Settings', 'essential-addons-elementor').'</a></span>';
                                 }
                             ?>
                         </p>
