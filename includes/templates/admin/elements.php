@@ -343,6 +343,13 @@ use Essential_Addons_Elementor\Classes\Bootstrap;
                         <p class="eael-el-title">
                             <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
                             <?php echo isset( $item['is_pro'] ) && !Bootstrap::pro_enabled() ? '<sup class="pro-label">Pro</sup>' : ''; ?>
+                            <?php
+                                if( $item['key'] === 'mailchimp' && Bootstrap::pro_enabled() ) {
+                                    echo '<span><a href="#" id="eael-popup-mailchimp-api-modal">'.__('Settings', 'essential-addons-elementor').'</a></span>';
+                                }elseif( $item['key'] === 'adv-google-map' && Bootstrap::pro_enabled() ) {
+                                    echo '<span><a href="#" id="eael-popup-api-modal">'.__('Settings', 'essential-addons-elementor').'</a></span>';
+                                }
+                            ?>
                         </p>
                     </div>
                 <?php } ?>
