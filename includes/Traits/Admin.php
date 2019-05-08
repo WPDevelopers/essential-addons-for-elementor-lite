@@ -131,6 +131,14 @@ trait Admin
         // update new settings
         $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
 
+        // Saving Google Map Api Key
+		$eael_google_map_api = $settings['google-map-api'];
+		update_option( 'eael_save_google_map_api', $eael_google_map_api );
+
+		// Saving Mailchimp Api Key
+		$eael_mailchimp_api = $settings['mailchimp-api'];
+		update_option( 'eael_save_mailchimp_api', $eael_mailchimp_api );
+
         // Build assets files
         $this->generate_scripts(array_keys($settings));
 
