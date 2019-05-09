@@ -169,14 +169,15 @@ trait Core
         return $links;
     }
 
-    public function eael_is_elementor_active()
+    public function eael_is_plugin_installed($basename)
     {
-        $file_path = 'elementor/elementor.php';
         if (!function_exists('get_plugins')) {
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
+
         $installed_plugins = get_plugins();
-        return isset($installed_plugins[$file_path]);
+
+        return isset($installed_plugins[$basename]);
     }
 
     /**
@@ -184,23 +185,24 @@ trait Core
      */
     public function eael_is_failed_to_load()
     {
+        if (!current_user_can('activate_plugins')) {
+            return;
+        }
+
         $elementor = 'elementor/elementor.php';
-        if ($this->eael_is_elementor_active()) {
-            if (!current_user_can('activate_plugins')) {
-                return;
-            }
+
+        if ($this->eael_is_plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
             $message = __('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-elementor');
             $button_text = __('Activate Elementor', 'essential-addons-elementor');
         } else {
-            if (!current_user_can('activate_plugins')) {
-                return;
-            }
             $activation_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=elementor'), 'install-plugin_elementor');
             $message = sprintf(__('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-elementor'), '<strong>', '</strong>');
             $button_text = __('Install Elementor', 'essential-addons-elementor');
         }
+
         $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
+        
         printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
     }
 
