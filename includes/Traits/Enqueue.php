@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Traits;
+use \Essential_Addons_Elementor\Pro\Classes\Bootstrap;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -90,6 +91,10 @@ trait Enqueue
         } else {
             $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
             $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+
+            if(Bootstrap::pro_enabled()) {
+                // have to work here.
+            }
         }
 
         wp_enqueue_style(

@@ -992,7 +992,7 @@ class Eael_Data_Table extends Widget_Base {
 			'data-table_id'          => esc_attr($this->get_id()),
 			'data-custom_responsive' => $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
 		]);
-		if($settings['eael_section_data_table_enabled']){
+		if(isset($settings['eael_section_data_table_enabled']) && $settings['eael_section_data_table_enabled']){
 			$this->add_render_attribute('eael_data_table_wrap', 'data-table_enabled', 'true');
 		}
 		$this->add_render_attribute('eael_data_table', [
