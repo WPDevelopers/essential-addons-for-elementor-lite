@@ -3,6 +3,8 @@ const notify = require("gulp-notify");
 const compass = require("gulp-compass");
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
 
 /**
  * Primary Compass Configurations
@@ -10,9 +12,10 @@ const cleancss = require('gulp-clean-css');
  */
 var compassConfig = {
 	config_file: 'config.rb',
-	css: 'assets/front-end/css/', // Must match css_dir value in config.rb.
-	sass: 'assets/front-end/sass/', // Must match sass_dir value in config.rb
-	sourcemap: false
+	css        : 'assets/front-end/css/',    // Must match css_dir value in config.rb.
+	sass       : 'assets/front-end/sass/',   // Must match sass_dir value in config.rb
+	js         : 'assets/front-end/js',
+	sourcemap  : false
 };
 
 /**
@@ -20,7 +23,13 @@ var compassConfig = {
  * also generally contain patterns of files that are watched to trigger compilation.
  */
 var files = {
-	sass: ['assets/sass/*.scss', 'assets/sass/*/*.scss']
+	sass: ['assets/front-end/sass/*.scss', 'assets/front-end/sass/*/*.scss'],
+	js: [
+		'assets/front-end/js/vendor/!(load-more)**/*.js',
+		'assets/front-end/js/vendor/load-more/*.js',
+		'assets/front-end/js/general.js',
+		'assets/front-end/js/!(vendor)**/!(general)*.js'
+	]
 };
 
 // compile sass
@@ -32,6 +41,23 @@ gulp.task('compassBuild', function() {
 		}))
 		.pipe(gulp.dest('./' + compassConfig.css))
 		.pipe(notify('Sass compiled successfully!'));
+});
+
+//concat and minify js
+gulp.task('minifyJS', () => {
+	return gulp.src(files.js)
+		.pipe( uglify() )
+		.pipe(concat('eael.min.js'))
+		.pipe(gulp.dest('./'+compassConfig.js))
+		.pipe(notify('JS minified successfully!'));
+});
+
+//concat and minify js
+gulp.task('compileJS', () => {
+	return gulp.src(files.js)
+		.pipe(concat('eael.js'))
+		.pipe(gulp.dest('./'+compassConfig.js))
+		.pipe(notify('JS minified successfully!'));
 });
 
 // minify css
