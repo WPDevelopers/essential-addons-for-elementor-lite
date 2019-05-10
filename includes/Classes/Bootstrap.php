@@ -423,7 +423,7 @@ class Bootstrap
         if (is_admin()) {
             // Admin
             $this->admin_notice();
-            add_action('admin_menu', array($this, 'admin_menu'), 600);
+            add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
             add_action('wp_ajax_clear_cache_files_with_ajax', array($this, 'clear_cache_files'));
