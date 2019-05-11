@@ -22,7 +22,7 @@ trait Admin
 
         add_menu_page(
             __('Essential Addons', 'Essential Addons'),
-            __('Essential Addons', 'elementor'),
+            __('Essential Addons', 'essential-addons-elementor'),
             'manage_options',
             'eael-settings',
             [$this, 'eael_admin_settings_page'],
