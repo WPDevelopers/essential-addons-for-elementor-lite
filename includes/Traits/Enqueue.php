@@ -91,10 +91,6 @@ trait Enqueue
         } else {
             $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
             $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-
-            if(Bootstrap::pro_enabled()) {
-                // have to work here.
-            }
         }
 
         wp_enqueue_style(
@@ -107,7 +103,7 @@ trait Enqueue
         if($this->pro_enabled) {
             wp_enqueue_style(
                 'eael-pro-front-end',
-                $this->safe_protocol(EAEL_PRO_PLUGIN_URL . '/assets/front-end/css/eael-pro.css'),
+                $this->safe_protocol(EAEL_PRO_PLUGIN_URL . 'assets/front-end/css/eael-pro.css'),
                 false,
                 EAEL_PLUGIN_VERSION
             );
@@ -120,6 +116,16 @@ trait Enqueue
             EAEL_PLUGIN_VERSION,
             true
         );
+
+        if($this->pro_enabled) {
+            wp_enqueue_script(
+                'eael-pro-front-end',
+                $this->safe_protocol(EAEL_PRO_PLUGIN_URL . 'assets/front-end/js/eael-pro.min.js'),
+                ['jquery'],
+                EAEL_PLUGIN_VERSION,
+                true
+            );
+        }
 
         // localize script
         $this->localize_scripts = apply_filters('eael_localize_front_script', [
