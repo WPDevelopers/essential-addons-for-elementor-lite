@@ -417,8 +417,8 @@ class Eael_Post_Grid extends Widget_Base {
 		 */
 		$settings['post_style'] = 'grid';
 		$post_args = $this->eael_get_post_settings( $settings );
-		$query_args = $this->eael_get_query_args( 'eaeposts', $this->get_settings() );
-		$settings = $query_args = array_merge( $query_args, $post_args );
+		$query_args = $this->eael_get_query_args( 'eaeposts', $settings );
+		$query_args = array_merge($query_args, $post_args, $settings);
 
 		if( isset( $query_args['tax_query'] ) ) {
 			$tax_query = $query_args['tax_query'];
