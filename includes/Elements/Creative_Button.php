@@ -14,7 +14,7 @@ use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Creative_Button extends Widget_Base {
+class Creative_Button extends Widget_Base {
 	
 
 	public function get_name() {

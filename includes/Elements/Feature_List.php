@@ -15,7 +15,7 @@ use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
 
-class Eael_Feature_List extends Widget_Base
+class Feature_List extends Widget_Base
 {
 	public function get_name() {
 		return 'eael-feature-list';

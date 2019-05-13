@@ -63,7 +63,7 @@ class Bootstrap
         // elements classmap
         $this->registered_elements = apply_filters('eael_registered_elements', [
             'post-grid' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Grid',
+                'class' => '\Essential_Addons_Elementor\Elements\Post_Grid',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-grid.css',
@@ -76,7 +76,7 @@ class Bootstrap
                 ],
             ],
             'post-timeline' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Timeline',
+                'class' => '\Essential_Addons_Elementor\Elements\Post_Timeline',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-timeline.css',
@@ -88,7 +88,7 @@ class Bootstrap
                 ],
             ],
             'fancy-text' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Fancy_Text',
+                'class' => '\Essential_Addons_Elementor\Elements\Fancy_Text',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fancy-text.css',
@@ -100,7 +100,7 @@ class Bootstrap
                 ],
             ],
             'creative-btn' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Creative_Button',
+                'class' => '\Essential_Addons_Elementor\Elements\Creative_Button',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/creative-btn.css',
@@ -108,7 +108,7 @@ class Bootstrap
                 ],
             ],
             'count-down' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Countdown',
+                'class' => '\Essential_Addons_Elementor\Elements\Countdown',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/count-down.css',
@@ -120,7 +120,7 @@ class Bootstrap
                 ],
             ],
             'team-members' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Team_Member',
+                'class' => '\Essential_Addons_Elementor\Elements\Team_Member',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/team-members.css',
@@ -128,7 +128,7 @@ class Bootstrap
                 ],
             ],
             'testimonials' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Testimonial',
+                'class' => '\Essential_Addons_Elementor\Elements\Testimonial',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/testimonials.css',
@@ -136,7 +136,7 @@ class Bootstrap
                 ],
             ],
             'info-box' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Info_Box',
+                'class' => '\Essential_Addons_Elementor\Elements\Info_Box',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/info-box.css',
@@ -144,7 +144,7 @@ class Bootstrap
                 ],
             ],
             'flip-box' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Flip_Box',
+                'class' => '\Essential_Addons_Elementor\Elements\Flip_Box',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/flip-box.css',
@@ -152,7 +152,7 @@ class Bootstrap
                 ],
             ],
             'call-to-action' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Cta_Box',
+                'class' => '\Essential_Addons_Elementor\Elements\Cta_Box',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/call-to-action.css',
@@ -160,7 +160,7 @@ class Bootstrap
                 ],
             ],
             'dual-header' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Dual_Color_Header',
+                'class' => '\Essential_Addons_Elementor\Elements\Dual_Color_Header',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/dual-header.css',
@@ -168,7 +168,7 @@ class Bootstrap
                 ],
             ],
             'price-table' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Pricing_Table',
+                'class' => '\Essential_Addons_Elementor\Elements\Pricing_Table',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/price-table.css',
@@ -180,7 +180,7 @@ class Bootstrap
                 ],
             ],
             'twitter-feed' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Twitter_Feed',
+                'class' => '\Essential_Addons_Elementor\Elements\Twitter_Feed',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/twitter-feed.css',
@@ -196,7 +196,7 @@ class Bootstrap
                 ],
             ],
             'data-table' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Data_Table',
+                'class' => '\Essential_Addons_Elementor\Elements\Data_Table',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/data-table.css',
@@ -207,7 +207,7 @@ class Bootstrap
                 ],
             ],
             'filter-gallery' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Filterable_Gallery',
+                'class' => '\Essential_Addons_Elementor\Elements\Filterable_Gallery',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup.css',
@@ -221,7 +221,7 @@ class Bootstrap
                 ],
             ],
             'image-accordion' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Image_Accordion',
+                'class' => '\Essential_Addons_Elementor\Elements\Image_Accordion',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/image-accordion.css',
@@ -232,7 +232,7 @@ class Bootstrap
                 ],
             ],
             'content-ticker' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Content_Ticker',
+                'class' => '\Essential_Addons_Elementor\Elements\Content_Ticker',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/content-ticker.css',
@@ -243,7 +243,7 @@ class Bootstrap
                 ],
             ],
             'tooltip' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Tooltip',
+                'class' => '\Essential_Addons_Elementor\Elements\Tooltip',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/tooltip.css',
@@ -251,7 +251,7 @@ class Bootstrap
                 ],
             ],
             'adv-accordion' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Adv_Accordion',
+                'class' => '\Essential_Addons_Elementor\Elements\Adv_Accordion',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-accordion.css',
@@ -262,7 +262,7 @@ class Bootstrap
                 ],
             ],
             'adv-tabs' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Adv_Tabs',
+                'class' => '\Essential_Addons_Elementor\Elements\Adv_Tabs',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-tabs.css',
@@ -273,7 +273,7 @@ class Bootstrap
                 ],
             ],
             'progress-bar' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Progress_Bar',
+                'class' => '\Essential_Addons_Elementor\Elements\Progress_Bar',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/progress-bar.css',
@@ -286,7 +286,7 @@ class Bootstrap
                 ],
             ],
             'feature-list' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Feature_List',
+                'class' => '\Essential_Addons_Elementor\Elements\Feature_List',
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/feature-list.css',
@@ -294,7 +294,7 @@ class Bootstrap
                 ],
             ],
             'product-grid' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Product_Grid',
+                'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
                 'condition' => [
                     'function_exists',
                     'WC',
@@ -306,7 +306,7 @@ class Bootstrap
                 ],
             ],
             'contact-form-7' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Contact_Form_7',
+                'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
                 'condition' => [
                     'function_exists',
                     'wpcf7',
@@ -318,7 +318,7 @@ class Bootstrap
                 ],
             ],
             'weforms' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_WeForms',
+                'class' => '\Essential_Addons_Elementor\Elements\WeForms',
                 'condition' => [
                     'function_exists',
                     'WeForms',
@@ -330,7 +330,7 @@ class Bootstrap
                 ],
             ],
             'ninja-form' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_NinjaForms',
+                'class' => '\Essential_Addons_Elementor\Elements\NinjaForms',
                 'condition' => [
                     'function_exists',
                     'Ninja_Forms',
@@ -342,7 +342,7 @@ class Bootstrap
                 ],
             ],
             'gravity-form' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_GravityForms',
+                'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
                 'condition' => [
                     'class_exists',
                     'GFForms',
@@ -354,7 +354,7 @@ class Bootstrap
                 ],
             ],
             'caldera-form' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_Caldera_Forms',
+                'class' => '\Essential_Addons_Elementor\Elements\Caldera_Forms',
                 'condition' => [
                     'class_exists',
                     'Caldera_Forms',
@@ -366,7 +366,7 @@ class Bootstrap
                 ],
             ],
             'wpforms' => [
-                'class' => '\Essential_Addons_Elementor\Elements\Eael_WpForms',
+                'class' => '\Essential_Addons_Elementor\Elements\WpForms',
                 'condition' => [
                     'class_exists',
                     '\WPForms\WPForms',

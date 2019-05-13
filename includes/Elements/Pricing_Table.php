@@ -14,7 +14,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Pricing_Table extends Widget_Base {
+class Pricing_Table extends Widget_Base {
 
 	use \Essential_Addons_Elementor\Traits\Helper;
 
