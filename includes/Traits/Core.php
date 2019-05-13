@@ -84,6 +84,8 @@ trait Core
 
     /**
      * Check if elementor preview mode or not
+     *
+     * @since 3.0.0
      */
     public function is_preview_mode()
     {
@@ -98,60 +100,25 @@ trait Core
         return true;
     }
 
+    /**
+     * Generate safe url
+     *
+     * @since v3.0.0
+     */
     public function safe_protocol($url)
     {
         return str_replace(['http:', 'https:'], '', $url);
     }
 
     /**
-     * Creates an Action Menu
-     */
-    public function eael_add_settings_link($links)
-    {
-        $settings_link = sprintf('<a href="admin.php?page=eael-settings">' . __('Settings') . '</a>');
-        $go_pro_link = sprintf('<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __('Go Pro') . '</a>');
-        array_push($links, $settings_link, $go_pro_link);
-        return $links;
-    }
-
-    /**
-     * Redirect to options page
+     * Check if a plugin is installed
      *
-     * @since v1.0.0
+     * @since v3.0.0
      */
-    public function eael_redirect()
-    {
-        if (get_option('eael_do_activation_redirect', false)) {
-            delete_option('eael_do_activation_redirect');
-            
-            if (!isset($_GET['activate-multi'])) {
-                wp_redirect("admin.php?page=eael-settings");
-            }
-        }
-    }
-
-    public function eael_pro_filter_action_links($links)
+    public function plugin_installed($basename)
     {
         if (!function_exists('get_plugins')) {
-            include ABSPATH . '/wp-admin/includes/plugin.php';
-        }
-        $activate_plugins = get_option('active_plugins');
-        if (in_array(plugin_basename(__FILE__), $activate_plugins)) {
-            $pro_plugin_base_name = 'essential-addons-elementor/essential_adons_elementor.php';
-            if (isset($links['activate'])) {
-                $activate_link = $links['activate'];
-                // Insert an onClick action to allow form before deactivating
-                $activation_link = str_replace('<a ', '<a id="eae-pro-activation" onclick="javascript:event.preventDefault();"', $activate_link);
-                $links['activate'] = $activation_link;
-            }
-        }
-        return $links;
-    }
-
-    public function eael_is_plugin_installed($basename)
-    {
-        if (!function_exists('get_plugins')) {
-            include ABSPATH . '/wp-admin/includes/plugin.php';
+            include_once ABSPATH . '/wp-admin/includes/plugin.php';
         }
 
         $installed_plugins = get_plugins();
@@ -160,9 +127,43 @@ trait Core
     }
 
     /**
-     * This notice will appear if Elementor is not installed or activated or both
+     * Creates an action menu
+     *
+     * @since 3.0.0
      */
-    public function eael_is_failed_to_load()
+    public function insert_plugin_links($links)
+    {
+        $links[] = sprintf('<a href="admin.php?page=eael-settings">' . __('Settings') . '</a>');
+
+        if (!$this->plugin_installed('essential-addons-elementor/essential_adons_elementor.php')) {
+            $links[] = sprintf('<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __('Go Pro') . '</a>');
+        }
+
+        return $links;
+    }
+
+    /**
+     * Redirect to options page
+     *
+     * @since v1.0.0
+     */
+    public function redirect_on_activation()
+    {
+        if (get_option('eael_do_activation_redirect', false)) {
+            delete_option('eael_do_activation_redirect');
+
+            if (!isset($_GET['activate-multi'])) {
+                wp_redirect("admin.php?page=eael-settings");
+            }
+        }
+    }
+
+    /**
+     * Check if elementor plugin is activated
+     *
+     * @since v1.0.0
+     */
+    public function elementor_not_loaded()
     {
         if (!current_user_can('activate_plugins')) {
             return;
@@ -170,7 +171,7 @@ trait Core
 
         $elementor = 'elementor/elementor.php';
 
-        if ($this->eael_is_plugin_installed($elementor)) {
+        if ($this->plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
             $message = __('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-elementor');
             $button_text = __('Activate Elementor', 'essential-addons-elementor');
@@ -192,7 +193,7 @@ trait Core
      */
     public function start_plugin_tracking()
     {
-        $wpins = new Plugin_Usage_Tracker(
+        new Plugin_Usage_Tracker(
             EAEL_PLUGIN_FILE,
             'http://app.wpdeveloper.net',
             array(),
