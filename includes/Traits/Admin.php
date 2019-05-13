@@ -7,14 +7,12 @@ if (!defined('ABSPATH')) {
 // Exit if accessed directly
 
 use Essential_Addons_Elementor\Classes\WPDeveloper_Notice;
-use Essential_Addons_Elementor\Classes\Bootstrap;
 
 trait Admin
 {
     /**
      * Create an admin menu.
-     * @param
-     * @return void
+     * 
      * @since 1.1.2
      */
     public function admin_menu()
@@ -32,8 +30,7 @@ trait Admin
 
     /**
      * Loading all essential scripts
-     * @param
-     * @return void
+     * 
      * @since 1.1.2
      */
     public function admin_enqueue_scripts($hook)
@@ -42,7 +39,7 @@ trait Admin
 
         if (isset($hook) && $hook == 'toplevel_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);
-            if (Bootstrap::pro_enabled()) {
+            if ($this->pro_enabled) {
                 wp_enqueue_style('eael_pro-admin-css', EAEL_PRO_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PRO_PLUGIN_VERSION);
             }
             wp_enqueue_style('sweetalert2-css', EAEL_PLUGIN_URL . '/assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION);
@@ -59,8 +56,7 @@ trait Admin
 
     /**
      * Create settings page.
-     * @param
-     * @return void
+     * 
      * @since 1.1.2
      */
     public function eael_admin_settings_page()
@@ -85,7 +81,7 @@ trait Admin
 				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg'; ?>"><span><?php echo __('Elements', 'essential-addons-elementor'); ?></span></a></li>
                         <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>"><span><?php echo __('Extensions', 'essential-addons-elementor'); ?></span></a></li>
                         <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/tools.svg'; ?>"><span><?php echo __('Tools', 'essential-addons-elementor'); ?></span></a></li>
-                        <?php if (!Bootstrap::pro_enabled()) {?>
+                        <?php if (!$this->pro_enabled) {?>
                             <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>"><span><?php echo __('Go Premium', 'essential-addons-elementor'); ?></span></a></li>
                         <?php }?>
                     </ul>
@@ -94,7 +90,7 @@ trait Admin
                         include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
                         include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
                         include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-                        if (!Bootstrap::pro_enabled()) {
+                        if (!$this->pro_enabled) {
                             include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
                         }
                     ?>
