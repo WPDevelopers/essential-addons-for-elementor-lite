@@ -35,8 +35,10 @@
   height: 100%;
   z-index: 2;
   -webkit-transition: opacity 0.2s ease-in-out, -webkit-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-  -moz-transition: opacity 0.2s ease-in-out, -moz-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 0.2s ease-in-out, -webkit-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .eael-entry-overlay > a {
@@ -68,7 +70,8 @@
 }
 
 .eael-entry-footer .eael-author-avatar .avatar {
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 
 .eael-post-grid .eael-entry-footer .eael-entry-meta {
@@ -77,12 +80,23 @@
 }
 
 .eael-grid-post .eael-entry-meta {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .eael-grid-post .eael-entry-footer .eael-entry-meta {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .eael-entry-meta > div {
@@ -119,13 +133,25 @@
 }
 
 .eael-load-more-button-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .eael-load-more-button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .eael-load-more-button {
@@ -139,6 +165,8 @@
   left: -100%;
   top: auto;
   margin-right: 5px;
+  -webkit-transition: all .2s;
+  -o-transition: all .2s;
   transition: all .2s;
 }
 
@@ -156,7 +184,8 @@
 
 .eael-btn-loader,
 .eael-btn-loader:after {
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   width: 20px;
   height: 20px;
 }
@@ -169,16 +198,31 @@
   border-right: 4px solid rgba(255, 255, 255, 0.2);
   border-bottom: 4px solid rgba(255, 255, 255, 0.2);
   border-left: 4px solid #ffffff;
-  transform: translateZ(0);
-  animation: loaderSpin 1.1s infinite linear;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-animation: loaderSpin 1.1s infinite linear;
+          animation: loaderSpin 1.1s infinite linear;
+}
+
+@-webkit-keyframes loaderSpin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 @keyframes loaderSpin {
   0% {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 /*--- Post Grid Thumbnail Hover Effects ---*/
@@ -187,9 +231,18 @@
 }
 
 .eael-entry-overlay {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .eael-entry-overlay > i {
@@ -200,6 +253,8 @@
 .eael-entry-overlay.fade-in {
   visibility: hidden;
   opacity: 0;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
   transition: 300ms;
 }
 
@@ -209,34 +264,48 @@
 }
 
 .eael-entry-medianone:hover .eael-entry-overlay.fade-in > i {
-  transform: translate(0);
+  -webkit-transform: translate(0);
+      -ms-transform: translate(0);
+          transform: translate(0);
   opacity: 1;
 }
 
 /*--- zoom in --- */
 .eael-entry-overlay.zoom-in {
-  transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+          transform: scale(0.9);
   visibility: hidden;
   opacity: 0;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
   transition: 300ms;
 }
 
 .eael-entry-medianone:hover .eael-entry-overlay.zoom-in {
   visibility: visible;
   opacity: 1;
-  transform: scale(1);
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
 }
 
 /*--- slide up ---*/
 .eael-entry-overlay.slide-up {
-  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
   visibility: hidden;
   opacity: 0;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
   transition: 300ms;
 }
 
 .eael-entry-medianone:hover .eael-entry-overlay.slide-up {
-  transform: translateY(0);
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
   visibility: visible;
   opacity: 1;
 }
@@ -259,53 +328,81 @@
 }
 
 .eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
-  transform: scale(0.4);
+  -webkit-transform: scale(0.4);
+      -ms-transform: scale(0.4);
+          transform: scale(0.4);
   opacity: 0;
 }
 
 .eael-entry-media.grid-hover-style-zoom-in:hover .eael-entry-overlay {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
   opacity: 1;
 }
 
 .eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay {
-  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+      -ms-transform: translateY(-100%);
+          transform: translateY(-100%);
 }
 
 .eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay > i {
-  transform: translateY(-100px);
-  transition-delay: 100ms;
-  transition-duration: 300ms;
+  -webkit-transform: translateY(-100px);
+      -ms-transform: translateY(-100px);
+          transform: translateY(-100px);
+  -webkit-transition-delay: 100ms;
+       -o-transition-delay: 100ms;
+          transition-delay: 100ms;
+  -webkit-transition-duration: 300ms;
+       -o-transition-duration: 300ms;
+          transition-duration: 300ms;
 }
 
 .eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay {
-  transform: translate(0);
+  -webkit-transform: translate(0);
+      -ms-transform: translate(0);
+          transform: translate(0);
 }
 
 .eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay > i {
-  transform: translateY(0);
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
 }
 
 .eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay {
-  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
   visibility: hidden;
   opacity: 0;
 }
 
 .eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay > i {
-  transform: translateY(100px);
-  transition-delay: 100ms;
-  transition-duration: 300ms;
+  -webkit-transform: translateY(100px);
+      -ms-transform: translateY(100px);
+          transform: translateY(100px);
+  -webkit-transition-delay: 100ms;
+       -o-transition-delay: 100ms;
+          transition-delay: 100ms;
+  -webkit-transition-duration: 300ms;
+       -o-transition-duration: 300ms;
+          transition-duration: 300ms;
 }
 
 .eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay {
-  transform: translate(0);
+  -webkit-transform: translate(0);
+      -ms-transform: translate(0);
+          transform: translate(0);
   visibility: visible;
   opacity: 1;
 }
 
 .eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay > i {
-  transform: translateY(0);
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
 }
 
 /*--- Post Grid Column Styles ---*/
@@ -376,6 +473,9 @@
 
 .eael-entry-footer {
   overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 

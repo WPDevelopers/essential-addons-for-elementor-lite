@@ -3,11 +3,17 @@
 /* -------------------------------- */
 .eael-pricing {
   -webkit-display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-align-items: center;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .eael-pricing .eael-pricing-item {
@@ -26,6 +32,7 @@
   text-transform: uppercase;
   text-decoration: none;
   -webkit-transition: .3s;
+  -o-transition: .3s;
   transition: .3s;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -68,6 +75,7 @@
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
 }
 
@@ -235,7 +243,8 @@
 
 .eael-pricing.style-2 .eael-pricing-item {
   padding: 30px 0px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
   margin: 0px;
   border: 1px solid rgba(9, 9, 9, 0.1);
 }
@@ -308,10 +317,12 @@
   width: 80px;
   height: 80px;
   background: #00c853;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   margin-bottom: 30px;
   text-align: center;
   -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
   overflow: hidden;
 }
@@ -321,6 +332,7 @@
   color: #fff;
   line-height: 80px;
   -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
 }
 
@@ -508,18 +520,21 @@
 
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item .header:after {
   -webkit-transform: translateX(-80%);
-  transform: translateX(-80%);
+  -ms-transform: translateX(-80%);
+      transform: translateX(-80%);
 }
 
 .eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item .header:after {
   -webkit-transform: translateX(80%);
-  transform: translateX(80%);
+  -ms-transform: translateX(80%);
+      transform: translateX(80%);
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item:hover .header:after,
 .eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item:hover .header:after {
   -webkit-transform: translateX(0%);
-  transform: translateX(0%);
+  -ms-transform: translateX(0%);
+      transform: translateX(0%);
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-1 .eael-pricing-item .header:after,
@@ -568,11 +583,17 @@
 .only-in-pro {
   width: 100%;
   -webkit-display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   -webkit-align-items: center;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 15px;
   min-width: 200px;
   background: #EF5350;

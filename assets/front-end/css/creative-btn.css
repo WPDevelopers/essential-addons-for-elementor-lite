@@ -6,11 +6,17 @@
 }
 
 .eael-creative-button-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .eael-creative-button {
-  flex: 0 0 auto;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   min-width: 150px;
   text-align: center;
   vertical-align: middle;
@@ -30,7 +36,8 @@
 }
 
 .eael-creative-button {
-  border-radius: 2px;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
   padding: 20px 30px;
   font-size: 16px;
   line-height: 1;
@@ -41,9 +48,11 @@
   overflow: hidden;
   padding: 0 !important;
   -webkit-transition: border-color 0.3s, background-color 0.3s;
+  -o-transition: border-color 0.3s, background-color 0.3s;
   transition: border-color 0.3s, background-color 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--winona::after {
@@ -66,9 +75,14 @@
 .eael-creative-button--winona > span {
   padding: 1em 2em;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, -webkit-transform 0.3s;
+  -o-transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--winona:hover::after {
@@ -86,6 +100,7 @@
 /*--- Ujarak ---*/
 .eael-creative-button--ujarak {
   -webkit-transition: border-color 0.4s, color 0.4s;
+  -o-transition: border-color 0.4s, color 0.4s;
   transition: border-color 0.4s, color 0.4s;
 }
 
@@ -101,15 +116,21 @@
   -webkit-transform: scale3d(0.7, 1, 1);
   transform: scale3d(0.7, 1, 1);
   -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+  -webkit-transition: opacity 0.4s, -webkit-transform 0.4s;
+  transition: opacity 0.4s, -webkit-transform 0.4s;
+  -o-transition: transform 0.4s, opacity 0.4s;
   transition: transform 0.4s, opacity 0.4s;
+  transition: transform 0.4s, opacity 0.4s, -webkit-transform 0.4s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--ujarak,
 .eael-creative-button--ujarak::before {
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--ujarak:hover::before {
@@ -122,9 +143,11 @@
 .eael-creative-button--wayra {
   overflow: hidden;
   -webkit-transition: border-color 0.3s, color 0.3s;
+  -o-transition: border-color 0.3s, color 0.3s;
   transition: border-color 0.3s, color 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--wayra::before {
@@ -138,9 +161,14 @@
   -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
   transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
   -webkit-transform-origin: 0% 100%;
-  transform-origin: 0% 100%;
+  -ms-transform-origin: 0% 100%;
+      transform-origin: 0% 100%;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
+  -webkit-transition: opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
+  -o-transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
   transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+  transition: transform 0.3s, opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
 }
 
 .eael-creative-button--wayra:hover::before {
@@ -148,7 +176,8 @@
   -webkit-transform: rotate3d(0, 0, 1, 0deg);
   transform: rotate3d(0, 0, 1, 0deg);
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 /*--- Tamaya ---*/
@@ -165,9 +194,13 @@
   left: 0;
   overflow: hidden;
   -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  -o-transition: transform 0.3s;
   transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--tamaya::before {
@@ -190,9 +223,14 @@
   transform: scale3d(0.2, 0.2, 1);
   opacity: 0;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, -webkit-transform 0.3s;
+  -o-transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--tamaya:hover::before {
@@ -236,9 +274,13 @@
 .eael-creative-button--rayen > span {
   padding: 1em 2em;
   -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  -o-transition: transform 0.3s;
   transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  -o-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+     transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 
 .eael-creative-button--rayen:hover::before {

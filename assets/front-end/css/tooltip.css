@@ -11,6 +11,8 @@
   color: #333;
   line-height: 1;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -21,7 +23,8 @@
   background-color: black;
   color: #fff;
   text-align: center;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
   padding: 10px;
   position: absolute;
   z-index: 1;
@@ -44,12 +47,15 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left {
   top: 50%;
   right: 100%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   margin-right: 10px;
 }
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left {
-  animation: tooltipLeftIn 300ms ease-in-out;
+  -webkit-animation: tooltipLeftIn 300ms ease-in-out;
+          animation: tooltipLeftIn 300ms ease-in-out;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left::after {
@@ -62,13 +68,18 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right {
   top: 50%;
   left: 100%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   margin-left: 10px;
 }
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right {
-  animation: tooltipRightIn 300ms linear;
+  -webkit-animation: tooltipRightIn 300ms linear;
+          animation: tooltipRightIn 300ms linear;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right::after {
@@ -93,7 +104,8 @@
 }
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top {
-  animation: tooltipTopIn 300ms linear;
+  -webkit-animation: tooltipTopIn 300ms linear;
+          animation: tooltipTopIn 300ms linear;
 }
 
 /*--- Bottom ---*/
@@ -112,35 +124,73 @@
 }
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom {
-  animation: tooltipBottomIn 300ms linear;
+  -webkit-animation: tooltipBottomIn 300ms linear;
+          animation: tooltipBottomIn 300ms linear;
 }
 
 /*--- Alignments ---*/
 .eael-tooltip-align-left {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 .eael-tooltip-align-right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .eael-tooltip-align-center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  justify-content: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .eael-tooltip-align-justify .eael-tooltip {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 /*--- Tooltip Keyframes ---*/
+@-webkit-keyframes tooltipRightIn {
+  0% {
+    opacity: 0;
+    left: 105%;
+  }
+  100% {
+    opacity: 1;
+    left: 100%;
+  }
+}
 @keyframes tooltipRightIn {
   0% {
     opacity: 0;
@@ -149,6 +199,16 @@
   100% {
     opacity: 1;
     left: 100%;
+  }
+}
+@-webkit-keyframes tooltipLeftIn {
+  0% {
+    opacity: 0;
+    right: 105%;
+  }
+  100% {
+    opacity: 1;
+    right: 100%;
   }
 }
 @keyframes tooltipLeftIn {
@@ -161,6 +221,16 @@
     right: 100%;
   }
 }
+@-webkit-keyframes tooltipTopIn {
+  0% {
+    opacity: 0;
+    bottom: 110%;
+  }
+  100% {
+    opacity: 1;
+    bottom: 100%;
+  }
+}
 @keyframes tooltipTopIn {
   0% {
     opacity: 0;
@@ -169,6 +239,16 @@
   100% {
     opacity: 1;
     bottom: 100%;
+  }
+}
+@-webkit-keyframes tooltipBottomIn {
+  0% {
+    opacity: 0;
+    top: 110%;
+  }
+  100% {
+    opacity: 1;
+    top: 100%;
   }
 }
 @keyframes tooltipBottomIn {

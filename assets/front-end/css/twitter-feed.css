@@ -84,7 +84,8 @@
 .eael-social-feed-element p.social-feed-text {
   margin: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
@@ -121,7 +122,8 @@
 .eael-social-feed-element .media-object {
   display: block;
   width: 48px;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 
 .eael-social-feed-element .media-heading {
@@ -143,6 +145,8 @@
 }
 
 .eael-social-feed-element {
+  -webkit-transition: 0.25s;
+  -o-transition: 0.25s;
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -157,6 +161,8 @@
 
 .eael-social-feed-element .eael-content {
   padding: 20px 15px 15px;
+  -webkit-transition: .4s;
+  -o-transition: .4s;
   transition: .4s;
   background: #fff;
 }
@@ -211,15 +217,27 @@
   display: block;
   text-align: center;
   z-index: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
 }
 
 .eael-loading-feed .loader {
   border: 3px solid #f3f3f3;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   border-top: 3px solid #3498db;
   width: 30px;
   height: 30px;
@@ -240,10 +258,12 @@
 }
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 /*--- List View ---*/
@@ -272,11 +292,13 @@
 
 /*--- Editor Related Style ---*/
 .eael-social-feed-avatar-circle .eael-social-feed-element .media-object {
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 
 .eael-social-feed-avatar-square .eael-social-feed-element .media-object {
-  border-radius: 0%;
+  -webkit-border-radius: 0%;
+          border-radius: 0%;
 }
 
 .eael-social-feed-masonry-col-4 .eael-social-feed-element .social-feed-date .eael-social-feed-masonry-col-4 .eael-social-feed-element .social-feed-date {
