@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Enqueue
 {
-    protected function enqueue_scripts()
+    public function enqueue_scripts()
     {
         // Gravity forms Compatibility
         if (class_exists('GFCommon')) {
