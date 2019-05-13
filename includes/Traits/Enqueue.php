@@ -1,7 +1,6 @@
 <?php
 
 namespace Essential_Addons_Elementor\Traits;
-use \Essential_Addons_Elementor\Pro\Classes\Bootstrap;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -9,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Enqueue
 {
-    public function enqueue_scripts()
+    protected function enqueue_scripts()
     {
         // Gravity forms Compatibility
         if (class_exists('GFCommon')) {
@@ -64,11 +63,15 @@ trait Enqueue
                 true
             );
 
+            // hook extended assets
+            do_action('eael/after_enqueue_scripts');
+
             // localize script
-            $this->localize_scripts = apply_filters('eael_localize_front_script', [
-                'ajaxurl' => admin_url('admin-ajax.php')
+            $this->localize_objects = apply_filters('eael/localize_objects', [
+                'ajaxurl' => admin_url('admin-ajax.php'),
             ]);
-            wp_localize_script('eael-backend', 'localize', $this->localize_scripts);
+
+            wp_localize_script('eael-backend', 'localize', $this->localize_objects);
         } else if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
             $post_type = (is_singular() ? 'post' : 'term');
@@ -83,8 +86,8 @@ trait Enqueue
     }
 
     // rules how css will be enqueued on front-end
-    public function enqueue_protocols($post_type, $queried_object)
-    {   
+    protected function enqueue_protocols($post_type, $queried_object)
+    {
         if ($this->has_cache_files($post_type, $queried_object)) {
             $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
             $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
@@ -99,7 +102,7 @@ trait Enqueue
             false,
             EAEL_PLUGIN_VERSION
         );
-        
+
         wp_enqueue_script(
             'eael-front-end',
             $this->safe_protocol($js_file),
@@ -108,12 +111,14 @@ trait Enqueue
             true
         );
 
-        do_action('eael_wp_enque');
+        // hook extended assets
+        do_action('eael/after_enqueue_scripts');
 
         // localize script
-        $this->localize_scripts = apply_filters('eael_localize_front_script', [
-            'ajaxurl' => admin_url('admin-ajax.php')
+        $this->localize_objects = apply_filters('eael/localize_objects', [
+            'ajaxurl' => admin_url('admin-ajax.php'),
         ]);
-        wp_localize_script('eael-front-end', 'localize', $this->localize_scripts);
+
+        wp_localize_script('eael-front-end', 'localize', $this->localize_objects);
     }
 }

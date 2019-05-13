@@ -6,8 +6,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\User as User;
-use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker as Plugin_Usage_Tracker;
+use \Elementor\User;
+use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker;
 
 trait Core
 {
@@ -123,33 +123,12 @@ trait Core
     {
         if (get_option('eael_do_activation_redirect', false)) {
             delete_option('eael_do_activation_redirect');
+            
             if (!isset($_GET['activate-multi'])) {
                 wp_redirect("admin.php?page=eael-settings");
             }
         }
     }
-
-    public function plugins_footer_for_pro()
-    {
-        ?>
-        <script>
-        jQuery(document).ready(function( $ ){
-            $('#eae-pro-activation').on('click', function( e ){
-                e.preventDefault();
-                swal({
-                    title: '<h2>Please <span style="color: red">Deactivate</span> <br><br> Free Version</h2>',
-                    type: 'error',
-                    html:
-                    'You don\'t need the <span style="color: #1abc9c;font-weight: 700;">Free Version</span> to use the <span style="color: #00629a;font-weight: 700;">Premium</span> one.',
-                    showCloseButton: true,
-                    showCancelButton: false,
-                    focusConfirm: false,
-                }).catch(swal.noop);
-            });
-        });
-        </script>
-        <?php
-}
 
     public function eael_pro_filter_action_links($links)
     {
@@ -202,7 +181,7 @@ trait Core
         }
 
         $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
-        
+
         printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
     }
 

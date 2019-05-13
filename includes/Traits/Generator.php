@@ -9,7 +9,6 @@ use \MatthiasMullie\Minify;
 
 trait Generator
 {
-
     /**
      * Collect elements in a page or post
      *
@@ -38,9 +37,12 @@ trait Generator
                 }
             }
 
-            foreach($this->registered_extensions as $key => $extension) {
-                if( !in_array($key, $this->get_settings()) ) continue;
-                if( ! empty($extension['dependency'][$type]) ) {
+            foreach ($this->registered_extensions as $key => $extension) {
+                if (!in_array($key, $this->get_settings())) {
+                    continue;
+                }
+
+                if (!empty($extension['dependency'][$type])) {
                     foreach ($extension['dependency'][$type] as $path) {
                         $paths[] = $path;
                     }
