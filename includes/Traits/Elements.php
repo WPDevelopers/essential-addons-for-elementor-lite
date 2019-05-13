@@ -15,7 +15,7 @@ trait Elements
      *
      * @since v1.0.0
      */
-    public function add_elementor_widget_categories($elements_manager)
+    protected function register_widget_categories($elements_manager)
     {
         $elements_manager->add_category(
             'essential-addons-elementor',
@@ -30,7 +30,7 @@ trait Elements
      *
      * @since v1.0.0
      */
-    public function controls_registered($controls_manager)
+    protected function register_controls_group($controls_manager)
     {
         $controls_manager->add_group_control('eaeposts', new Group_Control_EA_Posts);
     }
@@ -40,7 +40,7 @@ trait Elements
      *
      * @since v1.0.0
      */
-    public function eael_add_elements($widgets_manager)
+    protected function register_elements($widgets_manager)
     {
         $active_elements = $this->get_settings();
 
@@ -49,7 +49,6 @@ trait Elements
         }
 
         foreach ($active_elements as $active_element) {
-
             if (!isset($this->registered_elements[$active_element])) {
                 continue;
             }
@@ -64,17 +63,21 @@ trait Elements
         }
     }
 
-    protected function eael_add_extensions() {
+    protected function register_extensions()
+    {
         $active_elements = $this->get_settings();
 
-        if (empty($active_elements)) return;
+        if (empty($active_elements)) {
+            return;
+        }
 
-        foreach($this->registered_extensions as $key => $extension) {
-            if( !in_array($key, $active_elements) ) continue;
+        foreach ($this->registered_extensions as $key => $extension) {
+            if (!in_array($key, $active_elements)) {
+                continue;
+            }
 
             new $extension['class'];
         }
-
     }
 
 }
