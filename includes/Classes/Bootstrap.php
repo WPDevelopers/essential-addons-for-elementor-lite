@@ -426,12 +426,11 @@ class Bootstrap
             add_action('wp_ajax_clear_cache_files_with_ajax', array($this, 'clear_cache_files'));
 
             // Core
-            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_add_settings_link'));
-            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_pro_filter_action_links'));
-            add_action('admin_init', array($this, 'eael_redirect'));
+            add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));
+            add_action('admin_init', array($this, 'redirect_on_activation'));
 
             if (!did_action('elementor/loaded')) {
-                add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
+                add_action('admin_notices', array($this, 'elementor_not_loaded'));
             }
         }
     }
