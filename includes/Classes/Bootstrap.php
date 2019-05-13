@@ -21,7 +21,7 @@ class Bootstrap
     // registered elements container
     public $registered_elements;
 
-    // registered elements container
+    // registered extensions container
     public $registered_extensions;
 
     // transient elements container
@@ -30,8 +30,8 @@ class Bootstrap
     // identify whether pro is enabled
     public $pro_enabled;
 
-    // script localization
-    public $localize_scripts;
+    // localize objects
+    public $localize_objects;
 
     /**
      * Singleton instance
@@ -55,13 +55,13 @@ class Bootstrap
     private function __construct()
     {
         // before init hook
-        do_action('eael_before_init');
+        do_action('eael/before_init');
 
-        // check for pro version
-        $this->pro_enabled = apply_filters('eael_pro_enabled', false);
+        // search for pro version
+        $this->pro_enabled = apply_filters('eael/pro_enabled', false);
 
         // elements classmap
-        $this->registered_elements = apply_filters('eael_registered_elements', [
+        $this->registered_elements = apply_filters('eael/registered_elements', [
             'post-grid' => [
                 'class' => '\Essential_Addons_Elementor\Elements\Eael_Post_Grid',
                 'dependency' => [
@@ -379,27 +379,27 @@ class Bootstrap
             ],
         ]);
 
-        $this->registered_extensions = apply_filters('eael_registered_extensions', []);
-
+        // extensions classmap
+        $this->registered_extensions = apply_filters('eael/registered_extensions', []);
 
         // initialize transient container
         $this->transient_elements = [];
 
-        // Start plugin tracking
+        // start plugin tracking
         $this->start_plugin_tracking();
 
-        // Register hooks
-        $this->extender_hooks();
-        $this->functional_hooks();
+        // post args
+        $this->post_args = apply_filters('eael/post_args', $this->post_args);
+
+        // register extensions
+        $this->register_extensions();
+        
+        // register hooks
+        $this->register_hooks();
     }
 
-    protected function extender_hooks() {
-        $this->post_args = apply_filters('eael_post_args', $this->post_args);
-    }
-
-    protected function functional_hooks()
+    protected function register_hooks()
     {
-
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
         add_action('loop_end', array($this, 'generate_frontend_scripts'));
@@ -412,12 +412,9 @@ class Bootstrap
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
 
         // Elements
-        add_action('elementor/widgets/widgets_registered', array($this, 'eael_add_elements'));
-        add_action('elementor/controls/controls_registered', array($this, 'controls_registered'));
-        add_action('elementor/elements/categories_registered', array($this, 'add_elementor_widget_categories'));
-
-        // Extension
-        $this->eael_add_extensions();
+        add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
+        add_action('elementor/controls/controls_registered', array($this, 'register_controls_group'));
+        add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
 
         // Admin
         if (is_admin()) {
@@ -432,7 +429,6 @@ class Bootstrap
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_add_settings_link'));
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'eael_pro_filter_action_links'));
             add_action('admin_init', array($this, 'eael_redirect'));
-            add_action('admin_footer-plugins.php', array($this, 'plugins_footer_for_pro'));
 
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'eael_is_failed_to_load'));
