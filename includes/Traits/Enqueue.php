@@ -84,7 +84,7 @@ trait Enqueue
 
     // rules how css will be enqueued on front-end
     public function enqueue_protocols($post_type, $queried_object)
-    {   do_action('eael_wp_enque');
+    {   
         if ($this->has_cache_files($post_type, $queried_object)) {
             $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
             $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
@@ -100,15 +100,6 @@ trait Enqueue
             EAEL_PLUGIN_VERSION
         );
         
-        if($this->pro_enabled) {
-            wp_enqueue_style(
-                'eael-pro-front-end',
-                $this->safe_protocol(EAEL_PRO_PLUGIN_URL . 'assets/front-end/css/eael-pro.css'),
-                false,
-                EAEL_PLUGIN_VERSION
-            );
-        }
-
         wp_enqueue_script(
             'eael-front-end',
             $this->safe_protocol($js_file),
@@ -117,15 +108,7 @@ trait Enqueue
             true
         );
 
-        if($this->pro_enabled) {
-            wp_enqueue_script(
-                'eael-pro-front-end',
-                $this->safe_protocol(EAEL_PRO_PLUGIN_URL . 'assets/front-end/js/eael-pro.min.js'),
-                ['jquery'],
-                EAEL_PLUGIN_VERSION,
-                true
-            );
-        }
+        do_action('eael_wp_enque');
 
         // localize script
         $this->localize_scripts = apply_filters('eael_localize_front_script', [

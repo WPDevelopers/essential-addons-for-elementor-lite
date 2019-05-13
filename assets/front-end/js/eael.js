@@ -1,275 +1,3 @@
-!function (a) { "function" == typeof define && define.amd ? define(["jquery"], a) : a(jQuery) }(function (a) { "use strict"; var b = function (c, d) { this.$element = a(c), this.defaults = a.extend({}, b.defaults, this.$element.data(), a.isPlainObject(d) ? d : {}), this.init() }; b.prototype = { constructor: b, init: function () { var a = this.$element.html(), b = new Date(this.defaults.date || a); b.getTime() && (this.content = a, this.date = b, this.find(), this.defaults.autoStart && this.start()) }, find: function () { var a = this.$element; this.$days = a.find("[data-days]"), this.$hours = a.find("[data-hours]"), this.$minutes = a.find("[data-minutes]"), this.$seconds = a.find("[data-seconds]"), this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length > 0 && (this.found = !0) }, reset: function () { this.found ? (this.output("days"), this.output("hours"), this.output("minutes"), this.output("seconds")) : this.output() }, ready: function () { var a, b = this.date, c = 100, d = 1e3, e = 6e4, f = 36e5, g = 864e5, h = {}; return b ? (a = b.getTime() - (new Date).getTime(), 0 >= a ? (this.end(), !1) : (h.days = a, h.hours = h.days % g, h.minutes = h.hours % f, h.seconds = h.minutes % e, h.milliseconds = h.seconds % d, this.days = Math.floor(h.days / g), this.hours = Math.floor(h.hours / f), this.minutes = Math.floor(h.minutes / e), this.seconds = Math.floor(h.seconds / d), this.deciseconds = Math.floor(h.milliseconds / c), !0)) : !1 }, start: function () { !this.active && this.ready() && (this.active = !0, this.reset(), this.autoUpdate = this.defaults.fast ? setInterval(a.proxy(this.fastUpdate, this), 100) : setInterval(a.proxy(this.update, this), 1e3)) }, stop: function () { this.active && (this.active = !1, clearInterval(this.autoUpdate)) }, end: function () { this.date && (this.stop(), this.days = 0, this.hours = 0, this.minutes = 0, this.seconds = 0, this.deciseconds = 0, this.reset(), this.defaults.end()) }, destroy: function () { this.date && (this.stop(), this.$days = null, this.$hours = null, this.$minutes = null, this.$seconds = null, this.$element.empty().html(this.content), this.$element.removeData("countdown")) }, fastUpdate: function () { --this.deciseconds >= 0 ? this.output("deciseconds") : (this.deciseconds = 9, this.update()) }, update: function () { --this.seconds >= 0 ? this.output("seconds") : (this.seconds = 59, --this.minutes >= 0 ? this.output("minutes") : (this.minutes = 59, --this.hours >= 0 ? this.output("hours") : (this.hours = 23, --this.days >= 0 ? this.output("days") : this.end()))) }, output: function (a) { if (!this.found) return void this.$element.empty().html(this.template()); switch (a) { case "deciseconds": this.$seconds.text(this.getSecondsText()); break; case "seconds": this.$seconds.text(this.seconds); break; case "minutes": this.$minutes.text(this.minutes); break; case "hours": this.$hours.text(this.hours); break; case "days": this.$days.text(this.days) } }, template: function () { return this.defaults.text.replace("%s", this.days).replace("%s", this.hours).replace("%s", this.minutes).replace("%s", this.getSecondsText()) }, getSecondsText: function () { return this.active && this.defaults.fast ? this.seconds + "." + this.deciseconds : this.seconds } }, b.defaults = { autoStart: !0, date: null, fast: !1, end: a.noop, text: "%s days, %s hours, %s minutes, %s seconds" }, b.setDefaults = function (c) { a.extend(b.defaults, c) }, a.fn.countdown = function (c) { return this.each(function () { var d = a(this), e = d.data("countdown"); e || d.data("countdown", e = new b(this, c)), "string" == typeof c && a.isFunction(e[c]) && e[c]() }) }, a.fn.countdown.constructor = b, a.fn.countdown.setDefaults = b.setDefaults, a(function () { a("[countdown]").countdown() }) });
-/*!
- * Countdown v0.1.0
- * https://github.com/fengyuanchen/countdown
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
-(function (factory) {
-    if (typeof define === "function" && define.amd) {
-        // AMD. Register as anonymous module.
-        define(["jquery"], factory);
-    } else {
-        // Browser globals.
-        factory(jQuery);
-    }
-})(function ($) {
-
-    "use strict";
-
-    var Countdown = function (element, options) {
-            this.$element = $(element);
-            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
-            this.init();
-        };
-
-    Countdown.prototype = {
-        constructor: Countdown,
-
-        init: function () {
-            var content = this.$element.html(),
-                date = new Date(this.defaults.date || content);
-
-            if (date.getTime()) {
-                this.content = content;
-                this.date = date;
-                this.find();
-
-                if (this.defaults.autoStart) {
-                    this.start();
-                }
-            }
-        },
-
-        find: function () {
-            var $element = this.$element;
-
-            this.$days = $element.find("[data-days]");
-            this.$hours = $element.find("[data-hours]");
-            this.$minutes = $element.find("[data-minutes]");
-            this.$seconds = $element.find("[data-seconds]");
-
-            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
-                this.found = true;
-            }
-        },
-
-        reset: function () {
-            if (this.found) {
-                this.output("days");
-                this.output("hours");
-                this.output("minutes");
-                this.output("seconds");
-            } else {
-                this.output();
-            }
-        },
-
-        ready: function () {
-            var date = this.date,
-                decisecond = 100,
-                second = 1000,
-                minute = 60000,
-                hour = 3600000,
-                day = 86400000,
-                remainder = {},
-                diff;
-
-            if (!date) {
-                return false;
-            }
-
-            diff = date.getTime() - (new Date()).getTime();
-
-            if (diff <= 0) {
-                this.end();
-                return false;
-            }
-
-            remainder.days = diff;
-            remainder.hours = remainder.days % day;
-            remainder.minutes = remainder.hours % hour;
-            remainder.seconds = remainder.minutes % minute;
-            remainder.milliseconds = remainder.seconds % second;
-
-            this.days = Math.floor(remainder.days / day);
-            this.hours = Math.floor(remainder.hours / hour);
-            this.minutes = Math.floor(remainder.minutes / minute);
-            this.seconds = Math.floor(remainder.seconds / second);
-            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
-
-            return true;
-        },
-
-        start: function () {
-            if (!this.active && this.ready()) {
-                this.active = true;
-                this.reset();
-                this.autoUpdate = this.defaults.fast ?
-                    setInterval($.proxy(this.fastUpdate, this), 100) :
-                    setInterval($.proxy(this.update, this), 1000);
-            }
-        },
-
-        stop: function () {
-            if (this.active) {
-                this.active = false;
-                clearInterval(this.autoUpdate);
-            }
-        },
-
-        end: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.days = 0;
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.deciseconds = 0;
-            this.reset();
-            this.defaults.end();
-        },
-
-        destroy: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.$days = null;
-            this.$hours = null;
-            this.$minutes = null;
-            this.$seconds = null;
-
-            this.$element.empty().html(this.content);
-            this.$element.removeData("countdown");
-        },
-
-        fastUpdate: function () {
-            if (--this.deciseconds >= 0) {
-                this.output("deciseconds");
-            } else {
-                this.deciseconds = 9;
-                this.update();
-            }
-        },
-
-        update: function () {
-            if (--this.seconds >= 0) {
-                this.output("seconds");
-            } else {
-                this.seconds = 59;
-
-                if (--this.minutes >= 0) {
-                    this.output("minutes");
-                } else {
-                    this.minutes = 59;
-
-                    if (--this.hours >= 0) {
-                        this.output("hours");
-                    } else {
-                        this.hours = 23;
-
-                        if (--this.days >= 0) {
-                            this.output("days");
-                        } else {
-                            this.end();
-                        }
-                    }
-                }
-            }
-        },
-
-        output: function (type) {
-            if (!this.found) {
-                this.$element.empty().html(this.template());
-                return;
-            }
-
-            switch (type) {
-                case "deciseconds":
-                    this.$seconds.text(this.getSecondsText());
-                    break;
-
-                case "seconds":
-                    this.$seconds.text(this.seconds);
-                    break;
-
-                case "minutes":
-                    this.$minutes.text(this.minutes);
-                    break;
-
-                case "hours":
-                    this.$hours.text(this.hours);
-                    break;
-
-                case "days":
-                    this.$days.text(this.days);
-                    break;
-
-                // No default
-            }
-        },
-
-        template: function () {
-            return this.defaults.text
-                    .replace("%s", this.days)
-                    .replace("%s", this.hours)
-                    .replace("%s", this.minutes)
-                    .replace("%s", this.getSecondsText());
-        },
-
-        getSecondsText: function () {
-            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
-        }
-    };
-
-    // Default settings
-    Countdown.defaults = {
-        autoStart: true,
-        date: null,
-        fast: false,
-        end: $.noop,
-        text: "%s days, %s hours, %s minutes, %s seconds"
-    };
-
-    // Set default settings
-    Countdown.setDefaults = function (options) {
-        $.extend(Countdown.defaults, options);
-    };
-
-    // Register as jQuery plugin
-    $.fn.countdown = function (options) {
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data("countdown");
-
-            if (!data) {
-                $this.data("countdown", (data = new Countdown(this, options)));
-            }
-
-            if (typeof options === "string" && $.isFunction(data[options])) {
-                data[options]();
-            }
-        });
-    };
-
-    $.fn.countdown.constructor = Countdown;
-    $.fn.countdown.setDefaults = Countdown.setDefaults;
-
-    $(function () {
-        $("[countdown]").countdown();
-    });
-
-});
-
 !function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
 !function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
 
@@ -1396,6 +1124,422 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
+!function (a) { "function" == typeof define && define.amd ? define(["jquery"], a) : "object" == typeof exports ? module.exports = a(require("jquery")) : a(jQuery) }(function (a) { function i() { var b, c, d = { height: f.innerHeight, width: f.innerWidth }; return d.height || (b = e.compatMode, (b || !a.support.boxModel) && (c = "CSS1Compat" === b ? g : e.body, d = { height: c.clientHeight, width: c.clientWidth })), d } function j() { return { top: f.pageYOffset || g.scrollTop || e.body.scrollTop, left: f.pageXOffset || g.scrollLeft || e.body.scrollLeft } } function k() { if (b.length) { var e = 0, f = a.map(b, function (a) { var b = a.data.selector, c = a.$element; return b ? c.find(b) : c }); for (c = c || i(), d = d || j(); e < b.length; e++)if (a.contains(g, f[e][0])) { var h = a(f[e]), k = { height: h[0].offsetHeight, width: h[0].offsetWidth }, l = h.offset(), m = h.data("inview"); if (!d || !c) return; l.top + k.height > d.top && l.top < d.top + c.height && l.left + k.width > d.left && l.left < d.left + c.width ? m || h.data("inview", !0).trigger("inview", [!0]) : m && h.data("inview", !1).trigger("inview", [!1]) } } } var c, d, h, b = [], e = document, f = window, g = e.documentElement; a.event.special.inview = { add: function (c) { b.push({ data: c, $element: a(this), element: this }), !h && b.length && (h = setInterval(k, 250)) }, remove: function (a) { for (var c = 0; c < b.length; c++) { var d = b[c]; if (d.element === this && d.data.guid === a.guid) { b.splice(c, 1); break } } b.length || (clearInterval(h), h = null) } }, a(f).on("scroll resize scrollstop", function () { c = d = null }), !g.addEventListener && g.attachEvent && g.attachEvent("onfocusin", function () { d = null }) });
+
+!function (a) { "function" == typeof define && define.amd ? define(["jquery"], a) : a(jQuery) }(function (a) { "use strict"; var b = function (c, d) { this.$element = a(c), this.defaults = a.extend({}, b.defaults, this.$element.data(), a.isPlainObject(d) ? d : {}), this.init() }; b.prototype = { constructor: b, init: function () { var a = this.$element.html(), b = new Date(this.defaults.date || a); b.getTime() && (this.content = a, this.date = b, this.find(), this.defaults.autoStart && this.start()) }, find: function () { var a = this.$element; this.$days = a.find("[data-days]"), this.$hours = a.find("[data-hours]"), this.$minutes = a.find("[data-minutes]"), this.$seconds = a.find("[data-seconds]"), this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length > 0 && (this.found = !0) }, reset: function () { this.found ? (this.output("days"), this.output("hours"), this.output("minutes"), this.output("seconds")) : this.output() }, ready: function () { var a, b = this.date, c = 100, d = 1e3, e = 6e4, f = 36e5, g = 864e5, h = {}; return b ? (a = b.getTime() - (new Date).getTime(), 0 >= a ? (this.end(), !1) : (h.days = a, h.hours = h.days % g, h.minutes = h.hours % f, h.seconds = h.minutes % e, h.milliseconds = h.seconds % d, this.days = Math.floor(h.days / g), this.hours = Math.floor(h.hours / f), this.minutes = Math.floor(h.minutes / e), this.seconds = Math.floor(h.seconds / d), this.deciseconds = Math.floor(h.milliseconds / c), !0)) : !1 }, start: function () { !this.active && this.ready() && (this.active = !0, this.reset(), this.autoUpdate = this.defaults.fast ? setInterval(a.proxy(this.fastUpdate, this), 100) : setInterval(a.proxy(this.update, this), 1e3)) }, stop: function () { this.active && (this.active = !1, clearInterval(this.autoUpdate)) }, end: function () { this.date && (this.stop(), this.days = 0, this.hours = 0, this.minutes = 0, this.seconds = 0, this.deciseconds = 0, this.reset(), this.defaults.end()) }, destroy: function () { this.date && (this.stop(), this.$days = null, this.$hours = null, this.$minutes = null, this.$seconds = null, this.$element.empty().html(this.content), this.$element.removeData("countdown")) }, fastUpdate: function () { --this.deciseconds >= 0 ? this.output("deciseconds") : (this.deciseconds = 9, this.update()) }, update: function () { --this.seconds >= 0 ? this.output("seconds") : (this.seconds = 59, --this.minutes >= 0 ? this.output("minutes") : (this.minutes = 59, --this.hours >= 0 ? this.output("hours") : (this.hours = 23, --this.days >= 0 ? this.output("days") : this.end()))) }, output: function (a) { if (!this.found) return void this.$element.empty().html(this.template()); switch (a) { case "deciseconds": this.$seconds.text(this.getSecondsText()); break; case "seconds": this.$seconds.text(this.seconds); break; case "minutes": this.$minutes.text(this.minutes); break; case "hours": this.$hours.text(this.hours); break; case "days": this.$days.text(this.days) } }, template: function () { return this.defaults.text.replace("%s", this.days).replace("%s", this.hours).replace("%s", this.minutes).replace("%s", this.getSecondsText()) }, getSecondsText: function () { return this.active && this.defaults.fast ? this.seconds + "." + this.deciseconds : this.seconds } }, b.defaults = { autoStart: !0, date: null, fast: !1, end: a.noop, text: "%s days, %s hours, %s minutes, %s seconds" }, b.setDefaults = function (c) { a.extend(b.defaults, c) }, a.fn.countdown = function (c) { return this.each(function () { var d = a(this), e = d.data("countdown"); e || d.data("countdown", e = new b(this, c)), "string" == typeof c && a.isFunction(e[c]) && e[c]() }) }, a.fn.countdown.constructor = b, a.fn.countdown.setDefaults = b.setDefaults, a(function () { a("[countdown]").countdown() }) });
+/*!
+ * Countdown v0.1.0
+ * https://github.com/fengyuanchen/countdown
+ *
+ * Copyright 2014 Fengyuan Chen
+ * Released under the MIT license
+ */
+
+(function (factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD. Register as anonymous module.
+        define(["jquery"], factory);
+    } else {
+        // Browser globals.
+        factory(jQuery);
+    }
+})(function ($) {
+
+    "use strict";
+
+    var Countdown = function (element, options) {
+            this.$element = $(element);
+            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
+            this.init();
+        };
+
+    Countdown.prototype = {
+        constructor: Countdown,
+
+        init: function () {
+            var content = this.$element.html(),
+                date = new Date(this.defaults.date || content);
+
+            if (date.getTime()) {
+                this.content = content;
+                this.date = date;
+                this.find();
+
+                if (this.defaults.autoStart) {
+                    this.start();
+                }
+            }
+        },
+
+        find: function () {
+            var $element = this.$element;
+
+            this.$days = $element.find("[data-days]");
+            this.$hours = $element.find("[data-hours]");
+            this.$minutes = $element.find("[data-minutes]");
+            this.$seconds = $element.find("[data-seconds]");
+
+            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
+                this.found = true;
+            }
+        },
+
+        reset: function () {
+            if (this.found) {
+                this.output("days");
+                this.output("hours");
+                this.output("minutes");
+                this.output("seconds");
+            } else {
+                this.output();
+            }
+        },
+
+        ready: function () {
+            var date = this.date,
+                decisecond = 100,
+                second = 1000,
+                minute = 60000,
+                hour = 3600000,
+                day = 86400000,
+                remainder = {},
+                diff;
+
+            if (!date) {
+                return false;
+            }
+
+            diff = date.getTime() - (new Date()).getTime();
+
+            if (diff <= 0) {
+                this.end();
+                return false;
+            }
+
+            remainder.days = diff;
+            remainder.hours = remainder.days % day;
+            remainder.minutes = remainder.hours % hour;
+            remainder.seconds = remainder.minutes % minute;
+            remainder.milliseconds = remainder.seconds % second;
+
+            this.days = Math.floor(remainder.days / day);
+            this.hours = Math.floor(remainder.hours / hour);
+            this.minutes = Math.floor(remainder.minutes / minute);
+            this.seconds = Math.floor(remainder.seconds / second);
+            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
+
+            return true;
+        },
+
+        start: function () {
+            if (!this.active && this.ready()) {
+                this.active = true;
+                this.reset();
+                this.autoUpdate = this.defaults.fast ?
+                    setInterval($.proxy(this.fastUpdate, this), 100) :
+                    setInterval($.proxy(this.update, this), 1000);
+            }
+        },
+
+        stop: function () {
+            if (this.active) {
+                this.active = false;
+                clearInterval(this.autoUpdate);
+            }
+        },
+
+        end: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.days = 0;
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.deciseconds = 0;
+            this.reset();
+            this.defaults.end();
+        },
+
+        destroy: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.$days = null;
+            this.$hours = null;
+            this.$minutes = null;
+            this.$seconds = null;
+
+            this.$element.empty().html(this.content);
+            this.$element.removeData("countdown");
+        },
+
+        fastUpdate: function () {
+            if (--this.deciseconds >= 0) {
+                this.output("deciseconds");
+            } else {
+                this.deciseconds = 9;
+                this.update();
+            }
+        },
+
+        update: function () {
+            if (--this.seconds >= 0) {
+                this.output("seconds");
+            } else {
+                this.seconds = 59;
+
+                if (--this.minutes >= 0) {
+                    this.output("minutes");
+                } else {
+                    this.minutes = 59;
+
+                    if (--this.hours >= 0) {
+                        this.output("hours");
+                    } else {
+                        this.hours = 23;
+
+                        if (--this.days >= 0) {
+                            this.output("days");
+                        } else {
+                            this.end();
+                        }
+                    }
+                }
+            }
+        },
+
+        output: function (type) {
+            if (!this.found) {
+                this.$element.empty().html(this.template());
+                return;
+            }
+
+            switch (type) {
+                case "deciseconds":
+                    this.$seconds.text(this.getSecondsText());
+                    break;
+
+                case "seconds":
+                    this.$seconds.text(this.seconds);
+                    break;
+
+                case "minutes":
+                    this.$minutes.text(this.minutes);
+                    break;
+
+                case "hours":
+                    this.$hours.text(this.hours);
+                    break;
+
+                case "days":
+                    this.$days.text(this.days);
+                    break;
+
+                // No default
+            }
+        },
+
+        template: function () {
+            return this.defaults.text
+                    .replace("%s", this.days)
+                    .replace("%s", this.hours)
+                    .replace("%s", this.minutes)
+                    .replace("%s", this.getSecondsText());
+        },
+
+        getSecondsText: function () {
+            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+        }
+    };
+
+    // Default settings
+    Countdown.defaults = {
+        autoStart: true,
+        date: null,
+        fast: false,
+        end: $.noop,
+        text: "%s days, %s hours, %s minutes, %s seconds"
+    };
+
+    // Set default settings
+    Countdown.setDefaults = function (options) {
+        $.extend(Countdown.defaults, options);
+    };
+
+    // Register as jQuery plugin
+    $.fn.countdown = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data("countdown");
+
+            if (!data) {
+                $this.data("countdown", (data = new Countdown(this, options)));
+            }
+
+            if (typeof options === "string" && $.isFunction(data[options])) {
+                data[options]();
+            }
+        });
+    };
+
+    $.fn.countdown.constructor = Countdown;
+    $.fn.countdown.setDefaults = Countdown.setDefaults;
+
+    $(function () {
+        $("[countdown]").countdown();
+    });
+
+});
+
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -4962,150 +5106,6 @@ var trim = String.prototype.trim ?
 
 !function(t,e){"function"==typeof define&&define.amd?define("jquery-bridget/jquery-bridget",["jquery"],function(i){return e(t,i)}):"object"==typeof module&&module.exports?module.exports=e(t,require("jquery")):t.jQueryBridget=e(t,t.jQuery)}(window,function(t,e){"use strict";function i(i,s,a){function u(t,e,o){var n,s="$()."+i+'("'+e+'")';return t.each(function(t,u){var h=a.data(u,i);if(!h)return void r(i+" not initialized. Cannot call methods, i.e. "+s);var d=h[e];if(!d||"_"==e.charAt(0))return void r(s+" is not a valid method");var l=d.apply(h,o);n=void 0===n?l:n}),void 0!==n?n:t}function h(t,e){t.each(function(t,o){var n=a.data(o,i);n?(n.option(e),n._init()):(n=new s(o,e),a.data(o,i,n))})}a=a||e||t.jQuery,a&&(s.prototype.option||(s.prototype.option=function(t){a.isPlainObject(t)&&(this.options=a.extend(!0,this.options,t))}),a.fn[i]=function(t){if("string"==typeof t){var e=n.call(arguments,1);return u(this,t,e)}return h(this,t),this},o(a))}function o(t){!t||t&&t.bridget||(t.bridget=i)}var n=Array.prototype.slice,s=t.console,r="undefined"==typeof s?function(){}:function(t){s.error(t)};return o(e||t.jQuery),i}),function(t,e){"function"==typeof define&&define.amd?define("ev-emitter/ev-emitter",e):"object"==typeof module&&module.exports?module.exports=e():t.EvEmitter=e()}("undefined"!=typeof window?window:this,function(){function t(){}var e=t.prototype;return e.on=function(t,e){if(t&&e){var i=this._events=this._events||{},o=i[t]=i[t]||[];return o.indexOf(e)==-1&&o.push(e),this}},e.once=function(t,e){if(t&&e){this.on(t,e);var i=this._onceEvents=this._onceEvents||{},o=i[t]=i[t]||{};return o[e]=!0,this}},e.off=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){var o=i.indexOf(e);return o!=-1&&i.splice(o,1),this}},e.emitEvent=function(t,e){var i=this._events&&this._events[t];if(i&&i.length){i=i.slice(0),e=e||[];for(var o=this._onceEvents&&this._onceEvents[t],n=0;n<i.length;n++){var s=i[n],r=o&&o[s];r&&(this.off(t,s),delete o[s]),s.apply(this,e)}return this}},e.allOff=function(){delete this._events,delete this._onceEvents},t}),function(t,e){"function"==typeof define&&define.amd?define("get-size/get-size",e):"object"==typeof module&&module.exports?module.exports=e():t.getSize=e()}(window,function(){"use strict";function t(t){var e=parseFloat(t),i=t.indexOf("%")==-1&&!isNaN(e);return i&&e}function e(){}function i(){for(var t={width:0,height:0,innerWidth:0,innerHeight:0,outerWidth:0,outerHeight:0},e=0;e<h;e++){var i=u[e];t[i]=0}return t}function o(t){var e=getComputedStyle(t);return e||a("Style returned "+e+". Are you running this code in a hidden iframe on Firefox? See https://bit.ly/getsizebug1"),e}function n(){if(!d){d=!0;var e=document.createElement("div");e.style.width="200px",e.style.padding="1px 2px 3px 4px",e.style.borderStyle="solid",e.style.borderWidth="1px 2px 3px 4px",e.style.boxSizing="border-box";var i=document.body||document.documentElement;i.appendChild(e);var n=o(e);r=200==Math.round(t(n.width)),s.isBoxSizeOuter=r,i.removeChild(e)}}function s(e){if(n(),"string"==typeof e&&(e=document.querySelector(e)),e&&"object"==typeof e&&e.nodeType){var s=o(e);if("none"==s.display)return i();var a={};a.width=e.offsetWidth,a.height=e.offsetHeight;for(var d=a.isBorderBox="border-box"==s.boxSizing,l=0;l<h;l++){var f=u[l],c=s[f],m=parseFloat(c);a[f]=isNaN(m)?0:m}var p=a.paddingLeft+a.paddingRight,y=a.paddingTop+a.paddingBottom,g=a.marginLeft+a.marginRight,v=a.marginTop+a.marginBottom,_=a.borderLeftWidth+a.borderRightWidth,z=a.borderTopWidth+a.borderBottomWidth,I=d&&r,x=t(s.width);x!==!1&&(a.width=x+(I?0:p+_));var S=t(s.height);return S!==!1&&(a.height=S+(I?0:y+z)),a.innerWidth=a.width-(p+_),a.innerHeight=a.height-(y+z),a.outerWidth=a.width+g,a.outerHeight=a.height+v,a}}var r,a="undefined"==typeof console?e:function(t){console.error(t)},u=["paddingLeft","paddingRight","paddingTop","paddingBottom","marginLeft","marginRight","marginTop","marginBottom","borderLeftWidth","borderRightWidth","borderTopWidth","borderBottomWidth"],h=u.length,d=!1;return s}),function(t,e){"use strict";"function"==typeof define&&define.amd?define("desandro-matches-selector/matches-selector",e):"object"==typeof module&&module.exports?module.exports=e():t.matchesSelector=e()}(window,function(){"use strict";var t=function(){var t=window.Element.prototype;if(t.matches)return"matches";if(t.matchesSelector)return"matchesSelector";for(var e=["webkit","moz","ms","o"],i=0;i<e.length;i++){var o=e[i],n=o+"MatchesSelector";if(t[n])return n}}();return function(e,i){return e[t](i)}}),function(t,e){"function"==typeof define&&define.amd?define("fizzy-ui-utils/utils",["desandro-matches-selector/matches-selector"],function(i){return e(t,i)}):"object"==typeof module&&module.exports?module.exports=e(t,require("desandro-matches-selector")):t.fizzyUIUtils=e(t,t.matchesSelector)}(window,function(t,e){var i={};i.extend=function(t,e){for(var i in e)t[i]=e[i];return t},i.modulo=function(t,e){return(t%e+e)%e};var o=Array.prototype.slice;i.makeArray=function(t){if(Array.isArray(t))return t;if(null===t||void 0===t)return[];var e="object"==typeof t&&"number"==typeof t.length;return e?o.call(t):[t]},i.removeFrom=function(t,e){var i=t.indexOf(e);i!=-1&&t.splice(i,1)},i.getParent=function(t,i){for(;t.parentNode&&t!=document.body;)if(t=t.parentNode,e(t,i))return t},i.getQueryElement=function(t){return"string"==typeof t?document.querySelector(t):t},i.handleEvent=function(t){var e="on"+t.type;this[e]&&this[e](t)},i.filterFindElements=function(t,o){t=i.makeArray(t);var n=[];return t.forEach(function(t){if(t instanceof HTMLElement){if(!o)return void n.push(t);e(t,o)&&n.push(t);for(var i=t.querySelectorAll(o),s=0;s<i.length;s++)n.push(i[s])}}),n},i.debounceMethod=function(t,e,i){i=i||100;var o=t.prototype[e],n=e+"Timeout";t.prototype[e]=function(){var t=this[n];clearTimeout(t);var e=arguments,s=this;this[n]=setTimeout(function(){o.apply(s,e),delete s[n]},i)}},i.docReady=function(t){var e=document.readyState;"complete"==e||"interactive"==e?setTimeout(t):document.addEventListener("DOMContentLoaded",t)},i.toDashed=function(t){return t.replace(/(.)([A-Z])/g,function(t,e,i){return e+"-"+i}).toLowerCase()};var n=t.console;return i.htmlInit=function(e,o){i.docReady(function(){var s=i.toDashed(o),r="data-"+s,a=document.querySelectorAll("["+r+"]"),u=document.querySelectorAll(".js-"+s),h=i.makeArray(a).concat(i.makeArray(u)),d=r+"-options",l=t.jQuery;h.forEach(function(t){var i,s=t.getAttribute(r)||t.getAttribute(d);try{i=s&&JSON.parse(s)}catch(a){return void(n&&n.error("Error parsing "+r+" on "+t.className+": "+a))}var u=new e(t,i);l&&l.data(t,o,u)})})},i}),function(t,e){"function"==typeof define&&define.amd?define("outlayer/item",["ev-emitter/ev-emitter","get-size/get-size"],e):"object"==typeof module&&module.exports?module.exports=e(require("ev-emitter"),require("get-size")):(t.Outlayer={},t.Outlayer.Item=e(t.EvEmitter,t.getSize))}(window,function(t,e){"use strict";function i(t){for(var e in t)return!1;return e=null,!0}function o(t,e){t&&(this.element=t,this.layout=e,this.position={x:0,y:0},this._create())}function n(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})}var s=document.documentElement.style,r="string"==typeof s.transition?"transition":"WebkitTransition",a="string"==typeof s.transform?"transform":"WebkitTransform",u={WebkitTransition:"webkitTransitionEnd",transition:"transitionend"}[r],h={transform:a,transition:r,transitionDuration:r+"Duration",transitionProperty:r+"Property",transitionDelay:r+"Delay"},d=o.prototype=Object.create(t.prototype);d.constructor=o,d._create=function(){this._transn={ingProperties:{},clean:{},onEnd:{}},this.css({position:"absolute"})},d.handleEvent=function(t){var e="on"+t.type;this[e]&&this[e](t)},d.getSize=function(){this.size=e(this.element)},d.css=function(t){var e=this.element.style;for(var i in t){var o=h[i]||i;e[o]=t[i]}},d.getPosition=function(){var t=getComputedStyle(this.element),e=this.layout._getOption("originLeft"),i=this.layout._getOption("originTop"),o=t[e?"left":"right"],n=t[i?"top":"bottom"],s=parseFloat(o),r=parseFloat(n),a=this.layout.size;o.indexOf("%")!=-1&&(s=s/100*a.width),n.indexOf("%")!=-1&&(r=r/100*a.height),s=isNaN(s)?0:s,r=isNaN(r)?0:r,s-=e?a.paddingLeft:a.paddingRight,r-=i?a.paddingTop:a.paddingBottom,this.position.x=s,this.position.y=r},d.layoutPosition=function(){var t=this.layout.size,e={},i=this.layout._getOption("originLeft"),o=this.layout._getOption("originTop"),n=i?"paddingLeft":"paddingRight",s=i?"left":"right",r=i?"right":"left",a=this.position.x+t[n];e[s]=this.getXValue(a),e[r]="";var u=o?"paddingTop":"paddingBottom",h=o?"top":"bottom",d=o?"bottom":"top",l=this.position.y+t[u];e[h]=this.getYValue(l),e[d]="",this.css(e),this.emitEvent("layout",[this])},d.getXValue=function(t){var e=this.layout._getOption("horizontal");return this.layout.options.percentPosition&&!e?t/this.layout.size.width*100+"%":t+"px"},d.getYValue=function(t){var e=this.layout._getOption("horizontal");return this.layout.options.percentPosition&&e?t/this.layout.size.height*100+"%":t+"px"},d._transitionTo=function(t,e){this.getPosition();var i=this.position.x,o=this.position.y,n=t==this.position.x&&e==this.position.y;if(this.setPosition(t,e),n&&!this.isTransitioning)return void this.layoutPosition();var s=t-i,r=e-o,a={};a.transform=this.getTranslate(s,r),this.transition({to:a,onTransitionEnd:{transform:this.layoutPosition},isCleaning:!0})},d.getTranslate=function(t,e){var i=this.layout._getOption("originLeft"),o=this.layout._getOption("originTop");return t=i?t:-t,e=o?e:-e,"translate3d("+t+"px, "+e+"px, 0)"},d.goTo=function(t,e){this.setPosition(t,e),this.layoutPosition()},d.moveTo=d._transitionTo,d.setPosition=function(t,e){this.position.x=parseFloat(t),this.position.y=parseFloat(e)},d._nonTransition=function(t){this.css(t.to),t.isCleaning&&this._removeStyles(t.to);for(var e in t.onTransitionEnd)t.onTransitionEnd[e].call(this)},d.transition=function(t){if(!parseFloat(this.layout.options.transitionDuration))return void this._nonTransition(t);var e=this._transn;for(var i in t.onTransitionEnd)e.onEnd[i]=t.onTransitionEnd[i];for(i in t.to)e.ingProperties[i]=!0,t.isCleaning&&(e.clean[i]=!0);if(t.from){this.css(t.from);var o=this.element.offsetHeight;o=null}this.enableTransition(t.to),this.css(t.to),this.isTransitioning=!0};var l="opacity,"+n(a);d.enableTransition=function(){if(!this.isTransitioning){var t=this.layout.options.transitionDuration;t="number"==typeof t?t+"ms":t,this.css({transitionProperty:l,transitionDuration:t,transitionDelay:this.staggerDelay||0}),this.element.addEventListener(u,this,!1)}},d.onwebkitTransitionEnd=function(t){this.ontransitionend(t)},d.onotransitionend=function(t){this.ontransitionend(t)};var f={"-webkit-transform":"transform"};d.ontransitionend=function(t){if(t.target===this.element){var e=this._transn,o=f[t.propertyName]||t.propertyName;if(delete e.ingProperties[o],i(e.ingProperties)&&this.disableTransition(),o in e.clean&&(this.element.style[t.propertyName]="",delete e.clean[o]),o in e.onEnd){var n=e.onEnd[o];n.call(this),delete e.onEnd[o]}this.emitEvent("transitionEnd",[this])}},d.disableTransition=function(){this.removeTransitionStyles(),this.element.removeEventListener(u,this,!1),this.isTransitioning=!1},d._removeStyles=function(t){var e={};for(var i in t)e[i]="";this.css(e)};var c={transitionProperty:"",transitionDuration:"",transitionDelay:""};return d.removeTransitionStyles=function(){this.css(c)},d.stagger=function(t){t=isNaN(t)?0:t,this.staggerDelay=t+"ms"},d.removeElem=function(){this.element.parentNode.removeChild(this.element),this.css({display:""}),this.emitEvent("remove",[this])},d.remove=function(){return r&&parseFloat(this.layout.options.transitionDuration)?(this.once("transitionEnd",function(){this.removeElem()}),void this.hide()):void this.removeElem()},d.reveal=function(){delete this.isHidden,this.css({display:""});var t=this.layout.options,e={},i=this.getHideRevealTransitionEndProperty("visibleStyle");e[i]=this.onRevealTransitionEnd,this.transition({from:t.hiddenStyle,to:t.visibleStyle,isCleaning:!0,onTransitionEnd:e})},d.onRevealTransitionEnd=function(){this.isHidden||this.emitEvent("reveal")},d.getHideRevealTransitionEndProperty=function(t){var e=this.layout.options[t];if(e.opacity)return"opacity";for(var i in e)return i},d.hide=function(){this.isHidden=!0,this.css({display:""});var t=this.layout.options,e={},i=this.getHideRevealTransitionEndProperty("hiddenStyle");e[i]=this.onHideTransitionEnd,this.transition({from:t.visibleStyle,to:t.hiddenStyle,isCleaning:!0,onTransitionEnd:e})},d.onHideTransitionEnd=function(){this.isHidden&&(this.css({display:"none"}),this.emitEvent("hide"))},d.destroy=function(){this.css({position:"",left:"",right:"",top:"",bottom:"",transition:"",transform:""})},o}),function(t,e){"use strict";"function"==typeof define&&define.amd?define("outlayer/outlayer",["ev-emitter/ev-emitter","get-size/get-size","fizzy-ui-utils/utils","./item"],function(i,o,n,s){return e(t,i,o,n,s)}):"object"==typeof module&&module.exports?module.exports=e(t,require("ev-emitter"),require("get-size"),require("fizzy-ui-utils"),require("./item")):t.Outlayer=e(t,t.EvEmitter,t.getSize,t.fizzyUIUtils,t.Outlayer.Item)}(window,function(t,e,i,o,n){"use strict";function s(t,e){var i=o.getQueryElement(t);if(!i)return void(u&&u.error("Bad element for "+this.constructor.namespace+": "+(i||t)));this.element=i,h&&(this.$element=h(this.element)),this.options=o.extend({},this.constructor.defaults),this.option(e);var n=++l;this.element.outlayerGUID=n,f[n]=this,this._create();var s=this._getOption("initLayout");s&&this.layout()}function r(t){function e(){t.apply(this,arguments)}return e.prototype=Object.create(t.prototype),e.prototype.constructor=e,e}function a(t){if("number"==typeof t)return t;var e=t.match(/(^\d*\.?\d*)(\w*)/),i=e&&e[1],o=e&&e[2];if(!i.length)return 0;i=parseFloat(i);var n=m[o]||1;return i*n}var u=t.console,h=t.jQuery,d=function(){},l=0,f={};s.namespace="outlayer",s.Item=n,s.defaults={containerStyle:{position:"relative"},initLayout:!0,originLeft:!0,originTop:!0,resize:!0,resizeContainer:!0,transitionDuration:"0.4s",hiddenStyle:{opacity:0,transform:"scale(0.001)"},visibleStyle:{opacity:1,transform:"scale(1)"}};var c=s.prototype;o.extend(c,e.prototype),c.option=function(t){o.extend(this.options,t)},c._getOption=function(t){var e=this.constructor.compatOptions[t];return e&&void 0!==this.options[e]?this.options[e]:this.options[t]},s.compatOptions={initLayout:"isInitLayout",horizontal:"isHorizontal",layoutInstant:"isLayoutInstant",originLeft:"isOriginLeft",originTop:"isOriginTop",resize:"isResizeBound",resizeContainer:"isResizingContainer"},c._create=function(){this.reloadItems(),this.stamps=[],this.stamp(this.options.stamp),o.extend(this.element.style,this.options.containerStyle);var t=this._getOption("resize");t&&this.bindResize()},c.reloadItems=function(){this.items=this._itemize(this.element.children)},c._itemize=function(t){for(var e=this._filterFindItemElements(t),i=this.constructor.Item,o=[],n=0;n<e.length;n++){var s=e[n],r=new i(s,this);o.push(r)}return o},c._filterFindItemElements=function(t){return o.filterFindElements(t,this.options.itemSelector)},c.getItemElements=function(){return this.items.map(function(t){return t.element})},c.layout=function(){this._resetLayout(),this._manageStamps();var t=this._getOption("layoutInstant"),e=void 0!==t?t:!this._isLayoutInited;this.layoutItems(this.items,e),this._isLayoutInited=!0},c._init=c.layout,c._resetLayout=function(){this.getSize()},c.getSize=function(){this.size=i(this.element)},c._getMeasurement=function(t,e){var o,n=this.options[t];n?("string"==typeof n?o=this.element.querySelector(n):n instanceof HTMLElement&&(o=n),this[t]=o?i(o)[e]:n):this[t]=0},c.layoutItems=function(t,e){t=this._getItemsForLayout(t),this._layoutItems(t,e),this._postLayout()},c._getItemsForLayout=function(t){return t.filter(function(t){return!t.isIgnored})},c._layoutItems=function(t,e){if(this._emitCompleteOnItems("layout",t),t&&t.length){var i=[];t.forEach(function(t){var o=this._getItemLayoutPosition(t);o.item=t,o.isInstant=e||t.isLayoutInstant,i.push(o)},this),this._processLayoutQueue(i)}},c._getItemLayoutPosition=function(){return{x:0,y:0}},c._processLayoutQueue=function(t){this.updateStagger(),t.forEach(function(t,e){this._positionItem(t.item,t.x,t.y,t.isInstant,e)},this)},c.updateStagger=function(){var t=this.options.stagger;return null===t||void 0===t?void(this.stagger=0):(this.stagger=a(t),this.stagger)},c._positionItem=function(t,e,i,o,n){o?t.goTo(e,i):(t.stagger(n*this.stagger),t.moveTo(e,i))},c._postLayout=function(){this.resizeContainer()},c.resizeContainer=function(){var t=this._getOption("resizeContainer");if(t){var e=this._getContainerSize();e&&(this._setContainerMeasure(e.width,!0),this._setContainerMeasure(e.height,!1))}},c._getContainerSize=d,c._setContainerMeasure=function(t,e){if(void 0!==t){var i=this.size;i.isBorderBox&&(t+=e?i.paddingLeft+i.paddingRight+i.borderLeftWidth+i.borderRightWidth:i.paddingBottom+i.paddingTop+i.borderTopWidth+i.borderBottomWidth),t=Math.max(t,0),this.element.style[e?"width":"height"]=t+"px"}},c._emitCompleteOnItems=function(t,e){function i(){n.dispatchEvent(t+"Complete",null,[e])}function o(){r++,r==s&&i()}var n=this,s=e.length;if(!e||!s)return void i();var r=0;e.forEach(function(e){e.once(t,o)})},c.dispatchEvent=function(t,e,i){var o=e?[e].concat(i):i;if(this.emitEvent(t,o),h)if(this.$element=this.$element||h(this.element),e){var n=h.Event(e);n.type=t,this.$element.trigger(n,i)}else this.$element.trigger(t,i)},c.ignore=function(t){var e=this.getItem(t);e&&(e.isIgnored=!0)},c.unignore=function(t){var e=this.getItem(t);e&&delete e.isIgnored},c.stamp=function(t){t=this._find(t),t&&(this.stamps=this.stamps.concat(t),t.forEach(this.ignore,this))},c.unstamp=function(t){t=this._find(t),t&&t.forEach(function(t){o.removeFrom(this.stamps,t),this.unignore(t)},this)},c._find=function(t){if(t)return"string"==typeof t&&(t=this.element.querySelectorAll(t)),t=o.makeArray(t)},c._manageStamps=function(){this.stamps&&this.stamps.length&&(this._getBoundingRect(),this.stamps.forEach(this._manageStamp,this))},c._getBoundingRect=function(){var t=this.element.getBoundingClientRect(),e=this.size;this._boundingRect={left:t.left+e.paddingLeft+e.borderLeftWidth,top:t.top+e.paddingTop+e.borderTopWidth,right:t.right-(e.paddingRight+e.borderRightWidth),bottom:t.bottom-(e.paddingBottom+e.borderBottomWidth)}},c._manageStamp=d,c._getElementOffset=function(t){var e=t.getBoundingClientRect(),o=this._boundingRect,n=i(t),s={left:e.left-o.left-n.marginLeft,top:e.top-o.top-n.marginTop,right:o.right-e.right-n.marginRight,bottom:o.bottom-e.bottom-n.marginBottom};return s},c.handleEvent=o.handleEvent,c.bindResize=function(){t.addEventListener("resize",this),this.isResizeBound=!0},c.unbindResize=function(){t.removeEventListener("resize",this),this.isResizeBound=!1},c.onresize=function(){this.resize()},o.debounceMethod(s,"onresize",100),c.resize=function(){this.isResizeBound&&this.needsResizeLayout()&&this.layout()},c.needsResizeLayout=function(){var t=i(this.element),e=this.size&&t;return e&&t.innerWidth!==this.size.innerWidth},c.addItems=function(t){var e=this._itemize(t);return e.length&&(this.items=this.items.concat(e)),e},c.appended=function(t){var e=this.addItems(t);e.length&&(this.layoutItems(e,!0),this.reveal(e))},c.prepended=function(t){var e=this._itemize(t);if(e.length){var i=this.items.slice(0);this.items=e.concat(i),this._resetLayout(),this._manageStamps(),this.layoutItems(e,!0),this.reveal(e),this.layoutItems(i)}},c.reveal=function(t){if(this._emitCompleteOnItems("reveal",t),t&&t.length){var e=this.updateStagger();t.forEach(function(t,i){t.stagger(i*e),t.reveal()})}},c.hide=function(t){if(this._emitCompleteOnItems("hide",t),t&&t.length){var e=this.updateStagger();t.forEach(function(t,i){t.stagger(i*e),t.hide()})}},c.revealItemElements=function(t){var e=this.getItems(t);this.reveal(e)},c.hideItemElements=function(t){var e=this.getItems(t);this.hide(e)},c.getItem=function(t){for(var e=0;e<this.items.length;e++){var i=this.items[e];if(i.element==t)return i}},c.getItems=function(t){t=o.makeArray(t);var e=[];return t.forEach(function(t){var i=this.getItem(t);i&&e.push(i)},this),e},c.remove=function(t){var e=this.getItems(t);this._emitCompleteOnItems("remove",e),e&&e.length&&e.forEach(function(t){t.remove(),o.removeFrom(this.items,t)},this)},c.destroy=function(){var t=this.element.style;t.height="",t.position="",t.width="",this.items.forEach(function(t){t.destroy()}),this.unbindResize();var e=this.element.outlayerGUID;delete f[e],delete this.element.outlayerGUID,h&&h.removeData(this.element,this.constructor.namespace)},s.data=function(t){t=o.getQueryElement(t);var e=t&&t.outlayerGUID;return e&&f[e]},s.create=function(t,e){var i=r(s);return i.defaults=o.extend({},s.defaults),o.extend(i.defaults,e),i.compatOptions=o.extend({},s.compatOptions),i.namespace=t,i.data=s.data,i.Item=r(n),o.htmlInit(i,t),h&&h.bridget&&h.bridget(t,i),i};var m={ms:1,s:1e3};return s.Item=n,s}),function(t,e){"function"==typeof define&&define.amd?define("isotope-layout/js/item",["outlayer/outlayer"],e):"object"==typeof module&&module.exports?module.exports=e(require("outlayer")):(t.Isotope=t.Isotope||{},t.Isotope.Item=e(t.Outlayer))}(window,function(t){"use strict";function e(){t.Item.apply(this,arguments)}var i=e.prototype=Object.create(t.Item.prototype),o=i._create;i._create=function(){this.id=this.layout.itemGUID++,o.call(this),this.sortData={}},i.updateSortData=function(){if(!this.isIgnored){this.sortData.id=this.id,this.sortData["original-order"]=this.id,this.sortData.random=Math.random();var t=this.layout.options.getSortData,e=this.layout._sorters;for(var i in t){var o=e[i];this.sortData[i]=o(this.element,this)}}};var n=i.destroy;return i.destroy=function(){n.apply(this,arguments),this.css({display:""})},e}),function(t,e){"function"==typeof define&&define.amd?define("isotope-layout/js/layout-mode",["get-size/get-size","outlayer/outlayer"],e):"object"==typeof module&&module.exports?module.exports=e(require("get-size"),require("outlayer")):(t.Isotope=t.Isotope||{},t.Isotope.LayoutMode=e(t.getSize,t.Outlayer))}(window,function(t,e){"use strict";function i(t){this.isotope=t,t&&(this.options=t.options[this.namespace],this.element=t.element,this.items=t.filteredItems,this.size=t.size)}var o=i.prototype,n=["_resetLayout","_getItemLayoutPosition","_manageStamp","_getContainerSize","_getElementOffset","needsResizeLayout","_getOption"];return n.forEach(function(t){o[t]=function(){return e.prototype[t].apply(this.isotope,arguments)}}),o.needsVerticalResizeLayout=function(){var e=t(this.isotope.element),i=this.isotope.size&&e;return i&&e.innerHeight!=this.isotope.size.innerHeight},o._getMeasurement=function(){this.isotope._getMeasurement.apply(this,arguments)},o.getColumnWidth=function(){this.getSegmentSize("column","Width")},o.getRowHeight=function(){this.getSegmentSize("row","Height")},o.getSegmentSize=function(t,e){var i=t+e,o="outer"+e;if(this._getMeasurement(i,o),!this[i]){var n=this.getFirstItemSize();this[i]=n&&n[o]||this.isotope.size["inner"+e]}},o.getFirstItemSize=function(){var e=this.isotope.filteredItems[0];return e&&e.element&&t(e.element)},o.layout=function(){this.isotope.layout.apply(this.isotope,arguments)},o.getSize=function(){this.isotope.getSize(),this.size=this.isotope.size},i.modes={},i.create=function(t,e){function n(){i.apply(this,arguments)}return n.prototype=Object.create(o),n.prototype.constructor=n,e&&(n.options=e),n.prototype.namespace=t,i.modes[t]=n,n},i}),function(t,e){"function"==typeof define&&define.amd?define("masonry-layout/masonry",["outlayer/outlayer","get-size/get-size"],e):"object"==typeof module&&module.exports?module.exports=e(require("outlayer"),require("get-size")):t.Masonry=e(t.Outlayer,t.getSize)}(window,function(t,e){var i=t.create("masonry");i.compatOptions.fitWidth="isFitWidth";var o=i.prototype;return o._resetLayout=function(){this.getSize(),this._getMeasurement("columnWidth","outerWidth"),this._getMeasurement("gutter","outerWidth"),this.measureColumns(),this.colYs=[];for(var t=0;t<this.cols;t++)this.colYs.push(0);this.maxY=0,this.horizontalColIndex=0},o.measureColumns=function(){if(this.getContainerWidth(),!this.columnWidth){var t=this.items[0],i=t&&t.element;this.columnWidth=i&&e(i).outerWidth||this.containerWidth}var o=this.columnWidth+=this.gutter,n=this.containerWidth+this.gutter,s=n/o,r=o-n%o,a=r&&r<1?"round":"floor";s=Math[a](s),this.cols=Math.max(s,1)},o.getContainerWidth=function(){var t=this._getOption("fitWidth"),i=t?this.element.parentNode:this.element,o=e(i);this.containerWidth=o&&o.innerWidth},o._getItemLayoutPosition=function(t){t.getSize();var e=t.size.outerWidth%this.columnWidth,i=e&&e<1?"round":"ceil",o=Math[i](t.size.outerWidth/this.columnWidth);o=Math.min(o,this.cols);for(var n=this.options.horizontalOrder?"_getHorizontalColPosition":"_getTopColPosition",s=this[n](o,t),r={x:this.columnWidth*s.col,y:s.y},a=s.y+t.size.outerHeight,u=o+s.col,h=s.col;h<u;h++)this.colYs[h]=a;return r},o._getTopColPosition=function(t){var e=this._getTopColGroup(t),i=Math.min.apply(Math,e);return{col:e.indexOf(i),y:i}},o._getTopColGroup=function(t){if(t<2)return this.colYs;for(var e=[],i=this.cols+1-t,o=0;o<i;o++)e[o]=this._getColGroupY(o,t);return e},o._getColGroupY=function(t,e){if(e<2)return this.colYs[t];var i=this.colYs.slice(t,t+e);return Math.max.apply(Math,i)},o._getHorizontalColPosition=function(t,e){var i=this.horizontalColIndex%this.cols,o=t>1&&i+t>this.cols;i=o?0:i;var n=e.size.outerWidth&&e.size.outerHeight;return this.horizontalColIndex=n?i+t:this.horizontalColIndex,{col:i,y:this._getColGroupY(i,t)}},o._manageStamp=function(t){var i=e(t),o=this._getElementOffset(t),n=this._getOption("originLeft"),s=n?o.left:o.right,r=s+i.outerWidth,a=Math.floor(s/this.columnWidth);a=Math.max(0,a);var u=Math.floor(r/this.columnWidth);u-=r%this.columnWidth?0:1,u=Math.min(this.cols-1,u);for(var h=this._getOption("originTop"),d=(h?o.top:o.bottom)+i.outerHeight,l=a;l<=u;l++)this.colYs[l]=Math.max(d,this.colYs[l])},o._getContainerSize=function(){this.maxY=Math.max.apply(Math,this.colYs);var t={height:this.maxY};return this._getOption("fitWidth")&&(t.width=this._getContainerFitWidth()),t},o._getContainerFitWidth=function(){for(var t=0,e=this.cols;--e&&0===this.colYs[e];)t++;return(this.cols-t)*this.columnWidth-this.gutter},o.needsResizeLayout=function(){var t=this.containerWidth;return this.getContainerWidth(),t!=this.containerWidth},i}),function(t,e){"function"==typeof define&&define.amd?define("isotope-layout/js/layout-modes/masonry",["../layout-mode","masonry-layout/masonry"],e):"object"==typeof module&&module.exports?module.exports=e(require("../layout-mode"),require("masonry-layout")):e(t.Isotope.LayoutMode,t.Masonry)}(window,function(t,e){"use strict";var i=t.create("masonry"),o=i.prototype,n={_getElementOffset:!0,layout:!0,_getMeasurement:!0};for(var s in e.prototype)n[s]||(o[s]=e.prototype[s]);var r=o.measureColumns;o.measureColumns=function(){this.items=this.isotope.filteredItems,r.call(this)};var a=o._getOption;return o._getOption=function(t){return"fitWidth"==t?void 0!==this.options.isFitWidth?this.options.isFitWidth:this.options.fitWidth:a.apply(this.isotope,arguments)},i}),function(t,e){"function"==typeof define&&define.amd?define("isotope-layout/js/layout-modes/fit-rows",["../layout-mode"],e):"object"==typeof exports?module.exports=e(require("../layout-mode")):e(t.Isotope.LayoutMode)}(window,function(t){"use strict";var e=t.create("fitRows"),i=e.prototype;return i._resetLayout=function(){this.x=0,this.y=0,this.maxY=0,this._getMeasurement("gutter","outerWidth")},i._getItemLayoutPosition=function(t){t.getSize();var e=t.size.outerWidth+this.gutter,i=this.isotope.size.innerWidth+this.gutter;0!==this.x&&e+this.x>i&&(this.x=0,this.y=this.maxY);var o={x:this.x,y:this.y};return this.maxY=Math.max(this.maxY,this.y+t.size.outerHeight),this.x+=e,o},i._getContainerSize=function(){return{height:this.maxY}},e}),function(t,e){"function"==typeof define&&define.amd?define("isotope-layout/js/layout-modes/vertical",["../layout-mode"],e):"object"==typeof module&&module.exports?module.exports=e(require("../layout-mode")):e(t.Isotope.LayoutMode)}(window,function(t){"use strict";var e=t.create("vertical",{horizontalAlignment:0}),i=e.prototype;return i._resetLayout=function(){this.y=0},i._getItemLayoutPosition=function(t){t.getSize();var e=(this.isotope.size.innerWidth-t.size.outerWidth)*this.options.horizontalAlignment,i=this.y;return this.y+=t.size.outerHeight,{x:e,y:i}},i._getContainerSize=function(){return{height:this.y}},e}),function(t,e){"function"==typeof define&&define.amd?define(["outlayer/outlayer","get-size/get-size","desandro-matches-selector/matches-selector","fizzy-ui-utils/utils","isotope-layout/js/item","isotope-layout/js/layout-mode","isotope-layout/js/layout-modes/masonry","isotope-layout/js/layout-modes/fit-rows","isotope-layout/js/layout-modes/vertical"],function(i,o,n,s,r,a){return e(t,i,o,n,s,r,a)}):"object"==typeof module&&module.exports?module.exports=e(t,require("outlayer"),require("get-size"),require("desandro-matches-selector"),require("fizzy-ui-utils"),require("isotope-layout/js/item"),require("isotope-layout/js/layout-mode"),require("isotope-layout/js/layout-modes/masonry"),require("isotope-layout/js/layout-modes/fit-rows"),require("isotope-layout/js/layout-modes/vertical")):t.Isotope=e(t,t.Outlayer,t.getSize,t.matchesSelector,t.fizzyUIUtils,t.Isotope.Item,t.Isotope.LayoutMode)}(window,function(t,e,i,o,n,s,r){function a(t,e){return function(i,o){for(var n=0;n<t.length;n++){var s=t[n],r=i.sortData[s],a=o.sortData[s];if(r>a||r<a){var u=void 0!==e[s]?e[s]:e,h=u?1:-1;return(r>a?1:-1)*h}}return 0}}var u=t.jQuery,h=String.prototype.trim?function(t){return t.trim()}:function(t){return t.replace(/^\s+|\s+$/g,"")},d=e.create("isotope",{layoutMode:"masonry",isJQueryFiltering:!0,sortAscending:!0});d.Item=s,d.LayoutMode=r;var l=d.prototype;l._create=function(){this.itemGUID=0,this._sorters={},this._getSorters(),e.prototype._create.call(this),this.modes={},this.filteredItems=this.items,this.sortHistory=["original-order"];for(var t in r.modes)this._initLayoutMode(t)},l.reloadItems=function(){this.itemGUID=0,e.prototype.reloadItems.call(this)},l._itemize=function(){for(var t=e.prototype._itemize.apply(this,arguments),i=0;i<t.length;i++){var o=t[i];o.id=this.itemGUID++}return this._updateItemsSortData(t),t},l._initLayoutMode=function(t){var e=r.modes[t],i=this.options[t]||{};this.options[t]=e.options?n.extend(e.options,i):i,this.modes[t]=new e(this)},l.layout=function(){return!this._isLayoutInited&&this._getOption("initLayout")?void this.arrange():void this._layout()},l._layout=function(){var t=this._getIsInstant();this._resetLayout(),this._manageStamps(),this.layoutItems(this.filteredItems,t),this._isLayoutInited=!0},l.arrange=function(t){this.option(t),this._getIsInstant();var e=this._filter(this.items);this.filteredItems=e.matches,this._bindArrangeComplete(),this._isInstant?this._noTransition(this._hideReveal,[e]):this._hideReveal(e),this._sort(),this._layout()},l._init=l.arrange,l._hideReveal=function(t){this.reveal(t.needReveal),this.hide(t.needHide)},l._getIsInstant=function(){var t=this._getOption("layoutInstant"),e=void 0!==t?t:!this._isLayoutInited;return this._isInstant=e,e},l._bindArrangeComplete=function(){function t(){e&&i&&o&&n.dispatchEvent("arrangeComplete",null,[n.filteredItems])}var e,i,o,n=this;this.once("layoutComplete",function(){e=!0,t()}),this.once("hideComplete",function(){i=!0,t()}),this.once("revealComplete",function(){o=!0,t()})},l._filter=function(t){var e=this.options.filter;e=e||"*";for(var i=[],o=[],n=[],s=this._getFilterTest(e),r=0;r<t.length;r++){var a=t[r];if(!a.isIgnored){var u=s(a);u&&i.push(a),u&&a.isHidden?o.push(a):u||a.isHidden||n.push(a)}}return{matches:i,needReveal:o,needHide:n}},l._getFilterTest=function(t){return u&&this.options.isJQueryFiltering?function(e){return u(e.element).is(t);
 }:"function"==typeof t?function(e){return t(e.element)}:function(e){return o(e.element,t)}},l.updateSortData=function(t){var e;t?(t=n.makeArray(t),e=this.getItems(t)):e=this.items,this._getSorters(),this._updateItemsSortData(e)},l._getSorters=function(){var t=this.options.getSortData;for(var e in t){var i=t[e];this._sorters[e]=f(i)}},l._updateItemsSortData=function(t){for(var e=t&&t.length,i=0;e&&i<e;i++){var o=t[i];o.updateSortData()}};var f=function(){function t(t){if("string"!=typeof t)return t;var i=h(t).split(" "),o=i[0],n=o.match(/^\[(.+)\]$/),s=n&&n[1],r=e(s,o),a=d.sortDataParsers[i[1]];return t=a?function(t){return t&&a(r(t))}:function(t){return t&&r(t)}}function e(t,e){return t?function(e){return e.getAttribute(t)}:function(t){var i=t.querySelector(e);return i&&i.textContent}}return t}();d.sortDataParsers={parseInt:function(t){return parseInt(t,10)},parseFloat:function(t){return parseFloat(t)}},l._sort=function(){if(this.options.sortBy){var t=n.makeArray(this.options.sortBy);this._getIsSameSortBy(t)||(this.sortHistory=t.concat(this.sortHistory));var e=a(this.sortHistory,this.options.sortAscending);this.filteredItems.sort(e)}},l._getIsSameSortBy=function(t){for(var e=0;e<t.length;e++)if(t[e]!=this.sortHistory[e])return!1;return!0},l._mode=function(){var t=this.options.layoutMode,e=this.modes[t];if(!e)throw new Error("No layout mode: "+t);return e.options=this.options[t],e},l._resetLayout=function(){e.prototype._resetLayout.call(this),this._mode()._resetLayout()},l._getItemLayoutPosition=function(t){return this._mode()._getItemLayoutPosition(t)},l._manageStamp=function(t){this._mode()._manageStamp(t)},l._getContainerSize=function(){return this._mode()._getContainerSize()},l.needsResizeLayout=function(){return this._mode().needsResizeLayout()},l.appended=function(t){var e=this.addItems(t);if(e.length){var i=this._filterRevealAdded(e);this.filteredItems=this.filteredItems.concat(i)}},l.prepended=function(t){var e=this._itemize(t);if(e.length){this._resetLayout(),this._manageStamps();var i=this._filterRevealAdded(e);this.layoutItems(this.filteredItems),this.filteredItems=i.concat(this.filteredItems),this.items=e.concat(this.items)}},l._filterRevealAdded=function(t){var e=this._filter(t);return this.hide(e.needHide),this.reveal(e.matches),this.layoutItems(e.matches,!0),e.matches},l.insert=function(t){var e=this.addItems(t);if(e.length){var i,o,n=e.length;for(i=0;i<n;i++)o=e[i],this.element.appendChild(o.element);var s=this._filter(e).matches;for(i=0;i<n;i++)e[i].isLayoutInstant=!0;for(this.arrange(),i=0;i<n;i++)delete e[i].isLayoutInstant;this.reveal(s)}};var c=l.remove;return l.remove=function(t){t=n.makeArray(t);var e=this.getItems(t);c.call(this,t);for(var i=e&&e.length,o=0;i&&o<i;o++){var s=e[o];n.removeFrom(this.filteredItems,s)}},l.shuffle=function(){for(var t=0;t<this.items.length;t++){var e=this.items[t];e.sortData.random=Math.random()}this.options.sortBy="random",this._sort(),this._layout()},l._noTransition=function(t,e){var i=this.options.transitionDuration;this.options.transitionDuration=0;var o=t.apply(this,e);return this.options.transitionDuration=i,o},l.getFilteredItemElements=function(){return this.filteredItems.map(function(t){return t.element})},d});
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
-!function (a) { "function" == typeof define && define.amd ? define(["jquery"], a) : "object" == typeof exports ? module.exports = a(require("jquery")) : a(jQuery) }(function (a) { function i() { var b, c, d = { height: f.innerHeight, width: f.innerWidth }; return d.height || (b = e.compatMode, (b || !a.support.boxModel) && (c = "CSS1Compat" === b ? g : e.body, d = { height: c.clientHeight, width: c.clientWidth })), d } function j() { return { top: f.pageYOffset || g.scrollTop || e.body.scrollTop, left: f.pageXOffset || g.scrollLeft || e.body.scrollLeft } } function k() { if (b.length) { var e = 0, f = a.map(b, function (a) { var b = a.data.selector, c = a.$element; return b ? c.find(b) : c }); for (c = c || i(), d = d || j(); e < b.length; e++)if (a.contains(g, f[e][0])) { var h = a(f[e]), k = { height: h[0].offsetHeight, width: h[0].offsetWidth }, l = h.offset(), m = h.data("inview"); if (!d || !c) return; l.top + k.height > d.top && l.top < d.top + c.height && l.left + k.width > d.left && l.left < d.left + c.width ? m || h.data("inview", !0).trigger("inview", [!0]) : m && h.data("inview", !1).trigger("inview", [!1]) } } } var c, d, h, b = [], e = document, f = window, g = e.documentElement; a.event.special.inview = { add: function (c) { b.push({ data: c, $element: a(this), element: this }), !h && b.length && (h = setInterval(k, 250)) }, remove: function (a) { for (var c = 0; c < b.length; c++) { var d = b[c]; if (d.element === this && d.data.guid === a.guid) { b.splice(c, 1); break } } b.length || (clearInterval(h), h = null) } }, a(f).on("scroll resize scrollstop", function () { c = d = null }), !g.addEventListener && g.attachEvent && g.attachEvent("onfocusin", function () { d = null }) });
-
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -6968,54 +6968,4282 @@ var trim = String.prototype.trim ?
     _checkInstance();
 }));
 !function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports?require("jquery"):window.jQuery||window.Zepto)}(function(a){var b,c,d,e,f,g,h="Close",i="BeforeClose",j="AfterClose",k="BeforeAppend",l="MarkupParse",m="Open",n="Change",o="mfp",p="."+o,q="mfp-ready",r="mfp-removing",s="mfp-prevent-close",t=function(){},u=!!window.jQuery,v=a(window),w=function(a,c){b.ev.on(o+a+p,c)},x=function(b,c,d,e){var f=document.createElement("div");return f.className="mfp-"+b,d&&(f.innerHTML=d),e?c&&c.appendChild(f):(f=a(f),c&&f.appendTo(c)),f},y=function(c,d){b.ev.triggerHandler(o+c,d),b.st.callbacks&&(c=c.charAt(0).toLowerCase()+c.slice(1),b.st.callbacks[c]&&b.st.callbacks[c].apply(b,a.isArray(d)?d:[d]))},z=function(c){return c===g&&b.currTemplate.closeBtn||(b.currTemplate.closeBtn=a(b.st.closeMarkup.replace("%title%",b.st.tClose)),g=c),b.currTemplate.closeBtn},A=function(){a.magnificPopup.instance||(b=new t,b.init(),a.magnificPopup.instance=b)},B=function(){var a=document.createElement("p").style,b=["ms","O","Moz","Webkit"];if(void 0!==a.transition)return!0;for(;b.length;)if(b.pop()+"Transition"in a)return!0;return!1};t.prototype={constructor:t,init:function(){var c=navigator.appVersion;b.isLowIE=b.isIE8=document.all&&!document.addEventListener,b.isAndroid=/android/gi.test(c),b.isIOS=/iphone|ipad|ipod/gi.test(c),b.supportsTransition=B(),b.probablyMobile=b.isAndroid||b.isIOS||/(Opera Mini)|Kindle|webOS|BlackBerry|(Opera Mobi)|(Windows Phone)|IEMobile/i.test(navigator.userAgent),d=a(document),b.popupsCache={}},open:function(c){var e;if(c.isObj===!1){b.items=c.items.toArray(),b.index=0;var g,h=c.items;for(e=0;e<h.length;e++)if(g=h[e],g.parsed&&(g=g.el[0]),g===c.el[0]){b.index=e;break}}else b.items=a.isArray(c.items)?c.items:[c.items],b.index=c.index||0;if(b.isOpen)return void b.updateItemHTML();b.types=[],f="",c.mainEl&&c.mainEl.length?b.ev=c.mainEl.eq(0):b.ev=d,c.key?(b.popupsCache[c.key]||(b.popupsCache[c.key]={}),b.currTemplate=b.popupsCache[c.key]):b.currTemplate={},b.st=a.extend(!0,{},a.magnificPopup.defaults,c),b.fixedContentPos="auto"===b.st.fixedContentPos?!b.probablyMobile:b.st.fixedContentPos,b.st.modal&&(b.st.closeOnContentClick=!1,b.st.closeOnBgClick=!1,b.st.showCloseBtn=!1,b.st.enableEscapeKey=!1),b.bgOverlay||(b.bgOverlay=x("bg").on("click"+p,function(){b.close()}),b.wrap=x("wrap").attr("tabindex",-1).on("click"+p,function(a){b._checkIfClose(a.target)&&b.close()}),b.container=x("container",b.wrap)),b.contentContainer=x("content"),b.st.preloader&&(b.preloader=x("preloader",b.container,b.st.tLoading));var i=a.magnificPopup.modules;for(e=0;e<i.length;e++){var j=i[e];j=j.charAt(0).toUpperCase()+j.slice(1),b["init"+j].call(b)}y("BeforeOpen"),b.st.showCloseBtn&&(b.st.closeBtnInside?(w(l,function(a,b,c,d){c.close_replaceWith=z(d.type)}),f+=" mfp-close-btn-in"):b.wrap.append(z())),b.st.alignTop&&(f+=" mfp-align-top"),b.fixedContentPos?b.wrap.css({overflow:b.st.overflowY,overflowX:"hidden",overflowY:b.st.overflowY}):b.wrap.css({top:v.scrollTop(),position:"absolute"}),(b.st.fixedBgPos===!1||"auto"===b.st.fixedBgPos&&!b.fixedContentPos)&&b.bgOverlay.css({height:d.height(),position:"absolute"}),b.st.enableEscapeKey&&d.on("keyup"+p,function(a){27===a.keyCode&&b.close()}),v.on("resize"+p,function(){b.updateSize()}),b.st.closeOnContentClick||(f+=" mfp-auto-cursor"),f&&b.wrap.addClass(f);var k=b.wH=v.height(),n={};if(b.fixedContentPos&&b._hasScrollBar(k)){var o=b._getScrollbarSize();o&&(n.marginRight=o)}b.fixedContentPos&&(b.isIE7?a("body, html").css("overflow","hidden"):n.overflow="hidden");var r=b.st.mainClass;return b.isIE7&&(r+=" mfp-ie7"),r&&b._addClassToMFP(r),b.updateItemHTML(),y("BuildControls"),a("html").css(n),b.bgOverlay.add(b.wrap).prependTo(b.st.prependTo||a(document.body)),b._lastFocusedEl=document.activeElement,setTimeout(function(){b.content?(b._addClassToMFP(q),b._setFocus()):b.bgOverlay.addClass(q),d.on("focusin"+p,b._onFocusIn)},16),b.isOpen=!0,b.updateSize(k),y(m),c},close:function(){b.isOpen&&(y(i),b.isOpen=!1,b.st.removalDelay&&!b.isLowIE&&b.supportsTransition?(b._addClassToMFP(r),setTimeout(function(){b._close()},b.st.removalDelay)):b._close())},_close:function(){y(h);var c=r+" "+q+" ";if(b.bgOverlay.detach(),b.wrap.detach(),b.container.empty(),b.st.mainClass&&(c+=b.st.mainClass+" "),b._removeClassFromMFP(c),b.fixedContentPos){var e={marginRight:""};b.isIE7?a("body, html").css("overflow",""):e.overflow="",a("html").css(e)}d.off("keyup"+p+" focusin"+p),b.ev.off(p),b.wrap.attr("class","mfp-wrap").removeAttr("style"),b.bgOverlay.attr("class","mfp-bg"),b.container.attr("class","mfp-container"),!b.st.showCloseBtn||b.st.closeBtnInside&&b.currTemplate[b.currItem.type]!==!0||b.currTemplate.closeBtn&&b.currTemplate.closeBtn.detach(),b.st.autoFocusLast&&b._lastFocusedEl&&a(b._lastFocusedEl).focus(),b.currItem=null,b.content=null,b.currTemplate=null,b.prevHeight=0,y(j)},updateSize:function(a){if(b.isIOS){var c=document.documentElement.clientWidth/window.innerWidth,d=window.innerHeight*c;b.wrap.css("height",d),b.wH=d}else b.wH=a||v.height();b.fixedContentPos||b.wrap.css("height",b.wH),y("Resize")},updateItemHTML:function(){var c=b.items[b.index];b.contentContainer.detach(),b.content&&b.content.detach(),c.parsed||(c=b.parseEl(b.index));var d=c.type;if(y("BeforeChange",[b.currItem?b.currItem.type:"",d]),b.currItem=c,!b.currTemplate[d]){var f=b.st[d]?b.st[d].markup:!1;y("FirstMarkupParse",f),f?b.currTemplate[d]=a(f):b.currTemplate[d]=!0}e&&e!==c.type&&b.container.removeClass("mfp-"+e+"-holder");var g=b["get"+d.charAt(0).toUpperCase()+d.slice(1)](c,b.currTemplate[d]);b.appendContent(g,d),c.preloaded=!0,y(n,c),e=c.type,b.container.prepend(b.contentContainer),y("AfterChange")},appendContent:function(a,c){b.content=a,a?b.st.showCloseBtn&&b.st.closeBtnInside&&b.currTemplate[c]===!0?b.content.find(".mfp-close").length||b.content.append(z()):b.content=a:b.content="",y(k),b.container.addClass("mfp-"+c+"-holder"),b.contentContainer.append(b.content)},parseEl:function(c){var d,e=b.items[c];if(e.tagName?e={el:a(e)}:(d=e.type,e={data:e,src:e.src}),e.el){for(var f=b.types,g=0;g<f.length;g++)if(e.el.hasClass("mfp-"+f[g])){d=f[g];break}e.src=e.el.attr("data-mfp-src"),e.src||(e.src=e.el.attr("href"))}return e.type=d||b.st.type||"inline",e.index=c,e.parsed=!0,b.items[c]=e,y("ElementParse",e),b.items[c]},addGroup:function(a,c){var d=function(d){d.mfpEl=this,b._openClick(d,a,c)};c||(c={});var e="click.magnificPopup";c.mainEl=a,c.items?(c.isObj=!0,a.off(e).on(e,d)):(c.isObj=!1,c.delegate?a.off(e).on(e,c.delegate,d):(c.items=a,a.off(e).on(e,d)))},_openClick:function(c,d,e){var f=void 0!==e.midClick?e.midClick:a.magnificPopup.defaults.midClick;if(f||!(2===c.which||c.ctrlKey||c.metaKey||c.altKey||c.shiftKey)){var g=void 0!==e.disableOn?e.disableOn:a.magnificPopup.defaults.disableOn;if(g)if(a.isFunction(g)){if(!g.call(b))return!0}else if(v.width()<g)return!0;c.type&&(c.preventDefault(),b.isOpen&&c.stopPropagation()),e.el=a(c.mfpEl),e.delegate&&(e.items=d.find(e.delegate)),b.open(e)}},updateStatus:function(a,d){if(b.preloader){c!==a&&b.container.removeClass("mfp-s-"+c),d||"loading"!==a||(d=b.st.tLoading);var e={status:a,text:d};y("UpdateStatus",e),a=e.status,d=e.text,b.preloader.html(d),b.preloader.find("a").on("click",function(a){a.stopImmediatePropagation()}),b.container.addClass("mfp-s-"+a),c=a}},_checkIfClose:function(c){if(!a(c).hasClass(s)){var d=b.st.closeOnContentClick,e=b.st.closeOnBgClick;if(d&&e)return!0;if(!b.content||a(c).hasClass("mfp-close")||b.preloader&&c===b.preloader[0])return!0;if(c===b.content[0]||a.contains(b.content[0],c)){if(d)return!0}else if(e&&a.contains(document,c))return!0;return!1}},_addClassToMFP:function(a){b.bgOverlay.addClass(a),b.wrap.addClass(a)},_removeClassFromMFP:function(a){this.bgOverlay.removeClass(a),b.wrap.removeClass(a)},_hasScrollBar:function(a){return(b.isIE7?d.height():document.body.scrollHeight)>(a||v.height())},_setFocus:function(){(b.st.focus?b.content.find(b.st.focus).eq(0):b.wrap).focus()},_onFocusIn:function(c){return c.target===b.wrap[0]||a.contains(b.wrap[0],c.target)?void 0:(b._setFocus(),!1)},_parseMarkup:function(b,c,d){var e;d.data&&(c=a.extend(d.data,c)),y(l,[b,c,d]),a.each(c,function(c,d){if(void 0===d||d===!1)return!0;if(e=c.split("_"),e.length>1){var f=b.find(p+"-"+e[0]);if(f.length>0){var g=e[1];"replaceWith"===g?f[0]!==d[0]&&f.replaceWith(d):"img"===g?f.is("img")?f.attr("src",d):f.replaceWith(a("<img>").attr("src",d).attr("class",f.attr("class"))):f.attr(e[1],d)}}else b.find(p+"-"+c).html(d)})},_getScrollbarSize:function(){if(void 0===b.scrollbarSize){var a=document.createElement("div");a.style.cssText="width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;",document.body.appendChild(a),b.scrollbarSize=a.offsetWidth-a.clientWidth,document.body.removeChild(a)}return b.scrollbarSize}},a.magnificPopup={instance:null,proto:t.prototype,modules:[],open:function(b,c){return A(),b=b?a.extend(!0,{},b):{},b.isObj=!0,b.index=c||0,this.instance.open(b)},close:function(){return a.magnificPopup.instance&&a.magnificPopup.instance.close()},registerModule:function(b,c){c.options&&(a.magnificPopup.defaults[b]=c.options),a.extend(this.proto,c.proto),this.modules.push(b)},defaults:{disableOn:0,key:null,midClick:!1,mainClass:"",preloader:!0,focus:"",closeOnContentClick:!1,closeOnBgClick:!0,closeBtnInside:!0,showCloseBtn:!0,enableEscapeKey:!0,modal:!1,alignTop:!1,removalDelay:0,prependTo:null,fixedContentPos:"auto",fixedBgPos:"auto",overflowY:"auto",closeMarkup:'<button title="%title%" type="button" class="mfp-close">&#215;</button>',tClose:"Close (Esc)",tLoading:"Loading...",autoFocusLast:!0}},a.fn.magnificPopup=function(c){A();var d=a(this);if("string"==typeof c)if("open"===c){var e,f=u?d.data("magnificPopup"):d[0].magnificPopup,g=parseInt(arguments[1],10)||0;f.items?e=f.items[g]:(e=d,f.delegate&&(e=e.find(f.delegate)),e=e.eq(g)),b._openClick({mfpEl:e},d,f)}else b.isOpen&&b[c].apply(b,Array.prototype.slice.call(arguments,1));else c=a.extend(!0,{},c),u?d.data("magnificPopup",c):d[0].magnificPopup=c,b.addGroup(d,c);return d};var C,D,E,F="inline",G=function(){E&&(D.after(E.addClass(C)).detach(),E=null)};a.magnificPopup.registerModule(F,{options:{hiddenClass:"hide",markup:"",tNotFound:"Content not found"},proto:{initInline:function(){b.types.push(F),w(h+"."+F,function(){G()})},getInline:function(c,d){if(G(),c.src){var e=b.st.inline,f=a(c.src);if(f.length){var g=f[0].parentNode;g&&g.tagName&&(D||(C=e.hiddenClass,D=x(C),C="mfp-"+C),E=f.after(D).detach().removeClass(C)),b.updateStatus("ready")}else b.updateStatus("error",e.tNotFound),f=a("<div>");return c.inlineElement=f,f}return b.updateStatus("ready"),b._parseMarkup(d,{},c),d}}});var H,I="ajax",J=function(){H&&a(document.body).removeClass(H)},K=function(){J(),b.req&&b.req.abort()};a.magnificPopup.registerModule(I,{options:{settings:null,cursor:"mfp-ajax-cur",tError:'<a href="%url%">The content</a> could not be loaded.'},proto:{initAjax:function(){b.types.push(I),H=b.st.ajax.cursor,w(h+"."+I,K),w("BeforeChange."+I,K)},getAjax:function(c){H&&a(document.body).addClass(H),b.updateStatus("loading");var d=a.extend({url:c.src,success:function(d,e,f){var g={data:d,xhr:f};y("ParseAjax",g),b.appendContent(a(g.data),I),c.finished=!0,J(),b._setFocus(),setTimeout(function(){b.wrap.addClass(q)},16),b.updateStatus("ready"),y("AjaxContentAdded")},error:function(){J(),c.finished=c.loadError=!0,b.updateStatus("error",b.st.ajax.tError.replace("%url%",c.src))}},b.st.ajax.settings);return b.req=a.ajax(d),""}}});var L,M=function(c){if(c.data&&void 0!==c.data.title)return c.data.title;var d=b.st.image.titleSrc;if(d){if(a.isFunction(d))return d.call(b,c);if(c.el)return c.el.attr(d)||""}return""};a.magnificPopup.registerModule("image",{options:{markup:'<div class="mfp-figure"><div class="mfp-close"></div><figure><div class="mfp-img"></div><figcaption><div class="mfp-bottom-bar"><div class="mfp-title"></div><div class="mfp-counter"></div></div></figcaption></figure></div>',cursor:"mfp-zoom-out-cur",titleSrc:"title",verticalFit:!0,tError:'<a href="%url%">The image</a> could not be loaded.'},proto:{initImage:function(){var c=b.st.image,d=".image";b.types.push("image"),w(m+d,function(){"image"===b.currItem.type&&c.cursor&&a(document.body).addClass(c.cursor)}),w(h+d,function(){c.cursor&&a(document.body).removeClass(c.cursor),v.off("resize"+p)}),w("Resize"+d,b.resizeImage),b.isLowIE&&w("AfterChange",b.resizeImage)},resizeImage:function(){var a=b.currItem;if(a&&a.img&&b.st.image.verticalFit){var c=0;b.isLowIE&&(c=parseInt(a.img.css("padding-top"),10)+parseInt(a.img.css("padding-bottom"),10)),a.img.css("max-height",b.wH-c)}},_onImageHasSize:function(a){a.img&&(a.hasSize=!0,L&&clearInterval(L),a.isCheckingImgSize=!1,y("ImageHasSize",a),a.imgHidden&&(b.content&&b.content.removeClass("mfp-loading"),a.imgHidden=!1))},findImageSize:function(a){var c=0,d=a.img[0],e=function(f){L&&clearInterval(L),L=setInterval(function(){return d.naturalWidth>0?void b._onImageHasSize(a):(c>200&&clearInterval(L),c++,void(3===c?e(10):40===c?e(50):100===c&&e(500)))},f)};e(1)},getImage:function(c,d){var e=0,f=function(){c&&(c.img[0].complete?(c.img.off(".mfploader"),c===b.currItem&&(b._onImageHasSize(c),b.updateStatus("ready")),c.hasSize=!0,c.loaded=!0,y("ImageLoadComplete")):(e++,200>e?setTimeout(f,100):g()))},g=function(){c&&(c.img.off(".mfploader"),c===b.currItem&&(b._onImageHasSize(c),b.updateStatus("error",h.tError.replace("%url%",c.src))),c.hasSize=!0,c.loaded=!0,c.loadError=!0)},h=b.st.image,i=d.find(".mfp-img");if(i.length){var j=document.createElement("img");j.className="mfp-img",c.el&&c.el.find("img").length&&(j.alt=c.el.find("img").attr("alt")),c.img=a(j).on("load.mfploader",f).on("error.mfploader",g),j.src=c.src,i.is("img")&&(c.img=c.img.clone()),j=c.img[0],j.naturalWidth>0?c.hasSize=!0:j.width||(c.hasSize=!1)}return b._parseMarkup(d,{title:M(c),img_replaceWith:c.img},c),b.resizeImage(),c.hasSize?(L&&clearInterval(L),c.loadError?(d.addClass("mfp-loading"),b.updateStatus("error",h.tError.replace("%url%",c.src))):(d.removeClass("mfp-loading"),b.updateStatus("ready")),d):(b.updateStatus("loading"),c.loading=!0,c.hasSize||(c.imgHidden=!0,d.addClass("mfp-loading"),b.findImageSize(c)),d)}}});var N,O=function(){return void 0===N&&(N=void 0!==document.createElement("p").style.MozTransform),N};a.magnificPopup.registerModule("zoom",{options:{enabled:!1,easing:"ease-in-out",duration:300,opener:function(a){return a.is("img")?a:a.find("img")}},proto:{initZoom:function(){var a,c=b.st.zoom,d=".zoom";if(c.enabled&&b.supportsTransition){var e,f,g=c.duration,j=function(a){var b=a.clone().removeAttr("style").removeAttr("class").addClass("mfp-animated-image"),d="all "+c.duration/1e3+"s "+c.easing,e={position:"fixed",zIndex:9999,left:0,top:0,"-webkit-backface-visibility":"hidden"},f="transition";return e["-webkit-"+f]=e["-moz-"+f]=e["-o-"+f]=e[f]=d,b.css(e),b},k=function(){b.content.css("visibility","visible")};w("BuildControls"+d,function(){if(b._allowZoom()){if(clearTimeout(e),b.content.css("visibility","hidden"),a=b._getItemToZoom(),!a)return void k();f=j(a),f.css(b._getOffset()),b.wrap.append(f),e=setTimeout(function(){f.css(b._getOffset(!0)),e=setTimeout(function(){k(),setTimeout(function(){f.remove(),a=f=null,y("ZoomAnimationEnded")},16)},g)},16)}}),w(i+d,function(){if(b._allowZoom()){if(clearTimeout(e),b.st.removalDelay=g,!a){if(a=b._getItemToZoom(),!a)return;f=j(a)}f.css(b._getOffset(!0)),b.wrap.append(f),b.content.css("visibility","hidden"),setTimeout(function(){f.css(b._getOffset())},16)}}),w(h+d,function(){b._allowZoom()&&(k(),f&&f.remove(),a=null)})}},_allowZoom:function(){return"image"===b.currItem.type},_getItemToZoom:function(){return b.currItem.hasSize?b.currItem.img:!1},_getOffset:function(c){var d;d=c?b.currItem.img:b.st.zoom.opener(b.currItem.el||b.currItem);var e=d.offset(),f=parseInt(d.css("padding-top"),10),g=parseInt(d.css("padding-bottom"),10);e.top-=a(window).scrollTop()-f;var h={width:d.width(),height:(u?d.innerHeight():d[0].offsetHeight)-g-f};return O()?h["-moz-transform"]=h.transform="translate("+e.left+"px,"+e.top+"px)":(h.left=e.left,h.top=e.top),h}}});var P="iframe",Q="//about:blank",R=function(a){if(b.currTemplate[P]){var c=b.currTemplate[P].find("iframe");c.length&&(a||(c[0].src=Q),b.isIE8&&c.css("display",a?"block":"none"))}};a.magnificPopup.registerModule(P,{options:{markup:'<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe></div>',srcAction:"iframe_src",patterns:{youtube:{index:"youtube.com",id:"v=",src:"//www.youtube.com/embed/%id%?autoplay=1"},vimeo:{index:"vimeo.com/",id:"/",src:"//player.vimeo.com/video/%id%?autoplay=1"},gmaps:{index:"//maps.google.",src:"%id%&output=embed"}}},proto:{initIframe:function(){b.types.push(P),w("BeforeChange",function(a,b,c){b!==c&&(b===P?R():c===P&&R(!0))}),w(h+"."+P,function(){R()})},getIframe:function(c,d){var e=c.src,f=b.st.iframe;a.each(f.patterns,function(){return e.indexOf(this.index)>-1?(this.id&&(e="string"==typeof this.id?e.substr(e.lastIndexOf(this.id)+this.id.length,e.length):this.id.call(this,e)),e=this.src.replace("%id%",e),!1):void 0});var g={};return f.srcAction&&(g[f.srcAction]=e),b._parseMarkup(d,g,c),b.updateStatus("ready"),d}}});var S=function(a){var c=b.items.length;return a>c-1?a-c:0>a?c+a:a},T=function(a,b,c){return a.replace(/%curr%/gi,b+1).replace(/%total%/gi,c)};a.magnificPopup.registerModule("gallery",{options:{enabled:!1,arrowMarkup:'<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',preload:[0,2],navigateByImgClick:!0,arrows:!0,tPrev:"Previous (Left arrow key)",tNext:"Next (Right arrow key)",tCounter:"%curr% of %total%"},proto:{initGallery:function(){var c=b.st.gallery,e=".mfp-gallery";return b.direction=!0,c&&c.enabled?(f+=" mfp-gallery",w(m+e,function(){c.navigateByImgClick&&b.wrap.on("click"+e,".mfp-img",function(){return b.items.length>1?(b.next(),!1):void 0}),d.on("keydown"+e,function(a){37===a.keyCode?b.prev():39===a.keyCode&&b.next()})}),w("UpdateStatus"+e,function(a,c){c.text&&(c.text=T(c.text,b.currItem.index,b.items.length))}),w(l+e,function(a,d,e,f){var g=b.items.length;e.counter=g>1?T(c.tCounter,f.index,g):""}),w("BuildControls"+e,function(){if(b.items.length>1&&c.arrows&&!b.arrowLeft){var d=c.arrowMarkup,e=b.arrowLeft=a(d.replace(/%title%/gi,c.tPrev).replace(/%dir%/gi,"left")).addClass(s),f=b.arrowRight=a(d.replace(/%title%/gi,c.tNext).replace(/%dir%/gi,"right")).addClass(s);e.click(function(){b.prev()}),f.click(function(){b.next()}),b.container.append(e.add(f))}}),w(n+e,function(){b._preloadTimeout&&clearTimeout(b._preloadTimeout),b._preloadTimeout=setTimeout(function(){b.preloadNearbyImages(),b._preloadTimeout=null},16)}),void w(h+e,function(){d.off(e),b.wrap.off("click"+e),b.arrowRight=b.arrowLeft=null})):!1},next:function(){b.direction=!0,b.index=S(b.index+1),b.updateItemHTML()},prev:function(){b.direction=!1,b.index=S(b.index-1),b.updateItemHTML()},goTo:function(a){b.direction=a>=b.index,b.index=a,b.updateItemHTML()},preloadNearbyImages:function(){var a,c=b.st.gallery.preload,d=Math.min(c[0],b.items.length),e=Math.min(c[1],b.items.length);for(a=1;a<=(b.direction?e:d);a++)b._preloadItem(b.index+a);for(a=1;a<=(b.direction?d:e);a++)b._preloadItem(b.index-a)},_preloadItem:function(c){if(c=S(c),!b.items[c].preloaded){var d=b.items[c];d.parsed||(d=b.parseEl(c)),y("LazyLoad",d),"image"===d.type&&(d.img=a('<img class="mfp-img" />').on("load.mfploader",function(){d.hasSize=!0}).on("error.mfploader",function(){d.hasSize=!0,d.loadError=!0,y("LazyLoadError",d)}).attr("src",d.src)),d.preloaded=!0}}}});var U="retina";a.magnificPopup.registerModule(U,{options:{replaceSrc:function(a){return a.src.replace(/\.\w+$/,function(a){return"@2x"+a})},ratio:1},proto:{initRetina:function(){if(window.devicePixelRatio>1){var a=b.st.retina,c=a.ratio;c=isNaN(c)?c():c,c>1&&(w("ImageHasSize."+U,function(a,b){b.img.css({"max-width":b.img[0].naturalWidth/c,width:"100%"})}),w("ElementParse."+U,function(b,d){d.src=a.replaceSrc(d,c)}))}}}}),A()});
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
+/**
+ * tooltipster http://iamceege.github.io/tooltipster/
+ * A rockin' custom tooltip jQuery plugin
+ * Developed by Caleb Jacob and Louis Ameline
+ * MIT license
+ */
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module unless amdModuleId is set
+    define(["jquery"], function (a0) {
+      return (factory(a0));
+    });
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory(require("jquery"));
+  } else {
+    factory(jQuery);
+  }
+}(this, function ($) {
 
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
+// This file will be UMDified by a build task.
+
+var defaults = {
+		animation: 'fade',
+		animationDuration: 350,
+		content: null,
+		contentAsHTML: false,
+		contentCloning: false,
+		debug: true,
+		delay: 300,
+		delayTouch: [300, 500],
+		functionInit: null,
+		functionBefore: null,
+		functionReady: null,
+		functionAfter: null,
+		functionFormat: null,
+		IEmin: 6,
+		interactive: false,
+		multiple: false,
+		// will default to document.body, or must be an element positioned at (0, 0)
+		// in the document, typically like the very top views of an app.
+		parent: null,
+		plugins: ['sideTip'],
+		repositionOnScroll: false,
+		restoration: 'none',
+		selfDestruction: true,
+		theme: [],
+		timer: 0,
+		trackerInterval: 500,
+		trackOrigin: false,
+		trackTooltip: false,
+		trigger: 'hover',
+		triggerClose: {
+			click: false,
+			mouseleave: false,
+			originClick: false,
+			scroll: false,
+			tap: false,
+			touchleave: false
+		},
+		triggerOpen: {
+			click: false,
+			mouseenter: false,
+			tap: false,
+			touchstart: false
+		},
+		updateAnimation: 'rotate',
+		zIndex: 9999999
+	},
+	// we'll avoid using the 'window' global as a good practice but npm's
+	// jquery@<2.1.0 package actually requires a 'window' global, so not sure
+	// it's useful at all
+	win = (typeof window != 'undefined') ? window : null,
+	// env will be proxied by the core for plugins to have access its properties
+	env = {
+		// detect if this device can trigger touch events. Better have a false
+		// positive (unused listeners, that's ok) than a false negative.
+		// https://github.com/Modernizr/Modernizr/blob/master/feature-detects/touchevents.js
+		// http://stackoverflow.com/questions/4817029/whats-the-best-way-to-detect-a-touch-screen-device-using-javascript
+		hasTouchCapability: !!(
+			win
+			&&	(	'ontouchstart' in win
+				||	(win.DocumentTouch && win.document instanceof win.DocumentTouch)
+				||	win.navigator.maxTouchPoints
+			)
+		),
+		hasTransitions: transitionSupport(),
+		IE: false,
+		// don't set manually, it will be updated by a build task after the manifest
+		semVer: '4.2.6',
+		window: win
+	},
+	core = function() {
+		
+		// core variables
+		
+		// the core emitters
+		this.__$emitterPrivate = $({});
+		this.__$emitterPublic = $({});
+		this.__instancesLatestArr = [];
+		// collects plugin constructors
+		this.__plugins = {};
+		// proxy env variables for plugins who might use them
+		this._env = env;
+	};
+
+// core methods
+core.prototype = {
+	
+	/**
+	 * A function to proxy the public methods of an object onto another
+	 *
+	 * @param {object} constructor The constructor to bridge
+	 * @param {object} obj The object that will get new methods (an instance or the core)
+	 * @param {string} pluginName A plugin name for the console log message
+	 * @return {core}
+	 * @private
+	 */
+	__bridge: function(constructor, obj, pluginName) {
+		
+		// if it's not already bridged
+		if (!obj[pluginName]) {
+			
+			var fn = function() {};
+			fn.prototype = constructor;
+			
+			var pluginInstance = new fn();
+			
+			// the _init method has to exist in instance constructors but might be missing
+			// in core constructors
+			if (pluginInstance.__init) {
+				pluginInstance.__init(obj);
 			}
+			
+			$.each(constructor, function(methodName, fn) {
+				
+				// don't proxy "private" methods, only "protected" and public ones
+				if (methodName.indexOf('__') != 0) {
+					
+					// if the method does not exist yet
+					if (!obj[methodName]) {
+						
+						obj[methodName] = function() {
+							return pluginInstance[methodName].apply(pluginInstance, Array.prototype.slice.apply(arguments));
+						};
+						
+						// remember to which plugin this method corresponds (several plugins may
+						// have methods of the same name, we need to be sure)
+						obj[methodName].bridged = pluginInstance;
+					}
+					else if (defaults.debug) {
+						
+						console.log('The '+ methodName +' method of the '+ pluginName
+							+' plugin conflicts with another plugin or native methods');
+					}
+				}
+			});
+			
+			obj[pluginName] = pluginInstance;
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * For mockup in Node env if need be, for testing purposes
+	 *
+	 * @return {core}
+	 * @private
+	 */
+	__setWindow: function(window) {
+		env.window = window;
+		return this;
+	},
+	
+	/**
+	 * Returns a ruler, a tool to help measure the size of a tooltip under
+	 * various settings. Meant for plugins
+	 * 
+	 * @see Ruler
+	 * @return {object} A Ruler instance
+	 * @protected
+	 */
+	_getRuler: function($tooltip) {
+		return new Ruler($tooltip);
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @return {core}
+	 * @protected
+	 */
+	_off: function() {
+		this.__$emitterPrivate.off.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @return {core}
+	 * @protected
+	 */
+	_on: function() {
+		this.__$emitterPrivate.on.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @return {core}
+	 * @protected
+	 */
+	_one: function() {
+		this.__$emitterPrivate.one.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * Returns (getter) or adds (setter) a plugin
+	 *
+	 * @param {string|object} plugin Provide a string (in the full form
+	 * "namespace.name") to use as as getter, an object to use as a setter
+	 * @return {object|core}
+	 * @protected
+	 */
+	_plugin: function(plugin) {
+		
+		var self = this;
+		
+		// getter
+		if (typeof plugin == 'string') {
+			
+			var pluginName = plugin,
+				p = null;
+			
+			// if the namespace is provided, it's easy to search
+			if (pluginName.indexOf('.') > 0) {
+				p = self.__plugins[pluginName];
+			}
+			// otherwise, return the first name that matches
+			else {
+				$.each(self.__plugins, function(i, plugin) {
+					
+					if (plugin.name.substring(plugin.name.length - pluginName.length - 1) == '.'+ pluginName) {
+						p = plugin;
+						return false;
+					}
+				});
+			}
+			
+			return p;
+		}
+		// setter
+		else {
+			
+			// force namespaces
+			if (plugin.name.indexOf('.') < 0) {
+				throw new Error('Plugins must be namespaced');
+			}
+			
+			self.__plugins[plugin.name] = plugin;
+			
+			// if the plugin has core features
+			if (plugin.core) {
+				
+				// bridge non-private methods onto the core to allow new core methods
+				self.__bridge(plugin.core, self, plugin.name);
+			}
+			
+			return this;
+		}
+	},
+	
+	/**
+	 * Trigger events on the core emitters
+	 * 
+	 * @returns {core}
+	 * @protected
+	 */
+	_trigger: function() {
+		
+		var args = Array.prototype.slice.apply(arguments);
+		
+		if (typeof args[0] == 'string') {
+			args[0] = { type: args[0] };
+		}
+		
+		// note: the order of emitters matters
+		this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate, args);
+		this.__$emitterPublic.trigger.apply(this.__$emitterPublic, args);
+		
+		return this;
+	},
+	
+	/**
+	 * Returns instances of all tooltips in the page or an a given element
+	 *
+	 * @param {string|HTML object collection} selector optional Use this
+	 * parameter to restrict the set of objects that will be inspected
+	 * for the retrieval of instances. By default, all instances in the
+	 * page are returned.
+	 * @return {array} An array of instance objects
+	 * @public
+	 */
+	instances: function(selector) {
+		
+		var instances = [],
+			sel = selector || '.tooltipstered';
+		
+		$(sel).each(function() {
+			
+			var $this = $(this),
+				ns = $this.data('tooltipster-ns');
+			
+			if (ns) {
+				
+				$.each(ns, function(i, namespace) {
+					instances.push($this.data(namespace));
+				});
+			}
+		});
+		
+		return instances;
+	},
+	
+	/**
+	 * Returns the Tooltipster objects generated by the last initializing call
+	 *
+	 * @return {array} An array of instance objects
+	 * @public
+	 */
+	instancesLatest: function() {
+		return this.__instancesLatestArr;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_off() instead)
+	 *
+	 * @return {core}
+	 * @public
+	 */
+	off: function() {
+		this.__$emitterPublic.off.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_on() instead)
+	 *
+	 * @return {core}
+	 * @public
+	 */
+	on: function() {
+		this.__$emitterPublic.on.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_one() instead)
+	 * 
+	 * @return {core}
+	 * @public
+	 */
+	one: function() {
+		this.__$emitterPublic.one.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * Returns all HTML elements which have one or more tooltips
+	 *
+	 * @param {string} selector optional Use this to restrict the results
+	 * to the descendants of an element
+	 * @return {array} An array of HTML elements
+	 * @public
+	 */
+	origins: function(selector) {
+		
+		var sel = selector ?
+			selector +' ' :
+			'';
+		
+		return $(sel +'.tooltipstered').toArray();
+	},
+	
+	/**
+	 * Change default options for all future instances
+	 *
+	 * @param {object} d The options that should be made defaults
+	 * @return {core}
+	 * @public
+	 */
+	setDefaults: function(d) {
+		$.extend(defaults, d);
+		return this;
+	},
+	
+	/**
+	 * For users to trigger their handlers on the public emitter
+	 * 
+	 * @returns {core}
+	 * @public
+	 */
+	triggerHandler: function() {
+		this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	}
+};
 
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0)'
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
+// $.tooltipster will be used to call core methods
+$.tooltipster = new core();
+
+// the Tooltipster instance class (mind the capital T)
+$.Tooltipster = function(element, options) {
+	
+	// list of instance variables
+	
+	// stack of custom callbacks provided as parameters to API methods
+	this.__callbacks = {
+		close: [],
+		open: []
+	};
+	// the schedule time of DOM removal
+	this.__closingTime;
+	// this will be the user content shown in the tooltip. A capital "C" is used
+	// because there is also a method called content()
+	this.__Content;
+	// for the size tracker
+	this.__contentBcr;
+	// to disable the tooltip after destruction
+	this.__destroyed = false;
+	// we can't emit directly on the instance because if a method with the same
+	// name as the event exists, it will be called by jQuery. Se we use a plain
+	// object as emitter. This emitter is for internal use by plugins,
+	// if needed.
+	this.__$emitterPrivate = $({});
+	// this emitter is for the user to listen to events without risking to mess
+	// with our internal listeners
+	this.__$emitterPublic = $({});
+	this.__enabled = true;
+	// the reference to the gc interval
+	this.__garbageCollector;
+	// various position and size data recomputed before each repositioning
+	this.__Geometry;
+	// the tooltip position, saved after each repositioning by a plugin
+	this.__lastPosition;
+	// a unique namespace per instance
+	this.__namespace = 'tooltipster-'+ Math.round(Math.random()*1000000);
+	this.__options;
+	// will be used to support origins in scrollable areas
+	this.__$originParents;
+	this.__pointerIsOverOrigin = false;
+	// to remove themes if needed
+	this.__previousThemes = [];
+	// the state can be either: appearing, stable, disappearing, closed
+	this.__state = 'closed';
+	// timeout references
+	this.__timeouts = {
+		close: [],
+		open: null
+	};
+	// store touch events to be able to detect emulated mouse events
+	this.__touchEvents = [];
+	// the reference to the tracker interval
+	this.__tracker = null;
+	// the element to which this tooltip is associated
+	this._$origin;
+	// this will be the tooltip element (jQuery wrapped HTML element).
+	// It's the job of a plugin to create it and append it to the DOM
+	this._$tooltip;
+	
+	// launch
+	this.__init(element, options);
+};
+
+$.Tooltipster.prototype = {
+	
+	/**
+	 * @param origin
+	 * @param options
+	 * @private
+	 */
+	__init: function(origin, options) {
+		
+		var self = this;
+		
+		self._$origin = $(origin);
+		self.__options = $.extend(true, {}, defaults, options);
+		
+		// some options may need to be reformatted
+		self.__optionsFormat();
+		
+		// don't run on old IE if asked no to
+		if (	!env.IE
+			||	env.IE >= self.__options.IEmin
+		) {
+			
+			// note: the content is null (empty) by default and can stay that
+			// way if the plugin remains initialized but not fed any content. The
+			// tooltip will just not appear.
+			
+			// let's save the initial value of the title attribute for later
+			// restoration if need be.
+			var initialTitle = null;
+			
+			// it will already have been saved in case of multiple tooltips
+			if (self._$origin.data('tooltipster-initialTitle') === undefined) {
+				
+				initialTitle = self._$origin.attr('title');
+				
+				// we do not want initialTitle to be "undefined" because
+				// of how jQuery's .data() method works
+				if (initialTitle === undefined) initialTitle = null;
+				
+				self._$origin.data('tooltipster-initialTitle', initialTitle);
+			}
+			
+			// If content is provided in the options, it has precedence over the
+			// title attribute.
+			// Note: an empty string is considered content, only 'null' represents
+			// the absence of content.
+			// Also, an existing title="" attribute will result in an empty string
+			// content
+			if (self.__options.content !== null) {
+				self.__contentSet(self.__options.content);
+			}
+			else {
+				
+				var selector = self._$origin.attr('data-tooltip-content'),
+					$el;
+				
+				if (selector){
+					$el = $(selector);
+				}
+				
+				if ($el && $el[0]) {
+					self.__contentSet($el.first());
+				}
+				else {
+					self.__contentSet(initialTitle);
+				}
+			}
+			
+			self._$origin
+				// strip the title off of the element to prevent the default tooltips
+				// from popping up
+				.removeAttr('title')
+				// to be able to find all instances on the page later (upon window
+				// events in particular)
+				.addClass('tooltipstered');
+			
+			// set listeners on the origin
+			self.__prepareOrigin();
+			
+			// set the garbage collector
+			self.__prepareGC();
+			
+			// init plugins
+			$.each(self.__options.plugins, function(i, pluginName) {
+				self._plug(pluginName);
+			});
+			
+			// to detect swiping
+			if (env.hasTouchCapability) {
+				$(env.window.document.body).on('touchmove.'+ self.__namespace +'-triggerOpen', function(event) {
+					self._touchRecordEvent(event);
+				});
+			}
+			
+			self
+				// prepare the tooltip when it gets created. This event must
+				// be fired by a plugin
+				._on('created', function() {
+					self.__prepareTooltip();
+				})
+				// save position information when it's sent by a plugin
+				._on('repositioned', function(e) {
+					self.__lastPosition = e.position;
+				});
+		}
+		else {
+			self.__options.disabled = true;
+		}
+	},
+	
+	/**
+	 * Insert the content into the appropriate HTML element of the tooltip
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__contentInsert: function() {
+		
+		var self = this,
+			$el = self._$tooltip.find('.tooltipster-content'),
+			formattedContent = self.__Content,
+			format = function(content) {
+				formattedContent = content;
+			};
+		
+		self._trigger({
+			type: 'format',
+			content: self.__Content,
+			format: format
+		});
+		
+		if (self.__options.functionFormat) {
+			
+			formattedContent = self.__options.functionFormat.call(
+				self,
+				self,
+				{ origin: self._$origin[0] },
+				self.__Content
+			);
+		}
+		
+		if (typeof formattedContent === 'string' && !self.__options.contentAsHTML) {
+			$el.text(formattedContent);
+		}
+		else {
+			$el
+				.empty()
+				.append(formattedContent);
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Save the content, cloning it beforehand if need be
+	 * 
+	 * @param content
+	 * @returns {self}
+	 * @private
+	 */
+	__contentSet: function(content) {
+		
+		// clone if asked. Cloning the object makes sure that each instance has its
+		// own version of the content (in case a same object were provided for several
+		// instances)
+		// reminder: typeof null === object
+		if (content instanceof $ && this.__options.contentCloning) {
+			content = content.clone(true);
+		}
+		
+		this.__Content = content;
+		
+		this._trigger({
+			type: 'updated',
+			content: content
+		});
+		
+		return this;
+	},
+	
+	/**
+	 * Error message about a method call made after destruction
+	 * 
+	 * @private
+	 */
+	__destroyError: function() {
+		throw new Error('This tooltip has been destroyed and cannot execute your method call.');
+	},
+	
+	/**
+	 * Gather all information about dimensions and available space,
+	 * called before every repositioning
+	 * 
+	 * @private
+	 * @returns {object}
+	 */
+	__geometry: function() {
+		
+		var	self = this,
+			$target = self._$origin,
+			originIsArea = self._$origin.is('area');
+		
+		// if this._$origin is a map area, the target we'll need
+		// the dimensions of is actually the image using the map,
+		// not the area itself
+		if (originIsArea) {
+			
+			var mapName = self._$origin.parent().attr('name');
+			
+			$target = $('img[usemap="#'+ mapName +'"]');
+		}
+		
+		var bcr = $target[0].getBoundingClientRect(),
+			$document = $(env.window.document),
+			$window = $(env.window),
+			$parent = $target,
+			// some useful properties of important elements
+			geo = {
+				// available space for the tooltip, see down below
+				available: {
+					document: null,
+					window: null
+				},
+				document: {
+					size: {
+						height: $document.height(),
+						width: $document.width()
+					}
+				},
+				window: {
+					scroll: {
+						// the second ones are for IE compatibility
+						left: env.window.scrollX || env.window.document.documentElement.scrollLeft,
+						top: env.window.scrollY || env.window.document.documentElement.scrollTop
+					},
+					size: {
+						height: $window.height(),
+						width: $window.width()
+					}
+				},
+				origin: {
+					// the origin has a fixed lineage if itself or one of its
+					// ancestors has a fixed position
+					fixedLineage: false,
+					// relative to the document
+					offset: {},
+					size: {
+						height: bcr.bottom - bcr.top,
+						width: bcr.right - bcr.left
+					},
+					usemapImage: originIsArea ? $target[0] : null,
+					// relative to the window
+					windowOffset: {
+						bottom: bcr.bottom,
+						left: bcr.left,
+						right: bcr.right,
+						top: bcr.top
+					}
+				}
+			},
+			geoFixed = false;
+		
+		// if the element is a map area, some properties may need
+		// to be recalculated
+		if (originIsArea) {
+			
+			var shape = self._$origin.attr('shape'),
+				coords = self._$origin.attr('coords');
+			
+			if (coords) {
+				
+				coords = coords.split(',');
+				
+				$.map(coords, function(val, i) {
+					coords[i] = parseInt(val);
+				});
+			}
+			
+			// if the image itself is the area, nothing more to do
+			if (shape != 'default') {
+				
+				switch(shape) {
+					
+					case 'circle':
+						
+						var circleCenterLeft = coords[0],
+							circleCenterTop = coords[1],
+							circleRadius = coords[2],
+							areaTopOffset = circleCenterTop - circleRadius,
+							areaLeftOffset = circleCenterLeft - circleRadius;
+						
+						geo.origin.size.height = circleRadius * 2;
+						geo.origin.size.width = geo.origin.size.height;
+						
+						geo.origin.windowOffset.left += areaLeftOffset;
+						geo.origin.windowOffset.top += areaTopOffset;
+						
+						break;
+					
+					case 'rect':
+						
+						var areaLeft = coords[0],
+							areaTop = coords[1],
+							areaRight = coords[2],
+							areaBottom = coords[3];
+						
+						geo.origin.size.height = areaBottom - areaTop;
+						geo.origin.size.width = areaRight - areaLeft;
+						
+						geo.origin.windowOffset.left += areaLeft;
+						geo.origin.windowOffset.top += areaTop;
+						
+						break;
+					
+					case 'poly':
+						
+						var areaSmallestX = 0,
+							areaSmallestY = 0,
+							areaGreatestX = 0,
+							areaGreatestY = 0,
+							arrayAlternate = 'even';
+						
+						for (var i = 0; i < coords.length; i++) {
+							
+							var areaNumber = coords[i];
+							
+							if (arrayAlternate == 'even') {
+								
+								if (areaNumber > areaGreatestX) {
+									
+									areaGreatestX = areaNumber;
+									
+									if (i === 0) {
+										areaSmallestX = areaGreatestX;
+									}
+								}
+								
+								if (areaNumber < areaSmallestX) {
+									areaSmallestX = areaNumber;
+								}
+								
+								arrayAlternate = 'odd';
+							}
+							else {
+								if (areaNumber > areaGreatestY) {
+									
+									areaGreatestY = areaNumber;
+									
+									if (i == 1) {
+										areaSmallestY = areaGreatestY;
+									}
+								}
+								
+								if (areaNumber < areaSmallestY) {
+									areaSmallestY = areaNumber;
+								}
+								
+								arrayAlternate = 'even';
+							}
+						}
+						
+						geo.origin.size.height = areaGreatestY - areaSmallestY;
+						geo.origin.size.width = areaGreatestX - areaSmallestX;
+						
+						geo.origin.windowOffset.left += areaSmallestX;
+						geo.origin.windowOffset.top += areaSmallestY;
+						
+						break;
+				}
+			}
+		}
+		
+		// user callback through an event
+		var edit = function(r) {
+			geo.origin.size.height = r.height,
+				geo.origin.windowOffset.left = r.left,
+				geo.origin.windowOffset.top = r.top,
+				geo.origin.size.width = r.width
+		};
+		
+		self._trigger({
+			type: 'geometry',
+			edit: edit,
+			geometry: {
+				height: geo.origin.size.height,
+				left: geo.origin.windowOffset.left,
+				top: geo.origin.windowOffset.top,
+				width: geo.origin.size.width
+			}
+		});
+		
+		// calculate the remaining properties with what we got
+		
+		geo.origin.windowOffset.right = geo.origin.windowOffset.left + geo.origin.size.width;
+		geo.origin.windowOffset.bottom = geo.origin.windowOffset.top + geo.origin.size.height;
+		
+		geo.origin.offset.left = geo.origin.windowOffset.left + geo.window.scroll.left;
+		geo.origin.offset.top = geo.origin.windowOffset.top + geo.window.scroll.top;
+		geo.origin.offset.bottom = geo.origin.offset.top + geo.origin.size.height;
+		geo.origin.offset.right = geo.origin.offset.left + geo.origin.size.width;
+		
+		// the space that is available to display the tooltip relatively to the document
+		geo.available.document = {
+			bottom: {
+				height: geo.document.size.height - geo.origin.offset.bottom,
+				width: geo.document.size.width
+			},
+			left: {
+				height: geo.document.size.height,
+				width: geo.origin.offset.left
+			},
+			right: {
+				height: geo.document.size.height,
+				width: geo.document.size.width - geo.origin.offset.right
+			},
+			top: {
+				height: geo.origin.offset.top,
+				width: geo.document.size.width
+			}
+		};
+		
+		// the space that is available to display the tooltip relatively to the viewport
+		// (the resulting values may be negative if the origin overflows the viewport)
+		geo.available.window = {
+			bottom: {
+				// the inner max is here to make sure the available height is no bigger
+				// than the viewport height (when the origin is off screen at the top).
+				// The outer max just makes sure that the height is not negative (when
+				// the origin overflows at the bottom).
+				height: Math.max(geo.window.size.height - Math.max(geo.origin.windowOffset.bottom, 0), 0),
+				width: geo.window.size.width
+			},
+			left: {
+				height: geo.window.size.height,
+				width: Math.max(geo.origin.windowOffset.left, 0)
+			},
+			right: {
+				height: geo.window.size.height,
+				width: Math.max(geo.window.size.width - Math.max(geo.origin.windowOffset.right, 0), 0)
+			},
+			top: {
+				height: Math.max(geo.origin.windowOffset.top, 0),
+				width: geo.window.size.width
+			}
+		};
+		
+		while ($parent[0].tagName.toLowerCase() != 'html') {
+			
+			if ($parent.css('position') == 'fixed') {
+				geo.origin.fixedLineage = true;
+				break;
+			}
+			
+			$parent = $parent.parent();
+		}
+		
+		return geo;
+	},
+	
+	/**
+	 * Some options may need to be formated before being used
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__optionsFormat: function() {
+		
+		if (typeof this.__options.animationDuration == 'number') {
+			this.__options.animationDuration = [this.__options.animationDuration, this.__options.animationDuration];
+		}
+		
+		if (typeof this.__options.delay == 'number') {
+			this.__options.delay = [this.__options.delay, this.__options.delay];
+		}
+		
+		if (typeof this.__options.delayTouch == 'number') {
+			this.__options.delayTouch = [this.__options.delayTouch, this.__options.delayTouch];
+		}
+		
+		if (typeof this.__options.theme == 'string') {
+			this.__options.theme = [this.__options.theme];
+		}
+		
+		// determine the future parent
+		if (this.__options.parent === null) {
+			this.__options.parent = $(env.window.document.body);
+		}
+		else if (typeof this.__options.parent == 'string') {
+			this.__options.parent = $(this.__options.parent);
+		}
+		
+		if (this.__options.trigger == 'hover') {
+			
+			this.__options.triggerOpen = {
+				mouseenter: true,
+				touchstart: true
+			};
+			
+			this.__options.triggerClose = {
+				mouseleave: true,
+				originClick: true,
+				touchleave: true
+			};
+		}
+		else if (this.__options.trigger == 'click') {
+			
+			this.__options.triggerOpen = {
+				click: true,
+				tap: true
+			};
+			
+			this.__options.triggerClose = {
+				click: true,
+				tap: true
+			};
+		}
+		
+		// for the plugins
+		this._trigger('options');
+		
+		return this;
+	},
+	
+	/**
+	 * Schedules or cancels the garbage collector task
+	 *
+	 * @returns {self}
+	 * @private
+	 */
+	__prepareGC: function() {
+		
+		var self = this;
+		
+		// in case the selfDestruction option has been changed by a method call
+		if (self.__options.selfDestruction) {
+			
+			// the GC task
+			self.__garbageCollector = setInterval(function() {
+				
+				var now = new Date().getTime();
+				
+				// forget the old events
+				self.__touchEvents = $.grep(self.__touchEvents, function(event, i) {
+					// 1 minute
+					return now - event.time > 60000;
+				});
+				
+				// auto-destruct if the origin is gone
+				if (!bodyContains(self._$origin)) {
+					
+					self.close(function(){
+						self.destroy();
+					});
+				}
+			}, 20000);
+		}
+		else {
+			clearInterval(self.__garbageCollector);
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Sets listeners on the origin if the open triggers require them.
+	 * Unlike the listeners set at opening time, these ones
+	 * remain even when the tooltip is closed. It has been made a
+	 * separate method so it can be called when the triggers are
+	 * changed in the options. Closing is handled in _open()
+	 * because of the bindings that may be needed on the tooltip
+	 * itself
+	 *
+	 * @returns {self}
+	 * @private
+	 */
+	__prepareOrigin: function() {
+		
+		var self = this;
+		
+		// in case we're resetting the triggers
+		self._$origin.off('.'+ self.__namespace +'-triggerOpen');
+		
+		// if the device is touch capable, even if only mouse triggers
+		// are asked, we need to listen to touch events to know if the mouse
+		// events are actually emulated (so we can ignore them)
+		if (env.hasTouchCapability) {
+			
+			self._$origin.on(
+				'touchstart.'+ self.__namespace +'-triggerOpen ' +
+				'touchend.'+ self.__namespace +'-triggerOpen ' +
+				'touchcancel.'+ self.__namespace +'-triggerOpen',
+				function(event){
+					self._touchRecordEvent(event);
+				}
+			);
+		}
+		
+		// mouse click and touch tap work the same way
+		if (	self.__options.triggerOpen.click
+			||	(self.__options.triggerOpen.tap && env.hasTouchCapability)
+		) {
+			
+			var eventNames = '';
+			if (self.__options.triggerOpen.click) {
+				eventNames += 'click.'+ self.__namespace +'-triggerOpen ';
+			}
+			if (self.__options.triggerOpen.tap && env.hasTouchCapability) {
+				eventNames += 'touchend.'+ self.__namespace +'-triggerOpen';
+			}
+			
+			self._$origin.on(eventNames, function(event) {
+				if (self._touchIsMeaningfulEvent(event)) {
+					self._open(event);
+				}
+			});
+		}
+		
+		// mouseenter and touch start work the same way
+		if (	self.__options.triggerOpen.mouseenter
+			||	(self.__options.triggerOpen.touchstart && env.hasTouchCapability)
+		) {
+			
+			var eventNames = '';
+			if (self.__options.triggerOpen.mouseenter) {
+				eventNames += 'mouseenter.'+ self.__namespace +'-triggerOpen ';
+			}
+			if (self.__options.triggerOpen.touchstart && env.hasTouchCapability) {
+				eventNames += 'touchstart.'+ self.__namespace +'-triggerOpen';
+			}
+			
+			self._$origin.on(eventNames, function(event) {
+				if (	self._touchIsTouchEvent(event)
+					||	!self._touchIsEmulatedEvent(event)
+				) {
+					self.__pointerIsOverOrigin = true;
+					self._openShortly(event);
+				}
+			});
+		}
+		
+		// info for the mouseleave/touchleave close triggers when they use a delay
+		if (	self.__options.triggerClose.mouseleave
+			||	(self.__options.triggerClose.touchleave && env.hasTouchCapability)
+		) {
+			
+			var eventNames = '';
+			if (self.__options.triggerClose.mouseleave) {
+				eventNames += 'mouseleave.'+ self.__namespace +'-triggerOpen ';
+			}
+			if (self.__options.triggerClose.touchleave && env.hasTouchCapability) {
+				eventNames += 'touchend.'+ self.__namespace +'-triggerOpen touchcancel.'+ self.__namespace +'-triggerOpen';
+			}
+			
+			self._$origin.on(eventNames, function(event) {
+				
+				if (self._touchIsMeaningfulEvent(event)) {
+					self.__pointerIsOverOrigin = false;
+				}
+			});
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Do the things that need to be done only once after the tooltip
+	 * HTML element it has been created. It has been made a separate
+	 * method so it can be called when options are changed. Remember
+	 * that the tooltip may actually exist in the DOM before it is
+	 * opened, and present after it has been closed: it's the display
+	 * plugin that takes care of handling it.
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__prepareTooltip: function() {
+		
+		var self = this,
+			p = self.__options.interactive ? 'auto' : '';
+		
+		// this will be useful to know quickly if the tooltip is in
+		// the DOM or not 
+		self._$tooltip
+			.attr('id', self.__namespace)
+			.css({
+				// pointer events
+				'pointer-events': p,
+				zIndex: self.__options.zIndex
+			});
+		
+		// themes
+		// remove the old ones and add the new ones
+		$.each(self.__previousThemes, function(i, theme) {
+			self._$tooltip.removeClass(theme);
+		});
+		$.each(self.__options.theme, function(i, theme) {
+			self._$tooltip.addClass(theme);
+		});
+		
+		self.__previousThemes = $.merge([], self.__options.theme);
+		
+		return self;
+	},
+	
+	/**
+	 * Handles the scroll on any of the parents of the origin (when the
+	 * tooltip is open)
+	 *
+	 * @param {object} event
+	 * @returns {self}
+	 * @private
+	 */
+	__scrollHandler: function(event) {
+		
+		var self = this;
+		
+		if (self.__options.triggerClose.scroll) {
+			self._close(event);
+		}
+		else {
+			
+			// if the origin or tooltip have been removed: do nothing, the tracker will
+			// take care of it later
+			if (bodyContains(self._$origin) && bodyContains(self._$tooltip)) {
+				
+				var geo = null;
+				
+				// if the scroll happened on the window
+				if (event.target === env.window.document) {
+					
+					// if the origin has a fixed lineage, window scroll will have no
+					// effect on its position nor on the position of the tooltip
+					if (!self.__Geometry.origin.fixedLineage) {
+						
+						// we don't need to do anything unless repositionOnScroll is true
+						// because the tooltip will already have moved with the window
+						// (and of course with the origin)
+						if (self.__options.repositionOnScroll) {
+							self.reposition(event);
 						}
 					}
-
-					$(this).text(Math.ceil(counter))
 				}
-			})
-		})
+				// if the scroll happened on another parent of the tooltip, it means
+				// that it's in a scrollable area and now needs to have its position
+				// adjusted or recomputed, depending ont the repositionOnScroll
+				// option. Also, if the origin is partly hidden due to a parent that
+				// hides its overflow, we'll just hide (not close) the tooltip.
+				else {
+					
+					geo = self.__geometry();
+					
+					var overflows = false;
+					
+					// a fixed position origin is not affected by the overflow hiding
+					// of a parent
+					if (self._$origin.css('position') != 'fixed') {
+						
+						self.__$originParents.each(function(i, el) {
+							
+							var $el = $(el),
+								overflowX = $el.css('overflow-x'),
+								overflowY = $el.css('overflow-y');
+							
+							if (overflowX != 'visible' || overflowY != 'visible') {
+								
+								var bcr = el.getBoundingClientRect();
+								
+								if (overflowX != 'visible') {
+									
+									if (	geo.origin.windowOffset.left < bcr.left
+										||	geo.origin.windowOffset.right > bcr.right
+									) {
+										overflows = true;
+										return false;
+									}
+								}
+								
+								if (overflowY != 'visible') {
+									
+									if (	geo.origin.windowOffset.top < bcr.top
+										||	geo.origin.windowOffset.bottom > bcr.bottom
+									) {
+										overflows = true;
+										return false;
+									}
+								}
+							}
+							
+							// no need to go further if fixed, for the same reason as above
+							if ($el.css('position') == 'fixed') {
+								return false;
+							}
+						});
+					}
+					
+					if (overflows) {
+						self._$tooltip.css('visibility', 'hidden');
+					}
+					else {
+						
+						self._$tooltip.css('visibility', 'visible');
+						
+						// reposition
+						if (self.__options.repositionOnScroll) {
+							self.reposition(event);
+						}
+						// or just adjust offset
+						else {
+							
+							// we have to use offset and not windowOffset because this way,
+							// only the scroll distance of the scrollable areas are taken into
+							// account (the scrolltop value of the main window must be
+							// ignored since the tooltip already moves with it)
+							var offsetLeft = geo.origin.offset.left - self.__Geometry.origin.offset.left,
+								offsetTop = geo.origin.offset.top - self.__Geometry.origin.offset.top;
+							
+							// add the offset to the position initially computed by the display plugin
+							self._$tooltip.css({
+								left: self.__lastPosition.coord.left + offsetLeft,
+								top: self.__lastPosition.coord.top + offsetTop
+							});
+						}
+					}
+				}
+				
+				self._trigger({
+					type: 'scroll',
+					event: event,
+					geo: geo
+				});
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Changes the state of the tooltip
+	 *
+	 * @param {string} state
+	 * @returns {self}
+	 * @private
+	 */
+	__stateSet: function(state) {
+		
+		this.__state = state;
+		
+		this._trigger({
+			type: 'state',
+			state: state
+		});
+		
+		return this;
+	},
+	
+	/**
+	 * Clear appearance timeouts
+	 *
+	 * @returns {self}
+	 * @private
+	 */
+	__timeoutsClear: function() {
+		
+		// there is only one possible open timeout: the delayed opening
+		// when the mouseenter/touchstart open triggers are used
+		clearTimeout(this.__timeouts.open);
+		this.__timeouts.open = null;
+		
+		// ... but several close timeouts: the delayed closing when the
+		// mouseleave close trigger is used and the timer option
+		$.each(this.__timeouts.close, function(i, timeout) {
+			clearTimeout(timeout);
+		});
+		this.__timeouts.close = [];
+		
+		return this;
+	},
+	
+	/**
+	 * Start the tracker that will make checks at regular intervals
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__trackerStart: function() {
+		
+		var self = this,
+			$content = self._$tooltip.find('.tooltipster-content');
+		
+		// get the initial content size
+		if (self.__options.trackTooltip) {
+			self.__contentBcr = $content[0].getBoundingClientRect();
+		}
+		
+		self.__tracker = setInterval(function() {
+			
+			// if the origin or tooltip elements have been removed.
+			// Note: we could destroy the instance now if the origin has
+			// been removed but we'll leave that task to our garbage collector
+			if (!bodyContains(self._$origin) || !bodyContains(self._$tooltip)) {
+				self._close();
+			}
+			// if everything is alright
+			else {
+				
+				// compare the former and current positions of the origin to reposition
+				// the tooltip if need be
+				if (self.__options.trackOrigin) {
+					
+					var g = self.__geometry(),
+						identical = false;
+					
+					// compare size first (a change requires repositioning too)
+					if (areEqual(g.origin.size, self.__Geometry.origin.size)) {
+						
+						// for elements that have a fixed lineage (see __geometry()), we track the
+						// top and left properties (relative to window)
+						if (self.__Geometry.origin.fixedLineage) {
+							if (areEqual(g.origin.windowOffset, self.__Geometry.origin.windowOffset)) {
+								identical = true;
+							}
+						}
+						// otherwise, track total offset (relative to document)
+						else {
+							if (areEqual(g.origin.offset, self.__Geometry.origin.offset)) {
+								identical = true;
+							}
+						}
+					}
+					
+					if (!identical) {
+						
+						// close the tooltip when using the mouseleave close trigger
+						// (see https://github.com/iamceege/tooltipster/pull/253)
+						if (self.__options.triggerClose.mouseleave) {
+							self._close();
+						}
+						else {
+							self.reposition();
+						}
+					}
+				}
+				
+				if (self.__options.trackTooltip) {
+					
+					var currentBcr = $content[0].getBoundingClientRect();
+					
+					if (	currentBcr.height !== self.__contentBcr.height
+						||	currentBcr.width !== self.__contentBcr.width
+					) {
+						self.reposition();
+						self.__contentBcr = currentBcr;
+					}
+				}
+			}
+		}, self.__options.trackerInterval);
+		
+		return self;
+	},
+	
+	/**
+	 * Closes the tooltip (after the closing delay)
+	 * 
+	 * @param event
+	 * @param callback
+	 * @param force Set to true to override a potential refusal of the user's function
+	 * @returns {self}
+	 * @protected
+	 */
+	_close: function(event, callback, force) {
+		
+		var self = this,
+			ok = true;
+		
+		self._trigger({
+			type: 'close',
+			event: event,
+			stop: function() {
+				ok = false;
+			}
+		});
+		
+		// a destroying tooltip (force == true) may not refuse to close
+		if (ok || force) {
+			
+			// save the method custom callback and cancel any open method custom callbacks
+			if (callback) self.__callbacks.close.push(callback);
+			self.__callbacks.open = [];
+			
+			// clear open/close timeouts
+			self.__timeoutsClear();
+			
+			var finishCallbacks = function() {
+				
+				// trigger any close method custom callbacks and reset them
+				$.each(self.__callbacks.close, function(i,c) {
+					c.call(self, self, {
+						event: event,
+						origin: self._$origin[0]
+					});
+				});
+				
+				self.__callbacks.close = [];
+			};
+			
+			if (self.__state != 'closed') {
+				
+				var necessary = true,
+					d = new Date(),
+					now = d.getTime(),
+					newClosingTime = now + self.__options.animationDuration[1];
+				
+				// the tooltip may already already be disappearing, but if a new
+				// call to close() is made after the animationDuration was changed
+				// to 0 (for example), we ought to actually close it sooner than
+				// previously scheduled. In that case it should be noted that the
+				// browser will not adapt the animation duration to the new
+				// animationDuration that was set after the start of the closing
+				// animation.
+				// Note: the same thing could be considered at opening, but is not
+				// really useful since the tooltip is actually opened immediately
+				// upon a call to _open(). Since it would not make the opening
+				// animation finish sooner, its sole impact would be to trigger the
+				// state event and the open callbacks sooner than the actual end of
+				// the opening animation, which is not great.
+				if (self.__state == 'disappearing') {
+					
+					if (	newClosingTime > self.__closingTime
+						// in case closing is actually overdue because the script
+						// execution was suspended. See #679
+						&&	self.__options.animationDuration[1] > 0
+					) {
+						necessary = false;
+					}
+				}
+				
+				if (necessary) {
+					
+					self.__closingTime = newClosingTime;
+					
+					if (self.__state != 'disappearing') {
+						self.__stateSet('disappearing');
+					}
+					
+					var finish = function() {
+						
+						// stop the tracker
+						clearInterval(self.__tracker);
+						
+						// a "beforeClose" option has been asked several times but would
+						// probably useless since the content element is still accessible
+						// via ::content(), and because people can always use listeners
+						// inside their content to track what's going on. For the sake of
+						// simplicity, this has been denied. Bur for the rare people who
+						// really need the option (for old browsers or for the case where
+						// detaching the content is actually destructive, for file or
+						// password inputs for example), this event will do the work.
+						self._trigger({
+							type: 'closing',
+							event: event
+						});
+						
+						// unbind listeners which are no longer needed
+						
+						self._$tooltip
+							.off('.'+ self.__namespace +'-triggerClose')
+							.removeClass('tooltipster-dying');
+						
+						// orientationchange, scroll and resize listeners
+						$(env.window).off('.'+ self.__namespace +'-triggerClose');
+						
+						// scroll listeners
+						self.__$originParents.each(function(i, el) {
+							$(el).off('scroll.'+ self.__namespace +'-triggerClose');
+						});
+						// clear the array to prevent memory leaks
+						self.__$originParents = null;
+						
+						$(env.window.document.body).off('.'+ self.__namespace +'-triggerClose');
+						
+						self._$origin.off('.'+ self.__namespace +'-triggerClose');
+						
+						self._off('dismissable');
+						
+						// a plugin that would like to remove the tooltip from the
+						// DOM when closed should bind on this
+						self.__stateSet('closed');
+						
+						// trigger event
+						self._trigger({
+							type: 'after',
+							event: event
+						});
+						
+						// call our constructor custom callback function
+						if (self.__options.functionAfter) {
+							self.__options.functionAfter.call(self, self, {
+								event: event,
+								origin: self._$origin[0]
+							});
+						}
+						
+						// call our method custom callbacks functions
+						finishCallbacks();
+					};
+					
+					if (env.hasTransitions) {
+						
+						self._$tooltip.css({
+							'-moz-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'-ms-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'-o-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'-webkit-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'animation-duration': self.__options.animationDuration[1] + 'ms',
+							'transition-duration': self.__options.animationDuration[1] + 'ms'
+						});
+						
+						self._$tooltip
+							// clear both potential open and close tasks
+							.clearQueue()
+							.removeClass('tooltipster-show')
+							// for transitions only
+							.addClass('tooltipster-dying');
+						
+						if (self.__options.animationDuration[1] > 0) {
+							self._$tooltip.delay(self.__options.animationDuration[1]);
+						}
+						
+						self._$tooltip.queue(finish);
+					}
+					else {
+						
+						self._$tooltip
+							.stop()
+							.fadeOut(self.__options.animationDuration[1], finish);
+					}
+				}
+			}
+			// if the tooltip is already closed, we still need to trigger
+			// the method custom callbacks
+			else {
+				finishCallbacks();
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 * 
+	 * @returns {self}
+	 * @protected
+	 */
+	_off: function() {
+		this.__$emitterPrivate.off.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @returns {self}
+	 * @protected
+	 */
+	_on: function() {
+		this.__$emitterPrivate.on.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @returns {self}
+	 * @protected
+	 */
+	_one: function() {
+		this.__$emitterPrivate.one.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * Opens the tooltip right away.
+	 *
+	 * @param event
+	 * @param callback Will be called when the opening animation is over
+	 * @returns {self}
+	 * @protected
+	 */
+	_open: function(event, callback) {
+		
+		var self = this;
+		
+		// if the destruction process has not begun and if this was not
+		// triggered by an unwanted emulated click event
+		if (!self.__destroying) {
+			
+			// check that the origin is still in the DOM
+			if (	bodyContains(self._$origin)
+				// if the tooltip is enabled
+				&&	self.__enabled
+			) {
+				
+				var ok = true;
+				
+				// if the tooltip is not open yet, we need to call functionBefore.
+				// otherwise we can jst go on
+				if (self.__state == 'closed') {
+					
+					// trigger an event. The event.stop function allows the callback
+					// to prevent the opening of the tooltip
+					self._trigger({
+						type: 'before',
+						event: event,
+						stop: function() {
+							ok = false;
+						}
+					});
+					
+					if (ok && self.__options.functionBefore) {
+						
+						// call our custom function before continuing
+						ok = self.__options.functionBefore.call(self, self, {
+							event: event,
+							origin: self._$origin[0]
+						});
+					}
+				}
+				
+				if (ok !== false) {
+					
+					// if there is some content
+					if (self.__Content !== null) {
+						
+						// save the method callback and cancel close method callbacks
+						if (callback) {
+							self.__callbacks.open.push(callback);
+						}
+						self.__callbacks.close = [];
+						
+						// get rid of any appearance timeouts
+						self.__timeoutsClear();
+						
+						var extraTime,
+							finish = function() {
+								
+								if (self.__state != 'stable') {
+									self.__stateSet('stable');
+								}
+								
+								// trigger any open method custom callbacks and reset them
+								$.each(self.__callbacks.open, function(i,c) {
+									c.call(self, self, {
+										origin: self._$origin[0],
+										tooltip: self._$tooltip[0]
+									});
+								});
+								
+								self.__callbacks.open = [];
+							};
+						
+						// if the tooltip is already open
+						if (self.__state !== 'closed') {
+							
+							// the timer (if any) will start (or restart) right now
+							extraTime = 0;
+							
+							// if it was disappearing, cancel that
+							if (self.__state === 'disappearing') {
+								
+								self.__stateSet('appearing');
+								
+								if (env.hasTransitions) {
+									
+									self._$tooltip
+										.clearQueue()
+										.removeClass('tooltipster-dying')
+										.addClass('tooltipster-show');
+									
+									if (self.__options.animationDuration[0] > 0) {
+										self._$tooltip.delay(self.__options.animationDuration[0]);
+									}
+									
+									self._$tooltip.queue(finish);
+								}
+								else {
+									// in case the tooltip was currently fading out, bring it back
+									// to life
+									self._$tooltip
+										.stop()
+										.fadeIn(finish);
+								}
+							}
+							// if the tooltip is already open, we still need to trigger the method
+							// custom callback
+							else if (self.__state == 'stable') {
+								finish();
+							}
+						}
+						// if the tooltip isn't already open, open it
+						else {
+							
+							// a plugin must bind on this and store the tooltip in this._$tooltip
+							self.__stateSet('appearing');
+							
+							// the timer (if any) will start when the tooltip has fully appeared
+							// after its transition
+							extraTime = self.__options.animationDuration[0];
+							
+							// insert the content inside the tooltip
+							self.__contentInsert();
+							
+							// reposition the tooltip and attach to the DOM
+							self.reposition(event, true);
+							
+							// animate in the tooltip. If the display plugin wants no css
+							// animations, it may override the animation option with a
+							// dummy value that will produce no effect
+							if (env.hasTransitions) {
+								
+								// note: there seems to be an issue with start animations which
+								// are randomly not played on fast devices in both Chrome and FF,
+								// couldn't find a way to solve it yet. It seems that applying
+								// the classes before appending to the DOM helps a little, but
+								// it messes up some CSS transitions. The issue almost never
+								// happens when delay[0]==0 though
+								self._$tooltip
+									.addClass('tooltipster-'+ self.__options.animation)
+									.addClass('tooltipster-initial')
+									.css({
+										'-moz-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'-ms-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'-o-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'-webkit-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'animation-duration': self.__options.animationDuration[0] + 'ms',
+										'transition-duration': self.__options.animationDuration[0] + 'ms'
+									});
+								
+								setTimeout(
+									function() {
+										
+										// a quick hover may have already triggered a mouseleave
+										if (self.__state != 'closed') {
+											
+											self._$tooltip
+												.addClass('tooltipster-show')
+												.removeClass('tooltipster-initial');
+											
+											if (self.__options.animationDuration[0] > 0) {
+												self._$tooltip.delay(self.__options.animationDuration[0]);
+											}
+											
+											self._$tooltip.queue(finish);
+										}
+									},
+									0
+								);
+							}
+							else {
+								
+								// old browsers will have to live with this
+								self._$tooltip
+									.css('display', 'none')
+									.fadeIn(self.__options.animationDuration[0], finish);
+							}
+							
+							// checks if the origin is removed while the tooltip is open
+							self.__trackerStart();
+							
+							// NOTE: the listeners below have a '-triggerClose' namespace
+							// because we'll remove them when the tooltip closes (unlike
+							// the '-triggerOpen' listeners). So some of them are actually
+							// not about close triggers, rather about positioning.
+							
+							$(env.window)
+								// reposition on resize
+								.on('resize.'+ self.__namespace +'-triggerClose', function(e) {
+									
+									var $ae = $(document.activeElement);
+									
+									// reposition only if the resize event was not triggered upon the opening
+									// of a virtual keyboard due to an input field being focused within the tooltip
+									// (otherwise the repositioning would lose the focus)
+									if (	(!$ae.is('input') && !$ae.is('textarea'))
+										||	!$.contains(self._$tooltip[0], $ae[0])
+									) {
+										self.reposition(e);
+									}
+								})
+								// same as below for parents
+								.on('scroll.'+ self.__namespace +'-triggerClose', function(e) {
+									self.__scrollHandler(e);
+								});
+							
+							self.__$originParents = self._$origin.parents();
+							
+							// scrolling may require the tooltip to be moved or even
+							// repositioned in some cases
+							self.__$originParents.each(function(i, parent) {
+								
+								$(parent).on('scroll.'+ self.__namespace +'-triggerClose', function(e) {
+									self.__scrollHandler(e);
+								});
+							});
+							
+							if (	self.__options.triggerClose.mouseleave
+								||	(self.__options.triggerClose.touchleave && env.hasTouchCapability)
+							) {
+								
+								// we use an event to allow users/plugins to control when the mouseleave/touchleave
+								// close triggers will come to action. It allows to have more triggering elements
+								// than just the origin and the tooltip for example, or to cancel/delay the closing,
+								// or to make the tooltip interactive even if it wasn't when it was open, etc.
+								self._on('dismissable', function(event) {
+									
+									if (event.dismissable) {
+										
+										if (event.delay) {
+											
+											timeout = setTimeout(function() {
+												// event.event may be undefined
+												self._close(event.event);
+											}, event.delay);
+											
+											self.__timeouts.close.push(timeout);
+										}
+										else {
+											self._close(event);
+										}
+									}
+									else {
+										clearTimeout(timeout);
+									}
+								});
+								
+								// now set the listeners that will trigger 'dismissable' events
+								var $elements = self._$origin,
+									eventNamesIn = '',
+									eventNamesOut = '',
+									timeout = null;
+								
+								// if we have to allow interaction, bind on the tooltip too
+								if (self.__options.interactive) {
+									$elements = $elements.add(self._$tooltip);
+								}
+								
+								if (self.__options.triggerClose.mouseleave) {
+									eventNamesIn += 'mouseenter.'+ self.__namespace +'-triggerClose ';
+									eventNamesOut += 'mouseleave.'+ self.__namespace +'-triggerClose ';
+								}
+								if (self.__options.triggerClose.touchleave && env.hasTouchCapability) {
+									eventNamesIn += 'touchstart.'+ self.__namespace +'-triggerClose';
+									eventNamesOut += 'touchend.'+ self.__namespace +'-triggerClose touchcancel.'+ self.__namespace +'-triggerClose';
+								}
+								
+								$elements
+									// close after some time spent outside of the elements
+									.on(eventNamesOut, function(event) {
+										
+										// it's ok if the touch gesture ended up to be a swipe,
+										// it's still a "touch leave" situation
+										if (	self._touchIsTouchEvent(event)
+											||	!self._touchIsEmulatedEvent(event)
+										) {
+											
+											var delay = (event.type == 'mouseleave') ?
+												self.__options.delay :
+												self.__options.delayTouch;
+											
+											self._trigger({
+												delay: delay[1],
+												dismissable: true,
+												event: event,
+												type: 'dismissable'
+											});
+										}
+									})
+									// suspend the mouseleave timeout when the pointer comes back
+									// over the elements
+									.on(eventNamesIn, function(event) {
+										
+										// it's also ok if the touch event is a swipe gesture
+										if (	self._touchIsTouchEvent(event)
+											||	!self._touchIsEmulatedEvent(event)
+										) {
+											self._trigger({
+												dismissable: false,
+												event: event,
+												type: 'dismissable'
+											});
+										}
+									});
+							}
+							
+							// close the tooltip when the origin gets a mouse click (common behavior of
+							// native tooltips)
+							if (self.__options.triggerClose.originClick) {
+								
+								self._$origin.on('click.'+ self.__namespace + '-triggerClose', function(event) {
+									
+									// we could actually let a tap trigger this but this feature just
+									// does not make sense on touch devices
+									if (	!self._touchIsTouchEvent(event)
+										&&	!self._touchIsEmulatedEvent(event)
+									) {
+										self._close(event);
+									}
+								});
+							}
+							
+							// set the same bindings for click and touch on the body to close the tooltip
+							if (	self.__options.triggerClose.click
+								||	(self.__options.triggerClose.tap && env.hasTouchCapability)
+							) {
+								
+								// don't set right away since the click/tap event which triggered this method
+								// (if it was a click/tap) is going to bubble up to the body, we don't want it
+								// to close the tooltip immediately after it opened
+								setTimeout(function() {
+									
+									if (self.__state != 'closed') {
+										
+										var eventNames = '',
+											$body = $(env.window.document.body);
+										
+										if (self.__options.triggerClose.click) {
+											eventNames += 'click.'+ self.__namespace +'-triggerClose ';
+										}
+										if (self.__options.triggerClose.tap && env.hasTouchCapability) {
+											eventNames += 'touchend.'+ self.__namespace +'-triggerClose';
+										}
+										
+										$body.on(eventNames, function(event) {
+											
+											if (self._touchIsMeaningfulEvent(event)) {
+												
+												self._touchRecordEvent(event);
+												
+												if (!self.__options.interactive || !$.contains(self._$tooltip[0], event.target)) {
+													self._close(event);
+												}
+											}
+										});
+										
+										// needed to detect and ignore swiping
+										if (self.__options.triggerClose.tap && env.hasTouchCapability) {
+											
+											$body.on('touchstart.'+ self.__namespace +'-triggerClose', function(event) {
+												self._touchRecordEvent(event);
+											});
+										}
+									}
+								}, 0);
+							}
+							
+							self._trigger('ready');
+							
+							// call our custom callback
+							if (self.__options.functionReady) {
+								self.__options.functionReady.call(self, self, {
+									origin: self._$origin[0],
+									tooltip: self._$tooltip[0]
+								});
+							}
+						}
+						
+						// if we have a timer set, let the countdown begin
+						if (self.__options.timer > 0) {
+							
+							var timeout = setTimeout(function() {
+								self._close();
+							}, self.__options.timer + extraTime);
+							
+							self.__timeouts.close.push(timeout);
+						}
+					}
+				}
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * When using the mouseenter/touchstart open triggers, this function will
+	 * schedule the opening of the tooltip after the delay, if there is one
+	 *
+	 * @param event
+	 * @returns {self}
+	 * @protected
+ 	 */
+	_openShortly: function(event) {
+		
+		var self = this,
+			ok = true;
+		
+		if (self.__state != 'stable' && self.__state != 'appearing') {
+			
+			// if a timeout is not already running
+			if (!self.__timeouts.open) {
+				
+				self._trigger({
+					type: 'start',
+					event: event,
+					stop: function() {
+						ok = false;
+					}
+				});
+				
+				if (ok) {
+					
+					var delay = (event.type.indexOf('touch') == 0) ?
+						self.__options.delayTouch :
+						self.__options.delay;
+					
+					if (delay[0]) {
+						
+						self.__timeouts.open = setTimeout(function() {
+							
+							self.__timeouts.open = null;
+							
+							// open only if the pointer (mouse or touch) is still over the origin.
+							// The check on the "meaningful event" can only be made here, after some
+							// time has passed (to know if the touch was a swipe or not)
+							if (self.__pointerIsOverOrigin && self._touchIsMeaningfulEvent(event)) {
+								
+								// signal that we go on
+								self._trigger('startend');
+								
+								self._open(event);
+							}
+							else {
+								// signal that we cancel
+								self._trigger('startcancel');
+							}
+						}, delay[0]);
+					}
+					else {
+						// signal that we go on
+						self._trigger('startend');
+						
+						self._open(event);
+					}
+				}
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Meant for plugins to get their options
+	 * 
+	 * @param {string} pluginName The name of the plugin that asks for its options
+	 * @param {object} defaultOptions The default options of the plugin
+	 * @returns {object} The options
+	 * @protected
+	 */
+	_optionsExtract: function(pluginName, defaultOptions) {
+		
+		var self = this,
+			options = $.extend(true, {}, defaultOptions);
+		
+		// if the plugin options were isolated in a property named after the
+		// plugin, use them (prevents conflicts with other plugins)
+		var pluginOptions = self.__options[pluginName];
+		
+		// if not, try to get them as regular options
+		if (!pluginOptions){
+			
+			pluginOptions = {};
+			
+			$.each(defaultOptions, function(optionName, value) {
+				
+				var o = self.__options[optionName];
+				
+				if (o !== undefined) {
+					pluginOptions[optionName] = o;
+				}
+			});
+		}
+		
+		// let's merge the default options and the ones that were provided. We'd want
+		// to do a deep copy but not let jQuery merge arrays, so we'll do a shallow
+		// extend on two levels, that will be enough if options are not more than 1
+		// level deep
+		$.each(options, function(optionName, value) {
+			
+			if (pluginOptions[optionName] !== undefined) {
+				
+				if ((		typeof value == 'object'
+						&&	!(value instanceof Array)
+						&&	value != null
+					)
+					&&
+					(		typeof pluginOptions[optionName] == 'object'
+						&&	!(pluginOptions[optionName] instanceof Array)
+						&&	pluginOptions[optionName] != null
+					)
+				) {
+					$.extend(options[optionName], pluginOptions[optionName]);
+				}
+				else {
+					options[optionName] = pluginOptions[optionName];
+				}
+			}
+		});
+		
+		return options;
+	},
+	
+	/**
+	 * Used at instantiation of the plugin, or afterwards by plugins that activate themselves
+	 * on existing instances
+	 * 
+	 * @param {object} pluginName
+	 * @returns {self}
+	 * @protected
+	 */
+	_plug: function(pluginName) {
+		
+		var plugin = $.tooltipster._plugin(pluginName);
+		
+		if (plugin) {
+			
+			// if there is a constructor for instances
+			if (plugin.instance) {
+				
+				// proxy non-private methods on the instance to allow new instance methods
+				$.tooltipster.__bridge(plugin.instance, this, plugin.name);
+			}
+		}
+		else {
+			throw new Error('The "'+ pluginName +'" plugin is not defined');
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * This will return true if the event is a mouse event which was
+	 * emulated by the browser after a touch event. This allows us to
+	 * really dissociate mouse and touch triggers.
+	 * 
+	 * There is a margin of error if a real mouse event is fired right
+	 * after (within the delay shown below) a touch event on the same
+	 * element, but hopefully it should not happen often.
+	 * 
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchIsEmulatedEvent: function(event) {
+		
+		var isEmulated = false,
+			now = new Date().getTime();
+		
+		for (var i = this.__touchEvents.length - 1; i >= 0; i--) {
+			
+			var e = this.__touchEvents[i];
+			
+			// delay, in milliseconds. It's supposed to be 300ms in
+			// most browsers (350ms on iOS) to allow a double tap but
+			// can be less (check out FastClick for more info)
+			if (now - e.time < 500) {
+				
+				if (e.target === event.target) {
+					isEmulated = true;
+				}
+			}
+			else {
+				break;
+			}
+		}
+		
+		return isEmulated;
+	},
+	
+	/**
+	 * Returns false if the event was an emulated mouse event or
+	 * a touch event involved in a swipe gesture.
+	 * 
+	 * @param {object} event
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchIsMeaningfulEvent: function(event) {
+		return (
+				(this._touchIsTouchEvent(event) && !this._touchSwiped(event.target))
+			||	(!this._touchIsTouchEvent(event) && !this._touchIsEmulatedEvent(event))
+		);
+	},
+	
+	/**
+	 * Checks if an event is a touch event
+	 * 
+	 * @param {object} event
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchIsTouchEvent: function(event){
+		return event.type.indexOf('touch') == 0;
+	},
+	
+	/**
+	 * Store touch events for a while to detect swiping and emulated mouse events
+	 * 
+	 * @param {object} event
+	 * @returns {self}
+	 * @protected
+	 */
+	_touchRecordEvent: function(event) {
+		
+		if (this._touchIsTouchEvent(event)) {
+			event.time = new Date().getTime();
+			this.__touchEvents.push(event);
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Returns true if a swipe happened after the last touchstart event fired on
+	 * event.target.
+	 * 
+	 * We need to differentiate a swipe from a tap before we let the event open
+	 * or close the tooltip. A swipe is when a touchmove (scroll) event happens
+	 * on the body between the touchstart and the touchend events of an element.
+	 * 
+	 * @param {object} target The HTML element that may have triggered the swipe
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchSwiped: function(target) {
+		
+		var swiped = false;
+		
+		for (var i = this.__touchEvents.length - 1; i >= 0; i--) {
+			
+			var e = this.__touchEvents[i];
+			
+			if (e.type == 'touchmove') {
+				swiped = true;
+				break;
+			}
+			else if (
+				e.type == 'touchstart'
+				&&	target === e.target
+			) {
+				break;
+			}
+		}
+		
+		return swiped;
+	},
+	
+	/**
+	 * Triggers an event on the instance emitters
+	 * 
+	 * @returns {self}
+	 * @protected
+	 */
+	_trigger: function() {
+		
+		var args = Array.prototype.slice.apply(arguments);
+		
+		if (typeof args[0] == 'string') {
+			args[0] = { type: args[0] };
+		}
+		
+		// add properties to the event
+		args[0].instance = this;
+		args[0].origin = this._$origin ? this._$origin[0] : null;
+		args[0].tooltip = this._$tooltip ? this._$tooltip[0] : null;
+		
+		// note: the order of emitters matters
+		this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate, args);
+		$.tooltipster._trigger.apply($.tooltipster, args);
+		this.__$emitterPublic.trigger.apply(this.__$emitterPublic, args);
+		
+		return this;
+	},
+	
+	/**
+	 * Deactivate a plugin on this instance
+	 * 
+	 * @returns {self}
+	 * @protected
+	 */
+	_unplug: function(pluginName) {
+		
+		var self = this;
+		
+		// if the plugin has been activated on this instance
+		if (self[pluginName]) {
+			
+			var plugin = $.tooltipster._plugin(pluginName);
+			
+			// if there is a constructor for instances
+			if (plugin.instance) {
+				
+				// unbridge
+				$.each(plugin.instance, function(methodName, fn) {
+					
+					// if the method exists (privates methods do not) and comes indeed from
+					// this plugin (may be missing or come from a conflicting plugin).
+					if (	self[methodName]
+						&&	self[methodName].bridged === self[pluginName]
+					) {
+						delete self[methodName];
+					}
+				});
+			}
+			
+			// destroy the plugin
+			if (self[pluginName].__destroy) {
+				self[pluginName].__destroy();
+			}
+			
+			// remove the reference to the plugin instance
+			delete self[pluginName];
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * @see self::_close
+	 * @returns {self}
+	 * @public
+	 */
+	close: function(callback) {
+		
+		if (!this.__destroyed) {
+			this._close(null, callback);
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Sets or gets the content of the tooltip
+	 * 
+	 * @returns {mixed|self}
+	 * @public
+	 */
+	content: function(content) {
+		
+		var self = this;
+		
+		// getter method
+		if (content === undefined) {
+			return self.__Content;
+		}
+		// setter method
+		else {
+			
+			if (!self.__destroyed) {
+				
+				// change the content
+				self.__contentSet(content);
+				
+				if (self.__Content !== null) {
+					
+					// update the tooltip if it is open
+					if (self.__state !== 'closed') {
+						
+						// reset the content in the tooltip
+						self.__contentInsert();
+						
+						// reposition and resize the tooltip
+						self.reposition();
+						
+						// if we want to play a little animation showing the content changed
+						if (self.__options.updateAnimation) {
+							
+							if (env.hasTransitions) {
+								
+								// keep the reference in the local scope
+								var animation = self.__options.updateAnimation;
+								
+								self._$tooltip.addClass('tooltipster-update-'+ animation);
+								
+								// remove the class after a while. The actual duration of the
+								// update animation may be shorter, it's set in the CSS rules
+								setTimeout(function() {
+									
+									if (self.__state != 'closed') {
+										
+										self._$tooltip.removeClass('tooltipster-update-'+ animation);
+									}
+								}, 1000);
+							}
+							else {
+								self._$tooltip.fadeTo(200, 0.5, function() {
+									if (self.__state != 'closed') {
+										self._$tooltip.fadeTo(200, 1);
+									}
+								});
+							}
+						}
+					}
+				}
+				else {
+					self._close();
+				}
+			}
+			else {
+				self.__destroyError();
+			}
+			
+			return self;
+		}
+	},
+	
+	/**
+	 * Destroys the tooltip
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	destroy: function() {
+		
+		var self = this;
+		
+		if (!self.__destroyed) {
+			
+			if(self.__state != 'closed'){
+				
+				// no closing delay
+				self.option('animationDuration', 0)
+					// force closing
+					._close(null, null, true);
+			}
+			else {
+				// there might be an open timeout still running
+				self.__timeoutsClear();
+			}
+			
+			// send event
+			self._trigger('destroy');
+			
+			self.__destroyed = true;
+			
+			self._$origin
+				.removeData(self.__namespace)
+				// remove the open trigger listeners
+				.off('.'+ self.__namespace +'-triggerOpen');
+			
+			// remove the touch listener
+			$(env.window.document.body).off('.' + self.__namespace +'-triggerOpen');
+			
+			var ns = self._$origin.data('tooltipster-ns');
+			
+			// if the origin has been removed from DOM, its data may
+			// well have been destroyed in the process and there would
+			// be nothing to clean up or restore
+			if (ns) {
+				
+				// if there are no more tooltips on this element
+				if (ns.length === 1) {
+					
+					// optional restoration of a title attribute
+					var title = null;
+					if (self.__options.restoration == 'previous') {
+						title = self._$origin.data('tooltipster-initialTitle');
+					}
+					else if (self.__options.restoration == 'current') {
+						
+						// old school technique to stringify when outerHTML is not supported
+						title = (typeof self.__Content == 'string') ?
+							self.__Content :
+							$('<div></div>').append(self.__Content).html();
+					}
+					
+					if (title) {
+						self._$origin.attr('title', title);
+					}
+					
+					// final cleaning
+					
+					self._$origin.removeClass('tooltipstered');
+					
+					self._$origin
+						.removeData('tooltipster-ns')
+						.removeData('tooltipster-initialTitle');
+				}
+				else {
+					// remove the instance namespace from the list of namespaces of
+					// tooltips present on the element
+					ns = $.grep(ns, function(el, i) {
+						return el !== self.__namespace;
+					});
+					self._$origin.data('tooltipster-ns', ns);
+				}
+			}
+			
+			// last event
+			self._trigger('destroyed');
+			
+			// unbind private and public event listeners
+			self._off();
+			self.off();
+			
+			// remove external references, just in case
+			self.__Content = null;
+			self.__$emitterPrivate = null;
+			self.__$emitterPublic = null;
+			self.__options.parent = null;
+			self._$origin = null;
+			self._$tooltip = null;
+			
+			// make sure the object is no longer referenced in there to prevent
+			// memory leaks
+			$.tooltipster.__instancesLatestArr = $.grep($.tooltipster.__instancesLatestArr, function(el, i) {
+				return self !== el;
+			});
+			
+			clearInterval(self.__garbageCollector);
+		}
+		else {
+			self.__destroyError();
+		}
+		
+		// we return the scope rather than true so that the call to
+		// .tooltipster('destroy') actually returns the matched elements
+		// and applies to all of them
+		return self;
+	},
+	
+	/**
+	 * Disables the tooltip
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	disable: function() {
+		
+		if (!this.__destroyed) {
+			
+			// close first, in case the tooltip would not disappear on
+			// its own (no close trigger)
+			this._close();
+			this.__enabled = false;
+			
+			return this;
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Returns the HTML element of the origin
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	elementOrigin: function() {
+		
+		if (!this.__destroyed) {
+			return this._$origin[0];
+		}
+		else {
+			this.__destroyError();
+		}
+	},
+	
+	/**
+	 * Returns the HTML element of the tooltip
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	elementTooltip: function() {
+		return this._$tooltip ? this._$tooltip[0] : null;
+	},
+	
+	/**
+	 * Enables the tooltip
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	enable: function() {
+		this.__enabled = true;
+		return this;
+	},
+	
+	/**
+	 * Alias, deprecated in 4.0.0
+	 * 
+	 * @param {function} callback
+	 * @returns {self}
+	 * @public
+	 */
+	hide: function(callback) {
+		return this.close(callback);
+	},
+	
+	/**
+	 * Returns the instance
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	instance: function() {
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_off() instead)
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	off: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.off.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_on() instead)
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	on: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.on.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	one: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.one.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * @see self::_open
+	 * @returns {self}
+	 * @public
+	 */
+	open: function(callback) {
+		
+		if (!this.__destroyed) {
+			this._open(null, callback);
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Get or set options. For internal use and advanced users only.
+	 * 
+	 * @param {string} o Option name
+	 * @param {mixed} val optional A new value for the option
+	 * @return {mixed|self} If val is omitted, the value of the option
+	 * is returned, otherwise the instance itself is returned
+	 * @public
+	 */ 
+	option: function(o, val) {
+		
+		// getter
+		if (val === undefined) {
+			return this.__options[o];
+		}
+		// setter
+		else {
+			
+			if (!this.__destroyed) {
+				
+				// change value
+				this.__options[o] = val;
+				
+				// format
+				this.__optionsFormat();
+				
+				// re-prepare the triggers if needed
+				if ($.inArray(o, ['trigger', 'triggerClose', 'triggerOpen']) >= 0) {
+					this.__prepareOrigin();
+				}
+				
+				if (o === 'selfDestruction') {
+					this.__prepareGC();
+				}
+			}
+			else {
+				this.__destroyError();
+			}
+			
+			return this;
+		}
+	},
+	
+	/**
+	 * This method is in charge of setting the position and size properties of the tooltip.
+	 * All the hard work is delegated to the display plugin.
+	 * Note: The tooltip may be detached from the DOM at the moment the method is called 
+	 * but must be attached by the end of the method call.
+	 * 
+	 * @param {object} event For internal use only. Defined if an event such as
+	 * window resizing triggered the repositioning
+	 * @param {boolean} tooltipIsDetached For internal use only. Set this to true if you
+	 * know that the tooltip not being in the DOM is not an issue (typically when the
+	 * tooltip element has just been created but has not been added to the DOM yet).
+	 * @returns {self}
+	 * @public
+	 */
+	reposition: function(event, tooltipIsDetached) {
+		
+		var self = this;
+		
+		if (!self.__destroyed) {
+			
+			// if the tooltip is still open and the origin is still in the DOM
+			if (self.__state != 'closed' && bodyContains(self._$origin)) {
+				
+				// if the tooltip has not been removed from DOM manually (or if it
+				// has been detached on purpose)
+				if (tooltipIsDetached || bodyContains(self._$tooltip)) {
+					
+					if (!tooltipIsDetached) {
+						// detach in case the tooltip overflows the window and adds
+						// scrollbars to it, so __geometry can be accurate
+						self._$tooltip.detach();
+					}
+					
+					// refresh the geometry object before passing it as a helper
+					self.__Geometry = self.__geometry();
+					
+					// let a plugin fo the rest
+					self._trigger({
+						type: 'reposition',
+						event: event,
+						helper: {
+							geo: self.__Geometry
+						}
+					});
+				}
+			}
+		}
+		else {
+			self.__destroyError();
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Alias, deprecated in 4.0.0
+	 *
+	 * @param callback
+	 * @returns {self}
+	 * @public
+	 */
+	show: function(callback) {
+		return this.open(callback);
+	},
+	
+	/**
+	 * Returns some properties about the instance
+	 * 
+	 * @returns {object}
+	 * @public
+	 */
+	status: function() {
+		
+		return {
+			destroyed: this.__destroyed,
+			enabled: this.__enabled,
+			open: this.__state !== 'closed',
+			state: this.__state
+		};
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	triggerHandler: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
 	}
-}(jQuery))
-!function(e){e.fn.eaelProgressBar=function(){var r=e(this),a=r.data("layout"),i=r.data("count"),s=r.data("duration");r.one("inview",function(){"line"==a?e(".eael-progressbar-line-fill",r).css({width:i+"%"}):"half_circle"==a&&e(".eael-progressbar-circle-half",r).css({transform:"rotate("+1.8*i+"deg)"}),e(".eael-progressbar-count",r).prop({counter:0}).animate({counter:i},{duration:s,easing:"linear",step:function(i){if("circle"==a){var s=3.6*i;e(".eael-progressbar-circle-half-left",r).css({transform:"rotate("+s+"deg)"}),s>180&&(e(".eael-progressbar-circle-pie",r).css({"clip-path":"inset(0)"}),e(".eael-progressbar-circle-half-right",r).css({visibility:"visible"}))}e(this).text(Math.ceil(i))}})})}}(jQuery);
+};
+
+$.fn.tooltipster = function() {
+	
+	// for using in closures
+	var args = Array.prototype.slice.apply(arguments),
+		// common mistake: an HTML element can't be in several tooltips at the same time
+		contentCloningWarning = 'You are using a single HTML element as content for several tooltips. You probably want to set the contentCloning option to TRUE.';
+	
+	// this happens with $(sel).tooltipster(...) when $(sel) does not match anything
+	if (this.length === 0) {
+		
+		// still chainable
+		return this;
+	}
+	// this happens when calling $(sel).tooltipster('methodName or options')
+	// where $(sel) matches one or more elements
+	else {
+		
+		// method calls
+		if (typeof args[0] === 'string') {
+			
+			var v = '#*$~&';
+			
+			this.each(function() {
+				
+				// retrieve the namepaces of the tooltip(s) that exist on that element.
+				// We will interact with the first tooltip only.
+				var ns = $(this).data('tooltipster-ns'),
+					// self represents the instance of the first tooltipster plugin
+					// associated to the current HTML object of the loop
+					self = ns ? $(this).data(ns[0]) : null;
+				
+				// if the current element holds a tooltipster instance
+				if (self) {
+					
+					if (typeof self[args[0]] === 'function') {
+						
+						if (	this.length > 1
+							&&	args[0] == 'content'
+							&&	(	args[1] instanceof $
+								|| (typeof args[1] == 'object' && args[1] != null && args[1].tagName)
+							)
+							&&	!self.__options.contentCloning
+							&&	self.__options.debug
+						) {
+							console.log(contentCloningWarning);
+						}
+						
+						// note : args[1] and args[2] may not be defined
+						var resp = self[args[0]](args[1], args[2]);
+					}
+					else {
+						throw new Error('Unknown method "'+ args[0] +'"');
+					}
+					
+					// if the function returned anything other than the instance
+					// itself (which implies chaining, except for the `instance` method)
+					if (resp !== self || args[0] === 'instance') {
+						
+						v = resp;
+						
+						// return false to stop .each iteration on the first element
+						// matched by the selector
+						return false;
+					}
+				}
+				else {
+					throw new Error('You called Tooltipster\'s "'+ args[0] +'" method on an uninitialized element');
+				}
+			});
+			
+			return (v !== '#*$~&') ? v : this;
+		}
+		// first argument is undefined or an object: the tooltip is initializing
+		else {
+			
+			// reset the array of last initialized objects
+			$.tooltipster.__instancesLatestArr = [];
+			
+			// is there a defined value for the multiple option in the options object ?
+			var	multipleIsSet = args[0] && args[0].multiple !== undefined,
+				// if the multiple option is set to true, or if it's not defined but
+				// set to true in the defaults
+				multiple = (multipleIsSet && args[0].multiple) || (!multipleIsSet && defaults.multiple),
+				// same for content
+				contentIsSet = args[0] && args[0].content !== undefined,
+				content = (contentIsSet && args[0].content) || (!contentIsSet && defaults.content),
+				// same for contentCloning
+				contentCloningIsSet = args[0] && args[0].contentCloning !== undefined,
+				contentCloning =
+						(contentCloningIsSet && args[0].contentCloning)
+					||	(!contentCloningIsSet && defaults.contentCloning),
+				// same for debug
+				debugIsSet = args[0] && args[0].debug !== undefined,
+				debug = (debugIsSet && args[0].debug) || (!debugIsSet && defaults.debug);
+			
+			if (	this.length > 1
+				&&	(	content instanceof $
+					|| (typeof content == 'object' && content != null && content.tagName)
+				)
+				&&	!contentCloning
+				&&	debug
+			) {
+				console.log(contentCloningWarning);
+			}
+			
+			// create a tooltipster instance for each element if it doesn't
+			// already have one or if the multiple option is set, and attach the
+			// object to it
+			this.each(function() {
+				
+				var go = false,
+					$this = $(this),
+					ns = $this.data('tooltipster-ns'),
+					obj = null;
+				
+				if (!ns) {
+					go = true;
+				}
+				else if (multiple) {
+					go = true;
+				}
+				else if (debug) {
+					console.log('Tooltipster: one or more tooltips are already attached to the element below. Ignoring.');
+					console.log(this);
+				}
+				
+				if (go) {
+					obj = new $.Tooltipster(this, args[0]);
+					
+					// save the reference of the new instance
+					if (!ns) ns = [];
+					ns.push(obj.__namespace);
+					$this.data('tooltipster-ns', ns);
+					
+					// save the instance itself
+					$this.data(obj.__namespace, obj);
+					
+					// call our constructor custom function.
+					// we do this here and not in ::init() because we wanted
+					// the object to be saved in $this.data before triggering
+					// it
+					if (obj.__options.functionInit) {
+						obj.__options.functionInit.call(obj, obj, {
+							origin: this
+						});
+					}
+					
+					// and now the event, for the plugins and core emitter
+					obj._trigger('init');
+				}
+				
+				$.tooltipster.__instancesLatestArr.push(obj);
+			});
+			
+			return this;
+		}
+	}
+};
+
+// Utilities
+
+/**
+ * A class to check if a tooltip can fit in given dimensions
+ * 
+ * @param {object} $tooltip The jQuery wrapped tooltip element, or a clone of it
+ */
+function Ruler($tooltip) {
+	
+	// list of instance variables
+	
+	this.$container;
+	this.constraints = null;
+	this.__$tooltip;
+	
+	this.__init($tooltip);
+}
+
+Ruler.prototype = {
+	
+	/**
+	 * Move the tooltip into an invisible div that does not allow overflow to make
+	 * size tests. Note: the tooltip may or may not be attached to the DOM at the
+	 * moment this method is called, it does not matter.
+	 * 
+	 * @param {object} $tooltip The object to test. May be just a clone of the
+	 * actual tooltip.
+	 * @private
+	 */
+	__init: function($tooltip) {
+		
+		this.__$tooltip = $tooltip;
+		
+		this.__$tooltip
+			.css({
+				// for some reason we have to specify top and left 0
+				left: 0,
+				// any overflow will be ignored while measuring
+				overflow: 'hidden',
+				// positions at (0,0) without the div using 100% of the available width
+				position: 'absolute',
+				top: 0
+			})
+			// overflow must be auto during the test. We re-set this in case
+			// it were modified by the user
+			.find('.tooltipster-content')
+				.css('overflow', 'auto');
+		
+		this.$container = $('<div class="tooltipster-ruler"></div>')
+			.append(this.__$tooltip)
+			.appendTo(env.window.document.body);
+	},
+	
+	/**
+	 * Force the browser to redraw (re-render) the tooltip immediately. This is required
+	 * when you changed some CSS properties and need to make something with it
+	 * immediately, without waiting for the browser to redraw at the end of instructions.
+	 *
+	 * @see http://stackoverflow.com/questions/3485365/how-can-i-force-webkit-to-redraw-repaint-to-propagate-style-changes
+	 * @private
+	 */
+	__forceRedraw: function() {
+		
+		// note: this would work but for Webkit only
+		//this.__$tooltip.close();
+		//this.__$tooltip[0].offsetHeight;
+		//this.__$tooltip.open();
+		
+		// works in FF too
+		var $p = this.__$tooltip.parent();
+		this.__$tooltip.detach();
+		this.__$tooltip.appendTo($p);
+	},
+	
+	/**
+	 * Set maximum dimensions for the tooltip. A call to ::measure afterwards
+	 * will tell us if the content overflows or if it's ok
+	 *
+	 * @param {int} width
+	 * @param {int} height
+	 * @return {Ruler}
+	 * @public
+	 */
+	constrain: function(width, height) {
+		
+		this.constraints = {
+			width: width,
+			height: height
+		};
+		
+		this.__$tooltip.css({
+			// we disable display:flex, otherwise the content would overflow without
+			// creating horizontal scrolling (which we need to detect).
+			display: 'block',
+			// reset any previous height
+			height: '',
+			// we'll check if horizontal scrolling occurs
+			overflow: 'auto',
+			// we'll set the width and see what height is generated and if there
+			// is horizontal overflow
+			width: width
+		});
+		
+		return this;
+	},
+	
+	/**
+	 * Reset the tooltip content overflow and remove the test container
+	 * 
+	 * @returns {Ruler}
+	 * @public
+	 */
+	destroy: function() {
+		
+		// in case the element was not a clone
+		this.__$tooltip
+			.detach()
+			.find('.tooltipster-content')
+				.css({
+					// reset to CSS value
+					display: '',
+					overflow: ''
+				});
+		
+		this.$container.remove();
+	},
+	
+	/**
+	 * Removes any constraints
+	 * 
+	 * @returns {Ruler}
+	 * @public
+	 */
+	free: function() {
+		
+		this.constraints = null;
+		
+		// reset to natural size
+		this.__$tooltip.css({
+			display: '',
+			height: '',
+			overflow: 'visible',
+			width: ''
+		});
+		
+		return this;
+	},
+	
+	/**
+	 * Returns the size of the tooltip. When constraints are applied, also returns
+	 * whether the tooltip fits in the provided dimensions.
+	 * The idea is to see if the new height is small enough and if the content does
+	 * not overflow horizontally.
+	 *
+	 * @param {int} width
+	 * @param {int} height
+	 * @returns {object} An object with a bool `fits` property and a `size` property
+	 * @public
+	 */
+	measure: function() {
+		
+		this.__forceRedraw();
+		
+		var tooltipBcr = this.__$tooltip[0].getBoundingClientRect(),
+			result = { size: {
+				// bcr.width/height are not defined in IE8- but in this
+				// case, bcr.right/bottom will have the same value
+				// except in iOS 8+ where tooltipBcr.bottom/right are wrong
+				// after scrolling for reasons yet to be determined.
+				// tooltipBcr.top/left might not be 0, see issue #514
+				height: tooltipBcr.height || (tooltipBcr.bottom - tooltipBcr.top),
+				width: tooltipBcr.width || (tooltipBcr.right - tooltipBcr.left)
+			}};
+		
+		if (this.constraints) {
+			
+			// note: we used to use offsetWidth instead of boundingRectClient but
+			// it returned rounded values, causing issues with sub-pixel layouts.
+			
+			// note2: noticed that the bcrWidth of text content of a div was once
+			// greater than the bcrWidth of its container by 1px, causing the final
+			// tooltip box to be too small for its content. However, evaluating
+			// their widths one against the other (below) surprisingly returned
+			// equality. Happened only once in Chrome 48, was not able to reproduce
+			// => just having fun with float position values...
+			
+			var $content = this.__$tooltip.find('.tooltipster-content'),
+				height = this.__$tooltip.outerHeight(),
+				contentBcr = $content[0].getBoundingClientRect(),
+				fits = {
+					height: height <= this.constraints.height,
+					width: (
+						// this condition accounts for min-width property that
+						// may apply
+						tooltipBcr.width <= this.constraints.width
+							// the -1 is here because scrollWidth actually returns
+							// a rounded value, and may be greater than bcr.width if
+							// it was rounded up. This may cause an issue for contents
+							// which actually really overflow  by 1px or so, but that
+							// should be rare. Not sure how to solve this efficiently.
+							// See http://blogs.msdn.com/b/ie/archive/2012/02/17/sub-pixel-rendering-and-the-css-object-model.aspx
+						&&	contentBcr.width >= $content[0].scrollWidth - 1
+					)
+				};
+			
+			result.fits = fits.height && fits.width;
+		}
+		
+		// old versions of IE get the width wrong for some reason and it causes
+		// the text to be broken to a new line, so we round it up. If the width
+		// is the width of the screen though, we can assume it is accurate.
+		if (	env.IE
+			&&	env.IE <= 11
+			&&	result.size.width !== env.window.document.documentElement.clientWidth
+		) {
+			result.size.width = Math.ceil(result.size.width) + 1;
+		}
+		
+		return result;
+	}
+};
+
+// quick & dirty compare function, not bijective nor multidimensional
+function areEqual(a,b) {
+	var same = true;
+	$.each(a, function(i, _) {
+		if (b[i] === undefined || a[i] !== b[i]) {
+			same = false;
+			return false;
+		}
+	});
+	return same;
+}
+
+/**
+ * A fast function to check if an element is still in the DOM. It
+ * tries to use an id as ids are indexed by the browser, or falls
+ * back to jQuery's `contains` method. May fail if two elements
+ * have the same id, but so be it
+ *
+ * @param {object} $obj A jQuery-wrapped HTML element
+ * @return {boolean}
+ */
+function bodyContains($obj) {
+	var id = $obj.attr('id'),
+		el = id ? env.window.document.getElementById(id) : null;
+	// must also check that the element with the id is the one we want
+	return el ? el === $obj[0] : $.contains(env.window.document.body, $obj[0]);
+}
+
+// detect IE versions for dirty fixes
+var uA = navigator.userAgent.toLowerCase();
+if (uA.indexOf('msie') != -1) env.IE = parseInt(uA.split('msie')[1]);
+else if (uA.toLowerCase().indexOf('trident') !== -1 && uA.indexOf(' rv:11') !== -1) env.IE = 11;
+else if (uA.toLowerCase().indexOf('edge/') != -1) env.IE = parseInt(uA.toLowerCase().split('edge/')[1]);
+
+// detecting support for CSS transitions
+function transitionSupport() {
+	
+	// env.window is not defined yet when this is called
+	if (!win) return false;
+	
+	var b = win.document.body || win.document.documentElement,
+		s = b.style,
+		p = 'transition',
+		v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+	
+	if (typeof s[p] == 'string') { return true; }
+	
+	p = p.charAt(0).toUpperCase() + p.substr(1);
+	for (var i=0; i<v.length; i++) {
+		if (typeof s[v[i] + p] == 'string') { return true; }
+	}
+	return false;
+}
+
+// we'll return jQuery for plugins not to have to declare it as a dependency,
+// but it's done by a build task since it should be included only once at the
+// end when we concatenate the main file with a plugin
+// sideTip is Tooltipster's default plugin.
+// This file will be UMDified by a build task.
+
+var pluginName = 'tooltipster.sideTip';
+
+$.tooltipster._plugin({
+	name: pluginName,
+	instance: {
+		/**
+		 * Defaults are provided as a function for an easy override by inheritance
+		 *
+		 * @return {object} An object with the defaults options
+		 * @private
+		 */
+		__defaults: function() {
+			
+			return {
+				// if the tooltip should display an arrow that points to the origin
+				arrow: true,
+				// the distance in pixels between the tooltip and the origin
+				distance: 6,
+				// allows to easily change the position of the tooltip
+				functionPosition: null,
+				maxWidth: null,
+				// used to accomodate the arrow of tooltip if there is one.
+				// First to make sure that the arrow target is not too close
+				// to the edge of the tooltip, so the arrow does not overflow
+				// the tooltip. Secondly when we reposition the tooltip to
+				// make sure that it's positioned in such a way that the arrow is
+				// still pointing at the target (and not a few pixels beyond it).
+				// It should be equal to or greater than half the width of
+				// the arrow (by width we mean the size of the side which touches
+				// the side of the tooltip).
+				minIntersection: 16,
+				minWidth: 0,
+				// deprecated in 4.0.0. Listed for _optionsExtract to pick it up
+				position: null,
+				side: 'top',
+				// set to false to position the tooltip relatively to the document rather
+				// than the window when we open it
+				viewportAware: true
+			};
+		},
+		
+		/**
+		 * Run once: at instantiation of the plugin
+		 *
+		 * @param {object} instance The tooltipster object that instantiated this plugin
+		 * @private
+		 */
+		__init: function(instance) {
+			
+			var self = this;
+			
+			// list of instance variables
+			
+			self.__instance = instance;
+			self.__namespace = 'tooltipster-sideTip-'+ Math.round(Math.random()*1000000);
+			self.__previousState = 'closed';
+			self.__options;
+			
+			// initial formatting
+			self.__optionsFormat();
+			
+			self.__instance._on('state.'+ self.__namespace, function(event) {
+				
+				if (event.state == 'closed') {
+					self.__close();
+				}
+				else if (event.state == 'appearing' && self.__previousState == 'closed') {
+					self.__create();
+				}
+				
+				self.__previousState = event.state;
+			});
+			
+			// reformat every time the options are changed
+			self.__instance._on('options.'+ self.__namespace, function() {
+				self.__optionsFormat();
+			});
+			
+			self.__instance._on('reposition.'+ self.__namespace, function(e) {
+				self.__reposition(e.event, e.helper);
+			});
+		},
+		
+		/**
+		 * Called when the tooltip has closed
+		 * 
+		 * @private
+		 */
+		__close: function() {
+			
+			// detach our content object first, so the next jQuery's remove()
+			// call does not unbind its event handlers
+			if (this.__instance.content() instanceof $) {
+				this.__instance.content().detach();
+			}
+			
+			// remove the tooltip from the DOM
+			this.__instance._$tooltip.remove();
+			this.__instance._$tooltip = null;
+		},
+		
+		/**
+		 * Creates the HTML element of the tooltip.
+		 * 
+		 * @private
+		 */
+		__create: function() {
+			
+			// note: we wrap with a .tooltipster-box div to be able to set a margin on it
+			// (.tooltipster-base must not have one)
+			var $html = $(
+				'<div class="tooltipster-base tooltipster-sidetip">' +
+					'<div class="tooltipster-box">' +
+						'<div class="tooltipster-content"></div>' +
+					'</div>' +
+					'<div class="tooltipster-arrow">' +
+						'<div class="tooltipster-arrow-uncropped">' +
+							'<div class="tooltipster-arrow-border"></div>' +
+							'<div class="tooltipster-arrow-background"></div>' +
+						'</div>' +
+					'</div>' +
+				'</div>'
+			);
+			
+			// hide arrow if asked
+			if (!this.__options.arrow) {
+				$html
+					.find('.tooltipster-box')
+						.css('margin', 0)
+						.end()
+					.find('.tooltipster-arrow')
+						.hide();
+			}
+			
+			// apply min/max width if asked
+			if (this.__options.minWidth) {
+				$html.css('min-width', this.__options.minWidth + 'px');
+			}
+			if (this.__options.maxWidth) {
+				$html.css('max-width', this.__options.maxWidth + 'px');
+			}
+			
+			this.__instance._$tooltip = $html;
+			
+			// tell the instance that the tooltip element has been created
+			this.__instance._trigger('created');
+		},
+		
+		/**
+		 * Used when the plugin is to be unplugged
+		 *
+		 * @private
+		 */
+		__destroy: function() {
+			this.__instance._off('.'+ self.__namespace);
+		},
+		
+		/**
+		 * (Re)compute this.__options from the options declared to the instance
+		 *
+		 * @private
+		 */
+		__optionsFormat: function() {
+			
+			var self = this;
+			
+			// get the options
+			self.__options = self.__instance._optionsExtract(pluginName, self.__defaults());
+			
+			// for backward compatibility, deprecated in v4.0.0
+			if (self.__options.position) {
+				self.__options.side = self.__options.position;
+			}
+			
+			// options formatting
+			
+			// format distance as a four-cell array if it ain't one yet and then make
+			// it an object with top/bottom/left/right properties
+			if (typeof self.__options.distance != 'object') {
+				self.__options.distance = [self.__options.distance];
+			}
+			if (self.__options.distance.length < 4) {
+				
+				if (self.__options.distance[1] === undefined) self.__options.distance[1] = self.__options.distance[0];
+				if (self.__options.distance[2] === undefined) self.__options.distance[2] = self.__options.distance[0];
+				if (self.__options.distance[3] === undefined) self.__options.distance[3] = self.__options.distance[1];
+				
+				self.__options.distance = {
+					top: self.__options.distance[0],
+					right: self.__options.distance[1],
+					bottom: self.__options.distance[2],
+					left: self.__options.distance[3]
+				};
+			}
+			
+			// let's transform:
+			// 'top' into ['top', 'bottom', 'right', 'left']
+			// 'right' into ['right', 'left', 'top', 'bottom']
+			// 'bottom' into ['bottom', 'top', 'right', 'left']
+			// 'left' into ['left', 'right', 'top', 'bottom']
+			if (typeof self.__options.side == 'string') {
+				
+				var opposites = {
+					'top': 'bottom',
+					'right': 'left',
+					'bottom': 'top',
+					'left': 'right'
+				};
+				
+				self.__options.side = [self.__options.side, opposites[self.__options.side]];
+				
+				if (self.__options.side[0] == 'left' || self.__options.side[0] == 'right') {
+					self.__options.side.push('top', 'bottom');
+				}
+				else {
+					self.__options.side.push('right', 'left');
+				}
+			}
+			
+			// misc
+			// disable the arrow in IE6 unless the arrow option was explicitly set to true
+			if (	$.tooltipster._env.IE === 6
+				&&	self.__options.arrow !== true
+			) {
+				self.__options.arrow = false;
+			}
+		},
+		
+		/**
+		 * This method must compute and set the positioning properties of the
+		 * tooltip (left, top, width, height, etc.). It must also make sure the
+		 * tooltip is eventually appended to its parent (since the element may be
+		 * detached from the DOM at the moment the method is called).
+		 *
+		 * We'll evaluate positioning scenarios to find which side can contain the
+		 * tooltip in the best way. We'll consider things relatively to the window
+		 * (unless the user asks not to), then to the document (if need be, or if the
+		 * user explicitly requires the tests to run on the document). For each
+		 * scenario, measures are taken, allowing us to know how well the tooltip
+		 * is going to fit. After that, a sorting function will let us know what
+		 * the best scenario is (we also allow the user to choose his favorite
+		 * scenario by using an event).
+		 * 
+		 * @param {object} helper An object that contains variables that plugin
+		 * creators may find useful (see below)
+		 * @param {object} helper.geo An object with many layout properties
+		 * about objects of interest (window, document, origin). This should help
+		 * plugin users compute the optimal position of the tooltip
+		 * @private
+		 */
+		__reposition: function(event, helper) {
+			
+			var self = this,
+				finalResult,
+				// to know where to put the tooltip, we need to know on which point
+				// of the x or y axis we should center it. That coordinate is the target
+				targets = self.__targetFind(helper),
+				testResults = [];
+			
+			// make sure the tooltip is detached while we make tests on a clone
+			self.__instance._$tooltip.detach();
+			
+			// we could actually provide the original element to the Ruler and
+			// not a clone, but it just feels right to keep it out of the
+			// machinery.
+			var $clone = self.__instance._$tooltip.clone(),
+				// start position tests session
+				ruler = $.tooltipster._getRuler($clone),
+				satisfied = false,
+				animation = self.__instance.option('animation');
+			
+			// an animation class could contain properties that distort the size
+			if (animation) {
+				$clone.removeClass('tooltipster-'+ animation);
+			}
+			
+			// start evaluating scenarios
+			$.each(['window', 'document'], function(i, container) {
+				
+				var takeTest = null;
+				
+				// let the user decide to keep on testing or not
+				self.__instance._trigger({
+					container: container,
+					helper: helper,
+					satisfied: satisfied,
+					takeTest: function(bool) {
+						takeTest = bool;
+					},
+					results: testResults,
+					type: 'positionTest'
+				});
+				
+				if (	takeTest == true
+					||	(	takeTest != false
+						&&	satisfied == false
+							// skip the window scenarios if asked. If they are reintegrated by
+							// the callback of the positionTest event, they will have to be
+							// excluded using the callback of positionTested
+						&&	(container != 'window' || self.__options.viewportAware)
+					)
+				) {
+					
+					// for each allowed side
+					for (var i=0; i < self.__options.side.length; i++) {
+						
+						var distance = {
+								horizontal: 0,
+								vertical: 0
+							},
+							side = self.__options.side[i];
+						
+						if (side == 'top' || side == 'bottom') {
+							distance.vertical = self.__options.distance[side];
+						}
+						else {
+							distance.horizontal = self.__options.distance[side];
+						}
+						
+						// this may have an effect on the size of the tooltip if there are css
+						// rules for the arrow or something else
+						self.__sideChange($clone, side);
+						
+						$.each(['natural', 'constrained'], function(i, mode) {
+							
+							takeTest = null;
+							
+							// emit an event on the instance
+							self.__instance._trigger({
+								container: container,
+								event: event,
+								helper: helper,
+								mode: mode,
+								results: testResults,
+								satisfied: satisfied,
+								side: side,
+								takeTest: function(bool) {
+									takeTest = bool;
+								},
+								type: 'positionTest'
+							});
+							
+							if (	takeTest == true
+								||	(	takeTest != false
+									&&	satisfied == false
+								)
+							) {
+								
+								var testResult = {
+									container: container,
+									// we let the distance as an object here, it can make things a little easier
+									// during the user's calculations at positionTest/positionTested
+									distance: distance,
+									// whether the tooltip can fit in the size of the viewport (does not mean
+									// that we'll be able to make it initially entirely visible, see 'whole')
+									fits: null,
+									mode: mode,
+									outerSize: null,
+									side: side,
+									size: null,
+									target: targets[side],
+									// check if the origin has enough surface on screen for the tooltip to
+									// aim at it without overflowing the viewport (this is due to the thickness
+									// of the arrow represented by the minIntersection length).
+									// If not, the tooltip will have to be partly or entirely off screen in
+									// order to stay docked to the origin. This value will stay null when the
+									// container is the document, as it is not relevant
+									whole: null
+								};
+								
+								// get the size of the tooltip with or without size constraints
+								var rulerConfigured = (mode == 'natural') ?
+										ruler.free() :
+										ruler.constrain(
+											helper.geo.available[container][side].width - distance.horizontal,
+											helper.geo.available[container][side].height - distance.vertical
+										),
+									rulerResults = rulerConfigured.measure();
+								
+								testResult.size = rulerResults.size;
+								testResult.outerSize = {
+									height: rulerResults.size.height + distance.vertical,
+									width: rulerResults.size.width + distance.horizontal
+								};
+								
+								if (mode == 'natural') {
+									
+									if(		helper.geo.available[container][side].width >= testResult.outerSize.width
+										&&	helper.geo.available[container][side].height >= testResult.outerSize.height
+									) {
+										testResult.fits = true;
+									}
+									else {
+										testResult.fits = false;
+									}
+								}
+								else {
+									testResult.fits = rulerResults.fits;
+								}
+								
+								if (container == 'window') {
+									
+									if (!testResult.fits) {
+										testResult.whole = false;
+									}
+									else {
+										if (side == 'top' || side == 'bottom') {
+											
+											testResult.whole = (
+													helper.geo.origin.windowOffset.right >= self.__options.minIntersection
+												&&	helper.geo.window.size.width - helper.geo.origin.windowOffset.left >= self.__options.minIntersection
+											);
+										}
+										else {
+											testResult.whole = (
+													helper.geo.origin.windowOffset.bottom >= self.__options.minIntersection
+												&&	helper.geo.window.size.height - helper.geo.origin.windowOffset.top >= self.__options.minIntersection
+											);
+										}
+									}
+								}
+								
+								testResults.push(testResult);
+								
+								// we don't need to compute more positions if we have one fully on screen
+								if (testResult.whole) {
+									satisfied = true;
+								}
+								else {
+									// don't run the constrained test unless the natural width was greater
+									// than the available width, otherwise it's pointless as we know it
+									// wouldn't fit either
+									if (	testResult.mode == 'natural'
+										&&	(	testResult.fits
+											||	testResult.size.width <= helper.geo.available[container][side].width
+										)
+									) {
+										return false;
+									}
+								}
+							}
+						});
+					}
+				}
+			});
+			
+			// the user may eliminate the unwanted scenarios from testResults, but he's
+			// not supposed to alter them at this point. functionPosition and the
+			// position event serve that purpose.
+			self.__instance._trigger({
+				edit: function(r) {
+					testResults = r;
+				},
+				event: event,
+				helper: helper,
+				results: testResults,
+				type: 'positionTested'
+			});
+			
+			/**
+			 * Sort the scenarios to find the favorite one.
+			 * 
+			 * The favorite scenario is when we can fully display the tooltip on screen,
+			 * even if it means that the middle of the tooltip is no longer centered on
+			 * the middle of the origin (when the origin is near the edge of the screen
+			 * or even partly off screen). We want the tooltip on the preferred side,
+			 * even if it means that we have to use a constrained size rather than a
+			 * natural one (as long as it fits). When the origin is off screen at the top
+			 * the tooltip will be positioned at the bottom (if allowed), if the origin
+			 * is off screen on the right, it will be positioned on the left, etc.
+			 * If there are no scenarios where the tooltip can fit on screen, or if the
+			 * user does not want the tooltip to fit on screen (viewportAware == false),
+			 * we fall back to the scenarios relative to the document.
+			 * 
+			 * When the tooltip is bigger than the viewport in either dimension, we stop
+			 * looking at the window scenarios and consider the document scenarios only,
+			 * with the same logic to find on which side it would fit best.
+			 * 
+			 * If the tooltip cannot fit the document on any side, we force it at the
+			 * bottom, so at least the user can scroll to see it.
+ 			 */
+			testResults.sort(function(a, b) {
+				
+				// best if it's whole (the tooltip fits and adapts to the viewport)
+				if (a.whole && !b.whole) {
+					return -1;
+				}
+				else if (!a.whole && b.whole) {
+					return 1;
+				}
+				else if (a.whole && b.whole) {
+					
+					var ai = self.__options.side.indexOf(a.side),
+						bi = self.__options.side.indexOf(b.side);
+					
+					// use the user's sides fallback array
+					if (ai < bi) {
+						return -1;
+					}
+					else if (ai > bi) {
+						return 1;
+					}
+					else {
+						// will be used if the user forced the tests to continue
+						return a.mode == 'natural' ? -1 : 1;
+					}
+				}
+				else {
+					
+					// better if it fits
+					if (a.fits && !b.fits) {
+						return -1;
+					}
+					else if (!a.fits && b.fits) {
+						return 1;
+					}
+					else if (a.fits && b.fits) {
+						
+						var ai = self.__options.side.indexOf(a.side),
+							bi = self.__options.side.indexOf(b.side);
+						
+						// use the user's sides fallback array
+						if (ai < bi) {
+							return -1;
+						}
+						else if (ai > bi) {
+							return 1;
+						}
+						else {
+							// will be used if the user forced the tests to continue
+							return a.mode == 'natural' ? -1 : 1;
+						}
+					}
+					else {
+						
+						// if everything failed, this will give a preference to the case where
+						// the tooltip overflows the document at the bottom
+						if (	a.container == 'document'
+							&&	a.side == 'bottom'
+							&&	a.mode == 'natural'
+						) {
+							return -1;
+						}
+						else {
+							return 1;
+						}
+					}
+				}
+			});
+			
+			finalResult = testResults[0];
+			
+			
+			// now let's find the coordinates of the tooltip relatively to the window
+			finalResult.coord = {};
+			
+			switch (finalResult.side) {
+				
+				case 'left':
+				case 'right':
+					finalResult.coord.top = Math.floor(finalResult.target - finalResult.size.height / 2);
+					break;
+				
+				case 'bottom':
+				case 'top':
+					finalResult.coord.left = Math.floor(finalResult.target - finalResult.size.width / 2);
+					break;
+			}
+			
+			switch (finalResult.side) {
+				
+				case 'left':
+					finalResult.coord.left = helper.geo.origin.windowOffset.left - finalResult.outerSize.width;
+					break;
+				
+				case 'right':
+					finalResult.coord.left = helper.geo.origin.windowOffset.right + finalResult.distance.horizontal;
+					break;
+				
+				case 'top':
+					finalResult.coord.top = helper.geo.origin.windowOffset.top - finalResult.outerSize.height;
+					break;
+				
+				case 'bottom':
+					finalResult.coord.top = helper.geo.origin.windowOffset.bottom + finalResult.distance.vertical;
+					break;
+			}
+			
+			// if the tooltip can potentially be contained within the viewport dimensions
+			// and that we are asked to make it fit on screen
+			if (finalResult.container == 'window') {
+				
+				// if the tooltip overflows the viewport, we'll move it accordingly (then it will
+				// not be centered on the middle of the origin anymore). We only move horizontally
+				// for top and bottom tooltips and vice versa.
+				if (finalResult.side == 'top' || finalResult.side == 'bottom') {
+					
+					// if there is an overflow on the left
+					if (finalResult.coord.left < 0) {
+						
+						// prevent the overflow unless the origin itself gets off screen (minus the
+						// margin needed to keep the arrow pointing at the target)
+						if (helper.geo.origin.windowOffset.right - this.__options.minIntersection >= 0) {
+							finalResult.coord.left = 0;
+						}
+						else {
+							finalResult.coord.left = helper.geo.origin.windowOffset.right - this.__options.minIntersection - 1;
+						}
+					}
+					// or an overflow on the right
+					else if (finalResult.coord.left > helper.geo.window.size.width - finalResult.size.width) {
+						
+						if (helper.geo.origin.windowOffset.left + this.__options.minIntersection <= helper.geo.window.size.width) {
+							finalResult.coord.left = helper.geo.window.size.width - finalResult.size.width;
+						}
+						else {
+							finalResult.coord.left = helper.geo.origin.windowOffset.left + this.__options.minIntersection + 1 - finalResult.size.width;
+						}
+					}
+				}
+				else {
+					
+					// overflow at the top
+					if (finalResult.coord.top < 0) {
+						
+						if (helper.geo.origin.windowOffset.bottom - this.__options.minIntersection >= 0) {
+							finalResult.coord.top = 0;
+						}
+						else {
+							finalResult.coord.top = helper.geo.origin.windowOffset.bottom - this.__options.minIntersection - 1;
+						}
+					}
+					// or at the bottom
+					else if (finalResult.coord.top > helper.geo.window.size.height - finalResult.size.height) {
+						
+						if (helper.geo.origin.windowOffset.top + this.__options.minIntersection <= helper.geo.window.size.height) {
+							finalResult.coord.top = helper.geo.window.size.height - finalResult.size.height;
+						}
+						else {
+							finalResult.coord.top = helper.geo.origin.windowOffset.top + this.__options.minIntersection + 1 - finalResult.size.height;
+						}
+					}
+				}
+			}
+			else {
+				
+				// there might be overflow here too but it's easier to handle. If there has
+				// to be an overflow, we'll make sure it's on the right side of the screen
+				// (because the browser will extend the document size if there is an overflow
+				// on the right, but not on the left). The sort function above has already
+				// made sure that a bottom document overflow is preferred to a top overflow,
+				// so we don't have to care about it.
+				
+				// if there is an overflow on the right
+				if (finalResult.coord.left > helper.geo.window.size.width - finalResult.size.width) {
+					
+					// this may actually create on overflow on the left but we'll fix it in a sec
+					finalResult.coord.left = helper.geo.window.size.width - finalResult.size.width;
+				}
+				
+				// if there is an overflow on the left
+				if (finalResult.coord.left < 0) {
+					
+					// don't care if it overflows the right after that, we made our best
+					finalResult.coord.left = 0;
+				}
+			}
+			
+			
+			// submit the positioning proposal to the user function which may choose to change
+			// the side, size and/or the coordinates
+			
+			// first, set the rules that corresponds to the proposed side: it may change
+			// the size of the tooltip, and the custom functionPosition may want to detect the
+			// size of something before making a decision. So let's make things easier for the
+			// implementor
+			self.__sideChange($clone, finalResult.side);
+			
+			// add some variables to the helper
+			helper.tooltipClone = $clone[0];
+			helper.tooltipParent = self.__instance.option('parent').parent[0];
+			// move informative values to the helper
+			helper.mode = finalResult.mode;
+			helper.whole = finalResult.whole;
+			// add some variables to the helper for the functionPosition callback (these
+			// will also be added to the event fired by self.__instance._trigger but that's
+			// ok, we're just being consistent)
+			helper.origin = self.__instance._$origin[0];
+			helper.tooltip = self.__instance._$tooltip[0];
+			
+			// leave only the actionable values in there for functionPosition
+			delete finalResult.container;
+			delete finalResult.fits;
+			delete finalResult.mode;
+			delete finalResult.outerSize;
+			delete finalResult.whole;
+			
+			// keep only the distance on the relevant side, for clarity
+			finalResult.distance = finalResult.distance.horizontal || finalResult.distance.vertical;
+			
+			// beginners may not be comfortable with the concept of editing the object
+			//  passed by reference, so we provide an edit function and pass a clone
+			var finalResultClone = $.extend(true, {}, finalResult);
+			
+			// emit an event on the instance
+			self.__instance._trigger({
+				edit: function(result) {
+					finalResult = result;
+				},
+				event: event,
+				helper: helper,
+				position: finalResultClone,
+				type: 'position'
+			});
+			
+			if (self.__options.functionPosition) {
+				
+				var result = self.__options.functionPosition.call(self, self.__instance, helper, finalResultClone);
+				
+				if (result) finalResult = result;
+			}
+			
+			// end the positioning tests session (the user might have had a
+			// use for it during the position event, now it's over)
+			ruler.destroy();
+			
+			// compute the position of the target relatively to the tooltip root
+			// element so we can place the arrow and make the needed adjustments
+			var arrowCoord,
+				maxVal;
+			
+			if (finalResult.side == 'top' || finalResult.side == 'bottom') {
+				
+				arrowCoord = {
+					prop: 'left',
+					val: finalResult.target - finalResult.coord.left
+				};
+				maxVal = finalResult.size.width - this.__options.minIntersection;
+			}
+			else {
+				
+				arrowCoord = {
+					prop: 'top',
+					val: finalResult.target - finalResult.coord.top
+				};
+				maxVal = finalResult.size.height - this.__options.minIntersection;
+			}
+			
+			// cannot lie beyond the boundaries of the tooltip, minus the
+			// arrow margin
+			if (arrowCoord.val < this.__options.minIntersection) {
+				arrowCoord.val = this.__options.minIntersection;
+			}
+			else if (arrowCoord.val > maxVal) {
+				arrowCoord.val = maxVal;
+			}
+			
+			var originParentOffset;
+			
+			// let's convert the window-relative coordinates into coordinates relative to the
+			// future positioned parent that the tooltip will be appended to
+			if (helper.geo.origin.fixedLineage) {
+				
+				// same as windowOffset when the position is fixed
+				originParentOffset = helper.geo.origin.windowOffset;
+			}
+			else {
+				
+				// this assumes that the parent of the tooltip is located at
+				// (0, 0) in the document, typically like when the parent is
+				// <body>.
+				// If we ever allow other types of parent, .tooltipster-ruler
+				// will have to be appended to the parent to inherit css style
+				// values that affect the display of the text and such.
+				originParentOffset = {
+					left: helper.geo.origin.windowOffset.left + helper.geo.window.scroll.left,
+					top: helper.geo.origin.windowOffset.top + helper.geo.window.scroll.top
+				};
+			}
+			
+			finalResult.coord = {
+				left: originParentOffset.left + (finalResult.coord.left - helper.geo.origin.windowOffset.left),
+				top: originParentOffset.top + (finalResult.coord.top - helper.geo.origin.windowOffset.top)
+			};
+			
+			// set position values on the original tooltip element
+			
+			self.__sideChange(self.__instance._$tooltip, finalResult.side);
+			
+			if (helper.geo.origin.fixedLineage) {
+				self.__instance._$tooltip
+					.css('position', 'fixed');
+			}
+			else {
+				// CSS default
+				self.__instance._$tooltip
+					.css('position', '');
+			}
+			
+			self.__instance._$tooltip
+				.css({
+					left: finalResult.coord.left,
+					top: finalResult.coord.top,
+					// we need to set a size even if the tooltip is in its natural size
+					// because when the tooltip is positioned beyond the width of the body
+					// (which is by default the width of the window; it will happen when
+					// you scroll the window horizontally to get to the origin), its text
+					// content will otherwise break lines at each word to keep up with the
+					// body overflow strategy.
+					height: finalResult.size.height,
+					width: finalResult.size.width
+				})
+				.find('.tooltipster-arrow')
+					.css({
+						'left': '',
+						'top': ''
+					})
+					.css(arrowCoord.prop, arrowCoord.val);
+			
+			// append the tooltip HTML element to its parent
+			self.__instance._$tooltip.appendTo(self.__instance.option('parent'));
+			
+			self.__instance._trigger({
+				type: 'repositioned',
+				event: event,
+				position: finalResult
+			});
+		},
+		
+		/**
+		 * Make whatever modifications are needed when the side is changed. This has
+		 * been made an independant method for easy inheritance in custom plugins based
+		 * on this default plugin.
+		 *
+		 * @param {object} $obj
+		 * @param {string} side
+		 * @private
+		 */
+		__sideChange: function($obj, side) {
+			
+			$obj
+				.removeClass('tooltipster-bottom')
+				.removeClass('tooltipster-left')
+				.removeClass('tooltipster-right')
+				.removeClass('tooltipster-top')
+				.addClass('tooltipster-'+ side);
+		},
+		
+		/**
+		 * Returns the target that the tooltip should aim at for a given side.
+		 * The calculated value is a distance from the edge of the window
+		 * (left edge for top/bottom sides, top edge for left/right side). The
+		 * tooltip will be centered on that position and the arrow will be
+		 * positioned there (as much as possible).
+		 *
+		 * @param {object} helper
+		 * @return {integer}
+		 * @private
+		 */
+		__targetFind: function(helper) {
+			
+			var target = {},
+				rects = this.__instance._$origin[0].getClientRects();
+			
+			// these lines fix a Chrome bug (issue #491)
+			if (rects.length > 1) {
+				var opacity = this.__instance._$origin.css('opacity');
+				if(opacity == 1) {
+					this.__instance._$origin.css('opacity', 0.99);
+					rects = this.__instance._$origin[0].getClientRects();
+					this.__instance._$origin.css('opacity', 1);
+				}
+			}
+			
+			// by default, the target will be the middle of the origin
+			if (rects.length < 2) {
+				
+				target.top = Math.floor(helper.geo.origin.windowOffset.left + (helper.geo.origin.size.width / 2));
+				target.bottom = target.top;
+				
+				target.left = Math.floor(helper.geo.origin.windowOffset.top + (helper.geo.origin.size.height / 2));
+				target.right = target.left;
+			}
+			// if multiple client rects exist, the element may be text split
+			// up into multiple lines and the middle of the origin may not be
+			// best option anymore. We need to choose the best target client rect
+			else {
+				
+				// top: the first
+				var targetRect = rects[0];
+				target.top = Math.floor(targetRect.left + (targetRect.right - targetRect.left) / 2);
+		
+				// right: the middle line, rounded down in case there is an even
+				// number of lines (looks more centered => check out the
+				// demo with 4 split lines)
+				if (rects.length > 2) {
+					targetRect = rects[Math.ceil(rects.length / 2) - 1];
+				}
+				else {
+					targetRect = rects[0];
+				}
+				target.right = Math.floor(targetRect.top + (targetRect.bottom - targetRect.top) / 2);
+		
+				// bottom: the last
+				targetRect = rects[rects.length - 1];
+				target.bottom = Math.floor(targetRect.left + (targetRect.right - targetRect.left) / 2);
+		
+				// left: the middle line, rounded up
+				if (rects.length > 2) {
+					targetRect = rects[Math.ceil((rects.length + 1) / 2) - 1];
+				}
+				else {
+					targetRect = rects[rects.length - 1];
+				}
+				
+				target.left = Math.floor(targetRect.top + (targetRect.bottom - targetRect.top) / 2);
+			}
+			
+			return target;
+		}
+	}
+});
+
+/* a build task will add "return $;" here */
+return $;
+
+}));
+
+!function(a,b){"function"==typeof define&&define.amd?define(["jquery"],function(a){return b(a)}):"object"==typeof exports?module.exports=b(require("jquery")):b(jQuery)}(this,function(a){function b(a){this.$container,this.constraints=null,this.__$tooltip,this.__init(a)}function c(b,c){var d=!0;return a.each(b,function(a,e){return void 0===c[a]||b[a]!==c[a]?(d=!1,!1):void 0}),d}function d(b){var c=b.attr("id"),d=c?h.window.document.getElementById(c):null;return d?d===b[0]:a.contains(h.window.document.body,b[0])}function e(){if(!g)return!1;var a=g.document.body||g.document.documentElement,b=a.style,c="transition",d=["Moz","Webkit","Khtml","O","ms"];if("string"==typeof b[c])return!0;c=c.charAt(0).toUpperCase()+c.substr(1);for(var e=0;e<d.length;e++)if("string"==typeof b[d[e]+c])return!0;return!1}var f={animation:"fade",animationDuration:350,content:null,contentAsHTML:!1,contentCloning:!1,debug:!0,delay:300,delayTouch:[300,500],functionInit:null,functionBefore:null,functionReady:null,functionAfter:null,functionFormat:null,IEmin:6,interactive:!1,multiple:!1,parent:null,plugins:["sideTip"],repositionOnScroll:!1,restoration:"none",selfDestruction:!0,theme:[],timer:0,trackerInterval:500,trackOrigin:!1,trackTooltip:!1,trigger:"hover",triggerClose:{click:!1,mouseleave:!1,originClick:!1,scroll:!1,tap:!1,touchleave:!1},triggerOpen:{click:!1,mouseenter:!1,tap:!1,touchstart:!1},updateAnimation:"rotate",zIndex:9999999},g="undefined"!=typeof window?window:null,h={hasTouchCapability:!(!g||!("ontouchstart"in g||g.DocumentTouch&&g.document instanceof g.DocumentTouch||g.navigator.maxTouchPoints)),hasTransitions:e(),IE:!1,semVer:"4.2.6",window:g},i=function(){this.__$emitterPrivate=a({}),this.__$emitterPublic=a({}),this.__instancesLatestArr=[],this.__plugins={},this._env=h};i.prototype={__bridge:function(b,c,d){if(!c[d]){var e=function(){};e.prototype=b;var g=new e;g.__init&&g.__init(c),a.each(b,function(a,b){0!=a.indexOf("__")&&(c[a]?f.debug&&console.log("The "+a+" method of the "+d+" plugin conflicts with another plugin or native methods"):(c[a]=function(){return g[a].apply(g,Array.prototype.slice.apply(arguments))},c[a].bridged=g))}),c[d]=g}return this},__setWindow:function(a){return h.window=a,this},_getRuler:function(a){return new b(a)},_off:function(){return this.__$emitterPrivate.off.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_on:function(){return this.__$emitterPrivate.on.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_one:function(){return this.__$emitterPrivate.one.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_plugin:function(b){var c=this;if("string"==typeof b){var d=b,e=null;return d.indexOf(".")>0?e=c.__plugins[d]:a.each(c.__plugins,function(a,b){return b.name.substring(b.name.length-d.length-1)=="."+d?(e=b,!1):void 0}),e}if(b.name.indexOf(".")<0)throw new Error("Plugins must be namespaced");return c.__plugins[b.name]=b,b.core&&c.__bridge(b.core,c,b.name),this},_trigger:function(){var a=Array.prototype.slice.apply(arguments);return"string"==typeof a[0]&&(a[0]={type:a[0]}),this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate,a),this.__$emitterPublic.trigger.apply(this.__$emitterPublic,a),this},instances:function(b){var c=[],d=b||".tooltipstered";return a(d).each(function(){var b=a(this),d=b.data("tooltipster-ns");d&&a.each(d,function(a,d){c.push(b.data(d))})}),c},instancesLatest:function(){return this.__instancesLatestArr},off:function(){return this.__$emitterPublic.off.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},on:function(){return this.__$emitterPublic.on.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},one:function(){return this.__$emitterPublic.one.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},origins:function(b){var c=b?b+" ":"";return a(c+".tooltipstered").toArray()},setDefaults:function(b){return a.extend(f,b),this},triggerHandler:function(){return this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this}},a.tooltipster=new i,a.Tooltipster=function(b,c){this.__callbacks={close:[],open:[]},this.__closingTime,this.__Content,this.__contentBcr,this.__destroyed=!1,this.__$emitterPrivate=a({}),this.__$emitterPublic=a({}),this.__enabled=!0,this.__garbageCollector,this.__Geometry,this.__lastPosition,this.__namespace="tooltipster-"+Math.round(1e6*Math.random()),this.__options,this.__$originParents,this.__pointerIsOverOrigin=!1,this.__previousThemes=[],this.__state="closed",this.__timeouts={close:[],open:null},this.__touchEvents=[],this.__tracker=null,this._$origin,this._$tooltip,this.__init(b,c)},a.Tooltipster.prototype={__init:function(b,c){var d=this;if(d._$origin=a(b),d.__options=a.extend(!0,{},f,c),d.__optionsFormat(),!h.IE||h.IE>=d.__options.IEmin){var e=null;if(void 0===d._$origin.data("tooltipster-initialTitle")&&(e=d._$origin.attr("title"),void 0===e&&(e=null),d._$origin.data("tooltipster-initialTitle",e)),null!==d.__options.content)d.__contentSet(d.__options.content);else{var g,i=d._$origin.attr("data-tooltip-content");i&&(g=a(i)),g&&g[0]?d.__contentSet(g.first()):d.__contentSet(e)}d._$origin.removeAttr("title").addClass("tooltipstered"),d.__prepareOrigin(),d.__prepareGC(),a.each(d.__options.plugins,function(a,b){d._plug(b)}),h.hasTouchCapability&&a(h.window.document.body).on("touchmove."+d.__namespace+"-triggerOpen",function(a){d._touchRecordEvent(a)}),d._on("created",function(){d.__prepareTooltip()})._on("repositioned",function(a){d.__lastPosition=a.position})}else d.__options.disabled=!0},__contentInsert:function(){var a=this,b=a._$tooltip.find(".tooltipster-content"),c=a.__Content,d=function(a){c=a};return a._trigger({type:"format",content:a.__Content,format:d}),a.__options.functionFormat&&(c=a.__options.functionFormat.call(a,a,{origin:a._$origin[0]},a.__Content)),"string"!=typeof c||a.__options.contentAsHTML?b.empty().append(c):b.text(c),a},__contentSet:function(b){return b instanceof a&&this.__options.contentCloning&&(b=b.clone(!0)),this.__Content=b,this._trigger({type:"updated",content:b}),this},__destroyError:function(){throw new Error("This tooltip has been destroyed and cannot execute your method call.")},__geometry:function(){var b=this,c=b._$origin,d=b._$origin.is("area");if(d){var e=b._$origin.parent().attr("name");c=a('img[usemap="#'+e+'"]')}var f=c[0].getBoundingClientRect(),g=a(h.window.document),i=a(h.window),j=c,k={available:{document:null,window:null},document:{size:{height:g.height(),width:g.width()}},window:{scroll:{left:h.window.scrollX||h.window.document.documentElement.scrollLeft,top:h.window.scrollY||h.window.document.documentElement.scrollTop},size:{height:i.height(),width:i.width()}},origin:{fixedLineage:!1,offset:{},size:{height:f.bottom-f.top,width:f.right-f.left},usemapImage:d?c[0]:null,windowOffset:{bottom:f.bottom,left:f.left,right:f.right,top:f.top}}};if(d){var l=b._$origin.attr("shape"),m=b._$origin.attr("coords");if(m&&(m=m.split(","),a.map(m,function(a,b){m[b]=parseInt(a)})),"default"!=l)switch(l){case"circle":var n=m[0],o=m[1],p=m[2],q=o-p,r=n-p;k.origin.size.height=2*p,k.origin.size.width=k.origin.size.height,k.origin.windowOffset.left+=r,k.origin.windowOffset.top+=q;break;case"rect":var s=m[0],t=m[1],u=m[2],v=m[3];k.origin.size.height=v-t,k.origin.size.width=u-s,k.origin.windowOffset.left+=s,k.origin.windowOffset.top+=t;break;case"poly":for(var w=0,x=0,y=0,z=0,A="even",B=0;B<m.length;B++){var C=m[B];"even"==A?(C>y&&(y=C,0===B&&(w=y)),w>C&&(w=C),A="odd"):(C>z&&(z=C,1==B&&(x=z)),x>C&&(x=C),A="even")}k.origin.size.height=z-x,k.origin.size.width=y-w,k.origin.windowOffset.left+=w,k.origin.windowOffset.top+=x}}var D=function(a){k.origin.size.height=a.height,k.origin.windowOffset.left=a.left,k.origin.windowOffset.top=a.top,k.origin.size.width=a.width};for(b._trigger({type:"geometry",edit:D,geometry:{height:k.origin.size.height,left:k.origin.windowOffset.left,top:k.origin.windowOffset.top,width:k.origin.size.width}}),k.origin.windowOffset.right=k.origin.windowOffset.left+k.origin.size.width,k.origin.windowOffset.bottom=k.origin.windowOffset.top+k.origin.size.height,k.origin.offset.left=k.origin.windowOffset.left+k.window.scroll.left,k.origin.offset.top=k.origin.windowOffset.top+k.window.scroll.top,k.origin.offset.bottom=k.origin.offset.top+k.origin.size.height,k.origin.offset.right=k.origin.offset.left+k.origin.size.width,k.available.document={bottom:{height:k.document.size.height-k.origin.offset.bottom,width:k.document.size.width},left:{height:k.document.size.height,width:k.origin.offset.left},right:{height:k.document.size.height,width:k.document.size.width-k.origin.offset.right},top:{height:k.origin.offset.top,width:k.document.size.width}},k.available.window={bottom:{height:Math.max(k.window.size.height-Math.max(k.origin.windowOffset.bottom,0),0),width:k.window.size.width},left:{height:k.window.size.height,width:Math.max(k.origin.windowOffset.left,0)},right:{height:k.window.size.height,width:Math.max(k.window.size.width-Math.max(k.origin.windowOffset.right,0),0)},top:{height:Math.max(k.origin.windowOffset.top,0),width:k.window.size.width}};"html"!=j[0].tagName.toLowerCase();){if("fixed"==j.css("position")){k.origin.fixedLineage=!0;break}j=j.parent()}return k},__optionsFormat:function(){return"number"==typeof this.__options.animationDuration&&(this.__options.animationDuration=[this.__options.animationDuration,this.__options.animationDuration]),"number"==typeof this.__options.delay&&(this.__options.delay=[this.__options.delay,this.__options.delay]),"number"==typeof this.__options.delayTouch&&(this.__options.delayTouch=[this.__options.delayTouch,this.__options.delayTouch]),"string"==typeof this.__options.theme&&(this.__options.theme=[this.__options.theme]),null===this.__options.parent?this.__options.parent=a(h.window.document.body):"string"==typeof this.__options.parent&&(this.__options.parent=a(this.__options.parent)),"hover"==this.__options.trigger?(this.__options.triggerOpen={mouseenter:!0,touchstart:!0},this.__options.triggerClose={mouseleave:!0,originClick:!0,touchleave:!0}):"click"==this.__options.trigger&&(this.__options.triggerOpen={click:!0,tap:!0},this.__options.triggerClose={click:!0,tap:!0}),this._trigger("options"),this},__prepareGC:function(){var b=this;return b.__options.selfDestruction?b.__garbageCollector=setInterval(function(){var c=(new Date).getTime();b.__touchEvents=a.grep(b.__touchEvents,function(a,b){return c-a.time>6e4}),d(b._$origin)||b.close(function(){b.destroy()})},2e4):clearInterval(b.__garbageCollector),b},__prepareOrigin:function(){var a=this;if(a._$origin.off("."+a.__namespace+"-triggerOpen"),h.hasTouchCapability&&a._$origin.on("touchstart."+a.__namespace+"-triggerOpen touchend."+a.__namespace+"-triggerOpen touchcancel."+a.__namespace+"-triggerOpen",function(b){a._touchRecordEvent(b)}),a.__options.triggerOpen.click||a.__options.triggerOpen.tap&&h.hasTouchCapability){var b="";a.__options.triggerOpen.click&&(b+="click."+a.__namespace+"-triggerOpen "),a.__options.triggerOpen.tap&&h.hasTouchCapability&&(b+="touchend."+a.__namespace+"-triggerOpen"),a._$origin.on(b,function(b){a._touchIsMeaningfulEvent(b)&&a._open(b)})}if(a.__options.triggerOpen.mouseenter||a.__options.triggerOpen.touchstart&&h.hasTouchCapability){var b="";a.__options.triggerOpen.mouseenter&&(b+="mouseenter."+a.__namespace+"-triggerOpen "),a.__options.triggerOpen.touchstart&&h.hasTouchCapability&&(b+="touchstart."+a.__namespace+"-triggerOpen"),a._$origin.on(b,function(b){!a._touchIsTouchEvent(b)&&a._touchIsEmulatedEvent(b)||(a.__pointerIsOverOrigin=!0,a._openShortly(b))})}if(a.__options.triggerClose.mouseleave||a.__options.triggerClose.touchleave&&h.hasTouchCapability){var b="";a.__options.triggerClose.mouseleave&&(b+="mouseleave."+a.__namespace+"-triggerOpen "),a.__options.triggerClose.touchleave&&h.hasTouchCapability&&(b+="touchend."+a.__namespace+"-triggerOpen touchcancel."+a.__namespace+"-triggerOpen"),a._$origin.on(b,function(b){a._touchIsMeaningfulEvent(b)&&(a.__pointerIsOverOrigin=!1)})}return a},__prepareTooltip:function(){var b=this,c=b.__options.interactive?"auto":"";return b._$tooltip.attr("id",b.__namespace).css({"pointer-events":c,zIndex:b.__options.zIndex}),a.each(b.__previousThemes,function(a,c){b._$tooltip.removeClass(c)}),a.each(b.__options.theme,function(a,c){b._$tooltip.addClass(c)}),b.__previousThemes=a.merge([],b.__options.theme),b},__scrollHandler:function(b){var c=this;if(c.__options.triggerClose.scroll)c._close(b);else if(d(c._$origin)&&d(c._$tooltip)){var e=null;if(b.target===h.window.document)c.__Geometry.origin.fixedLineage||c.__options.repositionOnScroll&&c.reposition(b);else{e=c.__geometry();var f=!1;if("fixed"!=c._$origin.css("position")&&c.__$originParents.each(function(b,c){var d=a(c),g=d.css("overflow-x"),h=d.css("overflow-y");if("visible"!=g||"visible"!=h){var i=c.getBoundingClientRect();if("visible"!=g&&(e.origin.windowOffset.left<i.left||e.origin.windowOffset.right>i.right))return f=!0,!1;if("visible"!=h&&(e.origin.windowOffset.top<i.top||e.origin.windowOffset.bottom>i.bottom))return f=!0,!1}return"fixed"==d.css("position")?!1:void 0}),f)c._$tooltip.css("visibility","hidden");else if(c._$tooltip.css("visibility","visible"),c.__options.repositionOnScroll)c.reposition(b);else{var g=e.origin.offset.left-c.__Geometry.origin.offset.left,i=e.origin.offset.top-c.__Geometry.origin.offset.top;c._$tooltip.css({left:c.__lastPosition.coord.left+g,top:c.__lastPosition.coord.top+i})}}c._trigger({type:"scroll",event:b,geo:e})}return c},__stateSet:function(a){return this.__state=a,this._trigger({type:"state",state:a}),this},__timeoutsClear:function(){return clearTimeout(this.__timeouts.open),this.__timeouts.open=null,a.each(this.__timeouts.close,function(a,b){clearTimeout(b)}),this.__timeouts.close=[],this},__trackerStart:function(){var a=this,b=a._$tooltip.find(".tooltipster-content");return a.__options.trackTooltip&&(a.__contentBcr=b[0].getBoundingClientRect()),a.__tracker=setInterval(function(){if(d(a._$origin)&&d(a._$tooltip)){if(a.__options.trackOrigin){var e=a.__geometry(),f=!1;c(e.origin.size,a.__Geometry.origin.size)&&(a.__Geometry.origin.fixedLineage?c(e.origin.windowOffset,a.__Geometry.origin.windowOffset)&&(f=!0):c(e.origin.offset,a.__Geometry.origin.offset)&&(f=!0)),f||(a.__options.triggerClose.mouseleave?a._close():a.reposition())}if(a.__options.trackTooltip){var g=b[0].getBoundingClientRect();g.height===a.__contentBcr.height&&g.width===a.__contentBcr.width||(a.reposition(),a.__contentBcr=g)}}else a._close()},a.__options.trackerInterval),a},_close:function(b,c,d){var e=this,f=!0;if(e._trigger({type:"close",event:b,stop:function(){f=!1}}),f||d){c&&e.__callbacks.close.push(c),e.__callbacks.open=[],e.__timeoutsClear();var g=function(){a.each(e.__callbacks.close,function(a,c){c.call(e,e,{event:b,origin:e._$origin[0]})}),e.__callbacks.close=[]};if("closed"!=e.__state){var i=!0,j=new Date,k=j.getTime(),l=k+e.__options.animationDuration[1];if("disappearing"==e.__state&&l>e.__closingTime&&e.__options.animationDuration[1]>0&&(i=!1),i){e.__closingTime=l,"disappearing"!=e.__state&&e.__stateSet("disappearing");var m=function(){clearInterval(e.__tracker),e._trigger({type:"closing",event:b}),e._$tooltip.off("."+e.__namespace+"-triggerClose").removeClass("tooltipster-dying"),a(h.window).off("."+e.__namespace+"-triggerClose"),e.__$originParents.each(function(b,c){a(c).off("scroll."+e.__namespace+"-triggerClose")}),e.__$originParents=null,a(h.window.document.body).off("."+e.__namespace+"-triggerClose"),e._$origin.off("."+e.__namespace+"-triggerClose"),e._off("dismissable"),e.__stateSet("closed"),e._trigger({type:"after",event:b}),e.__options.functionAfter&&e.__options.functionAfter.call(e,e,{event:b,origin:e._$origin[0]}),g()};h.hasTransitions?(e._$tooltip.css({"-moz-animation-duration":e.__options.animationDuration[1]+"ms","-ms-animation-duration":e.__options.animationDuration[1]+"ms","-o-animation-duration":e.__options.animationDuration[1]+"ms","-webkit-animation-duration":e.__options.animationDuration[1]+"ms","animation-duration":e.__options.animationDuration[1]+"ms","transition-duration":e.__options.animationDuration[1]+"ms"}),e._$tooltip.clearQueue().removeClass("tooltipster-show").addClass("tooltipster-dying"),e.__options.animationDuration[1]>0&&e._$tooltip.delay(e.__options.animationDuration[1]),e._$tooltip.queue(m)):e._$tooltip.stop().fadeOut(e.__options.animationDuration[1],m)}}else g()}return e},_off:function(){return this.__$emitterPrivate.off.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_on:function(){return this.__$emitterPrivate.on.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_one:function(){return this.__$emitterPrivate.one.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_open:function(b,c){var e=this;if(!e.__destroying&&d(e._$origin)&&e.__enabled){var f=!0;if("closed"==e.__state&&(e._trigger({type:"before",event:b,stop:function(){f=!1}}),f&&e.__options.functionBefore&&(f=e.__options.functionBefore.call(e,e,{event:b,origin:e._$origin[0]}))),f!==!1&&null!==e.__Content){c&&e.__callbacks.open.push(c),e.__callbacks.close=[],e.__timeoutsClear();var g,i=function(){"stable"!=e.__state&&e.__stateSet("stable"),a.each(e.__callbacks.open,function(a,b){b.call(e,e,{origin:e._$origin[0],tooltip:e._$tooltip[0]})}),e.__callbacks.open=[]};if("closed"!==e.__state)g=0,"disappearing"===e.__state?(e.__stateSet("appearing"),h.hasTransitions?(e._$tooltip.clearQueue().removeClass("tooltipster-dying").addClass("tooltipster-show"),e.__options.animationDuration[0]>0&&e._$tooltip.delay(e.__options.animationDuration[0]),e._$tooltip.queue(i)):e._$tooltip.stop().fadeIn(i)):"stable"==e.__state&&i();else{if(e.__stateSet("appearing"),g=e.__options.animationDuration[0],e.__contentInsert(),e.reposition(b,!0),h.hasTransitions?(e._$tooltip.addClass("tooltipster-"+e.__options.animation).addClass("tooltipster-initial").css({"-moz-animation-duration":e.__options.animationDuration[0]+"ms","-ms-animation-duration":e.__options.animationDuration[0]+"ms","-o-animation-duration":e.__options.animationDuration[0]+"ms","-webkit-animation-duration":e.__options.animationDuration[0]+"ms","animation-duration":e.__options.animationDuration[0]+"ms","transition-duration":e.__options.animationDuration[0]+"ms"}),setTimeout(function(){"closed"!=e.__state&&(e._$tooltip.addClass("tooltipster-show").removeClass("tooltipster-initial"),e.__options.animationDuration[0]>0&&e._$tooltip.delay(e.__options.animationDuration[0]),e._$tooltip.queue(i))},0)):e._$tooltip.css("display","none").fadeIn(e.__options.animationDuration[0],i),e.__trackerStart(),a(h.window).on("resize."+e.__namespace+"-triggerClose",function(b){var c=a(document.activeElement);(c.is("input")||c.is("textarea"))&&a.contains(e._$tooltip[0],c[0])||e.reposition(b)}).on("scroll."+e.__namespace+"-triggerClose",function(a){e.__scrollHandler(a)}),e.__$originParents=e._$origin.parents(),e.__$originParents.each(function(b,c){a(c).on("scroll."+e.__namespace+"-triggerClose",function(a){e.__scrollHandler(a)})}),e.__options.triggerClose.mouseleave||e.__options.triggerClose.touchleave&&h.hasTouchCapability){e._on("dismissable",function(a){a.dismissable?a.delay?(m=setTimeout(function(){e._close(a.event)},a.delay),e.__timeouts.close.push(m)):e._close(a):clearTimeout(m)});var j=e._$origin,k="",l="",m=null;e.__options.interactive&&(j=j.add(e._$tooltip)),e.__options.triggerClose.mouseleave&&(k+="mouseenter."+e.__namespace+"-triggerClose ",l+="mouseleave."+e.__namespace+"-triggerClose "),e.__options.triggerClose.touchleave&&h.hasTouchCapability&&(k+="touchstart."+e.__namespace+"-triggerClose",l+="touchend."+e.__namespace+"-triggerClose touchcancel."+e.__namespace+"-triggerClose"),j.on(l,function(a){if(e._touchIsTouchEvent(a)||!e._touchIsEmulatedEvent(a)){var b="mouseleave"==a.type?e.__options.delay:e.__options.delayTouch;e._trigger({delay:b[1],dismissable:!0,event:a,type:"dismissable"})}}).on(k,function(a){!e._touchIsTouchEvent(a)&&e._touchIsEmulatedEvent(a)||e._trigger({dismissable:!1,event:a,type:"dismissable"})})}e.__options.triggerClose.originClick&&e._$origin.on("click."+e.__namespace+"-triggerClose",function(a){e._touchIsTouchEvent(a)||e._touchIsEmulatedEvent(a)||e._close(a)}),(e.__options.triggerClose.click||e.__options.triggerClose.tap&&h.hasTouchCapability)&&setTimeout(function(){if("closed"!=e.__state){var b="",c=a(h.window.document.body);e.__options.triggerClose.click&&(b+="click."+e.__namespace+"-triggerClose "),e.__options.triggerClose.tap&&h.hasTouchCapability&&(b+="touchend."+e.__namespace+"-triggerClose"),c.on(b,function(b){e._touchIsMeaningfulEvent(b)&&(e._touchRecordEvent(b),e.__options.interactive&&a.contains(e._$tooltip[0],b.target)||e._close(b))}),e.__options.triggerClose.tap&&h.hasTouchCapability&&c.on("touchstart."+e.__namespace+"-triggerClose",function(a){e._touchRecordEvent(a)})}},0),e._trigger("ready"),e.__options.functionReady&&e.__options.functionReady.call(e,e,{origin:e._$origin[0],tooltip:e._$tooltip[0]})}if(e.__options.timer>0){var m=setTimeout(function(){e._close()},e.__options.timer+g);e.__timeouts.close.push(m)}}}return e},_openShortly:function(a){var b=this,c=!0;if("stable"!=b.__state&&"appearing"!=b.__state&&!b.__timeouts.open&&(b._trigger({type:"start",event:a,stop:function(){c=!1}}),c)){var d=0==a.type.indexOf("touch")?b.__options.delayTouch:b.__options.delay;d[0]?b.__timeouts.open=setTimeout(function(){b.__timeouts.open=null,b.__pointerIsOverOrigin&&b._touchIsMeaningfulEvent(a)?(b._trigger("startend"),b._open(a)):b._trigger("startcancel")},d[0]):(b._trigger("startend"),b._open(a))}return b},_optionsExtract:function(b,c){var d=this,e=a.extend(!0,{},c),f=d.__options[b];return f||(f={},a.each(c,function(a,b){var c=d.__options[a];void 0!==c&&(f[a]=c)})),a.each(e,function(b,c){void 0!==f[b]&&("object"!=typeof c||c instanceof Array||null==c||"object"!=typeof f[b]||f[b]instanceof Array||null==f[b]?e[b]=f[b]:a.extend(e[b],f[b]))}),e},_plug:function(b){var c=a.tooltipster._plugin(b);if(!c)throw new Error('The "'+b+'" plugin is not defined');return c.instance&&a.tooltipster.__bridge(c.instance,this,c.name),this},_touchIsEmulatedEvent:function(a){for(var b=!1,c=(new Date).getTime(),d=this.__touchEvents.length-1;d>=0;d--){var e=this.__touchEvents[d];if(!(c-e.time<500))break;e.target===a.target&&(b=!0)}return b},_touchIsMeaningfulEvent:function(a){return this._touchIsTouchEvent(a)&&!this._touchSwiped(a.target)||!this._touchIsTouchEvent(a)&&!this._touchIsEmulatedEvent(a)},_touchIsTouchEvent:function(a){return 0==a.type.indexOf("touch")},_touchRecordEvent:function(a){return this._touchIsTouchEvent(a)&&(a.time=(new Date).getTime(),this.__touchEvents.push(a)),this},_touchSwiped:function(a){for(var b=!1,c=this.__touchEvents.length-1;c>=0;c--){var d=this.__touchEvents[c];if("touchmove"==d.type){b=!0;break}if("touchstart"==d.type&&a===d.target)break}return b},_trigger:function(){var b=Array.prototype.slice.apply(arguments);return"string"==typeof b[0]&&(b[0]={type:b[0]}),b[0].instance=this,b[0].origin=this._$origin?this._$origin[0]:null,b[0].tooltip=this._$tooltip?this._$tooltip[0]:null,this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate,b),a.tooltipster._trigger.apply(a.tooltipster,b),this.__$emitterPublic.trigger.apply(this.__$emitterPublic,b),this},_unplug:function(b){var c=this;if(c[b]){var d=a.tooltipster._plugin(b);d.instance&&a.each(d.instance,function(a,d){c[a]&&c[a].bridged===c[b]&&delete c[a]}),c[b].__destroy&&c[b].__destroy(),delete c[b]}return c},close:function(a){return this.__destroyed?this.__destroyError():this._close(null,a),this},content:function(a){var b=this;if(void 0===a)return b.__Content;if(b.__destroyed)b.__destroyError();else if(b.__contentSet(a),null!==b.__Content){if("closed"!==b.__state&&(b.__contentInsert(),b.reposition(),b.__options.updateAnimation))if(h.hasTransitions){var c=b.__options.updateAnimation;b._$tooltip.addClass("tooltipster-update-"+c),setTimeout(function(){"closed"!=b.__state&&b._$tooltip.removeClass("tooltipster-update-"+c)},1e3)}else b._$tooltip.fadeTo(200,.5,function(){"closed"!=b.__state&&b._$tooltip.fadeTo(200,1)})}else b._close();return b},destroy:function(){var b=this;if(b.__destroyed)b.__destroyError();else{"closed"!=b.__state?b.option("animationDuration",0)._close(null,null,!0):b.__timeoutsClear(),b._trigger("destroy"),b.__destroyed=!0,b._$origin.removeData(b.__namespace).off("."+b.__namespace+"-triggerOpen"),a(h.window.document.body).off("."+b.__namespace+"-triggerOpen");var c=b._$origin.data("tooltipster-ns");if(c)if(1===c.length){var d=null;"previous"==b.__options.restoration?d=b._$origin.data("tooltipster-initialTitle"):"current"==b.__options.restoration&&(d="string"==typeof b.__Content?b.__Content:a("<div></div>").append(b.__Content).html()),d&&b._$origin.attr("title",d),b._$origin.removeClass("tooltipstered"),b._$origin.removeData("tooltipster-ns").removeData("tooltipster-initialTitle")}else c=a.grep(c,function(a,c){return a!==b.__namespace}),b._$origin.data("tooltipster-ns",c);b._trigger("destroyed"),b._off(),b.off(),b.__Content=null,b.__$emitterPrivate=null,b.__$emitterPublic=null,b.__options.parent=null,b._$origin=null,b._$tooltip=null,a.tooltipster.__instancesLatestArr=a.grep(a.tooltipster.__instancesLatestArr,function(a,c){return b!==a}),clearInterval(b.__garbageCollector)}return b},disable:function(){return this.__destroyed?(this.__destroyError(),this):(this._close(),this.__enabled=!1,this)},elementOrigin:function(){return this.__destroyed?void this.__destroyError():this._$origin[0]},elementTooltip:function(){return this._$tooltip?this._$tooltip[0]:null},enable:function(){return this.__enabled=!0,this},hide:function(a){return this.close(a)},instance:function(){return this},off:function(){return this.__destroyed||this.__$emitterPublic.off.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},on:function(){return this.__destroyed?this.__destroyError():this.__$emitterPublic.on.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},one:function(){return this.__destroyed?this.__destroyError():this.__$emitterPublic.one.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},open:function(a){return this.__destroyed?this.__destroyError():this._open(null,a),this},option:function(b,c){return void 0===c?this.__options[b]:(this.__destroyed?this.__destroyError():(this.__options[b]=c,this.__optionsFormat(),a.inArray(b,["trigger","triggerClose","triggerOpen"])>=0&&this.__prepareOrigin(),"selfDestruction"===b&&this.__prepareGC()),this)},reposition:function(a,b){var c=this;return c.__destroyed?c.__destroyError():"closed"!=c.__state&&d(c._$origin)&&(b||d(c._$tooltip))&&(b||c._$tooltip.detach(),c.__Geometry=c.__geometry(),c._trigger({type:"reposition",event:a,helper:{geo:c.__Geometry}})),c},show:function(a){return this.open(a)},status:function(){return{destroyed:this.__destroyed,enabled:this.__enabled,open:"closed"!==this.__state,state:this.__state}},triggerHandler:function(){return this.__destroyed?this.__destroyError():this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this}},a.fn.tooltipster=function(){var b=Array.prototype.slice.apply(arguments),c="You are using a single HTML element as content for several tooltips. You probably want to set the contentCloning option to TRUE.";if(0===this.length)return this;if("string"==typeof b[0]){var d="#*$~&";return this.each(function(){var e=a(this).data("tooltipster-ns"),f=e?a(this).data(e[0]):null;if(!f)throw new Error("You called Tooltipster's \""+b[0]+'" method on an uninitialized element');if("function"!=typeof f[b[0]])throw new Error('Unknown method "'+b[0]+'"');this.length>1&&"content"==b[0]&&(b[1]instanceof a||"object"==typeof b[1]&&null!=b[1]&&b[1].tagName)&&!f.__options.contentCloning&&f.__options.debug&&console.log(c);var g=f[b[0]](b[1],b[2]);return g!==f||"instance"===b[0]?(d=g,!1):void 0}),"#*$~&"!==d?d:this}a.tooltipster.__instancesLatestArr=[];var e=b[0]&&void 0!==b[0].multiple,g=e&&b[0].multiple||!e&&f.multiple,h=b[0]&&void 0!==b[0].content,i=h&&b[0].content||!h&&f.content,j=b[0]&&void 0!==b[0].contentCloning,k=j&&b[0].contentCloning||!j&&f.contentCloning,l=b[0]&&void 0!==b[0].debug,m=l&&b[0].debug||!l&&f.debug;return this.length>1&&(i instanceof a||"object"==typeof i&&null!=i&&i.tagName)&&!k&&m&&console.log(c),this.each(function(){var c=!1,d=a(this),e=d.data("tooltipster-ns"),f=null;e?g?c=!0:m&&(console.log("Tooltipster: one or more tooltips are already attached to the element below. Ignoring."),console.log(this)):c=!0,c&&(f=new a.Tooltipster(this,b[0]),e||(e=[]),e.push(f.__namespace),d.data("tooltipster-ns",e),d.data(f.__namespace,f),f.__options.functionInit&&f.__options.functionInit.call(f,f,{origin:this}),f._trigger("init")),a.tooltipster.__instancesLatestArr.push(f)}),this},b.prototype={__init:function(b){this.__$tooltip=b,this.__$tooltip.css({left:0,overflow:"hidden",position:"absolute",top:0}).find(".tooltipster-content").css("overflow","auto"),this.$container=a('<div class="tooltipster-ruler"></div>').append(this.__$tooltip).appendTo(h.window.document.body)},__forceRedraw:function(){var a=this.__$tooltip.parent();this.__$tooltip.detach(),this.__$tooltip.appendTo(a)},constrain:function(a,b){return this.constraints={width:a,height:b},this.__$tooltip.css({display:"block",height:"",overflow:"auto",width:a}),this},destroy:function(){this.__$tooltip.detach().find(".tooltipster-content").css({display:"",overflow:""}),this.$container.remove()},free:function(){return this.constraints=null,this.__$tooltip.css({display:"",height:"",overflow:"visible",width:""}),this},measure:function(){this.__forceRedraw();var a=this.__$tooltip[0].getBoundingClientRect(),b={size:{height:a.height||a.bottom-a.top,width:a.width||a.right-a.left}};if(this.constraints){var c=this.__$tooltip.find(".tooltipster-content"),d=this.__$tooltip.outerHeight(),e=c[0].getBoundingClientRect(),f={height:d<=this.constraints.height,width:a.width<=this.constraints.width&&e.width>=c[0].scrollWidth-1};b.fits=f.height&&f.width}return h.IE&&h.IE<=11&&b.size.width!==h.window.document.documentElement.clientWidth&&(b.size.width=Math.ceil(b.size.width)+1),b}};var j=navigator.userAgent.toLowerCase();-1!=j.indexOf("msie")?h.IE=parseInt(j.split("msie")[1]):-1!==j.toLowerCase().indexOf("trident")&&-1!==j.indexOf(" rv:11")?h.IE=11:-1!=j.toLowerCase().indexOf("edge/")&&(h.IE=parseInt(j.toLowerCase().split("edge/")[1]));var k="tooltipster.sideTip";return a.tooltipster._plugin({name:k,instance:{__defaults:function(){return{arrow:!0,distance:6,functionPosition:null,maxWidth:null,minIntersection:16,minWidth:0,position:null,side:"top",viewportAware:!0}},__init:function(a){var b=this;b.__instance=a,b.__namespace="tooltipster-sideTip-"+Math.round(1e6*Math.random()),b.__previousState="closed",b.__options,b.__optionsFormat(),b.__instance._on("state."+b.__namespace,function(a){"closed"==a.state?b.__close():"appearing"==a.state&&"closed"==b.__previousState&&b.__create(),b.__previousState=a.state}),b.__instance._on("options."+b.__namespace,function(){b.__optionsFormat()}),b.__instance._on("reposition."+b.__namespace,function(a){b.__reposition(a.event,a.helper)})},__close:function(){this.__instance.content()instanceof a&&this.__instance.content().detach(),this.__instance._$tooltip.remove(),this.__instance._$tooltip=null},__create:function(){var b=a('<div class="tooltipster-base tooltipster-sidetip"><div class="tooltipster-box"><div class="tooltipster-content"></div></div><div class="tooltipster-arrow"><div class="tooltipster-arrow-uncropped"><div class="tooltipster-arrow-border"></div><div class="tooltipster-arrow-background"></div></div></div></div>');this.__options.arrow||b.find(".tooltipster-box").css("margin",0).end().find(".tooltipster-arrow").hide(),this.__options.minWidth&&b.css("min-width",this.__options.minWidth+"px"),this.__options.maxWidth&&b.css("max-width",this.__options.maxWidth+"px"),
+this.__instance._$tooltip=b,this.__instance._trigger("created")},__destroy:function(){this.__instance._off("."+self.__namespace)},__optionsFormat:function(){var b=this;if(b.__options=b.__instance._optionsExtract(k,b.__defaults()),b.__options.position&&(b.__options.side=b.__options.position),"object"!=typeof b.__options.distance&&(b.__options.distance=[b.__options.distance]),b.__options.distance.length<4&&(void 0===b.__options.distance[1]&&(b.__options.distance[1]=b.__options.distance[0]),void 0===b.__options.distance[2]&&(b.__options.distance[2]=b.__options.distance[0]),void 0===b.__options.distance[3]&&(b.__options.distance[3]=b.__options.distance[1]),b.__options.distance={top:b.__options.distance[0],right:b.__options.distance[1],bottom:b.__options.distance[2],left:b.__options.distance[3]}),"string"==typeof b.__options.side){var c={top:"bottom",right:"left",bottom:"top",left:"right"};b.__options.side=[b.__options.side,c[b.__options.side]],"left"==b.__options.side[0]||"right"==b.__options.side[0]?b.__options.side.push("top","bottom"):b.__options.side.push("right","left")}6===a.tooltipster._env.IE&&b.__options.arrow!==!0&&(b.__options.arrow=!1)},__reposition:function(b,c){var d,e=this,f=e.__targetFind(c),g=[];e.__instance._$tooltip.detach();var h=e.__instance._$tooltip.clone(),i=a.tooltipster._getRuler(h),j=!1,k=e.__instance.option("animation");switch(k&&h.removeClass("tooltipster-"+k),a.each(["window","document"],function(d,k){var l=null;if(e.__instance._trigger({container:k,helper:c,satisfied:j,takeTest:function(a){l=a},results:g,type:"positionTest"}),1==l||0!=l&&0==j&&("window"!=k||e.__options.viewportAware))for(var d=0;d<e.__options.side.length;d++){var m={horizontal:0,vertical:0},n=e.__options.side[d];"top"==n||"bottom"==n?m.vertical=e.__options.distance[n]:m.horizontal=e.__options.distance[n],e.__sideChange(h,n),a.each(["natural","constrained"],function(a,d){if(l=null,e.__instance._trigger({container:k,event:b,helper:c,mode:d,results:g,satisfied:j,side:n,takeTest:function(a){l=a},type:"positionTest"}),1==l||0!=l&&0==j){var h={container:k,distance:m,fits:null,mode:d,outerSize:null,side:n,size:null,target:f[n],whole:null},o="natural"==d?i.free():i.constrain(c.geo.available[k][n].width-m.horizontal,c.geo.available[k][n].height-m.vertical),p=o.measure();if(h.size=p.size,h.outerSize={height:p.size.height+m.vertical,width:p.size.width+m.horizontal},"natural"==d?c.geo.available[k][n].width>=h.outerSize.width&&c.geo.available[k][n].height>=h.outerSize.height?h.fits=!0:h.fits=!1:h.fits=p.fits,"window"==k&&(h.fits?"top"==n||"bottom"==n?h.whole=c.geo.origin.windowOffset.right>=e.__options.minIntersection&&c.geo.window.size.width-c.geo.origin.windowOffset.left>=e.__options.minIntersection:h.whole=c.geo.origin.windowOffset.bottom>=e.__options.minIntersection&&c.geo.window.size.height-c.geo.origin.windowOffset.top>=e.__options.minIntersection:h.whole=!1),g.push(h),h.whole)j=!0;else if("natural"==h.mode&&(h.fits||h.size.width<=c.geo.available[k][n].width))return!1}})}}),e.__instance._trigger({edit:function(a){g=a},event:b,helper:c,results:g,type:"positionTested"}),g.sort(function(a,b){if(a.whole&&!b.whole)return-1;if(!a.whole&&b.whole)return 1;if(a.whole&&b.whole){var c=e.__options.side.indexOf(a.side),d=e.__options.side.indexOf(b.side);return d>c?-1:c>d?1:"natural"==a.mode?-1:1}if(a.fits&&!b.fits)return-1;if(!a.fits&&b.fits)return 1;if(a.fits&&b.fits){var c=e.__options.side.indexOf(a.side),d=e.__options.side.indexOf(b.side);return d>c?-1:c>d?1:"natural"==a.mode?-1:1}return"document"==a.container&&"bottom"==a.side&&"natural"==a.mode?-1:1}),d=g[0],d.coord={},d.side){case"left":case"right":d.coord.top=Math.floor(d.target-d.size.height/2);break;case"bottom":case"top":d.coord.left=Math.floor(d.target-d.size.width/2)}switch(d.side){case"left":d.coord.left=c.geo.origin.windowOffset.left-d.outerSize.width;break;case"right":d.coord.left=c.geo.origin.windowOffset.right+d.distance.horizontal;break;case"top":d.coord.top=c.geo.origin.windowOffset.top-d.outerSize.height;break;case"bottom":d.coord.top=c.geo.origin.windowOffset.bottom+d.distance.vertical}"window"==d.container?"top"==d.side||"bottom"==d.side?d.coord.left<0?c.geo.origin.windowOffset.right-this.__options.minIntersection>=0?d.coord.left=0:d.coord.left=c.geo.origin.windowOffset.right-this.__options.minIntersection-1:d.coord.left>c.geo.window.size.width-d.size.width&&(c.geo.origin.windowOffset.left+this.__options.minIntersection<=c.geo.window.size.width?d.coord.left=c.geo.window.size.width-d.size.width:d.coord.left=c.geo.origin.windowOffset.left+this.__options.minIntersection+1-d.size.width):d.coord.top<0?c.geo.origin.windowOffset.bottom-this.__options.minIntersection>=0?d.coord.top=0:d.coord.top=c.geo.origin.windowOffset.bottom-this.__options.minIntersection-1:d.coord.top>c.geo.window.size.height-d.size.height&&(c.geo.origin.windowOffset.top+this.__options.minIntersection<=c.geo.window.size.height?d.coord.top=c.geo.window.size.height-d.size.height:d.coord.top=c.geo.origin.windowOffset.top+this.__options.minIntersection+1-d.size.height):(d.coord.left>c.geo.window.size.width-d.size.width&&(d.coord.left=c.geo.window.size.width-d.size.width),d.coord.left<0&&(d.coord.left=0)),e.__sideChange(h,d.side),c.tooltipClone=h[0],c.tooltipParent=e.__instance.option("parent").parent[0],c.mode=d.mode,c.whole=d.whole,c.origin=e.__instance._$origin[0],c.tooltip=e.__instance._$tooltip[0],delete d.container,delete d.fits,delete d.mode,delete d.outerSize,delete d.whole,d.distance=d.distance.horizontal||d.distance.vertical;var l=a.extend(!0,{},d);if(e.__instance._trigger({edit:function(a){d=a},event:b,helper:c,position:l,type:"position"}),e.__options.functionPosition){var m=e.__options.functionPosition.call(e,e.__instance,c,l);m&&(d=m)}i.destroy();var n,o;"top"==d.side||"bottom"==d.side?(n={prop:"left",val:d.target-d.coord.left},o=d.size.width-this.__options.minIntersection):(n={prop:"top",val:d.target-d.coord.top},o=d.size.height-this.__options.minIntersection),n.val<this.__options.minIntersection?n.val=this.__options.minIntersection:n.val>o&&(n.val=o);var p;p=c.geo.origin.fixedLineage?c.geo.origin.windowOffset:{left:c.geo.origin.windowOffset.left+c.geo.window.scroll.left,top:c.geo.origin.windowOffset.top+c.geo.window.scroll.top},d.coord={left:p.left+(d.coord.left-c.geo.origin.windowOffset.left),top:p.top+(d.coord.top-c.geo.origin.windowOffset.top)},e.__sideChange(e.__instance._$tooltip,d.side),c.geo.origin.fixedLineage?e.__instance._$tooltip.css("position","fixed"):e.__instance._$tooltip.css("position",""),e.__instance._$tooltip.css({left:d.coord.left,top:d.coord.top,height:d.size.height,width:d.size.width}).find(".tooltipster-arrow").css({left:"",top:""}).css(n.prop,n.val),e.__instance._$tooltip.appendTo(e.__instance.option("parent")),e.__instance._trigger({type:"repositioned",event:b,position:d})},__sideChange:function(a,b){a.removeClass("tooltipster-bottom").removeClass("tooltipster-left").removeClass("tooltipster-right").removeClass("tooltipster-top").addClass("tooltipster-"+b)},__targetFind:function(a){var b={},c=this.__instance._$origin[0].getClientRects();if(c.length>1){var d=this.__instance._$origin.css("opacity");1==d&&(this.__instance._$origin.css("opacity",.99),c=this.__instance._$origin[0].getClientRects(),this.__instance._$origin.css("opacity",1))}if(c.length<2)b.top=Math.floor(a.geo.origin.windowOffset.left+a.geo.origin.size.width/2),b.bottom=b.top,b.left=Math.floor(a.geo.origin.windowOffset.top+a.geo.origin.size.height/2),b.right=b.left;else{var e=c[0];b.top=Math.floor(e.left+(e.right-e.left)/2),e=c.length>2?c[Math.ceil(c.length/2)-1]:c[0],b.right=Math.floor(e.top+(e.bottom-e.top)/2),e=c[c.length-1],b.bottom=Math.floor(e.left+(e.right-e.left)/2),e=c.length>2?c[Math.ceil((c.length+1)/2)-1]:c[c.length-1],b.left=Math.floor(e.top+(e.bottom-e.top)/2)}return b}}}),a});
 "use strict";
 
 var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
@@ -13922,4282 +18150,54 @@ hooks.prototype             = proto;
 return hooks;
 
 })));
-/**
- * tooltipster http://iamceege.github.io/tooltipster/
- * A rockin' custom tooltip jQuery plugin
- * Developed by Caleb Jacob and Louis Ameline
- * MIT license
- */
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    define(["jquery"], function (a0) {
-      return (factory(a0));
-    });
-  } else if (typeof exports === 'object') {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory(require("jquery"));
-  } else {
-    factory(jQuery);
-  }
-}(this, function ($) {
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
 
-// This file will be UMDified by a build task.
-
-var defaults = {
-		animation: 'fade',
-		animationDuration: 350,
-		content: null,
-		contentAsHTML: false,
-		contentCloning: false,
-		debug: true,
-		delay: 300,
-		delayTouch: [300, 500],
-		functionInit: null,
-		functionBefore: null,
-		functionReady: null,
-		functionAfter: null,
-		functionFormat: null,
-		IEmin: 6,
-		interactive: false,
-		multiple: false,
-		// will default to document.body, or must be an element positioned at (0, 0)
-		// in the document, typically like the very top views of an app.
-		parent: null,
-		plugins: ['sideTip'],
-		repositionOnScroll: false,
-		restoration: 'none',
-		selfDestruction: true,
-		theme: [],
-		timer: 0,
-		trackerInterval: 500,
-		trackOrigin: false,
-		trackTooltip: false,
-		trigger: 'hover',
-		triggerClose: {
-			click: false,
-			mouseleave: false,
-			originClick: false,
-			scroll: false,
-			tap: false,
-			touchleave: false
-		},
-		triggerOpen: {
-			click: false,
-			mouseenter: false,
-			tap: false,
-			touchstart: false
-		},
-		updateAnimation: 'rotate',
-		zIndex: 9999999
-	},
-	// we'll avoid using the 'window' global as a good practice but npm's
-	// jquery@<2.1.0 package actually requires a 'window' global, so not sure
-	// it's useful at all
-	win = (typeof window != 'undefined') ? window : null,
-	// env will be proxied by the core for plugins to have access its properties
-	env = {
-		// detect if this device can trigger touch events. Better have a false
-		// positive (unused listeners, that's ok) than a false negative.
-		// https://github.com/Modernizr/Modernizr/blob/master/feature-detects/touchevents.js
-		// http://stackoverflow.com/questions/4817029/whats-the-best-way-to-detect-a-touch-screen-device-using-javascript
-		hasTouchCapability: !!(
-			win
-			&&	(	'ontouchstart' in win
-				||	(win.DocumentTouch && win.document instanceof win.DocumentTouch)
-				||	win.navigator.maxTouchPoints
-			)
-		),
-		hasTransitions: transitionSupport(),
-		IE: false,
-		// don't set manually, it will be updated by a build task after the manifest
-		semVer: '4.2.6',
-		window: win
-	},
-	core = function() {
-		
-		// core variables
-		
-		// the core emitters
-		this.__$emitterPrivate = $({});
-		this.__$emitterPublic = $({});
-		this.__instancesLatestArr = [];
-		// collects plugin constructors
-		this.__plugins = {};
-		// proxy env variables for plugins who might use them
-		this._env = env;
-	};
-
-// core methods
-core.prototype = {
-	
-	/**
-	 * A function to proxy the public methods of an object onto another
-	 *
-	 * @param {object} constructor The constructor to bridge
-	 * @param {object} obj The object that will get new methods (an instance or the core)
-	 * @param {string} pluginName A plugin name for the console log message
-	 * @return {core}
-	 * @private
-	 */
-	__bridge: function(constructor, obj, pluginName) {
-		
-		// if it's not already bridged
-		if (!obj[pluginName]) {
-			
-			var fn = function() {};
-			fn.prototype = constructor;
-			
-			var pluginInstance = new fn();
-			
-			// the _init method has to exist in instance constructors but might be missing
-			// in core constructors
-			if (pluginInstance.__init) {
-				pluginInstance.__init(obj);
-			}
-			
-			$.each(constructor, function(methodName, fn) {
-				
-				// don't proxy "private" methods, only "protected" and public ones
-				if (methodName.indexOf('__') != 0) {
-					
-					// if the method does not exist yet
-					if (!obj[methodName]) {
-						
-						obj[methodName] = function() {
-							return pluginInstance[methodName].apply(pluginInstance, Array.prototype.slice.apply(arguments));
-						};
-						
-						// remember to which plugin this method corresponds (several plugins may
-						// have methods of the same name, we need to be sure)
-						obj[methodName].bridged = pluginInstance;
-					}
-					else if (defaults.debug) {
-						
-						console.log('The '+ methodName +' method of the '+ pluginName
-							+' plugin conflicts with another plugin or native methods');
-					}
-				}
-			});
-			
-			obj[pluginName] = pluginInstance;
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * For mockup in Node env if need be, for testing purposes
-	 *
-	 * @return {core}
-	 * @private
-	 */
-	__setWindow: function(window) {
-		env.window = window;
-		return this;
-	},
-	
-	/**
-	 * Returns a ruler, a tool to help measure the size of a tooltip under
-	 * various settings. Meant for plugins
-	 * 
-	 * @see Ruler
-	 * @return {object} A Ruler instance
-	 * @protected
-	 */
-	_getRuler: function($tooltip) {
-		return new Ruler($tooltip);
-	},
-	
-	/**
-	 * For internal use by plugins, if needed
-	 *
-	 * @return {core}
-	 * @protected
-	 */
-	_off: function() {
-		this.__$emitterPrivate.off.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * For internal use by plugins, if needed
-	 *
-	 * @return {core}
-	 * @protected
-	 */
-	_on: function() {
-		this.__$emitterPrivate.on.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * For internal use by plugins, if needed
-	 *
-	 * @return {core}
-	 * @protected
-	 */
-	_one: function() {
-		this.__$emitterPrivate.one.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * Returns (getter) or adds (setter) a plugin
-	 *
-	 * @param {string|object} plugin Provide a string (in the full form
-	 * "namespace.name") to use as as getter, an object to use as a setter
-	 * @return {object|core}
-	 * @protected
-	 */
-	_plugin: function(plugin) {
-		
-		var self = this;
-		
-		// getter
-		if (typeof plugin == 'string') {
-			
-			var pluginName = plugin,
-				p = null;
-			
-			// if the namespace is provided, it's easy to search
-			if (pluginName.indexOf('.') > 0) {
-				p = self.__plugins[pluginName];
-			}
-			// otherwise, return the first name that matches
-			else {
-				$.each(self.__plugins, function(i, plugin) {
-					
-					if (plugin.name.substring(plugin.name.length - pluginName.length - 1) == '.'+ pluginName) {
-						p = plugin;
-						return false;
-					}
-				});
-			}
-			
-			return p;
-		}
-		// setter
-		else {
-			
-			// force namespaces
-			if (plugin.name.indexOf('.') < 0) {
-				throw new Error('Plugins must be namespaced');
-			}
-			
-			self.__plugins[plugin.name] = plugin;
-			
-			// if the plugin has core features
-			if (plugin.core) {
-				
-				// bridge non-private methods onto the core to allow new core methods
-				self.__bridge(plugin.core, self, plugin.name);
-			}
-			
-			return this;
-		}
-	},
-	
-	/**
-	 * Trigger events on the core emitters
-	 * 
-	 * @returns {core}
-	 * @protected
-	 */
-	_trigger: function() {
-		
-		var args = Array.prototype.slice.apply(arguments);
-		
-		if (typeof args[0] == 'string') {
-			args[0] = { type: args[0] };
-		}
-		
-		// note: the order of emitters matters
-		this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate, args);
-		this.__$emitterPublic.trigger.apply(this.__$emitterPublic, args);
-		
-		return this;
-	},
-	
-	/**
-	 * Returns instances of all tooltips in the page or an a given element
-	 *
-	 * @param {string|HTML object collection} selector optional Use this
-	 * parameter to restrict the set of objects that will be inspected
-	 * for the retrieval of instances. By default, all instances in the
-	 * page are returned.
-	 * @return {array} An array of instance objects
-	 * @public
-	 */
-	instances: function(selector) {
-		
-		var instances = [],
-			sel = selector || '.tooltipstered';
-		
-		$(sel).each(function() {
-			
-			var $this = $(this),
-				ns = $this.data('tooltipster-ns');
-			
-			if (ns) {
-				
-				$.each(ns, function(i, namespace) {
-					instances.push($this.data(namespace));
-				});
-			}
-		});
-		
-		return instances;
-	},
-	
-	/**
-	 * Returns the Tooltipster objects generated by the last initializing call
-	 *
-	 * @return {array} An array of instance objects
-	 * @public
-	 */
-	instancesLatest: function() {
-		return this.__instancesLatestArr;
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins (use ::_off() instead)
-	 *
-	 * @return {core}
-	 * @public
-	 */
-	off: function() {
-		this.__$emitterPublic.off.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins (use ::_on() instead)
-	 *
-	 * @return {core}
-	 * @public
-	 */
-	on: function() {
-		this.__$emitterPublic.on.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins (use ::_one() instead)
-	 * 
-	 * @return {core}
-	 * @public
-	 */
-	one: function() {
-		this.__$emitterPublic.one.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * Returns all HTML elements which have one or more tooltips
-	 *
-	 * @param {string} selector optional Use this to restrict the results
-	 * to the descendants of an element
-	 * @return {array} An array of HTML elements
-	 * @public
-	 */
-	origins: function(selector) {
-		
-		var sel = selector ?
-			selector +' ' :
-			'';
-		
-		return $(sel +'.tooltipstered').toArray();
-	},
-	
-	/**
-	 * Change default options for all future instances
-	 *
-	 * @param {object} d The options that should be made defaults
-	 * @return {core}
-	 * @public
-	 */
-	setDefaults: function(d) {
-		$.extend(defaults, d);
-		return this;
-	},
-	
-	/**
-	 * For users to trigger their handlers on the public emitter
-	 * 
-	 * @returns {core}
-	 * @public
-	 */
-	triggerHandler: function() {
-		this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		return this;
-	}
-};
-
-// $.tooltipster will be used to call core methods
-$.tooltipster = new core();
-
-// the Tooltipster instance class (mind the capital T)
-$.Tooltipster = function(element, options) {
-	
-	// list of instance variables
-	
-	// stack of custom callbacks provided as parameters to API methods
-	this.__callbacks = {
-		close: [],
-		open: []
-	};
-	// the schedule time of DOM removal
-	this.__closingTime;
-	// this will be the user content shown in the tooltip. A capital "C" is used
-	// because there is also a method called content()
-	this.__Content;
-	// for the size tracker
-	this.__contentBcr;
-	// to disable the tooltip after destruction
-	this.__destroyed = false;
-	// we can't emit directly on the instance because if a method with the same
-	// name as the event exists, it will be called by jQuery. Se we use a plain
-	// object as emitter. This emitter is for internal use by plugins,
-	// if needed.
-	this.__$emitterPrivate = $({});
-	// this emitter is for the user to listen to events without risking to mess
-	// with our internal listeners
-	this.__$emitterPublic = $({});
-	this.__enabled = true;
-	// the reference to the gc interval
-	this.__garbageCollector;
-	// various position and size data recomputed before each repositioning
-	this.__Geometry;
-	// the tooltip position, saved after each repositioning by a plugin
-	this.__lastPosition;
-	// a unique namespace per instance
-	this.__namespace = 'tooltipster-'+ Math.round(Math.random()*1000000);
-	this.__options;
-	// will be used to support origins in scrollable areas
-	this.__$originParents;
-	this.__pointerIsOverOrigin = false;
-	// to remove themes if needed
-	this.__previousThemes = [];
-	// the state can be either: appearing, stable, disappearing, closed
-	this.__state = 'closed';
-	// timeout references
-	this.__timeouts = {
-		close: [],
-		open: null
-	};
-	// store touch events to be able to detect emulated mouse events
-	this.__touchEvents = [];
-	// the reference to the tracker interval
-	this.__tracker = null;
-	// the element to which this tooltip is associated
-	this._$origin;
-	// this will be the tooltip element (jQuery wrapped HTML element).
-	// It's the job of a plugin to create it and append it to the DOM
-	this._$tooltip;
-	
-	// launch
-	this.__init(element, options);
-};
-
-$.Tooltipster.prototype = {
-	
-	/**
-	 * @param origin
-	 * @param options
-	 * @private
-	 */
-	__init: function(origin, options) {
-		
-		var self = this;
-		
-		self._$origin = $(origin);
-		self.__options = $.extend(true, {}, defaults, options);
-		
-		// some options may need to be reformatted
-		self.__optionsFormat();
-		
-		// don't run on old IE if asked no to
-		if (	!env.IE
-			||	env.IE >= self.__options.IEmin
-		) {
-			
-			// note: the content is null (empty) by default and can stay that
-			// way if the plugin remains initialized but not fed any content. The
-			// tooltip will just not appear.
-			
-			// let's save the initial value of the title attribute for later
-			// restoration if need be.
-			var initialTitle = null;
-			
-			// it will already have been saved in case of multiple tooltips
-			if (self._$origin.data('tooltipster-initialTitle') === undefined) {
-				
-				initialTitle = self._$origin.attr('title');
-				
-				// we do not want initialTitle to be "undefined" because
-				// of how jQuery's .data() method works
-				if (initialTitle === undefined) initialTitle = null;
-				
-				self._$origin.data('tooltipster-initialTitle', initialTitle);
-			}
-			
-			// If content is provided in the options, it has precedence over the
-			// title attribute.
-			// Note: an empty string is considered content, only 'null' represents
-			// the absence of content.
-			// Also, an existing title="" attribute will result in an empty string
-			// content
-			if (self.__options.content !== null) {
-				self.__contentSet(self.__options.content);
-			}
-			else {
-				
-				var selector = self._$origin.attr('data-tooltip-content'),
-					$el;
-				
-				if (selector){
-					$el = $(selector);
-				}
-				
-				if ($el && $el[0]) {
-					self.__contentSet($el.first());
-				}
-				else {
-					self.__contentSet(initialTitle);
-				}
-			}
-			
-			self._$origin
-				// strip the title off of the element to prevent the default tooltips
-				// from popping up
-				.removeAttr('title')
-				// to be able to find all instances on the page later (upon window
-				// events in particular)
-				.addClass('tooltipstered');
-			
-			// set listeners on the origin
-			self.__prepareOrigin();
-			
-			// set the garbage collector
-			self.__prepareGC();
-			
-			// init plugins
-			$.each(self.__options.plugins, function(i, pluginName) {
-				self._plug(pluginName);
-			});
-			
-			// to detect swiping
-			if (env.hasTouchCapability) {
-				$(env.window.document.body).on('touchmove.'+ self.__namespace +'-triggerOpen', function(event) {
-					self._touchRecordEvent(event);
-				});
-			}
-			
-			self
-				// prepare the tooltip when it gets created. This event must
-				// be fired by a plugin
-				._on('created', function() {
-					self.__prepareTooltip();
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
 				})
-				// save position information when it's sent by a plugin
-				._on('repositioned', function(e) {
-					self.__lastPosition = e.position;
-				});
-		}
-		else {
-			self.__options.disabled = true;
-		}
-	},
-	
-	/**
-	 * Insert the content into the appropriate HTML element of the tooltip
-	 * 
-	 * @returns {self}
-	 * @private
-	 */
-	__contentInsert: function() {
-		
-		var self = this,
-			$el = self._$tooltip.find('.tooltipster-content'),
-			formattedContent = self.__Content,
-			format = function(content) {
-				formattedContent = content;
-			};
-		
-		self._trigger({
-			type: 'format',
-			content: self.__Content,
-			format: format
-		});
-		
-		if (self.__options.functionFormat) {
-			
-			formattedContent = self.__options.functionFormat.call(
-				self,
-				self,
-				{ origin: self._$origin[0] },
-				self.__Content
-			);
-		}
-		
-		if (typeof formattedContent === 'string' && !self.__options.contentAsHTML) {
-			$el.text(formattedContent);
-		}
-		else {
-			$el
-				.empty()
-				.append(formattedContent);
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * Save the content, cloning it beforehand if need be
-	 * 
-	 * @param content
-	 * @returns {self}
-	 * @private
-	 */
-	__contentSet: function(content) {
-		
-		// clone if asked. Cloning the object makes sure that each instance has its
-		// own version of the content (in case a same object were provided for several
-		// instances)
-		// reminder: typeof null === object
-		if (content instanceof $ && this.__options.contentCloning) {
-			content = content.clone(true);
-		}
-		
-		this.__Content = content;
-		
-		this._trigger({
-			type: 'updated',
-			content: content
-		});
-		
-		return this;
-	},
-	
-	/**
-	 * Error message about a method call made after destruction
-	 * 
-	 * @private
-	 */
-	__destroyError: function() {
-		throw new Error('This tooltip has been destroyed and cannot execute your method call.');
-	},
-	
-	/**
-	 * Gather all information about dimensions and available space,
-	 * called before every repositioning
-	 * 
-	 * @private
-	 * @returns {object}
-	 */
-	__geometry: function() {
-		
-		var	self = this,
-			$target = self._$origin,
-			originIsArea = self._$origin.is('area');
-		
-		// if this._$origin is a map area, the target we'll need
-		// the dimensions of is actually the image using the map,
-		// not the area itself
-		if (originIsArea) {
-			
-			var mapName = self._$origin.parent().attr('name');
-			
-			$target = $('img[usemap="#'+ mapName +'"]');
-		}
-		
-		var bcr = $target[0].getBoundingClientRect(),
-			$document = $(env.window.document),
-			$window = $(env.window),
-			$parent = $target,
-			// some useful properties of important elements
-			geo = {
-				// available space for the tooltip, see down below
-				available: {
-					document: null,
-					window: null
-				},
-				document: {
-					size: {
-						height: $document.height(),
-						width: $document.width()
-					}
-				},
-				window: {
-					scroll: {
-						// the second ones are for IE compatibility
-						left: env.window.scrollX || env.window.document.documentElement.scrollLeft,
-						top: env.window.scrollY || env.window.document.documentElement.scrollTop
-					},
-					size: {
-						height: $window.height(),
-						width: $window.width()
-					}
-				},
-				origin: {
-					// the origin has a fixed lineage if itself or one of its
-					// ancestors has a fixed position
-					fixedLineage: false,
-					// relative to the document
-					offset: {},
-					size: {
-						height: bcr.bottom - bcr.top,
-						width: bcr.right - bcr.left
-					},
-					usemapImage: originIsArea ? $target[0] : null,
-					// relative to the window
-					windowOffset: {
-						bottom: bcr.bottom,
-						left: bcr.left,
-						right: bcr.right,
-						top: bcr.top
-					}
-				}
-			},
-			geoFixed = false;
-		
-		// if the element is a map area, some properties may need
-		// to be recalculated
-		if (originIsArea) {
-			
-			var shape = self._$origin.attr('shape'),
-				coords = self._$origin.attr('coords');
-			
-			if (coords) {
-				
-				coords = coords.split(',');
-				
-				$.map(coords, function(val, i) {
-					coords[i] = parseInt(val);
-				});
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
 			}
-			
-			// if the image itself is the area, nothing more to do
-			if (shape != 'default') {
-				
-				switch(shape) {
-					
-					case 'circle':
-						
-						var circleCenterLeft = coords[0],
-							circleCenterTop = coords[1],
-							circleRadius = coords[2],
-							areaTopOffset = circleCenterTop - circleRadius,
-							areaLeftOffset = circleCenterLeft - circleRadius;
-						
-						geo.origin.size.height = circleRadius * 2;
-						geo.origin.size.width = geo.origin.size.height;
-						
-						geo.origin.windowOffset.left += areaLeftOffset;
-						geo.origin.windowOffset.top += areaTopOffset;
-						
-						break;
-					
-					case 'rect':
-						
-						var areaLeft = coords[0],
-							areaTop = coords[1],
-							areaRight = coords[2],
-							areaBottom = coords[3];
-						
-						geo.origin.size.height = areaBottom - areaTop;
-						geo.origin.size.width = areaRight - areaLeft;
-						
-						geo.origin.windowOffset.left += areaLeft;
-						geo.origin.windowOffset.top += areaTop;
-						
-						break;
-					
-					case 'poly':
-						
-						var areaSmallestX = 0,
-							areaSmallestY = 0,
-							areaGreatestX = 0,
-							areaGreatestY = 0,
-							arrayAlternate = 'even';
-						
-						for (var i = 0; i < coords.length; i++) {
-							
-							var areaNumber = coords[i];
-							
-							if (arrayAlternate == 'even') {
-								
-								if (areaNumber > areaGreatestX) {
-									
-									areaGreatestX = areaNumber;
-									
-									if (i === 0) {
-										areaSmallestX = areaGreatestX;
-									}
-								}
-								
-								if (areaNumber < areaSmallestX) {
-									areaSmallestX = areaNumber;
-								}
-								
-								arrayAlternate = 'odd';
-							}
-							else {
-								if (areaNumber > areaGreatestY) {
-									
-									areaGreatestY = areaNumber;
-									
-									if (i == 1) {
-										areaSmallestY = areaGreatestY;
-									}
-								}
-								
-								if (areaNumber < areaSmallestY) {
-									areaSmallestY = areaNumber;
-								}
-								
-								arrayAlternate = 'even';
-							}
-						}
-						
-						geo.origin.size.height = areaGreatestY - areaSmallestY;
-						geo.origin.size.width = areaGreatestX - areaSmallestX;
-						
-						geo.origin.windowOffset.left += areaSmallestX;
-						geo.origin.windowOffset.top += areaSmallestY;
-						
-						break;
-				}
-			}
-		}
-		
-		// user callback through an event
-		var edit = function(r) {
-			geo.origin.size.height = r.height,
-				geo.origin.windowOffset.left = r.left,
-				geo.origin.windowOffset.top = r.top,
-				geo.origin.size.width = r.width
-		};
-		
-		self._trigger({
-			type: 'geometry',
-			edit: edit,
-			geometry: {
-				height: geo.origin.size.height,
-				left: geo.origin.windowOffset.left,
-				top: geo.origin.windowOffset.top,
-				width: geo.origin.size.width
-			}
-		});
-		
-		// calculate the remaining properties with what we got
-		
-		geo.origin.windowOffset.right = geo.origin.windowOffset.left + geo.origin.size.width;
-		geo.origin.windowOffset.bottom = geo.origin.windowOffset.top + geo.origin.size.height;
-		
-		geo.origin.offset.left = geo.origin.windowOffset.left + geo.window.scroll.left;
-		geo.origin.offset.top = geo.origin.windowOffset.top + geo.window.scroll.top;
-		geo.origin.offset.bottom = geo.origin.offset.top + geo.origin.size.height;
-		geo.origin.offset.right = geo.origin.offset.left + geo.origin.size.width;
-		
-		// the space that is available to display the tooltip relatively to the document
-		geo.available.document = {
-			bottom: {
-				height: geo.document.size.height - geo.origin.offset.bottom,
-				width: geo.document.size.width
-			},
-			left: {
-				height: geo.document.size.height,
-				width: geo.origin.offset.left
-			},
-			right: {
-				height: geo.document.size.height,
-				width: geo.document.size.width - geo.origin.offset.right
-			},
-			top: {
-				height: geo.origin.offset.top,
-				width: geo.document.size.width
-			}
-		};
-		
-		// the space that is available to display the tooltip relatively to the viewport
-		// (the resulting values may be negative if the origin overflows the viewport)
-		geo.available.window = {
-			bottom: {
-				// the inner max is here to make sure the available height is no bigger
-				// than the viewport height (when the origin is off screen at the top).
-				// The outer max just makes sure that the height is not negative (when
-				// the origin overflows at the bottom).
-				height: Math.max(geo.window.size.height - Math.max(geo.origin.windowOffset.bottom, 0), 0),
-				width: geo.window.size.width
-			},
-			left: {
-				height: geo.window.size.height,
-				width: Math.max(geo.origin.windowOffset.left, 0)
-			},
-			right: {
-				height: geo.window.size.height,
-				width: Math.max(geo.window.size.width - Math.max(geo.origin.windowOffset.right, 0), 0)
-			},
-			top: {
-				height: Math.max(geo.origin.windowOffset.top, 0),
-				width: geo.window.size.width
-			}
-		};
-		
-		while ($parent[0].tagName.toLowerCase() != 'html') {
-			
-			if ($parent.css('position') == 'fixed') {
-				geo.origin.fixedLineage = true;
-				break;
-			}
-			
-			$parent = $parent.parent();
-		}
-		
-		return geo;
-	},
-	
-	/**
-	 * Some options may need to be formated before being used
-	 * 
-	 * @returns {self}
-	 * @private
-	 */
-	__optionsFormat: function() {
-		
-		if (typeof this.__options.animationDuration == 'number') {
-			this.__options.animationDuration = [this.__options.animationDuration, this.__options.animationDuration];
-		}
-		
-		if (typeof this.__options.delay == 'number') {
-			this.__options.delay = [this.__options.delay, this.__options.delay];
-		}
-		
-		if (typeof this.__options.delayTouch == 'number') {
-			this.__options.delayTouch = [this.__options.delayTouch, this.__options.delayTouch];
-		}
-		
-		if (typeof this.__options.theme == 'string') {
-			this.__options.theme = [this.__options.theme];
-		}
-		
-		// determine the future parent
-		if (this.__options.parent === null) {
-			this.__options.parent = $(env.window.document.body);
-		}
-		else if (typeof this.__options.parent == 'string') {
-			this.__options.parent = $(this.__options.parent);
-		}
-		
-		if (this.__options.trigger == 'hover') {
-			
-			this.__options.triggerOpen = {
-				mouseenter: true,
-				touchstart: true
-			};
-			
-			this.__options.triggerClose = {
-				mouseleave: true,
-				originClick: true,
-				touchleave: true
-			};
-		}
-		else if (this.__options.trigger == 'click') {
-			
-			this.__options.triggerOpen = {
-				click: true,
-				tap: true
-			};
-			
-			this.__options.triggerClose = {
-				click: true,
-				tap: true
-			};
-		}
-		
-		// for the plugins
-		this._trigger('options');
-		
-		return this;
-	},
-	
-	/**
-	 * Schedules or cancels the garbage collector task
-	 *
-	 * @returns {self}
-	 * @private
-	 */
-	__prepareGC: function() {
-		
-		var self = this;
-		
-		// in case the selfDestruction option has been changed by a method call
-		if (self.__options.selfDestruction) {
-			
-			// the GC task
-			self.__garbageCollector = setInterval(function() {
-				
-				var now = new Date().getTime();
-				
-				// forget the old events
-				self.__touchEvents = $.grep(self.__touchEvents, function(event, i) {
-					// 1 minute
-					return now - event.time > 60000;
-				});
-				
-				// auto-destruct if the origin is gone
-				if (!bodyContains(self._$origin)) {
-					
-					self.close(function(){
-						self.destroy();
-					});
-				}
-			}, 20000);
-		}
-		else {
-			clearInterval(self.__garbageCollector);
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * Sets listeners on the origin if the open triggers require them.
-	 * Unlike the listeners set at opening time, these ones
-	 * remain even when the tooltip is closed. It has been made a
-	 * separate method so it can be called when the triggers are
-	 * changed in the options. Closing is handled in _open()
-	 * because of the bindings that may be needed on the tooltip
-	 * itself
-	 *
-	 * @returns {self}
-	 * @private
-	 */
-	__prepareOrigin: function() {
-		
-		var self = this;
-		
-		// in case we're resetting the triggers
-		self._$origin.off('.'+ self.__namespace +'-triggerOpen');
-		
-		// if the device is touch capable, even if only mouse triggers
-		// are asked, we need to listen to touch events to know if the mouse
-		// events are actually emulated (so we can ignore them)
-		if (env.hasTouchCapability) {
-			
-			self._$origin.on(
-				'touchstart.'+ self.__namespace +'-triggerOpen ' +
-				'touchend.'+ self.__namespace +'-triggerOpen ' +
-				'touchcancel.'+ self.__namespace +'-triggerOpen',
-				function(event){
-					self._touchRecordEvent(event);
-				}
-			);
-		}
-		
-		// mouse click and touch tap work the same way
-		if (	self.__options.triggerOpen.click
-			||	(self.__options.triggerOpen.tap && env.hasTouchCapability)
-		) {
-			
-			var eventNames = '';
-			if (self.__options.triggerOpen.click) {
-				eventNames += 'click.'+ self.__namespace +'-triggerOpen ';
-			}
-			if (self.__options.triggerOpen.tap && env.hasTouchCapability) {
-				eventNames += 'touchend.'+ self.__namespace +'-triggerOpen';
-			}
-			
-			self._$origin.on(eventNames, function(event) {
-				if (self._touchIsMeaningfulEvent(event)) {
-					self._open(event);
-				}
-			});
-		}
-		
-		// mouseenter and touch start work the same way
-		if (	self.__options.triggerOpen.mouseenter
-			||	(self.__options.triggerOpen.touchstart && env.hasTouchCapability)
-		) {
-			
-			var eventNames = '';
-			if (self.__options.triggerOpen.mouseenter) {
-				eventNames += 'mouseenter.'+ self.__namespace +'-triggerOpen ';
-			}
-			if (self.__options.triggerOpen.touchstart && env.hasTouchCapability) {
-				eventNames += 'touchstart.'+ self.__namespace +'-triggerOpen';
-			}
-			
-			self._$origin.on(eventNames, function(event) {
-				if (	self._touchIsTouchEvent(event)
-					||	!self._touchIsEmulatedEvent(event)
-				) {
-					self.__pointerIsOverOrigin = true;
-					self._openShortly(event);
-				}
-			});
-		}
-		
-		// info for the mouseleave/touchleave close triggers when they use a delay
-		if (	self.__options.triggerClose.mouseleave
-			||	(self.__options.triggerClose.touchleave && env.hasTouchCapability)
-		) {
-			
-			var eventNames = '';
-			if (self.__options.triggerClose.mouseleave) {
-				eventNames += 'mouseleave.'+ self.__namespace +'-triggerOpen ';
-			}
-			if (self.__options.triggerClose.touchleave && env.hasTouchCapability) {
-				eventNames += 'touchend.'+ self.__namespace +'-triggerOpen touchcancel.'+ self.__namespace +'-triggerOpen';
-			}
-			
-			self._$origin.on(eventNames, function(event) {
-				
-				if (self._touchIsMeaningfulEvent(event)) {
-					self.__pointerIsOverOrigin = false;
-				}
-			});
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * Do the things that need to be done only once after the tooltip
-	 * HTML element it has been created. It has been made a separate
-	 * method so it can be called when options are changed. Remember
-	 * that the tooltip may actually exist in the DOM before it is
-	 * opened, and present after it has been closed: it's the display
-	 * plugin that takes care of handling it.
-	 * 
-	 * @returns {self}
-	 * @private
-	 */
-	__prepareTooltip: function() {
-		
-		var self = this,
-			p = self.__options.interactive ? 'auto' : '';
-		
-		// this will be useful to know quickly if the tooltip is in
-		// the DOM or not 
-		self._$tooltip
-			.attr('id', self.__namespace)
-			.css({
-				// pointer events
-				'pointer-events': p,
-				zIndex: self.__options.zIndex
-			});
-		
-		// themes
-		// remove the old ones and add the new ones
-		$.each(self.__previousThemes, function(i, theme) {
-			self._$tooltip.removeClass(theme);
-		});
-		$.each(self.__options.theme, function(i, theme) {
-			self._$tooltip.addClass(theme);
-		});
-		
-		self.__previousThemes = $.merge([], self.__options.theme);
-		
-		return self;
-	},
-	
-	/**
-	 * Handles the scroll on any of the parents of the origin (when the
-	 * tooltip is open)
-	 *
-	 * @param {object} event
-	 * @returns {self}
-	 * @private
-	 */
-	__scrollHandler: function(event) {
-		
-		var self = this;
-		
-		if (self.__options.triggerClose.scroll) {
-			self._close(event);
-		}
-		else {
-			
-			// if the origin or tooltip have been removed: do nothing, the tracker will
-			// take care of it later
-			if (bodyContains(self._$origin) && bodyContains(self._$tooltip)) {
-				
-				var geo = null;
-				
-				// if the scroll happened on the window
-				if (event.target === env.window.document) {
-					
-					// if the origin has a fixed lineage, window scroll will have no
-					// effect on its position nor on the position of the tooltip
-					if (!self.__Geometry.origin.fixedLineage) {
-						
-						// we don't need to do anything unless repositionOnScroll is true
-						// because the tooltip will already have moved with the window
-						// (and of course with the origin)
-						if (self.__options.repositionOnScroll) {
-							self.reposition(event);
-						}
-					}
-				}
-				// if the scroll happened on another parent of the tooltip, it means
-				// that it's in a scrollable area and now needs to have its position
-				// adjusted or recomputed, depending ont the repositionOnScroll
-				// option. Also, if the origin is partly hidden due to a parent that
-				// hides its overflow, we'll just hide (not close) the tooltip.
-				else {
-					
-					geo = self.__geometry();
-					
-					var overflows = false;
-					
-					// a fixed position origin is not affected by the overflow hiding
-					// of a parent
-					if (self._$origin.css('position') != 'fixed') {
-						
-						self.__$originParents.each(function(i, el) {
-							
-							var $el = $(el),
-								overflowX = $el.css('overflow-x'),
-								overflowY = $el.css('overflow-y');
-							
-							if (overflowX != 'visible' || overflowY != 'visible') {
-								
-								var bcr = el.getBoundingClientRect();
-								
-								if (overflowX != 'visible') {
-									
-									if (	geo.origin.windowOffset.left < bcr.left
-										||	geo.origin.windowOffset.right > bcr.right
-									) {
-										overflows = true;
-										return false;
-									}
-								}
-								
-								if (overflowY != 'visible') {
-									
-									if (	geo.origin.windowOffset.top < bcr.top
-										||	geo.origin.windowOffset.bottom > bcr.bottom
-									) {
-										overflows = true;
-										return false;
-									}
-								}
-							}
-							
-							// no need to go further if fixed, for the same reason as above
-							if ($el.css('position') == 'fixed') {
-								return false;
-							}
-						});
-					}
-					
-					if (overflows) {
-						self._$tooltip.css('visibility', 'hidden');
-					}
-					else {
-						
-						self._$tooltip.css('visibility', 'visible');
-						
-						// reposition
-						if (self.__options.repositionOnScroll) {
-							self.reposition(event);
-						}
-						// or just adjust offset
-						else {
-							
-							// we have to use offset and not windowOffset because this way,
-							// only the scroll distance of the scrollable areas are taken into
-							// account (the scrolltop value of the main window must be
-							// ignored since the tooltip already moves with it)
-							var offsetLeft = geo.origin.offset.left - self.__Geometry.origin.offset.left,
-								offsetTop = geo.origin.offset.top - self.__Geometry.origin.offset.top;
-							
-							// add the offset to the position initially computed by the display plugin
-							self._$tooltip.css({
-								left: self.__lastPosition.coord.left + offsetLeft,
-								top: self.__lastPosition.coord.top + offsetTop
-							});
-						}
-					}
-				}
-				
-				self._trigger({
-					type: 'scroll',
-					event: event,
-					geo: geo
-				});
-			}
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * Changes the state of the tooltip
-	 *
-	 * @param {string} state
-	 * @returns {self}
-	 * @private
-	 */
-	__stateSet: function(state) {
-		
-		this.__state = state;
-		
-		this._trigger({
-			type: 'state',
-			state: state
-		});
-		
-		return this;
-	},
-	
-	/**
-	 * Clear appearance timeouts
-	 *
-	 * @returns {self}
-	 * @private
-	 */
-	__timeoutsClear: function() {
-		
-		// there is only one possible open timeout: the delayed opening
-		// when the mouseenter/touchstart open triggers are used
-		clearTimeout(this.__timeouts.open);
-		this.__timeouts.open = null;
-		
-		// ... but several close timeouts: the delayed closing when the
-		// mouseleave close trigger is used and the timer option
-		$.each(this.__timeouts.close, function(i, timeout) {
-			clearTimeout(timeout);
-		});
-		this.__timeouts.close = [];
-		
-		return this;
-	},
-	
-	/**
-	 * Start the tracker that will make checks at regular intervals
-	 * 
-	 * @returns {self}
-	 * @private
-	 */
-	__trackerStart: function() {
-		
-		var self = this,
-			$content = self._$tooltip.find('.tooltipster-content');
-		
-		// get the initial content size
-		if (self.__options.trackTooltip) {
-			self.__contentBcr = $content[0].getBoundingClientRect();
-		}
-		
-		self.__tracker = setInterval(function() {
-			
-			// if the origin or tooltip elements have been removed.
-			// Note: we could destroy the instance now if the origin has
-			// been removed but we'll leave that task to our garbage collector
-			if (!bodyContains(self._$origin) || !bodyContains(self._$tooltip)) {
-				self._close();
-			}
-			// if everything is alright
-			else {
-				
-				// compare the former and current positions of the origin to reposition
-				// the tooltip if need be
-				if (self.__options.trackOrigin) {
-					
-					var g = self.__geometry(),
-						identical = false;
-					
-					// compare size first (a change requires repositioning too)
-					if (areEqual(g.origin.size, self.__Geometry.origin.size)) {
-						
-						// for elements that have a fixed lineage (see __geometry()), we track the
-						// top and left properties (relative to window)
-						if (self.__Geometry.origin.fixedLineage) {
-							if (areEqual(g.origin.windowOffset, self.__Geometry.origin.windowOffset)) {
-								identical = true;
-							}
-						}
-						// otherwise, track total offset (relative to document)
-						else {
-							if (areEqual(g.origin.offset, self.__Geometry.origin.offset)) {
-								identical = true;
-							}
-						}
-					}
-					
-					if (!identical) {
-						
-						// close the tooltip when using the mouseleave close trigger
-						// (see https://github.com/iamceege/tooltipster/pull/253)
-						if (self.__options.triggerClose.mouseleave) {
-							self._close();
-						}
-						else {
-							self.reposition();
-						}
-					}
-				}
-				
-				if (self.__options.trackTooltip) {
-					
-					var currentBcr = $content[0].getBoundingClientRect();
-					
-					if (	currentBcr.height !== self.__contentBcr.height
-						||	currentBcr.width !== self.__contentBcr.width
-					) {
-						self.reposition();
-						self.__contentBcr = currentBcr;
-					}
-				}
-			}
-		}, self.__options.trackerInterval);
-		
-		return self;
-	},
-	
-	/**
-	 * Closes the tooltip (after the closing delay)
-	 * 
-	 * @param event
-	 * @param callback
-	 * @param force Set to true to override a potential refusal of the user's function
-	 * @returns {self}
-	 * @protected
-	 */
-	_close: function(event, callback, force) {
-		
-		var self = this,
-			ok = true;
-		
-		self._trigger({
-			type: 'close',
-			event: event,
-			stop: function() {
-				ok = false;
-			}
-		});
-		
-		// a destroying tooltip (force == true) may not refuse to close
-		if (ok || force) {
-			
-			// save the method custom callback and cancel any open method custom callbacks
-			if (callback) self.__callbacks.close.push(callback);
-			self.__callbacks.open = [];
-			
-			// clear open/close timeouts
-			self.__timeoutsClear();
-			
-			var finishCallbacks = function() {
-				
-				// trigger any close method custom callbacks and reset them
-				$.each(self.__callbacks.close, function(i,c) {
-					c.call(self, self, {
-						event: event,
-						origin: self._$origin[0]
-					});
-				});
-				
-				self.__callbacks.close = [];
-			};
-			
-			if (self.__state != 'closed') {
-				
-				var necessary = true,
-					d = new Date(),
-					now = d.getTime(),
-					newClosingTime = now + self.__options.animationDuration[1];
-				
-				// the tooltip may already already be disappearing, but if a new
-				// call to close() is made after the animationDuration was changed
-				// to 0 (for example), we ought to actually close it sooner than
-				// previously scheduled. In that case it should be noted that the
-				// browser will not adapt the animation duration to the new
-				// animationDuration that was set after the start of the closing
-				// animation.
-				// Note: the same thing could be considered at opening, but is not
-				// really useful since the tooltip is actually opened immediately
-				// upon a call to _open(). Since it would not make the opening
-				// animation finish sooner, its sole impact would be to trigger the
-				// state event and the open callbacks sooner than the actual end of
-				// the opening animation, which is not great.
-				if (self.__state == 'disappearing') {
-					
-					if (	newClosingTime > self.__closingTime
-						// in case closing is actually overdue because the script
-						// execution was suspended. See #679
-						&&	self.__options.animationDuration[1] > 0
-					) {
-						necessary = false;
-					}
-				}
-				
-				if (necessary) {
-					
-					self.__closingTime = newClosingTime;
-					
-					if (self.__state != 'disappearing') {
-						self.__stateSet('disappearing');
-					}
-					
-					var finish = function() {
-						
-						// stop the tracker
-						clearInterval(self.__tracker);
-						
-						// a "beforeClose" option has been asked several times but would
-						// probably useless since the content element is still accessible
-						// via ::content(), and because people can always use listeners
-						// inside their content to track what's going on. For the sake of
-						// simplicity, this has been denied. Bur for the rare people who
-						// really need the option (for old browsers or for the case where
-						// detaching the content is actually destructive, for file or
-						// password inputs for example), this event will do the work.
-						self._trigger({
-							type: 'closing',
-							event: event
-						});
-						
-						// unbind listeners which are no longer needed
-						
-						self._$tooltip
-							.off('.'+ self.__namespace +'-triggerClose')
-							.removeClass('tooltipster-dying');
-						
-						// orientationchange, scroll and resize listeners
-						$(env.window).off('.'+ self.__namespace +'-triggerClose');
-						
-						// scroll listeners
-						self.__$originParents.each(function(i, el) {
-							$(el).off('scroll.'+ self.__namespace +'-triggerClose');
-						});
-						// clear the array to prevent memory leaks
-						self.__$originParents = null;
-						
-						$(env.window.document.body).off('.'+ self.__namespace +'-triggerClose');
-						
-						self._$origin.off('.'+ self.__namespace +'-triggerClose');
-						
-						self._off('dismissable');
-						
-						// a plugin that would like to remove the tooltip from the
-						// DOM when closed should bind on this
-						self.__stateSet('closed');
-						
-						// trigger event
-						self._trigger({
-							type: 'after',
-							event: event
-						});
-						
-						// call our constructor custom callback function
-						if (self.__options.functionAfter) {
-							self.__options.functionAfter.call(self, self, {
-								event: event,
-								origin: self._$origin[0]
-							});
-						}
-						
-						// call our method custom callbacks functions
-						finishCallbacks();
-					};
-					
-					if (env.hasTransitions) {
-						
-						self._$tooltip.css({
-							'-moz-animation-duration': self.__options.animationDuration[1] + 'ms',
-							'-ms-animation-duration': self.__options.animationDuration[1] + 'ms',
-							'-o-animation-duration': self.__options.animationDuration[1] + 'ms',
-							'-webkit-animation-duration': self.__options.animationDuration[1] + 'ms',
-							'animation-duration': self.__options.animationDuration[1] + 'ms',
-							'transition-duration': self.__options.animationDuration[1] + 'ms'
-						});
-						
-						self._$tooltip
-							// clear both potential open and close tasks
-							.clearQueue()
-							.removeClass('tooltipster-show')
-							// for transitions only
-							.addClass('tooltipster-dying');
-						
-						if (self.__options.animationDuration[1] > 0) {
-							self._$tooltip.delay(self.__options.animationDuration[1]);
-						}
-						
-						self._$tooltip.queue(finish);
-					}
-					else {
-						
-						self._$tooltip
-							.stop()
-							.fadeOut(self.__options.animationDuration[1], finish);
-					}
-				}
-			}
-			// if the tooltip is already closed, we still need to trigger
-			// the method custom callbacks
-			else {
-				finishCallbacks();
-			}
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * For internal use by plugins, if needed
-	 * 
-	 * @returns {self}
-	 * @protected
-	 */
-	_off: function() {
-		this.__$emitterPrivate.off.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * For internal use by plugins, if needed
-	 *
-	 * @returns {self}
-	 * @protected
-	 */
-	_on: function() {
-		this.__$emitterPrivate.on.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * For internal use by plugins, if needed
-	 *
-	 * @returns {self}
-	 * @protected
-	 */
-	_one: function() {
-		this.__$emitterPrivate.one.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
-		return this;
-	},
-	
-	/**
-	 * Opens the tooltip right away.
-	 *
-	 * @param event
-	 * @param callback Will be called when the opening animation is over
-	 * @returns {self}
-	 * @protected
-	 */
-	_open: function(event, callback) {
-		
-		var self = this;
-		
-		// if the destruction process has not begun and if this was not
-		// triggered by an unwanted emulated click event
-		if (!self.__destroying) {
-			
-			// check that the origin is still in the DOM
-			if (	bodyContains(self._$origin)
-				// if the tooltip is enabled
-				&&	self.__enabled
-			) {
-				
-				var ok = true;
-				
-				// if the tooltip is not open yet, we need to call functionBefore.
-				// otherwise we can jst go on
-				if (self.__state == 'closed') {
-					
-					// trigger an event. The event.stop function allows the callback
-					// to prevent the opening of the tooltip
-					self._trigger({
-						type: 'before',
-						event: event,
-						stop: function() {
-							ok = false;
-						}
-					});
-					
-					if (ok && self.__options.functionBefore) {
-						
-						// call our custom function before continuing
-						ok = self.__options.functionBefore.call(self, self, {
-							event: event,
-							origin: self._$origin[0]
-						});
-					}
-				}
-				
-				if (ok !== false) {
-					
-					// if there is some content
-					if (self.__Content !== null) {
-						
-						// save the method callback and cancel close method callbacks
-						if (callback) {
-							self.__callbacks.open.push(callback);
-						}
-						self.__callbacks.close = [];
-						
-						// get rid of any appearance timeouts
-						self.__timeoutsClear();
-						
-						var extraTime,
-							finish = function() {
-								
-								if (self.__state != 'stable') {
-									self.__stateSet('stable');
-								}
-								
-								// trigger any open method custom callbacks and reset them
-								$.each(self.__callbacks.open, function(i,c) {
-									c.call(self, self, {
-										origin: self._$origin[0],
-										tooltip: self._$tooltip[0]
-									});
-								});
-								
-								self.__callbacks.open = [];
-							};
-						
-						// if the tooltip is already open
-						if (self.__state !== 'closed') {
-							
-							// the timer (if any) will start (or restart) right now
-							extraTime = 0;
-							
-							// if it was disappearing, cancel that
-							if (self.__state === 'disappearing') {
-								
-								self.__stateSet('appearing');
-								
-								if (env.hasTransitions) {
-									
-									self._$tooltip
-										.clearQueue()
-										.removeClass('tooltipster-dying')
-										.addClass('tooltipster-show');
-									
-									if (self.__options.animationDuration[0] > 0) {
-										self._$tooltip.delay(self.__options.animationDuration[0]);
-									}
-									
-									self._$tooltip.queue(finish);
-								}
-								else {
-									// in case the tooltip was currently fading out, bring it back
-									// to life
-									self._$tooltip
-										.stop()
-										.fadeIn(finish);
-								}
-							}
-							// if the tooltip is already open, we still need to trigger the method
-							// custom callback
-							else if (self.__state == 'stable') {
-								finish();
-							}
-						}
-						// if the tooltip isn't already open, open it
-						else {
-							
-							// a plugin must bind on this and store the tooltip in this._$tooltip
-							self.__stateSet('appearing');
-							
-							// the timer (if any) will start when the tooltip has fully appeared
-							// after its transition
-							extraTime = self.__options.animationDuration[0];
-							
-							// insert the content inside the tooltip
-							self.__contentInsert();
-							
-							// reposition the tooltip and attach to the DOM
-							self.reposition(event, true);
-							
-							// animate in the tooltip. If the display plugin wants no css
-							// animations, it may override the animation option with a
-							// dummy value that will produce no effect
-							if (env.hasTransitions) {
-								
-								// note: there seems to be an issue with start animations which
-								// are randomly not played on fast devices in both Chrome and FF,
-								// couldn't find a way to solve it yet. It seems that applying
-								// the classes before appending to the DOM helps a little, but
-								// it messes up some CSS transitions. The issue almost never
-								// happens when delay[0]==0 though
-								self._$tooltip
-									.addClass('tooltipster-'+ self.__options.animation)
-									.addClass('tooltipster-initial')
-									.css({
-										'-moz-animation-duration': self.__options.animationDuration[0] + 'ms',
-										'-ms-animation-duration': self.__options.animationDuration[0] + 'ms',
-										'-o-animation-duration': self.__options.animationDuration[0] + 'ms',
-										'-webkit-animation-duration': self.__options.animationDuration[0] + 'ms',
-										'animation-duration': self.__options.animationDuration[0] + 'ms',
-										'transition-duration': self.__options.animationDuration[0] + 'ms'
-									});
-								
-								setTimeout(
-									function() {
-										
-										// a quick hover may have already triggered a mouseleave
-										if (self.__state != 'closed') {
-											
-											self._$tooltip
-												.addClass('tooltipster-show')
-												.removeClass('tooltipster-initial');
-											
-											if (self.__options.animationDuration[0] > 0) {
-												self._$tooltip.delay(self.__options.animationDuration[0]);
-											}
-											
-											self._$tooltip.queue(finish);
-										}
-									},
-									0
-								);
-							}
-							else {
-								
-								// old browsers will have to live with this
-								self._$tooltip
-									.css('display', 'none')
-									.fadeIn(self.__options.animationDuration[0], finish);
-							}
-							
-							// checks if the origin is removed while the tooltip is open
-							self.__trackerStart();
-							
-							// NOTE: the listeners below have a '-triggerClose' namespace
-							// because we'll remove them when the tooltip closes (unlike
-							// the '-triggerOpen' listeners). So some of them are actually
-							// not about close triggers, rather about positioning.
-							
-							$(env.window)
-								// reposition on resize
-								.on('resize.'+ self.__namespace +'-triggerClose', function(e) {
-									
-									var $ae = $(document.activeElement);
-									
-									// reposition only if the resize event was not triggered upon the opening
-									// of a virtual keyboard due to an input field being focused within the tooltip
-									// (otherwise the repositioning would lose the focus)
-									if (	(!$ae.is('input') && !$ae.is('textarea'))
-										||	!$.contains(self._$tooltip[0], $ae[0])
-									) {
-										self.reposition(e);
-									}
-								})
-								// same as below for parents
-								.on('scroll.'+ self.__namespace +'-triggerClose', function(e) {
-									self.__scrollHandler(e);
-								});
-							
-							self.__$originParents = self._$origin.parents();
-							
-							// scrolling may require the tooltip to be moved or even
-							// repositioned in some cases
-							self.__$originParents.each(function(i, parent) {
-								
-								$(parent).on('scroll.'+ self.__namespace +'-triggerClose', function(e) {
-									self.__scrollHandler(e);
-								});
-							});
-							
-							if (	self.__options.triggerClose.mouseleave
-								||	(self.__options.triggerClose.touchleave && env.hasTouchCapability)
-							) {
-								
-								// we use an event to allow users/plugins to control when the mouseleave/touchleave
-								// close triggers will come to action. It allows to have more triggering elements
-								// than just the origin and the tooltip for example, or to cancel/delay the closing,
-								// or to make the tooltip interactive even if it wasn't when it was open, etc.
-								self._on('dismissable', function(event) {
-									
-									if (event.dismissable) {
-										
-										if (event.delay) {
-											
-											timeout = setTimeout(function() {
-												// event.event may be undefined
-												self._close(event.event);
-											}, event.delay);
-											
-											self.__timeouts.close.push(timeout);
-										}
-										else {
-											self._close(event);
-										}
-									}
-									else {
-										clearTimeout(timeout);
-									}
-								});
-								
-								// now set the listeners that will trigger 'dismissable' events
-								var $elements = self._$origin,
-									eventNamesIn = '',
-									eventNamesOut = '',
-									timeout = null;
-								
-								// if we have to allow interaction, bind on the tooltip too
-								if (self.__options.interactive) {
-									$elements = $elements.add(self._$tooltip);
-								}
-								
-								if (self.__options.triggerClose.mouseleave) {
-									eventNamesIn += 'mouseenter.'+ self.__namespace +'-triggerClose ';
-									eventNamesOut += 'mouseleave.'+ self.__namespace +'-triggerClose ';
-								}
-								if (self.__options.triggerClose.touchleave && env.hasTouchCapability) {
-									eventNamesIn += 'touchstart.'+ self.__namespace +'-triggerClose';
-									eventNamesOut += 'touchend.'+ self.__namespace +'-triggerClose touchcancel.'+ self.__namespace +'-triggerClose';
-								}
-								
-								$elements
-									// close after some time spent outside of the elements
-									.on(eventNamesOut, function(event) {
-										
-										// it's ok if the touch gesture ended up to be a swipe,
-										// it's still a "touch leave" situation
-										if (	self._touchIsTouchEvent(event)
-											||	!self._touchIsEmulatedEvent(event)
-										) {
-											
-											var delay = (event.type == 'mouseleave') ?
-												self.__options.delay :
-												self.__options.delayTouch;
-											
-											self._trigger({
-												delay: delay[1],
-												dismissable: true,
-												event: event,
-												type: 'dismissable'
-											});
-										}
-									})
-									// suspend the mouseleave timeout when the pointer comes back
-									// over the elements
-									.on(eventNamesIn, function(event) {
-										
-										// it's also ok if the touch event is a swipe gesture
-										if (	self._touchIsTouchEvent(event)
-											||	!self._touchIsEmulatedEvent(event)
-										) {
-											self._trigger({
-												dismissable: false,
-												event: event,
-												type: 'dismissable'
-											});
-										}
-									});
-							}
-							
-							// close the tooltip when the origin gets a mouse click (common behavior of
-							// native tooltips)
-							if (self.__options.triggerClose.originClick) {
-								
-								self._$origin.on('click.'+ self.__namespace + '-triggerClose', function(event) {
-									
-									// we could actually let a tap trigger this but this feature just
-									// does not make sense on touch devices
-									if (	!self._touchIsTouchEvent(event)
-										&&	!self._touchIsEmulatedEvent(event)
-									) {
-										self._close(event);
-									}
-								});
-							}
-							
-							// set the same bindings for click and touch on the body to close the tooltip
-							if (	self.__options.triggerClose.click
-								||	(self.__options.triggerClose.tap && env.hasTouchCapability)
-							) {
-								
-								// don't set right away since the click/tap event which triggered this method
-								// (if it was a click/tap) is going to bubble up to the body, we don't want it
-								// to close the tooltip immediately after it opened
-								setTimeout(function() {
-									
-									if (self.__state != 'closed') {
-										
-										var eventNames = '',
-											$body = $(env.window.document.body);
-										
-										if (self.__options.triggerClose.click) {
-											eventNames += 'click.'+ self.__namespace +'-triggerClose ';
-										}
-										if (self.__options.triggerClose.tap && env.hasTouchCapability) {
-											eventNames += 'touchend.'+ self.__namespace +'-triggerClose';
-										}
-										
-										$body.on(eventNames, function(event) {
-											
-											if (self._touchIsMeaningfulEvent(event)) {
-												
-												self._touchRecordEvent(event);
-												
-												if (!self.__options.interactive || !$.contains(self._$tooltip[0], event.target)) {
-													self._close(event);
-												}
-											}
-										});
-										
-										// needed to detect and ignore swiping
-										if (self.__options.triggerClose.tap && env.hasTouchCapability) {
-											
-											$body.on('touchstart.'+ self.__namespace +'-triggerClose', function(event) {
-												self._touchRecordEvent(event);
-											});
-										}
-									}
-								}, 0);
-							}
-							
-							self._trigger('ready');
-							
-							// call our custom callback
-							if (self.__options.functionReady) {
-								self.__options.functionReady.call(self, self, {
-									origin: self._$origin[0],
-									tooltip: self._$tooltip[0]
-								});
-							}
-						}
-						
-						// if we have a timer set, let the countdown begin
-						if (self.__options.timer > 0) {
-							
-							var timeout = setTimeout(function() {
-								self._close();
-							}, self.__options.timer + extraTime);
-							
-							self.__timeouts.close.push(timeout);
-						}
-					}
-				}
-			}
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * When using the mouseenter/touchstart open triggers, this function will
-	 * schedule the opening of the tooltip after the delay, if there is one
-	 *
-	 * @param event
-	 * @returns {self}
-	 * @protected
- 	 */
-	_openShortly: function(event) {
-		
-		var self = this,
-			ok = true;
-		
-		if (self.__state != 'stable' && self.__state != 'appearing') {
-			
-			// if a timeout is not already running
-			if (!self.__timeouts.open) {
-				
-				self._trigger({
-					type: 'start',
-					event: event,
-					stop: function() {
-						ok = false;
-					}
-				});
-				
-				if (ok) {
-					
-					var delay = (event.type.indexOf('touch') == 0) ?
-						self.__options.delayTouch :
-						self.__options.delay;
-					
-					if (delay[0]) {
-						
-						self.__timeouts.open = setTimeout(function() {
-							
-							self.__timeouts.open = null;
-							
-							// open only if the pointer (mouse or touch) is still over the origin.
-							// The check on the "meaningful event" can only be made here, after some
-							// time has passed (to know if the touch was a swipe or not)
-							if (self.__pointerIsOverOrigin && self._touchIsMeaningfulEvent(event)) {
-								
-								// signal that we go on
-								self._trigger('startend');
-								
-								self._open(event);
-							}
-							else {
-								// signal that we cancel
-								self._trigger('startcancel');
-							}
-						}, delay[0]);
-					}
-					else {
-						// signal that we go on
-						self._trigger('startend');
-						
-						self._open(event);
-					}
-				}
-			}
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * Meant for plugins to get their options
-	 * 
-	 * @param {string} pluginName The name of the plugin that asks for its options
-	 * @param {object} defaultOptions The default options of the plugin
-	 * @returns {object} The options
-	 * @protected
-	 */
-	_optionsExtract: function(pluginName, defaultOptions) {
-		
-		var self = this,
-			options = $.extend(true, {}, defaultOptions);
-		
-		// if the plugin options were isolated in a property named after the
-		// plugin, use them (prevents conflicts with other plugins)
-		var pluginOptions = self.__options[pluginName];
-		
-		// if not, try to get them as regular options
-		if (!pluginOptions){
-			
-			pluginOptions = {};
-			
-			$.each(defaultOptions, function(optionName, value) {
-				
-				var o = self.__options[optionName];
-				
-				if (o !== undefined) {
-					pluginOptions[optionName] = o;
-				}
-			});
-		}
-		
-		// let's merge the default options and the ones that were provided. We'd want
-		// to do a deep copy but not let jQuery merge arrays, so we'll do a shallow
-		// extend on two levels, that will be enough if options are not more than 1
-		// level deep
-		$.each(options, function(optionName, value) {
-			
-			if (pluginOptions[optionName] !== undefined) {
-				
-				if ((		typeof value == 'object'
-						&&	!(value instanceof Array)
-						&&	value != null
-					)
-					&&
-					(		typeof pluginOptions[optionName] == 'object'
-						&&	!(pluginOptions[optionName] instanceof Array)
-						&&	pluginOptions[optionName] != null
-					)
-				) {
-					$.extend(options[optionName], pluginOptions[optionName]);
-				}
-				else {
-					options[optionName] = pluginOptions[optionName];
-				}
-			}
-		});
-		
-		return options;
-	},
-	
-	/**
-	 * Used at instantiation of the plugin, or afterwards by plugins that activate themselves
-	 * on existing instances
-	 * 
-	 * @param {object} pluginName
-	 * @returns {self}
-	 * @protected
-	 */
-	_plug: function(pluginName) {
-		
-		var plugin = $.tooltipster._plugin(pluginName);
-		
-		if (plugin) {
-			
-			// if there is a constructor for instances
-			if (plugin.instance) {
-				
-				// proxy non-private methods on the instance to allow new instance methods
-				$.tooltipster.__bridge(plugin.instance, this, plugin.name);
-			}
-		}
-		else {
-			throw new Error('The "'+ pluginName +'" plugin is not defined');
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * This will return true if the event is a mouse event which was
-	 * emulated by the browser after a touch event. This allows us to
-	 * really dissociate mouse and touch triggers.
-	 * 
-	 * There is a margin of error if a real mouse event is fired right
-	 * after (within the delay shown below) a touch event on the same
-	 * element, but hopefully it should not happen often.
-	 * 
-	 * @returns {boolean}
-	 * @protected
-	 */
-	_touchIsEmulatedEvent: function(event) {
-		
-		var isEmulated = false,
-			now = new Date().getTime();
-		
-		for (var i = this.__touchEvents.length - 1; i >= 0; i--) {
-			
-			var e = this.__touchEvents[i];
-			
-			// delay, in milliseconds. It's supposed to be 300ms in
-			// most browsers (350ms on iOS) to allow a double tap but
-			// can be less (check out FastClick for more info)
-			if (now - e.time < 500) {
-				
-				if (e.target === event.target) {
-					isEmulated = true;
-				}
-			}
-			else {
-				break;
-			}
-		}
-		
-		return isEmulated;
-	},
-	
-	/**
-	 * Returns false if the event was an emulated mouse event or
-	 * a touch event involved in a swipe gesture.
-	 * 
-	 * @param {object} event
-	 * @returns {boolean}
-	 * @protected
-	 */
-	_touchIsMeaningfulEvent: function(event) {
-		return (
-				(this._touchIsTouchEvent(event) && !this._touchSwiped(event.target))
-			||	(!this._touchIsTouchEvent(event) && !this._touchIsEmulatedEvent(event))
-		);
-	},
-	
-	/**
-	 * Checks if an event is a touch event
-	 * 
-	 * @param {object} event
-	 * @returns {boolean}
-	 * @protected
-	 */
-	_touchIsTouchEvent: function(event){
-		return event.type.indexOf('touch') == 0;
-	},
-	
-	/**
-	 * Store touch events for a while to detect swiping and emulated mouse events
-	 * 
-	 * @param {object} event
-	 * @returns {self}
-	 * @protected
-	 */
-	_touchRecordEvent: function(event) {
-		
-		if (this._touchIsTouchEvent(event)) {
-			event.time = new Date().getTime();
-			this.__touchEvents.push(event);
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * Returns true if a swipe happened after the last touchstart event fired on
-	 * event.target.
-	 * 
-	 * We need to differentiate a swipe from a tap before we let the event open
-	 * or close the tooltip. A swipe is when a touchmove (scroll) event happens
-	 * on the body between the touchstart and the touchend events of an element.
-	 * 
-	 * @param {object} target The HTML element that may have triggered the swipe
-	 * @returns {boolean}
-	 * @protected
-	 */
-	_touchSwiped: function(target) {
-		
-		var swiped = false;
-		
-		for (var i = this.__touchEvents.length - 1; i >= 0; i--) {
-			
-			var e = this.__touchEvents[i];
-			
-			if (e.type == 'touchmove') {
-				swiped = true;
-				break;
-			}
-			else if (
-				e.type == 'touchstart'
-				&&	target === e.target
-			) {
-				break;
-			}
-		}
-		
-		return swiped;
-	},
-	
-	/**
-	 * Triggers an event on the instance emitters
-	 * 
-	 * @returns {self}
-	 * @protected
-	 */
-	_trigger: function() {
-		
-		var args = Array.prototype.slice.apply(arguments);
-		
-		if (typeof args[0] == 'string') {
-			args[0] = { type: args[0] };
-		}
-		
-		// add properties to the event
-		args[0].instance = this;
-		args[0].origin = this._$origin ? this._$origin[0] : null;
-		args[0].tooltip = this._$tooltip ? this._$tooltip[0] : null;
-		
-		// note: the order of emitters matters
-		this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate, args);
-		$.tooltipster._trigger.apply($.tooltipster, args);
-		this.__$emitterPublic.trigger.apply(this.__$emitterPublic, args);
-		
-		return this;
-	},
-	
-	/**
-	 * Deactivate a plugin on this instance
-	 * 
-	 * @returns {self}
-	 * @protected
-	 */
-	_unplug: function(pluginName) {
-		
-		var self = this;
-		
-		// if the plugin has been activated on this instance
-		if (self[pluginName]) {
-			
-			var plugin = $.tooltipster._plugin(pluginName);
-			
-			// if there is a constructor for instances
-			if (plugin.instance) {
-				
-				// unbridge
-				$.each(plugin.instance, function(methodName, fn) {
-					
-					// if the method exists (privates methods do not) and comes indeed from
-					// this plugin (may be missing or come from a conflicting plugin).
-					if (	self[methodName]
-						&&	self[methodName].bridged === self[pluginName]
-					) {
-						delete self[methodName];
-					}
-				});
-			}
-			
-			// destroy the plugin
-			if (self[pluginName].__destroy) {
-				self[pluginName].__destroy();
-			}
-			
-			// remove the reference to the plugin instance
-			delete self[pluginName];
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * @see self::_close
-	 * @returns {self}
-	 * @public
-	 */
-	close: function(callback) {
-		
-		if (!this.__destroyed) {
-			this._close(null, callback);
-		}
-		else {
-			this.__destroyError();
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * Sets or gets the content of the tooltip
-	 * 
-	 * @returns {mixed|self}
-	 * @public
-	 */
-	content: function(content) {
-		
-		var self = this;
-		
-		// getter method
-		if (content === undefined) {
-			return self.__Content;
-		}
-		// setter method
-		else {
-			
-			if (!self.__destroyed) {
-				
-				// change the content
-				self.__contentSet(content);
-				
-				if (self.__Content !== null) {
-					
-					// update the tooltip if it is open
-					if (self.__state !== 'closed') {
-						
-						// reset the content in the tooltip
-						self.__contentInsert();
-						
-						// reposition and resize the tooltip
-						self.reposition();
-						
-						// if we want to play a little animation showing the content changed
-						if (self.__options.updateAnimation) {
-							
-							if (env.hasTransitions) {
-								
-								// keep the reference in the local scope
-								var animation = self.__options.updateAnimation;
-								
-								self._$tooltip.addClass('tooltipster-update-'+ animation);
-								
-								// remove the class after a while. The actual duration of the
-								// update animation may be shorter, it's set in the CSS rules
-								setTimeout(function() {
-									
-									if (self.__state != 'closed') {
-										
-										self._$tooltip.removeClass('tooltipster-update-'+ animation);
-									}
-								}, 1000);
-							}
-							else {
-								self._$tooltip.fadeTo(200, 0.5, function() {
-									if (self.__state != 'closed') {
-										self._$tooltip.fadeTo(200, 1);
-									}
-								});
-							}
-						}
-					}
-				}
-				else {
-					self._close();
-				}
-			}
-			else {
-				self.__destroyError();
-			}
-			
-			return self;
-		}
-	},
-	
-	/**
-	 * Destroys the tooltip
-	 * 
-	 * @returns {self}
-	 * @public
-	 */
-	destroy: function() {
-		
-		var self = this;
-		
-		if (!self.__destroyed) {
-			
-			if(self.__state != 'closed'){
-				
-				// no closing delay
-				self.option('animationDuration', 0)
-					// force closing
-					._close(null, null, true);
-			}
-			else {
-				// there might be an open timeout still running
-				self.__timeoutsClear();
-			}
-			
-			// send event
-			self._trigger('destroy');
-			
-			self.__destroyed = true;
-			
-			self._$origin
-				.removeData(self.__namespace)
-				// remove the open trigger listeners
-				.off('.'+ self.__namespace +'-triggerOpen');
-			
-			// remove the touch listener
-			$(env.window.document.body).off('.' + self.__namespace +'-triggerOpen');
-			
-			var ns = self._$origin.data('tooltipster-ns');
-			
-			// if the origin has been removed from DOM, its data may
-			// well have been destroyed in the process and there would
-			// be nothing to clean up or restore
-			if (ns) {
-				
-				// if there are no more tooltips on this element
-				if (ns.length === 1) {
-					
-					// optional restoration of a title attribute
-					var title = null;
-					if (self.__options.restoration == 'previous') {
-						title = self._$origin.data('tooltipster-initialTitle');
-					}
-					else if (self.__options.restoration == 'current') {
-						
-						// old school technique to stringify when outerHTML is not supported
-						title = (typeof self.__Content == 'string') ?
-							self.__Content :
-							$('<div></div>').append(self.__Content).html();
-					}
-					
-					if (title) {
-						self._$origin.attr('title', title);
-					}
-					
-					// final cleaning
-					
-					self._$origin.removeClass('tooltipstered');
-					
-					self._$origin
-						.removeData('tooltipster-ns')
-						.removeData('tooltipster-initialTitle');
-				}
-				else {
-					// remove the instance namespace from the list of namespaces of
-					// tooltips present on the element
-					ns = $.grep(ns, function(el, i) {
-						return el !== self.__namespace;
-					});
-					self._$origin.data('tooltipster-ns', ns);
-				}
-			}
-			
-			// last event
-			self._trigger('destroyed');
-			
-			// unbind private and public event listeners
-			self._off();
-			self.off();
-			
-			// remove external references, just in case
-			self.__Content = null;
-			self.__$emitterPrivate = null;
-			self.__$emitterPublic = null;
-			self.__options.parent = null;
-			self._$origin = null;
-			self._$tooltip = null;
-			
-			// make sure the object is no longer referenced in there to prevent
-			// memory leaks
-			$.tooltipster.__instancesLatestArr = $.grep($.tooltipster.__instancesLatestArr, function(el, i) {
-				return self !== el;
-			});
-			
-			clearInterval(self.__garbageCollector);
-		}
-		else {
-			self.__destroyError();
-		}
-		
-		// we return the scope rather than true so that the call to
-		// .tooltipster('destroy') actually returns the matched elements
-		// and applies to all of them
-		return self;
-	},
-	
-	/**
-	 * Disables the tooltip
-	 * 
-	 * @returns {self}
-	 * @public
-	 */
-	disable: function() {
-		
-		if (!this.__destroyed) {
-			
-			// close first, in case the tooltip would not disappear on
-			// its own (no close trigger)
-			this._close();
-			this.__enabled = false;
-			
-			return this;
-		}
-		else {
-			this.__destroyError();
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * Returns the HTML element of the origin
-	 *
-	 * @returns {self}
-	 * @public
-	 */
-	elementOrigin: function() {
-		
-		if (!this.__destroyed) {
-			return this._$origin[0];
-		}
-		else {
-			this.__destroyError();
-		}
-	},
-	
-	/**
-	 * Returns the HTML element of the tooltip
-	 *
-	 * @returns {self}
-	 * @public
-	 */
-	elementTooltip: function() {
-		return this._$tooltip ? this._$tooltip[0] : null;
-	},
-	
-	/**
-	 * Enables the tooltip
-	 * 
-	 * @returns {self}
-	 * @public
-	 */
-	enable: function() {
-		this.__enabled = true;
-		return this;
-	},
-	
-	/**
-	 * Alias, deprecated in 4.0.0
-	 * 
-	 * @param {function} callback
-	 * @returns {self}
-	 * @public
-	 */
-	hide: function(callback) {
-		return this.close(callback);
-	},
-	
-	/**
-	 * Returns the instance
-	 * 
-	 * @returns {self}
-	 * @public
-	 */
-	instance: function() {
-		return this;
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins (use ::_off() instead)
-	 * 
-	 * @returns {self}
-	 * @public
-	 */
-	off: function() {
-		
-		if (!this.__destroyed) {
-			this.__$emitterPublic.off.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins (use ::_on() instead)
-	 *
-	 * @returns {self}
-	 * @public
-	 */
-	on: function() {
-		
-		if (!this.__destroyed) {
-			this.__$emitterPublic.on.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		}
-		else {
-			this.__destroyError();
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins
-	 *
-	 * @returns {self}
-	 * @public
-	 */
-	one: function() {
-		
-		if (!this.__destroyed) {
-			this.__$emitterPublic.one.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		}
-		else {
-			this.__destroyError();
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * @see self::_open
-	 * @returns {self}
-	 * @public
-	 */
-	open: function(callback) {
-		
-		if (!this.__destroyed) {
-			this._open(null, callback);
-		}
-		else {
-			this.__destroyError();
-		}
-		
-		return this;
-	},
-	
-	/**
-	 * Get or set options. For internal use and advanced users only.
-	 * 
-	 * @param {string} o Option name
-	 * @param {mixed} val optional A new value for the option
-	 * @return {mixed|self} If val is omitted, the value of the option
-	 * is returned, otherwise the instance itself is returned
-	 * @public
-	 */ 
-	option: function(o, val) {
-		
-		// getter
-		if (val === undefined) {
-			return this.__options[o];
-		}
-		// setter
-		else {
-			
-			if (!this.__destroyed) {
-				
-				// change value
-				this.__options[o] = val;
-				
-				// format
-				this.__optionsFormat();
-				
-				// re-prepare the triggers if needed
-				if ($.inArray(o, ['trigger', 'triggerClose', 'triggerOpen']) >= 0) {
-					this.__prepareOrigin();
-				}
-				
-				if (o === 'selfDestruction') {
-					this.__prepareGC();
-				}
-			}
-			else {
-				this.__destroyError();
-			}
-			
-			return this;
-		}
-	},
-	
-	/**
-	 * This method is in charge of setting the position and size properties of the tooltip.
-	 * All the hard work is delegated to the display plugin.
-	 * Note: The tooltip may be detached from the DOM at the moment the method is called 
-	 * but must be attached by the end of the method call.
-	 * 
-	 * @param {object} event For internal use only. Defined if an event such as
-	 * window resizing triggered the repositioning
-	 * @param {boolean} tooltipIsDetached For internal use only. Set this to true if you
-	 * know that the tooltip not being in the DOM is not an issue (typically when the
-	 * tooltip element has just been created but has not been added to the DOM yet).
-	 * @returns {self}
-	 * @public
-	 */
-	reposition: function(event, tooltipIsDetached) {
-		
-		var self = this;
-		
-		if (!self.__destroyed) {
-			
-			// if the tooltip is still open and the origin is still in the DOM
-			if (self.__state != 'closed' && bodyContains(self._$origin)) {
-				
-				// if the tooltip has not been removed from DOM manually (or if it
-				// has been detached on purpose)
-				if (tooltipIsDetached || bodyContains(self._$tooltip)) {
-					
-					if (!tooltipIsDetached) {
-						// detach in case the tooltip overflows the window and adds
-						// scrollbars to it, so __geometry can be accurate
-						self._$tooltip.detach();
-					}
-					
-					// refresh the geometry object before passing it as a helper
-					self.__Geometry = self.__geometry();
-					
-					// let a plugin fo the rest
-					self._trigger({
-						type: 'reposition',
-						event: event,
-						helper: {
-							geo: self.__Geometry
-						}
-					});
-				}
-			}
-		}
-		else {
-			self.__destroyError();
-		}
-		
-		return self;
-	},
-	
-	/**
-	 * Alias, deprecated in 4.0.0
-	 *
-	 * @param callback
-	 * @returns {self}
-	 * @public
-	 */
-	show: function(callback) {
-		return this.open(callback);
-	},
-	
-	/**
-	 * Returns some properties about the instance
-	 * 
-	 * @returns {object}
-	 * @public
-	 */
-	status: function() {
-		
-		return {
-			destroyed: this.__destroyed,
-			enabled: this.__enabled,
-			open: this.__state !== 'closed',
-			state: this.__state
-		};
-	},
-	
-	/**
-	 * For public use only, not to be used by plugins
-	 *
-	 * @returns {self}
-	 * @public
-	 */
-	triggerHandler: function() {
-		
-		if (!this.__destroyed) {
-			this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
-		}
-		else {
-			this.__destroyError();
-		}
-		
-		return this;
-	}
-};
 
-$.fn.tooltipster = function() {
-	
-	// for using in closures
-	var args = Array.prototype.slice.apply(arguments),
-		// common mistake: an HTML element can't be in several tooltips at the same time
-		contentCloningWarning = 'You are using a single HTML element as content for several tooltips. You probably want to set the contentCloning option to TRUE.';
-	
-	// this happens with $(sel).tooltipster(...) when $(sel) does not match anything
-	if (this.length === 0) {
-		
-		// still chainable
-		return this;
-	}
-	// this happens when calling $(sel).tooltipster('methodName or options')
-	// where $(sel) matches one or more elements
-	else {
-		
-		// method calls
-		if (typeof args[0] === 'string') {
-			
-			var v = '#*$~&';
-			
-			this.each(function() {
-				
-				// retrieve the namepaces of the tooltip(s) that exist on that element.
-				// We will interact with the first tooltip only.
-				var ns = $(this).data('tooltipster-ns'),
-					// self represents the instance of the first tooltipster plugin
-					// associated to the current HTML object of the loop
-					self = ns ? $(this).data(ns[0]) : null;
-				
-				// if the current element holds a tooltipster instance
-				if (self) {
-					
-					if (typeof self[args[0]] === 'function') {
-						
-						if (	this.length > 1
-							&&	args[0] == 'content'
-							&&	(	args[1] instanceof $
-								|| (typeof args[1] == 'object' && args[1] != null && args[1].tagName)
-							)
-							&&	!self.__options.contentCloning
-							&&	self.__options.debug
-						) {
-							console.log(contentCloningWarning);
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'clip-path': 'inset(0)'
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
 						}
-						
-						// note : args[1] and args[2] may not be defined
-						var resp = self[args[0]](args[1], args[2]);
 					}
-					else {
-						throw new Error('Unknown method "'+ args[0] +'"');
-					}
-					
-					// if the function returned anything other than the instance
-					// itself (which implies chaining, except for the `instance` method)
-					if (resp !== self || args[0] === 'instance') {
-						
-						v = resp;
-						
-						// return false to stop .each iteration on the first element
-						// matched by the selector
-						return false;
-					}
-				}
-				else {
-					throw new Error('You called Tooltipster\'s "'+ args[0] +'" method on an uninitialized element');
-				}
-			});
-			
-			return (v !== '#*$~&') ? v : this;
-		}
-		// first argument is undefined or an object: the tooltip is initializing
-		else {
-			
-			// reset the array of last initialized objects
-			$.tooltipster.__instancesLatestArr = [];
-			
-			// is there a defined value for the multiple option in the options object ?
-			var	multipleIsSet = args[0] && args[0].multiple !== undefined,
-				// if the multiple option is set to true, or if it's not defined but
-				// set to true in the defaults
-				multiple = (multipleIsSet && args[0].multiple) || (!multipleIsSet && defaults.multiple),
-				// same for content
-				contentIsSet = args[0] && args[0].content !== undefined,
-				content = (contentIsSet && args[0].content) || (!contentIsSet && defaults.content),
-				// same for contentCloning
-				contentCloningIsSet = args[0] && args[0].contentCloning !== undefined,
-				contentCloning =
-						(contentCloningIsSet && args[0].contentCloning)
-					||	(!contentCloningIsSet && defaults.contentCloning),
-				// same for debug
-				debugIsSet = args[0] && args[0].debug !== undefined,
-				debug = (debugIsSet && args[0].debug) || (!debugIsSet && defaults.debug);
-			
-			if (	this.length > 1
-				&&	(	content instanceof $
-					|| (typeof content == 'object' && content != null && content.tagName)
-				)
-				&&	!contentCloning
-				&&	debug
-			) {
-				console.log(contentCloningWarning);
-			}
-			
-			// create a tooltipster instance for each element if it doesn't
-			// already have one or if the multiple option is set, and attach the
-			// object to it
-			this.each(function() {
-				
-				var go = false,
-					$this = $(this),
-					ns = $this.data('tooltipster-ns'),
-					obj = null;
-				
-				if (!ns) {
-					go = true;
-				}
-				else if (multiple) {
-					go = true;
-				}
-				else if (debug) {
-					console.log('Tooltipster: one or more tooltips are already attached to the element below. Ignoring.');
-					console.log(this);
-				}
-				
-				if (go) {
-					obj = new $.Tooltipster(this, args[0]);
-					
-					// save the reference of the new instance
-					if (!ns) ns = [];
-					ns.push(obj.__namespace);
-					$this.data('tooltipster-ns', ns);
-					
-					// save the instance itself
-					$this.data(obj.__namespace, obj);
-					
-					// call our constructor custom function.
-					// we do this here and not in ::init() because we wanted
-					// the object to be saved in $this.data before triggering
-					// it
-					if (obj.__options.functionInit) {
-						obj.__options.functionInit.call(obj, obj, {
-							origin: this
-						});
-					}
-					
-					// and now the event, for the plugins and core emitter
-					obj._trigger('init');
-				}
-				
-				$.tooltipster.__instancesLatestArr.push(obj);
-			});
-			
-			return this;
-		}
-	}
-};
 
-// Utilities
-
-/**
- * A class to check if a tooltip can fit in given dimensions
- * 
- * @param {object} $tooltip The jQuery wrapped tooltip element, or a clone of it
- */
-function Ruler($tooltip) {
-	
-	// list of instance variables
-	
-	this.$container;
-	this.constraints = null;
-	this.__$tooltip;
-	
-	this.__init($tooltip);
-}
-
-Ruler.prototype = {
-	
-	/**
-	 * Move the tooltip into an invisible div that does not allow overflow to make
-	 * size tests. Note: the tooltip may or may not be attached to the DOM at the
-	 * moment this method is called, it does not matter.
-	 * 
-	 * @param {object} $tooltip The object to test. May be just a clone of the
-	 * actual tooltip.
-	 * @private
-	 */
-	__init: function($tooltip) {
-		
-		this.__$tooltip = $tooltip;
-		
-		this.__$tooltip
-			.css({
-				// for some reason we have to specify top and left 0
-				left: 0,
-				// any overflow will be ignored while measuring
-				overflow: 'hidden',
-				// positions at (0,0) without the div using 100% of the available width
-				position: 'absolute',
-				top: 0
+					$(this).text(Math.ceil(counter))
+				}
 			})
-			// overflow must be auto during the test. We re-set this in case
-			// it were modified by the user
-			.find('.tooltipster-content')
-				.css('overflow', 'auto');
-		
-		this.$container = $('<div class="tooltipster-ruler"></div>')
-			.append(this.__$tooltip)
-			.appendTo(env.window.document.body);
-	},
-	
-	/**
-	 * Force the browser to redraw (re-render) the tooltip immediately. This is required
-	 * when you changed some CSS properties and need to make something with it
-	 * immediately, without waiting for the browser to redraw at the end of instructions.
-	 *
-	 * @see http://stackoverflow.com/questions/3485365/how-can-i-force-webkit-to-redraw-repaint-to-propagate-style-changes
-	 * @private
-	 */
-	__forceRedraw: function() {
-		
-		// note: this would work but for Webkit only
-		//this.__$tooltip.close();
-		//this.__$tooltip[0].offsetHeight;
-		//this.__$tooltip.open();
-		
-		// works in FF too
-		var $p = this.__$tooltip.parent();
-		this.__$tooltip.detach();
-		this.__$tooltip.appendTo($p);
-	},
-	
-	/**
-	 * Set maximum dimensions for the tooltip. A call to ::measure afterwards
-	 * will tell us if the content overflows or if it's ok
-	 *
-	 * @param {int} width
-	 * @param {int} height
-	 * @return {Ruler}
-	 * @public
-	 */
-	constrain: function(width, height) {
-		
-		this.constraints = {
-			width: width,
-			height: height
-		};
-		
-		this.__$tooltip.css({
-			// we disable display:flex, otherwise the content would overflow without
-			// creating horizontal scrolling (which we need to detect).
-			display: 'block',
-			// reset any previous height
-			height: '',
-			// we'll check if horizontal scrolling occurs
-			overflow: 'auto',
-			// we'll set the width and see what height is generated and if there
-			// is horizontal overflow
-			width: width
-		});
-		
-		return this;
-	},
-	
-	/**
-	 * Reset the tooltip content overflow and remove the test container
-	 * 
-	 * @returns {Ruler}
-	 * @public
-	 */
-	destroy: function() {
-		
-		// in case the element was not a clone
-		this.__$tooltip
-			.detach()
-			.find('.tooltipster-content')
-				.css({
-					// reset to CSS value
-					display: '',
-					overflow: ''
-				});
-		
-		this.$container.remove();
-	},
-	
-	/**
-	 * Removes any constraints
-	 * 
-	 * @returns {Ruler}
-	 * @public
-	 */
-	free: function() {
-		
-		this.constraints = null;
-		
-		// reset to natural size
-		this.__$tooltip.css({
-			display: '',
-			height: '',
-			overflow: 'visible',
-			width: ''
-		});
-		
-		return this;
-	},
-	
-	/**
-	 * Returns the size of the tooltip. When constraints are applied, also returns
-	 * whether the tooltip fits in the provided dimensions.
-	 * The idea is to see if the new height is small enough and if the content does
-	 * not overflow horizontally.
-	 *
-	 * @param {int} width
-	 * @param {int} height
-	 * @returns {object} An object with a bool `fits` property and a `size` property
-	 * @public
-	 */
-	measure: function() {
-		
-		this.__forceRedraw();
-		
-		var tooltipBcr = this.__$tooltip[0].getBoundingClientRect(),
-			result = { size: {
-				// bcr.width/height are not defined in IE8- but in this
-				// case, bcr.right/bottom will have the same value
-				// except in iOS 8+ where tooltipBcr.bottom/right are wrong
-				// after scrolling for reasons yet to be determined.
-				// tooltipBcr.top/left might not be 0, see issue #514
-				height: tooltipBcr.height || (tooltipBcr.bottom - tooltipBcr.top),
-				width: tooltipBcr.width || (tooltipBcr.right - tooltipBcr.left)
-			}};
-		
-		if (this.constraints) {
-			
-			// note: we used to use offsetWidth instead of boundingRectClient but
-			// it returned rounded values, causing issues with sub-pixel layouts.
-			
-			// note2: noticed that the bcrWidth of text content of a div was once
-			// greater than the bcrWidth of its container by 1px, causing the final
-			// tooltip box to be too small for its content. However, evaluating
-			// their widths one against the other (below) surprisingly returned
-			// equality. Happened only once in Chrome 48, was not able to reproduce
-			// => just having fun with float position values...
-			
-			var $content = this.__$tooltip.find('.tooltipster-content'),
-				height = this.__$tooltip.outerHeight(),
-				contentBcr = $content[0].getBoundingClientRect(),
-				fits = {
-					height: height <= this.constraints.height,
-					width: (
-						// this condition accounts for min-width property that
-						// may apply
-						tooltipBcr.width <= this.constraints.width
-							// the -1 is here because scrollWidth actually returns
-							// a rounded value, and may be greater than bcr.width if
-							// it was rounded up. This may cause an issue for contents
-							// which actually really overflow  by 1px or so, but that
-							// should be rare. Not sure how to solve this efficiently.
-							// See http://blogs.msdn.com/b/ie/archive/2012/02/17/sub-pixel-rendering-and-the-css-object-model.aspx
-						&&	contentBcr.width >= $content[0].scrollWidth - 1
-					)
-				};
-			
-			result.fits = fits.height && fits.width;
-		}
-		
-		// old versions of IE get the width wrong for some reason and it causes
-		// the text to be broken to a new line, so we round it up. If the width
-		// is the width of the screen though, we can assume it is accurate.
-		if (	env.IE
-			&&	env.IE <= 11
-			&&	result.size.width !== env.window.document.documentElement.clientWidth
-		) {
-			result.size.width = Math.ceil(result.size.width) + 1;
-		}
-		
-		return result;
+		})
 	}
-};
-
-// quick & dirty compare function, not bijective nor multidimensional
-function areEqual(a,b) {
-	var same = true;
-	$.each(a, function(i, _) {
-		if (b[i] === undefined || a[i] !== b[i]) {
-			same = false;
-			return false;
-		}
-	});
-	return same;
-}
-
-/**
- * A fast function to check if an element is still in the DOM. It
- * tries to use an id as ids are indexed by the browser, or falls
- * back to jQuery's `contains` method. May fail if two elements
- * have the same id, but so be it
- *
- * @param {object} $obj A jQuery-wrapped HTML element
- * @return {boolean}
- */
-function bodyContains($obj) {
-	var id = $obj.attr('id'),
-		el = id ? env.window.document.getElementById(id) : null;
-	// must also check that the element with the id is the one we want
-	return el ? el === $obj[0] : $.contains(env.window.document.body, $obj[0]);
-}
-
-// detect IE versions for dirty fixes
-var uA = navigator.userAgent.toLowerCase();
-if (uA.indexOf('msie') != -1) env.IE = parseInt(uA.split('msie')[1]);
-else if (uA.toLowerCase().indexOf('trident') !== -1 && uA.indexOf(' rv:11') !== -1) env.IE = 11;
-else if (uA.toLowerCase().indexOf('edge/') != -1) env.IE = parseInt(uA.toLowerCase().split('edge/')[1]);
-
-// detecting support for CSS transitions
-function transitionSupport() {
-	
-	// env.window is not defined yet when this is called
-	if (!win) return false;
-	
-	var b = win.document.body || win.document.documentElement,
-		s = b.style,
-		p = 'transition',
-		v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
-	
-	if (typeof s[p] == 'string') { return true; }
-	
-	p = p.charAt(0).toUpperCase() + p.substr(1);
-	for (var i=0; i<v.length; i++) {
-		if (typeof s[v[i] + p] == 'string') { return true; }
-	}
-	return false;
-}
-
-// we'll return jQuery for plugins not to have to declare it as a dependency,
-// but it's done by a build task since it should be included only once at the
-// end when we concatenate the main file with a plugin
-// sideTip is Tooltipster's default plugin.
-// This file will be UMDified by a build task.
-
-var pluginName = 'tooltipster.sideTip';
-
-$.tooltipster._plugin({
-	name: pluginName,
-	instance: {
-		/**
-		 * Defaults are provided as a function for an easy override by inheritance
-		 *
-		 * @return {object} An object with the defaults options
-		 * @private
-		 */
-		__defaults: function() {
-			
-			return {
-				// if the tooltip should display an arrow that points to the origin
-				arrow: true,
-				// the distance in pixels between the tooltip and the origin
-				distance: 6,
-				// allows to easily change the position of the tooltip
-				functionPosition: null,
-				maxWidth: null,
-				// used to accomodate the arrow of tooltip if there is one.
-				// First to make sure that the arrow target is not too close
-				// to the edge of the tooltip, so the arrow does not overflow
-				// the tooltip. Secondly when we reposition the tooltip to
-				// make sure that it's positioned in such a way that the arrow is
-				// still pointing at the target (and not a few pixels beyond it).
-				// It should be equal to or greater than half the width of
-				// the arrow (by width we mean the size of the side which touches
-				// the side of the tooltip).
-				minIntersection: 16,
-				minWidth: 0,
-				// deprecated in 4.0.0. Listed for _optionsExtract to pick it up
-				position: null,
-				side: 'top',
-				// set to false to position the tooltip relatively to the document rather
-				// than the window when we open it
-				viewportAware: true
-			};
-		},
-		
-		/**
-		 * Run once: at instantiation of the plugin
-		 *
-		 * @param {object} instance The tooltipster object that instantiated this plugin
-		 * @private
-		 */
-		__init: function(instance) {
-			
-			var self = this;
-			
-			// list of instance variables
-			
-			self.__instance = instance;
-			self.__namespace = 'tooltipster-sideTip-'+ Math.round(Math.random()*1000000);
-			self.__previousState = 'closed';
-			self.__options;
-			
-			// initial formatting
-			self.__optionsFormat();
-			
-			self.__instance._on('state.'+ self.__namespace, function(event) {
-				
-				if (event.state == 'closed') {
-					self.__close();
-				}
-				else if (event.state == 'appearing' && self.__previousState == 'closed') {
-					self.__create();
-				}
-				
-				self.__previousState = event.state;
-			});
-			
-			// reformat every time the options are changed
-			self.__instance._on('options.'+ self.__namespace, function() {
-				self.__optionsFormat();
-			});
-			
-			self.__instance._on('reposition.'+ self.__namespace, function(e) {
-				self.__reposition(e.event, e.helper);
-			});
-		},
-		
-		/**
-		 * Called when the tooltip has closed
-		 * 
-		 * @private
-		 */
-		__close: function() {
-			
-			// detach our content object first, so the next jQuery's remove()
-			// call does not unbind its event handlers
-			if (this.__instance.content() instanceof $) {
-				this.__instance.content().detach();
-			}
-			
-			// remove the tooltip from the DOM
-			this.__instance._$tooltip.remove();
-			this.__instance._$tooltip = null;
-		},
-		
-		/**
-		 * Creates the HTML element of the tooltip.
-		 * 
-		 * @private
-		 */
-		__create: function() {
-			
-			// note: we wrap with a .tooltipster-box div to be able to set a margin on it
-			// (.tooltipster-base must not have one)
-			var $html = $(
-				'<div class="tooltipster-base tooltipster-sidetip">' +
-					'<div class="tooltipster-box">' +
-						'<div class="tooltipster-content"></div>' +
-					'</div>' +
-					'<div class="tooltipster-arrow">' +
-						'<div class="tooltipster-arrow-uncropped">' +
-							'<div class="tooltipster-arrow-border"></div>' +
-							'<div class="tooltipster-arrow-background"></div>' +
-						'</div>' +
-					'</div>' +
-				'</div>'
-			);
-			
-			// hide arrow if asked
-			if (!this.__options.arrow) {
-				$html
-					.find('.tooltipster-box')
-						.css('margin', 0)
-						.end()
-					.find('.tooltipster-arrow')
-						.hide();
-			}
-			
-			// apply min/max width if asked
-			if (this.__options.minWidth) {
-				$html.css('min-width', this.__options.minWidth + 'px');
-			}
-			if (this.__options.maxWidth) {
-				$html.css('max-width', this.__options.maxWidth + 'px');
-			}
-			
-			this.__instance._$tooltip = $html;
-			
-			// tell the instance that the tooltip element has been created
-			this.__instance._trigger('created');
-		},
-		
-		/**
-		 * Used when the plugin is to be unplugged
-		 *
-		 * @private
-		 */
-		__destroy: function() {
-			this.__instance._off('.'+ self.__namespace);
-		},
-		
-		/**
-		 * (Re)compute this.__options from the options declared to the instance
-		 *
-		 * @private
-		 */
-		__optionsFormat: function() {
-			
-			var self = this;
-			
-			// get the options
-			self.__options = self.__instance._optionsExtract(pluginName, self.__defaults());
-			
-			// for backward compatibility, deprecated in v4.0.0
-			if (self.__options.position) {
-				self.__options.side = self.__options.position;
-			}
-			
-			// options formatting
-			
-			// format distance as a four-cell array if it ain't one yet and then make
-			// it an object with top/bottom/left/right properties
-			if (typeof self.__options.distance != 'object') {
-				self.__options.distance = [self.__options.distance];
-			}
-			if (self.__options.distance.length < 4) {
-				
-				if (self.__options.distance[1] === undefined) self.__options.distance[1] = self.__options.distance[0];
-				if (self.__options.distance[2] === undefined) self.__options.distance[2] = self.__options.distance[0];
-				if (self.__options.distance[3] === undefined) self.__options.distance[3] = self.__options.distance[1];
-				
-				self.__options.distance = {
-					top: self.__options.distance[0],
-					right: self.__options.distance[1],
-					bottom: self.__options.distance[2],
-					left: self.__options.distance[3]
-				};
-			}
-			
-			// let's transform:
-			// 'top' into ['top', 'bottom', 'right', 'left']
-			// 'right' into ['right', 'left', 'top', 'bottom']
-			// 'bottom' into ['bottom', 'top', 'right', 'left']
-			// 'left' into ['left', 'right', 'top', 'bottom']
-			if (typeof self.__options.side == 'string') {
-				
-				var opposites = {
-					'top': 'bottom',
-					'right': 'left',
-					'bottom': 'top',
-					'left': 'right'
-				};
-				
-				self.__options.side = [self.__options.side, opposites[self.__options.side]];
-				
-				if (self.__options.side[0] == 'left' || self.__options.side[0] == 'right') {
-					self.__options.side.push('top', 'bottom');
-				}
-				else {
-					self.__options.side.push('right', 'left');
-				}
-			}
-			
-			// misc
-			// disable the arrow in IE6 unless the arrow option was explicitly set to true
-			if (	$.tooltipster._env.IE === 6
-				&&	self.__options.arrow !== true
-			) {
-				self.__options.arrow = false;
-			}
-		},
-		
-		/**
-		 * This method must compute and set the positioning properties of the
-		 * tooltip (left, top, width, height, etc.). It must also make sure the
-		 * tooltip is eventually appended to its parent (since the element may be
-		 * detached from the DOM at the moment the method is called).
-		 *
-		 * We'll evaluate positioning scenarios to find which side can contain the
-		 * tooltip in the best way. We'll consider things relatively to the window
-		 * (unless the user asks not to), then to the document (if need be, or if the
-		 * user explicitly requires the tests to run on the document). For each
-		 * scenario, measures are taken, allowing us to know how well the tooltip
-		 * is going to fit. After that, a sorting function will let us know what
-		 * the best scenario is (we also allow the user to choose his favorite
-		 * scenario by using an event).
-		 * 
-		 * @param {object} helper An object that contains variables that plugin
-		 * creators may find useful (see below)
-		 * @param {object} helper.geo An object with many layout properties
-		 * about objects of interest (window, document, origin). This should help
-		 * plugin users compute the optimal position of the tooltip
-		 * @private
-		 */
-		__reposition: function(event, helper) {
-			
-			var self = this,
-				finalResult,
-				// to know where to put the tooltip, we need to know on which point
-				// of the x or y axis we should center it. That coordinate is the target
-				targets = self.__targetFind(helper),
-				testResults = [];
-			
-			// make sure the tooltip is detached while we make tests on a clone
-			self.__instance._$tooltip.detach();
-			
-			// we could actually provide the original element to the Ruler and
-			// not a clone, but it just feels right to keep it out of the
-			// machinery.
-			var $clone = self.__instance._$tooltip.clone(),
-				// start position tests session
-				ruler = $.tooltipster._getRuler($clone),
-				satisfied = false,
-				animation = self.__instance.option('animation');
-			
-			// an animation class could contain properties that distort the size
-			if (animation) {
-				$clone.removeClass('tooltipster-'+ animation);
-			}
-			
-			// start evaluating scenarios
-			$.each(['window', 'document'], function(i, container) {
-				
-				var takeTest = null;
-				
-				// let the user decide to keep on testing or not
-				self.__instance._trigger({
-					container: container,
-					helper: helper,
-					satisfied: satisfied,
-					takeTest: function(bool) {
-						takeTest = bool;
-					},
-					results: testResults,
-					type: 'positionTest'
-				});
-				
-				if (	takeTest == true
-					||	(	takeTest != false
-						&&	satisfied == false
-							// skip the window scenarios if asked. If they are reintegrated by
-							// the callback of the positionTest event, they will have to be
-							// excluded using the callback of positionTested
-						&&	(container != 'window' || self.__options.viewportAware)
-					)
-				) {
-					
-					// for each allowed side
-					for (var i=0; i < self.__options.side.length; i++) {
-						
-						var distance = {
-								horizontal: 0,
-								vertical: 0
-							},
-							side = self.__options.side[i];
-						
-						if (side == 'top' || side == 'bottom') {
-							distance.vertical = self.__options.distance[side];
-						}
-						else {
-							distance.horizontal = self.__options.distance[side];
-						}
-						
-						// this may have an effect on the size of the tooltip if there are css
-						// rules for the arrow or something else
-						self.__sideChange($clone, side);
-						
-						$.each(['natural', 'constrained'], function(i, mode) {
-							
-							takeTest = null;
-							
-							// emit an event on the instance
-							self.__instance._trigger({
-								container: container,
-								event: event,
-								helper: helper,
-								mode: mode,
-								results: testResults,
-								satisfied: satisfied,
-								side: side,
-								takeTest: function(bool) {
-									takeTest = bool;
-								},
-								type: 'positionTest'
-							});
-							
-							if (	takeTest == true
-								||	(	takeTest != false
-									&&	satisfied == false
-								)
-							) {
-								
-								var testResult = {
-									container: container,
-									// we let the distance as an object here, it can make things a little easier
-									// during the user's calculations at positionTest/positionTested
-									distance: distance,
-									// whether the tooltip can fit in the size of the viewport (does not mean
-									// that we'll be able to make it initially entirely visible, see 'whole')
-									fits: null,
-									mode: mode,
-									outerSize: null,
-									side: side,
-									size: null,
-									target: targets[side],
-									// check if the origin has enough surface on screen for the tooltip to
-									// aim at it without overflowing the viewport (this is due to the thickness
-									// of the arrow represented by the minIntersection length).
-									// If not, the tooltip will have to be partly or entirely off screen in
-									// order to stay docked to the origin. This value will stay null when the
-									// container is the document, as it is not relevant
-									whole: null
-								};
-								
-								// get the size of the tooltip with or without size constraints
-								var rulerConfigured = (mode == 'natural') ?
-										ruler.free() :
-										ruler.constrain(
-											helper.geo.available[container][side].width - distance.horizontal,
-											helper.geo.available[container][side].height - distance.vertical
-										),
-									rulerResults = rulerConfigured.measure();
-								
-								testResult.size = rulerResults.size;
-								testResult.outerSize = {
-									height: rulerResults.size.height + distance.vertical,
-									width: rulerResults.size.width + distance.horizontal
-								};
-								
-								if (mode == 'natural') {
-									
-									if(		helper.geo.available[container][side].width >= testResult.outerSize.width
-										&&	helper.geo.available[container][side].height >= testResult.outerSize.height
-									) {
-										testResult.fits = true;
-									}
-									else {
-										testResult.fits = false;
-									}
-								}
-								else {
-									testResult.fits = rulerResults.fits;
-								}
-								
-								if (container == 'window') {
-									
-									if (!testResult.fits) {
-										testResult.whole = false;
-									}
-									else {
-										if (side == 'top' || side == 'bottom') {
-											
-											testResult.whole = (
-													helper.geo.origin.windowOffset.right >= self.__options.minIntersection
-												&&	helper.geo.window.size.width - helper.geo.origin.windowOffset.left >= self.__options.minIntersection
-											);
-										}
-										else {
-											testResult.whole = (
-													helper.geo.origin.windowOffset.bottom >= self.__options.minIntersection
-												&&	helper.geo.window.size.height - helper.geo.origin.windowOffset.top >= self.__options.minIntersection
-											);
-										}
-									}
-								}
-								
-								testResults.push(testResult);
-								
-								// we don't need to compute more positions if we have one fully on screen
-								if (testResult.whole) {
-									satisfied = true;
-								}
-								else {
-									// don't run the constrained test unless the natural width was greater
-									// than the available width, otherwise it's pointless as we know it
-									// wouldn't fit either
-									if (	testResult.mode == 'natural'
-										&&	(	testResult.fits
-											||	testResult.size.width <= helper.geo.available[container][side].width
-										)
-									) {
-										return false;
-									}
-								}
-							}
-						});
-					}
-				}
-			});
-			
-			// the user may eliminate the unwanted scenarios from testResults, but he's
-			// not supposed to alter them at this point. functionPosition and the
-			// position event serve that purpose.
-			self.__instance._trigger({
-				edit: function(r) {
-					testResults = r;
-				},
-				event: event,
-				helper: helper,
-				results: testResults,
-				type: 'positionTested'
-			});
-			
-			/**
-			 * Sort the scenarios to find the favorite one.
-			 * 
-			 * The favorite scenario is when we can fully display the tooltip on screen,
-			 * even if it means that the middle of the tooltip is no longer centered on
-			 * the middle of the origin (when the origin is near the edge of the screen
-			 * or even partly off screen). We want the tooltip on the preferred side,
-			 * even if it means that we have to use a constrained size rather than a
-			 * natural one (as long as it fits). When the origin is off screen at the top
-			 * the tooltip will be positioned at the bottom (if allowed), if the origin
-			 * is off screen on the right, it will be positioned on the left, etc.
-			 * If there are no scenarios where the tooltip can fit on screen, or if the
-			 * user does not want the tooltip to fit on screen (viewportAware == false),
-			 * we fall back to the scenarios relative to the document.
-			 * 
-			 * When the tooltip is bigger than the viewport in either dimension, we stop
-			 * looking at the window scenarios and consider the document scenarios only,
-			 * with the same logic to find on which side it would fit best.
-			 * 
-			 * If the tooltip cannot fit the document on any side, we force it at the
-			 * bottom, so at least the user can scroll to see it.
- 			 */
-			testResults.sort(function(a, b) {
-				
-				// best if it's whole (the tooltip fits and adapts to the viewport)
-				if (a.whole && !b.whole) {
-					return -1;
-				}
-				else if (!a.whole && b.whole) {
-					return 1;
-				}
-				else if (a.whole && b.whole) {
-					
-					var ai = self.__options.side.indexOf(a.side),
-						bi = self.__options.side.indexOf(b.side);
-					
-					// use the user's sides fallback array
-					if (ai < bi) {
-						return -1;
-					}
-					else if (ai > bi) {
-						return 1;
-					}
-					else {
-						// will be used if the user forced the tests to continue
-						return a.mode == 'natural' ? -1 : 1;
-					}
-				}
-				else {
-					
-					// better if it fits
-					if (a.fits && !b.fits) {
-						return -1;
-					}
-					else if (!a.fits && b.fits) {
-						return 1;
-					}
-					else if (a.fits && b.fits) {
-						
-						var ai = self.__options.side.indexOf(a.side),
-							bi = self.__options.side.indexOf(b.side);
-						
-						// use the user's sides fallback array
-						if (ai < bi) {
-							return -1;
-						}
-						else if (ai > bi) {
-							return 1;
-						}
-						else {
-							// will be used if the user forced the tests to continue
-							return a.mode == 'natural' ? -1 : 1;
-						}
-					}
-					else {
-						
-						// if everything failed, this will give a preference to the case where
-						// the tooltip overflows the document at the bottom
-						if (	a.container == 'document'
-							&&	a.side == 'bottom'
-							&&	a.mode == 'natural'
-						) {
-							return -1;
-						}
-						else {
-							return 1;
-						}
-					}
-				}
-			});
-			
-			finalResult = testResults[0];
-			
-			
-			// now let's find the coordinates of the tooltip relatively to the window
-			finalResult.coord = {};
-			
-			switch (finalResult.side) {
-				
-				case 'left':
-				case 'right':
-					finalResult.coord.top = Math.floor(finalResult.target - finalResult.size.height / 2);
-					break;
-				
-				case 'bottom':
-				case 'top':
-					finalResult.coord.left = Math.floor(finalResult.target - finalResult.size.width / 2);
-					break;
-			}
-			
-			switch (finalResult.side) {
-				
-				case 'left':
-					finalResult.coord.left = helper.geo.origin.windowOffset.left - finalResult.outerSize.width;
-					break;
-				
-				case 'right':
-					finalResult.coord.left = helper.geo.origin.windowOffset.right + finalResult.distance.horizontal;
-					break;
-				
-				case 'top':
-					finalResult.coord.top = helper.geo.origin.windowOffset.top - finalResult.outerSize.height;
-					break;
-				
-				case 'bottom':
-					finalResult.coord.top = helper.geo.origin.windowOffset.bottom + finalResult.distance.vertical;
-					break;
-			}
-			
-			// if the tooltip can potentially be contained within the viewport dimensions
-			// and that we are asked to make it fit on screen
-			if (finalResult.container == 'window') {
-				
-				// if the tooltip overflows the viewport, we'll move it accordingly (then it will
-				// not be centered on the middle of the origin anymore). We only move horizontally
-				// for top and bottom tooltips and vice versa.
-				if (finalResult.side == 'top' || finalResult.side == 'bottom') {
-					
-					// if there is an overflow on the left
-					if (finalResult.coord.left < 0) {
-						
-						// prevent the overflow unless the origin itself gets off screen (minus the
-						// margin needed to keep the arrow pointing at the target)
-						if (helper.geo.origin.windowOffset.right - this.__options.minIntersection >= 0) {
-							finalResult.coord.left = 0;
-						}
-						else {
-							finalResult.coord.left = helper.geo.origin.windowOffset.right - this.__options.minIntersection - 1;
-						}
-					}
-					// or an overflow on the right
-					else if (finalResult.coord.left > helper.geo.window.size.width - finalResult.size.width) {
-						
-						if (helper.geo.origin.windowOffset.left + this.__options.minIntersection <= helper.geo.window.size.width) {
-							finalResult.coord.left = helper.geo.window.size.width - finalResult.size.width;
-						}
-						else {
-							finalResult.coord.left = helper.geo.origin.windowOffset.left + this.__options.minIntersection + 1 - finalResult.size.width;
-						}
-					}
-				}
-				else {
-					
-					// overflow at the top
-					if (finalResult.coord.top < 0) {
-						
-						if (helper.geo.origin.windowOffset.bottom - this.__options.minIntersection >= 0) {
-							finalResult.coord.top = 0;
-						}
-						else {
-							finalResult.coord.top = helper.geo.origin.windowOffset.bottom - this.__options.minIntersection - 1;
-						}
-					}
-					// or at the bottom
-					else if (finalResult.coord.top > helper.geo.window.size.height - finalResult.size.height) {
-						
-						if (helper.geo.origin.windowOffset.top + this.__options.minIntersection <= helper.geo.window.size.height) {
-							finalResult.coord.top = helper.geo.window.size.height - finalResult.size.height;
-						}
-						else {
-							finalResult.coord.top = helper.geo.origin.windowOffset.top + this.__options.minIntersection + 1 - finalResult.size.height;
-						}
-					}
-				}
-			}
-			else {
-				
-				// there might be overflow here too but it's easier to handle. If there has
-				// to be an overflow, we'll make sure it's on the right side of the screen
-				// (because the browser will extend the document size if there is an overflow
-				// on the right, but not on the left). The sort function above has already
-				// made sure that a bottom document overflow is preferred to a top overflow,
-				// so we don't have to care about it.
-				
-				// if there is an overflow on the right
-				if (finalResult.coord.left > helper.geo.window.size.width - finalResult.size.width) {
-					
-					// this may actually create on overflow on the left but we'll fix it in a sec
-					finalResult.coord.left = helper.geo.window.size.width - finalResult.size.width;
-				}
-				
-				// if there is an overflow on the left
-				if (finalResult.coord.left < 0) {
-					
-					// don't care if it overflows the right after that, we made our best
-					finalResult.coord.left = 0;
-				}
-			}
-			
-			
-			// submit the positioning proposal to the user function which may choose to change
-			// the side, size and/or the coordinates
-			
-			// first, set the rules that corresponds to the proposed side: it may change
-			// the size of the tooltip, and the custom functionPosition may want to detect the
-			// size of something before making a decision. So let's make things easier for the
-			// implementor
-			self.__sideChange($clone, finalResult.side);
-			
-			// add some variables to the helper
-			helper.tooltipClone = $clone[0];
-			helper.tooltipParent = self.__instance.option('parent').parent[0];
-			// move informative values to the helper
-			helper.mode = finalResult.mode;
-			helper.whole = finalResult.whole;
-			// add some variables to the helper for the functionPosition callback (these
-			// will also be added to the event fired by self.__instance._trigger but that's
-			// ok, we're just being consistent)
-			helper.origin = self.__instance._$origin[0];
-			helper.tooltip = self.__instance._$tooltip[0];
-			
-			// leave only the actionable values in there for functionPosition
-			delete finalResult.container;
-			delete finalResult.fits;
-			delete finalResult.mode;
-			delete finalResult.outerSize;
-			delete finalResult.whole;
-			
-			// keep only the distance on the relevant side, for clarity
-			finalResult.distance = finalResult.distance.horizontal || finalResult.distance.vertical;
-			
-			// beginners may not be comfortable with the concept of editing the object
-			//  passed by reference, so we provide an edit function and pass a clone
-			var finalResultClone = $.extend(true, {}, finalResult);
-			
-			// emit an event on the instance
-			self.__instance._trigger({
-				edit: function(result) {
-					finalResult = result;
-				},
-				event: event,
-				helper: helper,
-				position: finalResultClone,
-				type: 'position'
-			});
-			
-			if (self.__options.functionPosition) {
-				
-				var result = self.__options.functionPosition.call(self, self.__instance, helper, finalResultClone);
-				
-				if (result) finalResult = result;
-			}
-			
-			// end the positioning tests session (the user might have had a
-			// use for it during the position event, now it's over)
-			ruler.destroy();
-			
-			// compute the position of the target relatively to the tooltip root
-			// element so we can place the arrow and make the needed adjustments
-			var arrowCoord,
-				maxVal;
-			
-			if (finalResult.side == 'top' || finalResult.side == 'bottom') {
-				
-				arrowCoord = {
-					prop: 'left',
-					val: finalResult.target - finalResult.coord.left
-				};
-				maxVal = finalResult.size.width - this.__options.minIntersection;
-			}
-			else {
-				
-				arrowCoord = {
-					prop: 'top',
-					val: finalResult.target - finalResult.coord.top
-				};
-				maxVal = finalResult.size.height - this.__options.minIntersection;
-			}
-			
-			// cannot lie beyond the boundaries of the tooltip, minus the
-			// arrow margin
-			if (arrowCoord.val < this.__options.minIntersection) {
-				arrowCoord.val = this.__options.minIntersection;
-			}
-			else if (arrowCoord.val > maxVal) {
-				arrowCoord.val = maxVal;
-			}
-			
-			var originParentOffset;
-			
-			// let's convert the window-relative coordinates into coordinates relative to the
-			// future positioned parent that the tooltip will be appended to
-			if (helper.geo.origin.fixedLineage) {
-				
-				// same as windowOffset when the position is fixed
-				originParentOffset = helper.geo.origin.windowOffset;
-			}
-			else {
-				
-				// this assumes that the parent of the tooltip is located at
-				// (0, 0) in the document, typically like when the parent is
-				// <body>.
-				// If we ever allow other types of parent, .tooltipster-ruler
-				// will have to be appended to the parent to inherit css style
-				// values that affect the display of the text and such.
-				originParentOffset = {
-					left: helper.geo.origin.windowOffset.left + helper.geo.window.scroll.left,
-					top: helper.geo.origin.windowOffset.top + helper.geo.window.scroll.top
-				};
-			}
-			
-			finalResult.coord = {
-				left: originParentOffset.left + (finalResult.coord.left - helper.geo.origin.windowOffset.left),
-				top: originParentOffset.top + (finalResult.coord.top - helper.geo.origin.windowOffset.top)
-			};
-			
-			// set position values on the original tooltip element
-			
-			self.__sideChange(self.__instance._$tooltip, finalResult.side);
-			
-			if (helper.geo.origin.fixedLineage) {
-				self.__instance._$tooltip
-					.css('position', 'fixed');
-			}
-			else {
-				// CSS default
-				self.__instance._$tooltip
-					.css('position', '');
-			}
-			
-			self.__instance._$tooltip
-				.css({
-					left: finalResult.coord.left,
-					top: finalResult.coord.top,
-					// we need to set a size even if the tooltip is in its natural size
-					// because when the tooltip is positioned beyond the width of the body
-					// (which is by default the width of the window; it will happen when
-					// you scroll the window horizontally to get to the origin), its text
-					// content will otherwise break lines at each word to keep up with the
-					// body overflow strategy.
-					height: finalResult.size.height,
-					width: finalResult.size.width
-				})
-				.find('.tooltipster-arrow')
-					.css({
-						'left': '',
-						'top': ''
-					})
-					.css(arrowCoord.prop, arrowCoord.val);
-			
-			// append the tooltip HTML element to its parent
-			self.__instance._$tooltip.appendTo(self.__instance.option('parent'));
-			
-			self.__instance._trigger({
-				type: 'repositioned',
-				event: event,
-				position: finalResult
-			});
-		},
-		
-		/**
-		 * Make whatever modifications are needed when the side is changed. This has
-		 * been made an independant method for easy inheritance in custom plugins based
-		 * on this default plugin.
-		 *
-		 * @param {object} $obj
-		 * @param {string} side
-		 * @private
-		 */
-		__sideChange: function($obj, side) {
-			
-			$obj
-				.removeClass('tooltipster-bottom')
-				.removeClass('tooltipster-left')
-				.removeClass('tooltipster-right')
-				.removeClass('tooltipster-top')
-				.addClass('tooltipster-'+ side);
-		},
-		
-		/**
-		 * Returns the target that the tooltip should aim at for a given side.
-		 * The calculated value is a distance from the edge of the window
-		 * (left edge for top/bottom sides, top edge for left/right side). The
-		 * tooltip will be centered on that position and the arrow will be
-		 * positioned there (as much as possible).
-		 *
-		 * @param {object} helper
-		 * @return {integer}
-		 * @private
-		 */
-		__targetFind: function(helper) {
-			
-			var target = {},
-				rects = this.__instance._$origin[0].getClientRects();
-			
-			// these lines fix a Chrome bug (issue #491)
-			if (rects.length > 1) {
-				var opacity = this.__instance._$origin.css('opacity');
-				if(opacity == 1) {
-					this.__instance._$origin.css('opacity', 0.99);
-					rects = this.__instance._$origin[0].getClientRects();
-					this.__instance._$origin.css('opacity', 1);
-				}
-			}
-			
-			// by default, the target will be the middle of the origin
-			if (rects.length < 2) {
-				
-				target.top = Math.floor(helper.geo.origin.windowOffset.left + (helper.geo.origin.size.width / 2));
-				target.bottom = target.top;
-				
-				target.left = Math.floor(helper.geo.origin.windowOffset.top + (helper.geo.origin.size.height / 2));
-				target.right = target.left;
-			}
-			// if multiple client rects exist, the element may be text split
-			// up into multiple lines and the middle of the origin may not be
-			// best option anymore. We need to choose the best target client rect
-			else {
-				
-				// top: the first
-				var targetRect = rects[0];
-				target.top = Math.floor(targetRect.left + (targetRect.right - targetRect.left) / 2);
-		
-				// right: the middle line, rounded down in case there is an even
-				// number of lines (looks more centered => check out the
-				// demo with 4 split lines)
-				if (rects.length > 2) {
-					targetRect = rects[Math.ceil(rects.length / 2) - 1];
-				}
-				else {
-					targetRect = rects[0];
-				}
-				target.right = Math.floor(targetRect.top + (targetRect.bottom - targetRect.top) / 2);
-		
-				// bottom: the last
-				targetRect = rects[rects.length - 1];
-				target.bottom = Math.floor(targetRect.left + (targetRect.right - targetRect.left) / 2);
-		
-				// left: the middle line, rounded up
-				if (rects.length > 2) {
-					targetRect = rects[Math.ceil((rects.length + 1) / 2) - 1];
-				}
-				else {
-					targetRect = rects[rects.length - 1];
-				}
-				
-				target.left = Math.floor(targetRect.top + (targetRect.bottom - targetRect.top) / 2);
-			}
-			
-			return target;
-		}
-	}
-});
-
-/* a build task will add "return $;" here */
-return $;
-
-}));
-
-!function(a,b){"function"==typeof define&&define.amd?define(["jquery"],function(a){return b(a)}):"object"==typeof exports?module.exports=b(require("jquery")):b(jQuery)}(this,function(a){function b(a){this.$container,this.constraints=null,this.__$tooltip,this.__init(a)}function c(b,c){var d=!0;return a.each(b,function(a,e){return void 0===c[a]||b[a]!==c[a]?(d=!1,!1):void 0}),d}function d(b){var c=b.attr("id"),d=c?h.window.document.getElementById(c):null;return d?d===b[0]:a.contains(h.window.document.body,b[0])}function e(){if(!g)return!1;var a=g.document.body||g.document.documentElement,b=a.style,c="transition",d=["Moz","Webkit","Khtml","O","ms"];if("string"==typeof b[c])return!0;c=c.charAt(0).toUpperCase()+c.substr(1);for(var e=0;e<d.length;e++)if("string"==typeof b[d[e]+c])return!0;return!1}var f={animation:"fade",animationDuration:350,content:null,contentAsHTML:!1,contentCloning:!1,debug:!0,delay:300,delayTouch:[300,500],functionInit:null,functionBefore:null,functionReady:null,functionAfter:null,functionFormat:null,IEmin:6,interactive:!1,multiple:!1,parent:null,plugins:["sideTip"],repositionOnScroll:!1,restoration:"none",selfDestruction:!0,theme:[],timer:0,trackerInterval:500,trackOrigin:!1,trackTooltip:!1,trigger:"hover",triggerClose:{click:!1,mouseleave:!1,originClick:!1,scroll:!1,tap:!1,touchleave:!1},triggerOpen:{click:!1,mouseenter:!1,tap:!1,touchstart:!1},updateAnimation:"rotate",zIndex:9999999},g="undefined"!=typeof window?window:null,h={hasTouchCapability:!(!g||!("ontouchstart"in g||g.DocumentTouch&&g.document instanceof g.DocumentTouch||g.navigator.maxTouchPoints)),hasTransitions:e(),IE:!1,semVer:"4.2.6",window:g},i=function(){this.__$emitterPrivate=a({}),this.__$emitterPublic=a({}),this.__instancesLatestArr=[],this.__plugins={},this._env=h};i.prototype={__bridge:function(b,c,d){if(!c[d]){var e=function(){};e.prototype=b;var g=new e;g.__init&&g.__init(c),a.each(b,function(a,b){0!=a.indexOf("__")&&(c[a]?f.debug&&console.log("The "+a+" method of the "+d+" plugin conflicts with another plugin or native methods"):(c[a]=function(){return g[a].apply(g,Array.prototype.slice.apply(arguments))},c[a].bridged=g))}),c[d]=g}return this},__setWindow:function(a){return h.window=a,this},_getRuler:function(a){return new b(a)},_off:function(){return this.__$emitterPrivate.off.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_on:function(){return this.__$emitterPrivate.on.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_one:function(){return this.__$emitterPrivate.one.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_plugin:function(b){var c=this;if("string"==typeof b){var d=b,e=null;return d.indexOf(".")>0?e=c.__plugins[d]:a.each(c.__plugins,function(a,b){return b.name.substring(b.name.length-d.length-1)=="."+d?(e=b,!1):void 0}),e}if(b.name.indexOf(".")<0)throw new Error("Plugins must be namespaced");return c.__plugins[b.name]=b,b.core&&c.__bridge(b.core,c,b.name),this},_trigger:function(){var a=Array.prototype.slice.apply(arguments);return"string"==typeof a[0]&&(a[0]={type:a[0]}),this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate,a),this.__$emitterPublic.trigger.apply(this.__$emitterPublic,a),this},instances:function(b){var c=[],d=b||".tooltipstered";return a(d).each(function(){var b=a(this),d=b.data("tooltipster-ns");d&&a.each(d,function(a,d){c.push(b.data(d))})}),c},instancesLatest:function(){return this.__instancesLatestArr},off:function(){return this.__$emitterPublic.off.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},on:function(){return this.__$emitterPublic.on.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},one:function(){return this.__$emitterPublic.one.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},origins:function(b){var c=b?b+" ":"";return a(c+".tooltipstered").toArray()},setDefaults:function(b){return a.extend(f,b),this},triggerHandler:function(){return this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this}},a.tooltipster=new i,a.Tooltipster=function(b,c){this.__callbacks={close:[],open:[]},this.__closingTime,this.__Content,this.__contentBcr,this.__destroyed=!1,this.__$emitterPrivate=a({}),this.__$emitterPublic=a({}),this.__enabled=!0,this.__garbageCollector,this.__Geometry,this.__lastPosition,this.__namespace="tooltipster-"+Math.round(1e6*Math.random()),this.__options,this.__$originParents,this.__pointerIsOverOrigin=!1,this.__previousThemes=[],this.__state="closed",this.__timeouts={close:[],open:null},this.__touchEvents=[],this.__tracker=null,this._$origin,this._$tooltip,this.__init(b,c)},a.Tooltipster.prototype={__init:function(b,c){var d=this;if(d._$origin=a(b),d.__options=a.extend(!0,{},f,c),d.__optionsFormat(),!h.IE||h.IE>=d.__options.IEmin){var e=null;if(void 0===d._$origin.data("tooltipster-initialTitle")&&(e=d._$origin.attr("title"),void 0===e&&(e=null),d._$origin.data("tooltipster-initialTitle",e)),null!==d.__options.content)d.__contentSet(d.__options.content);else{var g,i=d._$origin.attr("data-tooltip-content");i&&(g=a(i)),g&&g[0]?d.__contentSet(g.first()):d.__contentSet(e)}d._$origin.removeAttr("title").addClass("tooltipstered"),d.__prepareOrigin(),d.__prepareGC(),a.each(d.__options.plugins,function(a,b){d._plug(b)}),h.hasTouchCapability&&a(h.window.document.body).on("touchmove."+d.__namespace+"-triggerOpen",function(a){d._touchRecordEvent(a)}),d._on("created",function(){d.__prepareTooltip()})._on("repositioned",function(a){d.__lastPosition=a.position})}else d.__options.disabled=!0},__contentInsert:function(){var a=this,b=a._$tooltip.find(".tooltipster-content"),c=a.__Content,d=function(a){c=a};return a._trigger({type:"format",content:a.__Content,format:d}),a.__options.functionFormat&&(c=a.__options.functionFormat.call(a,a,{origin:a._$origin[0]},a.__Content)),"string"!=typeof c||a.__options.contentAsHTML?b.empty().append(c):b.text(c),a},__contentSet:function(b){return b instanceof a&&this.__options.contentCloning&&(b=b.clone(!0)),this.__Content=b,this._trigger({type:"updated",content:b}),this},__destroyError:function(){throw new Error("This tooltip has been destroyed and cannot execute your method call.")},__geometry:function(){var b=this,c=b._$origin,d=b._$origin.is("area");if(d){var e=b._$origin.parent().attr("name");c=a('img[usemap="#'+e+'"]')}var f=c[0].getBoundingClientRect(),g=a(h.window.document),i=a(h.window),j=c,k={available:{document:null,window:null},document:{size:{height:g.height(),width:g.width()}},window:{scroll:{left:h.window.scrollX||h.window.document.documentElement.scrollLeft,top:h.window.scrollY||h.window.document.documentElement.scrollTop},size:{height:i.height(),width:i.width()}},origin:{fixedLineage:!1,offset:{},size:{height:f.bottom-f.top,width:f.right-f.left},usemapImage:d?c[0]:null,windowOffset:{bottom:f.bottom,left:f.left,right:f.right,top:f.top}}};if(d){var l=b._$origin.attr("shape"),m=b._$origin.attr("coords");if(m&&(m=m.split(","),a.map(m,function(a,b){m[b]=parseInt(a)})),"default"!=l)switch(l){case"circle":var n=m[0],o=m[1],p=m[2],q=o-p,r=n-p;k.origin.size.height=2*p,k.origin.size.width=k.origin.size.height,k.origin.windowOffset.left+=r,k.origin.windowOffset.top+=q;break;case"rect":var s=m[0],t=m[1],u=m[2],v=m[3];k.origin.size.height=v-t,k.origin.size.width=u-s,k.origin.windowOffset.left+=s,k.origin.windowOffset.top+=t;break;case"poly":for(var w=0,x=0,y=0,z=0,A="even",B=0;B<m.length;B++){var C=m[B];"even"==A?(C>y&&(y=C,0===B&&(w=y)),w>C&&(w=C),A="odd"):(C>z&&(z=C,1==B&&(x=z)),x>C&&(x=C),A="even")}k.origin.size.height=z-x,k.origin.size.width=y-w,k.origin.windowOffset.left+=w,k.origin.windowOffset.top+=x}}var D=function(a){k.origin.size.height=a.height,k.origin.windowOffset.left=a.left,k.origin.windowOffset.top=a.top,k.origin.size.width=a.width};for(b._trigger({type:"geometry",edit:D,geometry:{height:k.origin.size.height,left:k.origin.windowOffset.left,top:k.origin.windowOffset.top,width:k.origin.size.width}}),k.origin.windowOffset.right=k.origin.windowOffset.left+k.origin.size.width,k.origin.windowOffset.bottom=k.origin.windowOffset.top+k.origin.size.height,k.origin.offset.left=k.origin.windowOffset.left+k.window.scroll.left,k.origin.offset.top=k.origin.windowOffset.top+k.window.scroll.top,k.origin.offset.bottom=k.origin.offset.top+k.origin.size.height,k.origin.offset.right=k.origin.offset.left+k.origin.size.width,k.available.document={bottom:{height:k.document.size.height-k.origin.offset.bottom,width:k.document.size.width},left:{height:k.document.size.height,width:k.origin.offset.left},right:{height:k.document.size.height,width:k.document.size.width-k.origin.offset.right},top:{height:k.origin.offset.top,width:k.document.size.width}},k.available.window={bottom:{height:Math.max(k.window.size.height-Math.max(k.origin.windowOffset.bottom,0),0),width:k.window.size.width},left:{height:k.window.size.height,width:Math.max(k.origin.windowOffset.left,0)},right:{height:k.window.size.height,width:Math.max(k.window.size.width-Math.max(k.origin.windowOffset.right,0),0)},top:{height:Math.max(k.origin.windowOffset.top,0),width:k.window.size.width}};"html"!=j[0].tagName.toLowerCase();){if("fixed"==j.css("position")){k.origin.fixedLineage=!0;break}j=j.parent()}return k},__optionsFormat:function(){return"number"==typeof this.__options.animationDuration&&(this.__options.animationDuration=[this.__options.animationDuration,this.__options.animationDuration]),"number"==typeof this.__options.delay&&(this.__options.delay=[this.__options.delay,this.__options.delay]),"number"==typeof this.__options.delayTouch&&(this.__options.delayTouch=[this.__options.delayTouch,this.__options.delayTouch]),"string"==typeof this.__options.theme&&(this.__options.theme=[this.__options.theme]),null===this.__options.parent?this.__options.parent=a(h.window.document.body):"string"==typeof this.__options.parent&&(this.__options.parent=a(this.__options.parent)),"hover"==this.__options.trigger?(this.__options.triggerOpen={mouseenter:!0,touchstart:!0},this.__options.triggerClose={mouseleave:!0,originClick:!0,touchleave:!0}):"click"==this.__options.trigger&&(this.__options.triggerOpen={click:!0,tap:!0},this.__options.triggerClose={click:!0,tap:!0}),this._trigger("options"),this},__prepareGC:function(){var b=this;return b.__options.selfDestruction?b.__garbageCollector=setInterval(function(){var c=(new Date).getTime();b.__touchEvents=a.grep(b.__touchEvents,function(a,b){return c-a.time>6e4}),d(b._$origin)||b.close(function(){b.destroy()})},2e4):clearInterval(b.__garbageCollector),b},__prepareOrigin:function(){var a=this;if(a._$origin.off("."+a.__namespace+"-triggerOpen"),h.hasTouchCapability&&a._$origin.on("touchstart."+a.__namespace+"-triggerOpen touchend."+a.__namespace+"-triggerOpen touchcancel."+a.__namespace+"-triggerOpen",function(b){a._touchRecordEvent(b)}),a.__options.triggerOpen.click||a.__options.triggerOpen.tap&&h.hasTouchCapability){var b="";a.__options.triggerOpen.click&&(b+="click."+a.__namespace+"-triggerOpen "),a.__options.triggerOpen.tap&&h.hasTouchCapability&&(b+="touchend."+a.__namespace+"-triggerOpen"),a._$origin.on(b,function(b){a._touchIsMeaningfulEvent(b)&&a._open(b)})}if(a.__options.triggerOpen.mouseenter||a.__options.triggerOpen.touchstart&&h.hasTouchCapability){var b="";a.__options.triggerOpen.mouseenter&&(b+="mouseenter."+a.__namespace+"-triggerOpen "),a.__options.triggerOpen.touchstart&&h.hasTouchCapability&&(b+="touchstart."+a.__namespace+"-triggerOpen"),a._$origin.on(b,function(b){!a._touchIsTouchEvent(b)&&a._touchIsEmulatedEvent(b)||(a.__pointerIsOverOrigin=!0,a._openShortly(b))})}if(a.__options.triggerClose.mouseleave||a.__options.triggerClose.touchleave&&h.hasTouchCapability){var b="";a.__options.triggerClose.mouseleave&&(b+="mouseleave."+a.__namespace+"-triggerOpen "),a.__options.triggerClose.touchleave&&h.hasTouchCapability&&(b+="touchend."+a.__namespace+"-triggerOpen touchcancel."+a.__namespace+"-triggerOpen"),a._$origin.on(b,function(b){a._touchIsMeaningfulEvent(b)&&(a.__pointerIsOverOrigin=!1)})}return a},__prepareTooltip:function(){var b=this,c=b.__options.interactive?"auto":"";return b._$tooltip.attr("id",b.__namespace).css({"pointer-events":c,zIndex:b.__options.zIndex}),a.each(b.__previousThemes,function(a,c){b._$tooltip.removeClass(c)}),a.each(b.__options.theme,function(a,c){b._$tooltip.addClass(c)}),b.__previousThemes=a.merge([],b.__options.theme),b},__scrollHandler:function(b){var c=this;if(c.__options.triggerClose.scroll)c._close(b);else if(d(c._$origin)&&d(c._$tooltip)){var e=null;if(b.target===h.window.document)c.__Geometry.origin.fixedLineage||c.__options.repositionOnScroll&&c.reposition(b);else{e=c.__geometry();var f=!1;if("fixed"!=c._$origin.css("position")&&c.__$originParents.each(function(b,c){var d=a(c),g=d.css("overflow-x"),h=d.css("overflow-y");if("visible"!=g||"visible"!=h){var i=c.getBoundingClientRect();if("visible"!=g&&(e.origin.windowOffset.left<i.left||e.origin.windowOffset.right>i.right))return f=!0,!1;if("visible"!=h&&(e.origin.windowOffset.top<i.top||e.origin.windowOffset.bottom>i.bottom))return f=!0,!1}return"fixed"==d.css("position")?!1:void 0}),f)c._$tooltip.css("visibility","hidden");else if(c._$tooltip.css("visibility","visible"),c.__options.repositionOnScroll)c.reposition(b);else{var g=e.origin.offset.left-c.__Geometry.origin.offset.left,i=e.origin.offset.top-c.__Geometry.origin.offset.top;c._$tooltip.css({left:c.__lastPosition.coord.left+g,top:c.__lastPosition.coord.top+i})}}c._trigger({type:"scroll",event:b,geo:e})}return c},__stateSet:function(a){return this.__state=a,this._trigger({type:"state",state:a}),this},__timeoutsClear:function(){return clearTimeout(this.__timeouts.open),this.__timeouts.open=null,a.each(this.__timeouts.close,function(a,b){clearTimeout(b)}),this.__timeouts.close=[],this},__trackerStart:function(){var a=this,b=a._$tooltip.find(".tooltipster-content");return a.__options.trackTooltip&&(a.__contentBcr=b[0].getBoundingClientRect()),a.__tracker=setInterval(function(){if(d(a._$origin)&&d(a._$tooltip)){if(a.__options.trackOrigin){var e=a.__geometry(),f=!1;c(e.origin.size,a.__Geometry.origin.size)&&(a.__Geometry.origin.fixedLineage?c(e.origin.windowOffset,a.__Geometry.origin.windowOffset)&&(f=!0):c(e.origin.offset,a.__Geometry.origin.offset)&&(f=!0)),f||(a.__options.triggerClose.mouseleave?a._close():a.reposition())}if(a.__options.trackTooltip){var g=b[0].getBoundingClientRect();g.height===a.__contentBcr.height&&g.width===a.__contentBcr.width||(a.reposition(),a.__contentBcr=g)}}else a._close()},a.__options.trackerInterval),a},_close:function(b,c,d){var e=this,f=!0;if(e._trigger({type:"close",event:b,stop:function(){f=!1}}),f||d){c&&e.__callbacks.close.push(c),e.__callbacks.open=[],e.__timeoutsClear();var g=function(){a.each(e.__callbacks.close,function(a,c){c.call(e,e,{event:b,origin:e._$origin[0]})}),e.__callbacks.close=[]};if("closed"!=e.__state){var i=!0,j=new Date,k=j.getTime(),l=k+e.__options.animationDuration[1];if("disappearing"==e.__state&&l>e.__closingTime&&e.__options.animationDuration[1]>0&&(i=!1),i){e.__closingTime=l,"disappearing"!=e.__state&&e.__stateSet("disappearing");var m=function(){clearInterval(e.__tracker),e._trigger({type:"closing",event:b}),e._$tooltip.off("."+e.__namespace+"-triggerClose").removeClass("tooltipster-dying"),a(h.window).off("."+e.__namespace+"-triggerClose"),e.__$originParents.each(function(b,c){a(c).off("scroll."+e.__namespace+"-triggerClose")}),e.__$originParents=null,a(h.window.document.body).off("."+e.__namespace+"-triggerClose"),e._$origin.off("."+e.__namespace+"-triggerClose"),e._off("dismissable"),e.__stateSet("closed"),e._trigger({type:"after",event:b}),e.__options.functionAfter&&e.__options.functionAfter.call(e,e,{event:b,origin:e._$origin[0]}),g()};h.hasTransitions?(e._$tooltip.css({"-moz-animation-duration":e.__options.animationDuration[1]+"ms","-ms-animation-duration":e.__options.animationDuration[1]+"ms","-o-animation-duration":e.__options.animationDuration[1]+"ms","-webkit-animation-duration":e.__options.animationDuration[1]+"ms","animation-duration":e.__options.animationDuration[1]+"ms","transition-duration":e.__options.animationDuration[1]+"ms"}),e._$tooltip.clearQueue().removeClass("tooltipster-show").addClass("tooltipster-dying"),e.__options.animationDuration[1]>0&&e._$tooltip.delay(e.__options.animationDuration[1]),e._$tooltip.queue(m)):e._$tooltip.stop().fadeOut(e.__options.animationDuration[1],m)}}else g()}return e},_off:function(){return this.__$emitterPrivate.off.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_on:function(){return this.__$emitterPrivate.on.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_one:function(){return this.__$emitterPrivate.one.apply(this.__$emitterPrivate,Array.prototype.slice.apply(arguments)),this},_open:function(b,c){var e=this;if(!e.__destroying&&d(e._$origin)&&e.__enabled){var f=!0;if("closed"==e.__state&&(e._trigger({type:"before",event:b,stop:function(){f=!1}}),f&&e.__options.functionBefore&&(f=e.__options.functionBefore.call(e,e,{event:b,origin:e._$origin[0]}))),f!==!1&&null!==e.__Content){c&&e.__callbacks.open.push(c),e.__callbacks.close=[],e.__timeoutsClear();var g,i=function(){"stable"!=e.__state&&e.__stateSet("stable"),a.each(e.__callbacks.open,function(a,b){b.call(e,e,{origin:e._$origin[0],tooltip:e._$tooltip[0]})}),e.__callbacks.open=[]};if("closed"!==e.__state)g=0,"disappearing"===e.__state?(e.__stateSet("appearing"),h.hasTransitions?(e._$tooltip.clearQueue().removeClass("tooltipster-dying").addClass("tooltipster-show"),e.__options.animationDuration[0]>0&&e._$tooltip.delay(e.__options.animationDuration[0]),e._$tooltip.queue(i)):e._$tooltip.stop().fadeIn(i)):"stable"==e.__state&&i();else{if(e.__stateSet("appearing"),g=e.__options.animationDuration[0],e.__contentInsert(),e.reposition(b,!0),h.hasTransitions?(e._$tooltip.addClass("tooltipster-"+e.__options.animation).addClass("tooltipster-initial").css({"-moz-animation-duration":e.__options.animationDuration[0]+"ms","-ms-animation-duration":e.__options.animationDuration[0]+"ms","-o-animation-duration":e.__options.animationDuration[0]+"ms","-webkit-animation-duration":e.__options.animationDuration[0]+"ms","animation-duration":e.__options.animationDuration[0]+"ms","transition-duration":e.__options.animationDuration[0]+"ms"}),setTimeout(function(){"closed"!=e.__state&&(e._$tooltip.addClass("tooltipster-show").removeClass("tooltipster-initial"),e.__options.animationDuration[0]>0&&e._$tooltip.delay(e.__options.animationDuration[0]),e._$tooltip.queue(i))},0)):e._$tooltip.css("display","none").fadeIn(e.__options.animationDuration[0],i),e.__trackerStart(),a(h.window).on("resize."+e.__namespace+"-triggerClose",function(b){var c=a(document.activeElement);(c.is("input")||c.is("textarea"))&&a.contains(e._$tooltip[0],c[0])||e.reposition(b)}).on("scroll."+e.__namespace+"-triggerClose",function(a){e.__scrollHandler(a)}),e.__$originParents=e._$origin.parents(),e.__$originParents.each(function(b,c){a(c).on("scroll."+e.__namespace+"-triggerClose",function(a){e.__scrollHandler(a)})}),e.__options.triggerClose.mouseleave||e.__options.triggerClose.touchleave&&h.hasTouchCapability){e._on("dismissable",function(a){a.dismissable?a.delay?(m=setTimeout(function(){e._close(a.event)},a.delay),e.__timeouts.close.push(m)):e._close(a):clearTimeout(m)});var j=e._$origin,k="",l="",m=null;e.__options.interactive&&(j=j.add(e._$tooltip)),e.__options.triggerClose.mouseleave&&(k+="mouseenter."+e.__namespace+"-triggerClose ",l+="mouseleave."+e.__namespace+"-triggerClose "),e.__options.triggerClose.touchleave&&h.hasTouchCapability&&(k+="touchstart."+e.__namespace+"-triggerClose",l+="touchend."+e.__namespace+"-triggerClose touchcancel."+e.__namespace+"-triggerClose"),j.on(l,function(a){if(e._touchIsTouchEvent(a)||!e._touchIsEmulatedEvent(a)){var b="mouseleave"==a.type?e.__options.delay:e.__options.delayTouch;e._trigger({delay:b[1],dismissable:!0,event:a,type:"dismissable"})}}).on(k,function(a){!e._touchIsTouchEvent(a)&&e._touchIsEmulatedEvent(a)||e._trigger({dismissable:!1,event:a,type:"dismissable"})})}e.__options.triggerClose.originClick&&e._$origin.on("click."+e.__namespace+"-triggerClose",function(a){e._touchIsTouchEvent(a)||e._touchIsEmulatedEvent(a)||e._close(a)}),(e.__options.triggerClose.click||e.__options.triggerClose.tap&&h.hasTouchCapability)&&setTimeout(function(){if("closed"!=e.__state){var b="",c=a(h.window.document.body);e.__options.triggerClose.click&&(b+="click."+e.__namespace+"-triggerClose "),e.__options.triggerClose.tap&&h.hasTouchCapability&&(b+="touchend."+e.__namespace+"-triggerClose"),c.on(b,function(b){e._touchIsMeaningfulEvent(b)&&(e._touchRecordEvent(b),e.__options.interactive&&a.contains(e._$tooltip[0],b.target)||e._close(b))}),e.__options.triggerClose.tap&&h.hasTouchCapability&&c.on("touchstart."+e.__namespace+"-triggerClose",function(a){e._touchRecordEvent(a)})}},0),e._trigger("ready"),e.__options.functionReady&&e.__options.functionReady.call(e,e,{origin:e._$origin[0],tooltip:e._$tooltip[0]})}if(e.__options.timer>0){var m=setTimeout(function(){e._close()},e.__options.timer+g);e.__timeouts.close.push(m)}}}return e},_openShortly:function(a){var b=this,c=!0;if("stable"!=b.__state&&"appearing"!=b.__state&&!b.__timeouts.open&&(b._trigger({type:"start",event:a,stop:function(){c=!1}}),c)){var d=0==a.type.indexOf("touch")?b.__options.delayTouch:b.__options.delay;d[0]?b.__timeouts.open=setTimeout(function(){b.__timeouts.open=null,b.__pointerIsOverOrigin&&b._touchIsMeaningfulEvent(a)?(b._trigger("startend"),b._open(a)):b._trigger("startcancel")},d[0]):(b._trigger("startend"),b._open(a))}return b},_optionsExtract:function(b,c){var d=this,e=a.extend(!0,{},c),f=d.__options[b];return f||(f={},a.each(c,function(a,b){var c=d.__options[a];void 0!==c&&(f[a]=c)})),a.each(e,function(b,c){void 0!==f[b]&&("object"!=typeof c||c instanceof Array||null==c||"object"!=typeof f[b]||f[b]instanceof Array||null==f[b]?e[b]=f[b]:a.extend(e[b],f[b]))}),e},_plug:function(b){var c=a.tooltipster._plugin(b);if(!c)throw new Error('The "'+b+'" plugin is not defined');return c.instance&&a.tooltipster.__bridge(c.instance,this,c.name),this},_touchIsEmulatedEvent:function(a){for(var b=!1,c=(new Date).getTime(),d=this.__touchEvents.length-1;d>=0;d--){var e=this.__touchEvents[d];if(!(c-e.time<500))break;e.target===a.target&&(b=!0)}return b},_touchIsMeaningfulEvent:function(a){return this._touchIsTouchEvent(a)&&!this._touchSwiped(a.target)||!this._touchIsTouchEvent(a)&&!this._touchIsEmulatedEvent(a)},_touchIsTouchEvent:function(a){return 0==a.type.indexOf("touch")},_touchRecordEvent:function(a){return this._touchIsTouchEvent(a)&&(a.time=(new Date).getTime(),this.__touchEvents.push(a)),this},_touchSwiped:function(a){for(var b=!1,c=this.__touchEvents.length-1;c>=0;c--){var d=this.__touchEvents[c];if("touchmove"==d.type){b=!0;break}if("touchstart"==d.type&&a===d.target)break}return b},_trigger:function(){var b=Array.prototype.slice.apply(arguments);return"string"==typeof b[0]&&(b[0]={type:b[0]}),b[0].instance=this,b[0].origin=this._$origin?this._$origin[0]:null,b[0].tooltip=this._$tooltip?this._$tooltip[0]:null,this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate,b),a.tooltipster._trigger.apply(a.tooltipster,b),this.__$emitterPublic.trigger.apply(this.__$emitterPublic,b),this},_unplug:function(b){var c=this;if(c[b]){var d=a.tooltipster._plugin(b);d.instance&&a.each(d.instance,function(a,d){c[a]&&c[a].bridged===c[b]&&delete c[a]}),c[b].__destroy&&c[b].__destroy(),delete c[b]}return c},close:function(a){return this.__destroyed?this.__destroyError():this._close(null,a),this},content:function(a){var b=this;if(void 0===a)return b.__Content;if(b.__destroyed)b.__destroyError();else if(b.__contentSet(a),null!==b.__Content){if("closed"!==b.__state&&(b.__contentInsert(),b.reposition(),b.__options.updateAnimation))if(h.hasTransitions){var c=b.__options.updateAnimation;b._$tooltip.addClass("tooltipster-update-"+c),setTimeout(function(){"closed"!=b.__state&&b._$tooltip.removeClass("tooltipster-update-"+c)},1e3)}else b._$tooltip.fadeTo(200,.5,function(){"closed"!=b.__state&&b._$tooltip.fadeTo(200,1)})}else b._close();return b},destroy:function(){var b=this;if(b.__destroyed)b.__destroyError();else{"closed"!=b.__state?b.option("animationDuration",0)._close(null,null,!0):b.__timeoutsClear(),b._trigger("destroy"),b.__destroyed=!0,b._$origin.removeData(b.__namespace).off("."+b.__namespace+"-triggerOpen"),a(h.window.document.body).off("."+b.__namespace+"-triggerOpen");var c=b._$origin.data("tooltipster-ns");if(c)if(1===c.length){var d=null;"previous"==b.__options.restoration?d=b._$origin.data("tooltipster-initialTitle"):"current"==b.__options.restoration&&(d="string"==typeof b.__Content?b.__Content:a("<div></div>").append(b.__Content).html()),d&&b._$origin.attr("title",d),b._$origin.removeClass("tooltipstered"),b._$origin.removeData("tooltipster-ns").removeData("tooltipster-initialTitle")}else c=a.grep(c,function(a,c){return a!==b.__namespace}),b._$origin.data("tooltipster-ns",c);b._trigger("destroyed"),b._off(),b.off(),b.__Content=null,b.__$emitterPrivate=null,b.__$emitterPublic=null,b.__options.parent=null,b._$origin=null,b._$tooltip=null,a.tooltipster.__instancesLatestArr=a.grep(a.tooltipster.__instancesLatestArr,function(a,c){return b!==a}),clearInterval(b.__garbageCollector)}return b},disable:function(){return this.__destroyed?(this.__destroyError(),this):(this._close(),this.__enabled=!1,this)},elementOrigin:function(){return this.__destroyed?void this.__destroyError():this._$origin[0]},elementTooltip:function(){return this._$tooltip?this._$tooltip[0]:null},enable:function(){return this.__enabled=!0,this},hide:function(a){return this.close(a)},instance:function(){return this},off:function(){return this.__destroyed||this.__$emitterPublic.off.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},on:function(){return this.__destroyed?this.__destroyError():this.__$emitterPublic.on.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},one:function(){return this.__destroyed?this.__destroyError():this.__$emitterPublic.one.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this},open:function(a){return this.__destroyed?this.__destroyError():this._open(null,a),this},option:function(b,c){return void 0===c?this.__options[b]:(this.__destroyed?this.__destroyError():(this.__options[b]=c,this.__optionsFormat(),a.inArray(b,["trigger","triggerClose","triggerOpen"])>=0&&this.__prepareOrigin(),"selfDestruction"===b&&this.__prepareGC()),this)},reposition:function(a,b){var c=this;return c.__destroyed?c.__destroyError():"closed"!=c.__state&&d(c._$origin)&&(b||d(c._$tooltip))&&(b||c._$tooltip.detach(),c.__Geometry=c.__geometry(),c._trigger({type:"reposition",event:a,helper:{geo:c.__Geometry}})),c},show:function(a){return this.open(a)},status:function(){return{destroyed:this.__destroyed,enabled:this.__enabled,open:"closed"!==this.__state,state:this.__state}},triggerHandler:function(){return this.__destroyed?this.__destroyError():this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic,Array.prototype.slice.apply(arguments)),this}},a.fn.tooltipster=function(){var b=Array.prototype.slice.apply(arguments),c="You are using a single HTML element as content for several tooltips. You probably want to set the contentCloning option to TRUE.";if(0===this.length)return this;if("string"==typeof b[0]){var d="#*$~&";return this.each(function(){var e=a(this).data("tooltipster-ns"),f=e?a(this).data(e[0]):null;if(!f)throw new Error("You called Tooltipster's \""+b[0]+'" method on an uninitialized element');if("function"!=typeof f[b[0]])throw new Error('Unknown method "'+b[0]+'"');this.length>1&&"content"==b[0]&&(b[1]instanceof a||"object"==typeof b[1]&&null!=b[1]&&b[1].tagName)&&!f.__options.contentCloning&&f.__options.debug&&console.log(c);var g=f[b[0]](b[1],b[2]);return g!==f||"instance"===b[0]?(d=g,!1):void 0}),"#*$~&"!==d?d:this}a.tooltipster.__instancesLatestArr=[];var e=b[0]&&void 0!==b[0].multiple,g=e&&b[0].multiple||!e&&f.multiple,h=b[0]&&void 0!==b[0].content,i=h&&b[0].content||!h&&f.content,j=b[0]&&void 0!==b[0].contentCloning,k=j&&b[0].contentCloning||!j&&f.contentCloning,l=b[0]&&void 0!==b[0].debug,m=l&&b[0].debug||!l&&f.debug;return this.length>1&&(i instanceof a||"object"==typeof i&&null!=i&&i.tagName)&&!k&&m&&console.log(c),this.each(function(){var c=!1,d=a(this),e=d.data("tooltipster-ns"),f=null;e?g?c=!0:m&&(console.log("Tooltipster: one or more tooltips are already attached to the element below. Ignoring."),console.log(this)):c=!0,c&&(f=new a.Tooltipster(this,b[0]),e||(e=[]),e.push(f.__namespace),d.data("tooltipster-ns",e),d.data(f.__namespace,f),f.__options.functionInit&&f.__options.functionInit.call(f,f,{origin:this}),f._trigger("init")),a.tooltipster.__instancesLatestArr.push(f)}),this},b.prototype={__init:function(b){this.__$tooltip=b,this.__$tooltip.css({left:0,overflow:"hidden",position:"absolute",top:0}).find(".tooltipster-content").css("overflow","auto"),this.$container=a('<div class="tooltipster-ruler"></div>').append(this.__$tooltip).appendTo(h.window.document.body)},__forceRedraw:function(){var a=this.__$tooltip.parent();this.__$tooltip.detach(),this.__$tooltip.appendTo(a)},constrain:function(a,b){return this.constraints={width:a,height:b},this.__$tooltip.css({display:"block",height:"",overflow:"auto",width:a}),this},destroy:function(){this.__$tooltip.detach().find(".tooltipster-content").css({display:"",overflow:""}),this.$container.remove()},free:function(){return this.constraints=null,this.__$tooltip.css({display:"",height:"",overflow:"visible",width:""}),this},measure:function(){this.__forceRedraw();var a=this.__$tooltip[0].getBoundingClientRect(),b={size:{height:a.height||a.bottom-a.top,width:a.width||a.right-a.left}};if(this.constraints){var c=this.__$tooltip.find(".tooltipster-content"),d=this.__$tooltip.outerHeight(),e=c[0].getBoundingClientRect(),f={height:d<=this.constraints.height,width:a.width<=this.constraints.width&&e.width>=c[0].scrollWidth-1};b.fits=f.height&&f.width}return h.IE&&h.IE<=11&&b.size.width!==h.window.document.documentElement.clientWidth&&(b.size.width=Math.ceil(b.size.width)+1),b}};var j=navigator.userAgent.toLowerCase();-1!=j.indexOf("msie")?h.IE=parseInt(j.split("msie")[1]):-1!==j.toLowerCase().indexOf("trident")&&-1!==j.indexOf(" rv:11")?h.IE=11:-1!=j.toLowerCase().indexOf("edge/")&&(h.IE=parseInt(j.toLowerCase().split("edge/")[1]));var k="tooltipster.sideTip";return a.tooltipster._plugin({name:k,instance:{__defaults:function(){return{arrow:!0,distance:6,functionPosition:null,maxWidth:null,minIntersection:16,minWidth:0,position:null,side:"top",viewportAware:!0}},__init:function(a){var b=this;b.__instance=a,b.__namespace="tooltipster-sideTip-"+Math.round(1e6*Math.random()),b.__previousState="closed",b.__options,b.__optionsFormat(),b.__instance._on("state."+b.__namespace,function(a){"closed"==a.state?b.__close():"appearing"==a.state&&"closed"==b.__previousState&&b.__create(),b.__previousState=a.state}),b.__instance._on("options."+b.__namespace,function(){b.__optionsFormat()}),b.__instance._on("reposition."+b.__namespace,function(a){b.__reposition(a.event,a.helper)})},__close:function(){this.__instance.content()instanceof a&&this.__instance.content().detach(),this.__instance._$tooltip.remove(),this.__instance._$tooltip=null},__create:function(){var b=a('<div class="tooltipster-base tooltipster-sidetip"><div class="tooltipster-box"><div class="tooltipster-content"></div></div><div class="tooltipster-arrow"><div class="tooltipster-arrow-uncropped"><div class="tooltipster-arrow-border"></div><div class="tooltipster-arrow-background"></div></div></div></div>');this.__options.arrow||b.find(".tooltipster-box").css("margin",0).end().find(".tooltipster-arrow").hide(),this.__options.minWidth&&b.css("min-width",this.__options.minWidth+"px"),this.__options.maxWidth&&b.css("max-width",this.__options.maxWidth+"px"),
-this.__instance._$tooltip=b,this.__instance._trigger("created")},__destroy:function(){this.__instance._off("."+self.__namespace)},__optionsFormat:function(){var b=this;if(b.__options=b.__instance._optionsExtract(k,b.__defaults()),b.__options.position&&(b.__options.side=b.__options.position),"object"!=typeof b.__options.distance&&(b.__options.distance=[b.__options.distance]),b.__options.distance.length<4&&(void 0===b.__options.distance[1]&&(b.__options.distance[1]=b.__options.distance[0]),void 0===b.__options.distance[2]&&(b.__options.distance[2]=b.__options.distance[0]),void 0===b.__options.distance[3]&&(b.__options.distance[3]=b.__options.distance[1]),b.__options.distance={top:b.__options.distance[0],right:b.__options.distance[1],bottom:b.__options.distance[2],left:b.__options.distance[3]}),"string"==typeof b.__options.side){var c={top:"bottom",right:"left",bottom:"top",left:"right"};b.__options.side=[b.__options.side,c[b.__options.side]],"left"==b.__options.side[0]||"right"==b.__options.side[0]?b.__options.side.push("top","bottom"):b.__options.side.push("right","left")}6===a.tooltipster._env.IE&&b.__options.arrow!==!0&&(b.__options.arrow=!1)},__reposition:function(b,c){var d,e=this,f=e.__targetFind(c),g=[];e.__instance._$tooltip.detach();var h=e.__instance._$tooltip.clone(),i=a.tooltipster._getRuler(h),j=!1,k=e.__instance.option("animation");switch(k&&h.removeClass("tooltipster-"+k),a.each(["window","document"],function(d,k){var l=null;if(e.__instance._trigger({container:k,helper:c,satisfied:j,takeTest:function(a){l=a},results:g,type:"positionTest"}),1==l||0!=l&&0==j&&("window"!=k||e.__options.viewportAware))for(var d=0;d<e.__options.side.length;d++){var m={horizontal:0,vertical:0},n=e.__options.side[d];"top"==n||"bottom"==n?m.vertical=e.__options.distance[n]:m.horizontal=e.__options.distance[n],e.__sideChange(h,n),a.each(["natural","constrained"],function(a,d){if(l=null,e.__instance._trigger({container:k,event:b,helper:c,mode:d,results:g,satisfied:j,side:n,takeTest:function(a){l=a},type:"positionTest"}),1==l||0!=l&&0==j){var h={container:k,distance:m,fits:null,mode:d,outerSize:null,side:n,size:null,target:f[n],whole:null},o="natural"==d?i.free():i.constrain(c.geo.available[k][n].width-m.horizontal,c.geo.available[k][n].height-m.vertical),p=o.measure();if(h.size=p.size,h.outerSize={height:p.size.height+m.vertical,width:p.size.width+m.horizontal},"natural"==d?c.geo.available[k][n].width>=h.outerSize.width&&c.geo.available[k][n].height>=h.outerSize.height?h.fits=!0:h.fits=!1:h.fits=p.fits,"window"==k&&(h.fits?"top"==n||"bottom"==n?h.whole=c.geo.origin.windowOffset.right>=e.__options.minIntersection&&c.geo.window.size.width-c.geo.origin.windowOffset.left>=e.__options.minIntersection:h.whole=c.geo.origin.windowOffset.bottom>=e.__options.minIntersection&&c.geo.window.size.height-c.geo.origin.windowOffset.top>=e.__options.minIntersection:h.whole=!1),g.push(h),h.whole)j=!0;else if("natural"==h.mode&&(h.fits||h.size.width<=c.geo.available[k][n].width))return!1}})}}),e.__instance._trigger({edit:function(a){g=a},event:b,helper:c,results:g,type:"positionTested"}),g.sort(function(a,b){if(a.whole&&!b.whole)return-1;if(!a.whole&&b.whole)return 1;if(a.whole&&b.whole){var c=e.__options.side.indexOf(a.side),d=e.__options.side.indexOf(b.side);return d>c?-1:c>d?1:"natural"==a.mode?-1:1}if(a.fits&&!b.fits)return-1;if(!a.fits&&b.fits)return 1;if(a.fits&&b.fits){var c=e.__options.side.indexOf(a.side),d=e.__options.side.indexOf(b.side);return d>c?-1:c>d?1:"natural"==a.mode?-1:1}return"document"==a.container&&"bottom"==a.side&&"natural"==a.mode?-1:1}),d=g[0],d.coord={},d.side){case"left":case"right":d.coord.top=Math.floor(d.target-d.size.height/2);break;case"bottom":case"top":d.coord.left=Math.floor(d.target-d.size.width/2)}switch(d.side){case"left":d.coord.left=c.geo.origin.windowOffset.left-d.outerSize.width;break;case"right":d.coord.left=c.geo.origin.windowOffset.right+d.distance.horizontal;break;case"top":d.coord.top=c.geo.origin.windowOffset.top-d.outerSize.height;break;case"bottom":d.coord.top=c.geo.origin.windowOffset.bottom+d.distance.vertical}"window"==d.container?"top"==d.side||"bottom"==d.side?d.coord.left<0?c.geo.origin.windowOffset.right-this.__options.minIntersection>=0?d.coord.left=0:d.coord.left=c.geo.origin.windowOffset.right-this.__options.minIntersection-1:d.coord.left>c.geo.window.size.width-d.size.width&&(c.geo.origin.windowOffset.left+this.__options.minIntersection<=c.geo.window.size.width?d.coord.left=c.geo.window.size.width-d.size.width:d.coord.left=c.geo.origin.windowOffset.left+this.__options.minIntersection+1-d.size.width):d.coord.top<0?c.geo.origin.windowOffset.bottom-this.__options.minIntersection>=0?d.coord.top=0:d.coord.top=c.geo.origin.windowOffset.bottom-this.__options.minIntersection-1:d.coord.top>c.geo.window.size.height-d.size.height&&(c.geo.origin.windowOffset.top+this.__options.minIntersection<=c.geo.window.size.height?d.coord.top=c.geo.window.size.height-d.size.height:d.coord.top=c.geo.origin.windowOffset.top+this.__options.minIntersection+1-d.size.height):(d.coord.left>c.geo.window.size.width-d.size.width&&(d.coord.left=c.geo.window.size.width-d.size.width),d.coord.left<0&&(d.coord.left=0)),e.__sideChange(h,d.side),c.tooltipClone=h[0],c.tooltipParent=e.__instance.option("parent").parent[0],c.mode=d.mode,c.whole=d.whole,c.origin=e.__instance._$origin[0],c.tooltip=e.__instance._$tooltip[0],delete d.container,delete d.fits,delete d.mode,delete d.outerSize,delete d.whole,d.distance=d.distance.horizontal||d.distance.vertical;var l=a.extend(!0,{},d);if(e.__instance._trigger({edit:function(a){d=a},event:b,helper:c,position:l,type:"position"}),e.__options.functionPosition){var m=e.__options.functionPosition.call(e,e.__instance,c,l);m&&(d=m)}i.destroy();var n,o;"top"==d.side||"bottom"==d.side?(n={prop:"left",val:d.target-d.coord.left},o=d.size.width-this.__options.minIntersection):(n={prop:"top",val:d.target-d.coord.top},o=d.size.height-this.__options.minIntersection),n.val<this.__options.minIntersection?n.val=this.__options.minIntersection:n.val>o&&(n.val=o);var p;p=c.geo.origin.fixedLineage?c.geo.origin.windowOffset:{left:c.geo.origin.windowOffset.left+c.geo.window.scroll.left,top:c.geo.origin.windowOffset.top+c.geo.window.scroll.top},d.coord={left:p.left+(d.coord.left-c.geo.origin.windowOffset.left),top:p.top+(d.coord.top-c.geo.origin.windowOffset.top)},e.__sideChange(e.__instance._$tooltip,d.side),c.geo.origin.fixedLineage?e.__instance._$tooltip.css("position","fixed"):e.__instance._$tooltip.css("position",""),e.__instance._$tooltip.css({left:d.coord.left,top:d.coord.top,height:d.size.height,width:d.size.width}).find(".tooltipster-arrow").css({left:"",top:""}).css(n.prop,n.val),e.__instance._$tooltip.appendTo(e.__instance.option("parent")),e.__instance._trigger({type:"repositioned",event:b,position:d})},__sideChange:function(a,b){a.removeClass("tooltipster-bottom").removeClass("tooltipster-left").removeClass("tooltipster-right").removeClass("tooltipster-top").addClass("tooltipster-"+b)},__targetFind:function(a){var b={},c=this.__instance._$origin[0].getClientRects();if(c.length>1){var d=this.__instance._$origin.css("opacity");1==d&&(this.__instance._$origin.css("opacity",.99),c=this.__instance._$origin[0].getClientRects(),this.__instance._$origin.css("opacity",1))}if(c.length<2)b.top=Math.floor(a.geo.origin.windowOffset.left+a.geo.origin.size.width/2),b.bottom=b.top,b.left=Math.floor(a.geo.origin.windowOffset.top+a.geo.origin.size.height/2),b.right=b.left;else{var e=c[0];b.top=Math.floor(e.left+(e.right-e.left)/2),e=c.length>2?c[Math.ceil(c.length/2)-1]:c[0],b.right=Math.floor(e.top+(e.bottom-e.top)/2),e=c[c.length-1],b.bottom=Math.floor(e.left+(e.right-e.left)/2),e=c.length>2?c[Math.ceil((c.length+1)/2)-1]:c[c.length-1],b.left=Math.floor(e.top+(e.bottom-e.top)/2)}return b}}}),a});
+}(jQuery))
+!function(e){e.fn.eaelProgressBar=function(){var r=e(this),a=r.data("layout"),i=r.data("count"),s=r.data("duration");r.one("inview",function(){"line"==a?e(".eael-progressbar-line-fill",r).css({width:i+"%"}):"half_circle"==a&&e(".eael-progressbar-circle-half",r).css({transform:"rotate("+1.8*i+"deg)"}),e(".eael-progressbar-count",r).prop({counter:0}).animate({counter:i},{duration:s,easing:"linear",step:function(i){if("circle"==a){var s=3.6*i;e(".eael-progressbar-circle-half-left",r).css({transform:"rotate("+s+"deg)"}),s>180&&(e(".eael-progressbar-circle-pie",r).css({"clip-path":"inset(0)"}),e(".eael-progressbar-circle-half-right",r).css({visibility:"visible"}))}e(this).text(Math.ceil(i))}})})}}(jQuery);
 (function($) {
     "use strict";
 
@@ -18322,142 +18322,6 @@ this.__instance._$tooltip=b,this.__instance._trigger("created")},__destroy:funct
     });
 })(jQuery);
 
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
-var AdvanceTabHandler = function($scope, $) {
-    var $currentTab = $scope.find(".eael-advance-tabs"),
-        $currentTabId = "#" + $currentTab.attr("id").toString();
-
-    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-nav > ul li")
-                .removeClass("active")
-                .addClass("inactive");
-            $(this).removeClass("inactive");
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-content div").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-content > div").removeClass(
-                "active"
-            );
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
-        var currentTabIndex = $(this).index();
-        var tabsContainer = $(this).closest(".eael-advance-tabs");
-        var tabsNav = $(tabsContainer)
-            .children(".eael-tabs-nav")
-            .children("ul")
-            .children("li");
-        var tabsContent = $(tabsContainer)
-            .children(".eael-tabs-content")
-            .children("div");
-
-        $(this)
-            .parent("li")
-            .addClass("active");
-
-        $(tabsNav)
-            .removeClass("active active-default")
-            .addClass("inactive");
-        $(this)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent)
-            .removeClass("active")
-            .addClass("inactive");
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent).each(function(index) {
-            $(this).removeClass("active-default");
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-tabs.default",
-        AdvanceTabHandler
-    );
-});
-
 var CountDown = function($scope, $) {
     var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
         $countdown_id =
@@ -18525,42 +18389,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var dataTable = function($scope, $) {
-    var $_this = $scope.find(".eael-data-table-wrap"),
-        $id = $_this.data("table_id");
-
-
-    if(typeof enableProSorter !== 'undefined' && $.isFunction(enableProSorter) ) {
-        $(document).ready(function(){
-            enableProSorter(jQuery, $_this);
-        });
-    }
-
-    var responsive = $_this.data("custom_responsive");
-    if (true == responsive) {
-        var $th = $scope.find(".eael-data-table").find("th");
-        var $tbody = $scope.find(".eael-data-table").find("tbody");
-
-        $tbody.find("tr").each(function(i, item) {
-            $(item)
-                .find("td .td-content-wrapper")
-                .each(function(index, item) {
-                    $(this).prepend(
-                        '<div class="th-mobile-screen">' +
-                            $th.eq(index).html() +
-                            "</div>"
-                    );
-                });
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-data-table.default",
-        dataTable
-    );
-});
 var ContentTicker = function($scope, $) {
     var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
         $items =
@@ -18680,6 +18508,142 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
+var AdvanceTabHandler = function($scope, $) {
+    var $currentTab = $scope.find(".eael-advance-tabs"),
+        $currentTabId = "#" + $currentTab.attr("id").toString();
+
+    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-nav > ul li")
+                .removeClass("active")
+                .addClass("inactive");
+            $(this).removeClass("inactive");
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-content div").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-content > div").removeClass(
+                "active"
+            );
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
+        var currentTabIndex = $(this).index();
+        var tabsContainer = $(this).closest(".eael-advance-tabs");
+        var tabsNav = $(tabsContainer)
+            .children(".eael-tabs-nav")
+            .children("ul")
+            .children("li");
+        var tabsContent = $(tabsContainer)
+            .children(".eael-tabs-content")
+            .children("div");
+
+        $(this)
+            .parent("li")
+            .addClass("active");
+
+        $(tabsNav)
+            .removeClass("active active-default")
+            .addClass("inactive");
+        $(this)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent)
+            .removeClass("active")
+            .addClass("inactive");
+        $(tabsContent)
+            .eq(currentTabIndex)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent).each(function(index) {
+            $(this).removeClass("active-default");
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
+
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
+});
+
 var FancyText = function($scope, $) {
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
         $id =
@@ -18742,6 +18706,42 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var dataTable = function($scope, $) {
+    var $_this = $scope.find(".eael-data-table-wrap"),
+        $id = $_this.data("table_id");
+
+
+    if(typeof enableProSorter !== 'undefined' && $.isFunction(enableProSorter) ) {
+        $(document).ready(function(){
+            enableProSorter(jQuery, $_this);
+        });
+    }
+
+    var responsive = $_this.data("custom_responsive");
+    if (true == responsive) {
+        var $th = $scope.find(".eael-data-table").find("th");
+        var $tbody = $scope.find(".eael-data-table").find("tbody");
+
+        $tbody.find("tr").each(function(i, item) {
+            $(item)
+                .find("td .td-content-wrapper")
+                .each(function(index, item) {
+                    $(this).prepend(
+                        '<div class="th-mobile-screen">' +
+                            $th.eq(index).html() +
+                            "</div>"
+                    );
+                });
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-data-table.default",
+        dataTable
+    );
+});
 var filterableGalleryHandler = function($scope, $) {
     if (!isEditMode) {
         var $gallery = $(".eael-filter-gallery-container", $scope),
@@ -18922,6 +18922,53 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PricingTooltip = function($scope, $) {
+    if ($.fn.tooltipster) {
+        var $tooltip = $scope.find(".tooltip"),
+            i;
+
+        for (i = 0; i < $tooltip.length; i++) {
+            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
+                $tooltipSide =
+                    $currentTooltip.data("side") !== undefined
+                        ? $currentTooltip.data("side")
+                        : false,
+                $tooltipTrigger =
+                    $currentTooltip.data("trigger") !== undefined
+                        ? $currentTooltip.data("trigger")
+                        : "hover",
+                $animation =
+                    $currentTooltip.data("animation") !== undefined
+                        ? $currentTooltip.data("animation")
+                        : "fade",
+                $anim_duration =
+                    $currentTooltip.data("animation_duration") !== undefined
+                        ? $currentTooltip.data("animation_duration")
+                        : 300,
+                $theme =
+                    $currentTooltip.data("theme") !== undefined
+                        ? $currentTooltip.data("theme")
+                        : "default",
+                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
+
+            $currentTooltip.tooltipster({
+                animation: $animation,
+                trigger: $tooltipTrigger,
+                side: $tooltipSide,
+                delay: $anim_duration,
+                arrow: $arrow,
+                theme: "tooltipster-" + $theme
+            });
+        }
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-pricing-table.default",
+        PricingTooltip
+    );
+});
+
 var postTimelineHandler = function($scope, $) {
     var $_this = $scope.find(".eael-post-timeline"),
         $currentTimelineId = "#" + $_this.attr("id"),
@@ -18973,63 +19020,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-post-timeline.default",
         postTimelineHandler
-    );
-});
-
-var PricingTooltip = function($scope, $) {
-    if ($.fn.tooltipster) {
-        var $tooltip = $scope.find(".tooltip"),
-            i;
-
-        for (i = 0; i < $tooltip.length; i++) {
-            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
-                $tooltipSide =
-                    $currentTooltip.data("side") !== undefined
-                        ? $currentTooltip.data("side")
-                        : false,
-                $tooltipTrigger =
-                    $currentTooltip.data("trigger") !== undefined
-                        ? $currentTooltip.data("trigger")
-                        : "hover",
-                $animation =
-                    $currentTooltip.data("animation") !== undefined
-                        ? $currentTooltip.data("animation")
-                        : "fade",
-                $anim_duration =
-                    $currentTooltip.data("animation_duration") !== undefined
-                        ? $currentTooltip.data("animation_duration")
-                        : 300,
-                $theme =
-                    $currentTooltip.data("theme") !== undefined
-                        ? $currentTooltip.data("theme")
-                        : "default",
-                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
-
-            $currentTooltip.tooltipster({
-                animation: $animation,
-                trigger: $tooltipTrigger,
-                side: $tooltipSide,
-                delay: $anim_duration,
-                arrow: $arrow,
-                theme: "tooltipster-" + $theme
-            });
-        }
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-pricing-table.default",
-        PricingTooltip
-    );
-});
-
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
     );
 });
 
@@ -19156,5 +19146,15 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-twitter-feed.default",
         TwitterFeedHandler
+    );
+});
+
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
     );
 });
