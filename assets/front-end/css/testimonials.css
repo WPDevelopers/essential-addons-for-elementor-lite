@@ -60,7 +60,8 @@
 }
 
 .testimonial-avatar-rounded figure img {
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   height: auto;
 }
 

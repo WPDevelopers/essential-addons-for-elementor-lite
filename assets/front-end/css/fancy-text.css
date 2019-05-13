@@ -18,7 +18,6 @@
 .typed-cursor {
   opacity: 1;
   -webkit-animation: blink_cursor 0.7s infinite;
-  -moz-animation: blink_cursor 0.7s infinite;
   animation: blink_cursor 0.7s infinite;
 }
 
@@ -34,17 +33,6 @@
   }
 }
 @-webkit-keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-moz-keyframes blink_cursor {
   0% {
     opacity: 1;
   }

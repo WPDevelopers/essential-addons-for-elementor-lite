@@ -36,8 +36,10 @@
 .eael-timeline-bullet {
   background-color: #9fa9af;
   border: 5px solid #fff;
-  border-radius: 50%;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  -webkit-box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
   content: "";
   height: 20px;
   position: absolute;
@@ -51,7 +53,8 @@
 .eael-timeline-post:nth-child(2n) .eael-timeline-bullet {
   background-color: #9fa9af;
   border: 5px solid #fff;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   bottom: 36px;
   content: "";
   height: 20px;
@@ -63,9 +66,12 @@
 }
 
 .eael-timeline-post-inner {
+  background: -webkit-linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 transparent;
   background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 transparent;
   border: 8px solid #e5eaed;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   float: right;
   margin: 30px 40px 30px auto;
   position: relative;
@@ -113,7 +119,8 @@
 }
 
 .eael-timeline-post-image {
-  background-size: cover;
+  -webkit-background-size: cover;
+          background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   display: block;
@@ -122,7 +129,7 @@
   position: relative;
   opacity: .6;
   -webkit-transition: all .3s;
-  -moz-transition: all .3s;
+  -o-transition: all .3s;
   transition: all .3s;
 }
 
@@ -149,7 +156,7 @@
   top: 0;
   left: 0;
   -webkit-transition: all .3s;
-  -moz-transition: all .3s;
+  -o-transition: all .3s;
   transition: all .3s;
 }
 
@@ -173,7 +180,8 @@
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   font-size: 10px;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   position: absolute;
   right: -97px;
   width: 100px;
@@ -183,13 +191,14 @@
   top: 50px;
   z-index: 99;
   -webkit-transition: all .5s;
-  -moz-transition: all .5s;
+  -o-transition: all .5s;
   transition: all .5s;
 }
 
 .eael-timeline-post:nth-child(2n) time {
   background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   color: #fff;
   font-size: 10px;
   height: 30px;
@@ -299,7 +308,8 @@
   .eael-timeline-post time,
   .eael-timeline-post:nth-child(2n) time {
     background-color: #fff;
-    border-radius: 0;
+    -webkit-border-radius: 0;
+            border-radius: 0;
     color: #444;
     font-size: 12px;
     text-transform: uppercase;
