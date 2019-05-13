@@ -16,7 +16,7 @@ use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Flip_Box extends Widget_Base {
+class Flip_Box extends Widget_Base {
 
 	public function get_name() {
 		return 'eael-flip-box';
