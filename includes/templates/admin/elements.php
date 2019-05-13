@@ -226,11 +226,6 @@ use Essential_Addons_Elementor\Classes\Bootstrap;
                     'is_pro' => true
                 ],
                 [
-                    'key'    => 'progress-bar',
-                    'title'  => __( 'Progress Bar', 'essential-addons-elementor' ),
-                    'is_pro' => true
-                ],
-                [
                     'key'    => 'image-scroller',
                     'title'  => __( 'Image Scroller', 'essential-addons-elementor' ),
                     'is_pro' => true
