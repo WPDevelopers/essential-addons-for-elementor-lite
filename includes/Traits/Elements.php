@@ -11,7 +11,7 @@ use Essential_Addons_Elementor\Classes\Group_Control_EA_Posts as Group_Control_E
 trait Elements
 {
     /**
-     * Add Category
+     * Add elementor category
      *
      * @since v1.0.0
      */
@@ -26,7 +26,7 @@ trait Elements
     }
 
     /**
-     * Add new group control
+     * Add new elementor group control
      *
      * @since v1.0.0
      */
@@ -36,9 +36,9 @@ trait Elements
     }
 
     /**
-     * Acivate or Deactivate Modules
+     * Register widgets
      *
-     * @since v1.0.0
+     * @since v3.0.0
      */
     public function register_elements($widgets_manager)
     {
@@ -63,6 +63,11 @@ trait Elements
         }
     }
 
+    /**
+     * Register extensions
+     *
+     * @since v3.0.0
+     */
     public function register_extensions()
     {
         $active_elements = $this->get_settings();
