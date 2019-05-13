@@ -307,11 +307,6 @@ use Essential_Addons_Elementor\Classes\Bootstrap;
                     'is_pro' => true
                 ],
                 [
-                    'key'    => 'facebook-feed-carousel',
-                    'title'  => __( 'Facebook Feed Carousel', 'essential-addons-elementor' ),
-                    'is_pro' => true
-                ],
-                [
                     'key'    => 'instagram-gallery',
                     'title'  => __( 'Instagram Feed', 'essential-addons-elementor' ),
                     'is_pro' => true
