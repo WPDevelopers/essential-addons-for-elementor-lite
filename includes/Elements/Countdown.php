@@ -15,7 +15,7 @@ use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Countdown extends Widget_Base {
+class Countdown extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 
 	public function get_name() {
