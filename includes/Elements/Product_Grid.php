@@ -11,7 +11,7 @@ use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 
-class Eael_Product_Grid extends Widget_Base
+class Product_Grid extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Template\Content\Product_Loop;

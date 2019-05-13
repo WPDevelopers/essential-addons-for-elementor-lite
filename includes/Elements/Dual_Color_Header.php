@@ -13,7 +13,7 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Dual_Color_Header extends Widget_Base {
+class Dual_Color_Header extends Widget_Base {
 
 	public function get_name() {
 		return 'eael-dual-color-header';

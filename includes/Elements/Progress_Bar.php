@@ -14,7 +14,7 @@ use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Progress_Bar extends Widget_Base
+class Progress_Bar extends Widget_Base
 {
 
     public function get_name()

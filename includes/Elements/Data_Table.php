@@ -14,7 +14,7 @@ use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Data_Table extends Widget_Base {
+class Data_Table extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 
 	public $unique_id = null;

@@ -14,7 +14,7 @@ use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
-class Eael_Tooltip extends Widget_Base {
+class Tooltip extends Widget_Base {
 
 	public function get_name() {
 		return 'eael-tooltip';
