@@ -33,7 +33,7 @@ define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-element
  *
  * @since 3.0.0
  */
-$GLOBALS['Essential_Addons_Elementor_Loader'] = require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+require_once EAEL_PLUGIN_PATH . 'autoload.php';
 
 /**
  * Run plugin after all others plugins

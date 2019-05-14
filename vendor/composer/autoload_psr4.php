@@ -8,5 +8,4 @@ $baseDir = dirname($vendorDir);
 return array(
     'MatthiasMullie\\PathConverter\\' => array($vendorDir . '/matthiasmullie/path-converter/src'),
     'MatthiasMullie\\Minify\\' => array($vendorDir . '/matthiasmullie/minify/src'),
-    'Essential_Addons_Elementor\\' => array($baseDir . '/includes'),
 );
