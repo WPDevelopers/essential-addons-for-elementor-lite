@@ -37,8 +37,6 @@ trait Enqueue
             } else {
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
                 $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
-
-                $this->generate_scripts($this->get_settings());
             }
 
             wp_enqueue_style(
@@ -72,6 +70,9 @@ trait Enqueue
             ]);
 
             wp_localize_script('eael-backend', 'localize', $this->localize_objects);
+            
+            // generate fallback scripts
+            $this->generate_scripts($this->get_settings());
         } else if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
             $post_type = (is_singular() ? 'post' : 'term');
