@@ -209,11 +209,6 @@ $elements = [
                 'is_pro' => true
             ],
             [
-                'key'    => 'filter-gallery',
-                'title'  => __( 'Filterable Gallery', 'essential-addons-elementor' ),
-                'is_pro' => true
-            ],
-            [
                 'key'    => 'image-accordion',
                 'title'  => __( 'Image Accordion', 'essential-addons-elementor' ),
                 'is_pro' => true
