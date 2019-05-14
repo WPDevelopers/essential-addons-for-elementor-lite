@@ -35,7 +35,7 @@ $elements = [
             ],
             [
                 'key'   => 'dual-header',
-                'title' => __( 'Dual Color Header', 'essential-addons-elementor' )
+                'title' => __( 'Dual Color Heading', 'essential-addons-elementor' )
             ],
             [
                 'key'   => 'tooltip',
@@ -121,13 +121,12 @@ $elements = [
             ],
             [
                 'key'    => 'post-list',
-                'title'  => __( 'Post List', 'essential-addons-elementor' ),
+                'title'  => __( 'Smart Post List', 'essential-addons-elementor' ),
                 'is_pro' => true
             ],
             [
                 'key'    => 'product-grid',
-                'title'  => __( 'Woo Product Grid', 'essential-addons-elementor' ),
-                'is_pro' => true
+                'title'  => __( 'Product Grid', 'essential-addons-elementor' ),
             ],
             [
                 'key'    => 'woo-collections',
@@ -141,7 +140,7 @@ $elements = [
             ],
             [
                 'key'    => 'dynamic-filter-gallery',
-                'title'  => __( 'Dynamic Filter Gallery', 'essential-addons-elementor' ),
+                'title'  => __( 'Dynamic Gallery', 'essential-addons-elementor' ),
                 'is_pro' => true
             ]
         ]
@@ -181,7 +180,7 @@ $elements = [
             ],
             [
                 'key'    => 'lightbox',
-                'title'  => __( 'Lightbox', 'essential-addons-elementor' ),
+                'title'  => __( 'Lightbox & Modal', 'essential-addons-elementor' ),
                 'is_pro' => true
             ],
             [
