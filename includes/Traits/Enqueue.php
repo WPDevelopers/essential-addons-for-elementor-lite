@@ -64,7 +64,7 @@ trait Enqueue
             );
 
             // hook extended assets
-            do_action('eael/after_enqueue_scripts');
+            do_action('eael/after_enqueue_scripts', $this->has_cache_files());
 
             // localize script
             $this->localize_objects = apply_filters('eael/localize_objects', [
@@ -112,7 +112,7 @@ trait Enqueue
         );
 
         // hook extended assets
-        do_action('eael/after_enqueue_scripts');
+        do_action('eael/after_enqueue_scripts', $this->has_cache_files($post_type, $queried_object));
 
         // localize script
         $this->localize_objects = apply_filters('eael/localize_objects', [
