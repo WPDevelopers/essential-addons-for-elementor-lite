@@ -6,7 +6,7 @@ $elements = [
         'elements' => [
             [
                 'key'   => 'global-elements-control',
-                'title' => __( 'Enable/Disable All Elements', 'essential-addons-elementor' )
+                'title' => __( 'Toggle All Elements', 'essential-addons-elementor' )
             ],
         ]
     ],
