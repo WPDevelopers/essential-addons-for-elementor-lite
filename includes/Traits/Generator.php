@@ -19,6 +19,19 @@ trait Generator
         $this->transient_elements[] = $widget->get_name();
     }
 
+    public function combine_files($paths = array(), $file = 'eael.min.css')
+    {
+        $output = '';
+
+        if (!empty($paths)) {
+            foreach ($paths as $path) {
+                $output .= file_get_contents($path);
+            }
+        }
+
+        return file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file, $output);
+    }
+
     /**
      * Collect dependencies for modules
      *
@@ -83,11 +96,9 @@ trait Generator
         $js_paths = array_merge($js_paths, $this->generate_dependency($elements, 'js'));
         $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css'));
 
-        $minifier = new Minify\JS($js_paths);
-        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.js', $minifier->minify());
-
-        $minifier = new Minify\CSS($css_paths);
-        file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($file_name ? $file_name : 'eael') . '.min.css', $minifier->minify());
+        // combine files
+        $this->combine_files($css_paths, ($file_name ? $file_name : 'eael') . '.min.css');
+        $this->combine_files($js_paths, ($file_name ? $file_name : 'eael') . '.min.js');
     }
 
     /**
