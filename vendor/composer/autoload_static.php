@@ -12,10 +12,6 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
             'MatthiasMullie\\PathConverter\\' => 29,
             'MatthiasMullie\\Minify\\' => 22,
         ),
-        'E' => 
-        array (
-            'Essential_Addons_Elementor\\' => 27,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -26,10 +22,6 @@ class ComposerStaticInite6e2cbae70c835106a2f6367baecac5f
         'MatthiasMullie\\Minify\\' => 
         array (
             0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
-        ),
-        'Essential_Addons_Elementor\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/includes',
         ),
     );
 
