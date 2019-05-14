@@ -105,6 +105,10 @@ $elements = [
                 'title' => __( 'Content Ticker', 'essential-addons-elementor' )
             ],
             [
+                'key'    => 'product-grid',
+                'title'  => __( 'Product Grid', 'essential-addons-elementor' ),
+            ],
+            [
                 'key'   => 'adv-google-map',
                 'title' => __( 'Advanced Google Map', 'essential-addons-elementor' ),
                 'is_pro' => true
@@ -123,10 +127,6 @@ $elements = [
                 'key'    => 'post-list',
                 'title'  => __( 'Smart Post List', 'essential-addons-elementor' ),
                 'is_pro' => true
-            ],
-            [
-                'key'    => 'product-grid',
-                'title'  => __( 'Product Grid', 'essential-addons-elementor' ),
             ],
             [
                 'key'    => 'woo-collections',
