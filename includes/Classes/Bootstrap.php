@@ -386,14 +386,16 @@ class Bootstrap
         $this->transient_elements = [];
 
         // start plugin tracking
-        $this->start_plugin_tracking();
+        if (!$this->pro_enabled) {
+            $this->start_plugin_tracking();
+        }
 
         // post args
         $this->post_args = apply_filters('eael/post_args', $this->post_args);
 
         // register extensions
         $this->register_extensions();
-        
+
         // register hooks
         $this->register_hooks();
     }
@@ -419,7 +421,10 @@ class Bootstrap
         // Admin
         if (is_admin()) {
             // Admin
-            $this->admin_notice();
+            if (!$this->pro_enabled) {
+                $this->admin_notice();
+            }
+
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
             add_action('wp_ajax_save_settings_with_ajax', array($this, 'save_settings'));
