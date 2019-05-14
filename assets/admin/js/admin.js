@@ -4,14 +4,14 @@
      * Eael Tabs
      */
     $(".eael-tabs li a").on("click", function(e) {
-        e.preventDefault();
-        $(".eael-tabs li a").removeClass("active");
-        $(this).addClass("active");
-        var tab = $(this).attr("href");
-        $(".eael-settings-tab").removeClass("active");
-        $(".eael-settings-tabs")
-            .find(tab)
-            .addClass("active");
+      e.preventDefault();
+      $(".eael-tabs li a").removeClass("active");
+      $(this).addClass("active");
+      var tab = $(this).attr("href");
+      $(".eael-settings-tab").removeClass("active");
+      $(".eael-settings-tabs")
+        .find(tab)
+        .addClass("active");
     });
 
     $(".eael-get-pro").on("click", function() {
@@ -122,5 +122,24 @@
                 });
             }
         });
+    });
+
+    // Elements global control
+    $('#global-elements-control').on('click', function(){
+        var trigger = $(this).prop('checked');
+        var container = $('.eael-checkbox-container').not($('.eael-checkbox-container').first()),
+            checkbox  = container.find('.eael-checkbox input:enabled');
+
+            checkbox.each(function(index) {
+                status = $(this).prop('checked');
+
+                if(trigger == true) {
+                    $(this).prop('checked', true);
+                }else if(trigger == false) {
+                    $(this).prop('checked', false);
+                }
+
+            });
+
     });
 })(jQuery);

@@ -1,6 +1,15 @@
 <?php
 
 $elements = [
+    'global-controls'   => [
+        'title'    => __( 'Global Controls', '' ),
+        'elements' => [
+            [
+                'key'   => 'global-elements-control',
+                'title' => __( 'Enable/Disable All Elements', 'essential-addons-elementor' )
+            ],
+        ]
+    ],
     'content-elements'  => [
         'title' => __( 'CONTENT ELEMENTS', 'essential-addons-elementor' ),
         'elements'  => [
