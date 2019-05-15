@@ -25,11 +25,11 @@ trait Generator
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
-                $output .= file_get_contents($path);
+                $output .= file_get_contents($this->safe_path($path));
             }
         }
 
-        return file_put_contents(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file, $output);
+        return file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file), $output);
     }
 
     /**
@@ -111,7 +111,7 @@ trait Generator
         $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
         $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
 
-        if (is_readable($css_path) && is_readable($js_path)) {
+        if (is_readable($this->safe_path($css_path)) && is_readable($this->safe_path($js_path))) {
             return true;
         }
 
