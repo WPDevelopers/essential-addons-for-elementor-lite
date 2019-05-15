@@ -12,7 +12,7 @@ trait Admin
 {
     /**
      * Create an admin menu.
-     * 
+     *
      * @since 1.1.2
      */
     public function admin_menu()
@@ -30,7 +30,7 @@ trait Admin
 
     /**
      * Loading all essential scripts
-     * 
+     *
      * @since 1.1.2
      */
     public function admin_enqueue_scripts($hook)
@@ -56,7 +56,7 @@ trait Admin
 
     /**
      * Create settings page.
-     * 
+     *
      * @since 1.1.2
      */
     public function eael_admin_settings_page()
@@ -86,14 +86,14 @@ trait Admin
                         <?php }?>
                     </ul>
                     <?php
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-                        if (!$this->pro_enabled) {
-                            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-                        }
-                    ?>
+include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+        if (!$this->pro_enabled) {
+            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+        }
+        ?>
                 </div>
             </form>
         </div>
@@ -120,12 +120,10 @@ trait Admin
         $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
 
         // Saving Google Map Api Key
-		$eael_google_map_api = $settings['google-map-api'];
-		update_option( 'eael_save_google_map_api', $eael_google_map_api );
+        update_option('eael_save_google_map_api', @$settings['google-map-api']);
 
-		// Saving Mailchimp Api Key
-		$eael_mailchimp_api = $settings['mailchimp-api'];
-		update_option( 'eael_save_mailchimp_api', $eael_mailchimp_api );
+        // Saving Mailchimp Api Key
+        update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
 
         // Build assets files
         $this->generate_scripts(array_keys($settings));
