@@ -10,7 +10,7 @@
                     ?>
                     <div class="eael-admin-block eael-admin-block-banner">
                         <a href="https://essential-addons.com/elementor/" target="_blank">
-                            <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/eael-featured.png'; ?>">
+                            <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/eael-featured.png'; ?>">
                         </a>
                     </div><!--preview image end-->
                     <?php endif; ?>
