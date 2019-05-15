@@ -109,6 +109,18 @@ trait Core
     {
         return preg_replace(['/^http:/', '/^https:/', '/(?!^)\/\//'], ['', '', '/'], $url);
     }
+    
+    /**
+     * Generate safe path
+     *
+     * @since v3.0.0
+     */
+    public function safe_path($path)
+    {
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
 
     /**
      * Check if a plugin is installed
