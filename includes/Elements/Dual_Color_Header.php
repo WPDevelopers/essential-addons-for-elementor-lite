@@ -165,7 +165,7 @@ class Dual_Color_Header extends Widget_Base {
 						],
 					],
 					'default' => '1',
-					'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
 			
