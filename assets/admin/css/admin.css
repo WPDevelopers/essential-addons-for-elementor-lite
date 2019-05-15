@@ -156,7 +156,7 @@ textarea.eael-form-control {
 }
 .eael-checkbox {
     display: flex;
-    flex-basis: calc(25% - 20px);
+    flex-basis: 330px;
     flex-flow: row-reverse;
     justify-content: space-between;
     align-items: center;
@@ -648,4 +648,7 @@ textarea.eael-form-control {
     background-color: #ff0000;
     padding: 3px 5px;
     border-radius: 20px;
+}
+#toplevel_page_eael-settings.current .wp-menu-image img {
+    opacity: 1;
 }
