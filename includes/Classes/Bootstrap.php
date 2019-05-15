@@ -379,6 +379,8 @@ class Bootstrap
             ],
         ]);
 
+        error_log(print_r($this->registered_elements, 1));
+
         // extensions classmap
         $this->registered_extensions = apply_filters('eael/registered_extensions', []);
 
