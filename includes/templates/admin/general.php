@@ -10,7 +10,7 @@
                     ?>
                     <div class="eael-admin-block eael-admin-block-banner">
                         <a href="https://essential-addons.com/elementor/" target="_blank">
-                            <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/eael-featured.png'; ?>">
+                            <img class="eael-preview-img" src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/eael-featured.png'; ?>">
                         </a>
                     </div><!--preview image end-->
                     <?php endif; ?>
@@ -36,7 +36,7 @@
                         </header>
                         <div class="eael-admin-block-content">
                             <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at <a href="https://github.com/rupok/essential-addons-elementor-lite/" target="_blank">Github.</a></p>
-                            <a href="https://github.com/rupok/essential-addons-elementor-lite/issues/new" class="button button-primary" target="_blank">Report a bug</a>
+                            <a href="https://github.com/rupok/essential-addons-for-elementor-lite/issues/new" class="button button-primary" target="_blank">Report a bug</a>
                         </div>
                     </div>
                     <div class="eael-admin-block eael-admin-block-support">
