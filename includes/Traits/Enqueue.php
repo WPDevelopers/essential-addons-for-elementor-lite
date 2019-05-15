@@ -41,7 +41,7 @@ trait Enqueue
 
             wp_enqueue_style(
                 'eael-editor-css',
-                $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/front-end/css/eael-editor.css'),
+                $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
                 false,
                 EAEL_PLUGIN_VERSION
             );
