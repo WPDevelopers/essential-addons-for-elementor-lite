@@ -152,7 +152,7 @@ class Creative_Button extends Widget_Base {
 						],
 					],
 					'default' => '1',
-					'description' => '<span class="pro-feature"> Get the  <a href="https://essential-addons.com/elementor/buy.php" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
 			
@@ -192,7 +192,7 @@ class Creative_Button extends Widget_Base {
 					'eael-creative-button--pro-9' 	=> esc_html__( 'Quidel (Pro)', 	'essential-addons-elementor' ),
 					'eael-creative-button--pro-10' 	=> esc_html__( 'Shikoba (Pro)', 'essential-addons-elementor' ),
 				],
-				'description' => '10 more effects on <a href="https://essential-addons.com/elementor/buy.php">Pro version</a>'
+				'description' => '10 more effects on <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor">Pro version</a>'
 			]
 		);
 
