@@ -35,7 +35,7 @@
                             <h4 class="eael-admin-title">Contribute to Essential Addons</h4>
                         </header>
                         <div class="eael-admin-block-content">
-                            <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at <a href="https://github.com/rupok/essential-addons-elementor-lite/" target="_blank">Github.</a></p>
+                            <p>You can contribute to make Essential Addons better reporting bugs, creating issues, pull requests at <a href="https://github.com/rupok/essential-addons-for-elementor-lite/" target="_blank">Github.</a></p>
                             <a href="https://github.com/rupok/essential-addons-for-elementor-lite/issues/new" class="button button-primary" target="_blank">Report a bug</a>
                         </div>
                     </div>
