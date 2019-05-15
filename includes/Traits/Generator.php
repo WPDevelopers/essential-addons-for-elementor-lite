@@ -144,7 +144,8 @@ trait Generator
             'interactive-card' => 'interactive-cards',
             'image-comparison' => 'img-comparison',
             'dynamic-filterable-gallery' => 'dynamic-filter-gallery',
-            'google-map' => 'adv-google-map'
+            'google-map' => 'adv-google-map',
+            'instafeed' => 'instagram-gallery',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
