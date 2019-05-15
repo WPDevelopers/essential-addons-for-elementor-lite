@@ -50,8 +50,8 @@ trait Core
      */
     public function remove_files($post_type = null, $post_id = null)
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
+        $css_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css');
+        $js_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js');
 
         if (file_exists($css_path)) {
             unlink($css_path);
@@ -78,7 +78,7 @@ trait Core
                 continue;
             }
 
-            unlink($path . DIRECTORY_SEPARATOR . $item);
+            unlink($this->safe_path($path . DIRECTORY_SEPARATOR . $item));
         }
     }
 
