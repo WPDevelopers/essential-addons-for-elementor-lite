@@ -66,8 +66,8 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Post_Grid',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-grid.css',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-grid/index.min.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
@@ -79,11 +79,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Post_Timeline',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-timeline.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-timeline/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/post-timeline/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/post-timeline/index.min.js',
                     ],
                 ],
             ],
@@ -91,11 +91,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Fancy_Text',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fancy-text.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fancy-text/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/fancy-text/fancy-text.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/fancy-text/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/fancy-text/index.min.js',
                     ],
                 ],
             ],
@@ -103,7 +103,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Creative_Button',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/creative-btn.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/creative-btn/index.min.css',
                     ],
                 ],
             ],
@@ -111,11 +111,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Countdown',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/count-down.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/count-down/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/count-down/count-down.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/count-down/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/count-down/index.min.js',
                     ],
                 ],
             ],
@@ -123,7 +123,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Team_Member',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/team-members.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/team-members/index.min.css',
                     ],
                 ],
             ],
@@ -131,7 +131,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Testimonial',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/testimonials.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/testimonials/index.min.css',
                     ],
                 ],
             ],
@@ -139,7 +139,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Info_Box',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/info-box.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/info-box/index.min.css',
                     ],
                 ],
             ],
@@ -147,7 +147,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Flip_Box',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/flip-box.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/flip-box/index.min.css',
                     ],
                 ],
             ],
@@ -155,7 +155,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Cta_Box',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/call-to-action.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/call-to-action/index.min.css',
                     ],
                 ],
             ],
@@ -163,7 +163,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Dual_Color_Header',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/dual-header.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/dual-header/index.min.css',
                     ],
                 ],
             ],
@@ -171,11 +171,11 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Pricing_Table',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/price-table.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/price-table/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/price-table/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/price-table/index.min.js',
                     ],
                 ],
             ],
@@ -183,7 +183,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Twitter_Feed',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/twitter-feed.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/twitter-feed/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
@@ -191,7 +191,7 @@ class Bootstrap
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/doT.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/moment.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/twitter-feed/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/twitter-feed/index.min.js',
                     ],
                 ],
             ],
@@ -199,10 +199,10 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Data_Table',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/data-table.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/data-table/index.min.css',
                     ],
                     'js' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/data-table/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/data-table/index.min.js',
                     ],
                 ],
             ],
@@ -210,13 +210,13 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Filterable_Gallery',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup.css',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filter-gallery.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup/index.min.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filter-gallery/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/filter-gallery/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/filter-gallery/index.min.js',
                     ],
                 ],
             ],
@@ -224,10 +224,10 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Image_Accordion',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/image-accordion.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/image-accordion/index.min.css',
                     ],
                     'js' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/image-accordion/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/image-accordion/index.min.js',
                     ],
                 ],
             ],
@@ -235,10 +235,10 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Content_Ticker',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/content-ticker.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/content-ticker/index.min.css',
                     ],
                     'js' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/content-ticker/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/content-ticker/index.min.js',
                     ],
                 ],
             ],
@@ -246,7 +246,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Tooltip',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/tooltip.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/tooltip/index.min.css',
                     ],
                 ],
             ],
@@ -254,10 +254,10 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Adv_Accordion',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-accordion.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-accordion/index.min.css',
                     ],
                     'js' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-accordion/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-accordion/index.min.js',
                     ],
                 ],
             ],
@@ -265,10 +265,10 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Adv_Tabs',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-tabs.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-tabs/index.min.css',
                     ],
                     'js' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-tabs/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-tabs/index.min.js',
                     ],
                 ],
             ],
@@ -276,12 +276,12 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Progress_Bar',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/progress-bar.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/progress-bar/index.min.css',
                     ],
                     'js' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/inview/inview.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/progress-bar/index.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/progress-bar/index.min.js',
                     ],
                 ],
             ],
@@ -289,7 +289,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Feature_List',
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/feature-list.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/feature-list/index.min.css',
                     ],
                 ],
             ],
@@ -301,7 +301,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
                     ],
                 ],
             ],
@@ -313,7 +313,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/contact-form-7.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/contact-form-7/index.min.css',
                     ],
                 ],
             ],
@@ -325,7 +325,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/weforms.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/weforms/index.min.css',
                     ],
                 ],
             ],
@@ -337,7 +337,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
                     ],
                 ],
             ],
@@ -349,7 +349,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/gravity-form.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/gravity-form/index.min.css',
                     ],
                 ],
             ],
@@ -361,7 +361,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/caldera-form.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/caldera-form/index.min.css',
                     ],
                 ],
             ],
@@ -373,7 +373,7 @@ class Bootstrap
                 ],
                 'dependency' => [
                     'css' => [
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/wpforms.css',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/wpforms/index.min.css',
                     ],
                 ],
             ],
