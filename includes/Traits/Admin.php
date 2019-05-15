@@ -23,7 +23,7 @@ trait Admin
             'manage_options',
             'eael-settings',
             [$this, 'eael_admin_settings_page'],
-            EAEL_PLUGIN_URL . '/assets/admin/images/ea_white.svg',
+            EAEL_PLUGIN_URL . '/assets/admin/images/ea-icon-white.svg',
             '58.6'
         );
     }
