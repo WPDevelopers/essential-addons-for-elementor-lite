@@ -107,7 +107,7 @@ trait Core
      */
     public function safe_protocol($url)
     {
-        return str_replace(['http:', 'https:'], '', $url);
+        return preg_replace(['/^http:/', '/^https:/', '/(?!^)\/\//'], ['', '', '/'], $url);
     }
 
     /**
