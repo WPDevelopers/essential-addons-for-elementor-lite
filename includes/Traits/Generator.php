@@ -86,10 +86,10 @@ trait Generator
 
         // collect eael js
         $js_paths = array(
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/general.js',
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/general/index.js',
         );
         $css_paths = array(
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general.css",
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general/index.css",
         );
 
         // collect library scripts & styles
