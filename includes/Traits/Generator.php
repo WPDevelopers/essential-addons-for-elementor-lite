@@ -144,6 +144,7 @@ trait Generator
             'interactive-card' => 'interactive-cards',
             'image-comparison' => 'img-comparison',
             'dynamic-filterable-gallery' => 'dynamic-filter-gallery',
+            'google-map' => 'adv-google-map'
         ];
 
         $elements = array_map(function ($val) use ($replace) {
@@ -182,7 +183,7 @@ trait Generator
 
             // if no elements, remove cache files
             if (empty($elements)) {
-                $this->remove_files($queried_object);
+                $this->remove_files($post_type, $queried_object);
             }
         }
     }
