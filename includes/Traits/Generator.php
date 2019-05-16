@@ -115,7 +115,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_frontend_scripts($wp_query)
+    public function generate_frontend_scripts()
     {
         if ($this->is_preview_mode()) {
             return;
@@ -152,9 +152,9 @@ trait Generator
 
         $elements = array_unique(array_merge($elements, $extensions));
 
-        if ($wp_query->is_singular || $wp_query->is_archive) {
+        if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
-            $post_type = ($wp_query->is_singular ? 'post' : 'term');
+            $post_type = (is_singular() ? 'post' : 'term');
             $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
             // sort two arr for compare
