@@ -168,6 +168,13 @@ textarea.eael-form-control {
     border: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: 0px 6px 20px 0px rgba(194, 204, 222, 0.3);
 }
+.eael-checkbox.checkbox-toggle-all {
+    border-radius: 100px;
+    padding: 12px 25px;
+    flex-basis: 270px;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
 .eael-checkbox input[type="checkbox"] {
     visibility: hidden;
     display: none;
@@ -388,7 +395,12 @@ textarea.eael-form-control {
 }
 
 .go-premium .eael-btn.eael-license-btn {
+    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
     margin-top: 30px;
+    transition: all .3s ease;
+}
+.go-premium .eael-btn.eael-license-btn:hover {
+    opacity: .85;
 }
 
 .go-premium img {
@@ -645,9 +657,10 @@ textarea.eael-form-control {
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background-color: #ff0000;
-    padding: 3px 5px;
-    border-radius: 20px;
+    background-color: #4b22eb;
+    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
+    padding: 3px 6px;
+    border-radius: 5px;
 }
 #toplevel_page_eael-settings.current .wp-menu-image img {
     opacity: 1;
