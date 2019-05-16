@@ -74,8 +74,6 @@ trait Generator
     public function generate_scripts($elements, $file_name = null)
     {
         if (empty($elements)) {
-            $this->remove_files();
-
             return;
         }
 
