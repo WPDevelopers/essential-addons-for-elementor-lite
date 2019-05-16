@@ -24,21 +24,27 @@ var compassConfig = {
  * also generally contain patterns of files that are watched to trigger compilation.
  */
 var files = {
-    sass: ["assets/front-end/sass/*.scss", "assets/front-end/sass/*/*.scss"],
-    js: [
-        "assets/front-end/js/vendor/!(load-more)**/*.js",
-        "assets/front-end/js/vendor/load-more/*.js",
-        "assets/front-end/js/!(vendor)**/*.js"
-    ],
+    sass: ["assets/front-end/sass/*.scss", "assets/front-end/sass/**/*.scss"],
     css: [
         "assets/front-end/css/*.css",
         "assets/front-end/css/**/*.css",
-        "assets/front-end/css/**/**/*.css"
+        "assets/front-end/css/**/**/*.css",
+        "!assets/front-end/css/*.min.css",
+        "!assets/front-end/css/**/*.min.css",
+        "!assets/front-end/css/**/**/*.min.css"
+    ],
+    js: [
+        "assets/front-end/js/vendor/!(load-more)**/*.js",
+        "assets/front-end/js/vendor/load-more/*.js",
+        "assets/front-end/js/!(vendor)**/*.js",
+        "!assets/front-end/js/vendor/!(load-more)**/*.min.js",
+        "!assets/front-end/js/vendor/load-more/*.min.js",
+        "!assets/front-end/js/!(vendor)**/*.min.js"
     ]
 };
 
 // compile sass
-gulp.task("compassBuild", function() {
+gulp.task("compileSCSS", function() {
     return gulp
         .src(files.sass)
         .pipe(compass(compassConfig))
@@ -48,13 +54,31 @@ gulp.task("compassBuild", function() {
             })
         )
         .pipe(gulp.dest("./" + compassConfig.css));
-    // .pipe(notify('Sass compiled successfully!'));
 });
 
-//concat and minify js
-gulp.task("minifyJS", () => {
+// minify & combine css
+gulp.task("minifyCombineCSS", function() {
+    return gulp
+        .src(files.css)
+        .pipe(concat("eael.css"))
+        .pipe(gulp.dest("./" + compassConfig.css))
+        .pipe(cleancss())
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(
+            gulp.dest(function(file) {
+                return file.base;
+            })
+        )
+        .pipe(concat("eael.min.css"))
+        .pipe(gulp.dest("./" + compassConfig.css));
+});
+
+// minify & combine js
+gulp.task("minifyCombineJS", function() {
     return gulp
         .src(files.js)
+        .pipe(concat("eael.js"))
+        .pipe(gulp.dest("./" + compassConfig.js))
         .pipe(uglify())
         .pipe(rename({ suffix: ".min" }))
         .pipe(
@@ -63,36 +87,11 @@ gulp.task("minifyJS", () => {
             })
         )
         .pipe(concat("eael.min.js"))
-        .pipe(gulp.dest("./" + compassConfig.js))
-        .pipe(notify("JS minified successfully!"));
-});
-
-//concat and minify js
-gulp.task("compileJS", () => {
-    return gulp
-        .src(files.js)
-        .pipe(concat("eael-pro.js"))
-        .pipe(gulp.dest("./" + compassConfig.js))
-        .pipe(notify("JS minified successfully!"));
-});
-
-// minify css
-gulp.task("minifyCss", () => {
-    return gulp
-        .src(files.css)
-        .pipe(cleancss())
-        .pipe(rename({ suffix: ".min" }))
-        .pipe(
-            gulp.dest(function(file) {
-                return file.base;
-            })
-        )
-        .pipe(gulp.dest("./" + compassConfig.css))
-        .pipe(notify("CSS minified successfully!"));
+        .pipe(gulp.dest("./" + compassConfig.js));
 });
 
 // Default task (one-time build).
-gulp.task("default", ["compassBuild"]);
+gulp.task("default", ["compileSCSS", "minifyCombineCSS", "minifyCombineJS"]);
 
 // Gulp Watcher if there is any change on SCSS file.
 gulp.watch([files.sass, files.js], ["default"]);
