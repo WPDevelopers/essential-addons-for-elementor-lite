@@ -1,6 +1,7 @@
 <?php
 $post_hover_style = !empty($post_args['eael_post_grid_hover_style']) ? ' grid-hover-style-' . $post_args['eael_post_grid_hover_style'] : 'none';
 $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size']);
+
 ?>
 <article class="eael-grid-post eael-post-grid-column">
     <div class="eael-grid-post-holder">
