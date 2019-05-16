@@ -112,12 +112,10 @@ p.eael-el-title {
     margin: 0.5em;
 }
 .eael-settings-tab p.eael-elements-control-notice {
-    color: #42418e;
+    color: #444;
     font-size: 16px;
-    border: 1px solid #42418e;
+    font-style: italic;
     padding: 10px;
-    text-align: center;
-    display: block;
 }
 .eael-form-control {
     width: 100%;
@@ -158,15 +156,24 @@ textarea.eael-form-control {
 }
 .eael-checkbox {
     display: flex;
-    flex: 0 0 auto;
-    flex-basis: calc(25% - 20px);
+    flex-basis: 330px;
+    flex-flow: row-reverse;
+    justify-content: space-between;
     align-items: center;
     font-size: 24px;
     margin: 10px;
     padding: 15px;
     box-sizing: border-box;
-    box-shadow: 2px 2px 5px #eee;
-    border: 1px solid #f5f5f5;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 6px 20px 0px rgba(194, 204, 222, 0.3);
+}
+.eael-checkbox.checkbox-toggle-all {
+    border-radius: 100px;
+    padding: 12px 25px;
+    flex-basis: 270px;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 .eael-checkbox input[type="checkbox"] {
     visibility: hidden;
@@ -187,6 +194,7 @@ textarea.eael-form-control {
     left: 0.1em;
     transition: background 0.1s 0.1s ease;
     background: #cbcfd0;
+    border: 1px solid #cbcfd0;
     border-radius: 50px;
 }
 .eael-checkbox label:after {
@@ -196,20 +204,20 @@ textarea.eael-form-control {
     height: 0.8em;
     border-radius: 100%;
     left: 0.2em;
-    top: 0.1em;
+    top: 0.14em;
     transition: all 0.2s ease;
     box-shadow: 0 0 0 5px #fcfff4 inset;
     background: #cbcfd0;
     z-index: 2;
     animation: switch-off 0.3s ease-out;
 }
-.eael-checkbox input[type="checkbox"]:checked + label:before {
-    background: #7e86f9;
-    box-shadow: inset 0px 1px 1px rgba(84, 152, 140, 0.5);
+.eael-checkbox input[type="checkbox"]:checked + label::before {
+    background: rgba(54, 214, 107, 0.8);
+    border: 1px solid #36d66b;
 }
-.eael-checkbox input[type="checkbox"]:checked + label:after {
+.eael-checkbox input[type="checkbox"]:checked + label::after {
     left: 1.2em;
-    background: #7e86f9;
+    background: rgba(54, 214, 107, 0.8);
     animation: switch-on 0.3s ease-out;
 }
 
@@ -387,7 +395,12 @@ textarea.eael-form-control {
 }
 
 .go-premium .eael-btn.eael-license-btn {
+    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
     margin-top: 30px;
+    transition: all .3s ease;
+}
+.go-premium .eael-btn.eael-license-btn:hover {
+    opacity: .85;
 }
 
 .go-premium img {
@@ -429,6 +442,16 @@ textarea.eael-form-control {
     display: flex;
     align-items: center;
     align-content: center;
+}
+
+.eael-elements-list h4 {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #343434;
+    margin: 2em 10px 1em;
+    font-style: italic;
+    font-weight: 300;
 }
 
 /* Header Button */
@@ -627,4 +650,18 @@ textarea.eael-form-control {
 }
 .eael-notice-text {
     padding-left: 10px;
+}
+.pro-label {
+    font-size: 9px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: #4b22eb;
+    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+#toplevel_page_eael-settings.current .wp-menu-image img {
+    opacity: 1;
 }

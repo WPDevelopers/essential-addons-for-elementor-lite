@@ -4,25 +4,23 @@
      * Eael Tabs
      */
     $(".eael-tabs li a").on("click", function(e) {
-        e.preventDefault();
-        $(".eael-tabs li a").removeClass("active");
-        $(this).addClass("active");
-        var tab = $(this).attr("href");
-        $(".eael-settings-tab").removeClass("active");
-        $(".eael-settings-tabs")
-            .find(tab)
-            .addClass("active");
+      e.preventDefault();
+      $(".eael-tabs li a").removeClass("active");
+      $(this).addClass("active");
+      var tab = $(this).attr("href");
+      $(".eael-settings-tab").removeClass("active");
+      $(".eael-settings-tabs")
+        .find(tab)
+        .addClass("active");
     });
 
     $(".eael-get-pro").on("click", function() {
-        swal({
+        Swal.fire({
+            type: 'warning',
             title: "<h2><span>Go</span> Premium",
-            type: "warning",
-            html:
-                'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
-            showCloseButton: true,
-            showCancelButton: false,
-            focusConfirm: true
+            html: 'Purchase our <b><a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" rel="nofollow">premium version</a></b> to unlock these pro components!',
+            showConfirmButton: false,
+            timer: 3000
         });
     });
 
@@ -59,17 +57,23 @@
                 success: function(response) {
                     setTimeout(function() {
                         _this.html("Save Settings");
-                        swal(
-                            "Settings Saved!",
-                            "Click OK to continue",
-                            "success"
-                        );
+                        Swal.fire({
+                            type: 'success',
+                            title: "Settings Saved!",
+                            footer: "Have Fun :-)",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                         headerSaveBtn.removeClass("save-now");
                         footerSaveBtn.removeClass("save-now");
-                    }, 1000);
+                    }, 500);
                 },
                 error: function() {
-                    swal("Oops...", "Something went wrong!", "error");
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
                 }
             });
         } else {
@@ -99,12 +103,43 @@
             success: function(response) {
                 setTimeout(function() {
                     _this.html("Clear Cache");
-                    swal("Cache Cleared!", "Click OK to continue", "success");
+
+                    Swal.fire({
+                        type: 'success',
+                        title: "Cache Cleared!",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 }, 1000);
             },
             error: function() {
-                swal("Ops!", "Something went wrong!", "error");
+                Swal.fire({
+                    type: 'error',
+                    title: "Ops!",
+                    footer: "Something went wrong!",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             }
         });
+    });
+
+    // Elements global control
+    $('#global-elements-control').on('click', function(){
+        var trigger = $(this).prop('checked');
+        var container = $('.eael-checkbox-container').not($('.eael-checkbox-container').first()),
+            checkbox  = container.find('.eael-checkbox input:enabled');
+
+            checkbox.each(function(index) {
+                status = $(this).prop('checked');
+
+                if(trigger == true) {
+                    $(this).prop('checked', true);
+                }else if(trigger == false) {
+                    $(this).prop('checked', false);
+                }
+
+            });
+
     });
 })(jQuery);

@@ -97,3 +97,7 @@
     padding: 0;
     width: 80px;
 }
+.toplevel_page_eael-settings .wp-menu-image img {
+    max-width: 20px;
+    padding-top: 8px !important;
+}

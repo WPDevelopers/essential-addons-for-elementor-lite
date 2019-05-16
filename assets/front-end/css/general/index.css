@@ -1,0 +1,192 @@
+/*--------------------------*/
+/* 01. General Styles
+/*--------------------------*/
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+/*---------------------------------------*/
+/* 02. Common styles for slider elements
+/*---------------------------------------*/
+.eael-testimonial-slider.nav-top-left,
+.eael-testimonial-slider.nav-top-right,
+.eael-team-slider.nav-top-left,
+.eael-team-slider.nav-top-right,
+.eael-logo-carousel.nav-top-left,
+.eael-logo-carousel.nav-top-right,
+.eael-post-carousel.nav-top-left,
+.eael-post-carousel.nav-top-right,
+.eael-product-carousel.nav-top-left,
+.eael-product-carousel.nav-top-right {
+  padding-top: 40px;
+}
+
+/*----------------------------*/
+/* 28. Swiper
+/*----------------------------*/
+.swiper-container-wrap .swiper-slide,
+.swiper-container .swiper-slide {
+  text-align: center;
+}
+
+.swiper-container-wrap .swiper-slide img,
+.swiper-container .swiper-slide img {
+  width: auto;
+}
+
+.swiper-container-wrap-dots-outside .swiper-pagination,
+.swiper-container-dots-outside .swiper-pagination {
+  position: static;
+}
+
+.swiper-container-wrap .swiper-button-next,
+.swiper-container-wrap .swiper-button-prev,
+.swiper-container .swiper-button-next,
+.swiper-container .swiper-button-prev {
+  background: transparent;
+  font-size: 20px;
+  height: auto;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: auto;
+}
+
+.swiper-container-wrap .swiper-button-next .fa,
+.swiper-container-wrap .swiper-button-prev .fa,
+.swiper-container .swiper-button-next .fa,
+.swiper-container .swiper-button-prev .fa {
+  vertical-align: top;
+}
+
+.swiper-container-wrap .swiper-pagination {
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+}
+
+.swiper-container-wrap-dots-outside .swiper-pagination {
+  position: static;
+}
+
+.swiper-container-wrap .swiper-pagination-bullet {
+  background: #ccc;
+  margin: 0 4px;
+  opacity: 1;
+  height: 8px;
+  width: 8px;
+}
+
+.swiper-container-wrap .swiper-pagination-bullet-active {
+  background: #000;
+}
+
+.swiper-container-3d .swiper-slide {
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-property: all;
+}
+
+/*--------------------------------*/
+/* 10. Contact forms common
+/*--------------------------------*/
+.eael-contact-form input[type=text],
+.eael-contact-form input[type=email],
+.eael-contact-form input[type=url],
+.eael-contact-form input[type=tel],
+.eael-contact-form input[type=date],
+.eael-contact-form input[type=number],
+.eael-contact-form textarea {
+  background: #fff;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  float: none;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  width: 100%;
+}
+
+.eael-contact-form input[type=submit] {
+  border: 0;
+  float: none;
+  height: auto;
+  margin: 0;
+  padding: 10px 20px;
+  width: auto;
+  -webkit-transition: all 0.25s linear 0s;
+  -o-transition: all 0.25s linear 0s;
+  transition: all 0.25s linear 0s;
+}
+
+.eael-contact-form.placeholder-hide input::-webkit-input-placeholder,
+.eael-contact-form.placeholder-hide textarea::-webkit-input-placeholder {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.eael-contact-form.placeholder-hide input::-moz-placeholder,
+.eael-contact-form.placeholder-hide textarea::-moz-placeholder {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.eael-contact-form.placeholder-hide input:-ms-input-placeholder,
+.eael-contact-form.placeholder-hide textarea:-ms-input-placeholder {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.eael-contact-form.placeholder-hide input:-moz-placeholder,
+.eael-contact-form.placeholder-hide textarea:-moz-placeholder {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.eael-custom-radio-checkbox input[type=checkbox],
+.eael-custom-radio-checkbox input[type=radio] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-style: solid;
+  border-width: 0;
+  outline: none;
+  min-width: 1px;
+  width: 15px;
+  height: 15px;
+  background: #ddd;
+  padding: 3px;
+}
+
+.eael-custom-radio-checkbox input[type=checkbox]:before,
+.eael-custom-radio-checkbox input[type=radio]:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.eael-custom-radio-checkbox input[type=checkbox]:checked:before,
+.eael-custom-radio-checkbox input[type=radio]:checked:before {
+  background: #999;
+  -webkit-transition: all 0.25s linear 0s;
+  -o-transition: all 0.25s linear 0s;
+  transition: all 0.25s linear 0s;
+}
+
+.eael-custom-radio-checkbox input[type=radio] {
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+}
+
+.eael-custom-radio-checkbox input[type=radio]:before {
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+}
