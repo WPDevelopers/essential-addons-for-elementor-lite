@@ -6,6 +6,7 @@ $elements = [
         'elements' => [
             [
                 'key'   => 'global-elements-control',
+                'class' => 'checkbox-toggle-all',
                 'title' => __( 'Toggle All Elements', 'essential-addons-elementor' )
             ],
         ]
@@ -15,7 +16,7 @@ $elements = [
         'elements'  => [
             [
                 'key'   => 'creative-btn',
-                'title' => __( 'Creative Button', 'essential-addons-elementor' )
+                'title' => __( 'Creative Button', 'essential-addons-elementor' ),
             ],
             [
                 'key'   => 'team-members',
@@ -329,8 +330,9 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                     foreach($element['elements'] as $item) {
                         $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
                         $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
+                        $class = isset($item['class']) ? ' '.$item['class'] : '';
                     ?>
-                    <div class="eael-checkbox">
+                    <div class="eael-checkbox<?php echo $class; ?>">
                         <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?> >
                         <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
                         <p class="eael-el-title">
