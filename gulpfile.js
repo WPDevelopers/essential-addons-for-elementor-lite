@@ -64,7 +64,7 @@ gulp.task("minifyJS", () => {
         )
         .pipe(concat("eael.min.js"))
         .pipe(gulp.dest("./" + compassConfig.js))
-        .pipe(notify("JS minified successfully!"));
+        // .pipe(notify("JS minified successfully!"));
 });
 
 //concat and minify js
@@ -73,7 +73,7 @@ gulp.task("compileJS", () => {
         .src(files.js)
         .pipe(concat("eael-pro.js"))
         .pipe(gulp.dest("./" + compassConfig.js))
-        .pipe(notify("JS minified successfully!"));
+        // .pipe(notify("JS minified successfully!"));
 });
 
 // minify css
@@ -88,7 +88,7 @@ gulp.task("minifyCss", () => {
             })
         )
         .pipe(gulp.dest("./" + compassConfig.css))
-        .pipe(notify("CSS minified successfully!"));
+        // .pipe(notify("CSS minified successfully!"));
 });
 
 // Default task (one-time build).
