@@ -2,7 +2,7 @@
 
 $elements = [
     'global-controls'   => [
-        'title'    => __( 'Global Controls', '' ),
+        'title'    => __( 'Global Control', '' ),
         'elements' => [
             [
                 'key'   => 'global-elements-control',
