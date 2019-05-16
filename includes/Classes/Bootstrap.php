@@ -26,6 +26,9 @@ class Bootstrap
 
     // transient elements container
     public $transient_elements;
+    
+    // transient elements container
+    public $transient_extensions;
 
     // identify whether pro is enabled
     public $pro_enabled;
@@ -384,6 +387,7 @@ class Bootstrap
 
         // initialize transient container
         $this->transient_elements = [];
+        $this->transient_extensions = [];
 
         // start plugin tracking
         if (!$this->pro_enabled) {

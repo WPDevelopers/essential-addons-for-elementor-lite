@@ -48,15 +48,9 @@ trait Generator
                         $paths[] = $path;
                     }
                 }
-            }
-
-            foreach ($this->registered_extensions as $key => $extension) {
-                if (!in_array($key, $this->get_settings())) {
-                    continue;
-                }
-
-                if (!empty($extension['dependency'][$type])) {
-                    foreach ($extension['dependency'][$type] as $path) {
+            } elseif (isset($this->registered_extensions[$element])) {
+                if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
+                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
                         $paths[] = $path;
                     }
                 }
@@ -153,6 +147,10 @@ trait Generator
         }, $this->transient_elements);
 
         $elements = array_intersect(array_keys($this->registered_elements), $elements);
+
+        $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
+
+        $elements = array_unique(array_merge($elements, $extensions));
 
         if ($wp_query->is_singular || $wp_query->is_archive) {
             $queried_object = get_queried_object_id();
