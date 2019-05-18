@@ -145,15 +145,11 @@ trait Core
      */
     public function insert_plugin_links($links)
     {
-        if ($this->pro_enabled) {
-            return array();
-        }
-
         // insert settings link
         $links[] = sprintf('<a href="admin.php?page=eael-settings">' . __('Settings') . '</a>');
 
         // insert go pro link
-        if (!$this->plugin_installed('essential-addons-elementor/essential_adons_elementor.php')) {
+        if (!$this->pro_enabled) {
             $links[] = sprintf('<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __('Go Pro') . '</a>');
         }
 
