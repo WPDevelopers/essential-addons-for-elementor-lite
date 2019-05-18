@@ -57,11 +57,16 @@ gulp.task("compileSCSS", function() {
 });
 
 // minify & combine css
-gulp.task("minifyCombineCSS", function() {
+gulp.task("combineCSS", function() {
     return gulp
         .src(files.css)
         .pipe(concat("eael.css"))
-        .pipe(gulp.dest("./" + compassConfig.css))
+        .pipe(gulp.dest("./" + compassConfig.css));
+});
+
+gulp.task("minifyCSS", function() {
+    return gulp
+        .src(files.css)
         .pipe(cleancss())
         .pipe(rename({ suffix: ".min" }))
         .pipe(
@@ -74,11 +79,16 @@ gulp.task("minifyCombineCSS", function() {
 });
 
 // minify & combine js
-gulp.task("minifyCombineJS", function() {
+gulp.task("combineJS", function() {
     return gulp
         .src(files.js)
         .pipe(concat("eael.js"))
-        .pipe(gulp.dest("./" + compassConfig.js))
+        .pipe(gulp.dest("./" + compassConfig.js));
+});
+
+gulp.task("minifyJS", function() {
+    return gulp
+        .src(files.js)
         .pipe(uglify())
         .pipe(rename({ suffix: ".min" }))
         .pipe(
@@ -91,7 +101,7 @@ gulp.task("minifyCombineJS", function() {
 });
 
 // Default task (one-time build).
-gulp.task("default", ["compileSCSS", "minifyCombineCSS", "minifyCombineJS"]);
+gulp.task("default", ["compileSCSS", "combineCSS", "minifyCSS", "combineJS", "minifyJS"]);
 
 // Gulp Watcher if there is any change on SCSS file.
 gulp.watch([files.sass, files.js], ["default"]);
