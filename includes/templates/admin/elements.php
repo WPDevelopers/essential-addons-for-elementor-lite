@@ -333,7 +333,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                         $class = isset($item['class']) ? ' '.$item['class'] : '';
                     ?>
                     <div class="eael-checkbox<?php echo $class; ?>">
-                        <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?> >
+                        <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
                         <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
                         <p class="eael-el-title">
                             <?php _e( $item['title'], 'essential-addons-elementor' ) ?>

@@ -53,6 +53,11 @@ register_activation_hook(__FILE__, function () {
     \Essential_Addons_Elementor\Classes\Migration::plugin_activation_hook();
 });
 
+
+register_activation_hook(__FILE__, function () {
+    \Essential_Addons_Elementor\Classes\Bootstrap::setDefaultValues();
+});
+
 /**
  * Deactivation hook
  *
