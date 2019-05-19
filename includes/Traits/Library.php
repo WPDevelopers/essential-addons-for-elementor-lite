@@ -6,8 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\User;
-
 trait Library
 {
     /**
@@ -93,15 +91,20 @@ trait Library
      */
     public function is_preview_mode()
     {
-        if (!User::is_current_user_can_edit()) {
-            return false;
+        if (isset($_REQUEST['doing_wp_cron'])) {
+            return true;
+        }
+        if (wp_doing_ajax()) {
+            return true;
+        }
+        if (isset($_GET['elementor-preview'])) {
+            return true;
+        }
+        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor') {
+            return true;
         }
 
-        if (!isset($_GET['elementor-preview'])) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     /**
