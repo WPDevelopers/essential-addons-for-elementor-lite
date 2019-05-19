@@ -145,7 +145,7 @@ class Dual_Color_Header extends Widget_Base {
 
 		$this->end_controls_section();
 
-		if(!Bootstrap::pro_enabled()) {
+		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
