@@ -131,16 +131,6 @@ trait Admin
         wp_send_json($updated);
     }
 
-    public function clear_cache_files()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
-
-        // clear cache files
-        $this->empty_dir(EAEL_ASSET_PATH);
-
-        wp_send_json(true);
-    }
-
     public function admin_notice()
     {
         $notice = new WPDeveloper_Notice(EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION);
