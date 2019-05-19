@@ -54,7 +54,7 @@ class Data_Table extends Widget_Base {
 
 		do_action('eael_section_data_table_enabled', $this);
 
-		if(!Bootstrap::pro_enabled()) {
+		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->add_control(
 				'eael_pricing_table_style_pro_alert',
 				[
@@ -329,7 +329,7 @@ class Data_Table extends Widget_Base {
 
   		$this->end_controls_section();
 
-		if(!Bootstrap::pro_enabled()) {
+		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
@@ -1020,7 +1020,7 @@ class Data_Table extends Widget_Base {
 								'colspan'	=> $header_title['eael_data_table_header_col_span']
 							]);
 
-							if(Bootstrap::pro_enabled()) {
+							if(apply_filters('eael/pro_enabled', false)) {
 								$this->add_render_attribute('th_class'.$i, 'class', 'sorting' );
 							}
 						?>

@@ -256,7 +256,7 @@ class Fancy_Text extends Widget_Base {
 		$this->end_controls_section();
 
        
-		if(!Bootstrap::pro_enabled()) {
+		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
@@ -477,7 +477,7 @@ class Fancy_Text extends Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 		$fancy_text = $this->fancy_text($settings['eael_fancy_text_strings']);
-		if(!Bootstrap::pro_enabled()) { $settings['eael_fancy_text_style'] = 'style-1'; }
+		if(!apply_filters('eael/pro_enabled', false)) { $settings['eael_fancy_text_style'] = 'style-1'; }
 		$this->add_render_attribute( 'fancy-text', 'class', 'eael-fancy-text-container' );
 		$this->add_render_attribute( 'fancy-text', 'class', esc_attr($settings['eael_fancy_text_style']) );
 		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-id', esc_attr($this->get_id()) );
