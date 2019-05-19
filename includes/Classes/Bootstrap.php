@@ -8,6 +8,8 @@ if (!defined('ABSPATH')) {
 
 class Bootstrap
 {
+    use \Essential_Addons_Elementor\Traits\Library;
+    use \Essential_Addons_Elementor\Traits\Shared;
     use \Essential_Addons_Elementor\Traits\Core;
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Traits\Generator;
