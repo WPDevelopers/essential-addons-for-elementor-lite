@@ -406,41 +406,6 @@ class Bootstrap
         $this->register_hooks();
     }
 
-    public static function setDefaultValues()
-    {
-        return update_option('eael_save_settings', array_fill_keys([
-            'post-grid',
-            'post-timeline',
-            'fancy-text',
-            'creative-btn',
-            'count-down',
-            'team-members',
-            'testimonials',
-            'info-box',
-            'flip-box',
-            'call-to-action',
-            'dual-header',
-            'price-table',
-            'twitter-feed',
-            'data-table',
-            'filter-gallery',
-            'image-accordion',
-            'content-ticker',
-            'tooltip',
-            'adv-accordion',
-            'adv-tabs',
-            'progress-bar',
-            'feature-list',
-            'product-grid',
-            'contact-form-7',
-            'weforms',
-            'ninja-form',
-            'gravity-form',
-            'caldera-form',
-            'wpforms',
-            'global-elements-control'
-        ], 1));
-    }
 
     protected function register_hooks()
     {
