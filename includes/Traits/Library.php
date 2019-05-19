@@ -119,4 +119,16 @@ trait Library
 
         return isset($installed_plugins[$basename]);
     }
+
+    /**
+     * Generate safe path
+     *
+     * @since v3.0.0
+     */
+    public function safe_path($path)
+    {
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
 }
