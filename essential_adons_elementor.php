@@ -50,12 +50,8 @@ add_action('plugins_loaded', function () {
  * @since v3.0.0
  */
 register_activation_hook(__FILE__, function () {
-    \Essential_Addons_Elementor\Classes\Migration::plugin_activation_hook();
-});
-
-
-register_activation_hook(__FILE__, function () {
-    \Essential_Addons_Elementor\Classes\Bootstrap::setDefaultValues();
+    $migration = new \Essential_Addons_Elementor\Classes\Migration;
+    $migration->plugin_activation_hook();
 });
 
 /**
@@ -64,7 +60,8 @@ register_activation_hook(__FILE__, function () {
  * @since v3.0.0
  */
 register_deactivation_hook(__FILE__, function () {
-    \Essential_Addons_Elementor\Classes\Migration::plugin_deactivation_hook();
+    $migration = new \Essential_Addons_Elementor\Classes\Migration;
+    $migration->plugin_deactivation_hook();
 });
 
 /**
@@ -73,5 +70,6 @@ register_deactivation_hook(__FILE__, function () {
  * @since v3.0.0
  */
 add_action('upgrader_process_complete', function ($upgrader_object, $options) {
-    \Essential_Addons_Elementor\Classes\Migration::plugin_upgrade_hook($upgrader_object, $options);
+    $migration = new \Essential_Addons_Elementor\Classes\Migration;
+    $migration->plugin_upgrade_hook($upgrader_object, $options);
 }, 10, 2);
