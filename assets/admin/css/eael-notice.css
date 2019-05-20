@@ -45,6 +45,39 @@
 .wpdeveloper-notice-thumbnail img:hover {
     opacity: 1;
 }
+.wpdeveloper-update-notice .wpdeveloper-notice-thumbnail img {
+    width: 40px;
+}
+.wpdeveloper-update-notice .wpdeveloper-notice-thumbnail {
+    width: auto;
+    padding: 0;
+}
+.wpdeveloper-update-notice .wpdeveloper-notice-message {
+    padding: 5px 0;
+}
+.wpdeveloper-update-notice {
+    border-color: #6648fe;
+}
+a.ea-notice-cta {
+    background-color: #4D18FF;
+    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
+    margin-top: 30px;
+    color: #fff;
+    padding: 8px 20px;
+    outline: none;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-left: 10px;
+    transition: all .3s ease;
+}
+a.ea-notice-cta:hover{
+    opacity: 0.85;
+}
+span.coupon-code {
+    background: #ebebeb;
+    padding: 5px 10px;
+    letter-spacing: 0.035em;
+}
 .eael-review-text {
     overflow: hidden;
 }
