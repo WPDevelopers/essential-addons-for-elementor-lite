@@ -89,7 +89,7 @@ trait Core
         );
     }
 
-    public static function set_default_values()
+    public function set_default_values()
     {
         return update_option('eael_save_settings', array_fill_keys([
             'post-grid',
