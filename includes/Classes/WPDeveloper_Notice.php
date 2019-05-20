@@ -33,6 +33,7 @@ class WPDeveloper_Notice {
      */
     public $cne_time = '2 day';
     public $maybe_later_time = '7 day';
+    public $finish_time = [];
     /**
      * Plugin Name
      *
@@ -163,6 +164,13 @@ class WPDeveloper_Notice {
                     $this->maybe_later( $current_notice );
                     $notice_time = false;
                 }
+
+                if( isset( $this->finish_time[ $current_notice ] ) ) {
+                    if( $this->timestamp >= strtotime( $this->finish_time[ $current_notice ] ) ) {
+                        unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] );
+                        $this->update_options_data( $options_data[ $this->plugin_name ] );
+                    }
+                }
                 
                 if( $notice_time != false ) {
                     if( $notice_time <= $this->timestamp ) {
@@ -198,7 +206,7 @@ class WPDeveloper_Notice {
      * @return integer
      */
     public function makeTime( $current, $time ) {
-        return intval( strtotime( date('Y-m-d H:i:s', $current) . " +$time" ) );
+        return intval( strtotime( date('Y-m-d h:i:s', $current) . " +$time" ) );
     }
     /**
      * Automatice Maybe Later.
