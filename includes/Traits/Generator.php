@@ -48,15 +48,9 @@ trait Generator
                         $paths[] = $path;
                     }
                 }
-            }
-
-            foreach ($this->registered_extensions as $key => $extension) {
-                if (!in_array($key, $this->get_settings())) {
-                    continue;
-                }
-
-                if (!empty($extension['dependency'][$type])) {
-                    foreach ($extension['dependency'][$type] as $path) {
+            } elseif (isset($this->registered_extensions[$element])) {
+                if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
+                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
                         $paths[] = $path;
                     }
                 }
@@ -121,7 +115,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_frontend_scripts($wp_query)
+    public function generate_frontend_scripts()
     {
         if ($this->is_preview_mode()) {
             return;
@@ -154,9 +148,13 @@ trait Generator
 
         $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
-        if ($wp_query->is_singular || $wp_query->is_archive) {
+        $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
+
+        $elements = array_unique(array_merge($elements, $extensions));
+
+        if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();
-            $post_type = ($wp_query->is_singular ? 'post' : 'term');
+            $post_type = (is_singular() ? 'post' : 'term');
             $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
             // sort two arr for compare

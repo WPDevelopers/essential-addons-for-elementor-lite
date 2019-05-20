@@ -471,7 +471,7 @@ class Post_Grid extends Widget_Base {
 				}
 
 				var settings = {
-					postType: '<?php echo $settings['post_type']; ?>',
+					postType: '<?php echo isset($settings['post_type']) ? $settings['post_type'] : ''; ?>',
 					perPage: <?php echo $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4'; ?>,
 					postOrder: '<?php echo $settings['order']; ?>',
 					orderBy: '<?php echo $settings['orderby']; ?>',
