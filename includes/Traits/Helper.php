@@ -1311,8 +1311,20 @@ trait Helper
         $return = array();
         $return['count'] = $posts->found_posts;
 
+        if (isset($post_args['post_style'])) {
+            if (
+                $post_args['post_style'] == 'list'
+                || $post_args['post_style'] == 'dynamic_gallery'
+                || $post_args['post_style'] == 'content_timeline'
+                || $post_args['post_style'] == 'list'
+                || $post_args['post_style'] == 'block'
+                || $post_args['post_style'] == 'post_carousel'
+            ) {
+                $post_args['is_pro'] = true;
+            }
+        }
+
         if (isset($post_args['post_style']) && $post_args['post_style'] == 'list') {
-            $post_args['is_pro'] = true; // fix
             $iterator = $feature_counter = 0;
 
             foreach ($posts->posts as $post) {
@@ -1324,7 +1336,6 @@ trait Helper
         }
 
         ob_start();
-        
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
             include ($post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH) . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';

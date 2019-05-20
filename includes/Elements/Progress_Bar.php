@@ -204,7 +204,7 @@ class Progress_Bar extends Widget_Base
 
         $this->end_controls_section();
 
-        if(!Bootstrap::pro_enabled()) {
+        if(!apply_filters('eael/pro_enabled', false)) {
             $this->start_controls_section(
                 'eael_section_pro',
                 [
@@ -393,7 +393,7 @@ class Progress_Bar extends Widget_Base
             ]
         );
 
-        if(Bootstrap::pro_enabled()){
+        if(apply_filters('eael/pro_enabled', false)){
             $line_fill_color_condition = [
                 'progress_bar_layout' => 'line',
             ];
@@ -562,7 +562,7 @@ class Progress_Bar extends Widget_Base
             ]
         );
 
-        if(Bootstrap::pro_enabled()) {
+        if(apply_filters('eael/pro_enabled', false)) {
             $circle_fill_color_condition = [
                 '{{WRAPPER}} .eael-progressbar-circle-half' => 'border-color: {{VALUE}}',
                 '{{WRAPPER}} .eael-progressbar-circle-fill .eael-progressbar-circle-half' => 'background-color: {{VALUE}}',
@@ -698,7 +698,7 @@ class Progress_Bar extends Widget_Base
         $wrap_classes   = ['eael-progressbar'];
         $circle_wrapper = [];
 
-        if(!Bootstrap::pro_enabled()) {
+        if(!apply_filters('eael/pro_enabled', false)) {
             if(in_array($settings['progress_bar_layout'], ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'])) {
                 $settings['progress_bar_layout'] = 'line';
             }
@@ -773,7 +773,7 @@ class Progress_Bar extends Widget_Base
                 ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '</div>' : '') . '
             </div>';
         }
-        if(Bootstrap::pro_enabled()){
+        if(apply_filters('eael/pro_enabled', false)){
             $circle_condition = $settings['progress_bar_layout'] == 'half_circle' || $settings['progress_bar_layout'] == 'half_circle_fill';
         }else {
             $circle_condition = $settings['progress_bar_layout'] == 'half_circle';

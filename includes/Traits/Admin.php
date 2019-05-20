@@ -86,14 +86,14 @@ trait Admin
                         <?php }?>
                     </ul>
                     <?php
-include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-        if (!$this->pro_enabled) {
-            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-        }
-        ?>
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+                        if (!$this->pro_enabled) {
+                            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+                        }
+                    ?>
                 </div>
             </form>
         </div>
@@ -131,19 +131,10 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         wp_send_json($updated);
     }
 
-    public function clear_cache_files()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
-
-        // clear cache files
-        $this->empty_dir(EAEL_ASSET_PATH);
-
-        wp_send_json(true);
-    }
-
     public function admin_notice()
     {
         $notice = new WPDeveloper_Notice(EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION);
+        $notice->finish_time['update'] = 'May 28, 2019';
         $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
         $url = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
@@ -192,6 +183,12 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor') . '</p>');
         $notice->thumbnail('review', plugins_url('assets/admin/images/ea-logo.svg', EAEL_PLUGIN_BASENAME));
 
+         /**
+         * This is update message and thumbnail.
+         */
+        $notice->message('update', '<p>' . __("Get 20% Discount & Turbo-Charge Your Elementor Page Building With Essential Addons PRO. Use Coupon Code <strong><a class='btn btn-default' href='https://wpdeveloper.net/plugins/essential-addons-elementor'>SpeedUp</a></strong>", 'essential-addons-elementor') . '</p>');
+        $notice->thumbnail('update', plugins_url('assets/admin/images/ea-logo.svg', EAEL_PLUGIN_BASENAME));
+
         /**
          * Current Notice End Time.
          * Notice will dismiss in 3 days if user does nothing.
@@ -207,7 +204,8 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
 
         $notice->options_args = array(
             'notice_will_show' => [
-                'opt_in' => $notice->timestamp,
+                'update' => $notice->timestamp,
+                'opt_in' => $notice->makeTime($notice->timestamp, '1 Day'),
                 'review' => $notice->makeTime($notice->timestamp, '4 Day'), // after 4 days
             ],
         );

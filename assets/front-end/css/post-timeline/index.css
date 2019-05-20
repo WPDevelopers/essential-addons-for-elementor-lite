@@ -239,6 +239,13 @@
   display: none;
 }
 
+.eael-load-more-button-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 /*--- Responsive Style for Post Timeline ---*/
 @media only screen and (max-width: 1366px) {
   .eael-timeline-post-title h2 {
