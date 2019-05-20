@@ -8,6 +8,8 @@ if (!defined('ABSPATH')) {
 
 class Bootstrap
 {
+    use \Essential_Addons_Elementor\Traits\Library;
+    use \Essential_Addons_Elementor\Traits\Shared;
     use \Essential_Addons_Elementor\Traits\Core;
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Traits\Generator;
@@ -26,6 +28,9 @@ class Bootstrap
 
     // transient elements container
     public $transient_elements;
+    
+    // transient elements container
+    public $transient_extensions;
 
     // identify whether pro is enabled
     public $pro_enabled;
@@ -384,6 +389,7 @@ class Bootstrap
 
         // initialize transient container
         $this->transient_elements = [];
+        $this->transient_extensions = [];
 
         // start plugin tracking
         if (!$this->pro_enabled) {
@@ -400,11 +406,12 @@ class Bootstrap
         $this->register_hooks();
     }
 
+
     protected function register_hooks()
     {
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('loop_end', array($this, 'generate_frontend_scripts'));
+        add_action('wp_footer', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));

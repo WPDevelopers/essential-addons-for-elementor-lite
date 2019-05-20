@@ -86,14 +86,14 @@ trait Admin
                         <?php }?>
                     </ul>
                     <?php
-include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-        if (!$this->pro_enabled) {
-            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-        }
-        ?>
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+                        if (!$this->pro_enabled) {
+                            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+                        }
+                    ?>
                 </div>
             </form>
         </div>
@@ -129,16 +129,6 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         $this->generate_scripts(array_keys($settings));
 
         wp_send_json($updated);
-    }
-
-    public function clear_cache_files()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
-
-        // clear cache files
-        $this->empty_dir(EAEL_ASSET_PATH);
-
-        wp_send_json(true);
     }
 
     public function admin_notice()

@@ -46,7 +46,7 @@ class Post_Timeline extends Widget_Base {
 		$this->eael_query_controls();
 		$this->eael_layout_controls();
 
-		if(!Bootstrap::pro_enabled()) {
+		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->eael_go_premium();
 		}
 
