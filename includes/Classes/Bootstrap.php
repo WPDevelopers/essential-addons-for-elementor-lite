@@ -71,6 +71,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Post_Grid',
                 'dependency' => [
                     'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-grid/index.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
                     ],
@@ -84,6 +85,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Post_Timeline',
                 'dependency' => [
                     'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-timeline/index.min.css',
                     ],
                     'js' => [
@@ -215,6 +217,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Filterable_Gallery',
                 'dependency' => [
                     'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup/index.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filter-gallery/index.min.css',
                     ],
