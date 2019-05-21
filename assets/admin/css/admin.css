@@ -164,6 +164,7 @@ textarea.eael-form-control {
     flex-flow: row wrap;
     align-items: center;
 }
+
 .eael-checkbox {
     display: flex;
     flex-basis: 330px;
@@ -174,10 +175,11 @@ textarea.eael-form-control {
     margin: 10px;
     padding: 15px;
     box-sizing: border-box;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 6px 20px 0px rgba(194, 204, 222, 0.3);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 5px 18px 0px rgba(0, 4, 32, 0.08);
 }
+
 .eael-checkbox.checkbox-toggle-all {
     border-radius: 100px;
     padding: 12px 25px;
