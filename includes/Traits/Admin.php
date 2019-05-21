@@ -186,7 +186,7 @@ trait Admin
          /**
          * This is update message and thumbnail.
          */
-        $notice->message('update', '<p>' . __("Get 20% Discount & Turbo-Charge Your <strong>Elementor</strong> Page Building With <strong>Essential Addons PRO</strong>. Use Coupon Code <span class='coupon-code'>SpeedUp</span> on checkout. <a class='ea-notice-cta' target='_blank' href='https://wpdeveloper.net/plugins/essential-addons-elementor#pricing'>Redeem Now</a>", 'essential-addons-elementor') . '</p>');
+        $notice->message('update', '<p>' . __("Get 20% Discount & Turbo-Charge Your <strong>Elementor</strong> Page Building With <strong>Essential Addons PRO</strong>. Use Coupon Code <span class='coupon-code'>SpeedUp</span> on checkout. <a class='ea-notice-cta' target='_blank' href='https://wpdeveloper.net/plugins/essential-addons-elementor#pricing'>Redeem Now</a>", 'essential-addons-elementor') . '<button class="notice-dismiss" data-notice="update"></button></p>');
         $notice->thumbnail('update', plugins_url('assets/admin/images/icon-bolt.svg', EAEL_PLUGIN_BASENAME));
 
         /**

@@ -125,6 +125,7 @@ class WPDeveloper_Notice {
     public function hooks(){
         add_action( 'wpdeveloper_notice_clicked_for_' . $this->plugin_name, array( $this, 'clicked' ) );
         add_action( 'wp_ajax_wpdeveloper_upsale_notice_dissmiss_for_' . $this->plugin_name, array( $this, 'upsale_notice_dissmiss' ) );
+        add_action( 'wp_ajax_wpdeveloper_notice_dissmiss_for_' . $this->plugin_name, array( $this, 'notice_dissmiss' ) );
         add_action( 'wpdeveloper_before_notice_for_' . $this->plugin_name, array( $this, 'before' ) );
         add_action( 'wpdeveloper_after_notice_for_' . $this->plugin_name, array( $this, 'after' ) );
         add_action( 'wpdeveloper_before_upsale_notice_for_' . $this->plugin_name, array( $this, 'before_upsale' ) );
@@ -245,6 +246,7 @@ class WPDeveloper_Notice {
                     break;
 
                 case 'update' : 
+                    $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
                     $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
                     break;
 
@@ -337,6 +339,7 @@ class WPDeveloper_Notice {
                 do_action( 'wpdeveloper_update_notice_for_' . $this->plugin_name );
                 $this->get_thumbnail( 'update' );
                 $this->get_message( 'update' );
+                $this->dismiss_button_scripts();
                 break;
             case 'review' : 
                 do_action( 'wpdeveloper_review_notice_for_' . $this->plugin_name );
@@ -703,6 +706,27 @@ class WPDeveloper_Notice {
         // Set users meta, not to show again current_version notice.
         update_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, $user_notices);
     }
+
+    public function notice_dissmiss(){
+        if( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'wpdeveloper_notice_dissmiss' ) ) {
+            return;
+        }
+        
+        if( ! isset( $_POST['action'] ) || ( $_POST['action'] !== 'wpdeveloper_notice_dissmiss_for_' . $this->plugin_name ) ) {
+            return;
+        }
+        
+        $dismiss = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
+        $notice = isset( $_POST['notice'] ) ? $_POST['notice'] : false;
+        if( $dismiss ) { 
+            $this->update( $notice );
+            echo 'success';
+        } else {
+            echo 'failed';
+        }
+        die();
+    }
+
     /**
      * This function is responsible for do action when 
      * the dismiss button clicked in upsale notice.
@@ -726,6 +750,43 @@ class WPDeveloper_Notice {
         }
         die();
     }
+
+    public function dismiss_button_scripts(){
+        ?>
+        <script type="text/javascript">
+            jQuery(document).ready( function($) {
+                if( $('.notice').length > 0 ) {
+                    if( $('.notice').find('.notice-dismiss').length > 0 ) {
+                        $('.notice').on('click', 'button.notice-dismiss', function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                                type: 'post',
+                                data: {
+                                    action: 'wpdeveloper_notice_dissmiss_for_<?php echo $this->plugin_name; ?>',
+                                    _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_notice_dissmiss'); ?>',
+                                    dismiss: true,
+                                    notice: $(this).data('notice'),
+                                },
+                                success: function(response) {
+                                    $('.notice').hide();
+                                    console.log('Successfully saved!');
+                                },
+                                error: function(error) {
+                                    console.log('Something went wrong!');
+                                },
+                                complete: function() {
+                                    console.log('Its Complete.');
+                                }
+                            });
+                        });
+                    }
+                }
+            } );
+        </script>
+        <?php
+    }
+
     /**
      * Upsale Button Script.
      * When install button is clicked, it will do its own things.
@@ -779,6 +840,8 @@ class WPDeveloper_Notice {
 
                 $('.wpdeveloper-upsale-notice').on('click', 'button.notice-dismiss', function (e) {
                     e.preventDefault();
+                    console.log( e );
+                    return;
                     $.ajax({
                         url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
                         type: 'post',
