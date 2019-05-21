@@ -2,17 +2,18 @@
 
 $elements = [
     'global-controls'   => [
-        'title'    => __( 'Global Control', '' ),
+        'title'    => __( 'Global Control', 'essential-addons-elementor' ),
+        'desc'      => __( 'Use the Toggle to deactivate or activate all the Essential Addons Elements at once.', 'essential-addons-elementor' ),
         'elements' => [
             [
                 'key'   => 'global-elements-control',
                 'class' => 'checkbox-toggle-all',
-                'title' => __( 'Toggle All Elements', 'essential-addons-elementor' )
+                'title' => null
             ],
         ]
     ],
     'content-elements'  => [
-        'title' => __( 'CONTENT ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Content Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'creative-btn',
@@ -87,7 +88,7 @@ $elements = [
         ]
     ],
     'dynamic-content-elements'  => [
-        'title' => __( 'DYNAMIC CONTENT ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Dynamic Content Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'post-grid',
@@ -147,7 +148,7 @@ $elements = [
         ]
     ],
     'creative-elements' => [
-        'title' => __( 'CREATIVE ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Creative Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'count-down',
@@ -242,7 +243,7 @@ $elements = [
         ]
     ],
     'marketing-elements'    => [
-        'title' => __( 'MARKETING ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Marketing Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'call-to-action',
@@ -260,7 +261,7 @@ $elements = [
         ]
     ],
     'form-styler-elements'  => [
-        'title' => __( 'FORM STYLER ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Form Styler Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'contact-form-7',
@@ -294,7 +295,7 @@ $elements = [
         ]
     ],
     'social-feed-elements'  => [
-        'title' => __( 'SOCIAL FEED ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Social Feed Elemens', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'twitter-feed',
@@ -321,11 +322,18 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
     <div class="row">
         <div class="col-full">
         <?php
+            $i = 0;
             foreach($elements as $element) :
-                // ob_start();
+                $wrap_class = isset($element['elements'][$i]['key']) && $element['elements'][$i]['key'] == 'global-elements-control' ? ' elements-global-control-wrap' : '';
+                $i++;
         ?>
-        <h4><?php echo $element['title']; ?></h4>
-            <div class="eael-checkbox-container">
+        <?php if(isset($element['title'])) : ?>
+            <div class="elements-controls-wrap<?php echo $wrap_class; ?>">
+                <?php echo !empty($element['title']) ? '<h4>'.$element['title'].'</h4>' : ''; ?>
+                <?php echo !empty($element['desc']) ? '<p>'.$element['desc'].'</p>' : ''; ?>
+            </div>
+        <?php endif; ?>
+            <div class="eael-checkbox-container<?php echo $wrap_class; ?>">
                 <?php
                     foreach($element['elements'] as $item) {
                         $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );

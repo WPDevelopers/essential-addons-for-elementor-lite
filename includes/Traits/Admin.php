@@ -67,7 +67,7 @@ trait Admin
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/ea-logo.svg'; ?>">
+							<img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-ea-logo.svg'; ?>">
 						</div>
 						<h2 class="title"><?php echo __('Essential Addons Settings', 'essential-addons-elementor'); ?></h2>
 					</div>
@@ -77,10 +77,10 @@ trait Admin
 				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul class="eael-tabs">
-				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg'; ?>"><span><?php echo __('General', 'essential-addons-elementor'); ?></span></a></li>
-				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg'; ?>"><span><?php echo __('Elements', 'essential-addons-elementor'); ?></span></a></li>
+				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-general.svg'; ?>"><span><?php echo __('General', 'essential-addons-elementor'); ?></span></a></li>
+				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-elements.svg'; ?>"><span><?php echo __('Elements', 'essential-addons-elementor'); ?></span></a></li>
                         <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>"><span><?php echo __('Extensions', 'essential-addons-elementor'); ?></span></a></li>
-                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/tools.svg'; ?>"><span><?php echo __('Tools', 'essential-addons-elementor'); ?></span></a></li>
+                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-tools.svg'; ?>"><span><?php echo __('Tools', 'essential-addons-elementor'); ?></span></a></li>
                         <?php if (!$this->pro_enabled) {?>
                             <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>"><span><?php echo __('Go Premium', 'essential-addons-elementor'); ?></span></a></li>
                         <?php }?>
