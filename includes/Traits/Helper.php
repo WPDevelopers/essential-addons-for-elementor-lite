@@ -461,8 +461,6 @@ trait Helper
             ]
         );
 
-        $excerpt_feature = apply_filters('eael_excerpt_length', '<span class="pro-feature"> Pro Feature. Get <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> </span>');
-
         $this->add_control(
             'eael_excerpt_length',
             [
@@ -472,7 +470,6 @@ trait Helper
                 'condition' => [
                     'eael_show_excerpt' => '1',
                 ],
-                'description' => $excerpt_feature,
             ]
         );
 
