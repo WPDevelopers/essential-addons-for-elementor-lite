@@ -136,6 +136,11 @@
         );
     });
 
+    $('.eael-btn-group button').on('click', function() {
+        $('.eael-btn-group button').removeClass('active');
+        $(this).addClass('active');
+    });
+
     $(document).on("click", ".eael-global-control-disable", function(e) {
         e.preventDefault();
 
