@@ -11,7 +11,7 @@ use \Essential_Addons_Elementor\Classes\Plugin_Usage_Tracker;
 trait Core
 {
     /**
-     * Creates an action menu
+     * Extending plugin links
      *
      * @since 3.0.0
      */
@@ -20,15 +20,27 @@ trait Core
         // settings
         $links[] = sprintf('<a href="admin.php?page=eael-settings">' . __('Settings') . '</a>');
 
-        // docs & faq
-        $links[] = sprintf('<a href="https://essential-addons.com/elementor/docs/?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Docs & FAQs') . '</a>');
-
-        // video tutorials
-        $links[] = sprintf('<a href="https://www.youtube.com/channel/UCOjzLEdsnpnFVkm1JKFurPA?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Video Tutorials') . '</a>');
-
         // go pro
         if (!$this->pro_enabled) {
             $links[] = sprintf('<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank" style="color: #39b54a; font-weight: bold;">' . __('Go Pro') . '</a>');
+        }
+
+        return $links;
+    }
+
+    /**
+     * Extending plugin row meta
+     *
+     * @since 3.0.0
+     */
+    public function insert_plugin_row_meta($links, $file)
+    {
+        if (EAEL_PLUGIN_BASENAME == $file) {
+            // docs & faq
+            $links[] = sprintf('<a href="https://essential-addons.com/elementor/docs/?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Docs & FAQs') . '</a>');
+
+            // video tutorials
+            $links[] = sprintf('<a href="https://www.youtube.com/channel/UCOjzLEdsnpnFVkm1JKFurPA?utm_medium=admin&utm_source=wp.org&utm_term=ea" target="_blank">' . __('Video Tutorials') . '</a>');
         }
 
         return $links;
