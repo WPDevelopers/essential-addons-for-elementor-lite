@@ -109,7 +109,7 @@ trait Core
 
     public function set_default_values()
     {
-        return update_option('eael_save_settings', array_fill_keys([
+        $defaults = array_fill_keys([
             'post-grid',
             'post-timeline',
             'fancy-text',
@@ -140,6 +140,10 @@ trait Core
             'caldera-form',
             'wpforms',
             'global-elements-control',
-        ], 1));
+        ], 1);
+        
+        $values = get_option('eael_save_settings');
+
+        return update_option('eael_save_settings', wp_parse_args($values, $defaults));
     }
 }
