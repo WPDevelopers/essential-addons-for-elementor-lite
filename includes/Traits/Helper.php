@@ -461,8 +461,6 @@ trait Helper
             ]
         );
 
-        $excerpt_feature = apply_filters('eael_excerpt_length', '<span class="pro-feature"> Pro Feature. Get <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> </span>');
-
         $this->add_control(
             'eael_excerpt_length',
             [
@@ -472,7 +470,6 @@ trait Helper
                 'condition' => [
                     'eael_show_excerpt' => '1',
                 ],
-                'description' => $excerpt_feature,
             ]
         );
 
@@ -1288,7 +1285,7 @@ trait Helper
     {
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
             $post_args = $this->eael_get_post_settings($_POST);
-            $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args);
+            $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args, $_POST);
 
             if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
                 $post_args['tax_query']['relation'] = 'OR';
