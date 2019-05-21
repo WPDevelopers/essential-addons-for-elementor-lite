@@ -95,6 +95,14 @@
     border-radius: 4px 4px 0 0;
 }
 
+.eael-settings-tabs ul li a img {
+    opacity: .6;
+}
+
+.eael-settings-tabs ul li a.active img {
+    opacity: 1;
+}
+
 .eael-settings-tabs ul li a:focus {
     outline: none;
     box-shadow: none;
@@ -760,7 +768,7 @@ label.eael-get-pro + .eael-el-title {
     /* border: 0px solid; */
 }
 
-.elements-controls-wrap.elements-global-control-wrap h4 {
+.elements-global-control-wrap h4 {
     font-size: 25px;
     font-weight: bold;
     font-style: normal;
@@ -772,4 +780,32 @@ label.eael-get-pro + .eael-el-title {
 .elements-controls-wrap.elements-global-control-wrap p {
     font-size: 14px;
     color: #707070;
+}
+
+button.eael-btn.eael-global-control-enable {
+    background: #0099cc;
+}
+
+button.eael-btn.eael-global-control-disable {
+    background: #dc4444;
+}
+
+.eael-btn-group button {
+    border: 0px solid;
+    color: #fff;
+    padding: 13px 25px;
+    border-radius: 3px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin: 0 3px;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+button.eael-btn.eael-global-control-enable:hover {
+    background: #46c1ea;
+}
+
+button.eael-btn.eael-global-control-disable:hover {
+    background: #d01111;
 }
