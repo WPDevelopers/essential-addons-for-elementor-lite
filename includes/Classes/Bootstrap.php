@@ -28,7 +28,7 @@ class Bootstrap
 
     // transient elements container
     public $transient_elements;
-    
+
     // transient elements container
     public $transient_extensions;
 
@@ -409,7 +409,6 @@ class Bootstrap
         $this->register_hooks();
     }
 
-
     protected function register_hooks()
     {
         // Generator
@@ -442,6 +441,7 @@ class Bootstrap
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));
+            add_filter('plugin_row_meta', array($this, 'insert_plugin_row_meta'), 10, 2);
             add_action('admin_init', array($this, 'redirect_on_activation'));
 
             if (!did_action('elementor/loaded')) {
