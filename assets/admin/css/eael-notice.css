@@ -8,6 +8,7 @@
 .notice {
     display: flex;
     align-items: center;
+    position: relative;
 }
 /* review notice */
 .wpdeveloper-review-notice {
