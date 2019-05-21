@@ -1285,7 +1285,7 @@ trait Helper
     {
         if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
             $post_args = $this->eael_get_post_settings($_POST);
-            $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args);
+            $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args, $_POST);
 
             if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
                 $post_args['tax_query']['relation'] = 'OR';
