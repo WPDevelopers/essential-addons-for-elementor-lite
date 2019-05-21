@@ -1,17 +1,6 @@
 <?php
 
 $elements = [
-    'global-controls'   => [
-        'title'    => __( 'Global Control', 'essential-addons-elementor' ),
-        'desc'      => __( 'Use the Toggle to deactivate or activate all the Essential Addons Elements at once.', 'essential-addons-elementor' ),
-        'elements' => [
-            [
-                'key'   => 'global-elements-control',
-                'class' => 'checkbox-toggle-all',
-                'title' => null
-            ],
-        ]
-    ],
     'content-elements'  => [
         'title' => __( 'Content Elements', 'essential-addons-elementor' ),
         'elements'  => [
@@ -321,51 +310,48 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 <div id="elements" class="eael-settings-tab eael-elements-list">
     <div class="row">
         <div class="col-full">
-        <?php
-            $i = 0;
-            foreach($elements as $element) :
-                $wrap_class = isset($element['elements'][$i]['key']) && $element['elements'][$i]['key'] == 'global-elements-control' ? ' elements-global-control-wrap' : '';
-                $i++;
-        ?>
-        <?php if(isset($element['title'])) : ?>
-            <div class="elements-controls-wrap<?php echo $wrap_class; ?>">
+            <div class="elements-global-control-wrap">
+                <h4><?php _e('Global Control') ?></h4>
+                <p><?php _e('Use the Toggle to deactivate or activate all the Essential Addons Elements at once.') ?></p>
+
+                <div class="eael-btn-group">
+                    <button type="button" class="eael-btn eael-global-control-enable"><?php _e('Enable All') ?></button>
+                    <button type="button" class="eael-btn eael-global-control-disable"><?php _e('Disable All') ?></button>
+                </div>
+            </div>
+            <?php foreach($elements as $element) : ?>
                 <?php echo !empty($element['title']) ? '<h4>'.$element['title'].'</h4>' : ''; ?>
-                <?php echo !empty($element['desc']) ? '<p>'.$element['desc'].'</p>' : ''; ?>
-            </div>
-        <?php endif; ?>
-            <div class="eael-checkbox-container<?php echo $wrap_class; ?>">
-                <?php
-                    foreach($element['elements'] as $item) {
-                        $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
-                        $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
-                        $class = isset($item['class']) ? ' '.$item['class'] : '';
-                    ?>
-                    <div class="eael-checkbox<?php echo $class; ?>">
-                        <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
-                        <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
-                        <p class="eael-el-title">
-                            <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
-                            <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
-                            <?php
-                                if( $item['key'] === 'mailchimp' && $this->pro_enabled ) {
-                                    echo '
-                                    <span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="mailchimp-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
-                                    <input type="hidden" name="mailchimp-api" id="mailchimp-api-hidden" class="mailchimp-api" placeholder="Set API Key" value="'.get_option('eael_save_mailchimp_api').'">
-                                    ';
-                                }elseif( $item['key'] === 'adv-google-map' && $this->pro_enabled ) {
-                                    echo '<span style="font-size: 12px; font-style:italic;"><a href="#" id="eael-popup-api-modal" data-settings="google-map-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
-                                    <input type="hidden" name="google-map-api" id="google-map-api-hidden" class="google-map-api" placeholder="Set API Key" value="'.get_option('eael_save_google_map_api').'">
-                                    ';
-                                }
-                            ?>
-                        </p>
-                    </div>
-                <?php } ?>
-            </div>
-            <?php
-                // echo ob_get_clean();
-                endforeach;
-            ?>
+
+                <div class="eael-checkbox-container">
+                    <?php
+                        foreach($element['elements'] as $item) {
+                            $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
+                            $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
+                            $class = isset($item['class']) ? ' '.$item['class'] : '';
+                        ?>
+                        <div class="eael-checkbox<?php echo $class; ?>">
+                            <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
+                            <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
+                            <p class="eael-el-title">
+                                <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
+                                <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
+                                <?php
+                                    if( $item['key'] === 'mailchimp' && $this->pro_enabled ) {
+                                        echo '
+                                        <span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="mailchimp-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                        <input type="hidden" name="mailchimp-api" id="mailchimp-api-hidden" class="mailchimp-api" placeholder="Set API Key" value="'.get_option('eael_save_mailchimp_api').'">
+                                        ';
+                                    }elseif( $item['key'] === 'adv-google-map' && $this->pro_enabled ) {
+                                        echo '<span style="font-size: 12px; font-style:italic;"><a href="#" id="eael-popup-api-modal" data-settings="google-map-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                        <input type="hidden" name="google-map-api" id="google-map-api-hidden" class="google-map-api" placeholder="Set API Key" value="'.get_option('eael_save_google_map_api').'">
+                                        ';
+                                    }
+                                ?>
+                            </p>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endforeach; ?>
 
             <div class="eael-save-btn-wrap">
                 <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>
