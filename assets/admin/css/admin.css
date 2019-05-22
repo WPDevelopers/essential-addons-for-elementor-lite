@@ -58,7 +58,7 @@
     text-align: right;
 }
 .eael-settings-tabs {
-    padding-top: 60px;
+    padding-top: 10px;
 }
 
 .eael-settings-tab h4 {
@@ -512,6 +512,11 @@ textarea.eael-form-control {
     padding: 12px 22px 14px;
     text-decoration: none;
     line-height: 1;
+    transition: all .3s;
+}
+
+.ea-button:hover{
+    opacity: 0.85;
 }
 
 /* Admin Blocks */
