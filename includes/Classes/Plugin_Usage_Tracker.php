@@ -693,7 +693,7 @@ class Plugin_Usage_Tracker
                 $notice_text = __('Thank you for installing our plugin. We would like to track its usage on your site. We don\'t record any sensitive data, only information regarding the WordPress environment and plugin settings, which we will use to help us make improvements to the plugin. Tracking is completely optional.', 'plugin-usage-tracker');
             } else {
                 // If we have option 1 for marketing, we include reference to sending product information here
-                $notice_text = __('Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>25% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker');
+                $notice_text = __('Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>10% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker');
             }
             // And we allow you to filter the text anyway
             $notice_text = apply_filters('wpins_notice_text_' . esc_attr($this->plugin_name), $notice_text);?>
