@@ -18,14 +18,14 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     border-radius: 5px;
     -webkit-box-shadow: 0px 8px 21px 0px rgba(36, 39, 50, 0.08);
-            box-shadow: 0px 8px 21px 0px rgba(36, 39, 50, 0.08);
+    box-shadow: 0px 8px 21px 0px rgba(36, 39, 50, 0.08);
 }
 
 .eael-settings-wrap .eael-header-left {
@@ -96,7 +96,7 @@
 }
 
 .eael-settings-tabs ul li a img {
-    opacity: .6;
+    opacity: 0.6;
 }
 
 .eael-settings-tabs ul li a.active img {
@@ -415,12 +415,12 @@ textarea.eael-form-control {
 }
 
 .go-premium .eael-btn.eael-license-btn {
-    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
+    background: linear-gradient(-30deg, #4d18ff, #9a7cff);
     margin-top: 30px;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 .go-premium .eael-btn.eael-license-btn:hover {
-    opacity: .85;
+    opacity: 0.85;
 }
 
 .go-premium img {
@@ -477,9 +477,21 @@ textarea.eael-form-control {
 .eael-header-bar .eael-btn,
 .eael-save-btn-wrap .eael-btn {
     border-radius: 3px;
-    background-image: -moz-linear-gradient( -169deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
-    background-image: -webkit-linear-gradient( -169deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
-    background-image: -ms-linear-gradient( -169deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
+    background-image: -moz-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -webkit-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
     width: 160px;
     height: 50px;
     transition: all 300ms ease-in-out;
@@ -502,20 +514,28 @@ textarea.eael-form-control {
 .eael-admin-block-content .ea-button {
     font-size: 13px;
     border-radius: 3px;
-    background-image: -webkit-linear-gradient( -169deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
-    background-image: -ms-linear-gradient( -169deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
+    background-image: -webkit-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
     -webkit-box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
-            box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
+    box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
     box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
     color: #fff;
     display: inline-block;
     padding: 12px 22px 14px;
     text-decoration: none;
     line-height: 1;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
-.ea-button:hover{
+.ea-button:hover {
     opacity: 0.85;
 }
 
@@ -658,7 +678,6 @@ textarea.eael-form-control {
     transition: all 0.3s;
 }
 
-
 /* Facebook Settings CSS */
 #social-networks input {
     padding: 10px;
@@ -729,9 +748,21 @@ label.eael-get-pro + .eael-el-title {
     top: -14px;
     left: -45px;
     width: 80px;
-    background-image: -moz-linear-gradient( -122deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
-    background-image: -webkit-linear-gradient( -122deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
-    background-image: -ms-linear-gradient( -122deg, rgb(146,113,255) 0%, rgb(87,37,255) 100%);
+    background-image: -moz-linear-gradient(
+        -122deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -webkit-linear-gradient(
+        -122deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+        -122deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
     box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
     color: #fff;
 }
@@ -747,30 +778,38 @@ label.eael-get-pro + .eael-el-title {
     text-align: center;
 }
 
-.eael-checkbox-container.elements-global-control-wrap .eael-checkbox.checkbox-toggle-all {
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox.checkbox-toggle-all {
     display: inline-block;
     margin: 0 auto;
 }
 
-.eael-checkbox-container.elements-global-control-wrap .eael-checkbox label:after {
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox
+    label:after {
     width: 1.8em;
     height: 1.8em;
 }
 
-.eael-checkbox-container.elements-global-control-wrap .eael-checkbox input[type="checkbox"]:checked + label::after {
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox
+    input[type="checkbox"]:checked
+    + label::after {
     left: 2.2em;
 }
 
 .eael-checkbox-container.elements-global-control-wrap .eael-checkbox label,
-.eael-checkbox-container.elements-global-control-wrap .eael-checkbox label:before {
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox
+    label:before {
     width: 100px;
     height: 2em;
 }
 
-.eael-checkbox-container.elements-global-control-wrap .eael-checkbox.checkbox-toggle-all {
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox.checkbox-toggle-all {
     flex-basis: 150px;
     padding: 10px 20px 5px;
-    /* border: 0px solid; */
 }
 
 .elements-global-control-wrap h4 {

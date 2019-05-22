@@ -26,14 +26,17 @@
     });
 
     // Save Button reacting on any changes
-    var headerSaveBtn = $(".eael-header-bar .eael-btn");
-    var footerSaveBtn = $(".eael-save-btn-wrap .eael-btn");
-    $('.eael-checkbox input[type="checkbox"]').on("click", function(e) {
-        headerSaveBtn.addClass("save-now");
-        footerSaveBtn.addClass("save-now");
-        headerSaveBtn.removeAttr("disabled").css("cursor", "pointer");
-        footerSaveBtn.removeAttr("disabled").css("cursor", "pointer");
-    });
+    var saveButton = $(".js-eael-settings-save");
+
+    $(".eael-checkbox-container .eael-checkbox input:enabled").on(
+        "click",
+        function(e) {
+            saveButton
+                .addClass("save-now")
+                .removeAttr("disabled")
+                .css("cursor", "pointer");
+        }
+    );
 
     // Saving Data With Ajax Request
     $(".js-eael-settings-save").on("click", function(event) {
@@ -65,8 +68,7 @@
                             showConfirmButton: false,
                             timer: 2000
                         });
-                        headerSaveBtn.removeClass("save-now");
-                        footerSaveBtn.removeClass("save-now");
+                        saveButton.removeClass("save-now");
                     }, 500);
                 },
                 error: function() {
@@ -131,12 +133,16 @@
 
         $(".eael-checkbox-container .eael-checkbox input:enabled").each(
             function(i) {
-                $(this).prop("checked", true).change();
+                $(this)
+                    .prop("checked", true)
+                    .change();
             }
         );
 
-        headerSaveBtn.addClass("save-now");
-        footerSaveBtn.addClass("save-now");
+        saveButton
+            .addClass("save-now")
+            .removeAttr("disabled")
+            .css("cursor", "pointer");
     });
 
     $(document).on("click", ".eael-global-control-disable", function(e) {
@@ -144,11 +150,15 @@
 
         $(".eael-checkbox-container .eael-checkbox input:enabled").each(
             function(i) {
-                $(this).prop("checked", false).change();
+                $(this)
+                    .prop("checked", false)
+                    .change();
             }
         );
-        
-        headerSaveBtn.addClass("save-now");
-        footerSaveBtn.addClass("save-now");
+
+        saveButton
+            .addClass("save-now")
+            .removeAttr("disabled")
+            .css("cursor", "pointer");
     });
 })(jQuery);
