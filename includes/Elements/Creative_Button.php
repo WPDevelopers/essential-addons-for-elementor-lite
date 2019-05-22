@@ -417,9 +417,7 @@ class Creative_Button extends Widget_Base {
 	}
 
 
-	protected function render( ) {
-
-
+	protected function render() {
 		$settings = $this->get_settings();
 		
 		$this->add_render_attribute( 'eael_creative_button', [
@@ -435,24 +433,23 @@ class Creative_Button extends Widget_Base {
 			$this->add_render_attribute( 'eael_creative_button', 'rel', 'nofollow' );
 		}
 
+		$this->add_render_attribute( 'eael_creative_button', 'data-text', esc_attr($settings['creative_button_secondary_text'] ));
 	?>
-
-	<div class = "eael-creative-button-wrapper">
-	<a <?php echo $this->get_render_attribute_string( 'eael_creative_button' ); ?>>
+	<div class="eael-creative-button-wrapper">
+		<a <?php echo $this->get_render_attribute_string( 'eael_creative_button' ); ?>>
 			<span>
-				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'left' ): ?>
-					<i class = "<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden = "true"></i>
+				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
+					<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
 				<?php endif; ?>
 
 				<?php echo  $settings['creative_button_text'];?>
 
-				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'right' ): ?>
-					<i class = "<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden = "true"></i>
+				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
+					<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
 				<?php endif; ?>
 			</span>
 		</a>
 	</div>
-
 	<?php
 	
 	}

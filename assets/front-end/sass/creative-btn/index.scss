@@ -1,45 +1,49 @@
-/*-----------------------------*/
-/* 04. Creative Button styles
-/*-----------------------------*/
+
+/*--------------------------------*/
+/* 08. Creative Button styles
+/*--------------------------------*/
 
 .eael-creative-button-align-center {
 	text-align: center;
 }
-
 .eael-creative-button-wrapper {
-	display: flex;
+  display: flex;
 }
 
 .eael-creative-button {
-	flex: 0 0 auto;
-	min-width: 150px;
-	text-align: center;
-	vertical-align: middle;
-	position: relative;
-	z-index: 1;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	-moz-osx-font-smoothing: grayscale;
+  flex: 0 0 auto;
+  min-width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+ 	border-radius: 2px;
+	padding: 20px 30px;
+	font-size: 16px;
+	line-height: 1;
+  -webkit-backface-visibility: hidden;
+  	backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.eael-creative-button-align-center .eael-creative-button {
+	float: none;
+	display: inline-block;
 }
 
 .eael-creative-button:focus {
 	outline: none;
 }
 
-.eael-creative-button>span {
+.eael-creative-button > span {
 	vertical-align: middle;
 }
 
-.eael-creative-button {
-	border-radius: 2px;
-	padding: 20px 30px;
-	font-size: 16px;
-	line-height: 1;
-}
-
+/*--------------------------------------------*/
+/* 09. Individual eael-creative-button styles
+/*--------------------------------------------*/
 
 /*--- Winona ---*/
-
 .eael-creative-button--winona {
 	overflow: hidden;
 	padding: 0!important;
@@ -61,12 +65,12 @@
 	transform: translate3d(0, 25%, 0);
 }
 
-.eael-creative-button--winona>span {
+.eael-creative-button--winona > span {
 	display: block;
 }
 
 .eael-creative-button--winona::after,
-.eael-creative-button--winona>span {
+.eael-creative-button--winona > span {
 	padding: 1em 2em;
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
 	transition: transform 0.3s, opacity 0.3s;
@@ -80,15 +84,13 @@
 	transform: translate3d(0, 0, 0);
 }
 
-.eael-creative-button--winona:hover>span {
+.eael-creative-button--winona:hover > span {
 	opacity: 0;
 	-webkit-transform: translate3d(0, -25%, 0);
 	transform: translate3d(0, -25%, 0);
 }
 
-
 /*--- Ujarak ---*/
-
 .eael-creative-button--ujarak {
 	-webkit-transition: border-color 0.4s, color 0.4s;
 	transition: border-color 0.4s, color 0.4s;
@@ -123,9 +125,7 @@
 	transform: translate3d(0, 0, 0);
 }
 
-
 /*--- Wayra ---*/
-
 .eael-creative-button--wayra {
 	overflow: hidden;
 	-webkit-transition: border-color 0.3s, color 0.3s;
@@ -157,7 +157,6 @@
 	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-
 
 /*--- Tamaya ---*/
 .eael-creative-button--tamaya {
@@ -192,7 +191,7 @@
 	bottom: -1px;
 }
 
-.eael-creative-button--tamaya>span {
+.eael-creative-button--tamaya > span {
 	display: block;
 	-webkit-transform: scale3d(0.2, 0.2, 1);
 	transform: scale3d(0.2, 0.2, 1);
@@ -213,15 +212,13 @@
 	transform: translate3d(0, 100%, 0);
 }
 
-.eael-creative-button--tamaya:hover>span {
+.eael-creative-button--tamaya:hover > span {
 	opacity: 1;
 	-webkit-transform: scale3d(1, 1, 1);
 	transform: scale3d(1, 1, 1);
 }
 
-
 /*--- Rayen ---*/
-
 .eael-creative-button--rayen {
 	overflow: hidden;
 	padding: 0!important;
@@ -238,12 +235,12 @@
 	transform: translate3d(-100%, 0, 0);
 }
 
-.eael-creative-button--rayen>span {
+.eael-creative-button--rayen > span {
 	display: block;
 }
 
 .eael-creative-button--rayen::before,
-.eael-creative-button--rayen>span {
+.eael-creative-button--rayen > span {
 	padding: 1em 2em;
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
@@ -256,7 +253,8 @@
 	transform: translate3d(0, 0, 0);
 }
 
-.eael-creative-button--rayen:hover>span {
+.eael-creative-button--rayen:hover > span {
 	-webkit-transform: translate3d(0, 100%, 0);
 	transform: translate3d(0, 100%, 0);
 }
+
