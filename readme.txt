@@ -103,7 +103,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
 29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
 
-Extensions: 
+Extensions (Pro): 
 
 1. [Parallax Scrolling](https://essential-addons.com/elementor/parallax-scrolling/) - Add creative parallax scrolling effects to your section, your visitors will love it.
 2. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
@@ -166,7 +166,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 3.0.0 - 16/05/2019 =
+= 3.0.0 - 22/05/2019 =
 - Refractored code for better performance
 - Minimized dependencies to keep the plugin lighter
 - Lots of bugfix and improvements
