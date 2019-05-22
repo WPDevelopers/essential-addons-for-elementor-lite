@@ -312,7 +312,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
         <div class="col-full">
             <div class="elements-global-control-wrap">
                 <h4><?php _e('Global Control') ?></h4>
-                <p><?php _e('Use the Toggle to deactivate or activate all the Essential Addons Elements at once.') ?></p>
+                <p><?php _e('Use the Buttons to Activate or Deactivate all the Elements of Essential Addons at once.') ?></p>
 
                 <div class="eael-btn-group">
                     <button type="button" class="eael-btn eael-global-control-enable"><?php _e('Enable All') ?></button>
