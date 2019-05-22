@@ -131,14 +131,12 @@
 
         $(".eael-checkbox-container .eael-checkbox input:enabled").each(
             function(i) {
-                $(this).prop("checked", true);
+                $(this).prop("checked", true).change();
             }
         );
-    });
 
-    $('.eael-btn-group button').on('click', function() {
-        $('.eael-btn-group button').removeClass('active');
-        $(this).addClass('active');
+        headerSaveBtn.addClass("save-now");
+        footerSaveBtn.addClass("save-now");
     });
 
     $(document).on("click", ".eael-global-control-disable", function(e) {
@@ -146,8 +144,11 @@
 
         $(".eael-checkbox-container .eael-checkbox input:enabled").each(
             function(i) {
-                $(this).prop("checked", false);
+                $(this).prop("checked", false).change();
             }
         );
+        
+        headerSaveBtn.addClass("save-now");
+        footerSaveBtn.addClass("save-now");
     });
 })(jQuery);
