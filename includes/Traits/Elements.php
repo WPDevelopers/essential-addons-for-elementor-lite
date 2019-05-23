@@ -48,7 +48,6 @@ trait Elements
             return;
         }
 
-        
         asort($active_elements);
 
         foreach ($active_elements as $active_element) {
