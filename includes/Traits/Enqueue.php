@@ -31,6 +31,11 @@ trait Enqueue
 
         // My Assets
         if ($this->is_preview_mode()) {
+            // generate fallback scripts
+            if (!$this->has_cache_files()) {
+                $this->generate_scripts($this->get_settings());
+            }
+            
             if ($this->has_cache_files()) {
                 $css_file = EAEL_ASSET_URL . '/eael.min.css';
                 $js_file = EAEL_ASSET_URL . '/eael.min.js';
@@ -70,11 +75,6 @@ trait Enqueue
             ]);
 
             wp_localize_script('eael-backend', 'localize', $this->localize_objects);
-            
-            // generate fallback scripts
-            if (!$this->has_cache_files()) {
-                $this->generate_scripts($this->get_settings());
-            }
         } else {
             if (is_singular() || is_archive()) {
                 $queried_object = get_queried_object_id();
