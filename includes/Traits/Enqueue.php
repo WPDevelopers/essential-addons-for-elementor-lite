@@ -75,16 +75,18 @@ trait Enqueue
             if (!$this->has_cache_files()) {
                 $this->generate_scripts($this->get_settings());
             }
-        } else if (is_singular() || is_archive()) {
-            $queried_object = get_queried_object_id();
-            $post_type = (is_singular() ? 'post' : 'term');
-            $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
+        } else {
+            if (is_singular() || is_archive()) {
+                $queried_object = get_queried_object_id();
+                $post_type = (is_singular() ? 'post' : 'term');
+                $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
-            if (empty($elements)) {
-                return;
+                if (empty($elements)) {
+                    return;
+                }
+    
+                $this->enqueue_protocols($post_type, $queried_object);
             }
-
-            $this->enqueue_protocols($post_type, $queried_object);
         }
     }
 
