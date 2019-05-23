@@ -42,11 +42,14 @@ trait Elements
      */
     public function register_elements($widgets_manager)
     {
-        $active_elements = $this->get_settings();
+        $active_elements = (array) $this->get_settings();
 
         if (empty($active_elements)) {
             return;
         }
+
+        
+        asort($active_elements);
 
         foreach ($active_elements as $active_element) {
             if (!isset($this->registered_elements[$active_element])) {
