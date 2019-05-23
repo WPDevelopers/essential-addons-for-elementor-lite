@@ -35,7 +35,8 @@ trait Enqueue
             if (!$this->has_cache_files()) {
                 $this->generate_scripts($this->get_settings());
             }
-            
+
+            // enqueue scripts
             if ($this->has_cache_files()) {
                 $css_file = EAEL_ASSET_URL . '/eael.min.css';
                 $js_file = EAEL_ASSET_URL . '/eael.min.js';
