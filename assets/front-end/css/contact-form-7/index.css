@@ -85,3 +85,7 @@
 .eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
   width: 100%;
 }
+
+.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
+  margin: 0 auto;
+}
