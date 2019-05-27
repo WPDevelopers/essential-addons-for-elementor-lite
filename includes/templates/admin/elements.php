@@ -223,11 +223,6 @@ $elements = [
                 'key'    => 'image-scroller',
                 'title'  => __( 'Image Scroller', 'essential-addons-elementor' ),
                 'is_pro' => true
-            ],
-            [
-                'key'    => 'dismissible-section',
-                'title'  => __( 'Dismissible Section', 'essential-addons-elementor' ),
-                'is_pro' => true
             ]
         ]
     ],

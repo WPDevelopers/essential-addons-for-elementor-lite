@@ -45,6 +45,16 @@ add_action('plugins_loaded', function () {
 });
 
 /**
+ * Plugin migrator
+ *
+ * @since v3.0.0
+ */
+add_action('wp_loaded', function () {
+    $migration = new \Essential_Addons_Elementor\Classes\Migration;
+    $migration->migrator();
+});
+
+/**
  * Activation hook
  *
  * @since v3.0.0

@@ -52,4 +52,16 @@ class Migration
             }
         }
     }
+
+    /**
+     * Plugin migrator
+     *
+     * @since 3.0.0
+     */
+    public function migrator() {
+        // set current version to db
+        if(get_option('eael_version') == false) {
+            update_option('eael_version', EAEL_PLUGIN_VERSION);
+        }
+    }
 }
