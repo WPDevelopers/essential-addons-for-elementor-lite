@@ -293,32 +293,6 @@ class Contact_Form_7 extends Widget_Base {
 		);
 
   		$this->add_responsive_control(
-  			'eael_contact_form_width',
-  			[
-  				'label' => esc_html__( 'Form Width', 'essential-addons-elementor' ),
-  				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 10,
-						'max' => 1500,
-					],
-					'em' => [
-						'min' => 1,
-						'max' => 80,
-					],
-				],
-				'default'   => [
-				        'unit'  => 'px',
-                        'size'  => '500'
-                ],
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'width: {{SIZE}}{{UNIT}};',
-				],
-  			]
-  		);
-
-  		$this->add_responsive_control(
   			'eael_contact_form_max_width',
   			[
   				'label' => esc_html__( 'Form Max Width', 'essential-addons-elementor' ),
@@ -335,7 +309,7 @@ class Contact_Form_7 extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form-7-wrapper' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-contact-form-7-wrapper form' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
   			]
   		);
