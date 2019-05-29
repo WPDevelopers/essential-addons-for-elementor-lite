@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -165,6 +165,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.0.2 - 29/05/2019 =
+- Fixed : Notice style breaking issue
+- Fixed : Pricing Table tooltip issue
+- Enhanced : ALT tag for all images thourghout the elements
+- Few minor bugfix and improvements
 
 = 3.0.1 - 27/05/2019 =
 - Fixed : Form styler alignment issue
