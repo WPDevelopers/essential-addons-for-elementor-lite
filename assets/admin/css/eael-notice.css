@@ -5,7 +5,7 @@
 .notice:after {
     clear: both;
 }
-.notice {
+.notice:not(.hidden) {
     display: flex;
     align-items: center;
     position: relative;
