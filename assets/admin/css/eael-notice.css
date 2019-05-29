@@ -1,3 +1,14 @@
+.notice:after, .notice:before {
+    content: "";
+    display: table;
+}
+.notice:after {
+    clear: both;
+}
+.notice {
+    display: flex;
+    align-items: center;
+}
 /* review notice */
 .wpdeveloper-review-notice {
     padding: 10px;
