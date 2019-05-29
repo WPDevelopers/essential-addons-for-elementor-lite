@@ -107,6 +107,17 @@
   line-height: 1;
 }
 
+.eael-tab-top-icon li {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  text-align: center;
+}
+
 .eael-tab-top-icon li a {
   display: -webkit-box;
   display: -webkit-flex;
@@ -118,8 +129,8 @@
   text-align: center;
 }
 
-.eael-tab-top-icon li a .fa,
-.eael-tab-top-icon li a .eael-tab-title {
+.eael-tab-top-icon li .fa,
+.eael-tab-top-icon li .eael-tab-title {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 100%;
       -ms-flex: 1 1 100%;
