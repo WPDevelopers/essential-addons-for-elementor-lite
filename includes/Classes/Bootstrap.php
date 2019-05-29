@@ -178,6 +178,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Pricing_Table',
                 'dependency' => [
                     'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/tooltipster/tooltipster.bundle.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/price-table/index.min.css',
                     ],
                     'js' => [
