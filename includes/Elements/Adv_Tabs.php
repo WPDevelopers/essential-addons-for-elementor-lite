@@ -764,7 +764,7 @@ class Adv_Tabs extends Widget_Base
             if ($tab['eael_adv_tabs_icon_type'] === 'icon'): ?>
 			      					<i class="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_icon']); ?>"></i>
 			      				<?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image'): ?>
-	      					<img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>">
+	      					<img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
 	      				<?php endif;?>
 	      		<?php endif;?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
 	      	<?php endforeach;?>

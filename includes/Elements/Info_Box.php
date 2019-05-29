@@ -1518,7 +1518,7 @@ class Info_Box extends Widget_Base {
 			<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
 
 				<?php if( 'img' == $settings['eael_infobox_img_or_icon'] ) : ?>
-					<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="Icon Image">
+					<img src="<?php echo esc_url( $infobox_image_url ); ?>" alt="<?php echo esc_attr(get_post_meta($infobox_image['id'], '_wp_attachment_image_alt', true)); ?>">
 				<?php endif; ?>
 
 				<?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : ?>
