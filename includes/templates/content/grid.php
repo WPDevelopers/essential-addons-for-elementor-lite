@@ -1,5 +1,5 @@
 <?php
-$post_hover_style = !empty($post_args['eael_post_grid_hover_style']) ? ' grid-hover-style-' . $post_args['eael_post_grid_hover_style'] : 'none';
+$post_hover_style    = !empty($post_args['eael_post_grid_hover_style']) ? ' grid-hover-style-' . $post_args['eael_post_grid_hover_style'] : 'none';
 $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $post_args['image_size']);
 
 ?>
@@ -21,7 +21,7 @@ $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $pos
 
                     <?php if (!empty($post_carousel_image)){ ?>
                         <div class="eael-entry-thumbnail">
-                            <img src="<?php echo esc_url($post_carousel_image); ?>">
+                            <img src="<?php echo esc_url($post_carousel_image); ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)); ?>">
                         </div>
                     <?php }?>
                 </div>
