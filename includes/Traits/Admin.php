@@ -35,7 +35,7 @@ trait Admin
      */
     public function admin_enqueue_scripts($hook)
     {
-        wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/eael-notice.css', false, EAEL_PLUGIN_VERSION);
+        wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/notice.css', false, EAEL_PLUGIN_VERSION);
 
         if (isset($hook) && $hook == 'toplevel_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);
