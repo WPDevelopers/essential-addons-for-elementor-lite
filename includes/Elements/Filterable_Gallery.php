@@ -1845,6 +1845,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['id'] = $gallery['_id'];
             $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img'];
             $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img']['url'];
+            $gallery_store[$counter]['image_id'] = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
@@ -1906,7 +1907,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap">';
             }
             $html .= '<div class="gallery-item-thumbnail-wrap">
-							<img src="' . $item['image'] . '" alt="' . $item['title'] . '">';
+							<img src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '">';
 
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
                 $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">';

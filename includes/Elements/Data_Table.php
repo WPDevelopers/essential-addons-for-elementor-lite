@@ -1039,7 +1039,7 @@ class Data_Table extends Widget_Base {
 										'src'	=> esc_url( $header_title['eael_data_table_header_col_img']['url'] ),
 										'class'	=> 'eael-data-table-th-img',
 										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
-										'alt'	=> esc_attr( $header_title['eael_data_table_header_col'] )
+										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
 									]);
 							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?></th>
 			        	<?php $i++; endforeach; ?>
