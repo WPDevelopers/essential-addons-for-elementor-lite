@@ -599,6 +599,18 @@ class Team_Member extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_team_members_social_icons_spacing',
+			[
+				'label'      => esc_html__( 'Social Icon Spacing', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-team-content > .eael-team-member-social-profiles li.eael-team-member-social-link' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 
 		$this->start_controls_tabs( 'eael_team_members_social_icons_style_tabs' );
 
