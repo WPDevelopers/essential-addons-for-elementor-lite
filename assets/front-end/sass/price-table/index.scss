@@ -610,3 +610,9 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 	top: -8px;
 	bottom: auto;
 }
+
+@media only screen and (max-width: 480px) {
+    .eael-pricing.style-1 .eael-pricing-item .price-tag {
+        display: block;
+    }
+}
