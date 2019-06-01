@@ -1943,7 +1943,6 @@ class Filterable_Gallery extends Widget_Base
 
                 if ($settings['eael_fg_grid_hover_style'] !== 'eael-none') {
 
-                    if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
 
                         $html .= '<div class="gallery-item-caption-wrap ' . $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] . '">';
 
@@ -1953,11 +1952,13 @@ class Filterable_Gallery extends Widget_Base
 
                         $html .= '<div class="gallery-item-caption-over">';
 
-                        if (!empty($item['title'])) {
-                            $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
-                        }
-                        if (!empty($item['content'])) {
-                            $html .= '<p class="fg-item-content">' . $item['content'] . '</p>';
+                        if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
+                            if (!empty($item['title'])) {
+                                $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
+                            }
+                            if (!empty($item['content'])) {
+                                $html .= '<p class="fg-item-content">' . $item['content'] . '</p>';
+                            }
                         }
 
                         if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
@@ -1965,7 +1966,7 @@ class Filterable_Gallery extends Widget_Base
                         }
                         $html .= '</div>';
                         $html .= '</div>';
-                    }
+                    
                 }
 
             }
