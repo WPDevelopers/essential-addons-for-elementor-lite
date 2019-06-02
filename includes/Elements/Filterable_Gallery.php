@@ -37,16 +37,6 @@ class Filterable_Gallery extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
-    public function get_script_depends()
-    {
-        return [
-            'eael-scripts',
-            'imagesloaded',
-            'jquery-resize',
-            'essential_addons_isotope-js',
-        ];
-    }
-
     protected function _register_controls()
     {
         /**
