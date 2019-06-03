@@ -18,11 +18,6 @@ $extensions = [
                 'key'    => 'eael-tooltip-section',
                 'title'  => __( 'Advanced Tooltip', 'essential-addons-elementor' ),
                 'is_pro' => true
-            ],
-            [
-                'key'    => 'eael-conditional-content',
-                'title'  => __( 'Conditional Content', 'essential-addons-elementor' ),
-                'is_pro' => true
             ]
         ]
     ]
