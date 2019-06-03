@@ -33,13 +33,6 @@ class Adv_Accordion extends Widget_Base
         return 'eicon-accordion';
     }
 
-    public function get_script_depends()
-    {
-        return [
-            'eael-scripts',
-        ];
-    }
-
     public function get_categories()
     {
         return ['essential-addons-elementor'];
