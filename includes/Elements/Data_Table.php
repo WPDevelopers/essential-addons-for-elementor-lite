@@ -30,12 +30,6 @@ class Data_Table extends Widget_Base {
 		return 'eicon-table';
 	}
 
-	public function get_script_depends() {
-        return [
-			'eael-scripts'
-        ];
-    }
-
    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}

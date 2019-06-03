@@ -21,7 +21,7 @@ var filterableGalleryHandler = function($scope, $) {
             ).data("filter")
         });
 
-        // layout gal, while images are loadin
+        // layout gal, while images are loading
         $isotope_gallery.imagesLoaded().progress(function() {
             $isotope_gallery.isotope("layout");
         });

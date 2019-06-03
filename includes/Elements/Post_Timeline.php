@@ -27,12 +27,6 @@ class Post_Timeline extends Widget_Base {
 		return 'eicon-post-list';
 	}
 
-	public function get_script_depends() {
-        return [
-            'eael-scripts'
-        ];
-    }
-
 	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
