@@ -21,10 +21,11 @@ class Migration
         // remove old cache files
         $this->empty_dir(EAEL_ASSET_PATH);
 
-        // Redirect to options page
-        update_option('eael_do_activation_redirect', true);
-
+        // save default values
         $this->set_default_values();
+
+        // Redirect to options page
+        set_transient('eael_do_activation_redirect', true, 60);
     }
 
     /**
@@ -45,10 +46,9 @@ class Migration
     public function plugin_upgrade_hook($upgrader_object, $options)
     {
         if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            foreach ($options['plugins'] as $plugin) {
-                if ($plugin == EAEL_PLUGIN_BASENAME) {
-                    $this->empty_dir(EAEL_ASSET_PATH);
-                }
+            if (isset($options['plugins'][EAEL_PLUGIN_BASENAME])) {
+                // remove old cache files
+                $this->empty_dir(EAEL_ASSET_PATH);
             }
         }
     }
