@@ -53,8 +53,8 @@ trait Core
      */
     public function redirect_on_activation()
     {
-        if (get_option('eael_do_activation_redirect', false)) {
-            delete_option('eael_do_activation_redirect');
+        if (get_transient('eael_do_activation_redirect')) {
+            delete_transient('eael_do_activation_redirect');
 
             if (!isset($_GET['activate-multi'])) {
                 wp_redirect("admin.php?page=eael-settings");
