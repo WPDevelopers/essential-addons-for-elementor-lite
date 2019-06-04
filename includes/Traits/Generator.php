@@ -5,8 +5,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \MatthiasMullie\Minify;
-
 trait Generator
 {
     /**
@@ -19,6 +17,11 @@ trait Generator
         $this->transient_elements[] = $widget->get_name();
     }
 
+    /**
+     * Combine files into one
+     *
+     * @since 3.0.1
+     */
     public function combine_files($paths = array(), $file = 'eael.min.css')
     {
         $output = '';
