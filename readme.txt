@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -165,6 +165,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.0.3 - 04/06/2019 =
+- Fixed : Filterable Gallery button show without title
+- Fixed : Pricing Table mobile price overlaping issue 
+- Fixed : ImageLoaded broken path
+- Fixed : Gravity Form inline spacing issue
+- Enhanced : Team Member social icons spacing control added
+- Few minor bugfix and improvements
 
 = 3.0.2 - 29/05/2019 =
 - Fixed : Notice style breaking issue
