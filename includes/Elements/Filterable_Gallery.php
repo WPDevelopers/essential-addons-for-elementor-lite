@@ -37,16 +37,6 @@ class Filterable_Gallery extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
-    public function get_script_depends()
-    {
-        return [
-            'eael-scripts',
-            'imagesloaded',
-            'jquery-resize',
-            'essential_addons_isotope-js',
-        ];
-    }
-
     protected function _register_controls()
     {
         /**
@@ -1773,6 +1763,10 @@ class Filterable_Gallery extends Widget_Base
     {
         $sorter_class = strtolower($string);
         $sorter_class = str_replace(' ', '-', $sorter_class);
+        $sorter_class = str_replace('&', 'and', $sorter_class);
+        $sorter_class = str_replace('amp;', '', $sorter_class);
+        $sorter_class = str_replace('/', 'slash', $sorter_class);
+        
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);

@@ -29,13 +29,6 @@ class Adv_Tabs extends Widget_Base
         return esc_html__('EA Advanced Tabs', 'essential-addons-elementor');
     }
 
-    public function get_script_depends()
-    {
-        return [
-            'eael-scripts',
-        ];
-    }
-
     public function get_icon()
     {
         return 'eicon-tabs';

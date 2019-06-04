@@ -649,6 +649,25 @@ class GravityForms extends Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'field_spacing_right',
+            [
+                'label'                 => __( 'Spacing Right', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 100,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px', 'em', '%' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-gravity-form .gfield.gf_left_half' => 'padding-right: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
 		$this->add_responsive_control(
 			'field_padding',
 			[
