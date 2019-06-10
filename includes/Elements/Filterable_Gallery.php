@@ -113,7 +113,7 @@ class Filterable_Gallery extends Widget_Base
                     'eael_fg_grid_style' => 'grid',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
                 ],
             ]
         );
@@ -854,7 +854,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -866,7 +866,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -876,7 +876,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_border',
                 'label' => esc_html__('Border', 'essential-addons-elementor'),
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
             ]
         );
 
@@ -894,7 +894,7 @@ class Filterable_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -903,7 +903,7 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_fg_item_shadow',
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
             ]
         );
 
@@ -1892,10 +1892,10 @@ class Filterable_Gallery extends Widget_Base
         foreach ($gallery as $item) {
             if ($item['controls'] != '') {
                 $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . $item['controls'] . '">
-				<div class="gallery-grid-item">';
+				<div class="eael-gallery-grid-item">';
             } else {
                 $html = '<div class="eael-filterable-gallery-item-wrap">
-				<div class="gallery-grid-item">';
+				<div class="eael-gallery-grid-item">';
             }
             if ($settings['eael_fg_caption_style'] === 'card' && $item['video_gallery_switch'] === 'false' && $settings['eael_fg_show_popup'] === 'media') {
                 $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap">';
