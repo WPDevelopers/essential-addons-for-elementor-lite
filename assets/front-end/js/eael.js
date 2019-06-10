@@ -1,3 +1,11 @@
+/*!
+ * Countdown v0.1.0
+ * https://github.com/fengyuanchen/countdown
+ *
+ * Copyright 2014 Fengyuan Chen
+ * Released under the MIT license
+ */
+
 (function (factory) {
     if (typeof define === "function" && define.amd) {
         // AMD. Register as anonymous module.
@@ -14403,12 +14411,6 @@ hooks.prototype             = proto;
 return hooks;
 
 })));
-/**
- * tooltipster http://iamceege.github.io/tooltipster/
- * A rockin' custom tooltip jQuery plugin
- * Developed by Caleb Jacob and Louis Ameline
- * MIT license
- */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -19401,6 +19403,20 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PostGrid = function ($scope, $) {
+    $('.eael-post-grid:not(.eael-post-carousel)').isotope({
+        itemSelector: '.eael-grid-post',
+        percentPosition: true,
+        columnWidth: '.eael-post-grid-column'
+    });
+}
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
 var postTimelineHandler = function($scope, $) {
     var $_this = $scope.find(".eael-post-timeline"),
         $currentTimelineId = "#" + $_this.attr("id"),
