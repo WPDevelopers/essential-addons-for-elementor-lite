@@ -14,7 +14,37 @@ trait Generator
      */
     public function collect_transient_elements($widget)
     {
-        $this->transient_elements[] = $widget->get_name();
+        if($widget->get_name() === 'global') {
+            $global_data = $widget->get_raw_data(false);
+
+            if($global_data['templateID']) {
+                $elements_data = json_decode(get_post_meta($global_data['templateID'], '_elementor_data', true));
+                $this->transient_elements = array_merge($this->transient_elements, $this->collect_recursive_elements($elements_data));
+            }
+        } else {
+            $this->transient_elements[] = $widget->get_name();
+        }
+    }
+
+    /**
+     * Collect recursive elements
+     *
+     * @since 3.0.5
+     */
+    public function collect_recursive_elements($elements) {
+        $collections = [];
+
+        foreach($elements as $element) {
+            if($element->widgetType) {
+                $collections[] = $element->widgetType;
+            }
+
+            if($element->elements) {
+                $this->collect_recursive_elements($element->elements);
+            }
+        }
+
+        return $collections;
     }
 
     /**
