@@ -490,18 +490,7 @@ class Post_Grid extends Widget_Base {
 					hover_animation: '<?php echo $settings['eael_post_grid_hover_animation']; ?>',
 					hover_icon: '<?php echo $settings['eael_post_grid_bg_hover_icon']; ?>'
 				}
-
 				eaelLoadMore( options, settings );
-
-				// Load Masonry Js
-				$(window).load(function(){
-					$('.eael-post-grid:not(.eael-post-carousel)').masonry({
-						itemSelector: '.eael-grid-post',
-						percentPosition: true,
-						columnWidth: '.eael-post-grid-column'
-					});
-				});
-
 			});
 		</script>
 		<?php endif; endif; 
