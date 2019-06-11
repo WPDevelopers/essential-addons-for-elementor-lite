@@ -14,7 +14,37 @@ trait Generator
      */
     public function collect_transient_elements($widget)
     {
-        $this->transient_elements[] = $widget->get_name();
+        if($widget->get_name() === 'global') {
+            $global_data = $widget->get_raw_data(false);
+
+            if($global_data['templateID']) {
+                $elements_data = json_decode(get_post_meta($global_data['templateID'], '_elementor_data', true));
+                $this->transient_elements = array_merge($this->transient_elements, $this->collect_recursive_elements($elements_data));
+            }
+        } else {
+            $this->transient_elements[] = $widget->get_name();
+        }
+    }
+
+    /**
+     * Collect recursive elements
+     *
+     * @since 3.0.5
+     */
+    public function collect_recursive_elements($elements) {
+        $collections = [];
+
+        foreach($elements as $element) {
+            if($element->widgetType) {
+                $collections[] = $element->widgetType;
+            }
+
+            if($element->elements) {
+                $this->collect_recursive_elements($element->elements);
+            }
+        }
+
+        return $collections;
     }
 
     /**
@@ -125,35 +155,33 @@ trait Generator
         }
 
         $replace = [
-            'eicon-woocommerce' => 'product-grid',
-            'countdown' => 'count-down',
-            'creative-button' => 'creative-btn',
-            'team-member' => 'team-members',
-            'testimonial' => 'testimonials',
-            'weform' => 'weforms',
-            'cta-box' => 'call-to-action',
-            'dual-color-header' => 'dual-header',
-            'pricing-table' => 'price-table',
-            'filterable-gallery' => 'filter-gallery',
-            'one-page-nav' => 'one-page-navigation',
-            'interactive-card' => 'interactive-cards',
-            'image-comparison' => 'img-comparison',
-            'dynamic-filterable-gallery' => 'dynamic-filter-gallery',
-            'google-map' => 'adv-google-map',
-            'instafeed' => 'instagram-gallery',
+            'eicon-woocommerce' => 'eael-product-grid',
+            'eael-countdown' => 'eael-count-down',
+            'eael-creative-button' => 'eael-creative-btn',
+            'eael-team-member' => 'eael-team-members',
+            'eael-testimonial' => 'eael-testimonials',
+            'eael-weform' => 'eael-weforms',
+            'eael-cta-box' => 'eael-call-to-action',
+            'eael-dual-color-header' => 'eael-dual-header',
+            'eael-pricing-table' => 'eael-price-table',
+            'eael-filterable-gallery' => 'eael-filter-gallery',
+            'eael-one-page-nav' => 'eael-one-page-navigation',
+            'eael-interactive-card' => 'eael-interactive-cards',
+            'eael-image-comparison' => 'eael-img-comparison',
+            'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
+            'eael-google-map' => 'eael-adv-google-map',
+            'eael-instafeed' => 'eael-instagram-gallery',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
-            $val = str_replace(['eael-'], [''], $val);
+            $val = str_replace(array_keys($replace), array_values($replace), $val);
 
-            return (array_key_exists($val, $replace) ? $replace[$val] : $val);
+            return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
         }, $this->transient_elements);
-
-        $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
         $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
 
-        $elements = array_unique(array_merge($elements, $extensions));
+        $elements = array_filter(array_unique(array_merge($elements, $extensions)));
 
         if (is_singular() || is_archive()) {
             $queried_object = get_queried_object_id();

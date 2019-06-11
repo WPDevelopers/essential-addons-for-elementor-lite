@@ -291,7 +291,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	width: 20%;
 }
 
-.gallery-grid-item {
+.eael-gallery-grid-item {
 	margin-left: calc(20px/2);
 	margin-right: calc(20px/2);
 	margin-bottom: 20px;
@@ -320,7 +320,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	z-index: 10;
 }
 
-.eael-filterable-gallery-item-wrap .gallery-grid-item .gallery-item-thumbnail-wrap>img {
+.eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img {
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
@@ -397,7 +397,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	align-items: center;
 }
 
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer {
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer {
 	opacity: 1;
 	visibility: visible;
 }
@@ -440,13 +440,13 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	transition: 0.6s all ease;
 }
 
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up h5,
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up .gallery-item-buttons,
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up p {
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up h5,
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up .gallery-item-buttons,
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up p {
 	transform: translate(0);
 }
 
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
 	transform: scale(1);
 	visibility: visible;
 	opacity: 1;
@@ -493,7 +493,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	transition: 350ms;
 }
 
-.gallery-grid-item:hover .video-popup-bg {
+.eael-gallery-grid-item:hover .video-popup-bg {
 	visibility: visible;
 	opacity: 1;
 }
