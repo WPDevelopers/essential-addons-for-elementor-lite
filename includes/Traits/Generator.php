@@ -5,6 +5,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use \ReflectionClass;
+
 trait Generator
 {
     /**
@@ -15,11 +17,12 @@ trait Generator
     public function collect_transient_elements($widget)
     {
         if($widget->get_name() === 'global') {
-            $global_data = $widget->get_raw_data(false);
+            $reflection = new ReflectionClass(get_class($widget));
+            $protected = $reflection->getProperty('template_data');
+            $protected->setAccessible(true);
 
-            if($global_data['templateID']) {
-                $elements_data = json_decode(get_post_meta($global_data['templateID'], '_elementor_data', true));
-                $this->transient_elements = array_merge($this->transient_elements, $this->collect_recursive_elements($elements_data));
+            if($global_data = $protected->getValue($widget)) {
+                $this->transient_elements = array_merge($this->transient_elements, $this->collect_recursive_elements($global_data['content']));
             }
         } else {
             $this->transient_elements[] = $widget->get_name();
@@ -34,15 +37,11 @@ trait Generator
     public function collect_recursive_elements($elements) {
         $collections = [];
 
-        foreach($elements as $element) {
-            if($element->widgetType) {
-                $collections[] = $element->widgetType;
+        array_walk_recursive($elements, function($val, $key) use (&$collections) {
+            if($key == 'widgetType') {
+                $collections[] = $val;
             }
-
-            if($element->elements) {
-                $this->collect_recursive_elements($element->elements);
-            }
-        }
+        });
 
         return $collections;
     }
