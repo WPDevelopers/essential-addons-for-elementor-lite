@@ -37,15 +37,11 @@ trait Generator
     public function collect_recursive_elements($elements) {
         $collections = [];
 
-        foreach($elements as $element) {
-            if($element['widgetType']) {
-                $collections[] = $element['widgetType'];
+        array_walk_recursive($elements, function($val, $key) use (&$collections) {
+            if($key == 'widgetType') {
+                $collections[] = $val;
             }
-
-            if($element['elements']) {
-                $this->collect_recursive_elements($element['elements']);
-            }
-        }
+        });
 
         return $collections;
     }
