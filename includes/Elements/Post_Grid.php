@@ -427,12 +427,15 @@ class Post_Grid extends Widget_Base {
 		 * Get posts from database.
 		 */
 		$posts = $this->eael_load_more_ajax($query_args);
+
+		error_log(print_r($query_args, 1));
+		
 		/**
 		 * Set total posts.
 		 */
 		$total_post = $posts['count'];
 		?>
-		<div id="eael-post-grid-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-grid-container <?php echo esc_attr($settings['eael_post_grid_columns'] ); ?>">
+		<div id="eael-post-grid-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-grid-container <?php echo esc_attr($query_args['eael_post_grid_columns'] ); ?>">
 		    <div class="eael-post-grid eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
 			<?php
 		        if( ! empty( $posts['content'] ) ){
@@ -445,18 +448,18 @@ class Post_Grid extends Widget_Base {
 		    <div class="clearfix"></div>
 		</div>
 		<?php 
-			if( 1 == $settings['show_load_more'] ) : 
+			if( 1 == $query_args['show_load_more'] ) : 
 				if( 
-					$settings['posts_per_page'] != '-1'
-					&& $total_post != $settings['posts_per_page'] 
-					&& $total_post > intval( $settings['offset'] ) + intval( ! empty( $settings['posts_per_page'] ) ? $settings['posts_per_page'] : 4 ) 
+					$query_args['posts_per_page'] != '-1'
+					&& $total_post != $query_args['posts_per_page'] 
+					&& $total_post > intval( $query_args['offset'] ) + intval( ! empty( $query_args['posts_per_page'] ) ? $query_args['posts_per_page'] : 4 ) 
 				) : 
 		?>
 		<!-- Load More Button -->
 		<div class="eael-load-more-button-wrap">
 			<button class="eael-load-more-button" id="eael-load-more-btn-<?php echo $this->get_id(); ?>">
 				<div class="eael-btn-loader button__loader"></div>
-				<span><?php echo esc_html__( $settings['show_load_more_text'], 'essential-addons-elementor' ); ?></span>
+				<span><?php echo esc_html__( $query_args['show_load_more_text'], 'essential-addons-elementor' ); ?></span>
 			</button>
 		</div>
 		<!-- Loading Lode More Js -->
@@ -471,24 +474,24 @@ class Post_Grid extends Widget_Base {
 				}
 
 				var settings = {
-					postType: '<?php echo isset($settings['eaeposts_post_type']) ? $settings['eaeposts_post_type'] : ''; ?>',
-					perPage: <?php echo $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4'; ?>,
-					postOrder: '<?php echo $settings['order']; ?>',
-					orderBy: '<?php echo $settings['orderby']; ?>',
-					showImage: <?php echo $settings['eael_show_image']; ?>,
-					imageSize: '<?php echo $settings['image_size']; ?>',
-					showTitle: <?php echo $settings['eael_show_title']; ?>,
-					showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
-					showMeta: <?php echo $settings['eael_show_meta']; ?>,
-					offset: <?php echo intval( $settings['offset'] ); ?>,
-					metaPosition: '<?php echo $settings['meta_position']; ?>',
-					excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
-					btnText: '<?php echo $settings['show_load_more_text']; ?>',
+					postType: '<?php echo isset($query_args['post_type']) ? $query_args['post_type'] : ''; ?>',
+					perPage: <?php echo $query_args['posts_per_page'] != '' ? $query_args['posts_per_page'] : '4'; ?>,
+					postOrder: '<?php echo $query_args['order']; ?>',
+					orderBy: '<?php echo $query_args['orderby']; ?>',
+					showImage: <?php echo $query_args['eael_show_image']; ?>,
+					imageSize: '<?php echo $query_args['image_size']; ?>',
+					showTitle: <?php echo $query_args['eael_show_title']; ?>,
+					showExcerpt: <?php echo $query_args['eael_show_excerpt']; ?>,
+					showMeta: <?php echo $query_args['eael_show_meta']; ?>,
+					offset: <?php echo intval( $query_args['offset'] ); ?>,
+					metaPosition: '<?php echo $query_args['meta_position']; ?>',
+					excerptLength: parseInt( <?php echo $query_args['eael_excerpt_length']; ?>, 10 ),
+					btnText: '<?php echo $query_args['show_load_more_text']; ?>',
 					tax_query: <?php echo json_encode( ! empty( $tax_query ) ? $tax_query : [] ); ?>,
-					exclude_posts: <?php echo json_encode( ! empty( $settings['post__not_in'] ) ? $settings['post__not_in'] : [] ); ?>,
-					post__in: <?php echo json_encode( ! empty( $settings['post__in'] ) ? $settings['post__in'] : [] ); ?>,
-					hover_animation: '<?php echo $settings['eael_post_grid_hover_animation']; ?>',
-					hover_icon: '<?php echo $settings['eael_post_grid_bg_hover_icon']; ?>'
+					exclude_posts: <?php echo json_encode( ! empty( $query_args['post__not_in'] ) ? $query_args['post__not_in'] : [] ); ?>,
+					post__in: <?php echo json_encode( ! empty( $query_args['post__in'] ) ? $query_args['post__in'] : [] ); ?>,
+					hover_animation: '<?php echo $query_args['eael_post_grid_hover_animation']; ?>',
+					hover_icon: '<?php echo $query_args['eael_post_grid_bg_hover_icon']; ?>'
 				}
 				eaelLoadMore( options, settings );
 			});
