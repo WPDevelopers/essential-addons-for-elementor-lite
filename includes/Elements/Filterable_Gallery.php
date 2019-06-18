@@ -95,9 +95,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Layout', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'grid',
+                'default' => 'eael-filter-gallery-grid',
                 'options' => [
-                    'grid' => esc_html__('Grid', 'essential-addons-elementor'),
+                    'eael-filter-gallery-grid' => esc_html__('Grid', 'essential-addons-elementor'),
                     'masonry' => esc_html__('Masonry', 'essential-addons-elementor'),
                 ],
             ]
@@ -110,7 +110,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => '300',
                 'condition' => [
-                    'eael_fg_grid_style' => 'grid',
+                    'eael_fg_grid_style' => 'eael-filter-gallery-grid',
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
