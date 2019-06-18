@@ -2012,7 +2012,7 @@ class Filterable_Gallery extends Widget_Base
         $gallery_settings['widget_id'] = $this->get_id();
 
         $no_more_items_text = esc_html__($settings['nomore_items_text'], 'essential-addons-elementor');
-        $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : '';
+        $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : 'masonry';
 
         $this->add_render_attribute('gallery-items-wrap', [
             'class' => [
