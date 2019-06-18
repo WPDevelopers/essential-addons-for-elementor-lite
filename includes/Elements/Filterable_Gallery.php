@@ -95,9 +95,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Layout', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'eael-filter-gallery-grid',
+                'default' => 'grid',
                 'options' => [
-                    'eael-filter-gallery-grid' => esc_html__('Grid', 'essential-addons-elementor'),
+                    'grid' => esc_html__('Grid', 'essential-addons-elementor'),
                     'masonry' => esc_html__('Masonry', 'essential-addons-elementor'),
                 ],
             ]
@@ -110,7 +110,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => '300',
                 'condition' => [
-                    'eael_fg_grid_style' => 'eael-filter-gallery-grid',
+                    'eael_fg_grid_style' => 'grid',
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
@@ -2012,11 +2012,12 @@ class Filterable_Gallery extends Widget_Base
         $gallery_settings['widget_id'] = $this->get_id();
 
         $no_more_items_text = esc_html__($settings['nomore_items_text'], 'essential-addons-elementor');
+        $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : '';
 
         $this->add_render_attribute('gallery-items-wrap', [
             'class' => [
                 'eael-filter-gallery-container',
-                esc_attr($settings['eael_fg_grid_style']),
+                $grid_class
             ],
             'data-images-per-page' => $settings['images_per_page'],
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
