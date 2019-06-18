@@ -15,6 +15,16 @@ trait Core
      *
      * @since 3.0.0
      */
+    public function i18n()
+    {
+        load_plugin_textdomain('essential-addons-elementor');
+    }
+
+    /**
+     * Extending plugin links
+     *
+     * @since 3.0.0
+     */
     public function insert_plugin_links($links)
     {
         // settings
@@ -141,7 +151,7 @@ trait Core
             'wpforms',
             'global-elements-control',
         ], 1);
-        
+
         $values = get_option('eael_save_settings');
 
         return update_option('eael_save_settings', wp_parse_args($values, $defaults));
