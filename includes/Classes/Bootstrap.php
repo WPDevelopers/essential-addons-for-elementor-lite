@@ -415,6 +415,9 @@ class Bootstrap
 
     protected function register_hooks()
     {
+        // Core
+        add_action('init', [$this, 'i18n']);
+
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
         add_action('wp_footer', array($this, 'generate_frontend_scripts'));
