@@ -39,7 +39,7 @@ var PostGrid = function ($scope, $) {
     }
 
 
-    eaelLoadMore( options, settings, $gallery );
+    eaelLoadMore( options, settings );
 
 
     var $gallery = $('.eael-post-grid:not(.eael-post-carousel)').isotope({
