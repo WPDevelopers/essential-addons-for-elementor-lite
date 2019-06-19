@@ -2019,7 +2019,7 @@ class Filterable_Gallery extends Widget_Base
                 'eael-filter-gallery-container',
                 $grid_class
             ],
-            'data-images-per-page' => $settings['images_per_page'],
+            'data-images-per-page' => $settings['imag es_per_page'],
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
             'data-nomore-item-text' => $no_more_items_text,
         ]);
