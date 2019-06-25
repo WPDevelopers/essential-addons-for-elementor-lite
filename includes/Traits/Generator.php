@@ -173,7 +173,9 @@ trait Generator
         ];
 
         $elements = array_map(function ($val) use ($replace) {
-            $val = str_replace(array_keys($replace), array_values($replace), $val);
+            if(array_key_exists($val, $replace)) {
+                $val = $replace[$val];
+            }
 
             return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
         }, $this->transient_elements);
