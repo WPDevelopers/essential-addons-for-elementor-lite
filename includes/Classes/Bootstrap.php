@@ -16,6 +16,7 @@ class Bootstrap
     use \Essential_Addons_Elementor\Traits\Enqueue;
     use \Essential_Addons_Elementor\Traits\Admin;
     use \Essential_Addons_Elementor\Traits\Elements;
+    use \Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
 
     // instance container
     private static $instance = null;
@@ -417,6 +418,7 @@ class Bootstrap
     {
         // Core
         add_action('init', [$this, 'i18n']);
+        add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
 
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
