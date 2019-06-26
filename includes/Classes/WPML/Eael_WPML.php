@@ -311,7 +311,7 @@ trait Eael_WPML {
             ],
         ];
 
-        return apply_filters('eael/translateable_widgets', $widgets);
+        return $widgets;
     }
 
 }
