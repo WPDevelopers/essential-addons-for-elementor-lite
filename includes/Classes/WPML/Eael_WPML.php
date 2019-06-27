@@ -133,10 +133,32 @@ trait Eael_WPML {
             'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Image_Accordion'
         ];
 
-        $widgets['eael-flip-box'] = [
-            'conditions' => ['widgetType' => 'eael-flip-box'],
-            'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Flip_Box',
-        ];
+        // have to work on this later.
+        // $widgets['eael-flip-box'] = [
+        //     'conditions' => ['widgetType' => 'eael-flip-box'],
+        //     'fields' => [
+        //         [
+        //             'field'       => 'eael_flipbox_front_title',
+        //             'type'        => __('Flip Box: Front Title', 'essential-addons-elementor'),
+        //             'editor_type' => 'LINE',
+        //         ],
+        //         [
+        //             'field'       => 'eael_flipbox_front_text',
+        //             'type'        => __('Flip Box: Front Text', 'essential-addons-elementor'),
+        //             'editor_type' => 'AREA',
+        //         ],
+        //         [
+        //             'field'       => 'eael_flipbox_back_title',
+        //             'type'        => __('Flip Box: Back Title', 'essential-addons-elementor'),
+        //             'editor_type' => 'LINE',
+        //         ],
+        //         [
+        //             'field'       => 'eael_flipbox_back_text',
+        //             'type'        => __('Flip Box: Back Text', 'essential-addons-elementor'),
+        //             'editor_type' => 'AREA',
+        //         ]
+        //     ],
+        // ];
 
         $widgets['eael-info-box'] = [
             'conditions' => ['widgetType' => 'eael-info-box'],
@@ -289,7 +311,7 @@ trait Eael_WPML {
             ],
         ];
 
-        return apply_filters('eael/translateable_widgets', $widgets);
+        return $widgets;
     }
 
 }
