@@ -78,9 +78,9 @@ trait Enqueue
 
             wp_localize_script('eael-backend', 'localize', $this->localize_objects);
         } else {
-            if (is_singular() || is_archive()) {
+            if (is_singular() || is_home() || is_archive()) {
                 $queried_object = get_queried_object_id();
-                $post_type = (is_singular() ? 'post' : 'term');
+                $post_type = (is_singular() || is_home() ? 'post' : 'term');
                 $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
                 if (empty($elements)) {
