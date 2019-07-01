@@ -169,9 +169,9 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 3.1.0 - 01/07/2019 =
 - Added : WPML support for all elements
-- Added : Manual post selection for all post elements
-- Fixed: Elements not working on blog page
-- Fixed: Elements not working properly on popup
+- Fixed : Manual post selection for all post elements
+- Fixed : Elements not working on blog page
+- Fixed : Elements not working properly on popup
 - Few minor bugfix and improvements
 
 = 3.0.5 - 12/06/2019 =
