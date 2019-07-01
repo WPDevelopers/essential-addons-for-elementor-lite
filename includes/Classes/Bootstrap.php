@@ -16,6 +16,7 @@ class Bootstrap
     use \Essential_Addons_Elementor\Traits\Enqueue;
     use \Essential_Addons_Elementor\Traits\Admin;
     use \Essential_Addons_Elementor\Traits\Elements;
+    use \Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
 
     // instance container
     private static $instance = null;
@@ -76,6 +77,7 @@ class Bootstrap
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
                     ],
                     'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/post-grid/index.min.js',
@@ -414,9 +416,13 @@ class Bootstrap
 
     protected function register_hooks()
     {
+        // Core
+        add_action('init', [$this, 'i18n']);
+        add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
+
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('wp_footer', array($this, 'generate_frontend_scripts'));
+        add_action('wp_print_footer_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
