@@ -98,8 +98,7 @@
   width: 220px;
   height: 220px;
   padding: 10px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-progressbar-circle-pie {
@@ -118,8 +117,7 @@
   border-width: 12px;
   border-style: solid;
   border-color: #eeeeee;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-progressbar-circle-half {
@@ -131,8 +129,7 @@
   border-width: 12px;
   border-style: solid;
   border-color: #000000;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   -webkit-clip-path: inset(0 50% 0 0);
           clip-path: inset(0 50% 0 0);
 }
@@ -216,11 +213,9 @@
   left: -35px;
   width: calc(100% + 70px);
   height: 100%;
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  -webkit-background-size: 35px 35px;
-          background-size: 35px 35px;
+  background-size: 35px 35px;
 }
 
 .eael-progressbar-line-animate .eael-progressbar-line-fill:after {

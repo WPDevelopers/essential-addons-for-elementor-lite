@@ -225,8 +225,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   height: 50px;
   text-align: center;
   line-height: 50px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   margin: 0 5px;
   font-size: 20px;
   cursor: pointer;
@@ -276,8 +275,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
-  -webkit-background-size: cover;
-          background-size: cover;
+  background-size: cover;
   height: 220px;
   z-index: 0;
   overflow: hidden;
@@ -525,8 +523,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .gallery-item-caption-wrap .gallery-item-buttons > a {
   padding: 5px 15px;
   display: inline-block;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   outline: none;
   text-decoration: none;
 }

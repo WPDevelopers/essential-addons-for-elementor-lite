@@ -18713,7 +18713,8 @@ return $;
             offset: parseInt(settings.offset, 10),
             grid_style: settings.grid_style || "",
             hover_animation: settings.hover_animation,
-            hover_icon: settings.hover_icon
+            hover_icon: settings.hover_icon,
+            show_read_more_button: settings.show_read_more_button
         };
 
         var offset = settingsValue.offset + settingsValue.perPage;
@@ -18756,7 +18757,8 @@ return $;
                     grid_style: settingsValue.grid_style,
                     eael_post_grid_hover_animation:
                         settingsValue.hover_animation,
-                    eael_post_grid_bg_hover_icon: settingsValue.hover_icon
+                    eael_post_grid_bg_hover_icon: settingsValue.hover_icon,
+                    eael_show_read_more_button: settingsValue.show_read_more_button
                 },
                 beforeSend: function() {
                     // _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
@@ -19440,9 +19442,9 @@ var PostGrid = function ($scope, $) {
         post__in       : post__in,
         grid_style     : $settings.grid_style,
         hover_animation: $settings.hover_animation,
-        hover_icon     : $settings.hover_icon
+        hover_icon: $settings.hover_icon,
+        show_read_more_button: $settings.eael_show_read_more_button
     }
-
 
     eaelLoadMore( options, settings );
 
