@@ -46,6 +46,9 @@ $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $pos
                         <div class="eael-entry-content">
                             <div class="eael-grid-post-excerpt">
                                 <p><?php echo $this->eael_get_excerpt_by_id(get_the_ID(), $post_args['eael_excerpt_length']); ?></p>
+                                <?php if($post_args['eael_show_read_more_button']) : ?>
+                                <a href="<?php the_permalink(); ?>" class="eael-post-elements-readmore-btn"><?php echo _e('Read More ...', 'essential-addons-elementor'); ?></a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php }?>
