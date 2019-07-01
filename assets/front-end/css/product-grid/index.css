@@ -105,8 +105,7 @@
   overflow: hidden;
   text-align: center;
   padding: 0;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   background-color: #fff;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -153,8 +152,7 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #ff2a13;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -211,8 +209,7 @@
   background-color: #333;
   padding: 0;
   margin: 15px;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button:focus, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button:focus,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button:focus,
@@ -265,8 +262,7 @@
   overflow: hidden;
   text-align: center;
   padding: 0 0 15px 0;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   background-color: #fff;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -321,8 +317,7 @@
   width: 38px;
   height: 38px;
   border-style: none;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   vertical-align: middle;
   padding: 0;
   margin: 0 5px;
@@ -421,8 +416,7 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #ff2a13;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
