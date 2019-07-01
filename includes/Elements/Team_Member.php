@@ -249,30 +249,37 @@ class Team_Member extends Widget_Base {
 			]
 		);
 
+		$team_member_style_presets_options = apply_filters('eael_team_member_style_presets_options', [
+			'eael-team-members-simple'        => esc_html__( 'Simple Style', 		'essential-addons-elementor' ),
+			'eael-team-members-overlay'       => esc_html__( 'Overlay Style', 	'essential-addons-elementor' ),
+			'eael-team-members-centered'      => esc_html__( 'Centered Style', 	'essential-addons-elementor' ),
+			'eael-team-members-circle'        => esc_html__( 'Circle Style', 	'essential-addons-elementor' ),
+			'eael-team-members-social-bottom' => esc_html__( 'Social on Bottom', 	'essential-addons-elementor' ),
+		]);
 
 		$this->add_control(
 			'eael_team_members_preset',
 			[
-				'label' => esc_html__( 'Style Preset', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SELECT,
+				'label'   => esc_html__( 'Style Preset', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'eael-team-members-simple',
-				'options' => [
-					'eael-team-members-simple' 		=> esc_html__( 'Simple Style', 		'essential-addons-elementor' ),
-					'eael-team-members-overlay' 	=> esc_html__( 'Overlay Style', 	'essential-addons-elementor' ),
-					'eael-team-members-pro-style-3' 	=> esc_html__( 'Centered Style', 	'essential-addons-elementor' ),
-					'eael-team-members-pro-style-4' 		=> esc_html__( 'Circle Style', 	'essential-addons-elementor' ),
-					'eael-team-members-pro-style-5' => esc_html__( 'Social on Bottom', 	'essential-addons-elementor' ),
-				],
+				'options' => $team_member_style_presets_options
 			]
 		);
+
+		$team_member_style_presets_condition = apply_filters('eael_team_member_style_presets_condition', [
+			'eael-team-members-centered',
+			'eael-team-members-circle',
+			'eael-team-members-social-bottom'
+		]);
 
 		$this->add_control(
 			'eael_team_members_preset_pro_alert',
 			[
-				'label' => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => [
-					'eael_team_members_preset' => ['eael-team-members-pro-style-3', 'eael-team-members-pro-style-4', 'eael-team-members-pro-style-5'],
+					'eael_team_members_preset' => $team_member_style_presets_condition
 				]
 			]
 		);
@@ -399,8 +406,13 @@ class Team_Member extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item figure img' => 'width:{{SIZE}}{{UNIT}};',
 				],
+				'condition' => [
+					'eael_team_members_preset!' => 'eael-team-members-circle'
+				]
 			]
 		);
+
+		do_action('eael/team_member_circle_controls', $this);
 
 
 		$this->add_responsive_control(
@@ -748,20 +760,23 @@ class Team_Member extends Widget_Base {
 				<h3 class="eael-team-member-name"><?php echo $settings['eael_team_member_name']; ?></h3>
 				<h4 class="eael-team-member-position"><?php echo $settings['eael_team_member_job_title']; ?></h4>
 
-				<?php if ( ! empty( $settings['eael_team_member_enable_social_profiles'] ) ): ?>
-				<ul class="eael-team-member-social-profiles">
-					<?php foreach ( $settings['eael_team_member_social_profile_links'] as $item ) : ?>
-						<?php if ( ! empty( $item['social'] ) ) : ?>
-							<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
-							<li class="eael-team-member-social-link">
-								<a href="<?php echo esc_attr( $item['link']['url'] ); ?>"<?php echo $target; ?>><i class="<?php echo esc_attr($item['social'] ); ?>"></i></a>
-							</li>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</ul>
+				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
+					<?php do_action('eael/team_member_social_botton_markup', $settings); ?>
+				<?php else: ?>
+					<?php if ( ! empty( $settings['eael_team_member_enable_social_profiles'] ) ): ?>
+					<ul class="eael-team-member-social-profiles">
+						<?php foreach ( $settings['eael_team_member_social_profile_links'] as $item ) : ?>
+							<?php if ( ! empty( $item['social'] ) ) : ?>
+								<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
+								<li class="eael-team-member-social-link">
+									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>"<?php echo $target; ?>><i class="<?php echo esc_attr($item['social'] ); ?>"></i></a>
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+					<p class="eael-team-text"><?php echo $settings['eael_team_member_description']; ?></p>
 				<?php endif; ?>
-
-				<p class="eael-team-text"><?php echo $settings['eael_team_member_description']; ?></p>
 			</div>
 		</div>
 	</div>
