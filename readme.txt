@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.0.5
+Stable tag: 3.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -108,6 +108,7 @@ Extensions (Pro):
 1. [Parallax Scrolling](https://essential-addons.com/elementor/parallax-scrolling/) - Add creative parallax scrolling effects to your section, your visitors will love it.
 2. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
 3. [Advanced Tooltip](https://essential-addons.com/elementor/advanced-tooltip/) - Make any widget more informative with Advanced Tooltip.
+4. [Content Protection](https://essential-addons.com/elementor/content-protection/) - Lock your content with password and allow only selected people to see it.
 
 
 More coming soon (weekly update) ...
@@ -165,6 +166,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.1.0 - 01/07/2019 =
+- Added : WPML support for all elements
+- Fixed : Manual post selection for all post elements
+- Fixed : Elements not working on blog page
+- Fixed : Elements not working properly on popup
+- Few minor bugfix and improvements
 
 = 3.0.5 - 12/06/2019 =
 - Fixed: Global widget fatal error
