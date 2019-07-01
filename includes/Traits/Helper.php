@@ -473,6 +473,31 @@ trait Helper
             ]
         );
 
+        if(
+        'eael-post-grid' === $this->get_name()
+        || 'eael-post-block' === $this->get_name()
+        || 'eael-post-carousel' === $this->get_name()
+        ) {
+            $this->add_control(
+                'eael_show_read_more_button',
+                [
+                    'label' => __('Show Read More Button', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        '1' => [
+                            'title' => __('Yes', 'essential-addons-elementor'),
+                            'icon' => 'fa fa-check',
+                        ],
+                        '0' => [
+                            'title' => __('No', 'essential-addons-elementor'),
+                            'icon' => 'fa fa-ban',
+                        ],
+                    ],
+                    'default' => '1',
+                ]
+            );
+        }
+
         if ('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
 
             $this->add_control(
@@ -513,6 +538,62 @@ trait Helper
         }
 
         $this->end_controls_section();
+    }
+
+    protected function eael_read_more_button_style()
+    {
+        if(
+            'eael-post-grid' === $this->get_name()
+            || 'eael-post-block' === $this->get_name()
+            || 'eael-post-carousel' === $this->get_name()
+            || 'eael-post-list' === $this->get_name()
+            || 'eael-post-timeline' === $this->get_name()
+        ) {
+            $this->start_controls_section(
+                'eael_section_read_more_btn',
+                [
+                    'label' => __('Read More Button Style', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'eael_show_read_more_button' => '1',
+                    ],
+                ]
+            );
+    
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_post_read_more_btn_typography',
+                    'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
+                ]
+            );
+
+            $this->add_control(
+                'eael_post_read_more_btn_color',
+                [
+                    'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#61ce70',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'color: {{VALUE}};',
+                    ],
+                ]
+            );
+    
+            $this->add_responsive_control(
+                'eael_post_read_more_btn_padding',
+                [
+                    'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+    
+            $this->end_controls_section();
+        }
     }
 
     /**
