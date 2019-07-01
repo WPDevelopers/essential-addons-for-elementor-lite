@@ -70,7 +70,7 @@ class Image_Accordion extends WPML_Elementor_Module_With_Items {
 				return 'LINE';
 
 			case 'eael_accordion_content':
-				return 'AREA';
+				return 'VISUAL';
 
 			default:
 				return '';
