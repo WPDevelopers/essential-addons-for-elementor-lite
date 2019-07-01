@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.0.3
+Stable tag: 3.0.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -165,6 +165,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.0.5 - 12/06/2019 =
+- Fixed: Global widget fatal error
+- Few minor bugfix and improvements
+
+= 3.0.4 - 11/06/2019 =
+- Fixed: Global widget styles
+- Fixed: Filter Gallery grid class conflict
+- Fixed: Post Grid masonry
+- Few minor bugfix and improvements
 
 = 3.0.3 - 04/06/2019 =
 - Fixed : Filterable Gallery button show without title
