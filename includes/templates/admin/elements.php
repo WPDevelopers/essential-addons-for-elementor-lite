@@ -152,10 +152,6 @@ $elements = [
                 'title' => __( 'Filterable Gallery', 'essential-addons-elementor' )
             ],
             [
-                'key'   => 'image-accordion',
-                'title' => __( 'Image Accordion', 'essential-addons-elementor' )
-            ],
-            [
                 'key'   => 'progress-bar',
                 'title' => __( 'Progress Bar', 'essential-addons-elementor' )
             ],
