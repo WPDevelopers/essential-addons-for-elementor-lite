@@ -152,6 +152,10 @@ $elements = [
                 'title' => __( 'Filterable Gallery', 'essential-addons-elementor' )
             ],
             [
+                'key'    => 'image-accordion',
+                'title'  => __( 'Image Accordion', 'essential-addons-elementor' )
+            ],
+            [
                 'key'   => 'progress-bar',
                 'title' => __( 'Progress Bar', 'essential-addons-elementor' )
             ],
@@ -193,11 +197,6 @@ $elements = [
             [
                 'key'    => 'interactive-cards',
                 'title'  => __( 'Interactive Cards', 'essential-addons-elementor' ),
-                'is_pro' => true
-            ],
-            [
-                'key'    => 'image-accordion',
-                'title'  => __( 'Image Accordion', 'essential-addons-elementor' ),
                 'is_pro' => true
             ],
             [
