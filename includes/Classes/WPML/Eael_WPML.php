@@ -48,7 +48,7 @@ trait Eael_WPML {
                 [
                     'field'       => 'eael_cta_content',
                     'type'        => __('Call to Action: Content', 'essential-addons-elementor'),
-                    'editor_type' => 'AREA',
+                    'editor_type' => 'VISUAL',
                 ],
                 [
                     'field' => 'eael_cta_btn_text',
@@ -69,18 +69,18 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'eael_dch_first_title',
-                    'type'        => __('Title ( First Part )', 'essential-addons-elementor'),
+                    'type'        => __('Dual Color Heading: Title ( First Part )', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_dch_last_title',
-                    'type'        => __('Title ( Last Part )', 'essential-addons-elementor'),
+                    'type'        => __('Dual Color Heading: Title ( Last Part )', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_dch_subtext',
-                    'type'        => __('Sub Text', 'essential-addons-elementor'),
-                    'editor_type' => 'AREA',
+                    'type'        => __('Dual Color Heading: Sub Text', 'essential-addons-elementor'),
+                    'editor_type' => 'VISUAL',
                 ]
             ],
         ];
@@ -91,12 +91,12 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'eael_fancy_text_prefix',
-                    'type'        => __('Prefix Text', 'essential-addons-elementor'),
+                    'type'        => __('Fancy Text: Prefix Text', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_fancy_text_suffix',
-                    'type'        => __('Suffix Text', 'essential-addons-elementor'),
+                    'type'        => __('Fancy Text: Suffix Text', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ]
             ],
@@ -171,7 +171,7 @@ trait Eael_WPML {
                 [
                     'field'       => 'eael_infobox_text',
                     'type'        => __('Infobox Content', 'essential-addons-elementor'),
-                    'editor_type' => 'AREA',
+                    'editor_type' => 'VISUAL',
                 ]
             ],
         ];
@@ -182,42 +182,42 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'eael_pricing_table_title',
-                    'type'        => __('Title', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Title', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_sub_title',
-                    'type'        => __('Sub Title', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Sub Title', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_price',
-                    'type'        => __('Price', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Price', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_price_cur',
-                    'type'        => __('Currency Placement', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Currency Placement', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_price_period',
-                    'type'        => __('Price Period (per)', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Price Period (per)', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_btn',
-                    'type'        => __('Button Text', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Button Text', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_btn',
-                    'type'        => __('Button Text', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Button Text', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_pricing_table_featured_tag_text',
-                    'type'        => __('Featured Tag Text', 'essential-addons-elementor'),
+                    'type'        => __('Pricing Table: Featured Tag Text', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ]
             ],
@@ -228,7 +228,7 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'progress_bar_title',
-                    'type'        => __('Title', 'essential-addons-elementor'),
+                    'type'        => __('Progressbar: Title', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ]
             ],
@@ -239,17 +239,17 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'eael_team_member_name',
-                    'type'        => __('Name', 'essential-addons-elementor'),
+                    'type'        => __('Team Member: Name', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_team_member_job_title',
-                    'type'        => __('Job Position', 'essential-addons-elementor'),
+                    'type'        => __('Team Member: Job Position', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_team_member_description',
-                    'type'        => __('Description', 'essential-addons-elementor'),
+                    'type'        => __('Team Member: Description', 'essential-addons-elementor'),
                     'editor_type' => 'AREA',
                 ]
             ],
@@ -260,18 +260,18 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'eael_testimonial_name',
-                    'type'        => __('User Name', 'essential-addons-elementor'),
+                    'type'        => __('Testimonial: User Name', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_testimonial_company_title',
-                    'type'        => __('Company Name', 'essential-addons-elementor'),
+                    'type'        => __('Testimonial: Company Name', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_testimonial_description',
-                    'type'        => __('Testimonial Description', 'essential-addons-elementor'),
-                    'editor_type' => 'AREA',
+                    'type'        => __('Testimonial: Testimonial Description', 'essential-addons-elementor'),
+                    'editor_type' => 'VISUAL',
                 ]
             ],
         ];
@@ -282,13 +282,13 @@ trait Eael_WPML {
             'fields' => [
                 [
                     'field'       => 'eael_tooltip_content',
-                    'type'        => __('Content', 'essential-addons-elementor'),
+                    'type'        => __('Tooltip: Content', 'essential-addons-elementor'),
                     'editor_type' => 'LINE',
                 ],
                 [
                     'field'       => 'eael_tooltip_hover_content',
-                    'type'        => __('Content', 'essential-addons-elementor'),
-                    'editor_type' => 'AREA',
+                    'type'        => __('Tooltip: Content', 'essential-addons-elementor'),
+                    'editor_type' => 'VISUAL',
                 ]
             ],
         ];
@@ -306,6 +306,86 @@ trait Eael_WPML {
                 [
                     'field'       => 'eael_feature_list_content',
                     'type'        => __('Feature List: Content', 'essential-addons-elementor'),
+                    'editor_type' => 'AREA',
+                ]
+            ],
+        ];
+
+        $widgets['eael-caldera-form'] = [
+            'conditions' => ['widgetType' => 'eael-caldera-form'],
+            'fields' => [
+                [
+                    'field'       => 'form_title_custom',
+                    'type'        => __('Caldera Form: Title', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'form_description_custom',
+                    'type'        => __('Caldera Form: Description', 'essential-addons-elementor'),
+                    'editor_type' => 'AREA',
+                ]
+            ],
+        ];
+
+        $widgets['eael-contact-form-7'] = [
+            'conditions' => ['widgetType' => 'eael-contact-form-7'],
+            'fields' => [
+                [
+                    'field'       => 'form_title_text',
+                    'type'        => __('Contact Form-7: Title', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'form_description_text',
+                    'type'        => __('Contact Form-7: Description', 'essential-addons-elementor'),
+                    'editor_type' => 'AREA',
+                ]
+            ],
+        ];
+
+        $widgets['eael-gravity-form'] = [
+            'conditions' => ['widgetType' => 'eael-gravity-form'],
+            'fields' => [
+                [
+                    'field'       => 'form_title_custom',
+                    'type'        => __('Gravity Form: Title', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'form_description_custom',
+                    'type'        => __('Gravity Form: Description', 'essential-addons-elementor'),
+                    'editor_type' => 'AREA',
+                ]
+            ],
+        ];
+
+        $widgets['eael-wpforms'] = [
+            'conditions' => ['widgetType' => 'eael-wpforms'],
+            'fields' => [
+                [
+                    'field'       => 'form_title_custom',
+                    'type'        => __('WPForms: Title', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'form_description_custom',
+                    'type'        => __('WPForms: Description', 'essential-addons-elementor'),
+                    'editor_type' => 'AREA',
+                ]
+            ],
+        ];
+
+        $widgets['eael-ninja'] = [
+            'conditions' => ['widgetType' => 'eael-ninja'],
+            'fields' => [
+                [
+                    'field'       => 'form_title_custom',
+                    'type'        => __('NinjaForm: Title', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'form_description_custom',
+                    'type'        => __('NinjaForm: Description', 'essential-addons-elementor'),
                     'editor_type' => 'AREA',
                 ]
             ],

@@ -70,7 +70,7 @@ class Advance_Tab extends WPML_Elementor_Module_With_Items {
 				return 'LINE';
 
 			case 'eael_adv_tabs_tab_content':
-				return 'AREA';
+				return 'VISUAL';
 
 			default:
 				return '';

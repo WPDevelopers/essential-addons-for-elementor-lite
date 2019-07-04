@@ -35,9 +35,9 @@ var PostGrid = function ($scope, $) {
         post__in       : post__in,
         grid_style     : $settings.grid_style,
         hover_animation: $settings.hover_animation,
-        hover_icon     : $settings.hover_icon
+        hover_icon: $settings.hover_icon,
+        show_read_more_button: $settings.eael_show_read_more_button
     }
-
 
     eaelLoadMore( options, settings );
 
