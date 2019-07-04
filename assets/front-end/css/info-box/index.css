@@ -50,14 +50,12 @@
 }
 
 .eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
 }
 
 .eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
 .eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
-  -webkit-border-radius: 15px;
-          border-radius: 15px;
+  border-radius: 15px;
 }
 
 .eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
@@ -77,8 +75,7 @@
 
 .eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
 .eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
@@ -251,18 +248,15 @@
 }
 
 .eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
 }
 
 .eael-infobox-shape-circle .eael-infobox .infobox-icon img,
 .eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-infobox-shape-radius .eael-infobox .infobox-icon img,
 .eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
-  -webkit-border-radius: 15px;
-          border-radius: 15px;
+  border-radius: 15px;
 }

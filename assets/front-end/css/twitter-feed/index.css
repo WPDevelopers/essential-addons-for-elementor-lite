@@ -122,8 +122,7 @@
 .eael-social-feed-element .media-object {
   display: block;
   width: 48px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-social-feed-element .media-heading {
@@ -236,8 +235,7 @@
 
 .eael-loading-feed .loader {
   border: 3px solid #f3f3f3;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   border-top: 3px solid #3498db;
   width: 30px;
   height: 30px;
@@ -292,13 +290,11 @@
 
 /*--- Editor Related Style ---*/
 .eael-social-feed-avatar-circle .eael-social-feed-element .media-object {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-social-feed-avatar-square .eael-social-feed-element .media-object {
-  -webkit-border-radius: 0%;
-          border-radius: 0%;
+  border-radius: 0%;
 }
 
 .eael-social-feed-masonry-col-4 .eael-social-feed-element .social-feed-date .eael-social-feed-masonry-col-4 .eael-social-feed-element .social-feed-date {
