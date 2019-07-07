@@ -170,6 +170,7 @@ class WPDeveloper_Notice {
                     if( $this->timestamp >= strtotime( $this->finish_time[ $current_notice ] ) ) {
                         unset( $options_data[ $this->plugin_name ]['notice_will_show'][ $current_notice ] );
                         $this->update_options_data( $options_data[ $this->plugin_name ] );
+                        $notice_time = false;
                     }
                 }
                 
