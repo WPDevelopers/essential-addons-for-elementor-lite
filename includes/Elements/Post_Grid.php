@@ -470,7 +470,8 @@ class Post_Grid extends Widget_Base {
 			'post__in'        => json_encode( ! empty( $query_args['post__in'] ) ? $query_args['post__in'] : [] ),
 			'hover_animation' => $query_args['eael_post_grid_hover_animation'],
 			'hover_icon'      => $query_args['eael_post_grid_bg_hover_icon'],
-			'eael_show_read_more_button' => $query_args['eael_show_read_more_button']
+			'eael_show_read_more_button' => $query_args['eael_show_read_more_button'],
+			'read_more_button_text' => $query_args['read_more_button_text']
 		];
 
 		$this->add_render_attribute(
