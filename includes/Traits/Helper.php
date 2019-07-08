@@ -39,6 +39,9 @@ trait Helper
         'eael_read_more_text',
         'show_load_more',
         'show_load_more_text',
+        'eael_show_read_more_button',
+        'read_more_button_text',
+
 
         // query_args
         'post_type',
@@ -494,6 +497,18 @@ trait Helper
                         ],
                     ],
                     'default' => '1',
+                ]
+            );
+
+            $this->add_control(
+                'read_more_button_text',
+                [
+                    'label' => __('Button Text', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => __( 'Read More', 'essential-addons-elementor' ),
+                    'condition' => [
+                        'eael_show_read_more_button' => '1',
+                    ],
                 ]
             );
         }
