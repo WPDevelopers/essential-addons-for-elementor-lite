@@ -37,314 +37,333 @@ class NinjaForms extends Widget_Base {
         /*-----------------------------------------------------------------------------------*/
         /*	CONTENT TAB
         /*-----------------------------------------------------------------------------------*/
-        
-        /**
-         * Content Tab: Ninja Forms
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_info_box',
-            [
-                'label'                 => __( 'Ninja Forms', 'essential-addons-elementor' ),
-            ]
-        );
-		
-		$this->add_control(
-			'contact_form_list',
-			[
-				'label'       => esc_html__( 'Select Form', 'essential-addons-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'label_block' => true,
-				'options'     => $this->eael_select_ninja_form(),
-				'default'     => '0',
-			]
-		);
-        
-        $this->add_control(
-            'custom_title_description',
-            [
-                'label'                 => __( 'Custom Title & Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                'label_off'             => __( 'No', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'form_title',
-            [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-                'prefix_class'          => 'eael-ninja-form-title-',
-                'condition'             => [
-                    'custom_title_description!'   => 'yes',
-                ],
-            ]
-        );
-		
-		$this->add_control(
-			'form_title_custom',
-			[
-				'label'                 => esc_html__( 'Title', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::TEXT,
-				'label_block'           => true,
-                'default'               => '',
-                'condition'             => [
-                    'custom_title_description'   => 'yes',
-                ],
-			]
-		);
-		
-		$this->add_control(
-			'form_description_custom',
-			[
-				'label'                 => esc_html__( 'Description', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::TEXTAREA,
-                'default'               => '',
-                'condition'             => [
-                    'custom_title_description'   => 'yes',
-                ],
-			]
-		);
-        
-        $this->add_control(
-            'labels_switch',
-            [
-                'label'                 => __( 'Labels', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-                'prefix_class'          => 'eael-ninja-form-labels-',
-            ]
-        );
-        
-        $this->add_control(
-            'placeholder_switch',
-            [
-                'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->end_controls_section();
+        if(!function_exists('Ninja_Forms')) {
+            $this->start_controls_section(
+                'eael_global_warning',
+                [
+                    'label'             => __( 'Warning!', 'essential-addons-elementor' ),
+                ]
+            );
 
-        /**
-         * Content Tab: Errors
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_errors',
-            [
-                'label'                 => __( 'Errors', 'essential-addons-elementor' ),
-            ]
-        );
-        
-        $this->add_control(
-            'error_messages',
-            [
-                'label'                 => __( 'Error Messages', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SELECT,
-                'default'               => 'show',
-                'options'               => [
-                    'show'          => __( 'Show', 'essential-addons-elementor' ),
-                    'hide'          => __( 'Hide', 'essential-addons-elementor' ),
-                ],
-                'selectors_dictionary'  => [
-					'show'          => 'block',
-					'hide'          => 'none',
-				],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-error-wrap .nf-error-required-error' => 'display: {{VALUE}} !important;',
-                ],
-            ]
-        );
+            $this->add_control(
+                'eael_global_warning_text',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __( '<strong>Ninja Forms</strong> is not installed/activated on your site. Please install and activate <strong>Ninja Forms</strong> first.', 'essential-addons-elementor' ),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
 
-        $this->add_control(
-            'validation_errors',
-            [
-                'label'                 => __( 'Validation Errors', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SELECT,
-                'default'               => 'show',
-                'options'               => [
-                    'show'          => __( 'Show', 'essential-addons-elementor' ),
-                    'hide'          => __( 'Hide', 'essential-addons-elementor' ),
-                ],
-                'selectors_dictionary'  => [
-					'show'          => 'block',
-					'hide'          => 'none',
-				],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-ninja-form .nf-form-errors .nf-error-field-errors' => 'display: {{VALUE}} !important;',
-                ],
-            ]
-        );
-        
-        $this->end_controls_section();
+            $this->end_controls_section();
+        } else {
+            /**
+             * Content Tab: Ninja Forms
+             * -------------------------------------------------
+             */
+            $this->start_controls_section(
+                'section_info_box',
+                [
+                    'label'                 => __( 'Ninja Forms', 'essential-addons-elementor' ),
+                ]
+            );
+            
+            $this->add_control(
+                'contact_form_list',
+                [
+                    'label'       => esc_html__( 'Select Form', 'essential-addons-elementor' ),
+                    'type'        => Controls_Manager::SELECT,
+                    'label_block' => true,
+                    'options'     => $this->eael_select_ninja_form(),
+                    'default'     => '0',
+                ]
+            );
+            
+            $this->add_control(
+                'custom_title_description',
+                [
+                    'label'                 => __( 'Custom Title & Description', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                ]
+            );
+            
+            $this->add_control(
+                'form_title',
+                [
+                    'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                    'prefix_class'          => 'eael-ninja-form-title-',
+                    'condition'             => [
+                        'custom_title_description!'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'form_title_custom',
+                [
+                    'label'                 => esc_html__( 'Title', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::TEXT,
+                    'label_block'           => true,
+                    'default'               => '',
+                    'condition'             => [
+                        'custom_title_description'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'form_description_custom',
+                [
+                    'label'                 => esc_html__( 'Description', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::TEXTAREA,
+                    'default'               => '',
+                    'condition'             => [
+                        'custom_title_description'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'labels_switch',
+                [
+                    'label'                 => __( 'Labels', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                    'prefix_class'          => 'eael-ninja-form-labels-',
+                ]
+            );
+            
+            $this->add_control(
+                'placeholder_switch',
+                [
+                    'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                ]
+            );
+            
+            $this->end_controls_section();
 
-        /**
-         * Style Tab: Form Container
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_container_style',
-            [
-                'label'                 => __( 'Form Container', 'essential-addons-elementor' ),
-                'tab'                   => Controls_Manager::TAB_STYLE,
-            ]
-        );
+            /**
+             * Content Tab: Errors
+             * -------------------------------------------------
+             */
+            $this->start_controls_section(
+                'section_errors',
+                [
+                    'label'                 => __( 'Errors', 'essential-addons-elementor' ),
+                ]
+            );
+            
+            $this->add_control(
+                'error_messages',
+                [
+                    'label'                 => __( 'Error Messages', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SELECT,
+                    'default'               => 'show',
+                    'options'               => [
+                        'show'          => __( 'Show', 'essential-addons-elementor' ),
+                        'hide'          => __( 'Hide', 'essential-addons-elementor' ),
+                    ],
+                    'selectors_dictionary'  => [
+                        'show'          => 'block',
+                        'hide'          => 'none',
+                    ],
+                    'selectors'             => [
+                        '{{WRAPPER}} .eael-ninja-form .nf-error-wrap .nf-error-required-error' => 'display: {{VALUE}} !important;',
+                    ],
+                ]
+            );
 
-		$this->add_control(
-			'eael_contact_form_background',
-			[
-				'label' => esc_html__( 'Form Background Color', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'background: {{VALUE}};',
-				],
-			]
-		);
-		
-		$this->add_responsive_control(
-			'eael_contact_form_alignment',
-			[
-				'label' => esc_html__( 'Form Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'options' => [
-					'default' => [
-						'title' => __( 'Default', 'essential-addons-elementor' ),
-						'icon' => 'fa fa-ban',
-					],
-					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
-						'icon' => 'eicon-h-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
-						'icon' => 'eicon-h-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
-						'icon' => 'eicon-h-align-right',
-					],
-				],
-				'default' => 'default',
-			]
-		);
+            $this->add_control(
+                'validation_errors',
+                [
+                    'label'                 => __( 'Validation Errors', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SELECT,
+                    'default'               => 'show',
+                    'options'               => [
+                        'show'          => __( 'Show', 'essential-addons-elementor' ),
+                        'hide'          => __( 'Hide', 'essential-addons-elementor' ),
+                    ],
+                    'selectors_dictionary'  => [
+                        'show'          => 'block',
+                        'hide'          => 'none',
+                    ],
+                    'selectors'             => [
+                        '{{WRAPPER}} .eael-ninja-form .nf-form-errors .nf-error-field-errors' => 'display: {{VALUE}} !important;',
+                    ],
+                ]
+            );
+            
+            $this->end_controls_section();
 
-  		$this->add_responsive_control(
-  			'eael_contact_form_width',
-  			[
-  				'label' => esc_html__( 'Form Width', 'essential-addons-elementor' ),
-  				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 10,
-						'max' => 1500,
-					],
-					'em' => [
-						'min' => 1,
-						'max' => 80,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'width: {{SIZE}}{{UNIT}};',
-				],
-  			]
-  		);
+            /**
+             * Style Tab: Form Container
+             * -------------------------------------------------
+             */
+            $this->start_controls_section(
+                'section_container_style',
+                [
+                    'label'                 => __( 'Form Container', 'essential-addons-elementor' ),
+                    'tab'                   => Controls_Manager::TAB_STYLE,
+                ]
+            );
 
-  		$this->add_responsive_control(
-  			'eael_contact_form_max_width',
-  			[
-  				'label' => esc_html__( 'Form Max Width', 'essential-addons-elementor' ),
-  				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 10,
-						'max' => 1500,
-					],
-					'em' => [
-						'min' => 1,
-						'max' => 80,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};',
-				],
-  			]
-  		);
-		
-		
-		$this->add_responsive_control(
-			'eael_contact_form_margin',
-			[
-				'label' => esc_html__( 'Form Margin', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);		
-		
-		$this->add_responsive_control(
-			'eael_contact_form_padding',
-			[
-				'label' => esc_html__( 'Form Padding', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-		
-		
-		$this->add_control(
-			'eael_contact_form_border_radius',
-			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'separator' => 'before',
-				'size_units' => [ 'px' ],
-				'selectors' => [
-					'{{WRAPPER}} .eael-contact-form' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-		
-		
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'eael_contact_form_border',
-				'selector' => '{{WRAPPER}} .eael-contact-form',
-			]
-		);
-		
-		
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'eael_contact_form_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-contact-form',
-			]
-		);
+            $this->add_control(
+                'eael_contact_form_background',
+                [
+                    'label' => esc_html__( 'Form Background Color', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-contact-form' => 'background: {{VALUE}};',
+                    ],
+                ]
+            );
+            
+            $this->add_responsive_control(
+                'eael_contact_form_alignment',
+                [
+                    'label' => esc_html__( 'Form Alignment', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::CHOOSE,
+                    'label_block' => true,
+                    'options' => [
+                        'default' => [
+                            'title' => __( 'Default', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-ban',
+                        ],
+                        'left' => [
+                            'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+                            'icon' => 'eicon-h-align-left',
+                        ],
+                        'center' => [
+                            'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+                            'icon' => 'eicon-h-align-center',
+                        ],
+                        'right' => [
+                            'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+                            'icon' => 'eicon-h-align-right',
+                        ],
+                    ],
+                    'default' => 'default',
+                ]
+            );
 
-        $this->end_controls_section();
+            $this->add_responsive_control(
+                'eael_contact_form_width',
+                [
+                    'label' => esc_html__( 'Form Width', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'range' => [
+                        'px' => [
+                            'min' => 10,
+                            'max' => 1500,
+                        ],
+                        'em' => [
+                            'min' => 1,
+                            'max' => 80,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-contact-form' => 'width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_responsive_control(
+                'eael_contact_form_max_width',
+                [
+                    'label' => esc_html__( 'Form Max Width', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'range' => [
+                        'px' => [
+                            'min' => 10,
+                            'max' => 1500,
+                        ],
+                        'em' => [
+                            'min' => 1,
+                            'max' => 80,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+            
+            
+            $this->add_responsive_control(
+                'eael_contact_form_margin',
+                [
+                    'label' => esc_html__( 'Form Margin', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-contact-form' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );		
+            
+            $this->add_responsive_control(
+                'eael_contact_form_padding',
+                [
+                    'label' => esc_html__( 'Form Padding', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-contact-form' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+            
+            
+            $this->add_control(
+                'eael_contact_form_border_radius',
+                [
+                    'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'separator' => 'before',
+                    'size_units' => [ 'px' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-contact-form' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+            
+            
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'eael_contact_form_border',
+                    'selector' => '{{WRAPPER}} .eael-contact-form',
+                ]
+            );
+            
+            
+            $this->add_group_control(
+                Group_Control_Box_Shadow::get_type(),
+                [
+                    'name' => 'eael_contact_form_box_shadow',
+                    'selector' => '{{WRAPPER}} .eael-contact-form',
+                ]
+            );
+
+            $this->end_controls_section();
+        }
 
         /*-----------------------------------------------------------------------------------*/
         /*	STYLE TAB
@@ -1525,6 +1544,10 @@ class NinjaForms extends Widget_Base {
     }
 
     protected function render() {
+        if(!function_exists('Ninja_Forms')) {
+            return;
+        }
+
         $settings = $this->get_settings();
         
         $this->add_render_attribute( 'contact-form', 'class', [
@@ -1560,32 +1583,31 @@ class NinjaForms extends Widget_Base {
         }
         else {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-default' );
-        }       
-        if ( class_exists( 'Ninja_Forms' ) ) {
-            if ( ! empty( $settings['contact_form_list'] ) ) { ?>
-                <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
-                    <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
-                        <div class="eael-ninja-form-heading">
-                            <?php if ( $settings['form_title_custom'] != '' ) { ?>
-                                <h3 class="eael-contact-form-title eael-ninja-form-title">
-                                    <?php echo esc_attr( $settings['form_title_custom'] ); ?>
-                                </h3>
-                            <?php } ?>
-                            <?php if ( $settings['form_description_custom'] != '' ) { ?>
-                                <div class="eael-contact-form-description eael-ninja-form-description">
-                                    <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <?php
-                        $eael_form_id = $settings['contact_form_list'];
+        }
 
-                        echo do_shortcode( '[ninja_form id="' . $eael_form_id . '" ]' );
-                    ?>
-                </div>
+        if ( ! empty( $settings['contact_form_list'] ) ) { ?>
+            <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
+                <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
+                    <div class="eael-ninja-form-heading">
+                        <?php if ( $settings['form_title_custom'] != '' ) { ?>
+                            <h3 class="eael-contact-form-title eael-ninja-form-title">
+                                <?php echo esc_attr( $settings['form_title_custom'] ); ?>
+                            </h3>
+                        <?php } ?>
+                        <?php if ( $settings['form_description_custom'] != '' ) { ?>
+                            <div class="eael-contact-form-description eael-ninja-form-description">
+                                <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
                 <?php
-            }
+                    $eael_form_id = $settings['contact_form_list'];
+
+                    echo do_shortcode( '[ninja_form id="' . $eael_form_id . '" ]' );
+                ?>
+            </div>
+            <?php
         }
     }
 
