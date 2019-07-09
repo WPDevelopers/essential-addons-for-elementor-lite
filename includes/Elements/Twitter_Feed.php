@@ -64,7 +64,7 @@ class Twitter_Feed extends Widget_Base
                 'label' => esc_html__('Hashtag Name', 'essential-addons-elementor'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
-                'description' => esc_html__('Use # sign with your hashtag name.', 'essential-addons-elementor'),
+                'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-elementor'),
 
             ]
         );
