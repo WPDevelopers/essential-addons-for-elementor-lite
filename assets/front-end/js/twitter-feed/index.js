@@ -16,17 +16,6 @@ var TwitterFeedHandler = function($scope, $) {
     $twitter_feed_gallery.imagesLoaded().progress(function() {
         $twitter_feed_gallery.isotope("layout");
     });
-
-    // reinit for preview
-    setTimeout(function() {
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope($settings);
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }, 3000);
 };
 
 jQuery(window).on("elementor/frontend/init", function() {

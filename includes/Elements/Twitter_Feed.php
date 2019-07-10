@@ -479,21 +479,25 @@ class Twitter_Feed extends Widget_Base
         </div>';
         
         echo '<style>
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-2 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
                 width: calc(50% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] / 2) . 'px);
-                margin-bottom: ' . $settings['eael_twitter_feed_column_spacing']['size'] . 'px;
             }
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-3 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
                 width: calc(33.33% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] * 2 / 3) . 'px);
-                margin-bottom: ' . $settings['eael_twitter_feed_column_spacing']['size'] . 'px;
             }
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                 width: calc(25% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] * 3 / 4) . 'px);
+            }
+            
+            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-2 .eael-twitter-feed-item,
+            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                 margin-bottom: ' . $settings['eael_twitter_feed_column_spacing']['size'] . 'px;
             }
+
             @media only screen and (min-width: 768px) and (max-width: 992px) {
-                .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-3 .eael-twitter-feed-item,
-                .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+                .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                     width: calc(50% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] / 2) . 'px);
                 }
             }
