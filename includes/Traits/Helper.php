@@ -1580,6 +1580,10 @@ foreach ($settings['eael_pricing_table_items'] as $item):
                 set_transient($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_cache', $items, 1800);
             }
         }
+
+        if(empty($items)) {
+            return;
+        }
         
         if ($settings['eael_twitter_feed_hashtag_name']) {
             foreach ($items as $key => $item) {

@@ -46,13 +46,6 @@ trait Enqueue
             }
 
             wp_enqueue_style(
-                'eael-editor-css',
-                $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
-                false,
-                EAEL_PLUGIN_VERSION
-            );
-
-            wp_enqueue_style(
                 'eael-backend',
                 $this->safe_protocol($css_file),
                 false,
@@ -90,6 +83,16 @@ trait Enqueue
                 $this->enqueue_protocols($post_type, $queried_object);
             }
         }
+    }
+
+    // editor styles
+    public function editor_enqueue_scripts() {
+        wp_enqueue_style(
+            'eael-editor-css',
+            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
+            false,
+            EAEL_PLUGIN_VERSION
+        );
     }
 
     // rules how css will be enqueued on front-end
