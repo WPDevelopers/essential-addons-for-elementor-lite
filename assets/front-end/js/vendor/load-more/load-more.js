@@ -33,7 +33,8 @@
             grid_style: settings.grid_style || "",
             hover_animation: settings.hover_animation,
             hover_icon: settings.hover_icon,
-            show_read_more_button: settings.show_read_more_button
+            show_read_more_button: settings.show_read_more_button,
+            read_more_button_text: settings.read_more_button_text
         };
 
         var offset = settingsValue.offset + settingsValue.perPage;
@@ -77,7 +78,8 @@
                     eael_post_grid_hover_animation:
                         settingsValue.hover_animation,
                     eael_post_grid_bg_hover_icon: settingsValue.hover_icon,
-                    eael_show_read_more_button: settingsValue.show_read_more_button
+                    eael_show_read_more_button: settingsValue.show_read_more_button,
+                    read_more_button_text: settingsValue.read_more_button_text
                 },
                 beforeSend: function() {
                     // _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');

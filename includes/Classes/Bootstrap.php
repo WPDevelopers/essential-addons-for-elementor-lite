@@ -197,11 +197,8 @@ class Bootstrap
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/twitter-feed/index.min.css',
                     ],
                     'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/codebird.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/doT.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/moment.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/twitter-feed/index.min.js',
                     ],
                 ],
@@ -320,10 +317,6 @@ class Bootstrap
             ],
             'contact-form-7' => [
                 'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
-                'condition' => [
-                    'function_exists',
-                    'wpcf7',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/contact-form-7/index.min.css',
@@ -332,10 +325,6 @@ class Bootstrap
             ],
             'weforms' => [
                 'class' => '\Essential_Addons_Elementor\Elements\WeForms',
-                'condition' => [
-                    'function_exists',
-                    'WeForms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/weforms/index.min.css',
@@ -344,10 +333,6 @@ class Bootstrap
             ],
             'ninja-form' => [
                 'class' => '\Essential_Addons_Elementor\Elements\NinjaForms',
-                'condition' => [
-                    'function_exists',
-                    'Ninja_Forms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
@@ -356,10 +341,6 @@ class Bootstrap
             ],
             'gravity-form' => [
                 'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
-                'condition' => [
-                    'class_exists',
-                    'GFForms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/gravity-form/index.min.css',
@@ -368,10 +349,6 @@ class Bootstrap
             ],
             'caldera-form' => [
                 'class' => '\Essential_Addons_Elementor\Elements\Caldera_Forms',
-                'condition' => [
-                    'class_exists',
-                    'Caldera_Forms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/caldera-form/index.min.css',
@@ -380,10 +357,6 @@ class Bootstrap
             ],
             'wpforms' => [
                 'class' => '\Essential_Addons_Elementor\Elements\WpForms',
-                'condition' => [
-                    'class_exists',
-                    '\WPForms\WPForms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/wpforms/index.min.css',
@@ -426,6 +399,7 @@ class Bootstrap
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
 
         // Ajax
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
