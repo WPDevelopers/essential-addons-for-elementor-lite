@@ -77,185 +77,204 @@ class GravityForms extends Widget_Base {
         /*-----------------------------------------------------------------------------------*/
         /*	CONTENT TAB
         /*-----------------------------------------------------------------------------------*/
-        
-        /**
-         * Content Tab: Contact Form
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_info_box',
-            [
-                'label'                 => __( 'Gravity Forms', 'essential-addons-elementor' ),
-            ]
-        );
-		
-		$this->add_control(
-			'contact_form_list',
-			[
-				'label'                 => esc_html__( 'Select Form', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::SELECT,
-				'label_block'           => true,
-				'options'               => $this->eael_select_gravity_form(),
-                'default'               => '0',
-			]
-		);
-        
-        $this->add_control(
-            'custom_title_description',
-            [
-                'label'                 => __( 'Custom Title & Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                'label_off'             => __( 'No', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'form_title',
-            [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-                'condition'             => [
-                    'custom_title_description!'   => 'yes',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'form_description',
-            [
-                'label'                 => __( 'Description', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-                'condition'             => [
-                    'custom_title_description!'   => 'yes',
-                ],
-            ]
-        );
-		
-		$this->add_control(
-			'form_title_custom',
-			[
-				'label'                 => esc_html__( 'Title', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::TEXT,
-				'label_block'           => true,
-                'default'               => '',
-                'condition'             => [
-                    'custom_title_description'   => 'yes',
-                ],
-			]
-		);
-		
-		$this->add_control(
-			'form_description_custom',
-			[
-				'label'                 => esc_html__( 'Description', 'essential-addons-elementor' ),
-				'type'                  => Controls_Manager::TEXTAREA,
-                'default'               => '',
-                'condition'             => [
-                    'custom_title_description'   => 'yes',
-                ],
-			]
-		);
-        
-        $this->add_control(
-            'labels_switch',
-            [
-                'label'                 => __( 'Labels', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'placeholder_switch',
-            [
-                'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'default'               => 'yes',
-                'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->add_control(
-            'form_ajax',
-            [
-                'label'                 => __( 'Use Ajax', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SWITCHER,
-                'description'           => __( 'Use ajax to submit the form', 'essential-addons-elementor' ),
-                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                'label_off'             => __( 'No', 'essential-addons-elementor' ),
-                'return_value'          => 'yes',
-            ]
-        );
-        
-        $this->end_controls_section();
+        if(!class_exists('\GFForms')) {
+            $this->start_controls_section(
+                'eael_global_warning',
+                [
+                    'label'             => __( 'Warning!', 'essential-addons-elementor' ),
+                ]
+            );
 
-        /**
-         * Content Tab: Errors
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'section_errors',
-            [
-                'label'                 => __( 'Errors', 'essential-addons-elementor' ),
-            ]
-        );
-        
-        $this->add_control(
-            'error_messages',
-            [
-                'label'                 => __( 'Error Messages', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SELECT,
-                'default'               => 'show',
-                'options'               => [
-                    'show'          => __( 'Show', 'essential-addons-elementor' ),
-                    'hide'          => __( 'Hide', 'essential-addons-elementor' ),
-                ],
-                'selectors_dictionary'  => [
-					'show'          => 'block',
-					'hide'          => 'none',
-				],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}} !important;',
-                ],
-            ]
-        );
+            $this->add_control(
+                'eael_global_warning_text',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __( '<strong>Gravity Forms</strong> is not installed/activated on your site. Please install and activate <strong>Gravity Forms</strong> first.', 'essential-addons-elementor' ),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
 
-        $this->add_control(
-            'validation_errors',
-            [
-                'label'                 => __( 'Validation Errors', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::SELECT,
-                'default'               => 'show',
-                'options'               => [
-                    'show'          => __( 'Show', 'essential-addons-elementor' ),
-                    'hide'          => __( 'Hide', 'essential-addons-elementor' ),
-                ],
-                'selectors_dictionary'  => [
-					'show'          => 'block',
-					'hide'          => 'none',
-				],
-                'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}} !important;',
-                ],
-            ]
-        );
-        
-        $this->end_controls_section();
+            $this->end_controls_section();
+        } else {
+            /**
+             * Content Tab: Contact Form
+             * -------------------------------------------------
+             */
+            $this->start_controls_section(
+                'section_info_box',
+                [
+                    'label'                 => __( 'Gravity Forms', 'essential-addons-elementor' ),
+                ]
+            );
+            
+            $this->add_control(
+                'contact_form_list',
+                [
+                    'label'                 => esc_html__( 'Select Form', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SELECT,
+                    'label_block'           => true,
+                    'options'               => $this->eael_select_gravity_form(),
+                    'default'               => '0',
+                ]
+            );
+            
+            $this->add_control(
+                'custom_title_description',
+                [
+                    'label'                 => __( 'Custom Title & Description', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                ]
+            );
+            
+            $this->add_control(
+                'form_title',
+                [
+                    'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                    'condition'             => [
+                        'custom_title_description!'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'form_description',
+                [
+                    'label'                 => __( 'Description', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                    'condition'             => [
+                        'custom_title_description!'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'form_title_custom',
+                [
+                    'label'                 => esc_html__( 'Title', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::TEXT,
+                    'label_block'           => true,
+                    'default'               => '',
+                    'condition'             => [
+                        'custom_title_description'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'form_description_custom',
+                [
+                    'label'                 => esc_html__( 'Description', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::TEXTAREA,
+                    'default'               => '',
+                    'condition'             => [
+                        'custom_title_description'   => 'yes',
+                    ],
+                ]
+            );
+            
+            $this->add_control(
+                'labels_switch',
+                [
+                    'label'                 => __( 'Labels', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                ]
+            );
+            
+            $this->add_control(
+                'placeholder_switch',
+                [
+                    'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'default'               => 'yes',
+                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                ]
+            );
+            
+            $this->add_control(
+                'form_ajax',
+                [
+                    'label'                 => __( 'Use Ajax', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SWITCHER,
+                    'description'           => __( 'Use ajax to submit the form', 'essential-addons-elementor' ),
+                    'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
+                    'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                    'return_value'          => 'yes',
+                ]
+            );
+            
+            $this->end_controls_section();
+
+            /**
+             * Content Tab: Errors
+             * -------------------------------------------------
+             */
+            $this->start_controls_section(
+                'section_errors',
+                [
+                    'label'                 => __( 'Errors', 'essential-addons-elementor' ),
+                ]
+            );
+            
+            $this->add_control(
+                'error_messages',
+                [
+                    'label'                 => __( 'Error Messages', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SELECT,
+                    'default'               => 'show',
+                    'options'               => [
+                        'show'          => __( 'Show', 'essential-addons-elementor' ),
+                        'hide'          => __( 'Hide', 'essential-addons-elementor' ),
+                    ],
+                    'selectors_dictionary'  => [
+                        'show'          => 'block',
+                        'hide'          => 'none',
+                    ],
+                    'selectors'             => [
+                        '{{WRAPPER}} .eael-gravity-form .validation_message' => 'display: {{VALUE}} !important;',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'validation_errors',
+                [
+                    'label'                 => __( 'Validation Errors', 'essential-addons-elementor' ),
+                    'type'                  => Controls_Manager::SELECT,
+                    'default'               => 'show',
+                    'options'               => [
+                        'show'          => __( 'Show', 'essential-addons-elementor' ),
+                        'hide'          => __( 'Hide', 'essential-addons-elementor' ),
+                    ],
+                    'selectors_dictionary'  => [
+                        'show'          => 'block',
+                        'hide'          => 'none',
+                    ],
+                    'selectors'             => [
+                        '{{WRAPPER}} .eael-gravity-form .validation_error' => 'display: {{VALUE}} !important;',
+                    ],
+                ]
+            );
+            
+            $this->end_controls_section();
+        }
 
         /*-----------------------------------------------------------------------------------*/
         /*	STYLE TAB
@@ -1722,6 +1741,10 @@ class GravityForms extends Widget_Base {
 	 * @access protected
 	 */
     protected function render() {
+        if(!class_exists('\GFForms')) {
+            return;
+        }
+
         $settings = $this->get_settings();
         
         $this->add_render_attribute( 'contact-form', 'class', [
@@ -1759,34 +1782,32 @@ class GravityForms extends Widget_Base {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-contact-form-align-default' );
         }
 
-        if ( class_exists( 'GFCommon' ) ) {
-            if ( ! empty( $settings['contact_form_list'] ) ) { ?>
-                <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
-                    <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
-                        <div class="eael-gravity-form-heading">
-                            <?php if ( $settings['form_title_custom'] != '' ) { ?>
-                                <h3 class="eael-contact-form-title eael-gravity-form-title">
-                                    <?php echo esc_attr( $settings['form_title_custom'] ); ?>
-                                </h3>
-                            <?php } ?>
-                            <?php if ( $settings['form_description_custom'] != '' ) { ?>
-                                <div class="eael-contact-form-description eael-gravity-form-description">
-                                    <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <?php
-                        $eael_form_id = $settings['contact_form_list'];
-                        $eael_form_title = $settings['form_title'];
-                        $eael_form_description = $settings['form_description'];
-                        $eael_form_ajax = $settings['form_ajax'];
-
-                        gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
-                    ?>
-                </div>
+        if ( ! empty( $settings['contact_form_list'] ) ) { ?>
+            <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
+                <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
+                    <div class="eael-gravity-form-heading">
+                        <?php if ( $settings['form_title_custom'] != '' ) { ?>
+                            <h3 class="eael-contact-form-title eael-gravity-form-title">
+                                <?php echo esc_attr( $settings['form_title_custom'] ); ?>
+                            </h3>
+                        <?php } ?>
+                        <?php if ( $settings['form_description_custom'] != '' ) { ?>
+                            <div class="eael-contact-form-description eael-gravity-form-description">
+                                <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
                 <?php
-            }
+                    $eael_form_id = $settings['contact_form_list'];
+                    $eael_form_title = $settings['form_title'];
+                    $eael_form_description = $settings['form_description'];
+                    $eael_form_ajax = $settings['form_ajax'];
+
+                    gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
+                ?>
+            </div>
+            <?php
         }
     }
 
