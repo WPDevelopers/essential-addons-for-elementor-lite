@@ -1431,7 +1431,7 @@ trait Helper
         ob_start();
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
-            include $post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
+            include ($post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR) . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
         endwhile;
 
         $return['content'] = ob_get_clean();
