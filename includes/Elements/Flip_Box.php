@@ -1179,7 +1179,7 @@ class Flip_Box extends Widget_Base {
 	  				'flipbox-back-icon-image-container',
 	  				[
 	  					'src'	=> $flipbox_back_image_url,
-	  					'alt'	=> 'flipbox-image'
+	  					'alt'	=> esc_attr(get_post_meta($flipbox_image_back['id'], '_wp_attachment_image_alt', true))
 	  				]
 	  			);
 	  		}elseif( 'icon' == $settings['eael_flipbox_img_or_icon_back'] ) {
@@ -1217,7 +1217,7 @@ class Flip_Box extends Widget_Base {
 								<?php if( 'icon' === $settings['eael_flipbox_img_or_icon'] ) : ?>
 									<i class="<?php echo esc_attr( $settings['eael_flipbox_icon'] ); ?>"></i>
 								<?php elseif( 'img' === $settings['eael_flipbox_img_or_icon'] ): ?>
-									<img src="<?php echo esc_url( $flipbox_image_url ); ?>" alt="">
+									<img src="<?php echo esc_url( $flipbox_image_url ); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
 								<?php endif; ?>
 	                        </div>
 	                        <h2 class="eael-elements-flip-box-heading"><?php echo esc_html__( $settings['eael_flipbox_front_title'], 'essential-addons-elementor' ); ?></h2>

@@ -1,6 +1,6 @@
-/*-----------------------------*/
-/* 04. Creative Button styles
-/*-----------------------------*/
+/*--------------------------------*/
+/* 08. Creative Button styles
+/*--------------------------------*/
 .eael-creative-button-align-center {
   text-align: center;
 }
@@ -22,9 +22,18 @@
   vertical-align: middle;
   position: relative;
   z-index: 1;
+  border-radius: 2px;
+  padding: 20px 30px;
+  font-size: 16px;
+  line-height: 1;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.eael-creative-button-align-center .eael-creative-button {
+  float: none;
+  display: inline-block;
 }
 
 .eael-creative-button:focus {
@@ -35,14 +44,9 @@
   vertical-align: middle;
 }
 
-.eael-creative-button {
-  -webkit-border-radius: 2px;
-          border-radius: 2px;
-  padding: 20px 30px;
-  font-size: 16px;
-  line-height: 1;
-}
-
+/*--------------------------------------------*/
+/* 09. Individual eael-creative-button styles
+/*--------------------------------------------*/
 /*--- Winona ---*/
 .eael-creative-button--winona {
   overflow: hidden;

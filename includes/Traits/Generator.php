@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \MatthiasMullie\Minify;
+use \ReflectionClass;
 
 trait Generator
 {
@@ -16,9 +16,41 @@ trait Generator
      */
     public function collect_transient_elements($widget)
     {
-        $this->transient_elements[] = $widget->get_name();
+        if($widget->get_name() === 'global') {
+            $reflection = new ReflectionClass(get_class($widget));
+            $protected = $reflection->getProperty('template_data');
+            $protected->setAccessible(true);
+
+            if($global_data = $protected->getValue($widget)) {
+                $this->transient_elements = array_merge($this->transient_elements, $this->collect_recursive_elements($global_data['content']));
+            }
+        } else {
+            $this->transient_elements[] = $widget->get_name();
+        }
     }
 
+    /**
+     * Collect recursive elements
+     *
+     * @since 3.0.5
+     */
+    public function collect_recursive_elements($elements) {
+        $collections = [];
+
+        array_walk_recursive($elements, function($val, $key) use (&$collections) {
+            if($key == 'widgetType') {
+                $collections[] = $val;
+            }
+        });
+
+        return $collections;
+    }
+
+    /**
+     * Combine files into one
+     *
+     * @since 3.0.1
+     */
     public function combine_files($paths = array(), $file = 'eael.min.css')
     {
         $output = '';
@@ -122,39 +154,39 @@ trait Generator
         }
 
         $replace = [
-            'eicon-woocommerce' => 'product-grid',
-            'countdown' => 'count-down',
-            'creative-button' => 'creative-btn',
-            'team-member' => 'team-members',
-            'testimonial' => 'testimonials',
-            'weform' => 'weforms',
-            'cta-box' => 'call-to-action',
-            'dual-color-header' => 'dual-header',
-            'pricing-table' => 'price-table',
-            'filterable-gallery' => 'filter-gallery',
-            'one-page-nav' => 'one-page-navigation',
-            'interactive-card' => 'interactive-cards',
-            'image-comparison' => 'img-comparison',
-            'dynamic-filterable-gallery' => 'dynamic-filter-gallery',
-            'google-map' => 'adv-google-map',
-            'instafeed' => 'instagram-gallery',
+            'eicon-woocommerce' => 'eael-product-grid',
+            'eael-countdown' => 'eael-count-down',
+            'eael-creative-button' => 'eael-creative-btn',
+            'eael-team-member' => 'eael-team-members',
+            'eael-testimonial' => 'eael-testimonials',
+            'eael-weform' => 'eael-weforms',
+            'eael-cta-box' => 'eael-call-to-action',
+            'eael-dual-color-header' => 'eael-dual-header',
+            'eael-pricing-table' => 'eael-price-table',
+            'eael-filterable-gallery' => 'eael-filter-gallery',
+            'eael-one-page-nav' => 'eael-one-page-navigation',
+            'eael-interactive-card' => 'eael-interactive-cards',
+            'eael-image-comparison' => 'eael-img-comparison',
+            'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
+            'eael-google-map' => 'eael-adv-google-map',
+            'eael-instafeed' => 'eael-instagram-gallery',
         ];
 
         $elements = array_map(function ($val) use ($replace) {
-            $val = str_replace(['eael-'], [''], $val);
+            if(array_key_exists($val, $replace)) {
+                $val = $replace[$val];
+            }
 
-            return (array_key_exists($val, $replace) ? $replace[$val] : $val);
+            return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
         }, $this->transient_elements);
-
-        $elements = array_intersect(array_keys($this->registered_elements), $elements);
 
         $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
 
-        $elements = array_unique(array_merge($elements, $extensions));
+        $elements = array_filter(array_unique(array_merge($elements, $extensions)));
 
-        if (is_singular() || is_archive()) {
+        if (is_singular() || is_home() || is_archive()) {
             $queried_object = get_queried_object_id();
-            $post_type = (is_singular() ? 'post' : 'term');
+            $post_type = (is_singular() || is_home() ? 'post' : 'term');
             $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
             // sort two arr for compare

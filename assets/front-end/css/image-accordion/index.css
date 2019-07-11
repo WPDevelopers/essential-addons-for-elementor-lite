@@ -18,8 +18,7 @@
   text-align: center;
   text-decoration: none;
   color: #fff;
-  -webkit-background-size: cover;
-          background-size: cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   -webkit-transition: -webkit-box-flex .4s, -webkit-flex .4s;

@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 3.0.0
+ * Version: 3.1.2
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -24,9 +24,9 @@ define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
-define('EAEL_PLUGIN_VERSION', '3.0.0');
-define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
-define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
+define('EAEL_PLUGIN_VERSION', '3.1.2');
+define('EAEL_ASSET_PATH', WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
+define('EAEL_ASSET_URL', WP_CONTENT_URL . '/essential-addons-elementor');
 
 /**
  * Including composer autoloader globally.
@@ -42,6 +42,16 @@ require_once EAEL_PLUGIN_PATH . 'autoload.php';
  */
 add_action('plugins_loaded', function () {
     \Essential_Addons_Elementor\Classes\Bootstrap::instance();
+});
+
+/**
+ * Plugin migrator
+ *
+ * @since v3.0.0
+ */
+add_action('wp_loaded', function () {
+    $migration = new \Essential_Addons_Elementor\Classes\Migration;
+    $migration->migrator();
 });
 
 /**

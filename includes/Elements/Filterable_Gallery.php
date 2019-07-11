@@ -37,16 +37,6 @@ class Filterable_Gallery extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
-    public function get_script_depends()
-    {
-        return [
-            'eael-scripts',
-            'imagesloaded',
-            'jquery-resize',
-            'essential_addons_isotope-js',
-        ];
-    }
-
     protected function _register_controls()
     {
         /**
@@ -123,7 +113,7 @@ class Filterable_Gallery extends Widget_Base
                     'eael_fg_grid_style' => 'grid',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
                 ],
             ]
         );
@@ -864,7 +854,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -876,7 +866,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -886,7 +876,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_border',
                 'label' => esc_html__('Border', 'essential-addons-elementor'),
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
             ]
         );
 
@@ -904,7 +894,7 @@ class Filterable_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -913,7 +903,7 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_fg_item_shadow',
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
             ]
         );
 
@@ -1773,6 +1763,10 @@ class Filterable_Gallery extends Widget_Base
     {
         $sorter_class = strtolower($string);
         $sorter_class = str_replace(' ', '-', $sorter_class);
+        $sorter_class = str_replace('&', 'and', $sorter_class);
+        $sorter_class = str_replace('amp;', '', $sorter_class);
+        $sorter_class = str_replace('/', 'slash', $sorter_class);
+        
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);
@@ -1845,6 +1839,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['id'] = $gallery['_id'];
             $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img'];
             $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img']['url'];
+            $gallery_store[$counter]['image_id'] = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
@@ -1897,16 +1892,16 @@ class Filterable_Gallery extends Widget_Base
         foreach ($gallery as $item) {
             if ($item['controls'] != '') {
                 $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . $item['controls'] . '">
-				<div class="gallery-grid-item">';
+				<div class="eael-gallery-grid-item">';
             } else {
                 $html = '<div class="eael-filterable-gallery-item-wrap">
-				<div class="gallery-grid-item">';
+				<div class="eael-gallery-grid-item">';
             }
             if ($settings['eael_fg_caption_style'] === 'card' && $item['video_gallery_switch'] === 'false' && $settings['eael_fg_show_popup'] === 'media') {
                 $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap">';
             }
             $html .= '<div class="gallery-item-thumbnail-wrap">
-							<img src="' . $item['image'] . '" alt="' . $item['title'] . '">';
+							<img src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '">';
 
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
                 $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">';
@@ -1942,7 +1937,6 @@ class Filterable_Gallery extends Widget_Base
 
                 if ($settings['eael_fg_grid_hover_style'] !== 'eael-none') {
 
-                    if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
 
                         $html .= '<div class="gallery-item-caption-wrap ' . $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] . '">';
 
@@ -1952,11 +1946,13 @@ class Filterable_Gallery extends Widget_Base
 
                         $html .= '<div class="gallery-item-caption-over">';
 
-                        if (!empty($item['title'])) {
-                            $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
-                        }
-                        if (!empty($item['content'])) {
-                            $html .= '<p class="fg-item-content">' . $item['content'] . '</p>';
+                        if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
+                            if (!empty($item['title'])) {
+                                $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
+                            }
+                            if (!empty($item['content'])) {
+                                $html .= '<p class="fg-item-content">' . $item['content'] . '</p>';
+                            }
                         }
 
                         if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
@@ -1964,7 +1960,7 @@ class Filterable_Gallery extends Widget_Base
                         }
                         $html .= '</div>';
                         $html .= '</div>';
-                    }
+                    
                 }
 
             }
@@ -2016,11 +2012,12 @@ class Filterable_Gallery extends Widget_Base
         $gallery_settings['widget_id'] = $this->get_id();
 
         $no_more_items_text = esc_html__($settings['nomore_items_text'], 'essential-addons-elementor');
+        $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : 'masonry';
 
         $this->add_render_attribute('gallery-items-wrap', [
             'class' => [
                 'eael-filter-gallery-container',
-                esc_attr($settings['eael_fg_grid_style']),
+                $grid_class
             ],
             'data-images-per-page' => $settings['images_per_page'],
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),

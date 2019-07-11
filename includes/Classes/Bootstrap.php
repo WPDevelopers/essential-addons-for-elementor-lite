@@ -16,6 +16,7 @@ class Bootstrap
     use \Essential_Addons_Elementor\Traits\Enqueue;
     use \Essential_Addons_Elementor\Traits\Admin;
     use \Essential_Addons_Elementor\Traits\Elements;
+    use \Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
 
     // instance container
     private static $instance = null;
@@ -28,7 +29,7 @@ class Bootstrap
 
     // transient elements container
     public $transient_elements;
-    
+
     // transient elements container
     public $transient_extensions;
 
@@ -76,8 +77,10 @@ class Bootstrap
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
                     ],
                     'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/post-grid/index.min.js',
                     ],
                 ],
             ],
@@ -178,6 +181,7 @@ class Bootstrap
                 'class' => '\Essential_Addons_Elementor\Elements\Pricing_Table',
                 'dependency' => [
                     'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/tooltipster/tooltipster.bundle.min.css',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/price-table/index.min.css',
                     ],
                     'js' => [
@@ -193,11 +197,8 @@ class Bootstrap
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/twitter-feed/index.min.css',
                     ],
                     'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/codebird.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/doT.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/moment.min.js',
-                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/social-feeds/jquery.socialfeed.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/twitter-feed/index.min.js',
                     ],
                 ],
@@ -222,6 +223,7 @@ class Bootstrap
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filter-gallery/index.min.css',
                     ],
                     'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/filter-gallery/index.min.js',
@@ -315,10 +317,6 @@ class Bootstrap
             ],
             'contact-form-7' => [
                 'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
-                'condition' => [
-                    'function_exists',
-                    'wpcf7',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/contact-form-7/index.min.css',
@@ -327,10 +325,6 @@ class Bootstrap
             ],
             'weforms' => [
                 'class' => '\Essential_Addons_Elementor\Elements\WeForms',
-                'condition' => [
-                    'function_exists',
-                    'WeForms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/weforms/index.min.css',
@@ -339,10 +333,6 @@ class Bootstrap
             ],
             'ninja-form' => [
                 'class' => '\Essential_Addons_Elementor\Elements\NinjaForms',
-                'condition' => [
-                    'function_exists',
-                    'Ninja_Forms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
@@ -351,10 +341,6 @@ class Bootstrap
             ],
             'gravity-form' => [
                 'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
-                'condition' => [
-                    'class_exists',
-                    'GFForms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/gravity-form/index.min.css',
@@ -363,10 +349,6 @@ class Bootstrap
             ],
             'caldera-form' => [
                 'class' => '\Essential_Addons_Elementor\Elements\Caldera_Forms',
-                'condition' => [
-                    'class_exists',
-                    'Caldera_Forms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/caldera-form/index.min.css',
@@ -375,10 +357,6 @@ class Bootstrap
             ],
             'wpforms' => [
                 'class' => '\Essential_Addons_Elementor\Elements\WpForms',
-                'condition' => [
-                    'class_exists',
-                    '\WPForms\WPForms',
-                ],
                 'dependency' => [
                     'css' => [
                         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/wpforms/index.min.css',
@@ -409,15 +387,19 @@ class Bootstrap
         $this->register_hooks();
     }
 
-
     protected function register_hooks()
     {
+        // Core
+        add_action('init', [$this, 'i18n']);
+        add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
+
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('wp_footer', array($this, 'generate_frontend_scripts'));
+        add_action('wp_print_footer_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('elementor/editor/before_enqueue_scripts', array($this, 'editor_enqueue_scripts'));
 
         // Ajax
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
@@ -442,6 +424,7 @@ class Bootstrap
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));
+            add_filter('plugin_row_meta', array($this, 'insert_plugin_row_meta'), 10, 2);
             add_action('admin_init', array($this, 'redirect_on_activation'));
 
             if (!did_action('elementor/loaded')) {
