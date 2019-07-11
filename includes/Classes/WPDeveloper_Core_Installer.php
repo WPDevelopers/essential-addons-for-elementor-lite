@@ -92,7 +92,7 @@ class WPDeveloper_Core_Installer {
         }
 
         // seems like the plugin doesn't exists. Download and activate it
-        $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
+        $upgrader = new \Plugin_Upgrader( new \WP_Ajax_Upgrader_Skin() );
 
         $api      = plugins_api( 'plugin_information', array( 'slug' => $slug, 'fields' => array( 'sections' => false ) ) );
         $result   = $upgrader->install( $api->download_link );
