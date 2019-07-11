@@ -31,6 +31,12 @@ trait Enqueue
 
         // My Assets
         if ($this->is_preview_mode()) {
+            // generate fallback scripts
+            if (!$this->has_cache_files()) {
+                $this->generate_scripts($this->get_settings());
+            }
+
+            // enqueue scripts
             if ($this->has_cache_files()) {
                 $css_file = EAEL_ASSET_URL . '/eael.min.css';
                 $js_file = EAEL_ASSET_URL . '/eael.min.js';
@@ -38,13 +44,6 @@ trait Enqueue
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
                 $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
             }
-
-            wp_enqueue_style(
-                'eael-editor-css',
-                $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
-                false,
-                EAEL_PLUGIN_VERSION
-            );
 
             wp_enqueue_style(
                 'eael-backend',
@@ -67,25 +66,33 @@ trait Enqueue
             // localize script
             $this->localize_objects = apply_filters('eael/localize_objects', [
                 'ajaxurl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('essential-addons-elementor'),
             ]);
 
             wp_localize_script('eael-backend', 'localize', $this->localize_objects);
-            
-            // generate fallback scripts
-            if (!$this->has_cache_files()) {
-                $this->generate_scripts($this->get_settings());
-            }
-        } else if (is_singular() || is_archive()) {
-            $queried_object = get_queried_object_id();
-            $post_type = (is_singular() ? 'post' : 'term');
-            $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
+        } else {
+            if (is_singular() || is_home() || is_archive()) {
+                $queried_object = get_queried_object_id();
+                $post_type = (is_singular() || is_home() ? 'post' : 'term');
+                $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
-            if (empty($elements)) {
-                return;
+                if (empty($elements)) {
+                    return;
+                }
+    
+                $this->enqueue_protocols($post_type, $queried_object);
             }
-
-            $this->enqueue_protocols($post_type, $queried_object);
         }
+    }
+
+    // editor styles
+    public function editor_enqueue_scripts() {
+        wp_enqueue_style(
+            'eael-editor-css',
+            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
+            false,
+            EAEL_PLUGIN_VERSION
+        );
     }
 
     // rules how css will be enqueued on front-end
@@ -120,6 +127,7 @@ trait Enqueue
         // localize script
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('essential-addons-elementor'),
         ]);
 
         wp_localize_script('eael-front-end', 'localize', $this->localize_objects);

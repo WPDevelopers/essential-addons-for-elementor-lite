@@ -70,8 +70,7 @@
 }
 
 .eael-entry-footer .eael-author-avatar .avatar {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 
 .eael-post-grid .eael-entry-footer .eael-entry-meta {

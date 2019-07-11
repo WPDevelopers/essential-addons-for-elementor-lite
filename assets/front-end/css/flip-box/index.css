@@ -41,8 +41,7 @@
 }
 
 .eael_flip_box_icon_border_round {
-  -webkit-border-radius: 100px;
-          border-radius: 100px;
+  border-radius: 100px;
 }
 
 .eael_eleements_flip_front_icon_style_background,
@@ -319,7 +318,6 @@
 
 .eael-flipbox-img-circle .eael-elements-flip-box-icon-image img,
 .eael-flipbox-img-circle .flipbox-back-image-icon img {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   overflow: hidden;
 }

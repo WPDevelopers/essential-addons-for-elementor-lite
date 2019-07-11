@@ -46,8 +46,7 @@
   background-image: url("../img/bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  -webkit-background-size: cover;
-          background-size: cover;
+  background-size: cover;
   position: relative;
   z-index: 0;
   color: rgba(255, 255, 255, 0.7);

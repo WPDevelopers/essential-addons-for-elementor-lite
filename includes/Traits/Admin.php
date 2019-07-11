@@ -23,7 +23,7 @@ trait Admin
             'manage_options',
             'eael-settings',
             [$this, 'eael_admin_settings_page'],
-            EAEL_PLUGIN_URL . '/assets/admin/images/ea-icon-white.svg',
+            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
     }
@@ -35,7 +35,7 @@ trait Admin
      */
     public function admin_enqueue_scripts($hook)
     {
-        wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/eael-notice.css', false, EAEL_PLUGIN_VERSION);
+        wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/notice.css', false, EAEL_PLUGIN_VERSION);
 
         if (isset($hook) && $hook == 'toplevel_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);
@@ -67,7 +67,7 @@ trait Admin
 		  		<div class="eael-header-bar">
 					<div class="eael-header-left">
 						<div class="eael-admin-logo-inline">
-							<img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/ea-logo.svg'; ?>">
+							<img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-ea-logo.svg'; ?>" alt="essential-addons-for-elementor">
 						</div>
 						<h2 class="title"><?php echo __('Essential Addons Settings', 'essential-addons-elementor'); ?></h2>
 					</div>
@@ -77,12 +77,12 @@ trait Admin
 				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul class="eael-tabs">
-				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-settings.svg'; ?>"><span><?php echo __('General', 'essential-addons-elementor'); ?></span></a></li>
-				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-modules.svg'; ?>"><span><?php echo __('Elements', 'essential-addons-elementor'); ?></span></a></li>
-                        <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>"><span><?php echo __('Extensions', 'essential-addons-elementor'); ?></span></a></li>
-                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/tools.svg'; ?>"><span><?php echo __('Tools', 'essential-addons-elementor'); ?></span></a></li>
+				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-general.svg'; ?>" alt="essential-addons-general-settings"><span><?php echo __('General', 'essential-addons-elementor'); ?></span></a></li>
+				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-elements.svg'; ?>" alt="essential-addons-elements"><span><?php echo __('Elements', 'essential-addons-elementor'); ?></span></a></li>
+                        <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>" alt="essential-addons-extensions"><span><?php echo __('Extensions', 'essential-addons-elementor'); ?></span></a></li>
+                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-tools.svg'; ?>" alt="essential-addons-tools"><span><?php echo __('Tools', 'essential-addons-elementor'); ?></span></a></li>
                         <?php if (!$this->pro_enabled) {?>
-                            <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>"><span><?php echo __('Go Premium', 'essential-addons-elementor'); ?></span></a></li>
+                            <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>" alt="essential-addons-go-pro"><span><?php echo __('Go Premium', 'essential-addons-elementor'); ?></span></a></li>
                         <?php }?>
                     </ul>
                     <?php
@@ -181,7 +181,7 @@ trait Admin
          * This is review message and thumbnail.
          */
         $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor') . '</p>');
-        $notice->thumbnail('review', plugins_url('assets/admin/images/ea-logo.svg', EAEL_PLUGIN_BASENAME));
+        $notice->thumbnail('review', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
 
          /**
          * This is update message and thumbnail.

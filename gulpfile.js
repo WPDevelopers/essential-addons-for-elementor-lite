@@ -27,19 +27,29 @@ var files = {
     sass: ["assets/front-end/sass/*.scss", "assets/front-end/sass/**/*.scss"],
     css: [
         "assets/front-end/css/*.css",
-        "assets/front-end/css/**/*.css",
-        "assets/front-end/css/**/**/*.css",
         "!assets/front-end/css/*.min.css",
+        "assets/front-end/css/**/*.css",
         "!assets/front-end/css/**/*.min.css",
+        "assets/front-end/css/**/**/*.css",
         "!assets/front-end/css/**/**/*.min.css"
+    ],
+    minCSS: [
+        "assets/front-end/css/*.min.css",
+        "assets/front-end/css/**/*.min.css",
+        "assets/front-end/css/**/**/*.min.css"
     ],
     js: [
         "assets/front-end/js/vendor/!(load-more)**/*.js",
-        "assets/front-end/js/vendor/load-more/*.js",
-        "assets/front-end/js/!(vendor)**/*.js",
         "!assets/front-end/js/vendor/!(load-more)**/*.min.js",
+        "assets/front-end/js/vendor/load-more/*.js",
         "!assets/front-end/js/vendor/load-more/*.min.js",
+        "assets/front-end/js/!(vendor)**/*.js",
         "!assets/front-end/js/!(vendor)**/*.min.js"
+    ],
+    minJS: [
+        "assets/front-end/js/vendor/!(load-more)**/*.min.js",
+        "assets/front-end/js/vendor/load-more/*.min.js",
+        "assets/front-end/js/!(vendor)**/*.min.js"
     ]
 };
 
@@ -56,14 +66,7 @@ gulp.task("compileSCSS", function() {
         .pipe(gulp.dest("./" + compassConfig.css));
 });
 
-// minify & combine css
-gulp.task("combineCSS", function() {
-    return gulp
-        .src(files.css)
-        .pipe(concat("eael.css"))
-        .pipe(gulp.dest("./" + compassConfig.css));
-});
-
+// minify csss
 gulp.task("minifyCSS", function() {
     return gulp
         .src(files.css)
@@ -73,19 +76,25 @@ gulp.task("minifyCSS", function() {
             gulp.dest(function(file) {
                 return file.base;
             })
-        )
+        );
+});
+
+// combine css
+gulp.task("combineCSS", function() {
+    return gulp
+        .src(files.css)
+        .pipe(concat("eael.css"))
+        .pipe(gulp.dest("./" + compassConfig.css));
+});
+
+gulp.task("combineMinCSS", function() {
+    return gulp
+        .src(files.minCSS)
         .pipe(concat("eael.min.css"))
         .pipe(gulp.dest("./" + compassConfig.css));
 });
 
-// minify & combine js
-gulp.task("combineJS", function() {
-    return gulp
-        .src(files.js)
-        .pipe(concat("eael.js"))
-        .pipe(gulp.dest("./" + compassConfig.js));
-});
-
+// minify js
 gulp.task("minifyJS", function() {
     return gulp
         .src(files.js)
@@ -96,12 +105,19 @@ gulp.task("minifyJS", function() {
                 return file.base;
             })
         )
-        .pipe(concat("eael.min.js"))
+});
+
+// combine js
+gulp.task("combineJS", function() {
+    return gulp
+        .src(files.js)
+        .pipe(concat("eael.js"))
         .pipe(gulp.dest("./" + compassConfig.js));
 });
 
-// Default task (one-time build).
-gulp.task("default", ["compileSCSS", "combineCSS", "minifyCSS", "combineJS", "minifyJS"]);
-
-// Gulp Watcher if there is any change on SCSS file.
-gulp.watch([files.sass, files.js], ["default"]);
+gulp.task("combineMinJS", function() {
+    return gulp
+        .src(files.minJS)
+        .pipe(concat("eael.min.js"))
+        .pipe(gulp.dest("./" + compassConfig.js));
+});

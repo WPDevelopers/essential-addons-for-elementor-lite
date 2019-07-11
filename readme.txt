@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.0.0
+Stable tag: 3.1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -103,11 +103,12 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
 29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
 
-Extensions: 
+Extensions (Pro): 
 
 1. [Parallax Scrolling](https://essential-addons.com/elementor/parallax-scrolling/) - Add creative parallax scrolling effects to your section, your visitors will love it.
 2. [Particle Effect](https://essential-addons.com/elementor/particle-effect/) - Add creative particle effects to your section, your visitors will love it.
 3. [Advanced Tooltip](https://essential-addons.com/elementor/advanced-tooltip/) - Make any widget more informative with Advanced Tooltip.
+4. [Content Protection](https://essential-addons.com/elementor/content-protection/) - Lock your content with password and allow only selected people to see it.
 
 
 More coming soon (weekly update) ...
@@ -166,7 +167,52 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 3.0.0 - 16/05/2019 =
+= 3.1.2 - 10/07/2019 =
+- Twitter Feed rebuilt with new API for better performance
+- Few minor bugfix and improvements
+
+= 3.1.1 - 04/07/2019 =
+- Added : Post Grid read more button added
+- Fixed : Image Accordion duplication issue
+- Improved : WPML fields
+
+= 3.1.0 - 01/07/2019 =
+- Added : WPML support for all elements
+- Fixed : Manual post selection for all post elements
+- Fixed : Elements not working on blog page
+- Fixed : Elements not working properly on popup
+- Few minor bugfix and improvements
+
+= 3.0.5 - 12/06/2019 =
+- Fixed: Global widget fatal error
+- Few minor bugfix and improvements
+
+= 3.0.4 - 11/06/2019 =
+- Fixed: Global widget styles
+- Fixed: Filter Gallery grid class conflict
+- Fixed: Post Grid masonry
+- Few minor bugfix and improvements
+
+= 3.0.3 - 04/06/2019 =
+- Fixed : Filterable Gallery button show without title
+- Fixed : Pricing Table mobile price overlaping issue 
+- Fixed : ImageLoaded broken path
+- Fixed : Gravity Form inline spacing issue
+- Enhanced : Team Member social icons spacing control added
+- Few minor bugfix and improvements
+
+= 3.0.2 - 29/05/2019 =
+- Fixed : Notice style breaking issue
+- Fixed : Pricing Table tooltip issue
+- Enhanced : ALT tag for all images thourghout the elements
+- Few minor bugfix and improvements
+
+= 3.0.1 - 27/05/2019 =
+- Fixed : Form styler alignment issue
+- Fixed : Creative Button styling issue
+- Few minor bugfix and improvements
+
+= 3.0.0 - 22/05/2019 =
 - Refractored code for better performance
 - Minimized dependencies to keep the plugin lighter
 - Lots of bugfix and improvements

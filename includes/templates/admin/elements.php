@@ -1,18 +1,8 @@
 <?php
 
 $elements = [
-    'global-controls'   => [
-        'title'    => __( 'Global Control', '' ),
-        'elements' => [
-            [
-                'key'   => 'global-elements-control',
-                'class' => 'checkbox-toggle-all',
-                'title' => __( 'Toggle All Elements', 'essential-addons-elementor' )
-            ],
-        ]
-    ],
     'content-elements'  => [
-        'title' => __( 'CONTENT ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Content Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'creative-btn',
@@ -87,7 +77,7 @@ $elements = [
         ]
     ],
     'dynamic-content-elements'  => [
-        'title' => __( 'DYNAMIC CONTENT ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Dynamic Content Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'post-grid',
@@ -147,7 +137,7 @@ $elements = [
         ]
     ],
     'creative-elements' => [
-        'title' => __( 'CREATIVE ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Creative Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'count-down',
@@ -162,8 +152,8 @@ $elements = [
                 'title' => __( 'Filterable Gallery', 'essential-addons-elementor' )
             ],
             [
-                'key'   => 'image-accordion',
-                'title' => __( 'Image Accordion', 'essential-addons-elementor' )
+                'key'    => 'image-accordion',
+                'title'  => __( 'Image Accordion', 'essential-addons-elementor' )
             ],
             [
                 'key'   => 'progress-bar',
@@ -210,11 +200,6 @@ $elements = [
                 'is_pro' => true
             ],
             [
-                'key'    => 'image-accordion',
-                'title'  => __( 'Image Accordion', 'essential-addons-elementor' ),
-                'is_pro' => true
-            ],
-            [
                 'key'    => 'one-page-navigation',
                 'title'  => __( 'One Page Navigation', 'essential-addons-elementor' ),
                 'is_pro' => true
@@ -233,16 +218,11 @@ $elements = [
                 'key'    => 'image-scroller',
                 'title'  => __( 'Image Scroller', 'essential-addons-elementor' ),
                 'is_pro' => true
-            ],
-            [
-                'key'    => 'dismissible-section',
-                'title'  => __( 'Dismissible Section', 'essential-addons-elementor' ),
-                'is_pro' => true
             ]
         ]
     ],
     'marketing-elements'    => [
-        'title' => __( 'MARKETING ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Marketing Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'call-to-action',
@@ -260,7 +240,7 @@ $elements = [
         ]
     ],
     'form-styler-elements'  => [
-        'title' => __( 'FORM STYLER ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Form Styler Elements', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'contact-form-7',
@@ -294,7 +274,7 @@ $elements = [
         ]
     ],
     'social-feed-elements'  => [
-        'title' => __( 'SOCIAL FEED ELEMENTS', 'essential-addons-elementor' ),
+        'title' => __( 'Social Feed Elemens', 'essential-addons-elementor' ),
         'elements'  => [
             [
                 'key'   => 'twitter-feed',
@@ -320,44 +300,46 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 <div id="elements" class="eael-settings-tab eael-elements-list">
     <div class="row">
         <div class="col-full">
-        <?php
-            foreach($elements as $element) :
-                // ob_start();
-        ?>
-        <h4><?php echo $element['title']; ?></h4>
-            <div class="eael-checkbox-container">
-                <?php
-                    foreach($element['elements'] as $item) {
-                        $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
-                        $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
-                        $class = isset($item['class']) ? ' '.$item['class'] : '';
-                    ?>
-                    <div class="eael-checkbox<?php echo $class; ?>">
-                        <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
-                        <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
-                        <p class="eael-el-title">
-                            <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
-                            <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
-                            <?php
-                                if( $item['key'] === 'mailchimp' && $this->pro_enabled ) {
-                                    echo '
-                                    <span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="mailchimp-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
-                                    <input type="hidden" name="mailchimp-api" id="mailchimp-api-hidden" class="mailchimp-api" placeholder="Set API Key" value="'.get_option('eael_save_mailchimp_api').'">
-                                    ';
-                                }elseif( $item['key'] === 'adv-google-map' && $this->pro_enabled ) {
-                                    echo '<span style="font-size: 12px; font-style:italic;"><a href="#" id="eael-popup-api-modal" data-settings="google-map-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
-                                    <input type="hidden" name="google-map-api" id="google-map-api-hidden" class="google-map-api" placeholder="Set API Key" value="'.get_option('eael_save_google_map_api').'">
-                                    ';
-                                }
-                            ?>
-                        </p>
-                    </div>
-                <?php } ?>
+            <div class="elements-global-control-wrap">
+                <h4><?php _e('Global Control') ?></h4>
+                <p><?php _e('Use the Buttons to Activate or Deactivate all the Elements of Essential Addons at once.') ?></p>
+
+                <div class="eael-btn-group">
+                    <button type="button" class="eael-btn eael-global-control-enable"><?php _e('Enable All') ?></button>
+                    <button type="button" class="eael-btn eael-global-control-disable"><?php _e('Disable All') ?></button>
+                </div>
             </div>
-            <?php
-                // echo ob_get_clean();
-                endforeach;
-            ?>
+            <?php foreach($elements as $element) : ?>
+                <?php echo !empty($element['title']) ? '<h4>'.$element['title'].'</h4>' : ''; ?>
+
+                <div class="eael-checkbox-container">
+                    <?php
+                        foreach($element['elements'] as $item) {
+                            $status = isset($item['is_pro']) && !$this->pro_enabled ? 'disabled' : checked( 1, $this->get_settings($item['key']), false );
+                            $label_class = isset($item['is_pro']) && !$this->pro_enabled ? 'eael-get-pro' : '';
+                            $class = isset($item['class']) ? ' '.$item['class'] : '';
+                        ?>
+                        <div class="eael-checkbox<?php echo $class; ?>">
+                            <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
+                            <label for="<?php echo esc_attr($item['key']); ?>" class="<?php echo $label_class; ?>"></label>
+                            <p class="eael-el-title">
+                                <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
+                                <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
+                                <?php
+                                    if ($item['key'] === 'mailchimp' && $this->pro_enabled) {
+                                        echo '
+                                        <span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="mailchimp-api" data-title="Mailchimp API Key" data-key="eael_mailchimp_api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                        <input type="hidden" name="mailchimp-api" id="mailchimp-api-hidden" class="mailchimp-api" placeholder="Set API Key" value="'.get_option('eael_save_mailchimp_api').'">';
+                                    } elseif($item['key'] === 'adv-google-map' && $this->pro_enabled) {
+                                        echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="google-map-api" data-title="Google Map API Key" data-key="eael_google_map_api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                        <input type="hidden" name="google-map-api" id="google-map-api-hidden" class="google-map-api" placeholder="Set API Key" value="'.get_option('eael_save_google_map_api').'">';
+                                    }
+                                ?>
+                            </p>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endforeach; ?>
 
             <div class="eael-save-btn-wrap">
                 <button type="submit" class="button eael-btn js-eael-settings-save"><?php _e('Save settings', 'essential-addons-elementor'); ?></button>

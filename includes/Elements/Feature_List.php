@@ -713,6 +713,20 @@ class Feature_List extends Widget_Base
 
 				$this->add_render_attribute( $list_icon_setting_key, 'class', 'eael-feature-list-icon' );
 				$this->add_render_attribute( $list_title_setting_key, 'class', 'eael-feature-list-title' );
+
+				$feat_title_tag = $settings['eael_feature_list_title_size'];
+				if( ! empty( $item['eael_feature_list_link']['url'] ) ) {
+					$this->add_render_attribute( $list_title_setting_key, 'href', $item['eael_feature_list_link']['url'] );
+
+					if ( $item['eael_feature_list_link']['is_external'] ) {
+						$this->add_render_attribute( $list_title_setting_key, 'target', '_blank' );
+					}
+
+					if ( $item['eael_feature_list_link']['nofollow'] ) {
+						$this->add_render_attribute( $list_title_setting_key, 'rel', 'nofollow' );
+					}
+					$feat_title_tag = 'a';
+				}
 				$this->add_render_attribute( $list_content_setting_key, 'class', 'eael-feature-list-content' );
 
 				$feature_icon_attributes = $this->get_render_attribute_string( $list_icon_setting_key );
@@ -760,7 +774,7 @@ class Feature_List extends Widget_Base
 							$this->add_render_attribute('feature_list_image'.$i, [
 								'src'	=> esc_url( $item['eael_feature_list_img']['url'] ),
 								'class'	=> 'eael-feature-list-img',
-								'alt'	=> esc_attr( $item['eael_feature_list_title'] )
+								'alt'	=> esc_attr(get_post_meta($item['eael_feature_list_img']['id'], '_wp_attachment_image_alt', true))
 							]);
 
                             ?>
@@ -775,10 +789,10 @@ class Feature_List extends Widget_Base
 
                     <div class="eael-feature-list-content-box">
                         <<?php echo implode( ' ', [
-							$settings['eael_feature_list_title_size'],
+							$feat_title_tag,
 							$this->get_render_attribute_string( $list_title_setting_key )
 						] ); ?>
-                        ><?php echo $item['eael_feature_list_title']; ?></<?php echo $settings['eael_feature_list_title_size']; ?>
+                        ><?php echo $item['eael_feature_list_title']; ?></<?php echo $feat_title_tag; ?>
                     >
                     <p <?php echo $this->get_render_attribute_string( $list_content_setting_key ); ?>><?php echo $item['eael_feature_list_content']; ?></p>
                     </div>

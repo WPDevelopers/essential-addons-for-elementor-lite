@@ -81,14 +81,20 @@
 	line-height: 1;
 }
 
+.eael-tab-top-icon li {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
 .eael-tab-top-icon li a {
 	display: flex;
 	flex-wrap: wrap;
 	text-align: center;
 }
 
-.eael-tab-top-icon li a .fa,
-.eael-tab-top-icon li a .eael-tab-title {
+.eael-tab-top-icon li .fa,
+.eael-tab-top-icon li .eael-tab-title {
 	flex: 1 1 100%;
 	line-height: 1;
 }

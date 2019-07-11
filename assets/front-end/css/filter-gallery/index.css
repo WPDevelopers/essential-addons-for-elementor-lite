@@ -225,8 +225,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   height: 50px;
   text-align: center;
   line-height: 50px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   margin: 0 5px;
   font-size: 20px;
   cursor: pointer;
@@ -276,8 +275,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
-  -webkit-background-size: cover;
-          background-size: cover;
+  background-size: cover;
   height: 220px;
   z-index: 0;
   overflow: hidden;
@@ -368,7 +366,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   width: 20%;
 }
 
-.gallery-grid-item {
+.eael-gallery-grid-item {
   margin-left: calc(20px/2);
   margin-right: calc(20px/2);
   margin-bottom: 20px;
@@ -397,7 +395,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   z-index: 10;
 }
 
-.eael-filterable-gallery-item-wrap .gallery-grid-item .gallery-item-thumbnail-wrap > img {
+.eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap > img {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
@@ -480,7 +478,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
           align-items: center;
 }
 
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer {
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer {
   opacity: 1;
   visibility: visible;
 }
@@ -525,8 +523,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .gallery-item-caption-wrap .gallery-item-buttons > a {
   padding: 5px 15px;
   display: inline-block;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   outline: none;
   text-decoration: none;
 }
@@ -540,15 +537,15 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   transition: 0.6s all ease;
 }
 
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up h5,
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up .gallery-item-buttons,
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up p {
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up h5,
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up .gallery-item-buttons,
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up p {
   -webkit-transform: translate(0);
       -ms-transform: translate(0);
           transform: translate(0);
 }
 
-.gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
+.eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
           transform: scale(1);
@@ -614,7 +611,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   transition: 350ms;
 }
 
-.gallery-grid-item:hover .video-popup-bg {
+.eael-gallery-grid-item:hover .video-popup-bg {
   visibility: visible;
   opacity: 1;
 }

@@ -427,12 +427,64 @@ class Post_Grid extends Widget_Base {
 		 * Get posts from database.
 		 */
 		$posts = $this->eael_load_more_ajax($query_args);
+		
 		/**
 		 * Set total posts.
 		 */
 		$total_post = $posts['count'];
+
+		$this->add_render_attribute(
+			'post_grid_wrapper',
+			[
+				'id'	=> 'eael-post-grid-'.esc_attr($this->get_id()),
+				'class'	=> [
+					'eael-post-grid-container',
+					esc_attr($query_args['eael_post_grid_columns'] )
+				]
+			]
+		);
+
+		$options = [
+			'totalPosts'    => $total_post,
+			'loadMoreBtn'   => '#eael-load-more-btn-'.$this->get_id(),            // return selected item jquery $()
+			'postContainer' => '.eael-post-appender-'.esc_attr( $this->get_id() ), // return selected item jquery $()
+			'postStyle'     => 'grid'
+		];
+
+		$settings = [
+			'postType'        => isset($query_args['post_type']) ? $query_args['post_type'] : '',
+			'perPage'         => $query_args['posts_per_page'] != '' ? $query_args['posts_per_page'] : '4',
+			'postOrder'       => $query_args['order'],
+			'orderBy'         => $query_args['orderby'],
+			'showImage'       => $query_args['eael_show_image'],
+			'imageSize'       => $query_args['image_size'],
+			'showTitle'       => $query_args['eael_show_title'],
+			'showExcerpt'     => $query_args['eael_show_excerpt'],
+			'showMeta'        => $query_args['eael_show_meta'],
+			'offset'          => intval( $query_args['offset'] ),
+			'metaPosition'    => $query_args['meta_position'],
+			'excerptLength'   => intval($query_args['eael_excerpt_length'], 10 ),
+			'btnText'         => $query_args['show_load_more_text'],
+			'tax_query'       => json_encode( ! empty( $tax_query ) ? $tax_query : [] ),
+			'exclude_posts'   => json_encode( ! empty( $query_args['post__not_in'] ) ? $query_args['post__not_in'] : []),
+			'post__in'        => json_encode( ! empty( $query_args['post__in'] ) ? $query_args['post__in'] : [] ),
+			'hover_animation' => $query_args['eael_post_grid_hover_animation'],
+			'hover_icon'      => $query_args['eael_post_grid_bg_hover_icon'],
+			'eael_show_read_more_button' => $query_args['eael_show_read_more_button'],
+			'read_more_button_text' => $query_args['read_more_button_text']
+		];
+
+		$this->add_render_attribute(
+            'post_grid_wrapper',
+            [
+                'data-post_grid_options' => wp_json_encode($options),
+                'data-post_grid_settings' => wp_json_encode($settings),
+            ]
+        );
+		
+
 		?>
-		<div id="eael-post-grid-<?php echo esc_attr($this->get_id()); ?>" class="eael-post-grid-container <?php echo esc_attr($settings['eael_post_grid_columns'] ); ?>">
+		<div <?php echo $this->get_render_attribute_string('post_grid_wrapper'); ?>>
 		    <div class="eael-post-grid eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>">
 			<?php
 		        if( ! empty( $posts['content'] ) ){
@@ -445,65 +497,20 @@ class Post_Grid extends Widget_Base {
 		    <div class="clearfix"></div>
 		</div>
 		<?php 
-			if( 1 == $settings['show_load_more'] ) : 
+			if( 1 == $query_args['show_load_more'] ) : 
 				if( 
-					$settings['posts_per_page'] != '-1'
-					&& $total_post != $settings['posts_per_page'] 
-					&& $total_post > intval( $settings['offset'] ) + intval( ! empty( $settings['posts_per_page'] ) ? $settings['posts_per_page'] : 4 ) 
+					$query_args['posts_per_page'] != '-1'
+					&& $total_post != $query_args['posts_per_page'] 
+					&& $total_post > intval( $query_args['offset'] ) + intval( ! empty( $query_args['posts_per_page'] ) ? $query_args['posts_per_page'] : 4 ) 
 				) : 
 		?>
 		<!-- Load More Button -->
 		<div class="eael-load-more-button-wrap">
 			<button class="eael-load-more-button" id="eael-load-more-btn-<?php echo $this->get_id(); ?>">
 				<div class="eael-btn-loader button__loader"></div>
-				<span><?php echo esc_html__( $settings['show_load_more_text'], 'essential-addons-elementor' ); ?></span>
+				<span><?php echo esc_html__( $query_args['show_load_more_text'], 'essential-addons-elementor' ); ?></span>
 			</button>
 		</div>
-		<!-- Loading Lode More Js -->
-		<script>
-			jQuery(document).ready(function($) {
-				'use strict';
-				var options = {
-					totalPosts: <?php echo $total_post; ?>,
-					loadMoreBtn: $( '#eael-load-more-btn-<?php echo $this->get_id(); ?>' ),
-					postContainer: $( '.eael-post-appender-<?php echo esc_attr( $this->get_id() ); ?>' ),
-					postStyle: 'grid',
-				}
-
-				var settings = {
-					postType: '<?php echo isset($settings['eaeposts_post_type']) ? $settings['eaeposts_post_type'] : ''; ?>',
-					perPage: <?php echo $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4'; ?>,
-					postOrder: '<?php echo $settings['order']; ?>',
-					orderBy: '<?php echo $settings['orderby']; ?>',
-					showImage: <?php echo $settings['eael_show_image']; ?>,
-					imageSize: '<?php echo $settings['image_size']; ?>',
-					showTitle: <?php echo $settings['eael_show_title']; ?>,
-					showExcerpt: <?php echo $settings['eael_show_excerpt']; ?>,
-					showMeta: <?php echo $settings['eael_show_meta']; ?>,
-					offset: <?php echo intval( $settings['offset'] ); ?>,
-					metaPosition: '<?php echo $settings['meta_position']; ?>',
-					excerptLength: parseInt( <?php echo $settings['eael_excerpt_length']; ?>, 10 ),
-					btnText: '<?php echo $settings['show_load_more_text']; ?>',
-					tax_query: <?php echo json_encode( ! empty( $tax_query ) ? $tax_query : [] ); ?>,
-					exclude_posts: <?php echo json_encode( ! empty( $settings['post__not_in'] ) ? $settings['post__not_in'] : [] ); ?>,
-					post__in: <?php echo json_encode( ! empty( $settings['post__in'] ) ? $settings['post__in'] : [] ); ?>,
-					hover_animation: '<?php echo $settings['eael_post_grid_hover_animation']; ?>',
-					hover_icon: '<?php echo $settings['eael_post_grid_bg_hover_icon']; ?>'
-				}
-
-				eaelLoadMore( options, settings );
-
-				// Load Masonry Js
-				$(window).load(function(){
-					$('.eael-post-grid:not(.eael-post-carousel)').masonry({
-						itemSelector: '.eael-grid-post',
-						percentPosition: true,
-						columnWidth: '.eael-post-grid-column'
-					});
-				});
-
-			});
-		</script>
 		<?php endif; endif; 
 	}
 

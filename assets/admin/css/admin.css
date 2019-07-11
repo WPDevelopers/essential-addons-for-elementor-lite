@@ -8,17 +8,24 @@
 .eael-settings-wrap {
     padding: 15px;
 }
+
 .eael-header-bar {
     height: auto;
     padding: 10px;
     background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     -webkit-display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    -webkit-justify-content: flex-end;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: flex-end;
-    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 8px 21px 0px rgba(36, 39, 50, 0.08);
+    box-shadow: 0px 8px 21px 0px rgba(36, 39, 50, 0.08);
 }
 
 .eael-settings-wrap .eael-header-left {
@@ -27,20 +34,19 @@
     align-items: center;
 }
 .eael-header-bar .eael-admin-logo-inline {
-    width: 32px;
-    box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
-    padding: 10px 10px 5px;
-    margin-right: 10px;
+    width: 40px;
+    padding: 5px 15px;
+    margin-right: 25px;
 }
 .eael-header-bar .eael-admin-logo-inline img {
     width: 100%;
 }
 .eael-header-bar .title {
-    font-size: 24px;
-    color: #444;
-    font-weight: 600;
+    font-size: 22px;
+    color: #3f3f3f;
+    font-weight: 500;
     margin: 0px;
-    line-height: 1;
+    line-height: 2.5;
 }
 
 .eael-header-left,
@@ -52,7 +58,7 @@
     text-align: right;
 }
 .eael-settings-tabs {
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .eael-settings-tab h4 {
@@ -60,42 +66,54 @@
 }
 
 .eael-settings-tab p {
-    font-size: 14px;
+    font-size: 13px;
+    color: #707070;
+    margin: 0px 0 20px 0;
+    line-height: 21px;
 }
 
 .eael-settings-tabs ul {
     width: 100%;
     height: auto;
-    margin: 25px 0px 20px 0px;
+    margin: 25px 0px 0px 0px;
 }
+
 .eael-settings-tabs ul li {
     display: inline-block;
+    margin-bottom: 0;
 }
+
 .eael-settings-tabs ul li a {
-    padding: 15px 20px;
+    padding: 19px 22px;
     background: #f8fafb;
-    color: #516378;
+    color: #252525;
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    border-top: 2px solid #f8fafb;
+    margin-right: 5px;
+    display: block;
+    border-radius: 4px 4px 0 0;
 }
-.eael-settings-tabs ul li:first-child a {
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
+
+.eael-settings-tabs ul li a img {
+    opacity: 0.6;
 }
+
+.eael-settings-tabs ul li a.active img {
+    opacity: 1;
+}
+
 .eael-settings-tabs ul li a:focus {
     outline: none;
     box-shadow: none;
 }
 .eael-settings-tabs ul li a img {
-    width: 20px;
-    margin: 0 5px -3px 0;
+    width: 18px;
+    margin: 0 15px -3px 0;
 }
 .eael-settings-tab {
     background: #fff;
     padding: 15px 25px;
-    margin-top: -8px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     border-top: none;
     position: relative;
 }
@@ -154,6 +172,7 @@ textarea.eael-form-control {
     flex-flow: row wrap;
     align-items: center;
 }
+
 .eael-checkbox {
     display: flex;
     flex-basis: 330px;
@@ -164,10 +183,11 @@ textarea.eael-form-control {
     margin: 10px;
     padding: 15px;
     box-sizing: border-box;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 6px 20px 0px rgba(194, 204, 222, 0.3);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 5px 18px 0px rgba(0, 4, 32, 0.08);
 }
+
 .eael-checkbox.checkbox-toggle-all {
     border-radius: 100px;
     padding: 12px 25px;
@@ -212,12 +232,12 @@ textarea.eael-form-control {
     animation: switch-off 0.3s ease-out;
 }
 .eael-checkbox input[type="checkbox"]:checked + label::before {
-    background: rgba(54, 214, 107, 0.8);
-    border: 1px solid #36d66b;
+    background: #2ddaa3;
+    border: 1px solid #2ddaa3;
 }
 .eael-checkbox input[type="checkbox"]:checked + label::after {
     left: 1.2em;
-    background: rgba(54, 214, 107, 0.8);
+    background: #ffffff;
     animation: switch-on 0.3s ease-out;
 }
 
@@ -242,7 +262,7 @@ textarea.eael-form-control {
 }
 .eael-tabs li a.active {
     background-color: #fff;
-    border-top: 2px solid #6648fe;
+    color: #724fb6;
 }
 
 /* Footer Style */
@@ -395,12 +415,12 @@ textarea.eael-form-control {
 }
 
 .go-premium .eael-btn.eael-license-btn {
-    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
+    background: linear-gradient(-30deg, #4d18ff, #9a7cff);
     margin-top: 30px;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 .go-premium .eael-btn.eael-license-btn:hover {
-    opacity: .85;
+    opacity: 0.85;
 }
 
 .go-premium img {
@@ -445,18 +465,36 @@ textarea.eael-form-control {
 }
 
 .eael-elements-list h4 {
-    font-size: 18px;
-    text-transform: uppercase;
+    font-size: 20px;
+    text-transform: capitalize;
     letter-spacing: 1px;
-    color: #343434;
+    color: #724fb6;
     margin: 2em 10px 1em;
-    font-style: italic;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 /* Header Button */
-.eael-header-bar .eael-btn {
-    background-color: #3ccd94;
+.eael-header-bar .eael-btn,
+.eael-save-btn-wrap .eael-btn {
+    border-radius: 3px;
+    background-image: -moz-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -webkit-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    width: 160px;
+    height: 50px;
+    transition: all 300ms ease-in-out;
 }
 .eael-header-bar .eael-btn:hover,
 .eael-header-bar .eael-btn:focus {
@@ -471,6 +509,34 @@ textarea.eael-form-control {
 .eael-header-bar .eael-btn.save-now:hover,
 .eael-fb-feed-btn.save-now:hover {
     background: #ff5544;
+}
+
+.eael-admin-block-content .ea-button {
+    font-size: 13px;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+        -169deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    -webkit-box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
+    box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
+    box-shadow: 0px 14px 15px 0px rgba(0, 5, 41, 0.08);
+    color: #fff;
+    display: inline-block;
+    padding: 12px 22px 14px;
+    text-decoration: none;
+    line-height: 1;
+    transition: all 0.3s;
+}
+
+.ea-button:hover {
+    opacity: 0.85;
 }
 
 /* Admin Blocks */
@@ -495,14 +561,20 @@ textarea.eael-form-control {
     justify-content: space-between;
     margin: -10px;
 }
+
 .eael-admin-block-wrapper .eael-admin-block {
     background-color: #fff;
     flex: 1 1 auto;
     min-width: 250px;
     width: 300px;
     margin: 10px 10px 25px 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 38px 0px rgba(16, 16, 16, 0.07);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
 .eael-admin-block-large,
 .eael-sidebar-widget {
     background: #fff;
@@ -514,45 +586,49 @@ textarea.eael-form-control {
     padding: 8px;
 }
 .eael-admin-block-header {
-    max-height: 4em;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
     display: flex;
     align-content: center;
     align-items: center;
+    padding: 30px 0 0 25px;
 }
 .eael-admin-block-header-icon {
-    width: 42px;
-    box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
+    height: 40px;
+    width: 40px;
+    background: #f3edff;
     padding: 10px;
+    box-sizing: border-box;
+    border-radius: 50%;
 }
 .eael-admin-block-header-icon svg {
-    width: 80%;
+    /* width: 80%;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; */
 }
 .eael-admin-block-review .eael-admin-block-header-icon svg {
-    width: 100%;
+    /* width: 100%; */
 }
 .eael-admin-block-support .eael-admin-block-header-icon {
-    width: 30px;
+    /* width: 30px; */
 }
 .eael-settings-tab .eael-admin-title {
-    margin: 1em 0;
+    margin: 0.7em 0 1em;
     padding: 0 1.26582em;
-    font-size: 1.185em;
+    font-size: 15px;
     font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: #333333;
 }
 .eael-admin-block-content {
     overflow: hidden;
     position: relative;
     padding: 1em 1.5em 1.5em;
     background-color: #fff;
+    padding-left: 85px;
+    padding-bottom: 30px;
+    padding-top: 0px;
 }
+
 .eael-preview-img {
     width: 100%;
     height: 100%;
@@ -582,27 +658,24 @@ textarea.eael-form-control {
     display: block;
     margin: 10px auto;
 }
-.eael-admin-sidebar-cta a {
-    font-size: 1em;
-    color: rgba(35, 40, 45, 0.45);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.065em;
+.eael-admin-sidebar-cta {
     text-align: center;
-    margin: 20px auto;
-    display: block;
-    border: 1px solid rgba(35, 40, 45, 0.185);
-    border-radius: 4px;
-    padding: 15px;
-    width: 200px;
-    outline: none;
-    box-shadow: none;
-    transition: all 0.3s;
 }
 
-.eael-admin-sidebar-cta a:hover {
-    color: #23282d;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.715);
+.eael-admin-sidebar-cta a {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    text-decoration: none;
+    text-align: center;
+    margin: 20px auto;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0px 5px 23px 0px rgba(5, 9, 54, 0.12);
+    background: #ffffff;
+    padding: 15px 35px;
+    outline: none;
+    transition: all 0.3s;
 }
 
 /* Facebook Settings CSS */
@@ -651,17 +724,132 @@ textarea.eael-form-control {
 .eael-notice-text {
     padding-left: 10px;
 }
+.eael-el-title {
+    position: relative;
+}
+.eael-checkbox {
+    overflow: hidden;
+}
+
+label.eael-get-pro + .eael-el-title {
+    padding-left: 25px;
+}
+
 .pro-label {
-    font-size: 9px;
-    color: #fff;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-size: 11px;
+    color: #ffffff;
     text-transform: uppercase;
-    background-color: #4b22eb;
-    background: linear-gradient(-30deg, #4D18FF, #9A7CFF);
-    padding: 3px 6px;
-    border-radius: 5px;
+    text-align: center;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    position: absolute;
+    top: -14px;
+    left: -45px;
+    width: 80px;
+    background-image: -moz-linear-gradient(
+        -122deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -webkit-linear-gradient(
+        -122deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    background-image: -ms-linear-gradient(
+        -122deg,
+        rgb(146, 113, 255) 0%,
+        rgb(87, 37, 255) 100%
+    );
+    box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
+    color: #fff;
 }
 #toplevel_page_eael-settings.current .wp-menu-image img {
     opacity: 1;
+}
+
+.eael-admin-block-content a {
+    color: #5725ff;
+}
+
+.elements-global-control-wrap {
+    text-align: center;
+}
+
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox.checkbox-toggle-all {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox
+    label:after {
+    width: 1.8em;
+    height: 1.8em;
+}
+
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox
+    input[type="checkbox"]:checked
+    + label::after {
+    left: 2.2em;
+}
+
+.eael-checkbox-container.elements-global-control-wrap .eael-checkbox label,
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox
+    label:before {
+    width: 100px;
+    height: 2em;
+}
+
+.eael-checkbox-container.elements-global-control-wrap
+    .eael-checkbox.checkbox-toggle-all {
+    flex-basis: 150px;
+    padding: 10px 20px 5px;
+}
+
+.elements-global-control-wrap h4 {
+    font-size: 25px;
+    font-weight: bold;
+    font-style: normal;
+    color: #333333;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.elements-controls-wrap.elements-global-control-wrap p {
+    font-size: 14px;
+    color: #707070;
+}
+
+button.eael-btn.eael-global-control-enable {
+    background: #0099cc;
+}
+
+button.eael-btn.eael-global-control-disable {
+    background: #dc4444;
+}
+
+.eael-btn-group button {
+    border: 0px solid;
+    color: #fff;
+    padding: 13px 25px;
+    border-radius: 3px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin: 0 3px;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+button.eael-btn.eael-global-control-enable:hover {
+    background: #46c1ea;
+}
+
+button.eael-btn.eael-global-control-disable:hover {
+    background: #d01111;
 }
