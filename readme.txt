@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -166,6 +166,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.1.3 - 14/07/2019 =
+- Twitter Feed masonry layout bug fixed
+- Few minor bugfix and improvements
 
 = 3.1.2 - 10/07/2019 =
 - Twitter Feed rebuilt with new API for better performance
