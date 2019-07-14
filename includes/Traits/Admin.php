@@ -200,7 +200,7 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible' );
-        $notice->message( 'upsale', '<p>'. __( 'Increase 20-40% Sales & Interaction in Your Site with <strong>NotificationX!</strong>', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( 'Increase 20-40% Sales & Interaction in Your Site with <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         $notice->upsale_args = array(
