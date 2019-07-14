@@ -23,6 +23,10 @@ $extensions = [
                 'key'    => 'eael-content-protection',
                 'title'  => __( 'Content Protection', 'essential-addons-elementor' ),
                 'is_pro' => true
+            ],
+            [
+                'key'    => 'eael-scroll-progress',
+                'title'  => __( 'Scroll Progress', 'essential-addons-elementor' ),
             ]
         ]
     ]

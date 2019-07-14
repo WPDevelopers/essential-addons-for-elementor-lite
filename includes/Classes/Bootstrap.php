@@ -366,7 +366,19 @@ class Bootstrap
         ]);
 
         // extensions classmap
-        $this->registered_extensions = apply_filters('eael/registered_extensions', []);
+        $this->registered_extensions = apply_filters('eael/registered_extensions', [
+            'eael-scroll-progress' => [
+                'class' => '\Essential_Addons_Elementor\Extensions\Scroll_Progress',
+                'dependency' => [
+                    'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/scroll-progress/index.min.css',
+                    ],
+                    'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/scroll-progress/index.min.js',
+                    ],
+                ],
+            ]
+        ]);
 
         // initialize transient container
         $this->transient_elements = [];
