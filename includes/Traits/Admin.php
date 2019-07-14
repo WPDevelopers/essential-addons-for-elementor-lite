@@ -201,8 +201,7 @@ trait Admin
          */
         $notice->classes( 'upsale', 'notice is-dismissible' );
         $notice->message( 'upsale', '<p>'. __( 'Increase 20-40% Sales & Interaction in Your Site with NotificationX!', $notice->text_domain ) .'</p>' );
-        // $notice->thumbnail( 'upsale', plugins_url( 'admin/assets/img/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
-        $notice->thumbnail( 'upsale', 'https://ps.w.org/notificationx/assets/icon-128x128.png' );
+        $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         $notice->upsale_args = array(
             'slug'      => 'notificationx',
