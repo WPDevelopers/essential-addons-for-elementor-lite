@@ -216,7 +216,7 @@ trait Admin
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
             'file'      => 'notificationx.php',
-            'btn_text'  => __( 'Download Free', $notice->text_domain ),
+            'btn_text'  => __( 'Download Free', 'essential-addons-elementor' ),
             'condition' => [
                 'by' => 'class',
                 'class' => 'NotificationX'
@@ -228,7 +228,7 @@ trait Admin
                 'update' => $notice->timestamp,
                 'upsale' => $notice->makeTime($notice->timestamp, '1 Hour'),
                 'opt_in' => $notice->makeTime($notice->timestamp, '1 Day'),
-                'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 4 days
+                'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
             ],
         );
 
