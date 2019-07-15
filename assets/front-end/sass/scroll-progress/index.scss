@@ -3,10 +3,18 @@
     position: fixed;
     top: 0;
     left: 0;
+    height: 5px;
+    z-index: 999;
+
+    &.eael-scroll-progress-bottom {
+        top: unset;
+        bottom: 0;
+    }
     
     .eael-scroll-progress-fill {
         height: 5px;
-        background-color: #dd102d;
+        background-color: #cfdd10;
         width: 0%;
+        transition: width 50ms ease;
     }
 }
