@@ -1,0 +1,11 @@
+.eael-scroll-progress {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.eael-scroll-progress .eael-scroll-progress-fill {
+  height: 5px;
+  background-color: #dd102d;
+  width: 0%;
+}
