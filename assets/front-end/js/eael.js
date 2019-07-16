@@ -12678,6 +12678,49 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+jQuery(document).ready(function() {
+    jQuery(window).scroll(function() {
+        var winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+        var height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+
+        jQuery(".eael-scroll-progress-fill").css({
+            width: scrolled + "%"
+        });
+    });
+
+    elementor.settings.page.addChangeCallback(
+        "eael_ext_scroll_progress",
+        function(newValue) {
+            var $settings = elementor.settings.page.getSettings();
+
+            if (newValue == "yes") {
+                jQuery("body").append(
+                    '<div class="eael-scroll-progress eael-scroll-progress-' +
+                        $settings.settings.eael_ext_scroll_progress_position +
+                        '"><div class="eael-scroll-progress-fill"></div></div>'
+                );
+            } else {
+                jQuery(".eael-scroll-progress").remove();
+            }
+        }
+    );
+
+    elementor.settings.page.addChangeCallback(
+        "eael_ext_scroll_progress_position",
+        function(newValue) {
+            jQuery(".eael-scroll-progress")
+                .removeClass(
+                    "eael-scroll-progress-top eael-scroll-progress-bottom"
+                )
+                .addClass("eael-scroll-progress-" + newValue);
+        }
+    );
+});
+
 var TwitterFeedHandler = function($scope, $) {
     $gutter = $(".eael-twitter-feed-masonry", $scope).data('gutter');
     $settings = {
