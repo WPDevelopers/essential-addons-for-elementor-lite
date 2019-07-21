@@ -25,8 +25,8 @@ define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
 define('EAEL_PLUGIN_VERSION', '3.1.0');
-define('EAEL_ASSET_PATH', WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'essential-addons-elementor');
-define('EAEL_ASSET_URL', WP_CONTENT_URL . '/essential-addons-elementor');
+define('EAEL_ASSET_PATH', WP_CONTENT_DIR . '/uploads/essential-addons-elementor');
+define('EAEL_ASSET_URL', WP_CONTENT_URL . '/uploads/essential-addons-elementor');
 
 /**
  * Including composer autoloader globally.
