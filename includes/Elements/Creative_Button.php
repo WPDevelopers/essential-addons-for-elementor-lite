@@ -407,6 +407,7 @@ class Creative_Button extends Widget_Base {
 
 
 	protected function render() {
+		$settings = $this->get_settings();
 		$elementId = $this->get_id();
 		$bgcolor = $settings['eael_creative_button_background_color'];
 		$hoverbgcolor = $settings['eael_creative_button_hover_background_color'];
