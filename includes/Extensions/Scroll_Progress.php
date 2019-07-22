@@ -13,11 +13,13 @@ class Scroll_Progress
     public function __construct()
     {
         add_action('elementor/element/post/document_settings/after_section_end', [$this, 'register_controls'], 10);
-        add_action('wp_footer', [$this, 'render_html']);
+        add_action('wp_footer', [$this, 'render_html'], 10);
     }
 
     public function register_controls($element)
     {
+        $global_settings = get_option('eael_global_settings');
+
         $element->start_controls_section(
             'eael_ext_scroll_progress_section',
             [
@@ -37,6 +39,49 @@ class Scroll_Progress
                 'return_value' => 'yes',
             ]
         );
+
+        if ($global_settings['scroll_progress']['enabled'] && get_the_ID() != $global_settings['scroll_progress']['post_id']) {
+            $element->add_control(
+                'eael_global_warning_text',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __('Global Scroll Progress was enabled on <strong>Post ID: ' . $global_settings['scroll_progress']['post_id'] . '</strong>', 'essential-addons-elementor'),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
+        } else {
+            $element->add_control(
+                'eael_ext_scroll_progress_global',
+                [
+                    'label' => __('Enable Scroll Progress Globally', 'essential-addons-elementor'),
+                    'description' => __('Enabling this option will effect on entire site.', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'default' => 'no',
+                    'label_on' => __('Yes', 'essential-addons-elementor'),
+                    'label_off' => __('No', 'essential-addons-elementor'),
+                    'return_value' => 'yes',
+                    'separator' => 'before',
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_scroll_progress_global_display_condition',
+                [
+                    'label' => __('Display On', 'essential-addons-elementor'),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'default' => 'solid',
+                    'options' => [
+                        'posts' => __('All Posts', 'essential-addons-elementor'),
+                        'pages' => __('All Pages', 'essential-addons-elementor'),
+                        'all' => __('All Posts & Pages', 'essential-addons-elementor'),
+                    ],
+                    'condition' => [
+                        'eael_ext_scroll_progress_global' => 'yes',
+                    ],
+                    'separator' => 'before',
+                ]
+            );
+        }
 
         $element->add_control(
             'eael_ext_scroll_progress_position',
