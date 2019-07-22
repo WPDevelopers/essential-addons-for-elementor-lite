@@ -52,6 +52,12 @@ var FancyText = function($scope, $) {
             }
         });
     }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
