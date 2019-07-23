@@ -210,7 +210,7 @@ class Creative_Button extends Widget_Base {
 			$this->add_control(
 				'use_gradient_background',
 				[
-					'label' => __( 'Use Gradient Background', 'plugin-domain' ),
+					'label' => __( 'Use Gradient Background', 'essential-addons-elementor' ),
 					'type' => Controls_Manager::SWITCHER,
 					'label_on' => __( 'Show', 'essential-addons-elementor' ),
 					'label_off' => __( 'Hide', 'essential-addons-elementor' ),
