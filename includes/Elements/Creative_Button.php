@@ -247,12 +247,6 @@ class Creative_Button extends Widget_Base {
 						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before' => 'background-color: {{VALUE}};',
 						'{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover'        => 'background-color: {{VALUE}};',
 						'{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before'       => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave::before'        => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave:hover::before'  => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--aylen::after'        => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--saqui:hover'         => 'color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--nuka:hover::after'   => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--quidel:hover::after' => 'background-color: {{VALUE}};',
 					],
 					'condition' => [
 						'use_gradient_background' => ''
@@ -329,12 +323,6 @@ class Creative_Button extends Widget_Base {
 						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before' => 'background-color: {{VALUE}};',
 						'{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover'        => 'background-color: {{VALUE}};',
 						'{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before'       => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave::before'        => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave:hover::before'  => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--aylen::after'        => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--saqui:hover'         => 'color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--nuka:hover::after'   => 'background-color: {{VALUE}};',
-						'{{WRAPPER}} .eael-creative-button.eael-creative-button--quidel:hover::after' => 'background-color: {{VALUE}};',
 					],
 					'condition' => [
 						'use_gradient_background' => ''
