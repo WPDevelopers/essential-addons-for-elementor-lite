@@ -4,8 +4,6 @@
 .eael-adv-accordion {
   width: auto;
   height: auto;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -15,41 +13,22 @@
   font-size: 1rem;
   font-weight: 600;
   line-height: 1;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 }
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  -webkit-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
   z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
-  -webkit-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
   z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -62,8 +41,7 @@
   display: none;
   border: 1px solid #eee;
   padding: 15px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 1rem;
   line-height: 1.7;
 }
@@ -78,50 +56,38 @@
 
 @-webkit-keyframes rotate-90 {
   0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
+    transform: rotateY(0deg);
   }
   100% {
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
   }
 }
 
 @keyframes rotate-90 {
   0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
+    transform: rotateY(0deg);
   }
   100% {
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
   }
 }
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
   100% {
     opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
 }
 @keyframes fadeIn {
   0% {
     opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
   100% {
     opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
 }

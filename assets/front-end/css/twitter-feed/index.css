@@ -80,8 +80,7 @@
   color: #666666;
   margin: 0 0 5px;
   min-height: 20px;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }

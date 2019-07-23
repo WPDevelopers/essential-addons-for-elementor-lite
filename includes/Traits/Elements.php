@@ -94,7 +94,7 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (is_singular() && !in_array('eael-scroll-progress', (array) $this->transient_extensions)) {
+        if (is_singular() && !in_array('eael-reading-progress', (array) $this->transient_extensions)) {
             $settings = get_option('eael_global_settings');
 
             if ($settings['scroll_progress']['enabled']) {
@@ -109,20 +109,20 @@ trait Elements
                 }
 
                 add_filter('eael/section/after_render', function ($extensions) {
-                    $extensions[] = 'eael-scroll-progress';
+                    $extensions[] = 'eael-reading-progress';
                     return $extensions;
                 });
     
-                echo '<div class="eael-scroll-progress eael-scroll-progress-' . $settings['scroll_progress']['position'] . '">
-                    <div class="eael-scroll-progress-fill"></div>
+                echo '<div class="eael-reading-progress eael-reading-progress-' . $settings['scroll_progress']['position'] . '">
+                    <div class="eael-reading-progress-fill"></div>
                     <style scoped>
-                        .eael-scroll-progress, .eael-scroll-progress .eael-scroll-progress-fill {
+                        .eael-reading-progress, .eael-reading-progress .eael-reading-progress-fill {
                             height: ' . $settings['scroll_progress']['height']['size'] . 'px;
                         }
-                        .eael-scroll-progress {
+                        .eael-reading-progress {
                             background-color: ' . $settings['scroll_progress']['bg_color'] . ';
                         }
-                        .eael-scroll-progress .eael-scroll-progress-fill {
+                        .eael-reading-progress .eael-reading-progress-fill {
                             background-color: ' . $settings['scroll_progress']['fill_color'] . ';
                             transition: width ' . $settings['scroll_progress']['animation_speed']['size'] . 'ms ease;
                         }

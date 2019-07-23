@@ -1,4 +1,4 @@
-.eael-scroll-progress {
+.eael-reading-progress {
     width: 100%;
     position: fixed;
     top: 0;
@@ -6,12 +6,12 @@
     height: 5px;
     z-index: 999;
 
-    &.eael-scroll-progress-bottom {
+    &.eael-reading-progress-bottom {
         top: unset;
         bottom: 0;
     }
     
-    .eael-scroll-progress-fill {
+    .eael-reading-progress-fill {
         height: 5px;
         background-color: #cfdd10;
         width: 0%;

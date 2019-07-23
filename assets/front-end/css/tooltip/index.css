@@ -11,8 +11,6 @@
   color: #333;
   line-height: 1;
   cursor: pointer;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -46,9 +44,7 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left {
   top: 50%;
   right: 100%;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   margin-right: 10px;
 }
 
@@ -67,11 +63,7 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right {
   top: 50%;
   left: 100%;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
+  transform: translateY(-50%);
   transition: all 0.3s ease-in-out;
   margin-left: 10px;
 }
@@ -129,54 +121,27 @@
 
 /*--- Alignments ---*/
 .eael-tooltip-align-left {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .eael-tooltip-align-right {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .eael-tooltip-align-center {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .eael-tooltip-align-justify .eael-tooltip {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /*--- Tooltip Keyframes ---*/
