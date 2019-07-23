@@ -94,7 +94,9 @@ trait Elements
      */
     public function render_global_html()
     {
-        if (is_singular() && !in_array('eael-reading-progress', (array) $this->transient_extensions)) {
+        $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
+
+        if (is_singular() && !in_array('eael-reading-progress', $extensions)) {
             $settings = get_option('eael_global_settings');
 
             if (isset($settings['reading_progress']) && $settings['reading_progress']['enabled']) {
