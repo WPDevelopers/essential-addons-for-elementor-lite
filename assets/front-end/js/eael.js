@@ -12694,7 +12694,7 @@ jQuery(document).ready(function() {
             document.documentElement.clientHeight;
         var scrolled = (winScroll / height) * 100;
 
-        jQuery(".eael-scroll-progress-fill").css({
+        jQuery(".eael-reading-progress-fill").css({
             width: scrolled + "%"
         });
     });
@@ -12707,20 +12707,20 @@ jQuery(document).ready(function() {
                 var $settings = elementor.settings.page.getSettings();
 
                 if (newValue == "yes") {
-                    if (jQuery(".eael-scroll-progress").length == 0) {
+                    if (jQuery(".eael-reading-progress").length == 0) {
                         jQuery("body").append(
-                            '<div class="eael-scroll-progress eael-scroll-progress-' +
+                            '<div class="eael-reading-progress eael-reading-progress-' +
                                 $settings.settings
                                     .eael_ext_scroll_progress_position +
-                                '"><div class="eael-scroll-progress-fill"></div></div>'
+                                '"><div class="eael-reading-progress-fill"></div></div>'
                         );
                     }
 
-                    jQuery(".eael-scroll-progress").css({
+                    jQuery(".eael-reading-progress").css({
                         display: "initial"
                     });
                 } else {
-                    jQuery(".eael-scroll-progress").css({
+                    jQuery(".eael-reading-progress").css({
                         display: "none"
                     });
                 }
@@ -12734,11 +12734,11 @@ jQuery(document).ready(function() {
                     "eael_ext_scroll_progress_position",
                     newValue
                 );
-                jQuery(".eael-scroll-progress")
+                jQuery(".eael-reading-progress")
                     .removeClass(
-                        "eael-scroll-progress-top eael-scroll-progress-bottom"
+                        "eael-reading-progress-top eael-reading-progress-bottom"
                     )
-                    .addClass("eael-scroll-progress-" + newValue);
+                    .addClass("eael-reading-progress-" + newValue);
             }
         );
     }

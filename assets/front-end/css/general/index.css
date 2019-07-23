@@ -52,9 +52,7 @@
   line-height: 1;
   margin: 0;
   text-align: center;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   width: auto;
 }
 
@@ -88,7 +86,6 @@
 }
 
 .swiper-container-3d .swiper-slide {
-  -o-transition-property: all;
   transition-property: all;
   -webkit-transition-property: all;
 }
@@ -120,8 +117,6 @@
   margin: 0;
   padding: 10px 20px;
   width: auto;
-  -webkit-transition: all 0.25s linear 0s;
-  -o-transition: all 0.25s linear 0s;
   transition: all 0.25s linear 0s;
 }
 
@@ -176,8 +171,6 @@
 .eael-custom-radio-checkbox input[type=checkbox]:checked:before,
 .eael-custom-radio-checkbox input[type=radio]:checked:before {
   background: #999;
-  -webkit-transition: all 0.25s linear 0s;
-  -o-transition: all 0.25s linear 0s;
   transition: all 0.25s linear 0s;
 }
 
