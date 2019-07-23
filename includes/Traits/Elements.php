@@ -97,14 +97,12 @@ trait Elements
         if (is_singular() && !in_array('eael-reading-progress', (array) $this->transient_extensions)) {
             $settings = get_option('eael_global_settings');
 
-            if ($settings['scroll_progress']['enabled']) {
-                if ($settings['scroll_progress']['display_condition'] == 'pages' && !is_page()) {
+            if ($settings['reading_progress']['enabled']) {
+                if ($settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
                     return;
-                }
-                if ($settings['scroll_progress']['display_condition'] == 'posts' && !is_single()) {
+                } else if ($settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
                     return;
-                }
-                if ($settings['scroll_progress']['display_condition'] == 'all' && !is_singular()) {
+                } else if ($settings['reading_progress']['display_condition'] == 'all' && !is_singular()) {
                     return;
                 }
 
@@ -113,18 +111,18 @@ trait Elements
                     return $extensions;
                 });
     
-                echo '<div class="eael-reading-progress eael-reading-progress-' . $settings['scroll_progress']['position'] . '">
+                echo '<div class="eael-reading-progress eael-reading-progress-' . $settings['reading_progress']['position'] . '">
                     <div class="eael-reading-progress-fill"></div>
                     <style scoped>
                         .eael-reading-progress, .eael-reading-progress .eael-reading-progress-fill {
-                            height: ' . $settings['scroll_progress']['height']['size'] . 'px;
+                            height: ' . $settings['reading_progress']['height']['size'] . 'px;
                         }
                         .eael-reading-progress {
-                            background-color: ' . $settings['scroll_progress']['bg_color'] . ';
+                            background-color: ' . $settings['reading_progress']['bg_color'] . ';
                         }
                         .eael-reading-progress .eael-reading-progress-fill {
-                            background-color: ' . $settings['scroll_progress']['fill_color'] . ';
-                            transition: width ' . $settings['scroll_progress']['animation_speed']['size'] . 'ms ease;
+                            background-color: ' . $settings['reading_progress']['fill_color'] . ';
+                            transition: width ' . $settings['reading_progress']['animation_speed']['size'] . 'ms ease;
                         }
                     </style>
                 </div>';

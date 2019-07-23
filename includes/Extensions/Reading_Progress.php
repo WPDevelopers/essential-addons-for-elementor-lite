@@ -40,13 +40,16 @@ class Reading_Progress
             ]
         );
 
-        if ($global_settings['reading_progress']['enabled'] && get_the_ID() != $global_settings['reading_progress']['post_id']) {
+        if (isset($global_settings['reading_progress']['enabled']) && $global_settings['reading_progress']['enabled'] == true && get_the_ID() != $global_settings['reading_progress']['post_id']) {
             $element->add_control(
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
                     'raw' => __('Global Reading Progress Bar was enabled on <strong>Post ID: ' . $global_settings['reading_progress']['post_id'] . '</strong>', 'essential-addons-elementor'),
                     'content_classes' => 'eael-warning',
+                    'condition' => [
+                        'eael_ext_reading_progress' => 'yes',
+                    ],
                 ]
             );
         } else {
@@ -61,6 +64,9 @@ class Reading_Progress
                     'label_off' => __('No', 'essential-addons-elementor'),
                     'return_value' => 'yes',
                     'separator' => 'before',
+                    'condition' => [
+                        'eael_ext_reading_progress' => 'yes',
+                    ],
                 ]
             );
 
@@ -76,6 +82,7 @@ class Reading_Progress
                         'all' => __('All Posts & Pages', 'essential-addons-elementor'),
                     ],
                     'condition' => [
+                        'eael_ext_reading_progress' => 'yes',
                         'eael_ext_reading_progress_global' => 'yes',
                     ],
                     'separator' => 'before',
@@ -134,7 +141,7 @@ class Reading_Progress
             [
                 'label' => __('Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#fafafa',
+                'default' => '',
                 'selectors' => [
                     '.eael-reading-progress' => 'background-color: {{VALUE}}',
                 ],
@@ -150,7 +157,7 @@ class Reading_Progress
             [
                 'label' => __('Fill Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#cfdd10',
+                'default' => '#1fd18e',
                 'selectors' => [
                     '.eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}}',
                 ],
