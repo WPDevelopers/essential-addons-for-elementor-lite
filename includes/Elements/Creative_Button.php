@@ -258,7 +258,7 @@ class Creative_Button extends Widget_Base {
 				Group_Control_Background::get_type(),
 				[
 					'name' => 'eael_creative_button_gradient_background',
-					'types' => [ 'classic', 'gradient' ],
+					'types' => [ 'gradient', 'classic' ],
 					'selector' => '{{WRAPPER}} .eael-creative-button',
 					'condition' => [
 						'use_gradient_background' => 'yes'
@@ -334,7 +334,7 @@ class Creative_Button extends Widget_Base {
 				Group_Control_Background::get_type(),
 				[
 					'name' => 'eael_creative_button_hover_gradient_background',
-					'types' => [ 'classic', 'gradient' ],
+					'types' => [ 'gradient', 'classic' ],
 					'selector' => '{{WRAPPER}} .eael-creative-button:hover',
 					'condition' => [
 						'use_gradient_background' => 'yes'
