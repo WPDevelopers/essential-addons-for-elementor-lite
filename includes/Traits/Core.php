@@ -185,6 +185,10 @@ trait Core
                 'fill_color' => $page_settings_model->get_settings('eael_ext_reading_progress_fill_color'),
                 'animation_speed' => $page_settings_model->get_settings('eael_ext_reading_progress_animation_speed'),
             ];
+        } else {
+            if($global_settings['reading_progress']['post_id'] == $post_id) {
+                $global_settings['reading_progress'] = [];
+            }
         }
 
         update_option('eael_global_settings', $global_settings);
