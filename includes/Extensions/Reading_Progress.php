@@ -13,7 +13,7 @@ class Reading_Progress
     public function __construct()
     {
         add_action('elementor/element/post/document_settings/after_section_end', [$this, 'register_controls'], 10);
-        add_action('wp_footer', [$this, 'render_html'], 9);
+        add_action('wp_footer', [$this, 'render_html'], 10);
     }
 
     public function register_controls($element)
@@ -40,12 +40,12 @@ class Reading_Progress
             ]
         );
 
-        if (isset($global_settings['reading_progress']['enabled']) && $global_settings['reading_progress']['enabled'] == true && get_the_ID() != $global_settings['reading_progress']['post_id']) {
+        if (isset($global_settings['reading_progress']['enabled']) && ($global_settings['reading_progress']['enabled'] == true) && get_the_ID() != $global_settings['reading_progress']['post_id']) {
             $element->add_control(
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('Global Reading Progress Bar was enabled on <strong>Post ID: ' . $global_settings['reading_progress']['post_id'] . '</strong>', 'essential-addons-elementor'),
+                    'raw' => __('You can modify the Global Reading Progress Bar by <strong><a href="' .  get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['reading_progress']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor'),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'eael_ext_reading_progress' => 'yes',
