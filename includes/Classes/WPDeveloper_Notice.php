@@ -250,45 +250,56 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function clicked(){        
-        if( isset( $_GET['plugin'] ) && $_GET['plugin'] === $this->plugin_name ) {
-            $options_data = $this->get_options_data();
-            $clicked_from = current( $this->next_notice() );
-            extract($_GET);
-
-            $later_time = '';
-
-            switch( $clicked_from ) {
-
-                case 'opt_in' :
-                    $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
-                    $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
-                    break;
-
-                case 'first_install' : 
-                    $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
-                    break;
-
-                case 'update' : 
-                    $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
-                    $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
-                    break;
-
-                case 'review' : 
-                    $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
-                    break;
-
-                case 'upsale' : 
-                    $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
-                    break;
+        if( isset( $_GET['plugin'] ) ) {
+            $plugin = sanitize_text_field( $_GET['plugin'] );
+            if( $plugin === $this->plugin_name ) {
+                $options_data = $this->get_options_data();
+                $clicked_from = current( $this->next_notice() );
+                if( isset( $_GET['plugin_action'] ) ) {
+                    $plugin_action = sanitize_text_field( $_GET['plugin_action'] );
+                }
+                if( isset( $_GET['dismiss'] ) ) {
+                    $dismiss = sanitize_text_field( $_GET['dismiss'] );
+                }
+                if( isset( $_GET['later'] ) ) {
+                    $later = sanitize_text_field( $_GET['later'] );
+                }
+    
+                $later_time = '';
+    
+                switch( $clicked_from ) {
+    
+                    case 'opt_in' :
+                        $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
+                        $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
+                        break;
+    
+                    case 'first_install' : 
+                        $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
+                        break;
+    
+                    case 'update' : 
+                        $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
+                        $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
+                        break;
+    
+                    case 'review' : 
+                        $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
+                        break;
+    
+                    case 'upsale' : 
+                        $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
+                        break;
+                }
+            
+                if( isset( $later ) && $later == true ) { 
+                    $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] = $later_time;
+                }
+                if( isset( $dismiss ) && $dismiss == true ) { 
+                    $this->update( $clicked_from );
+                }
+                $this->update_options_data( $options_data[ $this->plugin_name ] );
             }
-        
-            if( isset( $later ) && $later == true ) { 
-                $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] = $later_time;
-            }
-            if( isset( $dismiss ) && $dismiss == true ) { 
-                $this->update( $clicked_from );
-            }
-            $this->update_options_data( $options_data[ $this->plugin_name ] );
         }
     }
     /**
