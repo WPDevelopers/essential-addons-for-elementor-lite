@@ -201,10 +201,23 @@ class Creative_Button extends Widget_Base {
 						'eael-creative-button--quidel' 		=> esc_html__( 'Quidel (Pro)', 	'essential-addons-elementor' ),
 						'eael-creative-button--shikoba' 	=> esc_html__( 'Shikoba (Pro)', 	'essential-addons-elementor' ),
 					],
+					'condition' => [
+						'use_gradient_background' => ''
+					],
 					'description' => '10 more effects on <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor">Pro version</a>'
 				]
 			);
-
+			$this->add_control(
+				'use_gradient_background',
+				[
+					'label' => __( 'Use Gradient Background', 'plugin-domain' ),
+					'type' => Controls_Manager::SWITCHER,
+					'label_on' => __( 'Show', 'essential-addons-elementor' ),
+					'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+					'return_value' => 'yes',
+					'default' => '',
+				]
+			);
 			$this->start_controls_tabs( 'eael_creative_button_tabs' );
 
 			$this->start_controls_tab( 'normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
@@ -222,13 +235,40 @@ class Creative_Button extends Widget_Base {
 					],
 				]
 			);
+			$this->add_control(
+				'eael_creative_button_background_color',
+				[
+					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#f54',
+					'selectors' => [
+						'{{WRAPPER}} .eael-creative-button'                                     	  => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--ujarak::before'      => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before' => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover'        => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before'       => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave::before'        => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave:hover::before'  => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--aylen::after'        => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--saqui:hover'         => 'color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--nuka:hover::after'   => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--quidel:hover::after' => 'background-color: {{VALUE}};',
+					],
+					'condition' => [
+						'use_gradient_background' => ''
+					],
+				]
+			);
 
 			$this->add_group_control(
 				Group_Control_Background::get_type(),
 				[
-					'name' => 'eael_creative_button_background',
+					'name' => 'eael_creative_buttongradient_gradient_background',
 					'types' => [ 'classic', 'gradient' ],
 					'selector' => '{{WRAPPER}} .eael-creative-button',
+					'condition' => [
+						'use_gradient_background' => 'yes'
+					],
 				]
 			);
 			
@@ -277,12 +317,40 @@ class Creative_Button extends Widget_Base {
 				]
 			);
 
+			$this->add_control(
+				'eael_creative_button_hover_background_color',
+				[
+					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'type' => Controls_Manager::COLOR,
+					'default' => '#f54',
+					'selectors' => [
+						'{{WRAPPER}} .eael-creative-button:hover'                                     => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--ujarak::before'      => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before' => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover'        => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before'       => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave::before'        => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--wave:hover::before'  => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--aylen::after'        => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--saqui:hover'         => 'color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--nuka:hover::after'   => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .eael-creative-button.eael-creative-button--quidel:hover::after' => 'background-color: {{VALUE}};',
+					],
+					'condition' => [
+						'use_gradient_background' => ''
+					],
+				]
+			);
+
 			$this->add_group_control(
 				Group_Control_Background::get_type(),
 				[
-					'name' => 'eael_creative_button_hover_background',
+					'name' => 'eael_creative_button_hover_gradient_background',
 					'types' => [ 'classic', 'gradient' ],
 					'selector' => '{{WRAPPER}} .eael-creative-button:hover',
+					'condition' => [
+						'use_gradient_background' => 'yes'
+					],
 				]
 			);
 
@@ -443,47 +511,5 @@ class Creative_Button extends Widget_Base {
 	
 	}
 
-	protected function custom_style(){
-		$settings = $this->get_settings();
-		$elementId = $this->get_id();
-		$bgcolor = $settings['eael_creative_button_background_color'];
-		$hoverbgcolor = $settings['eael_creative_button_hover_background_color'];
-		$custom_css = "<style type='text/css'>
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--ujarak:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wayra:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--rayen:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--pipaluk:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--aylen:before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--antiman:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after
-		{
-			background-color: ".$bgcolor.";
-		}
-
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--ujarak::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wayra:hover::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--rayen::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave:hover::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--aylen::after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:hover::after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:hover::after,
-		{
-			background-color: ".$hoverbgcolor.";
-		}
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--saqui:hover{
-			color: ".$hoverbgcolor.";
-		}
-		</style>";
-		return $custom_css;
-	}
 	protected function content_template() {}
 }
