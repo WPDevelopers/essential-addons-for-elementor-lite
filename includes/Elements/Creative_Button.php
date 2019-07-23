@@ -408,46 +408,6 @@ class Creative_Button extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings();
-		$elementId = $this->get_id();
-		$bgcolor = $settings['eael_creative_button_background_color'];
-		$hoverbgcolor = $settings['eael_creative_button_hover_background_color'];
-		
-
-		echo "<style>
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--ujarak:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wayra:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--rayen:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--pipaluk:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--aylen:before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--antiman:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after
-		{
-			background-color: ".$bgcolor.";
-		}
-
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--ujarak::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wayra:hover::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:hover,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--rayen::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave:hover::before,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--aylen::after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:hover::after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after,
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:hover::after,
-		{
-			background-color: ".$hoverbgcolor.";
-		}
-		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--saqui:hover{
-			color: ".$hoverbgcolor.";
-		}
-		</style>";
 
 		$this->add_render_attribute( 'eael_creative_button', [
 			'class'	=> [ 'eael-creative-button', esc_attr($settings['creative_button_effect'] ) ],
@@ -483,5 +443,47 @@ class Creative_Button extends Widget_Base {
 	
 	}
 
+	protected function custom_style(){
+		$settings = $this->get_settings();
+		$elementId = $this->get_id();
+		$bgcolor = $settings['eael_creative_button_background_color'];
+		$hoverbgcolor = $settings['eael_creative_button_hover_background_color'];
+		$custom_css = "<style type='text/css'>
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--ujarak:hover,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wayra:hover,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--rayen:hover,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--pipaluk:after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave:hover,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--aylen:before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--antiman:after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after
+		{
+			background-color: ".$bgcolor.";
+		}
+
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--ujarak::before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wayra:hover::before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--tamaya:hover,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--rayen::before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave::before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--wave:hover::before,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--aylen::after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--nuka:hover::after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:after,
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--quidel:hover::after,
+		{
+			background-color: ".$hoverbgcolor.";
+		}
+		#elementor .elementor-element-".$elementId." .eael-creative-button.eael-creative-button--saqui:hover{
+			color: ".$hoverbgcolor.";
+		}
+		</style>";
+		return $custom_css;
+	}
 	protected function content_template() {}
 }
