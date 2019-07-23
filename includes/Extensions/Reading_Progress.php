@@ -13,7 +13,7 @@ class Reading_Progress
     public function __construct()
     {
         add_action('elementor/element/post/document_settings/after_section_end', [$this, 'register_controls'], 10);
-        add_action('wp_footer', [$this, 'render_html'], 10);
+        add_action('wp_footer', [$this, 'render_html'], 9);
     }
 
     public function register_controls($element)
