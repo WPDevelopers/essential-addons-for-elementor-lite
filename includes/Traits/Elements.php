@@ -101,7 +101,7 @@ trait Elements
                 if ($settings['scroll_progress']['display_condition'] == 'pages' && !is_page()) {
                     return;
                 }
-                if ($settings['scroll_progress']['display_condition'] == 'posts' && !is_post()) {
+                if ($settings['scroll_progress']['display_condition'] == 'posts' && !is_single()) {
                     return;
                 }
                 if ($settings['scroll_progress']['display_condition'] == 'all' && !is_singular()) {
