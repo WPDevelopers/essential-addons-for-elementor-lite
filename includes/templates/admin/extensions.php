@@ -26,7 +26,7 @@ $extensions = [
             ],
             [
                 'key'    => 'eael-reading-progress',
-                'title'  => __( 'Reading Progress', 'essential-addons-elementor' ),
+                'title'  => __( 'Reading Progress Bar', 'essential-addons-elementor' ),
             ]
         ]
     ]
