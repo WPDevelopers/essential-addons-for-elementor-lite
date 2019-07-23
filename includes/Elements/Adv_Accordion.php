@@ -11,6 +11,7 @@ use \Elementor\Frontend;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Background as Group_Control_Background;
 use \Elementor\Widget_Base as Widget_Base;
 use \Essential_Addons_Elementor\Classes\Bootstrap;
 
@@ -364,15 +365,13 @@ class Adv_Accordion extends Widget_Base
         $this->start_controls_tabs('eael_adv_accordion_header_tabs');
         # Normal State Tab
         $this->start_controls_tab('eael_adv_accordion_header_normal', ['label' => esc_html__('Normal', 'essential-addons-elementor')]);
-        $this->add_control(
-            'eael_adv_accordion_tab_color',
+        
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#f1f1f1',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header' => 'background-color: {{VALUE}};',
-                ],
+                'name' => 'eael_adv_accordion_tab_background',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header'
             ]
         );
         $this->add_control(
@@ -429,15 +428,12 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_adv_accordion_tab_color_hover',
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#414141',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover' => 'background-color: {{VALUE}};',
-                ],
+                'name' => 'eael_adv_accordion_tab_background_hover',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover'
             ]
         );
         $this->add_control(
@@ -494,15 +490,12 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_adv_accordion_tab_color_active',
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#444',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active' => 'background-color: {{VALUE}};',
-                ],
+                'name' => 'eael_adv_accordion_tab_background_active',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active'
             ]
         );
         $this->add_control(
@@ -566,15 +559,12 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'adv_accordion_content_bg_color',
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'background-color: {{VALUE}};',
-                ],
+                'name' => 'adv_accordion_content_bg',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content'
             ]
         );
 
