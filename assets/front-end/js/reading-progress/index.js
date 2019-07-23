@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
     // live prev
     if (isEditMode) {
         elementor.settings.page.addChangeCallback(
-            "eael_ext_scroll_progress",
+            "eael_ext_reading_progress",
             function(newValue) {
                 var $settings = elementor.settings.page.getSettings();
 
@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
                         jQuery("body").append(
                             '<div class="eael-reading-progress eael-reading-progress-' +
                                 $settings.settings
-                                    .eael_ext_scroll_progress_position +
+                                    .eael_ext_reading_progress_position +
                                 '"><div class="eael-reading-progress-fill"></div></div>'
                         );
                     }
@@ -42,10 +42,10 @@ jQuery(document).ready(function() {
         );
 
         elementor.settings.page.addChangeCallback(
-            "eael_ext_scroll_progress_position",
+            "eael_ext_reading_progress_position",
             function(newValue) {
                 elementor.settings.page.setSettings(
-                    "eael_ext_scroll_progress_position",
+                    "eael_ext_reading_progress_position",
                     newValue
                 );
                 jQuery(".eael-reading-progress")
