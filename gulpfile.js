@@ -60,7 +60,7 @@ gulp.task("compileSCSS", function() {
         .pipe(compass(compassConfig))
         .pipe(
             autoprefixer({
-                browsers: ["last 10 versions"]
+                Browserslist: ["last 10 versions"]
             })
         )
         .pipe(gulp.dest("./" + compassConfig.css));
