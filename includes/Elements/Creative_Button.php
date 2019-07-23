@@ -257,7 +257,7 @@ class Creative_Button extends Widget_Base {
 			$this->add_group_control(
 				Group_Control_Background::get_type(),
 				[
-					'name' => 'eael_creative_buttongradient_gradient_background',
+					'name' => 'eael_creative_button_gradient_background',
 					'types' => [ 'classic', 'gradient' ],
 					'selector' => '{{WRAPPER}} .eael-creative-button',
 					'condition' => [
