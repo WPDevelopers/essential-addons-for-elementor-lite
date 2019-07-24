@@ -6,14 +6,12 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Core\Settings\Manager as Settings_Manager;
 
 class Reading_Progress
 {
     public function __construct()
     {
         add_action('elementor/element/post/document_settings/after_section_end', [$this, 'register_controls'], 10);
-        add_action('wp_footer', [$this, 'render_html'], 10);
     }
 
     public function register_controls($element)
@@ -40,13 +38,23 @@ class Reading_Progress
             ]
         );
 
+        $element->add_control(
+            'eael_ext_reading_progress_has_global',
+            [
+                'label' => __('Enabled Globally?', 'essential-addons-elementor'),
+                'type' => \Elementor\Controls_Manager::HIDDEN,
+                'default' => isset($global_settings['reading_progress']['enabled']) ? true : false,
+            ]
+        );
+
         if (isset($global_settings['reading_progress']['enabled']) && ($global_settings['reading_progress']['enabled'] == true) && get_the_ID() != $global_settings['reading_progress']['post_id']) {
             $element->add_control(
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('You can modify the Global Reading Progress Bar by <strong><a href="' .  get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['reading_progress']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor'),
+                    'raw' => __('You can modify the Global Reading Progress Bar by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['reading_progress']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor'),
                     'content_classes' => 'eael-warning',
+                    'separator' => 'before',
                     'condition' => [
                         'eael_ext_reading_progress' => 'yes',
                     ],
@@ -126,8 +134,8 @@ class Reading_Progress
                     'size' => 5,
                 ],
                 'selectors' => [
-                    '.eael-reading-progress' => 'height: {{SIZE}}{{UNIT}}',
-                    '.eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress' => 'height: {{SIZE}}{{UNIT}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'height: {{SIZE}}{{UNIT}}',
                 ],
                 'separator' => 'before',
                 'condition' => [
@@ -159,7 +167,7 @@ class Reading_Progress
                 'type' => Controls_Manager::COLOR,
                 'default' => '#1fd18e',
                 'selectors' => [
-                    '.eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}}',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'background-color: {{VALUE}}',
                 ],
                 'separator' => 'before',
                 'condition' => [
@@ -186,7 +194,7 @@ class Reading_Progress
                     'size' => 50,
                 ],
                 'selectors' => [
-                    '.eael-reading-progress .eael-reading-progress-fill' => 'transition: width {{SIZE}}ms ease;',
+                    '.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill' => 'transition: width {{SIZE}}ms ease;',
                 ],
                 'separator' => 'before',
                 'condition' => [
@@ -197,22 +205,4 @@ class Reading_Progress
 
         $element->end_controls_section();
     }
-
-    public function render_html()
-    {
-        if (is_singular() || is_home() || is_archive()) {
-            $page_settings_manager = Settings_Manager::get_settings_managers('page');
-            $page_settings_model = $page_settings_manager->get_model(get_the_ID());
-
-            if ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes') {
-                add_filter('eael/section/after_render', function ($extensions) {
-                    $extensions[] = 'eael-reading-progress';
-                    return $extensions;
-                });
-
-                echo '<div class="eael-reading-progress eael-reading-progress-' . $page_settings_model->get_settings('eael_ext_reading_progress_position') . '"><div class="eael-reading-progress-fill"></div></div>';
-            }
-        }
-    }
-
 }

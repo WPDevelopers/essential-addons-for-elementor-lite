@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use Essential_Addons_Elementor\Classes\Group_Control_EA_Posts;
+use \Elementor\Core\Settings\Manager as Settings_Manager;
 
 trait Elements
 {
@@ -94,40 +95,38 @@ trait Elements
      */
     public function render_global_html()
     {
-        $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
+        if (is_singular()) {
+            $page_settings_manager = Settings_Manager::get_settings_managers('page');
+            $page_settings_model = $page_settings_manager->get_model(get_the_ID());
+            $global_settings = get_option('eael_global_settings');
+            $html = '';
 
-        if (is_singular() && !in_array('eael-reading-progress', $extensions)) {
-            $settings = get_option('eael_global_settings');
-
-            if (isset($settings['reading_progress']['enabled']) && $settings['reading_progress']['enabled']) {
-                if ($settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
-                    return;
-                } else if ($settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
-                    return;
-                } else if ($settings['reading_progress']['display_condition'] == 'all' && !is_singular()) {
-                    return;
-                }
-
+            if ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
                 add_filter('eael/section/after_render', function ($extensions) {
                     $extensions[] = 'eael-reading-progress';
                     return $extensions;
                 });
-    
-                echo '<div class="eael-reading-progress eael-reading-progress-' . $settings['reading_progress']['position'] . '">
-                    <div class="eael-reading-progress-fill"></div>
-                    <style scoped>
-                        .eael-reading-progress, .eael-reading-progress .eael-reading-progress-fill {
-                            height: ' . $settings['reading_progress']['height']['size'] . 'px;
-                        }
-                        .eael-reading-progress {
-                            background-color: ' . $settings['reading_progress']['bg_color'] . ';
-                        }
-                        .eael-reading-progress .eael-reading-progress-fill {
-                            background-color: ' . $settings['reading_progress']['fill_color'] . ';
-                            transition: width ' . $settings['reading_progress']['animation_speed']['size'] . 'ms ease;
-                        }
-                    </style>
+
+                $html .= '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' ? 'local' : 'global') . '">
+                    <div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $page_settings_model->get_settings('eael_ext_reading_progress_position') . '">
+                        <div class="eael-reading-progress-fill"></div>
+                    </div>
+                    <div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . @$global_settings['reading_progress']['position'] . '" style="background-color: ' . @$global_settings['reading_progress']['bg_color'] . ';">
+                        <div class="eael-reading-progress-fill" style="height: ' . @$global_settings['reading_progress']['height']['size'] . 'px;background-color: ' . @$global_settings['reading_progress']['fill_color'] . ';transition: width ' . @$global_settings['reading_progress']['animation_speed']['size'] . 'ms ease;"></div>
+                    </div>
                 </div>';
+
+                if ($page_settings_model->get_settings('eael_ext_reading_progress') != 'yes') {
+                    if ($global_settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
+                        return;
+                    } else if ($global_settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
+                        return;
+                    } else if ($global_settings['reading_progress']['display_condition'] == 'all' && !is_singular()) {
+                        return;
+                    }
+                }
+
+                echo $html;
             }
         }
     }
