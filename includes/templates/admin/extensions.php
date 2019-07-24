@@ -23,6 +23,10 @@ $extensions = [
                 'key'    => 'eael-content-protection',
                 'title'  => __( 'Content Protection', 'essential-addons-elementor' ),
                 'is_pro' => true
+            ],
+            [
+                'key'    => 'eael-reading-progress',
+                'title'  => __( 'Reading Progress Bar', 'essential-addons-elementor' ),
             ]
         ]
     ]

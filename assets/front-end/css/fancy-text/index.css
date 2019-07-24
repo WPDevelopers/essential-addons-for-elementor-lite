@@ -1,11 +1,11 @@
-/*--------------------------*/
-/* 03. Fancy Text Style
-/*--------------------------*/
 .eael-fancy-text-container p {
   margin: 0;
 }
 
-.eael-fancy-text-strings,
+.eael-fancy-text-strings {
+  display: none;
+}
+
 .eael-fancy-text-prefix,
 .eael-fancy-text-suffix {
   display: inline-block;
@@ -43,7 +43,6 @@
     opacity: 1;
   }
 }
-/*--- Style 2 ---*/
 .eael-fancy-text-container.style-2 {
   font-size: 24px;
 }
