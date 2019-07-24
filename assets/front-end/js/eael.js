@@ -12707,22 +12707,40 @@ jQuery(document).ready(function() {
                 var $settings = elementor.settings.page.getSettings();
 
                 if (newValue == "yes") {
-                    if (jQuery(".eael-reading-progress").length == 0) {
+                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
                         jQuery("body").append(
-                            '<div class="eael-reading-progress eael-reading-progress-' +
+                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
                                 $settings.settings
                                     .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div>'
+                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div></div>'
                         );
                     }
 
-                    jQuery(".eael-reading-progress").css({
-                        display: "initial"
-                    });
+                    jQuery(".eael-reading-progress-wrap")
+                        .addClass("eael-reading-progress-wrap-local")
+                        .removeClass(
+                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
+                        );
                 } else {
-                    jQuery(".eael-reading-progress").css({
-                        display: "none"
-                    });
+                    jQuery(".eael-reading-progress-wrap").removeClass(
+                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
+                    );
+
+                    if (
+                        $settings.settings
+                            .eael_ext_reading_progress_has_global == true
+                    ) {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-global"
+                        );
+                    } else {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-disabled"
+                        );
+                    }
                 }
             }
         );
