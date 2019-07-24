@@ -291,6 +291,15 @@ $elements = [
                 'is_pro' => true
             ],
         ]
+    ],
+    'learn-dash-elements'   => [
+        'title' => __( 'LearnDash Elements', 'essential-addons-elementor' ),
+        'elements'  => [
+            [
+                'key'   => 'learn-dash-course-list',
+                'title' => __( 'LearnDash Course List', 'essential-addons-elementor' )
+            ]
+        ]
     ]
 ];
 

@@ -1,38 +1,19 @@
-/*----------------------------*/
-/* 29. Content Ticker
-/*----------------------------*/
 .eael-ticker-wrap {
   overflow: hidden;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-flow: row nowrap;
+  align-items: center;
   width: 100%;
 }
 
 .eael-ticker-wrap .ticker-badge {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
+  flex: 0 0 auto;
   padding: 8px 12px;
 }
 
 .eael-ticker-wrap .eael-ticker {
   overflow: hidden;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .eael-ticker-wrap .eael-ticker .ticker-content {
@@ -65,11 +46,7 @@
 
 @media only screen and (max-width: 767px) {
   .eael-ticker-wrap {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-flow: row wrap;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    flex-flow: row wrap;
   }
 
   .content-ticker-pagination {

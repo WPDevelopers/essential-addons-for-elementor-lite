@@ -176,6 +176,33 @@ trait Eael_WPML {
             ],
         ];
 
+        $widgets['eael-post-grid'] = [
+            'conditions' => ['widgetType' => 'eael-post-grid'],
+            'fields' => [
+                [
+                    'field'       => 'show_load_more_text',
+                    'type'        => __('Post Grid: Load More Button', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'read_more_button_text',
+                    'type'        => __('Post Grid: Read More Button', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ]
+            ],
+        ];
+
+        $widgets['eael-post-timeline'] = [
+            'conditions' => ['widgetType' => 'eael-post-timeline'],
+            'fields' => [
+                [
+                    'field'       => 'show_load_more_text',
+                    'type'        => __('Post Timeline: Load More Button', 'essential-addons-elementor'),
+                    'editor_type' => 'LINE',
+                ]
+            ],
+        ];
+
         $widgets['eael-pricing-table'] = [
             'conditions' => ['widgetType' => 'eael-pricing-table'],
             'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Pricing_Table',

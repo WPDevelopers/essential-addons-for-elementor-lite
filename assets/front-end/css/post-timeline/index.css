@@ -37,8 +37,7 @@
   background-color: #9fa9af;
   border: 5px solid #fff;
   border-radius: 50%;
-  -webkit-box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
   content: "";
   height: 20px;
   position: absolute;
@@ -64,11 +63,9 @@
 }
 
 .eael-timeline-post-inner {
-  background: -o-linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 transparent;
   background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 transparent;
   border: 8px solid #e5eaed;
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   float: right;
   margin: 30px 40px 30px auto;
   position: relative;
@@ -124,8 +121,6 @@
   overflow: hidden;
   position: relative;
   opacity: .6;
-  -webkit-transition: all .3s;
-  -o-transition: all .3s;
   transition: all .3s;
 }
 
@@ -151,8 +146,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-transition: all .3s;
-  -o-transition: all .3s;
   transition: all .3s;
 }
 
@@ -185,8 +178,6 @@
   text-align: center;
   top: 50px;
   z-index: 99;
-  -webkit-transition: all .5s;
-  -o-transition: all .5s;
   transition: all .5s;
 }
 
@@ -234,9 +225,6 @@
 }
 
 .eael-load-more-button-wrap {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 

@@ -366,7 +366,19 @@ class Bootstrap
         ]);
 
         // extensions classmap
-        $this->registered_extensions = apply_filters('eael/registered_extensions', []);
+        $this->registered_extensions = apply_filters('eael/registered_extensions', [
+            'eael-reading-progress' => [
+                'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
+                'dependency' => [
+                    'css' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/reading-progress/index.min.css',
+                    ],
+                    'js' => [
+                        EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/reading-progress/index.min.js',
+                    ],
+                ],
+            ],
+        ]);
 
         // initialize transient container
         $this->transient_elements = [];
@@ -392,6 +404,7 @@ class Bootstrap
         // Core
         add_action('init', [$this, 'i18n']);
         add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
+        add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Generator
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
@@ -409,6 +422,7 @@ class Bootstrap
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/controls/controls_registered', array($this, 'register_controls_group'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
+        add_action('wp_footer', array($this, 'render_global_html'));
 
         // Admin
         if (is_admin()) {
