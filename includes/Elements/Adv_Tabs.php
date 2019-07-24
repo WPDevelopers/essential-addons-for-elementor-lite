@@ -478,7 +478,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#f1f1f1',
+                'default' => '#333',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
                 ],
