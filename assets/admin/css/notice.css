@@ -113,7 +113,7 @@ span.coupon-code {
     padding: 10px 0;
 }
 .wpdeveloper-upsale-notice .wpdeveloper-notice-message + .notice-dismiss {
-    top: 18px;
+    top: 10px;
 }
 .wpdeveloper-upsale-notice #plugin-install-core {
     margin-left: 10px;
@@ -127,10 +127,16 @@ span.coupon-code {
     display: flex;
 }
 .wpdeveloper-upsale-notice .wpdeveloper-notice-thumbnail {
-    padding: 0;
-    width: 80px;
+    padding: 10px;
+    width: 40px;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-thumbnail img {
+    width: 32px;
 }
 .toplevel_page_eael-settings .wp-menu-image img {
     max-width: 20px;
     padding-top: 8px !important;
+}
+.wpdeveloper-upsale-notice .wpdeveloper-notice-message .button {
+    margin-left: 15px;
 }
