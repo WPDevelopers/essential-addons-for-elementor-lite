@@ -25,8 +25,8 @@ $extensions = [
                 'is_pro' => true
             ],
             [
-                'key'    => 'eael-scroll-progress',
-                'title'  => __( 'Scroll Progress', 'essential-addons-elementor' ),
+                'key'    => 'eael-reading-progress',
+                'title'  => __( 'Reading Progress Bar', 'essential-addons-elementor' ),
             ]
         ]
     ]

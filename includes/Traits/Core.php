@@ -171,19 +171,26 @@ trait Core
     {
         $page_settings_manager = \Elementor\Core\Settings\Manager::get_settings_managers('page');
         $page_settings_model = $page_settings_manager->get_model($post_id);
-        $eael_ext_scroll_progress_global = $page_settings_model->get_settings('eael_ext_scroll_progress_global');
+        $eael_ext_reading_progress_global = $page_settings_model->get_settings('eael_ext_reading_progress_global');
+        $global_settings = get_option('eael_global_settings');
 
-        update_option('eael_global_settings', [
-            'scroll_progress' => [
+        if($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes') {
+            $global_settings['reading_progress'] = [
                 'post_id' => $post_id,
-                'enabled' => ($page_settings_model->get_settings('eael_ext_scroll_progress_global') == 'yes' ? true : false),
-                'display_condition' => $page_settings_model->get_settings('eael_ext_scroll_progress_global_display_condition'),
-                'position' => $page_settings_model->get_settings('eael_ext_scroll_progress_position'),
-                'height' => $page_settings_model->get_settings('eael_ext_scroll_progress_height'),
-                'bg_color' => $page_settings_model->get_settings('eael_ext_scroll_progress_bg_color'),
-                'fill_color' => $page_settings_model->get_settings('eael_ext_scroll_progress_fill_color'),
-                'animation_speed' => $page_settings_model->get_settings('eael_ext_scroll_progress_animation_speed'),
-            ],
-        ]);
+                'enabled' => ($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes' ? true : false),
+                'display_condition' => $page_settings_model->get_settings('eael_ext_reading_progress_global_display_condition'),
+                'position' => $page_settings_model->get_settings('eael_ext_reading_progress_position'),
+                'height' => $page_settings_model->get_settings('eael_ext_reading_progress_height'),
+                'bg_color' => $page_settings_model->get_settings('eael_ext_reading_progress_bg_color'),
+                'fill_color' => $page_settings_model->get_settings('eael_ext_reading_progress_fill_color'),
+                'animation_speed' => $page_settings_model->get_settings('eael_ext_reading_progress_animation_speed'),
+            ];
+        } else {
+            if($global_settings['reading_progress']['post_id'] == $post_id) {
+                $global_settings['reading_progress'] = [];
+            }
+        }
+
+        update_option('eael_global_settings', $global_settings);
     }
 }
