@@ -134,7 +134,19 @@ trait Admin
     public function admin_notice()
     {
         $notice = new WPDeveloper_Notice(EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION);
-        $notice->finish_time['update'] = 'May 28, 2019';
+        /**
+         * Current Notice End Time.
+         * Notice will dismiss in 3 days if user does nothing.
+         */
+        $notice->cne_time = '3 Day';
+        /**
+         * Current Notice Maybe Later Time.
+         * Notice will show again in 7 days
+         */
+        $notice->maybe_later_time = '7 Day';
+
+        $notice->text_domain = 'essential-addons-elementor';
+
         $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
         $url = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
@@ -182,31 +194,31 @@ trait Admin
          */
         $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor') . '</p>');
         $notice->thumbnail('review', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
-
-         /**
-         * This is update message and thumbnail.
-         */
-        $notice->message('update', '<p>' . __("Get 20% Discount & Turbo-Charge Your <strong>Elementor</strong> Page Building With <strong>Essential Addons PRO</strong>. Use Coupon Code <span class='coupon-code'>SpeedUp</span> on checkout. <a class='ea-notice-cta' target='_blank' href='https://wpdeveloper.net/plugins/essential-addons-elementor#pricing'>Redeem Now</a>", 'essential-addons-elementor') . '<button class="notice-dismiss" data-notice="update"></button></p>');
-        $notice->thumbnail('update', plugins_url('assets/admin/images/icon-bolt.svg', EAEL_PLUGIN_BASENAME));
-
         /**
-         * Current Notice End Time.
-         * Notice will dismiss in 3 days if user does nothing.
+         * This is upsale notice settings
+         * classes for wrapper, 
+         * Message message for showing.
          */
-        $notice->cne_time = '3 Day';
-        /**
-         * Current Notice Maybe Later Time.
-         * Notice will show again in 7 days
-         */
-        $notice->maybe_later_time = '7 Day';
+        $notice->classes( 'upsale', 'notice is-dismissible' );
+        $notice->message( 'upsale', '<p>'. __( 'Increase 20-40% Sales & Interaction in Your Site with <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
+        $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
-        $notice->text_domain = 'essential-addons-elementor';
+        $notice->upsale_args = array(
+            'slug'      => 'notificationx',
+            'page_slug' => 'nx-builder',
+            'file'      => 'notificationx.php',
+            'btn_text'  => __( 'Download Free', 'essential-addons-elementor' ),
+            'condition' => [
+                'by' => 'class',
+                'class' => 'NotificationX'
+            ],
+        );
 
         $notice->options_args = array(
             'notice_will_show' => [
-                'update' => $notice->timestamp,
-                'opt_in' => $notice->makeTime($notice->timestamp, '1 Day'),
-                'review' => $notice->makeTime($notice->timestamp, '4 Day'), // after 4 days
+                'opt_in' => $notice->timestamp,
+                'upsale' => $notice->makeTime($notice->timestamp, '1 Hour'),
+                'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
             ],
         );
 
