@@ -25,6 +25,7 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	background-color: #f1f1f1;
 }
 
 .eael-advance-tabs .eael-tabs-nav>ul li:after {
@@ -43,7 +44,11 @@
 	border-bottom: 0px;
 	display: none;
 }
-
+.eael-advance-tabs .eael-tabs-nav > ul li:hover,
+.eael-advance-tabs .eael-tabs-nav > ul li.active,
+.eael-advance-tabs .eael-tabs-nav > ul li.active-default{
+	background-color: #444;
+}
 .eael-advance-tabs.active-caret-on .eael-tabs-nav>ul li.active:after,
 .eael-advance-tabs.active-caret-on .eael-tabs-nav>ul li.active-default:after {
 	display: none;
