@@ -99,7 +99,7 @@ trait Elements
         if (is_singular() && !in_array('eael-reading-progress', $extensions)) {
             $settings = get_option('eael_global_settings');
 
-            if (isset($settings['reading_progress']) && $settings['reading_progress']['enabled']) {
+            if (isset($settings['reading_progress']['enabled']) && $settings['reading_progress']['enabled']) {
                 if ($settings['reading_progress']['display_condition'] == 'pages' && !is_page()) {
                     return;
                 } else if ($settings['reading_progress']['display_condition'] == 'posts' && !is_single()) {
