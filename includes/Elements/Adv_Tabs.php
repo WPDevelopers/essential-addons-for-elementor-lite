@@ -407,10 +407,21 @@ class Adv_Tabs extends Widget_Base
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
         $this->start_controls_tab('eael_adv_tabs_header_normal', ['label' => esc_html__('Normal', 'essential-addons-elementor')]);
+        $this->add_control(
+            'eael_adv_tabs_tab_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#f1f1f1',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'eael_adv_tabs_tab_bg',
+                'name' => 'eael_adv_tabs_tab_bgtype',
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li'
             ]
@@ -462,10 +473,21 @@ class Adv_Tabs extends Widget_Base
         $this->end_controls_tab();
         // Hover State Tab
         $this->start_controls_tab('eael_adv_tabs_header_hover', ['label' => esc_html__('Hover', 'essential-addons-elementor')]);
+        $this->add_control(
+            'eael_adv_tabs_tab_color_hover',
+            [
+                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#f1f1f1',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'eael_adv_tabs_tab_bg_hover',
+                'name' => 'eael_adv_tabs_tab_bgtype_hover',
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover'
             ]
@@ -517,10 +539,22 @@ class Adv_Tabs extends Widget_Base
         $this->end_controls_tab();
         // Active State Tab
         $this->start_controls_tab('eael_adv_tabs_header_active', ['label' => esc_html__('Active', 'essential-addons-elementor')]);
+        $this->add_control(
+            'eael_adv_tabs_tab_color_active',
+            [
+                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#444',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'eael_adv_tabs_tab_bg_active',
+                'name' => 'eael_adv_tabs_tab_bgtype_active',
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active,{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default'
             ]
@@ -588,10 +622,21 @@ class Adv_Tabs extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+        $this->add_control(
+            'adv_tabs_content_bg_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'adv_tabs_content_background',
+                'name' => 'adv_tabs_content_bgtype',
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div'
             ]
