@@ -83,7 +83,7 @@ class Reading_Progress
                 [
                     'label' => __('Display On', 'essential-addons-elementor'),
                     'type' => \Elementor\Controls_Manager::SELECT,
-                    'default' => 'solid',
+                    'default' => 'all',
                     'options' => [
                         'posts' => __('All Posts', 'essential-addons-elementor'),
                         'pages' => __('All Pages', 'essential-addons-elementor'),
