@@ -36,6 +36,13 @@ define('EAEL_ASSET_URL', WP_CONTENT_URL . '/uploads/essential-addons-elementor')
 require_once EAEL_PLUGIN_PATH . 'autoload.php';
 
 /**
+ * Including plugin config.
+ *
+ * @since 3.0.0
+ */
+require_once EAEL_PLUGIN_PATH . 'config.php';
+
+/**
  * Run plugin after all others plugins
  *
  * @since 3.0.0

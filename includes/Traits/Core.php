@@ -124,39 +124,7 @@ trait Core
      */
     public function set_default_values()
     {
-        $defaults = array_fill_keys([
-            'post-grid',
-            'post-timeline',
-            'fancy-text',
-            'creative-btn',
-            'count-down',
-            'team-members',
-            'testimonials',
-            'info-box',
-            'flip-box',
-            'call-to-action',
-            'dual-header',
-            'price-table',
-            'twitter-feed',
-            'data-table',
-            'filter-gallery',
-            'image-accordion',
-            'content-ticker',
-            'tooltip',
-            'adv-accordion',
-            'adv-tabs',
-            'progress-bar',
-            'feature-list',
-            'product-grid',
-            'contact-form-7',
-            'weforms',
-            'ninja-form',
-            'gravity-form',
-            'caldera-form',
-            'wpforms',
-            'global-elements-control',
-        ], 1);
-
+        $defaults = array_fill_keys(array_merge(EAEL_PLUGIN_MAPS['elements'], EAEL_PLUGIN_MAPS['extensions']), 1);
         $values = get_option('eael_save_settings');
 
         return update_option('eael_save_settings', wp_parse_args($values, $defaults));
