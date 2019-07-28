@@ -76,14 +76,6 @@ class Adv_Accordion extends Widget_Base
             [
                 'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
                 'type' => Controls_Manager::ICONS,
-                'recommended' => [
-                    'fas fa-angle-right',
-                    'fas fa-angle-double-right',
-                    'fas fa-chevron-right',
-                    'fas fa-chevron-circle-right',
-                    'fas fa-arrow-right',
-                    'fas fa-long-arrow-right',
-                ],
                 'default' => [
                     'value' => 'fas fa-angle-right',
                     'library' => 'solid',
@@ -142,9 +134,6 @@ class Adv_Accordion extends Widget_Base
                         'name' => 'eael_adv_accordion_tab_title_icon',
                         'label' => esc_html__('Icon', 'essential-addons-elementor'),
                         'type' => Controls_Manager::ICONS,
-                        'recommended' => [
-                            'fas fa-plus',
-                        ],
                         'default' => [
                             'value' => 'fas fa-plus',
                             'library' => 'solid',
