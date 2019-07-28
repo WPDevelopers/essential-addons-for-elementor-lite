@@ -11,8 +11,8 @@ use \Elementor\Frontend;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Icons_Manager;
 use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Adv_Accordion extends Widget_Base
 {
@@ -75,15 +75,18 @@ class Adv_Accordion extends Widget_Base
             'eael_adv_accordion_icon',
             [
                 'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
-                'type' => Controls_Manager::ICON,
-                'default' => 'fa fa-angle-right',
-                'include' => [
-                    'fa fa-angle-right',
-                    'fa fa-angle-double-right',
-                    'fa fa-chevron-right',
-                    'fa fa-chevron-circle-right',
-                    'fa fa-arrow-right',
-                    'fa fa-long-arrow-right',
+                'type' => Controls_Manager::ICONS,
+                'recommended' => [
+                    'fas fa-angle-right',
+                    'fas fa-angle-double-right',
+                    'fas fa-chevron-right',
+                    'fas fa-chevron-circle-right',
+                    'fas fa-arrow-right',
+                    'fas fa-long-arrow-right',
+                ],
+                'default' => [
+                    'value' => 'fas fa-angle-right',
+                    'library' => 'solid',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -138,8 +141,14 @@ class Adv_Accordion extends Widget_Base
                     [
                         'name' => 'eael_adv_accordion_tab_title_icon',
                         'label' => esc_html__('Icon', 'essential-addons-elementor'),
-                        'type' => Controls_Manager::ICON,
-                        'default' => 'fa fa-plus',
+                        'type' => Controls_Manager::ICONS,
+                        'recommended' => [
+                            'fas fa-plus',
+                        ],
+                        'default' => [
+                            'value' => 'fas fa-plus',
+                            'library' => 'solid',
+                        ],
                         'condition' => [
                             'eael_adv_accordion_tab_icon_show' => 'yes',
                         ],
@@ -186,30 +195,30 @@ class Adv_Accordion extends Widget_Base
         );
         $this->end_controls_section();
 
-        if(!apply_filters('eael/pro_enabled', false)) {
+        if (!apply_filters('eael/pro_enabled', false)) {
             $this->start_controls_section(
                 'eael_section_pro',
                 [
-                    'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+                    'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
                 ]
             );
-        
+
             $this->add_control(
                 'eael_control_get_pro',
                 [
-                    'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                    'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __( '', 'essential-addons-elementor' ),
+                            'title' => __('', 'essential-addons-elementor'),
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
                     'default' => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
-            
+
             $this->end_controls_section();
         }
 
@@ -713,15 +722,13 @@ class Adv_Accordion extends Widget_Base
         $this->add_render_attribute('eael-adv-accordion', 'class', 'eael-adv-accordion');
         $this->add_render_attribute('eael-adv-accordion', 'id', 'eael-adv-accordion-' . esc_attr($this->get_id()));
         ?>
-	<div
-		<?php echo $this->get_render_attribute_string('eael-adv-accordion'); ?>
-		<?php echo 'data-accordion-id="' . esc_attr($this->get_id()) . '"'; ?>
-		<?php echo !empty($settings['eael_adv_accordion_type']) ? 'data-accordion-type="' . esc_attr($settings['eael_adv_accordion_type']) . '"' : 'accordion'; ?>
-		<?php echo !empty($settings['eael_adv_accordion_toggle_speed']) ? 'data-toogle-speed="' . esc_attr($settings['eael_adv_accordion_toggle_speed']) . '"' : '300'; ?>
-	>
-		<?php
-foreach ($settings['eael_adv_accordion_tab'] as $index => $tab):
-
+        <div
+            <?php echo $this->get_render_attribute_string('eael-adv-accordion'); ?>
+            <?php echo 'data-accordion-id="' . esc_attr($this->get_id()) . '"'; ?>
+            <?php echo !empty($settings['eael_adv_accordion_type']) ? 'data-accordion-type="' . esc_attr($settings['eael_adv_accordion_type']) . '"' : 'accordion'; ?>
+            <?php echo !empty($settings['eael_adv_accordion_toggle_speed']) ? 'data-toogle-speed="' . esc_attr($settings['eael_adv_accordion_toggle_speed']) . '"' : '300'; ?>
+        >
+		<?php foreach ($settings['eael_adv_accordion_tab'] as $index => $tab) {
             $tab_count = $index + 1;
             $tab_title_setting_key = $this->get_repeater_setting_key('eael_adv_accordion_tab_title', 'eael_adv_accordion_tab', $index);
             $tab_content_setting_key = $this->get_repeater_setting_key('eael_adv_accordion_tab_content', 'eael_adv_accordion_tab', $index);
@@ -750,33 +757,34 @@ foreach ($settings['eael_adv_accordion_tab'] as $index => $tab):
                 'role' => 'tabpanel',
                 'aria-labelledby' => 'elementor-tab-title-' . $id_int . $tab_count,
             ]);
-            ?>
-			<div class="eael-accordion-list">
 
-				<div <?php echo $this->get_render_attribute_string($tab_title_setting_key); ?>>
-					<span><?php if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes'): ?><i class="<?php echo esc_attr($tab['eael_adv_accordion_tab_title_icon']); ?> fa-accordion-icon"></i><?php endif;?><?php echo $tab['eael_adv_accordion_tab_title']; ?></span>
-				<?php if ($settings['eael_adv_accordion_icon_show'] === 'yes'): ?><i class="<?php echo esc_attr($settings['eael_adv_accordion_icon']); ?> fa-toggle"></i>
-				<?php endif;?>
-			</div>
+            echo '<div class="eael-accordion-list">
+                <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>
+                    <span>';
+                        if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
+                            Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon'], ['class' => 'fa-accordion-icon']);
+                        }
+                        echo $tab['eael_adv_accordion_tab_title'] .
+                    '</span>';
+                    if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
+                        Icons_Manager::render_icon($settings['eael_adv_accordion_icon'], ['class' => 'fa-toggle']);
+                    }
+                echo '</div>';
 
-			<div <?php echo $this->get_render_attribute_string($tab_content_setting_key); ?>>
-				<?php if ('content' == $tab['eael_adv_accordion_text_type']): ?>
-					<p><?php echo do_shortcode($tab['eael_adv_accordion_tab_content']); ?></p>
-				<?php elseif ('template' == $tab['eael_adv_accordion_text_type']):
-            if (!empty($tab['eael_primary_templates'])) {
-                $eael_template_id = $tab['eael_primary_templates'];
-                $eael_frontend = new Frontend;
-                echo $eael_frontend->get_builder_content($eael_template_id, true);
-            }
-        endif;?>
-			</div>
+                echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
+                if ('content' == $tab['eael_adv_accordion_text_type']) {
+                    echo '<p>' . do_shortcode($tab['eael_adv_accordion_tab_content']) . '</p>';
+                } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
+                    if (!empty($tab['eael_primary_templates'])) {
+                        $eael_template_id = $tab['eael_primary_templates'];
+                        $eael_frontend = new Frontend;
 
-		</div>
-		<?php endforeach;?>
-	</div>
-	<?php
-}
-
-    protected function _content_template()
-    {}
+                        echo $eael_frontend->get_builder_content($eael_template_id, true);
+                    }
+                }
+                echo '</div>
+            </div>';
+        }
+        echo '</div>';
+    }
 }
