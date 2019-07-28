@@ -200,14 +200,14 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible' );
-        $notice->message( 'upsale', '<p>'. __( 'Increase 20-40% Sales & Interaction in Your Site with <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( '<a href="https://essential-addons.com/elementor/reading-progress/" target="_blank">Reading Progress Bar</a> is Now Available for Elementor. Increase 20-40% Sales & Interaction in Your Site With Our New Plugin <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         $notice->upsale_args = array(
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
             'file'      => 'notificationx.php',
-            'btn_text'  => __( 'Download Free', 'essential-addons-elementor' ),
+            'btn_text'  => __( 'Install NotificationX', 'essential-addons-elementor' ),
             'condition' => [
                 'by' => 'class',
                 'class' => 'NotificationX'
