@@ -156,6 +156,7 @@ class Adv_Accordion extends Widget_Base
                         'name' => 'eael_adv_accordion_tab_title_icon_new',
                         'label' => esc_html__('Icon', 'essential-addons-elementor'),
                         'type' => Controls_Manager::ICONS,
+                        'fa4compatibility' => 'eael_adv_accordion_tab_title_icon',
                         'default' => [
                             'value' => 'fas fa-plus',
                             'library' => 'solid',
@@ -814,7 +815,7 @@ class Adv_Accordion extends Widget_Base
                 if ($accordion_icon_is_new || $accordion_icon_migrated) {
                     Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon_new'], ['class' => 'fa-accordion-icon']);
                 } else {
-                    echo '<i class="fa-plus fa-accordion-icon"></i>';
+                    echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
                 }
             }
             echo $tab['eael_adv_accordion_tab_title'] .
@@ -823,7 +824,7 @@ class Adv_Accordion extends Widget_Base
                 if ($accordion_icon_is_new || $accordion_icon_migrated) {
                     Icons_Manager::render_icon($settings['eael_adv_accordion_icon_new'], ['class' => 'fa-toggle']);
                 } else {
-                    echo '<i class="fa-angle-right fa-toggle"></i>';
+                    echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
                 }
             }
             echo '</div>';
