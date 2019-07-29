@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -103,6 +103,10 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
 29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
 
+Extensions (Free): 
+
+1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add a reading progress bar to your page/post to indicate the current reading position.
+
 Extensions (Pro): 
 
 1. [Parallax Scrolling](https://essential-addons.com/elementor/parallax-scrolling/) - Add creative parallax scrolling effects to your section, your visitors will love it.
@@ -166,6 +170,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.1.4 - 28/07/2019 =
+- New Extension : Reading Progress Bar
+- Enhancement : Background Type option added to Creative Buttons, Advanced Tabs and Advanced Accordions
+- Few minor bugfix and improvements
 
 = 3.1.3 - 14/07/2019 =
 - Twitter Feed masonry layout bug fixed

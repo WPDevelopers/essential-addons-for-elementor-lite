@@ -297,7 +297,8 @@ $elements = [
         'elements'  => [
             [
                 'key'   => 'learn-dash-course-list',
-                'title' => __( 'LearnDash Course List', 'essential-addons-elementor' )
+                'title' => __( 'LearnDash Course List', 'essential-addons-elementor' ),
+                'is_pro' => true
             ]
         ]
     ]
