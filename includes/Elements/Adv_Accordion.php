@@ -6,13 +6,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Controls_Manager;
 use \Elementor\Frontend;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Background;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
 use \Elementor\Icons_Manager;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Widget_Base;
 
 class Adv_Accordion extends Widget_Base
 {
@@ -365,12 +366,20 @@ class Adv_Accordion extends Widget_Base
         $this->add_control(
             'eael_adv_accordion_tab_color',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f1f1f1',
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header' => 'background-color: {{VALUE}};',
                 ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_adv_accordion_tab_bgtype',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header',
             ]
         );
         $this->add_control(
@@ -426,16 +435,23 @@ class Adv_Accordion extends Widget_Base
                 'label' => esc_html__('Hover', 'essential-addons-elementor'),
             ]
         );
-
         $this->add_control(
             'eael_adv_accordion_tab_color_hover',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#414141',
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover' => 'background-color: {{VALUE}};',
                 ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_adv_accordion_tab_bgtype_hover',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header:hover',
             ]
         );
         $this->add_control(
@@ -491,16 +507,23 @@ class Adv_Accordion extends Widget_Base
                 'label' => esc_html__('Active', 'essential-addons-elementor'),
             ]
         );
-
         $this->add_control(
             'eael_adv_accordion_tab_color_active',
             [
-                'label' => esc_html__('Tab Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444',
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active' => 'background-color: {{VALUE}};',
                 ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_adv_accordion_tab_bgtype_active',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active',
             ]
         );
         $this->add_control(
@@ -573,6 +596,15 @@ class Adv_Accordion extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'background-color: {{VALUE}};',
                 ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'adv_accordion_content_bgtype',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content',
             ]
         );
 
@@ -750,28 +782,28 @@ class Adv_Accordion extends Widget_Base
             echo '<div class="eael-accordion-list">
                 <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>
                     <span>';
-                        if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
-                            Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon'], ['class' => 'fa-accordion-icon']);
-                        }
-                        echo $tab['eael_adv_accordion_tab_title'] .
-                    '</span>';
-                    if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
-                        Icons_Manager::render_icon($settings['eael_adv_accordion_icon'], ['class' => 'fa-toggle']);
-                    }
-                echo '</div>';
+            if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
+                Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon'], ['class' => 'fa-accordion-icon']);
+            }
+            echo $tab['eael_adv_accordion_tab_title'] .
+                '</span>';
+            if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
+                Icons_Manager::render_icon($settings['eael_adv_accordion_icon'], ['class' => 'fa-toggle']);
+            }
+            echo '</div>';
 
-                echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
-                if ('content' == $tab['eael_adv_accordion_text_type']) {
-                    echo '<p>' . do_shortcode($tab['eael_adv_accordion_tab_content']) . '</p>';
-                } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
-                    if (!empty($tab['eael_primary_templates'])) {
-                        $eael_template_id = $tab['eael_primary_templates'];
-                        $eael_frontend = new Frontend;
+            echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
+            if ('content' == $tab['eael_adv_accordion_text_type']) {
+                echo '<p>' . do_shortcode($tab['eael_adv_accordion_tab_content']) . '</p>';
+            } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
+                if (!empty($tab['eael_primary_templates'])) {
+                    $eael_template_id = $tab['eael_primary_templates'];
+                    $eael_frontend = new Frontend;
 
-                        echo $eael_frontend->get_builder_content($eael_template_id, true);
-                    }
+                    echo $eael_frontend->get_builder_content($eael_template_id, true);
                 }
-                echo '</div>
+            }
+            echo '</div>
             </div>';
         }
         echo '</div>';
