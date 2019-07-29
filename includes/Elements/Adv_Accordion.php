@@ -72,11 +72,23 @@ class Adv_Accordion extends Widget_Base
                 'return_value' => 'yes',
             ]
         );
+        // $this->add_control(
+        //     'eael_adv_accordion_icon',
+        //     [
+        //         'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
+        //         'type' => Controls_Manager::ICON,
+        //         'default' => 'fa-angle-right',
+        //         'condition' => [
+        //             'eael_adv_accordion_icon_show' => 'yes',
+        //         ],
+        //     ]
+        // );
         $this->add_control(
-            'eael_adv_accordion_icon',
+            'eael_adv_accordion_icon_new',
             [
                 'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
                 'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_adv_accordion_icon',
                 'default' => [
                     'value' => 'fas fa-angle-right',
                     'library' => 'solid',
@@ -131,8 +143,17 @@ class Adv_Accordion extends Widget_Base
                         'default' => 'yes',
                         'return_value' => 'yes',
                     ],
+                    // [
+                    //     'name' => 'eael_adv_accordion_tab_title_icon',
+                    //     'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
+                    //     'type' => Controls_Manager::ICON,
+                    //     'default' => 'fa-plus',
+                    //     'condition' => [
+                    //         'eael_adv_accordion_tab_icon_show' => 'yes',
+                    //     ],
+                    // ],
                     [
-                        'name' => 'eael_adv_accordion_tab_title_icon',
+                        'name' => 'eael_adv_accordion_tab_title_icon_new',
                         'label' => esc_html__('Icon', 'essential-addons-elementor'),
                         'type' => Controls_Manager::ICONS,
                         'default' => [
@@ -742,6 +763,10 @@ class Adv_Accordion extends Widget_Base
 
         $this->add_render_attribute('eael-adv-accordion', 'class', 'eael-adv-accordion');
         $this->add_render_attribute('eael-adv-accordion', 'id', 'eael-adv-accordion-' . esc_attr($this->get_id()));
+
+        // icon handler
+        $accordion_icon_migrated = isset($settings['__fa4_migrated']['eael_adv_accordion_icon_new']);
+        $accordion_icon_is_new = empty($settings['eael_adv_accordion_icon']);
         ?>
         <div
             <?php echo $this->get_render_attribute_string('eael-adv-accordion'); ?>
@@ -756,6 +781,9 @@ class Adv_Accordion extends Widget_Base
 
             $tab_title_class = ['elementor-tab-title', 'eael-accordion-header'];
             $tab_content_class = ['eael-accordion-content', 'clearfix'];
+
+            $tab_icon_migrated = isset($tab['__fa4_migrated']['eael_adv_accordion_tab_title_icon_new']);
+            $tab_icon_is_new = empty($tab['eael_adv_accordion_tab_title_icon']);
 
             if ($tab['eael_adv_accordion_tab_default_active'] == 'yes') {
                 $tab_title_class[] = 'active-default';
@@ -783,12 +811,20 @@ class Adv_Accordion extends Widget_Base
                 <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>
                     <span>';
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
-                Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon'], ['class' => 'fa-accordion-icon']);
+                if ($accordion_icon_is_new || $accordion_icon_migrated) {
+                    Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon_new'], ['class' => 'fa-accordion-icon']);
+                } else {
+                    echo '<i class="fa-plus fa-accordion-icon"></i>';
+                }
             }
             echo $tab['eael_adv_accordion_tab_title'] .
                 '</span>';
             if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
-                Icons_Manager::render_icon($settings['eael_adv_accordion_icon'], ['class' => 'fa-toggle']);
+                if ($accordion_icon_is_new || $accordion_icon_migrated) {
+                    Icons_Manager::render_icon($settings['eael_adv_accordion_icon_new'], ['class' => 'fa-toggle']);
+                } else {
+                    echo '<i class="fa-angle-right fa-toggle"></i>';
+                }
             }
             echo '</div>';
 
@@ -804,7 +840,7 @@ class Adv_Accordion extends Widget_Base
                 }
             }
             echo '</div>
-            </div>';
+                </div>';
         }
         echo '</div>';
     }
