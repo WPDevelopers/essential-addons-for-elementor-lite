@@ -124,7 +124,7 @@ trait Core
      */
     public function set_default_values()
     {
-        $defaults = array_fill_keys(array_keys(array_merge(EAEL_PLUGIN_MAPS['elements'], EAEL_PLUGIN_MAPS['extensions'])), 1);
+        $defaults = array_fill_keys(array_keys(array_merge($GLOBALS['eael_config']['elements'], $GLOBALS['eael_config']['extensions'])), 1);
         $values = get_option('eael_save_settings');
 
         return update_option('eael_save_settings', wp_parse_args($values, $defaults));

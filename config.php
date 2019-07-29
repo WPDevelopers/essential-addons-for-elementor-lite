@@ -1,6 +1,6 @@
 <?php
 
-$plugin_maps = [
+$config = [
     'elements' => [
         'post-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Post_Grid',
@@ -313,4 +313,4 @@ $plugin_maps = [
     ],
 ];
 
-define('EAEL_PLUGIN_MAPS', $plugin_maps);
+return $config;

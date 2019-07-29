@@ -40,7 +40,7 @@ require_once EAEL_PLUGIN_PATH . 'autoload.php';
  *
  * @since 3.0.0
  */
-require_once EAEL_PLUGIN_PATH . 'config.php';
+$GLOBALS['eael_config'] = require_once EAEL_PLUGIN_PATH . 'config.php';
 
 /**
  * Run plugin after all others plugins
