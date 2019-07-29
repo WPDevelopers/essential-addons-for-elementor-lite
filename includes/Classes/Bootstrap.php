@@ -67,10 +67,10 @@ class Bootstrap
         $this->pro_enabled = apply_filters('eael/pro_enabled', false);
 
         // elements classmap
-        $this->registered_elements = apply_filters('eael/registered_elements', EAEL_PLUGIN_MAPS['elements']);
+        $this->registered_elements = apply_filters('eael/registered_elements', $GLOBALS['eael_config']['elements']);
 
         // extensions classmap
-        $this->registered_extensions = apply_filters('eael/registered_extensions', EAEL_PLUGIN_MAPS['extensions']);
+        $this->registered_extensions = apply_filters('eael/registered_extensions', $GLOBALS['eael_config']['extensions']);
 
         // initialize transient container
         $this->transient_elements = [];
