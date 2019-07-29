@@ -1013,7 +1013,7 @@ trait Helper
      *
      * @return array
      */
-    public function eael_post_type_categories(string $type = 'term_id')
+    public function eael_post_type_categories($type = 'term_id')
     {
         $terms = get_terms(array(
             'taxonomy' => 'category',
