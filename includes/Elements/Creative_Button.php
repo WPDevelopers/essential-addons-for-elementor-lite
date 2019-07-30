@@ -6,14 +6,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Group_Control_Background as Group_Control_Background;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Group_Control_Background;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Creative_Button extends Widget_Base {
 	
@@ -89,10 +89,11 @@ class Creative_Button extends Widget_Base {
 			);
 
 			$this->add_control(
-				'eael_creative_button_icon',
+				'eael_creative_button_icon_new',
 				[
 					'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-					'type'  => Controls_Manager::ICON,
+					'type'  => Controls_Manager::ICONS,
+					'fa4compatibility' => 'eael_creative_button_icon',
 				]
 			);
 
@@ -464,6 +465,8 @@ class Creative_Button extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings();
+		$icon_migrated = isset($settings['__fa4_migrated']['eael_creative_button_icon_new']);
+		$icon_is_new = empty($settings['eael_creative_button_icon']);
 
 		$this->add_render_attribute( 'eael_creative_button', [
 			'class'	=> [ 'eael-creative-button', esc_attr($settings['creative_button_effect'] ) ],
@@ -483,14 +486,22 @@ class Creative_Button extends Widget_Base {
 	<div class="eael-creative-button-wrapper">
 		<a <?php echo $this->get_render_attribute_string( 'eael_creative_button' ); ?>>
 			<span>
-				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
-					<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
+				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
+					<?php if($icon_migrated || $icon_is_new) { ?>
+						<?php Icons_Manager::render_icon($settings['eael_creative_button_icon_new']); ?>
+					<?php } else { ?>
+						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
+					<?php } ?>
 				<?php endif; ?>
 
 				<?php echo  $settings['creative_button_text'];?>
 
-				<?php if ( ! empty( $settings['eael_creative_button_icon'] ) && $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
-					<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
+				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
+					<?php if($icon_migrated || $icon_is_new) { ?>
+						<?php Icons_Manager::render_icon($settings['eael_creative_button_icon_new']); ?>
+					<?php } else { ?>
+						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
+					<?php } ?>
 				<?php endif; ?>
 			</span>
 		</a>
@@ -498,6 +509,4 @@ class Creative_Button extends Widget_Base {
 	<?php
 	
 	}
-
-	protected function content_template() {}
 }
