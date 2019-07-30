@@ -6,12 +6,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Dual_Color_Header extends Widget_Base {
 
@@ -75,11 +75,15 @@ class Dual_Color_Header extends Widget_Base {
 		 * Condition: 'eael_show_dch_icon_content' => 'yes'
 		 */
 		$this->add_control(
-			'eael_dch_icon',
+			'eael_dch_icon_new',
 			[
 				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::ICON,
-				'default' => 'fa fa-snowflake-o',
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_dch_icon',
+				'default' => [
+					'value' => 'fas fa-snowflake-o',
+					'library' => 'solid',
+				],
 				'condition' => [
 					'eael_show_dch_icon_content' => 'yes'
 				]
@@ -394,8 +398,9 @@ class Dual_Color_Header extends Widget_Base {
 	}
 
 	protected function render() {
-
-   	$settings = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
+		$icon_migrated = isset($settings['__fa4_migrated']['eael_dch_icon_new']);
+		$icon_is_new = empty($settings['eael_dch_icon']);
 
 	?>
 	<?php if( 'dch-default' == $settings['eael_dch_type'] ) : ?>
@@ -403,7 +408,11 @@ class Dual_Color_Header extends Widget_Base {
 		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	   <?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
-	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php if($icon_is_new || $icon_migrated) { ?>
+				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+			<?php } else { ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php } ?>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
@@ -411,7 +420,11 @@ class Dual_Color_Header extends Widget_Base {
 	<?php if( 'dch-icon-on-top' == $settings['eael_dch_type'] ) : ?>
 	<div class="eael-dual-header">
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
-	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php if($icon_is_new || $icon_migrated) { ?>
+				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+			<?php } else { ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php } ?>
 		<?php endif; ?>
 		<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
@@ -421,7 +434,11 @@ class Dual_Color_Header extends Widget_Base {
 	<?php if( 'dch-icon-subtext-on-top' == $settings['eael_dch_type'] ) : ?>
 	<div class="eael-dual-header">
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
-	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php if($icon_is_new || $icon_migrated) { ?>
+				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+			<?php } else { ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php } ?>
 		<?php endif; ?>
 	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	   <h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
@@ -433,13 +450,15 @@ class Dual_Color_Header extends Widget_Base {
 	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 			<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
-	   	<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php if($icon_is_new || $icon_migrated) { ?>
+				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+			<?php } else { ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+			<?php } ?>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
 
 	<?php
 	}
-
-	protected function content_template() {}
 }
