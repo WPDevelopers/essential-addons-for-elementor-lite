@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Filterable_Gallery extends Widget_Base
 {
@@ -186,11 +186,15 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
-            'eael_section_fg_zoom_icon',
+            'eael_section_fg_zoom_icon_new',
             [
                 'label' => esc_html__('Lightbox Icon', 'essential-addons-elementor'),
-                'type' => Controls_Manager::ICON,
-                'default' => 'fa fa-search-plus',
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_section_fg_zoom_icon',
+                'default' => [
+                    'value' => 'fas fa-search-plus',
+                    'library' => 'solid',
+                ],
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
                 ],
@@ -198,11 +202,15 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
-            'eael_section_fg_link_icon',
+            'eael_section_fg_link_icon_new',
             [
                 'label' => esc_html__('Link Icon', 'essential-addons-elementor'),
-                'type' => Controls_Manager::ICON,
-                'default' => 'fa fa-link',
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_section_fg_link_icon',
+                'default' => [
+                    'value' => 'fas fa-link',
+                    'library' => 'solid',
+                ],
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
                 ],
@@ -481,11 +489,11 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
-            'load_more_icon',
+            'load_more_icon_new',
             [
                 'label' => __('Button Icon', 'essential-addons-elementor'),
-                'type' => Controls_Manager::ICON,
-                'default' => '',
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'load_more_icon',
                 'condition' => [
                     'pagination' => 'yes',
                 ],
@@ -1799,6 +1807,8 @@ class Filterable_Gallery extends Widget_Base
     protected function render_loadmore_button()
     {
         $settings = $this->get_settings_for_display();
+        $icon_migrated = isset($settings['__fa4_migrated']['load_more_icon_new']);
+        $icon_is_new = empty($settings['load_more_icon']);
 
         $this->add_render_attribute('load-more-button', 'class', [
             'eael-gallery-load-more',
@@ -1811,14 +1821,22 @@ class Filterable_Gallery extends Widget_Base
 			<div class="eael-filterable-gallery-loadmore">
 				<a href="#" <?php echo $this->get_render_attribute_string('load-more-button'); ?>>
 					<span class="eael-button-loader"></span>
-					<?php if (!empty($settings['load_more_icon']) && $settings['button_icon_position'] == 'before') {?>
-						<span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+					<?php if($settings['button_icon_position'] == 'before') {?>
+                        <?php if($icon_is_new || $icon_migrated) { ?>
+                            <?php Icons_Manager::render_icon($settings['load_more_icon_new'], ['class' => 'eael-filterable-gallery-load-more-icon']); ?>
+                        <?php } else { ?>
+                            <span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                        <?php } ?>
 					<?php }?>
 					<span class="eael-filterable-gallery-load-more-text">
 						<?php echo $settings['load_more_text']; ?>
 					</span>
-					<?php if (!empty($settings['load_more_icon']) && $settings['button_icon_position'] == 'after') {?>
-						<span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+					<?php if($settings['button_icon_position'] == 'after') {?>
+						<?php if($icon_is_new || $icon_migrated) { ?>
+                            <?php Icons_Manager::render_icon($settings['load_more_icon_new'], ['class' => 'eael-filterable-gallery-load-more-icon']); ?>
+                        <?php } else { ?>
+                            <span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                        <?php } ?>
 					<?php }?>
 				</a>
 			</div>
@@ -1855,10 +1873,23 @@ class Filterable_Gallery extends Widget_Base
 
     protected function eael_render_fg_buttons($settings, $item)
     {
-        $html = '<div class="gallery-item-buttons">';
+        $zoom_icon_migrated = isset($settings['__fa4_migrated']['eael_section_fg_zoom_icon_new']);
+        $zoom_icon_is_new = empty($settings['eael_section_fg_zoom_icon']);
+        $link_icon_migrated = isset($settings['__fa4_migrated']['eael_section_fg_link_icon_new']);
+        $link_icon_is_new = empty($settings['eael_section_fg_link_icon']);
 
-        if (!empty($settings['eael_section_fg_zoom_icon']) && ($item['show_lightbox'] == true)) {
-            $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link"><i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i></a>';
+        ob_start();
+
+        echo '<div class="gallery-item-buttons">';
+
+        if ($item['show_lightbox'] == true) {
+            echo '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link">';
+            if ($zoom_icon_is_new || $zoom_icon_migrated) {
+                Icons_Manager::render_icon($settings['eael_section_fg_zoom_icon_new']);
+            } else {
+                echo '<i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i>';
+            }
+            echo '</a>';
         }
 
         if ($item['maybe_link'] == 'true') {
@@ -1872,13 +1903,22 @@ class Filterable_Gallery extends Widget_Base
                 $a_string .= 'target="_blank"';
             }
 
-            if (!empty($settings['eael_section_fg_link_icon'])) {
-                $html .= '<a ' . $a_string . '><i class="' . $settings['eael_section_fg_link_icon'] . '" aria-hidden="true"></i></a>';
+            if (!empty($item['link']['url'])) {
+                echo '<a ' . $a_string . '>';
+                
+                if ($link_icon_is_new || $link_icon_migrated) {
+                    Icons_Manager::render_icon($settings['eael_section_fg_link_icon_new']);
+                } else {
+                    echo '<i class="' . $settings['eael_section_fg_link_icon'] . '" aria-hidden="true"></i>';
+                }
+
+                echo '</a>';
             }
         }
 
-        $html .= '</div>';
-        return $html;
+        echo '</div>';
+        
+        return ob_get_clean();
     }
 
     protected function render_gallery_items($init_show = 0)
