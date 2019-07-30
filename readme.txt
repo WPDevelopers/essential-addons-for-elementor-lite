@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.1.4
+Stable tag: 3.1.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -170,6 +170,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.1.5 - 30/07/2019 =
+- Compatibility issue fixed with PHP 5.4 / 5.6
+- Few minor bugfix and improvements
 
 = 3.1.4 - 28/07/2019 =
 - New Extension : Reading Progress Bar
