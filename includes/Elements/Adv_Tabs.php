@@ -140,10 +140,14 @@ class Adv_Tabs extends Widget_Base
                         'default' => 'icon',
                     ],
                     [
-                        'name' => 'eael_adv_tabs_tab_title_icon',
+                        'name' => 'eael_adv_tabs_tab_title_icon_new',
                         'label' => esc_html__('Icon', 'essential-addons-elementor'),
-                        'type' => Controls_Manager::ICON,
-                        'default' => 'fa fa-home',
+                        'type' => Controls_Manager::ICONS,
+                        'fa4compatibility' => 'eael_adv_tabs_tab_title_icon',
+                        'default' => [
+                            'value' => 'fas fa-home',
+                            'library' => 'solid',
+                        ],
                         'condition' => [
                             'eael_adv_tabs_icon_type' => 'icon',
                         ],
@@ -762,11 +766,12 @@ class Adv_Tabs extends Widget_Base
 
     protected function render()
     {
-
         $settings = $this->get_settings_for_display();
         $eael_find_default_tab = array();
         $eael_adv_tab_id = 1;
         $eael_adv_tab_content_id = 1;
+        $tab_icon_migrated = isset($settings['__fa4_migrated']['eael_adv_tabs_tab_title_icon_new']);
+        $tab_icon_is_new = empty($settings['eael_adv_tabs_tab_title_icon']);
 
         $this->add_render_attribute(
             'eael_tab_wrapper',
@@ -788,7 +793,11 @@ class Adv_Tabs extends Widget_Base
 	    	<?php foreach ($settings['eael_adv_tabs_tab'] as $tab): ?>
 	      		<li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>"><?php if ($settings['eael_adv_tabs_icon_show'] === 'yes'):
             if ($tab['eael_adv_tabs_icon_type'] === 'icon'): ?>
-			      					<i class="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_icon']); ?>"></i>
+                                <?php if ($tab_icon_is_new || $tab_icon_migrated) {
+                                    Icons_Manager::render_icon($tab['eael_adv_tabs_tab_title_icon_new']);
+                                } else {
+                                    echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
+                                } ?>
 			      				<?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image'): ?>
 	      					<img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
 	      				<?php endif;?>
