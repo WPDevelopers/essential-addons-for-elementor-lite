@@ -72,17 +72,7 @@ class Adv_Accordion extends Widget_Base
                 'return_value' => 'yes',
             ]
         );
-        // $this->add_control(
-        //     'eael_adv_accordion_icon',
-        //     [
-        //         'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
-        //         'type' => Controls_Manager::ICON,
-        //         'default' => 'fa-angle-right',
-        //         'condition' => [
-        //             'eael_adv_accordion_icon_show' => 'yes',
-        //         ],
-        //     ]
-        // );
+
         $this->add_control(
             'eael_adv_accordion_icon_new',
             [
@@ -143,15 +133,6 @@ class Adv_Accordion extends Widget_Base
                         'default' => 'yes',
                         'return_value' => 'yes',
                     ],
-                    // [
-                    //     'name' => 'eael_adv_accordion_tab_title_icon',
-                    //     'label' => esc_html__('Toggle Icon', 'essential-addons-elementor'),
-                    //     'type' => Controls_Manager::ICON,
-                    //     'default' => 'fa-plus',
-                    //     'condition' => [
-                    //         'eael_adv_accordion_tab_icon_show' => 'yes',
-                    //     ],
-                    // ],
                     [
                         'name' => 'eael_adv_accordion_tab_title_icon_new',
                         'label' => esc_html__('Icon', 'essential-addons-elementor'),
@@ -812,7 +793,7 @@ class Adv_Accordion extends Widget_Base
                 <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>
                     <span>';
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
-                if ($accordion_icon_is_new || $accordion_icon_migrated) {
+                if ($tab_icon_is_new || $tab_icon_migrated) {
                     Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon_new'], ['class' => 'fa-accordion-icon']);
                 } else {
                     echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
