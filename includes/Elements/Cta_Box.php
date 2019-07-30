@@ -6,14 +6,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Controls_Manager;
 use \Elementor\Frontend;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Cta_Box extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -101,11 +101,15 @@ class Cta_Box extends Widget_Base {
 		 * Condition: 'eael_cta_type' => 'cta-icon-flex'
 		 */
 		$this->add_control(
-			'eael_cta_flex_grid_icon',
+			'eael_cta_flex_grid_icon_new',
 			[
 				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::ICON,
-				'default' => 'fa fa-bullhorn',
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_cta_flex_grid_icon',
+				'default' => [
+					'value' => 'fas fa-bullhorn',
+					'library' => 'solid',
+				],
 				'condition' => [
 					'eael_cta_type' => 'cta-icon-flex'
 				]
@@ -660,7 +664,10 @@ class Cta_Box extends Widget_Base {
 
    		$settings = $this->get_settings_for_display();
 	  	$target = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
-	  	$nofollow = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+		$nofollow = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+		$icon_migrated = isset($settings['__fa4_migrated']['eael_cta_flex_grid_icon_new']);
+		$icon_is_new = empty($settings['eael_cta_flex_grid_icon']);  
+
 	  	if( 'cta-bg-color' == $settings['eael_cta_color_type'] ) {
 	  		$cta_class = 'bg-lite';
 	  	}else if( 'cta-bg-img' == $settings['eael_cta_color_type'] ) {
@@ -729,7 +736,11 @@ class Cta_Box extends Widget_Base {
 	<?php if( 'cta-icon-flex' == $settings['eael_cta_type'] ) : ?>
 	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr( $cta_class ); ?>">
 	    <div class="icon">
-	        <i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon'] ); ?>"></i>
+			<?php if($icon_is_new || $icon_migrated) { ?>
+				<?php Icons_Manager::render_icon($settings['eael_cta_flex_grid_icon_new']); ?>
+			<?php } else { ?>
+				<i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon'] ); ?>"></i>
+			<?php } ?>
 	    </div>
 	    <div class="content">
 	        <h2 class="title"><?php echo $settings['eael_cta_title']; ?></h2>
@@ -752,6 +763,4 @@ class Cta_Box extends Widget_Base {
 	<?php endif; ?>
 	<?php
 	}
-
-	protected function content_template() {}
 }
