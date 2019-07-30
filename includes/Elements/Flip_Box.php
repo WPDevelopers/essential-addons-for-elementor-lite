@@ -6,15 +6,15 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Group_Control_Typography;
 use \Elementor\Modules\DynamicTags\Module as TagsModule;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Flip_Box extends Widget_Base {
 
@@ -102,11 +102,15 @@ class Flip_Box extends Widget_Base {
 				);
 
 				$this->add_control(
-					'eael_flipbox_icon',
+					'eael_flipbox_icon_new',
 					[
 						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::ICON,
-						'default' => 'fa fa-snowflake-o',
+						'type' => Controls_Manager::ICONS,
+						'fa4compatibility' => 'eael_flipbox_icon',
+						'default' => [
+							'value' => 'fas fa-snowflake-o',
+							'library' => 'solid',
+						],
 						'condition' => [
 							'eael_flipbox_img_or_icon' => 'icon'
 						]
@@ -185,11 +189,15 @@ class Flip_Box extends Widget_Base {
 				);
 
 				$this->add_control(
-					'eael_flipbox_icon_back',
+					'eael_flipbox_icon_back_new',
 					[
 						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::ICON,
-						'default' => 'fa fa-snowflake-o',
+						'type' => Controls_Manager::ICONS,
+						'fa4compatibility' => 'eael_flipbox_icon_back',
+						'default' => [
+							'value' => 'fas fa-snowflake-o',
+							'library' => 'solid',
+						],
 						'condition'	=> [
 							'eael_flipbox_img_or_icon_back'	=> 'icon'
 						]
@@ -1116,6 +1124,11 @@ class Flip_Box extends Widget_Base {
 	  	$this->add_render_attribute('flipbox-container', 'class', 'eael-elements-flip-box-flip-card');
 	  	$this->add_render_attribute('flipbox-title-container', 'class', 'eael-elements-flip-box-heading');
 
+		$front_icon_migrated = isset($settings['__fa4_migrated']['eael_flipbox_icon_new']);
+		$front_icon_is_new = empty($settings['eael_flipbox_icon']);
+		$back_icon_migrated = isset($settings['__fa4_migrated']['eael_flipbox_icon_back_new']);
+		$back_icon_is_new = empty($settings['eael_flipbox_icon_back']);
+
 	  	if( $settings['flipbox_link_type'] != 'none' ) {
 	  		if( ! empty($settings['flipbox_link']['url']) ) {
 	  			if( $settings['flipbox_link_type'] == 'box' ) {
@@ -1173,25 +1186,15 @@ class Flip_Box extends Widget_Base {
 	  	$flipbox_back_image_url = Group_Control_Image_Size::get_attachment_image_src( $flipbox_image_back['id'], 'thumbnail_back', $settings );
 	  	$flipbox_back_image_url = empty($flipbox_back_image_url) ? $flipbox_back_image_url['url'] : $flipbox_back_image_url;
 
-	  	if( $settings['eael_flipbox_img_or_icon_back'] != 'none' ) {
-	  		if( 'img' == $settings['eael_flipbox_img_or_icon_back'] ) {
-	  			$this->add_render_attribute(
-	  				'flipbox-back-icon-image-container',
-	  				[
-	  					'src'	=> $flipbox_back_image_url,
-	  					'alt'	=> esc_attr(get_post_meta($flipbox_image_back['id'], '_wp_attachment_image_alt', true))
-	  				]
-	  			);
-	  		}elseif( 'icon' == $settings['eael_flipbox_img_or_icon_back'] ) {
-	  			$this->add_render_attribute(
-	  				'flipbox-back-icon-container',
-	  				[
-	  					'class'	=> $settings['eael_flipbox_icon_back'],
-	  					'aria-hidden' => 'true'
-	  				]
-	  			);
-	  		}
-	  	}
+		if( 'img' == $settings['eael_flipbox_img_or_icon_back'] ) {
+			$this->add_render_attribute(
+				'flipbox-back-icon-image-container',
+				[
+					'src'	=> $flipbox_back_image_url,
+					'alt'	=> esc_attr(get_post_meta($flipbox_image_back['id'], '_wp_attachment_image_alt', true))
+				]
+			);
+		}
 
 	  	$this->add_render_attribute(
 	  		'eael_flipbox_main_wrap',
@@ -1215,7 +1218,11 @@ class Flip_Box extends Widget_Base {
 	                    <div class="eael-elements-flip-box-padding">
 	                        <div class="eael-elements-flip-box-icon-image">
 								<?php if( 'icon' === $settings['eael_flipbox_img_or_icon'] ) : ?>
-									<i class="<?php echo esc_attr( $settings['eael_flipbox_icon'] ); ?>"></i>
+									<?php if ($front_icon_is_new || $front_icon_migrated) { ?>
+										<?php Icons_Manager::render_icon($settings['eael_flipbox_icon_new']); ?>
+									<?php } else { ?>
+										<i class="<?php echo esc_attr( $settings['eael_flipbox_icon'] ); ?>"></i>
+									<?php } ?>
 								<?php elseif( 'img' === $settings['eael_flipbox_img_or_icon'] ): ?>
 									<img src="<?php echo esc_url( $flipbox_image_url ); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
 								<?php endif; ?>
@@ -1238,7 +1245,11 @@ class Flip_Box extends Widget_Base {
 	                    			<?php if('img' == $settings['eael_flipbox_img_or_icon_back']) : ?>
 	                    				<img <?php echo $this->get_render_attribute_string('flipbox-back-icon-image-container'); ?>>
 	                				<?php elseif('icon' == $settings['eael_flipbox_img_or_icon_back']): ?>
-	                					<i <?php echo $this->get_render_attribute_string('flipbox-back-icon-container'); ?>></i>
+										<?php if ($back_icon_is_new || $back_icon_migrated) { ?>
+											<?php Icons_Manager::render_icon($settings['eael_flipbox_icon_back_new']); ?>
+										<?php } else { ?>
+											<i class="<?php echo esc_attr( $settings['eael_flipbox_icon_back'] ); ?>"></i>
+										<?php } ?>
 	                				<?php endif; ?>
 	                			</div>
 	                    	<?php endif; ?>
@@ -1268,6 +1279,4 @@ class Flip_Box extends Widget_Base {
 
 	<?php
 	}
-
-	protected function content_template() {}
 }
