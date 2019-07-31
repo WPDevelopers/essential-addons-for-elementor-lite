@@ -409,11 +409,11 @@ class Flip_Box extends Widget_Base {
         );
 
         $this->add_control(
-            'button_icon',
+            'button_icon_new',
             [
                 'label'                 => __( 'Button Icon', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::ICON,
-                'default'               => '',
+				'type'                  => Controls_Manager::ICONS,
+				'fa4compatibility' 		=> 'button_icon',
                 'condition'             => [
                     'flipbox_link_type'   => 'button',
                 ],
@@ -1128,6 +1128,8 @@ class Flip_Box extends Widget_Base {
 		$front_icon_is_new = empty($settings['eael_flipbox_icon']);
 		$back_icon_migrated = isset($settings['__fa4_migrated']['eael_flipbox_icon_back_new']);
 		$back_icon_is_new = empty($settings['eael_flipbox_icon_back']);
+		$button_icon_migrated = isset($settings['__fa4_migrated']['button_icon_new']);
+		$button_icon_is_new = empty($settings['button_icon']);
 
 	  	if( $settings['flipbox_link_type'] != 'none' ) {
 	  		if( ! empty($settings['flipbox_link']['url']) ) {
@@ -1261,12 +1263,20 @@ class Flip_Box extends Widget_Base {
 
 	                        <?php if( $settings['flipbox_link_type'] == 'button' && ! empty($settings['flipbox_button_text']) ) : ?>
 	                        	<a <?php echo $this->get_render_attribute_string('flipbox-button-container'); ?>>
-	                        		<?php if( ! empty($settings['button_icon']) && 'before' == $settings['button_icon_position'] ) : ?>
-	                        			<i class="<?php echo $settings['button_icon']; ?>"></i>
+	                        		<?php if( 'before' == $settings['button_icon_position'] ) : ?>
+										<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+											<?php Icons_Manager::render_icon($settings['button_icon_new']); ?>
+										<?php } else { ?>
+											<i class="<?php echo $settings['button_icon']; ?>"></i>
+										<?php } ?>
 	                        		<?php endif; ?>
 	                        		<?php echo esc_attr($settings['flipbox_button_text']); ?>
-	                        		<?php if( ! empty($settings['button_icon']) && 'after' == $settings['button_icon_position'] ) : ?>
-	                        			<i class="<?php echo $settings['button_icon']; ?>"></i>
+	                        		<?php if( 'after' == $settings['button_icon_position'] ) : ?>
+										<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+											<?php Icons_Manager::render_icon($settings['button_icon_new']); ?>
+										<?php } else { ?>
+											<i class="<?php echo $settings['button_icon']; ?>"></i>
+										<?php } ?>
 	                        		<?php endif; ?>
 	                        	</a>
 	                        <?php endif; ?>
