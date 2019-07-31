@@ -6,15 +6,15 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Controls_Manager;
 use \Elementor\Frontend;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Info_Box extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -146,11 +146,15 @@ class Info_Box extends Widget_Base {
 		 * Condition: 'eael_infobox_img_or_icon' => 'icon'
 		 */
 		$this->add_control(
-			'eael_infobox_icon',
+			'eael_infobox_icon_new',
 			[
 				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::ICON,
-				'default' => 'fa fa-building-o',
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_infobox_icon',
+				'default' => [
+					'value' => 'fa fa-building-o',
+					'library' => 'solid',
+				],
 				'condition' => [
 					'eael_infobox_img_or_icon' => 'icon'
 				]
@@ -365,10 +369,11 @@ class Info_Box extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_infobox_button_icon',
+			'eael_infobox_button_icon_new',
 			[
 				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::ICON,
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_infobox_button_icon',
 				'condition'	=> [
 					'eael_show_infobox_button'	=> 'yes'
 				]
@@ -1489,6 +1494,8 @@ class Info_Box extends Widget_Base {
 		$infobox_image = $this->get_settings( 'eael_infobox_image' );
 		$infobox_image_url = Group_Control_Image_Size::get_attachment_image_src( $infobox_image['id'], 'thumbnail', $settings );
 		if( empty( $infobox_image_url ) ) : $infobox_image_url = $infobox_image['url']; else: $infobox_image_url = $infobox_image_url; endif;
+		$infobox_icon_migrated = isset($settings['__fa4_migrated']['eael_infobox_icon_new']);
+		$infobox_icon_is_new = empty($settings['eael_infobox_icon']);
 
 		$this->add_render_attribute(
 			'infobox_icon',
@@ -1523,7 +1530,11 @@ class Info_Box extends Widget_Base {
 
 				<?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : ?>
 				<div class="infobox-icon-wrap">
-					<i class="<?php echo esc_attr( $settings['eael_infobox_icon'] ); ?>"></i>
+					<?php if ($infobox_icon_is_new || $infobox_icon_migrated) { ?>
+						<?php Icons_Manager::render_icon($settings['eael_infobox_icon_new']); ?>
+					<?php } else { ?>
+						<i class="<?php echo esc_attr( $settings['eael_infobox_icon'] ); ?>"></i>
+					<?php } ?>
 				</div>
 				<?php endif; ?>
 
@@ -1578,6 +1589,9 @@ class Info_Box extends Widget_Base {
 	protected function render_infobox_button( $settings ) {
 		if('yes' == $settings['eael_show_infobox_clickable'] || 'yes' != $settings['eael_show_infobox_button']) return;
 
+		$button_icon_migrated = isset($settings['__fa4_migrated']['eael_infobox_button_icon_new']);
+		$button_icon_is_new = empty($settings['eael_infobox_button_icon']);
+
 		$this->add_render_attribute('infobox_button', 'class', 'eael-infobox-button' );
 
 		if($settings['infobox_button_link_url']['url'])
@@ -1589,11 +1603,6 @@ class Info_Box extends Widget_Base {
 		if('on' == $settings['infobox_button_link_url']['nofollow'])
 			$this->add_render_attribute('infobox_button', 'rel', 'nofollow');
 
-		$this->add_render_attribute('button_icon', [
-			'class'	=> esc_attr($settings['eael_infobox_button_icon']),
-			'aria-hidden'	=> 'true'
-		]);
-
 		if( 'left' == $settings['eael_infobox_button_icon_alignment'])
 			$this->add_render_attribute('button_icon', 'class', 'eael_infobox_button_icon_left');
 
@@ -1604,9 +1613,21 @@ class Info_Box extends Widget_Base {
 		?>
 		<div class="infobox-button">
 			<a <?php echo $this->get_render_attribute_string('infobox_button'); ?>>
-				<?php if( 'left' == $settings['eael_infobox_button_icon_alignment']) : ?><i <?php echo $this->get_render_attribute_string('button_icon'); ?>></i><?php endif; ?>
+				<?php if( 'left' == $settings['eael_infobox_button_icon_alignment']) : ?>
+					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+						<?php Icons_Manager::render_icon($settings['eael_infobox_button_icon_new']); ?>
+					<?php } else { ?>
+						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon'] ); ?>"></i>
+					<?php } ?>
+				<?php endif; ?>
 				<?php echo esc_attr($settings['infobox_button_text']); ?>
-				<?php if( 'right' == $settings['eael_infobox_button_icon_alignment']) : ?><i <?php echo $this->get_render_attribute_string('button_icon'); ?>></i><?php endif; ?>
+				<?php if( 'right' == $settings['eael_infobox_button_icon_alignment']) : ?>
+					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+						<?php Icons_Manager::render_icon($settings['eael_infobox_button_icon_new']); ?>
+					<?php } else { ?>
+						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon'] ); ?>"></i>
+					<?php } ?>
+				<?php endif; ?>
 			</a>
 		</div>
 		<?php
@@ -1620,6 +1641,4 @@ class Info_Box extends Widget_Base {
 		$this->render_infobox_content( $settings );
 		$this->eael_infobox_after( $settings );
 	}
-
-	protected function content_template() {}
 }
