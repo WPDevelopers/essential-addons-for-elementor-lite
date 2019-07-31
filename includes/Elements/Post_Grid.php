@@ -6,12 +6,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Post_Grid extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -335,11 +336,15 @@ class Post_Grid extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_post_grid_bg_hover_icon',
+			'eael_post_grid_bg_hover_icon_new',
 			[
 				'label'		=> __( 'Post Hover Icon', 'essential-addons-elementor' ),
-				'type'		=> Controls_Manager::ICON,
-				'default'	=> 'fa fa-long-arrow-right',
+				'type'		=> Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_post_grid_bg_hover_icon',
+				'default'	=> [
+					'value' => 'fa fa-long-arrow-right',
+					'library' => 'solid',
+				],
 				'condition'	=> [
 					'eael_post_grid_hover_animation!'	=> 'none'
 				]
@@ -469,7 +474,7 @@ class Post_Grid extends Widget_Base {
 			'exclude_posts'   => json_encode( ! empty( $query_args['post__not_in'] ) ? $query_args['post__not_in'] : []),
 			'post__in'        => json_encode( ! empty( $query_args['post__in'] ) ? $query_args['post__in'] : [] ),
 			'hover_animation' => $query_args['eael_post_grid_hover_animation'],
-			'hover_icon'      => $query_args['eael_post_grid_bg_hover_icon'],
+			'hover_icon'      => ((isset($settings['__fa4_migrated']['eael_post_grid_bg_hover_icon_new']) || empty($settings['eael_post_grid_bg_hover_icon'])) ? $settings['eael_post_grid_bg_hover_icon_new'] : $settings['eael_post_grid_bg_hover_icon']),
 			'eael_show_read_more_button' => $query_args['eael_show_read_more_button'],
 			'read_more_button_text' => $query_args['read_more_button_text']
 		];
