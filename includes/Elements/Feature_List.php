@@ -7,13 +7,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Background as Group_Control_Background;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Color as Scheme_Color;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Background;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Color;
+use \Elementor\Scheme_Typography;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Feature_List extends Widget_Base
 {
@@ -86,10 +87,14 @@ class Feature_List extends Widget_Base
 						'label_block' => false,
 					],
 					[
-						'name'    => 'eael_feature_list_icon',
+						'name'    => 'eael_feature_list_icon_new',
 						'label'   => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type'    => Controls_Manager::ICON,
-						'default' => 'fa fa-plus',
+						'type'    => Controls_Manager::ICONS,
+						'fa4compatibility' => 'eael_feature_list_icon',
+						'default' => [
+							'value' => 'fa fa-plus',
+							'library' => 'solid'
+						],
 						'condition' => [
 							'eael_feature_list_icon_type' => 'icon'
 						]
@@ -732,7 +737,7 @@ class Feature_List extends Widget_Base
 				$feature_icon_attributes = $this->get_render_attribute_string( $list_icon_setting_key );
 
 				$feature_icon_tag = 'span';
-				$feature_has_icon = ! empty( $item['eael_feature_list_icon'] );
+				$feature_has_icon = (!empty($item['eael_feature_list_icon']) || !empty($item['eael_feature_list_icon_new']));
 
 				if ( ! empty( $item['eael_feature_list_link']['url'] ) ) {
 					$this->add_render_attribute( $list_link_setting_key, 'href', $item['eael_feature_list_link']['url'] );
@@ -767,7 +772,11 @@ class Feature_List extends Widget_Base
 						] ); ?>>
 
                         <?php if ($item['eael_feature_list_icon_type'] == 'icon') { ?>
-                            <i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
+							<?php if (empty($item['eael_feature_list_icon']) || isset($item['__fa4_migrated']['eael_feature_list_icon_new'])) { ?>
+								<?php Icons_Manager::render_icon($item['eael_feature_list_icon_new'], ['aria-hidden' => 'true']); ?>
+							<?php } else { ?>
+								<i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
+							<?php } ?>
                         <?php } ?>
 
                         <?php if ($item['eael_feature_list_icon_type'] == 'image') {
