@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Team_Member extends Widget_Base {
 
@@ -135,64 +135,39 @@ class Team_Member extends Widget_Base {
 				],
 				'default' => [
 					[
-						'social' => 'fa fa-facebook',
+						'social_new' => [
+							'value' => 'fa fa-facebook',
+							'library' => 'solid'
+						]
 					],
 					[
-						'social' => 'fa fa-twitter',
+						'social_new' => [
+							'value' => 'fa fa-twitter',
+							'library' => 'solid'
+						]
 					],
 					[
-						'social' => 'fa fa-google-plus',
+						'social_new' => [
+							'value' => 'fa fa-google-plus',
+							'library' => 'solid'
+						]
 					],
 					[
-						'social' => 'fa fa-linkedin',
+						'social_new' => [
+							'value' => 'fa fa-linkedin',
+							'library' => 'solid'
+						]
 					],
 				],
 				'fields' => [
 					[
-						'name' => 'social',
+						'name' => 'social_new',
 						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::ICON,
-						'label_block' => true,
-						'default' => 'fa fa-wordpress',
-						'include' => [
-							'fa fa-apple',
-							'fa fa-behance',
-							'fa fa-bitbucket',
-							'fa fa-codepen',
-							'fa fa-delicious',
-							'fa fa-digg',
-							'fa fa-dribbble',
-							'fa fa-envelope',
-							'fa fa-facebook',
-							'fa fa-flickr',
-							'fa fa-foursquare',
-							'fa fa-github',
-							'fa fa-google-plus',
-							'fa fa-houzz',
-							'fa fa-instagram',
-							'fa fa-jsfiddle',
-							'fa fa-linkedin',
-							'fa fa-medium',
-							'fa fa-pinterest',
-							'fa fa-product-hunt',
-							'fa fa-reddit',
-							'fa fa-shopping-cart',
-							'fa fa-slideshare',
-							'fa fa-snapchat',
-							'fa fa-soundcloud',
-							'fa fa-spotify',
-							'fa fa-stack-overflow',
-							'fa fa-tripadvisor',
-							'fa fa-tumblr',
-							'fa fa-twitch',
-							'fa fa-twitter',
-							'fa fa-vimeo',
-							'fa fa-vk',
-							'fa fa-whatsapp',
-							'fa fa-wordpress',
-							'fa fa-xing',
-							'fa fa-yelp',
-							'fa fa-youtube',
+						'type' => Controls_Manager::ICONS,
+						'fa4compatibility' => 'social',
+						'default' => [
+							'value' => 'fas fa-wordpress',
+							'library' => 'solid',
 						],
 					],
 					[
@@ -207,7 +182,7 @@ class Team_Member extends Widget_Base {
 						'placeholder' => esc_html__( 'Place URL here', 'essential-addons-elementor' ),
 					],
 				],
-				'title_field' => '<i class="{{ social }}"></i> {{{ social.replace( \'fa fa-\', \'\' ).replace( \'-\', \' \' ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}',
+				'title_field' => '<i class="{{ social_new.value }}"></i> {{{ social_new.value.replace( \'fas fa-\', \'\' ).replace( \'-\', \' \' ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}',
 			]
 		);
 
@@ -766,10 +741,18 @@ class Team_Member extends Widget_Base {
 					<?php if ( ! empty( $settings['eael_team_member_enable_social_profiles'] ) ): ?>
 					<ul class="eael-team-member-social-profiles">
 						<?php foreach ( $settings['eael_team_member_social_profile_links'] as $item ) : ?>
-							<?php if ( ! empty( $item['social'] ) ) : ?>
+							<?php $icon_migrated = isset($item['__fa4_migrated']['social_new']);
+							$icon_is_new = empty($item['social']); ?>
+							<?php if ( ! empty( $item['social'] ) || !empty($item['social_new'])) : ?>
 								<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
 								<li class="eael-team-member-social-link">
-									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>"<?php echo $target; ?>><i class="<?php echo esc_attr($item['social'] ); ?>"></i></a>
+									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>"<?php echo $target; ?>>
+										<?php if ($icon_is_new || $icon_migrated) { ?>
+											<?php Icons_Manager::render_icon($item['social_new']); ?>
+										<?php } else { ?>
+											<i class="<?php echo esc_attr($item['social'] ); ?>"></i>
+										<?php } ?>
+									</a>
 								</li>
 							<?php endif; ?>
 						<?php endforeach; ?>
@@ -780,11 +763,6 @@ class Team_Member extends Widget_Base {
 			</div>
 		</div>
 	</div>
-
-	
 	<?php
-	
 	}
-
-	protected function content_template() {}
 }
