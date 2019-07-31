@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
+use \Elementor\Controls_Manager;
 use \Elementor\Frontend;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Utils as Utils;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Data_Table extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -120,9 +120,10 @@ class Data_Table extends Widget_Base {
 						]
 					],
 					[
-						'name' => 'eael_data_table_header_col_icon',
+						'name' => 'eael_data_table_header_col_icon_new',
 						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type' => Controls_Manager::ICON,
+						'type' => Controls_Manager::ICONS,
+						'fa4compatibility' => 'eael_data_table_header_col_icon',
 						'default' => '',
 						'condition' => [
 							'eael_data_table_header_col_icon_enabled' => 'true',
@@ -1019,13 +1020,12 @@ class Data_Table extends Widget_Base {
 							}
 						?>
 			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
-							<?php
-								if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) :
-									$this->add_render_attribute('table_header_col_icon'.$i, [
-										'class'	=> [ 'data-header-icon', esc_attr( $header_title['eael_data_table_header_col_icon'] )]
-									]);
-							?>
-			            		<i <?php echo $this->get_render_attribute_string('table_header_col_icon'.$i); ?>></i>
+							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
+								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
+									<?php Icons_Manager::render_icon($header_title['eael_data_table_header_col_icon_new'], ['class' => 'data-header-icon']); ?>
+								<?php } else { ?>
+									<i class="<?php echo $header_title['eael_data_table_header_col_icon'] ?> data-header-icon"></i>
+								<?php } ?>
 			            	<?php endif; ?>
 							<?php
 								if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'image' ) :
