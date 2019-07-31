@@ -154,7 +154,7 @@ trait Core
                 'animation_speed' => $page_settings_model->get_settings('eael_ext_reading_progress_animation_speed'),
             ];
         } else {
-            if($global_settings['reading_progress']['post_id'] == $post_id) {
+            if(isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
                 $global_settings['reading_progress'] = [];
             }
         }
