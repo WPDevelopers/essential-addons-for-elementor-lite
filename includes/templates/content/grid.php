@@ -10,8 +10,8 @@ $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $pos
                 <div class="eael-entry-media<?php echo esc_attr($post_hover_style); ?>">
                     <?php if ('none' !== $post_args['eael_post_grid_hover_animation']){ ?>
                         <div class="eael-entry-overlay<?php echo ' ' . esc_attr($post_args['eael_post_grid_hover_animation']); ?>">
-                            <?php if (!empty($post_args['eael_post_grid_bg_hover_icon'])) { ?>
-                                <i class="<?php echo esc_attr($post_args['eael_post_grid_bg_hover_icon']); ?>" aria-hidden="true"></i>
+                            <?php if (!empty($post_args['eael_post_grid_bg_hover_icon_new'])) { ?>
+                                <i class="<?php echo esc_attr($post_args['eael_post_grid_bg_hover_icon_new']['value']); ?>" aria-hidden="true"></i>
                             <?php } else { ?>
                                 <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                             <?php }?>
