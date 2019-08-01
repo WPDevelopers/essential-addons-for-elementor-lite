@@ -28,6 +28,7 @@
 .eael-ticker-wrap .swiper-button-prev {
   left: auto !important;
   right: 25px;
+  transform: translateY(-50%) rotate(180deg) !important;
 }
 
 .eael-ticker-wrap div.swiper-slide,

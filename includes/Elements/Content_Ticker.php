@@ -6,11 +6,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Widget_Base;
+use \Elementor\Icons_Manager;
 
 class Content_Ticker extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -484,26 +484,16 @@ class Content_Ticker extends Widget_Base {
         );
         
         $this->add_control(
-            'arrow',
+            'arrow_new',
             [
                 'label'                 => __( 'Choose Arrow', 'essential-addons-elementor' ),
-                'type'                  => Controls_Manager::ICON,
+				'type'                  => Controls_Manager::ICONS,
+				'fa4compatibility' 		=> 'arrow',
                 'label_block'           => true,
-                'default'               => 'fa fa-angle-right',
-                'include'               => [
-                    'fa fa-angle-right',
-                    'fa fa-angle-double-right',
-                    'fa fa-chevron-right',
-                    'fa fa-chevron-circle-right',
-                    'fa fa-arrow-right',
-                    'fa fa-long-arrow-right',
-                    'fa fa-caret-right',
-                    'fa fa-caret-square-o-right',
-                    'fa fa-arrow-circle-right',
-                    'fa fa-arrow-circle-o-right',
-                    'fa fa-toggle-right',
-                    'fa fa-hand-o-right',
-                ],
+                'default'               => [
+					'value' => 'fas fa-angle-right',
+					'library' => 'solid'
+				],
             ]
         );
         
@@ -795,26 +785,25 @@ class Content_Ticker extends Widget_Base {
 	 * @access protected
 	 */
     protected function render_arrows() {
-        $settings = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
+		$icon_migrated = isset($settings['__fa4_migrated']['arrow_new']);
+		$icon_is_new = empty($settings['arrow']);
 
         if ( $settings['arrows'] == 'yes' ) { ?>
             <?php
-                if ( $settings['arrow'] ) {
-                    $ticker_next_arrow = $settings['arrow'];
-                    $ticker_prev_arrow = str_replace("right","left",$settings['arrow']);
-                }
-                else {
-                    $ticker_next_arrow = 'fa fa-angle-right';
-                    $ticker_prev_arrow = 'fa fa-angle-left';
-                }
+                if ($icon_is_new || $icon_migrated) {
+					$arrow = $settings['arrow_new']['value'];
+				} else {
+					$arrow = $settings['arrow'];
+				}
             ?>
             <!-- Add Arrows -->
             <div class="content-ticker-pagination">
 	            <div class="swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
-	                <i class="<?php echo esc_attr( $ticker_next_arrow ); ?>"></i>
+	                <i class="<?php echo esc_attr( $arrow ); ?>"></i>
 	            </div>
 	            <div class="swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
-	                <i class="<?php echo esc_attr( $ticker_prev_arrow ); ?>"></i>
+	                <i class="<?php echo esc_attr( $arrow ); ?>"></i>
 	            </div>
             </div>
         <?php }
