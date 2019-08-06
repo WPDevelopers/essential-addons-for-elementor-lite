@@ -343,7 +343,7 @@ class Post_Grid extends Widget_Base {
 				'fa4compatibility' => 'eael_post_grid_bg_hover_icon',
 				'default'	=> [
 					'value' => 'fa fa-long-arrow-right',
-					'library' => 'solid',
+					'library' => 'fa-solid',
 				],
 				'condition'	=> [
 					'eael_post_grid_hover_animation!'	=> 'none'

@@ -81,7 +81,7 @@ class Adv_Accordion extends Widget_Base
                 'fa4compatibility' => 'eael_adv_accordion_icon',
                 'default' => [
                     'value' => 'fas fa-angle-right',
-                    'library' => 'solid',
+                    'library' => 'fa-solid',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -140,7 +140,7 @@ class Adv_Accordion extends Widget_Base
                         'fa4compatibility' => 'eael_adv_accordion_tab_title_icon',
                         'default' => [
                             'value' => 'fas fa-plus',
-                            'library' => 'solid',
+                            'library' => 'fa-solid',
                         ],
                         'condition' => [
                             'eael_adv_accordion_tab_icon_show' => 'yes',

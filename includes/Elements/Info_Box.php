@@ -153,7 +153,7 @@ class Info_Box extends Widget_Base {
 				'fa4compatibility' => 'eael_infobox_icon',
 				'default' => [
 					'value' => 'fa fa-building-o',
-					'library' => 'solid',
+					'library' => 'fa-solid',
 				],
 				'condition' => [
 					'eael_infobox_img_or_icon' => 'icon'
