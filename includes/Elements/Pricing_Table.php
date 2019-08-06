@@ -132,7 +132,7 @@ class Pricing_Table extends Widget_Base {
 				'fa4compatibility' => 'eael_pricing_table_style_2_icon',
 				'default' => [
 					'value' => 'fas fa-home',
-					'library' => 'solid',
+					'library' => 'fa-solid',
 				],
 				'condition' => [
 					'eael_pricing_table_style' => 'style-2'
@@ -271,7 +271,7 @@ class Pricing_Table extends Widget_Base {
 						'fa4compatibility' => 'eael_pricing_table_list_icon',
 						'default' => [
 							'value' => 'fas fa-check',
-							'library' => 'solid',
+							'library' => 'fa-solid',
 						],
 					],
 					[
