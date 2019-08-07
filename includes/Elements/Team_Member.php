@@ -136,26 +136,26 @@ class Team_Member extends Widget_Base {
 				'default' => [
 					[
 						'social_new' => [
-							'value' => 'fa fa-facebook',
-							'library' => 'fa-solid'
+							'value' => 'fab fa-facebook',
+							'library' => 'fa-brands'
 						]
 					],
 					[
 						'social_new' => [
-							'value' => 'fa fa-twitter',
-							'library' => 'fa-solid'
+							'value' => 'fab fa-twitter',
+							'library' => 'fa-brands'
 						]
 					],
 					[
 						'social_new' => [
-							'value' => 'fa fa-google-plus',
-							'library' => 'fa-solid'
+							'value' => 'fab fa-google-plus',
+							'library' => 'fa-brands'
 						]
 					],
 					[
 						'social_new' => [
-							'value' => 'fa fa-linkedin',
-							'library' => 'fa-solid'
+							'value' => 'fab fa-linkedin',
+							'library' => 'fa-brands'
 						]
 					],
 				],
