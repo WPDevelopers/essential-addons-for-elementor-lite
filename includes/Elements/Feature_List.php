@@ -93,7 +93,7 @@ class Feature_List extends Widget_Base
 						'fa4compatibility' => 'eael_feature_list_icon',
 						'default' => [
 							'value' => 'fa fa-plus',
-							'library' => 'solid'
+							'library' => 'fa-solid'
 						],
 						'condition' => [
 							'eael_feature_list_icon_type' => 'icon'

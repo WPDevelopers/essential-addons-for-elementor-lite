@@ -108,7 +108,7 @@ class Cta_Box extends Widget_Base {
 				'fa4compatibility' => 'eael_cta_flex_grid_icon',
 				'default' => [
 					'value' => 'fas fa-bullhorn',
-					'library' => 'solid',
+					'library' => 'fa-solid',
 				],
 				'condition' => [
 					'eael_cta_type' => 'cta-icon-flex'
