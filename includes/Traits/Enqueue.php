@@ -29,6 +29,14 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
+        // Load fontawesome as fallback
+        wp_enqueue_style(
+			'font-awesome-5-all',
+			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
+			false,
+			EAEL_PLUGIN_VERSION
+		);
+
         // My Assets
         if ($this->is_preview_mode()) {
             // generate fallback scripts
