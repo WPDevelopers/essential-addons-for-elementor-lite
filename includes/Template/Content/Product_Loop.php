@@ -29,7 +29,7 @@ trait Product_Loop
                 <div class="overlay">
                     ' . $product->get_image('woocommerce_thumbnail') . '
                     <div class="button-wrap clearfix">
-                        <a href="' . $product->get_permalink() . '" class="product-link"><span class="fa fa-link"></span></a>';
+                        <a href="' . $product->get_permalink() . '" class="product-link"><span class="fas fa-link"></span></a>';
                         woocommerce_template_loop_add_to_cart();
                     echo '</div>
                 </div>
