@@ -81,7 +81,7 @@ class Dual_Color_Header extends Widget_Base {
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_dch_icon',
 				'default' => [
-					'value' => 'fas fa-snowflake-o',
+					'value' => 'fas fa-snowflake',
 					'library' => 'fa-solid',
 				],
 				'condition' => [

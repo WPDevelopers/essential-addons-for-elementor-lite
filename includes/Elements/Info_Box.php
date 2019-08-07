@@ -152,7 +152,7 @@ class Info_Box extends Widget_Base {
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_infobox_icon',
 				'default' => [
-					'value' => 'fa fa-building',
+					'value' => 'fas fa-building',
 					'library' => 'fa-solid',
 				],
 				'condition' => [
