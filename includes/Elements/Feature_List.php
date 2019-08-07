@@ -91,10 +91,6 @@ class Feature_List extends Widget_Base
 						'label'   => esc_html__( 'Icon', 'essential-addons-elementor' ),
 						'type'    => Controls_Manager::ICONS,
 						'fa4compatibility' => 'eael_feature_list_icon',
-						'default' => [
-							'value' => 'fa fa-plus',
-							'library' => 'fa-solid'
-						],
 						'condition' => [
 							'eael_feature_list_icon_type' => 'icon'
 						]
