@@ -269,6 +269,60 @@
   }
 }
 
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
+}
+
 /*--------------------------*/
 /* 19. Call To Action
 /*-------------------------*/
@@ -583,117 +637,6 @@
   height: 20px;
 }
 
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
-}
-
-.eael-ticker-wrap {
-  overflow: hidden;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-}
-
-.eael-ticker-wrap .ticker-badge {
-  flex: 0 0 auto;
-  padding: 8px 12px;
-}
-
-.eael-ticker-wrap .eael-ticker {
-  overflow: hidden;
-  flex: 1 1 auto;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content {
-  padding: 8px 12px;
-  line-height: 1.8;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content p {
-  margin: 0;
-}
-
-.eael-ticker-wrap .swiper-button-prev {
-  left: auto !important;
-  right: 25px;
-  transform: translateY(-50%) rotate(180deg) !important;
-}
-
-.eael-ticker-wrap div.swiper-slide,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
-  opacity: 0 !important;
-}
-
-.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
-  text-align: left;
-}
-
-@media only screen and (max-width: 767px) {
-  .eael-ticker-wrap {
-    flex-flow: row wrap;
-  }
-
-  .content-ticker-pagination {
-    display: none;
-  }
-}
-
 /*--------------------------------*/
 /* 11. Contact Form 7 Styles
 /*--------------------------------*/
@@ -781,6 +724,63 @@
   margin: 0 auto;
 }
 
+.eael-ticker-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.eael-ticker-wrap .ticker-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.eael-ticker-wrap .eael-ticker {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
+}
+
+.eael-ticker-wrap .swiper-button-prev {
+  left: auto !important;
+  right: 25px;
+  transform: translateY(-50%) rotate(180deg) !important;
+}
+
+.eael-ticker-wrap div.swiper-slide,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
+  opacity: 0 !important;
+}
+
+.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .eael-ticker-wrap {
+    flex-flow: row wrap;
+  }
+
+  .content-ticker-pagination {
+    display: none;
+  }
+}
+
 /*---------------------------------*/
 /* 05. Countdown Styles
 /*---------------------------------*/
@@ -838,6 +838,231 @@
 /*--- Style 1 ---*/
 .eael-countdown-items.style-1 .eael-countdown-item > div {
   background: #262625;
+}
+
+/*--------------------------------*/
+/* 08. Creative Button styles
+/*--------------------------------*/
+.eael-creative-button-align-center {
+  text-align: center;
+}
+
+.eael-creative-button-wrapper {
+  display: flex;
+}
+
+.eael-creative-button {
+  flex: 0 0 auto;
+  min-width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  border-radius: 2px;
+  padding: 20px 30px;
+  font-size: 16px;
+  line-height: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.eael-creative-button-align-center .eael-creative-button {
+  float: none;
+  display: inline-block;
+}
+
+.eael-creative-button:focus {
+  outline: none;
+}
+
+.eael-creative-button > span {
+  vertical-align: middle;
+}
+
+/*--------------------------------------------*/
+/* 09. Individual eael-creative-button styles
+/*--------------------------------------------*/
+/*--- Winona ---*/
+.eael-creative-button--winona {
+  overflow: hidden;
+  padding: 0 !important;
+  transition: border-color 0.3s, background-color 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--winona::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translate3d(0, 25%, 0);
+}
+
+.eael-creative-button--winona > span {
+  display: block;
+}
+
+.eael-creative-button--winona::after,
+.eael-creative-button--winona > span {
+  padding: 1em 2em;
+  transition: transform 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--winona:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.eael-creative-button--winona:hover > span {
+  opacity: 0;
+  transform: translate3d(0, -25%, 0);
+}
+
+/*--- Ujarak ---*/
+.eael-creative-button--ujarak {
+  transition: border-color 0.4s, color 0.4s;
+}
+
+.eael-creative-button--ujarak::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--ujarak,
+.eael-creative-button--ujarak::before {
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--ujarak:hover::before {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/*--- Wayra ---*/
+.eael-creative-button--wayra {
+  overflow: hidden;
+  transition: border-color 0.3s, color 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--wayra::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  z-index: -1;
+  transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+  transform-origin: 0% 100%;
+  transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+}
+
+.eael-creative-button--wayra:hover::before {
+  opacity: 1;
+  transform: rotate3d(0, 0, 1, 0deg);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/*--- Tamaya ---*/
+.eael-creative-button--tamaya {
+  overflow: hidden;
+}
+
+.eael-creative-button--tamaya::before,
+.eael-creative-button--tamaya::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  overflow: hidden;
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--tamaya::before {
+  top: 0;
+  padding: 20px 30px;
+}
+
+.eael-creative-button--tamaya::after {
+  bottom: 0;
+  line-height: 0;
+}
+
+.eael-creative-button--tamaya:hover::after {
+  bottom: -1px;
+}
+
+.eael-creative-button--tamaya > span {
+  display: block;
+  transform: scale3d(0.2, 0.2, 1);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--tamaya:hover::before {
+  transform: translate3d(0, -100%, 0);
+}
+
+.eael-creative-button--tamaya:hover::after {
+  transform: translate3d(0, 100%, 0);
+}
+
+.eael-creative-button--tamaya:hover > span {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+/*--- Rayen ---*/
+.eael-creative-button--rayen {
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.eael-creative-button--rayen::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.eael-creative-button--rayen > span {
+  display: block;
+}
+
+.eael-creative-button--rayen::before,
+.eael-creative-button--rayen > span {
+  padding: 1em 2em;
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+
+.eael-creative-button--rayen:hover::before {
+  transform: translate3d(0, 0, 0);
+}
+
+.eael-creative-button--rayen:hover > span {
+  transform: translate3d(0, 100%, 0);
 }
 
 table.eael-data-table thead .sorting, table.eael-data-table thead .sorting_desc, table.eael-data-table thead .sorting_asc {
@@ -2901,231 +3126,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-flipbox-img-circle .flipbox-back-image-icon img {
   border-radius: 50%;
   overflow: hidden;
-}
-
-/*--------------------------------*/
-/* 08. Creative Button styles
-/*--------------------------------*/
-.eael-creative-button-align-center {
-  text-align: center;
-}
-
-.eael-creative-button-wrapper {
-  display: flex;
-}
-
-.eael-creative-button {
-  flex: 0 0 auto;
-  min-width: 150px;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-  border-radius: 2px;
-  padding: 20px 30px;
-  font-size: 16px;
-  line-height: 1;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.eael-creative-button-align-center .eael-creative-button {
-  float: none;
-  display: inline-block;
-}
-
-.eael-creative-button:focus {
-  outline: none;
-}
-
-.eael-creative-button > span {
-  vertical-align: middle;
-}
-
-/*--------------------------------------------*/
-/* 09. Individual eael-creative-button styles
-/*--------------------------------------------*/
-/*--- Winona ---*/
-.eael-creative-button--winona {
-  overflow: hidden;
-  padding: 0 !important;
-  transition: border-color 0.3s, background-color 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--winona::after {
-  content: attr(data-text);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transform: translate3d(0, 25%, 0);
-}
-
-.eael-creative-button--winona > span {
-  display: block;
-}
-
-.eael-creative-button--winona::after,
-.eael-creative-button--winona > span {
-  padding: 1em 2em;
-  transition: transform 0.3s, opacity 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--winona:hover::after {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.eael-creative-button--winona:hover > span {
-  opacity: 0;
-  transform: translate3d(0, -25%, 0);
-}
-
-/*--- Ujarak ---*/
-.eael-creative-button--ujarak {
-  transition: border-color 0.4s, color 0.4s;
-}
-
-.eael-creative-button--ujarak::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0;
-  transform: scale3d(0.7, 1, 1);
-  transition: transform 0.4s, opacity 0.4s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--ujarak,
-.eael-creative-button--ujarak::before {
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--ujarak:hover::before {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/*--- Wayra ---*/
-.eael-creative-button--wayra {
-  overflow: hidden;
-  transition: border-color 0.3s, color 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--wayra::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150%;
-  height: 100%;
-  z-index: -1;
-  transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
-  transform-origin: 0% 100%;
-  transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
-}
-
-.eael-creative-button--wayra:hover::before {
-  opacity: 1;
-  transform: rotate3d(0, 0, 1, 0deg);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-/*--- Tamaya ---*/
-.eael-creative-button--tamaya {
-  overflow: hidden;
-}
-
-.eael-creative-button--tamaya::before,
-.eael-creative-button--tamaya::after {
-  content: attr(data-text);
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  left: 0;
-  overflow: hidden;
-  transition: transform 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--tamaya::before {
-  top: 0;
-  padding: 20px 30px;
-}
-
-.eael-creative-button--tamaya::after {
-  bottom: 0;
-  line-height: 0;
-}
-
-.eael-creative-button--tamaya:hover::after {
-  bottom: -1px;
-}
-
-.eael-creative-button--tamaya > span {
-  display: block;
-  transform: scale3d(0.2, 0.2, 1);
-  opacity: 0;
-  transition: transform 0.3s, opacity 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--tamaya:hover::before {
-  transform: translate3d(0, -100%, 0);
-}
-
-.eael-creative-button--tamaya:hover::after {
-  transform: translate3d(0, 100%, 0);
-}
-
-.eael-creative-button--tamaya:hover > span {
-  opacity: 1;
-  transform: scale3d(1, 1, 1);
-}
-
-/*--- Rayen ---*/
-.eael-creative-button--rayen {
-  overflow: hidden;
-  padding: 0 !important;
-}
-
-.eael-creative-button--rayen::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: translate3d(-100%, 0, 0);
-}
-
-.eael-creative-button--rayen > span {
-  display: block;
-}
-
-.eael-creative-button--rayen::before,
-.eael-creative-button--rayen > span {
-  padding: 1em 2em;
-  transition: transform 0.3s;
-  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-}
-
-.eael-creative-button--rayen:hover::before {
-  transform: translate3d(0, 0, 0);
-}
-
-.eael-creative-button--rayen:hover > span {
-  transform: translate3d(0, 100%, 0);
 }
 
 /*--------------------------*/
@@ -6407,8 +6407,9 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 .eael-testimonial-item .eael-testimonial-quote::after {
   color: inherit !important;
   content: "\f10e";
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
   font-size: 200%;
+  font-weight: 900;
 }
 
 .eael-testimonial-slider.default-style .eael-testimonial-align-centered .eael-testimonial-image figure img {
