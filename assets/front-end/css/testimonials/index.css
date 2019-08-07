@@ -129,8 +129,9 @@
 .eael-testimonial-item .eael-testimonial-quote::after {
   color: inherit !important;
   content: "\f10e";
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
   font-size: 200%;
+  font-weight: 900;
 }
 
 .eael-testimonial-slider.default-style .eael-testimonial-align-centered .eael-testimonial-image figure img {
