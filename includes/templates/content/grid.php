@@ -13,7 +13,7 @@ $post_carousel_image = wp_get_attachment_image_url(get_post_thumbnail_id(), $pos
                             <?php if (!empty($post_args['eael_post_grid_bg_hover_icon_new'])) { ?>
                                 <i class="<?php echo esc_attr($post_args['eael_post_grid_bg_hover_icon_new']['value']); ?>" aria-hidden="true"></i>
                             <?php } else { ?>
-                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                <i class="fas long-arrow-alt-right" aria-hidden="true"></i>
                             <?php }?>
                             <a href="<?php echo get_permalink(); ?>"></a>
                         </div>
