@@ -108,8 +108,8 @@ class Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::ICONS,
 						'fa4compatibility' => 'eael_flipbox_icon',
 						'default' => [
-							'value' => 'fas fa-snowflake-o',
-							'library' => 'solid',
+							'value' => 'fas fa-snowflake',
+							'library' => 'fa-solid',
 						],
 						'condition' => [
 							'eael_flipbox_img_or_icon' => 'icon'
@@ -195,8 +195,8 @@ class Flip_Box extends Widget_Base {
 						'type' => Controls_Manager::ICONS,
 						'fa4compatibility' => 'eael_flipbox_icon_back',
 						'default' => [
-							'value' => 'fas fa-snowflake-o',
-							'library' => 'solid',
+							'value' => 'fas fa-snowflake',
+							'library' => 'fa-solid',
 						],
 						'condition'	=> [
 							'eael_flipbox_img_or_icon_back'	=> 'icon'

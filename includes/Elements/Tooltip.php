@@ -125,7 +125,7 @@ class Tooltip extends Widget_Base {
 				'fa4compatibility' => 'eael_tooltip_icon_content',
 				'default' => [
 					'value' => 'fas fa-home',
-					'library' => 'solid',
+					'library' => 'fa-solid',
 				],
 				'condition' => [
 					'eael_tooltip_type' => [ 'icon' ]

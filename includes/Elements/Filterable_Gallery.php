@@ -193,7 +193,7 @@ class Filterable_Gallery extends Widget_Base
                 'fa4compatibility' => 'eael_section_fg_zoom_icon',
                 'default' => [
                     'value' => 'fas fa-search-plus',
-                    'library' => 'solid',
+                    'library' => 'fa-solid',
                 ],
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
@@ -209,7 +209,7 @@ class Filterable_Gallery extends Widget_Base
                 'fa4compatibility' => 'eael_section_fg_link_icon',
                 'default' => [
                     'value' => 'fas fa-link',
-                    'library' => 'solid',
+                    'library' => 'fa-solid',
                 ],
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',

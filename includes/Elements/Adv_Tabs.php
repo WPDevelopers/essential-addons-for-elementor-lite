@@ -146,7 +146,7 @@ class Adv_Tabs extends Widget_Base
                         'fa4compatibility' => 'eael_adv_tabs_tab_title_icon',
                         'default' => [
                             'value' => 'fas fa-home',
-                            'library' => 'solid',
+                            'library' => 'fa-solid',
                         ],
                         'condition' => [
                             'eael_adv_tabs_icon_type' => 'icon',
