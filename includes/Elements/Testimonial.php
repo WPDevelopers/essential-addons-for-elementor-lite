@@ -565,11 +565,11 @@ class Testimonial extends Widget_Base {
 			ob_start();
 		?>
 		<ul class="testimonial-star-rating">
-			<li><i class="fa fa-star" aria-hidden="true"></i></li>
-			<li><i class="fa fa-star" aria-hidden="true"></i></li>
-			<li><i class="fa fa-star" aria-hidden="true"></i></li>
-			<li><i class="fa fa-star" aria-hidden="true"></i></li>
-			<li><i class="fa fa-star" aria-hidden="true"></i></li>
+			<li><i class="fas fa-star" aria-hidden="true"></i></li>
+			<li><i class="fas fa-star" aria-hidden="true"></i></li>
+			<li><i class="fas fa-star" aria-hidden="true"></i></li>
+			<li><i class="fas fa-star" aria-hidden="true"></i></li>
+			<li><i class="fas fa-star" aria-hidden="true"></i></li>
 		</ul>
 		<?php
 			echo ob_get_clean();
