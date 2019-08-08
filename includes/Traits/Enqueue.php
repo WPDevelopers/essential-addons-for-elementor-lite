@@ -36,6 +36,20 @@ trait Enqueue
 			false,
 			EAEL_PLUGIN_VERSION
 		);
+        
+        wp_enqueue_style(
+			'font-awesome-4-shim',
+			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
+			false,
+			EAEL_PLUGIN_VERSION
+		);
+        
+        wp_enqueue_script(
+			'font-awesome-4-shim',
+			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
+			false,
+			EAEL_PLUGIN_VERSION
+		);
 
         // My Assets
         if ($this->is_preview_mode()) {
