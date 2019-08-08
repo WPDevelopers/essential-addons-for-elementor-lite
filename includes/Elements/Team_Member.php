@@ -166,8 +166,8 @@ class Team_Member extends Widget_Base {
 						'type' => Controls_Manager::ICONS,
 						'fa4compatibility' => 'social',
 						'default' => [
-							'value' => 'fas fa-wordpress',
-							'library' => 'fa-solid',
+							'value' => 'fab fa-wordpress',
+							'library' => 'fa-brands',
 						],
 					],
 					[
