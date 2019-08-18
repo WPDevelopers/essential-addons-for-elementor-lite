@@ -1223,7 +1223,7 @@ table.eael-data-table thead .sorting:after, table.eael-data-table thead .sorting
   display: none;
 }
 
-@media (max-width: 39.9375em) {
+@media (max-width: 768px) {
   .eael-data-table-wrap {
     overflow-x: scroll !important;
     padding-bottom: 5px;
