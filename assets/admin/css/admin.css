@@ -126,7 +126,7 @@
 p.eael-el-title {
     font-size: 15px;
     font-weight: 600;
-    color: #333;
+    color: #3a3c40;
     margin: 0.5em;
 }
 .eael-settings-tab p.eael-elements-control-notice {
@@ -174,9 +174,9 @@ textarea.eael-form-control {
 }
 
 .eael-checkbox {
+    position: relative;
     display: flex;
-    flex-basis: 330px;
-    flex-flow: row-reverse;
+    flex-basis: 350px;
     justify-content: space-between;
     align-items: center;
     font-size: 24px;
@@ -727,44 +727,26 @@ textarea.eael-form-control {
 .eael-el-title {
     position: relative;
 }
-.eael-checkbox {
-    overflow: hidden;
-}
 
 label.eael-get-pro + .eael-el-title {
     padding-left: 25px;
 }
 
 .pro-label {
-    font-size: 11px;
+    font-size: 10px;
     color: #ffffff;
     text-transform: uppercase;
     text-align: center;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
     position: absolute;
-    top: -14px;
-    left: -45px;
-    width: 80px;
-    background-image: -moz-linear-gradient(
-        -122deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
-    );
-    background-image: -webkit-linear-gradient(
-        -122deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
-    );
-    background-image: -ms-linear-gradient(
-        -122deg,
-        rgb(146, 113, 255) 0%,
-        rgb(87, 37, 255) 100%
-    );
+    bottom: 22px;
+    left: -18px;
+    line-height: 1;
+    padding: 3px 6px;
+    border-radius: 2px;
+    background-image: -moz-linear-gradient( -122deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100% );
+    background-image: -webkit-linear-gradient( -122deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100% );
+    background-image: -ms-linear-gradient( -122deg, rgb(146, 113, 255) 0%, rgb(87, 37, 255) 100% );
     box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
-    color: #fff;
 }
 #toplevel_page_eael-settings.current .wp-menu-image img {
     opacity: 1;
@@ -853,3 +835,72 @@ button.eael-btn.eael-global-control-enable:hover {
 button.eael-btn.eael-global-control-disable:hover {
     background: #d01111;
 }
+
+.eael-elements-info {
+    display: flex;
+    align-items: center;
+}
+.eael-elements-info > a.eael-element-info-link {
+    position: relative;
+    width: 17px;
+    height: 16px;
+    border: 1px solid rgba(0,0,0, .15);
+    border-radius: 20px;
+    padding: 4px;
+    display: flex;
+    margin: 0 1px;
+    text-decoration: none;
+    color: #3a3c40;
+    opacity: .75;
+}
+.eael-elements-info > a.eael-element-info-link:hover{
+    opacity: 1;
+}
+.eael-elements-info img, .eael-elements-info svg {
+    width: 18px;
+}
+.eael-element-info-link span.dashicons {
+    font-size: 17px;
+}
+.eael-elements-info .eael-info-tooltip {
+    background-color: #3a3c40;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 5px 15px;
+    border-radius: 40px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    text-transform: uppercase;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+.eael-elements-info > a:hover .eael-info-tooltip {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translate(-50%, -150%);
+          transform: translate(-50%, -150%);
+}
+
+.eael-elements-info .eael-info-tooltip:after {
+    display: block;
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    content: "";
+    border: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: transparent;
+    border-top-color: #3a3c40;
+    -webkit-transform: translate(-50%, 100%);
+          transform: translate(-50%, 100%);
+}
+
