@@ -314,7 +314,7 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -336,7 +336,7 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-right: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
