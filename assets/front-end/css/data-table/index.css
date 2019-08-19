@@ -156,7 +156,7 @@ table.eael-data-table thead .sorting:after, table.eael-data-table thead .sorting
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .eael-data-table-wrap {
     overflow-x: scroll !important;
     padding-bottom: 5px;
