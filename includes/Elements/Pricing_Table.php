@@ -1677,7 +1677,7 @@ class Pricing_Table extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function render_feature_list($settings, $obj)
+	public function render_feature_list($settings, $obj)
     {
         if (empty($settings['eael_pricing_table_items'])) {
             return;
