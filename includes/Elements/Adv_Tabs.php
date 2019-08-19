@@ -514,7 +514,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover .fa' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover i' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
@@ -582,8 +582,8 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active .fa' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default .fa' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default i' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
