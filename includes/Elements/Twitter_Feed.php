@@ -505,7 +505,6 @@ class Twitter_Feed extends Widget_Base
 
         if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
             echo '<script type="text/javascript">
-                
                 jQuery(document).ready(function($) {
                     $(".eael-twitter-feed").each(function() {
                         var $node_id = "' . $this->get_id() . '",
