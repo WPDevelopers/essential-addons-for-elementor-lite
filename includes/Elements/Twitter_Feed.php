@@ -502,5 +502,34 @@ class Twitter_Feed extends Widget_Base
                 }
             }
         </style>';
+
+        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+            echo '<script type="text/javascript">
+                jQuery(document).ready(function() {
+                    jQuery(".eael-filter-gallery-container").each(function() {
+                        var $node_id = "' . $this->get_id() . '",
+                            $scope = $("[data-id= ${$node_id} ]"),
+                            $gallery = $(this),
+                            $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter"),
+                            $settings = {
+                                itemSelector: ".eael-twitter-feed-item",
+                                percentPosition: true,
+                                masonry: {
+                                    columnWidth: ".eael-twitter-feed-item",
+                                    gutter: $gutter
+                                }
+                            };
+
+                        // init isotope
+                        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope($settings);
+                    
+                        // layout gal, while images are loading
+                        $twitter_feed_gallery.imagesLoaded().progress(function() {
+                            $twitter_feed_gallery.isotope("layout");
+                        });
+                    });
+                });
+            </script>';
+        }
     }
 }
