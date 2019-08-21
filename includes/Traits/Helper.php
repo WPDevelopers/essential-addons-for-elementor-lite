@@ -6,12 +6,12 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Utils as Utils;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Utils;
 
 trait Helper
 {
@@ -42,7 +42,6 @@ trait Helper
         'eael_show_read_more_button',
         'read_more_button_text',
 
-
         // query_args
         'post_type',
         'post__in',
@@ -63,21 +62,18 @@ trait Helper
      */
     public function eael_get_all_types_post()
     {
-        $posts_args = array(
+        $posts = get_posts([
             'post_type' => 'any',
             'post_style' => 'all_types',
             'post_status' => 'publish',
             'posts_per_page' => '-1',
-        );
-        $posts = $this->eael_load_more_ajax($posts_args);
+        ]);
 
-        $post_list = [];
-
-        foreach ($posts as $post) {
-            $post_list[$post->ID] = $post->post_title;
+        if (!empty($posts)) {
+            return wp_list_pluck($posts, 'post_title', 'ID');
         }
 
-        return $post_list;
+        return [];
     }
 
     /**
@@ -86,6 +82,10 @@ trait Helper
      */
     protected function eael_query_controls()
     {
+        $post_types = $this->eael_get_post_types();
+        $post_types['by_id'] = __('Manual Selection', 'essential-addons-elementor');
+        $taxonomies = get_taxonomies([], 'objects');
+
         if ('eael-content-ticker' === $this->get_name()) {
             $this->start_controls_section(
                 'eael_section_content_ticker_filters',
@@ -96,9 +96,7 @@ trait Helper
                     ],
                 ]
             );
-        }
-
-        if ('eael-content-timeline' === $this->get_name()) {
+        } else if ('eael-content-timeline' === $this->get_name()) {
             $this->start_controls_section(
                 'eael_section_timeline__filters',
                 [
@@ -108,9 +106,7 @@ trait Helper
                     ],
                 ]
             );
-        }
-
-        if ('eael-content-timeline' !== $this->get_name() && 'eael-content-ticker' !== $this->get_name()) {
+        } else {
             $this->start_controls_section(
                 'eael_section_post__filters',
                 [
@@ -119,12 +115,64 @@ trait Helper
             );
         }
 
-        $this->add_group_control(
-            'eaeposts',
+        $this->add_control(
+            'post_type',
             [
-                'name' => 'eaeposts',
+                'label' => __('Source', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'options' => $post_types,
+                'default' => key($post_types),
             ]
         );
+
+        $this->add_control(
+            'posts_ids',
+            [
+                'label' => __('Search & Select', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_get_all_types_post(),
+                'label_block' => true,
+                'multiple' => true,
+                'condition' => [
+                    'post_type' => 'by_id',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'authors', [
+                'label' => __('Author', 'essential-addons-elementor'),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+                'multiple' => true,
+                'default' => [],
+                'options' => $this->eael_get_authors(),
+                'condition' => [
+                    'post_type!' => 'by_id',
+                ],
+            ]
+        );
+
+        foreach ($taxonomies as $taxonomy => $object) {
+            if (!in_array($object->object_type[0], array_keys($post_types))) {
+                continue;
+            }
+
+            $this->add_control(
+                $taxonomy . '_ids',
+                [
+                    'label' => $object->label,
+                    'type' => Controls_Manager::SELECT2,
+                    'label_block' => true,
+                    'multiple' => true,
+                    'object_type' => $taxonomy,
+                    'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
+                    'condition' => [
+                        'post_type' => $object->object_type,
+                    ],
+                ]
+            );
+        }
 
         $this->add_control(
             'post__not_in',
@@ -505,7 +553,7 @@ trait Helper
                 [
                     'label' => __('Button Text', 'essential-addons-elementor'),
                     'type' => Controls_Manager::TEXT,
-                    'default' => __( 'Read More', 'essential-addons-elementor' ),
+                    'default' => __('Read More', 'essential-addons-elementor'),
                     'condition' => [
                         'eael_show_read_more_button' => '1',
                     ],
@@ -910,18 +958,11 @@ trait Helper
      */
     public function eael_get_post_types()
     {
-        $eael_cpts = get_post_types(array('public' => true, 'show_in_nav_menus' => true), 'object');
-        $eael_exclude_cpts = array('elementor_library', 'attachment');
+        $post_types = get_post_types(['public' => true, 'show_in_nav_menus' => true], 'objects');
+        $post_types = wp_list_pluck($post_types, 'label', 'name');
+        $post_types = array_diff_key($post_types, ['elementor_library', 'attachment']);
 
-        foreach ($eael_exclude_cpts as $exclude_cpt) {
-            unset($eael_cpts[$exclude_cpt]);
-        }
-        $post_types = array_merge($eael_cpts);
-        foreach ($post_types as $type) {
-            $types[$type->name] = $type->label;
-        }
-
-        return $types;
+        return $post_types;
     }
 
     /**
@@ -1291,16 +1332,20 @@ trait Helper
      */
     public function eael_get_authors()
     {
-        $options = array();
-        $users = get_users();
+        $users = get_users([
+            'who' => 'authors',
+            'has_published_posts' => true,
+            'fields' => [
+                'ID',
+                'display_name',
+            ],
+        ]);
 
-        if ($users) {
-            foreach ($users as $user) {
-                $options[$user->ID] = $user->display_name;
-            }
+        if (!empty($users)) {
+            return wp_list_pluck($users, 'display_name', 'ID');
         }
 
-        return $options;
+        return [];
     }
 
     /**
@@ -1431,7 +1476,7 @@ trait Helper
         ob_start();
         while ($posts->have_posts()): $posts->the_post();
             $isPrinted = false;
-            include ($post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR) . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
+            include $post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
         endwhile;
 
         $return['content'] = ob_get_clean();
@@ -1463,7 +1508,7 @@ trait Helper
         $items = get_transient($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_cache');
         $html = '';
 
-        if(empty($settings['eael_twitter_feed_consumer_key']) || empty($settings['eael_twitter_feed_consumer_secret'])) {
+        if (empty($settings['eael_twitter_feed_consumer_key']) || empty($settings['eael_twitter_feed_consumer_secret'])) {
             return;
         }
 
@@ -1516,14 +1561,14 @@ trait Helper
             }
         }
 
-        if(empty($items)) {
+        if (empty($items)) {
             return;
         }
-        
+
         if ($settings['eael_twitter_feed_hashtag_name']) {
             foreach ($items as $key => $item) {
                 $match = false;
-                
+
                 if ($item['entities']['hashtags']) {
                     foreach ($item['entities']['hashtags'] as $tag) {
                         if (strcasecmp($tag['text'], $settings['eael_twitter_feed_hashtag_name']) == 0) {
@@ -1532,7 +1577,7 @@ trait Helper
                     }
                 }
 
-                if($match == false) {
+                if ($match == false) {
                     unset($items[$key]);
                 }
             }
@@ -1544,29 +1589,29 @@ trait Helper
             $html .= '<div class="eael-twitter-feed-item ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
-                        if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
-                            $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
+            if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
+                $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
                                 <img src="' . $item['user']['profile_image_url_https'] . '">
                             </a>';
-                        }
-                        $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
-                            if ($settings['eael_twitter_feed_show_icon'] == 'true') {
-                                $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
-                            }
-                            
-                            $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
+            }
+            $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
+            if ($settings['eael_twitter_feed_show_icon'] == 'true') {
+                $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
+            }
+
+            $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
                         </a>';
-                        if ($settings['eael_twitter_feed_show_date'] == 'true') {
-                            $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-elementor'), human_time_diff(strtotime($item['created_at']))) . '</span>';
-                        }
-                    $html .= '</div>
+            if ($settings['eael_twitter_feed_show_date'] == 'true') {
+                $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-elementor'), human_time_diff(strtotime($item['created_at']))) . '</span>';
+            }
+            $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
                         <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . '...</p>';
-                        
-                        if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
-                            $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '\/status/' . $item['id'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
-                        }
-                    $html .= '</div>
+
+            if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
+                $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '\/status/' . $item['id'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
+            }
+            $html .= '</div>
                     ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
                 </div>
 			</div>';
