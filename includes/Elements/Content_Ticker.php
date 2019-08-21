@@ -786,6 +786,7 @@ class Content_Ticker extends Widget_Base {
 	 */
     protected function render_arrows() {
 		$settings = $this->get_settings_for_display();
+		print_r($settings);
 		$icon_migrated = isset($settings['__fa4_migrated']['arrow_new']);
 		$icon_is_new = empty($settings['arrow']);
 
