@@ -20,27 +20,27 @@ trait Helper
      *
      */
     public $post_args = [
-        // content ticker
-        'eael_ticker_type',
-        'eael_ticker_custom_contents',
+        // // content ticker
+        // 'eael_ticker_type',
+        // 'eael_ticker_custom_contents',
 
-        // post grid
-        'eael_post_grid_columns',
+        // // post grid
+        // 'eael_post_grid_columns',
 
-        // common
-        'meta_position',
-        'eael_show_meta',
-        'image_size',
-        'eael_show_image',
-        'eael_show_title',
-        'eael_show_excerpt',
-        'eael_excerpt_length',
-        'eael_show_read_more',
-        'eael_read_more_text',
-        'show_load_more',
-        'show_load_more_text',
-        'eael_show_read_more_button',
-        'read_more_button_text',
+        // // common
+        // 'meta_position',
+        // 'eael_show_meta',
+        // 'image_size',
+        // 'eael_show_image',
+        // 'eael_show_title',
+        // 'eael_show_excerpt',
+        // 'eael_excerpt_length',
+        // 'eael_show_read_more',
+        // 'eael_read_more_text',
+        // 'show_load_more',
+        // 'show_load_more_text',
+        // 'eael_show_read_more_button',
+        // 'read_more_button_text',
 
         // query_args
         'post_type',
@@ -49,8 +49,8 @@ trait Helper
         'post_style',
         'tax_query',
         'post__not_in',
-        'eael_post_authors',
-        'eaeposts_authors',
+        'post_authors',
+        'authors',
         'offset',
         'orderby',
         'order',
@@ -883,73 +883,70 @@ trait Helper
         $this->end_controls_section();
     }
 
-    public function eael_get_query_args($control_id, $settings)
+    public function eael_get_query_args($settings = [])
     {
-        $defaults = [
-            $control_id . '_post_type' => 'post',
-            $control_id . '_posts_ids' => [],
+        // if (wp_doing_ajax()) {
+        //     $settings = [];
+        // } else {
+            $settings = func_get_arg(0);
+        // }
+
+        $settings = wp_parse_args($settings, [
+            'post_type' => 'post',
+            'posts_ids' => [],
             'orderby' => 'date',
             'order' => 'desc',
             'posts_per_page' => 3,
             'offset' => 0,
-        ];
+            'paged' => 1,
+            'post__not_in' => []
+        ]);
 
-        $settings = wp_parse_args($settings, $defaults);
-
-        $post_type = $settings[$control_id . '_post_type'];
-
-        $query_args = [
+        $args = [
             'orderby' => $settings['orderby'],
             'order' => $settings['order'],
             'ignore_sticky_posts' => 1,
-            'post_status' => 'publish', // Hide drafts/private posts for admins
+            'post_status' => 'publish',
         ];
 
-        if ('by_id' === $post_type) {
-            $query_args['post_type'] = 'any';
-            $query_args['post__in'] = $settings[$control_id . '_posts_ids'];
-
-            if (empty($query_args['post__in'])) {
-                // If no selection - return an empty query
-                $query_args['post__in'] = [0];
-            }
+        if ('by_id' === $settings['post_type']) {
+            $args['post_type'] = 'any';
+            $args['post__in'] = empty($settings['posts_ids']) ? [0] : $settings['posts_ids'];
         } else {
-            $query_args['post_type'] = $post_type;
-            $query_args['posts_per_page'] = $settings['posts_per_page'];
-            $query_args['tax_query'] = [];
+            $args['post_type'] = $settings['post_type'];
+            $args['posts_per_page'] = $settings['posts_per_page'];
+            $args['offset'] = $settings['offset'];
+            $args['paged'] = $settings['paged'];
+            $args['tax_query'] = [];
 
-            $query_args['offset'] = $settings['offset'];
-
-            $taxonomies = get_object_taxonomies($post_type, 'objects');
+            $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
 
             foreach ($taxonomies as $object) {
-                $setting_key = $control_id . '_' . $object->name . '_ids';
+                $setting_key = $object->name . '_ids';
 
                 if (!empty($settings[$setting_key])) {
-                    $query_args['tax_query'][] = [
+                    $args['tax_query'][] = [
                         'taxonomy' => $object->name,
                         'field' => 'term_id',
                         'terms' => $settings[$setting_key],
                     ];
                 }
             }
+
+            if (!empty($args['tax_query'])) {
+                $args['tax_query']['relation'] = 'OR';
+            }
         }
 
-        if (!empty($settings[$control_id . '_authors'])) {
-            $query_args['author__in'] = $settings[$control_id . '_authors'];
+        if (!empty($settings['authors'])) {
+            $args['author__in'] = $settings['authors'];
         }
 
-        $post__not_in = [];
         if (!empty($settings['post__not_in'])) {
-            $post__not_in = array_merge($post__not_in, $settings['post__not_in']);
-            $query_args['post__not_in'] = $post__not_in;
+            $args['post__not_in'] = $settings['post__not_in'];
         }
 
-        if (isset($query_args['tax_query']) && count($query_args['tax_query']) > 1) {
-            $query_args['tax_query']['relation'] = 'OR';
-        }
-
-        return $query_args;
+        return get_posts($args);
     }
 
     /**
@@ -960,9 +957,8 @@ trait Helper
     {
         $post_types = get_post_types(['public' => true, 'show_in_nav_menus' => true], 'objects');
         $post_types = wp_list_pluck($post_types, 'label', 'name');
-        $post_types = array_diff_key($post_types, ['elementor_library', 'attachment']);
-
-        return $post_types;
+        
+        return array_diff_key($post_types, ['elementor_library', 'attachment']);
     }
 
     /**
