@@ -1737,8 +1737,9 @@ foreach ($settings['eael_pricing_table_items'] as $item):
                                     <?php if(isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
 										<?php Icons_Manager::render_icon($item['eael_pricing_table_list_icon_new']); ?>
                                     <?php } else { ?>
-                                        <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i></span>
+                                        <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
                                     <?php } ?>
+									</span>
 				                <?php endif;?>
                 <?php echo $item['eael_pricing_table_item']; ?>
             </li>
