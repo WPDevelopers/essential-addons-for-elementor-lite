@@ -14,7 +14,6 @@ use \Elementor\Scheme_Color;
 use \Elementor\Scheme_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Feature_List extends Widget_Base
 {
@@ -769,7 +768,7 @@ class Feature_List extends Widget_Base
 
                         <?php if ($item['eael_feature_list_icon_type'] == 'icon') { ?>
 							<?php if (empty($item['eael_feature_list_icon']) || isset($item['__fa4_migrated']['eael_feature_list_icon_new'])) { ?>
-								<?php Icons_Manager::render_icon($item['eael_feature_list_icon_new'], ['aria-hidden' => 'true']); ?>
+								<i class="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value'] ); ?>" aria-hidden="true"></i>
 							<?php } else { ?>
 								<i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
 							<?php } ?>
