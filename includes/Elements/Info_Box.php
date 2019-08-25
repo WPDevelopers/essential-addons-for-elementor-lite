@@ -14,7 +14,6 @@ use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Info_Box extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -285,7 +284,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_infobox_button',
 			[
-				'label' => esc_html__( 'Link', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Button', 'essential-addons-elementor' )
 			]
 		);
 
@@ -1449,7 +1448,8 @@ class Info_Box extends Widget_Base {
 	 * 
 	 * @param	$settings
 	 */
-	protected function eael_infobox_before( $settings ) {
+	protected function eael_infobox_before() {
+		$settings = $this->get_settings();
 
 		$this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 
@@ -1476,7 +1476,8 @@ class Info_Box extends Widget_Base {
 	 * 
 	 * @param	$settings
 	 */
-	protected function eael_infobox_after($settings) {
+	protected function eael_infobox_after() {
+		$settings = $this->get_settings();
 		ob_start();?></div><?php
 		if( 'yes' == $settings['eael_show_infobox_clickable'] ) : ?></a><?php endif;
 		echo ob_get_clean();
@@ -1487,7 +1488,8 @@ class Info_Box extends Widget_Base {
 	 * 
 	 * @param $settings
 	 */
-	protected function render_infobox_icon($settings) {
+	protected function render_infobox_icon() {
+		$settings = $this->get_settings();
 
 		if( 'none' == $settings['eael_infobox_img_or_icon'] ) return;
 
@@ -1531,7 +1533,7 @@ class Info_Box extends Widget_Base {
 				<?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : ?>
 				<div class="infobox-icon-wrap">
 					<?php if ($infobox_icon_is_new || $infobox_icon_migrated) { ?>
-						<?php Icons_Manager::render_icon($settings['eael_infobox_icon_new']); ?>
+						<i class="<?php echo esc_attr( $settings['eael_infobox_icon_new']['value'] ); ?>"></i>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr( $settings['eael_infobox_icon'] ); ?>"></i>
 					<?php } ?>
@@ -1550,7 +1552,8 @@ class Info_Box extends Widget_Base {
 	}
 
 
-	protected function render_infobox_content( $settings ) {
+	protected function render_infobox_content() {
+		$settings = $this->get_settings();
 
 		$this->add_render_attribute( 'infobox_content', 'class', 'infobox-content' );
 		if( 'icon' == $settings['eael_infobox_img_or_icon'] )
@@ -1586,7 +1589,8 @@ class Info_Box extends Widget_Base {
 	 * 
 	 * @param $settings
 	 */
-	protected function render_infobox_button( $settings ) {
+	protected function render_infobox_button() {
+		$settings = $this->get_settings();
 		if('yes' == $settings['eael_show_infobox_clickable'] || 'yes' != $settings['eael_show_infobox_button']) return;
 
 		$button_icon_migrated = isset($settings['__fa4_migrated']['eael_infobox_button_icon_new']);
@@ -1615,7 +1619,7 @@ class Info_Box extends Widget_Base {
 			<a <?php echo $this->get_render_attribute_string('infobox_button'); ?>>
 				<?php if( 'left' == $settings['eael_infobox_button_icon_alignment']) : ?>
 					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-						<?php Icons_Manager::render_icon($settings['eael_infobox_button_icon_new']); ?>
+						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?>"></i>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon'] ); ?>"></i>
 					<?php } ?>
@@ -1623,7 +1627,7 @@ class Info_Box extends Widget_Base {
 				<?php echo esc_attr($settings['infobox_button_text']); ?>
 				<?php if( 'right' == $settings['eael_infobox_button_icon_alignment']) : ?>
 					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-						<?php Icons_Manager::render_icon($settings['eael_infobox_button_icon_new']); ?>
+						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?>"></i>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon'] ); ?>"></i>
 					<?php } ?>
@@ -1635,10 +1639,9 @@ class Info_Box extends Widget_Base {
 	}
 
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-		$this->eael_infobox_before( $settings );
-		$this->render_infobox_icon( $settings );
-		$this->render_infobox_content( $settings );
-		$this->eael_infobox_after( $settings );
+		$this->eael_infobox_before();
+		$this->render_infobox_icon();
+		$this->render_infobox_content();
+		$this->eael_infobox_after();
 	}
 }
