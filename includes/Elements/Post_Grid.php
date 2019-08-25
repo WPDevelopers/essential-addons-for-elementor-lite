@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Post_Grid extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;

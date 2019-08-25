@@ -14,7 +14,6 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Flip_Box extends Widget_Base {
 
@@ -1221,7 +1220,7 @@ class Flip_Box extends Widget_Base {
 	                        <div class="eael-elements-flip-box-icon-image">
 								<?php if( 'icon' === $settings['eael_flipbox_img_or_icon'] ) : ?>
 									<?php if ($front_icon_is_new || $front_icon_migrated) { ?>
-										<?php Icons_Manager::render_icon($settings['eael_flipbox_icon_new']); ?>
+										<i class="<?php echo esc_attr( $settings['eael_flipbox_icon_new']['value'] ); ?>"></i>
 									<?php } else { ?>
 										<i class="<?php echo esc_attr( $settings['eael_flipbox_icon'] ); ?>"></i>
 									<?php } ?>
@@ -1248,7 +1247,7 @@ class Flip_Box extends Widget_Base {
 	                    				<img <?php echo $this->get_render_attribute_string('flipbox-back-icon-image-container'); ?>>
 	                				<?php elseif('icon' == $settings['eael_flipbox_img_or_icon_back']): ?>
 										<?php if ($back_icon_is_new || $back_icon_migrated) { ?>
-											<?php Icons_Manager::render_icon($settings['eael_flipbox_icon_back_new']); ?>
+											<i class="<?php echo esc_attr( $settings['eael_flipbox_icon_back_new']['value'] ); ?>"></i>
 										<?php } else { ?>
 											<i class="<?php echo esc_attr( $settings['eael_flipbox_icon_back'] ); ?>"></i>
 										<?php } ?>
@@ -1265,7 +1264,7 @@ class Flip_Box extends Widget_Base {
 	                        	<a <?php echo $this->get_render_attribute_string('flipbox-button-container'); ?>>
 	                        		<?php if( 'before' == $settings['button_icon_position'] ) : ?>
 										<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-											<?php Icons_Manager::render_icon($settings['button_icon_new']); ?>
+											<i class="<?php echo $settings['button_icon_new']['value']; ?>"></i>
 										<?php } else { ?>
 											<i class="<?php echo $settings['button_icon']; ?>"></i>
 										<?php } ?>
@@ -1273,7 +1272,7 @@ class Flip_Box extends Widget_Base {
 	                        		<?php echo esc_attr($settings['flipbox_button_text']); ?>
 	                        		<?php if( 'after' == $settings['button_icon_position'] ) : ?>
 										<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-											<?php Icons_Manager::render_icon($settings['button_icon_new']); ?>
+											<i class="<?php echo $settings['button_icon_new']['value']; ?>"></i>
 										<?php } else { ?>
 											<i class="<?php echo $settings['button_icon']; ?>"></i>
 										<?php } ?>

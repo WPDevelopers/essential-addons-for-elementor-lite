@@ -409,7 +409,7 @@ class Dual_Color_Header extends Widget_Base {
 	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	   <?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon_new']['value'] ); ?>"></i>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 			<?php } ?>
@@ -421,7 +421,7 @@ class Dual_Color_Header extends Widget_Base {
 	<div class="eael-dual-header">
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon_new']['value'] ); ?>"></i>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 			<?php } ?>
@@ -435,7 +435,7 @@ class Dual_Color_Header extends Widget_Base {
 	<div class="eael-dual-header">
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon_new']['value'] ); ?>"></i>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 			<?php } ?>
@@ -451,7 +451,7 @@ class Dual_Color_Header extends Widget_Base {
 			<h2 class="title"><span class="lead"><?php esc_html_e( $settings['eael_dch_first_title'], 'essential-addons-elementor' ); ?></span> <span><?php esc_html_e( $settings['eael_dch_last_title'], 'essential-addons-elementor' ); ?></span></h2>
 		<?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<?php Icons_Manager::render_icon($settings['eael_dch_icon_new']); ?>
+				<i class="<?php echo esc_attr( $settings['eael_dch_icon_new']['value'] ); ?>"></i>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 			<?php } ?>
