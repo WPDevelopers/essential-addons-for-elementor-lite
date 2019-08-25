@@ -488,7 +488,7 @@ class Creative_Button extends Widget_Base {
 			<span>
 				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
-						<?php Icons_Manager::render_icon($settings['eael_creative_button_icon_new']); ?>
+						<i class="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
 					<?php } ?>
@@ -498,7 +498,7 @@ class Creative_Button extends Widget_Base {
 
 				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
-						<?php Icons_Manager::render_icon($settings['eael_creative_button_icon_new']); ?>
+						<i class="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
 					<?php } ?>
