@@ -885,12 +885,6 @@ trait Helper
 
     public function eael_get_query_args($settings = [])
     {
-        // if (wp_doing_ajax()) {
-        //     $settings = [];
-        // } else {
-            $settings = func_get_arg(0);
-        // }
-
         $settings = wp_parse_args($settings, [
             'post_type' => 'post',
             'posts_ids' => [],
@@ -899,7 +893,7 @@ trait Helper
             'posts_per_page' => 3,
             'offset' => 0,
             'paged' => 1,
-            'post__not_in' => []
+            'post__not_in' => [],
         ]);
 
         $args = [
@@ -946,7 +940,14 @@ trait Helper
             $args['post__not_in'] = $settings['post__not_in'];
         }
 
-        return get_posts($args);
+        $query = new \WP_Query;
+        $query->init();
+        $query->query = $query->query_vars = wp_parse_args($args);
+
+        return [
+            'posts' => $query->get_posts(),
+            'max_num_pages' => $query->max_num_pages,
+        ];
     }
 
     /**
@@ -957,7 +958,7 @@ trait Helper
     {
         $post_types = get_post_types(['public' => true, 'show_in_nav_menus' => true], 'objects');
         $post_types = wp_list_pluck($post_types, 'label', 'name');
-        
+
         return array_diff_key($post_types, ['elementor_library', 'attachment']);
     }
 
