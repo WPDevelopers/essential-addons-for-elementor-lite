@@ -940,14 +940,7 @@ trait Helper
             $args['post__not_in'] = $settings['post__not_in'];
         }
 
-        $query = new \WP_Query;
-        $query->init();
-        $query->query = $query->query_vars = wp_parse_args($args);
-
-        return [
-            'posts' => $query->get_posts(),
-            'max_num_pages' => $query->max_num_pages,
-        ];
+        return $args;
     }
 
     /**
@@ -1421,77 +1414,93 @@ trait Helper
      */
     public function eael_load_more_ajax()
     {
-        if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            $post_args = $this->eael_get_post_settings($_POST);
-            $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args, $_POST);
+        $widget_id = $_REQUEST['widget_id'];
+        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
+        $args = $_REQUEST['args'];
+        $settings = $_REQUEST['settings'];
+        $layout = $_REQUEST['layout'];
+        $page = $_REQUEST['page'];
 
-            if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
-                $post_args['tax_query']['relation'] = 'OR';
-            }
-        } else {
-            $args = func_get_args();
-            $post_args = $args[0];
-        }
+        parse_str($args, $args);
+        parse_str($settings, $settings);
 
-        $posts = new \WP_Query($post_args);
+        $html = $class::__render_template($args, $settings);
+
+        echo $html;
+        wp_die();
+
+
+        // if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
+        //     $post_args = $this->eael_get_post_settings($_POST);
+        //     $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args, $_POST);
+
+        //     if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
+        //         $post_args['tax_query']['relation'] = 'OR';
+        //     }
+        // } else {
+        //     $args = func_get_args();
+        //     $post_args = $args[0];
+        // }
+
+        // $posts = new \WP_Query($post_args);
 
         /**
          * For returning all types of post as an array
          * @return array;
          */
-        if (isset($post_args['post_style']) && $post_args['post_style'] == 'all_types') {
-            return $posts->posts;
-        }
+        // if (isset($post_args['post_style']) && $post_args['post_style'] == 'all_types') {
+        //     return $posts->posts;
+        // }
 
-        $return = array();
-        $return['count'] = $posts->found_posts;
+        // $return = array();
+        // $return['count'] = $posts->found_posts;
 
-        if (isset($post_args['post_style'])) {
-            if (
-                $post_args['post_style'] == 'list'
-                || $post_args['post_style'] == 'dynamic_gallery'
-                || $post_args['post_style'] == 'content_timeline'
-                || $post_args['post_style'] == 'list'
-                || $post_args['post_style'] == 'block'
-                || $post_args['post_style'] == 'post_carousel'
-            ) {
-                $post_args['is_pro'] = true;
-            }
-        }
+        // if (isset($post_args['post_style'])) {
+        //     if (
+        //         $post_args['post_style'] == 'list'
+        //         || $post_args['post_style'] == 'dynamic_gallery'
+        //         || $post_args['post_style'] == 'content_timeline'
+        //         || $post_args['post_style'] == 'list'
+        //         || $post_args['post_style'] == 'block'
+        //         || $post_args['post_style'] == 'post_carousel'
+        //     ) {
+        //         $post_args['is_pro'] = true;
+        //     }
+        // }
 
-        if (isset($post_args['post_style']) && $post_args['post_style'] == 'list') {
-            $iterator = $feature_counter = 0;
+        // if (isset($post_args['post_style']) && $post_args['post_style'] == 'list') {
+        //     $iterator = $feature_counter = 0;
 
-            foreach ($posts->posts as $post) {
-                if (isset($post_args['featured_posts']) && $post->ID != $post_args['featured_posts']) {
-                    $normal_posts[] = $post;
-                }
-            }
-            $posts->posts = array_merge(empty($post_args['featured_posts']) ? [] : [$post_args['featured_posts']], $normal_posts);
-        }
+        //     foreach ($posts->posts as $post) {
+        //         if (isset($post_args['featured_posts']) && $post->ID != $post_args['featured_posts']) {
+        //             $normal_posts[] = $post;
+        //         }
+        //     }
+        //     $posts->posts = array_merge(empty($post_args['featured_posts']) ? [] : [$post_args['featured_posts']], $normal_posts);
+        // }
 
-        ob_start();
-        while ($posts->have_posts()): $posts->the_post();
-            $isPrinted = false;
-            include $post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
-        endwhile;
+        // ob_start();
+        // while ($posts->have_posts()): $posts->the_post();
+        //     $isPrinted = false;
+        //     include $post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
+        // endwhile;
 
-        $return['content'] = ob_get_clean();
+        // $return['content'] = ob_get_clean();
 
-        wp_reset_postdata();
-        wp_reset_query();
+        // wp_reset_postdata();
+        // wp_reset_query();
 
-        if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-            if ($_POST['post_style'] == 'list') {
-                echo json_encode($return);
-                die();
-            }
+        // if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
+        //     if ($_POST['post_style'] == 'list') {
+        //         echo json_encode($return);
+        //         die();
+        //     }
 
-            echo $return['content'];
-            die();
-        } else {
-            return $return;
-        }
+        //     echo $return['content'];
+        //     die();
+        // } else {
+        //     return $return;
+        // }
     }
 
     /**
