@@ -1395,6 +1395,148 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
@@ -1893,148 +2035,6 @@ return ImagesLoaded;
 });
 
 
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -11778,118 +11778,73 @@ return $;
 (function($) {
     "use strict";
 
-    window.eaelLoadMore = function(options, settings) {
-        // Default Values for Load More Js
-        var optionsValue = {
-            totalPosts: options.totalPosts,
-            loadMoreBtn: options.loadMoreBtn,
-            postContainer: $(options.postContainer),
-            postStyle: options.postStyle // block, grid, timeline,
-        };
-
-        // Settings Values
-        var settingsValue = {
-            postType: settings.postType,
-            perPage: settings.perPage,
-            postOrder: settings.postOrder,
-            orderBy: settings.orderBy,
-            showImage: settings.showImage,
-            showTitle: settings.showTitle,
-            showExcerpt: settings.showExcerpt,
-            showMeta: settings.showMeta,
-            imageSize: settings.imageSize,
-            metaPosition: settings.metaPosition,
-            excerptLength: settings.excerptLength,
-            btnText: settings.btnText,
-
-            tax_query: settings.tax_query,
-
-            post__in: settings.post__in,
-            excludePosts: settings.exclude_posts,
-            offset: parseInt(settings.offset, 10),
-            grid_style: settings.grid_style || "",
-            hover_animation: settings.hover_animation,
-            hover_icon: settings.hover_icon,
-            show_read_more_button: settings.show_read_more_button,
-            read_more_button_text: settings.read_more_button_text
-        };
-
-        var offset = settingsValue.offset + settingsValue.perPage;
-
-        optionsValue.loadMoreBtn.on("click", function(e) {
+    window.eaelLoadMore = function() {
+        $('.eael-load-more-button').on("click", function(e) {
             e.preventDefault();
 
-            $(this).addClass("button--loading");
-            $(this)
-                .find("span")
-                .html("Loading...");
+            var $this = $(this),
+            $widget_id = $this.data('widget'),
+            $class = $this.data('class'),
+            $args = $this.data('args'),
+            $settings = $this.data('settings'),
+            $layout = $this.data('layout'),
+            $page = $this.data('page');
+
+            $this.addClass("button--loading");
+            $('span', $this).html("Loading...");
 
             $.ajax({
                 url: localize.ajaxurl,
                 type: "post",
                 data: {
                     action: "load_more",
-                    post_style: optionsValue.postStyle,
-                    eael_show_image: settingsValue.showImage,
-                    image_size: settingsValue.imageSize,
-                    eael_show_title: settingsValue.showTitle,
-                    eael_show_meta: settingsValue.showMeta,
-                    meta_position: settingsValue.metaPosition,
-
-                    eael_show_excerpt: settingsValue.showExcerpt,
-                    eael_excerpt_length: settingsValue.excerptLength,
-
-                    post_type: settingsValue.postType,
-                    posts_per_page: settingsValue.perPage,
-                    offset: offset,
-
-                    tax_query: settingsValue.tax_query,
-
-                    post__not_in: settingsValue.excludePosts,
-
-                    post__in: settingsValue.post__in,
-
-                    orderby: settingsValue.orderBy,
-                    order: settingsValue.postOrder,
-                    grid_style: settingsValue.grid_style,
-                    eael_post_grid_hover_animation:
-                        settingsValue.hover_animation,
-                    eael_post_grid_bg_hover_icon: settingsValue.hover_icon,
-                    eael_show_read_more_button: settingsValue.show_read_more_button,
-                    read_more_button_text: settingsValue.read_more_button_text
-                },
-                beforeSend: function() {
-                    // _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
+                    widget_id: $widget_id,
+                    class: $class,
+                    args: $args,
+                    settings: $settings,
+                    layout: $layout,
+                    page: $page
                 },
                 success: function(response) {
                     var $content = $(response);
-                    if (optionsValue.postStyle === "grid") {
-                        setTimeout(function() {
-                            optionsValue.postContainer.masonry();
-                            optionsValue.postContainer
-                                .append($content)
-                                .masonry("appended", $content);
-                            optionsValue.postContainer.masonry({
-                                itemSelector: ".eael-grid-post",
-                                percentPosition: true,
-                                columnWidth: ".eael-post-grid-column"
-                            });
-                        }, 100);
+
+                    if($layout == 'masonry') {
+                        $('.eael-post-appender-' . $widget_id).isotope().append($content).isotope("appended", $content)
                     } else {
-                        optionsValue.postContainer.append($content);
+                        $('.eael-post-appender-' . $widget_id).append($content)
                     }
-                    optionsValue.loadMoreBtn.removeClass("button--loading");
-                    optionsValue.loadMoreBtn
-                        .find("span")
-                        .html(settingsValue.btnText);
 
-                    offset = offset + settingsValue.perPage;
+                    console.log($content);
+                    
+                    // if (optionsValue.postStyle === "grid") {
+                    //     setTimeout(function() {
+                    //         optionsValue.postContainer.masonry();
+                    //         optionsValue.postContainer
+                    //             .append($content)
+                    //             .masonry("appended", $content);
+                    //         optionsValue.postContainer.masonry({
+                    //             itemSelector: ".eael-grid-post",
+                    //             percentPosition: true,
+                    //             columnWidth: ".eael-post-grid-column"
+                    //         });
+                    //     }, 100);
+                    // } else {
+                    //     optionsValue.postContainer.append($content);
+                    // }
+                    // optionsValue.loadMoreBtn.removeClass("button--loading");
+                    // optionsValue.loadMoreBtn
+                    //     .find("span")
+                    //     .html(settingsValue.btnText);
 
-                    if (offset >= optionsValue.totalPosts) {
-                        optionsValue.loadMoreBtn.remove();
-                    }
+                    // offset = offset + settingsValue.perPage;
+
+                    // if (offset >= optionsValue.totalPosts) {
+                    //     optionsValue.loadMoreBtn.remove();
+                    // }
                 },
-                error: function() {}
+                error: function(response) {
+                    console.log(response);
+                }
             });
         });
     };
@@ -12510,51 +12465,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 });
 
 var PostGrid = function ($scope, $) {
-    
-    var container = $('.eael-post-grid-container').eq(0),
-        $options   = container.data('post_grid_options'),
-        $settings = container.data('post_grid_settings');
-    
-    
-    var options = {
-        totalPosts   : parseInt($options.totalPosts),
-        loadMoreBtn  : $( $options.loadMoreBtn ),
-        postContainer: $( $options.postContainer ),
-        postStyle    : 'grid'
-    }
-
-    var exclude_posts = JSON.parse($settings.exclude_posts),
-        tax_query     = JSON.parse($settings.tax_query),
-        post__in      = JSON.parse($settings.post__in);
-
-    var settings = {
-        postType       : $settings.postType,
-        perPage        : parseInt($settings.perPage),
-        postOrder      : $settings.postOrder,
-        orderBy        : $settings.orderBy,
-        showImage      : parseInt($settings.showImage),
-        imageSize      : $settings.imageSize,
-        showTitle      : parseInt($settings.showTitle),
-        showExcerpt    : parseInt($settings.showExcerpt),
-        showMeta       : parseInt($settings.showMeta),
-        offset         : $settings.offset,
-        metaPosition   : $settings.metaPosition,
-        excerptLength  : $settings.excerptLength,
-        btnText        : $settings.btnText,
-        tax_query      : tax_query,
-        exclude_posts  : exclude_posts,
-        post__in       : post__in,
-        grid_style     : $settings.grid_style,
-        hover_animation: $settings.hover_animation,
-        hover_icon: $settings.hover_icon,
-        show_read_more_button: $settings.eael_show_read_more_button,
-        read_more_button_text: $settings.read_more_button_text
-    }
-
-    eaelLoadMore( options, settings );
-
-
-    var $gallery = $('.eael-post-grid:not(.eael-post-carousel)').isotope({
+    var $gallery = $('.eael-post-grid', $scope).isotope({
         itemSelector: '.eael-grid-post',
         percentPosition: true,
         columnWidth: '.eael-post-grid-column'
@@ -12564,7 +12475,8 @@ var PostGrid = function ($scope, $) {
     $gallery.imagesLoaded().progress(function() {
         $gallery.isotope("layout");
     });
-    
+
+    eaelLoadMore();
 }
 
 jQuery(window).on("elementor/frontend/init", function() {

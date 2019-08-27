@@ -40,7 +40,6 @@ class Post_Grid extends Widget_Base
 
     protected function _register_controls()
     {
-
         /**
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
@@ -376,7 +375,6 @@ class Post_Grid extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-grid-post .eael-entry-overlay > i' => 'color: {{VALUE}}',
                 ],
-
             ]
         );
 
@@ -414,13 +412,12 @@ class Post_Grid extends Widget_Base
          * Load More Button Style Controls!
          */
         $this->eael_load_more_button_style();
-
     }
 
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-		$query = $this->eael_get_query_args($settings);
+        $args = $this->eael_get_query_args($settings);
 
         $this->add_render_attribute(
             'post_grid_wrapper',
@@ -433,57 +430,45 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        // $options = [
-        //     'totalPosts' => $total_post,
-        //     'loadMoreBtn' => '#eael-load-more-btn-' . $this->get_id(), // return selected item jquery $()
-        //     'postContainer' => '.eael-post-appender-' . esc_attr($this->get_id()), // return selected item jquery $()
-        //     'postStyle' => 'grid',
-        // ];
-
-        // $settings = [
-        //     'postType' => isset($settings['post_type']) ? $settings['post_type'] : '',
-        //     'perPage' => $settings['posts_per_page'] != '' ? $settings['posts_per_page'] : '4',
-        //     'postOrder' => $settings['order'],
-        //     'orderBy' => $settings['orderby'],
-        //     'showImage' => $settings['eael_show_image'],
-        //     'imageSize' => $settings['image_size'],
-        //     'showTitle' => $settings['eael_show_title'],
-        //     'showExcerpt' => $settings['eael_show_excerpt'],
-        //     'showMeta' => $settings['eael_show_meta'],
-        //     'offset' => intval($settings['offset']),
-        //     'metaPosition' => $settings['meta_position'],
-        //     'excerptLength' => intval($settings['eael_excerpt_length'], 10),
-        //     'btnText' => $settings['show_load_more_text'],
-        //     'tax_query' => json_encode(!empty($tax_query) ? $tax_query : []),
-        //     'exclude_posts' => json_encode(!empty($settings['post__not_in']) ? $settings['post__not_in'] : []),
-        //     'post__in' => json_encode(!empty($settings['post__in']) ? $settings['post__in'] : []),
-        //     'hover_animation' => $settings['eael_post_grid_hover_animation'],
-        //     'hover_icon' => ((isset($settings['__fa4_migrated']['eael_post_grid_bg_hover_icon_new']) || empty($settings['eael_post_grid_bg_hover_icon'])) ? $settings['eael_post_grid_bg_hover_icon_new']['value'] : $settings['eael_post_grid_bg_hover_icon']),
-        //     'eael_show_read_more_button' => $settings['eael_show_read_more_button'],
-        //     'read_more_button_text' => $settings['read_more_button_text']
-        // ];
-
-        // $this->add_render_attribute(
-        //     'post_grid_wrapper',
-        //     [
-        //         'data-post_grid_options' => wp_json_encode($options),
-        //         'data-post_grid_settings' => wp_json_encode($settings),
-        //     ]
-        // );
-
-		echo '<div class="eael-post-grid eael-post-appender-' . $this->get_id() . ' clearfix">
-			' . $this->__render_template($query['posts'], $settings) . '
-		</div>';
+        echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
+            <div class="eael-post-grid eael-post-appender-' . $this->get_id() . '">
+                ' . self::__render_template($args, $settings) . '
+            </div>
+            <div class="clearfix"></div>
+        </div>';
 		
 		if (1 == $settings['show_load_more']) {
-			if ($settings['posts_per_page'] != '-1' && $query['max_num_pages'] != 1) {
+			if ($settings['posts_per_page'] != '-1') {
 				echo '<div class="eael-load-more-button-wrap">
-					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-id="' . $this->get_id() . '" data-current="1" data-max="' . $query['max_num_pages'] . '">
+					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-layout="masonry" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
 						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-elementor') . '</span>
 					</button>
 				</div>';
 			}
-		}
+        }
+        
+        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+            echo '<script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $(".eael-post-grid-container").each(function() {
+                        var $node_id = "' . $this->get_id() . '",
+                        $scope = $(".elementor-element-"+$node_id+"");
+                        
+                        // init isotope
+                        var $gallery = $(".eael-post-grid", $scope).isotope({
+                            itemSelector: ".eael-grid-post",
+                            percentPosition: true,
+                            columnWidth: ".eael-post-grid-column"
+                        });
+                    
+                        // layout gal, while images are loading
+                        $gallery.imagesLoaded().progress(function() {
+                            $gallery.isotope("layout");
+                        });
+                    });
+                });
+            </script>';
+        }
     }
 }
