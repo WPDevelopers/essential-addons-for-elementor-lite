@@ -82,7 +82,7 @@ trait Post_Grid
                 </article>';
             }
         } else {
-            $html .= __('No content found!', 'essential-addons-elementor');
+            $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
         }
 
         wp_reset_postdata();
