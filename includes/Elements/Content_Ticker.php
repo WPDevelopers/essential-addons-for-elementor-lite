@@ -684,7 +684,7 @@ class Content_Ticker extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $query = $this->eael_get_query_args($settings);
+        $args = $this->eael_get_query_args($settings);
 
         $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
 
@@ -751,7 +751,7 @@ class Content_Ticker extends Widget_Base
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
                         if ('dynamic' === $settings['eael_ticker_type']) {
-                            echo $this->__render_template($query['posts']);
+                            echo self::__render_template($args, null);
                         }
 
                         do_action('render_content_ticker_custom_content', $settings);

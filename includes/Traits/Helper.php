@@ -892,7 +892,6 @@ trait Helper
             'order' => 'desc',
             'posts_per_page' => 3,
             'offset' => 0,
-            'paged' => 1,
             'post__not_in' => [],
         ]);
 
@@ -910,7 +909,6 @@ trait Helper
             $args['post_type'] = $settings['post_type'];
             $args['posts_per_page'] = $settings['posts_per_page'];
             $args['offset'] = $settings['offset'];
-            $args['paged'] = $settings['paged'];
             $args['tax_query'] = [];
 
             $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
@@ -1414,16 +1412,11 @@ trait Helper
      */
     public function eael_load_more_ajax()
     {
-        $widget_id = $_REQUEST['widget_id'];
+        parse_str($_REQUEST['args'], $args);
+        parse_str($_REQUEST['settings'], $settings);
+
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
-        $args = $_REQUEST['args'];
-        $settings = $_REQUEST['settings'];
-        $layout = $_REQUEST['layout'];
-        $page = $_REQUEST['page'];
-
-        parse_str($args, $args);
-        parse_str($settings, $settings);
-
+        $args['offset'] = $args['offset'] + (($_REQUEST['page'] - 1) * $args['posts_per_page']);
         $html = $class::__render_template($args, $settings);
 
         echo $html;

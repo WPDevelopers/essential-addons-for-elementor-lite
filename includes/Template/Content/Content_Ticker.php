@@ -8,18 +8,21 @@ if (!defined('ABSPATH')) {
 
 trait Content_Ticker
 {
-    public function __render_template($posts)
+    public static function __render_template($args, $settings)
     {
         $html = '';
+        $query = new \WP_Query($args);
 
-        if (empty($posts)) {
-            $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-elementor') . '</a></div>';
-        } else {
-            foreach ($posts as $post) {
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+
                 $html .= '<div class="swiper-slide"><div class="ticker-content">
-                    <a href="' . $post->guid . '" class="ticker-content-link">' . $post->post_title . '</a>
+                    <a href="' . get_the_permalink() . '" class="ticker-content-link">' . get_the_title() . '</a>
                 </div></div>';
             }
+        } else {
+            $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-elementor') . '</a></div>';
         }
 
         return $html;
