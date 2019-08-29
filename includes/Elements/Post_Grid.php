@@ -418,6 +418,24 @@ class Post_Grid extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $args = $this->eael_get_query_args($settings);
+        $settings = [
+            'eael_show_image' => $settings['eael_show_image'],
+            'image_size' => $settings['image_size'],
+            'eael_show_title' => $settings['eael_show_title'],
+            'eael_show_excerpt' => $settings['eael_show_excerpt'],
+            'eael_show_meta' => $settings['eael_show_meta'],
+            'meta_position' => $settings['meta_position'],
+            'eael_excerpt_length' => intval($settings['eael_excerpt_length'], 10),
+            'eael_post_grid_hover_animation' => $settings['eael_post_grid_hover_animation'],
+            'eael_post_grid_bg_hover_icon' => (isset($settings['__fa4_migrated']['eael_post_grid_bg_hover_icon_new']) || empty($settings['eael_post_grid_bg_hover_icon'])) ? $settings['eael_post_grid_bg_hover_icon_new']['value'] : $settings['eael_post_grid_bg_hover_icon'],
+            'eael_show_read_more_button' => $settings['eael_show_read_more_button'],
+            'read_more_button_text' => $settings['read_more_button_text'],
+            'read_more_button_text' => $settings['read_more_button_text'],
+            
+            'eael_post_grid_columns' => $settings['eael_post_grid_columns'],
+            'show_load_more' => $settings['show_load_more'],
+            'show_load_more_text' => $settings['show_load_more_text'],
+        ];
 
         $this->add_render_attribute(
             'post_grid_wrapper',
@@ -438,7 +456,7 @@ class Post_Grid extends Widget_Base
         </div>';
 		
 		if (1 == $settings['show_load_more']) {
-			if ($settings['posts_per_page'] != '-1') {
+			if ($args['posts_per_page'] != '-1') {
 				echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-layout="masonry" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>

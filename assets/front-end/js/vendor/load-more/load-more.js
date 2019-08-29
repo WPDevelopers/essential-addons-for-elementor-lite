@@ -3,6 +3,8 @@
 
     window.eaelLoadMore = function() {
         $(".eael-load-more-button").on("click", function(e) {
+            e.stopPropagation();
+            e.stopImmediatePropagation();
             e.preventDefault();
 
             var $this = $(this),

@@ -17,9 +17,6 @@ trait Post_Grid
             while($query->have_posts()) {
                 $query->the_post();
 
-                $hover_icon = (isset($settings['__fa4_migrated']['eael_post_grid_bg_hover_icon_new']) || empty($settings['eael_post_grid_bg_hover_icon'])) ? $settings['eael_post_grid_bg_hover_icon_new']['value'] : $settings['eael_post_grid_bg_hover_icon'];
-                $excerpt = implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $settings['eael_excerpt_length']));
-
                 $html .= '<article class="eael-grid-post eael-post-grid-column">
                     <div class="eael-grid-post-holder">
                         <div class="eael-grid-post-holder-inner">';
@@ -27,7 +24,7 @@ trait Post_Grid
                                 $html .= '<div class="eael-entry-media">';
                                     if ('none' !== $settings['eael_post_grid_hover_animation']) {
                                         $html .= '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">
-                                            <i class="' . $hover_icon . '" aria-hidden="true"></i>
+                                            <i class="' . $settings['eael_post_grid_bg_hover_icon'] . '" aria-hidden="true"></i>
                                             <a href="' . get_the_permalink() . '"></a>
                                         </div>';
                                     }
@@ -56,7 +53,7 @@ trait Post_Grid
                                     if ($settings['eael_show_excerpt']) {
                                         $html .= '<div class="eael-entry-content">
                                             <div class="eael-grid-post-excerpt">
-                                                <p>' . $excerpt . '...</p>';
+                                                <p>' . implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $settings['eael_excerpt_length'])) . '...</p>';
                                                 if ($settings['eael_show_read_more_button']) {
                                                     $html .= '<a href="' . get_the_permalink() . '" class="eael-post-elements-readmore-btn">' . esc_attr($settings['read_more_button_text']) . '</a>';
                                                 }
