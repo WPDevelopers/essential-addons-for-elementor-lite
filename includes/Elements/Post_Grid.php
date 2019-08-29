@@ -484,6 +484,8 @@ class Post_Grid extends Widget_Base
                         $gallery.imagesLoaded().progress(function() {
                             $gallery.isotope("layout");
                         });
+
+                        eaelLoadMore();
                     });
                 });
             </script>';

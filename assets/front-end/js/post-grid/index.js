@@ -9,8 +9,6 @@ var PostGrid = function ($scope, $) {
     $gallery.imagesLoaded().progress(function() {
         $gallery.isotope("layout");
     });
-
-    eaelLoadMore();
 }
 
 jQuery(window).on("elementor/frontend/init", function() {
