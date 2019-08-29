@@ -290,34 +290,21 @@ class Post_Timeline extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $args = $this->eael_get_query_args($settings);
+        $settings = [
+            'eael_show_image' => $settings['eael_show_image'],
+            'image_size' => $settings['image_size'],
+            'eael_show_title' => $settings['eael_show_title'],
+            'eael_show_excerpt' => $settings['eael_show_excerpt'],
+            'eael_excerpt_length' => $settings['eael_excerpt_length'],
+            'show_load_more' => $settings['show_load_more'],
+            'show_load_more_text' => $settings['show_load_more_text'],
+        ];
 
         $this->add_render_attribute(
             'eael_post_timeline_wrapper',
             [
                 'id' => "eael-post-timeline-{$this->get_id()}",
                 'class' => 'eael-post-timeline',
-                // 'data-total_posts' => $total_post,
-                'data-timeline_id' => $this->get_id(),
-
-                'data-post_type' => $settings['post_type'],
-                'data-posts_per_page' => $settings['posts_per_page'] ? $settings['posts_per_page'] : 4,
-                'data-post_order' => $settings['order'],
-                'data-post_orderby' => $settings['orderby'],
-                'data-post_offset' => $settings['offset'],
-
-                'data-show_images' => $settings['eael_show_image'],
-                'data-image_size' => $settings['image_size'],
-                'data-show_title' => $settings['eael_show_title'],
-
-                'data-show_excerpt' => $settings['eael_show_excerpt'],
-                'data-excerpt_length' => $settings['eael_excerpt_length'],
-
-                'data-btn_text' => $settings['show_load_more_text'],
-
-                'data-tax_query' => json_encode(!empty($tax_query) ? $tax_query : []),
-                'data-post__in' => json_encode(!empty($settings['post__in']) ? $settings['post__in'] : []),
-
-                'data-exclude_posts' => json_encode(!empty($exclude_posts) ? $exclude_posts : []),
             ]
         );
 
@@ -335,7 +322,7 @@ class Post_Timeline extends Widget_Base
 		</div>';
 
         if (1 == $settings['show_load_more']) {
-            if ($settings['posts_per_page'] != '-1') {
+            if ($args['posts_per_page'] != '-1') {
                 echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
