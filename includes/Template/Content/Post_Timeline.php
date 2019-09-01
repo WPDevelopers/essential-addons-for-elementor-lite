@@ -42,6 +42,8 @@ trait Post_Timeline
             $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
         }
 
+        wp_reset_postdata();
+
         return $html;
     }
 }

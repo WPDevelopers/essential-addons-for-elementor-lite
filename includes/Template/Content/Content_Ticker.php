@@ -25,6 +25,8 @@ trait Content_Ticker
             $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-elementor') . '</a></div>';
         }
 
+        wp_reset_postdata();
+
         return $html;
     }
 }
