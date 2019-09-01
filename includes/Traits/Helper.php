@@ -958,20 +958,20 @@ trait Helper
      * @param  array $settings
      * @return array
      */
-    public function eael_get_post_settings($settings)
-    {
-        foreach ($settings as $key => $value) {
-            if (in_array($key, $this->post_args)) {
-                $post_args[$key] = $value;
-            }
-        }
+    // public function eael_get_post_settings($settings)
+    // {
+    //     foreach ($settings as $key => $value) {
+    //         if (in_array($key, $this->post_args)) {
+    //             $post_args[$key] = $value;
+    //         }
+    //     }
 
-        $post_args['post_style'] = isset($post_args['post_style']) ? $post_args['post_style'] : 'grid';
-        $post_args['is_pro'] = isset($settings['is_pro']) ? $settings['is_pro'] : false;
-        $post_args['post_status'] = 'publish';
+    //     $post_args['post_style'] = isset($post_args['post_style']) ? $post_args['post_style'] : 'grid';
+    //     $post_args['is_pro'] = isset($settings['is_pro']) ? $settings['is_pro'] : false;
+    //     $post_args['post_status'] = 'publish';
 
-        return $post_args;
-    }
+    //     return $post_args;
+    // }
 
     /**
      * Getting Excerpts By Post Id
