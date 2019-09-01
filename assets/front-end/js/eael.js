@@ -11778,14 +11778,15 @@ return $;
 (function($) {
     "use strict";
 
-    $(".eael-load-more-button").on("click", function(e) {
+    $(document).on("click", ".eael-load-more-button", function(e) {
+        e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
-        e.preventDefault();
 
         var $this = $(this),
             $text = $("span", $this).html(),
             $widget_id = $this.data("widget"),
+            $scope = $(".elementor-element-" + $widget_id),
             $class = $this.data("class"),
             $args = $this.data("args"),
             $settings = $this.data("settings"),
@@ -11815,11 +11816,13 @@ return $;
                     $this.remove();
                 } else {
                     if ($layout == "masonry") {
-                        $(".eael-post-appender-" + $widget_id)
+                        $(".eael-post-appender", $scope)
+                            .isotope()
                             .append($content)
-                            .isotope("appended", $content);
+                            .isotope("appended", $content)
+                            .isotope("layout");
                     } else {
-                        $(".eael-post-appender-" + $widget_id).append($content);
+                        $(".eael-post-appender", $scope).append($content);
                     }
 
                     $this.removeClass("button--loading");
@@ -12193,74 +12196,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         dataTable
     );
 });
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
-
 var filterableGalleryHandler = function($scope, $) {
     if (!isEditMode) {
         var $gallery = $(".eael-filter-gallery-container", $scope),
@@ -12400,6 +12335,74 @@ jQuery(window).on("elementor/frontend/init", function() {
     });
 })(jQuery);
 
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -12449,18 +12452,20 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var PostGrid = function ($scope, $) {
-    var $gallery = $('.eael-post-grid', $scope).isotope({
-        itemSelector: '.eael-grid-post',
-        percentPosition: true,
-        columnWidth: '.eael-post-grid-column'
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
     });
 
     // layout gal, while images are loading
     $gallery.imagesLoaded().progress(function() {
         $gallery.isotope("layout");
     });
-}
+};
 
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
@@ -12468,6 +12473,7 @@ jQuery(window).on("elementor/frontend/init", function() {
         PostGrid
     );
 });
+
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".tooltip"),
