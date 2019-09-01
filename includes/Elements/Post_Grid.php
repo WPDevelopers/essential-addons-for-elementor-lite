@@ -449,7 +449,7 @@ class Post_Grid extends Widget_Base
         );
 
         echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
-            <div class="eael-post-grid eael-post-appender-' . $this->get_id() . '">
+            <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '">
                 ' . self::__render_template($args, $settings) . '
             </div>
             <div class="clearfix"></div>
@@ -468,24 +468,23 @@ class Post_Grid extends Widget_Base
         
         if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
             echo '<script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    $(".eael-post-grid-container").each(function() {
-                        var $node_id = "' . $this->get_id() . '",
-                        $scope = $(".elementor-element-"+$node_id+"");
-                        
+                jQuery(document).ready(function() {
+                    jQuery(".eael-post-grid").each(function() {
+                        var $scope = jQuery(".elementor-element-' . $this->get_id() . '");
+
                         // init isotope
-                        var $gallery = $(".eael-post-grid", $scope).isotope({
+                        var $gallery = jQuery(".eael-post-grid", $scope).isotope({
                             itemSelector: ".eael-grid-post",
-                            percentPosition: true,
-                            columnWidth: ".eael-post-grid-column"
+                            masonry: {
+                                columnWidth: ".eael-post-grid-column",
+                                percentPosition: true
+                            }
                         });
                     
                         // layout gal, while images are loading
                         $gallery.imagesLoaded().progress(function() {
                             $gallery.isotope("layout");
                         });
-
-                        eaelLoadMore();
                     });
                 });
             </script>';

@@ -1,14 +1,15 @@
 (function($) {
     "use strict";
 
-    $(".eael-load-more-button").on("click", function(e) {
+    $(document).on("click", ".eael-load-more-button", function(e) {
+        e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
-        e.preventDefault();
 
         var $this = $(this),
             $text = $("span", $this).html(),
             $widget_id = $this.data("widget"),
+            $scope = $(".elementor-element-" + $widget_id),
             $class = $this.data("class"),
             $args = $this.data("args"),
             $settings = $this.data("settings"),
@@ -38,11 +39,13 @@
                     $this.remove();
                 } else {
                     if ($layout == "masonry") {
-                        $(".eael-post-appender-" + $widget_id)
+                        $(".eael-post-appender", $scope)
+                            .isotope()
                             .append($content)
-                            .isotope("appended", $content);
+                            .isotope("appended", $content)
+                            .isotope("layout");
                     } else {
-                        $(".eael-post-appender-" + $widget_id).append($content);
+                        $(".eael-post-appender", $scope).append($content);
                     }
 
                     $this.removeClass("button--loading");
