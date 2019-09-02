@@ -14,7 +14,7 @@ use \Elementor\Widget_Base as Widget_Base;
 class Product_Grid extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\Content\Product_Loop;
+    use \Essential_Addons_Elementor\Template\Content\Product_Grid;
 
     public function get_name()
     {
@@ -442,7 +442,7 @@ class Product_Grid extends Widget_Base
 
     protected function render()
     {
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
         $args = [
             'post_type' => 'product',
@@ -494,19 +494,17 @@ class Product_Grid extends Widget_Base
             $args['order'] = 'DESC';
         }
 
+        $settings = [
+            'eael_product_grid_style_preset' => $settings['eael_product_grid_style_preset'],
+            'eael_product_grid_rating' => $settings['eael_product_grid_rating'],
+            'eael_product_grid_column' => $settings['eael_product_grid_column']
+        ];
+
         echo '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">
 			<div class="woocommerce">
-				<ul class="products eael-product-columns-' . $settings['eael_product_grid_column'] . '">';
-                    $products = get_posts($args);
-
-                    if ($products) {
-                        foreach ($products as $product) {
-                            $this->template_product_loop($settings, $product);
-                        }
-                    } else {
-                        echo __('No products found');
-                    }
-                echo '</ul>
+                <ul class="products eael-product-columns-' . $settings['eael_product_grid_column'] . '">
+                    ' . self::__render_template($args, $settings) . '
+                </ul>
 			</div>
 		</div>';
     }
