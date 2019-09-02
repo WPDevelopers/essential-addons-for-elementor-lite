@@ -243,6 +243,38 @@ trait Helper
             if ('eael-content-timeline' === $this->get_name()) {
 
                 $this->add_control(
+                    'content_timeline_layout',
+                    [
+                        'label' => esc_html__('Layout', 'essential-addons-elementor'),
+                        'type' => Controls_Manager::SELECT,
+                        'default' => 'center',
+                        'options' => [
+                            'left'   => esc_html__('Right', 'essential-addons-elementor'),
+                            'center' => esc_html__('Center', 'essential-addons-elementor'),
+                            'right'  => esc_html__('Left', 'essential-addons-elementor'),
+                        ],
+                        'default'   => 'center'
+                    ]
+                );
+
+                $this->add_control(
+                    'date_position',
+                    [
+                        'label' => esc_html__('Date Position', 'essential-addons-elementor'),
+                        'type' => Controls_Manager::SELECT,
+                        'default' => 'inside',
+                        'options' => [
+                            'inside'   => esc_html__('Inside', 'essential-addons-elementor'),
+                            'outside' => esc_html__('Outside', 'essential-addons-elementor')
+                        ],
+                        'default'   => 'inside',
+                        'condition' => [
+                            'content_timeline_layout!'  => 'center'
+                        ]
+                    ]
+                );
+
+                $this->add_control(
                     'eael_show_read_more',
                     [
                         'label' => __('Show Read More', 'essential-addons-elementor'),
