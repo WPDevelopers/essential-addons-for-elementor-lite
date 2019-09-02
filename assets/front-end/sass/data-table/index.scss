@@ -180,7 +180,7 @@ $font_2: "sans-serif";
 .th-mobile-screen {
 	display: none;
 }
-@media(max-width: 39.9375em) {
+@media(max-width: 767px) {
 	.eael-data-table-wrap {
 		overflow-x: scroll !important;
 		padding-bottom: 5px;

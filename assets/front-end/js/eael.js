@@ -11778,121 +11778,64 @@ return $;
 (function($) {
     "use strict";
 
-    window.eaelLoadMore = function(options, settings) {
-        // Default Values for Load More Js
-        var optionsValue = {
-            totalPosts: options.totalPosts,
-            loadMoreBtn: options.loadMoreBtn,
-            postContainer: $(options.postContainer),
-            postStyle: options.postStyle // block, grid, timeline,
-        };
+    $(document).on("click", ".eael-load-more-button", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
 
-        // Settings Values
-        var settingsValue = {
-            postType: settings.postType,
-            perPage: settings.perPage,
-            postOrder: settings.postOrder,
-            orderBy: settings.orderBy,
-            showImage: settings.showImage,
-            showTitle: settings.showTitle,
-            showExcerpt: settings.showExcerpt,
-            showMeta: settings.showMeta,
-            imageSize: settings.imageSize,
-            metaPosition: settings.metaPosition,
-            excerptLength: settings.excerptLength,
-            btnText: settings.btnText,
+        var $this = $(this),
+            $text = $("span", $this).html(),
+            $widget_id = $this.data("widget"),
+            $scope = $(".elementor-element-" + $widget_id),
+            $class = $this.data("class"),
+            $args = $this.data("args"),
+            $settings = $this.data("settings"),
+            $layout = $this.data("layout"),
+            $page = parseInt($this.data("page")) + 1;
 
-            tax_query: settings.tax_query,
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
 
-            post__in: settings.post__in,
-            excludePosts: settings.exclude_posts,
-            offset: parseInt(settings.offset, 10),
-            grid_style: settings.grid_style || "",
-            hover_animation: settings.hover_animation,
-            hover_icon: settings.hover_icon,
-            show_read_more_button: settings.show_read_more_button,
-            read_more_button_text: settings.read_more_button_text
-        };
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "load_more",
+                class: $class,
+                args: $args,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                var $content = $(response);
 
-        var offset = settingsValue.offset + settingsValue.perPage;
-
-        optionsValue.loadMoreBtn.on("click", function(e) {
-            e.preventDefault();
-
-            $(this).addClass("button--loading");
-            $(this)
-                .find("span")
-                .html("Loading...");
-
-            $.ajax({
-                url: localize.ajaxurl,
-                type: "post",
-                data: {
-                    action: "load_more",
-                    post_style: optionsValue.postStyle,
-                    eael_show_image: settingsValue.showImage,
-                    image_size: settingsValue.imageSize,
-                    eael_show_title: settingsValue.showTitle,
-                    eael_show_meta: settingsValue.showMeta,
-                    meta_position: settingsValue.metaPosition,
-
-                    eael_show_excerpt: settingsValue.showExcerpt,
-                    eael_excerpt_length: settingsValue.excerptLength,
-
-                    post_type: settingsValue.postType,
-                    posts_per_page: settingsValue.perPage,
-                    offset: offset,
-
-                    tax_query: settingsValue.tax_query,
-
-                    post__not_in: settingsValue.excludePosts,
-
-                    post__in: settingsValue.post__in,
-
-                    orderby: settingsValue.orderBy,
-                    order: settingsValue.postOrder,
-                    grid_style: settingsValue.grid_style,
-                    eael_post_grid_hover_animation:
-                        settingsValue.hover_animation,
-                    eael_post_grid_bg_hover_icon: settingsValue.hover_icon,
-                    eael_show_read_more_button: settingsValue.show_read_more_button,
-                    read_more_button_text: settingsValue.read_more_button_text
-                },
-                beforeSend: function() {
-                    // _this.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Saving Data..');
-                },
-                success: function(response) {
-                    var $content = $(response);
-                    if (optionsValue.postStyle === "grid") {
-                        setTimeout(function() {
-                            optionsValue.postContainer.masonry();
-                            optionsValue.postContainer
-                                .append($content)
-                                .masonry("appended", $content);
-                            optionsValue.postContainer.masonry({
-                                itemSelector: ".eael-grid-post",
-                                percentPosition: true,
-                                columnWidth: ".eael-post-grid-column"
-                            });
-                        }, 100);
+                if (
+                    $content.hasClass("no-posts-found") ||
+                    $content.length == 0
+                ) {
+                    $this.remove();
+                } else {
+                    if ($layout == "masonry") {
+                        $(".eael-post-appender", $scope)
+                            .isotope()
+                            .append($content)
+                            .isotope("appended", $content)
+                            .isotope("layout");
                     } else {
-                        optionsValue.postContainer.append($content);
+                        $(".eael-post-appender", $scope).append($content);
                     }
-                    optionsValue.loadMoreBtn.removeClass("button--loading");
-                    optionsValue.loadMoreBtn
-                        .find("span")
-                        .html(settingsValue.btnText);
 
-                    offset = offset + settingsValue.perPage;
+                    $this.removeClass("button--loading");
+                    $("span", $this).html($text);
 
-                    if (offset >= optionsValue.totalPosts) {
-                        optionsValue.loadMoreBtn.remove();
-                    }
-                },
-                error: function() {}
-            });
+                    $this.data("page", $page);
+                }
+            },
+            error: function(response) {
+                console.log(response);
+            }
         });
-    };
+    });
 })(jQuery);
 
 var AdvAccordionHandler = function($scope, $) {
@@ -12253,74 +12196,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         dataTable
     );
 });
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
-
 var filterableGalleryHandler = function($scope, $) {
     if (!isEditMode) {
         var $gallery = $(".eael-filter-gallery-container", $scope),
@@ -12460,6 +12335,74 @@ jQuery(window).on("elementor/frontend/init", function() {
     });
 })(jQuery);
 
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -12509,121 +12452,25 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var PostGrid = function ($scope, $) {
-    
-    var container = $('.eael-post-grid-container').eq(0),
-        $options   = container.data('post_grid_options'),
-        $settings = container.data('post_grid_settings');
-    
-    
-    var options = {
-        totalPosts   : parseInt($options.totalPosts),
-        loadMoreBtn  : $( $options.loadMoreBtn ),
-        postContainer: $( $options.postContainer ),
-        postStyle    : 'grid'
-    }
-
-    var exclude_posts = JSON.parse($settings.exclude_posts),
-        tax_query     = JSON.parse($settings.tax_query),
-        post__in      = JSON.parse($settings.post__in);
-
-    var settings = {
-        postType       : $settings.postType,
-        perPage        : parseInt($settings.perPage),
-        postOrder      : $settings.postOrder,
-        orderBy        : $settings.orderBy,
-        showImage      : parseInt($settings.showImage),
-        imageSize      : $settings.imageSize,
-        showTitle      : parseInt($settings.showTitle),
-        showExcerpt    : parseInt($settings.showExcerpt),
-        showMeta       : parseInt($settings.showMeta),
-        offset         : $settings.offset,
-        metaPosition   : $settings.metaPosition,
-        excerptLength  : $settings.excerptLength,
-        btnText        : $settings.btnText,
-        tax_query      : tax_query,
-        exclude_posts  : exclude_posts,
-        post__in       : post__in,
-        grid_style     : $settings.grid_style,
-        hover_animation: $settings.hover_animation,
-        hover_icon: $settings.hover_icon,
-        show_read_more_button: $settings.eael_show_read_more_button,
-        read_more_button_text: $settings.read_more_button_text
-    }
-
-    eaelLoadMore( options, settings );
-
-
-    var $gallery = $('.eael-post-grid:not(.eael-post-carousel)').isotope({
-        itemSelector: '.eael-grid-post',
-        percentPosition: true,
-        columnWidth: '.eael-post-grid-column'
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
     });
 
     // layout gal, while images are loading
     $gallery.imagesLoaded().progress(function() {
         $gallery.isotope("layout");
     });
-    
-}
+};
 
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-post-grid.default",
         PostGrid
-    );
-});
-var postTimelineHandler = function($scope, $) {
-    var $_this = $scope.find(".eael-post-timeline"),
-        $currentTimelineId = "#" + $_this.attr("id"),
-        $total_posts = parseInt($_this.data("total_posts"), 10),
-        $timeline_id = $_this.data("timeline_id"),
-        $post_type = $_this.data("post_type"),
-        $posts_per_page = parseInt($_this.data("posts_per_page"), 10),
-        $post_order = $_this.data("post_order"),
-        $post_orderby = $_this.data("post_orderby"),
-        $post_offset = parseInt($_this.data("post_offset"), 10),
-        $show_images = $_this.data("show_images"),
-        $image_size = $_this.data("image_size"),
-        $show_title = $_this.data("show_title"),
-        $show_excerpt = $_this.data("show_excerpt"),
-        $excerpt_length = parseInt($_this.data("excerpt_length"), 10),
-        $btn_text = $_this.data("btn_text"),
-        $tax_query = $_this.data("tax_query"),
-        $post__in = $_this.data("post__in"),
-        $exclude_posts = $_this.data("exclude_posts");
-
-    var options = {
-        totalPosts: $total_posts,
-        loadMoreBtn: $("#eael-load-more-btn-" + $timeline_id),
-        postContainer: $(".eael-post-appender-" + $timeline_id),
-        postStyle: "timeline"
-    };
-
-    var settings = {
-        postType: $post_type,
-        perPage: $posts_per_page,
-        postOrder: $post_order,
-        orderBy: $post_orderby,
-        offset: $post_offset,
-
-        showImage: $show_images,
-        imageSize: $image_size,
-        showTitle: $show_title,
-        showExcerpt: $show_excerpt,
-        excerptLength: parseInt($excerpt_length, 10),
-        btnText: $btn_text,
-        tax_query: $tax_query,
-        post__in: $post__in,
-        exclude_posts: $exclude_posts
-    };
-
-    eaelLoadMore(options, settings);
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-timeline.default",
-        postTimelineHandler
     );
 });
 
@@ -12763,23 +12610,27 @@ jQuery(document).ready(function() {
 });
 
 var TwitterFeedHandler = function($scope, $) {
-    $gutter = $(".eael-twitter-feed-masonry", $scope).data('gutter');
-    $settings = {
-        itemSelector: ".eael-twitter-feed-item",
-        percentPosition: true,
-        masonry: {
-            columnWidth: ".eael-twitter-feed-item",
-            gutter: $gutter
-        }
-    };
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
 
-    // init isotope
-    $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope($settings);
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
 
-    // layout gal, while images are loading
-    $twitter_feed_gallery.imagesLoaded().progress(function() {
-        $twitter_feed_gallery.isotope("layout");
-    });
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
