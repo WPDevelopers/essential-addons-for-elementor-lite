@@ -1730,17 +1730,17 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 
             }
             ?>
-				            <li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
-				                <?php if ('show' === $settings['eael_pricing_table_icon_enabled']): ?>
-                                    <span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>">
-                                    <?php if(isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
-										<i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
-                                    <?php } else { ?>
-                                        <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
-                                    <?php } ?>
-									</span>
-				                <?php endif;?>
-                <?php echo $item['eael_pricing_table_item']; ?>
+			<li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
+				<?php if ('show' === $settings['eael_pricing_table_icon_enabled']): ?>
+					<span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>">
+					<?php if(isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
+						<i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
+					<?php } else { ?>
+						<i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
+					<?php } ?>
+					</span>
+				<?php endif;?>
+            <?php echo $item['eael_pricing_table_item']; ?>
             </li>
 			<?php $counter++;endforeach;?>
 		</ul>
