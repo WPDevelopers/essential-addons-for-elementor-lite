@@ -492,11 +492,15 @@ trait Helper
             );
 
             $this->add_control(
-                'eael_content_timeline_circle_icon',
+                'eael_content_timeline_circle_icon_new',
                 [
                     'label' => esc_html__('Icon', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::ICON,
-                    'default' => 'fa fa-pencil',
+                    'fa4compatibility' 		=> 'eael_content_timeline_circle_icon',
+                    'type' => Controls_Manager::ICONS,
+                    'default' => [
+                        'value' => 'fas fa-pencil-alt',
+                        'library' => 'fa-solid',
+                    ],
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
                         'eael_show_image_or_icon' => 'icon',
