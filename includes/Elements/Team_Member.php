@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Team_Member extends Widget_Base {
 
@@ -747,8 +746,8 @@ class Team_Member extends Widget_Base {
 								<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
 								<li class="eael-team-member-social-link">
 									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>"<?php echo $target; ?>>
-										<?php if ($icon_is_new || $icon_migrated) { ?>
-											<?php Icons_Manager::render_icon($item['social_new']); ?>
+										<?php if ($icon_is_new || $icon_migrated) { ?>>
+											<i class="<?php echo esc_attr($item['social_new']['value'] ); ?>"></i>
 										<?php } else { ?>
 											<i class="<?php echo esc_attr($item['social'] ); ?>"></i>
 										<?php } ?>

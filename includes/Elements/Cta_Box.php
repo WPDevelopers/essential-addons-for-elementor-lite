@@ -13,7 +13,6 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Cta_Box extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -737,7 +736,7 @@ class Cta_Box extends Widget_Base {
 	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr( $cta_class ); ?>">
 	    <div class="icon">
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<?php Icons_Manager::render_icon($settings['eael_cta_flex_grid_icon_new']); ?>
+				<i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon_new']['value'] ); ?>"></i>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon'] ); ?>"></i>
 			<?php } ?>
