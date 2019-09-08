@@ -323,6 +323,73 @@
   width: 100%;
 }
 
+@-webkit-keyframes "loaderSpin" {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes "loaderSpin" {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.eael-load-more-button-wrap {
+  display: flex;
+}
+
+.eael-load-more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 2em;
+  border: 0px solid;
+  font-size: 16px;
+  overflow: hidden;
+}
+.eael-load-more-button .button__loader {
+  left: -100%;
+  top: auto;
+  margin-right: 5px;
+  transition: all .2s;
+}
+.eael-load-more-button > span {
+  margin-left: -20px;
+}
+
+.eael-load-more-button.button--loading > span {
+  margin-left: 0;
+}
+.eael-load-more-button.button--loading .button__loader {
+  left: 0;
+}
+
+.eael-btn-loader {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 4px solid rgba(255, 255, 255, 0.2);
+  border-right: 4px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #ffffff;
+  transform: translateZ(0);
+  -webkit-animation: loaderSpin 1.1s infinite linear;
+          animation: loaderSpin 1.1s infinite linear;
+}
+.eael-btn-loader:after {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
 /*--------------------------*/
 /* 19. Call To Action
 /*-------------------------*/
@@ -568,73 +635,6 @@
     font-size: 20px;
     line-height: 30px;
   }
-}
-
-@-webkit-keyframes "loaderSpin" {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes "loaderSpin" {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.eael-load-more-button-wrap {
-  display: flex;
-}
-
-.eael-load-more-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1em 2em;
-  border: 0px solid;
-  font-size: 16px;
-  overflow: hidden;
-}
-.eael-load-more-button .button__loader {
-  left: -100%;
-  top: auto;
-  margin-right: 5px;
-  transition: all .2s;
-}
-.eael-load-more-button > span {
-  margin-left: -20px;
-}
-
-.eael-load-more-button.button--loading > span {
-  margin-left: 0;
-}
-.eael-load-more-button.button--loading .button__loader {
-  left: 0;
-}
-
-.eael-btn-loader {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 10px;
-  position: relative;
-  text-indent: -9999em;
-  border-top: 4px solid rgba(255, 255, 255, 0.2);
-  border-right: 4px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 4px solid rgba(255, 255, 255, 0.2);
-  border-left: 4px solid #ffffff;
-  transform: translateZ(0);
-  -webkit-animation: loaderSpin 1.1s infinite linear;
-          animation: loaderSpin 1.1s infinite linear;
-}
-.eael-btn-loader:after {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
 }
 
 /*--------------------------------*/
@@ -1342,89 +1342,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: center;
 }
 
-/* -------------------------------- */
-/* 20. Dual Color Heading
-/* -------------------------------- */
-.eael-dual-header {
-  display: block;
-  margin-bottom: 50px;
-}
-
-.eael-dual-header .title,
-.eael-dual-header .title span {
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 48px;
-  margin: 10px 0px;
-}
-
-.eael-dual-header .subtext {
-  font-size: 16px;
-  display: block;
-}
-
-.eael-dual-header i {
-  display: block;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
-  font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-  color: #1abc9c;
-}
-
-/*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
-  text-align: center;
-}
-
-.eael-dual-header-content-align-left {
-  text-align: left;
-}
-
-.eael-dual-header-content-align-right {
-  text-align: right;
-}
-
-.elementor-panel .pro-feature, .elementor-panel .pro-feature a {
-  color: #a4afb7;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 1.8;
-  font-style: normal;
-}
-
-.elementor-panel .pro-feature a {
-  text-decoration: underline;
-  color: #f54 !important;
-}
-
-.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
-.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
-.elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
-.elementor-control-data_table_header_img_pro_alert .elementor-control-title,
-.elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
-.elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
-.elementor-control-data_table_content_template_pro_alert .elementor-control-title {
-  color: #f54;
-}
-
-.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
-  display: none !important;
-}
-
-.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
-.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
-.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
-.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
-.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
-.elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
-.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
-  color: #f54;
-}
-
 .eael-fancy-text-container p {
   margin: 0;
 }
@@ -1478,6 +1395,89 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   background: #ff5544;
   color: #fff;
   padding: 10px 25px;
+}
+
+.elementor-panel .pro-feature, .elementor-panel .pro-feature a {
+  color: #a4afb7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  font-style: normal;
+}
+
+.elementor-panel .pro-feature a {
+  text-decoration: underline;
+  color: #f54 !important;
+}
+
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
+.elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_header_img_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_template_pro_alert .elementor-control-title {
+  color: #f54;
+}
+
+.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
+  display: none !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
+  color: #f54;
+}
+
+/* -------------------------------- */
+/* 20. Dual Color Heading
+/* -------------------------------- */
+.eael-dual-header {
+  display: block;
+  margin-bottom: 50px;
+}
+
+.eael-dual-header .title,
+.eael-dual-header .title span {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0px;
+}
+
+.eael-dual-header .subtext {
+  font-size: 16px;
+  display: block;
+}
+
+.eael-dual-header i {
+  display: block;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  font-size: 36px;
+}
+
+.eael-dual-header .title span.lead {
+  color: #1abc9c;
+}
+
+/*--- Builder Related Css ---*/
+.eael-dual-header-content-align-center {
+  text-align: center;
+}
+
+.eael-dual-header-content-align-left {
+  text-align: left;
+}
+
+.eael-dual-header-content-align-right {
+  text-align: right;
 }
 
 /*----------------------------*/
