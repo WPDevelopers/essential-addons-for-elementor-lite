@@ -1,6 +1,7 @@
 .sass-cache
 .DS_Store
 .phpintel
+./gulpfile.js
 package-lock.json
 composer.lock
 /node_modules

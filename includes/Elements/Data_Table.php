@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Data_Table extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -1022,7 +1021,7 @@ class Data_Table extends Widget_Base {
 			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
 							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
 								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
-									<?php Icons_Manager::render_icon($header_title['eael_data_table_header_col_icon_new'], ['class' => 'data-header-icon']); ?>
+									<i class="<?php echo $header_title['eael_data_table_header_col_icon_new']['value'] ?> data-header-icon"></i>
 								<?php } else { ?>
 									<i class="<?php echo $header_title['eael_data_table_header_col_icon'] ?> data-header-icon"></i>
 								<?php } ?>

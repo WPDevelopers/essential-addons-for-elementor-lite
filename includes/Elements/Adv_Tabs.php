@@ -14,7 +14,6 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
-use \Elementor\Icons_Manager;
 
 class Adv_Tabs extends Widget_Base
 {
@@ -514,7 +513,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover > i' => 'color: {{VALUE}};'
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
@@ -571,7 +570,7 @@ class Adv_Tabs extends Widget_Base
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-deafult' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul .active-default .eael-tab-title' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -582,8 +581,8 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active i' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active > i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active-default > i' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
@@ -794,7 +793,7 @@ class Adv_Tabs extends Widget_Base
 	      		<li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>"><?php if ($settings['eael_adv_tabs_icon_show'] === 'yes'):
             if ($tab['eael_adv_tabs_icon_type'] === 'icon'): ?>
                                 <?php if ($tab_icon_is_new || $tab_icon_migrated) {
-                                    Icons_Manager::render_icon($tab['eael_adv_tabs_tab_title_icon_new']);
+                                    echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon_new']['value'] . '"></i>';
                                 } else {
                                     echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
                                 } ?>

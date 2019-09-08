@@ -474,7 +474,7 @@ class Twitter_Feed extends Widget_Base
     {
         $settings = $this->get_settings();
 
-        echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . '" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
+        echo '<div class="eael-twitter-feed eael-twitter-feed-' . $this->get_id() . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type'] . ' eael-twitter-feed-' . $settings['eael_twitter_feed_type_col_type'] . ' clearfix" data-gutter="' . $settings['eael_twitter_feed_column_spacing']['size'] . '">
 			' . $this->twitter_feed_render_items($this->get_id(), $settings) . '
         </div>';
         
@@ -502,5 +502,33 @@ class Twitter_Feed extends Widget_Base
                 }
             }
         </style>';
+
+        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+            echo '<script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $(".eael-twitter-feed").each(function() {
+                        var $node_id = "' . $this->get_id() . '",
+                        $scope = $(".elementor-element-"+$node_id+""),
+                        $gutter = $(".eael-twitter-feed", $scope).data("gutter"),
+                        $settings = {
+                            itemSelector: ".eael-twitter-feed-item",
+                            percentPosition: true,
+                            masonry: {
+                                columnWidth: ".eael-twitter-feed-item",
+                                gutter: $gutter
+                            }
+                        };
+                        
+                        // init isotope
+                        $twitter_feed_gallery = $(".eael-twitter-feed", $scope).isotope($settings);
+                    
+                        // layout gal, while images are loading
+                        $twitter_feed_gallery.imagesLoaded().progress(function() {
+                            $twitter_feed_gallery.isotope("layout");
+                        });
+                    });
+                });
+            </script>';
+        }
     }
 }

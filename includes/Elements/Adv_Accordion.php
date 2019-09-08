@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
 
 class Adv_Accordion extends Widget_Base
@@ -794,7 +793,7 @@ class Adv_Accordion extends Widget_Base
                     <span>';
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
                 if ($tab_icon_is_new || $tab_icon_migrated) {
-                    Icons_Manager::render_icon($tab['eael_adv_accordion_tab_title_icon_new'], ['class' => 'fa-accordion-icon']);
+                    echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon_new']['value'] . ' fa-accordion-icon"></i>';
                 } else {
                     echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
                 }
@@ -803,7 +802,7 @@ class Adv_Accordion extends Widget_Base
                 '</span>';
             if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
                 if ($accordion_icon_is_new || $accordion_icon_migrated) {
-                    Icons_Manager::render_icon($settings['eael_adv_accordion_icon_new'], ['class' => 'fa-toggle']);
+                    echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
                 } else {
                     echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
                 }

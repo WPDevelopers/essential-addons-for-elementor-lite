@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 
 class Tooltip extends Widget_Base {
 
@@ -624,7 +623,7 @@ class Tooltip extends Widget_Base {
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
 			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?>
 			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<?php Icons_Manager::render_icon($settings['eael_tooltip_icon_content_new']); ?>
+				<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value'] ); ?>"></i>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content'] ); ?>"></i>
 			<?php } ?>
