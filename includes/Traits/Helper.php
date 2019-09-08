@@ -16,47 +16,6 @@ use \Elementor\Utils;
 trait Helper
 {
     /**
-     * For All Settings Key Need To Display
-     *
-     */
-    public $post_args = [
-        // // content ticker
-        // 'eael_ticker_type',
-        // 'eael_ticker_custom_contents',
-
-        // // post grid
-        // 'eael_post_grid_columns',
-
-        // // common
-        // 'meta_position',
-        // 'eael_show_meta',
-        // 'image_size',
-        // 'eael_show_image',
-        // 'eael_show_title',
-        // 'eael_show_excerpt',
-        // 'eael_excerpt_length',
-        // 'eael_show_read_more',
-        // 'eael_read_more_text',
-        // 'show_load_more',
-        // 'show_load_more_text',
-        // 'eael_show_read_more_button',
-        // 'read_more_button_text',
-
-        // query_args
-        'post_type',
-        'post__in',
-        'posts_per_page',
-        'post_style',
-        'tax_query',
-        'post__not_in',
-        'post_authors',
-        'authors',
-        'offset',
-        'orderby',
-        'order',
-    ];
-
-    /**
      * Get all types of post.
      * @return array
      */
@@ -986,26 +945,6 @@ trait Helper
     }
 
     /**
-     * Post Settings Parameter
-     * @param  array $settings
-     * @return array
-     */
-    // public function eael_get_post_settings($settings)
-    // {
-    //     foreach ($settings as $key => $value) {
-    //         if (in_array($key, $this->post_args)) {
-    //             $post_args[$key] = $value;
-    //         }
-    //     }
-
-    //     $post_args['post_style'] = isset($post_args['post_style']) ? $post_args['post_style'] : 'grid';
-    //     $post_args['is_pro'] = isset($settings['is_pro']) ? $settings['is_pro'] : false;
-    //     $post_args['post_status'] = 'publish';
-
-    //     return $post_args;
-    // }
-
-    /**
      * Getting Excerpts By Post Id
      * @param  int $post_id
      * @param  int $excerpt_length
@@ -1449,83 +1388,17 @@ trait Helper
 
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
         $args['offset'] = $args['offset'] + (($_REQUEST['page'] - 1) * $args['posts_per_page']);
+
+        if(isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
+            $args['tax_query'] = [
+                $_REQUEST['taxonomy']
+            ];
+        }
+
         $html = $class::__render_template($args, $settings);
 
         echo $html;
         wp_die();
-
-
-        // if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-        //     $post_args = $this->eael_get_post_settings($_POST);
-        //     $post_args = array_merge($this->eael_get_query_args('eaeposts', $_POST), $post_args, $_POST);
-
-        //     if (isset($_POST['tax_query']) && count($_POST['tax_query']) > 1) {
-        //         $post_args['tax_query']['relation'] = 'OR';
-        //     }
-        // } else {
-        //     $args = func_get_args();
-        //     $post_args = $args[0];
-        // }
-
-        // $posts = new \WP_Query($post_args);
-
-        /**
-         * For returning all types of post as an array
-         * @return array;
-         */
-        // if (isset($post_args['post_style']) && $post_args['post_style'] == 'all_types') {
-        //     return $posts->posts;
-        // }
-
-        // $return = array();
-        // $return['count'] = $posts->found_posts;
-
-        // if (isset($post_args['post_style'])) {
-        //     if (
-        //         $post_args['post_style'] == 'list'
-        //         || $post_args['post_style'] == 'dynamic_gallery'
-        //         || $post_args['post_style'] == 'content_timeline'
-        //         || $post_args['post_style'] == 'list'
-        //         || $post_args['post_style'] == 'block'
-        //         || $post_args['post_style'] == 'post_carousel'
-        //     ) {
-        //         $post_args['is_pro'] = true;
-        //     }
-        // }
-
-        // if (isset($post_args['post_style']) && $post_args['post_style'] == 'list') {
-        //     $iterator = $feature_counter = 0;
-
-        //     foreach ($posts->posts as $post) {
-        //         if (isset($post_args['featured_posts']) && $post->ID != $post_args['featured_posts']) {
-        //             $normal_posts[] = $post;
-        //         }
-        //     }
-        //     $posts->posts = array_merge(empty($post_args['featured_posts']) ? [] : [$post_args['featured_posts']], $normal_posts);
-        // }
-
-        // ob_start();
-        // while ($posts->have_posts()): $posts->the_post();
-        //     $isPrinted = false;
-        //     include $post_args['is_pro'] ? EAEL_PRO_PLUGIN_PATH : EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/content/' . @$post_args['post_style'] . '.php';
-        // endwhile;
-
-        // $return['content'] = ob_get_clean();
-
-        // wp_reset_postdata();
-        // wp_reset_query();
-
-        // if (isset($_POST['action']) && $_POST['action'] == 'load_more') {
-        //     if ($_POST['post_style'] == 'list') {
-        //         echo json_encode($return);
-        //         die();
-        //     }
-
-        //     echo $return['content'];
-        //     die();
-        // } else {
-        //     return $return;
-        // }
     }
 
     /**
