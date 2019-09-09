@@ -945,33 +945,6 @@ trait Helper
     }
 
     /**
-     * Getting Excerpts By Post Id
-     * @param  int $post_id
-     * @param  int $excerpt_length
-     * @return string
-     */
-    public function eael_get_excerpt_by_id($post_id, $excerpt_length)
-    {
-        $the_post = get_post($post_id); //Gets post ID
-
-        $the_excerpt = null;
-        if ($the_post) {
-            $the_excerpt = $the_post->post_excerpt ? $the_post->post_excerpt : $the_post->post_content;
-        }
-
-        $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
-        $words = explode(' ', $the_excerpt, $excerpt_length + 1);
-
-        if (count($words) > $excerpt_length):
-            array_pop($words);
-            array_push($words, '…');
-            $the_excerpt = implode(' ', $words);
-        endif;
-
-        return $the_excerpt;
-    }
-
-    /**
      * Get Post Thumbnail Size
      *
      * @return array
