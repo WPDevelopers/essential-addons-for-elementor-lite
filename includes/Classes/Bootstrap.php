@@ -81,9 +81,6 @@ class Bootstrap
             $this->start_plugin_tracking();
         }
 
-        // post args
-        $this->post_args = apply_filters('eael/post_args', $this->post_args);
-
         // register extensions
         $this->register_extensions();
 
