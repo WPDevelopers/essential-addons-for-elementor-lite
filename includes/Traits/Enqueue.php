@@ -42,11 +42,27 @@ trait Enqueue
 			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
 			false,
 			EAEL_PLUGIN_VERSION
-		);
+        );
+        
+        //Admin bar css
+        wp_enqueue_style(
+            'essential_addons_elementor-admin-bar-css',
+            EAEL_PLUGIN_URL . '/assets/admin/css/admin-bar.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
         
         wp_enqueue_script(
 			'font-awesome-4-shim',
 			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
+			false,
+			EAEL_PLUGIN_VERSION
+        );
+        
+        // Admin bar js
+        wp_enqueue_script(
+			'ea-admin-bar',
+			EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
 			false,
 			EAEL_PLUGIN_VERSION
 		);

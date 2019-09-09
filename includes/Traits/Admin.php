@@ -224,4 +224,37 @@ trait Admin
 
         $notice->init();
     }
+
+    public function admin_bar($wp_admin_bar) {
+        $wp_admin_bar->add_node([
+            'id'    => 'ea-wp-admin-bar',
+            'meta'  => [
+                'class' => 'ea-wp-admin-bar'
+            ],
+            'title' => 'EA Tools'
+        ]);
+
+        $wp_admin_bar->add_node([
+            'parent'    => 'ea-wp-admin-bar',
+            'id'    => 'ea-all-cache-clear',
+            'href'  => '#',
+            'meta'  => [
+                'class' => 'ea-all-cache-clear'
+            ],
+            'title' => 'All Cache Clear'
+        ]);
+
+        $wp_admin_bar->add_node([
+            'parent'    => 'ea-wp-admin-bar',
+            'id'    => 'ea-clear-cache-'.get_queried_object_id(),
+            'href'  => '#',
+            'meta'  => [
+                'class' => 'ea-clear-cache',
+                'html'   => '<div class="ea-clear-cache-id" data-pageid="'.get_queried_object_id().'">'
+            ],
+            'title' => 'Clear Page Cache'
+        ]);
+
+        
+    }
 }

@@ -132,6 +132,11 @@ class Bootstrap
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'elementor_not_loaded'));
             }
+
+        }
+
+        if(current_user_can('manage_options')) {
+            add_action( 'admin_bar_menu', [$this, 'admin_bar'], 900);
         }
     }
 }
