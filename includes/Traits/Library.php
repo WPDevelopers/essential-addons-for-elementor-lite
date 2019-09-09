@@ -78,8 +78,12 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        // clear cache files
-        $this->empty_dir(EAEL_ASSET_PATH);
+        if(isset($_POST['pageID']) && 'post' === $_POST['actionType'] ) {
+            $this->remove_files($_POST['actionType'], $_POST['pageID']);
+        }else {
+            // clear cache files
+            $this->empty_dir(EAEL_ASSET_PATH);
+        }
 
         wp_send_json(true);
     }

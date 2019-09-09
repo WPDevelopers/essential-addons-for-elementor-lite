@@ -1,0 +1,15 @@
+#wpadminbar .ea-wp-admin-bar > .ab-item {
+    position: relative;
+    padding-left: 33px;
+}
+
+#wpadminbar .ea-wp-admin-bar > .ab-item:before {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    content: "";
+    top: 0px;
+    left: 5px;
+    background: url("../images/ea-icon-white.svg") no-repeat scroll center 8px/ 85%!important;
+}
