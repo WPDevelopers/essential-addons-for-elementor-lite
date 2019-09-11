@@ -1761,9 +1761,6 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 		$button_icon_migrated = isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new']);
 		$button_icon_is_new = empty($settings['eael_pricing_table_button_icon']);
 
-		// $featured_class = ('yes' === $settings['eael_pricing_table_featured']) ? 'featured '.$settings['eael_pricing_table_featured_styles'] : '';
-		// dump($featured_class);
-
 		if( 'yes' === $settings['eael_pricing_table_onsale'] ) {
 			if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) {
 				$pricing = '<del class="muted-price"><span class="muted-price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_price'].'</del> <span class="price-currency">'.$settings['eael_pricing_table_price_cur'].'</span>'.$settings['eael_pricing_table_onsale_price'];
@@ -1859,6 +1856,6 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 	</div>
 	<?php endif; ?>
 	<?php
-		do_action('add_pricing_table_style_block', $settings, $this, $pricing, $target, $nofollow);
+		do_action('add_pricing_table_style_block', $settings, $this, $pricing, $target, $nofollow, $featured_class);
 	}
 }
