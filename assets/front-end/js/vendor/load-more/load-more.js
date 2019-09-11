@@ -1,7 +1,7 @@
-(function($) {
+(function ($) {
     "use strict";
 
-    $(document).on("click", ".eael-load-more-button", function(e) {
+    $(document).on("click", ".eael-load-more-button", function (e) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -29,7 +29,7 @@
                 settings: $settings,
                 page: $page
             },
-            success: function(response) {
+            success: function (response) {
                 var $content = $(response);
 
                 if (
@@ -39,11 +39,9 @@
                     $this.remove();
                 } else {
                     if ($layout == "masonry") {
-                        $(".eael-post-appender", $scope)
-                            .isotope()
-                            .append($content)
-                            .isotope("appended", $content)
-                            .isotope("layout");
+                        $(".eael-post-appender", $scope).isotope();
+                        $(".eael-post-appender", $scope).append($content).isotope("appended", $content);
+                        $(".eael-post-appender", $scope).isotope("layout");
                     } else {
                         $(".eael-post-appender", $scope).append($content);
                     }
@@ -54,7 +52,7 @@
                     $this.data("page", $page);
                 }
             },
-            error: function(response) {
+            error: function (response) {
                 console.log(response);
             }
         });
