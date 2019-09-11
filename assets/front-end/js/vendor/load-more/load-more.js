@@ -38,12 +38,15 @@
                 ) {
                     $this.remove();
                 } else {
+                    $(".eael-post-appender", $scope).append($content);
+
                     if ($layout == "masonry") {
-                        $(".eael-post-appender", $scope).isotope();
-                        $(".eael-post-appender", $scope).append($content).isotope("appended", $content);
-                        $(".eael-post-appender", $scope).isotope("layout");
-                    } else {
-                        $(".eael-post-appender", $scope).append($content);
+                        var $isotope = $(".eael-post-appender", $scope).isotope();
+                        $isotope.isotope("appended", $content).isotope("layout");
+
+                        $isotope.imagesLoaded().progress(function() {
+                            $isotope.isotope("layout");
+                        });
                     }
 
                     $this.removeClass("button--loading");
