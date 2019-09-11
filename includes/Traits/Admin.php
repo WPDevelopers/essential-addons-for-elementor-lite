@@ -241,7 +241,7 @@ trait Admin
             'meta'  => [
                 'class' => 'ea-all-cache-clear'
             ],
-            'title' => 'All Cache Clear'
+            'title' => 'Clear All Cache'
         ]);
 
         $wp_admin_bar->add_node([
