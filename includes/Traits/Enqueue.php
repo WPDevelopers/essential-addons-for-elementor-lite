@@ -63,7 +63,7 @@ trait Enqueue
         wp_enqueue_script(
 			'ea-admin-bar',
 			EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
-			false,
+			['jquery'],
 			EAEL_PLUGIN_VERSION
 		);
 
