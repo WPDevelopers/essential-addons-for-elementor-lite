@@ -745,8 +745,8 @@ class Team_Member extends Widget_Base {
 							<?php if ( ! empty( $item['social'] ) || !empty($item['social_new'])) : ?>
 								<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
 								<li class="eael-team-member-social-link">
-									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>"<?php echo $target; ?>>
-										<?php if ($icon_is_new || $icon_migrated) { ?>>
+									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>" <?php echo $target; ?>>
+										<?php if ($icon_is_new || $icon_migrated) { ?>
 											<i class="<?php echo esc_attr($item['social_new']['value'] ); ?>"></i>
 										<?php } else { ?>
 											<i class="<?php echo esc_attr($item['social'] ); ?>"></i>
