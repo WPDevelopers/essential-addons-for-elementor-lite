@@ -880,6 +880,14 @@ trait Helper
 
     public function eael_get_query_args($settings = [])
     {
+        // fix old settings
+        foreach($settings as $key => $value) {
+            if(strpos($key, 'eaeposts_') !== false) {
+                $settings[str_replace('eaeposts_', '', $key)] = $value;
+                unset($settings[$key]);
+            }
+        };
+
         $settings = wp_parse_args($settings, [
             'post_type' => 'post',
             'posts_ids' => [],
