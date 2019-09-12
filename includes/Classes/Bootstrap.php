@@ -116,8 +116,9 @@ class Bootstrap
         if (is_admin()) {
             // Admin
             if (!$this->pro_enabled) {
-                $this->admin_notice();
+                // TODO: you have to call admin_notice for pro also.
             }
+            $this->admin_notice(); // this line of code
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
