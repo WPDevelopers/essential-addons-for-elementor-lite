@@ -903,6 +903,8 @@ trait Helper
             'order' => $settings['order'],
             'ignore_sticky_posts' => 1,
             'post_status' => 'publish',
+            'posts_per_page' => $settings['posts_per_page'],
+            'offset' => $settings['offset']
         ];
 
         if ('by_id' === $settings['post_type']) {
@@ -910,8 +912,6 @@ trait Helper
             $args['post__in'] = empty($settings['posts_ids']) ? [0] : $settings['posts_ids'];
         } else {
             $args['post_type'] = $settings['post_type'];
-            $args['posts_per_page'] = $settings['posts_per_page'];
-            $args['offset'] = $settings['offset'];
             $args['tax_query'] = [];
 
             $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
@@ -1372,7 +1372,7 @@ trait Helper
         parse_str($_REQUEST['settings'], $settings);
 
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
-        $args['offset'] = $args['offset'] + (($_REQUEST['page'] - 1) * $args['posts_per_page']);
+        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
 
         if(isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
             $args['tax_query'] = [
