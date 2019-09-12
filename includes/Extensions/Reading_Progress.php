@@ -11,7 +11,7 @@ class Reading_Progress
 {
     public function __construct()
     {
-        add_action('elementor/element/post/document_settings/after_section_end', [$this, 'register_controls'], 10);
+        add_action('elementor/documents/register_controls', [$this, 'register_controls'], 10);
     }
 
     public function register_controls($element)
