@@ -51,6 +51,12 @@ trait Elements
                 }
             }
 
+            if($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.3.0', '<')) {
+                if(in_array($active_element, ['content-timeline', 'dynamic-filter-gallery', 'post-block', 'post-carousel', 'post-list'])) {
+                    continue;
+                }
+            }
+
             $widgets_manager->register_widget_type(new $this->registered_elements[$active_element]['class']);
         }
     }
