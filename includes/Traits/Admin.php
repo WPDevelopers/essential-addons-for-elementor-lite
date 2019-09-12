@@ -203,6 +203,13 @@ trait Admin
         $notice->message( 'upsale', '<p>'. __( '<a href="https://essential-addons.com/elementor/reading-progress/" target="_blank">Reading Progress Bar</a> is Now Available for Elementor. Increase 20-40% Sales & Interaction in Your Site With Our New Plugin <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
+        // Update Notice For PRO Version
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.2.1', '<' ) ) {
+            $notice->classes( 'update', 'notice is-dismissible' );
+            $notice->message( 'update', '<p>'. __( 'Please make sure to Update to the Latest version of Essential Addons PRO <a href="https://wpdeveloper.net/manually-update-plugins-wordpress/">Read More</a>', $notice->text_domain ) .'</p>' );
+            $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
+        }
+
         $notice->upsale_args = array(
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
@@ -221,6 +228,9 @@ trait Admin
                 'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
             ],
         );
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.2.1', '<' ) ) { 
+            $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
+        }
 
         $notice->init();
     }
