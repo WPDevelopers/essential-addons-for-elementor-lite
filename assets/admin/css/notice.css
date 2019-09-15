@@ -35,17 +35,18 @@
     opacity: 1;
 }
 .wpdeveloper-update-notice .wpdeveloper-notice-thumbnail img {
-    width: 40px;
+    width: 32px;
 }
 .wpdeveloper-update-notice .wpdeveloper-notice-thumbnail {
     width: auto;
-    padding: 0;
+    padding: 7px;
 }
 .wpdeveloper-update-notice .wpdeveloper-notice-message {
     padding: 5px 0;
 }
 .wpdeveloper-update-notice {
     border-color: #6648fe;
+    padding: 0
 }
 a.ea-notice-cta {
     background-color: #4d18ff;

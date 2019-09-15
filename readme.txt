@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.2.0
+Stable tag: 3.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -170,6 +170,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.3.0 - 15/09/2019 =
+- Improved : All post queries optimized to improve the load time and memory usage
+- Improved : Icon Manager optmized for better performance
+- Added : Content Timeline left and right layout
+- Fixed : Load More button overlapping issue
+- Fixed : Team Member icon issue
+- Fixed : Pricing Table style 3 and 4 ribbon issue
+- Lots of minor bugfix and improvements
 
 = 3.2.0 - 19/08/2019 =
 - Icon Manager updated to new Font Awesome 5.x
