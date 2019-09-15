@@ -96,8 +96,6 @@ trait Elements
             $global_settings = get_option('eael_global_settings');
             $html = '';
 
-            print_r($global_settings);
-
             if ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled'])) {
                 add_filter('eael/section/after_render', function ($extensions) {
                     $extensions[] = 'eael-reading-progress';
