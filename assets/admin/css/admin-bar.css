@@ -11,5 +11,6 @@
     content: "";
     top: 0px;
     left: 5px;
+    opacity: .75;
     background: url("../images/ea-icon-white.svg") no-repeat scroll center 8px/ 85%!important;
 }
