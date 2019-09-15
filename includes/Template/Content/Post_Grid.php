@@ -44,7 +44,7 @@ trait Post_Grid
 
                                         if ($settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header') {
                                             echo '<div class="eael-entry-meta">
-                                                <span class="eael-posted-by">' . get_author_posts_url(get_the_author_meta('ID')) . '</span>
+                                                <span class="eael-posted-by">' . get_the_author_meta( 'display_name' ) . '</span>
                                                 <span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>
                                             </div>';
                                         }
