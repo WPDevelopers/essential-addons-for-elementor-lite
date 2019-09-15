@@ -10,8 +10,8 @@ trait Post_Grid
 {
     public static function __render_template($args, $settings)
     {
-        $html = '';
         $query = new \WP_Query($args);
+      
         ob_start();
 
         if($query->have_posts()) {
@@ -79,7 +79,7 @@ trait Post_Grid
                 </article>';
             }
         } else {
-            echo __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
+            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
         }
 
         wp_reset_postdata();
