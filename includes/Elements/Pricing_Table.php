@@ -1753,13 +1753,7 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 		$pricing_table_image_url = Group_Control_Image_Size::get_attachment_image_src( $pricing_table_image['id'], 'thumbnail', $settings );
 		$target = $settings['eael_pricing_table_btn_link']['is_external'] ? 'target="_blank"' : '';
 		$nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
-		if( 'yes' === $settings['eael_pricing_table_featured'] ) : $featured_class = 'featured '.$settings['eael_pricing_table_featured_styles']; else : $featured_class = ''; endif;
-		
-		
-		$style_2_icon_migrated = isset($settings['__fa4_migrated']['eael_pricing_table_style_2_icon_new']);
-		$style_2_icon_is_new = empty($settings['eael_pricing_table_style_2_icon']);
-		$button_icon_migrated = isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new']);
-		$button_icon_is_new = empty($settings['eael_pricing_table_button_icon']);
+		$featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
 
 		if( 'yes' === $settings['eael_pricing_table_onsale'] ) {
 			if( $settings['eael_pricing_table_price_cur_placement'] == 'left' ) {
@@ -1791,7 +1785,7 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 	        <div class="footer">
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
 		    		<?php if( 'left' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
-						<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+						<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-left"></i>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-left"></i>
@@ -1799,7 +1793,7 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 						<?php echo $settings['eael_pricing_table_btn']; ?>
 					<?php elseif( 'right' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
 						<?php echo $settings['eael_pricing_table_btn']; ?>
-		        		<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+		        		<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-right"></i>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-right"></i>
@@ -1815,7 +1809,7 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 	    <div class="eael-pricing-item <?php echo esc_attr( $featured_class ); ?>">
 	        <div class="eael-pricing-icon">
 	            <span class="icon" style="background:<?php if('yes' != $settings['eael_pricing_table_icon_bg_show']) : echo 'none'; endif;  ?>;">
-					<?php if ($style_2_icon_is_new || $style_2_icon_migrated) { ?>
+					<?php if (empty($settings['eael_pricing_table_style_2_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_style_2_icon_new'])) { ?>
 						<i class="<?php echo esc_attr( $settings['eael_pricing_table_style_2_icon_new']['value'] ); ?>"></i>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr( $settings['eael_pricing_table_style_2_icon'] ); ?>"></i>
@@ -1836,7 +1830,7 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 	        <div class="footer">
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
 		    		<?php if( 'left' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
-						<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+						<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-left"></i>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-left"></i>
@@ -1844,7 +1838,7 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 						<?php echo $settings['eael_pricing_table_btn']; ?>
 					<?php elseif( 'right' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
 						<?php echo $settings['eael_pricing_table_btn']; ?>
-		        		<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
+		        		<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-right"></i>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-right"></i>
