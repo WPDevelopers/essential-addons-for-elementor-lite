@@ -236,6 +236,14 @@ trait Admin
     }
 
     public function admin_bar($wp_admin_bar) {
+        if(is_admin()) {
+            return;
+        }
+
+        if(!$this->get_settings('quick_tools')) {
+            return;
+        }
+
         $wp_admin_bar->add_node([
             'id'    => 'ea-wp-admin-bar',
             'meta'  => [
