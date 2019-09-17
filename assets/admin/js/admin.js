@@ -28,7 +28,7 @@
     // Save Button reacting on any changes
     var saveButton = $(".js-eael-settings-save");
 
-    $(".eael-checkbox-container .eael-checkbox input:enabled").on(
+    $(".eael-checkbox input:enabled").on(
         "click",
         function(e) {
             saveButton
