@@ -46,7 +46,7 @@ trait Enqueue
         
         //Admin bar css
         wp_enqueue_style(
-            'essential_addons_elementor-admin-bar-css',
+            'ea-admin-bar',
             EAEL_PLUGIN_URL . '/assets/admin/css/admin-bar.css',
             false,
             EAEL_PLUGIN_VERSION

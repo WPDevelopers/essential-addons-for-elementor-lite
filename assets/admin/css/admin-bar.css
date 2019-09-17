@@ -1,6 +1,7 @@
 #wpadminbar .ea-wp-admin-bar > .ab-item {
     position: relative;
     padding-left: 33px;
+    cursor: pointer;
 }
 
 #wpadminbar .ea-wp-admin-bar > .ab-item:before {

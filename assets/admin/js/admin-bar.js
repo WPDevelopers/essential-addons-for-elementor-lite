@@ -25,6 +25,7 @@
                 success: function(response) {
                     setTimeout(function() {
                         text.text('Clear Page Cache');
+                        window.location.reload();
                     }, 1000);
                 },
                 error: function() {
@@ -57,6 +58,7 @@
                 success: function(response) {
                     setTimeout(function() {
                         text.text('Clear All Cache');
+                        window.location.reload();
                     }, 1000);
                 },
                 error: function() {
