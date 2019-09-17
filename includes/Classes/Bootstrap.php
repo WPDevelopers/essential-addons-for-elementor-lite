@@ -33,6 +33,9 @@ class Bootstrap
     // transient elements container
     public $transient_extensions;
 
+    // additional settings
+    public $additional_settings;
+
     // identify whether pro is enabled
     public $pro_enabled;
 
@@ -71,6 +74,11 @@ class Bootstrap
 
         // extensions classmap
         $this->registered_extensions = apply_filters('eael/registered_extensions', $GLOBALS['eael_config']['extensions']);
+
+        // additional settings
+        $this->additional_settings = apply_filters('eael/additional_settings', [
+            'quick_tools' => true
+        ]);
 
         // initialize transient container
         $this->transient_elements = [];
