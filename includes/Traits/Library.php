@@ -27,7 +27,7 @@ trait Library
     {
         $elements = get_option('eael_save_settings', array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), true));
 
-        return (isset($element) ? (isset($elements[$element]) ? $elements[$element] : 0) : array_keys(array_filter($elements)));
+        return (isset($element) ? (isset($elements[$element]) ? $elements[$element] : true) : array_keys(array_filter($elements)));
     }
 
     /**
