@@ -121,7 +121,7 @@
 
 /*--- Post Grid Thumbnail Hover Effects ---*/
 
-.eael-entry-medianone {
+.eael-entry-media {
 	position: relative;
 }
 
@@ -142,12 +142,12 @@
 	transition: 300ms;
 }
 
-.eael-entry-medianone:hover .eael-entry-overlay.fade-in {
+.eael-entry-media:hover .eael-entry-overlay.fade-in {
 	visibility: visible;
 	opacity: 1;
 }
 
-.eael-entry-medianone:hover .eael-entry-overlay.fade-in>i {
+.eael-entry-media:hover .eael-entry-overlay.fade-in>i {
 	transform: translate(0);
 	opacity: 1;
 }
@@ -160,7 +160,7 @@
 	transition: 300ms;
 }
 
-.eael-entry-medianone:hover .eael-entry-overlay.zoom-in {
+.eael-entry-media:hover .eael-entry-overlay.zoom-in {
 	visibility: visible;
 	opacity: 1;
 	transform: scale(1);
@@ -174,13 +174,13 @@
 	transition: 300ms;
 }
 
-.eael-entry-medianone:hover .eael-entry-overlay.slide-up {
+.eael-entry-media:hover .eael-entry-overlay.slide-up {
 	transform: translateY(0);
 	visibility: visible;
 	opacity: 1;
 }
 
-.eael-entry-medianone {
+.eael-entry-media {
 	overflow: hidden;
 }
 
