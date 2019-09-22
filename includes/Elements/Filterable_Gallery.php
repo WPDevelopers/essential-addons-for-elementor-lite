@@ -1866,6 +1866,14 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
+            'fg_sf',
+            [
+                'label' => esc_html__('Form', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING
+            ]
+        );
+
+        $this->add_control(
             'fg_sf_background',
             [
                 'label' => __('Form Background', 'essential-addons-elementor'),
@@ -1874,6 +1882,103 @@ class Filterable_Gallery extends Widget_Base
                     '{{WRAPPER}} .fg-filter-wrap button' => 'background: {{VALUE}}',
                     '{{WRAPPER}} .fg-layout-3-filters-wrap' => 'background: {{VALUE}}'
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_placeholder',
+            [
+                'label' => esc_html__('Placeholder', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => __( 'Search Gallery Item...', 'essential-addons-elementor' ),
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_dropdown',
+            [
+                'label' => esc_html__('Dropdown', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_dropdown_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-filter-controls li.control' => 'color: {{VALUE}}'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_dropdown_hover_color',
+            [
+                'label' => __('Hover Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-filter-controls li.control:hover' => 'color: {{VALUE}}'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+			Group_Control_Background:: get_type(),
+			[
+				'name'    => 'fg_sf_dropdown_bg',
+				'types'   => [ 'classic', 'gradient' ],
+				'exclude' => [
+                    'image',
+                ],
+				'selector' => '{{WRAPPER}} .fg-layout-3-filter-controls',
+			]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'fg_sf_dropdown_typography',
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'selector' => '{{WRAPPER}} .fg-layout-3-filter-controls li.control'
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_dropdown_spacing',
+            [
+                'label' => __('Spacing', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-filter-controls li.control' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ]
+            ]
+        );
+
+
+        $this->add_control(
+            'fg_sf_dropdown_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-filter-controls.open-filters' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ]
+            ]
+        );
+        
+
+        $this->add_control(
+            'fg_sf_separator',
+            [
+                'label' => esc_html__('Separator', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
 
@@ -1907,29 +2012,7 @@ class Filterable_Gallery extends Widget_Base
                 ]
             ]
         );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name'      => 'fg_sf_button_bg',
-                'label'     => __( 'Button Background', 'essential-addons-elementor' ),
-                'types'     => [ 'classic', 'gradient' ],
-                'selector'  => '{{WRAPPER}} .fg-layout-3-search-box>button',
-            ]
-        );
-
-        $this->add_control(
-            'fg_sf_button_border_radius',
-            [
-                'label' => __('Border Radius', 'essential-addons-elementor'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .fg-layout-3-search-box>button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ]
-            ]
-        );
-
+        
         $this->end_controls_section();
 
         /**
@@ -2246,7 +2329,7 @@ class Filterable_Gallery extends Widget_Base
             <div class="fg-layout-3-filters-wrap">
 
                 <div class="fg-filter-wrap">
-                    <button class="fg-filter-trigger"><?php echo $all_text; ?> <i class="fas fa-angle-down"></i></button>
+                    <button id="fg-filter-trigger"><span><?php echo $all_text; ?></span> <i class="fas fa-angle-down"></i></button>
                     <ul class="fg-layout-3-filter-controls">
                         <?php if ($settings['eael_fg_all_label_text']) {?>
                             <li class="control active" data-filter="*"><?php echo $all_text; ?></li>
@@ -2260,8 +2343,7 @@ class Filterable_Gallery extends Widget_Base
                 </div>
 
                 <form class="fg-layout-3-search-box" id="fg-layout-3-search-box" autocomplete="off">
-                    <input type="text" name="fg-frontend-search" placeholder="responsive wordpress" />
-                    <button><?php _e('Search', 'essential-addons-elementor'); ?></button> 
+                    <input type="text" id="fg-search-box-input" name="fg-frontend-search" placeholder="<?php echo $settings['fg_sf_placeholder']; ?>" />
                 </form>
 
             </div>
@@ -2638,7 +2720,9 @@ class Filterable_Gallery extends Widget_Base
 						$settings = $gallery.data('settings'),
 				        $gallery_items = $gallery.data('gallery-items'),
 						$layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
-						$gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false);
+                        $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
+                        input = $scope.find('#fg-search-box-input'),
+                        searchRegex, buttonFilter, timer;
 
 					if ($gallery.closest($scope).length < 1) {
         				return;
@@ -2649,8 +2733,41 @@ class Filterable_Gallery extends Widget_Base
 					     itemSelector: '.eael-filterable-gallery-item-wrap',
 					     layoutMode: $layout_mode,
 					     percentPosition: true,
-					     filter: $('.eael-filter-gallery-control .control.active', $scope).data('filter')
-					 });
+                         filter: function() {
+                            var $this = $(this);
+                            var $result = searchRegex ? $this.text().match( searchRegex ) : true;
+                            var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
+                            return $result && buttonResult;
+                        }
+                     });
+
+                    // filter
+                    $scope.on("click", ".control", function() {
+
+                        var $this = $(this);
+                        buttonFilter = $( this ).attr('data-filter');
+
+                        if($scope.find('#fg-filter-trigger > span')) {
+                            $scope.find('#fg-filter-trigger > span').text($this.text());
+                        }
+
+                        $this.siblings().removeClass("active");
+                        $this.addClass("active");
+
+                        $isotope_gallery.isotope();
+                    });
+
+                    //quick search
+                    input.on('input', function() {
+                        var $this = $(this);
+
+                        clearTimeout(timer);
+                        timer = setTimeout(function() {
+                            searchRegex = new RegExp($this.val(), 'gi');
+                            $isotope_gallery.isotope();
+                        }, 600);
+
+                    });
 
 					 // not necessary, just in case
 					 $isotope_gallery.imagesLoaded().progress(function() {
@@ -2662,17 +2779,6 @@ class Filterable_Gallery extends Widget_Base
 						$isotope_gallery.isotope('layout');
 					});
 
-					 // filter
-					 $scope.on('click', '.control', function() {
-					     var $this = $(this),
-					         $filterValue = $this.data('filter');
-
-					     $this.siblings().removeClass('active');
-					     $this.addClass('active');
-					     $isotope_gallery.isotope({
-					         filter: $filterValue
-					     });
-					 });
 
 			        // popup
 					$('.eael-magnific-link', $scope).magnificPopup({
@@ -2698,35 +2804,7 @@ class Filterable_Gallery extends Widget_Base
                     });
 
                     // Search code start here.
-                    var button = $('#fg-layout-3-search-box button'),
-                        input = $('#fg-layout-3-search-box > input');
-
-                        button.on('click', function(e) {
-                            e.preventDefault();
-                            var val = input.val().toLowerCase();
-                            val = val.trim();
-                            val = val.split(" ").join("-");
-                            val = '.eael-cf-'+val;
-
-                            if(val == '') return;
-
-                            // $items.each(function(index, item) {
-                            //     var sk = $(item).data('search-key');
-                            //     if(sk.includes(val)) {
-                            //         $(item).css('display', 'block');
-                            //     }else {
-                            //         $(item).css('display', 'none');
-                            //     }
-                            // });
-
-                            $isotope_gallery.isotope({
-                                filter: val
-                            });
-
-                            // $isotope_gallery.isotope("layout");
-
-                    });
-                    // Search code end here.
+                    
 
 					 // Load more button
 				    $scope.on('click', '.eael-gallery-load-more', function(e) {
