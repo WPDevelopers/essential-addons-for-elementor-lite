@@ -200,7 +200,7 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible ' );
-        $notice->message( 'upsale', '<p>'. __( '<a href="https://essential-addons.com/elementor/reading-progress/" target="_blank">Reading Progress Bar</a> is Now Available for Elementor. Increase 20-40% Sales & Interaction in Your Site With Our New Plugin <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( '5000+ People already using <a href="hhttps://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement! Join Free or Get <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">Exclusive Lifetime Pro</a> for only $39! Limied Time!', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         // Update Notice For PRO Version
@@ -214,7 +214,7 @@ trait Admin
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
             'file'      => 'notificationx.php',
-            'btn_text'  => __( 'Install NotificationX', 'essential-addons-elementor' ),
+            'btn_text'  => __( 'Install Free', 'essential-addons-elementor' ),
             'condition' => [
                 'by' => 'class',
                 'class' => 'NotificationX'
