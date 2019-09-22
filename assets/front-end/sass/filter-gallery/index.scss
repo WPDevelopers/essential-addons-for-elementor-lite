@@ -891,11 +891,12 @@ form#fg-layout-3-search-box input {
 }
 
 .fg-layout-3-item-content {
-    padding: 27px 0 30px;
+    padding: 27px 27px 30px;
     text-align: center;
 }
 
 .eael-fg-card-content-align-left .fg-layout-3-item-content { text-align: left; }
+.eael-fg-card-content-align-center .fg-layout-3-item-content { text-align: center; }
 .eael-fg-card-content-align-right .fg-layout-3-item-content { text-align: right; }
 
 .eael-filterable-gallery-item-wrap .fg-layout-3-item.eael-gallery-grid-item {
