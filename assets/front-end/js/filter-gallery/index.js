@@ -1,4 +1,14 @@
 var filterableGalleryHandler = function($scope, $) {
+
+    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0);
+    var filterTrigger = $scope.find('.fg-filter-trigger').eq(0);
+
+    filterTrigger.on('click', function() {
+        filterControls.toggleClass('open-filters');
+    }).blur(function() {
+        filterControls.toggleClass('open-filters');
+    });
+
     if (!isEditMode) {
         var $gallery = $(".eael-filter-gallery-container", $scope),
             $settings = $gallery.data("settings"),
@@ -43,6 +53,7 @@ var filterableGalleryHandler = function($scope, $) {
 
             $this.siblings().removeClass("active");
             $this.addClass("active");
+
             $isotope_gallery.isotope({
                 filter: $filterValue
             });
@@ -70,6 +81,38 @@ var filterableGalleryHandler = function($scope, $) {
                 }
             }
         });
+
+        // Search code start here.
+        var button = $scope.find('#fg-layout-3-search-box button'),
+            input = $scope.find('#fg-layout-3-search-box > input');
+
+            button.on('click', function(e) {
+                e.preventDefault();
+                var val = input.val().toLowerCase();
+                val = val.trim();
+                val = val.split(" ").join("-");
+                val = '.eael-cf-'+val;
+
+                if(val == '') return;
+
+                // $items.each(function(index, item) {
+                //     var sk = $(item).data('search-key');
+                //     if(sk.includes(val)) {
+                //         $(item).css('display', 'block');
+                //     }else {
+                //         $(item).css('display', 'none');
+                //     }
+                // });
+
+                $isotope_gallery.isotope({
+                    filter: val
+                });
+
+                // $isotope_gallery.isotope("layout");
+
+        });
+        // Search code end here.
+
 
         // Load more button
         $scope.on("click", ".eael-gallery-load-more", function(e) {
