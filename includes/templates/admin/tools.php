@@ -15,12 +15,13 @@
 
                         <div class="eael-checkbox eael-checkbox-quick-tools">
                             <p class="eael-el-title">
-                                <?php _e( 'Quick Tools', 'essential-addons-elementor' ); ?>
+                                <?php _e( 'Show Quick Tools in Admin Bar?', 'essential-addons-elementor' ); ?>
                             </p>
 
                             <input type="checkbox" id="<?php echo esc_attr('quick_tools'); ?>" name="<?php echo esc_attr('quick_tools'); ?>" <?php echo checked( 1, $this->get_settings('quick_tools'), false ); ?>>
                             <label for="<?php echo esc_attr('quick_tools'); ?>"></label>
                         </div>
+                        <p class="quick-tools-description"><?php _e('Display quick cache clearing tools in admin bar from where you can clear global cache or page cache.', 'essential-addons-elementor'); ?></p>
                     </div>
                 </div>
             </div>
