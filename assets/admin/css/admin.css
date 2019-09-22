@@ -188,6 +188,12 @@ textarea.eael-form-control {
     box-shadow: 0px 5px 18px 0px rgba(0, 4, 32, 0.08);
 }
 
+.eael-checkbox-quick-tools {
+    margin-left: 0;
+    margin-right: 0;
+    
+}
+
 .eael-checkbox.checkbox-toggle-all {
     border-radius: 100px;
     padding: 12px 25px;
