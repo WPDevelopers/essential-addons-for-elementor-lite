@@ -296,6 +296,14 @@ $config = [
                 ],
             ],
         ],
+        'video-sticky' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Video_Sticky',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/video-sticky/index.min.css',
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'eael-reading-progress' => [
