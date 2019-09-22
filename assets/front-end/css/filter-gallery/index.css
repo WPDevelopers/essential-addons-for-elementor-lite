@@ -906,17 +906,6 @@ form#fg-layout-3-search-box {
   height: 100%;
 }
 
-.fg-layout-3-search-box > button {
-  width: 100px;
-  background: #fa9196;
-  color: #fff;
-  border: 0px solid;
-  padding: 13px 25px;
-  margin: 2px 0;
-  border-radius: 50px;
-  font-weight: 500;
-}
-
 form#fg-layout-3-search-box input {
   width: calc(100% - 105px);
   height: 100%;
