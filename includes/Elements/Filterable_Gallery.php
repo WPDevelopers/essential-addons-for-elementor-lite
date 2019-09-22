@@ -374,7 +374,7 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'fg_item_ratings_switch',
             [
-                'label' => __('Enable Price ?', 'essential-addons-elementor'),
+                'label' => __('Enable Ratings ?', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SWITCHER,
                 'default'   => 'false',
                 'label_on' => esc_html__('Yes', 'essential-addons-elementor'),
