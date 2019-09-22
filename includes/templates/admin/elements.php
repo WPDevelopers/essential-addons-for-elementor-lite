@@ -105,6 +105,12 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/team-member-carousel/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/team-member-carousel/',
                 'is_pro' => true
+            ],
+            [
+                'key'   => 'video-sticky',
+                'title' => __( 'Video Sticky', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/video-sticky/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/video-sticky/',
             ]
         ]
     ],
