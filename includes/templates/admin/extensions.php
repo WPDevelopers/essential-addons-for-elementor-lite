@@ -62,15 +62,15 @@ $extensions = [
                         <div class="eael-elements-info">
                             <p class="eael-el-title">
                                 <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
-                                <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
+                                <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">'.__('Pro', 'essential-addons-elementor').'</sup>' : ''; ?>
                             </p>
                             <a  class="eael-element-info-link" href="<?php echo ($item['demo_link']);?>" target="_blank">
                                 <span class="dashicons dashicons-welcome-view-site"></span>
-                                <span class="eael-info-tooltip">Demo</span>
+                                <span class="eael-info-tooltip"><?php _e('Demo', 'essential-addons-elementor'); ?></span>
                             </a>
                             <a class="eael-element-info-link" href="<?php echo ($item['doc_link']);?>" target="_blank">
                                 <span class="dashicons dashicons-editor-help"></span>
-                                <span class="eael-info-tooltip">Documentation</span>
+                                <span class="eael-info-tooltip"><?php _e('Documentation', 'essential-addons-elementor'); ?></span>
                             </a>
                         </div>
                         <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>
