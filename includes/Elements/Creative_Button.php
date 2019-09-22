@@ -134,7 +134,7 @@ class Creative_Button extends Widget_Base {
 					],
 				]
 			);
-		}else {
+		} else {
 			do_action('eael_creative_button_pro_controls', $this);
 		}
 
