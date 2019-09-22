@@ -2259,7 +2259,7 @@ class Filterable_Gallery extends Widget_Base
                     </ul>
                 </div>
 
-                <form class="fg-layout-3-search-box" id="fg-layout-3-search-box">
+                <form class="fg-layout-3-search-box" id="fg-layout-3-search-box" autocomplete="off">
                     <input type="text" name="fg-frontend-search" placeholder="responsive wordpress" />
                     <button><?php _e('Search', 'essential-addons-elementor'); ?></button> 
                 </form>
