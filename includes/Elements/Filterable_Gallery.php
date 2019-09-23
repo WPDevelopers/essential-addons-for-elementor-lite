@@ -94,7 +94,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_grid_style',
             [
-                'label' => esc_html__('Layout', 'essential-addons-elementor'),
+                'label' => esc_html__('Grid Style', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => [
@@ -122,13 +122,13 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_caption_style',
             [
-                'label' => esc_html__('Layout Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Layout', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'hoverer',
                 'options' => [
                     'hoverer' => __('Overlay', 'essential-addons-elementor'),
                     'card' => __('Card', 'essential-addons-elementor'),
-                    'layout_3'  => __('Layout 3', 'essential-addons-elementor')
+                    'layout_3'  => esc_html__('Search & Filter', 'essential-addons-elementor')
                 ],
             ]
         );
@@ -1866,10 +1866,68 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
+            'fg_sf_controls',
+            [
+                'label' => esc_html__('Controls', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'fg_sf_controls_typography',
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'selector' => '{{WRAPPER}} .fg-filter-trigger > span'
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_controls_icon_space',
+            [
+                'label' => esc_html__('Icon Space', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 1,
+                ],
+                'range' => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-filter-trigger > i' => 'margin-left: {{SIZE}}px;',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_controls_width',
+            [
+                'label' => esc_html__('Width', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [
+                        'max' => 500,
+                    ],
+                    '%' => [
+                        'max'   => 100
+                    ]
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-filter-wrap' => 'flex-basis: {{SIZE}}{{UNIT}};',
+                ]
+            ]
+        );
+
+        $this->add_control(
             'fg_sf',
             [
                 'label' => esc_html__('Form', 'essential-addons-elementor'),
-                'type' => Controls_Manager::HEADING
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
             ]
         );
 
@@ -1891,6 +1949,26 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Placeholder', 'essential-addons-elementor'),
                 'type' => Controls_Manager::TEXT,
                 'default'   => __( 'Search Gallery Item...', 'essential-addons-elementor' ),
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_form_width',
+            [
+                'label' => esc_html__('Width', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [
+                        'max' => 500,
+                    ],
+                    '%' => [
+                        'max'   => 100
+                    ]
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-search-box' => 'flex-basis: {{SIZE}}{{UNIT}};',
+                ]
             ]
         );
 
@@ -2329,7 +2407,7 @@ class Filterable_Gallery extends Widget_Base
             <div class="fg-layout-3-filters-wrap">
 
                 <div class="fg-filter-wrap">
-                    <button id="fg-filter-trigger"><span><?php echo $all_text; ?></span> <i class="fas fa-angle-down"></i></button>
+                    <button id="fg-filter-trigger" class="fg-filter-trigger"><span><?php echo $all_text; ?></span> <i class="fas fa-angle-down"></i></button>
                     <ul class="fg-layout-3-filter-controls">
                         <?php if ($settings['eael_fg_all_label_text']) {?>
                             <li class="control active" data-filter="*"><?php echo $all_text; ?></li>

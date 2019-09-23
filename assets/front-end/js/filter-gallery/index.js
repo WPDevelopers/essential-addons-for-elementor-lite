@@ -2,8 +2,15 @@ var filterableGalleryHandler = function($scope, $) {
 
     var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
         filterTrigger = $scope.find('#fg-filter-trigger'),
+        form = $scope.find('.fg-layout-3-search-box'),
         input = $scope.find('#fg-search-box-input'),
         searchRegex, buttonFilter, timer;
+
+    if(form.length) {
+        form.on('submit', function(e) {
+            e.preventDefault();
+        });
+    }
 
     filterTrigger.on('click', function() {
         filterControls.toggleClass('open-filters');
