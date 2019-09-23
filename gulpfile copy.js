@@ -6,7 +6,6 @@ const cleancss = require("gulp-clean-css");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
-const watch = require('gulp-watch');
 
 /**
  * Primary Compass Configurations
@@ -53,10 +52,6 @@ var files = {
         "assets/front-end/js/!(vendor)**/*.min.js"
     ]
 };
-
-gulp.task('hello', function() {
-    console.log('Hello World!');
-  });
 
 // compile sass
 gulp.task("compileSCSS", function() {
@@ -126,17 +121,3 @@ gulp.task("combineMinJS", function() {
         .pipe(concat("eael.min.js"))
         .pipe(gulp.dest("./" + compassConfig.js));
 });
-
-
-//gulp.watch('app/scss/**/*.scss', ['compileSCSS', 'minifyCSS', 'combineCSS', 'combineMinCSS']); 
-//gulp.task('watch', ['build'], function (){
-    //gulp.watch('assets/front-end/sass/**/*.scss', ['build']);
-    // Other watchers
-//});
-
-//gulp.task('build', ['compileSCSS', 'minifyCSS', 'combineCSS', 'combineMinCSS']);
-gulp.task('build1', ['compileSCSS']);
-gulp.task('build2', ['build1', 'minifyCSS']);
-gulp.task('build3', ['build1', 'combineCSS']);
-gulp.task('build4', ['build1', 'combineMinCSS']);
-gulp.task('build', ['build3']);

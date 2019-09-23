@@ -244,6 +244,7 @@ class Adv_Tabs extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+        
         $this->add_responsive_control(
             'eael_adv_tabs_padding',
             [
