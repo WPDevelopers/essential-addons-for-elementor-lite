@@ -1889,7 +1889,7 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Icon Space', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 1,
+                    'size' => 5,
                 ],
                 'range' => [
                     'px' => [
