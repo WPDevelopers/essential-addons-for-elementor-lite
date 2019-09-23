@@ -918,11 +918,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 35px 35px;
-}
-
-.fg-caption-head {
-    color: #fff;
+	padding: 35px 35px;
+	z-index: 3;
+	color: #fff;
     font-size: 18px;
     font-weight: 700;
 }
