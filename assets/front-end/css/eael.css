@@ -781,6 +781,65 @@
   }
 }
 
+/*---------------------------------*/
+/* 05. Countdown Styles
+/*---------------------------------*/
+/*--- General ---*/
+.eael-countdown-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.eael-countdown-items > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  position: relative;
+}
+
+.eael-countdown-item > div {
+  text-align: center;
+  padding: 20px;
+}
+
+.eael-countdown-label-block .eael-countdown-digits,
+.eael-countdown-label-block .eael-countdown-label {
+  display: block;
+  text-align: center;
+}
+
+.eael-countdown-digits {
+  font-size: 54px;
+  line-height: 1;
+}
+
+.eael-countdown-label {
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.eael-countdown-show-separator .eael-countdown-digits::after {
+  content: ":";
+  position: absolute;
+  left: 98%;
+  z-index: 9999;
+}
+
+.eael-countdown-item:last-child .eael-countdown-digits::after {
+  display: none;
+}
+
+/*--- Style 1 ---*/
+.eael-countdown-items.style-1 .eael-countdown-item > div {
+  background: #262625;
+}
+
 /*--------------------------------*/
 /* 08. Creative Button styles
 /*--------------------------------*/
@@ -1004,65 +1063,6 @@
 
 .eael-creative-button--rayen:hover > span {
   transform: translate3d(0, 100%, 0);
-}
-
-/*---------------------------------*/
-/* 05. Countdown Styles
-/*---------------------------------*/
-/*--- General ---*/
-.eael-countdown-items {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.eael-countdown-items > li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table-cell;
-  position: relative;
-}
-
-.eael-countdown-item > div {
-  text-align: center;
-  padding: 20px;
-}
-
-.eael-countdown-label-block .eael-countdown-digits,
-.eael-countdown-label-block .eael-countdown-label {
-  display: block;
-  text-align: center;
-}
-
-.eael-countdown-digits {
-  font-size: 54px;
-  line-height: 1;
-}
-
-.eael-countdown-label {
-  font-size: 18px;
-  line-height: 1;
-  color: #ffffff;
-}
-
-.eael-countdown-show-separator .eael-countdown-digits::after {
-  content: ":";
-  position: absolute;
-  left: 98%;
-  z-index: 9999;
-}
-
-.eael-countdown-item:last-child .eael-countdown-digits::after {
-  display: none;
-}
-
-/*--- Style 1 ---*/
-.eael-countdown-items.style-1 .eael-countdown-item > div {
-  background: #262625;
 }
 
 table.eael-data-table thead .sorting, table.eael-data-table thead .sorting_desc, table.eael-data-table thead .sorting_asc {
@@ -1342,43 +1342,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: center;
 }
 
-.elementor-panel .pro-feature, .elementor-panel .pro-feature a {
-  color: #a4afb7;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 1.8;
-  font-style: normal;
-}
-
-.elementor-panel .pro-feature a {
-  text-decoration: underline;
-  color: #f54 !important;
-}
-
-.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
-.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
-.elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
-.elementor-control-data_table_header_img_pro_alert .elementor-control-title,
-.elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
-.elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
-.elementor-control-data_table_content_template_pro_alert .elementor-control-title {
-  color: #f54;
-}
-
-.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
-  display: none !important;
-}
-
-.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
-.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
-.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
-.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
-.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
-.elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
-.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
-  color: #f54;
-}
-
 /* -------------------------------- */
 /* 20. Dual Color Heading
 /* -------------------------------- */
@@ -1423,6 +1386,43 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 
 .eael-dual-header-content-align-right {
   text-align: right;
+}
+
+.elementor-panel .pro-feature, .elementor-panel .pro-feature a {
+  color: #a4afb7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  font-style: normal;
+}
+
+.elementor-panel .pro-feature a {
+  text-decoration: underline;
+  color: #f54 !important;
+}
+
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
+.elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_header_img_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_template_pro_alert .elementor-control-title {
+  color: #f54;
+}
+
+.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
+  display: none !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
+  color: #f54;
 }
 
 .eael-fancy-text-container p {
@@ -2920,17 +2920,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 form#fg-layout-3-search-box {
   width: calc(100% - 95px);
   height: 100%;
-}
-
-.fg-layout-3-search-box > button {
-  width: 100px;
-  background: #fa9196;
-  color: #fff;
-  border: 0px solid;
-  padding: 13px 25px;
-  margin: 2px 0;
-  border-radius: 50px;
-  font-weight: 500;
 }
 
 form#fg-layout-3-search-box input {
