@@ -1777,10 +1777,21 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'fg_item_ratings_color',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .fg-caption-head .fg-item-ratings' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'fg_item_ratings_star_color',
+            [
+                'label' => __('Star Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fg-caption-head .fg-item-ratings i' => 'color: {{VALUE}}',
                 ]
             ]
         );
@@ -1923,6 +1934,57 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
+            'fg_sf_controls_background',
+            [
+                'label' => __('Controls Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fg-filter-wrap button' => 'background: {{VALUE}}'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'fg_sf_separator',
+            [
+                'label' => esc_html__('Separator', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'sf_left_border_size',
+            [
+                'label' => esc_html__('Separator Size', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 1,
+                ],
+                'range' => [
+                    'px' => [
+                        'max' => 10,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-filter-wrap button' => 'border-right: {{SIZE}}px solid;',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'sf_left_border_color',
+            [
+                'label' => __('Separator Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#abb5ff',
+                'selectors' => [
+                    '{{WRAPPER}} .fg-filter-wrap button' => 'border-color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_control(
             'fg_sf',
             [
                 'label' => esc_html__('Form', 'essential-addons-elementor'),
@@ -1937,7 +1999,6 @@ class Filterable_Gallery extends Widget_Base
                 'label' => __('Form Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .fg-filter-wrap button' => 'background: {{VALUE}}',
                     '{{WRAPPER}} .fg-layout-3-filters-wrap' => 'background: {{VALUE}}'
                 ]
             ]
@@ -2046,47 +2107,6 @@ class Filterable_Gallery extends Widget_Base
                 'size_units' => ['px', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .fg-layout-3-filter-controls.open-filters' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ]
-            ]
-        );
-        
-
-        $this->add_control(
-            'fg_sf_separator',
-            [
-                'label' => esc_html__('Separator', 'essential-addons-elementor'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'sf_left_border_size',
-            [
-                'label' => esc_html__('Separator Size', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'size' => 1,
-                ],
-                'range' => [
-                    'px' => [
-                        'max' => 10,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .fg-filter-wrap button' => 'border-right: {{SIZE}}px solid;',
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'sf_left_border_color',
-            [
-                'label' => __('Separator Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default'   => '#abb5ff',
-                'selectors' => [
-                    '{{WRAPPER}} .fg-filter-wrap button' => 'border-color: {{VALUE}}',
                 ]
             ]
         );
