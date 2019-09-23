@@ -107,10 +107,10 @@ $elements = [
                 'is_pro' => true
             ],
             [
-                'key'   => 'video-sticky',
-                'title' => __( 'Video Sticky', 'essential-addons-elementor' ),
-                'demo_link' => 'https://essential-addons.com/elementor/video-sticky/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/video-sticky/',
+                'key'   => 'sticky-video',
+                'title' => __( 'Sticky Video', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/sticky-video/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/sticky-video/',
             ]
         ]
     ],

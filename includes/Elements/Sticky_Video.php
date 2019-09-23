@@ -1,30 +1,21 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
-// If this file is called directly, abort.
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) { exit; }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Frontend;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
+use \Elementor\Controls_Manager;
+use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Image_Size;
 
-class Video_Sticky extends Widget_Base {
+class Sticky_Video extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 
 	public function get_name() {
-		return 'video-sticky';
+		return 'sticky-video';
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Video Sticky', 'essential-addons-elementor' );
+		return esc_html__( 'EA Sticky Video', 'essential-addons-elementor' );
 	}
 
 	public function get_icon() {
@@ -262,7 +253,7 @@ class Video_Sticky extends Widget_Base {
 		$this->add_control(
 			'eael_video_image_overlay_choose_image',
 			[
-				'label'     => __( 'Choose Image', 'essential-addons-elementor' ),
+				'label'     => __( 'Choose Image1', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
 				'label_block' => true,
 				'condition'     => [
@@ -271,6 +262,9 @@ class Video_Sticky extends Widget_Base {
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
+				'selectors'     => [
+                    '{{WRAPPER}} div.eael-sticky-video-player'  => 'background-image: {{VALUE}}'
+                ]
             ]
 		);
 
@@ -317,21 +311,116 @@ class Video_Sticky extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-          
     }
 
     protected function render() {
 		$settings = $this->get_settings();
 		$source = $settings['eael_video_source'];
+		$id = $settings['eael_video_source_youtube'];
+		?>
+		<div class="eael-sticky-video-wrapper">
+            <div class="eael-sticky-video-player" data-id="<?php echo esc_attr( $id ); ?>">
+                <div class="owp-play"><i class="eicon-play"></i></div>
+            </div>
+		</div>
+
+		<style>
+		.eael-sticky-video-wrapper {
+			position: relative;
+			height: 0;
+			padding-bottom: 56.25%;
+		}
 		
+		.eael-sticky-video-wrapper iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			border: 0;
+			line-height: 1;
+		}
+		
+		.eael-sticky-video-player {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			background-position: 50%;
+			cursor: pointer;
+			text-align: center;
+		}
+		
+		.eael-sticky-video-player img {
+			display: block;
+			width: 100%;
+		}
+		
+		.owp-play {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translateX(-50%) translateY(-50%);
+			-ms-transform: translateX(-50%) translateY(-50%);
+			transform: translateX(-50%) translateY(-50%);
+		}
+		
+		.owp-play i {
+			font-size: 100px;
+			color: #fff;
+			opacity: 0.8;
+			text-shadow: 1px 0 6px rgba(0, 0, 0, 0.3);
+			-webkit-transition: all .5s;
+			-o-transition: all .5s;
+			transition: all .5s;
+		}
+		
+		.eael-sticky-video-player:hover .owp-play i {
+			opacity: 1;
+		}
+		</style>
+		<script>
+		document.addEventListener( 'DOMContentLoaded', function() {
+			var i,
+			video = document.getElementsByClassName( 'eael-sticky-video-player' );
+				
+			for (i = 0; i < video.length; i++) {
+		
+				// We get the thumbnail image from the YouTube ID
+				//video[i].style.backgroundImage = 'url(//i.ytimg.com/vi/' + video[i].dataset.id + '/maxresdefault.jpg)';
+				//video[i].style.backgroundImage = 'url(https://www.rowletteagles.org/wp-content/uploads/2015/06/bg-video-player.jpg)';
+				video[i].onclick = function() {
+					var iframe  = document.createElement( 'iframe' ),
+						embed   = 'https://www.youtube.com/embed/ID?autoplay=1&rel=0&controls=1&showinfo=0&mute=0&wmode=opaque';
+					iframe.setAttribute( 'src', embed.replace( 'ID', this.dataset.id ) );
+					iframe.setAttribute( 'frameborder', '0' );
+					iframe.setAttribute( 'allowfullscreen', '1' );
+					this.parentNode.replaceChild( iframe, this );
+				}
+		
+			}
+		
+		} );
+		</script>
+		<?php
+	}
+	
+	protected function render1() {
+		$settings = $this->get_settings();
+		$source = $settings['eael_video_source'];
+		?>
+		<div class="eael_video_sticky_wrapper">
+		<?php
 		if('youtube'==$source):
-			$src = $settings['eael_video_source_youtube'];
+			echo $src = $settings['eael_video_source_youtube'];
 			?>
-			<div class="eael_video_sticky_wrapper">
 			<iframe width="420" height="315" src="<?php echo esc_url($src); ?>"></iframe>
-			</div>
 			<?php
-		endif;
+		endif; ?>
+		</div>
+		<?php
     }
 
 }

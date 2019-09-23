@@ -296,11 +296,11 @@ $config = [
                 ],
             ],
         ],
-        'video-sticky' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Video_Sticky',
+        'sticky-video' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Sticky_Video',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/video-sticky/index.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/sticky-video/index.min.css',
                 ],
             ],
         ],
