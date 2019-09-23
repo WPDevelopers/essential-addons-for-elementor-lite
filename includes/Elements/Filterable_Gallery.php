@@ -2574,7 +2574,18 @@ class Filterable_Gallery extends Widget_Base
                                         $html .= '<div class="fg-item-ratings"><i class="fas fa-star"></i> '.$item['ratings'].'</div>';
                                     }
                                 $html .= '</div>';
-                                $html .= ($this->eael_render_fg_buttons($settings, $item));
+
+                                if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
+                                    $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
+                                    $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
+        
+                                    $html .= '<a href="' . esc_url($video_url) . '" class="video-popup eael-magnific-video-link">';
+                                        $html .= '<div class="video-popup-bg"></div>';
+                                        if (!empty($icon_url)) $html .= '<img src="' . esc_url($icon_url) . '">';
+                                    $html .= '</a>';
+                                }else {
+                                    $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                }
                             $html .= '</div>';
 
                     $html .= '</div>';
