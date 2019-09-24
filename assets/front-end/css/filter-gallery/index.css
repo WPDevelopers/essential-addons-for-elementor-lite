@@ -828,17 +828,20 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   list-style: none;
 }
 
-.fg-layout-3-item-content h5 {
+.fg-layout-3-item-content {
+  text-align: center;
+}
+
+.fg-layout-3-item-content .fg-item-title {
   font-size: 18px;
-  color: #031d3c;
   line-height: 1;
   font-weight: 500;
   margin: 0;
+  transition: 300ms;
 }
 
-.fg-layout-3-item-content p {
+.fg-layout-3-item-content .fg-item-content p {
   font-size: 13px;
-  color: #7f8995;
   font-weight: 400;
 }
 
@@ -866,6 +869,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .fg-layout-3-filter-controls li.control {
   padding: 5px 5px 5px 10px;
   cursor: pointer;
+  transition: 300ms;
 }
 
 .fg-layout-3-filters-wrap {
@@ -894,7 +898,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .fg-layout-3-search-box {
@@ -938,17 +942,19 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .fg-layout-3-filters-wrap {
   height: 55px;
-  background: #f7f8ff;
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.fg-layout-3-filters-wrap .fg-layout-3-search-box {
+  background: #f7f8ff;
 }
 
 .fg-layout-3-item-thumb {
   position: relative;
-  border-top: 30px solid #fff;
-  border-left: 20px solid #fff;
-  border-right: 20px solid #fff;
+  overflow: hidden;
 }
 
 .fg-layout-3-item-thumb .gallery-item-buttons {
