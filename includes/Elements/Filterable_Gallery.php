@@ -2118,6 +2118,18 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
+            'fg_sf_controls_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#7f8995',
+                'selectors' => [
+                    '{{WRAPPER}} .fg-filter-wrap button' => 'color: {{VALUE}}'
+                ]
+            ]
+        );
+
+        $this->add_control(
             'fg_sf_controls_background',
             [
                 'label' => __('Controls Background', 'essential-addons-elementor'),
