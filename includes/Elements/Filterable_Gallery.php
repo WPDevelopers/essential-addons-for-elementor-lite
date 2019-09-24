@@ -1762,7 +1762,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'fg_item_price_color',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .fg-caption-head .fg-item-price' => 'color: {{VALUE}}',
