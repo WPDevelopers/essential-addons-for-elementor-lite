@@ -270,60 +270,6 @@
   }
 }
 
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
-}
-
 /*--------------------------*/
 /* 19. Call To Action
 /*-------------------------*/
@@ -725,6 +671,117 @@
   height: 20px;
 }
 
+.eael-ticker-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.eael-ticker-wrap .ticker-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.eael-ticker-wrap .eael-ticker {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
+}
+
+.eael-ticker-wrap .swiper-button-prev {
+  left: auto !important;
+  right: 25px;
+  transform: translateY(-50%) rotate(180deg) !important;
+}
+
+.eael-ticker-wrap div.swiper-slide,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
+  opacity: 0 !important;
+}
+
+.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .eael-ticker-wrap {
+    flex-flow: row wrap;
+  }
+
+  .content-ticker-pagination {
+    display: none;
+  }
+}
+
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
+}
+
 /*---------------------------------*/
 /* 05. Countdown Styles
 /*---------------------------------*/
@@ -784,61 +841,275 @@
   background: #262625;
 }
 
-.eael-ticker-wrap {
-  overflow: hidden;
+/*--------------------------------*/
+/* 08. Creative Button styles
+/*--------------------------------*/
+.eael-creative-button-align-center {
+  text-align: center;
+}
+
+.eael-creative-button-wrapper {
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
 }
 
-.eael-ticker-wrap .ticker-badge {
+.eael-creative-button {
   flex: 0 0 auto;
-  padding: 8px 12px;
+  min-width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  border-radius: 2px;
+  padding: 20px 30px;
+  font-size: 16px;
+  line-height: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.eael-ticker-wrap .eael-ticker {
+.eael-creative-button-align-center .eael-creative-button {
+  float: none;
+  display: inline-block;
+}
+
+.eael-creative-button:focus {
+  outline: none;
+}
+
+.eael-creative-button > span {
+  vertical-align: middle;
+}
+
+/*--------------------------------------------*/
+/* 09. Individual eael-creative-button styles
+/*--------------------------------------------*/
+/*--- Winona ---*/
+.eael-creative-button--winona {
   overflow: hidden;
-  flex: 1 1 auto;
+  padding: 0 !important;
+  transition: border-color 0.3s, background-color 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-.eael-ticker-wrap .eael-ticker .ticker-content {
-  padding: 8px 12px;
-  line-height: 1.8;
+.eael-creative-button--winona::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translate3d(0, 25%, 0);
 }
 
-.eael-ticker-wrap .eael-ticker .ticker-content p {
-  margin: 0;
+.eael-creative-button--winona > span {
+  display: block;
 }
 
-.eael-ticker-wrap .swiper-button-prev {
-  left: auto !important;
-  right: 25px;
-  transform: translateY(-50%) rotate(180deg) !important;
+.eael-creative-button--winona::after,
+.eael-creative-button--winona > span {
+  padding: 1em 2em;
+  transition: transform 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-.eael-ticker-wrap div.swiper-slide,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
-  opacity: 0 !important;
+.eael-creative-button--winona:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
-.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
+.eael-creative-button--winona:hover > span {
+  opacity: 0;
+  transform: translate3d(0, -25%, 0);
 }
 
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+/*--- Ujarak ---*/
+.eael-creative-button--ujarak {
+  transition: border-color 0.4s, color 0.4s;
+}
+
+.eael-creative-button--ujarak::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  transform: scale3d(0.7, 1, 1);
+  transition: transform 0.4s, opacity 0.4s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--ujarak,
+.eael-creative-button--ujarak::before {
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--ujarak:hover::before {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/*--- Wayra ---*/
+.eael-creative-button--wayra {
+  overflow: hidden;
+  transition: border-color 0.3s, color 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--wayra::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  z-index: -1;
+  transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+  transform-origin: 0% 100%;
+  transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+}
+
+.eael-creative-button--wayra:hover::before {
+  opacity: 1;
+  transform: rotate3d(0, 0, 1, 0deg);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/*--- Tamaya ---*/
+.eael-creative-button--tamaya {
+  overflow: hidden;
+}
+
+.eael-creative-button--tamaya::before,
+.eael-creative-button--tamaya::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  overflow: hidden;
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--tamaya::before {
+  top: 0;
+  padding: 20px 30px;
+}
+
+.eael-creative-button--tamaya::after {
+  bottom: 0;
+  line-height: 0;
+}
+
+.eael-creative-button--tamaya:hover::after {
+  bottom: -1px;
+}
+
+.eael-creative-button--tamaya > span {
+  display: block;
+  transform: scale3d(0.2, 0.2, 1);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.eael-creative-button--tamaya:hover::before {
+  transform: translate3d(0, -100%, 0);
+}
+
+.eael-creative-button--tamaya:hover::after {
+  transform: translate3d(0, 100%, 0);
+}
+
+.eael-creative-button--tamaya:hover > span {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+/*--- Rayen ---*/
+.eael-creative-button--rayen {
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.eael-creative-button--rayen::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.eael-creative-button--rayen > span {
+  display: block;
+}
+
+.eael-creative-button--rayen::before,
+.eael-creative-button--rayen > span {
+  padding: 1em 2em;
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+
+.eael-creative-button--rayen:hover::before {
+  transform: translate3d(0, 0, 0);
+}
+
+.eael-creative-button--rayen:hover > span {
+  transform: translate3d(0, 100%, 0);
+}
+
+/* -------------------------------- */
+/* 20. Dual Color Heading
+/* -------------------------------- */
+.eael-dual-header {
+  display: block;
+  margin-bottom: 50px;
+}
+
+.eael-dual-header .title,
+.eael-dual-header .title span {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0px;
+}
+
+.eael-dual-header .subtext {
+  font-size: 16px;
+  display: block;
+}
+
+.eael-dual-header i {
+  display: block;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  font-size: 36px;
+}
+
+.eael-dual-header .title span.lead {
+  color: #1abc9c;
+}
+
+/*--- Builder Related Css ---*/
+.eael-dual-header-content-align-center {
+  text-align: center;
+}
+
+.eael-dual-header-content-align-left {
   text-align: left;
 }
 
-@media only screen and (max-width: 767px) {
-  .eael-ticker-wrap {
-    flex-flow: row wrap;
-  }
-
-  .content-ticker-pagination {
-    display: none;
-  }
+.eael-dual-header-content-align-right {
+  text-align: right;
 }
 
 table.eael-data-table thead .sorting, table.eael-data-table thead .sorting_desc, table.eael-data-table thead .sorting_asc {
@@ -1118,231 +1389,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: center;
 }
 
-/*--------------------------------*/
-/* 08. Creative Button styles
-/*--------------------------------*/
-.eael-creative-button-align-center {
-  text-align: center;
-}
-
-.eael-creative-button-wrapper {
-  display: flex;
-}
-
-.eael-creative-button {
-  flex: 0 0 auto;
-  min-width: 150px;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-  border-radius: 2px;
-  padding: 20px 30px;
-  font-size: 16px;
-  line-height: 1;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.eael-creative-button-align-center .eael-creative-button {
-  float: none;
-  display: inline-block;
-}
-
-.eael-creative-button:focus {
-  outline: none;
-}
-
-.eael-creative-button > span {
-  vertical-align: middle;
-}
-
-/*--------------------------------------------*/
-/* 09. Individual eael-creative-button styles
-/*--------------------------------------------*/
-/*--- Winona ---*/
-.eael-creative-button--winona {
-  overflow: hidden;
-  padding: 0 !important;
-  transition: border-color 0.3s, background-color 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--winona::after {
-  content: attr(data-text);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transform: translate3d(0, 25%, 0);
-}
-
-.eael-creative-button--winona > span {
-  display: block;
-}
-
-.eael-creative-button--winona::after,
-.eael-creative-button--winona > span {
-  padding: 1em 2em;
-  transition: transform 0.3s, opacity 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--winona:hover::after {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.eael-creative-button--winona:hover > span {
-  opacity: 0;
-  transform: translate3d(0, -25%, 0);
-}
-
-/*--- Ujarak ---*/
-.eael-creative-button--ujarak {
-  transition: border-color 0.4s, color 0.4s;
-}
-
-.eael-creative-button--ujarak::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0;
-  transform: scale3d(0.7, 1, 1);
-  transition: transform 0.4s, opacity 0.4s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--ujarak,
-.eael-creative-button--ujarak::before {
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--ujarak:hover::before {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/*--- Wayra ---*/
-.eael-creative-button--wayra {
-  overflow: hidden;
-  transition: border-color 0.3s, color 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--wayra::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150%;
-  height: 100%;
-  z-index: -1;
-  transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
-  transform-origin: 0% 100%;
-  transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
-}
-
-.eael-creative-button--wayra:hover::before {
-  opacity: 1;
-  transform: rotate3d(0, 0, 1, 0deg);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-/*--- Tamaya ---*/
-.eael-creative-button--tamaya {
-  overflow: hidden;
-}
-
-.eael-creative-button--tamaya::before,
-.eael-creative-button--tamaya::after {
-  content: attr(data-text);
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  left: 0;
-  overflow: hidden;
-  transition: transform 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--tamaya::before {
-  top: 0;
-  padding: 20px 30px;
-}
-
-.eael-creative-button--tamaya::after {
-  bottom: 0;
-  line-height: 0;
-}
-
-.eael-creative-button--tamaya:hover::after {
-  bottom: -1px;
-}
-
-.eael-creative-button--tamaya > span {
-  display: block;
-  transform: scale3d(0.2, 0.2, 1);
-  opacity: 0;
-  transition: transform 0.3s, opacity 0.3s;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.eael-creative-button--tamaya:hover::before {
-  transform: translate3d(0, -100%, 0);
-}
-
-.eael-creative-button--tamaya:hover::after {
-  transform: translate3d(0, 100%, 0);
-}
-
-.eael-creative-button--tamaya:hover > span {
-  opacity: 1;
-  transform: scale3d(1, 1, 1);
-}
-
-/*--- Rayen ---*/
-.eael-creative-button--rayen {
-  overflow: hidden;
-  padding: 0 !important;
-}
-
-.eael-creative-button--rayen::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: translate3d(-100%, 0, 0);
-}
-
-.eael-creative-button--rayen > span {
-  display: block;
-}
-
-.eael-creative-button--rayen::before,
-.eael-creative-button--rayen > span {
-  padding: 1em 2em;
-  transition: transform 0.3s;
-  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-}
-
-.eael-creative-button--rayen:hover::before {
-  transform: translate3d(0, 0, 0);
-}
-
-.eael-creative-button--rayen:hover > span {
-  transform: translate3d(0, 100%, 0);
-}
-
 .elementor-panel .pro-feature, .elementor-panel .pro-feature a {
   color: #a4afb7;
   text-transform: uppercase;
@@ -1378,52 +1424,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 .elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
 .elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
   color: #f54;
-}
-
-/* -------------------------------- */
-/* 20. Dual Color Heading
-/* -------------------------------- */
-.eael-dual-header {
-  display: block;
-  margin-bottom: 50px;
-}
-
-.eael-dual-header .title,
-.eael-dual-header .title span {
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 48px;
-  margin: 10px 0px;
-}
-
-.eael-dual-header .subtext {
-  font-size: 16px;
-  display: block;
-}
-
-.eael-dual-header i {
-  display: block;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
-  font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-  color: #1abc9c;
-}
-
-/*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
-  text-align: center;
-}
-
-.eael-dual-header-content-align-left {
-  text-align: left;
-}
-
-.eael-dual-header-content-align-right {
-  text-align: right;
 }
 
 .eael-fancy-text-container p {
@@ -3211,7 +3211,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   background: #f7f8ff;
   height: 55px;
   border-right: 1px solid #abb5ff;
-  border-radius: 4px 0px 0 4px;
+  border-radius: 10px 0px 0 10px;
   outline: none;
   text-align: center;
   position: relative;
@@ -3605,97 +3605,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   width: 100%;
 }
 
-/*------------------------------*/
-/* 34. Image accordion
-/*------------------------------*/
-.eael-img-accordion {
-  display: flex;
-  height: 50vh;
-}
-
-.eael-img-accordion a {
-  position: relative;
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: flex .4s;
-}
-
-.eael-grow-accordion {
-  flex: 3;
-}
-
-.eael-img-accordion .overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: background-color .4s;
-}
-
-.eael-img-accordion .overlay .overlay-inner {
-  z-index: 1;
-}
-
-.eael-img-accordion a:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-img-accordion .overlay-inner * {
-  visibility: hidden;
-  opacity: 0;
-  transform-style: preserve-3d;
-}
-
-.eael-img-accordion .overlay h2 {
-  color: #fff;
-  transform: translate3d(0, -60px, 0);
-}
-
-.eael-img-accordion .overlay p {
-  color: #fff;
-  transform: translate3d(0, 60px, 0);
-}
-
-.eael-img-accordion .overlay-inner-show * {
-  opacity: 1;
-  visibility: visible;
-  transform: none !important;
-  transition: all .3s .3s;
-}
-
-@media screen and (max-width: 800px) {
-  .eael-img-accordion {
-    flex-direction: column;
-  }
-
-  .eael-img-accordion a:hover {
-    flex: 1;
-  }
-
-  .eael-img-accordion a:hover .overlay {
-    background-color: transparent;
-  }
-}
-
 /* ------------------------ */
 /* 17. Infobox Style
 /* ------------------------ */
@@ -3892,396 +3801,95 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   border-radius: 15px;
 }
 
-/*-----------------------------*/
-/* 15. Post Grid Style
-/*-----------------------------*/
-.eael-post-grid {
-  margin: 0 -10px;
-}
-
-.eael-grid-post {
-  float: left;
-  padding: 10px;
-}
-
-.eael-post-carousel .eael-grid-post {
-  float: none;
-  padding: 0;
-}
-
-.eael-grid-post-holder {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.eael-grid-post-holder-inner {
-  height: 100%;
-}
-
-.eael-entry-media {
-  position: relative;
-}
-
-.eael-entry-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.eael-entry-overlay > a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-}
-
-.eael-entry-title {
-  margin: 10px 0 5px;
-  font-size: 1.2em;
-}
-
-.eael-entry-thumbnail img {
-  width: 100%;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-.eael-entry-thumbnail > img {
-  height: 100%;
-}
-
-.eael-entry-footer .eael-author-avatar {
-  width: 50px;
-}
-
-.eael-entry-footer .eael-author-avatar .avatar {
-  border-radius: 50%;
-}
-
-.eael-post-grid .eael-entry-footer .eael-entry-meta {
-  padding-left: 8px;
-  text-align: left;
-}
-
-.eael-grid-post .eael-entry-meta {
+/*------------------------------*/
+/* 34. Image accordion
+/*------------------------------*/
+.eael-img-accordion {
   display: flex;
-  flex-direction: row;
+  height: 50vh;
 }
 
-.eael-grid-post .eael-entry-footer .eael-entry-meta {
-  flex-direction: column;
-}
-
-.eael-entry-meta > div {
-  font-size: 12px;
-  line-height: 1.2;
-  padding-bottom: 5px;
-}
-
-.eael-grid-post-excerpt p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.eael-entry-meta .eael-entry-footer .eael-posted-by {
-  display: block;
-}
-
-.eael-grid-post .eael-entry-wrapper,
-.eael-grid-post .eael-entry-footer {
-  padding: 15px;
-}
-
-.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on {
-  padding-left: 5px;
-}
-
-.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on::before {
-  content: '\f111';
-  font-family: FontAwesome;
-  color: inherit;
-  opacity: .4;
-  font-size: .8em;
-  padding-right: 7px;
-}
-
-/*--- Post Grid Thumbnail Hover Effects ---*/
-.eael-entry-media {
+.eael-img-accordion a {
   position: relative;
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: flex .4s;
 }
 
-.eael-entry-overlay {
+.eael-grow-accordion {
+  flex: 3;
+}
+
+.eael-img-accordion .overlay {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color .4s;
 }
 
-.eael-entry-overlay > i {
+.eael-img-accordion .overlay .overlay-inner {
+  z-index: 1;
+}
+
+.eael-img-accordion a:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-img-accordion .overlay-inner * {
+  visibility: hidden;
+  opacity: 0;
+  transform-style: preserve-3d;
+}
+
+.eael-img-accordion .overlay h2 {
   color: #fff;
+  transform: translate3d(0, -60px, 0);
 }
 
-/*--- fade in ---*/
-.eael-entry-overlay.fade-in {
-  visibility: hidden;
-  opacity: 0;
-  transition: 300ms;
+.eael-img-accordion .overlay p {
+  color: #fff;
+  transform: translate3d(0, 60px, 0);
 }
 
-.eael-entry-media:hover .eael-entry-overlay.fade-in {
+.eael-img-accordion .overlay-inner-show * {
+  opacity: 1;
   visibility: visible;
-  opacity: 1;
+  transform: none !important;
+  transition: all .3s .3s;
 }
 
-.eael-entry-media:hover .eael-entry-overlay.fade-in > i {
-  transform: translate(0);
-  opacity: 1;
-}
-
-/*--- zoom in --- */
-.eael-entry-overlay.zoom-in {
-  transform: scale(0.9);
-  visibility: hidden;
-  opacity: 0;
-  transition: 300ms;
-}
-
-.eael-entry-media:hover .eael-entry-overlay.zoom-in {
-  visibility: visible;
-  opacity: 1;
-  transform: scale(1);
-}
-
-/*--- slide up ---*/
-.eael-entry-overlay.slide-up {
-  transform: translateY(100%);
-  visibility: hidden;
-  opacity: 0;
-  transition: 300ms;
-}
-
-.eael-entry-media:hover .eael-entry-overlay.slide-up {
-  transform: translateY(0);
-  visibility: visible;
-  opacity: 1;
-}
-
-.eael-entry-media {
-  overflow: hidden;
-}
-
-/*--- Post Grid & Carousel Hover Styles ---*/
-.eael-entry-media.grid-hover-style-fade-in .eael-entry-overlay {
-  opacity: 0;
-}
-
-.eael-entry-media.grid-hover-style-fade-in:hover .eael-entry-overlay {
-  opacity: 1;
-}
-
-.eael-entry-media.grid-hover-style-none .eael-entry-overlay {
-  display: none;
-}
-
-.eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
-  transform: scale(0.4);
-  opacity: 0;
-}
-
-.eael-entry-media.grid-hover-style-zoom-in:hover .eael-entry-overlay {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay {
-  transform: translateY(-100%);
-}
-
-.eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay > i {
-  transform: translateY(-100px);
-  transition-delay: 100ms;
-  transition-duration: 300ms;
-}
-
-.eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay {
-  transform: translate(0);
-}
-
-.eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay > i {
-  transform: translateY(0);
-}
-
-.eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay {
-  transform: translateY(100%);
-  visibility: hidden;
-  opacity: 0;
-}
-
-.eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay > i {
-  transform: translateY(100px);
-  transition-delay: 100ms;
-  transition-duration: 300ms;
-}
-
-.eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay {
-  transform: translate(0);
-  visibility: visible;
-  opacity: 1;
-}
-
-.eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay > i {
-  transform: translateY(0);
-}
-
-/*--- Post Grid Column Styles ---*/
-.eael-col-1 .eael-post-grid-column {
-  float: none;
-  width: 100%;
-}
-
-.eael-col-2 .eael-post-grid-column {
-  float: left;
-  width: 50%;
-}
-
-.eael-col-3 .eael-post-grid-column {
-  float: left;
-  width: 33.3333%;
-}
-
-.eael-col-4 .eael-post-grid-column {
-  float: left;
-  width: 25%;
-}
-
-.eael-col-5 .eael-post-grid-column {
-  float: left;
-  width: 20%;
-}
-
-.eael-col-6 .eael-post-grid-column {
-  float: left;
-  width: 16.6666%;
-}
-
-@media only screen and (max-width: 979px) {
-  .eael-col-1 .eael-post-grid-column,
-  .eael-col-2 .eael-post-grid-column,
-  .eael-col-3 .eael-post-grid-column,
-  .eael-col-4 .eael-post-grid-column,
-  .eael-col-5 .eael-post-grid-column,
-  .eael-col-6 .eael-post-grid-column {
-    width: 33.3333%;
+@media screen and (max-width: 800px) {
+  .eael-img-accordion {
+    flex-direction: column;
   }
-}
-@media only screen and (max-width: 767px) {
-  .eael-col-1 .eael-post-grid-column,
-  .eael-col-2 .eael-post-grid-column,
-  .eael-col-3 .eael-post-grid-column,
-  .eael-col-4 .eael-post-grid-column,
-  .eael-col-5 .eael-post-grid-column,
-  .eael-col-6 .eael-post-grid-column {
-    width: 50%;
+
+  .eael-img-accordion a:hover {
+    flex: 1;
   }
-}
-@media only screen and (max-width: 480px) {
-  .eael-col-1 .eael-post-grid-column,
-  .eael-col-2 .eael-post-grid-column,
-  .eael-col-3 .eael-post-grid-column,
-  .eael-col-4 .eael-post-grid-column,
-  .eael-col-5 .eael-post-grid-column,
-  .eael-col-6 .eael-post-grid-column {
-    float: none;
-    width: 100%;
+
+  .eael-img-accordion a:hover .overlay {
+    background-color: transparent;
   }
-}
-.eael-author-avatar > a {
-  display: block;
-}
-
-.eael-entry-footer {
-  overflow: hidden;
-  display: flex;
-}
-
-.eael-entry-footer > div {
-  display: inline-block;
-  float: left;
-}
-
-/*----------------------*/
-/* 13. Ninja Form Styles
-/*----------------------*/
-.eael-ninja-container input,
-.eael-ninja-container textarea {
-  height: auto;
-  padding: 10px;
-}
-
-.eael-contact-form-align-center .eael-ninja-container,
-.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form-align-left .eael-ninja-container,
-.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form-align-right .eael-ninja-container,
-.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: right;
-  width: auto;
-}
-
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-ninja-container .nf-field .nf-field-element input[type="password"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-ninja-container .nf-field .nf-field-element input[type="url"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-ninja-container .nf-field .nf-field-element textarea {
-  max-width: 100%;
-}
-
-.eael-ninja-form .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form-title-yes .nf-form-title {
-  display: block;
-}
-
-.eael-ninja-form .title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form.title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form .nf-field-label {
-  display: none;
-}
-
-.eael-ninja-form-labels-yes .nf-field-label {
-  display: block;
-}
-
-.eael-ninja-form .submit-container input[type=button] {
-  border: 0;
-  border-radius: 0;
-}
-
-.eael-ninja-form-button-full-width .submit-container input[type=button] {
-  width: 100%;
 }
 
 /* ------------------------ */
@@ -4740,6 +4348,398 @@ button.mfp-close:hover {
     padding-left: 6px;
     padding-right: 6px;
   }
+}
+
+/*----------------------*/
+/* 13. Ninja Form Styles
+/*----------------------*/
+.eael-ninja-container input,
+.eael-ninja-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-align-center .eael-ninja-container,
+.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-align-left .eael-ninja-container,
+.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-align-right .eael-ninja-container,
+.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: right;
+  width: auto;
+}
+
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-ninja-container .nf-field .nf-field-element input[type="password"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-ninja-container .nf-field .nf-field-element input[type="url"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-ninja-container .nf-field .nf-field-element textarea {
+  max-width: 100%;
+}
+
+.eael-ninja-form .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form-title-yes .nf-form-title {
+  display: block;
+}
+
+.eael-ninja-form .title-description-hide .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form.title-description-hide .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form .nf-field-label {
+  display: none;
+}
+
+.eael-ninja-form-labels-yes .nf-field-label {
+  display: block;
+}
+
+.eael-ninja-form .submit-container input[type=button] {
+  border: 0;
+  border-radius: 0;
+}
+
+.eael-ninja-form-button-full-width .submit-container input[type=button] {
+  width: 100%;
+}
+
+/*-----------------------------*/
+/* 15. Post Grid Style
+/*-----------------------------*/
+.eael-post-grid {
+  margin: 0 -10px;
+}
+
+.eael-grid-post {
+  float: left;
+  padding: 10px;
+}
+
+.eael-post-carousel .eael-grid-post {
+  float: none;
+  padding: 0;
+}
+
+.eael-grid-post-holder {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.eael-grid-post-holder-inner {
+  height: 100%;
+}
+
+.eael-entry-media {
+  position: relative;
+}
+
+.eael-entry-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.eael-entry-overlay > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.eael-entry-title {
+  margin: 10px 0 5px;
+  font-size: 1.2em;
+}
+
+.eael-entry-thumbnail img {
+  width: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.eael-entry-thumbnail > img {
+  height: 100%;
+}
+
+.eael-entry-footer .eael-author-avatar {
+  width: 50px;
+}
+
+.eael-entry-footer .eael-author-avatar .avatar {
+  border-radius: 50%;
+}
+
+.eael-post-grid .eael-entry-footer .eael-entry-meta {
+  padding-left: 8px;
+  text-align: left;
+}
+
+.eael-grid-post .eael-entry-meta {
+  display: flex;
+  flex-direction: row;
+}
+
+.eael-grid-post .eael-entry-footer .eael-entry-meta {
+  flex-direction: column;
+}
+
+.eael-entry-meta > div {
+  font-size: 12px;
+  line-height: 1.2;
+  padding-bottom: 5px;
+}
+
+.eael-grid-post-excerpt p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.eael-entry-meta .eael-entry-footer .eael-posted-by {
+  display: block;
+}
+
+.eael-grid-post .eael-entry-wrapper,
+.eael-grid-post .eael-entry-footer {
+  padding: 15px;
+}
+
+.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on {
+  padding-left: 5px;
+}
+
+.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on::before {
+  content: '\f111';
+  font-family: FontAwesome;
+  color: inherit;
+  opacity: .4;
+  font-size: .8em;
+  padding-right: 7px;
+}
+
+/*--- Post Grid Thumbnail Hover Effects ---*/
+.eael-entry-media {
+  position: relative;
+}
+
+.eael-entry-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-entry-overlay > i {
+  color: #fff;
+}
+
+/*--- fade in ---*/
+.eael-entry-overlay.fade-in {
+  visibility: hidden;
+  opacity: 0;
+  transition: 300ms;
+}
+
+.eael-entry-media:hover .eael-entry-overlay.fade-in {
+  visibility: visible;
+  opacity: 1;
+}
+
+.eael-entry-media:hover .eael-entry-overlay.fade-in > i {
+  transform: translate(0);
+  opacity: 1;
+}
+
+/*--- zoom in --- */
+.eael-entry-overlay.zoom-in {
+  transform: scale(0.9);
+  visibility: hidden;
+  opacity: 0;
+  transition: 300ms;
+}
+
+.eael-entry-media:hover .eael-entry-overlay.zoom-in {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/*--- slide up ---*/
+.eael-entry-overlay.slide-up {
+  transform: translateY(100%);
+  visibility: hidden;
+  opacity: 0;
+  transition: 300ms;
+}
+
+.eael-entry-media:hover .eael-entry-overlay.slide-up {
+  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+}
+
+.eael-entry-media {
+  overflow: hidden;
+}
+
+/*--- Post Grid & Carousel Hover Styles ---*/
+.eael-entry-media.grid-hover-style-fade-in .eael-entry-overlay {
+  opacity: 0;
+}
+
+.eael-entry-media.grid-hover-style-fade-in:hover .eael-entry-overlay {
+  opacity: 1;
+}
+
+.eael-entry-media.grid-hover-style-none .eael-entry-overlay {
+  display: none;
+}
+
+.eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
+  transform: scale(0.4);
+  opacity: 0;
+}
+
+.eael-entry-media.grid-hover-style-zoom-in:hover .eael-entry-overlay {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay {
+  transform: translateY(-100%);
+}
+
+.eael-entry-media.grid-hover-style-animate-down .eael-entry-overlay > i {
+  transform: translateY(-100px);
+  transition-delay: 100ms;
+  transition-duration: 300ms;
+}
+
+.eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay {
+  transform: translate(0);
+}
+
+.eael-entry-media.grid-hover-style-animate-down:hover .eael-entry-overlay > i {
+  transform: translateY(0);
+}
+
+.eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay {
+  transform: translateY(100%);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.eael-entry-media.grid-hover-style-animate-up .eael-entry-overlay > i {
+  transform: translateY(100px);
+  transition-delay: 100ms;
+  transition-duration: 300ms;
+}
+
+.eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay {
+  transform: translate(0);
+  visibility: visible;
+  opacity: 1;
+}
+
+.eael-entry-media.grid-hover-style-animate-up:hover .eael-entry-overlay > i {
+  transform: translateY(0);
+}
+
+/*--- Post Grid Column Styles ---*/
+.eael-col-1 .eael-post-grid-column {
+  float: none;
+  width: 100%;
+}
+
+.eael-col-2 .eael-post-grid-column {
+  float: left;
+  width: 50%;
+}
+
+.eael-col-3 .eael-post-grid-column {
+  float: left;
+  width: 33.3333%;
+}
+
+.eael-col-4 .eael-post-grid-column {
+  float: left;
+  width: 25%;
+}
+
+.eael-col-5 .eael-post-grid-column {
+  float: left;
+  width: 20%;
+}
+
+.eael-col-6 .eael-post-grid-column {
+  float: left;
+  width: 16.6666%;
+}
+
+@media only screen and (max-width: 979px) {
+  .eael-col-1 .eael-post-grid-column,
+  .eael-col-2 .eael-post-grid-column,
+  .eael-col-3 .eael-post-grid-column,
+  .eael-col-4 .eael-post-grid-column,
+  .eael-col-5 .eael-post-grid-column,
+  .eael-col-6 .eael-post-grid-column {
+    width: 33.3333%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .eael-col-1 .eael-post-grid-column,
+  .eael-col-2 .eael-post-grid-column,
+  .eael-col-3 .eael-post-grid-column,
+  .eael-col-4 .eael-post-grid-column,
+  .eael-col-5 .eael-post-grid-column,
+  .eael-col-6 .eael-post-grid-column {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-col-1 .eael-post-grid-column,
+  .eael-col-2 .eael-post-grid-column,
+  .eael-col-3 .eael-post-grid-column,
+  .eael-col-4 .eael-post-grid-column,
+  .eael-col-5 .eael-post-grid-column,
+  .eael-col-6 .eael-post-grid-column {
+    float: none;
+    width: 100%;
+  }
+}
+.eael-author-avatar > a {
+  display: block;
+}
+
+.eael-entry-footer {
+  overflow: hidden;
+  display: flex;
+}
+
+.eael-entry-footer > div {
+  display: inline-block;
+  float: left;
 }
 
 /*----------------------------*/
@@ -6133,35 +6133,6 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   transform: translateY(0);
 }
 
-.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap .eael-reading-progress {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  z-index: 999999;
-}
-.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
-  top: unset;
-  bottom: 0;
-}
-.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
-  height: 5px;
-  background-color: #1fd18e;
-  width: 0%;
-  transition: width 50ms ease;
-}
-
 @-webkit-keyframes animateStripe {
   0% {
     transform: translate(0, 0);
@@ -6386,6 +6357,35 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 .eael-progressbar-circle-container.right > div,
 .eael-progressbar-box-container.right > div {
   margin: 0 0 0 auto;
+}
+
+.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap .eael-reading-progress {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  z-index: 999999;
+}
+.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
+  top: unset;
+  bottom: 0;
+}
+.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
+  height: 5px;
+  background-color: #1fd18e;
+  width: 0%;
+  transition: width 50ms ease;
 }
 
 /*----------------------------*/
@@ -7202,6 +7202,44 @@ span.eael-testimonial-quote {
   -webkit-box-orient: vertical;
 }
 
+/*----------------------*/
+/* 12. weForm Styles
+/*----------------------*/
+.eael-weform-container input,
+.eael-weform-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-align-center .eael-weform-container,
+.eael-contact-form-btn-align-center .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-align-left .eael-weform-container,
+.eael-contact-form-btn-align-left .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-align-right .eael-weform-container,
+.eael-contact-form-btn-align-right .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  float: right;
+  width: auto;
+}
+
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
+  max-width: 100%;
+}
+
 /* ------------------- */
 /* 23. WPForms
 /* ------------------- */
@@ -7242,42 +7280,4 @@ span.eael-testimonial-quote {
 
 .eael-wpforms-form-button-full-width .wpforms-submit-container .wpforms-submit {
   width: 100%;
-}
-
-/*----------------------*/
-/* 12. weForm Styles
-/*----------------------*/
-.eael-weform-container input,
-.eael-weform-container textarea {
-  height: auto;
-  padding: 10px;
-}
-
-.eael-contact-form-align-center .eael-weform-container,
-.eael-contact-form-btn-align-center .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form-align-left .eael-weform-container,
-.eael-contact-form-btn-align-left .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form-align-right .eael-weform-container,
-.eael-contact-form-btn-align-right .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  float: right;
-  width: auto;
-}
-
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
-  max-width: 100%;
 }
