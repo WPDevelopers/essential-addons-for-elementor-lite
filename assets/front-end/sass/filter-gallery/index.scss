@@ -887,9 +887,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .fg-layout-3-item-thumb {
 	position: relative;
-	border-top: 30px solid #fff;
-    border-left: 20px solid #fff;
-    border-right: 20px solid #fff;
+	overflow: hidden;
 }
 
 .fg-layout-3-item-thumb .gallery-item-buttons {
