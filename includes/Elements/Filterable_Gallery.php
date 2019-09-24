@@ -780,6 +780,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Control Style', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style!' => 'layout_3'
+                ]
             ]
         );
         $this->add_responsive_control(
@@ -1209,6 +1212,7 @@ class Filterable_Gallery extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .fg-layout-3-item-thumb' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fg-layout-3-item .gallery-item-caption-wrap.card-hover-bg.caption-style-hoverer'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ],
             ]
         );
@@ -1255,6 +1259,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Video item hover', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style!' => 'layout_3'
+                ]
             ]
         );
 
@@ -2612,7 +2619,6 @@ class Filterable_Gallery extends Widget_Base
                                     $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
         
                                     $html .= '<a href="' . esc_url($video_url) . '" class="video-popup eael-magnific-video-link">';
-                                        $html .= '<div class="video-popup-bg"></div>';
                                         if (!empty($icon_url)) $html .= '<img src="' . esc_url($icon_url) . '">';
                                     $html .= '</a>';
                                 }else {
