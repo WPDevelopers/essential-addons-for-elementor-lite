@@ -872,6 +872,14 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   transition: 300ms;
 }
 
+.fg-layout-3-filter-controls li.control:first-child {
+  border-top: 0px solid;
+}
+
+.fg-layout-3-filter-controls li.control:last-child {
+  border-bottom: 0px solid;
+}
+
 .fg-layout-3-filters-wrap {
   max-width: 600px;
   margin: 15px auto 50px;

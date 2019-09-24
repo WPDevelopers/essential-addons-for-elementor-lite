@@ -2229,6 +2229,20 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'fg_sf_placeholder_color',
+            [
+                'label' => __('Placeholder Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]::-webkit-input-placeholder' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]::-moz-placeholder'  => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-ms-input-placeholder' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-moz-placeholder'   => 'color: {{VALUE}}'
+                ]
+            ]
+        );
+
         $this->add_responsive_control(
             'fg_sf_form_width',
             [
@@ -2318,6 +2332,16 @@ class Filterable_Gallery extends Widget_Base
                 'name' => 'fg_sf_dropdown_typography',
                 'label' => __('Typography', 'essential-addons-elementor'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'selector' => '{{WRAPPER}} .fg-layout-3-filter-controls li.control'
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'fg_sf_dropdown_border',
+                'label' => __('Border', 'essential-addons-elementor'),
+                'placeholder' => '1px',
                 'selector' => '{{WRAPPER}} .fg-layout-3-filter-controls li.control'
             ]
         );
