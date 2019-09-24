@@ -1201,6 +1201,18 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'fg_item_thubm_border_radius',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fg-layout-3-item-thumb' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
