@@ -11,7 +11,7 @@ class Sticky_Video extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 
 	public function get_name() {
-		return 'sticky-video';
+		return 'eael-sticky-video';
 	}
 
 	public function get_title() {
@@ -45,7 +45,7 @@ class Sticky_Video extends Widget_Base {
                 'default'       => 'youtube',
                 'options'       => [
 					'youtube'   	=> __( 'YouTube', 'essential-addons-elementor' ),
-					'viemo'       	=> __( 'Vimeo', 'essential-addons-elementor' ),
+					'vimeo'       	=> __( 'Vimeo', 'essential-addons-elementor' ),
 					'dailymotion'	=> __( 'Dailymotion', 'essential-addons-elementor' ),
 					'self_hosted'	=> __( 'Self Hosted', 'essential-addons-elementor' ),
 				],
@@ -53,7 +53,7 @@ class Sticky_Video extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_video_source_youtube',
+			'eaelsv_link_youtube',
 			[
 				'label'         => __( 'Link', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::TEXT,
@@ -66,20 +66,20 @@ class Sticky_Video extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_video_source_viemo',
+			'eaelsv_link_vimeo',
 			[
 				'label'         => __( 'Link', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::TEXT,
 				'placeholder'   => __( 'Enter your URL (Vimeo)', 'essential-addons-elementor' ),
 				'label_block' => true,
                 'condition'     => [
-                    'eael_video_source' => 'viemo'
+                    'eael_video_source' => 'vimeo'
                 ]
             ]
 		);
 		
 		$this->add_control(
-			'eael_video_source_dailymotion',
+			'eaelsv_link_dailymotion',
 			[
 				'label'         => __( 'Link', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::TEXT,
@@ -92,7 +92,7 @@ class Sticky_Video extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_video_source_external',
+			'eaelsv_link_external',
 			[
 				'label'         => __( 'External URL', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::SWITCHER,
@@ -238,7 +238,7 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_video_image_overlay_options',
+			'eaelsv_overlay_options',
 			[
 				'label'         => __( 'Image Overlay', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::SWITCHER,
@@ -251,20 +251,22 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_video_image_overlay_choose_image',
+			'eaelsv_overlay_image',
 			[
 				'label'     => __( 'Choose Image1', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
 				'label_block' => true,
 				'condition'     => [
-					'eael_video_image_overlay_options' => 'yes'
+					'eaelsv_overlay_options' => 'yes'
 				],
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
+				/*
 				'selectors'     => [
-                    '{{WRAPPER}} div.eael-sticky-video-player'  => 'background-image: {{VALUE}}'
-                ]
+                    '{{WRAPPER}} div.eael-sticky-video-player'  => 'background-image: url("'.$this->get_settings().'")'
+				]
+				*/
             ]
 		);
 
@@ -272,15 +274,15 @@ class Sticky_Video extends Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'default'   => 'full',
-				'name'      => 'eael_video_image_overlay_choose_image_size',
+				'name'      => 'eaelsv_overlay_image_size',
 				'condition'     => [
-					'eael_video_image_overlay_options' => 'yes'
+					'eaelsv_overlay_options' => 'yes'
 				],
             ]
 		);
 		
 		$this->add_control(
-			'eael_video_image_overlay_play_icon',
+			'eaelsv_overlay_play_icon',
 			[
 				'label'         => __( 'Play Icon', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::SWITCHER,
@@ -288,9 +290,22 @@ class Sticky_Video extends Widget_Base {
 				'return_value' => 'yes',
 				'default' => 'yes',
 				'condition'     => [
-					'eael_video_image_overlay_options' => 'yes'
+					'eaelsv_overlay_options' => 'yes'
 				],
             ]
+		);
+
+		$this->add_control(
+			'eaelsv_icon_new',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+				'type'  => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eaelsv_icon',
+				'condition'     => [
+					'eaelsv_overlay_options' => 'yes',
+					'eaelsv_overlay_play_icon' => 'yes'
+				],
+			]
 		);
 
 		$this->add_control(
@@ -304,7 +319,7 @@ class Sticky_Video extends Widget_Base {
 				'return_value' => 'yes',
 				'default' => '',
 				'condition'     => [
-					'eael_video_image_overlay_options' => 'yes'
+					'eaelsv_overlay_options' => 'yes'
 				],
 				'separator' => 'before',
             ]
@@ -315,22 +330,97 @@ class Sticky_Video extends Widget_Base {
 
     protected function render() {
 		$settings = $this->get_settings();
-		$source = $settings['eael_video_source'];
-		$id = $settings['eael_video_source_youtube'];
+		$image = $settings['eaelsv_overlay_image']['url'];
+		$id = $this->eaelsv_get_url_id($settings);
+		$iconNew = $settings['eaelsv_icon_new'];
 		?>
 		<div class="eael-sticky-video-wrapper">
-            <div class="eael-sticky-video-player" data-id="<?php echo esc_attr( $id ); ?>">
-                <div class="owp-play"><i class="eicon-play"></i></div>
-            </div>
+		<?php
+		if('yes' === $settings['eaelsv_overlay_options']):
+			if('yes' === $settings['eaelsv_overlay_play_icon']):
+				if($iconNew['value']!=''):
+					$icon = $iconNew['value'];
+				else:
+					$icon = 'eicon-play';
+				endif;
+			endif;
+			if($image!=''):
+				$img = $image;
+			else:
+				$img = 'http://i.ytimg.com/vi/'.$id.'/maxresdefault.jpg';
+			endif;
+			?>
+			<div class="eael-sticky-video-player" style="background-image:url('<?php echo esc_attr($img); ?>');" data-id="<?php echo esc_attr( $id ); ?>" data-image="<?php echo esc_attr( $image ); ?>">
+                <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
+			</div>
+		<?php else:
+			$this->eaelsv_load_player($settings);
+		endif; ?>
 		</div>
+		<?php
 
+		$this->eaelsv_enqueue_styles();
+		$this->eaelsv_enqueue_scripts();
+	}
+	
+	protected function eaelsv_load_player($settings){
+		$id = $this->eaelsv_get_url_id($settings);
+		switch ($settings['eael_video_source']) {
+			case "youtube":
+				$this->eaelsv_load_player_youtube($id);
+				break;
+			case "vimeo":
+				$this->eaelsv_load_player_vimeo($id);
+				break;
+			case "green":
+				echo "Your favorite color is green!";
+				break;
+			default:
+				$this->eaelsv_load_player_youtube($id);
+		}
+	}
+
+	protected function eaelsv_load_player_youtube($id){
+		//XHOmBV4js_E
+		?>
+		<iframe width="420" height="315"
+			src="https://www.youtube.com/embed/<?php echo esc_attr($id); ?>?autoplay=0">
+		</iframe>
+		<?php
+	}
+
+	protected function eaelsv_load_player_vimeo($id){
+		?>
+		<iframe 
+			src="https://player.vimeo.com/video/<?php echo esc_attr($id); ?>"
+			width="420" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+		</iframe>
+		<?php
+	}
+
+	protected function eaelsv_get_url_id( $settings ){
+		if('youtube' === $settings['eael_video_source']){
+			$url = $settings['eaelsv_link_youtube'];
+			$link = explode( '=', parse_url($url, PHP_URL_QUERY) );
+			$id = $link[1];
+		}
+		if('vimeo' === $settings['eael_video_source']){
+			$url = $settings['eaelsv_link_vimeo'];
+			$link = explode('/', $url);
+			$id = $link[3];
+		}
+		return $id;
+	}
+
+	protected function eaelsv_enqueue_styles(){
+		?>
 		<style>
 		.eael-sticky-video-wrapper {
 			position: relative;
 			height: 0;
 			padding-bottom: 56.25%;
 		}
-		
+
 		.eael-sticky-video-wrapper iframe {
 			position: absolute;
 			top: 0;
@@ -340,7 +430,7 @@ class Sticky_Video extends Widget_Base {
 			border: 0;
 			line-height: 1;
 		}
-		
+
 		.eael-sticky-video-player {
 			position: absolute;
 			top: 0;
@@ -349,15 +439,18 @@ class Sticky_Video extends Widget_Base {
 			height: 100%;
 			background-size: cover;
 			background-position: 50%;
+			/*
+			background-image: url('https://cdn.pixabay.com/photo/2016/10/17/10/52/wind-farm-1747331__340.jpg');
+			*/
 			cursor: pointer;
 			text-align: center;
 		}
-		
+
 		.eael-sticky-video-player img {
 			display: block;
 			width: 100%;
 		}
-		
+
 		.owp-play {
 			position: absolute;
 			top: 50%;
@@ -366,7 +459,7 @@ class Sticky_Video extends Widget_Base {
 			-ms-transform: translateX(-50%) translateY(-50%);
 			transform: translateX(-50%) translateY(-50%);
 		}
-		
+
 		.owp-play i {
 			font-size: 100px;
 			color: #fff;
@@ -376,20 +469,51 @@ class Sticky_Video extends Widget_Base {
 			-o-transition: all .5s;
 			transition: all .5s;
 		}
-		
+
 		.eael-sticky-video-player:hover .owp-play i {
 			opacity: 1;
 		}
 		</style>
+		<?php
+	}
+
+	protected function eaelsv_enqueue_scripts(){
+		?>
 		<script>
+		jQuery(document).ready(function() {
+			if (isEditMode) {
+				var v = jQuery('.eael-sticky-video-player');
+				for (i = 0; i < v.length; i++) {
+					/*
+					jQuery(v[i]).on('click', function(){
+						var iframe1  = '<div style="border:1px solid #009900;"></div>';
+						alert(iframe1);
+						jQuery(this).parent().get().replaceChild(iframe1,this);
+					});
+					*/
+					v[i].onclick = function() {
+						var iframe1  =  document.createElement( 'iframe' );
+						iframe1.setAttribute('src', 'http://dasda.com');
+						alert(iframe1);
+						jQuery(this).parent().empty().append(iframe1);
+					}
+				}
+			}
+		});
 		document.addEventListener( 'DOMContentLoaded', function() {
 			var i,
 			video = document.getElementsByClassName( 'eael-sticky-video-player' );
 				
 			for (i = 0; i < video.length; i++) {
-		
+				var overlayImage = video[i].dataset.image;
+				//alert(video[i].dataset.id);
+				if(overlayImage!=''){
+					video[i].style.backgroundImage = 'url('+overlayImage+')';
+				} else{
+					video[i].style.backgroundImage = 'url(//i.ytimg.com/vi/' + video[i].dataset.id + '/maxresdefault.jpg)';
+				}
 				// We get the thumbnail image from the YouTube ID
-				//video[i].style.backgroundImage = 'url(//i.ytimg.com/vi/' + video[i].dataset.id + '/maxresdefault.jpg)';
+				//
 				//video[i].style.backgroundImage = 'url(https://www.rowletteagles.org/wp-content/uploads/2015/06/bg-video-player.jpg)';
 				video[i].onclick = function() {
 					var iframe  = document.createElement( 'iframe' ),
@@ -406,21 +530,5 @@ class Sticky_Video extends Widget_Base {
 		</script>
 		<?php
 	}
-	
-	protected function render1() {
-		$settings = $this->get_settings();
-		$source = $settings['eael_video_source'];
-		?>
-		<div class="eael_video_sticky_wrapper">
-		<?php
-		if('youtube'==$source):
-			echo $src = $settings['eael_video_source_youtube'];
-			?>
-			<iframe width="420" height="315" src="<?php echo esc_url($src); ?>"></iframe>
-			<?php
-		endif; ?>
-		</div>
-		<?php
-    }
 
 }

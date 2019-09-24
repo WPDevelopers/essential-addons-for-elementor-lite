@@ -59,7 +59,7 @@ gulp.task('hello', function() {
   });
 
 // compile sass
-gulp.task("compileSCSS", function() {
+gulp.task("compileSC", function() {
     return gulp
         .src(files.sass)
         .pipe(compass(compassConfig))
@@ -72,7 +72,7 @@ gulp.task("compileSCSS", function() {
 });
 
 // minify csss
-gulp.task("minifyCSS", function() {
+gulp.task("minifyC", function() {
     return gulp
         .src(files.css)
         .pipe(cleancss())
@@ -85,14 +85,14 @@ gulp.task("minifyCSS", function() {
 });
 
 // combine css
-gulp.task("combineCSS", function() {
+gulp.task("combineC", function() {
     return gulp
         .src(files.css)
         .pipe(concat("eael.css"))
         .pipe(gulp.dest("./" + compassConfig.css));
 });
 
-gulp.task("combineMinCSS", function() {
+gulp.task("combineMC", function() {
     return gulp
         .src(files.minCSS)
         .pipe(concat("eael.min.css"))
@@ -134,9 +134,10 @@ gulp.task("combineMinJS", function() {
     // Other watchers
 //});
 
-//gulp.task('build', ['compileSCSS', 'minifyCSS', 'combineCSS', 'combineMinCSS']);
-gulp.task('build1', ['compileSCSS']);
+gulp.task('build1', ['compileSCSS', 'minifyCSS', 'combineCSS', 'combineMinCSS']);
+/*gulp.task('build1', ['compileSCSS']);
 gulp.task('build2', ['build1', 'minifyCSS']);
-gulp.task('build3', ['build1', 'combineCSS']);
-gulp.task('build4', ['build1', 'combineMinCSS']);
-gulp.task('build', ['build3']);
+gulp.task('build3', ['build2', 'combineCSS']);
+gulp.task('build4', ['build3', 'combineMinCSS']);
+gulp.task('build', ['build4']);
+*/
