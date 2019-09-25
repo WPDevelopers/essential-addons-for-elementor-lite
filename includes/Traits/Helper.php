@@ -519,6 +519,19 @@ trait Helper
             ]
         );
 
+        $this->add_control(
+            'excerpt_expanison_indicator',
+            [
+                'label' => esc_html__('Expanison Indicator', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default' => esc_html__('...', 'essential-addons-elementor'),
+                'condition' => [
+                    'eael_show_excerpt' => '1',
+                ],
+            ]
+        );
+
         if (
             'eael-post-grid' === $this->get_name()
             || 'eael-post-block' === $this->get_name()
