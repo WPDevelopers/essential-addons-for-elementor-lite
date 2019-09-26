@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) { exit; }
 
 use \Elementor\Controls_Manager;
 use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Image_Size;
 
 class Sticky_Video extends Widget_Base {
@@ -26,8 +27,8 @@ class Sticky_Video extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
 	
-	
 	protected function _register_controls() {
+		add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
 
   		$this->start_controls_section(
   			'eael_section_video_settings',
@@ -131,7 +132,7 @@ class Sticky_Video extends Widget_Base {
 		);
 		
 		$this->add_control(
-			'eael_video_start_time',
+			'eaelsv_start_time',
 			[
 				'label' => __( 'Start Time', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::NUMBER,
@@ -144,7 +145,7 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_video_end_time',
+			'eaelsv_end_time',
 			[
 				'label' => __( 'End Time', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::NUMBER,
@@ -262,14 +263,22 @@ class Sticky_Video extends Widget_Base {
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
-				/*
-				'selectors'     => [
-                    '{{WRAPPER}} div.eael-sticky-video-player'  => 'background-image: url("'.$this->get_settings().'")'
+				'selectors' => [
+                   	//'{{WRAPPER}} div.eael-sticky-video-player'  => 'background-image: url("'.\Elementor\Utils::get_placeholder_image_src().'")'
 				]
-				*/
             ]
 		);
-
+		/*
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_background',
+				'label' => __( 'Background', 'essential-addons-elementor' ),
+				'types' => [ 'classic' ],
+				'selector' => '{{WRAPPER}} .eael-sticky-video-player',
+			]
+		);
+		*/
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
@@ -326,6 +335,84 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'eaelsv_sticky_option_section',
+			[
+				'label' => __( 'Sticky Ootions', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'eaelsv_is_sticky',
+			[
+				'label'         => __( 'Sticky', 'essential-addons-elementor' ),
+				'type'          => Controls_Manager::SWITCHER,
+				'label_block' 	=> false,
+				'label_on'		=> __( 'On', 'essential-addons-elementor' ),
+				'label_off'    	=> __( 'Off', 'essential-addons-elementor' ),
+				'return_value'	=> 'yes',
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'display: block',
+				]
+            ]
+		);
+
+		$this->add_control(
+			'eaelsv_sticky_position',
+			[
+				'label'     => __( 'Position', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => 'youtube',
+                'options'	=> [
+					'top-left'   	=> __( 'Top Left', 'essential-addons-elementor' ),
+					'top-right'     => __( 'Top Right', 'essential-addons-elementor' ),
+					'bottom-left'	=> __( 'Bottom Left', 'essential-addons-elementor' ),
+					'bottom-right'	=> __( 'Bottom Right', 'essential-addons-elementor' ),
+				],
+				'default' 	=> 'bottom-right',
+            ]
+		);
+
+		$this->add_control(
+			'eaelsv_sticky_width',
+			[
+				'label'     => __( 'Width', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::SLIDER,
+                'range'     => [
+                    'px' => [
+						'min' => 100,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'width: {{SIZE}}px'
+				]
+            ]
+        );
+		
+		$this->add_control(
+			'eaelsv_sticky_height',
+			[
+				'label'     => __( 'Height', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::SLIDER,
+                'range'     => [
+                    'px' => [
+						'min' => 100,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'height: {{SIZE}}px'
+				]
+            ]
+        );
+
+		$this->end_controls_section();
     }
 
     protected function render() {
@@ -333,6 +420,10 @@ class Sticky_Video extends Widget_Base {
 		$image = $settings['eaelsv_overlay_image']['url'];
 		$id = $this->eaelsv_get_url_id($settings);
 		$iconNew = $settings['eaelsv_icon_new'];
+		$st = $settings['eaelsv_start_time'];
+		$et = $settings['eaelsv_end_time'];
+		$sticky = $settings['eaelsv_is_sticky'];
+		$position = $this->eaelvs_sticky_video_position($settings['eaelsv_sticky_position']);
 		?>
 		<div class="eael-sticky-video-wrapper">
 		<?php
@@ -350,17 +441,23 @@ class Sticky_Video extends Widget_Base {
 				$img = 'http://i.ytimg.com/vi/'.$id.'/maxresdefault.jpg';
 			endif;
 			?>
-			<div class="eael-sticky-video-player" style="background-image:url('<?php echo esc_attr($img); ?>');" data-id="<?php echo esc_attr( $id ); ?>" data-image="<?php echo esc_attr( $image ); ?>">
+			<div class="eael-sticky-video-player" 
+				style="background-image:url('<?php echo esc_attr($img); ?>');" 
+				data-id="<?php echo esc_attr( $id ); ?>"
+				data-image="<?php echo esc_attr( $img ); ?>"
+				data-start="<?php echo esc_attr( $st ); ?>"
+				data-end="<?php echo esc_attr( $et ); ?>"
+				data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
+				data-sticky="<?php echo esc_attr( $sticky ); ?>">
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
 		<?php else:
 			$this->eaelsv_load_player($settings);
 		endif; ?>
 		</div>
+		<div class="eaelsv-sticky-player" style="<?php echo esc_attr($position); ?>"></div>
 		<?php
-
 		$this->eaelsv_enqueue_styles();
-		$this->eaelsv_enqueue_scripts();
 	}
 	
 	protected function eaelsv_load_player($settings){
@@ -410,6 +507,26 @@ class Sticky_Video extends Widget_Base {
 			$id = $link[3];
 		}
 		return $id;
+	}
+
+	protected function eaelvs_sticky_video_position($position){
+		if('top-left' === $position){
+			$pos = "top:50px; left: 50px;";
+		}
+		if('top-right' === $position){
+			$pos = "top:50px; right: 50px;";
+		}
+		if('bottom-left' === $position){
+			$pos = "bottom:50px; left: 50px;";
+		}
+		if('bottom-right' === $position){
+			$pos = "bottom:50px; right: 50px;";
+		}
+		return $pos;
+	}
+
+	public function eaelsv_custom_scripts(){
+		wp_enqueue_script( 'eaelsv-js', plugins_url( '../../assets/eael-sticky-video.js', __FILE__ ), ['jquery'], time(), true );
 	}
 
 	protected function eaelsv_enqueue_styles(){
@@ -473,61 +590,20 @@ class Sticky_Video extends Widget_Base {
 		.eael-sticky-video-player:hover .owp-play i {
 			opacity: 1;
 		}
-		</style>
-		<?php
-	}
 
-	protected function eaelsv_enqueue_scripts(){
-		?>
-		<script>
-		jQuery(document).ready(function() {
-			if (isEditMode) {
-				var v = jQuery('.eael-sticky-video-player');
-				for (i = 0; i < v.length; i++) {
-					/*
-					jQuery(v[i]).on('click', function(){
-						var iframe1  = '<div style="border:1px solid #009900;"></div>';
-						alert(iframe1);
-						jQuery(this).parent().get().replaceChild(iframe1,this);
-					});
-					*/
-					v[i].onclick = function() {
-						var iframe1  =  document.createElement( 'iframe' );
-						iframe1.setAttribute('src', 'http://dasda.com');
-						alert(iframe1);
-						jQuery(this).parent().empty().append(iframe1);
-					}
-				}
-			}
-		});
-		document.addEventListener( 'DOMContentLoaded', function() {
-			var i,
-			video = document.getElementsByClassName( 'eael-sticky-video-player' );
-				
-			for (i = 0; i < video.length; i++) {
-				var overlayImage = video[i].dataset.image;
-				//alert(video[i].dataset.id);
-				if(overlayImage!=''){
-					video[i].style.backgroundImage = 'url('+overlayImage+')';
-				} else{
-					video[i].style.backgroundImage = 'url(//i.ytimg.com/vi/' + video[i].dataset.id + '/maxresdefault.jpg)';
-				}
-				// We get the thumbnail image from the YouTube ID
-				//
-				//video[i].style.backgroundImage = 'url(https://www.rowletteagles.org/wp-content/uploads/2015/06/bg-video-player.jpg)';
-				video[i].onclick = function() {
-					var iframe  = document.createElement( 'iframe' ),
-						embed   = 'https://www.youtube.com/embed/ID?autoplay=1&rel=0&controls=1&showinfo=0&mute=0&wmode=opaque';
-					iframe.setAttribute( 'src', embed.replace( 'ID', this.dataset.id ) );
-					iframe.setAttribute( 'frameborder', '0' );
-					iframe.setAttribute( 'allowfullscreen', '1' );
-					this.parentNode.replaceChild( iframe, this );
-				}
-		
-			}
-		
-		} );
-		</script>
+		.eaelsv-sticky-player {
+			height: 200px;
+			width: 300px;
+			position: fixed;
+			bottom: 50px;
+			right: 50px;
+			border: 1px solid #009900;
+			background-size: cover;
+			display:none;
+			z-index: 1000;
+			background: #EAEAEA;
+		}
+		</style>
 		<?php
 	}
 
