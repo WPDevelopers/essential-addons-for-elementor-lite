@@ -244,30 +244,6 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
-            'filter_prefix_text_enable',
-            [
-                'label' => __('Enable Prefix Label', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => '',
-                'condition' => [
-                    'eael_fg_caption_style' => 'layout_3'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'filter_prefix_text',
-            [
-                'label' => esc_html__('Prefix Label', 'essential-addons-elementor'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Filter :',
-                'condition' => [
-                    'filter_prefix_text_enable' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
             'eael_fg_all_label_text',
             [
                 'label' => esc_html__('Gallery All Label', 'essential-addons-elementor'),
@@ -1987,59 +1963,6 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
-            'fg_sf_controls_prefix',
-            [
-                'label' => esc_html__('Prefix', 'essential-addons-elementor'),
-                'type' => Controls_Manager::HEADING,
-                'condition' => [
-                    'filter_prefix_text_enable'    => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'fg_sf_prefix_color',
-            [
-                'label' => __('Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .fg-layout-3-filters-wrap .eael-fg-controls-prefix' => 'color: {{VALUE}}'
-                ],
-                'condition' => [
-                    'filter_prefix_text_enable'    => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'fg_sf_prefix_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
-                'selector' => '{{WRAPPER}} .fg-layout-3-filters-wrap .eael-fg-controls-prefix',
-                'condition' => [
-                    'filter_prefix_text_enable'    => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_responsive_control(
-            'fg_sf_prefix_margin',
-            [
-                'label' => __('Margin', 'essential-addons-elementor'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .fg-layout-3-filters-wrap .eael-fg-controls-prefix' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'filter_prefix_text_enable'    => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_control(
             'fg_sf_controls',
             [
                 'label' => esc_html__('Controls', 'essential-addons-elementor'),
@@ -2697,12 +2620,6 @@ class Filterable_Gallery extends Widget_Base
         if ($settings['filter_enable'] == 'yes') {
             ?>
             <div class="fg-layout-3-filters-wrap">
-
-                <?php
-                    if(isset($settings['filter_prefix_text']) && !empty($settings['filter_prefix_text'])) {
-                        echo '<span class="eael-fg-controls-prefix">'.$settings['filter_prefix_text'].'</span>';
-                    }
-                ?>
                 <div class="fg-filter-wrap">
                     <button id="fg-filter-trigger" class="fg-filter-trigger">
                         <span><?php echo $all_text; ?></span>
