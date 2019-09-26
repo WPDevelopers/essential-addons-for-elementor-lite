@@ -1125,6 +1125,277 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 /*!
+ * Countdown v0.1.0
+ * https://github.com/fengyuanchen/countdown
+ *
+ * Copyright 2014 Fengyuan Chen
+ * Released under the MIT license
+ */
+
+(function (factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD. Register as anonymous module.
+        define(["jquery"], factory);
+    } else {
+        // Browser globals.
+        factory(jQuery);
+    }
+})(function ($) {
+
+    "use strict";
+
+    var Countdown = function (element, options) {
+            this.$element = $(element);
+            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
+            this.init();
+        };
+
+    Countdown.prototype = {
+        constructor: Countdown,
+
+        init: function () {
+            var content = this.$element.html(),
+                date = new Date(this.defaults.date || content);
+
+            if (date.getTime()) {
+                this.content = content;
+                this.date = date;
+                this.find();
+
+                if (this.defaults.autoStart) {
+                    this.start();
+                }
+            }
+        },
+
+        find: function () {
+            var $element = this.$element;
+
+            this.$days = $element.find("[data-days]");
+            this.$hours = $element.find("[data-hours]");
+            this.$minutes = $element.find("[data-minutes]");
+            this.$seconds = $element.find("[data-seconds]");
+
+            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
+                this.found = true;
+            }
+        },
+
+        reset: function () {
+            if (this.found) {
+                this.output("days");
+                this.output("hours");
+                this.output("minutes");
+                this.output("seconds");
+            } else {
+                this.output();
+            }
+        },
+
+        ready: function () {
+            var date = this.date,
+                decisecond = 100,
+                second = 1000,
+                minute = 60000,
+                hour = 3600000,
+                day = 86400000,
+                remainder = {},
+                diff;
+
+            if (!date) {
+                return false;
+            }
+
+            diff = date.getTime() - (new Date()).getTime();
+
+            if (diff <= 0) {
+                this.end();
+                return false;
+            }
+
+            remainder.days = diff;
+            remainder.hours = remainder.days % day;
+            remainder.minutes = remainder.hours % hour;
+            remainder.seconds = remainder.minutes % minute;
+            remainder.milliseconds = remainder.seconds % second;
+
+            this.days = Math.floor(remainder.days / day);
+            this.hours = Math.floor(remainder.hours / hour);
+            this.minutes = Math.floor(remainder.minutes / minute);
+            this.seconds = Math.floor(remainder.seconds / second);
+            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
+
+            return true;
+        },
+
+        start: function () {
+            if (!this.active && this.ready()) {
+                this.active = true;
+                this.reset();
+                this.autoUpdate = this.defaults.fast ?
+                    setInterval($.proxy(this.fastUpdate, this), 100) :
+                    setInterval($.proxy(this.update, this), 1000);
+            }
+        },
+
+        stop: function () {
+            if (this.active) {
+                this.active = false;
+                clearInterval(this.autoUpdate);
+            }
+        },
+
+        end: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.days = 0;
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.deciseconds = 0;
+            this.reset();
+            this.defaults.end();
+        },
+
+        destroy: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.$days = null;
+            this.$hours = null;
+            this.$minutes = null;
+            this.$seconds = null;
+
+            this.$element.empty().html(this.content);
+            this.$element.removeData("countdown");
+        },
+
+        fastUpdate: function () {
+            if (--this.deciseconds >= 0) {
+                this.output("deciseconds");
+            } else {
+                this.deciseconds = 9;
+                this.update();
+            }
+        },
+
+        update: function () {
+            if (--this.seconds >= 0) {
+                this.output("seconds");
+            } else {
+                this.seconds = 59;
+
+                if (--this.minutes >= 0) {
+                    this.output("minutes");
+                } else {
+                    this.minutes = 59;
+
+                    if (--this.hours >= 0) {
+                        this.output("hours");
+                    } else {
+                        this.hours = 23;
+
+                        if (--this.days >= 0) {
+                            this.output("days");
+                        } else {
+                            this.end();
+                        }
+                    }
+                }
+            }
+        },
+
+        output: function (type) {
+            if (!this.found) {
+                this.$element.empty().html(this.template());
+                return;
+            }
+
+            switch (type) {
+                case "deciseconds":
+                    this.$seconds.text(this.getSecondsText());
+                    break;
+
+                case "seconds":
+                    this.$seconds.text(this.seconds);
+                    break;
+
+                case "minutes":
+                    this.$minutes.text(this.minutes);
+                    break;
+
+                case "hours":
+                    this.$hours.text(this.hours);
+                    break;
+
+                case "days":
+                    this.$days.text(this.days);
+                    break;
+
+                // No default
+            }
+        },
+
+        template: function () {
+            return this.defaults.text
+                    .replace("%s", this.days)
+                    .replace("%s", this.hours)
+                    .replace("%s", this.minutes)
+                    .replace("%s", this.getSecondsText());
+        },
+
+        getSecondsText: function () {
+            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+        }
+    };
+
+    // Default settings
+    Countdown.defaults = {
+        autoStart: true,
+        date: null,
+        fast: false,
+        end: $.noop,
+        text: "%s days, %s hours, %s minutes, %s seconds"
+    };
+
+    // Set default settings
+    Countdown.setDefaults = function (options) {
+        $.extend(Countdown.defaults, options);
+    };
+
+    // Register as jQuery plugin
+    $.fn.countdown = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data("countdown");
+
+            if (!data) {
+                $this.data("countdown", (data = new Countdown(this, options)));
+            }
+
+            if (typeof options === "string" && $.isFunction(data[options])) {
+                data[options]();
+            }
+        });
+    };
+
+    $.fn.countdown.constructor = Countdown;
+    $.fn.countdown.setDefaults = Countdown.setDefaults;
+
+    $(function () {
+        $("[countdown]").countdown();
+    });
+
+});
+
+/*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
  * MIT License
@@ -1621,277 +1892,6 @@ return ImagesLoaded;
 
 });
 
-
-/*!
- * Countdown v0.1.0
- * https://github.com/fengyuanchen/countdown
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
-(function (factory) {
-    if (typeof define === "function" && define.amd) {
-        // AMD. Register as anonymous module.
-        define(["jquery"], factory);
-    } else {
-        // Browser globals.
-        factory(jQuery);
-    }
-})(function ($) {
-
-    "use strict";
-
-    var Countdown = function (element, options) {
-            this.$element = $(element);
-            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
-            this.init();
-        };
-
-    Countdown.prototype = {
-        constructor: Countdown,
-
-        init: function () {
-            var content = this.$element.html(),
-                date = new Date(this.defaults.date || content);
-
-            if (date.getTime()) {
-                this.content = content;
-                this.date = date;
-                this.find();
-
-                if (this.defaults.autoStart) {
-                    this.start();
-                }
-            }
-        },
-
-        find: function () {
-            var $element = this.$element;
-
-            this.$days = $element.find("[data-days]");
-            this.$hours = $element.find("[data-hours]");
-            this.$minutes = $element.find("[data-minutes]");
-            this.$seconds = $element.find("[data-seconds]");
-
-            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
-                this.found = true;
-            }
-        },
-
-        reset: function () {
-            if (this.found) {
-                this.output("days");
-                this.output("hours");
-                this.output("minutes");
-                this.output("seconds");
-            } else {
-                this.output();
-            }
-        },
-
-        ready: function () {
-            var date = this.date,
-                decisecond = 100,
-                second = 1000,
-                minute = 60000,
-                hour = 3600000,
-                day = 86400000,
-                remainder = {},
-                diff;
-
-            if (!date) {
-                return false;
-            }
-
-            diff = date.getTime() - (new Date()).getTime();
-
-            if (diff <= 0) {
-                this.end();
-                return false;
-            }
-
-            remainder.days = diff;
-            remainder.hours = remainder.days % day;
-            remainder.minutes = remainder.hours % hour;
-            remainder.seconds = remainder.minutes % minute;
-            remainder.milliseconds = remainder.seconds % second;
-
-            this.days = Math.floor(remainder.days / day);
-            this.hours = Math.floor(remainder.hours / hour);
-            this.minutes = Math.floor(remainder.minutes / minute);
-            this.seconds = Math.floor(remainder.seconds / second);
-            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
-
-            return true;
-        },
-
-        start: function () {
-            if (!this.active && this.ready()) {
-                this.active = true;
-                this.reset();
-                this.autoUpdate = this.defaults.fast ?
-                    setInterval($.proxy(this.fastUpdate, this), 100) :
-                    setInterval($.proxy(this.update, this), 1000);
-            }
-        },
-
-        stop: function () {
-            if (this.active) {
-                this.active = false;
-                clearInterval(this.autoUpdate);
-            }
-        },
-
-        end: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.days = 0;
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.deciseconds = 0;
-            this.reset();
-            this.defaults.end();
-        },
-
-        destroy: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.$days = null;
-            this.$hours = null;
-            this.$minutes = null;
-            this.$seconds = null;
-
-            this.$element.empty().html(this.content);
-            this.$element.removeData("countdown");
-        },
-
-        fastUpdate: function () {
-            if (--this.deciseconds >= 0) {
-                this.output("deciseconds");
-            } else {
-                this.deciseconds = 9;
-                this.update();
-            }
-        },
-
-        update: function () {
-            if (--this.seconds >= 0) {
-                this.output("seconds");
-            } else {
-                this.seconds = 59;
-
-                if (--this.minutes >= 0) {
-                    this.output("minutes");
-                } else {
-                    this.minutes = 59;
-
-                    if (--this.hours >= 0) {
-                        this.output("hours");
-                    } else {
-                        this.hours = 23;
-
-                        if (--this.days >= 0) {
-                            this.output("days");
-                        } else {
-                            this.end();
-                        }
-                    }
-                }
-            }
-        },
-
-        output: function (type) {
-            if (!this.found) {
-                this.$element.empty().html(this.template());
-                return;
-            }
-
-            switch (type) {
-                case "deciseconds":
-                    this.$seconds.text(this.getSecondsText());
-                    break;
-
-                case "seconds":
-                    this.$seconds.text(this.seconds);
-                    break;
-
-                case "minutes":
-                    this.$minutes.text(this.minutes);
-                    break;
-
-                case "hours":
-                    this.$hours.text(this.hours);
-                    break;
-
-                case "days":
-                    this.$days.text(this.days);
-                    break;
-
-                // No default
-            }
-        },
-
-        template: function () {
-            return this.defaults.text
-                    .replace("%s", this.days)
-                    .replace("%s", this.hours)
-                    .replace("%s", this.minutes)
-                    .replace("%s", this.getSecondsText());
-        },
-
-        getSecondsText: function () {
-            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
-        }
-    };
-
-    // Default settings
-    Countdown.defaults = {
-        autoStart: true,
-        date: null,
-        fast: false,
-        end: $.noop,
-        text: "%s days, %s hours, %s minutes, %s seconds"
-    };
-
-    // Set default settings
-    Countdown.setDefaults = function (options) {
-        $.extend(Countdown.defaults, options);
-    };
-
-    // Register as jQuery plugin
-    $.fn.countdown = function (options) {
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data("countdown");
-
-            if (!data) {
-                $this.data("countdown", (data = new Countdown(this, options)));
-            }
-
-            if (typeof options === "string" && $.isFunction(data[options])) {
-                data[options]();
-            }
-        });
-    };
-
-    $.fn.countdown.constructor = Countdown;
-    $.fn.countdown.setDefaults = Countdown.setDefaults;
-
-    $(function () {
-        $("[countdown]").countdown();
-    });
-
-});
 
 /**
  * author Christopher Blum
@@ -11793,6 +11793,10 @@ return $;
             $layout = $this.data("layout"),
             $page = parseInt($this.data("page")) + 1;
 
+        if (typeof $widget_id == 'undefined' || typeof $args == 'undefined') {
+            return;
+        }
+
         $this.addClass("button--loading");
         $("span", $this).html("Loading...");
 
@@ -11821,7 +11825,7 @@ return $;
                         var $isotope = $(".eael-post-appender", $scope).isotope();
                         $isotope.isotope("appended", $content).isotope("layout");
 
-                        $isotope.imagesLoaded().progress(function() {
+                        $isotope.imagesLoaded().progress(function () {
                             $isotope.isotope("layout");
                         });
                     }
@@ -12161,6 +12165,110 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
+var dataTable = function($scope, $) {
+    var $_this = $scope.find(".eael-data-table-wrap"),
+        $id = $_this.data("table_id");
+
+
+    if(typeof enableProSorter !== 'undefined' && $.isFunction(enableProSorter) ) {
+        $(document).ready(function(){
+            enableProSorter(jQuery, $_this);
+        });
+    }
+
+    var responsive = $_this.data("custom_responsive");
+    if (true == responsive) {
+        var $th = $scope.find(".eael-data-table").find("th");
+        var $tbody = $scope.find(".eael-data-table").find("tbody");
+
+        $tbody.find("tr").each(function(i, item) {
+            $(item)
+                .find("td .td-content-wrapper")
+                .each(function(index, item) {
+                    $(this).prepend(
+                        '<div class="th-mobile-screen">' +
+                            $th.eq(index).html() +
+                            "</div>"
+                    );
+                });
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-data-table.default",
+        dataTable
+    );
+});
 var filterableGalleryHandler = function($scope, $) {
 
     var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
@@ -12334,110 +12442,14 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
+(function($) {
+    window.isEditMode = false;
 
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
+    $(window).on("elementor/frontend/init", function() {
+        window.isEditMode = elementorFrontend.isEditMode();
     });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
+})(jQuery);
 
-var dataTable = function($scope, $) {
-    var $_this = $scope.find(".eael-data-table-wrap"),
-        $id = $_this.data("table_id");
-
-
-    if(typeof enableProSorter !== 'undefined' && $.isFunction(enableProSorter) ) {
-        $(document).ready(function(){
-            enableProSorter(jQuery, $_this);
-        });
-    }
-
-    var responsive = $_this.data("custom_responsive");
-    if (true == responsive) {
-        var $th = $scope.find(".eael-data-table").find("th");
-        var $tbody = $scope.find(".eael-data-table").find("tbody");
-
-        $tbody.find("tr").each(function(i, item) {
-            $(item)
-                .find("td .td-content-wrapper")
-                .each(function(index, item) {
-                    $(this).prepend(
-                        '<div class="th-mobile-screen">' +
-                            $th.eq(index).html() +
-                            "</div>"
-                    );
-                });
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-data-table.default",
-        dataTable
-    );
-});
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -12486,14 +12498,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ImageAccordion
     );
 });
-
-(function($) {
-    window.isEditMode = false;
-
-    $(window).on("elementor/frontend/init", function() {
-        window.isEditMode = elementorFrontend.isEditMode();
-    });
-})(jQuery);
 
 var PostGrid = function($scope, $) {
     var $gallery = $(".eael-post-appender", $scope).isotope({

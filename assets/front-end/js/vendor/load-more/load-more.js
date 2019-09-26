@@ -16,6 +16,10 @@
             $layout = $this.data("layout"),
             $page = parseInt($this.data("page")) + 1;
 
+        if (typeof $widget_id == 'undefined' || typeof $args == 'undefined') {
+            return;
+        }
+
         $this.addClass("button--loading");
         $("span", $this).html("Loading...");
 
@@ -44,7 +48,7 @@
                         var $isotope = $(".eael-post-appender", $scope).isotope();
                         $isotope.isotope("appended", $content).isotope("layout");
 
-                        $isotope.imagesLoaded().progress(function() {
+                        $isotope.imagesLoaded().progress(function () {
                             $isotope.isotope("layout");
                         });
                     }
