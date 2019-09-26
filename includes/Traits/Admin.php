@@ -200,7 +200,7 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible ' );
-        $notice->message( 'upsale', '<p>'. __( '5000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement! Join Free or Get <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">Exclusive Lifetime Pro</a> for only $39! Limied Time!', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( '6000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement! Join Free or Get <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">Exclusive Lifetime Pro</a> for only $39! Limied Time!', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         // Update Notice For PRO Version
