@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.3.1
+Stable tag: 3.3.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -170,6 +170,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.3.2 - 26/09/2019 =
+- Added : Filterable Gallery new layout (Search & Filter) 
+- Added: Post elements excerpt expanison indicator option field
+- Fixed: Post Grid hover not working
+- Fixed: Createive Button options not showing
+- Few minor bugfix and improvements
 
 = 3.3.1 - 18/09/2019 =
 - Added : Option to enable/disable EA Quick Tools menu in admin bar
