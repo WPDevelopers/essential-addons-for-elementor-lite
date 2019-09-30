@@ -461,7 +461,7 @@ class Filterable_Gallery extends Widget_Base
                 'label' => __('Video play icon', 'essential-addons-elementor'),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
-                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/play-icon.png',
+                    'url' => EAEL_PLUGIN_URL . 'assets/front-end/img/play-icon.png',
                 ],
                 'condition' => [
                     'fg_video_gallery_switch' => 'true',
