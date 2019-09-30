@@ -84,7 +84,7 @@
         <div class="eael-admin-sidebar">
             <div class="eael-sidebar-block">
                 <div class="eael-admin-sidebar-logo">
-                    <img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-ea-logo.svg'; ?>" alt="essential-addons-for-elementor">
+                    <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg'; ?>" alt="essential-addons-for-elementor">
                 </div>
                 <div class="eael-admin-sidebar-cta">
                     <?php

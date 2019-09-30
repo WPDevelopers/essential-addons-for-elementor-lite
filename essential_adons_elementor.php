@@ -21,9 +21,9 @@ if (!defined('ABSPATH')) {
  * @since 3.0.0
  */
 define('EAEL_PLUGIN_FILE', __FILE__);
-define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
-define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
+define('EAEL_PLUGIN_BASENAME', trailingslashit(plugin_basename(__FILE__)));
+define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
+define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
 define('EAEL_PLUGIN_VERSION', '3.3.1');
 define('EAEL_ASSET_PATH', WP_CONTENT_DIR . '/uploads/essential-addons-elementor');
 define('EAEL_ASSET_URL', WP_CONTENT_URL . '/uploads/essential-addons-elementor');
