@@ -143,7 +143,7 @@ trait Helper
                 'post_type' => '',
                 'multiple' => true,
                 'condition' => [
-                    'eaeposts_post_type!' => 'by_id',
+                    'post_type!' => 'by_id',
                 ],
             ]
         );
