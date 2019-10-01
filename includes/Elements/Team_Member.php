@@ -259,6 +259,42 @@ class Team_Member extends Widget_Base {
 		);
 
 		$this->add_control(
+			'content_card_style',
+			[
+				'label' => __( 'Content Card', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator'	=> 'before'
+			]
+		);
+
+
+		$this->add_control(
+			'content_card_height',
+			[
+				'label' => esc_html__( 'Height', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> [ 'px', 'em' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+					],
+					'em'	=> [
+						'min'	=> 0,
+						'max'	=> 200
+					]
+				],
+				'default'	=> [
+					'unit'	=> 'px',
+					'size'	=> 'auto'
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-team-item .eael-team-content' => 'height: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_team_members_overlay_background',
 			[
 				'label' => esc_html__( 'Overlay Color', 'essential-addons-elementor' ),
@@ -492,6 +528,7 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => __( 'Member Job Position', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
+				'separator'	=> 'before'
 			]
 		);
 
@@ -520,6 +557,7 @@ class Team_Member extends Widget_Base {
 			[
 				'label' => __( 'Member Description', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
+				'separator'	=> 'before'
 			]
 		);
 
@@ -542,7 +580,6 @@ class Team_Member extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-team-item .eael-team-content .eael-team-text',
 			]
 		);
-
 
 		$this->end_controls_section();
 
