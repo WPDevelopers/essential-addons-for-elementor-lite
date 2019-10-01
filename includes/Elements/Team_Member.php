@@ -289,7 +289,7 @@ class Team_Member extends Widget_Base {
 					'size'	=> 'auto'
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-team-item .eael-team-content' => 'height: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-team-item .eael-team-content' => 'min-height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
