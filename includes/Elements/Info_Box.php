@@ -870,20 +870,21 @@ class Info_Box extends Widget_Base {
     		'eael_infobox_icon_size',
     		[
         		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
-       		'type' => Controls_Manager::SLIDER,
+       			'type' => Controls_Manager::SLIDER,
         		'default' => [
-            	'size' => 40,
+            		'size' => 40,
         		],
         		'range' => [
-            	'px' => [
-                	'min' => 20,
-                	'max' => 100,
-                	'step' => 1,
-            	]
+					'px' => [
+						'min' => 20,
+						'max' => 100,
+						'step' => 1,
+					]
         		],
         		'selectors' => [
-            	'{{WRAPPER}} .eael-infobox .infobox-icon i' => 'font-size: {{SIZE}}px;',
-        		],
+					'{{WRAPPER}} .eael-infobox .infobox-icon i' => 'font-size: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap img'	=> 'height: {{SIZE}}px; width: {{SIZE}}px;'
+        		]
     		]
 		);
 
@@ -1522,6 +1523,23 @@ class Info_Box extends Widget_Base {
 			$this->add_render_attribute('infobox_icon', 'class', 'eael-icon-only');
 		}
 
+		if ($infobox_icon_is_new || $infobox_icon_migrated) {
+			$icon = $settings['eael_infobox_icon_new']['value'];
+
+			if(isset($icon['url'])) {
+				$this->add_render_attribute('icon_or_image', [
+					'src'	=> $icon['url'],
+					'alt'	=> esc_attr(get_post_meta($icon['id'], '_wp_attachment_image_alt', true))
+				]);
+				$icon_tag = '<img '.$this->get_render_attribute_string('icon_or_image').'/>';
+			}else {
+				$this->add_render_attribute('icon_or_image', 'class', $icon);
+				$icon_tag = '<i '.$this->get_render_attribute_string('icon_or_image').'></i>';
+			}
+		}else {
+			$icon_tag = '<i class="'.esc_attr( $settings['eael_infobox_icon'] ).'"></i>';
+		}
+
 		ob_start();
 		?>
 			<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
@@ -1531,13 +1549,9 @@ class Info_Box extends Widget_Base {
 				<?php endif; ?>
 
 				<?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : ?>
-				<div class="infobox-icon-wrap">
-					<?php if ($infobox_icon_is_new || $infobox_icon_migrated) { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_icon_new']['value'] ); ?>"></i>
-					<?php } else { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_icon'] ); ?>"></i>
-					<?php } ?>
-				</div>
+					<div class="infobox-icon-wrap">
+						<?php echo $icon_tag; ?>
+					</div>
 				<?php endif; ?>
 
 				<?php if( 'number' == $settings['eael_infobox_img_or_icon'] ) : ?>
