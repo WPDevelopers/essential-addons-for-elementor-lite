@@ -1,4 +1,5 @@
 ;(function (window, $) {
+    var videoIsActive = 0;
     var StickyVideo = function(scope, $) {
         var videoElement = scope.find('.eael-sticky-video-player');
         
@@ -82,12 +83,15 @@
                 } else{
                     lp = '';
                 }
-                iframe1 = '<video id="player" preload controls '+ap+' '+mt+' '+lp+' poster="images/poster.jpg">'+
-                            '<source src="'+id+'" type="video/mp4">'+
-                            '</video>';
+                alert(id);
+                iframe1 = '';
             }
+            
             videoElement[i].onclick = function() {
+                $(this).parent().attr('id', 'videobox');
                 $(this).parent().empty().append(iframe1);
+                videoIsActive = 1;
+                //videoElement[i].parentElement.classList.add("HossniMubarak");
             }
         }
     };
@@ -99,49 +103,15 @@
     });
     
     $(window).scroll(function() {
-        var FloatVideo =  $('.eaelsv-sticky-player');
-        //alert(FloatVideo.length);
-        if($(window).scrollTop() >= 300 ) {
-            for (i = 0; i < FloatVideo.length; i++) {
-                var sticky = FloatVideo[i].dataset.sticky;
-                var src = FloatVideo[i].dataset.source;
-                var id = FloatVideo[i].dataset.id;
-                if(sticky){
-                    if( src == 'youtube' ){
-                        url = '<iframe width="100%" height="100%"'+
-                                'src="https://www.youtube.com/embed/'+id+'?autoplay=1">'+
-                                '</iframe>';
-                    }
-                    else if( src == 'vimeo' ){
-                        //alert('Hello');
-                        url = '<iframe width="100%" height="100%"'+
-                                'src="https://player.vimeo.com/video/'+id+'?autoplay=1&color=009900&title=1&byline=1&portrait=1">'+
-                                '</iframe>';
-                    }
-                    else{
-                        url = '';
-                    }
-                    FloatVideo[i].classList.add("eaelsv-display-player");
-                    //FloatVideo[i].style.BackgroundColor = '#FF0000!important';
-                    FloatVideo[i].innerHTML = url;
-                }
+        var FloatVideo =  $('.eael-sticky-video-wrapper');
+        if($(window).scrollTop() > 299 ) {
+            if(videoIsActive == 1){
+                $('#videobox').removeClass('in').addClass('out');
+				$('#videobox').css('bottom', '10');   
             }
-           /*
-            if(sticky=='yes'){
-                alert(videoElement[i]);
-                //videoElement[i].style.display = '';
-                videoElement[i].classList.add("mystyle");
-                
-            }
-            */
         }
-        if(jQuery(window).scrollTop() < 300) {
-            for (i = 0; i < FloatVideo.length; i++) {
-                var sticky = FloatVideo[i].dataset.sticky;
-                if(sticky){
-                    FloatVideo[i].classList.remove("eaelsv-display-player");
-                }
-            }
+        else{
+            $('#videobox').removeClass('out').addClass('in');
         }
     });
     

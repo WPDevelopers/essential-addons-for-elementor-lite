@@ -29,7 +29,7 @@ class Sticky_Video extends Widget_Base {
 	}
 	
 	protected function _register_controls() {
-		//add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
+		add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
 
   		$this->start_controls_section(
   			'eael_section_video_settings',
