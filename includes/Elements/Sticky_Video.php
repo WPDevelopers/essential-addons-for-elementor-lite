@@ -7,6 +7,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Image_Size;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 class Sticky_Video extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -28,7 +29,7 @@ class Sticky_Video extends Widget_Base {
 	}
 	
 	protected function _register_controls() {
-		add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
+		//add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
 
   		$this->start_controls_section(
   			'eael_section_video_settings',
@@ -99,13 +100,33 @@ class Sticky_Video extends Widget_Base {
 				'type'          => Controls_Manager::SWITCHER,
 				'label_block' => false,
                 'condition'     => [
-                    'eael_video_source' => 'self_hosted'
+					'eael_video_source' => 'self_hosted',
+					//'eaelsv_link_external' => 'yes'
                 ]
             ]
 		);
+
+		$this->add_control(
+			'eaelsv_hosted_url',
+			[
+				'label' => __( 'Choose File', 'elementor' ),
+				'type' => Controls_Manager::MEDIA,
+				'dynamic' => [
+					'active' => true,
+					'categories' => [
+						TagsModule::MEDIA_CATEGORY,
+					],
+				],
+				'media_type' => 'video',
+				'condition' => [
+					'eael_video_source' => 'self_hosted',
+					'eaelsv_link_external' => '',
+				],
+			]
+		);
 		
 		$this->add_control(
-			'eael_video_link_external_url',
+			'eaelsv_external_url',
 			[
 				'label'         => __( 'Link', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::TEXT,
@@ -113,7 +134,8 @@ class Sticky_Video extends Widget_Base {
 				'label_block' => true,
 				'show_label'  => false,
                 'condition'     => [
-                    'eael_video_source_external' => 'yes'
+					'eael_video_source' => 'self_hosted',
+                    'eaelsv_link_external' => 'yes'
                 ]
             ]
 		);
@@ -167,7 +189,7 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_video_options_autopaly',
+			'eaelsv_autopaly',
 			[
 				'label'         => __( 'Autoplay', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::SWITCHER,
@@ -176,7 +198,7 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_video_options_mute',
+			'eaelsv_mute',
 			[
 				'label'         => __( 'Mute', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::SWITCHER,
@@ -185,46 +207,11 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_video_options_loop',
+			'eaelsv_loop',
 			[
 				'label'         => __( 'Loop', 'essential-addons-elementor' ),
 				'type'          => Controls_Manager::SWITCHER,
 				'label_block' => false
-            ]
-		);
-
-		$this->add_control(
-			'eael_video_options_player_controls',
-			[
-				'label'         => __( 'Player Controls', 'essential-addons-elementor' ),
-				'type'          => Controls_Manager::SWITCHER,
-				'label_block' => false,
-				'label_on' => __( 'Show', 'essential-addons-elementor' ),
-				'label_off' => __( 'Hide', 'essential-addons-elementor' ),
-				'return_value' => 'yes',
-				'default' => 'yes',
-            ]
-		);
-
-		$this->add_control(
-			'eael_video_options_download_button',
-			[
-				'label'         => __( 'Download Button', 'essential-addons-elementor' ),
-				'type'          => Controls_Manager::SWITCHER,
-				'label_block' => false,
-				'label_on' => __( 'Show', 'essential-addons-elementor' ),
-				'label_off' => __( 'Hide', 'essential-addons-elementor' ),
-				'return_value' => 'yes',
-				'default' => '',
-            ]
-		);
-
-		$this->add_control(
-			'eael_video_options_poster',
-			[
-				'label'     => __( 'Poster', 'essential-addons-elementor' ),
-				'type'      => Controls_Manager::MEDIA,
-				'label_block' => true,
             ]
 		);
 
@@ -268,17 +255,6 @@ class Sticky_Video extends Widget_Base {
 				]
             ]
 		);
-		/*
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'eael_background',
-				'label' => __( 'Background', 'essential-addons-elementor' ),
-				'types' => [ 'classic' ],
-				'selector' => '{{WRAPPER}} .eael-sticky-video-player',
-			]
-		);
-		*/
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
@@ -424,6 +400,7 @@ class Sticky_Video extends Widget_Base {
 		$et = $settings['eaelsv_end_time'];
 		$sticky = $settings['eaelsv_is_sticky'];
 		$position = $this->eaelvs_sticky_video_position($settings['eaelsv_sticky_position']);
+		$hostedUrl = $settings['eaelsv_hosted_url']['url'];
 		?>
 		<div class="eael-sticky-video-wrapper">
 		<?php
@@ -447,15 +424,22 @@ class Sticky_Video extends Widget_Base {
 				data-image="<?php echo esc_attr( $img ); ?>"
 				data-start="<?php echo esc_attr( $st ); ?>"
 				data-end="<?php echo esc_attr( $et ); ?>"
+				data-sticky="<?php echo esc_attr( $sticky ); ?>"
 				data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
-				data-sticky="<?php echo esc_attr( $sticky ); ?>">
+				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']) ?>"
+				data-mute="<?php echo esc_attr($settings['eaelsv_mute']) ?>"
+				data-loop="<?php echo esc_attr($settings['eaelsv_loop']) ?>">
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
 		<?php else:
 			$this->eaelsv_load_player($settings);
 		endif; ?>
 		</div>
-		<div class="eaelsv-sticky-player" style="<?php echo esc_attr($position); ?>"></div>
+		<div class="eaelsv-sticky-player" 
+			style="<?php echo esc_attr($position); ?>"
+			data-sticky="<?php echo esc_attr( $sticky ); ?>"
+			data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
+			data-id="<?php echo esc_attr( $id ); ?>"></div>
 		<?php
 		$this->eaelsv_enqueue_styles();
 	}
@@ -469,8 +453,8 @@ class Sticky_Video extends Widget_Base {
 			case "vimeo":
 				$this->eaelsv_load_player_vimeo($id);
 				break;
-			case "green":
-				echo "Your favorite color is green!";
+			case "self_hosted":
+				$this->eaelsv_load_player_self_hosted($settings['eaelsv_hosted_url']['url']);
 				break;
 			default:
 				$this->eaelsv_load_player_youtube($id);
@@ -495,6 +479,14 @@ class Sticky_Video extends Widget_Base {
 		<?php
 	}
 
+	protected function eaelsv_load_player_self_hosted($video){
+		?>
+		<video id="player" preload controls poster="images/poster.jpg">
+			<source src="<?php echo esc_attr($video); ?>" type="video/mp4">
+		</video>
+		<?php
+	}
+
 	protected function eaelsv_get_url_id( $settings ){
 		if('youtube' === $settings['eael_video_source']){
 			$url = $settings['eaelsv_link_youtube'];
@@ -505,6 +497,14 @@ class Sticky_Video extends Widget_Base {
 			$url = $settings['eaelsv_link_vimeo'];
 			$link = explode('/', $url);
 			$id = $link[3];
+		}
+		if('self_hosted' === $settings['eael_video_source']){
+			$externalUrl = $settings['eaelsv_link_external'];
+			if('yes'==$externalUrl){
+				$id = $settings['eaelsv_external_url'];
+			} else{
+				$id = $settings['eaelsv_hosted_url']['url'];
+			}
 		}
 		return $id;
 	}
@@ -534,8 +534,10 @@ class Sticky_Video extends Widget_Base {
 		<style>
 		.eael-sticky-video-wrapper {
 			position: relative;
-			height: 0;
-			padding-bottom: 56.25%;
+			width:100%;
+			height:300px;
+			margin:auto;
+			transition: 0.5s;
 		}
 
 		.eael-sticky-video-wrapper iframe {
@@ -556,11 +558,19 @@ class Sticky_Video extends Widget_Base {
 			height: 100%;
 			background-size: cover;
 			background-position: 50%;
-			/*
-			background-image: url('https://cdn.pixabay.com/photo/2016/10/17/10/52/wind-farm-1747331__340.jpg');
-			*/
 			cursor: pointer;
 			text-align: center;
+		}
+		.eael-sticky-video-wrapper.out{
+			position:fixed;
+			bottom:20px;
+			right:20px;
+			width:300px;
+			height:200px;
+			z-index:999;
+		}
+		.eael-sticky-video-wrapper.out iframe{
+			
 		}
 
 		.eael-sticky-video-player img {
@@ -597,11 +607,16 @@ class Sticky_Video extends Widget_Base {
 			position: fixed;
 			bottom: 50px;
 			right: 50px;
-			border: 1px solid #009900;
+			border: 0px solid #009900;
 			background-size: cover;
-			display:none;
 			z-index: 1000;
-			background: #EAEAEA;
+			background: transparent;
+			display:none!important;
+		}
+		.eaelsv-sticky-player.eaelsv-display-player{
+			display:block!important;
+			-webkit-animation: fadeIn 1s;
+    		animation: fadeIn 1s;
 		}
 		</style>
 		<?php
