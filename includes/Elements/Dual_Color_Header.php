@@ -280,20 +280,21 @@ class Dual_Color_Header extends Widget_Base {
     		'eael_dch_icon_size',
     		[
         		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
-       		'type' => Controls_Manager::SLIDER,
+       			'type' => Controls_Manager::SLIDER,
         		'default' => [
-            	'size' => 36,
+            		'size' => 36,
         		],
         		'range' => [
-            	'px' => [
-                	'min' => 20,
-                	'max' => 100,
-                	'step' => 1,
-            	]
+					'px' => [
+						'min' => 20,
+						'max' => 500,
+						'step' => 1,
+					]
         		],
         		'selectors' => [
-            	'{{WRAPPER}} .eael-dual-header i' => 'font-size: {{SIZE}}px;',
-        		],
+					'{{WRAPPER}} .eael-dual-header i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-dual-header img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+        		]
     		]
 		);
 
@@ -409,7 +410,11 @@ class Dual_Color_Header extends Widget_Base {
 	   <span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
 	   <?php if( 'yes' == $settings['eael_show_dch_icon_content'] ) : ?>
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<i class="<?php echo esc_attr( $settings['eael_dch_icon_new']['value'] ); ?>"></i>
+				<?php if ( isset( $settings['eael_dch_icon_new']['value']['url'] ) ) : ?>
+					<img src="<?php echo esc_attr( $settings['eael_dch_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_dch_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
+				<?php else : ?>
+					<i class="<?php echo esc_attr( $settings['eael_dch_icon_new']['value'] ); ?>"></i>
+				<?php endif; ?>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
 			<?php } ?>
