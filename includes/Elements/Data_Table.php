@@ -547,8 +547,48 @@ class Data_Table extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              	'name' => 'eael_data_table_header_title_typography',
-				'selector' => '{{WRAPPER}} .eael-data-table thead > tr th',
+				'selector' => '{{WRAPPER}} .eael-data-table thead > tr th .data-table-header-text',
 			]
+		);
+
+		$this->add_responsive_control(
+            'header_icon_size',
+            [
+                'label'                 => __( 'Icon Size', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::SLIDER,
+                'size_units'            => [ 'px' ],
+                'range'                 => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 70,
+                    ],
+				],
+				'default'	=> [
+					'size'	=> 20
+				],
+                'selectors'             => [
+					'{{WRAPPER}} .eael-data-table thead tr th i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-data-table thead tr th img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				]
+            ]
+		);
+
+		$this->add_responsive_control(
+            'header_icon_space',
+            [
+                'label'                 => __( 'Icon Space', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::SLIDER,
+                'size_units'            => [ 'px' ],
+                'range'                 => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 70,
+                    ],
+				],
+                'selectors'             => [
+					'{{WRAPPER}} .eael-data-table thead tr th i, {{WRAPPER}} .eael-data-table thead tr th img' => 'margin-right: {{SIZE}}{{UNIT}};'
+				]
+            ]
 		);
 
 		$this->add_responsive_control(
@@ -1021,7 +1061,11 @@ class Data_Table extends Widget_Base {
 			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
 							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
 								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
-									<i class="<?php echo $header_title['eael_data_table_header_col_icon_new']['value'] ?> data-header-icon"></i>
+									<?php if( isset($header_title['eael_data_table_header_col_icon_new']['value']['url']) ) : ?>
+										<img class="data-header-icon" src="<?php echo $header_title['eael_data_table_header_col_icon_new']['value']['url'] ?>" alt="<?php echo esc_attr(get_post_meta($header_title['eael_data_table_header_col_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+									<?php else : ?>
+										<i class="<?php echo $header_title['eael_data_table_header_col_icon_new']['value'] ?> data-header-icon"></i>
+									<?php endif; ?>
 								<?php } else { ?>
 									<i class="<?php echo $header_title['eael_data_table_header_col_icon'] ?> data-header-icon"></i>
 								<?php } ?>
@@ -1034,7 +1078,7 @@ class Data_Table extends Widget_Base {
 										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
 										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
 									]);
-							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?></th>
+							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( $header_title['eael_data_table_header_col'], 'essential-addons-elementor' ); ?></span></th>
 			        	<?php $i++; endforeach; ?>
 			        </tr>
 			    </thead>
