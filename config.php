@@ -302,6 +302,9 @@ $config = [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/sticky-video/index.min.css',
                 ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/sticky-video/index.min.js',
+                ],
             ],
         ],
     ],

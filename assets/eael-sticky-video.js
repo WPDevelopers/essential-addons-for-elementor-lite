@@ -3,7 +3,7 @@
     var StickyVideo = function(scope, $) {
         var videoElement = scope.find('.eael-sticky-video-player');
         
-        //alert(stickyElement);
+        alert('Bangladesh');
         //$('.eaelsv-sticky-player').html('');
         for (i = 0; i < videoElement.length; i++) {
             //alert(i);
