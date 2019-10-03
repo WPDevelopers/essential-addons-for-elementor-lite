@@ -770,7 +770,7 @@ class Feature_List extends Widget_Base
                         <?php if ($item['eael_feature_list_icon_type'] == 'icon') { ?>
 							<?php if (empty($item['eael_feature_list_icon']) || isset($item['__fa4_migrated']['eael_feature_list_icon_new'])) { ?>
 								<?php if( isset($item['eael_feature_list_icon_new']['value']['url']) ) : ?>
-									<img src="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
+									<img src="<?php echo esc_url( $item['eael_feature_list_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
 								<?php else : ?>
 									<i class="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value'] ); ?>" aria-hidden="true"></i>
 								<?php endif; ?>
