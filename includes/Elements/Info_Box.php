@@ -1676,7 +1676,7 @@ class Info_Box extends Widget_Base {
 				<?php if( 'left' == $settings['eael_infobox_button_icon_alignment']) : ?>
 					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
 						<?php if ( isset($settings['eael_infobox_button_icon_new']['value']['url']) ) { ?>
-							<img class="eael_infobox_button_icon_left" src="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>"/>
+							<img class="eael_infobox_button_icon_left" src="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?> eael_infobox_button_icon_left"></i>
 						<?php } ?>
@@ -1688,7 +1688,7 @@ class Info_Box extends Widget_Base {
 				<?php if( 'right' == $settings['eael_infobox_button_icon_alignment']) : ?>
 					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
 						<?php if ( isset($settings['eael_infobox_button_icon_new']['value']['url']) ) { ?>
-							<img class="eael_infobox_button_icon_right" src="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>"/>
+							<img class="eael_infobox_button_icon_right" src="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?> eael_infobox_button_icon_right"></i>
 						<?php } ?>
