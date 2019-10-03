@@ -422,6 +422,7 @@ class Feature_List extends Widget_Base
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-feature-list-img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -768,7 +769,11 @@ class Feature_List extends Widget_Base
 
                         <?php if ($item['eael_feature_list_icon_type'] == 'icon') { ?>
 							<?php if (empty($item['eael_feature_list_icon']) || isset($item['__fa4_migrated']['eael_feature_list_icon_new'])) { ?>
-								<i class="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value'] ); ?>" aria-hidden="true"></i>
+								<?php if( isset($item['eael_feature_list_icon_new']['value']['url']) ) : ?>
+									<img src="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
+								<?php else : ?>
+									<i class="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value'] ); ?>" aria-hidden="true"></i>
+								<?php endif; ?>
 							<?php } else { ?>
 								<i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
 							<?php } ?>
@@ -807,6 +812,5 @@ class Feature_List extends Widget_Base
 		<?php
 	}
 
-	protected function _content_template() {
-	}
+	protected function _content_template() {}
 }
