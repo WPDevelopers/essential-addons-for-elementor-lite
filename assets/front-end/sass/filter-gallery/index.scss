@@ -426,9 +426,10 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	transition: 0.6s all ease;
 }
 
-.gallery-item-caption-wrap .gallery-item-buttons > a {
-	padding: 5px 15px;
-	display: inline-block;
+.gallery-item-caption-wrap .gallery-item-buttons > a span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border-radius: 50%;
 	outline: none;
 	text-decoration: none;
