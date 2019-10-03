@@ -29,7 +29,7 @@ class Sticky_Video extends Widget_Base {
 	}
 	
 	protected function _register_controls() {
-		add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
+		//add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
 
   		$this->start_controls_section(
   			'eael_section_video_settings',
@@ -419,7 +419,8 @@ class Sticky_Video extends Widget_Base {
 			endif;
 			?>
 			<div class="eael-sticky-video-player" 
-				style="background-image:url('<?php echo esc_attr($img); ?>');" 
+				style="background-image:url('<?php echo esc_attr($img); ?>');"
+				data-overlay="<?php echo esc_attr($settings['eaelsv_overlay_options']); ?>"
 				data-id="<?php echo esc_attr( $id ); ?>"
 				data-image="<?php echo esc_attr( $img ); ?>"
 				data-start="<?php echo esc_attr( $st ); ?>"
@@ -431,9 +432,19 @@ class Sticky_Video extends Widget_Base {
 				data-loop="<?php echo esc_attr($settings['eaelsv_loop']) ?>">
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
-		<?php else:
-			$this->eaelsv_load_player($settings);
-		endif; ?>
+		<?php else: ?>
+			<div class="eael-sticky-video-player" 
+				data-id="<?php echo esc_attr( $id ); ?>"
+				data-start="<?php echo esc_attr( $st ); ?>"
+				data-end="<?php echo esc_attr( $et ); ?>"
+				data-sticky="<?php echo esc_attr( $sticky ); ?>"
+				data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
+				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']) ?>"
+				data-mute="<?php echo esc_attr($settings['eaelsv_mute']) ?>"
+				data-loop="<?php echo esc_attr($settings['eaelsv_loop']) ?>">
+				<?php $this->eaelsv_load_player($settings); ?>
+			</div>
+		<?php endif; ?>
 		</div>
 		<div class="eaelsv-sticky-player" 
 			style="<?php echo esc_attr($position); ?>"
@@ -481,7 +492,7 @@ class Sticky_Video extends Widget_Base {
 
 	protected function eaelsv_load_player_self_hosted($video){
 		?>
-		<video id="player" preload controls poster="images/poster.jpg">
+		<video id="player" preload controls autoplay="1" height="100%" poster="images/poster.jpg">
 			<source src="<?php echo esc_attr($video); ?>" type="video/mp4">
 		</video>
 		<?php
@@ -526,7 +537,7 @@ class Sticky_Video extends Widget_Base {
 	}
 
 	public function eaelsv_custom_scripts(){
-		wp_enqueue_script( 'eaelsv-js', plugins_url( '../../assets/eael-sticky-video.js', __FILE__ ), ['jquery'], time(), true );
+		wp_enqueue_script( 'eaelsv-js', plugins_url( '../../assets/front-end/js/sticky-video/index.js', __FILE__ ), ['jquery'], time(), true );
 	}
 
 	protected function eaelsv_enqueue_styles(){
@@ -540,7 +551,8 @@ class Sticky_Video extends Widget_Base {
 			transition: 0.5s;
 		}
 
-		.eael-sticky-video-wrapper iframe {
+		.eael-sticky-video-wrapper iframe,
+		.eael-sticky-video-wrapper video {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -561,6 +573,22 @@ class Sticky_Video extends Widget_Base {
 			cursor: pointer;
 			text-align: center;
 		}
+
+		.eael-sticky-video-player1 {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			background-position: 50%;
+			cursor: pointer;
+			text-align: center;
+			background:#009900;
+			z-index:1000;
+			opacity:0.5;
+		}
+
 		.eael-sticky-video-wrapper.out{
 			position:fixed;
 			bottom:20px;
