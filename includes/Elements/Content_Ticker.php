@@ -498,7 +498,7 @@ class Content_Ticker extends Widget_Base
                 'default' => [
                     'value' => 'fas fa-angle-right',
                     'library' => 'fa-solid',
-                ],
+                ]
             ]
         );
 
