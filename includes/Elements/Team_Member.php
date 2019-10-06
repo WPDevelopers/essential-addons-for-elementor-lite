@@ -181,7 +181,7 @@ class Team_Member extends Widget_Base {
 						'placeholder' => esc_html__( 'Place URL here', 'essential-addons-elementor' ),
 					],
 				],
-				'title_field' => '<i class="{{ social_new.value }}"></i> {{{ social_new.value.replace( \'fas fa-\', \'\' ).replace( \'-\', \' \' ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}',
+				'title_field' => '<i class="{{ social_new.value }}"></i>',
 			]
 		);
 
@@ -604,8 +604,14 @@ class Team_Member extends Widget_Base {
 						'max' => 200,
 					],
 				],
+				'default'	=> [
+					'size'	=> 35,
+					'unit'	=> 'px'
+				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-team-member-social-link > a' => 'width: {{SIZE}}px; height: {{SIZE}}px; line-height: {{SIZE}}px;',
+					// '{{WRAPPER}} .eael-team-member-social-link > a' => 'width: {{SIZE}}px; height: {{SIZE}}px; line-height: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-team-member-social-link > a i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-team-member-social-link > a img' => 'width: {{SIZE}}px; height: {{SIZE}}px; line-height: {{SIZE}}px;',
 				],
 			]
 		);
@@ -784,7 +790,11 @@ class Team_Member extends Widget_Base {
 								<li class="eael-team-member-social-link">
 									<a href="<?php echo esc_attr( $item['link']['url'] ); ?>" <?php echo $target; ?>>
 										<?php if ($icon_is_new || $icon_migrated) { ?>
-											<i class="<?php echo esc_attr($item['social_new']['value'] ); ?>"></i>
+											<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
+												<img src="<?php echo esc_attr($item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+											<?php else : ?>
+												<i class="<?php echo esc_attr($item['social_new']['value'] ); ?>"></i>
+											<?php endif; ?>
 										<?php } else { ?>
 											<i class="<?php echo esc_attr($item['social'] ); ?>"></i>
 										<?php } ?>
