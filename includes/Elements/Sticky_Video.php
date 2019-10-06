@@ -453,6 +453,7 @@ class Sticky_Video extends Widget_Base {
 			data-id="<?php echo esc_attr( $id ); ?>"></div>
 		<?php
 		$this->eaelsv_enqueue_styles();
+		$this->eaelsv_sticky_video_styles($settings);
 	}
 	
 	protected function eaelsv_load_player($settings){
@@ -485,7 +486,7 @@ class Sticky_Video extends Widget_Base {
 		?>
 		<iframe 
 			src="https://player.vimeo.com/video/<?php echo esc_attr($id); ?>"
-			width="420" height="315" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+			width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen>
 		</iframe>
 		<?php
 	}
@@ -588,7 +589,7 @@ class Sticky_Video extends Widget_Base {
 			z-index:1000;
 			opacity:0.5;
 		}
-
+		/*
 		.eael-sticky-video-wrapper.out{
 			position:fixed;
 			bottom:20px;
@@ -597,6 +598,7 @@ class Sticky_Video extends Widget_Base {
 			height:200px;
 			z-index:999;
 		}
+		*/
 		.eael-sticky-video-wrapper.out iframe{
 			
 		}
@@ -648,6 +650,34 @@ class Sticky_Video extends Widget_Base {
 		}
 		</style>
 		<?php
+	}
+
+	public function eaelsv_sticky_video_styles($settings){
+		echo $sticky = $settings['eaelsv_is_sticky'];
+		$position = $settings['eaelsv_sticky_position'];
+		if('top-left'==$position){
+			$pos = 'top:20px; left:20px;';
+		}
+		if('top-right'==$position){
+			$pos = 'top:20px; right:20px;';
+		}
+		if('bottom-right'==$position){
+			$pos = 'bottom:20px; right:20px;';
+		}
+		if('bottom-left'==$position){
+			$pos = 'bottom:20px; left:20px;';
+		}
+		if('yes'==$sticky){ ?>
+		<style>
+		.eael-sticky-video-wrapper.out{
+			position:fixed;
+			<?php echo $pos; ?>
+			width:300px;
+			height:200px;
+			z-index:999;
+		}
+		</style>
+		<?php }
 	}
 
 }
