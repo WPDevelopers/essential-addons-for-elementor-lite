@@ -623,7 +623,11 @@ class Tooltip extends Widget_Base {
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
 			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?>
 			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value'] ); ?>"></i>
+				<?php if( isset($settings['eael_tooltip_icon_content_new']['value']['url']) ) : ?>
+					<img src="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_tooltip_icon_content_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+				<?php else : ?>
+					<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value'] ); ?>"></i>
+				<?php endif; ?>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content'] ); ?>"></i>
 			<?php } ?>
