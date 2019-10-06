@@ -23,10 +23,14 @@ trait Post_Grid
                             if (has_post_thumbnail() && $settings['eael_show_image'] == 1) {
                                 echo '<div class="eael-entry-media">';
                                     if ('none' !== $settings['eael_post_grid_hover_animation']) {
-                                        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">
-                                            <i class="' . $settings['eael_post_grid_bg_hover_icon'] . '" aria-hidden="true"></i>
-                                            <a href="' . get_the_permalink() . '"></a>
-                                        </div>';
+                                        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+                                            if( isset($settings['eael_post_grid_bg_hover_icon']['url']) ) {
+                                                echo '<img src="'.esc_url($settings['eael_post_grid_bg_hover_icon']['url']).'" alt="'.esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon']['id'], '_wp_attachment_image_alt', true)).'" />';
+                                            }else {
+                                                echo '<i class="' . $settings['eael_post_grid_bg_hover_icon'] . '" aria-hidden="true"></i>';
+                                            }
+                                            echo '<a href="' . get_the_permalink() . '"></a>';
+                                        echo '</div>';
                                     }
 
                                     echo '<div class="eael-entry-thumbnail">
