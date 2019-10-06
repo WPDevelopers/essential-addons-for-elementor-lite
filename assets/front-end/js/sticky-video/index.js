@@ -4,8 +4,6 @@
     var eaelVideoElement = '';
     var StickyVideo = function(scope, $) {
         var videoElement = scope.find('.eael-sticky-video-player');
-        //var videoElementWrapper = scope.find('.eael-sticky-video-wrapper');
-        //alert(videoElementWrapper.length);
         for (i = 0; i < videoElement.length; i++) {
             var overlayImage = videoElement[i].dataset.image;
             var source = videoElement[i].dataset.source;
@@ -76,7 +74,7 @@
             }
             if(overlay!='yes'){
                 eaelVideoElement = videoElement[i].querySelector('video');
-                
+                //alert(eaelVideoElement+'Hello');
                 if('yes'== autoplay){
                     //videoElement[i].innerHTML = iframe1;
                     eaelStickVideoHeight = ($(videoElement[i]).parent().offset().top + $(videoElement[i]).parent().height());
@@ -93,18 +91,28 @@
                     //alert(eaelVideoElement+'='+media)
                     eaelVideoElement.addEventListener("playing", function() {
                         eaelStickVideoHeight = ($(this).parent().offset().top + $(this).parent().height());
+                        //alert(eaelStickVideoHeight);
+                        $('.eael-sticky-video-wrapper').removeAttr('id');
                         $(this).parent().parent().attr('id', 'videobox');
                         if(videoIsActive == 0){
                             videoIsActive = 1;
                         }
                     });
+                    
                 }
                 eaelVideoElement.addEventListener("pause", function() {
                     if(videoIsActive == 1){
                         videoIsActive = 0;
                     }
                 });
-            } 
+            }
+            /*
+            eaelIframeElement = videoElement[i].querySelector('video');
+            alert(eaelIframeElement);
+            eaelIframeElement.addEventListener("click", function() {
+                alert('Hello');
+            });
+            */
         }
     };
 

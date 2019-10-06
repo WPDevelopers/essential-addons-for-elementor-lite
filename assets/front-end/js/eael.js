@@ -1893,148 +1893,6 @@ return ImagesLoaded;
 });
 
 
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -5599,6 +5457,148 @@ var trim = String.prototype.trim ?
 }));
 
 
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -11839,70 +11839,64 @@ return $;
     });
 })(jQuery);
 
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
 
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
 
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
             }
-        });
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
     });
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
     );
 });
 
@@ -12025,6 +12019,73 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -12097,67 +12158,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",
         AdvanceTabHandler
-    );
-});
-
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
     );
 });
 
@@ -12453,28 +12453,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
-    );
-});
-
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".tooltip"),
@@ -12522,6 +12500,28 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var ProgressBar = function($scope, $) {
     $(".eael-progressbar", $scope).eaelProgressBar();
 };
@@ -12532,6 +12532,177 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
+    );
+});
+
+;(function (window, $) {
+    var videoIsActive = 0;
+    var eaelStickVideoHeight = '';
+    var eaelVideoElement = '';
+    var StickyVideo = function(scope, $) {
+        var videoElement = scope.find('.eael-sticky-video-player');
+        for (i = 0; i < videoElement.length; i++) {
+            var overlayImage = videoElement[i].dataset.image;
+            var source = videoElement[i].dataset.source;
+            var start = videoElement[i].dataset.start;
+            var end = videoElement[i].dataset.end;
+            var id = videoElement[i].dataset.id;
+            var autoplay = videoElement[i].dataset.autoplay;
+            var mute = videoElement[i].dataset.mute;
+            var loop = videoElement[i].dataset.loop;
+            var overlay = videoElement[i].dataset.overlay;
+            
+            var iframe1  =  document.createElement( 'iframe' );
+            var	embed1 = "";
+
+            if( source == 'youtube' ){
+                if('yes'== autoplay){ ap = 1;
+                } else{ ap = 0; }
+                if('yes'== mute){ mt = 1;
+                } else{ mt = 0; }
+                if('yes'== loop){ lp = '1';
+                } else{ lp = ''; }
+                embed1 = 'https://www.youtube.com/embed/ID?autoplay='+ap+'&rel=0&controls=1&showinfo=0&mute='+mt+'&loop=1&wmode=opaque&start='+start+'&end='+end;
+                iframe1.setAttribute( 'src', embed1.replace( 'ID', id ) );
+                iframe1.setAttribute( 'frameborder', '0' );
+                iframe1.setAttribute( 'allowfullscreen', '1' );
+            }
+            if( source == 'vimeo' ){
+                if('yes'== autoplay){ ap = 1;
+                } else{ ap = 0; }
+                if('yes'== mute){ mt = 1;
+                } else{ mt = 0; }
+                if('yes'== loop){ lp = '1';
+                } else{ lp = ''; }
+                embade1 = 'https://player.vimeo.com/video/'+id+'?autoplay='+ap+'&color=009900&title=1&byline=1&portrait=1&muted='+mt+'&loop='+lp+'';
+                iframe1.setAttribute( 'src', embade1 );
+                iframe1.setAttribute( 'webkitallowfullscreen', true );
+                iframe1.setAttribute( 'mozallowfullscreen', true );
+                iframe1.setAttribute( 'allowfullscreen', true );
+            }
+            if( source == 'self_hosted' ){
+                if('yes'== autoplay){ ap = 'autoplay';
+                } else{ ap = ''; }
+                if('yes'== mute){ mt = 'muted';
+                } else{ mt = ''; }
+                if('yes'== loop){ lp = 'loop';
+                } else{ lp = ''; }
+                iframe1 = '<video controls '+ap+' '+mt+' '+lp+'>'+
+                            '<source src="'+id+'" type="video/mp4">'+
+                            '</video>';
+            }
+            if('yes'==overlay){
+                if(overlayImage!=''){
+                    videoElement[i].style.backgroundImage = 'url('+overlayImage+')';
+                } else{
+                    videoElement[i].style.backgroundImage = 'url(//i.ytimg.com/vi/' + id + '/maxresdefault.jpg)';
+                }
+                videoElement[i].onclick = function() {
+                    $('.eael-sticky-video-wrapper').removeAttr('id');
+                    $(this).parent().attr('id', 'videobox');
+                    eaelStickVideoHeight = ($(this).parent().offset().top + $(this).parent().height());
+                    $(this).parent().empty().append(iframe1);
+                    //alert(videoIsActive);
+                    if(videoIsActive == 0){
+                        videoIsActive = 1;
+                    }
+                    //videoElement[i].parentElement.classList.add("HossniMubarak");
+                }
+            }
+            if(overlay!='yes'){
+                eaelVideoElement = videoElement[i].querySelector('video');
+                //alert(eaelVideoElement+'Hello');
+                if('yes'== autoplay){
+                    //videoElement[i].innerHTML = iframe1;
+                    eaelStickVideoHeight = ($(videoElement[i]).parent().offset().top + $(videoElement[i]).parent().height());
+        
+                    $(videoElement[i]).parent().attr('id', 'videobox');
+                    $(videoElement[i]).parent().empty().append(iframe1);
+                    if(videoIsActive == 0){
+                        videoIsActive = 1;
+                    }
+                }
+                if(autoplay == ''){
+                    //eaelVideoElement = videoElement[i].querySelector('video');
+                    //var media = document.getElementById('player');
+                    //alert(eaelVideoElement+'='+media)
+                    eaelVideoElement.addEventListener("playing", function() {
+                        eaelStickVideoHeight = ($(this).parent().offset().top + $(this).parent().height());
+                        //alert(eaelStickVideoHeight);
+                        $('.eael-sticky-video-wrapper').removeAttr('id');
+                        $(this).parent().parent().attr('id', 'videobox');
+                        if(videoIsActive == 0){
+                            videoIsActive = 1;
+                        }
+                    });
+                    
+                }
+                eaelVideoElement.addEventListener("pause", function() {
+                    if(videoIsActive == 1){
+                        videoIsActive = 0;
+                    }
+                });
+            }
+            /*
+            eaelIframeElement = videoElement[i].querySelector('video');
+            alert(eaelIframeElement);
+            eaelIframeElement.addEventListener("click", function() {
+                alert('Hello');
+            });
+            */
+        }
+    };
+
+    $(window).on("elementor/frontend/init", function() {
+        elementorFrontend.hooks.addAction(
+            "frontend/element_ready/eael-sticky-video.default",
+            StickyVideo
+        );
+    });
+    
+    $(window).scroll(function() {
+        var FloatVideo =  $('.eael-sticky-video-wrapper');
+        //alert(eaelStickVideoHeight);
+        if($(window).scrollTop() > eaelStickVideoHeight ) {
+            if(videoIsActive == 1){
+                $('#videobox').removeClass('in').addClass('out');
+				$('#videobox').css('bottom', '10');
+            }
+        }
+        else {
+            $('#videobox').removeClass('out').addClass('in');
+        }
+    });
+    
+})(window, jQuery);
 jQuery(document).ready(function() {
     // scroll func
     jQuery(window).scroll(function() {
@@ -12608,167 +12779,4 @@ jQuery(document).ready(function() {
             }
         );
     }
-});
-
-;(function (window, $) {
-    var videoIsActive = 0;
-    var eaelStickVideoHeight = '';
-    var eaelVideoElement = '';
-    var StickyVideo = function(scope, $) {
-        var videoElement = scope.find('.eael-sticky-video-player');
-        //var videoElementWrapper = scope.find('.eael-sticky-video-wrapper');
-        //alert(videoElementWrapper.length);
-        for (i = 0; i < videoElement.length; i++) {
-            var overlayImage = videoElement[i].dataset.image;
-            var source = videoElement[i].dataset.source;
-            var start = videoElement[i].dataset.start;
-            var end = videoElement[i].dataset.end;
-            var id = videoElement[i].dataset.id;
-            var autoplay = videoElement[i].dataset.autoplay;
-            var mute = videoElement[i].dataset.mute;
-            var loop = videoElement[i].dataset.loop;
-            var overlay = videoElement[i].dataset.overlay;
-            
-            var iframe1  =  document.createElement( 'iframe' );
-            var	embed1 = "";
-
-            if( source == 'youtube' ){
-                if('yes'== autoplay){ ap = 1;
-                } else{ ap = 0; }
-                if('yes'== mute){ mt = 1;
-                } else{ mt = 0; }
-                if('yes'== loop){ lp = '1';
-                } else{ lp = ''; }
-                embed1 = 'https://www.youtube.com/embed/ID?autoplay='+ap+'&rel=0&controls=1&showinfo=0&mute='+mt+'&loop=1&wmode=opaque&start='+start+'&end='+end;
-                iframe1.setAttribute( 'src', embed1.replace( 'ID', id ) );
-                iframe1.setAttribute( 'frameborder', '0' );
-                iframe1.setAttribute( 'allowfullscreen', '1' );
-            }
-            if( source == 'vimeo' ){
-                if('yes'== autoplay){ ap = 1;
-                } else{ ap = 0; }
-                if('yes'== mute){ mt = 1;
-                } else{ mt = 0; }
-                if('yes'== loop){ lp = '1';
-                } else{ lp = ''; }
-                embade1 = 'https://player.vimeo.com/video/'+id+'?autoplay='+ap+'&color=009900&title=1&byline=1&portrait=1&muted='+mt+'&loop='+lp+'';
-                iframe1.setAttribute( 'src', embade1 );
-                iframe1.setAttribute( 'webkitallowfullscreen', true );
-                iframe1.setAttribute( 'mozallowfullscreen', true );
-                iframe1.setAttribute( 'allowfullscreen', true );
-            }
-            if( source == 'self_hosted' ){
-                if('yes'== autoplay){ ap = 'autoplay';
-                } else{ ap = ''; }
-                if('yes'== mute){ mt = 'muted';
-                } else{ mt = ''; }
-                if('yes'== loop){ lp = 'loop';
-                } else{ lp = ''; }
-                iframe1 = '<video controls '+ap+' '+mt+' '+lp+'>'+
-                            '<source src="'+id+'" type="video/mp4">'+
-                            '</video>';
-            }
-            if('yes'==overlay){
-                if(overlayImage!=''){
-                    videoElement[i].style.backgroundImage = 'url('+overlayImage+')';
-                } else{
-                    videoElement[i].style.backgroundImage = 'url(//i.ytimg.com/vi/' + id + '/maxresdefault.jpg)';
-                }
-                videoElement[i].onclick = function() {
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $(this).parent().attr('id', 'videobox');
-                    eaelStickVideoHeight = ($(this).parent().offset().top + $(this).parent().height());
-                    $(this).parent().empty().append(iframe1);
-                    //alert(videoIsActive);
-                    if(videoIsActive == 0){
-                        videoIsActive = 1;
-                    }
-                    //videoElement[i].parentElement.classList.add("HossniMubarak");
-                }
-            }
-            if(overlay!='yes'){
-                eaelVideoElement = videoElement[i].querySelector('video');
-                
-                if('yes'== autoplay){
-                    //videoElement[i].innerHTML = iframe1;
-                    eaelStickVideoHeight = ($(videoElement[i]).parent().offset().top + $(videoElement[i]).parent().height());
-        
-                    $(videoElement[i]).parent().attr('id', 'videobox');
-                    $(videoElement[i]).parent().empty().append(iframe1);
-                    if(videoIsActive == 0){
-                        videoIsActive = 1;
-                    }
-                }
-                if(autoplay == ''){
-                    //eaelVideoElement = videoElement[i].querySelector('video');
-                    //var media = document.getElementById('player');
-                    //alert(eaelVideoElement+'='+media)
-                    eaelVideoElement.addEventListener("playing", function() {
-                        eaelStickVideoHeight = ($(this).parent().offset().top + $(this).parent().height());
-                        $(this).parent().parent().attr('id', 'videobox');
-                        if(videoIsActive == 0){
-                            videoIsActive = 1;
-                        }
-                    });
-                }
-                eaelVideoElement.addEventListener("pause", function() {
-                    if(videoIsActive == 1){
-                        videoIsActive = 0;
-                    }
-                });
-            } 
-        }
-    };
-
-    $(window).on("elementor/frontend/init", function() {
-        elementorFrontend.hooks.addAction(
-            "frontend/element_ready/eael-sticky-video.default",
-            StickyVideo
-        );
-    });
-    
-    $(window).scroll(function() {
-        var FloatVideo =  $('.eael-sticky-video-wrapper');
-        //alert(eaelStickVideoHeight);
-        if($(window).scrollTop() > eaelStickVideoHeight ) {
-            if(videoIsActive == 1){
-                $('#videobox').removeClass('in').addClass('out');
-				$('#videobox').css('bottom', '10');
-            }
-        }
-        else {
-            $('#videobox').removeClass('out').addClass('in');
-        }
-    });
-    
-})(window, jQuery);
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
 });
