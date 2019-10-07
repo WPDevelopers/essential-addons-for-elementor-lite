@@ -436,17 +436,37 @@ class Feature_List extends Widget_Base
 		);
 
 		$this->add_responsive_control(
-			'eael_feature_list_icon_size',
+			'eael_feature_list_icon_circle_size',
 			[
 				'label'     => esc_html__( 'Size', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
-					'size' => 30,
+					'size' => 80,
 				],
 				'range'     => [
 					'px' => [
 						'min' => 6,
 						'max' => 300,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_feature_list_icon_size',
+			[
+				'label'     => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => 40,
+				],
+				'range'     => [
+					'px' => [
+						'min' => 6,
+						'max' => 150,
 					],
 				],
 				'selectors' => [
