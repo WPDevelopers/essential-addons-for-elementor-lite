@@ -122,7 +122,6 @@ video {
   position: relative;
   font-size: 0;
   overflow: hidden;
-  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -133,7 +132,6 @@ video {
   left: 0;
   bottom: 0;
   right: 0;
-  border-radius: 5px;
   transition: opacity .2s;
   opacity: 1;
   visibility: visible;
@@ -162,6 +160,7 @@ video {
   display: -ms-flexbox;
   display: flex;
   max-width: 50px;
+  box-shadow:none!important;
 }
 
 .default__button i {
@@ -190,6 +189,7 @@ video {
   transition: all .2s;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
+  box-shadow: none!important;
 }
 
 .default__slider {
@@ -424,7 +424,6 @@ video {
   position: relative;
   font-size: 0;
   overflow: hidden;
-  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -435,7 +434,6 @@ video {
   left: 0;
   bottom: 0;
   right: 0;
-  border-radius: 5px;
   transition: opacity .2s;
   opacity: 1;
   visibility: visible;
