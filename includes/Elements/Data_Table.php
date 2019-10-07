@@ -568,7 +568,7 @@ class Data_Table extends Widget_Base {
 				],
                 'selectors'             => [
 					'{{WRAPPER}} .eael-data-table thead tr th i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-data-table thead tr th img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-data-table thead tr th .data-table-header-svg-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				]
             ]
 		);
@@ -1084,7 +1084,7 @@ class Data_Table extends Widget_Base {
 							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
 								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
 									<?php if( isset($header_title['eael_data_table_header_col_icon_new']['value']['url']) ) : ?>
-										<img class="data-header-icon" src="<?php echo $header_title['eael_data_table_header_col_icon_new']['value']['url'] ?>" alt="<?php echo esc_attr(get_post_meta($header_title['eael_data_table_header_col_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+										<img class="data-header-icon data-table-header-svg-icon" src="<?php echo $header_title['eael_data_table_header_col_icon_new']['value']['url'] ?>" alt="<?php echo esc_attr(get_post_meta($header_title['eael_data_table_header_col_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 									<?php else : ?>
 										<i class="<?php echo $header_title['eael_data_table_header_col_icon_new']['value'] ?> data-header-icon"></i>
 									<?php endif; ?>
