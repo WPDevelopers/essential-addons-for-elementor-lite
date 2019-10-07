@@ -429,6 +429,10 @@ class Creative_Button extends Widget_Base {
 					'label'      => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
 					'type'       => Controls_Manager::SLIDER,
 					'size_units' => [ 'px', '%' ],
+					'default' => [
+						'size' => 30,
+						'unit' => 'px',
+					],
 					'range'      => [
 						'px' => [
 							'min'  => 0,
@@ -516,7 +520,9 @@ class Creative_Button extends Widget_Base {
 						<?php if ( isset( $settings['eael_creative_button_icon_new']['value']['url']) ) : ?>
 							<img src="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value']['url'] ); ?>" class="eael-creative-button-icon-left" alt="<?php echo esc_attr(get_post_meta($settings['eael_creative_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
 						<?php else : ?>
-							<i class="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i>
+							<?php if( ! empty($settings['eael_creative_button_icon_new']['value']) ) {
+								echo '<i class="'.esc_attr($settings['eael_creative_button_icon_new']['value'] ).' eael-creative-button-icon-left" aria-hidden="true"></i>';
+							} ?>
 						<?php endif; ?>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
@@ -530,7 +536,9 @@ class Creative_Button extends Widget_Base {
 						<?php if ( isset( $settings['eael_creative_button_icon_new']['value']['url']) ) : ?>
 							<img src="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value']['url'] ); ?>" class="eael-creative-button-icon-right" alt="<?php echo esc_attr(get_post_meta($settings['eael_creative_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
 						<?php else : ?>
-							<i class="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i>
+							<?php if( ! empty($settings['eael_creative_button_icon_new']['value']) ) {
+								echo '<i class="'.esc_attr($settings['eael_creative_button_icon_new']['value'] ).' eael-creative-button-icon-right" aria-hidden="true"></i>';
+							} ?>
 						<?php endif; ?>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
