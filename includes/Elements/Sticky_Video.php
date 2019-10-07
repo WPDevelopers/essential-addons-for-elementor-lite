@@ -214,9 +214,48 @@ class Sticky_Video extends Widget_Base {
 				'label_block' => false
             ]
 		);
+		/*
+		$this->add_control(
+			'eaelsv_display_options',
+			[
+				'label' => __( 'Display', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition'     => [
+					'eael_video_source' => 'self_hosted'
+                ]
+			]
+		);
+		*/
+		$this->add_control(
+			'eaelsv_sh_show_bar',
+			[
+				'label'         => __( 'Show Bar', 'essential-addons-elementor' ),
+				'type'          => Controls_Manager::SWITCHER,
+				'label_block' => false,
+				'condition'     => [
+					'eael_video_source' => 'self_hosted'
+                ]
+            ]
+		);
+
+		$this->add_control(
+			'eaelsv_sh_show_fullscreen',
+			[
+				'label'         => __( 'Show Fullscreen', 'essential-addons-elementor' ),
+				'type'          => Controls_Manager::SWITCHER,
+				'label_block' => false,
+				'condition'     => [
+					'eael_video_source' => 'self_hosted',
+					'eaelsv_sh_show_bar' => 'yes'
+                ]
+            ]
+		);
 
 		$this->end_controls_section();
 
+
+		//=========================================================================
 		$this->start_controls_section(
 			'eael_video_image_overlay_section',
 			[
@@ -341,7 +380,6 @@ class Sticky_Video extends Widget_Base {
 			[
 				'label'     => __( 'Position', 'essential-addons-elementor' ),
                 'type'      => Controls_Manager::SELECT,
-                'default'   => 'youtube',
                 'options'	=> [
 					'top-left'   	=> __( 'Top Left', 'essential-addons-elementor' ),
 					'top-right'     => __( 'Top Right', 'essential-addons-elementor' ),
@@ -386,13 +424,65 @@ class Sticky_Video extends Widget_Base {
 					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'height: {{SIZE}}px'
 				]
             ]
-        );
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'eaelsv_sh_player_section',
+			[
+				'label' => __( 'Player', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_responsive_control(
+			'eaelsv_sh_video_width',
+			[
+				'label'      => esc_html__( 'Width', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 600,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .ckin__player' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eaelsv_sh_video_border_type',
+			[
+				'label'     => __( 'Border Type', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => 'none',
+                'options'	=> [
+					'none'   	=> __( 'None', 'essential-addons-elementor' ),
+					'solid'     => __( 'Solid', 'essential-addons-elementor' ),
+					'double'	=> __( 'Double', 'essential-addons-elementor' ),
+					'dotted'	=> __( 'Dotted', 'essential-addons-elementor' ),
+					'dashed'	=> __( 'Dashed', 'essential-addons-elementor' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .ckin__player' => 'border: 5px {{VALUE}} #009900;',
+				],
+            ]
+		);
 
 		$this->end_controls_section();
     }
 
     protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 		$image = $settings['eaelsv_overlay_image']['url'];
 		$id = $this->eaelsv_get_url_id($settings);
 		$iconNew = $settings['eaelsv_icon_new'];
@@ -433,17 +523,17 @@ class Sticky_Video extends Widget_Base {
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
 		<?php else: ?>
-			<div class="eael-sticky-video-player" 
-				data-id="<?php echo esc_attr( $id ); ?>"
-				data-start="<?php echo esc_attr( $st ); ?>"
-				data-end="<?php echo esc_attr( $et ); ?>"
-				data-sticky="<?php echo esc_attr( $sticky ); ?>"
-				data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
-				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']) ?>"
-				data-mute="<?php echo esc_attr($settings['eaelsv_mute']) ?>"
-				data-loop="<?php echo esc_attr($settings['eaelsv_loop']) ?>">
+			<!-- div class="eael-sticky-video-player" 
+				data-id="<?php //echo esc_attr( $id ); ?>"
+				data-start="<?php //echo esc_attr( $st ); ?>"
+				data-end="<?php //echo esc_attr( $et ); ?>"
+				data-sticky="<?php //echo esc_attr( $sticky ); ?>"
+				data-source="<?php //echo esc_attr($settings['eael_video_source']); ?>"
+				data-autoplay="<?php //echo esc_attr($settings['eaelsv_autopaly']) ?>"
+				data-mute="<?php //echo esc_attr($settings['eaelsv_mute']) ?>"
+				data-loop="<?php //echo esc_attr($settings['eaelsv_loop']) ?>" -->
 				<?php $this->eaelsv_load_player($settings); ?>
-			</div>
+			<!-- /div -->
 		<?php endif; ?>
 		</div>
 		<div class="eaelsv-sticky-player" 
@@ -452,7 +542,7 @@ class Sticky_Video extends Widget_Base {
 			data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
 			data-id="<?php echo esc_attr( $id ); ?>"></div>
 		<?php
-		$this->eaelsv_enqueue_styles();
+		//$this->eaelsv_enqueue_styles();
 		$this->eaelsv_sticky_video_styles($settings);
 	}
 	
@@ -466,7 +556,7 @@ class Sticky_Video extends Widget_Base {
 				$this->eaelsv_load_player_vimeo($id);
 				break;
 			case "self_hosted":
-				$this->eaelsv_load_player_self_hosted($settings['eaelsv_hosted_url']['url']);
+				$this->eaelsv_load_player_self_hosted($settings);
 				break;
 			default:
 				$this->eaelsv_load_player_youtube($id);
@@ -491,9 +581,40 @@ class Sticky_Video extends Widget_Base {
 		<?php
 	}
 
-	protected function eaelsv_load_player_self_hosted($video){
+	protected function eaelsv_load_player_self_hosted($settings){
+		$video = $settings['eaelsv_hosted_url']['url'];
+		$controlBars = $settings['eaelsv_sh_show_bar'];
+		$autoplay = $settings['eaelsv_autopaly'];
+		$mute = $settings['eaelsv_mute'];
+		$loop = $settings['eaelsv_loop'];
+		//$fullScreen	= $settings['eaelsv_sh_show_fullscreen'];
 		?>
-		<video id="player" preload controls autoplay="1" height="100%" poster="images/poster.jpg">
+		<video poster="ckin.jpg" 
+		src="<?php echo esc_attr($video); ?>" 
+		data-color="#fff000" 
+		data-ckin="compact" 
+		data-overlay="2">
+		</video>
+		<?php
+	}
+
+	protected function eaelsv_load_player_self_hosted1($settings){
+		$video = $settings['eaelsv_hosted_url']['url'];
+		$controlBars = $settings['eaelsv_sh_show_bar'];
+		$autoplay = $settings['eaelsv_autopaly'];
+		$mute = $settings['eaelsv_mute'];
+		$loop = $settings['eaelsv_loop'];
+		//$fullScreen	= $settings['eaelsv_sh_show_fullscreen'];
+		?>
+		<video
+			id="player" 
+			preload 
+			<?php if('yes'==$controlBars) echo "controls"; ?> 
+			<?php if('yes'==$autoplay) echo "autoplay"; ?>  
+			<?php if('yes'==$mute) echo "muted"; ?> 
+			<?php if('yes'==$loop) echo "loop"; ?> 
+			height="100%" 
+			poster="images/poster.jpg">
 			<source src="<?php echo esc_attr($video); ?>" type="video/mp4">
 		</video>
 		<?php
@@ -544,21 +665,26 @@ class Sticky_Video extends Widget_Base {
 	protected function eaelsv_enqueue_styles(){
 		?>
 		<style>
+		.controls {
+			border:5px solid #CC0000;
+		}
 		.eael-sticky-video-wrapper {
 			position: relative;
 			width:100%;
-			height:300px;
-			margin:auto;
+			min-height:10px;
+			margin:0px; padding:0px;
 			transition: 0.5s;
+			text-align:left;
+			overflow: hidden;
 		}
 
 		.eael-sticky-video-wrapper iframe,
 		.eael-sticky-video-wrapper video {
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: 100%;
+			position: relative;
+			/*top: 0;
+			left: 0;*/
+			margin:0px; padding:0px;
+			height:auto;
 			border: 0;
 			line-height: 1;
 		}
@@ -653,7 +779,7 @@ class Sticky_Video extends Widget_Base {
 	}
 
 	public function eaelsv_sticky_video_styles($settings){
-		echo $sticky = $settings['eaelsv_is_sticky'];
+		$sticky = $settings['eaelsv_is_sticky'];
 		$position = $settings['eaelsv_sticky_position'];
 		if('top-left'==$position){
 			$pos = 'top:20px; left:20px;';
