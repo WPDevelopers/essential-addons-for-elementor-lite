@@ -86,6 +86,8 @@ table.eael-data-table thead .sorting:after, table.eael-data-table thead .sorting
 
 .data-header-icon {
   margin-right: 10px;
+  position: relative;
+  top: 2px;
 }
 
 .eael-data-table {
