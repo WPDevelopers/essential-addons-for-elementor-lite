@@ -473,10 +473,141 @@ class Sticky_Video extends Widget_Base {
 					'dashed'	=> __( 'Dashed', 'essential-addons-elementor' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} .ckin__player' => 'border: 5px {{VALUE}} #009900;',
+					'{{WRAPPER}} .ckin__player' => 'border-style: {{VALUE}};',
 				],
             ]
 		);
+
+		$this->add_responsive_control(
+            'eaelsv_sh_video_border_width',
+            [
+                'label' => esc_html__('Border Width', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .ckin__player' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+		);
+		
+		$this->add_control(
+            'eaelsv_sh_video_border_color',
+            [
+                'label' => esc_html__('Border Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .ckin__player' => 'border-color: {{VALUE}};',
+                ],
+            ]
+		);
+		
+		$this->add_responsive_control(
+            'eaelsv_sh_video_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .ckin__player' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'eaelsv_sh_player_interface_section',
+			[
+				'label' => __( 'Interface', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'eaelsv_sh_video_skin',
+			[
+				'label'     => __( 'Player Skin', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => 'default',
+                'options'	=> [
+					'default'	=> __( 'Default', 'essential-addons-elementor' ),
+					'compact'	=> __( 'Compact', 'essential-addons-elementor' ),
+				],
+				'condition'     => [
+					'eael_video_source' => 'self_hosted',
+                ]
+            ]
+		);
+
+		$this->add_control(
+            'eaelsv_sh_video_interface_color',
+            [
+                'label' => esc_html__('Interface Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ADD8E6',
+            ]
+		);
+
+		$this->add_responsive_control(
+            'eaelsv_sh_play_button_size',
+            [
+                'label' => __('Play Button Size', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 64,
+                    'unit' => 'px',
+                ],
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 64,
+                        'max' => 192,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .default__button--big' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .compact__button--big' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'eaelsv_sh_player_bar_section',
+			[
+				'label' => __( 'Bar', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+				'condition'     => [
+					'eael_video_source' => 'self_hosted',
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+            'eaelsv_sh_player_bar_padding',
+            [
+                'label' => __('Bar Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 10,
+                    'unit' => 'px',
+                ],
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .compact__controls' => 'padding: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
 		$this->end_controls_section();
     }
@@ -523,17 +654,17 @@ class Sticky_Video extends Widget_Base {
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
 		<?php else: ?>
-			<!-- div class="eael-sticky-video-player" 
-				data-id="<?php //echo esc_attr( $id ); ?>"
-				data-start="<?php //echo esc_attr( $st ); ?>"
-				data-end="<?php //echo esc_attr( $et ); ?>"
-				data-sticky="<?php //echo esc_attr( $sticky ); ?>"
-				data-source="<?php //echo esc_attr($settings['eael_video_source']); ?>"
-				data-autoplay="<?php //echo esc_attr($settings['eaelsv_autopaly']) ?>"
-				data-mute="<?php //echo esc_attr($settings['eaelsv_mute']) ?>"
-				data-loop="<?php //echo esc_attr($settings['eaelsv_loop']) ?>" -->
+			<div class="eael-sticky-video-player2" 
+				data-id="<?php echo esc_attr( $id ); ?>"
+				data-start="<?php echo esc_attr( $st ); ?>"
+				data-end="<?php echo esc_attr( $et ); ?>"
+				data-sticky="<?php echo esc_attr( $sticky ); ?>"
+				data-source="<?php echo esc_attr($settings['eael_video_source']); ?>"
+				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']) ?>"
+				data-mute="<?php echo esc_attr($settings['eaelsv_mute']) ?>"
+				data-loop="<?php echo esc_attr($settings['eaelsv_loop']) ?>">
 				<?php $this->eaelsv_load_player($settings); ?>
-			<!-- /div -->
+			</div>
 		<?php endif; ?>
 		</div>
 		<div class="eaelsv-sticky-player" 
@@ -582,40 +713,24 @@ class Sticky_Video extends Widget_Base {
 	}
 
 	protected function eaelsv_load_player_self_hosted($settings){
-		$video = $settings['eaelsv_hosted_url']['url'];
+		if($settings['eaelsv_external_url']!=''){
+			$video = $settings['eaelsv_external_url'];
+		} else{
+			$video = $settings['eaelsv_hosted_url']['url'];
+		}
 		$controlBars = $settings['eaelsv_sh_show_bar'];
 		$autoplay = $settings['eaelsv_autopaly'];
 		$mute = $settings['eaelsv_mute'];
 		$loop = $settings['eaelsv_loop'];
-		//$fullScreen	= $settings['eaelsv_sh_show_fullscreen'];
+		$interfaceColor = $settings['eaelsv_sh_video_interface_color'];
+		$skin = $settings['eaelsv_sh_video_skin'];
 		?>
-		<video poster="ckin.jpg" 
+		<video 
+		poster="https://upload.wikimedia.org/wikipedia/commons/4/4b/What_Is_URL.jpg"
 		src="<?php echo esc_attr($video); ?>" 
-		data-color="#fff000" 
-		data-ckin="compact" 
-		data-overlay="2">
-		</video>
-		<?php
-	}
-
-	protected function eaelsv_load_player_self_hosted1($settings){
-		$video = $settings['eaelsv_hosted_url']['url'];
-		$controlBars = $settings['eaelsv_sh_show_bar'];
-		$autoplay = $settings['eaelsv_autopaly'];
-		$mute = $settings['eaelsv_mute'];
-		$loop = $settings['eaelsv_loop'];
-		//$fullScreen	= $settings['eaelsv_sh_show_fullscreen'];
-		?>
-		<video
-			id="player" 
-			preload 
-			<?php if('yes'==$controlBars) echo "controls"; ?> 
-			<?php if('yes'==$autoplay) echo "autoplay"; ?>  
-			<?php if('yes'==$mute) echo "muted"; ?> 
-			<?php if('yes'==$loop) echo "loop"; ?> 
-			height="100%" 
-			poster="images/poster.jpg">
-			<source src="<?php echo esc_attr($video); ?>" type="video/mp4">
+		data-color="<?php echo esc_attr($interfaceColor); ?>" 
+		data-ckin="<?php echo esc_attr($skin); ?>" 
+		data-overlay="1">
 		</video>
 		<?php
 	}
@@ -656,126 +771,6 @@ class Sticky_Video extends Widget_Base {
 			$pos = "bottom:50px; right: 50px;";
 		}
 		return $pos;
-	}
-
-	public function eaelsv_custom_scripts(){
-		wp_enqueue_script( 'eaelsv-js', plugins_url( '../../assets/front-end/js/sticky-video/index.js', __FILE__ ), ['jquery'], time(), true );
-	}
-
-	protected function eaelsv_enqueue_styles(){
-		?>
-		<style>
-		.controls {
-			border:5px solid #CC0000;
-		}
-		.eael-sticky-video-wrapper {
-			position: relative;
-			width:100%;
-			min-height:10px;
-			margin:0px; padding:0px;
-			transition: 0.5s;
-			text-align:left;
-			overflow: hidden;
-		}
-
-		.eael-sticky-video-wrapper iframe,
-		.eael-sticky-video-wrapper video {
-			position: relative;
-			/*top: 0;
-			left: 0;*/
-			margin:0px; padding:0px;
-			height:auto;
-			border: 0;
-			line-height: 1;
-		}
-
-		.eael-sticky-video-player {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-size: cover;
-			background-position: 50%;
-			cursor: pointer;
-			text-align: center;
-		}
-
-		.eael-sticky-video-player1 {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-size: cover;
-			background-position: 50%;
-			cursor: pointer;
-			text-align: center;
-			background:#009900;
-			z-index:1000;
-			opacity:0.5;
-		}
-		/*
-		.eael-sticky-video-wrapper.out{
-			position:fixed;
-			bottom:20px;
-			right:20px;
-			width:300px;
-			height:200px;
-			z-index:999;
-		}
-		*/
-		.eael-sticky-video-wrapper.out iframe{
-			
-		}
-
-		.eael-sticky-video-player img {
-			display: block;
-			width: 100%;
-		}
-
-		.owp-play {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			-webkit-transform: translateX(-50%) translateY(-50%);
-			-ms-transform: translateX(-50%) translateY(-50%);
-			transform: translateX(-50%) translateY(-50%);
-		}
-
-		.owp-play i {
-			font-size: 100px;
-			color: #fff;
-			opacity: 0.8;
-			text-shadow: 1px 0 6px rgba(0, 0, 0, 0.3);
-			-webkit-transition: all .5s;
-			-o-transition: all .5s;
-			transition: all .5s;
-		}
-
-		.eael-sticky-video-player:hover .owp-play i {
-			opacity: 1;
-		}
-
-		.eaelsv-sticky-player {
-			height: 200px;
-			width: 300px;
-			position: fixed;
-			bottom: 50px;
-			right: 50px;
-			border: 0px solid #009900;
-			background-size: cover;
-			z-index: 1000;
-			background: transparent;
-			display:none!important;
-		}
-		.eaelsv-sticky-player.eaelsv-display-player{
-			display:block!important;
-			-webkit-animation: fadeIn 1s;
-    		animation: fadeIn 1s;
-		}
-		</style>
-		<?php
 	}
 
 	public function eaelsv_sticky_video_styles($settings){
