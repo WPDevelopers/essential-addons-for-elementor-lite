@@ -441,7 +441,7 @@ class Feature_List extends Widget_Base
 				'label'     => esc_html__( 'Size', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
-					'size' => 80,
+					'size' => 70,
 				],
 				'range'     => [
 					'px' => [
@@ -461,7 +461,7 @@ class Feature_List extends Widget_Base
 				'label'     => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
-					'size' => 40,
+					'size' => 21,
 				],
 				'range'     => [
 					'px' => [
@@ -729,22 +729,21 @@ class Feature_List extends Widget_Base
 		$this->add_render_attribute( 'eael_feature_list_item', 'class', 'eael-feature-list-item' );
 
 		$padding = $settings['eael_feature_list_icon_padding']['size'];
+		$circle_size = $settings['eael_feature_list_icon_circle_size']['size'];
 		$font    = $settings['eael_feature_list_icon_size']['size'];
 		$border  = $settings['eael_feature_list_icon_border_width']['right'] + $settings['eael_feature_list_icon_border_width']['left'];
 
 
 		if ( $settings['eael_feature_list_icon_shape'] == 'rhombus' ) {
 		    $margin = 30;
-			$connector_width = ( $padding * 2 ) + $font + $border + $margin;
+			$connector_width = $circle_size + $margin;
 		} else {
-			$connector_width = ( $padding * 2 ) + $font + $border;
+			$connector_width = $circle_size;
 		}
 
 
 		if ( $settings['eael_feature_list_icon_position'] == 'left' ) {
-
 			$connector = 'right: calc(100% - ' . $connector_width . 'px) !important; left: 0;';
-
 		} else {
 			$connector = 'left: calc(100% - ' . $connector_width . 'px) !important; right: 0;';
 		}
