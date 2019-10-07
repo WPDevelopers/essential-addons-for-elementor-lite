@@ -172,6 +172,31 @@ class Tooltip extends Widget_Base {
 				'prefix_class' => 'eael-tooltip-align-',
 			]
 		);
+
+		$this->add_responsive_control(
+			'eael_tooltip_icon_size',
+			[
+				'label'     => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'size_units'	=> [ '%', 'px' ],
+				'default'   => [
+					'size' => 30,
+				],
+				'range'     => [
+					'px' => [
+						'max' => 150,
+					],
+					'%'	=> [
+						'max'	=> 100
+					]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content i'	=> 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content img'	=> 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				]
+			]
+		);
+		
 		$this->add_control(
 			'eael_tooltip_enable_link',
 			[
