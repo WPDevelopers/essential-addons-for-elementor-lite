@@ -59,7 +59,7 @@ gulp.task('hello', function() {
   });
 
 // compile sass
-gulp.task("compileSC", function() {
+gulp.task("compileSCSS", function() {
     return gulp
         .src(files.sass)
         .pipe(compass(compassConfig))
@@ -72,7 +72,7 @@ gulp.task("compileSC", function() {
 });
 
 // minify csss
-gulp.task("minifyC", function() {
+gulp.task("minifyCSS", function() {
     return gulp
         .src(files.css)
         .pipe(cleancss())
@@ -85,14 +85,14 @@ gulp.task("minifyC", function() {
 });
 
 // combine css
-gulp.task("combineC", function() {
+gulp.task("combineCSS", function() {
     return gulp
         .src(files.css)
         .pipe(concat("eael.css"))
         .pipe(gulp.dest("./" + compassConfig.css));
 });
 
-gulp.task("combineMC", function() {
+gulp.task("combineMinCSS", function() {
     return gulp
         .src(files.minCSS)
         .pipe(concat("eael.min.css"))

@@ -1,15 +1,23 @@
+.controls {
+    border:5px solid #009900;
+}
 .eael-sticky-video-wrapper {
     position: relative;
-    height: 0;
-    padding-bottom: 56.25%;
+    width:100%;
+    min-height:10px;
+    margin:0px; padding:0px;
+    transition: 0.5s;
+    text-align:left;
+    overflow: hidden;
 }
 
-.eael-sticky-video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+.eael-sticky-video-wrapper iframe,
+.eael-sticky-video-wrapper video {
+    position: relative;
+    /*top: 0;
+    left: 0;*/
+    margin:0px; padding:0px;
+    height:auto;
     border: 0;
     line-height: 1;
 }
@@ -25,6 +33,31 @@
     cursor: pointer;
     text-align: center;
 }
+
+.eael-sticky-video-player1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: 50%;
+    cursor: pointer;
+    text-align: center;
+    background:#009900;
+    z-index:1000;
+    opacity:0.5;
+}
+/*
+.eael-sticky-video-wrapper.out{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:300px;
+    height:200px;
+    z-index:999;
+}
+*/
 
 .eael-sticky-video-player img {
     display: block;
@@ -52,4 +85,22 @@
 
 .eael-sticky-video-player:hover .owp-play i {
     opacity: 1;
+}
+
+.eaelsv-sticky-player {
+    height: 200px;
+    width: 300px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    border: 0px solid #009900;
+    background-size: cover;
+    z-index: 1000;
+    background: transparent;
+    display:none!important;
+}
+.eaelsv-sticky-player.eaelsv-display-player{
+    display:block!important;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
 }
