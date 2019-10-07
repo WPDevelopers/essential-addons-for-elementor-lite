@@ -574,6 +574,28 @@ class Data_Table extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
+            'header_icon_position_from_top',
+            [
+                'label'                 => __( 'Icon Position', 'essential-addons-elementor' ),
+				'type'                  => Controls_Manager::SLIDER,
+                'size_units'            => [ 'px', '%' ],
+                'range'                 => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 70,
+					],
+					'%'	=> [
+						'min'	=> 0,
+						'max'	=> 100
+					]
+					],
+                'selectors'             => [
+					'{{WRAPPER}} .eael-data-table thead tr th .data-header-icon' => 'top: {{SIZE}}{{UNIT}};'
+				]
+            ]
+		);
+
+		$this->add_responsive_control(
             'header_icon_space',
             [
                 'label'                 => __( 'Icon Space', 'essential-addons-elementor' ),
