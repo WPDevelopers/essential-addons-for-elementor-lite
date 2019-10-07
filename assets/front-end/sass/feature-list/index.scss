@@ -127,6 +127,9 @@ $enable-prefers-reduced-motion-media-query: true !default;
                     color: #37368e;
                     text-align: center;
                     display: inline-flex;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
                     i {
                         width: 1em;
