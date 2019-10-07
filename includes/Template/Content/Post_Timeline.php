@@ -25,7 +25,7 @@ trait Post_Timeline
                             <div class="eael-timeline-post-image" ' . ($settings['eael_show_image'] == 1 ? 'style="background-image: url(' . wp_get_attachment_image_url(get_post_thumbnail_id(), $settings['image_size']) . ');"' : null) . '></div>';
                             if ($settings['eael_show_excerpt']) {
                                 $html .= '<div class="eael-timeline-post-excerpt">
-                                    <p>' . implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $settings['eael_excerpt_length'])) . '</p>
+                                    <p>' . implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $settings['eael_excerpt_length'])) . $settings['expanison_indicator'] . '</p>
                                 </div>';
                             }
 

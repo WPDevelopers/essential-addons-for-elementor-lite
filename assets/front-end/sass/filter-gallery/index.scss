@@ -773,17 +773,20 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	list-style: none;
 }
 
-.fg-layout-3-item-content h5 {
+.fg-layout-3-item-content {
+	text-align: center;
+}
+
+.fg-layout-3-item-content .fg-item-title {
 	font-size: 18px;
-	color: #031d3c;
 	line-height: 1;
 	font-weight: 500;
 	margin: 0;
+	transition: 300ms;
 }
 
-.fg-layout-3-item-content p {
+.fg-layout-3-item-content .fg-item-content p {
 	font-size: 13px;
-	color: #7f8995;
 	font-weight: 400;
 }
 
@@ -801,6 +804,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	visibility: hidden;
 	opacity: 0;
 	transition: 300ms;
+	width: 100%;
+	border-radius: 5px;
+	padding-top: 7px;
 }
 
 .fg-layout-3-filter-controls.open-filters {
@@ -810,7 +816,23 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .fg-layout-3-filter-controls li.control {
 	padding: 5px 5px 5px 10px;
-    cursor: pointer;
+	cursor: pointer;
+	transition: 300ms;
+	font-size: 14px;
+	color: #7f8995;
+	font-weight: normal;
+}
+
+.fg-layout-3-filter-controls li.control:hover {
+	color: #2d425a;
+}
+
+.fg-layout-3-filter-controls li.control:first-child {
+	border-top: 0px solid;
+}
+
+.fg-layout-3-filter-controls li.control:last-child {
+	border-bottom: 0px solid;
 }
 
 .fg-layout-3-filters-wrap {
@@ -828,7 +850,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	background: #f7f8ff;
 	height: 55px;
     border-right: 1px solid #abb5ff;
-	border-radius: 4px 0px 0 4px;
+	border-radius: 10px 0px 0 10px;
 	outline: none;
 	text-align: center;
     position: relative;
@@ -839,7 +861,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
     position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	margin-left: 5px;
+	margin-left: 10px;
 }
 
 .fg-layout-3-search-box {
@@ -848,7 +870,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .fg-layout-3-search-box input[type="text"] {
-    width: calc(100% - 105px);
+    width: 100%;
     height: 100%;
     margin: 0;
     padding: 15px;
@@ -879,10 +901,15 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .fg-layout-3-filters-wrap {
     height: 55px;
-	background: #f7f8ff;
 	border-radius: 5px;
     display: flex;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.fg-layout-3-filters-wrap .fg-layout-3-search-box {
+	background: #f7f8ff;
+	border-radius: 0 10px 10px 0;
 }
 
 .fg-layout-3-item-thumb {
