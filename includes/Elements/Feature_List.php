@@ -14,6 +14,7 @@ use \Elementor\Scheme_Color;
 use \Elementor\Scheme_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+use \Elementor\Repeater;
 
 class Feature_List extends Widget_Base
 {
@@ -44,6 +45,85 @@ class Feature_List extends Widget_Base
 			]
 		);
 
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'eael_feature_list_icon_type',
+			[
+				'label'       => esc_html__( 'Icon Type', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'icon'  => [
+						'title' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+						'icon'  => 'fa fa-star',
+					],
+					'image' => [
+						'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
+						'icon'  => 'fa fa-picture-o',
+					],
+				],
+				'default'     => 'icon',
+				'label_block' => false,
+			]
+		);
+
+		$repeater->add_control(
+			'eael_feature_list_icon_new',
+			[
+				'label'   => esc_html__( 'Icon', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_feature_list_icon',
+				'condition' => [
+					'eael_feature_list_icon_type' => 'icon'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_feature_list_img',
+			[
+				'label'     => esc_html__( 'Image', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::MEDIA,
+				'default'   => [
+					'url' => Utils::get_placeholder_image_src(),
+				],
+				'condition' => [
+					'eael_feature_list_icon_type' => 'image'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_feature_list_title',
+			[
+				'label'   => esc_html__( 'Title', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'Title', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_feature_list_content',
+			[
+				'label'   => esc_html__( 'Content', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::TEXTAREA,
+				'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' ),
+				'dynamic' => [ 'active' => true ]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_feature_list_link',
+			[
+				'label'       => esc_html__( 'Link', 'essential-addons-elementor' ),
+				'type'        => Controls_Manager::URL,
+				'dynamic'     => [ 'active' => true ],
+				'placeholder' => esc_html__( 'https://your-link.com', 'essential-addons-elementor' ),
+				'separator'   => 'before',
+			]
+		);
+
 		$this->add_control(
 			'eael_feature_list',
 			[
@@ -52,83 +132,32 @@ class Feature_List extends Widget_Base
 				'seperator'   => 'before',
 				'default'     => [
 					[
-						'eael_feature_list_icon'    => 'fa fa-check',
+						'eael_feature_list_icon_new'    => [
+							'value' => 'fas fa-check',
+							'library'	=> 'fa-solid'
+						],
 						'eael_feature_list_title'   => esc_html__( 'Feature Item 1', 'essential-addons-elementor' ),
 						'eael_feature_list_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-elementor' )
 					],
 					[
-						'eael_feature_list_icon'    => 'fa fa-times',
+						'eael_feature_list_icon_new'    => [
+							'value'	=> 'fas fa-times',
+							'library'	=> 'fa-solid'
+						],
 						'eael_feature_list_title'   => esc_html__( 'Feature Item 2', 'essential-addons-elementor' ),
 						'eael_feature_list_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-elementor' )
 					],
 					[
-						'eael_feature_list_icon'    => 'fa fa-dot-circle-o',
+						'eael_feature_list_icon_new'    => [
+							'value'	=> 'fas fa-anchor',
+							'library'	=> 'fa-solid'
+						],
 						'eael_feature_list_title'   => esc_html__( 'Feature Item 3', 'essential-addons-elementor' ),
 						'eael_feature_list_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-elementor' )
 					]
 				],
-				'fields'      => [
-					[
-						'name'        => 'eael_feature_list_icon_type',
-						'label'       => esc_html__( 'Icon Type', 'essential-addons-elementor' ),
-						'type'        => Controls_Manager::CHOOSE,
-						'options'     => [
-							'icon'  => [
-								'title' => esc_html__( 'Icon', 'essential-addons-elementor' ),
-								'icon'  => 'fa fa-star',
-							],
-							'image' => [
-								'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
-								'icon'  => 'fa fa-picture-o',
-							],
-						],
-						'default'     => 'icon',
-						'label_block' => false,
-					],
-					[
-						'name'    => 'eael_feature_list_icon_new',
-						'label'   => esc_html__( 'Icon', 'essential-addons-elementor' ),
-						'type'    => Controls_Manager::ICONS,
-						'fa4compatibility' => 'eael_feature_list_icon',
-						'condition' => [
-							'eael_feature_list_icon_type' => 'icon'
-						]
-					],
-					[
-						'name'      => 'eael_feature_list_img',
-						'label'     => esc_html__( 'Image', 'essential-addons-elementor' ),
-						'type'      => Controls_Manager::MEDIA,
-						'default'   => [
-							'url' => Utils::get_placeholder_image_src(),
-						],
-						'condition' => [
-							'eael_feature_list_icon_type' => 'image'
-						]
-					],
-					[
-						'name'    => 'eael_feature_list_title',
-						'label'   => esc_html__( 'Title', 'essential-addons-elementor' ),
-						'type'    => Controls_Manager::TEXT,
-						'default' => esc_html__( 'Title', 'essential-addons-elementor' ),
-						'dynamic' => [ 'active' => true ]
-					],
-					[
-						'name'    => 'eael_feature_list_content',
-						'label'   => esc_html__( 'Content', 'essential-addons-elementor' ),
-						'type'    => Controls_Manager::TEXTAREA,
-						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-elementor' ),
-						'dynamic' => [ 'active' => true ]
-					],
-					[
-						'name'        => 'eael_feature_list_link',
-						'label'       => esc_html__( 'Link', 'essential-addons-elementor' ),
-						'type'        => Controls_Manager::URL,
-						'dynamic'     => [ 'active' => true ],
-						'placeholder' => esc_html__( 'https://your-link.com', 'essential-addons-elementor' ),
-						'separator'   => 'before',
-					],
-				],
-				'title_field' => '<i class="{{ eael_feature_list_icon }}" aria-hidden="true"></i> {{{ eael_feature_list_title }}}',
+				'fields'      => $repeater->get_controls(),
+				'title_field' => '<i class="{{ eael_feature_list_icon_new.value }}" aria-hidden="true"></i> {{{ eael_feature_list_title }}}',
 			]
 		);
 
@@ -707,49 +736,44 @@ class Feature_List extends Widget_Base
 			<?php $i = 0;
 			foreach ( $settings['eael_feature_list'] as $index => $item ) :
 
-				$list_icon_setting_key = $this->get_repeater_setting_key( 'eael_feature_list_icon', 'eael_feature_list', $index );
-				$list_title_setting_key = $this->get_repeater_setting_key( 'eael_feature_list_title', 'eael_feature_list', $index );
-				$list_content_setting_key = $this->get_repeater_setting_key( 'eael_feature_list_content', 'eael_feature_list', $index );
-				$list_link_setting_key = $this->get_repeater_setting_key( 'eael_feature_list_link', 'eael_feature_list', $index );
-
-				$this->add_render_attribute( $list_icon_setting_key, 'class', 'eael-feature-list-icon' );
-				$this->add_render_attribute( $list_title_setting_key, 'class', 'eael-feature-list-title' );
+				$this->add_render_attribute( 'eael_feature_list_icon'.$i, 'class', 'eael-feature-list-icon' );
+				$this->add_render_attribute( 'eael_feature_list_title'.$i, 'class', 'eael-feature-list-title' );
+				$this->add_render_attribute( 'eael_feature_list_content'.$i, 'class', 'eael-feature-list-content' );
 
 				$feat_title_tag = $settings['eael_feature_list_title_size'];
-				if( ! empty( $item['eael_feature_list_link']['url'] ) ) {
-					$this->add_render_attribute( $list_title_setting_key, 'href', $item['eael_feature_list_link']['url'] );
+
+				if( $item['eael_feature_list_link']['url'] ) {
+					$this->add_render_attribute( 'eael_feature_list_title'.$i, 'href', $item['eael_feature_list_link']['url'] );
 
 					if ( $item['eael_feature_list_link']['is_external'] ) {
-						$this->add_render_attribute( $list_title_setting_key, 'target', '_blank' );
+						$this->add_render_attribute( 'eael_feature_list_title'.$i, 'target', '_blank' );
 					}
 
 					if ( $item['eael_feature_list_link']['nofollow'] ) {
-						$this->add_render_attribute( $list_title_setting_key, 'rel', 'nofollow' );
+						$this->add_render_attribute( 'eael_feature_list_title'.$i, 'rel', 'nofollow' );
 					}
+
 					$feat_title_tag = 'a';
 				}
-				$this->add_render_attribute( $list_content_setting_key, 'class', 'eael-feature-list-content' );
 
-				$feature_icon_attributes = $this->get_render_attribute_string( $list_icon_setting_key );
+				
 
 				$feature_icon_tag = 'span';
+
 				$feature_has_icon = (!empty($item['eael_feature_list_icon']) || !empty($item['eael_feature_list_icon_new']));
 
-				if ( ! empty( $item['eael_feature_list_link']['url'] ) ) {
-					$this->add_render_attribute( $list_link_setting_key, 'href', $item['eael_feature_list_link']['url'] );
+				if ( $item['eael_feature_list_link']['url'] ) {
+					$this->add_render_attribute( 'eael_feature_list_link'.$i, 'href', $item['eael_feature_list_link']['url'] );
 
 					if ( $item['eael_feature_list_link']['is_external'] ) {
-						$this->add_render_attribute( $list_link_setting_key, 'target', '_blank' );
+						$this->add_render_attribute( 'eael_feature_list_link'.$i, 'target', '_blank' );
 					}
 
 					if ( $item['eael_feature_list_link']['nofollow'] ) {
-						$this->add_render_attribute( $list_link_setting_key, 'rel', 'nofollow' );
+						$this->add_render_attribute( 'eael_feature_list_link'.$i, 'rel', 'nofollow' );
 					}
-
 					$feature_icon_tag = 'a';
 				}
-
-				$feature_link_attributes = $this->get_render_attribute_string( $list_link_setting_key );
 
 				?>
                 <li class="eael-feature-list-item">
@@ -757,53 +781,56 @@ class Feature_List extends Widget_Base
                         <span class="connector" style="<?php echo $connector; ?>"></span>
 					<?php endif; ?>
 
-					<?php if ( $feature_has_icon ) : ?>
 
+					<?php if ( $feature_has_icon ) : ?>
                         <div class="eael-feature-list-icon-box">
                             <div class="eael-feature-list-icon-inner">
-                        <<?php echo implode( ' ', [
-							$feature_icon_tag,
-							$feature_icon_attributes,
-							$feature_link_attributes
-						] ); ?>>
 
-                        <?php if ($item['eael_feature_list_icon_type'] == 'icon') { ?>
-							<?php if (empty($item['eael_feature_list_icon']) || isset($item['__fa4_migrated']['eael_feature_list_icon_new'])) { ?>
-								<?php if( isset($item['eael_feature_list_icon_new']['value']['url']) ) : ?>
-									<img src="<?php echo esc_url( $item['eael_feature_list_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
-								<?php else : ?>
-									<i class="<?php echo esc_attr( $item['eael_feature_list_icon_new']['value'] ); ?>" aria-hidden="true"></i>
-								<?php endif; ?>
-							<?php } else { ?>
-								<i class="<?php echo esc_attr( $item['eael_feature_list_icon'] ); ?>" aria-hidden="true"></i>
-							<?php } ?>
-                        <?php } ?>
+								<<?php echo $feature_icon_tag .' '. $this->get_render_attribute_string( 'eael_feature_list_icon'.$i ) . $this->get_render_attribute_string( 'eael_feature_list_link'.$i ); ?>>
 
-                        <?php if ($item['eael_feature_list_icon_type'] == 'image') {
-							$this->add_render_attribute('feature_list_image'.$i, [
-								'src'	=> esc_url( $item['eael_feature_list_img']['url'] ),
-								'class'	=> 'eael-feature-list-img',
-								'alt'	=> esc_attr(get_post_meta($item['eael_feature_list_img']['id'], '_wp_attachment_image_alt', true))
-							]);
+									<?php 
+										if ($item['eael_feature_list_icon_type'] == 'icon') {
 
-                            ?>
-                            <img <?php echo $this->get_render_attribute_string('feature_list_image'.$i); ?>>
-                        <?php } ?>
+											if ( empty($item['eael_feature_list_icon']) || isset($item['__fa4_migrated']['eael_feature_list_icon_new']) ) {
 
-                        </<?php echo $feature_icon_tag; ?>>
+												if( isset($item['eael_feature_list_icon_new']['value']['url']) ) {
+													echo '<img src="'.esc_url( $item['eael_feature_list_icon_new']['value']['url'] ).'" alt="'.esc_attr(get_post_meta($item['eael_feature_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)).'"/>';
+												}
+												else {
+													echo '<i class="'.esc_attr( $item['eael_feature_list_icon_new']['value'] ).'" aria-hidden="true"></i>';
+												}
+												
+											} else {
+												echo '<i class="'.esc_attr( $item['eael_feature_list_icon'] ).'" aria-hidden="true"></i>';
+											}
+										}
+									?>
+
+									<?php if ($item['eael_feature_list_icon_type'] == 'image') {
+										$this->add_render_attribute('feature_list_image'.$i, [
+											'src'	=> esc_url( $item['eael_feature_list_img']['url'] ),
+											'class'	=> 'eael-feature-list-img',
+											'alt'	=> esc_attr(get_post_meta($item['eael_feature_list_img']['id'], '_wp_attachment_image_alt', true))
+										]);
+
+										echo '<img '.$this->get_render_attribute_string('feature_list_image'.$i).'>';
+										
+									} ?>
+
+								</<?php echo $feature_icon_tag; ?>>
                             </div>
                         </div>
-
 					<?php endif; ?>
+
 
                     <div class="eael-feature-list-content-box">
                         <<?php echo implode( ' ', [
 							$feat_title_tag,
-							$this->get_render_attribute_string( $list_title_setting_key )
+							$this->get_render_attribute_string( 'eael_feature_list_title'.$i )
 						] ); ?>
                         ><?php echo $item['eael_feature_list_title']; ?></<?php echo $feat_title_tag; ?>
                     >
-                    <p <?php echo $this->get_render_attribute_string( $list_content_setting_key ); ?>><?php echo $item['eael_feature_list_content']; ?></p>
+                    <p <?php echo $this->get_render_attribute_string( 'eael_feature_list_content'.$i ); ?>><?php echo $item['eael_feature_list_content']; ?></p>
                     </div>
 
                 </li>
