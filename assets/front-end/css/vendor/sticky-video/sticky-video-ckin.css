@@ -26,6 +26,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ckin__controls {
+  display: none!important;
+}
+
 .ckin-compress:before {
   content: "\e901";
 }
