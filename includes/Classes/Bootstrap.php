@@ -136,7 +136,9 @@ class Bootstrap
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));
             add_filter('plugin_row_meta', array($this, 'insert_plugin_row_meta'), 10, 2);
-            add_action('admin_init', array($this, 'redirect_on_activation'));
+
+            // removed activation redirection temporarily
+            // add_action('admin_init', array($this, 'redirect_on_activation'));
 
             if (!did_action('elementor/loaded')) {
                 add_action('admin_notices', array($this, 'elementor_not_loaded'));

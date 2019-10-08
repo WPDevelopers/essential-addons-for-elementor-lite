@@ -24,8 +24,8 @@ class Migration
         // save default values
         $this->set_default_values();
 
-        // Redirect to options page
-        set_transient('eael_do_activation_redirect', true, 60);
+        // Redirect to options page - disabled temporarily
+        // set_transient('eael_do_activation_redirect', true, 60);
     }
 
     /**
