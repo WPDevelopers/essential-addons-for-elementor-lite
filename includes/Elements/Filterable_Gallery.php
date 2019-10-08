@@ -2969,7 +2969,7 @@ class Filterable_Gallery extends Widget_Base
                                             $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
                                         }
                                         if (!empty($item['content'])) {
-                                            $html .= '<p class="fg-item-content">' . $item['content'] . '</p>';
+                                            $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
                                         }
                                     }
 
