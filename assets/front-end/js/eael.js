@@ -1395,148 +1395,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 /*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
@@ -2035,6 +1893,148 @@ return ImagesLoaded;
 });
 
 
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -7460,450 +7460,6 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0)'
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
-/*!
-   ckin v0.0.1: Custom HTML5 Video Player Skins.
-   (c) 2017 
-   MIT License
-   git+https://github.com/hunzaboy/ckin.git
-*/
-// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca;
-(function () {
-    // helpers
-    var regExp = function regExp(name) {
-        return new RegExp('(^| )' + name + '( |$)');
-    };
-    var forEach = function forEach(list, fn, scope) {
-        for (var i = 0; i < list.length; i++) {
-            fn.call(scope, list[i]);
-        }
-    };
-
-    // class list object with basic methods
-    function ClassList(element) {
-        this.element = element;
-    }
-
-    ClassList.prototype = {
-        add: function add() {
-            forEach(arguments, function (name) {
-                if (!this.contains(name)) {
-                    this.element.className += ' ' + name;
-                }
-            }, this);
-        },
-        remove: function remove() {
-            forEach(arguments, function (name) {
-                this.element.className = this.element.className.replace(regExp(name), '');
-            }, this);
-        },
-        toggle: function toggle(name) {
-            return this.contains(name) ? (this.remove(name), false) : (this.add(name), true);
-        },
-        contains: function contains(name) {
-            return regExp(name).test(this.element.className);
-        },
-        // bonus..
-        replace: function replace(oldName, newName) {
-            this.remove(oldName), this.add(newName);
-        }
-    };
-
-    // IE8/9, Safari
-    if (!('classList' in Element.prototype)) {
-        Object.defineProperty(Element.prototype, 'classList', {
-            get: function get() {
-                return new ClassList(this);
-            }
-        });
-    }
-
-    // replace() support for others
-    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
-        DOMTokenList.prototype.replace = ClassList.prototype.replace;
-    }
-})();
-(function () {
-    if (typeof NodeList.prototype.forEach === "function") return false;
-    NodeList.prototype.forEach = Array.prototype.forEach;
-})();
-
-// Unfortunately, due to scattered support, browser sniffing is required
-function browserSniff() {
-    var nVer = navigator.appVersion,
-        nAgt = navigator.userAgent,
-        browserName = navigator.appName,
-        fullVersion = '' + parseFloat(navigator.appVersion),
-        majorVersion = parseInt(navigator.appVersion, 10),
-        nameOffset,
-        verOffset,
-        ix;
-
-    // MSIE 11
-    if (navigator.appVersion.indexOf("Windows NT") !== -1 && navigator.appVersion.indexOf("rv:11") !== -1) {
-        browserName = "IE";
-        fullVersion = "11;";
-    }
-    // MSIE
-    else if ((verOffset = nAgt.indexOf("MSIE")) !== -1) {
-            browserName = "IE";
-            fullVersion = nAgt.substring(verOffset + 5);
-        }
-        // Chrome
-        else if ((verOffset = nAgt.indexOf("Chrome")) !== -1) {
-                browserName = "Chrome";
-                fullVersion = nAgt.substring(verOffset + 7);
-            }
-            // Safari
-            else if ((verOffset = nAgt.indexOf("Safari")) !== -1) {
-                    browserName = "Safari";
-                    fullVersion = nAgt.substring(verOffset + 7);
-                    if ((verOffset = nAgt.indexOf("Version")) !== -1) {
-                        fullVersion = nAgt.substring(verOffset + 8);
-                    }
-                }
-                // Firefox
-                else if ((verOffset = nAgt.indexOf("Firefox")) !== -1) {
-                        browserName = "Firefox";
-                        fullVersion = nAgt.substring(verOffset + 8);
-                    }
-                    // In most other browsers, "name/version" is at the end of userAgent
-                    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
-                            browserName = nAgt.substring(nameOffset, verOffset);
-                            fullVersion = nAgt.substring(verOffset + 1);
-                            if (browserName.toLowerCase() == browserName.toUpperCase()) {
-                                browserName = navigator.appName;
-                            }
-                        }
-    // Trim the fullVersion string at semicolon/space if present
-    if ((ix = fullVersion.indexOf(";")) !== -1) {
-        fullVersion = fullVersion.substring(0, ix);
-    }
-    if ((ix = fullVersion.indexOf(" ")) !== -1) {
-        fullVersion = fullVersion.substring(0, ix);
-    }
-    // Get major version
-    majorVersion = parseInt('' + fullVersion, 10);
-    if (isNaN(majorVersion)) {
-        fullVersion = '' + parseFloat(navigator.appVersion);
-        majorVersion = parseInt(navigator.appVersion, 10);
-    }
-    // Return data
-    return [browserName, majorVersion];
-}
-
-var obj = {};
-obj.browserInfo = browserSniff();
-obj.browserName = obj.browserInfo[0];
-obj.browserVersion = obj.browserInfo[1];
-
-wrapPlayers();
-/* Get Our Elements */
-var players = document.querySelectorAll('.ckin__player');
-
-var iconPlay = '<i class="fas fa-play"></i>';
-var iconPause = '<i class="fas fa-pause"></i>';
-var iconVolumeMute = '<i class="fas fa-volume-mute"></i>';
-var iconVolumeMedium = '<i class="fas fa-volume-up"></i>';
-var iconVolumeLow = '<i class="fas fa-volume-down"></i>';
-var iconExpand = '<i class="fas fa-expand"></i>';
-var iconCompress = '<i class="fas fa-compress-arrows-alt"></i>';
-
-players.forEach(function (player) {
-    var video = player.querySelector('video');
-
-    var skin = attachSkin(video.dataset.ckin);
-    player.classList.add(skin);
-
-    var overlay = video.dataset.overlay;
-    addOverlay(player, overlay);
-
-    var title = showTitle(skin, video.dataset.title);
-    if (title) {
-        player.insertAdjacentHTML('beforeend', title);
-    }
-
-    var html = buildControls(skin);
-    player.insertAdjacentHTML('beforeend', html);
-
-    var color = video.dataset.color;
-    addColor(player, color);
-
-    var playerControls = player.querySelector('.' + skin + '__controls');
-    var progress = player.querySelector('.progress');;
-    var progressBar = player.querySelector('.progress__filled');
-    var toggle = player.querySelectorAll('.toggle');
-    var skipButtons = player.querySelectorAll('[data-skip]');
-    var ranges = player.querySelectorAll('.' + skin + '__slider');
-    var volumeButton = player.querySelector('.volume');
-    var fullScreenButton = player.querySelector('.fullscreen');
-
-    if (obj.browserName === "IE" && (obj.browserVersion === 8 || obj.browserVersion === 9)) {
-        showControls(video);
-        playerControls.style.display = "none";
-    }
-
-    video.addEventListener('click', function () {
-        togglePlay(this, player);
-    });
-    video.addEventListener('play', function () {
-        updateButton(this, toggle);
-    });
-
-    video.addEventListener('pause', function () {
-        updateButton(this, toggle);
-    });
-    video.addEventListener('timeupdate', function () {
-        handleProgress(this, progressBar);
-    });
-
-    toggle.forEach(function (button) {
-        return button.addEventListener('click', function () {
-            togglePlay(video, player);
-        });
-    });
-    volumeButton.addEventListener('click', function () {
-        toggleVolume(video, volumeButton);
-    });
-
-    var mousedown = false;
-    progress.addEventListener('click', function (e) {
-        scrub(e, video, progress);
-    });
-    progress.addEventListener('mousemove', function (e) {
-        return mousedown && scrub(e, video, progress);
-    });
-    progress.addEventListener('mousedown', function () {
-        return mousedown = true;
-    });
-    progress.addEventListener('mouseup', function () {
-        return mousedown = false;
-    });
-    fullScreenButton.addEventListener('click', function (e) {
-        return toggleFullScreen(player, fullScreenButton);
-    });
-    addListenerMulti(player, 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function (e) {
-        return onFullScreen(e, player);
-    });
-});
-
-function showControls(video) {
-
-    video.setAttribute("controls", "controls");
-}
-
-function togglePlay(video, player) {
-    var method = video.paused ? 'play' : 'pause';
-    video[method]();
-    video.paused ? player.classList.remove('is-playing') : player.classList.add('is-playing');
-}
-
-function updateButton(video, toggle) {
-    var icon = video.paused ? iconPlay : iconPause;
-    toggle.forEach(function (button) {
-        return button.innerHTML = icon;
-    });
-}
-
-function skip() {
-    video.currentTime += parseFloat(this.dataset.skip);
-}
-
-function toggleVolume(video, volumeButton) {
-    var level = video.volume;
-    var icon = iconVolumeMedium;
-    if (level == 1) {
-        level = 0;
-        icon = iconVolumeMute;
-    } else if (level == 0.5) {
-        level = 1;
-        icon = iconVolumeMedium;
-    } else {
-        level = 0.5;
-        icon = iconVolumeLow;
-    }
-    video['volume'] = level;
-    volumeButton.innerHTML = icon;
-}
-
-function handleRangeUpdate() {
-    video[this.name] = this.value;
-}
-
-function handleProgress(video, progressBar) {
-    var percent = video.currentTime / video.duration * 100;
-    progressBar.style.flexBasis = percent + '%';
-}
-
-function scrub(e, video, progress) {
-    var scrubTime = e.offsetX / progress.offsetWidth * video.duration;
-    video.currentTime = scrubTime;
-}
-
-function wrapPlayers() {
-
-    var videos = document.querySelectorAll('video');
-
-    videos.forEach(function (video) {
-
-        var wrapper = document.createElement('div');
-        wrapper.classList.add('ckin__player');
-
-        video.parentNode.insertBefore(wrapper, video);
-
-        wrapper.appendChild(video);
-    });
-}
-
-function buildControls(skin) {
-    var html = [];
-    html.push('<button class="' + skin + '__button--big toggle" title="Toggle Play">' + iconPlay + '</button>');
-
-    html.push('<div class="' + skin + '__controls ckin__controls">');
-
-    html.push('<button class="' + skin + '__button toggle" title="Toggle Video">' + iconPlay + '</button>', '<div class="progress">', '<div class="progress__filled"></div>', '</div>', '<button class="' + skin + '__button volume" title="Volume">' + iconVolumeMedium + '</button>', '<button class="' + skin + '__button fullscreen" title="Full Screen">' + iconExpand + '</button>');
-
-    html.push('</div>');
-
-    return html.join('');
-}
-
-function attachSkin(skin) {
-    if (typeof skin != 'undefined' && skin != '') {
-        return skin;
-    } else {
-        return 'default';
-    }
-}
-
-function showTitle(skin, title) {
-    if (typeof title != 'undefined' && title != '') {
-        return '<div class="' + skin + '__title">' + title + '</div>';
-    } else {
-        return false;
-    }
-}
-
-function addOverlay(player, overlay) {
-
-    if (overlay == 1) {
-        player.classList.add('ckin__overlay');
-    } else if (overlay == 2) {
-        player.classList.add('ckin__overlay--2');
-    } else {
-        return;
-    }
-}
-
-function addColor(player, color) {
-    if (typeof color != 'undefined' && color != '') {
-        var buttons = player.querySelectorAll('button');
-        var progress = player.querySelector('.progress__filled');
-        progress.style.background = color;
-        buttons.forEach(function (button) {
-            return button.style.color = color;
-        });
-    }
-}
-
-function toggleFullScreen(player, fullScreenButton) {
-    // let isFullscreen = false;
-    if (!document.fullscreenElement && // alternative standard method
-    !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        player.classList.add('ckin__fullscreen');
-
-        if (player.requestFullscreen) {
-            player.requestFullscreen();
-        } else if (player.mozRequestFullScreen) {
-            player.mozRequestFullScreen(); // Firefox
-        } else if (player.webkitRequestFullscreen) {
-            player.webkitRequestFullscreen(); // Chrome and Safari
-        } else if (player.msRequestFullscreen) {
-            player.msRequestFullscreen();
-        }
-        isFullscreen = true;
-
-        fullScreenButton.innerHTML = iconCompress;
-    } else {
-        player.classList.remove('ckin__fullscreen');
-
-        if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
-        isFullscreen = false;
-        fullScreenButton.innerHTML = iconExpand;
-    }
-}
-
-function onFullScreen(e, player) {
-    var isFullscreenNow = document.webkitFullscreenElement !== null;
-    if (!isFullscreenNow) {
-        player.classList.remove('ckin__fullscreen');
-        player.querySelector('.fullscreen').innerHTML = iconExpand;
-    } else {
-        // player.querySelector('.fullscreen').innerHTML = iconExpand;
-
-    }
-}
-
-function addListenerMulti(element, eventNames, listener) {
-    var events = eventNames.split(' ');
-    for (var i = 0, iLen = events.length; i < iLen; i++) {
-        element.addEventListener(events[i], listener, false);
-    }
-}
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -12172,6 +11728,450 @@ return $;
 
 }));
 
+/*!
+   ckin v0.0.1: Custom HTML5 Video Player Skins.
+   (c) 2017 
+   MIT License
+   git+https://github.com/hunzaboy/ckin.git
+*/
+// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca;
+(function () {
+    // helpers
+    var regExp = function regExp(name) {
+        return new RegExp('(^| )' + name + '( |$)');
+    };
+    var forEach = function forEach(list, fn, scope) {
+        for (var i = 0; i < list.length; i++) {
+            fn.call(scope, list[i]);
+        }
+    };
+
+    // class list object with basic methods
+    function ClassList(element) {
+        this.element = element;
+    }
+
+    ClassList.prototype = {
+        add: function add() {
+            forEach(arguments, function (name) {
+                if (!this.contains(name)) {
+                    this.element.className += ' ' + name;
+                }
+            }, this);
+        },
+        remove: function remove() {
+            forEach(arguments, function (name) {
+                this.element.className = this.element.className.replace(regExp(name), '');
+            }, this);
+        },
+        toggle: function toggle(name) {
+            return this.contains(name) ? (this.remove(name), false) : (this.add(name), true);
+        },
+        contains: function contains(name) {
+            return regExp(name).test(this.element.className);
+        },
+        // bonus..
+        replace: function replace(oldName, newName) {
+            this.remove(oldName), this.add(newName);
+        }
+    };
+
+    // IE8/9, Safari
+    if (!('classList' in Element.prototype)) {
+        Object.defineProperty(Element.prototype, 'classList', {
+            get: function get() {
+                return new ClassList(this);
+            }
+        });
+    }
+
+    // replace() support for others
+    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
+        DOMTokenList.prototype.replace = ClassList.prototype.replace;
+    }
+})();
+(function () {
+    if (typeof NodeList.prototype.forEach === "function") return false;
+    NodeList.prototype.forEach = Array.prototype.forEach;
+})();
+
+// Unfortunately, due to scattered support, browser sniffing is required
+function browserSniff() {
+    var nVer = navigator.appVersion,
+        nAgt = navigator.userAgent,
+        browserName = navigator.appName,
+        fullVersion = '' + parseFloat(navigator.appVersion),
+        majorVersion = parseInt(navigator.appVersion, 10),
+        nameOffset,
+        verOffset,
+        ix;
+
+    // MSIE 11
+    if (navigator.appVersion.indexOf("Windows NT") !== -1 && navigator.appVersion.indexOf("rv:11") !== -1) {
+        browserName = "IE";
+        fullVersion = "11;";
+    }
+    // MSIE
+    else if ((verOffset = nAgt.indexOf("MSIE")) !== -1) {
+            browserName = "IE";
+            fullVersion = nAgt.substring(verOffset + 5);
+        }
+        // Chrome
+        else if ((verOffset = nAgt.indexOf("Chrome")) !== -1) {
+                browserName = "Chrome";
+                fullVersion = nAgt.substring(verOffset + 7);
+            }
+            // Safari
+            else if ((verOffset = nAgt.indexOf("Safari")) !== -1) {
+                    browserName = "Safari";
+                    fullVersion = nAgt.substring(verOffset + 7);
+                    if ((verOffset = nAgt.indexOf("Version")) !== -1) {
+                        fullVersion = nAgt.substring(verOffset + 8);
+                    }
+                }
+                // Firefox
+                else if ((verOffset = nAgt.indexOf("Firefox")) !== -1) {
+                        browserName = "Firefox";
+                        fullVersion = nAgt.substring(verOffset + 8);
+                    }
+                    // In most other browsers, "name/version" is at the end of userAgent
+                    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
+                            browserName = nAgt.substring(nameOffset, verOffset);
+                            fullVersion = nAgt.substring(verOffset + 1);
+                            if (browserName.toLowerCase() == browserName.toUpperCase()) {
+                                browserName = navigator.appName;
+                            }
+                        }
+    // Trim the fullVersion string at semicolon/space if present
+    if ((ix = fullVersion.indexOf(";")) !== -1) {
+        fullVersion = fullVersion.substring(0, ix);
+    }
+    if ((ix = fullVersion.indexOf(" ")) !== -1) {
+        fullVersion = fullVersion.substring(0, ix);
+    }
+    // Get major version
+    majorVersion = parseInt('' + fullVersion, 10);
+    if (isNaN(majorVersion)) {
+        fullVersion = '' + parseFloat(navigator.appVersion);
+        majorVersion = parseInt(navigator.appVersion, 10);
+    }
+    // Return data
+    return [browserName, majorVersion];
+}
+
+var obj = {};
+obj.browserInfo = browserSniff();
+obj.browserName = obj.browserInfo[0];
+obj.browserVersion = obj.browserInfo[1];
+
+wrapPlayers();
+/* Get Our Elements */
+var players = document.querySelectorAll('.ckin__player');
+
+var iconPlay = '<i class="fas fa-play"></i>';
+var iconPause = '<i class="fas fa-pause"></i>';
+var iconVolumeMute = '<i class="fas fa-volume-mute"></i>';
+var iconVolumeMedium = '<i class="fas fa-volume-up"></i>';
+var iconVolumeLow = '<i class="fas fa-volume-down"></i>';
+var iconExpand = '<i class="fas fa-expand"></i>';
+var iconCompress = '<i class="fas fa-compress-arrows-alt"></i>';
+
+players.forEach(function (player) {
+    var video = player.querySelector('video');
+
+    var skin = attachSkin(video.dataset.ckin);
+    player.classList.add(skin);
+
+    var overlay = video.dataset.overlay;
+    addOverlay(player, overlay);
+
+    var title = showTitle(skin, video.dataset.title);
+    if (title) {
+        player.insertAdjacentHTML('beforeend', title);
+    }
+
+    var html = buildControls(skin);
+    player.insertAdjacentHTML('beforeend', html);
+
+    var color = video.dataset.color;
+    addColor(player, color);
+
+    var playerControls = player.querySelector('.' + skin + '__controls');
+    var progress = player.querySelector('.progress');;
+    var progressBar = player.querySelector('.progress__filled');
+    var toggle = player.querySelectorAll('.toggle');
+    var skipButtons = player.querySelectorAll('[data-skip]');
+    var ranges = player.querySelectorAll('.' + skin + '__slider');
+    var volumeButton = player.querySelector('.volume');
+    var fullScreenButton = player.querySelector('.fullscreen');
+
+    if (obj.browserName === "IE" && (obj.browserVersion === 8 || obj.browserVersion === 9)) {
+        showControls(video);
+        playerControls.style.display = "none";
+    }
+
+    video.addEventListener('click', function () {
+        togglePlay(this, player);
+    });
+    video.addEventListener('play', function () {
+        updateButton(this, toggle);
+    });
+
+    video.addEventListener('pause', function () {
+        updateButton(this, toggle);
+    });
+    video.addEventListener('timeupdate', function () {
+        handleProgress(this, progressBar);
+    });
+
+    toggle.forEach(function (button) {
+        return button.addEventListener('click', function () {
+            togglePlay(video, player);
+        });
+    });
+    volumeButton.addEventListener('click', function () {
+        toggleVolume(video, volumeButton);
+    });
+
+    var mousedown = false;
+    progress.addEventListener('click', function (e) {
+        scrub(e, video, progress);
+    });
+    progress.addEventListener('mousemove', function (e) {
+        return mousedown && scrub(e, video, progress);
+    });
+    progress.addEventListener('mousedown', function () {
+        return mousedown = true;
+    });
+    progress.addEventListener('mouseup', function () {
+        return mousedown = false;
+    });
+    fullScreenButton.addEventListener('click', function (e) {
+        return toggleFullScreen(player, fullScreenButton);
+    });
+    addListenerMulti(player, 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function (e) {
+        return onFullScreen(e, player);
+    });
+});
+
+function showControls(video) {
+
+    video.setAttribute("controls", "controls");
+}
+
+function togglePlay(video, player) {
+    var method = video.paused ? 'play' : 'pause';
+    video[method]();
+    video.paused ? player.classList.remove('is-playing') : player.classList.add('is-playing');
+}
+
+function updateButton(video, toggle) {
+    var icon = video.paused ? iconPlay : iconPause;
+    toggle.forEach(function (button) {
+        return button.innerHTML = icon;
+    });
+}
+
+function skip() {
+    video.currentTime += parseFloat(this.dataset.skip);
+}
+
+function toggleVolume(video, volumeButton) {
+    var level = video.volume;
+    var icon = iconVolumeMedium;
+    if (level == 1) {
+        level = 0;
+        icon = iconVolumeMute;
+    } else if (level == 0.5) {
+        level = 1;
+        icon = iconVolumeMedium;
+    } else {
+        level = 0.5;
+        icon = iconVolumeLow;
+    }
+    video['volume'] = level;
+    volumeButton.innerHTML = icon;
+}
+
+function handleRangeUpdate() {
+    video[this.name] = this.value;
+}
+
+function handleProgress(video, progressBar) {
+    var percent = video.currentTime / video.duration * 100;
+    progressBar.style.flexBasis = percent + '%';
+}
+
+function scrub(e, video, progress) {
+    var scrubTime = e.offsetX / progress.offsetWidth * video.duration;
+    video.currentTime = scrubTime;
+}
+
+function wrapPlayers() {
+
+    var videos = document.querySelectorAll('video');
+
+    videos.forEach(function (video) {
+
+        var wrapper = document.createElement('div');
+        wrapper.classList.add('ckin__player');
+
+        video.parentNode.insertBefore(wrapper, video);
+
+        wrapper.appendChild(video);
+    });
+}
+
+function buildControls(skin) {
+    var html = [];
+    html.push('<button class="' + skin + '__button--big toggle" title="Toggle Play">' + iconPlay + '</button>');
+
+    html.push('<div class="' + skin + '__controls ckin__controls">');
+
+    html.push('<button class="' + skin + '__button toggle" title="Toggle Video">' + iconPlay + '</button>', '<div class="progress">', '<div class="progress__filled"></div>', '</div>', '<button class="' + skin + '__button volume" title="Volume">' + iconVolumeMedium + '</button>', '<button class="' + skin + '__button fullscreen" title="Full Screen">' + iconExpand + '</button>');
+
+    html.push('</div>');
+
+    return html.join('');
+}
+
+function attachSkin(skin) {
+    if (typeof skin != 'undefined' && skin != '') {
+        return skin;
+    } else {
+        return 'default';
+    }
+}
+
+function showTitle(skin, title) {
+    if (typeof title != 'undefined' && title != '') {
+        return '<div class="' + skin + '__title">' + title + '</div>';
+    } else {
+        return false;
+    }
+}
+
+function addOverlay(player, overlay) {
+
+    if (overlay == 1) {
+        player.classList.add('ckin__overlay');
+    } else if (overlay == 2) {
+        player.classList.add('ckin__overlay--2');
+    } else {
+        return;
+    }
+}
+
+function addColor(player, color) {
+    if (typeof color != 'undefined' && color != '') {
+        var buttons = player.querySelectorAll('button');
+        var progress = player.querySelector('.progress__filled');
+        progress.style.background = color;
+        buttons.forEach(function (button) {
+            return button.style.color = color;
+        });
+    }
+}
+
+function toggleFullScreen(player, fullScreenButton) {
+    // let isFullscreen = false;
+    if (!document.fullscreenElement && // alternative standard method
+    !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        player.classList.add('ckin__fullscreen');
+
+        if (player.requestFullscreen) {
+            player.requestFullscreen();
+        } else if (player.mozRequestFullScreen) {
+            player.mozRequestFullScreen(); // Firefox
+        } else if (player.webkitRequestFullscreen) {
+            player.webkitRequestFullscreen(); // Chrome and Safari
+        } else if (player.msRequestFullscreen) {
+            player.msRequestFullscreen();
+        }
+        isFullscreen = true;
+
+        fullScreenButton.innerHTML = iconCompress;
+    } else {
+        player.classList.remove('ckin__fullscreen');
+
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        isFullscreen = false;
+        fullScreenButton.innerHTML = iconExpand;
+    }
+}
+
+function onFullScreen(e, player) {
+    var isFullscreenNow = document.webkitFullscreenElement !== null;
+    if (!isFullscreenNow) {
+        player.classList.remove('ckin__fullscreen');
+        player.querySelector('.fullscreen').innerHTML = iconExpand;
+    } else {
+        // player.querySelector('.fullscreen').innerHTML = iconExpand;
+
+    }
+}
+
+function addListenerMulti(element, eventNames, listener) {
+    var events = eventNames.split(' ');
+    for (var i = 0, iLen = events.length; i < iLen; i++) {
+        element.addEventListener(events[i], listener, false);
+    }
+}
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'clip-path': 'inset(0)'
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 (function ($) {
     "use strict";
 
@@ -12297,42 +12297,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var dataTable = function($scope, $) {
-    var $_this = $scope.find(".eael-data-table-wrap"),
-        $id = $_this.data("table_id");
-
-
-    if(typeof enableProSorter !== 'undefined' && $.isFunction(enableProSorter) ) {
-        $(document).ready(function(){
-            enableProSorter(jQuery, $_this);
-        });
-    }
-
-    var responsive = $_this.data("custom_responsive");
-    if (true == responsive) {
-        var $th = $scope.find(".eael-data-table").find("th");
-        var $tbody = $scope.find(".eael-data-table").find("tbody");
-
-        $tbody.find("tr").each(function(i, item) {
-            $(item)
-                .find("td .td-content-wrapper")
-                .each(function(index, item) {
-                    $(this).prepend(
-                        '<div class="th-mobile-screen">' +
-                            $th.eq(index).html() +
-                            "</div>"
-                    );
-                });
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-data-table.default",
-        dataTable
-    );
-});
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -12405,73 +12369,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",
         AdvanceTabHandler
-    );
-});
-
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
     );
 });
 
@@ -12592,6 +12489,109 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-content-ticker.default",
         ContentTicker
+    );
+});
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
+var dataTable = function($scope, $) {
+    var $_this = $scope.find(".eael-data-table-wrap"),
+        $id = $_this.data("table_id");
+
+
+    if(typeof enableProSorter !== 'undefined' && $.isFunction(enableProSorter) ) {
+        $(document).ready(function(){
+            enableProSorter(jQuery, $_this);
+        });
+    }
+
+    var responsive = $_this.data("custom_responsive");
+    if (true == responsive) {
+        var $th = $scope.find(".eael-data-table").find("th");
+        var $tbody = $scope.find(".eael-data-table").find("tbody");
+
+        $tbody.find("tr").each(function(i, item) {
+            $(item)
+                .find("td .td-content-wrapper")
+                .each(function(index, item) {
+                    $(this).prepend(
+                        '<div class="th-mobile-screen">' +
+                            $th.eq(index).html() +
+                            "</div>"
+                    );
+                });
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-data-table.default",
+        dataTable
     );
 });
 var FancyText = function($scope, $) {
@@ -12801,28 +12801,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     });
 })(jQuery);
 
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
-    );
-});
-
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -12872,50 +12850,35 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var PricingTooltip = function($scope, $) {
-    if ($.fn.tooltipster) {
-        var $tooltip = $scope.find(".tooltip"),
-            i;
-
-        for (i = 0; i < $tooltip.length; i++) {
-            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
-                $tooltipSide =
-                    $currentTooltip.data("side") !== undefined
-                        ? $currentTooltip.data("side")
-                        : false,
-                $tooltipTrigger =
-                    $currentTooltip.data("trigger") !== undefined
-                        ? $currentTooltip.data("trigger")
-                        : "hover",
-                $animation =
-                    $currentTooltip.data("animation") !== undefined
-                        ? $currentTooltip.data("animation")
-                        : "fade",
-                $anim_duration =
-                    $currentTooltip.data("animation_duration") !== undefined
-                        ? $currentTooltip.data("animation_duration")
-                        : 300,
-                $theme =
-                    $currentTooltip.data("theme") !== undefined
-                        ? $currentTooltip.data("theme")
-                        : "default",
-                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
-
-            $currentTooltip.tooltipster({
-                animation: $animation,
-                trigger: $tooltipTrigger,
-                side: $tooltipSide,
-                delay: $anim_duration,
-                arrow: $arrow,
-                theme: "tooltipster-" + $theme
-            });
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
         }
-    }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-pricing-table.default",
-        PricingTooltip
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
     );
 });
 
@@ -12997,13 +12960,81 @@ jQuery(document).ready(function() {
     }
 });
 
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
+var PricingTooltip = function($scope, $) {
+    if ($.fn.tooltipster) {
+        var $tooltip = $scope.find(".tooltip"),
+            i;
+
+        for (i = 0; i < $tooltip.length; i++) {
+            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
+                $tooltipSide =
+                    $currentTooltip.data("side") !== undefined
+                        ? $currentTooltip.data("side")
+                        : false,
+                $tooltipTrigger =
+                    $currentTooltip.data("trigger") !== undefined
+                        ? $currentTooltip.data("trigger")
+                        : "hover",
+                $animation =
+                    $currentTooltip.data("animation") !== undefined
+                        ? $currentTooltip.data("animation")
+                        : "fade",
+                $anim_duration =
+                    $currentTooltip.data("animation_duration") !== undefined
+                        ? $currentTooltip.data("animation_duration")
+                        : 300,
+                $theme =
+                    $currentTooltip.data("theme") !== undefined
+                        ? $currentTooltip.data("theme")
+                        : "default",
+                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
+
+            $currentTooltip.tooltipster({
+                animation: $animation,
+                trigger: $tooltipTrigger,
+                side: $tooltipSide,
+                delay: $anim_duration,
+                arrow: $arrow,
+                theme: "tooltipster-" + $theme
+            });
+        }
+    }
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
+        "frontend/element_ready/eael-pricing-table.default",
+        PricingTooltip
+    );
+});
+
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
     );
 });
 
@@ -13013,6 +13044,20 @@ jQuery(window).on("elementor/frontend/init", function() {
     var eaelVideoElement = '';
     var StickyVideo = function(scope, $) {
         var videoElement = scope.find('.eael-sticky-video-player');
+        var videoElement2 = scope.find('.eael-sticky-video-player2');
+        for (j = 0; j < videoElement2.length; j++) {
+            var sticky2 = videoElement2[j].dataset.sticky;
+            var stpos = videoElement2[j].dataset.stpos;
+            if(sticky2=='yes'){
+                eaelStickVideoHeight2 = ($(videoElement2[j]).parent().offset().top + $(videoElement2[j]).parent().height());
+                //alert(videoElement2[j])
+                $(videoElement2[j]).parent().attr('id', 'videobox');
+                //$(videoElement2[i]).parent().empty().append(iframe1);
+                if(videoIsActive == 0){
+                    videoIsActive = 1;
+                }
+            }
+        }
         for (i = 0; i < videoElement.length; i++) {
             var overlayImage = videoElement[i].dataset.image;
             var source = videoElement[i].dataset.source;
@@ -13138,42 +13183,13 @@ jQuery(window).on("elementor/frontend/init", function() {
         if($(window).scrollTop() > eaelStickVideoHeight ) {
             if(videoIsActive == 1){
                 $('#videobox').removeClass('in').addClass('out');
-				$('#videobox').css('bottom', '10');
+				$('#videobox').css({ 'bottom' : '10', 'width' : '300px' });
             }
         }
         else {
             $('#videobox').removeClass('out').addClass('in');
+            $('.eael-sticky-video-wrapper').removeAttr('style');
         }
     });
     
 })(window, jQuery);
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
-});
