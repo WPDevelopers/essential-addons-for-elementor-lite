@@ -305,6 +305,11 @@
   overflow: hidden;
 }
 
+.eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon img {
+  position: relative;
+  bottom: auto;
+}
+
 .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i {
   font-size: 30px;
   color: #fff;
