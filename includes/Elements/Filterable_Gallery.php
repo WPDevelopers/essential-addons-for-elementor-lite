@@ -461,7 +461,7 @@ class Filterable_Gallery extends Widget_Base
                 'label' => __('Video play icon', 'essential-addons-elementor'),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
-                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/play-icon.png',
+                    'url' => EAEL_PLUGIN_URL . 'assets/front-end/img/play-icon.png',
                 ],
                 'condition' => [
                     'fg_video_gallery_switch' => 'true',
@@ -1610,7 +1610,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ff622a',
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'background: {{VALUE}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'background: {{VALUE}};',
                     ],
                 ]
             );
@@ -1622,7 +1622,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::COLOR,
                     'default' => '#fff',
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'color: {{VALUE}};',
                     ],
                 ]
             );
@@ -1634,7 +1634,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -1646,7 +1646,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -1672,7 +1672,7 @@ class Filterable_Gallery extends Widget_Base
                         'size' => 50,
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                     ],
                 ]
             );
@@ -1696,7 +1696,8 @@ class Filterable_Gallery extends Widget_Base
                         'size' => 18,
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'font-size: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'font-size: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                     ],
                 ]
             );
@@ -1706,7 +1707,7 @@ class Filterable_Gallery extends Widget_Base
                 [
                     'name' => 'eael_fg_item_icon_border',
                     'label' => esc_html__('Border', 'essential-addons-elementor'),
-                    'selector' => '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a',
+                    'selector' => '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span',
                 ]
             );
     
@@ -1724,7 +1725,7 @@ class Filterable_Gallery extends Widget_Base
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'border-radius: {{SIZE}}px;',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'border-radius: {{SIZE}}px;',
                     ],
                 ]
             );
@@ -1745,7 +1746,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ff622a',
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a:hover' => 'background: {{VALUE}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span:hover' => 'background: {{VALUE}};',
                     ],
                 ]
             );
@@ -1757,7 +1758,7 @@ class Filterable_Gallery extends Widget_Base
                     'type' => Controls_Manager::COLOR,
                     'default' => '#fff',
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a:hover' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span:hover' => 'color: {{VALUE}};',
                     ],
                 ]
             );
@@ -1767,7 +1768,7 @@ class Filterable_Gallery extends Widget_Base
                 [
                     'name' => 'eael_fg_item_icon_border_hover',
                     'label' => esc_html__('Border', 'essential-addons-elementor'),
-                    'selector' => '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a:hover',
+                    'selector' => '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span:hover',
                 ]
             );
     
@@ -1785,7 +1786,7 @@ class Filterable_Gallery extends Widget_Base
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a:hover' => 'border-radius: {{SIZE}}px;',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span:hover' => 'border-radius: {{SIZE}}px;',
                     ],
                 ]
             );
@@ -1804,7 +1805,7 @@ class Filterable_Gallery extends Widget_Base
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a' => 'transition: {{SIZE}}ms;',
+                        '{{WRAPPER}} .gallery-item-caption-wrap .gallery-item-buttons > a span' => 'transition: {{SIZE}}ms;',
                     ],
                 ]
             );
@@ -1995,7 +1996,8 @@ class Filterable_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .fg-filter-trigger > i' => 'margin-left: {{SIZE}}px;',
+                    '{{WRAPPER}} .fg-filter-trigger > i' => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .fg-filter-trigger img' => 'margin-left: {{SIZE}}{{UNIT}};',
                 ]
             ]
         );
@@ -2015,7 +2017,8 @@ class Filterable_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .fg-filter-trigger > i' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .fg-filter-trigger > i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .fg-filter-trigger img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ]
             ]
         );
@@ -2425,13 +2428,53 @@ class Filterable_Gallery extends Widget_Base
                 'name' => 'load_more_button_typography',
                 'label' => __('Typography', 'essential-addons-elementor'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
                 'condition' => [
                     'pagination' => 'yes',
                     'load_more_text!' => '',
                 ],
             ]
         );
+
+        $this->add_control(
+    		'load_more_button_icon_size',
+    		[
+        		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
+       			'type' => Controls_Manager::SLIDER,
+        		'default' => [
+            		'size' => 36,
+        		],
+        		'range' => [
+					'px' => [
+						'min' => 20,
+						'max' => 500,
+						'step' => 1,
+					]
+        		],
+        		'selectors' => [
+					'{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-gallery-load-more img.eael-filterable-gallery-load-more-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+        		]
+    		]
+        );
+        
+        $this->add_control(
+    		'load_more_button_icon_spacing',
+    		[
+        		'label' => __( 'Icon Spacing', 'essential-addons-elementor' ),
+       			'type' => Controls_Manager::SLIDER,
+        		'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 50
+					]
+        		],
+        		'selectors' => [
+					'{{WRAPPER}} .eael-gallery-load-more .fg-load-more-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-gallery-load-more .fg-load-more-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
+        		]
+    		]
+		);
 
         $this->add_responsive_control(
             'load_more_button_padding',
@@ -2625,8 +2668,11 @@ class Filterable_Gallery extends Widget_Base
                         <span><?php echo $all_text; ?></span>
                         <?php
                             if( isset($settings['fg_all_label_icon']) && ! empty($settings['fg_all_label_icon']) ) {
-                                
-                                echo '<i class="'.$settings['fg_all_label_icon']['value'].'"></i>';
+                                if( isset($settings['fg_all_label_icon']['value']['url']) ) {
+                                    echo '<img src="'.$settings['fg_all_label_icon']['value']['url'].'" alt="'.esc_attr(get_post_meta($settings['fg_all_label_icon']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
+                                }else {
+                                    echo '<i class="'.$settings['fg_all_label_icon']['value'].'"></i>';
+                                }
                             }else {
                                 echo '<i class="fas fa-angle-down"></i>';
                             }
@@ -2673,9 +2719,13 @@ class Filterable_Gallery extends Widget_Base
 					<span class="eael-button-loader"></span>
 					<?php if($settings['button_icon_position'] == 'before') {?>
                         <?php if($icon_is_new || $icon_migrated) { ?>
-                            <span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                            <?php if( isset($settings['load_more_icon_new']['value']['url']) ) : ?>
+                                <img class="eael-filterable-gallery-load-more-icon fg-load-more-icon-left" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <?php else : ?>
+                                <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-left <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                            <?php endif; ?>
                         <?php } else { ?>
-                            <span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                            <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-left <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
                         <?php } ?>
 					<?php }?>
 					<span class="eael-filterable-gallery-load-more-text">
@@ -2683,9 +2733,13 @@ class Filterable_Gallery extends Widget_Base
 					</span>
 					<?php if($settings['button_icon_position'] == 'after') {?>
 						<?php if($icon_is_new || $icon_migrated) { ?>
-                            <span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                            <?php if( isset($settings['load_more_icon_new']['value']['url']) ) : ?>
+                                <img class="eael-filterable-gallery-load-more-icon fg-load-more-icon-right" src="<?php echo esc_url($settings['load_more_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['load_more_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <?php else : ?>
+                                <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon_new']['value']); ?>" aria-hidden="true"></span>
+                            <?php endif; ?>
                         <?php } else { ?>
-                            <span class="eael-filterable-gallery-load-more-icon <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
+                            <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
                         <?php } ?>
 					<?php }?>
 				</a>
@@ -2740,11 +2794,19 @@ class Filterable_Gallery extends Widget_Base
 
         if ($item['show_lightbox'] == true) {
             echo '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link">';
-            if ($zoom_icon_is_new || $zoom_icon_migrated) {
-                echo '<i class="' . $settings['eael_section_fg_zoom_icon_new']['value'] . '" aria-hidden="true"></i>';
-            } else {
-                echo '<i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i>';
-            }
+            
+                echo '<span class="fg-item-icon-inner">';
+                    if ($zoom_icon_is_new || $zoom_icon_migrated) {
+                        if( isset($settings['eael_section_fg_zoom_icon_new']['value']['url']) ) {
+                            echo '<img src="' . $settings['eael_section_fg_zoom_icon_new']['value']['url'] . '" alt="'.esc_attr(get_post_meta($settings['eael_section_fg_zoom_icon_new']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
+                        }else {
+                            echo '<i class="' . $settings['eael_section_fg_zoom_icon_new']['value'] . '" aria-hidden="true"></i>';
+                        }
+                    } else {
+                        echo '<i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i>';
+                    }
+                echo '</span>';
+
             echo '</a>';
         }
 
@@ -2761,13 +2823,19 @@ class Filterable_Gallery extends Widget_Base
 
             if (!empty($item['link']['url'])) {
                 echo '<a ' . $a_string . '>';
-                
-                if ($link_icon_is_new || $link_icon_migrated) {
-                    echo '<i class="' . $settings['eael_section_fg_link_icon_new']['value'] . '" aria-hidden="true"></i>';
-                } else {
-                    echo '<i class="' . $settings['eael_section_fg_link_icon'] . '" aria-hidden="true"></i>';
-                }
+                    echo '<span class="fg-item-icon-inner">';
 
+                        if ($link_icon_is_new || $link_icon_migrated) {
+                            if( isset($settings['eael_section_fg_link_icon_new']['value']['url']) ) {
+                                echo '<img src="' . $settings['eael_section_fg_link_icon_new']['value']['url'] . '" alt="'.esc_attr(get_post_meta($settings['eael_section_fg_link_icon_new']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
+                            }else {
+                                echo '<i class="' . $settings['eael_section_fg_link_icon_new']['value'] . '" aria-hidden="true"></i>';
+                            }
+                        } else {
+                            echo '<i class="' . $settings['eael_section_fg_link_icon'] . '" aria-hidden="true"></i>';
+                        }
+
+                    echo '</span>';
                 echo '</a>';
             }
         }

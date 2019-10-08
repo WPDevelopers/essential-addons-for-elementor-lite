@@ -8,10 +8,13 @@
 }
 
 .eael-infobox .infobox-icon .infobox-icon-wrap {
-	display: block;
+	display: flex;
 	width: 100%;
 	height: auto;
 	transition: .3s;
+	align-items: center;
+	justify-content: center;
+
 }
 
 .eael-infobox .infobox-icon .infobox-icon-wrap i {

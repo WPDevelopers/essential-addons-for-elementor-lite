@@ -30,7 +30,7 @@ class Creative_Button extends Widget_Base {
 		return 'eicon-button';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
 
@@ -108,13 +108,13 @@ class Creative_Button extends Widget_Base {
 						'right' => esc_html__( 'After', 'essential-addons-elementor' ),
 					],
 					'condition' => [
-						'eael_creative_button_icon!' => '',
+						'eael_creative_button_icon_new!' => '',
 					],
 				]
 			);
 			
 
-			$this->add_control(
+			$this->add_responsive_control(
 				'eael_creative_button_icon_indent',
 				[
 					'label' => esc_html__( 'Icon Spacing', 'essential-addons-elementor' ),
@@ -125,7 +125,7 @@ class Creative_Button extends Widget_Base {
 						],
 					],
 					'condition' => [
-						'eael_creative_button_icon!' => '',
+						'eael_creative_button_icon_new!' => '',
 					],
 					'selectors' => [
 						'{{WRAPPER}} .eael-creative-button-icon-right' => 'margin-left: {{SIZE}}px;',
@@ -411,14 +411,43 @@ class Creative_Button extends Widget_Base {
 						'{{WRAPPER}} .eael-creative-button' => 'width: {{SIZE}}{{UNIT}};',
 					],
 				]
-			);	
+			);
 
 			$this->add_group_control(
 				Group_Control_Typography:: get_type(),
 				[
 				'name'     => 'eael_creative_button_typography',
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .eael-creative-button',
+				'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text',
+				]
+			);
+
+
+			$this->add_responsive_control(
+				'eael_creative_button_icon_size',
+				[
+					'label'      => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+					'type'       => Controls_Manager::SLIDER,
+					'size_units' => [ 'px', '%' ],
+					'default' => [
+						'size' => 30,
+						'unit' => 'px',
+					],
+					'range'      => [
+						'px' => [
+							'min'  => 0,
+							'max'  => 500,
+							'step' => 1,
+						],
+						'%' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eael-creative-button i' => 'font-size: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .eael-creative-button img' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
+					],
 				]
 			);
 			
@@ -488,17 +517,29 @@ class Creative_Button extends Widget_Base {
 			<span>
 				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
-						<i class="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i>
+						<?php if ( isset( $settings['eael_creative_button_icon_new']['value']['url']) ) : ?>
+							<img src="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value']['url'] ); ?>" class="eael-creative-button-icon-left" alt="<?php echo esc_attr(get_post_meta($settings['eael_creative_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
+						<?php else : ?>
+							<?php if( ! empty($settings['eael_creative_button_icon_new']['value']) ) {
+								echo '<i class="'.esc_attr($settings['eael_creative_button_icon_new']['value'] ).' eael-creative-button-icon-left" aria-hidden="true"></i>';
+							} ?>
+						<?php endif; ?>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-left" aria-hidden="true"></i> 
 					<?php } ?>
 				<?php endif; ?>
 
-				<?php echo  $settings['creative_button_text'];?>
+				<span class="cretive-button-text"><?php echo  $settings['creative_button_text'];?></span>
 
 				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
-						<i class="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i>
+						<?php if ( isset( $settings['eael_creative_button_icon_new']['value']['url']) ) : ?>
+							<img src="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value']['url'] ); ?>" class="eael-creative-button-icon-right" alt="<?php echo esc_attr(get_post_meta($settings['eael_creative_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
+						<?php else : ?>
+							<?php if( ! empty($settings['eael_creative_button_icon_new']['value']) ) {
+								echo '<i class="'.esc_attr($settings['eael_creative_button_icon_new']['value'] ).' eael-creative-button-icon-right" aria-hidden="true"></i>';
+							} ?>
+						<?php endif; ?>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
 					<?php } ?>

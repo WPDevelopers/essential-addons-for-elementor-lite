@@ -637,7 +637,8 @@ class Cta_Box extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'font-size: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-call-to-action.cta-icon-flex .icon img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -736,7 +737,11 @@ class Cta_Box extends Widget_Base {
 	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr( $cta_class ); ?>">
 	    <div class="icon">
 			<?php if($icon_is_new || $icon_migrated) { ?>
-				<i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon_new']['value'] ); ?>"></i>
+				<?php if( isset($settings['eael_cta_flex_grid_icon_new']['value']['url']) ) : ?>
+					<img src="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_cta_flex_grid_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+				<?php else : ?>
+					<i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon_new']['value'] ); ?>"></i>
+				<?php endif; ?>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_cta_flex_grid_icon'] ); ?>"></i>
 			<?php } ?>
