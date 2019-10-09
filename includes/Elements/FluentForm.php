@@ -55,8 +55,7 @@ class FluentForm extends Widget_Base
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>Fluent Form</strong> is not installed/activated on your site. Please install and activate <a href="install.php?s=fluentform&tab=search&type=term
-                    " target="_blank">Fluent Form</a> first.', 'essential-addons-elementor'),
+                    'raw' => __('<strong>Fluent Form</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=fluentform&tab=search&type=term" target="_blank">Fluent Form</a> first.', 'essential-addons-elementor'),
                     'content_classes' => 'eael-warning',
                 ]
             );
