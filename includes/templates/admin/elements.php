@@ -377,8 +377,8 @@ $elements = [
             [
                 'key'   => 'fluentform',
                 'title' => __( 'FluentForm', 'essential-addons-elementor' ),
-                'demo_link' => 'https://essential-addons.com/elementor/wpforms/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/wpforms/',
+                'demo_link' => 'https://essential-addons.com/elementor/fluentform/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/fluentform/',
             ],
             [
                 'key'    => 'mailchimp',

@@ -55,7 +55,8 @@ class FluentForm extends Widget_Base
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>Fluent Form</strong> is not installed/activated on your site. Please install and activate <strong>Fluent Form</strong> first.', 'essential-addons-elementor'),
+                    'raw' => __('<strong>Fluent Form</strong> is not installed/activated on your site. Please install and activate <a href="install.php?s=fluentform&tab=search&type=term
+                    " target="_blank">Fluent Form</a> first.', 'essential-addons-elementor'),
                     'content_classes' => 'eael-warning',
                 ]
             );
@@ -216,6 +217,7 @@ class FluentForm extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-fluentform-title' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-fluentform-description' => 'text-align: {{VALUE}};',
                 ],
                 'condition' => [
                     'custom_title_description' => 'yes',
@@ -428,7 +430,7 @@ class FluentForm extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form' => 'width: {{SIZE}}{{UNIT}};'
                 ],
             ]
         );
