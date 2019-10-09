@@ -1250,6 +1250,34 @@ trait Helper
     }
 
     /**
+     * Get FluentForms List
+     * 
+     * @return array
+     */
+    public static function eael_select_fluent_forms()
+    {
+
+        $options = array();
+
+        if(defined('FLUENTFORM')) {
+            global $wpdb;
+            
+            $result = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}fluentform_forms" );
+            if($result) {
+                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-elementor');
+                foreach($result as $form) {
+                    $options[$form->id] = $form->title;
+                }
+            }else {
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+            }
+        }
+
+        return $options;
+
+    }
+
+    /**
      * Get all elementor page templates
      *
      * @return array
