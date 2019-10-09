@@ -124,6 +124,9 @@ trait Admin
 
         // Saving Mailchimp Api Key
         update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
+        
+        // Saving Duplicator Settings
+        update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
 
         // Build assets files
         $this->generate_scripts(array_keys($settings));
@@ -200,7 +203,7 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible ' );
-        $notice->message( 'upsale', '<p>'. __( '6000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement! Join Free or Get <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">Exclusive Lifetime Pro</a> for only $39! Limied Time!', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( '7000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         // Update Notice For PRO Version
@@ -224,7 +227,7 @@ trait Admin
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
-                'upsale' => $notice->makeTime($notice->timestamp, '1 Hour'),
+                'upsale' => $notice->makeTime($notice->timestamp, '1 Day'),
                 'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
             ],
         );

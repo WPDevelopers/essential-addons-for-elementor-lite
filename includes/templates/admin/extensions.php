@@ -69,6 +69,10 @@ $extensions = [
                             <p class="eael-el-title">
                                 <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
                                 <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">'.__('Pro', 'essential-addons-elementor').'</sup>' : ''; ?>
+                                <?php if ($item['key'] === 'eael-post-duplicator') {
+                                    echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Select Post Types" data-option="select" data-options=' . json_encode(get_post_types(['public' => true, 'show_in_nav_menus' => true])) . ' data-target="#post-duplicator-post-type">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                    <input type="hidden" name="post-duplicator-post-type" id="post-duplicator-post-type" class="post-duplicator-post-type" value="'.get_option('eael_save_post_duplicator_post_type').'">';
+                                } ?>
                             </p>
                             <a  class="eael-element-info-link" href="<?php echo ($item['demo_link']);?>" target="_blank">
                                 <span class="dashicons dashicons-welcome-view-site"></span>
