@@ -189,6 +189,7 @@ $config = [
             'class' => '\Essential_Addons_Elementor\Elements\Tooltip',
             'dependency' => [
                 'css' => [
+
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/tooltip/index.min.css',
                 ],
             ],
@@ -309,6 +310,9 @@ $config = [
                 ],
             ],
         ],
+        'eael-post-duplicator' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
+        ]
     ],
 ];
 
