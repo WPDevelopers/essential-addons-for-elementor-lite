@@ -17,14 +17,14 @@ class Post_Duplicator
 
     public function admin_bar_menu( $wp_admin_bar ){
         global $pagenow;
-        /**
-         * TODO: Check post type from settings we have set.
-         * .... 
-         */
-        if( ! is_admin() || $pagenow !== 'post.php' ) {
+        global $post;
+
+        $enabled_on = get_option('eael_save_post_duplicator_post_type', 'all');
+
+        if( ! is_admin() || $pagenow !== 'post.php' || ($enabled_on != 'all' || $post->post_type != $enabled_on)) {
             return;
         }
-        global $post;
+
         $duplicate_url = admin_url('admin.php?action=eae_duplicate&post=' . $post->ID );
         $duplicate_url = wp_nonce_url( $duplicate_url, 'ea_duplicator' );
         $wp_admin_bar->add_menu( 
@@ -42,12 +42,10 @@ class Post_Duplicator
      * @param WP_Post $post
      * @return array
      */
-    public function row_actions( $actions, $post ){
-        /**
-         * TODO: Check post type from settings we have set.
-         * .... 
-         */
-        if( current_user_can('edit_posts') ) {
+    public function row_actions( $actions, $post ) {
+        $enabled_on = get_option('eael_save_post_duplicator_post_type', 'all');
+
+        if( current_user_can('edit_posts') && ($enabled_on == 'all' || $post->post_type == $enabled_on)) {
             $duplicate_url = admin_url('admin.php?action=eae_duplicate&post=' . $post->ID );
             $duplicate_url = wp_nonce_url( $duplicate_url, 'ea_duplicator' );
             $actions['eae_duplicate'] = sprintf( '<a href="%s" title="%s">%s</a>', $duplicate_url,  __( 'Duplicate ' . $post->post_title, 'essential-addons-elementor' ), __( 'EA Duplicate', 'essential-addons-elementor' ) );
