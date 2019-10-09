@@ -68,7 +68,7 @@ trait Elements
      */
     public function register_extensions()
     {
-        $active_elements = $this->get_settings();
+        $active_elements = (array) $this->get_settings();
 
         if (empty($active_elements)) {
             return;
