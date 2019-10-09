@@ -124,6 +124,9 @@ trait Admin
 
         // Saving Mailchimp Api Key
         update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
+        
+        // Saving Duplicator Settings
+        update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
 
         // Build assets files
         $this->generate_scripts(array_keys($settings));
