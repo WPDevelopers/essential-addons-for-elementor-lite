@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.3.2
+Stable tag: 3.3.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -170,6 +170,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.3.3 - 08/10/2019 =
+- Added: Team Member content card height control
+- Added: Tootip icon size control
+- Fixed: SVG upload issue on all icon manager
+- Fixed: Post Elements exclude control missing
+- Fixed: Data Table header icon top position issue
+- Fixed: Data Table image icon squeezing issue
+- Fixed: Tooltip image trigger size issue
+- Fixed: Redirection issue
+- Few minor bugfix and improvements
 
 = 3.3.2 - 26/09/2019 =
 - Added : Filterable Gallery new layout (Search & Filter) 
