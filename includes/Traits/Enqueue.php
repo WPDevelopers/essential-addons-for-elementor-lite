@@ -29,6 +29,22 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
+        if( defined('FLUENTFORM') ) {
+            wp_enqueue_style(
+                'fluent-form-styles',
+                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
+                array(),
+                FLUENTFORM_VERSION
+            );
+
+            wp_enqueue_style(
+                'fluentform-public-default',
+                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
+                array(),
+                FLUENTFORM_VERSION
+            );
+        }
+
         // Load fontawesome as fallback
         wp_enqueue_style(
 			'font-awesome-5-all',
