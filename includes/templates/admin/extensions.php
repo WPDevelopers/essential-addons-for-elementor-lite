@@ -40,7 +40,7 @@ $extensions = [
             ],
             [
                 'key'    => 'eael-post-duplicator',
-                'title'  => __( 'Post Duplicator', 'essential-addons-elementor' ),
+                'title'  => __( 'EA Duplicator', 'essential-addons-elementor' ),
                 'demo_link' => 'https://essential-addons.com/elementor/reading-progress/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
             ]
