@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.3.3
+Stable tag: 3.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -36,7 +36,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 29+ FREE WIDGETS AND COUNTING
+### 30+ FREE WIDGETS AND COUNTING
 
 We have designed 29 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -69,6 +69,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
+30. [FluentForm](https://essential-addons.com/elementor/fluentform/) - Design your FluentForm container, fields and anything you want
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -106,6 +107,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 Extensions (Free): 
 
 1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add a reading progress bar to your page/post to indicate the current reading position.
+2. [Page/Post Duplicator](https://essential-addons.com/elementor/post-duplicator/) - Duplicate any page or post in a single click.
 
 Extensions (Pro): 
 
@@ -170,6 +172,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.4.0 - 10/10/2019 =
+- Added: FluentForm styler
+- Added: "EA Duplicator" extension to duplicate any page/post
+- Fixed: New elements not active by default
+- Few minor bugfix and improvements
 
 = 3.3.3 - 08/10/2019 =
 - Added: Team Member content card height control
