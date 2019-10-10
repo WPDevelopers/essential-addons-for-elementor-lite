@@ -703,8 +703,8 @@ class Sticky_Video extends Widget_Base {
 			?>
 			<div class="eael-sticky-video-player" 
 				style="background-image:url('<?php echo esc_attr($settings['eaelsv_overlay_image']['url']); ?>');"
-				data-player="<?php echo esc_attr( $eaelsvPlayer ); ?>"
-				data-sticky="<?php echo esc_attr( $sticky ); ?>">
+				data-player="<?php echo esc_attr($eaelsvPlayer); ?>"
+				data-sticky="<?php echo esc_attr($sticky); ?>">
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
 		<?php else: ?>
