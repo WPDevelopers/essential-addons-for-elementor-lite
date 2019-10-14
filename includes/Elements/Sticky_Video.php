@@ -785,14 +785,14 @@ class Sticky_Video extends Widget_Base {
 		$endTime = $settings['eaelsv_end_time'];
 		?>
 		<video
-		src="<?php echo esc_attr($video); ?>#t=<?php echo esc_attr($startTime); ?>,<?php echo esc_attr($endTime); ?>" 
-		data-color="<?php echo esc_attr($interfaceColor); ?>" 
-		data-ckin="<?php echo esc_attr($skin); ?>" 
-		data-overlay="1"
-		<?php if('yes'==$autoplay) echo "autoplay"; ?>
-		<?php if('yes'==$loop) echo "loop"; ?>
-		<?php if('yes'==$mute) echo "muted"; ?>
-		poster="ckin.jpg">
+			src="<?php echo esc_attr($video); ?>#t=<?php echo esc_attr($startTime); ?>,<?php echo esc_attr($endTime); ?>" 
+			data-color="<?php echo esc_attr($interfaceColor); ?>" 
+			data-ckin="<?php echo esc_attr($skin); ?>" 
+			data-overlay="1"
+			<?php if('yes'==$autoplay) echo "autoplay"; ?>
+			<?php if('yes'==$loop) echo "loop"; ?>
+			<?php if('yes'==$mute) echo "muted"; ?>
+			poster="ckin.jpg">
 		</video>
 		<?php
 		return ob_get_clean();

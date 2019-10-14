@@ -1,4 +1,5 @@
 ;(function (window, $) {
+    
     var videoIsActive = 0;
     var eaelStickVideoHeight = 0;
     var eaelStickVideoHeight2 = 0;
@@ -49,14 +50,20 @@
 
         // When overlay option is enable
         for (i = 0; i < videoElement.length; i++) {
-            var ifrm        = videoElement[i].dataset.player;
-            var sticky      = videoElement[i].dataset.sticky;
+            
             videoElement[i].onclick = function() {
+                var ifrm        = videoElement[i].dataset.player;
+                var sticky      = videoElement[i].dataset.sticky;
+                
+                
                 $(this).css('background-image', 'none');
-                // $(this).empty().html(ifrm);
+                $(this).html(ifrm);
                 $(this).removeAttr('data-player');
-                $(this).removeClass('eael-sticky-video-player');
-                $(this).addClass('eael-sticky-video-player2');
+                //$(this).removeClass('eael-sticky-video-player');
+                //$(this).addClass('eael-sticky-video-player2');
+                var imported = document.createElement('script');
+                imported.src = 'https://dd7tel2830j4w.cloudfront.net/f1543187702754x874859008239582200/ckin.min.js';
+                document.body.appendChild(imported);
                 if(sticky == 'yes') {
                     //alert(sticky);
                     $('.eael-sticky-video-wrapper').removeAttr('id');
@@ -67,6 +74,7 @@
                     }
                 }
             }
+            
         }
     };
 
