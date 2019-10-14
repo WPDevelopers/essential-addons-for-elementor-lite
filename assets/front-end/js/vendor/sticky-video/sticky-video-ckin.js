@@ -1,10 +1,3 @@
-/*!
-   ckin v0.0.1: Custom HTML5 Video Player Skins.
-   (c) 2017 
-   MIT License
-   git+https://github.com/hunzaboy/ckin.git
-*/
-// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca;
 (function () {
     // helpers
     var regExp = function regExp(name) {
@@ -138,13 +131,13 @@ wrapPlayers();
 /* Get Our Elements */
 var players = document.querySelectorAll('.ckin__player');
 
-var iconPlay = '<i class="fas fa-play"></i>';
-var iconPause = '<i class="fas fa-pause"></i>';
-var iconVolumeMute = '<i class="fas fa-volume-mute"></i>';
-var iconVolumeMedium = '<i class="fas fa-volume-up"></i>';
-var iconVolumeLow = '<i class="fas fa-volume-down"></i>';
-var iconExpand = '<i class="fas fa-expand"></i>';
-var iconCompress = '<i class="fas fa-compress-arrows-alt"></i>';
+var iconPlay = '<i class="ckin-play"></i>';
+var iconPause = '<i class="ckin-pause"></i>';
+var iconVolumeMute = '<i class="ckin-volume-mute"></i>';
+var iconVolumeMedium = '<i class="ckin-volume-medium"></i>';
+var iconVolumeLow = '<i class="ckin-volume-low"></i>';
+var iconExpand = '<i class="ckin-expand"></i>';
+var iconCompress = '<i class="ckin-compress"></i>';
 
 players.forEach(function (player) {
     var video = player.querySelector('video');

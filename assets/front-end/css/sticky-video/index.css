@@ -28,6 +28,10 @@
   line-height: 1;
 }
 
+.eael-sticky-video-wrapper > .eael-sticky-video-player > video {
+  z-index: 99999;
+}
+
 .eael-sticky-video-player {
   position: absolute;
   top: 0;

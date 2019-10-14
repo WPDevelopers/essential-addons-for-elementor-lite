@@ -91,6 +91,7 @@ video {
   margin-bottom: 20px;
   font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
   letter-spacing: 0.02em;
+  z-index: 999999;
 }
 
 .ckin__player.ckin__fullscreen {
