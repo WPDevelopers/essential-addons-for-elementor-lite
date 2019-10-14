@@ -130,7 +130,7 @@ class Flip_Box extends Widget_Base {
 							],
 						],
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image > img' => 'width: {{SIZE}}px;'
+							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image > img.eael-flipbox-image-as-icon' => 'width: {{SIZE}}{{UNIT}};'
 						],
 						'condition'	=> [
 							'eael_flipbox_img_or_icon'	=> 'img'
@@ -217,7 +217,7 @@ class Flip_Box extends Widget_Base {
 							],
 						],
 						'selectors' => [
-							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image > img' => 'width: {{SIZE}}px;'
+							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image > img.eael-flipbox-image-as-icon' => 'width: {{SIZE}}{{UNIT}};'
 						],
 						'condition'	=> [
 							'eael_flipbox_img_or_icon_back'	=> 'img'
@@ -780,6 +780,9 @@ class Flip_Box extends Widget_Base {
 					[
 						'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::HEADING,
+						'condition' => [
+							'eael_flipbox_img_or_icon' => 'icon'
+						]
 					]
 				);
 
@@ -791,22 +794,17 @@ class Flip_Box extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i' => 'color: {{VALUE}};',
+						],
+						'condition' => [
+							'eael_flipbox_img_or_icon' => 'icon'
 						]
 					]
 				);
 
-				// $this->add_group_control(
-				// 	Group_Control_Typography::get_type(),
-				// 	[
-		        //     	'name' => 'eael_flipbox_front_icon_typography',
-				// 		'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i',
-				// 	]
-				// );
-
 				$this->add_control(
 					'eael_flipbox_front_icon_typography',
 					[
-						'label' => esc_html__( 'Icon Size	', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SLIDER,
 						'size_units'	=> [ 'px' ],
 						'default'	=> [
@@ -822,8 +820,11 @@ class Flip_Box extends Widget_Base {
 						],
 						'selectors' => [
 							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image i'	=> 'font-size: {{SIZE}}{{UNIT}};',
-							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image img'	=> 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+							'{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image img.eael-flipbox-svg-icon'	=> 'width: {{SIZE}}{{UNIT}};'
 						],
+						'condition' => [
+							'eael_flipbox_img_or_icon' => 'icon'
+						]
 					]
 				);
 
@@ -905,6 +906,9 @@ class Flip_Box extends Widget_Base {
 					[
 						'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::HEADING,
+						'condition'	=> [
+							'eael_flipbox_img_or_icon_back'	=> 'icon'
+						]
 					]
 				);
 
@@ -916,22 +920,17 @@ class Flip_Box extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image i' => 'color: {{VALUE}};',
+						],
+						'condition'	=> [
+							'eael_flipbox_img_or_icon_back'	=> 'icon'
 						]
 					]
 				);
 
-				// $this->add_group_control(
-				// 	Group_Control_Typography::get_type(),
-				// 	[
-		        //     	'name' => 'eael_flipbox_back_icon_typography',
-				// 		'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image i'
-				// 	]
-				// );
-
 				$this->add_control(
 					'eael_flipbox_back_icon_typography',
 					[
-						'label' => esc_html__( 'Icon Size	', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
 						'type' => Controls_Manager::SLIDER,
 						'size_units'	=> [ 'px' ],
 						'default'	=> [
@@ -947,8 +946,11 @@ class Flip_Box extends Widget_Base {
 						],
 						'selectors' => [
 							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image i'	=> 'font-size: {{SIZE}}{{UNIT}};',
-							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image img'	=> 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+							'{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image img'	=> 'width: {{SIZE}}{{UNIT}};'
 						],
+						'condition'	=> [
+							'eael_flipbox_img_or_icon_back'	=> 'icon'
+						]
 					]
 				);
 
@@ -1269,7 +1271,7 @@ class Flip_Box extends Widget_Base {
 								<?php if( 'icon' === $settings['eael_flipbox_img_or_icon'] ) : ?>
 									<?php if ($front_icon_is_new || $front_icon_migrated) { ?>
 										<?php if( isset( $settings['eael_flipbox_icon_new']['value']['url'] ) ) : ?>
-											<img src="<?php echo esc_attr( $settings['eael_flipbox_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+											<img class="eael-flipbox-svg-icon" src="<?php echo esc_attr( $settings['eael_flipbox_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 										<?php else : ?>
 											<i class="<?php echo esc_attr( $settings['eael_flipbox_icon_new']['value'] ); ?>"></i>
 										<?php endif; ?>
@@ -1277,7 +1279,7 @@ class Flip_Box extends Widget_Base {
 										<i class="<?php echo esc_attr( $settings['eael_flipbox_icon'] ); ?>"></i>
 									<?php } ?>
 								<?php elseif( 'img' === $settings['eael_flipbox_img_or_icon'] ): ?>
-									<img src="<?php echo esc_url( $flipbox_image_url ); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
+									<img class="eael-flipbox-image-as-icon" src="<?php echo esc_url( $flipbox_image_url ); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
 								<?php endif; ?>
 	                        </div>
 	                        <h2 class="eael-elements-flip-box-heading"><?php echo esc_html__( $settings['eael_flipbox_front_title'], 'essential-addons-elementor' ); ?></h2>
@@ -1296,11 +1298,11 @@ class Flip_Box extends Widget_Base {
 	                    	<?php if( 'none' != $settings['eael_flipbox_img_or_icon_back'] ) : ?>
 	                    		<div class="eael-elements-flip-box-icon-image">
 	                    			<?php if('img' == $settings['eael_flipbox_img_or_icon_back']) : ?>
-	                    				<img <?php echo $this->get_render_attribute_string('flipbox-back-icon-image-container'); ?>>
+	                    				<img class="eael-flipbox-image-as-icon" <?php echo $this->get_render_attribute_string('flipbox-back-icon-image-container'); ?>>
 	                				<?php elseif('icon' == $settings['eael_flipbox_img_or_icon_back']): ?>
 										<?php if ($back_icon_is_new || $back_icon_migrated) { ?>
 											<?php if( isset($settings['eael_flipbox_icon_back_new']['value']['url']) ) : ?>
-												<img src="<?php echo esc_attr( $settings['eael_flipbox_icon_back_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_back_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+												<img class="eael-flipbox-svg-icon" src="<?php echo esc_attr( $settings['eael_flipbox_icon_back_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_flipbox_icon_back_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 											<?php else : ?>
 												<i class="<?php echo esc_attr( $settings['eael_flipbox_icon_back_new']['value'] ); ?>"></i>
 											<?php endif; ?>
