@@ -130,7 +130,7 @@ obj.browserVersion = obj.browserInfo[1];
 wrapPlayers();
 /* Get Our Elements */
 var players = document.querySelectorAll('.ckin__player');
-
+/*
 var iconPlay = '<i class="ckin-play"></i>';
 var iconPause = '<i class="ckin-pause"></i>';
 var iconVolumeMute = '<i class="ckin-volume-mute"></i>';
@@ -138,6 +138,14 @@ var iconVolumeMedium = '<i class="ckin-volume-medium"></i>';
 var iconVolumeLow = '<i class="ckin-volume-low"></i>';
 var iconExpand = '<i class="ckin-expand"></i>';
 var iconCompress = '<i class="ckin-compress"></i>';
+*/
+var iconPlay = '<i class="fas fa-play"></i>';
+var iconPause = '<i class="fas fa-pause"></i>';
+var iconVolumeMute = '<i class="fas fa-volume-mute"></i>';
+var iconVolumeMedium = '<i class="fas fa-volume-up"></i>';
+var iconVolumeLow = '<i class="fas fa-volume-down"></i>';
+var iconExpand = '<i class="fas fa-expand"></i>';
+var iconCompress = '<i class="fas fa-compress-arrows-alt"></i>';
 
 players.forEach(function (player) {
     var video = player.querySelector('video');
