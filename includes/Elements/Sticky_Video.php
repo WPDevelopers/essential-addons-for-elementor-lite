@@ -704,13 +704,19 @@ class Sticky_Video extends Widget_Base {
 			<div class="eael-sticky-video-player" 
 				style="background-image:url('<?php echo esc_attr($settings['eaelsv_overlay_image']['url']); ?>');"
 				data-player="<?php echo esc_attr($eaelsvPlayer); ?>"
-				data-sticky="<?php echo esc_attr($sticky); ?>">
+				data-sticky="<?php echo esc_attr($sticky); ?>"
+				data-position="<?php echo esc_attr($settings['eaelsv_sticky_position']); ?>"
+				data-sheight="<?php echo esc_attr($settings['eaelsv_sticky_height']['size']); ?>"
+				data-swidth="<?php echo esc_attr($settings['eaelsv_sticky_width']['size']); ?>">
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
 		<?php else: ?>
 			<div class="eael-sticky-video-player2"
 				data-sticky="<?php echo esc_attr( $sticky ); ?>"
-				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']) ?>">
+				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']); ?>"
+				data-position="<?php echo esc_attr($settings['eaelsv_sticky_position']); ?>"
+				data-sheight="<?php echo esc_attr($settings['eaelsv_sticky_height']['size']); ?>"
+				data-swidth="<?php echo esc_attr($settings['eaelsv_sticky_width']['size']); ?>">
 				<?php echo $eaelsvPlayer; ?>
 			</div>
 		<?php endif; ?>
@@ -718,7 +724,7 @@ class Sticky_Video extends Widget_Base {
 		</div>
 		<?php
 		//$this->eaelsv_enqueue_styles();
-		$this->eaelsv_sticky_video_styles($settings);
+		//$this->eaelsv_sticky_video_styles($settings);
 	}
 
 	protected function eaelsv_load_player_youtube($settings){
@@ -857,7 +863,7 @@ class Sticky_Video extends Widget_Base {
 		<style>
 		.eael-sticky-video-wrapper.out{
 			position:fixed;
-			<?php echo $pos; ?>
+			<?php //echo $pos; ?>
 			width:<?php echo $sw; ?>px!important;
 			height:<?php echo $sh; ?>px!important;
 			z-index:999;

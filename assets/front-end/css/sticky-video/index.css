@@ -63,10 +63,6 @@
 */
 .eael-sticky-video-wrapper.out {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px !important;
-  height: 200px;
   z-index: 999;
   border: 0 !important;
   border-radius: 0px !important;
@@ -134,7 +130,7 @@
   position: absolute;
   right: -22px;
   top: -32px;
-  display: block;
+  display: none;
   padding: 7px;
   font-size: 24px;
   z-index: 9999;
