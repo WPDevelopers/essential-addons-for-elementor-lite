@@ -162,10 +162,10 @@
         var title = $(this).data('title');
         var placeholder = $(this).data('placeholder');
         var type = $(this).data('option') || 'text';
-        var options = $(this).data('options');
+        var options = $(this).data('options') || {};
         var prepareOptions = {};
         var target = $(this).data('target');
-        var value = $(target).val();
+        var val = $(target).val();
 
         if(Object.keys(options).length > 0) {
             prepareOptions['all'] = 'All';
@@ -179,7 +179,7 @@
             title: title,
             input: type,
             inputPlaceholder: placeholder,
-            inputValue: value,
+            inputValue: val,
             inputOptions: prepareOptions,
             preConfirm: function(res) {
                 $(target).val(res);
