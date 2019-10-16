@@ -61,6 +61,7 @@ class Sticky_Video extends Widget_Base {
 				'type'          => Controls_Manager::TEXT,
 				'placeholder'   => __( 'Enter your URL (YouTube)', 'essential-addons-elementor' ),
 				'label_block' => true,
+				'default'       => 'https://www.youtube.com/watch?v=uuyXfUDqRZM',
                 'condition'     => [
                     'eael_video_source' => 'youtube'
                 ]
@@ -355,7 +356,7 @@ class Sticky_Video extends Widget_Base {
 		$this->start_controls_section(
 			'eaelsv_sticky_option_section',
 			[
-				'label' => __( 'Sticky Ootions', 'essential-addons-elementor' ),
+				'label' => __( 'Sticky Options', 'essential-addons-elementor' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
