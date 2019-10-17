@@ -31,6 +31,54 @@ class Sticky_Video extends Widget_Base {
 	protected function _register_controls() {
 		//add_action( 'elementor/frontend/after_enqueue_scripts', [ $this, 'eaelsv_custom_scripts' ] );
 
+		/** 
+		 * Sticky Option Starts
+		*/
+		$this->start_controls_section(
+			'eaelsv_sticky_option_section',
+			[
+				'label' => __( 'Sticky Options', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'eaelsv_is_sticky',
+			[
+				'label'         => __( 'Sticky', 'essential-addons-elementor' ),
+				'type'          => Controls_Manager::SWITCHER,
+				'label_block' 	=> false,
+				'label_on'		=> __( 'On', 'essential-addons-elementor' ),
+				'label_off'    	=> __( 'Off', 'essential-addons-elementor' ),
+				'return_value'	=> 'yes',
+				'default' 		=> '',
+				'selectors' 	=> [
+					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'display: block',
+				]
+            ]
+		);
+
+		$this->add_control(
+			'eaelsv_sticky_position',
+			[
+				'label'     => __( 'Position', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::SELECT,
+                'options'	=> [
+					'top-left'   	=> __( 'Top Left', 'essential-addons-elementor' ),
+					'top-right'     => __( 'Top Right', 'essential-addons-elementor' ),
+					'bottom-left'	=> __( 'Bottom Left', 'essential-addons-elementor' ),
+					'bottom-right'	=> __( 'Bottom Right', 'essential-addons-elementor' ),
+				],
+				'default' 	=> 'bottom-right',
+				'condition'     => [
+                    'eaelsv_is_sticky' => 'yes'
+                ]
+            ]
+		);
+
+		$this->end_controls_section();
+		//========================================
+
   		$this->start_controls_section(
   			'eael_section_video_settings',
   			[
@@ -162,7 +210,7 @@ class Sticky_Video extends Widget_Base {
 				'min' => 0,
 				'max' => 10000,
 				'step' => 1,
-				'default' => 0,
+				'default' => '',
 				'description' => 'Specify a start time (in seconds)',
 			]
 		);
@@ -175,7 +223,7 @@ class Sticky_Video extends Widget_Base {
 				'min' => 0,
 				'max' => 10000,
 				'step' => 1,
-				'default' => 0,
+				'default' => '',
 				'description' => 'Specify an end time (in seconds)',
 			]
 		);
@@ -352,45 +400,23 @@ class Sticky_Video extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+		//===================================================================
 
+		/**
+		 * Style Tab Started
+		 */
 		$this->start_controls_section(
-			'eaelsv_sticky_option_section',
+			'eaelsv_sticky_video_interface',
 			[
-				'label' => __( 'Sticky Options', 'essential-addons-elementor' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
+				'label' => __( 'Sticky Video Interface', 'essential-addons-elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+				'condition'     => [
+                    'eaelsv_is_sticky' => 'yes'
+                ]
 			]
 		);
 
-		$this->add_control(
-			'eaelsv_is_sticky',
-			[
-				'label'         => __( 'Sticky', 'essential-addons-elementor' ),
-				'type'          => Controls_Manager::SWITCHER,
-				'label_block' 	=> false,
-				'label_on'		=> __( 'On', 'essential-addons-elementor' ),
-				'label_off'    	=> __( 'Off', 'essential-addons-elementor' ),
-				'return_value'	=> 'yes',
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'display: block',
-				]
-            ]
-		);
-
-		$this->add_control(
-			'eaelsv_sticky_position',
-			[
-				'label'     => __( 'Position', 'essential-addons-elementor' ),
-                'type'      => Controls_Manager::SELECT,
-                'options'	=> [
-					'top-left'   	=> __( 'Top Left', 'essential-addons-elementor' ),
-					'top-right'     => __( 'Top Right', 'essential-addons-elementor' ),
-					'bottom-left'	=> __( 'Bottom Left', 'essential-addons-elementor' ),
-					'bottom-right'	=> __( 'Bottom Right', 'essential-addons-elementor' ),
-				],
-				'default' 	=> 'bottom-right',
-            ]
-		);
+		
 
 		$this->add_control(
 			'eaelsv_sticky_width',
@@ -408,8 +434,12 @@ class Sticky_Video extends Widget_Base {
 					'unit' => 'px',
 					'size' => 300,
 				],
+				'condition'     => [
+                    'eaelsv_is_sticky' => 'yes'
+                ],
 				'selectors' => [
-					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'width: {{SIZE}}px'
+					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'width: {{SIZE}}px;',
+					'{{WRAPPER}} div.eael-sticky-video-wrapper.out'  => 'width: {{SIZE}}px!important;'
 				]
             ]
         );
@@ -430,14 +460,38 @@ class Sticky_Video extends Widget_Base {
 					'unit' => 'px',
 					'size' => 200,
 				],
+				'condition'     => [
+                    'eaelsv_is_sticky' => 'yes'
+                ],
 				'selectors' => [
-					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'height: {{SIZE}}px'
+					'{{WRAPPER}} div.eaelsv-sticky-player'  => 'height: {{SIZE}}px;',
+					'{{WRAPPER}} div.eael-sticky-video-wrapper.out'  => 'height: {{SIZE}}px!important;'
 				]
             ]
 		);
 
-		$this->end_controls_section();
+		$this->add_control(
+			'eaelsv_sticky_close_button_color',
+			[
+				'label' => __( 'Close Button Color', 'essential-addons-elementor' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				/*
+				'scheme' => [
+					'type' => \Elementor\Scheme_Color::get_type(),
+					'value' => \Elementor\Scheme_Color::COLOR_1,
+				],
+				*/
+				'condition'	=> [
+                    'eaelsv_is_sticky' => 'yes'
+                ],
+				'selectors' => [
+					'{{WRAPPER}} .eaelsv-sticky-player-close' => 'color: {{VALUE}}!important',
+				],
+			]
+		);
 
+		$this->end_controls_section();
+		
 		$this->start_controls_section(
 			'eaelsv_sh_player_section',
 			[
@@ -455,7 +509,7 @@ class Sticky_Video extends Widget_Base {
 				'range'      => [
 					'px' => [
 						'min'  => 0,
-						'max'  => 600,
+						'max'  => 1200,
 						'step' => 1,
 					],
 					'%' => [
@@ -679,6 +733,7 @@ class Sticky_Video extends Widget_Base {
 		$sticky = $settings['eaelsv_is_sticky'];
 		//$position = $this->eaelvs_sticky_video_position($settings['eaelsv_sticky_position']);
 		//$hostedUrl = $settings['eaelsv_hosted_url']['url'];
+		$stickyCloseColor = $settings['eaelsv_sticky_close_button_color'];
 		if( 'youtube' == $settings['eael_video_source'] ){
 			$eaelsvPlayer = $this->eaelsv_load_player_youtube($settings);
 		}
