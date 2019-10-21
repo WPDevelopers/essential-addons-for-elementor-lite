@@ -3117,6 +3117,9 @@ class Filterable_Gallery extends Widget_Base
                          filter: function() {
                             var $this = $(this);
                             var $result = searchRegex ? $this.text().match( searchRegex ) : true;
+                            if(buttonFilter == undefined) {
+                                buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
+                            }
                             var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
                             return $result && buttonResult;
                         }
