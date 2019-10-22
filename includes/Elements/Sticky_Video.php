@@ -245,10 +245,12 @@ class Sticky_Video extends Widget_Base {
 				'label_block' => false,
 				'return_value' => 'yes',
 				'default' => '',
+				/*
 				'selectors' => [
 					'{{WRAPPER}} .default__button--big' => 'display: none;',
 					'{{WRAPPER}} .compact__button--big' => 'display: none;',
 				],
+				*/
             ]
 		);
 
@@ -776,7 +778,7 @@ class Sticky_Video extends Widget_Base {
 				<?php echo $eaelsvPlayer; ?>
 			</div>
 		<?php endif; ?>
-		<div class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></div>
+		<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
 		</div>
 		<?php
 		//$this->eaelsv_enqueue_styles();
@@ -791,13 +793,21 @@ class Sticky_Video extends Widget_Base {
 		$loop = $settings['eaelsv_loop'];
 		$startTime = $settings['eaelsv_start_time'];
 		$endTime = $settings['eaelsv_end_time'];
-		if('yes'== $autoplay){ $ap = 1;
-		} else{ $ap = 0; }
-		if('yes'== $mute){ $mt = 1;
-		} else{ $mt = 0; }
+		if($autoplay=='yes'){ 
+			$am = "autoplay=1&mute=1";
+		}
+		if(('yes'== $mute) && ($autoplay=='yes')){ 
+			$am = "autoplay=1&mute=1"; 
+		}
+		if(('yes'!= $mute) && ($autoplay!='yes')){ 
+			$am = "autoplay=0&mute=0"; 
+		}
+		if(('yes'== $mute) && ($autoplay!='yes')){ 
+			$am = "autoplay=0&mute=1"; 
+		}
 		if('yes'== $loop){ $lp = '1';
 		} else{ $lp = 0; }
-		$src = "https://www.youtube.com/embed/{$id}?autoplay={$ap}&loop={$lp}&playlist={$id}&rel=0&controls=1&showinfo=0&mute={$mt}&wmode=opaque&start={$startTime}&end={$endTime}";
+		$src = "https://www.youtube.com/embed/{$id}?{$am}&loop={$lp}&playlist={$id}&rel=0&controls=1&showinfo=0&wmode=opaque&start={$startTime}&end={$endTime}";
 		?>
 		<iframe
 			src="<?php echo esc_attr($src); ?>"
@@ -814,13 +824,21 @@ class Sticky_Video extends Widget_Base {
 		$autoplay = $settings['eaelsv_autopaly'];
 		$mute = $settings['eaelsv_mute'];
 		$loop = $settings['eaelsv_loop'];
-		if('yes'== $autoplay){ $ap = 1;
-		} else{ $ap = 0; }
-		if('yes'== $mute){ $mt = 1;
-		} else{ $mt = 0; }
+		if($autoplay=='yes'){ 
+			$am = "autoplay=1&mute=1";
+		}
+		if(('yes'== $mute) && ($autoplay=='yes')){ 
+			$am = "autoplay=1&mute=1"; 
+		}
+		if(('yes'!= $mute) && ($autoplay!='yes')){ 
+			$am = "autoplay=0&mute=0"; 
+		}
+		if(('yes'== $mute) && ($autoplay!='yes')){ 
+			$am = "autoplay=0&mute=1"; 
+		}
 		if('yes'== $loop){ $lp = '1';
 		} else{ $lp = 0; }
-		$src = "https://player.vimeo.com/video/{$id}?autoplay={$ap}&color={$color}&title=1&byline=1&portrait=1&muted={$mt}&loop={$lp}";
+		$src = "https://player.vimeo.com/video/{$id}?{$am}&color={$color}&title=1&byline=1&portrait=1&loop={$lp}";
 		?>
 		<iframe controls
 			src="<?php echo esc_attr($src); ?>"
@@ -845,13 +863,18 @@ class Sticky_Video extends Widget_Base {
 		$skin = $settings['eaelsv_sh_video_skin'];
 		$startTime = $settings['eaelsv_start_time'];
 		$endTime = $settings['eaelsv_end_time'];
-		?>
+		if('yes'==$autoplay){ ?>
+			<style>
+			.default__button--big{display: none;}
+			.compact__button--big{display: none;}
+			</style>
+		<?php } ?>
 		<video
 			src="<?php echo esc_attr($video); ?>#t=<?php echo esc_attr($startTime); ?>,<?php echo esc_attr($endTime); ?>" 
 			data-color="<?php echo esc_attr($interfaceColor); ?>" 
 			data-ckin="<?php echo esc_attr($skin); ?>" 
 			data-overlay="1"
-			<?php if('yes'==$autoplay) echo "autoplay"; ?>
+			<?php if('yes'==$autoplay) echo "autoplay muted"; ?>
 			<?php if('yes'==$loop) echo "loop"; ?>
 			<?php if('yes'==$mute) echo "muted"; ?>
 			poster="ckin.jpg">
