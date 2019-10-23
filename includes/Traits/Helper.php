@@ -946,7 +946,7 @@ trait Helper
             }
 
             if (!empty($args['tax_query'])) {
-                $args['tax_query']['relation'] = 'OR';
+                $args['tax_query']['relation'] = 'AND';
             }
         }
 
