@@ -28,6 +28,7 @@ var filterableGalleryHandler = function($scope, $) {
                 $settings.gallery_enabled == "yes" ? true : false;
 
         // init isotope
+        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
         var $isotope_gallery = $gallery.isotope({
             itemSelector: ".eael-filterable-gallery-item-wrap",
             layoutMode: $layout_mode,
@@ -38,7 +39,11 @@ var filterableGalleryHandler = function($scope, $) {
                 var $this = $(this);
                 var $result = searchRegex ? $this.text().match( searchRegex ) : true;
                 if(buttonFilter == undefined) {
-                    buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
+                    if(layoutMode != 'layout_3') {
+                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
+                    }else {
+                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
+                    }
                 }
                 var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
                 return $result && buttonResult;
