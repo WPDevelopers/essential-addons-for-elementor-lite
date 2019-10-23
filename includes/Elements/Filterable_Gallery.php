@@ -2659,13 +2659,16 @@ class Filterable_Gallery extends Widget_Base
     protected function render_layout_3_filters()
     {
         $settings = $this->get_settings_for_display();
-        $all_text = ($settings['eael_fg_all_label_text'] != '') ? $settings['eael_fg_all_label_text'] : esc_html__('All', 'essential-addons-elementor');
+        // $all_text = ($settings['eael_fg_all_label_text'] != '') ? $settings['eael_fg_all_label_text'] : esc_html__('All', 'essential-addons-elementor');
         if ($settings['filter_enable'] == 'yes') {
             ?>
             <div class="fg-layout-3-filters-wrap">
                 <div class="fg-filter-wrap">
                     <button id="fg-filter-trigger" class="fg-filter-trigger">
-                        <span><?php echo $all_text; ?></span>
+                        
+                        <span>
+                            <?php echo $settings['eael_fg_all_label_text'] ? $settings['eael_fg_all_label_text'] : isset($settings['eael_fg_controls']) && !empty($settings['eael_fg_controls']) ? $settings['eael_fg_controls'][0]['eael_fg_control'] : ''; ?>
+                        </span>
                         <?php
                             if( isset($settings['fg_all_label_icon']) && ! empty($settings['fg_all_label_icon']) ) {
                                 if( isset($settings['fg_all_label_icon']['value']['url']) ) {
