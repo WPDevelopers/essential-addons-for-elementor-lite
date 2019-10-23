@@ -733,8 +733,6 @@ class Sticky_Video extends Widget_Base {
 		$st = $settings['eaelsv_start_time'];
 		$et = $settings['eaelsv_end_time'];
 		$sticky = $settings['eaelsv_is_sticky'];
-		//$position = $this->eaelvs_sticky_video_position($settings['eaelsv_sticky_position']);
-		//$hostedUrl = $settings['eaelsv_hosted_url']['url'];
 		$stickyCloseColor = $settings['eaelsv_sticky_close_button_color'];
 		if( 'youtube' == $settings['eael_video_source'] ){
 			$eaelsvPlayer = $this->eaelsv_load_player_youtube($settings);
@@ -757,35 +755,59 @@ class Sticky_Video extends Widget_Base {
 					$icon = 'eicon-play';
 				endif;
 			endif;
-			//echo $eaelsvPlayer;
+			$this->add_render_attribute(
+				'esvp_overlay_wrapper',
+				[
+					'class' 		=> 'eael-sticky-video-player',
+					'data-player' 	=> esc_attr($eaelsvPlayer),
+					'data-sticky'	=> $sticky,
+					'data-position'	=> $settings['eaelsv_sticky_position'],
+					'data-sheight'	=> $settings['eaelsv_sticky_height']['size'],
+					'data-swidth'	=> $settings['eaelsv_sticky_width']['size'],
+					'style'	=> "background-image:url('".$settings['eaelsv_overlay_image']['url']."');",
+				]
+			);
 			?>
-			<div class="eael-sticky-video-player" 
-				style="background-image:url('<?php echo esc_attr($settings['eaelsv_overlay_image']['url']); ?>');"
-				data-player="<?php echo esc_attr($eaelsvPlayer); ?>"
-				data-sticky="<?php echo esc_attr($sticky); ?>"
-				data-position="<?php echo esc_attr($settings['eaelsv_sticky_position']); ?>"
-				data-sheight="<?php echo esc_attr($settings['eaelsv_sticky_height']['size']); ?>"
-				data-swidth="<?php echo esc_attr($settings['eaelsv_sticky_width']['size']); ?>">
+			<div <?php echo $this->get_render_attribute_string( 'esvp_overlay_wrapper' ); ?>>
                 <div class="owp-play"><i class="<?php echo esc_attr($icon); ?>"></i></div>
 			</div>
-		<?php else: ?>
-			<div class="eael-sticky-video-player2"
-				data-sticky="<?php echo esc_attr( $sticky ); ?>"
-				data-autoplay="<?php echo esc_attr($settings['eaelsv_autopaly']); ?>"
-				data-position="<?php echo esc_attr($settings['eaelsv_sticky_position']); ?>"
-				data-sheight="<?php echo esc_attr($settings['eaelsv_sticky_height']['size']); ?>"
-				data-swidth="<?php echo esc_attr($settings['eaelsv_sticky_width']['size']); ?>">
+		<?php else: 
+			$this->add_render_attribute(
+				'esvp_overlay_wrapper2',
+				[
+					'class' 		=> 'eael-sticky-video-player2',
+					'data-sticky'	=> $sticky,
+					'data-position'	=> $settings['eaelsv_sticky_position'],
+					'data-sheight'	=> $settings['eaelsv_sticky_height']['size'],
+					'data-swidth'	=> $settings['eaelsv_sticky_width']['size'],
+					'data-autoplay'	=> $settings['eaelsv_autopaly'],
+				]
+			);
+			?>
+			<div <?php echo $this->get_render_attribute_string( 'esvp_overlay_wrapper2' ); ?>>
 				<?php echo $eaelsvPlayer; ?>
 			</div>
 		<?php endif; ?>
 		<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
 		</div>
 		<?php
-		//$this->eaelsv_enqueue_styles();
-		//$this->eaelsv_sticky_video_styles($settings);
 	}
 
 	protected function eaelsv_load_player_youtube($settings){
+		ob_start();
+		$id = $this->eaelsv_get_url_id($settings);
+		?>
+		<div 
+			class="eaelsv-player-<?php echo rand(10,100); ?>" 
+			data-plyr-provider="youtube" 
+			data-plyr-embed-id="<?php echo esc_attr($id); ?>"
+			data-plyr-config='{ "autoplay":1, "muted":1, "loop" : {"active":true} }'
+		></div>
+		<?php
+		return ob_get_clean();
+	}
+
+	protected function eaelsv_load_player_youtube1($settings){
 		ob_start();
 		$id = $this->eaelsv_get_url_id($settings);
 		$autoplay = $settings['eaelsv_autopaly'];
@@ -818,6 +840,20 @@ class Sticky_Video extends Widget_Base {
 	}
 
 	protected function eaelsv_load_player_vimeo($settings){
+		ob_start();
+		$id = $this->eaelsv_get_url_id($settings);
+		?>
+		<div 
+			class="eaelsv-player-<?php echo rand(10,100); ?>" 
+			data-plyr-provider="vimeo" 
+			data-plyr-embed-id="<?php echo esc_attr($id); ?>"
+			data-plyr-config='{ "autoplay":1, "muted":1, "loop" : {"active":true} }'
+		></div>
+		<?php
+		return ob_get_clean();
+	}
+
+	protected function eaelsv_load_player_vimeo1($settings){
 		ob_start();
 		$color = ltrim($settings['eaelsv_sh_video_interface_color'], '#');
 		$id = $this->eaelsv_get_url_id($settings);
@@ -903,60 +939,6 @@ class Sticky_Video extends Widget_Base {
 			}
 		}
 		return $id;
-	}
-
-	protected function eaelvs_sticky_video_position($position){
-		if('top-left' === $position){
-			$pos = "top:50px; left: 50px;";
-		}
-		if('top-right' === $position){
-			$pos = "top:50px; right: 50px;";
-		}
-		if('bottom-left' === $position){
-			$pos = "bottom:50px; left: 50px;";
-		}
-		if('bottom-right' === $position){
-			$pos = "bottom:50px; right: 50px;";
-		}
-		return $pos;
-	}
-
-	public function eaelsv_sticky_video_styles($settings){
-		$sticky = $settings['eaelsv_is_sticky'];
-		$position = $settings['eaelsv_sticky_position'];
-		$sw = $settings['eaelsv_sticky_width']['size'];
-		$sh = $settings['eaelsv_sticky_height']['size'];
-		if('top-left'==$position){
-			$pos = 'top:40px; left:40px;';
-		}
-		if('top-right'==$position){
-			$pos = 'top:40px; right:40px;';
-		}
-		if('bottom-right'==$position){
-			$pos = 'bottom:40px; right:40px;';
-		}
-		if('bottom-left'==$position){
-			$pos = 'bottom:40px; left:40px;';
-		}
-		if('yes'==$sticky){ ?>
-		<style>
-		.eael-sticky-video-wrapper.out{
-			position:fixed;
-			<?php //echo $pos; ?>
-			width:<?php echo $sw; ?>px!important;
-			height:<?php echo $sh; ?>px!important;
-			z-index:999;
-		}
-		.eael-sticky-video-wrapper.out .eael-sticky-video-player2 iframe,
-		.eael-sticky-video-wrapper.out .eael-sticky-video-player2 video{
-			padding: 0px!important;
-			margin:0px!important;
-			width:100%!important;
-			height:100%!important;
-			background: #242424;
-		}
-		</style>
-		<?php }
 	}
 
 }
