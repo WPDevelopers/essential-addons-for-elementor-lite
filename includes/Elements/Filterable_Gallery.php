@@ -2664,9 +2664,14 @@ class Filterable_Gallery extends Widget_Base
             <div class="fg-layout-3-filters-wrap">
                 <div class="fg-filter-wrap">
                     <button id="fg-filter-trigger" class="fg-filter-trigger">
-                        
                         <span>
-                            <?php echo $settings['eael_fg_all_label_text'] ? $settings['eael_fg_all_label_text'] : isset($settings['eael_fg_controls']) && !empty($settings['eael_fg_controls']) ? $settings['eael_fg_controls'][0]['eael_fg_control'] : ''; ?>
+                            <?php
+                                if($settings['eael_fg_all_label_text'] ) {
+                                    echo $settings['eael_fg_all_label_text'];
+                                }elseif( isset($settings['eael_fg_controls']) && !empty($settings['eael_fg_controls']) ) {
+                                    echo $settings['eael_fg_controls'][0]['eael_fg_control'];
+                                }
+                            ?>
                         </span>
                         <?php
                             if( isset($settings['fg_all_label_icon']) && ! empty($settings['fg_all_label_icon']) ) {
@@ -2683,7 +2688,7 @@ class Filterable_Gallery extends Widget_Base
                     </button>
                     <ul class="fg-layout-3-filter-controls">
                         <?php if ($settings['eael_fg_all_label_text']) {?>
-                            <li class="control active" data-filter="*"><?php echo $all_text; ?></li>
+                            <li class="control active" data-filter="*"><?php echo $settings['eael_fg_all_label_text']; ?></li>
                         <?php }?>
 
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control):
@@ -3129,7 +3134,7 @@ class Filterable_Gallery extends Widget_Base
                                     buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
                                 }
                             }
-                            
+
                             var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
                             return $result && buttonResult;
                         }
