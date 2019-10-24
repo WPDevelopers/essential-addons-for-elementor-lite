@@ -290,7 +290,7 @@ trait Helper
                         'label_on'  => __( 'Show', 'essential-addons-elementor' ),
                         'label_off' => __( 'Hide', 'essential-addons-elementor' ),
                         'return_value' => 'yes',
-                        'default' => 'yes'
+                        'default' => ''
                     ]
                 );
 
