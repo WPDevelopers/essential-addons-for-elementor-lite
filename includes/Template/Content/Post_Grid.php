@@ -20,7 +20,7 @@ trait Post_Grid
                 echo '<article class="eael-grid-post eael-post-grid-column">
                     <div class="eael-grid-post-holder">
                         <div class="eael-grid-post-holder-inner">';
-                            if (has_post_thumbnail() && $settings['eael_show_image'] == 1) {
+                            if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
                                 echo '<div class="eael-entry-media">';
                                     if ('none' !== $settings['eael_post_grid_hover_animation']) {
                                         echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
