@@ -1,3 +1,11 @@
+.plyr__controls button {
+  box-shadow: none !important;
+}
+
+.plyr__controls button:hover {
+  box-shadow: none !important;
+}
+
 .eael-sticky-video-wrapper {
   position: relative;
   width: 100%;
