@@ -281,60 +281,16 @@ trait Helper
                     ]
                 );
 
-                $this->add_control(
-                    'eael_show_read_more',
-                    [
-                        'label' => __('Show Read More', 'essential-addons-elementor'),
-                        'type' => Controls_Manager::CHOOSE,
-                        'options' => [
-                            '1' => [
-                                'title' => __('Yes', 'essential-addons-elementor'),
-                                'icon' => 'fa fa-check',
-                            ],
-                            '0' => [
-                                'title' => __('No', 'essential-addons-elementor'),
-                                'icon' => 'fa fa-ban',
-                            ],
-                        ],
-                        'default' => '1',
-                        'condition' => [
-                            'eael_content_timeline_choose' => 'dynamic',
-                        ],
-                    ]
-                );
-
-                $this->add_control(
-                    'eael_read_more_text',
-                    [
-                        'label' => esc_html__('Label Text', 'essential-addons-elementor'),
-                        'type' => Controls_Manager::TEXT,
-                        'label_block' => false,
-                        'default' => esc_html__('Read More', 'essential-addons-elementor'),
-                        'condition' => [
-                            'eael_content_timeline_choose' => 'dynamic',
-                            'eael_show_read_more' => '1',
-                        ],
-                    ]
-                );
-
             } else {
-
                 $this->add_control(
                     'show_load_more',
                     [
                         'label' => __('Show Load More', 'essential-addons-elementor'),
-                        'type' => Controls_Manager::CHOOSE,
-                        'options' => [
-                            '1' => [
-                                'title' => __('Yes', 'essential-addons-elementor'),
-                                'icon' => 'fa fa-check',
-                            ],
-                            '0' => [
-                                'title' => __('No', 'essential-addons-elementor'),
-                                'icon' => 'fa fa-ban',
-                            ],
-                        ],
-                        'default' => '0',
+                        'type'      => Controls_Manager::SWITCHER,
+                        'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                        'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                        'return_value' => 'yes',
+                        'default' => 'yes'
                     ]
                 );
 
@@ -346,7 +302,7 @@ trait Helper
                         'label_block' => false,
                         'default' => esc_html__('Load More', 'essential-addons-elementor'),
                         'condition' => [
-                            'show_load_more' => '1',
+                            'show_load_more' => 'yes',
                         ],
                     ]
                 );
@@ -359,20 +315,14 @@ trait Helper
                 'eael_show_image',
                 [
                     'label' => __('Show Image', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::CHOOSE,
-                    'options' => [
-                        '1' => [
-                            'title' => __('Yes', 'essential-addons-elementor'),
-                            'icon' => 'fa fa-check',
-                        ],
-                        '0' => [
-                            'title' => __('No', 'essential-addons-elementor'),
-                            'icon' => 'fa fa-ban',
-                        ],
-                    ],
-                    'default' => '1',
+                    'type'      => Controls_Manager::SWITCHER,
+                    'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value' => 'yes',
+                    'default' => 'yes'
                 ]
             );
+
             $this->add_group_control(
                 Group_Control_Image_Size::get_type(),
                 [
@@ -473,18 +423,11 @@ trait Helper
             'eael_show_title',
             [
                 'label' => __('Show Title', 'essential-addons-elementor'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    '1' => [
-                        'title' => __('Yes', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-check',
-                    ],
-                    '0' => [
-                        'title' => __('No', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-ban',
-                    ],
-                ],
-                'default' => '1',
+                'type'      => Controls_Manager::SWITCHER,
+                'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                'return_value' => 'yes',
+                'default' => 'yes'
             ]
         );
 
@@ -492,18 +435,11 @@ trait Helper
             'eael_show_excerpt',
             [
                 'label' => __('Show excerpt', 'essential-addons-elementor'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    '1' => [
-                        'title' => __('Yes', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-check',
-                    ],
-                    '0' => [
-                        'title' => __('No', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-ban',
-                    ],
-                ],
-                'default' => '1',
+                'type'      => Controls_Manager::SWITCHER,
+                'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                'return_value' => 'yes',
+                'default' => 'yes'
             ]
         );
 
@@ -514,7 +450,7 @@ trait Helper
                 'type' => Controls_Manager::NUMBER,
                 'default' => '10',
                 'condition' => [
-                    'eael_show_excerpt' => '1',
+                    'eael_show_excerpt' => 'yes',
                 ],
             ]
         );
@@ -527,7 +463,36 @@ trait Helper
                 'label_block' => false,
                 'default' => esc_html__('...', 'essential-addons-elementor'),
                 'condition' => [
-                    'eael_show_excerpt' => '1',
+                    'eael_show_excerpt' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_read_more',
+            [
+                'label' => __('Show Read More', 'essential-addons-elementor'),
+                'type'      => Controls_Manager::SWITCHER,
+                'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+                    'eael_content_timeline_choose' => 'dynamic',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_read_more_text',
+            [
+                'label' => esc_html__('Label Text', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default' => esc_html__('Read More', 'essential-addons-elementor'),
+                'condition' => [
+                    'eael_content_timeline_choose' => 'dynamic',
+                    'eael_show_read_more' => 'yes',
                 ],
             ]
         );
@@ -541,18 +506,11 @@ trait Helper
                 'eael_show_read_more_button',
                 [
                     'label' => __('Show Read More Button', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::CHOOSE,
-                    'options' => [
-                        '1' => [
-                            'title' => __('Yes', 'essential-addons-elementor'),
-                            'icon' => 'fa fa-check',
-                        ],
-                        '0' => [
-                            'title' => __('No', 'essential-addons-elementor'),
-                            'icon' => 'fa fa-ban',
-                        ],
-                    ],
-                    'default' => '1',
+                    'type'      => Controls_Manager::SWITCHER,
+                    'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value' => 'yes',
+                    'default' => 'yes'
                 ]
             );
 
@@ -563,7 +521,7 @@ trait Helper
                     'type' => Controls_Manager::TEXT,
                     'default' => __('Read More', 'essential-addons-elementor'),
                     'condition' => [
-                        'eael_show_read_more_button' => '1',
+                        'eael_show_read_more_button' => 'yes',
                     ],
                 ]
             );
@@ -575,18 +533,11 @@ trait Helper
                 'eael_show_meta',
                 [
                     'label' => __('Show Meta', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::CHOOSE,
-                    'options' => [
-                        '1' => [
-                            'title' => __('Yes', 'essential-addons-elementor'),
-                            'icon' => 'fa fa-check',
-                        ],
-                        '0' => [
-                            'title' => __('No', 'essential-addons-elementor'),
-                            'icon' => 'fa fa-ban',
-                        ],
-                    ],
-                    'default' => '1',
+                    'type'      => Controls_Manager::SWITCHER,
+                    'label_on'  => __( 'Show', 'essential-addons-elementor' ),
+                    'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                    'return_value' => 'yes',
+                    'default' => 'yes'
                 ]
             );
 
@@ -601,7 +552,7 @@ trait Helper
                         'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-elementor'),
                     ],
                     'condition' => [
-                        'eael_show_meta' => '1',
+                        'eael_show_meta' => 'yes',
                     ],
                 ]
             );
@@ -679,7 +630,7 @@ trait Helper
                 'label' => __('Load More Button Style', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'show_load_more' => '1',
+                    'show_load_more' => 'yes',
                 ],
             ]
         );
