@@ -1396,6 +1396,646 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 /*!
+ * imagesLoaded PACKAGED v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( 'ev-emitter/ev-emitter',factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+/*!
+ * imagesLoaded v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'ev-emitter/ev-emitter'
+    ], function( EvEmitter ) {
+      return factory( window, EvEmitter );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else {
+    // browser global
+    window.imagesLoaded = factory(
+      window,
+      window.EvEmitter
+    );
+  }
+
+})( typeof window !== 'undefined' ? window : this,
+
+// --------------------------  factory -------------------------- //
+
+function factory( window, EvEmitter ) {
+
+
+
+var $ = window.jQuery;
+var console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+var arraySlice = Array.prototype.slice;
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    return obj;
+  }
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {Array, Element, NodeList, String} elem
+ * @param {Object or Function} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  var queryElem = elem;
+  if ( typeof elem == 'string' ) {
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
+    return;
+  }
+
+  this.elements = makeArray( queryElem );
+  this.options = extend( {}, this.options );
+  // shift arguments if no options set
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    extend( this.options, options );
+  }
+
+  if ( onAlways ) {
+    this.on( 'always', onAlways );
+  }
+
+  this.getImages();
+
+  if ( $ ) {
+    // add jQuery Deferred object
+    this.jqDeferred = new $.Deferred();
+  }
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( this.check.bind( this ) );
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.options = {};
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+/**
+ * @param {Node} element
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName == 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  var nodeType = elem.nodeType;
+  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
+    return;
+  }
+  var childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( var i=0; i < childImgs.length; i++ ) {
+    var img = childImgs[i];
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    var children = elem.querySelectorAll( this.options.background );
+    for ( i=0; i < children.length; i++ ) {
+      var child = children[i];
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+var elementNodeTypes = {
+  1: true,
+  9: true,
+  11: true
+};
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+    return;
+  }
+  // get url inside url("...")
+  var reURL = /url\((['"])?(.*?)\1\)/gi;
+  var matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    var url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  var loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  var background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  var _this = this;
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  function onProgress( image, elem, message ) {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( function() {
+      _this.progress( image, elem, message );
+    });
+  }
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  });
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount == this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( 'progress: ' + message, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  var eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.img, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) {
+    return;
+  }
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, callback ) {
+    var instance = new ImagesLoaded( this, options, callback );
+    return instance.jqDeferred.promise( $(this) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+});
+
+
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
+/*!
  * Isotope PACKAGED v3.0.6
  *
  * Licensed GPLv3 for open source use
@@ -4959,693 +5599,6 @@ var trim = String.prototype.trim ?
 }));
 
 
-/*!
- * imagesLoaded PACKAGED v4.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-/**
- * EvEmitter v1.1.0
- * Lil' event emitter
- * MIT License
- */
-
-/* jshint unused: true, undef: true, strict: true */
-
-( function( global, factory ) {
-  // universal module definition
-  /* jshint strict: false */ /* globals define, module, window */
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD - RequireJS
-    define( 'ev-emitter/ev-emitter',factory );
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory();
-  } else {
-    // Browser globals
-    global.EvEmitter = factory();
-  }
-
-}( typeof window != 'undefined' ? window : this, function() {
-
-
-
-function EvEmitter() {}
-
-var proto = EvEmitter.prototype;
-
-proto.on = function( eventName, listener ) {
-  if ( !eventName || !listener ) {
-    return;
-  }
-  // set events hash
-  var events = this._events = this._events || {};
-  // set listeners array
-  var listeners = events[ eventName ] = events[ eventName ] || [];
-  // only add once
-  if ( listeners.indexOf( listener ) == -1 ) {
-    listeners.push( listener );
-  }
-
-  return this;
-};
-
-proto.once = function( eventName, listener ) {
-  if ( !eventName || !listener ) {
-    return;
-  }
-  // add event
-  this.on( eventName, listener );
-  // set once flag
-  // set onceEvents hash
-  var onceEvents = this._onceEvents = this._onceEvents || {};
-  // set onceListeners object
-  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
-  // set flag
-  onceListeners[ listener ] = true;
-
-  return this;
-};
-
-proto.off = function( eventName, listener ) {
-  var listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) {
-    return;
-  }
-  var index = listeners.indexOf( listener );
-  if ( index != -1 ) {
-    listeners.splice( index, 1 );
-  }
-
-  return this;
-};
-
-proto.emitEvent = function( eventName, args ) {
-  var listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) {
-    return;
-  }
-  // copy over to avoid interference if .off() in listener
-  listeners = listeners.slice(0);
-  args = args || [];
-  // once stuff
-  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
-
-  for ( var i=0; i < listeners.length; i++ ) {
-    var listener = listeners[i]
-    var isOnce = onceListeners && onceListeners[ listener ];
-    if ( isOnce ) {
-      // remove listener
-      // remove before trigger to prevent recursion
-      this.off( eventName, listener );
-      // unset once flag
-      delete onceListeners[ listener ];
-    }
-    // trigger listener
-    listener.apply( this, args );
-  }
-
-  return this;
-};
-
-proto.allOff = function() {
-  delete this._events;
-  delete this._onceEvents;
-};
-
-return EvEmitter;
-
-}));
-
-/*!
- * imagesLoaded v4.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-( function( window, factory ) { 'use strict';
-  // universal module definition
-
-  /*global define: false, module: false, require: false */
-
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD
-    define( [
-      'ev-emitter/ev-emitter'
-    ], function( EvEmitter ) {
-      return factory( window, EvEmitter );
-    });
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS
-    module.exports = factory(
-      window,
-      require('ev-emitter')
-    );
-  } else {
-    // browser global
-    window.imagesLoaded = factory(
-      window,
-      window.EvEmitter
-    );
-  }
-
-})( typeof window !== 'undefined' ? window : this,
-
-// --------------------------  factory -------------------------- //
-
-function factory( window, EvEmitter ) {
-
-
-
-var $ = window.jQuery;
-var console = window.console;
-
-// -------------------------- helpers -------------------------- //
-
-// extend objects
-function extend( a, b ) {
-  for ( var prop in b ) {
-    a[ prop ] = b[ prop ];
-  }
-  return a;
-}
-
-var arraySlice = Array.prototype.slice;
-
-// turn element or nodeList into an array
-function makeArray( obj ) {
-  if ( Array.isArray( obj ) ) {
-    // use object if already an array
-    return obj;
-  }
-
-  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
-  if ( isArrayLike ) {
-    // convert nodeList to array
-    return arraySlice.call( obj );
-  }
-
-  // array of single index
-  return [ obj ];
-}
-
-// -------------------------- imagesLoaded -------------------------- //
-
-/**
- * @param {Array, Element, NodeList, String} elem
- * @param {Object or Function} options - if function, use as callback
- * @param {Function} onAlways - callback function
- */
-function ImagesLoaded( elem, options, onAlways ) {
-  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
-  if ( !( this instanceof ImagesLoaded ) ) {
-    return new ImagesLoaded( elem, options, onAlways );
-  }
-  // use elem as selector string
-  var queryElem = elem;
-  if ( typeof elem == 'string' ) {
-    queryElem = document.querySelectorAll( elem );
-  }
-  // bail if bad element
-  if ( !queryElem ) {
-    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
-    return;
-  }
-
-  this.elements = makeArray( queryElem );
-  this.options = extend( {}, this.options );
-  // shift arguments if no options set
-  if ( typeof options == 'function' ) {
-    onAlways = options;
-  } else {
-    extend( this.options, options );
-  }
-
-  if ( onAlways ) {
-    this.on( 'always', onAlways );
-  }
-
-  this.getImages();
-
-  if ( $ ) {
-    // add jQuery Deferred object
-    this.jqDeferred = new $.Deferred();
-  }
-
-  // HACK check async to allow time to bind listeners
-  setTimeout( this.check.bind( this ) );
-}
-
-ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
-
-ImagesLoaded.prototype.options = {};
-
-ImagesLoaded.prototype.getImages = function() {
-  this.images = [];
-
-  // filter & find items if we have an item selector
-  this.elements.forEach( this.addElementImages, this );
-};
-
-/**
- * @param {Node} element
- */
-ImagesLoaded.prototype.addElementImages = function( elem ) {
-  // filter siblings
-  if ( elem.nodeName == 'IMG' ) {
-    this.addImage( elem );
-  }
-  // get background image on element
-  if ( this.options.background === true ) {
-    this.addElementBackgroundImages( elem );
-  }
-
-  // find children
-  // no non-element nodes, #143
-  var nodeType = elem.nodeType;
-  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
-    return;
-  }
-  var childImgs = elem.querySelectorAll('img');
-  // concat childElems to filterFound array
-  for ( var i=0; i < childImgs.length; i++ ) {
-    var img = childImgs[i];
-    this.addImage( img );
-  }
-
-  // get child background images
-  if ( typeof this.options.background == 'string' ) {
-    var children = elem.querySelectorAll( this.options.background );
-    for ( i=0; i < children.length; i++ ) {
-      var child = children[i];
-      this.addElementBackgroundImages( child );
-    }
-  }
-};
-
-var elementNodeTypes = {
-  1: true,
-  9: true,
-  11: true
-};
-
-ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
-  var style = getComputedStyle( elem );
-  if ( !style ) {
-    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
-    return;
-  }
-  // get url inside url("...")
-  var reURL = /url\((['"])?(.*?)\1\)/gi;
-  var matches = reURL.exec( style.backgroundImage );
-  while ( matches !== null ) {
-    var url = matches && matches[2];
-    if ( url ) {
-      this.addBackground( url, elem );
-    }
-    matches = reURL.exec( style.backgroundImage );
-  }
-};
-
-/**
- * @param {Image} img
- */
-ImagesLoaded.prototype.addImage = function( img ) {
-  var loadingImage = new LoadingImage( img );
-  this.images.push( loadingImage );
-};
-
-ImagesLoaded.prototype.addBackground = function( url, elem ) {
-  var background = new Background( url, elem );
-  this.images.push( background );
-};
-
-ImagesLoaded.prototype.check = function() {
-  var _this = this;
-  this.progressedCount = 0;
-  this.hasAnyBroken = false;
-  // complete if no images
-  if ( !this.images.length ) {
-    this.complete();
-    return;
-  }
-
-  function onProgress( image, elem, message ) {
-    // HACK - Chrome triggers event before object properties have changed. #83
-    setTimeout( function() {
-      _this.progress( image, elem, message );
-    });
-  }
-
-  this.images.forEach( function( loadingImage ) {
-    loadingImage.once( 'progress', onProgress );
-    loadingImage.check();
-  });
-};
-
-ImagesLoaded.prototype.progress = function( image, elem, message ) {
-  this.progressedCount++;
-  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
-  // progress event
-  this.emitEvent( 'progress', [ this, image, elem ] );
-  if ( this.jqDeferred && this.jqDeferred.notify ) {
-    this.jqDeferred.notify( this, image );
-  }
-  // check if completed
-  if ( this.progressedCount == this.images.length ) {
-    this.complete();
-  }
-
-  if ( this.options.debug && console ) {
-    console.log( 'progress: ' + message, image, elem );
-  }
-};
-
-ImagesLoaded.prototype.complete = function() {
-  var eventName = this.hasAnyBroken ? 'fail' : 'done';
-  this.isComplete = true;
-  this.emitEvent( eventName, [ this ] );
-  this.emitEvent( 'always', [ this ] );
-  if ( this.jqDeferred ) {
-    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
-    this.jqDeferred[ jqMethod ]( this );
-  }
-};
-
-// --------------------------  -------------------------- //
-
-function LoadingImage( img ) {
-  this.img = img;
-}
-
-LoadingImage.prototype = Object.create( EvEmitter.prototype );
-
-LoadingImage.prototype.check = function() {
-  // If complete is true and browser supports natural sizes,
-  // try to check for image status manually.
-  var isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    // report based on naturalWidth
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    return;
-  }
-
-  // If none of the checks above matched, simulate loading on detached element.
-  this.proxyImage = new Image();
-  this.proxyImage.addEventListener( 'load', this );
-  this.proxyImage.addEventListener( 'error', this );
-  // bind to image as well for Firefox. #191
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.proxyImage.src = this.img.src;
-};
-
-LoadingImage.prototype.getIsImageComplete = function() {
-  // check for non-zero, non-undefined naturalWidth
-  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
-  return this.img.complete && this.img.naturalWidth;
-};
-
-LoadingImage.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.img, message ] );
-};
-
-// ----- events ----- //
-
-// trigger specified handler for event type
-LoadingImage.prototype.handleEvent = function( event ) {
-  var method = 'on' + event.type;
-  if ( this[ method ] ) {
-    this[ method ]( event );
-  }
-};
-
-LoadingImage.prototype.onload = function() {
-  this.confirm( true, 'onload' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.onerror = function() {
-  this.confirm( false, 'onerror' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.unbindEvents = function() {
-  this.proxyImage.removeEventListener( 'load', this );
-  this.proxyImage.removeEventListener( 'error', this );
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-// -------------------------- Background -------------------------- //
-
-function Background( url, element ) {
-  this.url = url;
-  this.element = element;
-  this.img = new Image();
-}
-
-// inherit LoadingImage prototype
-Background.prototype = Object.create( LoadingImage.prototype );
-
-Background.prototype.check = function() {
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.img.src = this.url;
-  // check if image is already complete
-  var isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    this.unbindEvents();
-  }
-};
-
-Background.prototype.unbindEvents = function() {
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-Background.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.element, message ] );
-};
-
-// -------------------------- jQuery -------------------------- //
-
-ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
-  jQuery = jQuery || window.jQuery;
-  if ( !jQuery ) {
-    return;
-  }
-  // set local variable
-  $ = jQuery;
-  // $().imagesLoaded()
-  $.fn.imagesLoaded = function( options, callback ) {
-    var instance = new ImagesLoaded( this, options, callback );
-    return instance.jqDeferred.promise( $(this) );
-  };
-};
-// try making plugin
-ImagesLoaded.makeJQueryPlugin();
-
-// --------------------------  -------------------------- //
-
-return ImagesLoaded;
-
-});
-
-
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0)'
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -20909,6 +20862,53 @@ return $;
 
 }));
 
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'clip-path': 'inset(0)'
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 (function ($) {
     "use strict";
 
@@ -21538,6 +21538,28 @@ jQuery(window).on("elementor/frontend/init", function() {
     });
 })(jQuery);
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -21584,28 +21606,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
     );
 });
 
@@ -21747,41 +21747,54 @@ jQuery(document).ready(function() {
     
     var videoIsActive = 0;
        
-    var eaelStickVideoHeight = 0;
-    var eaelStickVideoHeight2 = 0;
+    //var eaelStickVideoHeight = 0;
+    //var eaelStickVideoHeight2 = 0;
     var eaelVideoElement = '';
+    var eaelVdoElmntOvrly = '';
+    var eaelVdoElmntOvrly2 = '';
     var height = 0;
     var position = '';
     var swidth = '';
     var sheight = '';
     var playerAbc = '';
+    var playerAbcd = '';
+    var eaelsvPlayerClass = '';
+    var sticky = '';
+    var autoplay = '';
 
     var StickyVideo = function(scope, $) {
         
         $('.eaelsv-sticky-player-close').hide();
-        var videoElement = scope.find('.eael-sticky-video-player');
+        //var videoElement = scope.find('.eael-sticky-video-player');
         var videoElementWithoutOverlay = scope.find('.eael-sticky-video-player2');
 
-        alert(videoElementWithoutOverlay.length);
+        //alert(videoElementWithoutOverlay.length);
         // When there is no image overlay
         for (j = 0; j < videoElementWithoutOverlay.length; j++) {
-            var sticky2     = videoElementWithoutOverlay[j].dataset.sticky;
-            var autoplay    = videoElementWithoutOverlay[j].dataset.autoplay;
-            var pos         = videoElementWithoutOverlay[j].dataset.position;
-            var stickyHeight    = videoElementWithoutOverlay[j].dataset.sheight;
-            var stickyWidth     = videoElementWithoutOverlay[j].dataset.swidth;
+            sticky     = videoElementWithoutOverlay[j].dataset.sticky;
+            autoplay    = videoElementWithoutOverlay[j].dataset.autoplay;
+            position    = videoElementWithoutOverlay[j].dataset.position;
+            sheight     = videoElementWithoutOverlay[j].dataset.sheight;
+            swidth      = videoElementWithoutOverlay[j].dataset.swidth;
+            var overlay      = videoElementWithoutOverlay[j].dataset.overlay;
             
-            //eaelVideoElement = videoElementWithoutOverlay[j].querySelector('video');
-            //eaelIframeElement = videoElementWithoutOverlay[j].querySelector('iframe');
-            
-            var eaelsvPlayerClass = $(videoElementWithoutOverlay[j]).find( 'div' ).attr('class');
+            eaelsvPlayerClass = $(videoElementWithoutOverlay[j]).find( 'div, video' ).attr('class');
             eaelVideoElement = document.querySelector('.'+eaelsvPlayerClass);
-            //alert(eaelsvPlayerClass);
             playerAbc = new Plyr(eaelVideoElement);
-            //var playerAbc = Array.from(document.querySelectorAll('.'+eaelsvPlayerClass)).map(p => new Plyr(p));
-           
+
+            if(overlay == 'yes'){
+                var ovrlyElmnt = $(videoElementWithoutOverlay[j]).prev();
+                $(ovrlyElmnt).on('click', function(){
+                    $(this).css('display', 'none');
+                    //alert('abc');
+                    //if('yes'== autoplay){
+                        //playerAbc.play();
+                    //}
+                });
+            }
+            
             // If element is Sticky video
-            if(sticky2=='yes'){
+            if(sticky == 'yes'){
                 // If autoplay is enable
                 if('yes'== autoplay){
                     
@@ -21789,97 +21802,26 @@ jQuery(document).ready(function() {
                     $(videoElementWithoutOverlay[j]).parent().attr('id', 'videobox');
                     if(videoIsActive == 0){
                         videoIsActive = 1;
-                        position = pos;
-                        swidth = stickyWidth;
-                        sheight = stickyHeight;
                     }
                 }
                 
                 // When html5 video play event is cliked
                 // Do the sticky process
-                playerAbc.on('play', function(event) {
-                    //alert('Hello there');
-                    height = GetDomElementHeight(this);
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $('.eael-sticky-video-wrapper').removeClass('out');
-                    $(this).parent().parent().attr('id', 'videobox');
-                    
-                    videoIsActive = 1;
-                    position = pos;
-                    swidth = stickyWidth;
-                    sheight = stickyHeight;
-                });
-        
-                playerAbc.on('pause', function(event) {
-                    if(videoIsActive == 1){
-                        videoIsActive = 0;
-                    }
-                });
-                /*
-                eaelVideoElement.addEventListener("playing", function() {
-                    height = GetDomElementHeight(this);
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $('.eael-sticky-video-wrapper').removeClass('out');
-                    $(this).parent().parent().parent().attr('id', 'videobox');
-                    
-                    videoIsActive = 1;
-                    position = pos;
-                    swidth = stickyWidth;
-                    sheight = stickyHeight;
-                    
-                });
-                // When html5 video pause event is cliked
-                // Stop the sticky process
-                eaelVideoElement.addEventListener("pause", function() {
-                    if(videoIsActive == 1){
-                        videoIsActive = 0;
-                    }
-                });
-                
-
-                */
-                
+                PlayerPlay(playerAbc, videoElementWithoutOverlay[j]);
             }
         }
 
-        // When overlay option is enable
-        for (i = 0; i < videoElement.length; i++) {
-
-            videoElement[i].onclick = function() {
-                
-                var ifrm = $(this).data('player');
-                var sticky  = $(this).data('sticky');
-                var pos2    = $(this).data('position');
-                var stickyHeight2   = $(this).data('sheight');
-                var stickyWidth2    = $(this).data('swidth');
-                
-                $(this).css('background-image', 'none');
-                $(this).html(ifrm);
-                
-                if(sticky == 'yes') {
-                    
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $('.eael-sticky-video-wrapper').removeClass('out');
-                    $(this).parent().attr('id', 'videobox');
-                    height = GetDomElementHeight(this);
-                    
-                    videoIsActive = 1;
-                    position = pos2;
-                    swidth = stickyWidth2;
-                    sheight = stickyHeight2;
-                }
+        playerAbc.on('pause', function(event) {
+            if(videoIsActive == 1){
+                videoIsActive = 0;
             }
-            
-        }
+        });
 
         $('.eaelsv-sticky-player-close').on('click', function(){
            $(this).parent().removeClass('out').addClass('in');
             $('.eael-sticky-video-wrapper').removeAttr('style');
             videoIsActive = 0;
         });
-
-        
-        
     };
 
     jQuery(window).on("elementor/frontend/init", function() {
@@ -21925,15 +21867,30 @@ jQuery(document).ready(function() {
             jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
         }
         if(p == 'bottom-right'){
-            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
+            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '0px');
             jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
         }
         if(p == 'bottom-left'){
-            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
+            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '0px');
             jQuery('.eael-sticky-video-wrapper.out').css('left', '40px');
         }
         jQuery('.eael-sticky-video-wrapper.out').css('width', w+'px');
         jQuery('.eael-sticky-video-wrapper.out').css('height', h+'px');
+    }
+
+    function PlayerPlay(a, b){
+        a.on('play', function(event) {
+            height = GetDomElementHeight(this);
+            jQuery('.eael-sticky-video-wrapper').removeAttr('id');
+            jQuery('.eael-sticky-video-wrapper').removeClass('out');
+            jQuery(this).parent().parent().attr('id', 'videobox');
+            
+            videoIsActive   = 1;
+            position        = jQuery(b).data('position');
+            sheight         = jQuery(b).data('sheight');
+            swidth          = jQuery(b).data('swidth');
+            //alert( sheight+'='+swidth );
+        });
     }
     
 var TwitterFeedHandler = function($scope, $) {

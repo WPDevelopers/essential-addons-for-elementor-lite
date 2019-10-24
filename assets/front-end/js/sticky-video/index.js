@@ -1,41 +1,54 @@
     
     var videoIsActive = 0;
        
-    var eaelStickVideoHeight = 0;
-    var eaelStickVideoHeight2 = 0;
+    //var eaelStickVideoHeight = 0;
+    //var eaelStickVideoHeight2 = 0;
     var eaelVideoElement = '';
+    var eaelVdoElmntOvrly = '';
+    var eaelVdoElmntOvrly2 = '';
     var height = 0;
     var position = '';
     var swidth = '';
     var sheight = '';
     var playerAbc = '';
+    var playerAbcd = '';
+    var eaelsvPlayerClass = '';
+    var sticky = '';
+    var autoplay = '';
 
     var StickyVideo = function(scope, $) {
         
         $('.eaelsv-sticky-player-close').hide();
-        var videoElement = scope.find('.eael-sticky-video-player');
+        //var videoElement = scope.find('.eael-sticky-video-player');
         var videoElementWithoutOverlay = scope.find('.eael-sticky-video-player2');
 
-        alert(videoElementWithoutOverlay.length);
+        //alert(videoElementWithoutOverlay.length);
         // When there is no image overlay
         for (j = 0; j < videoElementWithoutOverlay.length; j++) {
-            var sticky2     = videoElementWithoutOverlay[j].dataset.sticky;
-            var autoplay    = videoElementWithoutOverlay[j].dataset.autoplay;
-            var pos         = videoElementWithoutOverlay[j].dataset.position;
-            var stickyHeight    = videoElementWithoutOverlay[j].dataset.sheight;
-            var stickyWidth     = videoElementWithoutOverlay[j].dataset.swidth;
+            sticky     = videoElementWithoutOverlay[j].dataset.sticky;
+            autoplay    = videoElementWithoutOverlay[j].dataset.autoplay;
+            position    = videoElementWithoutOverlay[j].dataset.position;
+            sheight     = videoElementWithoutOverlay[j].dataset.sheight;
+            swidth      = videoElementWithoutOverlay[j].dataset.swidth;
+            var overlay      = videoElementWithoutOverlay[j].dataset.overlay;
             
-            //eaelVideoElement = videoElementWithoutOverlay[j].querySelector('video');
-            //eaelIframeElement = videoElementWithoutOverlay[j].querySelector('iframe');
-            
-            var eaelsvPlayerClass = $(videoElementWithoutOverlay[j]).find( 'div' ).attr('class');
+            eaelsvPlayerClass = $(videoElementWithoutOverlay[j]).find( 'div, video' ).attr('class');
             eaelVideoElement = document.querySelector('.'+eaelsvPlayerClass);
-            //alert(eaelsvPlayerClass);
             playerAbc = new Plyr(eaelVideoElement);
-            //var playerAbc = Array.from(document.querySelectorAll('.'+eaelsvPlayerClass)).map(p => new Plyr(p));
-           
+
+            if(overlay == 'yes'){
+                var ovrlyElmnt = $(videoElementWithoutOverlay[j]).prev();
+                $(ovrlyElmnt).on('click', function(){
+                    $(this).css('display', 'none');
+                    //alert('abc');
+                    //if('yes'== autoplay){
+                        //playerAbc.play();
+                    //}
+                });
+            }
+            
             // If element is Sticky video
-            if(sticky2=='yes'){
+            if(sticky == 'yes'){
                 // If autoplay is enable
                 if('yes'== autoplay){
                     
@@ -43,97 +56,26 @@
                     $(videoElementWithoutOverlay[j]).parent().attr('id', 'videobox');
                     if(videoIsActive == 0){
                         videoIsActive = 1;
-                        position = pos;
-                        swidth = stickyWidth;
-                        sheight = stickyHeight;
                     }
                 }
                 
                 // When html5 video play event is cliked
                 // Do the sticky process
-                playerAbc.on('play', function(event) {
-                    //alert('Hello there');
-                    height = GetDomElementHeight(this);
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $('.eael-sticky-video-wrapper').removeClass('out');
-                    $(this).parent().parent().attr('id', 'videobox');
-                    
-                    videoIsActive = 1;
-                    position = pos;
-                    swidth = stickyWidth;
-                    sheight = stickyHeight;
-                });
-        
-                playerAbc.on('pause', function(event) {
-                    if(videoIsActive == 1){
-                        videoIsActive = 0;
-                    }
-                });
-                /*
-                eaelVideoElement.addEventListener("playing", function() {
-                    height = GetDomElementHeight(this);
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $('.eael-sticky-video-wrapper').removeClass('out');
-                    $(this).parent().parent().parent().attr('id', 'videobox');
-                    
-                    videoIsActive = 1;
-                    position = pos;
-                    swidth = stickyWidth;
-                    sheight = stickyHeight;
-                    
-                });
-                // When html5 video pause event is cliked
-                // Stop the sticky process
-                eaelVideoElement.addEventListener("pause", function() {
-                    if(videoIsActive == 1){
-                        videoIsActive = 0;
-                    }
-                });
-                
-
-                */
-                
+                PlayerPlay(playerAbc, videoElementWithoutOverlay[j]);
             }
         }
 
-        // When overlay option is enable
-        for (i = 0; i < videoElement.length; i++) {
-
-            videoElement[i].onclick = function() {
-                
-                var ifrm = $(this).data('player');
-                var sticky  = $(this).data('sticky');
-                var pos2    = $(this).data('position');
-                var stickyHeight2   = $(this).data('sheight');
-                var stickyWidth2    = $(this).data('swidth');
-                
-                $(this).css('background-image', 'none');
-                $(this).html(ifrm);
-                
-                if(sticky == 'yes') {
-                    
-                    $('.eael-sticky-video-wrapper').removeAttr('id');
-                    $('.eael-sticky-video-wrapper').removeClass('out');
-                    $(this).parent().attr('id', 'videobox');
-                    height = GetDomElementHeight(this);
-                    
-                    videoIsActive = 1;
-                    position = pos2;
-                    swidth = stickyWidth2;
-                    sheight = stickyHeight2;
-                }
+        playerAbc.on('pause', function(event) {
+            if(videoIsActive == 1){
+                videoIsActive = 0;
             }
-            
-        }
+        });
 
         $('.eaelsv-sticky-player-close').on('click', function(){
            $(this).parent().removeClass('out').addClass('in');
             $('.eael-sticky-video-wrapper').removeAttr('style');
             videoIsActive = 0;
         });
-
-        
-        
     };
 
     jQuery(window).on("elementor/frontend/init", function() {
@@ -179,14 +121,29 @@
             jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
         }
         if(p == 'bottom-right'){
-            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
+            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '0px');
             jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
         }
         if(p == 'bottom-left'){
-            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
+            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '0px');
             jQuery('.eael-sticky-video-wrapper.out').css('left', '40px');
         }
         jQuery('.eael-sticky-video-wrapper.out').css('width', w+'px');
         jQuery('.eael-sticky-video-wrapper.out').css('height', h+'px');
+    }
+
+    function PlayerPlay(a, b){
+        a.on('play', function(event) {
+            height = GetDomElementHeight(this);
+            jQuery('.eael-sticky-video-wrapper').removeAttr('id');
+            jQuery('.eael-sticky-video-wrapper').removeClass('out');
+            jQuery(this).parent().parent().attr('id', 'videobox');
+            
+            videoIsActive   = 1;
+            position        = jQuery(b).data('position');
+            sheight         = jQuery(b).data('sheight');
+            swidth          = jQuery(b).data('swidth');
+            //alert( sheight+'='+swidth );
+        });
     }
     
