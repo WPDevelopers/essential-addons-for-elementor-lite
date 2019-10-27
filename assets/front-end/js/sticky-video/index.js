@@ -42,7 +42,7 @@
                     $(this).css('display', 'none');
                     //alert('abc');
                     //if('yes'== autoplay){
-                        //playerAbc.play();
+                        playerAbc.play();
                     //}
                 });
             }
@@ -121,11 +121,11 @@
             jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
         }
         if(p == 'bottom-right'){
-            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '0px');
+            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
             jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
         }
         if(p == 'bottom-left'){
-            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '0px');
+            jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
             jQuery('.eael-sticky-video-wrapper.out').css('left', '40px');
         }
         jQuery('.eael-sticky-video-wrapper.out').css('width', w+'px');
