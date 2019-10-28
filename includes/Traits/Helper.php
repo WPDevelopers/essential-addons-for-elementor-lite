@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Essential_Addons_Elementor\Traits;
 
 if (!defined('ABSPATH')) {
@@ -1642,11 +1643,12 @@ trait Helper
         $html = '';
         $page_id = $settings['eael_facebook_feed_page_id'];
         $token = $settings['eael_facebook_feed_access_token'];
-        $key = 'eael_facebook_feed_' . str_replace('.', '_', $page_id);
-
+        
         if(empty($page_id) || empty($token)) {
             return;
         }
+        
+        $key = 'eael_facebook_feed_' . substr(str_rot13(str_replace('.', '', $page_id . $token)), 32);
 
         if (get_transient($key) === false) {
             $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v4.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}"));
