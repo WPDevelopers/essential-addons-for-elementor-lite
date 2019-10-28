@@ -716,17 +716,19 @@ class Sticky_Video extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$id = $this->eaelsv_get_url_id($settings);
+		//$id = $this->eaelsv_get_url_id($settings);
 		$iconNew = $settings['eaelsv_icon_new'];
-		$st = $settings['eaelsv_start_time'];
-		$et = $settings['eaelsv_end_time'];
+		//$st = $settings['eaelsv_start_time'];
+		//$et = $settings['eaelsv_end_time'];
 		$sticky = $settings['eaelsv_is_sticky'];
-		$stickyCloseColor = $settings['eaelsv_sticky_close_button_color'];
+		$eaelsvPlayer = '';
+		//$stickyCloseColor = $settings['eaelsv_sticky_close_button_color'];
 		if( 'youtube' == $settings['eael_video_source'] ){
+			//$eaelsvPlayer = '';
 			$eaelsvPlayer = $this->eaelsv_load_player_youtube($settings);
 		}
 		if( 'vimeo' == $settings['eael_video_source'] ){
-			$eaelsvPlayer = '';
+			//$eaelsvPlayer = '';
 			$eaelsvPlayer = $this->eaelsv_load_player_vimeo($settings);
 		}
 		if( 'self_hosted' == $settings['eael_video_source'] ){
