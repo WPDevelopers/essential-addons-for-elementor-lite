@@ -1699,33 +1699,35 @@ trait Helper
                             </div>';
                         }
 
-                        $html .= '<div class="eael-facebook-feed-preview-wrap">';
-                            if($item['status_type'] == 'shared_story') {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">';
-                                    if($item['attachments']['data'][0]['media_type'] == 'video') {
-                                        $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
-                                        <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
-                                    } else {
-                                        $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
-                                    }
-                                $html .= '</a>';
-
-                                $html .= '<div class="eael-facebook-feed-url-preview">
-                                    <p class="eael-facebook-feed-url-host">' . parse_url($item['attachments']['data'][0]['unshimmed_url'])['host'] . '</p>
-                                    <h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>
-                                    <p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>
-                                </div>';
-                            } else if ($item['status_type'] == 'added_video') {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
-                                    <img class="eael-facebook-feed-img" src="' . $photo . '">
-                                    <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
-                                </a>';
-                            } else {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
-                                    <img class="eael-facebook-feed-img" src="' . $photo . '">
-                                </a>';
-                            }
-                        $html .= '</div>';
+                        if(!empty($photo) || isset($item['attachments']['data'])) {
+                            $html .= '<div class="eael-facebook-feed-preview-wrap">';
+                                if($item['status_type'] == 'shared_story') {
+                                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">';
+                                        if($item['attachments']['data'][0]['media_type'] == 'video') {
+                                            $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
+                                            <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
+                                        } else {
+                                            $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
+                                        }
+                                    $html .= '</a>';
+    
+                                    $html .= '<div class="eael-facebook-feed-url-preview">
+                                        <p class="eael-facebook-feed-url-host">' . parse_url($item['attachments']['data'][0]['unshimmed_url'])['host'] . '</p>
+                                        <h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>
+                                        <p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>
+                                    </div>';
+                                } else if ($item['status_type'] == 'added_video') {
+                                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
+                                        <img class="eael-facebook-feed-img" src="' . $photo . '">
+                                        <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
+                                    </a>';
+                                } else {
+                                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
+                                        <img class="eael-facebook-feed-img" src="' . $photo . '">
+                                    </a>';
+                                }
+                            $html .= '</div>';
+                        }
 
                         $html .= '<footer class="eael-facebook-feed-item-footer">
                             <div class="clearfix">';
