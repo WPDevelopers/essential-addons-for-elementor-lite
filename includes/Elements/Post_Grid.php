@@ -410,6 +410,11 @@ class Post_Grid extends Widget_Base
         $this->end_controls_section();
 
         /**
+         * Read More Button Style Controls
+         */
+        $this->eael_read_more_button_style();
+
+        /**
          * Load More Button Style Controls!
          */
         $this->eael_load_more_button_style();
