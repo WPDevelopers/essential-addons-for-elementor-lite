@@ -116,20 +116,23 @@ trait Admin
 
         parse_str($_POST['fields'], $settings);
 
-        // update new settings
-        $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
-
         // Saving Google Map Api Key
         update_option('eael_save_google_map_api', @$settings['google-map-api']);
-
+        
         // Saving Mailchimp Api Key
         update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
         
         // Saving Duplicator Settings
         update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
+        
+        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), false);
+        $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));
+        
+        // update new settings
+        $updated = update_option('eael_save_settings', $elements);
 
         // Build assets files
-        $this->generate_scripts(array_keys($settings));
+        $this->generate_scripts(array_keys($elements));
 
         wp_send_json($updated);
     }
