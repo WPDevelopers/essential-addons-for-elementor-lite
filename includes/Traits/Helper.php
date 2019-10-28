@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
+use \Elementor\Group_Control_Background;
 
 trait Helper
 {
@@ -577,7 +578,7 @@ trait Helper
                     'label' => __('Read More Button Style', 'essential-addons-elementor'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
-                        'eael_show_read_more_button' => '1',
+                        'eael_show_read_more_button' => 'yes',
                     ],
                 ]
             );
@@ -590,17 +591,118 @@ trait Helper
                 ]
             );
 
-            $this->add_control(
-                'eael_post_read_more_btn_color',
-                [
-                    'label' => esc_html__('Text Color', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::COLOR,
-                    'default' => '#61ce70',
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'color: {{VALUE}};',
-                    ],
-                ]
-            );
+            $this->start_controls_tabs('read_more_button_tabs');
+
+                $this->start_controls_tab(
+                    'read_more_button_style_normal',
+                    [
+                        'label' => __( 'Normal', 'essential-addons-elementor' ),
+                    ]
+                );
+
+                $this->add_control(
+                    'eael_post_read_more_btn_color',
+                    [
+                        'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                        'type' => Controls_Manager::COLOR,
+                        'default' => '#61ce70',
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'color: {{VALUE}};',
+                        ],
+                    ]
+                );
+    
+                $this->add_group_control(
+                    Group_Control_Background::get_type(),
+                    [
+                        'name' => 'read_more_btn_background',
+                        'label' => __( 'Background', 'essential-addons-elementor' ),
+                        'types' => [ 'classic', 'gradient' ],
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
+                        'exclude' => [
+                            'image'
+                        ],
+                    ]
+                );
+    
+                $this->add_group_control(
+                    Group_Control_Border::get_type(),
+                    [
+                        'name' => 'read_more_btn_border',
+                        'label' => __( 'Border', 'essential-addons-elementor' ),
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
+                    ]
+                );
+    
+                $this->add_responsive_control(
+                    'read_more_btn_border_radius',
+                    [
+                        'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                        'type' => Controls_Manager::DIMENSIONS,
+                        'size_units' => ['px', 'em', '%'],
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ],
+                    ]
+                );
+
+                $this->end_controls_tab();
+
+                $this->start_controls_tab(
+                    'read_more_button_style_hover',
+                    [
+                        'label' => __( 'Hover', 'essential-addons-elementor' ),
+                    ]
+                );
+
+                $this->add_control(
+                    'eael_post_read_more_btn_hover_color',
+                    [
+                        'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                        'type' => Controls_Manager::COLOR,
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'color: {{VALUE}};',
+                        ],
+                    ]
+                );
+    
+                $this->add_group_control(
+                    Group_Control_Background::get_type(),
+                    [
+                        'name' => 'read_more_btn_hover_background',
+                        'label' => __( 'Background', 'essential-addons-elementor' ),
+                        'types' => [ 'classic', 'gradient' ],
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                        'exclude' => [
+                            'image'
+                        ],
+                    ]
+                );
+    
+                $this->add_group_control(
+                    Group_Control_Border::get_type(),
+                    [
+                        'name' => 'read_more_btn_hover_border',
+                        'label' => __( 'Border', 'essential-addons-elementor' ),
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                    ]
+                );
+    
+                $this->add_responsive_control(
+                    'read_more_btn_border_hover_radius',
+                    [
+                        'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                        'type' => Controls_Manager::DIMENSIONS,
+                        'size_units' => ['px', 'em', '%'],
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ],
+                    ]
+                );
+                
+                $this->end_controls_tab();
+
+            $this->end_controls_tabs();
 
             $this->add_responsive_control(
                 'eael_post_read_more_btn_padding',
@@ -610,6 +712,18 @@ trait Helper
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_responsive_control(
+                'read_more_btn_margin',
+                [
+                    'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
