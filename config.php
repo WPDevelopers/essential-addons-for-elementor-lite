@@ -136,6 +136,20 @@ $config = [
                 ],
             ],
         ],
+        'facebook-feed' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Facebook_Feed',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/facebook-feed/index.min.css',
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/facebook-feed/index.min.js',
+                ],
+            ],
+        ],
         'data-table' => [
             'class' => '\Essential_Addons_Elementor\Elements\Data_Table',
             'dependency' => [
