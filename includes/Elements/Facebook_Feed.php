@@ -305,6 +305,23 @@ class Facebook_Feed extends Widget_Base
                 'name' => 'eael_facebook_feed_box_border',
                 'label' => esc_html__('Border', 'essential-addons-elementor'),
                 'selector' => '{{WRAPPER}} .eael-facebook-feed-item-inner',
+                'fields_options' => [
+                    'border' => [
+                        'default' => 'solid',
+                    ],
+                    'width' => [
+                        'default' => [
+                            'top' => '1',
+                            'right' => '1',
+                            'bottom' => '1',
+                            'left' => '1',
+                            'isLinked' => false,
+                        ],
+                    ],
+                    'color' => [
+                        'default' => '#eee',
+                    ],
+                ],
             ]
         );
 
@@ -487,8 +504,8 @@ class Facebook_Feed extends Widget_Base
                     '{{WRAPPER}} .eael-facebook-feed-item' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'card'
-                ]
+                    'eael_facebook_feed_layout' => 'card',
+                ],
             ]
         );
 
@@ -502,8 +519,8 @@ class Facebook_Feed extends Widget_Base
                     '{{WRAPPER}} .eael-facebook-feed-item a' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'card'
-                ]
+                    'eael_facebook_feed_layout' => 'card',
+                ],
             ]
         );
 
@@ -517,8 +534,8 @@ class Facebook_Feed extends Widget_Base
                     '{{WRAPPER}} .eael-facebook-feed-item-overlay' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'overlay'
-                ]
+                    'eael_facebook_feed_layout' => 'overlay',
+                ],
             ]
         );
 
@@ -533,8 +550,8 @@ class Facebook_Feed extends Widget_Base
                     '{{WRAPPER}} .eael-facebook-feed-item-overlay i' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'overlay'
-                ]
+                    'eael_facebook_feed_layout' => 'overlay',
+                ],
             ]
         );
 
