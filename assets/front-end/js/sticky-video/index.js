@@ -1,17 +1,14 @@
     
     var videoIsActive = 0;
-       
-    //var eaelStickVideoHeight = 0;
-    //var eaelStickVideoHeight2 = 0;
     var eaelVideoElement = '';
-    var eaelVdoElmntOvrly = '';
-    var eaelVdoElmntOvrly2 = '';
+    //var eaelVdoElmntOvrly = '';
+    //var eaelVdoElmntOvrly2 = '';
     var height = 0;
     var position = '';
     var swidth = '';
     var sheight = '';
     var playerAbc = '';
-    var playerAbcd = '';
+    //var playerAbcd = '';
     var eaelsvPlayerClass = '';
     var sticky = '';
     var autoplay = '';
@@ -25,25 +22,28 @@
         //alert(videoElementWithoutOverlay.length);
         // When there is no image overlay
         for (j = 0; j < videoElementWithoutOverlay.length; j++) {
-            sticky     = videoElementWithoutOverlay[j].dataset.sticky;
+            sticky      = videoElementWithoutOverlay[j].dataset.sticky;
             autoplay    = videoElementWithoutOverlay[j].dataset.autoplay;
             position    = videoElementWithoutOverlay[j].dataset.position;
             sheight     = videoElementWithoutOverlay[j].dataset.sheight;
             swidth      = videoElementWithoutOverlay[j].dataset.swidth;
-            var overlay      = videoElementWithoutOverlay[j].dataset.overlay;
+            var overlay = videoElementWithoutOverlay[j].dataset.overlay;
             
             eaelsvPlayerClass = $(videoElementWithoutOverlay[j]).find( 'div, video' ).attr('class');
             eaelVideoElement = document.querySelector('.'+eaelsvPlayerClass);
             playerAbc = new Plyr(eaelVideoElement);
-
+            /*if(isEditMode){
+                playerAbc = new Plyr(eaelVideoElement);
+            }*/
+            alert(playerAbc);
             if(overlay == 'yes'){
                 var ovrlyElmnt = $(videoElementWithoutOverlay[j]).prev();
                 $(ovrlyElmnt).on('click', function(){
                     $(this).css('display', 'none');
                     //alert('abc');
-                    //if('yes'== autoplay){
+                    if('yes'== autoplay){
                         playerAbc.play();
-                    //}
+                    }
                 });
             }
             
