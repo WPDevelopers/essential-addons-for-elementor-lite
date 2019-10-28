@@ -289,6 +289,7 @@ class Post_Timeline extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
         $settings = [
             'eael_show_image' => $settings['eael_show_image'],

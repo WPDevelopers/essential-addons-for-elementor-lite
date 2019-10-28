@@ -412,6 +412,13 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/instagram-feed/',
                 'is_pro' => true
             ],
+            [
+                'key'    => 'facebook-feed',
+                'title'  => __( 'Facebook Feed', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/facebook-feed/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/facebook-feed/',
+                'is_pro' => true
+            ],
         ]
     ],
     'learn-dash-elements'   => [

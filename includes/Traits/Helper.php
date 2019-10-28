@@ -891,16 +891,20 @@ trait Helper
         $this->end_controls_section();
     }
 
-    public function eael_get_query_args($settings = [])
-    {
-        // fix old settings
+    public function fix_old_query($settings) {
         foreach($settings as $key => $value) {
             if(strpos($key, 'eaeposts_') !== false) {
                 $settings[str_replace('eaeposts_', '', $key)] = $value;
-                unset($settings[$key]);
+                
+                update_post_meta(get_the_ID(), '_elementor_data', str_replace('eaeposts_', '', get_post_meta(get_the_ID(), '_elementor_data', true)));
             }
-        };
+        }
 
+        return $settings;
+    }
+
+    public function eael_get_query_args($settings = [])
+    {
         $settings = wp_parse_args($settings, [
             'post_type' => 'post',
             'posts_ids' => [],
@@ -942,7 +946,7 @@ trait Helper
             }
 
             if (!empty($args['tax_query'])) {
-                $args['tax_query']['relation'] = 'OR';
+                $args['tax_query']['relation'] = 'AND';
             }
         }
 
