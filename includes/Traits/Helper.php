@@ -1689,7 +1689,7 @@ trait Helper
                             </div>';
 
                             if ($settings['eael_facebook_feed_date']) {
-                                $html .= '<span class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</span>';
+                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
                             }
                         $html .= '</header>';
                         
