@@ -1,97 +1,3 @@
-/*------------------------------*/
-/* 31. Advance Accordion
-/*------------------------------*/
-.eael-adv-accordion {
-  width: auto;
-  height: auto;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  transform: rotate(0deg);
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
-  transform: rotate(90deg);
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
-}
-
-.fa-accordion-icon {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
-  display: none;
-  border: 1px solid #eee;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
-  display: block;
-}
-
-@-webkit-keyframes rotate-90 {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
-}
-
-@keyframes rotate-90 {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-}
-
 /*----------------------------*/
 /* 30. Advance Tabs
 /*----------------------------*/
@@ -266,6 +172,100 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
+  }
+}
+
+/*------------------------------*/
+/* 31. Advance Accordion
+/*------------------------------*/
+.eael-adv-accordion {
+  width: auto;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+  transform: rotate(0deg);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+  transform: rotate(90deg);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+
+.fa-accordion-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
+  display: none;
+  border: 1px solid #eee;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
+  margin: 0;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
+  display: block;
+}
+
+@-webkit-keyframes rotate-90 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+@keyframes rotate-90 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -637,62 +637,6 @@
   height: 20px;
 }
 
-.eael-ticker-wrap {
-  overflow: hidden;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-}
-
-.eael-ticker-wrap .ticker-badge {
-  flex: 0 0 auto;
-  padding: 8px 12px;
-}
-
-.eael-ticker-wrap .eael-ticker {
-  overflow: hidden;
-  flex: 1 1 auto;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content {
-  padding: 8px 12px;
-  line-height: 1.8;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content p {
-  margin: 0;
-}
-
-.eael-ticker-wrap .swiper-button-prev {
-  left: auto !important;
-  right: 25px;
-}
-
-.eael-ticker-wrap div.swiper-slide,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
-  opacity: 0 !important;
-}
-
-.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
-  text-align: left;
-}
-
-@media only screen and (max-width: 767px) {
-  .eael-ticker-wrap {
-    flex-flow: row wrap;
-  }
-
-  .content-ticker-pagination {
-    display: none;
-  }
-}
-
 /*--------------------------------*/
 /* 11. Contact Form 7 Styles
 /*--------------------------------*/
@@ -778,6 +722,62 @@
 
 .eael-contact-form-7-wrapper .eael-contact-form-align-center form {
   margin: 0 auto;
+}
+
+.eael-ticker-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.eael-ticker-wrap .ticker-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.eael-ticker-wrap .eael-ticker {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
+}
+
+.eael-ticker-wrap .swiper-button-prev {
+  left: auto !important;
+  right: 25px;
+}
+
+.eael-ticker-wrap div.swiper-slide,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
+  opacity: 0 !important;
+}
+
+.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .eael-ticker-wrap {
+    flex-flow: row wrap;
+  }
+
+  .content-ticker-pagination {
+    display: none;
+  }
 }
 
 /*---------------------------------*/
@@ -866,18 +866,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.eael-creative-button-align-center .eael-creative-button {
-  float: none;
-  display: inline-block;
-}
-
 .eael-creative-button:focus {
   outline: none;
-}
-
-.eael-creative-button > span {
-  display: flex;
-  align-items: center;
 }
 
 /*--------------------------------------------*/
@@ -900,14 +890,13 @@
   left: 0;
   opacity: 0;
   transform: translate3d(0, 25%, 0);
-}
-
-.eael-creative-button--winona > span {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .eael-creative-button--winona::after,
-.eael-creative-button--winona > span {
+.eael-creative-button--winona > .creative-button-inner {
   padding: 1em 2em;
   transition: transform 0.3s, opacity 0.3s;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -918,9 +907,9 @@
   transform: translate3d(0, 0, 0);
 }
 
-.eael-creative-button--winona:hover > span {
+.eael-creative-button--winona:hover > .creative-button-inner {
   opacity: 0;
-  transform: translate3d(0, -25%, 0);
+  transform: translate3d(0, 0%, 0);
 }
 
 /*--- Ujarak ---*/
@@ -997,7 +986,8 @@
 
 .eael-creative-button--tamaya::before {
   top: 0;
-  padding: 20px 30px;
+  padding-top: 27px;
+  overflow: hidden;
 }
 
 .eael-creative-button--tamaya::after {
@@ -1009,8 +999,10 @@
   bottom: -1px;
 }
 
-.eael-creative-button--tamaya > span {
-  display: block;
+.eael-creative-button--tamaya > .creative-button-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform: scale3d(0.2, 0.2, 1);
   opacity: 0;
   transition: transform 0.3s, opacity 0.3s;
@@ -1025,7 +1017,7 @@
   transform: translate3d(0, 100%, 0);
 }
 
-.eael-creative-button--tamaya:hover > span {
+.eael-creative-button--tamaya:hover > .creative-button-inner {
   opacity: 1;
   transform: scale3d(1, 1, 1);
 }
@@ -1044,14 +1036,13 @@
   width: 100%;
   height: 100%;
   transform: translate3d(-100%, 0, 0);
-}
-
-.eael-creative-button--rayen > span {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .eael-creative-button--rayen::before,
-.eael-creative-button--rayen > span {
+.eael-creative-button--rayen > .creative-button-inner {
   padding: 1em 2em;
   transition: transform 0.3s;
   transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
@@ -1061,8 +1052,22 @@
   transform: translate3d(0, 0, 0);
 }
 
-.eael-creative-button--rayen:hover > span {
+.eael-creative-button--rayen:hover > .creative-button-inner {
   transform: translate3d(0, 100%, 0);
+}
+
+.creative-button-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.eael-creative-button-icon-left {
+  margin-right: 5px;
+}
+
+.eael-creative-button-icon-right {
+  margin-left: 5px;
 }
 
 table.eael-data-table thead .sorting, table.eael-data-table thead .sorting_desc, table.eael-data-table thead .sorting_asc {
@@ -3323,60 +3328,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   opacity: 1;
 }
 
-.eael-fluent-form-wrapper label.ff-el-form-check-label {
-  display: flex;
-  align-items: center;
-}
-.eael-fluent-form-wrapper label.ff-el-form-check-label input {
-  margin-right: 5px;
-}
-
-.eael-fluentform-form-button-full-width .ff-btn-submit {
-  width: 100%;
-  display: block;
-}
-
-.eael-contact-form.eael-fluent-form-wrapper.error-message-hide .ff-el-is-error .text-danger {
-  display: none;
-}
-
-.eael-fluentform-form-button-center .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-right .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-right .ff-el-group .ff-btn-submit {
-  float: right;
-}
-
-.eael-fluentform-form-button-left .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-left .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-left .ff-el-group .ff-btn-submit {
-  float: left;
-}
-
-.eael-contact-form.eael-fluent-form-wrapper.fluent-form-labels-hide label {
-  display: none !important;
-}
-
-.eael-fluentform-section-break-content-left .ff-el-group.ff-el-section-break {
-  text-align: left;
-}
-
-.eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break {
-  text-align: center;
-}
-
-.eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break {
-  text-align: right;
-}
-
 /*---------------------------*/
 /* 18. Flipbox Style
 /*---------------------------*/
@@ -3662,6 +3613,60 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-flipbox-img-circle .flipbox-back-image-icon img {
   border-radius: 50%;
   overflow: hidden;
+}
+
+.eael-fluent-form-wrapper label.ff-el-form-check-label {
+  display: flex;
+  align-items: center;
+}
+.eael-fluent-form-wrapper label.ff-el-form-check-label input {
+  margin-right: 5px;
+}
+
+.eael-fluentform-form-button-full-width .ff-btn-submit {
+  width: 100%;
+  display: block;
+}
+
+.eael-contact-form.eael-fluent-form-wrapper.error-message-hide .ff-el-is-error .text-danger {
+  display: none;
+}
+
+.eael-fluentform-form-button-center .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-right .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-right .ff-el-group .ff-btn-submit {
+  float: right;
+}
+
+.eael-fluentform-form-button-left .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-left .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-left .ff-el-group .ff-btn-submit {
+  float: left;
+}
+
+.eael-contact-form.eael-fluent-form-wrapper.fluent-form-labels-hide label {
+  display: none !important;
+}
+
+.eael-fluentform-section-break-content-left .ff-el-group.ff-el-section-break {
+  text-align: left;
+}
+
+.eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break {
+  text-align: center;
+}
+
+.eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break {
+  text-align: right;
 }
 
 /*--------------------------*/
