@@ -169,7 +169,7 @@
 
 .eael-creative-button--tamaya::before {
     top: 0;
-    padding-top: 27px;
+    padding-top: 11%;
     overflow: hidden;
 }
 
@@ -256,5 +256,10 @@
     align-items: center;
 }
 
-.eael-creative-button-icon-left { margin-right: 5px; }
-.eael-creative-button-icon-right { margin-left: 5px; }
+.eael-creative-button-icon-left {
+	margin-right: 5px;
+}
+
+.eael-creative-button-icon-right {
+	margin-left: 5px;
+}
