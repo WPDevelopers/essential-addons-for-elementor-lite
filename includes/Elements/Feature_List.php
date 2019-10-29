@@ -731,7 +731,11 @@ class Feature_List extends Widget_Base
 		$padding = $settings['eael_feature_list_icon_padding']['size'];
 		$circle_size = $settings['eael_feature_list_icon_circle_size']['size'];
 		$font    = $settings['eael_feature_list_icon_size']['size'];
-		$border  = $settings['eael_feature_list_icon_border_width']['right'] + $settings['eael_feature_list_icon_border_width']['left'];
+
+		
+		if( isset($settings['eael_feature_list_icon_border_width']['right']) &&  isset($settings['eael_feature_list_icon_border_width']['left']) ) {
+			$border  = $settings['eael_feature_list_icon_border_width']['right'] + $settings['eael_feature_list_icon_border_width']['left'];
+		}
 
 
 		if ( $settings['eael_feature_list_icon_shape'] == 'rhombus' ) {

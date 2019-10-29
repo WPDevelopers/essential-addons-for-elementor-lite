@@ -1235,8 +1235,7 @@ class Flip_Box extends Widget_Base {
 
 		$flipbox_image_back = $this->get_settings( 'eael_flipbox_image_back' );
 	  	$flipbox_back_image_url = Group_Control_Image_Size::get_attachment_image_src( $flipbox_image_back['id'], 'thumbnail_back', $settings );
-	  	$flipbox_back_image_url = empty($flipbox_back_image_url) ? $flipbox_back_image_url['url'] : $flipbox_back_image_url;
-
+	  	$flipbox_back_image_url = empty($flipbox_back_image_url) ? $flipbox_back_image_url : $flipbox_back_image_url;
 		if( 'img' == $settings['eael_flipbox_img_or_icon_back'] ) {
 			$this->add_render_attribute(
 				'flipbox-back-icon-image-container',
