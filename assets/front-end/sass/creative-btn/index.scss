@@ -26,18 +26,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.eael-creative-button-align-center .eael-creative-button {
-	float: none;
-	display: inline-block;
-}
-
 .eael-creative-button:focus {
 	outline: none;
-}
-
-.eael-creative-button > span {
-	display: flex;
-	align-items: center;
 }
 
 /*--------------------------------------------*/
@@ -64,14 +54,13 @@
 	opacity: 0;
 	-webkit-transform: translate3d(0, 25%, 0);
 	transform: translate3d(0, 25%, 0);
-}
-
-.eael-creative-button--winona > span {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .eael-creative-button--winona::after,
-.eael-creative-button--winona > span {
+.eael-creative-button--winona > .creative-button-inner {
 	padding: 1em 2em;
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
 	transition: transform 0.3s, opacity 0.3s;
@@ -85,10 +74,10 @@
 	transform: translate3d(0, 0, 0);
 }
 
-.eael-creative-button--winona:hover > span {
+.eael-creative-button--winona:hover > .creative-button-inner {
 	opacity: 0;
 	-webkit-transform: translate3d(0, -25%, 0);
-	transform: translate3d(0, -25%, 0);
+	transform: translate3d(0, 0%, 0);
 }
 
 /*--- Ujarak ---*/
@@ -179,8 +168,9 @@
 }
 
 .eael-creative-button--tamaya::before {
-	top: 0;
-	padding: 20px 30px;
+    top: 0;
+    padding-top: 27px;
+    overflow: hidden;
 }
 
 .eael-creative-button--tamaya::after {
@@ -192,8 +182,10 @@
 	bottom: -1px;
 }
 
-.eael-creative-button--tamaya > span {
-	display: block;
+.eael-creative-button--tamaya > .creative-button-inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	-webkit-transform: scale3d(0.2, 0.2, 1);
 	transform: scale3d(0.2, 0.2, 1);
 	opacity: 0;
@@ -213,7 +205,7 @@
 	transform: translate3d(0, 100%, 0);
 }
 
-.eael-creative-button--tamaya:hover > span {
+.eael-creative-button--tamaya:hover > .creative-button-inner {
 	opacity: 1;
 	-webkit-transform: scale3d(1, 1, 1);
 	transform: scale3d(1, 1, 1);
@@ -234,14 +226,13 @@
 	height: 100%;
 	-webkit-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
-}
-
-.eael-creative-button--rayen > span {
-	display: block;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .eael-creative-button--rayen::before,
-.eael-creative-button--rayen > span {
+.eael-creative-button--rayen > .creative-button-inner {
 	padding: 1em 2em;
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
@@ -254,8 +245,16 @@
 	transform: translate3d(0, 0, 0);
 }
 
-.eael-creative-button--rayen:hover > span {
+.eael-creative-button--rayen:hover > .creative-button-inner {
 	-webkit-transform: translate3d(0, 100%, 0);
 	transform: translate3d(0, 100%, 0);
 }
 
+.creative-button-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.eael-creative-button-icon-left { margin-right: 5px; }
+.eael-creative-button-icon-right { margin-left: 5px; }
