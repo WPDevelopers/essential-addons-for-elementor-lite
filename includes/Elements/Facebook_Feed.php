@@ -813,7 +813,6 @@ class Facebook_Feed extends Widget_Base
                 </button>
             </div>';
         }
-        echo '</div>';
 
         if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
             echo '<script type="text/javascript">
