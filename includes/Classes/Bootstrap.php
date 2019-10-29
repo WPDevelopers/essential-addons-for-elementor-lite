@@ -115,6 +115,9 @@ class Bootstrap
         add_action('wp_ajax_load_more', array($this, 'eael_load_more_ajax'));
         add_action('wp_ajax_nopriv_load_more', array($this, 'eael_load_more_ajax'));
 
+        add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
+        add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
+
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
