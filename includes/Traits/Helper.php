@@ -1689,7 +1689,7 @@ trait Helper
                             </div>';
 
                             if ($settings['eael_facebook_feed_date']) {
-                                $html .= '<span class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</span>';
+                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
                             }
                         $html .= '</header>';
                         
@@ -1729,26 +1729,9 @@ trait Helper
                             $html .= '</div>';
                         }
 
-                        $html .= '<footer class="eael-facebook-feed-item-footer">
-                            <div class="clearfix">';
-                                if ($settings['eael_facebook_feed_likes']) {
-                                    $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
-                                }
-                                if ($settings['eael_facebook_feed_comments']) {
-                                    $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
-                                }
-                            $html .= '</div>
-                        </footer>
-                    </div>
-                </div>';
-            } else {
-                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-item">
-                    <div class="eael-facebook-feed-item-inner">
-                        <img class="eael-facebook-feed-img" src="' . (empty($photo) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : $photo) . '">
-
-                        <div class="eael-facebook-feed-item-overlay">
-                            <div class="eael-facebook-feed-item-overlay-inner">
-                                <div class="eael-facebook-feed-meta">';
+                        if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
+                            $html .= '<footer class="eael-facebook-feed-item-footer">
+                                <div class="clearfix">';
                                     if ($settings['eael_facebook_feed_likes']) {
                                         $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
                                     }
@@ -1756,9 +1739,30 @@ trait Helper
                                         $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
                                     }
                                 $html .= '</div>
-                            </div>
-                        </div>
-                    </div>
+                            </footer>';
+                        }
+                    $html .= '</div>
+                </div>';
+            } else {
+                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-item">
+                    <div class="eael-facebook-feed-item-inner">
+                        <img class="eael-facebook-feed-img" src="' . (empty($photo) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : $photo) . '">';
+                        
+                        if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
+                            $html .= '<div class="eael-facebook-feed-item-overlay">
+                                <div class="eael-facebook-feed-item-overlay-inner">
+                                    <div class="eael-facebook-feed-meta">';
+                                        if ($settings['eael_facebook_feed_likes']) {
+                                            $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
+                                        }
+                                        if ($settings['eael_facebook_feed_comments']) {
+                                            $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
+                                        }
+                                    $html .= '</div>
+                                </div>
+                            </div>';
+                        }
+                    $html .= '</div>
                 </a>';
             }
         }
