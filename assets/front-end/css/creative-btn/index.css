@@ -126,9 +126,30 @@
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-/*--- Tamaya ---*/
+/* Tamaya */
 .eael-creative-button--tamaya {
+  float: left;
+  min-width: 150px;
+  max-width: 250px;
+  display: block;
+  margin: 1em;
+  padding: 1em 2em;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  color: #7986cb;
+  min-width: 180px;
+}
+
+.eael-creative-button--tamaya.button--inverted {
+  color: #37474f;
+  border-color: #37474f;
 }
 
 .eael-creative-button--tamaya::before,
@@ -138,15 +159,22 @@
   width: 100%;
   height: 50%;
   left: 0;
+  background: #7986cb;
+  color: #fff;
   overflow: hidden;
   transition: transform 0.3s;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
+.eael-creative-button--tamaya.button--inverted::before,
+.eael-creative-button--tamaya.button--inverted::after {
+  background: #fff;
+  color: #37474f;
+}
+
 .eael-creative-button--tamaya::before {
   top: 0;
-  padding-top: 11%;
-  overflow: hidden;
+  padding-top: 1em;
 }
 
 .eael-creative-button--tamaya::after {
@@ -154,14 +182,8 @@
   line-height: 0;
 }
 
-.eael-creative-button--tamaya:hover::after {
-  bottom: -1px;
-}
-
-.eael-creative-button--tamaya > .creative-button-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.eael-creative-button--tamaya span {
+  display: block;
   transform: scale3d(0.2, 0.2, 1);
   opacity: 0;
   transition: transform 0.3s, opacity 0.3s;
@@ -176,7 +198,7 @@
   transform: translate3d(0, 100%, 0);
 }
 
-.eael-creative-button--tamaya:hover > .creative-button-inner {
+.eael-creative-button--tamaya:hover span {
   opacity: 1;
   transform: scale3d(1, 1, 1);
 }
