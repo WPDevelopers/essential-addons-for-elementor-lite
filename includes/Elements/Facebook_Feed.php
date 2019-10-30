@@ -305,6 +305,23 @@ class Facebook_Feed extends Widget_Base
                 'name' => 'eael_facebook_feed_box_border',
                 'label' => esc_html__('Border', 'essential-addons-elementor'),
                 'selector' => '{{WRAPPER}} .eael-facebook-feed-item-inner',
+                'fields_options' => [
+                    'border' => [
+                        'default' => 'solid',
+                    ],
+                    'width' => [
+                        'default' => [
+                            'top' => '1',
+                            'right' => '1',
+                            'bottom' => '1',
+                            'left' => '1',
+                            'isLinked' => false,
+                        ],
+                    ],
+                    'color' => [
+                        'default' => '#eee',
+                    ],
+                ],
             ]
         );
 
@@ -350,7 +367,7 @@ class Facebook_Feed extends Widget_Base
             [
                 'label' => esc_html__('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+                'default' => '#f2f6fd',
                 'selectors' => [
                     '{{WRAPPER}} .eael-facebook-feed-item-header' => 'background-color: {{VALUE}};',
                 ],
@@ -433,9 +450,9 @@ class Facebook_Feed extends Widget_Base
             [
                 'label' => esc_html__('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+                'default' => '#f2f6fd',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item-footer' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -450,7 +467,7 @@ class Facebook_Feed extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item-footer' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -468,42 +485,277 @@ class Facebook_Feed extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_facebook_feed_styles_page_name_heading',
+            [
+                'label' => __('Page Name', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'eael_facebook_feed_typography',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .eael-facebook-feed-item',
+                'name' => 'eael_facebook_feed_page_name_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-username',
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
             ]
         );
 
         $this->add_control(
-            'eael_facebook_feed_text_color',
+            'eael_facebook_feed_page_name_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#7a7a7a',
+                'default' => '#365899',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-username' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'card'
-                ]
+                    'eael_facebook_feed_layout' => 'card',
+                ],
             ]
         );
 
         $this->add_control(
-            'eael_facebook_feed_link_color',
+            'eael_facebook_feed_styles_date_heading',
+            [
+                'label' => __('Date', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_facebook_feed_date_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-post-time',
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_date_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#707070',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-post-time' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_styles_message_heading',
+            [
+                'label' => __('Message', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_facebook_feed_message_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content .eael-facebook-feed-message',
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_message_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#707070',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content .eael-facebook-feed-message' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_message_link_color',
             [
                 'label' => esc_html__('Link Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#365899',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content .eael-facebook-feed-message a' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'card'
-                ]
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_styles_preview_host_heading',
+            [
+                'label' => __('Preview Host', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_facebook_feed_preview_host_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-host',
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_preview_host_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#707070',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-host' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_styles_preview_title_heading',
+            [
+                'label' => __('Preview Title', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_facebook_feed_preview_title_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-title',
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_preview_title_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#333333',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-title' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_styles_preview_desc_heading',
+            [
+                'label' => __('Preview Description', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_facebook_feed_preview_desc_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-description',
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_preview_desc_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#707070',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-description' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_facebook_feed_layout' => 'card',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_styles_likes_conmments_heading',
+            [
+                'label' => __('Likes & Comments', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_facebook_feed_likes_conmments_typography',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                'selector' => '{{WRAPPER}} .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay, {{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer',
+            ]
+        );
+
+        $this->add_control(
+            'eael_facebook_feed_likes_conmments_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#707070',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay i' => 'color: {{VALUE}};',
+                ],
             ]
         );
 
@@ -514,27 +766,11 @@ class Facebook_Feed extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(86,20,213,0.8)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item-overlay' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_facebook_feed_layout' => 'overlay'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'eael_facebook_feed_icon_color',
-            [
-                'label' => esc_html__('Icon Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-facebook-feed-item-overlay' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-facebook-feed-item-overlay i' => 'color: {{VALUE}};',
+                    'eael_facebook_feed_layout' => 'overlay',
                 ],
-                'condition' => [
-                    'eael_facebook_feed_layout' => 'overlay'
-                ]
             ]
         );
 
@@ -577,7 +813,6 @@ class Facebook_Feed extends Widget_Base
                 </button>
             </div>';
         }
-        echo '</div>';
 
         if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
             echo '<script type="text/javascript">
