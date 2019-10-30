@@ -12,6 +12,8 @@ use Elementor\Modules\DynamicTags\Module as TagsModule;
 class Sticky_Video extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 
+	protected $eaelRElem = 1;
+
 	public function get_name() {
 		return 'eael-sticky-video';
 	}
@@ -24,7 +26,7 @@ class Sticky_Video extends Widget_Base {
 		return 'eicon-youtube';
 	}
 
-   public function get_categories() {
+    public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
 	
@@ -721,6 +723,7 @@ class Sticky_Video extends Widget_Base {
 		//$st = $settings['eaelsv_start_time'];
 		//$et = $settings['eaelsv_end_time'];
 		$sticky = $settings['eaelsv_is_sticky'];
+		$autoplay = ($settings['eaelsv_autopaly'] == 'yes') ? $settings['eaelsv_autopaly'] : 'no';
 		$eaelsvPlayer = '';
 		//$stickyCloseColor = $settings['eaelsv_sticky_close_button_color'];
 		if( 'youtube' == $settings['eael_video_source'] ){
@@ -734,10 +737,12 @@ class Sticky_Video extends Widget_Base {
 		if( 'self_hosted' == $settings['eael_video_source'] ){
 			$eaelsvPlayer = $this->eaelsv_load_player_self_hosted($settings);
 		}
+
 		?>
 		<div class="eael-sticky-video-wrapper">
 		<?php
 		if('yes' === $settings['eaelsv_overlay_options']){
+			$autoplay = 'yes';
 			if('yes' === $settings['eaelsv_overlay_play_icon']):
 				if($iconNew['value']!=''):
 					$icon = $iconNew['value'];
@@ -766,8 +771,8 @@ class Sticky_Video extends Widget_Base {
 				'data-position'	=> $settings['eaelsv_sticky_position'],
 				'data-sheight'	=> $settings['eaelsv_sticky_height']['size'],
 				'data-swidth'	=> $settings['eaelsv_sticky_width']['size'],
-				'data-autoplay'	=> $settings['eaelsv_autopaly'],
-				'data-overlay'	=> $settings['eaelsv_overlay_options'],
+				'data-autoplay'	=> $autoplay,
+				'data-overlay'	=> ($settings['eaelsv_overlay_options'] == 'yes') ? $settings['eaelsv_overlay_options'] : 'no',
 			]
 		);
 		?>
@@ -801,7 +806,6 @@ class Sticky_Video extends Widget_Base {
 		} else{ $lp = 'false'; }
 		?>
 		<div
-			class="eaelsv-player-<?php echo rand(10,100); ?>" 
 			data-plyr-provider="youtube" 
 			data-plyr-embed-id="<?php echo esc_attr($id); ?>"
 			data-plyr-config='{ <?php echo esc_attr($am); ?>, "loop" : {"active":<?php echo esc_attr($lp); ?>} }'
@@ -831,8 +835,7 @@ class Sticky_Video extends Widget_Base {
 		if('yes'== $loop){ $lp = 'true';
 		} else{ $lp = 'false'; }
 		?>
-		<div 
-			class="eaelsv-player-<?php echo rand(10,100); ?>" 
+		<div
 			data-plyr-provider="vimeo" 
 			data-plyr-embed-id="<?php echo esc_attr($id); ?>"
 			data-plyr-config='{ <?php echo esc_attr($am); ?>, "loop" : {"active":<?php echo esc_attr($lp); ?>} }'
@@ -871,8 +874,7 @@ class Sticky_Video extends Widget_Base {
 		if('yes'== $loop){ $lp = 'true';
 		} else{ $lp = 'false'; }
 		?>
-		<video  
-			id="player1"
+		<video
 			class="eaelsv-player-<?php echo rand(10,100); ?>" 
 			playsinline controls
 			data-plyr-config='{ <?php echo esc_attr($am); ?>, "loop" : {"active":<?php echo esc_attr($lp); ?>} }'
@@ -905,6 +907,10 @@ class Sticky_Video extends Widget_Base {
 			}
 		}
 		return $id;
+	}
+
+	protected function getClsContr($c){
+		return $c++;
 	}
 
 }
