@@ -8,12 +8,12 @@
 }
 @media only screen and (max-width: 979px) {
   .eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
-    width: 33.3333%;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 480px) {
   .eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
-    width: 50%;
+    width: 100%;
   }
 }
 .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
@@ -22,12 +22,12 @@
 }
 @media only screen and (max-width: 979px) {
   .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
-    width: 33.3333%;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 480px) {
   .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
-    width: 50%;
+    width: 100%;
   }
 }
 .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
@@ -36,12 +36,12 @@
 }
 @media only screen and (max-width: 979px) {
   .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
-    width: 33.3333%;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 480px) {
   .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
-    width: 50%;
+    width: 100%;
   }
 }
 .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
@@ -50,12 +50,12 @@
 }
 @media only screen and (max-width: 979px) {
   .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
-    width: 33.3333%;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 480px) {
   .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
-    width: 50%;
+    width: 100%;
   }
 }
 .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
@@ -64,12 +64,12 @@
 }
 @media only screen and (max-width: 979px) {
   .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
-    width: 33.3333%;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 480px) {
   .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
-    width: 50%;
+    width: 100%;
   }
 }
 .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
@@ -78,12 +78,12 @@
 }
 @media only screen and (max-width: 979px) {
   .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
-    width: 33.3333%;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 480px) {
   .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
-    width: 50%;
+    width: 100%;
   }
 }
 .eael-facebook-feed .eael-facebook-feed-item {
