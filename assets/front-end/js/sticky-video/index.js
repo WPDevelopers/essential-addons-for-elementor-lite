@@ -60,7 +60,7 @@
                             //runStickyPlayer(a1);
                             if(($(this).next().data('autoplay')) === 'yes'){
                                 var a1 = $(this).next().find( 'div, video' ).attr('id');
-                                alert(a1);
+                                //alert(a1);
                                 runStickyPlayer(a1);
                                 height = GetDomElementHeight(this);
                                 $(this).parent().attr('id', 'videobox');
@@ -148,7 +148,7 @@
         //ovrplyer.stop();
         if( cls!=='' ){
             var ovrplyer = new Plyr('#'+cls);
-            alert(cls);
+            //alert(cls);
             ovrplyer.restart();
         }
     }
