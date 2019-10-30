@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.4.0
+Stable tag: 3.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -70,6 +70,7 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
 30. [FluentForm](https://essential-addons.com/elementor/fluentform/) - Design your FluentForm container, fields and anything you want
+31. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook post feed from your page
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -172,6 +173,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.5.0 - 30/10/2019 =
+- Added : Facebook Feed widget with new graph API
+- Improved : Asset loading protocol 
+- Bug fix: Query settings not updated (edited)
+- Bug fix: Query not working for export/import
+- Bug fix: Reading progress showing if disabled from settings panel
+- Filterable gallery filtering improvements
+- Post element CHOOSE controls are changed with the SWITCHER controls
+- Post elements read more button styles improvements
+- Creative Button improvements
+- Few minor bugfix and improvements
 
 = 3.4.0 - 10/10/2019 =
 - Added: FluentForm styler
