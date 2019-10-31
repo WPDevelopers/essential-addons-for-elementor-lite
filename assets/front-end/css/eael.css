@@ -1,3 +1,4 @@
+
 /*------------------------------*/
 /* 31. Advance Accordion
 /*------------------------------*/
@@ -269,6 +270,60 @@
   }
 }
 
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
+}
+
 @-webkit-keyframes "loaderSpin" {
   0% {
     transform: rotate(0deg);
@@ -334,147 +389,6 @@
   border-radius: 50%;
   width: 20px;
   height: 20px;
-}
-
-/*--------------------------------*/
-/* 11. Contact Form 7 Styles
-/*--------------------------------*/
-.eael-contact-form.eael-contact-form-align-center,
-.eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form.eael-contact-form-align-left,
-.eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form.eael-contact-form-align-right,
-.eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
-  float: right;
-  width: auto;
-}
-
-.eael-contact-form-7 textarea,
-.eael-contact-form-7 input[type="text"],
-.eael-contact-form-7 input[type="password"],
-.eael-contact-form-7 input[type="datetime"],
-.eael-contact-form-7 input[type="datetime-local"],
-.eael-contact-form-7 input[type="date"],
-.eael-contact-form-7 input[type="month"],
-.eael-contact-form-7 input[type="time"],
-.eael-contact-form-7 input[type="week"],
-.eael-contact-form-7 input[type="number"],
-.eael-contact-form-7 input[type="email"],
-.eael-contact-form-7 input[type="url"],
-.eael-contact-form-7 input[type="search"],
-.eael-contact-form-7 input[type="tel"],
-.eael-contact-form-7 input[type="color"],
-.eael-contact-form-7 .uneditable-input {
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-}
-
-.eael-contact-form-7 .wpcf7-form::before,
-.eael-contact-form-7 .wpcf7-form::after {
-  content: " ";
-  clear: both;
-  display: table;
-}
-
-.eael-contact-form-7 .wpcf7-form:after {
-  clear: both;
-  content: "";
-  font-size: 0;
-  height: 0;
-  display: block;
-  visibility: hidden;
-}
-
-.eael-contact-form-7 .wpcf7-form label,
-.eael-contact-form-7 .wpcf7-form .wpcf7-form-control-wrap {
-  display: block;
-}
-
-.eael-contact-form-7 .wpcf7-form p {
-  margin-bottom: 0;
-}
-
-.eael-contact-form-7.labels-hide .wpcf7-form label {
-  display: none;
-}
-
-.eael-contact-form-7-title {
-  margin-bottom: 10px;
-}
-
-.eael-contact-form-7-description {
-  margin-bottom: 20px;
-}
-
-.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
-  width: 100%;
-}
-
-.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
-  margin: 0 auto;
-}
-
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
 }
 
 /*--------------------------*/
@@ -724,6 +638,93 @@
   }
 }
 
+/*--------------------------------*/
+/* 11. Contact Form 7 Styles
+/*--------------------------------*/
+.eael-contact-form.eael-contact-form-align-center,
+.eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form.eael-contact-form-align-left,
+.eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form.eael-contact-form-align-right,
+.eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
+  float: right;
+  width: auto;
+}
+
+.eael-contact-form-7 textarea,
+.eael-contact-form-7 input[type="text"],
+.eael-contact-form-7 input[type="password"],
+.eael-contact-form-7 input[type="datetime"],
+.eael-contact-form-7 input[type="datetime-local"],
+.eael-contact-form-7 input[type="date"],
+.eael-contact-form-7 input[type="month"],
+.eael-contact-form-7 input[type="time"],
+.eael-contact-form-7 input[type="week"],
+.eael-contact-form-7 input[type="number"],
+.eael-contact-form-7 input[type="email"],
+.eael-contact-form-7 input[type="url"],
+.eael-contact-form-7 input[type="search"],
+.eael-contact-form-7 input[type="tel"],
+.eael-contact-form-7 input[type="color"],
+.eael-contact-form-7 .uneditable-input {
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+.eael-contact-form-7 .wpcf7-form::before,
+.eael-contact-form-7 .wpcf7-form::after {
+  content: " ";
+  clear: both;
+  display: table;
+}
+
+.eael-contact-form-7 .wpcf7-form:after {
+  clear: both;
+  content: "";
+  font-size: 0;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+
+.eael-contact-form-7 .wpcf7-form label,
+.eael-contact-form-7 .wpcf7-form .wpcf7-form-control-wrap {
+  display: block;
+}
+
+.eael-contact-form-7 .wpcf7-form p {
+  margin-bottom: 0;
+}
+
+.eael-contact-form-7.labels-hide .wpcf7-form label {
+  display: none;
+}
+
+.eael-contact-form-7-title {
+  margin-bottom: 10px;
+}
+
+.eael-contact-form-7-description {
+  margin-bottom: 20px;
+}
+
+.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
+  width: 100%;
+}
+
+.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
+  margin: 0 auto;
+}
+
 .eael-ticker-wrap {
   overflow: hidden;
   display: flex;
@@ -782,6 +783,9 @@
 .eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
   background-image: none;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*---------------------------------*/
@@ -3877,97 +3881,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   width: 100%;
 }
 
-/*------------------------------*/
-/* 34. Image accordion
-/*------------------------------*/
-.eael-img-accordion {
-  display: flex;
-  height: 50vh;
-}
-
-.eael-img-accordion a {
-  position: relative;
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: flex .4s;
-}
-
-.eael-grow-accordion {
-  flex: 3;
-}
-
-.eael-img-accordion .overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: background-color .4s;
-}
-
-.eael-img-accordion .overlay .overlay-inner {
-  z-index: 1;
-}
-
-.eael-img-accordion a:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-img-accordion .overlay-inner * {
-  visibility: hidden;
-  opacity: 0;
-  transform-style: preserve-3d;
-}
-
-.eael-img-accordion .overlay h2 {
-  color: #fff;
-  transform: translate3d(0, -60px, 0);
-}
-
-.eael-img-accordion .overlay p {
-  color: #fff;
-  transform: translate3d(0, 60px, 0);
-}
-
-.eael-img-accordion .overlay-inner-show * {
-  opacity: 1;
-  visibility: visible;
-  transform: none !important;
-  transition: all .3s .3s;
-}
-
-@media screen and (max-width: 800px) {
-  .eael-img-accordion {
-    flex-direction: column;
-  }
-
-  .eael-img-accordion a:hover {
-    flex: 1;
-  }
-
-  .eael-img-accordion a:hover .overlay {
-    background-color: transparent;
-  }
-}
-
 /* ------------------------ */
 /* 17. Infobox Style
 /* ------------------------ */
@@ -4164,6 +4077,97 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-infobox-shape-radius .eael-infobox .infobox-icon img,
 .eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
   border-radius: 15px;
+}
+
+/*------------------------------*/
+/* 34. Image accordion
+/*------------------------------*/
+.eael-img-accordion {
+  display: flex;
+  height: 50vh;
+}
+
+.eael-img-accordion a {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: flex .4s;
+}
+
+.eael-grow-accordion {
+  flex: 3;
+}
+
+.eael-img-accordion .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color .4s;
+}
+
+.eael-img-accordion .overlay .overlay-inner {
+  z-index: 1;
+}
+
+.eael-img-accordion a:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-img-accordion .overlay-inner * {
+  visibility: hidden;
+  opacity: 0;
+  transform-style: preserve-3d;
+}
+
+.eael-img-accordion .overlay h2 {
+  color: #fff;
+  transform: translate3d(0, -60px, 0);
+}
+
+.eael-img-accordion .overlay p {
+  color: #fff;
+  transform: translate3d(0, 60px, 0);
+}
+
+.eael-img-accordion .overlay-inner-show * {
+  opacity: 1;
+  visibility: visible;
+  transform: none !important;
+  transition: all .3s .3s;
+}
+
+@media screen and (max-width: 800px) {
+  .eael-img-accordion {
+    flex-direction: column;
+  }
+
+  .eael-img-accordion a:hover {
+    flex: 1;
+  }
+
+  .eael-img-accordion a:hover .overlay {
+    background-color: transparent;
+  }
 }
 
 /* ------------------------ */
@@ -7479,6 +7483,11 @@ span.eael-testimonial-quote {
   text-overflow: ellipsis;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+}
+
+.eael-twitter-feed.swiper-container .swiper-button-next, .eael-twitter-feed.swiper-container .swiper-button-prev {
+  background-image: none;
+  outline: none;
 }
 
 /*----------------------*/

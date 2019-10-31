@@ -114,3 +114,10 @@
         }
     }
 }
+
+.eael-twitter-feed.swiper-container {
+	.swiper-button-next, .swiper-button-prev {
+		background-image: none;
+		outline: none;
+	}
+}
