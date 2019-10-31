@@ -53,3 +53,7 @@
     display: none;
   }
 }
+.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
+  background-image: none;
+  outline: none;
+}
