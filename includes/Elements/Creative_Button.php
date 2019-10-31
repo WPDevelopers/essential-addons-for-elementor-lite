@@ -72,8 +72,7 @@ class Creative_Button extends Widget_Base {
 					'title'       => __( 'Enter button secondary text here', 'essential-addons-elementor' ),
 				]
 			);
-
-
+			
 			$this->add_control(
 				'creative_button_link_url',
 				[
@@ -94,6 +93,9 @@ class Creative_Button extends Widget_Base {
 					'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
 					'type'  => Controls_Manager::ICONS,
 					'fa4compatibility' => 'eael_creative_button_icon',
+					'condition'	=> [
+						'creative_button_effect!' => ['eael-creative-button--tamaya']
+					]
 				]
 			);
 
@@ -109,6 +111,7 @@ class Creative_Button extends Widget_Base {
 					],
 					'condition' => [
 						'eael_creative_button_icon_new!' => '',
+						'creative_button_effect!' => ['eael-creative-button--tamaya']
 					],
 				]
 			);
@@ -126,11 +129,12 @@ class Creative_Button extends Widget_Base {
 					],
 					'condition' => [
 						'eael_creative_button_icon_new!' => '',
+						'creative_button_effect!' => ['eael-creative-button--tamaya']
 					],
 					'selectors' => [
 						'{{WRAPPER}} .eael-creative-button-icon-right' => 'margin-left: {{SIZE}}px;',
 						'{{WRAPPER}} .eael-creative-button-icon-left'  => 'margin-right: {{SIZE}}px;',
-						'{{WRAPPER}} .eael-creative-button--shikoba i' => 'left: -{{SIZE}}px;',
+						'{{WRAPPER}} .eael-creative-button--shikoba i' => 'left: {{SIZE}}%;',
 					],
 				]
 			);
@@ -516,7 +520,8 @@ class Creative_Button extends Widget_Base {
 	<div class="eael-creative-button-wrapper">
 		<a <?php echo $this->get_render_attribute_string( 'eael_creative_button' ); ?>>
 			<div class="creative-button-inner">
-				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
+				
+				<?php if ( $settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
 						<?php if ( isset( $settings['eael_creative_button_icon_new']['value']['url']) ) : ?>
 							<img src="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value']['url'] ); ?>" class="eael-creative-button-icon-left" alt="<?php echo esc_attr(get_post_meta($settings['eael_creative_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
@@ -532,7 +537,7 @@ class Creative_Button extends Widget_Base {
 
 				<span class="cretive-button-text"><?php echo  $settings['creative_button_text'];?></span>
 
-				<?php if ( $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
+				<?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
 						<?php if ( isset( $settings['eael_creative_button_icon_new']['value']['url']) ) : ?>
 							<img src="<?php echo esc_attr($settings['eael_creative_button_icon_new']['value']['url'] ); ?>" class="eael-creative-button-icon-right" alt="<?php echo esc_attr(get_post_meta($settings['eael_creative_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
