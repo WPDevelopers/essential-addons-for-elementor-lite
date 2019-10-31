@@ -1,7 +1,7 @@
 ;(function($){
 
     var videoIsActive = 0;
-    var eaelVideoElement = '';
+    //var eaelVideoElement = '';
     var height = 0;
     var position = '';
     var swidth = '';
@@ -16,6 +16,7 @@
     $(window).on("elementor/frontend/init",function(){
         elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default',function($scope, $){
             
+            $('.eaelsv-sticky-player-close').hide();
             $scope.find(".eael-sticky-video-player2").each(function(){
                 var element = $(this); //[0];
                 
@@ -91,7 +92,7 @@
         //alert(videoIsActive)
         if($(window).scrollTop() > height ) {
             if(videoIsActive == 1){
-                $('.eaelsv-sticky-player-close').css('display', 'block');
+                $('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
                 $('#videobox').removeClass('in').addClass('out');
                 PositionStickyPlayer(position, sheight, swidth);
             }
