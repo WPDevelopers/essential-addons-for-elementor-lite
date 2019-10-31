@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5.0
+Stable tag: 3.5.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -173,6 +173,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.5.1 - 31/10/2019 =
+- Conflict Fix: Elementor Pro Media Carousel
+- Fixed : Few Creative Buttons effects
+- Few minor bugfix and improvements
 
 = 3.5.0 - 30/10/2019 =
 - Added : Facebook Feed widget with new graph API
