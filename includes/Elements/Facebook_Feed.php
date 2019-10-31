@@ -51,6 +51,7 @@ class Facebook_Feed extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => esc_html__('', 'essential-addons-elementor'),
+                'description' => __('<a href="https://findmyfbid.com/" class="eael-btn" target="_blank">Find Your Page ID</a>', 'essential-addons-elementor'),
             ]
         );
 
@@ -61,7 +62,7 @@ class Facebook_Feed extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => esc_html__('', 'essential-addons-elementor'),
-                'description' => __('<a href="https://developers.facebook.com/" class="eael-btn" target="_blank">Get Access Token</a>', 'essential-addons-elementor'),
+                'description' => __('<a href="https://essential-addons.com/elementor/docs/facebook-feed/" class="eael-btn" target="_blank">Get Access Token</a>', 'essential-addons-elementor'),
             ]
         );
 
@@ -252,16 +253,16 @@ class Facebook_Feed extends Widget_Base
                 'label' => __('Show Load More', 'essential-addons-elementor'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
-                    '1' => [
+                    'yes' => [
                         'title' => __('Yes', 'essential-addons-elementor'),
                         'icon' => 'fa fa-check',
                     ],
-                    '0' => [
+                    'no' => [
                         'title' => __('No', 'essential-addons-elementor'),
                         'icon' => 'fa fa-ban',
                     ],
                 ],
-                'default' => '0',
+                'default' => 'no',
             ]
         );
 
@@ -272,7 +273,7 @@ class Facebook_Feed extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Load More', 'essential-addons-elementor'),
                 'condition' => [
-                    'show_load_more' => '1',
+                    'show_load_more' => 'yes',
                 ],
             ]
         );
@@ -805,7 +806,7 @@ class Facebook_Feed extends Widget_Base
         </div>
         <div class="clearfix"></div>';
 
-        if (($settings['show_load_more'] == '1')) {
+        if (($settings['show_load_more'] == 'yes')) {
             echo '<div class="eael-load-more-button-wrap">
                 <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-settings="' . http_build_query($settings_var) . '" data-page="1">
                     <div class="eael-btn-loader button__loader"></div>
