@@ -118,6 +118,8 @@
   z-index: 999;
   border: 0 !important;
   border-radius: 0px !important;
+  height: 200px;
+  width: 300px;
 }
 
 .eael-sticky-video-wrapper.out .eael-sticky-video-player2,

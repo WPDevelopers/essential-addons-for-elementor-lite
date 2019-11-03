@@ -806,6 +806,7 @@ class Sticky_Video extends Widget_Base {
 		} else{ $lp = 'false'; }
 		?>
 		<div
+			id="eaelsv-player-<?php echo $this->get_id(); ?>"
 			data-plyr-provider="youtube" 
 			data-plyr-embed-id="<?php echo esc_attr($id); ?>"
 			data-plyr-config='{ <?php echo esc_attr($am); ?>, "loop" : {"active":<?php echo esc_attr($lp); ?>} }'
@@ -836,6 +837,7 @@ class Sticky_Video extends Widget_Base {
 		} else{ $lp = 'false'; }
 		?>
 		<div
+			id="eaelsv-player-<?php echo $this->get_id(); ?>"
 			data-plyr-provider="vimeo" 
 			data-plyr-embed-id="<?php echo esc_attr($id); ?>"
 			data-plyr-config='{ <?php echo esc_attr($am); ?>, "loop" : {"active":<?php echo esc_attr($lp); ?>} }'
@@ -875,7 +877,8 @@ class Sticky_Video extends Widget_Base {
 		} else{ $lp = 'false'; }
 		?>
 		<video
-			class="eaelsv-player-<?php echo rand(10,100); ?>" 
+			class="eaelsv-player"
+			id="eaelsv-player-<?php echo $this->get_id(); ?>"
 			playsinline controls
 			data-plyr-config='{ <?php echo esc_attr($am); ?>, "loop" : {"active":<?php echo esc_attr($lp); ?>} }'
 		>
