@@ -130,10 +130,20 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function has_cache_files($post_type = null, $post_id = null)
+    public function has_cache_files($post_id = null)
     {
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
+        if($post_id) {
+            $uid = get_post_meta($post_id, 'eael_uid', true);
+
+            if($uid === false) {
+                return false;
+            }
+        } else {
+            $uid = 'eael';
+        }
+
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $uid. '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $uid . '.min.js';
 
         if (is_readable($this->safe_path($css_path)) && is_readable($this->safe_path($js_path))) {
             return true;
@@ -187,6 +197,7 @@ trait Generator
         if (is_singular() || is_home() || is_archive()) {
             $queried_object = get_queried_object_id();
             $post_type = (is_singular() || is_home() ? 'post' : 'term');
+            $file_name = time() . str_rot13($post_type . $queried_object);
             $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
             // sort two arr for compare
@@ -198,22 +209,24 @@ trait Generator
 
                 // if not empty elements, regenerate cache files
                 if (!empty($elements)) {
-                    $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
+                    $this->generate_scripts($elements, $file_name);
+                    update_post_meta($queried_object, 'eael_uid', $file_name);
 
                     // load generated files - fallback
-                    $this->enqueue_protocols($queried_object, $post_type);
+                    // $this->enqueue_protocols($queried_object);
                 }
             }
 
             // if no cache files, generate new
-            if (!$this->has_cache_files($post_type, $queried_object)) {
-                $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
+            if (!$this->has_cache_files($queried_object)) {
+                $this->generate_scripts($elements, $file_name);
+                update_post_meta($queried_object, 'eael_uid', $file_name);
             }
 
             // if no elements, remove cache files
-            if (empty($elements)) {
-                $this->remove_files($post_type, $queried_object);
-            }
+            // if (empty($elements)) {
+            //     $this->remove_files($post_type, $queried_object);
+            // }
         }
     }
 }

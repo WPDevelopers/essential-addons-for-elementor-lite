@@ -134,7 +134,7 @@ trait Enqueue
                     return;
                 }
     
-                $this->enqueue_protocols($post_type, $queried_object);
+                $this->enqueue_protocols($queried_object);
             }
         }
     }
@@ -150,11 +150,13 @@ trait Enqueue
     }
 
     // rules how css will be enqueued on front-end
-    protected function enqueue_protocols($post_type, $queried_object)
+    protected function enqueue_protocols($queried_object)
     {
-        if ($this->has_cache_files($post_type, $queried_object)) {
-            $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
-            $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
+        $uid = get_post_meta($queried_object, 'eael_uid', true);
+
+        if ($this->has_cache_files($queried_object)) {
+            $css_file = EAEL_ASSET_URL . '/' . $uid . '.min.css';
+            $js_file = EAEL_ASSET_URL . '/' . $uid . '.min.js';
         } else {
             $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
             $js_file = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
@@ -176,7 +178,7 @@ trait Enqueue
         );
 
         // hook extended assets
-        do_action('eael/after_enqueue_scripts', $this->has_cache_files($post_type, $queried_object));
+        do_action('eael/after_enqueue_scripts', $this->has_cache_files($queried_object));
 
         // localize script
         $this->localize_objects = apply_filters('eael/localize_objects', [
