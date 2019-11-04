@@ -90,8 +90,3 @@ add_action('upgrader_process_complete', function ($upgrader_object, $options) {
     $migration = new \Essential_Addons_Elementor\Classes\Migration;
     $migration->plugin_upgrade_hook($upgrader_object, $options);
 }, 10, 2);
-
-add_action('template_redirect', function () {
-    $frontend = new \Elementor\Frontend;
-    $frontend->get_builder_content(get_the_ID(), true);
-});
