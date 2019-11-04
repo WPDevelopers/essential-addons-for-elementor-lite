@@ -39,8 +39,14 @@ trait Library
      */
     public function remove_files($post_type = null, $post_id = null)
     {
-        $css_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css');
-        $js_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js');
+        if($post_id && $post_type) {
+            $filename = get_metadata($post_type, $post_id, 'eael_uid', true);
+        } else {
+            $filename = 'eael';
+        }
+
+        $css_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $filename . '.min.css');
+        $js_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $filename . '.min.js');
 
         if (file_exists($css_path)) {
             unlink($css_path);
@@ -80,9 +86,9 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if(isset($_POST['pageID']) && 'post' === $_POST['actionType'] ) {
+        if (isset($_POST['pageID']) && 'post' === $_POST['actionType']) {
             $this->remove_files($_POST['actionType'], $_POST['pageID']);
-        }else {
+        } else {
             // clear cache files
             $this->empty_dir(EAEL_ASSET_PATH);
         }
