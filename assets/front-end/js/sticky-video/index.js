@@ -3,6 +3,7 @@ var eaelsvWidth = 0;
 var eaelsvHeight = 0;
 var eaelsvDomHeight = 0;
 var videoIsActive = 0;
+var eaelMakeItSticky = 0;
 
 jQuery(window).on("elementor/frontend/init", function () {
     elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
@@ -27,8 +28,8 @@ jQuery(window).on("elementor/frontend/init", function () {
             // If autoplay is enable
             if (('yes' === autoplay) && (overlay === 'no')) {
                 eaelsvDomHeight = GetDomElementHeight(element);
-                element.parent().attr('id', 'videobox');
-                
+                element.attr('id', 'videobox');
+                //alert( element.attr('class'));
                 if (videoIsActive == 0) {
                     videoIsActive = 1;
                 }
@@ -42,18 +43,18 @@ jQuery(window).on("elementor/frontend/init", function () {
         // Overlay Operation Started
         if (overlay === 'yes') {
             var ovrlyElmnt = element.prev();
-            element.find('div, video').attr('id', 'eaelsv-player-' + $scope.data('id'));
+            //element.find('div, video').attr('id', 'eaelsv-player-' + $scope.data('id'));
 
             $(ovrlyElmnt).on('click', function() {
                 $(this).css('display', 'none');
 
                 if (($(this).next().data('autoplay')) === 'yes') {
-                    var a1 = $(this).next().find('div, video').attr('id');
+                    //var a1 = $(this).next().find('div, video').attr('id');
                     //alert($(this).next().find('div').attr('class'));
                     //RunStickyPlayer(a1);
                     playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
-                    $(this).parent().attr('id', 'videobox');
+                    $(this).next().attr('id', 'videobox');
                     videoIsActive = 1;
                 }
             });
@@ -67,25 +68,17 @@ jQuery(window).on("elementor/frontend/init", function () {
         });
         */
         $('.eaelsv-sticky-player-close').on('click', function () {
-            element.parent().removeClass('out').addClass('in');
-            $('.eael-sticky-video-wrapper').removeAttr('style');
+            element.removeClass('out').addClass('in');
+            $('.eael-sticky-video-player2').removeAttr('style');
             videoIsActive = 0;
         });
-        /*
-        $('#videobox').on('inview', function(event, isInView) {
-            if (isInView) {
-                alert('Video is inview');
-            } else {
-                alert('Video is not inview');
-            }
-        });
-        */
     });
 });
 
-jQuery(document).scroll(function(){
+jQuery(window).scroll(function(){
     var scrollTop = jQuery(this).scrollTop();
-    if (scrollTop > eaelsvDomHeight) {
+    //alert(scrollTop +'=='+ eaelsvDomHeight);
+    if (scrollTop >= eaelsvDomHeight) {
         if (videoIsActive == 1) {
             jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
             jQuery('#videobox').removeClass('in').addClass('out');
@@ -94,7 +87,7 @@ jQuery(document).scroll(function(){
     } else {
         jQuery('.eaelsv-sticky-player-close').hide();
         jQuery('#videobox').removeClass('out').addClass('in');
-        jQuery('.eael-sticky-video-wrapper').removeAttr('style');
+        jQuery('.eael-sticky-video-player2').removeAttr('style');
     }
 });
 
@@ -105,31 +98,32 @@ function GetDomElementHeight(elem) {
 
 function PositionStickyPlayer(p, h, w) {
     if (p == 'top-left') {
-        jQuery('.eael-sticky-video-wrapper.out').css('top', '40px');
-        jQuery('.eael-sticky-video-wrapper.out').css('left', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
     }
     if (p == 'top-right') {
-        jQuery('.eael-sticky-video-wrapper.out').css('top', '40px');
-        jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
     }
     if (p == 'bottom-right') {
-        jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-wrapper.out').css('right', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
     }
     if (p == 'bottom-left') {
-        jQuery('.eael-sticky-video-wrapper.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-wrapper.out').css('left', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
     }
-    jQuery('.eael-sticky-video-wrapper.out').css('width', w + 'px');
-    jQuery('.eael-sticky-video-wrapper.out').css('height', h + 'px');
+    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
+    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
 }
 
 function PlayerPlay(a, b) {
     a.on('play', function (event) {
+        //alert('Initial Play');
         eaelsvDomHeight = GetDomElementHeight(b);
-        jQuery('.eael-sticky-video-wrapper').removeAttr('id');
-        jQuery('.eael-sticky-video-wrapper').removeClass('out');
-        b.parent().attr('id', 'videobox');
+        jQuery('.eael-sticky-video-player2').removeAttr('id');
+        jQuery('.eael-sticky-video-player2').removeClass('out');
+        b.attr('id', 'videobox');
         
         videoIsActive = 1;
         eaelsvPosition  = b.data('position');

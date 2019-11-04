@@ -778,8 +778,9 @@ class Sticky_Video extends Widget_Base {
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'esvp_overlay_wrapper2' ); ?>>
 			<?php echo $eaelsvPlayer; ?>
+			<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
 		</div>
-		<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
+		
 		</div>
 		<?php
 	}
