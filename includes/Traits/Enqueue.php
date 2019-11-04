@@ -133,7 +133,7 @@ trait Enqueue
 
                 $this->generate_frontend_scripts($queried_object, $post_type);
 
-                $uid = get_post_meta($queried_object, 'eael_uid', true);
+                $uid = get_metadata($post_type, $queried_object, 'eael_uid', true);
 
                 if ($this->has_cache_files($queried_object, $post_type)) {
                     $css_file = EAEL_ASSET_URL . '/' . $uid . '.min.css';

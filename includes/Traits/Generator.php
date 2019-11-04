@@ -5,9 +5,9 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \ReflectionClass;
-use \Elementor\Frontend;
 use \Elementor\Core\Settings\Manager as Settings_Manager;
+use \Elementor\Frontend;
+use \ReflectionClass;
 
 trait Generator
 {
@@ -19,20 +19,20 @@ trait Generator
      */
     public function before_page_render()
     {
-        if(is_singular() || is_home() || is_archive()) {
+        if (is_singular() || is_home() || is_archive()) {
             $queried_object = get_queried_object_id();
-    
+
             // hit page
             $frontend = new Frontend;
             $frontend->get_builder_content($queried_object, true);
-    
+
             // get elementor page settings
             $page_settings_manager = Settings_Manager::get_settings_managers('page');
             $page_settings_model = $page_settings_manager->get_model($queried_object);
-    
+
             // get global settings
             $global_settings = get_option('eael_global_settings');
-            
+
             // add global extension in transient
             if ($this->get_settings('eael-reading-progress') && ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled']))) {
                 add_filter('eael/section/after_render', function ($extensions) {
@@ -236,14 +236,26 @@ trait Generator
 
             // if not empty elements, regenerate cache files
             if (!empty($elements)) {
+                // remove old cache
+                $this->remove_files($post_type, $queried_object);
+
+                // update new meta
                 update_metadata($post_type, $queried_object, 'eael_uid', $file_name);
+
+                // generate new cache
                 $this->generate_scripts($elements, $file_name);
             }
         }
 
         // if no cache files, generate new
         if (!$this->has_cache_files($queried_object, $post_type)) {
+            // remove old cache
+            $this->remove_files($post_type, $queried_object);
+
+            // update new meta
             update_metadata($post_type, $queried_object, 'eael_uid', $file_name);
+
+            // generate new cache
             $this->generate_scripts($elements, $file_name);
         }
 
