@@ -1,3 +1,274 @@
+/*!
+ * Countdown v0.1.0
+ * https://github.com/fengyuanchen/countdown
+ *
+ * Copyright 2014 Fengyuan Chen
+ * Released under the MIT license
+ */
+
+(function (factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD. Register as anonymous module.
+        define(["jquery"], factory);
+    } else {
+        // Browser globals.
+        factory(jQuery);
+    }
+})(function ($) {
+
+    "use strict";
+
+    var Countdown = function (element, options) {
+            this.$element = $(element);
+            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
+            this.init();
+        };
+
+    Countdown.prototype = {
+        constructor: Countdown,
+
+        init: function () {
+            var content = this.$element.html(),
+                date = new Date(this.defaults.date || content);
+
+            if (date.getTime()) {
+                this.content = content;
+                this.date = date;
+                this.find();
+
+                if (this.defaults.autoStart) {
+                    this.start();
+                }
+            }
+        },
+
+        find: function () {
+            var $element = this.$element;
+
+            this.$days = $element.find("[data-days]");
+            this.$hours = $element.find("[data-hours]");
+            this.$minutes = $element.find("[data-minutes]");
+            this.$seconds = $element.find("[data-seconds]");
+
+            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
+                this.found = true;
+            }
+        },
+
+        reset: function () {
+            if (this.found) {
+                this.output("days");
+                this.output("hours");
+                this.output("minutes");
+                this.output("seconds");
+            } else {
+                this.output();
+            }
+        },
+
+        ready: function () {
+            var date = this.date,
+                decisecond = 100,
+                second = 1000,
+                minute = 60000,
+                hour = 3600000,
+                day = 86400000,
+                remainder = {},
+                diff;
+
+            if (!date) {
+                return false;
+            }
+
+            diff = date.getTime() - (new Date()).getTime();
+
+            if (diff <= 0) {
+                this.end();
+                return false;
+            }
+
+            remainder.days = diff;
+            remainder.hours = remainder.days % day;
+            remainder.minutes = remainder.hours % hour;
+            remainder.seconds = remainder.minutes % minute;
+            remainder.milliseconds = remainder.seconds % second;
+
+            this.days = Math.floor(remainder.days / day);
+            this.hours = Math.floor(remainder.hours / hour);
+            this.minutes = Math.floor(remainder.minutes / minute);
+            this.seconds = Math.floor(remainder.seconds / second);
+            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
+
+            return true;
+        },
+
+        start: function () {
+            if (!this.active && this.ready()) {
+                this.active = true;
+                this.reset();
+                this.autoUpdate = this.defaults.fast ?
+                    setInterval($.proxy(this.fastUpdate, this), 100) :
+                    setInterval($.proxy(this.update, this), 1000);
+            }
+        },
+
+        stop: function () {
+            if (this.active) {
+                this.active = false;
+                clearInterval(this.autoUpdate);
+            }
+        },
+
+        end: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.days = 0;
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.deciseconds = 0;
+            this.reset();
+            this.defaults.end();
+        },
+
+        destroy: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.$days = null;
+            this.$hours = null;
+            this.$minutes = null;
+            this.$seconds = null;
+
+            this.$element.empty().html(this.content);
+            this.$element.removeData("countdown");
+        },
+
+        fastUpdate: function () {
+            if (--this.deciseconds >= 0) {
+                this.output("deciseconds");
+            } else {
+                this.deciseconds = 9;
+                this.update();
+            }
+        },
+
+        update: function () {
+            if (--this.seconds >= 0) {
+                this.output("seconds");
+            } else {
+                this.seconds = 59;
+
+                if (--this.minutes >= 0) {
+                    this.output("minutes");
+                } else {
+                    this.minutes = 59;
+
+                    if (--this.hours >= 0) {
+                        this.output("hours");
+                    } else {
+                        this.hours = 23;
+
+                        if (--this.days >= 0) {
+                            this.output("days");
+                        } else {
+                            this.end();
+                        }
+                    }
+                }
+            }
+        },
+
+        output: function (type) {
+            if (!this.found) {
+                this.$element.empty().html(this.template());
+                return;
+            }
+
+            switch (type) {
+                case "deciseconds":
+                    this.$seconds.text(this.getSecondsText());
+                    break;
+
+                case "seconds":
+                    this.$seconds.text(this.seconds);
+                    break;
+
+                case "minutes":
+                    this.$minutes.text(this.minutes);
+                    break;
+
+                case "hours":
+                    this.$hours.text(this.hours);
+                    break;
+
+                case "days":
+                    this.$days.text(this.days);
+                    break;
+
+                // No default
+            }
+        },
+
+        template: function () {
+            return this.defaults.text
+                    .replace("%s", this.days)
+                    .replace("%s", this.hours)
+                    .replace("%s", this.minutes)
+                    .replace("%s", this.getSecondsText());
+        },
+
+        getSecondsText: function () {
+            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+        }
+    };
+
+    // Default settings
+    Countdown.defaults = {
+        autoStart: true,
+        date: null,
+        fast: false,
+        end: $.noop,
+        text: "%s days, %s hours, %s minutes, %s seconds"
+    };
+
+    // Set default settings
+    Countdown.setDefaults = function (options) {
+        $.extend(Countdown.defaults, options);
+    };
+
+    // Register as jQuery plugin
+    $.fn.countdown = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data("countdown");
+
+            if (!data) {
+                $this.data("countdown", (data = new Countdown(this, options)));
+            }
+
+            if (typeof options === "string" && $.isFunction(data[options])) {
+                data[options]();
+            }
+        });
+    };
+
+    $.fn.countdown.constructor = Countdown;
+    $.fn.countdown.setDefaults = Countdown.setDefaults;
+
+    $(function () {
+        $("[countdown]").countdown();
+    });
+
+});
+
 !function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
 !function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
 
@@ -1124,277 +1395,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-/*!
- * Countdown v0.1.0
- * https://github.com/fengyuanchen/countdown
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
-(function (factory) {
-    if (typeof define === "function" && define.amd) {
-        // AMD. Register as anonymous module.
-        define(["jquery"], factory);
-    } else {
-        // Browser globals.
-        factory(jQuery);
-    }
-})(function ($) {
-
-    "use strict";
-
-    var Countdown = function (element, options) {
-            this.$element = $(element);
-            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
-            this.init();
-        };
-
-    Countdown.prototype = {
-        constructor: Countdown,
-
-        init: function () {
-            var content = this.$element.html(),
-                date = new Date(this.defaults.date || content);
-
-            if (date.getTime()) {
-                this.content = content;
-                this.date = date;
-                this.find();
-
-                if (this.defaults.autoStart) {
-                    this.start();
-                }
-            }
-        },
-
-        find: function () {
-            var $element = this.$element;
-
-            this.$days = $element.find("[data-days]");
-            this.$hours = $element.find("[data-hours]");
-            this.$minutes = $element.find("[data-minutes]");
-            this.$seconds = $element.find("[data-seconds]");
-
-            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
-                this.found = true;
-            }
-        },
-
-        reset: function () {
-            if (this.found) {
-                this.output("days");
-                this.output("hours");
-                this.output("minutes");
-                this.output("seconds");
-            } else {
-                this.output();
-            }
-        },
-
-        ready: function () {
-            var date = this.date,
-                decisecond = 100,
-                second = 1000,
-                minute = 60000,
-                hour = 3600000,
-                day = 86400000,
-                remainder = {},
-                diff;
-
-            if (!date) {
-                return false;
-            }
-
-            diff = date.getTime() - (new Date()).getTime();
-
-            if (diff <= 0) {
-                this.end();
-                return false;
-            }
-
-            remainder.days = diff;
-            remainder.hours = remainder.days % day;
-            remainder.minutes = remainder.hours % hour;
-            remainder.seconds = remainder.minutes % minute;
-            remainder.milliseconds = remainder.seconds % second;
-
-            this.days = Math.floor(remainder.days / day);
-            this.hours = Math.floor(remainder.hours / hour);
-            this.minutes = Math.floor(remainder.minutes / minute);
-            this.seconds = Math.floor(remainder.seconds / second);
-            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
-
-            return true;
-        },
-
-        start: function () {
-            if (!this.active && this.ready()) {
-                this.active = true;
-                this.reset();
-                this.autoUpdate = this.defaults.fast ?
-                    setInterval($.proxy(this.fastUpdate, this), 100) :
-                    setInterval($.proxy(this.update, this), 1000);
-            }
-        },
-
-        stop: function () {
-            if (this.active) {
-                this.active = false;
-                clearInterval(this.autoUpdate);
-            }
-        },
-
-        end: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.days = 0;
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.deciseconds = 0;
-            this.reset();
-            this.defaults.end();
-        },
-
-        destroy: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.$days = null;
-            this.$hours = null;
-            this.$minutes = null;
-            this.$seconds = null;
-
-            this.$element.empty().html(this.content);
-            this.$element.removeData("countdown");
-        },
-
-        fastUpdate: function () {
-            if (--this.deciseconds >= 0) {
-                this.output("deciseconds");
-            } else {
-                this.deciseconds = 9;
-                this.update();
-            }
-        },
-
-        update: function () {
-            if (--this.seconds >= 0) {
-                this.output("seconds");
-            } else {
-                this.seconds = 59;
-
-                if (--this.minutes >= 0) {
-                    this.output("minutes");
-                } else {
-                    this.minutes = 59;
-
-                    if (--this.hours >= 0) {
-                        this.output("hours");
-                    } else {
-                        this.hours = 23;
-
-                        if (--this.days >= 0) {
-                            this.output("days");
-                        } else {
-                            this.end();
-                        }
-                    }
-                }
-            }
-        },
-
-        output: function (type) {
-            if (!this.found) {
-                this.$element.empty().html(this.template());
-                return;
-            }
-
-            switch (type) {
-                case "deciseconds":
-                    this.$seconds.text(this.getSecondsText());
-                    break;
-
-                case "seconds":
-                    this.$seconds.text(this.seconds);
-                    break;
-
-                case "minutes":
-                    this.$minutes.text(this.minutes);
-                    break;
-
-                case "hours":
-                    this.$hours.text(this.hours);
-                    break;
-
-                case "days":
-                    this.$days.text(this.days);
-                    break;
-
-                // No default
-            }
-        },
-
-        template: function () {
-            return this.defaults.text
-                    .replace("%s", this.days)
-                    .replace("%s", this.hours)
-                    .replace("%s", this.minutes)
-                    .replace("%s", this.getSecondsText());
-        },
-
-        getSecondsText: function () {
-            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
-        }
-    };
-
-    // Default settings
-    Countdown.defaults = {
-        autoStart: true,
-        date: null,
-        fast: false,
-        end: $.noop,
-        text: "%s days, %s hours, %s minutes, %s seconds"
-    };
-
-    // Set default settings
-    Countdown.setDefaults = function (options) {
-        $.extend(Countdown.defaults, options);
-    };
-
-    // Register as jQuery plugin
-    $.fn.countdown = function (options) {
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data("countdown");
-
-            if (!data) {
-                $this.data("countdown", (data = new Countdown(this, options)));
-            }
-
-            if (typeof options === "string" && $.isFunction(data[options])) {
-                data[options]();
-            }
-        });
-    };
-
-    $.fn.countdown.constructor = Countdown;
-    $.fn.countdown.setDefaults = Countdown.setDefaults;
-
-    $(function () {
-        $("[countdown]").countdown();
-    });
-
-});
-
 /*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
@@ -5599,53 +5599,6 @@ var trim = String.prototype.trim ?
 }));
 
 
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0)'
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -7507,6 +7460,53 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'clip-path': 'inset(0)'
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -20973,192 +20973,6 @@ return $;
     });
 })(jQuery);
 
-var ContentTicker = function($scope, $) {
-    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-        $items =
-            $contentTicker.data("items") !== undefined
-                ? $contentTicker.data("items")
-                : 1,
-        $items_tablet =
-            $contentTicker.data("items-tablet") !== undefined
-                ? $contentTicker.data("items-tablet")
-                : 1,
-        $items_mobile =
-            $contentTicker.data("items-mobile") !== undefined
-                ? $contentTicker.data("items-mobile")
-                : 1,
-        $margin =
-            $contentTicker.data("margin") !== undefined
-                ? $contentTicker.data("margin")
-                : 10,
-        $margin_tablet =
-            $contentTicker.data("margin-tablet") !== undefined
-                ? $contentTicker.data("margin-tablet")
-                : 10,
-        $margin_mobile =
-            $contentTicker.data("margin-mobile") !== undefined
-                ? $contentTicker.data("margin-mobile")
-                : 10,
-        $effect =
-            $contentTicker.data("effect") !== undefined
-                ? $contentTicker.data("effect")
-                : "slide",
-        $speed =
-            $contentTicker.data("speed") !== undefined
-                ? $contentTicker.data("speed")
-                : 400,
-        $autoplay =
-            $contentTicker.data("autoplay") !== undefined
-                ? $contentTicker.data("autoplay")
-                : 5000,
-        $loop =
-            $contentTicker.data("loop") !== undefined
-                ? $contentTicker.data("loop")
-                : false,
-        $grab_cursor =
-            $contentTicker.data("grab-cursor") !== undefined
-                ? $contentTicker.data("grab-cursor")
-                : false,
-        $pagination =
-            $contentTicker.data("pagination") !== undefined
-                ? $contentTicker.data("pagination")
-                : ".swiper-pagination",
-        $arrow_next =
-            $contentTicker.data("arrow-next") !== undefined
-                ? $contentTicker.data("arrow-next")
-                : ".swiper-button-next",
-        $arrow_prev =
-            $contentTicker.data("arrow-prev") !== undefined
-                ? $contentTicker.data("arrow-prev")
-                : ".swiper-button-prev",
-        $pause_on_hover =
-            $contentTicker.data("pause-on-hover") !== undefined
-                ? $contentTicker.data("pause-on-hover")
-                : "",
-        $contentTickerOptions = {
-            direction: "horizontal",
-            loop: $loop,
-            speed: $speed,
-            effect: $effect,
-            slidesPerView: $items,
-            spaceBetween: $margin,
-            grabCursor: $grab_cursor,
-            paginationClickable: true,
-            autoHeight: true,
-            autoplay: {
-                delay: $autoplay
-            },
-            pagination: {
-                el: $pagination,
-                clickable: true
-            },
-            navigation: {
-                nextEl: $arrow_next,
-                prevEl: $arrow_prev
-            },
-            breakpoints: {
-                // when window width is <= 480px
-                480: {
-                    slidesPerView: $items_mobile,
-                    spaceBetween: $margin_mobile
-                },
-                // when window width is <= 640px
-                768: {
-                    slidesPerView: $items_tablet,
-                    spaceBetween: $margin_tablet
-                }
-            }
-        };
-
-    var $contentTickerSlider = new Swiper(
-        $contentTicker,
-        $contentTickerOptions
-    );
-    if ($autoplay === 0) {
-        $contentTickerSlider.autoplay.stop();
-    }
-    if ($pause_on_hover && $autoplay !== 0) {
-        $contentTicker.on("mouseenter", function() {
-            $contentTickerSlider.autoplay.stop();
-        });
-        $contentTicker.on("mouseleave", function() {
-            $contentTickerSlider.autoplay.start();
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-content-ticker.default",
-        ContentTicker
-    );
-});
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var AdvAccordionHandler = function($scope, $) {
     var $advanceAccordion = $scope.find(".eael-adv-accordion"),
         $accordionHeader = $scope.find(".eael-accordion-header"),
@@ -21331,6 +21145,125 @@ jQuery(window).on("elementor/frontend/init", function() {
         dataTable
     );
 });
+var ContentTicker = function($scope, $) {
+    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+        $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
+        $items_tablet =
+            $contentTicker.data("items-tablet") !== undefined
+                ? $contentTicker.data("items-tablet")
+                : 1,
+        $items_mobile =
+            $contentTicker.data("items-mobile") !== undefined
+                ? $contentTicker.data("items-mobile")
+                : 1,
+        $margin =
+            $contentTicker.data("margin") !== undefined
+                ? $contentTicker.data("margin")
+                : 10,
+        $margin_tablet =
+            $contentTicker.data("margin-tablet") !== undefined
+                ? $contentTicker.data("margin-tablet")
+                : 10,
+        $margin_mobile =
+            $contentTicker.data("margin-mobile") !== undefined
+                ? $contentTicker.data("margin-mobile")
+                : 10,
+        $effect =
+            $contentTicker.data("effect") !== undefined
+                ? $contentTicker.data("effect")
+                : "slide",
+        $speed =
+            $contentTicker.data("speed") !== undefined
+                ? $contentTicker.data("speed")
+                : 400,
+        $autoplay =
+            $contentTicker.data("autoplay") !== undefined
+                ? $contentTicker.data("autoplay")
+                : 5000,
+        $loop =
+            $contentTicker.data("loop") !== undefined
+                ? $contentTicker.data("loop")
+                : false,
+        $grab_cursor =
+            $contentTicker.data("grab-cursor") !== undefined
+                ? $contentTicker.data("grab-cursor")
+                : false,
+        $pagination =
+            $contentTicker.data("pagination") !== undefined
+                ? $contentTicker.data("pagination")
+                : ".swiper-pagination",
+        $arrow_next =
+            $contentTicker.data("arrow-next") !== undefined
+                ? $contentTicker.data("arrow-next")
+                : ".swiper-button-next",
+        $arrow_prev =
+            $contentTicker.data("arrow-prev") !== undefined
+                ? $contentTicker.data("arrow-prev")
+                : ".swiper-button-prev",
+        $pause_on_hover =
+            $contentTicker.data("pause-on-hover") !== undefined
+                ? $contentTicker.data("pause-on-hover")
+                : "",
+        $contentTickerOptions = {
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
+                },
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
+                }
+            }
+        };
+
+    var $contentTickerSlider = new Swiper(
+        $contentTicker,
+        $contentTickerOptions
+    );
+    if ($autoplay === 0) {
+        $contentTickerSlider.autoplay.stop();
+    }
+    if ($pause_on_hover && $autoplay !== 0) {
+        $contentTicker.on("mouseenter", function() {
+            $contentTickerSlider.autoplay.stop();
+        });
+        $contentTicker.on("mouseleave", function() {
+            $contentTickerSlider.autoplay.start();
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-content-ticker.default",
+        ContentTicker
+    );
+});
 var FancyText = function($scope, $) {
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
         $id =
@@ -21399,60 +21332,70 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-(function($) {
-    window.isEditMode = false;
-
-    $(window).on("elementor/frontend/init", function() {
-        window.isEditMode = elementorFrontend.isEditMode();
-    });
-})(jQuery);
-
-var ImageAccordion = function($scope, $) {
-    var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
-        $id =
-            $imageAccordion.data("img-accordion-id") !== undefined
-                ? $imageAccordion.data("img-accordion-id")
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
                 : "",
-        $type =
-            $imageAccordion.data("img-accordion-type") !== undefined
-                ? $imageAccordion.data("img-accordion-type")
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
                 : "";
 
-    if ("on-click" === $type) {
-        $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
-            if ($(this).hasClass("overlay-active") == false) {
-                e.preventDefault();
-            }
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
 
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .addClass("overlay-active");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay-inner")
-                .addClass("overlay-inner-show");
-            $(this).css("flex", "3");
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
         });
-        $("#eael-img-accordion-" + $id + " a").on("blur", function(e) {
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .removeClass("overlay-active");
-        });
-    }
+    });
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-image-accordion.default",
-        ImageAccordion
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
     );
 });
 
@@ -21584,6 +21527,63 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-filterable-gallery.default",
         filterableGalleryHandler
+    );
+});
+
+(function($) {
+    window.isEditMode = false;
+
+    $(window).on("elementor/frontend/init", function() {
+        window.isEditMode = elementorFrontend.isEditMode();
+    });
+})(jQuery);
+
+var ImageAccordion = function($scope, $) {
+    var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
+        $id =
+            $imageAccordion.data("img-accordion-id") !== undefined
+                ? $imageAccordion.data("img-accordion-id")
+                : "",
+        $type =
+            $imageAccordion.data("img-accordion-type") !== undefined
+                ? $imageAccordion.data("img-accordion-type")
+                : "";
+
+    if ("on-click" === $type) {
+        $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
+            if ($(this).hasClass("overlay-active") == false) {
+                e.preventDefault();
+            }
+
+            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $(this)
+                .find(".overlay")
+                .parent("a")
+                .addClass("overlay-active");
+            $("#eael-img-accordion-" + $id + " a")
+                .find(".overlay-inner")
+                .removeClass("overlay-inner-show");
+            $(this)
+                .find(".overlay-inner")
+                .addClass("overlay-inner-show");
+            $(this).css("flex", "3");
+        });
+        $("#eael-img-accordion-" + $id + " a").on("blur", function(e) {
+            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $("#eael-img-accordion-" + $id + " a")
+                .find(".overlay-inner")
+                .removeClass("overlay-inner-show");
+            $(this)
+                .find(".overlay")
+                .parent("a")
+                .removeClass("overlay-active");
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-image-accordion.default",
+        ImageAccordion
     );
 });
 
@@ -21744,6 +21744,37 @@ jQuery(document).ready(function() {
     }
 });
 
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
+    );
+});
+
 var eaelsvPosition = "";
 var eaelsvWidth = 0;
 var eaelsvHeight = 0;
@@ -21795,7 +21826,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 
                 if (($(this).next().data('autoplay')) === 'yes') {
                     var a1 = $(this).next().find('div, video').attr('id');
-                    RunStickyPlayer(a1);
+                    //alert($(this).next().find('div').attr('class'));
+                    //RunStickyPlayer(a1);
+                    playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
                     $(this).parent().attr('id', 'videobox');
                     videoIsActive = 1;
@@ -21815,11 +21848,21 @@ jQuery(window).on("elementor/frontend/init", function () {
             $('.eael-sticky-video-wrapper').removeAttr('style');
             videoIsActive = 0;
         });
+        /*
+        $('#videobox').on('inview', function(event, isInView) {
+            if (isInView) {
+                alert('Video is inview');
+            } else {
+                alert('Video is not inview');
+            }
+        });
+        */
     });
 });
 
-jQuery(window).scroll(function () {
-    if (jQuery(window).scrollTop() > eaelsvDomHeight) {
+jQuery(document).scroll(function(){
+    var scrollTop = jQuery(this).scrollTop();
+    if (scrollTop > eaelsvDomHeight) {
         if (videoIsActive == 1) {
             jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
             jQuery('#videobox').removeClass('in').addClass('out');
@@ -21876,33 +21919,3 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
-});
