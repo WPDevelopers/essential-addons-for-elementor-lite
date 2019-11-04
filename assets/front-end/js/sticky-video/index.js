@@ -49,7 +49,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 
                 if (($(this).next().data('autoplay')) === 'yes') {
                     var a1 = $(this).next().find('div, video').attr('id');
-                    RunStickyPlayer(a1);
+                    //alert($(this).next().find('div').attr('class'));
+                    //RunStickyPlayer(a1);
+                    playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
                     $(this).parent().attr('id', 'videobox');
                     videoIsActive = 1;
@@ -69,11 +71,21 @@ jQuery(window).on("elementor/frontend/init", function () {
             $('.eael-sticky-video-wrapper').removeAttr('style');
             videoIsActive = 0;
         });
+        /*
+        $('#videobox').on('inview', function(event, isInView) {
+            if (isInView) {
+                alert('Video is inview');
+            } else {
+                alert('Video is not inview');
+            }
+        });
+        */
     });
 });
 
-jQuery(window).scroll(function () {
-    if (jQuery(window).scrollTop() > eaelsvDomHeight) {
+jQuery(document).scroll(function(){
+    var scrollTop = jQuery(this).scrollTop();
+    if (scrollTop > eaelsvDomHeight) {
         if (videoIsActive == 1) {
             jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
             jQuery('#videobox').removeClass('in').addClass('out');
