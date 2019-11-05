@@ -76,8 +76,26 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 jQuery(window).scroll(function(){
+    var scrollTop = jQuery(window).scrollTop();
+    var scrollBottom = jQuery(document).height() - scrollTop;
+    //alert(scrollBottom);
+    if( scrollBottom > jQuery(window).height() + 400 ) {
+        if (scrollTop >= eaelsvDomHeight + 100) {
+            if (videoIsActive == 1) {
+                jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
+                jQuery('#videobox').removeClass('in').addClass('out');
+                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+            }
+        } else {
+            jQuery('.eaelsv-sticky-player-close').hide();
+            jQuery('#videobox').removeClass('out').addClass('in');
+            jQuery('.eael-sticky-video-player2').removeAttr('style');
+        }
+    }
+});
+/*
+jQuery(window).scroll(function(){
     var scrollTop = jQuery(this).scrollTop();
-    //alert(scrollTop +'=='+ eaelsvDomHeight);
     if (scrollTop >= eaelsvDomHeight) {
         if (videoIsActive == 1) {
             jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
@@ -90,6 +108,7 @@ jQuery(window).scroll(function(){
         jQuery('.eael-sticky-video-player2').removeAttr('style');
     }
 });
+*/
 
 function GetDomElementHeight(elem) {
     var hght = (jQuery(elem).parent().offset().top + jQuery(elem).parent().height());
