@@ -7460,53 +7460,6 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0)'
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -11775,6 +11728,53 @@ return $;
 
 }));
 
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'clip-path': 'inset(0)'
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 (function ($) {
     "use strict";
 
@@ -11843,6 +11843,103 @@ return $;
     });
 })(jQuery);
 
+var AdvanceTabHandler = function($scope, $) {
+    var $currentTab = $scope.find(".eael-advance-tabs"),
+        $currentTabId = "#" + $currentTab.attr("id").toString();
+
+    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-nav > ul li")
+                .removeClass("active")
+                .addClass("inactive");
+            $(this).removeClass("inactive");
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-content div").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-content > div").removeClass(
+                "active"
+            );
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
+        var currentTabIndex = $(this).index();
+        var tabsContainer = $(this).closest(".eael-advance-tabs");
+
+        var tabsNav = $(tabsContainer)
+            .children(".eael-tabs-nav")
+            .children("ul")
+            .children("li");
+        var tabsContent = $(tabsContainer)
+            .children(".eael-tabs-content")
+            .children("div");
+
+        $(this)
+            .parent("li")
+            .addClass("active");
+
+        $(tabsNav)
+            .removeClass("active active-default")
+            .addClass("inactive");
+        $(this)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent)
+            .removeClass("active")
+            .addClass("inactive");
+        $(tabsContent)
+            .eq(currentTabIndex)
+            .addClass("active")
+            .removeClass("inactive");
+
+        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
+            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
+            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+
+        if($postGridGallery.length) {
+            $postGridGallery.isotope();
+        }
+
+        if($twitterfeedGallery.length) {
+            $twitterfeedGallery.isotope("layout");
+        }
+        
+        if($filterGallery.length) {
+            $filterGallery.isotope("layout");
+        }
+        
+        if($instaGallery.length) {
+            $instaGallery.isotope("layout");
+        }
+
+        $(tabsContent).each(function(index) {
+            $(this).removeClass("active-default");
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
+
 var AdvAccordionHandler = function($scope, $) {
     var $advanceAccordion = $scope.find(".eael-adv-accordion"),
         $accordionHeader = $scope.find(".eael-accordion-header"),
@@ -11904,78 +12001,70 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var AdvanceTabHandler = function($scope, $) {
-    var $currentTab = $scope.find(".eael-advance-tabs"),
-        $currentTabId = "#" + $currentTab.attr("id").toString();
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
 
-    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-nav > ul li")
-                .removeClass("active")
-                .addClass("inactive");
-            $(this).removeClass("inactive");
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
             }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-content div").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-content > div").removeClass(
-                "active"
-            );
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
-        var currentTabIndex = $(this).index();
-        var tabsContainer = $(this).closest(".eael-advance-tabs");
-        var tabsNav = $(tabsContainer)
-            .children(".eael-tabs-nav")
-            .children("ul")
-            .children("li");
-        var tabsContent = $(tabsContainer)
-            .children(".eael-tabs-content")
-            .children("div");
-
-        $(this)
-            .parent("li")
-            .addClass("active");
-
-        $(tabsNav)
-            .removeClass("active active-default")
-            .addClass("inactive");
-        $(this)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent)
-            .removeClass("active")
-            .addClass("inactive");
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent).each(function(index) {
-            $(this).removeClass("active-default");
         });
     });
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-tabs.default",
-        AdvanceTabHandler
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
     );
 });
 
@@ -12098,73 +12187,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
     var $_this = $scope.find(".eael-data-table-wrap"),
         $id = $_this.data("table_id");
@@ -12201,72 +12223,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         dataTable
     );
 });
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
-});
-
 var FancyText = function($scope, $) {
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
         $id =
@@ -12332,6 +12288,72 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-fancy-text.default",
         FancyText
+    );
+});
+
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
     );
 });
 
