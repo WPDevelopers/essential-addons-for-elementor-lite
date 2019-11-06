@@ -59,14 +59,12 @@ jQuery(window).on("elementor/frontend/init", function () {
                 }
             });
         }
-        /*
         playerAbc.on('pause', function (event) {
-            alert('Paused');
+            //alert('Paused');
             if (videoIsActive == 1) {
                 videoIsActive = 0;
             }
         });
-        */
         $('.eaelsv-sticky-player-close').on('click', function () {
             element.removeClass('out').addClass('in');
             $('.eael-sticky-video-player2').removeAttr('style');
