@@ -24,7 +24,7 @@ trait Generator
 
             // hit page
             $frontend = new Frontend;
-            $frontend->get_builder_content($queried_object, true);
+            $frontend->get_builder_content($queried_object);
 
             // get elementor page settings
             $page_settings_manager = Settings_Manager::get_settings_managers('page');
