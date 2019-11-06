@@ -265,7 +265,7 @@ trait Admin
             'meta'  => [
                 'class' => 'ea-all-cache-clear'
             ],
-            'title' => 'Clear All Cache'
+            'title' => 'Regenerate All Assets'
         ]);
 
         $wp_admin_bar->add_node([
@@ -276,7 +276,7 @@ trait Admin
                 'class' => 'ea-clear-cache',
                 'html'   => '<div class="ea-clear-cache-id" data-pageid="'.get_queried_object_id().'">'
             ],
-            'title' => 'Clear Page Cache'
+            'title' => 'Regenerate Page Assets'
         ]);
 
         

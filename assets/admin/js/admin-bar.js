@@ -19,12 +19,12 @@
                 },
                 beforeSend: function() {
                     text.text(
-                        'Clearing...'
+                        'Generating...'
                     );
                 },
                 success: function(response) {
                     setTimeout(function() {
-                        text.text('Clear Page Cache');
+                        text.text('Regenerate Page Assets');
                         window.location.reload();
                     }, 1000);
                 },
@@ -52,12 +52,12 @@
                 },
                 beforeSend: function() {
                     text.text(
-                        'Clearing...'
+                        'Generating...'
                     );
                 },
                 success: function(response) {
                     setTimeout(function() {
-                        text.text('Clear All Cache');
+                        text.text('Regenerate All Assets');
                         window.location.reload();
                     }, 1000);
                 },
