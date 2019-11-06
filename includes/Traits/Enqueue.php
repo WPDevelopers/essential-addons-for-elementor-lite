@@ -132,10 +132,9 @@ trait Enqueue
                 $post_type = (is_singular() || is_home() ? 'post' : 'term');
 
                 $this->generate_frontend_scripts($queried_object, $post_type);
-
-                $uid = get_metadata($post_type, $queried_object, 'eael_uid', true);
-
+                
                 if ($this->has_cache_files($queried_object, $post_type)) {
+                    $uid = get_metadata($post_type, $queried_object, 'eael_uid', true);
                     $css_file = EAEL_ASSET_URL . '/' . $uid . '.min.css';
                     $js_file = EAEL_ASSET_URL . '/' . $uid . '.min.js';
                 } else {
