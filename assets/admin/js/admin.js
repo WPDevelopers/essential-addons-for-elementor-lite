@@ -83,7 +83,7 @@
         }
     });
 
-    // Clear cache files
+    // Regenerate Assets
     $('#eael-regenerate-files').on('click', function(e) {
         e.preventDefault();
         var _this = $(this);
@@ -102,11 +102,11 @@
             },
             success: function(response) {
                 setTimeout(function() {
-                    _this.html('Clear Cache');
+                    _this.html('Regenerate Assets');
 
                     Swal.fire({
                         type: 'success',
-                        title: 'Cache Cleared!',
+                        title: 'Assets Regenerated!',
                         showConfirmButton: false,
                         timer: 2000
                     });
@@ -167,11 +167,11 @@
         var target = $(this).data('target');
         var val = $(target).val();
 
-        if(Object.keys(options).length > 0) {
+        if (Object.keys(options).length > 0) {
             prepareOptions['all'] = 'All';
 
-            for(var index in options) {
-                prepareOptions[index] = options[index].toUpperCase()
+            for (var index in options) {
+                prepareOptions[index] = options[index].toUpperCase();
             }
         }
 
