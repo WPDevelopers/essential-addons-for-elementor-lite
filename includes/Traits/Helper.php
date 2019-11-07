@@ -332,7 +332,7 @@ trait Helper
                     'exclude' => ['custom'],
                     'default' => 'medium',
                     'condition' => [
-                        'eael_show_image' => '1',
+                        'eael_show_image' => 'yes',
                     ],
                 ]
             );
