@@ -104,8 +104,8 @@ class Bootstrap
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Generator
+        add_action('wp', [$this, 'before_page_render']);
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('wp_print_footer_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));

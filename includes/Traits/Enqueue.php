@@ -29,7 +29,8 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
-        if( defined('FLUENTFORM') ) {
+        // Fluent form compatibility
+        if (defined('FLUENTFORM')) {
             wp_enqueue_style(
                 'fluent-form-styles',
                 WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
@@ -47,41 +48,42 @@ trait Enqueue
 
         // Load fontawesome as fallback
         wp_enqueue_style(
-			'font-awesome-5-all',
-			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
-			false,
-			EAEL_PLUGIN_VERSION
-		);
-        
-        wp_enqueue_style(
-			'font-awesome-4-shim',
-			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
-			false,
-			EAEL_PLUGIN_VERSION
-        );
-        
-        //Admin bar css
-        wp_enqueue_style(
-            'ea-admin-bar',
-            EAEL_PLUGIN_URL . 'assets/admin/css/admin-bar.css',
+            'font-awesome-5-all',
+            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
             false,
             EAEL_PLUGIN_VERSION
         );
-        
-        wp_enqueue_script(
-			'font-awesome-4-shim',
-			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
-			false,
-			EAEL_PLUGIN_VERSION
+
+        wp_enqueue_style(
+            'font-awesome-4-shim',
+            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
         );
-        
-        // Admin bar js
+
         wp_enqueue_script(
-			'ea-admin-bar',
-			EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
-			['jquery'],
-			EAEL_PLUGIN_VERSION
-		);
+            'font-awesome-4-shim',
+            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        // admin bar
+        if (is_admin_bar_showing()) {
+            wp_enqueue_style(
+                'ea-admin-bar',
+                EAEL_PLUGIN_URL . 'assets/admin/css/admin-bar.css',
+                false,
+                EAEL_PLUGIN_VERSION
+            );
+
+            wp_enqueue_script(
+                'ea-admin-bar',
+                EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
+                ['jquery'],
+                EAEL_PLUGIN_VERSION
+            );
+        }
 
         // My Assets
         if ($this->is_preview_mode()) {
@@ -128,62 +130,55 @@ trait Enqueue
             if (is_singular() || is_home() || is_archive()) {
                 $queried_object = get_queried_object_id();
                 $post_type = (is_singular() || is_home() ? 'post' : 'term');
-                $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
-                if (empty($elements)) {
-                    return;
+                $this->generate_frontend_scripts($queried_object, $post_type);
+                
+                if ($this->has_cache_files($queried_object, $post_type)) {
+                    $uid = get_metadata($post_type, $queried_object, 'eael_uid', true);
+                    $css_file = EAEL_ASSET_URL . '/' . $uid . '.min.css';
+                    $js_file = EAEL_ASSET_URL . '/' . $uid . '.min.js';
+                } else {
+                    $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
+                    $js_file = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
                 }
-    
-                $this->enqueue_protocols($post_type, $queried_object);
+
+                wp_enqueue_style(
+                    'eael-front-end',
+                    $this->safe_protocol($css_file),
+                    false,
+                    EAEL_PLUGIN_VERSION
+                );
+
+                wp_enqueue_script(
+                    'eael-front-end',
+                    $this->safe_protocol($js_file),
+                    ['jquery'],
+                    EAEL_PLUGIN_VERSION,
+                    true
+                );
+
+                // hook extended assets
+                do_action('eael/after_enqueue_scripts', $this->has_cache_files($queried_object, $post_type));
+
+                // localize script
+                $this->localize_objects = apply_filters('eael/localize_objects', [
+                    'ajaxurl' => admin_url('admin-ajax.php'),
+                    'nonce' => wp_create_nonce('essential-addons-elementor'),
+                ]);
+
+                wp_localize_script('eael-front-end', 'localize', $this->localize_objects);
             }
         }
     }
 
     // editor styles
-    public function editor_enqueue_scripts() {
+    public function editor_enqueue_scripts()
+    {
         wp_enqueue_style(
             'eael-editor-css',
             $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
             false,
             EAEL_PLUGIN_VERSION
         );
-    }
-
-    // rules how css will be enqueued on front-end
-    protected function enqueue_protocols($post_type, $queried_object)
-    {
-        if ($this->has_cache_files($post_type, $queried_object)) {
-            $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
-            $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
-        } else {
-            $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
-            $js_file = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
-        }
-
-        wp_enqueue_style(
-            'eael-front-end',
-            $this->safe_protocol($css_file),
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_enqueue_script(
-            'eael-front-end',
-            $this->safe_protocol($js_file),
-            ['jquery'],
-            EAEL_PLUGIN_VERSION,
-            true
-        );
-
-        // hook extended assets
-        do_action('eael/after_enqueue_scripts', $this->has_cache_files($post_type, $queried_object));
-
-        // localize script
-        $this->localize_objects = apply_filters('eael/localize_objects', [
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('essential-addons-elementor'),
-        ]);
-
-        wp_localize_script('eael-front-end', 'localize', $this->localize_objects);
     }
 }
