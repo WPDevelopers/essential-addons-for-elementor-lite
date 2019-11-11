@@ -1,15 +1,15 @@
-var eaelsvPosition = "";
+var eaelsvPosition = '';
 var eaelsvWidth = 0;
 var eaelsvHeight = 0;
 var eaelsvDomHeight = 0;
 var videoIsActive = 0;
 var eaelMakeItSticky = 0;
 
-jQuery(window).on("elementor/frontend/init", function () {
-    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
+jQuery(window).on('elementor/frontend/init', function() {
+    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function($scope, $) {
         $('.eaelsv-sticky-player-close', $scope).hide();
 
-        var element = $scope.find(".eael-sticky-video-player2"); //$(".eael-sticky-video-player2", $scope);
+        var element = $scope.find('.eael-sticky-video-player2');
         var sticky = '';
         var autoplay = '';
         var overlay = '';
@@ -20,16 +20,16 @@ jQuery(window).on("elementor/frontend/init", function () {
         eaelsvHeight = element.data('sheight');
         eaelsvWidth = element.data('swidth');
         overlay = element.data('overlay');
-        
+
         var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
-        
+
         // If element is Sticky video
         if (sticky === 'yes') {
             // If autoplay is enable
-            if (('yes' === autoplay) && (overlay === 'no')) {
+            if ('yes' === autoplay && overlay === 'no') {
                 eaelsvDomHeight = GetDomElementHeight(element);
                 element.attr('id', 'videobox');
-                //alert( element.attr('class'));
+
                 if (videoIsActive == 0) {
                     videoIsActive = 1;
                 }
@@ -43,29 +43,30 @@ jQuery(window).on("elementor/frontend/init", function () {
         // Overlay Operation Started
         if (overlay === 'yes') {
             var ovrlyElmnt = element.prev();
-            //element.find('div, video').attr('id', 'eaelsv-player-' + $scope.data('id'));
 
             $(ovrlyElmnt).on('click', function() {
                 $(this).css('display', 'none');
 
-                if (($(this).next().data('autoplay')) === 'yes') {
-                    //var a1 = $(this).next().find('div, video').attr('id');
-                    //alert($(this).next().find('div').attr('class'));
-                    //RunStickyPlayer(a1);
+                if (
+                    $(this)
+                        .next()
+                        .data('autoplay') === 'yes'
+                ) {
                     playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
-                    $(this).next().attr('id', 'videobox');
+                    $(this)
+                        .next()
+                        .attr('id', 'videobox');
                     videoIsActive = 1;
                 }
             });
         }
-        playerAbc.on('pause', function (event) {
-            //alert('Paused');
+        playerAbc.on('pause', function(event) {
             if (videoIsActive == 1) {
                 videoIsActive = 0;
             }
         });
-        $('.eaelsv-sticky-player-close').on('click', function () {
+        $('.eaelsv-sticky-player-close').on('click', function() {
             element.removeClass('out').addClass('in');
             $('.eael-sticky-video-player2').removeAttr('style');
             videoIsActive = 0;
@@ -73,43 +74,39 @@ jQuery(window).on("elementor/frontend/init", function () {
     });
 });
 
-jQuery(window).scroll(function(){
+jQuery(window).scroll(function() {
     var scrollTop = jQuery(window).scrollTop();
     var scrollBottom = jQuery(document).height() - scrollTop;
-    //alert(scrollBottom);
-    if( scrollBottom > jQuery(window).height() + 400 ) {
+
+    if (scrollBottom > jQuery(window).height() + 400) {
         if (scrollTop >= eaelsvDomHeight + 100) {
             if (videoIsActive == 1) {
-                jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
-                jQuery('#videobox').removeClass('in').addClass('out');
+                jQuery('#videobox')
+                    .find('.eaelsv-sticky-player-close')
+                    .css('display', 'block');
+                jQuery('#videobox')
+                    .removeClass('in')
+                    .addClass('out');
                 PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
             }
         } else {
             jQuery('.eaelsv-sticky-player-close').hide();
-            jQuery('#videobox').removeClass('out').addClass('in');
+            jQuery('#videobox')
+                .removeClass('out')
+                .addClass('in');
             jQuery('.eael-sticky-video-player2').removeAttr('style');
         }
     }
 });
-/*
-jQuery(window).scroll(function(){
-    var scrollTop = jQuery(this).scrollTop();
-    if (scrollTop >= eaelsvDomHeight) {
-        if (videoIsActive == 1) {
-            jQuery('#videobox').find('.eaelsv-sticky-player-close').css('display', 'block');
-            jQuery('#videobox').removeClass('in').addClass('out');
-            PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-        }
-    } else {
-        jQuery('.eaelsv-sticky-player-close').hide();
-        jQuery('#videobox').removeClass('out').addClass('in');
-        jQuery('.eael-sticky-video-player2').removeAttr('style');
-    }
-});
-*/
 
 function GetDomElementHeight(elem) {
-    var hght = (jQuery(elem).parent().offset().top + jQuery(elem).parent().height());
+    var hght =
+        jQuery(elem)
+            .parent()
+            .offset().top +
+        jQuery(elem)
+            .parent()
+            .height();
     return hght;
 }
 
@@ -135,17 +132,16 @@ function PositionStickyPlayer(p, h, w) {
 }
 
 function PlayerPlay(a, b) {
-    a.on('play', function (event) {
-        //alert('Initial Play');
+    a.on('play', function(event) {
         eaelsvDomHeight = GetDomElementHeight(b);
         jQuery('.eael-sticky-video-player2').removeAttr('id');
         jQuery('.eael-sticky-video-player2').removeClass('out');
         b.attr('id', 'videobox');
-        
+
         videoIsActive = 1;
-        eaelsvPosition  = b.data('position');
-        eaelsvHeight    = b.data('sheight');
-        eaelsvWidth     = b.data('swidth');
+        eaelsvPosition = b.data('position');
+        eaelsvHeight = b.data('sheight');
+        eaelsvWidth = b.data('swidth');
     });
 }
 
