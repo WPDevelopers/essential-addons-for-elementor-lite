@@ -309,17 +309,6 @@ $config = [
                 ],
             ],
         ],
-        'table-generator' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Table_Generator',
-            'dependency' => [
-                'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/table-generator/index.min.css',
-                ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/table-generator/index.min.js',
-                ],
-            ],
-        ],
     ],
     'extensions' => [
         'eael-reading-progress' => [
