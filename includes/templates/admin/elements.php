@@ -111,6 +111,12 @@ $elements = [
                 'title' => __( 'Sticky Video', 'essential-addons-elementor' ),
                 'demo_link' => 'https://essential-addons.com/elementor/sticky-video/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/sticky-video/',
+            ],
+            [
+                'key'   => 'table-generator',
+                'title' => __( 'Table Generator', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/table-generator/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/table-generator/',
             ]
         ]
     ],
