@@ -128,8 +128,13 @@ trait Enqueue
             wp_localize_script('eael-backend', 'localize', $this->localize_objects);
         } else {
             if (is_singular() || is_home() || is_archive()) {
+                $elements = $this->parse_elements();
                 $queried_object = get_queried_object_id();
                 $post_type = (is_singular() || is_home() ? 'post' : 'term');
+
+                if (empty($elements)) {
+                    return;
+                }
 
                 $this->generate_frontend_scripts($queried_object, $post_type);
                 

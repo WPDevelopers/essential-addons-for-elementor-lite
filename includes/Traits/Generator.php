@@ -188,12 +188,11 @@ trait Generator
     }
 
     /**
-     * Generate single post scripts
+     * Parse ea elements from list of all elements
      *
-     * @since 3.0.0
+     * @since 3.5.3
      */
-    public function generate_frontend_scripts($queried_object, $post_type)
-    {
+    public function parse_elements() {
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
             'eael-countdown' => 'eael-count-down',
@@ -213,19 +212,28 @@ trait Generator
             'eael-instafeed' => 'eael-instagram-gallery',
         ];
 
-        $elements = array_map(function ($val) use ($replace) {
+        $this->transient_elements = array_map(function ($val) use ($replace) {
             if (array_key_exists($val, $replace)) {
                 $val = $replace[$val];
             }
 
             return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
         }, $this->transient_elements);
-
         $this->transient_extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
 
-        $elements = array_filter(array_unique(array_merge($elements, $this->transient_extensions)));
-        $file_name = str_rot13($post_type . $queried_object . time());
+        return array_filter(array_unique(array_merge($this->transient_elements, $this->transient_extensions)));
+    }
+
+    /**
+     * Generate single post scripts
+     *
+     * @since 3.0.0
+     */
+    public function generate_frontend_scripts($queried_object, $post_type)
+    {
+        $elements = array_filter(array_unique(array_merge($this->transient_elements, $this->transient_extensions)));
         $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
+        $file_name = str_rot13($post_type . $queried_object . time());
 
         // sort two arr for compare
         sort($elements);
