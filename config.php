@@ -319,6 +319,14 @@ $config = [
                 ],
             ],
         ],
+        'betterdocs-category-grid' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
+            'dependency' => [
+                'css' => [
+                    // EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fluentform/index.min.css',
+                ],
+            ],
+        ],
         'sticky-video' => [
             'class' => '\Essential_Addons_Elementor\Elements\Sticky_Video',
             'dependency' => [
