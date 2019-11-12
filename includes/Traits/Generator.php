@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Core\Settings\Manager as Settings_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \ReflectionClass;
 
 trait Generator
@@ -15,16 +15,14 @@ trait Generator
      * Hit the page before it renders
      *
      * @since 3.5.2
-     * @todo new class
      */
     public function before_page_render()
     {
         if (is_singular() || is_home() || is_archive()) {
             $queried_object = get_queried_object_id();
 
-            // hit page
-            $frontend = new Frontend;
-            $frontend->get_builder_content($queried_object);
+            // pre render elementor widgets
+            $this->pre_render_elementor($queried_object);
 
             // get elementor page settings
             $page_settings_manager = Settings_Manager::get_settings_managers('page');
@@ -41,6 +39,48 @@ trait Generator
                 });
             }
         }
+    }
+
+    /**
+     * Render elementor widgets berfore page render.
+     *
+     * @since 3.5.3
+     */
+    public function pre_render_elementor($post_id)
+    {
+        if (post_password_required($post_id) || !Plugin::$instance->db->is_built_with_elementor($post_id)) {
+            return;
+        }
+
+        $document = Plugin::$instance->documents->get_doc_for_frontend($post_id);
+
+        Plugin::$instance->documents->switch_to_document($document);
+
+        $elements_data = $document->get_elements_data();
+
+        if (empty($elements_data)) {
+            return;
+        }
+
+        add_filter("elementor/frontend/section/should_render", "__return_false");
+        add_filter("elementor/frontend/column/should_render", "__return_false");
+        add_filter("elementor/frontend/widget/should_render", "__return_false");
+
+        foreach ($elements_data as $element_data) {
+            $element = Plugin::$instance->elements_manager->create_element_instance($element_data);
+
+            if (!$element) {
+                continue;
+            }
+
+            $element->print_element();
+        }
+
+        remove_filter("elementor/frontend/section/should_render", "__return_false");
+        remove_filter("elementor/frontend/column/should_render", "__return_false");
+        remove_filter("elementor/frontend/widget/should_render", "__return_false");
+
+        Plugin::$instance->documents->restore_document();
     }
 
     /**
@@ -192,7 +232,8 @@ trait Generator
      *
      * @since 3.5.3
      */
-    public function parse_elements() {
+    public function parse_elements()
+    {
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
             'eael-countdown' => 'eael-count-down',
