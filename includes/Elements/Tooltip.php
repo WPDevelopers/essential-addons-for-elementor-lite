@@ -147,7 +147,7 @@ class Tooltip extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_tooltip_content_alignment',
 			[
-				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
@@ -337,6 +337,36 @@ class Tooltip extends Widget_Base {
 	 			],
 			]
 		);
+
+		$this->add_responsive_control(
+			'eael_tooltip_text_alignment',
+			[
+				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+					'justify' => [
+						'title' => __( 'Justified', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-justify',
+					],
+				],
+				'default' => 'left',
+				'prefix_class' => 'eael-tooltip-text-align-',
+			]
+		);
+
 		$this->start_controls_tabs( 'eael_tooltip_content_style_tabs' );
 			// Normal State Tab
 			$this->start_controls_tab( 'eael_tooltip_content_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );

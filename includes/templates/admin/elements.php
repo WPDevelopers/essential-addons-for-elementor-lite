@@ -437,6 +437,29 @@ $elements = [
                 'is_pro' => true
             ]
         ]
+    ],
+    'documentation-elements'   => [
+        'title' => __( 'Documentation Elements', 'essential-addons-elementor' ),
+        'elements'  => [
+            [
+                'key'   => 'betterdocs-category-grid',
+                'title' => __( 'BetterDocs Category Grid', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/betterdocs-category-grid/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-category-grid/'
+            ],
+            [
+                'key'   => 'betterdocs-category-box',
+                'title' => __( 'BetterDocs Category Box', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/betterdocs-category-box/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-category-box/'
+            ],
+            [
+                'key'   => 'betterdocs-search-form',
+                'title' => __( 'BetterDocs Search Form', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/betterdocs-search-form/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-search-form/'
+            ]
+        ]
     ]
 ];
 
