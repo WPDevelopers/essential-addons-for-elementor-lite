@@ -164,14 +164,14 @@ trait Enqueue
             'eael-front-end',
             $this->safe_protocol($css_file),
             false,
-            EAEL_PLUGIN_VERSION
+            time()
         );
 
         wp_enqueue_script(
             'eael-front-end',
             $this->safe_protocol($js_file),
             ['jquery'],
-            EAEL_PLUGIN_VERSION,
+            time(),
             true
         );
 

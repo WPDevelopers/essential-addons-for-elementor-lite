@@ -957,13 +957,33 @@ trait Helper
         $this->end_controls_section();
     }
 
-    public function fix_old_query($settings) {
-        foreach($settings as $key => $value) {
-            if(strpos($key, 'eaeposts_') !== false) {
+    public function fix_old_query($settings)
+    {
+        $update_query = false;
+        
+        foreach ($settings as $key => $value) {
+            if (strpos($key, 'eaeposts_') !== false) {
                 $settings[str_replace('eaeposts_', '', $key)] = $value;
-                
-                update_post_meta(get_the_ID(), '_elementor_data', str_replace('eaeposts_', '', get_post_meta(get_the_ID(), '_elementor_data', true)));
+                $update_query = true;
             }
+        }
+
+        if ($update_query) {
+            global $wpdb;
+            
+            $post_id = get_the_ID();
+            $data = get_post_meta($post_id, '_elementor_data', true);
+            $data = str_replace('eaeposts_', '', $data);
+            $wpdb->update(
+                $wpdb->postmeta,
+                [
+                    'meta_value' => $data,
+                ],
+                [
+                    'post_id' => $post_id,
+                    'meta_key' => '_elementor_data',
+                ]
+            );
         }
 
         return $settings;
