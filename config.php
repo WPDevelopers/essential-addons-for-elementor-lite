@@ -319,6 +319,15 @@ $config = [
                 ],
             ],
         ],
+        'betterdocs-category-grid' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
+        ],
+        'betterdocs-category-box'   => [
+            'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Box',
+        ],
+        'betterdocs-search-form'   => [
+            'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Search_Form',
+        ],
         'sticky-video' => [
             'class' => '\Essential_Addons_Elementor\Elements\Sticky_Video',
             'dependency' => [
