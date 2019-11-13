@@ -122,3 +122,8 @@
   transition: all 300ms ease-in-out;
   display: inline-block;
 }
+
+.elementor-lightbox .dialog-widget-content {
+  width: 100%;
+  height: 100%;
+}

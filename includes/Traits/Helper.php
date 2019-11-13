@@ -332,7 +332,7 @@ trait Helper
                     'exclude' => ['custom'],
                     'default' => 'medium',
                     'condition' => [
-                        'eael_show_image' => '1',
+                        'eael_show_image' => 'yes',
                     ],
                 ]
             );
@@ -960,7 +960,7 @@ trait Helper
     public function fix_old_query($settings)
     {
         $update_query = false;
-
+        
         foreach ($settings as $key => $value) {
             if (strpos($key, 'eaeposts_') !== false) {
                 $settings[str_replace('eaeposts_', '', $key)] = $value;
@@ -970,11 +970,10 @@ trait Helper
 
         if ($update_query) {
             global $wpdb;
-
+            
             $post_id = get_the_ID();
             $data = get_post_meta($post_id, '_elementor_data', true);
             $data = str_replace('eaeposts_', '', $data);
-
             $wpdb->update(
                 $wpdb->postmeta,
                 [

@@ -5,44 +5,10 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Elementor\Core\Settings\Manager as Settings_Manager;
-use \Elementor\Frontend;
 use \ReflectionClass;
 
 trait Generator
 {
-    /**
-     * Hit the page before it renders
-     *
-     * @since 3.5.2
-     * @todo new class
-     */
-    public function before_page_render()
-    {
-        if (is_singular() || is_home() || is_archive()) {
-            $queried_object = get_queried_object_id();
-
-            // hit page
-            $frontend = new Frontend;
-            $frontend->get_builder_content($queried_object);
-
-            // get elementor page settings
-            $page_settings_manager = Settings_Manager::get_settings_managers('page');
-            $page_settings_model = $page_settings_manager->get_model($queried_object);
-
-            // get global settings
-            $global_settings = get_option('eael_global_settings');
-
-            // add global extension in transient
-            if ($this->get_settings('eael-reading-progress') && ($page_settings_model->get_settings('eael_ext_reading_progress') == 'yes' || isset($global_settings['reading_progress']['enabled']))) {
-                add_filter('eael/section/after_render', function ($extensions) {
-                    $extensions[] = 'eael-reading-progress';
-                    return $extensions;
-                });
-            }
-        }
-    }
-
     /**
      * Collect elements in a page or post
      *
@@ -50,12 +16,12 @@ trait Generator
      */
     public function collect_transient_elements($widget)
     {
-        if ($widget->get_name() === 'global') {
+        if($widget->get_name() === 'global') {
             $reflection = new ReflectionClass(get_class($widget));
             $protected = $reflection->getProperty('template_data');
             $protected->setAccessible(true);
 
-            if ($global_data = $protected->getValue($widget)) {
+            if($global_data = $protected->getValue($widget)) {
                 $this->transient_elements = array_merge($this->transient_elements, $this->collect_recursive_elements($global_data['content']));
             }
         } else {
@@ -68,12 +34,11 @@ trait Generator
      *
      * @since 3.0.5
      */
-    public function collect_recursive_elements($elements)
-    {
+    public function collect_recursive_elements($elements) {
         $collections = [];
 
-        array_walk_recursive($elements, function ($val, $key) use (&$collections) {
-            if ($key == 'widgetType') {
+        array_walk_recursive($elements, function($val, $key) use (&$collections) {
+            if($key == 'widgetType') {
                 $collections[] = $val;
             }
         });
@@ -165,20 +130,10 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function has_cache_files($post_id = null, $post_type = null)
+    public function has_cache_files($post_type = null, $post_id = null)
     {
-        if ($post_id && $post_type) {
-            $uid = get_metadata($post_type, $post_id, 'eael_uid', true);
-
-            if ($uid === false) {
-                return false;
-            }
-        } else {
-            $uid = 'eael';
-        }
-
-        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $uid . '.min.css';
-        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $uid . '.min.js';
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css';
+        $js_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js';
 
         if (is_readable($this->safe_path($css_path)) && is_readable($this->safe_path($js_path))) {
             return true;
@@ -192,8 +147,12 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_frontend_scripts($queried_object, $post_type)
+    public function generate_frontend_scripts()
     {
+        if ($this->is_preview_mode()) {
+            return;
+        }
+
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
             'eael-countdown' => 'eael-count-down',
@@ -214,54 +173,47 @@ trait Generator
         ];
 
         $elements = array_map(function ($val) use ($replace) {
-            if (array_key_exists($val, $replace)) {
+            if(array_key_exists($val, $replace)) {
                 $val = $replace[$val];
             }
 
             return (strpos($val, 'eael-') !== false ? str_replace(['eael-'], [''], $val) : null);
         }, $this->transient_elements);
 
-        $this->transient_extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
+        $extensions = apply_filters('eael/section/after_render', $this->transient_extensions);
 
-        $elements = array_filter(array_unique(array_merge($elements, $this->transient_extensions)));
-        $file_name = str_rot13($post_type . $queried_object . time());
-        $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
+        $elements = array_filter(array_unique(array_merge($elements, $extensions)));
 
-        // sort two arr for compare
-        sort($elements);
-        sort($old_elements);
+        if (is_singular() || is_home() || is_archive()) {
+            $queried_object = get_queried_object_id();
+            $post_type = (is_singular() || is_home() ? 'post' : 'term');
+            $old_elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
-        if ($old_elements != $elements) {
-            update_metadata($post_type, $queried_object, 'eael_transient_elements', $elements);
+            // sort two arr for compare
+            sort($elements);
+            sort($old_elements);
 
-            // if not empty elements, regenerate cache files
-            if (!empty($elements)) {
-                // remove old cache
-                $this->remove_files($post_type, $queried_object);
+            if ($old_elements != $elements) {
+                update_metadata($post_type, $queried_object, 'eael_transient_elements', $elements);
 
-                // update new meta
-                update_metadata($post_type, $queried_object, 'eael_uid', $file_name);
+                // if not empty elements, regenerate cache files
+                if (!empty($elements)) {
+                    $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
 
-                // generate new cache
-                $this->generate_scripts($elements, $file_name);
+                    // load generated files - fallback
+                    $this->enqueue_protocols($queried_object, $post_type);
+                }
             }
-        }
 
-        // if no cache files, generate new
-        if (!$this->has_cache_files($queried_object, $post_type)) {
-            // remove old cache
-            $this->remove_files($post_type, $queried_object);
+            // if no cache files, generate new
+            if (!$this->has_cache_files($post_type, $queried_object)) {
+                $this->generate_scripts($elements, 'eael-' . $post_type . '-' . $queried_object);
+            }
 
-            // update new meta
-            update_metadata($post_type, $queried_object, 'eael_uid', $file_name);
-
-            // generate new cache
-            $this->generate_scripts($elements, $file_name);
-        }
-
-        // if no elements, remove cache files
-        if (empty($elements)) {
-            $this->remove_files($post_type, $queried_object);
+            // if no elements, remove cache files
+            if (empty($elements)) {
+                $this->remove_files($post_type, $queried_object);
+            }
         }
     }
 }
