@@ -143,7 +143,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_group_control(
                 Group_Control_Typography::get_type(),
                 [
-                 'name' => 'list_typography',
+                 'name' => 'cat_list_typography',
                     'selector' => '{{WRAPPER}} .docs-cat-title-inner h3, {{WRAPPER}}.betterdocs-category-box .docs-single-cat-wrap .docs-cat-title'
                 ]
             );
@@ -281,7 +281,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_group_control(
                 Group_Control_Typography::get_type(),
                 [
-                 'name' => 'list_typography',
+                 'name' => 'list_item_typography',
                     'selector' => '{{WRAPPER}} .betterdocs-categories-wrap li a',
                 ]
             );
