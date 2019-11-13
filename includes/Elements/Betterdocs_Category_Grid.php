@@ -36,7 +36,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eicon-document-file';
     }
 
     /**
@@ -78,84 +78,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->end_controls_section();
         } else {
 
-            /**
-             * ----------------------------------------------------------
-             * Section: Content Area
-             * ----------------------------------------------------------
-             */
-            $this->start_controls_section(
-                'section_content_area',
-                [
-                    'label' => __('Content Area', 'essential-addons-elementor'),
-                ]
-            );
-
-            $this->add_group_control(
-                Group_Control_Background::get_type(),
-                [
-                    'name' => 'content_area_bg',
-                    'types' => ['classic', 'gradient'],
-                    'selector' => '{{WRAPPER}} .betterdocs-categories-wrap'
-                ]
-            );
-
-            $this->add_responsive_control(
-                'content_area_padding',
-                [
-                    'label' => esc_html__('Padding', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
-                        '{{WRAPPER}} .betterdocs-categories-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
-                'content_area_width',
-                [
-                    'label' => __('Width', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::SLIDER,
-                    'default' => [
-                        'size' => 100,
-                        'unit' => '%',
-                    ],
-                    'size_units' => ['%', 'px', 'em'],
-                    'range' => [
-                        '%' => [
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .betterdocs-categories-wrap' => 'width: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
-                'content_area_max_width',
-                [
-                    'label' => __('Max Width', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::SLIDER,
-                    'default' => [
-                        'size' => 1600,
-                        'unit' => 'px',
-                    ],
-                    'size_units' => [ 'px', 'em'],
-                    'range' => [
-                        'px' => [
-                            'max' => 1600,
-                            'step' => 1,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .betterdocs-categories-wrap' => 'max-width: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->end_controls_section(); # end of 'Content Area'
+            $this->eael_betterdocs_content_controls();
 
             /**
              * ----------------------------------------------------------
@@ -231,7 +154,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'label' => esc_html__( 'Title Color', 'essential-addons-elementor' ),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .docs-cat-title-inner h3, {{WRAPPER}}.betterdocs-category-box .docs-single-cat-wrap .docs-cat-title' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .docs-cat-title-inner h3, {{WRAPPER}} .betterdocs-category-box .docs-single-cat-wrap .docs-cat-title' => 'color: {{VALUE}};',
                     ],
                 ]
             );
