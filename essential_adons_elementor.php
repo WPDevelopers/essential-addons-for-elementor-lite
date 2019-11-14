@@ -4,7 +4,7 @@
  * Description: The ultimate elements library for Elementor page builder plugin for WordPress.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 3.3.0
+ * Version: 3.5.2
  * Author URI: https://wpdeveloper.net/
  *
  * Text Domain: essential-addons-elementor
@@ -22,9 +22,9 @@ if (!defined('ABSPATH')) {
  */
 define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
-define('EAEL_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('EAEL_PLUGIN_URL', plugins_url('/', __FILE__));
-define('EAEL_PLUGIN_VERSION', '3.3.0');
+define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
+define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
+define('EAEL_PLUGIN_VERSION', '3.5.1');
 define('EAEL_ASSET_PATH', WP_CONTENT_DIR . '/uploads/essential-addons-elementor');
 define('EAEL_ASSET_URL', WP_CONTENT_URL . '/uploads/essential-addons-elementor');
 

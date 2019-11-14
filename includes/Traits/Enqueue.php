@@ -29,6 +29,22 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
+        if( defined('FLUENTFORM') ) {
+            wp_enqueue_style(
+                'fluent-form-styles',
+                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
+                array(),
+                FLUENTFORM_VERSION
+            );
+
+            wp_enqueue_style(
+                'fluentform-public-default',
+                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
+                array(),
+                FLUENTFORM_VERSION
+            );
+        }
+
         // Load fontawesome as fallback
         wp_enqueue_style(
 			'font-awesome-5-all',
@@ -46,8 +62,8 @@ trait Enqueue
         
         //Admin bar css
         wp_enqueue_style(
-            'essential_addons_elementor-admin-bar-css',
-            EAEL_PLUGIN_URL . '/assets/admin/css/admin-bar.css',
+            'ea-admin-bar',
+            EAEL_PLUGIN_URL . 'assets/admin/css/admin-bar.css',
             false,
             EAEL_PLUGIN_VERSION
         );
@@ -140,22 +156,22 @@ trait Enqueue
             $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
             $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
         } else {
-            $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-            $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+            $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
+            $js_file = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
         }
 
         wp_enqueue_style(
             'eael-front-end',
             $this->safe_protocol($css_file),
             false,
-            EAEL_PLUGIN_VERSION
+            time()
         );
 
         wp_enqueue_script(
             'eael-front-end',
             $this->safe_protocol($js_file),
             ['jquery'],
-            EAEL_PLUGIN_VERSION,
+            time(),
             true
         );
 

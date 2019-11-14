@@ -25,7 +25,9 @@ trait Library
      */
     public function get_settings($element = null)
     {
-        $elements = get_option('eael_save_settings', array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions)), true));
+        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), true);
+        $elements = get_option('eael_save_settings', $defaults);
+        $elements = array_merge($defaults, $elements);
 
         return (isset($element) ? (isset($elements[$element]) ? $elements[$element] : 0) : array_keys(array_filter($elements)));
     }

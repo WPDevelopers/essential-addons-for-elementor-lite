@@ -188,6 +188,26 @@ textarea.eael-form-control {
     box-shadow: 0px 5px 18px 0px rgba(0, 4, 32, 0.08);
 }
 
+.eael-checkbox-quick-tools {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 320px;
+    margin-top: 15px;
+    box-shadow: none;
+    border: 1px solid #eee;
+    padding: 5px 15px;
+    background: #f9f9f9;
+}
+
+.eael-checkbox-quick-tools p.eael-el-title {
+    font-size: 13px;
+    font-weight: 500;
+}
+.eael-settings-tab p.quick-tools-description {
+    padding: 0 0 0 10px;
+    font-style: italic;
+    font-size: 12px;
+}
 .eael-checkbox.checkbox-toggle-all {
     border-radius: 100px;
     padding: 12px 25px;

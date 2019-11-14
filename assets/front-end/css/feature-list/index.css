@@ -9,7 +9,7 @@
 }
 .elementor-widget-eael-feature-list.-icon-position-right .connector, .elementor-widget-eael-feature-list.-icon-position-right.-tablet-icon-position-right .connector {
   right: 0;
-  left: calc(100% - 60px);
+  left: calc(100% - 70px);
 }
 .elementor-widget-eael-feature-list.-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item, .elementor-widget-eael-feature-list.-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
   padding: 0 50px 0 0;
@@ -80,6 +80,9 @@
   color: #37368e;
   text-align: center;
   display: inline-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media (prefers-reduced-motion: reduce) {
   .elementor-widget-eael-feature-list .eael-feature-list-items .eael-feature-list-item .eael-feature-list-icon-box .eael-feature-list-icon {

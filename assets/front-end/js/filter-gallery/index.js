@@ -1,4 +1,23 @@
 var filterableGalleryHandler = function($scope, $) {
+
+    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
+        filterTrigger = $scope.find('#fg-filter-trigger'),
+        form = $scope.find('.fg-layout-3-search-box'),
+        input = $scope.find('#fg-search-box-input'),
+        searchRegex, buttonFilter, timer;
+
+    if(form.length) {
+        form.on('submit', function(e) {
+            e.preventDefault();
+        });
+    }
+
+    filterTrigger.on('click', function() {
+        filterControls.toggleClass('open-filters');
+    }).blur(function() {
+        filterControls.toggleClass('open-filters');
+    });
+
     if (!isEditMode) {
         var $gallery = $(".eael-filter-gallery-container", $scope),
             $settings = $gallery.data("settings"),
@@ -9,16 +28,57 @@ var filterableGalleryHandler = function($scope, $) {
                 $settings.gallery_enabled == "yes" ? true : false;
 
         // init isotope
+        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
         var $isotope_gallery = $gallery.isotope({
             itemSelector: ".eael-filterable-gallery-item-wrap",
             layoutMode: $layout_mode,
             percentPosition: true,
             stagger: 30,
             transitionDuration: $settings.duration + "ms",
-            filter: $(
-                ".eael-filter-gallery-control .control.active",
-                $scope
-            ).data("filter")
+            filter: function() {
+                var $this = $(this);
+                var $result = searchRegex ? $this.text().match( searchRegex ) : true;
+                if(buttonFilter == undefined) {
+                    if(layoutMode != 'layout_3') {
+                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
+                    }else {
+                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
+                    }
+                }
+                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
+                return $result && buttonResult;
+            }
+        });
+
+
+        // filter
+        $scope.on("click", ".control", function() {
+
+            var $this = $(this);
+            buttonFilter = $( this ).attr('data-filter');
+
+            if($scope.find('#fg-filter-trigger > span')) {
+                $scope.find('#fg-filter-trigger > span').text($this.text());
+            }
+
+            $this.siblings().removeClass("active");
+            $this.addClass("active");
+
+            $isotope_gallery.isotope();
+        });
+
+
+
+        //quick search
+        input.on('input', function() {
+            var $this = $(this);
+
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                searchRegex = new RegExp($this.val(), 'gi');
+                $isotope_gallery.isotope();
+            }, 600);
+
         });
 
         // layout gal, while images are loading
@@ -36,17 +96,7 @@ var filterableGalleryHandler = function($scope, $) {
             $isotope_gallery.isotope("layout");
         });
 
-        // filter
-        $scope.on("click", ".control", function() {
-            var $this = $(this),
-                $filterValue = $this.data("filter");
-
-            $this.siblings().removeClass("active");
-            $this.addClass("active");
-            $isotope_gallery.isotope({
-                filter: $filterValue
-            });
-        });
+        
 
         // popup
         $(".eael-magnific-link", $scope).magnificPopup({

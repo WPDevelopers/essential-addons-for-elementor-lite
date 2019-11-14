@@ -314,6 +314,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -336,6 +337,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img'   => 'margin-right: {{SIZE}}{{UNIT}};'
                 ],
             ]
         );
@@ -698,6 +700,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_adv_accordion_icon_show' => 'yes',
@@ -793,7 +796,11 @@ class Adv_Accordion extends Widget_Base
                     <span>';
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
                 if ($tab_icon_is_new || $tab_icon_migrated) {
-                    echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon_new']['value'] . ' fa-accordion-icon"></i>';
+                    if( isset($tab['eael_adv_accordion_tab_title_icon_new']['value']['url']) ) {
+                        echo '<img src="' . $tab['eael_adv_accordion_tab_title_icon_new']['value']['url'] . '" />';
+                    }else {
+                        echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon_new']['value'] . ' fa-accordion-icon"></i>';
+                    }
                 } else {
                     echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
                 }
@@ -802,7 +809,11 @@ class Adv_Accordion extends Widget_Base
                 '</span>';
             if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
                 if ($accordion_icon_is_new || $accordion_icon_migrated) {
-                    echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
+                    if( isset($settings['eael_adv_accordion_icon_new']['value']['url']) ) {
+                        echo '<img src="' . $settings['eael_adv_accordion_icon_new']['value']['url'] . '" />';
+                    }else {
+                        echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
+                    }
                 } else {
                     echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
                 }

@@ -10,7 +10,6 @@ trait Product_Grid
 {
     public static function __render_template($args, $settings)
     {
-        $html = '';
         $query = new \WP_Query($args);
 
         ob_start();
@@ -51,13 +50,11 @@ trait Product_Grid
                 }
             }
         } else {
-            $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
+            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
         }
-
-        $html .= ob_get_clean();
 
         wp_reset_postdata();
 
-        return $html;
+        return ob_get_clean();
     }
 }

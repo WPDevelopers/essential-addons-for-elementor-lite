@@ -407,7 +407,7 @@ class Pricing_Table extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_pricing_table_footerr',
   			[
-  				'label' => esc_html__( 'Footer', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Button', 'essential-addons-elementor' )
   			]
   		);
 
@@ -431,7 +431,7 @@ class Pricing_Table extends Widget_Base {
 					'right' => esc_html__( 'After', 'essential-addons-elementor' ),
 				],
 				'condition' => [
-					'eael_pricing_table_button_icon!' => '',
+					'eael_pricing_table_button_icon_new!' => '',
 				],
 			]
 		);
@@ -447,7 +447,7 @@ class Pricing_Table extends Widget_Base {
 					],
 				],
 				'condition' => [
-					'eael_pricing_table_button_icon!' => '',
+					'eael_pricing_table_button_icon_new!' => '',
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-button i.fa-icon-left' => 'margin-right: {{SIZE}}px;',
@@ -1004,6 +1004,27 @@ class Pricing_Table extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_pricing_table_list_item_icon_size',
+			[
+				'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default'	=> [
+					'size'	=> 20,
+					'unit'	=> 'px'
+				],
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing-item .body ul li .li-icon img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-pricing-item .body ul li .li-icon i' => 'font-size: {{SIZE}}{{UNIT}};'
+				]
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1374,7 +1395,7 @@ class Pricing_Table extends Widget_Base {
 		);
 
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_pricing_table_icon_settings',
 			[
 				'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
@@ -1388,12 +1409,13 @@ class Pricing_Table extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i' => 'font-size: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_pricing_table_icon_area_width',
 			[
 				'label' => esc_html__( 'Icon Area Width', 'essential-addons-elementor' ),
@@ -1412,7 +1434,7 @@ class Pricing_Table extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_pricing_table_icon_area_height',
 			[
 				'label' => esc_html__( 'Icon Area Height', 'essential-addons-elementor' ),
@@ -1431,11 +1453,12 @@ class Pricing_Table extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_pricing_table_icon_line_height',
 			[
 				'label' => esc_html__( 'Icon Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
 				'default' => [
 					'size' => 80
 				],
@@ -1445,7 +1468,8 @@ class Pricing_Table extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i' => 'line-height: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i' => 'line-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon img' => 'top: {{SIZE}}{{UNIT}};'
 				],
 			]
 		);
@@ -1556,6 +1580,28 @@ class Pricing_Table extends Widget_Base {
 	 			],
 			]
 		);
+
+		$this->add_control(
+			'eael_pricing_table_btn_icon_size',
+			[
+				'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'default'	=> [
+					'size'	=> 20,
+					'unit'	=> 'px'
+				],
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-pricing .eael-pricing-button img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-pricing .eael-pricing-button i' => 'font-size: {{SIZE}}{{UNIT}};'
+				]
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -1734,7 +1780,11 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 				<?php if ('show' === $settings['eael_pricing_table_icon_enabled']): ?>
 					<span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>">
 					<?php if(isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
-						<i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
+						<?php if( isset( $item['eael_pricing_table_list_icon_new']['value']['url'] ) ) : ?>
+							<img src="<?php echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+						<?php else : ?>
+							<i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
+						<?php endif; ?>
 					<?php } else { ?>
 						<i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
 					<?php } ?>
@@ -1786,15 +1836,23 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
 		    		<?php if( 'left' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
 						<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
-							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-left"></i>
+							<?php if( isset($settings['eael_pricing_table_button_icon_new']['value']['url']) ) : ?>
+								<img src="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value']['url'] ); ?>" class="fa-icon-left" alt="<?php echo esc_attr(get_post_meta($settings['eael_pricing_table_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+							<?php else : ?>
+								<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-left"></i>
+							<?php endif; ?>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-left"></i>
 						<?php } ?>
 						<?php echo $settings['eael_pricing_table_btn']; ?>
 					<?php elseif( 'right' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
 						<?php echo $settings['eael_pricing_table_btn']; ?>
-		        		<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
-							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-right"></i>
+						<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
+							<?php if( isset($settings['eael_pricing_table_button_icon_new']['value']['url']) ) : ?>
+								<img src="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value']['url'] ); ?>" class="fa-icon-right" alt="<?php echo esc_attr(get_post_meta($settings['eael_pricing_table_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+							<?php else : ?>
+								<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-right"></i>
+							<?php endif; ?>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-right"></i>
 						<?php } ?>
@@ -1810,7 +1868,11 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 	        <div class="eael-pricing-icon">
 	            <span class="icon" style="background:<?php if('yes' != $settings['eael_pricing_table_icon_bg_show']) : echo 'none'; endif;  ?>;">
 					<?php if (empty($settings['eael_pricing_table_style_2_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_style_2_icon_new'])) { ?>
-						<i class="<?php echo esc_attr( $settings['eael_pricing_table_style_2_icon_new']['value'] ); ?>"></i>
+						<?php if( isset($settings['eael_pricing_table_style_2_icon_new']['value']['url']) ) : ?>
+							<img src="<?php echo esc_attr( $settings['eael_pricing_table_style_2_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_pricing_table_style_2_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
+						<?php else : ?>
+							<i class="<?php echo esc_attr( $settings['eael_pricing_table_style_2_icon_new']['value'] ); ?>"></i>
+						<?php endif; ?>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr( $settings['eael_pricing_table_style_2_icon'] ); ?>"></i>
 					<?php } ?>
@@ -1831,15 +1893,22 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 		    	<a href="<?php echo esc_url( $settings['eael_pricing_table_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
 		    		<?php if( 'left' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
 						<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
-							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-left"></i>
+							<?php if ( isset( $settings['eael_pricing_table_button_icon_new']['value']['url'] ) ) : ?><img src="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value']['url'] ); ?>" class="fa-icon-left" alt="<?php echo esc_attr(get_post_meta($settings['eael_pricing_table_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"></i>
+							<?php else : ?>
+								<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-left"></i>
+							<?php endif; ?>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-left"></i>
 						<?php } ?>
 						<?php echo $settings['eael_pricing_table_btn']; ?>
 					<?php elseif( 'right' == $settings['eael_pricing_table_button_icon_alignment'] ) : ?>
 						<?php echo $settings['eael_pricing_table_btn']; ?>
-		        		<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
-							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-right"></i>
+						<?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) { ?>
+							<?php if( isset($settings['eael_pricing_table_button_icon_new']['value']['url']) ) : ?>
+								<img src="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value']['url'] ); ?>" class="fa-icon-right" alt="<?php echo esc_attr(get_post_meta($settings['eael_pricing_table_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>">
+							<?php else : ?>
+								<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon_new']['value'] ); ?> fa-icon-right"></i>
+							<?php endif; ?>
 						<?php } else { ?>
 							<i class="<?php echo esc_attr( $settings['eael_pricing_table_button_icon'] ); ?> fa-icon-right"></i>
 						<?php } ?>

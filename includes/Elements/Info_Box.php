@@ -390,7 +390,7 @@ class Info_Box extends Widget_Base {
 					'right' => esc_html__( 'After', 'essential-addons-elementor' ),
 				],
 				'condition' => [
-					'eael_infobox_button_icon!' => '',
+					'eael_infobox_button_icon_new!' => '',
 					'eael_show_infobox_button'	=> 'yes'
 				],
 			]
@@ -407,7 +407,7 @@ class Info_Box extends Widget_Base {
 					],
 				],
 				'condition' => [
-					'eael_infobox_button_icon!' => '',
+					'eael_infobox_button_icon_new!' => '',
 					'eael_show_infobox_button'	=> 'yes'
 				],
 				'selectors' => [
@@ -870,20 +870,21 @@ class Info_Box extends Widget_Base {
     		'eael_infobox_icon_size',
     		[
         		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
-       		'type' => Controls_Manager::SLIDER,
+       			'type' => Controls_Manager::SLIDER,
         		'default' => [
-            	'size' => 40,
+            		'size' => 40,
         		],
         		'range' => [
-            	'px' => [
-                	'min' => 20,
-                	'max' => 100,
-                	'step' => 1,
-            	]
+					'px' => [
+						'min' => 20,
+						'max' => 100,
+						'step' => 1,
+					]
         		],
         		'selectors' => [
-            	'{{WRAPPER}} .eael-infobox .infobox-icon i' => 'font-size: {{SIZE}}px;',
-        		],
+					'{{WRAPPER}} .eael-infobox .infobox-icon i' => 'font-size: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-infobox .infobox-icon .infobox-icon-wrap img'	=> 'height: {{SIZE}}px; width: {{SIZE}}px;'
+        		]
     		]
 		);
 
@@ -1101,9 +1102,57 @@ class Info_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 			'name' => 'eael_infobox_button_typography',
-				'selector' => '{{WRAPPER}} .eael-infobox .infobox-button a.eael-infobox-button',
+				'selector' => '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button .infobox-button-text',
 			]
 		);
+
+		$this->add_responsive_control(
+            'eael_infobox_button_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 16,
+                    'unit' => 'px',
+                ],
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+		);
+		
+		// $this->add_responsive_control(
+        //     'eael_infobox_button_icon_gap',
+        //     [
+        //         'label' => __('Icon Gap', 'essential-addons-elementor'),
+        //         'type' => Controls_Manager::SLIDER,
+        //         'default' => [
+        //             'size' => 10,
+        //             'unit' => 'px',
+        //         ],
+        //         'size_units' => ['px'],
+        //         'range' => [
+        //             'px' => [
+        //                 'min' => 0,
+        //                 'max' => 100,
+        //                 'step' => 1,
+        //             ],
+        //         ],
+        //         'selectors' => [
+		// 			'{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button i' => 'margin-right: {{SIZE}}{{UNIT}};',
+        //             '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button img' => 'margin-right: {{SIZE}}{{UNIT}};',
+        //         ],
+        //     ]
+        // );
 
 		$this->add_responsive_control(
 			'eael_creative_button_padding',
@@ -1522,6 +1571,23 @@ class Info_Box extends Widget_Base {
 			$this->add_render_attribute('infobox_icon', 'class', 'eael-icon-only');
 		}
 
+		if ($infobox_icon_is_new || $infobox_icon_migrated) {
+			$icon = $settings['eael_infobox_icon_new']['value'];
+
+			if(isset($icon['url'])) {
+				$this->add_render_attribute('icon_or_image', [
+					'src'	=> $icon['url'],
+					'alt'	=> esc_attr(get_post_meta($icon['id'], '_wp_attachment_image_alt', true))
+				]);
+				$icon_tag = '<img '.$this->get_render_attribute_string('icon_or_image').'/>';
+			}else {
+				$this->add_render_attribute('icon_or_image', 'class', $icon);
+				$icon_tag = '<i '.$this->get_render_attribute_string('icon_or_image').'></i>';
+			}
+		}else {
+			$icon_tag = '<i class="'.esc_attr( $settings['eael_infobox_icon'] ).'"></i>';
+		}
+
 		ob_start();
 		?>
 			<div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
@@ -1531,13 +1597,9 @@ class Info_Box extends Widget_Base {
 				<?php endif; ?>
 
 				<?php if( 'icon' == $settings['eael_infobox_img_or_icon'] ) : ?>
-				<div class="infobox-icon-wrap">
-					<?php if ($infobox_icon_is_new || $infobox_icon_migrated) { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_icon_new']['value'] ); ?>"></i>
-					<?php } else { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_icon'] ); ?>"></i>
-					<?php } ?>
-				</div>
+					<div class="infobox-icon-wrap">
+						<?php echo $icon_tag; ?>
+					</div>
 				<?php endif; ?>
 
 				<?php if( 'number' == $settings['eael_infobox_img_or_icon'] ) : ?>
@@ -1607,29 +1669,48 @@ class Info_Box extends Widget_Base {
 		if('on' == $settings['infobox_button_link_url']['nofollow'])
 			$this->add_render_attribute('infobox_button', 'rel', 'nofollow');
 
-		if( 'left' == $settings['eael_infobox_button_icon_alignment'])
-			$this->add_render_attribute('button_icon', 'class', 'eael_infobox_button_icon_left');
-
-		if( 'right' == $settings['eael_infobox_button_icon_alignment'])
-			$this->add_render_attribute('button_icon', 'class', 'eael_infobox_button_icon_right');
-
 		ob_start();
 		?>
 		<div class="infobox-button">
 			<a <?php echo $this->get_render_attribute_string('infobox_button'); ?>>
 				<?php if( 'left' == $settings['eael_infobox_button_icon_alignment']) : ?>
 					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?>"></i>
+						<?php if ( isset($settings['eael_infobox_button_icon_new']['value']['url']) ) { ?>
+							<img class="eael_infobox_button_icon_left" src="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
+						<?php } else { ?>
+							<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?> eael_infobox_button_icon_left"></i>
+						<?php } ?>
 					<?php } else { ?>
 						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon'] ); ?>"></i>
 					<?php } ?>
 				<?php endif; ?>
-				<?php echo esc_attr($settings['infobox_button_text']); ?>
+					<span class="infobox-button-text"><?php echo esc_attr($settings['infobox_button_text']); ?></span>
 				<?php if( 'right' == $settings['eael_infobox_button_icon_alignment']) : ?>
 					<?php if ($button_icon_is_new || $button_icon_migrated) { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?>"></i>
-					<?php } else { ?>
-						<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon'] ); ?>"></i>
+						<?php if ( isset($settings['eael_infobox_button_icon_new']['value']['url']) ) { ?>
+							<img class="eael_infobox_button_icon_right" src="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>"/>
+						<?php } else { ?>
+							<i class="<?php echo esc_attr( $settings['eael_infobox_button_icon_new']['value'] ); ?> eael_infobox_button_icon_right"></i>
+						<?php } ?>
+					<?php } else {
+						
+						if( 'left' == $settings['eael_infobox_button_icon_alignment'])
+						$this->add_render_attribute('button_icon', 'class', 'eael_infobox_button_icon_left');
+			
+						if( 'right' == $settings['eael_infobox_button_icon_alignment'])
+							$this->add_render_attribute('button_icon', 'class', 'eael_infobox_button_icon_right');
+
+						$this->add_render_attribute(
+							'button_icon',
+							[
+								'class' => [
+									'eael_infobox_button_icon_right',
+									$settings['eael_infobox_button_icon']
+								]
+							]
+						);	
+					?>
+						<i <?php echo $this->get_render_attribute_string('button_icon'); ?>></i>
 					<?php } ?>
 				<?php endif; ?>
 			</a>
