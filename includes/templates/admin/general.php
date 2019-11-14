@@ -84,12 +84,12 @@
         <div class="eael-admin-sidebar">
             <div class="eael-sidebar-block">
                 <div class="eael-admin-sidebar-logo">
-                    <img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-ea-logo.svg'; ?>" alt="essential-addons-for-elementor">
+                    <img src="<?php echo EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg'; ?>" alt="essential-addons-for-elementor">
                 </div>
                 <div class="eael-admin-sidebar-cta">
                     <?php
                         if( !defined('EAEL_PRO_PLUGIN_BASENAME') ) {
-                            printf( __( '<a href="%s" target="_blank">Upgrade to Pro</a>', 'essential-addons-elementor' ), 'https://wpdeveloper.net/in/upgrade-essential-addons-elementor' );
+                            printf( __( '<a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">%s</a>', 'essential-addons-elementor' ), 'Upgrade to Pro' );
                         }else {
                             do_action('eael_manage_license_action_link');
                         }

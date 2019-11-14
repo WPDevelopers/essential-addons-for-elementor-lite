@@ -381,6 +381,12 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/wpforms/',
             ],
             [
+                'key'   => 'fluentform',
+                'title' => __( 'FluentForm', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/fluentform/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/fluentform/',
+            ],
+            [
                 'key'    => 'mailchimp',
                 'title'  => __( 'Mailchimp', 'essential-addons-elementor' ),
                 'demo_link' => 'https://essential-addons.com/elementor/mailchimp/',
@@ -412,6 +418,12 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/instagram-feed/',
                 'is_pro' => true
             ],
+            [
+                'key'    => 'facebook-feed',
+                'title'  => __( 'Facebook Feed', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/facebook-feed/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/facebook-feed/',
+            ],
         ]
     ],
     'learn-dash-elements'   => [
@@ -423,6 +435,29 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/learndash-course-list/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/learndash-course-list/',
                 'is_pro' => true
+            ]
+        ]
+    ],
+    'documentation-elements'   => [
+        'title' => __( 'Documentation Elements', 'essential-addons-elementor' ),
+        'elements'  => [
+            [
+                'key'   => 'betterdocs-category-grid',
+                'title' => __( 'BetterDocs Category Grid', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/betterdocs-category-grid/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-category-grid/'
+            ],
+            [
+                'key'   => 'betterdocs-category-box',
+                'title' => __( 'BetterDocs Category Box', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/betterdocs-category-box/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-category-box/'
+            ],
+            [
+                'key'   => 'betterdocs-search-form',
+                'title' => __( 'BetterDocs Search Form', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/betterdocs-search-form/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-search-form/'
             ]
         ]
     ]
@@ -457,25 +492,24 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                             <div class="eael-elements-info">
                                 <p class="eael-el-title">
                                     <?php _e( $item['title'], 'essential-addons-elementor' ) ?>
-                                    <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">Pro</sup>' : ''; ?>
+                                    <?php echo isset( $item['is_pro'] ) && !$this->pro_enabled ? '<sup class="pro-label">'.__('Pro', 'essential-addons-elementor').'</sup>' : ''; ?>
                                     <?php
                                         if ($item['key'] === 'mailchimp' && $this->pro_enabled) {
-                                            echo '
-                                            <span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="mailchimp-api" data-title="Mailchimp API Key" data-key="eael_mailchimp_api">'.__('Settings', 'essential-addons-elementor').'</a></span>
-                                            <input type="hidden" name="mailchimp-api" id="mailchimp-api-hidden" class="mailchimp-api" placeholder="Set API Key" value="'.get_option('eael_save_mailchimp_api').'">';
+                                            echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Mailchimp API Key" data-placeholder="Set API Key" data-target="#mailchimp-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                            <input type="hidden" name="mailchimp-api" id="mailchimp-api" class="mailchimp-api" placeholder="Set API Key" value="' . get_option('eael_save_mailchimp_api') . '">';
                                         } elseif($item['key'] === 'adv-google-map' && $this->pro_enabled) {
-                                            echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-settings="google-map-api" data-title="Google Map API Key" data-key="eael_google_map_api">'.__('Settings', 'essential-addons-elementor').'</a></span>
-                                            <input type="hidden" name="google-map-api" id="google-map-api-hidden" class="google-map-api" placeholder="Set API Key" value="'.get_option('eael_save_google_map_api').'">';
+                                            echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Google Map API Key" data-placeholder="Set API Key" data-target="#google-map-api">'.__('Settings', 'essential-addons-elementor').'</a></span>
+                                            <input type="hidden" name="google-map-api" id="google-map-api" class="google-map-api" value="' . get_option('eael_save_google_map_api') . '">';
                                         }
                                     ?>
                                 </p>
                                 <a  class="eael-element-info-link" href="<?php echo ($item['demo_link']);?>" target="_blank">
                                     <span class="dashicons dashicons-welcome-view-site"></span>
-                                    <span class="eael-info-tooltip">Demo</span>
+                                    <span class="eael-info-tooltip"><?php _e('Demo', 'essential-addons-elementor'); ?></span>
                                 </a>
                                 <a class="eael-element-info-link" href="<?php echo ($item['doc_link']);?>" target="_blank">
                                     <span class="dashicons dashicons-editor-help"></span>
-                                    <span class="eael-info-tooltip">Documentation</span>
+                                    <span class="eael-info-tooltip"><?php _e('Documentation', 'essential-addons-elementor'); ?></span>
                                 </a>
                             </div>
                             <input type="checkbox" id="<?php echo esc_attr($item['key']); ?>" name="<?php echo esc_attr($item['key']); ?>" <?php echo $status; ?>>

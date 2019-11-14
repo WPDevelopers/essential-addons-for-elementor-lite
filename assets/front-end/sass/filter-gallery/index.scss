@@ -296,7 +296,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	margin-right: calc(20px/2);
 	margin-bottom: 20px;
 	position: relative;
-	overflow: hidden;
 }
 
 .gallery-item-caption-wrap,
@@ -427,12 +426,16 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	transition: 0.6s all ease;
 }
 
-.gallery-item-caption-wrap .gallery-item-buttons > a {
-	padding: 5px 15px;
-	display: inline-block;
+.gallery-item-caption-wrap .gallery-item-buttons > a span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border-radius: 50%;
 	outline: none;
 	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
@@ -765,4 +768,232 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	.elementor-element.elementor-grid-mobile-6 .eael-filterable-gallery-item-wrap:nth-of-type(6n+1) {
 		clear: left;
 	}
+}
+
+/* ------------- Layout 3 Style ----------------- */
+.fg-layout-3-filter-controls {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fg-layout-3-item-content {
+	text-align: center;
+}
+
+.fg-layout-3-item-content .fg-item-title {
+	font-size: 18px;
+	line-height: 1;
+	font-weight: 500;
+	margin: 0;
+	transition: 300ms;
+}
+
+.fg-layout-3-item-content .fg-item-content p {
+	font-size: 13px;
+	font-weight: 400;
+}
+
+.fg-filter-wrap {
+	position: relative;
+	flex-basis: 30%;
+}
+
+.fg-layout-3-filter-controls {
+    position: absolute;
+    left: 0;
+    background: #fff;
+    z-index: 999;
+	width: 150px;
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
+	width: 100%;
+	border-radius: 5px;
+	padding-top: 7px;
+}
+
+.fg-layout-3-filter-controls.open-filters {
+    visibility: visible;
+    opacity: 1;
+}
+
+.fg-layout-3-filter-controls li.control {
+	padding: 5px 5px 5px 10px;
+	cursor: pointer;
+	transition: 300ms;
+	font-size: 14px;
+	color: #7f8995;
+	font-weight: normal;
+}
+
+.fg-layout-3-filter-controls li.control:hover {
+	color: #2d425a;
+}
+
+.fg-layout-3-filter-controls li.control:first-child {
+	border-top: 0px solid;
+}
+
+.fg-layout-3-filter-controls li.control:last-child {
+	border-bottom: 0px solid;
+}
+
+.fg-layout-3-filters-wrap {
+    max-width: 600px;
+    margin: 15px auto 50px;
+}
+
+.fg-filter-wrap button {
+    width: 100%;
+    border: 0px solid;
+    border-radius: 0px;
+    padding: 17px 13px;
+    font-size: 14px;
+	color: #2d425a;
+	background: #f7f8ff;
+	height: 55px;
+    border-right: 1px solid #abb5ff;
+	border-radius: 10px 0px 0 10px;
+	outline: none;
+	text-align: center;
+    position: relative;
+}
+
+.fg-filter-wrap button > i {
+    font-size: 18px;
+    position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 10px;
+}
+
+.fg-layout-3-search-box {
+    flex-basis: 70%;
+    height: 100%;
+}
+
+.fg-layout-3-search-box input[type="text"] {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 15px;
+    border: 0px solid;
+    outline: none;
+    background: none;
+}
+
+.fg-layout-3-search-box input[type="text"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #7f8995;
+	font-size: 13px;
+}
+
+.fg-layout-3-search-box input[type="text"]::-moz-placeholder { /* Firefox 19+ */
+	color: #7f8995;
+	font-size: 13px;
+}
+
+.fg-layout-3-search-box input[type="text"]:-ms-input-placeholder { /* IE 10+ */
+	color: #7f8995;
+	font-size: 13px;
+}
+
+.fg-layout-3-search-box input[type="text"]:-moz-placeholder { /* Firefox 18- */
+	color: #7f8995;
+	font-size: 13px;
+}
+
+.fg-layout-3-filters-wrap {
+    height: 55px;
+	border-radius: 5px;
+    display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.fg-layout-3-filters-wrap .fg-layout-3-search-box {
+	background: #f7f8ff;
+	border-radius: 0 10px 10px 0;
+}
+
+.fg-layout-3-item-thumb {
+	position: relative;
+	overflow: hidden;
+}
+
+.fg-layout-3-item-thumb .gallery-item-buttons {
+	text-align: center;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 4;
+}
+
+.fg-layout-3-item-content {
+    padding: 27px 27px 30px;
+    text-align: center;
+}
+
+.eael-fg-card-content-align-left .fg-layout-3-item-content { text-align: left; }
+.eael-fg-card-content-align-center .fg-layout-3-item-content { text-align: center; }
+.eael-fg-card-content-align-right .fg-layout-3-item-content { text-align: right; }
+
+.eael-filterable-gallery-item-wrap .fg-layout-3-item.eael-gallery-grid-item {
+	box-shadow: 0px 0px 30px 0px rgba(3, 29, 60, 0.05);
+	border-radius: 5px;
+}
+
+.fg-caption-head {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+	padding: 35px 35px;
+	z-index: 3;
+	color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.fg-item-category > span {
+	font-size: 12px;
+	color: #fff;
+	background: #fa9196;
+	padding: 10px 12px;
+	display: inline-block;
+}
+
+.fg-layout-3-item-content {
+    position: relative;
+}
+
+.fg-item-category {
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    margin-top: -15px;
+    z-index: 11;
+}
+
+.fg-item-category span {
+    border-radius: 5px;
+	line-height: 1;
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
+}
+
+.fg-layout-3-item.eael-gallery-grid-item:hover .fg-item-category span {
+	visibility: visible;
+	opacity: 1;
 }

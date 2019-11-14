@@ -116,17 +116,23 @@ trait Admin
 
         parse_str($_POST['fields'], $settings);
 
-        // update new settings
-        $updated = update_option('eael_save_settings', array_merge(array_fill_keys($this->get_registered_elements(), 0), array_map(function ($value) {return 1;}, $settings)));
-
         // Saving Google Map Api Key
         update_option('eael_save_google_map_api', @$settings['google-map-api']);
-
+        
         // Saving Mailchimp Api Key
         update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
+        
+        // Saving Duplicator Settings
+        update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
+        
+        $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), false);
+        $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));
+        
+        // update new settings
+        $updated = update_option('eael_save_settings', $elements);
 
         // Build assets files
-        $this->generate_scripts(array_keys($settings));
+        $this->generate_scripts(array_keys($elements));
 
         wp_send_json($updated);
     }
@@ -200,7 +206,7 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible ' );
-        $notice->message( 'upsale', '<p>'. __( '<a href="https://essential-addons.com/elementor/reading-progress/" target="_blank">Reading Progress Bar</a> is Now Available for Elementor. Increase 20-40% Sales & Interaction in Your Site With Our New Plugin <a href="https://notificationx.com" target="_blank">NotificationX!</a>', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( '7000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', $notice->text_domain ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         // Update Notice For PRO Version
@@ -214,7 +220,7 @@ trait Admin
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
             'file'      => 'notificationx.php',
-            'btn_text'  => __( 'Install NotificationX', 'essential-addons-elementor' ),
+            'btn_text'  => __( 'Install Free', 'essential-addons-elementor' ),
             'condition' => [
                 'by' => 'class',
                 'class' => 'NotificationX'
@@ -224,7 +230,7 @@ trait Admin
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
-                'upsale' => $notice->makeTime($notice->timestamp, '1 Hour'),
+                'upsale' => $notice->makeTime($notice->timestamp, '1 Day'),
                 'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
             ],
         );
@@ -236,6 +242,14 @@ trait Admin
     }
 
     public function admin_bar($wp_admin_bar) {
+        if(is_admin()) {
+            return;
+        }
+
+        if(!$this->get_settings('quick_tools')) {
+            return;
+        }
+
         $wp_admin_bar->add_node([
             'id'    => 'ea-wp-admin-bar',
             'meta'  => [
@@ -251,7 +265,7 @@ trait Admin
             'meta'  => [
                 'class' => 'ea-all-cache-clear'
             ],
-            'title' => 'Clear All Cache'
+            'title' => 'Regenerate All Assets'
         ]);
 
         $wp_admin_bar->add_node([
@@ -262,7 +276,7 @@ trait Admin
                 'class' => 'ea-clear-cache',
                 'html'   => '<div class="ea-clear-cache-id" data-pageid="'.get_queried_object_id().'">'
             ],
-            'title' => 'Clear Page Cache'
+            'title' => 'Regenerate Page Assets'
         ]);
 
         

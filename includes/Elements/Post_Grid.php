@@ -402,11 +402,17 @@ class Post_Grid extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-grid-post .eael-entry-overlay > i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-grid-post .eael-entry-overlay > img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
                 ],
             ]
         );
 
         $this->end_controls_section();
+
+        /**
+         * Read More Button Style Controls
+         */
+        $this->eael_read_more_button_style();
 
         /**
          * Load More Button Style Controls!
@@ -417,6 +423,7 @@ class Post_Grid extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
         $settings = [
             'eael_show_image' => $settings['eael_show_image'],
@@ -435,6 +442,7 @@ class Post_Grid extends Widget_Base
             'eael_post_grid_columns' => $settings['eael_post_grid_columns'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
+            'expanison_indicator'   => $settings['excerpt_expanison_indicator']
         ];
 
         $this->add_render_attribute(
@@ -455,7 +463,7 @@ class Post_Grid extends Widget_Base
             <div class="clearfix"></div>
         </div>';
 		
-		if (1 == $settings['show_load_more']) {
+		if ('yes' == $settings['show_load_more']) {
 			if ($args['posts_per_page'] != '-1') {
 				echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-layout="masonry" data-page="1">

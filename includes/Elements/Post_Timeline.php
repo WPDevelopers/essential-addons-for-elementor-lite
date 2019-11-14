@@ -289,6 +289,7 @@ class Post_Timeline extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
         $settings = [
             'eael_show_image' => $settings['eael_show_image'],
@@ -298,6 +299,7 @@ class Post_Timeline extends Widget_Base
             'eael_excerpt_length' => $settings['eael_excerpt_length'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
+            'expanison_indicator'   => $settings['excerpt_expanison_indicator']
         ];
 
         $this->add_render_attribute(
@@ -321,7 +323,7 @@ class Post_Timeline extends Widget_Base
 		    </div>
 		</div>';
 
-        if (1 == $settings['show_load_more']) {
+        if ('yes' == $settings['show_load_more']) {
             if ($args['posts_per_page'] != '-1') {
                 echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">

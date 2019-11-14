@@ -147,7 +147,7 @@ class Tooltip extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_tooltip_content_alignment',
 			[
-				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Alignment', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
@@ -172,6 +172,34 @@ class Tooltip extends Widget_Base {
 				'prefix_class' => 'eael-tooltip-align-',
 			]
 		);
+
+		$this->add_responsive_control(
+			'eael_tooltip_icon_size',
+			[
+				'label'     => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'size_units'	=> [ '%', 'px' ],
+				'default'   => [
+					'size' => 30,
+				],
+				'range'     => [
+					'px' => [
+						'max' => 150,
+					],
+					'%'	=> [
+						'max'	=> 100
+					]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content i'	=> 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-tooltip .eael-tooltip-content .ea-tooltip-svg-trigger'	=> 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+				'condition'	=> [
+					'eael_tooltip_type'	=> 'icon'
+				]
+			]
+		);
+		
 		$this->add_control(
 			'eael_tooltip_enable_link',
 			[
@@ -309,6 +337,36 @@ class Tooltip extends Widget_Base {
 	 			],
 			]
 		);
+
+		$this->add_responsive_control(
+			'eael_tooltip_text_alignment',
+			[
+				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-right',
+					],
+					'justify' => [
+						'title' => __( 'Justified', 'essential-addons-elementor' ),
+						'icon' => 'fa fa-align-justify',
+					],
+				],
+				'default' => 'left',
+				'prefix_class' => 'eael-tooltip-text-align-',
+			]
+		);
+
 		$this->start_controls_tabs( 'eael_tooltip_content_style_tabs' );
 			// Normal State Tab
 			$this->start_controls_tab( 'eael_tooltip_content_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
@@ -623,7 +681,11 @@ class Tooltip extends Widget_Base {
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
 			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?>
 			<?php if ($icon_is_new || $icon_migrated) { ?>
-				<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value'] ); ?>"></i>
+				<?php if( isset($settings['eael_tooltip_icon_content_new']['value']['url']) ) : ?>
+					<img class="ea-tooltip-svg-trigger" src="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_tooltip_icon_content_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+				<?php else : ?>
+					<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value'] ); ?>"></i>
+				<?php endif; ?>
 			<?php } else { ?>
 				<i class="<?php echo esc_attr( $settings['eael_tooltip_icon_content'] ); ?>"></i>
 			<?php } ?>

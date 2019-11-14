@@ -1,0 +1,271 @@
+.eael-facebook-feed {
+    width: 100%;
+    margin: auto;
+
+    &.eael-col-1 {
+        .eael-facebook-feed-item {
+            float: none;
+            width: 100%;
+
+            @media only screen and (max-width: 979px) {
+                width: 50%;
+            }
+
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+            }
+        }
+    }
+    &.eael-col-2 {
+        .eael-facebook-feed-item {
+            float: left;
+            width: 50%;
+
+            @media only screen and (max-width: 979px) {
+                width: 50%;
+            }
+
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+            }
+        }
+    }
+    &.eael-col-3 {
+        .eael-facebook-feed-item {
+            float: left;
+            width: 33.3333%;
+
+            @media only screen and (max-width: 979px) {
+                width: 50%;
+            }
+
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+            }
+        }
+    }
+
+    &.eael-col-4 {
+        .eael-facebook-feed-item {
+            float: left;
+            width: 25%;
+
+            @media only screen and (max-width: 979px) {
+                width: 50%;
+            }
+
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+            }
+        }
+    }
+    &.eael-col-5 {
+        .eael-facebook-feed-item {
+            float: left;
+            width: 20%;
+
+            @media only screen and (max-width: 979px) {
+                width: 50%;
+            }
+
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+            }
+        }
+    }
+    &.eael-col-6 {
+        .eael-facebook-feed-item {
+            float: left;
+            width: 16.6666%;
+
+            @media only screen and (max-width: 979px) {
+                width: 50%;
+            }
+
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+            }
+        }
+    }
+
+    .eael-facebook-feed-item {
+        display: inline-block;
+        line-height: 0;
+    }
+
+    .eael-facebook-feed-item,
+    .eael-facebook-feed-item-inner {
+        position: relative;
+    }
+}
+
+.eael-facebook-feed-overlay {
+    .eael-facebook-feed-item {
+        .eael-facebook-feed-item-overlay {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 12px;
+            line-height: 1;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 200ms;
+
+            .eael-facebook-feed-item-overlay-inner {
+                position: relative;
+                align-self: center;
+            }
+        }
+        &:hover {
+            .eael-facebook-feed-item-overlay {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
+    .eael-facebook-feed-meta {
+        margin-bottom: 0;
+
+        span {
+            display: inline-block;
+            margin: 0 15px;
+        }
+    }
+}
+
+.eael-facebook-feed-card {
+    .eael-facebook-feed-item {
+        .eael-facebook-feed-item-inner {
+            margin: 10px;
+
+            .eael-facebook-feed-item-header {
+                padding: 8px 12px;
+
+                .eael-facebook-feed-item-user {
+                    float: left;
+
+                    .eael-facebook-feed-avatar {
+                        float: left;
+                        display: inline-block;
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                    }
+
+                    .eael-facebook-feed-username {
+                        float: left;
+                        display: inline-block;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 32px;
+                        margin: 0;
+                    }
+                }
+                .eael-facebook-feed-post-time {
+                    float: right;
+                    font-size: 11px;
+                    font-weight: 400;
+                    line-height: 32px;
+                }
+            }
+
+            .eael-facebook-feed-item-content {
+                position: relative;
+                display: block;
+                padding: 12px;
+
+                .eael-facebook-feed-message {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.3;
+                    margin: 0;
+                }
+            }
+
+            .eael-facebook-feed-preview-wrap {
+                padding: 0;
+
+                .eael-facebook-feed-preview-img {
+                    display: block;
+                    position: relative;
+                    margin-bottom: 12px;
+                }
+
+                .eael-facebook-feed-preview-overlay {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background-color: rgba($color: #000000, $alpha: 0.4);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    i {
+                        font-size: 48px;
+                        color: #fff;
+                    }
+                }
+
+                .eael-facebook-feed-url-preview {
+                    padding: 0 12px 15px;
+
+                    .eael-facebook-feed-url-host {
+                        font-size: 12px;
+                        font-weight: 400;
+                        line-height: 1;
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                    }
+                    .eael-facebook-feed-url-title {
+                        font-size: 15px;
+                        font-weight: 700;
+                        line-height: 1.4;
+                        margin-top: 0;
+                        margin-bottom: 6px;
+                    }
+                    .eael-facebook-feed-url-description {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 1.2;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            .eael-facebook-feed-item-footer {
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 30px;
+                padding: 8px 12px;
+
+                span {
+                    display: inline-block;
+
+                    &.eael-facebook-feed-post-likes {
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.elementor-widget-eael-facebook-feed {
+    .eael-load-more-button-wrap {
+        justify-content: center;
+        margin-top: 15px;
+
+        &.no-pagination {
+            display: none;
+        }
+    }
+}

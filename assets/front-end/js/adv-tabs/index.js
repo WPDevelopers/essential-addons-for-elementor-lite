@@ -34,6 +34,7 @@ var AdvanceTabHandler = function($scope, $) {
     $($currentTabId + " .eael-tabs-nav ul li").click(function() {
         var currentTabIndex = $(this).index();
         var tabsContainer = $(this).closest(".eael-advance-tabs");
+
         var tabsNav = $(tabsContainer)
             .children(".eael-tabs-nav")
             .children("ul")
@@ -60,6 +61,27 @@ var AdvanceTabHandler = function($scope, $) {
             .eq(currentTabIndex)
             .addClass("active")
             .removeClass("inactive");
+
+        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
+            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
+            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+
+        if($postGridGallery.length) {
+            $postGridGallery.isotope();
+        }
+
+        if($twitterfeedGallery.length) {
+            $twitterfeedGallery.isotope("layout");
+        }
+        
+        if($filterGallery.length) {
+            $filterGallery.isotope("layout");
+        }
+        
+        if($instaGallery.length) {
+            $instaGallery.isotope("layout");
+        }
 
         $(tabsContent).each(function(index) {
             $(this).removeClass("active-default");

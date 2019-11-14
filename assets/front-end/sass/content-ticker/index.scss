@@ -28,7 +28,6 @@
 .eael-ticker-wrap .swiper-button-prev {
 	left: auto !important;
 	right: 25px;
-	transform: translateY(-50%) rotate(180deg) !important;
 }
 
 .eael-ticker-wrap div.swiper-slide,
@@ -51,5 +50,15 @@
 	}
 	.content-ticker-pagination {
 		display: none;
+	}
+}
+
+.eael-ticker-wrap {
+	.swiper-button-next, .swiper-button-prev {
+		background-image: none;
+		outline: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }

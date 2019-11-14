@@ -489,16 +489,29 @@ class Content_Ticker extends Widget_Base
         );
 
         $this->add_control(
+            'prev_arrow',
+            [
+                'label' => __('Choose Prev Arrow', 'essential-addons-elementor'),
+                'type' => Controls_Manager::ICONS,
+                'label_block' => true,
+                'default' => [
+                    'value' => 'fas fa-angle-left',
+                    'library' => 'fa-solid',
+                ]
+            ]
+        );
+
+        $this->add_control(
             'arrow_new',
             [
-                'label' => __('Choose Arrow', 'essential-addons-elementor'),
+                'label' => __('Choose Next Arrow', 'essential-addons-elementor'),
                 'type' => Controls_Manager::ICONS,
                 'fa4compatibility' => 'arrow',
                 'label_block' => true,
                 'default' => [
                     'value' => 'fas fa-angle-right',
                     'library' => 'fa-solid',
-                ],
+                ]
             ]
         );
 
@@ -518,6 +531,7 @@ class Content_Ticker extends Widget_Base
                 'size_units' => ['px'],
                 'selectors' => [
                     '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next img, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -684,6 +698,7 @@ class Content_Ticker extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
 
         $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
@@ -780,14 +795,28 @@ class Content_Ticker extends Widget_Base
                 $arrow = $settings['arrow'];
             }
 
-            return '<div class="content-ticker-pagination">
-	            <div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">
-	                <i class="' . $arrow . '"></i>
-	            </div>
-	            <div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">
-	                <i class="' . $arrow . '"></i>
-	            </div>
-            </div>';
+            $html = '<div class="content-ticker-pagination">';
+
+                $html .= '<div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">';
+                    if( isset($arrow['url']) ) {
+                        $html .= '<img src="'.esc_url($arrow['url']).'" alt="'.esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)).'" />';
+                    }else {
+                        $html .= '<i class="' . $arrow . '"></i>';
+                    }
+                $html .= '</div>';
+                
+                $html .='<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
+                    if( isset($settings['prev_arrow']['value']['url'])) {
+                        $html .= '<img src="'.esc_url($settings['prev_arrow']['value']['url']).'" alt="'.esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
+                    }else {
+                        $html .= '<i class="' . esc_attr($settings['prev_arrow']['value']) . '"></i>';
+                    }
+                $html .= '</div>';
+                
+            $html .= '</div>';
+
+
+            return $html;
         }
     }
 }

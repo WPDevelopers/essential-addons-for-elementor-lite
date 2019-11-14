@@ -792,15 +792,19 @@ class Adv_Tabs extends Widget_Base
 		  <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
 	    	<?php foreach ($settings['eael_adv_tabs_tab'] as $tab): ?>
 	      		<li class="<?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>"><?php if ($settings['eael_adv_tabs_icon_show'] === 'yes'):
-            if ($tab['eael_adv_tabs_icon_type'] === 'icon'): ?>
-                                <?php if ($tab_icon_is_new || $tab_icon_migrated) {
+                    if ($tab['eael_adv_tabs_icon_type'] === 'icon'): ?>
+                            <?php if ($tab_icon_is_new || $tab_icon_migrated) {
+                                if(isset($tab['eael_adv_tabs_tab_title_icon_new']['value']['url'])) {
+                                    echo '<img src="' . $tab['eael_adv_tabs_tab_title_icon_new']['value']['url'] . '"/>';
+                                }else {
                                     echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon_new']['value'] . '"></i>';
-                                } else {
-                                    echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
-                                } ?>
-			      				<?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image'): ?>
-	      					<img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
-	      				<?php endif;?>
+                                }
+                            } else {
+                                echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
+                            } ?>
+                            <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image'): ?>
+                        <img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
+                    <?php endif;?>
 	      		<?php endif;?> <span class="eael-tab-title"><?php echo $tab['eael_adv_tabs_tab_title']; ?></span></li>
 	      	<?php endforeach;?>
     		</ul>
