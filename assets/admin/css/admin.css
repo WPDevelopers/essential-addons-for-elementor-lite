@@ -34,9 +34,9 @@
     align-items: center;
 }
 .eael-header-bar .eael-admin-logo-inline {
-    width: 40px;
-    padding: 5px 15px;
-    margin-right: 25px;
+    width: 60px;
+    padding: 5px 10px;
+    margin-right: 5px;
 }
 .eael-header-bar .eael-admin-logo-inline img {
     width: 100%;
@@ -220,31 +220,31 @@ textarea.eael-form-control {
     display: none;
 }
 .eael-checkbox label {
-    width: 2em;
-    height: 1em;
+    width: 48px;
+    height: 24px;
     position: relative;
     cursor: pointer;
     display: block;
 }
-.eael-checkbox label:before {
+.eael-checkbox label::before {
     content: "";
     position: absolute;
-    width: 2em;
-    height: 1em;
-    left: 0.1em;
+    width: 48px;
+    height: 24px;
+    left: 2px;
     transition: background 0.1s 0.1s ease;
     background: #cbcfd0;
     border: 1px solid #cbcfd0;
     border-radius: 50px;
 }
-.eael-checkbox label:after {
+.eael-checkbox label::after {
     content: "";
     position: absolute;
-    width: 0.8em;
-    height: 0.8em;
+    width: 18px;
+    height: 17px;
     border-radius: 100%;
-    left: 0.2em;
-    top: 0.14em;
+    left: 5px;
+    top: 3px;
     transition: all 0.2s ease;
     box-shadow: 0 0 0 5px #fcfff4 inset;
     background: #cbcfd0;
@@ -257,6 +257,11 @@ textarea.eael-form-control {
 }
 .eael-checkbox input[type="checkbox"]:checked + label::after {
     left: 1.2em;
+    background: #ffffff;
+    animation: switch-on 0.3s ease-out;
+}
+.eael-checkbox input[type="checkbox"]:checked + label::after {
+    left: 29px;
     background: #ffffff;
     animation: switch-on 0.3s ease-out;
 }
@@ -862,25 +867,25 @@ button.eael-btn.eael-global-control-disable:hover {
 }
 .eael-elements-info > a.eael-element-info-link {
     position: relative;
-    width: 17px;
-    height: 16px;
-    border: 1px solid rgba(0,0,0, .15);
-    border-radius: 20px;
-    padding: 4px;
+    width: 18px;
     display: flex;
     margin: 0 1px;
     text-decoration: none;
     color: #3a3c40;
     opacity: .75;
+    align-items: center;
+    justify-content: center;
 }
 .eael-elements-info > a.eael-element-info-link:hover{
     opacity: 1;
 }
 .eael-elements-info img, .eael-elements-info svg {
-    width: 18px;
+    width: 16px;
+    fill: #3a3c40;
 }
 .eael-element-info-link span.dashicons {
-    font-size: 17px;
+    font-size: 15px;
+    margin-top: 6px;
 }
 .eael-elements-info .eael-info-tooltip {
     background-color: #3a3c40;

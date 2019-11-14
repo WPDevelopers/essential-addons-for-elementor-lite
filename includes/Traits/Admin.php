@@ -230,11 +230,11 @@ trait Admin
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
-                'upsale' => $notice->makeTime($notice->timestamp, '1 Day'),
+                'upsale' => $notice->makeTime($notice->timestamp, '6 Day'),
                 'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
             ],
         );
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.3.0', '<' ) ) { 
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) { 
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
 
