@@ -46,7 +46,7 @@ jQuery(window).on('elementor/frontend/init', function() {
                                 var cols = rows[i].querySelectorAll('th, td');
 
                                 for (var j = 0; j < cols.length; j++) {
-                                    row.push(cols[j].innerText);
+                                    row.push(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, ' '));
                                 }
 
                                 csv.push(row.join(','));
