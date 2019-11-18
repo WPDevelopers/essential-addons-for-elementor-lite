@@ -1,4 +1,3 @@
-
 /*------------------------------*/
 /* 31. Advance Accordion
 /*------------------------------*/
@@ -324,6 +323,156 @@
   width: 100%;
 }
 
+/*--------------------------------*/
+/* 11. Contact Form 7 Styles
+/*--------------------------------*/
+.eael-contact-form.eael-contact-form-align-center,
+.eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form.eael-contact-form-align-left,
+.eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form.eael-contact-form-align-right,
+.eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
+  float: right;
+  width: auto;
+}
+
+.eael-contact-form-7 textarea,
+.eael-contact-form-7 input[type="text"],
+.eael-contact-form-7 input[type="password"],
+.eael-contact-form-7 input[type="datetime"],
+.eael-contact-form-7 input[type="datetime-local"],
+.eael-contact-form-7 input[type="date"],
+.eael-contact-form-7 input[type="month"],
+.eael-contact-form-7 input[type="time"],
+.eael-contact-form-7 input[type="week"],
+.eael-contact-form-7 input[type="number"],
+.eael-contact-form-7 input[type="email"],
+.eael-contact-form-7 input[type="url"],
+.eael-contact-form-7 input[type="search"],
+.eael-contact-form-7 input[type="tel"],
+.eael-contact-form-7 input[type="color"],
+.eael-contact-form-7 .uneditable-input {
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+.eael-contact-form-7 .wpcf7-form::before,
+.eael-contact-form-7 .wpcf7-form::after {
+  content: " ";
+  clear: both;
+  display: table;
+}
+
+.eael-contact-form-7 .wpcf7-form:after {
+  clear: both;
+  content: "";
+  font-size: 0;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+
+.eael-contact-form-7 .wpcf7-form label,
+.eael-contact-form-7 .wpcf7-form .wpcf7-form-control-wrap {
+  display: block;
+}
+
+.eael-contact-form-7 .wpcf7-form p {
+  margin-bottom: 0;
+}
+
+.eael-contact-form-7.labels-hide .wpcf7-form label {
+  display: none;
+}
+
+.eael-contact-form-7-title {
+  margin-bottom: 10px;
+}
+
+.eael-contact-form-7-description {
+  margin-bottom: 20px;
+}
+
+.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
+  width: 100%;
+}
+
+.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
+  margin: 0 auto;
+}
+
+.eael-ticker-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.eael-ticker-wrap .ticker-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.eael-ticker-wrap .eael-ticker {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
+}
+
+.eael-ticker-wrap .swiper-button-prev {
+  left: auto !important;
+  right: 25px;
+}
+
+.eael-ticker-wrap div.swiper-slide,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
+  opacity: 0 !important;
+}
+
+.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .eael-ticker-wrap {
+    flex-flow: row wrap;
+  }
+
+  .content-ticker-pagination {
+    display: none;
+  }
+}
+.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
+  background-image: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /*--------------------------*/
 /* 19. Call To Action
 /*-------------------------*/
@@ -639,215 +788,6 @@
 }
 
 /*--------------------------------*/
-/* 11. Contact Form 7 Styles
-/*--------------------------------*/
-.eael-contact-form.eael-contact-form-align-center,
-.eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form.eael-contact-form-align-left,
-.eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form.eael-contact-form-align-right,
-.eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
-  float: right;
-  width: auto;
-}
-
-.eael-contact-form-7 textarea,
-.eael-contact-form-7 input[type="text"],
-.eael-contact-form-7 input[type="password"],
-.eael-contact-form-7 input[type="datetime"],
-.eael-contact-form-7 input[type="datetime-local"],
-.eael-contact-form-7 input[type="date"],
-.eael-contact-form-7 input[type="month"],
-.eael-contact-form-7 input[type="time"],
-.eael-contact-form-7 input[type="week"],
-.eael-contact-form-7 input[type="number"],
-.eael-contact-form-7 input[type="email"],
-.eael-contact-form-7 input[type="url"],
-.eael-contact-form-7 input[type="search"],
-.eael-contact-form-7 input[type="tel"],
-.eael-contact-form-7 input[type="color"],
-.eael-contact-form-7 .uneditable-input {
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-}
-
-.eael-contact-form-7 .wpcf7-form::before,
-.eael-contact-form-7 .wpcf7-form::after {
-  content: " ";
-  clear: both;
-  display: table;
-}
-
-.eael-contact-form-7 .wpcf7-form:after {
-  clear: both;
-  content: "";
-  font-size: 0;
-  height: 0;
-  display: block;
-  visibility: hidden;
-}
-
-.eael-contact-form-7 .wpcf7-form label,
-.eael-contact-form-7 .wpcf7-form .wpcf7-form-control-wrap {
-  display: block;
-}
-
-.eael-contact-form-7 .wpcf7-form p {
-  margin-bottom: 0;
-}
-
-.eael-contact-form-7.labels-hide .wpcf7-form label {
-  display: none;
-}
-
-.eael-contact-form-7-title {
-  margin-bottom: 10px;
-}
-
-.eael-contact-form-7-description {
-  margin-bottom: 20px;
-}
-
-.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
-  width: 100%;
-}
-
-.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
-  margin: 0 auto;
-}
-
-.eael-ticker-wrap {
-  overflow: hidden;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-}
-
-.eael-ticker-wrap .ticker-badge {
-  flex: 0 0 auto;
-  padding: 8px 12px;
-}
-
-.eael-ticker-wrap .eael-ticker {
-  overflow: hidden;
-  flex: 1 1 auto;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content {
-  padding: 8px 12px;
-  line-height: 1.8;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content p {
-  margin: 0;
-}
-
-.eael-ticker-wrap .swiper-button-prev {
-  left: auto !important;
-  right: 25px;
-}
-
-.eael-ticker-wrap div.swiper-slide,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
-  opacity: 0 !important;
-}
-
-.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
-  text-align: left;
-}
-
-@media only screen and (max-width: 767px) {
-  .eael-ticker-wrap {
-    flex-flow: row wrap;
-  }
-
-  .content-ticker-pagination {
-    display: none;
-  }
-}
-.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
-  background-image: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/*---------------------------------*/
-/* 05. Countdown Styles
-/*---------------------------------*/
-/*--- General ---*/
-.eael-countdown-items {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.eael-countdown-items > li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table-cell;
-  position: relative;
-}
-
-.eael-countdown-item > div {
-  text-align: center;
-  padding: 20px;
-}
-
-.eael-countdown-label-block .eael-countdown-digits,
-.eael-countdown-label-block .eael-countdown-label {
-  display: block;
-  text-align: center;
-}
-
-.eael-countdown-digits {
-  font-size: 54px;
-  line-height: 1;
-}
-
-.eael-countdown-label {
-  font-size: 18px;
-  line-height: 1;
-  color: #ffffff;
-}
-
-.eael-countdown-show-separator .eael-countdown-digits::after {
-  content: ":";
-  position: absolute;
-  left: 98%;
-  z-index: 9999;
-}
-
-.eael-countdown-item:last-child .eael-countdown-digits::after {
-  display: none;
-}
-
-/*--- Style 1 ---*/
-.eael-countdown-items.style-1 .eael-countdown-item > div {
-  background: #262625;
-}
-
-/*--------------------------------*/
 /* 08. Creative Button styles
 /*--------------------------------*/
 .eael-creative-button-align-center {
@@ -1101,50 +1041,63 @@
   margin-left: 5px;
 }
 
-/* -------------------------------- */
-/* 20. Dual Color Heading
-/* -------------------------------- */
-.eael-dual-header {
+/*---------------------------------*/
+/* 05. Countdown Styles
+/*---------------------------------*/
+/*--- General ---*/
+.eael-countdown-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.eael-countdown-items > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  position: relative;
+}
+
+.eael-countdown-item > div {
+  text-align: center;
+  padding: 20px;
+}
+
+.eael-countdown-label-block .eael-countdown-digits,
+.eael-countdown-label-block .eael-countdown-label {
   display: block;
-  margin-bottom: 50px;
-}
-
-.eael-dual-header .title,
-.eael-dual-header .title span {
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 48px;
-  margin: 10px 0px;
-}
-
-.eael-dual-header .subtext {
-  font-size: 16px;
-  display: block;
-}
-
-.eael-dual-header i {
-  display: block;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
-  font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-  color: #1abc9c;
-}
-
-/*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
   text-align: center;
 }
 
-.eael-dual-header-content-align-left {
-  text-align: left;
+.eael-countdown-digits {
+  font-size: 54px;
+  line-height: 1;
 }
 
-.eael-dual-header-content-align-right {
-  text-align: right;
+.eael-countdown-label {
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.eael-countdown-show-separator .eael-countdown-digits::after {
+  content: ":";
+  position: absolute;
+  left: 98%;
+  z-index: 9999;
+}
+
+.eael-countdown-item:last-child .eael-countdown-digits::after {
+  display: none;
+}
+
+/*--- Style 1 ---*/
+.eael-countdown-items.style-1 .eael-countdown-item > div {
+  background: #262625;
 }
 
 table.eael-data-table thead .sorting, table.eael-data-table thead .sorting_desc, table.eael-data-table thead .sorting_asc {
@@ -1426,6 +1379,52 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: center;
 }
 
+/* -------------------------------- */
+/* 20. Dual Color Heading
+/* -------------------------------- */
+.eael-dual-header {
+  display: block;
+  margin-bottom: 50px;
+}
+
+.eael-dual-header .title,
+.eael-dual-header .title span {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0px;
+}
+
+.eael-dual-header .subtext {
+  font-size: 16px;
+  display: block;
+}
+
+.eael-dual-header i {
+  display: block;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  font-size: 36px;
+}
+
+.eael-dual-header .title span.lead {
+  color: #1abc9c;
+}
+
+/*--- Builder Related Css ---*/
+.eael-dual-header-content-align-center {
+  text-align: center;
+}
+
+.eael-dual-header-content-align-left {
+  text-align: left;
+}
+
+.eael-dual-header-content-align-right {
+  text-align: right;
+}
+
 .elementor-panel .pro-feature, .elementor-panel .pro-feature a {
   color: #a4afb7;
   text-transform: uppercase;
@@ -1698,6 +1697,61 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 }
 .elementor-widget-eael-facebook-feed .eael-load-more-button-wrap.no-pagination {
   display: none;
+}
+
+.eael-fancy-text-container p {
+  margin: 0;
+}
+
+.eael-fancy-text-strings {
+  display: none;
+}
+
+.eael-fancy-text-prefix,
+.eael-fancy-text-suffix {
+  display: inline-block;
+}
+
+.morphext > .animated {
+  display: inline-block;
+}
+
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink_cursor 0.7s infinite;
+  animation: blink_cursor 0.7s infinite;
+}
+
+@keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.eael-fancy-text-container.style-2 {
+  font-size: 24px;
+}
+
+.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
+  background: #ff5544;
+  color: #fff;
+  padding: 10px 25px;
 }
 
 /*----------------------------*/
@@ -3590,61 +3644,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   overflow: hidden;
 }
 
-.eael-fancy-text-container p {
-  margin: 0;
-}
-
-.eael-fancy-text-strings {
-  display: none;
-}
-
-.eael-fancy-text-prefix,
-.eael-fancy-text-suffix {
-  display: inline-block;
-}
-
-.morphext > .animated {
-  display: inline-block;
-}
-
-.typed-cursor {
-  opacity: 1;
-  -webkit-animation: blink_cursor 0.7s infinite;
-  animation: blink_cursor 0.7s infinite;
-}
-
-@keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.eael-fancy-text-container.style-2 {
-  font-size: 24px;
-}
-
-.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
-  background: #ff5544;
-  color: #fff;
-  padding: 10px 25px;
-}
-
 .eael-fluent-form-wrapper label.ff-el-form-check-label {
   display: flex;
   align-items: center;
@@ -3827,6 +3826,154 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .elementor-lightbox .dialog-widget-content {
   width: 100%;
   height: 100%;
+}
+
+/*----------------------*/
+/* 14. Gravity Form
+/*----------------------*/
+.eael-gravity-form-align-default,
+.eael-gravity-form-align-left,
+.eael-gravity-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-gravity-form-align-right,
+.eael-gravity-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-gravity-form-align-center,
+.eael-gravity-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer {
+  margin: 0;
+  padding: 0;
+}
+
+.gform_wrapper form li,
+.gform_wrapper li {
+  list-style: none;
+}
+
+.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper textarea {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
+  margin: 0;
+}
+
+.eael-gravity-form.title-description-hide .gform_heading {
+  display: none;
+}
+
+.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
+.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
+  display: none;
+}
+
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
+  width: 100%;
+}
+
+/*------------------------------*/
+/* 34. Image accordion
+/*------------------------------*/
+.eael-img-accordion {
+  display: flex;
+  height: 50vh;
+}
+
+.eael-img-accordion a {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: flex .4s;
+}
+
+.eael-grow-accordion {
+  flex: 3;
+}
+
+.eael-img-accordion .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color .4s;
+}
+
+.eael-img-accordion .overlay .overlay-inner {
+  z-index: 1;
+}
+
+.eael-img-accordion a:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-img-accordion .overlay-inner * {
+  visibility: hidden;
+  opacity: 0;
+  transform-style: preserve-3d;
+}
+
+.eael-img-accordion .overlay h2 {
+  color: #fff;
+  transform: translate3d(0, -60px, 0);
+}
+
+.eael-img-accordion .overlay p {
+  color: #fff;
+  transform: translate3d(0, 60px, 0);
+}
+
+.eael-img-accordion .overlay-inner-show * {
+  opacity: 1;
+  visibility: visible;
+  transform: none !important;
+  transition: all .3s .3s;
+}
+
+@media screen and (max-width: 800px) {
+  .eael-img-accordion {
+    flex-direction: column;
+  }
+
+  .eael-img-accordion a:hover {
+    flex: 1;
+  }
+
+  .eael-img-accordion a:hover .overlay {
+    background-color: transparent;
+  }
 }
 
 /* ------------------------ */
@@ -4025,168 +4172,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-infobox-shape-radius .eael-infobox .infobox-icon img,
 .eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
   border-radius: 15px;
-}
-
-/*------------------------------*/
-/* 34. Image accordion
-/*------------------------------*/
-.eael-img-accordion {
-  display: flex;
-  height: 50vh;
-}
-
-.eael-img-accordion a {
-  position: relative;
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: flex .4s;
-}
-
-.eael-grow-accordion {
-  flex: 3;
-}
-
-.eael-img-accordion .overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: background-color .4s;
-}
-
-.eael-img-accordion .overlay .overlay-inner {
-  z-index: 1;
-}
-
-.eael-img-accordion a:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-img-accordion .overlay-inner * {
-  visibility: hidden;
-  opacity: 0;
-  transform-style: preserve-3d;
-}
-
-.eael-img-accordion .overlay h2 {
-  color: #fff;
-  transform: translate3d(0, -60px, 0);
-}
-
-.eael-img-accordion .overlay p {
-  color: #fff;
-  transform: translate3d(0, 60px, 0);
-}
-
-.eael-img-accordion .overlay-inner-show * {
-  opacity: 1;
-  visibility: visible;
-  transform: none !important;
-  transition: all .3s .3s;
-}
-
-@media screen and (max-width: 800px) {
-  .eael-img-accordion {
-    flex-direction: column;
-  }
-
-  .eael-img-accordion a:hover {
-    flex: 1;
-  }
-
-  .eael-img-accordion a:hover .overlay {
-    background-color: transparent;
-  }
-}
-
-/*----------------------*/
-/* 13. Ninja Form Styles
-/*----------------------*/
-.eael-ninja-container input,
-.eael-ninja-container textarea {
-  height: auto;
-  padding: 10px;
-}
-
-.eael-contact-form-align-center .eael-ninja-container,
-.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form-align-left .eael-ninja-container,
-.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form-align-right .eael-ninja-container,
-.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: right;
-  width: auto;
-}
-
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-ninja-container .nf-field .nf-field-element input[type="password"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-ninja-container .nf-field .nf-field-element input[type="url"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-ninja-container .nf-field .nf-field-element textarea {
-  max-width: 100%;
-}
-
-.eael-ninja-form .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form-title-yes .nf-form-title {
-  display: block;
-}
-
-.eael-ninja-form .title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form.title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form .nf-field-label {
-  display: none;
-}
-
-.eael-ninja-form-labels-yes .nf-field-label {
-  display: block;
-}
-
-.eael-ninja-form .submit-container input[type=button] {
-  border: 0;
-  border-radius: 0;
-}
-
-.eael-ninja-form-button-full-width .submit-container input[type=button] {
-  width: 100%;
 }
 
 /* ------------------------ */
@@ -4645,6 +4630,77 @@ button.mfp-close:hover {
     padding-left: 6px;
     padding-right: 6px;
   }
+}
+
+/*----------------------*/
+/* 13. Ninja Form Styles
+/*----------------------*/
+.eael-ninja-container input,
+.eael-ninja-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-align-center .eael-ninja-container,
+.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-align-left .eael-ninja-container,
+.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-align-right .eael-ninja-container,
+.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: right;
+  width: auto;
+}
+
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-ninja-container .nf-field .nf-field-element input[type="password"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-ninja-container .nf-field .nf-field-element input[type="url"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-ninja-container .nf-field .nf-field-element textarea {
+  max-width: 100%;
+}
+
+.eael-ninja-form .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form-title-yes .nf-form-title {
+  display: block;
+}
+
+.eael-ninja-form .title-description-hide .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form.title-description-hide .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form .nf-field-label {
+  display: none;
+}
+
+.eael-ninja-form-labels-yes .nf-field-label {
+  display: block;
+}
+
+.eael-ninja-form .submit-container input[type=button] {
+  border: 0;
+  border-radius: 0;
+}
+
+.eael-ninja-form-button-full-width .submit-container input[type=button] {
+  width: 100%;
 }
 
 /*-----------------------------*/
@@ -6681,7 +6737,7 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   padding: 0px;
   transition: 0.5s;
   text-align: left;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .eael-sticky-video-player2 {
@@ -7332,6 +7388,97 @@ span.eael-testimonial-quote {
   text-align: right;
 }
 
+.eael-twitter-feed::before, .eael-twitter-feed::after {
+  content: "";
+  clear: both;
+}
+
+.eael-twitter-feed-masonry .eael-twitter-feed-item {
+  float: left;
+}
+@media only screen and (max-width: 480px) {
+  .eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+    width: 100% !important;
+  }
+}
+
+.eael-twitter-feed-item .eael-twitter-feed-item-inner {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.eael-twitter-feed-item a {
+  color: #0088cc;
+  text-decoration: none;
+}
+.eael-twitter-feed-item a:hover {
+  outline: 0;
+  color: #005580;
+}
+.eael-twitter-feed-item a:focus {
+  outline: none;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header {
+  padding: 20px 15px 0;
+  margin-bottom: 10px;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar {
+  float: left;
+  width: 38px;
+  margin-right: 10px;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar img {
+  max-width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar.avatar-circle img {
+  border-radius: 50%;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta {
+  float: left;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta .eael-twitter-feed-item-icon {
+  color: #1da1f2;
+  margin-right: 5px;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta .eael-twitter-feed-item-author {
+  color: #444;
+  line-height: 1.5em;
+  font-weight: 700;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-date {
+  float: right;
+  margin-right: 10px;
+  font-size: 90%;
+  color: #999999;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-content {
+  padding: 0 15px 15px;
+}
+.eael-twitter-feed-item .eael-twitter-feed-item-content p {
+  color: #666666;
+  margin: 0 0 5px;
+  min-height: 20px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.eael-twitter-feed.swiper-container .swiper-button-next, .eael-twitter-feed.swiper-container .swiper-button-prev {
+  background-image: none;
+  outline: none;
+}
 
 /*------------------------------*/
 /* 32. Tooltip
@@ -7575,98 +7722,6 @@ span.eael-testimonial-quote {
 
 .eael-tooltip-text-align-justify .eael-tooltip-text {
   text-align: justify;
-}
-
-.eael-twitter-feed::before, .eael-twitter-feed::after {
-  content: "";
-  clear: both;
-}
-
-.eael-twitter-feed-masonry .eael-twitter-feed-item {
-  float: left;
-}
-@media only screen and (max-width: 480px) {
-  .eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
-    width: 100% !important;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
-    width: 100% !important;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
-    width: 100% !important;
-  }
-}
-
-.eael-twitter-feed-item .eael-twitter-feed-item-inner {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.eael-twitter-feed-item a {
-  color: #0088cc;
-  text-decoration: none;
-}
-.eael-twitter-feed-item a:hover {
-  outline: 0;
-  color: #005580;
-}
-.eael-twitter-feed-item a:focus {
-  outline: none;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header {
-  padding: 20px 15px 0;
-  margin-bottom: 10px;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar {
-  float: left;
-  width: 38px;
-  margin-right: 10px;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar img {
-  max-width: 100%;
-  height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-avatar.avatar-circle img {
-  border-radius: 50%;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta {
-  float: left;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta .eael-twitter-feed-item-icon {
-  color: #1da1f2;
-  margin-right: 5px;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-meta .eael-twitter-feed-item-author {
-  color: #444;
-  line-height: 1.5em;
-  font-weight: 700;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-header .eael-twitter-feed-item-date {
-  float: right;
-  margin-right: 10px;
-  font-size: 90%;
-  color: #999999;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-content {
-  padding: 0 15px 15px;
-}
-.eael-twitter-feed-item .eael-twitter-feed-item-content p {
-  color: #666666;
-  margin: 0 0 5px;
-  min-height: 20px;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-}
-
-.eael-twitter-feed.swiper-container .swiper-button-next, .eael-twitter-feed.swiper-container .swiper-button-prev {
-  background-image: none;
-  outline: none;
 }
 
 /*----------------------*/
