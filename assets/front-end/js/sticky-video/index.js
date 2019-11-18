@@ -4,6 +4,7 @@ var eaelsvHeight = 0;
 var eaelsvDomHeight = 0;
 var videoIsActive = 0;
 var eaelMakeItSticky = 0;
+var scrollHeight = 0;
 
 jQuery(window).on('elementor/frontend/init', function() {
     elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function($scope, $) {
@@ -20,6 +21,9 @@ jQuery(window).on('elementor/frontend/init', function() {
         eaelsvHeight = element.data('sheight');
         eaelsvWidth = element.data('swidth');
         overlay = element.data('overlay');
+        scrollHeight = element.data('scroll_height');
+
+        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
 
         var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
 
@@ -71,6 +75,7 @@ jQuery(window).on('elementor/frontend/init', function() {
             $('.eael-sticky-video-player2').removeAttr('style');
             videoIsActive = 0;
         });
+        $('.eael-sticky-video-wrapper').css('height', element.height()+'px');
     });
 });
 
@@ -79,7 +84,7 @@ jQuery(window).scroll(function() {
     var scrollBottom = jQuery(document).height() - scrollTop;
 
     if (scrollBottom > jQuery(window).height() + 400) {
-        if (scrollTop >= eaelsvDomHeight + 100) {
+        if (scrollTop >= eaelsvDomHeight) {
             if (videoIsActive == 1) {
                 jQuery('#videobox')
                     .find('.eaelsv-sticky-player-close')
@@ -100,13 +105,13 @@ jQuery(window).scroll(function() {
 });
 
 function GetDomElementHeight(elem) {
+    var contentHeight = jQuery(elem).parent().height(); //;
+    var expHeight = ((scrollHeight*contentHeight)/100);
     var hght =
         jQuery(elem)
             .parent()
-            .offset().top +
-        jQuery(elem)
-            .parent()
-            .height();
+            .offset().top + expHeight;
+        
     return hght;
 }
 
