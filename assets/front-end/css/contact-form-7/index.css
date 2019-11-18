@@ -1,7 +1,6 @@
 /*--------------------------------*/
 /* 11. Contact Form 7 Styles
 /*--------------------------------*/
-.eael-contact-form.eael-contact-form-align-center,
 .eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -9,16 +8,27 @@
   float: none;
 }
 
-.eael-contact-form.eael-contact-form-align-left,
+.eael-contact-form-align-center {
+  float: none;
+  margin: 0 auto;
+}
+
 .eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
   float: left;
   width: auto;
 }
 
-.eael-contact-form.eael-contact-form-align-right,
+.eael-contact-form-align-left {
+  margin: 0 auto 0 0;
+}
+
 .eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
   float: right;
   width: auto;
+}
+
+.eael-contact-form-align-right {
+  margin: 0 0 0 auto;
 }
 
 .eael-contact-form-7 textarea,
@@ -79,8 +89,4 @@
 
 .eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
   width: 100%;
-}
-
-.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
-  margin: 0 auto;
 }
