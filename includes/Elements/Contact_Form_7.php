@@ -334,7 +334,7 @@ class Contact_Form_7 extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7-wrapper form' => 'max-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form-7-wrapper .eael-contact-form.eael-contact-form-7' => 'max-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
