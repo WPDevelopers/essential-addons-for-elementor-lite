@@ -13,6 +13,8 @@ class Advanced_Data_Table extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
 
+    protected $html_table = '<table><tbody><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr></tbody></table>';
+
     public function get_name()
     {
         return 'eael-advanced-data-table';
@@ -83,6 +85,17 @@ class Advanced_Data_Table extends Widget_Base
                 ],
             ]
         );
+        
+        $this->add_control(
+            'ea_adv_data_table_static_html',
+            [
+                'label' => __('Column', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HIDDEN,
+                'default' => $this->html_table,
+            ]
+        );
+
+
 
         // $this->add_control(
         //     'ea_adv_data_table_static_generate',
@@ -115,15 +128,15 @@ class Advanced_Data_Table extends Widget_Base
         $settings = $this->get_settings_for_display();
 
         if ($settings['ea_adv_data_table_source'] == 'static') {
-            $this->add_render_attribute('ea-adv-data-table-wrap', [
-                'class' => "ea-advanced-data-table-wrap ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
                 'data-id' => $this->get_id(),
                 'data-num-row' => $settings['ea_adv_data_table_static_num_row'],
                 'data-num-col' => $settings['ea_adv_data_table_static_num_col'],
             ]);
         }
 
-        echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>
+        echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table') . '>
             ' . $this->html_static_table($settings) . '
         </div>';
     }
@@ -132,14 +145,16 @@ class Advanced_Data_Table extends Widget_Base
     {
         $row = $settings['ea_adv_data_table_static_num_row'];
         $col = $settings['ea_adv_data_table_static_num_col'];
+        $table = $settings['ea_adv_data_table_static_html'];
+
+        echo $table;
+
         $table = '<table>';
 
-        foreach (range(0, $row) as $r) {
+        foreach (range(1, $row) as $r) {
             $table .= '<tr>';
-            foreach (range(0, $col) as $c) {
-                $this->add_inline_editing_attributes("ea_adv_data_table_{$r}_{$c}", 'none');
-
-                $table .= '<td>' . $this->get_settings("ea_adv_data_table_{$r}_{$c}") . '</td>';
+            foreach (range(1, $col) as $c) {
+                $table .= '<td contenteditable></td>';
             }
             $table .= '</tr>';
         }
