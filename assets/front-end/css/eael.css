@@ -517,60 +517,6 @@
   }
 }
 
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
-}
-
 @-webkit-keyframes "loaderSpin" {
   0% {
     transform: rotate(0deg);
@@ -636,6 +582,60 @@
   border-radius: 50%;
   width: 20px;
   height: 20px;
+}
+
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
 }
 
 /*--------------------------------*/
@@ -1327,6 +1327,52 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: center;
 }
 
+/* -------------------------------- */
+/* 20. Dual Color Heading
+/* -------------------------------- */
+.eael-dual-header {
+  display: block;
+  margin-bottom: 50px;
+}
+
+.eael-dual-header .title,
+.eael-dual-header .title span {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0px;
+}
+
+.eael-dual-header .subtext {
+  font-size: 16px;
+  display: block;
+}
+
+.eael-dual-header i {
+  display: block;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  font-size: 36px;
+}
+
+.eael-dual-header .title span.lead {
+  color: #1abc9c;
+}
+
+/*--- Builder Related Css ---*/
+.eael-dual-header-content-align-center {
+  text-align: center;
+}
+
+.eael-dual-header-content-align-left {
+  text-align: left;
+}
+
+.eael-dual-header-content-align-right {
+  text-align: right;
+}
+
 /*---------------------------------*/
 /* 05. Countdown Styles
 /*---------------------------------*/
@@ -1384,52 +1430,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 /*--- Style 1 ---*/
 .eael-countdown-items.style-1 .eael-countdown-item > div {
   background: #262625;
-}
-
-/* -------------------------------- */
-/* 20. Dual Color Heading
-/* -------------------------------- */
-.eael-dual-header {
-  display: block;
-  margin-bottom: 50px;
-}
-
-.eael-dual-header .title,
-.eael-dual-header .title span {
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 48px;
-  margin: 10px 0px;
-}
-
-.eael-dual-header .subtext {
-  font-size: 16px;
-  display: block;
-}
-
-.eael-dual-header i {
-  display: block;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
-  font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-  color: #1abc9c;
-}
-
-/*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
-  text-align: center;
-}
-
-.eael-dual-header-content-align-left {
-  text-align: left;
-}
-
-.eael-dual-header-content-align-right {
-  text-align: right;
 }
 
 .elementor-panel .pro-feature, .elementor-panel .pro-feature a {
@@ -5689,20 +5689,20 @@ button.mfp-close:hover {
   background: #00c853;
   border-radius: 50%;
   margin-bottom: 30px;
-  text-align: center;
   transition: .5s;
   overflow: hidden;
 }
 
-.eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon img {
-  position: relative;
-  bottom: auto;
+.eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon,
+.eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i {
   font-size: 30px;
   color: #fff;
-  line-height: 80px;
   transition: .5s;
 }
 
@@ -5861,7 +5861,6 @@ button.mfp-close:hover {
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .header,
-.eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon,
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .footer,
 .eael-pricing-content-align-left .eael-pricing.style-4 .eael-pricing-item .header,
 .eael-pricing-content-align-left .eael-pricing.style-4 .eael-pricing-item .footer {
@@ -5870,7 +5869,6 @@ button.mfp-close:hover {
 }
 
 .eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .header,
-.eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon,
 .eael-pricing-content-align-right .eael-pricing.style-2 .eael-pricing-item .footer,
 .eael-pricing-content-align-right .eael-pricing.style-4 .eael-pricing-item .header,
 .eael-pricing-content-align-right .eael-pricing.style-4 .eael-pricing-item .footer {
