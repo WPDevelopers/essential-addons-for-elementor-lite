@@ -1775,7 +1775,8 @@ class FluentForm extends Widget_Base
             [
                 'class' => [
                     'eael-contact-form',
-                    'eael-fluent-form-wrapper'
+                    'eael-fluent-form-wrapper',
+                    'clearfix'
                 ]
             ]
         );
