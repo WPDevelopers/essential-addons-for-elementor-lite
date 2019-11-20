@@ -466,7 +466,8 @@ class Product_Grid extends Widget_Base
                 [
 					'taxonomy' => 'product_visibility',
                     'field' => 'name',
-					'terms' => 'featured'
+                    'terms' => 'featured',
+                    'operator'  => 'IN'
 				]
             ];
         } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
