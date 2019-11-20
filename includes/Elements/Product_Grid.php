@@ -463,13 +463,22 @@ class Product_Grid extends Widget_Base
 
         if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
             $args['tax_query'] = [
+                'relation' => 'AND',
                 [
 					'taxonomy' => 'product_visibility',
                     'field' => 'name',
-                    'terms' => 'featured',
-                    'operator'  => 'IN'
-				]
+                    'terms' => 'featured'
+                ]
             ];
+
+            if($settings['eael_product_grid_categories']) {
+                $args['tax_query'][] = [
+					'taxonomy' => 'product_cat',
+                    'field' => 'slug',
+                    'terms' => $settings['eael_product_grid_categories']
+                ];
+            }
+
         } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
             $args['meta_key'] = 'total_sales';
             $args['orderby'] = 'meta_value_num';
