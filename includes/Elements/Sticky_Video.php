@@ -387,24 +387,17 @@ class Sticky_Video extends Widget_Base
             'eaelsv_sticky_width',
             [
                 'label' => __('Width', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 100,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 300,
-                ],
+                'type' => Controls_Manager::NUMBER,
+                'min' => 100,
+                'max' => 500,
+                'step' => 1,
+                'default' => 300,
                 'condition' => [
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'width: {{SIZE}}px;',
-                    '{{WRAPPER}} div.eael-sticky-video-wrapper.out' => 'width: {{SIZE}}px!important;',
+                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'width: {{VALUE}}px;',
+                    '{{WRAPPER}} div.eael-sticky-video-wrapper.out' => 'width: {{VALUE}}px!important;',
                 ],
             ]
         );
@@ -413,24 +406,17 @@ class Sticky_Video extends Widget_Base
             'eaelsv_sticky_height',
             [
                 'label' => __('Height', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 100,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 200,
-                ],
+                'type' => Controls_Manager::NUMBER,
+                'min' => 55,
+                'max' => 280,
+                'step' => 1,
+                'default' => 169,
                 'condition' => [
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'height: {{SIZE}}px;',
-                    '{{WRAPPER}} div.eael-sticky-video-wrapper.out' => 'height: {{SIZE}}px!important;',
+                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} div.eael-sticky-video-wrapper.out' => 'height: {{VALUE}}px!important;',
                 ],
             ]
         );
