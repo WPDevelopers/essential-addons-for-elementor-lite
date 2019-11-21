@@ -27,10 +27,10 @@ jQuery(window).on('elementor/frontend/init', function () {
                 clearTimeout(interval);
 
                 interval = setTimeout(function() {
-                    var heighta = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
+                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
 
-                    model.attributes.settings.attributes.eaelsv_sticky_width = heighta;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = heighta;
+                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
                 }, 250);
             });
         });
@@ -107,14 +107,6 @@ jQuery(window).on('elementor/frontend/init', function () {
         });
 
         $('.eael-sticky-video-wrapper').css('height', element.height() + 'px');
-
-        //if(isEditMode){
-        /* $("input:hidden[value='eaelsv_sticky_height_hc']").parents('.elementor-control').prev().find('input').on('change', function(){
-            alert('Hello There!!!');
-        }); */
-        //var abcd = $("input:hidden[value='eaelsv_sticky_height_hc']").val();
-        //alert(abcd);
-        //}
     });
 
 });
@@ -145,7 +137,7 @@ jQuery(window).scroll(function () {
 });
 
 function GetDomElementHeight(elem) {
-    var contentHeight = jQuery(elem).parent().height(); //;
+    var contentHeight = jQuery(elem).parent().height();
     var expHeight = ((scrollHeight * contentHeight) / 100);
     var hght =
         jQuery(elem)
