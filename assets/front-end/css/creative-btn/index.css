@@ -154,7 +154,7 @@
 
 .eael-creative-button--tamaya::before,
 .eael-creative-button--tamaya::after {
-  content: attr(data-text);
+  /*content: attr(data-text);*/
   position: absolute;
   width: 100%;
   height: 50%;
@@ -178,8 +178,8 @@
 }
 
 .eael-creative-button--tamaya::after {
-  bottom: 0;
-  line-height: 0;
+  /*bottom: 0;
+  line-height: 0;*/
 }
 
 .eael-creative-button--tamaya span {
@@ -201,6 +201,7 @@
 .eael-creative-button--tamaya:hover span {
   opacity: 1;
   transform: scale3d(1, 1, 1);
+  content: 'Bangladesh';
 }
 
 /*--- Rayen ---*/
