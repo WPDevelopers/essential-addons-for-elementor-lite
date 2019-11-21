@@ -383,10 +383,7 @@ class Sticky_Video extends Widget_Base
             ]
         );
 
-        //$eaelsvStickyWidthArr = $this->get_settings('eaelsv_sticky_height');
-        //echo $eaelsvStickyWidth = $eaelsvStickyWidthArr['size'];
-        //echo $eaelsvStickyHeight = round((9 * $eaelsvStickyWidth)/16);
-
+        
         $this->add_control(
             'eaelsv_sticky_width',
             [
@@ -400,7 +397,6 @@ class Sticky_Video extends Widget_Base
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                    //'{{WRAPPER}} div.eaelsv-sticky-player' => 'width: {{VALUE}}px;',
                     '{{WRAPPER}} .eael-sticky-video-player2.out' => 'width: {{VALUE}}px!important;',
                 ],
             ]
@@ -419,7 +415,6 @@ class Sticky_Video extends Widget_Base
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                   // '{{WRAPPER}} div.eaelsv-sticky-player' => 'height: {{VALUE}}px;',
                    '{{WRAPPER}} .eael-sticky-video-player2.out' => 'height: {{VALUE}}px!important;',
                 ],
             ]
