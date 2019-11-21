@@ -7,13 +7,14 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
+use \Elementor\Plugin;
 use \Elementor\Widget_Base;
 
 class Advanced_Data_Table extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
 
-    protected $html_table = '<table><tbody><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr><tr><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td><td contenteditable=""></td></tr></tbody></table>';
+    protected $html_table = '<table><thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
 
     public function get_name()
     {
@@ -85,7 +86,11 @@ class Advanced_Data_Table extends Widget_Base
 
     protected function html_static_table($settings)
     {
-        return $settings['ea_adv_data_table_static_html'];
+        if (Plugin::$instance->editor->is_edit_mode()) {
+            return str_replace(['<th>', '<td>'], ['<th contenteditable>', '<td contenteditable>'], $settings['ea_adv_data_table_static_html']);
+        }
+
+        return str_replace(['contenteditable=""', 'contenteditable'], '', $settings['ea_adv_data_table_static_html']);
     }
 
 }
