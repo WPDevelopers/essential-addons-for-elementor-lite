@@ -383,28 +383,25 @@ class Sticky_Video extends Widget_Base
             ]
         );
 
+        //$eaelsvStickyWidthArr = $this->get_settings('eaelsv_sticky_height');
+        //echo $eaelsvStickyWidth = $eaelsvStickyWidthArr['size'];
+        //echo $eaelsvStickyHeight = round((9 * $eaelsvStickyWidth)/16);
+
         $this->add_control(
             'eaelsv_sticky_width',
             [
                 'label' => __('Width', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 200,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 300,
-                ],
+                'type' => Controls_Manager::NUMBER,
+                'min' => 100,
+                'max' => 500,
+                'step' => 1,
+                'default' => 300,
                 'condition' => [
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                    //'{{WRAPPER}} .eaelsv-sticky-player' => 'width: {{SIZE}}px;',
-                    //'{{WRAPPER}} .eael-sticky-video-player2.out' => 'width: {{SIZE}}px!important;',
+                    //'{{WRAPPER}} div.eaelsv-sticky-player' => 'width: {{VALUE}}px;',
+                    '{{WRAPPER}} .eael-sticky-video-player2.out' => 'width: {{VALUE}}px!important;',
                 ],
             ]
         );
@@ -413,27 +410,22 @@ class Sticky_Video extends Widget_Base
             'eaelsv_sticky_height',
             [
                 'label' => __('Height', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 113,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 'eaelsv_sticky_width', //169
-                ],
+                'type' => Controls_Manager::NUMBER,
+                'min' => 55,
+                'max' => 280,
+                'step' => 1,
+                'default' => 169,
                 'condition' => [
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                    //'{{WRAPPER}} .eaelsv-sticky-player' => 'height: {{SIZE}}px;',
-                    //'{{WRAPPER}} .eael-sticky-video-player2.out' => 'height: {{SIZE}}px!important;',
+                   // '{{WRAPPER}} div.eaelsv-sticky-player' => 'height: {{VALUE}}px;',
+                   '{{WRAPPER}} .eael-sticky-video-player2.out' => 'height: {{VALUE}}px!important;',
                 ],
             ]
         );
+
+        
 
         $this->add_control(
             'eaelsv_scroll_height_display_sticky',
