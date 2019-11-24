@@ -1,29 +1,54 @@
-var Advanced_Data_Table = function($scope, $) {};
+var Advanced_Data_Table = function($scope, $) {
+    if (isEditMode) {
+        var table = $scope.context.querySelector('.ea-advanced-data-table').querySelector('table');
+
+        // insert editable area
+        table.querySelectorAll('th, td').forEach(function(el) {
+            var value = el.innerHTML;
+
+            if (value.indexOf('<textarea>') !== 0) {
+                el.innerHTML = '<textarea>' + value + '</textarea>';
+            }
+        });
+    }
+};
 
 // Inline edit
 var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
     setTimeout(function() {
-        var table = view.el.querySelector('.ea-advanced-data-table').querySelector('table');
+        if (view.el.querySelector('.ea-advanced-data-table')) {
+            var interval;
+            var table = view.el.querySelector('.ea-advanced-data-table').querySelector('table');
 
-        // inline edit
-        table.addEventListener('click', function(e) {
-            if (e.target.tagName.toLowerCase() == 'th' || e.target.tagName.toLowerCase() == 'td') {
-                e.target.focus();
-            }
-        });
+            // save input on edit
+            table.querySelectorAll('textarea').forEach(function(el) {
+                el.addEventListener('focusout', function(e) {
+                    clearTimeout(interval);
 
-        // update table
-        table.querySelectorAll('th, td').forEach(function(el) {
-            el.addEventListener('focusout', function(e) {
-                model.remoteRender = false;
-                model.setSetting('ea_adv_data_table_static_html', table.innerHTML);
+                    // clone current table
+                    var origTable = table.cloneNode(true);
 
-                setTimeout(function() {
-                    model.remoteRender = true;
-                }, 1001);
+                    // remove editable area
+                    origTable.querySelectorAll('th, td').forEach(function(el) {
+                        var value = el.querySelector('textarea').value;
+                        el.innerHTML = value;
+                    });
+
+                    // disable elementor remote server render
+                    model.remoteRender = false;
+
+                    // update backbone model
+                    model.setSetting('ea_adv_data_table_static_html', origTable.innerHTML);
+
+                    // enable elementor remote server render just after elementor throttle
+                    // ignore multiple assign
+                    interval = setTimeout(function() {
+                        model.remoteRender = true;
+                    }, 1001);
+                });
             });
-        });
-    }, 500);
+        }
+    }, 300);
 };
 
 jQuery(window).on('elementor/frontend/init', function() {
