@@ -14,7 +14,7 @@ class Advanced_Data_Table extends Widget_Base
 {
     use \Essential_Addons_Elementor\Traits\Helper;
 
-    protected $html_table = '<table><thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
+    protected $html_table = '<thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody>';
 
     public function get_name()
     {
@@ -80,7 +80,7 @@ class Advanced_Data_Table extends Widget_Base
         }
 
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table') . '>
-            ' . $this->html_static_table($settings) . '
+            <table>' . $this->html_static_table($settings) . '</table>
         </div>';
     }
 
