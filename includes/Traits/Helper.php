@@ -115,7 +115,7 @@ trait Helper
         );
 
         foreach ($taxonomies as $taxonomy => $object) {
-            if (!in_array($object->object_type[0], array_keys($post_types))) {
+            if (!isset($object->object_type[0]) || !in_array($object->object_type[0], array_keys($post_types))) {
                 continue;
             }
 
