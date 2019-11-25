@@ -341,21 +341,6 @@ $config = [
                 ],
             ],
         ],
-        'event-calendar' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Event_Calendar',
-            'dependency' => [
-                'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/event-calendar/fullcalendar.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/event-calendar/index.min.css',
-                ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/jquery-ui.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/moment.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/fullcalendar.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/event-calendar/index.min.js',
-                ],
-            ],
-        ],
     ],
     'extensions' => [
         'eael-reading-progress' => [

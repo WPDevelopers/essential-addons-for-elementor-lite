@@ -93,7 +93,15 @@ class Event_Calendar extends Widget_Base {
         $repeater->add_control(
 			'eael_event_start_date',
 			[
-				'label' => __( 'Start Date', 'plugin-domain' ),
+				'label' => __( 'Start Date', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::DATE_TIME,
+			]
+        );
+        
+        $repeater->add_control(
+			'eael_event_end_date',
+			[
+				'label' => __( 'End Date', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::DATE_TIME,
 			]
 		);
@@ -131,16 +139,27 @@ class Event_Calendar extends Widget_Base {
                 //echo $eaelEventTitle =  . '<br>';
                 //echo $dueDate =  . '<br>';
                 $data[] = array(
-                                    'id'    => $i,
-                                    'title' => $event["eael_event_title"],
-                                    'start' => $event["eael_event_start_date"],
-                                    'end'   => $event["eael_event_start_date"]
+                                    'id'            => $i,
+                                    'title'         => $event["eael_event_title"],
+                                    'description'   => $event["eael_event_description"],
+                                    'start'         => $event["eael_event_start_date"],
+                                    'end'           => $event["eael_event_end_date"],
+                                    'borderColor'   => '#CC0000',
+                                    'textColor'     => '#FFFFFF',
+                                    'color'         => '#FF0000',
+                                    'url'           => $event["eael_event_link"]
                                 );
                 $i++;
             endforeach;
         endif;
-        echo '<div id="calendar" class="calendar2"
+        echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
                 data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"></div>';
+        echo '<div id="eventContent" title="Event Details" style="display:none;">
+                    Start: <span id="startTime"></span><br>
+                    End: <span id="endTime"></span><br><br>
+                    <p id="eventInfo"></p>
+                    <p><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>
+                </div>';
         echo '</div>';
     }
 
