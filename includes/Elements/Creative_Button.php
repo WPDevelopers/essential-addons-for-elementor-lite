@@ -518,7 +518,9 @@ class Creative_Button extends Widget_Base {
 		$this->add_render_attribute( 'eael_creative_button', 'data-text', esc_attr($settings['creative_button_secondary_text'] ));
 	?>
 	<div class="eael-creative-button-wrapper">
+		
 		<a <?php echo $this->get_render_attribute_string( 'eael_creative_button' ); ?>>
+			
 			<div class="creative-button-inner">
 				
 				<?php if ( $settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'left' ) : ?>
@@ -535,7 +537,7 @@ class Creative_Button extends Widget_Base {
 					<?php } ?>
 				<?php endif; ?>
 
-				<span class="cretive-button-text"><?php echo  $settings['creative_button_text'];?></span>
+				<span class="cretive-button-text"><?php echo $settings['creative_button_text']; ?></span>
 
 				<?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'right' ) : ?>
 					<?php if($icon_migrated || $icon_is_new) { ?>
@@ -550,6 +552,7 @@ class Creative_Button extends Widget_Base {
 						<i class="<?php echo esc_attr($settings['eael_creative_button_icon'] ); ?> eael-creative-button-icon-right" aria-hidden="true"></i> 
 					<?php } ?>
 				<?php endif; ?>
+
 			</div>
 		</a>
 	</div>
