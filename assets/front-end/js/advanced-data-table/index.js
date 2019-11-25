@@ -1,6 +1,9 @@
 var Advanced_Data_Table = function($scope, $) {
     if (isEditMode) {
-        var table = $scope.context.querySelector('.ea-advanced-data-table').querySelector('table');
+        var table = $scope.context.querySelector('.ea-advanced-data-table');
+
+        // add edit class
+        table.classList.add('ea-advanced-data-table-editable')
 
         // insert editable area
         table.querySelectorAll('th, td').forEach(function(el) {
@@ -18,7 +21,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
     setTimeout(function() {
         if (view.el.querySelector('.ea-advanced-data-table')) {
             var interval;
-            var table = view.el.querySelector('.ea-advanced-data-table').querySelector('table');
+            var table = view.el.querySelector('.ea-advanced-data-table');
 
             // save input on edit
             table.querySelectorAll('textarea').forEach(function(el) {
