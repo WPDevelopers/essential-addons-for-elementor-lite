@@ -7,10 +7,8 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Scheme_Color;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
@@ -70,9 +68,9 @@ class Advanced_Data_Table extends Widget_Base
 
         // style
         $this->start_controls_section(
-            'ea_section_adv_data_table_style_general',
+            'ea_section_adv_data_table_style_table',
             [
-                'label' => __('General', 'essential-addons-elementor'),
+                'label' => __('Table', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -80,7 +78,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'plugin-name'),
+                'label' => __('Border', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -89,7 +87,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_border',
-                'label' => __('Table Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-elementor'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -176,12 +174,9 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_head_color',
             [
-                'label' => __('Color', 'plugin-domain'),
+                'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
-                ],
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} th textarea' => 'color: {{VALUE}};',
                     '{{WRAPPER}} th' => 'color: {{VALUE}};',
@@ -199,21 +194,20 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'plugin-name'),
+                'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
+        $this->add_control(
+            'ea_adv_data_table_head_background',
             [
-                'name' => 'ea_adv_data_table_head_background',
                 'label' => __('Background', 'essential-addons-elementor'),
-                'types' => ['classic', 'gradient'],
-                'exclude' => [
-                    'image',
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fbfbfb',
+                'selectors' => [
+                    '{{WRAPPER}} thead' => 'background-color: {{VALUE}};',
                 ],
-                'selector' => '{{WRAPPER}} thead',
             ]
         );
 
@@ -227,7 +221,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'plugin-name'),
+                'label' => __('Border', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -269,7 +263,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_head_cell_padding',
             [
-                'label' => __('Padding', 'plugin-domain'),
+                'label' => __('Padding', 'essential-addons-elementor'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'default' => [
@@ -351,12 +345,9 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_color',
             [
-                'label' => __('Color', 'plugin-domain'),
+                'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
-                ],
+                'default' => '#666666',
                 'selectors' => [
                     '{{WRAPPER}} td textarea' => 'color: {{VALUE}};',
                     '{{WRAPPER}} td' => 'color: {{VALUE}};',
@@ -374,21 +365,20 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'plugin-name'),
+                'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
+        $this->add_control(
+            'ea_adv_data_table_body_background',
             [
-                'name' => 'ea_adv_data_table_body_background',
                 'label' => __('Background', 'essential-addons-elementor'),
-                'types' => ['classic', 'gradient'],
-                'exclude' => [
-                    'image',
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} tbody' => 'background-color: {{VALUE}};',
                 ],
-                'selector' => '{{WRAPPER}} tbody',
             ]
         );
 
@@ -402,7 +392,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'plugin-name'),
+                'label' => __('Border', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -442,9 +432,74 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Highlight Row/Colum', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_highlight',
+            [
+                'label' => esc_html__('Highlight', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'none' => esc_html__('None', 'essential-addons-elementor'),
+                    'f-col' => esc_html__('First Column', 'essential-addons-elementor'),
+                    'l-col' => esc_html__('Last Column', 'essential-addons-elementor'),
+                    'e-col' => esc_html__('Even Column', 'essential-addons-elementor'),
+                    'o-col' => esc_html__('Odd Column', 'essential-addons-elementor'),
+                    'e-row' => esc_html__('Even Row', 'essential-addons-elementor'),
+                    'o-row' => esc_html__('Odd Row', 'essential-addons-elementor'),
+                ],
+                'default' => 'none',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_highlight_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:first-child' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody td:first-child textarea' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'f-col',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_highlight_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:first-child' => 'background-color: {{VALUE}} !important',
+                    '{{WRAPPER}} tbody td:first-child textarea' => 'background-color: {{VALUE}} !important',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'f-col',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
             'ea_adv_data_table_body_cell_padding',
             [
-                'label' => __('Padding', 'plugin-domain'),
+                'label' => __('Padding', 'essential-addons-elementor'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'default' => [
