@@ -9,8 +9,8 @@ var Advanced_Data_Table = function($scope, $) {
         table.querySelectorAll('th, td').forEach(function(el) {
             var value = el.innerHTML;
 
-            if (value.indexOf('<textarea>') !== 0) {
-                el.innerHTML = '<textarea>' + value + '</textarea>';
+            if (value.indexOf('<textarea rows="1">') !== 0) {
+                el.innerHTML = '<textarea rows="1">' + value + '</textarea>';
             }
         });
     }
