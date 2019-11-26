@@ -111,7 +111,7 @@ $elements = [
                 'title' => __( 'Sticky Video', 'essential-addons-elementor' ),
                 'demo_link' => 'https://essential-addons.com/elementor/sticky-video/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/sticky-video/',
-            ]
+            ],
         ]
     ],
     'dynamic-content-elements'  => [

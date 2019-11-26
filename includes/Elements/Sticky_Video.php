@@ -318,7 +318,7 @@ class Sticky_Video extends Widget_Base
         $this->add_control(
             'eaelsv_overlay_image',
             [
-                'label' => __('Choose Image1', 'essential-addons-elementor'),
+                'label' => __('Choose Image', 'essential-addons-elementor'),
                 'type' => Controls_Manager::MEDIA,
                 'label_block' => true,
                 'condition' => [
@@ -357,7 +357,7 @@ class Sticky_Video extends Widget_Base
         $this->add_control(
             'eaelsv_icon_new',
             [
-                'label' => esc_html__('Icon', 'essential-addons-elementor'),
+                'label' => esc_html__('Choose Icon', 'essential-addons-elementor'),
                 'type' => Controls_Manager::ICONS,
                 'fa4compatibility' => 'eaelsv_icon',
                 'condition' => [
@@ -383,28 +383,21 @@ class Sticky_Video extends Widget_Base
             ]
         );
 
+        
         $this->add_control(
             'eaelsv_sticky_width',
             [
                 'label' => __('Width', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 100,
-                        'max' => 500,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 300,
-                ],
+                'type' => Controls_Manager::NUMBER,
+                'min' => 100,
+                'max' => 500,
+                'step' => 1,
+                'default' => 300,
                 'condition' => [
                     'eaelsv_is_sticky' => 'yes',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'width: {{SIZE}}px;',
-                    '{{WRAPPER}} div.eael-sticky-video-wrapper.out' => 'width: {{SIZE}}px!important;',
+                    '{{WRAPPER}} .eael-sticky-video-player2.out' => 'width: {{VALUE}}px!important;',
                 ],
             ]
         );
@@ -413,24 +406,40 @@ class Sticky_Video extends Widget_Base
             'eaelsv_sticky_height',
             [
                 'label' => __('Height', 'essential-addons-elementor'),
+                'type' => Controls_Manager::NUMBER,
+                'min' => 55,
+                'max' => 280,
+                'step' => 1,
+                'default' => 169,
+                'condition' => [
+                    'eaelsv_is_sticky' => 'yes',
+                ],
+                'selectors' => [
+                   '{{WRAPPER}} .eael-sticky-video-player2.out' => 'height: {{VALUE}}px!important;',
+                ],
+            ]
+        );
+
+        
+
+        $this->add_control(
+            'eaelsv_scroll_height_display_sticky',
+            [
+                'label' => __('Scroll Height To Display Sticky (%)', 'essential-addons-elementor'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
-                        'min' => 100,
-                        'max' => 500,
+                        'min' => 50,
+                        'max' => 200,
                         'step' => 1,
                     ],
                 ],
                 'default' => [
                     'unit' => 'px',
-                    'size' => 200,
+                    'size' => 70,
                 ],
                 'condition' => [
                     'eaelsv_is_sticky' => 'yes',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'height: {{SIZE}}px;',
-                    '{{WRAPPER}} div.eael-sticky-video-wrapper.out' => 'height: {{SIZE}}px!important;',
                 ],
             ]
         );
@@ -686,7 +695,8 @@ class Sticky_Video extends Widget_Base
 					'data-sticky' => $sticky,
 					'data-position' => $settings['eaelsv_sticky_position'],
 					'data-sheight' => $settings['eaelsv_sticky_height']['size'],
-					'data-swidth' => $settings['eaelsv_sticky_width']['size'],
+                    'data-swidth' => $settings['eaelsv_sticky_width']['size'],
+                    'data-scroll_height' => $settings['eaelsv_scroll_height_display_sticky']['size'],
 					'data-autoplay' => $autoplay,
 					'data-overlay' => ($settings['eaelsv_overlay_options'] == 'yes') ? $settings['eaelsv_overlay_options'] : 'no',
 				]
