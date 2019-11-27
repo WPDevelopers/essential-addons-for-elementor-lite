@@ -143,22 +143,67 @@ class Event_Calendar extends Widget_Base {
         );
         
         $this->add_control(
-			'eael_event_calendar_days_sat',
-			[
-				'label' => __( 'Saturday', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'default' => 'Sat',
-			]
-        );
-        
-        $this->add_control(
             'eael_event_calendar_days_sat',
             [
                 'label' => __('Saturday', 'essential-addons-elementor'),
                 'type' => Controls_Manager::TEXT,
-                'placeholder' => __('Enter your URL', 'essential-addons-elementor'),
-                'label_block' => true,
-                'show_label' => false,
+                //'label_block' => true,
+                //'show_label' => false,
+                'default'   => 'Sat'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_days_sun',
+            [
+                'label' => __('Sunday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'Sun'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_days_mon',
+            [
+                'label' => __('Monday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'Mon'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_days_tue',
+            [
+                'label' => __('Tuesday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'Tue'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_days_wed',
+            [
+                'label' => __('Wednesday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'Wed'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_days_thu',
+            [
+                'label' => __('Thursday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'Thu'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_days_fri',
+            [
+                'label' => __('Friday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'Fri'
             ]
         );
 
@@ -235,6 +280,23 @@ class Event_Calendar extends Widget_Base {
 	protected function render( ) {
         $settings = $this->get_settings_for_display();
         $events = $settings['eael_event_items'];
+        $daysWeek = "[ 
+                        '" . $settings['eael_event_calendar_days_sun'] . "',
+                        '" . $settings['eael_event_calendar_days_mon'] . "',
+                        '" . $settings['eael_event_calendar_days_tue'] . "',
+                        '" . $settings['eael_event_calendar_days_wed'] . "',
+                        '" . $settings['eael_event_calendar_days_thu'] . "',
+                        '" . $settings['eael_event_calendar_days_fri'] . "',
+                        '" . $settings['eael_event_calendar_days_sat'] .  "']";
+
+        /*
+                        '" .  . "'," .
+                        '" . $settings['eael_event_calendar_days_mon'] . "'," .
+                        '" . $settings['eael_event_calendar_days_tue'] . "'," .
+                        '" . $settings['eael_event_calendar_days_wed'] . "'," .
+                        '" . $settings['eael_event_calendar_days_thu'] . "'," .
+                        '" . $settings['eael_event_calendar_days_fri'] . "',]""; */
+        echo ($daysWeek);
         echo '<div class="eael-event-calendar-wrapper" style="padding:20px;">';
         if($events):
             $data = array();
@@ -257,7 +319,8 @@ class Event_Calendar extends Widget_Base {
             endforeach;
         endif;
         echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
-                data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"></div>';
+                data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
+                data-days_week="' . htmlspecialchars($daysWeek, ENT_QUOTES, 'UTF-8') . '"></div>';
         
         echo '<div id="eaelecModal" class="eaelec-modal">
                 <div class="eaelec-modal-content">

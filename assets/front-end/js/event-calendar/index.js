@@ -3,9 +3,11 @@ jQuery(window).on('elementor/frontend/init', function () {
         
         var element = $scope.find('.eael-event-calendar-cls');
         var eventAll = element.data('events');
+        var daysWeek = element.data('days_week');
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
-        //alert(eventAll);
+        //daysWeek1 = ['s1', 's2'];
+        alert(daysWeek);
         var calendar = $('#eael-event-calendar').fullCalendar({
             editable:true,
             header:{
@@ -16,7 +18,7 @@ jQuery(window).on('elementor/frontend/init', function () {
             events: eventAll,
             selectable:true,
             selectHelper:true,
-            dayNamesShort: ['Saturday', 'M', 'T', 'W', 'T', 'F', 'S'],
+            dayNamesShort: daysWeek,
             eventRender: function (event, element) {
                 element.attr('href', 'javascript:void(0);');
                 element.click(function() {
