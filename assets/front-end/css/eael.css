@@ -1,3 +1,4 @@
+
 /*------------------------------*/
 /* 31. Advance Accordion
 /*------------------------------*/
@@ -267,6 +268,60 @@
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
   }
+}
+
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
 }
 
 /*--------------------------*/
@@ -581,60 +636,6 @@
   border-radius: 50%;
   width: 20px;
   height: 20px;
-}
-
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
 }
 
 /*--------------------------------*/
@@ -995,7 +996,7 @@
 
 .eael-creative-button--tamaya::before,
 .eael-creative-button--tamaya::after {
-  /*content: attr(data-text);*/
+  content: attr(data-text);
   position: absolute;
   width: 100%;
   height: 50%;
@@ -1019,8 +1020,8 @@
 }
 
 .eael-creative-button--tamaya::after {
-  /*bottom: 0;
-  line-height: 0;*/
+  bottom: 0;
+  line-height: 0;
 }
 
 .eael-creative-button--tamaya span {
@@ -1456,6 +1457,61 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   color: #f54;
 }
 
+.eael-fancy-text-container p {
+  margin: 0;
+}
+
+.eael-fancy-text-strings {
+  display: none;
+}
+
+.eael-fancy-text-prefix,
+.eael-fancy-text-suffix {
+  display: inline-block;
+}
+
+.morphext > .animated {
+  display: inline-block;
+}
+
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink_cursor 0.7s infinite;
+  animation: blink_cursor 0.7s infinite;
+}
+
+@keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.eael-fancy-text-container.style-2 {
+  font-size: 24px;
+}
+
+.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
+  background: #ff5544;
+  color: #fff;
+  padding: 10px 25px;
+}
+
 .eael-facebook-feed {
   width: 100%;
   margin: auto;
@@ -1691,61 +1747,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 }
 .elementor-widget-eael-facebook-feed .eael-load-more-button-wrap.no-pagination {
   display: none;
-}
-
-.eael-fancy-text-container p {
-  margin: 0;
-}
-
-.eael-fancy-text-strings {
-  display: none;
-}
-
-.eael-fancy-text-prefix,
-.eael-fancy-text-suffix {
-  display: inline-block;
-}
-
-.morphext > .animated {
-  display: inline-block;
-}
-
-.typed-cursor {
-  opacity: 1;
-  -webkit-animation: blink_cursor 0.7s infinite;
-  animation: blink_cursor 0.7s infinite;
-}
-
-@keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.eael-fancy-text-container.style-2 {
-  font-size: 24px;
-}
-
-.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
-  background: #ff5544;
-  color: #fff;
-  padding: 10px 25px;
 }
 
 /*----------------------------*/
@@ -3692,63 +3693,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   text-align: right;
 }
 
-/*----------------------*/
-/* 14. Gravity Form
-/*----------------------*/
-.eael-gravity-form-align-default,
-.eael-gravity-form-align-left,
-.eael-gravity-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-gravity-form-align-right,
-.eael-gravity-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-gravity-form-align-center,
-.eael-gravity-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-gravity-form .gform_wrapper .gform_footer {
-  margin: 0;
-  padding: 0;
-}
-
-.gform_wrapper form li,
-.gform_wrapper li {
-  list-style: none;
-}
-
-.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
-  padding: 0;
-}
-
-.eael-gravity-form .gform_wrapper textarea {
-  padding: 0;
-}
-
-.eael-gravity-form .gform_wrapper .gform_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
-.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
-  margin: 0;
-}
-
-.eael-gravity-form.title-description-hide .gform_heading {
-  display: none;
-}
-
-.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
-.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
-  display: none;
-}
-
-.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
-  width: 100%;
-}
-
 /*--------------------------*/
 /* 01. General Styles
 /*--------------------------*/
@@ -3895,6 +3839,63 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   margin: 0 0 0 auto;
 }
 
+/*----------------------*/
+/* 14. Gravity Form
+/*----------------------*/
+.eael-gravity-form-align-default,
+.eael-gravity-form-align-left,
+.eael-gravity-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-gravity-form-align-right,
+.eael-gravity-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-gravity-form-align-center,
+.eael-gravity-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer {
+  margin: 0;
+  padding: 0;
+}
+
+.gform_wrapper form li,
+.gform_wrapper li {
+  list-style: none;
+}
+
+.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper textarea {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
+  margin: 0;
+}
+
+.eael-gravity-form.title-description-hide .gform_heading {
+  display: none;
+}
+
+.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
+.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
+  display: none;
+}
+
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
+  width: 100%;
+}
+
 /*------------------------------*/
 /* 34. Image accordion
 /*------------------------------*/
@@ -3984,204 +3985,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   .eael-img-accordion a:hover .overlay {
     background-color: transparent;
   }
-}
-
-/* ------------------------ */
-/* 17. Infobox Style
-/* ------------------------ */
-/*--- Image/Icon On Top ---*/
-.eael-infobox .infobox-icon {
-  height: auto;
-}
-
-.eael-infobox .infobox-icon .infobox-icon-wrap {
-  display: flex;
-  width: 100%;
-  height: auto;
-  transition: .3s;
-  align-items: center;
-  justify-content: center;
-}
-
-.eael-infobox .infobox-icon .infobox-icon-wrap i {
-  transition: .3s;
-}
-
-/*--- For Content Alignment ---*/
-.eael-infobox-content-align-left .eael-infobox .infobox-icon,
-.eael-infobox-content-align-left .eael-infobox .infobox-content,
-.eael-infobox-content-align-left .eael-infobox .infobox-button {
-  text-align: left;
-}
-
-.eael-infobox-content-align-right .eael-infobox .infobox-icon,
-.eael-infobox-content-align-right .eael-infobox .infobox-content,
-.eael-infobox-content-align-right .eael-infobox .infobox-button {
-  text-align: right;
-}
-
-.eael-infobox-content-align-center .eael-infobox .infobox-icon,
-.eael-infobox-content-align-center .eael-infobox .infobox-content,
-.eael-infobox-content-align-center .eael-infobox .infobox-button {
-  text-align: center;
-}
-
-/*--- For icon background shape ---*/
-.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap {
-  width: 90px;
-  height: 90px;
-  text-align: center;
-}
-
-.eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 0;
-}
-
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 15px;
-}
-
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 50%;
-}
-
-.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
-  margin-top: 50%;
-  transform: translateY(-50%);
-}
-
-/*--- Infobox Button ---*/
-.eael-infobox .infobox-button a.eael-infobox-button {
-  display: inline-block;
-  padding: 5px 10px;
-  transition: all 300ms ease-in-out 0s;
-}
-
-/*--- For icon bg shape alignment ---*/
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: flex;
-  justify-content: center;
-}
-
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/*--- Image/Icon On Left ---*/
-.eael-infobox.icon-on-left {
-  position: relative;
-  z-index: 0;
-  display: flex;
-}
-
-.eael-infobox.icon-on-right .infobox-icon-wrap,
-.eael-infobox.icon-on-left .infobox-icon-wrap {
-  justify-content: center;
-  display: flex !important;
-  align-items: center;
-}
-
-.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
-  background: none;
-  border: 0px;
-  text-align: left;
-  height: auto;
-  display: block;
-}
-
-.eael-infobox .infobox-content p {
-  margin: 0 0 15px;
-}
-
-.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
-  margin-top: 0px;
-  transform: translateY(0%);
-}
-
-.eael-infobox.icon-on-left .infobox-content {
-  padding-left: 15px;
-  flex: 1 1 auto;
-}
-
-.eael-infobox.icon-on-left .infobox-content .title {
-  line-height: 1;
-  margin: 0 0 10px 0;
-}
-
-/*--- Image/Icon On Right ---*/
-.eael-infobox.icon-on-right {
-  position: relative;
-  z-index: 0;
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
-  background: none;
-  border: 0px;
-  text-align: right;
-  width: auto;
-  height: auto;
-  display: block;
-}
-
-.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
-  margin-top: 0px;
-  transform: translateY(0%);
-}
-
-.eael-infobox.icon-on-right .infobox-content {
-  padding-right: 15px;
-  text-align: right;
-  flex: 1 1 auto;
-  box-sizing: border-box;
-}
-
-.eael-infobox.icon-on-right .infobox-content .title {
-  line-height: 1;
-  margin: 0 0 10px 0;
-}
-
-/*--- Imgae Circle On Top ---*/
-.eael-infobox .infobox-icon img {
-  transition: all 300ms ease-in-out 0s;
-}
-
-.eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
-  border-radius: 0;
-}
-
-.eael-infobox-shape-circle .eael-infobox .infobox-icon img,
-.eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
-  border-radius: 50%;
-}
-
-.eael-infobox-shape-radius .eael-infobox .infobox-icon img,
-.eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
-  border-radius: 15px;
 }
 
 /* ------------------------ */
@@ -4640,6 +4443,204 @@ button.mfp-close:hover {
     padding-left: 6px;
     padding-right: 6px;
   }
+}
+
+/* ------------------------ */
+/* 17. Infobox Style
+/* ------------------------ */
+/*--- Image/Icon On Top ---*/
+.eael-infobox .infobox-icon {
+  height: auto;
+}
+
+.eael-infobox .infobox-icon .infobox-icon-wrap {
+  display: flex;
+  width: 100%;
+  height: auto;
+  transition: .3s;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-infobox .infobox-icon .infobox-icon-wrap i {
+  transition: .3s;
+}
+
+/*--- For Content Alignment ---*/
+.eael-infobox-content-align-left .eael-infobox .infobox-icon,
+.eael-infobox-content-align-left .eael-infobox .infobox-content,
+.eael-infobox-content-align-left .eael-infobox .infobox-button {
+  text-align: left;
+}
+
+.eael-infobox-content-align-right .eael-infobox .infobox-icon,
+.eael-infobox-content-align-right .eael-infobox .infobox-content,
+.eael-infobox-content-align-right .eael-infobox .infobox-button {
+  text-align: right;
+}
+
+.eael-infobox-content-align-center .eael-infobox .infobox-icon,
+.eael-infobox-content-align-center .eael-infobox .infobox-content,
+.eael-infobox-content-align-center .eael-infobox .infobox-button {
+  text-align: center;
+}
+
+/*--- For icon background shape ---*/
+.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap {
+  width: 90px;
+  height: 90px;
+  text-align: center;
+}
+
+.eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 0;
+}
+
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 15px;
+}
+
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 50%;
+}
+
+.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
+
+/*--- Infobox Button ---*/
+.eael-infobox .infobox-button a.eael-infobox-button {
+  display: inline-block;
+  padding: 5px 10px;
+  transition: all 300ms ease-in-out 0s;
+}
+
+/*--- For icon bg shape alignment ---*/
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*--- Image/Icon On Left ---*/
+.eael-infobox.icon-on-left {
+  position: relative;
+  z-index: 0;
+  display: flex;
+}
+
+.eael-infobox.icon-on-right .infobox-icon-wrap,
+.eael-infobox.icon-on-left .infobox-icon-wrap {
+  justify-content: center;
+  display: flex !important;
+  align-items: center;
+}
+
+.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
+  background: none;
+  border: 0px;
+  text-align: left;
+  height: auto;
+  display: block;
+}
+
+.eael-infobox .infobox-content p {
+  margin: 0 0 15px;
+}
+
+.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
+  margin-top: 0px;
+  transform: translateY(0%);
+}
+
+.eael-infobox.icon-on-left .infobox-content {
+  padding-left: 15px;
+  flex: 1 1 auto;
+}
+
+.eael-infobox.icon-on-left .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+/*--- Image/Icon On Right ---*/
+.eael-infobox.icon-on-right {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
+  background: none;
+  border: 0px;
+  text-align: right;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
+  margin-top: 0px;
+  transform: translateY(0%);
+}
+
+.eael-infobox.icon-on-right .infobox-content {
+  padding-right: 15px;
+  text-align: right;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.eael-infobox.icon-on-right .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+/*--- Imgae Circle On Top ---*/
+.eael-infobox .infobox-icon img {
+  transition: all 300ms ease-in-out 0s;
+}
+
+.eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
+  border-radius: 0;
+}
+
+.eael-infobox-shape-circle .eael-infobox .infobox-icon img,
+.eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
+  border-radius: 50%;
+}
+
+.eael-infobox-shape-radius .eael-infobox .infobox-icon img,
+.eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
+  border-radius: 15px;
 }
 
 /*-----------------------------*/
