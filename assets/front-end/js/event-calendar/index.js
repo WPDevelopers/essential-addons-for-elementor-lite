@@ -1,14 +1,12 @@
-jQuery(document).ready(function() {
-    
-});
-
 jQuery(window).on('elementor/frontend/init', function () {
     elementorFrontend.hooks.addAction('frontend/element_ready/eael-event-calendar.default', function ($scope, $) {
         
-        var element = $scope.find('.calendar2');
+        var element = $scope.find('.eael-event-calendar-cls');
         var eventAll = element.data('events');
+        var eaelevModal = document.getElementById("eaelecModal");
+        var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
         //alert(eventAll);
-        var calendar = jQuery('#calendar').fullCalendar({
+        var calendar = $('#eael-event-calendar').fullCalendar({
             editable:true,
             header:{
             left:'prev,next today',
@@ -17,7 +15,27 @@ jQuery(window).on('elementor/frontend/init', function () {
             },
             events: eventAll,
             selectable:true,
-            selectHelper:true
+            selectHelper:true,
+            dayNamesShort: ['Saturday', 'M', 'T', 'W', 'T', 'F', 'S'],
+            eventRender: function (event, element) {
+                element.attr('href', 'javascript:void(0);');
+                element.click(function() {
+                    eaelevModal.style.display = "block";
+                    /*
+                    $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
+                    $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
+                    */
+                    $(".eaelec-modal-header h2").html(event.title);
+                    $(".eaelec-modal-body p").html(event.description);
+                    $(".eaelec-modal-footer a").attr('href', event.url);
+                    
+                });
+            }
         });
+
+        // When the user clicks on <span> (x), close the modal
+        eaelevSpan.onclick = function() {
+            eaelevModal.style.display = "none";
+        }
     });
 });
