@@ -274,6 +274,23 @@ class Info_Box extends Widget_Base {
 				]
 			]
 		);
+
+		$this->add_control(
+			'content_height',
+			[
+				'label' => esc_html__( 'Content Height', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> ['px', '%', 'em'],
+				'range' => [
+					'px' => [ 'max' => 300 ],
+					'%'	=> [ 'max'	=> 100 ]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .infobox-content' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**

@@ -252,6 +252,22 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+			'content_height',
+			[
+				'label' => esc_html__( 'Content Height', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> ['px', '%', 'em'],
+				'range' => [
+					'px' => [ 'max' => 300 ],
+					'%'	=> [ 'max'	=> 100 ]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
             'eael_post_grid_meta_style',
             [
                 'label' => __('Meta Style', 'essential-addons-elementor'),
