@@ -96,6 +96,14 @@ class Event_Calendar extends Widget_Base {
 				'label' => __( 'Start Date', 'plugin-domain' ),
 				'type' => Controls_Manager::DATE_TIME,
 			]
+        );
+        
+        $repeater->add_control(
+			'eael_event_end_date',
+			[
+				'label' => __( 'End Date', 'plugin-domain' ),
+				'type' => Controls_Manager::DATE_TIME,
+			]
 		);
 
         $this->add_control(
@@ -117,6 +125,110 @@ class Event_Calendar extends Widget_Base {
         
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'eael_event_calendar_section',
+            [
+                'label' => __('Calendar', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+			'eael_event_calendar_days_heading',
+			[
+				'label' => __( 'Days', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				//'separator' => 'before',
+			]
+        );
+        
+        $this->add_control(
+			'eael_event_calendar_days_sat',
+			[
+				'label' => __( 'Saturday', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'default' => 'Sat',
+			]
+        );
+        
+        $this->add_control(
+            'eael_event_calendar_days_sat',
+            [
+                'label' => __('Saturday', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'placeholder' => __('Enter your URL', 'essential-addons-elementor'),
+                'label_block' => true,
+                'show_label' => false,
+            ]
+        );
+
+        $this->end_controls_section();
+
+        
+        /**
+         * Style Tab Started
+         */
+        $this->start_controls_section(
+            'eael_event_event_interface',
+            [
+                'label' => __('Event', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_bg_color',
+            [
+                'label' => __('Event Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_text_color',
+            [
+                'label' => __('Event Text Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#FFFFFF',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_border_color',
+            [
+                'label' => __('Event Border Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'eael_event_calendar_head_interface',
+            [
+                'label' => __('Calendar Head', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_title_color',
+            [
+                'label' => __('Calendar Title Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar h2' => 'color: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-toolbar .fc-button' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
     }
 
 
@@ -128,19 +240,39 @@ class Event_Calendar extends Widget_Base {
             $data = array();
             $i=0;
             foreach($events as $event):
-                //echo $eaelEventTitle =  . '<br>';
-                //echo $dueDate =  . '<br>';
                 $data[] = array(
-                                    'id'    => $i,
-                                    'title' => $event["eael_event_title"],
-                                    'start' => $event["eael_event_start_date"],
-                                    'end'   => $event["eael_event_start_date"]
+                                    'id'            => $i,
+                                    'title'         => $event["eael_event_title"],
+                                    'description'   => $event["eael_event_description"],
+                                    'start'         => $event["eael_event_start_date"],
+                                    'end'           => $event["eael_event_end_date"],
+                                    'borderColor'   => $settings['eael_event_border_color'],
+                                    'textColor'     => $settings['eael_event_text_color'],
+                                    'color'         => $settings['eael_event_bg_color'],
+                                    'url'           => $event["eael_event_link"]["url"],
+                                    'dayNames'      => ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                                    'Thursday', 'Friday', 'Saturday']
                                 );
                 $i++;
             endforeach;
         endif;
-        echo '<div id="calendar" class="calendar2"
+        echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
                 data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"></div>';
+        
+        echo '<div id="eaelecModal" class="eaelec-modal">
+                <div class="eaelec-modal-content">
+                  <div class="eaelec-modal-header">
+                    <span class="eaelec-modal-close">&times;</span>
+                    <h2></h2>
+                  </div>
+                  <div class="eaelec-modal-body">
+                    <p></p>
+                  </div>
+                  <div class="eaelec-modal-footer">
+                    <a href="#">Event Details</a>
+                  </div>
+                </div>
+              </div>';    
         echo '</div>';
     }
 

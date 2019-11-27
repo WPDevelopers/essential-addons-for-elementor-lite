@@ -269,127 +269,6 @@
   }
 }
 
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
-}
-
-@-webkit-keyframes "loaderSpin" {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes "loaderSpin" {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.eael-load-more-button-wrap {
-  display: flex;
-}
-
-.eael-load-more-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1em 2em;
-  border: 0px solid;
-  font-size: 16px;
-  overflow: hidden;
-}
-.eael-load-more-button .button__loader {
-  left: -100%;
-  top: auto;
-  margin-right: 5px;
-  transition: all .2s;
-}
-.eael-load-more-button > span {
-  margin-left: -20px;
-}
-
-.eael-load-more-button.button--loading > span {
-  margin-left: 0;
-}
-.eael-load-more-button.button--loading .button__loader {
-  left: 0;
-}
-
-.eael-btn-loader {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 10px;
-  position: relative;
-  text-indent: -9999em;
-  border-top: 4px solid rgba(255, 255, 255, 0.2);
-  border-right: 4px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 4px solid rgba(255, 255, 255, 0.2);
-  border-left: 4px solid #ffffff;
-  transform: translateZ(0);
-  -webkit-animation: loaderSpin 1.1s infinite linear;
-          animation: loaderSpin 1.1s infinite linear;
-}
-.eael-btn-loader:after {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-}
-
 /*--------------------------*/
 /* 19. Call To Action
 /*-------------------------*/
@@ -635,6 +514,214 @@
     font-size: 20px;
     line-height: 30px;
   }
+}
+
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
+}
+
+@-webkit-keyframes "loaderSpin" {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes "loaderSpin" {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.eael-load-more-button-wrap {
+  display: flex;
+}
+
+.eael-load-more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 2em;
+  border: 0px solid;
+  font-size: 16px;
+  overflow: hidden;
+}
+.eael-load-more-button .button__loader {
+  left: -100%;
+  top: auto;
+  margin-right: 5px;
+  transition: all .2s;
+}
+.eael-load-more-button > span {
+  margin-left: -20px;
+}
+
+.eael-load-more-button.button--loading > span {
+  margin-left: 0;
+}
+.eael-load-more-button.button--loading .button__loader {
+  left: 0;
+}
+
+.eael-btn-loader {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 4px solid rgba(255, 255, 255, 0.2);
+  border-right: 4px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #ffffff;
+  transform: translateZ(0);
+  -webkit-animation: loaderSpin 1.1s infinite linear;
+          animation: loaderSpin 1.1s infinite linear;
+}
+.eael-btn-loader:after {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+/*--------------------------------*/
+/* 11. Contact Form 7 Styles
+/*--------------------------------*/
+.eael-contact-form.eael-contact-form-align-center,
+.eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form.eael-contact-form-align-left,
+.eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form.eael-contact-form-align-right,
+.eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
+  float: right;
+  width: auto;
+}
+
+.eael-contact-form-7 textarea,
+.eael-contact-form-7 input[type="text"],
+.eael-contact-form-7 input[type="password"],
+.eael-contact-form-7 input[type="datetime"],
+.eael-contact-form-7 input[type="datetime-local"],
+.eael-contact-form-7 input[type="date"],
+.eael-contact-form-7 input[type="month"],
+.eael-contact-form-7 input[type="time"],
+.eael-contact-form-7 input[type="week"],
+.eael-contact-form-7 input[type="number"],
+.eael-contact-form-7 input[type="email"],
+.eael-contact-form-7 input[type="url"],
+.eael-contact-form-7 input[type="search"],
+.eael-contact-form-7 input[type="tel"],
+.eael-contact-form-7 input[type="color"],
+.eael-contact-form-7 .uneditable-input {
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+.eael-contact-form-7 .wpcf7-form::before,
+.eael-contact-form-7 .wpcf7-form::after {
+  content: " ";
+  clear: both;
+  display: table;
+}
+
+.eael-contact-form-7 .wpcf7-form:after {
+  clear: both;
+  content: "";
+  font-size: 0;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+
+.eael-contact-form-7 .wpcf7-form label,
+.eael-contact-form-7 .wpcf7-form .wpcf7-form-control-wrap {
+  display: block;
+}
+
+.eael-contact-form-7 .wpcf7-form p {
+  margin-bottom: 0;
+}
+
+.eael-contact-form-7.labels-hide .wpcf7-form label {
+  display: none;
+}
+
+.eael-contact-form-7-title {
+  margin-bottom: 10px;
+}
+
+.eael-contact-form-7-description {
+  margin-bottom: 20px;
+}
+
+.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
+  width: 100%;
+}
+
+.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
+  margin: 0 auto;
 }
 
 .eael-ticker-wrap {
@@ -1014,93 +1101,6 @@
   margin-left: 5px;
 }
 
-/*--------------------------------*/
-/* 11. Contact Form 7 Styles
-/*--------------------------------*/
-.eael-contact-form.eael-contact-form-align-center,
-.eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form.eael-contact-form-align-left,
-.eael-contact-form-7.eael-contact-form-btn-align-left input.wpcf7-submit {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form.eael-contact-form-align-right,
-.eael-contact-form-7.eael-contact-form-btn-align-right input.wpcf7-submit {
-  float: right;
-  width: auto;
-}
-
-.eael-contact-form-7 textarea,
-.eael-contact-form-7 input[type="text"],
-.eael-contact-form-7 input[type="password"],
-.eael-contact-form-7 input[type="datetime"],
-.eael-contact-form-7 input[type="datetime-local"],
-.eael-contact-form-7 input[type="date"],
-.eael-contact-form-7 input[type="month"],
-.eael-contact-form-7 input[type="time"],
-.eael-contact-form-7 input[type="week"],
-.eael-contact-form-7 input[type="number"],
-.eael-contact-form-7 input[type="email"],
-.eael-contact-form-7 input[type="url"],
-.eael-contact-form-7 input[type="search"],
-.eael-contact-form-7 input[type="tel"],
-.eael-contact-form-7 input[type="color"],
-.eael-contact-form-7 .uneditable-input {
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-}
-
-.eael-contact-form-7 .wpcf7-form::before,
-.eael-contact-form-7 .wpcf7-form::after {
-  content: " ";
-  clear: both;
-  display: table;
-}
-
-.eael-contact-form-7 .wpcf7-form:after {
-  clear: both;
-  content: "";
-  font-size: 0;
-  height: 0;
-  display: block;
-  visibility: hidden;
-}
-
-.eael-contact-form-7 .wpcf7-form label,
-.eael-contact-form-7 .wpcf7-form .wpcf7-form-control-wrap {
-  display: block;
-}
-
-.eael-contact-form-7 .wpcf7-form p {
-  margin-bottom: 0;
-}
-
-.eael-contact-form-7.labels-hide .wpcf7-form label {
-  display: none;
-}
-
-.eael-contact-form-7-title {
-  margin-bottom: 10px;
-}
-
-.eael-contact-form-7-description {
-  margin-bottom: 20px;
-}
-
-.eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
-  width: 100%;
-}
-
-.eael-contact-form-7-wrapper .eael-contact-form-align-center form {
-  margin: 0 auto;
-}
-
 /* -------------------------------- */
 /* 20. Dual Color Heading
 /* -------------------------------- */
@@ -1463,6 +1463,111 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   color: #f54;
 }
 
+.fc-row table {
+  margin: 0px !important;
+}
+
+.fc-view table thead:first-child tr:first-child td {
+  border-top: 1px solid #DDD !important;
+}
+
+.eael-event-calendar-wrapper {
+  border: 2px solid #009900;
+}
+
+/* The Modal Started */
+.eaelec-modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.eaelec-modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+/* The Close Button */
+.eaelec-modal-close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.eaelec-modal-close:hover,
+.eaelec-modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.eaelec-modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.eaelec-modal-body {
+  padding: 2px 16px;
+}
+
+.eaelec-modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Modal Ended */
+
 .eael-facebook-feed {
   width: 100%;
   margin: auto;
@@ -1698,65 +1803,6 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 }
 .elementor-widget-eael-facebook-feed .eael-load-more-button-wrap.no-pagination {
   display: none;
-}
-
-.eael-event-calendar-wrapper {
-  border: 2px solid #009900;
-}
-
-.eael-fancy-text-container p {
-  margin: 0;
-}
-
-.eael-fancy-text-strings {
-  display: none;
-}
-
-.eael-fancy-text-prefix,
-.eael-fancy-text-suffix {
-  display: inline-block;
-}
-
-.morphext > .animated {
-  display: inline-block;
-}
-
-.typed-cursor {
-  opacity: 1;
-  -webkit-animation: blink_cursor 0.7s infinite;
-  animation: blink_cursor 0.7s infinite;
-}
-
-@keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.eael-fancy-text-container.style-2 {
-  font-size: 24px;
-}
-
-.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
-  background: #ff5544;
-  color: #fff;
-  padding: 10px 25px;
 }
 
 /*----------------------------*/
@@ -3362,60 +3408,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   opacity: 1;
 }
 
-.eael-fluent-form-wrapper label.ff-el-form-check-label {
-  display: flex;
-  align-items: center;
-}
-.eael-fluent-form-wrapper label.ff-el-form-check-label input {
-  margin-right: 5px;
-}
-
-.eael-fluentform-form-button-full-width .ff-btn-submit {
-  width: 100%;
-  display: block;
-}
-
-.eael-contact-form.eael-fluent-form-wrapper.error-message-hide .ff-el-is-error .text-danger {
-  display: none;
-}
-
-.eael-fluentform-form-button-center .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-right .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-right .ff-el-group .ff-btn-submit {
-  float: right;
-}
-
-.eael-fluentform-form-button-left .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-left .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-left .ff-el-group .ff-btn-submit {
-  float: left;
-}
-
-.eael-contact-form.eael-fluent-form-wrapper.fluent-form-labels-hide label {
-  display: none !important;
-}
-
-.eael-fluentform-section-break-content-left .ff-el-group.ff-el-section-break {
-  text-align: left;
-}
-
-.eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break {
-  text-align: center;
-}
-
-.eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break {
-  text-align: right;
-}
-
 /*---------------------------*/
 /* 18. Flipbox Style
 /*---------------------------*/
@@ -3703,6 +3695,61 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   overflow: hidden;
 }
 
+.eael-fancy-text-container p {
+  margin: 0;
+}
+
+.eael-fancy-text-strings {
+  display: none;
+}
+
+.eael-fancy-text-prefix,
+.eael-fancy-text-suffix {
+  display: inline-block;
+}
+
+.morphext > .animated {
+  display: inline-block;
+}
+
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink_cursor 0.7s infinite;
+  animation: blink_cursor 0.7s infinite;
+}
+
+@keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.eael-fancy-text-container.style-2 {
+  font-size: 24px;
+}
+
+.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
+  background: #ff5544;
+  color: #fff;
+  padding: 10px 25px;
+}
+
 /*--------------------------*/
 /* 01. General Styles
 /*--------------------------*/
@@ -3833,6 +3880,117 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   height: 100%;
 }
 
+.eael-fluent-form-wrapper label.ff-el-form-check-label {
+  display: flex;
+  align-items: center;
+}
+.eael-fluent-form-wrapper label.ff-el-form-check-label input {
+  margin-right: 5px;
+}
+
+.eael-fluentform-form-button-full-width .ff-btn-submit {
+  width: 100%;
+  display: block;
+}
+
+.eael-contact-form.eael-fluent-form-wrapper.error-message-hide .ff-el-is-error .text-danger {
+  display: none;
+}
+
+.eael-fluentform-form-button-center .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-right .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-right .ff-el-group .ff-btn-submit {
+  float: right;
+}
+
+.eael-fluentform-form-button-left .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-left .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-left .ff-el-group .ff-btn-submit {
+  float: left;
+}
+
+.eael-contact-form.eael-fluent-form-wrapper.fluent-form-labels-hide label {
+  display: none !important;
+}
+
+.eael-fluentform-section-break-content-left .ff-el-group.ff-el-section-break {
+  text-align: left;
+}
+
+.eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break {
+  text-align: center;
+}
+
+.eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break {
+  text-align: right;
+}
+
+/*----------------------*/
+/* 14. Gravity Form
+/*----------------------*/
+.eael-gravity-form-align-default,
+.eael-gravity-form-align-left,
+.eael-gravity-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-gravity-form-align-right,
+.eael-gravity-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-gravity-form-align-center,
+.eael-gravity-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer {
+  margin: 0;
+  padding: 0;
+}
+
+.gform_wrapper form li,
+.gform_wrapper li {
+  list-style: none;
+}
+
+.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper textarea {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
+  margin: 0;
+}
+
+.eael-gravity-form.title-description-hide .gform_heading {
+  display: none;
+}
+
+.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
+.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
+  display: none;
+}
+
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
+  width: 100%;
+}
+
 /*------------------------------*/
 /* 34. Image accordion
 /*------------------------------*/
@@ -3924,132 +4082,202 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   }
 }
 
-/*----------------------*/
-/* 14. Gravity Form
-/*----------------------*/
-.eael-gravity-form-align-default,
-.eael-gravity-form-align-left,
-.eael-gravity-form-btn-align-left {
+/* ------------------------ */
+/* 17. Infobox Style
+/* ------------------------ */
+/*--- Image/Icon On Top ---*/
+.eael-infobox .infobox-icon {
+  height: auto;
+}
+
+.eael-infobox .infobox-icon .infobox-icon-wrap {
+  display: flex;
+  width: 100%;
+  height: auto;
+  transition: .3s;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-infobox .infobox-icon .infobox-icon-wrap i {
+  transition: .3s;
+}
+
+/*--- For Content Alignment ---*/
+.eael-infobox-content-align-left .eael-infobox .infobox-icon,
+.eael-infobox-content-align-left .eael-infobox .infobox-content,
+.eael-infobox-content-align-left .eael-infobox .infobox-button {
   text-align: left;
 }
 
-.eael-gravity-form-align-right,
-.eael-gravity-form-btn-align-right {
+.eael-infobox-content-align-right .eael-infobox .infobox-icon,
+.eael-infobox-content-align-right .eael-infobox .infobox-content,
+.eael-infobox-content-align-right .eael-infobox .infobox-button {
   text-align: right;
 }
 
-.eael-gravity-form-align-center,
-.eael-gravity-form-btn-align-center {
+.eael-infobox-content-align-center .eael-infobox .infobox-icon,
+.eael-infobox-content-align-center .eael-infobox .infobox-content,
+.eael-infobox-content-align-center .eael-infobox .infobox-button {
   text-align: center;
 }
 
-.eael-gravity-form .gform_wrapper .gform_footer {
-  margin: 0;
-  padding: 0;
+/*--- For icon background shape ---*/
+.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap {
+  width: 90px;
+  height: 90px;
+  text-align: center;
 }
 
-.gform_wrapper form li,
-.gform_wrapper li {
-  list-style: none;
-}
-
-.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
-  padding: 0;
-}
-
-.eael-gravity-form .gform_wrapper textarea {
-  padding: 0;
-}
-
-.eael-gravity-form .gform_wrapper .gform_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
-.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
-  margin: 0;
-}
-
-.eael-gravity-form.title-description-hide .gform_heading {
-  display: none;
-}
-
-.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
-.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
-  display: none;
-}
-
-.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
-  width: 100%;
-}
-
-/*----------------------*/
-/* 13. Ninja Form Styles
-/*----------------------*/
-.eael-ninja-container input,
-.eael-ninja-container textarea {
-  height: auto;
-  padding: 10px;
-}
-
-.eael-contact-form-align-center .eael-ninja-container,
-.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form-align-left .eael-ninja-container,
-.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form-align-right .eael-ninja-container,
-.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: right;
-  width: auto;
-}
-
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-ninja-container .nf-field .nf-field-element input[type="password"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-ninja-container .nf-field .nf-field-element input[type="url"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-ninja-container .nf-field .nf-field-element textarea {
-  max-width: 100%;
-}
-
-.eael-ninja-form .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form-title-yes .nf-form-title {
-  display: block;
-}
-
-.eael-ninja-form .title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form.title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form .nf-field-label {
-  display: none;
-}
-
-.eael-ninja-form-labels-yes .nf-field-label {
-  display: block;
-}
-
-.eael-ninja-form .submit-container input[type=button] {
-  border: 0;
+.eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
   border-radius: 0;
 }
 
-.eael-ninja-form-button-full-width .submit-container input[type=button] {
-  width: 100%;
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 15px;
+}
+
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 50%;
+}
+
+.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
+
+/*--- Infobox Button ---*/
+.eael-infobox .infobox-button a.eael-infobox-button {
+  display: inline-block;
+  padding: 5px 10px;
+  transition: all 300ms ease-in-out 0s;
+}
+
+/*--- For icon bg shape alignment ---*/
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*--- Image/Icon On Left ---*/
+.eael-infobox.icon-on-left {
+  position: relative;
+  z-index: 0;
+  display: flex;
+}
+
+.eael-infobox.icon-on-right .infobox-icon-wrap,
+.eael-infobox.icon-on-left .infobox-icon-wrap {
+  justify-content: center;
+  display: flex !important;
+  align-items: center;
+}
+
+.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
+  background: none;
+  border: 0px;
+  text-align: left;
+  height: auto;
+  display: block;
+}
+
+.eael-infobox .infobox-content p {
+  margin: 0 0 15px;
+}
+
+.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
+  margin-top: 0px;
+  transform: translateY(0%);
+}
+
+.eael-infobox.icon-on-left .infobox-content {
+  padding-left: 15px;
+  flex: 1 1 auto;
+}
+
+.eael-infobox.icon-on-left .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+/*--- Image/Icon On Right ---*/
+.eael-infobox.icon-on-right {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
+  background: none;
+  border: 0px;
+  text-align: right;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
+  margin-top: 0px;
+  transform: translateY(0%);
+}
+
+.eael-infobox.icon-on-right .infobox-content {
+  padding-right: 15px;
+  text-align: right;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.eael-infobox.icon-on-right .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+/*--- Imgae Circle On Top ---*/
+.eael-infobox .infobox-icon img {
+  transition: all 300ms ease-in-out 0s;
+}
+
+.eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
+  border-radius: 0;
+}
+
+.eael-infobox-shape-circle .eael-infobox .infobox-icon img,
+.eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
+  border-radius: 50%;
+}
+
+.eael-infobox-shape-radius .eael-infobox .infobox-icon img,
+.eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
+  border-radius: 15px;
 }
 
 /* ------------------------ */
@@ -4510,202 +4738,75 @@ button.mfp-close:hover {
   }
 }
 
-/* ------------------------ */
-/* 17. Infobox Style
-/* ------------------------ */
-/*--- Image/Icon On Top ---*/
-.eael-infobox .infobox-icon {
+/*----------------------*/
+/* 13. Ninja Form Styles
+/*----------------------*/
+.eael-ninja-container input,
+.eael-ninja-container textarea {
   height: auto;
+  padding: 10px;
 }
 
-.eael-infobox .infobox-icon .infobox-icon-wrap {
-  display: flex;
-  width: 100%;
-  height: auto;
-  transition: .3s;
-  align-items: center;
-  justify-content: center;
-}
-
-.eael-infobox .infobox-icon .infobox-icon-wrap i {
-  transition: .3s;
-}
-
-/*--- For Content Alignment ---*/
-.eael-infobox-content-align-left .eael-infobox .infobox-icon,
-.eael-infobox-content-align-left .eael-infobox .infobox-content,
-.eael-infobox-content-align-left .eael-infobox .infobox-button {
-  text-align: left;
-}
-
-.eael-infobox-content-align-right .eael-infobox .infobox-icon,
-.eael-infobox-content-align-right .eael-infobox .infobox-content,
-.eael-infobox-content-align-right .eael-infobox .infobox-button {
-  text-align: right;
-}
-
-.eael-infobox-content-align-center .eael-infobox .infobox-icon,
-.eael-infobox-content-align-center .eael-infobox .infobox-content,
-.eael-infobox-content-align-center .eael-infobox .infobox-button {
-  text-align: center;
-}
-
-/*--- For icon background shape ---*/
-.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap {
-  width: 90px;
-  height: 90px;
-  text-align: center;
-}
-
-.eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 0;
-}
-
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 15px;
-}
-
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 50%;
-}
-
-.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
-  margin-top: 50%;
-  transform: translateY(-50%);
-}
-
-/*--- Infobox Button ---*/
-.eael-infobox .infobox-button a.eael-infobox-button {
-  display: inline-block;
-  padding: 5px 10px;
-  transition: all 300ms ease-in-out 0s;
-}
-
-/*--- For icon bg shape alignment ---*/
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: flex;
-  justify-content: center;
-}
-
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/*--- Image/Icon On Left ---*/
-.eael-infobox.icon-on-left {
-  position: relative;
-  z-index: 0;
-  display: flex;
-}
-
-.eael-infobox.icon-on-right .infobox-icon-wrap,
-.eael-infobox.icon-on-left .infobox-icon-wrap {
-  justify-content: center;
-  display: flex !important;
-  align-items: center;
-}
-
-.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
-  background: none;
-  border: 0px;
-  text-align: left;
-  height: auto;
+.eael-contact-form-align-center .eael-ninja-container,
+.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
   display: block;
+  float: none;
 }
 
-.eael-infobox .infobox-content p {
-  margin: 0 0 15px;
-}
-
-.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
-  margin-top: 0px;
-  transform: translateY(0%);
-}
-
-.eael-infobox.icon-on-left .infobox-content {
-  padding-left: 15px;
-  flex: 1 1 auto;
-}
-
-.eael-infobox.icon-on-left .infobox-content .title {
-  line-height: 1;
-  margin: 0 0 10px 0;
-}
-
-/*--- Image/Icon On Right ---*/
-.eael-infobox.icon-on-right {
-  position: relative;
-  z-index: 0;
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
-  background: none;
-  border: 0px;
-  text-align: right;
+.eael-contact-form-align-left .eael-ninja-container,
+.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: left;
   width: auto;
-  height: auto;
+}
+
+.eael-contact-form-align-right .eael-ninja-container,
+.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: right;
+  width: auto;
+}
+
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-ninja-container .nf-field .nf-field-element input[type="password"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-ninja-container .nf-field .nf-field-element input[type="url"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-ninja-container .nf-field .nf-field-element textarea {
+  max-width: 100%;
+}
+
+.eael-ninja-form .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form-title-yes .nf-form-title {
   display: block;
 }
 
-.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
-  margin-top: 0px;
-  transform: translateY(0%);
+.eael-ninja-form .title-description-hide .nf-form-title {
+  display: none;
 }
 
-.eael-infobox.icon-on-right .infobox-content {
-  padding-right: 15px;
-  text-align: right;
-  flex: 1 1 auto;
-  box-sizing: border-box;
+.eael-ninja-form.title-description-hide .nf-form-title {
+  display: none;
 }
 
-.eael-infobox.icon-on-right .infobox-content .title {
-  line-height: 1;
-  margin: 0 0 10px 0;
+.eael-ninja-form .nf-field-label {
+  display: none;
 }
 
-/*--- Imgae Circle On Top ---*/
-.eael-infobox .infobox-icon img {
-  transition: all 300ms ease-in-out 0s;
+.eael-ninja-form-labels-yes .nf-field-label {
+  display: block;
 }
 
-.eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
+.eael-ninja-form .submit-container input[type=button] {
+  border: 0;
   border-radius: 0;
 }
 
-.eael-infobox-shape-circle .eael-infobox .infobox-icon img,
-.eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
-  border-radius: 50%;
-}
-
-.eael-infobox-shape-radius .eael-infobox .infobox-icon img,
-.eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
-  border-radius: 15px;
+.eael-ninja-form-button-full-width .submit-container input[type=button] {
+  width: 100%;
 }
 
 /*-----------------------------*/
@@ -5979,232 +6080,6 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   }
 }
 
-@-webkit-keyframes animateStripe {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(35px, 0);
-  }
-}
-@keyframes animateStripe {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(35px, 0);
-  }
-}
-@-webkit-keyframes animateStripeRTL {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-35px, 0);
-  }
-}
-@keyframes animateStripeRTL {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-35px, 0);
-  }
-}
-.eael-progressbar {
-  position: relative;
-}
-
-.eael-progressbar-title {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.eael-progressbar-line {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 12px;
-  background-color: #eeeeee;
-}
-.eael-progressbar-line .eael-progressbar-count-wrap {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 5px);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.eael-progressbar-line-fill {
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 0;
-  height: 12px;
-  background-color: #000000;
-  transform: translateY(-50%);
-  transition: width 1500ms linear;
-  overflow: hidden;
-}
-
-.eael-progressbar-circle {
-  position: relative;
-  width: 200px;
-  height: 200px;
-}
-.eael-progressbar-circle .eael-progressbar-title {
-  font-size: 16px;
-  font-weight: 400;
-}
-.eael-progressbar-circle .eael-progressbar-count-wrap {
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.eael-progressbar-circle-shadow {
-  width: 220px;
-  height: 220px;
-  padding: 10px;
-  border-radius: 50%;
-}
-
-.eael-progressbar-circle-pie {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-clip-path: inset(0 0 0 50%);
-          clip-path: inset(0 0 0 50%);
-}
-
-.eael-progressbar-circle-inner {
-  height: 100%;
-  width: 100%;
-  border-width: 12px;
-  border-style: solid;
-  border-color: #eeeeee;
-  border-radius: 50%;
-}
-
-.eael-progressbar-circle-half {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  border-width: 12px;
-  border-style: solid;
-  border-color: #000000;
-  border-radius: 50%;
-  -webkit-clip-path: inset(0 50% 0 0);
-          clip-path: inset(0 50% 0 0);
-}
-
-.eael-progressbar-circle-half-left {
-  transform: rotate(0deg);
-}
-
-.eael-progressbar-circle-half-right {
-  transform: rotate(180deg);
-  visibility: hidden;
-}
-
-.eael-progressbar-circle-inner-content {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-50%);
-  text-align: center;
-}
-
-.eael-progressbar-half-circle {
-  position: relative;
-  width: 200px;
-  height: 100px;
-  overflow: hidden;
-}
-.eael-progressbar-half-circle .eael-progressbar-circle-pie {
-  -webkit-clip-path: inset(0 0 50% 0);
-          clip-path: inset(0 0 50% 0);
-}
-.eael-progressbar-half-circle .eael-progressbar-circle-half {
-  -webkit-clip-path: inset(50% 0 0 0);
-          clip-path: inset(50% 0 0 0);
-  transform: rotate(0deg);
-  transition: transform 1500ms linear;
-}
-.eael-progressbar-half-circle .eael-progressbar-circle-inner-content {
-  top: initial;
-  bottom: 0;
-  transform: translateY(0);
-}
-.eael-progressbar-half-circle .eael-progressbar-title {
-  font-size: 16px;
-  font-weight: 400;
-}
-.eael-progressbar-half-circle .eael-progressbar-count-wrap {
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.eael-progressbar-half-circle-after {
-  position: relative;
-  font-size: 12px;
-  font-weight: 400;
-  clear: both;
-}
-
-.eael-progressbar-postfix-label {
-  float: right;
-}
-
-.eael-progressbar-line-stripe .eael-progressbar-line-fill:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -35px;
-  width: calc(100% + 70px);
-  height: 100%;
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-size: 35px 35px;
-}
-
-.eael-progressbar-line-animate .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripe 2s linear infinite;
-          animation: animateStripe 2s linear infinite;
-}
-
-.eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripeRTL 2s linear infinite;
-          animation: animateStripeRTL 2s linear infinite;
-}
-
-.eael-progressbar-circle-wrap > div {
-  margin: 0 auto;
-}
-
-/*alignment*/
-.eael-progressbar-line-container.left,
-.eael-progressbar-circle-container.left > div,
-.eael-progressbar-box-container.left > div {
-  margin: 0 auto 0 0;
-}
-
-.eael-progressbar-line-container.center,
-.eael-progressbar-circle-container.center > div,
-.eael-progressbar-box-container.center > div {
-  margin: 0 auto;
-}
-
-.eael-progressbar-line-container.right,
-.eael-progressbar-circle-container.right > div,
-.eael-progressbar-box-container.right > div {
-  margin: 0 0 0 auto;
-}
-
 /*--------------------------*/
 /* 09. Product Styles
 /*--------------------------*/
@@ -6651,6 +6526,232 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   transform: translateY(0);
 }
 
+@-webkit-keyframes animateStripe {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(35px, 0);
+  }
+}
+@keyframes animateStripe {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(35px, 0);
+  }
+}
+@-webkit-keyframes animateStripeRTL {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-35px, 0);
+  }
+}
+@keyframes animateStripeRTL {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-35px, 0);
+  }
+}
+.eael-progressbar {
+  position: relative;
+}
+
+.eael-progressbar-title {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.eael-progressbar-line {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 12px;
+  background-color: #eeeeee;
+}
+.eael-progressbar-line .eael-progressbar-count-wrap {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 5px);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.eael-progressbar-line-fill {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 12px;
+  background-color: #000000;
+  transform: translateY(-50%);
+  transition: width 1500ms linear;
+  overflow: hidden;
+}
+
+.eael-progressbar-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+.eael-progressbar-circle .eael-progressbar-title {
+  font-size: 16px;
+  font-weight: 400;
+}
+.eael-progressbar-circle .eael-progressbar-count-wrap {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.eael-progressbar-circle-shadow {
+  width: 220px;
+  height: 220px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.eael-progressbar-circle-pie {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-clip-path: inset(0 0 0 50%);
+          clip-path: inset(0 0 0 50%);
+}
+
+.eael-progressbar-circle-inner {
+  height: 100%;
+  width: 100%;
+  border-width: 12px;
+  border-style: solid;
+  border-color: #eeeeee;
+  border-radius: 50%;
+}
+
+.eael-progressbar-circle-half {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-width: 12px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 50%;
+  -webkit-clip-path: inset(0 50% 0 0);
+          clip-path: inset(0 50% 0 0);
+}
+
+.eael-progressbar-circle-half-left {
+  transform: rotate(0deg);
+}
+
+.eael-progressbar-circle-half-right {
+  transform: rotate(180deg);
+  visibility: hidden;
+}
+
+.eael-progressbar-circle-inner-content {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.eael-progressbar-half-circle {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  overflow: hidden;
+}
+.eael-progressbar-half-circle .eael-progressbar-circle-pie {
+  -webkit-clip-path: inset(0 0 50% 0);
+          clip-path: inset(0 0 50% 0);
+}
+.eael-progressbar-half-circle .eael-progressbar-circle-half {
+  -webkit-clip-path: inset(50% 0 0 0);
+          clip-path: inset(50% 0 0 0);
+  transform: rotate(0deg);
+  transition: transform 1500ms linear;
+}
+.eael-progressbar-half-circle .eael-progressbar-circle-inner-content {
+  top: initial;
+  bottom: 0;
+  transform: translateY(0);
+}
+.eael-progressbar-half-circle .eael-progressbar-title {
+  font-size: 16px;
+  font-weight: 400;
+}
+.eael-progressbar-half-circle .eael-progressbar-count-wrap {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.eael-progressbar-half-circle-after {
+  position: relative;
+  font-size: 12px;
+  font-weight: 400;
+  clear: both;
+}
+
+.eael-progressbar-postfix-label {
+  float: right;
+}
+
+.eael-progressbar-line-stripe .eael-progressbar-line-fill:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -35px;
+  width: calc(100% + 70px);
+  height: 100%;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 35px 35px;
+}
+
+.eael-progressbar-line-animate .eael-progressbar-line-fill:after {
+  -webkit-animation: animateStripe 2s linear infinite;
+          animation: animateStripe 2s linear infinite;
+}
+
+.eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
+  -webkit-animation: animateStripeRTL 2s linear infinite;
+          animation: animateStripeRTL 2s linear infinite;
+}
+
+.eael-progressbar-circle-wrap > div {
+  margin: 0 auto;
+}
+
+/*alignment*/
+.eael-progressbar-line-container.left,
+.eael-progressbar-circle-container.left > div,
+.eael-progressbar-box-container.left > div {
+  margin: 0 auto 0 0;
+}
+
+.eael-progressbar-line-container.center,
+.eael-progressbar-circle-container.center > div,
+.eael-progressbar-box-container.center > div {
+  margin: 0 auto;
+}
+
+.eael-progressbar-line-container.right,
+.eael-progressbar-circle-container.right > div,
+.eael-progressbar-box-container.right > div {
+  margin: 0 0 0 auto;
+}
+
 .eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
   display: none;
 }
@@ -7011,6 +7112,250 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 
 .eael-team-member-social-link > a:focus {
   outline: none;
+}
+
+/*------------------------------*/
+/* 32. Tooltip
+/*------------------------------*/
+.eael-tooltip {
+  position: relative;
+  display: inline-block;
+  min-width: 150px;
+  padding: 12px 24px;
+  font-size: .93rem;
+  color: #333;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-tooltip .eael-tooltip-text {
+  display: block;
+  width: 100%;
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  font-size: .93rem;
+  line-height: 1.3;
+}
+.eael-tooltip .eael-tooltip-text p {
+  margin: 0;
+}
+
+.eael-tooltip .eael-tooltip-text::after {
+  content: "";
+  position: absolute;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.eael-tooltip:hover .eael-tooltip-text {
+  visibility: visible;
+}
+
+/*--- Left ---*/
+.eael-tooltip .eael-tooltip-text.eael-tooltip-left {
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  margin-right: 10px;
+}
+
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left {
+  -webkit-animation: tooltipLeftIn 300ms ease-in-out;
+          animation: tooltipLeftIn 300ms ease-in-out;
+}
+
+.eael-tooltip .eael-tooltip-text.eael-tooltip-left::after {
+  top: calc(50% - 5px);
+  left: 100%;
+  border-color: transparent transparent transparent black;
+}
+
+/*--- Right ---*/
+.eael-tooltip .eael-tooltip-text.eael-tooltip-right {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in-out;
+  margin-left: 10px;
+}
+
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right {
+  -webkit-animation: tooltipRightIn 300ms linear;
+          animation: tooltipRightIn 300ms linear;
+}
+
+.eael-tooltip .eael-tooltip-text.eael-tooltip-right::after {
+  top: calc(50% - 5px);
+  right: 100%;
+  border-color: transparent black transparent transparent;
+}
+
+/*--- Top ---*/
+.eael-tooltip .eael-tooltip-text.eael-tooltip-top {
+  bottom: calc(100%);
+  left: 0;
+  right: 0;
+  margin: 0 auto 10px auto;
+}
+
+.eael-tooltip .eael-tooltip-text.eael-tooltip-top::after {
+  margin-top: 0px;
+  top: 100%;
+  left: calc( 50% - 5px);
+  border-color: black transparent transparent transparent;
+}
+
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top {
+  -webkit-animation: tooltipTopIn 300ms linear;
+          animation: tooltipTopIn 300ms linear;
+}
+
+/*--- Bottom ---*/
+.eael-tooltip .eael-tooltip-text.eael-tooltip-bottom {
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 10px auto 0px auto;
+}
+
+.eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
+  margin-top: 0px;
+  bottom: 100%;
+  left: calc( 50% - 5px);
+  border-color: transparent transparent black transparent;
+}
+
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom {
+  -webkit-animation: tooltipBottomIn 300ms linear;
+          animation: tooltipBottomIn 300ms linear;
+}
+
+/*--- Alignments ---*/
+.eael-tooltip-align-left {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.eael-tooltip-align-right {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.eael-tooltip-align-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.eael-tooltip-align-justify .eael-tooltip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*--- Tooltip Keyframes ---*/
+@-webkit-keyframes tooltipRightIn {
+  0% {
+    opacity: 0;
+    left: 105%;
+  }
+  100% {
+    opacity: 1;
+    left: 100%;
+  }
+}
+@keyframes tooltipRightIn {
+  0% {
+    opacity: 0;
+    left: 105%;
+  }
+  100% {
+    opacity: 1;
+    left: 100%;
+  }
+}
+@-webkit-keyframes tooltipLeftIn {
+  0% {
+    opacity: 0;
+    right: 105%;
+  }
+  100% {
+    opacity: 1;
+    right: 100%;
+  }
+}
+@keyframes tooltipLeftIn {
+  0% {
+    opacity: 0;
+    right: 105%;
+  }
+  100% {
+    opacity: 1;
+    right: 100%;
+  }
+}
+@-webkit-keyframes tooltipTopIn {
+  0% {
+    opacity: 0;
+    bottom: 110%;
+  }
+  100% {
+    opacity: 1;
+    bottom: 100%;
+  }
+}
+@keyframes tooltipTopIn {
+  0% {
+    opacity: 0;
+    bottom: 110%;
+  }
+  100% {
+    opacity: 1;
+    bottom: 100%;
+  }
+}
+@-webkit-keyframes tooltipBottomIn {
+  0% {
+    opacity: 0;
+    top: 110%;
+  }
+  100% {
+    opacity: 1;
+    top: 100%;
+  }
+}
+@keyframes tooltipBottomIn {
+  0% {
+    opacity: 0;
+    top: 110%;
+  }
+  100% {
+    opacity: 1;
+    top: 100%;
+  }
+}
+.eael-tooltip-text-align-left .eael-tooltip-text {
+  text-align: left;
+}
+
+.eael-tooltip-text-align-right .eael-tooltip-text {
+  text-align: right;
+}
+
+.eael-tooltip-text-align-center .eael-tooltip-text {
+  text-align: center;
+}
+
+.eael-tooltip-text-align-justify .eael-tooltip-text {
+  text-align: justify;
 }
 
 /*----------------------------*/
@@ -7483,250 +7828,6 @@ span.eael-testimonial-quote {
 .eael-twitter-feed.swiper-container .swiper-button-next, .eael-twitter-feed.swiper-container .swiper-button-prev {
   background-image: none;
   outline: none;
-}
-
-/*------------------------------*/
-/* 32. Tooltip
-/*------------------------------*/
-.eael-tooltip {
-  position: relative;
-  display: inline-block;
-  min-width: 150px;
-  padding: 12px 24px;
-  font-size: .93rem;
-  color: #333;
-  line-height: 1;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-tooltip .eael-tooltip-text {
-  display: block;
-  width: 100%;
-  visibility: hidden;
-  background-color: black;
-  color: #fff;
-  border-radius: 4px;
-  padding: 10px;
-  position: absolute;
-  z-index: 1;
-  font-size: .93rem;
-  line-height: 1.3;
-}
-.eael-tooltip .eael-tooltip-text p {
-  margin: 0;
-}
-
-.eael-tooltip .eael-tooltip-text::after {
-  content: "";
-  position: absolute;
-  border-width: 5px;
-  border-style: solid;
-}
-
-.eael-tooltip:hover .eael-tooltip-text {
-  visibility: visible;
-}
-
-/*--- Left ---*/
-.eael-tooltip .eael-tooltip-text.eael-tooltip-left {
-  top: 50%;
-  right: 100%;
-  transform: translateY(-50%);
-  margin-right: 10px;
-}
-
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left {
-  -webkit-animation: tooltipLeftIn 300ms ease-in-out;
-          animation: tooltipLeftIn 300ms ease-in-out;
-}
-
-.eael-tooltip .eael-tooltip-text.eael-tooltip-left::after {
-  top: calc(50% - 5px);
-  left: 100%;
-  border-color: transparent transparent transparent black;
-}
-
-/*--- Right ---*/
-.eael-tooltip .eael-tooltip-text.eael-tooltip-right {
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  transition: all 0.3s ease-in-out;
-  margin-left: 10px;
-}
-
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right {
-  -webkit-animation: tooltipRightIn 300ms linear;
-          animation: tooltipRightIn 300ms linear;
-}
-
-.eael-tooltip .eael-tooltip-text.eael-tooltip-right::after {
-  top: calc(50% - 5px);
-  right: 100%;
-  border-color: transparent black transparent transparent;
-}
-
-/*--- Top ---*/
-.eael-tooltip .eael-tooltip-text.eael-tooltip-top {
-  bottom: calc(100%);
-  left: 0;
-  right: 0;
-  margin: 0 auto 10px auto;
-}
-
-.eael-tooltip .eael-tooltip-text.eael-tooltip-top::after {
-  margin-top: 0px;
-  top: 100%;
-  left: calc( 50% - 5px);
-  border-color: black transparent transparent transparent;
-}
-
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top {
-  -webkit-animation: tooltipTopIn 300ms linear;
-          animation: tooltipTopIn 300ms linear;
-}
-
-/*--- Bottom ---*/
-.eael-tooltip .eael-tooltip-text.eael-tooltip-bottom {
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin: 10px auto 0px auto;
-}
-
-.eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
-  margin-top: 0px;
-  bottom: 100%;
-  left: calc( 50% - 5px);
-  border-color: transparent transparent black transparent;
-}
-
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom {
-  -webkit-animation: tooltipBottomIn 300ms linear;
-          animation: tooltipBottomIn 300ms linear;
-}
-
-/*--- Alignments ---*/
-.eael-tooltip-align-left {
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-}
-
-.eael-tooltip-align-right {
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-}
-
-.eael-tooltip-align-center {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-.eael-tooltip-align-justify .eael-tooltip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/*--- Tooltip Keyframes ---*/
-@-webkit-keyframes tooltipRightIn {
-  0% {
-    opacity: 0;
-    left: 105%;
-  }
-  100% {
-    opacity: 1;
-    left: 100%;
-  }
-}
-@keyframes tooltipRightIn {
-  0% {
-    opacity: 0;
-    left: 105%;
-  }
-  100% {
-    opacity: 1;
-    left: 100%;
-  }
-}
-@-webkit-keyframes tooltipLeftIn {
-  0% {
-    opacity: 0;
-    right: 105%;
-  }
-  100% {
-    opacity: 1;
-    right: 100%;
-  }
-}
-@keyframes tooltipLeftIn {
-  0% {
-    opacity: 0;
-    right: 105%;
-  }
-  100% {
-    opacity: 1;
-    right: 100%;
-  }
-}
-@-webkit-keyframes tooltipTopIn {
-  0% {
-    opacity: 0;
-    bottom: 110%;
-  }
-  100% {
-    opacity: 1;
-    bottom: 100%;
-  }
-}
-@keyframes tooltipTopIn {
-  0% {
-    opacity: 0;
-    bottom: 110%;
-  }
-  100% {
-    opacity: 1;
-    bottom: 100%;
-  }
-}
-@-webkit-keyframes tooltipBottomIn {
-  0% {
-    opacity: 0;
-    top: 110%;
-  }
-  100% {
-    opacity: 1;
-    top: 100%;
-  }
-}
-@keyframes tooltipBottomIn {
-  0% {
-    opacity: 0;
-    top: 110%;
-  }
-  100% {
-    opacity: 1;
-    top: 100%;
-  }
-}
-.eael-tooltip-text-align-left .eael-tooltip-text {
-  text-align: left;
-}
-
-.eael-tooltip-text-align-right .eael-tooltip-text {
-  text-align: right;
-}
-
-.eael-tooltip-text-align-center .eael-tooltip-text {
-  text-align: center;
-}
-
-.eael-tooltip-text-align-justify .eael-tooltip-text {
-  text-align: justify;
 }
 
 /*----------------------*/
