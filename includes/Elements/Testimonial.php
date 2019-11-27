@@ -118,6 +118,22 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'content_height',
+			[
+				'label' => esc_html__( 'Description Height', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> ['px', '%', 'em'],
+				'range' => [
+					'px' => [ 'max' => 300 ],
+					'%'	=> [ 'max'	=> 100 ]
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-content' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 
 		$this->add_control(
 			'eael_testimonial_enable_rating',
