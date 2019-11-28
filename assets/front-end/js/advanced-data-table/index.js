@@ -1,3 +1,5 @@
+var advanced_data_table_active_cell = null;
+
 var Advanced_Data_Table = function($scope, $) {
 	if (isEditMode) {
 		var table = $scope.context.querySelector(".ea-advanced-data-table");
@@ -25,6 +27,10 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 			// save input on edit
 			table.querySelectorAll("textarea").forEach(function(el) {
+				el.addEventListener("focusin", function(e) {
+					advanced_data_table_active_cell = el;
+				});
+
 				el.addEventListener("focusout", function(e) {
 					clearTimeout(interval);
 
@@ -55,20 +61,25 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
-	console.log(element);
-	element.on("mousedown", function(e) {
-		console.log(e);
-	});
 	if (element.options.model.attributes.widgetType == "eael-advanced-data-table") {
 		groups.push({
 			name: "ea_advanced_data_table",
 			actions: [
 				{
-					name: "add_row",
-					title: "Add Row",
+					name: "add_row_above",
+					title: "Add Row Above",
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-						var row = table.insertRow(table.rows.length);
+						var index;
+
+						if (advanced_data_table_active_cell == null) {
+							index = table.rows.length;
+						} else {
+							index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+							advanced_data_table_active_cell = null;
+						}
+
+						var row = table.insertRow(index);
 
 						for (var i = 0; i < table.rows[0].cells.length; i++) {
 							var cell = row.insertCell(i);
@@ -77,8 +88,84 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					}
 				},
 				{
-					name: "add_column",
-					title: "Add Column",
+					name: "add_row_below",
+					title: "Add Row Below",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+						var index;
+
+						if (advanced_data_table_active_cell == null) {
+							index = table.rows.length;
+						} else {
+							index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
+							advanced_data_table_active_cell = null;
+						}
+
+						var row = table.insertRow(index);
+
+						for (var i = 0; i < table.rows[0].cells.length; i++) {
+							var cell = row.insertCell(i);
+							cell.innerHTML = '<textarea rows="1"></textarea>';
+						}
+					}
+				},
+				{
+					name: "add_column_left",
+					title: "Add Column Left",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+						var index;
+
+						if (advanced_data_table_active_cell !== null) {
+							index = advanced_data_table_active_cell.parentNode.cellIndex;
+						}
+
+						for (var i = 0; i < table.rows.length; i++) {
+							if (index === null) {
+								index = table.rows[i].cells.length;
+							}
+
+							var cell = table.rows[i].insertCell(index);
+							cell.innerHTML = '<textarea rows="1"></textarea>';
+						}
+					}
+				},
+				{
+					name: "add_column_right",
+					title: "Add Column Right",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+						var index;
+
+						if (advanced_data_table_active_cell !== null) {
+							index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
+						}
+
+						for (var i = 0; i < table.rows.length; i++) {
+							if (index === null) {
+								index = table.rows[i].cells.length;
+							}
+
+							var cell = table.rows[i].insertCell(index);
+							cell.innerHTML = '<textarea rows="1"></textarea>';
+						}
+					}
+				},
+				{
+					name: "delete_row",
+					title: "Delete Row",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						for (var i = 0; i < table.rows.length; i++) {
+							var cell = table.rows[i].insertCell(table.rows[i].cells.length - 1);
+							cell.innerHTML = '<textarea rows="1"></textarea>';
+						}
+					}
+				},
+				{
+					name: "delete_column",
+					title: "Delete Column",
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
