@@ -280,6 +280,7 @@ class Event_Calendar extends Widget_Base {
 	protected function render( ) {
         $settings = $this->get_settings_for_display();
         $events = $settings['eael_event_items'];
+        /*
         $daysWeek = "[ 
                         '" . $settings['eael_event_calendar_days_sun'] . "',
                         '" . $settings['eael_event_calendar_days_mon'] . "',
@@ -289,14 +290,21 @@ class Event_Calendar extends Widget_Base {
                         '" . $settings['eael_event_calendar_days_fri'] . "',
                         '" . $settings['eael_event_calendar_days_sat'] .  "']";
 
-        /*
                         '" .  . "'," .
                         '" . $settings['eael_event_calendar_days_mon'] . "'," .
                         '" . $settings['eael_event_calendar_days_tue'] . "'," .
                         '" . $settings['eael_event_calendar_days_wed'] . "'," .
                         '" . $settings['eael_event_calendar_days_thu'] . "'," .
                         '" . $settings['eael_event_calendar_days_fri'] . "',]""; */
-        echo ($daysWeek);
+        $daysWeek = array(
+                                $settings['eael_event_calendar_days_sun'],
+                                $settings['eael_event_calendar_days_mon'],
+                                $settings['eael_event_calendar_days_tue'],
+                                $settings['eael_event_calendar_days_wed'],
+                                $settings['eael_event_calendar_days_thu'],
+                                $settings['eael_event_calendar_days_fri'],
+                                $settings['eael_event_calendar_days_sat']
+                            );
         echo '<div class="eael-event-calendar-wrapper" style="padding:20px;">';
         if($events):
             $data = array();
@@ -320,7 +328,7 @@ class Event_Calendar extends Widget_Base {
         endif;
         echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
                 data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
-                data-days_week="' . htmlspecialchars($daysWeek, ENT_QUOTES, 'UTF-8') . '"></div>';
+                data-days_week="' . htmlspecialchars(json_encode($daysWeek), ENT_QUOTES, 'UTF-8') . '"></div>';
         
         echo '<div id="eaelecModal" class="eaelec-modal">
                 <div class="eaelec-modal-content">
