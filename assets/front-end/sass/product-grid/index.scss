@@ -76,6 +76,10 @@
                     grid-template-columns: repeat(1, 1fr);
                 }
             }
+            
+            &.products[class*=columns-] li.product {
+                width: 100%;
+            }
         }
     }
 
