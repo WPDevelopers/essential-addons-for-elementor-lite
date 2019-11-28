@@ -97,6 +97,10 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+.eael-product-grid .woocommerce ul.products.products[class*=columns-] li.product,
+.eael-post-grid .woocommerce ul.products.products[class*=columns-] li.product {
+  width: 100%;
+}
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product {
