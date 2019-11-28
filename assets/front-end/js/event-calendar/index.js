@@ -7,7 +7,7 @@ jQuery(window).on('elementor/frontend/init', function () {
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
         //daysWeek1 = ['s1', 's2'];
-        alert(daysWeek);
+        //alert(daysWeek);
         var calendar = $('#eael-event-calendar').fullCalendar({
             editable:true,
             header:{
