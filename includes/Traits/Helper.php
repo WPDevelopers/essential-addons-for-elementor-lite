@@ -827,7 +827,7 @@ trait Helper
                 'label' => __('Load More Button Style', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'show_load_more' => 'yes',
+                    'show_load_more' => ['yes', '1']
                 ],
             ]
         );
