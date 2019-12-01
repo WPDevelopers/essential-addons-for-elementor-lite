@@ -13,6 +13,19 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table td {
   background-color: transparent !important;
 }
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th {
+  position: relative;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:after {
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  cursor: col-resize;
+}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th,
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td {
   padding: 0;
