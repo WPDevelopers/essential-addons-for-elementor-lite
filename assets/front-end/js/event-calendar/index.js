@@ -27,6 +27,7 @@ jQuery(window).on('elementor/frontend/init', function () {
                     $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
                     $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
                     */
+                    $("span.eaelec-event-date-start").html(event.start);
                     $(".eaelec-modal-header h2").html(event.title);
                     $(".eaelec-modal-body p").html(event.description);
                     $(".eaelec-modal-footer a").attr('href', event.url);

@@ -107,12 +107,39 @@ class Event_Calendar extends Widget_Base {
                 ]
             );
 
+            $repeater->add_control(
+                'eael_event_bg_color',
+                [
+                    'label' => __('Event Background Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#009900',
+                ]
+            );
+    
+            $repeater->add_control(
+                'eael_event_text_color',
+                [
+                    'label' => __('Event Text Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#FFFFFF',
+                ]
+            );
+    
+            $repeater->add_control(
+                'eael_event_border_color',
+                [
+                    'label' => __('Event Border Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#009900',
+                ]
+            );
+
             $repeater->end_controls_tab();
 
             $repeater->start_controls_tab(
 				'eaelec_event_content_tab',
 				[
-					'label'	=> __( 'Description', 'essential-addons-elementor' )
+					'label'	=> __( 'Content', 'essential-addons-elementor' )
 				]
             );
 
@@ -243,33 +270,6 @@ class Event_Calendar extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'eael_event_bg_color',
-            [
-                'label' => __('Event Background Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default'   => '#009900',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_text_color',
-            [
-                'label' => __('Event Text Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_border_color',
-            [
-                'label' => __('Event Border Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default'   => '#009900',
-            ]
-        );
-
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -338,9 +338,9 @@ class Event_Calendar extends Widget_Base {
                                     'description'   => $event["eael_event_description"],
                                     'start'         => $event["eael_event_start_date"],
                                     'end'           => $event["eael_event_end_date"],
-                                    'borderColor'   => $settings['eael_event_border_color'],
-                                    'textColor'     => $settings['eael_event_text_color'],
-                                    'color'         => $settings['eael_event_bg_color'],
+                                    'borderColor'   => $event['eael_event_border_color'],
+                                    'textColor'     => $event['eael_event_text_color'],
+                                    'color'         => $event['eael_event_bg_color'],
                                     'url'           => $event["eael_event_link"]["url"],
                                     'dayNames'      => ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
                                     'Thursday', 'Friday', 'Saturday']
@@ -359,6 +359,8 @@ class Event_Calendar extends Widget_Base {
                     <h2></h2>
                   </div>
                   <div class="eaelec-modal-body">
+                    <span>Event Start:</span>
+                    <span class="eaelec-event-date-start"></span>
                     <p></p>
                   </div>
                   <div class="eaelec-modal-footer">
