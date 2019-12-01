@@ -58,70 +58,92 @@ class Event_Calendar extends Widget_Base {
 
         $repeater = new \Elementor\Repeater();
 
-		$repeater->add_control(
-			'eael_event_title',
-			[
-				'label'         => __( 'Title', 'essential-addons-elementor' ),
-				'type'          => Controls_Manager::TEXT,
-                'label_block'   => true,
-            ]
-        );
+        $repeater->start_controls_tabs('eael_event_content_tabs');
 
-        $repeater->add_control(
-			'eael_event_description',
-			[
-				'label' => __( 'Description', 'essential-addons-elementor' ),
-                'type'  => Controls_Manager::TEXTAREA,
-            ]
-        );
+            $repeater->start_controls_tab(
+                'eaelec_event_info_tab',
+                [
+                    'label'	=> __( 'General', 'essential-addons-elementor' )
+                ]
+            );
+            
+            $repeater->add_control(
+                'eael_event_title',
+                [
+                    'label'         => __( 'Title', 'essential-addons-elementor' ),
+                    'type'          => Controls_Manager::TEXT,
+                    'label_block'   => true,
+                ]
+            );
 
-        $repeater->add_control(
-			'eael_event_link',
-			[
-				'label' => __( 'Link', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'https://sample-domain.com', 'essential-addons-elementor' ),
-				'show_external' => true,
-				'default' => [
-					'url' => '#',
-					'is_external' => false,
-					'nofollow' => false,
-				],
-			]
-        );
+            $repeater->add_control(
+                'eael_event_link',
+                [
+                    'label' => __( 'Link', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::URL,
+                    'placeholder' => __( 'https://sample-domain.com', 'essential-addons-elementor' ),
+                    'show_external' => true,
+                    'default' => [
+                        'url' => '#',
+                        'is_external' => false,
+                        'nofollow' => false,
+                    ],
+                ]
+            );
+            
+            $repeater->add_control(
+                'eael_event_start_date',
+                [
+                    'label' => __( 'Start Date', 'plugin-domain' ),
+                    'type' => Controls_Manager::DATE_TIME,
+                ]
+            );
+            
+            $repeater->add_control(
+                'eael_event_end_date',
+                [
+                    'label' => __( 'End Date', 'plugin-domain' ),
+                    'type' => Controls_Manager::DATE_TIME,
+                ]
+            );
+
+            $repeater->end_controls_tab();
+
+            $repeater->start_controls_tab(
+				'eaelec_event_content_tab',
+				[
+					'label'	=> __( 'Description', 'essential-addons-elementor' )
+				]
+            );
+
+            $repeater->add_control(
+                'eael_event_description',
+                [
+                    'label' => __( 'Description', 'essential-addons-elementor' ),
+                    'type'  => Controls_Manager::WYSIWYG,
+                ]
+            );
+            
+            $repeater->end_controls_tab();
+
+            $this->add_control(
+                'eael_event_items',
+                [
+                    'label'         => __( 'Events', 'essential-addons-elementor' ),
+                    'type'          => Controls_Manager::REPEATER,
+                    'fields'        => $repeater->get_controls(),
+                    'default' => [
+                        [ 'eael_event_title' => 'Event Title' ],
+                    ],
+                    'title_field'   => '{{ eael_event_title }}',
+                    'condition' => [
+                        'eael_event_calendar_type' => 'manual',
+                    ],
+    
+                ]
+            );
         
-        $repeater->add_control(
-			'eael_event_start_date',
-			[
-				'label' => __( 'Start Date', 'plugin-domain' ),
-				'type' => Controls_Manager::DATE_TIME,
-			]
-        );
-        
-        $repeater->add_control(
-			'eael_event_end_date',
-			[
-				'label' => __( 'End Date', 'plugin-domain' ),
-				'type' => Controls_Manager::DATE_TIME,
-			]
-		);
-
-        $this->add_control(
-			'eael_event_items',
-			[
-				'label'         => __( 'Events', 'essential-addons-elementor' ),
-                'type'          => Controls_Manager::REPEATER,
-                'fields'        => $repeater->get_controls(),
-                'default' => [
-					[ 'eael_event_title' => 'Event Title' ],
-				],
-                'title_field'   => '{{ eael_event_title }}',
-                'condition' => [
-                    'eael_event_calendar_type' => 'manual',
-                ],
-
-            ]
-        );
+        $this->end_controls_tabs();
         
         $this->end_controls_section();
 
