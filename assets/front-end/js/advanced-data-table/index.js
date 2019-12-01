@@ -25,13 +25,14 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 			var interval;
 			var table = view.el.querySelector(".ea-advanced-data-table");
 
-			// save input on edit
-			table.querySelectorAll("textarea").forEach(function(el) {
-				el.addEventListener("focusin", function(e) {
-					advanced_data_table_active_cell = el;
-				});
+			table.addEventListener("focusin", function(e) {
+				if (e.target.tagName.toLowerCase() == "textarea") {
+					advanced_data_table_active_cell = e.target;
+				}
+			});
 
-				el.addEventListener("focusout", function(e) {
+			table.addEventListener("focusout", function(e) {
+				if (e.target.tagName.toLowerCase() == "textarea") {
 					clearTimeout(interval);
 
 					// clone current table
@@ -54,7 +55,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 					interval = setTimeout(function() {
 						model.remoteRender = true;
 					}, 1001);
-				});
+				}
 			});
 		}
 	}, 300);
@@ -70,20 +71,17 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					title: "Add Row Above",
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-						var index;
 
-						if (advanced_data_table_active_cell == null) {
-							index = table.rows.length;
-						} else {
-							index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+							var row = table.insertRow(index);
+
+							for (var i = 0; i < table.rows[0].cells.length; i++) {
+								var cell = row.insertCell(i);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
 							advanced_data_table_active_cell = null;
-						}
-
-						var row = table.insertRow(index);
-
-						for (var i = 0; i < table.rows[0].cells.length; i++) {
-							var cell = row.insertCell(i);
-							cell.innerHTML = '<textarea rows="1"></textarea>';
 						}
 					}
 				},
@@ -92,20 +90,17 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					title: "Add Row Below",
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-						var index;
 
-						if (advanced_data_table_active_cell == null) {
-							index = table.rows.length;
-						} else {
-							index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
+							var row = table.insertRow(index);
+
+							for (var i = 0; i < table.rows[0].cells.length; i++) {
+								var cell = row.insertCell(i);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
 							advanced_data_table_active_cell = null;
-						}
-
-						var row = table.insertRow(index);
-
-						for (var i = 0; i < table.rows[0].cells.length; i++) {
-							var cell = row.insertCell(i);
-							cell.innerHTML = '<textarea rows="1"></textarea>';
 						}
 					}
 				},
@@ -114,19 +109,16 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					title: "Add Column Left",
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-						var index;
 
 						if (advanced_data_table_active_cell !== null) {
-							index = advanced_data_table_active_cell.parentNode.cellIndex;
-						}
+							var index = advanced_data_table_active_cell.parentNode.cellIndex;
 
-						for (var i = 0; i < table.rows.length; i++) {
-							if (index === null) {
-								index = table.rows[i].cells.length;
+							for (var i = 0; i < table.rows.length; i++) {
+								var cell = table.rows[i].insertCell(index);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
 							}
 
-							var cell = table.rows[i].insertCell(index);
-							cell.innerHTML = '<textarea rows="1"></textarea>';
+							advanced_data_table_active_cell = null;
 						}
 					}
 				},
@@ -135,19 +127,16 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					title: "Add Column Right",
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-						var index;
 
 						if (advanced_data_table_active_cell !== null) {
-							index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
-						}
+							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
 
-						for (var i = 0; i < table.rows.length; i++) {
-							if (index === null) {
-								index = table.rows[i].cells.length;
+							for (var i = 0; i < table.rows.length; i++) {
+								var cell = table.rows[i].insertCell(index);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
 							}
 
-							var cell = table.rows[i].insertCell(index);
-							cell.innerHTML = '<textarea rows="1"></textarea>';
+							advanced_data_table_active_cell = null;
 						}
 					}
 				},
@@ -157,9 +146,12 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
-						for (var i = 0; i < table.rows.length; i++) {
-							var cell = table.rows[i].insertCell(table.rows[i].cells.length - 1);
-							cell.innerHTML = '<textarea rows="1"></textarea>';
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+
+							table.deleteRow(index);
+
+							advanced_data_table_active_cell = null;
 						}
 					}
 				},
@@ -169,9 +161,14 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
-						for (var i = 0; i < table.rows.length; i++) {
-							var cell = table.rows[i].insertCell(table.rows[i].cells.length - 1);
-							cell.innerHTML = '<textarea rows="1"></textarea>';
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								table.rows[i].deleteCell(index);
+							}
+
+							advanced_data_table_active_cell = null;
 						}
 					}
 				}
