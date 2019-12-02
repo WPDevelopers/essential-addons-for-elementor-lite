@@ -1,4 +1,8 @@
 var advanced_data_table_active_cell = null;
+var advanced_data_table_drag_start_x,
+	advanced_data_table_drag_start_width,
+	advanced_data_table_drag_el,
+	advanced_data_table_dragging = false;
 
 var Advanced_Data_Table = function($scope, $) {
 	if (isEditMode) {
@@ -13,6 +17,30 @@ var Advanced_Data_Table = function($scope, $) {
 
 			if (value.indexOf('<textarea rows="1">') !== 0) {
 				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
+			}
+		});
+
+		// drag
+		table.addEventListener("mousedown", function(e) {
+			if (e.target.tagName.toLowerCase() === "th") {
+				e.stopPropagation();
+
+				advanced_data_table_dragging = true;
+				advanced_data_table_drag_el = e.target;
+				advanced_data_table_drag_start_x = e.pageX;
+				advanced_data_table_drag_start_width = e.target.offsetWidth;
+			}
+		});
+
+		document.addEventListener("mousemove", function(e) {
+			if (advanced_data_table_dragging) {
+				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
+			}
+		});
+		
+		document.addEventListener("mouseup", function(e) {
+			if (advanced_data_table_dragging) {
+				advanced_data_table_dragging = false;
 			}
 		});
 	}
