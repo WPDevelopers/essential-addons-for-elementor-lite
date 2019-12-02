@@ -37,10 +37,18 @@ var Advanced_Data_Table = function($scope, $) {
 				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
 			}
 		});
-		
+
 		document.addEventListener("mouseup", function(e) {
 			if (advanced_data_table_dragging) {
 				advanced_data_table_dragging = false;
+			}
+		});
+
+		table.addEventListener("dblclick", function(e) {
+			if (e.target.tagName.toLowerCase() === "th") {
+				e.stopPropagation();
+
+				e.target.style.width = "";
 			}
 		});
 	}
@@ -59,8 +67,35 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 				}
 			});
 
-			table.addEventListener("focusout", function(e) {
+			table.addEventListener("input", function(e) {
 				if (e.target.tagName.toLowerCase() == "textarea") {
+					clearTimeout(interval);
+
+					// clone current table
+					var origTable = table.cloneNode(true);
+
+					// remove editable area
+					origTable.querySelectorAll("th, td").forEach(function(el) {
+						var value = el.querySelector("textarea").value;
+						el.innerHTML = value;
+					});
+
+					// disable elementor remote server render
+					model.remoteRender = false;
+
+					// update backbone model
+					model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
+
+					// enable elementor remote server render just after elementor throttle
+					// ignore multiple assign
+					interval = setTimeout(function() {
+						model.remoteRender = true;
+					}, 1001);
+				}
+			});
+
+			table.addEventListener("mouseup", function(e) {
+				if (e.target.tagName.toLowerCase() == "th") {
 					clearTimeout(interval);
 
 					// clone current table
