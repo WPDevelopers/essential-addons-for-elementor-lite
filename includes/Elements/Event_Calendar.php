@@ -96,6 +96,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __( 'Start Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
+                    'default'   => date('Y-m-d H:i'),
                 ]
             );
             
@@ -104,6 +105,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __( 'End Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
+                    'default'   => date('Y-m-d H:i'),
                 ]
             );
 
@@ -187,7 +189,6 @@ class Event_Calendar extends Widget_Base {
 			[
 				'label' => __( 'Days', 'essential-addons-elementor' ),
 				'type' => Controls_Manager::HEADING,
-				//'separator' => 'before',
 			]
         );
         
@@ -196,8 +197,6 @@ class Event_Calendar extends Widget_Base {
             [
                 'label' => __('Saturday', 'essential-addons-elementor'),
                 'type' => Controls_Manager::TEXT,
-                //'label_block' => true,
-                //'show_label' => false,
                 'default'   => 'Sat'
             ]
         );
@@ -299,25 +298,10 @@ class Event_Calendar extends Widget_Base {
     }
 
 
-	protected function render( ) {
+	protected function render() {
         $settings = $this->get_settings_for_display();
         $events = $settings['eael_event_items'];
-        /*
-        $daysWeek = "[ 
-                        '" . $settings['eael_event_calendar_days_sun'] . "',
-                        '" . $settings['eael_event_calendar_days_mon'] . "',
-                        '" . $settings['eael_event_calendar_days_tue'] . "',
-                        '" . $settings['eael_event_calendar_days_wed'] . "',
-                        '" . $settings['eael_event_calendar_days_thu'] . "',
-                        '" . $settings['eael_event_calendar_days_fri'] . "',
-                        '" . $settings['eael_event_calendar_days_sat'] .  "']";
-
-                        '" .  . "'," .
-                        '" . $settings['eael_event_calendar_days_mon'] . "'," .
-                        '" . $settings['eael_event_calendar_days_tue'] . "'," .
-                        '" . $settings['eael_event_calendar_days_wed'] . "'," .
-                        '" . $settings['eael_event_calendar_days_thu'] . "'," .
-                        '" . $settings['eael_event_calendar_days_fri'] . "',]""; */
+        
         $daysWeek = array(
                                 $settings['eael_event_calendar_days_sun'],
                                 $settings['eael_event_calendar_days_mon'],
