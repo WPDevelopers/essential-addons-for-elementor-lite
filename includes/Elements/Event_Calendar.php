@@ -361,6 +361,9 @@ class Event_Calendar extends Widget_Base {
                   <div class="eaelec-modal-body">
                     <span>Event Start:</span>
                     <span class="eaelec-event-date-start"></span>
+                    <br>
+                    <span>Event End:</span>
+                    <span class="eaelec-event-date-end"></span>
                     <p></p>
                   </div>
                   <div class="eaelec-modal-footer">
