@@ -113,6 +113,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 				}
 			});
 
+			// clear style
 			table.addEventListener("dblclick", function(e) {
 				if (e.target.tagName.toLowerCase() === "th") {
 					e.stopPropagation();

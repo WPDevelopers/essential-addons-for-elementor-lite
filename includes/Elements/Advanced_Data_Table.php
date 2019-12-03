@@ -99,7 +99,7 @@ class Advanced_Data_Table extends Widget_Base
                             'right' => '1',
                             'bottom' => '1',
                             'left' => '1',
-                            'isLinked' => false,
+                            'isLinked' => true,
                         ],
                     ],
                     'color' => [
