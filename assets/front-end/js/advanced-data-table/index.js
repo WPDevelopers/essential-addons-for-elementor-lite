@@ -5,9 +5,9 @@ var advanced_data_table_drag_start_x,
 	advanced_data_table_dragging = false;
 
 var Advanced_Data_Table = function($scope, $) {
-	if (isEditMode) {
-		var table = $scope.context.querySelector(".ea-advanced-data-table");
+	var table = $scope.context.querySelector(".ea-advanced-data-table");
 
+	if (isEditMode) {
 		// add edit class
 		table.classList.add("ea-advanced-data-table-editable");
 
@@ -43,6 +43,36 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 		});
 	}
+
+	// sort
+	table.addEventListener("click", function(e) {
+		if (e.target.tagName.toLowerCase() === "th") {
+			var index = e.target.cellIndex;
+			var asc = e.target.classList.toggle("asc");
+			var switching = true;
+
+			while (switching) {
+				switching = false;
+
+				for (var i = 1; i < table.rows.length - 1; i++) {
+					var x = table.rows[i].cells[index];
+					var y = table.rows[i + 1].cells[index];
+
+					if (asc && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+						switching = true;
+
+						break;
+					} else if (asc === false && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+						switching = true;
+
+						break;
+					}
+				}
+			}
+		}
+	});
 };
 
 // Inline edit
