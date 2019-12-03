@@ -135,7 +135,7 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 					callback: function() {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
-						if (advanced_data_table_active_cell !== null) {
+						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
 							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
 							var row = table.insertRow(index);
 
@@ -177,7 +177,12 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var index = advanced_data_table_active_cell.parentNode.cellIndex;
 
 							for (var i = 0; i < table.rows.length; i++) {
-								var cell = table.rows[i].insertCell(index);
+								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
+									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+								} else {
+									var cell = table.rows[i].insertCell(index);
+								}
+
 								cell.innerHTML = '<textarea rows="1"></textarea>';
 							}
 
@@ -195,7 +200,12 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
 
 							for (var i = 0; i < table.rows.length; i++) {
-								var cell = table.rows[i].insertCell(index);
+								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
+									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+								} else {
+									var cell = table.rows[i].insertCell(index);
+								}
+
 								cell.innerHTML = '<textarea rows="1"></textarea>';
 							}
 
