@@ -37,18 +37,9 @@ var Advanced_Data_Table = function($scope, $) {
 				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
 			}
 		});
-
 		document.addEventListener("mouseup", function(e) {
 			if (advanced_data_table_dragging) {
 				advanced_data_table_dragging = false;
-			}
-		});
-
-		table.addEventListener("dblclick", function(e) {
-			if (e.target.tagName.toLowerCase() === "th") {
-				e.stopPropagation();
-
-				e.target.style.width = "";
 			}
 		});
 	}
@@ -94,8 +85,9 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 				}
 			});
 
+			// drag
 			table.addEventListener("mouseup", function(e) {
-				if (e.target.tagName.toLowerCase() == "th") {
+				if (e.target.tagName.toLowerCase() === "th") {
 					clearTimeout(interval);
 
 					// clone current table
@@ -118,6 +110,14 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 					interval = setTimeout(function() {
 						model.remoteRender = true;
 					}, 1001);
+				}
+			});
+
+			table.addEventListener("dblclick", function(e) {
+				if (e.target.tagName.toLowerCase() === "th") {
+					e.stopPropagation();
+
+					e.target.style.width = "";
 				}
 			});
 		}
