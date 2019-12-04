@@ -14,6 +14,7 @@ jQuery(window).on('elementor/frontend/init', function () {
             editable:false,
             draggable:false,
             firstDay: firstDay,
+            slotLabelFormat:"HH:mm",
             header:{
             left:'prev,next today',
             center:'title',
