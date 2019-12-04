@@ -11,6 +11,7 @@ use \Elementor\Frontend;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 
@@ -398,22 +399,89 @@ class Event_Calendar extends Widget_Base {
          * Style Tab Started
          */
         $this->start_controls_section(
-            'eael_event_calendar_head_interface',
+            'eael_event_calendar_interface',
             [
-                'label' => __('Calendar Head', 'essential-addons-elementor'),
+                'label' => __('Calendar', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
+            'eael_event_calendar_border_type',
+            [
+                'label' => __('Border Type', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __('None', 'essential-addons-elementor'),
+                    'solid' => __('Solid', 'essential-addons-elementor'),
+                    'double' => __('Double', 'essential-addons-elementor'),
+                    'dotted' => __('Dotted', 'essential-addons-elementor'),
+                    'dashed' => __('Dashed', 'essential-addons-elementor'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'border-style: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_border_width',
+            [
+                'label' => esc_html__('Border Width', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_border_color',
+            [
+                'label' => __('Border Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        $this->add_control(
             'eael_event_calendar_title_color',
             [
-                'label' => __('Calendar Title Color', 'essential-addons-elementor'),
+                'label' => __('Title Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'default'   => '#009900',
                 'selectors' => [
                     '{{WRAPPER}} .fc-toolbar h2' => 'color: {{VALUE}}!important',
-                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -485,6 +553,40 @@ class Event_Calendar extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_event_calendar_weekday_bg_color',
+            [
+                'label' => __('Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_event_calendar_weekday_typography',
+				'label' => __( 'Typography', 'essential-addons-elementor' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th',
+			]
+		);
+
+        $this->add_control(
+            'eael_event_calendar_weekday_font_color',
+            [
+                'label' => __('Font Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'color: {{VALUE}}!important',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -517,7 +619,7 @@ class Event_Calendar extends Widget_Base {
                                 $settings['eael_event_calendar_month_nov'],
                                 $settings['eael_event_calendar_month_dec']
                             );
-        echo '<div class="eael-event-calendar-wrapper" style="padding:20px;">';
+        echo '<div class="eael-event-calendar-wrapper">';
         if($events):
             $data = array();
             $i=0;

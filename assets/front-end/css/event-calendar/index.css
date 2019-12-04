@@ -7,7 +7,7 @@
 }
 
 .eael-event-calendar-wrapper {
-  border: 2px solid #009900;
+  overflow: hidden;
 }
 
 /* The Modal Started */
