@@ -5,6 +5,7 @@ jQuery(window).on('elementor/frontend/init', function () {
         var eventAll = element.data('events');
         var daysWeek = element.data('days_week');
         var monthNames = element.data('month_names');
+        var firstDay = element.data('first_day');
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
         //daysWeek1 = ['s1', 's2'];
@@ -12,6 +13,7 @@ jQuery(window).on('elementor/frontend/init', function () {
         var calendar = $('#eael-event-calendar').fullCalendar({
             editable:false,
             draggable:false,
+            firstDay: firstDay,
             header:{
             left:'prev,next today',
             center:'title',

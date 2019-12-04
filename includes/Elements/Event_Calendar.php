@@ -372,6 +372,25 @@ class Event_Calendar extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_event_calendar_first_day',
+            [
+                'label' => __('First Day of Week', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    '0' => __('Sunday', 'essential-addons-elementor'),
+                    '1' => __('Monday', 'essential-addons-elementor'),
+                    '2' => __('Tuesday', 'essential-addons-elementor'),
+                    '3' => __('Wednesday', 'essential-addons-elementor'),
+                    '4' => __('Thursday', 'essential-addons-elementor'),
+                    '5' => __('Friday', 'essential-addons-elementor'),
+                    '6' => __('Saturday', 'essential-addons-elementor'),
+                ],
+                'default' => '0',
+                'separator' => 'before',
+            ]
+        );
+
         $this->end_controls_section();
 
         
@@ -463,9 +482,11 @@ class Event_Calendar extends Widget_Base {
                 $i++;
             endforeach;
         endif;
+        //
         echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
                 data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
                 data-month_names="' . htmlspecialchars(json_encode($monthNames), ENT_QUOTES, 'UTF-8') . '"
+                data-first_day="' . $settings['eael_event_calendar_first_day'] . '"
                 data-days_week="' . htmlspecialchars(json_encode($daysWeek), ENT_QUOTES, 'UTF-8') . '"></div>';
         
         $this->eaelec_load_event_details();    
