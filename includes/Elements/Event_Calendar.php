@@ -413,8 +413,64 @@ class Event_Calendar extends Widget_Base {
                 'default'   => '#009900',
                 'selectors' => [
                     '{{WRAPPER}} .fc-toolbar h2' => 'color: {{VALUE}}!important',
-                    '{{WRAPPER}} .fc-toolbar .fc-button' => 'background: {{VALUE}}!important',
                     '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_event_calendar_button_style',
+			[
+				'label' => __( 'Button', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+			]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_button_color',
+            [
+                'label' => __('Button Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#EAEAEA',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar .fc-button' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_button_hover_color',
+            [
+                'label' => __('Button Hover Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#EAEAEA',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar .fc-button:hover' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_button_active_color',
+            [
+                'label' => __('Button Active Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#EAEAEA',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar .fc-state-active' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_today_button_color',
+            [
+                'label' => __('Today Button Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#EAEAEA',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar .fc-today-button' => 'background: {{VALUE}}!important',
                 ],
             ]
         );
