@@ -16,10 +16,19 @@
 			background-color: transparent !important;
 		}
 
+		// paginated table
+		&.ea-advanced-data-table-paginated {
+			tbody {
+				tr {
+					display: none;
+				}
+			}
+		}
+
 		&.ea-advanced-data-table-editable {
 			th {
-                position: relative;
-                
+				position: relative;
+
 				&:after {
 					content: "";
 					display: block;
@@ -47,6 +56,14 @@
 					padding: 0;
 					outline: none;
 					vertical-align: middle;
+				}
+			}
+
+			&.ea-advanced-data-table-paginated {
+				tbody {
+					tr {
+						display: table-row;
+					}
 				}
 			}
 		}
