@@ -96,7 +96,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __( 'Start Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
-                    'default'   => date('Y-m-d H:i'),
+                    'default'   => date( 'Y-m-d H:i', current_time( 'timestamp', 0 ) ),
                 ]
             );
             
@@ -105,7 +105,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __( 'End Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
-                    'default'   => date('Y-m-d H:i'),
+                    'default'   => date( 'Y-m-d H:i', current_time( 'timestamp', 0 ) ),
                 ]
             );
 
@@ -255,22 +255,129 @@ class Event_Calendar extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+			'eael_event_calendar_months_name',
+			[
+				'label' => __( 'Months', 'essential-addons-elementor' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+			]
+        );
+        
+        $this->add_control(
+            'eael_event_calendar_month_jan',
+            [
+                'label' => __('January', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'January'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_feb',
+            [
+                'label' => __('February', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'February'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_mar',
+            [
+                'label' => __('March', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'March'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_apr',
+            [
+                'label' => __('April', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'April'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_may',
+            [
+                'label' => __('May', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'May'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_jun',
+            [
+                'label' => __('June', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'June'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_jul',
+            [
+                'label' => __('July', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'July'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_aug',
+            [
+                'label' => __('August', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'August'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_sep',
+            [
+                'label' => __('September', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'September'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_oct',
+            [
+                'label' => __('October', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'October'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_nov',
+            [
+                'label' => __('November', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'November'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_month_dec',
+            [
+                'label' => __('December', 'essential-addons-elementor'),
+                'type' => Controls_Manager::TEXT,
+                'default'   => 'December'
+            ]
+        );
+
         $this->end_controls_section();
 
         
         /**
          * Style Tab Started
          */
-        $this->start_controls_section(
-            'eael_event_event_interface',
-            [
-                'label' => __('Event', 'essential-addons-elementor'),
-                'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->end_controls_section();
-
         $this->start_controls_section(
             'eael_event_calendar_head_interface',
             [
@@ -295,6 +402,15 @@ class Event_Calendar extends Widget_Base {
 
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'eael_event_week_interface',
+            [
+                'label' => __('Weekday', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
 
@@ -310,6 +426,21 @@ class Event_Calendar extends Widget_Base {
                                 $settings['eael_event_calendar_days_thu'],
                                 $settings['eael_event_calendar_days_fri'],
                                 $settings['eael_event_calendar_days_sat']
+                            );
+
+        $monthNames = array(
+                                $settings['eael_event_calendar_month_jan'],
+                                $settings['eael_event_calendar_month_feb'],
+                                $settings['eael_event_calendar_month_mar'],
+                                $settings['eael_event_calendar_month_apr'],
+                                $settings['eael_event_calendar_month_may'],
+                                $settings['eael_event_calendar_month_jun'],
+                                $settings['eael_event_calendar_month_jul'],
+                                $settings['eael_event_calendar_month_aug'],
+                                $settings['eael_event_calendar_month_sep'],
+                                $settings['eael_event_calendar_month_oct'],
+                                $settings['eael_event_calendar_month_nov'],
+                                $settings['eael_event_calendar_month_dec']
                             );
         echo '<div class="eael-event-calendar-wrapper" style="padding:20px;">';
         if($events):
@@ -334,28 +465,35 @@ class Event_Calendar extends Widget_Base {
         endif;
         echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
                 data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
+                data-month_names="' . htmlspecialchars(json_encode($monthNames), ENT_QUOTES, 'UTF-8') . '"
                 data-days_week="' . htmlspecialchars(json_encode($daysWeek), ENT_QUOTES, 'UTF-8') . '"></div>';
         
-        echo '<div id="eaelecModal" class="eaelec-modal">
-                <div class="eaelec-modal-content">
-                  <div class="eaelec-modal-header">
+        $this->eaelec_load_event_details();    
+        echo '</div>';
+    }
+
+    protected function eaelec_load_event_details(){
+        ?>
+        <div id="eaelecModal" class="eaelec-modal">
+            <div class="eaelec-modal-content">
+                <div class="eaelec-modal-header">
                     <span class="eaelec-modal-close">&times;</span>
                     <h2></h2>
-                  </div>
-                  <div class="eaelec-modal-body">
+                </div>
+                <div class="eaelec-modal-body">
                     <span>Event Start:</span>
                     <span class="eaelec-event-date-start"></span>
                     <br>
                     <span>Event End:</span>
                     <span class="eaelec-event-date-end"></span>
                     <p></p>
-                  </div>
-                  <div class="eaelec-modal-footer">
-                    <a href="#">Event Details</a>
-                  </div>
                 </div>
-              </div>';    
-        echo '</div>';
+                <div class="eaelec-modal-footer">
+                    <a href="#">Event Details</a>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 
 }
