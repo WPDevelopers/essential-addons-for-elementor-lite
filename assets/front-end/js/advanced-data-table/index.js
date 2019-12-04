@@ -6,6 +6,7 @@ var advanced_data_table_drag_start_x,
 
 var Advanced_Data_Table = function($scope, $) {
 	var table = $scope.context.querySelector(".ea-advanced-data-table");
+	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
 
 	if (isEditMode) {
 		// add edit class
@@ -42,33 +43,59 @@ var Advanced_Data_Table = function($scope, $) {
 				advanced_data_table_dragging = false;
 			}
 		});
+	} else {
+		// sort
+		table.addEventListener("click", function(e) {
+			if (e.target.tagName.toLowerCase() === "th") {
+				var index = e.target.cellIndex;
+				var asc = e.target.classList.toggle("asc");
+				var switching = true;
+
+				while (switching) {
+					switching = false;
+
+					for (var i = 1; i < table.rows.length - 1; i++) {
+						var x = table.rows[i].cells[index];
+						var y = table.rows[i + 1].cells[index];
+
+						if (asc && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+							switching = true;
+
+							break;
+						} else if (asc === false && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+							switching = true;
+
+							break;
+						}
+					}
+				}
+			}
+		});
 	}
 
-	// sort
-	table.addEventListener("click", function(e) {
-		if (e.target.tagName.toLowerCase() === "th") {
-			var index = e.target.cellIndex;
-			var asc = e.target.classList.toggle("asc");
-			var switching = true;
+	// search
+	search.addEventListener("input", function(e) {
+		var input = this.value.toLowerCase();
 
-			while (switching) {
-				switching = false;
+		if (table.rows.length > 1) {
+			for (var i = 1; i < table.rows.length; i++) {
+				var matchFound = false;
 
-				for (var i = 1; i < table.rows.length - 1; i++) {
-					var x = table.rows[i].cells[index];
-					var y = table.rows[i + 1].cells[index];
-
-					if (asc && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-						table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-						switching = true;
-
-						break;
-					} else if (asc === false && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-						table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-						switching = true;
-
-						break;
+				if (table.rows[i].cells.length > 0) {
+					for (var j = 0; j < table.rows[i].cells.length; j++) {
+						if (table.rows[i].cells[j].textContent.toLowerCase().indexOf(input) > -1) {
+							matchFound = true;
+							break;
+						}
 					}
+				}
+
+				if (matchFound) {
+					table.rows[i].style.display = "";
+				} else {
+					table.rows[i].style.display = "none";
 				}
 			}
 		}
