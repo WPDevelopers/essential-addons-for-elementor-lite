@@ -537,6 +537,7 @@ class Advanced_Data_Table extends Widget_Base
         }
 
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>
+            <input type="search" class="ea-advanced-data-table-search">
             <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->html_static_table($settings) . '</table>
         </div>';
     }
