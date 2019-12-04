@@ -531,14 +531,16 @@ class Advanced_Data_Table extends Widget_Base
             ]);
 
             $this->add_render_attribute('ea-adv-data-table', [
-                'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
+                'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()} ea-advanced-data-table-searchable ea-advanced-data-table-paginated",
                 'data-id' => $this->get_id(),
+                'data-items-per-page' => 4
             ]);
         }
 
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>
             <input type="search" class="ea-advanced-data-table-search">
             <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->html_static_table($settings) . '</table>
+            <div class="ea-advanced-data-table-pagination"></div>
         </div>';
     }
 

@@ -13,6 +13,9 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table td {
   background-color: transparent !important;
 }
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-paginated tbody tr {
+  display: none;
+}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th {
   position: relative;
 }
@@ -42,4 +45,7 @@
   padding: 0;
   outline: none;
   vertical-align: middle;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
+  display: table-row;
 }
