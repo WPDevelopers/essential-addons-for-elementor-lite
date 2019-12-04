@@ -651,7 +651,7 @@ class Feature_List extends Widget_Base
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#414247',
 				'selectors' => [
-					'{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title > a, {{WRAPPER}} .eael-feature-list-content-box .eael-feature-list-title:visited' => 'color: {{VALUE}};',
 				],
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
