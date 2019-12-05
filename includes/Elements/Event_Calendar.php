@@ -493,7 +493,7 @@ class Event_Calendar extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default'   => '#009900',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'color: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}}!important',
                 ],
                 'separator' => 'before',
             ]
@@ -552,6 +552,18 @@ class Event_Calendar extends Widget_Base {
                 'default'   => '#EAEAEA',
                 'selectors' => [
                     '{{WRAPPER}} .fc-toolbar .fc-today-button' => 'background: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_button_border_radius',
+            [
+                'label' => esc_html__('Button Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar .fc-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
