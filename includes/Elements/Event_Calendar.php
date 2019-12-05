@@ -487,6 +487,19 @@ class Event_Calendar extends Widget_Base {
         );
 
         $this->add_control(
+            'eael_event_calendar_today_bg_color',
+            [
+                'label' => __('Today Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#009900',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'color: {{VALUE}}!important',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
 			'eael_event_calendar_button_style',
 			[
 				'label' => __( 'Button', 'essential-addons-elementor' ),
@@ -583,6 +596,76 @@ class Event_Calendar extends Widget_Base {
                 'default'   => '#009900',
                 'selectors' => [
                     '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'color: {{VALUE}}!important',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'eael_event_calendar_date_interface',
+            [
+                'label' => __('Date', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_date_font_color',
+            [
+                'label' => __('Font Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#242424',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-number' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_date_bg_color',
+            [
+                'label' => __('Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default'   => '#EAEAEA',
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-number' => 'background: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_date_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-number' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_date_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-number' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_date_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-number' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
