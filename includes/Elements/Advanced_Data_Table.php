@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
+use \Elementor\Plugin;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
@@ -61,6 +62,36 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'type' => Controls_Manager::HIDDEN,
                 'default' => '<thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody>',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // general
+        $this->start_controls_section(
+            'ea_section_adv_data_table_features',
+            [
+                'label' => esc_html__('Advance Features', 'essential-addons-elementor'),
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search',
+            [
+                'label' => esc_html__('Search', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_pagination',
+            [
+                'label' => esc_html__('Pagination', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
             ]
         );
 
@@ -518,6 +549,513 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'ea_section_adv_data_table_style_search',
+            [
+                'label' => __('Search', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'ea_adv_data_table_search' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_width',
+            [
+                'label' => __('Width', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 100,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 1,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-search' => 'width: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_height',
+            [
+                'label' => __('Height', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 40,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-search' => 'height: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-search' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_margin',
+            [
+                'label' => __('Margin Bottom', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 10,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-search' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_alignment',
+            [
+                'label' => esc_html__('Alignment', 'essential-addons-elementor'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'default' => 'right',
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'ea_adv_data_table_search_typography',
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-search',
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#666666',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-search' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_search_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-search' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Border', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'ea_adv_data_table_search_border',
+                'label' => __('Border', 'essential-addons-elementor'),
+                'fields_options' => [
+                    'border' => [
+                        'default' => 'solid',
+                    ],
+                    'width' => [
+                        'default' => [
+                            'unit' => 'px',
+                            'top' => '1',
+                            'right' => '1',
+                            'bottom' => '1',
+                            'left' => '1',
+                            'isLinked' => true,
+                        ],
+                    ],
+                    'color' => [
+                        'default' => '#eeeeee',
+                    ],
+                ],
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-search',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'ea_section_adv_data_table_style_pagination',
+            [
+                'label' => __('Pagination', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'ea_adv_data_table_pagination' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_pagination_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'default' => [
+                    'unit' => 'px',
+                    'top' => '5',
+                    'right' => '15',
+                    'bottom' => '5',
+                    'left' => '15',
+                    'isLinked' => false,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_pagination_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'default' => [
+                    'unit' => 'px',
+                    'top' => '5',
+                    'right' => '5',
+                    'bottom' => '0',
+                    'left' => '0',
+                    'isLinked' => false,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'ea_adv_data_table_pagination_typography',
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a',
+            ]
+        );
+
+        $this->start_controls_tabs('ea_adv_data_table_pagination_tabs');
+
+        $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-elementor')]);
+
+        $this->add_control(
+            'ea_adv_data_table_pagination_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#666666',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_pagination_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Border', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'ea_adv_data_table_pagination_border',
+                'label' => __('Border', 'essential-addons-elementor'),
+                'fields_options' => [
+                    'border' => [
+                        'default' => 'solid',
+                    ],
+                    'width' => [
+                        'default' => [
+                            'unit' => 'px',
+                            'top' => '1',
+                            'right' => '1',
+                            'bottom' => '1',
+                            'left' => '1',
+                            'isLinked' => true,
+                        ],
+                    ],
+                    'color' => [
+                        'default' => '#eeeeee',
+                    ],
+                ],
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a',
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('hover', ['label' => esc_html__('Hover', 'essential-addons-elementor')]);
+
+        $this->add_control(
+            'ea_adv_data_table_pagination_color_hover',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#666666',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_pagination_background_hover',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'type' => Controls_Manager::DIVIDER,
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Border', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'ea_adv_data_table_pagination_border_hover',
+                'label' => __('Border', 'essential-addons-elementor'),
+                'fields_options' => [
+                    'border' => [
+                        'default' => 'solid',
+                    ],
+                    'width' => [
+                        'default' => [
+                            'unit' => 'px',
+                            'top' => '1',
+                            'right' => '1',
+                            'bottom' => '1',
+                            'left' => '1',
+                            'isLinked' => true,
+                        ],
+                    ],
+                    'color' => [
+                        'default' => '#eeeeee',
+                    ],
+                ],
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover',
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section();
     }
 
     protected function render()
@@ -533,15 +1071,36 @@ class Advanced_Data_Table extends Widget_Base
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()} ea-advanced-data-table-searchable ea-advanced-data-table-paginated",
                 'data-id' => $this->get_id(),
-                'data-items-per-page' => 4
+                'data-items-per-page' => 4,
+            ]);
+
+            $this->add_render_attribute('ea-adv-data-table-search-wrap', [
+                'class' => "ea-advanced-data-table-search-wrap ea-advanced-data-table-search-{$settings['ea_adv_data_table_search_alignment']}",
             ]);
         }
 
-        echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>
-            <input type="search" class="ea-advanced-data-table-search">
-            <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->html_static_table($settings) . '</table>
-            <div class="ea-advanced-data-table-pagination"></div>
-        </div>';
+        echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
+
+        if ($settings['ea_adv_data_table_search'] == 'yes') {
+            echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" class="ea-advanced-data-table-search"></div>';
+        }
+
+        echo '<table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->html_static_table($settings) . '</table>';
+
+        if ($settings['ea_adv_data_table_pagination'] == 'yes') {
+            if (Plugin::$instance->editor->is_edit_mode()) {
+                echo '<div class="ea-advanced-data-table-pagination clearfix">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">&raquo;</a>
+                </div>';
+            } else {
+                echo '<div class="ea-advanced-data-table-pagination clearfix"></div>';
+            }
+        }
+
+        echo '</div>';
     }
 
     protected function html_static_table($settings)

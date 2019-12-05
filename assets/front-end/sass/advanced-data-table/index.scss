@@ -68,4 +68,23 @@
 			}
 		}
 	}
+
+	// search
+	.ea-advanced-data-table-search-wrap {
+		&.ea-advanced-data-table-search-center {
+			text-align: center;
+		}
+
+		&.ea-advanced-data-table-search-right {
+			text-align: right;
+		}
+	}
+
+	// pagination
+	.ea-advanced-data-table-pagination {
+		a {
+			float: left;
+			display: inline-block;
+		}
+	}
 }
