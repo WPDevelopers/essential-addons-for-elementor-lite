@@ -106,7 +106,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __( 'End Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
-                    'default'   => date( 'Y-m-d H:i', current_time( 'timestamp', 0 ) ),
+                    'default'   => date( 'Y-m-d H:i', strtotime("+5 minute", current_time( 'timestamp', 0 )) ),
                 ]
             );
 
