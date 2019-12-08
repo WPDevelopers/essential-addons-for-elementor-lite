@@ -115,7 +115,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __('Event Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#009900',
+                    'default'   => '#00BFFF',
                 ]
             );
     
@@ -124,7 +124,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __('Event Text Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#FFFFFF',
+                    'default'   => '#242424',
                 ]
             );
     
@@ -133,7 +133,7 @@ class Event_Calendar extends Widget_Base {
                 [
                     'label' => __('Event Border Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#009900',
+                    'default'   => '#9400D3',
                 ]
             );
 
@@ -466,7 +466,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'label' => __('Title Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default'   => '#009900',
+                'default'   => '#242424',
                 'selectors' => [
                     '{{WRAPPER}} .fc-toolbar h2' => 'color: {{VALUE}}!important',
                 ],
@@ -491,7 +491,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'label' => __('Today Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default'   => '#009900',
+                'default'   => '#F2F2F2',
                 'selectors' => [
                     '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}}!important',
                 ],
@@ -583,7 +583,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'label' => __('Background Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default'   => '#009900',
+                'default'   => '#EAEAEA',
                 'selectors' => [
                     '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
                 ],
@@ -605,7 +605,7 @@ class Event_Calendar extends Widget_Base {
             [
                 'label' => __('Font Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default'   => '#009900',
+                'default'   => '#242424',
                 'selectors' => [
                     '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'color: {{VALUE}}!important',
                 ],
