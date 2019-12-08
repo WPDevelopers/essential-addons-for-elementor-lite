@@ -724,7 +724,7 @@ class Event_Calendar extends Widget_Base {
                                     'title'         => $event["eael_event_title"],
                                     'description'   => $event["eael_event_description"],
                                     'start'         => $event["eael_event_start_date"],
-                                    'end'           => $event["eael_event_end_date"],
+                                    'end'           => $event["eael_event_end_date"].":01",
                                     'borderColor'   => $event['eael_event_border_color'],
                                     'textColor'     => $event['eael_event_text_color'],
                                     'color'         => $event['eael_event_bg_color'],
