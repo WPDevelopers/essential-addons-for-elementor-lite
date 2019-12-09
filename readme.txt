@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.6.1
+Stable tag: 3.6.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -177,6 +177,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.6.2 - 09/12/2019 =
+- Bugfix: Product grid responsive issue 
+- Bugfix: 404 page assets loading
+- Improvement: Tooltip alignement option added
+- Few minor bugfix and improvements
 
 = 3.6.1 - 27/11/2019 =
 - Bugfix:  Product Grid featured products issue fix
