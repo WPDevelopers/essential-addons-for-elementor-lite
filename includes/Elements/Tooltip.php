@@ -180,7 +180,7 @@ class Tooltip extends Widget_Base {
 				'type'      => Controls_Manager::SLIDER,
 				'size_units'	=> [ '%', 'px' ],
 				'default'   => [
-					'size' => 30,
+					'size' => 60,
 				],
 				'range'     => [
 					'px' => [
