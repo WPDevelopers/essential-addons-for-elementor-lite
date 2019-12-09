@@ -11,7 +11,11 @@
 		width: 100%;
 		border-collapse: collapse;
 
-		th,
+		th {
+			background-color: transparent !important;
+			cursor: pointer;
+		}
+
 		td {
 			background-color: transparent !important;
 		}

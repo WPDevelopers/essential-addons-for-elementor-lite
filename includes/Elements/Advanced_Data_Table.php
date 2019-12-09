@@ -95,6 +95,32 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'ea_adv_data_table_search_pagination',
+            [
+                'label' => esc_html__('Search Pagination', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+                    'ea_adv_data_table_search' => 'yes',
+                    'ea_adv_data_table_pagination' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_items_per_page',
+            [
+                'label' => esc_html__('Pagination', 'essential-addons-elementor'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => 10,
+                'condition' => [
+                    'ea_adv_data_table_pagination' => 'yes',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         // style
@@ -977,7 +1003,7 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1004,7 +1030,7 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1047,7 +1073,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '#eeeeee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current',
             ]
         );
 
@@ -1069,13 +1095,31 @@ class Advanced_Data_Table extends Widget_Base
             ]);
 
             $this->add_render_attribute('ea-adv-data-table', [
-                'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()} ea-advanced-data-table-searchable ea-advanced-data-table-paginated",
+                'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
                 'data-id' => $this->get_id(),
-                'data-items-per-page' => 4,
+                'data-items-per-page' => $settings['ea_adv_data_table_items_per_page'],
+            ]);
+        }
+
+        if ($settings['ea_adv_data_table_pagination'] == 'yes') {
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table-paginated",
+            ]);
+        }
+
+        if ($settings['ea_adv_data_table_search'] == 'yes') {
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table-searchable",
             ]);
 
             $this->add_render_attribute('ea-adv-data-table-search-wrap', [
                 'class' => "ea-advanced-data-table-search-wrap ea-advanced-data-table-search-{$settings['ea_adv_data_table_search_alignment']}",
+            ]);
+        }
+
+        if($settings['ea_adv_data_table_search_pagination']) {
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table-searchable-paginated",
             ]);
         }
 
