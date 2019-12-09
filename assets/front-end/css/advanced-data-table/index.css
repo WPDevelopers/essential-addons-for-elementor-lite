@@ -9,7 +9,10 @@
   width: 100%;
   border-collapse: collapse;
 }
-.ea-advanced-data-table-wrap .ea-advanced-data-table th,
+.ea-advanced-data-table-wrap .ea-advanced-data-table th {
+  background-color: transparent !important;
+  cursor: pointer;
+}
 .ea-advanced-data-table-wrap .ea-advanced-data-table td {
   background-color: transparent !important;
 }

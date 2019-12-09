@@ -7,6 +7,7 @@ var advanced_data_table_drag_start_x,
 var Advanced_Data_Table = function($scope, $) {
 	var table = $scope.context.querySelector(".ea-advanced-data-table");
 	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
+	var classCollection = {};
 
 	if (isEditMode) {
 		// add edit class
@@ -48,7 +49,7 @@ var Advanced_Data_Table = function($scope, $) {
 		search.addEventListener("input", function(e) {
 			var input = this.value.toLowerCase();
 
-			if (table.rows.length > 1) {
+			if (table.rows.length > 1 && input.length > 0) {
 				for (var i = 1; i < table.rows.length; i++) {
 					var matchFound = false;
 
@@ -62,9 +63,25 @@ var Advanced_Data_Table = function($scope, $) {
 					}
 
 					if (matchFound) {
-						table.rows[i].style.display = "";
+						table.rows[i].style.display = "table-row";
 					} else {
 						table.rows[i].style.display = "none";
+					}
+				}
+			} else {
+				if (table.classList.contains("ea-advanced-data-table-paginated")) {
+					var pagination = table.parentNode.querySelector(".ea-advanced-data-table-pagination");
+					var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+
+					if (table.classList.contains("ea-advanced-data-table-searchable-paginated")) {
+					} else {
+						for (var i = 1; i <= table.rows.length - 1; i++) {
+							if (i >= (currentPage - 1) * table.dataset.itemsPerPage + 1 && i <= currentPage * table.dataset.itemsPerPage) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
 					}
 				}
 			}
@@ -74,22 +91,42 @@ var Advanced_Data_Table = function($scope, $) {
 		table.addEventListener("click", function(e) {
 			if (e.target.tagName.toLowerCase() === "th") {
 				var index = e.target.cellIndex;
-				var asc = e.target.classList.toggle("asc");
+				var desc = e.target.classList.toggle("desc");
 				var switching = true;
+				var paginated = table.classList.contains("ea-advanced-data-table-paginated");
+				var currentPage = 1;
+				var startIndex = 1;
+				var endIndex = table.rows.length - 1;
+
+				if (paginated) {
+					currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+					endIndex = currentPage * table.dataset.itemsPerPage;
+				}
+
+				classCollection[currentPage] = function() {
+					var collections = [];
+
+					table.querySelectorAll("th").forEach(function(el) {
+						collections.push(el.classList.contains("desc"));
+					});
+
+					return collections;
+				};
 
 				while (switching) {
 					switching = false;
 
-					for (var i = 1; i < table.rows.length - 1; i++) {
+					for (var i = startIndex; i < endIndex; i++) {
 						var x = table.rows[i].cells[index];
 						var y = table.rows[i + 1].cells[index];
 
-						if (asc && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						if (desc === true && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
 							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
 							switching = true;
 
 							break;
-						} else if (asc === false && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						} else if (desc === false && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
 							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
 							switching = true;
 
@@ -105,6 +142,8 @@ var Advanced_Data_Table = function($scope, $) {
 			var pagination = table.parentNode.querySelector(".ea-advanced-data-table-pagination");
 			var paginationHTML = "";
 			var currentPage = 1;
+			var startIndex = 1;
+			var endIndex = currentPage * table.dataset.itemsPerPage;
 			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
 
 			// insert pagination
@@ -120,7 +159,7 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 
 			// make initial item visible
-			for (var i = (currentPage - 1) * table.dataset.itemsPerPage + 1; i <= currentPage * table.dataset.itemsPerPage; i++) {
+			for (var i = 1; i <= endIndex; i++) {
 				table.rows[i].style.display = "table-row";
 			}
 
@@ -130,17 +169,34 @@ var Advanced_Data_Table = function($scope, $) {
 
 				if (e.target.tagName.toLowerCase() == "a") {
 					currentPage = e.target.dataset.page;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+					endIndex = currentPage * table.dataset.itemsPerPage;
 
-					pagination.querySelector(".ea-advanced-data-table-pagination-current").classList.remove("ea-advanced-data-table-pagination-current");
-					e.target.classList.add("ea-advanced-data-table-pagination-current");
+					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+						el.classList.remove("ea-advanced-data-table-pagination-current");
+					});
+
+					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+						el.classList.add("ea-advanced-data-table-pagination-current");
+					});
 
 					for (var i = 1; i <= table.rows.length - 1; i++) {
-						if (i >= (currentPage - 1) * table.dataset.itemsPerPage + 1 && i <= currentPage * table.dataset.itemsPerPage) {
+						if (i >= startIndex && i <= endIndex) {
 							table.rows[i].style.display = "table-row";
 						} else {
 							table.rows[i].style.display = "none";
 						}
 					}
+
+					table.querySelectorAll("th").forEach(function(el, index) {
+						if (typeof classCollection[currentPage] != "undefined") {
+							if (classCollection[currentPage]()[index]) {
+								el.classList.add("desc");
+							} else {
+								el.classList.remove("desc");
+							}
+						}
+					});
 				}
 			});
 		}
