@@ -187,7 +187,22 @@
 	}
 }
 
-.eael-tooltip-text-align-left .eael-tooltip-text { text-align: left; }
-.eael-tooltip-text-align-right .eael-tooltip-text { text-align: right; }
-.eael-tooltip-text-align-center .eael-tooltip-text { text-align: center; }
-.eael-tooltip-text-align-justify .eael-tooltip-text { text-align: justify; }
+span.eael-tooltip-content,
+span.eael-tooltip-content a {
+    width: 100%;
+	display: block;
+	text-align: center;
+}
+
+.eael-tooltip-text-align-left {
+	.eael-tooltip-text, .eael-tooltip-content a { text-align: left; }
+}
+.eael-tooltip-text-align-right {
+	.eael-tooltip-text, .eael-tooltip-content a { text-align: right; }
+}
+.eael-tooltip-text-align-center {
+	.eael-tooltip-text, .eael-tooltip-content a { text-align: center; }
+}
+.eael-tooltip-text-align-justify {
+	.eael-tooltip-text, .eael-tooltip-content a { text-align: justify; }
+}
