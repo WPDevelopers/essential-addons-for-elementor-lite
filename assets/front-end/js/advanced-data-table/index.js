@@ -48,8 +48,10 @@ var Advanced_Data_Table = function($scope, $) {
 		// search
 		search.addEventListener("input", function(e) {
 			var input = this.value.toLowerCase();
+			var paginated = table.classList.contains("ea-advanced-data-table-paginated");
+			var searchablePaginated = table.classList.contains("ea-advanced-data-table-searchable-paginated");
 
-			if (table.rows.length > 1 && input.length > 0) {
+			if (table.rows.length > 1 && (!paginated || !searchablePaginated)) {
 				for (var i = 1; i < table.rows.length; i++) {
 					var matchFound = false;
 
@@ -69,21 +71,17 @@ var Advanced_Data_Table = function($scope, $) {
 					}
 				}
 			} else {
-				if (table.classList.contains("ea-advanced-data-table-paginated")) {
-					var pagination = table.parentNode.querySelector(".ea-advanced-data-table-pagination");
-					var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+				// if (table.classList.contains("ea-advanced-data-table-paginated")) {
+				// 	// var pagination = table.parentNode.querySelector(".ea-advanced-data-table-pagination");
+				// 	// var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 
-					if (table.classList.contains("ea-advanced-data-table-searchable-paginated")) {
-					} else {
-						for (var i = 1; i <= table.rows.length - 1; i++) {
-							if (i >= (currentPage - 1) * table.dataset.itemsPerPage + 1 && i <= currentPage * table.dataset.itemsPerPage) {
-								table.rows[i].style.display = "table-row";
-							} else {
-								table.rows[i].style.display = "none";
-							}
-						}
-					}
-				}
+				// 	if (table.classList.contains("ea-advanced-data-table-searchable-paginated")) {
+				// 	} else {
+				// 		table.rows.forEach(function(row) {
+				// 			row.style.display = "table-row";
+				// 		});
+				// 	}
+				// }
 			}
 		});
 
