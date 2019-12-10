@@ -21036,103 +21036,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var AdvanceTabHandler = function($scope, $) {
-    var $currentTab = $scope.find(".eael-advance-tabs"),
-        $currentTabId = "#" + $currentTab.attr("id").toString();
-
-    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-nav > ul li")
-                .removeClass("active")
-                .addClass("inactive");
-            $(this).removeClass("inactive");
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-content div").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-content > div").removeClass(
-                "active"
-            );
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
-        var currentTabIndex = $(this).index();
-        var tabsContainer = $(this).closest(".eael-advance-tabs");
-
-        var tabsNav = $(tabsContainer)
-            .children(".eael-tabs-nav")
-            .children("ul")
-            .children("li");
-        var tabsContent = $(tabsContainer)
-            .children(".eael-tabs-content")
-            .children("div");
-
-        $(this)
-            .parent("li")
-            .addClass("active");
-
-        $(tabsNav)
-            .removeClass("active active-default")
-            .addClass("inactive");
-        $(this)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent)
-            .removeClass("active")
-            .addClass("inactive");
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass("active")
-            .removeClass("inactive");
-
-        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
-            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
-            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
-
-        if($postGridGallery.length) {
-            $postGridGallery.isotope();
-        }
-
-        if($twitterfeedGallery.length) {
-            $twitterfeedGallery.isotope("layout");
-        }
-        
-        if($filterGallery.length) {
-            $filterGallery.isotope("layout");
-        }
-        
-        if($instaGallery.length) {
-            $instaGallery.isotope("layout");
-        }
-
-        $(tabsContent).each(function(index) {
-            $(this).removeClass("active-default");
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-tabs.default",
-        AdvanceTabHandler
-    );
-});
-
 var ContentTicker = function($scope, $) {
     var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
         $items =
@@ -21252,6 +21155,103 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
+var AdvanceTabHandler = function($scope, $) {
+    var $currentTab = $scope.find(".eael-advance-tabs"),
+        $currentTabId = "#" + $currentTab.attr("id").toString();
+
+    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-nav > ul li")
+                .removeClass("active")
+                .addClass("inactive");
+            $(this).removeClass("inactive");
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-content div").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-content > div").removeClass(
+                "active"
+            );
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
+        var currentTabIndex = $(this).index();
+        var tabsContainer = $(this).closest(".eael-advance-tabs");
+
+        var tabsNav = $(tabsContainer)
+            .children(".eael-tabs-nav")
+            .children("ul")
+            .children("li");
+        var tabsContent = $(tabsContainer)
+            .children(".eael-tabs-content")
+            .children("div");
+
+        $(this)
+            .parent("li")
+            .addClass("active");
+
+        $(tabsNav)
+            .removeClass("active active-default")
+            .addClass("inactive");
+        $(this)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent)
+            .removeClass("active")
+            .addClass("inactive");
+        $(tabsContent)
+            .eq(currentTabIndex)
+            .addClass("active")
+            .removeClass("inactive");
+
+        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
+            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
+            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+
+        if($postGridGallery.length) {
+            $postGridGallery.isotope();
+        }
+
+        if($twitterfeedGallery.length) {
+            $twitterfeedGallery.isotope("layout");
+        }
+        
+        if($filterGallery.length) {
+            $filterGallery.isotope("layout");
+        }
+        
+        if($instaGallery.length) {
+            $instaGallery.isotope("layout");
+        }
+
+        $(tabsContent).each(function(index) {
+            $(this).removeClass("active-default");
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
+
 var CountDown = function($scope, $) {
     var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
         $countdown_id =
@@ -21399,6 +21399,58 @@ jQuery(window).on('elementor/frontend/init', function() {
     elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);
 });
 
+jQuery(window).on('elementor/frontend/init', function () {
+    elementorFrontend.hooks.addAction('frontend/element_ready/eael-event-calendar.default', function ($scope, $) {
+        
+        var element = $scope.find('.eael-event-calendar-cls');
+        var eventAll = element.data('events');
+        var daysWeek = element.data('days_week');
+        var monthNames = element.data('month_names');
+        var firstDay = element.data('first_day');
+        var eaelevModal = document.getElementById("eaelecModal");
+        var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
+        //daysWeek1 = ['s1', 's2'];
+        //alert(daysWeek);
+        var calendar = $('#eael-event-calendar').fullCalendar({
+            editable:false,
+            draggable:false,
+            firstDay: firstDay,
+            slotLabelFormat:"HH:mm",
+            nextDayThreshold : "00:00:00",
+            header:{
+            left:'prev,next today',
+            center:'title',
+            right:'month,agendaWeek,agendaDay'
+            },
+            events: eventAll,
+            selectable:true,
+            selectHelper:true,
+            dayNamesShort: daysWeek,
+            monthNames: monthNames,
+            eventRender: function (event, element) {
+                element.attr('href', 'javascript:void(0);');
+                element.click(function() {
+                    eaelevModal.style.display = "block";
+                    /*
+                    $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
+                    $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
+                    */
+                    $("span.eaelec-event-date-start").html(moment(event.start).format('MMM Do h:mm A'));
+                    $("span.eaelec-event-date-end").html(moment(event.end).format('MMM Do h:mm A'));
+                    $(".eaelec-modal-header h2").html(event.title);
+                    $(".eaelec-modal-body p").html(event.description);
+                    $(".eaelec-modal-footer a").attr('href', event.url);
+                    
+                });
+            }
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        eaelevSpan.onclick = function() {
+            eaelevModal.style.display = "none";
+        }
+    });
+});
 var FacebookFeed = function($scope, $) {
     if (!isEditMode) {
         $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
@@ -21771,6 +21823,28 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".tooltip"),
@@ -21815,28 +21889,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-pricing-table.default",
         PricingTooltip
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
     );
 });
 
