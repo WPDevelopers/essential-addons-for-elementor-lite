@@ -210,8 +210,8 @@
             $this->add_control(
                 'eael_google_calendar_start_date',
                 [
-                    'label' => __( 'Start Date', 'plugin-domain' ),
-                    'type' => Controls_Manager::DATE_TIME,
+                    'label'     => __( 'Start Date', 'plugin-domain' ),
+                    'type'      => Controls_Manager::DATE_TIME,
                     'default'   => date( 'Y-m-d H:i', current_time( 'timestamp', 0 ) ),
                 ]
             );
@@ -219,17 +219,16 @@
             $this->add_control(
                 'eael_google_calendar_end_date',
                 [
-                    'label' => __( 'End Date', 'plugin-domain' ),
-                    'type' => Controls_Manager::DATE_TIME
+                    'label'     => __( 'End Date', 'plugin-domain' ),
+                    'type'      => Controls_Manager::DATE_TIME
                 ]
             );
 
             $this->add_control(
                 'eael_google_calendar_max_result',
                 [
-                    'label'         => __( 'Max Result', 'essential-addons-elementor' ),
-                    'type'          => Controls_Manager::NUMBER,
-                    'label_block'   => true,
+                    'label'     => __( 'Max Result', 'essential-addons-elementor' ),
+                    'type'      => Controls_Manager::NUMBER,
                     'default'   => 10,
                 ]
             );
@@ -834,6 +833,11 @@
             <?php
         }
 
+        /**
+         * get google calendar events
+         *
+         * @return array
+         */
         public function get_google_calendar_events(){
 
             $settings = $this->get_settings_for_display();
@@ -841,12 +845,12 @@
             $calendar_id = urlencode($settings['eael_event_calendar_id']);
             $base_url = "https://www.googleapis.com/calendar/v3/calendars/{$calendar_id}/events";
 
-            if(empty($api_key) && empty($calendar_id)){
-                return array();
+            if(empty( $api_key ) && empty( $calendar_id )){
+                return [];
             }
             $start_date = strtotime( $settings['eael_google_calendar_start_date'] );
             $end_date = strtotime( $settings['eael_google_calendar_end_date'] );
-            $max_results = strtotime( $settings['eael_google_calendar_max_result'] );
+            $max_results = $settings['eael_google_calendar_max_result'];
             $arg = array(
                 'key' => $api_key,
                 'maxResults' => $max_results,
@@ -856,29 +860,29 @@
                 $arg['timeMax'] = urlencode(date( 'c', $end_date ));
             }
             $arg['$calendar_id'] = $calendar_id;
-            $transient_key = 'eael_google_calendar_'.md5(implode('',$arg));
+            $transient_key = 'eael_google_calendar_'.md5(implode('', $arg));
             $calendar_data = get_transient( $transient_key );
-            if(!empty($calendar_data)){
+            if(!empty( $calendar_data )){
                 return $calendar_data;
             }
-            $response = wp_remote_get(  add_query_arg($arg, $base_url) );
-            $data = wp_remote_retrieve_body($response);
-            if(is_wp_error($data)){
-                return array();
+            $response = wp_remote_get(  add_query_arg( $arg, $base_url) );
+            $data = wp_remote_retrieve_body( $response );
+            if( is_wp_error( $data ) ){
+                return [];
             }
-            $data = json_decode($data);
+            $data = json_decode( $data );
 
-            if(isset($data->items)){
-                foreach($data->items as $key => $item){
+            if( isset( $data->items ) ){
+                foreach( $data->items as $key => $item ){
                     $calendar_data[] = [
                         'eael_event_title'         => $item->summary,
                         'eael_event_description'   => isset($item->description)?$item->description:'',
-                        'eael_event_start_date'         => $item->start->date,
-                        'eael_event_end_date'           => $item->end->date,
-                        'eael_event_border_color'   => '',
-                        'eael_event_text_color'     => '',
-                        'eael_event_bg_color'         => '',
-                        'eael_event_link'           => ['url' =>$item->htmlLink],
+                        'eael_event_start_date'    => $item->start->date,
+                        'eael_event_end_date'      => $item->end->date,
+                        'eael_event_border_color'  => '',
+                        'eael_event_text_color'    => '',
+                        'eael_event_bg_color'      => '',
+                        'eael_event_link'          => ['url' => $item->htmlLink ],
                     ];
                 }
                 set_transient( $transient_key, $calendar_data, 1*HOUR_IN_SECONDS );
