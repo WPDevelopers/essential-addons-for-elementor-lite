@@ -181,7 +181,11 @@ Your existing elements/content will work with premium version. So you won't lose
 = 3.6.2 - 09/12/2019 =
 - Bugfix: Product grid responsive issue 
 - Bugfix: 404 page assets loading
-- Improvement: Tooltip alignement option added
+- Bugfix: Data Table | Content Alignment (left/right)
+- Bugfix: Fancy text > not showing animation on edit mode
+- Bugfix: Tooltip 'Text'- Content Type
+- Bugfix: Feature List Content text resizes when URL is added
+- Bugfix: Creative Button >> Winona >> Secondary text's typography fix
 - Few minor bugfix and improvements
 
 = 3.6.1 - 27/11/2019 =
