@@ -742,7 +742,7 @@ class Event_Calendar extends Widget_Base {
                 data-first_day="' . $settings['eael_event_calendar_first_day'] . '"
                 data-days_week="' . htmlspecialchars(json_encode($daysWeek), ENT_QUOTES, 'UTF-8') . '"></div>';
         
-        $this->eaelec_load_event_details();    
+        $this->eaelec_load_event_details();
         echo '</div>';
     }
 
