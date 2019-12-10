@@ -49,7 +49,7 @@ var Advanced_Data_Table = function($scope, $) {
 		search.addEventListener("input", function(e) {
 			var input = this.value.toLowerCase();
 			var paginated = table.classList.contains("ea-advanced-data-table-paginated");
-			var searchablePaginated = table.classList.contains("ea-advanced-data-table-searchable-paginated");
+			// var searchablePaginated = table.classList.contains("ea-advanced-data-table-searchable-paginated");
 
 			if (table.rows.length > 1) {
 				if (input.length > 0) {
