@@ -48,7 +48,8 @@ var Advanced_Data_Table = function($scope, $) {
 		// search
 		search.addEventListener("input", function(e) {
 			var input = this.value.toLowerCase();
-			var paginated = table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+			var paginated =
+				table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 
 			if (table.rows.length > 1) {
 				if (input.length > 0) {
@@ -98,7 +99,8 @@ var Advanced_Data_Table = function($scope, $) {
 				var index = e.target.cellIndex;
 				var desc = e.target.classList.toggle("desc");
 				var switching = true;
-				var paginated = table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;;
+				var paginated =
+					table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 				var currentPage = 1;
 				var startIndex = 1;
 				var endIndex = table.rows.length - 1;
@@ -210,8 +212,12 @@ var Advanced_Data_Table = function($scope, $) {
 
 // Inline edit
 var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
-	setTimeout(function() {
+	var interval;
+
+	interval = setInterval(function() {
 		if (view.el.querySelector(".ea-advanced-data-table")) {
+			clearInterval(interval);
+
 			var interval;
 			var table = view.el.querySelector(".ea-advanced-data-table");
 
@@ -285,7 +291,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 				}
 			});
 		}
-	}, 300);
+	}, 10);
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
