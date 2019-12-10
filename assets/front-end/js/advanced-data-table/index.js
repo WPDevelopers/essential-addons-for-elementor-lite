@@ -158,6 +158,10 @@ var Advanced_Data_Table = function($scope, $) {
 
 			// make initial item visible
 			for (var i = 1; i <= endIndex; i++) {
+				if (table.rows.length <= i) {
+					break;
+				}
+
 				table.rows[i].style.display = "table-row";
 			}
 
