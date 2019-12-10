@@ -212,13 +212,9 @@ var Advanced_Data_Table = function($scope, $) {
 
 // Inline edit
 var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
-	var interval;
-
-	interval = setInterval(function() {
+	var interval = setInterval(function() {
 		if (view.el.querySelector(".ea-advanced-data-table")) {
-			clearInterval(interval);
-
-			var interval;
+			var timeout;
 			var table = view.el.querySelector(".ea-advanced-data-table");
 
 			table.addEventListener("focusin", function(e) {
@@ -229,7 +225,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 			table.addEventListener("input", function(e) {
 				if (e.target.tagName.toLowerCase() == "textarea") {
-					clearTimeout(interval);
+					clearTimeout(timeout);
 
 					// clone current table
 					var origTable = table.cloneNode(true);
@@ -248,7 +244,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 					// enable elementor remote server render just after elementor throttle
 					// ignore multiple assign
-					interval = setTimeout(function() {
+					timeout = setTimeout(function() {
 						model.remoteRender = true;
 					}, 1001);
 				}
@@ -257,7 +253,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 			// drag
 			table.addEventListener("mouseup", function(e) {
 				if (e.target.tagName.toLowerCase() === "th") {
-					clearTimeout(interval);
+					clearTimeout(timeout);
 
 					// clone current table
 					var origTable = table.cloneNode(true);
@@ -276,7 +272,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 					// enable elementor remote server render just after elementor throttle
 					// ignore multiple assign
-					interval = setTimeout(function() {
+					timeout = setTimeout(function() {
 						model.remoteRender = true;
 					}, 1001);
 				}
@@ -290,6 +286,8 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 					e.target.style.width = "";
 				}
 			});
+
+			clearInterval(interval);
 		}
 	}, 10);
 };
