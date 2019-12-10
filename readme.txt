@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 5.2
+Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.5.1
+Stable tag: 3.6.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -12,7 +12,7 @@ Ultimate elements library for Elementor WordPress Page Builder. 54+ Premium elem
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 57+ creative elements. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 65+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
 
 [Check the Demos](https://essential-addons.com/elementor/)
@@ -36,9 +36,9 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 30+ FREE WIDGETS AND COUNTING
+### 35+ FREE WIDGETS AND COUNTING
 
-We have designed 29 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 35 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -71,6 +71,10 @@ We have designed 29 of the most useful widgets to enhance your Elementor Page Bu
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
 30. [FluentForm](https://essential-addons.com/elementor/fluentform/) - Design your FluentForm container, fields and anything you want
 31. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook post feed from your page
+32. [Sticky Video](https://essential-addons.com/elementor/sticky-video/) - Create cool video from YouTube, Vimeo or self-hosted that will be sticky on scroll while playing.
+33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
+34. [BetterDocs Category Box](https://essential-addons.com/elementor/betterdocs-category-box/) - Cretae custom box-style Knowledge Base layout with BetterDocs Category List.
+35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -131,7 +135,7 @@ Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Element
 - If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite).
 - For more information about features, FAQs and documentation, check out our website at [Essential Addons for Elementor](https://essential-addons.com/elementor/).
 
-### Liked Essential Addons?
+### Happy User of Essential Addons?
 
 - Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/).
 - Learn from our tutorials on [Youtube Channel](https://wpdeveloper.net/go/youtube-channel).
@@ -173,6 +177,30 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.6.1 - 27/11/2019 =
+- Bugfix:  Product Grid featured products issue fix
+- Bugfix: Form alignment fix for forms
+- Improvement: Height Control added on content elements
+- Improvement: Pricing table icon alignment control removed and used CSS to align the icon automatically
+- Improvement: Display Sticky video when scroll pass the video 50% to 200% (70% default)
+- Improvement: Sticky Video Height & Width change in Live Editor
+- Improvement: Maintain aspect ratio in height width on sticky video
+- Improvement: Changed label Sticky Video to 'Choose Image' and 'Choose Icon'
+- Few minor bugfix and improvements
+
+= 3.6.0 - 14/11/2019 =
+- Added : Sticky Video element
+- Added : BetterDocs Category Grid
+- Added : BetterDocs Category Box
+- Added : BetterDocs Search
+- Fixed : Style breaking issue after update
+- Fixed : Fixed: EA Tooltip | Longer content changes the alignment to center
+- Few minor bugfix and improvements
+
+= 3.5.2 - 11/11/2019 =
+- Fixed : Style breaking issue after update
+- Few minor bugfix and improvements
 
 = 3.5.1 - 31/10/2019 =
 - Conflict Fix: Elementor Pro Media Carousel
