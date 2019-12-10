@@ -1453,27 +1453,6 @@ class Pricing_Table extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'eael_pricing_table_icon_line_height',
-			[
-				'label' => esc_html__( 'Icon Alignment', 'essential-addons-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'default' => [
-					'size' => 80
-				],
-				'range' => [
-					'px' => [
-						'max' => 300,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i' => 'line-height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon img' => 'top: {{SIZE}}{{UNIT}};'
-				],
-			]
-		);
-
 		$this->add_control(
 			'eael_pricing_table_icon_color',
 			[

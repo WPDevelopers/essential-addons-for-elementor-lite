@@ -10,6 +10,7 @@
   color: #333;
   line-height: 1;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -45,7 +46,8 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left {
   top: 50%;
   right: 100%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   margin-right: 10px;
 }
 
@@ -64,7 +66,9 @@
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right {
   top: 50%;
   left: 100%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   margin-left: 10px;
 }
@@ -122,27 +126,36 @@
 
 /*--- Alignments ---*/
 .eael-tooltip-align-left {
+  display: -webkit-box;
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+          justify-content: flex-start;
 }
 
 .eael-tooltip-align-right {
+  display: -webkit-box;
   display: flex;
   width: 100%;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+          justify-content: flex-end;
 }
 
 .eael-tooltip-align-center {
+  display: -webkit-box;
   display: flex;
   width: 100%;
-  justify-content: center;
+  -webkit-box-pack: center;
+          justify-content: center;
 }
 
 .eael-tooltip-align-justify .eael-tooltip {
+  display: -webkit-box;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
 }
 
 /*--- Tooltip Keyframes ---*/
