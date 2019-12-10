@@ -95,19 +95,19 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'ea_adv_data_table_search_pagination',
-            [
-                'label' => esc_html__('Search Pagination', 'essential-addons-elementor'),
-                'type' => Controls_Manager::SWITCHER,
-                'return_value' => 'yes',
-                'default' => 'yes',
-                'condition' => [
-                    'ea_adv_data_table_search' => 'yes',
-                    'ea_adv_data_table_pagination' => 'yes',
-                ],
-            ]
-        );
+        // $this->add_control(
+        //     'ea_adv_data_table_search_pagination',
+        //     [
+        //         'label' => esc_html__('Search Pagination', 'essential-addons-elementor'),
+        //         'type' => Controls_Manager::SWITCHER,
+        //         'return_value' => 'yes',
+        //         'default' => 'yes',
+        //         'condition' => [
+        //             'ea_adv_data_table_search' => 'yes',
+        //             'ea_adv_data_table_pagination' => 'yes',
+        //         ],
+        //     ]
+        // );
 
         $this->add_control(
             'ea_adv_data_table_items_per_page',
@@ -1117,11 +1117,11 @@ class Advanced_Data_Table extends Widget_Base
             ]);
         }
 
-        if($settings['ea_adv_data_table_search_pagination']) {
-            $this->add_render_attribute('ea-adv-data-table', [
-                'class' => "ea-advanced-data-table-searchable-paginated",
-            ]);
-        }
+        // if($settings['ea_adv_data_table_search_pagination']) {
+        //     $this->add_render_attribute('ea-adv-data-table', [
+        //         'class' => "ea-advanced-data-table-searchable-paginated",
+        //     ]);
+        // }
 
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
 
