@@ -216,84 +216,93 @@ var Advanced_Data_Table = function($scope, $) {
 
 // Inline edit
 var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
-	var interval = setInterval(function() {
-		if (view.el.querySelector(".ea-advanced-data-table")) {
-			var timeout;
-			var table = view.el.querySelector(".ea-advanced-data-table");
+	var localRender = function() {
+		var interval = setInterval(function() {
+			if (view.el.querySelector(".ea-advanced-data-table")) {
+				var timeout;
+				var table = view.el.querySelector(".ea-advanced-data-table");
 
-			table.addEventListener("focusin", function(e) {
-				if (e.target.tagName.toLowerCase() == "textarea") {
-					advanced_data_table_active_cell = e.target;
-				}
-			});
+				table.addEventListener("focusin", function(e) {
+					if (e.target.tagName.toLowerCase() == "textarea") {
+						advanced_data_table_active_cell = e.target;
+					}
+				});
 
-			table.addEventListener("input", function(e) {
-				if (e.target.tagName.toLowerCase() == "textarea") {
-					clearTimeout(timeout);
+				table.addEventListener("input", function(e) {
+					if (e.target.tagName.toLowerCase() == "textarea") {
+						clearTimeout(timeout);
 
-					// clone current table
-					var origTable = table.cloneNode(true);
+						// clone current table
+						var origTable = table.cloneNode(true);
 
-					// remove editable area
-					origTable.querySelectorAll("th, td").forEach(function(el) {
-						var value = el.querySelector("textarea").value;
-						el.innerHTML = value;
-					});
+						// remove editable area
+						origTable.querySelectorAll("th, td").forEach(function(el) {
+							var value = el.querySelector("textarea").value;
+							el.innerHTML = value;
+						});
 
-					// disable elementor remote server render
-					model.remoteRender = false;
+						// disable elementor remote server render
+						model.remoteRender = false;
 
-					// update backbone model
-					model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
+						// update backbone model
+						model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
 
-					// enable elementor remote server render just after elementor throttle
-					// ignore multiple assign
-					timeout = setTimeout(function() {
-						model.remoteRender = true;
-					}, 1001);
-				}
-			});
+						// enable elementor remote server render just after elementor throttle
+						// ignore multiple assign
+						timeout = setTimeout(function() {
+							model.remoteRender = true;
+						}, 1001);
+					}
+				});
 
-			// drag
-			table.addEventListener("mouseup", function(e) {
-				if (e.target.tagName.toLowerCase() === "th") {
-					clearTimeout(timeout);
+				// drag
+				table.addEventListener("mouseup", function(e) {
+					if (e.target.tagName.toLowerCase() === "th") {
+						clearTimeout(timeout);
 
-					// clone current table
-					var origTable = table.cloneNode(true);
+						// clone current table
+						var origTable = table.cloneNode(true);
 
-					// remove editable area
-					origTable.querySelectorAll("th, td").forEach(function(el) {
-						var value = el.querySelector("textarea").value;
-						el.innerHTML = value;
-					});
+						// remove editable area
+						origTable.querySelectorAll("th, td").forEach(function(el) {
+							var value = el.querySelector("textarea").value;
+							el.innerHTML = value;
+						});
 
-					// disable elementor remote server render
-					model.remoteRender = false;
+						// disable elementor remote server render
+						model.remoteRender = false;
 
-					// update backbone model
-					model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
+						// update backbone model
+						model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
 
-					// enable elementor remote server render just after elementor throttle
-					// ignore multiple assign
-					timeout = setTimeout(function() {
-						model.remoteRender = true;
-					}, 1001);
-				}
-			});
+						// enable elementor remote server render just after elementor throttle
+						// ignore multiple assign
+						timeout = setTimeout(function() {
+							model.remoteRender = true;
+						}, 1001);
+					}
+				});
 
-			// clear style
-			table.addEventListener("dblclick", function(e) {
-				if (e.target.tagName.toLowerCase() === "th") {
-					e.stopPropagation();
+				// clear style
+				table.addEventListener("dblclick", function(e) {
+					if (e.target.tagName.toLowerCase() === "th") {
+						e.stopPropagation();
 
-					e.target.style.width = "";
-				}
-			});
+						e.target.style.width = "";
+					}
+				});
 
-			clearInterval(interval);
-		}
-	}, 10);
+				clearInterval(interval);
+			}
+		}, 10);
+	};
+
+	// init
+	localRender();
+
+	model.on("remote:render", function() {
+		localRender();
+	});
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
