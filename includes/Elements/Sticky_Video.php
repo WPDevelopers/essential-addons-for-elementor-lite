@@ -732,7 +732,7 @@ class Sticky_Video extends Widget_Base
         if ('yes' == $loop) {
 			$lp = '"loop": {"active": true}';
         } else {
-			$lp = '"loop": {"active": true}';
+			$lp = '"loop": {"active": false}';
         }
 
         return '<div
@@ -766,7 +766,7 @@ class Sticky_Video extends Widget_Base
         if ('yes' == $loop) {
 			$lp = '"loop": {"active": true}';
         } else {
-			$lp = '"loop": {"active": true}';
+			$lp = '"loop": {"active": false}';
         }
 
         return '<div
@@ -804,7 +804,7 @@ class Sticky_Video extends Widget_Base
         if ('yes' == $loop) {
 			$lp = '"loop": {"active": true}';
         } else {
-			$lp = '"loop": {"active": true}';
+			$lp = '"loop": {"active": false}';
         }
 
         return '<video class="eaelsv-player" id="eaelsv-player-' . $this->get_id() . '" playsinline controls data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}">
