@@ -114,7 +114,7 @@ var Advanced_Data_Table = function($scope, $) {
 				if (paginated) {
 					currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-					endIndex = currentPage * table.dataset.itemsPerPage;
+					endIndex = (endIndex - ((currentPage - 1) * table.dataset.itemsPerPage)) >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
 				}
 
 				classCollection[currentPage] = [];
