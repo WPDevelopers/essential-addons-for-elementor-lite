@@ -130,12 +130,12 @@ var Advanced_Data_Table = function($scope, $) {
 						var x = table.rows[i].cells[index];
 						var y = table.rows[i + 1].cells[index];
 
-						if (isNaN(parseInt(x.innerHTML)) || isNaN(parseInt(y.innerHTML))) {
-							x = x.innerHTML.toLowerCase();
-							y = y.innerHTML.toLowerCase();
+						if (isNaN(parseInt(x.innerText)) || isNaN(parseInt(y.innerText))) {
+							x = x.innerText.toLowerCase();
+							y = y.innerText.toLowerCase();
 						} else {
-							x = parseInt(x.innerHTML);
-							y = parseInt(y.innerHTML);
+							x = parseInt(x.innerText);
+							y = parseInt(y.innerText);
 						}
 
 						if (desc === true && x < y) {
