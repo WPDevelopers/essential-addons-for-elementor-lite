@@ -827,7 +827,7 @@ trait Helper
                 'label' => __('Load More Button Style', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'show_load_more' => 'yes',
+                    'show_load_more' => ['yes', '1']
                 ],
             ]
         );
@@ -1097,24 +1097,26 @@ trait Helper
             $args['post__in'] = empty($settings['posts_ids']) ? [0] : $settings['posts_ids'];
         } else {
             $args['post_type'] = $settings['post_type'];
-            $args['tax_query'] = [];
+            
+            if( $args['post_type'] !== 'page' ) {
+                $args['tax_query'] = [];
+                $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
 
-            $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
+                foreach ($taxonomies as $object) {
+                    $setting_key = $object->name . '_ids';
 
-            foreach ($taxonomies as $object) {
-                $setting_key = $object->name . '_ids';
-
-                if (!empty($settings[$setting_key])) {
-                    $args['tax_query'][] = [
-                        'taxonomy' => $object->name,
-                        'field' => 'term_id',
-                        'terms' => $settings[$setting_key],
-                    ];
+                    if (!empty($settings[$setting_key])) {
+                        $args['tax_query'][] = [
+                            'taxonomy' => $object->name,
+                            'field' => 'term_id',
+                            'terms' => $settings[$setting_key],
+                        ];
+                    }
                 }
-            }
 
-            if (!empty($args['tax_query'])) {
-                $args['tax_query']['relation'] = 'AND';
+                if (!empty($args['tax_query'])) {
+                    $args['tax_query']['relation'] = 'AND';
+                }
             }
         }
 

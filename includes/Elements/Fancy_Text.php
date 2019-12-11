@@ -33,22 +33,6 @@ class Fancy_Text extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
 
-	protected $allowed_html = array(
-		'strong' => array(
-			'style' => array()
-		),
-		'span' => array(
-			'style' => array()
-		),
-		'em' => array(
-			'style' => array()
-		),
-		'a' => array(
-			'href' => array(),
-			'style' => array()
-		),
-	);
-
 	protected function _register_controls() {
 
 		// Content Controls
@@ -491,7 +475,7 @@ class Fancy_Text extends Widget_Base {
 
 	<div  <?php echo $this->get_render_attribute_string( 'fancy-text' ); ?> >
 		<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?>
-			<span class="eael-fancy-text-prefix"><?php echo wp_kses(($settings['eael_fancy_text_prefix'] ), $this->allowed_html ); ?> </span>
+			<span class="eael-fancy-text-prefix"><?php echo wp_kses_post($settings['eael_fancy_text_prefix']); ?> </span>
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
@@ -509,7 +493,7 @@ class Fancy_Text extends Widget_Base {
 		<?php endif; ?>
 
 		<?php if ( ! empty( $settings['eael_fancy_text_suffix'] ) ) : ?>
-			<span class="eael-fancy-text-suffix"> <?php echo wp_kses(($settings['eael_fancy_text_suffix'] ), $this->allowed_html ); ?></span>
+			<span class="eael-fancy-text-suffix"> <?php echo wp_kses_post($settings['eael_fancy_text_suffix']); ?></span>
 		<?php endif; ?>
 	</div><!-- close .eael-fancy-text-container -->
 

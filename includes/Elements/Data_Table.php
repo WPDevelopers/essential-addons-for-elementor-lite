@@ -882,8 +882,9 @@ class Data_Table extends Widget_Base {
 						'icon' => 'fa fa-align-right',
 					],
 				],
+				'toggle' => true,
 				'default' => 'left',
-				'prefix_class' => 'eael-dt-td-align-',
+				'prefix_class' => 'eael-dt-td-align%s-',
 			]
 		);
 		$this->end_controls_section();
