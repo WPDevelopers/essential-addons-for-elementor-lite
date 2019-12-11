@@ -195,6 +195,7 @@
                     'label'         => __( 'APi Key', 'essential-addons-elementor' ),
                     'type'          => Controls_Manager::TEXT,
                     'label_block'   => true,
+                    'description' => sprintf( __('<a href="https://essential-addons.com/elementor/docs/google-api-key/" class="eael-btn" target="_blank">%s</a>', 'essential-addons-elementor') ,'Get API Key'),
                 ]
             );
 
@@ -204,6 +205,7 @@
                     'label'         => __( 'Calendar ID', 'essential-addons-elementor' ),
                     'type'          => Controls_Manager::TEXT,
                     'label_block'   => true,
+                    'description' => sprintf( __('<a href="https://essential-addons.com/elementor/docs/google-calendar-id/" class="eael-btn" target="_blank">%s</a>', 'essential-addons-elementor') ,'Get google calendar ID'),
                 ]
             );
 
@@ -229,6 +231,8 @@
                 [
                     'label'     => __( 'Max Result', 'essential-addons-elementor' ),
                     'type'      => Controls_Manager::NUMBER,
+                    'min'       => 1,
+                    'max'       => 100,
                     'default'   => 10,
                 ]
             );
