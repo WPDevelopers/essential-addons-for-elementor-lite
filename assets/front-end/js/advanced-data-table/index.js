@@ -114,7 +114,7 @@ var Advanced_Data_Table = function($scope, $) {
 				if (paginated) {
 					currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-					endIndex = (endIndex - ((currentPage - 1) * table.dataset.itemsPerPage)) >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
+					endIndex = endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
 				}
 
 				classCollection[currentPage] = [];
@@ -130,12 +130,20 @@ var Advanced_Data_Table = function($scope, $) {
 						var x = table.rows[i].cells[index];
 						var y = table.rows[i + 1].cells[index];
 
-						if (desc === true && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						if (isNaN(parseInt(x.innerHTML)) || isNaN(parseInt(y.innerHTML))) {
+							x = x.innerHTML.toLowerCase();
+							y = y.innerHTML.toLowerCase();
+						} else {
+							x = parseInt(x.innerHTML);
+							y = parseInt(y.innerHTML);
+						}
+
+						if (desc === true && x < y) {
 							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
 							switching = true;
 
 							break;
-						} else if (desc === false && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						} else if (desc === false && x > y) {
 							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
 							switching = true;
 
