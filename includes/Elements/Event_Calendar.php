@@ -117,6 +117,11 @@
                     'label' => __('Event Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'default'   => '#00BFFF',
+                    'selectors' => [
+                        '{{WRAPPER}} .eaelec-modal-close' => 'background: {{VALUE}};',
+                        '{{WRAPPER}} .eaelec-modal-header' => 'border-left: 5px solid {{VALUE}};',
+                        '{{WRAPPER}} .eaelec-modal-header span' => 'color: {{VALUE}};',
+                    ],
                 ]
             );
 
@@ -820,13 +825,10 @@
                     <div class="eaelec-modal-header">
                         <span class="eaelec-modal-close">&times;</span>
                         <h2></h2>
+                        <span class="eaelec-event-date-start"></span> - 
+                        <span class="eaelec-event-date-end"></span>
                     </div>
                     <div class="eaelec-modal-body">
-                        <span>Event Start:</span>
-                        <span class="eaelec-event-date-start"></span>
-                        <br>
-                        <span>Event End:</span>
-                        <span class="eaelec-event-date-end"></span>
                         <p></p>
                     </div>
                     <div class="eaelec-modal-footer">

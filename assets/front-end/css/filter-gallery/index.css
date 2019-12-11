@@ -17,15 +17,10 @@
 }
 
 .eael-filter-gallery-control {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-flow: 1 1 auto;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  flex-flow: 1 1 auto;
+  align-items: center;
+  justify-content: center;
   flex-flow: row wrap;
   padding: 0px;
   margin: 0px;
@@ -65,24 +60,16 @@
 
 .eael-filter-gallery-container .item .caption {
   position: absolute;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-flow: 1 1 100%;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  flex-flow: 1 1 100%;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
-  -webkit-transition: -webkit-transform .4s;
-  transition: -webkit-transform .4s;
   transition: transform .4s;
-  transition: transform .4s, -webkit-transform .4s;
 }
 
 .eael-filter-gallery-container.eael-cards .item .caption {
@@ -91,24 +78,16 @@
 
 .eael-filter-gallery-container.eael-cards .item .item-img .caption {
   position: absolute;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-flow: 1 1 100%;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  flex-flow: 1 1 100%;
+  align-items: center;
+  justify-content: center;
   z-index: 10;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
-  -webkit-transition: -webkit-transform .4s;
-  transition: -webkit-transform .4s;
   transition: transform .4s;
-  transition: transform .4s, -webkit-transform .4s;
 }
 
 .gallery-item-caption-over {
@@ -123,62 +102,52 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 /*--- Caption Animation ---*/
 .eael-filter-gallery-container .item .caption.eael-zoom-in,
 .eael-filter-gallery-container.eael-cards .item .item-img .caption.eael-zoom-in {
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
 }
 
 .eael-filter-gallery-container .item:hover .caption.eael-zoom-in,
 .eael-filter-gallery-container.eael-cards .item:hover .item-img .caption.eael-zoom-in {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 .eael-filter-gallery-container .item .caption.eael-slide-left,
 .eael-filter-gallery-container.eael-cards .item .item-img .caption.eael-slide-left {
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .eael-filter-gallery-container .item:hover .caption.eael-slide-left,
 .eael-filter-gallery-container.eael-cards .item:hover .item-img .caption.eael-slide-left {
-  -webkit-transform: translateX(0%);
-          transform: translateX(0%);
+  transform: translateX(0%);
 }
 
 .eael-filter-gallery-container .item .caption.eael-slide-right,
 .eael-filter-gallery-container.eael-cards .item .item-img .caption.eael-slide-right {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .eael-filter-gallery-container .item:hover .caption.eael-slide-right,
 .eael-filter-gallery-container.eael-cards .item:hover .item-img .caption.eael-slide-right {
-  -webkit-transform: translateX(0%);
-          transform: translateX(0%);
+  transform: translateX(0%);
 }
 
 .eael-filter-gallery-container .item .caption.eael-slide-top,
 .eael-filter-gallery-container.eael-cards .item .item-img .caption.eael-slide-top {
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+  transform: translateY(-100%);
 }
 
 .eael-filter-gallery-container .item:hover .caption.eael-slide-top,
 .eael-filter-gallery-container.eael-cards .item:hover .item-img .caption.eael-slide-top {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
+  transform: translateY(0%);
 }
 
 .eael-filter-gallery-container .item .caption.eael-slide-bottom,
 .eael-filter-gallery-container.eael-cards .item .item-img .caption.eael-slide-bottom {
-  -webkit-transform: translateY(100%);
-          transform: translateY(100%);
+  transform: translateY(100%);
 }
 
 .eael-filter-gallery-container .item:hover .caption.eael-slide-bottom,
 .eael-filter-gallery-container.eael-cards .item:hover .item-img .caption.eael-slide-bottom {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
+  transform: translateY(0%);
 }
 
 .eael-filter-gallery-container .item .caption a {
@@ -191,31 +160,26 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   margin: 0 5px;
   font-size: 20px;
   cursor: pointer;
-  -webkit-transition: .3s;
   transition: .3s;
 }
 
 .eael-filter-gallery-container .item .caption a:nth-child(1),
 .eael-container .item .caption a:nth-child(2) {
-  -webkit-transition: .6s;
   transition: .6s;
   opacity: 0;
 }
 
 .eael-filter-gallery-container .item .caption a:nth-child(1) {
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+  transform: translateY(-100%);
 }
 
 .eael-filter-gallery-container .item .caption a:nth-child(2) {
-  -webkit-transform: translateY(100%);
-          transform: translateY(100%);
+  transform: translateY(100%);
 }
 
 .eael-filter-gallery-container .item .caption:hover a:nth-child(1),
 .eael-filter-gallery-container .item .caption:hover a:nth-child(2) {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
+  transform: translateY(0%);
   opacity: 1;
 }
 
@@ -247,7 +211,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   font-size: 20px;
   line-height: 1;
   margin-bottom: 0px;
-  -webkit-transition: .3s;
   transition: .3s;
 }
 
@@ -419,12 +382,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .gallery-item-caption-wrap.caption-style-hoverer {
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: 0.6s all ease;
   transition: 0.6s all ease;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer {
@@ -439,9 +399,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up h5 {
-  -webkit-transform: translateY(20px);
-          transform: translateY(20px);
-  -webkit-transition: 0.6s all ease;
+  transform: translateY(20px);
   transition: 0.6s all ease;
 }
 
@@ -450,26 +408,19 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up p {
-  -webkit-transform: translateY(40px);
-          transform: translateY(40px);
-  -webkit-transition: 0.6s all ease;
+  transform: translateY(40px);
   transition: 0.6s all ease;
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up .gallery-item-buttons {
-  -webkit-transform: translateY(40px);
-          transform: translateY(40px);
-  -webkit-transition: 0.6s all ease;
+  transform: translateY(40px);
   transition: 0.6s all ease;
 }
 
 .gallery-item-caption-wrap .gallery-item-buttons > a span {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   outline: none;
   text-decoration: none;
@@ -478,28 +429,23 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
-  -webkit-transform: scale(0.8);
-          transform: scale(0.8);
-  -webkit-transition: 0.6s all ease;
+  transform: scale(0.8);
   transition: 0.6s all ease;
 }
 
 .eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up h5,
 .eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up .gallery-item-buttons,
 .eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-slide-up p {
-  -webkit-transform: translate(0);
-          transform: translate(0);
+  transform: translate(0);
 }
 
 .eael-gallery-grid-item:hover .gallery-item-caption-wrap.caption-style-hoverer.eael-zoom-in {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
   visibility: visible;
   opacity: 1;
 }
 
 .gallery-item-caption-wrap.caption-style-hoverer.eael-none {
-  -webkit-transition: none;
   transition: none;
 }
 
@@ -521,28 +467,22 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   width: 62px;
   position: relative;
   z-index: 1;
-  -webkit-transition: 300ms;
   transition: 300ms;
 }
 
 .video-popup {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .video-popup:hover > img {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .video-popup-bg {
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: 350ms;
   transition: 350ms;
 }
 
@@ -557,18 +497,14 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   top: 0;
   height: 100%;
   width: 100%;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .gallery-item-caption-wrap.card-hover-bg {
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: 800ms;
   transition: 800ms;
 }
 
@@ -578,12 +514,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 .gallery-item-caption-wrap .gallery-item-buttons > a > i {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   height: 100%;
 }
 
@@ -907,7 +840,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   line-height: 1;
   font-weight: 500;
   margin: 0;
-  -webkit-transition: 300ms;
   transition: 300ms;
 }
 
@@ -929,7 +861,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   width: 150px;
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: 300ms;
   transition: 300ms;
   width: 100%;
   border-radius: 5px;
@@ -944,7 +875,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .fg-layout-3-filter-controls li.control {
   padding: 5px 5px 5px 10px;
   cursor: pointer;
-  -webkit-transition: 300ms;
   transition: 300ms;
   font-size: 14px;
   color: #7f8995;
@@ -988,8 +918,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   font-size: 18px;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   margin-left: 10px;
 }
 
@@ -1035,11 +964,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .fg-layout-3-filters-wrap {
   height: 55px;
   border-radius: 5px;
-  display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
-  -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .fg-layout-3-filters-wrap .fg-layout-3-search-box {
@@ -1059,12 +986,9 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   top: 0;
   height: 100%;
   width: 100%;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   z-index: 4;
 }
 
@@ -1095,10 +1019,8 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   left: 0;
   top: 0;
   width: 100%;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 35px 35px;
   z-index: 3;
   color: #fff;
@@ -1134,7 +1056,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   line-height: 1;
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: 300ms;
   transition: 300ms;
 }
 
