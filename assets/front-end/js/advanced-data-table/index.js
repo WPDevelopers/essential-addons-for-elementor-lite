@@ -114,7 +114,8 @@ var Advanced_Data_Table = function($scope, $) {
 				if (paginated) {
 					currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-					endIndex = endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
+					endIndex =
+						endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
 				}
 
 				classCollection[currentPage] = [];
@@ -310,8 +311,35 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	// init
 	localRender();
 
+	// after render
 	model.on("remote:render", function() {
 		localRender();
+	});
+
+	elementor.channels.editor.on("ea:table:import", function(e) {
+		var textarea = panel.el.querySelector('.ea_adv_table_csv_string');
+		var csvArr = textarea.value.split("\n");
+		var tableHTML = "";
+
+		if (csvArr.length > 0) {
+			// tableHTML += "<tbody>";
+			// csvArr.forEach(function(row) {
+			// 	cols = row.split("\",");
+
+			// 	if (cols.length > 0) {
+			// 		tableHTML += "<tr>";
+			// 		cols.forEach(function(col) {
+			// 			tableHTML += col;
+			// 		});
+			// 		tableHTML += "</tr>";
+			// 	}
+			// });
+			// tableHTML += "</tbody>";
+		}
+
+		console.log(csvArr);
+		textarea.value = "";
+		// model.setSetting("ea_adv_data_table_static_html", tableHTML);
 	});
 };
 

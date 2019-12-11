@@ -67,7 +67,7 @@ class Advanced_Data_Table extends Widget_Base
 
         $this->end_controls_section();
 
-        // general
+        // features
         $this->start_controls_section(
             'ea_section_adv_data_table_features',
             [
@@ -95,29 +95,56 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        // $this->add_control(
-        //     'ea_adv_data_table_search_pagination',
-        //     [
-        //         'label' => esc_html__('Search Pagination', 'essential-addons-elementor'),
-        //         'type' => Controls_Manager::SWITCHER,
-        //         'return_value' => 'yes',
-        //         'default' => 'yes',
-        //         'condition' => [
-        //             'ea_adv_data_table_search' => 'yes',
-        //             'ea_adv_data_table_pagination' => 'yes',
-        //         ],
-        //     ]
-        // );
-
         $this->add_control(
             'ea_adv_data_table_items_per_page',
             [
-                'label' => esc_html__('Pagination', 'essential-addons-elementor'),
+                'label' => esc_html__('Rows Per Page', 'essential-addons-elementor'),
                 'type' => Controls_Manager::NUMBER,
+                'min' => 1,
                 'default' => 10,
                 'condition' => [
                     'ea_adv_data_table_pagination' => 'yes',
                 ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // export/import
+        $this->start_controls_section(
+            'ea_section_adv_data_table_export_import',
+            [
+                'label' => esc_html__('Export/Import', 'essential-addons-elementor'),
+                'condition' => [
+                    'ea_adv_data_table_source' => 'static',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
+                'label' => __('Import', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_csv_string',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea>',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_import_csv_button',
+            [
+                'label' => __('Delete Content', 'essential-addons-elementor'),
+                'type' => Controls_Manager::BUTTON,
+                'show_label' => false,
+                'text' => __('Import', 'essential-addons-elementor'),
+                'event' => 'ea:table:import',
             ]
         );
 
@@ -1116,12 +1143,6 @@ class Advanced_Data_Table extends Widget_Base
                 'class' => "ea-advanced-data-table-search-wrap ea-advanced-data-table-search-{$settings['ea_adv_data_table_search_alignment']}",
             ]);
         }
-
-        // if($settings['ea_adv_data_table_search_pagination']) {
-        //     $this->add_render_attribute('ea-adv-data-table', [
-        //         'class' => "ea-advanced-data-table-searchable-paginated",
-        //     ]);
-        // }
 
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
 
