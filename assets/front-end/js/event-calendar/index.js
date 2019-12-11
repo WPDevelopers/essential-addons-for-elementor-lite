@@ -34,8 +34,8 @@ jQuery(window).on('elementor/frontend/init', function () {
                     $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
                     $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
                     */
-                    $("span.eaelec-event-date-start").html(moment(event.start).format('MMM Do h:mm A'));
-                    $("span.eaelec-event-date-end").html(moment(event.end).format('MMM Do h:mm A'));
+                    $("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format('MMM Do, h:mm A'));
+                    $("span.eaelec-event-date-end").html('<i class="eicon-calendar"></i> ' + moment(event.end).format('MMM Do, h:mm A'));
                     $(".eaelec-modal-header h2").html(event.title);
                     $(".eaelec-modal-body p").html(event.description);
                     $(".eaelec-modal-footer a").attr('href', event.url);
