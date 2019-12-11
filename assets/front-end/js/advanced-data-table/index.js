@@ -53,6 +53,8 @@ var Advanced_Data_Table = function($scope, $) {
 
 			if (table.rows.length > 1) {
 				if (input.length > 0) {
+					table.parentNode.querySelector(".ea-advanced-data-table-pagination").style.display = "none";
+
 					for (var i = 1; i < table.rows.length; i++) {
 						var matchFound = false;
 
@@ -72,6 +74,8 @@ var Advanced_Data_Table = function($scope, $) {
 						}
 					}
 				} else {
+					table.parentNode.querySelector(".ea-advanced-data-table-pagination").style.display = "";
+
 					if (paginated) {
 						var currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 						var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
