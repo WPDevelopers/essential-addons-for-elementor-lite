@@ -133,7 +133,7 @@ class Advanced_Data_Table extends Widget_Base
             'ea_adv_data_table_csv_string',
             [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea>',
+                'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea><label for="ea_adv_table_csv_string_table"><input type="checkbox" id="ea_adv_table_csv_string_table" class="ea_adv_table_csv_string_table"> Import first row as Header</label>',
             ]
         );
 

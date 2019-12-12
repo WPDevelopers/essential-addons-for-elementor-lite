@@ -177,7 +177,7 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 
 			// make initial item visible
-			for (var i = 1; i <= endIndex; i++) {
+			for (var i = 0; i <= endIndex; i++) {
 				if (i >= table.rows.length) {
 					break;
 				}
@@ -317,29 +317,41 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	});
 
 	elementor.channels.editor.on("ea:table:import", function(e) {
-		var textarea = panel.el.querySelector('.ea_adv_table_csv_string');
+		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
+		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
 		var csvArr = textarea.value.split("\n");
-		var tableHTML = "";
+		var header = "";
+		var body = "";
 
 		if (csvArr.length > 0) {
-			// tableHTML += "<tbody>";
-			// csvArr.forEach(function(row) {
-			// 	cols = row.split("\",");
+			body += "<tbody>";
+			csvArr.forEach(function(row, index) {
+				cols = row.split(",");
 
-			// 	if (cols.length > 0) {
-			// 		tableHTML += "<tr>";
-			// 		cols.forEach(function(col) {
-			// 			tableHTML += col;
-			// 		});
-			// 		tableHTML += "</tr>";
-			// 	}
-			// });
-			// tableHTML += "</tbody>";
+				if (cols.length > 0) {
+					if (enableHeader && index == 0) {
+						header += "<thead><tr>";
+						cols.forEach(function(col) {
+							header += "<th>" + col.slice(1, -1) + "</th>";
+						});
+						header += "</tr></thead>";
+					} else {
+						body += "<tr>";
+						cols.forEach(function(col) {
+							body += "<td>" + col.slice(1, -1) + "</td>";
+						});
+						body += "</tr>";
+					}
+				}
+			});
+			body += "</tbody>";
+
+			if (header.length > 0 || body.length > 0) {
+				model.setSetting("ea_adv_data_table_static_html", header + body);
+			}
 		}
 
-		console.log(csvArr);
 		textarea.value = "";
-		// model.setSetting("ea_adv_data_table_static_html", tableHTML);
 	});
 };
 
