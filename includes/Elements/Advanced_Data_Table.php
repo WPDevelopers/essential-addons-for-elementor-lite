@@ -124,6 +124,24 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
+                'label' => __('Export', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_export_csv_button',
+            [
+                'label' => __('Export table as CSV file', 'essential-addons-elementor'),
+                'type' => Controls_Manager::BUTTON,
+                'text' => __('Export', 'essential-addons-elementor'),
+                'event' => 'ea:advTable:export',
+            ]
+        );
+
+        $this->add_control(
+            base64_encode(random_bytes(10)),
+            [
                 'label' => __('Import', 'essential-addons-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
@@ -140,11 +158,11 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_import_csv_button',
             [
-                'label' => __('Delete Content', 'essential-addons-elementor'),
+                'label' => __('Import', 'essential-addons-elementor'),
                 'type' => Controls_Manager::BUTTON,
                 'show_label' => false,
                 'text' => __('Import', 'essential-addons-elementor'),
-                'event' => 'ea:table:import',
+                'event' => 'ea:advTable:import',
             ]
         );
 
