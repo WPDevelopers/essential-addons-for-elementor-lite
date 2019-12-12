@@ -316,7 +316,40 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		localRender();
 	});
 
-	elementor.channels.editor.on("ea:table:import", function(e) {
+	// export
+	elementor.channels.editor.on("ea:advTable:export", function(e) {
+		var table = view.el.querySelector(".ea-advanced-data-table");
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			for (var j = 0; j < cols.length; j++) {
+				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("eael-adv-data-table-download-" + model.attributes.id);
+		download_link.download = "eael-adv-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".eael-adv-data-table-download-" + model.attributes.id).remove();
+	});
+
+	// import
+	elementor.channels.editor.on("ea:advTable:import", function(e) {
 		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
 		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
 		var csvArr = textarea.value.split("\n");
