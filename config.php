@@ -369,8 +369,11 @@ $config = [
                 ],
             ],
         ],
+        'eael-table-of-content' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content'
+        ],
         'eael-post-duplicator' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
+            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator'
         ]
     ],
 ];
