@@ -112,6 +112,12 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/sticky-video/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/sticky-video/',
             ],
+            [
+                'key'   => 'event-calendar',
+                'title' => __( 'Event Calendar', 'essential-addons-elementor' ),
+                'demo_link' => 'https://essential-addons.com/elementor/event-calendar/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/event-calendar/',
+            ],
         ]
     ],
     'dynamic-content-elements'  => [

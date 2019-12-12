@@ -52,7 +52,6 @@
                     'options' => [
                         'manual' => __('Manual', 'essential-addons-elementor'),
                         'google' => __('Google', 'essential-addons-elementor'),
-                        'others' => __('Others', 'essential-addons-elementor'),
                     ],
                     'default' => 'manual',
                 ]
@@ -94,6 +93,16 @@
             );
 
             $repeater->add_control(
+                'eael_event_all_day',
+                [
+                    'label' => __('All Day', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_block' => false,
+                    'return_value' => 'yes'
+                ]
+            );
+
+            $repeater->add_control(
                 'eael_event_start_date',
                 [
                     'label' => __( 'Start Date', 'plugin-domain' ),
@@ -108,6 +117,9 @@
                     'label' => __( 'End Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
                     'default'   => date( 'Y-m-d H:i', strtotime("+5 minute", current_time( 'timestamp', 0 )) ),
+                    'condition' => [
+                        'eael_event_all_day' => '',
+                    ],
                 ]
             );
 
@@ -427,7 +439,7 @@
                 [
                     'label' => __('November', 'essential-addons-elementor'),
                     'type' => Controls_Manager::TEXT,
-                    'default'   => 'November'
+                    'default' => 'November'
                 ]
             );
 
