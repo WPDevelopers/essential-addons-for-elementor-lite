@@ -328,7 +328,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 			var cols = rows[i].querySelectorAll("th, td");
 
 			for (var j = 0; j < cols.length; j++) {
-				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+				row.push(JSON.stringify(cols[j].querySelector('textarea').value.replace(/(\r\n|\n|\r)/gm, " ").trim()));
 			}
 
 			csv.push(row.join(","));
