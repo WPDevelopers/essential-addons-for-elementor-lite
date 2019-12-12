@@ -321,7 +321,27 @@ class Data_Table extends Widget_Base {
 			]
 		);
 
-  		$this->end_controls_section();
+		$this->end_controls_section();
+
+		// export
+        $this->start_controls_section(
+            'ea_section_adv_data_table_export',
+            [
+                'label' => esc_html__('Export', 'essential-addons-elementor'),
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_export_csv_button',
+            [
+                'label' => __('Export table as CSV file', 'essential-addons-elementor'),
+                'type' => Controls_Manager::BUTTON,
+                'text' => __('Export', 'essential-addons-elementor'),
+                'event' => 'ea:table:export',
+            ]
+        );
+
+		$this->end_controls_section();
 
 		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->start_controls_section(
