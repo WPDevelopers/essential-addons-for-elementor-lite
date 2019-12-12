@@ -58,6 +58,12 @@ var FancyText = function($scope, $) {
             $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
         }, 500);
     });
+
+    if(isEditMode) {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 800);
+    }
 };
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
