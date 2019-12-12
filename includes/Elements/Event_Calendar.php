@@ -52,7 +52,6 @@
                     'options' => [
                         'manual' => __('Manual', 'essential-addons-elementor'),
                         'google' => __('Google', 'essential-addons-elementor'),
-                        'others' => __('Others', 'essential-addons-elementor'),
                     ],
                     'default' => 'manual',
                 ]
@@ -94,6 +93,16 @@
             );
 
             $repeater->add_control(
+                'eael_event_all_day',
+                [
+                    'label' => __('All Day', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_block' => false,
+                    'return_value' => 'yes'
+                ]
+            );
+
+            $repeater->add_control(
                 'eael_event_start_date',
                 [
                     'label' => __( 'Start Date', 'plugin-domain' ),
@@ -108,6 +117,9 @@
                     'label' => __( 'End Date', 'plugin-domain' ),
                     'type' => Controls_Manager::DATE_TIME,
                     'default'   => date( 'Y-m-d H:i', strtotime("+5 minute", current_time( 'timestamp', 0 )) ),
+                    'condition' => [
+                        'eael_event_all_day' => '',
+                    ],
                 ]
             );
 
@@ -117,6 +129,11 @@
                     'label' => __('Event Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'default'   => '#00BFFF',
+                    'selectors' => [
+                        '{{WRAPPER}} .eaelec-modal-close' => 'background: {{VALUE}};',
+                        '{{WRAPPER}} .eaelec-modal-header' => 'border-left: 5px solid {{VALUE}};',
+                        '{{WRAPPER}} .eaelec-modal-header span' => 'color: {{VALUE}};',
+                    ],
                 ]
             );
 
@@ -422,7 +439,7 @@
                 [
                     'label' => __('November', 'essential-addons-elementor'),
                     'type' => Controls_Manager::TEXT,
-                    'default'   => 'November'
+                    'default' => 'November'
                 ]
             );
 
@@ -820,13 +837,10 @@
                     <div class="eaelec-modal-header">
                         <span class="eaelec-modal-close">&times;</span>
                         <h2></h2>
+                        <span class="eaelec-event-date-start"></span> - 
+                        <span class="eaelec-event-date-end"></span>
                     </div>
                     <div class="eaelec-modal-body">
-                        <span>Event Start:</span>
-                        <span class="eaelec-event-date-start"></span>
-                        <br>
-                        <span>Event End:</span>
-                        <span class="eaelec-event-date-end"></span>
                         <p></p>
                     </div>
                     <div class="eaelec-modal-footer">
