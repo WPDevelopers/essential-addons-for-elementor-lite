@@ -338,14 +338,14 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
 		var download_link = parent.document.createElement("a");
 
-		download_link.classList.add("eael-adv-data-table-download-" + model.attributes.id);
-		download_link.download = "eael-adv-data-table-" + model.attributes.id + ".csv";
+		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
+		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
 		download_link.href = window.URL.createObjectURL(csv_file);
 		download_link.style.display = "none";
 		parent.document.body.appendChild(download_link);
 		download_link.click();
 
-		parent.document.querySelector(".eael-adv-data-table-download-" + model.attributes.id).remove();
+		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
 	});
 
 	// import
