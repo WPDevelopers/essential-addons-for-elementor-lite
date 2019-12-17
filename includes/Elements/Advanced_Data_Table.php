@@ -559,8 +559,9 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
+        // first col
         $this->add_control(
-            'ea_adv_data_table_body_highlight_color',
+            'ea_adv_data_table_body_f_col_highlight_color',
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
@@ -576,7 +577,7 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            'ea_adv_data_table_body_highlight_background',
+            'ea_adv_data_table_body_f_col_highlight_background',
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
@@ -587,6 +588,171 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'f-col',
+                ],
+            ]
+        );
+
+        // last col
+        $this->add_control(
+            'ea_adv_data_table_body_l_col_highlight_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:last-child' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody td:last-child textarea' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'l-col',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_l_col_highlight_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:last-child' => 'background-color: {{VALUE}} !important',
+                    '{{WRAPPER}} tbody td:last-child textarea' => 'background-color: {{VALUE}} !important',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'l-col',
+                ],
+            ]
+        );
+
+        // even col
+        $this->add_control(
+            'ea_adv_data_table_body_e_col_highlight_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:nth-child(even)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody td:nth-child(even) textarea' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'e-col',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_e_col_highlight_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:nth-child(even)' => 'background-color: {{VALUE}} !important',
+                    '{{WRAPPER}} tbody td:nth-child(even) textarea' => 'background-color: {{VALUE}} !important',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'e-col',
+                ],
+            ]
+        );
+
+        // odd col
+        $this->add_control(
+            'ea_adv_data_table_body_o_col_highlight_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:nth-child(odd)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody td:nth-child(odd) textarea' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'o-col',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_o_col_highlight_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody td:nth-child(odd)' => 'background-color: {{VALUE}} !important',
+                    '{{WRAPPER}} tbody td:nth-child(odd) textarea' => 'background-color: {{VALUE}} !important',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'o-col',
+                ],
+            ]
+        );
+
+        // even row
+        $this->add_control(
+            'ea_adv_data_table_body_e_row_highlight_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody tr:nth-child(even)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody tr:nth-child(even) textarea' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'e-row',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_e_row_highlight_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody tr:nth-child(even)' => 'background-color: {{VALUE}} !important',
+                    '{{WRAPPER}} tbody tr:nth-child(even) textarea' => 'background-color: {{VALUE}} !important',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'e-row',
+                ],
+            ]
+        );
+
+        // odd row
+        $this->add_control(
+            'ea_adv_data_table_body_o_row_highlight_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody tr:nth-child(odd)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody tr:nth-child(odd) textarea' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'o-row',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_o_row_highlight_background',
+            [
+                'label' => __('Background', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(255,255,255,0)',
+                'selectors' => [
+                    '{{WRAPPER}} tbody tr:nth-child(odd)' => 'background-color: {{VALUE}} !important',
+                    '{{WRAPPER}} tbody tr:nth-child(odd) textarea' => 'background-color: {{VALUE}} !important',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_body_highlight' => 'o-row',
                 ],
             ]
         );
