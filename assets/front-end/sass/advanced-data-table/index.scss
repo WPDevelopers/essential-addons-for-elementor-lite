@@ -13,7 +13,37 @@
 
 		th {
 			background-color: transparent !important;
-			cursor: pointer;
+		}
+
+		&.ea-advanced-data-table-sortable {
+			th {
+				position: relative;
+				cursor: pointer;
+				
+				&:after {
+					content: "";
+					border-left: 5px solid transparent;
+					border-right: 5px solid transparent;
+					border-top: 5px solid #4d4d4d;
+					position: absolute;
+					top: 50%;
+					right: 15px;
+					margin-top: -3px;
+				}
+
+				&.desc {
+					&:after {
+						border-top: none;
+						border-bottom: 5px solid #4d4d4d;
+					}
+				}
+			}
+
+			&.ea-advanced-data-table-editable {
+				th:after {
+					display: none;
+				}
+			}
 		}
 
 		td {

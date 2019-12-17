@@ -100,60 +100,62 @@ var Advanced_Data_Table = function($scope, $) {
 		}
 
 		// sort
-		table.addEventListener("click", function(e) {
-			if (e.target.tagName.toLowerCase() === "th") {
-				var index = e.target.cellIndex;
-				var desc = e.target.classList.toggle("desc");
-				var switching = true;
-				var paginated =
-					table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
-				var currentPage = 1;
-				var startIndex = 1;
-				var endIndex = table.rows.length - 1;
+		if (table.classList.contains("ea-advanced-data-table-sortable")) {
+			table.addEventListener("click", function(e) {
+				if (e.target.tagName.toLowerCase() === "th") {
+					var index = e.target.cellIndex;
+					var desc = e.target.classList.toggle("desc");
+					var switching = true;
+					var paginated =
+						table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+					var currentPage = 1;
+					var startIndex = 1;
+					var endIndex = table.rows.length - 1;
 
-				if (paginated) {
-					currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-					endIndex =
-						endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
-				}
+					if (paginated) {
+						currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+						endIndex =
+							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
+					}
 
-				classCollection[currentPage] = [];
+					classCollection[currentPage] = [];
 
-				table.querySelectorAll("th").forEach(function(el) {
-					classCollection[currentPage].push(el.classList.contains("desc"));
-				});
+					table.querySelectorAll("th").forEach(function(el) {
+						classCollection[currentPage].push(el.classList.contains("desc"));
+					});
 
-				while (switching) {
-					switching = false;
+					while (switching) {
+						switching = false;
 
-					for (var i = startIndex; i < endIndex; i++) {
-						var x = table.rows[i].cells[index];
-						var y = table.rows[i + 1].cells[index];
+						for (var i = startIndex; i < endIndex; i++) {
+							var x = table.rows[i].cells[index];
+							var y = table.rows[i + 1].cells[index];
 
-						if (isNaN(parseInt(x.innerText)) || isNaN(parseInt(y.innerText))) {
-							x = x.innerText.toLowerCase();
-							y = y.innerText.toLowerCase();
-						} else {
-							x = parseInt(x.innerText);
-							y = parseInt(y.innerText);
-						}
+							if (isNaN(parseInt(x.innerText)) || isNaN(parseInt(y.innerText))) {
+								x = x.innerText.toLowerCase();
+								y = y.innerText.toLowerCase();
+							} else {
+								x = parseInt(x.innerText);
+								y = parseInt(y.innerText);
+							}
 
-						if (desc === true && x < y) {
-							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-							switching = true;
+							if (desc === true && x < y) {
+								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+								switching = true;
 
-							break;
-						} else if (desc === false && x > y) {
-							table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-							switching = true;
+								break;
+							} else if (desc === false && x > y) {
+								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+								switching = true;
 
-							break;
+								break;
+							}
 						}
 					}
 				}
-			}
-		});
+			});
+		}
 
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
