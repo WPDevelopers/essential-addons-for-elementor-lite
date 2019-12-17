@@ -328,7 +328,14 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 			var cols = rows[i].querySelectorAll("th, td");
 
 			for (var j = 0; j < cols.length; j++) {
-				row.push(JSON.stringify(cols[j].querySelector('textarea').value.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+				row.push(
+					JSON.stringify(
+						cols[j]
+							.querySelector("textarea")
+							.value.replace(/(\r\n|\n|\r)/gm, " ")
+							.trim()
+					)
+				);
 			}
 
 			csv.push(row.join(","));
@@ -359,19 +366,19 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		if (csvArr.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.split(",");
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
 						header += "<thead><tr>";
 						cols.forEach(function(col) {
-							header += "<th>" + col.slice(1, -1) + "</th>";
+							header += "<th>" + col.replace(/(^"")|(^")|("$)|(""$)/g, '') + "</th>";
 						});
 						header += "</tr></thead>";
 					} else {
 						body += "<tr>";
 						cols.forEach(function(col) {
-							body += "<td>" + col.slice(1, -1) + "</td>";
+							body += "<td>" + col.replace(/(^"")|(^")|("$)|(""$)/g, '') + "</td>";
 						});
 						body += "</tr>";
 					}
