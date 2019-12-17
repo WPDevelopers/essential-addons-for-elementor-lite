@@ -129,11 +129,13 @@
                     'label' => __('Event Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'default'   => '#00BFFF',
+                    /*
                     'selectors' => [
                         '{{WRAPPER}} .eaelec-modal-close' => 'background: {{VALUE}};',
                         '{{WRAPPER}} .eaelec-modal-header' => 'border-left: 5px solid {{VALUE}};',
                         '{{WRAPPER}} .eaelec-modal-header span' => 'color: {{VALUE}};',
                     ],
+                    */
                 ]
             );
 
