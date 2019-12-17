@@ -113,28 +113,35 @@
             );
 
             $element->add_control(
-                'control_id',
+                'eael_ext_toc_supported_heading_tag',
                 [
-                'label' => __( 'Control Label', 'elementor-pro' ),
-			    'type' => Controls_Manager::SELECT2,
-			    'multiple' => true,
-			    'label_block' => true,
-			    'separator' => 'before',
-			    'default' => [
-                    'option1',
-                    'optino2',
-                ],
-                'options' => [
-                    'option1' => __( 'Option One', 'elementor-pro' ),
-                    'option2' => __( 'Option Two', 'elementor-pro' ),
-                    'option3' => __( 'Option Three', 'elementor-pro' ),
-                    'option4' => __( 'Option Four', 'elementor-pro' ),
-                    'option5' => __( 'Option Five', 'elementor-pro' ),
-                    'option6' => __( 'Option Six', 'elementor-pro' ),
-                ],
-                'render_type' => 'none',
-		]
-	);
+                    'label' => __( 'Supported Heading Tag', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::SELECT2,
+                    'multiple' => true,
+                    'label_block' => true,
+                    'separator' => 'before',
+                    'default' => [
+                        'h1',
+                        'h2',
+                        'h3',
+                        'h4',
+                        'h5',
+                        'h6',
+                    ],
+                    'options' => [
+                        'h1' => __( 'H1', 'essential-addons-elementor' ),
+                        'h2' => __( 'H2', 'essential-addons-elementor' ),
+                        'h3' => __( 'H3', 'essential-addons-elementor' ),
+                        'h4' => __( 'H4', 'essential-addons-elementor' ),
+                        'h5' => __( 'H5', 'essential-addons-elementor' ),
+                        'h6' => __( 'H6', 'essential-addons-elementor' ),
+                    ],
+                    'render_type' => 'none',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+	        );
 
             $element->end_controls_section();
         }
