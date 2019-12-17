@@ -6,10 +6,10 @@ jQuery(window).on('elementor/frontend/init', function () {
         var daysWeek = element.data('days_week');
         var monthNames = element.data('month_names');
         var firstDay = element.data('first_day');
+        var eventBgColor = element.data('event_bg_color');
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
         //daysWeek1 = ['s1', 's2'];
-        //alert(daysWeek);
         var calendar = $('#eael-event-calendar').fullCalendar({
             editable:false,
             draggable:false,
@@ -39,7 +39,11 @@ jQuery(window).on('elementor/frontend/init', function () {
                     $(".eaelec-modal-header h2").html(event.title);
                     $(".eaelec-modal-body p").html(event.description);
                     $(".eaelec-modal-footer a").attr('href', event.url);
-                    
+
+                    // Popup color
+                    $('.eaelec-modal-close').css('background-color', event.color );
+                    $('.eaelec-modal-header').css('border-left', '5px solid ' + event.color );
+                    $('.eaelec-modal-header span').css('color', event.color );
                 });
             }
         });
