@@ -11,6 +11,7 @@
 
         public function __construct(){
             add_action('elementor/documents/register_controls', [$this, 'register_controls'], 10);
+
         }
 
         public function register_controls( $element ){
@@ -74,6 +75,25 @@
                         'condition' => [
                             'eael_ext_table_of_content' => 'yes',
                         ],
+                    ]
+                );
+
+                $element->add_control(
+                    'eael_ext_toc_global_display_condition',
+                    [
+                        'label' => __('Display On', 'essential-addons-elementor'),
+                        'type' => \Elementor\Controls_Manager::SELECT,
+                        'default' => 'all',
+                        'options' => [
+                            'posts' => __('All Posts', 'essential-addons-elementor'),
+                            'pages' => __('All Pages', 'essential-addons-elementor'),
+                            'all' => __('All Posts & Pages', 'essential-addons-elementor'),
+                        ],
+                        'condition' => [
+                            'eael_ext_table_of_content' => 'yes',
+                            'eael_ext_toc_global' => 'yes',
+                        ],
+                        'separator' => 'before',
                     ]
                 );
             }
