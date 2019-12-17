@@ -159,6 +159,21 @@ trait Core
             }
         }
 
+        //save table of content global value
+        if($page_settings_model->get_settings('eael_ext_toc_global') == 'yes') {
+            $global_settings['table_of_content'] = [
+                'post_id' => $post_id,
+                'enabled' => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
+                'position' => $page_settings_model->get_settings('eael_ext_toc_position'),
+                'bg_color' => $page_settings_model->get_settings('eael_ext_toc_bg_color'),
+                'supported_heading_tag' => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag')
+            ];
+        } else {
+            if(isset($global_settings['table_of_content']['post_id']) && $global_settings['table_of_content']['post_id'] == $post_id) {
+                $global_settings['table_of_content'] = [];
+            }
+        }
+
         update_option('eael_global_settings', $global_settings);
     }
 }
