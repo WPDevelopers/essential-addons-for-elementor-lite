@@ -76,6 +76,16 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
+            'ea_adv_data_table_sort',
+            [
+                'label' => esc_html__('Sort', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
             'ea_adv_data_table_search',
             [
                 'label' => esc_html__('Search', 'essential-addons-elementor'),
@@ -1312,6 +1322,12 @@ class Advanced_Data_Table extends Widget_Base
             ]);
         }
 
+        if ($settings['ea_adv_data_table_sort'] == 'yes') {
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table-sortable",
+            ]);
+        }
+        
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-paginated",
