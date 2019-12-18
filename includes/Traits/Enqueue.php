@@ -45,6 +45,16 @@ trait Enqueue
             );
         }
 
+        if( class_exists('\Ninja_Forms') && class_exists('\NF_Display_Render') ) {
+            add_action('elementor/preview/enqueue_styles', function() {
+                ob_start();
+                    \NF_Display_Render::localize( 0 );
+                ob_clean();
+                
+                wp_add_inline_script( 'nf-front-end', 'var nfForms = nfForms || [];' );
+            });
+        }
+
         // Load fontawesome as fallback
         wp_enqueue_style(
 			'font-awesome-5-all',
