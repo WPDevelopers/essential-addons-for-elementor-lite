@@ -6,6 +6,7 @@ const cleancss = require("gulp-clean-css");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
+var runSequence = require('run-sequence');
 
 /**
  * Primary Compass Configurations
@@ -120,4 +121,16 @@ gulp.task("combineMinJS", function() {
         .src(files.minJS)
         .pipe(concat("eael.min.js"))
         .pipe(gulp.dest("./" + compassConfig.js));
+});
+
+gulp.task('buildcss', function(callback) {
+    runSequence('compileSCSS',
+        'minifyCSS','combineCSS','combineMinCSS',
+        callback);
+});
+
+gulp.task('buildjs', function(callback) {
+    runSequence('minifyJS',
+        'combineJS','combineMinJS',
+        callback);
 });

@@ -1894,7 +1894,7 @@ trait Helper
                 return $matches[0];
             }
             $hash_link = '';
-            return sprintf('<%s%s class="betterdocs-content-heading" id="%s">%s %s</%s>', $tag, $matches[2], $id, $matches[3], $hash_link, $tag);
+            return sprintf('<%s%s class="eael-heading-content" id="%s">%s %s</%s>', $tag, $matches[2], $id, $matches[3], $hash_link, $tag);
         }, $content);
         return $content;
     }
