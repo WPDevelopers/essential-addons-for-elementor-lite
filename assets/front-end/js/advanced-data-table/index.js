@@ -227,13 +227,91 @@ var Advanced_Data_Table = function($scope, $) {
 	}
 };
 
+var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:advTable:export") {
+		// export
+		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			for (var j = 0; j < cols.length; j++) {
+				row.push(
+					JSON.stringify(
+						cols[j]
+							.querySelector("textarea")
+							.value.replace(/(\r\n|\n|\r)/gm, " ")
+							.trim()
+					)
+				);
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
+		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
+	} else if (event.target.dataset.event == "ea:advTable:import") {
+		// import
+		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
+		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
+		var csvArr = textarea.value.split("\n");
+		var header = "";
+		var body = "";
+
+		if (csvArr.length > 0) {
+			body += "<tbody>";
+			csvArr.forEach(function(row, index) {
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
+
+				if (cols.length > 0) {
+					if (enableHeader && index == 0) {
+						header += "<thead><tr>";
+						cols.forEach(function(col) {
+							header += "<th>" + col.replace(/(^"")|(^")|("$)|(""$)/g, "") + "</th>";
+						});
+						header += "</tr></thead>";
+					} else {
+						body += "<tr>";
+						cols.forEach(function(col) {
+							body += "<td>" + col.replace(/(^"")|(^")|("$)|(""$)/g, "") + "</td>";
+						});
+						body += "</tr>";
+					}
+				}
+			});
+			body += "</tbody>";
+
+			if (header.length > 0 || body.length > 0) {
+				model.setSetting("ea_adv_data_table_static_html", header + body);
+			}
+		}
+
+		textarea.value = "";
+	}
+};
+
 // Inline edit
 var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	var localRender = function() {
 		var interval = setInterval(function() {
 			if (view.el.querySelector(".ea-advanced-data-table")) {
 				var timeout;
-				var table = view.el.querySelector(".ea-advanced-data-table");
+				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
 
 				table.addEventListener("focusin", function(e) {
 					if (e.target.tagName.toLowerCase() == "textarea") {
@@ -318,82 +396,13 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		localRender();
 	});
 
-	// export
-	elementor.channels.editor.on("ea:advTable:export", function(e) {
-		var table = view.el.querySelector(".ea-advanced-data-table");
-		var rows = table.querySelectorAll("table tr");
-		var csv = [];
+	// export import handler
+	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
 
-		// generate csv
-		for (var i = 0; i < rows.length; i++) {
-			var row = [];
-			var cols = rows[i].querySelectorAll("th, td");
+	panel.el.addEventListener("click", handler);
 
-			for (var j = 0; j < cols.length; j++) {
-				row.push(
-					JSON.stringify(
-						cols[j]
-							.querySelector("textarea")
-							.value.replace(/(\r\n|\n|\r)/gm, " ")
-							.trim()
-					)
-				);
-			}
-
-			csv.push(row.join(","));
-		}
-
-		// download
-		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-		var download_link = parent.document.createElement("a");
-
-		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
-		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
-		download_link.href = window.URL.createObjectURL(csv_file);
-		download_link.style.display = "none";
-		parent.document.body.appendChild(download_link);
-		download_link.click();
-
-		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
-	});
-
-	// import
-	elementor.channels.editor.on("ea:advTable:import", function(e) {
-		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
-		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
-		var csvArr = textarea.value.split("\n");
-		var header = "";
-		var body = "";
-
-		if (csvArr.length > 0) {
-			body += "<tbody>";
-			csvArr.forEach(function(row, index) {
-				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
-
-				if (cols.length > 0) {
-					if (enableHeader && index == 0) {
-						header += "<thead><tr>";
-						cols.forEach(function(col) {
-							header += "<th>" + col.replace(/(^"")|(^")|("$)|(""$)/g, '') + "</th>";
-						});
-						header += "</tr></thead>";
-					} else {
-						body += "<tr>";
-						cols.forEach(function(col) {
-							body += "<td>" + col.replace(/(^"")|(^")|("$)|(""$)/g, '') + "</td>";
-						});
-						body += "</tr>";
-					}
-				}
-			});
-			body += "</tbody>";
-
-			if (header.length > 0 || body.length > 0) {
-				model.setSetting("ea_adv_data_table_static_html", header + body);
-			}
-		}
-
-		textarea.value = "";
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
 	});
 };
 

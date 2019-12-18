@@ -23,10 +23,10 @@ var dataTable = function($scope, $) {
 	}
 };
 
-var data_table_panel = function(panel, model, view) {
-	// export
-	elementor.channels.editor.on("ea:table:export", function(e) {
-		var table = view.el.querySelector(".eael-data-table");
+var Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:table:export") {
+		// export
+		var table = view.el.querySelector("#eael-data-table-" + model.attributes.id);
 		var rows = table.querySelectorAll("table tr");
 		var csv = [];
 
@@ -54,6 +54,16 @@ var data_table_panel = function(panel, model, view) {
 		download_link.click();
 
 		parent.document.querySelector(".eael-data-table-download-" + model.attributes.id).remove();
+	}
+};
+
+var data_table_panel = function(panel, model, view) {
+	var handler = Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
 	});
 };
 
