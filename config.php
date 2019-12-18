@@ -370,7 +370,15 @@ $config = [
             ],
         ],
         'eael-table-of-content' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content'
+            'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/table-of-content/index.min.css',
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/table-of-content/index.min.js',
+                ],
+            ],
         ],
         'eael-post-duplicator' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator'

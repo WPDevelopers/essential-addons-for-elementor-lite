@@ -121,6 +121,7 @@
   overflow: hidden;
   position: relative;
   opacity: .6;
+  -webkit-transition: all .3s;
   transition: all .3s;
 }
 
@@ -146,6 +147,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-transition: all .3s;
   transition: all .3s;
 }
 
@@ -178,6 +180,7 @@
   text-align: center;
   top: 50px;
   z-index: 99;
+  -webkit-transition: all .5s;
   transition: all .5s;
 }
 
@@ -225,6 +228,7 @@
 }
 
 .eael-load-more-button-wrap {
+  display: -webkit-box;
   display: flex;
 }
 
