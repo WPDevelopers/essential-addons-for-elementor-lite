@@ -9,7 +9,10 @@ jQuery(window).on('elementor/frontend/init', function () {
         var eventBgColor = element.data('event_bg_color');
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
+       
         //daysWeek1 = ['s1', 's2'];
+        //alert('Hello there');
+
         var calendar = $('#eael-event-calendar').fullCalendar({
             editable:false,
             draggable:false,
@@ -46,6 +49,26 @@ jQuery(window).on('elementor/frontend/init', function () {
                     $('.eaelec-modal-header span').css('color', event.color );
                 });
             }
+        });
+
+        $('.fc-right .fc-button-group').css('display', 'none');
+        $('.fc-right').append('<select class="eaelec_select_view form-control">' +
+                                '<option value="month">Month</option>' +
+                                '<option value="week">Week</option>' +
+                                '<option value="day">Day</option>' +
+                                '</select>');
+        
+        $(".eaelec_select_view").on("change", function(event) {
+            if($(this).val()==='month'){
+                $('#eael-event-calendar').fullCalendar('changeView', 'month');
+            }
+            if($(this).val()==='week'){
+                $('#eael-event-calendar').fullCalendar('changeView', 'agendaWeek');
+            }
+            if($(this).val()==='day'){
+                $('#eael-event-calendar').fullCalendar('changeView', 'agendaDay');
+            }
+            //$('#calendar').fullCalendar('gotoDate', "2018-"+this.value+"-1");
         });
 
         // When the user clicks on <span> (x), close the modal
