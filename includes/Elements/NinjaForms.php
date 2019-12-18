@@ -974,7 +974,7 @@ class NinjaForms extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .list-radio-wrap .nf-field-element li label:after, {{WRAPPER}} .listcheckbox-wrap .nf-field-element label:after, {{WRAPPER}} .checkbox-wrap .nf-field-label label:after' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1001,7 +1001,7 @@ class NinjaForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .listradio-wrap .nf-field-element label:after, {{WRAPPER}} .listcheckbox-wrap .nf-field-element label:after, {{WRAPPER}} .checkbox-wrap .nf-field-label label:after' => 'background: {{VALUE}}',
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1023,7 +1023,7 @@ class NinjaForms extends Widget_Base {
                 ],
                 'size_units'            => [ 'px' ],
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'border-width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .listradio-wrap .nf-field-element label:after, {{WRAPPER}} .listcheckbox-wrap .nf-field-element label:after, {{WRAPPER}} .checkbox-wrap .nf-field-label label:after' => 'border-width: {{SIZE}}{{UNIT}};'
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1038,7 +1038,7 @@ class NinjaForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .listradio-wrap .nf-field-element label:after, {{WRAPPER}} .listcheckbox-wrap .nf-field-element label:after, {{WRAPPER}} .checkbox-wrap .nf-field-label label:after' => 'border-color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1053,7 +1053,8 @@ class NinjaForms extends Widget_Base {
                 'type'                  => Controls_Manager::HEADING,
 				'condition'             => [
 					'custom_radio_checkbox' => 'yes',
-				],
+                ],
+                'separator' => 'before'
             ]
         );
 
@@ -1064,7 +1065,7 @@ class NinjaForms extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:before, {{WRAPPER}} .listcheckbox-wrap .nf-field-element label:after, {{WRAPPER}} .checkbox-wrap .nf-field-label label:after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1079,7 +1080,8 @@ class NinjaForms extends Widget_Base {
                 'type'                  => Controls_Manager::HEADING,
 				'condition'             => [
 					'custom_radio_checkbox' => 'yes',
-				],
+                ],
+                'separator' => 'before'
             ]
         );
 
@@ -1090,7 +1092,7 @@ class NinjaForms extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:before, {{WRAPPER}} .list-radio-wrap .nf-field-element li label:after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1117,13 +1119,129 @@ class NinjaForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:checked:before, {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:checked:before' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:checked:before, {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:checked:before, {{WRAPPER}} .listradio-wrap .nf-field-element label.nf-checked-label:before' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .checkbox-wrap .nf-field-label label.nf-checked-label:before, {{WRAPPER}} .listcheckbox-wrap .nf-field-element label.nf-checked-label:before'  => 'color: {{VALUE}};'
                 ],
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
+
+        $this->add_control(
+            'checked_checkbox_heading',
+            [
+                'label'                 => __( 'Checkbox', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+				'condition'             => [
+					'custom_radio_checkbox' => 'yes',
+                ],
+                'separator' => 'before'
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'checked_checkbox_position_x_axis',
+            [
+                'label'                 => __( 'Position: X Axis', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 50,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .checkbox-container.label-right label:before'   => 'left: -{{SIZE}}{{UNIT}};'
+                ],
+                'condition'             => [
+                    'custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'checked_checkbox_position_y_axis',
+            [
+                'label'                 => __( 'Position: Y Axis', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 50,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .checkbox-container.label-right label:before'   => 'top: {{SIZE}}{{UNIT}};'
+                ],
+                'condition'             => [
+                    'custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+
+        $this->add_control(
+            'checked_radio_buttons_heading',
+            [
+                'label'                 => __( 'Radio Buttons', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::HEADING,
+				'condition'             => [
+					'custom_radio_checkbox' => 'yes',
+                ],
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'checked_radio_position_x_axis',
+            [
+                'label'                 => __( 'Position: X Axis', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 50,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .listradio-wrap .nf-field-element label.nf-checked-label:before'   => 'left: -{{SIZE}}{{UNIT}};'
+                ],
+                'condition'             => [
+                    'custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'checked_radio_position_y_axis',
+            [
+                'label'                 => __( 'Position: Y Axis', 'essential-addons-elementor' ),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 50,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .listradio-wrap .nf-field-element label.nf-checked-label:before'   => 'top: {{SIZE}}{{UNIT}};'
+                ],
+                'condition'             => [
+                    'custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
 
         $this->end_controls_tab();
 
