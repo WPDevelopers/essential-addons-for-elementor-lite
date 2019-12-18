@@ -7460,6 +7460,54 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -16592,54 +16640,6 @@ typeof navigator === "object" && (function (global, factory) {
 
 }));
 
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -21037,6 +21037,103 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var AdvanceTabHandler = function($scope, $) {
+    var $currentTab = $scope.find(".eael-advance-tabs"),
+        $currentTabId = "#" + $currentTab.attr("id").toString();
+
+    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-nav > ul li")
+                .removeClass("active")
+                .addClass("inactive");
+            $(this).removeClass("inactive");
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-content div").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-content > div").removeClass(
+                "active"
+            );
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
+        var currentTabIndex = $(this).index();
+        var tabsContainer = $(this).closest(".eael-advance-tabs");
+
+        var tabsNav = $(tabsContainer)
+            .children(".eael-tabs-nav")
+            .children("ul")
+            .children("li");
+        var tabsContent = $(tabsContainer)
+            .children(".eael-tabs-content")
+            .children("div");
+
+        $(this)
+            .parent("li")
+            .addClass("active");
+
+        $(tabsNav)
+            .removeClass("active active-default")
+            .addClass("inactive");
+        $(this)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent)
+            .removeClass("active")
+            .addClass("inactive");
+        $(tabsContent)
+            .eq(currentTabIndex)
+            .addClass("active")
+            .removeClass("inactive");
+
+        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
+            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
+            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+
+        if($postGridGallery.length) {
+            $postGridGallery.isotope();
+        }
+
+        if($twitterfeedGallery.length) {
+            $twitterfeedGallery.isotope("layout");
+        }
+        
+        if($filterGallery.length) {
+            $filterGallery.isotope("layout");
+        }
+        
+        if($instaGallery.length) {
+            $instaGallery.isotope("layout");
+        }
+
+        $(tabsContent).each(function(index) {
+            $(this).removeClass("active-default");
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
+
 var advanced_data_table_active_cell = null;
 var advanced_data_table_drag_start_x,
 	advanced_data_table_drag_start_width,
@@ -21266,13 +21363,91 @@ var Advanced_Data_Table = function($scope, $) {
 	}
 };
 
+var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:advTable:export") {
+		// export
+		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			for (var j = 0; j < cols.length; j++) {
+				row.push(
+					JSON.stringify(
+						cols[j]
+							.querySelector("textarea")
+							.value.replace(/(\r\n|\n|\r)/gm, " ")
+							.trim()
+					)
+				);
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
+		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
+	} else if (event.target.dataset.event == "ea:advTable:import") {
+		// import
+		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
+		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
+		var csvArr = textarea.value.split("\n");
+		var header = "";
+		var body = "";
+
+		if (csvArr.length > 0) {
+			body += "<tbody>";
+			csvArr.forEach(function(row, index) {
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
+
+				if (cols.length > 0) {
+					if (enableHeader && index == 0) {
+						header += "<thead><tr>";
+						cols.forEach(function(col) {
+							header += "<th>" + col.replace(/(^"")|(^")|("$)|(""$)/g, "") + "</th>";
+						});
+						header += "</tr></thead>";
+					} else {
+						body += "<tr>";
+						cols.forEach(function(col) {
+							body += "<td>" + col.replace(/(^"")|(^")|("$)|(""$)/g, "") + "</td>";
+						});
+						body += "</tr>";
+					}
+				}
+			});
+			body += "</tbody>";
+
+			if (header.length > 0 || body.length > 0) {
+				model.setSetting("ea_adv_data_table_static_html", header + body);
+			}
+		}
+
+		textarea.value = "";
+	}
+};
+
 // Inline edit
 var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	var localRender = function() {
 		var interval = setInterval(function() {
 			if (view.el.querySelector(".ea-advanced-data-table")) {
 				var timeout;
-				var table = view.el.querySelector(".ea-advanced-data-table");
+				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
 
 				table.addEventListener("focusin", function(e) {
 					if (e.target.tagName.toLowerCase() == "textarea") {
@@ -21357,82 +21532,13 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		localRender();
 	});
 
-	// export
-	elementor.channels.editor.on("ea:advTable:export", function(e) {
-		var table = view.el.querySelector(".ea-advanced-data-table");
-		var rows = table.querySelectorAll("table tr");
-		var csv = [];
+	// export import handler
+	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
 
-		// generate csv
-		for (var i = 0; i < rows.length; i++) {
-			var row = [];
-			var cols = rows[i].querySelectorAll("th, td");
+	panel.el.addEventListener("click", handler);
 
-			for (var j = 0; j < cols.length; j++) {
-				row.push(
-					JSON.stringify(
-						cols[j]
-							.querySelector("textarea")
-							.value.replace(/(\r\n|\n|\r)/gm, " ")
-							.trim()
-					)
-				);
-			}
-
-			csv.push(row.join(","));
-		}
-
-		// download
-		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-		var download_link = parent.document.createElement("a");
-
-		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
-		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
-		download_link.href = window.URL.createObjectURL(csv_file);
-		download_link.style.display = "none";
-		parent.document.body.appendChild(download_link);
-		download_link.click();
-
-		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
-	});
-
-	// import
-	elementor.channels.editor.on("ea:advTable:import", function(e) {
-		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
-		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
-		var csvArr = textarea.value.split("\n");
-		var header = "";
-		var body = "";
-
-		if (csvArr.length > 0) {
-			body += "<tbody>";
-			csvArr.forEach(function(row, index) {
-				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
-
-				if (cols.length > 0) {
-					if (enableHeader && index == 0) {
-						header += "<thead><tr>";
-						cols.forEach(function(col) {
-							header += "<th>" + col.replace(/(^"")|(^")|("$)|(""$)/g, '') + "</th>";
-						});
-						header += "</tr></thead>";
-					} else {
-						body += "<tr>";
-						cols.forEach(function(col) {
-							body += "<td>" + col.replace(/(^"")|(^")|("$)|(""$)/g, '') + "</td>";
-						});
-						body += "</tr>";
-					}
-				}
-			});
-			body += "</tbody>";
-
-			if (header.length > 0 || body.length > 0) {
-				model.setSetting("ea_adv_data_table_static_html", header + body);
-			}
-		}
-
-		textarea.value = "";
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
 	});
 };
 
@@ -21784,10 +21890,10 @@ var dataTable = function($scope, $) {
 	}
 };
 
-var data_table_panel = function(panel, model, view) {
-	// export
-	elementor.channels.editor.on("ea:table:export", function(e) {
-		var table = view.el.querySelector(".eael-data-table");
+var Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:table:export") {
+		// export
+		var table = view.el.querySelector("#eael-data-table-" + model.attributes.id);
 		var rows = table.querySelectorAll("table tr");
 		var csv = [];
 
@@ -21815,6 +21921,16 @@ var data_table_panel = function(panel, model, view) {
 		download_link.click();
 
 		parent.document.querySelector(".eael-data-table-download-" + model.attributes.id).remove();
+	}
+};
+
+var data_table_panel = function(panel, model, view) {
+	var handler = Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
 	});
 };
 
@@ -21825,103 +21941,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	}
 
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
-});
-
-var AdvanceTabHandler = function($scope, $) {
-    var $currentTab = $scope.find(".eael-advance-tabs"),
-        $currentTabId = "#" + $currentTab.attr("id").toString();
-
-    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-nav > ul li")
-                .removeClass("active")
-                .addClass("inactive");
-            $(this).removeClass("inactive");
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-content div").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-content > div").removeClass(
-                "active"
-            );
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
-        var currentTabIndex = $(this).index();
-        var tabsContainer = $(this).closest(".eael-advance-tabs");
-
-        var tabsNav = $(tabsContainer)
-            .children(".eael-tabs-nav")
-            .children("ul")
-            .children("li");
-        var tabsContent = $(tabsContainer)
-            .children(".eael-tabs-content")
-            .children("div");
-
-        $(this)
-            .parent("li")
-            .addClass("active");
-
-        $(tabsNav)
-            .removeClass("active active-default")
-            .addClass("inactive");
-        $(this)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent)
-            .removeClass("active")
-            .addClass("inactive");
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass("active")
-            .removeClass("inactive");
-
-        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
-            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
-            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
-
-        if($postGridGallery.length) {
-            $postGridGallery.isotope();
-        }
-
-        if($twitterfeedGallery.length) {
-            $twitterfeedGallery.isotope("layout");
-        }
-        
-        if($filterGallery.length) {
-            $filterGallery.isotope("layout");
-        }
-        
-        if($instaGallery.length) {
-            $instaGallery.isotope("layout");
-        }
-
-        $(tabsContent).each(function(index) {
-            $(this).removeClass("active-default");
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-tabs.default",
-        AdvanceTabHandler
-    );
 });
 
 var FacebookFeed = function($scope, $) {
