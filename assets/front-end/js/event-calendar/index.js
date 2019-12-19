@@ -65,9 +65,9 @@ jQuery(window).on('elementor/frontend/init', function () {
                     $(".eaelec-modal-footer a").attr('href', event.url);
 
                     // Popup color
-                    $('.eaelec-modal-close').css('background-color', event.color );
-                    $('.eaelec-modal-header').css('border-left', '5px solid ' + event.color );
-                    $('.eaelec-modal-header span').css('color', event.color );
+                    $('.eaelec-modal-close').css('background-color', event.borderColor );
+                    $('.eaelec-modal-header').css('border-left', '5px solid ' + event.borderColor );
+                    $('.eaelec-modal-header span').css('color', event.borderColor );
                 });
             }
         });
@@ -78,6 +78,8 @@ jQuery(window).on('elementor/frontend/init', function () {
                                 '<option value="week">Week</option>' +
                                 '<option value="day">Day</option>' +
                                 '</select>');
+        
+        //$('.fc-center').prepend('<button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button>');
         
         $(".eaelec_select_view").on("change", function(event) {
             if($(this).val()==='month'){
