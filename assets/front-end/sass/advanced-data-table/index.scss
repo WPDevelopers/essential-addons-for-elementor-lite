@@ -7,11 +7,18 @@
 		padding: 0;
 	}
 
+	.ea-advanced-data-table-wrap-inner {
+		width: 100%;
+		overflow-y: auto;
+	}
+
 	.ea-advanced-data-table {
 		width: 100%;
 		border-collapse: collapse;
+		table-layout: fixed;
 
-		th {
+		th,
+		td {
 			background-color: transparent !important;
 		}
 
@@ -38,16 +45,6 @@
 					}
 				}
 			}
-
-			&.ea-advanced-data-table-editable {
-				th:after {
-					display: none;
-				}
-			}
-		}
-
-		td {
-			background-color: transparent !important;
 		}
 
 		// paginated table
@@ -71,6 +68,7 @@
 					right: 0;
 					top: 0;
 					width: 10px;
+					border: none;
 					cursor: col-resize;
 				}
 			}

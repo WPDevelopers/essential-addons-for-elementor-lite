@@ -118,6 +118,18 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_global_warning_text',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('Note: Pagination will be applied on Live Preview only.', 'essential-addons-elementor'),
+                'content_classes' => 'eael-warning',
+                'condition' => [
+                    'ea_adv_data_table_pagination' => 'yes',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         // export/import
@@ -575,7 +587,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:first-child' => 'color: {{VALUE}}',
                     '{{WRAPPER}} tbody td:first-child textarea' => 'color: {{VALUE}}',
@@ -591,7 +603,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:first-child' => 'background-color: {{VALUE}} !important',
                     '{{WRAPPER}} tbody td:first-child textarea' => 'background-color: {{VALUE}} !important',
@@ -608,7 +620,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:last-child' => 'color: {{VALUE}}',
                     '{{WRAPPER}} tbody td:last-child textarea' => 'color: {{VALUE}}',
@@ -624,7 +636,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:last-child' => 'background-color: {{VALUE}} !important',
                     '{{WRAPPER}} tbody td:last-child textarea' => 'background-color: {{VALUE}} !important',
@@ -641,7 +653,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(even)' => 'color: {{VALUE}}',
                     '{{WRAPPER}} tbody td:nth-child(even) textarea' => 'color: {{VALUE}}',
@@ -657,7 +669,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(even)' => 'background-color: {{VALUE}} !important',
                     '{{WRAPPER}} tbody td:nth-child(even) textarea' => 'background-color: {{VALUE}} !important',
@@ -674,7 +686,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(odd)' => 'color: {{VALUE}}',
                     '{{WRAPPER}} tbody td:nth-child(odd) textarea' => 'color: {{VALUE}}',
@@ -690,7 +702,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(odd)' => 'background-color: {{VALUE}} !important',
                     '{{WRAPPER}} tbody td:nth-child(odd) textarea' => 'background-color: {{VALUE}} !important',
@@ -707,7 +719,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(even)' => 'color: {{VALUE}}',
                     '{{WRAPPER}} tbody tr:nth-child(even) textarea' => 'color: {{VALUE}}',
@@ -723,7 +735,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(even)' => 'background-color: {{VALUE}} !important',
                     '{{WRAPPER}} tbody tr:nth-child(even) textarea' => 'background-color: {{VALUE}} !important',
@@ -740,7 +752,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(odd)' => 'color: {{VALUE}}',
                     '{{WRAPPER}} tbody tr:nth-child(odd) textarea' => 'color: {{VALUE}}',
@@ -756,7 +768,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background', 'essential-addons-elementor'),
                 'type' => Controls_Manager::COLOR,
-                'default' => 'rgba(255,255,255,0)',
+                'default' => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(odd)' => 'background-color: {{VALUE}} !important',
                     '{{WRAPPER}} tbody tr:nth-child(odd) textarea' => 'background-color: {{VALUE}} !important',
@@ -1327,7 +1339,7 @@ class Advanced_Data_Table extends Widget_Base
                 'class' => "ea-advanced-data-table-sortable",
             ]);
         }
-        
+
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-paginated",
@@ -1347,10 +1359,12 @@ class Advanced_Data_Table extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
 
         if ($settings['ea_adv_data_table_search'] == 'yes') {
-            echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" class="ea-advanced-data-table-search"></div>';
+            echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . __('Search...', 'essential-addons-elementor') . '" class="ea-advanced-data-table-search"></div>';
         }
 
-        echo '<table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->html_static_table($settings) . '</table>';
+        echo '<div class="ea-advanced-data-table-wrap-inner">
+            <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $this->html_static_table($settings) . '</table>
+            </div>';
 
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {
             if (Plugin::$instance->editor->is_edit_mode()) {

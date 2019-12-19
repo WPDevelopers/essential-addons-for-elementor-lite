@@ -21134,15 +21134,158 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var ContentTicker = function($scope, $) {
+    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+        $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
+        $items_tablet =
+            $contentTicker.data("items-tablet") !== undefined
+                ? $contentTicker.data("items-tablet")
+                : 1,
+        $items_mobile =
+            $contentTicker.data("items-mobile") !== undefined
+                ? $contentTicker.data("items-mobile")
+                : 1,
+        $margin =
+            $contentTicker.data("margin") !== undefined
+                ? $contentTicker.data("margin")
+                : 10,
+        $margin_tablet =
+            $contentTicker.data("margin-tablet") !== undefined
+                ? $contentTicker.data("margin-tablet")
+                : 10,
+        $margin_mobile =
+            $contentTicker.data("margin-mobile") !== undefined
+                ? $contentTicker.data("margin-mobile")
+                : 10,
+        $effect =
+            $contentTicker.data("effect") !== undefined
+                ? $contentTicker.data("effect")
+                : "slide",
+        $speed =
+            $contentTicker.data("speed") !== undefined
+                ? $contentTicker.data("speed")
+                : 400,
+        $autoplay =
+            $contentTicker.data("autoplay") !== undefined
+                ? $contentTicker.data("autoplay")
+                : 5000,
+        $loop =
+            $contentTicker.data("loop") !== undefined
+                ? $contentTicker.data("loop")
+                : false,
+        $grab_cursor =
+            $contentTicker.data("grab-cursor") !== undefined
+                ? $contentTicker.data("grab-cursor")
+                : false,
+        $pagination =
+            $contentTicker.data("pagination") !== undefined
+                ? $contentTicker.data("pagination")
+                : ".swiper-pagination",
+        $arrow_next =
+            $contentTicker.data("arrow-next") !== undefined
+                ? $contentTicker.data("arrow-next")
+                : ".swiper-button-next",
+        $arrow_prev =
+            $contentTicker.data("arrow-prev") !== undefined
+                ? $contentTicker.data("arrow-prev")
+                : ".swiper-button-prev",
+        $pause_on_hover =
+            $contentTicker.data("pause-on-hover") !== undefined
+                ? $contentTicker.data("pause-on-hover")
+                : "",
+        $contentTickerOptions = {
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
+                },
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
+                }
+            }
+        };
+
+    var $contentTickerSlider = new Swiper(
+        $contentTicker,
+        $contentTickerOptions
+    );
+    if ($autoplay === 0) {
+        $contentTickerSlider.autoplay.stop();
+    }
+    if ($pause_on_hover && $autoplay !== 0) {
+        $contentTicker.on("mouseenter", function() {
+            $contentTickerSlider.autoplay.stop();
+        });
+        $contentTicker.on("mouseleave", function() {
+            $contentTickerSlider.autoplay.start();
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-content-ticker.default",
+        ContentTicker
+    );
+});
 var advanced_data_table_active_cell = null;
 var advanced_data_table_drag_start_x,
 	advanced_data_table_drag_start_width,
 	advanced_data_table_drag_el,
 	advanced_data_table_dragging = false;
 
+var Advanced_Data_Table_Update_Model = function(table, model) {
+	// clone current table
+	var origTable = table.cloneNode(true);
+
+	// remove editable area
+	origTable.querySelectorAll("th, td").forEach(function(el) {
+		var value = el.querySelector("textarea").value;
+		el.innerHTML = value;
+	});
+
+	// disable elementor remote server render
+	model.remoteRender = false;
+
+	// update backbone model
+	model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
 var Advanced_Data_Table = function($scope, $) {
 	var table = $scope.context.querySelector(".ea-advanced-data-table");
 	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
+	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
 	var classCollection = {};
 
 	if (isEditMode) {
@@ -21185,12 +21328,11 @@ var Advanced_Data_Table = function($scope, $) {
 		if (search) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
-				var paginated =
-					table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+				var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 
 				if (table.rows.length > 1) {
 					if (input.length > 0) {
-						table.parentNode.querySelector(".ea-advanced-data-table-pagination").style.display = "none";
+						pagination.style.display = "none";
 
 						for (var i = 1; i < table.rows.length; i++) {
 							var matchFound = false;
@@ -21211,7 +21353,7 @@ var Advanced_Data_Table = function($scope, $) {
 							}
 						}
 					} else {
-						table.parentNode.querySelector(".ea-advanced-data-table-pagination").style.display = "";
+						pagination.style.display = "";
 
 						if (paginated) {
 							var currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
@@ -21242,8 +21384,7 @@ var Advanced_Data_Table = function($scope, $) {
 					var index = e.target.cellIndex;
 					var desc = e.target.classList.toggle("desc");
 					var switching = true;
-					var paginated =
-						table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+					var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 					var currentPage = 1;
 					var startIndex = 1;
 					var endIndex = table.rows.length - 1;
@@ -21295,7 +21436,6 @@ var Advanced_Data_Table = function($scope, $) {
 
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
-			var pagination = table.parentNode.querySelector(".ea-advanced-data-table-pagination");
 			var paginationHTML = "";
 			var currentPage = 1;
 			var startIndex = 1;
@@ -21563,6 +21703,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -21582,6 +21725,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -21605,6 +21751,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -21628,6 +21777,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -21643,6 +21795,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							table.deleteRow(index);
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -21660,6 +21815,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				}
@@ -21679,125 +21837,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
-var ContentTicker = function($scope, $) {
-    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-        $items =
-            $contentTicker.data("items") !== undefined
-                ? $contentTicker.data("items")
-                : 1,
-        $items_tablet =
-            $contentTicker.data("items-tablet") !== undefined
-                ? $contentTicker.data("items-tablet")
-                : 1,
-        $items_mobile =
-            $contentTicker.data("items-mobile") !== undefined
-                ? $contentTicker.data("items-mobile")
-                : 1,
-        $margin =
-            $contentTicker.data("margin") !== undefined
-                ? $contentTicker.data("margin")
-                : 10,
-        $margin_tablet =
-            $contentTicker.data("margin-tablet") !== undefined
-                ? $contentTicker.data("margin-tablet")
-                : 10,
-        $margin_mobile =
-            $contentTicker.data("margin-mobile") !== undefined
-                ? $contentTicker.data("margin-mobile")
-                : 10,
-        $effect =
-            $contentTicker.data("effect") !== undefined
-                ? $contentTicker.data("effect")
-                : "slide",
-        $speed =
-            $contentTicker.data("speed") !== undefined
-                ? $contentTicker.data("speed")
-                : 400,
-        $autoplay =
-            $contentTicker.data("autoplay") !== undefined
-                ? $contentTicker.data("autoplay")
-                : 5000,
-        $loop =
-            $contentTicker.data("loop") !== undefined
-                ? $contentTicker.data("loop")
-                : false,
-        $grab_cursor =
-            $contentTicker.data("grab-cursor") !== undefined
-                ? $contentTicker.data("grab-cursor")
-                : false,
-        $pagination =
-            $contentTicker.data("pagination") !== undefined
-                ? $contentTicker.data("pagination")
-                : ".swiper-pagination",
-        $arrow_next =
-            $contentTicker.data("arrow-next") !== undefined
-                ? $contentTicker.data("arrow-next")
-                : ".swiper-button-next",
-        $arrow_prev =
-            $contentTicker.data("arrow-prev") !== undefined
-                ? $contentTicker.data("arrow-prev")
-                : ".swiper-button-prev",
-        $pause_on_hover =
-            $contentTicker.data("pause-on-hover") !== undefined
-                ? $contentTicker.data("pause-on-hover")
-                : "",
-        $contentTickerOptions = {
-            direction: "horizontal",
-            loop: $loop,
-            speed: $speed,
-            effect: $effect,
-            slidesPerView: $items,
-            spaceBetween: $margin,
-            grabCursor: $grab_cursor,
-            paginationClickable: true,
-            autoHeight: true,
-            autoplay: {
-                delay: $autoplay
-            },
-            pagination: {
-                el: $pagination,
-                clickable: true
-            },
-            navigation: {
-                nextEl: $arrow_next,
-                prevEl: $arrow_prev
-            },
-            breakpoints: {
-                // when window width is <= 480px
-                480: {
-                    slidesPerView: $items_mobile,
-                    spaceBetween: $margin_mobile
-                },
-                // when window width is <= 640px
-                768: {
-                    slidesPerView: $items_tablet,
-                    spaceBetween: $margin_tablet
-                }
-            }
-        };
-
-    var $contentTickerSlider = new Swiper(
-        $contentTicker,
-        $contentTickerOptions
-    );
-    if ($autoplay === 0) {
-        $contentTickerSlider.autoplay.stop();
-    }
-    if ($pause_on_hover && $autoplay !== 0) {
-        $contentTicker.on("mouseenter", function() {
-            $contentTickerSlider.autoplay.stop();
-        });
-        $contentTicker.on("mouseleave", function() {
-            $contentTickerSlider.autoplay.start();
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-content-ticker.default",
-        ContentTicker
-    );
-});
 var CountDown = function($scope, $) {
     var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
         $countdown_id =
@@ -22266,6 +22305,28 @@ jQuery(window).on("elementor/frontend/init", function() {
     });
 })(jQuery);
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -22312,28 +22373,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
     );
 });
 
@@ -22392,84 +22431,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         "frontend/element_ready/eael-progress-bar.default",
         ProgressBar
     );
-});
-
-jQuery(document).ready(function() {
-    // scroll func
-    jQuery(window).scroll(function() {
-        var winScroll =
-            document.body.scrollTop || document.documentElement.scrollTop;
-        var height =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-
-        jQuery(".eael-reading-progress-fill").css({
-            width: scrolled + "%"
-        });
-    });
-
-    // live prev
-    if (isEditMode) {
-        elementor.settings.page.addChangeCallback(
-            "eael_ext_reading_progress",
-            function(newValue) {
-                var $settings = elementor.settings.page.getSettings();
-
-                if (newValue == "yes") {
-                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
-                        jQuery("body").append(
-                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
-                                $settings.settings
-                                    .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
-                                $settings.settings
-                                    .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div></div>'
-                        );
-                    }
-
-                    jQuery(".eael-reading-progress-wrap")
-                        .addClass("eael-reading-progress-wrap-local")
-                        .removeClass(
-                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
-                        );
-                } else {
-                    jQuery(".eael-reading-progress-wrap").removeClass(
-                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
-                    );
-
-                    if (
-                        $settings.settings
-                            .eael_ext_reading_progress_has_global == true
-                    ) {
-                        jQuery(".eael-reading-progress-wrap").addClass(
-                            "eael-reading-progress-wrap-global"
-                        );
-                    } else {
-                        jQuery(".eael-reading-progress-wrap").addClass(
-                            "eael-reading-progress-wrap-disabled"
-                        );
-                    }
-                }
-            }
-        );
-
-        elementor.settings.page.addChangeCallback(
-            "eael_ext_reading_progress_position",
-            function(newValue) {
-                elementor.settings.page.setSettings(
-                    "eael_ext_reading_progress_position",
-                    newValue
-                );
-                jQuery(".eael-reading-progress")
-                    .removeClass(
-                        "eael-reading-progress-top eael-reading-progress-bottom"
-                    )
-                    .addClass("eael-reading-progress-" + newValue);
-            }
-        );
-    }
 });
 
 var eaelsvPosition = '';
@@ -22660,6 +22621,84 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
+
+jQuery(document).ready(function() {
+    // scroll func
+    jQuery(window).scroll(function() {
+        var winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+        var height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+
+        jQuery(".eael-reading-progress-fill").css({
+            width: scrolled + "%"
+        });
+    });
+
+    // live prev
+    if (isEditMode) {
+        elementor.settings.page.addChangeCallback(
+            "eael_ext_reading_progress",
+            function(newValue) {
+                var $settings = elementor.settings.page.getSettings();
+
+                if (newValue == "yes") {
+                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
+                        jQuery("body").append(
+                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div></div>'
+                        );
+                    }
+
+                    jQuery(".eael-reading-progress-wrap")
+                        .addClass("eael-reading-progress-wrap-local")
+                        .removeClass(
+                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
+                        );
+                } else {
+                    jQuery(".eael-reading-progress-wrap").removeClass(
+                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
+                    );
+
+                    if (
+                        $settings.settings
+                            .eael_ext_reading_progress_has_global == true
+                    ) {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-global"
+                        );
+                    } else {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-disabled"
+                        );
+                    }
+                }
+            }
+        );
+
+        elementor.settings.page.addChangeCallback(
+            "eael_ext_reading_progress_position",
+            function(newValue) {
+                elementor.settings.page.setSettings(
+                    "eael_ext_reading_progress_position",
+                    newValue
+                );
+                jQuery(".eael-reading-progress")
+                    .removeClass(
+                        "eael-reading-progress-top eael-reading-progress-bottom"
+                    )
+                    .addClass("eael-reading-progress-" + newValue);
+            }
+        );
+    }
+});
 
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
