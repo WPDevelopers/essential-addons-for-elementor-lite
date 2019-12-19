@@ -126,8 +126,6 @@ class Bootstrap
             add_filter( 'the_content', array( $this, 'eael_table_of_content' ) );
         }
 
-
-
         // Admin
         if (is_admin()) {
             // Admin
