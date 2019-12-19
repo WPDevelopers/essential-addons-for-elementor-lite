@@ -32,13 +32,34 @@ jQuery(window).on('elementor/frontend/init', function () {
             eventRender: function (event, element) {
                 element.attr('href', 'javascript:void(0);');
                 element.click(function() {
-                    eaelevModal.style.display = "block";
-                    /*
-                    $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
-                    $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
-                    */
-                    $("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format('MMM Do, h:mm A'));
-                    $("span.eaelec-event-date-end").html('<i class="eicon-calendar"></i> ' + moment(event.end).format('MMM Do, h:mm A'));
+                    eaelevModal.style.display = "block"; 
+                    if(event.allDay=='yes'){
+                        $("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format('MMM Do'));
+                    } else{
+                        if(moment(event.start).isSame(Date.now(), 'day')==true){
+                            $("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format('h:mm A'));
+                        }
+                        if(moment(event.start).format('MM-DD-YYYY')==moment(new Date()).add(1,'days').format('MM-DD-YYYY')){
+                            $("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format('h:mm A'));
+                        }
+                        if((moment(event.start).format('MM-DD-YYYY') < moment(new Date()).format('MM-DD-YYYY')) || (moment(event.start).format('MM-DD-YYYY') > moment(new Date()).add(1,'days').format('MM-DD-YYYY'))){
+                            $("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format('MMM Do, h:mm A'));
+                        }
+                        
+                        if(moment(event.end).isSame(Date.now(), 'day')==true){
+                            $("span.eaelec-event-date-end").html('- ' + moment(event.end).format('h:mm A'));
+                        }
+                        if( (moment(event.start).format('MM-DD-YYYY')!=moment(new Date()).add(1,'days').format('MM-DD-YYYY')) && (moment(event.end).format('MM-DD-YYYY')==moment(new Date()).add(1,'days').format('MM-DD-YYYY'))){
+                            $("span.eaelec-event-date-end").html('- Tomorrow, ' + moment(event.end).format('h:mm A'));
+                        }
+                        if( (moment(event.start).format('MM-DD-YYYY')==moment(new Date()).add(1,'days').format('MM-DD-YYYY')) && (moment(event.end).format('MM-DD-YYYY')==moment(new Date()).add(1,'days').format('MM-DD-YYYY'))){
+                            $("span.eaelec-event-date-end").html('- ' + moment(event.end).format('h:mm A'));
+                        }
+                        if(moment(event.end).format('MM-DD-YYYY') > moment(new Date()).add(1,'days').format('MM-DD-YYYY')){
+                            $("span.eaelec-event-date-end").html('- ' + moment(event.end).format('MMM Do, h:mm A'));
+                        }
+                    }
+                    
                     $(".eaelec-modal-header h2").html(event.title);
                     $(".eaelec-modal-body p").html(event.description);
                     $(".eaelec-modal-footer a").attr('href', event.url);
@@ -74,6 +95,10 @@ jQuery(window).on('elementor/frontend/init', function () {
         // When the user clicks on <span> (x), close the modal
         eaelevSpan.onclick = function() {
             eaelevModal.style.display = "none";
+        }
+
+        function eaelecChkTomorrow(){
+            var date1_tomorrow = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate() + 1);
         }
     });
 });
