@@ -815,6 +815,7 @@
                         'textColor'     => $event['eael_event_text_color'],
                         'color'         => $event['eael_event_bg_color'],
                         'url'           => $event["eael_event_link"]["url"],
+                        'allDay'        => $event['eael_event_all_day'],
                         'dayNames'      => ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
                             'Thursday', 'Friday', 'Saturday']
                     );
@@ -839,7 +840,7 @@
                     <div class="eaelec-modal-header">
                         <span class="eaelec-modal-close">&times;</span>
                         <h2></h2>
-                        <span class="eaelec-event-date-start"></span> - 
+                        <span class="eaelec-event-date-start"></span>
                         <span class="eaelec-event-date-end"></span>
                     </div>
                     <div class="eaelec-modal-body">
