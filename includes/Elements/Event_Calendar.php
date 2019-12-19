@@ -128,7 +128,7 @@
                 [
                     'label' => __('Event Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#00BFFF',
+                    'default'   => '#FFF',
                     /*
                     'selectors' => [
                         '{{WRAPPER}} .eaelec-modal-close' => 'background: {{VALUE}};',
@@ -144,7 +144,7 @@
                 [
                     'label' => __('Event Text Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#242424',
+                    'default'   => '#555',
                 ]
             );
 
@@ -153,7 +153,7 @@
                 [
                     'label' => __('Event Border Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#9400D3',
+                    'default'   => '#6030FF',
                 ]
             );
 
@@ -594,7 +594,7 @@
                 [
                     'label' => __('Button Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#EAEAEA',
+                    'default'   => '#FFF',
                     'selectors' => [
                         '{{WRAPPER}} .fc-toolbar .fc-button' => 'background: {{VALUE}}!important',
                     ],
@@ -664,7 +664,7 @@
                 [
                     'label' => __('Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#EAEAEA',
+                    'default'   => '#F9F9F9',
                     'selectors' => [
                         '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
                     ],
@@ -720,7 +720,7 @@
                 [
                     'label' => __('Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default'   => '#EAEAEA',
+                    'default'   => '#F9F9F9',
                     'selectors' => [
                         '{{WRAPPER}} .fc-day-number' => 'background: {{VALUE}}',
                     ],

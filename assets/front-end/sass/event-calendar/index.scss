@@ -8,6 +8,43 @@
 
 .eael-event-calendar-wrapper {
   overflow: hidden;
+  font-family: roboto;
+}
+
+.fc-day-grid-event {
+  margin-top: 2px;
+  padding: 8px;
+  font-family: roboto;
+  font-size: 12px;
+  border-left-width:5px;
+  background-color: #FFF!important;
+}
+
+.fc-row table thead:first-child tr:first-child th {
+  font-family: roboto;
+  font-size:14px;
+  padding:10px;
+}
+
+.fc-day-number {
+  font-family: roboto;
+  font-size: 14px;
+  float: center!important;
+}
+
+.eaelec_select_view{
+  box-sizing: border-box;
+  height: 2.5em;
+  padding: 0 .6em;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: roboto;
+  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1)rgba(0,0,0,.25);
+  color:#333;
+  text-shadow: 0 1px 1px rgba(255,255,255,.75);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+  border-radius:4px;
 }
 
 /* The Modal Started */
@@ -121,5 +158,10 @@
     padding: 0px 10px 0 35px;
     color: white;
     border: 0px solid #FF0000;
+  }
+
+  .eaelec-event-date-start, .eaelec-event-date-end{
+    font-family:roboto;
+    font-size: 12px;
   }
   /* Modal Ended */
