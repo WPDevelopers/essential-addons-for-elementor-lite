@@ -8,6 +8,7 @@
   width: 35vw !important;
   margin-left: 10px !important;
   padding-bottom: 20px;
+  top: 50%;
 }
 .eael-toc.eael-sticky {
   position: fixed;

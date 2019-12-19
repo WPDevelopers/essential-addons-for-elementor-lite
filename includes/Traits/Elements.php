@@ -173,17 +173,68 @@ trait Elements
         }
         $prepare_content = $this->eael_prepare_table_of_content( $content, $support_tag );
 
+//        $html .= "<div id='eael-toc' class='eael-toc'>";
+//        $html .= "<span class='eael-toc-close'>×</span>";
+//            $html .= "<div class='eael-toc-header'>";
+//                $html .= "<h2 class='eael-toc-title'>".__('Table of Contents','essential-addons-elementor')."</h2>";
+//            $html .= "</div>";
+//            $html .= "<div class='eael-toc-body'>";
+//                $html .= $this->eael_list_hierarchy($content,$support_tag);
+//            $html .= "</div>";
+//        $html .= "</div>";
+
+        $html = '<div class="main-content">'.$prepare_content.'</div>';
+        return $html;
+    }
+
+    public function eael_table_of_content_editor (){
+        $content  = '';
+        if(!is_singular()){
+            return $content;
+        }
+
+        $page_settings_manager = Settings_Manager::get_settings_managers('page');
+        $page_settings_model = $page_settings_manager->get_model(get_the_ID());
+        $global_settings = get_option('eael_global_settings');
+        $html = '';
+
+        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])) {
+            return $content;
+        }
+
+        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes') {
+            if(get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
+                return $content;
+            } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
+                return $content;
+            } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
+                return $content;
+            } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
+                return $content;
+            }
+        }
+
+        $content = get_the_content();
+
+        $support_tag = $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag');
+        if(!empty($global_settings['table_of_content'])) {
+            $support_tag = $global_settings['table_of_content']['supported_heading_tag'];
+        }
+        $support_tag = implode( ',', $support_tag );
+        if( !preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER )){
+            return $content;
+        }
+        $prepare_content = $this->eael_prepare_table_of_content( $content, $support_tag );
+        $html = '';
         $html .= "<div id='eael-toc' class='eael-toc'>";
-        $html .= "<span class='eael-toc-close'>×</span>";
+            $html .= "<span class='eael-toc-close'>×</span>";
             $html .= "<div class='eael-toc-header'>";
-                $html .= "<h2 class='eael-toc-title'>".__('Table of Contents','essential-addons-elementor')."</h2>";
+                 $html .= "<h2 class='eael-toc-title'>".__('Table of Contents','essential-addons-elementor')."</h2>";
             $html .= "</div>";
-            $html .= "<div class='eael-toc-body'>";
+                $html .= "<div class='eael-toc-body'>";
                 $html .= $this->eael_list_hierarchy($content,$support_tag);
             $html .= "</div>";
         $html .= "</div>";
-
-        $html .= '<div class="main-content">'.$prepare_content.'</div>';
-        return $html;
+        echo $html;
     }
 }

@@ -34,7 +34,10 @@
                     'default'       => 'no',
                     'label_on'      => __('Yes', 'essential-addons-elementor'),
                     'label_off'     => __('No', 'essential-addons-elementor'),
-                    'return_value'  => 'yes',
+                    'return_value'  => 'Yes',
+                    'selectors' => [
+                        '.eael-toc'  => 'display: none',
+                    ],
                 ]
             );
 

@@ -34,9 +34,10 @@ jQuery(document).ready(function() {
         ).each(function() {
             var currLink = jQuery(this);
             var refElement = jQuery(currLink.attr("href"));
-            if (
-                refElement.position().top <= scrollPos &&
-                refElement.position().top + refElement.height() > scrollPos
+            var position =  refElement.position();
+            if (position &&
+                position.top <= scrollPos &&
+                position.top + refElement.height() > scrollPos
             ) {
                 jQuery(".eael-toc .eael-toc-list a").removeClass("active");
                 currLink.addClass("active");
@@ -66,5 +67,11 @@ jQuery(document).ready(function() {
             close.text('X');
         }
     });
+
+    if (isEditMode) {
+        elementor.settings.page.addChangeCallback( 'menu_item_color', function(){
+
+        } );
+    }
 
 });
