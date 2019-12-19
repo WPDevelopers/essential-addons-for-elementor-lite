@@ -49,7 +49,7 @@
 
             if (isset($global_settings['table_of_content']['enabled']) && ($global_settings['table_of_content']['enabled'] == true) && get_the_ID() != $global_settings['table_of_content']['post_id'] && get_post_status($global_settings['table_of_content']['post_id']) == 'publish') {
                 $element->add_control(
-                    'eael_global_warning_text',
+                    'eael_ext_toc_global_warning_text',
                     [
                         'type' => Controls_Manager::RAW_HTML,
                         'raw' => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor'),

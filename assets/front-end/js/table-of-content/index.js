@@ -50,9 +50,21 @@ jQuery(document).ready(function() {
     var sticky = eaelToc.offsetTop;
     function eaelSticky() {
         if ( window.pageYOffset >= sticky ) {
-            eaelToc.classList.add("eael-sticky")
+            eaelToc.classList.add("eael-sticky");
         } else {
             eaelToc.classList.remove("eael-sticky");
         }
     }
+
+    jQuery('.eael-toc-close').click(function(e) {
+        jQuery('.eael-toc').toggleClass('expanded');
+        var checkclass = jQuery( ".eael-toc" ).hasClass( "expanded" );
+        var close =  jQuery('.eael-toc-close');
+        if(checkclass){
+            close.text('Table of content');
+        }else{
+            close.text('X');
+        }
+    });
+
 });

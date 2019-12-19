@@ -6,7 +6,7 @@ const cleancss = require("gulp-clean-css");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
-var runSequence = require('run-sequence');
+const runsequence = require('run-sequence');
 
 /**
  * Primary Compass Configurations
@@ -124,13 +124,13 @@ gulp.task("combineMinJS", function() {
 });
 
 gulp.task('buildcss', function(callback) {
-    runSequence('compileSCSS',
+    runsequence('compileSCSS',
         'minifyCSS','combineCSS','combineMinCSS',
         callback);
 });
 
 gulp.task('buildjs', function(callback) {
-    runSequence('minifyJS',
+    runsequence('minifyJS',
         'combineJS','combineMinJS',
         callback);
 });

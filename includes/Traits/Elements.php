@@ -163,7 +163,11 @@ trait Elements
                 return $content;
             }
         }
-        $support_tag = 'h1,h2,h3,h4,h5,h6';
+        $support_tag = $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag');
+        if(!empty($global_settings['table_of_content'])) {
+            $support_tag = $global_settings['table_of_content']['supported_heading_tag'];
+        }
+        $support_tag = implode( ',', $support_tag );
         if( !preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER )){
             return $content;
         }

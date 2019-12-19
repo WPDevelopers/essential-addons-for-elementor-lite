@@ -13,6 +13,21 @@
         position: fixed;
         top: 50px;
     }
+    &.expanded {
+        width: 12%!important;
+        overflow-y: visible;
+        padding-bottom: 0;
+        .eael-toc-header, .eael-toc-body {
+            display: none;
+        }
+        .eael-toc-close {
+            padding: 0 2px;
+            border-radius: unset;
+            width: 100%;
+            border: none;
+            font-size: 18px;
+        }
+    }
 
     .eael-toc-header {
         .eael-toc-title {
@@ -36,6 +51,11 @@
                     display: table-cell;
                     padding-right: 0.3em;
                 }
+                a {
+                    &.active{
+                        color:blue;
+                    }
+                }
             }
         }
     }
@@ -46,14 +66,16 @@
         background: #d30c5c;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
         right: 0;
-        top: 0px;
+        top: 0;
         line-height: 26px;
         text-align: center;
         z-index: 99999;
         border-radius: 20px;
         color: white;
         font-weight: 500;
-        border: 1px solid black;
+        font-size: 1.8rem;
+        border: 1px solid #fff;
+        cursor: pointer;
     }
 
 }
