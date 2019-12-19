@@ -4,9 +4,33 @@ var advanced_data_table_drag_start_x,
 	advanced_data_table_drag_el,
 	advanced_data_table_dragging = false;
 
+var Advanced_Data_Table_Update_Model = function(table, model) {
+	// clone current table
+	var origTable = table.cloneNode(true);
+
+	// remove editable area
+	origTable.querySelectorAll("th, td").forEach(function(el) {
+		var value = el.querySelector("textarea").value;
+		el.innerHTML = value;
+	});
+
+	// disable elementor remote server render
+	model.remoteRender = false;
+
+	// update backbone model
+	model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
 var Advanced_Data_Table = function($scope, $) {
 	var table = $scope.context.querySelector(".ea-advanced-data-table");
 	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
+	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
 	var classCollection = {};
 
 	if (isEditMode) {
@@ -49,12 +73,11 @@ var Advanced_Data_Table = function($scope, $) {
 		if (search) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
-				var paginated =
-					table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+				var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 
 				if (table.rows.length > 1) {
 					if (input.length > 0) {
-						table.parentNode.querySelector(".ea-advanced-data-table-pagination").style.display = "none";
+						pagination.style.display = "none";
 
 						for (var i = 1; i < table.rows.length; i++) {
 							var matchFound = false;
@@ -75,7 +98,7 @@ var Advanced_Data_Table = function($scope, $) {
 							}
 						}
 					} else {
-						table.parentNode.querySelector(".ea-advanced-data-table-pagination").style.display = "";
+						pagination.style.display = "";
 
 						if (paginated) {
 							var currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
@@ -106,8 +129,7 @@ var Advanced_Data_Table = function($scope, $) {
 					var index = e.target.cellIndex;
 					var desc = e.target.classList.toggle("desc");
 					var switching = true;
-					var paginated =
-						table.parentNode.querySelector(".ea-advanced-data-table-pagination").querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+					var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 					var currentPage = 1;
 					var startIndex = 1;
 					var endIndex = table.rows.length - 1;
@@ -159,7 +181,6 @@ var Advanced_Data_Table = function($scope, $) {
 
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
-			var pagination = table.parentNode.querySelector(".ea-advanced-data-table-pagination");
 			var paginationHTML = "";
 			var currentPage = 1;
 			var startIndex = 1;
@@ -427,6 +448,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -446,6 +470,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -469,6 +496,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -492,6 +522,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -507,6 +540,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							table.deleteRow(index);
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				},
@@ -524,6 +560,9 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// update model
+							Advanced_Data_Table_Update_Model(table, element.options.model);
 						}
 					}
 				}
