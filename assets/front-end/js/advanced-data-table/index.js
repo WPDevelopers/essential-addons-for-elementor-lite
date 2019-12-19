@@ -101,7 +101,7 @@ var Advanced_Data_Table = function($scope, $) {
 						pagination.style.display = "";
 
 						if (paginated) {
-							var currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 							var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 							var endIndex = currentPage * table.dataset.itemsPerPage;
 
@@ -135,7 +135,7 @@ var Advanced_Data_Table = function($scope, $) {
 					var endIndex = table.rows.length - 1;
 
 					if (paginated) {
-						currentPage = table.parentNode.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 						endIndex =
 							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
