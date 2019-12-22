@@ -21005,67 +21005,6 @@ return $;
     });
 })(jQuery);
 
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -21160,6 +21099,73 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",
         AdvanceTabHandler
+    );
+});
+
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
     );
 });
 
@@ -21282,73 +21288,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
     var $_this = $scope.find('.eael-data-table-wrap'),
         $id = $_this.data('table_id');
@@ -21427,6 +21366,67 @@ jQuery(window).on('elementor/frontend/init', function() {
     }
 
     elementorFrontend.hooks.addAction('frontend/element_ready/eael-data-table.default', dataTable);
+});
+
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
 });
 
 jQuery(window).on('elementor/frontend/init', function () {
@@ -22205,83 +22205,82 @@ function RunStickyPlayer(elem) {
     ovrplyer.start();
 }
 
-jQuery(document).ready(function() {
-    var toc_links = jQuery(".eael-toc .eael-toc-body .eael-toc-list a");
-    toc_links.on("click", function(e) {
-        e.preventDefault();
-        jQuery(document).off("scroll");
-        toc_links.each(function() {
-            jQuery(this).removeClass("active");
+( function( $){
+    jQuery(document).ready(function() {
+        var toc_links = $(".eael-toc .eael-toc-body .eael-toc-list a");
+        toc_links.on("click", function(e) {
+            e.preventDefault();
+            $(document).off("scroll");
+            toc_links.each(function() {
+                $(this).removeClass("active");
+            });
+            $(this).addClass("active");
+            var target = this.hash,
+                $target = jQuery(target);
+            $("html, body")
+                .stop()
+                .animate(
+                    {
+                        scrollTop: $target.offset().top
+                    },
+                    600,
+                    "swing",
+                    function() {
+                        window.location.hash = target;
+                        $(document).on("scroll", onScroll);
+                    }
+                );
         });
-        jQuery(this).addClass("active");
-        var target = this.hash,
-            $target = jQuery(target);
-        jQuery("html, body")
-            .stop()
-            .animate(
-                {
-                    scrollTop: $target.offset().top
-                },
-                600,
-                "swing",
-                function() {
-                    window.location.hash = target;
-                    jQuery(document).on("scroll", onScroll);
+
+        $(document).on("scroll", onScroll);
+
+        function onScroll(){
+
+            var scrollPos = jQuery(document).scrollTop();
+            $(".eael-toc .eael-toc-body .eael-toc-list a").each( function() {
+                var currLink = $(this);
+                var refElement = $(currLink.attr("href"));
+                var position =  refElement.position();
+
+                if ( position &&
+                    position.top <= scrollPos &&
+                    position.top + refElement.height() > scrollPos
+                ) {
+                    $(".eael-toc .eael-toc-list a").removeClass("active");
+                    currLink.addClass("active");
                 }
-            );
-    });
+            });
+        }
 
-    jQuery(document).on("scroll", onScroll);
+        window.onscroll = function() {eaelSticky()};
 
-    function onScroll(){
-        var scrollPos = jQuery(document).scrollTop();
+        var eaelToc = document.getElementById("eael-toc");
+        var sticky = (eaelToc)?eaelToc.offsetTop:0;
 
-        jQuery(
-            ".eael-toc .eael-toc-body .eael-toc-list a"
-        ).each(function() {
-            var currLink = jQuery(this);
-            var refElement = jQuery(currLink.attr("href"));
-            var position =  refElement.position();
-            if (position &&
-                position.top <= scrollPos &&
-                position.top + refElement.height() > scrollPos
-            ) {
-                jQuery(".eael-toc .eael-toc-list a").removeClass("active");
-                currLink.addClass("active");
+        function eaelSticky() {
+            if(!eaelToc){
+                return ;
+            }
+            if ( window.pageYOffset >= sticky ) {
+                eaelToc.classList.add("eael-sticky");
+            } else {
+                eaelToc.classList.remove("eael-sticky");
+            }
+        }
+
+        $('.eael-toc-close').click(function(e) {
+            $('.eael-toc').toggleClass('expanded');
+            var checkClass = $( ".eael-toc" ).hasClass( "expanded" );
+            var close =  $('.eael-toc-close');
+            if(checkClass){
+                close.text('Table of content');
+            }else{
+                close.text('X');
             }
         });
-    }
 
-    window.onscroll = function() {eaelSticky()};
-
-    var eaelToc = document.getElementById("eael-toc");
-    var sticky = eaelToc.offsetTop;
-    function eaelSticky() {
-        if ( window.pageYOffset >= sticky ) {
-            eaelToc.classList.add("eael-sticky");
-        } else {
-            eaelToc.classList.remove("eael-sticky");
-        }
-    }
-
-    jQuery('.eael-toc-close').click(function(e) {
-        jQuery('.eael-toc').toggleClass('expanded');
-        var checkclass = jQuery( ".eael-toc" ).hasClass( "expanded" );
-        var close =  jQuery('.eael-toc-close');
-        if(checkclass){
-            close.text('Table of content');
-        }else{
-            close.text('X');
-        }
     });
-
-    if (isEditMode) {
-        elementor.settings.page.addChangeCallback( 'menu_item_color', function(){
-
-        } );
-    }
-
-});
+})(jQuery);
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
         $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");

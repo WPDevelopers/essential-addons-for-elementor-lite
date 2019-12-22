@@ -6,6 +6,7 @@
     }
 
     use \Elementor\Controls_Manager;
+    use Elementor\Group_Control_Border;
 
     class Table_of_Content {
 
@@ -34,10 +35,7 @@
                     'default'       => 'no',
                     'label_on'      => __('Yes', 'essential-addons-elementor'),
                     'label_off'     => __('No', 'essential-addons-elementor'),
-                    'return_value'  => 'Yes',
-                    'selectors' => [
-                        '.eael-toc'  => 'display: none',
-                    ],
+                    'return_value'  => 'yes',
                 ]
             );
 
@@ -165,6 +163,81 @@
                     ],
                 ]
 	        );
+
+            $element->end_controls_section();
+
+            $element->start_controls_section(
+                'eael_ext_table_of_content_body_style',
+                [
+                    'label' => esc_html__('EA Toc Body', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_responsive_control(
+                'eael_ext_table_of_content_body_r',
+                [
+                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-advance-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $element->end_controls_section();
+
+            $element->start_controls_section(
+                'eael_ext_table_of_content_header_style',
+                [
+                    'label' => esc_html__('EA Toc Header', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_responsive_control(
+                'eael_ext_table_of_content_header_r',
+                [
+                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-advance-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $element->end_controls_section();
+
+            $element->start_controls_section(
+                'eael_ext_table_of_content_list_style',
+                [
+                    'label' => esc_html__('EA Toc List', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_responsive_control(
+                'eael_ext_table_of_content_list_r',
+                [
+                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-advance-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
 
             $element->end_controls_section();
         }
