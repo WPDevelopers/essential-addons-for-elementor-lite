@@ -823,7 +823,8 @@
                 endforeach;
             endif;
             //
-            echo '<div id="eael-event-calendar" class="eael-event-calendar-cls"
+            echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
+                data-cal_id = "' . $this->get_id() . '"
                 data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
                 data-month_names="' . htmlspecialchars(json_encode($monthNames), ENT_QUOTES, 'UTF-8') . '"
                 data-first_day="' . $settings['eael_event_calendar_first_day'] . '"
