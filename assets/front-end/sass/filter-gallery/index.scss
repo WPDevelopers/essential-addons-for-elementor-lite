@@ -1002,3 +1002,16 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .mfp-image-holder .mfp-close {
 	width: auto;
 }
+
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+	cursor: pointer;
+}
+
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close:hover {
+	text-decoration: none;
+}
+
+button.mfp-close:not(.toggle),
+button.mfp-arrow:not(.toggle) {
+	background: transparent;
+}
