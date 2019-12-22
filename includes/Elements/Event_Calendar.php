@@ -900,9 +900,9 @@
                         'eael_event_description'   => isset($item->description)?$item->description:'',
                         'eael_event_start_date'    => $item->start->date,
                         'eael_event_end_date'      => $item->end->date,
-                        'eael_event_border_color'  => '',
-                        'eael_event_text_color'    => '',
-                        'eael_event_bg_color'      => '',
+                        'eael_event_border_color'  => '#6231FF',
+                        'eael_event_text_color'    => '#242424',
+                        'eael_event_bg_color'      => '#FFF',
                         'eael_event_link'          => ['url' => $item->htmlLink ],
                     ];
                 }
