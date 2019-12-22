@@ -1142,3 +1142,21 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   visibility: visible;
   opacity: 1;
 }
+
+.mfp-iframe-holder .mfp-close,
+.mfp-image-holder .mfp-close {
+  width: auto;
+}
+
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: pointer;
+}
+
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close:hover {
+  text-decoration: none;
+}
+
+button.mfp-close:not(.toggle),
+button.mfp-arrow:not(.toggle) {
+  background: transparent;
+}
