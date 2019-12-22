@@ -7,7 +7,7 @@
  * Version: 3.6.0
  * Author URI: https://wpdeveloper.net/
  *
- * Text Domain: essential-addons-elementor
+ * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  */
 

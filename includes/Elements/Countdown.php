@@ -23,7 +23,7 @@ class Countdown extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Countdown', 'essential-addons-elementor' );
+		return esc_html__( 'EA Countdown', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
@@ -41,29 +41,29 @@ class Countdown extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_countdown_settings_general',
   			[
-  				'label' => esc_html__( 'Timer Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Timer Settings', 'essential-addons-for-elementor-lite')
   			]
   		);
 		
 		$this->add_control(
 			'eael_countdown_due_time',
 			[
-				'label' => esc_html__( 'Countdown Due Date', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Countdown Due Date', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DATE_TIME,
 				'default' => date("Y-m-d", strtotime("+ 1 day")),
-				'description' => esc_html__( 'Set the due date and time', 'essential-addons-elementor' ),
+				'description' => esc_html__( 'Set the due date and time', 'essential-addons-for-elementor-lite'),
 			]
 		);
 
 		$this->add_control(
 			'eael_countdown_label_view',
 			[
-				'label' => esc_html__( 'Label Position', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Label Position', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'eael-countdown-label-block',
 				'options' => [
-					'eael-countdown-label-block' => esc_html__( 'Block', 'essential-addons-elementor' ),
-					'eael-countdown-label-inline' => esc_html__( 'Inline', 'essential-addons-elementor' ),
+					'eael-countdown-label-block' => esc_html__( 'Block', 'essential-addons-for-elementor-lite'),
+					'eael-countdown-label-inline' => esc_html__( 'Inline', 'essential-addons-for-elementor-lite'),
 				],
 			]
 		);
@@ -71,9 +71,9 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_label_padding_left',
 			[
-				'label' => esc_html__( 'Left spacing for Labels', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Left spacing for Labels', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
-				'description' => esc_html__( 'Use when you select inline labels', 'essential-addons-elementor' ),
+				'description' => esc_html__( 'Use when you select inline labels', 'essential-addons-for-elementor-lite'),
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -96,21 +96,21 @@ class Countdown extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_countdown_settings_content',
   			[
-  				'label' => esc_html__( 'Content Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Content Settings', 'essential-addons-for-elementor-lite')
   			]
   		);
 
   		$this->add_control(
 		  'eael_section_countdown_style',
 		  	[
-		   	'label'       	=> esc_html__( 'Countdown Style', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Countdown Style', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'style-1',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'style-1'  	=> esc_html__( 'Style 1', 'essential-addons-elementor' ),
-		     		'style-2' 	=> esc_html__( 'Style 2', 'essential-addons-elementor' ),
-		     		'style-3' 	=> esc_html__( 'Style 3', 'essential-addons-elementor' ),
+		     		'style-1'  	=> esc_html__( 'Style 1', 'essential-addons-for-elementor-lite'),
+		     		'style-2' 	=> esc_html__( 'Style 2', 'essential-addons-for-elementor-lite'),
+		     		'style-3' 	=> esc_html__( 'Style 3', 'essential-addons-for-elementor-lite'),
 		     	],
 		  	]
 		);
@@ -119,7 +119,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days',
 			[
-				'label' => esc_html__( 'Display Days', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Display Days', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -129,10 +129,10 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days_label',
 			[
-				'label' => esc_html__( 'Custom Label for Days', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Custom Label for Days', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Days', 'essential-addons-elementor' ),
-				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'Days', 'essential-addons-for-elementor-lite'),
+				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite'),
 				'condition' => [
 					'eael_countdown_days' => 'yes',
 				],
@@ -143,7 +143,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours',
 			[
-				'label' => esc_html__( 'Display Hours', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Display Hours', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -153,10 +153,10 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours_label',
 			[
-				'label' => esc_html__( 'Custom Label for Hours', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Custom Label for Hours', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Hours', 'essential-addons-elementor' ),
-				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'Hours', 'essential-addons-for-elementor-lite'),
+				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite'),
 				'condition' => [
 					'eael_countdown_hours' => 'yes',
 				],
@@ -166,7 +166,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes',
 			[
-				'label' => esc_html__( 'Display Minutes', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Display Minutes', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -176,10 +176,10 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes_label',
 			[
-				'label' => esc_html__( 'Custom Label for Minutes', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Custom Label for Minutes', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Minutes', 'essential-addons-elementor' ),
-				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'Minutes', 'essential-addons-for-elementor-lite'),
+				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite'),
 				'condition' => [
 					'eael_countdown_minutes' => 'yes',
 				],
@@ -189,7 +189,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds',
 			[
-				'label' => esc_html__( 'Display Seconds', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Display Seconds', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -199,10 +199,10 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_label',
 			[
-				'label' => esc_html__( 'Custom Label for Seconds', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Custom Label for Seconds', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Seconds', 'essential-addons-elementor' ),
-				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'Seconds', 'essential-addons-for-elementor-lite'),
+				'description' => esc_html__( 'Leave blank to hide', 'essential-addons-for-elementor-lite'),
 				'condition' => [
 					'eael_countdown_seconds' => 'yes',
 				],
@@ -212,7 +212,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_separator_heading',
 			[
-				'label' => __( 'Countdown Separator', 'essential-addons-elementor' ),
+				'label' => __( 'Countdown Separator', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -220,7 +220,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_separator',
 			[
-				'label' => esc_html__( 'Display Separator', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Display Separator', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'eael-countdown-show-separator',
 				'default' => '',
@@ -230,7 +230,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_separator_color',
 			[
-				'label' => esc_html__( 'Separator Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Separator Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'condition' => [
@@ -261,22 +261,22 @@ class Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'countdown_on_expire_settings',
 			[
-				'label' => esc_html__( 'Expire Action' , 'essential-addons-elementor' )
+				'label' => esc_html__( 'Expire Action' , 'essential-addons-for-elementor-lite')
 			]
 		);
 
 		$this->add_control(
 			'countdown_expire_type',
 			[
-				'label'			=> esc_html__('Expire Type', 'essential-addons-elementor'),
+				'label'			=> esc_html__('Expire Type', 'essential-addons-for-elementor-lite'),
 				'label_block'	=> false,
 				'type'			=> Controls_Manager::SELECT,
-                'description'   => esc_html__('Choose whether if you want to set a message or a redirect link', 'essential-addons-elementor'),
+                'description'   => esc_html__('Choose whether if you want to set a message or a redirect link', 'essential-addons-for-elementor-lite'),
 				'options'		=> [
-					'none'		=> esc_html__('None', 'essential-addons-elementor'),
-					'text'		=> esc_html__('Message', 'essential-addons-elementor'),
-					'url'		=> esc_html__('Redirection Link', 'essential-addons-elementor'),
-					'template'		=> esc_html__('Saved Templates', 'essential-addons-elementor')
+					'none'		=> esc_html__('None', 'essential-addons-for-elementor-lite'),
+					'text'		=> esc_html__('Message', 'essential-addons-for-elementor-lite'),
+					'url'		=> esc_html__('Redirection Link', 'essential-addons-for-elementor-lite'),
+					'template'		=> esc_html__('Saved Templates', 'essential-addons-for-elementor-lite')
 				],
 				'default'		=> 'none'
 			]
@@ -285,9 +285,9 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'countdown_expiry_text_title',
 			[
-				'label'			=> esc_html__('On Expiry Title', 'essential-addons-elementor'),
+				'label'			=> esc_html__('On Expiry Title', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXTAREA,
-				'default'		=> esc_html__('Countdown is finished!','essential-addons-elementor'),
+				'default'		=> esc_html__('Countdown is finished!','essential-addons-for-elementor-lite'),
 				'condition'		=> [
 					'countdown_expire_type' => 'text'
 				]
@@ -297,9 +297,9 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'countdown_expiry_text',
 			[
-				'label'			=> esc_html__('On Expiry Content', 'essential-addons-elementor'),
+				'label'			=> esc_html__('On Expiry Content', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::WYSIWYG,
-				'default'		=> esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s','essential-addons-elementor'),
+				'default'		=> esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s','essential-addons-for-elementor-lite'),
 				'condition'		=> [
 					'countdown_expire_type' => 'text'
 				]
@@ -309,7 +309,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'countdown_expiry_redirection',
 			[
-				'label'			=> esc_html__('Redirect To (URL)', 'essential-addons-elementor'),
+				'label'			=> esc_html__('Redirect To (URL)', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
 				'condition'		=> [
 					'countdown_expire_type' => 'url'
@@ -321,7 +321,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
             'countdown_expiry_templates',
             [
-                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+                'label'                 => __( 'Choose Template', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'options'               => $this->eael_get_page_templates(),
 				'condition'             => [
@@ -336,18 +336,18 @@ class Countdown extends Widget_Base {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
-					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
 		
 			$this->add_control(
 				'eael_control_get_pro',
 				[
-					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'label' => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-elementor' ),
+							'title' => __( '', 'essential-addons-for-elementor-lite'),
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -362,7 +362,7 @@ class Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_countdown_styles_general',
 			[
-				'label' => esc_html__( 'Countdown Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Countdown Styles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -370,7 +370,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_background',
 			[
-				'label' => esc_html__( 'Box Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Box Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -382,7 +382,7 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_spacing',
 			[
-				'label' => esc_html__( 'Space Between Boxes', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Space Between Boxes', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 15,
@@ -406,7 +406,7 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_container_margin_bottom',
 			[
-				'label' => esc_html__( 'Space Below Container', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Space Below Container', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 0,
@@ -426,7 +426,7 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_box_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -439,7 +439,7 @@ class Countdown extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'eael_countdown_box_border',
-				'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 				'selector' => '{{WRAPPER}} .eael-countdown-item > div',
 			]
 		);
@@ -447,7 +447,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_box_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'selectors' => [
 					'{{WRAPPER}} .eael-countdown-item > div' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
@@ -469,7 +469,7 @@ class Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_countdown_styles_content',
 			[
-				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -477,7 +477,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_digits_heading',
 			[
-				'label' => __( 'Countdown Digits', 'essential-addons-elementor' ),
+				'label' => __( 'Countdown Digits', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -485,7 +485,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_digits_color',
 			[
-				'label' => esc_html__( 'Digits Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Digits Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#fec503',
 				'selectors' => [
@@ -506,7 +506,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_label_heading',
 			[
-				'label' => __( 'Countdown Labels', 'essential-addons-elementor' ),
+				'label' => __( 'Countdown Labels', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -514,7 +514,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_label_color',
 			[
-				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Label Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -540,7 +540,7 @@ class Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_countdown_styles_individual',
 			[
-				'label' => esc_html__( 'Individual Box Styling', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Individual Box Styling', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -548,7 +548,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days_label_heading',
 			[
-				'label' => __( 'Days', 'essential-addons-elementor' ),
+				'label' => __( 'Days', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -556,7 +556,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days_background_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -568,7 +568,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days_digit_color',
 			[
-				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Digit Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -580,7 +580,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days_label_color',
 			[
-				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Label Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -592,7 +592,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_days_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -604,7 +604,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours_label_heading',
 			[
-				'label' => __( 'Hours', 'essential-addons-elementor' ),
+				'label' => __( 'Hours', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -612,7 +612,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours_background_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -624,7 +624,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours_digit_color',
 			[
-				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Digit Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -636,7 +636,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours_label_color',
 			[
-				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Label Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -648,7 +648,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_hours_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -660,7 +660,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes_label_heading',
 			[
-				'label' => __( 'Minutes', 'essential-addons-elementor' ),
+				'label' => __( 'Minutes', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -668,7 +668,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes_background_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -680,7 +680,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes_digit_color',
 			[
-				'label' => esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Digit Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -692,7 +692,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes_label_color',
 			[
-				'label' => esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Label Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -704,7 +704,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_minutes_border_color',
 			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -716,7 +716,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_label_heading',
 			[
-				'label' => __( 'Seconds', 'essential-addons-elementor' ),
+				'label' => __( 'Seconds', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -724,7 +724,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_background_color',
 			[
-				'label'		=> esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::COLOR,
 				'default'	=> '',
 				'selectors' => [
@@ -736,7 +736,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_digit_color',
 			[
-				'label'		=> esc_html__( 'Digit Color', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Digit Color', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::COLOR,
 				'default'	=> '',
 				'selectors' => [
@@ -748,7 +748,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_label_color',
 			[
-				'label'		=> esc_html__( 'Label Color', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Label Color', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::COLOR,
 				'default'	=> '',
 				'selectors'	=> [
@@ -760,7 +760,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_seconds_border_color',
 			[
-				'label'		=> esc_html__( 'Border Color', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Border Color', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::COLOR,
 				'default' 	=> '',
 				'selectors'	=> [
@@ -776,7 +776,7 @@ class Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_countdown_expire_style',
 			[
-				'label'	=> esc_html__( 'Expire Message', 'essential-addons-elementor' ),
+				'label'	=> esc_html__( 'Expire Message', 'essential-addons-for-elementor-lite'),
 				'tab'	=> Controls_Manager::TAB_STYLE,
 				'condition'	=> [
 					'countdown_expire_type'	=> 'text'
@@ -787,20 +787,20 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_expire_message_alignment',
 			[
-				'label' => esc_html__( 'Text Alignment', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Text Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-right',
 					],
 				],
@@ -814,7 +814,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'heading_eael_countdown_expire_title',
 			[
-				'label'		=> __( 'Title Style', 'essential-addons-elementor' ),
+				'label'		=> __( 'Title Style', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::HEADING,
 				'separator'	=> 'before'
 			]
@@ -823,7 +823,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_expire_title_color',
 			[
-				'label'		=> esc_html__( 'Title Color', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Title Color', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::COLOR,
 				'default'	=> '',
 				'selectors'	=> [
@@ -850,7 +850,7 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_expire_title_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors' => [
@@ -862,7 +862,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'heading_eael_countdown_expire_message',
 			[
-				'label'		=> __( 'Content Style', 'essential-addons-elementor' ),
+				'label'		=> __( 'Content Style', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::HEADING,
 				'separator'	=> 'before'
 			]
@@ -871,7 +871,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'eael_countdown_expire_message_color',
 			[
-				'label'		=> esc_html__( 'Text Color', 'essential-addons-elementor' ),
+				'label'		=> esc_html__( 'Text Color', 'essential-addons-for-elementor-lite'),
 				'type'		=> Controls_Manager::COLOR,
 				'default'	=> '',
 				'selectors'	=> [
@@ -898,7 +898,7 @@ class Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_countdown_expire_message_padding',
 			[
-				'label'			=> esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'label'			=> esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::DIMENSIONS,
 				'size_units'	=> [ 'px', '%', 'em' ],
 				'separator'		=> 'before',

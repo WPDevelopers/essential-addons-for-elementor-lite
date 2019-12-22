@@ -22,7 +22,7 @@ class Advanced_Data_Table extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Advanced Data Table', 'essential-addons-elementor');
+        return esc_html__('EA Advanced Data Table', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -41,17 +41,17 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_source',
             [
-                'label' => esc_html__('Data Source', 'essential-addons-elementor'),
+                'label' => esc_html__('Data Source', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'ea_adv_data_table_source',
             [
-                'label' => esc_html__('Source', 'essential-addons-elementor'),
+                'label' => esc_html__('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'static' => esc_html__('Static Data', 'essential-addons-elementor'),
+                    'static' => esc_html__('Static Data', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'static',
             ]
@@ -71,14 +71,14 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_features',
             [
-                'label' => esc_html__('Advance Features', 'essential-addons-elementor'),
+                'label' => esc_html__('Advance Features', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'ea_adv_data_table_sort',
             [
-                'label' => esc_html__('Sort', 'essential-addons-elementor'),
+                'label' => esc_html__('Sort', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -88,7 +88,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search',
             [
-                'label' => esc_html__('Search', 'essential-addons-elementor'),
+                'label' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -98,7 +98,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_pagination',
             [
-                'label' => esc_html__('Pagination', 'essential-addons-elementor'),
+                'label' => esc_html__('Pagination', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -108,7 +108,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_items_per_page',
             [
-                'label' => esc_html__('Rows Per Page', 'essential-addons-elementor'),
+                'label' => esc_html__('Rows Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'min' => 1,
                 'default' => 10,
@@ -122,7 +122,7 @@ class Advanced_Data_Table extends Widget_Base
             'eael_global_warning_text',
             [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw' => __('Note: Pagination will be applied on Live Preview only.', 'essential-addons-elementor'),
+                'raw' => __('Note: Pagination will be applied on Live Preview only.', 'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
                 'condition' => [
                     'ea_adv_data_table_pagination' => 'yes',
@@ -136,7 +136,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_export_import',
             [
-                'label' => esc_html__('Export/Import', 'essential-addons-elementor'),
+                'label' => esc_html__('Export/Import', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'ea_adv_data_table_source' => 'static',
                 ],
@@ -146,7 +146,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Export', 'essential-addons-elementor'),
+                'label' => __('Export', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -154,9 +154,9 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_export_csv_button',
             [
-                'label' => __('Export table as CSV file', 'essential-addons-elementor'),
+                'label' => __('Export table as CSV file', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::BUTTON,
-                'text' => __('Export', 'essential-addons-elementor'),
+                'text' => __('Export', 'essential-addons-for-elementor-lite'),
                 'event' => 'ea:advTable:export',
             ]
         );
@@ -164,7 +164,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Import', 'essential-addons-elementor'),
+                'label' => __('Import', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -180,10 +180,10 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_import_csv_button',
             [
-                'label' => __('Import', 'essential-addons-elementor'),
+                'label' => __('Import', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::BUTTON,
                 'show_label' => false,
-                'text' => __('Import', 'essential-addons-elementor'),
+                'text' => __('Import', 'essential-addons-for-elementor-lite'),
                 'event' => 'ea:advTable:import',
             ]
         );
@@ -194,7 +194,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_style_table',
             [
-                'label' => __('Table', 'essential-addons-elementor'),
+                'label' => __('Table', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -202,7 +202,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -211,7 +211,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_border',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -239,7 +239,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_style_head',
             [
-                'label' => __('Head', 'essential-addons-elementor'),
+                'label' => __('Head', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -248,7 +248,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_adv_data_table_head_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} th textarea, {{WRAPPER}} th',
             ]
@@ -264,19 +264,19 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_head_horizontal_alignment',
             [
-                'label' => esc_html__('Text Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Text Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -298,7 +298,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_head_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -318,7 +318,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -326,7 +326,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_head_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -345,7 +345,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -354,7 +354,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_head_cell_border',
-                'label' => __('Cell Border', 'essential-addons-elementor'),
+                'label' => __('Cell Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -387,7 +387,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_head_cell_padding',
             [
-                'label' => __('Padding', 'essential-addons-elementor'),
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'default' => [
@@ -410,7 +410,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_style_body',
             [
-                'label' => __('Body', 'essential-addons-elementor'),
+                'label' => __('Body', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -419,7 +419,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_adv_data_table_body_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} td textarea, {{WRAPPER}} td',
             ]
@@ -435,19 +435,19 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_horizontal_alignment',
             [
-                'label' => esc_html__('Text Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Text Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -469,7 +469,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
@@ -489,7 +489,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -497,7 +497,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -516,7 +516,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -525,7 +525,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_body_cell_border',
-                'label' => __('Cell Border', 'essential-addons-elementor'),
+                'label' => __('Cell Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -558,7 +558,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Highlight Row/Colum', 'essential-addons-elementor'),
+                'label' => __('Highlight Row/Colum', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -566,16 +566,16 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_highlight',
             [
-                'label' => esc_html__('Highlight', 'essential-addons-elementor'),
+                'label' => esc_html__('Highlight', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'none' => esc_html__('None', 'essential-addons-elementor'),
-                    'f-col' => esc_html__('First Column', 'essential-addons-elementor'),
-                    'l-col' => esc_html__('Last Column', 'essential-addons-elementor'),
-                    'e-col' => esc_html__('Even Column', 'essential-addons-elementor'),
-                    'o-col' => esc_html__('Odd Column', 'essential-addons-elementor'),
-                    'e-row' => esc_html__('Even Row', 'essential-addons-elementor'),
-                    'o-row' => esc_html__('Odd Row', 'essential-addons-elementor'),
+                    'none' => esc_html__('None', 'essential-addons-for-elementor-lite'),
+                    'f-col' => esc_html__('First Column', 'essential-addons-for-elementor-lite'),
+                    'l-col' => esc_html__('Last Column', 'essential-addons-for-elementor-lite'),
+                    'e-col' => esc_html__('Even Column', 'essential-addons-for-elementor-lite'),
+                    'o-col' => esc_html__('Odd Column', 'essential-addons-for-elementor-lite'),
+                    'e-row' => esc_html__('Even Row', 'essential-addons-for-elementor-lite'),
+                    'o-row' => esc_html__('Odd Row', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'none',
             ]
@@ -585,7 +585,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_f_col_highlight_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -601,7 +601,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_f_col_highlight_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -618,7 +618,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_l_col_highlight_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -634,7 +634,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_l_col_highlight_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -651,7 +651,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_e_col_highlight_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -667,7 +667,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_e_col_highlight_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -684,7 +684,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_o_col_highlight_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -700,7 +700,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_o_col_highlight_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -717,7 +717,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_e_row_highlight_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -733,7 +733,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_e_row_highlight_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -750,7 +750,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_o_row_highlight_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
@@ -766,7 +766,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_o_row_highlight_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fbfbfb',
                 'selectors' => [
@@ -789,7 +789,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_body_cell_padding',
             [
-                'label' => __('Padding', 'essential-addons-elementor'),
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'default' => [
@@ -812,7 +812,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_style_search',
             [
-                'label' => __('Search', 'essential-addons-elementor'),
+                'label' => __('Search', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'ea_adv_data_table_search' => 'yes',
@@ -823,7 +823,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_width',
             [
-                'label' => __('Width', 'essential-addons-elementor'),
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
@@ -858,7 +858,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_height',
             [
-                'label' => __('Height', 'essential-addons-elementor'),
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -888,7 +888,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors' => [
@@ -907,7 +907,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_margin',
             [
-                'label' => __('Margin Bottom', 'essential-addons-elementor'),
+                'label' => __('Margin Bottom', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -937,20 +937,20 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_alignment',
             [
-                'label' => esc_html__('Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -969,7 +969,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_adv_data_table_search_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-search',
             ]
@@ -985,7 +985,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
@@ -1004,7 +1004,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -1012,7 +1012,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_search_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -1031,7 +1031,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -1040,7 +1040,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_search_border',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -1068,7 +1068,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_style_pagination',
             [
-                'label' => __('Pagination', 'essential-addons-elementor'),
+                'label' => __('Pagination', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'ea_adv_data_table_pagination' => 'yes',
@@ -1079,7 +1079,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_pagination_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'default' => [
@@ -1106,7 +1106,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_pagination_margin',
             [
-                'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'default' => [
@@ -1134,7 +1134,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_adv_data_table_pagination_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a',
             ]
@@ -1142,12 +1142,12 @@ class Advanced_Data_Table extends Widget_Base
 
         $this->start_controls_tabs('ea_adv_data_table_pagination_tabs');
 
-        $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-elementor')]);
+        $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'ea_adv_data_table_pagination_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
@@ -1166,7 +1166,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -1174,7 +1174,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_pagination_background',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -1193,7 +1193,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -1202,7 +1202,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_pagination_border',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -1227,12 +1227,12 @@ class Advanced_Data_Table extends Widget_Base
 
         $this->end_controls_tab();
 
-        $this->start_controls_tab('hover', ['label' => esc_html__('Hover', 'essential-addons-elementor')]);
+        $this->start_controls_tab('hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'ea_adv_data_table_pagination_color_hover',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
@@ -1251,7 +1251,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -1259,7 +1259,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             'ea_adv_data_table_pagination_background_hover',
             [
-                'label' => __('Background', 'essential-addons-elementor'),
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -1278,7 +1278,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->add_control(
             base64_encode(random_bytes(10)),
             [
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -1287,7 +1287,7 @@ class Advanced_Data_Table extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'ea_adv_data_table_pagination_border_hover',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'fields_options' => [
                     'border' => [
                         'default' => 'solid',
@@ -1359,7 +1359,7 @@ class Advanced_Data_Table extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
 
         if ($settings['ea_adv_data_table_search'] == 'yes') {
-            echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . __('Search...', 'essential-addons-elementor') . '" class="ea-advanced-data-table-search"></div>';
+            echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . __('Search...', 'essential-addons-for-elementor-lite') . '" class="ea-advanced-data-table-search"></div>';
         }
 
         echo '<div class="ea-advanced-data-table-wrap-inner">

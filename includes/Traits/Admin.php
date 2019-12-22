@@ -19,7 +19,7 @@ trait Admin
     {
         add_menu_page(
             __('Essential Addons', 'Essential Addons'),
-            __('Essential Addons', 'essential-addons-elementor'),
+            __('Essential Addons', 'essential-addons-for-elementor-lite'),
             'manage_options',
             'eael-settings',
             [$this, 'eael_admin_settings_page'],
@@ -69,20 +69,20 @@ trait Admin
 						<div class="eael-admin-logo-inline">
 							<img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-ea-logo.svg'; ?>" alt="essential-addons-for-elementor">
 						</div>
-						<h2 class="title"><?php echo __('Essential Addons Settings', 'essential-addons-elementor'); ?></h2>
+						<h2 class="title"><?php echo __('Essential Addons Settings', 'essential-addons-for-elementor-lite'); ?></h2>
 					</div>
 					<div class="eael-header-right">
-					<button type="submit" class="button eael-btn js-eael-settings-save"><?php echo __('Save settings', 'essential-addons-elementor'); ?></button>
+					<button type="submit" class="button eael-btn js-eael-settings-save"><?php echo __('Save settings', 'essential-addons-for-elementor-lite'); ?></button>
 					</div>
 				</div>
 			  	<div class="eael-settings-tabs">
 			    	<ul class="eael-tabs">
-				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-general.svg'; ?>" alt="essential-addons-general-settings"><span><?php echo __('General', 'essential-addons-elementor'); ?></span></a></li>
-				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-elements.svg'; ?>" alt="essential-addons-elements"><span><?php echo __('Elements', 'essential-addons-elementor'); ?></span></a></li>
-                        <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>" alt="essential-addons-extensions"><span><?php echo __('Extensions', 'essential-addons-elementor'); ?></span></a></li>
-                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-tools.svg'; ?>" alt="essential-addons-tools"><span><?php echo __('Tools', 'essential-addons-elementor'); ?></span></a></li>
+				      	<li><a href="#general" class="active"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-general.svg'; ?>" alt="essential-addons-general-settings"><span><?php echo __('General', 'essential-addons-for-elementor-lite'); ?></span></a></li>
+				      	<li><a href="#elements"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-elements.svg'; ?>" alt="essential-addons-elements"><span><?php echo __('Elements', 'essential-addons-for-elementor-lite'); ?></span></a></li>
+                        <li><a href="#extensions"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-extensions.svg'; ?>" alt="essential-addons-extensions"><span><?php echo __('Extensions', 'essential-addons-for-elementor-lite'); ?></span></a></li>
+                        <li><a href="#tools"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-tools.svg'; ?>" alt="essential-addons-tools"><span><?php echo __('Tools', 'essential-addons-for-elementor-lite'); ?></span></a></li>
                         <?php if (!$this->pro_enabled) {?>
-                            <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>" alt="essential-addons-go-pro"><span><?php echo __('Go Premium', 'essential-addons-elementor'); ?></span></a></li>
+                            <li><a href="#go-pro"><img src="<?php echo EAEL_PLUGIN_URL . '/assets/admin/images/icon-upgrade.svg'; ?>" alt="essential-addons-go-pro"><span><?php echo __('Go Premium', 'essential-addons-for-elementor-lite'); ?></span></a></li>
                         <?php }?>
                     </ul>
                     <?php
@@ -160,12 +160,12 @@ trait Admin
                 'later' => array(
                     'link' => 'https://wpdeveloper.net/review-essential-addons-elementor',
                     'target' => '_blank',
-                    'label' => __('Ok, you deserve it!', 'essential-addons-elementor'),
+                    'label' => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-external',
                 ),
                 'allready' => array(
                     'link' => $url,
-                    'label' => __('I already did', 'essential-addons-elementor'),
+                    'label' => __('I already did', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-smiley',
                     'data_args' => [
                         'dismiss' => true,
@@ -173,7 +173,7 @@ trait Admin
                 ),
                 'maybe_later' => array(
                     'link' => $url,
-                    'label' => __('Maybe Later', 'essential-addons-elementor'),
+                    'label' => __('Maybe Later', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-calendar-alt',
                     'data_args' => [
                         'later' => true,
@@ -181,12 +181,12 @@ trait Admin
                 ),
                 'support' => array(
                     'link' => 'https://wpdeveloper.net/support',
-                    'label' => __('I need help', 'essential-addons-elementor'),
+                    'label' => __('I need help', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-sos',
                 ),
                 'never_show_again' => array(
                     'link' => $url,
-                    'label' => __('Never show again', 'essential-addons-elementor'),
+                    'label' => __('Never show again', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-dismiss',
                     'data_args' => [
                         'dismiss' => true,
@@ -198,7 +198,7 @@ trait Admin
         /**
          * This is review message and thumbnail.
          */
-        $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-elementor') . '</p>');
+        $notice->message('review', '<p>' . __('We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-for-elementor-lite') . '</p>');
         $notice->thumbnail('review', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
         /**
          * This is upsale notice settings
@@ -220,7 +220,7 @@ trait Admin
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
             'file'      => 'notificationx.php',
-            'btn_text'  => __( 'Install Free', 'essential-addons-elementor' ),
+            'btn_text'  => __( 'Install Free', 'essential-addons-for-elementor-lite'),
             'condition' => [
                 'by' => 'class',
                 'class' => 'NotificationX'

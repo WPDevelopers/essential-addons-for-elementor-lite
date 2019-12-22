@@ -20,7 +20,7 @@ trait Elements
         $elements_manager->add_category(
             'essential-addons-elementor',
             [
-                'title' => __('Essential Addons', 'essential-addons-elementor'),
+                'title' => __('Essential Addons', 'essential-addons-for-elementor-lite'),
                 'icon' => 'font',
             ], 1);
     }

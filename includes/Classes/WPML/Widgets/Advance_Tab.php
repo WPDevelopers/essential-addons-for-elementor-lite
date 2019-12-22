@@ -47,10 +47,10 @@ class Advance_Tab extends WPML_Elementor_Module_With_Items {
 	protected function get_title( $field ) {
 		switch($field) {
 			case 'eael_adv_tabs_tab_title':
-				return __( 'Advance Tab: Title', 'essential-addons-elementor' );
+				return __( 'Advance Tab: Title', 'essential-addons-for-elementor-lite');
 
 			case 'eael_adv_tabs_tab_content':
-				return __( 'Advance Tab: Content', 'essential-addons-elementor' );
+				return __( 'Advance Tab: Content', 'essential-addons-for-elementor-lite');
 
 			default:
 				return '';

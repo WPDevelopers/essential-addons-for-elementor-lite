@@ -22,7 +22,7 @@ trait Content_Ticker
                 </div></div>';
             }
         } else {
-            $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-elementor') . '</a></div>';
+            $html .= '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
         }
 
         wp_reset_postdata();
