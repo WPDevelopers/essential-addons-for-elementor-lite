@@ -23,7 +23,7 @@ class Post_Timeline extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Post Timeline', 'essential-addons-elementor');
+        return __('EA Post Timeline', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -53,7 +53,7 @@ class Post_Timeline extends Widget_Base
         $this->start_controls_section(
             'eael_section_post_timeline_style',
             [
-                'label' => __('Timeline Style', 'essential-addons-elementor'),
+                'label' => __('Timeline Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -61,9 +61,9 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_overlay_color',
             [
-                'label' => __('Overlay Color', 'essential-addons-elementor'),
+                'label' => __('Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'description' => __('Leave blank or Clear to use default gradient overlay', 'essential-addons-elementor'),
+                'description' => __('Leave blank or Clear to use default gradient overlay', 'essential-addons-for-elementor-lite'),
                 'default' => 'linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0)',
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-inner' => 'background: {{VALUE}}',
@@ -75,7 +75,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_bullet_color',
             [
-                'label' => __('Timeline Bullet Color', 'essential-addons-elementor'),
+                'label' => __('Timeline Bullet Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#9fa9af',
                 'selectors' => [
@@ -88,7 +88,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_bullet_border_color',
             [
-                'label' => __('Timeline Bullet Border Color', 'essential-addons-elementor'),
+                'label' => __('Timeline Bullet Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -101,7 +101,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_vertical_line_color',
             [
-                'label' => __('Timeline Vertical Line Color', 'essential-addons-elementor'),
+                'label' => __('Timeline Vertical Line Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(83, 85, 86, .2)',
                 'selectors' => [
@@ -114,7 +114,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_border_color',
             [
-                'label' => __('Border & Arrow Color', 'essential-addons-elementor'),
+                'label' => __('Border & Arrow Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e5eaed',
                 'selectors' => [
@@ -129,7 +129,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_date_background_color',
             [
-                'label' => __('Date Background Color', 'essential-addons-elementor'),
+                'label' => __('Date Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(0, 0, 0, 0.7)',
                 'selectors' => [
@@ -143,7 +143,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_date_color',
             [
-                'label' => __('Date Text Color', 'essential-addons-elementor'),
+                'label' => __('Date Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -158,7 +158,7 @@ class Post_Timeline extends Widget_Base
         $this->start_controls_section(
             'eael_section_typography',
             [
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -166,7 +166,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_title_style',
             [
-                'label' => __('Title Style', 'essential-addons-elementor'),
+                'label' => __('Title Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -175,7 +175,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_title_color',
             [
-                'label' => __('Title Color', 'essential-addons-elementor'),
+                'label' => __('Title Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -188,19 +188,19 @@ class Post_Timeline extends Widget_Base
         $this->add_responsive_control(
             'eael_timeline_title_alignment',
             [
-                'label' => __('Title Alignment', 'essential-addons-elementor'),
+                'label' => __('Title Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -214,7 +214,7 @@ class Post_Timeline extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_timeline_title_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-timeline-post-title h2',
             ]
@@ -223,7 +223,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_excerpt_style',
             [
-                'label' => __('Excerpt Style', 'essential-addons-elementor'),
+                'label' => __('Excerpt Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -232,7 +232,7 @@ class Post_Timeline extends Widget_Base
         $this->add_control(
             'eael_timeline_excerpt_color',
             [
-                'label' => __('Excerpt Color', 'essential-addons-elementor'),
+                'label' => __('Excerpt Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -244,23 +244,23 @@ class Post_Timeline extends Widget_Base
         $this->add_responsive_control(
             'eael_timeline_excerpt_alignment',
             [
-                'label' => __('Excerpt Alignment', 'essential-addons-elementor'),
+                'label' => __('Excerpt Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                     'justify' => [
-                        'title' => __('Justified', 'essential-addons-elementor'),
+                        'title' => __('Justified', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-justify',
                     ],
                 ],
@@ -274,7 +274,7 @@ class Post_Timeline extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_timeline_excerpt_typography',
-                'label' => __('excerpt Typography', 'essential-addons-elementor'),
+                'label' => __('excerpt Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_3,
                 'selector' => '{{WRAPPER}} .eael-timeline-post-excerpt p',
             ]
@@ -328,7 +328,7 @@ class Post_Timeline extends Widget_Base
                 echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
-						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-elementor') . '</span>
+						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
 					</button>
 				</div>';
             }

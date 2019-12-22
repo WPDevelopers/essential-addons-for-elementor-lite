@@ -47,10 +47,10 @@ class Accordion extends WPML_Elementor_Module_With_Items {
 	protected function get_title( $field ) {
 		switch($field) {
 			case 'eael_adv_accordion_tab_title':
-				return __( 'Advance Accordion: Title', 'essential-addons-elementor' );
+				return __( 'Advance Accordion: Title', 'essential-addons-for-elementor-lite');
 
 			case 'eael_adv_accordion_tab_content':
-				return __( 'Advance Accordion: Content', 'essential-addons-elementor' );
+				return __( 'Advance Accordion: Content', 'essential-addons-for-elementor-lite');
 
 			default:
 				return '';

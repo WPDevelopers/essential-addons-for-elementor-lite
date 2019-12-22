@@ -26,7 +26,7 @@ class Betterdocs_Category_Box extends Widget_Base
 
     public function get_title()
     {
-        return __('BetterDocs Category Box', 'essential-addons-elementor');
+        return __('BetterDocs Category Box', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories()
@@ -62,7 +62,7 @@ class Betterdocs_Category_Box extends Widget_Base
             $this->start_controls_section(
                 'eael_global_warning',
                 [
-                    'label' => __('Warning!', 'essential-addons-elementor'),
+                    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -70,7 +70,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>BetterDocs</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=BetterDocs&tab=search&type=term" target="_blank">BetterDocs</a> first.', 'essential-addons-elementor'),
+                    'raw' => __('<strong>BetterDocs</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=BetterDocs&tab=search&type=term" target="_blank">BetterDocs</a> first.', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                 ]
             );
@@ -88,14 +88,14 @@ class Betterdocs_Category_Box extends Widget_Base
             $this->start_controls_section(
                 'section_column_settings',
                 [
-                    'label' => __('Column', 'essential-addons-elementor'),
+                    'label' => __('Column', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'column_settings_heading',
                 [
-                    'label' => esc_html__( 'Column', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Column', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::HEADING,
                 ]
             );
@@ -103,7 +103,7 @@ class Betterdocs_Category_Box extends Widget_Base
             $this->add_responsive_control(
                 'column_space',
                 [
-                    'label' => __('Column Space', 'essential-addons-elementor'),
+                    'label' => __('Column Space', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SLIDER,
                     'size_units' => ['px', '%', 'em'],
                     'range' => [
@@ -121,7 +121,7 @@ class Betterdocs_Category_Box extends Widget_Base
             $this->add_responsive_control(
                 'column_padding',
                 [
-                    'label' => __('Column Padding', 'essential-addons-elementor'),
+                    'label' => __('Column Padding', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
@@ -139,7 +139,7 @@ class Betterdocs_Category_Box extends Widget_Base
             $this->start_controls_section(
                 'section_card_settings',
                 [
-                    'label' => __('Card', 'essential-addons-elementor'),
+                    'label' => __('Card', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -148,7 +148,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 // Normal State Tab
                 $this->start_controls_tab(
                     'card_normal',
-                    [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ]
+                    [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite') ]
                 );
                 $this->add_group_control(
                     Group_Control_Background::get_type(),
@@ -163,7 +163,7 @@ class Betterdocs_Category_Box extends Widget_Base
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'card_border_normal',
-                        'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
                         'selector' => '{{WRAPPER}} .betterdocs-categories-wrap .docs-single-cat-wrap'
                     ]
                 );
@@ -171,7 +171,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_responsive_control(
                     'card_border_radius_normal',
                     [
-                        'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', 'em', '%' ],
                         'selectors' => [
@@ -191,7 +191,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'category_settings_icon_normal',
                     [
-                        'label' => esc_html__( 'Category Icon', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Category Icon', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -200,7 +200,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'category_settings_icon_size_normal',
                     [
-                        'label' => esc_html__( 'Size', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SLIDER,
                         'size_units'    => [ 'px', '%', 'em' ],
                         'range' => [
@@ -217,7 +217,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'category_settings_heading_normal',
                     [
-                        'label' => esc_html__( 'Category Title', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Category Title', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -234,7 +234,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'cat_title_color_normal',
                     [
-                        'label' => esc_html__( 'Title Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .docs-cat-title-inner h3, {{WRAPPER}} .betterdocs-category-box .docs-single-cat-wrap .docs-cat-title' => 'color: {{VALUE}};',
@@ -245,7 +245,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'count_settings_heading_normal',
                     [
-                        'label' => esc_html__( 'Count', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Count', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -262,7 +262,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'count_color_normal',
                     [
-                        'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .betterdocs-categories-wrap.betterdocs-category-box .docs-single-cat-wrap span' => 'color: {{VALUE}};',
@@ -275,13 +275,13 @@ class Betterdocs_Category_Box extends Widget_Base
                 // Hover State Tab
                 $this->start_controls_tab(
                     'card_hover',
-                    [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ]
+                    [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite') ]
                 );
 
                 $this->add_responsive_control(
                     'card_transition',
                     [
-                        'label' => __('Transition', 'essential-addons-elementor'),
+                        'label' => __('Transition', 'essential-addons-for-elementor-lite'),
                         'type'  => Controls_Manager::SLIDER,
                         'default' => [
                             'size' => 300,
@@ -313,7 +313,7 @@ class Betterdocs_Category_Box extends Widget_Base
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'card_border_hover',
-                        'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
                         'selector' => '{{WRAPPER}} .betterdocs-categories-wrap .docs-single-cat-wrap:hover'
                     ]
                 );
@@ -321,7 +321,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_responsive_control(
                     'card_border_radius_hover',
                     [
-                        'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => [ 'px', 'em', '%' ],
                         'selectors' => [
@@ -341,7 +341,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'category_settings_icon_hover',
                     [
-                        'label' => esc_html__( 'Category Icon', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Category Icon', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -350,7 +350,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'category_settings_icon_size_hover',
                     [
-                        'label' => esc_html__( 'Size', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SLIDER,
                         'size_units'    => [ 'px', '%', 'em' ],
                         'range' => [
@@ -367,7 +367,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_responsive_control(
                     'category_settings_icon_size_transition',
                     [
-                        'label' => __('Transition', 'essential-addons-elementor'),
+                        'label' => __('Transition', 'essential-addons-for-elementor-lite'),
                         'type'  => Controls_Manager::SLIDER,
                         'default' => [
                             'size' => 300,
@@ -389,7 +389,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'category_settings_heading_hover',
                     [
-                        'label' => esc_html__( 'Category Title', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Category Title', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -406,7 +406,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'cat_title_color_hover',
                     [
-                        'label' => esc_html__( 'Title Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .docs-cat-title-inner:hover h3, {{WRAPPER}} .betterdocs-category-box .docs-single-cat-wrap:hover .docs-cat-title' => 'color: {{VALUE}};',
@@ -417,7 +417,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_responsive_control(
                     'category_title_transition',
                     [
-                        'label' => __('Transition', 'essential-addons-elementor'),
+                        'label' => __('Transition', 'essential-addons-for-elementor-lite'),
                         'type'  => Controls_Manager::SLIDER,
                         'default' => [
                             'size' => 300,
@@ -439,7 +439,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'count_settings_heading_hover',
                     [
-                        'label' => esc_html__( 'Count', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Count', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -456,7 +456,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_control(
                     'count_color_hover',
                     [
-                        'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .betterdocs-categories-wrap.betterdocs-category-box .docs-single-cat-wrap:hover span' => 'color: {{VALUE}};',
@@ -467,7 +467,7 @@ class Betterdocs_Category_Box extends Widget_Base
                 $this->add_responsive_control(
                     'category_count_transition',
                     [
-                        'label' => __('Transition', 'essential-addons-elementor'),
+                        'label' => __('Transition', 'essential-addons-for-elementor-lite'),
                         'type'  => Controls_Manager::SLIDER,
                         'default' => [
                             'size' => 300,

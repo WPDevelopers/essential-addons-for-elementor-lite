@@ -26,7 +26,7 @@ class Betterdocs_Search_Form extends Widget_Base
 
     public function get_title()
     {
-        return __('BetterDocs Search Form', 'essential-addons-elementor');
+        return __('BetterDocs Search Form', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories()
@@ -62,7 +62,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->start_controls_section(
                 'eael_global_warning',
                 [
-                    'label' => __('Warning!', 'essential-addons-elementor'),
+                    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -70,7 +70,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>BetterDocs</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=BetterDocs&tab=search&type=term" target="_blank">BetterDocs</a> first.', 'essential-addons-elementor'),
+                    'raw' => __('<strong>BetterDocs</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=BetterDocs&tab=search&type=term" target="_blank">BetterDocs</a> first.', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                 ]
             );
@@ -86,7 +86,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->start_controls_section(
                 'section_search_box_settings',
                 [
-                    'label' => __('Search Box', 'essential-addons-elementor'),
+                    'label' => __('Search Box', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -102,7 +102,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_responsive_control(
                 'search_box_padding',
                 [
-                    'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'default'   => [
@@ -127,14 +127,14 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->start_controls_section(
                 'section_search_field_settings',
                 [
-                    'label' => __('Search Field', 'essential-addons-elementor'),
+                    'label' => __('Search Field', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'search_field_bg',
                 [
-                    'label' => esc_html__( 'Field Background Color', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Field Background Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .betterdocs-searchform' => 'background: {{VALUE}};',
@@ -145,7 +145,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'search_field_text_color',
                 [
-                    'label' => esc_html__( 'Field Color', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Field Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .betterdocs-searchform .betterdocs-search-field' => 'color: {{VALUE}};',
@@ -164,7 +164,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_responsive_control(
                 'search_field_padding',
                 [
-                    'label' => __('Field Padding', 'essential-addons-elementor'),
+                    'label' => __('Field Padding', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
@@ -176,7 +176,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_responsive_control(
                 'search_field_padding_radius',
                 [
-                    'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'selectors' => [
@@ -188,7 +188,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'field_search_icon_heading',
                 [
-                    'label' => esc_html__( 'Search Icon', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Search Icon', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before'
                 ]
@@ -197,7 +197,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'field_search_icon_color',
                 [
-                    'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .betterdocs-searchform svg.docs-search-icon' => 'fill: {{VALUE}};',
@@ -208,7 +208,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'field_search_icon_size',
                 [
-                    'label' => esc_html__( 'Size', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SLIDER,
                     'size_units'    => [ 'px', '%', 'em' ],
                     'range' => [
@@ -225,7 +225,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'field_close_icon_heading',
                 [
-                    'label' => esc_html__( 'Close Icon', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Close Icon', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before'
                 ]
@@ -234,7 +234,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'search_field_close_icon_color',
                 [
-                    'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .docs-search-close .close-line' => 'fill: {{VALUE}};',
@@ -245,7 +245,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'search_field_close_icon_border_color',
                 [
-                    'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .docs-search-loader, {{WRAPPER}} .docs-search-close .close-border' => 'stroke: {{VALUE}};',
@@ -264,14 +264,14 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->start_controls_section(
                 'section_search_result_settings',
                 [
-                    'label' => __('Search Result Box', 'essential-addons-elementor'),
+                    'label' => __('Search Result Box', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_responsive_control(
                 'result_box_width',
                 [
-                    'label' => __('Width', 'essential-addons-elementor'),
+                    'label' => __('Width', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SLIDER,
                     'default' => [
                         'size' => 100,
@@ -293,7 +293,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_responsive_control(
                 'result_box_max_width',
                 [
-                    'label' => __('Max Width', 'essential-addons-elementor'),
+                    'label' => __('Max Width', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SLIDER,
                     'default' => [
                         'size' => 1600,
@@ -325,7 +325,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 Group_Control_Border::get_type(),
                 [
                     'name' => 'result_box_border',
-                    'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+                    'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
                     'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result',
                 ]
             );
@@ -340,7 +340,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->start_controls_section(
                 'section_search_result_item_settings',
                 [
-                    'label' => __('Search Result List', 'essential-addons-elementor'),
+                    'label' => __('Search Result List', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -349,13 +349,13 @@ class Betterdocs_Search_Form extends Widget_Base
                 // Normal State Tab
                 $this->start_controls_tab(
                     'item_normal',
-                    [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ]
+                    [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite') ]
                 );
 
                 $this->add_control(
                     'result_box_item',
                     [
-                        'label' => esc_html__( 'Item', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Item', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING
                     ]
                 );
@@ -371,7 +371,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'result_box_item_color',
                     [
-                        'label' => esc_html__( 'Item Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Item Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .betterdocs-live-search .docs-search-result li a' => 'color: {{VALUE}};',
@@ -383,7 +383,7 @@ class Betterdocs_Search_Form extends Widget_Base
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'result_item_border',
-                        'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
                         'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li'
                     ]
                 );
@@ -391,7 +391,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_responsive_control(
                     'result_box_item_padding',
                     [
-                        'label' => __('Padding', 'essential-addons-elementor'),
+                        'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => ['px', 'em', '%'],
                         'selectors' => [
@@ -403,7 +403,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'search_result_box_item_count',
                     [
-                        'label' => esc_html__( 'Count', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Count', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -420,7 +420,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'result_box_item_count_color',
                     [
-                        'label' => esc_html__( 'Item Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Item Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .betterdocs-live-search .docs-search-result li span' => 'color: {{VALUE}};',
@@ -433,13 +433,13 @@ class Betterdocs_Search_Form extends Widget_Base
                 // Hover State Tab
                 $this->start_controls_tab(
                     'item_hover',
-                    [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ]
+                    [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite') ]
                 );
 
                 $this->add_responsive_control(
                     'result_item_transition',
                     [
-                        'label' => __('Transition', 'essential-addons-elementor'),
+                        'label' => __('Transition', 'essential-addons-for-elementor-lite'),
                         'type'  => Controls_Manager::SLIDER,
                         'default' => [
                             'size' => 300,
@@ -461,7 +461,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'result_box_item_hover_heading',
                     [
-                        'label' => esc_html__( 'Item', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Item', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING
                     ]
                 );
@@ -481,7 +481,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'result_box_item_hover_color',
                     [
-                        'label' => esc_html__( 'Item Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Item Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .betterdocs-live-search .docs-search-result li:hover a' => 'color: {{VALUE}};',
@@ -493,7 +493,7 @@ class Betterdocs_Search_Form extends Widget_Base
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'result_item_hover_border',
-                        'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
                         'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li:hover'
                     ]
                 );
@@ -501,7 +501,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'result_box_item_hover_count_heading',
                     [
-                        'label' => esc_html__( 'Count', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Count', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::HEADING,
                         'separator' => 'before'
                     ]
@@ -510,7 +510,7 @@ class Betterdocs_Search_Form extends Widget_Base
                 $this->add_control(
                     'result_box_item_hover_count_color',
                     [
-                        'label' => esc_html__( 'Item Color', 'essential-addons-elementor' ),
+                        'label' => esc_html__( 'Item Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .betterdocs-live-search .docs-search-result li:hover span' => 'color: {{VALUE}};',
