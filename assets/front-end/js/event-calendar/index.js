@@ -9,15 +9,17 @@ jQuery(window).on('elementor/frontend/init', function () {
         var eventBgColor = element.data('event_bg_color');
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
+        var calId = element.data('cal_id');
        
         //daysWeek1 = ['s1', 's2'];
         //alert('Hello there');
 
-        var calendar = $('#eael-event-calendar').fullCalendar({
+        var calendar = $('#eael-event-calendar-' + calId).fullCalendar({
             editable:false,
             draggable:false,
             firstDay: firstDay,
             slotLabelFormat:"HH:mm",
+            timeFormat: 'hh:mm a',
             nextDayThreshold : "00:00:00",
             header:{
             left:'prev,next today',
@@ -73,25 +75,22 @@ jQuery(window).on('elementor/frontend/init', function () {
         });
 
         $('.fc-right .fc-button-group').css('display', 'none');
-        $('.fc-right').append('<select class="eaelec_select_view form-control">' +
+        $('.fc-right').append('<select id="eaelec-select-mwd-' + calId + '" class="eaelec-select-view form-control">' +
                                 '<option value="month">Month</option>' +
                                 '<option value="week">Week</option>' +
                                 '<option value="day">Day</option>' +
                                 '</select>');
         
-        //$('.fc-center').prepend('<button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button>');
-        
-        $(".eaelec_select_view").on("change", function(event) {
+        $("#eaelec-select-mwd-" + calId).on("change", function(event) {
             if($(this).val()==='month'){
-                $('#eael-event-calendar').fullCalendar('changeView', 'month');
+                $('#eael-event-calendar-' + calId).fullCalendar('changeView', 'month');
             }
             if($(this).val()==='week'){
-                $('#eael-event-calendar').fullCalendar('changeView', 'agendaWeek');
+                $('#eael-event-calendar-' + calId).fullCalendar('changeView', 'agendaWeek');
             }
             if($(this).val()==='day'){
-                $('#eael-event-calendar').fullCalendar('changeView', 'agendaDay');
+                $('#eael-event-calendar-' + calId).fullCalendar('changeView', 'agendaDay');
             }
-            //$('#calendar').fullCalendar('gotoDate', "2018-"+this.value+"-1");
         });
 
         // When the user clicks on <span> (x), close the modal
