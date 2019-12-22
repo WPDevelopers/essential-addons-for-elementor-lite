@@ -1883,34 +1883,34 @@ trait Helper
 
 
     public function eael_prepare_table_of_content($content ,$support_tag ){
+
         $index = 0;
         $content = preg_replace_callback('#<(h['.$support_tag.'])(.*?)>(.*?)</\1>#si', function ($matches) use (&$index) {
             $tag = $matches[1];
             $title = strip_tags($matches[3]);
             $has_id = preg_match('/id=(["\'])(.*?)\1[\s>]/si', $matches[2], $matched_ids);
             $id = $has_id ? $matched_ids[2] : $index++ . '-' . sanitize_title($title);
-
             if ($has_id) {
                 return $matches[0];
             }
             $hash_link = '';
             return sprintf('<%s%s class="eael-heading-content" id="%s">%s %s</%s>', $tag, $matches[2], $id, $matches[3], $hash_link, $tag);
         }, $content);
+
         return $content;
     }
 
     public function eael_list_hierarchy( $content, $support_tag ) {
-        preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER );
 
+        preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER );
         $current_depth      = 6;
         $html               = '';
         $numbered_items     = array();
         $numbered_items_min = NULL;
         $html .= '<ol class="eael-toc-list">';
+
         // find the minimum heading to establish our baseline
         for ( $i = 0; $i < count( $matches ); $i ++ ) {
-
-
             if ( $current_depth > $matches[ $i ][2] ) {
                 $current_depth = (int) $matches[ $i ][2];
             }
@@ -1920,37 +1920,28 @@ trait Helper
         $numbered_items_min               = $current_depth;
 
         for ( $i = 0; $i < count( $matches ); $i ++ ) {
-
             if ( $current_depth == (int) $matches[ $i ][2] ) {
-
                 $html .= '<li itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">';
             }
-
             // start lists
-
-
             for ( $current_depth; $current_depth < (int) $matches[ $i ][2]; $current_depth++ ) {
                 if ( $current_depth + 1 == (int) $matches[ $i ][2] ) {
                     $numbered_items[ $current_depth + 1 ] = 0;
                     $html .= '<ol><li>';
                 }
-
             }
 
-
             // list item
-
             $title = $matches[ $i ][0];
             $title = strip_tags( $title );
             $has_id = preg_match('/id=(["\'])(.*?)\1[\s>]/si', $matches[ $i ][0], $matched_ids);
             $id = $has_id ? $matched_ids[2] : $i . '-' . sanitize_title($title);
+
             $html .= '<a itemprop="item" href="#'.$id.'">' . $title . '</a>';
 
             // end lists
             if ( $i != count( $matches ) - 1 ) {
-
                 if ( $current_depth > (int) $matches[ $i + 1 ][2] ) {
-
                     for ( $current_depth; $current_depth > (int) $matches[ $i + 1 ][2]; $current_depth-- ) {
                         if ( $current_depth == (int) $matches[ $i ][2] ) {
                             $html .= '</li></ol>';
@@ -1960,17 +1951,13 @@ trait Helper
                 }
 
                 if ( $current_depth == (int) @$matches[ $i + 1 ][2] ) {
-
                     $html .= '</li>';
                 }
 
             } else {
-
                 // this is the last item, make sure we close off all tags
                 for ( $current_depth; $current_depth >= $numbered_items_min; $current_depth -- ) {
-
                     $html .= '</li>';
-
                     if ( $current_depth != $numbered_items_min ) {
                         if ( $current_depth == (int) $matches[ $i ][2] ) {
                             $html .= '</ol>';

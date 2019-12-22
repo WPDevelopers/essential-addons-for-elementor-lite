@@ -232,7 +232,7 @@ trait Elements
                  $html .= "<h2 class='eael-toc-title'>".__('Table of Contents','essential-addons-elementor')."</h2>";
             $html .= "</div>";
                 $html .= "<div class='eael-toc-body'>";
-                $html .= $this->eael_list_hierarchy($content,$support_tag);
+                $html .= $this->eael_list_hierarchy( $content, $support_tag );
             $html .= "</div>";
         $html .= "</div>";
         echo $html;
