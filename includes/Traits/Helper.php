@@ -1907,7 +1907,7 @@ trait Helper
         $html               = '';
         $numbered_items     = array();
         $numbered_items_min = NULL;
-        $html .= '<ol class="eael-toc-list">';
+        $html .= '<ul class="eael-toc-list">';
 
         // find the minimum heading to establish our baseline
         for ( $i = 0; $i < count( $matches ); $i ++ ) {
@@ -1927,7 +1927,7 @@ trait Helper
             for ( $current_depth; $current_depth < (int) $matches[ $i ][2]; $current_depth++ ) {
                 if ( $current_depth + 1 == (int) $matches[ $i ][2] ) {
                     $numbered_items[ $current_depth + 1 ] = 0;
-                    $html .= '<ol><li>';
+                    $html .= '<ul><li>';
                 }
             }
 
@@ -1944,7 +1944,7 @@ trait Helper
                 if ( $current_depth > (int) $matches[ $i + 1 ][2] ) {
                     for ( $current_depth; $current_depth > (int) $matches[ $i + 1 ][2]; $current_depth-- ) {
                         if ( $current_depth == (int) $matches[ $i ][2] ) {
-                            $html .= '</li></ol>';
+                            $html .= '</li></ul>';
                             $numbered_items[ $current_depth ] = 0;
                         }
                     }
@@ -1960,13 +1960,13 @@ trait Helper
                     $html .= '</li>';
                     if ( $current_depth != $numbered_items_min ) {
                         if ( $current_depth == (int) $matches[ $i ][2] ) {
-                            $html .= '</ol>';
+                            $html .= '</ul>';
                         }
                     }
                 }
             }
         }
-        $html .= '</ol>';
+        $html .= '</ul>';
         return $html;
     }
 }
