@@ -157,7 +157,7 @@ span.eaelec-modal-close {
 
 .eaelec-modal-body {
   padding: 0px 10px 0 35px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 250px;
   margin: 10px 0;
   color: #555555;
