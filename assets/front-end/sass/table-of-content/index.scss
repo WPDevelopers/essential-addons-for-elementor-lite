@@ -2,59 +2,86 @@
 	position: absolute;
     z-index: 9999;
     background-color: #fff;
-    padding-left: 20px;
-    max-height: 70vh;
-    overflow-y: scroll;
-    width: 35vw !important;
-    margin-left: 10px !important;
-    padding-bottom: 20px;
+    width: 25vw!important;
     top:50%;
     &.eael-sticky {
         position: fixed;
         top: 50px;
     }
     &.expanded {
-        width: 12%!important;
         overflow-y: visible;
         padding-bottom: 0;
-        .eael-toc-header, .eael-toc-body {
+        .eael-toc-header,
+        .eael-toc-body,
+        .eael-toc-close  {
             display: none;
         }
-        .eael-toc-close {
-            padding: 0 2px;
+        .eael-toc-button {
+            display: block;
+            transform: translate(-70px, 120px) rotate(90deg);
             border-radius: unset;
-            width: 100%;
-            border: none;
-            font-size: 18px;
+            background: #fc7f03;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            width: 50%;
+            cursor: pointer;
         }
     }
 
     .eael-toc-header {
+        background: #fc7f03;
+        padding: 12px 20px;
         .eael-toc-title {
-            font-size: 18px;
+            font-size: 15px;
+            margin: 0;
+            color: #fff;
         }
     }
     .eael-toc-body {
-        ol {
-            list-style-type: none;
-            counter-reset: item;
-            margin: 0;
-        }
-        .eael-toc-list {
+        padding: 12px 20px;
+        background: #615757;
+        ul.eael-toc-list {
+            margin-left: -18px;
+            margin-bottom: 0;
+             > li {
+                 ///list-style-type: circle !important;
+                 padding: 5px 0;
+                 border-top: 0.5px dashed gray;
+                 list-style-position: inside !important;
+                 color: gray;
+                 &:before{
+                     content: '\00b7';
+                     font-size: 5.2rem;
+                     line-height: 0;
+                     vertical-align: middle;
+                     margin-right: 5px;
+                     margin-left: -5px;
+                 }
+                 > ul {
+                     display: none;
+                     margin-left: 25px !important;
+                     margin-top: 5px !important;
+                 }
+                 ul {
+                     margin: 0;
+                     li{
+                         margin: 0;
+                     }
+                 }
+             }
             li {
                 font-size: 15px;
-                counter-increment: item;
-                display: table;
-                margin-left: 0;
-                &:before {
-                    content: counters(item, ".") ". ";
-                    display: table-cell;
-                    padding-right: 0.3em;
+                list-style: none;
+                &.active{
+                    color: #fc7f03;
+                    > a {
+                        color: #fc7f03;
+                    }
                 }
                 a {
-                    &.active{
-                        color:blue;
-                    }
+                    text-decoration: none;
+                    color:black;
                 }
             }
         }
@@ -63,19 +90,20 @@
         position: absolute;
         width: 29px;
         height: 29px;
-        background: #d30c5c;
+        background: #fff;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-        right: 0;
-        top: 0;
+        right: -9px;
+        top: -11px;
         line-height: 26px;
         text-align: center;
-        z-index: 99999;
         border-radius: 20px;
-        color: white;
+        color: #fc7f03;
         font-weight: 500;
-        font-size: 1.8rem;
-        border: 1px solid #fff;
         cursor: pointer;
+    }
+
+    .eael-toc-button {
+        display: none;
     }
 
 }
