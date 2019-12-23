@@ -85,13 +85,15 @@ trait Enqueue
 			EAEL_PLUGIN_VERSION
         );
         
-        // Admin bar js
-        wp_enqueue_script(
-			'ea-admin-bar',
-			EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
-			['jquery'],
-			EAEL_PLUGIN_VERSION
-		);
+        if(current_user_can('manage_options')) {
+            // Admin bar js
+            wp_enqueue_script(
+                'ea-admin-bar',
+                EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
+                ['jquery'],
+                EAEL_PLUGIN_VERSION
+            );
+        }
 
         // My Assets
         if ($this->is_preview_mode()) {
