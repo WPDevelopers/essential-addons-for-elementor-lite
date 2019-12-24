@@ -85,7 +85,7 @@ trait Enqueue
 			EAEL_PLUGIN_VERSION
         );
         
-        if(current_user_can('manage_options')) {
+        if(current_user_can('manage_options') && is_user_logged_in() ) {
             // Admin bar js
             wp_enqueue_script(
                 'ea-admin-bar',
