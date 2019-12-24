@@ -82,6 +82,11 @@
 .eael-toc .eael-toc-body ul.eael-toc-list li.active > a {
   color: #fc7f03;
 }
+.eael-toc .eael-toc-body ul.eael-toc-list li.eael-highlight > ul {
+  display: block;
+  -webkit-transition: all 2s linear;
+  transition: all 2s linear;
+}
 .eael-toc .eael-toc-body ul.eael-toc-list li a {
   text-decoration: none;
   color: black;

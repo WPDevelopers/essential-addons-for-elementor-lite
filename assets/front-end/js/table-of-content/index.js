@@ -7,7 +7,10 @@
             toc_links.parent().each(function() {
                 $(this).removeClass("active");
             });
-            $(this).parent().addClass("active");
+            //active parent node when visit child node
+            $(".eael-first-child").removeClass( "eael-highlight" );
+            $(this).closest('.eael-first-child').addClass( "eael-highlight" );
+            $(this).parent().addClass( "active" );
             var target = this.hash,
                 $target = $(target);
             $("html, body")
@@ -34,13 +37,15 @@
                 var currLink = $(this);
                 var refElement = $(currLink.attr("href"));
                 var position =  refElement.position();
-
+                var closest  = currLink.closest('.eael-first-child');
                 if ( position &&
                     position.top <= scrollPos &&
                     position.top + refElement.height() > scrollPos
                 ) {
                     $("ul.eael-toc-list li").removeClass("active");
+                    $(".eael-first-child").removeClass("eael-highlight");
                     currLink.parent().addClass("active");
+                    closest.addClass( "eael-highlight" );
                 }
             });
         }
@@ -63,13 +68,6 @@
 
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {
             $('.eael-toc').toggleClass('expanded');
-            var checkClass = $( ".eael-toc" ).hasClass( "expanded" );
-            var close =  $('.eael-toc-close');
-            // if(checkClass){
-            //     close.text('Table of content');
-            // }else{
-            //     close.text('X');
-            // }
         });
 
     });
