@@ -555,6 +555,16 @@
                 ]
             );
 
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eaelec_title_typography',
+                    'label' => __( 'Title Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .fc-toolbar h2',
+                ]
+            );
+
             $this->add_control(
                 'eael_event_calendar_padding',
                 [
@@ -637,6 +647,16 @@
                 ]
             );
 
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eaelec_today_button_typography',
+                    'label' => __( 'Today Button Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .fc-toolbar .fc-today-button',
+                ]
+            );
+
             $this->add_control(
                 'eael_event_calendar_button_border_radius',
                 [
@@ -646,6 +666,17 @@
                     'selectors' => [
                         '{{WRAPPER}} .fc-toolbar .fc-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
+                    'separator' => 'after',
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eaelec_display_options_typography',
+                    'label' => __( 'Display Options Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} select.eaelec-select-view',
                 ]
             );
 
