@@ -74,8 +74,8 @@ jQuery(window).on('elementor/frontend/init', function () {
             }
         });
 
-        $('.fc-right .fc-button-group').css('display', 'none');
-        $('.fc-right').append('<select id="eaelec-select-mwd-' + calId + '" class="eaelec-select-view form-control">' +
+        $('#eael-event-calendar-' + calId + ' .fc-right .fc-button-group').css('display', 'none');
+        $('#eael-event-calendar-' + calId + ' .fc-right').append('<select id="eaelec-select-mwd-' + calId + '" class="eaelec-select-view form-control">' +
                                 '<option value="month">Month</option>' +
                                 '<option value="week">Week</option>' +
                                 '<option value="day">Day</option>' +
