@@ -7,25 +7,29 @@
     &.eael-sticky {
         position: fixed;
         top: 50px;
+        background: none;
     }
     &.expanded {
-        overflow-y: visible;
-        padding-bottom: 0;
+        //overflow-y: visible;
+        //padding-bottom: 0;
+        margin-left: -17px;
         .eael-toc-header,
         .eael-toc-body,
         .eael-toc-close  {
             display: none;
         }
         .eael-toc-button {
-            display: block;
-            transform: translate(-70px, 120px) rotate(90deg);
-            border-radius: unset;
+            display: inline-block;
+            transform: translate(-70px,120px) rotate(90deg);
             background: #fc7f03;
             color: #fff;
-            padding: 10px 0;
             text-align: center;
-            width: 50%;
             cursor: pointer;
+            padding: 10px 20px;
+            i {
+                margin-right: 10px;
+                transform: rotate(-90deg);
+            }
         }
     }
 
@@ -68,13 +72,17 @@
                          margin: 0;
                      }
                  }
+                 &:first-child{
+                     border: none;
+                 }
              }
+
             li {
                 font-size: 15px;
                 list-style: none;
+                margin: 0 20px 0 20px;
                 &.active{
                     color: #fc7f03;
-
                     > a {
                         color: #fc7f03;
                     }

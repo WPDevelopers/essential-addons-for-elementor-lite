@@ -234,7 +234,7 @@ trait Elements
                 $html .= "<div class='eael-toc-body'>";
                 $html .= $this->eael_list_hierarchy( $content, $support_tag );
             $html .= "</div>";
-            $html .= sprintf( "<span class='eael-toc-button'>%s</span>", __('Table of Contents','essential-addons-elementor') );
+            $html .= sprintf( "<div class='eael-toc-button'><i class='fas fa-list'></i><span>%s</span></div>", __('Table of Contents','essential-addons-elementor') );
         $html .= "</div>";
         echo $html;
     }
