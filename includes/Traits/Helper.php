@@ -1921,7 +1921,8 @@ trait Helper
 
         for ( $i = 0; $i < count( $matches ); $i ++ ) {
             if ( $current_depth == (int) $matches[ $i ][2] ) {
-                $html .= '<li itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">';
+                $first_node = ($current_depth == 1)?'eael-first-child':'';
+                $html .= '<li class="'.$first_node.'" itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">';
             }
             // start lists
             for ( $current_depth; $current_depth < (int) $matches[ $i ][2]; $current_depth++ ) {

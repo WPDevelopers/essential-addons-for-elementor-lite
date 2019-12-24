@@ -45,7 +45,6 @@
             margin-left: -18px;
             margin-bottom: 0;
              > li {
-                 ///list-style-type: circle !important;
                  padding: 5px 0;
                  border-top: 0.5px dashed gray;
                  list-style-position: inside !important;
@@ -75,8 +74,15 @@
                 list-style: none;
                 &.active{
                     color: #fc7f03;
+
                     > a {
                         color: #fc7f03;
+                    }
+                }
+                &.eael-highlight {
+                    > ul {
+                        display: block;
+                        transition: all 2s linear;
                     }
                 }
                 a {
