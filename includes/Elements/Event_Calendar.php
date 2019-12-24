@@ -795,6 +795,53 @@
             );
 
             $this->end_controls_section();
+
+            $this->start_controls_section(
+                'eael_event_popup',
+                [
+                    'label' => __('Event Popup', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                ]
+            );
+
+            $this->add_control(
+                'eael_event_popup_title_color',
+                [
+                    'label' => __('Title Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#242424',
+                    'selectors' => [
+                        '{{WRAPPER}} .eaelec-modal-header h2' => 'color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'eael_event_popup_details_color',
+                [
+                    'label' => __('Event Details Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#CC0000',
+                    'selectors' => [
+                        '{{WRAPPER}} .eaelec-modal-footer a.eaelec-event-details-link' => 'color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'eael_event_popup_event_date_color',
+                [
+                    'label' => __('Event Date Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#6030FF',
+                    'selectors' => [
+                        '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}}!important',
+                        '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end' => 'color: {{VALUE}}!important',
+                    ],
+                ]
+            );
+
+            $this->end_controls_section();
         }
 
 
@@ -879,7 +926,7 @@
                         <p></p>
                     </div>
                     <div class="eaelec-modal-footer">
-                        <a href="#">Event Details</a>
+                        <a href="#" class="eaelec-event-details-link">Event Details</a>
                     </div>
                 </div>
             </div>
