@@ -1,7 +1,6 @@
 .eael-toc {
 	position: absolute;
     z-index: 9999;
-    background-color: #fff;
     width: 25vw!important;
     top:50%;
     &.eael-sticky {
@@ -10,8 +9,6 @@
         background: none;
     }
     &.expanded {
-        //overflow-y: visible;
-        //padding-bottom: 0;
         margin-left: -17px;
         .eael-toc-header,
         .eael-toc-body,
@@ -21,11 +18,12 @@
         .eael-toc-button {
             display: inline-block;
             transform: translate(-70px,120px) rotate(90deg);
-            background: #fc7f03;
+            background: #ff7d50;
             color: #fff;
             text-align: center;
             cursor: pointer;
             padding: 10px 20px;
+            border-radius: 3px;
             i {
                 margin-right: 10px;
                 transform: rotate(-90deg);
@@ -34,27 +32,31 @@
     }
 
     .eael-toc-header {
-        background: #fc7f03;
-        padding: 12px 20px;
+        background: #ff7d50;
+        padding: 12px 32px;
         .eael-toc-title {
-            font-size: 15px;
+            font-size: 18px;
             margin: 0;
             color: #fff;
+            font-weight: 400;
+            letter-spacing: 0.1px;
         }
     }
     .eael-toc-body {
         padding: 12px 20px;
-        background: #615757;
+        background: #fff6f3;
+        //overflow-y: scroll;
         ul.eael-toc-list {
-            margin-left: -18px;
+            margin-left: -5px;
             margin-bottom: 0;
              > li {
                  padding: 5px 0;
-                 border-top: 0.5px dashed gray;
+                 border-top: .5px dashed #c6c4cf;
                  list-style-position: inside !important;
-                 color: gray;
+                 color: #c6c4cf;
+                 //style 1
                  &:before{
-                     content: '\00b7';
+                     //content: '\00b7';
                      font-size: 5.2rem;
                      line-height: 0;
                      vertical-align: middle;
@@ -69,7 +71,7 @@
                  ul {
                      margin: 0;
                      li{
-                         margin: 0;
+                         margin: 5px 0;
                      }
                  }
                  &:first-child{
@@ -82,9 +84,23 @@
                 list-style: none;
                 margin: 0 20px 0 20px;
                 &.active{
-                    color: #fc7f03;
+                    color: #ff7d50;
                     > a {
-                        color: #fc7f03;
+                        //style 2
+                        //&:before{
+                        //    position: absolute;
+                        //    left: 0;
+                        //    font-size: 15px;
+                        //    z-index: 999999;
+                        //    border-bottom: 10px solid #08d699;
+                        //    border-left: 5px solid transparent;
+                        //    border-right: 5px solid transparent;
+                        //    -webkit-transform: rotate(90deg);
+                        //    transform: rotate(90deg);
+                        //    content: " ";
+                        //    margin-top: 5px;
+                        //}
+                        color: #ff7d50;
                     }
                 }
                 &.eael-highlight {
@@ -95,7 +111,7 @@
                 }
                 a {
                     text-decoration: none;
-                    color:black;
+                    color: #707070;
                 }
             }
         }
@@ -111,7 +127,7 @@
         line-height: 26px;
         text-align: center;
         border-radius: 20px;
-        color: #fc7f03;
+        color: #ff7d50;
         font-weight: 500;
         cursor: pointer;
     }
