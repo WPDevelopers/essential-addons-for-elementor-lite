@@ -90,19 +90,6 @@
 .eael-toc .eael-toc-body ul.eael-toc-list li.active > a {
   color: #ff7d50;
 }
-.eael-toc .eael-toc-body ul.eael-toc-list li.active > a:before {
-  position: absolute;
-  left: 0;
-  font-size: 15px;
-  z-index: 999999;
-  border-bottom: 7px solid #08d699;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-  content: " ";
-  margin-top: 5px;
-}
 .eael-toc .eael-toc-body ul.eael-toc-list li.eael-highlight > ul {
   display: block;
   -webkit-transition: all 2s linear;
@@ -129,4 +116,25 @@
 }
 .eael-toc .eael-toc-button {
   display: none;
+}
+.eael-toc .eael-toc-list > li {
+  border: none !important;
+}
+.eael-toc .eael-highlight {
+  background: #2d325a;
+  width: 100%;
+}
+.eael-toc .eael-highlight > a {
+  color: #dcdff5;
+}
+.eael-toc .eael-highlight > a:after {
+  content: "\f107";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  right: 30px;
+  color: #dcdff5;
+}
+.eael-toc .eael-highlight .active > a {
+  color: #dcdff5 !important;
 }
