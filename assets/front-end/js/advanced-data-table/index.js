@@ -1,28 +1,73 @@
-var advanced_data_table_active_cell = null;
-var advanced_data_table_drag_start_x,
+var advanced_data_table_timeout,
+	advanced_data_table_active_cell = null,
+	advanced_data_table_drag_start_x,
 	advanced_data_table_drag_start_width,
 	advanced_data_table_drag_el,
 	advanced_data_table_dragging = false;
 
-var Advanced_Data_Table_Update_Model = function(table, model) {
-	// clone current table
-	var origTable = table.cloneNode(true);
-
-	// remove editable area
-	origTable.querySelectorAll("th, td").forEach(function(el) {
-		var value = el.querySelector("textarea").value;
-		el.innerHTML = value;
-	});
+var Advanced_Data_Table_Update_View = function(view, refresh, value) {
+	var model = view.model;
 
 	// disable elementor remote server render
-	model.remoteRender = false;
+	model.remoteRender = refresh;
 
-	// update backbone model
-	model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
+	if (elementor.config.version > "2.7.6") {
+		var container = view.getContainer();
+		var settings = view.getContainer().settings.attributes;
+
+		Object.keys(value).forEach(function(key) {
+			settings[key] = value[key];
+		});
+
+		parent.window.$e.run("document/elements/settings", {
+			container: container,
+			settings: settings,
+			options: {
+				external: refresh
+			}
+		});
+	} else {
+		// update backbone model
+		Object.keys(value).forEach(function(key) {
+			model.setSetting(key, value[key]);
+		});
+	}
 
 	// enable elementor remote server render just after elementor throttle
 	// ignore multiple assign
-	setTimeout(function() {
+	advanced_data_table_timeout = setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
+var Advanced_Data_Table_Update_Model = function(model, container, refresh, value) {
+	// disable elementor remote server render
+	model.remoteRender = refresh;
+
+	if (elementor.config.version > "2.7.6") {
+		var settings = container.settings.attributes;
+
+		Object.keys(value).forEach(function(key) {
+			settings[key] = value[key];
+		});
+
+		parent.window.$e.run("document/elements/settings", {
+			container: container,
+			settings: settings,
+			options: {
+				external: refresh
+			}
+		});
+	} else {
+		// update backbone model
+		Object.keys(value).forEach(function(key) {
+			model.setSetting(key, value[key]);
+		});
+	}
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	advanced_data_table_timeout = setTimeout(function() {
 		model.remoteRender = true;
 	}, 1001);
 };
@@ -318,7 +363,9 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 			body += "</tbody>";
 
 			if (header.length > 0 || body.length > 0) {
-				model.setSetting("ea_adv_data_table_static_html", header + body);
+				Advanced_Data_Table_Update_View(view, true, {
+					ea_adv_data_table_static_html: header + body
+				});
 			}
 		}
 
@@ -331,7 +378,6 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	var localRender = function() {
 		var interval = setInterval(function() {
 			if (view.el.querySelector(".ea-advanced-data-table")) {
-				var timeout;
 				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
 
 				table.addEventListener("focusin", function(e) {
@@ -342,7 +388,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 				table.addEventListener("input", function(e) {
 					if (e.target.tagName.toLowerCase() == "textarea") {
-						clearTimeout(timeout);
+						clearTimeout(advanced_data_table_timeout);
 
 						// clone current table
 						var origTable = table.cloneNode(true);
@@ -353,24 +399,17 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 							el.innerHTML = value;
 						});
 
-						// disable elementor remote server render
-						model.remoteRender = false;
-
-						// update backbone model
-						model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
-
-						// enable elementor remote server render just after elementor throttle
-						// ignore multiple assign
-						timeout = setTimeout(function() {
-							model.remoteRender = true;
-						}, 1001);
+						// update table
+						Advanced_Data_Table_Update_View(view, false, {
+							ea_adv_data_table_static_html: origTable.innerHTML
+						});
 					}
 				});
 
 				// drag
 				table.addEventListener("mouseup", function(e) {
 					if (e.target.tagName.toLowerCase() === "th") {
-						clearTimeout(timeout);
+						clearTimeout(advanced_data_table_timeout);
 
 						// clone current table
 						var origTable = table.cloneNode(true);
@@ -381,17 +420,10 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 							el.innerHTML = value;
 						});
 
-						// disable elementor remote server render
-						model.remoteRender = false;
-
-						// update backbone model
-						model.setSetting("ea_adv_data_table_static_html", origTable.innerHTML);
-
-						// enable elementor remote server render just after elementor throttle
-						// ignore multiple assign
-						timeout = setTimeout(function() {
-							model.remoteRender = true;
-						}, 1001);
+						// update table
+						Advanced_Data_Table_Update_View(view, false, {
+							ea_adv_data_table_static_html: origTable.innerHTML
+						});
 					}
 				});
 
@@ -449,8 +481,19 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 
 							advanced_data_table_active_cell = null;
 
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
 							// update model
-							Advanced_Data_Table_Update_Model(table, element.options.model);
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
 						}
 					}
 				},
@@ -471,8 +514,19 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 
 							advanced_data_table_active_cell = null;
 
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
 							// update model
-							Advanced_Data_Table_Update_Model(table, element.options.model);
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
 						}
 					}
 				},
@@ -497,8 +551,19 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 
 							advanced_data_table_active_cell = null;
 
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
 							// update model
-							Advanced_Data_Table_Update_Model(table, element.options.model);
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
 						}
 					}
 				},
@@ -523,8 +588,19 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 
 							advanced_data_table_active_cell = null;
 
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
 							// update model
-							Advanced_Data_Table_Update_Model(table, element.options.model);
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
 						}
 					}
 				},
@@ -541,8 +617,19 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 
 							advanced_data_table_active_cell = null;
 
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
 							// update model
-							Advanced_Data_Table_Update_Model(table, element.options.model);
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
 						}
 					}
 				},
@@ -561,8 +648,19 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 
 							advanced_data_table_active_cell = null;
 
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
 							// update model
-							Advanced_Data_Table_Update_Model(table, element.options.model);
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
 						}
 					}
 				}
