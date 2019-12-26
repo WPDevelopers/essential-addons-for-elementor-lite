@@ -1,7 +1,6 @@
 .eael-toc {
   position: absolute;
   z-index: 9999;
-  background-color: #fff;
   width: 25vw !important;
   top: 50%;
 }
@@ -22,11 +21,12 @@
   display: inline-block;
   -webkit-transform: translate(-70px, 120px) rotate(90deg);
           transform: translate(-70px, 120px) rotate(90deg);
-  background: #fc7f03;
+  background: #ff7d50;
   color: #fff;
   text-align: center;
   cursor: pointer;
   padding: 10px 20px;
+  border-radius: 3px;
 }
 .eael-toc.expanded .eael-toc-button i {
   margin-right: 10px;
@@ -34,30 +34,31 @@
           transform: rotate(-90deg);
 }
 .eael-toc .eael-toc-header {
-  background: #fc7f03;
-  padding: 12px 20px;
+  background: #ff7d50;
+  padding: 12px 32px;
 }
 .eael-toc .eael-toc-header .eael-toc-title {
-  font-size: 15px;
+  font-size: 18px;
   margin: 0;
   color: #fff;
+  font-weight: 400;
+  letter-spacing: 0.1px;
 }
 .eael-toc .eael-toc-body {
   padding: 12px 20px;
-  background: #615757;
+  background: #fff6f3;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
-  margin-left: -18px;
+  margin-left: -5px;
   margin-bottom: 0;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li {
   padding: 5px 0;
-  border-top: 0.5px dashed gray;
+  border-top: .5px dashed #c6c4cf;
   list-style-position: inside !important;
-  color: gray;
+  color: #c6c4cf;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li:before {
-  content: '\00b7';
   font-size: 5.2rem;
   line-height: 0;
   vertical-align: middle;
@@ -73,7 +74,7 @@
   margin: 0;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li ul li {
-  margin: 0;
+  margin: 5px 0;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li:first-child {
   border: none;
@@ -84,10 +85,23 @@
   margin: 0 20px 0 20px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li.active {
-  color: #fc7f03;
+  color: #ff7d50;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li.active > a {
-  color: #fc7f03;
+  color: #ff7d50;
+}
+.eael-toc .eael-toc-body ul.eael-toc-list li.active > a:before {
+  position: absolute;
+  left: 0;
+  font-size: 15px;
+  z-index: 999999;
+  border-bottom: 7px solid #08d699;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  content: " ";
+  margin-top: 5px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li.eael-highlight > ul {
   display: block;
@@ -96,7 +110,7 @@
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li a {
   text-decoration: none;
-  color: black;
+  color: #707070;
 }
 .eael-toc .eael-toc-close {
   position: absolute;
@@ -109,7 +123,7 @@
   line-height: 26px;
   text-align: center;
   border-radius: 20px;
-  color: #fc7f03;
+  color: #ff7d50;
   font-weight: 500;
   cursor: pointer;
 }
