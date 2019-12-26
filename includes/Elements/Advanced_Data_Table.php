@@ -71,7 +71,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_features',
             [
-                'label' => esc_html__('Advance Features', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Advanced Features', 'essential-addons-for-elementor-lite'),
             ]
         );
 
