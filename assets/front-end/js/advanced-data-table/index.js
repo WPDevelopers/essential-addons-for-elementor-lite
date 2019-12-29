@@ -348,13 +348,13 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 					if (enableHeader && index == 0) {
 						header += "<thead><tr>";
 						cols.forEach(function(col) {
-							header += "<th>" + col.replace(/(^"")|(^")|("$)|(""$)/g, "") + "</th>";
+							header += "<th>" + JSON.parse(col) + "</th>";
 						});
 						header += "</tr></thead>";
 					} else {
 						body += "<tr>";
 						cols.forEach(function(col) {
-							body += "<td>" + col.replace(/(^"")|(^")|("$)|(""$)/g, "") + "</td>";
+							body += "<td>" + JSON.parse(col) + "</td>";
 						});
 						body += "</tr>";
 					}
