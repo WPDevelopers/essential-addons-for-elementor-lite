@@ -166,7 +166,6 @@ trait Core
                 'enabled' => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
                 'display_condition' => $page_settings_model->get_settings('eael_ext_toc_global_display_condition'),
                 'position' => $page_settings_model->get_settings('eael_ext_toc_position'),
-                'bg_color' => $page_settings_model->get_settings('eael_ext_toc_bg_color'),
                 'supported_heading_tag' => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag')
             ];
         } else {

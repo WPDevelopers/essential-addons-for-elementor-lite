@@ -173,16 +173,6 @@ trait Elements
         }
         $prepare_content = $this->eael_prepare_table_of_content( $content, $support_tag );
 
-//        $html .= "<div id='eael-toc' class='eael-toc'>";
-//        $html .= "<span class='eael-toc-close'>×</span>";
-//            $html .= "<div class='eael-toc-header'>";
-//                $html .= "<h2 class='eael-toc-title'>".__('Table of Contents','essential-addons-elementor')."</h2>";
-//            $html .= "</div>";
-//            $html .= "<div class='eael-toc-body'>";
-//                $html .= $this->eael_list_hierarchy($content,$support_tag);
-//            $html .= "</div>";
-//        $html .= "</div>";
-
         $html = '<div class="main-content">'.$prepare_content.'</div>';
         return $html;
     }

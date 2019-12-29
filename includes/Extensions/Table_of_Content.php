@@ -118,22 +118,6 @@
             );
 
             $element->add_control(
-                'eael_ext_toc_bg_color',
-                [
-                    'label' => __('Background Color', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::COLOR,
-                    'default' => '',
-                    'selectors' => [
-                        '.eael-table-of-content' => 'background-color: {{VALUE}}',
-                    ],
-                    'separator' => 'before',
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
-
-            $element->add_control(
                 'eael_ext_toc_supported_heading_tag',
                 [
                     'label' => __( 'Supported Heading Tag', 'essential-addons-elementor' ),
@@ -167,31 +151,6 @@
             $element->end_controls_section();
 
             $element->start_controls_section(
-                'eael_ext_table_of_content_body_style',
-                [
-                    'label' => esc_html__('EA Toc Body', 'essential-addons-elementor'),
-                    'tab' => Controls_Manager::TAB_STYLE,
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
-
-            $element->add_responsive_control(
-                'eael_ext_table_of_content_body_r',
-                [
-                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-advance-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $element->end_controls_section();
-
-            $element->start_controls_section(
                 'eael_ext_table_of_content_header_style',
                 [
                     'label' => esc_html__('EA Toc Header', 'essential-addons-elementor'),
@@ -202,19 +161,65 @@
                 ]
             );
 
-            $element->add_responsive_control(
-                'eael_ext_table_of_content_header_r',
+            $element->add_control(
+                'eael_ext_table_of_content_header_bg',
                 [
-                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', 'em', '%'],
+                    'label' => __('Background Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .eael-advance-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '.eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
+                        '.eael-toc .eael-toc-close' => 'color: {{VALUE}}',
+                        '.eael-toc.expanded .eael-toc-button' => 'background-color: {{VALUE}}'
                     ],
+                    'separator' => 'before'
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_header_text_color',
+                [
+                    'label' => __('Text Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '',
+                    'selectors' => [
+                        '.eael-toc .eael-toc-header .eael-toc-title' => 'color: {{VALUE}}',
+                        '.eael-toc .eael-toc-close' => 'background-color: {{VALUE}}',
+                        '.eael-toc.expanded .eael-toc-button' => 'color: {{VALUE}}'
+                    ],
+                    'separator' => 'before'
                 ]
             );
 
             $element->end_controls_section();
+
+            $element->start_controls_section(
+                'eael_ext_table_of_content_body_style',
+                [
+                    'label' => esc_html__('EA Toc Body', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_body_bg',
+                [
+                    'label' => __('Background Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '',
+                    'selectors' => [
+                        '.eael-toc .eael-toc-body' => 'background-color: {{VALUE}}'
+                    ],
+                    'separator' => 'before'
+                ]
+            );
+
+            $element->end_controls_section();
+
+
 
             $element->start_controls_section(
                 'eael_ext_table_of_content_list_style',

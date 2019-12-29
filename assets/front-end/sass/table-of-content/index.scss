@@ -3,6 +3,9 @@
     z-index: 9999;
     width: 25vw!important;
     top:50%;
+    &.eael-toc-disable {
+        display: none;
+    }
     &.eael-sticky {
         position: fixed;
         top: 50px;
@@ -50,13 +53,19 @@
             margin-left: -5px;
             margin-bottom: 0;
              > li {
-                 padding: 5px 0;
+
+                 padding: 8px 0;
                  border-top: .5px dashed #c6c4cf;
+                //style 5
+                // border-top: solid thin #c6c4cf;
+                // width: 100%;
+                 //END STYLE 5
+
                  list-style-position: inside !important;
                  color: #c6c4cf;
                  //style 1
                  &:before{
-                     //content: '\00b7';
+                     content: '\00b7';
                      font-size: 5.2rem;
                      line-height: 0;
                      vertical-align: middle;
@@ -92,7 +101,7 @@
                         //    left: 0;
                         //    font-size: 15px;
                         //    z-index: 999999;
-                        //    border-bottom: 10px solid #08d699;
+                        //    border-bottom: 10px solid #ff7d50;
                         //    border-left: 5px solid transparent;
                         //    border-right: 5px solid transparent;
                         //    -webkit-transform: rotate(90deg);
@@ -100,14 +109,31 @@
                         //    content: " ";
                         //    margin-top: 5px;
                         //}
+                        //style 4
+                        //&:after{
+                        //    position: absolute;
+                        //    font-size: 15px;
+                        //    z-index: 999999;
+                        //    content: " ";
+                        //    margin-top: -6px;
+                        //    right: 0;
+                        //    background: #ff7d50;
+                        //    height: 31px;
+                        //    width: 2px;
+                        //}
                         color: #ff7d50;
                     }
                 }
                 &.eael-highlight {
+                    color: #ff7d50;
+                    > a {
+                        color: #ff7d50;
+                    }
                     > ul {
                         display: block;
-                        transition: all 2s linear;
+
                     }
+
                 }
                 a {
                     text-decoration: none;
@@ -131,31 +157,47 @@
         font-weight: 500;
         cursor: pointer;
     }
+    &.eael-toc-right {
+        right: 0;
+        width: inherit !important;
+        .eael-toc-close  {
+            left: -11px;
+        }
+        .eael-toc-button {
+            transform: translate(70px,120px) rotate(90deg);
+        }
+    }
 
     .eael-toc-button {
         display: none;
     }
     //style 3
-    .eael-toc-list > li {
-        border: none !important;
-    }
-    .eael-highlight {
-        background: #2d325a;
-        width: 100%;
-        > a {
-            color: #dcdff5;
-            &:after{
-                content: "\f107";
-                font-weight: 900;
-                font-family: "Font Awesome 5 Free";
-                position: absolute;
-                right: 30px;
-                color: #dcdff5;
-            }
-        }
-        .active > a{
-            color: #dcdff5 !important;
-        }
-    }
-
+    //.eael-toc-list > li {
+    //    border: none !important;
+    //}
+    //.eael-highlight {
+    //    background: #2d325a;
+    //    width: 100%;
+    //    > a {
+    //        color: #dcdff5;
+    //        &:after{
+    //            content: "\f107";
+    //            font-weight: 900;
+    //            font-family: "Font Awesome 5 Free";
+    //            position: absolute;
+    //            right: 30px;
+    //            color: #dcdff5;
+    //        }
+    //    }
+    //    .active > a{
+    //        color: #dcdff5 !important;
+    //    }
+    //    &:before{
+    //        content: " ";
+    //        background: red;
+    //        position: absolute;
+    //        width: inherit;
+    //        right: 0;
+    //    }
+    //}
 }
