@@ -241,7 +241,8 @@
                 'eael_google_calendar_end_date',
                 [
                     'label'     => __( 'End Date', 'plugin-domain' ),
-                    'type'      => Controls_Manager::DATE_TIME
+                    'type'      => Controls_Manager::DATE_TIME,
+                    'default'   => date( 'Y-m-d H:i', strtotime("+6 months",current_time( 'timestamp', 0 )) ),
                 ]
             );
 
@@ -888,7 +889,7 @@
                         'title'         => $event["eael_event_title"],
                         'description'   => $event["eael_event_description"],
                         'start'         => $event["eael_event_start_date"],
-                        'end'           => $event["eael_event_end_date"].":01",
+                        'end'           => date('Y-m-d H:i',strtotime($event["eael_event_end_date"])).":01",
                         'borderColor'   => $event['eael_event_border_color'],
                         'textColor'     => $event['eael_event_text_color'],
                         'color'         => $event['eael_event_bg_color'],
