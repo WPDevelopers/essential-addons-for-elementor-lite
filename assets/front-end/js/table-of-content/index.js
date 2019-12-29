@@ -70,5 +70,31 @@
             $('.eael-toc').toggleClass('expanded');
         });
 
+        //editor mode
+        if (isEditMode) {
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_table_of_content",
+                function (newValue) {
+                    var $settings = elementor.settings.page.getSettings();
+                    if (newValue != "yes") {
+                        $("#eael-toc").addClass('eael-toc-disable');
+                    }else{
+                        $("#eael-toc").removeClass('eael-toc-disable');
+                    }
+                    console.log($settings);
+                });
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_toc_position",
+                function (newValue) {
+                    var $settings = elementor.settings.page.getSettings();
+                    if (newValue === "right") {
+                        $("#eael-toc").addClass('eael-toc-right');
+                    }else{
+                        $("#eael-toc").removeClass('eael-toc-right');
+                    }
+                });
+
+        }
+
     });
 })(jQuery);
