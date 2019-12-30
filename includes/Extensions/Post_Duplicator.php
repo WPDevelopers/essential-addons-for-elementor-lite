@@ -30,7 +30,7 @@ class Post_Duplicator
         $wp_admin_bar->add_menu( 
             array( 
                 'id' => 'eae-duplicator', 
-                'title' => __( 'EA Duplicator', 'essential-addons-elementor' ),
+                'title' => __( 'EA Duplicator', 'essential-addons-for-elementor-lite'),
                 'href' => $duplicate_url
             ) 
         );
@@ -48,7 +48,7 @@ class Post_Duplicator
         if( current_user_can('edit_posts') && ($enabled_on == 'all' || $post->post_type == $enabled_on)) {
             $duplicate_url = admin_url('admin.php?action=eae_duplicate&post=' . $post->ID );
             $duplicate_url = wp_nonce_url( $duplicate_url, 'ea_duplicator' );
-            $actions['eae_duplicate'] = sprintf( '<a href="%s" title="%s">%s</a>', $duplicate_url,  __( 'Duplicate ' . $post->post_title, 'essential-addons-elementor' ), __( 'EA Duplicator', 'essential-addons-elementor' ) );
+            $actions['eae_duplicate'] = sprintf( '<a href="%s" title="%s">%s</a>', $duplicate_url,  __( 'Duplicate ' . $post->post_title, 'essential-addons-for-elementor-lite'), __( 'EA Duplicator', 'essential-addons-for-elementor-lite') );
         }
         return $actions;
     }

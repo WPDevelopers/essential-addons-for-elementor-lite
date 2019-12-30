@@ -22,7 +22,7 @@ class Cta_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Call to Action', 'essential-addons-elementor' );
+		return esc_html__( 'EA Call to Action', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
@@ -41,21 +41,21 @@ class Cta_Box extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_cta_content_settings',
   			[
-  				'label' => esc_html__( 'Content Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Content Settings', 'essential-addons-for-elementor-lite')
   			]
   		);
 
   		$this->add_control(
 		  'eael_cta_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Content Style', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Content Style', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'cta-basic',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'cta-basic'  		=> esc_html__( 'Basic', 'essential-addons-elementor' ),
-		     		'cta-flex' 			=> esc_html__( 'Flex Grid', 'essential-addons-elementor' ),
-		     		'cta-icon-flex' 	=> esc_html__( 'Flex Grid with Icon', 'essential-addons-elementor' ),
+		     		'cta-basic'  		=> esc_html__( 'Basic', 'essential-addons-for-elementor-lite'),
+		     		'cta-flex' 			=> esc_html__( 'Flex Grid', 'essential-addons-for-elementor-lite'),
+		     		'cta-icon-flex' 	=> esc_html__( 'Flex Grid with Icon', 'essential-addons-for-elementor-lite'),
 		     	],
 		  	]
 		);
@@ -66,14 +66,14 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 		  'eael_cta_content_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Content Type', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Content Type', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'cta-default',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'cta-default'  	=> esc_html__( 'Left', 'essential-addons-elementor' ),
-		     		'cta-center' 		=> esc_html__( 'Center', 'essential-addons-elementor' ),
-		     		'cta-right' 		=> esc_html__( 'Right', 'essential-addons-elementor' ),
+		     		'cta-default'  	=> esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
+		     		'cta-center' 		=> esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
+		     		'cta-right' 		=> esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
 		     	],
 		     	'condition'    => [
 		     		'eael_cta_type' => 'cta-basic'
@@ -84,14 +84,14 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 		  'eael_cta_color_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Color Style', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Color Style', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'cta-bg-color',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'cta-bg-color'  		=> esc_html__( 'Background Color', 'essential-addons-elementor' ),
-		     		'cta-bg-img' 			=> esc_html__( 'Background Image', 'essential-addons-elementor' ),
-		     		'cta-bg-img-fixed' 	=> esc_html__( 'Background Fixed Image', 'essential-addons-elementor' ),
+		     		'cta-bg-color'  		=> esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
+		     		'cta-bg-img' 			=> esc_html__( 'Background Image', 'essential-addons-for-elementor-lite'),
+		     		'cta-bg-img-fixed' 	=> esc_html__( 'Background Fixed Image', 'essential-addons-for-elementor-lite'),
 		     	],
 		  	]
 		);
@@ -102,7 +102,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_flex_grid_icon_new',
 			[
-				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_cta_flex_grid_icon',
 				'default' => [
@@ -118,21 +118,21 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_title',
 			[
-				'label' => esc_html__( 'Title', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Title', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'The Ultimate Addons For Elementor', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'The Ultimate Addons For Elementor', 'essential-addons-for-elementor-lite'),
 				'dynamic' => [ 'active' => true ]
 			]
 		);
 		$this->add_control(
             'eael_cta_title_content_type',
             [
-                'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+                'label'                 => __( 'Content Type', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'options'               => [
-                    'content'       => __( 'Content', 'essential-addons-elementor' ),
-                    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+                    'content'       => __( 'Content', 'essential-addons-for-elementor-lite'),
+                    'template'      => __( 'Saved Templates', 'essential-addons-for-elementor-lite'),
                 ],
                 'default'               => 'content',
             ]
@@ -141,7 +141,7 @@ class Cta_Box extends Widget_Base {
         $this->add_control(
             'eael_primary_templates',
             [
-                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+                'label'                 => __( 'Choose Template', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'options'               => $this->eael_get_page_templates(),
 				'condition'             => [
@@ -152,10 +152,10 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_content',
 			[
-				'label' => esc_html__( 'Content', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				'default' => esc_html__( 'Add a strong one liner supporting the heading above and giving users a reason to click on the button below.', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'Add a strong one liner supporting the heading above and giving users a reason to click on the button below.', 'essential-addons-for-elementor-lite'),
 				'separator' => 'after',
 				'condition' => [
 					'eael_cta_title_content_type' => 'content'
@@ -166,17 +166,17 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_btn_text',
 			[
-				'label' => esc_html__( 'Button Text', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__( 'Button Text', 'essential-addons-elementor' )
+				'default' => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite')
 			]
 		);
 
 		$this->add_control(
 			'eael_cta_btn_link',
 			[
-				'label' => esc_html__( 'Button Link', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button Link', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::URL,
 				'label_block' => true,
 				'default' => [
@@ -194,7 +194,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_bg_image',
 			[
-				'label' => esc_html__( 'Background Image', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Background Image', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -215,18 +215,18 @@ class Cta_Box extends Widget_Base {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
-					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
 		
 			$this->add_control(
 				'eael_control_get_pro',
 				[
-					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'label' => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-elementor' ),
+							'title' => __( '', 'essential-addons-for-elementor-lite'),
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -246,7 +246,7 @@ class Cta_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_cta_style_settings',
 			[
-				'label' => esc_html__( 'Call to Action Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Call to Action Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -254,10 +254,10 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_container_width',
 			[
-				'label' => esc_html__( 'Set max width for the container?', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Set max width for the container?', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'no', 'essential-addons-elementor' ),
+				'label_on' => __( 'yes', 'essential-addons-for-elementor-lite'),
+				'label_off' => __( 'no', 'essential-addons-for-elementor-lite'),
 				'default' => 'yes',
 			]
 		);
@@ -265,7 +265,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_cta_container_width_value',
 			[
-				'label' => __( 'Container Max Width (% or px)', 'essential-addons-elementor' ),
+				'label' => __( 'Container Max Width (% or px)', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 1170,
@@ -295,7 +295,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#f4f4f4',
 				'selectors' => [
@@ -307,7 +307,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_cta_container_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -319,7 +319,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_cta_container_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -332,7 +332,7 @@ class Cta_Box extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'eael_cta_border',
-				'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 				'selector' => '{{WRAPPER}} .eael-call-to-action',
 			]
 		);
@@ -340,7 +340,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -372,7 +372,7 @@ class Cta_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_cta_title_style_settings',
 			[
-				'label' => esc_html__( 'Color &amp; Typography ', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color &amp; Typography ', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -380,7 +380,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_title_heading',
 			[
-				'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Title Style', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 			]
 		);
@@ -388,7 +388,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_title_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -408,7 +408,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_content_heading',
 			[
-				'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content Style', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
@@ -417,7 +417,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_cta_content_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -444,7 +444,7 @@ class Cta_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_cta_btn_style_settings',
 			[
-				'label' => esc_html__( 'Button Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -452,14 +452,14 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 		  'eael_cta_btn_effect_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Effect', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Effect', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'default',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'default'  			=> esc_html__( 'Default', 'essential-addons-elementor' ),
-		     		'top-to-bottom'  	=> esc_html__( 'Top to Bottom', 'essential-addons-elementor' ),
-		     		'left-to-right'  	=> esc_html__( 'Left to Right', 'essential-addons-elementor' ),
+		     		'default'  			=> esc_html__( 'Default', 'essential-addons-for-elementor-lite'),
+		     		'top-to-bottom'  	=> esc_html__( 'Top to Bottom', 'essential-addons-for-elementor-lite'),
+		     		'left-to-right'  	=> esc_html__( 'Left to Right', 'essential-addons-for-elementor-lite'),
 		     	],
 		  	]
 		);
@@ -467,7 +467,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_cta_btn_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -479,7 +479,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_cta_btn_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -498,12 +498,12 @@ class Cta_Box extends Widget_Base {
 		$this->start_controls_tabs( 'eael_cta_button_tabs' );
 
 			// Normal State Tab
-			$this->start_controls_tab( 'eael_cta_btn_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-elementor' ) ] );
+			$this->start_controls_tab( 'eael_cta_btn_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite') ] );
 
 			$this->add_control(
 				'eael_cta_btn_normal_text_color',
 				[
-					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '#4d4d4d',
 					'selectors' => [
@@ -515,7 +515,7 @@ class Cta_Box extends Widget_Base {
 			$this->add_control(
 				'eael_cta_btn_normal_bg_color',
 				[
-					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '#f9f9f9',
 					'selectors' => [
@@ -528,7 +528,7 @@ class Cta_Box extends Widget_Base {
 				Group_Control_Border::get_type(),
 				[
 					'name' => 'eael_cat_btn_normal_border',
-					'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 					'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
 				]
 			);
@@ -536,7 +536,7 @@ class Cta_Box extends Widget_Base {
 			$this->add_control(
 				'eael_cta_btn_border_radius',
 				[
-					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::SLIDER,
 					'range' => [
 						'px' => [
@@ -552,12 +552,12 @@ class Cta_Box extends Widget_Base {
 			$this->end_controls_tab();
 
 			// Hover State Tab
-			$this->start_controls_tab( 'eael_cta_btn_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-elementor' ) ] );
+			$this->start_controls_tab( 'eael_cta_btn_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite') ] );
 
 			$this->add_control(
 				'eael_cta_btn_hover_text_color',
 				[
-					'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '#f9f9f9',
 					'selectors' => [
@@ -569,7 +569,7 @@ class Cta_Box extends Widget_Base {
 			$this->add_control(
 				'eael_cta_btn_hover_bg_color',
 				[
-					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '#3F51B5',
 					'selectors' => [
@@ -582,7 +582,7 @@ class Cta_Box extends Widget_Base {
 			$this->add_control(
 				'eael_cta_btn_hover_border_color',
 				[
-					'label' => esc_html__( 'Border Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '',
 					'selectors' => [
@@ -615,7 +615,7 @@ class Cta_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_cta_icon_style_settings',
 			[
-				'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'eael_cta_type' => 'cta-icon-flex'
@@ -626,7 +626,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_section_cta_icon_size',
 			[
-				'label' => esc_html__( 'Font Size', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Font Size', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 80
@@ -646,7 +646,7 @@ class Cta_Box extends Widget_Base {
 		$this->add_control(
 			'eael_section_cta_icon_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#444',
 				'selectors' => [
@@ -709,7 +709,7 @@ class Cta_Box extends Widget_Base {
                 }
 			?>
 		<?php endif; ?>
-	    <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
+	    <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-for-elementor-lite'); ?></a>
 	</div>
 	<?php endif; ?>
 	<?php if( 'cta-flex' == $settings['eael_cta_type'] ) : ?>
@@ -729,7 +729,7 @@ class Cta_Box extends Widget_Base {
 			<?php endif; ?>
 	    </div>
 	    <div class="action">
-	        <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
+	        <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-for-elementor-lite'); ?></a>
 	    </div>
 	</div>
 	<?php endif; ?>
@@ -761,7 +761,7 @@ class Cta_Box extends Widget_Base {
 			<?php endif; ?>
 	    </div>
 	    <div class="action">
-	       <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-elementor' ); ?></a>
+	       <a href="<?php echo esc_url( $settings['eael_cta_btn_link']['url'] ); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr( $cta_btn_effect ); ?>"><?php esc_html_e( $settings['eael_cta_btn_text'], 'essential-addons-for-elementor-lite'); ?></a>
 	    </div>
 	</div>
 	<?php endif; ?>
