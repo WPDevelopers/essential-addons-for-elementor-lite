@@ -56,11 +56,6 @@
 
                  padding: 8px 0;
                  border-top: .5px dashed #c6c4cf;
-                //style 5
-                // border-top: solid thin #c6c4cf;
-                // width: 100%;
-                 //END STYLE 5
-
                  list-style-position: inside !important;
                  color: #c6c4cf;
                  //style 1
@@ -95,32 +90,6 @@
                 &.active{
                     color: #ff7d50;
                     > a {
-                        //style 2
-                        //&:before{
-                        //    position: absolute;
-                        //    left: 0;
-                        //    font-size: 15px;
-                        //    z-index: 999999;
-                        //    border-bottom: 10px solid #ff7d50;
-                        //    border-left: 5px solid transparent;
-                        //    border-right: 5px solid transparent;
-                        //    -webkit-transform: rotate(90deg);
-                        //    transform: rotate(90deg);
-                        //    content: " ";
-                        //    margin-top: 5px;
-                        //}
-                        //style 4
-                        //&:after{
-                        //    position: absolute;
-                        //    font-size: 15px;
-                        //    z-index: 999999;
-                        //    content: " ";
-                        //    margin-top: -6px;
-                        //    right: 0;
-                        //    background: #ff7d50;
-                        //    height: 31px;
-                        //    width: 2px;
-                        //}
                         color: #ff7d50;
                     }
                 }
@@ -140,7 +109,57 @@
                     color: #707070;
                 }
             }
+            &.eael-toc-list-style_2,
+            &.eael-toc-list-style_3 {
+                > li {
+                    &:before {
+                        content: " ";
+                    }
+                }
+            }
+            &.eael-toc-list-style_2 {
+                li {
+                    &.active {
+                        > a {
+                            &:before {
+                                position: absolute;
+                                left: 0;
+                                font-size: 15px;
+                                z-index: 999999;
+                                border-bottom: 10px solid #ff7d50;
+                                border-left: 5px solid transparent;
+                                border-right: 5px solid transparent;
+                                -webkit-transform: rotate(90deg);
+                                transform: rotate(90deg);
+                                content: " ";
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.eael-toc-list-style_3 {
+                li {
+                    &.active {
+                        > a {
+                            &:after{
+                                position: absolute;
+                                font-size: 15px;
+                                z-index: 999999;
+                                content: " ";
+                                margin-top: -6px;
+                                right: 0;
+                                background: #ff7d50;
+                                height: 31px;
+                                width: 2px;
+                            }
+                        }
+                    }
+                }
+            }
         }
+
     }
     .eael-toc-close {
         position: absolute;

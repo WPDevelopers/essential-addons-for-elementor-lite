@@ -107,6 +107,33 @@
   text-decoration: none;
   color: #707070;
 }
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_2 > li:before, .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_3 > li:before {
+  content: " ";
+}
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before {
+  position: absolute;
+  left: 0;
+  font-size: 15px;
+  z-index: 999999;
+  border-bottom: 10px solid #ff7d50;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  content: " ";
+  margin-top: 5px;
+}
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after {
+  position: absolute;
+  font-size: 15px;
+  z-index: 999999;
+  content: " ";
+  margin-top: -6px;
+  right: 0;
+  background: #ff7d50;
+  height: 31px;
+  width: 2px;
+}
 .eael-toc .eael-toc-close {
   position: absolute;
   width: 29px;

@@ -81,8 +81,8 @@
                     }else{
                         $("#eael-toc").removeClass('eael-toc-disable');
                     }
-                    console.log($settings);
                 });
+
             elementor.settings.page.addChangeCallback(
                 "eael_ext_toc_position",
                 function (newValue) {
@@ -91,6 +91,16 @@
                         $("#eael-toc").addClass('eael-toc-right');
                     }else{
                         $("#eael-toc").removeClass('eael-toc-right');
+                    }
+                });
+
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_table_of_content_list_style",
+                function (newValue) {
+                    var list  = $(".eael-toc-list");
+                    list.removeClass('eael-toc-list-style_2 eael-toc-list-style_3');
+                    if (newValue !== "style_1") {
+                        list.addClass('eael-toc-list-'+newValue);
                     }
                 });
 

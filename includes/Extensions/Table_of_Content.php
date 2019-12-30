@@ -6,7 +6,9 @@
     }
 
     use \Elementor\Controls_Manager;
+    use \Elementor\Core\Schemes\Typography;
     use Elementor\Group_Control_Border;
+    use Elementor\Group_Control_Typography;
 
     class Table_of_Content {
 
@@ -168,9 +170,9 @@
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '.eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
-                        '.eael-toc .eael-toc-close' => 'color: {{VALUE}}',
-                        '.eael-toc.expanded .eael-toc-button' => 'background-color: {{VALUE}}'
+                        '{{WRAPPER}} .eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-close' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc.expanded .eael-toc-button' => 'background-color: {{VALUE}}'
                     ],
                     'separator' => 'before'
                 ]
@@ -183,11 +185,19 @@
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '.eael-toc .eael-toc-header .eael-toc-title' => 'color: {{VALUE}}',
-                        '.eael-toc .eael-toc-close' => 'background-color: {{VALUE}}',
-                        '.eael-toc.expanded .eael-toc-button' => 'color: {{VALUE}}'
-                    ],
-                    'separator' => 'before'
+                        '{{WRAPPER}} .eael-toc .eael-toc-header .eael-toc-title' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-close' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc.expanded .eael-toc-button' => 'color: {{VALUE}}'
+                    ]
+                ]
+            );
+
+            $element->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_ext_table_of_content_header_typography',
+                    'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title',
+                    'scheme' => Typography::TYPOGRAPHY_1,
                 ]
             );
 
@@ -211,7 +221,7 @@
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '.eael-toc .eael-toc-body' => 'background-color: {{VALUE}}'
+                        '{{WRAPPER}} .eael-toc .eael-toc-body' => 'background-color: {{VALUE}}'
                     ],
                     'separator' => 'before'
                 ]
@@ -222,7 +232,7 @@
 
 
             $element->start_controls_section(
-                'eael_ext_table_of_content_list_style',
+                'eael_ext_table_of_content_list_style_section',
                 [
                     'label' => esc_html__('EA Toc List', 'essential-addons-elementor'),
                     'tab' => Controls_Manager::TAB_STYLE,
@@ -232,17 +242,120 @@
                 ]
             );
 
-            $element->add_responsive_control(
-                'eael_ext_table_of_content_list_r',
+            $element->add_control(
+                'eael_ext_table_of_content_list_style',
                 [
-                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-advance-tabs' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    'label' => __( 'List Style', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'style_1',
+                    'options' => [
+                        'style_1' => __( 'Style 1', 'plugin-domain' ),
+                        'style_2' => __( 'Style 2', 'plugin-domain' ),
+                        'style_3' => __( 'Style 3', 'plugin-domain' )
                     ],
                 ]
             );
+
+            $element->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_ext_table_of_content_list_typography',
+                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li',
+                    'scheme' => Typography::TYPOGRAPHY_1
+                ]
+            );
+
+            $element->start_controls_tabs( 'ea_toc_list_style' );
+
+            $element->start_controls_tab( 'normal',
+                   [
+                       'label' => __( 'Normal', 'essential-addons-elementor' ),
+                   ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_list_text_color',
+                [
+                    'label' => __('Text Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li ' => 'color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            $element->end_controls_tab();
+
+            $element->start_controls_tab( 'active',
+                  [
+                      'label' => __( 'Active', 'essential-addons-elementor' ),
+                  ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_list_text_color_active',
+                [
+                    'label' => __('Text Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active > a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before' => 'border-bottom: 10px solid {{VALUE}}',
+                        '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_3 li.active>a:after > a:before' => 'background: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            $element->end_controls_tab(); // active
+
+            $element->end_controls_tabs();
+
+            $element->add_control(
+                'eael_ext_table_of_content_list_separator',
+                [
+                    'label' => __( 'Separator', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_list_separator_style',
+                [
+                    'label' => __( 'Style', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'dashed',
+                    'options' => [
+                        'solid'  => __( 'Solid', 'plugin-domain' ),
+                        'dashed' => __( 'Dashed', 'plugin-domain' ),
+                        'none' => __( 'None', 'plugin-domain' )
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list > li' => 'border-top: 0.5px {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list>li:first-child ' => 'border: none'
+                    ]
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_list_separator_color',
+                [
+                    'label' => __('Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list>li' => 'border-color: {{VALUE}}'
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content_list_separator_style!' => 'none',
+                    ],
+                ]
+            );
+
+
 
             $element->end_controls_section();
         }
