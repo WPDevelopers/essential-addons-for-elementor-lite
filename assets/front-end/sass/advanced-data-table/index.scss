@@ -1,0 +1,123 @@
+.ea-advanced-data-table-wrap {
+	* {
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.ea-advanced-data-table-wrap-inner {
+		width: 100%;
+		overflow-y: auto;
+	}
+
+	.ea-advanced-data-table {
+		width: 100%;
+		border-collapse: collapse;
+
+		th,
+		td {
+			word-break: keep-all;
+			white-space: nowrap;
+			background-color: transparent !important;
+		}
+
+		&.ea-advanced-data-table-sortable {
+			th {
+				position: relative;
+				cursor: pointer;
+				
+				&:after {
+					content: "";
+					border-left: 5px solid transparent;
+					border-right: 5px solid transparent;
+					border-top: 5px solid #4d4d4d;
+					position: absolute;
+					top: 50%;
+					right: 15px;
+					margin-top: -3px;
+				}
+
+				&.desc {
+					&:after {
+						border-top: none;
+						border-bottom: 5px solid #4d4d4d;
+					}
+				}
+			}
+		}
+
+		// paginated table
+		&.ea-advanced-data-table-paginated {
+			tbody {
+				tr {
+					display: none;
+				}
+			}
+		}
+
+		&.ea-advanced-data-table-editable {
+			th {
+				position: relative;
+
+				&:after {
+					content: "";
+					display: block;
+					height: 100%;
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: 10px;
+					border: none;
+					cursor: col-resize;
+				}
+			}
+
+			th,
+			td {
+				padding: 0;
+
+				textarea {
+					width: 100%;
+					height: 100%;
+					background-color: transparent;
+					border: none;
+					box-shadow: none;
+					resize: none;
+					margin: 0;
+					padding: 0;
+					outline: none;
+					vertical-align: middle;
+				}
+			}
+
+			&.ea-advanced-data-table-paginated {
+				tbody {
+					tr {
+						display: table-row;
+					}
+				}
+			}
+		}
+	}
+
+	// search
+	.ea-advanced-data-table-search-wrap {
+		&.ea-advanced-data-table-search-center {
+			text-align: center;
+		}
+
+		&.ea-advanced-data-table-search-right {
+			text-align: right;
+		}
+	}
+
+	// pagination
+	.ea-advanced-data-table-pagination {
+		a {
+			float: left;
+			display: inline-block;
+		}
+	}
+}

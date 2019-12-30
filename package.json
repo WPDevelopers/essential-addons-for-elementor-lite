@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rupok/essential-addons-elementor.git"
+    "url": "git+https://github.com/rupok/essential-addons-for-elementor-lite.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rupok/essential-addons-elementor/issues"
+    "url": "https://github.com/rupok/essential-addons-for-elementor-lite/issues"
   },
-  "homepage": "https://github.com/rupok/essential-addons-elementor#readme",
+  "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.1.0",

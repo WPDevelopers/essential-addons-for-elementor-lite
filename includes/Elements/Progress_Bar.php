@@ -24,7 +24,7 @@ class Progress_Bar extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Progress Bar', 'essential-addons-elementor');
+        return esc_html__('EA Progress Bar', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -50,7 +50,7 @@ class Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_layout',
             [
-                'label' => __('Layout', 'essential-addons-elementor'),
+                'label' => __('Layout', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -59,13 +59,13 @@ class Progress_Bar extends Widget_Base
             'add_eael_progressbar_layout',
             [
                 'layouts'   => [
-                    'line'             => __('Line', 'essential-addons-elementor'),
-                    'line_rainbow'     => __('Line Rainbow (Pro)', 'essential-addons-elementor'),
-                    'circle'           => __('Circle', 'essential-addons-elementor'),
-                    'circle_fill'      => __('Circle Fill (Pro)', 'essential-addons-elementor'),
-                    'half_circle'      => __('Half Circle', 'essential-addons-elementor'),
-                    'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-elementor'),
-                    'box'              => __('Box (Pro)', 'essential-addons-elementor'),
+                    'line'             => __('Line', 'essential-addons-for-elementor-lite'),
+                    'line_rainbow'     => __('Line Rainbow (Pro)', 'essential-addons-for-elementor-lite'),
+                    'circle'           => __('Circle', 'essential-addons-for-elementor-lite'),
+                    'circle_fill'      => __('Circle Fill (Pro)', 'essential-addons-for-elementor-lite'),
+                    'half_circle'      => __('Half Circle', 'essential-addons-for-elementor-lite'),
+                    'half_circle_fill' => __('Half Circle Fill (Pro)', 'essential-addons-for-elementor-lite'),
+                    'box'              => __('Box (Pro)', 'essential-addons-for-elementor-lite'),
                 ],
                 'conditions'    => [
                     'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'
@@ -76,7 +76,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_layout',
             [
-                'label'   => __('Layout', 'essential-addons-elementor'),
+                'label'   => __('Layout', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'options' => $options['layouts'],
                 'default' => 'line',
@@ -86,7 +86,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'eael_pricing_table_style_pro_alert',
             [
-                'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-elementor'),
+                'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'progress_bar_layout' => $options['conditions']
@@ -97,9 +97,9 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_title',
             [
-                'label' => __('Title', 'essential-addons-elementor'),
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Progress Bar', 'essential-addons-elementor'),
+                'default' => __('Progress Bar', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
             ]
         );
@@ -107,18 +107,18 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_title_html_tag',
             [
-                'label' => __('Title HTML Tag', 'essential-addons-elementor'),
+                'label' => __('Title HTML Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'h1'   => __('H1', 'essential-addons-elementor'),
-                    'h2'   => __('H2', 'essential-addons-elementor'),
-                    'h3'   => __('H3', 'essential-addons-elementor'),
-                    'h4'   => __('H4', 'essential-addons-elementor'),
-                    'h5'   => __('H5', 'essential-addons-elementor'),
-                    'h6'   => __('H6', 'essential-addons-elementor'),
-                    'div'  => __('div', 'essential-addons-elementor'),
-                    'span' => __('span', 'essential-addons-elementor'),
-                    'p'    => __('p', 'essential-addons-elementor'),
+                    'h1'   => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2'   => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3'   => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4'   => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5'   => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6'   => __('H6', 'essential-addons-for-elementor-lite'),
+                    'div'  => __('div', 'essential-addons-for-elementor-lite'),
+                    'span' => __('span', 'essential-addons-for-elementor-lite'),
+                    'p'    => __('p', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'div',
             ]
@@ -127,7 +127,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_value',
             [
-                'label'      => __('Counter Value', 'essential-addons-elementor'),
+                'label'      => __('Counter Value', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['%'],
                 'range'      => [
@@ -148,7 +148,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_show_count',
             [
-                'label'        => esc_html__('Display Count', 'essential-addons-elementor'),
+                'label'        => esc_html__('Display Count', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'yes',
@@ -158,7 +158,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_animation_duration',
             [
-                'label'      => __('Animation Duration', 'essential-addons-elementor'),
+                'label'      => __('Animation Duration', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [
@@ -179,9 +179,9 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_prefix_label',
             [
-                'label'     => __('Prefix Label', 'essential-addons-elementor'),
+                'label'     => __('Prefix Label', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::TEXT,
-                'default'   => __('Prefix', 'essential-addons-elementor'),
+                'default'   => __('Prefix', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'progress_bar_layout' => 'half_circle',
                 ],
@@ -192,9 +192,9 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_postfix_label',
             [
-                'label'     => __('Postfix Label', 'essential-addons-elementor'),
+                'label'     => __('Postfix Label', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::TEXT,
-                'default'   => __('Postfix', 'essential-addons-elementor'),
+                'default'   => __('Postfix', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'progress_bar_layout' => 'half_circle',
                 ],
@@ -208,18 +208,18 @@ class Progress_Bar extends Widget_Base
             $this->start_controls_section(
                 'eael_section_pro',
                 [
-                    'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+                    'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
                 ]
             );
         
             $this->add_control(
                 'eael_control_get_pro',
                 [
-                    'label'   => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+                    'label'   => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite'),
                     'type'    => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __( '', 'essential-addons-elementor' ),
+                            'title' => __( '', 'essential-addons-for-elementor-lite'),
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -243,7 +243,7 @@ class Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_style_general_line',
             [
-                'label'     => __('General', 'essential-addons-elementor'),
+                'label'     => __('General', 'essential-addons-for-elementor-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'progress_bar_layout' => $style_condition,
@@ -254,19 +254,19 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_alignment',
             [
-                'label' => __('Alignment', 'essential-addons-elementor'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -282,7 +282,7 @@ class Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_style_bg',
             [
-                'label'     => __('Background', 'essential-addons-elementor'),
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'progress_bar_layout' => $style_condition, // ['line', 'line_rainbow'] ( Pro Only )
@@ -293,7 +293,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_width',
             [
-                'label' => __('Width', 'essential-addons-elementor'),
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%'],
                 'range' => [
@@ -321,7 +321,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_height',
             [
-                'label' => __('Height', 'essential-addons-elementor'),
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -344,7 +344,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_bg_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#eee',
                 'selectors' => [
@@ -362,7 +362,7 @@ class Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_style_fill',
             [
-                'label' => __('Fill', 'essential-addons-elementor'),
+                'label' => __('Fill', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'progress_bar_layout' => $style_condition, // will here ['line', 'line_rainbow'] ( Pro Only )
@@ -373,7 +373,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_fill_height',
             [
-                'label' => __('Height', 'essential-addons-elementor'),
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -404,7 +404,7 @@ class Progress_Bar extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name'    => 'progress_bar_line_fill_color',
-                'label'   => __('Color', 'essential-addons-elementor'),
+                'label'   => __('Color', 'essential-addons-for-elementor-lite'),
                 'types'   => ['classic', 'gradient'],
                 'exclude' => [
                     'image',
@@ -418,7 +418,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_fill_stripe',
             [
-                'label'        => __('Show Stripe', 'essential-addons-elementor'),
+                'label'        => __('Show Stripe', 'essential-addons-for-elementor-lite'),
                 'type'         => \Elementor\Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'condition'     => $line_fill_color_condition,
@@ -432,12 +432,12 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_line_fill_stripe_animate',
             [
-                'label' => __('Stripe Animation', 'essential-addons-elementor'),
+                'label' => __('Stripe Animation', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'normal'  => __('Left To Right', 'essential-addons-elementor'),
-                    'reverse' => __('Right To Left', 'essential-addons-elementor'),
-                    'none'    => __('Disabled', 'essential-addons-elementor'),
+                    'normal'  => __('Left To Right', 'essential-addons-for-elementor-lite'),
+                    'reverse' => __('Right To Left', 'essential-addons-for-elementor-lite'),
+                    'none'    => __('Disabled', 'essential-addons-for-elementor-lite'),
                 ],
                 'default'   => 'none',
                 'condition' => $fill_stripe_animate_condition
@@ -454,7 +454,7 @@ class Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_style_general_circle',
             [
-                'label'     => __('General', 'essential-addons-elementor'),
+                'label'     => __('General', 'essential-addons-for-elementor-lite'),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'progress_bar_layout' => $circle_general_condition,
@@ -465,19 +465,19 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_alignment',
             [
-                'label' => __('Alignment', 'essential-addons-elementor'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -488,7 +488,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_size',
             [
-                'label'      => __('Size', 'essential-addons-elementor'),
+                'label'      => __('Size', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [
@@ -515,7 +515,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_bg_color',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -528,7 +528,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_stroke_width',
             [
-                'label'      => __('Stroke Width', 'essential-addons-elementor'),
+                'label'      => __('Stroke Width', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range'      => [
@@ -553,7 +553,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_stroke_color',
             [
-                'label'     => __('Stroke Color', 'essential-addons-elementor'),
+                'label'     => __('Stroke Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#eee',
                 'selectors' => [
@@ -577,7 +577,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_circle_fill_color',
             [
-                'label'     => __('Fill Color', 'essential-addons-elementor'),
+                'label'     => __('Fill Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#000',
                 'selectors' => $circle_fill_color_condition,
@@ -589,7 +589,7 @@ class Progress_Bar extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'      => 'progress_bar_circle_box_shadow',
-                'label'     => __('Box Shadow', 'essential-addons-elementor'),
+                'label'     => __('Box Shadow', 'essential-addons-for-elementor-lite'),
                 'selector'  => '{{WRAPPER}} .eael-progressbar-circle-shadow',
                 'condition' => [
                     'progress_bar_layout' => 'circle',
@@ -609,7 +609,7 @@ class Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'progress_bar_section_style_typography',
             [
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -618,7 +618,7 @@ class Progress_Bar extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'progress_bar_title_typography',
-                'label'    => __('Title', 'essential-addons-elementor'),
+                'label'    => __('Title', 'essential-addons-for-elementor-lite'),
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-progressbar-title',
             ]
@@ -627,7 +627,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_title_color',
             [
-                'label' => __('Title Color', 'essential-addons-elementor'),
+                'label' => __('Title Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -641,7 +641,7 @@ class Progress_Bar extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'progress_bar_count_typography',
-                'label' => __('Counter', 'essential-addons-elementor'),
+                'label' => __('Counter', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-progressbar-count-wrap',
             ]
@@ -650,7 +650,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_count_color',
             [
-                'label' => __('Counter Color', 'essential-addons-elementor'),
+                'label' => __('Counter Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -664,7 +664,7 @@ class Progress_Bar extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'progress_bar_after_typography',
-                'label' => __('Prefix/Postfix', 'essential-addons-elementor'),
+                'label' => __('Prefix/Postfix', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-progressbar-half-circle-after span',
                 'condition' => [
@@ -676,7 +676,7 @@ class Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_after_color',
             [
-                'label' => __('Prefix/Postfix Color', 'essential-addons-elementor'),
+                'label' => __('Prefix/Postfix Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
