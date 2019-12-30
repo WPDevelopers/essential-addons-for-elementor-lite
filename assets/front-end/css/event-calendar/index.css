@@ -175,3 +175,32 @@ span.eaelec-modal-close {
 }
 
 /* Modal Ended */
+@media (max-width: 575px) {
+  .fc-toolbar {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .fc-toolbar .fc-center {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .fc-toolbar h2 {
+    font-size: 16px !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 5px !important;
+  }
+
+  .fc-ltr .fc-axis {
+    font-size: 12px !important;
+  }
+
+  .fc-row table thead:first-child tr:first-child th {
+    font-weight: normal !important;
+    font-size: 12px !important;
+    padding: 5px !important;
+  }
+}
