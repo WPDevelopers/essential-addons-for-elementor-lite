@@ -36,7 +36,7 @@ var Data_Table_Click_Handler = function(panel, model, view) {
 			var cols = rows[i].querySelectorAll("th, td");
 
 			for (var j = 0; j < cols.length; j++) {
-				row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
 			}
 
 			csv.push(row.join(","));

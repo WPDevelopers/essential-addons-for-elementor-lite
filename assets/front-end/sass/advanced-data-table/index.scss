@@ -15,10 +15,11 @@
 	.ea-advanced-data-table {
 		width: 100%;
 		border-collapse: collapse;
-		table-layout: fixed;
 
 		th,
 		td {
+			word-break: keep-all;
+			white-space: nowrap;
 			background-color: transparent !important;
 		}
 
