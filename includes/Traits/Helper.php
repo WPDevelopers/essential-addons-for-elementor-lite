@@ -1980,4 +1980,22 @@ trait Helper
         $html .= '</ul>';
         return $html;
     }
+
+    /**
+     * @param $page_obj
+     * @param $key
+     * @return string
+     */
+    public function eael_get_toc_setting_value( $page_obj, $key, $global_settings ){
+
+        if( $page_obj->get_settings('eael_ext_table_of_content') == 'yes' ){
+            return $page_obj->get_settings( $key );
+        }
+
+        if ( isset( $global_settings['table_of_content']['enabled'] ) ){
+            return $global_settings['table_of_content'][$key];
+        }
+
+        return '';
+    }
 }
