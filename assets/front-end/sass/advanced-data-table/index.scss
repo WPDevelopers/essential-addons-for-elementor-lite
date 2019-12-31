@@ -18,6 +18,8 @@
 
 		th,
 		td {
+			word-break: keep-all;
+			white-space: nowrap;
 			background-color: transparent !important;
 		}
 
