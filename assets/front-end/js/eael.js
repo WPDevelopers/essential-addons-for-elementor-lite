@@ -5599,6 +5599,54 @@ var trim = String.prototype.trim ?
 }));
 
 
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -7460,54 +7508,6 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -20976,67 +20976,6 @@ return $;
     });
 })(jQuery);
 
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -21134,694 +21073,65 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var advanced_data_table_timeout,
-	advanced_data_table_active_cell = null,
-	advanced_data_table_drag_start_x,
-	advanced_data_table_drag_start_width,
-	advanced_data_table_drag_el,
-	advanced_data_table_dragging = false;
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
 
-var Advanced_Data_Table_Update_View = function(view, refresh, value) {
-	var model = view.model;
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
 
-	// disable elementor remote server render
-	model.remoteRender = refresh;
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
 
-	if (elementor.config.version > "2.7.6") {
-		var container = view.getContainer();
-		var settings = view.getContainer().settings.attributes;
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
 
-		Object.keys(value).forEach(function(key) {
-			settings[key] = value[key];
-		});
+        var $this = $(this);
 
-		parent.window.$e.run("document/elements/settings", {
-			container: container,
-			settings: settings,
-			options: {
-				external: refresh
-			}
-		});
-	} else {
-		// update backbone model
-		Object.keys(value).forEach(function(key) {
-			model.setSetting(key, value[key]);
-		});
-	}
-
-	// enable elementor remote server render just after elementor throttle
-	// ignore multiple assign
-	advanced_data_table_timeout = setTimeout(function() {
-		model.remoteRender = true;
-	}, 1001);
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
 };
-
-var Advanced_Data_Table_Update_Model = function(model, container, refresh, value) {
-	// disable elementor remote server render
-	model.remoteRender = refresh;
-
-	if (elementor.config.version > "2.7.6") {
-		var settings = container.settings.attributes;
-
-		Object.keys(value).forEach(function(key) {
-			settings[key] = value[key];
-		});
-
-		parent.window.$e.run("document/elements/settings", {
-			container: container,
-			settings: settings,
-			options: {
-				external: refresh
-			}
-		});
-	} else {
-		// update backbone model
-		Object.keys(value).forEach(function(key) {
-			model.setSetting(key, value[key]);
-		});
-	}
-
-	// enable elementor remote server render just after elementor throttle
-	// ignore multiple assign
-	advanced_data_table_timeout = setTimeout(function() {
-		model.remoteRender = true;
-	}, 1001);
-};
-
-var Advanced_Data_Table = function($scope, $) {
-	var table = $scope.context.querySelector(".ea-advanced-data-table");
-	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
-	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
-	var classCollection = {};
-
-	if (isEditMode) {
-		// add edit class
-		table.classList.add("ea-advanced-data-table-editable");
-
-		// insert editable area
-		table.querySelectorAll("th, td").forEach(function(el) {
-			var value = el.innerHTML;
-
-			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
-			}
-		});
-
-		// drag
-		table.addEventListener("mousedown", function(e) {
-			if (e.target.tagName.toLowerCase() === "th") {
-				e.stopPropagation();
-
-				advanced_data_table_dragging = true;
-				advanced_data_table_drag_el = e.target;
-				advanced_data_table_drag_start_x = e.pageX;
-				advanced_data_table_drag_start_width = e.target.offsetWidth;
-			}
-		});
-
-		document.addEventListener("mousemove", function(e) {
-			if (advanced_data_table_dragging) {
-				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
-			}
-		});
-		document.addEventListener("mouseup", function(e) {
-			if (advanced_data_table_dragging) {
-				advanced_data_table_dragging = false;
-			}
-		});
-	} else {
-		// search
-		if (search) {
-			search.addEventListener("input", function(e) {
-				var input = this.value.toLowerCase();
-				var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
-
-				if (table.rows.length > 1) {
-					if (input.length > 0) {
-						pagination.style.display = "none";
-
-						for (var i = 1; i < table.rows.length; i++) {
-							var matchFound = false;
-
-							if (table.rows[i].cells.length > 0) {
-								for (var j = 0; j < table.rows[i].cells.length; j++) {
-									if (table.rows[i].cells[j].textContent.toLowerCase().indexOf(input) > -1) {
-										matchFound = true;
-										break;
-									}
-								}
-							}
-
-							if (matchFound) {
-								table.rows[i].style.display = "table-row";
-							} else {
-								table.rows[i].style.display = "none";
-							}
-						}
-					} else {
-						pagination.style.display = "";
-
-						if (paginated) {
-							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
-							var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-							var endIndex = currentPage * table.dataset.itemsPerPage;
-
-							for (var i = 1; i <= table.rows.length - 1; i++) {
-								if (i >= startIndex && i <= endIndex) {
-									table.rows[i].style.display = "table-row";
-								} else {
-									table.rows[i].style.display = "none";
-								}
-							}
-						} else {
-							for (var i = 1; i <= table.rows.length - 1; i++) {
-								table.rows[i].style.display = "table-row";
-							}
-						}
-					}
-				}
-			});
-		}
-
-		// sort
-		if (table.classList.contains("ea-advanced-data-table-sortable")) {
-			table.addEventListener("click", function(e) {
-				if (e.target.tagName.toLowerCase() === "th") {
-					var index = e.target.cellIndex;
-					var desc = e.target.classList.toggle("desc");
-					var switching = true;
-					var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
-					var currentPage = 1;
-					var startIndex = 1;
-					var endIndex = table.rows.length - 1;
-
-					if (paginated) {
-						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
-						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-						endIndex =
-							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
-					}
-
-					classCollection[currentPage] = [];
-
-					table.querySelectorAll("th").forEach(function(el) {
-						classCollection[currentPage].push(el.classList.contains("desc"));
-					});
-
-					while (switching) {
-						switching = false;
-
-						for (var i = startIndex; i < endIndex; i++) {
-							var x = table.rows[i].cells[index];
-							var y = table.rows[i + 1].cells[index];
-
-							if (isNaN(parseInt(x.innerText)) || isNaN(parseInt(y.innerText))) {
-								x = x.innerText.toLowerCase();
-								y = y.innerText.toLowerCase();
-							} else {
-								x = parseInt(x.innerText);
-								y = parseInt(y.innerText);
-							}
-
-							if (desc === true && x < y) {
-								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-								switching = true;
-
-								break;
-							} else if (desc === false && x > y) {
-								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-								switching = true;
-
-								break;
-							}
-						}
-					}
-				}
-			});
-		}
-
-		// paginated table
-		if (table.classList.contains("ea-advanced-data-table-paginated")) {
-			var paginationHTML = "";
-			var currentPage = 1;
-			var startIndex = 1;
-			var endIndex = currentPage * table.dataset.itemsPerPage;
-			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
-
-			// insert pagination
-			if (maxPages > 1) {
-				for (var i = 1; i <= maxPages; i++) {
-					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
-				}
-
-				pagination.insertAdjacentHTML(
-					"beforeend",
-					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
-				);
-			}
-
-			// make initial item visible
-			for (var i = 0; i <= endIndex; i++) {
-				if (i >= table.rows.length) {
-					break;
-				}
-
-				table.rows[i].style.display = "table-row";
-			}
-
-			// paginate on click
-			pagination.addEventListener("click", function(e) {
-				e.preventDefault();
-
-				if (e.target.tagName.toLowerCase() == "a") {
-					currentPage = e.target.dataset.page;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-					endIndex = currentPage * table.dataset.itemsPerPage;
-
-					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
-						el.classList.remove("ea-advanced-data-table-pagination-current");
-					});
-
-					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
-						el.classList.add("ea-advanced-data-table-pagination-current");
-					});
-
-					for (var i = 1; i <= table.rows.length - 1; i++) {
-						if (i >= startIndex && i <= endIndex) {
-							table.rows[i].style.display = "table-row";
-						} else {
-							table.rows[i].style.display = "none";
-						}
-					}
-
-					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("desc");
-
-						if (typeof classCollection[currentPage] != "undefined") {
-							if (classCollection[currentPage][index]) {
-								el.classList.add("desc");
-							}
-						}
-					});
-				}
-			});
-		}
-	}
-};
-
-var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
-	if (event.target.dataset.event == "ea:advTable:export") {
-		// export
-		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
-		var rows = table.querySelectorAll("table tr");
-		var csv = [];
-
-		// generate csv
-		for (var i = 0; i < rows.length; i++) {
-			var row = [];
-			var cols = rows[i].querySelectorAll("th, td");
-
-			for (var j = 0; j < cols.length; j++) {
-				row.push(
-					JSON.stringify(
-						cols[j]
-							.querySelector("textarea")
-							.value.replace(/(\r\n|\n|\r)/gm, " ")
-							.trim()
-					)
-				);
-			}
-
-			csv.push(row.join(","));
-		}
-
-		// download
-		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-		var download_link = parent.document.createElement("a");
-
-		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
-		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
-		download_link.href = window.URL.createObjectURL(csv_file);
-		download_link.style.display = "none";
-		parent.document.body.appendChild(download_link);
-		download_link.click();
-
-		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
-	} else if (event.target.dataset.event == "ea:advTable:import") {
-		// import
-		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
-		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
-		var csvArr = textarea.value.split("\n");
-		var header = "";
-		var body = "";
-
-		if (textarea.value.length > 0) {
-			body += "<tbody>";
-			csvArr.forEach(function(row, index) {
-				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
-
-				if (cols.length > 0) {
-					if (enableHeader && index == 0) {
-						header += "<thead><tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								header += "<th>" + JSON.parse(col) + "</th>";
-							} else {
-								header += "<th>" + col + "</th>";
-							}
-						});
-						header += "</tr></thead>";
-					} else {
-						body += "<tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								body += "<td>" + JSON.parse(col) + "</td>";
-							} else {
-								body += "<td>" + col + "</td>";
-							}
-						});
-						body += "</tr>";
-					}
-				}
-			});
-			body += "</tbody>";
-
-			if (header.length > 0 || body.length > 0) {
-				Advanced_Data_Table_Update_View(view, true, {
-					ea_adv_data_table_static_html: header + body
-				});
-			}
-		}
-
-		textarea.value = "";
-	}
-};
-
-// Inline edit
-var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
-	var localRender = function() {
-		var interval = setInterval(function() {
-			if (view.el.querySelector(".ea-advanced-data-table")) {
-				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
-
-				table.addEventListener("focusin", function(e) {
-					if (e.target.tagName.toLowerCase() == "textarea") {
-						advanced_data_table_active_cell = e.target;
-					}
-				});
-
-				table.addEventListener("input", function(e) {
-					if (e.target.tagName.toLowerCase() == "textarea") {
-						clearTimeout(advanced_data_table_timeout);
-
-						// clone current table
-						var origTable = table.cloneNode(true);
-
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function(el) {
-							var value = el.querySelector("textarea").value;
-							el.innerHTML = value;
-						});
-
-						// update table
-						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML
-						});
-					}
-				});
-
-				// drag
-				table.addEventListener("mouseup", function(e) {
-					if (e.target.tagName.toLowerCase() === "th") {
-						clearTimeout(advanced_data_table_timeout);
-
-						// clone current table
-						var origTable = table.cloneNode(true);
-
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function(el) {
-							var value = el.querySelector("textarea").value;
-							el.innerHTML = value;
-						});
-
-						// update table
-						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML
-						});
-					}
-				});
-
-				// clear style
-				table.addEventListener("dblclick", function(e) {
-					if (e.target.tagName.toLowerCase() === "th") {
-						e.stopPropagation();
-
-						e.target.style.width = "";
-					}
-				});
-
-				clearInterval(interval);
-			}
-		}, 10);
-	};
-
-	// init
-	localRender();
-
-	// after render
-	model.on("remote:render", function() {
-		localRender();
-	});
-
-	// export import handler
-	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
-
-	panel.el.addEventListener("click", handler);
-
-	panel.currentPageView.on("destroy", function() {
-		panel.el.removeEventListener("click", handler);
-	});
-};
-
-Advanced_Data_Table_Context_Menu = function(groups, element) {
-	if (element.options.model.attributes.widgetType == "eael-advanced-data-table") {
-		groups.push({
-			name: "ea_advanced_data_table",
-			actions: [
-				{
-					name: "add_row_above",
-					title: "Add Row Above",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
-							var row = table.insertRow(index);
-
-							for (var i = 0; i < table.rows[0].cells.length; i++) {
-								var cell = row.insertCell(i);
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "add_row_below",
-					title: "Add Row Below",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
-							var row = table.insertRow(index);
-
-							for (var i = 0; i < table.rows[0].cells.length; i++) {
-								var cell = row.insertCell(i);
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "add_column_left",
-					title: "Add Column Left",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex;
-
-							for (var i = 0; i < table.rows.length; i++) {
-								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
-									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
-								} else {
-									var cell = table.rows[i].insertCell(index);
-								}
-
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "add_column_right",
-					title: "Add Column Right",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
-
-							for (var i = 0; i < table.rows.length; i++) {
-								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
-									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
-								} else {
-									var cell = table.rows[i].insertCell(index);
-								}
-
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "delete_row",
-					title: "Delete Row",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
-
-							table.deleteRow(index);
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "delete_column",
-					title: "Delete Column",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex;
-
-							for (var i = 0; i < table.rows.length; i++) {
-								table.rows[i].deleteCell(index);
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				}
-			]
-		});
-	}
-
-	return groups;
-};
-
 jQuery(window).on("elementor/frontend/init", function() {
-	if (isEditMode) {
-		elementor.hooks.addFilter("elements/widget/contextMenuGroups", Advanced_Data_Table_Context_Menu);
-		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", Advanced_Data_Table_Inline_Edit);
-	}
-
-	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
 });
 
 var ContentTicker = function($scope, $) {
@@ -22841,4 +22151,712 @@ jQuery(window).on("elementor/frontend/init", function() {
         "frontend/element_ready/eael-twitter-feed.default",
         TwitterFeedHandler
     );
+});
+
+var advanced_data_table_timeout,
+	advanced_data_table_active_cell = null,
+	advanced_data_table_drag_start_x,
+	advanced_data_table_drag_start_width,
+	advanced_data_table_drag_el,
+	advanced_data_table_dragging = false;
+
+var Advanced_Data_Table_Update_View = function(view, refresh, value) {
+	var model = view.model;
+
+	// disable elementor remote server render
+	model.remoteRender = refresh;
+
+	if (elementor.config.version > "2.7.6") {
+		var container = view.getContainer();
+		var settings = view.getContainer().settings.attributes;
+
+		Object.keys(value).forEach(function(key) {
+			settings[key] = value[key];
+		});
+
+		parent.window.$e.run("document/elements/settings", {
+			container: container,
+			settings: settings,
+			options: {
+				external: refresh
+			}
+		});
+	} else {
+		// update backbone model
+		Object.keys(value).forEach(function(key) {
+			model.setSetting(key, value[key]);
+		});
+	}
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	advanced_data_table_timeout = setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
+var Advanced_Data_Table_Update_Model = function(model, container, refresh, value) {
+	// disable elementor remote server render
+	model.remoteRender = refresh;
+
+	if (elementor.config.version > "2.7.6") {
+		var settings = container.settings.attributes;
+
+		Object.keys(value).forEach(function(key) {
+			settings[key] = value[key];
+		});
+
+		parent.window.$e.run("document/elements/settings", {
+			container: container,
+			settings: settings,
+			options: {
+				external: refresh
+			}
+		});
+	} else {
+		// update backbone model
+		Object.keys(value).forEach(function(key) {
+			model.setSetting(key, value[key]);
+		});
+	}
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	advanced_data_table_timeout = setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
+var Advanced_Data_Table = function($scope, $) {
+	var table = $scope.context.querySelector(".ea-advanced-data-table");
+	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
+	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
+	var classCollection = {};
+
+	if (isEditMode) {
+		// add edit class
+		table.classList.add("ea-advanced-data-table-editable");
+
+		// insert editable area
+		table.querySelectorAll("th, td").forEach(function(el) {
+			var value = el.innerHTML;
+
+			if (value.indexOf('<textarea rows="1">') !== 0) {
+				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
+			}
+		});
+
+		// drag
+		table.addEventListener("mousedown", function(e) {
+			if (e.target.tagName.toLowerCase() === "th") {
+				e.stopPropagation();
+
+				advanced_data_table_dragging = true;
+				advanced_data_table_drag_el = e.target;
+				advanced_data_table_drag_start_x = e.pageX;
+				advanced_data_table_drag_start_width = e.target.offsetWidth;
+			}
+		});
+
+		document.addEventListener("mousemove", function(e) {
+			if (advanced_data_table_dragging) {
+				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
+			}
+		});
+		document.addEventListener("mouseup", function(e) {
+			if (advanced_data_table_dragging) {
+				advanced_data_table_dragging = false;
+			}
+		});
+	} else {
+		// search
+		if (search) {
+			search.addEventListener("input", function(e) {
+				var input = this.value.toLowerCase();
+				var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
+
+				if (table.rows.length > 1) {
+					if (input.length > 0) {
+						if (hasSort) {
+							table.classList.add("ea-advanced-data-table-unsortable");
+						}
+
+						pagination.style.display = "none";
+
+						for (var i = 1; i < table.rows.length; i++) {
+							var matchFound = false;
+
+							if (table.rows[i].cells.length > 0) {
+								for (var j = 0; j < table.rows[i].cells.length; j++) {
+									if (table.rows[i].cells[j].textContent.toLowerCase().indexOf(input) > -1) {
+										matchFound = true;
+										break;
+									}
+								}
+							}
+
+							if (matchFound) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
+					} else {
+						pagination.style.display = "";
+
+						if (hasSort) {
+							table.classList.remove("ea-advanced-data-table-unsortable");
+						}
+
+						if (paginated) {
+							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+							var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+							var endIndex = currentPage * table.dataset.itemsPerPage;
+
+							for (var i = 1; i <= table.rows.length - 1; i++) {
+								if (i >= startIndex && i <= endIndex) {
+									table.rows[i].style.display = "table-row";
+								} else {
+									table.rows[i].style.display = "none";
+								}
+							}
+						} else {
+							for (var i = 1; i <= table.rows.length - 1; i++) {
+								table.rows[i].style.display = "table-row";
+							}
+						}
+					}
+				}
+			});
+		}
+
+		// sort
+		if (table.classList.contains("ea-advanced-data-table-sortable")) {
+			table.addEventListener("click", function(e) {
+				if (e.target.tagName.toLowerCase() === "th") {
+					var index = e.target.cellIndex;
+					var switching = true;
+					var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+					var currentPage = 1;
+					var startIndex = 1;
+					var endIndex = table.rows.length - 1;
+
+					if (e.target.classList.contains("asc")) {
+						e.target.classList.remove("asc");
+						e.target.classList.add("desc");
+					} else if (e.target.classList.contains("desc")) {
+						e.target.classList.remove("desc");
+						e.target.classList.add("asc");
+					} else {
+						e.target.classList.add("asc");
+					}
+
+					if (paginated) {
+						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+						endIndex =
+							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
+					}
+
+					classCollection[currentPage] = [];
+
+					table.querySelectorAll("th").forEach(function(el) {
+						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
+					});
+
+					while (switching) {
+						switching = false;
+
+						for (var i = startIndex; i < endIndex; i++) {
+							var x = table.rows[i].cells[index];
+							var y = table.rows[i + 1].cells[index];
+
+							if (isNaN(parseInt(x.innerText)) || isNaN(parseInt(y.innerText))) {
+								x = x.innerText.toLowerCase();
+								y = y.innerText.toLowerCase();
+							} else {
+								x = parseInt(x.innerText);
+								y = parseInt(y.innerText);
+							}
+
+							if (e.target.classList.contains("desc") && x < y) {
+								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+								switching = true;
+
+								break;
+							} else if (e.target.classList.contains("asc") && x > y) {
+								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+								switching = true;
+
+								break;
+							}
+						}
+					}
+				}
+			});
+		}
+
+		// paginated table
+		if (table.classList.contains("ea-advanced-data-table-paginated")) {
+			var paginationHTML = "";
+			var currentPage = 1;
+			var startIndex = 1;
+			var endIndex = currentPage * table.dataset.itemsPerPage;
+			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
+
+			// insert pagination
+			if (maxPages > 1) {
+				for (var i = 1; i <= maxPages; i++) {
+					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
+				}
+
+				pagination.insertAdjacentHTML(
+					"beforeend",
+					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
+				);
+			}
+
+			// make initial item visible
+			for (var i = 0; i <= endIndex; i++) {
+				if (i >= table.rows.length) {
+					break;
+				}
+
+				table.rows[i].style.display = "table-row";
+			}
+
+			// paginate on click
+			pagination.addEventListener("click", function(e) {
+				e.preventDefault();
+
+				if (e.target.tagName.toLowerCase() == "a") {
+					currentPage = e.target.dataset.page;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+					endIndex = currentPage * table.dataset.itemsPerPage;
+
+					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+						el.classList.remove("ea-advanced-data-table-pagination-current");
+					});
+
+					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+						el.classList.add("ea-advanced-data-table-pagination-current");
+					});
+
+					for (var i = 1; i <= table.rows.length - 1; i++) {
+						if (i >= startIndex && i <= endIndex) {
+							table.rows[i].style.display = "table-row";
+						} else {
+							table.rows[i].style.display = "none";
+						}
+					}
+
+					table.querySelectorAll("th").forEach(function(el, index) {
+						el.classList.remove("asc", "desc");
+
+						if (typeof classCollection[currentPage] != "undefined") {
+							if (classCollection[currentPage][index]) {
+								el.classList.add(classCollection[currentPage][index]);
+							}
+						}
+					});
+				}
+			});
+		}
+	}
+};
+
+var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:advTable:export") {
+		// export
+		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			for (var j = 0; j < cols.length; j++) {
+				row.push(
+					JSON.stringify(
+						cols[j]
+							.querySelector("textarea")
+							.value.replace(/(\r\n|\n|\r)/gm, " ")
+							.trim()
+					)
+				);
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
+		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
+	} else if (event.target.dataset.event == "ea:advTable:import") {
+		// import
+		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
+		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
+		var csvArr = textarea.value.split("\n");
+		var header = "";
+		var body = "";
+
+		if (textarea.value.length > 0) {
+			body += "<tbody>";
+			csvArr.forEach(function(row, index) {
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
+
+				if (cols.length > 0) {
+					if (enableHeader && index == 0) {
+						header += "<thead><tr>";
+						cols.forEach(function(col) {
+							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+								header += "<th>" + JSON.parse(col) + "</th>";
+							} else {
+								header += "<th>" + col + "</th>";
+							}
+						});
+						header += "</tr></thead>";
+					} else {
+						body += "<tr>";
+						cols.forEach(function(col) {
+							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+								body += "<td>" + JSON.parse(col) + "</td>";
+							} else {
+								body += "<td>" + col + "</td>";
+							}
+						});
+						body += "</tr>";
+					}
+				}
+			});
+			body += "</tbody>";
+
+			if (header.length > 0 || body.length > 0) {
+				Advanced_Data_Table_Update_View(view, true, {
+					ea_adv_data_table_static_html: header + body
+				});
+			}
+		}
+
+		textarea.value = "";
+	}
+};
+
+// Inline edit
+var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
+	var localRender = function() {
+		var interval = setInterval(function() {
+			if (view.el.querySelector(".ea-advanced-data-table")) {
+				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+
+				table.addEventListener("focusin", function(e) {
+					if (e.target.tagName.toLowerCase() == "textarea") {
+						advanced_data_table_active_cell = e.target;
+					}
+				});
+
+				table.addEventListener("input", function(e) {
+					if (e.target.tagName.toLowerCase() == "textarea") {
+						clearTimeout(advanced_data_table_timeout);
+
+						// clone current table
+						var origTable = table.cloneNode(true);
+
+						// remove editable area
+						origTable.querySelectorAll("th, td").forEach(function(el) {
+							var value = el.querySelector("textarea").value;
+							el.innerHTML = value;
+						});
+
+						// update table
+						Advanced_Data_Table_Update_View(view, false, {
+							ea_adv_data_table_static_html: origTable.innerHTML
+						});
+					}
+				});
+
+				// drag
+				table.addEventListener("mouseup", function(e) {
+					if (e.target.tagName.toLowerCase() === "th") {
+						clearTimeout(advanced_data_table_timeout);
+
+						// clone current table
+						var origTable = table.cloneNode(true);
+
+						// remove editable area
+						origTable.querySelectorAll("th, td").forEach(function(el) {
+							var value = el.querySelector("textarea").value;
+							el.innerHTML = value;
+						});
+
+						// update table
+						Advanced_Data_Table_Update_View(view, false, {
+							ea_adv_data_table_static_html: origTable.innerHTML
+						});
+					}
+				});
+
+				// clear style
+				table.addEventListener("dblclick", function(e) {
+					if (e.target.tagName.toLowerCase() === "th") {
+						e.stopPropagation();
+
+						e.target.style.width = "";
+					}
+				});
+
+				clearInterval(interval);
+			}
+		}, 10);
+	};
+
+	// init
+	localRender();
+
+	// after render
+	model.on("remote:render", function() {
+		localRender();
+	});
+
+	// export import handler
+	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
+	});
+};
+
+Advanced_Data_Table_Context_Menu = function(groups, element) {
+	if (element.options.model.attributes.widgetType == "eael-advanced-data-table") {
+		groups.push({
+			name: "ea_advanced_data_table",
+			actions: [
+				{
+					name: "add_row_above",
+					title: "Add Row Above",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+							var row = table.insertRow(index);
+
+							for (var i = 0; i < table.rows[0].cells.length; i++) {
+								var cell = row.insertCell(i);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "add_row_below",
+					title: "Add Row Below",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
+							var row = table.insertRow(index);
+
+							for (var i = 0; i < table.rows[0].cells.length; i++) {
+								var cell = row.insertCell(i);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "add_column_left",
+					title: "Add Column Left",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
+									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+								} else {
+									var cell = table.rows[i].insertCell(index);
+								}
+
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "add_column_right",
+					title: "Add Column Right",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
+									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+								} else {
+									var cell = table.rows[i].insertCell(index);
+								}
+
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "delete_row",
+					title: "Delete Row",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+
+							table.deleteRow(index);
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "delete_column",
+					title: "Delete Column",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								table.rows[i].deleteCell(index);
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				}
+			]
+		});
+	}
+
+	return groups;
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	if (isEditMode) {
+		elementor.hooks.addFilter("elements/widget/contextMenuGroups", Advanced_Data_Table_Context_Menu);
+		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", Advanced_Data_Table_Inline_Edit);
+	}
+
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
