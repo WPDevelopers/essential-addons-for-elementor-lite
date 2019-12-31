@@ -134,7 +134,7 @@ trait Elements
 
     public function eael_table_of_content( $content ){
 
-        if(!is_singular()){
+        if( !is_singular() ){
             return $content;
         }
 
@@ -178,30 +178,23 @@ trait Elements
     }
 
     public function eael_table_of_content_editor (){
-        $content  = '';
+
         if(!is_singular()){
-            return $content;
+            return '';
         }
 
         $page_settings_manager = Settings_Manager::get_settings_managers('page');
         $page_settings_model = $page_settings_manager->get_model(get_the_ID());
         $global_settings = get_option('eael_global_settings');
-        $html = '';
-
-        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])) {
-            return $content;
+        $disable_toc = $html = '';
+        $el_class = 'eael-toc';
+        $enable_toc = true;
+        if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])){
+            $el_class .= ' eael-toc-disable';
+            $enable_toc = false;
         }
-
-        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes') {
-            if(get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
-                return $content;
-            } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
-                return $content;
-            } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
-                return $content;
-            } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
-                return $content;
-            }
+        if (!\Elementor\Plugin::$instance->preview->is_preview_mode() && !$enable_toc) {
+            $disable_toc = 'style="display:none;"';
         }
 
         $content = get_the_content();
@@ -210,21 +203,41 @@ trait Elements
         if(!empty($global_settings['table_of_content'])) {
             $support_tag = $global_settings['table_of_content']['supported_heading_tag'];
         }
+
         $support_tag = implode( ',', $support_tag );
         if( !preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER )){
             return $content;
         }
-        $prepare_content = $this->eael_prepare_table_of_content( $content, $support_tag );
+
+        $position = $page_settings_model->get_settings('eael_ext_toc_position');
+        if(!empty($global_settings['table_of_content'])) {
+            $position = $global_settings['table_of_content']['toc_position'];
+        }
+
+        $el_class .= ($position =='right')?' eael-toc-right':'';
+
+        $toc_style = $page_settings_model->get_settings('eael_ext_table_of_content_list_style');
+        if(!empty($global_settings['table_of_content'])) {
+            $toc_style = $global_settings['table_of_content']['toc_list_style'];
+        }
+
+        $toc_style_class = ' eael-toc-list-'.$toc_style;
+
+        $toc_title = $page_settings_model->get_settings('eael_ext_toc_title');
+        if(!empty($global_settings['table_of_content'])) {
+            $toc_title = $global_settings['table_of_content']['eael_ext_toc_title'];
+        }
+        $toc_title = esc_html($toc_title);
         $html = '';
-        $html .= "<div id='eael-toc' class='eael-toc'>";
+        $html .= "<div id='eael-toc' class='{$el_class}' {$disable_toc}>";
             $html .= "<span class='eael-toc-close'>×</span>";
             $html .= "<div class='eael-toc-header'>";
-                 $html .= "<h2 class='eael-toc-title'>".__('Table of Contents','essential-addons-elementor')."</h2>";
+                 $html .= "<h2 class='eael-toc-title'>{$toc_title}</h2>";
             $html .= "</div>";
                 $html .= "<div class='eael-toc-body'>";
-                $html .= $this->eael_list_hierarchy( $content, $support_tag );
+                $html .= $this->eael_list_hierarchy( $content, $support_tag, array( 'class' => $toc_style_class ) );
             $html .= "</div>";
-            $html .= sprintf( "<div class='eael-toc-button'><i class='fas fa-list'></i><span>%s</span></div>", __('Table of Contents','essential-addons-elementor') );
+            $html .= sprintf( "<div class='eael-toc-button'><i class='fas fa-list'></i><span>%s</span></div>", $toc_title );
         $html .= "</div>";
         echo $html;
     }

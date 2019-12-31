@@ -104,6 +104,14 @@
                     }
                 });
 
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_toc_title",
+                function (newValue) {
+                    var $toc_title = elementorFrontend.elements.$document.find('.eael-toc-title');
+                    $toc_title.text(newValue);
+                    elementorFrontend.elements.$document.find('.eael-toc-button span').text(newValue);
+                });
+
         }
 
     });

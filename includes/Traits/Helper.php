@@ -1881,8 +1881,12 @@ trait Helper
         return $html;
     }
 
-
-    public function eael_prepare_table_of_content($content ,$support_tag ){
+    /**
+     * @param $content
+     * @param $support_tag
+     * @return string
+     */
+    public function eael_prepare_table_of_content( $content, $support_tag ){
 
         $index = 0;
         $content = preg_replace_callback('#<(h['.$support_tag.'])(.*?)>(.*?)</\1>#si', function ($matches) use (&$index) {
@@ -1900,14 +1904,20 @@ trait Helper
         return $content;
     }
 
-    public function eael_list_hierarchy( $content, $support_tag ) {
+    /**
+     * @param $content
+     * @param $support_tag
+     * @param $extra_param
+     * @return string
+     */
+    public function eael_list_hierarchy( $content, $support_tag, $extra_param = array( 'class' => '' ) ) {
 
         preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER );
         $current_depth      = 6;
         $html               = '';
         $numbered_items     = array();
         $numbered_items_min = NULL;
-        $html .= '<ul class="eael-toc-list">';
+        $html .= "<ul class='eael-toc-list {$extra_param['class']}'>";
 
         // find the minimum heading to establish our baseline
         for ( $i = 0; $i < count( $matches ); $i ++ ) {
