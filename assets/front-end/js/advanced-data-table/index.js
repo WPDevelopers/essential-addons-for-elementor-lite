@@ -119,9 +119,14 @@ var Advanced_Data_Table = function($scope, $) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
 				var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
 
 				if (table.rows.length > 1) {
 					if (input.length > 0) {
+						if (hasSort) {
+							table.classList.add("ea-advanced-data-table-unsortable");
+						}
+
 						pagination.style.display = "none";
 
 						for (var i = 1; i < table.rows.length; i++) {
@@ -144,6 +149,10 @@ var Advanced_Data_Table = function($scope, $) {
 						}
 					} else {
 						pagination.style.display = "";
+
+						if (hasSort) {
+							table.classList.remove("ea-advanced-data-table-unsortable");
+						}
 
 						if (paginated) {
 							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
@@ -172,12 +181,21 @@ var Advanced_Data_Table = function($scope, $) {
 			table.addEventListener("click", function(e) {
 				if (e.target.tagName.toLowerCase() === "th") {
 					var index = e.target.cellIndex;
-					var desc = e.target.classList.toggle("desc");
 					var switching = true;
 					var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
 					var currentPage = 1;
 					var startIndex = 1;
 					var endIndex = table.rows.length - 1;
+
+					if (e.target.classList.contains("asc")) {
+						e.target.classList.remove("asc");
+						e.target.classList.add("desc");
+					} else if (e.target.classList.contains("desc")) {
+						e.target.classList.remove("desc");
+						e.target.classList.add("asc");
+					} else {
+						e.target.classList.add("asc");
+					}
 
 					if (paginated) {
 						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
@@ -189,7 +207,7 @@ var Advanced_Data_Table = function($scope, $) {
 					classCollection[currentPage] = [];
 
 					table.querySelectorAll("th").forEach(function(el) {
-						classCollection[currentPage].push(el.classList.contains("desc"));
+						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
 					});
 
 					while (switching) {
@@ -207,12 +225,12 @@ var Advanced_Data_Table = function($scope, $) {
 								y = parseInt(y.innerText);
 							}
 
-							if (desc === true && x < y) {
+							if (e.target.classList.contains("desc") && x < y) {
 								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
 								switching = true;
 
 								break;
-							} else if (desc === false && x > y) {
+							} else if (e.target.classList.contains("asc") && x > y) {
 								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
 								switching = true;
 
@@ -279,11 +297,11 @@ var Advanced_Data_Table = function($scope, $) {
 					}
 
 					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("desc");
+						el.classList.remove("asc", "desc");
 
 						if (typeof classCollection[currentPage] != "undefined") {
 							if (classCollection[currentPage][index]) {
-								el.classList.add("desc");
+								el.classList.add(classCollection[currentPage][index]);
 							}
 						}
 					});
