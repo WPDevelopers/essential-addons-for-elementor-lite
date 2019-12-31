@@ -162,11 +162,26 @@ trait Core
         //save table of content global value
         if($page_settings_model->get_settings('eael_ext_toc_global') == 'yes') {
             $global_settings['table_of_content'] = [
-                'post_id' => $post_id,
-                'enabled' => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
-                'display_condition' => $page_settings_model->get_settings('eael_ext_toc_global_display_condition'),
-                'position' => $page_settings_model->get_settings('eael_ext_toc_position'),
-                'supported_heading_tag' => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag')
+                'post_id'                                           => $post_id,
+                'enabled'                                           => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
+                'display_condition'                                 => $page_settings_model->get_settings('eael_ext_toc_global_display_condition'),
+                'eael_ext_toc_title'                                => $page_settings_model->get_settings('eael_ext_toc_title'),
+                'eael_ext_toc_position'                             => $page_settings_model->get_settings('eael_ext_toc_position'),
+                'eael_ext_toc_supported_heading_tag'                => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag'),
+
+                //toc header setting
+                'eael_ext_table_of_content_header_bg'               => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
+                'eael_ext_table_of_content_header_text_color'       => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
+
+                //toc body setting
+                'eael_ext_table_of_content_body_bg'                 => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
+
+                //list style setting
+                'eael_ext_table_of_content_list_style'              => $page_settings_model->get_settings('eael_ext_table_of_content_list_style'),
+                'eael_ext_table_of_content_list_text_color'         => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color'),
+                'eael_ext_table_of_content_list_text_color_active'  => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color_active'),
+                'eael_ext_table_of_content_list_separator_style'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_style'),
+                'eael_ext_table_of_content_list_separator_color'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_color'),
             ];
         } else {
             if(isset($global_settings['table_of_content']['post_id']) && $global_settings['table_of_content']['post_id'] == $post_id) {
@@ -174,6 +189,6 @@ trait Core
             }
         }
 
-        update_option('eael_global_settings', $global_settings);
+        update_option('eael_global_settings', $global_settings );
     }
 }
