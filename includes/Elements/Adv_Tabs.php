@@ -808,7 +808,7 @@ class Adv_Tabs extends Widget_Base
                 'data-tabid' => $this->get_id(),
             ]
         );
-        if ($settings['eael_adv_tabs_tab_caret_show'] == 'yes') {
+        if ($settings['eael_adv_tabs_tab_caret_show'] != 'yes') {
             $this->add_render_attribute('eael_tab_wrapper', 'class', 'active-caret-on');
         }
 
