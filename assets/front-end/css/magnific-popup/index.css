@@ -377,7 +377,7 @@ button.mfp-close,
 button.mfp-close:hover {
   display: inline-block !important;
   background: transparent;
-  width: auto !important;
+  width: auto;
 }
 
 .mfp-arrow,
