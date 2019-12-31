@@ -55,6 +55,28 @@ trait Enqueue
             });
         }
 
+        // Load fontawesome as fallback
+        wp_enqueue_style(
+            'font-awesome-5-all',
+            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_enqueue_style(
+            'font-awesome-4-shim',
+            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        wp_enqueue_script(
+            'font-awesome-4-shim',
+            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
 
         // admin bar css
         if (is_admin_bar_showing()) {
