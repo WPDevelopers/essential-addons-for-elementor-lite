@@ -7,7 +7,6 @@
 
     use \Elementor\Controls_Manager;
     use \Elementor\Core\Schemes\Typography;
-    use Elementor\Group_Control_Border;
     use Elementor\Group_Control_Typography;
 
     class Table_of_Content {
@@ -100,6 +99,20 @@
                     ]
                 );
             }
+
+            $element->add_control(
+                'eael_ext_toc_title',
+                [
+                    'label' => __('Title', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => __('Table of Contents', 'essential-addons-elementor'),
+                    'label_block' => false,
+                    'separator' => 'before',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
 
             $element->add_control(
                 'eael_ext_toc_position',

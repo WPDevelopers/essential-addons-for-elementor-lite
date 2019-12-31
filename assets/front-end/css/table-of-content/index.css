@@ -12,9 +12,6 @@
   top: 50px;
   background: none;
 }
-.eael-toc.expanded {
-  margin-left: -17px;
-}
 .eael-toc.expanded .eael-toc-header,
 .eael-toc.expanded .eael-toc-body,
 .eael-toc.expanded .eael-toc-close {
