@@ -762,6 +762,33 @@ class Adv_Tabs extends Widget_Base
             ]
         );
         $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Tab Style: Advance Tabs Responsive Controls
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_ad_responsive_controls',
+            [
+                'label' => esc_html__('Responsive Controls', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'responsive_vertical_layout',
+			[
+				'label'     => __( 'Vertical Layout', 'plugin-domain' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Yes', 'your-plugin' ),
+				'label_off' => __( 'No', 'your-plugin' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+        );
+        
+        $this->end_controls_section();
     }
 
     protected function render()
@@ -785,8 +812,12 @@ class Adv_Tabs extends Widget_Base
             $this->add_render_attribute('eael_tab_wrapper', 'class', 'active-caret-on');
         }
 
+        if($settings['responsive_vertical_layout'] != 'yes') {
+            $this->add_render_attribute('eael_tab_wrapper', 'class', 'responsive-vertical-layout');
+        }
+
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']));
-        ?>
+    ?>
 	<div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
   		<div class="eael-tabs-nav">
 		  <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
