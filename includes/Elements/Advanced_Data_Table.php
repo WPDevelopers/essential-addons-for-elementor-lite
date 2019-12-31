@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
 use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Box_Shadow;
 
 class Advanced_Data_Table extends Widget_Base
 {
@@ -235,14 +236,6 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'label' => __('Border', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
-
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -267,6 +260,27 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_width_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'ea_adv_data_table_width_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner',
             ]
         );
 
