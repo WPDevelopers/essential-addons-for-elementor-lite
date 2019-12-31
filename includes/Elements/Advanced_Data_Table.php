@@ -199,7 +199,7 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'ea_adv_data_table_width',
             [
                 'label' => __('Width', 'essential-addons-for-elementor-lite'),
@@ -217,7 +217,15 @@ class Advanced_Data_Table extends Widget_Base
                         'step' => 1,
                     ],
                 ],
-                'default' => [
+                'desktop_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'tablet_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'mobile_default' => [
                     'unit' => '%',
                     'size' => 100,
                 ],

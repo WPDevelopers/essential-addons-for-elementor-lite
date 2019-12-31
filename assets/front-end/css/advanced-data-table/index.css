@@ -59,6 +59,7 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th textarea,
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td textarea {
   width: 100%;
+  min-width: 100px;
   height: 100%;
   background-color: transparent;
   border: none;
