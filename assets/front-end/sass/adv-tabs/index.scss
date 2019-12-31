@@ -149,6 +149,14 @@
 		flex: 1 1 auto;
 	}
 
+	.responsive-vertical-layout {
+		&.eael-advance-tabs {
+			.eael-tabs-nav>ul li {
+				flex: 1 1 100%;
+			}
+		}
+	}
+
 	.eael-advance-tabs.eael-tabs-vertical {
 		flex-wrap: wrap;
 	}
