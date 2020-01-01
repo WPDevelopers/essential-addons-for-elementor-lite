@@ -1911,7 +1911,9 @@ trait Helper
      * @return string
      */
     public function eael_list_hierarchy( $content, $support_tag, $extra_param = array( 'class' => '' ) ) {
-
+        if( empty( $support_tag ) ){
+            return '<ul class="eael-toc-list"></ul>';
+        }
         preg_match_all( '/(<h(['.$support_tag.']{1})[^>]*>).*<\/h\2>/msuU', $content, $matches, PREG_SET_ORDER );
         $current_depth      = 6;
         $html               = '';

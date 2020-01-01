@@ -29,7 +29,8 @@
         });
 
         $(document).on("scroll", onScroll);
-
+        // var $settings = elementor.settings.page.getSettings();
+        // console.log($settings.settings);
         function onScroll(){
 
             var scrollPos = $(document).scrollTop();
@@ -66,6 +67,19 @@
             }
         }
 
+        function eael_toc_content( selector, supportTag ){
+            var container = document.querySelector(selector),
+                matches = Array.prototype.slice.call( container.querySelectorAll( supportTag ) ),
+                c =0;
+
+            matches.forEach(function( el ) {
+                var id = el.innerHTML.toLowerCase().replace(/ /g,"-");
+                el.id = c+"-"+id;
+                el.classList.add("eael-heading-content");
+                c++
+            });
+        }
+
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {
             $('.eael-toc').toggleClass('expanded');
         });
@@ -75,10 +89,14 @@
             elementor.settings.page.addChangeCallback(
                 "eael_ext_table_of_content",
                 function (newValue) {
-                    var $settings = elementor.settings.page.getSettings();
                     if (newValue != "yes") {
                         $("#eael-toc").addClass('eael-toc-disable');
                     }else{
+                        var $settings = elementor.settings.page.getSettings();
+                        var title = $settings.settings.eael_ext_toc_title;
+                        console.log($settings.settings);
+                        ea_toc_title_change( title );
+                        eael_toc_content('.entry-content', $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
                         $("#eael-toc").removeClass('eael-toc-disable');
                     }
                 });
@@ -86,7 +104,6 @@
             elementor.settings.page.addChangeCallback(
                 "eael_ext_toc_position",
                 function (newValue) {
-                    var $settings = elementor.settings.page.getSettings();
                     if (newValue === "right") {
                         $("#eael-toc").addClass('eael-toc-right');
                     }else{
@@ -104,15 +121,12 @@
                     }
                 });
 
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_title",
-                function (newValue) {
-                    var $toc_title = elementorFrontend.elements.$document.find('.eael-toc-title');
-                    $toc_title.text(newValue);
-                    elementorFrontend.elements.$document.find('.eael-toc-button span').text(newValue);
-                });
+            elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change );
 
+            function ea_toc_title_change ( newValue ) {
+                elementorFrontend.elements.$document.find('.eael-toc-title').text(newValue);
+                elementorFrontend.elements.$document.find('.eael-toc-button span').text(newValue);
+            }
         }
-
     });
 })(jQuery);
