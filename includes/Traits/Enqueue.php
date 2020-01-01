@@ -56,21 +56,21 @@ trait Enqueue
         }
 
         // Load fontawesome as fallback
-        wp_enqueue_style(
+        wp_register_style(
             'font-awesome-5-all',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
             false,
             EAEL_PLUGIN_VERSION
         );
 
-        wp_enqueue_style(
+        wp_register_style(
             'font-awesome-4-shim',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
             false,
             EAEL_PLUGIN_VERSION
         );
 
-        wp_enqueue_script(
+        wp_register_script(
             'font-awesome-4-shim',
             ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
             false,
