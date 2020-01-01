@@ -21318,19 +21318,25 @@ var Advanced_Data_Table = function($scope, $) {
 			table.addEventListener("click", function(e) {
 				if (e.target.tagName.toLowerCase() === "th") {
 					var index = e.target.cellIndex;
-					var switching = true;
 					var currentPage = 1;
 					var startIndex = 1;
 					var endIndex = table.rows.length - 1;
+					var sort = "";
+					var classList = e.target.classList;
+					var collection = [];
+					var origTable = table.cloneNode(true);
 
-					if (e.target.classList.contains("asc")) {
+					if (classList.contains("asc")) {
 						e.target.classList.remove("asc");
 						e.target.classList.add("desc");
-					} else if (e.target.classList.contains("desc")) {
+						sort = "desc";
+					} else if (classList.contains("desc")) {
 						e.target.classList.remove("desc");
 						e.target.classList.add("asc");
+						sort = "asc";
 					} else {
 						e.target.classList.add("asc");
+						sort = "asc";
 					}
 
 					if (pagination) {
@@ -21340,40 +21346,42 @@ var Advanced_Data_Table = function($scope, $) {
 							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
 					}
 
+					// collect header class
 					classCollection[currentPage] = [];
 
 					table.querySelectorAll("th").forEach(function(el) {
 						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
 					});
 
-					while (switching) {
-						switching = false;
+					// collect table cells value
+					for (var i = startIndex; i <= endIndex; i++) {
+						var value;
+						var cell = table.rows[i].cells[index];
 
-						for (var i = startIndex; i < endIndex; i++) {
-							var x = table.rows[i].cells[index];
-							var y = table.rows[i + 1].cells[index];
-
-							if (isNaN(parseInt(x.innerText)) || isNaN(parseInt(y.innerText))) {
-								x = x.innerText.toLowerCase();
-								y = y.innerText.toLowerCase();
-							} else {
-								x = parseInt(x.innerText);
-								y = parseInt(y.innerText);
-							}
-
-							if (e.target.classList.contains("desc") && x < y) {
-								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-								switching = true;
-
-								break;
-							} else if (e.target.classList.contains("asc") && x > y) {
-								table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-								switching = true;
-
-								break;
-							}
+						if (isNaN(parseInt(cell.innerText))) {
+							value = cell.innerText.toLowerCase();
+						} else {
+							value = parseInt(cell.innerText);
 						}
+
+						collection.push({ index: i, value: value });
 					}
+
+					// sort collection array
+					if (sort == "asc") {
+						collection.sort(function(x, y) {
+							return x.value - y.value;
+						});
+					} else if (sort == "desc") {
+						collection.sort(function(x, y) {
+							return y.value - x.value;
+						});
+					}
+
+					// sort table
+					collection.forEach(function(row, index) {
+						table.rows[startIndex + index].innerHTML = origTable.rows[row.index].innerHTML;
+					});
 				}
 			});
 		}
