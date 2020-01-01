@@ -214,6 +214,10 @@ var Advanced_Data_Table = function($scope, $) {
 					classCollection[currentPage] = [];
 
 					table.querySelectorAll("th").forEach(function(el) {
+						if (el.cellIndex != index) {
+							el.classList.remove("asc", "desc");
+						}
+
 						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
 					});
 
@@ -234,11 +238,11 @@ var Advanced_Data_Table = function($scope, $) {
 					// sort collection array
 					if (sort == "asc") {
 						collection.sort(function(x, y) {
-							return x.value - y.value;
+							return x.value > y.value ? 1 : -1;
 						});
 					} else if (sort == "desc") {
 						collection.sort(function(x, y) {
-							return y.value - x.value;
+							return x.value < y.value ? 1 : -1;
 						});
 					}
 
