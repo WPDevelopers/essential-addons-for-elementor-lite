@@ -118,7 +118,6 @@ var Advanced_Data_Table = function($scope, $) {
 		if (search) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
-				var paginated = table.classList.contains("ea-advanced-data-table-paginated");
 				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
 
 				if (table.rows.length > 1) {
@@ -127,7 +126,7 @@ var Advanced_Data_Table = function($scope, $) {
 							table.classList.add("ea-advanced-data-table-unsortable");
 						}
 
-						if (paginated) {
+						if (pagination) {
 							pagination.style.display = "none";
 						}
 
@@ -154,7 +153,7 @@ var Advanced_Data_Table = function($scope, $) {
 							table.classList.remove("ea-advanced-data-table-unsortable");
 						}
 
-						if (paginated) {
+						if (pagination) {
 							pagination.style.display = "";
 
 							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
@@ -184,7 +183,6 @@ var Advanced_Data_Table = function($scope, $) {
 				if (e.target.tagName.toLowerCase() === "th") {
 					var index = e.target.cellIndex;
 					var switching = true;
-					var paginated = table.classList.contains("ea-advanced-data-table-pagination");
 					var currentPage = 1;
 					var startIndex = 1;
 					var endIndex = table.rows.length - 1;
@@ -199,7 +197,7 @@ var Advanced_Data_Table = function($scope, $) {
 						e.target.classList.add("asc");
 					}
 
-					if (paginated) {
+					if (pagination) {
 						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 						endIndex =
