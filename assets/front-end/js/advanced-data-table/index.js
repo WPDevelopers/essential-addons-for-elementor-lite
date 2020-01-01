@@ -118,7 +118,7 @@ var Advanced_Data_Table = function($scope, $) {
 		if (search) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
-				var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+				var paginated = table.classList.contains("ea-advanced-data-table-paginated");
 				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
 
 				if (table.rows.length > 1) {
@@ -127,7 +127,9 @@ var Advanced_Data_Table = function($scope, $) {
 							table.classList.add("ea-advanced-data-table-unsortable");
 						}
 
-						pagination.style.display = "none";
+						if (paginated) {
+							pagination.style.display = "none";
+						}
 
 						for (var i = 1; i < table.rows.length; i++) {
 							var matchFound = false;
@@ -148,13 +150,13 @@ var Advanced_Data_Table = function($scope, $) {
 							}
 						}
 					} else {
-						pagination.style.display = "";
-
 						if (hasSort) {
 							table.classList.remove("ea-advanced-data-table-unsortable");
 						}
 
 						if (paginated) {
+							pagination.style.display = "";
+
 							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 							var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 							var endIndex = currentPage * table.dataset.itemsPerPage;
@@ -182,7 +184,7 @@ var Advanced_Data_Table = function($scope, $) {
 				if (e.target.tagName.toLowerCase() === "th") {
 					var index = e.target.cellIndex;
 					var switching = true;
-					var paginated = pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").length > 0;
+					var paginated = table.classList.contains("ea-advanced-data-table-pagination");
 					var currentPage = 1;
 					var startIndex = 1;
 					var endIndex = table.rows.length - 1;
