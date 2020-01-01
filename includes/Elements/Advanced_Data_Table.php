@@ -251,7 +251,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '#eeeeee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-wrap-inner',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table',
             ]
         );
 
