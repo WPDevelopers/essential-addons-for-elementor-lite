@@ -895,12 +895,29 @@
                         'color'         => $event['eael_event_bg_color'],
                         'url'           => $event["eael_event_link"]["url"],
                         'allDay'        => $event['eael_event_all_day'],
+                        'external'      => $event['eael_event_link']['is_external'],
+                        'nofollow'      => $event['eael_event_link']['nofollow'],
                         'dayNames'      => ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
                             'Thursday', 'Friday', 'Saturday']
                     );
+
                     $i++;
                 endforeach;
             endif;
+            /*
+            $this->add_render_attribute( 'eaelec_event_details_link', [
+                'class'	=> 'eaelec-event-details-link',
+                'href'	=> esc_attr($event['eael_event_link']['url'] ),
+            ]);
+            echo 'sdasdas';
+            if( $data['external'] ) { echo $data['external'].'Bangladesh';
+                $this->add_render_attribute( 'eaelec_event_details_link', 'target', '_blank' );
+            }
+            
+            if( $event['eael_event_link']['nofollow'] ) {
+                $this->add_render_attribute( 'eaelec_event_details_link', 'rel', 'nofollow' );
+            }
+            */
             //
             echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
                 data-cal_id = "' . $this->get_id() . '"
@@ -927,7 +944,7 @@
                         <p></p>
                     </div>
                     <div class="eaelec-modal-footer">
-                        <a href="#" class="eaelec-event-details-link">Event Details</a>
+                        <a class="eaelec-event-details-link">Event Details</a>
                     </div>
                 </div>
             </div>
