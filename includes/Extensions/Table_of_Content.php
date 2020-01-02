@@ -181,7 +181,7 @@
                 [
                     'label' => __('Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '',
+                    'default' => '#ff7d50',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc .eael-toc-close' => 'color: {{VALUE}}',
@@ -196,7 +196,7 @@
                 [
                     'label' => __('Text Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '',
+                    'default' => '#ffffff',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-header .eael-toc-title' => 'color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc .eael-toc-close' => 'background-color: {{VALUE}}',
@@ -232,7 +232,7 @@
                 [
                     'label' => __('Background Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '',
+                    'default' => '#fff6f3',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-body' => 'background-color: {{VALUE}}'
                     ],
@@ -291,10 +291,10 @@
                 [
                     'label' => __('Text Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '',
+                    'default' => '#707070',
                     'selectors' => [
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li a' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li ' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list li a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list li ' => 'color: {{VALUE}}',
                     ],
                 ]
             );
@@ -312,10 +312,10 @@
                 [
                     'label' => __('Text Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '',
+                    'default' => '#ff7d50',
                     'selectors' => [
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active > a' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list li.active > a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list li.active' => 'color: {{VALUE}}',
                         '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before' => 'border-bottom: 10px solid {{VALUE}}',
                         '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_3 li.active>a:after > a:before' => 'background: {{VALUE}}',
                     ],
@@ -344,11 +344,11 @@
                     'options' => [
                         'solid'  => __( 'Solid', 'plugin-domain' ),
                         'dashed' => __( 'Dashed', 'plugin-domain' ),
-                        'none' => __( 'None', 'plugin-domain' )
+                        'none'   => __( 'None', 'plugin-domain' )
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list > li' => 'border-top: 0.5px {{VALUE}}',
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list>li:first-child ' => 'border: none'
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list > li' => 'border-top: 0.5px {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list>li:first-child ' => 'border: none'
                     ]
                 ]
             );
@@ -358,17 +358,15 @@
                 [
                     'label' => __('Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '',
+                    'default' => '#c6c4cf',
                     'selectors' => [
-                        '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list>li' => 'border-color: {{VALUE}}'
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list>li' => 'border-color: {{VALUE}}'
                     ],
                     'condition' => [
                         'eael_ext_table_of_content_list_separator_style!' => 'none',
                     ],
                 ]
             );
-
-
 
             $element->end_controls_section();
         }

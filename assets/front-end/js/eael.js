@@ -22275,12 +22275,11 @@ function RunStickyPlayer(elem) {
         }
 
         function eael_toc_content( selector, supportTag ){
-            var container = document.querySelector(selector),
-                matches = Array.prototype.slice.call( container.querySelectorAll( supportTag ) ),
+            var mainSelector = document.querySelector(selector),
+                allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;
-
-            matches.forEach(function( el ) {
-                var id = el.innerHTML.toLowerCase().replace(/ /g,"-");
+            allSupportTag.forEach(function( el ) {
+                var id = el.innerHTML.toLowerCase().trim().replace(/ /g,"-");
                 el.id = c+"-"+id;
                 el.classList.add("eael-heading-content");
                 c++
@@ -22301,10 +22300,9 @@ function RunStickyPlayer(elem) {
                     }else{
                         var $settings = elementor.settings.page.getSettings();
                         var title = $settings.settings.eael_ext_toc_title;
-                        console.log($settings.settings);
                         ea_toc_title_change( title );
                         eael_toc_content('.entry-content', $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
-                        $("#eael-toc").removeClass('eael-toc-disable');
+                        $("#eael-toc").removeClass('eael-toc-disable eael-toc-global');
                     }
                 });
 
@@ -22334,6 +22332,10 @@ function RunStickyPlayer(elem) {
                 elementorFrontend.elements.$document.find('.eael-toc-title').text(newValue);
                 elementorFrontend.elements.$document.find('.eael-toc-button span').text(newValue);
             }
+        }
+        var intSupportTag = $('#eael-toc').data('eaeltoctag');
+        if(intSupportTag!=''){
+            eael_toc_content('.entry-content', intSupportTag );
         }
     });
 })(jQuery);
