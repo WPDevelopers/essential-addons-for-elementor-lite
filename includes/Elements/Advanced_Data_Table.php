@@ -358,6 +358,8 @@ class Advanced_Data_Table extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} th textarea' => 'color: {{VALUE}};',
                     '{{WRAPPER}} th' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} th:before' => 'border-bottom-color: {{VALUE}};',
+                    '{{WRAPPER}} th:after' => 'border-top-color: {{VALUE}};',
                 ],
             ]
         );
