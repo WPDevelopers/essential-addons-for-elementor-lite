@@ -65,7 +65,15 @@ jQuery(window).on('elementor/frontend/init', function () {
                     $(".eaelec-modal-header h2").html(event.title);
                     $(".eaelec-modal-body p").html(event.description);
                     $(".eaelec-modal-footer a").attr('href', event.url);
-
+                    if(event.external == 'on'){
+                        $(".eaelec-modal-footer a").attr('target', '_blank');
+                    }
+                    if(event.nofollow == 'on'){
+                        $(".eaelec-modal-footer a").attr('rel', 'nofollow');
+                    }
+                    if(event.url == ''){
+                        $(".eaelec-modal-footer a").css('display', 'none');
+                    }
                     // Popup color
                     $('.eaelec-modal-close').css('background-color', event.borderColor );
                     $('.eaelec-modal-header').css('border-left', '5px solid ' + event.borderColor );
