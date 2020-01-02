@@ -138,8 +138,8 @@ $elements = [
             [
                 'key'   => 'advanced-data-table',
                 'title' => __( 'Advanced Data Table', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/table/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/data-table/',
+                'demo_link' => 'https://essential-addons.com/elementor/advanced-data-table/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/advanced-data-table/',
             ],
             [
                 'key'   => 'content-ticker',
