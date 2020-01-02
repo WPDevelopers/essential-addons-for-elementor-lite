@@ -21286,7 +21286,7 @@ var Advanced_Data_Table = function($scope, $) {
 							table.classList.add("ea-advanced-data-table-unsortable");
 						}
 
-						if (pagination.innerHTML.length > 0) {
+						if (pagination && pagination.innerHTML.length > 0) {
 							pagination.style.display = "none";
 						}
 
@@ -21313,7 +21313,7 @@ var Advanced_Data_Table = function($scope, $) {
 							table.classList.remove("ea-advanced-data-table-unsortable");
 						}
 
-						if (pagination.innerHTML.length > 0) {
+						if (pagination && pagination.innerHTML.length > 0) {
 							pagination.style.display = "";
 
 							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
@@ -21363,7 +21363,7 @@ var Advanced_Data_Table = function($scope, $) {
 						sort = "asc";
 					}
 
-					if (pagination.innerHTML.length > 0) {
+					if (pagination && pagination.innerHTML.length > 0) {
 						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
 						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
 						endIndex =
