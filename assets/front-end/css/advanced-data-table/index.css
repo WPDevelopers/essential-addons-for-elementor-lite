@@ -65,6 +65,9 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th {
   position: relative;
 }
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:before {
+  border: none;
+}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:after {
   content: "";
   display: block;

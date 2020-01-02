@@ -94,6 +94,10 @@
 			th {
 				position: relative;
 
+				&:before {
+					border: none;
+				}
+
 				&:after {
 					content: "";
 					display: block;
