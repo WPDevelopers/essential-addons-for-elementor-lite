@@ -992,15 +992,29 @@
 
             if( isset( $data->items ) ){
                 foreach( $data->items as $key => $item ){
+                    $all_day = false;
+                    if(isset($item->start->date)){
+                        $ev_start_date = $item->start->date;
+                        $ev_end_date = $item->end->date;
+                        $ev_end_date = date( 'Y-m-d', strtotime("-1 days", strtotime($ev_end_date)) );
+                    }else{
+                        $ev_start_date = $item->start->dateTime;
+                        $ev_end_date = $item->end->dateTime;
+                    }
                     $calendar_data[] = [
                         'eael_event_title'         => $item->summary,
                         'eael_event_description'   => isset($item->description)?$item->description:'',
-                        'eael_event_start_date'    => $item->start->date,
-                        'eael_event_end_date'      => $item->end->date,
+                        'eael_event_start_date'    => $ev_start_date,
+                        'eael_event_end_date'      => $ev_end_date,
                         'eael_event_border_color'  => '#6231FF',
                         'eael_event_text_color'    => '#242424',
                         'eael_event_bg_color'      => '#FFF',
-                        'eael_event_link'          => ['url' => $item->htmlLink ],
+                        'eael_event_all_day'       => $all_day,
+                        'eael_event_link'          => [
+                            'is_external' => '',
+                            'nofollow'    => '',
+                            'url'         => $item->htmlLink
+                        ]
                     ];
                 }
                 set_transient( $transient_key, $calendar_data, 1*HOUR_IN_SECONDS );
