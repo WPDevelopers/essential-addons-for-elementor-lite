@@ -424,13 +424,13 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'ea_adv_data_table_head_cell_padding',
             [
                 'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
-                'default' => [
+                'desktop_default' => [
                     'unit' => 'px',
                     'top' => '10',
                     'right' => '10',
@@ -802,13 +802,13 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'ea_adv_data_table_body_cell_padding',
             [
                 'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
-                'default' => [
+                'desktop_default' => [
                     'unit' => 'px',
                     'top' => '10',
                     'right' => '10',
@@ -901,7 +901,7 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'ea_adv_data_table_search_padding',
             [
                 'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
@@ -1145,13 +1145,13 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'ea_adv_data_table_pagination_padding',
             [
                 'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
-                'default' => [
+                'desktop_default' => [
                     'unit' => 'px',
                     'top' => '5',
                     'right' => '15',
@@ -1172,13 +1172,13 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'ea_adv_data_table_pagination_margin',
             [
                 'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
-                'default' => [
+                'desktop_default' => [
                     'unit' => 'px',
                     'top' => '5',
                     'right' => '5',
