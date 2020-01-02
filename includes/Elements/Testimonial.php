@@ -28,9 +28,24 @@ class Testimonial extends Widget_Base {
 		return 'eicon-testimonial';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+
+	public function get_style_depends()
+    {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
+
+    public function get_script_depends()
+    {
+        return [
+            'font-awesome-4-shim'
+        ];
+    }
 
 
 	protected function _register_controls() {

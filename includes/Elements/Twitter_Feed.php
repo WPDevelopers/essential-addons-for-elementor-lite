@@ -36,6 +36,21 @@ class Twitter_Feed extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_style_depends()
+    {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
+
+    public function get_script_depends()
+    {
+        return [
+            'font-awesome-4-shim'
+        ];
+    }
+
     protected function _register_controls()
     {
 
