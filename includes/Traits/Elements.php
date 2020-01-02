@@ -194,8 +194,8 @@ trait Elements
      * @param $elements
      * @return string|void
      */
-    public function eael_toc_global_css( $post_css, $elements ){
-        error_log('manzur');
+    public function eael_toc_global_css(){
+
         if(!is_singular()){
             return '';
         }
@@ -262,6 +262,9 @@ trait Elements
             .eael-toc ul.eael-toc-list>li:first-child
             {border: none !important;}";
         }
-        $post_css->get_stylesheet()->add_raw_css( $toc_global_css );
+        wp_register_style( 'eael-toc-global', false );
+        wp_enqueue_style( 'eael-toc-global' );
+
+        wp_add_inline_style( 'eael-toc-global', $toc_global_css );
     }
 }
