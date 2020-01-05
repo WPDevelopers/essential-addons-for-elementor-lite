@@ -17,7 +17,7 @@ trait Core
      */
     public function i18n()
     {
-        load_plugin_textdomain('essential-addons-elementor');
+        load_plugin_textdomain('essential-addons-for-elementor-lite');
     }
 
     /**
@@ -87,12 +87,12 @@ trait Core
 
         if ($this->is_plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
-            $message = __('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-elementor');
-            $button_text = __('Activate Elementor', 'essential-addons-elementor');
+            $message = __('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite');
+            $button_text = __('Activate Elementor', 'essential-addons-for-elementor-lite');
         } else {
             $activation_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=elementor'), 'install-plugin_elementor');
-            $message = sprintf(__('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-elementor'), '<strong>', '</strong>');
-            $button_text = __('Install Elementor', 'essential-addons-elementor');
+            $message = sprintf(__('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>');
+            $button_text = __('Install Elementor', 'essential-addons-for-elementor-lite');
         }
 
         $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';

@@ -1,0 +1,160 @@
+.ea-advanced-data-table-wrap {
+	* {
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.ea-advanced-data-table-wrap-inner {
+		width: 100%;
+		overflow-y: auto;
+	}
+
+	.ea-advanced-data-table {
+		width: 100%;
+		border-collapse: collapse;
+
+		th,
+		td {
+			background-color: transparent !important;
+		}
+
+		&.ea-advanced-data-table-sortable {
+			th {
+				position: relative;
+				cursor: pointer;
+
+				&:before {
+					content: "";
+					border-left: 4px solid transparent;
+					border-right: 4px solid transparent;
+					border-bottom: 5px solid #4d4d4d;
+					position: absolute;
+					top: 50%;
+					right: 15px;
+					margin-top: -6px;
+				}
+
+				&:after {
+					content: "";
+					border-left: 4px solid transparent;
+					border-right: 4px solid transparent;
+					border-top: 5px solid #4d4d4d;
+					position: absolute;
+					top: 50%;
+					right: 15px;
+					margin-top: 1px;
+				}
+
+				&.asc {
+					&:before {
+						display: none;
+					}
+
+					&:after {
+						margin-top: -3px;
+					}
+				}
+
+				&.desc {
+					&:before {
+						margin-top: -3px;
+					}
+
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+
+		&.ea-advanced-data-table-unsortable {
+			th {
+				pointer-events: none;
+
+				&:before,
+				&:after {
+					display: none;
+				}
+			}
+		}
+
+		// paginated table
+		&.ea-advanced-data-table-paginated {
+			tbody {
+				tr {
+					display: none;
+				}
+			}
+		}
+
+		&.ea-advanced-data-table-editable {
+			th {
+				position: relative;
+
+				&:before {
+					border: none;
+				}
+
+				&:after {
+					content: "";
+					display: block;
+					height: 100%;
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: 10px;
+					border: none;
+					cursor: col-resize;
+				}
+			}
+
+			th,
+			td {
+				padding: 0;
+
+				textarea {
+					width: 100%;
+					min-width: 100px;
+					height: 100%;
+					background-color: transparent;
+					border: none;
+					box-shadow: none;
+					resize: none;
+					margin: 0;
+					padding: 0;
+					outline: none;
+					vertical-align: middle;
+				}
+			}
+
+			&.ea-advanced-data-table-paginated {
+				tbody {
+					tr {
+						display: table-row;
+					}
+				}
+			}
+		}
+	}
+
+	// search
+	.ea-advanced-data-table-search-wrap {
+		&.ea-advanced-data-table-search-center {
+			text-align: center;
+		}
+
+		&.ea-advanced-data-table-search-right {
+			text-align: right;
+		}
+	}
+
+	// pagination
+	.ea-advanced-data-table-pagination {
+		a {
+			display: inline-block;
+		}
+	}
+}

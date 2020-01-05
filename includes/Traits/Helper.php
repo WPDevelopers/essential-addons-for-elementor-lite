@@ -44,14 +44,14 @@ trait Helper
     protected function eael_query_controls()
     {
         $post_types = $this->eael_get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'essential-addons-elementor');
+        $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
         $taxonomies = get_taxonomies([], 'objects');
 
         if ('eael-content-ticker' === $this->get_name()) {
             $this->start_controls_section(
                 'eael_section_content_ticker_filters',
                 [
-                    'label' => __('Dynamic Content Settings', 'essential-addons-elementor'),
+                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_ticker_type' => 'dynamic',
                     ],
@@ -61,7 +61,7 @@ trait Helper
             $this->start_controls_section(
                 'eael_section_timeline__filters',
                 [
-                    'label' => __('Dynamic Content Settings', 'essential-addons-elementor'),
+                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
                     ],
@@ -71,7 +71,7 @@ trait Helper
             $this->start_controls_section(
                 'eael_section_post__filters',
                 [
-                    'label' => __('Query', 'essential-addons-elementor'),
+                    'label' => __('Query', 'essential-addons-for-elementor-lite'),
                 ]
             );
         }
@@ -79,7 +79,7 @@ trait Helper
         $this->add_control(
             'post_type',
             [
-                'label' => __('Source', 'essential-addons-elementor'),
+                'label' => __('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => $post_types,
                 'default' => key($post_types),
@@ -89,7 +89,7 @@ trait Helper
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'essential-addons-elementor'),
+                'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => $this->eael_get_all_types_post(),
                 'label_block' => true,
@@ -102,7 +102,7 @@ trait Helper
 
         $this->add_control(
             'authors', [
-                'label' => __('Author', 'essential-addons-elementor'),
+                'label' => __('Author', 'essential-addons-for-elementor-lite'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -138,7 +138,7 @@ trait Helper
         $this->add_control(
             'post__not_in',
             [
-                'label' => __('Exclude', 'essential-addons-elementor'),
+                'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => $this->eael_get_all_types_post(),
                 'label_block' => true,
@@ -153,7 +153,7 @@ trait Helper
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'essential-addons-elementor'),
+                'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
             ]
@@ -162,7 +162,7 @@ trait Helper
         $this->add_control(
             'offset',
             [
-                'label' => __('Offset', 'essential-addons-elementor'),
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '0',
             ]
@@ -171,7 +171,7 @@ trait Helper
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'essential-addons-elementor'),
+                'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => $this->eael_get_post_orderby_options(),
                 'default' => 'date',
@@ -182,7 +182,7 @@ trait Helper
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'essential-addons-elementor'),
+                'label' => __('Order', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -206,7 +206,7 @@ trait Helper
         $this->start_controls_section(
             'section_content_area',
             [
-                'label' => __('Content Area', 'essential-addons-elementor'),
+                'label' => __('Content Area', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -222,7 +222,7 @@ trait Helper
         $this->add_responsive_control(
             'content_area_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -234,7 +234,7 @@ trait Helper
         $this->add_responsive_control(
             'content_area_width',
             [
-                'label' => __('Width', 'essential-addons-elementor'),
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 100,
@@ -256,7 +256,7 @@ trait Helper
         $this->add_responsive_control(
             'content_area_max_width',
             [
-                'label' => __('Max Width', 'essential-addons-elementor'),
+                'label' => __('Max Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 1600,
@@ -287,7 +287,7 @@ trait Helper
         $this->start_controls_section(
             'eael_section_post_timeline_layout',
             [
-                'label' => __('Layout Settings', 'essential-addons-elementor'),
+                'label' => __('Layout Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -295,16 +295,16 @@ trait Helper
             $this->add_control(
                 'eael_post_grid_columns',
                 [
-                    'label' => esc_html__('Number of Columns', 'essential-addons-elementor'),
+                    'label' => esc_html__('Number of Columns', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'eael-col-4',
                     'options' => [
-                        'eael-col-1' => esc_html__('Single Column', 'essential-addons-elementor'),
-                        'eael-col-2' => esc_html__('Two Columns', 'essential-addons-elementor'),
-                        'eael-col-3' => esc_html__('Three Columns', 'essential-addons-elementor'),
-                        'eael-col-4' => esc_html__('Four Columns', 'essential-addons-elementor'),
-                        'eael-col-5' => esc_html__('Five Columns', 'essential-addons-elementor'),
-                        'eael-col-6' => esc_html__('Six Columns', 'essential-addons-elementor'),
+                        'eael-col-1' => esc_html__('Single Column', 'essential-addons-for-elementor-lite'),
+                        'eael-col-2' => esc_html__('Two Columns', 'essential-addons-for-elementor-lite'),
+                        'eael-col-3' => esc_html__('Three Columns', 'essential-addons-for-elementor-lite'),
+                        'eael-col-4' => esc_html__('Four Columns', 'essential-addons-for-elementor-lite'),
+                        'eael-col-5' => esc_html__('Five Columns', 'essential-addons-for-elementor-lite'),
+                        'eael-col-6' => esc_html__('Six Columns', 'essential-addons-for-elementor-lite'),
                     ],
                 ]
             );
@@ -314,12 +314,12 @@ trait Helper
             $this->add_control(
                 'grid_style',
                 [
-                    'label' => esc_html__('Post Block Style Preset', 'essential-addons-elementor'),
+                    'label' => esc_html__('Post Block Style Preset', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'post-block-style-default',
                     'options' => [
-                        'post-block-style-default' => esc_html__('Default', 'essential-addons-elementor'),
-                        'post-block-style-overlay' => esc_html__('Overlay', 'essential-addons-elementor'),
+                        'post-block-style-default' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+                        'post-block-style-overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
                     ],
                 ]
             );
@@ -336,13 +336,13 @@ trait Helper
                 $this->add_control(
                     'content_timeline_layout',
                     [
-                        'label' => esc_html__('Layout', 'essential-addons-elementor'),
+                        'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SELECT,
                         'default' => 'center',
                         'options' => [
-                            'left'   => esc_html__('Right', 'essential-addons-elementor'),
-                            'center' => esc_html__('Center', 'essential-addons-elementor'),
-                            'right'  => esc_html__('Left', 'essential-addons-elementor'),
+                            'left'   => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                            'center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                            'right'  => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         ],
                         'default'   => 'center'
                     ]
@@ -351,12 +351,12 @@ trait Helper
                 $this->add_control(
                     'date_position',
                     [
-                        'label' => esc_html__('Date Position', 'essential-addons-elementor'),
+                        'label' => esc_html__('Date Position', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::SELECT,
                         'default' => 'inside',
                         'options' => [
-                            'inside'   => esc_html__('Inside', 'essential-addons-elementor'),
-                            'outside' => esc_html__('Outside', 'essential-addons-elementor')
+                            'inside'   => esc_html__('Inside', 'essential-addons-for-elementor-lite'),
+                            'outside' => esc_html__('Outside', 'essential-addons-for-elementor-lite')
                         ],
                         'default'   => 'inside',
                         'condition' => [
@@ -369,10 +369,10 @@ trait Helper
                 $this->add_control(
                     'show_load_more',
                     [
-                        'label' => __('Show Load More', 'essential-addons-elementor'),
+                        'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
                         'type'      => Controls_Manager::SWITCHER,
-                        'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                        'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                        'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                        'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                         'return_value' => 'yes',
                         'default' => ''
                     ]
@@ -381,10 +381,10 @@ trait Helper
                 $this->add_control(
                     'show_load_more_text',
                     [
-                        'label' => esc_html__('Label Text', 'essential-addons-elementor'),
+                        'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
                         'label_block' => false,
-                        'default' => esc_html__('Load More', 'essential-addons-elementor'),
+                        'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
                         'condition' => [
                             'show_load_more' => 'yes',
                         ],
@@ -398,10 +398,10 @@ trait Helper
             $this->add_control(
                 'eael_show_image',
                 [
-                    'label' => __('Show Image', 'essential-addons-elementor'),
+                    'label' => __('Show Image', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::SWITCHER,
-                    'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'default' => 'yes'
                 ]
@@ -426,19 +426,19 @@ trait Helper
             $this->add_control(
                 'eael_show_image_or_icon',
                 [
-                    'label' => __('Show Circle Image / Icon', 'essential-addons-elementor'),
+                    'label' => __('Show Circle Image / Icon', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         'img' => [
-                            'title' => __('Image', 'essential-addons-elementor'),
+                            'title' => __('Image', 'essential-addons-for-elementor-lite'),
                             'icon' => 'fa fa-picture-o',
                         ],
                         'icon' => [
-                            'title' => __('Icon', 'essential-addons-elementor'),
+                            'title' => __('Icon', 'essential-addons-for-elementor-lite'),
                             'icon' => 'fa fa-info',
                         ],
                         'bullet' => [
-                            'title' => __('Bullet', 'essential-addons-elementor'),
+                            'title' => __('Bullet', 'essential-addons-for-elementor-lite'),
                             'icon' => 'fa fa-circle',
                         ],
                     ],
@@ -452,7 +452,7 @@ trait Helper
             $this->add_control(
                 'eael_icon_image',
                 [
-                    'label' => esc_html__('Icon Image', 'essential-addons-elementor'),
+                    'label' => esc_html__('Icon Image', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::MEDIA,
                     'default' => [
                         'url' => Utils::get_placeholder_image_src(),
@@ -465,7 +465,7 @@ trait Helper
             $this->add_control(
                 'eael_icon_image_size',
                 [
-                    'label' => esc_html__('Icon Image Size', 'essential-addons-elementor'),
+                    'label' => esc_html__('Icon Image Size', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SLIDER,
                     'default' => [
                         'size' => 24,
@@ -487,7 +487,7 @@ trait Helper
             $this->add_control(
                 'eael_content_timeline_circle_icon_new',
                 [
-                    'label' => esc_html__('Icon', 'essential-addons-elementor'),
+                    'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
                     'fa4compatibility' 		=> 'eael_content_timeline_circle_icon',
                     'type' => Controls_Manager::ICONS,
                     'default' => [
@@ -506,10 +506,10 @@ trait Helper
         $this->add_control(
             'eael_show_title',
             [
-                'label' => __('Show Title', 'essential-addons-elementor'),
+                'label' => __('Show Title', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::SWITCHER,
-                'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes'
             ]
@@ -518,10 +518,10 @@ trait Helper
         $this->add_control(
             'eael_show_excerpt',
             [
-                'label' => __('Show excerpt', 'essential-addons-elementor'),
+                'label' => __('Show excerpt', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::SWITCHER,
-                'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes'
             ]
@@ -530,7 +530,7 @@ trait Helper
         $this->add_control(
             'eael_excerpt_length',
             [
-                'label' => __('Excerpt Words', 'essential-addons-elementor'),
+                'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '10',
                 'condition' => [
@@ -542,10 +542,10 @@ trait Helper
         $this->add_control(
             'excerpt_expanison_indicator',
             [
-                'label' => esc_html__('Expanison Indicator', 'essential-addons-elementor'),
+                'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
-                'default' => esc_html__('...', 'essential-addons-elementor'),
+                'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_show_excerpt' => 'yes',
                 ],
@@ -555,10 +555,10 @@ trait Helper
         $this->add_control(
             'eael_show_read_more',
             [
-                'label' => __('Show Read More', 'essential-addons-elementor'),
+                'label' => __('Show Read More', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::SWITCHER,
-                'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'condition' => [
@@ -570,10 +570,10 @@ trait Helper
         $this->add_control(
             'eael_read_more_text',
             [
-                'label' => esc_html__('Label Text', 'essential-addons-elementor'),
+                'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
-                'default' => esc_html__('Read More', 'essential-addons-elementor'),
+                'default' => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_content_timeline_choose' => 'dynamic',
                     'eael_show_read_more' => 'yes',
@@ -589,10 +589,10 @@ trait Helper
             $this->add_control(
                 'eael_show_read_more_button',
                 [
-                    'label' => __('Show Read More Button', 'essential-addons-elementor'),
+                    'label' => __('Show Read More Button', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::SWITCHER,
-                    'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'default' => 'yes'
                 ]
@@ -601,9 +601,9 @@ trait Helper
             $this->add_control(
                 'read_more_button_text',
                 [
-                    'label' => __('Button Text', 'essential-addons-elementor'),
+                    'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
-                    'default' => __('Read More', 'essential-addons-elementor'),
+                    'default' => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
                     ],
@@ -616,10 +616,10 @@ trait Helper
             $this->add_control(
                 'eael_show_meta',
                 [
-                    'label' => __('Show Meta', 'essential-addons-elementor'),
+                    'label' => __('Show Meta', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::SWITCHER,
-                    'label_on'  => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'default' => 'yes'
                 ]
@@ -628,12 +628,12 @@ trait Helper
             $this->add_control(
                 'meta_position',
                 [
-                    'label' => esc_html__('Meta Position', 'essential-addons-elementor'),
+                    'label' => esc_html__('Meta Position', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'meta-entry-footer',
                     'options' => [
-                        'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-elementor'),
-                        'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-elementor'),
+                        'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-for-elementor-lite'),
+                        'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-for-elementor-lite'),
                     ],
                     'condition' => [
                         'eael_show_meta' => 'yes',
@@ -658,7 +658,7 @@ trait Helper
             $this->start_controls_section(
                 'eael_section_read_more_btn',
                 [
-                    'label' => __('Read More Button Style', 'essential-addons-elementor'),
+                    'label' => __('Read More Button Style', 'essential-addons-for-elementor-lite'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
@@ -679,14 +679,14 @@ trait Helper
                 $this->start_controls_tab(
                     'read_more_button_style_normal',
                     [
-                        'label' => __( 'Normal', 'essential-addons-elementor' ),
+                        'label' => __( 'Normal', 'essential-addons-for-elementor-lite'),
                     ]
                 );
 
                 $this->add_control(
                     'eael_post_read_more_btn_color',
                     [
-                        'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                        'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'default' => '#61ce70',
                         'selectors' => [
@@ -699,7 +699,7 @@ trait Helper
                     Group_Control_Background::get_type(),
                     [
                         'name' => 'read_more_btn_background',
-                        'label' => __( 'Background', 'essential-addons-elementor' ),
+                        'label' => __( 'Background', 'essential-addons-for-elementor-lite'),
                         'types' => [ 'classic', 'gradient' ],
                         'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
                         'exclude' => [
@@ -712,7 +712,7 @@ trait Helper
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'read_more_btn_border',
-                        'label' => __( 'Border', 'essential-addons-elementor' ),
+                        'label' => __( 'Border', 'essential-addons-for-elementor-lite'),
                         'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
                     ]
                 );
@@ -720,7 +720,7 @@ trait Helper
                 $this->add_responsive_control(
                     'read_more_btn_border_radius',
                     [
-                        'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                        'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => ['px', 'em', '%'],
                         'selectors' => [
@@ -734,14 +734,14 @@ trait Helper
                 $this->start_controls_tab(
                     'read_more_button_style_hover',
                     [
-                        'label' => __( 'Hover', 'essential-addons-elementor' ),
+                        'label' => __( 'Hover', 'essential-addons-for-elementor-lite'),
                     ]
                 );
 
                 $this->add_control(
                     'eael_post_read_more_btn_hover_color',
                     [
-                        'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                        'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::COLOR,
                         'selectors' => [
                             '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'color: {{VALUE}};',
@@ -753,7 +753,7 @@ trait Helper
                     Group_Control_Background::get_type(),
                     [
                         'name' => 'read_more_btn_hover_background',
-                        'label' => __( 'Background', 'essential-addons-elementor' ),
+                        'label' => __( 'Background', 'essential-addons-for-elementor-lite'),
                         'types' => [ 'classic', 'gradient' ],
                         'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
                         'exclude' => [
@@ -766,7 +766,7 @@ trait Helper
                     Group_Control_Border::get_type(),
                     [
                         'name' => 'read_more_btn_hover_border',
-                        'label' => __( 'Border', 'essential-addons-elementor' ),
+                        'label' => __( 'Border', 'essential-addons-for-elementor-lite'),
                         'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
                     ]
                 );
@@ -774,7 +774,7 @@ trait Helper
                 $this->add_responsive_control(
                     'read_more_btn_border_hover_radius',
                     [
-                        'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                        'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::DIMENSIONS,
                         'size_units' => ['px', 'em', '%'],
                         'selectors' => [
@@ -790,7 +790,7 @@ trait Helper
             $this->add_responsive_control(
                 'eael_post_read_more_btn_padding',
                 [
-                    'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
@@ -802,7 +802,7 @@ trait Helper
             $this->add_responsive_control(
                 'read_more_btn_margin',
                 [
-                    'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                    'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
@@ -824,7 +824,7 @@ trait Helper
         $this->start_controls_section(
             'eael_section_load_more_btn',
             [
-                'label' => __('Load More Button Style', 'essential-addons-elementor'),
+                'label' => __('Load More Button Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_load_more' => ['yes', '1']
@@ -835,7 +835,7 @@ trait Helper
         $this->add_responsive_control(
             'eael_post_grid_load_more_btn_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -847,7 +847,7 @@ trait Helper
         $this->add_responsive_control(
             'eael_post_grid_load_more_btn_margin',
             [
-                'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -866,12 +866,12 @@ trait Helper
         $this->start_controls_tabs('eael_post_grid_load_more_btn_tabs');
 
         // Normal State Tab
-        $this->start_controls_tab('eael_post_grid_load_more_btn_normal', ['label' => esc_html__('Normal', 'essential-addons-elementor')]);
+        $this->start_controls_tab('eael_post_grid_load_more_btn_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'eael_post_grid_load_more_btn_normal_text_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -883,7 +883,7 @@ trait Helper
         $this->add_control(
             'eael_cta_btn_normal_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#29d8d8',
                 'selectors' => [
@@ -896,7 +896,7 @@ trait Helper
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_post_grid_load_more_btn_normal_border',
-                'label' => esc_html__('Border', 'essential-addons-elementor'),
+                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-load-more-button',
             ]
         );
@@ -904,7 +904,7 @@ trait Helper
         $this->add_control(
             'eael_post_grid_load_more_btn_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -928,12 +928,12 @@ trait Helper
         $this->end_controls_tab();
 
         // Hover State Tab
-        $this->start_controls_tab('eael_post_grid_load_more_btn_hover', ['label' => esc_html__('Hover', 'essential-addons-elementor')]);
+        $this->start_controls_tab('eael_post_grid_load_more_btn_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'eael_post_grid_load_more_btn_hover_text_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -945,7 +945,7 @@ trait Helper
         $this->add_control(
             'eael_post_grid_load_more_btn_hover_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#27bdbd',
                 'selectors' => [
@@ -957,7 +957,7 @@ trait Helper
         $this->add_control(
             'eael_post_grid_load_more_btn_hover_border_color',
             [
-                'label' => esc_html__('Border Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -981,19 +981,19 @@ trait Helper
         $this->add_responsive_control(
             'eael_post_grid_loadmore_button_alignment',
             [
-                'label' => __('Button Alignment', 'essential-addons-elementor'),
+                'label' => __('Button Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'flex-start' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'flex-end' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -1016,18 +1016,18 @@ trait Helper
         $this->start_controls_section(
             'eael_section_pro',
             [
-                'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
+                'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_control_get_pro',
             [
-                'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
+                'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     '1' => [
-                        'title' => __('', 'essential-addons-elementor'),
+                        'title' => __('', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-unlock-alt',
                     ],
                 ],
@@ -1276,13 +1276,13 @@ trait Helper
                 'post_type' => 'wpcf7_contact_form',
                 'showposts' => 999,
             ));
-            $options[0] = esc_html__('Select a Contact Form', 'essential-addons-elementor');
+            $options[0] = esc_html__('Select a Contact Form', 'essential-addons-for-elementor-lite');
             if (!empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list)) {
                 foreach ($wpcf7_form_list as $post) {
                     $options[$post->ID] = $post->post_title;
                 }
             } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
             }
         }
         return $options;
@@ -1302,13 +1302,13 @@ trait Helper
 
             if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
 
-                $options[0] = esc_html__('Select Gravity Form', 'essential-addons-elementor');
+                $options[0] = esc_html__('Select Gravity Form', 'essential-addons-for-elementor-lite');
                 foreach ($gravity_forms as $form) {
                     $options[$form->id] = $form->title;
                 }
 
             } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
             }
         }
 
@@ -1330,12 +1330,12 @@ trait Helper
         $options = array();
 
         if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
-            $options[0] = esc_html__('Select weForm', 'essential-addons-elementor');
+            $options[0] = esc_html__('Select weForm', 'essential-addons-for-elementor-lite');
             foreach ($wpuf_form_list as $post) {
                 $options[$post->ID] = $post->post_title;
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
         }
 
         return $options;
@@ -1355,14 +1355,14 @@ trait Helper
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
 
-                $options[0] = esc_html__('Select Ninja Form', 'essential-addons-elementor');
+                $options[0] = esc_html__('Select Ninja Form', 'essential-addons-for-elementor-lite');
 
                 foreach ($contact_forms as $form) {
                     $options[$form->get_id()] = $form->get_setting('title');
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
         }
 
         return $options;
@@ -1381,13 +1381,13 @@ trait Helper
             $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select Caldera Form', 'essential-addons-elementor');
+                $options[0] = esc_html__('Select Caldera Form', 'essential-addons-for-elementor-lite');
                 foreach ($contact_forms as $form) {
                     $options[$form['ID']] = $form['name'];
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
         }
 
         return $options;
@@ -1411,13 +1411,13 @@ trait Helper
             $contact_forms = get_posts($args);
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select a WPForm', 'essential-addons-elementor');
+                $options[0] = esc_html__('Select a WPForm', 'essential-addons-for-elementor-lite');
                 foreach ($contact_forms as $post) {
                     $options[$post->ID] = $post->post_title;
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
         }
 
         return $options;
@@ -1438,12 +1438,12 @@ trait Helper
             
             $result = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}fluentform_forms" );
             if($result) {
-                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-elementor');
+                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
                 foreach($result as $form) {
                     $options[$form->id] = $form->title;
                 }
             }else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-elementor');
+                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
             }
         }
 
@@ -1595,6 +1595,10 @@ trait Helper
             ];
         }
 
+        if($class == '\Essential_Addons_Elementor\Elements\Post_Grid') {
+            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
+        }
+
         $html = $class::__render_template($args, $settings);
 
         echo $html;
@@ -1706,7 +1710,7 @@ trait Helper
             $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
                         </a>';
             if ($settings['eael_twitter_feed_show_date'] == 'true') {
-                $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-elementor'), human_time_diff(strtotime($item['created_at']))) . '</span>';
+                $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
             }
             $html .= '</div>
                     <div class="eael-twitter-feed-item-content">

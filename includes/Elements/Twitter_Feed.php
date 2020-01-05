@@ -23,7 +23,7 @@ class Twitter_Feed extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Twitter Feed', 'essential-addons-elementor');
+        return esc_html__('EA Twitter Feed', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -36,24 +36,39 @@ class Twitter_Feed extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_style_depends()
+    {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
+
+    public function get_script_depends()
+    {
+        return [
+            'font-awesome-4-shim'
+        ];
+    }
+
     protected function _register_controls()
     {
 
         $this->start_controls_section(
             'eael_section_twitter_feed_acc_settings',
             [
-                'label' => esc_html__('Account Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('Account Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_twitter_feed_ac_name',
             [
-                'label' => esc_html__('Account Name', 'essential-addons-elementor'),
+                'label' => esc_html__('Account Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '@wpdevteam',
                 'label_block' => false,
-                'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-elementor'),
+                'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-for-elementor-lite'),
 
             ]
         );
@@ -61,10 +76,10 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_hashtag_name',
             [
-                'label' => esc_html__('Hashtag Name', 'essential-addons-elementor'),
+                'label' => esc_html__('Hashtag Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
-                'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-elementor'),
+                'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-for-elementor-lite'),
 
             ]
         );
@@ -72,7 +87,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_consumer_key',
             [
-                'label' => esc_html__('Consumer Key', 'essential-addons-elementor'),
+                'label' => esc_html__('Consumer Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'default' => 'wwC72W809xRKd9ySwUzXzjkmS',
@@ -83,7 +98,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_consumer_secret',
             [
-                'label' => esc_html__('Consumer Secret', 'essential-addons-elementor'),
+                'label' => esc_html__('Consumer Secret', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'default' => 'rn54hBqxjve2CWOtZqwJigT3F5OEvrriK2XAcqoQVohzr2UA8h',
@@ -96,19 +111,19 @@ class Twitter_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_twitter_feed_settings',
             [
-                'label' => esc_html__('Layout Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('Layout Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_twitter_feed_type',
             [
-                'label' => esc_html__('Content Layout', 'essential-addons-elementor'),
+                'label' => esc_html__('Content Layout', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'masonry',
                 'options' => [
-                    'list' => esc_html__('List', 'essential-addons-elementor'),
-                    'masonry' => esc_html__('Masonry', 'essential-addons-elementor'),
+                    'list' => esc_html__('List', 'essential-addons-for-elementor-lite'),
+                    'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -116,7 +131,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_type_col_type',
             [
-                'label' => __('Column Grid', 'essential-addons-elementor'),
+                'label' => __('Column Grid', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'col-2' => '2 Columns',
@@ -133,7 +148,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_content_length',
             [
-                'label' => esc_html__('Content Length', 'essential-addons-elementor'),
+                'label' => esc_html__('Content Length', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'default' => '400',
@@ -143,7 +158,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_responsive_control(
             'eael_twitter_feed_column_spacing',
             [
-                'label' => esc_html__('Column spacing', 'essential-addons-elementor'),
+                'label' => esc_html__('Column spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -160,7 +175,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_post_limit',
             [
-                'label' => esc_html__('Post Limit', 'essential-addons-elementor'),
+                'label' => esc_html__('Post Limit', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'label_block' => false,
                 'default' => 10,
@@ -170,10 +185,10 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_media',
             [
-                'label' => esc_html__('Show Media Elements', 'essential-addons-elementor'),
+                'label' => esc_html__('Show Media Elements', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('yes', 'essential-addons-elementor'),
-                'label_off' => __('no', 'essential-addons-elementor'),
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
                 'default' => 'true',
                 'return_value' => 'true',
             ]
@@ -184,17 +199,17 @@ class Twitter_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_twitter_feed_card_settings',
             [
-                'label' => esc_html__('Card Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('Card Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_twitter_feed_show_avatar',
             [
-                'label' => esc_html__('Show Avatar', 'essential-addons-elementor'),
+                'label' => esc_html__('Show Avatar', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('yes', 'essential-addons-elementor'),
-                'label_off' => __('no', 'essential-addons-elementor'),
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
                 'default' => 'true',
                 'return_value' => 'true',
             ]
@@ -203,7 +218,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_avatar_style',
             [
-                'label' => __('Avatar Style', 'essential-addons-elementor'),
+                'label' => __('Avatar Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'circle' => 'Circle',
@@ -220,10 +235,10 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_show_date',
             [
-                'label' => esc_html__('Show Date', 'essential-addons-elementor'),
+                'label' => esc_html__('Show Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('yes', 'essential-addons-elementor'),
-                'label_off' => __('no', 'essential-addons-elementor'),
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
                 'default' => 'true',
                 'return_value' => 'true',
             ]
@@ -232,10 +247,10 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_show_read_more',
             [
-                'label' => esc_html__('Show Read More', 'essential-addons-elementor'),
+                'label' => esc_html__('Show Read More', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('yes', 'essential-addons-elementor'),
-                'label_off' => __('no', 'essential-addons-elementor'),
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
                 'default' => 'true',
                 'return_value' => 'true',
             ]
@@ -244,10 +259,10 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_show_icon',
             [
-                'label' => esc_html__('Show Icon', 'essential-addons-elementor'),
+                'label' => esc_html__('Show Icon', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('yes', 'essential-addons-elementor'),
-                'label_off' => __('no', 'essential-addons-elementor'),
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
                 'default' => 'true',
                 'return_value' => 'true',
             ]
@@ -259,18 +274,18 @@ class Twitter_Feed extends Widget_Base
             $this->start_controls_section(
                 'eael_section_pro',
                 [
-                    'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
+                    'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'eael_control_get_pro',
                 [
-                    'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
+                    'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-elementor'),
+                            'title' => __('', 'essential-addons-for-elementor-lite'),
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -290,7 +305,7 @@ class Twitter_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_twitter_feed_card_style_settings',
             [
-                'label' => esc_html__('Card Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Card Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -298,7 +313,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_card_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -310,7 +325,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_responsive_control(
             'eael_twitter_feed_card_container_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -324,7 +339,7 @@ class Twitter_Feed extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_twitter_feed_card_border',
-                'label' => esc_html__('Border', 'essential-addons-elementor'),
+                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-twitter-feed-item-inner',
             ]
         );
@@ -332,7 +347,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_card_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -363,7 +378,7 @@ class Twitter_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_twitter_feed_card_typo_settings',
             [
-                'label' => esc_html__('Color &amp; Typography', 'essential-addons-elementor'),
+                'label' => esc_html__('Color &amp; Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -371,7 +386,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_title_heading',
             [
-                'label' => esc_html__('Title Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Title Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -379,7 +394,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_title_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -399,7 +414,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_content_heading',
             [
-                'label' => esc_html__('Content Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Content Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -408,7 +423,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_content_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -429,7 +444,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_content_link_heading',
             [
-                'label' => esc_html__('Link Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Link Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -438,7 +453,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_content_link_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -450,7 +465,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_content_link_hover_color',
             [
-                'label' => esc_html__('Hover Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Hover Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
