@@ -1,7 +1,7 @@
 .eael-toc {
-	position: absolute;
+    position: absolute;
     z-index: 9999;
-    width: 25vw!important;
+    width: 300px!important;
     top:50%;
     &.eael-toc-disable {
         display: none;
@@ -20,7 +20,7 @@
         }
         .eael-toc-button {
             display: inline-block;
-            transform: translate(-70px,120px) rotate(90deg);
+            transform: translate(-90px,120px) rotate(90deg);
             background: #ff7d50;
             color: #fff;
             text-align: center;
@@ -54,36 +54,36 @@
         ul.eael-toc-list {
             margin-left: -5px;
             margin-bottom: 0;
-             > li {
+            > li {
 
-                 padding: 8px 0;
-                 border-top: .5px dashed #c6c4cf;
-                 list-style-position: inside !important;
-                 color: #c6c4cf;
-                 //style 1
-                 &:before{
-                     content: '\00b7';
-                     font-size: 5.2rem;
-                     line-height: 0;
-                     vertical-align: middle;
-                     margin-right: 5px;
-                     margin-left: -5px;
-                 }
-                 > ul {
-                     display: none;
-                     margin-left: 25px !important;
-                     margin-top: 5px !important;
-                 }
-                 ul {
-                     margin: 0;
-                     li{
-                         margin: 5px 0;
-                     }
-                 }
-                 &:first-child{
-                     border: none;
-                 }
-             }
+                padding: 8px 0;
+                border-top: .5px dashed #c6c4cf;
+                list-style-position: inside !important;
+                color: #c6c4cf;
+                //style 1
+                &:before{
+                    content: '\00b7';
+                    font-size: 5.2rem;
+                    line-height: 0;
+                    vertical-align: middle;
+                    margin-right: 5px;
+                    margin-left: -5px;
+                }
+                > ul {
+                    display: none;
+                    margin-left: 25px !important;
+                    margin-top: 5px !important;
+                }
+                ul {
+                    margin: 0;
+                    li{
+                        margin: 5px 0;
+                    }
+                }
+                &:first-child{
+                    border: none;
+                }
+            }
 
             li {
                 font-size: 15px;
@@ -185,7 +185,7 @@
             left: -11px;
         }
         .eael-toc-button {
-            transform: translate(70px,120px) rotate(90deg);
+            transform: translate(90px,120px) rotate(90deg);
         }
     }
 

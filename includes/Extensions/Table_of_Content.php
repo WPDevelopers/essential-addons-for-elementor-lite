@@ -184,7 +184,6 @@
                     'default' => '#ff7d50',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
-                        '{{WRAPPER}} .eael-toc .eael-toc-close' => 'color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc.expanded .eael-toc-button' => 'background-color: {{VALUE}}'
                     ],
                     'separator' => 'before'
@@ -199,7 +198,6 @@
                     'default' => '#ffffff',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-header .eael-toc-title' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .eael-toc .eael-toc-close' => 'background-color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc.expanded .eael-toc-button' => 'color: {{VALUE}}'
                     ]
                 ]
@@ -211,6 +209,40 @@
                     'name' => 'eael_ext_table_of_content_header_typography',
                     'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title',
                     'scheme' => Typography::TYPOGRAPHY_1,
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_close_button',
+                [
+                    'label' => __( 'Close Button', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_close_button_bg',
+                [
+                    'label' => __('Background Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#ffffff',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-close' => 'background-color: {{VALUE}}'
+                    ],
+                    'separator' => 'before'
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_close_button_text_color',
+                [
+                    'label' => __('Text Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#ff7d50',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-close' => 'color: {{VALUE}}',
+                    ]
                 ]
             );
 
@@ -315,9 +347,11 @@
                     'default' => '#ff7d50',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc ul.eael-toc-list li.active > a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list li.eael-highlight > a' => 'color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc ul.eael-toc-list li.active' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before' => 'border-bottom: 10px solid {{VALUE}}',
-                        '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_3 li.active>a:after > a:before' => 'background: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc ul.eael-toc-list li.eael-highlight' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before' => 'border-bottom: 10px solid {{VALUE}} !important',
+                        '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after' => 'background: {{VALUE}} !important',
                     ],
                 ]
             );

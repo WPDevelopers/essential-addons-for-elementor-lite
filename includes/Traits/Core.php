@@ -173,6 +173,10 @@ trait Core
                 'eael_ext_table_of_content_header_bg'               => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
                 'eael_ext_table_of_content_header_text_color'       => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
 
+                //close button setting
+                'eael_ext_table_of_content_close_button_bg'         => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
+                'eael_ext_table_of_content_close_button_text_color' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_text_color'),
+
                 //toc body setting
                 'eael_ext_table_of_content_body_bg'                 => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
 
