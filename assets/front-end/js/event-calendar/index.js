@@ -10,10 +10,10 @@ jQuery(window).on('elementor/frontend/init', function () {
         var eaelevModal = document.getElementById("eaelecModal");
         var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
         var calId = element.data('cal_id');
-       
+        
         //daysWeek1 = ['s1', 's2'];
         //alert('Hello there');
-
+        
         var calendar = $('#eael-event-calendar-' + calId).fullCalendar({
             editable:false,
             draggable:false,
@@ -59,6 +59,10 @@ jQuery(window).on('elementor/frontend/init', function () {
                         }
                         if(moment(event.end).format('MM-DD-YYYY') > moment(new Date()).add(1,'days').format('MM-DD-YYYY')){
                             $("span.eaelec-event-date-end").html('- ' + moment(event.end).format('MMM Do, h:mm A'));
+                        }
+
+                        if( (moment(event.start).format('MM-DD-YYYY') > moment(new Date()).add(1,'days').format('MM-DD-YYYY')) && (moment(event.start).format('MM-DD-YYYY')==moment(event.end).format('MM-DD-YYYY'))){
+                            $("span.eaelec-event-date-end").html('- ' + moment(event.end).format('h:mm A'));
                         }
                     }
                     
