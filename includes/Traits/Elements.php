@@ -135,7 +135,7 @@ trait Elements
     /**
      * @return string
      */
-    public function eael_table_of_content_editor (){
+    public function eael_table_of_content_render (){
 
         if(!is_singular()){
             return '';
