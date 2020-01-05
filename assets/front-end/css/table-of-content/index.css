@@ -1,7 +1,7 @@
 .eael-toc {
   position: absolute;
   z-index: 9999;
-  width: 25vw !important;
+  width: 300px !important;
   top: 50%;
 }
 .eael-toc.eael-toc-disable {
@@ -19,8 +19,8 @@
 }
 .eael-toc.expanded .eael-toc-button {
   display: inline-block;
-  -webkit-transform: translate(-70px, 120px) rotate(90deg);
-          transform: translate(-70px, 120px) rotate(90deg);
+  -webkit-transform: translate(-90px, 120px) rotate(90deg);
+          transform: translate(-90px, 120px) rotate(90deg);
   background: #ff7d50;
   color: #fff;
   text-align: center;
@@ -156,8 +156,8 @@
   left: -11px;
 }
 .eael-toc.eael-toc-right .eael-toc-button {
-  -webkit-transform: translate(70px, 120px) rotate(90deg);
-          transform: translate(70px, 120px) rotate(90deg);
+  -webkit-transform: translate(90px, 120px) rotate(90deg);
+          transform: translate(90px, 120px) rotate(90deg);
 }
 .eael-toc .eael-toc-button {
   display: none;

@@ -125,7 +125,7 @@ class Bootstrap
 
         if($this->get_settings('eael-table-of-content') != false) {
             add_action('wp_footer', array( $this, 'eael_table_of_content_editor' ));
-            add_action('wp_head', [$this, 'eael_toc_global_css']);
+            //add_action('wp_footer', [$this, 'eael_toc_global_css']);
         }
 
         // Admin

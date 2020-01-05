@@ -2000,4 +2000,69 @@ trait Helper
 
         return '';
     }
+
+    /**
+     * @param $post_css
+     * @param $elements
+     * @return string|void
+     */
+    public function eael_toc_global_css( $page_settings_model ,$global_settings ){
+
+        $header_bg                  = $global_settings['table_of_content']['eael_ext_table_of_content_header_bg'];
+        $header_text_color          = $global_settings['table_of_content']['eael_ext_table_of_content_header_text_color'];
+        $close_bt_text_color        = $global_settings['table_of_content']['eael_ext_table_of_content_close_button_text_color'];
+        $close_bt_bg                = $global_settings['table_of_content']['eael_ext_table_of_content_close_button_bg'];
+        $toc_body_bg                = $global_settings['table_of_content']['eael_ext_table_of_content_body_bg'];
+        $toc_list_color             = $global_settings['table_of_content']['eael_ext_table_of_content_list_text_color'];
+        $toc_list_color_active      = $global_settings['table_of_content']['eael_ext_table_of_content_list_text_color_active'];
+        $toc_list_separator_style   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_style'];
+        $toc_list_separator_color   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_color'];
+
+        $toc_global_css = "
+            .eael-toc-global .eael-toc-header,
+            .eael-toc-global.expanded .eael-toc-button
+            {background-color:$header_bg;}
+            
+            .eael-toc-global .eael-toc-header .eael-toc-title,
+            .eael-toc-global.expanded .eael-toc-button
+            {color:$header_text_color;}
+
+            .eael-toc-global .eael-toc-close
+            {
+                color:$close_bt_text_color;
+                background-color:$close_bt_bg;
+            }
+            
+            .eael-toc-global .eael-toc-body
+            {background-color:$toc_body_bg;}
+            
+            .eael-toc-global ul.eael-toc-list li a,
+            .eael-toc-global ul.eael-toc-list li
+            {color:$toc_list_color;}
+            
+            .eael-toc-global ul.eael-toc-list li.active > a,
+            .eael-toc-global ul.eael-toc-list li.eael-highlight > a,
+            .eael-toc-global ul.eael-toc-list li.active,
+            .eael-toc-global ul.eael-toc-list li.eael-highlight
+            {color:$toc_list_color_active !important;}
+            .eael-toc-global .ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before,
+            {border-bottom:10px solid $toc_list_color_active;}
+            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_3 li.active>a:after > a:before
+            {background-color:$toc_list_color_active;}
+            
+            .eael-toc-global ul.eael-toc-list>li
+            {color:$toc_list_separator_color !important;}
+        ";
+        if($toc_list_separator_style!='none'){
+            $toc_global_css .= "
+            .eael-toc-global ul.eael-toc-list > li
+            {border-top: 0.5px $toc_list_separator_style !important;}
+            .eael-toc ul.eael-toc-list>li:first-child
+            {border: none !important;}";
+        }
+
+        wp_register_style( 'eael-toc-global', false );
+        wp_enqueue_style( 'eael-toc-global' );
+        wp_add_inline_style( 'eael-toc-global', $toc_global_css );
+    }
 }
