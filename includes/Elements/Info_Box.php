@@ -23,7 +23,7 @@ class Info_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Info Box', 'essential-addons-elementor' );
+		return esc_html__( 'EA Info Box', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
@@ -42,21 +42,21 @@ class Info_Box extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_infobox_content_settings',
   			[
-  				'label' => esc_html__( 'Infobox Image', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Infobox Image', 'essential-addons-for-elementor-lite')
   			]
   		);
 
   		$this->add_control(
 		  'eael_infobox_img_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Infobox Type', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Infobox Type', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'img-on-top',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'img-on-top'  	=> esc_html__( 'Image/Icon On Top', 'essential-addons-elementor' ),
-		     		'img-on-left' 	=> esc_html__( 'Image/Icon On Left', 'essential-addons-elementor' ),
-		     		'img-on-right' 	=> esc_html__( 'Image/Icon On Right', 'essential-addons-elementor' ),
+		     		'img-on-top'  	=> esc_html__( 'Image/Icon On Top', 'essential-addons-for-elementor-lite'),
+		     		'img-on-left' 	=> esc_html__( 'Image/Icon On Left', 'essential-addons-for-elementor-lite'),
+		     		'img-on-right' 	=> esc_html__( 'Image/Icon On Right', 'essential-addons-for-elementor-lite'),
 		     	],
 		  	]
 		);
@@ -64,24 +64,24 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_infobox_img_or_icon',
 			[
-				'label' => esc_html__( 'Image or Icon', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Image or Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
 					'none' => [
-						'title' => esc_html__( 'None', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'None', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-ban',
 					],
 					'number' => [
-						'title' => esc_html__( 'Number', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Number', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-sort-numeric-desc',
 					],
 					'icon' => [
-						'title' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-info-circle',
 					],
 					'img' => [
-						'title' => esc_html__( 'Image', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-picture-o',
 					]
 				],
@@ -92,7 +92,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'icon_vertical_position',
 			[
-				'label'                 => __( 'Icon Position', 'essential-addons-elementor' ),
+				'label'                 => __( 'Icon Position', 'essential-addons-for-elementor-lite'),
 				'type'                  => Controls_Manager::CHOOSE,
 				'default'               => 'top',
 				'condition'			=> [
@@ -100,15 +100,15 @@ class Info_Box extends Widget_Base {
 				],
 				'options'               => [
 					'top'          => [
-						'title'    => __( 'Top', 'essential-addons-elementor' ),
+						'title'    => __( 'Top', 'essential-addons-for-elementor-lite'),
 						'icon'     => 'eicon-v-align-top',
 					],
 					'middle'       => [
-						'title'    => __( 'Middle', 'essential-addons-elementor' ),
+						'title'    => __( 'Middle', 'essential-addons-for-elementor-lite'),
 						'icon'     => 'eicon-v-align-middle',
 					],
 					'bottom'       => [
-						'title'    => __( 'Bottom', 'essential-addons-elementor' ),
+						'title'    => __( 'Bottom', 'essential-addons-for-elementor-lite'),
 						'icon'     => 'eicon-v-align-bottom',
 					],
 				],
@@ -129,7 +129,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_image',
 			[
-				'label' => esc_html__( 'Infobox Image', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Infobox Image', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -147,7 +147,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_icon_new',
 			[
-				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_infobox_icon',
 				'default' => [
@@ -166,7 +166,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_number',
 			[
-				'label' => esc_html__( 'Number', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Number', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'condition' => [
 					'eael_infobox_img_or_icon' => 'number'
@@ -182,29 +182,29 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_infobox_content',
 			[
-				'label' => esc_html__( 'Infobox Content', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Infobox Content', 'essential-addons-for-elementor-lite'),
 			]
 		);
 		$this->add_control(
 			'eael_infobox_title',
 			[
-				'label' => esc_html__( 'Infobox Title', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Infobox Title', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'dynamic' => [
 					'active' => true
 				],
-				'default' => esc_html__( 'This is an icon box', 'essential-addons-elementor' )
+				'default' => esc_html__( 'This is an icon box', 'essential-addons-for-elementor-lite')
 			]
 		);
 		$this->add_control(
             'eael_infobox_text_type',
             [
-                'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+                'label'                 => __( 'Content Type', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'options'               => [
-                    'content'       => __( 'Content', 'essential-addons-elementor' ),
-                    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+                    'content'       => __( 'Content', 'essential-addons-for-elementor-lite'),
+                    'template'      => __( 'Saved Templates', 'essential-addons-for-elementor-lite'),
                 ],
                 'default'               => 'content',
             ]
@@ -213,7 +213,7 @@ class Info_Box extends Widget_Base {
         $this->add_control(
             'eael_primary_templates',
             [
-                'label'                 => __( 'Choose Template', 'essential-addons-elementor' ),
+                'label'                 => __( 'Choose Template', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'options'               => $this->eael_get_page_templates(),
 				'condition'             => [
@@ -224,13 +224,13 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_text',
 			[
-				'label' => esc_html__( 'Infobox Content', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Infobox Content', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
 				'dynamic' => [
 					'active' => true
 				],
-				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-addons-elementor' ),
+				'default' => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-addons-for-elementor-lite'),
 				'condition'             => [
 					'eael_infobox_text_type'      => 'content',
 				],
@@ -239,31 +239,31 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_show_infobox_content',
 			[
-				'label' => __( 'Show Content', 'essential-addons-elementor' ),
+				'label' => __( 'Show Content', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
-				'label_on' => __( 'Show', 'essential-addons-elementor' ),
-				'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite'),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite'),
 				'return_value' => 'yes',
 			]
 		);
 		$this->add_responsive_control(
 			'eael_infobox_content_alignment',
 			[
-				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-right',
 					],
 				],
@@ -278,7 +278,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'content_height',
 			[
-				'label' => esc_html__( 'Content Height', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content Height', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'size_units'	=> ['px', '%', 'em'],
 				'range' => [
@@ -301,17 +301,17 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_infobox_button',
 			[
-				'label' => esc_html__( 'Button', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Button', 'essential-addons-for-elementor-lite')
 			]
 		);
 
 		$this->add_control(
 			'eael_show_infobox_button',
 			[
-				'label' => __( 'Show Infobox Button', 'essential-addons-elementor' ),
+				'label' => __( 'Show Infobox Button', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
+				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite'),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite'),
 				'condition'	=> [
 					'eael_show_infobox_clickable!'	=> 'yes'
 				]
@@ -321,11 +321,11 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_show_infobox_clickable',
 			[
-				'label' => __( 'Infobox Clickable', 'essential-addons-elementor' ),
+				'label' => __( 'Infobox Clickable', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'no',
-				'label_on' => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off' => __( 'No', 'essential-addons-elementor' ),
+				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite'),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite'),
 				'return_value' => 'yes',
 				'condition'	=> [
 					'eael_show_infobox_button!'	=> 'yes'
@@ -336,7 +336,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_show_infobox_clickable_link',
 			[
-				'label' => esc_html__( 'Infobox Link', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Infobox Link', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::URL,
 				'label_block' => true,
 				'default' => [
@@ -353,13 +353,13 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'infobox_button_text',
 			[
-				'label' => __( 'Button Text', 'essential-addons-elementor' ),
+				'label' => __( 'Button Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default' => 'Click Me!',
 				'separator'	=> 'before',
-				'placeholder' => __( 'Enter button text', 'essential-addons-elementor' ),
-				'title' => __( 'Enter button text here', 'essential-addons-elementor' ),
+				'placeholder' => __( 'Enter button text', 'essential-addons-for-elementor-lite'),
+				'title' => __( 'Enter button text here', 'essential-addons-for-elementor-lite'),
 				'condition'	=> [
 					'eael_show_infobox_button'	=> 'yes'
 				]
@@ -369,15 +369,15 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'infobox_button_link_url',
 			[
-				'label' => __( 'Link URL', 'essential-addons-elementor' ),
+				'label' => __( 'Link URL', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::URL,
 				'label_block' => true,
-				'placeholder' => __( 'Enter link URL for the button', 'essential-addons-elementor' ),
+				'placeholder' => __( 'Enter link URL for the button', 'essential-addons-for-elementor-lite'),
 				'show_external'	=> true,
 				'default'		=> [
 					'url'	=> '#'
 				],
-				'title' => __( 'Enter heading for the button', 'essential-addons-elementor' ),
+				'title' => __( 'Enter heading for the button', 'essential-addons-for-elementor-lite'),
 				'condition'	=> [
 					'eael_show_infobox_button'	=> 'yes'
 				]
@@ -387,7 +387,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_button_icon_new',
 			[
-				'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_infobox_button_icon',
 				'condition'	=> [
@@ -399,12 +399,12 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_button_icon_alignment',
 			[
-				'label' => esc_html__( 'Icon Position', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'left',
 				'options' => [
-					'left' => esc_html__( 'Before', 'essential-addons-elementor' ),
-					'right' => esc_html__( 'After', 'essential-addons-elementor' ),
+					'left' => esc_html__( 'Before', 'essential-addons-for-elementor-lite'),
+					'right' => esc_html__( 'After', 'essential-addons-for-elementor-lite'),
 				],
 				'condition' => [
 					'eael_infobox_button_icon_new!' => '',
@@ -416,7 +416,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_button_icon_indent',
 			[
-				'label' => esc_html__( 'Icon Spacing', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon Spacing', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -440,18 +440,18 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_pro',
 			[
-				'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+				'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 			]
 		);
 
 		$this->add_control(
 			'eael_control_get_pro',
 			[
-				'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+				'label' => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => __( '', 'essential-addons-elementor' ),
+						'title' => __( '', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-unlock-alt',
 					],
 				],
@@ -471,7 +471,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_imgae_style_settings',
 			[
-				'label' => esc_html__( 'Image Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Image Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 		     		'eael_infobox_img_or_icon' => 'img'
@@ -484,14 +484,14 @@ class Info_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'eael_infobox_image_icon_normal',
 				[
-					'label'		=> __( 'Normal', 'essential-addons-elementor' )
+					'label'		=> __( 'Normal', 'essential-addons-for-elementor-lite')
 				]
 			);
 
 				$this->add_control(
 					'eael_infobox_image_icon_bg_color',
 					[
-						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '',
 						'selectors' => [
@@ -503,7 +503,7 @@ class Info_Box extends Widget_Base {
 				$this->add_responsive_control(
 					'eael_infobox_image_icon_padding',
 					[
-						'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em', '%' ],
 						'selectors' => [
@@ -516,7 +516,7 @@ class Info_Box extends Widget_Base {
 					Group_Control_Border::get_type(),
 						[
 							'name' => 'eael_infobox_image_border',
-							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 							'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon img'
 						]
 				);
@@ -524,14 +524,14 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 				'eael_infobox_img_shape',
 					[
-					'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
+					'label'     	=> esc_html__( 'Image Shape', 'essential-addons-for-elementor-lite'),
 						'type' 			=> Controls_Manager::SELECT,
 						'default' 		=> 'square',
 						'label_block' 	=> false,
 						'options' 		=> [
-							'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
-							'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-							'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+							'square'  	=> esc_html__( 'Square', 'essential-addons-for-elementor-lite'),
+							'circle' 	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+							'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
 						],
 						'prefix_class' => 'eael-infobox-shape-',
 						'condition' => [
@@ -545,7 +545,7 @@ class Info_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'eael_infobox_image_icon_hover',
 				[
-					'label'		=> __( 'Hover', 'essential-addons-elementor' )
+					'label'		=> __( 'Hover', 'essential-addons-for-elementor-lite')
 				]
 			);
 
@@ -562,7 +562,7 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 					'eael_infobox_image_icon_hover_animation',
 					[
-						'label' => esc_html__( 'Animation', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Animation', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HOVER_ANIMATION
 					]
 				);
@@ -571,7 +571,7 @@ class Info_Box extends Widget_Base {
 					Group_Control_Border::get_type(),
 						[
 							'name' => 'eael_infobox_hover_image_border',
-							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 							'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon img'
 						]
 				);
@@ -579,14 +579,14 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 				'eael_infobox_hover_img_shape',
 					[
-					'label'     	=> esc_html__( 'Image Shape', 'essential-addons-elementor' ),
+					'label'     	=> esc_html__( 'Image Shape', 'essential-addons-for-elementor-lite'),
 						'type' 			=> Controls_Manager::SELECT,
 						'default' 		=> 'square',
 						'label_block' 	=> false,
 						'options' 		=> [
-							'square'  	=> esc_html__( 'Square', 'essential-addons-elementor' ),
-							'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-							'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
+							'square'  	=> esc_html__( 'Square', 'essential-addons-for-elementor-lite'),
+							'circle' 	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+							'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
 						],
 						'prefix_class' => 'eael-infobox-hover-img-shape-',
 						'condition' => [
@@ -602,7 +602,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_image_resizer',
 			[
-				'label' => esc_html__( 'Image Resizer', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Image Resizer', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 100
@@ -637,7 +637,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_infobox_img_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -657,7 +657,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_number_icon_style_settings',
 			[
-				'label' => esc_html__( 'Number Icon Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Number Icon Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 		     		'eael_infobox_img_or_icon' => 'number'
@@ -676,7 +676,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
     		'eael_infobox_number_icon_bg_size',
     		[
-        		'label' => __( 'Icon Background Size', 'essential-addons-elementor' ),
+        		'label' => __( 'Icon Background Size', 'essential-addons-for-elementor-lite'),
        			'type' => Controls_Manager::SLIDER,
         		'default' => [
             		'size' => 90,
@@ -700,7 +700,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_infobox_number_icon_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -714,14 +714,14 @@ class Info_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'eael_infobox_number_icon_normal',
 				[
-					'label'		=> esc_html__( 'Normal', 'essential-addons-elementor' ),
+					'label'		=> esc_html__( 'Normal', 'essential-addons-for-elementor-lite'),
 				]
 			);
 
 				$this->add_control(
 					'eael_infobox_number_icon_color',
 					[
-						'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#4d4d4d',
 						'selectors' => [
@@ -734,7 +734,7 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 					'eael_infobox_number_icon_bg_color',
 					[
-						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '',
 						'selectors' => [
@@ -749,15 +749,15 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 				'eael_infobox_number_icon_bg_shape',
 					[
-					'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+					'label'     	=> esc_html__( 'Background Shape', 'essential-addons-for-elementor-lite'),
 						'type' 			=> Controls_Manager::SELECT,
 						'default' 		=> 'none',
 						'label_block' 	=> false,
 						'options' 		=> [
-							'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
-							'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-							'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-							'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+							'none'  	=> esc_html__( 'None', 'essential-addons-for-elementor-lite'),
+							'circle' 	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+							'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
+							'square' 	=> esc_html__( 'Square', 'essential-addons-for-elementor-lite'),
 						],
 						'prefix_class' => 'eael-infobox-icon-bg-shape-'
 					]
@@ -767,7 +767,7 @@ class Info_Box extends Widget_Base {
 					Group_Control_Border::get_type(),
 						[
 							'name' => 'eael_infobox_number_icon_border',
-							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 							'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon-wrap'
 						]
 				);
@@ -786,14 +786,14 @@ class Info_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'eael_infobox_number_icon_hover',
 				[
-					'label'		=> esc_html__( 'Hover', 'essential-addons-elementor' ),
+					'label'		=> esc_html__( 'Hover', 'essential-addons-for-elementor-lite'),
 				]
 			);
 
 			$this->add_control(
 				'eael_infobox_number_icon_hover_animation',
 				[
-					'label' => esc_html__( 'Animation', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Animation', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::HOVER_ANIMATION
 				]
 			);
@@ -801,7 +801,7 @@ class Info_Box extends Widget_Base {
 			$this->add_control(
 				'eael_infobox_number_icon_hover_color',
 				[
-					'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '#4d4d4d',
 					'selectors' => [
@@ -814,7 +814,7 @@ class Info_Box extends Widget_Base {
 			$this->add_control(
 				'eael_infobox_number_icon_hover_bg_color',
 				[
-					'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '',
 					'selectors' => [
@@ -830,15 +830,15 @@ class Info_Box extends Widget_Base {
 			$this->add_control(
 			'eael_infobox_number_icon_hover_bg_shape',
 				[
-				'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+				'label'     	=> esc_html__( 'Background Shape', 'essential-addons-for-elementor-lite'),
 					'type' 			=> Controls_Manager::SELECT,
 					'default' 		=> 'none',
 					'label_block' 	=> false,
 					'options' 		=> [
-						'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
-						'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-						'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-						'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+						'none'  	=> esc_html__( 'None', 'essential-addons-for-elementor-lite'),
+						'circle' 	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+						'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
+						'square' 	=> esc_html__( 'Square', 'essential-addons-for-elementor-lite'),
 					],
 					'prefix_class' => 'eael-infobox-icon-hover-bg-shape-',
 				]
@@ -848,7 +848,7 @@ class Info_Box extends Widget_Base {
 				Group_Control_Border::get_type(),
 					[
 						'name' => 'eael_infobox_hover_number_icon_border',
-						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 						'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon-wrap'
 					]
 			);
@@ -875,7 +875,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_icon_style_settings',
 			[
-				'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 		     		'eael_infobox_img_or_icon' => 'icon'
@@ -886,7 +886,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
     		'eael_infobox_icon_size',
     		[
-        		'label' => __( 'Icon Size', 'essential-addons-elementor' ),
+        		'label' => __( 'Icon Size', 'essential-addons-for-elementor-lite'),
        			'type' => Controls_Manager::SLIDER,
         		'default' => [
             		'size' => 40,
@@ -908,7 +908,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
     		'eael_infobox_icon_bg_size',
     		[
-        		'label' => __( 'Icon Background Size', 'essential-addons-elementor' ),
+        		'label' => __( 'Icon Background Size', 'essential-addons-for-elementor-lite'),
        			'type' => Controls_Manager::SLIDER,
         		'default' => [
             		'size' => 90,
@@ -932,7 +932,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_infobox_icon_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -946,14 +946,14 @@ class Info_Box extends Widget_Base {
 				$this->start_controls_tab(
 					'eael_infobox_icon_normal',
 					[
-						'label'		=> esc_html__( 'Normal', 'essential-addons-elementor' ),
+						'label'		=> esc_html__( 'Normal', 'essential-addons-for-elementor-lite'),
 					]
 				);
 
 					$this->add_control(
 						'eael_infobox_icon_color',
 						[
-							'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '#4d4d4d',
 							'selectors' => [
@@ -966,15 +966,15 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_icon_bg_shape',
 						[
-						'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+						'label'     	=> esc_html__( 'Background Shape', 'essential-addons-for-elementor-lite'),
 							'type' 			=> Controls_Manager::SELECT,
 							'default' 		=> 'none',
 							'label_block' 	=> false,
 							'options' 		=> [
-								'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
-								'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-								'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-								'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+								'none'  	=> esc_html__( 'None', 'essential-addons-for-elementor-lite'),
+								'circle' 	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+								'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
+								'square' 	=> esc_html__( 'Square', 'essential-addons-for-elementor-lite'),
 							],
 							'prefix_class' => 'eael-infobox-icon-bg-shape-'
 						]
@@ -983,7 +983,7 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_icon_bg_color',
 						[
-							'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -999,7 +999,7 @@ class Info_Box extends Widget_Base {
 						Group_Control_Border::get_type(),
 							[
 								'name' => 'eael_infobox_icon_border',
-								'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+								'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 								'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon-wrap'
 							]
 					);
@@ -1018,14 +1018,14 @@ class Info_Box extends Widget_Base {
 				$this->start_controls_tab(
 					'eael_infobox_icon_hover',
 					[
-						'label'		=> esc_html__( 'Hover', 'essential-addons-elementor' ),
+						'label'		=> esc_html__( 'Hover', 'essential-addons-for-elementor-lite'),
 					]
 				);
 
 				$this->add_control(
 					'eael_infobox_icon_hover_animation',
 					[
-						'label' => esc_html__( 'Animation', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Animation', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HOVER_ANIMATION
 					]
 				);
@@ -1033,7 +1033,7 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 					'eael_infobox_icon_hover_color',
 					[
-						'label' => esc_html__( 'Icon Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#4d4d4d',
 						'selectors' => [
@@ -1046,7 +1046,7 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 					'eael_infobox_icon_hover_bg_color',
 					[
-						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '',
 						'selectors' => [
@@ -1062,15 +1062,15 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 				  'eael_infobox_icon_hover_bg_shape',
 					  [
-					   'label'     	=> esc_html__( 'Background Shape', 'essential-addons-elementor' ),
+					   'label'     	=> esc_html__( 'Background Shape', 'essential-addons-for-elementor-lite'),
 						 'type' 			=> Controls_Manager::SELECT,
 						 'default' 		=> 'none',
 						 'label_block' 	=> false,
 						 'options' 		=> [
-							 'none'  	=> esc_html__( 'None', 'essential-addons-elementor' ),
-							 'circle' 	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-							 'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-							 'square' 	=> esc_html__( 'Square', 'essential-addons-elementor' ),
+							 'none'  	=> esc_html__( 'None', 'essential-addons-for-elementor-lite'),
+							 'circle' 	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+							 'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
+							 'square' 	=> esc_html__( 'Square', 'essential-addons-for-elementor-lite'),
 						 ],
 						 'prefix_class' => 'eael-infobox-icon-hover-bg-shape-',
 					  ]
@@ -1080,7 +1080,7 @@ class Info_Box extends Widget_Base {
 					Group_Control_Border::get_type(),
 						[
 							'name' => 'eael_infobox_hover_icon_border',
-							'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 							'selector' => '{{WRAPPER}} .eael-infobox:hover .infobox-icon-wrap'
 						]
 				);
@@ -1107,7 +1107,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_button_settings',
 			[
-				'label' => esc_html__( 'Button Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button Styles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition'	=> [
 					'eael_show_infobox_button'	=> 'yes'
@@ -1126,7 +1126,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
             'eael_infobox_button_icon_size',
             [
-                'label' => __('Icon Size', 'essential-addons-elementor'),
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 16,
@@ -1150,7 +1150,7 @@ class Info_Box extends Widget_Base {
 		// $this->add_responsive_control(
         //     'eael_infobox_button_icon_gap',
         //     [
-        //         'label' => __('Icon Gap', 'essential-addons-elementor'),
+        //         'label' => __('Icon Gap', 'essential-addons-for-elementor-lite'),
         //         'type' => Controls_Manager::SLIDER,
         //         'default' => [
         //             'size' => 10,
@@ -1174,7 +1174,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_creative_button_padding',
 			[
-				'label' => esc_html__( 'Button Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors' => [
@@ -1186,7 +1186,7 @@ class Info_Box extends Widget_Base {
 		$this->add_control(
 			'eael_infobox_button_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1202,13 +1202,13 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_tabs('infobox_button_styles_controls_tabs');
 
 			$this->start_controls_tab('infobox_button_normal', [
-				'label' => esc_html__( 'Normal', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite')
 			]);
 
 				$this->add_control(
 					'eael_infobox_button_text_color',
 					[
-						'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#ffffff',
 						'selectors'	=> [
@@ -1220,7 +1220,7 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 					'eael_infobox_button_background_color',
 					[
-						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333333',
 						'selectors'	=> [
@@ -1248,13 +1248,13 @@ class Info_Box extends Widget_Base {
 			$this->end_controls_tab();
 
 			$this->start_controls_tab('infobox_button_hover', [
-				'label' => esc_html__( 'Hover', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite')
 			]);
 
 				$this->add_control(
 					'eael_infobox_button_hover_text_color',
 					[
-						'label' => esc_html__( 'Text Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#ffffff',
 						'selectors'	=> [
@@ -1266,7 +1266,7 @@ class Info_Box extends Widget_Base {
 				$this->add_control(
 					'eael_infobox_button_hover_background_color',
 					[
-						'label' => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#333333',
 						'selectors'	=> [
@@ -1307,7 +1307,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_infobox_title_style_settings',
 			[
-				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -1315,13 +1315,13 @@ class Info_Box extends Widget_Base {
 			$this->start_controls_tabs('infobox_content_hover_style_tab');
 
 					$this->start_controls_tab('infobox_content_normal_style', [
-						'label'	=> esc_html__( 'Normal', 'essential-addons-elementor' )
+						'label'	=> esc_html__( 'Normal', 'essential-addons-for-elementor-lite')
 					]);
 
 					$this->add_control(
 						'eael_infobox_title_heading',
 						[
-							'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Title Style', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::HEADING,
 						]
 					);
@@ -1329,7 +1329,7 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_title_color',
 						[
-							'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '#4d4d4d',
 							'selectors' => [
@@ -1349,7 +1349,7 @@ class Info_Box extends Widget_Base {
 					$this->add_responsive_control(
 						'eael_infobox_title_margin',
 						[
-							'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::DIMENSIONS,
 							'size_units' => [ 'px', 'em', '%' ],
 							'selectors' => [
@@ -1360,7 +1360,7 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_content_heading',
 						[
-							'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Content Style', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::HEADING,
 							'separator' => 'before'
 						]
@@ -1369,7 +1369,7 @@ class Info_Box extends Widget_Base {
 					$this->add_responsive_control(
 						'eael_infobox_content_margin',
 						[
-							'label' => esc_html__( 'Content Only Margin', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Content Only Margin', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::DIMENSIONS,
 							'size_units' => [ 'px', 'em', '%' ],
 							'selectors' => [
@@ -1381,7 +1381,7 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_content_background',
 						[
-							'label' => esc_html__( 'Content Only Background', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Content Only Background', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -1393,7 +1393,7 @@ class Info_Box extends Widget_Base {
 					$this->add_responsive_control(
 						'eael_infobox_content_only_padding',
 						[
-							'label' => esc_html__( 'Content Only Padding', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Content Only Padding', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::DIMENSIONS,
 							'size_units' => [ 'px', 'em', '%' ],
 							'selectors' => [
@@ -1405,7 +1405,7 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_content_color',
 						[
-							'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '#4d4d4d',
 							'selectors' => [
@@ -1425,13 +1425,13 @@ class Info_Box extends Widget_Base {
 				$this->end_controls_tab();
 
 				$this->start_controls_tab('infobox_content_hover_style', [
-					'label'	=> esc_html__( 'Hover', 'essential-addons-elementor' )
+					'label'	=> esc_html__( 'Hover', 'essential-addons-for-elementor-lite')
 				]);
 
 					$this->add_control(
 						'eael_infobox_title_hover_color',
 						[
-							'label' => esc_html__( 'Title Color', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -1443,7 +1443,7 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_content_hover_color',
 						[
-							'label' => esc_html__( 'Content Color', 'essential-addons-elementor' ),
+							'label' => esc_html__( 'Content Color', 'essential-addons-for-elementor-lite'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -1455,8 +1455,8 @@ class Info_Box extends Widget_Base {
 					$this->add_control(
 						'eael_infobox_content_transition',
 						[
-							'label'		=> esc_html__( 'Transition', 'essential-addons-elementor' ),
-							'description'		=> esc_html__( 'Transition will applied to ms (ex: 300ms).', 'essential-addons-elementor' ),
+							'label'		=> esc_html__( 'Transition', 'essential-addons-for-elementor-lite'),
+							'description'		=> esc_html__( 'Transition will applied to ms (ex: 300ms).', 'essential-addons-for-elementor-lite'),
 							'type'		=> Controls_Manager::NUMBER,
 							'separator'	=> 'before',
 							'min'		=> 100,
@@ -1478,7 +1478,7 @@ class Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'_section_style',
 			[
-				'label' => esc_html__( 'Info Box Advanced', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Info Box Advanced', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_ADVANCED,
 				'name' => 'advanced',
 			]
@@ -1495,7 +1495,7 @@ class Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_infobox_container_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [

@@ -22,7 +22,7 @@ class Flip_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Flip Box', 'essential-addons-elementor' );
+		return esc_html__( 'EA Flip Box', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
@@ -41,24 +41,24 @@ class Flip_Box extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_flipbox_content_settings',
   			[
-  				'label' => esc_html__( 'Flipbox Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Flipbox Settings', 'essential-addons-for-elementor-lite')
   			]
   		);
 
   		$this->add_control(
 		  'eael_flipbox_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Flipbox Type', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Flipbox Type', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'animate-left',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'animate-left'  		=> esc_html__( 'Flip Left', 'essential-addons-elementor' ),
-		     		'animate-right' 		=> esc_html__( 'Flip Right', 'essential-addons-elementor' ),
-		     		'animate-up' 			=> esc_html__( 'Flip Top', 'essential-addons-elementor' ),
-		     		'animate-down' 		=> esc_html__( 'Flip Bottom', 'essential-addons-elementor' ),
-		     		'animate-zoom-in' 	=> esc_html__( 'Zoom In', 'essential-addons-elementor' ),
-		     		'animate-zoom-out' 	=> esc_html__( 'Zoom Out', 'essential-addons-elementor' ),
+		     		'animate-left'  		=> esc_html__( 'Flip Left', 'essential-addons-for-elementor-lite'),
+		     		'animate-right' 		=> esc_html__( 'Flip Right', 'essential-addons-for-elementor-lite'),
+		     		'animate-up' 			=> esc_html__( 'Flip Top', 'essential-addons-for-elementor-lite'),
+		     		'animate-down' 		=> esc_html__( 'Flip Bottom', 'essential-addons-for-elementor-lite'),
+		     		'animate-zoom-in' 	=> esc_html__( 'Zoom In', 'essential-addons-for-elementor-lite'),
+		     		'animate-zoom-out' 	=> esc_html__( 'Zoom Out', 'essential-addons-for-elementor-lite'),
 		     	],
 		  	]
 		);
@@ -68,19 +68,19 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'front',
 				[
-					'label'	=> __( 'Front', 'essential-addons-elementor' )
+					'label'	=> __( 'Front', 'essential-addons-for-elementor-lite')
 				]
 			);
 
 				$this->add_control(
 					'eael_flipbox_img_or_icon',
 					[
-						'label' => esc_html__( 'Icon Type', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Type', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::SELECT,
 						'options' => [
-							'none'	=> __( 'None', 'essential-addons-elementor' ),
-							'img'	=> __( 'Image', 'essential-addons-elementor' ),
-							'icon'	=> __( 'Icon', 'essential-addons-elementor' )
+							'none'	=> __( 'None', 'essential-addons-for-elementor-lite'),
+							'img'	=> __( 'Image', 'essential-addons-for-elementor-lite'),
+							'icon'	=> __( 'Icon', 'essential-addons-for-elementor-lite')
 						],
 						'default' => 'icon',
 					]
@@ -89,7 +89,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_image',
 					[
-						'label' => esc_html__( 'Flipbox Image', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Flipbox Image', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::MEDIA,
 						'default' => [
 							'url' => Utils::get_placeholder_image_src(),
@@ -103,7 +103,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_icon_new',
 					[
-						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::ICONS,
 						'fa4compatibility' => 'eael_flipbox_icon',
 						'default' => [
@@ -119,7 +119,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_responsive_control(
 					'eael_flipbox_image_resizer',
 					[
-						'label' => esc_html__( 'Image Resizer', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Image Resizer', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::SLIDER,
 						'default' => [
 							'size' => '100'
@@ -155,19 +155,19 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'back',
 				[
-					'label'	=> __( 'Back', 'essential-addons-elementor' )
+					'label'	=> __( 'Back', 'essential-addons-for-elementor-lite')
 				]
 			);
 
 				$this->add_control(
 					'eael_flipbox_img_or_icon_back',
 					[
-						'label' => esc_html__( 'Icon Type', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Type', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::SELECT,
 						'options' => [
-							'none'	=> __( 'None', 'essential-addons-elementor' ),
-							'img'	=> __( 'Image', 'essential-addons-elementor' ),
-							'icon'	=> __( 'Icon', 'essential-addons-elementor' )
+							'none'	=> __( 'None', 'essential-addons-for-elementor-lite'),
+							'img'	=> __( 'Image', 'essential-addons-for-elementor-lite'),
+							'icon'	=> __( 'Icon', 'essential-addons-for-elementor-lite')
 						],
 						'default' => 'icon'
 					]
@@ -176,7 +176,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_image_back',
 					[
-						'label' => esc_html__( 'Flipbox Image', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Flipbox Image', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::MEDIA,
 						'default' => [
 							'url' => Utils::get_placeholder_image_src(),
@@ -190,7 +190,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_icon_back_new',
 					[
-						'label' => esc_html__( 'Icon', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::ICONS,
 						'fa4compatibility' => 'eael_flipbox_icon_back',
 						'default' => [
@@ -206,7 +206,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_responsive_control(
 					'eael_flipbox_image_resizer_back',
 					[
-						'label' => esc_html__( 'Image Resizer', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Image Resizer', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::SLIDER,
 						'default' => [
 							'size' => '100'
@@ -249,7 +249,7 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_flipbox_content',
 			[
-				'label' => esc_html__( 'Flipbox Content', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Flipbox Content', 'essential-addons-for-elementor-lite'),
 			]
 		);
 
@@ -258,27 +258,27 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'eael_flipbox_content_front',
 				[
-					'label'	=> __( 'Front', 'essential-addons-elementor' )
+					'label'	=> __( 'Front', 'essential-addons-for-elementor-lite')
 				]
 			);
 
 			$this->add_control(
 				'eael_flipbox_front_title',
 				[
-					'label' => esc_html__( 'Front Title', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Front Title', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::TEXT,
 					'label_block' => true,
-					'default' => esc_html__( 'Front Title', 'essential-addons-elementor' ),
+					'default' => esc_html__( 'Front Title', 'essential-addons-for-elementor-lite'),
 				]
 			);
 
 			$this->add_control(
 				'eael_flipbox_front_text',
 				[
-					'label' => esc_html__( 'Front Text', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Front Text', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::WYSIWYG,
 					'label_block' => true,
-					'default' => __( 'This is front side content.', 'essential-addons-elementor' ),
+					'default' => __( 'This is front side content.', 'essential-addons-for-elementor-lite'),
 				]
 			);
 
@@ -288,27 +288,27 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'eael_flipbox_content_back',
 				[
-					'label'	=> __( 'Back', 'essential-addons-elementor' )
+					'label'	=> __( 'Back', 'essential-addons-for-elementor-lite')
 				]
 			);
 
 			$this->add_control(
 				'eael_flipbox_back_title',
 				[
-					'label' => esc_html__( 'Back Title', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Back Title', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::TEXT,
 					'label_block' => true,
-					'default' => esc_html__( 'Back Title', 'essential-addons-elementor' ),
+					'default' => esc_html__( 'Back Title', 'essential-addons-for-elementor-lite'),
 				]
 			);
 
 			$this->add_control(
 				'eael_flipbox_back_text',
 				[
-					'label' => esc_html__( 'Back Text', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Back Text', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::WYSIWYG,
 					'label_block' => true,
-					'default' => __( 'This is back side content.', 'essential-addons-elementor' ),
+					'default' => __( 'This is back side content.', 'essential-addons-for-elementor-lite'),
 				]
 			);
 
@@ -319,20 +319,20 @@ class Flip_Box extends Widget_Base {
 		$this->add_control(
 			'eael_flipbox_content_alignment',
 			[
-				'label' => esc_html__( 'Content Alignment', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-right',
 					],
 				],
@@ -351,21 +351,21 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_flixbox_link_section',
 			[
-				'label' => esc_html__( 'Link', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite')
 			]
 		);
 
 		$this->add_control(
             'flipbox_link_type',
             [
-                'label'                 => __( 'Link Type', 'essential-addons-elementor' ),
+                'label'                 => __( 'Link Type', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'default'               => 'none',
                 'options'               => [
-                    'none'      => __( 'None', 'essential-addons-elementor' ),
-                    'box'       => __( 'Box', 'essential-addons-elementor' ),
-                    'title'     => __( 'Title', 'essential-addons-elementor' ),
-                    'button'    => __( 'Button', 'essential-addons-elementor' ),
+                    'none'      => __( 'None', 'essential-addons-for-elementor-lite'),
+                    'box'       => __( 'Box', 'essential-addons-for-elementor-lite'),
+                    'title'     => __( 'Title', 'essential-addons-for-elementor-lite'),
+                    'button'    => __( 'Button', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -373,7 +373,7 @@ class Flip_Box extends Widget_Base {
         $this->add_control(
             'flipbox_link',
             [
-                'label'                 => __( 'Link', 'essential-addons-elementor' ),
+                'label'                 => __( 'Link', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::URL,
 				'dynamic'               => [
 					'active'        => true,
@@ -395,12 +395,12 @@ class Flip_Box extends Widget_Base {
         $this->add_control(
             'flipbox_button_text',
             [
-                'label'                 => __( 'Button Text', 'essential-addons-elementor' ),
+                'label'                 => __( 'Button Text', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::TEXT,
 				'dynamic'               => [
 					'active'   => true,
 				],
-                'default'               => __( 'Get Started', 'essential-addons-elementor' ),
+                'default'               => __( 'Get Started', 'essential-addons-for-elementor-lite'),
                 'condition'             => [
                     'flipbox_link_type'   => 'button',
                 ],
@@ -410,7 +410,7 @@ class Flip_Box extends Widget_Base {
         $this->add_control(
             'button_icon_new',
             [
-                'label'                 => __( 'Button Icon', 'essential-addons-elementor' ),
+                'label'                 => __( 'Button Icon', 'essential-addons-for-elementor-lite'),
 				'type'                  => Controls_Manager::ICONS,
 				'fa4compatibility' 		=> 'button_icon',
                 'condition'             => [
@@ -422,12 +422,12 @@ class Flip_Box extends Widget_Base {
         $this->add_control(
             'button_icon_position',
             [
-                'label'                 => __( 'Icon Position', 'essential-addons-elementor' ),
+                'label'                 => __( 'Icon Position', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'default'               => 'after',
                 'options'               => [
-                    'after'     => __( 'After', 'essential-addons-elementor' ),
-                    'before'    => __( 'Before', 'essential-addons-elementor' ),
+                    'after'     => __( 'After', 'essential-addons-for-elementor-lite'),
+                    'before'    => __( 'Before', 'essential-addons-for-elementor-lite'),
                 ],
                 'condition'             => [
                     'flipbox_link_type'     => 'button',
@@ -442,18 +442,18 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
-					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
 		
 			$this->add_control(
 				'eael_control_get_pro',
 				[
-					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'label' => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-elementor' ),
+							'title' => __( '', 'essential-addons-for-elementor-lite'),
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -473,7 +473,7 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_flipbox_style_settings',
 			[
-				'label' => esc_html__( 'Filp Box Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Filp Box Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -481,7 +481,7 @@ class Flip_Box extends Widget_Base {
 		$this->add_control(
 			'eael_flipbox_front_bg_color',
 			[
-				'label' => esc_html__( 'Front Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Front Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#14bcc8',
 				'selectors' => [
@@ -493,7 +493,7 @@ class Flip_Box extends Widget_Base {
 		$this->add_control(
 			'eael_flipbox_back_bg_color',
 			[
-				'label' => esc_html__( 'Back Background Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Back Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ff7e70',
 				'selectors' => [
@@ -505,7 +505,7 @@ class Flip_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_flipbox_front_back_padding',
 			[
-				'label' => esc_html__( 'Content Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Content Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -519,7 +519,7 @@ class Flip_Box extends Widget_Base {
 			Group_Control_Border::get_type(),
 				[
 					'name' => 'eael_filbpox_border',
-					'label' => esc_html__( 'Border Style', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Border Style', 'essential-addons-for-elementor-lite'),
 					'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container, {{WRAPPER}} .eael-elements-flip-box-rear-container',
 				]
 		);
@@ -527,7 +527,7 @@ class Flip_Box extends Widget_Base {
 		$this->add_control(
 			'eael_flipbox_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'size_units'	=> [ 'px', '%' ],
 				'range' => [
@@ -567,7 +567,7 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_flipbox_imgae_style_settings',
 			[
-				'label' => esc_html__( 'Image Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Image Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 		     		'eael_flipbox_img_or_icon' => 'img'
@@ -578,14 +578,14 @@ class Flip_Box extends Widget_Base {
 		$this->add_control(
 		  'eael_flipbox_img_type',
 		  	[
-		   	'label'       	=> esc_html__( 'Image Type', 'essential-addons-elementor' ),
+		   	'label'       	=> esc_html__( 'Image Type', 'essential-addons-for-elementor-lite'),
 		     	'type' 			=> Controls_Manager::SELECT,
 		     	'default' 		=> 'default',
 		     	'label_block' 	=> false,
 		     	'options' 		=> [
-		     		'circle'  	=> esc_html__( 'Circle', 'essential-addons-elementor' ),
-		     		'radius' 	=> esc_html__( 'Radius', 'essential-addons-elementor' ),
-		     		'default' 	=> esc_html__( 'Default', 'essential-addons-elementor' ),
+		     		'circle'  	=> esc_html__( 'Circle', 'essential-addons-for-elementor-lite'),
+		     		'radius' 	=> esc_html__( 'Radius', 'essential-addons-for-elementor-lite'),
+		     		'default' 	=> esc_html__( 'Default', 'essential-addons-for-elementor-lite'),
 		     	],
 		     	'prefix_class' => 'eael-flipbox-img-',
 		     	'condition' => [
@@ -600,7 +600,7 @@ class Flip_Box extends Widget_Base {
 		$this->add_control(
 			'eael_filpbox_img_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -628,7 +628,7 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_flipbox_icon_style_settings',
 			[
-				'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 		     		'eael_flipbox_img_or_icon' => 'icon'
@@ -638,7 +638,7 @@ class Flip_Box extends Widget_Base {
 
 		$this->start_controls_tabs('eael_section_icon_style_settings');
 			$this->start_controls_tab('eael_section_icon_front_style_settings', [
-				'label' => esc_html__( 'Front', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Front', 'essential-addons-for-elementor-lite')
 			]);
 
 			/**
@@ -647,7 +647,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_control(
 				'eael_flipbox_front_icon_heading',
 				[
-					'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::HEADING,
 					'condition' => [
 						'eael_flipbox_img_or_icon' => 'icon'
@@ -658,7 +658,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_control(
 				'eael_flipbox_front_icon_color',
 				[
-					'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::COLOR,
 					'default' => '#fff',
 					'selectors' => [
@@ -673,7 +673,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_control(
 				'eael_flipbox_front_icon_typography',
 				[
-					'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::SLIDER,
 					'size_units'	=> [ 'px' ],
 					'default'	=> [
@@ -701,7 +701,7 @@ class Flip_Box extends Widget_Base {
 				Group_Control_Border::get_type(),
 					[
 						'name' => 'eael_flipbox_icon_front_border',
-						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 						'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container .eael-elements-flip-box-icon-image',
 						'condition' => [
 							'eael_flipbox_img_or_icon' => 'icon'
@@ -712,7 +712,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_responsive_control(
 				'eael_flipbox_icon_front_padding',
 				[
-					'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em' ],
 					'selectors' => [
@@ -724,7 +724,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_control(
 				'eael_flipbox_icon_front_border_radius',
 				[
-					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::SLIDER,
 					'size_units'	=> [ 'px', '%' ],
 					'range' => [
@@ -751,7 +751,7 @@ class Flip_Box extends Widget_Base {
 			$this->end_controls_tab();
 			
 			$this->start_controls_tab('eael_section_icon_back_style_settings', [
-				'label' => esc_html__( 'Back', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Back', 'essential-addons-for-elementor-lite')
 			]);
 
 			/**
@@ -760,7 +760,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_icon_heading',
 					[
-						'label' => esc_html__( 'Icon Style', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HEADING,
 						'condition'	=> [
 							'eael_flipbox_img_or_icon_back'	=> 'icon'
@@ -771,7 +771,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_icon_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
@@ -786,7 +786,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_icon_typography',
 					[
-						'label' => esc_html__( 'Icon Size', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::SLIDER,
 						'size_units'	=> [ 'px' ],
 						'default'	=> [
@@ -814,7 +814,7 @@ class Flip_Box extends Widget_Base {
 				Group_Control_Border::get_type(),
 					[
 						'name' => 'eael_flipbox_icon_back_border',
-						'label' => esc_html__( 'Border', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
 						'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container .eael-elements-flip-box-icon-image',
 						'condition' => [
 							'eael_flipbox_img_or_icon' => 'icon'
@@ -825,7 +825,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_responsive_control(
 				'eael_flipbox_icon_back_padding',
 				[
-					'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px', 'em' ],
 					'selectors' => [
@@ -837,7 +837,7 @@ class Flip_Box extends Widget_Base {
 			$this->add_control(
 				'eael_flipbox_icon_back_border_radius',
 				[
-					'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+					'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::SLIDER,
 					'size_units'	=> [ 'px', '%' ],
 					'range' => [
@@ -874,14 +874,14 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_flipbox_title_style_settings',
 			[
-				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
 		
 		$this->start_controls_tabs('eael_section_flipbox_typo_style_settings');
 			$this->start_controls_tab('eael_section_flipbox_typo_style_front_settings', [
-				'label' => esc_html__( 'Front', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Front', 'essential-addons-for-elementor-lite')
 			]);
 
 				/**
@@ -890,7 +890,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_front_title_heading',
 					[
-						'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Title Style', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HEADING
 					]
 				);
@@ -898,7 +898,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_front_title_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
@@ -921,7 +921,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_front_content_heading',
 					[
-						'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Content Style', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HEADING
 					]
 				);
@@ -929,7 +929,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_front_content_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
@@ -949,7 +949,7 @@ class Flip_Box extends Widget_Base {
 			$this->end_controls_tab();
 
 			$this->start_controls_tab('eael_section_flipbox_typo_style_back_settings', [
-				'label' => esc_html__( 'Back', 'essential-addons-elementor' )
+				'label' => esc_html__( 'Back', 'essential-addons-for-elementor-lite')
 			]);
 
 				/**
@@ -958,7 +958,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_title_heading',
 					[
-						'label' => esc_html__( 'Title Style', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Title Style', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HEADING,
 						'separator' => 'before'
 					]
@@ -967,7 +967,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_title_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
@@ -990,7 +990,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_content_heading',
 					[
-						'label' => esc_html__( 'Content Style', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Content Style', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::HEADING,
 						'separator' => 'before'
 					]
@@ -999,7 +999,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_back_content_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#fff',
 						'selectors' => [
@@ -1029,7 +1029,7 @@ class Flip_Box extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_flipbox_button_style_settings',
 			[
-				'label' => esc_html__( 'Button Style', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Button Style', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition'	=> [
 					'flipbox_link_type'	=> 'button'
@@ -1042,13 +1042,13 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'flipbox_button_normal_style',
 				[
-					'label'	=> __( 'Normal', 'essential-addons-elementor' )
+					'label'	=> __( 'Normal', 'essential-addons-for-elementor-lite')
 				]
 			);
 				$this->add_responsive_control(
 					'eael_flipbox_button_margin',
 					[
-						'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em' ],
 						'selectors' => [
@@ -1060,7 +1060,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_responsive_control(
 					'eael_flipbox_button_padding',
 					[
-						'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::DIMENSIONS,
 						'size_units' => [ 'px', 'em' ],
 						'selectors' => [
@@ -1072,7 +1072,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_button_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#ffffff',
 						'selectors' => [
@@ -1084,7 +1084,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_button_bg_color',
 					[
-						'label' => esc_html__( 'Background', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#000000',
 						'selectors' => [
@@ -1096,7 +1096,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_button_border_radius',
 					[
-						'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::SLIDER,
 						'size_units'	=> [ 'px' ],
 						'range' => [
@@ -1124,13 +1124,13 @@ class Flip_Box extends Widget_Base {
 			$this->start_controls_tab(
 				'flipbox_button_hover_style',
 				[
-					'label'	=> __( 'Hover', 'essential-addons-elementor' )
+					'label'	=> __( 'Hover', 'essential-addons-for-elementor-lite')
 				]
 			);
 				$this->add_control(
 					'eael_flipbox_button_hover_color',
 					[
-						'label' => esc_html__( 'Color', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#ffffff',
 						'selectors' => [
@@ -1142,7 +1142,7 @@ class Flip_Box extends Widget_Base {
 				$this->add_control(
 					'eael_flipbox_button_hover_bg_color',
 					[
-						'label' => esc_html__( 'Background', 'essential-addons-elementor' ),
+						'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
 						'default' => '#000000',
 						'selectors' => [
@@ -1279,9 +1279,9 @@ class Flip_Box extends Widget_Base {
 									<img class="eael-flipbox-image-as-icon" src="<?php echo esc_url( $flipbox_image_url ); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
 								<?php endif; ?>
 	                        </div>
-	                        <h2 class="eael-elements-flip-box-heading"><?php echo esc_html__( $settings['eael_flipbox_front_title'], 'essential-addons-elementor' ); ?></h2>
+	                        <h2 class="eael-elements-flip-box-heading"><?php echo esc_html__( $settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></h2>
 	                        <div class="eael-elements-flip-box-content">
-	                           <p><?php echo __( $settings['eael_flipbox_front_text'], 'essential-addons-elementor' ); ?></p>
+	                           <p><?php echo __( $settings['eael_flipbox_front_text'], 'essential-addons-for-elementor-lite'); ?></p>
 	                        </div>
 	                    </div>
 	                </div>
@@ -1310,9 +1310,9 @@ class Flip_Box extends Widget_Base {
 	                			</div>
 	                    	<?php endif; ?>
 
-	                        <<?php echo $flipbox_if_html_title_tag,' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__( $settings['eael_flipbox_back_title'], 'essential-addons-elementor' ); ?></<?php echo $flipbox_if_html_title_tag; ?>>
+	                        <<?php echo $flipbox_if_html_title_tag,' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__( $settings['eael_flipbox_back_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $flipbox_if_html_title_tag; ?>>
 	                        <div class="eael-elements-flip-box-content">
-	                           <p><?php echo __( $settings['eael_flipbox_back_text'], 'essential-addons-elementor' ); ?></p>
+	                           <p><?php echo __( $settings['eael_flipbox_back_text'], 'essential-addons-for-elementor-lite'); ?></p>
 	                        </div>
 
 	                        <?php if( $settings['flipbox_link_type'] == 'button' && ! empty($settings['flipbox_button_text']) ) : ?>

@@ -21,7 +21,7 @@ var FancyText = function($scope, $) {
                 ? $fancyText.data("fancy-text-delay")
                 : "",
         $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") !== undefined ? true : false,
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
         $fancy_text_loop =
             $fancyText.data("fancy-text-loop") !== undefined
                 ? $fancyText.data("fancy-text-loop") == "yes"

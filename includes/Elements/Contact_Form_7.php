@@ -38,7 +38,7 @@ class Contact_Form_7 extends Widget_Base
      */
     public function get_title()
     {
-        return __('EA Contact Form 7', 'essential-addons-elementor');
+        return __('EA Contact Form 7', 'essential-addons-for-elementor-lite');
     }
 
     /**
@@ -84,7 +84,7 @@ class Contact_Form_7 extends Widget_Base
             $this->start_controls_section(
                 'eael_global_warning',
                 [
-                    'label' => __('Warning!', 'essential-addons-elementor'),
+                    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -92,7 +92,7 @@ class Contact_Form_7 extends Widget_Base
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>Contact Form 7</strong> is not installed/activated on your site. Please install and activate <strong>Contact Form 7</strong> first.', 'essential-addons-elementor'),
+                    'raw' => __('<strong>Contact Form 7</strong> is not installed/activated on your site. Please install and activate <strong>Contact Form 7</strong> first.', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                 ]
             );
@@ -106,14 +106,14 @@ class Contact_Form_7 extends Widget_Base
             $this->start_controls_section(
                 'section_info_box',
                 [
-                    'label' => __('Contact Form', 'essential-addons-elementor'),
+                    'label' => __('Contact Form', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'contact_form_list',
                 [
-                    'label' => esc_html__('Select Form', 'essential-addons-elementor'),
+                    'label' => esc_html__('Select Form', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'label_block' => true,
                     'options' => $this->eael_select_contact_form(),
@@ -124,10 +124,10 @@ class Contact_Form_7 extends Widget_Base
             $this->add_control(
                 'form_title',
                 [
-                    'label' => __('Form Title', 'essential-addons-elementor'),
+                    'label' => __('Form Title', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('On', 'essential-addons-elementor'),
-                    'label_off' => __('Off', 'essential-addons-elementor'),
+                    'label_on' => __('On', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Off', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                 ]
             );
@@ -135,7 +135,7 @@ class Contact_Form_7 extends Widget_Base
             $this->add_control(
                 'form_title_text',
                 [
-                    'label' => esc_html__('Title', 'essential-addons-elementor'),
+                    'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'label_block' => true,
                     'default' => '',
@@ -148,10 +148,10 @@ class Contact_Form_7 extends Widget_Base
             $this->add_control(
                 'form_description',
                 [
-                    'label' => __('Form Description', 'essential-addons-elementor'),
+                    'label' => __('Form Description', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('On', 'essential-addons-elementor'),
-                    'label_off' => __('Off', 'essential-addons-elementor'),
+                    'label_on' => __('On', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Off', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                 ]
             );
@@ -159,7 +159,7 @@ class Contact_Form_7 extends Widget_Base
             $this->add_control(
                 'form_description_text',
                 [
-                    'label' => esc_html__('Description', 'essential-addons-elementor'),
+                    'label' => esc_html__('Description', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXTAREA,
                     'default' => '',
                     'condition' => [
@@ -171,11 +171,11 @@ class Contact_Form_7 extends Widget_Base
             $this->add_control(
                 'labels_switch',
                 [
-                    'label' => __('Labels', 'essential-addons-elementor'),
+                    'label' => __('Labels', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SWITCHER,
                     'default' => 'yes',
-                    'label_on' => __('Show', 'essential-addons-elementor'),
-                    'label_off' => __('Hide', 'essential-addons-elementor'),
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                 ]
             );
@@ -189,19 +189,19 @@ class Contact_Form_7 extends Widget_Base
             $this->start_controls_section(
                 'section_errors',
                 [
-                    'label' => __('Errors', 'essential-addons-elementor'),
+                    'label' => __('Errors', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'error_messages',
                 [
-                    'label' => __('Error Messages', 'essential-addons-elementor'),
+                    'label' => __('Error Messages', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'show',
                     'options' => [
-                        'show' => __('Show', 'essential-addons-elementor'),
-                        'hide' => __('Hide', 'essential-addons-elementor'),
+                        'show' => __('Show', 'essential-addons-for-elementor-lite'),
+                        'hide' => __('Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary' => [
                         'show' => 'block',
@@ -216,12 +216,12 @@ class Contact_Form_7 extends Widget_Base
             $this->add_control(
                 'validation_errors',
                 [
-                    'label' => __('Validation Errors', 'essential-addons-elementor'),
+                    'label' => __('Validation Errors', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'show',
                     'options' => [
-                        'show' => __('Show', 'essential-addons-elementor'),
-                        'hide' => __('Hide', 'essential-addons-elementor'),
+                        'show' => __('Show', 'essential-addons-for-elementor-lite'),
+                        'hide' => __('Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary' => [
                         'show' => 'block',
@@ -239,18 +239,18 @@ class Contact_Form_7 extends Widget_Base
                 $this->start_controls_section(
                     'eael_section_pro',
                     [
-                        'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
+                        'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
                     ]
                 );
 
                 $this->add_control(
                     'eael_control_get_pro',
                     [
-                        'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
+                        'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::CHOOSE,
                         'options' => [
                             '1' => [
-                                'title' => __('', 'essential-addons-elementor'),
+                                'title' => __('', 'essential-addons-for-elementor-lite'),
                                 'icon' => 'fa fa-unlock-alt',
                             ],
                         ],
@@ -274,7 +274,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_container_style',
             [
-                'label' => __('Form Container', 'essential-addons-elementor'),
+                'label' => __('Form Container', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -292,24 +292,24 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'eael_contact_form_alignment',
             [
-                'label' => esc_html__('Form Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
                     'default' => [
-                        'title' => __('Default', 'essential-addons-elementor'),
+                        'title' => __('Default', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-ban',
                     ],
                     'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -320,7 +320,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'eael_contact_form_max_width',
             [
-                'label' => esc_html__('Form Max Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range' => [
@@ -342,7 +342,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'eael_contact_form_margin',
             [
-                'label' => esc_html__('Form Margin', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -354,7 +354,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'eael_contact_form_padding',
             [
-                'label' => esc_html__('Form Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -366,7 +366,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'eael_contact_form_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => ['px'],
@@ -401,7 +401,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_fields_title_description',
             [
-                'label' => __('Title & Description', 'essential-addons-elementor'),
+                'label' => __('Title & Description', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -409,19 +409,19 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'heading_alignment',
             [
-                'label' => __('Alignment', 'essential-addons-elementor'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -435,7 +435,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'title_heading',
             [
-                'label' => __('Title', 'essential-addons-elementor'),
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -444,7 +444,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'title_text_color',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -457,7 +457,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title',
             ]
@@ -466,7 +466,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'description_heading',
             [
-                'label' => __('Description', 'essential-addons-elementor'),
+                'label' => __('Description', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -475,7 +475,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'description_text_color',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -488,7 +488,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'description_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description',
             ]
@@ -503,7 +503,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_fields_style',
             [
-                'label' => __('Input & Textarea', 'essential-addons-elementor'),
+                'label' => __('Input & Textarea', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -513,14 +513,14 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'tab_fields_normal',
             [
-                'label' => __('Normal', 'essential-addons-elementor'),
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'field_bg',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -532,7 +532,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'field_text_color',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -545,7 +545,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'input_spacing',
             [
-                'label' => __('Spacing', 'essential-addons-elementor'),
+                'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => '20',
@@ -568,7 +568,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'field_padding',
             [
-                'label' => __('Padding', 'essential-addons-elementor'),
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -580,7 +580,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'text_indent',
             [
-                'label' => __('Text Indent', 'essential-addons-elementor'),
+                'label' => __('Text Indent', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -604,7 +604,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'input_width',
             [
-                'label' => __('Input Width', 'essential-addons-elementor'),
+                'label' => __('Input Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -623,7 +623,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'textarea_width',
             [
-                'label' => __('Textarea Width', 'essential-addons-elementor'),
+                'label' => __('Textarea Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -643,7 +643,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'field_border',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text,{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-date, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select',
@@ -654,7 +654,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'field_radius',
             [
-                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -667,7 +667,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'field_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select',
                 'separator' => 'before',
@@ -688,14 +688,14 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'tab_fields_focus',
             [
-                'label' => __('Focus', 'essential-addons-elementor'),
+                'label' => __('Focus', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'field_bg_focus',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -708,7 +708,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'input_border_focus',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input:focus, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form textarea:focus',
@@ -737,7 +737,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_label_style',
             [
-                'label' => __('Labels', 'essential-addons-elementor'),
+                'label' => __('Labels', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'labels_switch' => 'yes',
@@ -748,7 +748,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'text_color_label',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label' => 'color: {{VALUE}}',
@@ -762,7 +762,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'label_spacing',
             [
-                'label' => __('Spacing', 'essential-addons-elementor'),
+                'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -785,7 +785,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'typography_label',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label',
                 'condition' => [
@@ -802,7 +802,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_placeholder_style',
             [
-                'label' => __('Placeholder', 'essential-addons-elementor'),
+                'label' => __('Placeholder', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -810,11 +810,11 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'placeholder_switch',
             [
-                'label' => __('Show Placeholder', 'essential-addons-elementor'),
+                'label' => __('Show Placeholder', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => __('Yes', 'essential-addons-elementor'),
-                'label_off' => __('No', 'essential-addons-elementor'),
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -822,7 +822,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'text_color_placeholder',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control::-webkit-input-placeholder' => 'color: {{VALUE}}',
@@ -837,7 +837,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'typography_placeholder',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control::-webkit-input-placeholder',
                 'condition' => [
@@ -855,7 +855,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_radio_checkbox_style',
             [
-                'label' => __('Radio & Checkbox', 'essential-addons-elementor'),
+                'label' => __('Radio & Checkbox', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -863,10 +863,10 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'custom_radio_checkbox',
             [
-                'label' => __('Custom Styles', 'essential-addons-elementor'),
+                'label' => __('Custom Styles', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-elementor'),
-                'label_off' => __('No', 'essential-addons-elementor'),
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -874,7 +874,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'radio_checkbox_size',
             [
-                'label' => __('Size', 'essential-addons-elementor'),
+                'label' => __('Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => '15',
@@ -902,7 +902,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'radio_checkbox_normal',
             [
-                'label' => __('Normal', 'essential-addons-elementor'),
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -912,7 +912,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'radio_checkbox_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -927,7 +927,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'radio_checkbox_border_width',
             [
-                'label' => __('Border Width', 'essential-addons-elementor'),
+                'label' => __('Border Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -949,7 +949,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'radio_checkbox_border_color',
             [
-                'label' => __('Border Color', 'essential-addons-elementor'),
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -964,7 +964,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'checkbox_heading',
             [
-                'label' => __('Checkbox', 'essential-addons-elementor'),
+                'label' => __('Checkbox', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -975,7 +975,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'checkbox_border_radius',
             [
-                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -990,7 +990,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'radio_heading',
             [
-                'label' => __('Radio Buttons', 'essential-addons-elementor'),
+                'label' => __('Radio Buttons', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -1001,7 +1001,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'radio_border_radius',
             [
-                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -1018,7 +1018,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'radio_checkbox_checked',
             [
-                'label' => __('Checked', 'essential-addons-elementor'),
+                'label' => __('Checked', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -1028,7 +1028,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'radio_checkbox_color_checked',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1052,7 +1052,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_submit_button_style',
             [
-                'label' => __('Submit Button', 'essential-addons-elementor'),
+                'label' => __('Submit Button', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1060,20 +1060,20 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'button_align',
             [
-                'label' => __('Alignment', 'essential-addons-elementor'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'default' => 'left',
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -1090,12 +1090,12 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'button_width_type',
             [
-                'label' => __('Width', 'essential-addons-elementor'),
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'custom',
                 'options' => [
-                    'full-width' => __('Full Width', 'essential-addons-elementor'),
-                    'custom' => __('Custom', 'essential-addons-elementor'),
+                    'full-width' => __('Full Width', 'essential-addons-for-elementor-lite'),
+                    'custom' => __('Custom', 'essential-addons-for-elementor-lite'),
                 ],
                 'prefix_class' => 'eael-contact-form-7-button-',
             ]
@@ -1104,7 +1104,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'button_width',
             [
-                'label' => __('Width', 'essential-addons-elementor'),
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1128,14 +1128,14 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'tab_button_normal',
             [
-                'label' => __('Normal', 'essential-addons-elementor'),
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'button_bg_color_normal',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1147,7 +1147,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'button_text_color_normal',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1160,7 +1160,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'button_border_normal',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]',
             ]
@@ -1169,7 +1169,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -1181,7 +1181,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'button_padding',
             [
-                'label' => __('Padding', 'essential-addons-elementor'),
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -1193,7 +1193,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'button_margin',
             [
-                'label' => __('Margin Top', 'essential-addons-elementor'),
+                'label' => __('Margin Top', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1213,7 +1213,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'button_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]',
                 'separator' => 'before',
@@ -1234,14 +1234,14 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'tab_button_hover',
             [
-                'label' => __('Hover', 'essential-addons-elementor'),
+                'label' => __('Hover', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'button_bg_color_hover',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1253,7 +1253,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'button_text_color_hover',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1265,7 +1265,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'button_border_color_hover',
             [
-                'label' => __('Border Color', 'essential-addons-elementor'),
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1286,7 +1286,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_section(
             'section_error_style',
             [
-                'label' => __('Errors', 'essential-addons-elementor'),
+                'label' => __('Errors', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1294,7 +1294,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'error_messages_heading',
             [
-                'label' => __('Error Messages', 'essential-addons-elementor'),
+                'label' => __('Error Messages', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'error_messages' => 'show',
@@ -1307,7 +1307,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'tab_error_messages_alert',
             [
-                'label' => __('Alert', 'essential-addons-elementor'),
+                'label' => __('Alert', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'error_messages' => 'show',
                 ],
@@ -1317,7 +1317,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'error_alert_text_color',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1332,7 +1332,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'error_alert_spacing',
             [
-                'label' => __('Spacing', 'essential-addons-elementor'),
+                'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1356,7 +1356,7 @@ class Contact_Form_7 extends Widget_Base
         $this->start_controls_tab(
             'tab_error_messages_fields',
             [
-                'label' => __('Fields', 'essential-addons-elementor'),
+                'label' => __('Fields', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'error_messages' => 'show',
                 ],
@@ -1366,7 +1366,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'error_field_bg_color',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1381,7 +1381,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'error_field_color',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1397,7 +1397,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'error_field_border',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid',
@@ -1415,7 +1415,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'validation_errors_heading',
             [
-                'label' => __('Validation Errors', 'essential-addons-elementor'),
+                'label' => __('Validation Errors', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -1427,7 +1427,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'validation_errors_bg_color',
             [
-                'label' => __('Background Color', 'essential-addons-elementor'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1442,7 +1442,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_control(
             'validation_errors_color',
             [
-                'label' => __('Text Color', 'essential-addons-elementor'),
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1458,7 +1458,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'validation_errors_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_4,
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors',
                 'separator' => 'before',
@@ -1472,7 +1472,7 @@ class Contact_Form_7 extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'validation_errors_border',
-                'label' => __('Border', 'essential-addons-elementor'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-validation-errors',
@@ -1486,7 +1486,7 @@ class Contact_Form_7 extends Widget_Base
         $this->add_responsive_control(
             'validation_errors_margin',
             [
-                'label' => __('Margin', 'essential-addons-elementor'),
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
