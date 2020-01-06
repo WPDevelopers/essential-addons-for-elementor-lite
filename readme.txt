@@ -179,6 +179,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 3.7.0 - 06/01/2020 =
+- Added: Advanced Data Table
+- Fixed: Circle progress not showing in safari
+- Fixed: Filterable Gallery | Column Number issue on Firefox
+- Fixed: Feature List Image issue
+- Fixed: Ninja Form Radio & Checkbox styles are not working 
+- Fixed: Post Grid | Random Order shows duplicate posts when Load More is used
+- Fixed:  Lightbox & Modal > Close Button positioning issue
+- Improvements: Advanced Tabs responsiveness
+- Improvements: Data Table sorting improved
+- Few minor bugfix and improvements
+
 = 3.6.2 - 09/12/2019 =
 - Bugfix: Product grid responsive issue 
 - Bugfix: 404 page assets loading
