@@ -372,7 +372,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
+				cols = row.match(/(".*?"|[^","]+)/gm);
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
