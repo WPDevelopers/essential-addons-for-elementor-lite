@@ -14,9 +14,7 @@
             $("html, body")
                 .stop()
                 .animate(
-                    {
-                        scrollTop: $target.offset().top
-                    },
+                    {scrollTop: $target.offset().top},
                     600,
                     "swing",
                     function() {
@@ -77,7 +75,8 @@
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;
             allSupportTag.forEach(function( el ) {
-                var id = el.innerHTML.toLowerCase().trim().replace(/ /g,"-");
+                var id = el.innerHTML.toLowerCase().trim().replace(/[^a-zA-Z ]/g, "");
+                id = id.trim().replace(/ /g,"-");
                 el.id = c+"-"+id;
                 el.classList.add("eael-heading-content");
                 c++
@@ -106,19 +105,27 @@
                 var diff            = latestLavel - parentLevel;
 
                 if (diff > 0) {
-                    var containerLiNode = ListNode.lastChild;
-                    var createUlNode = document.createElement('UL');
+                    if(containerLiNode){
+                        var containerLiNode = ListNode.lastChild;
+                        var createUlNode = document.createElement('UL');
 
-                    containerLiNode.appendChild(createUlNode);
-                    ListNode = createUlNode;
-                    parentLevel = latestLavel;
+                        containerLiNode.appendChild(createUlNode);
+                        ListNode = createUlNode;
+                        parentLevel = latestLavel;
+                    }
                 }
 
                 if (diff < 0) {
                     while (0 !== diff++) {
-                        ListNode = ListNode.parentNode.parentNode;
+                        if(ListNode.parentNode.parentNode){
+                            ListNode = ListNode.parentNode.parentNode;
+                        }
                     }
                     parentLevel = latestLavel;
+                }
+
+                if(ListNode.tagName!=='UL'){
+                    ListNode = listId;
                 }
 
                 var createLiNode = document.createElement('LI');
@@ -131,7 +138,8 @@
                     createLiNode.setAttribute('itemprop', 'itemListElement');
                 }
 
-                var Linkid = currentHeading.textContent.toLowerCase().trim().replace(/ /g,"-");
+                var Linkid = currentHeading.textContent.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+                Linkid = Linkid.trim().replace(/ /g,"-");
                 Linkid = '#'+i+'-'+Linkid;
                 createALink.className = 'eael-toc-link';
                 createALink.setAttribute('itemprop', 'item');
