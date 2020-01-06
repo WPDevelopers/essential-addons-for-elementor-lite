@@ -817,15 +817,13 @@
                 ]
             );
 
-            $this->add_control(
-                'eael_event_popup_details_color',
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
                 [
-                    'label' => __('Event Details Color', 'essential-addons-elementor'),
-                    'type' => Controls_Manager::COLOR,
-                    'default'   => '#CC0000',
-                    'selectors' => [
-                        '{{WRAPPER}} .eaelec-modal-footer a.eaelec-event-details-link' => 'color: {{VALUE}}',
-                    ],
+                    'name' => 'eael_event_popup_title_typography',
+                    'label' => __( 'Title Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .eaelec-modal-header h2',
                 ]
             );
 
@@ -839,6 +837,38 @@
                         '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}}!important',
                         '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end' => 'color: {{VALUE}}!important',
                     ],
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_event_popup_event_date_typography',
+                    'label' => __( 'Date Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .eaelec-modal-header > span.eaelec-event-popup-date',
+                ]
+            );
+
+            $this->add_control(
+                'eael_event_popup_details_color',
+                [
+                    'label' => __('Event Details Color', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::COLOR,
+                    'default'   => '#CC0000',
+                    'selectors' => [
+                        '{{WRAPPER}} .eaelec-modal-footer a.eaelec-event-details-link' => 'color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_event_popup_details_typography',
+                    'label' => __( 'Details Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .eaelec-modal-footer a.eaelec-event-details-link',
                 ]
             );
 
@@ -937,8 +967,8 @@
                     <div class="eaelec-modal-header">
                         <span class="eaelec-modal-close">&times;</span>
                         <h2></h2>
-                        <span class="eaelec-event-date-start"></span>
-                        <span class="eaelec-event-date-end"></span>
+                        <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
+                        <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
                     </div>
                     <div class="eaelec-modal-body">
                         <p></p>

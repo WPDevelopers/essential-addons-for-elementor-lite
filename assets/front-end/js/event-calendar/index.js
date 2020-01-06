@@ -26,6 +26,9 @@ jQuery(window).on('elementor/frontend/init', function () {
             center:'title',
             right:'month,agendaWeek,agendaDay'
             },
+            buttonText: {
+                    today: 'Today' 
+            },
             events: eventAll,
             selectable:true,
             selectHelper:true,
