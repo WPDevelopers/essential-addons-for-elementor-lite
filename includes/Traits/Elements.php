@@ -182,7 +182,7 @@ trait Elements
                  $html .= "<h2 class='eael-toc-title'>{$toc_title}</h2>";
             $html .= "</div>";
                 $html .= "<div class='eael-toc-body'>";
-                $html .= $this->eael_list_hierarchy( $content, $support_tag, array( 'class' => $toc_style_class ) );
+                $html .= "<ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>";
             $html .= "</div>";
         $html .= sprintf( "<button class='eael-toc-button'><i class='fas fa-list'></i><span>%s</span></button>", $toc_title );
         $html .= "</div>";
