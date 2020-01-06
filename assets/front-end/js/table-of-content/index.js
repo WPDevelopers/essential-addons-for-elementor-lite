@@ -1,16 +1,14 @@
 ( function( $){
     jQuery(document).ready(function() {
-        var toc_links = $("ul.eael-toc-list li a");
-        toc_links.on("click", function(e) {
+        $(document).on("click",'.eael-toc-link', function(e) {
             e.preventDefault();
             $(document).off("scroll");
-            toc_links.parent().each(function() {
-                $(this).removeClass("active");
-            });
-            //active parent node when visit child node
+
+            $("ul.eael-toc-list li").removeClass("active");
             $(".eael-first-child").removeClass( "eael-highlight" );
             $(this).closest('.eael-first-child').addClass( "eael-highlight" );
             $(this).parent().addClass( "active" );
+
             var target = this.hash,
                 $target = $(target);
             $("html, body")
@@ -23,15 +21,14 @@
                     "swing",
                     function() {
                         window.location.hash = target;
-                        $(document).on("scroll", onScroll);
+                        $(document).on("scroll", EaelTocOnScroll);
                     }
                 );
         });
 
-        $(document).on("scroll", onScroll);
-        // var $settings = elementor.settings.page.getSettings();
-        // console.log($settings.settings);
-        function onScroll(){
+        $(document).on("scroll", EaelTocOnScroll);
+
+        function EaelTocOnScroll(){
 
             var scrollPos = $(document).scrollTop();
             $(" ul.eael-toc-list li a").each( function() {
@@ -51,12 +48,15 @@
             });
         }
 
-        window.onscroll = function() {eaelSticky()};
+        window.onscroll = function() {eaelTocSticky()};
 
         var eaelToc = document.getElementById("eael-toc");
         var sticky = (eaelToc)?eaelToc.offsetTop:0;
 
-        function eaelSticky() {
+        /**
+         * check sticky
+         */
+        function eaelTocSticky() {
             if(!eaelToc){
                 return ;
             }
@@ -67,6 +67,11 @@
             }
         }
 
+        /**
+         * add ID in main content heading tag
+         * @param selector
+         * @param supportTag
+         */
         function eael_toc_content( selector, supportTag ){
             var mainSelector = document.querySelector(selector),
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
@@ -77,6 +82,65 @@
                 el.classList.add("eael-heading-content");
                 c++
             });
+            eael_list_hierarchy( selector, supportTag);
+        }
+
+        /**
+         * Make toc list
+         * @param selector
+         * @param supportTag
+         */
+        function eael_list_hierarchy (selector, supportTag){
+            var tagList     = supportTag;
+            var listId      = document.getElementById('eael-toc-list');
+            var mainContent = document.querySelector(selector);
+            listId.innerHTML='';
+            allHeadings = mainContent.querySelectorAll(tagList),
+            baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
+            ListNode    = listId;
+
+            for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
+
+                var currentHeading  = allHeadings[i];
+                var latestLavel     = parseInt(currentHeading.tagName.substr(1,1));
+                var diff            = latestLavel - parentLevel;
+
+                if (diff > 0) {
+                    var containerLiNode = ListNode.lastChild;
+                    var createUlNode = document.createElement('UL');
+
+                    containerLiNode.appendChild(createUlNode);
+                    ListNode = createUlNode;
+                    parentLevel = latestLavel;
+                }
+
+                if (diff < 0) {
+                    while (0 !== diff++) {
+                        ListNode = ListNode.parentNode.parentNode;
+                    }
+                    parentLevel = latestLavel;
+                }
+
+                var createLiNode = document.createElement('LI');
+                var createALink = document.createElement('A');
+
+                if( baseTag == parentLevel ){
+                    createLiNode.className = 'eael-first-child';
+                    createLiNode.setAttribute('itemscope', '');
+                    createLiNode.setAttribute('itemtype', 'http://schema.org/ListItem');
+                    createLiNode.setAttribute('itemprop', 'itemListElement');
+                }
+
+                var Linkid = currentHeading.textContent.toLowerCase().trim().replace(/ /g,"-");
+                Linkid = '#'+i+'-'+Linkid;
+                createALink.className = 'eael-toc-link';
+                createALink.setAttribute('itemprop', 'item');
+                createALink.setAttribute('href', Linkid);
+                createALink.appendChild(document.createTextNode(currentHeading.textContent))
+                createLiNode.appendChild(createALink);
+
+                ListNode.appendChild(createLiNode);
+            }
         }
 
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {
@@ -88,7 +152,7 @@
             elementor.settings.page.addChangeCallback(
                 "eael_ext_table_of_content",
                 function (newValue) {
-                    if (newValue != "yes") {
+                    if (newValue !== "yes") {
                         $("#eael-toc").addClass('eael-toc-disable');
                     }else{
                         var $settings = elementor.settings.page.getSettings();
