@@ -114,6 +114,42 @@
                 ]
             );
 
+//            $element->add_responsive_control(
+//                'eael_ext_toc_width',
+//                [
+//                    'label' => __('Width', 'essential-addons-for-elementor-lite'),
+//                    'type' => Controls_Manager::SLIDER,
+//                    'size_units' => ['px', '%'],
+//                    'range' => [
+//                        'px' => [
+//                            'min' => 100,
+//                            'max' => 10000,
+//                            'step' => 1,
+//                        ],
+//                        '%' => [
+//                            'min' => 10,
+//                            'max' => 100,
+//                            'step' => 1,
+//                        ],
+//                    ],
+//                    'desktop_default' => [
+//                        'unit' => '%',
+//                        'size' => 100,
+//                    ],
+//                    'tablet_default' => [
+//                        'unit' => '%',
+//                        'size' => 100,
+//                    ],
+//                    'mobile_default' => [
+//                        'unit' => '%',
+//                        'size' => 100,
+//                    ],
+//                    'selectors' => [
+//                        '{{WRAPPER}} .eael-toc' => 'width: {{SIZE}}{{UNIT}}',
+//                    ],
+//                ]
+//            );
+
             $element->add_control(
                 'eael_ext_toc_position',
                 [
