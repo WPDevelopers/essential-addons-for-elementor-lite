@@ -29,6 +29,7 @@ jQuery(window).on('elementor/frontend/init', function () {
             buttonText: {
                     today: 'Today' 
             },
+            allDayText: 'All day',
             events: eventAll,
             selectable:true,
             selectHelper:true,

@@ -725,6 +725,33 @@
                 ]
             );
 
+            $this->add_control(
+                'eael_event_calendar_weekday_alignment',
+                [
+                    'label' => __( 'Alignment', 'essential-addons-elementor' ),
+                    'type' => \Elementor\Controls_Manager::CHOOSE,
+                    'options' => [
+                        'left' => [
+                            'title' => __( 'Left', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-align-left',
+                        ],
+                        'center' => [
+                            'title' => __( 'Center', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-align-center',
+                        ],
+                        'right' => [
+                            'title' => __( 'Right', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-align-right',
+                        ],
+                    ],
+                    'default' => 'center',
+                    'toggle' => true,
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'text-align: {{VALUE}}!important',
+                    ],
+                ]
+            );
+
             $this->end_controls_section();
 
             $this->start_controls_section(
@@ -792,6 +819,26 @@
                     'selectors' => [
                         '{{WRAPPER}} .fc-day-number' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
+                ]
+            );
+
+            $this->end_controls_section();
+
+            $this->start_controls_section(
+                'eaelec_event_section',
+                [
+                    'label' => __('Events', 'essential-addons-elementor'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eaelec_event_typography',
+                    'label' => __( 'Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .fc-day-grid-event',
                 ]
             );
 
