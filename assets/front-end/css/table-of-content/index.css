@@ -86,6 +86,9 @@ html {
 .eael-toc .eael-toc-body ul.eael-toc-list > li:first-child {
   border: none;
 }
+.eael-toc .eael-toc-body ul.eael-toc-list > li.active ul {
+  display: block;
+}
 .eael-toc .eael-toc-body ul.eael-toc-list li {
   font-size: 15px;
   list-style: none;

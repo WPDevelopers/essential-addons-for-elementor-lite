@@ -22217,21 +22217,24 @@ function RunStickyPlayer(elem) {
 
             var target = this.hash,
                 $target = $(target);
-            $("html, body")
-                .stop()
-                .animate(
-                    {
-                        scrollTop: $target.offset().top
-                    },
-                    600,
-                    "swing",
-                    function() {
-                        $(document).on("scroll", EaelTocOnScroll);
-                    }
-                );
+            window.location.hash = target;
+
+            // $("html, body")
+            //     .stop()
+            //     .animate(
+            //         {
+            //             scrollTop: $target.offset().top
+            //         },
+            //         600,
+            //         "swing",
+            //         function() {
+            //             window.location.hash = target;
+            //             $(document).on("scroll", EaelTocOnScroll);
+            //         }
+            //     );
         });
 
-        $(document).on("scroll", EaelTocOnScroll);
+        //$(document).on("scroll", EaelTocOnScroll);
 
         function EaelTocOnScroll(){
 
@@ -22322,6 +22325,8 @@ function RunStickyPlayer(elem) {
                     }
                 }
 
+                var sequenceParent = false;
+
                 if (diff < 0) {
                     while (0 !== diff++) {
                         if(ListNode.parentNode.parentNode){
@@ -22329,6 +22334,7 @@ function RunStickyPlayer(elem) {
                         }
                     }
                     parentLevel = latestLavel;
+                    sequenceParent = true;
                 }
 
                 if(ListNode.tagName!=='UL'){
@@ -22338,7 +22344,7 @@ function RunStickyPlayer(elem) {
                 var createLiNode = document.createElement('LI');
                 var createALink = document.createElement('A');
 
-                if( baseTag == parentLevel ){
+                if( baseTag === parentLevel || sequenceParent){
                     createLiNode.className = 'eael-first-child';
                     createLiNode.setAttribute('itemscope', '');
                     createLiNode.setAttribute('itemtype', 'http://schema.org/ListItem');
@@ -22357,8 +22363,9 @@ function RunStickyPlayer(elem) {
         }
 
         function eael_build_id( content ){
-            var Linkid = content.toLowerCase().replace(/[^a-zA-Z ]/g, "");
-            return Linkid.trim().replace(/ /g,"-");
+            return 'eael-uniq-link';
+            // var Linkid = content.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+            // return Linkid.trim().replace(/ /g,"-");
         }
 
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {

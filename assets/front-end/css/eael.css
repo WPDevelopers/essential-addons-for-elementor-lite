@@ -4136,6 +4136,65 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   overflow: hidden;
 }
 
+.eael-fluent-form-wrapper label.ff-el-form-check-label {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+.eael-fluent-form-wrapper label.ff-el-form-check-label input {
+  margin-right: 5px;
+}
+
+.eael-fluentform-form-button-full-width .ff-btn-submit {
+  width: 100%;
+  display: block;
+}
+
+.eael-contact-form.eael-fluent-form-wrapper.error-message-hide .ff-el-is-error .text-danger {
+  display: none;
+}
+
+.eael-fluentform-form-button-center .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-right .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-right .ff-el-group .ff-btn-submit {
+  float: right;
+}
+
+.eael-fluentform-form-button-left .ff-el-group.ff-text-left .ff-btn-submit,
+.eael-fluentform-form-button-left .ff-el-group.ff-text-right .ff-btn-submit,
+.eael-fluentform-form-button-left .ff-el-group .ff-btn-submit {
+  float: left;
+}
+
+.eael-contact-form.eael-fluent-form-wrapper.fluent-form-labels-hide label {
+  display: none !important;
+}
+
+.eael-fluentform-section-break-content-left .ff-el-group.ff-el-section-break {
+  text-align: left;
+}
+
+.eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break {
+  text-align: center;
+}
+
+.eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break {
+  text-align: right;
+}
+
 /*--------------------------*/
 /* 01. General Styles
 /*--------------------------*/
@@ -4283,65 +4342,6 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-contact-form-align-right,
 .elementor-widget-eael-weform.eael-contact-form-align-right .eael-weform-container {
   margin: 0 0 0 auto;
-}
-
-.eael-fluent-form-wrapper label.ff-el-form-check-label {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-}
-.eael-fluent-form-wrapper label.ff-el-form-check-label input {
-  margin-right: 5px;
-}
-
-.eael-fluentform-form-button-full-width .ff-btn-submit {
-  width: 100%;
-  display: block;
-}
-
-.eael-contact-form.eael-fluent-form-wrapper.error-message-hide .ff-el-is-error .text-danger {
-  display: none;
-}
-
-.eael-fluentform-form-button-center .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
-  margin: 0 auto;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
-}
-
-.eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-right .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-right .ff-el-group .ff-btn-submit {
-  float: right;
-}
-
-.eael-fluentform-form-button-left .ff-el-group.ff-text-left .ff-btn-submit,
-.eael-fluentform-form-button-left .ff-el-group.ff-text-right .ff-btn-submit,
-.eael-fluentform-form-button-left .ff-el-group .ff-btn-submit {
-  float: left;
-}
-
-.eael-contact-form.eael-fluent-form-wrapper.fluent-form-labels-hide label {
-  display: none !important;
-}
-
-.eael-fluentform-section-break-content-left .ff-el-group.ff-el-section-break {
-  text-align: left;
-}
-
-.eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break {
-  text-align: center;
-}
-
-.eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break {
-  text-align: right;
 }
 
 /*----------------------*/
@@ -7632,6 +7632,9 @@ html {
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li:first-child {
   border: none;
+}
+.eael-toc .eael-toc-body ul.eael-toc-list > li.active ul {
+  display: block;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li {
   font-size: 15px;
