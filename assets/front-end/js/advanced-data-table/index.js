@@ -79,15 +79,21 @@ var Advanced_Data_Table = function($scope, $) {
 	var classCollection = {};
 
 	if (isEditMode) {
+		var attr = "readonly";
+
 		// add edit class
 		table.classList.add("ea-advanced-data-table-editable");
+
+		if (table.classList.contains("ea-advanced-data-table-static")) {
+			attr = "";
+		}
 
 		// insert editable area
 		table.querySelectorAll("th, td").forEach(function(el) {
 			var value = el.innerHTML;
 
 			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
+				el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
 			}
 		});
 
