@@ -3,32 +3,25 @@
         $(document).on("click",'.eael-toc-link', function(e) {
             e.preventDefault();
             $(document).off("scroll");
-
             $("ul.eael-toc-list li").removeClass("active");
             $(".eael-first-child").removeClass( "eael-highlight" );
             $(this).closest('.eael-first-child').addClass( "eael-highlight" );
             $(this).parent().addClass( "active" );
 
-
-
             var target = this.hash,
                 $target = $(target);
-
-            window.location.hash = target;
-            $(document).on("scroll", EaelTocOnScroll);
-
-
-            // $("html, body")
-            //     .stop()
-            //     .animate(
-            //         {scrollTop: $target.offset().top},
-            //         600,
-            //         "swing",
-            //         function() {
-            //             window.location.hash = target;
-            //             $(document).on("scroll", EaelTocOnScroll);
-            //         }
-            //     );
+            $("html, body")
+                .stop()
+                .animate(
+                    {
+                        scrollTop: $target.offset().top
+                    },
+                    600,
+                    "swing",
+                    function() {
+                        $(document).on("scroll", EaelTocOnScroll);
+                    }
+                );
         });
 
         $(document).on("scroll", EaelTocOnScroll);
@@ -38,6 +31,7 @@
             var scrollPos = $(document).scrollTop();
             $(" ul.eael-toc-list li a").each( function() {
                 var currLink = $(this);
+
                 var refElement = $(currLink.attr("href"));
                 var position =  refElement.position();
                 var closest  = currLink.closest('.eael-first-child');
@@ -111,8 +105,8 @@
                 var diff            = latestLavel - parentLevel;
 
                 if (diff > 0) {
+                    var containerLiNode = ListNode.lastChild;
                     if(containerLiNode){
-                        var containerLiNode = ListNode.lastChild;
                         var createUlNode = document.createElement('UL');
 
                         containerLiNode.appendChild(createUlNode);
