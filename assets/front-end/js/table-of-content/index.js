@@ -9,19 +9,26 @@
             $(this).closest('.eael-first-child').addClass( "eael-highlight" );
             $(this).parent().addClass( "active" );
 
+
+
             var target = this.hash,
                 $target = $(target);
-            $("html, body")
-                .stop()
-                .animate(
-                    {scrollTop: $target.offset().top},
-                    600,
-                    "swing",
-                    function() {
-                        window.location.hash = target;
-                        $(document).on("scroll", EaelTocOnScroll);
-                    }
-                );
+
+            window.location.hash = target;
+            $(document).on("scroll", EaelTocOnScroll);
+
+
+            // $("html, body")
+            //     .stop()
+            //     .animate(
+            //         {scrollTop: $target.offset().top},
+            //         600,
+            //         "swing",
+            //         function() {
+            //             window.location.hash = target;
+            //             $(document).on("scroll", EaelTocOnScroll);
+            //         }
+            //     );
         });
 
         $(document).on("scroll", EaelTocOnScroll);
@@ -43,6 +50,7 @@
                     currLink.parent().addClass("active");
                     closest.addClass( "eael-highlight" );
                 }
+
             });
         }
 
@@ -75,9 +83,7 @@
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;
             allSupportTag.forEach(function( el ) {
-                var id = el.innerHTML.toLowerCase().trim().replace(/[^a-zA-Z ]/g, "");
-                id = id.trim().replace(/ /g,"-");
-                el.id = c+"-"+id;
+                el.id = c+"-"+ eael_build_id( el.innerHTML );
                 el.classList.add("eael-heading-content");
                 c++
             });
@@ -138,9 +144,7 @@
                     createLiNode.setAttribute('itemprop', 'itemListElement');
                 }
 
-                var Linkid = currentHeading.textContent.toLowerCase().replace(/[^a-zA-Z ]/g, "");
-                Linkid = Linkid.trim().replace(/ /g,"-");
-                Linkid = '#'+i+'-'+Linkid;
+                Linkid = '#'+i+'-'+ eael_build_id( currentHeading.textContent );
                 createALink.className = 'eael-toc-link';
                 createALink.setAttribute('itemprop', 'item');
                 createALink.setAttribute('href', Linkid);
@@ -149,6 +153,11 @@
 
                 ListNode.appendChild(createLiNode);
             }
+        }
+
+        function eael_build_id( content ){
+            var Linkid = content.toLowerCase().replace(/[^a-zA-Z ]/g, "");
+            return Linkid.trim().replace(/ /g,"-");
         }
 
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {
