@@ -763,6 +763,44 @@
             );
 
             $this->add_control(
+                'eael_event_calendar_date_alignment',
+                [
+                    'label' => __( 'Alignment', 'essential-addons-elementor' ),
+                    'type' => \Elementor\Controls_Manager::CHOOSE,
+                    'options' => [
+                        'left' => [
+                            'title' => __( 'Left', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-align-left',
+                        ],
+                        'center' => [
+                            'title' => __( 'Center', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-align-center',
+                        ],
+                        'right' => [
+                            'title' => __( 'Right', 'essential-addons-elementor' ),
+                            'icon' => 'fa fa-align-right',
+                        ],
+                    ],
+                    'default' => 'center',
+                    'toggle' => true,
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-number' => 'float: unset!important',
+                        '{{WRAPPER}} .fc-view table thead:first-child tr:first-child td' => 'text-align: {{VALUE}}!important',
+                    ],
+                ]
+            );
+
+            $this->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_event_calendar_date_typography',
+                    'label' => __( 'Typography', 'essential-addons-elementor' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .fc-day-number',
+                ]
+            );
+
+            $this->add_control(
                 'eael_event_calendar_date_font_color',
                 [
                     'label' => __('Font Color', 'essential-addons-elementor'),

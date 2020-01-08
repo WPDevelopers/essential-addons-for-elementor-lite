@@ -47,6 +47,10 @@
   border-radius: 4px;
 }
 
+.fc-time-grid .fc-event {
+  min-height: 15px;
+}
+
 /* The Modal Started */
 .eaelec-modal {
   display: none;
