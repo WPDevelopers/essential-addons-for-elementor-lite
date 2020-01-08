@@ -166,14 +166,16 @@ trait Elements
             $this->eael_toc_global_css($page_settings_model , $global_settings);
         }
 
-        $content = get_the_content();
         $support_tag =  (array) $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_supported_heading_tag', $global_settings );
         $support_tag = implode( ',', array_filter( $support_tag ) );
         $position = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_position', $global_settings );
         $toc_style = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_list_style', $global_settings );
+        $toc_collapse = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_collapse_sub_heading', $global_settings );
         $toc_title = esc_html($this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_title', $global_settings ));
         $el_class .= ($position =='right')?' eael-toc-right':' ';
+
         $toc_style_class = ' eael-toc-list-'.$toc_style;
+        $toc_style_class .= ($toc_collapse =='yes')?' eael-toc-collapse':' ';
 
         $html = '';
         $html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class}' {$disable_toc}>";
