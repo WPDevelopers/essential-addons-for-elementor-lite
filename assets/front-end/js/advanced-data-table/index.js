@@ -504,7 +504,10 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
-	if (element.options.model.attributes.widgetType == "eael-advanced-data-table") {
+	if (
+		element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
+		element.options.model.attributes.settings.attributes.ea_adv_data_table_source == "static"
+	) {
 		groups.push({
 			name: "ea_advanced_data_table",
 			actions: [
