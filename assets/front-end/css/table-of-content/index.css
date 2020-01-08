@@ -53,6 +53,8 @@ html {
 .eael-toc .eael-toc-body {
   padding: 12px 20px;
   background: #fff6f3;
+  overflow-y: auto;
+  max-height: 75vh;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin-left: -5px;
