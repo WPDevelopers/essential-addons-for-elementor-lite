@@ -1915,6 +1915,7 @@ trait Helper
         $toc_list_color_active      = $global_settings['table_of_content']['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_style'];
         $toc_list_separator_color   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_color'];
+        $collapse_sub_heading       = $global_settings['table_of_content']['eael_ext_toc_collapse_sub_heading'];
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,

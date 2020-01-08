@@ -11,20 +11,6 @@
             var target = this.hash,
                 $target = $(target);
             window.location.hash = target;
-
-            // $("html, body")
-            //     .stop()
-            //     .animate(
-            //         {
-            //             scrollTop: $target.offset().top
-            //         },
-            //         600,
-            //         "swing",
-            //         function() {
-            //             window.location.hash = target;
-            //             $(document).on("scroll", EaelTocOnScroll);
-            //         }
-            //     );
         });
 
         //$(document).on("scroll", EaelTocOnScroll);
@@ -47,7 +33,6 @@
                     currLink.parent().addClass("active");
                     closest.addClass( "eael-highlight" );
                 }
-
             });
         }
 
@@ -198,6 +183,17 @@
                     list.removeClass('eael-toc-list-style_2 eael-toc-list-style_3');
                     if (newValue !== "style_1") {
                         list.addClass('eael-toc-list-'+newValue);
+                    }
+                });
+
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_toc_collapse_sub_heading",
+                function (newValue) {
+                    var list  = $(".eael-toc-list");
+                    if (newValue === "yes") {
+                        list.addClass('eael-toc-collapse');
+                    }else{
+                        list.removeClass('eael-toc-collapse');
                     }
                 });
 

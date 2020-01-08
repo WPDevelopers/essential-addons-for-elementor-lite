@@ -199,6 +199,22 @@
                 ]
 	        );
 
+            $element->add_control(
+                'eael_ext_toc_collapse_sub_heading',
+                [
+                    'label'         => __('Collapse Sub Heading', 'essential-addons-elementor'),
+                    'type'          => Controls_Manager::SWITCHER,
+                    'default'       => 'yes',
+                    'label_on'      => __('Yes', 'essential-addons-elementor'),
+                    'label_off'     => __('No', 'essential-addons-elementor'),
+                    'return_value'  => 'yes',
+                    'separator'     => 'before',
+                    'condition'     => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
             $element->end_controls_section();
 
             $element->start_controls_section(
