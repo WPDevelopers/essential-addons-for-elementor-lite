@@ -842,6 +842,42 @@
                 ]
             );
 
+            $this->add_control(
+                'eaelec_event_margin',
+                [
+                    'label'         => esc_html__('Margin', 'essential-addons-elementor'),
+                    'type'          => Controls_Manager::DIMENSIONS,
+                    'size_units'    => ['px'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-grid-event' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'eaelec_event_padding',
+                [
+                    'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-grid-event' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $this->add_control(
+                'eaelec_event_border_radius',
+                [
+                    'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-grid-event' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
             $this->end_controls_section();
 
             $this->start_controls_section(
