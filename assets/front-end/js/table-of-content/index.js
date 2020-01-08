@@ -2,6 +2,11 @@
     jQuery(document).ready(function() {
         $(document).on("click",'.eael-toc-link', function(e) {
             e.preventDefault();
+            var parentLi = $(this).parent();
+            if( parentLi.is('.eael-highlight.active') ){
+                parentLi.removeClass('eael-highlight active');
+                return false;
+            }
             $(document).off("scroll");
             $("ul.eael-toc-list li").removeClass("active");
             $(".eael-first-child").removeClass( "eael-highlight" );
