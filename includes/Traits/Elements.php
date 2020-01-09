@@ -180,13 +180,13 @@ trait Elements
             $icon = $icon_check['value'];
         }
         $html = '';
-        $html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class}' {$disable_toc}>";
+        $html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} ' {$disable_toc}>";
             $html .= "<div class='eael-toc-header'>";
                  $html .= "<span class='eael-toc-close'>×</span>";
                  $html .= "<h2 class='eael-toc-title'>{$toc_title}</h2>";
             $html .= "</div>";
                 $html .= "<div class='eael-toc-body'>";
-                $html .= "<ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>";
+                $html .= "<ul id='eael-toc-list' class='eael-toc-list eael-toc-number {$toc_style_class}'></ul>";
             $html .= "</div>";
         $html .= sprintf( "<button class='eael-toc-button'><i class='%s'></i><span>%s</span></button>", $icon, $toc_title );
         $html .= "</div>";

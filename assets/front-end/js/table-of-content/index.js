@@ -18,29 +18,6 @@
             window.location.hash = target;
         });
 
-        //$(document).on("scroll", EaelTocOnScroll);
-
-        function EaelTocOnScroll(){
-
-            var scrollPos = $(document).scrollTop();
-            $(" ul.eael-toc-list li a").each( function() {
-                var currLink = $(this);
-
-                var refElement = $(currLink.attr("href"));
-                var position =  refElement.position();
-                var closest  = currLink.closest('.eael-first-child');
-                if ( position &&
-                    position.top <= scrollPos &&
-                    position.top + refElement.height() > scrollPos
-                ) {
-                    $("ul.eael-toc-list li").removeClass("active");
-                    $(".eael-first-child").removeClass("eael-highlight");
-                    currLink.parent().addClass("active");
-                    closest.addClass( "eael-highlight" );
-                }
-            });
-        }
-
         window.onscroll = function() {eaelTocSticky()};
 
         var eaelToc = document.getElementById("eael-toc");
@@ -147,8 +124,6 @@
 
         function eael_build_id( content ){
             return 'eael-uniq-link';
-            // var Linkid = content.toLowerCase().replace(/[^a-zA-Z ]/g, "");
-            // return Linkid.trim().replace(/ /g,"-");
         }
 
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {
@@ -166,7 +141,7 @@
                         var $settings = elementor.settings.page.getSettings();
                         var title = $settings.settings.eael_ext_toc_title;
                         ea_toc_title_change( title );
-                        eael_toc_content('.entry-content', $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
+                        eael_toc_content('.elementor-widget-wrap', $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
                         $("#eael-toc").removeClass('eael-toc-disable eael-toc-global');
                     }
                 });
@@ -218,7 +193,7 @@
         }
         var intSupportTag = $('#eael-toc').data('eaeltoctag');
         if(intSupportTag!==''){
-            eael_toc_content('.entry-content', intSupportTag );
+            eael_toc_content('.elementor-widget-wrap', intSupportTag );
         }
     });
 })(jQuery);
