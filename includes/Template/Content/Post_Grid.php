@@ -83,7 +83,7 @@ trait Post_Grid
                 </article>';
             }
         } else {
-            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
+            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
         }
 
         wp_reset_postdata();

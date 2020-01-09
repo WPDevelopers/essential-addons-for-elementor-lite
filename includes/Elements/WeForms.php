@@ -25,7 +25,7 @@ class WeForms extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA weForm', 'essential-addons-elementor');
+        return esc_html__('EA weForm', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -45,7 +45,7 @@ class WeForms extends Widget_Base
             $this->start_controls_section(
                 'eael_global_warning',
                 [
-                    'label' => __('Warning!', 'essential-addons-elementor'),
+                    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -53,7 +53,7 @@ class WeForms extends Widget_Base
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>WeForms</strong> is not installed/activated on your site. Please install and activate <strong>WeForms</strong> first.', 'essential-addons-elementor'),
+                    'raw' => __('<strong>WeForms</strong> is not installed/activated on your site. Please install and activate <strong>WeForms</strong> first.', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                 ]
             );
@@ -63,15 +63,15 @@ class WeForms extends Widget_Base
             $this->start_controls_section(
                 'eael_section_weform',
                 [
-                    'label' => esc_html__('Select Form', 'essential-addons-elementor'),
+                    'label' => esc_html__('Select Form', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
             $this->add_control(
                 'wpuf_contact_form',
                 [
-                    'label' => esc_html__('Select weForm', 'essential-addons-elementor'),
-                    'description' => esc_html__('Please save and refresh the page after selecting the form', 'essential-addons-elementor'),
+                    'label' => esc_html__('Select weForm', 'essential-addons-for-elementor-lite'),
+                    'description' => esc_html__('Please save and refresh the page after selecting the form', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type' => Controls_Manager::SELECT,
                     'options' => $this->eael_select_weform(),
@@ -85,18 +85,18 @@ class WeForms extends Widget_Base
                 $this->start_controls_section(
                     'eael_section_pro',
                     [
-                        'label' => __('Go Premium for More Features', 'essential-addons-elementor'),
+                        'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
                     ]
                 );
 
                 $this->add_control(
                     'eael_control_get_pro',
                     [
-                        'label' => __('Unlock more possibilities', 'essential-addons-elementor'),
+                        'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::CHOOSE,
                         'options' => [
                             '1' => [
-                                'title' => __('', 'essential-addons-elementor'),
+                                'title' => __('', 'essential-addons-for-elementor-lite'),
                                 'icon' => 'fa fa-unlock-alt',
                             ],
                         ],
@@ -112,7 +112,7 @@ class WeForms extends Widget_Base
         $this->start_controls_section(
             'eael_section_weform_styles',
             [
-                'label' => esc_html__('Form Container Styles', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Container Styles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -120,7 +120,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_background',
             [
-                'label' => esc_html__('Form Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container' => 'background-color: {{VALUE}};',
@@ -131,24 +131,24 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_alignment',
             [
-                'label' => esc_html__('Form Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
                     'default' => [
-                        'title' => __('Default', 'essential-addons-elementor'),
+                        'title' => __('Default', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-ban',
                     ],
                     'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -160,7 +160,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_width',
             [
-                'label' => esc_html__('Form Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range' => [
@@ -182,7 +182,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_max_width',
             [
-                'label' => esc_html__('Form Max Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range' => [
@@ -204,7 +204,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_margin',
             [
-                'label' => esc_html__('Form Margin', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -216,7 +216,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_padding',
             [
-                'label' => esc_html__('Form Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -228,7 +228,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => ['px'],
@@ -259,7 +259,7 @@ class WeForms extends Widget_Base
         $this->start_controls_section(
             'eael_section_weform_field_styles',
             [
-                'label' => esc_html__('Form Fields Styles', 'essential-addons-elementor'),
+                'label' => esc_html__('Form Fields Styles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -267,7 +267,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_input_background',
             [
-                'label' => esc_html__('Input Field Background', 'essential-addons-elementor'),
+                'label' => esc_html__('Input Field Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
@@ -284,7 +284,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_input_width',
             [
-                'label' => esc_html__('Input Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Input Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range' => [
@@ -311,7 +311,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_textarea_width',
             [
-                'label' => esc_html__('Textarea Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Textarea Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range' => [
@@ -333,7 +333,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_input_padding',
             [
-                'label' => esc_html__('Fields Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Fields Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -351,7 +351,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_input_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => ['px'],
@@ -399,7 +399,7 @@ class WeForms extends Widget_Base
             'eael_weform_focus_heading',
             [
                 'type' => Controls_Manager::HEADING,
-                'label' => esc_html__('Focus State Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Focus State Style', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
             ]
         );
@@ -421,7 +421,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_input_focus_border',
             [
-                'label' => esc_html__('Border Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"]:focus,
@@ -440,7 +440,7 @@ class WeForms extends Widget_Base
         $this->start_controls_section(
             'eael_section_weform_typography',
             [
-                'label' => esc_html__('Color & Typography', 'essential-addons-elementor'),
+                'label' => esc_html__('Color & Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -448,7 +448,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_label_color',
             [
-                'label' => esc_html__('Label Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Label Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container, {{WRAPPER}} .eael-weform-container .wpuf-label label' => 'color: {{VALUE}};',
@@ -459,7 +459,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_field_color',
             [
-                'label' => esc_html__('Field Font Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Field Font Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
@@ -476,7 +476,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_placeholder_color',
             [
-                'label' => esc_html__('Placeholder Font Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Placeholder Font Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ::-webkit-input-placeholder' => 'color: {{VALUE}};',
@@ -490,7 +490,7 @@ class WeForms extends Widget_Base
             'eael_weform_label_heading',
             [
                 'type' => Controls_Manager::HEADING,
-                'label' => esc_html__('Label Typography', 'essential-addons-elementor'),
+                'label' => esc_html__('Label Typography', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
             ]
         );
@@ -507,7 +507,7 @@ class WeForms extends Widget_Base
             'eael_weform_heading_input_field',
             [
                 'type' => Controls_Manager::HEADING,
-                'label' => esc_html__('Input Fields Typography', 'essential-addons-elementor'),
+                'label' => esc_html__('Input Fields Typography', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
             ]
         );
@@ -531,7 +531,7 @@ class WeForms extends Widget_Base
         $this->start_controls_section(
             'eael_section_weform_submit_button_styles',
             [
-                'label' => esc_html__('Submit Button Styles', 'essential-addons-elementor'),
+                'label' => esc_html__('Submit Button Styles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -539,7 +539,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_submit_btn_width',
             [
-                'label' => esc_html__('Button Width', 'essential-addons-elementor'),
+                'label' => esc_html__('Button Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range' => [
@@ -561,24 +561,24 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_submit_btn_alignment',
             [
-                'label' => esc_html__('Button Alignment', 'essential-addons-elementor'),
+                'label' => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
                     'default' => [
-                        'title' => __('Default', 'essential-addons-elementor'),
+                        'title' => __('Default', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-ban',
                     ],
                     'left' => [
-                        'title' => esc_html__('Left', 'essential-addons-elementor'),
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-elementor'),
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'essential-addons-elementor'),
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
@@ -599,7 +599,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_submit_btn_margin',
             [
-                'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -611,7 +611,7 @@ class WeForms extends Widget_Base
         $this->add_responsive_control(
             'eael_weform_submit_btn_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -622,12 +622,12 @@ class WeForms extends Widget_Base
 
         $this->start_controls_tabs('eael_weform_submit_button_tabs');
 
-        $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-elementor')]);
+        $this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'eael_weform_submit_btn_text_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'color: {{VALUE}};',
@@ -638,7 +638,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_submit_btn_background_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]' => 'background-color: {{VALUE}};',
@@ -657,7 +657,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_submit_btn_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -672,12 +672,12 @@ class WeForms extends Widget_Base
 
         $this->end_controls_tab();
 
-        $this->start_controls_tab('eael_weform_submit_btn_hover', ['label' => esc_html__('Hover', 'essential-addons-elementor')]);
+        $this->start_controls_tab('eael_weform_submit_btn_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
 
         $this->add_control(
             'eael_weform_submit_btn_hover_text_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]:hover' => 'color: {{VALUE}};',
@@ -688,7 +688,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_submit_btn_hover_background_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]:hover' => 'background-color: {{VALUE}};',
@@ -699,7 +699,7 @@ class WeForms extends Widget_Base
         $this->add_control(
             'eael_weform_submit_btn_hover_border_color',
             [
-                'label' => esc_html__('Border Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"]:hover' => 'border-color: {{VALUE}};',
