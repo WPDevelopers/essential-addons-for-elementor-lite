@@ -27,6 +27,7 @@ html {
           transform: translate(-90px, 120px) rotate(90deg);
   background: #ff7d50;
   color: #fff;
+  font-weight: 400;
   text-align: center;
   cursor: pointer;
   padding: 10px 20px;
@@ -50,6 +51,9 @@ html {
   font-weight: 400;
   letter-spacing: 0.1px;
 }
+.eael-toc .eael-toc-header .eael-toc-title:before {
+  content: none;
+}
 .eael-toc .eael-toc-body {
   padding: 12px 20px;
   background: #fff6f3;
@@ -59,6 +63,8 @@ html {
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin-left: -5px;
   margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 0;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li {
   padding: 8px 0;
@@ -68,11 +74,14 @@ html {
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li:before {
   content: '\00b7';
-  font-size: 5.2rem;
+  font-size: 50px;
   line-height: 0;
   vertical-align: middle;
   margin-right: 5px;
   margin-left: -5px;
+  font-weight: 600;
+  bottom: 3px;
+  position: relative;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li > ul {
   display: none;
@@ -81,6 +90,7 @@ html {
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li ul {
   margin: 0;
+  padding: 0;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li ul li {
   margin: 5px 0;

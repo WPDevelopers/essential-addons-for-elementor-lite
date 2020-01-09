@@ -26,6 +26,7 @@ html {
             transform: translate(-90px,120px) rotate(90deg);
             background: #ff7d50;
             color: #fff;
+            font-weight: 400;
             text-align: center;
             cursor: pointer;
             padding: 10px 20px;
@@ -48,6 +49,9 @@ html {
             color: #fff;
             font-weight: 400;
             letter-spacing: 0.1px;
+            &:before{
+                content: none;
+            }
         }
     }
     .eael-toc-body {
@@ -58,6 +62,8 @@ html {
         ul.eael-toc-list {
             margin-left: -5px;
             margin-bottom: 0;
+            margin-top: 0;
+            padding-left: 0;
             > li {
 
                 padding: 8px 0;
@@ -66,12 +72,22 @@ html {
                 color: #c6c4cf;
                 //style 1
                 &:before{
+                    //content: '\00b7';
+                    //font-size: 5.2rem;
+                    //line-height: 0;
+                    //vertical-align: middle;
+                    //margin-right: 5px;
+                    //margin-left: -5px;
+
                     content: '\00b7';
-                    font-size: 5.2rem;
+                    font-size: 50px;
                     line-height: 0;
                     vertical-align: middle;
                     margin-right: 5px;
                     margin-left: -5px;
+                    font-weight: 600;
+                    bottom: 3px;
+                    position: relative;
                 }
                 > ul {
                     display: none;
@@ -80,6 +96,7 @@ html {
                 }
                 ul {
                     margin: 0;
+                    padding: 0;
                     li{
                         margin: 5px 0;
                     }
