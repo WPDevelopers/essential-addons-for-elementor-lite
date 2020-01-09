@@ -16,6 +16,7 @@ jQuery(window).on('elementor/frontend/init', function () {
         
         var calendar = $('#eael-event-calendar-' + calId).fullCalendar({
             editable:false,
+            selectable: false,
             draggable:false,
             firstDay: firstDay,
             slotLabelFormat:"HH:mm",
@@ -31,7 +32,6 @@ jQuery(window).on('elementor/frontend/init', function () {
             },
             allDayText: 'All day',
             events: eventAll,
-            selectable:true,
             selectHelper:true,
             dayNamesShort: daysWeek,
             monthNames: monthNames,
