@@ -259,8 +259,22 @@
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'eael_ext_table_of_content_header_typography',
-                    'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title',
+                    'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title,{{WRAPPER}} .eael-toc.expanded .eael-toc-button',
                     'scheme' => Typography::TYPOGRAPHY_1,
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_header_icon',
+                [
+                    'label' => __( 'Icon', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::ICONS,
+                    'label_block' => true,
+                    'default' => [
+                        'value'     => 'fas fa-list',
+                        'library'   => 'fa-solid',
+                    ],
+                    'fa4compatibility' => 'icon',
                 ]
             );
 

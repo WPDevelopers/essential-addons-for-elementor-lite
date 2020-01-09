@@ -202,6 +202,13 @@
                     }
                 });
 
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_table_of_content_header_icon",
+                function (newValue) {
+                    var iconElement = $('.eael-toc-button i');
+                    iconElement.removeClass().addClass(newValue.value);
+                });
+
             elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change );
 
             function ea_toc_title_change ( newValue ) {
@@ -210,7 +217,7 @@
             }
         }
         var intSupportTag = $('#eael-toc').data('eaeltoctag');
-        if(intSupportTag!=''){
+        if(intSupportTag!==''){
             eael_toc_content('.entry-content', intSupportTag );
         }
     });
