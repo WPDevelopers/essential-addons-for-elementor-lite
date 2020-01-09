@@ -315,9 +315,9 @@
             $element->end_controls_section();
 
             $element->start_controls_section(
-                'eael_ext_table_of_content_body_style',
+                'eael_ext_table_of_content_list_style_section',
                 [
-                    'label' => esc_html__('EA Toc Body', 'essential-addons-elementor'),
+                    'label' => esc_html__('EA Toc List', 'essential-addons-elementor'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -335,21 +335,6 @@
                         '{{WRAPPER}} .eael-toc .eael-toc-body' => 'background-color: {{VALUE}}'
                     ],
                     'separator' => 'before'
-                ]
-            );
-
-            $element->end_controls_section();
-
-
-
-            $element->start_controls_section(
-                'eael_ext_table_of_content_list_style_section',
-                [
-                    'label' => esc_html__('EA Toc List', 'essential-addons-elementor'),
-                    'tab' => Controls_Manager::TAB_STYLE,
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
                 ]
             );
 
