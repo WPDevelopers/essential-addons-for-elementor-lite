@@ -1394,7 +1394,153 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ })
 /******/ ])
 });
+;
+/*!
+ * imagesLoaded PACKAGED v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( 'ev-emitter/ev-emitter',factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+/*!
+ * imagesLoaded v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'ev-emitter/ev-emitter'
+    ], function( EvEmitter ) {
+      return factory( window, EvEmitter );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else {
     // browser global
+    window.imagesLoaded = factory(
       window,
       window.EvEmitter
     );
@@ -1747,6 +1893,148 @@ return ImagesLoaded;
 });
 
 
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -20712,6 +21000,67 @@ return $;
     });
 })(jQuery);
 
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
+});
+
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -20806,67 +21155,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",
         AdvanceTabHandler
-    );
-});
-
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
     );
 });
 
@@ -21709,6 +21997,73 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -21787,72 +22142,153 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
 });
 
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
 
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
 
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
                 } else {
-                    //do nothing!
+                    $this.remove();
                 }
-            }
+            },
+            error: function() {}
         });
     });
 };
+
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
     );
 });
+
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+
+    if(isEditMode) {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 800);
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
+(function($) {
+    window.isEditMode = false;
+
+    $(window).on("elementor/frontend/init", function() {
+        window.isEditMode = elementorFrontend.isEditMode();
+    });
+})(jQuery);
 
 var filterableGalleryHandler = function($scope, $) {
 
@@ -22035,154 +22471,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
-});
-
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-
-    if(isEditMode) {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 800);
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
-
-(function($) {
-    window.isEditMode = false;
-
-    $(window).on("elementor/frontend/init", function() {
-        window.isEditMode = elementorFrontend.isEditMode();
-    });
-})(jQuery);
-
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -22251,16 +22539,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-post-grid.default",
         PostGrid
-    );
-});
-
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
     );
 });
 
@@ -22387,6 +22665,16 @@ jQuery(document).ready(function() {
             }
         );
     }
+});
+
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
+    );
 });
 
 var eaelsvPosition = '';
