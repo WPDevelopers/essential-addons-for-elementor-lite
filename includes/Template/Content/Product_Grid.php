@@ -26,7 +26,7 @@ trait Product_Grid
                             ' . $product->get_image('woocommerce_thumbnail') . '
                             <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
                             ' . ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '
-                            ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-elementor') . '</span>' : '') . '
+                            ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') . '
                             <span class="price">' . $product->get_price_html() . '</span>
                         </a>';
                         woocommerce_template_loop_add_to_cart();
@@ -42,7 +42,7 @@ trait Product_Grid
                         </div>
                         <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
                         ' . ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '
-                        ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-elementor') . '</span>' : '') . '
+                        ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') . '
                         <span class="price">' . $product->get_price_html() . '</span>
                     </li>';
                 } else {
@@ -50,7 +50,7 @@ trait Product_Grid
                 }
             }
         } else {
-            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
+            _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
         }
 
         wp_reset_postdata();

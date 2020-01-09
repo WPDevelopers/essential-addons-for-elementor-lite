@@ -31,7 +31,8 @@
 						})
 						if (rotate > 180) {
 							$('.eael-progressbar-circle-pie', $this).css({
-								'clip-path': 'inset(0)'
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
 							})
 							$('.eael-progressbar-circle-half-right', $this).css({
 								'visibility': 'visible'

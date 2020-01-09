@@ -22,7 +22,7 @@ class Fancy_Text extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Fancy Text', 'essential-addons-elementor' );
+		return esc_html__( 'EA Fancy Text', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
@@ -39,7 +39,7 @@ class Fancy_Text extends Widget_Base {
   		$this->start_controls_section(
   			'eael_fancy_text_content',
   			[
-  				'label' => esc_html__( 'Fancy Text', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Fancy Text', 'essential-addons-for-elementor-lite')
   			]
   		);
 
@@ -47,10 +47,10 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_prefix',
 			[
-				'label'       => esc_html__( 'Prefix Text', 'essential-addons-elementor' ),
-				'placeholder' => esc_html__( 'Place your prefix text', 'essential-addons-elementor' ),
+				'label'       => esc_html__( 'Prefix Text', 'essential-addons-for-elementor-lite'),
+				'placeholder' => esc_html__( 'Place your prefix text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'This is the ', 'essential-addons-elementor' ),
+				'default'     => esc_html__( 'This is the ', 'essential-addons-for-elementor-lite'),
 				'dynamic'     => [ 'active' => true ]
 			]
 		);
@@ -60,7 +60,7 @@ class Fancy_Text extends Widget_Base {
 		$repeater->add_control(
 			'eael_fancy_text_strings_text_field',
 			[
-				'label'			=> esc_html__( 'Fancy String', 'essential-addons-elementor' ),
+				'label'			=> esc_html__( 'Fancy String', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
 				'label_block'	=> true,
 				'dynamic'		=> [ 'active' => true ]
@@ -70,20 +70,20 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_strings',
 			[
-				'label'       => __( 'Fancy Text Strings', 'essential-addons-elementor' ),
+				'label'       => __( 'Fancy Text Strings', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::REPEATER,
 				'show_label'  => true,
 				'fields'      => array_values( $repeater->get_controls() ),
 				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
 				'default'     => [
 					[
-						'eael_fancy_text_strings_text_field' => __( 'First string', 'essential-addons-elementor' ),
+						'eael_fancy_text_strings_text_field' => __( 'First string', 'essential-addons-for-elementor-lite'),
 					],
 					[
-						'eael_fancy_text_strings_text_field' => __( 'Second tring', 'essential-addons-elementor' ),
+						'eael_fancy_text_strings_text_field' => __( 'Second tring', 'essential-addons-for-elementor-lite'),
 					],
 					[
-						'eael_fancy_text_strings_text_field' => __( 'Third tring', 'essential-addons-elementor' ),
+						'eael_fancy_text_strings_text_field' => __( 'Third tring', 'essential-addons-for-elementor-lite'),
 					]
 				],
 			]
@@ -92,10 +92,10 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_suffix',
 			[
-				'label'       => esc_html__( 'Suffix Text', 'essential-addons-elementor' ),
-				'placeholder' => esc_html__( 'Place your suffix text', 'essential-addons-elementor' ),
+				'label'       => esc_html__( 'Suffix Text', 'essential-addons-for-elementor-lite'),
+				'placeholder' => esc_html__( 'Place your suffix text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( ' of the sentence.', 'essential-addons-elementor' ),
+				'default'     => esc_html__( ' of the sentence.', 'essential-addons-for-elementor-lite'),
 				'dynamic'     => [ 'active' => true ]
 			]
 		);
@@ -106,7 +106,7 @@ class Fancy_Text extends Widget_Base {
   		$this->start_controls_section(
   			'eael_fancy_text_settings',
   			[
-  				'label' => esc_html__( 'Fancy Text Settings', 'essential-addons-elementor' )
+  				'label' => esc_html__( 'Fancy Text Settings', 'essential-addons-for-elementor-lite')
   			]
 		);
 		
@@ -114,8 +114,8 @@ class Fancy_Text extends Widget_Base {
 			'fancy_text_style_types',
 			[
 				'styles'	=> [
-					'style-1' => esc_html__( 'Style 1', 'essential-addons-elementor' ),
-					'style-2' => esc_html__( 'Style 2 (Pro)', 'essential-addons-elementor' ),
+					'style-1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite'),
+					'style-2' => esc_html__( 'Style 2 (Pro)', 'essential-addons-for-elementor-lite'),
 				],
 				'conditions'	=> ['style-2']
 			]
@@ -124,7 +124,7 @@ class Fancy_Text extends Widget_Base {
   		$this->add_control(
 			'eael_fancy_text_style',
 			[
-				'label'   => esc_html__( 'Style Type', 'essential-addons-elementor' ),
+				'label'   => esc_html__( 'Style Type', 'essential-addons-for-elementor-lite'),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => $style_options['styles']
@@ -134,7 +134,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_style_pro_alert',
 			[
-				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-elementor' ),
+				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => [
 					'eael_fancy_text_style' => $style_options['conditions'],
@@ -145,19 +145,19 @@ class Fancy_Text extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_fancy_text_alignment',
 			[
-				'label' => esc_html__( 'Alignment', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
 						'icon' => 'fa fa-align-right',
 					],
 				],
@@ -171,19 +171,19 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_transition_type',
 			[
-				'label' => esc_html__( 'Animation Type', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Animation Type', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'typing',
 				'options' => [
-					'typing' => esc_html__( 'Typing', 'essential-addons-elementor' ),
-					'fadeIn' => esc_html__( 'Fade', 'essential-addons-elementor' ),
-					'fadeInUp' => esc_html__( 'Fade Up', 'essential-addons-elementor' ),
-					'fadeInDown' => esc_html__( 'Fade Down', 'essential-addons-elementor' ),
-					'fadeInLeft' => esc_html__( 'Fade Left', 'essential-addons-elementor' ),
-					'fadeInRight' => esc_html__( 'Fade Right', 'essential-addons-elementor' ),
-					'zoomIn' => esc_html__( 'Zoom', 'essential-addons-elementor' ),
-					'bounceIn' => esc_html__( 'Bounce', 'essential-addons-elementor' ),
-					'swing' => esc_html__( 'Swing', 'essential-addons-elementor' ),
+					'typing' => esc_html__( 'Typing', 'essential-addons-for-elementor-lite'),
+					'fadeIn' => esc_html__( 'Fade', 'essential-addons-for-elementor-lite'),
+					'fadeInUp' => esc_html__( 'Fade Up', 'essential-addons-for-elementor-lite'),
+					'fadeInDown' => esc_html__( 'Fade Down', 'essential-addons-for-elementor-lite'),
+					'fadeInLeft' => esc_html__( 'Fade Left', 'essential-addons-for-elementor-lite'),
+					'fadeInRight' => esc_html__( 'Fade Right', 'essential-addons-for-elementor-lite'),
+					'zoomIn' => esc_html__( 'Zoom', 'essential-addons-for-elementor-lite'),
+					'bounceIn' => esc_html__( 'Bounce', 'essential-addons-for-elementor-lite'),
+					'swing' => esc_html__( 'Swing', 'essential-addons-for-elementor-lite'),
 				],
 			]
 		);
@@ -192,7 +192,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_speed',
 			[
-				'label' => esc_html__( 'Typing Speed', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Typing Speed', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::NUMBER,
 				'default' => '50',
 				'condition' => [
@@ -204,7 +204,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_delay',
 			[
-				'label' => esc_html__( 'Delay on Change', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Delay on Change', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::NUMBER,
 				'default' => '2500'
 			]
@@ -213,7 +213,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_loop',
 			[
-				'label' => esc_html__( 'Loop the Typing', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Loop the Typing', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -226,7 +226,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_cursor',
 			[
-				'label' => esc_html__( 'Display Type Cursor', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Display Type Cursor', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -244,18 +244,18 @@ class Fancy_Text extends Widget_Base {
 			$this->start_controls_section(
 				'eael_section_pro',
 				[
-					'label' => __( 'Go Premium for More Features', 'essential-addons-elementor' )
+					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
 	
 			$this->add_control(
 				'eael_control_get_pro',
 				[
-					'label' => __( 'Unlock more possibilities', 'essential-addons-elementor' ),
+					'label' => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-elementor' ),
+							'title' => __( '', 'essential-addons-for-elementor-lite'),
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -271,7 +271,7 @@ class Fancy_Text extends Widget_Base {
 		$this->start_controls_section(
 			'eael_fancy_text_prefix_styles',
 			[
-				'label' => esc_html__( 'Prefix Text Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Prefix Text Styles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -279,7 +279,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_prefix_color',
 			[
-				'label' => esc_html__( 'Prefix Text Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Prefix Text Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-fancy-text-prefix' => 'color: {{VALUE}};',
@@ -304,7 +304,7 @@ class Fancy_Text extends Widget_Base {
 		$this->start_controls_section(
 			'eael_fancy_text_strings_styles',
 			[
-				'label' => esc_html__( 'Fancy Text Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Fancy Text Styles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -312,7 +312,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_strings_color',
 			[
-				'label' => esc_html__( 'Fancy Text Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Fancy Text Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-fancy-text-strings' => 'color: {{VALUE}};',
@@ -332,7 +332,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_strings_background_color',
 			[
-				'label' => esc_html__( 'Background', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Background', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -344,7 +344,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_cursor_color',
 			[
-				'label' => esc_html__( 'Typing Cursor Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Typing Cursor Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .typed-cursor' => 'color: {{VALUE}};',
@@ -358,7 +358,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_fancy_text_strings_padding',
 			[
-				'label' => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -370,7 +370,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_fancy_text_strings_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
@@ -393,7 +393,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_strings_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -415,7 +415,7 @@ class Fancy_Text extends Widget_Base {
 		$this->start_controls_section(
 			'eael_fancy_text_suffix_styles',
 			[
-				'label' => esc_html__( 'Suffix Text Styles', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Suffix Text Styles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -423,7 +423,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_suffix_color',
 			[
-				'label' => esc_html__( 'Suffix Text Color', 'essential-addons-elementor' ),
+				'label' => esc_html__( 'Suffix Text Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-fancy-text-suffix' => 'color: {{VALUE}};',
