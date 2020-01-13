@@ -72,13 +72,6 @@ html {
                 color: #c6c4cf;
                 //style 1
                 &:before{
-                    //content: '\00b7';
-                    //font-size: 5.2rem;
-                    //line-height: 0;
-                    //vertical-align: middle;
-                    //margin-right: 5px;
-                    //margin-left: -5px;
-
                     content: '\00b7';
                     font-size: 50px;
                     line-height: 0;
@@ -192,8 +185,8 @@ html {
                     counter-increment: item;
                     &:before {
                         position: relative!important;
-                        left: -5px;
-                        content: counters(item,".");
+                        left: 3px;
+                        content: counters(item,".")". ";
                         font-size: 16px;
                     }
                 }
@@ -235,34 +228,5 @@ html {
     .eael-toc-button {
         display: none;
     }
-    //style 3
-    //.eael-toc-list > li {
-    //    border: none !important;
-    //}
-    //.eael-highlight {
-    //    background: #2d325a;
-    //    width: 100%;
-    //    > a {
-    //        color: #dcdff5;
-    //        &:after{
-    //            content: "\f107";
-    //            font-weight: 900;
-    //            font-family: "Font Awesome 5 Free";
-    //            position: absolute;
-    //            right: 30px;
-    //            color: #dcdff5;
-    //        }
-    //    }
-    //    .active > a{
-    //        color: #dcdff5 !important;
-    //    }
-    //    &:before{
-    //        content: " ";
-    //        background: red;
-    //        position: absolute;
-    //        width: inherit;
-    //        right: 0;
-    //    }
-    //}
 }
 

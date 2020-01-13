@@ -160,8 +160,8 @@ html {
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number li:before {
   position: relative !important;
-  left: -5px;
-  content: counters(item,".");
+  left: 3px;
+  content: counters(item,".") ". ";
   font-size: 16px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number > li ul {
