@@ -22391,6 +22391,17 @@ function RunStickyPlayer(elem) {
                     iconElement.removeClass().addClass(newValue.value);
                 });
 
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_toc_list_icon",
+                function (newValue) {
+                    var list  = $(".eael-toc-list");
+                    if (newValue === "number") {
+                        list.addClass('eael-toc-number');
+                    }else{
+                        list.removeClass('eael-toc-number');
+                    }
+                });
+
             elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change );
 
             function ea_toc_title_change ( newValue ) {

@@ -171,14 +171,18 @@ trait Elements
         $position = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_position', $global_settings );
         $toc_style = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_list_style', $global_settings );
         $toc_collapse = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_collapse_sub_heading', $global_settings );
+        $list_icon = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_list_icon', $global_settings );
         $toc_title = esc_html($this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_title', $global_settings ));
         $el_class .= ($position =='right')?' eael-toc-right':' ';
         $icon_check = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_header_icon', $global_settings );
         $toc_style_class = ' eael-toc-list-'.$toc_style;
         $toc_style_class .= ($toc_collapse =='yes')?' eael-toc-collapse':' ';
+        $toc_style_class .= ($list_icon =='number')?' eael-toc-number':' ';
+
         if(!empty($icon_check['value'])){
             $icon = $icon_check['value'];
         }
+
         $html = '';
         $html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} ' {$disable_toc}>";
             $html .= "<div class='eael-toc-header'>";
@@ -186,7 +190,7 @@ trait Elements
                  $html .= "<h2 class='eael-toc-title'>{$toc_title}</h2>";
             $html .= "</div>";
                 $html .= "<div class='eael-toc-body'>";
-                $html .= "<ul id='eael-toc-list' class='eael-toc-list eael-toc-number {$toc_style_class}'></ul>";
+                $html .= "<ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>";
             $html .= "</div>";
         $html .= sprintf( "<button class='eael-toc-button'><i class='%s'></i><span>%s</span></button>", $icon, $toc_title );
         $html .= "</div>";

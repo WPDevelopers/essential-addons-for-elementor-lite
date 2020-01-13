@@ -169,6 +169,24 @@
             );
 
             $element->add_control(
+                'eael_ext_toc_list_icon',
+                [
+                    'label' => esc_html__('List Icon', 'essential-addons-elementor'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'bullet',
+                    'label_block' => false,
+                    'options' => [
+                        'bullet' => esc_html__('Bullet', 'essential-addons-elementor'),
+                        'number' => esc_html__('Number', 'essential-addons-elementor'),
+                    ],
+                    'separator' => 'before',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
                 'eael_ext_toc_supported_heading_tag',
                 [
                     'label' => __( 'Supported Heading Tag', 'essential-addons-elementor' ),
