@@ -51,14 +51,12 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => apply_filters('eael/advanced-data-table/source', [
-                    'static' => __('Static Data', 'essential-addons-for-elementor-lite'),
-                ]),
+                'options' => [
+                    'static' => esc_html__('Static Data', 'essential-addons-for-elementor-lite'),
+                ],
                 'default' => 'static',
             ]
         );
-
-        do_action('eael/advanced-data-table/source/control', $this);
 
         $this->add_control(
             'ea_adv_data_table_static_html',
@@ -1381,16 +1379,18 @@ class Advanced_Data_Table extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        $this->add_render_attribute('ea-adv-data-table-wrap', [
-            'class' => "ea-advanced-data-table-wrap",
-            'data-id' => $this->get_id(),
-        ]);
+        if ($settings['ea_adv_data_table_source'] == 'static') {
+            $this->add_render_attribute('ea-adv-data-table-wrap', [
+                'class' => "ea-advanced-data-table-wrap",
+                'data-id' => $this->get_id(),
+            ]);
 
-        $this->add_render_attribute('ea-adv-data-table', [
-            'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
-            'data-id' => $this->get_id(),
-            'data-items-per-page' => $settings['ea_adv_data_table_items_per_page'],
-        ]);
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
+                'data-id' => $this->get_id(),
+                'data-items-per-page' => $settings['ea_adv_data_table_items_per_page'],
+            ]);
+        }
 
         if ($settings['ea_adv_data_table_sort'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
@@ -1442,10 +1442,6 @@ class Advanced_Data_Table extends Widget_Base
 
     protected function html_static_table($settings)
     {
-        if ($settings['ea_adv_data_table_source'] == 'database') {
-            return apply_filters('eael/advanced-data-table/table_html/database', $settings, '');
-        }
-
         return $settings['ea_adv_data_table_static_html'];
     }
 

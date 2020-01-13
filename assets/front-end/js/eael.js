@@ -21061,6 +21061,103 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var AdvanceTabHandler = function($scope, $) {
+    var $currentTab = $scope.find(".eael-advance-tabs"),
+        $currentTabId = "#" + $currentTab.attr("id").toString();
+
+    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-nav > ul li")
+                .removeClass("active")
+                .addClass("inactive");
+            $(this).removeClass("inactive");
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-content div").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-content > div").removeClass(
+                "active"
+            );
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
+        var currentTabIndex = $(this).index();
+        var tabsContainer = $(this).closest(".eael-advance-tabs");
+
+        var tabsNav = $(tabsContainer)
+            .children(".eael-tabs-nav")
+            .children("ul")
+            .children("li");
+        var tabsContent = $(tabsContainer)
+            .children(".eael-tabs-content")
+            .children("div");
+
+        $(this)
+            .parent("li")
+            .addClass("active");
+
+        $(tabsNav)
+            .removeClass("active active-default")
+            .addClass("inactive");
+        $(this)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent)
+            .removeClass("active")
+            .addClass("inactive");
+        $(tabsContent)
+            .eq(currentTabIndex)
+            .addClass("active")
+            .removeClass("inactive");
+
+        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
+            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
+            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+
+        if($postGridGallery.length) {
+            $postGridGallery.isotope();
+        }
+
+        if($twitterfeedGallery.length) {
+            $twitterfeedGallery.isotope("layout");
+        }
+        
+        if($filterGallery.length) {
+            $filterGallery.isotope("layout");
+        }
+        
+        if($instaGallery.length) {
+            $instaGallery.isotope("layout");
+        }
+
+        $(tabsContent).each(function(index) {
+            $(this).removeClass("active-default");
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
+
 var advanced_data_table_timeout,
 	advanced_data_table_active_cell = null,
 	advanced_data_table_drag_start_x,
@@ -21142,21 +21239,15 @@ var Advanced_Data_Table = function($scope, $) {
 	var classCollection = {};
 
 	if (isEditMode) {
-		var attr = "readonly";
-
 		// add edit class
 		table.classList.add("ea-advanced-data-table-editable");
-
-		if (table.classList.contains("ea-advanced-data-table-static")) {
-			attr = "";
-		}
 
 		// insert editable area
 		table.querySelectorAll("th, td").forEach(function(el) {
 			var value = el.innerHTML;
 
 			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
 			}
 		});
 
@@ -21441,7 +21532,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
@@ -22584,103 +22675,6 @@ jQuery(document).ready(function() {
             }
         );
     }
-});
-
-var AdvanceTabHandler = function($scope, $) {
-    var $currentTab = $scope.find(".eael-advance-tabs"),
-        $currentTabId = "#" + $currentTab.attr("id").toString();
-
-    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-nav > ul li")
-                .removeClass("active")
-                .addClass("inactive");
-            $(this).removeClass("inactive");
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-content div").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-content > div").removeClass(
-                "active"
-            );
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
-        var currentTabIndex = $(this).index();
-        var tabsContainer = $(this).closest(".eael-advance-tabs");
-
-        var tabsNav = $(tabsContainer)
-            .children(".eael-tabs-nav")
-            .children("ul")
-            .children("li");
-        var tabsContent = $(tabsContainer)
-            .children(".eael-tabs-content")
-            .children("div");
-
-        $(this)
-            .parent("li")
-            .addClass("active");
-
-        $(tabsNav)
-            .removeClass("active active-default")
-            .addClass("inactive");
-        $(this)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent)
-            .removeClass("active")
-            .addClass("inactive");
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass("active")
-            .removeClass("inactive");
-
-        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
-            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
-            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
-
-        if($postGridGallery.length) {
-            $postGridGallery.isotope();
-        }
-
-        if($twitterfeedGallery.length) {
-            $twitterfeedGallery.isotope("layout");
-        }
-        
-        if($filterGallery.length) {
-            $filterGallery.isotope("layout");
-        }
-        
-        if($instaGallery.length) {
-            $instaGallery.isotope("layout");
-        }
-
-        $(tabsContent).each(function(index) {
-            $(this).removeClass("active-default");
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-tabs.default",
-        AdvanceTabHandler
-    );
 });
 
 var eaelsvPosition = '';
