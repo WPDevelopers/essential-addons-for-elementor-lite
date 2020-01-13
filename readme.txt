@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.6.2
+Stable tag: 3.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -75,6 +75,7 @@ We have designed 35 of the most useful widgets to enhance your Elementor Page Bu
 33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
 34. [BetterDocs Category Box](https://essential-addons.com/elementor/betterdocs-category-box/) - Cretae custom box-style Knowledge Base layout with BetterDocs Category List.
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
+36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible freedon
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -177,6 +178,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.7.0 - 06/01/2020 =
+- Added: Advanced Data Table
+- Fixed: Circle progress not showing in safari
+- Fixed: Filterable Gallery | Column Number issue on Firefox
+- Fixed: Feature List Image issue
+- Fixed: Ninja Form Radio & Checkbox styles are not working 
+- Fixed: Post Grid | Random Order shows duplicate posts when Load More is used
+- Fixed:  Lightbox & Modal > Close Button positioning issue
+- Improvements: Advanced Tabs responsiveness
+- Improvements: Data Table sorting improved
+- Few minor bugfix and improvements
 
 = 3.6.2 - 09/12/2019 =
 - Bugfix: Product grid responsive issue 
