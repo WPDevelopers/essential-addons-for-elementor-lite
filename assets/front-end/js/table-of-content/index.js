@@ -1,41 +1,5 @@
 ( function( $){
     jQuery(document).ready(function() {
-        $(document).on("click",'.eael-toc-link', function(e) {
-            e.preventDefault();
-            var parentLi = $(this).parent();
-            if( parentLi.is('.eael-highlight.active') ){
-                parentLi.removeClass('eael-highlight active');
-                return false;
-            }
-            $(document).off("scroll");
-            $("ul.eael-toc-list li").removeClass("active");
-            $(".eael-first-child").removeClass( "eael-highlight" );
-            $(this).closest('.eael-first-child').addClass( "eael-highlight" );
-            $(this).parent().addClass( "active" );
-
-            var target = this.hash,
-                $target = $(target);
-            window.location.hash = target;
-        });
-
-        window.onscroll = function() {eaelTocSticky()};
-
-        var eaelToc = document.getElementById("eael-toc");
-        var sticky = (eaelToc)?eaelToc.offsetTop:0;
-
-        /**
-         * check sticky
-         */
-        function eaelTocSticky() {
-            if(!eaelToc){
-                return ;
-            }
-            if ( window.pageYOffset >= sticky ) {
-                eaelToc.classList.add("eael-sticky");
-            } else {
-                eaelToc.classList.remove("eael-sticky");
-            }
-        }
 
         /**
          * add ID in main content heading tag
@@ -65,8 +29,8 @@
             var mainContent = document.querySelector(selector);
             listId.innerHTML='';
             allHeadings = mainContent.querySelectorAll(tagList),
-            baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
-            ListNode    = listId;
+                baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
+                ListNode    = listId;
 
             for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
 
@@ -121,6 +85,67 @@
                 ListNode.appendChild(createLiNode);
             }
         }
+
+        var intSupportTag = $('#eael-toc').data('eaeltoctag');
+        if(intSupportTag!==''){
+            eael_toc_content('.elementor-widget-wrap', intSupportTag );
+        }
+
+        $(document).on("click",'ul.eael-toc-list li a', function(e) {
+            e.preventDefault();
+            $(document).off("scroll");
+            var parentLi = $(this).parent();
+            if( parentLi.is('.eael-highlight.active') ){
+                parentLi.removeClass('eael-highlight active');
+                return false;
+            }
+            $("ul.eael-toc-list li").removeClass("active");
+            $(".eael-first-child").removeClass( "eael-highlight" );
+            $(this).closest('.eael-first-child').addClass( "eael-highlight" );
+            $(this).parent().addClass( "active" );
+
+            var target = this.hash,
+                $target = $(target);
+                window.location.hash = target;
+        });
+
+        $(document).on("scroll", eaelTocScroll);
+
+        var Eaelanchor = $('ul.eael-toc-list li a');
+        function eaelTocScroll( event ){
+            var scrollPos = $(document).scrollTop();
+            Eaelanchor.each(function () {
+                var currLink = $(this);
+                var refElement = $(currLink.attr("href"));
+                if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+                    $("ul.eael-toc-list li").removeClass("active");
+                    $(".eael-first-child").removeClass( "eael-highlight" );
+                    currLink.closest('.eael-first-child').addClass( "eael-highlight" );
+                    currLink.parent().addClass( "active" );
+                }
+            });
+        }
+
+        window.onscroll = function() {eaelTocSticky()};
+
+        var eaelToc = document.getElementById("eael-toc");
+        var sticky = (eaelToc)?eaelToc.offsetTop:0;
+
+        /**
+         * check sticky
+         */
+        function eaelTocSticky() {
+            if(!eaelToc){
+                return ;
+            }
+            if ( window.pageYOffset >= sticky ) {
+                eaelToc.classList.add("eael-sticky");
+            } else {
+                eaelToc.classList.remove("eael-sticky");
+            }
+        }
+
+
 
         function eael_build_id( content ){
             return 'eael-uniq-link';
@@ -202,9 +227,6 @@
                 elementorFrontend.elements.$document.find('.eael-toc-button span').text(newValue);
             }
         }
-        var intSupportTag = $('#eael-toc').data('eaeltoctag');
-        if(intSupportTag!==''){
-            eael_toc_content('.elementor-widget-wrap', intSupportTag );
-        }
+
     });
 })(jQuery);
