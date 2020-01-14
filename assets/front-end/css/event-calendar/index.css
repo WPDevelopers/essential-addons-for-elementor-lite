@@ -23,7 +23,8 @@
 .fc-row table thead:first-child tr:first-child th {
   font-family: roboto;
   font-size: 14px;
-  padding: 10px;
+  /*
+  padding:10px; */
 }
 
 .fc-day-number {
