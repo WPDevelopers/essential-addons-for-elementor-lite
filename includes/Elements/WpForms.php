@@ -21,7 +21,7 @@ class WpForms extends Widget_Base {
     }
 
     public function get_title() {
-        return __( 'EA WPForms', 'essential-addons-elementor' );
+        return __( 'EA WPForms', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories() {
@@ -38,7 +38,7 @@ class WpForms extends Widget_Base {
             $this->start_controls_section(
                 'eael_global_warning',
                 [
-                    'label'             => __( 'Warning!', 'essential-addons-elementor' ),
+                    'label'             => __( 'Warning!', 'essential-addons-for-elementor-lite'),
                 ]
             );
 
@@ -46,7 +46,7 @@ class WpForms extends Widget_Base {
                 'eael_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __( '<strong>WPForms</strong> is not installed/activated on your site. Please install and activate <strong>WPForms</strong> first.', 'essential-addons-elementor' ),
+                    'raw' => __( '<strong>WPForms</strong> is not installed/activated on your site. Please install and activate <strong>WPForms</strong> first.', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                 ]
             );
@@ -56,14 +56,14 @@ class WpForms extends Widget_Base {
             $this->start_controls_section(
                 'section_info_box',
                 [
-                    'label'             => __( 'WPForms', 'essential-addons-elementor' ),
+                    'label'             => __( 'WPForms', 'essential-addons-for-elementor-lite'),
                 ]
             );
             
             $this->add_control(
                 'contact_form_list',
                 [
-                    'label'             => esc_html__( 'Select Form', 'essential-addons-elementor' ),
+                    'label'             => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
                     'type'              => Controls_Manager::SELECT,
                     'label_block'       => true,
                     'options'           => $this->eael_select_wpforms_forms(),
@@ -74,10 +74,10 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'custom_title_description',
                 [
-                    'label'                 => __( 'Custom Title & Description', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Custom Title & Description', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SWITCHER,
-                    'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                    'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                    'label_on'              => __( 'Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off'             => __( 'No', 'essential-addons-for-elementor-lite'),
                     'return_value'          => 'yes',
                 ]
             );
@@ -85,11 +85,11 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'form_title',
                 [
-                    'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Title', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SWITCHER,
                     'default'               => 'yes',
-                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'              => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off'             => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value'          => 'yes',
                     'condition'             => [
                         'custom_title_description!'   => 'yes',
@@ -100,11 +100,11 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'form_description',
                 [
-                    'label'                 => __( 'Description', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Description', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SWITCHER,
                     'default'               => 'yes',
-                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'              => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off'             => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value'          => 'yes',
                     'condition'             => [
                         'custom_title_description!'   => 'yes',
@@ -115,7 +115,7 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'form_title_custom',
                 [
-                    'label'                 => esc_html__( 'Title', 'essential-addons-elementor' ),
+                    'label'                 => esc_html__( 'Title', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::TEXT,
                     'label_block'           => true,
                     'default'               => '',
@@ -128,7 +128,7 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'form_description_custom',
                 [
-                    'label'                 => esc_html__( 'Description', 'essential-addons-elementor' ),
+                    'label'                 => esc_html__( 'Description', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::TEXTAREA,
                     'default'               => '',
                     'condition'             => [
@@ -140,11 +140,11 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'labels_switch',
                 [
-                    'label'                 => __( 'Labels', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Labels', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SWITCHER,
                     'default'               => 'yes',
-                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'              => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off'             => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value'          => 'yes',
                     'prefix_class'          => 'eael-wpforms-labels-',
                 ]
@@ -153,11 +153,11 @@ class WpForms extends Widget_Base {
             $this->add_control(
                 'placeholder_switch',
                 [
-                    'label'                 => __( 'Placeholder', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Placeholder', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SWITCHER,
                     'default'               => 'yes',
-                    'label_on'              => __( 'Show', 'essential-addons-elementor' ),
-                    'label_off'             => __( 'Hide', 'essential-addons-elementor' ),
+                    'label_on'              => __( 'Show', 'essential-addons-for-elementor-lite'),
+                    'label_off'             => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     'return_value'          => 'yes',
                 ]
             );
@@ -168,19 +168,19 @@ class WpForms extends Widget_Base {
             $this->start_controls_section(
                 'section_errors',
                 [
-                    'label'                 => __( 'Errors', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Errors', 'essential-addons-for-elementor-lite'),
                 ]
             );
             
             $this->add_control(
                 'error_messages',
                 [
-                    'label'                 => __( 'Error Messages', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Error Messages', 'essential-addons-for-elementor-lite'),
                     'type'                  => Controls_Manager::SELECT,
                     'default'               => 'show',
                     'options'               => [
-                        'show'          => __( 'Show', 'essential-addons-elementor' ),
-                        'hide'          => __( 'Hide', 'essential-addons-elementor' ),
+                        'show'          => __( 'Show', 'essential-addons-for-elementor-lite'),
+                        'hide'          => __( 'Hide', 'essential-addons-for-elementor-lite'),
                     ],
                     'selectors_dictionary'  => [
                         'show'          => 'block',
@@ -206,7 +206,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_container_style',
             [
-                'label'                 => __( 'Form Container', 'essential-addons-elementor' ),
+                'label'                 => __( 'Form Container', 'essential-addons-for-elementor-lite'),
                 'tab'                   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -214,7 +214,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'eael_contact_form_background',
             [
-                'label' => esc_html__( 'Form Background Color', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Form Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form' => 'background: {{VALUE}};',
@@ -225,24 +225,24 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'eael_contact_form_alignment',
             [
-                'label' => esc_html__( 'Form Alignment', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Form Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
                     'default' => [
-                        'title' => __( 'Default', 'essential-addons-elementor' ),
+                        'title' => __( 'Default', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-ban',
                     ],
                     'left' => [
-                        'title' => esc_html__( 'Left', 'essential-addons-elementor' ),
+                        'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'essential-addons-elementor' ),
+                        'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__( 'Right', 'essential-addons-elementor' ),
+                        'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
@@ -253,7 +253,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'eael_contact_form_max_width',
             [
-                'label' => esc_html__( 'Form Max Width', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Form Max Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', '%' ],
                 'range' => [
@@ -276,7 +276,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'eael_contact_form_margin',
             [
-                'label' => esc_html__( 'Form Margin', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Form Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -288,7 +288,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'eael_contact_form_padding',
             [
-                'label' => esc_html__( 'Form Padding', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Form Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
@@ -301,7 +301,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'eael_contact_form_border_radius',
             [
-                'label' => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+                'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'separator' => 'before',
                 'size_units' => [ 'px' ],
@@ -339,7 +339,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_form_title_style',
             [
-                'label'                 => __( 'Title & Description', 'essential-addons-elementor' ),
+                'label'                 => __( 'Title & Description', 'essential-addons-for-elementor-lite'),
                 'tab'                   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -347,19 +347,19 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'heading_alignment',
             [
-                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
+                'label'                 => __( 'Alignment', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::CHOOSE,
                 'options'               => [
                     'left'      => [
-                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite'),
                         'icon'  => 'fa fa-align-left',
                     ],
                     'center'    => [
-                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite'),
                         'icon'  => 'fa fa-align-center',
                     ],
                     'right'     => [
-                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite'),
                         'icon'  => 'fa fa-align-right',
                     ],
                 ],
@@ -373,7 +373,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'title_heading',
             [
-                'label'                 => __( 'Title', 'essential-addons-elementor' ),
+                'label'                 => __( 'Title', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::HEADING,
                 'separator'             => 'before',
             ]
@@ -382,7 +382,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'form_title_text_color',
             [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -395,7 +395,7 @@ class WpForms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'                  => 'form_title_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'selector'              => '{{WRAPPER}} .eael-contact-form-title, {{WRAPPER}} .wpforms-title',
             ]
         );
@@ -403,7 +403,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'form_title_margin',
             [
-                'label'                 => __( 'Margin', 'essential-addons-elementor' ),
+                'label'                 => __( 'Margin', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::DIMENSIONS,
                 'size_units'            => [ 'px', 'em', '%' ],
                 'allowed_dimensions'    => 'vertical',
@@ -422,7 +422,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'description_heading',
             [
-                'label'                 => __( 'Description', 'essential-addons-elementor' ),
+                'label'                 => __( 'Description', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::HEADING,
                 'separator'             => 'before',
             ]
@@ -431,7 +431,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'form_description_text_color',
             [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -444,7 +444,7 @@ class WpForms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'                  => 'form_description_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
                 'selector'              => '{{WRAPPER}} .eael-contact-form-description, {{WRAPPER}} .wpforms-description',
             ]
@@ -453,7 +453,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'form_description_margin',
             [
-                'label'                 => __( 'Margin', 'essential-addons-elementor' ),
+                'label'                 => __( 'Margin', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::DIMENSIONS,
                 'size_units'            => [ 'px', 'em', '%' ],
                 'allowed_dimensions'    => 'vertical',
@@ -478,7 +478,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_label_style',
             [
-                'label'             => __( 'Labels', 'essential-addons-elementor' ),
+                'label'             => __( 'Labels', 'essential-addons-for-elementor-lite'),
                 'tab'               => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -486,7 +486,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'text_color_label',
             [
-                'label'             => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'selectors'         => [
                     '{{WRAPPER}} .eael-wpforms .wpforms-field label' => 'color: {{VALUE}}',
@@ -498,7 +498,7 @@ class WpForms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'              => 'typography_label',
-                'label'             => __( 'Typography', 'essential-addons-elementor' ),
+                'label'             => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'            => Scheme_Typography::TYPOGRAPHY_4,
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field label',
             ]
@@ -513,7 +513,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_fields_style',
             [
-                'label'             => __( 'Input & Textarea', 'essential-addons-elementor' ),
+                'label'             => __( 'Input & Textarea', 'essential-addons-for-elementor-lite'),
                 'tab'               => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -521,19 +521,19 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'input_alignment',
             [
-                'label'                 => __( 'Alignment', 'essential-addons-elementor' ),
+                'label'                 => __( 'Alignment', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::CHOOSE,
                 'options'               => [
                     'left'      => [
-                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite'),
                         'icon'  => 'fa fa-align-left',
                     ],
                     'center'    => [
-                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite'),
                         'icon'  => 'fa fa-align-center',
                     ],
                     'right'     => [
-                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite'),
                         'icon'  => 'fa fa-align-right',
                     ],
                 ],
@@ -549,14 +549,14 @@ class WpForms extends Widget_Base {
         $this->start_controls_tab(
             'tab_fields_normal',
             [
-                'label'                 => __( 'Normal', 'essential-addons-elementor' ),
+                'label'                 => __( 'Normal', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'field_bg_color',
             [
-                'label'             => __( 'Background Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Background Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -568,7 +568,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'field_text_color',
             [
-                'label'             => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -581,7 +581,7 @@ class WpForms extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'              => 'field_border',
-                'label'             => __( 'Border', 'essential-addons-elementor' ),
+                'label'             => __( 'Border', 'essential-addons-for-elementor-lite'),
                 'placeholder'       => '1px',
                 'default'           => '1px',
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-wpforms .wpforms-field textarea, {{WRAPPER}} .eael-wpforms .wpforms-field select',
@@ -592,7 +592,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'field_radius',
             [
-                'label'             => __( 'Border Radius', 'essential-addons-elementor' ),
+                'label'             => __( 'Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::DIMENSIONS,
                 'size_units'        => [ 'px', 'em', '%' ],
                 'selectors'         => [
@@ -604,7 +604,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'text_indent',
             [
-                'label'                 => __( 'Text Indent', 'essential-addons-elementor' ),
+                'label'                 => __( 'Text Indent', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
                     'px'        => [
@@ -629,7 +629,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'input_width',
             [
-                'label'             => __( 'Input Width', 'essential-addons-elementor' ),
+                'label'             => __( 'Input Width', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::SLIDER,
                 'range'             => [
                     'px' => [
@@ -648,7 +648,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'input_height',
             [
-                'label'             => __( 'Input Height', 'essential-addons-elementor' ),
+                'label'             => __( 'Input Height', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::SLIDER,
                 'range'             => [
                     'px' => [
@@ -667,7 +667,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'textarea_width',
             [
-                'label'             => __( 'Textarea Width', 'essential-addons-elementor' ),
+                'label'             => __( 'Textarea Width', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::SLIDER,
                 'range'             => [
                     'px' => [
@@ -686,7 +686,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'textarea_height',
             [
-                'label'             => __( 'Textarea Height', 'essential-addons-elementor' ),
+                'label'             => __( 'Textarea Height', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::SLIDER,
                 'range'             => [
                     'px' => [
@@ -705,7 +705,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'field_padding',
             [
-                'label'             => __( 'Padding', 'essential-addons-elementor' ),
+                'label'             => __( 'Padding', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::DIMENSIONS,
                 'size_units'        => [ 'px', 'em', '%' ],
                 'selectors'         => [
@@ -718,7 +718,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'field_spacing',
             [
-                'label'                 => __( 'Spacing', 'essential-addons-elementor' ),
+                'label'                 => __( 'Spacing', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
                     'px'        => [
@@ -738,7 +738,7 @@ class WpForms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'              => 'field_typography',
-                'label'             => __( 'Typography', 'essential-addons-elementor' ),
+                'label'             => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'            => Scheme_Typography::TYPOGRAPHY_4,
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-wpforms .wpforms-field textarea, {{WRAPPER}} .eael-wpforms .wpforms-field select',
                 'separator'         => 'before',
@@ -759,7 +759,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_tab(
             'tab_fields_focus',
             [
-                'label'                 => __( 'Focus', 'essential-addons-elementor' ),
+                'label'                 => __( 'Focus', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -767,7 +767,7 @@ class WpForms extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'              => 'focus_input_border',
-                'label'             => __( 'Border', 'essential-addons-elementor' ),
+                'label'             => __( 'Border', 'essential-addons-for-elementor-lite'),
                 'placeholder'       => '1px',
                 'default'           => '1px',
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field input:focus, {{WRAPPER}} .eael-wpforms .wpforms-field textarea:focus',
@@ -796,7 +796,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_field_description_style',
             [
-                'label'                 => __( 'Field Description', 'essential-addons-elementor' ),
+                'label'                 => __( 'Field Description', 'essential-addons-for-elementor-lite'),
                 'tab'                   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -804,7 +804,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'field_description_text_color',
             [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
                     '{{WRAPPER}} .eael-wpforms .wpforms-field .wpforms-field-description, {{WRAPPER}} .eael-wpforms .wpforms-field .wpforms-field-sublabel' => 'color: {{VALUE}}',
@@ -816,7 +816,7 @@ class WpForms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'                  => 'field_description_typography',
-                'label'                 => __( 'Typography', 'essential-addons-elementor' ),
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'selector'              => '{{WRAPPER}} .eael-wpforms .wpforms-field .wpforms-field-description, {{WRAPPER}} .eael-wpforms .wpforms-field .wpforms-field-sublabel',
             ]
         );
@@ -824,7 +824,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'field_description_spacing',
             [
-                'label'                 => __( 'Spacing', 'essential-addons-elementor' ),
+                'label'                 => __( 'Spacing', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
                     'px'        => [
@@ -849,7 +849,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_placeholder_style',
             [
-                'label'             => __( 'Placeholder', 'essential-addons-elementor' ),
+                'label'             => __( 'Placeholder', 'essential-addons-for-elementor-lite'),
                 'tab'               => Controls_Manager::TAB_STYLE,
                 'condition'             => [
                     'placeholder_switch'   => 'yes',
@@ -860,7 +860,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'text_color_placeholder',
             [
-                'label'             => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'selectors'         => [
                     '{{WRAPPER}} .eael-wpforms .wpforms-field input::-webkit-input-placeholder, {{WRAPPER}} .eael-wpforms .wpforms-field textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
@@ -880,7 +880,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_radio_checkbox_style',
             [
-                'label'                 => __( 'Radio & Checkbox', 'essential-addons-elementor' ),
+                'label'                 => __( 'Radio & Checkbox', 'essential-addons-for-elementor-lite'),
                 'tab'                   => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -888,10 +888,10 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'custom_radio_checkbox',
             [
-                'label'                 => __( 'Custom Styles', 'essential-addons-elementor' ),
+                'label'                 => __( 'Custom Styles', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SWITCHER,
-                'label_on'              => __( 'Yes', 'essential-addons-elementor' ),
-                'label_off'             => __( 'No', 'essential-addons-elementor' ),
+                'label_on'              => __( 'Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'             => __( 'No', 'essential-addons-for-elementor-lite'),
                 'return_value'          => 'yes',
             ]
         );
@@ -899,7 +899,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'radio_checkbox_size',
             [
-                'label'                 => __( 'Size', 'essential-addons-elementor' ),
+                'label'                 => __( 'Size', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'default'               => [
                     'size'      => '15',
@@ -927,7 +927,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_tab(
             'radio_checkbox_normal',
             [
-                'label'                 => __( 'Normal', 'essential-addons-elementor' ),
+                'label'                 => __( 'Normal', 'essential-addons-for-elementor-lite'),
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -937,7 +937,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'radio_checkbox_color',
             [
-                'label'                 => __( 'Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -952,7 +952,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'radio_checkbox_border_width',
             [
-                'label'                 => __( 'Border Width', 'essential-addons-elementor' ),
+                'label'                 => __( 'Border Width', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
                     'px'        => [
@@ -974,7 +974,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'radio_checkbox_border_color',
             [
-                'label'                 => __( 'Border Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Border Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -989,7 +989,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'checkbox_heading',
             [
-                'label'                 => __( 'Checkbox', 'essential-addons-elementor' ),
+                'label'                 => __( 'Checkbox', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::HEADING,
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1000,7 +1000,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'checkbox_border_radius',
             [
-                'label'                 => __( 'Border Radius', 'essential-addons-elementor' ),
+                'label'                 => __( 'Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::DIMENSIONS,
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
@@ -1015,7 +1015,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'radio_heading',
             [
-                'label'                 => __( 'Radio Buttons', 'essential-addons-elementor' ),
+                'label'                 => __( 'Radio Buttons', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::HEADING,
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
@@ -1026,7 +1026,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'radio_border_radius',
             [
-                'label'                 => __( 'Border Radius', 'essential-addons-elementor' ),
+                'label'                 => __( 'Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::DIMENSIONS,
                 'size_units'            => [ 'px', 'em', '%' ],
                 'selectors'             => [
@@ -1043,7 +1043,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_tab(
             'radio_checkbox_checked',
             [
-                'label'                 => __( 'Checked', 'essential-addons-elementor' ),
+                'label'                 => __( 'Checked', 'essential-addons-for-elementor-lite'),
                 'condition'             => [
                     'custom_radio_checkbox' => 'yes',
                 ],
@@ -1053,7 +1053,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'radio_checkbox_color_checked',
             [
-                'label'                 => __( 'Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -1078,7 +1078,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_submit_button_style',
             [
-                'label'             => __( 'Submit Button', 'essential-addons-elementor' ),
+                'label'             => __( 'Submit Button', 'essential-addons-for-elementor-lite'),
                 'tab'               => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1086,19 +1086,19 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'button_align',
             [
-                'label'             => __( 'Alignment', 'essential-addons-elementor' ),
+                'label'             => __( 'Alignment', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::CHOOSE,
                 'options'           => [
                     'left'        => [
-                        'title'   => __( 'Left', 'essential-addons-elementor' ),
+                        'title'   => __( 'Left', 'essential-addons-for-elementor-lite'),
                         'icon'    => 'eicon-h-align-left',
                     ],
                     'center'      => [
-                        'title'   => __( 'Center', 'essential-addons-elementor' ),
+                        'title'   => __( 'Center', 'essential-addons-for-elementor-lite'),
                         'icon'    => 'eicon-h-align-center',
                     ],
                     'right'       => [
-                        'title'   => __( 'Right', 'essential-addons-elementor' ),
+                        'title'   => __( 'Right', 'essential-addons-for-elementor-lite'),
                         'icon'    => 'eicon-h-align-right',
                     ],
                 ],
@@ -1116,12 +1116,12 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'button_width_type',
             [
-                'label'                 => __( 'Width', 'essential-addons-elementor' ),
+                'label'                 => __( 'Width', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SELECT,
                 'default'               => 'custom',
                 'options'               => [
-                    'full-width'    => __( 'Full Width', 'essential-addons-elementor' ),
-                    'custom'        => __( 'Custom', 'essential-addons-elementor' ),
+                    'full-width'    => __( 'Full Width', 'essential-addons-for-elementor-lite'),
+                    'custom'        => __( 'Custom', 'essential-addons-for-elementor-lite'),
                 ],
                 'prefix_class'          => 'eael-wpforms-form-button-',
             ]
@@ -1130,7 +1130,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'button_width',
             [
-                'label'                 => __( 'Width', 'essential-addons-elementor' ),
+                'label'                 => __( 'Width', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
                     'px'        => [
@@ -1154,14 +1154,14 @@ class WpForms extends Widget_Base {
         $this->start_controls_tab(
             'tab_button_normal',
             [
-                'label'             => __( 'Normal', 'essential-addons-elementor' ),
+                'label'             => __( 'Normal', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'button_bg_color_normal',
             [
-                'label'             => __( 'Background Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Background Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -1173,7 +1173,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'button_text_color_normal',
             [
-                'label'             => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -1186,7 +1186,7 @@ class WpForms extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'              => 'button_border_normal',
-                'label'             => __( 'Border', 'essential-addons-elementor' ),
+                'label'             => __( 'Border', 'essential-addons-for-elementor-lite'),
                 'placeholder'       => '1px',
                 'default'           => '1px',
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit',
@@ -1196,7 +1196,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label'             => __( 'Border Radius', 'essential-addons-elementor' ),
+                'label'             => __( 'Border Radius', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::DIMENSIONS,
                 'size_units'        => [ 'px', 'em', '%' ],
                 'selectors'         => [
@@ -1208,7 +1208,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'button_padding',
             [
-                'label'             => __( 'Padding', 'essential-addons-elementor' ),
+                'label'             => __( 'Padding', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::DIMENSIONS,
                 'size_units'        => [ 'px', 'em', '%' ],
                 'selectors'         => [
@@ -1220,7 +1220,7 @@ class WpForms extends Widget_Base {
         $this->add_responsive_control(
             'button_margin',
             [
-                'label'                 => __( 'Margin Top', 'essential-addons-elementor' ),
+                'label'                 => __( 'Margin Top', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SLIDER,
                 'range'                 => [
                     'px'        => [
@@ -1240,7 +1240,7 @@ class WpForms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'              => 'button_typography',
-                'label'             => __( 'Typography', 'essential-addons-elementor' ),
+                'label'             => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'            => Scheme_Typography::TYPOGRAPHY_4,
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit',
                 'separator'         => 'before',
@@ -1261,14 +1261,14 @@ class WpForms extends Widget_Base {
         $this->start_controls_tab(
             'tab_button_hover',
             [
-                'label'             => __( 'Hover', 'essential-addons-elementor' ),
+                'label'             => __( 'Hover', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'button_bg_color_hover',
             [
-                'label'             => __( 'Background Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Background Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -1280,7 +1280,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'button_text_color_hover',
             [
-                'label'             => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -1292,7 +1292,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'button_border_color_hover',
             [
-                'label'             => __( 'Border Color', 'essential-addons-elementor' ),
+                'label'             => __( 'Border Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
@@ -1314,7 +1314,7 @@ class WpForms extends Widget_Base {
         $this->start_controls_section(
             'section_error_style',
             [
-                'label'                 => __( 'Errors', 'essential-addons-elementor' ),
+                'label'                 => __( 'Errors', 'essential-addons-for-elementor-lite'),
                 'tab'                   => Controls_Manager::TAB_STYLE,
                 'condition'             => [
                     'error_messages' => 'show',
@@ -1325,7 +1325,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'error_message_text_color',
             [
-                'label'                 => __( 'Text Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -1340,7 +1340,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'error_field_input_border_color',
             [
-                'label'                 => __( 'Error Field Input Border Color', 'essential-addons-elementor' ),
+                'label'                 => __( 'Error Field Input Border Color', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
@@ -1355,7 +1355,7 @@ class WpForms extends Widget_Base {
         $this->add_control(
             'error_field_input_border_width',
             [
-                'label'                 => __( 'Error Field Input Border Width', 'essential-addons-elementor' ),
+                'label'                 => __( 'Error Field Input Border Width', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::NUMBER,
                 'default'               => 1,
                 'min'                   => 1,

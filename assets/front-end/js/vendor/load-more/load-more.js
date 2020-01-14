@@ -20,19 +20,43 @@
             return;
         }
 
+        var obj = {};
+        var $data = {
+            action: "load_more",
+            class: $class,
+            args: $args,
+            settings: $settings,
+            page: $page
+        };
+
+        String($args).split('&').forEach(function(item, index) {
+            var arr = String(item).split('=');
+            obj[arr[0]] = arr[1];
+        });
+
+
+
+        if(obj.orderby == 'rand') {
+            var $printed = $('.eael-grid-post');
+
+            if($printed.length)  {
+                var $ids = [];
+                $printed.each(function(index, item) {
+                    var $id = $(item).data('id');
+                    $ids.push($id);
+                });
+
+                $data.post__not_in  = $ids;
+            }
+        }
+
         $this.addClass("button--loading");
         $("span", $this).html("Loading...");
 
         $.ajax({
             url: localize.ajaxurl,
             type: "post",
-            data: {
-                action: "load_more",
-                class: $class,
-                args: $args,
-                settings: $settings,
-                page: $page
-            },
+            data: $data,
             success: function (response) {
                 var $content = $(response);
 

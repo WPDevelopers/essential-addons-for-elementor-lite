@@ -22,7 +22,7 @@ class Facebook_Feed extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Facebook Feed', 'essential-addons-elementor');
+        return esc_html__('EA Facebook Feed', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -35,34 +35,49 @@ class Facebook_Feed extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_style_depends()
+    {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
+
+    public function get_script_depends()
+    {
+        return [
+            'font-awesome-4-shim'
+        ];
+    }
+
     protected function _register_controls()
     {
         $this->start_controls_section(
             'eael_section_facebook_feed_settings_account',
             [
-                'label' => esc_html__('Facebook Account Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('Facebook Account Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_facebook_feed_page_id',
             [
-                'label' => esc_html__('Page ID', 'essential-addons-elementor'),
+                'label' => esc_html__('Page ID', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default' => esc_html__('', 'essential-addons-elementor'),
-                'description' => __('<a href="https://findmyfbid.com/" class="eael-btn" target="_blank">Find Your Page ID</a>', 'essential-addons-elementor'),
+                'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
+                'description' => __('<a href="https://findmyfbid.com/" class="eael-btn" target="_blank">Find Your Page ID</a>', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_facebook_feed_access_token',
             [
-                'label' => esc_html__('Access Token', 'essential-addons-elementor'),
+                'label' => esc_html__('Access Token', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default' => esc_html__('', 'essential-addons-elementor'),
-                'description' => __('<a href="https://essential-addons.com/elementor/docs/facebook-feed/" class="eael-btn" target="_blank">Get Access Token</a>', 'essential-addons-elementor'),
+                'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
+                'description' => __('<a href="https://essential-addons.com/elementor/docs/facebook-feed/" class="eael-btn" target="_blank">Get Access Token</a>', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -71,18 +86,18 @@ class Facebook_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_facebook_feed_settings_content',
             [
-                'label' => esc_html__('Feed Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('Feed Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_facebook_feed_sort_by',
             [
-                'label' => esc_html__('Sort By', 'essential-addons-elementor'),
+                'label' => esc_html__('Sort By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'most-recent' => esc_html__('Newest', 'essential-addons-elementor'),
-                    'least-recent' => esc_html__('Oldest', 'essential-addons-elementor'),
+                    'most-recent' => esc_html__('Newest', 'essential-addons-for-elementor-lite'),
+                    'least-recent' => esc_html__('Oldest', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'most-recent',
             ]
@@ -91,7 +106,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_image_count',
             [
-                'label' => esc_html__('Max Visible Items', 'essential-addons-elementor'),
+                'label' => esc_html__('Max Visible Items', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 12,
@@ -110,14 +125,14 @@ class Facebook_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_facebook_feed_settings_general',
             [
-                'label' => esc_html__('General Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('General Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_facebook_feed_layout_heading',
             [
-                'label' => __('Layout Settings', 'essential-addons-elementor'),
+                'label' => __('Layout Settings', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -125,11 +140,11 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_layout',
             [
-                'label' => esc_html__('Layout', 'essential-addons-elementor'),
+                'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'card' => esc_html__('Card', 'essential-addons-elementor'),
-                    'overlay' => esc_html__('Overlay', 'essential-addons-elementor'),
+                    'card' => esc_html__('Card', 'essential-addons-for-elementor-lite'),
+                    'overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => 'card',
             ]
@@ -138,16 +153,16 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_columns',
             [
-                'label' => esc_html__('Columns', 'essential-addons-elementor'),
+                'label' => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'eael-col-3',
                 'options' => [
-                    'eael-col-1' => esc_html__('1', 'essential-addons-elementor'),
-                    'eael-col-2' => esc_html__('2', 'essential-addons-elementor'),
-                    'eael-col-3' => esc_html__('3', 'essential-addons-elementor'),
-                    'eael-col-4' => esc_html__('4', 'essential-addons-elementor'),
-                    'eael-col-5' => esc_html__('5', 'essential-addons-elementor'),
-                    'eael-col-6' => esc_html__('6', 'essential-addons-elementor'),
+                    'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+                    'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+                    'eael-col-3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+                    'eael-col-4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+                    'eael-col-5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+                    'eael-col-6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -155,7 +170,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_content_heading',
             [
-                'label' => __('Content Settings', 'essential-addons-elementor'),
+                'label' => __('Content Settings', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -163,7 +178,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_message',
             [
-                'label' => esc_html__('Display Message', 'essential-addons-elementor'),
+                'label' => esc_html__('Display Message', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -176,7 +191,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_message_max_length',
             [
-                'label' => esc_html__('Max Message Length', 'essential-addons-elementor'),
+                'label' => esc_html__('Max Message Length', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -199,7 +214,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_likes',
             [
-                'label' => esc_html__('Display Like', 'essential-addons-elementor'),
+                'label' => esc_html__('Display Like', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -209,7 +224,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_comments',
             [
-                'label' => esc_html__('Display Comments', 'essential-addons-elementor'),
+                'label' => esc_html__('Display Comments', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -219,7 +234,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_date',
             [
-                'label' => esc_html__('Display Date', 'essential-addons-elementor'),
+                'label' => esc_html__('Display Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -232,7 +247,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_link_target',
             [
-                'label' => esc_html__('Open link in new window', 'essential-addons-elementor'),
+                'label' => esc_html__('Open link in new window', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'yes',
@@ -242,7 +257,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'show_load_more_heading',
             [
-                'label' => __('Pagination', 'essential-addons-elementor'),
+                'label' => __('Pagination', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -250,15 +265,15 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'show_load_more',
             [
-                'label' => __('Show Load More', 'essential-addons-elementor'),
+                'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'yes' => [
-                        'title' => __('Yes', 'essential-addons-elementor'),
+                        'title' => __('Yes', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-check',
                     ],
                     'no' => [
-                        'title' => __('No', 'essential-addons-elementor'),
+                        'title' => __('No', 'essential-addons-for-elementor-lite'),
                         'icon' => 'fa fa-ban',
                     ],
                 ],
@@ -269,9 +284,9 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'loadmore_text',
             [
-                'label' => __('Label', 'essential-addons-elementor'),
+                'label' => __('Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Load More', 'essential-addons-elementor'),
+                'default' => __('Load More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'show_load_more' => 'yes',
                 ],
@@ -283,7 +298,7 @@ class Facebook_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_facebook_feed_styles_general',
             [
-                'label' => esc_html__('Feed Item Styles', 'essential-addons-elementor'),
+                'label' => esc_html__('Feed Item Styles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -291,7 +306,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_responsive_control(
             'eael_facebook_feed_spacing',
             [
-                'label' => esc_html__('Space Between Items', 'essential-addons-elementor'),
+                'label' => esc_html__('Space Between Items', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -304,7 +319,7 @@ class Facebook_Feed extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_facebook_feed_box_border',
-                'label' => esc_html__('Border', 'essential-addons-elementor'),
+                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-facebook-feed-item-inner',
                 'fields_options' => [
                     'border' => [
@@ -329,7 +344,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_box_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'selectors' => [
                     '{{WRAPPER}} .eael-facebook-feed-item-inner' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
@@ -340,7 +355,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_background',
             [
-                'label' => esc_html__('Background', 'essential-addons-elementor'),
+                'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -355,7 +370,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_header_style',
             [
-                'label' => __('Header Style', 'essential-addons-elementor'),
+                'label' => __('Header Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -366,7 +381,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_header_background',
             [
-                'label' => esc_html__('Background', 'essential-addons-elementor'),
+                'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f2f6fd',
                 'selectors' => [
@@ -381,7 +396,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_header_spacing',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -396,7 +411,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_content_style',
             [
-                'label' => __('Content Style', 'essential-addons-elementor'),
+                'label' => __('Content Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -407,7 +422,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_content_spacing',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -422,7 +437,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_content_preview_spacing',
             [
-                'label' => esc_html__('Preview Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Preview Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -438,7 +453,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_footer_style',
             [
-                'label' => __('Footer Style', 'essential-addons-elementor'),
+                'label' => __('Footer Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -449,7 +464,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_footer_background',
             [
-                'label' => esc_html__('Background', 'essential-addons-elementor'),
+                'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f2f6fd',
                 'selectors' => [
@@ -464,7 +479,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_footer_spacing',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -481,7 +496,7 @@ class Facebook_Feed extends Widget_Base
         $this->start_controls_section(
             'eael_section_facebook_feed_styles_content',
             [
-                'label' => esc_html__('Color &amp; Typography', 'essential-addons-elementor'),
+                'label' => esc_html__('Color &amp; Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -489,7 +504,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_page_name_heading',
             [
-                'label' => __('Page Name', 'essential-addons-elementor'),
+                'label' => __('Page Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -512,7 +527,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_page_name_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#365899',
                 'selectors' => [
@@ -527,7 +542,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_date_heading',
             [
-                'label' => __('Date', 'essential-addons-elementor'),
+                'label' => __('Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -550,7 +565,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_date_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#707070',
                 'selectors' => [
@@ -565,7 +580,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_message_heading',
             [
-                'label' => __('Message', 'essential-addons-elementor'),
+                'label' => __('Message', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -588,7 +603,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_message_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#707070',
                 'selectors' => [
@@ -603,7 +618,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_message_link_color',
             [
-                'label' => esc_html__('Link Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Link Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#365899',
                 'selectors' => [
@@ -618,7 +633,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_preview_host_heading',
             [
-                'label' => __('Preview Host', 'essential-addons-elementor'),
+                'label' => __('Preview Host', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -641,7 +656,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_preview_host_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#707070',
                 'selectors' => [
@@ -656,7 +671,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_preview_title_heading',
             [
-                'label' => __('Preview Title', 'essential-addons-elementor'),
+                'label' => __('Preview Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -679,7 +694,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_preview_title_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333333',
                 'selectors' => [
@@ -694,7 +709,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_preview_desc_heading',
             [
-                'label' => __('Preview Description', 'essential-addons-elementor'),
+                'label' => __('Preview Description', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_facebook_feed_layout' => 'card',
@@ -717,7 +732,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_preview_desc_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#707070',
                 'selectors' => [
@@ -732,7 +747,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_styles_likes_conmments_heading',
             [
-                'label' => __('Likes & Comments', 'essential-addons-elementor'),
+                'label' => __('Likes & Comments', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -749,7 +764,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_likes_conmments_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#707070',
                 'selectors' => [
@@ -763,7 +778,7 @@ class Facebook_Feed extends Widget_Base
         $this->add_control(
             'eael_facebook_feed_overlay_color',
             [
-                'label' => esc_html__('Overlay Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(86,20,213,0.8)',
                 'selectors' => [

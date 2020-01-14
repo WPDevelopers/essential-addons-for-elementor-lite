@@ -39,7 +39,7 @@ trait Post_Timeline
                 </article>';
             }
         } else {
-            $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-elementor');
+            $html .= __('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
         }
 
         wp_reset_postdata();

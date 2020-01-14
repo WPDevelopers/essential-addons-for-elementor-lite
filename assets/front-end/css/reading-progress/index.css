@@ -24,5 +24,6 @@
   height: 5px;
   background-color: #1fd18e;
   width: 0%;
+  -webkit-transition: width 50ms ease;
   transition: width 50ms ease;
 }
