@@ -16,6 +16,9 @@ html {
   top: 50px;
   background: none;
 }
+.eael-toc.expanded {
+  width: unset !important;
+}
 .eael-toc.expanded .eael-toc-header,
 .eael-toc.expanded .eael-toc-body,
 .eael-toc.expanded .eael-toc-close {
@@ -23,8 +26,8 @@ html {
 }
 .eael-toc.expanded .eael-toc-button {
   display: inline-block;
-  -webkit-transform: translate(-90px, 120px) rotate(90deg);
-          transform: translate(-90px, 120px) rotate(90deg);
+  -webkit-transform: translate(21px, 100px) rotate(90deg);
+          transform: translate(21px, 100px) rotate(90deg);
   background: #ff7d50;
   color: #fff;
   font-weight: 400;
@@ -34,6 +37,8 @@ html {
   border-radius: 3px;
   text-decoration: none;
   text-transform: none;
+  -webkit-transform-origin: left;
+          transform-origin: left;
 }
 .eael-toc.expanded .eael-toc-button i {
   margin-right: 10px;
@@ -184,14 +189,18 @@ html {
 }
 .eael-toc.eael-toc-right {
   right: 0;
+}
+.eael-toc.eael-toc-right.expanded {
   width: inherit !important;
 }
 .eael-toc.eael-toc-right .eael-toc-close {
   left: -11px;
 }
 .eael-toc.eael-toc-right .eael-toc-button {
-  -webkit-transform: translate(90px, 120px) rotate(90deg);
-          transform: translate(90px, 120px) rotate(90deg);
+  -webkit-transform: translate(-21px, 100px) rotate(90deg);
+          transform: translate(-21px, 100px) rotate(90deg);
+  -webkit-transform-origin: right;
+          transform-origin: right;
 }
 .eael-toc .eael-toc-button {
   display: none;

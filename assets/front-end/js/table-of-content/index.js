@@ -7,6 +7,9 @@
          * @param supportTag
          */
         function eael_toc_content( selector, supportTag ){
+            if(selector===null){
+                return null;
+            }
             var mainSelector = document.querySelector(selector),
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;
@@ -88,7 +91,7 @@
 
         var intSupportTag = $('#eael-toc').data('eaeltoctag');
         if(intSupportTag!==''){
-            eael_toc_content('.elementor-widget-wrap', intSupportTag );
+            eael_toc_content(eael_toc_check_content(), intSupportTag );
         }
 
         $(document).on("click",'ul.eael-toc-list li a', function(e) {
@@ -112,6 +115,11 @@
         $(document).on("scroll", eaelTocScroll);
 
         var Eaelanchor = $('ul.eael-toc-list li a');
+
+        /**
+         * add active class when scroll
+         * @param event
+         */
         function eaelTocScroll( event ){
             var scrollPos = $(document).scrollTop();
             Eaelanchor.each(function () {
@@ -146,9 +154,27 @@
         }
 
 
-
+        /**
+         *
+         * @param content
+         * @returns {string}
+         */
         function eael_build_id( content ){
-            return 'eael-uniq-link';
+            return 'eael-unique-link';
+        }
+
+        /**
+         *
+         * @returns {null|selector}
+         */
+        function eael_toc_check_content(){
+            var contentSelectro = null;
+            if($('.elementor-widget-wrap')[0]){
+                contentSelectro =  '.elementor-widget-wrap';
+            }else if($('#site-content')[0]){
+                contentSelectro = '#site-content';
+            }
+            return contentSelectro;
         }
 
         $('.eael-toc-close ,.eael-toc-button').click(function(e) {
@@ -166,7 +192,7 @@
                         var $settings = elementor.settings.page.getSettings();
                         var title = $settings.settings.eael_ext_toc_title;
                         ea_toc_title_change( title );
-                        eael_toc_content('.elementor-widget-wrap', $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
+                        eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
                         $("#eael-toc").removeClass('eael-toc-disable eael-toc-global');
                     }
                 });
