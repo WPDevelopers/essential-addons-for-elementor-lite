@@ -193,6 +193,9 @@ html {
 .eael-toc.eael-toc-right.expanded {
   width: inherit !important;
 }
+.eael-toc.eael-toc-right.expanded.eael-sticky {
+  top: 50%;
+}
 .eael-toc.eael-toc-right .eael-toc-close {
   left: -11px;
 }

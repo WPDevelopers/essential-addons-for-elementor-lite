@@ -294,7 +294,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_close_button_text_color',
                 [
-                    'label' => __('Text Color', 'essential-addons-elementor'),
+                    'label' => __('Close Button Color', 'essential-addons-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ff7d50',
                     'selectors' => [
