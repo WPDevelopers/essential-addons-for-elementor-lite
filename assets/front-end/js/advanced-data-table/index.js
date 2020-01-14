@@ -415,6 +415,56 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 
 		textarea.value = "";
 	}
+
+	// pro
+	if (event.target.dataset.event == "ea:advTable:connect") {
+		var button = event.target;
+		button.innerHTML = "Connecting";
+
+		jQuery.ajax({
+			url: localize.ajaxurl,
+			type: "post",
+			data: {
+				action: "connect_remote_db",
+				security: localize.nonce,
+				host: model.attributes.settings.attributes.ea_adv_data_table_source_remote_host,
+				username: model.attributes.settings.attributes.ea_adv_data_table_source_remote_username,
+				password: model.attributes.settings.attributes.ea_adv_data_table_source_remote_password,
+				database: model.attributes.settings.attributes.ea_adv_data_table_source_remote_database
+			},
+			success: function(response) {
+				if (response.connected == true) {
+					button.innerHTML = "Connected";
+
+					Advanced_Data_Table_Update_View(view, true, {
+						ea_adv_data_table_source_remote_connected: true,
+						ea_adv_data_table_source_remote_tables: response.tables
+					});
+
+					panel.content.currentView.render();
+				} else {
+					button.innerHTML = "Failed";
+				}
+
+				console.log(response);
+			},
+			error: function() {
+				button.innerHTML = "Failed";
+				console.log(response);
+			}
+		});
+
+		setTimeout(function() {
+			button.innerHTML = "Connect";
+		}, 2000);
+	}
+	if (event.target.dataset.event == "ea:advTable:disconnect") {
+		Advanced_Data_Table_Update_View(view, true, {
+			ea_adv_data_table_source_remote_connected: false
+		});
+
+		panel.content.currentView.render();
+	}
 };
 
 // Inline edit
