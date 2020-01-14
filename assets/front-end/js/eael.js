@@ -22226,6 +22226,10 @@ function RunStickyPlayer(elem) {
                 c++
             });
             eael_list_hierarchy( selector, supportTag);
+            var  firstChild = $('ul.eael-toc-list > li');
+            firstChild.each(function(){
+                this.classList.add('eael-first-child');
+            });
         }
 
         /**
@@ -22279,7 +22283,6 @@ function RunStickyPlayer(elem) {
                 var createALink = document.createElement('A');
 
                 if( baseTag === parentLevel || sequenceParent){
-                    createLiNode.className = 'eael-first-child';
                     createLiNode.setAttribute('itemscope', '');
                     createLiNode.setAttribute('itemtype', 'http://schema.org/ListItem');
                     createLiNode.setAttribute('itemprop', 'itemListElement');
