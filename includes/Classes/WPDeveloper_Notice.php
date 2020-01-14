@@ -114,9 +114,24 @@ class WPDeveloper_Notice {
      * @return void
      */
     public function init(){
+        $this->migration();
         add_action( 'init', array( $this, 'first_install_track') );
         add_action( 'deactivate_' . $this->plugin_file, array( $this, 'first_install_end' ) );
         add_action( 'init', array( $this, 'hooks' ) );
+    }
+    public function migration(){
+        $user_notices = $this->get_user_notices();
+        if( \version_compare( get_option( 'eael_version', false ), '3.7.2', '==' ) ) {
+            if( is_array( $user_notices ) ) {
+                array_walk( $user_notices, function( $value, $key ){
+                    array_walk( $value, function( $v, $k ){
+                        array_walk( $v, function( $vv, $kk ){
+                            update_user_meta( get_current_user_id(), $this->plugin_name . '_' . $vv, true );
+                        } );    
+                    } );
+                } );
+            }
+        }
     }
     /**
      * All Hooks
@@ -296,6 +311,7 @@ class WPDeveloper_Notice {
                     $options_data[ $this->plugin_name ]['notice_will_show'][ $clicked_from ] = $later_time;
                 }
                 if( isset( $dismiss ) && $dismiss == true ) { 
+                    update_user_meta( get_current_user_id(), $this->plugin_name . '_' . $clicked_from, true );
                     $this->update( $clicked_from );
                 }
                 $this->update_options_data( $options_data[ $this->plugin_name ] );
@@ -520,6 +536,9 @@ class WPDeveloper_Notice {
      */
     public function admin_notices(){
         $current_notice = current( $this->next_notice() );
+        if( get_user_meta( get_current_user_id(), $this->plugin_name . '_' . $current_notice, true ) ) {
+            return;
+        }
         if( $current_notice == 'opt_in' ) {
             do_action( $this->do_notice_action );
             return;
