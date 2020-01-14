@@ -21532,7 +21532,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
