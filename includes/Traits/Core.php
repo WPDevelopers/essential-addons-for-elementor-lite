@@ -184,6 +184,7 @@ trait Core
 
                 //list style setting
                 'eael_ext_table_of_content_list_style'              => $page_settings_model->get_settings('eael_ext_table_of_content_list_style'),
+                'eael_ext_toc_list_icon'                            => $page_settings_model->get_settings('eael_ext_toc_list_icon'),
                 'eael_ext_table_of_content_list_text_color'         => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color'),
                 'eael_ext_table_of_content_list_text_color_active'  => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color_active'),
                 'eael_ext_table_of_content_list_separator_style'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_style'),
