@@ -21,7 +21,7 @@ class Image_Accordion extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Image Accordion', 'essential-addons-elementor');
+        return esc_html__('EA Image Accordion', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -42,20 +42,20 @@ class Image_Accordion extends Widget_Base
         $this->start_controls_section(
             'eael_section_img_accordion_settings',
             [
-                'label' => esc_html__('Image Accordion Settings', 'essential-addons-elementor'),
+                'label' => esc_html__('Image Accordion Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $this->add_control(
             'eael_img_accordion_type',
             [
-                'label' => esc_html__('Accordion Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Accordion Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'on-hover',
                 'label_block' => false,
                 'options' => [
-                    'on-hover' => esc_html__('On Hover', 'essential-addons-elementor'),
-                    'on-click' => esc_html__('On Click', 'essential-addons-elementor'),
+                    'on-hover' => esc_html__('On Hover', 'essential-addons-for-elementor-lite'),
+                    'on-click' => esc_html__('On Click', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -74,7 +74,7 @@ class Image_Accordion extends Widget_Base
                 'fields' => [
                     [
                         'name' => 'eael_accordion_bg',
-                        'label' => esc_html__('Background Image', 'essential-addons-elementor'),
+                        'label' => esc_html__('Background Image', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::MEDIA,
                         'label_block' => true,
                         'default' => [
@@ -83,22 +83,22 @@ class Image_Accordion extends Widget_Base
                     ],
                     [
                         'name' => 'eael_accordion_tittle',
-                        'label' => esc_html__('Title', 'essential-addons-elementor'),
+                        'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
                         'label_block' => true,
-                        'default' => esc_html__('Accordion item title', 'essential-addons-elementor'),
+                        'default' => esc_html__('Accordion item title', 'essential-addons-for-elementor-lite'),
                         'dynamic' => ['active' => true],
                     ],
                     [
                         'name' => 'eael_accordion_content',
-                        'label' => esc_html__('Content', 'essential-addons-elementor'),
+                        'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::WYSIWYG,
                         'label_block' => true,
-                        'default' => esc_html__('Accordion content goes here!', 'essential-addons-elementor'),
+                        'default' => esc_html__('Accordion content goes here!', 'essential-addons-for-elementor-lite'),
                     ],
                     [
                         'name' => 'eael_accordion_title_link',
-                        'label' => esc_html__('Title Link', 'essential-addons-elementor'),
+                        'label' => esc_html__('Title Link', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::URL,
                         'label_block' => true,
                         'default' => [
@@ -122,7 +122,7 @@ class Image_Accordion extends Widget_Base
         $this->start_controls_section(
             'eael_section_img_accordion_style_settings',
             [
-                'label' => esc_html__('Image Accordion Style', 'essential-addons-elementor'),
+                'label' => esc_html__('Image Accordion Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -130,7 +130,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_height',
             [
-                'label' => esc_html__('Height', 'essential-addons-elementor'),
+                'label' => esc_html__('Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '400',
                 'description' => 'Unit in px',
@@ -143,7 +143,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -155,7 +155,7 @@ class Image_Accordion extends Widget_Base
         $this->add_responsive_control(
             'eael_accordion_container_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-elementor'),
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -167,7 +167,7 @@ class Image_Accordion extends Widget_Base
         $this->add_responsive_control(
             'eael_accordion_container_margin',
             [
-                'label' => esc_html__('Margin', 'essential-addons-elementor'),
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -180,7 +180,7 @@ class Image_Accordion extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_accordion_border',
-                'label' => esc_html__('Border', 'essential-addons-elementor'),
+                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-img-accordion',
             ]
         );
@@ -188,7 +188,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 4,
@@ -215,7 +215,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_img_overlay_color',
             [
-                'label' => esc_html__('Overlay Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(0, 0, 0, .3)',
                 'selectors' => [
@@ -227,7 +227,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_img_hover_color',
             [
-                'label' => esc_html__('Hover Overlay Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Hover Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(0, 0, 0, .5)',
                 'selectors' => [
@@ -247,7 +247,7 @@ class Image_Accordion extends Widget_Base
         $this->start_controls_section(
             'eael_section_img_accordion_typography_settings',
             [
-                'label' => esc_html__('Color &amp; Typography', 'essential-addons-elementor'),
+                'label' => esc_html__('Color &amp; Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -255,7 +255,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_title_text',
             [
-                'label' => esc_html__('Title', 'essential-addons-elementor'),
+                'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -264,7 +264,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_title_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -284,7 +284,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_content_text',
             [
-                'label' => esc_html__('Content', 'essential-addons-elementor'),
+                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -293,7 +293,7 @@ class Image_Accordion extends Widget_Base
         $this->add_control(
             'eael_accordion_content_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-elementor'),
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [

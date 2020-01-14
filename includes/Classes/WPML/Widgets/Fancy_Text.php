@@ -44,7 +44,7 @@ class Fancy_Text extends WPML_Elementor_Module_With_Items {
      * @return string
      */
 	protected function get_title( $field ) {
-		return __( 'Fancy Text: String', 'essential-addons-elementor' );
+		return __( 'Fancy Text: String', 'essential-addons-for-elementor-lite');
 	}
 
 	/**

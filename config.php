@@ -150,6 +150,17 @@ $config = [
                 ],
             ],
         ],
+        'advanced-data-table' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Advanced_Data_Table',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/advanced-data-table/index.min.css',
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/advanced-data-table/index.min.js',
+                ],
+            ],
+        ],
         'data-table' => [
             'class' => '\Essential_Addons_Elementor\Elements\Data_Table',
             'dependency' => [

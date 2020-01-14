@@ -88,7 +88,8 @@
   right: auto;
   margin: 0;
   padding: 0;
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .price, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .price,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .price,
@@ -162,6 +163,7 @@
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product a.added_to_cart {
   visibility: hidden;
+  -webkit-transition: none;
   transition: none;
 }
 .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product:hover,
@@ -215,7 +217,8 @@
   left: 0;
   right: 0;
   text-align: center;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button,
@@ -236,9 +239,13 @@
   vertical-align: middle;
   padding: 0;
   margin: 0 5px;
-  transform: translateY(20px);
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
   opacity: 0;
+  -webkit-transition: opacity 300ms, -webkit-transform 200ms;
+  transition: opacity 300ms, -webkit-transform 200ms;
   transition: transform 200ms, opacity 300ms;
+  transition: transform 200ms, opacity 300ms, -webkit-transform 200ms;
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:focus,
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button:focus,
@@ -337,7 +344,8 @@
   right: auto;
   margin: 0;
   padding: 0;
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .price,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .price {
@@ -367,7 +375,8 @@
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product:hover .overlay a,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product:hover .overlay .add_to_cart_button {
   opacity: 1;
-  transform: translateY(0);
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
 }
 
 @media only screen and (min-width: 1025px) {
