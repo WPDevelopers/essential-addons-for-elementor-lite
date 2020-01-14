@@ -16,6 +16,7 @@ html {
         background: none;
     }
     &.expanded {
+        width: unset !important;
         .eael-toc-header,
         .eael-toc-body,
         .eael-toc-close  {
@@ -23,7 +24,7 @@ html {
         }
         .eael-toc-button {
             display: inline-block;
-            transform: translate(-90px,120px) rotate(90deg);
+            transform: translate(21px,100px) rotate(90deg);
             background: #ff7d50;
             color: #fff;
             font-weight: 400;
@@ -33,6 +34,7 @@ html {
             border-radius: 3px;
             text-decoration: none;
             text-transform: none;
+            transform-origin: left;
             i {
                 margin-right: 10px;
                 transform: rotate(-90deg);
@@ -216,12 +218,15 @@ html {
     }
     &.eael-toc-right {
         right: 0;
-        width: inherit !important;
+        &.expanded {
+            width: inherit !important;
+        }
         .eael-toc-close  {
             left: -11px;
         }
         .eael-toc-button {
-            transform: translate(90px,120px) rotate(90deg);
+            transform: translate(-21px,100px) rotate(90deg);
+            transform-origin: right;
         }
     }
 
@@ -229,4 +234,6 @@ html {
         display: none;
     }
 }
+//responsive
+
 

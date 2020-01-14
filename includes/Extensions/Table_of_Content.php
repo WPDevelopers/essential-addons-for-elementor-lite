@@ -114,42 +114,6 @@
                 ]
             );
 
-//            $element->add_responsive_control(
-//                'eael_ext_toc_width',
-//                [
-//                    'label' => __('Width', 'essential-addons-for-elementor-lite'),
-//                    'type' => Controls_Manager::SLIDER,
-//                    'size_units' => ['px', '%'],
-//                    'range' => [
-//                        'px' => [
-//                            'min' => 100,
-//                            'max' => 10000,
-//                            'step' => 1,
-//                        ],
-//                        '%' => [
-//                            'min' => 10,
-//                            'max' => 100,
-//                            'step' => 1,
-//                        ],
-//                    ],
-//                    'desktop_default' => [
-//                        'unit' => '%',
-//                        'size' => 100,
-//                    ],
-//                    'tablet_default' => [
-//                        'unit' => '%',
-//                        'size' => 100,
-//                    ],
-//                    'mobile_default' => [
-//                        'unit' => '%',
-//                        'size' => 100,
-//                    ],
-//                    'selectors' => [
-//                        '{{WRAPPER}} .eael-toc' => 'width: {{SIZE}}{{UNIT}}',
-//                    ],
-//                ]
-//            );
-
             $element->add_control(
                 'eael_ext_toc_position',
                 [
@@ -238,11 +202,20 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_header_style',
                 [
-                    'label' => esc_html__('EA Toc Header', 'essential-addons-elementor'),
+                    'label' => esc_html__('EA TOC Header', 'essential-addons-elementor'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
                     ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_heading_separator',
+                [
+                    'label' => __( 'Heading', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
                 ]
             );
 
@@ -335,11 +308,20 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_list_style_section',
                 [
-                    'label' => esc_html__('EA Toc List', 'essential-addons-elementor'),
+                    'label' => esc_html__('EA TOC List', 'essential-addons-elementor'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
                     ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_content_list_style_separator',
+                [
+                    'label' => __( 'List Style', 'essential-addons-elementor' ),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
                 ]
             );
 
