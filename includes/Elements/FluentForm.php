@@ -1637,6 +1637,8 @@ class FluentForm extends Widget_Base
          * Style Tab: Success Message
          * -------------------------------------------------
          */
+
+        
         $this->start_controls_section(
             'section_pagination_style',
             [
@@ -1843,7 +1845,7 @@ class FluentForm extends Widget_Base
                     'label' => __('Filled', 'essential-addons-for-elementor-lite'),
                 ]
             );
-
+            
             $this->add_group_control(
                 Group_Control_Background::get_type(),
                 [
@@ -1893,11 +1895,8 @@ class FluentForm extends Widget_Base
                 [
                     'label' => __( 'Color', 'essential-addons-for-elementor-lite' ),
                     'type'  =>   Controls_Manager::COLOR,
-                    'scheme' => [
-                        'type' =>   Scheme_Color::get_type()
-                    ],
                     'selectors' => [
-                        '{{WRAPPER}} .step-nav button' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .step-nav button' => 'color: {{VALUE}};',
                     ]
                 ]
             );
@@ -1969,11 +1968,8 @@ class FluentForm extends Widget_Base
                 [
                     'label' => __( 'Color', 'essential-addons-for-elementor-lite' ),
                     'type'  =>   Controls_Manager::COLOR,
-                    'scheme' => [
-                        'type' =>   Scheme_Color::get_type()
-                    ],
                     'selectors' => [
-                        '{{WRAPPER}} .step-nav button:hover' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .step-nav button:hover' => 'color: {{VALUE}};',
                     ]
                 ]
             );
@@ -2006,6 +2002,7 @@ class FluentForm extends Widget_Base
 
 
         $this->end_controls_section();
+        
 
         /**
          * Style Tab: Success Message
