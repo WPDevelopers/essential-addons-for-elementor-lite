@@ -187,8 +187,9 @@
             elementor.settings.page.addChangeCallback(
                 "eael_ext_table_of_content",
                 function (newValue) {
+                    var eaelToc = $("#eael-toc");
                     if (newValue !== "yes") {
-                        $("#eael-toc").addClass('eael-toc-disable');
+                        eaelToc.addClass('eael-toc-disable');
                     }else{
                         var $settings = elementor.settings.page.getSettings();
                         var title = $settings.settings.eael_ext_toc_title;
@@ -196,7 +197,14 @@
                         ea_toc_title_change( title );
                         eael_toc_list_collapse(collapse);
                         eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
-                        $("#eael-toc").removeClass('eael-toc-disable eael-toc-global');
+
+                        //change icon when toc setting change global to  Individual
+                        if(eaelToc.hasClass('eael-toc-global')){
+                            var buttonIcon = $('.eael-toc-button i');
+                            buttonIcon.removeClass();
+                            buttonIcon.addClass('fas fa-list');
+                        }
+                        eaelToc.removeClass('eael-toc-disable eael-toc-global');
                     }
                 });
 
