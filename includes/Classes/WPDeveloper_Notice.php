@@ -121,7 +121,7 @@ class WPDeveloper_Notice {
     }
     public function migration(){
         $user_notices = $this->get_user_notices();
-        if( \version_compare( get_option( 'eael_version', false ), '3.7.2', '==' ) ) {
+        if( \version_compare( get_option( 'eael_version', false ), '3.7.2', '==' ) && ! get_option( 'eael_notice_migration', false ) ) {
             if( is_array( $user_notices ) ) {
                 array_walk( $user_notices, function( $value, $key ){
                     array_walk( $value, function( $v, $k ){
@@ -131,6 +131,7 @@ class WPDeveloper_Notice {
                     } );
                 } );
             }
+            update_option( 'eael_notice_migration', true );
         }
     }
     /**
