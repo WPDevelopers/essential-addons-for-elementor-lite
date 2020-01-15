@@ -141,15 +141,15 @@ trait Elements
             return '';
         }
 
-        $page_settings_manager = Settings_Manager::get_settings_managers('page');
-        $page_settings_model = $page_settings_manager->get_model(get_the_ID());
-        $global_settings = get_option('eael_global_settings');
-        $disable_toc = $html = '';
-        $el_class = 'eael-toc';
-        $enable_toc = true;
+        $page_settings_manager  = Settings_Manager::get_settings_managers('page');
+        $page_settings_model    = $page_settings_manager->get_model(get_the_ID());
+        $global_settings        = get_option('eael_global_settings');
+        $disable_toc            = $html = '';
+        $el_class               = 'eael-toc';
+        $enable_toc             = true;
 
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])){
-            $el_class .= ' eael-toc-disable';
+            $el_class   .= ' eael-toc-disable';
             $enable_toc = false;
         }else{
             add_filter('eael/section/after_render', function ($extensions) {
@@ -165,19 +165,19 @@ trait Elements
             $el_class .=' eael-toc-global';
             $this->eael_toc_global_css($page_settings_model , $global_settings);
         }
-        $icon = 'fas fa-list';
-        $support_tag =  (array) $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_supported_heading_tag', $global_settings );
-        $support_tag = implode( ',', array_filter( $support_tag ) );
-        $position = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_position', $global_settings );
-        $toc_style = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_list_style', $global_settings );
-        $toc_collapse = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_collapse_sub_heading', $global_settings );
-        $list_icon = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_list_icon', $global_settings );
-        $toc_title = esc_html($this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_title', $global_settings ));
-        $el_class .= ($position =='right')?' eael-toc-right':' ';
-        $icon_check = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_header_icon', $global_settings );
-        $toc_style_class = ' eael-toc-list-'.$toc_style;
-        $toc_style_class .= ($toc_collapse =='yes')?' eael-toc-collapse':' ';
-        $toc_style_class .= ($list_icon =='number')?' eael-toc-number':' ';
+        $icon               = 'fas fa-list';
+        $support_tag        =  (array) $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_supported_heading_tag', $global_settings );
+        $support_tag        = implode( ',', array_filter( $support_tag ) );
+        $position           = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_position', $global_settings );
+        $toc_style          = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_list_style', $global_settings );
+        $toc_collapse       = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_collapse_sub_heading', $global_settings );
+        $list_icon          = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_list_icon', $global_settings );
+        $toc_title          = esc_html($this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_title', $global_settings ));
+        $el_class           .= ($position =='right')?' eael-toc-right':' ';
+        $icon_check         = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_header_icon', $global_settings );
+        $toc_style_class    = ' eael-toc-list-'.$toc_style;
+        $toc_style_class    .= ($toc_collapse =='yes')?' eael-toc-collapse':' ';
+        $toc_style_class    .= ($list_icon =='number')?' eael-toc-number':' ';
 
         if(!empty($icon_check['value'])){
             $icon = $icon_check['value'];
