@@ -1642,7 +1642,7 @@ class FluentForm extends Widget_Base
         $this->start_controls_section(
             'section_pagination_style',
             [
-                'label' => __('Pagination Buttons', 'essential-addons-for-elementor-lite'),
+                'label' => __('Pagination', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1845,7 +1845,7 @@ class FluentForm extends Widget_Base
                     'label' => __('Filled', 'essential-addons-for-elementor-lite'),
                 ]
             );
-            
+
             $this->add_group_control(
                 Group_Control_Background::get_type(),
                 [
