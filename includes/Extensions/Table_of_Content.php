@@ -23,7 +23,7 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_section',
                 [
-                    'label' => esc_html__('EA Table of Content', 'essential-addons-elementor'),
+                    'label' => esc_html__('EA Table of Content', 'essential-addons-elementor-lite'),
                     'tab' => Controls_Manager::TAB_SETTINGS,
                 ]
             );
@@ -31,11 +31,11 @@
             $element->add_control(
                 'eael_ext_table_of_content',
                 [
-                    'label'         => __('Enable Table of Content', 'essential-addons-elementor'),
+                    'label'         => __('Enable Table of Content', 'essential-addons-elementor-lite'),
                     'type'          => Controls_Manager::SWITCHER,
                     'default'       => 'no',
-                    'label_on'      => __('Yes', 'essential-addons-elementor'),
-                    'label_off'     => __('No', 'essential-addons-elementor'),
+                    'label_on'      => __('Yes', 'essential-addons-elementor-lite'),
+                    'label_off'     => __('No', 'essential-addons-elementor-lite'),
                     'return_value'  => 'yes',
                 ]
             );
@@ -43,7 +43,7 @@
             $element->add_control(
                 'eael_ext_toc_has_global',
                 [
-                    'label' => __('Enabled Globally?', 'essential-addons-elementor'),
+                    'label' => __('Enabled Globally?', 'essential-addons-elementor-lite'),
                     'type' => Controls_Manager::HIDDEN,
                     'default' => isset($global_settings['table_of_content']['enabled']) ? true : false,
                 ]
@@ -54,7 +54,7 @@
                     'eael_ext_toc_global_warning_text',
                     [
                         'type' => Controls_Manager::RAW_HTML,
-                        'raw' => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor'),
+                        'raw' => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor-lite'),
                         'content_classes' => 'eael-warning',
                         'separator' => 'before',
                         'condition' => [
@@ -66,12 +66,12 @@
                 $element->add_control(
                     'eael_ext_toc_global',
                     [
-                        'label' => __('Enable Table of Content Globally', 'essential-addons-elementor'),
-                        'description' => __('Enabling this option will effect on entire site.', 'essential-addons-elementor'),
+                        'label' => __('Enable Table of Content Globally', 'essential-addons-elementor-lite'),
+                        'description' => __('Enabling this option will effect on entire site.', 'essential-addons-elementor-lite'),
                         'type' => Controls_Manager::SWITCHER,
                         'default' => 'no',
-                        'label_on' => __('Yes', 'essential-addons-elementor'),
-                        'label_off' => __('No', 'essential-addons-elementor'),
+                        'label_on' => __('Yes', 'essential-addons-elementor-lite'),
+                        'label_off' => __('No', 'essential-addons-elementor-lite'),
                         'return_value' => 'yes',
                         'separator' => 'before',
                         'condition' => [
@@ -83,13 +83,13 @@
                 $element->add_control(
                     'eael_ext_toc_global_display_condition',
                     [
-                        'label' => __('Display On', 'essential-addons-elementor'),
+                        'label' => __('Display On', 'essential-addons-elementor-lite'),
                         'type' => \Elementor\Controls_Manager::SELECT,
                         'default' => 'all',
                         'options' => [
-                            'posts' => __('All Posts', 'essential-addons-elementor'),
-                            'pages' => __('All Pages', 'essential-addons-elementor'),
-                            'all' => __('All Posts & Pages', 'essential-addons-elementor'),
+                            'posts' => __('All Posts', 'essential-addons-elementor-lite'),
+                            'pages' => __('All Pages', 'essential-addons-elementor-lite'),
+                            'all' => __('All Posts & Pages', 'essential-addons-elementor-lite'),
                         ],
                         'condition' => [
                             'eael_ext_table_of_content' => 'yes',
@@ -103,9 +103,9 @@
             $element->add_control(
                 'eael_ext_toc_title',
                 [
-                    'label' => __('Title', 'essential-addons-elementor'),
+                    'label' => __('Title', 'essential-addons-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
-                    'default' => __('Table of Contents', 'essential-addons-elementor'),
+                    'default' => __('Table of Contents', 'essential-addons-elementor-lite'),
                     'label_block' => false,
                     'separator' => 'before',
                     'condition' => [
