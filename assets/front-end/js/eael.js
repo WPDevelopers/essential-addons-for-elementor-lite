@@ -22404,9 +22404,12 @@ function RunStickyPlayer(elem) {
                         ea_toc_title_change( title );
                         eael_toc_list_collapse(collapse);
                         eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
+
+                        //change icon when toc setting change global to  Individual
                         if(eaelToc.hasClass('eael-toc-global')){
-                            $('.eael-toc-button i').removeClass();
-                            $('.eael-toc-button i').addClass('fas fa-list');
+                            var buttonIcon = $('.eael-toc-button i');
+                            buttonIcon.removeClass();
+                            buttonIcon.addClass('fas fa-list');
                         }
                         eaelToc.removeClass('eael-toc-disable eael-toc-global');
                     }
