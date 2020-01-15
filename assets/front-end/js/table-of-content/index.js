@@ -115,8 +115,6 @@
                 window.location.hash = target;
         });
 
-        $(document).on("scroll", eaelTocScroll);
-
         var Eaelanchor = $('ul.eael-toc-list li a');
 
         /**
