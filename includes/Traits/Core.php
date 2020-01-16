@@ -161,7 +161,6 @@ trait Core
 
         //save table of content global value
         if($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' && $page_settings_model->get_settings('eael_ext_table_of_content') == 'yes') {
-
             $global_settings['table_of_content'] = [
                 'post_id'                                           => $post_id,
                 'enabled'                                           => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
