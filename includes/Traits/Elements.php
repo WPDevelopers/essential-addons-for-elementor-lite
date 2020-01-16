@@ -144,9 +144,21 @@ trait Elements
         $page_settings_manager  = Settings_Manager::get_settings_managers('page');
         $page_settings_model    = $page_settings_manager->get_model(get_the_ID());
         $global_settings        = get_option('eael_global_settings');
-        $disable_toc            = $html = '';
+        $disable_toc            = '';
         $el_class               = 'eael-toc';
         $enable_toc             = true;
+
+        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['post_id'])) {
+            if(get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
+                $el_class   .= ' eael-toc-disable';
+            } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
+                $el_class   .= ' eael-toc-disable';
+            } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
+                $el_class   .= ' eael-toc-disable';
+            } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
+                $el_class   .= ' eael-toc-disable';
+            }
+        }
 
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])){
             $el_class   .= ' eael-toc-disable';
@@ -161,6 +173,7 @@ trait Elements
         if (!\Elementor\Plugin::$instance->preview->is_preview_mode() && !$enable_toc) {
             $disable_toc = 'style="display:none;"';
         }
+
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['enabled'])){
             $el_class .=' eael-toc-global';
             $this->eael_toc_global_css($page_settings_model , $global_settings);
@@ -183,17 +196,16 @@ trait Elements
             $icon = $icon_check['value'];
         }
 
-        $html = '';
-        $html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} ' {$disable_toc}>";
-            $html .= "<div class='eael-toc-header'>";
-                 $html .= "<span class='eael-toc-close'>×</span>";
-                 $html .= "<h2 class='eael-toc-title'>{$toc_title}</h2>";
-            $html .= "</div>";
-                $html .= "<div class='eael-toc-body'>";
-                $html .= "<ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>";
-            $html .= "</div>";
-        $html .= sprintf( "<button class='eael-toc-button'><i class='%s'></i><span>%s</span></button>", $icon, $toc_title );
-        $html .= "</div>";
+        $html = "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} ' {$disable_toc}>
+                    <div class='eael-toc-header'>
+                         <span class='eael-toc-close'>×</span>
+                         <h2 class='eael-toc-title'>{$toc_title}</h2>
+                    </div>
+                    <div class='eael-toc-body'>
+                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                    </div>
+                    <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
+                </div>";
         echo $html;
     }
 
