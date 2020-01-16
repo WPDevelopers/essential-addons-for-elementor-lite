@@ -117,24 +117,6 @@
 
         var Eaelanchor = $('ul.eael-toc-list li a');
 
-        /**
-         * add active class when scroll
-         * @param event
-         */
-        function eaelTocScroll( event ){
-            var scrollPos = $(document).scrollTop();
-            Eaelanchor.each(function () {
-                var currLink = $(this);
-                var refElement = $(currLink.attr("href"));
-                if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-                    $("ul.eael-toc-list li").removeClass("active");
-                    $(".eael-first-child").removeClass( "eael-highlight" );
-                    currLink.closest('.eael-first-child').addClass( "eael-highlight" );
-                    currLink.parent().addClass( "active" );
-                }
-            });
-        }
-
         window.onscroll = function() {eaelTocSticky()};
 
         var eaelToc = document.getElementById("eael-toc");

@@ -17,7 +17,7 @@ trait Core
      */
     public function i18n()
     {
-        load_plugin_textdomain('essential-addons-elementor-lite');
+        load_plugin_textdomain('essential-addons-for-elementor-lite');
     }
 
     /**

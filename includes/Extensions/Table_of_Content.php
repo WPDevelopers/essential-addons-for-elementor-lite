@@ -23,7 +23,7 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_section',
                 [
-                    'label' => esc_html__('EA Table of Content', 'essential-addons-elementor-lite'),
+                    'label' => esc_html__('EA Table of Content', 'essential-addons-for-elementor-lite'),
                     'tab'   => Controls_Manager::TAB_SETTINGS,
                 ]
             );
@@ -31,11 +31,11 @@
             $element->add_control(
                 'eael_ext_table_of_content',
                 [
-                    'label'         => __('Enable Table of Content', 'essential-addons-elementor-lite'),
+                    'label'         => __('Enable Table of Content', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::SWITCHER,
                     'default'       => 'no',
-                    'label_on'      => __('Yes', 'essential-addons-elementor-lite'),
-                    'label_off'     => __('No', 'essential-addons-elementor-lite'),
+                    'label_on'      => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off'     => __('No', 'essential-addons-for-elementor-lite'),
                     'return_value'  => 'yes',
                 ]
             );
@@ -43,7 +43,7 @@
             $element->add_control(
                 'eael_ext_toc_has_global',
                 [
-                    'label'     => __('Enabled Globally?', 'essential-addons-elementor-lite'),
+                    'label'     => __('Enabled Globally?', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::HIDDEN,
                     'default'   => isset($global_settings['table_of_content']['enabled']) ? true : false,
                 ]
@@ -54,7 +54,7 @@
                     'eael_ext_toc_global_warning_text',
                     [
                         'type'              => Controls_Manager::RAW_HTML,
-                        'raw'               => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-elementor-lite'),
+                        'raw'               => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
                         'content_classes'   => 'eael-warning',
                         'separator'         => 'before',
                         'condition'         => [
@@ -66,12 +66,12 @@
                 $element->add_control(
                     'eael_ext_toc_global',
                     [
-                        'label'         => __('Enable Table of Content Globally', 'essential-addons-elementor-lite'),
-                        'description'   => __('Enabling this option will effect on entire site.', 'essential-addons-elementor-lite'),
+                        'label'         => __('Enable Table of Content Globally', 'essential-addons-for-elementor-lite'),
+                        'description'   => __('Enabling this option will effect on entire site.', 'essential-addons-for-elementor-lite'),
                         'type'          => Controls_Manager::SWITCHER,
                         'default'       => 'no',
-                        'label_on'      => __('Yes', 'essential-addons-elementor-lite'),
-                        'label_off'     => __('No', 'essential-addons-elementor-lite'),
+                        'label_on'      => __('Yes', 'essential-addons-for-elementor-lite'),
+                        'label_off'     => __('No', 'essential-addons-for-elementor-lite'),
                         'return_value'  => 'yes',
                         'separator'     => 'before',
                         'condition'     => [
@@ -83,13 +83,13 @@
                 $element->add_control(
                     'eael_ext_toc_global_display_condition',
                     [
-                        'label'     => __('Display On', 'essential-addons-elementor-lite'),
+                        'label'     => __('Display On', 'essential-addons-for-elementor-lite'),
                         'type'      => \Elementor\Controls_Manager::SELECT,
                         'default'   => 'all',
                         'options'   => [
-                            'posts' => __('All Posts', 'essential-addons-elementor-lite'),
-                            'pages' => __('All Pages', 'essential-addons-elementor-lite'),
-                            'all'   => __('All Posts & Pages', 'essential-addons-elementor-lite'),
+                            'posts' => __('All Posts', 'essential-addons-for-elementor-lite'),
+                            'pages' => __('All Pages', 'essential-addons-for-elementor-lite'),
+                            'all'   => __('All Posts & Pages', 'essential-addons-for-elementor-lite'),
                         ],
                         'condition' => [
                             'eael_ext_table_of_content' => 'yes',
@@ -103,9 +103,9 @@
             $element->add_control(
                 'eael_ext_toc_title',
                 [
-                    'label'         => __('Title', 'essential-addons-elementor-lite'),
+                    'label'         => __('Title', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::TEXT,
-                    'default'       => __('Table of Contents', 'essential-addons-elementor-lite'),
+                    'default'       => __('Table of Contents', 'essential-addons-for-elementor-lite'),
                     'label_block'   => false,
                     'separator'     => 'before',
                     'condition'     => [
@@ -117,13 +117,13 @@
             $element->add_control(
                 'eael_ext_toc_position',
                 [
-                    'label'         => __('Position', 'essential-addons-elementor-lite'),
+                    'label'         => __('Position', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::SELECT,
                     'default'       => 'left',
                     'label_block'   => false,
                     'options'       => [
-                        'left'  => __('Left', 'essential-addons-elementor-lite'),
-                        'right' => __('Right', 'essential-addons-elementor-lite'),
+                        'left'  => __('Left', 'essential-addons-for-elementor-lite'),
+                        'right' => __('Right', 'essential-addons-for-elementor-lite'),
                     ],
                     'separator' => 'before',
                     'condition' => [
@@ -135,13 +135,13 @@
             $element->add_control(
                 'eael_ext_toc_list_icon',
                 [
-                    'label'         => __('List Icon', 'essential-addons-elementor-lite'),
+                    'label'         => __('List Icon', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::SELECT,
                     'default'       => 'bullet',
                     'label_block'   => false,
                     'options'       => [
-                        'bullet' => __('Bullet', 'essential-addons-elementor-lite'),
-                        'number' => __('Number', 'essential-addons-elementor-lite'),
+                        'bullet' => __('Bullet', 'essential-addons-for-elementor-lite'),
+                        'number' => __('Number', 'essential-addons-for-elementor-lite'),
                     ],
                     'separator'     => 'before',
                     'condition'     => [
@@ -153,7 +153,7 @@
             $element->add_control(
                 'eael_ext_toc_supported_heading_tag',
                 [
-                    'label'         => __( 'Supported Heading Tag', 'essential-addons-elementor-lite' ),
+                    'label'         => __( 'Supported Heading Tag', 'essential-addons-for-elementor-lite' ),
                     'type'          => Controls_Manager::SELECT2,
                     'multiple'      => true,
                     'label_block'   => true,
@@ -167,12 +167,12 @@
                         'h6',
                     ],
                     'options'       => [
-                        'h1'    => __( 'H1', 'essential-addons-elementor-lite' ),
-                        'h2'    => __( 'H2', 'essential-addons-elementor-lite' ),
-                        'h3'    => __( 'H3', 'essential-addons-elementor-lite' ),
-                        'h4'    => __( 'H4', 'essential-addons-elementor-lite' ),
-                        'h5'    => __( 'H5', 'essential-addons-elementor-lite' ),
-                        'h6'    => __( 'H6', 'essential-addons-elementor-lite' ),
+                        'h1'    => __( 'H1', 'essential-addons-for-elementor-lite' ),
+                        'h2'    => __( 'H2', 'essential-addons-for-elementor-lite' ),
+                        'h3'    => __( 'H3', 'essential-addons-for-elementor-lite' ),
+                        'h4'    => __( 'H4', 'essential-addons-for-elementor-lite' ),
+                        'h5'    => __( 'H5', 'essential-addons-for-elementor-lite' ),
+                        'h6'    => __( 'H6', 'essential-addons-for-elementor-lite' ),
                     ],
                     'render_type'   => 'none',
                     'condition'  => [
@@ -184,11 +184,11 @@
             $element->add_control(
                 'eael_ext_toc_collapse_sub_heading',
                 [
-                    'label'         => __('Collapse Sub Heading', 'essential-addons-elementor-lite'),
+                    'label'         => __('Collapse Sub Heading', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::SWITCHER,
                     'default'       => 'yes',
-                    'label_on'      => __('Yes', 'essential-addons-elementor-lite'),
-                    'label_off'     => __('No', 'essential-addons-elementor-lite'),
+                    'label_on'      => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off'     => __('No', 'essential-addons-for-elementor-lite'),
                     'return_value'  => 'yes',
                     'separator'     => 'before',
                     'condition'     => [
@@ -202,7 +202,7 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_header_style',
                 [
-                    'label' => esc_html__('EA TOC Header', 'essential-addons-elementor-lite'),
+                    'label' => esc_html__('EA TOC Header', 'essential-addons-for-elementor-lite'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -213,7 +213,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_heading_separator',
                 [
-                    'label' => __( 'Heading', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'Heading', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
                 ]
@@ -222,7 +222,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_header_bg',
                 [
-                    'label' => __('Background Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ff7d50',
                     'selectors' => [
@@ -236,7 +236,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_header_text_color',
                 [
-                    'label' => __('Text Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ffffff',
                     'selectors' => [
@@ -258,7 +258,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_header_icon',
                 [
-                    'label' => __( 'Icon', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::ICONS,
                     'label_block' => true,
                     'default' => [
@@ -272,7 +272,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_close_button',
                 [
-                    'label' => __( 'Close Button', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'Close Button', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
                 ]
@@ -281,7 +281,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_close_button_bg',
                 [
-                    'label' => __('Background Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ffffff',
                     'selectors' => [
@@ -294,7 +294,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_close_button_text_color',
                 [
-                    'label' => __('Close Button Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Close Button Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ff7d50',
                     'selectors' => [
@@ -308,7 +308,7 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_list_style_section',
                 [
-                    'label' => esc_html__('EA TOC List', 'essential-addons-elementor-lite'),
+                    'label' => esc_html__('EA TOC List', 'essential-addons-for-elementor-lite'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -319,7 +319,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_list_style_separator',
                 [
-                    'label' => __( 'List Style', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'List Style', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
                 ]
@@ -328,7 +328,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_body_bg',
                 [
-                    'label' => __('Background Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#fff6f3',
                     'selectors' => [
@@ -341,13 +341,13 @@
             $element->add_control(
                 'eael_ext_table_of_content_list_style',
                 [
-                    'label' => __( 'List Style', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'List Style', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'style_1',
                     'options' => [
-                        'style_1' => __( 'Style 1', 'essential-addons-elementor-lite' ),
-                        'style_2' => __( 'Style 2', 'essential-addons-elementor-lite' ),
-                        'style_3' => __( 'Style 3', 'essential-addons-elementor-lite' )
+                        'style_1' => __( 'Style 1', 'essential-addons-for-elementor-lite' ),
+                        'style_2' => __( 'Style 2', 'essential-addons-for-elementor-lite' ),
+                        'style_3' => __( 'Style 3', 'essential-addons-for-elementor-lite' )
                     ],
                 ]
             );
@@ -365,14 +365,14 @@
 
             $element->start_controls_tab( 'normal',
                    [
-                       'label' => __( 'Normal', 'essential-addons-elementor-lite' ),
+                       'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
                    ]
             );
 
             $element->add_control(
                 'eael_ext_table_of_content_list_text_color',
                 [
-                    'label' => __('Text Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#707070',
                     'selectors' => [
@@ -386,14 +386,14 @@
 
             $element->start_controls_tab( 'active',
                   [
-                      'label' => __( 'Active', 'essential-addons-elementor-lite' ),
+                      'label' => __( 'Active', 'essential-addons-for-elementor-lite' ),
                   ]
             );
 
             $element->add_control(
                 'eael_ext_table_of_content_list_text_color_active',
                 [
-                    'label' => __('Text Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ff7d50',
                     'selectors' => [
@@ -414,7 +414,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_list_separator',
                 [
-                    'label' => __( 'Separator', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'Separator', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
                 ]
@@ -423,13 +423,13 @@
             $element->add_control(
                 'eael_ext_table_of_content_list_separator_style',
                 [
-                    'label' => __( 'Style', 'essential-addons-elementor-lite' ),
+                    'label' => __( 'Style', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'dashed',
                     'options' => [
-                        'solid'  => __( 'Solid', 'essential-addons-elementor-lite' ),
-                        'dashed' => __( 'Dashed', 'essential-addons-elementor-lite' ),
-                        'none'   => __( 'None', 'essential-addons-elementor-lite' )
+                        'solid'  => __( 'Solid', 'essential-addons-for-elementor-lite' ),
+                        'dashed' => __( 'Dashed', 'essential-addons-for-elementor-lite' ),
+                        'none'   => __( 'None', 'essential-addons-for-elementor-lite' )
                     ],
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc ul.eael-toc-list > li' => 'border-top: 0.5px {{VALUE}}',
@@ -441,7 +441,7 @@
             $element->add_control(
                 'eael_ext_table_of_content_list_separator_color',
                 [
-                    'label' => __('Color', 'essential-addons-elementor-lite'),
+                    'label' => __('Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#c6c4cf',
                     'selectors' => [
