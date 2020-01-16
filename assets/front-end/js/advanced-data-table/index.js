@@ -79,21 +79,15 @@ var Advanced_Data_Table = function($scope, $) {
 	var classCollection = {};
 
 	if (isEditMode) {
-		var attr = "readonly";
-
 		// add edit class
 		table.classList.add("ea-advanced-data-table-editable");
-
-		if (table.classList.contains("ea-advanced-data-table-static")) {
-			attr = "";
-		}
 
 		// insert editable area
 		table.querySelectorAll("th, td").forEach(function(el) {
 			var value = el.innerHTML;
 
 			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
 			}
 		});
 
@@ -378,7 +372,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
