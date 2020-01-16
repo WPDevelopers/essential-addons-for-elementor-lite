@@ -148,16 +148,8 @@ trait Elements
         $el_class               = 'eael-toc';
         $enable_toc             = true;
 
-        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['post_id'])) {
-            if(get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
-                $el_class   .= ' eael-toc-disable';
-            } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
-                $el_class   .= ' eael-toc-disable';
-            } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
-                $el_class   .= ' eael-toc-disable';
-            } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
-                $el_class   .= ' eael-toc-disable';
-            }
+        if(!$this->eael_toc_page_scope( $page_settings_model,$global_settings )){
+            $el_class   .= ' eael-toc-disable';
         }
 
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])){
@@ -178,6 +170,7 @@ trait Elements
             $el_class .=' eael-toc-global';
             $this->eael_toc_global_css($page_settings_model , $global_settings);
         }
+
         $icon               = 'fas fa-list';
         $support_tag        =  (array) $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_supported_heading_tag', $global_settings );
         $support_tag        = implode( ',', array_filter( $support_tag ) );
