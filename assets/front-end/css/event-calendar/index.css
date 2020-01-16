@@ -1,59 +1,42 @@
-.fc-row table {
-  margin: 0px !important;
-}
-
-.fc-view table thead:first-child tr:first-child td {
-  border-top: 1px solid #DDD !important;
-}
-
 .eael-event-calendar-wrapper {
   overflow: hidden;
-  font-family: roboto;
 }
-
-.fc-day-grid-event {
+.eael-event-calendar-wrapper .fc-row table {
+  margin: 0px !important;
+}
+.eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td {
+  border-top: 1px solid #ddd !important;
+}
+.eael-event-calendar-wrapper .fc-day-grid-event {
   margin-top: 2px;
   padding: 8px;
-  font-family: roboto;
   font-size: 12px;
   border-left-width: 5px;
-  /*background-color: #FFF!important;*/
 }
-
-.fc-row table thead:first-child tr:first-child th {
-  font-family: roboto;
+.eael-event-calendar-wrapper .fc-row table thead:first-child tr:first-child th {
   font-size: 14px;
-  /*
-  padding:10px; */
 }
-
-.fc-day-number {
-  font-family: roboto;
+.eael-event-calendar-wrapper .fc-day-number {
   font-size: 14px;
   float: center !important;
 }
-
-.eaelec-select-view {
+.eael-event-calendar-wrapper .eaelec-select-view {
   box-sizing: border-box;
   height: 2.5em;
-  padding: 0 .6em;
+  padding: 0 0.6em;
   font-size: 14px;
   white-space: nowrap;
   cursor: pointer;
-  font-family: roboto;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   color: #333;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 }
-
-.fc-time-grid .fc-event {
+.eael-event-calendar-wrapper .fc-time-grid .fc-event {
   min-height: 15px;
 }
-
-/* The Modal Started */
-.eaelec-modal {
+.eael-event-calendar-wrapper .eaelec-modal {
   display: none;
   position: fixed;
   z-index: 100;
@@ -65,12 +48,9 @@
   overflow: auto;
   border: 1px solid #000;
   background-color: black;
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
 }
-
-/* Modal Content */
-.eaelec-modal-content {
+.eael-event-calendar-wrapper .eaelec-modal-content {
   position: relative;
   margin: auto;
   border: 1px solid #888;
@@ -81,11 +61,8 @@
   animation-name: animatetop;
   animation-duration: 0.4s;
   background-color: #fefefe;
-  font-family: roboto;
   padding: 20px 0;
 }
-
-/* Add Animation */
 @-webkit-keyframes animatetop {
   from {
     top: -300px;
@@ -106,32 +83,21 @@
     opacity: 1;
   }
 }
-.eaelec-modal-header {
+.eael-event-calendar-wrapper .eaelec-modal-header {
   padding: 0px 30px;
   color: white;
   border-left: 5px solid #009900;
   overflow: auto;
 }
-
-.eaelec-modal-header h2 {
+.eael-event-calendar-wrapper .eaelec-modal-header h2 {
   color: #242424;
-  font-family: roboto;
   margin: 0;
   padding: 0;
 }
-
-.eaelec-modal-header span {
+.eael-event-calendar-wrapper .eaelec-modal-header span {
   color: #009900;
 }
-
-/* The Close Button */
-span.eaelec-modal-close {
-  /*
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  */
+.eael-event-calendar-wrapper span.eaelec-modal-close {
   position: absolute;
   right: -15px;
   top: -18px;
@@ -141,69 +107,58 @@ span.eaelec-modal-close {
   cursor: pointer;
   box-sizing: content-box;
   overflow: visible;
-  border: 2px solid #FFF;
+  border: 2px solid #fff;
   background: #009900;
   line-height: 18px;
   height: 20px;
   width: 20px;
   text-align: center;
-  font-family: roboto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 20px;
   color: #fff !important;
 }
-
-.eaelec-modal-close:hover,
-.eaelec-modal-close:focus {
-  color: #FFF;
+.eael-event-calendar-wrapper .eaelec-modal-close:hover,
+.eael-event-calendar-wrapper .eaelec-modal-close:focus {
+  color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
-
-.eaelec-modal-body {
+.eael-event-calendar-wrapper .eaelec-modal-body {
   padding: 0px 10px 0 35px;
   overflow-y: auto;
   height: 250px;
   margin: 10px 0;
   color: #555555;
 }
-
-.eaelec-modal-footer {
+.eael-event-calendar-wrapper .eaelec-modal-footer {
   padding: 0px 10px 0 35px;
   color: white;
-  border: 0px solid #FF0000;
+  border: 0px solid #ff0000;
 }
-
-.eaelec-event-date-start, .eaelec-event-date-end {
-  font-family: roboto;
+.eael-event-calendar-wrapper .eaelec-event-date-start,
+.eael-event-calendar-wrapper .eaelec-event-date-end {
   font-size: 12px;
 }
-
-/* Modal Ended */
 @media (max-width: 575px) {
-  .fc-toolbar {
+  .eael-event-calendar-wrapper .fc-toolbar {
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  .fc-toolbar .fc-center {
+  .eael-event-calendar-wrapper .fc-toolbar .fc-center {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  .fc-toolbar h2 {
+  .eael-event-calendar-wrapper .fc-toolbar h2 {
     font-size: 16px !important;
     width: 100% !important;
     text-align: center !important;
     padding: 5px !important;
   }
-
-  .fc-ltr .fc-axis {
+  .eael-event-calendar-wrapper .fc-ltr .fc-axis {
     font-size: 12px !important;
   }
-
-  .fc-row table thead:first-child tr:first-child th {
+  .eael-event-calendar-wrapper .fc-row table thead:first-child tr:first-child th {
     font-weight: normal !important;
     font-size: 12px !important;
     padding: 5px !important;
