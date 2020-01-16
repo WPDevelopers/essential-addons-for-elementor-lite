@@ -79,15 +79,21 @@ var Advanced_Data_Table = function($scope, $) {
 	var classCollection = {};
 
 	if (isEditMode) {
+		var attr = "readonly";
+
 		// add edit class
 		table.classList.add("ea-advanced-data-table-editable");
+
+		if (table.classList.contains("ea-advanced-data-table-static")) {
+			attr = "";
+		}
 
 		// insert editable area
 		table.querySelectorAll("th, td").forEach(function(el) {
 			var value = el.innerHTML;
 
 			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
+				el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
 			}
 		});
 
@@ -372,7 +378,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
+				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
@@ -411,6 +417,16 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 	}
 
 	// pro
+
+	// var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+	// if (select) {
+	// 	select.length = 0;
+		
+	// 	model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
+	// 		select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+	// 	});
+	// }
+
 	if (event.target.dataset.event == "ea:advTable:connect") {
 		var button = event.target;
 		button.innerHTML = "Connecting";
@@ -436,6 +452,12 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 					});
 
 					panel.content.currentView.render();
+
+					var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+					select.length = 0;
+					response.tables.forEach(function(opt, index) {
+						select[index] = new Option(opt, opt);
+					});
 				} else {
 					button.innerHTML = "Failed";
 				}
