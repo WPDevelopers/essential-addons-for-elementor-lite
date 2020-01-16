@@ -7,9 +7,10 @@
          * @param supportTag
          */
         function eael_toc_content( selector, supportTag ){
-            if(selector===null){
+            if(selector === null || supportTag === undefined){
                 return null;
             }
+            console.log(typeof supportTag );
             var mainSelector = document.querySelector(selector),
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;
@@ -35,6 +36,7 @@
             var listId      = document.getElementById('eael-toc-list');
             var mainContent = document.querySelector(selector);
             listId.innerHTML='';
+
             allHeadings = mainContent.querySelectorAll(tagList),
                 baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
                 ListNode    = listId;
@@ -115,8 +117,6 @@
                 window.location.hash = target;
         });
 
-        var Eaelanchor = $('ul.eael-toc-list li a');
-
         window.onscroll = function() {eaelTocSticky()};
 
         var eaelToc = document.getElementById("eael-toc");
@@ -126,6 +126,7 @@
          * check sticky
          */
         function eaelTocSticky() {
+            var eaelToc = document.getElementById("eael-toc");
             if(!eaelToc){
                 return ;
             }
@@ -135,7 +136,6 @@
                 eaelToc.classList.remove("eael-sticky");
             }
         }
-
 
         /**
          *
@@ -160,33 +160,41 @@
             return contentSelectro;
         }
 
-        $('.eael-toc-close ,.eael-toc-button').click(function(e) {
+        $(document).on('click','.eael-toc-close ,.eael-toc-button',function(){
             $('.eael-toc').toggleClass('expanded');
         });
 
+        function eael_build_toc( $settings ){
+            var pageSetting = $settings.settings,
+                title = pageSetting.eael_ext_toc_title,
+                toc_style_class     = 'eael-toc-list eael-toc-list-'+pageSetting.eael_ext_table_of_content_list_style,
+                support_tag         =  pageSetting.eael_ext_toc_supported_heading_tag.join(', '),
+                icon                =  pageSetting.eael_ext_table_of_content_header_icon.value,
+                el_class            = (pageSetting.eael_ext_toc_position ==='right')?' eael-toc-right':' ';
+                toc_style_class    += (pageSetting.eael_ext_toc_collapse_sub_heading ==='yes')?' eael-toc-collapse':' ';
+                toc_style_class    += (pageSetting.eael_ext_toc_list_icon ==='number')?' eael-toc-number':' ';
+
+
+            return '<div id="eael-toc" class="eael-toc '+el_class+'">' +
+                '<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">'+ title + '</h2></div>' +
+                '<div class="eael-toc-body"><ul id="eael-toc-list" class="'+toc_style_class+'"></ul></div>' +
+                '<button class="eael-toc-button"><i class="'+icon+'"></i><span>'+ title +'</span></button>' +
+                '</div>';
+
+        }
+
         //editor mode
         if (isEditMode) {
+
             elementor.settings.page.addChangeCallback(
                 "eael_ext_table_of_content",
                 function (newValue) {
                     var eaelToc = $("#eael-toc");
-                    if (newValue !== "yes") {
-                        eaelToc.addClass('eael-toc-disable');
-                    }else{
+                    eaelToc.remove();
+                    if (newValue === "yes") {
                         var $settings = elementor.settings.page.getSettings();
-                        var title = $settings.settings.eael_ext_toc_title;
-                        var collapse = $settings.settings.eael_ext_toc_collapse_sub_heading;
-                        ea_toc_title_change( title );
-                        eael_toc_list_collapse(collapse);
+                        $('body').append(eael_build_toc($settings));
                         eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
-
-                        //change icon when toc setting change global to  Individual
-                        if(eaelToc.hasClass('eael-toc-global')){
-                            var buttonIcon = $('.eael-toc-button i');
-                            buttonIcon.removeClass();
-                            buttonIcon.addClass('fas fa-list');
-                        }
-                        eaelToc.removeClass('eael-toc-disable eael-toc-global');
                     }
                 });
 

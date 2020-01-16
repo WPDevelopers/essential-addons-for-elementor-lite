@@ -144,17 +144,14 @@ trait Elements
         $page_settings_manager  = Settings_Manager::get_settings_managers('page');
         $page_settings_model    = $page_settings_manager->get_model(get_the_ID());
         $global_settings        = get_option('eael_global_settings');
-        $disable_toc            = '';
         $el_class               = 'eael-toc';
-        $enable_toc             = true;
 
         if(!$this->eael_toc_page_scope( $page_settings_model,$global_settings )){
-            $el_class   .= ' eael-toc-disable';
+            return '';
         }
 
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])){
-            $el_class   .= ' eael-toc-disable';
-            $enable_toc = false;
+            return '';
         }else{
             add_filter('eael/section/after_render', function ($extensions) {
                 $extensions[] = 'eael-table-of-content';
@@ -162,9 +159,6 @@ trait Elements
             });
         }
 
-        if (!\Elementor\Plugin::$instance->preview->is_preview_mode() && !$enable_toc) {
-            $disable_toc = 'style="display:none;"';
-        }
 
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['enabled'])){
             $el_class .=' eael-toc-global';
@@ -189,7 +183,7 @@ trait Elements
             $icon = $icon_check['value'];
         }
 
-        $html = "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} ' {$disable_toc}>
+        $html = "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} '>
                     <div class='eael-toc-header'>
                          <span class='eael-toc-close'>×</span>
                          <h2 class='eael-toc-title'>{$toc_title}</h2>
