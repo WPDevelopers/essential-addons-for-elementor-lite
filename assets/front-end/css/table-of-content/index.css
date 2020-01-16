@@ -26,8 +26,8 @@ html {
 }
 .eael-toc.expanded .eael-toc-button {
   display: inline-block;
-  -webkit-transform: translate(21px, 100px) rotate(90deg);
-          transform: translate(21px, 100px) rotate(90deg);
+  -webkit-transform: translate(21px, 1px) rotate(90deg);
+          transform: translate(21px, 1px) rotate(90deg);
   background: #ff7d50;
   color: #fff;
   font-weight: 400;
