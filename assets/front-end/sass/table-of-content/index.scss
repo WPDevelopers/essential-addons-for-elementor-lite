@@ -2,10 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 .eael-toc {
-    position: absolute;
+    position: fixed;
     z-index: 9999;
     width: 300px!important;
-    top:50%;
+    top:30%;
 
     &.eael-toc-disable {
         display: none;
@@ -238,5 +238,14 @@ html {
     }
 }
 //responsive
+
+@media only screen and (max-width: 480px) {
+    .eael-toc {
+        .eael-toc-body {
+            max-height: 40vh;
+            overflow-y: auto;
+        }
+    }
+}
 
 
