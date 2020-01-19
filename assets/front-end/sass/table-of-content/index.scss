@@ -108,10 +108,7 @@ html {
                 font-size: 15px;
                 list-style: none;
                 margin: 0 20px 0 20px;
-                white-space: nowrap;
-                overflow: hidden;
-                -o-text-overflow: ellipsis;
-                text-overflow: ellipsis;
+
                 &.active{
                     color: #ff7d50;
                     > a {
@@ -200,6 +197,14 @@ html {
                     ul {
                         counter-reset: item;
                     }
+                }
+            }
+            &.eael-toc-word-wrap {
+                li {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    -o-text-overflow: ellipsis;
+                    text-overflow: ellipsis;
                 }
             }
         }
