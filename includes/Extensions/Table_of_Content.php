@@ -7,7 +7,7 @@
 
     use \Elementor\Controls_Manager;
     use \Elementor\Core\Schemes\Typography;
-    use Elementor\Group_Control_Typography;
+    use \Elementor\Group_Control_Typography;
 
     class Table_of_Content {
 
