@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Schemes\Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
@@ -1921,39 +1922,39 @@ trait Helper
      */
     public function eael_toc_global_css( $page_settings_model ,$global_settings ){
 
-        $header_bg                  = $global_settings['table_of_content']['eael_ext_table_of_content_header_bg'];
-        $header_text_color          = $global_settings['table_of_content']['eael_ext_table_of_content_header_text_color'];
-        $close_bt_text_color        = $global_settings['table_of_content']['eael_ext_table_of_content_close_button_text_color'];
-        $close_bt_bg                = $global_settings['table_of_content']['eael_ext_table_of_content_close_button_bg'];
-        $toc_body_bg                = $global_settings['table_of_content']['eael_ext_table_of_content_body_bg'];
-        $toc_list_color             = $global_settings['table_of_content']['eael_ext_table_of_content_list_text_color'];
-        $toc_list_color_active      = $global_settings['table_of_content']['eael_ext_table_of_content_list_text_color_active'];
+        $eael_toc = $global_settings['table_of_content'];
+        $toc_list_color_active      = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_style'];
-        $toc_list_separator_color   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_color'];
-        $collapse_sub_heading       = $global_settings['table_of_content']['eael_ext_toc_collapse_sub_heading'];
+
+        $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography',$eael_toc);
+        $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography',$eael_toc);
+
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
             .eael-toc-global.expanded .eael-toc-button
-            {background-color:$header_bg;}
+            {background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};}
             
             .eael-toc-global .eael-toc-header .eael-toc-title,
             .eael-toc-global.expanded .eael-toc-button
-            {color:$header_text_color;}
+            {
+                color:{$eael_toc['eael_ext_table_of_content_header_text_color']};
+                $header_typography
+            }
 
             .eael-toc-global .eael-toc-close
             {
-                color:$close_bt_text_color;
-                background-color:$close_bt_bg;
+                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']};
+                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
             }
             
             .eael-toc-global .eael-toc-body
-            {background-color:$toc_body_bg;}
+            {background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};}
             
             .eael-toc-global .eael-toc-body ul.eael-toc-list li a,
             .eael-toc-global .eael-toc-body ul.eael-toc-list li,
             .eael-toc-global .eael-toc-body ul.eael-toc-list li:before
-            {color:$toc_list_color;}
+            {color:{$eael_toc['eael_ext_table_of_content_list_text_color']};}
             
             .eael-toc-global ul.eael-toc-list li.active > a,
             .eael-toc-global ul.eael-toc-list li.eael-highlight > a,
@@ -1967,7 +1968,10 @@ trait Helper
             {background-color:$toc_list_color_active !important;}
             
             .eael-toc-global ul.eael-toc-list > li
-            {color:$toc_list_separator_color !important;}
+            {
+                color:{$eael_toc['eael_ext_table_of_content_list_separator_color']} !important;
+                $list_typography
+            }
         ";
         if($toc_list_separator_style!='none'){
             $toc_global_css .= "
@@ -1980,5 +1984,36 @@ trait Helper
         wp_register_style( 'eael-toc-global', false );
         wp_enqueue_style( 'eael-toc-global' );
         wp_add_inline_style( 'eael-toc-global', $toc_global_css );
+    }
+
+    /**
+     * @param $id
+     * @param $global_data
+     * @return string
+     */
+    public function eael_get_typography_data( $id, $global_data){
+        $typo_data = '';
+        $fields_keys = [
+            'font_family',
+            'font_weight',
+            'text_transform',
+            'font_style',
+            'text_decoration',
+            'font_size',
+            'letter_spacing',
+            'line_height'
+        ];
+        foreach( $fields_keys as $key => $field ){
+            $typo_attr = $global_data[$id.'_'.$field];
+            $attr = str_replace('_','-',$field);
+            if(in_array($field,['font_size','letter_spacing','line_height'])){
+                if(!empty($typo_attr['size'])){
+                    $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']};";
+                }
+            }elseif(!empty($typo_attr)){
+                $typo_data .= "{$attr}:{$typo_attr};";
+            }
+        }
+        return $typo_data;
     }
 }

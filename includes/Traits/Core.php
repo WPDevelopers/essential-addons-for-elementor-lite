@@ -161,6 +161,16 @@ trait Core
 
         //save table of content global value
         if($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' && $page_settings_model->get_settings('eael_ext_table_of_content') == 'yes') {
+            $typography_fields = [
+                'font_family',
+                'font_weight',
+                'text_transform',
+                'font_style',
+                'text_decoration',
+                'font_size',
+                'letter_spacing',
+                'line_height'
+            ];
             $global_settings['table_of_content'] = [
                 'post_id'                                           => $post_id,
                 'enabled'                                           => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
@@ -171,9 +181,9 @@ trait Core
                 'eael_ext_toc_collapse_sub_heading'                 => $page_settings_model->get_settings( 'eael_ext_toc_collapse_sub_heading'),
 
                 //toc header setting
-                'eael_ext_table_of_content_header_bg'               => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
-                'eael_ext_table_of_content_header_text_color'       => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
-                'eael_ext_table_of_content_header_icon'             => $page_settings_model->get_settings('eael_ext_table_of_content_header_icon'),
+                'eael_ext_table_of_content_header_bg'                   => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
+                'eael_ext_table_of_content_header_text_color'           => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
+                'eael_ext_table_of_content_header_icon'                 => $page_settings_model->get_settings('eael_ext_table_of_content_header_icon'),
 
                 //close button setting
                 'eael_ext_table_of_content_close_button_bg'         => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
@@ -190,6 +200,12 @@ trait Core
                 'eael_ext_table_of_content_list_separator_style'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_style'),
                 'eael_ext_table_of_content_list_separator_color'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_color'),
             ];
+            foreach ($typography_fields as $typography_field){
+                $header_fields_attr = 'eael_ext_table_of_content_header_typography_'.$typography_field;
+                $list_fields_attr   = 'eael_ext_table_of_content_list_typography_'.$typography_field;
+                $global_settings['table_of_content'][$header_fields_attr]   = $page_settings_model->get_settings($header_fields_attr);
+                $global_settings['table_of_content'][$list_fields_attr]     = $page_settings_model->get_settings($list_fields_attr);
+            }
         } else {
             if(isset($global_settings['table_of_content']['post_id']) && $global_settings['table_of_content']['post_id'] == $post_id) {
                 $global_settings['table_of_content'] = [];
