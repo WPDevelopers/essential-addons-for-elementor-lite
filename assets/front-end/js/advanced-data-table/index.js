@@ -417,16 +417,6 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 	}
 
 	// pro
-
-	// var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
-	// if (select) {
-	// 	select.length = 0;
-		
-	// 	model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
-	// 		select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
-	// 	});
-	// }
-
 	if (event.target.dataset.event == "ea:advTable:connect") {
 		var button = event.target;
 		button.innerHTML = "Connecting";
@@ -473,10 +463,10 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		setTimeout(function() {
 			button.innerHTML = "Connect";
 		}, 2000);
-	}
-	if (event.target.dataset.event == "ea:advTable:disconnect") {
+	} else if (event.target.dataset.event == "ea:advTable:disconnect") {
 		Advanced_Data_Table_Update_View(view, true, {
-			ea_adv_data_table_source_remote_connected: false
+			ea_adv_data_table_source_remote_connected: false,
+			ea_adv_data_table_source_remote_tables: []
 		});
 
 		panel.content.currentView.render();
@@ -567,6 +557,18 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	panel.currentPageView.on("destroy", function() {
 		panel.el.removeEventListener("click", handler);
 	});
+
+
+	// fill prev val - pro
+	var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+
+	if (select) {
+		select.length = 0;
+
+		model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
+			select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+		});
+	}
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
