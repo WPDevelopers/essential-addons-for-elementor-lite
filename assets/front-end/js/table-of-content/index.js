@@ -10,7 +10,6 @@
             if(selector === null || supportTag === undefined){
                 return null;
             }
-            console.log(typeof supportTag );
             var mainSelector = document.querySelector(selector),
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;

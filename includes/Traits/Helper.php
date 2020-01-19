@@ -1950,21 +1950,23 @@ trait Helper
             .eael-toc-global .eael-toc-body
             {background-color:$toc_body_bg;}
             
-            .eael-toc-global ul.eael-toc-list li a,
-            .eael-toc-global ul.eael-toc-list li
+            .eael-toc-global .eael-toc-body ul.eael-toc-list li a,
+            .eael-toc-global .eael-toc-body ul.eael-toc-list li,
+            .eael-toc-global .eael-toc-body ul.eael-toc-list li:before
             {color:$toc_list_color;}
             
             .eael-toc-global ul.eael-toc-list li.active > a,
             .eael-toc-global ul.eael-toc-list li.eael-highlight > a,
             .eael-toc-global ul.eael-toc-list li.active,
-            .eael-toc-global ul.eael-toc-list li.eael-highlight
+            .eael-toc-global ul.eael-toc-list li.eael-highlight,
+            .eael-toc-global ul.eael-toc-list li.eael-highlight:before
             {color:$toc_list_color_active !important;}
-            .eael-toc-global .ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before,
-            {border-bottom:10px solid $toc_list_color_active;}
-            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_3 li.active>a:after > a:before
-            {background-color:$toc_list_color_active;}
+            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before
+            {border-bottom:10px solid $toc_list_color_active !important;}
+            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after
+            {background-color:$toc_list_color_active !important;}
             
-            .eael-toc-global ul.eael-toc-list>li
+            .eael-toc-global ul.eael-toc-list > li
             {color:$toc_list_separator_color !important;}
         ";
         if($toc_list_separator_style!='none'){
