@@ -197,6 +197,22 @@
                 ]
             );
 
+            $element->add_control(
+                'eael_ext_toc_word_wrap',
+                [
+                    'label'         => __('Word Wrap', 'essential-addons-for-elementor-lite'),
+                    'type'          => Controls_Manager::SWITCHER,
+                    'default'       => 'no',
+                    'label_on'      => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off'     => __('No', 'essential-addons-for-elementor-lite'),
+                    'return_value'  => 'yes',
+                    'separator'     => 'before',
+                    'condition'     => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
             $element->end_controls_section();
 
             $element->start_controls_section(

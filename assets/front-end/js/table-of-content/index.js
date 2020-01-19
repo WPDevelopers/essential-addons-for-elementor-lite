@@ -249,6 +249,17 @@
                     }
                 });
 
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_toc_word_wrap",
+                function (newValue) {
+                    var list  = $(".eael-toc-list");
+                    if (newValue === "yes") {
+                        list.addClass('eael-toc-word-wrap');
+                    }else{
+                        list.removeClass('eael-toc-word-wrap');
+                    }
+                });
+
             elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change );
 
             function ea_toc_title_change ( newValue ) {
