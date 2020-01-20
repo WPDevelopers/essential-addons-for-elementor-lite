@@ -558,17 +558,26 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		panel.el.removeEventListener("click", handler);
 	});
 
-
 	// fill prev val - pro
-	var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+	var initRemoteTables = function() {
+		setTimeout(function() {
+			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
 
-	if (select) {
-		select.length = 0;
+			if (select != null && select.length == 0) {
+				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
+					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+				});
+			}
+		}, 50);
+	};
 
-		model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
-			select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
-		});
-	}
+	initRemoteTables();
+
+	panel.el.addEventListener("mousedown", function(e) {
+		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
+			initRemoteTables();
+		}
+	});
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
