@@ -267,7 +267,7 @@
                 [
                     'name' => 'eael_ext_table_of_content_header_typography',
                     'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title,{{WRAPPER}} .eael-toc.expanded .eael-toc-button',
-                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_2
                 ]
             );
 
