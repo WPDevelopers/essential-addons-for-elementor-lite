@@ -152,9 +152,6 @@ class Advanced_Data_Table extends Widget_Base
             'ea_section_adv_data_table_export_import',
             [
                 'label' => esc_html__('Export/Import', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'ea_adv_data_table_source' => 'static',
-                ],
             ]
         );
 
@@ -173,6 +170,9 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Import', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'ea_adv_data_table_source' => 'static',
+                ],
             ]
         );
 
@@ -181,6 +181,9 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'type' => Controls_Manager::RAW_HTML,
                 'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea><label for="ea_adv_table_csv_string_table"><input type="checkbox" id="ea_adv_table_csv_string_table" class="ea_adv_table_csv_string_table"> Import first row as Header</label>',
+                'condition' => [
+                    'ea_adv_data_table_source' => 'static',
+                ],
             ]
         );
 
@@ -192,6 +195,9 @@ class Advanced_Data_Table extends Widget_Base
                 'show_label' => false,
                 'text' => __('Import', 'essential-addons-for-elementor-lite'),
                 'event' => 'ea:advTable:import',
+                'condition' => [
+                    'ea_adv_data_table_source' => 'static',
+                ],
             ]
         );
 
