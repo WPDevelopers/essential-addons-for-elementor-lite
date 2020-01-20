@@ -89,7 +89,7 @@ jQuery(window).on('elementor/frontend/init', function () {
                 });
             }
         });
-
+        /*
         $('#eael-event-calendar-' + calId + ' .fc-right .fc-button-group').css('display', 'none');
         $('#eael-event-calendar-' + calId + ' .fc-right').append('<select id="eaelec-select-mwd-' + calId + '" class="eaelec-select-view form-control">' +
                                 '<option value="month">Month</option>' +
@@ -108,7 +108,7 @@ jQuery(window).on('elementor/frontend/init', function () {
                 $('#eael-event-calendar-' + calId).fullCalendar('changeView', 'agendaDay');
             }
         });
-
+        */
         // When the user clicks on <span> (x), close the modal
         eaelevSpan.onclick = function() {
             eaelevModal.style.display = "none";

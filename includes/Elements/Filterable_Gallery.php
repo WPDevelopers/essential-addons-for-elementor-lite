@@ -3117,6 +3117,7 @@ class Filterable_Gallery extends Widget_Base
     {?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
+                
 				$('.eael-filter-gallery-container').each(function() {
 					var $node_id = '<?php echo $this->get_id(); ?>',
 						$scope = $('[data-id="' + $node_id + '"]'),
@@ -3127,6 +3128,7 @@ class Filterable_Gallery extends Widget_Base
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
                         input = $scope.find('#fg-search-box-input'),
                         searchRegex, buttonFilter, timer;
+                        var delegateAbc = '';
 
 					if ($gallery.closest($scope).length < 1) {
         				return;
@@ -3155,11 +3157,24 @@ class Filterable_Gallery extends Widget_Base
                         }
                      });
 
+                     $('a.eael-magnific-link').magnificPopup({
+                        type: 'image',
+                        gallery: {
+                            enabled: $gallery_enabled,
+                        },
+                        callbacks: {
+                            close: function() {
+                                $('#elementor-lightbox').hide();
+                            }
+                        }
+                    });
+
                     // filter
-                    $scope.on("click", ".control", function() {
+                    $scope.on("click", ".control", function(){
 
                         var $this = $(this);
                         buttonFilter = $( this ).attr('data-filter');
+                        delegateAbc = $(this).attr('data-filter') + ' a.eael-magnific-link';
 
                         if($scope.find('#fg-filter-trigger > span')) {
                             $scope.find('#fg-filter-trigger > span').text($this.text());
@@ -3167,6 +3182,18 @@ class Filterable_Gallery extends Widget_Base
 
                         $this.siblings().removeClass("active");
                         $this.addClass("active");
+
+                        $(delegateAbc).magnificPopup({
+                            type: 'image',
+                            gallery: {
+                                enabled: $gallery_enabled,
+                            },
+                            callbacks: {
+                                close: function() {
+                                    $('#elementor-lightbox').hide();
+                                }
+                            }
+                        });
 
                         $isotope_gallery.isotope();
                     });
@@ -3193,20 +3220,7 @@ class Filterable_Gallery extends Widget_Base
 						$isotope_gallery.isotope('layout');
 					});
 
-
-			        // popup
-					$('.eael-magnific-link', $scope).magnificPopup({
-						type: 'image',
-							gallery: {
-								enabled: $gallery_enabled,
-							},
-						callbacks: {
-							close: function() {
-						    	$('#elementor-lightbox').hide();
-						 	}
-						}
-					});
-
+                    // popup
 					$($scope).magnificPopup({
 			        	delegate: '.eael-magnific-video-link',
 					    type: 'iframe',
@@ -3264,7 +3278,11 @@ class Filterable_Gallery extends Widget_Base
 				        })
 				    });
 
-				});
+                });
+                
+                function loadMagnificPopup(){
+                   return $( '.control.active' ).attr('data-filter');
+                }
 			});
 		</script>
 	<?php
