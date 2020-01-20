@@ -6,7 +6,7 @@
     }
 
     use \Elementor\Controls_Manager;
-    use \Elementor\Core\Schemes\Typography;
+    use \Elementor\Scheme_Typography as Scheme_Typography;
     use \Elementor\Group_Control_Typography;
 
     class Table_of_Content {
@@ -84,7 +84,7 @@
                     'eael_ext_toc_global_display_condition',
                     [
                         'label'     => __('Display On', 'essential-addons-for-elementor-lite'),
-                        'type'      => \Elementor\Controls_Manager::SELECT,
+                        'type'      => Controls_Manager::SELECT,
                         'default'   => 'all',
                         'options'   => [
                             'posts' => __('All Posts', 'essential-addons-for-elementor-lite'),
@@ -267,7 +267,7 @@
                 [
                     'name' => 'eael_ext_table_of_content_header_typography',
                     'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title,{{WRAPPER}} .eael-toc.expanded .eael-toc-button',
-                    'scheme' => Typography::TYPOGRAPHY_1,
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 ]
             );
 
@@ -373,7 +373,7 @@
                 [
                     'name' => 'eael_ext_table_of_content_list_typography',
                     'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li',
-                    'scheme' => Typography::TYPOGRAPHY_1
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 ]
             );
 
