@@ -65,7 +65,7 @@ html {
   background: #fff6f3;
   min-width: 20vh;
   overflow-y: auto;
-  max-height: 100vh;
+  max-height: 70vh;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin-left: -5px;
@@ -220,11 +220,4 @@ html {
 }
 .eael-toc .eael-toc-button {
   display: none;
-}
-
-@media only screen and (max-width: 480px) {
-  .eael-toc .eael-toc-body {
-    max-height: 40vh;
-    overflow-y: auto;
-  }
 }
