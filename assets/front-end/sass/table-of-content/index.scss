@@ -6,6 +6,7 @@ html {
     z-index: 9999;
     width: 300px!important;
     top:30%;
+    transition: all .5s linear;
 
     &.eael-toc-disable {
         display: none;
@@ -14,6 +15,7 @@ html {
         position: fixed;
         top: 50px;
         background: none;
+        transition: all .5s linear;
     }
     &.expanded {
         width: unset !important;

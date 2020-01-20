@@ -200,7 +200,7 @@
             $element->add_control(
                 'eael_ext_toc_word_wrap',
                 [
-                    'label'         => __('Word Wrap', 'essential-addons-for-elementor-lite'),
+                    'label'         => __('Stop Word Wrap', 'essential-addons-for-elementor-lite'),
                     'type'          => Controls_Manager::SWITCHER,
                     'default'       => 'no',
                     'label_on'      => __('Yes', 'essential-addons-for-elementor-lite'),
