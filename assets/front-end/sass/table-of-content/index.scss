@@ -48,6 +48,7 @@ html {
         .eael-toc-title {
             font-size: 18px;
             margin: 0;
+            padding: 0;
             color: #fff;
             font-weight: 400;
             letter-spacing: 0.1px;
@@ -59,8 +60,9 @@ html {
     .eael-toc-body {
         padding: 12px 20px;
         background: #fff6f3;
-        //overflow-y: auto;
-        min-height: 20vh;
+        min-width: 20vh;
+        overflow-y: auto;
+        max-height: 100vh;
         ul.eael-toc-list {
             margin-left: -5px;
             margin-bottom: 0;
@@ -99,8 +101,10 @@ html {
                 &:first-child{
                     border: none;
                 }
-                &.active ul{
-                    display: block;
+                &.active {
+                    ul{
+                        display: block;
+                    }
                 }
             }
 
@@ -110,7 +114,9 @@ html {
                 margin: 0 20px 0 20px;
 
                 &.active{
+
                     color: #ff7d50;
+
                     > a {
                         color: #ff7d50;
                     }
@@ -140,11 +146,19 @@ html {
             }
             &.eael-toc-list-style_2 {
                 li {
+                    &.eael-first-child {
+                        > a {
+                            &:before {
+                                left: -35px !important;
+                            }
+                        }
+                    }
                     &.active {
+                        position:relative;
                         > a {
                             &:before {
                                 position: absolute;
-                                left: 0;
+                                left: -60px;
                                 font-size: 15px;
                                 z-index: 999999;
                                 border-bottom: 10px solid #ff7d50;

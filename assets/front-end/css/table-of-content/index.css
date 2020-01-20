@@ -52,6 +52,7 @@ html {
 .eael-toc .eael-toc-header .eael-toc-title {
   font-size: 18px;
   margin: 0;
+  padding: 0;
   color: #fff;
   font-weight: 400;
   letter-spacing: 0.1px;
@@ -62,7 +63,9 @@ html {
 .eael-toc .eael-toc-body {
   padding: 12px 20px;
   background: #fff6f3;
-  min-height: 20vh;
+  min-width: 20vh;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin-left: -5px;
@@ -132,9 +135,15 @@ html {
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_2 > li:before, .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_3 > li:before {
   content: " ";
 }
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_2 li.eael-first-child > a:before {
+  left: -35px !important;
+}
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_2 li.active {
+  position: relative;
+}
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before {
   position: absolute;
-  left: 0;
+  left: -60px;
   font-size: 15px;
   z-index: 999999;
   border-bottom: 10px solid #ff7d50;
