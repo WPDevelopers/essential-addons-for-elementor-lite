@@ -179,6 +179,7 @@ trait Core
                 'eael_ext_toc_position'                             => $page_settings_model->get_settings('eael_ext_toc_position'),
                 'eael_ext_toc_supported_heading_tag'                => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag'),
                 'eael_ext_toc_collapse_sub_heading'                 => $page_settings_model->get_settings( 'eael_ext_toc_collapse_sub_heading'),
+                'eael_ext_toc_word_wrap'                            => $page_settings_model->get_settings( 'eael_ext_toc_word_wrap'),
 
                 //toc header setting
                 'eael_ext_table_of_content_header_bg'                   => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
