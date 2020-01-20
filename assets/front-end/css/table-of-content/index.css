@@ -7,8 +7,8 @@ html {
   z-index: 9999;
   width: 300px !important;
   top: 30%;
-  -webkit-transition: all .5s linear;
-  transition: all .5s linear;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
 }
 .eael-toc.eael-toc-disable {
   display: none;
@@ -17,8 +17,8 @@ html {
   position: fixed;
   top: 50px;
   background: none;
-  -webkit-transition: all .5s linear;
-  transition: all .5s linear;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
 }
 .eael-toc.expanded {
   width: unset !important;
