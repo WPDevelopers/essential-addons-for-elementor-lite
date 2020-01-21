@@ -71,7 +71,6 @@ html {
             margin-top: 0;
             padding-left: 0;
             > li {
-
                 padding: 8px 0;
                 border-top: .5px dashed #c6c4cf;
                 list-style-position: inside !important;
@@ -114,11 +113,8 @@ html {
                 font-size: 15px;
                 list-style: none;
                 margin: 0 20px 0 20px;
-
                 &.active{
-
                     color: #ff7d50;
-
                     sapn > a {
                         color: #ff7d50;
                     }
@@ -142,7 +138,12 @@ html {
             &.eael-toc-list-style_3 {
                 > li {
                     &:before {
+                        //content: " ";
+
                         content: " ";
+                        font-size: 0;
+                        margin: 0;
+                        font-weight: 100;
                     }
                 }
             }
@@ -185,7 +186,7 @@ html {
                                 font-size: 15px;
                                 z-index: 999999;
                                 content: " ";
-                                margin-top: -6px;
+                                margin-top: -25px;
                                 right: 0;
                                 background: #ff7d50;
                                 height: 31px;
@@ -215,18 +216,31 @@ html {
                     }
                 }
             }
-            //&.eael-toc-word-wrap {
-            //    li {
-            //        a {
-            //            span {
-            //                white-space: nowrap;
-            //                overflow: hidden;
-            //                -o-text-overflow: ellipsis;
-            //                text-overflow: ellipsis;
-            //            }
-            //        }
-            //    }
-            //}
+            &.eael-toc-word-wrap {
+                > li:before {
+                    bottom: 13px !important;
+                }
+                li {
+                    a {
+                        display: inline-block;
+                        span {
+                            width: 150px;
+                            //display: flex;
+                            display: block;
+                            /* height: 30px; */
+                            /* margin: 11px 0px; */
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+                &.eael-toc-number {
+                    li:before{
+                        bottom: 9px !important;
+                    }
+                }
+            }
         }
 
     }
