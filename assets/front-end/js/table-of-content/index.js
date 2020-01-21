@@ -75,6 +75,7 @@
 
                 var createLiNode = document.createElement('LI');
                 var createALink = document.createElement('A');
+                var createSpan = document.createElement('SPAN');
 
                 if( baseTag === parentLevel || sequenceParent){
                     createLiNode.setAttribute('itemscope', '');
@@ -86,7 +87,8 @@
                 createALink.className = 'eael-toc-link';
                 createALink.setAttribute('itemprop', 'item');
                 createALink.setAttribute('href', Linkid);
-                createALink.appendChild(document.createTextNode(currentHeading.textContent))
+                createSpan.appendChild(document.createTextNode(currentHeading.textContent));
+                createALink.appendChild(createSpan);
                 createLiNode.appendChild(createALink);
 
                 ListNode.appendChild(createLiNode);

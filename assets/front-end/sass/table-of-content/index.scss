@@ -119,7 +119,7 @@ html {
 
                     color: #ff7d50;
 
-                    > a {
+                    sapn > a {
                         color: #ff7d50;
                     }
                 }
@@ -215,14 +215,18 @@ html {
                     }
                 }
             }
-            &.eael-toc-word-wrap {
-                li {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    -o-text-overflow: ellipsis;
-                    text-overflow: ellipsis;
-                }
-            }
+            //&.eael-toc-word-wrap {
+            //    li {
+            //        a {
+            //            span {
+            //                white-space: nowrap;
+            //                overflow: hidden;
+            //                -o-text-overflow: ellipsis;
+            //                text-overflow: ellipsis;
+            //            }
+            //        }
+            //    }
+            //}
         }
 
     }
