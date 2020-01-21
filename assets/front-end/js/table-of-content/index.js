@@ -8,6 +8,7 @@
          */
         function eael_toc_content( selector, supportTag ){
             if(selector === null || supportTag === undefined){
+                $('#eael-toc-list').html("<p class='eael-toc-not-found'>Whoops! No headings were found on this page.</p>");
                 return null;
             }
             var mainSelector = document.querySelector(selector),
@@ -39,7 +40,9 @@
             allHeadings = mainContent.querySelectorAll(tagList),
                 baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
                 ListNode    = listId;
-
+            if(allHeadings.length===0){
+                ListNode.innerHTML = "<p class='eael-toc-not-found'>Whoops! No headings were found on this page.</p>";
+            }
             for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
 
                 var currentHeading  = allHeadings[i];
