@@ -4512,6 +4512,232 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 /* ------------------------ */
+/* 17. Infobox Style
+/* ------------------------ */
+/*--- Image/Icon On Top ---*/
+.eael-infobox .infobox-icon {
+  height: auto;
+}
+
+.eael-infobox .infobox-icon .infobox-icon-wrap {
+  display: -webkit-box;
+  display: flex;
+  width: 100%;
+  height: auto;
+  -webkit-transition: .3s;
+  transition: .3s;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.eael-infobox .infobox-icon .infobox-icon-wrap i {
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+/*--- For Content Alignment ---*/
+.eael-infobox-content-align-left .eael-infobox .infobox-icon,
+.eael-infobox-content-align-left .eael-infobox .infobox-content,
+.eael-infobox-content-align-left .eael-infobox .infobox-button {
+  text-align: left;
+}
+
+.eael-infobox-content-align-right .eael-infobox .infobox-icon,
+.eael-infobox-content-align-right .eael-infobox .infobox-content,
+.eael-infobox-content-align-right .eael-infobox .infobox-button {
+  text-align: right;
+}
+
+.eael-infobox-content-align-center .eael-infobox .infobox-icon,
+.eael-infobox-content-align-center .eael-infobox .infobox-content,
+.eael-infobox-content-align-center .eael-infobox .infobox-button {
+  text-align: center;
+}
+
+/*--- For icon background shape ---*/
+.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap {
+  width: 90px;
+  height: 90px;
+  text-align: center;
+}
+
+.eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 0;
+}
+
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 15px;
+}
+
+.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
+.eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
+  border-radius: 50%;
+}
+
+.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
+.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
+  margin-top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+/*--- Infobox Button ---*/
+.eael-infobox .infobox-button a.eael-infobox-button {
+  display: inline-block;
+  padding: 5px 10px;
+  -webkit-transition: all 300ms ease-in-out 0s;
+  transition: all 300ms ease-in-out 0s;
+}
+
+/*--- For icon bg shape alignment ---*/
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: start;
+          justify-content: flex-start;
+}
+
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
+.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: end;
+          justify-content: flex-end;
+}
+
+/*--- Image/Icon On Left ---*/
+.eael-infobox.icon-on-left {
+  position: relative;
+  z-index: 0;
+  display: -webkit-box;
+  display: flex;
+}
+
+.eael-infobox.icon-on-right .infobox-icon-wrap,
+.eael-infobox.icon-on-left .infobox-icon-wrap {
+  -webkit-box-pack: center;
+          justify-content: center;
+  display: -webkit-box !important;
+  display: flex !important;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
+  background: none;
+  border: 0px;
+  text-align: left;
+  height: auto;
+  display: block;
+}
+
+.eael-infobox .infobox-content p {
+  margin: 0 0 15px;
+}
+
+.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
+  margin-top: 0px;
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
+.eael-infobox.icon-on-left .infobox-content {
+  padding-left: 15px;
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
+}
+
+.eael-infobox.icon-on-left .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+/*--- Image/Icon On Right ---*/
+.eael-infobox.icon-on-right {
+  position: relative;
+  z-index: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+          flex-direction: row-reverse;
+}
+
+.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
+  background: none;
+  border: 0px;
+  text-align: right;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
+  margin-top: 0px;
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
+.eael-infobox.icon-on-right .infobox-content {
+  padding-right: 15px;
+  text-align: right;
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.eael-infobox.icon-on-right .infobox-content .title {
+  line-height: 1;
+  margin: 0 0 10px 0;
+}
+
+/*--- Imgae Circle On Top ---*/
+.eael-infobox .infobox-icon img {
+  -webkit-transition: all 300ms ease-in-out 0s;
+  transition: all 300ms ease-in-out 0s;
+}
+
+.eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
+  border-radius: 0;
+}
+
+.eael-infobox-shape-circle .eael-infobox .infobox-icon img,
+.eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
+  border-radius: 50%;
+}
+
+.eael-infobox-shape-radius .eael-infobox .infobox-icon img,
+.eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
+  border-radius: 15px;
+}
+
+/* ------------------------ */
 /* 26. Magnific Popup
 /* ------------------------ */
 /*--- Magnific Popup CSS ---*/
@@ -4972,232 +5198,6 @@ button.mfp-close:hover {
     padding-left: 6px;
     padding-right: 6px;
   }
-}
-
-/* ------------------------ */
-/* 17. Infobox Style
-/* ------------------------ */
-/*--- Image/Icon On Top ---*/
-.eael-infobox .infobox-icon {
-  height: auto;
-}
-
-.eael-infobox .infobox-icon .infobox-icon-wrap {
-  display: -webkit-box;
-  display: flex;
-  width: 100%;
-  height: auto;
-  -webkit-transition: .3s;
-  transition: .3s;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
-}
-
-.eael-infobox .infobox-icon .infobox-icon-wrap i {
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-/*--- For Content Alignment ---*/
-.eael-infobox-content-align-left .eael-infobox .infobox-icon,
-.eael-infobox-content-align-left .eael-infobox .infobox-content,
-.eael-infobox-content-align-left .eael-infobox .infobox-button {
-  text-align: left;
-}
-
-.eael-infobox-content-align-right .eael-infobox .infobox-icon,
-.eael-infobox-content-align-right .eael-infobox .infobox-content,
-.eael-infobox-content-align-right .eael-infobox .infobox-button {
-  text-align: right;
-}
-
-.eael-infobox-content-align-center .eael-infobox .infobox-icon,
-.eael-infobox-content-align-center .eael-infobox .infobox-content,
-.eael-infobox-content-align-center .eael-infobox .infobox-button {
-  text-align: center;
-}
-
-/*--- For icon background shape ---*/
-.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap {
-  width: 90px;
-  height: 90px;
-  text-align: center;
-}
-
-.eael-infobox-icon-hover-bg-shape-square:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 0;
-}
-
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-hover-bg-shape-radius:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 15px;
-}
-
-.eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
-}
-
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
-.eael-infobox-icon-hover-bg-shape-circle:hover .infobox-icon .infobox-icon-wrap {
-  border-radius: 50%;
-}
-
-.eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
-.eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
-  margin-top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-
-/*--- Infobox Button ---*/
-.eael-infobox .infobox-button a.eael-infobox-button {
-  display: inline-block;
-  padding: 5px 10px;
-  -webkit-transition: all 300ms ease-in-out 0s;
-  transition: all 300ms ease-in-out 0s;
-}
-
-/*--- For icon bg shape alignment ---*/
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: start;
-          justify-content: flex-start;
-}
-
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-}
-
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
-.eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: end;
-          justify-content: flex-end;
-}
-
-/*--- Image/Icon On Left ---*/
-.eael-infobox.icon-on-left {
-  position: relative;
-  z-index: 0;
-  display: -webkit-box;
-  display: flex;
-}
-
-.eael-infobox.icon-on-right .infobox-icon-wrap,
-.eael-infobox.icon-on-left .infobox-icon-wrap {
-  -webkit-box-pack: center;
-          justify-content: center;
-  display: -webkit-box !important;
-  display: flex !important;
-  -webkit-box-align: center;
-          align-items: center;
-}
-
-.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
-  background: none;
-  border: 0px;
-  text-align: left;
-  height: auto;
-  display: block;
-}
-
-.eael-infobox .infobox-content p {
-  margin: 0 0 15px;
-}
-
-.eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
-  margin-top: 0px;
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
-}
-
-.eael-infobox.icon-on-left .infobox-content {
-  padding-left: 15px;
-  -webkit-box-flex: 1;
-          flex: 1 1 auto;
-}
-
-.eael-infobox.icon-on-left .infobox-content .title {
-  line-height: 1;
-  margin: 0 0 10px 0;
-}
-
-/*--- Image/Icon On Right ---*/
-.eael-infobox.icon-on-right {
-  position: relative;
-  z-index: 0;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-          flex-direction: row-reverse;
-}
-
-.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
-  background: none;
-  border: 0px;
-  text-align: right;
-  width: auto;
-  height: auto;
-  display: block;
-}
-
-.eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
-  margin-top: 0px;
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
-}
-
-.eael-infobox.icon-on-right .infobox-content {
-  padding-right: 15px;
-  text-align: right;
-  -webkit-box-flex: 1;
-          flex: 1 1 auto;
-  box-sizing: border-box;
-}
-
-.eael-infobox.icon-on-right .infobox-content .title {
-  line-height: 1;
-  margin: 0 0 10px 0;
-}
-
-/*--- Imgae Circle On Top ---*/
-.eael-infobox .infobox-icon img {
-  -webkit-transition: all 300ms ease-in-out 0s;
-  transition: all 300ms ease-in-out 0s;
-}
-
-.eael-infobox-hover-img-shape-square:hover .eael-infobox .infobox-icon img {
-  border-radius: 0;
-}
-
-.eael-infobox-shape-circle .eael-infobox .infobox-icon img,
-.eael-infobox-hover-img-shape-circle:hover .eael-infobox .infobox-icon img {
-  border-radius: 50%;
-}
-
-.eael-infobox-shape-radius .eael-infobox .infobox-icon img,
-.eael-infobox-hover-img-shape-radius:hover .eael-infobox .infobox-icon img {
-  border-radius: 15px;
 }
 
 /*----------------------*/
@@ -7051,36 +7051,6 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   }
 }
 
-.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap .eael-reading-progress {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  z-index: 999999;
-}
-.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
-  top: unset;
-  bottom: 0;
-}
-.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
-  height: 5px;
-  background-color: #1fd18e;
-  width: 0%;
-  -webkit-transition: width 50ms ease;
-  transition: width 50ms ease;
-}
-
 @-webkit-keyframes animateStripe {
   0% {
     -webkit-transform: translate(0, 0);
@@ -7323,6 +7293,36 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 .eael-progressbar-circle-container.right > div,
 .eael-progressbar-box-container.right > div {
   margin: 0 0 0 auto;
+}
+
+.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap .eael-reading-progress {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  z-index: 999999;
+}
+.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
+  top: unset;
+  bottom: 0;
+}
+.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
+  height: 5px;
+  background-color: #1fd18e;
+  width: 0%;
+  -webkit-transition: width 50ms ease;
+  transition: width 50ms ease;
 }
 
 /* Overlay Styles */
@@ -7767,126 +7767,8 @@ html {
 .eael-toc .eael-toc-button {
   display: none;
 }
-
-/*----------------------------*/
-/* 07. Team Members Styles
-/*----------------------------*/
-.eael-team-item {
-  overflow: hidden;
-  position: relative;
-}
-
-.team-avatar-rounded figure img {
-  border-radius: 50%;
-  height: auto;
-}
-
-.eael-team-image > figure {
-  margin: 0;
-  padding: 0;
-}
-
-.eael-team-image > figure img {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-team-item .eael-team-content {
-  padding: 10px;
-}
-
-.eael-team-item .eael-team-member-name {
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  margin: 5px 0;
-  text-transform: uppercase;
-}
-
-.eael-team-item .eael-team-member-position {
-  font-size: 14px;
-  font-weight: normal;
-  letter-spacing: 0.05em;
-  margin: 5px 0 10px;
-  text-transform: uppercase;
-}
-
-.eael-team-item .eael-team-content,
-.eael-team-item .eael-team-content .eael-team-text {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.eael-team-content > ul {
-  margin: 0;
-  padding: 0;
-}
-
-.eael-team-content li {
-  display: inline-block;
-  list-style: outside none none;
-  margin-right: 10px;
-  text-align: center;
-}
-
-.eael-team-content li a {
-  font-size: 2.5rem;
-}
-
-.eael-team-align-left .eael-team-item .eael-team-member-name,
-.eael-team-align-left .eael-team-item .eael-team-member-position,
-.eael-team-align-left .eael-team-item .eael-team-text,
-.eael-team-align-left .eael-team-item .eael-team-content p,
-.eael-team-align-left .eael-team-item .eael-team-content ul,
-.eael-team-align-left .eael-team-item .eael-team-content li {
-  text-align: left;
-}
-
-.eael-team-align-right .eael-team-item .eael-team-member-name,
-.eael-team-align-right .eael-team-item .eael-team-member-position,
-.eael-team-align-right .eael-team-item .eael-team-text,
-.eael-team-align-right .eael-team-item .eael-team-content p,
-.eael-team-align-right .eael-team-item .eael-team-content ul,
-.eael-team-align-right .eael-team-item .eael-team-content li {
-  text-align: right;
-}
-
-.eael-team-align-centered .eael-team-item .eael-team-member-name,
-.eael-team-align-centered .eael-team-item .eael-team-member-position,
-.eael-team-align-centered .eael-team-item .eael-team-text,
-.eael-team-align-centered .eael-team-item .eael-team-content p,
-.eael-team-align-centered .eael-team-item .eael-team-content ul,
-.eael-team-align-centered .eael-team-item .eael-team-content li {
-  text-align: center;
-}
-
-.eael-team-item.eael-team-members-overlay .eael-team-content {
-  bottom: 10px;
-  left: 10px;
-  margin-bottom: 0;
-  padding-top: 15%;
-  opacity: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  -webkit-transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-}
-
-.eael-team-item.eael-team-members-overlay:hover .eael-team-content {
-  opacity: 1;
-}
-
-.eael-team-member-social-link > a {
-  display: inline-block;
-  -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-}
-
-.eael-team-member-social-link > a:focus {
-  outline: none;
+.eael-toc .eael-toc-not-found {
+  color: #a94442;
 }
 
 /*----------------------------*/
@@ -8267,6 +8149,127 @@ span.eael-testimonial-quote {
 
 .content-bottom-icon-title-inline .eael-testimonial-align-right .eael-testimonial-text {
   text-align: right;
+}
+
+/*----------------------------*/
+/* 07. Team Members Styles
+/*----------------------------*/
+.eael-team-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.team-avatar-rounded figure img {
+  border-radius: 50%;
+  height: auto;
+}
+
+.eael-team-image > figure {
+  margin: 0;
+  padding: 0;
+}
+
+.eael-team-image > figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-team-item .eael-team-content {
+  padding: 10px;
+}
+
+.eael-team-item .eael-team-member-name {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+
+.eael-team-item .eael-team-member-position {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  margin: 5px 0 10px;
+  text-transform: uppercase;
+}
+
+.eael-team-item .eael-team-content,
+.eael-team-item .eael-team-content .eael-team-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.eael-team-content > ul {
+  margin: 0;
+  padding: 0;
+}
+
+.eael-team-content li {
+  display: inline-block;
+  list-style: outside none none;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.eael-team-content li a {
+  font-size: 2.5rem;
+}
+
+.eael-team-align-left .eael-team-item .eael-team-member-name,
+.eael-team-align-left .eael-team-item .eael-team-member-position,
+.eael-team-align-left .eael-team-item .eael-team-text,
+.eael-team-align-left .eael-team-item .eael-team-content p,
+.eael-team-align-left .eael-team-item .eael-team-content ul,
+.eael-team-align-left .eael-team-item .eael-team-content li {
+  text-align: left;
+}
+
+.eael-team-align-right .eael-team-item .eael-team-member-name,
+.eael-team-align-right .eael-team-item .eael-team-member-position,
+.eael-team-align-right .eael-team-item .eael-team-text,
+.eael-team-align-right .eael-team-item .eael-team-content p,
+.eael-team-align-right .eael-team-item .eael-team-content ul,
+.eael-team-align-right .eael-team-item .eael-team-content li {
+  text-align: right;
+}
+
+.eael-team-align-centered .eael-team-item .eael-team-member-name,
+.eael-team-align-centered .eael-team-item .eael-team-member-position,
+.eael-team-align-centered .eael-team-item .eael-team-text,
+.eael-team-align-centered .eael-team-item .eael-team-content p,
+.eael-team-align-centered .eael-team-item .eael-team-content ul,
+.eael-team-align-centered .eael-team-item .eael-team-content li {
+  text-align: center;
+}
+
+.eael-team-item.eael-team-members-overlay .eael-team-content {
+  bottom: 10px;
+  left: 10px;
+  margin-bottom: 0;
+  padding-top: 15%;
+  opacity: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  -webkit-transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
+.eael-team-item.eael-team-members-overlay:hover .eael-team-content {
+  opacity: 1;
+}
+
+.eael-team-member-social-link > a {
+  display: inline-block;
+  -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
+.eael-team-member-social-link > a:focus {
+  outline: none;
 }
 
 /*------------------------------*/

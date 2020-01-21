@@ -220,3 +220,6 @@ html {
 .eael-toc .eael-toc-button {
   display: none;
 }
+.eael-toc .eael-toc-not-found {
+  color: #a94442;
+}
