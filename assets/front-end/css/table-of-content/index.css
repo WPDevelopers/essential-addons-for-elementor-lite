@@ -120,7 +120,7 @@ html {
 .eael-toc .eael-toc-body ul.eael-toc-list li.active {
   color: #ff7d50;
 }
-.eael-toc .eael-toc-body ul.eael-toc-list li.active > a {
+.eael-toc .eael-toc-body ul.eael-toc-list li.active sapn > a {
   color: #ff7d50;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li.eael-highlight {
@@ -183,11 +183,6 @@ html {
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number > li ul {
   counter-reset: item;
-}
-.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .eael-toc .eael-toc-close {
   position: absolute;
