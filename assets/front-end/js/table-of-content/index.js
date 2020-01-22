@@ -43,10 +43,6 @@
             allHeadings = mainContent.querySelectorAll(tagList),
                 baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
                 ListNode    = listId;
-            if(allHeadings.length===0){
-                document.getElementById("eael-toc").classList.add("eael-toc-disable");
-                return null;
-            }
             listId.innerHTML='';
             for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
 
