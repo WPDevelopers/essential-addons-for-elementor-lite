@@ -107,6 +107,10 @@ jQuery(window).on('elementor/frontend/init', function () {
         });
 
         element.parent().css('height', element.height() + 'px');
+
+        $(window).resize(function() {
+            element.parent().css('height', element.height() + 'px');
+        });
     });
 
 });
