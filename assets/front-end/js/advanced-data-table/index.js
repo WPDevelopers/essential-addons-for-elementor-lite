@@ -86,16 +86,16 @@ var Advanced_Data_Table = function($scope, $) {
 
 		if (table.classList.contains("ea-advanced-data-table-static")) {
 			attr = "";
+
+			// insert editable area
+			table.querySelectorAll("th, td").forEach(function(el) {
+				var value = el.innerHTML;
+
+				if (value.indexOf('<textarea rows="1">') !== 0) {
+					el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				}
+			});
 		}
-
-		// insert editable area
-		table.querySelectorAll("th, td").forEach(function(el) {
-			var value = el.innerHTML;
-
-			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
-			}
-		});
 
 		// drag
 		table.addEventListener("mousedown", function(e) {
@@ -341,15 +341,21 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 			var row = [];
 			var cols = rows[i].querySelectorAll("th, td");
 
-			for (var j = 0; j < cols.length; j++) {
-				row.push(
-					JSON.stringify(
-						cols[j]
-							.querySelector("textarea")
-							.value.replace(/(\r\n|\n|\r)/gm, " ")
-							.trim()
-					)
-				);
+			if (table.classList.contains("ea-advanced-data-table-static")) {
+				for (var j = 0; j < cols.length; j++) {
+					row.push(
+						JSON.stringify(
+							cols[j]
+								.querySelector("textarea")
+								.value.replace(/(\r\n|\n|\r)/gm, " ")
+								.trim()
+						)
+					);
+				}
+			} else {
+				for (var j = 0; j < cols.length; j++) {
+					row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+				}
 			}
 
 			csv.push(row.join(","));
