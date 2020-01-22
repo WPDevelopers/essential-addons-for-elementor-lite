@@ -130,7 +130,6 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#FFF',
             ]
         );
 
@@ -138,8 +137,7 @@ class Event_Calendar extends Widget_Base
             'eael_event_text_color',
             [
                 'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#555',
+                'type' => Controls_Manager::COLOR
             ]
         );
 
@@ -147,8 +145,7 @@ class Event_Calendar extends Widget_Base
             'eael_event_border_color',
             [
                 'label' => __('Event Border Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#6030FF',
+                'type' => Controls_Manager::COLOR
             ]
         );
 
@@ -518,7 +515,6 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#009900',
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper' => 'border-color: {{VALUE}};',
                 ],
@@ -542,9 +538,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Title Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#242424',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar h2' => 'color: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-toolbar h2' => 'color: {{VALUE}};',
                 ],
                 'separator' => 'before',
             ]
@@ -577,9 +572,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Today Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#F2F2F2',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}};',
                 ],
                 'separator' => 'before',
             ]
@@ -599,9 +593,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Button Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#FFF',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar .fc-button' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-toolbar .fc-button' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -611,9 +604,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Button Hover Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#EAEAEA',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar .fc-button:hover' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-toolbar .fc-button:hover' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -623,9 +615,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Button Active Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#EAEAEA',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar .fc-state-active' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-toolbar .fc-state-active' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -635,9 +626,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Today Button Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#EAEAEA',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar .fc-today-button' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-toolbar .fc-today-button' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -690,9 +680,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#F9F9F9',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'background: {{VALUE}};',
                 ],
             ]
         );
@@ -712,9 +701,8 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Font Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#242424',
                 'selectors' => [
-                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'color: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -741,7 +729,7 @@ class Event_Calendar extends Widget_Base
                 'default' => 'center',
                 'toggle' => true,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'text-align: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -778,8 +766,8 @@ class Event_Calendar extends Widget_Base
                 'default' => 'center',
                 'toggle' => true,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-day-number' => 'float: unset!important',
-                    '{{WRAPPER}} .fc-view table thead:first-child tr:first-child td' => 'text-align: {{VALUE}}!important',
+                    '{{WRAPPER}} .fc-day-number' => 'float: unset',
+                    '{{WRAPPER}} .fc-view table thead:first-child tr:first-child td' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -799,7 +787,6 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Font Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#242424',
                 'selectors' => [
                     '{{WRAPPER}} .fc-day-number' => 'color: {{VALUE}}',
                 ],
@@ -811,7 +798,6 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#F9F9F9',
                 'selectors' => [
                     '{{WRAPPER}} .fc-day-number' => 'background: {{VALUE}}',
                 ],
@@ -925,7 +911,6 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Title Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#242424',
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-header h2' => 'color: {{VALUE}}',
                 ],
@@ -947,10 +932,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Date Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#6030FF',
                 'selectors' => [
-                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}}!important',
-                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end' => 'color: {{VALUE}}!important',
+                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -970,7 +954,6 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Details Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#CC0000',
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-footer a.eaelec-event-details-link' => 'color: {{VALUE}}',
                 ],
