@@ -220,11 +220,19 @@ html {
                 > li:before {
                     bottom: 13px !important;
                 }
+
                 li {
+                    &.eael-first-child{
+                        a {
+                            span{
+                                width: 190px;
+                            }
+                        }
+                    }
                     a {
                         display: inline-block;
                         span {
-                            width: 190px;
+                            width: 120px !important;
                             display: block;
                             white-space: nowrap;
                             overflow: hidden;
