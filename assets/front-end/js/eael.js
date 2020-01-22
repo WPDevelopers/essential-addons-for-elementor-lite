@@ -21066,6 +21066,103 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var AdvanceTabHandler = function($scope, $) {
+    var $currentTab = $scope.find(".eael-advance-tabs"),
+        $currentTabId = "#" + $currentTab.attr("id").toString();
+
+    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-nav > ul li")
+                .removeClass("active")
+                .addClass("inactive");
+            $(this).removeClass("inactive");
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-content div").each(function(index) {
+        if ($(this).hasClass("active-default")) {
+            $($currentTabId + " .eael-tabs-content > div").removeClass(
+                "active"
+            );
+        } else {
+            if (index == 0) {
+                $(this)
+                    .removeClass("inactive")
+                    .addClass("active");
+            }
+        }
+    });
+
+    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
+        var currentTabIndex = $(this).index();
+        var tabsContainer = $(this).closest(".eael-advance-tabs");
+
+        var tabsNav = $(tabsContainer)
+            .children(".eael-tabs-nav")
+            .children("ul")
+            .children("li");
+        var tabsContent = $(tabsContainer)
+            .children(".eael-tabs-content")
+            .children("div");
+
+        $(this)
+            .parent("li")
+            .addClass("active");
+
+        $(tabsNav)
+            .removeClass("active active-default")
+            .addClass("inactive");
+        $(this)
+            .addClass("active")
+            .removeClass("inactive");
+
+        $(tabsContent)
+            .removeClass("active")
+            .addClass("inactive");
+        $(tabsContent)
+            .eq(currentTabIndex)
+            .addClass("active")
+            .removeClass("inactive");
+
+        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
+            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
+            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+
+        if($postGridGallery.length) {
+            $postGridGallery.isotope();
+        }
+
+        if($twitterfeedGallery.length) {
+            $twitterfeedGallery.isotope("layout");
+        }
+        
+        if($filterGallery.length) {
+            $filterGallery.isotope("layout");
+        }
+        
+        if($instaGallery.length) {
+            $instaGallery.isotope("layout");
+        }
+
+        $(tabsContent).each(function(index) {
+            $(this).removeClass("active-default");
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-tabs.default",
+        AdvanceTabHandler
+    );
+});
+
 var ContentTicker = function($scope, $) {
     var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
         $items =
@@ -21185,103 +21282,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var AdvanceTabHandler = function($scope, $) {
-    var $currentTab = $scope.find(".eael-advance-tabs"),
-        $currentTabId = "#" + $currentTab.attr("id").toString();
-
-    $($currentTabId + " .eael-tabs-nav ul li").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-nav > ul li")
-                .removeClass("active")
-                .addClass("inactive");
-            $(this).removeClass("inactive");
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-content div").each(function(index) {
-        if ($(this).hasClass("active-default")) {
-            $($currentTabId + " .eael-tabs-content > div").removeClass(
-                "active"
-            );
-        } else {
-            if (index == 0) {
-                $(this)
-                    .removeClass("inactive")
-                    .addClass("active");
-            }
-        }
-    });
-
-    $($currentTabId + " .eael-tabs-nav ul li").click(function() {
-        var currentTabIndex = $(this).index();
-        var tabsContainer = $(this).closest(".eael-advance-tabs");
-
-        var tabsNav = $(tabsContainer)
-            .children(".eael-tabs-nav")
-            .children("ul")
-            .children("li");
-        var tabsContent = $(tabsContainer)
-            .children(".eael-tabs-content")
-            .children("div");
-
-        $(this)
-            .parent("li")
-            .addClass("active");
-
-        $(tabsNav)
-            .removeClass("active active-default")
-            .addClass("inactive");
-        $(this)
-            .addClass("active")
-            .removeClass("inactive");
-
-        $(tabsContent)
-            .removeClass("active")
-            .addClass("inactive");
-        $(tabsContent)
-            .eq(currentTabIndex)
-            .addClass("active")
-            .removeClass("inactive");
-
-        var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
-            $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
-            $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
-
-        if($postGridGallery.length) {
-            $postGridGallery.isotope();
-        }
-
-        if($twitterfeedGallery.length) {
-            $twitterfeedGallery.isotope("layout");
-        }
-        
-        if($filterGallery.length) {
-            $filterGallery.isotope("layout");
-        }
-        
-        if($instaGallery.length) {
-            $instaGallery.isotope("layout");
-        }
-
-        $(tabsContent).each(function(index) {
-            $(this).removeClass("active-default");
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-tabs.default",
-        AdvanceTabHandler
-    );
-});
-
 var CountDown = function($scope, $) {
     var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
         $countdown_id =
@@ -22215,7 +22215,7 @@ function RunStickyPlayer(elem) {
          */
         function eael_toc_content( selector, supportTag ){
             if(selector === null || supportTag === undefined){
-                $('#eael-toc-list').html("<p class='eael-toc-not-found'>Whoops! No headings found</p>");
+                //$('#eael-toc-list').html("<p class='eael-toc-not-found'>Whoops! No headings found</p>");
                 return null;
             }
             var mainSelector = document.querySelector(selector),
@@ -22242,14 +22242,15 @@ function RunStickyPlayer(elem) {
             var tagList     = supportTag;
             var listId      = document.getElementById('eael-toc-list');
             var mainContent = document.querySelector(selector);
-            listId.innerHTML='';
+
 
             allHeadings = mainContent.querySelectorAll(tagList),
                 baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
                 ListNode    = listId;
             if(allHeadings.length===0){
-                ListNode.innerHTML = "<p class='eael-toc-not-found'>Whoops! No headings found</p>";
+                return null;
             }
+            listId.innerHTML='';
             for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
 
                 var currentHeading  = allHeadings[i];
@@ -22283,25 +22284,24 @@ function RunStickyPlayer(elem) {
                     ListNode = listId;
                 }
 
-                var createLiNode = document.createElement('LI');
-                var createALink = document.createElement('A');
-                var createSpan = document.createElement('SPAN');
+                var liNode = document.createElement('LI');
+                var anchorTag = document.createElement('A');
+                var spanTag = document.createElement('SPAN');
 
                 if( baseTag === parentLevel || sequenceParent){
-                    createLiNode.setAttribute('itemscope', '');
-                    createLiNode.setAttribute('itemtype', 'http://schema.org/ListItem');
-                    createLiNode.setAttribute('itemprop', 'itemListElement');
+                    liNode.setAttribute('itemscope', '');
+                    liNode.setAttribute('itemtype', 'http://schema.org/ListItem');
+                    liNode.setAttribute('itemprop', 'itemListElement');
                 }
 
                 Linkid = '#'+i+'-'+ eael_build_id( currentHeading.textContent );
-                createALink.className = 'eael-toc-link';
-                createALink.setAttribute('itemprop', 'item');
-                createALink.setAttribute('href', Linkid);
-                createSpan.appendChild(document.createTextNode(currentHeading.textContent));
-                createALink.appendChild(createSpan);
-                createLiNode.appendChild(createALink);
-
-                ListNode.appendChild(createLiNode);
+                anchorTag.className = 'eael-toc-link';
+                anchorTag.setAttribute('itemprop', 'item');
+                anchorTag.setAttribute('href', Linkid);
+                spanTag.appendChild(document.createTextNode(currentHeading.textContent));
+                anchorTag.appendChild(spanTag);
+                liNode.appendChild(anchorTag);
+                ListNode.appendChild(liNode);
             }
         }
 

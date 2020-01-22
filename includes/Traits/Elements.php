@@ -145,7 +145,6 @@ trait Elements
         $page_settings_model    = $page_settings_manager->get_model(get_the_ID());
         $global_settings        = get_option('eael_global_settings');
 
-
         if(!$this->eael_toc_page_scope( $page_settings_model,$global_settings )){
             return '';
         }
@@ -191,7 +190,7 @@ trait Elements
                          <h2 class='eael-toc-title'>{$toc_title}</h2>
                     </div>
                     <div class='eael-toc-body'>
-                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'><p class='eael-toc-not-found'>".__('Whoops! No headings found <a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a>','essential-addons-for-elementor-lite')."</p></ul>
                     </div>
                     <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
                 </div>";
