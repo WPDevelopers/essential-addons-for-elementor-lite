@@ -190,7 +190,7 @@ trait Elements
                          <h2 class='eael-toc-title'>{$toc_title}</h2>
                     </div>
                     <div class='eael-toc-body'>
-                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'><p class='eael-toc-not-found'>".__('Whoops! No headings found <a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a>','essential-addons-for-elementor-lite')."</p></ul>
+                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
                     </div>
                     <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
                 </div>";
