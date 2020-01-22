@@ -8,7 +8,7 @@
          */
         function eael_toc_content( selector, supportTag ){
             if(selector === null || supportTag === undefined){
-                $('#eael-toc-list').html("<p class='eael-toc-not-found'>Whoops! No headings found</p>");
+                //$('#eael-toc-list').html("<p class='eael-toc-not-found'>Whoops! No headings found</p>");
                 return null;
             }
             var mainSelector = document.querySelector(selector),
@@ -35,14 +35,15 @@
             var tagList     = supportTag;
             var listId      = document.getElementById('eael-toc-list');
             var mainContent = document.querySelector(selector);
-            listId.innerHTML='';
+
 
             allHeadings = mainContent.querySelectorAll(tagList),
                 baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
                 ListNode    = listId;
             if(allHeadings.length===0){
-                ListNode.innerHTML = "<p class='eael-toc-not-found'>Whoops! No headings found</p>";
+                return null;
             }
+            listId.innerHTML='';
             for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
 
                 var currentHeading  = allHeadings[i];
@@ -76,25 +77,24 @@
                     ListNode = listId;
                 }
 
-                var createLiNode = document.createElement('LI');
-                var createALink = document.createElement('A');
-                var createSpan = document.createElement('SPAN');
+                var liNode = document.createElement('LI');
+                var anchorTag = document.createElement('A');
+                var spanTag = document.createElement('SPAN');
 
                 if( baseTag === parentLevel || sequenceParent){
-                    createLiNode.setAttribute('itemscope', '');
-                    createLiNode.setAttribute('itemtype', 'http://schema.org/ListItem');
-                    createLiNode.setAttribute('itemprop', 'itemListElement');
+                    liNode.setAttribute('itemscope', '');
+                    liNode.setAttribute('itemtype', 'http://schema.org/ListItem');
+                    liNode.setAttribute('itemprop', 'itemListElement');
                 }
 
                 Linkid = '#'+i+'-'+ eael_build_id( currentHeading.textContent );
-                createALink.className = 'eael-toc-link';
-                createALink.setAttribute('itemprop', 'item');
-                createALink.setAttribute('href', Linkid);
-                createSpan.appendChild(document.createTextNode(currentHeading.textContent));
-                createALink.appendChild(createSpan);
-                createLiNode.appendChild(createALink);
-
-                ListNode.appendChild(createLiNode);
+                anchorTag.className = 'eael-toc-link';
+                anchorTag.setAttribute('itemprop', 'item');
+                anchorTag.setAttribute('href', Linkid);
+                spanTag.appendChild(document.createTextNode(currentHeading.textContent));
+                anchorTag.appendChild(spanTag);
+                liNode.appendChild(anchorTag);
+                ListNode.appendChild(liNode);
             }
         }
 
