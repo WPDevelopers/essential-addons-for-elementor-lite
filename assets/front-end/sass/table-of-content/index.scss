@@ -223,9 +223,9 @@ html {
 
                 li {
                     &.eael-first-child{
-                        a {
+                        > a {
                             span{
-                                width: 190px;
+                                width: 190px !important;
                             }
                         }
                     }
