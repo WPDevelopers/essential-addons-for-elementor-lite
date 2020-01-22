@@ -213,6 +213,28 @@
                 ]
             );
 
+            $element->add_control(
+                'eael_ext_table_of_content_additional_information',
+                [
+                    'label' => __( 'Additional Information', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_ad_warning_text',
+                [
+                    'type'              => Controls_Manager::RAW_HTML,
+                    'raw'               => __('Need extra info about TOC <strong><a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'content_classes'   => 'eael-warning',
+                    'separator'         => 'before',
+                    'condition'         => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
             $element->end_controls_section();
 
             $element->start_controls_section(
