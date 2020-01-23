@@ -217,12 +217,11 @@ html {
                 }
             }
             &.eael-toc-word-wrap {
-                > li:before {
-                    bottom: 13px !important;
-                }
-
                 li {
                     &.eael-first-child{
+                        &:before{
+                            //bottom: 5px !important;
+                        }
                         > a {
                             span{
                                 width: 190px !important;
@@ -230,7 +229,7 @@ html {
                         }
                     }
                     a {
-                        display: inline-block;
+                        display: inline-flex;
                         span {
                             width: 120px !important;
                             display: block;
@@ -241,8 +240,8 @@ html {
                     }
                 }
                 &.eael-toc-number {
-                    li:before{
-                        bottom: 9px !important;
+                    li:not(.eael-first-child):before{
+                        //bottom: 3px !important;
                     }
                 }
             }
