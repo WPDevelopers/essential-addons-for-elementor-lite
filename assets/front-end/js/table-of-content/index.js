@@ -13,10 +13,7 @@
             var mainSelector = document.querySelector(selector),
                 allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
                 c =0;
-            if(allSupportTag.length===0){
-                document.getElementById("eael-toc").classList.add("eael-toc-disable");
-                return null;
-            }
+
             allSupportTag.forEach(function( el ) {
                 el.id = c+"-"+ eael_build_id( el.innerHTML );
                 el.classList.add("eael-heading-content");
@@ -44,6 +41,9 @@
                 baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
                 ListNode    = listId;
             listId.innerHTML='';
+            if(allHeadings.length>0){
+                document.getElementById("eael-toc").classList.remove("eael-toc-disable");
+            }
             for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
 
                 var currentHeading  = allHeadings[i];

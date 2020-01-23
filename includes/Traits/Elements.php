@@ -157,7 +157,7 @@ trait Elements
                 return $extensions;
             });
         }
-        $el_class = 'eael-toc';
+        $el_class = 'eael-toc eael-toc-disable';
 
         if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['enabled'])){
             $el_class .=' eael-toc-global';
