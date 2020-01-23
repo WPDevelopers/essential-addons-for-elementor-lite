@@ -187,14 +187,12 @@ html {
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number > li ul {
   counter-reset: item;
 }
-.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap > li:before {
-  bottom: 13px !important;
-}
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li.eael-first-child > a span {
   width: 190px !important;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a {
-  display: inline-block;
+  display: -webkit-inline-box;
+  display: inline-flex;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a span {
   width: 120px !important;
@@ -202,9 +200,6 @@ html {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap.eael-toc-number li:before {
-  bottom: 9px !important;
 }
 .eael-toc .eael-toc-close {
   position: absolute;
