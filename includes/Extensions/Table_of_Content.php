@@ -214,15 +214,6 @@
             );
 
             $element->add_control(
-                'eael_ext_table_of_content_additional_information',
-                [
-                    'label' => __( 'Additional Information', 'essential-addons-for-elementor-lite' ),
-                    'type' => Controls_Manager::HEADING,
-                    'separator' => 'before',
-                ]
-            );
-
-            $element->add_control(
                 'eael_ext_toc_ad_warning_text',
                 [
                     'type'              => Controls_Manager::RAW_HTML,
