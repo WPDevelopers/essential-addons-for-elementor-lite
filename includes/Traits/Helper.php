@@ -1959,6 +1959,7 @@ trait Helper
             .eael-toc-global ul.eael-toc-list li.active > a,
             .eael-toc-global ul.eael-toc-list li.eael-highlight > a,
             .eael-toc-global ul.eael-toc-list li.active,
+            .eael-toc-global ul.eael-toc-list li.active:before,
             .eael-toc-global ul.eael-toc-list li.eael-highlight,
             .eael-toc-global ul.eael-toc-list li.eael-highlight:before
             {color:$toc_list_color_active !important;}
