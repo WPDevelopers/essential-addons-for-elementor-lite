@@ -179,7 +179,7 @@
                 toc_style_class    += (pageSetting.eael_ext_toc_list_icon ==='number')?' eael-toc-number':' ';
 
 
-            return '<div id="eael-toc" class="eael-toc '+el_class+'">' +
+            return '<div id="eael-toc" class="eael-toc eael-toc-disable '+el_class+'">' +
                 '<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">'+ title + '</h2></div>' +
                 '<div class="eael-toc-body"><ul id="eael-toc-list" class="'+toc_style_class+'"></ul></div>' +
                 '<button class="eael-toc-button"><i class="'+icon+'"></i><span>'+ title +'</span></button>' +
