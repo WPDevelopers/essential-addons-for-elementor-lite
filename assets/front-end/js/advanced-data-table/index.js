@@ -514,22 +514,36 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 				// drag
 				table.addEventListener("mouseup", function(e) {
+					clearTimeout(advanced_data_table_timeout);
+
 					if (e.target.tagName.toLowerCase() === "th") {
-						clearTimeout(advanced_data_table_timeout);
+						if (table.classList.contains("ea-advanced-data-table-static")) {
+							// clone current table
+							var origTable = table.cloneNode(true);
 
-						// clone current table
-						var origTable = table.cloneNode(true);
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
 
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function(el) {
-							var value = el.querySelector("textarea").value;
-							el.innerHTML = value;
-						});
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						} else {
+							var widths = [];
 
-						// update table
-						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML
-						});
+							// collect width of th
+							table.querySelectorAll("th").forEach(function(el, index) {
+								widths[index] = el.style.width;
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_dynamic_th_width: widths
+							});
+						}
 					}
 				});
 
