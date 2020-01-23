@@ -1,12 +1,13 @@
 var EventCalendar = function($scope, $) {
-	var element = $(".eael-event-calendar-cls", $scope),
-		eventAll = element.data("events"),
-		daysWeek = element.data("days_week"),
-		monthNames = element.data("month_names"),
-		firstDay = element.data("first_day"),
-		ecModal = $('#eaelecModal'),
-		CloseButton = $(".eaelec-modal-close").eq(0),
-		calendarID = element.data("cal_id");
+
+	var element	= $(".eael-event-calendar-cls", $scope),
+		CloseButton	= $(".eaelec-modal-close", $scope).eq(0),
+		ecModal		= $('#eaelecModal', $scope),
+		eventAll	= element.data("events"),
+		daysWeek 	= element.data("days_week"),
+		monthNames	= element.data("month_names"),
+		firstDay	= element.data("first_day"),
+		calendarID	= element.data("cal_id");
 
 		
 		$("#eael-event-calendar-" + calendarID).fullCalendar({
@@ -33,8 +34,7 @@ var EventCalendar = function($scope, $) {
 			eventRender: function(event, element) {
 				element.attr("href", "javascript:void(0);");
 				element.click(function() {
-					ecModal.addClass('open-this-event');
-					ecModal.css('display', 'block');
+					ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
 					if (event.allDay == "yes") {
 						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
 					} else {
@@ -128,7 +128,7 @@ var EventCalendar = function($scope, $) {
 
 		// When the user clicks on <span> (x), close the modal
 		CloseButton.on('click', function() {
-			ecModal.css('display', 'none');
+			ecModal.addClass('eael-ec-modal-removing').removeClass('eael-ec-popup-ready');
 		});
 };
 

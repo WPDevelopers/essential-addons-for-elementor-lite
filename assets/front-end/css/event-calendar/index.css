@@ -22,16 +22,32 @@
 }
 .eael-event-calendar-wrapper .eaelec-modal {
   position: fixed;
-  z-index: 100;
-  padding-top: 100px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  border: 1px solid #000;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.4);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  z-index: -1;
+}
+.eael-event-calendar-wrapper .eaelec-modal .eael-ec-modal-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
+  z-index: 100;
+  opacity: 1;
 }
 .eael-event-calendar-wrapper .eaelec-modal-content {
   position: relative;
@@ -57,7 +73,7 @@
 .eael-event-calendar-wrapper .eaelec-modal-header span {
   color: #5725ff;
 }
-.eael-event-calendar-wrapper span.eaelec-modal-close {
+.eael-event-calendar-wrapper .eaelec-modal-close {
   position: absolute;
   right: -15px;
   top: -18px;
@@ -258,4 +274,33 @@ span.fc-day-number {
 }
 .fc-unthemed .fc-event:hover {
   color: #707070;
+}
+
+.eaelec-modal.eael-zoom-in {
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.eaelec-modal.eael-zoom-in .eaelec-modal-content {
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+}
+.eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eael-ec-modal-bg {
+  opacity: .7;
+}
+.eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eaelec-modal-content {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eaelec-modal-content {
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  opacity: 0;
+}
+.eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eael-ec-modal-bg {
+  opacity: 0;
 }

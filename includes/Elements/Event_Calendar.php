@@ -1047,10 +1047,11 @@ class Event_Calendar extends Widget_Base
 
     protected function eaelec_load_event_details()
     {
-        echo '<div id="eaelecModal" class="eaelec-modal">
+        echo '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
+            <div class="eael-ec-modal-bg"></div>
             <div class="eaelec-modal-content">
                 <div class="eaelec-modal-header">
-                    <span class="eaelec-modal-close">&times;</span>
+                    <div class="eaelec-modal-close"><span>&times;</span></div>
                     <h2></h2>
                     <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
                     <span class="eaelec-event-date-end eaelec-event-popup-date"></span>

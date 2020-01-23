@@ -29,16 +29,30 @@
 
 	.eaelec-modal {
 		position: fixed;
-		z-index: 100;
-		padding-top: 100px;
 		left: 0;
 		top: 0;
 		width: 100%;
 		height: 100%;
-		overflow: auto;
-		border: 1px solid #000;
-		background-color: black;
-		background-color: rgba(0, 0, 0, 0.4);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: -1;
+
+		.eael-ec-modal-bg {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			background: #000000;
+			opacity: 0;
+			transition: all 0.3s ease-out;
+		}
+
+		&.eael-ec-popup-ready {
+			z-index: 100;
+			opacity: 1;
+		}
 	}
 
 	.eaelec-modal-content {
@@ -51,28 +65,6 @@
 		padding: 20px 0;
 		width: 100%;
 	}
-
-	// @-webkit-keyframes animatetop {
-	// 	from {
-	// 		top: -300px;
-	// 		opacity: 0;
-	// 	}
-	// 	to {
-	// 		top: 0;
-	// 		opacity: 1;
-	// 	}
-	// }
-
-	// @keyframes animatetop {
-	// 	from {
-	// 		top: -300px;
-	// 		opacity: 0;
-	// 	}
-	// 	to {
-	// 		top: 0;
-	// 		opacity: 1;
-	// 	}
-	// }
 
 	.eaelec-modal-header {
 		padding: 0px 30px;
@@ -92,7 +84,7 @@
 		color: #5725ff;
 	}
 
-	span.eaelec-modal-close {
+	.eaelec-modal-close {
 		position: absolute;
 		right: -15px;
 		top: -18px;
@@ -319,4 +311,34 @@ span.fc-day-number {
 		color: #707070;
 	}
 
+}
+
+.eaelec-modal.eael-zoom-in {
+	opacity: 0;
+	transition: all 0.3s ease-out;
+
+	.eaelec-modal-content {
+		opacity: 0;
+		transition: all 0.3s ease-in-out;
+		transform: scale(0.5);
+	}
+
+	&.eael-ec-popup-ready {
+		.eael-ec-modal-bg {
+			opacity: .7;
+		}
+		.eaelec-modal-content {
+            opacity: 1;
+            transform: scale(1);
+		}
+	}
+	&.eael-ec-modal-removing {
+		.eaelec-modal-content {
+			transform: scale(0.5);
+            opacity: 0;
+		}
+		.eael-ec-modal-bg {
+			opacity: 0;
+		}
+	}
 }
