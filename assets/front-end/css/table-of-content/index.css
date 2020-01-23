@@ -159,14 +159,14 @@ html {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   content: " ";
-  margin-top: 5px;
+  margin-top: 9px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after {
   position: absolute;
   font-size: 15px;
   z-index: 999999;
   content: " ";
-  margin-top: -25px;
+  margin-top: -4px;
   right: 0;
   background: #ff7d50;
   height: 31px;
