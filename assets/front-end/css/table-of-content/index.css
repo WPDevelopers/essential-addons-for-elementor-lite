@@ -159,7 +159,7 @@ html {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   content: " ";
-  margin-top: 9px;
+  margin-top: 7px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after {
   position: absolute;
