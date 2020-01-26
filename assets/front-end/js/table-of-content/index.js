@@ -193,12 +193,20 @@
             elementor.settings.page.addChangeCallback(
                 "eael_ext_table_of_content",
                 function (newValue) {
-                    var eaelToc = $("#eael-toc");
-                    eaelToc.remove();
+                    var tocGlobal = $('.eael-toc-global');
+                    if(tocGlobal.length>0){
+                        tocGlobal.attr('id', 'eael-toc-temp').removeClass('eael-toc').hide();
+                        $('.eael-toc-global #eael-toc-list').attr('id','');
+                    }
+                    $('#eael-toc').remove();
                     if (newValue === "yes") {
                         var $settings = elementor.settings.page.getSettings();
                         $('body').append(eael_build_toc($settings));
                         eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
+                    }else{
+                        if(tocGlobal.length>0){
+                            tocGlobal.addClass('eael-toc').attr('id', 'eael-toc').show();
+                        }
                     }
                 });
 
