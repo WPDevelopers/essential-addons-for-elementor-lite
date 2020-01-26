@@ -84,15 +84,16 @@ html {
   color: #c6c4cf;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li:before {
-  content: '\00b7';
-  font-size: 50px;
+  content: '\f111';
+  font-size: 7px;
   line-height: 0;
   vertical-align: middle;
   margin-right: 5px;
   margin-left: -5px;
-  font-weight: 600;
-  bottom: 3px;
+  bottom: 0;
   position: relative;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li > ul {
   display: none;
