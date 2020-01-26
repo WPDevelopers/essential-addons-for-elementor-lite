@@ -880,6 +880,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        /*
         $this->add_control(
             'event_time_heading',
             [
@@ -946,6 +947,7 @@ class Event_Calendar extends Widget_Base
 				'selector' => '{{WRAPPER}} .fc-day-grid-event',
 			]
         );
+        */
         
         $this->add_responsive_control(
             'day_event_border_radius',
@@ -1018,15 +1020,6 @@ class Event_Calendar extends Widget_Base
                     '{{WRAPPER}} .eaelec-modal-header .eael-ec-modal-title' => 'color: {{VALUE}}',
                 ],
             ]
-        );
-
-        $this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name' => 'event_popup_title_border',
-				'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .eaelec-modal-header'
-			]
         );
 
         $this->add_control(
@@ -1342,13 +1335,15 @@ class Event_Calendar extends Widget_Base
                     'description' => $event["eael_event_description"],
                     'start' => $event["eael_event_start_date"],
                     'end' => date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01",
+                    'borderColor' => $event['eael_event_border_color'],
+                    'textColor' => $event['eael_event_text_color'],
+                    'color' => $event['eael_event_bg_color'],
                     'url' => $event["eael_event_link"]["url"],
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
                     'nofollow' => $event['eael_event_link']['nofollow'],
                     'dayNames' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 ];
-
                 $i++;
             }
         }
@@ -1452,6 +1447,9 @@ class Event_Calendar extends Widget_Base
                     'eael_event_description' => isset($item->description) ? $item->description : '',
                     'eael_event_start_date' => $ev_start_date,
                     'eael_event_end_date' => $ev_end_date,
+                    'eael_event_border_color' => '#6231FF',
+                    'eael_event_text_color' => '#242424',
+                    'eael_event_bg_color' => '#FFF',
                     'eael_event_all_day' => $all_day,
                     'eael_event_link' => [
                         'is_external' => '',
