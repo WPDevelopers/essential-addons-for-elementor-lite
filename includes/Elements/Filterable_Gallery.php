@@ -3156,8 +3156,8 @@ class Filterable_Gallery extends Widget_Base
                             return $result && buttonResult;
                         }
                      });
-
-                     $('a.eael-magnific-link').magnificPopup({
+                     
+                     $('#eael-filter-gallery-wrapper-'+$node_id+' a.eael-magnific-link').magnificPopup({
                         type: 'image',
                         gallery: {
                             enabled: $gallery_enabled,
@@ -3183,7 +3183,7 @@ class Filterable_Gallery extends Widget_Base
                         $this.siblings().removeClass("active");
                         $this.addClass("active");
 
-                        $(delegateAbc).magnificPopup({
+                        $('#eael-filter-gallery-wrapper-'+$node_id+' '+delegateAbc).magnificPopup({
                             type: 'image',
                             gallery: {
                                 enabled: $gallery_enabled,
