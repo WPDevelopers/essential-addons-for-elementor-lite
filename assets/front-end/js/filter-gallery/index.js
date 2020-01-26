@@ -51,8 +51,9 @@ var filterableGalleryHandler = function($scope, $) {
             }
         });
 
+        //alert($settings.widget_id);
         // Popup
-        $(".eael-magnific-link", $scope).magnificPopup({
+        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
             type: "image",
             gallery: {
                 enabled: $gallery_enabled
@@ -61,7 +62,8 @@ var filterableGalleryHandler = function($scope, $) {
                 close: function() {
                     $("#elementor-lightbox").hide();
                 }
-            }
+            },
+            fixedContentPos: false,
         });
 
         // filter
@@ -78,7 +80,7 @@ var filterableGalleryHandler = function($scope, $) {
             $this.siblings().removeClass("active");
             $this.addClass("active");
 
-            $(delegateAbc).magnificPopup({
+            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
                 type: 'image',
                 gallery: {
                     enabled: $gallery_enabled,
@@ -87,7 +89,8 @@ var filterableGalleryHandler = function($scope, $) {
                     close: function() {
                         $('#elementor-lightbox').hide();
                     }
-                }
+                },
+                fixedContentPos: false,
             });
 
             $isotope_gallery.isotope();
