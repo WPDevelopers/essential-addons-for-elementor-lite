@@ -118,6 +118,8 @@ var EventCalendar = function($scope, $) {
 						$(".eaelec-modal-footer a").css("display", "none");
 					}
 
+					// Popup color
+					$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
 				});
 			}
 		});
