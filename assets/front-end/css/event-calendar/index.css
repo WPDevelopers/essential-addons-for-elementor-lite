@@ -71,7 +71,7 @@
   padding: 0;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header span {
-  color: #5725ff;
+  color: #ffffff;
 }
 .eael-event-calendar-wrapper .eaelec-modal-close {
   position: absolute;
@@ -293,8 +293,8 @@ span.fc-day-number {
 }
 .eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eaelec-modal-content {
   opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 .eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eaelec-modal-content {
   -webkit-transform: scale(0.5);
