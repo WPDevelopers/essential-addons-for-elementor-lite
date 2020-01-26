@@ -8,7 +8,6 @@ var EventCalendar = function($scope, $) {
 		monthNames	= element.data("month_names"),
 		firstDay	= element.data("first_day"),
 		calendarID	= element.data("cal_id");
-
 		
 		$("#eael-event-calendar-" + calendarID).fullCalendar({
 			editable: false,
@@ -118,10 +117,7 @@ var EventCalendar = function($scope, $) {
 					if (event.url == "") {
 						$(".eaelec-modal-footer a").css("display", "none");
 					}
-					// Popup color
-					$(".eaelec-modal-close").css("background-color", event.borderColor);
-					$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
-					$(".eaelec-modal-header span").css("color", event.borderColor);
+
 				});
 			}
 		});
