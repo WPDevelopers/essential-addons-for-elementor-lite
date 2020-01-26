@@ -52,7 +52,7 @@
                             <p><?php _e('Stuck with something? Get help from the community on', 'essential-addons-for-elementor-lite'); ?> <a href="https://community.wpdeveloper.net/" target="_blank"><?php _e('WPDeveloper Forum', 'essential-addons-for-elementor-lite'); ?></a> <?php _e('or', 'essential-addons-for-elementor-lite'); ?> <a href="https://www.facebook.com/groups/essentialaddons/" target="_blank"><?php _e('Facebook Community.', 'essential-addons-for-elementor-lite'); ?></a> <?php _e('In case of emergency, initiate a live chat at', 'essential-addons-for-elementor-lite'); ?> <a href="https://essential-addons.com/elementor/" target="_blank"><?php _e('Essential Addons website.', 'essential-addons-for-elementor-lite'); ?></a></p>
                             <a href="https://community.wpdeveloper.net/support-forum/forum/essential-addons-for-elementor/" class="ea-button" target="_blank"><?php _e('Get Community Support', 'essential-addons-for-elementor-lite'); ?></a>
                         <?php
-                            else :
+                            else:
                                 do_action('eael_premium_support_link');
                             endif;
                         ?>
