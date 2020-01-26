@@ -3166,7 +3166,8 @@ class Filterable_Gallery extends Widget_Base
                             close: function() {
                                 $('#elementor-lightbox').hide();
                             }
-                        }
+                        },
+                        fixedContentPos: false,
                     });
 
                     // filter
@@ -3192,7 +3193,8 @@ class Filterable_Gallery extends Widget_Base
                                 close: function() {
                                     $('#elementor-lightbox').hide();
                                 }
-                            }
+                            },
+                            fixedContentPos: false,
                         });
 
                         $isotope_gallery.isotope();
