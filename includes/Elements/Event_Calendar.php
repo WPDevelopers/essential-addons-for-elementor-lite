@@ -494,7 +494,6 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'calendar_title_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .fc-toolbar h2',
             ]
         );
@@ -573,7 +572,7 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-            $this->add_control(
+            $this->add_responsive_control(
                 'button_border_radius_normal',
                 [
                     'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
@@ -581,6 +580,18 @@ class Event_Calendar extends Widget_Base
                     'size_units' => ['px', '%'],
                     'selectors' => [
                         '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ]
+                ]
+            );
+
+            $this->add_responsive_control(
+                'buttons_margin',
+                [
+                    'label' => esc_html__('Space', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                     'separator' => 'after',
                 ]
@@ -629,7 +640,7 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-            $this->add_control(
+            $this->add_responsive_control(
                 'button_border_radius_hover',
                 [
                     'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
@@ -698,7 +709,6 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'days_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span',
             ]
         );
@@ -714,7 +724,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'days_position_alignment',
             [
                 'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
@@ -796,7 +806,7 @@ class Event_Calendar extends Widget_Base
 			]
 		);
 
-        $this->add_control(
+        $this->add_responsive_control(
             'date_position_alignment',
             [
                 'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
@@ -824,7 +834,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'date_padding',
             [
                 'label' => esc_html__('Inside Space', 'essential-addons-for-elementor-lite'),
@@ -836,7 +846,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'date_border_radius',
             [
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
@@ -848,7 +858,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'date_margin',
             [
                 'label' => esc_html__('Outside Space', 'essential-addons-for-elementor-lite'),
@@ -937,7 +947,7 @@ class Event_Calendar extends Widget_Base
 			]
         );
         
-        $this->add_control(
+        $this->add_responsive_control(
             'day_event_border_radius',
             [
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
@@ -949,7 +959,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'day_event_padding',
             [
                 'label' => esc_html__('Inside Space', 'essential-addons-for-elementor-lite'),
@@ -961,7 +971,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'day_event_margin',
             [
                 'label' => esc_html__('Outside Space', 'essential-addons-for-elementor-lite'),
@@ -1088,7 +1098,7 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
 			'close_button_icon_size',
 			[
 				'label' => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
@@ -1114,7 +1124,7 @@ class Event_Calendar extends Widget_Base
 			]
         );
         
-        $this->add_control(
+        $this->add_responsive_control(
 			'close_button_size',
 			[
 				'label' => __( 'Button Size', 'essential-addons-for-elementor-lite' ),
@@ -1176,7 +1186,7 @@ class Event_Calendar extends Widget_Base
 			]
         );
         
-        $this->add_control(
+        $this->add_responsive_control(
 			'close_button_border_radius',
 			[
 				'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -1247,8 +1257,8 @@ class Event_Calendar extends Widget_Base
 			]
         );
 
-        $this->add_control(
-            'button_border_radius_normal',
+        $this->add_responsive_control(
+            'event_popup_border_radius',
             [
                 'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -1263,7 +1273,7 @@ class Event_Calendar extends Widget_Base
         $this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name' => 'background',
+				'name' => 'event_popup_background',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
 				'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content',
@@ -1276,7 +1286,7 @@ class Event_Calendar extends Widget_Base
         $this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'box_shadow',
+				'name' => 'event_popup_box_shadow',
 				'label' => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
 				'selector' => '{{WRAPPER}} .eaelec-modal .eaelec-modal-content',
 			]
