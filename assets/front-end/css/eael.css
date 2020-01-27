@@ -110,6 +110,60 @@
   }
 }
 
+/* ----------------------------------------- */
+/* 22. Caldera Contact Form Styler
+/* ----------------------------------------- */
+.eael-caldera-form-align-left,
+.eael-caldera-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-caldera-form-align-right,
+.eael-caldera-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-caldera-form-align-center,
+.eael-caldera-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-caldera-form .control-label {
+  display: none;
+}
+
+.eael-caldera-form-labels-yes .control-label {
+  display: block;
+}
+
+.eael-caldera-form-button-center .form-group input[type=button],
+.eael-caldera-form-button-center .form-group input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.eael-caldera-form-button-right .form-group input[type=button],
+.eael-caldera-form-button-right .form-group input[type=submit] {
+  float: right;
+}
+
+.eael-caldera-form .intl-tel-input {
+  display: inherit;
+}
+
+.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
+.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
+  border-style: solid;
+  border-width: 0;
+  padding: 3px;
+  -webkit-appearance: none;
+}
+
+.eael-caldera-form-button-full-width .form-group input[type=submit],
+.eael-caldera-form-button-full-width .form-group input[type=button] {
+  width: 100%;
+}
+
 /*----------------------------*/
 /* 30. Advance Tabs
 /*----------------------------*/
@@ -306,60 +360,6 @@
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
   }
-}
-
-/* ----------------------------------------- */
-/* 22. Caldera Contact Form Styler
-/* ----------------------------------------- */
-.eael-caldera-form-align-left,
-.eael-caldera-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-caldera-form-align-right,
-.eael-caldera-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-caldera-form-align-center,
-.eael-caldera-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-caldera-form .control-label {
-  display: none;
-}
-
-.eael-caldera-form-labels-yes .control-label {
-  display: block;
-}
-
-.eael-caldera-form-button-center .form-group input[type=button],
-.eael-caldera-form-button-center .form-group input[type=submit] {
-  display: block;
-  margin: 0 auto;
-}
-
-.eael-caldera-form-button-right .form-group input[type=button],
-.eael-caldera-form-button-right .form-group input[type=submit] {
-  float: right;
-}
-
-.eael-caldera-form .intl-tel-input {
-  display: inherit;
-}
-
-.eael-custom-radio-checkbox .caldera-grid input[type=checkbox],
-.eael-custom-radio-checkbox .caldera-grid input[type=radio] {
-  border-style: solid;
-  border-width: 0;
-  padding: 3px;
-  -webkit-appearance: none;
-}
-
-.eael-caldera-form-button-full-width .form-group input[type=submit],
-.eael-caldera-form-button-full-width .form-group input[type=button] {
-  width: 100%;
 }
 
 /*--------------------------*/
@@ -4737,6 +4737,77 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
   border-radius: 15px;
 }
 
+/*----------------------*/
+/* 13. Ninja Form Styles
+/*----------------------*/
+.eael-ninja-container input,
+.eael-ninja-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-align-center .eael-ninja-container,
+.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-align-left .eael-ninja-container,
+.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-align-right .eael-ninja-container,
+.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
+  float: right;
+  width: auto;
+}
+
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-ninja-container .nf-field .nf-field-element input[type="password"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-ninja-container .nf-field .nf-field-element input[type="url"],
+.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-ninja-container .nf-field .nf-field-element textarea {
+  max-width: 100%;
+}
+
+.eael-ninja-form .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form-title-yes .nf-form-title {
+  display: block;
+}
+
+.eael-ninja-form .title-description-hide .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form.title-description-hide .nf-form-title {
+  display: none;
+}
+
+.eael-ninja-form .nf-field-label {
+  display: none;
+}
+
+.eael-ninja-form-labels-yes .nf-field-label {
+  display: block;
+}
+
+.eael-ninja-form .submit-container input[type=button] {
+  border: 0;
+  border-radius: 0;
+}
+
+.eael-ninja-form-button-full-width .submit-container input[type=button] {
+  width: 100%;
+}
+
 /* ------------------------ */
 /* 26. Magnific Popup
 /* ------------------------ */
@@ -5198,77 +5269,6 @@ button.mfp-close:hover {
     padding-left: 6px;
     padding-right: 6px;
   }
-}
-
-/*----------------------*/
-/* 13. Ninja Form Styles
-/*----------------------*/
-.eael-ninja-container input,
-.eael-ninja-container textarea {
-  height: auto;
-  padding: 10px;
-}
-
-.eael-contact-form-align-center .eael-ninja-container,
-.eael-contact-form-btn-align-center .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form-align-left .eael-ninja-container,
-.eael-contact-form-btn-align-left .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form-align-right .eael-ninja-container,
-.eael-contact-form-btn-align-right .eael-ninja-container .nf-field .nf-field-element input[type="button"] {
-  float: right;
-  width: auto;
-}
-
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-ninja-container .nf-field .nf-field-element input[type="password"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-ninja-container .nf-field .nf-field-element input[type="url"],
-.eael-ninja-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-ninja-container .nf-field .nf-field-element textarea {
-  max-width: 100%;
-}
-
-.eael-ninja-form .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form-title-yes .nf-form-title {
-  display: block;
-}
-
-.eael-ninja-form .title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form.title-description-hide .nf-form-title {
-  display: none;
-}
-
-.eael-ninja-form .nf-field-label {
-  display: none;
-}
-
-.eael-ninja-form-labels-yes .nf-field-label {
-  display: block;
-}
-
-.eael-ninja-form .submit-container input[type=button] {
-  border: 0;
-  border-radius: 0;
-}
-
-.eael-ninja-form-button-full-width .submit-container input[type=button] {
-  width: 100%;
 }
 
 /*-----------------------------*/
@@ -7295,36 +7295,6 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   margin: 0 0 0 auto;
 }
 
-.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap .eael-reading-progress {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  z-index: 999999;
-}
-.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
-  top: unset;
-  bottom: 0;
-}
-.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
-  height: 5px;
-  background-color: #1fd18e;
-  width: 0%;
-  -webkit-transition: width 50ms ease;
-  transition: width 50ms ease;
-}
-
 /* Overlay Styles */
 .eaelsv-overlay {
   position: absolute;
@@ -7543,6 +7513,36 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 .eaelsv-sticky-player-close:after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
+}
+
+.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap .eael-reading-progress {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  z-index: 999999;
+}
+.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
+  top: unset;
+  bottom: 0;
+}
+.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
+  height: 5px;
+  background-color: #1fd18e;
+  width: 0%;
+  -webkit-transition: width 50ms ease;
+  transition: width 50ms ease;
 }
 
 html {
