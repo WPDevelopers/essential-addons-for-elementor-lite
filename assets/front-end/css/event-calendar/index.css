@@ -147,25 +147,6 @@
 .fc-toolbar.fc-header-toolbar {
   margin-bottom: 25px;
 }
-.fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default {
-  box-shadow: none;
-  height: auto;
-  width: auto;
-  float: none;
-  font-size: 15px;
-  font-weight: normal;
-  color: #707070;
-  margin-left: 15px;
-  border-radius: 3px;
-  text-transform: capitalize;
-  background: #fff;
-  text-shadow: none;
-  line-height: 1.5em;
-}
-.fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-state-active, .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default:hover, .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default:visited, .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default:focus {
-  background: #5725ff;
-  color: #fff;
-}
 .fc-toolbar.fc-header-toolbar button.fc-state-default {
   padding: 8px 30px 8px 40px;
 }
@@ -200,6 +181,26 @@ button.fc-next-button,
 }
 .fc-toolbar.fc-header-toolbar button.fc-month-button:before {
   content: "\f00a";
+}
+
+button.fc-button.fc-state-default {
+  box-shadow: none;
+  height: auto;
+  width: auto;
+  float: none;
+  font-size: 15px;
+  font-weight: normal;
+  color: #707070;
+  margin-left: 15px;
+  border-radius: 3px;
+  text-transform: capitalize;
+  background: #fff;
+  text-shadow: none;
+  line-height: 1.5em;
+}
+button.fc-button.fc-state-default.fc-state-active, button.fc-button.fc-state-default:hover, button.fc-button.fc-state-default:visited, button.fc-button.fc-state-default:focus {
+  background: #5725ff;
+  color: #fff;
 }
 
 th.fc-widget-header > span {
@@ -304,4 +305,53 @@ span.fc-day-number {
 }
 .eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eael-ec-modal-bg {
   opacity: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .fc-right, .fc-button-group, .fc-left {
+    width: 100%;
+  }
+
+  .fc-button-group button.fc-button.fc-state-default {
+    padding: 8px 15px 8px 35px;
+    margin: 8px;
+    font-size: 12px;
+  }
+
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-prev-button,
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-next-button {
+    padding: 8px 27px;
+  }
+
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default {
+    margin: 5px;
+  }
+
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-month-button:before,
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaWeek-button:before,
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaDay-button:before {
+    left: 15px;
+    top: 9px;
+  }
+
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaDay-button:before,
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaWeek-button:before,
+  .fc-toolbar.fc-header-toolbar button.fc-button.fc-month-button:before {
+    font-size: 12px;
+  }
+
+  th.fc-widget-header > span {
+    padding: 0;
+    font-size: 14px;
+  }
+
+  .fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+  }
+
+  .fc-basic-view .fc-body .fc-row {
+    min-height: 2em;
+  }
 }
