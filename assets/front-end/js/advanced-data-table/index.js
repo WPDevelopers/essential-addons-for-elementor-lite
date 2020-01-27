@@ -420,10 +420,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		}
 
 		textarea.value = "";
-	}
-
-	// pro
-	if (event.target.dataset.event == "ea:advTable:connect") {
+	} else if (event.target.dataset.event == "ea:advTable:connect") {
 		var button = event.target;
 		button.innerHTML = "Connecting";
 
@@ -447,7 +444,9 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 						ea_adv_data_table_source_remote_tables: response.tables
 					});
 
-					panel.content.currentView.render();
+					// reload panel
+					panel.content.el.querySelector(".elementor-section-title").click();
+					panel.content.el.querySelector(".elementor-section-title").click();
 
 					var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
 					select.length = 0;
@@ -457,12 +456,9 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 				} else {
 					button.innerHTML = "Failed";
 				}
-
-				console.log(response);
 			},
 			error: function() {
 				button.innerHTML = "Failed";
-				console.log(response);
 			}
 		});
 
@@ -475,7 +471,9 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 			ea_adv_data_table_source_remote_tables: []
 		});
 
-		panel.content.currentView.render();
+		// reload panel
+		panel.content.el.querySelector(".elementor-section-title").click();
+		panel.content.el.querySelector(".elementor-section-title").click();
 	}
 };
 
@@ -578,7 +576,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 		panel.el.removeEventListener("click", handler);
 	});
 
-	// fill prev val - pro
+	// fill remote db list
 	var initRemoteTables = function() {
 		setTimeout(function() {
 			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
