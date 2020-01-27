@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Core\Settings\Manager as Settings_Manager;
-
+use Elementor\Plugin;
 trait Elements
 {
     /**
@@ -130,6 +130,71 @@ trait Elements
                 echo $html;
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function eael_table_of_content_render (){
+
+        if(!is_singular()){
+            return '';
+        }
+
+        $page_settings_manager  = Settings_Manager::get_settings_managers('page');
+        $page_settings_model    = $page_settings_manager->get_model(get_the_ID());
+        $global_settings        = get_option('eael_global_settings');
+
+        if(!$this->eael_toc_page_scope( $page_settings_model,$global_settings )){
+            return '';
+        }
+
+        if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && !isset($global_settings['table_of_content']['enabled'])){
+            return '';
+        }else{
+            add_filter('eael/section/after_render', function ($extensions) {
+                $extensions[] = 'eael-table-of-content';
+                return $extensions;
+            });
+        }
+        $el_class = 'eael-toc eael-toc-disable';
+
+        if($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['enabled'])){
+            $el_class .=' eael-toc-global';
+            $this->eael_toc_global_css($page_settings_model , $global_settings);
+        }
+
+        $icon               = 'fas fa-list';
+        $support_tag        =  (array) $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_supported_heading_tag', $global_settings );
+        $support_tag        = implode( ',', array_filter( $support_tag ) );
+        $position           = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_position', $global_settings );
+        $toc_style          = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_list_style', $global_settings );
+        $toc_word_wrap      = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_word_wrap', $global_settings );
+        $toc_collapse       = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_collapse_sub_heading', $global_settings );
+        $list_icon          = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_list_icon', $global_settings );
+        $toc_title          = esc_html($this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_toc_title', $global_settings ));
+        $el_class           .= ($position =='right')?' eael-toc-right':' ';
+        $icon_check         = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_header_icon', $global_settings );
+        $toc_style_class    = ' eael-toc-list-'.$toc_style;
+        $toc_style_class    .= ($toc_collapse =='yes')?' eael-toc-collapse':' ';
+        $toc_style_class    .= ($list_icon =='number')?' eael-toc-number':' ';
+        $toc_style_class    .= ($toc_word_wrap =='yes')?' eael-toc-word-wrap':' ';
+
+        if(!empty($icon_check['value'])){
+            $icon = $icon_check['value'];
+        }
+
+        $html = "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} '>
+                    <div class='eael-toc-header'>
+                         <span class='eael-toc-close'>×</span>
+                         <h2 class='eael-toc-title'>{$toc_title}</h2>
+                    </div>
+                    <div class='eael-toc-body'>
+                        <ul id='eael-toc-list' class='eael-toc-list {$toc_style_class}'></ul>
+                    </div>
+                    <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
+                </div>";
+        echo $html;
     }
 
 }
