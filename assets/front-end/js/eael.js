@@ -21239,17 +21239,23 @@ var Advanced_Data_Table = function($scope, $) {
 	var classCollection = {};
 
 	if (isEditMode) {
+		var attr = "readonly";
+
 		// add edit class
 		table.classList.add("ea-advanced-data-table-editable");
 
-		// insert editable area
-		table.querySelectorAll("th, td").forEach(function(el) {
-			var value = el.innerHTML;
+		if (table.classList.contains("ea-advanced-data-table-static")) {
+			attr = "";
 
-			if (value.indexOf('<textarea rows="1">') !== 0) {
-				el.innerHTML = '<textarea rows="1">' + value + "</textarea>";
-			}
-		});
+			// insert editable area
+			table.querySelectorAll("th, td").forEach(function(el) {
+				var value = el.innerHTML;
+
+				if (value.indexOf('<textarea rows="1">') !== 0) {
+					el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				}
+			});
+		}
 
 		// drag
 		table.addEventListener("mousedown", function(e) {
@@ -21495,15 +21501,21 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 			var row = [];
 			var cols = rows[i].querySelectorAll("th, td");
 
-			for (var j = 0; j < cols.length; j++) {
-				row.push(
-					JSON.stringify(
-						cols[j]
-							.querySelector("textarea")
-							.value.replace(/(\r\n|\n|\r)/gm, " ")
-							.trim()
-					)
-				);
+			if (table.classList.contains("ea-advanced-data-table-static")) {
+				for (var j = 0; j < cols.length; j++) {
+					row.push(
+						JSON.stringify(
+							cols[j]
+								.querySelector("textarea")
+								.value.replace(/(\r\n|\n|\r)/gm, " ")
+								.trim()
+						)
+					);
+				}
+			} else {
+				for (var j = 0; j < cols.length; j++) {
+					row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+				}
 			}
 
 			csv.push(row.join(","));
@@ -21532,7 +21544,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/"([^\\"]|\\")*"/g) || row.split(",");
+				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
 				if (cols.length > 0) {
 					if (enableHeader && index == 0) {
@@ -21568,6 +21580,60 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		}
 
 		textarea.value = "";
+	} else if (event.target.dataset.event == "ea:advTable:connect") {
+		var button = event.target;
+		button.innerHTML = "Connecting";
+
+		jQuery.ajax({
+			url: localize.ajaxurl,
+			type: "post",
+			data: {
+				action: "connect_remote_db",
+				security: localize.nonce,
+				host: model.attributes.settings.attributes.ea_adv_data_table_source_remote_host,
+				username: model.attributes.settings.attributes.ea_adv_data_table_source_remote_username,
+				password: model.attributes.settings.attributes.ea_adv_data_table_source_remote_password,
+				database: model.attributes.settings.attributes.ea_adv_data_table_source_remote_database
+			},
+			success: function(response) {
+				if (response.connected == true) {
+					button.innerHTML = "Connected";
+
+					Advanced_Data_Table_Update_View(view, true, {
+						ea_adv_data_table_source_remote_connected: true,
+						ea_adv_data_table_source_remote_tables: response.tables
+					});
+
+					// reload panel
+					panel.content.el.querySelector(".elementor-section-title").click();
+					panel.content.el.querySelector(".elementor-section-title").click();
+
+					var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+					select.length = 0;
+					response.tables.forEach(function(opt, index) {
+						select[index] = new Option(opt, opt);
+					});
+				} else {
+					button.innerHTML = "Failed";
+				}
+			},
+			error: function() {
+				button.innerHTML = "Failed";
+			}
+		});
+
+		setTimeout(function() {
+			button.innerHTML = "Connect";
+		}, 2000);
+	} else if (event.target.dataset.event == "ea:advTable:disconnect") {
+		Advanced_Data_Table_Update_View(view, true, {
+			ea_adv_data_table_source_remote_connected: false,
+			ea_adv_data_table_source_remote_tables: []
+		});
+
+		// reload panel
+		panel.content.el.querySelector(".elementor-section-title").click();
+		panel.content.el.querySelector(".elementor-section-title").click();
 	}
 };
 
@@ -21606,22 +21672,36 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 				// drag
 				table.addEventListener("mouseup", function(e) {
+					clearTimeout(advanced_data_table_timeout);
+
 					if (e.target.tagName.toLowerCase() === "th") {
-						clearTimeout(advanced_data_table_timeout);
+						if (table.classList.contains("ea-advanced-data-table-static")) {
+							// clone current table
+							var origTable = table.cloneNode(true);
 
-						// clone current table
-						var origTable = table.cloneNode(true);
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
 
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function(el) {
-							var value = el.querySelector("textarea").value;
-							el.innerHTML = value;
-						});
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						} else {
+							var widths = [];
 
-						// update table
-						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML
-						});
+							// collect width of th
+							table.querySelectorAll("th").forEach(function(el, index) {
+								widths[index] = el.style.width;
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_dynamic_th_width: widths
+							});
+						}
 					}
 				});
 
@@ -21655,10 +21735,34 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	panel.currentPageView.on("destroy", function() {
 		panel.el.removeEventListener("click", handler);
 	});
+
+	// fill remote db list
+	var initRemoteTables = function() {
+		setTimeout(function() {
+			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+
+			if (select != null && select.length == 0) {
+				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
+					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+				});
+			}
+		}, 50);
+	};
+
+	initRemoteTables();
+
+	panel.el.addEventListener("mousedown", function(e) {
+		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
+			initRemoteTables();
+		}
+	});
 };
 
 Advanced_Data_Table_Context_Menu = function(groups, element) {
-	if (element.options.model.attributes.widgetType == "eael-advanced-data-table") {
+	if (
+		element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
+		element.options.model.attributes.settings.attributes.ea_adv_data_table_source == "static"
+	) {
 		groups.push({
 			name: "ea_advanced_data_table",
 			actions: [

@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.7.0
+Stable tag: 3.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -178,6 +178,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.7.1 - 14/01/2020 =
+- Fixed: Moment not defined notice
+- Fixed: widgets not working on first load
 
 = 3.7.0 - 06/01/2020 =
 - Added: Advanced Data Table
