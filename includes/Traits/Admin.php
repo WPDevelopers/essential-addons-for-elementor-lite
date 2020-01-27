@@ -149,7 +149,7 @@ trait Admin
          * Current Notice Maybe Later Time.
          * Notice will show again in 7 days
          */
-        $notice->maybe_later_time = '7 Day';
+        $notice->maybe_later_time = '21 Day';
 
         $notice->text_domain = 'essential-addons-elementor';
 
@@ -230,8 +230,8 @@ trait Admin
         $notice->options_args = array(
             'notice_will_show' => [
                 'opt_in' => $notice->timestamp,
-                'upsale' => $notice->makeTime($notice->timestamp, '6 Day'),
-                'review' => $notice->makeTime($notice->timestamp, '3 Day'), // after 3 days
+                'upsale' => $notice->makeTime($notice->timestamp, '14 Day'),
+                'review' => $notice->makeTime($notice->timestamp, '7 Day'), // after 3 days
             ],
         );
         if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) { 
