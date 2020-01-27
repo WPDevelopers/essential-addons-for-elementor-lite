@@ -77,14 +77,12 @@ html {
                 color: #c6c4cf;
                 //style 1
                 &:before{
-                    //content: '\00b7';
                     content: '\f111';
                     font-size: 7px;
                     line-height: 0;
                     vertical-align: middle;
                     margin-right: 5px;
                     margin-left: -5px;
-                    //font-weight: 600;
                     bottom: 0;
                     position: relative;
                     font-family: "Font Awesome 5 Free";
@@ -141,8 +139,6 @@ html {
             &.eael-toc-list-style_3 {
                 > li {
                     &:before {
-                        //content: " ";
-
                         content: " ";
                         font-size: 0;
                         margin: 0;
@@ -222,9 +218,6 @@ html {
             &.eael-toc-word-wrap {
                 li {
                     &.eael-first-child{
-                        &:before{
-                            //bottom: 5px !important;
-                        }
                         > a {
                             span{
                                 width: 190px !important;
