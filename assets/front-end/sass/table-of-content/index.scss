@@ -242,10 +242,10 @@ html {
                         }
                     }
                 }
-                &.eael-toc-number {
-                    li:not(.eael-first-child):before{
-                        //bottom: 3px !important;
-                    }
+            }
+            &.eael-toc-number {
+                li.eael-first-child:before{
+                    bottom: 2px !important;
                 }
             }
         }

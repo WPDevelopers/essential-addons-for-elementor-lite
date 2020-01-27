@@ -202,6 +202,9 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number li.eael-first-child:before {
+  bottom: 2px !important;
+}
 .eael-toc .eael-toc-close {
   position: absolute;
   width: 29px;
