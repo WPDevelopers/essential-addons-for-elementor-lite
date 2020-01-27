@@ -24,6 +24,14 @@ class Event_Calendar extends Widget_Base
         return 'eael-event-calendar';
     }
 
+    public function get_style_depends()
+    {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
+
     public function get_title()
     {
         return esc_html__('EA Event Calendar', 'essential-addons-for-elementor-lite');
