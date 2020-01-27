@@ -1266,7 +1266,7 @@ class Event_Calendar extends Widget_Base
                     'description' => $event["eael_event_description"],
                     'start' => $event["eael_event_start_date"],
                     'end' => date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01",
-                    'borderColor' => $event['eael_event_border_color'],
+                    'borderColor' => !empty($event['eael_event_border_color']) ? $event['eael_event_border_color'] : '#10ecab',
                     'textColor' => $event['eael_event_text_color'],
                     'color' => $event['eael_event_bg_color'],
                     'url' => $event["eael_event_link"]["url"],
@@ -1296,7 +1296,7 @@ class Event_Calendar extends Widget_Base
             <div class="eael-ec-modal-bg"></div>
             <div class="eaelec-modal-content">
                 <div class="eaelec-modal-header">
-                    <div class="eaelec-modal-close"><span>&times;</span></div>
+                    <div class="eaelec-modal-close"><span><i class="fas fa-times"></i></span></div>
                     <h2 class="eael-ec-modal-title"></h2>
                     <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
                     <span class="eaelec-event-date-end eaelec-event-popup-date"></span>

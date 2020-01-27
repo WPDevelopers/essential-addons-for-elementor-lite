@@ -62,7 +62,7 @@
 .eael-event-calendar-wrapper .eaelec-modal-header {
   padding: 0px 30px;
   color: white;
-  border-left: 5px solid #009900;
+  border-color: #009900;
   overflow: auto;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header h2 {

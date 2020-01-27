@@ -117,7 +117,7 @@ var EventCalendar = function($scope, $) {
 					if (event.url == "") {
 						$(".eaelec-modal-footer a").css("display", "none");
 					}
-
+					
 					// Popup color
 					$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
 				});

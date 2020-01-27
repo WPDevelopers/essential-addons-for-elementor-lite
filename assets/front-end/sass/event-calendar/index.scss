@@ -69,7 +69,7 @@
 	.eaelec-modal-header {
 		padding: 0px 30px;
 		color: white;
-		border-left: 5px solid #009900;
+		border-color: #009900;
 		overflow: auto;
 	}
 
@@ -344,11 +344,6 @@ span.fc-day-number {
 	}
 }
 
-// For Tablet
-@media only screen and (max-width: 1024px) and (min-width: 766px) {
-
-}
-
 // For mobile
 @media only screen and (max-width: 767px) {
 	.fc-right, .fc-button-group, .fc-left {
@@ -399,5 +394,5 @@ span.fc-day-number {
 	.fc-basic-view .fc-body .fc-row {
 		min-height: 2em;
 	}
-	
+
 }
