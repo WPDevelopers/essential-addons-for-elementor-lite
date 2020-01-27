@@ -160,6 +160,7 @@
   text-transform: capitalize;
   background: #fff;
   text-shadow: none;
+  line-height: 1.5em;
 }
 .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-state-active, .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default:hover, .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default:visited, .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default:focus {
   background: #5725ff;
