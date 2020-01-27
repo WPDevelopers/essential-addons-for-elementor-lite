@@ -40,7 +40,7 @@ $extensions = [
             ],
             [
                 'key'    => 'eael-table-of-content',
-                'title'  => __( 'Table of Content', 'essential-addons-elementor' ),
+                'title'  => __( 'Table of Content', 'essential-addons-for-elementor-lite' ),
                 'demo_link' => 'https://essential-addons.com/elementor/reading-progress/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
             ],
