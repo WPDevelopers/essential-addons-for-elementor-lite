@@ -1,6 +1,9 @@
 html {
     scroll-behavior: smooth;
 }
+#eael-toc {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+}
 .eael-toc {
     position: fixed;
     z-index: 9999;
@@ -19,6 +22,7 @@ html {
     }
     &.expanded {
         width: unset !important;
+        box-shadow: none !important;
         .eael-toc-header,
         .eael-toc-body,
         .eael-toc-close  {
@@ -37,6 +41,7 @@ html {
             text-decoration: none;
             text-transform: none;
             transform-origin: left;
+            box-shadow: 5px 10px 20px 10px #54595f7a;
             i {
                 margin-right: 10px;
                 transform: rotate(-90deg);

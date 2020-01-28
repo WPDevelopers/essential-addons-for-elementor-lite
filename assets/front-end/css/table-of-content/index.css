@@ -2,6 +2,10 @@ html {
   scroll-behavior: smooth;
 }
 
+#eael-toc {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .eael-toc {
   position: fixed;
   z-index: 9999;
@@ -22,6 +26,7 @@ html {
 }
 .eael-toc.expanded {
   width: unset !important;
+  box-shadow: none !important;
 }
 .eael-toc.expanded .eael-toc-header,
 .eael-toc.expanded .eael-toc-body,
@@ -43,6 +48,7 @@ html {
   text-transform: none;
   -webkit-transform-origin: left;
           transform-origin: left;
+  box-shadow: 5px 10px 20px 10px #54595f7a;
 }
 .eael-toc.expanded .eael-toc-button i {
   margin-right: 10px;
