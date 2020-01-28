@@ -125,6 +125,7 @@ var Advanced_Data_Table = function($scope, $) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
 				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
+				var offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 
 				if (table.rows.length > 1) {
 					if (input.length > 0) {
@@ -136,7 +137,7 @@ var Advanced_Data_Table = function($scope, $) {
 							pagination.style.display = "none";
 						}
 
-						for (var i = 1; i < table.rows.length; i++) {
+						for (var i = offset; i < table.rows.length; i++) {
 							var matchFound = false;
 
 							if (table.rows[i].cells.length > 0) {
@@ -264,7 +265,7 @@ var Advanced_Data_Table = function($scope, $) {
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			var paginationHTML = "";
 			var currentPage = 1;
-			var startIndex = 1;
+			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			var endIndex = currentPage * table.dataset.itemsPerPage;
 			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
 
@@ -295,7 +296,8 @@ var Advanced_Data_Table = function($scope, $) {
 
 				if (e.target.tagName.toLowerCase() == "a") {
 					currentPage = e.target.dataset.page;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
 					endIndex = currentPage * table.dataset.itemsPerPage;
 
 					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
@@ -306,7 +308,7 @@ var Advanced_Data_Table = function($scope, $) {
 						el.classList.add("ea-advanced-data-table-pagination-current");
 					});
 
-					for (var i = 1; i <= table.rows.length - 1; i++) {
+					for (var i = offset; i <= table.rows.length - 1; i++) {
 						if (i >= startIndex && i <= endIndex) {
 							table.rows[i].style.display = "table-row";
 						} else {
