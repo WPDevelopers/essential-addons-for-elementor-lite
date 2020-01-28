@@ -79,8 +79,7 @@ class Post_Timeline extends Widget_Base
                 'label' => __('Overlay Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'description' => __('Leave blank or Clear to use default gradient overlay', 'essential-addons-for-elementor-lite'),
-                //'default' => 'linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0)',
-                'default'   => '',
+                'default' => 'linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0)',
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-inner' => 'background: {{VALUE}}',
                 ],
