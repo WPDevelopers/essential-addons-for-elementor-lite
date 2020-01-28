@@ -215,6 +215,32 @@
             );
 
             $element->add_control(
+                'eael_ext_toc_transition_speed',
+                [
+                    'label' => __( 'Transition Speed', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 's' ],
+                    'range' => [
+                        's' => [
+                            'min' => .2,
+                            'max' => 5,
+                            'step' => .1,
+                        ]
+                    ],
+                    'default' => [
+                        'unit' => 's',
+                        'size' => .2,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
                 'eael_ext_toc_ad_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
