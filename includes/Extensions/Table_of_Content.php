@@ -376,7 +376,8 @@
                     'options' => [
                         'style_1' => __( 'Style 1', 'essential-addons-for-elementor-lite' ),
                         'style_2' => __( 'Style 2', 'essential-addons-for-elementor-lite' ),
-                        'style_3' => __( 'Style 3', 'essential-addons-for-elementor-lite' )
+                        'style_3' => __( 'Style 3', 'essential-addons-for-elementor-lite' ),
+                        'style_4' => __( 'Style 4', 'essential-addons-for-elementor-lite' )
                     ],
                 ]
             );

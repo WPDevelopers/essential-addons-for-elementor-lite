@@ -173,6 +173,11 @@ html {
   height: 31px;
   width: 2px;
 }
+.eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-style_4 .eael-first-child.eael-highlight {
+  background: red;
+  margin: 0 -9999rem;
+  padding: 0.25rem 9999rem;
+}
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-collapse > li > ul {
   display: block !important;
 }
