@@ -21158,6 +21158,151 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
+var dataTable = function($scope, $) {
+	var $_this = $scope.find(".eael-data-table-wrap"),
+		$id = $_this.data("table_id");
+
+	if (typeof enableProSorter !== "undefined" && $.isFunction(enableProSorter)) {
+		$(document).ready(function() {
+			enableProSorter(jQuery, $_this);
+		});
+	}
+
+	var responsive = $_this.data("custom_responsive");
+	if (true == responsive) {
+		var $th = $scope.find(".eael-data-table").find("th");
+		var $tbody = $scope.find(".eael-data-table").find("tbody");
+
+		$tbody.find("tr").each(function(i, item) {
+			$(item)
+				.find("td .td-content-wrapper")
+				.each(function(index, item) {
+					$(this).prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + "</div>");
+				});
+		});
+	}
+};
+
+var Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:table:export") {
+		// export
+		var table = view.el.querySelector("#eael-data-table-" + model.attributes.id);
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			for (var j = 0; j < cols.length; j++) {
+				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("eael-data-table-download-" + model.attributes.id);
+		download_link.download = "eael-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".eael-data-table-download-" + model.attributes.id).remove();
+	}
+};
+
+var data_table_panel = function(panel, model, view) {
+	var handler = Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
+	});
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	// export table
+	if (isEditMode) {
+		elementor.hooks.addAction("panel/open_editor/widget/eael-data-table", data_table_panel);
+	}
+
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
+});
+
 var advanced_data_table_timeout,
 	advanced_data_table_active_cell = null,
 	advanced_data_table_drag_start_x,
@@ -21285,6 +21430,7 @@ var Advanced_Data_Table = function($scope, $) {
 			search.addEventListener("input", function(e) {
 				var input = this.value.toLowerCase();
 				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
+				var offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 
 				if (table.rows.length > 1) {
 					if (input.length > 0) {
@@ -21296,7 +21442,7 @@ var Advanced_Data_Table = function($scope, $) {
 							pagination.style.display = "none";
 						}
 
-						for (var i = 1; i < table.rows.length; i++) {
+						for (var i = offset; i < table.rows.length; i++) {
 							var matchFound = false;
 
 							if (table.rows[i].cells.length > 0) {
@@ -21424,7 +21570,7 @@ var Advanced_Data_Table = function($scope, $) {
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			var paginationHTML = "";
 			var currentPage = 1;
-			var startIndex = 1;
+			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			var endIndex = currentPage * table.dataset.itemsPerPage;
 			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
 
@@ -21455,7 +21601,8 @@ var Advanced_Data_Table = function($scope, $) {
 
 				if (e.target.tagName.toLowerCase() == "a") {
 					currentPage = e.target.dataset.page;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
 					endIndex = currentPage * table.dataset.itemsPerPage;
 
 					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
@@ -21466,7 +21613,7 @@ var Advanced_Data_Table = function($scope, $) {
 						el.classList.add("ea-advanced-data-table-pagination-current");
 					});
 
-					for (var i = 1; i <= table.rows.length - 1; i++) {
+					for (var i = offset; i <= table.rows.length - 1; i++) {
 						if (i >= startIndex && i <= endIndex) {
 							table.rows[i].style.display = "table-row";
 						} else {
@@ -22101,151 +22248,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
-var dataTable = function($scope, $) {
-	var $_this = $scope.find(".eael-data-table-wrap"),
-		$id = $_this.data("table_id");
-
-	if (typeof enableProSorter !== "undefined" && $.isFunction(enableProSorter)) {
-		$(document).ready(function() {
-			enableProSorter(jQuery, $_this);
-		});
-	}
-
-	var responsive = $_this.data("custom_responsive");
-	if (true == responsive) {
-		var $th = $scope.find(".eael-data-table").find("th");
-		var $tbody = $scope.find(".eael-data-table").find("tbody");
-
-		$tbody.find("tr").each(function(i, item) {
-			$(item)
-				.find("td .td-content-wrapper")
-				.each(function(index, item) {
-					$(this).prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + "</div>");
-				});
-		});
-	}
-};
-
-var Data_Table_Click_Handler = function(panel, model, view) {
-	if (event.target.dataset.event == "ea:table:export") {
-		// export
-		var table = view.el.querySelector("#eael-data-table-" + model.attributes.id);
-		var rows = table.querySelectorAll("table tr");
-		var csv = [];
-
-		// generate csv
-		for (var i = 0; i < rows.length; i++) {
-			var row = [];
-			var cols = rows[i].querySelectorAll("th, td");
-
-			for (var j = 0; j < cols.length; j++) {
-				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
-			}
-
-			csv.push(row.join(","));
-		}
-
-		// download
-		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-		var download_link = parent.document.createElement("a");
-
-		download_link.classList.add("eael-data-table-download-" + model.attributes.id);
-		download_link.download = "eael-data-table-" + model.attributes.id + ".csv";
-		download_link.href = window.URL.createObjectURL(csv_file);
-		download_link.style.display = "none";
-		parent.document.body.appendChild(download_link);
-		download_link.click();
-
-		parent.document.querySelector(".eael-data-table-download-" + model.attributes.id).remove();
-	}
-};
-
-var data_table_panel = function(panel, model, view) {
-	var handler = Data_Table_Click_Handler.bind(this, panel, model, view);
-
-	panel.el.addEventListener("click", handler);
-
-	panel.currentPageView.on("destroy", function() {
-		panel.el.removeEventListener("click", handler);
-	});
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-	// export table
-	if (isEditMode) {
-		elementor.hooks.addAction("panel/open_editor/widget/eael-data-table", data_table_panel);
-	}
-
-	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
-});
-
 var FacebookFeed = function($scope, $) {
     if (!isEditMode) {
         $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
