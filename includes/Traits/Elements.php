@@ -176,6 +176,7 @@ trait Elements
         $el_class           .= ($position =='right')?' eael-toc-right':' ';
         $icon_check         = $this->eael_get_toc_setting_value( $page_settings_model ,'eael_ext_table_of_content_header_icon', $global_settings );
         $toc_style_class    = ' eael-toc-list-'.$toc_style;
+        //$toc_style_class    = ' eael-toc-list-'.$toc_style;
         $toc_style_class    .= ($toc_collapse =='yes')?' eael-toc-collapse':' ';
         $toc_style_class    .= ($list_icon =='number')?' eael-toc-number':' ';
         $toc_style_class    .= ($toc_word_wrap =='yes')?' eael-toc-word-wrap':' ';
