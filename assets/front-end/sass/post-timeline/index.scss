@@ -64,7 +64,7 @@
 }
 
 .eael-timeline-post-inner {
-	background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	/*background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);*/
 	border: 8px solid #e5eaed;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
 	float: right;
@@ -121,7 +121,7 @@
 	height: 100%;
 	overflow: hidden;
 	position: relative;
-	opacity: .6;
+	opacity: 1;
 	-webkit-transition: all .3s;
 	-moz-transition: all .3s;
 	transition: all .3s;
