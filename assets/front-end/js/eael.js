@@ -23140,7 +23140,15 @@ function RunStickyPlayer(elem) {
             return contentSelectro;
         }
 
-        $(document).on('click','.eael-toc-close ,.eael-toc-button',function(){
+        $('body').click(function(e) {
+            var target = $( e.target );
+            if ( !$('.eael-toc').hasClass('expanded') && $(target).closest('#eael-toc').length === 0 ) {
+                $('.eael-toc').toggleClass('expanded');
+            }
+        });
+
+        $(document).on('click','.eael-toc-close ,.eael-toc-button',function(event){
+            event.stopPropagation();
             $('.eael-toc').toggleClass('expanded');
         });
 
