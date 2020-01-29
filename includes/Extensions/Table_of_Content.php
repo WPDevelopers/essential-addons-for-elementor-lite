@@ -359,6 +359,19 @@
                 ]
             );
 
+            $element->add_control(
+                'eael_ext_toc_close_button_text_style',
+                [
+                    'label' => __('List Style', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'top_to_bottom',
+                    'options' => [
+                        'top_to_bottom' => __('Top to Bottom', 'essential-addons-for-elementor-lite'),
+                        'bottom_to_top' => __('Bottom to Top', 'essential-addons-for-elementor-lite')
+                    ]
+                ]
+            );
+
             $element->end_controls_section();
 
             $element->start_controls_section(
