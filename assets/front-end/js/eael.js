@@ -23257,6 +23257,17 @@ function RunStickyPlayer(elem) {
                     }
                 });
 
+            elementor.settings.page.addChangeCallback(
+                "eael_ext_toc_close_button_text_style",
+                function (newValue) {
+                    var toc  = $("#eael-toc");
+                    if (newValue === "bottom_to_top") {
+                        toc.addClass('eael-bottom-to-top');
+                    }else{
+                        toc.removeClass('eael-bottom-to-top');
+                    }
+                });
+
             elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change );
 
             function ea_toc_title_change ( newValue ) {
