@@ -1395,6 +1395,148 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
@@ -1893,148 +2035,6 @@ return ImagesLoaded;
 });
 
 
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -7460,54 +7460,6 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -16640,6 +16592,54 @@ typeof navigator === "object" && (function (global, factory) {
 
 }));
 
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -21000,67 +21000,6 @@ return $;
     });
 })(jQuery);
 
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -21982,6 +21921,67 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
+});
+
 var ContentTicker = function($scope, $) {
     var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
         $items =
@@ -22246,6 +22246,144 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
 });
 
+var EventCalendar = function($scope, $) {
+
+	var element	= $(".eael-event-calendar-cls", $scope),
+		CloseButton	= $(".eaelec-modal-close", $scope).eq(0),
+		ecModal		= $('#eaelecModal', $scope),
+		eventAll	= element.data("events"),
+		daysWeek 	= element.data("days_week"),
+		monthNames	= element.data("month_names"),
+		firstDay	= element.data("first_day"),
+		calendarID	= element.data("cal_id");
+		
+		$("#eael-event-calendar-" + calendarID).fullCalendar({
+			editable: false,
+			selectable: false,
+			draggable: false,
+			firstDay: firstDay,
+			slotLabelFormat: "HH:mm",
+			timeFormat: "hh:mm a",
+			nextDayThreshold: "00:00:00",
+			header: {
+				left: "prev,next,today",
+				center: "title",
+				right: "agendaDay,agendaWeek,month",
+			},
+			buttonText: {
+				today: "Today"
+			},
+			allDayText: "All day",
+			events: eventAll,
+			selectHelper: true,
+			dayNamesShort: daysWeek,
+			monthNames: monthNames,
+			eventRender: function(event, element) {
+				element.attr("href", "javascript:void(0);");
+				element.click(function() {
+					ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
+					if (event.allDay == "yes") {
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
+					} else {
+						if (moment(event.start).isSame(Date.now(), "day") == true) {
+							$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format("h:mm A"));
+						}
+						if (
+							moment(event.start).format("MM-DD-YYYY") ==
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format("h:mm A"));
+						}
+						if (
+							moment(event.start).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
+							moment(event.start).format("MM-DD-YYYY") >
+								moment(new Date())
+									.add(1, "days")
+									.format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, h:mm A"));
+						}
+
+						if (moment(event.end).isSame(Date.now(), "day") == true) {
+							$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+						}
+						if (
+							moment(event.start).format("MM-DD-YYYY") !=
+								moment(new Date())
+									.add(1, "days")
+									.format("MM-DD-YYYY") &&
+							moment(event.end).format("MM-DD-YYYY") ==
+								moment(new Date())
+									.add(1, "days")
+									.format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-end").html("- Tomorrow, " + moment(event.end).format("h:mm A"));
+						}
+						if (
+							moment(event.start).format("MM-DD-YYYY") ==
+								moment(new Date())
+									.add(1, "days")
+									.format("MM-DD-YYYY") &&
+							moment(event.end).format("MM-DD-YYYY") ==
+								moment(new Date())
+									.add(1, "days")
+									.format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+						}
+						if (
+							moment(event.end).format("MM-DD-YYYY") >
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-end").html("- " + moment(event.end).format("MMM Do, h:mm A"));
+						}
+
+						if (
+							moment(event.start).format("MM-DD-YYYY") >
+								moment(new Date())
+									.add(1, "days")
+									.format("MM-DD-YYYY") &&
+							moment(event.start).format("MM-DD-YYYY") == moment(event.end).format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+						}
+					}
+
+					$(".eaelec-modal-header h2").html(event.title);
+					$(".eaelec-modal-body p").html(event.description);
+					$(".eaelec-modal-footer a").attr("href", event.url);
+					if (event.external == "on") {
+						$(".eaelec-modal-footer a").attr("target", "_blank");
+					}
+					if (event.nofollow == "on") {
+						$(".eaelec-modal-footer a").attr("rel", "nofollow");
+					}
+					if (event.url == "") {
+						$(".eaelec-modal-footer a").css("display", "none");
+					}
+					
+					// Popup color
+					$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
+				});
+			}
+		});
+
+		// When the user clicks on <span> (x), close the modal
+		CloseButton.on('click', function() {
+			ecModal.addClass('eael-ec-modal-removing').removeClass('eael-ec-popup-ready');
+		});
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	elementorFrontend.hooks.addAction(
+		"frontend/element_ready/eael-event-calendar.default",
+		EventCalendar
+	);
+});
 var FacebookFeed = function($scope, $) {
     if (!isEditMode) {
         $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
