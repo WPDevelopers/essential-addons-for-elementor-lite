@@ -52,6 +52,15 @@
 .eael-fluentform-section-break-content-center .ff-el-group.ff-el-section-break{ text-align: center; }
 .eael-fluentform-section-break-content-right .ff-el-group.ff-el-section-break{ text-align: right; }
 
-// .eael-contact-form.eael-fluent-form-wrapper.eael-contact-form-align-left { margin: 0 auto 0 0; }
-// .eael-contact-form.eael-fluent-form-wrapper.eael-contact-form-align-center { float: none; margin: 0 auto; }
-// .eael-contact-form.eael-fluent-form-wrapper.eael-contact-form-align-right { margin: 0 0 0 auto; }
+.ff-step-header .ff-el-progress-status,
+.ff-el-progress { display: none; }
+
+.eael-ff-step-header-yes .ff-step-header .ff-el-progress-status { display: block; }
+.eael-ff-step-progressbar-yes .ff-el-progress { display: block; }
+
+.ff-el-progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
