@@ -2,7 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 
-#eael-toc {
+#eael-toc.eael-box-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -37,6 +37,9 @@ html {
   -webkit-transform: translate(21px, 178px) rotate(-90deg);
           transform: translate(21px, 178px) rotate(-90deg);
 }
+.eael-toc.expanded.eael-box-shadow .eael-toc-button {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .eael-toc.expanded .eael-toc-button {
   display: inline-block;
   -webkit-transform: translate(21px, 1px) rotate(90deg);
@@ -52,7 +55,6 @@ html {
   text-transform: none;
   -webkit-transform-origin: left;
           transform-origin: left;
-  box-shadow: 5px 10px 20px 10px #54595f7a;
 }
 .eael-toc.expanded .eael-toc-button i {
   margin-right: 10px;
@@ -262,4 +264,14 @@ html {
 }
 .eael-toc .eael-toc-not-found {
   color: #a94442;
+}
+
+.eael-toc-body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+.eael-toc-body::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
 }

@@ -220,6 +220,7 @@
                     'label' => __( 'Transition Speed', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::SLIDER,
                     'size_units' => [ 's' ],
+                    'separator' => 'before',
                     'range' => [
                         's' => [
                             'min' => .2,
@@ -234,6 +235,38 @@
                     'selectors' => [
                         '{{WRAPPER}} #eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
                     ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_box_shadow',
+                [
+                    'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'default' => 'no',
+                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'separator' => 'before',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_auto_collapse',
+                [
+                    'label' => __('TOC Auto Collapse', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'default' => 'yes',
+                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'separator' => 'before',
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
                     ],
@@ -362,7 +395,7 @@
             $element->add_control(
                 'eael_ext_toc_close_button_text_style',
                 [
-                    'label' => __('List Style', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Text Orientation', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'top_to_bottom',
                     'options' => [
