@@ -1729,6 +1729,17 @@ class GravityForms extends Widget_Base {
                 ],
             ]
         );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'eaelgf_thankyou_message_typography',
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message',
+				'separator'             => 'before',
+            ]
+        );
         
         $this->end_controls_section();
     }
