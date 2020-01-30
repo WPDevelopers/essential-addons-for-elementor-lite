@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.7.1
+Stable tag: 3.7.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -178,6 +178,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.7.2 - 23/01/2020 =
+- Fixed: Admin notice comes after clicking on "Never show again"
+- Fixed: Sticky video SVG upload issue
+- Few minor bugfix and improvements
 
 = 3.7.1 - 14/01/2020 =
 - Fixed: Moment not defined notice
