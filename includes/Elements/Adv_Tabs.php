@@ -275,6 +275,7 @@ class Adv_Tabs extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-advance-tabs',
             ]
         );
+
         $this->add_responsive_control(
             'eael_adv_tabs_border_radius',
             [
@@ -286,6 +287,7 @@ class Adv_Tabs extends Widget_Base
                 ],
             ]
         );
+
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
