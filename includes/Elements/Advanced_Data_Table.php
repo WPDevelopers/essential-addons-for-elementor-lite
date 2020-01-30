@@ -1318,7 +1318,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+                'default' => '#fafafa',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
                 ],

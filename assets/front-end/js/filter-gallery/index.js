@@ -5,6 +5,7 @@ var filterableGalleryHandler = function($scope, $) {
         form = $scope.find('.fg-layout-3-search-box'),
         input = $scope.find('#fg-search-box-input'),
         searchRegex, buttonFilter, timer;
+    var delegateAbc = '';
 
     if(form.length) {
         form.on('submit', function(e) {
@@ -50,12 +51,27 @@ var filterableGalleryHandler = function($scope, $) {
             }
         });
 
+        //alert($settings.widget_id);
+        // Popup
+        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
+            type: "image",
+            gallery: {
+                enabled: $gallery_enabled
+            },
+            callbacks: {
+                close: function() {
+                    $("#elementor-lightbox").hide();
+                }
+            },
+            fixedContentPos: false,
+        });
 
         // filter
         $scope.on("click", ".control", function() {
 
             var $this = $(this);
             buttonFilter = $( this ).attr('data-filter');
+            delegateAbc = $( this ).attr('data-filter') + ' a.eael-magnific-link';
 
             if($scope.find('#fg-filter-trigger > span')) {
                 $scope.find('#fg-filter-trigger > span').text($this.text());
@@ -63,6 +79,19 @@ var filterableGalleryHandler = function($scope, $) {
 
             $this.siblings().removeClass("active");
             $this.addClass("active");
+
+            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: $gallery_enabled,
+                },
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                },
+                fixedContentPos: false,
+            });
 
             $isotope_gallery.isotope();
         });
@@ -99,18 +128,6 @@ var filterableGalleryHandler = function($scope, $) {
         
 
         // popup
-        $(".eael-magnific-link", $scope).magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: $gallery_enabled
-            },
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            }
-        });
-
         $($scope).magnificPopup({
             delegate: ".eael-magnific-video-link",
             type: "iframe",

@@ -101,24 +101,6 @@ class Betterdocs_Category_Grid extends Widget_Base
             );
 
             $this->add_responsive_control(
-                'column_space',
-                [
-                    'label' => __('Column Space', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => ['px', '%', 'em'],
-                    'range' => [
-                        '%' => [
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .betterdocs-categories-wrap .docs-single-cat-wrap' => 'margin: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
                 'column_padding',
                 [
                     'label' => __('Column Padding', 'essential-addons-for-elementor-lite'),
@@ -505,11 +487,34 @@ class Betterdocs_Category_Grid extends Widget_Base
         $shortcode  = sprintf('[betterdocs_category_grid]', apply_filters('eael_betterdocs_category_grid_params', []));
 
         echo do_shortcode( shortcode_unautop( $shortcode ) );
+        $this->load_js_on_editor();
     }
 
-	public function render_plain_content() {
-		// In plain mode, render without shortcode
-		echo '[betterdocs_category_grid]';
-	}
+    protected function load_js_on_editor()
+    {
+        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+        ?>
+        	<script>
+                jQuery(document).ready(function($) {
+                    var $scope = $(".elementor-element-"+"<?php echo $this->get_id(); ?>"),
+                        masonryGrid = $(".betterdocs-categories-wrap.layout-masonry", $scope);
+                    if (masonryGrid.length) {
+                        var columnPerGrid = masonryGrid.attr('data-column'),
+                            masonryItem = $(".betterdocs-categories-wrap.layout-masonry .docs-single-cat-wrap"),
+                            doc_page_column_space = <?php echo get_theme_mod('betterdocs_doc_page_column_space'); ?>,
+                            total_margin = columnPerGrid * doc_page_column_space;
+
+                        masonryItem.css("width", "calc((100% - "+total_margin+"px) / "+parseInt(columnPerGrid)+")");
+                        masonryGrid.masonry({
+                            itemSelector: ".docs-single-cat-wrap",
+                            percentPosition: true,
+                            gutter: doc_page_column_space
+                        });
+                    }
+                });
+            </script>
+            <?php
+        }
+    }
 
 }
