@@ -153,8 +153,7 @@
 .fc-toolbar.fc-header-toolbar button.fc-button.fc-today-button,
 .fc-toolbar.fc-header-toolbar button.fc-next-button.fc-button,
 .fc-toolbar.fc-header-toolbar button.fc-prev-button,
-.fc-toolbar.fc-header-toolbar button.fc-today-button
-button.fc-next-button,
+.fc-toolbar.fc-header-toolbar button.fc-today-button button.fc-next-button,
 .fc-toolbar.fc-header-toolbar button.fc-prev-button {
   padding: 8px 30px 8px 30px;
 }
@@ -291,7 +290,7 @@ span.fc-day-number {
           transform: scale(0.5);
 }
 .eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eael-ec-modal-bg {
-  opacity: .7;
+  opacity: 0.7;
 }
 .eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eaelec-modal-content {
   opacity: 1;
@@ -308,7 +307,9 @@ span.fc-day-number {
 }
 
 @media only screen and (max-width: 767px) {
-  .fc-right, .fc-button-group, .fc-left {
+  .fc-right,
+  .fc-button-group,
+  .fc-left {
     width: 100%;
   }
 
@@ -345,7 +346,8 @@ span.fc-day-number {
     font-size: 14px;
   }
 
-  .fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
+  .fc-basic-view .fc-day-number,
+  .fc-basic-view .fc-week-number {
     padding: 0;
     margin: 0;
     font-size: 10px;
