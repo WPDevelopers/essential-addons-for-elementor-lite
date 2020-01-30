@@ -34,17 +34,21 @@
 .wpdeveloper-notice-thumbnail img:hover {
     opacity: 1;
 }
-.wpdeveloper-update-notice .wpdeveloper-notice-thumbnail img {
+.wpdeveloper-update-notice .wpdeveloper-notice-thumbnail img,
+.wpdeveloper-update_400k-notice .wpdeveloper-notice-thumbnail img {
     width: 32px;
 }
-.wpdeveloper-update-notice .wpdeveloper-notice-thumbnail {
+.wpdeveloper-update-notice .wpdeveloper-notice-thumbnail,
+.wpdeveloper-update_400k-notice .wpdeveloper-notice-thumbnail {
     width: auto;
     padding: 7px;
 }
-.wpdeveloper-update-notice .wpdeveloper-notice-message {
+.wpdeveloper-update-notice .wpdeveloper-notice-message,
+.wpdeveloper-update_400k-notice .wpdeveloper-notice-message {
     padding: 5px 0;
 }
-.wpdeveloper-update-notice {
+.wpdeveloper-update-notice,
+.wpdeveloper-update_400k-notice {
     border-color: #6648fe;
     padding: 0
 }
