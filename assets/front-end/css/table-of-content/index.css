@@ -266,12 +266,16 @@ html {
   color: #a94442;
 }
 
+.eael-toc-body::-webkit-scrollbar {
+  width: 6px;
+}
+
 .eael-toc-body::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
 
 .eael-toc-body::-webkit-scrollbar-thumb {
-  background: red;
+  background: #aaa;
   border-radius: 10px;
 }
