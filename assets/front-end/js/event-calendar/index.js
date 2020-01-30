@@ -1,15 +1,15 @@
-jQuery(window).on("elementor/frontend/init", function() {
-	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", function($scope, $) {
-		var element = $(".eael-event-calendar-cls", $scope);
-		var eventAll = element.data("events");
-		var daysWeek = element.data("days_week");
-		var monthNames = element.data("month_names");
-		var firstDay = element.data("first_day");
-		var eaelevModal = document.getElementById("eaelecModal");
-		var eaelevSpan = document.getElementsByClassName("eaelec-modal-close")[0];
-		var calId = element.data("cal_id");
+var EventCalendar = function($scope, $) {
 
-		$("#eael-event-calendar-" + calId).fullCalendar({
+	var element	= $(".eael-event-calendar-cls", $scope),
+		CloseButton	= $(".eaelec-modal-close", $scope).eq(0),
+		ecModal		= $('#eaelecModal', $scope),
+		eventAll	= element.data("events"),
+		daysWeek 	= element.data("days_week"),
+		monthNames	= element.data("month_names"),
+		firstDay	= element.data("first_day"),
+		calendarID	= element.data("cal_id");
+		
+		$("#eael-event-calendar-" + calendarID).fullCalendar({
 			editable: false,
 			selectable: false,
 			draggable: false,
@@ -18,9 +18,9 @@ jQuery(window).on("elementor/frontend/init", function() {
 			timeFormat: "hh:mm a",
 			nextDayThreshold: "00:00:00",
 			header: {
-				left: "prev,next today",
+				left: "prev,next,today",
 				center: "title",
-				right: "month,agendaWeek,agendaDay"
+				right: "agendaDay,agendaWeek,month",
 			},
 			buttonText: {
 				today: "Today"
@@ -33,7 +33,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 			eventRender: function(event, element) {
 				element.attr("href", "javascript:void(0);");
 				element.click(function() {
-					eaelevModal.style.display = "block";
+					ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
 					if (event.allDay == "yes") {
 						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
 					} else {
@@ -117,40 +117,22 @@ jQuery(window).on("elementor/frontend/init", function() {
 					if (event.url == "") {
 						$(".eaelec-modal-footer a").css("display", "none");
 					}
+					
 					// Popup color
-					$(".eaelec-modal-close").css("background-color", event.borderColor);
 					$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
-					$(".eaelec-modal-header span").css("color", event.borderColor);
 				});
 			}
 		});
 
-		$("#eael-event-calendar-" + calId + " .fc-right .fc-button-group").css("display", "none");
-		$("#eael-event-calendar-" + calId + " .fc-right").append(
-			'<select id="eaelec-select-mwd-' +
-				calId +
-				'" class="eaelec-select-view form-control">' +
-				'<option value="month">Month</option>' +
-				'<option value="week">Week</option>' +
-				'<option value="day">Day</option>' +
-				"</select>"
-		);
-
-		$("#eaelec-select-mwd-" + calId).on("change", function(event) {
-			if ($(this).val() === "month") {
-				$("#eael-event-calendar-" + calId).fullCalendar("changeView", "month");
-			}
-			if ($(this).val() === "week") {
-				$("#eael-event-calendar-" + calId).fullCalendar("changeView", "agendaWeek");
-			}
-			if ($(this).val() === "day") {
-				$("#eael-event-calendar-" + calId).fullCalendar("changeView", "agendaDay");
-			}
-		});
-
 		// When the user clicks on <span> (x), close the modal
-		eaelevSpan.onclick = function() {
-			eaelevModal.style.display = "none";
-		};
-	});
+		CloseButton.on('click', function() {
+			ecModal.addClass('eael-ec-modal-removing').removeClass('eael-ec-popup-ready');
+		});
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	elementorFrontend.hooks.addAction(
+		"frontend/element_ready/eael-event-calendar.default",
+		EventCalendar
+	);
 });
