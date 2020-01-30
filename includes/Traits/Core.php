@@ -180,6 +180,8 @@ trait Core
                 'eael_ext_toc_supported_heading_tag'                => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag'),
                 'eael_ext_toc_collapse_sub_heading'                 => $page_settings_model->get_settings( 'eael_ext_toc_collapse_sub_heading'),
                 'eael_ext_toc_word_wrap'                            => $page_settings_model->get_settings( 'eael_ext_toc_word_wrap'),
+                'eael_ext_toc_box_shadow'                           => $page_settings_model->get_settings( 'eael_ext_toc_box_shadow'),
+                'eael_ext_toc_auto_collapse'                        => $page_settings_model->get_settings( 'eael_ext_toc_auto_collapse'),
 
                 //toc header setting
                 'eael_ext_table_of_content_header_bg'                   => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
