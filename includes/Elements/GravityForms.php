@@ -1725,7 +1725,7 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message' => 'color: {{VALUE}}!important',
                 ],
             ]
         );
