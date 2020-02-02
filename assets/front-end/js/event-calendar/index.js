@@ -15,6 +15,7 @@ var EventCalendar = function($scope, $) {
 			draggable: false,
 			firstDay: firstDay,
 			slotLabelFormat: "HH:mm",
+			slotDuration: '01:00',
 			timeFormat: "hh:mm a",
 			nextDayThreshold: "00:00:00",
 			header: {

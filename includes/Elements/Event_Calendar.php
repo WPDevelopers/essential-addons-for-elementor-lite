@@ -604,6 +604,26 @@ class Event_Calendar extends Widget_Base
                     'separator' => 'after',
                 ]
             );
+        // Buttons style
+        $this->add_control(
+            'calender_order_style',
+            [
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+        $this->add_control(
+            'calendar_border_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-unthemed thead' => 'border-color: {{VALUE}};'
+                ]
+            ]
+        );
 
             $this->end_controls_tab();
 
