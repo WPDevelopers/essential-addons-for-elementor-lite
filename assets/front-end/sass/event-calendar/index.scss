@@ -118,6 +118,20 @@
 		padding: 0px 10px 0 35px;
 		margin: 10px 0;
 		color: #555555;
+		height: 300px;
+		overflow-y: hidden;
+		&:hover{
+			overflow-y: auto;
+			margin-right: 2px;
+		}
+	}
+
+	.eaelec-modal-body::-webkit-scrollbar {
+		width: 6px;
+	}
+	.eaelec-modal-body::-webkit-scrollbar-thumb {
+		background: #cc0000;
+		border-radius: 10px;
 	}
 
 	.eaelec-modal-footer {
@@ -316,11 +330,17 @@ span.fc-day-number {
 		.fc-event {
 			min-height: 35px;
 			.fc-content {
-				display: flex;
+				/* display: flex; */
 				align-items: center;
 				justify-content: center;
 				height: 100%;
 				width: 100%;
+			}
+
+			.fc-content .fc-title{
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 	}

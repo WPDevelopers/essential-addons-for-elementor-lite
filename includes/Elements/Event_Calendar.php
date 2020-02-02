@@ -160,6 +160,15 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $repeater->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_event_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .fc-content span.fc-title',
+            ]
+        );
+
         $repeater->end_controls_tab();
 
         $repeater->start_controls_tab(
