@@ -801,15 +801,14 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_group_control(
-			Group_Control_Background::get_type(),
+        $this->add_control(
+            'date_background',
 			[
-				'name' => 'date_background',
+                'type' => Controls_Manager::COLOR,
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
-				'types' => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .fc-day-number',
-                'exclude'   => [
-                    'image'
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}} !important',
                 ]
 			]
 		);
@@ -875,6 +874,37 @@ class Event_Calendar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .fc-day-number' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'today_date_setting',
+            [
+                'label' => __('Today Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'today_date_color',
+            [
+                'type' => Controls_Manager::COLOR,
+                'label' => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'selectors' => [
+                    '{{WRAPPER}} .fc-today .fc-day-number' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'today_date_background',
+            [
+                'type' => Controls_Manager::COLOR,
+                'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                'selectors' => [
+                    '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}} !important',
+                ]
             ]
         );
 
