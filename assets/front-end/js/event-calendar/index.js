@@ -61,6 +61,21 @@ var EventCalendar = function($scope, $) {
 						if (moment(event.end).isSame(Date.now(), "day") == true) {
 							$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
 						}
+
+						if (
+							moment(event.start).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") &&
+							moment(event.end).isSame(Date.now(), "day") == true
+						) {
+							$("span.eaelec-event-date-end").html("- Today, " + moment(event.end).format("h:mm A"));
+						}
+
+						if (
+							moment(event.start).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") &&
+							moment(event.end).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY")
+						) {
+							$("span.eaelec-event-date-end").html("- " + moment(event.end).format("MMM Do, h:mm A"));
+						}
+
 						if (
 							moment(event.start).format("MM-DD-YYYY") !=
 								moment(new Date())
