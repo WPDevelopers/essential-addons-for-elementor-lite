@@ -158,6 +158,20 @@
 			padding: 5px !important;
 		}
 	}
+
+	.fc-view {
+		&.fc-agendaWeek-view {
+			.fc-slats {
+				.fc-widget-content {
+					&.fc-axis.fc-time {
+						width: 55px !important;
+						text-align: center;
+					}
+					padding: 20px 0;
+				}
+			}
+		}
+	}
 }
 
 // Calendar Header
@@ -211,6 +225,9 @@ button.fc-button.fc-state-default {
 	&.fc-state-active, &:hover, &:visited, &:focus {
 		background: #5725ff;
 		color: #fff;
+		border: none;
+		box-shadow: none;
+		outline: none;
 	}
 }
 
@@ -297,8 +314,7 @@ span.fc-day-number {
 	}
 	.fc-time-grid {
 		.fc-event {
-			height: 35px;;
-
+			min-height: 35px;
 			.fc-content {
 				display: flex;
 				align-items: center;
@@ -394,5 +410,7 @@ span.fc-day-number {
 	.fc-basic-view .fc-body .fc-row {
 		min-height: 2em;
 	}
+
+
 
 }

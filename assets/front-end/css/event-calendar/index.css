@@ -143,6 +143,13 @@
     padding: 5px !important;
   }
 }
+.eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-slats .fc-widget-content {
+  padding: 20px 0;
+}
+.eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-slats .fc-widget-content.fc-axis.fc-time {
+  width: 55px !important;
+  text-align: center;
+}
 
 .fc-toolbar.fc-header-toolbar {
   margin-bottom: 25px;
@@ -201,6 +208,9 @@ button.fc-button.fc-state-default {
 button.fc-button.fc-state-default.fc-state-active, button.fc-button.fc-state-default:hover, button.fc-button.fc-state-default:visited, button.fc-button.fc-state-default:focus {
   background: #5725ff;
   color: #fff;
+  border: none;
+  box-shadow: none;
+  outline: none;
 }
 
 th.fc-widget-header > span {
@@ -262,7 +272,7 @@ span.fc-day-number {
   font-weight: normal;
 }
 .fc-unthemed .fc-time-grid .fc-event {
-  height: 35px;
+  min-height: 35px;
 }
 .fc-unthemed .fc-time-grid .fc-event .fc-content {
   display: -webkit-box;
