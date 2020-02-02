@@ -352,6 +352,19 @@ $config = [
                 ],
             ],
         ],
+        'event-calendar' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Event_Calendar',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/event-calendar/fullcalendar.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/event-calendar/index.min.css',
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/fullcalendar.packaged.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/event-calendar/index.min.js',
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'eael-reading-progress' => [
@@ -365,8 +378,19 @@ $config = [
                 ],
             ],
         ],
+        'eael-table-of-content' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/table-of-content/index.min.css',
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/table-of-content/index.min.js',
+                ],
+            ],
+        ],
         'eael-post-duplicator' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
+            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator'
         ]
     ],
 ];

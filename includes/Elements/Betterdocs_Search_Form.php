@@ -245,7 +245,7 @@ class Betterdocs_Search_Form extends Widget_Base
             $this->add_control(
                 'search_field_close_icon_border_color',
                 [
-                    'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .docs-search-loader, {{WRAPPER}} .docs-search-close .close-border' => 'stroke: {{VALUE}};',

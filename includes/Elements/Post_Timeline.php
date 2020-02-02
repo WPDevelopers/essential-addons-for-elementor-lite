@@ -59,6 +59,21 @@ class Post_Timeline extends Widget_Base
         );
 
         $this->add_control(
+			'eael_timeline_display_overlay',
+			[
+				'label' => __( 'Show Overlay', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'your-plugin' ),
+				'label_off' => __( 'Hide', 'your-plugin' ),
+				'return_value' => 'yes',
+                'default' => 'yes',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-timeline-post-image' => 'opacity: .6',
+                ],
+			]
+		);
+
+        $this->add_control(
             'eael_timeline_overlay_color',
             [
                 'label' => __('Overlay Color', 'essential-addons-for-elementor-lite'),
@@ -68,7 +83,9 @@ class Post_Timeline extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-inner' => 'background: {{VALUE}}',
                 ],
-
+                'condition' => [
+                    'eael_timeline_display_overlay' => 'yes',
+                ],
             ]
         );
 
