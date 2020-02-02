@@ -262,17 +262,21 @@ span.fc-day-number {
   font-weight: normal;
 }
 .fc-unthemed .fc-time-grid .fc-event {
-  height: 35px;
+  min-height: 35px;
 }
 .fc-unthemed .fc-time-grid .fc-event .fc-content {
-  display: -webkit-box;
-  display: flex;
+  /* display: flex; */
   -webkit-box-align: center;
           align-items: center;
   -webkit-box-pack: center;
           justify-content: center;
   height: 100%;
   width: 100%;
+}
+.fc-unthemed .fc-time-grid .fc-event .fc-content .fc-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .fc-unthemed .fc-event:hover {
   color: #707070;

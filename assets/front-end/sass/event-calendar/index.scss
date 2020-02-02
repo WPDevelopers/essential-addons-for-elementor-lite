@@ -297,14 +297,20 @@ span.fc-day-number {
 	}
 	.fc-time-grid {
 		.fc-event {
-			height: 35px;;
+			min-height: 35px;
 
 			.fc-content {
-				display: flex;
+				/* display: flex; */
 				align-items: center;
 				justify-content: center;
 				height: 100%;
 				width: 100%;
+			}
+
+			.fc-content .fc-title{
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 	}
