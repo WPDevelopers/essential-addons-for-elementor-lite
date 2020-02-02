@@ -108,6 +108,19 @@
   padding: 0px 10px 0 35px;
   margin: 10px 0;
   color: #555555;
+  height: 300px;
+  overflow-y: hidden;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body:hover {
+  overflow-y: auto;
+  margin-right: 2px;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar-thumb {
+  background: #cc0000;
+  border-radius: 10px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-footer {
   padding: 0px 10px 0 35px;
