@@ -800,6 +800,37 @@ class Event_Calendar extends Widget_Base
                 ]
 			]
         );
+
+        $this->add_control(
+            'days_view_settings',
+            [
+                'label' => __('Day View', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'days_row_odd_color',
+            [
+                'label' => __('Odd row Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(odd) td:not(.fc-axis)' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'days_row_even_color',
+            [
+                'label' => __('Even row Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(even) td:not(.fc-axis)' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
