@@ -80,8 +80,12 @@ html {
   padding: 12px 20px;
   background: #fff6f3;
   min-width: 20vh;
-  overflow-y: auto;
   max-height: 70vh;
+  overflow-y: hidden;
+}
+.eael-toc .eael-toc-body:hover {
+  overflow-y: auto;
+  margin-right: 2px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin-left: -5px;
@@ -126,7 +130,7 @@ html {
   display: block;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list li {
-  font-size: 15px;
+  font-size: 16px;
   list-style: none;
   margin: 0 20px 0 20px;
 }
@@ -268,11 +272,6 @@ html {
 
 .eael-toc-body::-webkit-scrollbar {
   width: 6px;
-}
-
-.eael-toc-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
 }
 
 .eael-toc-body::-webkit-scrollbar-thumb {
