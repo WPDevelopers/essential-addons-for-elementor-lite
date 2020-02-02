@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Schemes\Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
@@ -1883,5 +1884,141 @@ trait Helper
         }
 
         return $html;
+    }
+
+    /**
+     * @param $page_obj
+     * @param $key
+     * @return string
+     */
+    public function eael_get_toc_setting_value( $page_obj, $key, $global_settings ){
+
+        if( $page_obj->get_settings('eael_ext_table_of_content') == 'yes' ){
+            return $page_obj->get_settings( $key );
+        }
+
+        if ( isset( $global_settings['table_of_content']['enabled'] ) ){
+            return $global_settings['table_of_content'][$key];
+        }
+
+        return '';
+    }
+
+    public function eael_toc_page_scope( $page_settings_model, $global_settings){
+        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['post_id'])) {
+            if(get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
+                return false;
+            } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
+                return false;
+            } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
+                return false;
+            } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param $post_css
+     * @param $elements
+     * @return string|void
+     */
+    public function eael_toc_global_css( $page_settings_model ,$global_settings ){
+
+        $eael_toc = $global_settings['table_of_content'];
+        $toc_list_color_active      = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
+        $toc_list_separator_style   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_style'];
+
+        $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography',$eael_toc);
+        $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography',$eael_toc);
+
+
+        $toc_global_css = "
+            .eael-toc-global .eael-toc-header,
+            .eael-toc-global.expanded .eael-toc-button
+            {background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};}
+            
+            .eael-toc-global .eael-toc-header .eael-toc-title,
+            .eael-toc-global.expanded .eael-toc-button
+            {
+                color:{$eael_toc['eael_ext_table_of_content_header_text_color']};
+                $header_typography
+            }
+
+            .eael-toc-global .eael-toc-close
+            {
+                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']};
+                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
+            }
+            
+            .eael-toc-global .eael-toc-body
+            {background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};}
+            
+            .eael-toc-global .eael-toc-body ul.eael-toc-list li a,
+            .eael-toc-global .eael-toc-body ul.eael-toc-list li,
+            .eael-toc-global .eael-toc-body ul.eael-toc-list li:before
+            {color:{$eael_toc['eael_ext_table_of_content_list_text_color']};}
+            
+            .eael-toc-global ul.eael-toc-list li.active > a,
+            .eael-toc-global ul.eael-toc-list li.eael-highlight > a,
+            .eael-toc-global ul.eael-toc-list li.active,
+            .eael-toc-global ul.eael-toc-list li.active:before,
+            .eael-toc-global ul.eael-toc-list li.eael-highlight,
+            .eael-toc-global ul.eael-toc-list li.eael-highlight:before
+            {color:$toc_list_color_active !important;}
+            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before
+            {border-bottom:10px solid $toc_list_color_active !important;}
+            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after
+            {background-color:$toc_list_color_active !important;}
+            
+            .eael-toc-global ul.eael-toc-list > li
+            {
+                color:{$eael_toc['eael_ext_table_of_content_list_separator_color']} !important;
+                $list_typography
+            }
+        ";
+        if($toc_list_separator_style!='none'){
+            $toc_global_css .= "
+            .eael-toc-global ul.eael-toc-list > li
+            {border-top: 0.5px $toc_list_separator_style !important;}
+            .eael-toc ul.eael-toc-list>li:first-child
+            {border: none !important;}";
+        }
+
+        wp_register_style( 'eael-toc-global', false );
+        wp_enqueue_style( 'eael-toc-global' );
+        wp_add_inline_style( 'eael-toc-global', $toc_global_css );
+    }
+
+    /**
+     * @param $id
+     * @param $global_data
+     * @return string
+     */
+    public function eael_get_typography_data( $id, $global_data){
+        $typo_data = '';
+        $fields_keys = [
+            'font_family',
+            'font_weight',
+            'text_transform',
+            'font_style',
+            'text_decoration',
+            'font_size',
+            'letter_spacing',
+            'line_height'
+        ];
+        foreach( $fields_keys as $key => $field ){
+            $typo_attr = $global_data[$id.'_'.$field];
+            $attr = str_replace('_','-',$field);
+            if(in_array($field,['font_size','letter_spacing','line_height'])){
+                if(!empty($typo_attr['size'])){
+                    $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']};";
+                }
+            }elseif(!empty($typo_attr)){
+                $typo_data .= "{$attr}:{$typo_attr};";
+            }
+        }
+        return $typo_data;
     }
 }

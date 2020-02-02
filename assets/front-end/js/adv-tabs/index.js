@@ -66,6 +66,8 @@ var AdvanceTabHandler = function($scope, $) {
             $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
             $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
             $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
+        var $imgCompContainer = tabsContent.eq(currentTabIndex).find('.eael-img-comp-container');
+            
 
         if($postGridGallery.length) {
             $postGridGallery.isotope();
@@ -83,11 +85,16 @@ var AdvanceTabHandler = function($scope, $) {
             $instaGallery.isotope("layout");
         }
 
+        if($imgCompContainer.length) {
+            $imgCompContainer.isotope("layout");
+        }
+
         $(tabsContent).each(function(index) {
             $(this).removeClass("active-default");
         });
     });
 };
+
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",

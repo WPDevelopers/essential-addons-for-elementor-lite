@@ -829,7 +829,7 @@ class GravityForms extends Widget_Base {
                 'name'                  => 'field_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .ginput_container_text input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
 				'separator'             => 'before',
             ]
         );
@@ -1725,8 +1725,19 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message' => 'color: {{VALUE}}!important',
                 ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'eaelgf_thankyou_message_typography',
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+                'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gform_confirmation_wrapper .gform_confirmation_message',
+				'separator'             => 'before',
             ]
         );
         
