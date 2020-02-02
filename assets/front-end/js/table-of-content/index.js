@@ -77,6 +77,10 @@
                     ListNode = listId;
                 }
 
+                if(currentHeading.textContent =='' ){
+                    continue;
+                }
+
                 var liNode = document.createElement('LI');
                 var anchorTag = document.createElement('A');
                 var spanTag = document.createElement('SPAN');

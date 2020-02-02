@@ -268,7 +268,7 @@
                 'eael_ext_toc_ad_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('Need extra info about TOC <strong><a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'raw' => __('Need more information about TOC <strong><a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a></strong>', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                     'separator' => 'before',
                     'condition' => [
