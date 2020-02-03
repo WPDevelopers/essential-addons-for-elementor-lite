@@ -40,6 +40,7 @@ trait Eael_WPML {
                     'editor_type' => 'LINE',
                 ]
             ],
+            'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Creative_Button',
         ];
 
         $widgets['eael-cta-box'] = [
