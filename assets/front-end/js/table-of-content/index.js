@@ -21,6 +21,9 @@
             });
             eael_list_hierarchy( selector, supportTag);
             var  firstChild = $('ul.eael-toc-list > li');
+            if(firstChild.length<1){
+                document.getElementById("eael-toc").classList.add("eael-toc-disable");
+            }
             firstChild.each(function(){
                 this.classList.add('eael-first-child');
             });
