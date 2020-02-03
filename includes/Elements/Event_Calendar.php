@@ -628,8 +628,10 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td' => 'border-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-unthemed thead' => 'border-color: {{VALUE}};'
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc td' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc th' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  td.fc-today' => 'border-left-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  table thead:first-child tr:first-child td' => 'border-top-color: {{VALUE}} !important;'
                 ]
             ]
         );
@@ -857,6 +859,17 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .fc-day-number' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'date_number_background',
+            [
+                'type' => Controls_Manager::COLOR,
+                'label' => __( 'Number Background', 'essential-addons-for-elementor-lite' ),
+                'selectors' => [
+                    '{{WRAPPER}} .fc-day-number' => 'background: {{VALUE}}',
                 ],
             ]
         );

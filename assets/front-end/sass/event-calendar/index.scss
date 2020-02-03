@@ -5,6 +5,7 @@
 
 	.fc-view table thead:first-child tr:first-child td {
 		border-top: 1px solid #ddd !important;
+		border-bottom:none !important;
 	}
 
 	.fc-day-grid-event {
@@ -471,7 +472,4 @@ span.fc-day-number {
 	.fc-basic-view .fc-body .fc-row {
 		min-height: 2em;
 	}
-
-
-
 }
