@@ -597,15 +597,14 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-            // It'll be available in next release
-            // $this->add_group_control(
-            //     Group_Control_Typography::get_type(),
-            //     [
-            //         'name' => 'button_typography_normal',
-            //         'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-            //         'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button',
-            //     ]
-            // );
+             $this->add_group_control(
+                 Group_Control_Typography::get_type(),
+                 [
+                     'name' => 'calendar_button_typography_normal',
+                     'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                     'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-button',
+                 ]
+             );
 
             $this->add_control(
                 'button_color_normal',
