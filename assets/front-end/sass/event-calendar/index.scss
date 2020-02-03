@@ -187,11 +187,18 @@
 			}
 		}
 		&.fc-agendaDay-view{
-			.fc-slats,
-			.fc-bg {
+			.fc-slats {
 				table{
 					tr:nth-child(even) td:not(.fc-axis) {background-color: #f6f6fb;}
 					tr:nth-child(odd) td:not(.fc-axis) {background-color: #ffffff;}
+				}
+
+			}
+			.fc-bg {
+				table{
+					tr td.fc-day.fc-widget-content {
+						background-color: #f6f6fb !important;
+					}
 				}
 			}
 			.fc-content-skeleton {
@@ -200,7 +207,7 @@
 					position: absolute;
 					top: 50%;
 					left: 25%;
-					margin-top: 20px;
+					//margin-top: 20px;
 				}
 			}
 		}
@@ -258,9 +265,9 @@ button.fc-button.fc-state-default {
 	&.fc-state-active, &:hover, &:visited, &:focus {
 		background: #5725ff;
 		color: #fff;
-		border: none;
-		box-shadow: none;
-		outline: none;
+		//border: none;
+		//box-shadow: none;
+		//outline: none;
 	}
 }
 
