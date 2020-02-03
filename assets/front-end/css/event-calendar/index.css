@@ -224,7 +224,8 @@ button.fc-next-button,
 .fc-toolbar.fc-header-toolbar button.fc-month-button:before {
   position: absolute;
   left: 0;
-  font-family: fontawesome;
+  font-family: FontAwesome;
+  font-weight: 400;
   right: 65px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-agendaWeek-button:before {
