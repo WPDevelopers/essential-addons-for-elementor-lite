@@ -33,6 +33,11 @@ trait Eael_WPML {
                     'field'       => 'creative_button_secondary_text',
                     'type'        => __('Creative Button: Secondary Text', 'essential-addons-for-elementor-lite'),
                     'editor_type' => 'LINE',
+                ],
+                [
+                    'field'       => 'creative_button_link_url',
+                    'type'        => __('Creative Button: Link URL', 'essential-addons-for-elementor-lite'),
+                    'editor_type' => 'LINE',
                 ]
             ],
         ];
