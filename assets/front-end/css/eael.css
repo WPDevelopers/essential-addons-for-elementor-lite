@@ -1908,7 +1908,7 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   cursor: pointer;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body {
-  padding: 0px 10px 0 35px;
+  padding: 0px 35px 0 35px;
   margin: 10px 0;
   color: #555555;
   height: 300px;
@@ -1917,6 +1917,7 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 .eael-event-calendar-wrapper .eaelec-modal-body:hover {
   overflow-y: auto;
   margin-right: 2px;
+  padding-right: 27px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar {
   width: 6px;
