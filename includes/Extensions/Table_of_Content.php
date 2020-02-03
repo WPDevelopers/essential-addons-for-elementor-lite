@@ -105,7 +105,7 @@
                 [
                     'label' => __('Title', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
-                    'default' => __('Table of Contents', 'essential-addons-for-elementor-lite'),
+                    'default' => __('Table of Content', 'essential-addons-for-elementor-lite'),
                     'label_block' => false,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
