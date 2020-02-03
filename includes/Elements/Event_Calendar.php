@@ -499,6 +499,57 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'calendar_background_color',
+            [
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'background: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'calendar_border_color',
+            [
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc td' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper hr.fc-divider' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc th' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  td.fc-today' => 'border-left-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  table thead:first-child tr:first-child td' => 'border-top-color: {{VALUE}} !important;'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'calendar_inside',
+            [
+                'label' => esc_html__('Inside Space', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'calendar_outside',
+            [
+                'label' => esc_html__('Outside Space', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_control(
             'calendar_title_heading',
             [
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
@@ -562,30 +613,29 @@ class Event_Calendar extends Widget_Base
                     'label' => __('Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'color: {{VALUE}};',
                     ]
                 ]
             );
 
-            $this->add_group_control(
-                Group_Control_Background::get_type(),
-                [
-                    'name' => 'button_background_normal',
-                    'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
-                    'types' => [ 'classic', 'gradient' ],
-                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button',
-                    'exclude'   => [
-                        'image'
-                    ]
+
+        $this->add_control(
+            'button_background_normal',
+            [
+                'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'background-color: {{VALUE}};',
                 ]
-            );
+            ]
+        );
 
             $this->add_group_control(
                 Group_Control_Border::get_type(),
                 [
                     'name' => 'button_border_normal',
                     'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
-                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button',
+                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)',
                 ]
             );
 
@@ -596,7 +646,7 @@ class Event_Calendar extends Widget_Base
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ]
                 ]
             );
@@ -608,33 +658,12 @@ class Event_Calendar extends Widget_Base
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                     'separator' => 'after',
                 ]
             );
         // Buttons style
-        $this->add_control(
-            'calender_order_style',
-            [
-                'label' => __('Border', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-        $this->add_control(
-            'calendar_border_color',
-            [
-                'label' => __('Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc td' => 'border-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc th' => 'border-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  td.fc-today' => 'border-left-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  table thead:first-child tr:first-child td' => 'border-top-color: {{VALUE}} !important;'
-                ]
-            ]
-        );
 
             $this->end_controls_tab();
 
@@ -726,9 +755,44 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-            $this->end_controls_tab();
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'button_border_active',
+                'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'button_border_radius_active',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'buttons_margin_active',
+            [
+                'label' => esc_html__('Space', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->end_controls_tab();
 
         $this->end_controls_tabs(); # end of $this->add_controls_tabs('calendar_buttons_style');
+
         $this->end_controls_section();
 
         /**

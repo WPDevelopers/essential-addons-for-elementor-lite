@@ -120,7 +120,7 @@
   width: 6px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar-thumb {
-  background: #cc0000;
+  background: #aaa;
   border-radius: 10px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-footer {
@@ -164,6 +164,10 @@
   width: 55px !important;
   text-align: center;
 }
+.eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view hr.fc-divider, .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view hr.fc-divider {
+  padding: initial;
+  border-width: 0.5px;
+}
 .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table {
   margin-top: 0;
 }
@@ -187,6 +191,9 @@
 }
 .eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-slats table {
   margin-top: 0;
+}
+.eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-slats table td.fc-widget-content:not(.fc-axis) {
+  border-right: none;
 }
 .eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-bg table {
   margin-bottom: 0;
@@ -249,7 +256,6 @@ button.fc-button.fc-state-default {
 button.fc-button.fc-state-default.fc-state-active, button.fc-button.fc-state-default:hover, button.fc-button.fc-state-default:visited, button.fc-button.fc-state-default:focus {
   background: #5725ff;
   color: #fff;
-  border: none;
   box-shadow: none;
   outline: none;
 }
@@ -311,6 +317,12 @@ span.fc-day-number {
 .fc-unthemed a.fc-day-grid-event .fc-day-grid-event .fc-time,
 .fc-unthemed .fc-event .fc-day-grid-event .fc-time {
   font-weight: normal;
+}
+.fc-unthemed .fc-agendaWeek-view .fc-event {
+  margin: unset;
+}
+.fc-unthemed .fc-agendaDay-view .fc-event {
+  margin-top: 10px;
 }
 .fc-unthemed .fc-time-grid .fc-event {
   min-height: 35px;
