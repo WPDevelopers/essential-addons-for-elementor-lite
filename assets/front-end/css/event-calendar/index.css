@@ -163,20 +163,20 @@
   width: 55px !important;
   text-align: center;
 }
-.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(even) td:not(.fc-axis),
-.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-bg table tr:nth-child(even) td:not(.fc-axis) {
+.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(even) td:not(.fc-axis) {
   background-color: #f6f6fb;
 }
-.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(odd) td:not(.fc-axis),
-.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-bg table tr:nth-child(odd) td:not(.fc-axis) {
+.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(odd) td:not(.fc-axis) {
   background-color: #ffffff;
+}
+.eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-bg table tr td.fc-day.fc-widget-content {
+  background-color: #f6f6fb !important;
 }
 .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-content-skeleton .fc-event-container {
   width: 50%;
   position: absolute;
   top: 50%;
   left: 25%;
-  margin-top: 20px;
 }
 
 .fc-toolbar.fc-header-toolbar {
@@ -236,9 +236,6 @@ button.fc-button.fc-state-default {
 button.fc-button.fc-state-default.fc-state-active, button.fc-button.fc-state-default:hover, button.fc-button.fc-state-default:visited, button.fc-button.fc-state-default:focus {
   background: #5725ff;
   color: #fff;
-  border: none;
-  box-shadow: none;
-  outline: none;
 }
 
 th.fc-widget-header > span {
