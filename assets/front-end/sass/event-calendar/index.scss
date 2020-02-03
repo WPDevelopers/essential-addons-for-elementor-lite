@@ -184,7 +184,7 @@
 						width: 55px !important;
 						text-align: center;
 					}
-					padding: 20px 0;
+					padding: 40px 0;
 				}
 			}
 			hr.fc-divider {
@@ -384,12 +384,15 @@ span.fc-day-number {
 
 	.fc-agendaDay-view {
 		.fc-event {
-			margin-top: 10px;
+			margin-top: -10px;
+			line-height: 35px;
+			height: 35px;
 		}
 	}
 	.fc-time-grid {
 		.fc-event {
 			min-height: 35px;
+			padding-left: 5px;
 			.fc-content {
 				/* display: flex; */
 				align-items: center;
