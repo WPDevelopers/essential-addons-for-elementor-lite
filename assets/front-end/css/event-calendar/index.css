@@ -159,7 +159,7 @@
   }
 }
 .eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-slats .fc-widget-content, .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats .fc-widget-content {
-  padding: 20px 0;
+  padding: 40px 0;
 }
 .eael-event-calendar-wrapper .fc-view.fc-agendaWeek-view .fc-slats .fc-widget-content.fc-axis.fc-time, .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats .fc-widget-content.fc-axis.fc-time {
   width: 55px !important;
@@ -323,10 +323,13 @@ span.fc-day-number {
   margin: unset;
 }
 .fc-unthemed .fc-agendaDay-view .fc-event {
-  margin-top: 10px;
+  margin-top: -10px;
+  line-height: 35px;
+  height: 35px;
 }
 .fc-unthemed .fc-time-grid .fc-event {
   min-height: 35px;
+  padding-left: 5px;
 }
 .fc-unthemed .fc-time-grid .fc-event .fc-content {
   /* display: flex; */
