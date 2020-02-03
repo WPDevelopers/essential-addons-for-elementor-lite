@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 // No access of directly access
 
 /**
- * Carousel
+ * Creative Button
  *
  * Registers translatable widget with items.
  *
