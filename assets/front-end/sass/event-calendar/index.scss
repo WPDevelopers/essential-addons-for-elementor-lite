@@ -116,7 +116,7 @@
 	}
 
 	.eaelec-modal-body {
-		padding: 0px 10px 0 35px;
+		padding: 0px 35px 0 35px;
 		margin: 10px 0;
 		color: #555555;
 		height: 300px;
@@ -124,6 +124,7 @@
 		&:hover{
 			overflow-y: auto;
 			margin-right: 2px;
+			padding-right: 27px;
 		}
 	}
 
