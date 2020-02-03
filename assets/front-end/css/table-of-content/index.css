@@ -85,7 +85,6 @@ html {
 }
 .eael-toc .eael-toc-body:hover {
   overflow-y: auto;
-  margin-right: 2px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin-left: -5px;
