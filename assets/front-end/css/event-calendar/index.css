@@ -110,12 +110,7 @@
   margin: 10px 0;
   color: #555555;
   height: 300px;
-  overflow-y: hidden;
-}
-.eael-event-calendar-wrapper .eaelec-modal-body:hover {
   overflow-y: auto;
-  margin-right: 2px;
-  padding-right: 27px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar {
   width: 6px;
