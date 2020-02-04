@@ -533,6 +533,8 @@ class Pricing_Table extends Widget_Base {
 				'selectors'   => [
 					'{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
+					'{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
+					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 				],
 				'condition' => [
 					'eael_pricing_table_featured_styles' => [ 'ribbon-2', 'ribbon-3' ],
