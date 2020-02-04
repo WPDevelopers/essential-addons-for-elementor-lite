@@ -120,12 +120,7 @@
 		margin: 10px 0;
 		color: #555555;
 		height: 300px;
-		overflow-y: hidden;
-		&:hover{
-			overflow-y: auto;
-			margin-right: 2px;
-			padding-right: 27px;
-		}
+		overflow-y: auto;
 	}
 
 	.eaelec-modal-body::-webkit-scrollbar {
