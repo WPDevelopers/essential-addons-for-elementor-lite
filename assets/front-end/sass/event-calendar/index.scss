@@ -23,10 +23,6 @@
 		float: center !important;
 	}
 
-	.fc-time-grid .fc-event {
-		min-height: 15px;
-	}
-
 	.eaelec-modal {
 		position: fixed;
 		left: 0;
@@ -317,7 +313,7 @@ span.fc-day-number {
 
 	.fc-time-grid {
 		.fc-event {
-			height: 35px;;
+			min-height: 20px;
 
 			.fc-content {
 				display: flex;

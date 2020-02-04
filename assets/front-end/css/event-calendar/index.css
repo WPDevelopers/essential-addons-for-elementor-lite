@@ -17,9 +17,6 @@
   font-size: 14px;
   float: center !important;
 }
-.eael-event-calendar-wrapper .fc-time-grid .fc-event {
-  min-height: 15px;
-}
 .eael-event-calendar-wrapper .eaelec-modal {
   position: fixed;
   left: 0;
@@ -269,7 +266,7 @@ span.fc-day-number {
   font-weight: normal;
 }
 .fc-unthemed .fc-time-grid .fc-event {
-  height: 35px;
+  min-height: 20px;
 }
 .fc-unthemed .fc-time-grid .fc-event .fc-content {
   display: -webkit-box;
