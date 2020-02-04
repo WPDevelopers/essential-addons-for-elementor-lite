@@ -606,8 +606,6 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-
-
             $this->add_control(
                 'button_color_normal',
                 [
@@ -620,16 +618,16 @@ class Event_Calendar extends Widget_Base
             );
 
 
-        $this->add_control(
-            'button_background_normal',
-            [
-                'label' => __('Background', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'background-color: {{VALUE}};',
+            $this->add_control(
+                'button_background_normal',
+                [
+                    'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'background-color: {{VALUE}};',
+                    ]
                 ]
-            ]
-        );
+            );
 
             $this->add_group_control(
                 Group_Control_Border::get_type(),
@@ -664,7 +662,7 @@ class Event_Calendar extends Widget_Base
                     'separator' => 'after',
                 ]
             );
-        // Buttons style
+            // Buttons style
 
             $this->end_controls_tab();
 
