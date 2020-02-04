@@ -80,10 +80,9 @@
                     ListNode = listId;
                 }
 
-                if(currentHeading.textContent =='' ){
+                if(currentHeading.textContent.trim()===''){
                     continue;
                 }
-
                 var liNode = document.createElement('LI');
                 var anchorTag = document.createElement('A');
                 var spanTag = document.createElement('SPAN');
@@ -154,7 +153,7 @@
          * @returns {string}
          */
         function eael_build_id( content ){
-            return 'eael-unique-link';
+            return 'eael-table-of-content';
         }
 
         /**
