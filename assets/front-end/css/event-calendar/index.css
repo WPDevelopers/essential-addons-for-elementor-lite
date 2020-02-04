@@ -71,6 +71,11 @@
   padding: 0;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header .eaelec-event-popup-date {
+  color: #555;
+  padding-top: 2px;
+  display: inline-block;
+}
+.eael-event-calendar-wrapper .eaelec-modal-header .eaelec-event-popup-date i {
   color: #5725ff;
 }
 .eael-event-calendar-wrapper .eaelec-modal-close {
@@ -83,12 +88,12 @@
   box-sizing: content-box;
   overflow: visible;
   border: 2px solid #fff;
-  background: #5725ff;
+  background: #fff;
   text-align: center;
   box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  color: #fff !important;
-  height: 35px;
-  width: 35px;
+  color: #000 !important;
+  height: 50px;
+  width: 50px;
   text-align: center;
   display: -webkit-box;
   display: flex;
@@ -97,6 +102,9 @@
   -webkit-box-pack: center;
           justify-content: center;
   border-radius: 50%;
+}
+.eael-event-calendar-wrapper .eaelec-modal-close > span {
+  font-size: 22px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-close:hover,
 .eael-event-calendar-wrapper .eaelec-modal-close:focus {
@@ -116,7 +124,7 @@
 }
 .eael-event-calendar-wrapper .eaelec-event-date-start,
 .eael-event-calendar-wrapper .eaelec-event-date-end {
-  font-size: 12px;
+  font-size: 15px;
 }
 @media (max-width: 575px) {
   .eael-event-calendar-wrapper .fc-toolbar {
@@ -147,7 +155,7 @@
 .fc-toolbar.fc-header-toolbar {
   margin-bottom: 25px;
 }
-.fc-toolbar.fc-header-toolbar button.fc-state-default {
+.fc-toolbar.fc-header-toolbar button.fc-button-primary {
   padding: 8px 30px 8px 40px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-button.fc-today-button,
@@ -158,32 +166,33 @@ button.fc-next-button,
 .fc-toolbar.fc-header-toolbar button.fc-prev-button {
   padding: 8px 30px 8px 30px;
 }
-.fc-toolbar.fc-header-toolbar button.fc-agendaWeek-button,
-.fc-toolbar.fc-header-toolbar button.fc-agendaDay-button,
-.fc-toolbar.fc-header-toolbar button.fc-month-button {
+.fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button,
+.fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button,
+.fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button {
   position: relative;
 }
-.fc-toolbar.fc-header-toolbar button.fc-agendaWeek-button:before,
-.fc-toolbar.fc-header-toolbar button.fc-agendaDay-button:before,
-.fc-toolbar.fc-header-toolbar button.fc-month-button:before {
+.fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before,
+.fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button:before,
+.fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
   position: absolute;
   left: 0;
-  font-family: fontawesome;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   right: 65px;
 }
-.fc-toolbar.fc-header-toolbar button.fc-agendaWeek-button:before {
+.fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before {
   content: "\f03a";
   left: 8px;
 }
-.fc-toolbar.fc-header-toolbar button.fc-agendaDay-button:before {
+.fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button:before {
   content: "\f0c9";
   left: 21px;
 }
-.fc-toolbar.fc-header-toolbar button.fc-month-button:before {
+.fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
   content: "\f00a";
 }
 
-button.fc-button.fc-state-default {
+button.fc-button.fc-button-primary {
   box-shadow: none;
   height: auto;
   width: auto;
@@ -197,10 +206,12 @@ button.fc-button.fc-state-default {
   background: #fff;
   text-shadow: none;
   line-height: 1.5em;
+  border: none;
 }
-button.fc-button.fc-state-default.fc-state-active, button.fc-button.fc-state-default:hover, button.fc-button.fc-state-default:visited, button.fc-button.fc-state-default:focus {
+button.fc-button.fc-button-primary.fc-state-active, button.fc-button.fc-button-primary:hover, button.fc-button.fc-button-primary:visited, button.fc-button.fc-button-primary:focus {
   background: #5725ff;
   color: #fff;
+  box-shadow: none;
 }
 
 th.fc-widget-header > span {
@@ -247,15 +258,11 @@ span.fc-day-number {
   color: #707070;
   font-size: 14px;
   background: #fff;
-  border-top: 0px solid;
-  border-bottom: 0px solid;
-  border-right: 0px solid;
-  border-radius: 0;
-  box-shadow: 0px 3px 6px 0px rgba(50, 33, 121, 0.15);
-  border-left: 2px solid #10ecab;
-  font-weight: normal;
-  width: 98%;
-  margin: 0 auto;
+  border-radius: 5px;
+  font-weight: 400;
+  margin: 1px;
+  border: 1px solid;
+  border-color: #4d4d4d !important;
 }
 .fc-unthemed a.fc-day-grid-event .fc-day-grid-event .fc-time,
 .fc-unthemed .fc-event .fc-day-grid-event .fc-time {
