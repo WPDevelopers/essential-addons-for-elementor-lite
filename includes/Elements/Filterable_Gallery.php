@@ -237,6 +237,18 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_section_fg_mfp_caption',
+			[
+				'label' => __( 'Show Popup Caption', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'default' => ''
+			]
+		);
+
         $this->end_controls_section();
 
         /**
@@ -3033,7 +3045,8 @@ class Filterable_Gallery extends Widget_Base
             [
                 'id' => 'eael-filter-gallery-wrapper-' . esc_attr($this->get_id()),
                 'class' => 'eael-filter-gallery-wrapper',
-                'data-layout-mode'  => $settings['eael_fg_caption_style']
+                'data-layout-mode'  => $settings['eael_fg_caption_style'],
+                'data-mfp_caption'  => $settings['eael_section_fg_mfp_caption']
             ]
         );
 
@@ -3136,6 +3149,8 @@ class Filterable_Gallery extends Widget_Base
 
 			         // init isotope
                      var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
+                     var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
+                     
 					 var $isotope_gallery = $gallery.isotope({
 					     itemSelector: '.eael-filterable-gallery-item-wrap',
 					     layoutMode: $layout_mode,
@@ -3168,6 +3183,13 @@ class Filterable_Gallery extends Widget_Base
                             }
                         },
                         fixedContentPos: false,
+                        image: {
+                            titleSrc: function(item) {
+                                        if(mfpCaption=='yes'){
+                                            return item.el.parent().prev().prev().html();
+                                        }
+                                    }
+                        }
                     });
 
                     // filter
@@ -3195,6 +3217,13 @@ class Filterable_Gallery extends Widget_Base
                                 }
                             },
                             fixedContentPos: false,
+                            image: {
+                                titleSrc: function(item) {
+                                            if(mfpCaption=='yes'){
+                                                return item.el.parent().prev().prev().html();
+                                            }
+                                        }
+                            }
                         });
 
                         $isotope_gallery.isotope();

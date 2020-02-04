@@ -63,8 +63,8 @@ class Post_Timeline extends Widget_Base
 			[
 				'label' => __( 'Show Overlay', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Show', 'your-plugin' ),
-				'label_off' => __( 'Hide', 'your-plugin' ),
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => 'yes',
                 'selectors' => [
