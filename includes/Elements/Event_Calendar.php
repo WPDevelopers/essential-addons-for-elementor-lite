@@ -587,6 +587,15 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'calendar_button_typography_normal',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-button',
+            ]
+        );
+
         $this->start_controls_tabs('calendar_buttons_style');
 
             // Normal
@@ -597,14 +606,7 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-             $this->add_group_control(
-                 Group_Control_Typography::get_type(),
-                 [
-                     'name' => 'calendar_button_typography_normal',
-                     'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                     'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-button',
-                 ]
-             );
+
 
             $this->add_control(
                 'button_color_normal',
@@ -685,15 +687,13 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-            $this->add_group_control(
-                Group_Control_Background::get_type(),
+            $this->add_control(
+                'button_background_hover',
                 [
-                    'name' => 'button_background_hover',
                     'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
-                    'types' => [ 'classic', 'gradient' ],
-                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:hover',
-                    'exclude'   => [
-                        'image'
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:hover' => 'background-color: {{VALUE}};',
                     ]
                 ]
             );
@@ -741,15 +741,13 @@ class Event_Calendar extends Widget_Base
                 ]
             );
 
-            $this->add_group_control(
-                Group_Control_Background::get_type(),
+            $this->add_control(
+                'button_background_active',
                 [
-                    'name' => 'button_background_active',
                     'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
-                    'types' => [ 'classic', 'gradient' ],
-                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active',
-                    'exclude'   => [
-                        'image'
+                    'type' => Controls_Manager::COLOR,
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'background-color: {{VALUE}};',
                     ]
                 ]
             );
