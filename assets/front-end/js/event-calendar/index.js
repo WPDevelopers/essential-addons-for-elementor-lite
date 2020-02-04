@@ -29,6 +29,7 @@ var EventCalendar = function($scope, $) {
 		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
+		eventLimit: 3,
 		dayNamesShort: daysWeek,
 		monthNames: monthNames,
 		eventRender: function(info) {
@@ -109,7 +110,7 @@ var EventCalendar = function($scope, $) {
 				}
 
 				$(".eaelec-modal-header h2").html(event.title);
-				$(".eaelec-modal-body p").html(event.description);
+				$(".eaelec-modal-body p").html(event.extendedProps.description);
 				$(".eaelec-modal-footer a").attr("href", event.url);
 				if (event.external == "on") {
 					$(".eaelec-modal-footer a").attr("target", "_blank");
