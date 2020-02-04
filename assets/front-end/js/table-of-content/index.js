@@ -112,9 +112,13 @@
         $(document).on("click",'ul.eael-toc-list li a', function(e) {
             e.preventDefault();
             $(document).off("scroll");
+
+            var target = this.hash;
+            history.pushState("", document.title, window.location.pathname + window.location.search);
             var parentLi = $(this).parent();
             if( parentLi.is('.eael-highlight.active') ){
                 parentLi.removeClass('eael-highlight active');
+                window.location.hash = target;
                 return false;
             }
             $("ul.eael-toc-list li").removeClass("active");
@@ -122,9 +126,7 @@
             $(this).closest('.eael-first-child').addClass( "eael-highlight" );
             $(this).parent().addClass( "active" );
 
-            var target = this.hash,
-                $target = $(target);
-                window.location.hash = target;
+            window.location.hash = target;
         });
 
         window.onscroll = function() {eaelTocSticky()};
