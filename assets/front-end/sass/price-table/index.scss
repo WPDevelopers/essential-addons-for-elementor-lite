@@ -460,15 +460,15 @@
 
 /*--- Page Builder Related Style ---*/
 .eael-pricing-content-align-center .eael-pricing {
-	text-align: center;
+	text-align: center!important;
 }
 
 .eael-pricing-content-align-left .eael-pricing {
-	text-align: left;
+	text-align: left!important;
 }
 
 .eael-pricing-content-align-right .eael-pricing {
-	text-align: right;
+	text-align: right!important;
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .price-tag {
