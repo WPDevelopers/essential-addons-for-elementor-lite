@@ -325,7 +325,7 @@ span.fc-day-number {
 .fc-unthemed .fc-agendaDay-view .fc-event {
   margin-top: -10px;
   line-height: 35px;
-  height: 35px;
+  min-height: 35px;
 }
 .fc-unthemed .fc-time-grid .fc-event {
   min-height: 35px;
