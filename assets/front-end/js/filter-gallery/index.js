@@ -30,6 +30,7 @@ var filterableGalleryHandler = function($scope, $) {
 
         // init isotope
         var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
+        var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
         var $isotope_gallery = $gallery.isotope({
             itemSelector: ".eael-filterable-gallery-item-wrap",
             layoutMode: $layout_mode,
@@ -64,6 +65,13 @@ var filterableGalleryHandler = function($scope, $) {
                 }
             },
             fixedContentPos: false,
+            image: {
+                titleSrc: function(item) {
+                            if(mfpCaption=='yes'){
+                                return item.el.parent().prev().prev().html();
+                            }
+                        }
+            }
         });
 
         // filter
@@ -91,6 +99,13 @@ var filterableGalleryHandler = function($scope, $) {
                     }
                 },
                 fixedContentPos: false,
+                image: {
+                    titleSrc: function(item) {
+                                if(mfpCaption=='yes'){
+                                    return item.el.parent().prev().prev().html();
+                                }
+                            }
+                }
             });
 
             $isotope_gallery.isotope();
