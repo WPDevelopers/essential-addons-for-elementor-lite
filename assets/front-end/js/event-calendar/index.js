@@ -16,7 +16,6 @@ var EventCalendar = function($scope, $) {
 		selectable: false,
 		draggable: false,
 		firstDay: firstDay,
-		slotLabelFormat: "HH:mm",
 		timeFormat: "hh:mm a",
 		nextDayThreshold: "00:00:00",
 		header: {
@@ -32,102 +31,107 @@ var EventCalendar = function($scope, $) {
 		selectHelper: true,
 		dayNamesShort: daysWeek,
 		monthNames: monthNames,
-		eventRender: calendarEventRender
+		eventRender: function(info) {
+			var element = $(info.el),
+			 	event = info.event;
+			element.attr("href", "javascript:void(0);");
+			element.click(function() {
+				ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
+				if (event.allDay == "yes") {
+					$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
+				} else {
+					if (moment(event.start).isSame(Date.now(), "day") == true) {
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format("h:mm A"));
+					}
+					if (
+						moment(event.start).format("MM-DD-YYYY") ==
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
+					) {
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format("h:mm A"));
+					}
+					if (
+						moment(event.start).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
+						moment(event.start).format("MM-DD-YYYY") >
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
+					) {
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, h:mm A"));
+					}
+
+					if (moment(event.end).isSame(Date.now(), "day") == true) {
+						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+					}
+					if (
+						moment(event.start).format("MM-DD-YYYY") !=
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
+						moment(event.end).format("MM-DD-YYYY") ==
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
+					) {
+						$("span.eaelec-event-date-end").html("- Tomorrow, " + moment(event.end).format("h:mm A"));
+					}
+					if (
+						moment(event.start).format("MM-DD-YYYY") ==
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
+						moment(event.end).format("MM-DD-YYYY") ==
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
+					) {
+						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+					}
+					if (
+						moment(event.end).format("MM-DD-YYYY") >
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
+					) {
+						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("MMM Do, h:mm A"));
+					}
+
+					if (
+						moment(event.start).format("MM-DD-YYYY") >
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
+						moment(event.start).format("MM-DD-YYYY") == moment(event.end).format("MM-DD-YYYY")
+					) {
+						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+					}
+				}
+
+				$(".eaelec-modal-header h2").html(event.title);
+				$(".eaelec-modal-body p").html(event.description);
+				$(".eaelec-modal-footer a").attr("href", event.url);
+				if (event.external == "on") {
+					$(".eaelec-modal-footer a").attr("target", "_blank");
+				}
+				if (event.nofollow == "on") {
+					$(".eaelec-modal-footer a").attr("rel", "nofollow");
+				}
+				if (event.url == "") {
+					$(".eaelec-modal-footer a").css("display", "none");
+				}
+
+				// Popup color
+				$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
+			});
+		}
 	});
+
+	CloseButton.on('click', function() {
+		ecModal.addClass('eael-ec-modal-removing').removeClass('eael-ec-popup-ready');
+	});
+
 	calendar.render();
-	var calendarEventRender = function( event, element ) {
-		element.attr("href", "javascript:void(0);");
-		element.click(function() {
-			ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
-			if (event.allDay == "yes") {
-				$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
-			} else {
-				if (moment(event.start).isSame(Date.now(), "day") == true) {
-					$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format("h:mm A"));
-				}
-				if (
-					moment(event.start).format("MM-DD-YYYY") ==
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY")
-				) {
-					$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format("h:mm A"));
-				}
-				if (
-					moment(event.start).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
-					moment(event.start).format("MM-DD-YYYY") >
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY")
-				) {
-					$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, h:mm A"));
-				}
-
-				if (moment(event.end).isSame(Date.now(), "day") == true) {
-					$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
-				}
-				if (
-					moment(event.start).format("MM-DD-YYYY") !=
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY") &&
-					moment(event.end).format("MM-DD-YYYY") ==
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY")
-				) {
-					$("span.eaelec-event-date-end").html("- Tomorrow, " + moment(event.end).format("h:mm A"));
-				}
-				if (
-					moment(event.start).format("MM-DD-YYYY") ==
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY") &&
-					moment(event.end).format("MM-DD-YYYY") ==
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY")
-				) {
-					$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
-				}
-				if (
-					moment(event.end).format("MM-DD-YYYY") >
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY")
-				) {
-					$("span.eaelec-event-date-end").html("- " + moment(event.end).format("MMM Do, h:mm A"));
-				}
-
-				if (
-					moment(event.start).format("MM-DD-YYYY") >
-					moment(new Date())
-						.add(1, "days")
-						.format("MM-DD-YYYY") &&
-					moment(event.start).format("MM-DD-YYYY") == moment(event.end).format("MM-DD-YYYY")
-				) {
-					$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
-				}
-			}
-
-			$(".eaelec-modal-header h2").html(event.title);
-			$(".eaelec-modal-body p").html(event.description);
-			$(".eaelec-modal-footer a").attr("href", event.url);
-			if (event.external == "on") {
-				$(".eaelec-modal-footer a").attr("target", "_blank");
-			}
-			if (event.nofollow == "on") {
-				$(".eaelec-modal-footer a").attr("rel", "nofollow");
-			}
-			if (event.url == "") {
-				$(".eaelec-modal-footer a").css("display", "none");
-			}
-
-			// Popup color
-			$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
-		});
-	};
-
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
