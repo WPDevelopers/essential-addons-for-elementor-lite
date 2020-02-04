@@ -1,3 +1,101 @@
+.eael-event-calendar-wrapper .eaelec-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  z-index: -1;
+}
+.eael-event-calendar-wrapper .eaelec-modal .eael-ec-modal-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
+  z-index: 100;
+  opacity: 1;
+}
+.eael-event-calendar-wrapper .eaelec-modal-content {
+  position: relative;
+  margin: auto;
+  border: 1px solid #888;
+  max-width: 900px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #fefefe;
+  padding: 20px 0;
+  width: 100%;
+}
+.eael-event-calendar-wrapper .eaelec-modal-header {
+  padding: 0px 30px;
+  color: white;
+  border-color: #009900;
+  overflow: auto;
+}
+.eael-event-calendar-wrapper .eaelec-modal-header h2 {
+  color: #242424;
+  margin: 0;
+  padding: 0;
+}
+.eael-event-calendar-wrapper .eaelec-modal-header .eaelec-event-popup-date {
+  color: #5725ff;
+}
+.eael-event-calendar-wrapper .eaelec-modal-close {
+  position: absolute;
+  right: -15px;
+  top: -18px;
+  font-size: 24px;
+  z-index: 9999;
+  cursor: pointer;
+  box-sizing: content-box;
+  overflow: visible;
+  border: 2px solid #fff;
+  background: #5725ff;
+  text-align: center;
+  box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: #fff !important;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+}
+.eael-event-calendar-wrapper .eaelec-modal-close:hover,
+.eael-event-calendar-wrapper .eaelec-modal-close:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body {
+  padding: 0px 10px 0 35px;
+  margin: 10px 0;
+  color: #555555;
+}
+.eael-event-calendar-wrapper .eaelec-modal-footer {
+  padding: 0px 10px 0 35px;
+  color: white;
+  border: 0px solid #ff0000;
+}
+.eael-event-calendar-wrapper .eaelec-event-date-start,
+.eael-event-calendar-wrapper .eaelec-event-date-end {
+  font-size: 12px;
+}
 .eael-event-calendar-wrapper .fc-event-container a.fc-event {
   min-height: 20px;
 }
