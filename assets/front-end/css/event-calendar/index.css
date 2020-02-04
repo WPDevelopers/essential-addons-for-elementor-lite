@@ -47,7 +47,7 @@
   transition: all 0.3s ease-out;
 }
 .eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
-  z-index: 100;
+  z-index: 999999;
   opacity: 1;
 }
 .eael-event-calendar-wrapper .eaelec-modal-content {
@@ -198,6 +198,9 @@
 .fc-toolbar.fc-header-toolbar {
   margin-bottom: 25px;
 }
+.fc-toolbar.fc-header-toolbar .fc-center {
+  margin-top: 5px;
+}
 .fc-toolbar.fc-header-toolbar button.fc-state-default {
   padding: 8px 30px 8px 40px;
 }
@@ -222,6 +225,7 @@ button.fc-next-button,
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   right: 65px;
+  top: 10px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-agendaWeek-button:before {
   content: "\f03a";
@@ -420,5 +424,19 @@ span.fc-day-number {
 
   .fc-basic-view .fc-body .fc-row {
     min-height: 2em;
+  }
+}
+@media screen and (max-width: 991px) {
+  .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0;
+  }
+  .fc-toolbar.fc-header-toolbar .fc-center {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  th.fc-widget-header > span {
+    padding: 0;
+    font-size: 17px;
   }
 }
