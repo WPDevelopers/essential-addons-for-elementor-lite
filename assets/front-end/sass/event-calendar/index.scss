@@ -51,7 +51,7 @@
 		}
 
 		&.eael-ec-popup-ready {
-			z-index: 100;
+			z-index: 999999;
 			opacity: 1;
 		}
 	}
@@ -236,6 +236,9 @@
 // Calendar Header
 .fc-toolbar.fc-header-toolbar {
 	margin-bottom: 25px;
+	.fc-center {
+		margin-top: 5px;
+	}
 
 	button.fc-state-default {
 		padding: 8px 30px 8px 40px;
@@ -260,6 +263,7 @@
 			font-family: "Font Awesome 5 Free";
 			font-weight: 900;
 			right: 65px;
+			top: 10px;
 		}
 	}
 
@@ -488,5 +492,20 @@ span.fc-day-number {
 	
 	.fc-basic-view .fc-body .fc-row {
 		min-height: 2em;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.fc-toolbar.fc-header-toolbar {
+		margin-bottom: 0;
+		.fc-center {
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+	}
+
+	th.fc-widget-header>span {
+		padding: 0;
+		font-size: 17px;
 	}
 }

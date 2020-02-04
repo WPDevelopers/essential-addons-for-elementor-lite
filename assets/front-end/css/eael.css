@@ -1,115 +1,4 @@
 
-/*------------------------------*/
-/* 31. Advance Accordion
-/*------------------------------*/
-.eael-adv-accordion {
-  width: auto;
-  height: auto;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
-  cursor: pointer;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-  z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-  z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.fa-accordion-icon {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
-  display: none;
-  border: 1px solid #eee;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
-  display: block;
-}
-
-@-webkit-keyframes rotate-90 {
-  0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-  100% {
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-  }
-}
-
-@keyframes rotate-90 {
-  0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-  100% {
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-  }
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-}
-
 /*----------------------------*/
 /* 30. Advance Tabs
 /*----------------------------*/
@@ -313,6 +202,117 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
+  }
+}
+
+/*------------------------------*/
+/* 31. Advance Accordion
+/*------------------------------*/
+.eael-adv-accordion {
+  width: auto;
+  height: auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  z-index: 10;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  z-index: 10;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.fa-accordion-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
+  display: none;
+  border: 1px solid #eee;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
+  margin: 0;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
+  display: block;
+}
+
+@-webkit-keyframes rotate-90 {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+}
+
+@keyframes rotate-90 {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -1849,7 +1849,7 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   transition: all 0.3s ease-out;
 }
 .eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
-  z-index: 100;
+  z-index: 999999;
   opacity: 1;
 }
 .eael-event-calendar-wrapper .eaelec-modal-content {
@@ -2000,6 +2000,9 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 .fc-toolbar.fc-header-toolbar {
   margin-bottom: 25px;
 }
+.fc-toolbar.fc-header-toolbar .fc-center {
+  margin-top: 5px;
+}
 .fc-toolbar.fc-header-toolbar button.fc-state-default {
   padding: 8px 30px 8px 40px;
 }
@@ -2024,6 +2027,7 @@ button.fc-next-button,
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   right: 65px;
+  top: 10px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-agendaWeek-button:before {
   content: "\f03a";
@@ -2222,6 +2226,20 @@ span.fc-day-number {
 
   .fc-basic-view .fc-body .fc-row {
     min-height: 2em;
+  }
+}
+@media screen and (max-width: 991px) {
+  .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0;
+  }
+  .fc-toolbar.fc-header-toolbar .fc-center {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  th.fc-widget-header > span {
+    padding: 0;
+    font-size: 17px;
   }
 }
 
@@ -4794,6 +4812,63 @@ button.mfp-arrow:not(.toggle) {
   margin: 0 0 0 auto;
 }
 
+/*----------------------*/
+/* 14. Gravity Form
+/*----------------------*/
+.eael-gravity-form-align-default,
+.eael-gravity-form-align-left,
+.eael-gravity-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-gravity-form-align-right,
+.eael-gravity-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-gravity-form-align-center,
+.eael-gravity-form-btn-align-center {
+  text-align: center;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer {
+  margin: 0;
+  padding: 0;
+}
+
+.gform_wrapper form li,
+.gform_wrapper li {
+  list-style: none;
+}
+
+.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper textarea {
+  padding: 0;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
+  margin: 0;
+}
+
+.eael-gravity-form.title-description-hide .gform_heading {
+  display: none;
+}
+
+.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
+.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
+  display: none;
+}
+
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
+  width: 100%;
+}
+
 /*------------------------------*/
 /* 34. Image accordion
 /*------------------------------*/
@@ -4902,63 +4977,6 @@ button.mfp-arrow:not(.toggle) {
   .eael-img-accordion a:hover .overlay {
     background-color: transparent;
   }
-}
-
-/*----------------------*/
-/* 14. Gravity Form
-/*----------------------*/
-.eael-gravity-form-align-default,
-.eael-gravity-form-align-left,
-.eael-gravity-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-gravity-form-align-right,
-.eael-gravity-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-gravity-form-align-center,
-.eael-gravity-form-btn-align-center {
-  text-align: center;
-}
-
-.eael-gravity-form .gform_wrapper .gform_footer {
-  margin: 0;
-  padding: 0;
-}
-
-.gform_wrapper form li,
-.gform_wrapper li {
-  list-style: none;
-}
-
-.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
-  padding: 0;
-}
-
-.eael-gravity-form .gform_wrapper textarea {
-  padding: 0;
-}
-
-.eael-gravity-form .gform_wrapper .gform_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
-.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
-  margin: 0;
-}
-
-.eael-gravity-form.title-description-hide .gform_heading {
-  display: none;
-}
-
-.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
-.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
-  display: none;
-}
-
-.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
-  width: 100%;
 }
 
 /* ------------------------ */
