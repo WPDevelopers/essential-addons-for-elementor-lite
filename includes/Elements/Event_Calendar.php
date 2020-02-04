@@ -1533,6 +1533,7 @@ class Event_Calendar extends Widget_Base
         $data = json_decode($data);
 
         if (isset($data->items)) {
+            $calendar_data = [];
             foreach ($data->items as $key => $item) {
                 $all_day = false;
 
