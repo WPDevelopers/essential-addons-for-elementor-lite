@@ -505,6 +505,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper table tbody > tr > td' => 'background: {{VALUE}}',
                 ]
             ]
         );
@@ -941,6 +942,7 @@ class Event_Calendar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .fc-day' => 'background: {{VALUE}} !important',
                     '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} table tbody > tr > td' => 'background: {{VALUE}} !important',
                 ]
 			]
 		);
