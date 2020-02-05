@@ -1808,6 +1808,7 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 }
 .eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td {
   border-top: 1px solid #ddd !important;
+  border-bottom: none !important;
 }
 .eael-event-calendar-wrapper .fc-day-grid-event {
   margin-top: 2px;
@@ -1848,7 +1849,7 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   transition: all 0.3s ease-out;
 }
 .eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
-  z-index: 100;
+  z-index: 99999;
   opacity: 1;
 }
 .eael-event-calendar-wrapper .eaelec-modal-content {
@@ -2122,36 +2123,53 @@ span.fc-day-number {
   opacity: 0;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 12px;
+  }
+  .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-center h2 {
+    font-size: 22px;
+  }
+  .eael-event-calendar-wrapper .fc-right .fc-button-group .fc-button.fc-button-primary:before {
+    font-size: 15px;
+  }
+  .eael-event-calendar-wrapper .fc-timeGridWeek-view a .fc-content {
+    display: inherit !important;
+  }
+  .eael-event-calendar-wrapper .fc-day-header.fc-widget-header span {
+    font-size: 15px;
+  }
+  .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
+    margin-left: 5px;
+  }
+}
 @media only screen and (max-width: 767px) {
-  .fc-right, .fc-button-group, .fc-left {
+  .fc-right, .fc-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .fc-left {
+    text-align: center;
+  }
+
+  .fc-right {
+    margin-bottom: 10px;
+  }
+  .fc-right .fc-button-group .fc-button.fc-button-primary {
+    font-size: 11px;
+  }
+  .fc-right .fc-button-group .fc-button.fc-button-primary:before {
+    font-size: 11px;
+    padding-left: 0;
+  }
+
+  .fc-toolbar.fc-header-toolbar {
+    display: inline-block;
     width: 100%;
   }
-
-  .fc-button-group button.fc-button.fc-state-default {
-    padding: 8px 15px 8px 35px;
-    margin: 8px;
-    font-size: 12px;
-  }
-
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-prev-button,
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-next-button {
-    padding: 8px 27px;
-  }
-
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default {
-    margin: 5px;
-  }
-
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-month-button:before,
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaWeek-button:before,
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaDay-button:before {
-    left: 15px;
-    top: 9px;
-  }
-
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaDay-button:before,
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-agendaWeek-button:before,
-  .fc-toolbar.fc-header-toolbar button.fc-button.fc-month-button:before {
+  .fc-toolbar.fc-header-toolbar .fc-button-group button.fc-button.fc-button-primary {
+    margin-left: 5px;
     font-size: 12px;
   }
 

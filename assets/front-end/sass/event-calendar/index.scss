@@ -11,7 +11,9 @@
 
 	.fc-view table thead:first-child tr:first-child td {
 		border-top: 1px solid #ddd !important;
+		border-bottom: none !important;
 	}
+
 
 	.fc-day-grid-event {
 		margin-top: 2px;
@@ -52,7 +54,7 @@
 		}
 
 		&.eael-ec-popup-ready {
-			z-index: 100;
+			z-index: 99999;
 			opacity: 1;
 		}
 	}
@@ -386,40 +388,74 @@ span.fc-day-number {
 	}
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+	.eael-event-calendar-wrapper {
+		.fc-toolbar.fc-header-toolbar {
+			margin-bottom: 12px;
+			.fc-center {
+				h2 {
+					font-size: 22px;
+				}
+
+			}
+		}
+		.fc-right {
+			.fc-button-group {
+				.fc-button.fc-button-primary {
+					&:before {
+						font-size: 15px;
+					}
+				}
+			}
+		}
+		.fc-timeGridWeek-view {
+			a .fc-content {
+				display: inherit !important;
+			}
+
+		}
+		.fc-day-header.fc-widget-header {
+			span {
+				font-size: 15px;
+			}
+		}
+
+		.fc-toolbar.fc-header-toolbar {
+			.fc-button-group {
+				button:not(:first-child ) {
+					margin-left: 5px;
+				}
+			}
+		}
+	}
+}
 // For mobile
 @media only screen and (max-width: 767px) {
-	.fc-right, .fc-button-group, .fc-left {
+	.fc-right, .fc-left {
 		width: 100%;
+		text-align: center;
 	}
-
-	.fc-button-group button.fc-button.fc-state-default {
-		padding: 8px 15px 8px 35px;
-		margin: 8px;
-		font-size: 12px;
+	.fc-left {
+		text-align: center;
 	}
-
-	.fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-prev-button,
-	.fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default.fc-next-button {
-		padding: 8px 27px;
-	}
-
-	.fc-toolbar.fc-header-toolbar button.fc-button.fc-state-default {
-		margin: 5px;
-	}
-
-	.fc-toolbar.fc-header-toolbar {
-		button.fc-button.fc-month-button:before,
-		button.fc-button.fc-agendaWeek-button:before,
-		button.fc-button.fc-agendaDay-button:before {
-			left: 15px;
-			top: 9px;
+	.fc-right {
+		margin-bottom: 10px;
+		.fc-button-group {
+			.fc-button.fc-button-primary {
+				font-size: 11px;
+				&:before {
+					font-size: 11px;
+					padding-left: 0;
+				}
+			}
 		}
 	}
 
 	.fc-toolbar.fc-header-toolbar {
-		button.fc-button.fc-agendaDay-button:before,
-		button.fc-button.fc-agendaWeek-button:before,
-		button.fc-button.fc-month-button:before {
+		display: inline-block;
+		width: 100%;
+		.fc-button-group button.fc-button.fc-button-primary {
+			margin-left: 5px;
 			font-size: 12px;
 		}
 	}
