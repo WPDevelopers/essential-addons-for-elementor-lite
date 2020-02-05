@@ -141,6 +141,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#5725ff'
             ]
         );
 
@@ -148,7 +149,8 @@ class Event_Calendar extends Widget_Base
             'eael_event_text_color',
             [
                 'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff'
             ]
         );
 
