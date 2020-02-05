@@ -829,7 +829,7 @@ class GravityForms extends Widget_Base {
                 'name'                  => 'field_typography',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'                => Scheme_Typography::TYPOGRAPHY_4,
-                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .ginput_container_text input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
+                'selector'              => '{{WRAPPER}} .eael-gravity-form .gfield .ginput_container_phone input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_email input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield .ginput_container_text input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield textarea, {{WRAPPER}} .eael-gravity-form .gfield select',
 				'separator'             => 'before',
             ]
         );

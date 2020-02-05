@@ -8,7 +8,7 @@ var ImageAccordion = function($scope, $) {
             $imageAccordion.data("img-accordion-type") !== undefined
                 ? $imageAccordion.data("img-accordion-type")
                 : "";
-
+    
     if ("on-click" === $type) {
         $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
             if ($(this).hasClass("overlay-active") == false) {

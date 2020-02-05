@@ -329,7 +329,7 @@ class Image_Accordion extends Widget_Base
                 $target = $img_accordion['eael_accordion_title_link']['is_external'] ? 'target="_blank"' : '';
                 $nofollow = $img_accordion['eael_accordion_title_link']['nofollow'] ? 'rel="nofollow"' : '';
 
-                echo '<a href="' . esc_url($eael_accordion_link) . '" ' . $target . ' ' . $nofollow . ' style="background-image: url(' . esc_url($img_accordion['eael_accordion_bg']['url']) . ');">
+                echo '<a class="abcd" href="' . esc_url($eael_accordion_link) . '" ' . $target . ' ' . $nofollow . ' style="background-image: url(' . esc_url($img_accordion['eael_accordion_bg']['url']) . ');">
 		            <div class="overlay">
 		              <div class="overlay-inner">
 		                <h2>' . $img_accordion['eael_accordion_tittle'] . '</h2>
@@ -341,7 +341,7 @@ class Image_Accordion extends Widget_Base
             echo '</div>';
 
             if ('on-hover' === $settings['eael_img_accordion_type']) {
-                echo '<style>
+                echo '<style typr="text/css">
                   #eael-img-accordion-' . $this->get_id() . ' a:hover {
                     flex: 3;
                   }
@@ -353,6 +353,7 @@ class Image_Accordion extends Widget_Base
                   }
                 </style>';
             }
+            
         }
     }
 }
