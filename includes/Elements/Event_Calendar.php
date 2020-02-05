@@ -279,194 +279,6 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
-            'days_name_heading',
-            [
-                'label' => __('Days', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_sat',
-            [
-                'label' => __('Saturday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Sat',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_sun',
-            [
-                'label' => __('Sunday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Sun',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_mon',
-            [
-                'label' => __('Monday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Mon',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_tue',
-            [
-                'label' => __('Tuesday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Tue',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_wed',
-            [
-                'label' => __('Wednesday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Wed',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_thu',
-            [
-                'label' => __('Thursday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Thu',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_days_fri',
-            [
-                'label' => __('Friday', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'Fri',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_months_name',
-            [
-                'label' => __('Months', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_jan',
-            [
-                'label' => __('January', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'January',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_feb',
-            [
-                'label' => __('February', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'February',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_mar',
-            [
-                'label' => __('March', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'March',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_apr',
-            [
-                'label' => __('April', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'April',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_may',
-            [
-                'label' => __('May', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'May',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_jun',
-            [
-                'label' => __('June', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'June',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_jul',
-            [
-                'label' => __('July', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'July',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_aug',
-            [
-                'label' => __('August', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'August',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_sep',
-            [
-                'label' => __('September', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'September',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_oct',
-            [
-                'label' => __('October', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'October',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_nov',
-            [
-                'label' => __('November', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'November',
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_calendar_month_dec',
-            [
-                'label' => __('December', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => 'December',
-            ]
-        );
-
-        $this->add_control(
             'eael_event_calendar_first_day',
             [
                 'label' => __('First Day of Week', 'essential-addons-for-elementor-lite'),
@@ -613,7 +425,7 @@ class Event_Calendar extends Widget_Base
                     'label' => __('Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-button-active)' => 'color: {{VALUE}};',
                     ]
                 ]
             );
@@ -625,7 +437,7 @@ class Event_Calendar extends Widget_Base
                     'label' => __('Background', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-button-active)' => 'background-color: {{VALUE}};',
                     ]
                 ]
             );
@@ -635,7 +447,7 @@ class Event_Calendar extends Widget_Base
                 [
                     'name' => 'button_border_normal',
                     'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
-                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)',
+                    'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-button-active)',
                 ]
             );
 
@@ -646,7 +458,7 @@ class Event_Calendar extends Widget_Base
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-button-active)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ]
                 ]
             );
@@ -658,7 +470,7 @@ class Event_Calendar extends Widget_Base
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-state-active)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button:not(.fc-button-active)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                     'separator' => 'after',
                 ]
@@ -735,7 +547,7 @@ class Event_Calendar extends Widget_Base
                     'label' => __('Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-button-active' => 'color: {{VALUE}};',
                     ]
                 ]
             );
@@ -746,7 +558,7 @@ class Event_Calendar extends Widget_Base
                     'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-button-active' => 'background-color: {{VALUE}};',
                     ]
                 ]
             );
@@ -756,7 +568,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'button_border_active',
                 'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
-                'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active',
+                'selector' => '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-button-active',
             ]
         );
 
@@ -767,7 +579,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-button-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ]
             ]
         );
@@ -779,7 +591,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-state-active' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .fc-toolbar.fc-header-toolbar .fc-button.fc-button-active' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
@@ -1402,30 +1214,6 @@ class Event_Calendar extends Widget_Base
             $events = $settings['eael_event_items'];
         }
 
-        $daysWeek = [
-            $settings['eael_event_calendar_days_sun'],
-            $settings['eael_event_calendar_days_mon'],
-            $settings['eael_event_calendar_days_tue'],
-            $settings['eael_event_calendar_days_wed'],
-            $settings['eael_event_calendar_days_thu'],
-            $settings['eael_event_calendar_days_fri'],
-            $settings['eael_event_calendar_days_sat'],
-        ];
-
-        $monthNames = [
-            $settings['eael_event_calendar_month_jan'],
-            $settings['eael_event_calendar_month_feb'],
-            $settings['eael_event_calendar_month_mar'],
-            $settings['eael_event_calendar_month_apr'],
-            $settings['eael_event_calendar_month_may'],
-            $settings['eael_event_calendar_month_jun'],
-            $settings['eael_event_calendar_month_jul'],
-            $settings['eael_event_calendar_month_aug'],
-            $settings['eael_event_calendar_month_sep'],
-            $settings['eael_event_calendar_month_oct'],
-            $settings['eael_event_calendar_month_nov'],
-            $settings['eael_event_calendar_month_dec'],
-        ];
         echo '<div class="eael-event-calendar-wrapper">';
 
         if ($events) {
@@ -1445,7 +1233,7 @@ class Event_Calendar extends Widget_Base
                     'allDay' => $event['eael_event_all_day'],
                     'external' => $event['eael_event_link']['is_external'],
                     'nofollow' => $event['eael_event_link']['nofollow'],
-                    'dayNames' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                    //'dayNames' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 ];
                 $i++;
             }
@@ -1454,9 +1242,7 @@ class Event_Calendar extends Widget_Base
         echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
-            data-month_names="' . htmlspecialchars(json_encode($monthNames), ENT_QUOTES, 'UTF-8') . '"
-            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"
-            data-days_week="' . htmlspecialchars(json_encode($daysWeek), ENT_QUOTES, 'UTF-8') . '"></div>';
+            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>';
 
             $this->eaelec_load_event_details();
         echo '</div>';

@@ -5,8 +5,6 @@ var EventCalendar = function($scope, $) {
 		CloseButton	= $(".eaelec-modal-close", $scope).eq(0),
 		ecModal		= $('#eaelecModal', $scope),
 		eventAll	= element.data("events"),
-		daysWeek 	= element.data("days_week"),
-		monthNames	= element.data("month_names"),
 		firstDay	= element.data("first_day"),
 		calendarID	= element.data("cal_id");
 		calendarEl = document.getElementById('eael-event-calendar-'+ calendarID);
@@ -30,8 +28,6 @@ var EventCalendar = function($scope, $) {
 		events: eventAll,
 		selectHelper: true,
 		eventLimit: 3,
-		dayNamesShort: daysWeek,
-		monthNames: monthNames,
 		eventRender: function(info) {
 			var element = $(info.el),
 			 	event = info.event;
