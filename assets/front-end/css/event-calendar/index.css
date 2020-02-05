@@ -1,6 +1,9 @@
 .eael-event-calendar-wrapper .fc-row table {
   margin: 0px !important;
 }
+.eael-event-calendar-wrapper .fc table {
+  margin: auto;
+}
 .eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td {
   border-top: 1px solid #ddd !important;
 }
@@ -89,8 +92,8 @@
   text-align: center;
   box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   color: #000 !important;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   text-align: center;
   display: -webkit-box;
   display: flex;
@@ -101,7 +104,7 @@
   border-radius: 50%;
 }
 .eael-event-calendar-wrapper .eaelec-modal-close > span {
-  font-size: 22px;
+  font-size: 20px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-close:hover,
 .eael-event-calendar-wrapper .eaelec-modal-close:focus {
@@ -149,19 +152,8 @@
   }
 }
 
-.fc-toolbar.fc-header-toolbar {
-  margin-bottom: 25px;
-}
-.fc-toolbar.fc-header-toolbar button.fc-button-primary {
-  padding: 8px 30px 8px 40px;
-}
-.fc-toolbar.fc-header-toolbar button.fc-button.fc-today-button,
-.fc-toolbar.fc-header-toolbar button.fc-next-button.fc-button,
-.fc-toolbar.fc-header-toolbar button.fc-prev-button,
-.fc-toolbar.fc-header-toolbar button.fc-today-button
-button.fc-next-button,
-.fc-toolbar.fc-header-toolbar button.fc-prev-button {
-  padding: 8px 30px 8px 30px;
+.fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
+  margin-left: 15px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button,
 .fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button,
@@ -171,11 +163,12 @@ button.fc-next-button,
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before,
 .fc-toolbar.fc-header-toolbar button.fc-timeGridDay-button:before,
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
-  position: absolute;
-  left: 0;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  right: 65px;
+  font-size: 16px;
+  display: inline-block;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before {
   content: "\f03a";
@@ -188,27 +181,30 @@ button.fc-next-button,
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
   content: "\f00a";
 }
-
-button.fc-button.fc-button-primary {
+.fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary {
   box-shadow: none;
   height: auto;
   width: auto;
   float: none;
   font-size: 15px;
-  font-weight: normal;
-  color: #707070;
-  margin-left: 15px;
-  border-radius: 3px;
+  font-weight: 400;
+  color: #5e5e5e;
+  border-radius: 5px;
   text-transform: capitalize;
-  background: #fff;
+  background: #f7f7fb;
   text-shadow: none;
   line-height: 1.5em;
+  padding: 8px 10px;
   border: none;
 }
-button.fc-button.fc-button-primary.fc-state-active, button.fc-button.fc-button-primary:hover, button.fc-button.fc-button-primary:visited, button.fc-button.fc-button-primary:focus {
+.fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary.fc-state-active, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:hover, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:visited, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:focus {
   background: #5725ff;
   color: #fff;
   box-shadow: none;
+}
+.fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary.fc-button-active {
+  background: #5725ff;
+  color: #fff;
 }
 
 th.fc-widget-header > span {
@@ -238,6 +234,20 @@ span.fc-day-number {
   border-top: 1px solid #dfdfe9;
 }
 
+.fc-unthemed .fc-timeGridDay-view .fc-event,
+.fc-unthemed .fc-timeGridWeek-view .fc-event {
+  border-left: 1px solid;
+  border-color: #4d4d4d !important;
+}
+.fc-unthemed .fc-timeGridDay-view .fc-event .fc-time,
+.fc-unthemed .fc-timeGridWeek-view .fc-event .fc-time {
+  padding-left: 3px;
+}
+.fc-unthemed .fc-timeGridDay-view .fc-time-grid .fc-event .fc-content,
+.fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
+  -webkit-box-pack: end;
+          justify-content: end;
+}
 .fc-unthemed .fc-content,
 .fc-unthemed .fc-divider,
 .fc-unthemed .fc-list-heading td,
@@ -258,8 +268,7 @@ span.fc-day-number {
   border-radius: 5px;
   font-weight: 400;
   margin: 1px;
-  border: 1px solid;
-  border-color: #4d4d4d !important;
+  border: none;
 }
 .fc-unthemed a.fc-day-grid-event .fc-day-grid-event .fc-time,
 .fc-unthemed .fc-event .fc-day-grid-event .fc-time {
