@@ -334,7 +334,8 @@ class Event_Calendar extends Widget_Base
                     '{{WRAPPER}} .eael-event-calendar-wrapper hr.fc-divider' => 'border-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc th' => 'border-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  td.fc-today' => 'border-left-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  table thead:first-child tr:first-child td' => 'border-top-color: {{VALUE}} !important;'
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view  table thead:first-child tr:first-child td' => 'border-top-color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view' => 'border-color: {{VALUE}} !important;'
                 ]
             ]
         );
