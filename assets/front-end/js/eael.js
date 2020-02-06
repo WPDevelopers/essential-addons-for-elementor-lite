@@ -38981,67 +38981,6 @@ return $;
     });
 })(jQuery);
 
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -39143,6 +39082,67 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",
         AdvanceTabHandler
+    );
+});
+
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
     );
 });
 
@@ -40271,12 +40271,21 @@ var EventCalendar = function($scope, $) {
 			 	event = info.event;
 			element.attr("href", "javascript:void(0);");
 			element.click(function() {
+				var endDate = event.end;
+				var timeFormate = "h:mm A";
+				if(event.allDay === "yes"){
+					var newEnd = moment(endDate).subtract(1, "days");
+					endDate = newEnd._d;
+					timeFormate = " ";
+				}
+				var timeFormatLen = timeFormate.trim().length;
+				console.log(timeFormatLen+' t');
 				ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
-				if (event.allDay == "yes") {
+				if (event.allDay === "yes" && event.end === null) {
 					$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") == true) {
-						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format("h:mm A"));
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
 					}
 					if (
 						moment(event.start).format("MM-DD-YYYY") ==
@@ -40284,7 +40293,7 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format("h:mm A"));
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format(timeFormate));
 					}
 					if (
 						moment(event.start).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
@@ -40293,43 +40302,45 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, h:mm A"));
+						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, "+timeFormate));
 					}
 
-					if (moment(event.end).isSame(Date.now(), "day") == true) {
-						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+					if (moment(endDate).isSame(Date.now(), "day") == true && timeFormatLen>0) {
+						$("span.eaelec-event-date-end").html("- " + moment(endDate).format(timeFormate));
 					}
 					if (
 						moment(event.start).format("MM-DD-YYYY") !=
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY") &&
-						moment(event.end).format("MM-DD-YYYY") ==
+						moment(endDate).format("MM-DD-YYYY") ==
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- Tomorrow, " + moment(event.end).format("h:mm A"));
+						$("span.eaelec-event-date-end").html("- Tomorrow, " + moment(endDate).format(timeFormate));
 					}
 					if (
 						moment(event.start).format("MM-DD-YYYY") ==
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY") &&
-						moment(event.end).format("MM-DD-YYYY") ==
+						moment(endDate).format("MM-DD-YYYY") ==
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+						if(timeFormatLen>0){
+							$("span.eaelec-event-date-end").html("- " + moment(endDate).format(timeFormate));
+						}
 					}
 					if (
-						moment(event.end).format("MM-DD-YYYY") >
+						moment(endDate).format("MM-DD-YYYY") >
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("MMM Do, h:mm A"));
+						$("span.eaelec-event-date-end").html("- " + moment(endDate).format("MMM Do, "+timeFormate));
 					}
 
 					if (
@@ -40337,9 +40348,12 @@ var EventCalendar = function($scope, $) {
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY") &&
-						moment(event.start).format("MM-DD-YYYY") == moment(event.end).format("MM-DD-YYYY")
+						moment(event.start).format("MM-DD-YYYY") == moment(endDate).format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- " + moment(event.end).format("h:mm A"));
+						if(timeFormatLen>0){
+							$("span.eaelec-event-date-end").html("- " + moment(endDate).format(timeFormate));
+						}
+
 					}
 				}
 

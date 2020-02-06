@@ -115,12 +115,16 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+
         $repeater->add_control(
             'eael_event_start_date',
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
                 'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'condition' => [
+                    'eael_event_all_day' => '',
+                ],
             ]
         );
 
@@ -132,6 +136,32 @@ class Event_Calendar extends Widget_Base
                 'default' => date('Y-m-d H:i', strtotime("+59 minute", current_time('timestamp', 0))),
                 'condition' => [
                     'eael_event_all_day' => '',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_event_start_date_allday',
+            [
+                'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'picker_options' => ['enableTime' => false],
+                'default' => date('Y-m-d', current_time('timestamp', 0)),
+                'condition' => [
+                    'eael_event_all_day' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_event_end_date_allday',
+            [
+                'label' => __('End Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'picker_options' => ['enableTime' => false],
+                'default' => date('Y-m-d',  current_time('timestamp', 0)),
+                'condition' => [
+                    'eael_event_all_day' => 'yes',
                 ],
             ]
         );
@@ -1223,12 +1253,19 @@ class Event_Calendar extends Widget_Base
             $i = 0;
 
             foreach ($events as $event) {
+
+                $start = $event["eael_event_start_date"];
+                $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
+                if($event['eael_event_all_day']=='yes'){
+                    $start = $event["eael_event_start_date_allday"];
+                    $end = date('Y-m-d', strtotime("+1 days", strtotime($event["eael_event_end_date_allday"])));
+                }
                 $data[] = [
                     'id' => $i,
                     'title' => $event["eael_event_title"],
                     'description' => $event["eael_event_description"],
-                    'start' => $event["eael_event_start_date"],
-                    'end' => date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01",
+                    'start' => $start,
+                    'end' => $end,
                     'borderColor' => !empty($event['eael_event_border_color']) ? $event['eael_event_border_color'] : '#10ecab',
                     'textColor' => $event['eael_event_text_color'],
                     'color' => $event['eael_event_bg_color'],
@@ -1324,9 +1361,10 @@ class Event_Calendar extends Widget_Base
         if (isset($data->items)) {
             $calendar_data = [];
             foreach ($data->items as $key => $item) {
-                $all_day = false;
+                $all_day = '';
 
                 if (isset($item->start->date)) {
+                    $all_day = 'yes';
                     $ev_start_date = $item->start->date;
                     $ev_end_date = $item->end->date;
                     $ev_end_date = date('Y-m-d', strtotime("-1 days", strtotime($ev_end_date)));
