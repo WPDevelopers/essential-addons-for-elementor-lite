@@ -33,23 +33,26 @@ var EventCalendar = function($scope, $) {
 			 	event = info.event;
 			element.attr("href", "javascript:void(0);");
 			element.click(function() {
-				var startDate 	= event.start;
-				var	timeFormate = "h:mm A";
-				var endDate 	= event.end;
+				var startDate 	= event.start,
+					timeFormate = "h:mm A",
+					endDate 	= event.end,
+					startSelector = $("span.eaelec-event-date-start"),
+					endSelector = $("span.eaelec-event-date-end");
 				if(event.allDay === "yes"){
 					var newEnd = moment(endDate).subtract(1, "days");
 					endDate = newEnd._d;
 					timeFormate = " ";
 				}
-				$("span.eaelec-event-date-start").html(" ");
-				$("span.eaelec-event-date-end").html(" ");
+				startSelector.html(" ");
+				endSelector.html(" ");
+
 				var timeFormatLen = timeFormate.trim().length;
 				ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
 				if (event.allDay === "yes" && event.end === null) {
-					$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
+					startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
+						startSelector.html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -57,7 +60,7 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format(timeFormate));
+						startSelector.html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format(timeFormate));
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
@@ -66,11 +69,11 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-start").html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, "+timeFormate));
+						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, "+timeFormate));
 					}
 
 					if (moment(endDate).isSame(Date.now(), "day") === true && timeFormatLen>0) {
-						$("span.eaelec-event-date-end").html("- " + moment(endDate).format(timeFormate));
+						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") !==
@@ -82,7 +85,7 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- Tomorrow, " + moment(endDate).format(timeFormate));
+						endSelector.html("- Tomorrow, " + moment(endDate).format(timeFormate));
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -94,7 +97,7 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- " + moment(endDate).format(timeFormate));
+						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
 					if (
 						moment(event.end).format("MM-DD-YYYY") >
@@ -102,7 +105,7 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- " + moment(endDate).format("MMM Do, "+timeFormate));
+						endSelector.html("- " + moment(endDate).format("MMM Do, "+timeFormate));
 					}
 
 					if (
@@ -112,7 +115,7 @@ var EventCalendar = function($scope, $) {
 							.format("MM-DD-YYYY") &&
 						moment(startDate).format("MM-DD-YYYY") === moment(event.end).format("MM-DD-YYYY")
 					) {
-						$("span.eaelec-event-date-end").html("- " + moment(endDate).format(timeFormate));
+						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
 				}
 

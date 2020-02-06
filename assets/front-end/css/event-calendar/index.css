@@ -300,6 +300,11 @@ span.fc-day-number {
   height: 100%;
   width: 100%;
 }
+.fc-unthemed .fc-time-grid .fc-event .fc-content .fc-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .fc-unthemed .fc-event:hover {
   color: #707070;
 }
@@ -352,6 +357,9 @@ span.fc-day-number {
   .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
     margin-left: 5px;
   }
+  .eael-event-calendar-wrapper .eaelec-modal-body {
+    height: 200px;
+  }
 }
 @media only screen and (max-width: 767px) {
   .fc-right, .fc-left {
@@ -396,5 +404,9 @@ span.fc-day-number {
 
   .fc-basic-view .fc-body .fc-row {
     min-height: 2em;
+  }
+
+  .eael-event-calendar-wrapper .eaelec-modal-body {
+    height: 100px;
   }
 }
