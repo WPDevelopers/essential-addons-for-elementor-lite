@@ -364,6 +364,11 @@ span.fc-day-number {
 				justify-content: center;
 				height: 100%;
 				width: 100%;
+				.fc-title{
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
 			}
 		}
 	}
@@ -450,6 +455,10 @@ span.fc-day-number {
 				}
 			}
 		}
+
+		.eaelec-modal-body {
+			height: 200px;
+		}
 	}
 }
 
@@ -502,5 +511,9 @@ span.fc-day-number {
 	.fc-basic-view .fc-body .fc-row {
 		min-height: 2em;
 	}
-
+	.eael-event-calendar-wrapper {
+		.eaelec-modal-body {
+			height: 100px;
+		}
+	}
 }
