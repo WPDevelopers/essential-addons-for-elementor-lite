@@ -33,6 +33,8 @@
 
 .eael-gravity-form .gform_wrapper textarea {
   padding: 0;
+  font-weight: normal !important;
+  font-family: inherit;
 }
 
 .eael-gravity-form .gform_wrapper .gform_footer input.button,
