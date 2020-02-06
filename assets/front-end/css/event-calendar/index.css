@@ -114,9 +114,18 @@
   cursor: pointer;
 }
 .eael-event-calendar-wrapper .eaelec-modal-body {
-  padding: 0px 10px 0 35px;
+  padding: 0 10px 0 35px;
   margin: 10px 0;
   color: #555555;
+  height: 300px;
+  overflow-y: auto;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.eael-event-calendar-wrapper .eaelec-modal-body::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-footer {
   padding: 0px 10px 0 35px;
@@ -248,6 +257,9 @@ span.fc-day-number {
 .fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
   -webkit-box-pack: end;
           justify-content: end;
+}
+.fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
+  display: inherit;
 }
 .fc-unthemed .fc-content,
 .fc-unthemed .fc-divider,
