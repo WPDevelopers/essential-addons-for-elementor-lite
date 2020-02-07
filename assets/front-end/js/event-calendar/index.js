@@ -113,6 +113,10 @@ var EventCalendar = function($scope, $) {
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
+				if(event.extendedProps.description.length<1){
+					$(".eaelec-modal-body").css("height", "auto");
+				}
+
 				$(".eaelec-modal-footer a").attr("href", event.url);
 				if (event.external === "on") {
 					$(".eaelec-modal-footer a").attr("target", "_blank");
