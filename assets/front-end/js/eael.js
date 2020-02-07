@@ -40340,22 +40340,11 @@ var EventCalendar = function($scope, $) {
 					) {
 						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
-					if (
-						moment(endDate).format("MM-DD-YYYY") >
-						moment(new Date())
-							.add(1, "days")
-							.format("MM-DD-YYYY")
-					) {
+					if ( moment(endDate).diff(moment(startDate), 'days') > 0 && endSelector.text().trim().length<1 ) {
 						endSelector.html("- " + moment(endDate).format("MMM Do, "+timeFormate));
 					}
 
-					if (
-						moment(endDate).format("MM-DD-YYYY") >
-						moment(new Date())
-							.add(1, "days")
-							.format("MM-DD-YYYY") &&
-						moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")
-					) {
+					if (moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
 						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
 				}
