@@ -45,10 +45,9 @@ var EventCalendar = function($scope, $) {
 				}
 				startSelector.html(" ");
 				endSelector.html(" ");
-
 				var timeFormatLen = timeFormate.trim().length;
 				ecModal.addClass('eael-ec-popup-ready').removeClass('eael-ec-modal-removing');
-				if (event.allDay === "yes" && event.end === null) {
+				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY")===moment(endDate).format("MM-DD-YYYY")) {
 					startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
@@ -72,8 +71,12 @@ var EventCalendar = function($scope, $) {
 						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, "+timeFormate));
 					}
 
-					if (moment(endDate).isSame(Date.now(), "day") === true && timeFormatLen>0) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
+					if (moment(endDate).isSame(Date.now(), "day") === true) {
+						if(moment(startDate).isSame(Date.now(), "day")!==true){
+							endSelector.html("- Today, " + moment(endDate).format(timeFormate));
+						}else{
+							endSelector.html("- " + moment(endDate).format(timeFormate));
+						}
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") !==
@@ -92,7 +95,7 @@ var EventCalendar = function($scope, $) {
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY") &&
-						moment(event.end).format("MM-DD-YYYY") ===
+						moment(endDate).format("MM-DD-YYYY") ===
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY")
@@ -100,7 +103,7 @@ var EventCalendar = function($scope, $) {
 						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
 					if (
-						moment(event.end).format("MM-DD-YYYY") >
+						moment(endDate).format("MM-DD-YYYY") >
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY")
@@ -113,7 +116,7 @@ var EventCalendar = function($scope, $) {
 						moment(new Date())
 							.add(1, "days")
 							.format("MM-DD-YYYY") &&
-						moment(startDate).format("MM-DD-YYYY") === moment(event.end).format("MM-DD-YYYY")
+						moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")
 					) {
 						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
