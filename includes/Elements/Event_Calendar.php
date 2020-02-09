@@ -351,6 +351,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#CFCFDA',
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-wrapper .fc td' => 'border-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-event-calendar-wrapper hr.fc-divider' => 'border-color: {{VALUE}}',
