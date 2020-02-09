@@ -755,69 +755,6 @@
   height: 20px;
 }
 
-.eael-ticker-wrap {
-  overflow: hidden;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-}
-
-.eael-ticker-wrap .ticker-badge {
-  flex: 0 0 auto;
-  padding: 8px 12px;
-}
-
-.eael-ticker-wrap .eael-ticker {
-  overflow: hidden;
-  flex: 1 1 auto;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content {
-  padding: 8px 12px;
-  line-height: 1.8;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content p {
-  margin: 0;
-}
-
-.eael-ticker-wrap .swiper-button-prev {
-  left: auto !important;
-  right: 25px;
-}
-
-.eael-ticker-wrap div.swiper-slide,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
-  opacity: 0 !important;
-}
-
-.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
-  text-align: left;
-}
-
-@media only screen and (max-width: 767px) {
-  .eael-ticker-wrap {
-    flex-flow: row wrap;
-  }
-
-  .content-ticker-pagination {
-    display: none;
-  }
-}
-.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
-  background-image: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /*--------------------------------*/
 /* 11. Contact Form 7 Styles
 /*--------------------------------*/
@@ -896,6 +833,69 @@
 
 .eael-contact-form-7-button-full-width .wpcf7-form-control.wpcf7-submit {
   width: 100%;
+}
+
+.eael-ticker-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.eael-ticker-wrap .ticker-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.eael-ticker-wrap .eael-ticker {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
+}
+
+.eael-ticker-wrap .swiper-button-prev {
+  left: auto !important;
+  right: 25px;
+}
+
+.eael-ticker-wrap div.swiper-slide,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
+  opacity: 0 !important;
+}
+
+.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .eael-ticker-wrap {
+    flex-flow: row wrap;
+  }
+
+  .content-ticker-pagination {
+    display: none;
+  }
+}
+.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
+  background-image: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*---------------------------------*/
@@ -1210,52 +1210,6 @@
 
 .eael-creative-button-icon-right {
   margin-left: 5px;
-}
-
-/* -------------------------------- */
-/* 20. Dual Color Heading
-/* -------------------------------- */
-.eael-dual-header {
-  display: block;
-  margin-bottom: 50px;
-}
-
-.eael-dual-header .title,
-.eael-dual-header .title span {
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 48px;
-  margin: 10px 0px;
-}
-
-.eael-dual-header .subtext {
-  font-size: 16px;
-  display: block;
-}
-
-.eael-dual-header i {
-  display: block;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
-  font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-  color: #1abc9c;
-}
-
-/*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
-  text-align: center;
-}
-
-.eael-dual-header-content-align-left {
-  text-align: left;
-}
-
-.eael-dual-header-content-align-right {
-  text-align: right;
 }
 
 @charset "UTF-8";
@@ -1639,241 +1593,50 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   color: #f54;
 }
 
-.eael-facebook-feed {
-  width: 100%;
-  margin: auto;
-}
-.eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
-  float: none;
-  width: 100%;
-}
-@media only screen and (max-width: 979px) {
-  .eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
-    width: 100%;
-  }
-}
-.eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
-  float: left;
-  width: 50%;
-}
-@media only screen and (max-width: 979px) {
-  .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
-    width: 100%;
-  }
-}
-.eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
-  float: left;
-  width: 33.3333%;
-}
-@media only screen and (max-width: 979px) {
-  .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
-    width: 100%;
-  }
-}
-.eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
-  float: left;
-  width: 25%;
-}
-@media only screen and (max-width: 979px) {
-  .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
-    width: 100%;
-  }
-}
-.eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
-  float: left;
-  width: 20%;
-}
-@media only screen and (max-width: 979px) {
-  .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
-    width: 100%;
-  }
-}
-.eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
-  float: left;
-  width: 16.6666%;
-}
-@media only screen and (max-width: 979px) {
-  .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
-    width: 100%;
-  }
-}
-.eael-facebook-feed .eael-facebook-feed-item {
-  display: inline-block;
-  line-height: 0;
-}
-.eael-facebook-feed .eael-facebook-feed-item,
-.eael-facebook-feed .eael-facebook-feed-item-inner {
-  position: relative;
+/* -------------------------------- */
+/* 20. Dual Color Heading
+/* -------------------------------- */
+.eael-dual-header {
+  display: block;
+  margin-bottom: 50px;
 }
 
-.eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: 12px;
-  line-height: 1;
-  transform: scale(0.8);
-  opacity: 0;
-  transition: all 200ms;
-}
-.eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay .eael-facebook-feed-item-overlay-inner {
-  position: relative;
-  align-self: center;
-}
-.eael-facebook-feed-overlay .eael-facebook-feed-item:hover .eael-facebook-feed-item-overlay {
-  transform: scale(1);
-  opacity: 1;
-}
-.eael-facebook-feed-overlay .eael-facebook-feed-meta {
-  margin-bottom: 0;
-}
-.eael-facebook-feed-overlay .eael-facebook-feed-meta span {
-  display: inline-block;
-  margin: 0 15px;
-}
-
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner {
-  margin: 10px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header {
-  padding: 8px 12px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user {
-  float: left;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-avatar {
-  float: left;
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-username {
-  float: left;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 32px;
-  margin: 0;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-post-time {
-  float: right;
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 32px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content {
-  position: relative;
-  display: block;
-  padding: 12px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content .eael-facebook-feed-message {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.3;
-  margin: 0;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap {
-  padding: 0;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-preview-img {
-  display: block;
-  position: relative;
-  margin-bottom: 12px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-preview-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-preview-overlay i {
-  font-size: 48px;
-  color: #fff;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview {
-  padding: 0 12px 15px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-host {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-title {
-  font-size: 15px;
+.eael-dual-header .title,
+.eael-dual-header .title span {
+  font-size: 36px;
   font-weight: 700;
-  line-height: 1.4;
-  margin-top: 0;
-  margin-bottom: 6px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-description {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 0;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 30px;
-  padding: 8px 12px;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer span {
-  display: inline-block;
-}
-.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer span.eael-facebook-feed-post-likes {
-  margin-right: 15px;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0px;
 }
 
-.elementor-widget-eael-facebook-feed .eael-load-more-button-wrap {
-  justify-content: center;
-  margin-top: 15px;
+.eael-dual-header .subtext {
+  font-size: 16px;
+  display: block;
 }
-.elementor-widget-eael-facebook-feed .eael-load-more-button-wrap.no-pagination {
-  display: none;
+
+.eael-dual-header i {
+  display: block;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  font-size: 36px;
+}
+
+.eael-dual-header .title span.lead {
+  color: #1abc9c;
+}
+
+/*--- Builder Related Css ---*/
+.eael-dual-header-content-align-center {
+  text-align: center;
+}
+
+.eael-dual-header-content-align-left {
+  text-align: left;
+}
+
+.eael-dual-header-content-align-right {
+  text-align: right;
 }
 
 .eael-event-calendar-wrapper .fc-row table {
@@ -1891,6 +1654,9 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   padding: 8px;
   font-size: 12px;
   border-left-width: 5px;
+}
+.eael-event-calendar-wrapper .fc-day.fc-today {
+  background: transparent;
 }
 .eael-event-calendar-wrapper .fc-row table thead:first-child tr:first-child th {
   font-size: 14px;
@@ -2284,59 +2050,241 @@ span.fc-day-number {
   }
 }
 
-.eael-fancy-text-container p {
+.eael-facebook-feed {
+  width: 100%;
+  margin: auto;
+}
+.eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
+  float: none;
+  width: 100%;
+}
+@media only screen and (max-width: 979px) {
+  .eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-facebook-feed.eael-col-1 .eael-facebook-feed-item {
+    width: 100%;
+  }
+}
+.eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
+  float: left;
+  width: 50%;
+}
+@media only screen and (max-width: 979px) {
+  .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-facebook-feed.eael-col-2 .eael-facebook-feed-item {
+    width: 100%;
+  }
+}
+.eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
+  float: left;
+  width: 33.3333%;
+}
+@media only screen and (max-width: 979px) {
+  .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-facebook-feed.eael-col-3 .eael-facebook-feed-item {
+    width: 100%;
+  }
+}
+.eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
+  float: left;
+  width: 25%;
+}
+@media only screen and (max-width: 979px) {
+  .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-facebook-feed.eael-col-4 .eael-facebook-feed-item {
+    width: 100%;
+  }
+}
+.eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
+  float: left;
+  width: 20%;
+}
+@media only screen and (max-width: 979px) {
+  .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-facebook-feed.eael-col-5 .eael-facebook-feed-item {
+    width: 100%;
+  }
+}
+.eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
+  float: left;
+  width: 16.6666%;
+}
+@media only screen and (max-width: 979px) {
+  .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .eael-facebook-feed.eael-col-6 .eael-facebook-feed-item {
+    width: 100%;
+  }
+}
+.eael-facebook-feed .eael-facebook-feed-item {
+  display: inline-block;
+  line-height: 0;
+}
+.eael-facebook-feed .eael-facebook-feed-item,
+.eael-facebook-feed .eael-facebook-feed-item-inner {
+  position: relative;
+}
+
+.eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  line-height: 1;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 200ms;
+}
+.eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay .eael-facebook-feed-item-overlay-inner {
+  position: relative;
+  align-self: center;
+}
+.eael-facebook-feed-overlay .eael-facebook-feed-item:hover .eael-facebook-feed-item-overlay {
+  transform: scale(1);
+  opacity: 1;
+}
+.eael-facebook-feed-overlay .eael-facebook-feed-meta {
+  margin-bottom: 0;
+}
+.eael-facebook-feed-overlay .eael-facebook-feed-meta span {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner {
+  margin: 10px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header {
+  padding: 8px 12px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user {
+  float: left;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-avatar {
+  float: left;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-item-user .eael-facebook-feed-username {
+  float: left;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 32px;
   margin: 0;
 }
-
-.eael-fancy-text-strings {
-  display: none;
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-header .eael-facebook-feed-post-time {
+  float: right;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 32px;
 }
-
-.eael-fancy-text-prefix,
-.eael-fancy-text-suffix {
-  display: inline-block;
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content {
+  position: relative;
+  display: block;
+  padding: 12px;
 }
-
-.morphext > .animated {
-  display: inline-block;
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-content .eael-facebook-feed-message {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0;
 }
-
-.typed-cursor {
-  opacity: 1;
-  -webkit-animation: blink_cursor 0.7s infinite;
-  animation: blink_cursor 0.7s infinite;
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap {
+  padding: 0;
 }
-
-@keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-preview-img {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
 }
-@-webkit-keyframes blink_cursor {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-preview-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.eael-fancy-text-container.style-2 {
-  font-size: 24px;
-}
-
-.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
-  background: #ff5544;
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-preview-overlay i {
+  font-size: 48px;
   color: #fff;
-  padding: 10px 25px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview {
+  padding: 0 12px 15px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-host {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-preview-wrap .eael-facebook-feed-url-preview .eael-facebook-feed-url-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 30px;
+  padding: 8px 12px;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer span {
+  display: inline-block;
+}
+.eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner .eael-facebook-feed-item-footer span.eael-facebook-feed-post-likes {
+  margin-right: 15px;
+}
+
+.elementor-widget-eael-facebook-feed .eael-load-more-button-wrap {
+  justify-content: center;
+  margin-top: 15px;
+}
+.elementor-widget-eael-facebook-feed .eael-load-more-button-wrap.no-pagination {
+  display: none;
 }
 
 /*----------------------------*/
@@ -2874,6 +2822,61 @@ span.fc-day-number {
     left: auto;
     right: 5px;
   }
+}
+
+.eael-fancy-text-container p {
+  margin: 0;
+}
+
+.eael-fancy-text-strings {
+  display: none;
+}
+
+.eael-fancy-text-prefix,
+.eael-fancy-text-suffix {
+  display: inline-block;
+}
+
+.morphext > .animated {
+  display: inline-block;
+}
+
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink_cursor 0.7s infinite;
+  animation: blink_cursor 0.7s infinite;
+}
+
+@keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink_cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.eael-fancy-text-container.style-2 {
+  font-size: 24px;
+}
+
+.eael-fancy-text-container.style-2 .eael-fancy-text-strings {
+  background: #ff5544;
+  color: #fff;
+  padding: 10px 25px;
 }
 
 /*------------------------------*/
@@ -7059,35 +7062,6 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
   }
 }
 
-.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
-.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
-  display: none;
-}
-.eael-reading-progress-wrap .eael-reading-progress {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  z-index: 999999;
-}
-.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
-  top: unset;
-  bottom: 0;
-}
-.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
-  height: 5px;
-  background-color: #1fd18e;
-  width: 0%;
-  transition: width 50ms ease;
-}
-
 @-webkit-keyframes animateStripe {
   0% {
     transform: translate(0, 0);
@@ -7312,6 +7286,35 @@ div.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow {
 .eael-progressbar-circle-container.right > div,
 .eael-progressbar-box-container.right > div {
   margin: 0 0 0 auto;
+}
+
+.eael-reading-progress-wrap.eael-reading-progress-wrap-local .eael-reading-progress-global {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-global .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-global,
+.eael-reading-progress-wrap.eael-reading-progress-wrap-disabled .eael-reading-progress-local {
+  display: none;
+}
+.eael-reading-progress-wrap .eael-reading-progress {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  z-index: 999999;
+}
+.eael-reading-progress-wrap .eael-reading-progress.eael-reading-progress-bottom {
+  top: unset;
+  bottom: 0;
+}
+.eael-reading-progress-wrap .eael-reading-progress .eael-reading-progress-fill {
+  height: 5px;
+  background-color: #1fd18e;
+  width: 0%;
+  transition: width 50ms ease;
 }
 
 /* Overlay Styles */
@@ -8549,41 +8552,6 @@ span.eael-tooltip-content a {
   text-align: justify;
 }
 
-/*----------------------*/
-/* 12. weForm Styles
-/*----------------------*/
-.eael-weform-container input,
-.eael-weform-container textarea {
-  height: auto;
-  padding: 10px;
-}
-
-.eael-contact-form-btn-align-center .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: block;
-  float: none;
-}
-
-.eael-contact-form-btn-align-left .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  float: left;
-  width: auto;
-}
-
-.eael-contact-form-btn-align-right .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  float: right;
-  width: auto;
-}
-
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
-  max-width: 100%;
-}
-
 .eael-twitter-feed::before, .eael-twitter-feed::after {
   content: "";
   clear: both;
@@ -8674,6 +8642,41 @@ span.eael-tooltip-content a {
 .eael-twitter-feed.swiper-container .swiper-button-next, .eael-twitter-feed.swiper-container .swiper-button-prev {
   background-image: none;
   outline: none;
+}
+
+/*----------------------*/
+/* 12. weForm Styles
+/*----------------------*/
+.eael-weform-container input,
+.eael-weform-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-btn-align-center .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-btn-align-left .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-btn-align-right .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  float: right;
+  width: auto;
+}
+
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
+  max-width: 100%;
 }
 
 /* ------------------- */

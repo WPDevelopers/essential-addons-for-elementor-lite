@@ -21,6 +21,9 @@
 		font-size: 12px;
 		border-left-width: 5px;
 	}
+	.fc-day.fc-today {
+		background: transparent;
+	}
 
 	.fc-row table thead:first-child tr:first-child th {
 		font-size: 14px;
