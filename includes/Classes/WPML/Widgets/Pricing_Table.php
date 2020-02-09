@@ -3,7 +3,6 @@
 namespace Essential_Addons_Elementor\Classes\WPML\Widgets;
 
 use WPML_Elementor_Module_With_Items;
-use Essential_Addons_Elementor\Classes\WPML\Eael_WPML;
 
 if ( ! defined('ABSPATH') ) exit; // No access of directly access
 
