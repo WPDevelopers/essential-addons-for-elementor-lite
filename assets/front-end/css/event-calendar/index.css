@@ -159,6 +159,12 @@
     padding: 5px !important;
   }
 }
+.eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-center h2 {
+  font-size: 22px;
+}
+.eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-left .fc-button .fc-icon {
+  font-size: 13px;
+}
 
 .fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
   margin-left: 5px;
@@ -175,10 +181,11 @@
 .fc-toolbar.fc-header-toolbar button.fc-dayGridMonth-button:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  font-size: 16px;
+  font-size: 13px;
   display: inline-block;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 5px;
+  padding-left: 0;
+  -webkit-font-smoothing: antialiased;
 }
 .fc-toolbar.fc-header-toolbar button.fc-timeGridWeek-button:before {
   content: "\f03a";
@@ -199,15 +206,15 @@
   height: auto;
   width: auto;
   float: none;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   color: #5e5e5e;
   border-radius: 3px;
   text-transform: capitalize;
   background: #f7f7fb;
   text-shadow: none;
-  line-height: 1.5em;
-  padding: 8px 10px;
+  line-height: 19px;
+  padding: 8px 12px;
   border: none;
 }
 .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary.fc-state-active, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:hover, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:visited, .fc-toolbar.fc-header-toolbar button.fc-button.fc-button-primary:focus {
