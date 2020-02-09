@@ -189,7 +189,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Popup Ribbon Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#10ecab'
+                'default' => '#E8E6ED'
             ]
         );
 
