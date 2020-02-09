@@ -39972,6 +39972,73 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
 var ContentTicker = function($scope, $) {
     var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
         $items =
@@ -40091,73 +40158,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -40257,7 +40257,7 @@ var EventCalendar = function($scope, $) {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+			right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
 		},
 		buttonText: {
 			today: "Today"
@@ -40444,80 +40444,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-facebook-feed.default",
         FacebookFeed
-    );
-});
-
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-
-    if(isEditMode) {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 800);
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
     );
 });
 
@@ -40719,6 +40645,80 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+
+    if(isEditMode) {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 800);
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
 (function($) {
     window.isEditMode = false;
 
@@ -40795,16 +40795,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-post-grid.default",
         PostGrid
-    );
-});
-
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
     );
 });
 
@@ -40931,6 +40921,16 @@ jQuery(document).ready(function() {
             }
         );
     }
+});
+
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
+    );
 });
 
 var eaelsvPosition = '';
