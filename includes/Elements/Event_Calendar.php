@@ -1366,7 +1366,7 @@ class Event_Calendar extends Widget_Base
                 $all_day = '';
 
                 if (isset($item->start->date)) {
-                    $all_day = 'yes';
+                    //$all_day = 'yes';
                     $ev_start_date = $item->start->date;
                     $ev_end_date = $item->end->date;
                     $ev_end_date = date('Y-m-d', strtotime("-1 days", strtotime($ev_end_date)));
