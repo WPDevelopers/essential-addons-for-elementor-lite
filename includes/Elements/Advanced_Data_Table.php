@@ -1452,7 +1452,7 @@ class Advanced_Data_Table extends Widget_Base
     {
         $settings = $this->get_parsed_dynamic_settings();
 
-        if ($settings['ea_adv_data_table_source'] == 'database' || $settings['ea_adv_data_table_source'] == 'remote') {
+        if ($settings['ea_adv_data_table_source'] == 'database' || $settings['ea_adv_data_table_source'] == 'remote' || $settings['ea_adv_data_table_source'] == 'google') {
             return apply_filters('eael/advanced-data-table/table_html/database', $settings, '');
         }
 
