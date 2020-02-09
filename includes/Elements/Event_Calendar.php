@@ -188,16 +188,8 @@ class Event_Calendar extends Widget_Base
             'eael_event_border_color',
             [
                 'label' => __('Event Border Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR
-            ]
-        );
-
-        $repeater->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'eael_event_typography',
-                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-content span.fc-title',
+                'type' => Controls_Manager::COLOR,
+                'default' => '#10ecab'
             ]
         );
 
@@ -894,6 +886,15 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Events', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_event_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .fc-content span.fc-title',
             ]
         );
         
