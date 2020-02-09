@@ -40352,10 +40352,10 @@ var EventCalendar = function($scope, $) {
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
 				$(".eaelec-modal-footer a").attr("href", event.url);
-				if (event.external === "on") {
+				if (event.extendedProps.external === "on") {
 					$(".eaelec-modal-footer a").attr("target", "_blank");
 				}
-				if (event.nofollow === "on") {
+				if (event.extendedProps.nofollow === "on") {
 					$(".eaelec-modal-footer a").attr("rel", "nofollow");
 				}
 				if (event.url == "") {
@@ -40798,6 +40798,16 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
+    );
+});
+
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".tooltip"),
@@ -40842,16 +40852,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-pricing-table.default",
         PricingTooltip
-    );
-});
-
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
     );
 });
 

@@ -68,6 +68,7 @@
 		background-color: #fefefe;
 		padding: 20px 0;
 		width: 100%;
+		border-radius: 10px;
 	}
 
 	.eaelec-modal-header {
@@ -133,6 +134,7 @@
 		color: #555555;
 		height: 300px;
 		overflow-y: auto;
+		word-break: break-all;
 	}
 
 	.eaelec-modal-body::-webkit-scrollbar {
@@ -189,12 +191,13 @@
 .fc-toolbar.fc-header-toolbar {
 	.fc-button-group {
 		button:not(:first-child ) {
-			margin-left: 15px;
+			margin-left: 5px;
 		}
 	}
 
 	button.fc-timeGridWeek-button,
 	button.fc-timeGridDay-button,
+	button.fc-listWeek-button,
 	button.fc-dayGridMonth-button {
 		position: relative;
 
@@ -222,6 +225,10 @@
 		content: "\f00a";
 	}
 
+	button.fc-listWeek-button:before {
+		content: "\f00b";
+	}
+
 	button.fc-button.fc-button-primary {
 		box-shadow: none;
 		height: auto;
@@ -230,7 +237,7 @@
 		font-size: 15px;
 		font-weight: 400;
 		color: #5e5e5e;
-		border-radius: 5px;
+		border-radius: 3px;
 		text-transform: capitalize;
 		background: #f7f7fb;
 		text-shadow: none;
@@ -484,6 +491,9 @@ span.fc-day-number {
 				}
 			}
 		}
+	}
+	.fc-center {
+		text-align: center;
 	}
 
 	.fc-toolbar.fc-header-toolbar {

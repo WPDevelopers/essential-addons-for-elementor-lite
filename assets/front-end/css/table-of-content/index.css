@@ -11,7 +11,6 @@ html {
   z-index: 9999;
   width: 300px !important;
   top: 30%;
-  -webkit-transition: all .2s linear;
   transition: all .2s linear;
 }
 .eael-toc.eael-toc-disable {
@@ -21,7 +20,6 @@ html {
   position: fixed;
   top: 50px;
   background: none;
-  -webkit-transition: all .2s linear;
   transition: all .2s linear;
 }
 .eael-toc.expanded {
@@ -34,16 +32,14 @@ html {
   display: none;
 }
 .eael-toc.expanded.eael-bottom-to-top .eael-toc-button {
-  -webkit-transform: translate(21px, 178px) rotate(-90deg);
-          transform: translate(21px, 178px) rotate(-90deg);
+  transform: translate(21px, 178px) rotate(-90deg);
 }
 .eael-toc.expanded.eael-box-shadow .eael-toc-button {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .eael-toc.expanded .eael-toc-button {
   display: inline-block;
-  -webkit-transform: translate(21px, 1px) rotate(90deg);
-          transform: translate(21px, 1px) rotate(90deg);
+  transform: translate(21px, 1px) rotate(90deg);
   background: #ff7d50;
   color: #fff;
   font-weight: 400;
@@ -53,13 +49,11 @@ html {
   border-radius: 3px;
   text-decoration: none;
   text-transform: none;
-  -webkit-transform-origin: left;
-          transform-origin: left;
+  transform-origin: left;
 }
 .eael-toc.expanded .eael-toc-button i {
   margin-right: 10px;
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 .eael-toc .eael-toc-header {
   background: #ff7d50;
@@ -172,7 +166,6 @@ html {
   border-bottom: 10px solid #ff7d50;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   content: " ";
   margin-top: 7px;
@@ -214,7 +207,6 @@ html {
   width: 190px !important;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a {
-  display: -webkit-inline-box;
   display: inline-flex;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a span {
@@ -255,14 +247,11 @@ html {
   left: -11px;
 }
 .eael-toc.eael-toc-right.eael-bottom-to-top .eael-toc-button {
-  -webkit-transform: translate(-21px, 20px) rotate(-90deg);
-          transform: translate(-21px, 20px) rotate(-90deg);
+  transform: translate(-21px, 20px) rotate(-90deg);
 }
 .eael-toc.eael-toc-right .eael-toc-button {
-  -webkit-transform: translate(-21px, 100px) rotate(90deg);
-          transform: translate(-21px, 100px) rotate(90deg);
-  -webkit-transform-origin: right;
-          transform-origin: right;
+  transform: translate(-21px, 100px) rotate(90deg);
+  transform-origin: right;
 }
 .eael-toc .eael-toc-button {
   display: none;
