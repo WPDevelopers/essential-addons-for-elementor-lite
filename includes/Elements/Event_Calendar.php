@@ -187,7 +187,7 @@ class Event_Calendar extends Widget_Base
         $repeater->add_control(
             'eael_event_border_color',
             [
-                'label' => __('Event Border Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Popup Ribbon Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#10ecab'
             ]

@@ -19,7 +19,7 @@ var EventCalendar = function($scope, $) {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+			right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
 		},
 		buttonText: {
 			today: "Today"
