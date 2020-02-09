@@ -123,6 +123,10 @@ class Bootstrap
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_action('wp_footer', array($this, 'render_global_html'));
 
+        if($this->get_settings('eael-table-of-content') != false) {
+            add_action('wp_footer', array( $this, 'eael_table_of_content_render' ));
+        }
+
         // Admin
         if (is_admin()) {
             // Admin

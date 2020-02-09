@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Background;
 
 class Pricing_Table extends Widget_Base {
 
@@ -818,6 +819,31 @@ class Pricing_Table extends Widget_Base {
 				]
 			]
 
+		);
+
+		$this->add_control(
+			'eael_pricing_table_header_bg_heading',
+			[
+				'label'     => esc_html__( 'Background', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_pricing_table_style!' => [ 'style-1', 'style-2' ]
+				]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_pricing_table_header_bg',
+				'label' => __( 'Background', 'essential-addons-elementor' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item .header',
+				'condition' => [
+					'eael_pricing_table_style' => 'style-4'
+				]
+			]
 		);
 
 		$this->end_controls_section();
