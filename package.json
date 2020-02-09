@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-compass": "^2.1.0",
@@ -32,6 +32,7 @@
     "graceful-fs": "^4.2.2",
     "minimatch": "^3.0.4",
     "natives": "^1.1.6",
-    "ruby": "^0.6.1"
+    "ruby": "^0.6.1",
+    "run-sequence": "^2.2.1"
   }
 }
