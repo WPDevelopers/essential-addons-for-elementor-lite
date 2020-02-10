@@ -1019,11 +1019,10 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'event_popup_content_color',
             [
-                'label' => __('Date Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
                 ],
             ]
         );
