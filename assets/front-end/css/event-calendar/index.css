@@ -17,6 +17,9 @@
 .eael-event-calendar-wrapper .fc-day.fc-today {
   background: transparent;
 }
+.eael-event-calendar-wrapper .fc-day-top.fc-today .fc-day-number {
+  font-weight: bold;
+}
 .eael-event-calendar-wrapper .fc-row table thead:first-child tr:first-child th {
   font-size: 14px;
 }
