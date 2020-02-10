@@ -25,6 +25,7 @@ html {
     &.expanded {
         width: unset !important;
         box-shadow: none !important;
+        border: none !important;
         .eael-toc-header,
         .eael-toc-body,
         .eael-toc-close  {

@@ -7,6 +7,7 @@
 
     use \Elementor\Controls_Manager;
     use \Elementor\Group_Control_Typography;
+    use \Elementor\Group_Control_Border;
     use \Elementor\Scheme_Typography as Scheme_Typography;
 
     class Table_of_Content
@@ -205,6 +206,15 @@
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
                     ],
+                ]
+            );
+
+            $element->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'eael_ext_toc_border',
+                    'label' => __( 'Border', 'plugin-domain' ),
+                    'selector' => '{{WRAPPER}} .eael-toc,{{WRAPPER}} button.eael-toc-button',
                 ]
             );
 
