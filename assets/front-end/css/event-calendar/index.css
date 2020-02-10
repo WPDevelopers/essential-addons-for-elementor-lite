@@ -65,6 +65,7 @@
   color: white;
   border-color: #009900;
   overflow: auto;
+  margin-top: 8px;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header h2 {
   color: #242424;
@@ -263,12 +264,26 @@ span.fc-day-number {
 .fc-unthemed .fc-timeGridWeek-view .fc-event .fc-time {
   padding-left: 3px;
 }
+.fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr > td,
+.fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr > td {
+  padding-left: 1px;
+}
 .fc-unthemed .fc-timeGridDay-view .fc-time-grid .fc-event .fc-content,
 .fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
   justify-content: end;
 }
 .fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
   display: inherit;
+}
+.fc-unthemed .fc-listWeek-view .fc-list-table tr.fc-list-item {
+  cursor: pointer;
+}
+.fc-unthemed .fc-listWeek-view .fc-list-table tr td {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.fc-unthemed .fc-dayGridMonth-view .fc-day-grid-event .fc-time {
+  font-weight: 400;
 }
 .fc-unthemed .fc-content,
 .fc-unthemed .fc-divider,

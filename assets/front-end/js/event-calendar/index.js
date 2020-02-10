@@ -14,7 +14,11 @@ var EventCalendar = function($scope, $) {
 		selectable: false,
 		draggable: false,
 		firstDay: firstDay,
-		timeFormat: "hh:mm a",
+		eventTimeFormat: {
+			hour: '2-digit',
+			minute: '2-digit',
+			meridiem: true
+		},
 		nextDayThreshold: "00:00:00",
 		header: {
 			left: "prev,next today",
@@ -33,7 +37,8 @@ var EventCalendar = function($scope, $) {
 				event = info.event;
 
 			element.attr("href", "javascript:void(0);");
-			element.click(function() {
+			element.click(function(e) {
+				e.preventDefault();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,

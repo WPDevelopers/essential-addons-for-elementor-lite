@@ -360,6 +360,15 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_calendar_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view-container .fc-view > table',
+            ]
+        );
+
         $this->add_responsive_control(
             'calendar_inside',
             [
@@ -642,7 +651,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'days_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span',
+                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span,{{WRAPPER}} .fc-listWeek-view .fc-list-table .fc-widget-header span',
             ]
         );
 
@@ -653,6 +662,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-widget-header span' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -700,7 +710,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'days_view_settings',
             [
-                'label' => __('Day View', 'essential-addons-for-elementor-lite'),
+                'label' => __('List View', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -711,8 +721,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Odd row Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#CFCFDA',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(odd) td:not(.fc-axis)' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -721,8 +732,10 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Even row Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(even) td:not(.fc-axis)' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:hover td' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -859,6 +872,7 @@ class Event_Calendar extends Widget_Base
             [
                 'type' => Controls_Manager::COLOR,
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'default' => '#1111e1',
                 'selectors' => [
                     '{{WRAPPER}} .fc-today .fc-day-number' => 'color: {{VALUE}}',
                 ],
