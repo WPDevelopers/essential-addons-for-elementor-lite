@@ -949,7 +949,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-content span.fc-title',
+                'selector' => '{{WRAPPER}} .fc-content span.fc-title,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
             ]
         );
 
