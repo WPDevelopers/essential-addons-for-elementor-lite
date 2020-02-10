@@ -509,18 +509,18 @@
 
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item .header:after {
   -webkit-transform: translateX(-80%);
-  transform: translateX(-80%);
+          transform: translateX(-80%);
 }
 
 .eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item .header:after {
   -webkit-transform: translateX(80%);
-  transform: translateX(80%);
+          transform: translateX(80%);
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item:hover .header:after,
 .eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item:hover .header:after {
   -webkit-transform: translateX(0%);
-  transform: translateX(0%);
+          transform: translateX(0%);
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-1 .eael-pricing-item .header:after,
