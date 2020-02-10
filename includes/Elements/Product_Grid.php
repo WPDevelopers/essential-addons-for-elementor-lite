@@ -532,7 +532,7 @@ class Product_Grid extends Widget_Base
         echo '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">
 			<div class="woocommerce">
                 <ul class="products">
-                    ' . self::__render_template($args, $settings) . '
+                    ' . self::render_template_($args, $settings) . '
                 </ul>
 			</div>
 		</div>';
