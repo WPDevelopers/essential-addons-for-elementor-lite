@@ -21,6 +21,16 @@
 		font-size: 12px;
 		border-left-width: 5px;
 	}
+	.fc-day.fc-today {
+
+		background: transparent;
+	}
+	.fc-day-top.fc-today {
+		.fc-day-number {
+			font-weight: bold;
+		}
+	}
+
 
 	.fc-row table thead:first-child tr:first-child th {
 		font-size: 14px;
@@ -68,6 +78,7 @@
 		background-color: #fefefe;
 		padding: 20px 0;
 		width: 100%;
+		border-radius: 10px;
 	}
 
 	.eaelec-modal-header {
@@ -75,6 +86,7 @@
 		color: white;
 		border-color: #009900;
 		overflow: auto;
+		margin-top: 8px;
 	}
 
 	.eaelec-modal-header h2 {
@@ -133,6 +145,7 @@
 		color: #555555;
 		height: 300px;
 		overflow-y: auto;
+		word-break: break-all;
 	}
 
 	.eaelec-modal-body::-webkit-scrollbar {
@@ -181,7 +194,18 @@
 			padding: 5px !important;
 		}
 	}
-
+	.fc-toolbar.fc-header-toolbar {
+		.fc-center {
+			h2 {
+				font-size: 22px;
+			}
+		}
+		.fc-left {
+			.fc-button .fc-icon {
+				font-size: 13px;
+			}
+		}
+	}
 
 }
 
@@ -189,22 +213,24 @@
 .fc-toolbar.fc-header-toolbar {
 	.fc-button-group {
 		button:not(:first-child ) {
-			margin-left: 15px;
+			margin-left: 5px;
 		}
 	}
 
 	button.fc-timeGridWeek-button,
 	button.fc-timeGridDay-button,
+	button.fc-listWeek-button,
 	button.fc-dayGridMonth-button {
 		position: relative;
 
 		&:before {
 			font-family: "Font Awesome 5 Free";
 			font-weight: 900;
-			font-size: 16px;
+			font-size: 13px;
 			display: inline-block;
-			padding-right: 10px;
-			padding-left: 10px;
+			padding-right: 5px;
+			padding-left: 0;
+			-webkit-font-smoothing: antialiased;
 		}
 	}
 
@@ -222,20 +248,24 @@
 		content: "\f00a";
 	}
 
+	button.fc-listWeek-button:before {
+		content: "\f00b";
+	}
+
 	button.fc-button.fc-button-primary {
 		box-shadow: none;
 		height: auto;
 		width: auto;
 		float: none;
-		font-size: 15px;
+		font-size: 13px;
 		font-weight: 400;
 		color: #5e5e5e;
-		border-radius: 5px;
+		border-radius: 3px;
 		text-transform: capitalize;
 		background: #f7f7fb;
 		text-shadow: none;
-		line-height: 1.5em;
-		padding: 8px 10px;
+		line-height: 19px;
+		padding: 8px 12px;
 		border: none;
 
 		&.fc-state-active, &:hover, &:visited, &:focus {
@@ -256,7 +286,7 @@
 th.fc-widget-header > span {
 	padding: 14px;
 	display: block;
-	font-size: 20px;
+	font-size: 16px;
 	color: #424344;
 }
 
@@ -312,6 +342,11 @@ span.fc-day-number {
 				padding-left: 3px;
 			}
 		}
+		.fc-bg {
+			table tbody tr > td {
+				padding-left: 1px;
+			}
+		}
 
 		.fc-time-grid .fc-event .fc-content {
 			justify-content: end;
@@ -321,6 +356,22 @@ span.fc-day-number {
 	.fc-timeGridWeek-view {
 		.fc-time-grid .fc-event .fc-content {
 			display: inherit;
+		}
+	}
+	.fc-listWeek-view {
+		.fc-list-table {
+			tr.fc-list-item {
+				cursor: pointer;
+			}
+			tr td {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+		}
+	}
+	.fc-dayGridMonth-view {
+		.fc-day-grid-event .fc-time {
+			font-weight: 400;
 		}
 	}
 
@@ -421,7 +472,6 @@ span.fc-day-number {
 				h2 {
 					font-size: 22px;
 				}
-
 			}
 		}
 
@@ -434,6 +484,8 @@ span.fc-day-number {
 				}
 			}
 		}
+
+
 
 		.fc-timeGridWeek-view {
 			a .fc-content {
@@ -484,6 +536,9 @@ span.fc-day-number {
 				}
 			}
 		}
+	}
+	.fc-center {
+		text-align: center;
 	}
 
 	.fc-toolbar.fc-header-toolbar {
