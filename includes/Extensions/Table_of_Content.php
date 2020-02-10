@@ -497,7 +497,7 @@
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'eael_ext_table_of_content_list_typography',
-                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li:before',
+                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active:before',
                     'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 ]
             );
