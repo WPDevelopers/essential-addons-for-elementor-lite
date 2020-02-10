@@ -707,39 +707,6 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'days_view_settings',
-            [
-                'label' => __('List View', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'days_row_odd_color',
-            [
-                'label' => __('Odd row Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#CFCFDA',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'days_row_even_color',
-            [
-                'label' => __('Even row Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:hover td' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
 
         /**
@@ -924,6 +891,45 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
                 'selectors' => [
                     '{{WRAPPER}} .fc-unthemed td.fc-today' => 'background: {{VALUE}} !important',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+
+        /**
+         * Tab: Style => Panel: List
+         * -----------------------------------------------
+         */
+        $this->start_controls_section(
+            'calendar_list_view',
+            [
+                'label' => __('List view', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'days_row_odd_color',
+            [
+                'label' => __('Odd row Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#f1edf8',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'days_row_even_color',
+            [
+                'label' => __('Even row Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:hover td' => 'background-color: {{VALUE}};',
                 ],
             ]
         );

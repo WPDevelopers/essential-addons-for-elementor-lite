@@ -17,7 +17,7 @@ var EventCalendar = function($scope, $) {
 		eventTimeFormat: {
 			hour: '2-digit',
 			minute: '2-digit',
-			meridiem: true
+			meridiem: 'short'
 		},
 		nextDayThreshold: "00:00:00",
 		header: {
