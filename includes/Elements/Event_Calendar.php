@@ -742,6 +742,44 @@ class Event_Calendar extends Widget_Base
 
         $this->end_controls_section();
 
+        /**
+         * Tab: Style => Panel: Time
+         * -----------------------------------------------
+         */
+        $this->start_controls_section(
+            'calendar_week_time',
+            [
+                'label' => __('Time', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'time_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr>td span, {{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr>td span ,{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-slats table tbody tr>td span ,{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-slats table tbody tr>td span',
+            ]
+        );
+
+        $this->add_control(
+            'time_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr>td span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr>td span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-slats table tbody tr>td span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-slats table tbody tr>td span' => 'color: {{VALUE}};',
+
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         $this->start_controls_section(
             'date_styles',
             [
