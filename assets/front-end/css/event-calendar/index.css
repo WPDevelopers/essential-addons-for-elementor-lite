@@ -279,8 +279,8 @@ span.fc-day-number {
   cursor: pointer;
 }
 .fc-unthemed .fc-listWeek-view .fc-list-table tr td {
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 .fc-unthemed .fc-dayGridMonth-view .fc-day-grid-event .fc-time {
   font-weight: 400;
