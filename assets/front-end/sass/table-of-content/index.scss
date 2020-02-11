@@ -83,7 +83,10 @@ html {
             margin-top: 0;
             padding-left: 0;
             > li {
-                padding: 8px 0;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                padding-right: 0;
+                padding-left: 0;
                 border-top: .5px dashed #c6c4cf;
                 list-style-position: inside !important;
                 color: #c6c4cf;
@@ -109,7 +112,11 @@ html {
                     margin: 0;
                     padding: 0;
                     li{
-                        margin: 5px 0;
+                        margin-bottom: 5px;
+                        margin-top: 5px;
+                        margin-left: 0;
+                        margin-right: 0;
+                        font-size: 80%;
                     }
                 }
                 &:first-child{
@@ -125,7 +132,10 @@ html {
             li {
                 font-size: 16px;
                 list-style: none;
-                margin: 0 20px 0 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                margin-bottom: 0;
+                margin-top: 0;
                 &.active{
                     color: #ff7d50;
                     sapn > a {

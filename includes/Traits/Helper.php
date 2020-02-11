@@ -1992,6 +1992,18 @@ trait Helper
             {
                 top:{$eael_toc['eael_ext_toc_sticky_offset']['size']}px;
             }
+            
+            #eael-toc.eael-toc-global ul.eael-toc-list > li
+            {
+                padding-top:{$eael_toc['eael_ext_toc_top_level_space']['size']}px;
+                padding-bottom:{$eael_toc['eael_ext_toc_top_level_space']['size']}px;
+            }
+            
+            #eael-toc.eael-toc-global ul.eael-toc-list>li ul li
+            {
+                padding-top:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
+                padding-bottom:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
+            }
         ";
         if($toc_list_separator_style!='none'){
             $toc_global_css .= "
