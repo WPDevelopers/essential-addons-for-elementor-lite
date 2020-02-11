@@ -125,6 +125,8 @@ var EventCalendar = function($scope, $) {
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
 				if(event.extendedProps.description.length<1){
 					$(".eaelec-modal-body").css("height", "auto");
+				}else {
+					$(".eaelec-modal-body").css("height", "300px");
 				}
 
 				$(".eaelec-modal-footer a").attr("href", event.url);
