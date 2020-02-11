@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Content_Ticker
 {
-    public static function __render_template($args, $settings)
+    public static function render_template_($args, $settings)
     {
         $html = '';
         $query = new \WP_Query($args);
