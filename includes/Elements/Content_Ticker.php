@@ -766,7 +766,7 @@ class Content_Ticker extends Widget_Base
                 <div ' . $this->get_render_attribute_string('content-ticker') . '>
                     <div class="swiper-wrapper">';
                         if ('dynamic' === $settings['eael_ticker_type']) {
-                            echo self::__render_template($args, null);
+                            echo self::render_template_($args, null);
                         }
 
                         do_action('render_content_ticker_custom_content', $settings);
