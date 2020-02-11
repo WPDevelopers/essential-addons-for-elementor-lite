@@ -174,7 +174,7 @@ html {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
   content: " ";
   margin-top: 7px;
 }
