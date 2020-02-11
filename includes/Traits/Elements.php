@@ -144,7 +144,6 @@ trait Elements
         $page_settings_manager  = Settings_Manager::get_settings_managers('page');
         $page_settings_model    = $page_settings_manager->get_model(get_the_ID());
         $global_settings        = get_option('eael_global_settings');
-
         if(!$this->eael_toc_page_scope( $page_settings_model,$global_settings )){
             return '';
         }

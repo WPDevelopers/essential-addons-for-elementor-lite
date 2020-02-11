@@ -8,6 +8,7 @@
     use \Elementor\Controls_Manager;
     use \Elementor\Group_Control_Typography;
     use \Elementor\Group_Control_Border;
+    use \Elementor\Group_Control_Box_Shadow;
     use \Elementor\Scheme_Typography as Scheme_Typography;
 
     class Table_of_Content
@@ -221,17 +222,24 @@
                 ]
             );
 
-            $element->add_control(
-                'eael_ext_toc_box_shadow',
+
+            $element->add_group_control(
+                Group_Control_Box_Shadow::get_type(),
                 [
+                    'name' => 'eael_ext_toc_table_box_shadow',
                     'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'default' => 'no',
-                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
+                    'selector' => '{{WRAPPER}} .eael-toc:not(.expanded)',
+                ]
+            );
+
+            $element->add_responsive_control(
+                'eael_ext_toc_box_border_radius',
+                [
+                    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-grid-event' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -270,6 +278,32 @@
                     ],
                     'selectors' => [
                         '{{WRAPPER}} #eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_sticky_offset',
+                [
+                    'label' => __( 'Sticky Offset', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px' ],
+                    'range' => [
+                        'px' => [
+                            'min' => 50,
+                            'max' => 1000,
+                            'step' => 10,
+                        ]
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 50,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}} !important;',
                     ],
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -453,6 +487,44 @@
                         '{{WRAPPER}} .eael-toc .eael-toc-body' => 'background-color: {{VALUE}}',
                     ],
 
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_list_hover_color',
+                [
+                    'label' => __('Hover Color', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#ff7d50',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li > a:hover ' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover:before' => 'color: {{VALUE}}',
+                    ],
+
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_list_padding',
+                [
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px' . 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-grid-event' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_list_margin',
+                [
+                    'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px' . 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .fc-day-grid-event' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
                 ]
             );
 

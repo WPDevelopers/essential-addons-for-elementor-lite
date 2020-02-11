@@ -1927,11 +1927,13 @@ trait Helper
     public function eael_toc_global_css( $page_settings_model ,$global_settings ){
 
         $eael_toc = $global_settings['table_of_content'];
+
         $toc_list_color_active      = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_style'];
 
         $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography',$eael_toc);
         $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography',$eael_toc);
+        $box_shadow   = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
 
 
         $toc_global_css = "
@@ -1945,11 +1947,16 @@ trait Helper
                 color:{$eael_toc['eael_ext_table_of_content_header_text_color']};
                 $header_typography
             }
-
-            .eael-toc-global .eael-toc-close
+            
+            .eael-toc-global.eael-toc-close
             {
                 color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']};
                 background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
+            }
+
+            .eael-toc-global.eael-toc:not(.expanded)
+            {
+                box-shadow:{$box_shadow['horizontal']}px {$box_shadow['vertical']}px {$box_shadow['blur']}px {$box_shadow['spread']}px {$box_shadow['color']};
             }
             
             .eael-toc-global .eael-toc-body

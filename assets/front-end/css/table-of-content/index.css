@@ -2,10 +2,6 @@ html {
   scroll-behavior: smooth;
 }
 
-#eael-toc.eael-box-shadow {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 .eael-toc {
   position: fixed;
   z-index: 9999;
@@ -34,9 +30,6 @@ html {
 }
 .eael-toc.expanded.eael-bottom-to-top .eael-toc-button {
   transform: translate(21px, 178px) rotate(-90deg);
-}
-.eael-toc.expanded.eael-box-shadow .eael-toc-button {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .eael-toc.expanded .eael-toc-button {
   display: inline-block;
@@ -102,7 +95,7 @@ html {
   margin-left: -5px;
   bottom: 0;
   position: relative;
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Free" !important;
   font-weight: 900;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list > li > ul {
@@ -222,18 +215,23 @@ html {
 }
 .eael-toc .eael-toc-close {
   position: absolute;
-  width: 29px;
-  height: 29px;
+  width: 28px;
+  height: 28px;
   background: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   right: -9px;
   top: -11px;
-  line-height: 26px;
+  line-height: 28px;
   text-align: center;
   border-radius: 20px;
   color: #ff7d50;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 22px;
+  font-family: serif;
 }
 .eael-toc.eael-toc-right {
   right: 0;
