@@ -22,8 +22,15 @@
 		border-left-width: 5px;
 	}
 	.fc-day.fc-today {
+
 		background: transparent;
 	}
+	.fc-day-top.fc-today {
+		.fc-day-number {
+			font-weight: bold;
+		}
+	}
+
 
 	.fc-row table thead:first-child tr:first-child th {
 		font-size: 14px;
@@ -79,6 +86,7 @@
 		color: white;
 		border-color: #009900;
 		overflow: auto;
+		margin-top: 8px;
 	}
 
 	.eaelec-modal-header h2 {
@@ -334,6 +342,11 @@ span.fc-day-number {
 				padding-left: 3px;
 			}
 		}
+		.fc-bg {
+			table tbody tr > td {
+				padding-left: 1px;
+			}
+		}
 
 		.fc-time-grid .fc-event .fc-content {
 			justify-content: end;
@@ -343,6 +356,22 @@ span.fc-day-number {
 	.fc-timeGridWeek-view {
 		.fc-time-grid .fc-event .fc-content {
 			display: inherit;
+		}
+	}
+	.fc-listWeek-view {
+		.fc-list-table {
+			tr.fc-list-item {
+				cursor: pointer;
+			}
+			tr td {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+		}
+	}
+	.fc-dayGridMonth-view {
+		.fc-day-grid-event .fc-time {
+			font-weight: 400;
 		}
 	}
 
