@@ -1909,13 +1909,13 @@ trait Helper
      */
     public function eael_toc_global_css( $page_settings_model ,$global_settings ){
 
-        $eael_toc = $global_settings['table_of_content'];
+        $eael_toc = $global_settings['eael_ext_table_of_content'];
 
         $toc_list_color_active      = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
-        $toc_list_separator_style   = $global_settings['table_of_content']['eael_ext_table_of_content_list_separator_style'];
+        $toc_list_separator_style   = $eael_toc['eael_ext_table_of_content_list_separator_style'];
 
         $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography',$eael_toc);
-        $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography',$eael_toc);
+        $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal',$eael_toc);
         $box_shadow   = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
         $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
         $body_padding = $eael_toc['eael_ext_toc_body_padding'];
@@ -1969,6 +1969,10 @@ trait Helper
                 color:{$eael_toc['eael_ext_table_of_content_list_separator_color']} !important;
                 $list_typography
             }
+            .eael-toc.eael-toc-global .eael-toc-body ul.eael-toc-list li:before {
+                $list_typography
+            }
+            
             
             .eael-toc.eael-toc-global
             {
@@ -1987,10 +1991,6 @@ trait Helper
                 border-bottom-left-radius:{$border_radius}px;
                 border-bottom-right-radius:{$border_radius}px;
                 padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
-            }
-            #eael-toc.eael-toc-global.eael-sticky
-            {
-                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']}px;
             }
             
             #eael-toc.eael-toc-global ul.eael-toc-list > li
@@ -2051,7 +2051,7 @@ trait Helper
             $attr = str_replace('_','-',$field);
             if(in_array($field,['font_size','letter_spacing','line_height'])){
                 if(!empty($typo_attr['size'])){
-                    $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']};";
+                    $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']} !important;";
                 }
             }elseif(!empty($typo_attr)){
                 $typo_data .= "{$attr}:{$typo_attr};";

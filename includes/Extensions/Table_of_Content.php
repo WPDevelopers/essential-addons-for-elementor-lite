@@ -48,16 +48,16 @@
                 [
                     'label' => __('Enabled Globally?', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::HIDDEN,
-                    'default' => isset($global_settings['table_of_content']['enabled']) ? true : false,
+                    'default' => isset($global_settings['eael_ext_table_of_content']['enabled']) ? true : false,
                 ]
             );
 
-            if (isset($global_settings['table_of_content']['enabled']) && ($global_settings['table_of_content']['enabled'] == true) && get_the_ID() != $global_settings['table_of_content']['post_id'] && get_post_status($global_settings['table_of_content']['post_id']) == 'publish') {
+            if (isset($global_settings['eael_ext_table_of_content']['enabled']) && ($global_settings['eael_ext_table_of_content']['enabled'] == true) && get_the_ID() != $global_settings['eael_ext_table_of_content']['post_id'] && get_post_status($global_settings['eael_ext_table_of_content']['post_id']) == 'publish') {
                 $element->add_control(
                     'eael_ext_toc_global_warning_text',
                     [
                         'type' => Controls_Manager::RAW_HTML,
-                        'raw' => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                        'raw' => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
                         'content_classes' => 'eael-warning',
                         'separator' => 'before',
                         'condition' => [
@@ -203,16 +203,13 @@
                     'range' => [
                         'px' => [
                             'min' => 50,
-                            'max' => 1000,
+                            'max' => 2000,
                             'step' => 10,
                         ]
                     ],
                     'default' => [
                         'unit' => 'px',
-                        'size' => 50,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} #eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}} !important;',
+                        'size' => 200,
                     ],
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',

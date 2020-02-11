@@ -132,7 +132,7 @@ trait Elements
 
             // Table of Content
             if ($this->get_settings('eael-table-of-content') == true) {
-                if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['table_of_content']['enabled'])) {
+                if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                     add_filter('eael/section/after_render', function ($extensions) {
                         $extensions[] = 'eael-table-of-content';
                         return $extensions;
@@ -140,27 +140,27 @@ trait Elements
 
                     $el_class = 'eael-toc eael-toc-disable';
 
-                    if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['enabled'])) {
+                    if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                         $toc_settings = $page_settings_model;
                         $el_class .= ' eael-toc-global';
                         $this->eael_toc_global_css($page_settings_model, $global_settings);
                     }
-
                     $icon = 'fas fa-list';
-                    $support_tag = (array) $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_supported_heading_tag' );
-
+                    $support_tag = (array) $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_supported_heading_tag' );
+                    $sticky_offset_ar = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_sticky_offset' );
                     $support_tag = implode(',', array_filter($support_tag));
-                    $position = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_position' );
-                    $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_close_button_text_style' );
-                    $box_shadow = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_box_shadow' );
-                    $auto_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_auto_collapse' );
-                    $toc_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_table_of_content_list_style' );
-                    $toc_word_wrap = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_word_wrap' );
-                    $toc_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_collapse_sub_heading' );
-                    $list_icon = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_list_icon' );
-                    $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_toc_title' );
-                    $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'table_of_content','eael_ext_table_of_content_header_icon' );
+                    $position = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_position' );
+                    $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_close_button_text_style' );
+                    $box_shadow = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_box_shadow' );
+                    $auto_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_auto_collapse' );
+                    $toc_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_table_of_content_list_style' );
+                    $toc_word_wrap = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_word_wrap' );
+                    $toc_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_collapse_sub_heading' );
+                    $list_icon = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_list_icon' );
+                    $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_title' );
+                    $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_table_of_content_header_icon' );
 
+                    $sticky_offset = !empty($sticky_offset_ar['size'])?$sticky_offset_ar['size']:200;
                     $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                     $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
                     $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
@@ -174,7 +174,7 @@ trait Elements
                         $icon = $icon_check['value'];
                     }
 
-                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} '>
+                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-eael-sticky-offset='{$sticky_offset}' id='eael-toc' class='{$el_class} '>
                         <div class='eael-toc-header'>
                                 <span class='eael-toc-close'>×</span>
                                 <h2 class='eael-toc-title'>{$toc_title}</h2>
@@ -188,14 +188,14 @@ trait Elements
 
 
 
-                if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['post_id'])) {
-                    if (get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
+                if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['post_id'])) {
+                    if (get_post_status($global_settings['eael_ext_table_of_content']['post_id']) != 'publish') {
                         $table_of_content_html = '';
-                    } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
+                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'pages' && !is_page()) {
                         $table_of_content_html = '';
-                    } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
+                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'posts' && !is_single()) {
                         $table_of_content_html = '';
-                    } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
+                    } else if ($global_settings['eael_ext_table_of_content']['display_condition'] == 'all' && !is_singular()) {
                         $table_of_content_html = '';
                     }
                 }
