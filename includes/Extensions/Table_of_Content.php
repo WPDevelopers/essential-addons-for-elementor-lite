@@ -215,6 +215,9 @@
                     'name' => 'eael_ext_toc_border',
                     'label' => __( 'Border', 'plugin-domain' ),
                     'selector' => '{{WRAPPER}} .eael-toc,{{WRAPPER}} button.eael-toc-button',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
                 ]
             );
 
@@ -474,6 +477,15 @@
                 ]
             );
 
+            $element->add_group_control(
+                Group_Control_Typography::get_type(),
+                [
+                    'name' => 'eael_ext_table_of_content_list_typography_normal',
+                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li:before',
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                ]
+            );
+
             $element->end_controls_tab();
 
             $element->start_controls_tab('active',
@@ -499,18 +511,18 @@
                 ]
             );
 
-            $element->end_controls_tab(); // active
-
-            $element->end_controls_tabs();
-
             $element->add_group_control(
                 Group_Control_Typography::get_type(),
                 [
-                    'name' => 'eael_ext_table_of_content_list_typography',
+                    'name' => 'eael_ext_table_of_content_list_typography_active',
                     'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active:before',
                     'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 ]
             );
+
+            $element->end_controls_tab(); // active
+
+            $element->end_controls_tabs();
 
             $element->add_control(
                 'eael_ext_table_of_content_list_separator',
