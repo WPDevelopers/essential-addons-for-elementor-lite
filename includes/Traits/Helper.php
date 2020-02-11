@@ -1891,32 +1891,15 @@ trait Helper
      * @param $key
      * @return string
      */
-    public function eael_get_toc_setting_value( $page_obj, $key, $global_settings ){
-
-        if( $page_obj->get_settings('eael_ext_table_of_content') == 'yes' ){
-            return $page_obj->get_settings( $key );
-        }
-
-        if ( isset( $global_settings['table_of_content']['enabled'] ) ){
-            return $global_settings['table_of_content'][$key];
+    public function eael_get_extension_settings($page_settings_model = [], $global_settings = [], $extension, $key)
+    {
+        if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
+            return $page_settings_model->get_settings($key);
+        } else if (isset($global_settings[$extension]['enabled'])) {
+            return $global_settings[$extension][$key];
         }
 
         return '';
-    }
-
-    public function eael_toc_page_scope( $page_settings_model, $global_settings){
-        if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['table_of_content']['post_id'])) {
-            if(get_post_status($global_settings['table_of_content']['post_id']) != 'publish') {
-                return false;
-            } else if ($global_settings['table_of_content']['display_condition'] == 'pages' && !is_page()) {
-                return false;
-            } else if ($global_settings['table_of_content']['display_condition'] == 'posts' && !is_single()) {
-                return false;
-            } else if ($global_settings['table_of_content']['display_condition'] == 'all' && !is_singular()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -1993,7 +1976,7 @@ trait Helper
             {border: none !important;}";
         }
 
-        wp_register_style( 'eael-toc-global', false );
+        // wp_register_style( 'eael-toc-global', false );
         wp_enqueue_style( 'eael-toc-global' );
         wp_add_inline_style( 'eael-toc-global', $toc_global_css );
     }
