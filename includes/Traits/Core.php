@@ -183,11 +183,17 @@ trait Core
                 'eael_ext_toc_box_shadow'                           => $page_settings_model->get_settings( 'eael_ext_toc_box_shadow'),
                 'eael_ext_toc_table_box_shadow_box_shadow'          => $page_settings_model->get_settings( 'eael_ext_toc_table_box_shadow_box_shadow'),
                 'eael_ext_toc_auto_collapse'                        => $page_settings_model->get_settings( 'eael_ext_toc_auto_collapse'),
+                'eael_ext_toc_border_border'                        => $page_settings_model->get_settings( 'eael_ext_toc_border_border'),
+                'eael_ext_toc_border_width'                         => $page_settings_model->get_settings( 'eael_ext_toc_border_width'),
+                'eael_ext_toc_border_color'                         => $page_settings_model->get_settings( 'eael_ext_toc_border_color'),
+                'eael_ext_toc_box_border_radius'                    => $page_settings_model->get_settings( 'eael_ext_toc_box_border_radius'),
+                'eael_ext_toc_sticky_offset'                        => $page_settings_model->get_settings( 'eael_ext_toc_sticky_offset'),
 
                 //toc header setting
                 'eael_ext_table_of_content_header_bg'                   => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
                 'eael_ext_table_of_content_header_text_color'           => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
                 'eael_ext_table_of_content_header_icon'                 => $page_settings_model->get_settings('eael_ext_table_of_content_header_icon'),
+                'eael_ext_toc_header_padding'                           => $page_settings_model->get_settings('eael_ext_toc_header_padding'),
 
                 //close button setting
                 'eael_ext_table_of_content_close_button_bg'         => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
@@ -196,6 +202,7 @@ trait Core
 
                 //toc body setting
                 'eael_ext_table_of_content_body_bg'                 => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
+                'eael_ext_toc_body_padding'                         => $page_settings_model->get_settings('eael_ext_toc_body_padding'),
 
                 //list style setting
                 'eael_ext_table_of_content_list_style'              => $page_settings_model->get_settings('eael_ext_table_of_content_list_style'),
