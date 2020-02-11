@@ -56,7 +56,13 @@ var EventCalendar = function($scope, $) {
 				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
 
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-					startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
+					var allDayTime = moment(startDate).format("MMM Do");
+					if (moment(startDate).isSame(Date.now(), "day") === true) {
+						allDayTime = 'Today';
+					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
+						allDayTime = 'Tomorrow';
+					}
+					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
 						startSelector.html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
