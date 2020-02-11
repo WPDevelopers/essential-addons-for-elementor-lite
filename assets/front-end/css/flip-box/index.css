@@ -9,6 +9,7 @@
 
 .eael-elements-flip-box-container .flipbox-button {
   display: inline-block;
+  -webkit-transition: all 400ms;
   transition: all 400ms;
 }
 
@@ -67,8 +68,10 @@
   color: #ffffff;
   border-color: #000000;
   -webkit-display: flex;
+  display: -webkit-box;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+          align-items: center;
 }
 
 .eael-elements-flip-box-content,
@@ -91,8 +94,10 @@
   height: 100%;
   background: #444444;
   color: #ffffff;
+  display: -webkit-box;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+          align-items: center;
   border-color: #000000;
 }
 
@@ -126,20 +131,26 @@
 
 /*--- CSS3 Transitions ---*/
 .eael-elements-flip-box-container {
-  perspective: 1000px;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
 }
 
 .eael-elements-flip-box-front-container,
 .eael-elements-flip-box-rear-container {
-  transition-duration: 500ms;
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-property: all;
   transition-property: all;
-  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
 }
 
 .eael-elements-flip-box-flip-card {
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
 
@@ -147,29 +158,35 @@
 .eael-elements-flip-box-front-container {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transform: rotateX(0deg);
-  transform: rotateY(0deg);
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
 }
 
 /*--- Flip ---*/
 .eael-animate-flip.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-up .eael-elements-flip-box-rear-container {
-  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
 }
 
 .eael-animate-flip.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-down .eael-elements-flip-box-rear-container {
-  transform: rotateX(-180deg);
+  -webkit-transform: rotateX(-180deg);
+          transform: rotateX(-180deg);
 }
 
 .eael-animate-flip.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-left .eael-elements-flip-box-rear-container {
-  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
 }
 
 .eael-animate-flip.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-right .eael-elements-flip-box-rear-container {
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 /*--- Slide ---*/
@@ -247,19 +264,22 @@
 /*--- Zoom In ---*/
 .eael-animate-zoom-in .eael-elements-flip-box-rear-container {
   opacity: 0;
-  transform: scale(0.75);
+  -webkit-transform: scale(0.75);
+          transform: scale(0.75);
   z-index: 3;
 }
 
 .eael-animate-zoom-in.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
   opacity: 1;
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /*--- Zoom Out ---*/
 .eael-animate-zoom-out.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
   opacity: 0;
-  transform: scale(0.75);
+  -webkit-transform: scale(0.75);
+          transform: scale(0.75);
 }
 
 .eael-animate-fade.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
