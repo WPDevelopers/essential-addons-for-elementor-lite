@@ -171,7 +171,7 @@ trait Core
                 'letter_spacing',
                 'line_height'
             ];
-            $global_settings['table_of_content'] = [
+            $global_settings['eael_ext_table_of_content'] = [
                 'post_id'                                           => $post_id,
                 'enabled'                                           => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
                 'display_condition'                                 => $page_settings_model->get_settings('eael_ext_toc_global_display_condition'),
@@ -216,13 +216,13 @@ trait Core
             ];
             foreach ($typography_fields as $typography_field){
                 $header_fields_attr = 'eael_ext_table_of_content_header_typography_'.$typography_field;
-                $list_fields_attr   = 'eael_ext_table_of_content_list_typography_'.$typography_field;
-                $global_settings['table_of_content'][$header_fields_attr]   = $page_settings_model->get_settings($header_fields_attr);
-                $global_settings['table_of_content'][$list_fields_attr]     = $page_settings_model->get_settings($list_fields_attr);
+                $list_fields_attr   = 'eael_ext_table_of_content_list_typography_normal_'.$typography_field;
+                $global_settings['eael_ext_table_of_content'][$header_fields_attr]   = $page_settings_model->get_settings($header_fields_attr);
+                $global_settings['eael_ext_table_of_content'][$list_fields_attr]     = $page_settings_model->get_settings($list_fields_attr);
             }
         } else {
-            if(isset($global_settings['table_of_content']['post_id']) && $global_settings['table_of_content']['post_id'] == $post_id) {
-                $global_settings['table_of_content'] = [];
+            if(isset($global_settings['eael_ext_table_of_content']['post_id']) && $global_settings['eael_ext_table_of_content']['post_id'] == $post_id) {
+                $global_settings['eael_ext_table_of_content'] = [];
             }
         }
 
