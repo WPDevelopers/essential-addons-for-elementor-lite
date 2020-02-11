@@ -175,6 +175,77 @@
                 ]
             );
 
+
+
+            $element->add_control(
+                'eael_ext_toc_auto_collapse',
+                [
+                    'label' => __('TOC Auto Collapse', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'default' => 'yes',
+                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+
+
+            $element->add_control(
+                'eael_ext_toc_sticky_offset',
+                [
+                    'label' => __( 'Sticky Offset', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px' ],
+                    'range' => [
+                        'px' => [
+                            'min' => 50,
+                            'max' => 1000,
+                            'step' => 10,
+                        ]
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 50,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}} !important;',
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_ad_warning_text',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __('Need more information about TOC <strong><a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'content_classes' => 'eael-warning',
+                    'separator' => 'before',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
+            $element->end_controls_section();
+
+            $element->start_controls_section(
+                'eael_ext_toc_main',
+                [
+                    'label' => esc_html__('EA TOC', 'essential-addons-for-elementor-lite'),
+                    'tab' => Controls_Manager::TAB_STYLE,
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
+
             $element->add_control(
                 'eael_ext_toc_position',
                 [
@@ -266,21 +337,6 @@
             );
 
             $element->add_control(
-                'eael_ext_toc_auto_collapse',
-                [
-                    'label' => __('TOC Auto Collapse', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'default' => 'yes',
-                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
-
-            $element->add_control(
                 'eael_ext_toc_transition_speed',
                 [
                     'label' => __( 'Transition Speed', 'essential-addons-for-elementor-lite' ),
@@ -306,45 +362,6 @@
                 ]
             );
 
-            $element->add_control(
-                'eael_ext_toc_sticky_offset',
-                [
-                    'label' => __( 'Sticky Offset', 'essential-addons-for-elementor-lite' ),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => [ 'px' ],
-                    'range' => [
-                        'px' => [
-                            'min' => 50,
-                            'max' => 1000,
-                            'step' => 10,
-                        ]
-                    ],
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => 50,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} #eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}} !important;',
-                    ],
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
-
-            $element->add_control(
-                'eael_ext_toc_ad_warning_text',
-                [
-                    'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('Need more information about TOC <strong><a href="https://essential-addons.com/elementor/docs/table-of-content/" class="eael-btn" target="_blank">Visit documentation</a></strong>', 'essential-addons-for-elementor-lite'),
-                    'content_classes' => 'eael-warning',
-                    'separator' => 'before',
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
-
             $element->end_controls_section();
 
             $element->start_controls_section(
@@ -359,15 +376,6 @@
             );
 
             $element->add_control(
-                'eael_ext_table_of_content_heading_separator',
-                [
-                    'label' => __('Heading', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::HEADING,
-                    'separator' => 'before',
-                ]
-            );
-
-            $element->add_control(
                 'eael_ext_table_of_content_header_bg',
                 [
                     'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
@@ -376,18 +384,6 @@
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc.expanded .eael-toc-button' => 'background-color: {{VALUE}}',
-                    ],
-                ]
-            );
-
-            $element->add_control(
-                'eael_ext_toc_header_padding',
-                [
-                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px'],
-                    'selectors' => [
-                        '{{WRAPPER}} #eael-toc .eael-toc-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -415,15 +411,23 @@
             );
 
             $element->add_control(
-                'eael_ext_toc_close_button_text_style',
+                'eael_ext_toc_header_padding',
                 [
-                    'label' => __('Text Orientation', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'default' => 'top_to_bottom',
-                    'options' => [
-                        'top_to_bottom' => __('Top to Bottom', 'essential-addons-for-elementor-lite'),
-                        'bottom_to_top' => __('Bottom to Top', 'essential-addons-for-elementor-lite')
-                    ]
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px'],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc .eael-toc-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_header_collapse_close_button',
+                [
+                    'label' => __('Collapse', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
                 ]
             );
 
@@ -440,6 +444,21 @@
                     'fa4compatibility' => 'icon',
                 ]
             );
+
+            $element->add_control(
+                'eael_ext_toc_close_button_text_style',
+                [
+                    'label' => __('Text Orientation', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'top_to_bottom',
+                    'options' => [
+                        'top_to_bottom' => __('Top to Bottom', 'essential-addons-for-elementor-lite'),
+                        'bottom_to_top' => __('Bottom to Top', 'essential-addons-for-elementor-lite')
+                    ]
+                ]
+            );
+
+
 
             $element->add_control(
                 'eael_ext_table_of_content_close_button',
@@ -479,7 +498,7 @@
             $element->start_controls_section(
                 'eael_ext_table_of_content_list_style_section',
                 [
-                    'label' => esc_html__('EA TOC List', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('EA TOC Body', 'essential-addons-for-elementor-lite'),
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -488,32 +507,9 @@
             );
 
             $element->add_control(
-                'eael_ext_table_of_content_list_style_separator',
-                [
-                    'label' => __('List Style', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::HEADING,
-                    'separator' => 'before',
-                ]
-            );
-
-            $element->add_control(
-                'eael_ext_table_of_content_list_style',
-                [
-                    'label' => __('List Style', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'default' => 'style_1',
-                    'options' => [
-                        'style_1' => __('Style 1', 'essential-addons-for-elementor-lite'),
-                        'style_2' => __('Style 2', 'essential-addons-for-elementor-lite'),
-                        'style_3' => __('Style 3', 'essential-addons-for-elementor-lite'),
-                    ],
-                ]
-            );
-
-            $element->add_control(
                 'eael_ext_table_of_content_body_bg',
                 [
-                    'label' => __('Body Background Color', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#fff6f3',
                     'selectors' => [
@@ -526,7 +522,7 @@
             $element->add_control(
                 'eael_ext_toc_body_padding',
                 [
-                    'label' => esc_html__('Body Padding', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px'],
                     'selectors' => [
@@ -536,49 +532,29 @@
             );
 
             $element->add_control(
-                'eael_ext_table_of_list_hover_color',
+                'eael_ext_table_of_content_list_style_separator',
                 [
-                    'label' => __('Hover Color', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::COLOR,
-                    'default' => '#ff7d50',
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li > a:hover ' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover:before' => 'color: {{VALUE}}',
-                    ],
-
+                    'label' => __('List', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::HEADING,
+                    'separator' => 'before',
                 ]
             );
 
-            $element->add_control(
-                'eael_ext_toc_list_padding',
+            $element->add_group_control(
+                Group_Control_Typography::get_type(),
                 [
-                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px'],
-                    'selectors' => [
-                        '{{WRAPPER}} .fc-day-grid-event' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            $element->add_control(
-                'eael_ext_toc_list_margin',
-                [
-                    'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px'],
-                    'selectors' => [
-                        '{{WRAPPER}} .fc-day-grid-event' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
+                    'name' => 'eael_ext_table_of_content_list_typography_normal',
+                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li:before',
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
                 ]
             );
 
             $element->start_controls_tabs('ea_toc_list_style');
 
             $element->start_controls_tab('normal',
-                 [
-                     'label' => __('Normal', 'essential-addons-for-elementor-lite'),
-                 ]
+                [
+                    'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+                ]
             );
 
             $element->add_control(
@@ -594,21 +570,35 @@
                 ]
             );
 
-            $element->add_group_control(
-                Group_Control_Typography::get_type(),
-                [
-                    'name' => 'eael_ext_table_of_content_list_typography_normal',
-                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li:before',
-                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
-                ]
-            );
 
             $element->end_controls_tab();
 
+            $element->start_controls_tab('hover',
+                [
+                    'label' => __('Hover', 'essential-addons-for-elementor-lite'),
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_table_of_list_hover_color',
+                [
+                    'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::COLOR,
+                    'default' => '#ff7d50',
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li > a:hover ' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover:before' => 'color: {{VALUE}}',
+                    ],
+
+                ]
+            );
+
+            $element->end_controls_tab(); // hover
+
             $element->start_controls_tab('active',
-                 [
-                     'label' => __('Active', 'essential-addons-for-elementor-lite'),
-                 ]
+                [
+                    'label' => __('Active', 'essential-addons-for-elementor-lite'),
+                ]
             );
 
             $element->add_control(
@@ -628,18 +618,78 @@
                 ]
             );
 
-            $element->add_group_control(
-                Group_Control_Typography::get_type(),
+            $element->end_controls_tab(); // active
+            $element->end_controls_tabs();
+
+            $element->add_control(
+                'eael_ext_toc_top_level_space',
                 [
-                    'name' => 'eael_ext_table_of_content_list_typography_active',
-                    'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li.active:before',
-                    'scheme' => Scheme_Typography::TYPOGRAPHY_2,
+                    'label' => __( 'Top Level Space', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px' ],
+                    'separator' => 'before',
+                    'range' => [
+                        's' => [
+                            'min' => 8,
+                            'max' => 50,
+                            'step' => 1,
+                        ]
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 8,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc ul.eael-toc-list > li' => 'padding-top: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc .eael-toc-body ul.eael-toc-list > li' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
                 ]
             );
 
-            $element->end_controls_tab(); // active
+            $element->add_control(
+                'eael_ext_toc_subitem_level_space',
+                [
+                    'label' => __( 'Sub Item Space', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px' ],
+                    'separator' => 'before',
+                    'range' => [
+                        's' => [
+                            'min' => 1,
+                            'max' => 20,
+                            'step' => 1,
+                        ]
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 1,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc ul.eael-toc-list>li ul li' => 'padding-top: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc .eael-toc-body ul.eael-toc-list>li ul li' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
+                ]
+            );
 
-            $element->end_controls_tabs();
+            $element->add_control(
+                'eael_ext_table_of_content_list_style',
+                [
+                    'label' => __('Indicator Style', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'style_1',
+                    'options' => [
+                        'style_1' => __('Style 1', 'essential-addons-for-elementor-lite'),
+                        'style_2' => __('Style 2', 'essential-addons-for-elementor-lite'),
+                        'style_3' => __('Style 3', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
 
             $element->add_control(
                 'eael_ext_table_of_content_list_separator',
