@@ -1917,7 +1917,9 @@ trait Helper
         $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography',$eael_toc);
         $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography',$eael_toc);
         $box_shadow   = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
-
+        $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
+        $body_padding = $eael_toc['eael_ext_toc_body_padding'];
+        $header_padding = $eael_toc['eael_ext_toc_header_padding'];
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
@@ -1967,6 +1969,29 @@ trait Helper
                 color:{$eael_toc['eael_ext_table_of_content_list_separator_color']} !important;
                 $list_typography
             }
+            
+            .eael-toc.eael-toc-global
+            {
+                border-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-global .eael-toc-header
+            {
+                border-top-left-radius:{$border_radius}px;
+                border-top-right-radius:{$border_radius}px;
+                padding:{$header_padding['top']}px {$header_padding['right']}px {$header_padding['bottom']}px {$header_padding['left']}px;
+            }
+            
+            .eael-toc.eael-toc-global .eael-toc-body
+            {
+                border-bottom-left-radius:{$border_radius}px;
+                border-bottom-right-radius:{$border_radius}px;
+                padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
+            }
+            #eael-toc.eael-toc-global.eael-sticky
+            {
+                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']}px;
+            }
         ";
         if($toc_list_separator_style!='none'){
             $toc_global_css .= "
@@ -1976,7 +2001,18 @@ trait Helper
             {border: none !important;}";
         }
 
-        // wp_register_style( 'eael-toc-global', false );
+        if(isset($eael_toc['eael_ext_toc_border_border'])){
+            $border_width = $eael_toc['eael_ext_toc_border_width'];
+            $toc_global_css .= "
+            .eael-toc.eael-toc-global,.eael-toc-global button.eael-toc-button
+            {
+                border-style: {$eael_toc['eael_ext_toc_border_border']};
+                border-width: {$border_width['top']}px {$border_width['right']}px {$border_width['bottom']}px {$border_width['left']}px;
+                border-color: {$eael_toc['eael_ext_toc_border_color']};
+            }";
+        }
+
+        wp_register_style( 'eael-toc-global', false );
         wp_enqueue_style( 'eael-toc-global' );
         wp_add_inline_style( 'eael-toc-global', $toc_global_css );
     }

@@ -229,17 +229,38 @@
                     'name' => 'eael_ext_toc_table_box_shadow',
                     'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
                     'selector' => '{{WRAPPER}} .eael-toc:not(.expanded)',
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
+                    ],
                 ]
             );
 
-            $element->add_responsive_control(
+            $element->add_control(
                 'eael_ext_toc_box_border_radius',
                 [
-                    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', '%'],
+                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px' ],
+                    'range' => [
+                        's' => [
+                            'min' => 5,
+                            'max' => 50,
+                            'step' => 1,
+                        ]
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 5,
+                    ],
                     'selectors' => [
-                        '{{WRAPPER}} .fc-day-grid-event' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc ' => 'border-radius: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc .eael-toc-header' => 'border-top-left-radius: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc .eael-toc-header' => 'border-top-right-radius: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc .eael-toc-body' => 'border-bottom-left-radius: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} #eael-toc .eael-toc-body' => 'border-bottom-right-radius: {{SIZE}}{{UNIT}};',
+                    ],
+                    'condition' => [
+                        'eael_ext_table_of_content' => 'yes',
                     ],
                 ]
             );
@@ -355,6 +376,18 @@
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-header' => 'background-color: {{VALUE}}',
                         '{{WRAPPER}} .eael-toc.expanded .eael-toc-button' => 'background-color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_header_padding',
+                [
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px'],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc .eael-toc-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
             );
@@ -480,13 +513,25 @@
             $element->add_control(
                 'eael_ext_table_of_content_body_bg',
                 [
-                    'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Body Background Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#fff6f3',
                     'selectors' => [
                         '{{WRAPPER}} .eael-toc .eael-toc-body' => 'background-color: {{VALUE}}',
                     ],
 
+                ]
+            );
+
+            $element->add_control(
+                'eael_ext_toc_body_padding',
+                [
+                    'label' => esc_html__('Body Padding', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px'],
+                    'selectors' => [
+                        '{{WRAPPER}} #eael-toc .eael-toc-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
                 ]
             );
 
@@ -509,7 +554,7 @@
                 [
                     'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px' . 'em', '%'],
+                    'size_units' => ['px'],
                     'selectors' => [
                         '{{WRAPPER}} .fc-day-grid-event' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
@@ -521,7 +566,7 @@
                 [
                     'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px' . 'em', '%'],
+                    'size_units' => ['px'],
                     'selectors' => [
                         '{{WRAPPER}} .fc-day-grid-event' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],

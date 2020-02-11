@@ -51,7 +51,6 @@
   margin: 0;
   padding: 10px 20px;
   width: auto;
-  -webkit-transition: all 0.25s linear 0s;
   transition: all 0.25s linear 0s;
 }
 
@@ -106,7 +105,6 @@
 .eael-custom-radio-checkbox input[type=checkbox]:checked:before,
 .eael-custom-radio-checkbox input[type=radio]:checked:before {
   background: #999;
-  -webkit-transition: all 0.25s linear 0s;
   transition: all 0.25s linear 0s;
 }
 
@@ -121,7 +119,6 @@
 .eael-post-elements-readmore-btn {
   font-size: 12px;
   font-weight: 500;
-  -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
   display: inline-block;
 }

@@ -1,6 +1,5 @@
 ( function( $){
     jQuery(document).ready(function() {
-
         /**
          * add ID in main content heading tag
          * @param selector
