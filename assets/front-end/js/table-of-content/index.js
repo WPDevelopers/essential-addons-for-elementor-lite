@@ -285,9 +285,9 @@
 			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function(newValue) {
 				var list = $(".eael-toc-list");
 				if (newValue === "number") {
-					list.addClass("eael-toc-number");
+					list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
 				} else {
-					list.removeClass("eael-toc-number");
+					list.addClass("eael-toc-bullet").removeClass("eael-toc-number");
 				}
 			});
 

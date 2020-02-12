@@ -89,8 +89,8 @@ html {
 		.eael-toc-button {
 			transform: translate(-21px, 100px) rotate(90deg);
 			transform-origin: right;
-            bottom: 25vh !important;
-        }
+			bottom: 25vh !important;
+		}
 	}
 
 	.eael-toc-header {
@@ -155,41 +155,60 @@ html {
 		ul.eael-toc-list {
 			margin: 0;
 			padding: 0;
-			margin-left: 20px;
-			list-style-type: disc;
+			list-style: none;
 
 			li {
 				ul {
 					margin: 0;
 					padding: 0;
-					margin-left: 25px;
-					list-style-type: disc;
+					margin-left: 20px;
+					list-style: none;
+				}
+			}
 
-					li {
+			// list-style - bullet
+			&.eael-toc-bullet {
+				li {
+					&:before {
+						content: "";
+						position: relative;
+						display: inline-block;
+						width: 8px;
+						height: 8px;
+						border-radius: 50%;
+						background-color: #ff7d50;
+						margin-right: 8px;
+						top: -2px;
 					}
 				}
 			}
 
+			// list-style - counter
 			&.eael-toc-number {
-				list-style-type: decimal;
-				counter-reset: item;
+				counter-reset: counter;
 
 				li {
-					content: counters(item, ".") " ";
-					counter-increment: item;
+					counter-increment: counter;
+
+					&:before {
+						content: counters(counter, ".") " ";
+					}
 
 					ul {
-						list-style-type: decimal;
-						counter-reset: item;
+						counter-reset: counter;
 
 						li {
-							content: counters(item, ".") " ";
-							counter-increment: item;
+							counter-increment: counter;
+
+							&:before {
+								content: counters(counter, ".") " ";
+							}
 						}
 					}
 				}
 			}
 
+			// indicator - arrow
 			&.eael-toc-list-arrow {
 				li.eael-highlight-active {
 					> a {
