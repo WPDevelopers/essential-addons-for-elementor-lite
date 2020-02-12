@@ -275,7 +275,7 @@ class Table_of_Content
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_ext_toc_border',
-                'label' => __('Border', 'plugin-domain'),
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-toc,{{WRAPPER}} button.eael-toc-button',
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
@@ -513,7 +513,7 @@ class Table_of_Content
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors' => [
-                    '{{WRAPPER}} #eael-toc .eael-toc-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -532,11 +532,11 @@ class Table_of_Content
             [
                 'label' => __('Indicator Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'style_1',
+                'default' => 'none',
                 'options' => [
-                    'style_1' => __('Style 1', 'essential-addons-for-elementor-lite'),
-                    'style_2' => __('Style 2', 'essential-addons-for-elementor-lite'),
-                    'style_3' => __('Style 3', 'essential-addons-for-elementor-lite'),
+                    'none' => __('None', 'essential-addons-for-elementor-lite'),
+                    'arrow' => __('Arrow', 'essential-addons-for-elementor-lite'),
+                    'bar' => __('Bar', 'essential-addons-for-elementor-lite'),
                 ],
             ]
         );
@@ -545,7 +545,7 @@ class Table_of_Content
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_ext_table_of_content_list_typography_normal',
-                'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li,{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list li:before',
+                'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list',
                 'scheme' => Scheme_Typography::TYPOGRAPHY_2,
             ]
         );
@@ -565,8 +565,8 @@ class Table_of_Content
                 'type' => Controls_Manager::COLOR,
                 'default' => '#707070',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list li a' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list li ' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li a' => 'color: {{VALUE}}'
                 ],
             ]
         );
@@ -586,9 +586,10 @@ class Table_of_Content
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ff7d50',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a ' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover:before' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover li:before' => 'color: initial',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a:before' => 'border-bottom-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a:after' => 'background-color: {{VALUE}}',
                 ],
 
             ]
@@ -609,12 +610,14 @@ class Table_of_Content
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ff7d50',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list li.active > a' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list li.eael-highlight > a' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list li.active' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list li.eael-highlight' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before' => 'border-bottom: 10px solid {{VALUE}} !important',
-                    '{{WRAPPER}} ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after' => 'background: {{VALUE}} !important',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before' => 'border-bottom-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:before' => 'border-bottom-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:after' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -640,7 +643,7 @@ class Table_of_Content
                     'size' => 8,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} #eael-toc ul.eael-toc-list > li' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
@@ -666,7 +669,7 @@ class Table_of_Content
                     'size' => 1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} #eael-toc ul.eael-toc-list>li ul li' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li ul li' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
@@ -692,11 +695,11 @@ class Table_of_Content
                 'options' => [
                     'solid' => __('Solid', 'essential-addons-for-elementor-lite'),
                     'dashed' => __('Dashed', 'essential-addons-for-elementor-lite'),
+                    'dotted' => __('Dotted', 'essential-addons-for-elementor-lite'),
                     'none' => __('None', 'essential-addons-for-elementor-lite'),
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list > li' => 'border-top: 0.5px {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list>li:first-child ' => 'border: none',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list > li:not(:last-child)' => 'border-bottom: 0.5px {{VALUE}}',
                 ],
             ]
         );
@@ -706,10 +709,10 @@ class Table_of_Content
             [
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#c6c4cf',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-toc ul.eael-toc-list>li' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list > li:not(:last-child)' => 'border-bottom-color: {{VALUE}}',
                 ],
+                'default' => '#c6c4cf',
                 'condition' => [
                     'eael_ext_table_of_content_list_separator_style!' => 'none',
                 ],
