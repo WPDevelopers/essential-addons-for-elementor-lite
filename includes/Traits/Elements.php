@@ -167,7 +167,7 @@ trait Elements
                     $el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
                     $toc_style_class = ' eael-toc-list-' . $toc_style;
                     $toc_style_class .= ($toc_collapse == 'yes') ? ' eael-toc-collapse' : ' ';
-                    $toc_style_class .= ($list_icon == 'number') ? ' eael-toc-number' : ' ';
+                    $toc_style_class .= ($list_icon == 'number') ? ' eael-toc-number' : ' eael-toc-bullet';
                     $toc_style_class .= ($toc_word_wrap == 'yes') ? ' eael-toc-word-wrap' : ' ';
 
                     if (!empty($icon_check['value'])) {

@@ -1923,11 +1923,11 @@ trait Helper
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
-            .eael-toc-global.expanded .eael-toc-button
+            .eael-toc-global.collapsed .eael-toc-button
             {background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};}
             
             .eael-toc-global .eael-toc-header .eael-toc-title,
-            .eael-toc-global.expanded .eael-toc-button
+            .eael-toc-global.collapsed .eael-toc-button
             {
                 color:{$eael_toc['eael_ext_table_of_content_header_text_color']};
                 $header_typography
@@ -1939,7 +1939,7 @@ trait Helper
                 background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
             }
 
-            .eael-toc-global.eael-toc:not(.expanded)
+            .eael-toc-global.eael-toc:not(.collapsed)
             {
                 box-shadow:{$box_shadow['horizontal']}px {$box_shadow['vertical']}px {$box_shadow['blur']}px {$box_shadow['spread']}px {$box_shadow['color']};
             }
