@@ -109,26 +109,31 @@
 			eael_toc_content(eael_toc_check_content(), intSupportTag);
 		}
 
-		$(document).on("click", "ul.eael-toc-list li a", function(e) {
+		// expand collapse
+		$(document).on("click", "ul.eael-toc-list a", function(e) {
 			e.preventDefault();
+
 			$(document).off("scroll");
 
 			var target = this.hash;
 			history.pushState("", document.title, window.location.pathname + window.location.search);
+
 			var parentLi = $(this).parent();
-			if (parentLi.is(".eael-highlight.active")) {
-				parentLi.removeClass("eael-highlight active");
+
+			if (parentLi.is(".eael-highlight-parent.eael-highlight-active")) {
 				window.location.hash = target;
 				return false;
 			}
-			$("ul.eael-toc-list li").removeClass("active");
-			$(".eael-first-child").removeClass("eael-highlight");
+
+			$(".eael-highlight-active, .eael-highlight-parent").removeClass("eael-highlight-active eael-highlight-parent");
+
 			$(this)
 				.closest(".eael-first-child")
-				.addClass("eael-highlight");
+				.addClass("eael-highlight-parent");
+
 			$(this)
 				.parent()
-				.addClass("active");
+				.addClass("eael-highlight-active");
 
 			window.location.hash = target;
 		});
