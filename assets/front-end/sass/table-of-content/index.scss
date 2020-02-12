@@ -21,7 +21,7 @@ html {
 
 	&.eael-sticky {
 		position: fixed;
-		bottom: 16vh;
+		bottom: 30%;
 		background: none;
 		transition: bottom 1s ease-in-out;
 	}
@@ -122,7 +122,7 @@ html {
 			top: -11px;
 			border-radius: 20px;
 			font-family: serif;
-			font-size: 22px;
+			font-size: 20px;
 			font-weight: 700;
 			line-height: 28px;
 			text-align: center;
