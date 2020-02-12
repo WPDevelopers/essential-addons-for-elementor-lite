@@ -5,8 +5,7 @@ html {
 .eael-toc {
 	z-index: 9999;
 	width: 300px;
-	top: 0;
-	transition: top 0.2s linear;
+	bottom: -100%;
 
 	&.eael-toc-disable {
 		display: none;
@@ -14,9 +13,9 @@ html {
 
 	&.eael-sticky {
 		position: fixed;
-		top: 15vh;
+		bottom: 16vh;
 		background: none;
-		transition: top 0.2s linear;
+		transition: bottom 1s ease-in-out;
 	}
 
 	&.collapsed {
