@@ -54,6 +54,8 @@ html {
   -webkit-transform: translate(21px, 1px) rotate(90deg);
           transform: translate(21px, 1px) rotate(90deg);
   cursor: pointer;
+  position: relative;
+  bottom: 60vh;
 }
 .eael-toc.collapsed .eael-toc-button i {
   margin-right: 10px;
@@ -79,6 +81,7 @@ html {
           transform: translate(-21px, 100px) rotate(90deg);
   -webkit-transform-origin: right;
           transform-origin: right;
+  bottom: 25vh !important;
 }
 .eael-toc .eael-toc-header {
   background: #ff7d50;

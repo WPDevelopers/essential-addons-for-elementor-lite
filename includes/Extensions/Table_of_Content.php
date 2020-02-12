@@ -333,14 +333,14 @@ class Table_of_Content
                 'size_units' => ['s'],
                 'range' => [
                     's' => [
-                        'min' => .2,
+                        'min' => 1,
                         'max' => 5,
                         'step' => .1,
                     ],
                 ],
                 'default' => [
                     'unit' => 's',
-                    'size' => .2,
+                    'size' => 1,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} #eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
