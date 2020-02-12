@@ -1910,7 +1910,6 @@ trait Helper
     public function eael_toc_global_css( $page_settings_model ,$global_settings ){
 
         $eael_toc = $global_settings['eael_ext_table_of_content'];
-
         $toc_list_color_active      = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style   = $eael_toc['eael_ext_table_of_content_list_separator_style'];
 
@@ -1918,8 +1917,7 @@ trait Helper
         $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal',$eael_toc);
         $box_shadow   = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
         $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
-        $body_padding = $eael_toc['eael_ext_toc_body_padding'];
-        $header_padding = $eael_toc['eael_ext_toc_header_padding'];
+
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
@@ -1947,22 +1945,25 @@ trait Helper
             .eael-toc-global .eael-toc-body
             {background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};}
             
-            .eael-toc-global .eael-toc-body ul.eael-toc-list li a,
-            .eael-toc-global .eael-toc-body ul.eael-toc-list li,
-            .eael-toc-global .eael-toc-body ul.eael-toc-list li:before
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li,
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a,
             {color:{$eael_toc['eael_ext_table_of_content_list_text_color']};}
             
-            .eael-toc-global ul.eael-toc-list li.active > a,
-            .eael-toc-global ul.eael-toc-list li.eael-highlight > a,
-            .eael-toc-global ul.eael-toc-list li.active,
-            .eael-toc-global ul.eael-toc-list li.active:before,
-            .eael-toc-global ul.eael-toc-list li.eael-highlight,
-            .eael-toc-global ul.eael-toc-list li.eael-highlight:before
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover,
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a,
+            {color:{$eael_toc['eael_ext_table_of_list_hover_color']};}
+            
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a:before
+                border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
+            }
+            
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a:after {
+                background-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
+            }
+            
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li,
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a,
             {color:$toc_list_color_active !important;}
-            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_2 li.active > a:before
-            {border-bottom:10px solid $toc_list_color_active !important;}
-            .eael-toc-global ul.eael-toc-list.eael-toc-list-style_3 li.active > a:after
-            {background-color:$toc_list_color_active !important;}
             
             .eael-toc-global ul.eael-toc-list > li
             {

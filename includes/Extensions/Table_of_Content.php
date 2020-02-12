@@ -204,6 +204,9 @@ class Table_of_Content
                     'unit' => 'px',
                     'size' => 200,
                 ],
+	            'selectors' => [
+		            '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+	            ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
@@ -320,32 +323,6 @@ class Table_of_Content
                     '{{WRAPPER}} .eael-toc.eael-toc-right' => 'border-top-left-radius: {{SIZE}}{{UNIT}}; border-bottom-left-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-toc.eael-toc-right .eael-toc-header' => 'border-top-left-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-toc.eael-toc-right .eael-toc-body' => 'border-bottom-left-radius: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'eael_ext_table_of_content' => 'yes',
-                ],
-            ]
-        );
-
-        $element->add_control(
-            'eael_ext_toc_transition_speed',
-            [
-                'label' => __('Transition Speed', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['s'],
-                'range' => [
-                    's' => [
-                        'min' => 1,
-                        'max' => 5,
-                        'step' => .1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 's',
-                    'size' => 1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
