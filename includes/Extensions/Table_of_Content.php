@@ -313,11 +313,13 @@ class Table_of_Content
                     'size' => 5,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} #eael-toc ' => 'border-radius: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} #eael-toc .eael-toc-header' => 'border-top-left-radius: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} #eael-toc .eael-toc-header' => 'border-top-right-radius: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} #eael-toc .eael-toc-body' => 'border-bottom-left-radius: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} #eael-toc .eael-toc-body' => 'border-bottom-right-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc:not(.eael-toc-right)' => 'border-top-right-radius: {{SIZE}}{{UNIT}}; border-bottom-right-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc:not(.eael-toc-right) .eael-toc-header' => 'border-top-right-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc:not(.eael-toc-right) .eael-toc-body' => 'border-bottom-right-radius: {{SIZE}}{{UNIT}};',
+                    
+                    '{{WRAPPER}} .eael-toc.eael-toc-right' => 'border-top-left-radius: {{SIZE}}{{UNIT}}; border-bottom-left-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc.eael-toc-right .eael-toc-header' => 'border-top-left-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc.eael-toc-right .eael-toc-body' => 'border-bottom-left-radius: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
@@ -343,7 +345,7 @@ class Table_of_Content
                     'size' => 1,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} #eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc' => 'transition-duration: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
@@ -406,7 +408,7 @@ class Table_of_Content
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors' => [
-                    '{{WRAPPER}} #eael-toc .eael-toc-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
