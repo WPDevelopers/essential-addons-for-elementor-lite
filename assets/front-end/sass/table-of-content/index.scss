@@ -3,20 +3,20 @@ html {
 }
 
 .eael-toc {
-    position: fixed;
+    position: relative;
     z-index: 9999;
     width: 300px!important;
-    top:30%;
-    transition: all .2s linear;
+    top:0;
+    transition: top 5s linear;
 
     &.eael-toc-disable {
         display: none;
     }
     &.eael-sticky {
         position: fixed;
-        top: 50px;
+        top: 15vh;
         background: none;
-        transition: all .2s linear;
+        transition: top 5s linear;
     }
     &.expanded {
         width: unset !important;
