@@ -31,8 +31,7 @@ html {
   display: none;
 }
 .eael-toc.collapsed.eael-bottom-to-top .eael-toc-button {
-  -webkit-transform: translate(21px, 178px) rotate(-90deg);
-          transform: translate(21px, 178px) rotate(-90deg);
+  transform: translate(21px, 178px) rotate(-90deg);
 }
 .eael-toc.collapsed .eael-toc-button {
   display: inline-block;
@@ -41,15 +40,13 @@ html {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  -webkit-transform-origin: left;
-          transform-origin: left;
+  transform-origin: left;
   color: #fff;
   background: #ff7d50;
   padding: 10px 20px;
   border-radius: 3px;
   border: none;
-  -webkit-transform: translate(21px, 1px) rotate(90deg);
-          transform: translate(21px, 1px) rotate(90deg);
+  transform: translate(21px, 1px) rotate(90deg);
   cursor: pointer;
   position: relative;
 }
@@ -69,14 +66,11 @@ html {
   left: -11px;
 }
 .eael-toc.eael-toc-right.eael-bottom-to-top .eael-toc-button {
-  -webkit-transform: translate(-21px, 20px) rotate(-90deg);
-          transform: translate(-21px, 20px) rotate(-90deg);
+  transform: translate(-21px, 20px) rotate(-90deg);
 }
 .eael-toc.eael-toc-right .eael-toc-button {
-  -webkit-transform: translate(-21px, 100px) rotate(90deg);
-          transform: translate(-21px, 100px) rotate(90deg);
-  -webkit-transform-origin: right;
-          transform-origin: right;
+  transform: translate(-21px, 100px) rotate(90deg);
+  transform-origin: right;
   bottom: 25vh !important;
 }
 .eael-toc .eael-toc-header {
@@ -150,7 +144,7 @@ html {
   height: 8px;
   border-radius: 50%;
   background-color: #ff7d50;
-  margin-right: 10px;
+  margin-right: 8px;
   top: -2px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number {
@@ -179,8 +173,7 @@ html {
   border-bottom: 10px solid #ff7d50;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
   margin-top: 10px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
@@ -196,7 +189,6 @@ html {
   display: none;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a {
-  display: -webkit-inline-box;
   display: inline-flex;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a span {
