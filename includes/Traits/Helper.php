@@ -1946,12 +1946,12 @@ trait Helper
             {background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};}
             
             .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li,
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a,
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a
             {color:{$eael_toc['eael_ext_table_of_content_list_text_color']};}
             
             .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover,
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a,
-            {color:{$eael_toc['eael_ext_table_of_list_hover_color']};}
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a
+            {color:{$eael_toc['eael_ext_table_of_list_hover_color']}; !important}
             
             .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a:before
                 border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
@@ -1961,9 +1961,19 @@ trait Helper
                 background-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
             }
             
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li,
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a,
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active,
+            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a,
+            .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent,
+            .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
             {color:$toc_list_color_active !important;}
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:before
+            {border-bottom-color:$toc_list_color_active !important;}
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:after
+            {background-color:$toc_list_color_active !important;}
             
             .eael-toc-global ul.eael-toc-list > li
             {
