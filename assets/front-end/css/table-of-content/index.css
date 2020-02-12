@@ -43,6 +43,8 @@ html {
   border-radius: 3px;
   transform: translate(21px, 1px) rotate(90deg);
   cursor: pointer;
+  position: relative;
+  bottom: 60vh;
 }
 .eael-toc.collapsed .eael-toc-button i {
   margin-right: 10px;
@@ -263,6 +265,7 @@ html {
 .eael-toc.eael-toc-right .eael-toc-button {
   transform: translate(-21px, 100px) rotate(90deg);
   transform-origin: right;
+  bottom: 25vh !important;
 }
 .eael-toc .eael-toc-button {
   display: none;
