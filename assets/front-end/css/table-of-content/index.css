@@ -52,7 +52,6 @@ html {
           transform: translate(21px, 1px) rotate(90deg);
   cursor: pointer;
   position: relative;
-  bottom: 60vh;
 }
 .eael-toc.collapsed .eael-toc-button i {
   margin-right: 10px;
