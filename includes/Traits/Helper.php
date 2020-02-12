@@ -1974,24 +1974,34 @@ trait Helper
             }
             
             
-            .eael-toc.eael-toc-global
+            .eael-toc:not(.eael-toc-right)
             {
-                border-radius:{$border_radius}px;
-            }
-            
-            .eael-toc.eael-toc-global .eael-toc-header
-            {
-                border-top-left-radius:{$border_radius}px;
                 border-top-right-radius:{$border_radius}px;
-                padding:{$header_padding['top']}px {$header_padding['right']}px {$header_padding['bottom']}px {$header_padding['left']}px;
+                border-bottom-right-radius:{$border_radius}px;
             }
             
-            .eael-toc.eael-toc-global .eael-toc-body
+            .eael-toc:not(.eael-toc-right) .eael-toc-header
             {
-                border-bottom-left-radius:{$border_radius}px;
-                border-bottom-right-radius:{$border_radius}px;
-                padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
+                border-top-right-radius:{$border_radius}px;
             }
+            
+            .eael-toc:not(.eael-toc-right) .eael-toc-body {
+                border-bottom-right-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-right {
+                border-top-left-radius:{$border_radius}px;
+                border-bottom-left-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-right .eael-toc-header {
+                border-top-left-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-right .eael-toc-body {
+                border-bottom-left-radius:{$border_radius}px;
+            }
+            
             
             #eael-toc.eael-toc-global ul.eael-toc-list > li
             {

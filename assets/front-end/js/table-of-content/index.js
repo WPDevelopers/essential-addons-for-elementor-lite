@@ -261,8 +261,8 @@
 
 			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function(newValue) {
 				var list = $(".eael-toc-list");
-				list.removeClass("eael-toc-list-style_2 eael-toc-list-style_3");
-				if (newValue !== "style_1") {
+				list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
+				if (newValue !== "none") {
 					list.addClass("eael-toc-list-" + newValue);
 				}
 			});
