@@ -40091,73 +40091,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -40234,6 +40167,73 @@ jQuery(window).on("elementor/frontend/init", function() {
 	}
 
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
+});
+
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
 });
 
 var EventCalendar = function($scope, $) {
@@ -40402,6 +40402,72 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
 });
 
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
+    );
+});
+
 var FancyText = function($scope, $) {
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
         $id =
@@ -40473,72 +40539,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-fancy-text.default",
         FancyText
-    );
-});
-
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
     );
 });
 
@@ -40748,6 +40748,28 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -40794,28 +40816,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
     );
 });
 
