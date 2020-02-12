@@ -147,7 +147,7 @@ trait Elements
                     }
                     $icon = 'fas fa-list';
                     $support_tag = (array) $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_supported_heading_tag' );
-                    $sticky_offset_ar = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_sticky_offset' );
+
                     $support_tag = implode(',', array_filter($support_tag));
                     $position = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_position' );
                     $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_close_button_text_style' );
@@ -160,7 +160,6 @@ trait Elements
                     $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_title' );
                     $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_table_of_content_header_icon' );
 
-                    $sticky_offset = !empty($sticky_offset_ar['size'])?$sticky_offset_ar['size']:200;
                     $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                     $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
                     $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
@@ -174,7 +173,7 @@ trait Elements
                         $icon = $icon_check['value'];
                     }
 
-                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-eael-sticky-offset='{$sticky_offset}' id='eael-toc' class='{$el_class} '>
+                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' id='eael-toc' class='{$el_class} '>
                         <div class='eael-toc-header'>
                                 <span class='eael-toc-close'>×</span>
                                 <h2 class='eael-toc-title'>{$toc_title}</h2>
