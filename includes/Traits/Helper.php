@@ -2083,7 +2083,7 @@ trait Helper
                     $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']} !important;";
                 }
             }elseif(!empty($typo_attr)){
-                $typo_data .= "{$attr}:{$typo_attr};";
+	            $typo_data .= ($attr=='font-family')?"{$attr}:{$typo_attr}, sans-serif;":"{$attr}:{$typo_attr};";
             }
         }
         return $typo_data;
