@@ -79,47 +79,39 @@
 /*--- Cta Flex ---*/
 .eael-call-to-action.cta-flex,
 .eael-call-to-action.cta-icon-flex {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: start;
-          align-items: flex-start;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 /*--- Cta Icon Flex ---*/
 .eael-call-to-action.cta-icon-flex .icon {
-  -webkit-box-flex: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   font-size: 80px;
   text-align: left;
   line-height: 130px;
 }
 
 .eael-call-to-action.cta-icon-flex .action {
-  -webkit-box-flex: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   text-align: right;
   padding-top: 22px;
   flex-basis: 22%;
 }
 
 .eael-call-to-action.cta-icon-flex .content {
-  -webkit-box-flex: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   padding: 0px 30px;
 }
 
 /*--- Cta Flex ---*/
 .eael-call-to-action.cta-flex .content {
   padding: 0px 15px;
-  -webkit-box-flex: 1;
-          flex-grow: 1;
+  flex-grow: 1;
 }
 
 .eael-call-to-action.cta-flex .action {
-  -webkit-box-flex: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   text-align: right;
   padding-top: 25px;
   flex-basis: 23%;
@@ -134,7 +126,6 @@
   font-size: 16px;
   text-decoration: none;
   color: #4d4d4d;
-  -webkit-transition: .5s;
   transition: .5s;
   -ms-box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2);
@@ -173,14 +164,12 @@
   -webkit-transform: translateY(-100%);
   -ms-transform: translateY(-100%);
   z-index: -1;
-  -webkit-transition: .5s;
   transition: .5s;
   color: #fff;
 }
 
 .eael-call-to-action .cta-button.effect-1:hover::after {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transform: translateY(0);
 }
 
 /*--- Cta Button effect 2 ---*/
@@ -193,16 +182,13 @@
   top: 0px;
   left: 0px;
   z-index: -1;
-  -webkit-transition: .5s;
   transition: .5s;
   color: #fff;
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .eael-call-to-action .cta-button.effect-2:hover::after {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 /*--- Media Queries ---*/
@@ -219,8 +205,7 @@
   }
 
   .eael-call-to-action.cta-icon-flex .icon {
-    -webkit-box-flex: 1;
-            flex-grow: 1;
+    flex-grow: 1;
     font-size: 48px;
     line-height: 90px;
     text-align: center;
@@ -228,8 +213,7 @@
 
   .eael-call-to-action.cta-flex .content,
   .eael-call-to-action.cta-icon-flex .content {
-    -webkit-box-flex: 1;
-            flex-grow: 1;
+    flex-grow: 1;
     text-align: center;
     padding: 0px;
   }
