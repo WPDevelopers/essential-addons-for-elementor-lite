@@ -203,10 +203,10 @@
 				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
 				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
 			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
-			toc_style_class += pageSetting.eael_ext_toc_list_icon === "number" ? " eael-toc-number" : "eael-toc-bullet";
+			toc_style_class += pageSetting.eael_ext_toc_list_icon === "number" ? " eael-toc-number" : " eael-toc-bullet";
 
 			return (
-				'<div id="eael-toc" data-eael-sticky-offset="200" class="eael-toc eael-toc-disable ' +
+				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +
 				el_class +
 				'">' +
 				'<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">' +
