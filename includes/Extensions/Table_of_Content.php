@@ -144,7 +144,7 @@ class Table_of_Content
         $element->add_control(
             'eael_ext_toc_collapse_sub_heading',
             [
-                'label' => __('Keep Sub Heading Expended', 'essential-addons-for-elementor-lite'),
+                'label' => __('Keep Sub Heading Collapsed', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
