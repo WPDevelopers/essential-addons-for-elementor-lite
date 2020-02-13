@@ -188,6 +188,7 @@ trait Core
                 'eael_ext_toc_border_color'                         => $page_settings_model->get_settings( 'eael_ext_toc_border_color'),
                 'eael_ext_toc_box_border_radius'                    => $page_settings_model->get_settings( 'eael_ext_toc_box_border_radius'),
                 'eael_ext_toc_sticky_offset'                        => $page_settings_model->get_settings( 'eael_ext_toc_sticky_offset'),
+                'eael_ext_toc_sticky_scroll'                        => $page_settings_model->get_settings( 'eael_ext_toc_sticky_scroll'),
 
                 //toc header setting
                 'eael_ext_table_of_content_header_bg'                   => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
