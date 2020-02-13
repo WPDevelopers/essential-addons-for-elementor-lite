@@ -1926,8 +1926,13 @@ trait Helper
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
             .eael-toc-global.collapsed .eael-toc-button
-            {background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};}
+            {
+                background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};
+            }
             
+            .eael-toc-global.eael-sticky {
+                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']};
+            }
             .eael-toc-global .eael-toc-header .eael-toc-title,
             .eael-toc-global.collapsed .eael-toc-button
             {
@@ -1954,7 +1959,9 @@ trait Helper
             }
             
             .eael-toc-global .eael-toc-body
-            {background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};}
+            {
+                background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};
+            }
             
             .eael-toc-global .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before
             {
@@ -1963,41 +1970,55 @@ trait Helper
                 top:{$top_position}px;
             }
             
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li,
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a
-            {color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;}
+            .eael-toc-global .eael-toc-body .eael-toc-list li,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li a
+            {
+                color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
+            }
             
-            .eael-toc-global .eael-toc-body .eael-toc-list li:before {
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li:before {
                 background-color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
             }
             
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li:hover:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a
-            {color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important; }
-            
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a:before
-                border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
+            {
+                color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important; 
             }
             
-            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:after,
-            .eael-toc-global .eael-toc-body .eael-toc-list li:hover:before {
-                background-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:before {
+                border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li:hover:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:after {
+                background-color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
             }
             
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-active:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-parent:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
-            {color:$toc_list_color_active !important;}
+            {
+                color:$toc_list_color_active !important;
+            }
             
             
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before
-            {border-bottom-color:$toc_list_color_active !important;}
+            {
+                border-bottom-color:$toc_list_color_active !important;
+            }
             
-            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-active:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after,
-            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent:before
-            {background-color:$toc_list_color_active !important;}
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-parent:before
+            {
+                background-color:$toc_list_color_active !important;
+            }
             
             .eael-toc-global ul.eael-toc-list > li
             {
