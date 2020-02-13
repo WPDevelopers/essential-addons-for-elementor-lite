@@ -172,7 +172,7 @@
 		 * @returns {null|selector}
 		 */
 		function eael_toc_check_content() {
-			var contentSelectro = null;
+			var contentSelectro = '.site-content';
 			if ($(".elementor-inner")[0]) {
 				contentSelectro = ".elementor-inner";
 			} else if ($("#site-content")[0]) {

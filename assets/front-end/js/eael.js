@@ -39146,125 +39146,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var ContentTicker = function($scope, $) {
-    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-        $items =
-            $contentTicker.data("items") !== undefined
-                ? $contentTicker.data("items")
-                : 1,
-        $items_tablet =
-            $contentTicker.data("items-tablet") !== undefined
-                ? $contentTicker.data("items-tablet")
-                : 1,
-        $items_mobile =
-            $contentTicker.data("items-mobile") !== undefined
-                ? $contentTicker.data("items-mobile")
-                : 1,
-        $margin =
-            $contentTicker.data("margin") !== undefined
-                ? $contentTicker.data("margin")
-                : 10,
-        $margin_tablet =
-            $contentTicker.data("margin-tablet") !== undefined
-                ? $contentTicker.data("margin-tablet")
-                : 10,
-        $margin_mobile =
-            $contentTicker.data("margin-mobile") !== undefined
-                ? $contentTicker.data("margin-mobile")
-                : 10,
-        $effect =
-            $contentTicker.data("effect") !== undefined
-                ? $contentTicker.data("effect")
-                : "slide",
-        $speed =
-            $contentTicker.data("speed") !== undefined
-                ? $contentTicker.data("speed")
-                : 400,
-        $autoplay =
-            $contentTicker.data("autoplay") !== undefined
-                ? $contentTicker.data("autoplay")
-                : 5000,
-        $loop =
-            $contentTicker.data("loop") !== undefined
-                ? $contentTicker.data("loop")
-                : false,
-        $grab_cursor =
-            $contentTicker.data("grab-cursor") !== undefined
-                ? $contentTicker.data("grab-cursor")
-                : false,
-        $pagination =
-            $contentTicker.data("pagination") !== undefined
-                ? $contentTicker.data("pagination")
-                : ".swiper-pagination",
-        $arrow_next =
-            $contentTicker.data("arrow-next") !== undefined
-                ? $contentTicker.data("arrow-next")
-                : ".swiper-button-next",
-        $arrow_prev =
-            $contentTicker.data("arrow-prev") !== undefined
-                ? $contentTicker.data("arrow-prev")
-                : ".swiper-button-prev",
-        $pause_on_hover =
-            $contentTicker.data("pause-on-hover") !== undefined
-                ? $contentTicker.data("pause-on-hover")
-                : "",
-        $contentTickerOptions = {
-            direction: "horizontal",
-            loop: $loop,
-            speed: $speed,
-            effect: $effect,
-            slidesPerView: $items,
-            spaceBetween: $margin,
-            grabCursor: $grab_cursor,
-            paginationClickable: true,
-            autoHeight: true,
-            autoplay: {
-                delay: $autoplay
-            },
-            pagination: {
-                el: $pagination,
-                clickable: true
-            },
-            navigation: {
-                nextEl: $arrow_next,
-                prevEl: $arrow_prev
-            },
-            breakpoints: {
-                // when window width is <= 480px
-                480: {
-                    slidesPerView: $items_mobile,
-                    spaceBetween: $margin_mobile
-                },
-                // when window width is <= 640px
-                768: {
-                    slidesPerView: $items_tablet,
-                    spaceBetween: $margin_tablet
-                }
-            }
-        };
-
-    var $contentTickerSlider = new Swiper(
-        $contentTicker,
-        $contentTickerOptions
-    );
-    if ($autoplay === 0) {
-        $contentTickerSlider.autoplay.stop();
-    }
-    if ($pause_on_hover && $autoplay !== 0) {
-        $contentTicker.on("mouseenter", function() {
-            $contentTickerSlider.autoplay.stop();
-        });
-        $contentTicker.on("mouseleave", function() {
-            $contentTickerSlider.autoplay.start();
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-content-ticker.default",
-        ContentTicker
-    );
-});
 var advanced_data_table_timeout,
 	advanced_data_table_active_cell = null,
 	advanced_data_table_drag_start_x,
@@ -40091,6 +39972,125 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
+var ContentTicker = function($scope, $) {
+    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+        $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
+        $items_tablet =
+            $contentTicker.data("items-tablet") !== undefined
+                ? $contentTicker.data("items-tablet")
+                : 1,
+        $items_mobile =
+            $contentTicker.data("items-mobile") !== undefined
+                ? $contentTicker.data("items-mobile")
+                : 1,
+        $margin =
+            $contentTicker.data("margin") !== undefined
+                ? $contentTicker.data("margin")
+                : 10,
+        $margin_tablet =
+            $contentTicker.data("margin-tablet") !== undefined
+                ? $contentTicker.data("margin-tablet")
+                : 10,
+        $margin_mobile =
+            $contentTicker.data("margin-mobile") !== undefined
+                ? $contentTicker.data("margin-mobile")
+                : 10,
+        $effect =
+            $contentTicker.data("effect") !== undefined
+                ? $contentTicker.data("effect")
+                : "slide",
+        $speed =
+            $contentTicker.data("speed") !== undefined
+                ? $contentTicker.data("speed")
+                : 400,
+        $autoplay =
+            $contentTicker.data("autoplay") !== undefined
+                ? $contentTicker.data("autoplay")
+                : 5000,
+        $loop =
+            $contentTicker.data("loop") !== undefined
+                ? $contentTicker.data("loop")
+                : false,
+        $grab_cursor =
+            $contentTicker.data("grab-cursor") !== undefined
+                ? $contentTicker.data("grab-cursor")
+                : false,
+        $pagination =
+            $contentTicker.data("pagination") !== undefined
+                ? $contentTicker.data("pagination")
+                : ".swiper-pagination",
+        $arrow_next =
+            $contentTicker.data("arrow-next") !== undefined
+                ? $contentTicker.data("arrow-next")
+                : ".swiper-button-next",
+        $arrow_prev =
+            $contentTicker.data("arrow-prev") !== undefined
+                ? $contentTicker.data("arrow-prev")
+                : ".swiper-button-prev",
+        $pause_on_hover =
+            $contentTicker.data("pause-on-hover") !== undefined
+                ? $contentTicker.data("pause-on-hover")
+                : "",
+        $contentTickerOptions = {
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
+                },
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
+                }
+            }
+        };
+
+    var $contentTickerSlider = new Swiper(
+        $contentTicker,
+        $contentTickerOptions
+    );
+    if ($autoplay === 0) {
+        $contentTickerSlider.autoplay.stop();
+    }
+    if ($pause_on_hover && $autoplay !== 0) {
+        $contentTicker.on("mouseenter", function() {
+            $contentTickerSlider.autoplay.stop();
+        });
+        $contentTicker.on("mouseleave", function() {
+            $contentTickerSlider.autoplay.start();
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-content-ticker.default",
+        ContentTicker
+    );
+});
 var CountDown = function($scope, $) {
     var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
         $countdown_id =
@@ -40468,80 +40468,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-
-    if(isEditMode) {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 800);
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
-
 var filterableGalleryHandler = function($scope, $) {
 
     var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
@@ -40740,6 +40666,80 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+
+    if(isEditMode) {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 800);
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
 (function($) {
     window.isEditMode = false;
 
@@ -40747,6 +40747,28 @@ jQuery(window).on("elementor/frontend/init", function() {
         window.isEditMode = elementorFrontend.isEditMode();
     });
 })(jQuery);
+
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope).isotope({
+        itemSelector: ".eael-grid-post",
+        masonry: {
+            columnWidth: ".eael-post-grid-column",
+            percentPosition: true
+        }
+    });
+
+    // layout gal, while images are loading
+    $gallery.imagesLoaded().progress(function() {
+        $gallery.isotope("layout");
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
 
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
@@ -40794,28 +40816,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
-            percentPosition: true
-        }
-    });
-
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
     );
 });
 
@@ -41320,7 +41320,7 @@ function RunStickyPlayer(elem) {
 		 * @returns {null|selector}
 		 */
 		function eael_toc_check_content() {
-			var contentSelectro = null;
+			var contentSelectro = '.site-content';
 			if ($(".elementor-inner")[0]) {
 				contentSelectro = ".elementor-inner";
 			} else if ($("#site-content")[0]) {
