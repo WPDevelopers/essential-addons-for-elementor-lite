@@ -216,6 +216,8 @@ trait Core
                 'eael_ext_table_of_content_list_separator_color'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_color'),
                 'eael_ext_toc_box_list_bullet_size'                 => $page_settings_model->get_settings('eael_ext_toc_box_list_bullet_size'),
                 'eael_ext_toc_box_list_top_position'                => $page_settings_model->get_settings('eael_ext_toc_box_list_top_position'),
+                'eael_ext_toc_indicator_size'                       => $page_settings_model->get_settings('eael_ext_toc_indicator_size'),
+                'eael_ext_toc_indicator_position'                   => $page_settings_model->get_settings('eael_ext_toc_indicator_position'),
             ];
             foreach ($typography_fields as $typography_field){
                 $header_fields_attr = 'eael_ext_table_of_content_header_typography_'.$typography_field;
