@@ -120,7 +120,6 @@ class Table_of_Content
                 'multiple' => true,
                 'label_block' => true,
                 'default' => [
-                    'h1',
                     'h2',
                     'h3',
                     'h4',
@@ -187,15 +186,38 @@ class Table_of_Content
             ]
         );
 
+	    $element->add_control(
+		    'eael_ext_toc_sticky_scroll',
+		    [
+			    'label' => __('Sticky Scroll Effect', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 0,
+					    'max' => 2000,
+					    'step' => 10,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 200,
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content' => 'yes',
+			    ],
+		    ]
+	    );
+
         $element->add_control(
             'eael_ext_toc_sticky_offset',
             [
-                'label' => __('Sticky Offset', 'essential-addons-for-elementor-lite'),
+                'label' => __('Sticky Top Offset', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 50,
+                        'min' => 0,
                         'max' => 2000,
                         'step' => 10,
                     ],
@@ -282,7 +304,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 8,
+                        'min' => 0,
                         'max' => 50,
                         'step' => 1,
                     ],
@@ -358,7 +380,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 5,
+                        'min' => 0,
                         'max' => 50,
                         'step' => 1,
                     ],
@@ -580,7 +602,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 1,
+                        'min' => 0,
                         'max' => 100,
                         'step' => 1,
                     ],
@@ -723,7 +745,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 8,
+                        'min' => 0,
                         'max' => 50,
                         'step' => 1,
                     ],
@@ -749,7 +771,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 1,
+                        'min' => 0,
                         'max' => 20,
                         'step' => 1,
                     ],
