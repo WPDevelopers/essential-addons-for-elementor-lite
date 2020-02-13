@@ -14,7 +14,7 @@
 				c = 0;
 
 			allSupportTag.forEach(function(el) {
-				el.id = c + "-" + eael_build_id(el.innerHTML);
+				el.id = c + "-" + eael_build_id();
 				el.classList.add("eael-heading-content");
 				c++;
 			});
@@ -93,7 +93,7 @@
 					liNode.setAttribute("itemprop", "itemListElement");
 				}
 
-				Linkid = "#" + i + "-" + eael_build_id(currentHeading.textContent);
+				Linkid = "#" + i + "-" + eael_build_id();
 				anchorTag.className = "eael-toc-link";
 				anchorTag.setAttribute("itemprop", "item");
 				anchorTag.setAttribute("href", Linkid);
@@ -163,7 +163,7 @@
 		 * @param content
 		 * @returns {string}
 		 */
-		function eael_build_id(content) {
+		function eael_build_id() {
 			return "eael-table-of-content";
 		}
 

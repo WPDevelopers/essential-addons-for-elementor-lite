@@ -1918,7 +1918,8 @@ trait Helper
         $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal',$eael_toc);
         $box_shadow   = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
         $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
-
+		$bullet_size = $eael_toc['eael_ext_toc_box_list_bullet_size']['size'];
+		$top_position = $eael_toc['eael_ext_toc_box_list_top_position']['size'];
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
@@ -1952,6 +1953,13 @@ trait Helper
             
             .eael-toc-global .eael-toc-body
             {background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};}
+            
+            .eael-toc-global .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before
+            {
+                width:{$bullet_size}px;
+                height:{$bullet_size}px;
+                top:{$top_position}px;
+            }
             
             .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li,
             .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a
