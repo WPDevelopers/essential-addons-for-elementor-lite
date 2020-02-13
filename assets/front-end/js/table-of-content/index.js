@@ -141,7 +141,7 @@
 		window.onscroll = function() {
 			eaelTocSticky();
 		};
-		var eaelToc = document.getElementById("eael-toc");
+		var stickyScroll = $('#eael-toc').data('stickyscroll');
 
 		/**
 		 * check sticky
@@ -151,7 +151,8 @@
 			if (!eaelToc) {
 				return;
 			}
-			if (window.pageYOffset >= 200) {
+			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
+			if (window.pageYOffset >= stickyScroll) {
 				eaelToc.classList.add("eael-sticky");
 			} else {
 				eaelToc.classList.remove("eael-sticky");

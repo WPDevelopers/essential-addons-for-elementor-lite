@@ -186,10 +186,33 @@ class Table_of_Content
             ]
         );
 
+	    $element->add_control(
+		    'eael_ext_toc_sticky_scroll',
+		    [
+			    'label' => __('Sticky Scroll Effect', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 200,
+					    'max' => 2000,
+					    'step' => 10,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 200,
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content' => 'yes',
+			    ],
+		    ]
+	    );
+
         $element->add_control(
             'eael_ext_toc_sticky_offset',
             [
-                'label' => __('Sticky Offset', 'essential-addons-for-elementor-lite'),
+                'label' => __('Sticky Top Offset', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
