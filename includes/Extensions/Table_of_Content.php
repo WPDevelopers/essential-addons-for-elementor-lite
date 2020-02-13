@@ -274,6 +274,58 @@ class Table_of_Content
             ]
         );
 
+	    $element->add_control(
+	    'eael_ext_toc_box_list_bullet_size',
+		    [
+			    'label' => __('Bullet Size', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 8,
+					    'max' => 50,
+					    'step' => 1,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 8,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'eael_ext_toc_list_icon' => 'bullet',
+			    ],
+		    ]
+	    );
+
+	    $element->add_control(
+		    'eael_ext_toc_box_list_top_position',
+		    [
+			    'label' => __('Top Position', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => -8,
+					    'max' => 50,
+					    'step' => 1,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => -2,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before' => 'top: {{SIZE}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'eael_ext_toc_list_icon' => 'bullet',
+			    ],
+		    ]
+	    );
+
         $element->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -305,7 +357,7 @@ class Table_of_Content
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
-                    's' => [
+                    'px' => [
                         'min' => 5,
                         'max' => 50,
                         'step' => 1,
@@ -611,7 +663,7 @@ class Table_of_Content
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
-                    's' => [
+                    'px' => [
                         'min' => 8,
                         'max' => 50,
                         'step' => 1,
@@ -637,7 +689,7 @@ class Table_of_Content
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
-                    's' => [
+                    'px' => [
                         'min' => 1,
                         'max' => 20,
                         'step' => 1,
