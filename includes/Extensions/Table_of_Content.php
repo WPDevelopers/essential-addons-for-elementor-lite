@@ -204,9 +204,9 @@ class Table_of_Content
                     'unit' => 'px',
                     'size' => 200,
                 ],
-	            'selectors' => [
-		            '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
-	            ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+                ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
@@ -274,57 +274,57 @@ class Table_of_Content
             ]
         );
 
-	    $element->add_control(
-	    'eael_ext_toc_box_list_bullet_size',
-		    [
-			    'label' => __('Bullet Size', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => 8,
-					    'max' => 50,
-					    'step' => 1,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 8,
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-			    ],
-			    'condition' => [
-				    'eael_ext_toc_list_icon' => 'bullet',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_box_list_bullet_size',
+            [
+                'label' => __('Bullet Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 8,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 8,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_ext_toc_list_icon' => 'bullet',
+                ],
+            ]
+        );
 
-	    $element->add_control(
-		    'eael_ext_toc_box_list_top_position',
-		    [
-			    'label' => __('Top Position', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => -50,
-					    'max' => 50,
-					    'step' => 1,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => -2,
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before' => 'top: {{SIZE}}{{UNIT}};',
-			    ],
-			    'condition' => [
-				    'eael_ext_toc_list_icon' => 'bullet',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_box_list_top_position',
+            [
+                'label' => __('Top Position', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => -50,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => -2,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before' => 'top: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_ext_toc_list_icon' => 'bullet',
+                ],
+            ]
+        );
 
         $element->add_group_control(
             Group_Control_Border::get_type(),
@@ -371,7 +371,7 @@ class Table_of_Content
                     '{{WRAPPER}} .eael-toc:not(.eael-toc-right)' => 'border-top-right-radius: {{SIZE}}{{UNIT}}; border-bottom-right-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-toc:not(.eael-toc-right) .eael-toc-header' => 'border-top-right-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-toc:not(.eael-toc-right) .eael-toc-body' => 'border-bottom-right-radius: {{SIZE}}{{UNIT}};',
-                    
+
                     '{{WRAPPER}} .eael-toc.eael-toc-right' => 'border-top-left-radius: {{SIZE}}{{UNIT}}; border-bottom-left-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-toc.eael-toc-right .eael-toc-header' => 'border-top-left-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-toc.eael-toc-right .eael-toc-body' => 'border-bottom-left-radius: {{SIZE}}{{UNIT}};',
@@ -572,58 +572,58 @@ class Table_of_Content
             ]
         );
 
-	    $element->add_control(
-		    'eael_ext_toc_indicator_size',
-		    [
-			    'label' => __('Indicator Size', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => 1,
-					    'max' => 100,
-					    'step' => 1,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 20,
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'height: {{SIZE}}{{UNIT}};'
-			    ],
-			    'condition' => [
-				    'eael_ext_table_of_content_list_style' => 'bar',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_indicator_size',
+            [
+                'label' => __('Indicator Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 20,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content_list_style' => 'bar',
+                ],
+            ]
+        );
 
-	    $element->add_control(
-		    'eael_ext_toc_indicator_position',
-		    [
-			    'label' => __('Indicator Position', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => -100,
-					    'max' => 100,
-					    'step' => 1,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 0,
-			    ],
-			    'selectors' => [
+        $element->add_control(
+            'eael_ext_toc_indicator_position',
+            [
+                'label' => __('Indicator Position', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => -100,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0,
+                ],
+                'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before' => 'margin-top: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'margin-top: {{SIZE}}{{UNIT}};'
-			    ],
-			    'condition' => [
-				    'eael_ext_table_of_content_list_style!' => 'none',
-			    ],
-		    ]
-	    );
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'margin-top: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content_list_style!' => 'none',
+                ],
+            ]
+        );
 
         $element->add_group_control(
             Group_Control_Typography::get_type(),
@@ -650,8 +650,9 @@ class Table_of_Content
                 'default' => '#707070',
                 'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:before' => 'background-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li a' => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-number li:before' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-bullet li:before' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li a' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -672,7 +673,8 @@ class Table_of_Content
                 'default' => '#ff7d50',
                 'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover:before' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-number li:hover:before' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-bullet li:hover:before' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a:before' => 'border-bottom-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li:hover > a:after' => 'background-color: {{VALUE}}',
@@ -697,12 +699,14 @@ class Table_of_Content
                 'default' => '#ff7d50',
                 'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active:before' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-active:before' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-active:before' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before' => 'border-bottom-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent:before' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-parent:before' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-parent:before' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a' => 'color: {{VALUE}}',
                 ],
             ]
