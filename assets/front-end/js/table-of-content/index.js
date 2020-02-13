@@ -11,12 +11,12 @@
 			}
 			var mainSelector = document.querySelector(selector),
 				allSupportTag = Array.prototype.slice.call(mainSelector.querySelectorAll(supportTag)),
-				c = 0;
+				listIndex = 0;
 
 			allSupportTag.forEach(function(el) {
-				el.id = c + "-" + eael_build_id();
+				el.id = listIndex + "-" + eael_build_id();
 				el.classList.add("eael-heading-content");
-				c++;
+				listIndex++;
 			});
 			eael_list_hierarchy(selector, supportTag);
 			var firstChild = $("ul.eael-toc-list > li");
@@ -35,15 +35,17 @@
 		 */
 		function eael_list_hierarchy(selector, supportTag) {
 			var tagList = supportTag;
+			var parentLevel = '';
 			var listId = document.getElementById("eael-toc-list");
-			var mainContent = document.querySelector(selector);
+			var mainContent = document.querySelector(selector),
 
-			(allHeadings = mainContent.querySelectorAll(tagList)),
-				(baseTag = parentLevel = tagList
+			allHeadings = mainContent.querySelectorAll(tagList),
+				baseTag = parentLevel = tagList
 					.trim()
 					.split(",")[0]
-					.substr(1, 1)),
-				(ListNode = listId);
+					.substr(1, 1),
+				ListNode = listId;
+
 			listId.innerHTML = "";
 			if (allHeadings.length > 0) {
 				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
@@ -93,7 +95,7 @@
 					liNode.setAttribute("itemprop", "itemListElement");
 				}
 
-				Linkid = "#" + i + "-" + eael_build_id();
+				var Linkid = "#" + i + "-" + eael_build_id();
 				anchorTag.className = "eael-toc-link";
 				anchorTag.setAttribute("itemprop", "item");
 				anchorTag.setAttribute("href", Linkid);

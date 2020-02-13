@@ -194,7 +194,7 @@ class Table_of_Content
 			    'size_units' => ['px'],
 			    'range' => [
 				    'px' => [
-					    'min' => 200,
+					    'min' => 0,
 					    'max' => 2000,
 					    'step' => 10,
 				    ],
@@ -217,7 +217,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 50,
+                        'min' => 0,
                         'max' => 2000,
                         'step' => 10,
                     ],
@@ -304,7 +304,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 8,
+                        'min' => 0,
                         'max' => 50,
                         'step' => 1,
                     ],
@@ -380,7 +380,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 5,
+                        'min' => 0,
                         'max' => 50,
                         'step' => 1,
                     ],
@@ -602,7 +602,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 1,
+                        'min' => 0,
                         'max' => 100,
                         'step' => 1,
                     ],
@@ -745,7 +745,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 8,
+                        'min' => 0,
                         'max' => 50,
                         'step' => 1,
                     ],
@@ -771,7 +771,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 1,
+                        'min' => 0,
                         'max' => 20,
                         'step' => 1,
                     ],
