@@ -42,21 +42,26 @@ html {
 		}
 
 		.eael-toc-button {
+			position: relative;
 			display: inline-block;
 			font-size: 80% !important;
 			font-weight: 400;
 			text-align: center;
 			text-decoration: none;
 			text-transform: none;
-			transform-origin: left;
 			color: #fff;
 			background: #ff7d50;
 			padding: 10px 20px;
 			border-radius: 3px;
 			border: none;
-			transform: translate(21px, 1px) rotate(90deg);
+			transform: rotate(90deg);
+			transform-origin: bottom left;
 			cursor: pointer;
-			position: relative;
+
+			&:focus {
+				outline: none;
+			}
+
 			i {
 				margin-right: 10px;
 			}
@@ -92,6 +97,7 @@ html {
 	}
 
 	.eael-toc-header {
+		position: relative;
 		background: #ff7d50;
 		padding: 12px 30px;
 
