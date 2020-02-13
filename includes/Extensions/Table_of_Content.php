@@ -572,6 +572,58 @@ class Table_of_Content
             ]
         );
 
+	    $element->add_control(
+		    'eael_ext_toc_indicator_size',
+		    [
+			    'label' => __('Indicator Size', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 50,
+					    'max' => 2000,
+					    'step' => 10,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 200,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content_list_style!' => 'none',
+			    ],
+		    ]
+	    );
+
+	    $element->add_control(
+		    'eael_ext_toc_indicator_position',
+		    [
+			    'label' => __('Indicator Position', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 50,
+					    'max' => 2000,
+					    'step' => 10,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 200,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content_list_style!' => 'none',
+			    ],
+		    ]
+	    );
+
         $element->add_group_control(
             Group_Control_Typography::get_type(),
             [
