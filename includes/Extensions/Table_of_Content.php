@@ -308,7 +308,7 @@ class Table_of_Content
 			    'size_units' => ['px'],
 			    'range' => [
 				    'px' => [
-					    'min' => -8,
+					    'min' => -50,
 					    'max' => 50,
 					    'step' => 1,
 				    ],
@@ -580,20 +580,20 @@ class Table_of_Content
 			    'size_units' => ['px'],
 			    'range' => [
 				    'px' => [
-					    'min' => 50,
-					    'max' => 2000,
-					    'step' => 10,
+					    'min' => 1,
+					    'max' => 100,
+					    'step' => 1,
 				    ],
 			    ],
 			    'default' => [
 				    'unit' => 'px',
-				    'size' => 200,
+				    'size' => 20,
 			    ],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'height: {{SIZE}}{{UNIT}};'
 			    ],
 			    'condition' => [
-				    'eael_ext_table_of_content_list_style!' => 'none',
+				    'eael_ext_table_of_content_list_style' => 'bar',
 			    ],
 		    ]
 	    );
@@ -606,17 +606,18 @@ class Table_of_Content
 			    'size_units' => ['px'],
 			    'range' => [
 				    'px' => [
-					    'min' => 50,
-					    'max' => 2000,
-					    'step' => 10,
+					    'min' => -100,
+					    'max' => 100,
+					    'step' => 1,
 				    ],
 			    ],
 			    'default' => [
 				    'unit' => 'px',
-				    'size' => 200,
+				    'size' => 0,
 			    ],
 			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before' => 'margin-top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'margin-top: {{SIZE}}{{UNIT}};'
 			    ],
 			    'condition' => [
 				    'eael_ext_table_of_content_list_style!' => 'none',
@@ -703,8 +704,6 @@ class Table_of_Content
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent:before' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a' => 'color: {{VALUE}}',
-                    // '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:before' => 'border-bottom-color: {{VALUE}}',
-                    // '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:after' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
