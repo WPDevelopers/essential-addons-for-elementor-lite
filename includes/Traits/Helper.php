@@ -1909,17 +1909,19 @@ trait Helper
      */
     public function eael_toc_global_css( $page_settings_model ,$global_settings ){
 
-        $eael_toc = $global_settings['eael_ext_table_of_content'];
-        $toc_list_color_active      = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
-        $toc_list_separator_style   = $eael_toc['eael_ext_table_of_content_list_separator_style'];
-		$header_padding = $eael_toc['eael_ext_toc_header_padding'];
-		$body_padding = $eael_toc['eael_ext_toc_body_padding'];
-        $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography',$eael_toc);
-        $list_typography   = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal',$eael_toc);
-        $box_shadow   = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
-        $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
-		$bullet_size = $eael_toc['eael_ext_toc_box_list_bullet_size']['size'];
-		$top_position = $eael_toc['eael_ext_toc_box_list_top_position']['size'];
+	    $eael_toc = $global_settings['eael_ext_table_of_content'];
+	    $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
+	    $toc_list_separator_style = $eael_toc['eael_ext_table_of_content_list_separator_style'];
+	    $header_padding = $eael_toc['eael_ext_toc_header_padding'];
+	    $body_padding = $eael_toc['eael_ext_toc_body_padding'];
+	    $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography', $eael_toc);
+	    $list_typography = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal', $eael_toc);
+	    $box_shadow = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
+	    $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
+	    $bullet_size = $eael_toc['eael_ext_toc_box_list_bullet_size']['size'];
+	    $top_position = $eael_toc['eael_ext_toc_box_list_top_position']['size'];
+	    $indicator_size = $eael_toc['eael_ext_toc_indicator_size']['size'];
+	    $indicator_position = $eael_toc['eael_ext_toc_indicator_position']['size'];
 
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
@@ -1965,6 +1967,10 @@ trait Helper
             .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li a
             {color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;}
             
+            .eael-toc-global .eael-toc-body .eael-toc-list li:before {
+                background-color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
+            }
+            
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover,
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a
             {color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important; }
@@ -1973,22 +1979,24 @@ trait Helper
                 border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
             }
             
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li:hover > a:after {
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:after,
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover:before {
                 background-color:{$eael_toc['eael_ext_table_of_list_hover_color']};
             }
             
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active,
-            .eael-toc-global.eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-active > a,
-            .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent,
-            .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
             {color:$toc_list_color_active !important;}
             
-            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before,
-            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:before
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before
             {border-bottom-color:$toc_list_color_active !important;}
             
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after,
-            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:after
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent:before
             {background-color:$toc_list_color_active !important;}
             
             .eael-toc-global ul.eael-toc-list > li
@@ -1998,6 +2006,15 @@ trait Helper
             }
             .eael-toc.eael-toc-global .eael-toc-body ul.eael-toc-list li:before {
                 $list_typography
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
+                height:{$indicator_size}px;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
+                margin-top:{$indicator_position}px;
             }
             
             
