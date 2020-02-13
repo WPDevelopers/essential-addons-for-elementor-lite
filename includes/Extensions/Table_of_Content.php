@@ -651,8 +651,8 @@ class Table_of_Content
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent:before' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:before' => 'border-bottom-color: {{VALUE}}',
-                    '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:after' => 'background-color: {{VALUE}}',
+                    // '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:before' => 'border-bottom-color: {{VALUE}}',
+                    // '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list li.eael-highlight-parent > a:after' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
