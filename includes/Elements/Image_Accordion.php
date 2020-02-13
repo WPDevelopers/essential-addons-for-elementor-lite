@@ -325,11 +325,11 @@ class Image_Accordion extends Widget_Base
         if (!empty($settings['eael_img_accordions'])) {
             echo '<div ' . $this->get_render_attribute_string('eael-image-accordion') . ' id="eael-img-accordion-' . $this->get_id() . '">';
             foreach ($settings['eael_img_accordions'] as $img_accordion) {
-                $eael_accordion_link = $img_accordion['eael_accordion_title_link']['url'];
+                $eael_accordion_link = ('#' === $img_accordion['eael_accordion_title_link']['url']) ? '#/' : $img_accordion['eael_accordion_title_link']['url'];
                 $target = $img_accordion['eael_accordion_title_link']['is_external'] ? 'target="_blank"' : '';
                 $nofollow = $img_accordion['eael_accordion_title_link']['nofollow'] ? 'rel="nofollow"' : '';
 
-                echo '<a class="abcd" href="' . esc_url($eael_accordion_link) . '" ' . $target . ' ' . $nofollow . ' style="background-image: url(' . esc_url($img_accordion['eael_accordion_bg']['url']) . ');">
+                echo '<a href="' . esc_url($eael_accordion_link) . '" ' . $target . ' ' . $nofollow . ' style="background-image: url(' . esc_url($img_accordion['eael_accordion_bg']['url']) . ');">
 		            <div class="overlay">
 		              <div class="overlay-inner">
 		                <h2>' . $img_accordion['eael_accordion_tittle'] . '</h2>
