@@ -292,7 +292,7 @@ trait Helper
         );
 
         if ('eael-post-grid' === $this->get_name()) {
-            $this->add_control(
+            $this->add_responsive_control(
                 'eael_post_grid_columns',
                 [
                     'label' => esc_html__('Number of Columns', 'essential-addons-for-elementor-lite'),
