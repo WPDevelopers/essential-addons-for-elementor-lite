@@ -1,115 +1,4 @@
 
-/*------------------------------*/
-/* 31. Advance Accordion
-/*------------------------------*/
-.eael-adv-accordion {
-  width: auto;
-  height: auto;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-          align-items: center;
-  cursor: pointer;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-  z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-  z-index: 10;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.fa-accordion-icon {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
-  display: none;
-  border: 1px solid #eee;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
-  display: block;
-}
-
-@-webkit-keyframes rotate-90 {
-  0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-  100% {
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-  }
-}
-
-@keyframes rotate-90 {
-  0% {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-  100% {
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-  }
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-  }
-}
-
 /*----------------------------*/
 /* 30. Advance Tabs
 /*----------------------------*/
@@ -313,6 +202,117 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
+  }
+}
+
+/*------------------------------*/
+/* 31. Advance Accordion
+/*------------------------------*/
+.eael-adv-accordion {
+  width: auto;
+  height: auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  z-index: 10;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  z-index: 10;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.fa-accordion-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
+  display: none;
+  border: 1px solid #eee;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
+  margin: 0;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
+  display: block;
+}
+
+@-webkit-keyframes rotate-90 {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+}
+
+@keyframes rotate-90 {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -8059,23 +8059,26 @@ html {
           transform: translate(21px, 178px) rotate(-90deg);
 }
 .eael-toc.collapsed .eael-toc-button {
+  position: relative;
   display: inline-block;
   font-size: 80% !important;
   font-weight: 400;
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  -webkit-transform-origin: left;
-          transform-origin: left;
   color: #fff;
   background: #ff7d50;
   padding: 10px 20px;
   border-radius: 3px;
   border: none;
-  -webkit-transform: translate(21px, 1px) rotate(90deg);
-          transform: translate(21px, 1px) rotate(90deg);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
   cursor: pointer;
-  position: relative;
+}
+.eael-toc.collapsed .eael-toc-button:focus {
+  outline: none;
 }
 .eael-toc.collapsed .eael-toc-button i {
   margin-right: 10px;
@@ -8104,6 +8107,7 @@ html {
   bottom: 25vh !important;
 }
 .eael-toc .eael-toc-header {
+  position: relative;
   background: #ff7d50;
   padding: 12px 30px;
 }
