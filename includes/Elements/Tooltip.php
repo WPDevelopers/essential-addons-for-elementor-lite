@@ -676,7 +676,7 @@ class Tooltip extends Widget_Base {
 	?>
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>
-			<<?php echo esc_attr( $settings['eael_tooltip_content_tag'] ); ?> class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><?php echo esc_html__( $settings['eael_tooltip_content'], 'essential-addons-for-elementor-lite'); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_attr( $settings['eael_tooltip_content_tag'] ); ?>>
+			<<?php echo esc_attr( $settings['eael_tooltip_content_tag'] ); ?> class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?><?php echo wp_kses_post($settings['eael_tooltip_content']); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_attr( $settings['eael_tooltip_content_tag'] ); ?>>
   			<span class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
 			<span class="eael-tooltip-content"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a href="<?php echo esc_url( $settings['eael_tooltip_link']['url'] ); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> ><?php endif; ?>

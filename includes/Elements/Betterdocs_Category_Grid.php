@@ -485,7 +485,6 @@ class Betterdocs_Category_Grid extends Widget_Base
         if( ! defined('BETTERDOCS_URL') ) return;
         $settings = $this->get_settings_for_display();
         $shortcode  = sprintf('[betterdocs_category_grid]', apply_filters('eael_betterdocs_category_grid_params', []));
-
         echo do_shortcode( shortcode_unautop( $shortcode ) );
         $this->load_js_on_editor();
     }
@@ -501,7 +500,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                     if (masonryGrid.length) {
                         var columnPerGrid = masonryGrid.attr('data-column'),
                             masonryItem = $(".betterdocs-categories-wrap.layout-masonry .docs-single-cat-wrap"),
-                            doc_page_column_space = <?php echo get_theme_mod('betterdocs_doc_page_column_space'); ?>,
+                            doc_page_column_space = '<?php echo get_theme_mod('betterdocs_doc_page_column_space'); ?>',
                             total_margin = columnPerGrid * doc_page_column_space;
 
                         masonryItem.css("width", "calc((100% - "+total_margin+"px) / "+parseInt(columnPerGrid)+")");
