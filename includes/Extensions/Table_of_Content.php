@@ -120,7 +120,6 @@ class Table_of_Content
                 'multiple' => true,
                 'label_block' => true,
                 'default' => [
-                    'h1',
                     'h2',
                     'h3',
                     'h4',
