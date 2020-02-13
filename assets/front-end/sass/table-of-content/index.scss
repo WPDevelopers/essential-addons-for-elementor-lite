@@ -37,7 +37,9 @@ html {
 
 		&.eael-bottom-to-top {
 			.eael-toc-button {
-				transform: translate(21px, 178px) rotate(-90deg);
+				transform: rotate(-90deg);
+				transform-origin: top left;
+				margin-top: 100%;
 			}
 		}
 
@@ -73,10 +75,6 @@ html {
 
 		&.collapsed {
 			width: inherit !important;
-
-			&.eael-sticky {
-				top: 50%;
-			}
 		}
 
 		.eael-toc-close {
@@ -85,14 +83,16 @@ html {
 
 		&.eael-bottom-to-top {
 			.eael-toc-button {
-				transform: translate(-21px, 20px) rotate(-90deg);
+				transform: rotate(-90deg);
+				transform-origin: bottom right;
+				margin-top: -100%;
 			}
 		}
 
 		.eael-toc-button {
-			transform: translate(-21px, 100px) rotate(90deg);
-			transform-origin: right;
-			bottom: 25vh !important;
+			transform: rotate(90deg);
+			transform-origin: top right;
+			margin-top: 100%;
 		}
 	}
 
