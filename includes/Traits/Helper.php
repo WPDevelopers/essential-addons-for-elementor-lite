@@ -1930,6 +1930,10 @@ trait Helper
                 background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};
             }
             
+            .eael-toc-global {
+                z-index:{$eael_toc['eael_ext_toc_sticky_z_index']['size']};
+            }
+            
             .eael-toc-global.eael-sticky {
                 top:{$eael_toc['eael_ext_toc_sticky_offset']['size']};
             }

@@ -194,7 +194,7 @@ class Table_of_Content
 			    'size_units' => ['px'],
 			    'range' => [
 				    'px' => [
-					    'min' => 0,
+					    'min' => 5,
 					    'max' => 2000,
 					    'step' => 10,
 				    ],
@@ -217,7 +217,7 @@ class Table_of_Content
                 'size_units' => ['px'],
                 'range' => [
                     'px' => [
-                        'min' => 0,
+                        'min' => 5,
                         'max' => 2000,
                         'step' => 10,
                     ],
@@ -234,6 +234,32 @@ class Table_of_Content
                 ],
             ]
         );
+
+	    $element->add_control(
+		    'eael_ext_toc_sticky_z_index',
+		    [
+			    'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SLIDER,
+			    'size_units' => ['px'],
+			    'range' => [
+				    'px' => [
+					    'min' => 0,
+					    'max' => 9999,
+					    'step' => 10,
+				    ],
+			    ],
+			    'default' => [
+				    'unit' => 'px',
+				    'size' => 9999,
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-toc' => 'z-index: {{SIZE}}',
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content' => 'yes',
+			    ],
+		    ]
+	    );
 
         $element->add_control(
             'eael_ext_toc_ad_warning_text',
