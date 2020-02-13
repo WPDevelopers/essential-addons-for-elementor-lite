@@ -1600,7 +1600,7 @@ trait Helper
             $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
         }
 
-        $html = $class::__render_template($args, $settings);
+        $html = $class::render_template_($args, $settings);
 
         echo $html;
         wp_die();
