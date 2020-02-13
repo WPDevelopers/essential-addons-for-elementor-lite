@@ -209,7 +209,7 @@
 			toc_style_class += pageSetting.eael_ext_toc_list_icon === "number" ? " eael-toc-number" : " eael-toc-bullet";
 
 			return (
-				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +
+				'<div style="position: fixed;top:"'+pageSetting.eael_ext_toc_sticky_offset+'"px" id="eael-toc" class="eael-toc eael-sticky eael-toc-disable ' +
 				el_class +
 				'">' +
 				'<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">' +

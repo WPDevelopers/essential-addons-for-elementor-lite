@@ -227,7 +227,7 @@ class Table_of_Content
                     'size' => 200,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-toc.eael-sticky' => 'top: {{SIZE}}{{UNIT}} !important;',
                 ],
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
