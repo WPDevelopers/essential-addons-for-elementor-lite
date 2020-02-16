@@ -181,7 +181,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 3.8.0 - 10/02/2020 =
+= 3.8.0 - 16/02/2020 =
 - Added: Table of Content global extension
 - Added: Event Calendar element
 - Fixed: Filterable Gallery | magnific popup background goes to top when closed
