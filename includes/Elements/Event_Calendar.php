@@ -1038,6 +1038,7 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
