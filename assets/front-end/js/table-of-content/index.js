@@ -223,17 +223,17 @@
 			);
 		}
 
-		jQuery(window).on("elementor/frontend/init", function() {
-			var intSupportTag = $("#eael-toc").data("eaeltoctag");
-			if (intSupportTag !== "") {
-				eael_toc_content(eael_toc_check_content(), intSupportTag);
-			}
-		});
+
+		var intSupportTag = $("#eael-toc").data("eaeltoctag");
+		if (intSupportTag !== "") {
+			eael_toc_content(eael_toc_check_content(), intSupportTag);
+		}
+
 
 		//editor mode
 		if (isEditMode) {
 
-			elementorFrontend.hooks.addAction('frontend/element_ready/section', function ($scope, $) {
+			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
 				var exist = $('#eael-toc #eael-toc-list li');
 				if(exist.length<1){
 					var $settings = elementor.settings.page.getSettings();
