@@ -1,8 +1,6 @@
 .eael-fluent-form-wrapper label.ff-el-form-check-label {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
 }
 .eael-fluent-form-wrapper label.ff-el-form-check-label input {
   margin-right: 5px;
@@ -21,12 +19,9 @@
 .eael-fluentform-form-button-center .ff-el-group.ff-text-right .ff-btn-submit,
 .eael-fluentform-form-button-center .ff-el-group .ff-btn-submit {
   margin: 0 auto;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .eael-fluentform-form-button-right .ff-el-group.ff-text-left .ff-btn-submit,
@@ -71,11 +66,8 @@
 }
 
 .ff-el-progress-bar {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: end;
-          justify-content: flex-end;
+  align-items: center;
+  justify-content: flex-end;
   height: 100%;
 }

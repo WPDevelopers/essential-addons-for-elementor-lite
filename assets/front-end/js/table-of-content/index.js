@@ -6,6 +6,7 @@
 		 * @param supportTag
 		 */
 		function eael_toc_content(selector, supportTag) {
+
 			if (selector === null || supportTag === undefined) {
 				return null;
 			}
@@ -45,7 +46,6 @@
 					.split(",")[0]
 					.substr(1, 1),
 				ListNode = listId;
-
 			listId.innerHTML = "";
 			if (allHeadings.length > 0) {
 				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
@@ -106,10 +106,7 @@
 			}
 		}
 
-		var intSupportTag = $("#eael-toc").data("eaeltoctag");
-		if (intSupportTag !== "") {
-			eael_toc_content(eael_toc_check_content(), intSupportTag);
-		}
+
 
 		// expand collapse
 		$(document).on("click", "ul.eael-toc-list a", function(e) {
@@ -154,7 +151,7 @@
 				return;
 			}
 			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
-			if (window.pageYOffset >= stickyScroll) {
+			if (window.pageYOffset >= stickyScroll && !eaelToc.classList.contains('eael-toc-disable')) {
 				eaelToc.classList.add("eael-sticky");
 			} else {
 				eaelToc.classList.remove("eael-sticky");
@@ -202,7 +199,6 @@
 			var pageSetting = $settings.settings,
 				title = pageSetting.eael_ext_toc_title,
 				toc_style_class = "eael-toc-list eael-toc-list-" + pageSetting.eael_ext_table_of_content_list_style,
-				support_tag = pageSetting.eael_ext_toc_supported_heading_tag.join(", "),
 				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
 				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
 			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
@@ -227,8 +223,24 @@
 			);
 		}
 
+		jQuery(window).on("elementor/frontend/init", function() {
+			var intSupportTag = $("#eael-toc").data("eaeltoctag");
+			if (intSupportTag !== "") {
+				eael_toc_content(eael_toc_check_content(), intSupportTag);
+			}
+		});
+
 		//editor mode
 		if (isEditMode) {
+
+			elementorFrontend.hooks.addAction('frontend/element_ready/section', function ($scope, $) {
+				var exist = $('#eael-toc #eael-toc-list li');
+				if(exist.length<1){
+					var $settings = elementor.settings.page.getSettings();
+					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
+				}
+			});
+
 			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function(newValue) {
 				var tocGlobal = $(".eael-toc-global");
 				if (tocGlobal.length > 0) {
