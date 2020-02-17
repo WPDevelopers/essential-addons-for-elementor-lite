@@ -458,15 +458,27 @@
 }
 /*--- Page Builder Related Style ---*/
 .eael-pricing-content-align-center .eael-pricing {
-  text-align: center !important;
+  text-align: center;
 }
 
 .eael-pricing-content-align-left .eael-pricing {
-  text-align: left !important;
+  text-align: left;
 }
 
 .eael-pricing-content-align-right .eael-pricing {
-  text-align: right !important;
+  text-align: right;
+}
+
+.eael-pricing-content-align-center .eael-pricing.style-4 {
+  text-align: center;
+}
+
+.eael-pricing-content-align-left .eael-pricing.style-4 {
+  text-align: left;
+}
+
+.eael-pricing-content-align-right .eael-pricing.style-4 {
+  text-align: right;
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-2 .eael-pricing-item .price-tag {
