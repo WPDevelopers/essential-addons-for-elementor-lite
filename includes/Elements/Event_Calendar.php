@@ -360,6 +360,15 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_calendar_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view-container .fc-view > table',
+            ]
+        );
+
         $this->add_responsive_control(
             'calendar_inside',
             [
@@ -642,7 +651,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'days_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span',
+                'selector' => '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span,{{WRAPPER}} .fc-listWeek-view .fc-list-table .fc-widget-header span',
             ]
         );
 
@@ -653,6 +662,7 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .fc-row table thead:first-child tr:first-child th > span' => 'color: {{VALUE}};',
+
                 ],
             ]
         );
@@ -697,32 +707,40 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'days_view_settings',
+        $this->end_controls_section();
+
+        /**
+         * Tab: Style => Panel: Time
+         * -----------------------------------------------
+         */
+        $this->start_controls_section(
+            'calendar_week_time',
             [
-                'label' => __('Day View', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label' => __('Time', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'time_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr>td span, {{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr>td span ,{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-slats table tbody tr>td span ,{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-slats table tbody tr>td span',
             ]
         );
 
         $this->add_control(
-            'days_row_odd_color',
+            'time_color',
             [
-                'label' => __('Odd row Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(odd) td:not(.fc-axis)' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'days_row_even_color',
-            [
-                'label' => __('Even row Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-agendaDay-view .fc-slats table tr:nth-child(even) td:not(.fc-axis)' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-bg table tbody tr>td span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-bg table tbody tr>td span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridWeek-view .fc-slats table tbody tr>td span' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .fc-unthemed .fc-timeGridDay-view .fc-slats table tbody tr>td span' => 'color: {{VALUE}};',
+
                 ],
             ]
         );
@@ -859,6 +877,7 @@ class Event_Calendar extends Widget_Base
             [
                 'type' => Controls_Manager::COLOR,
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'default' => '#1111e1',
                 'selectors' => [
                     '{{WRAPPER}} .fc-today .fc-day-number' => 'color: {{VALUE}}',
                 ],
@@ -878,6 +897,95 @@ class Event_Calendar extends Widget_Base
 
         $this->end_controls_section();
 
+
+        /**
+         * Tab: Style => Panel: List
+         * -----------------------------------------------
+         */
+        $this->start_controls_section(
+            'calendar_list_view',
+            [
+                'label' => __('List view', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_list_view_header_heading',
+            [
+                'label' => __('Header', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'list_row_header_color',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-widget-header span' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'list_header_background_color',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#f1edf8',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-heading td.fc-widget-header' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_list_view_body_heading',
+            [
+                'label' => __('Body', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'list_element_text_color',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-listWeek-view .fc-list-table .fc-list-item' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'list_element_even_color',
+            [
+                'label' => __('Even row Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:nth-child(even) td' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'list_element_odd_color',
+            [
+                'label' => __('Odd row Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-wrapper .fc-view.fc-listWeek-view .fc-list-table tr.fc-list-item:nth-child(odd) td' => 'background-color: {{VALUE}};',
+
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         $this->start_controls_section(
             'eaelec_event_section',
             [
@@ -891,7 +999,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .fc-content span.fc-title',
+                'selector' => '{{WRAPPER}} .fc-content span.fc-title,{{WRAPPER}} .eael-event-calendar-wrapper .fc-list-table .fc-list-item td',
             ]
         );
 
@@ -930,6 +1038,7 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1019,11 +1128,10 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'event_popup_content_color',
             [
-                'label' => __('Date Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-start' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eaelec-modal-header span.eaelec-event-date-end' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
                 ],
             ]
         );

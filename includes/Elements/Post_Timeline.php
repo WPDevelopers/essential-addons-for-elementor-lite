@@ -336,7 +336,7 @@ class Post_Timeline extends Widget_Base
 
         echo '<div ' . $this->get_render_attribute_string('eael_post_timeline_wrapper') . '>
 		    <div ' . $this->get_render_attribute_string('eael_post_timeline') . '>
-				' . self::__render_template($args, $settings) . '
+				' . self::render_template_($args, $settings) . '
 		    </div>
 		</div>';
 

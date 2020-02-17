@@ -1395,504 +1395,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-/*!
- * imagesLoaded PACKAGED v4.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-/**
- * EvEmitter v1.1.0
- * Lil' event emitter
- * MIT License
- */
-
-/* jshint unused: true, undef: true, strict: true */
-
-( function( global, factory ) {
-  // universal module definition
-  /* jshint strict: false */ /* globals define, module, window */
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD - RequireJS
-    define( 'ev-emitter/ev-emitter',factory );
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory();
-  } else {
-    // Browser globals
-    global.EvEmitter = factory();
-  }
-
-}( typeof window != 'undefined' ? window : this, function() {
-
-
-
-function EvEmitter() {}
-
-var proto = EvEmitter.prototype;
-
-proto.on = function( eventName, listener ) {
-  if ( !eventName || !listener ) {
-    return;
-  }
-  // set events hash
-  var events = this._events = this._events || {};
-  // set listeners array
-  var listeners = events[ eventName ] = events[ eventName ] || [];
-  // only add once
-  if ( listeners.indexOf( listener ) == -1 ) {
-    listeners.push( listener );
-  }
-
-  return this;
-};
-
-proto.once = function( eventName, listener ) {
-  if ( !eventName || !listener ) {
-    return;
-  }
-  // add event
-  this.on( eventName, listener );
-  // set once flag
-  // set onceEvents hash
-  var onceEvents = this._onceEvents = this._onceEvents || {};
-  // set onceListeners object
-  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
-  // set flag
-  onceListeners[ listener ] = true;
-
-  return this;
-};
-
-proto.off = function( eventName, listener ) {
-  var listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) {
-    return;
-  }
-  var index = listeners.indexOf( listener );
-  if ( index != -1 ) {
-    listeners.splice( index, 1 );
-  }
-
-  return this;
-};
-
-proto.emitEvent = function( eventName, args ) {
-  var listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) {
-    return;
-  }
-  // copy over to avoid interference if .off() in listener
-  listeners = listeners.slice(0);
-  args = args || [];
-  // once stuff
-  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
-
-  for ( var i=0; i < listeners.length; i++ ) {
-    var listener = listeners[i]
-    var isOnce = onceListeners && onceListeners[ listener ];
-    if ( isOnce ) {
-      // remove listener
-      // remove before trigger to prevent recursion
-      this.off( eventName, listener );
-      // unset once flag
-      delete onceListeners[ listener ];
-    }
-    // trigger listener
-    listener.apply( this, args );
-  }
-
-  return this;
-};
-
-proto.allOff = function() {
-  delete this._events;
-  delete this._onceEvents;
-};
-
-return EvEmitter;
-
-}));
-
-/*!
- * imagesLoaded v4.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-( function( window, factory ) { 'use strict';
-  // universal module definition
-
-  /*global define: false, module: false, require: false */
-
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD
-    define( [
-      'ev-emitter/ev-emitter'
-    ], function( EvEmitter ) {
-      return factory( window, EvEmitter );
-    });
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS
-    module.exports = factory(
-      window,
-      require('ev-emitter')
-    );
-  } else {
-    // browser global
-    window.imagesLoaded = factory(
-      window,
-      window.EvEmitter
-    );
-  }
-
-})( typeof window !== 'undefined' ? window : this,
-
-// --------------------------  factory -------------------------- //
-
-function factory( window, EvEmitter ) {
-
-
-
-var $ = window.jQuery;
-var console = window.console;
-
-// -------------------------- helpers -------------------------- //
-
-// extend objects
-function extend( a, b ) {
-  for ( var prop in b ) {
-    a[ prop ] = b[ prop ];
-  }
-  return a;
-}
-
-var arraySlice = Array.prototype.slice;
-
-// turn element or nodeList into an array
-function makeArray( obj ) {
-  if ( Array.isArray( obj ) ) {
-    // use object if already an array
-    return obj;
-  }
-
-  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
-  if ( isArrayLike ) {
-    // convert nodeList to array
-    return arraySlice.call( obj );
-  }
-
-  // array of single index
-  return [ obj ];
-}
-
-// -------------------------- imagesLoaded -------------------------- //
-
-/**
- * @param {Array, Element, NodeList, String} elem
- * @param {Object or Function} options - if function, use as callback
- * @param {Function} onAlways - callback function
- */
-function ImagesLoaded( elem, options, onAlways ) {
-  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
-  if ( !( this instanceof ImagesLoaded ) ) {
-    return new ImagesLoaded( elem, options, onAlways );
-  }
-  // use elem as selector string
-  var queryElem = elem;
-  if ( typeof elem == 'string' ) {
-    queryElem = document.querySelectorAll( elem );
-  }
-  // bail if bad element
-  if ( !queryElem ) {
-    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
-    return;
-  }
-
-  this.elements = makeArray( queryElem );
-  this.options = extend( {}, this.options );
-  // shift arguments if no options set
-  if ( typeof options == 'function' ) {
-    onAlways = options;
-  } else {
-    extend( this.options, options );
-  }
-
-  if ( onAlways ) {
-    this.on( 'always', onAlways );
-  }
-
-  this.getImages();
-
-  if ( $ ) {
-    // add jQuery Deferred object
-    this.jqDeferred = new $.Deferred();
-  }
-
-  // HACK check async to allow time to bind listeners
-  setTimeout( this.check.bind( this ) );
-}
-
-ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
-
-ImagesLoaded.prototype.options = {};
-
-ImagesLoaded.prototype.getImages = function() {
-  this.images = [];
-
-  // filter & find items if we have an item selector
-  this.elements.forEach( this.addElementImages, this );
-};
-
-/**
- * @param {Node} element
- */
-ImagesLoaded.prototype.addElementImages = function( elem ) {
-  // filter siblings
-  if ( elem.nodeName == 'IMG' ) {
-    this.addImage( elem );
-  }
-  // get background image on element
-  if ( this.options.background === true ) {
-    this.addElementBackgroundImages( elem );
-  }
-
-  // find children
-  // no non-element nodes, #143
-  var nodeType = elem.nodeType;
-  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
-    return;
-  }
-  var childImgs = elem.querySelectorAll('img');
-  // concat childElems to filterFound array
-  for ( var i=0; i < childImgs.length; i++ ) {
-    var img = childImgs[i];
-    this.addImage( img );
-  }
-
-  // get child background images
-  if ( typeof this.options.background == 'string' ) {
-    var children = elem.querySelectorAll( this.options.background );
-    for ( i=0; i < children.length; i++ ) {
-      var child = children[i];
-      this.addElementBackgroundImages( child );
-    }
-  }
-};
-
-var elementNodeTypes = {
-  1: true,
-  9: true,
-  11: true
-};
-
-ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
-  var style = getComputedStyle( elem );
-  if ( !style ) {
-    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
-    return;
-  }
-  // get url inside url("...")
-  var reURL = /url\((['"])?(.*?)\1\)/gi;
-  var matches = reURL.exec( style.backgroundImage );
-  while ( matches !== null ) {
-    var url = matches && matches[2];
-    if ( url ) {
-      this.addBackground( url, elem );
-    }
-    matches = reURL.exec( style.backgroundImage );
-  }
-};
-
-/**
- * @param {Image} img
- */
-ImagesLoaded.prototype.addImage = function( img ) {
-  var loadingImage = new LoadingImage( img );
-  this.images.push( loadingImage );
-};
-
-ImagesLoaded.prototype.addBackground = function( url, elem ) {
-  var background = new Background( url, elem );
-  this.images.push( background );
-};
-
-ImagesLoaded.prototype.check = function() {
-  var _this = this;
-  this.progressedCount = 0;
-  this.hasAnyBroken = false;
-  // complete if no images
-  if ( !this.images.length ) {
-    this.complete();
-    return;
-  }
-
-  function onProgress( image, elem, message ) {
-    // HACK - Chrome triggers event before object properties have changed. #83
-    setTimeout( function() {
-      _this.progress( image, elem, message );
-    });
-  }
-
-  this.images.forEach( function( loadingImage ) {
-    loadingImage.once( 'progress', onProgress );
-    loadingImage.check();
-  });
-};
-
-ImagesLoaded.prototype.progress = function( image, elem, message ) {
-  this.progressedCount++;
-  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
-  // progress event
-  this.emitEvent( 'progress', [ this, image, elem ] );
-  if ( this.jqDeferred && this.jqDeferred.notify ) {
-    this.jqDeferred.notify( this, image );
-  }
-  // check if completed
-  if ( this.progressedCount == this.images.length ) {
-    this.complete();
-  }
-
-  if ( this.options.debug && console ) {
-    console.log( 'progress: ' + message, image, elem );
-  }
-};
-
-ImagesLoaded.prototype.complete = function() {
-  var eventName = this.hasAnyBroken ? 'fail' : 'done';
-  this.isComplete = true;
-  this.emitEvent( eventName, [ this ] );
-  this.emitEvent( 'always', [ this ] );
-  if ( this.jqDeferred ) {
-    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
-    this.jqDeferred[ jqMethod ]( this );
-  }
-};
-
-// --------------------------  -------------------------- //
-
-function LoadingImage( img ) {
-  this.img = img;
-}
-
-LoadingImage.prototype = Object.create( EvEmitter.prototype );
-
-LoadingImage.prototype.check = function() {
-  // If complete is true and browser supports natural sizes,
-  // try to check for image status manually.
-  var isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    // report based on naturalWidth
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    return;
-  }
-
-  // If none of the checks above matched, simulate loading on detached element.
-  this.proxyImage = new Image();
-  this.proxyImage.addEventListener( 'load', this );
-  this.proxyImage.addEventListener( 'error', this );
-  // bind to image as well for Firefox. #191
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.proxyImage.src = this.img.src;
-};
-
-LoadingImage.prototype.getIsImageComplete = function() {
-  // check for non-zero, non-undefined naturalWidth
-  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
-  return this.img.complete && this.img.naturalWidth;
-};
-
-LoadingImage.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.img, message ] );
-};
-
-// ----- events ----- //
-
-// trigger specified handler for event type
-LoadingImage.prototype.handleEvent = function( event ) {
-  var method = 'on' + event.type;
-  if ( this[ method ] ) {
-    this[ method ]( event );
-  }
-};
-
-LoadingImage.prototype.onload = function() {
-  this.confirm( true, 'onload' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.onerror = function() {
-  this.confirm( false, 'onerror' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.unbindEvents = function() {
-  this.proxyImage.removeEventListener( 'load', this );
-  this.proxyImage.removeEventListener( 'error', this );
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-// -------------------------- Background -------------------------- //
-
-function Background( url, element ) {
-  this.url = url;
-  this.element = element;
-  this.img = new Image();
-}
-
-// inherit LoadingImage prototype
-Background.prototype = Object.create( LoadingImage.prototype );
-
-Background.prototype.check = function() {
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.img.src = this.url;
-  // check if image is already complete
-  var isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    this.unbindEvents();
-  }
-};
-
-Background.prototype.unbindEvents = function() {
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-Background.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.element, message ] );
-};
-
-// -------------------------- jQuery -------------------------- //
-
-ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
-  jQuery = jQuery || window.jQuery;
-  if ( !jQuery ) {
-    return;
-  }
-  // set local variable
-  $ = jQuery;
-  // $().imagesLoaded()
-  $.fn.imagesLoaded = function( options, callback ) {
-    var instance = new ImagesLoaded( this, options, callback );
-    return instance.jqDeferred.promise( $(this) );
-  };
-};
-// try making plugin
-ImagesLoaded.makeJQueryPlugin();
-
-// --------------------------  -------------------------- //
-
-return ImagesLoaded;
-
-});
-
-
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -2500,4996 +2002,6 @@ Docs & License: https://fullcalendar.io/
             m.getUTCMilliseconds();
     }
 
-    var INTERNAL_UNITS = ['years', 'months', 'days', 'milliseconds'];
-    var PARSE_RE = /^(-?)(?:(\d+)\.)?(\d+):(\d\d)(?::(\d\d)(?:\.(\d\d\d))?)?/;
-    // Parsing and Creation
-    function createDuration(input, unit) {
-        var _a;
-        if (typeof input === 'string') {
-            return parseString(input);
-        }
-        else if (typeof input === 'object' && input) { // non-null object
-            return normalizeObject(input);
-        }
-        else if (typeof input === 'number') {
-            return normalizeObject((_a = {}, _a[unit || 'milliseconds'] = input, _a));
-        }
-        else {
-            return null;
-        }
-    }
-    function parseString(s) {
-        var m = PARSE_RE.exec(s);
-        if (m) {
-            var sign = m[1] ? -1 : 1;
-            return {
-                years: 0,
-                months: 0,
-                days: sign * (m[2] ? parseInt(m[2], 10) : 0),
-                milliseconds: sign * ((m[3] ? parseInt(m[3], 10) : 0) * 60 * 60 * 1000 + // hours
-                    (m[4] ? parseInt(m[4], 10) : 0) * 60 * 1000 + // minutes
-                    (m[5] ? parseInt(m[5], 10) : 0) * 1000 + // seconds
-                    (m[6] ? parseInt(m[6], 10) : 0) // ms
-                )
-            };
-        }
-        return null;
-    }
-    function normalizeObject(obj) {
-        return {
-            years: obj.years || obj.year || 0,
-            months: obj.months || obj.month || 0,
-            days: (obj.days || obj.day || 0) +
-                getWeeksFromInput(obj) * 7,
-            milliseconds: (obj.hours || obj.hour || 0) * 60 * 60 * 1000 + // hours
-                (obj.minutes || obj.minute || 0) * 60 * 1000 + // minutes
-                (obj.seconds || obj.second || 0) * 1000 + // seconds
-                (obj.milliseconds || obj.millisecond || obj.ms || 0) // ms
-        };
-    }
-    function getWeeksFromInput(obj) {
-        return obj.weeks || obj.week || 0;
-    }
-    // Equality
-    function durationsEqual(d0, d1) {
-        return d0.years === d1.years &&
-            d0.months === d1.months &&
-            d0.days === d1.days &&
-            d0.milliseconds === d1.milliseconds;
-    }
-    function isSingleDay(dur) {
-        return dur.years === 0 && dur.months === 0 && dur.days === 1 && dur.milliseconds === 0;
-    }
-    // Simple Math
-    function addDurations(d0, d1) {
-        return {
-            years: d0.years + d1.years,
-            months: d0.months + d1.months,
-            days: d0.days + d1.days,
-            milliseconds: d0.milliseconds + d1.milliseconds
-        };
-    }
-    function subtractDurations(d1, d0) {
-        return {
-            years: d1.years - d0.years,
-            months: d1.months - d0.months,
-            days: d1.days - d0.days,
-            milliseconds: d1.milliseconds - d0.milliseconds
-        };
-    }
-    function multiplyDuration(d, n) {
-        return {
-            years: d.years * n,
-            months: d.months * n,
-            days: d.days * n,
-            milliseconds: d.milliseconds * n
-        };
-    }
-    // Conversions
-    // "Rough" because they are based on average-case Gregorian months/years
-    function asRoughYears(dur) {
-        return asRoughDays(dur) / 365;
-    }
-    function asRoughMonths(dur) {
-        return asRoughDays(dur) / 30;
-    }
-    function asRoughDays(dur) {
-        return asRoughMs(dur) / 864e5;
-    }
-    function asRoughMinutes(dur) {
-        return asRoughMs(dur) / (1000 * 60);
-    }
-    function asRoughSeconds(dur) {
-        return asRoughMs(dur) / 1000;
-    }
-    function asRoughMs(dur) {
-        return dur.years * (365 * 864e5) +
-            dur.months * (30 * 864e5) +
-            dur.days * 864e5 +
-            dur.milliseconds;
-    }
-    // Advanced Math
-    function wholeDivideDurations(numerator, denominator) {
-        var res = null;
-        for (var i = 0; i < INTERNAL_UNITS.length; i++) {
-            var unit = INTERNAL_UNITS[i];
-            if (denominator[unit]) {
-                var localRes = numerator[unit] / denominator[unit];
-                if (!isInt(localRes) || (res !== null && res !== localRes)) {
-                    return null;
-                }
-                res = localRes;
-            }
-            else if (numerator[unit]) {
-                // needs to divide by something but can't!
-                return null;
-            }
-        }
-        return res;
-    }
-    function greatestDurationDenominator(dur, dontReturnWeeks) {
-        var ms = dur.milliseconds;
-        if (ms) {
-            if (ms % 1000 !== 0) {
-                return { unit: 'millisecond', value: ms };
-            }
-            if (ms % (1000 * 60) !== 0) {
-                return { unit: 'second', value: ms / 1000 };
-            }
-            if (ms % (1000 * 60 * 60) !== 0) {
-                return { unit: 'minute', value: ms / (1000 * 60) };
-            }
-            if (ms) {
-                return { unit: 'hour', value: ms / (1000 * 60 * 60) };
-            }
-        }
-        if (dur.days) {
-            if (!dontReturnWeeks && dur.days % 7 === 0) {
-                return { unit: 'week', value: dur.days / 7 };
-            }
-            return { unit: 'day', value: dur.days };
-        }
-        if (dur.months) {
-            return { unit: 'month', value: dur.months };
-        }
-        if (dur.years) {
-            return { unit: 'year', value: dur.years };
-        }
-        return { unit: 'millisecond', value: 0 };
-    }
-
-    /* FullCalendar-specific DOM Utilities
-    ----------------------------------------------------------------------------------------------------------------------*/
-    // Given the scrollbar widths of some other container, create borders/margins on rowEls in order to match the left
-    // and right space that was offset by the scrollbars. A 1-pixel border first, then margin beyond that.
-    function compensateScroll(rowEl, scrollbarWidths) {
-        if (scrollbarWidths.left) {
-            applyStyle(rowEl, {
-                borderLeftWidth: 1,
-                marginLeft: scrollbarWidths.left - 1
-            });
-        }
-        if (scrollbarWidths.right) {
-            applyStyle(rowEl, {
-                borderRightWidth: 1,
-                marginRight: scrollbarWidths.right - 1
-            });
-        }
-    }
-    // Undoes compensateScroll and restores all borders/margins
-    function uncompensateScroll(rowEl) {
-        applyStyle(rowEl, {
-            marginLeft: '',
-            marginRight: '',
-            borderLeftWidth: '',
-            borderRightWidth: ''
-        });
-    }
-    // Make the mouse cursor express that an event is not allowed in the current area
-    function disableCursor() {
-        document.body.classList.add('fc-not-allowed');
-    }
-    // Returns the mouse cursor to its original look
-    function enableCursor() {
-        document.body.classList.remove('fc-not-allowed');
-    }
-    // Given a total available height to fill, have `els` (essentially child rows) expand to accomodate.
-    // By default, all elements that are shorter than the recommended height are expanded uniformly, not considering
-    // any other els that are already too tall. if `shouldRedistribute` is on, it considers these tall rows and
-    // reduces the available height.
-    function distributeHeight(els, availableHeight, shouldRedistribute) {
-        // *FLOORING NOTE*: we floor in certain places because zoom can give inaccurate floating-point dimensions,
-        // and it is better to be shorter than taller, to avoid creating unnecessary scrollbars.
-        var minOffset1 = Math.floor(availableHeight / els.length); // for non-last element
-        var minOffset2 = Math.floor(availableHeight - minOffset1 * (els.length - 1)); // for last element *FLOORING NOTE*
-        var flexEls = []; // elements that are allowed to expand. array of DOM nodes
-        var flexOffsets = []; // amount of vertical space it takes up
-        var flexHeights = []; // actual css height
-        var usedHeight = 0;
-        undistributeHeight(els); // give all elements their natural height
-        // find elements that are below the recommended height (expandable).
-        // important to query for heights in a single first pass (to avoid reflow oscillation).
-        els.forEach(function (el, i) {
-            var minOffset = i === els.length - 1 ? minOffset2 : minOffset1;
-            var naturalHeight = el.getBoundingClientRect().height;
-            var naturalOffset = naturalHeight + computeVMargins(el);
-            if (naturalOffset < minOffset) {
-                flexEls.push(el);
-                flexOffsets.push(naturalOffset);
-                flexHeights.push(naturalHeight);
-            }
-            else {
-                // this element stretches past recommended height (non-expandable). mark the space as occupied.
-                usedHeight += naturalOffset;
-            }
-        });
-        // readjust the recommended height to only consider the height available to non-maxed-out rows.
-        if (shouldRedistribute) {
-            availableHeight -= usedHeight;
-            minOffset1 = Math.floor(availableHeight / flexEls.length);
-            minOffset2 = Math.floor(availableHeight - minOffset1 * (flexEls.length - 1)); // *FLOORING NOTE*
-        }
-        // assign heights to all expandable elements
-        flexEls.forEach(function (el, i) {
-            var minOffset = i === flexEls.length - 1 ? minOffset2 : minOffset1;
-            var naturalOffset = flexOffsets[i];
-            var naturalHeight = flexHeights[i];
-            var newHeight = minOffset - (naturalOffset - naturalHeight); // subtract the margin/padding
-            if (naturalOffset < minOffset) { // we check this again because redistribution might have changed things
-                el.style.height = newHeight + 'px';
-            }
-        });
-    }
-    // Undoes distrubuteHeight, restoring all els to their natural height
-    function undistributeHeight(els) {
-        els.forEach(function (el) {
-            el.style.height = '';
-        });
-    }
-    // Given `els`, a set of <td> cells, find the cell with the largest natural width and set the widths of all the
-    // cells to be that width.
-    // PREREQUISITE: if you want a cell to take up width, it needs to have a single inner element w/ display:inline
-    function matchCellWidths(els) {
-        var maxInnerWidth = 0;
-        els.forEach(function (el) {
-            var innerEl = el.firstChild; // hopefully an element
-            if (innerEl instanceof HTMLElement) {
-                var innerWidth_1 = innerEl.getBoundingClientRect().width;
-                if (innerWidth_1 > maxInnerWidth) {
-                    maxInnerWidth = innerWidth_1;
-                }
-            }
-        });
-        maxInnerWidth++; // sometimes not accurate of width the text needs to stay on one line. insurance
-        els.forEach(function (el) {
-            el.style.width = maxInnerWidth + 'px';
-        });
-        return maxInnerWidth;
-    }
-    // Given one element that resides inside another,
-    // Subtracts the height of the inner element from the outer element.
-    function subtractInnerElHeight(outerEl, innerEl) {
-        // effin' IE8/9/10/11 sometimes returns 0 for dimensions. this weird hack was the only thing that worked
-        var reflowStyleProps = {
-            position: 'relative',
-            left: -1 // ensure reflow in case the el was already relative. negative is less likely to cause new scroll
-        };
-        applyStyle(outerEl, reflowStyleProps);
-        applyStyle(innerEl, reflowStyleProps);
-        var diff = // grab the dimensions
-         outerEl.getBoundingClientRect().height -
-            innerEl.getBoundingClientRect().height;
-        // undo hack
-        var resetStyleProps = { position: '', left: '' };
-        applyStyle(outerEl, resetStyleProps);
-        applyStyle(innerEl, resetStyleProps);
-        return diff;
-    }
-    /* Selection
-    ----------------------------------------------------------------------------------------------------------------------*/
-    function preventSelection(el) {
-        el.classList.add('fc-unselectable');
-        el.addEventListener('selectstart', preventDefault);
-    }
-    function allowSelection(el) {
-        el.classList.remove('fc-unselectable');
-        el.removeEventListener('selectstart', preventDefault);
-    }
-    /* Context Menu
-    ----------------------------------------------------------------------------------------------------------------------*/
-    function preventContextMenu(el) {
-        el.addEventListener('contextmenu', preventDefault);
-    }
-    function allowContextMenu(el) {
-        el.removeEventListener('contextmenu', preventDefault);
-    }
-    /* Object Ordering by Field
-    ----------------------------------------------------------------------------------------------------------------------*/
-    function parseFieldSpecs(input) {
-        var specs = [];
-        var tokens = [];
-        var i;
-        var token;
-        if (typeof input === 'string') {
-            tokens = input.split(/\s*,\s*/);
-        }
-        else if (typeof input === 'function') {
-            tokens = [input];
-        }
-        else if (Array.isArray(input)) {
-            tokens = input;
-        }
-        for (i = 0; i < tokens.length; i++) {
-            token = tokens[i];
-            if (typeof token === 'string') {
-                specs.push(token.charAt(0) === '-' ?
-                    { field: token.substring(1), order: -1 } :
-                    { field: token, order: 1 });
-            }
-            else if (typeof token === 'function') {
-                specs.push({ func: token });
-            }
-        }
-        return specs;
-    }
-    function compareByFieldSpecs(obj0, obj1, fieldSpecs) {
-        var i;
-        var cmp;
-        for (i = 0; i < fieldSpecs.length; i++) {
-            cmp = compareByFieldSpec(obj0, obj1, fieldSpecs[i]);
-            if (cmp) {
-                return cmp;
-            }
-        }
-        return 0;
-    }
-    function compareByFieldSpec(obj0, obj1, fieldSpec) {
-        if (fieldSpec.func) {
-            return fieldSpec.func(obj0, obj1);
-        }
-        return flexibleCompare(obj0[fieldSpec.field], obj1[fieldSpec.field])
-            * (fieldSpec.order || 1);
-    }
-    function flexibleCompare(a, b) {
-        if (!a && !b) {
-            return 0;
-        }
-        if (b == null) {
-            return -1;
-        }
-        if (a == null) {
-            return 1;
-        }
-        if (typeof a === 'string' || typeof b === 'string') {
-            return String(a).localeCompare(String(b));
-        }
-        return a - b;
-    }
-    /* String Utilities
-    ----------------------------------------------------------------------------------------------------------------------*/
-    function capitaliseFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-    function padStart(val, len) {
-        var s = String(val);
-        return '000'.substr(0, len - s.length) + s;
-    }
-    /* Number Utilities
-    ----------------------------------------------------------------------------------------------------------------------*/
-    function compareNumbers(a, b) {
-        return a - b;
-    }
-    function isInt(n) {
-        return n % 1 === 0;
-    }
-    /* Weird Utilities
-    ----------------------------------------------------------------------------------------------------------------------*/
-    function applyAll(functions, thisObj, args) {
-        if (typeof functions === 'function') { // supplied a single function
-            functions = [functions];
-        }
-        if (functions) {
-            var i = void 0;
-            var ret = void 0;
-            for (i = 0; i < functions.length; i++) {
-                ret = functions[i].apply(thisObj, args) || ret;
-            }
-            return ret;
-        }
-    }
-    function firstDefined() {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        for (var i = 0; i < args.length; i++) {
-            if (args[i] !== undefined) {
-                return args[i];
-            }
-        }
-    }
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds. If `immediate` is passed, trigger the function on the
-    // leading edge, instead of the trailing.
-    // https://github.com/jashkenas/underscore/blob/1.6.0/underscore.js#L714
-    function debounce(func, wait) {
-        var timeout;
-        var args;
-        var context;
-        var timestamp;
-        var result;
-        var later = function () {
-            var last = new Date().valueOf() - timestamp;
-            if (last < wait) {
-                timeout = setTimeout(later, wait - last);
-            }
-            else {
-                timeout = null;
-                result = func.apply(context, args);
-                context = args = null;
-            }
-        };
-        return function () {
-            context = this;
-            args = arguments;
-            timestamp = new Date().valueOf();
-            if (!timeout) {
-                timeout = setTimeout(later, wait);
-            }
-            return result;
-        };
-    }
-    // Number and Boolean are only types that defaults or not computed for
-    // TODO: write more comments
-    function refineProps(rawProps, processors, defaults, leftoverProps) {
-        if (defaults === void 0) { defaults = {}; }
-        var refined = {};
-        for (var key in processors) {
-            var processor = processors[key];
-            if (rawProps[key] !== undefined) {
-                // found
-                if (processor === Function) {
-                    refined[key] = typeof rawProps[key] === 'function' ? rawProps[key] : null;
-                }
-                else if (processor) { // a refining function?
-                    refined[key] = processor(rawProps[key]);
-                }
-                else {
-                    refined[key] = rawProps[key];
-                }
-            }
-            else if (defaults[key] !== undefined) {
-                // there's an explicit default
-                refined[key] = defaults[key];
-            }
-            else {
-                // must compute a default
-                if (processor === String) {
-                    refined[key] = ''; // empty string is default for String
-                }
-                else if (!processor || processor === Number || processor === Boolean || processor === Function) {
-                    refined[key] = null; // assign null for other non-custom processor funcs
-                }
-                else {
-                    refined[key] = processor(null); // run the custom processor func
-                }
-            }
-        }
-        if (leftoverProps) {
-            for (var key in rawProps) {
-                if (processors[key] === undefined) {
-                    leftoverProps[key] = rawProps[key];
-                }
-            }
-        }
-        return refined;
-    }
-    /* Date stuff that doesn't belong in datelib core
-    ----------------------------------------------------------------------------------------------------------------------*/
-    // given a timed range, computes an all-day range that has the same exact duration,
-    // but whose start time is aligned with the start of the day.
-    function computeAlignedDayRange(timedRange) {
-        var dayCnt = Math.floor(diffDays(timedRange.start, timedRange.end)) || 1;
-        var start = startOfDay(timedRange.start);
-        var end = addDays(start, dayCnt);
-        return { start: start, end: end };
-    }
-    // given a timed range, computes an all-day range based on how for the end date bleeds into the next day
-    // TODO: give nextDayThreshold a default arg
-    function computeVisibleDayRange(timedRange, nextDayThreshold) {
-        if (nextDayThreshold === void 0) { nextDayThreshold = createDuration(0); }
-        var startDay = null;
-        var endDay = null;
-        if (timedRange.end) {
-            endDay = startOfDay(timedRange.end);
-            var endTimeMS = timedRange.end.valueOf() - endDay.valueOf(); // # of milliseconds into `endDay`
-            // If the end time is actually inclusively part of the next day and is equal to or
-            // beyond the next day threshold, adjust the end to be the exclusive end of `endDay`.
-            // Otherwise, leaving it as inclusive will cause it to exclude `endDay`.
-            if (endTimeMS && endTimeMS >= asRoughMs(nextDayThreshold)) {
-                endDay = addDays(endDay, 1);
-            }
-        }
-        if (timedRange.start) {
-            startDay = startOfDay(timedRange.start); // the beginning of the day the range starts
-            // If end is within `startDay` but not past nextDayThreshold, assign the default duration of one day.
-            if (endDay && endDay <= startDay) {
-                endDay = addDays(startDay, 1);
-            }
-        }
-        return { start: startDay, end: endDay };
-    }
-    // spans from one day into another?
-    function isMultiDayRange(range) {
-        var visibleRange = computeVisibleDayRange(range);
-        return diffDays(visibleRange.start, visibleRange.end) > 1;
-    }
-    function diffDates(date0, date1, dateEnv, largeUnit) {
-        if (largeUnit === 'year') {
-            return createDuration(dateEnv.diffWholeYears(date0, date1), 'year');
-        }
-        else if (largeUnit === 'month') {
-            return createDuration(dateEnv.diffWholeMonths(date0, date1), 'month');
-        }
-        else {
-            return diffDayAndTime(date0, date1); // returns a duration
-        }
-    }
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
-    function parseRecurring(eventInput, allDayDefault, dateEnv, recurringTypes, leftovers) {
-        for (var i = 0; i < recurringTypes.length; i++) {
-            var localLeftovers = {};
-            var parsed = recurringTypes[i].parse(eventInput, localLeftovers, dateEnv);
-            if (parsed) {
-                var allDay = localLeftovers.allDay;
-                delete localLeftovers.allDay; // remove from leftovers
-                if (allDay == null) {
-                    allDay = allDayDefault;
-                    if (allDay == null) {
-                        allDay = parsed.allDayGuess;
-                        if (allDay == null) {
-                            allDay = false;
-                        }
-                    }
-                }
-                __assign(leftovers, localLeftovers);
-                return {
-                    allDay: allDay,
-                    duration: parsed.duration,
-                    typeData: parsed.typeData,
-                    typeId: i
-                };
-            }
-        }
-        return null;
-    }
-    /*
-    Event MUST have a recurringDef
-    */
-    function expandRecurringRanges(eventDef, duration, framingRange, dateEnv, recurringTypes) {
-        var typeDef = recurringTypes[eventDef.recurringDef.typeId];
-        var markers = typeDef.expand(eventDef.recurringDef.typeData, {
-            start: dateEnv.subtract(framingRange.start, duration),
-            end: framingRange.end
-        }, dateEnv);
-        // the recurrence plugins don't guarantee that all-day events are start-of-day, so we have to
-        if (eventDef.allDay) {
-            markers = markers.map(startOfDay);
-        }
-        return markers;
-    }
-
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
-    // Merges an array of objects into a single object.
-    // The second argument allows for an array of property names who's object values will be merged together.
-    function mergeProps(propObjs, complexProps) {
-        var dest = {};
-        var i;
-        var name;
-        var complexObjs;
-        var j;
-        var val;
-        var props;
-        if (complexProps) {
-            for (i = 0; i < complexProps.length; i++) {
-                name = complexProps[i];
-                complexObjs = [];
-                // collect the trailing object values, stopping when a non-object is discovered
-                for (j = propObjs.length - 1; j >= 0; j--) {
-                    val = propObjs[j][name];
-                    if (typeof val === 'object' && val) { // non-null object
-                        complexObjs.unshift(val);
-                    }
-                    else if (val !== undefined) {
-                        dest[name] = val; // if there were no objects, this value will be used
-                        break;
-                    }
-                }
-                // if the trailing values were objects, use the merged value
-                if (complexObjs.length) {
-                    dest[name] = mergeProps(complexObjs);
-                }
-            }
-        }
-        // copy values into the destination, going from last to first
-        for (i = propObjs.length - 1; i >= 0; i--) {
-            props = propObjs[i];
-            for (name in props) {
-                if (!(name in dest)) { // if already assigned by previous props or complex props, don't reassign
-                    dest[name] = props[name];
-                }
-            }
-        }
-        return dest;
-    }
-    function filterHash(hash, func) {
-        var filtered = {};
-        for (var key in hash) {
-            if (func(hash[key], key)) {
-                filtered[key] = hash[key];
-            }
-        }
-        return filtered;
-    }
-    function mapHash(hash, func) {
-        var newHash = {};
-        for (var key in hash) {
-            newHash[key] = func(hash[key], key);
-        }
-        return newHash;
-    }
-    function arrayToHash(a) {
-        var hash = {};
-        for (var _i = 0, a_1 = a; _i < a_1.length; _i++) {
-            var item = a_1[_i];
-            hash[item] = true;
-        }
-        return hash;
-    }
-    function hashValuesToArray(obj) {
-        var a = [];
-        for (var key in obj) {
-            a.push(obj[key]);
-        }
-        return a;
-    }
-    function isPropsEqual(obj0, obj1) {
-        for (var key in obj0) {
-            if (hasOwnProperty.call(obj0, key)) {
-                if (!(key in obj1)) {
-                    return false;
-                }
-            }
-        }
-        for (var key in obj1) {
-            if (hasOwnProperty.call(obj1, key)) {
-                if (obj0[key] !== obj1[key]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    function parseEvents(rawEvents, sourceId, calendar, allowOpenRange) {
-        var eventStore = createEmptyEventStore();
-        for (var _i = 0, rawEvents_1 = rawEvents; _i < rawEvents_1.length; _i++) {
-            var rawEvent = rawEvents_1[_i];
-            var tuple = parseEvent(rawEvent, sourceId, calendar, allowOpenRange);
-            if (tuple) {
-                eventTupleToStore(tuple, eventStore);
-            }
-        }
-        return eventStore;
-    }
-    function eventTupleToStore(tuple, eventStore) {
-        if (eventStore === void 0) { eventStore = createEmptyEventStore(); }
-        eventStore.defs[tuple.def.defId] = tuple.def;
-        if (tuple.instance) {
-            eventStore.instances[tuple.instance.instanceId] = tuple.instance;
-        }
-        return eventStore;
-    }
-    function expandRecurring(eventStore, framingRange, calendar) {
-        var dateEnv = calendar.dateEnv;
-        var defs = eventStore.defs, instances = eventStore.instances;
-        // remove existing recurring instances
-        instances = filterHash(instances, function (instance) {
-            return !defs[instance.defId].recurringDef;
-        });
-        for (var defId in defs) {
-            var def = defs[defId];
-            if (def.recurringDef) {
-                var duration = def.recurringDef.duration;
-                if (!duration) {
-                    duration = def.allDay ?
-                        calendar.defaultAllDayEventDuration :
-                        calendar.defaultTimedEventDuration;
-                }
-                var starts = expandRecurringRanges(def, duration, framingRange, calendar.dateEnv, calendar.pluginSystem.hooks.recurringTypes);
-                for (var _i = 0, starts_1 = starts; _i < starts_1.length; _i++) {
-                    var start = starts_1[_i];
-                    var instance = createEventInstance(defId, {
-                        start: start,
-                        end: dateEnv.add(start, duration)
-                    });
-                    instances[instance.instanceId] = instance;
-                }
-            }
-        }
-        return { defs: defs, instances: instances };
-    }
-    // retrieves events that have the same groupId as the instance specified by `instanceId`
-    // or they are the same as the instance.
-    // why might instanceId not be in the store? an event from another calendar?
-    function getRelevantEvents(eventStore, instanceId) {
-        var instance = eventStore.instances[instanceId];
-        if (instance) {
-            var def_1 = eventStore.defs[instance.defId];
-            // get events/instances with same group
-            var newStore = filterEventStoreDefs(eventStore, function (lookDef) {
-                return isEventDefsGrouped(def_1, lookDef);
-            });
-            // add the original
-            // TODO: wish we could use eventTupleToStore or something like it
-            newStore.defs[def_1.defId] = def_1;
-            newStore.instances[instance.instanceId] = instance;
-            return newStore;
-        }
-        return createEmptyEventStore();
-    }
-    function isEventDefsGrouped(def0, def1) {
-        return Boolean(def0.groupId && def0.groupId === def1.groupId);
-    }
-    function transformRawEvents(rawEvents, eventSource, calendar) {
-        var calEachTransform = calendar.opt('eventDataTransform');
-        var sourceEachTransform = eventSource ? eventSource.eventDataTransform : null;
-        if (sourceEachTransform) {
-            rawEvents = transformEachRawEvent(rawEvents, sourceEachTransform);
-        }
-        if (calEachTransform) {
-            rawEvents = transformEachRawEvent(rawEvents, calEachTransform);
-        }
-        return rawEvents;
-    }
-    function transformEachRawEvent(rawEvents, func) {
-        var refinedEvents;
-        if (!func) {
-            refinedEvents = rawEvents;
-        }
-        else {
-            refinedEvents = [];
-            for (var _i = 0, rawEvents_2 = rawEvents; _i < rawEvents_2.length; _i++) {
-                var rawEvent = rawEvents_2[_i];
-                var refinedEvent = func(rawEvent);
-                if (refinedEvent) {
-                    refinedEvents.push(refinedEvent);
-                }
-                else if (refinedEvent == null) {
-                    refinedEvents.push(rawEvent);
-                } // if a different falsy value, do nothing
-            }
-        }
-        return refinedEvents;
-    }
-    function createEmptyEventStore() {
-        return { defs: {}, instances: {} };
-    }
-    function mergeEventStores(store0, store1) {
-        return {
-            defs: __assign({}, store0.defs, store1.defs),
-            instances: __assign({}, store0.instances, store1.instances)
-        };
-    }
-    function filterEventStoreDefs(eventStore, filterFunc) {
-        var defs = filterHash(eventStore.defs, filterFunc);
-        var instances = filterHash(eventStore.instances, function (instance) {
-            return defs[instance.defId]; // still exists?
-        });
-        return { defs: defs, instances: instances };
-    }
-
-    function parseRange(input, dateEnv) {
-        var start = null;
-        var end = null;
-        if (input.start) {
-            start = dateEnv.createMarker(input.start);
-        }
-        if (input.end) {
-            end = dateEnv.createMarker(input.end);
-        }
-        if (!start && !end) {
-            return null;
-        }
-        if (start && end && end < start) {
-            return null;
-        }
-        return { start: start, end: end };
-    }
-    // SIDE-EFFECT: will mutate ranges.
-    // Will return a new array result.
-    function invertRanges(ranges, constraintRange) {
-        var invertedRanges = [];
-        var start = constraintRange.start; // the end of the previous range. the start of the new range
-        var i;
-        var dateRange;
-        // ranges need to be in order. required for our date-walking algorithm
-        ranges.sort(compareRanges);
-        for (i = 0; i < ranges.length; i++) {
-            dateRange = ranges[i];
-            // add the span of time before the event (if there is any)
-            if (dateRange.start > start) { // compare millisecond time (skip any ambig logic)
-                invertedRanges.push({ start: start, end: dateRange.start });
-            }
-            if (dateRange.end > start) {
-                start = dateRange.end;
-            }
-        }
-        // add the span of time after the last event (if there is any)
-        if (start < constraintRange.end) { // compare millisecond time (skip any ambig logic)
-            invertedRanges.push({ start: start, end: constraintRange.end });
-        }
-        return invertedRanges;
-    }
-    function compareRanges(range0, range1) {
-        return range0.start.valueOf() - range1.start.valueOf(); // earlier ranges go first
-    }
-    function intersectRanges(range0, range1) {
-        var start = range0.start;
-        var end = range0.end;
-        var newRange = null;
-        if (range1.start !== null) {
-            if (start === null) {
-                start = range1.start;
-            }
-            else {
-                start = new Date(Math.max(start.valueOf(), range1.start.valueOf()));
-            }
-        }
-        if (range1.end != null) {
-            if (end === null) {
-                end = range1.end;
-            }
-            else {
-                end = new Date(Math.min(end.valueOf(), range1.end.valueOf()));
-            }
-        }
-        if (start === null || end === null || start < end) {
-            newRange = { start: start, end: end };
-        }
-        return newRange;
-    }
-    function rangesEqual(range0, range1) {
-        return (range0.start === null ? null : range0.start.valueOf()) === (range1.start === null ? null : range1.start.valueOf()) &&
-            (range0.end === null ? null : range0.end.valueOf()) === (range1.end === null ? null : range1.end.valueOf());
-    }
-    function rangesIntersect(range0, range1) {
-        return (range0.end === null || range1.start === null || range0.end > range1.start) &&
-            (range0.start === null || range1.end === null || range0.start < range1.end);
-    }
-    function rangeContainsRange(outerRange, innerRange) {
-        return (outerRange.start === null || (innerRange.start !== null && innerRange.start >= outerRange.start)) &&
-            (outerRange.end === null || (innerRange.end !== null && innerRange.end <= outerRange.end));
-    }
-    function rangeContainsMarker(range, date) {
-        return (range.start === null || date >= range.start) &&
-            (range.end === null || date < range.end);
-    }
-    // If the given date is not within the given range, move it inside.
-    // (If it's past the end, make it one millisecond before the end).
-    function constrainMarkerToRange(date, range) {
-        if (range.start != null && date < range.start) {
-            return range.start;
-        }
-        if (range.end != null && date >= range.end) {
-            return new Date(range.end.valueOf() - 1);
-        }
-        return date;
-    }
-
-    function removeExact(array, exactVal) {
-        var removeCnt = 0;
-        var i = 0;
-        while (i < array.length) {
-            if (array[i] === exactVal) {
-                array.splice(i, 1);
-                removeCnt++;
-            }
-            else {
-                i++;
-            }
-        }
-        return removeCnt;
-    }
-    function isArraysEqual(a0, a1) {
-        var len = a0.length;
-        var i;
-        if (len !== a1.length) { // not array? or not same length?
-            return false;
-        }
-        for (i = 0; i < len; i++) {
-            if (a0[i] !== a1[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function memoize(workerFunc) {
-        var args;
-        var res;
-        return function () {
-            if (!args || !isArraysEqual(args, arguments)) {
-                args = arguments;
-                res = workerFunc.apply(this, arguments);
-            }
-            return res;
-        };
-    }
-    /*
-    always executes the workerFunc, but if the result is equal to the previous result,
-    return the previous result instead.
-    */
-    function memoizeOutput(workerFunc, equalityFunc) {
-        var cachedRes = null;
-        return function () {
-            var newRes = workerFunc.apply(this, arguments);
-            if (cachedRes === null || !(cachedRes === newRes || equalityFunc(cachedRes, newRes))) {
-                cachedRes = newRes;
-            }
-            return cachedRes;
-        };
-    }
-
-    var EXTENDED_SETTINGS_AND_SEVERITIES = {
-        week: 3,
-        separator: 0,
-        omitZeroMinute: 0,
-        meridiem: 0,
-        omitCommas: 0
-    };
-    var STANDARD_DATE_PROP_SEVERITIES = {
-        timeZoneName: 7,
-        era: 6,
-        year: 5,
-        month: 4,
-        day: 2,
-        weekday: 2,
-        hour: 1,
-        minute: 1,
-        second: 1
-    };
-    var MERIDIEM_RE = /\s*([ap])\.?m\.?/i; // eats up leading spaces too
-    var COMMA_RE = /,/g; // we need re for globalness
-    var MULTI_SPACE_RE = /\s+/g;
-    var LTR_RE = /\u200e/g; // control character
-    var UTC_RE = /UTC|GMT/;
-    var NativeFormatter = /** @class */ (function () {
-        function NativeFormatter(formatSettings) {
-            var standardDateProps = {};
-            var extendedSettings = {};
-            var severity = 0;
-            for (var name_1 in formatSettings) {
-                if (name_1 in EXTENDED_SETTINGS_AND_SEVERITIES) {
-                    extendedSettings[name_1] = formatSettings[name_1];
-                    severity = Math.max(EXTENDED_SETTINGS_AND_SEVERITIES[name_1], severity);
-                }
-                else {
-                    standardDateProps[name_1] = formatSettings[name_1];
-                    if (name_1 in STANDARD_DATE_PROP_SEVERITIES) {
-                        severity = Math.max(STANDARD_DATE_PROP_SEVERITIES[name_1], severity);
-                    }
-                }
-            }
-            this.standardDateProps = standardDateProps;
-            this.extendedSettings = extendedSettings;
-            this.severity = severity;
-            this.buildFormattingFunc = memoize(buildFormattingFunc);
-        }
-        NativeFormatter.prototype.format = function (date, context) {
-            return this.buildFormattingFunc(this.standardDateProps, this.extendedSettings, context)(date);
-        };
-        NativeFormatter.prototype.formatRange = function (start, end, context) {
-            var _a = this, standardDateProps = _a.standardDateProps, extendedSettings = _a.extendedSettings;
-            var diffSeverity = computeMarkerDiffSeverity(start.marker, end.marker, context.calendarSystem);
-            if (!diffSeverity) {
-                return this.format(start, context);
-            }
-            var biggestUnitForPartial = diffSeverity;
-            if (biggestUnitForPartial > 1 && // the two dates are different in a way that's larger scale than time
-                (standardDateProps.year === 'numeric' || standardDateProps.year === '2-digit') &&
-                (standardDateProps.month === 'numeric' || standardDateProps.month === '2-digit') &&
-                (standardDateProps.day === 'numeric' || standardDateProps.day === '2-digit')) {
-                biggestUnitForPartial = 1; // make it look like the dates are only different in terms of time
-            }
-            var full0 = this.format(start, context);
-            var full1 = this.format(end, context);
-            if (full0 === full1) {
-                return full0;
-            }
-            var partialDateProps = computePartialFormattingOptions(standardDateProps, biggestUnitForPartial);
-            var partialFormattingFunc = buildFormattingFunc(partialDateProps, extendedSettings, context);
-            var partial0 = partialFormattingFunc(start);
-            var partial1 = partialFormattingFunc(end);
-            var insertion = findCommonInsertion(full0, partial0, full1, partial1);
-            var separator = extendedSettings.separator || '';
-            if (insertion) {
-                return insertion.before + partial0 + separator + partial1 + insertion.after;
-            }
-            return full0 + separator + full1;
-        };
-        NativeFormatter.prototype.getLargestUnit = function () {
-            switch (this.severity) {
-                case 7:
-                case 6:
-                case 5:
-                    return 'year';
-                case 4:
-                    return 'month';
-                case 3:
-                    return 'week';
-                default:
-                    return 'day';
-            }
-        };
-        return NativeFormatter;
-    }());
-    function buildFormattingFunc(standardDateProps, extendedSettings, context) {
-        var standardDatePropCnt = Object.keys(standardDateProps).length;
-        if (standardDatePropCnt === 1 && standardDateProps.timeZoneName === 'short') {
-            return function (date) {
-                return formatTimeZoneOffset(date.timeZoneOffset);
-            };
-        }
-        if (standardDatePropCnt === 0 && extendedSettings.week) {
-            return function (date) {
-                return formatWeekNumber(context.computeWeekNumber(date.marker), context.weekLabel, context.locale, extendedSettings.week);
-            };
-        }
-        return buildNativeFormattingFunc(standardDateProps, extendedSettings, context);
-    }
-    function buildNativeFormattingFunc(standardDateProps, extendedSettings, context) {
-        standardDateProps = __assign({}, standardDateProps); // copy
-        extendedSettings = __assign({}, extendedSettings); // copy
-        sanitizeSettings(standardDateProps, extendedSettings);
-        standardDateProps.timeZone = 'UTC'; // we leverage the only guaranteed timeZone for our UTC markers
-        var normalFormat = new Intl.DateTimeFormat(context.locale.codes, standardDateProps);
-        var zeroFormat; // needed?
-        if (extendedSettings.omitZeroMinute) {
-            var zeroProps = __assign({}, standardDateProps);
-            delete zeroProps.minute; // seconds and ms were already considered in sanitizeSettings
-            zeroFormat = new Intl.DateTimeFormat(context.locale.codes, zeroProps);
-        }
-        return function (date) {
-            var marker = date.marker;
-            var format;
-            if (zeroFormat && !marker.getUTCMinutes()) {
-                format = zeroFormat;
-            }
-            else {
-                format = normalFormat;
-            }
-            var s = format.format(marker);
-            return postProcess(s, date, standardDateProps, extendedSettings, context);
-        };
-    }
-    function sanitizeSettings(standardDateProps, extendedSettings) {
-        // deal with a browser inconsistency where formatting the timezone
-        // requires that the hour/minute be present.
-        if (standardDateProps.timeZoneName) {
-            if (!standardDateProps.hour) {
-                standardDateProps.hour = '2-digit';
-            }
-            if (!standardDateProps.minute) {
-                standardDateProps.minute = '2-digit';
-            }
-        }
-        // only support short timezone names
-        if (standardDateProps.timeZoneName === 'long') {
-            standardDateProps.timeZoneName = 'short';
-        }
-        // if requesting to display seconds, MUST display minutes
-        if (extendedSettings.omitZeroMinute && (standardDateProps.second || standardDateProps.millisecond)) {
-            delete extendedSettings.omitZeroMinute;
-        }
-    }
-    function postProcess(s, date, standardDateProps, extendedSettings, context) {
-        s = s.replace(LTR_RE, ''); // remove left-to-right control chars. do first. good for other regexes
-        if (standardDateProps.timeZoneName === 'short') {
-            s = injectTzoStr(s, (context.timeZone === 'UTC' || date.timeZoneOffset == null) ?
-                'UTC' : // important to normalize for IE, which does "GMT"
-                formatTimeZoneOffset(date.timeZoneOffset));
-        }
-        if (extendedSettings.omitCommas) {
-            s = s.replace(COMMA_RE, '').trim();
-        }
-        if (extendedSettings.omitZeroMinute) {
-            s = s.replace(':00', ''); // zeroFormat doesn't always achieve this
-        }
-        // ^ do anything that might create adjacent spaces before this point,
-        // because MERIDIEM_RE likes to eat up loading spaces
-        if (extendedSettings.meridiem === false) {
-            s = s.replace(MERIDIEM_RE, '').trim();
-        }
-        else if (extendedSettings.meridiem === 'narrow') { // a/p
-            s = s.replace(MERIDIEM_RE, function (m0, m1) {
-                return m1.toLocaleLowerCase();
-            });
-        }
-        else if (extendedSettings.meridiem === 'short') { // am/pm
-            s = s.replace(MERIDIEM_RE, function (m0, m1) {
-                return m1.toLocaleLowerCase() + 'm';
-            });
-        }
-        else if (extendedSettings.meridiem === 'lowercase') { // other meridiem transformers already converted to lowercase
-            s = s.replace(MERIDIEM_RE, function (m0) {
-                return m0.toLocaleLowerCase();
-            });
-        }
-        s = s.replace(MULTI_SPACE_RE, ' ');
-        s = s.trim();
-        return s;
-    }
-    function injectTzoStr(s, tzoStr) {
-        var replaced = false;
-        s = s.replace(UTC_RE, function () {
-            replaced = true;
-            return tzoStr;
-        });
-        // IE11 doesn't include UTC/GMT in the original string, so append to end
-        if (!replaced) {
-            s += ' ' + tzoStr;
-        }
-        return s;
-    }
-    function formatWeekNumber(num, weekLabel, locale, display) {
-        var parts = [];
-        if (display === 'narrow') {
-            parts.push(weekLabel);
-        }
-        else if (display === 'short') {
-            parts.push(weekLabel, ' ');
-        }
-        // otherwise, considered 'numeric'
-        parts.push(locale.simpleNumberFormat.format(num));
-        if (locale.options.isRtl) { // TODO: use control characters instead?
-            parts.reverse();
-        }
-        return parts.join('');
-    }
-    // Range Formatting Utils
-    // 0 = exactly the same
-    // 1 = different by time
-    // and bigger
-    function computeMarkerDiffSeverity(d0, d1, ca) {
-        if (ca.getMarkerYear(d0) !== ca.getMarkerYear(d1)) {
-            return 5;
-        }
-        if (ca.getMarkerMonth(d0) !== ca.getMarkerMonth(d1)) {
-            return 4;
-        }
-        if (ca.getMarkerDay(d0) !== ca.getMarkerDay(d1)) {
-            return 2;
-        }
-        if (timeAsMs(d0) !== timeAsMs(d1)) {
-            return 1;
-        }
-        return 0;
-    }
-    function computePartialFormattingOptions(options, biggestUnit) {
-        var partialOptions = {};
-        for (var name_2 in options) {
-            if (!(name_2 in STANDARD_DATE_PROP_SEVERITIES) || // not a date part prop (like timeZone)
-                STANDARD_DATE_PROP_SEVERITIES[name_2] <= biggestUnit) {
-                partialOptions[name_2] = options[name_2];
-            }
-        }
-        return partialOptions;
-    }
-    function findCommonInsertion(full0, partial0, full1, partial1) {
-        var i0 = 0;
-        while (i0 < full0.length) {
-            var found0 = full0.indexOf(partial0, i0);
-            if (found0 === -1) {
-                break;
-            }
-            var before0 = full0.substr(0, found0);
-            i0 = found0 + partial0.length;
-            var after0 = full0.substr(i0);
-            var i1 = 0;
-            while (i1 < full1.length) {
-                var found1 = full1.indexOf(partial1, i1);
-                if (found1 === -1) {
-                    break;
-                }
-                var before1 = full1.substr(0, found1);
-                i1 = found1 + partial1.length;
-                var after1 = full1.substr(i1);
-                if (before0 === before1 && after0 === after1) {
-                    return {
-                        before: before0,
-                        after: after0
-                    };
-                }
-            }
-        }
-        return null;
-    }
-
-    /*
-    TODO: fix the terminology of "formatter" vs "formatting func"
-    */
-    /*
-    At the time of instantiation, this object does not know which cmd-formatting system it will use.
-    It receives this at the time of formatting, as a setting.
-    */
-    var CmdFormatter = /** @class */ (function () {
-        function CmdFormatter(cmdStr, separator) {
-            this.cmdStr = cmdStr;
-            this.separator = separator;
-        }
-        CmdFormatter.prototype.format = function (date, context) {
-            return context.cmdFormatter(this.cmdStr, createVerboseFormattingArg(date, null, context, this.separator));
-        };
-        CmdFormatter.prototype.formatRange = function (start, end, context) {
-            return context.cmdFormatter(this.cmdStr, createVerboseFormattingArg(start, end, context, this.separator));
-        };
-        return CmdFormatter;
-    }());
-
-    var FuncFormatter = /** @class */ (function () {
-        function FuncFormatter(func) {
-            this.func = func;
-        }
-        FuncFormatter.prototype.format = function (date, context) {
-            return this.func(createVerboseFormattingArg(date, null, context));
-        };
-        FuncFormatter.prototype.formatRange = function (start, end, context) {
-            return this.func(createVerboseFormattingArg(start, end, context));
-        };
-        return FuncFormatter;
-    }());
-
-    // Formatter Object Creation
-    function createFormatter(input, defaultSeparator) {
-        if (typeof input === 'object' && input) { // non-null object
-            if (typeof defaultSeparator === 'string') {
-                input = __assign({ separator: defaultSeparator }, input);
-            }
-            return new NativeFormatter(input);
-        }
-        else if (typeof input === 'string') {
-            return new CmdFormatter(input, defaultSeparator);
-        }
-        else if (typeof input === 'function') {
-            return new FuncFormatter(input);
-        }
-    }
-    // String Utils
-    // timeZoneOffset is in minutes
-    function buildIsoString(marker, timeZoneOffset, stripZeroTime) {
-        if (stripZeroTime === void 0) { stripZeroTime = false; }
-        var s = marker.toISOString();
-        s = s.replace('.000', '');
-        if (stripZeroTime) {
-            s = s.replace('T00:00:00Z', '');
-        }
-        if (s.length > 10) { // time part wasn't stripped, can add timezone info
-            if (timeZoneOffset == null) {
-                s = s.replace('Z', '');
-            }
-            else if (timeZoneOffset !== 0) {
-                s = s.replace('Z', formatTimeZoneOffset(timeZoneOffset, true));
-            }
-            // otherwise, its UTC-0 and we want to keep the Z
-        }
-        return s;
-    }
-    function formatIsoTimeString(marker) {
-        return padStart(marker.getUTCHours(), 2) + ':' +
-            padStart(marker.getUTCMinutes(), 2) + ':' +
-            padStart(marker.getUTCSeconds(), 2);
-    }
-    function formatTimeZoneOffset(minutes, doIso) {
-        if (doIso === void 0) { doIso = false; }
-        var sign = minutes < 0 ? '-' : '+';
-        var abs = Math.abs(minutes);
-        var hours = Math.floor(abs / 60);
-        var mins = Math.round(abs % 60);
-        if (doIso) {
-            return sign + padStart(hours, 2) + ':' + padStart(mins, 2);
-        }
-        else {
-            return 'GMT' + sign + hours + (mins ? ':' + padStart(mins, 2) : '');
-        }
-    }
-    // Arg Utils
-    function createVerboseFormattingArg(start, end, context, separator) {
-        var startInfo = expandZonedMarker(start, context.calendarSystem);
-        var endInfo = end ? expandZonedMarker(end, context.calendarSystem) : null;
-        return {
-            date: startInfo,
-            start: startInfo,
-            end: endInfo,
-            timeZone: context.timeZone,
-            localeCodes: context.locale.codes,
-            separator: separator
-        };
-    }
-    function expandZonedMarker(dateInfo, calendarSystem) {
-        var a = calendarSystem.markerToArray(dateInfo.marker);
-        return {
-            marker: dateInfo.marker,
-            timeZoneOffset: dateInfo.timeZoneOffset,
-            array: a,
-            year: a[0],
-            month: a[1],
-            day: a[2],
-            hour: a[3],
-            minute: a[4],
-            second: a[5],
-            millisecond: a[6]
-        };
-    }
-
-    var EventSourceApi = /** @class */ (function () {
-        function EventSourceApi(calendar, internalEventSource) {
-            this.calendar = calendar;
-            this.internalEventSource = internalEventSource;
-        }
-        EventSourceApi.prototype.remove = function () {
-            this.calendar.dispatch({
-                type: 'REMOVE_EVENT_SOURCE',
-                sourceId: this.internalEventSource.sourceId
-            });
-        };
-        EventSourceApi.prototype.refetch = function () {
-            this.calendar.dispatch({
-                type: 'FETCH_EVENT_SOURCES',
-                sourceIds: [this.internalEventSource.sourceId]
-            });
-        };
-        Object.defineProperty(EventSourceApi.prototype, "id", {
-            get: function () {
-                return this.internalEventSource.publicId;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventSourceApi.prototype, "url", {
-            // only relevant to json-feed event sources
-            get: function () {
-                return this.internalEventSource.meta.url;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return EventSourceApi;
-    }());
-
-    var EventApi = /** @class */ (function () {
-        function EventApi(calendar, def, instance) {
-            this._calendar = calendar;
-            this._def = def;
-            this._instance = instance || null;
-        }
-        /*
-        TODO: make event struct more responsible for this
-        */
-        EventApi.prototype.setProp = function (name, val) {
-            var _a, _b;
-            if (name in DATE_PROPS) ;
-            else if (name in NON_DATE_PROPS) {
-                if (typeof NON_DATE_PROPS[name] === 'function') {
-                    val = NON_DATE_PROPS[name](val);
-                }
-                this.mutate({
-                    standardProps: (_a = {}, _a[name] = val, _a)
-                });
-            }
-            else if (name in UNSCOPED_EVENT_UI_PROPS) {
-                var ui = void 0;
-                if (typeof UNSCOPED_EVENT_UI_PROPS[name] === 'function') {
-                    val = UNSCOPED_EVENT_UI_PROPS[name](val);
-                }
-                if (name === 'color') {
-                    ui = { backgroundColor: val, borderColor: val };
-                }
-                else if (name === 'editable') {
-                    ui = { startEditable: val, durationEditable: val };
-                }
-                else {
-                    ui = (_b = {}, _b[name] = val, _b);
-                }
-                this.mutate({
-                    standardProps: { ui: ui }
-                });
-            }
-        };
-        EventApi.prototype.setExtendedProp = function (name, val) {
-            var _a;
-            this.mutate({
-                extendedProps: (_a = {}, _a[name] = val, _a)
-            });
-        };
-        EventApi.prototype.setStart = function (startInput, options) {
-            if (options === void 0) { options = {}; }
-            var dateEnv = this._calendar.dateEnv;
-            var start = dateEnv.createMarker(startInput);
-            if (start && this._instance) { // TODO: warning if parsed bad
-                var instanceRange = this._instance.range;
-                var startDelta = diffDates(instanceRange.start, start, dateEnv, options.granularity); // what if parsed bad!?
-                if (options.maintainDuration) {
-                    this.mutate({ datesDelta: startDelta });
-                }
-                else {
-                    this.mutate({ startDelta: startDelta });
-                }
-            }
-        };
-        EventApi.prototype.setEnd = function (endInput, options) {
-            if (options === void 0) { options = {}; }
-            var dateEnv = this._calendar.dateEnv;
-            var end;
-            if (endInput != null) {
-                end = dateEnv.createMarker(endInput);
-                if (!end) {
-                    return; // TODO: warning if parsed bad
-                }
-            }
-            if (this._instance) {
-                if (end) {
-                    var endDelta = diffDates(this._instance.range.end, end, dateEnv, options.granularity);
-                    this.mutate({ endDelta: endDelta });
-                }
-                else {
-                    this.mutate({ standardProps: { hasEnd: false } });
-                }
-            }
-        };
-        EventApi.prototype.setDates = function (startInput, endInput, options) {
-            if (options === void 0) { options = {}; }
-            var dateEnv = this._calendar.dateEnv;
-            var standardProps = { allDay: options.allDay };
-            var start = dateEnv.createMarker(startInput);
-            var end;
-            if (!start) {
-                return; // TODO: warning if parsed bad
-            }
-            if (endInput != null) {
-                end = dateEnv.createMarker(endInput);
-                if (!end) { // TODO: warning if parsed bad
-                    return;
-                }
-            }
-            if (this._instance) {
-                var instanceRange = this._instance.range;
-                // when computing the diff for an event being converted to all-day,
-                // compute diff off of the all-day values the way event-mutation does.
-                if (options.allDay === true) {
-                    instanceRange = computeAlignedDayRange(instanceRange);
-                }
-                var startDelta = diffDates(instanceRange.start, start, dateEnv, options.granularity);
-                if (end) {
-                    var endDelta = diffDates(instanceRange.end, end, dateEnv, options.granularity);
-                    if (durationsEqual(startDelta, endDelta)) {
-                        this.mutate({ datesDelta: startDelta, standardProps: standardProps });
-                    }
-                    else {
-                        this.mutate({ startDelta: startDelta, endDelta: endDelta, standardProps: standardProps });
-                    }
-                }
-                else { // means "clear the end"
-                    standardProps.hasEnd = false;
-                    this.mutate({ datesDelta: startDelta, standardProps: standardProps });
-                }
-            }
-        };
-        EventApi.prototype.moveStart = function (deltaInput) {
-            var delta = createDuration(deltaInput);
-            if (delta) { // TODO: warning if parsed bad
-                this.mutate({ startDelta: delta });
-            }
-        };
-        EventApi.prototype.moveEnd = function (deltaInput) {
-            var delta = createDuration(deltaInput);
-            if (delta) { // TODO: warning if parsed bad
-                this.mutate({ endDelta: delta });
-            }
-        };
-        EventApi.prototype.moveDates = function (deltaInput) {
-            var delta = createDuration(deltaInput);
-            if (delta) { // TODO: warning if parsed bad
-                this.mutate({ datesDelta: delta });
-            }
-        };
-        EventApi.prototype.setAllDay = function (allDay, options) {
-            if (options === void 0) { options = {}; }
-            var standardProps = { allDay: allDay };
-            var maintainDuration = options.maintainDuration;
-            if (maintainDuration == null) {
-                maintainDuration = this._calendar.opt('allDayMaintainDuration');
-            }
-            if (this._def.allDay !== allDay) {
-                standardProps.hasEnd = maintainDuration;
-            }
-            this.mutate({ standardProps: standardProps });
-        };
-        EventApi.prototype.formatRange = function (formatInput) {
-            var dateEnv = this._calendar.dateEnv;
-            var instance = this._instance;
-            var formatter = createFormatter(formatInput, this._calendar.opt('defaultRangeSeparator'));
-            if (this._def.hasEnd) {
-                return dateEnv.formatRange(instance.range.start, instance.range.end, formatter, {
-                    forcedStartTzo: instance.forcedStartTzo,
-                    forcedEndTzo: instance.forcedEndTzo
-                });
-            }
-            else {
-                return dateEnv.format(instance.range.start, formatter, {
-                    forcedTzo: instance.forcedStartTzo
-                });
-            }
-        };
-        EventApi.prototype.mutate = function (mutation) {
-            var def = this._def;
-            var instance = this._instance;
-            if (instance) {
-                this._calendar.dispatch({
-                    type: 'MUTATE_EVENTS',
-                    instanceId: instance.instanceId,
-                    mutation: mutation,
-                    fromApi: true
-                });
-                var eventStore = this._calendar.state.eventStore;
-                this._def = eventStore.defs[def.defId];
-                this._instance = eventStore.instances[instance.instanceId];
-            }
-        };
-        EventApi.prototype.remove = function () {
-            this._calendar.dispatch({
-                type: 'REMOVE_EVENT_DEF',
-                defId: this._def.defId
-            });
-        };
-        Object.defineProperty(EventApi.prototype, "source", {
-            get: function () {
-                var sourceId = this._def.sourceId;
-                if (sourceId) {
-                    return new EventSourceApi(this._calendar, this._calendar.state.eventSources[sourceId]);
-                }
-                return null;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "start", {
-            get: function () {
-                return this._instance ?
-                    this._calendar.dateEnv.toDate(this._instance.range.start) :
-                    null;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "end", {
-            get: function () {
-                return (this._instance && this._def.hasEnd) ?
-                    this._calendar.dateEnv.toDate(this._instance.range.end) :
-                    null;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "id", {
-            // computable props that all access the def
-            // TODO: find a TypeScript-compatible way to do this at scale
-            get: function () { return this._def.publicId; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "groupId", {
-            get: function () { return this._def.groupId; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "allDay", {
-            get: function () { return this._def.allDay; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "title", {
-            get: function () { return this._def.title; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "url", {
-            get: function () { return this._def.url; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "rendering", {
-            get: function () { return this._def.rendering; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "startEditable", {
-            get: function () { return this._def.ui.startEditable; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "durationEditable", {
-            get: function () { return this._def.ui.durationEditable; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "constraint", {
-            get: function () { return this._def.ui.constraints[0] || null; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "overlap", {
-            get: function () { return this._def.ui.overlap; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "allow", {
-            get: function () { return this._def.ui.allows[0] || null; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "backgroundColor", {
-            get: function () { return this._def.ui.backgroundColor; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "borderColor", {
-            get: function () { return this._def.ui.borderColor; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "textColor", {
-            get: function () { return this._def.ui.textColor; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "classNames", {
-            // NOTE: user can't modify these because Object.freeze was called in event-def parsing
-            get: function () { return this._def.ui.classNames; },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(EventApi.prototype, "extendedProps", {
-            get: function () { return this._def.extendedProps; },
-            enumerable: true,
-            configurable: true
-        });
-        return EventApi;
-    }());
-
-    /*
-    Specifying nextDayThreshold signals that all-day ranges should be sliced.
-    */
-    function sliceEventStore(eventStore, eventUiBases, framingRange, nextDayThreshold) {
-        var inverseBgByGroupId = {};
-        var inverseBgByDefId = {};
-        var defByGroupId = {};
-        var bgRanges = [];
-        var fgRanges = [];
-        var eventUis = compileEventUis(eventStore.defs, eventUiBases);
-        for (var defId in eventStore.defs) {
-            var def = eventStore.defs[defId];
-            if (def.rendering === 'inverse-background') {
-                if (def.groupId) {
-                    inverseBgByGroupId[def.groupId] = [];
-                    if (!defByGroupId[def.groupId]) {
-                        defByGroupId[def.groupId] = def;
-                    }
-                }
-                else {
-                    inverseBgByDefId[defId] = [];
-                }
-            }
-        }
-        for (var instanceId in eventStore.instances) {
-            var instance = eventStore.instances[instanceId];
-            var def = eventStore.defs[instance.defId];
-            var ui = eventUis[def.defId];
-            var origRange = instance.range;
-            var normalRange = (!def.allDay && nextDayThreshold) ?
-                computeVisibleDayRange(origRange, nextDayThreshold) :
-                origRange;
-            var slicedRange = intersectRanges(normalRange, framingRange);
-            if (slicedRange) {
-                if (def.rendering === 'inverse-background') {
-                    if (def.groupId) {
-                        inverseBgByGroupId[def.groupId].push(slicedRange);
-                    }
-                    else {
-                        inverseBgByDefId[instance.defId].push(slicedRange);
-                    }
-                }
-                else {
-                    (def.rendering === 'background' ? bgRanges : fgRanges).push({
-                        def: def,
-                        ui: ui,
-                        instance: instance,
-                        range: slicedRange,
-                        isStart: normalRange.start && normalRange.start.valueOf() === slicedRange.start.valueOf(),
-                        isEnd: normalRange.end && normalRange.end.valueOf() === slicedRange.end.valueOf()
-                    });
-                }
-            }
-        }
-        for (var groupId in inverseBgByGroupId) { // BY GROUP
-            var ranges = inverseBgByGroupId[groupId];
-            var invertedRanges = invertRanges(ranges, framingRange);
-            for (var _i = 0, invertedRanges_1 = invertedRanges; _i < invertedRanges_1.length; _i++) {
-                var invertedRange = invertedRanges_1[_i];
-                var def = defByGroupId[groupId];
-                var ui = eventUis[def.defId];
-                bgRanges.push({
-                    def: def,
-                    ui: ui,
-                    instance: null,
-                    range: invertedRange,
-                    isStart: false,
-                    isEnd: false
-                });
-            }
-        }
-        for (var defId in inverseBgByDefId) {
-            var ranges = inverseBgByDefId[defId];
-            var invertedRanges = invertRanges(ranges, framingRange);
-            for (var _a = 0, invertedRanges_2 = invertedRanges; _a < invertedRanges_2.length; _a++) {
-                var invertedRange = invertedRanges_2[_a];
-                bgRanges.push({
-                    def: eventStore.defs[defId],
-                    ui: eventUis[defId],
-                    instance: null,
-                    range: invertedRange,
-                    isStart: false,
-                    isEnd: false
-                });
-            }
-        }
-        return { bg: bgRanges, fg: fgRanges };
-    }
-    function hasBgRendering(def) {
-        return def.rendering === 'background' || def.rendering === 'inverse-background';
-    }
-    function filterSegsViaEls(view, segs, isMirror) {
-        if (view.hasPublicHandlers('eventRender')) {
-            segs = segs.filter(function (seg) {
-                var custom = view.publiclyTrigger('eventRender', [
-                    {
-                        event: new EventApi(view.calendar, seg.eventRange.def, seg.eventRange.instance),
-                        isMirror: isMirror,
-                        isStart: seg.isStart,
-                        isEnd: seg.isEnd,
-                        // TODO: include seg.range once all components consistently generate it
-                        el: seg.el,
-                        view: view
-                    }
-                ]);
-                if (custom === false) { // means don't render at all
-                    return false;
-                }
-                else if (custom && custom !== true) {
-                    seg.el = custom;
-                }
-                return true;
-            });
-        }
-        for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
-            var seg = segs_1[_i];
-            setElSeg(seg.el, seg);
-        }
-        return segs;
-    }
-    function setElSeg(el, seg) {
-        el.fcSeg = seg;
-    }
-    function getElSeg(el) {
-        return el.fcSeg || null;
-    }
-    // event ui computation
-    function compileEventUis(eventDefs, eventUiBases) {
-        return mapHash(eventDefs, function (eventDef) {
-            return compileEventUi(eventDef, eventUiBases);
-        });
-    }
-    function compileEventUi(eventDef, eventUiBases) {
-        var uis = [];
-        if (eventUiBases['']) {
-            uis.push(eventUiBases['']);
-        }
-        if (eventUiBases[eventDef.defId]) {
-            uis.push(eventUiBases[eventDef.defId]);
-        }
-        uis.push(eventDef.ui);
-        return combineEventUis(uis);
-    }
-
-    // applies the mutation to ALL defs/instances within the event store
-    function applyMutationToEventStore(eventStore, eventConfigBase, mutation, calendar) {
-        var eventConfigs = compileEventUis(eventStore.defs, eventConfigBase);
-        var dest = createEmptyEventStore();
-        for (var defId in eventStore.defs) {
-            var def = eventStore.defs[defId];
-            dest.defs[defId] = applyMutationToEventDef(def, eventConfigs[defId], mutation, calendar.pluginSystem.hooks.eventDefMutationAppliers, calendar);
-        }
-        for (var instanceId in eventStore.instances) {
-            var instance = eventStore.instances[instanceId];
-            var def = dest.defs[instance.defId]; // important to grab the newly modified def
-            dest.instances[instanceId] = applyMutationToEventInstance(instance, def, eventConfigs[instance.defId], mutation, calendar);
-        }
-        return dest;
-    }
-    function applyMutationToEventDef(eventDef, eventConfig, mutation, appliers, calendar) {
-        var standardProps = mutation.standardProps || {};
-        // if hasEnd has not been specified, guess a good value based on deltas.
-        // if duration will change, there's no way the default duration will persist,
-        // and thus, we need to mark the event as having a real end
-        if (standardProps.hasEnd == null &&
-            eventConfig.durationEditable &&
-            (mutation.startDelta || mutation.endDelta)) {
-            standardProps.hasEnd = true; // TODO: is this mutation okay?
-        }
-        var copy = __assign({}, eventDef, standardProps, { ui: __assign({}, eventDef.ui, standardProps.ui) });
-        if (mutation.extendedProps) {
-            copy.extendedProps = __assign({}, copy.extendedProps, mutation.extendedProps);
-        }
-        for (var _i = 0, appliers_1 = appliers; _i < appliers_1.length; _i++) {
-            var applier = appliers_1[_i];
-            applier(copy, mutation, calendar);
-        }
-        if (!copy.hasEnd && calendar.opt('forceEventDuration')) {
-            copy.hasEnd = true;
-        }
-        return copy;
-    }
-    function applyMutationToEventInstance(eventInstance, eventDef, // must first be modified by applyMutationToEventDef
-    eventConfig, mutation, calendar) {
-        var dateEnv = calendar.dateEnv;
-        var forceAllDay = mutation.standardProps && mutation.standardProps.allDay === true;
-        var clearEnd = mutation.standardProps && mutation.standardProps.hasEnd === false;
-        var copy = __assign({}, eventInstance);
-        if (forceAllDay) {
-            copy.range = computeAlignedDayRange(copy.range);
-        }
-        if (mutation.datesDelta && eventConfig.startEditable) {
-            copy.range = {
-                start: dateEnv.add(copy.range.start, mutation.datesDelta),
-                end: dateEnv.add(copy.range.end, mutation.datesDelta)
-            };
-        }
-        if (mutation.startDelta && eventConfig.durationEditable) {
-            copy.range = {
-                start: dateEnv.add(copy.range.start, mutation.startDelta),
-                end: copy.range.end
-            };
-        }
-        if (mutation.endDelta && eventConfig.durationEditable) {
-            copy.range = {
-                start: copy.range.start,
-                end: dateEnv.add(copy.range.end, mutation.endDelta)
-            };
-        }
-        if (clearEnd) {
-            copy.range = {
-                start: copy.range.start,
-                end: calendar.getDefaultEventEnd(eventDef.allDay, copy.range.start)
-            };
-        }
-        // in case event was all-day but the supplied deltas were not
-        // better util for this?
-        if (eventDef.allDay) {
-            copy.range = {
-                start: startOfDay(copy.range.start),
-                end: startOfDay(copy.range.end)
-            };
-        }
-        // handle invalid durations
-        if (copy.range.end < copy.range.start) {
-            copy.range.end = calendar.getDefaultEventEnd(eventDef.allDay, copy.range.start);
-        }
-        return copy;
-    }
-
-    function reduceEventStore (eventStore, action, eventSources, dateProfile, calendar) {
-        switch (action.type) {
-            case 'RECEIVE_EVENTS': // raw
-                return receiveRawEvents(eventStore, eventSources[action.sourceId], action.fetchId, action.fetchRange, action.rawEvents, calendar);
-            case 'ADD_EVENTS': // already parsed, but not expanded
-                return addEvent(eventStore, action.eventStore, // new ones
-                dateProfile ? dateProfile.activeRange : null, calendar);
-            case 'MERGE_EVENTS': // already parsed and expanded
-                return mergeEventStores(eventStore, action.eventStore);
-            case 'PREV': // TODO: how do we track all actions that affect dateProfile :(
-            case 'NEXT':
-            case 'SET_DATE':
-            case 'SET_VIEW_TYPE':
-                if (dateProfile) {
-                    return expandRecurring(eventStore, dateProfile.activeRange, calendar);
-                }
-                else {
-                    return eventStore;
-                }
-            case 'CHANGE_TIMEZONE':
-                return rezoneDates(eventStore, action.oldDateEnv, calendar.dateEnv);
-            case 'MUTATE_EVENTS':
-                return applyMutationToRelated(eventStore, action.instanceId, action.mutation, action.fromApi, calendar);
-            case 'REMOVE_EVENT_INSTANCES':
-                return excludeInstances(eventStore, action.instances);
-            case 'REMOVE_EVENT_DEF':
-                return filterEventStoreDefs(eventStore, function (eventDef) {
-                    return eventDef.defId !== action.defId;
-                });
-            case 'REMOVE_EVENT_SOURCE':
-                return excludeEventsBySourceId(eventStore, action.sourceId);
-            case 'REMOVE_ALL_EVENT_SOURCES':
-                return filterEventStoreDefs(eventStore, function (eventDef) {
-                    return !eventDef.sourceId; // only keep events with no source id
-                });
-            case 'REMOVE_ALL_EVENTS':
-                return createEmptyEventStore();
-            case 'RESET_EVENTS':
-                return {
-                    defs: eventStore.defs,
-                    instances: eventStore.instances
-                };
-            default:
-                return eventStore;
-        }
-    }
-    function receiveRawEvents(eventStore, eventSource, fetchId, fetchRange, rawEvents, calendar) {
-        if (eventSource && // not already removed
-            fetchId === eventSource.latestFetchId // TODO: wish this logic was always in event-sources
-        ) {
-            var subset = parseEvents(transformRawEvents(rawEvents, eventSource, calendar), eventSource.sourceId, calendar);
-            if (fetchRange) {
-                subset = expandRecurring(subset, fetchRange, calendar);
-            }
-            return mergeEventStores(excludeEventsBySourceId(eventStore, eventSource.sourceId), subset);
-        }
-        return eventStore;
-    }
-    function addEvent(eventStore, subset, expandRange, calendar) {
-        if (expandRange) {
-            subset = expandRecurring(subset, expandRange, calendar);
-        }
-        return mergeEventStores(eventStore, subset);
-    }
-    function rezoneDates(eventStore, oldDateEnv, newDateEnv) {
-        var defs = eventStore.defs;
-        var instances = mapHash(eventStore.instances, function (instance) {
-            var def = defs[instance.defId];
-            if (def.allDay || def.recurringDef) {
-                return instance; // isn't dependent on timezone
-            }
-            else {
-                return __assign({}, instance, { range: {
-                        start: newDateEnv.createMarker(oldDateEnv.toDate(instance.range.start, instance.forcedStartTzo)),
-                        end: newDateEnv.createMarker(oldDateEnv.toDate(instance.range.end, instance.forcedEndTzo))
-                    }, forcedStartTzo: newDateEnv.canComputeOffset ? null : instance.forcedStartTzo, forcedEndTzo: newDateEnv.canComputeOffset ? null : instance.forcedEndTzo });
-            }
-        });
-        return { defs: defs, instances: instances };
-    }
-    function applyMutationToRelated(eventStore, instanceId, mutation, fromApi, calendar) {
-        var relevant = getRelevantEvents(eventStore, instanceId);
-        var eventConfigBase = fromApi ?
-            { '': {
-                    startEditable: true,
-                    durationEditable: true,
-                    constraints: [],
-                    overlap: null,
-                    allows: [],
-                    backgroundColor: '',
-                    borderColor: '',
-                    textColor: '',
-                    classNames: []
-                } } :
-            calendar.eventUiBases;
-        relevant = applyMutationToEventStore(relevant, eventConfigBase, mutation, calendar);
-        return mergeEventStores(eventStore, relevant);
-    }
-    function excludeEventsBySourceId(eventStore, sourceId) {
-        return filterEventStoreDefs(eventStore, function (eventDef) {
-            return eventDef.sourceId !== sourceId;
-        });
-    }
-    // QUESTION: why not just return instances? do a general object-property-exclusion util
-    function excludeInstances(eventStore, removals) {
-        return {
-            defs: eventStore.defs,
-            instances: filterHash(eventStore.instances, function (instance) {
-                return !removals[instance.instanceId];
-            })
-        };
-    }
-
-    // high-level segmenting-aware tester functions
-    // ------------------------------------------------------------------------------------------------------------------------
-    function isInteractionValid(interaction, calendar) {
-        return isNewPropsValid({ eventDrag: interaction }, calendar); // HACK: the eventDrag props is used for ALL interactions
-    }
-    function isDateSelectionValid(dateSelection, calendar) {
-        return isNewPropsValid({ dateSelection: dateSelection }, calendar);
-    }
-    function isNewPropsValid(newProps, calendar) {
-        var view = calendar.view;
-        var props = __assign({ businessHours: view ? view.props.businessHours : createEmptyEventStore(), dateSelection: '', eventStore: calendar.state.eventStore, eventUiBases: calendar.eventUiBases, eventSelection: '', eventDrag: null, eventResize: null }, newProps);
-        return (calendar.pluginSystem.hooks.isPropsValid || isPropsValid)(props, calendar);
-    }
-    function isPropsValid(state, calendar, dateSpanMeta, filterConfig) {
-        if (dateSpanMeta === void 0) { dateSpanMeta = {}; }
-        if (state.eventDrag && !isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig)) {
-            return false;
-        }
-        if (state.dateSelection && !isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig)) {
-            return false;
-        }
-        return true;
-    }
-    // Moving Event Validation
-    // ------------------------------------------------------------------------------------------------------------------------
-    function isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
-        var interaction = state.eventDrag; // HACK: the eventDrag props is used for ALL interactions
-        var subjectEventStore = interaction.mutatedEvents;
-        var subjectDefs = subjectEventStore.defs;
-        var subjectInstances = subjectEventStore.instances;
-        var subjectConfigs = compileEventUis(subjectDefs, interaction.isEvent ?
-            state.eventUiBases :
-            { '': calendar.selectionConfig } // if not a real event, validate as a selection
-        );
-        if (filterConfig) {
-            subjectConfigs = mapHash(subjectConfigs, filterConfig);
-        }
-        var otherEventStore = excludeInstances(state.eventStore, interaction.affectedEvents.instances); // exclude the subject events. TODO: exclude defs too?
-        var otherDefs = otherEventStore.defs;
-        var otherInstances = otherEventStore.instances;
-        var otherConfigs = compileEventUis(otherDefs, state.eventUiBases);
-        for (var subjectInstanceId in subjectInstances) {
-            var subjectInstance = subjectInstances[subjectInstanceId];
-            var subjectRange = subjectInstance.range;
-            var subjectConfig = subjectConfigs[subjectInstance.defId];
-            var subjectDef = subjectDefs[subjectInstance.defId];
-            // constraint
-            if (!allConstraintsPass(subjectConfig.constraints, subjectRange, otherEventStore, state.businessHours, calendar)) {
-                return false;
-            }
-            // overlap
-            var overlapFunc = calendar.opt('eventOverlap');
-            if (typeof overlapFunc !== 'function') {
-                overlapFunc = null;
-            }
-            for (var otherInstanceId in otherInstances) {
-                var otherInstance = otherInstances[otherInstanceId];
-                // intersect! evaluate
-                if (rangesIntersect(subjectRange, otherInstance.range)) {
-                    var otherOverlap = otherConfigs[otherInstance.defId].overlap;
-                    // consider the other event's overlap. only do this if the subject event is a "real" event
-                    if (otherOverlap === false && interaction.isEvent) {
-                        return false;
-                    }
-                    if (subjectConfig.overlap === false) {
-                        return false;
-                    }
-                    if (overlapFunc && !overlapFunc(new EventApi(calendar, otherDefs[otherInstance.defId], otherInstance), // still event
-                    new EventApi(calendar, subjectDef, subjectInstance) // moving event
-                    )) {
-                        return false;
-                    }
-                }
-            }
-            // allow (a function)
-            var calendarEventStore = calendar.state.eventStore; // need global-to-calendar, not local to component (splittable)state
-            for (var _i = 0, _a = subjectConfig.allows; _i < _a.length; _i++) {
-                var subjectAllow = _a[_i];
-                var subjectDateSpan = __assign({}, dateSpanMeta, { range: subjectInstance.range, allDay: subjectDef.allDay });
-                var origDef = calendarEventStore.defs[subjectDef.defId];
-                var origInstance = calendarEventStore.instances[subjectInstanceId];
-                var eventApi = void 0;
-                if (origDef) { // was previously in the calendar
-                    eventApi = new EventApi(calendar, origDef, origInstance);
-                }
-                else { // was an external event
-                    eventApi = new EventApi(calendar, subjectDef); // no instance, because had no dates
-                }
-                if (!subjectAllow(calendar.buildDateSpanApi(subjectDateSpan), eventApi)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    // Date Selection Validation
-    // ------------------------------------------------------------------------------------------------------------------------
-    function isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
-        var relevantEventStore = state.eventStore;
-        var relevantDefs = relevantEventStore.defs;
-        var relevantInstances = relevantEventStore.instances;
-        var selection = state.dateSelection;
-        var selectionRange = selection.range;
-        var selectionConfig = calendar.selectionConfig;
-        if (filterConfig) {
-            selectionConfig = filterConfig(selectionConfig);
-        }
-        // constraint
-        if (!allConstraintsPass(selectionConfig.constraints, selectionRange, relevantEventStore, state.businessHours, calendar)) {
-            return false;
-        }
-        // overlap
-        var overlapFunc = calendar.opt('selectOverlap');
-        if (typeof overlapFunc !== 'function') {
-            overlapFunc = null;
-        }
-        for (var relevantInstanceId in relevantInstances) {
-            var relevantInstance = relevantInstances[relevantInstanceId];
-            // intersect! evaluate
-            if (rangesIntersect(selectionRange, relevantInstance.range)) {
-                if (selectionConfig.overlap === false) {
-                    return false;
-                }
-                if (overlapFunc && !overlapFunc(new EventApi(calendar, relevantDefs[relevantInstance.defId], relevantInstance))) {
-                    return false;
-                }
-            }
-        }
-        // allow (a function)
-        for (var _i = 0, _a = selectionConfig.allows; _i < _a.length; _i++) {
-            var selectionAllow = _a[_i];
-            var fullDateSpan = __assign({}, dateSpanMeta, selection);
-            if (!selectionAllow(calendar.buildDateSpanApi(fullDateSpan), null)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    // Constraint Utils
-    // ------------------------------------------------------------------------------------------------------------------------
-    function allConstraintsPass(constraints, subjectRange, otherEventStore, businessHoursUnexpanded, calendar) {
-        for (var _i = 0, constraints_1 = constraints; _i < constraints_1.length; _i++) {
-            var constraint = constraints_1[_i];
-            if (!anyRangesContainRange(constraintToRanges(constraint, subjectRange, otherEventStore, businessHoursUnexpanded, calendar), subjectRange)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    function constraintToRanges(constraint, subjectRange, // for expanding a recurring constraint, or expanding business hours
-    otherEventStore, // for if constraint is an even group ID
-    businessHoursUnexpanded, // for if constraint is 'businessHours'
-    calendar // for expanding businesshours
-    ) {
-        if (constraint === 'businessHours') {
-            return eventStoreToRanges(expandRecurring(businessHoursUnexpanded, subjectRange, calendar));
-        }
-        else if (typeof constraint === 'string') { // an group ID
-            return eventStoreToRanges(filterEventStoreDefs(otherEventStore, function (eventDef) {
-                return eventDef.groupId === constraint;
-            }));
-        }
-        else if (typeof constraint === 'object' && constraint) { // non-null object
-            return eventStoreToRanges(expandRecurring(constraint, subjectRange, calendar));
-        }
-        return []; // if it's false
-    }
-    // TODO: move to event-store file?
-    function eventStoreToRanges(eventStore) {
-        var instances = eventStore.instances;
-        var ranges = [];
-        for (var instanceId in instances) {
-            ranges.push(instances[instanceId].range);
-        }
-        return ranges;
-    }
-    // TODO: move to geom file?
-    function anyRangesContainRange(outerRanges, innerRange) {
-        for (var _i = 0, outerRanges_1 = outerRanges; _i < outerRanges_1.length; _i++) {
-            var outerRange = outerRanges_1[_i];
-            if (rangeContainsRange(outerRange, innerRange)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    // Parsing
-    // ------------------------------------------------------------------------------------------------------------------------
-    function normalizeConstraint(input, calendar) {
-        if (Array.isArray(input)) {
-            return parseEvents(input, '', calendar, true); // allowOpenRange=true
-        }
-        else if (typeof input === 'object' && input) { // non-null object
-            return parseEvents([input], '', calendar, true); // allowOpenRange=true
-        }
-        else if (input != null) {
-            return String(input);
-        }
-        else {
-            return null;
-        }
-    }
-
-    function htmlEscape(s) {
-        return (s + '').replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/'/g, '&#039;')
-            .replace(/"/g, '&quot;')
-            .replace(/\n/g, '<br />');
-    }
-    // Given a hash of CSS properties, returns a string of CSS.
-    // Uses property names as-is (no camel-case conversion). Will not make statements for null/undefined values.
-    function cssToStr(cssProps) {
-        var statements = [];
-        for (var name_1 in cssProps) {
-            var val = cssProps[name_1];
-            if (val != null && val !== '') {
-                statements.push(name_1 + ':' + val);
-            }
-        }
-        return statements.join(';');
-    }
-    // Given an object hash of HTML attribute names to values,
-    // generates a string that can be injected between < > in HTML
-    function attrsToStr(attrs) {
-        var parts = [];
-        for (var name_2 in attrs) {
-            var val = attrs[name_2];
-            if (val != null) {
-                parts.push(name_2 + '="' + htmlEscape(val) + '"');
-            }
-        }
-        return parts.join(' ');
-    }
-    function parseClassName(raw) {
-        if (Array.isArray(raw)) {
-            return raw;
-        }
-        else if (typeof raw === 'string') {
-            return raw.split(/\s+/);
-        }
-        else {
-            return [];
-        }
-    }
-
-    var UNSCOPED_EVENT_UI_PROPS = {
-        editable: Boolean,
-        startEditable: Boolean,
-        durationEditable: Boolean,
-        constraint: null,
-        overlap: null,
-        allow: null,
-        className: parseClassName,
-        classNames: parseClassName,
-        color: String,
-        backgroundColor: String,
-        borderColor: String,
-        textColor: String
-    };
-    function processUnscopedUiProps(rawProps, calendar, leftovers) {
-        var props = refineProps(rawProps, UNSCOPED_EVENT_UI_PROPS, {}, leftovers);
-        var constraint = normalizeConstraint(props.constraint, calendar);
-        return {
-            startEditable: props.startEditable != null ? props.startEditable : props.editable,
-            durationEditable: props.durationEditable != null ? props.durationEditable : props.editable,
-            constraints: constraint != null ? [constraint] : [],
-            overlap: props.overlap,
-            allows: props.allow != null ? [props.allow] : [],
-            backgroundColor: props.backgroundColor || props.color,
-            borderColor: props.borderColor || props.color,
-            textColor: props.textColor,
-            classNames: props.classNames.concat(props.className)
-        };
-    }
-    function processScopedUiProps(prefix, rawScoped, calendar, leftovers) {
-        var rawUnscoped = {};
-        var wasFound = {};
-        for (var key in UNSCOPED_EVENT_UI_PROPS) {
-            var scopedKey = prefix + capitaliseFirstLetter(key);
-            rawUnscoped[key] = rawScoped[scopedKey];
-            wasFound[scopedKey] = true;
-        }
-        if (prefix === 'event') {
-            rawUnscoped.editable = rawScoped.editable; // special case. there is no 'eventEditable', just 'editable'
-        }
-        if (leftovers) {
-            for (var key in rawScoped) {
-                if (!wasFound[key]) {
-                    leftovers[key] = rawScoped[key];
-                }
-            }
-        }
-        return processUnscopedUiProps(rawUnscoped, calendar);
-    }
-    var EMPTY_EVENT_UI = {
-        startEditable: null,
-        durationEditable: null,
-        constraints: [],
-        overlap: null,
-        allows: [],
-        backgroundColor: '',
-        borderColor: '',
-        textColor: '',
-        classNames: []
-    };
-    // prevent against problems with <2 args!
-    function combineEventUis(uis) {
-        return uis.reduce(combineTwoEventUis, EMPTY_EVENT_UI);
-    }
-    function combineTwoEventUis(item0, item1) {
-        return {
-            startEditable: item1.startEditable != null ? item1.startEditable : item0.startEditable,
-            durationEditable: item1.durationEditable != null ? item1.durationEditable : item0.durationEditable,
-            constraints: item0.constraints.concat(item1.constraints),
-            overlap: typeof item1.overlap === 'boolean' ? item1.overlap : item0.overlap,
-            allows: item0.allows.concat(item1.allows),
-            backgroundColor: item1.backgroundColor || item0.backgroundColor,
-            borderColor: item1.borderColor || item0.borderColor,
-            textColor: item1.textColor || item0.textColor,
-            classNames: item0.classNames.concat(item1.classNames)
-        };
-    }
-
-    var NON_DATE_PROPS = {
-        id: String,
-        groupId: String,
-        title: String,
-        url: String,
-        rendering: String,
-        extendedProps: null
-    };
-    var DATE_PROPS = {
-        start: null,
-        date: null,
-        end: null,
-        allDay: null
-    };
-    var uid = 0;
-    function parseEvent(raw, sourceId, calendar, allowOpenRange) {
-        var allDayDefault = computeIsAllDayDefault(sourceId, calendar);
-        var leftovers0 = {};
-        var recurringRes = parseRecurring(raw, // raw, but with single-event stuff stripped out
-        allDayDefault, calendar.dateEnv, calendar.pluginSystem.hooks.recurringTypes, leftovers0 // will populate with non-recurring props
-        );
-        if (recurringRes) {
-            var def = parseEventDef(leftovers0, sourceId, recurringRes.allDay, Boolean(recurringRes.duration), calendar);
-            def.recurringDef = {
-                typeId: recurringRes.typeId,
-                typeData: recurringRes.typeData,
-                duration: recurringRes.duration
-            };
-            return { def: def, instance: null };
-        }
-        else {
-            var leftovers1 = {};
-            var singleRes = parseSingle(raw, allDayDefault, calendar, leftovers1, allowOpenRange);
-            if (singleRes) {
-                var def = parseEventDef(leftovers1, sourceId, singleRes.allDay, singleRes.hasEnd, calendar);
-                var instance = createEventInstance(def.defId, singleRes.range, singleRes.forcedStartTzo, singleRes.forcedEndTzo);
-                return { def: def, instance: instance };
-            }
-        }
-        return null;
-    }
-    /*
-    Will NOT populate extendedProps with the leftover properties.
-    Will NOT populate date-related props.
-    The EventNonDateInput has been normalized (id => publicId, etc).
-    */
-    function parseEventDef(raw, sourceId, allDay, hasEnd, calendar) {
-        var leftovers = {};
-        var def = pluckNonDateProps(raw, calendar, leftovers);
-        def.defId = String(uid++);
-        def.sourceId = sourceId;
-        def.allDay = allDay;
-        def.hasEnd = hasEnd;
-        for (var _i = 0, _a = calendar.pluginSystem.hooks.eventDefParsers; _i < _a.length; _i++) {
-            var eventDefParser = _a[_i];
-            var newLeftovers = {};
-            eventDefParser(def, leftovers, newLeftovers);
-            leftovers = newLeftovers;
-        }
-        def.extendedProps = __assign(leftovers, def.extendedProps || {});
-        // help out EventApi from having user modify props
-        Object.freeze(def.ui.classNames);
-        Object.freeze(def.extendedProps);
-        return def;
-    }
-    function createEventInstance(defId, range, forcedStartTzo, forcedEndTzo) {
-        return {
-            instanceId: String(uid++),
-            defId: defId,
-            range: range,
-            forcedStartTzo: forcedStartTzo == null ? null : forcedStartTzo,
-            forcedEndTzo: forcedEndTzo == null ? null : forcedEndTzo
-        };
-    }
-    function parseSingle(raw, allDayDefault, calendar, leftovers, allowOpenRange) {
-        var props = pluckDateProps(raw, leftovers);
-        var allDay = props.allDay;
-        var startMeta;
-        var startMarker = null;
-        var hasEnd = false;
-        var endMeta;
-        var endMarker = null;
-        startMeta = calendar.dateEnv.createMarkerMeta(props.start);
-        if (startMeta) {
-            startMarker = startMeta.marker;
-        }
-        else if (!allowOpenRange) {
-            return null;
-        }
-        if (props.end != null) {
-            endMeta = calendar.dateEnv.createMarkerMeta(props.end);
-        }
-        if (allDay == null) {
-            if (allDayDefault != null) {
-                allDay = allDayDefault;
-            }
-            else {
-                // fall back to the date props LAST
-                allDay = (!startMeta || startMeta.isTimeUnspecified) &&
-                    (!endMeta || endMeta.isTimeUnspecified);
-            }
-        }
-        if (allDay && startMarker) {
-            startMarker = startOfDay(startMarker);
-        }
-        if (endMeta) {
-            endMarker = endMeta.marker;
-            if (allDay) {
-                endMarker = startOfDay(endMarker);
-            }
-            if (startMarker && endMarker <= startMarker) {
-                endMarker = null;
-            }
-        }
-        if (endMarker) {
-            hasEnd = true;
-        }
-        else if (!allowOpenRange) {
-            hasEnd = calendar.opt('forceEventDuration') || false;
-            endMarker = calendar.dateEnv.add(startMarker, allDay ?
-                calendar.defaultAllDayEventDuration :
-                calendar.defaultTimedEventDuration);
-        }
-        return {
-            allDay: allDay,
-            hasEnd: hasEnd,
-            range: { start: startMarker, end: endMarker },
-            forcedStartTzo: startMeta ? startMeta.forcedTzo : null,
-            forcedEndTzo: endMeta ? endMeta.forcedTzo : null
-        };
-    }
-    function pluckDateProps(raw, leftovers) {
-        var props = refineProps(raw, DATE_PROPS, {}, leftovers);
-        props.start = (props.start !== null) ? props.start : props.date;
-        delete props.date;
-        return props;
-    }
-    function pluckNonDateProps(raw, calendar, leftovers) {
-        var preLeftovers = {};
-        var props = refineProps(raw, NON_DATE_PROPS, {}, preLeftovers);
-        var ui = processUnscopedUiProps(preLeftovers, calendar, leftovers);
-        props.publicId = props.id;
-        delete props.id;
-        props.ui = ui;
-        return props;
-    }
-    function computeIsAllDayDefault(sourceId, calendar) {
-        var res = null;
-        if (sourceId) {
-            var source = calendar.state.eventSources[sourceId];
-            res = source.allDayDefault;
-        }
-        if (res == null) {
-            res = calendar.opt('allDayDefault');
-        }
-        return res;
-    }
-
-    var DEF_DEFAULTS = {
-        startTime: '09:00',
-        endTime: '17:00',
-        daysOfWeek: [1, 2, 3, 4, 5],
-        rendering: 'inverse-background',
-        classNames: 'fc-nonbusiness',
-        groupId: '_businessHours' // so multiple defs get grouped
-    };
-    /*
-    TODO: pass around as EventDefHash!!!
-    */
-    function parseBusinessHours(input, calendar) {
-        return parseEvents(refineInputs(input), '', calendar);
-    }
-    function refineInputs(input) {
-        var rawDefs;
-        if (input === true) {
-            rawDefs = [{}]; // will get DEF_DEFAULTS verbatim
-        }
-        else if (Array.isArray(input)) {
-            // if specifying an array, every sub-definition NEEDS a day-of-week
-            rawDefs = input.filter(function (rawDef) {
-                return rawDef.daysOfWeek;
-            });
-        }
-        else if (typeof input === 'object' && input) { // non-null object
-            rawDefs = [input];
-        }
-        else { // is probably false
-            rawDefs = [];
-        }
-        rawDefs = rawDefs.map(function (rawDef) {
-            return __assign({}, DEF_DEFAULTS, rawDef);
-        });
-        return rawDefs;
-    }
-
-    function memoizeRendering(renderFunc, unrenderFunc, dependencies) {
-        if (dependencies === void 0) { dependencies = []; }
-        var dependents = [];
-        var thisContext;
-        var prevArgs;
-        function unrender() {
-            if (prevArgs) {
-                for (var _i = 0, dependents_1 = dependents; _i < dependents_1.length; _i++) {
-                    var dependent = dependents_1[_i];
-                    dependent.unrender();
-                }
-                if (unrenderFunc) {
-                    unrenderFunc.apply(thisContext, prevArgs);
-                }
-                prevArgs = null;
-            }
-        }
-        function res() {
-            if (!prevArgs || !isArraysEqual(prevArgs, arguments)) {
-                unrender();
-                thisContext = this;
-                prevArgs = arguments;
-                renderFunc.apply(this, arguments);
-            }
-        }
-        res.dependents = dependents;
-        res.unrender = unrender;
-        for (var _i = 0, dependencies_1 = dependencies; _i < dependencies_1.length; _i++) {
-            var dependency = dependencies_1[_i];
-            dependency.dependents.push(res);
-        }
-        return res;
-    }
-
-    var EMPTY_EVENT_STORE = createEmptyEventStore(); // for purecomponents. TODO: keep elsewhere
-    var Splitter = /** @class */ (function () {
-        function Splitter() {
-            this.getKeysForEventDefs = memoize(this._getKeysForEventDefs);
-            this.splitDateSelection = memoize(this._splitDateSpan);
-            this.splitEventStore = memoize(this._splitEventStore);
-            this.splitIndividualUi = memoize(this._splitIndividualUi);
-            this.splitEventDrag = memoize(this._splitInteraction);
-            this.splitEventResize = memoize(this._splitInteraction);
-            this.eventUiBuilders = {}; // TODO: typescript protection
-        }
-        Splitter.prototype.splitProps = function (props) {
-            var _this = this;
-            var keyInfos = this.getKeyInfo(props);
-            var defKeys = this.getKeysForEventDefs(props.eventStore);
-            var dateSelections = this.splitDateSelection(props.dateSelection);
-            var individualUi = this.splitIndividualUi(props.eventUiBases, defKeys); // the individual *bases*
-            var eventStores = this.splitEventStore(props.eventStore, defKeys);
-            var eventDrags = this.splitEventDrag(props.eventDrag);
-            var eventResizes = this.splitEventResize(props.eventResize);
-            var splitProps = {};
-            this.eventUiBuilders = mapHash(keyInfos, function (info, key) {
-                return _this.eventUiBuilders[key] || memoize(buildEventUiForKey);
-            });
-            for (var key in keyInfos) {
-                var keyInfo = keyInfos[key];
-                var eventStore = eventStores[key] || EMPTY_EVENT_STORE;
-                var buildEventUi = this.eventUiBuilders[key];
-                splitProps[key] = {
-                    businessHours: keyInfo.businessHours || props.businessHours,
-                    dateSelection: dateSelections[key] || null,
-                    eventStore: eventStore,
-                    eventUiBases: buildEventUi(props.eventUiBases[''], keyInfo.ui, individualUi[key]),
-                    eventSelection: eventStore.instances[props.eventSelection] ? props.eventSelection : '',
-                    eventDrag: eventDrags[key] || null,
-                    eventResize: eventResizes[key] || null
-                };
-            }
-            return splitProps;
-        };
-        Splitter.prototype._splitDateSpan = function (dateSpan) {
-            var dateSpans = {};
-            if (dateSpan) {
-                var keys = this.getKeysForDateSpan(dateSpan);
-                for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
-                    var key = keys_1[_i];
-                    dateSpans[key] = dateSpan;
-                }
-            }
-            return dateSpans;
-        };
-        Splitter.prototype._getKeysForEventDefs = function (eventStore) {
-            var _this = this;
-            return mapHash(eventStore.defs, function (eventDef) {
-                return _this.getKeysForEventDef(eventDef);
-            });
-        };
-        Splitter.prototype._splitEventStore = function (eventStore, defKeys) {
-            var defs = eventStore.defs, instances = eventStore.instances;
-            var splitStores = {};
-            for (var defId in defs) {
-                for (var _i = 0, _a = defKeys[defId]; _i < _a.length; _i++) {
-                    var key = _a[_i];
-                    if (!splitStores[key]) {
-                        splitStores[key] = createEmptyEventStore();
-                    }
-                    splitStores[key].defs[defId] = defs[defId];
-                }
-            }
-            for (var instanceId in instances) {
-                var instance = instances[instanceId];
-                for (var _b = 0, _c = defKeys[instance.defId]; _b < _c.length; _b++) {
-                    var key = _c[_b];
-                    if (splitStores[key]) { // must have already been created
-                        splitStores[key].instances[instanceId] = instance;
-                    }
-                }
-            }
-            return splitStores;
-        };
-        Splitter.prototype._splitIndividualUi = function (eventUiBases, defKeys) {
-            var splitHashes = {};
-            for (var defId in eventUiBases) {
-                if (defId) { // not the '' key
-                    for (var _i = 0, _a = defKeys[defId]; _i < _a.length; _i++) {
-                        var key = _a[_i];
-                        if (!splitHashes[key]) {
-                            splitHashes[key] = {};
-                        }
-                        splitHashes[key][defId] = eventUiBases[defId];
-                    }
-                }
-            }
-            return splitHashes;
-        };
-        Splitter.prototype._splitInteraction = function (interaction) {
-            var splitStates = {};
-            if (interaction) {
-                var affectedStores_1 = this._splitEventStore(interaction.affectedEvents, this._getKeysForEventDefs(interaction.affectedEvents) // can't use cached. might be events from other calendar
-                );
-                // can't rely on defKeys because event data is mutated
-                var mutatedKeysByDefId = this._getKeysForEventDefs(interaction.mutatedEvents);
-                var mutatedStores_1 = this._splitEventStore(interaction.mutatedEvents, mutatedKeysByDefId);
-                var populate = function (key) {
-                    if (!splitStates[key]) {
-                        splitStates[key] = {
-                            affectedEvents: affectedStores_1[key] || EMPTY_EVENT_STORE,
-                            mutatedEvents: mutatedStores_1[key] || EMPTY_EVENT_STORE,
-                            isEvent: interaction.isEvent,
-                            origSeg: interaction.origSeg
-                        };
-                    }
-                };
-                for (var key in affectedStores_1) {
-                    populate(key);
-                }
-                for (var key in mutatedStores_1) {
-                    populate(key);
-                }
-            }
-            return splitStates;
-        };
-        return Splitter;
-    }());
-    function buildEventUiForKey(allUi, eventUiForKey, individualUi) {
-        var baseParts = [];
-        if (allUi) {
-            baseParts.push(allUi);
-        }
-        if (eventUiForKey) {
-            baseParts.push(eventUiForKey);
-        }
-        var stuff = {
-            '': combineEventUis(baseParts)
-        };
-        if (individualUi) {
-            __assign(stuff, individualUi);
-        }
-        return stuff;
-    }
-
-    // Generates HTML for an anchor to another view into the calendar.
-    // Will either generate an <a> tag or a non-clickable <span> tag, depending on enabled settings.
-    // `gotoOptions` can either be a DateMarker, or an object with the form:
-    // { date, type, forceOff }
-    // `type` is a view-type like "day" or "week". default value is "day".
-    // `attrs` and `innerHtml` are use to generate the rest of the HTML tag.
-    function buildGotoAnchorHtml(component, gotoOptions, attrs, innerHtml) {
-        var dateEnv = component.dateEnv;
-        var date;
-        var type;
-        var forceOff;
-        var finalOptions;
-        if (gotoOptions instanceof Date) {
-            date = gotoOptions; // a single date-like input
-        }
-        else {
-            date = gotoOptions.date;
-            type = gotoOptions.type;
-            forceOff = gotoOptions.forceOff;
-        }
-        finalOptions = {
-            date: dateEnv.formatIso(date, { omitTime: true }),
-            type: type || 'day'
-        };
-        if (typeof attrs === 'string') {
-            innerHtml = attrs;
-            attrs = null;
-        }
-        attrs = attrs ? ' ' + attrsToStr(attrs) : ''; // will have a leading space
-        innerHtml = innerHtml || '';
-        if (!forceOff && component.opt('navLinks')) {
-            return '<a' + attrs +
-                ' data-goto="' + htmlEscape(JSON.stringify(finalOptions)) + '">' +
-                innerHtml +
-                '</a>';
-        }
-        else {
-            return '<span' + attrs + '>' +
-                innerHtml +
-                '</span>';
-        }
-    }
-    function getAllDayHtml(component) {
-        return component.opt('allDayHtml') || htmlEscape(component.opt('allDayText'));
-    }
-    // Computes HTML classNames for a single-day element
-    function getDayClasses(date, dateProfile, context, noThemeHighlight) {
-        var calendar = context.calendar, view = context.view, theme = context.theme, dateEnv = context.dateEnv;
-        var classes = [];
-        var todayStart;
-        var todayEnd;
-        if (!rangeContainsMarker(dateProfile.activeRange, date)) {
-            classes.push('fc-disabled-day');
-        }
-        else {
-            classes.push('fc-' + DAY_IDS[date.getUTCDay()]);
-            if (view.opt('monthMode') &&
-                dateEnv.getMonth(date) !== dateEnv.getMonth(dateProfile.currentRange.start)) {
-                classes.push('fc-other-month');
-            }
-            todayStart = startOfDay(calendar.getNow());
-            todayEnd = addDays(todayStart, 1);
-            if (date < todayStart) {
-                classes.push('fc-past');
-            }
-            else if (date >= todayEnd) {
-                classes.push('fc-future');
-            }
-            else {
-                classes.push('fc-today');
-                if (noThemeHighlight !== true) {
-                    classes.push(theme.getClass('today'));
-                }
-            }
-        }
-        return classes;
-    }
-
-    // given a function that resolves a result asynchronously.
-    // the function can either call passed-in success and failure callbacks,
-    // or it can return a promise.
-    // if you need to pass additional params to func, bind them first.
-    function unpromisify(func, success, failure) {
-        // guard against success/failure callbacks being called more than once
-        // and guard against a promise AND callback being used together.
-        var isResolved = false;
-        var wrappedSuccess = function () {
-            if (!isResolved) {
-                isResolved = true;
-                success.apply(this, arguments);
-            }
-        };
-        var wrappedFailure = function () {
-            if (!isResolved) {
-                isResolved = true;
-                if (failure) {
-                    failure.apply(this, arguments);
-                }
-            }
-        };
-        var res = func(wrappedSuccess, wrappedFailure);
-        if (res && typeof res.then === 'function') {
-            res.then(wrappedSuccess, wrappedFailure);
-        }
-    }
-
-    var Mixin = /** @class */ (function () {
-        function Mixin() {
-        }
-        // mix into a CLASS
-        Mixin.mixInto = function (destClass) {
-            this.mixIntoObj(destClass.prototype);
-        };
-        // mix into ANY object
-        Mixin.mixIntoObj = function (destObj) {
-            var _this = this;
-            Object.getOwnPropertyNames(this.prototype).forEach(function (name) {
-                if (!destObj[name]) { // if destination doesn't already define it
-                    destObj[name] = _this.prototype[name];
-                }
-            });
-        };
-        /*
-        will override existing methods
-        TODO: remove! not used anymore
-        */
-        Mixin.mixOver = function (destClass) {
-            var _this = this;
-            Object.getOwnPropertyNames(this.prototype).forEach(function (name) {
-                destClass.prototype[name] = _this.prototype[name];
-            });
-        };
-        return Mixin;
-    }());
-
-    /*
-    USAGE:
-      import { default as EmitterMixin, EmitterInterface } from './EmitterMixin'
-    in class:
-      on: EmitterInterface['on']
-      one: EmitterInterface['one']
-      off: EmitterInterface['off']
-      trigger: EmitterInterface['trigger']
-      triggerWith: EmitterInterface['triggerWith']
-      hasHandlers: EmitterInterface['hasHandlers']
-    after class:
-      EmitterMixin.mixInto(TheClass)
-    */
-    var EmitterMixin = /** @class */ (function (_super) {
-        __extends(EmitterMixin, _super);
-        function EmitterMixin() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        EmitterMixin.prototype.on = function (type, handler) {
-            addToHash(this._handlers || (this._handlers = {}), type, handler);
-            return this; // for chaining
-        };
-        // todo: add comments
-        EmitterMixin.prototype.one = function (type, handler) {
-            addToHash(this._oneHandlers || (this._oneHandlers = {}), type, handler);
-            return this; // for chaining
-        };
-        EmitterMixin.prototype.off = function (type, handler) {
-            if (this._handlers) {
-                removeFromHash(this._handlers, type, handler);
-            }
-            if (this._oneHandlers) {
-                removeFromHash(this._oneHandlers, type, handler);
-            }
-            return this; // for chaining
-        };
-        EmitterMixin.prototype.trigger = function (type) {
-            var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
-            }
-            this.triggerWith(type, this, args);
-            return this; // for chaining
-        };
-        EmitterMixin.prototype.triggerWith = function (type, context, args) {
-            if (this._handlers) {
-                applyAll(this._handlers[type], context, args);
-            }
-            if (this._oneHandlers) {
-                applyAll(this._oneHandlers[type], context, args);
-                delete this._oneHandlers[type]; // will never fire again
-            }
-            return this; // for chaining
-        };
-        EmitterMixin.prototype.hasHandlers = function (type) {
-            return (this._handlers && this._handlers[type] && this._handlers[type].length) ||
-                (this._oneHandlers && this._oneHandlers[type] && this._oneHandlers[type].length);
-        };
-        return EmitterMixin;
-    }(Mixin));
-    function addToHash(hash, type, handler) {
-        (hash[type] || (hash[type] = []))
-            .push(handler);
-    }
-    function removeFromHash(hash, type, handler) {
-        if (handler) {
-            if (hash[type]) {
-                hash[type] = hash[type].filter(function (func) {
-                    return func !== handler;
-                });
-            }
-        }
-        else {
-            delete hash[type]; // remove all handler funcs for this type
-        }
-    }
-
-    /*
-    Records offset information for a set of elements, relative to an origin element.
-    Can record the left/right OR the top/bottom OR both.
-    Provides methods for querying the cache by position.
-    */
-    var PositionCache = /** @class */ (function () {
-        function PositionCache(originEl, els, isHorizontal, isVertical) {
-            this.originEl = originEl;
-            this.els = els;
-            this.isHorizontal = isHorizontal;
-            this.isVertical = isVertical;
-        }
-        // Queries the els for coordinates and stores them.
-        // Call this method before using and of the get* methods below.
-        PositionCache.prototype.build = function () {
-            var originEl = this.originEl;
-            var originClientRect = this.originClientRect =
-                originEl.getBoundingClientRect(); // relative to viewport top-left
-            if (this.isHorizontal) {
-                this.buildElHorizontals(originClientRect.left);
-            }
-            if (this.isVertical) {
-                this.buildElVerticals(originClientRect.top);
-            }
-        };
-        // Populates the left/right internal coordinate arrays
-        PositionCache.prototype.buildElHorizontals = function (originClientLeft) {
-            var lefts = [];
-            var rights = [];
-            for (var _i = 0, _a = this.els; _i < _a.length; _i++) {
-                var el = _a[_i];
-                var rect = el.getBoundingClientRect();
-                lefts.push(rect.left - originClientLeft);
-                rights.push(rect.right - originClientLeft);
-            }
-            this.lefts = lefts;
-            this.rights = rights;
-        };
-        // Populates the top/bottom internal coordinate arrays
-        PositionCache.prototype.buildElVerticals = function (originClientTop) {
-            var tops = [];
-            var bottoms = [];
-            for (var _i = 0, _a = this.els; _i < _a.length; _i++) {
-                var el = _a[_i];
-                var rect = el.getBoundingClientRect();
-                tops.push(rect.top - originClientTop);
-                bottoms.push(rect.bottom - originClientTop);
-            }
-            this.tops = tops;
-            this.bottoms = bottoms;
-        };
-        // Given a left offset (from document left), returns the index of the el that it horizontally intersects.
-        // If no intersection is made, returns undefined.
-        PositionCache.prototype.leftToIndex = function (leftPosition) {
-            var lefts = this.lefts;
-            var rights = this.rights;
-            var len = lefts.length;
-            var i;
-            for (i = 0; i < len; i++) {
-                if (leftPosition >= lefts[i] && leftPosition < rights[i]) {
-                    return i;
-                }
-            }
-        };
-        // Given a top offset (from document top), returns the index of the el that it vertically intersects.
-        // If no intersection is made, returns undefined.
-        PositionCache.prototype.topToIndex = function (topPosition) {
-            var tops = this.tops;
-            var bottoms = this.bottoms;
-            var len = tops.length;
-            var i;
-            for (i = 0; i < len; i++) {
-                if (topPosition >= tops[i] && topPosition < bottoms[i]) {
-                    return i;
-                }
-            }
-        };
-        // Gets the width of the element at the given index
-        PositionCache.prototype.getWidth = function (leftIndex) {
-            return this.rights[leftIndex] - this.lefts[leftIndex];
-        };
-        // Gets the height of the element at the given index
-        PositionCache.prototype.getHeight = function (topIndex) {
-            return this.bottoms[topIndex] - this.tops[topIndex];
-        };
-        return PositionCache;
-    }());
-
-    /*
-    An object for getting/setting scroll-related information for an element.
-    Internally, this is done very differently for window versus DOM element,
-    so this object serves as a common interface.
-    */
-    var ScrollController = /** @class */ (function () {
-        function ScrollController() {
-        }
-        ScrollController.prototype.getMaxScrollTop = function () {
-            return this.getScrollHeight() - this.getClientHeight();
-        };
-        ScrollController.prototype.getMaxScrollLeft = function () {
-            return this.getScrollWidth() - this.getClientWidth();
-        };
-        ScrollController.prototype.canScrollVertically = function () {
-            return this.getMaxScrollTop() > 0;
-        };
-        ScrollController.prototype.canScrollHorizontally = function () {
-            return this.getMaxScrollLeft() > 0;
-        };
-        ScrollController.prototype.canScrollUp = function () {
-            return this.getScrollTop() > 0;
-        };
-        ScrollController.prototype.canScrollDown = function () {
-            return this.getScrollTop() < this.getMaxScrollTop();
-        };
-        ScrollController.prototype.canScrollLeft = function () {
-            return this.getScrollLeft() > 0;
-        };
-        ScrollController.prototype.canScrollRight = function () {
-            return this.getScrollLeft() < this.getMaxScrollLeft();
-        };
-        return ScrollController;
-    }());
-    var ElementScrollController = /** @class */ (function (_super) {
-        __extends(ElementScrollController, _super);
-        function ElementScrollController(el) {
-            var _this = _super.call(this) || this;
-            _this.el = el;
-            return _this;
-        }
-        ElementScrollController.prototype.getScrollTop = function () {
-            return this.el.scrollTop;
-        };
-        ElementScrollController.prototype.getScrollLeft = function () {
-            return this.el.scrollLeft;
-        };
-        ElementScrollController.prototype.setScrollTop = function (top) {
-            this.el.scrollTop = top;
-        };
-        ElementScrollController.prototype.setScrollLeft = function (left) {
-            this.el.scrollLeft = left;
-        };
-        ElementScrollController.prototype.getScrollWidth = function () {
-            return this.el.scrollWidth;
-        };
-        ElementScrollController.prototype.getScrollHeight = function () {
-            return this.el.scrollHeight;
-        };
-        ElementScrollController.prototype.getClientHeight = function () {
-            return this.el.clientHeight;
-        };
-        ElementScrollController.prototype.getClientWidth = function () {
-            return this.el.clientWidth;
-        };
-        return ElementScrollController;
-    }(ScrollController));
-    var WindowScrollController = /** @class */ (function (_super) {
-        __extends(WindowScrollController, _super);
-        function WindowScrollController() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        WindowScrollController.prototype.getScrollTop = function () {
-            return window.pageYOffset;
-        };
-        WindowScrollController.prototype.getScrollLeft = function () {
-            return window.pageXOffset;
-        };
-        WindowScrollController.prototype.setScrollTop = function (n) {
-            window.scroll(window.pageXOffset, n);
-        };
-        WindowScrollController.prototype.setScrollLeft = function (n) {
-            window.scroll(n, window.pageYOffset);
-        };
-        WindowScrollController.prototype.getScrollWidth = function () {
-            return document.documentElement.scrollWidth;
-        };
-        WindowScrollController.prototype.getScrollHeight = function () {
-            return document.documentElement.scrollHeight;
-        };
-        WindowScrollController.prototype.getClientHeight = function () {
-            return document.documentElement.clientHeight;
-        };
-        WindowScrollController.prototype.getClientWidth = function () {
-            return document.documentElement.clientWidth;
-        };
-        return WindowScrollController;
-    }(ScrollController));
-
-    /*
-    Embodies a div that has potential scrollbars
-    */
-    var ScrollComponent = /** @class */ (function (_super) {
-        __extends(ScrollComponent, _super);
-        function ScrollComponent(overflowX, overflowY) {
-            var _this = _super.call(this, createElement('div', {
-                className: 'fc-scroller'
-            })) || this;
-            _this.overflowX = overflowX;
-            _this.overflowY = overflowY;
-            _this.applyOverflow();
-            return _this;
-        }
-        // sets to natural height, unlocks overflow
-        ScrollComponent.prototype.clear = function () {
-            this.setHeight('auto');
-            this.applyOverflow();
-        };
-        ScrollComponent.prototype.destroy = function () {
-            removeElement(this.el);
-        };
-        // Overflow
-        // -----------------------------------------------------------------------------------------------------------------
-        ScrollComponent.prototype.applyOverflow = function () {
-            applyStyle(this.el, {
-                overflowX: this.overflowX,
-                overflowY: this.overflowY
-            });
-        };
-        // Causes any 'auto' overflow values to resolves to 'scroll' or 'hidden'.
-        // Useful for preserving scrollbar widths regardless of future resizes.
-        // Can pass in scrollbarWidths for optimization.
-        ScrollComponent.prototype.lockOverflow = function (scrollbarWidths) {
-            var overflowX = this.overflowX;
-            var overflowY = this.overflowY;
-            scrollbarWidths = scrollbarWidths || this.getScrollbarWidths();
-            if (overflowX === 'auto') {
-                overflowX = (scrollbarWidths.bottom || // horizontal scrollbars?
-                    this.canScrollHorizontally() // OR scrolling pane with massless scrollbars?
-                ) ? 'scroll' : 'hidden';
-            }
-            if (overflowY === 'auto') {
-                overflowY = (scrollbarWidths.left || scrollbarWidths.right || // horizontal scrollbars?
-                    this.canScrollVertically() // OR scrolling pane with massless scrollbars?
-                ) ? 'scroll' : 'hidden';
-            }
-            applyStyle(this.el, { overflowX: overflowX, overflowY: overflowY });
-        };
-        ScrollComponent.prototype.setHeight = function (height) {
-            applyStyleProp(this.el, 'height', height);
-        };
-        ScrollComponent.prototype.getScrollbarWidths = function () {
-            var edges = computeEdges(this.el);
-            return {
-                left: edges.scrollbarLeft,
-                right: edges.scrollbarRight,
-                bottom: edges.scrollbarBottom
-            };
-        };
-        return ScrollComponent;
-    }(ElementScrollController));
-
-    var Theme = /** @class */ (function () {
-        function Theme(calendarOptions) {
-            this.calendarOptions = calendarOptions;
-            this.processIconOverride();
-        }
-        Theme.prototype.processIconOverride = function () {
-            if (this.iconOverrideOption) {
-                this.setIconOverride(this.calendarOptions[this.iconOverrideOption]);
-            }
-        };
-        Theme.prototype.setIconOverride = function (iconOverrideHash) {
-            var iconClassesCopy;
-            var buttonName;
-            if (typeof iconOverrideHash === 'object' && iconOverrideHash) { // non-null object
-                iconClassesCopy = __assign({}, this.iconClasses);
-                for (buttonName in iconOverrideHash) {
-                    iconClassesCopy[buttonName] = this.applyIconOverridePrefix(iconOverrideHash[buttonName]);
-                }
-                this.iconClasses = iconClassesCopy;
-            }
-            else if (iconOverrideHash === false) {
-                this.iconClasses = {};
-            }
-        };
-        Theme.prototype.applyIconOverridePrefix = function (className) {
-            var prefix = this.iconOverridePrefix;
-            if (prefix && className.indexOf(prefix) !== 0) { // if not already present
-                className = prefix + className;
-            }
-            return className;
-        };
-        Theme.prototype.getClass = function (key) {
-            return this.classes[key] || '';
-        };
-        Theme.prototype.getIconClass = function (buttonName) {
-            var className = this.iconClasses[buttonName];
-            if (className) {
-                return this.baseIconClass + ' ' + className;
-            }
-            return '';
-        };
-        Theme.prototype.getCustomButtonIconClass = function (customButtonProps) {
-            var className;
-            if (this.iconOverrideCustomButtonOption) {
-                className = customButtonProps[this.iconOverrideCustomButtonOption];
-                if (className) {
-                    return this.baseIconClass + ' ' + this.applyIconOverridePrefix(className);
-                }
-            }
-            return '';
-        };
-        return Theme;
-    }());
-    Theme.prototype.classes = {};
-    Theme.prototype.iconClasses = {};
-    Theme.prototype.baseIconClass = '';
-    Theme.prototype.iconOverridePrefix = '';
-
-    var guid = 0;
-    var Component = /** @class */ (function () {
-        function Component(context, isView) {
-            // HACK to populate view at top of component instantiation call chain
-            if (isView) {
-                context.view = this;
-            }
-            this.uid = String(guid++);
-            this.context = context;
-            this.dateEnv = context.dateEnv;
-            this.theme = context.theme;
-            this.view = context.view;
-            this.calendar = context.calendar;
-            this.isRtl = this.opt('dir') === 'rtl';
-        }
-        Component.addEqualityFuncs = function (newFuncs) {
-            this.prototype.equalityFuncs = __assign({}, this.prototype.equalityFuncs, newFuncs);
-        };
-        Component.prototype.opt = function (name) {
-            return this.context.options[name];
-        };
-        Component.prototype.receiveProps = function (props) {
-            var _a = recycleProps(this.props || {}, props, this.equalityFuncs), anyChanges = _a.anyChanges, comboProps = _a.comboProps;
-            this.props = comboProps;
-            if (anyChanges) {
-                this.render(comboProps);
-            }
-        };
-        Component.prototype.render = function (props) {
-        };
-        // after destroy is called, this component won't ever be used again
-        Component.prototype.destroy = function () {
-        };
-        return Component;
-    }());
-    Component.prototype.equalityFuncs = {};
-    /*
-    Reuses old values when equal. If anything is unequal, returns newProps as-is.
-    Great for PureComponent, but won't be feasible with React, so just eliminate and use React's DOM diffing.
-    */
-    function recycleProps(oldProps, newProps, equalityFuncs) {
-        var comboProps = {}; // some old, some new
-        var anyChanges = false;
-        for (var key in newProps) {
-            if (key in oldProps && (oldProps[key] === newProps[key] ||
-                (equalityFuncs[key] && equalityFuncs[key](oldProps[key], newProps[key])))) {
-                // equal to old? use old prop
-                comboProps[key] = oldProps[key];
-            }
-            else {
-                comboProps[key] = newProps[key];
-                anyChanges = true;
-            }
-        }
-        for (var key in oldProps) {
-            if (!(key in newProps)) {
-                anyChanges = true;
-                break;
-            }
-        }
-        return { anyChanges: anyChanges, comboProps: comboProps };
-    }
-
-    /*
-    PURPOSES:
-    - hook up to fg, fill, and mirror renderers
-    - interface for dragging and hits
-    */
-    var DateComponent = /** @class */ (function (_super) {
-        __extends(DateComponent, _super);
-        function DateComponent(context, el, isView) {
-            var _this = _super.call(this, context, isView) || this;
-            _this.el = el;
-            return _this;
-        }
-        DateComponent.prototype.destroy = function () {
-            _super.prototype.destroy.call(this);
-            removeElement(this.el);
-        };
-        // TODO: WHAT ABOUT (sourceSeg && sourceSeg.component.doesDragMirror)
-        //
-        // Event Drag-n-Drop Rendering (for both events and external elements)
-        // ---------------------------------------------------------------------------------------------------------------
-        /*
-        renderEventDragSegs(state: EventSegUiInteractionState) {
-          if (state) {
-            let { isEvent, segs, sourceSeg } = state
-      
-            if (this.eventRenderer) {
-              this.eventRenderer.hideByHash(state.affectedInstances)
-            }
-      
-            // if the user is dragging something that is considered an event with real event data,
-            // and this component likes to do drag mirrors OR the component where the seg came from
-            // likes to do drag mirrors, then render a drag mirror.
-            if (isEvent && (this.doesDragMirror || sourceSeg && sourceSeg.component.doesDragMirror)) {
-              if (this.mirrorRenderer) {
-                this.mirrorRenderer.renderSegs(segs, { isDragging: true, sourceSeg })
-              }
-            }
-      
-            // if it would be impossible to render a drag mirror OR this component likes to render
-            // highlights, then render a highlight.
-            if (!isEvent || this.doesDragHighlight) {
-              if (this.fillRenderer) {
-                this.fillRenderer.renderSegs('highlight', segs)
-              }
-            }
-          }
-        }
-        */
-        // Hit System
-        // -----------------------------------------------------------------------------------------------------------------
-        DateComponent.prototype.buildPositionCaches = function () {
-        };
-        DateComponent.prototype.queryHit = function (positionLeft, positionTop, elWidth, elHeight) {
-            return null; // this should be abstract
-        };
-        // Validation
-        // -----------------------------------------------------------------------------------------------------------------
-        DateComponent.prototype.isInteractionValid = function (interaction) {
-            var calendar = this.calendar;
-            var dateProfile = this.props.dateProfile; // HACK
-            var instances = interaction.mutatedEvents.instances;
-            if (dateProfile) { // HACK for DayTile
-                for (var instanceId in instances) {
-                    if (!rangeContainsRange(dateProfile.validRange, instances[instanceId].range)) {
-                        return false;
-                    }
-                }
-            }
-            return isInteractionValid(interaction, calendar);
-        };
-        DateComponent.prototype.isDateSelectionValid = function (selection) {
-            var dateProfile = this.props.dateProfile; // HACK
-            if (dateProfile && // HACK for DayTile
-                !rangeContainsRange(dateProfile.validRange, selection.range)) {
-                return false;
-            }
-            return isDateSelectionValid(selection, this.calendar);
-        };
-        // Triggering
-        // -----------------------------------------------------------------------------------------------------------------
-        // TODO: move to Calendar
-        DateComponent.prototype.publiclyTrigger = function (name, args) {
-            var calendar = this.calendar;
-            return calendar.publiclyTrigger(name, args);
-        };
-        DateComponent.prototype.publiclyTriggerAfterSizing = function (name, args) {
-            var calendar = this.calendar;
-            return calendar.publiclyTriggerAfterSizing(name, args);
-        };
-        DateComponent.prototype.hasPublicHandlers = function (name) {
-            var calendar = this.calendar;
-            return calendar.hasPublicHandlers(name);
-        };
-        DateComponent.prototype.triggerRenderedSegs = function (segs, isMirrors) {
-            var calendar = this.calendar;
-            if (this.hasPublicHandlers('eventPositioned')) {
-                for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
-                    var seg = segs_1[_i];
-                    this.publiclyTriggerAfterSizing('eventPositioned', [
-                        {
-                            event: new EventApi(calendar, seg.eventRange.def, seg.eventRange.instance),
-                            isMirror: isMirrors,
-                            isStart: seg.isStart,
-                            isEnd: seg.isEnd,
-                            el: seg.el,
-                            view: this // safe to cast because this method is only called on context.view
-                        }
-                    ]);
-                }
-            }
-            if (!calendar.state.loadingLevel) { // avoid initial empty state while pending
-                calendar.afterSizingTriggers._eventsPositioned = [null]; // fire once
-            }
-        };
-        DateComponent.prototype.triggerWillRemoveSegs = function (segs, isMirrors) {
-            var calendar = this.calendar;
-            for (var _i = 0, segs_2 = segs; _i < segs_2.length; _i++) {
-                var seg = segs_2[_i];
-                calendar.trigger('eventElRemove', seg.el);
-            }
-            if (this.hasPublicHandlers('eventDestroy')) {
-                for (var _a = 0, segs_3 = segs; _a < segs_3.length; _a++) {
-                    var seg = segs_3[_a];
-                    this.publiclyTrigger('eventDestroy', [
-                        {
-                            event: new EventApi(calendar, seg.eventRange.def, seg.eventRange.instance),
-                            isMirror: isMirrors,
-                            el: seg.el,
-                            view: this // safe to cast because this method is only called on context.view
-                        }
-                    ]);
-                }
-            }
-        };
-        // Pointer Interaction Utils
-        // -----------------------------------------------------------------------------------------------------------------
-        DateComponent.prototype.isValidSegDownEl = function (el) {
-            return !this.props.eventDrag && // HACK
-                !this.props.eventResize && // HACK
-                !elementClosest(el, '.fc-mirror') &&
-                (this.isPopover() || !this.isInPopover(el));
-            // ^above line ensures we don't detect a seg interaction within a nested component.
-            // it's a HACK because it only supports a popover as the nested component.
-        };
-        DateComponent.prototype.isValidDateDownEl = function (el) {
-            var segEl = elementClosest(el, this.fgSegSelector);
-            return (!segEl || segEl.classList.contains('fc-mirror')) &&
-                !elementClosest(el, '.fc-more') && // a "more.." link
-                !elementClosest(el, 'a[data-goto]') && // a clickable nav link
-                !this.isInPopover(el);
-        };
-        DateComponent.prototype.isPopover = function () {
-            return this.el.classList.contains('fc-popover');
-        };
-        DateComponent.prototype.isInPopover = function (el) {
-            return Boolean(elementClosest(el, '.fc-popover'));
-        };
-        return DateComponent;
-    }(Component));
-    DateComponent.prototype.fgSegSelector = '.fc-event-container > *';
-    DateComponent.prototype.bgSegSelector = '.fc-bgevent:not(.fc-nonbusiness)';
-
-    var uid$1 = 0;
-    function createPlugin(input) {
-        return {
-            id: String(uid$1++),
-            deps: input.deps || [],
-            reducers: input.reducers || [],
-            eventDefParsers: input.eventDefParsers || [],
-            isDraggableTransformers: input.isDraggableTransformers || [],
-            eventDragMutationMassagers: input.eventDragMutationMassagers || [],
-            eventDefMutationAppliers: input.eventDefMutationAppliers || [],
-            dateSelectionTransformers: input.dateSelectionTransformers || [],
-            datePointTransforms: input.datePointTransforms || [],
-            dateSpanTransforms: input.dateSpanTransforms || [],
-            views: input.views || {},
-            viewPropsTransformers: input.viewPropsTransformers || [],
-            isPropsValid: input.isPropsValid || null,
-            externalDefTransforms: input.externalDefTransforms || [],
-            eventResizeJoinTransforms: input.eventResizeJoinTransforms || [],
-            viewContainerModifiers: input.viewContainerModifiers || [],
-            eventDropTransformers: input.eventDropTransformers || [],
-            componentInteractions: input.componentInteractions || [],
-            calendarInteractions: input.calendarInteractions || [],
-            themeClasses: input.themeClasses || {},
-            eventSourceDefs: input.eventSourceDefs || [],
-            cmdFormatter: input.cmdFormatter,
-            recurringTypes: input.recurringTypes || [],
-            namedTimeZonedImpl: input.namedTimeZonedImpl,
-            defaultView: input.defaultView || '',
-            elementDraggingImpl: input.elementDraggingImpl,
-            optionChangeHandlers: input.optionChangeHandlers || {}
-        };
-    }
-    var PluginSystem = /** @class */ (function () {
-        function PluginSystem() {
-            this.hooks = {
-                reducers: [],
-                eventDefParsers: [],
-                isDraggableTransformers: [],
-                eventDragMutationMassagers: [],
-                eventDefMutationAppliers: [],
-                dateSelectionTransformers: [],
-                datePointTransforms: [],
-                dateSpanTransforms: [],
-                views: {},
-                viewPropsTransformers: [],
-                isPropsValid: null,
-                externalDefTransforms: [],
-                eventResizeJoinTransforms: [],
-                viewContainerModifiers: [],
-                eventDropTransformers: [],
-                componentInteractions: [],
-                calendarInteractions: [],
-                themeClasses: {},
-                eventSourceDefs: [],
-                cmdFormatter: null,
-                recurringTypes: [],
-                namedTimeZonedImpl: null,
-                defaultView: '',
-                elementDraggingImpl: null,
-                optionChangeHandlers: {}
-            };
-            this.addedHash = {};
-        }
-        PluginSystem.prototype.add = function (plugin) {
-            if (!this.addedHash[plugin.id]) {
-                this.addedHash[plugin.id] = true;
-                for (var _i = 0, _a = plugin.deps; _i < _a.length; _i++) {
-                    var dep = _a[_i];
-                    this.add(dep);
-                }
-                this.hooks = combineHooks(this.hooks, plugin);
-            }
-        };
-        return PluginSystem;
-    }());
-    function combineHooks(hooks0, hooks1) {
-        return {
-            reducers: hooks0.reducers.concat(hooks1.reducers),
-            eventDefParsers: hooks0.eventDefParsers.concat(hooks1.eventDefParsers),
-            isDraggableTransformers: hooks0.isDraggableTransformers.concat(hooks1.isDraggableTransformers),
-            eventDragMutationMassagers: hooks0.eventDragMutationMassagers.concat(hooks1.eventDragMutationMassagers),
-            eventDefMutationAppliers: hooks0.eventDefMutationAppliers.concat(hooks1.eventDefMutationAppliers),
-            dateSelectionTransformers: hooks0.dateSelectionTransformers.concat(hooks1.dateSelectionTransformers),
-            datePointTransforms: hooks0.datePointTransforms.concat(hooks1.datePointTransforms),
-            dateSpanTransforms: hooks0.dateSpanTransforms.concat(hooks1.dateSpanTransforms),
-            views: __assign({}, hooks0.views, hooks1.views),
-            viewPropsTransformers: hooks0.viewPropsTransformers.concat(hooks1.viewPropsTransformers),
-            isPropsValid: hooks1.isPropsValid || hooks0.isPropsValid,
-            externalDefTransforms: hooks0.externalDefTransforms.concat(hooks1.externalDefTransforms),
-            eventResizeJoinTransforms: hooks0.eventResizeJoinTransforms.concat(hooks1.eventResizeJoinTransforms),
-            viewContainerModifiers: hooks0.viewContainerModifiers.concat(hooks1.viewContainerModifiers),
-            eventDropTransformers: hooks0.eventDropTransformers.concat(hooks1.eventDropTransformers),
-            calendarInteractions: hooks0.calendarInteractions.concat(hooks1.calendarInteractions),
-            componentInteractions: hooks0.componentInteractions.concat(hooks1.componentInteractions),
-            themeClasses: __assign({}, hooks0.themeClasses, hooks1.themeClasses),
-            eventSourceDefs: hooks0.eventSourceDefs.concat(hooks1.eventSourceDefs),
-            cmdFormatter: hooks1.cmdFormatter || hooks0.cmdFormatter,
-            recurringTypes: hooks0.recurringTypes.concat(hooks1.recurringTypes),
-            namedTimeZonedImpl: hooks1.namedTimeZonedImpl || hooks0.namedTimeZonedImpl,
-            defaultView: hooks0.defaultView || hooks1.defaultView,
-            elementDraggingImpl: hooks0.elementDraggingImpl || hooks1.elementDraggingImpl,
-            optionChangeHandlers: __assign({}, hooks0.optionChangeHandlers, hooks1.optionChangeHandlers)
-        };
-    }
-
-    var eventSourceDef = {
-        ignoreRange: true,
-        parseMeta: function (raw) {
-            if (Array.isArray(raw)) { // short form
-                return raw;
-            }
-            else if (Array.isArray(raw.events)) {
-                return raw.events;
-            }
-            return null;
-        },
-        fetch: function (arg, success) {
-            success({
-                rawEvents: arg.eventSource.meta
-            });
-        }
-    };
-    var ArrayEventSourcePlugin = createPlugin({
-        eventSourceDefs: [eventSourceDef]
-    });
-
-    var eventSourceDef$1 = {
-        parseMeta: function (raw) {
-            if (typeof raw === 'function') { // short form
-                return raw;
-            }
-            else if (typeof raw.events === 'function') {
-                return raw.events;
-            }
-            return null;
-        },
-        fetch: function (arg, success, failure) {
-            var dateEnv = arg.calendar.dateEnv;
-            var func = arg.eventSource.meta;
-            unpromisify(func.bind(null, {
-                start: dateEnv.toDate(arg.range.start),
-                end: dateEnv.toDate(arg.range.end),
-                startStr: dateEnv.formatIso(arg.range.start),
-                endStr: dateEnv.formatIso(arg.range.end),
-                timeZone: dateEnv.timeZone
-            }), function (rawEvents) {
-                success({ rawEvents: rawEvents }); // needs an object response
-            }, failure // send errorObj directly to failure callback
-            );
-        }
-    };
-    var FuncEventSourcePlugin = createPlugin({
-        eventSourceDefs: [eventSourceDef$1]
-    });
-
-    function requestJson(method, url, params, successCallback, failureCallback) {
-        method = method.toUpperCase();
-        var body = null;
-        if (method === 'GET') {
-            url = injectQueryStringParams(url, params);
-        }
-        else {
-            body = encodeParams(params);
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.open(method, url, true);
-        if (method !== 'GET') {
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        }
-        xhr.onload = function () {
-            if (xhr.status >= 200 && xhr.status < 400) {
-                try {
-                    var res = JSON.parse(xhr.responseText);
-                    successCallback(res, xhr);
-                }
-                catch (err) {
-                    failureCallback('Failure parsing JSON', xhr);
-                }
-            }
-            else {
-                failureCallback('Request failed', xhr);
-            }
-        };
-        xhr.onerror = function () {
-            failureCallback('Request failed', xhr);
-        };
-        xhr.send(body);
-    }
-    function injectQueryStringParams(url, params) {
-        return url +
-            (url.indexOf('?') === -1 ? '?' : '&') +
-            encodeParams(params);
-    }
-    function encodeParams(params) {
-        var parts = [];
-        for (var key in params) {
-            parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(params[key]));
-        }
-        return parts.join('&');
-    }
-
-    var eventSourceDef$2 = {
-        parseMeta: function (raw) {
-            if (typeof raw === 'string') { // short form
-                raw = { url: raw };
-            }
-            else if (!raw || typeof raw !== 'object' || !raw.url) {
-                return null;
-            }
-            return {
-                url: raw.url,
-                method: (raw.method || 'GET').toUpperCase(),
-                extraParams: raw.extraParams,
-                startParam: raw.startParam,
-                endParam: raw.endParam,
-                timeZoneParam: raw.timeZoneParam
-            };
-        },
-        fetch: function (arg, success, failure) {
-            var meta = arg.eventSource.meta;
-            var requestParams = buildRequestParams(meta, arg.range, arg.calendar);
-            requestJson(meta.method, meta.url, requestParams, function (rawEvents, xhr) {
-                success({ rawEvents: rawEvents, xhr: xhr });
-            }, function (errorMessage, xhr) {
-                failure({ message: errorMessage, xhr: xhr });
-            });
-        }
-    };
-    var JsonFeedEventSourcePlugin = createPlugin({
-        eventSourceDefs: [eventSourceDef$2]
-    });
-    function buildRequestParams(meta, range, calendar) {
-        var dateEnv = calendar.dateEnv;
-        var startParam;
-        var endParam;
-        var timeZoneParam;
-        var customRequestParams;
-        var params = {};
-        startParam = meta.startParam;
-        if (startParam == null) {
-            startParam = calendar.opt('startParam');
-        }
-        endParam = meta.endParam;
-        if (endParam == null) {
-            endParam = calendar.opt('endParam');
-        }
-        timeZoneParam = meta.timeZoneParam;
-        if (timeZoneParam == null) {
-            timeZoneParam = calendar.opt('timeZoneParam');
-        }
-        // retrieve any outbound GET/POST data from the options
-        if (typeof meta.extraParams === 'function') {
-            // supplied as a function that returns a key/value object
-            customRequestParams = meta.extraParams();
-        }
-        else {
-            // probably supplied as a straight key/value object
-            customRequestParams = meta.extraParams || {};
-        }
-        __assign(params, customRequestParams);
-        params[startParam] = dateEnv.formatIso(range.start);
-        params[endParam] = dateEnv.formatIso(range.end);
-        if (dateEnv.timeZone !== 'local') {
-            params[timeZoneParam] = dateEnv.timeZone;
-        }
-        return params;
-    }
-
-    var recurring = {
-        parse: function (rawEvent, leftoverProps, dateEnv) {
-            var createMarker = dateEnv.createMarker.bind(dateEnv);
-            var processors = {
-                daysOfWeek: null,
-                startTime: createDuration,
-                endTime: createDuration,
-                startRecur: createMarker,
-                endRecur: createMarker
-            };
-            var props = refineProps(rawEvent, processors, {}, leftoverProps);
-            var anyValid = false;
-            for (var propName in props) {
-                if (props[propName] != null) {
-                    anyValid = true;
-                    break;
-                }
-            }
-            if (anyValid) {
-                var duration = null;
-                if ('duration' in leftoverProps) {
-                    duration = createDuration(leftoverProps.duration);
-                    delete leftoverProps.duration;
-                }
-                if (!duration && props.startTime && props.endTime) {
-                    duration = subtractDurations(props.endTime, props.startTime);
-                }
-                return {
-                    allDayGuess: Boolean(!props.startTime && !props.endTime),
-                    duration: duration,
-                    typeData: props // doesn't need endTime anymore but oh well
-                };
-            }
-            return null;
-        },
-        expand: function (typeData, framingRange, dateEnv) {
-            var clippedFramingRange = intersectRanges(framingRange, { start: typeData.startRecur, end: typeData.endRecur });
-            if (clippedFramingRange) {
-                return expandRanges(typeData.daysOfWeek, typeData.startTime, clippedFramingRange, dateEnv);
-            }
-            else {
-                return [];
-            }
-        }
-    };
-    var SimpleRecurrencePlugin = createPlugin({
-        recurringTypes: [recurring]
-    });
-    function expandRanges(daysOfWeek, startTime, framingRange, dateEnv) {
-        var dowHash = daysOfWeek ? arrayToHash(daysOfWeek) : null;
-        var dayMarker = startOfDay(framingRange.start);
-        var endMarker = framingRange.end;
-        var instanceStarts = [];
-        while (dayMarker < endMarker) {
-            var instanceStart 
-            // if everyday, or this particular day-of-week
-            = void 0;
-            // if everyday, or this particular day-of-week
-            if (!dowHash || dowHash[dayMarker.getUTCDay()]) {
-                if (startTime) {
-                    instanceStart = dateEnv.add(dayMarker, startTime);
-                }
-                else {
-                    instanceStart = dayMarker;
-                }
-                instanceStarts.push(instanceStart);
-            }
-            dayMarker = addDays(dayMarker, 1);
-        }
-        return instanceStarts;
-    }
-
-    var DefaultOptionChangeHandlers = createPlugin({
-        optionChangeHandlers: {
-            events: function (events, calendar, deepEqual) {
-                handleEventSources([events], calendar, deepEqual);
-            },
-            eventSources: handleEventSources,
-            plugins: handlePlugins
-        }
-    });
-    function handleEventSources(inputs, calendar, deepEqual) {
-        var unfoundSources = hashValuesToArray(calendar.state.eventSources);
-        var newInputs = [];
-        for (var _i = 0, inputs_1 = inputs; _i < inputs_1.length; _i++) {
-            var input = inputs_1[_i];
-            var inputFound = false;
-            for (var i = 0; i < unfoundSources.length; i++) {
-                if (deepEqual(unfoundSources[i]._raw, input)) {
-                    unfoundSources.splice(i, 1); // delete
-                    inputFound = true;
-                    break;
-                }
-            }
-            if (!inputFound) {
-                newInputs.push(input);
-            }
-        }
-        for (var _a = 0, unfoundSources_1 = unfoundSources; _a < unfoundSources_1.length; _a++) {
-            var unfoundSource = unfoundSources_1[_a];
-            calendar.dispatch({
-                type: 'REMOVE_EVENT_SOURCE',
-                sourceId: unfoundSource.sourceId
-            });
-        }
-        for (var _b = 0, newInputs_1 = newInputs; _b < newInputs_1.length; _b++) {
-            var newInput = newInputs_1[_b];
-            calendar.addEventSource(newInput);
-        }
-    }
-    // shortcoming: won't remove plugins
-    function handlePlugins(inputs, calendar) {
-        calendar.addPluginInputs(inputs); // will gracefully handle duplicates
-    }
-
-    var config = {}; // TODO: make these options
-    var globalDefaults = {
-        defaultRangeSeparator: ' - ',
-        titleRangeSeparator: ' \u2013 ',
-        defaultTimedEventDuration: '01:00:00',
-        defaultAllDayEventDuration: { day: 1 },
-        forceEventDuration: false,
-        nextDayThreshold: '00:00:00',
-        // display
-        columnHeader: true,
-        defaultView: '',
-        aspectRatio: 1.35,
-        header: {
-            left: 'title',
-            center: '',
-            right: 'today prev,next'
-        },
-        weekends: true,
-        weekNumbers: false,
-        weekNumberCalculation: 'local',
-        editable: false,
-        // nowIndicator: false,
-        scrollTime: '06:00:00',
-        minTime: '00:00:00',
-        maxTime: '24:00:00',
-        showNonCurrentDates: true,
-        // event ajax
-        lazyFetching: true,
-        startParam: 'start',
-        endParam: 'end',
-        timeZoneParam: 'timeZone',
-        timeZone: 'local',
-        // allDayDefault: undefined,
-        // locale
-        locales: [],
-        locale: '',
-        // dir: will get this from the default locale
-        // buttonIcons: null,
-        // allows setting a min-height to the event segment to prevent short events overlapping each other
-        timeGridEventMinHeight: 0,
-        themeSystem: 'standard',
-        // eventResizableFromStart: false,
-        dragRevertDuration: 500,
-        dragScroll: true,
-        allDayMaintainDuration: false,
-        // selectable: false,
-        unselectAuto: true,
-        // selectMinDistance: 0,
-        dropAccept: '*',
-        eventOrder: 'start,-duration,allDay,title',
-        // ^ if start tie, longer events go before shorter. final tie-breaker is title text
-        // rerenderDelay: null,
-        eventLimit: false,
-        eventLimitClick: 'popover',
-        dayPopoverFormat: { month: 'long', day: 'numeric', year: 'numeric' },
-        handleWindowResize: true,
-        windowResizeDelay: 100,
-        longPressDelay: 1000,
-        eventDragMinDistance: 5 // only applies to mouse
-    };
-    var rtlDefaults = {
-        header: {
-            left: 'next,prev today',
-            center: '',
-            right: 'title'
-        },
-        buttonIcons: {
-            // TODO: make RTL support the responibility of the theme
-            prev: 'fc-icon-chevron-right',
-            next: 'fc-icon-chevron-left',
-            prevYear: 'fc-icon-chevrons-right',
-            nextYear: 'fc-icon-chevrons-left'
-        }
-    };
-    var complexOptions = [
-        'header',
-        'footer',
-        'buttonText',
-        'buttonIcons'
-    ];
-    // Merges an array of option objects into a single object
-    function mergeOptions(optionObjs) {
-        return mergeProps(optionObjs, complexOptions);
-    }
-    // TODO: move this stuff to a "plugin"-related file...
-    var INTERNAL_PLUGINS = [
-        ArrayEventSourcePlugin,
-        FuncEventSourcePlugin,
-        JsonFeedEventSourcePlugin,
-        SimpleRecurrencePlugin,
-        DefaultOptionChangeHandlers
-    ];
-    function refinePluginDefs(pluginInputs) {
-        var plugins = [];
-        for (var _i = 0, pluginInputs_1 = pluginInputs; _i < pluginInputs_1.length; _i++) {
-            var pluginInput = pluginInputs_1[_i];
-            if (typeof pluginInput === 'string') {
-                var globalName = 'FullCalendar' + capitaliseFirstLetter(pluginInput);
-                if (!window[globalName]) {
-                    console.warn('Plugin file not loaded for ' + pluginInput);
-                }
-                else {
-                    plugins.push(window[globalName].default); // is an ES6 module
-                }
-            }
-            else {
-                plugins.push(pluginInput);
-            }
-        }
-        return INTERNAL_PLUGINS.concat(plugins);
-    }
-
-    var RAW_EN_LOCALE = {
-        code: 'en',
-        week: {
-            dow: 0,
-            doy: 4 // 4 days need to be within the year to be considered the first week
-        },
-        dir: 'ltr',
-        buttonText: {
-            prev: 'prev',
-            next: 'next',
-            prevYear: 'prev year',
-            nextYear: 'next year',
-            year: 'year',
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day',
-            list: 'list'
-        },
-        weekLabel: 'W',
-        allDayText: 'all-day',
-        eventLimitText: 'more',
-        noEventsMessage: 'No events to display'
-    };
-    function parseRawLocales(explicitRawLocales) {
-        var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'en';
-        var globalArray = window['FullCalendarLocalesAll'] || []; // from locales-all.js
-        var globalObject = window['FullCalendarLocales'] || {}; // from locales/*.js. keys are meaningless
-        var allRawLocales = globalArray.concat(// globalArray is low prio
-        hashValuesToArray(globalObject), // medium prio
-        explicitRawLocales // highest prio
-        );
-        var rawLocaleMap = {
-            en: RAW_EN_LOCALE // necessary?
-        };
-        for (var _i = 0, allRawLocales_1 = allRawLocales; _i < allRawLocales_1.length; _i++) {
-            var rawLocale = allRawLocales_1[_i];
-            rawLocaleMap[rawLocale.code] = rawLocale;
-        }
-        return {
-            map: rawLocaleMap,
-            defaultCode: defaultCode
-        };
-    }
-    function buildLocale(inputSingular, available) {
-        if (typeof inputSingular === 'object' && !Array.isArray(inputSingular)) {
-            return parseLocale(inputSingular.code, [inputSingular.code], inputSingular);
-        }
-        else {
-            return queryLocale(inputSingular, available);
-        }
-    }
-    function queryLocale(codeArg, available) {
-        var codes = [].concat(codeArg || []); // will convert to array
-        var raw = queryRawLocale(codes, available) || RAW_EN_LOCALE;
-        return parseLocale(codeArg, codes, raw);
-    }
-    function queryRawLocale(codes, available) {
-        for (var i = 0; i < codes.length; i++) {
-            var parts = codes[i].toLocaleLowerCase().split('-');
-            for (var j = parts.length; j > 0; j--) {
-                var simpleId = parts.slice(0, j).join('-');
-                if (available[simpleId]) {
-                    return available[simpleId];
-                }
-            }
-        }
-        return null;
-    }
-    function parseLocale(codeArg, codes, raw) {
-        var merged = mergeProps([RAW_EN_LOCALE, raw], ['buttonText']);
-        delete merged.code; // don't want this part of the options
-        var week = merged.week;
-        delete merged.week;
-        return {
-            codeArg: codeArg,
-            codes: codes,
-            week: week,
-            simpleNumberFormat: new Intl.NumberFormat(codeArg),
-            options: merged
-        };
-    }
-
-    var OptionsManager = /** @class */ (function () {
-        function OptionsManager(overrides) {
-            this.overrides = __assign({}, overrides); // make a copy
-            this.dynamicOverrides = {};
-            this.compute();
-        }
-        OptionsManager.prototype.mutate = function (updates, removals, isDynamic) {
-            var overrideHash = isDynamic ? this.dynamicOverrides : this.overrides;
-            __assign(overrideHash, updates);
-            for (var _i = 0, removals_1 = removals; _i < removals_1.length; _i++) {
-                var propName = removals_1[_i];
-                delete overrideHash[propName];
-            }
-            this.compute();
-        };
-        // Computes the flattened options hash for the calendar and assigns to `this.options`.
-        // Assumes this.overrides and this.dynamicOverrides have already been initialized.
-        OptionsManager.prototype.compute = function () {
-            // TODO: not a very efficient system
-            var locales = firstDefined(// explicit locale option given?
-            this.dynamicOverrides.locales, this.overrides.locales, globalDefaults.locales);
-            var locale = firstDefined(// explicit locales option given?
-            this.dynamicOverrides.locale, this.overrides.locale, globalDefaults.locale);
-            var available = parseRawLocales(locales);
-            var localeDefaults = buildLocale(locale || available.defaultCode, available.map).options;
-            var dir = firstDefined(// based on options computed so far, is direction RTL?
-            this.dynamicOverrides.dir, this.overrides.dir, localeDefaults.dir);
-            var dirDefaults = dir === 'rtl' ? rtlDefaults : {};
-            this.dirDefaults = dirDefaults;
-            this.localeDefaults = localeDefaults;
-            this.computed = mergeOptions([
-                globalDefaults,
-                dirDefaults,
-                localeDefaults,
-                this.overrides,
-                this.dynamicOverrides
-            ]);
-        };
-        return OptionsManager;
-    }());
-
-    var calendarSystemClassMap = {};
-    function registerCalendarSystem(name, theClass) {
-        calendarSystemClassMap[name] = theClass;
-    }
-    function createCalendarSystem(name) {
-        return new calendarSystemClassMap[name]();
-    }
-    var GregorianCalendarSystem = /** @class */ (function () {
-        function GregorianCalendarSystem() {
-        }
-        GregorianCalendarSystem.prototype.getMarkerYear = function (d) {
-            return d.getUTCFullYear();
-        };
-        GregorianCalendarSystem.prototype.getMarkerMonth = function (d) {
-            return d.getUTCMonth();
-        };
-        GregorianCalendarSystem.prototype.getMarkerDay = function (d) {
-            return d.getUTCDate();
-        };
-        GregorianCalendarSystem.prototype.arrayToMarker = function (arr) {
-            return arrayToUtcDate(arr);
-        };
-        GregorianCalendarSystem.prototype.markerToArray = function (marker) {
-            return dateToUtcArray(marker);
-        };
-        return GregorianCalendarSystem;
-    }());
-    registerCalendarSystem('gregory', GregorianCalendarSystem);
-
-    var ISO_RE = /^\s*(\d{4})(-(\d{2})(-(\d{2})([T ](\d{2}):(\d{2})(:(\d{2})(\.(\d+))?)?(Z|(([-+])(\d{2})(:?(\d{2}))?))?)?)?)?$/;
-    function parse(str) {
-        var m = ISO_RE.exec(str);
-        if (m) {
-            var marker = new Date(Date.UTC(Number(m[1]), m[3] ? Number(m[3]) - 1 : 0, Number(m[5] || 1), Number(m[7] || 0), Number(m[8] || 0), Number(m[10] || 0), m[12] ? Number('0.' + m[12]) * 1000 : 0));
-            if (isValidDate(marker)) {
-                var timeZoneOffset = null;
-                if (m[13]) {
-                    timeZoneOffset = (m[15] === '-' ? -1 : 1) * (Number(m[16] || 0) * 60 +
-                        Number(m[18] || 0));
-                }
-                return {
-                    marker: marker,
-                    isTimeUnspecified: !m[6],
-                    timeZoneOffset: timeZoneOffset
-                };
-            }
-        }
-        return null;
-    }
-
-    var DateEnv = /** @class */ (function () {
-        function DateEnv(settings) {
-            var timeZone = this.timeZone = settings.timeZone;
-            var isNamedTimeZone = timeZone !== 'local' && timeZone !== 'UTC';
-            if (settings.namedTimeZoneImpl && isNamedTimeZone) {
-                this.namedTimeZoneImpl = new settings.namedTimeZoneImpl(timeZone);
-            }
-            this.canComputeOffset = Boolean(!isNamedTimeZone || this.namedTimeZoneImpl);
-            this.calendarSystem = createCalendarSystem(settings.calendarSystem);
-            this.locale = settings.locale;
-            this.weekDow = settings.locale.week.dow;
-            this.weekDoy = settings.locale.week.doy;
-            if (settings.weekNumberCalculation === 'ISO') {
-                this.weekDow = 1;
-                this.weekDoy = 4;
-            }
-            if (typeof settings.firstDay === 'number') {
-                this.weekDow = settings.firstDay;
-            }
-            if (typeof settings.weekNumberCalculation === 'function') {
-                this.weekNumberFunc = settings.weekNumberCalculation;
-            }
-            this.weekLabel = settings.weekLabel != null ? settings.weekLabel : settings.locale.options.weekLabel;
-            this.cmdFormatter = settings.cmdFormatter;
-        }
-        // Creating / Parsing
-        DateEnv.prototype.createMarker = function (input) {
-            var meta = this.createMarkerMeta(input);
-            if (meta === null) {
-                return null;
-            }
-            return meta.marker;
-        };
-        DateEnv.prototype.createNowMarker = function () {
-            if (this.canComputeOffset) {
-                return this.timestampToMarker(new Date().valueOf());
-            }
-            else {
-                // if we can't compute the current date val for a timezone,
-                // better to give the current local date vals than UTC
-                return arrayToUtcDate(dateToLocalArray(new Date()));
-            }
-        };
-        DateEnv.prototype.createMarkerMeta = function (input) {
-            if (typeof input === 'string') {
-                return this.parse(input);
-            }
-            var marker = null;
-            if (typeof input === 'number') {
-                marker = this.timestampToMarker(input);
-            }
-            else if (input instanceof Date) {
-                input = input.valueOf();
-                if (!isNaN(input)) {
-                    marker = this.timestampToMarker(input);
-                }
-            }
-            else if (Array.isArray(input)) {
-                marker = arrayToUtcDate(input);
-            }
-            if (marker === null || !isValidDate(marker)) {
-                return null;
-            }
-            return { marker: marker, isTimeUnspecified: false, forcedTzo: null };
-        };
-        DateEnv.prototype.parse = function (s) {
-            var parts = parse(s);
-            if (parts === null) {
-                return null;
-            }
-            var marker = parts.marker;
-            var forcedTzo = null;
-            if (parts.timeZoneOffset !== null) {
-                if (this.canComputeOffset) {
-                    marker = this.timestampToMarker(marker.valueOf() - parts.timeZoneOffset * 60 * 1000);
-                }
-                else {
-                    forcedTzo = parts.timeZoneOffset;
-                }
-            }
-            return { marker: marker, isTimeUnspecified: parts.isTimeUnspecified, forcedTzo: forcedTzo };
-        };
-        // Accessors
-        DateEnv.prototype.getYear = function (marker) {
-            return this.calendarSystem.getMarkerYear(marker);
-        };
-        DateEnv.prototype.getMonth = function (marker) {
-            return this.calendarSystem.getMarkerMonth(marker);
-        };
-        // Adding / Subtracting
-        DateEnv.prototype.add = function (marker, dur) {
-            var a = this.calendarSystem.markerToArray(marker);
-            a[0] += dur.years;
-            a[1] += dur.months;
-            a[2] += dur.days;
-            a[6] += dur.milliseconds;
-            return this.calendarSystem.arrayToMarker(a);
-        };
-        DateEnv.prototype.subtract = function (marker, dur) {
-            var a = this.calendarSystem.markerToArray(marker);
-            a[0] -= dur.years;
-            a[1] -= dur.months;
-            a[2] -= dur.days;
-            a[6] -= dur.milliseconds;
-            return this.calendarSystem.arrayToMarker(a);
-        };
-        DateEnv.prototype.addYears = function (marker, n) {
-            var a = this.calendarSystem.markerToArray(marker);
-            a[0] += n;
-            return this.calendarSystem.arrayToMarker(a);
-        };
-        DateEnv.prototype.addMonths = function (marker, n) {
-            var a = this.calendarSystem.markerToArray(marker);
-            a[1] += n;
-            return this.calendarSystem.arrayToMarker(a);
-        };
-        // Diffing Whole Units
-        DateEnv.prototype.diffWholeYears = function (m0, m1) {
-            var calendarSystem = this.calendarSystem;
-            if (timeAsMs(m0) === timeAsMs(m1) &&
-                calendarSystem.getMarkerDay(m0) === calendarSystem.getMarkerDay(m1) &&
-                calendarSystem.getMarkerMonth(m0) === calendarSystem.getMarkerMonth(m1)) {
-                return calendarSystem.getMarkerYear(m1) - calendarSystem.getMarkerYear(m0);
-            }
-            return null;
-        };
-        DateEnv.prototype.diffWholeMonths = function (m0, m1) {
-            var calendarSystem = this.calendarSystem;
-            if (timeAsMs(m0) === timeAsMs(m1) &&
-                calendarSystem.getMarkerDay(m0) === calendarSystem.getMarkerDay(m1)) {
-                return (calendarSystem.getMarkerMonth(m1) - calendarSystem.getMarkerMonth(m0)) +
-                    (calendarSystem.getMarkerYear(m1) - calendarSystem.getMarkerYear(m0)) * 12;
-            }
-            return null;
-        };
-        // Range / Duration
-        DateEnv.prototype.greatestWholeUnit = function (m0, m1) {
-            var n = this.diffWholeYears(m0, m1);
-            if (n !== null) {
-                return { unit: 'year', value: n };
-            }
-            n = this.diffWholeMonths(m0, m1);
-            if (n !== null) {
-                return { unit: 'month', value: n };
-            }
-            n = diffWholeWeeks(m0, m1);
-            if (n !== null) {
-                return { unit: 'week', value: n };
-            }
-            n = diffWholeDays(m0, m1);
-            if (n !== null) {
-                return { unit: 'day', value: n };
-            }
-            n = diffHours(m0, m1);
-            if (isInt(n)) {
-                return { unit: 'hour', value: n };
-            }
-            n = diffMinutes(m0, m1);
-            if (isInt(n)) {
-                return { unit: 'minute', value: n };
-            }
-            n = diffSeconds(m0, m1);
-            if (isInt(n)) {
-                return { unit: 'second', value: n };
-            }
-            return { unit: 'millisecond', value: m1.valueOf() - m0.valueOf() };
-        };
-        DateEnv.prototype.countDurationsBetween = function (m0, m1, d) {
-            // TODO: can use greatestWholeUnit
-            var diff;
-            if (d.years) {
-                diff = this.diffWholeYears(m0, m1);
-                if (diff !== null) {
-                    return diff / asRoughYears(d);
-                }
-            }
-            if (d.months) {
-                diff = this.diffWholeMonths(m0, m1);
-                if (diff !== null) {
-                    return diff / asRoughMonths(d);
-                }
-            }
-            if (d.days) {
-                diff = diffWholeDays(m0, m1);
-                if (diff !== null) {
-                    return diff / asRoughDays(d);
-                }
-            }
-            return (m1.valueOf() - m0.valueOf()) / asRoughMs(d);
-        };
-        // Start-Of
-        DateEnv.prototype.startOf = function (m, unit) {
-            if (unit === 'year') {
-                return this.startOfYear(m);
-            }
-            else if (unit === 'month') {
-                return this.startOfMonth(m);
-            }
-            else if (unit === 'week') {
-                return this.startOfWeek(m);
-            }
-            else if (unit === 'day') {
-                return startOfDay(m);
-            }
-            else if (unit === 'hour') {
-                return startOfHour(m);
-            }
-            else if (unit === 'minute') {
-                return startOfMinute(m);
-            }
-            else if (unit === 'second') {
-                return startOfSecond(m);
-            }
-        };
-        DateEnv.prototype.startOfYear = function (m) {
-            return this.calendarSystem.arrayToMarker([
-                this.calendarSystem.getMarkerYear(m)
-            ]);
-        };
-        DateEnv.prototype.startOfMonth = function (m) {
-            return this.calendarSystem.arrayToMarker([
-                this.calendarSystem.getMarkerYear(m),
-                this.calendarSystem.getMarkerMonth(m)
-            ]);
-        };
-        DateEnv.prototype.startOfWeek = function (m) {
-            return this.calendarSystem.arrayToMarker([
-                this.calendarSystem.getMarkerYear(m),
-                this.calendarSystem.getMarkerMonth(m),
-                m.getUTCDate() - ((m.getUTCDay() - this.weekDow + 7) % 7)
-            ]);
-        };
-        // Week Number
-        DateEnv.prototype.computeWeekNumber = function (marker) {
-            if (this.weekNumberFunc) {
-                return this.weekNumberFunc(this.toDate(marker));
-            }
-            else {
-                return weekOfYear(marker, this.weekDow, this.weekDoy);
-            }
-        };
-        // TODO: choke on timeZoneName: long
-        DateEnv.prototype.format = function (marker, formatter, dateOptions) {
-            if (dateOptions === void 0) { dateOptions = {}; }
-            return formatter.format({
-                marker: marker,
-                timeZoneOffset: dateOptions.forcedTzo != null ?
-                    dateOptions.forcedTzo :
-                    this.offsetForMarker(marker)
-            }, this);
-        };
-        DateEnv.prototype.formatRange = function (start, end, formatter, dateOptions) {
-            if (dateOptions === void 0) { dateOptions = {}; }
-            if (dateOptions.isEndExclusive) {
-                end = addMs(end, -1);
-            }
-            return formatter.formatRange({
-                marker: start,
-                timeZoneOffset: dateOptions.forcedStartTzo != null ?
-                    dateOptions.forcedStartTzo :
-                    this.offsetForMarker(start)
-            }, {
-                marker: end,
-                timeZoneOffset: dateOptions.forcedEndTzo != null ?
-                    dateOptions.forcedEndTzo :
-                    this.offsetForMarker(end)
-            }, this);
-        };
-        DateEnv.prototype.formatIso = function (marker, extraOptions) {
-            if (extraOptions === void 0) { extraOptions = {}; }
-            var timeZoneOffset = null;
-            if (!extraOptions.omitTimeZoneOffset) {
-                if (extraOptions.forcedTzo != null) {
-                    timeZoneOffset = extraOptions.forcedTzo;
-                }
-                else {
-                    timeZoneOffset = this.offsetForMarker(marker);
-                }
-            }
-            return buildIsoString(marker, timeZoneOffset, extraOptions.omitTime);
-        };
-        // TimeZone
-        DateEnv.prototype.timestampToMarker = function (ms) {
-            if (this.timeZone === 'local') {
-                return arrayToUtcDate(dateToLocalArray(new Date(ms)));
-            }
-            else if (this.timeZone === 'UTC' || !this.namedTimeZoneImpl) {
-                return new Date(ms);
-            }
-            else {
-                return arrayToUtcDate(this.namedTimeZoneImpl.timestampToArray(ms));
-            }
-        };
-        DateEnv.prototype.offsetForMarker = function (m) {
-            if (this.timeZone === 'local') {
-                return -arrayToLocalDate(dateToUtcArray(m)).getTimezoneOffset(); // convert "inverse" offset to "normal" offset
-            }
-            else if (this.timeZone === 'UTC') {
-                return 0;
-            }
-            else if (this.namedTimeZoneImpl) {
-                return this.namedTimeZoneImpl.offsetForArray(dateToUtcArray(m));
-            }
-            return null;
-        };
-        // Conversion
-        DateEnv.prototype.toDate = function (m, forcedTzo) {
-            if (this.timeZone === 'local') {
-                return arrayToLocalDate(dateToUtcArray(m));
-            }
-            else if (this.timeZone === 'UTC') {
-                return new Date(m.valueOf()); // make sure it's a copy
-            }
-            else if (!this.namedTimeZoneImpl) {
-                return new Date(m.valueOf() - (forcedTzo || 0));
-            }
-            else {
-                return new Date(m.valueOf() -
-                    this.namedTimeZoneImpl.offsetForArray(dateToUtcArray(m)) * 1000 * 60 // convert minutes -> ms
-                );
-            }
-        };
-        return DateEnv;
-    }());
-
-    var SIMPLE_SOURCE_PROPS = {
-        id: String,
-        allDayDefault: Boolean,
-        eventDataTransform: Function,
-        success: Function,
-        failure: Function
-    };
-    var uid$2 = 0;
-    function doesSourceNeedRange(eventSource, calendar) {
-        var defs = calendar.pluginSystem.hooks.eventSourceDefs;
-        return !defs[eventSource.sourceDefId].ignoreRange;
-    }
-    function parseEventSource(raw, calendar) {
-        var defs = calendar.pluginSystem.hooks.eventSourceDefs;
-        for (var i = defs.length - 1; i >= 0; i--) { // later-added plugins take precedence
-            var def = defs[i];
-            var meta = def.parseMeta(raw);
-            if (meta) {
-                var res = parseEventSourceProps(typeof raw === 'object' ? raw : {}, meta, i, calendar);
-                res._raw = raw;
-                return res;
-            }
-        }
-        return null;
-    }
-    function parseEventSourceProps(raw, meta, sourceDefId, calendar) {
-        var leftovers0 = {};
-        var props = refineProps(raw, SIMPLE_SOURCE_PROPS, {}, leftovers0);
-        var leftovers1 = {};
-        var ui = processUnscopedUiProps(leftovers0, calendar, leftovers1);
-        props.isFetching = false;
-        props.latestFetchId = '';
-        props.fetchRange = null;
-        props.publicId = String(raw.id || '');
-        props.sourceId = String(uid$2++);
-        props.sourceDefId = sourceDefId;
-        props.meta = meta;
-        props.ui = ui;
-        props.extendedProps = leftovers1;
-        return props;
-    }
-
-    function reduceEventSources (eventSources, action, dateProfile, calendar) {
-        switch (action.type) {
-            case 'ADD_EVENT_SOURCES': // already parsed
-                return addSources(eventSources, action.sources, dateProfile ? dateProfile.activeRange : null, calendar);
-            case 'REMOVE_EVENT_SOURCE':
-                return removeSource(eventSources, action.sourceId);
-            case 'PREV': // TODO: how do we track all actions that affect dateProfile :(
-            case 'NEXT':
-            case 'SET_DATE':
-            case 'SET_VIEW_TYPE':
-                if (dateProfile) {
-                    return fetchDirtySources(eventSources, dateProfile.activeRange, calendar);
-                }
-                else {
-                    return eventSources;
-                }
-            case 'FETCH_EVENT_SOURCES':
-            case 'CHANGE_TIMEZONE':
-                return fetchSourcesByIds(eventSources, action.sourceIds ?
-                    arrayToHash(action.sourceIds) :
-                    excludeStaticSources(eventSources, calendar), dateProfile ? dateProfile.activeRange : null, calendar);
-            case 'RECEIVE_EVENTS':
-            case 'RECEIVE_EVENT_ERROR':
-                return receiveResponse(eventSources, action.sourceId, action.fetchId, action.fetchRange);
-            case 'REMOVE_ALL_EVENT_SOURCES':
-                return {};
-            default:
-                return eventSources;
-        }
-    }
-    var uid$3 = 0;
-    function addSources(eventSourceHash, sources, fetchRange, calendar) {
-        var hash = {};
-        for (var _i = 0, sources_1 = sources; _i < sources_1.length; _i++) {
-            var source = sources_1[_i];
-            hash[source.sourceId] = source;
-        }
-        if (fetchRange) {
-            hash = fetchDirtySources(hash, fetchRange, calendar);
-        }
-        return __assign({}, eventSourceHash, hash);
-    }
-    function removeSource(eventSourceHash, sourceId) {
-        return filterHash(eventSourceHash, function (eventSource) {
-            return eventSource.sourceId !== sourceId;
-        });
-    }
-    function fetchDirtySources(sourceHash, fetchRange, calendar) {
-        return fetchSourcesByIds(sourceHash, filterHash(sourceHash, function (eventSource) {
-            return isSourceDirty(eventSource, fetchRange, calendar);
-        }), fetchRange, calendar);
-    }
-    function isSourceDirty(eventSource, fetchRange, calendar) {
-        if (!doesSourceNeedRange(eventSource, calendar)) {
-            return !eventSource.latestFetchId;
-        }
-        else {
-            return !calendar.opt('lazyFetching') ||
-                !eventSource.fetchRange ||
-                fetchRange.start < eventSource.fetchRange.start ||
-                fetchRange.end > eventSource.fetchRange.end;
-        }
-    }
-    function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, calendar) {
-        var nextSources = {};
-        for (var sourceId in prevSources) {
-            var source = prevSources[sourceId];
-            if (sourceIdHash[sourceId]) {
-                nextSources[sourceId] = fetchSource(source, fetchRange, calendar);
-            }
-            else {
-                nextSources[sourceId] = source;
-            }
-        }
-        return nextSources;
-    }
-    function fetchSource(eventSource, fetchRange, calendar) {
-        var sourceDef = calendar.pluginSystem.hooks.eventSourceDefs[eventSource.sourceDefId];
-        var fetchId = String(uid$3++);
-        sourceDef.fetch({
-            eventSource: eventSource,
-            calendar: calendar,
-            range: fetchRange
-        }, function (res) {
-            var rawEvents = res.rawEvents;
-            var calSuccess = calendar.opt('eventSourceSuccess');
-            var calSuccessRes;
-            var sourceSuccessRes;
-            if (eventSource.success) {
-                sourceSuccessRes = eventSource.success(rawEvents, res.xhr);
-            }
-            if (calSuccess) {
-                calSuccessRes = calSuccess(rawEvents, res.xhr);
-            }
-            rawEvents = sourceSuccessRes || calSuccessRes || rawEvents;
-            calendar.dispatch({
-                type: 'RECEIVE_EVENTS',
-                sourceId: eventSource.sourceId,
-                fetchId: fetchId,
-                fetchRange: fetchRange,
-                rawEvents: rawEvents
-            });
-        }, function (error) {
-            var callFailure = calendar.opt('eventSourceFailure');
-            console.warn(error.message, error);
-            if (eventSource.failure) {
-                eventSource.failure(error);
-            }
-            if (callFailure) {
-                callFailure(error);
-            }
-            calendar.dispatch({
-                type: 'RECEIVE_EVENT_ERROR',
-                sourceId: eventSource.sourceId,
-                fetchId: fetchId,
-                fetchRange: fetchRange,
-                error: error
-            });
-        });
-        return __assign({}, eventSource, { isFetching: true, latestFetchId: fetchId });
-    }
-    function receiveResponse(sourceHash, sourceId, fetchId, fetchRange) {
-        var _a;
-        var eventSource = sourceHash[sourceId];
-        if (eventSource && // not already removed
-            fetchId === eventSource.latestFetchId) {
-            return __assign({}, sourceHash, (_a = {}, _a[sourceId] = __assign({}, eventSource, { isFetching: false, fetchRange: fetchRange }), _a));
-        }
-        return sourceHash;
-    }
-    function excludeStaticSources(eventSources, calendar) {
-        return filterHash(eventSources, function (eventSource) {
-            return doesSourceNeedRange(eventSource, calendar);
-        });
-    }
-
-    var DateProfileGenerator = /** @class */ (function () {
-        function DateProfileGenerator(viewSpec, calendar) {
-            this.viewSpec = viewSpec;
-            this.options = viewSpec.options;
-            this.dateEnv = calendar.dateEnv;
-            this.calendar = calendar;
-            this.initHiddenDays();
-        }
-        /* Date Range Computation
-        ------------------------------------------------------------------------------------------------------------------*/
-        // Builds a structure with info about what the dates/ranges will be for the "prev" view.
-        DateProfileGenerator.prototype.buildPrev = function (currentDateProfile, currentDate) {
-            var dateEnv = this.dateEnv;
-            var prevDate = dateEnv.subtract(dateEnv.startOf(currentDate, currentDateProfile.currentRangeUnit), // important for start-of-month
-            currentDateProfile.dateIncrement);
-            return this.build(prevDate, -1);
-        };
-        // Builds a structure with info about what the dates/ranges will be for the "next" view.
-        DateProfileGenerator.prototype.buildNext = function (currentDateProfile, currentDate) {
-            var dateEnv = this.dateEnv;
-            var nextDate = dateEnv.add(dateEnv.startOf(currentDate, currentDateProfile.currentRangeUnit), // important for start-of-month
-            currentDateProfile.dateIncrement);
-            return this.build(nextDate, 1);
-        };
-        // Builds a structure holding dates/ranges for rendering around the given date.
-        // Optional direction param indicates whether the date is being incremented/decremented
-        // from its previous value. decremented = -1, incremented = 1 (default).
-        DateProfileGenerator.prototype.build = function (currentDate, direction, forceToValid) {
-            if (forceToValid === void 0) { forceToValid = false; }
-            var validRange;
-            var minTime = null;
-            var maxTime = null;
-            var currentInfo;
-            var isRangeAllDay;
-            var renderRange;
-            var activeRange;
-            var isValid;
-            validRange = this.buildValidRange();
-            validRange = this.trimHiddenDays(validRange);
-            if (forceToValid) {
-                currentDate = constrainMarkerToRange(currentDate, validRange);
-            }
-            currentInfo = this.buildCurrentRangeInfo(currentDate, direction);
-            isRangeAllDay = /^(year|month|week|day)$/.test(currentInfo.unit);
-            renderRange = this.buildRenderRange(this.trimHiddenDays(currentInfo.range), currentInfo.unit, isRangeAllDay);
-            renderRange = this.trimHiddenDays(renderRange);
-            activeRange = renderRange;
-            if (!this.options.showNonCurrentDates) {
-                activeRange = intersectRanges(activeRange, currentInfo.range);
-            }
-            minTime = createDuration(this.options.minTime);
-            maxTime = createDuration(this.options.maxTime);
-            activeRange = this.adjustActiveRange(activeRange, minTime, maxTime);
-            activeRange = intersectRanges(activeRange, validRange); // might return null
-            // it's invalid if the originally requested date is not contained,
-            // or if the range is completely outside of the valid range.
-            isValid = rangesIntersect(currentInfo.range, validRange);
-            return {
-                // constraint for where prev/next operations can go and where events can be dragged/resized to.
-                // an object with optional start and end properties.
-                validRange: validRange,
-                // range the view is formally responsible for.
-                // for example, a month view might have 1st-31st, excluding padded dates
-                currentRange: currentInfo.range,
-                // name of largest unit being displayed, like "month" or "week"
-                currentRangeUnit: currentInfo.unit,
-                isRangeAllDay: isRangeAllDay,
-                // dates that display events and accept drag-n-drop
-                // will be `null` if no dates accept events
-                activeRange: activeRange,
-                // date range with a rendered skeleton
-                // includes not-active days that need some sort of DOM
-                renderRange: renderRange,
-                // Duration object that denotes the first visible time of any given day
-                minTime: minTime,
-                // Duration object that denotes the exclusive visible end time of any given day
-                maxTime: maxTime,
-                isValid: isValid,
-                // how far the current date will move for a prev/next operation
-                dateIncrement: this.buildDateIncrement(currentInfo.duration)
-                // pass a fallback (might be null) ^
-            };
-        };
-        // Builds an object with optional start/end properties.
-        // Indicates the minimum/maximum dates to display.
-        // not responsible for trimming hidden days.
-        DateProfileGenerator.prototype.buildValidRange = function () {
-            return this.getRangeOption('validRange', this.calendar.getNow()) ||
-                { start: null, end: null }; // completely open-ended
-        };
-        // Builds a structure with info about the "current" range, the range that is
-        // highlighted as being the current month for example.
-        // See build() for a description of `direction`.
-        // Guaranteed to have `range` and `unit` properties. `duration` is optional.
-        DateProfileGenerator.prototype.buildCurrentRangeInfo = function (date, direction) {
-            var _a = this, viewSpec = _a.viewSpec, dateEnv = _a.dateEnv;
-            var duration = null;
-            var unit = null;
-            var range = null;
-            var dayCount;
-            if (viewSpec.duration) {
-                duration = viewSpec.duration;
-                unit = viewSpec.durationUnit;
-                range = this.buildRangeFromDuration(date, direction, duration, unit);
-            }
-            else if ((dayCount = this.options.dayCount)) {
-                unit = 'day';
-                range = this.buildRangeFromDayCount(date, direction, dayCount);
-            }
-            else if ((range = this.buildCustomVisibleRange(date))) {
-                unit = dateEnv.greatestWholeUnit(range.start, range.end).unit;
-            }
-            else {
-                duration = this.getFallbackDuration();
-                unit = greatestDurationDenominator(duration).unit;
-                range = this.buildRangeFromDuration(date, direction, duration, unit);
-            }
-            return { duration: duration, unit: unit, range: range };
-        };
-        DateProfileGenerator.prototype.getFallbackDuration = function () {
-            return createDuration({ day: 1 });
-        };
-        // Returns a new activeRange to have time values (un-ambiguate)
-        // minTime or maxTime causes the range to expand.
-        DateProfileGenerator.prototype.adjustActiveRange = function (range, minTime, maxTime) {
-            var dateEnv = this.dateEnv;
-            var start = range.start;
-            var end = range.end;
-            if (this.viewSpec.class.prototype.usesMinMaxTime) {
-                // expand active range if minTime is negative (why not when positive?)
-                if (asRoughDays(minTime) < 0) {
-                    start = startOfDay(start); // necessary?
-                    start = dateEnv.add(start, minTime);
-                }
-                // expand active range if maxTime is beyond one day (why not when positive?)
-                if (asRoughDays(maxTime) > 1) {
-                    end = startOfDay(end); // necessary?
-                    end = addDays(end, -1);
-                    end = dateEnv.add(end, maxTime);
-                }
-            }
-            return { start: start, end: end };
-        };
-        // Builds the "current" range when it is specified as an explicit duration.
-        // `unit` is the already-computed greatestDurationDenominator unit of duration.
-        DateProfileGenerator.prototype.buildRangeFromDuration = function (date, direction, duration, unit) {
-            var dateEnv = this.dateEnv;
-            var alignment = this.options.dateAlignment;
-            var dateIncrementInput;
-            var dateIncrementDuration;
-            var start;
-            var end;
-            var res;
-            // compute what the alignment should be
-            if (!alignment) {
-                dateIncrementInput = this.options.dateIncrement;
-                if (dateIncrementInput) {
-                    dateIncrementDuration = createDuration(dateIncrementInput);
-                    // use the smaller of the two units
-                    if (asRoughMs(dateIncrementDuration) < asRoughMs(duration)) {
-                        alignment = greatestDurationDenominator(dateIncrementDuration, !getWeeksFromInput(dateIncrementInput)).unit;
-                    }
-                    else {
-                        alignment = unit;
-                    }
-                }
-                else {
-                    alignment = unit;
-                }
-            }
-            // if the view displays a single day or smaller
-            if (asRoughDays(duration) <= 1) {
-                if (this.isHiddenDay(start)) {
-                    start = this.skipHiddenDays(start, direction);
-                    start = startOfDay(start);
-                }
-            }
-            function computeRes() {
-                start = dateEnv.startOf(date, alignment);
-                end = dateEnv.add(start, duration);
-                res = { start: start, end: end };
-            }
-            computeRes();
-            // if range is completely enveloped by hidden days, go past the hidden days
-            if (!this.trimHiddenDays(res)) {
-                date = this.skipHiddenDays(date, direction);
-                computeRes();
-            }
-            return res;
-        };
-        // Builds the "current" range when a dayCount is specified.
-        DateProfileGenerator.prototype.buildRangeFromDayCount = function (date, direction, dayCount) {
-            var dateEnv = this.dateEnv;
-            var customAlignment = this.options.dateAlignment;
-            var runningCount = 0;
-            var start = date;
-            var end;
-            if (customAlignment) {
-                start = dateEnv.startOf(start, customAlignment);
-            }
-            start = startOfDay(start);
-            start = this.skipHiddenDays(start, direction);
-            end = start;
-            do {
-                end = addDays(end, 1);
-                if (!this.isHiddenDay(end)) {
-                    runningCount++;
-                }
-            } while (runningCount < dayCount);
-            return { start: start, end: end };
-        };
-        // Builds a normalized range object for the "visible" range,
-        // which is a way to define the currentRange and activeRange at the same time.
-        DateProfileGenerator.prototype.buildCustomVisibleRange = function (date) {
-            var dateEnv = this.dateEnv;
-            var visibleRange = this.getRangeOption('visibleRange', dateEnv.toDate(date));
-            if (visibleRange && (visibleRange.start == null || visibleRange.end == null)) {
-                return null;
-            }
-            return visibleRange;
-        };
-        // Computes the range that will represent the element/cells for *rendering*,
-        // but which may have voided days/times.
-        // not responsible for trimming hidden days.
-        DateProfileGenerator.prototype.buildRenderRange = function (currentRange, currentRangeUnit, isRangeAllDay) {
-            return currentRange;
-        };
-        // Compute the duration value that should be added/substracted to the current date
-        // when a prev/next operation happens.
-        DateProfileGenerator.prototype.buildDateIncrement = function (fallback) {
-            var dateIncrementInput = this.options.dateIncrement;
-            var customAlignment;
-            if (dateIncrementInput) {
-                return createDuration(dateIncrementInput);
-            }
-            else if ((customAlignment = this.options.dateAlignment)) {
-                return createDuration(1, customAlignment);
-            }
-            else if (fallback) {
-                return fallback;
-            }
-            else {
-                return createDuration({ days: 1 });
-            }
-        };
-        // Arguments after name will be forwarded to a hypothetical function value
-        // WARNING: passed-in arguments will be given to generator functions as-is and can cause side-effects.
-        // Always clone your objects if you fear mutation.
-        DateProfileGenerator.prototype.getRangeOption = function (name) {
-            var otherArgs = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                otherArgs[_i - 1] = arguments[_i];
-            }
-            var val = this.options[name];
-            if (typeof val === 'function') {
-                val = val.apply(null, otherArgs);
-            }
-            if (val) {
-                val = parseRange(val, this.dateEnv);
-            }
-            if (val) {
-                val = computeVisibleDayRange(val);
-            }
-            return val;
-        };
-        /* Hidden Days
-        ------------------------------------------------------------------------------------------------------------------*/
-        // Initializes internal variables related to calculating hidden days-of-week
-        DateProfileGenerator.prototype.initHiddenDays = function () {
-            var hiddenDays = this.options.hiddenDays || []; // array of day-of-week indices that are hidden
-            var isHiddenDayHash = []; // is the day-of-week hidden? (hash with day-of-week-index -> bool)
-            var dayCnt = 0;
-            var i;
-            if (this.options.weekends === false) {
-                hiddenDays.push(0, 6); // 0=sunday, 6=saturday
-            }
-            for (i = 0; i < 7; i++) {
-                if (!(isHiddenDayHash[i] = hiddenDays.indexOf(i) !== -1)) {
-                    dayCnt++;
-                }
-            }
-            if (!dayCnt) {
-                throw new Error('invalid hiddenDays'); // all days were hidden? bad.
-            }
-            this.isHiddenDayHash = isHiddenDayHash;
-        };
-        // Remove days from the beginning and end of the range that are computed as hidden.
-        // If the whole range is trimmed off, returns null
-        DateProfileGenerator.prototype.trimHiddenDays = function (range) {
-            var start = range.start;
-            var end = range.end;
-            if (start) {
-                start = this.skipHiddenDays(start);
-            }
-            if (end) {
-                end = this.skipHiddenDays(end, -1, true);
-            }
-            if (start == null || end == null || start < end) {
-                return { start: start, end: end };
-            }
-            return null;
-        };
-        // Is the current day hidden?
-        // `day` is a day-of-week index (0-6), or a Date (used for UTC)
-        DateProfileGenerator.prototype.isHiddenDay = function (day) {
-            if (day instanceof Date) {
-                day = day.getUTCDay();
-            }
-            return this.isHiddenDayHash[day];
-        };
-        // Incrementing the current day until it is no longer a hidden day, returning a copy.
-        // DOES NOT CONSIDER validRange!
-        // If the initial value of `date` is not a hidden day, don't do anything.
-        // Pass `isExclusive` as `true` if you are dealing with an end date.
-        // `inc` defaults to `1` (increment one day forward each time)
-        DateProfileGenerator.prototype.skipHiddenDays = function (date, inc, isExclusive) {
-            if (inc === void 0) { inc = 1; }
-            if (isExclusive === void 0) { isExclusive = false; }
-            while (this.isHiddenDayHash[(date.getUTCDay() + (isExclusive ? inc : 0) + 7) % 7]) {
-                date = addDays(date, inc);
-            }
-            return date;
-        };
-        return DateProfileGenerator;
-    }());
-    // TODO: find a way to avoid comparing DateProfiles. it's tedious
-    function isDateProfilesEqual(p0, p1) {
         return rangesEqual(p0.validRange, p1.validRange) &&
             rangesEqual(p0.activeRange, p1.activeRange) &&
             rangesEqual(p0.renderRange, p1.renderRange) &&
@@ -8892,49 +3404,6 @@ Docs & License: https://fullcalendar.io/
             }
             this.afterSizingTriggers = {};
         };
-        // View
-        // -----------------------------------------------------------------------------------------------------------------
-        // Returns a boolean about whether the view is okay to instantiate at some point
-        Calendar.prototype.isValidViewType = function (viewType) {
-            return Boolean(this.viewSpecs[viewType]);
-        };
-        Calendar.prototype.changeView = function (viewType, dateOrRange) {
-            var dateMarker = null;
-            if (dateOrRange) {
-                if (dateOrRange.start && dateOrRange.end) { // a range
-                    this.optionsManager.mutate({ visibleRange: dateOrRange }, []); // will not rerender
-                    this.handleOptions(this.optionsManager.computed); // ...but yuck
-                }
-                else { // a date
-                    dateMarker = this.dateEnv.createMarker(dateOrRange); // just like gotoDate
-                }
-            }
-            this.unselect();
-            this.dispatch({
-                type: 'SET_VIEW_TYPE',
-                viewType: viewType,
-                dateMarker: dateMarker
-            });
-        };
-        // Forces navigation to a view for the given date.
-        // `viewType` can be a specific view name or a generic one like "week" or "day".
-        // needs to change
-        Calendar.prototype.zoomTo = function (dateMarker, viewType) {
-            var spec;
-            viewType = viewType || 'day'; // day is default zoom
-            spec = this.viewSpecs[viewType] ||
-                this.getUnitViewSpec(viewType);
-            this.unselect();
-            if (spec) {
-                this.dispatch({
-                    type: 'SET_VIEW_TYPE',
-                    viewType: spec.type,
-                    dateMarker: dateMarker
-                });
-            }
-            else {
-                this.dispatch({
-                    type: 'SET_DATE',
                     dateMarker: dateMarker
                 });
             }
@@ -8976,18 +3445,18 @@ Docs & License: https://fullcalendar.io/
             else {
                 return this.getNow(); // getNow already returns unzoned
             }
+            return formatter.formatRange({
+                marker: start,
+                timeZoneOffset: dateOptions.forcedStartTzo != null ?
+                    dateOptions.forcedStartTzo :
+                    this.offsetForMarker(start)
+            }, {
+                marker: end,
+                timeZoneOffset: dateOptions.forcedEndTzo != null ?
+                    dateOptions.forcedEndTzo :
+                    this.offsetForMarker(end)
+            }, this);
         };
-        Calendar.prototype.prev = function () {
-            this.unselect();
-            this.dispatch({ type: 'PREV' });
-        };
-        Calendar.prototype.next = function () {
-            this.unselect();
-            this.dispatch({ type: 'NEXT' });
-        };
-        Calendar.prototype.prevYear = function () {
-            this.unselect();
-            this.dispatch({
                 type: 'SET_DATE',
                 dateMarker: this.dateEnv.addYears(this.state.currentDate, -1)
             });
@@ -9018,7 +3487,6 @@ Docs & License: https://fullcalendar.io/
             if (delta) { // else, warn about invalid input?
                 this.unselect();
                 this.dispatch({
-                    type: 'SET_DATE',
                     dateMarker: this.dateEnv.add(this.state.currentDate, delta)
                 });
             }
@@ -9140,7 +3608,6 @@ Docs & License: https://fullcalendar.io/
         };
         Calendar.prototype.buildDatePointApi = function (dateSpan) {
             var props = {};
-            for (var _i = 0, _a = this.pluginSystem.hooks.datePointTransforms; _i < _a.length; _i++) {
                 var transform = _a[_i];
                 __assign(props, transform(dateSpan, this));
             }
@@ -10726,7 +5193,6 @@ Docs & License: https://fullcalendar.io/
             var _this = this;
             this.isHidden = true;
             this.margin = 10; // the space required between the popover and the edges of the scroll container
-            // Triggered when the user clicks *anywhere* in the document, for the autoHide feature
             this.documentMousedown = function (ev) {
                 // only hide the popover if the click happened outside the popover
                 if (_this.el && !_this.el.contains(ev.target)) {
@@ -10754,6 +5220,7 @@ Docs & License: https://fullcalendar.io/
                 this.isHidden = true;
                 this.trigger('hide');
             }
+            return val;
         };
         // Creates `this.el` and renders content inside of it
         Popover.prototype.render = function () {
@@ -10921,6 +5388,7 @@ Docs & License: https://fullcalendar.io/
             if (!mirrorInfo) {
                 this.dayGrid.removeSegPopover();
             }
+            return scroll;
         };
         // Unrenders all currently rendered foreground event segments
         DayGridEventRenderer.prototype.detachSegs = function () {
@@ -11626,6 +6094,14 @@ Docs & License: https://fullcalendar.io/
             if (this.segPopover) {
                 this.segPopover.hide(); // in handler, will call segPopover's removeElement
             }
+            return {
+                row: row,
+                tbodyEl: tbody,
+                cellMatrix: cellMatrix,
+                segMatrix: segMatrix,
+                segLevels: segLevels,
+                segs: rowSegs
+            };
         };
         // Limits the number of "levels" (vertically stacking layers of events) for each row of the grid.
         // `levelLimit` can be false (don't limit), a number, or true (should be computed).
@@ -11647,7 +6123,18 @@ Docs & License: https://fullcalendar.io/
                 if (rowLevelLimit !== false) {
                     this.limitRow(row, rowLevelLimit);
                 }
+                // `j` now holds the desired subrow index
+                seg.level = j;
+                seg.leftCol = isRtl ? (colCnt - 1 - seg.lastCol) : seg.firstCol; // for sorting only
+                seg.rightCol = isRtl ? (colCnt - 1 - seg.firstCol) : seg.lastCol // for sorting only
+                ;
+                (levels[j] || (levels[j] = [])).push(seg);
             }
+            // order segments left-to-right. very important if calendar is RTL
+            for (j = 0; j < levels.length; j++) {
+                levels[j].sort(compareDaySegCols);
+            }
+            return levels;
         };
         // Computes the number of levels a row will accomodate without going outside its bounds.
         // Assumes the row is "rigid" (maintains a constant height regardless of what is inside).
@@ -12485,6 +6972,7 @@ Docs & License: https://fullcalendar.io/
                         break;
                     }
                 }
+                level++;
             }
             return segs;
         };
@@ -13966,6 +8454,504 @@ Docs & License: https://fullcalendar.io/
     Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
+
+/*!
+ * imagesLoaded PACKAGED v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( 'ev-emitter/ev-emitter',factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+/*!
+ * imagesLoaded v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'ev-emitter/ev-emitter'
+    ], function( EvEmitter ) {
+      return factory( window, EvEmitter );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else {
+    // browser global
+    window.imagesLoaded = factory(
+      window,
+      window.EvEmitter
+    );
+  }
+
+})( typeof window !== 'undefined' ? window : this,
+
+// --------------------------  factory -------------------------- //
+
+function factory( window, EvEmitter ) {
+
+
+
+var $ = window.jQuery;
+var console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+var arraySlice = Array.prototype.slice;
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    return obj;
+  }
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {Array, Element, NodeList, String} elem
+ * @param {Object or Function} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  var queryElem = elem;
+  if ( typeof elem == 'string' ) {
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
+    return;
+  }
+
+  this.elements = makeArray( queryElem );
+  this.options = extend( {}, this.options );
+  // shift arguments if no options set
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    extend( this.options, options );
+  }
+
+  if ( onAlways ) {
+    this.on( 'always', onAlways );
+  }
+
+  this.getImages();
+
+  if ( $ ) {
+    // add jQuery Deferred object
+    this.jqDeferred = new $.Deferred();
+  }
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( this.check.bind( this ) );
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.options = {};
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+/**
+ * @param {Node} element
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName == 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  var nodeType = elem.nodeType;
+  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
+    return;
+  }
+  var childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( var i=0; i < childImgs.length; i++ ) {
+    var img = childImgs[i];
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    var children = elem.querySelectorAll( this.options.background );
+    for ( i=0; i < children.length; i++ ) {
+      var child = children[i];
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+var elementNodeTypes = {
+  1: true,
+  9: true,
+  11: true
+};
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+    return;
+  }
+  // get url inside url("...")
+  var reURL = /url\((['"])?(.*?)\1\)/gi;
+  var matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    var url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  var loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  var background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  var _this = this;
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  function onProgress( image, elem, message ) {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( function() {
+      _this.progress( image, elem, message );
+    });
+  }
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  });
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount == this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( 'progress: ' + message, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  var eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.img, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) {
+    return;
+  }
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, callback ) {
+    var instance = new ImagesLoaded( this, options, callback );
+    return instance.jqDeferred.promise( $(this) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+});
+
 
 /**
  * author Christopher Blum
@@ -17673,6 +12659,54 @@ var trim = String.prototype.trim ?
 }));
 
 
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -19534,54 +14568,6 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -37520,6 +32506,2968 @@ $.Tooltipster.prototype = {
 	}
 };
 
+        if (!is$1.empty(this.media.webkitPresentationMode)) {
+          return this.media.webkitPresentationMode === pip.active;
+        } // Chrome
+
+
+        return this.media === document.pictureInPictureElement;
+      }
+    }], [{
+      key: "supported",
+      value: function supported(type, provider, inline) {
+        return support.check(type, provider, inline);
+      }
+      /**
+       * Load an SVG sprite into the page
+       * @param {String} url - URL for the SVG sprite
+       * @param {String} [id] - Unique ID
+       */
+
+    }, {
+      key: "loadSprite",
+      value: function loadSprite$1(url, id) {
+        return loadSprite(url, id);
+      }
+      /**
+       * Setup multiple instances
+       * @param {*} selector
+       * @param {Object} options
+       */
+
+    }, {
+      key: "setup",
+      value: function setup(selector) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var targets = null;
+
+        if (is$1.string(selector)) {
+          targets = Array.from(document.querySelectorAll(selector));
+        } else if (is$1.nodeList(selector)) {
+          targets = Array.from(selector);
+        } else if (is$1.array(selector)) {
+          targets = selector.filter(is$1.element);
+        }
+
+        if (is$1.empty(targets)) {
+          return null;
+        }
+
+        return targets.map(function (t) {
+          return new Plyr(t, options);
+        });
+      }
+    }]);
+
+    return Plyr;
+  }();
+
+  Plyr.defaults = cloneDeep(defaults$1);
+
+  // ==========================================================================
+
+  return Plyr;
+
+}));
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module unless amdModuleId is set
+    define(["jquery"], function (a0) {
+      return (factory(a0));
+    });
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory(require("jquery"));
+  } else {
+    factory(jQuery);
+  }
+}(this, function ($) {
+
+// This file will be UMDified by a build task.
+
+var defaults = {
+		animation: 'fade',
+		animationDuration: 350,
+		content: null,
+		contentAsHTML: false,
+		contentCloning: false,
+		debug: true,
+		delay: 300,
+		delayTouch: [300, 500],
+		functionInit: null,
+		functionBefore: null,
+		functionReady: null,
+		functionAfter: null,
+		functionFormat: null,
+		IEmin: 6,
+		interactive: false,
+		multiple: false,
+		// will default to document.body, or must be an element positioned at (0, 0)
+		// in the document, typically like the very top views of an app.
+		parent: null,
+		plugins: ['sideTip'],
+		repositionOnScroll: false,
+		restoration: 'none',
+		selfDestruction: true,
+		theme: [],
+		timer: 0,
+		trackerInterval: 500,
+		trackOrigin: false,
+		trackTooltip: false,
+		trigger: 'hover',
+		triggerClose: {
+			click: false,
+			mouseleave: false,
+			originClick: false,
+			scroll: false,
+			tap: false,
+			touchleave: false
+		},
+		triggerOpen: {
+			click: false,
+			mouseenter: false,
+			tap: false,
+			touchstart: false
+		},
+		updateAnimation: 'rotate',
+		zIndex: 9999999
+	},
+	// we'll avoid using the 'window' global as a good practice but npm's
+	// jquery@<2.1.0 package actually requires a 'window' global, so not sure
+	// it's useful at all
+	win = (typeof window != 'undefined') ? window : null,
+	// env will be proxied by the core for plugins to have access its properties
+	env = {
+		// detect if this device can trigger touch events. Better have a false
+		// positive (unused listeners, that's ok) than a false negative.
+		// https://github.com/Modernizr/Modernizr/blob/master/feature-detects/touchevents.js
+		// http://stackoverflow.com/questions/4817029/whats-the-best-way-to-detect-a-touch-screen-device-using-javascript
+		hasTouchCapability: !!(
+			win
+			&&	(	'ontouchstart' in win
+				||	(win.DocumentTouch && win.document instanceof win.DocumentTouch)
+				||	win.navigator.maxTouchPoints
+			)
+		),
+		hasTransitions: transitionSupport(),
+		IE: false,
+		// don't set manually, it will be updated by a build task after the manifest
+		semVer: '4.2.6',
+		window: win
+	},
+	core = function() {
+		
+		// core variables
+		
+		// the core emitters
+		this.__$emitterPrivate = $({});
+		this.__$emitterPublic = $({});
+		this.__instancesLatestArr = [];
+		// collects plugin constructors
+		this.__plugins = {};
+		// proxy env variables for plugins who might use them
+		this._env = env;
+	};
+
+// core methods
+core.prototype = {
+	
+	/**
+	 * A function to proxy the public methods of an object onto another
+	 *
+	 * @param {object} constructor The constructor to bridge
+	 * @param {object} obj The object that will get new methods (an instance or the core)
+	 * @param {string} pluginName A plugin name for the console log message
+	 * @return {core}
+	 * @private
+	 */
+	__bridge: function(constructor, obj, pluginName) {
+		
+		// if it's not already bridged
+		if (!obj[pluginName]) {
+			
+			var fn = function() {};
+			fn.prototype = constructor;
+			
+			var pluginInstance = new fn();
+			
+			// the _init method has to exist in instance constructors but might be missing
+			// in core constructors
+			if (pluginInstance.__init) {
+				pluginInstance.__init(obj);
+			}
+			
+			$.each(constructor, function(methodName, fn) {
+				
+				// don't proxy "private" methods, only "protected" and public ones
+				if (methodName.indexOf('__') != 0) {
+					
+					// if the method does not exist yet
+					if (!obj[methodName]) {
+						
+						obj[methodName] = function() {
+							return pluginInstance[methodName].apply(pluginInstance, Array.prototype.slice.apply(arguments));
+						};
+						
+						// remember to which plugin this method corresponds (several plugins may
+						// have methods of the same name, we need to be sure)
+						obj[methodName].bridged = pluginInstance;
+					}
+					else if (defaults.debug) {
+						
+						console.log('The '+ methodName +' method of the '+ pluginName
+							+' plugin conflicts with another plugin or native methods');
+					}
+				}
+			});
+			
+			obj[pluginName] = pluginInstance;
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * For mockup in Node env if need be, for testing purposes
+	 *
+	 * @return {core}
+	 * @private
+	 */
+	__setWindow: function(window) {
+		env.window = window;
+		return this;
+	},
+	
+	/**
+	 * Returns a ruler, a tool to help measure the size of a tooltip under
+	 * various settings. Meant for plugins
+	 * 
+	 * @see Ruler
+	 * @return {object} A Ruler instance
+	 * @protected
+	 */
+	_getRuler: function($tooltip) {
+		return new Ruler($tooltip);
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @return {core}
+	 * @protected
+	 */
+	_off: function() {
+		this.__$emitterPrivate.off.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @return {core}
+	 * @protected
+	 */
+	_on: function() {
+		this.__$emitterPrivate.on.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @return {core}
+	 * @protected
+	 */
+	_one: function() {
+		this.__$emitterPrivate.one.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * Returns (getter) or adds (setter) a plugin
+	 *
+	 * @param {string|object} plugin Provide a string (in the full form
+	 * "namespace.name") to use as as getter, an object to use as a setter
+	 * @return {object|core}
+	 * @protected
+	 */
+	_plugin: function(plugin) {
+		
+		var self = this;
+		
+		// getter
+		if (typeof plugin == 'string') {
+			
+			var pluginName = plugin,
+				p = null;
+			
+			// if the namespace is provided, it's easy to search
+			if (pluginName.indexOf('.') > 0) {
+				p = self.__plugins[pluginName];
+			}
+			// otherwise, return the first name that matches
+			else {
+				$.each(self.__plugins, function(i, plugin) {
+					
+					if (plugin.name.substring(plugin.name.length - pluginName.length - 1) == '.'+ pluginName) {
+						p = plugin;
+						return false;
+					}
+				});
+			}
+			
+			return p;
+		}
+		// setter
+		else {
+			
+			// force namespaces
+			if (plugin.name.indexOf('.') < 0) {
+				throw new Error('Plugins must be namespaced');
+			}
+			
+			self.__plugins[plugin.name] = plugin;
+			
+			// if the plugin has core features
+			if (plugin.core) {
+				
+				// bridge non-private methods onto the core to allow new core methods
+				self.__bridge(plugin.core, self, plugin.name);
+			}
+			
+			return this;
+		}
+	},
+	
+	/**
+	 * Trigger events on the core emitters
+	 * 
+	 * @returns {core}
+	 * @protected
+	 */
+	_trigger: function() {
+		
+		var args = Array.prototype.slice.apply(arguments);
+		
+		if (typeof args[0] == 'string') {
+			args[0] = { type: args[0] };
+		}
+		
+		// note: the order of emitters matters
+		this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate, args);
+		this.__$emitterPublic.trigger.apply(this.__$emitterPublic, args);
+		
+		return this;
+	},
+	
+	/**
+	 * Returns instances of all tooltips in the page or an a given element
+	 *
+	 * @param {string|HTML object collection} selector optional Use this
+	 * parameter to restrict the set of objects that will be inspected
+	 * for the retrieval of instances. By default, all instances in the
+	 * page are returned.
+	 * @return {array} An array of instance objects
+	 * @public
+	 */
+	instances: function(selector) {
+		
+		var instances = [],
+			sel = selector || '.tooltipstered';
+		
+		$(sel).each(function() {
+			
+			var $this = $(this),
+				ns = $this.data('tooltipster-ns');
+			
+			if (ns) {
+				
+				$.each(ns, function(i, namespace) {
+					instances.push($this.data(namespace));
+				});
+			}
+		});
+		
+		return instances;
+	},
+	
+	/**
+	 * Returns the Tooltipster objects generated by the last initializing call
+	 *
+	 * @return {array} An array of instance objects
+	 * @public
+	 */
+	instancesLatest: function() {
+		return this.__instancesLatestArr;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_off() instead)
+	 *
+	 * @return {core}
+	 * @public
+	 */
+	off: function() {
+		this.__$emitterPublic.off.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_on() instead)
+	 *
+	 * @return {core}
+	 * @public
+	 */
+	on: function() {
+		this.__$emitterPublic.on.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_one() instead)
+	 * 
+	 * @return {core}
+	 * @public
+	 */
+	one: function() {
+		this.__$emitterPublic.one.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * Returns all HTML elements which have one or more tooltips
+	 *
+	 * @param {string} selector optional Use this to restrict the results
+	 * to the descendants of an element
+	 * @return {array} An array of HTML elements
+	 * @public
+	 */
+	origins: function(selector) {
+		
+		var sel = selector ?
+			selector +' ' :
+			'';
+		
+		return $(sel +'.tooltipstered').toArray();
+	},
+	
+	/**
+	 * Change default options for all future instances
+	 *
+	 * @param {object} d The options that should be made defaults
+	 * @return {core}
+	 * @public
+	 */
+	setDefaults: function(d) {
+		$.extend(defaults, d);
+		return this;
+	},
+	
+	/**
+	 * For users to trigger their handlers on the public emitter
+	 * 
+	 * @returns {core}
+	 * @public
+	 */
+	triggerHandler: function() {
+		this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		return this;
+	}
+};
+
+// $.tooltipster will be used to call core methods
+$.tooltipster = new core();
+
+// the Tooltipster instance class (mind the capital T)
+$.Tooltipster = function(element, options) {
+	
+	// list of instance variables
+	
+	// stack of custom callbacks provided as parameters to API methods
+	this.__callbacks = {
+		close: [],
+		open: []
+	};
+	// the schedule time of DOM removal
+	this.__closingTime;
+	// this will be the user content shown in the tooltip. A capital "C" is used
+	// because there is also a method called content()
+	this.__Content;
+	// for the size tracker
+	this.__contentBcr;
+	// to disable the tooltip after destruction
+	this.__destroyed = false;
+	// we can't emit directly on the instance because if a method with the same
+	// name as the event exists, it will be called by jQuery. Se we use a plain
+	// object as emitter. This emitter is for internal use by plugins,
+	// if needed.
+	this.__$emitterPrivate = $({});
+	// this emitter is for the user to listen to events without risking to mess
+	// with our internal listeners
+	this.__$emitterPublic = $({});
+	this.__enabled = true;
+	// the reference to the gc interval
+	this.__garbageCollector;
+	// various position and size data recomputed before each repositioning
+	this.__Geometry;
+	// the tooltip position, saved after each repositioning by a plugin
+	this.__lastPosition;
+	// a unique namespace per instance
+	this.__namespace = 'tooltipster-'+ Math.round(Math.random()*1000000);
+	this.__options;
+	// will be used to support origins in scrollable areas
+	this.__$originParents;
+	this.__pointerIsOverOrigin = false;
+	// to remove themes if needed
+	this.__previousThemes = [];
+	// the state can be either: appearing, stable, disappearing, closed
+	this.__state = 'closed';
+	// timeout references
+	this.__timeouts = {
+		close: [],
+		open: null
+	};
+	// store touch events to be able to detect emulated mouse events
+	this.__touchEvents = [];
+	// the reference to the tracker interval
+	this.__tracker = null;
+	// the element to which this tooltip is associated
+	this._$origin;
+	// this will be the tooltip element (jQuery wrapped HTML element).
+	// It's the job of a plugin to create it and append it to the DOM
+	this._$tooltip;
+	
+	// launch
+	this.__init(element, options);
+};
+
+$.Tooltipster.prototype = {
+	
+	/**
+	 * @param origin
+	 * @param options
+	 * @private
+	 */
+	__init: function(origin, options) {
+		
+		var self = this;
+		
+		self._$origin = $(origin);
+		self.__options = $.extend(true, {}, defaults, options);
+		
+		// some options may need to be reformatted
+		self.__optionsFormat();
+		
+		// don't run on old IE if asked no to
+		if (	!env.IE
+			||	env.IE >= self.__options.IEmin
+		) {
+			
+			// note: the content is null (empty) by default and can stay that
+			// way if the plugin remains initialized but not fed any content. The
+			// tooltip will just not appear.
+			
+			// let's save the initial value of the title attribute for later
+			// restoration if need be.
+			var initialTitle = null;
+			
+			// it will already have been saved in case of multiple tooltips
+			if (self._$origin.data('tooltipster-initialTitle') === undefined) {
+				
+				initialTitle = self._$origin.attr('title');
+				
+				// we do not want initialTitle to be "undefined" because
+				// of how jQuery's .data() method works
+				if (initialTitle === undefined) initialTitle = null;
+				
+				self._$origin.data('tooltipster-initialTitle', initialTitle);
+			}
+			
+			// If content is provided in the options, it has precedence over the
+			// title attribute.
+			// Note: an empty string is considered content, only 'null' represents
+			// the absence of content.
+			// Also, an existing title="" attribute will result in an empty string
+			// content
+			if (self.__options.content !== null) {
+				self.__contentSet(self.__options.content);
+			}
+			else {
+				
+				var selector = self._$origin.attr('data-tooltip-content'),
+					$el;
+				
+				if (selector){
+					$el = $(selector);
+				}
+				
+				if ($el && $el[0]) {
+					self.__contentSet($el.first());
+				}
+				else {
+					self.__contentSet(initialTitle);
+				}
+			}
+			
+			self._$origin
+				// strip the title off of the element to prevent the default tooltips
+				// from popping up
+				.removeAttr('title')
+				// to be able to find all instances on the page later (upon window
+				// events in particular)
+				.addClass('tooltipstered');
+			
+			// set listeners on the origin
+			self.__prepareOrigin();
+			
+			// set the garbage collector
+			self.__prepareGC();
+			
+			// init plugins
+			$.each(self.__options.plugins, function(i, pluginName) {
+				self._plug(pluginName);
+			});
+			
+			// to detect swiping
+			if (env.hasTouchCapability) {
+				$(env.window.document.body).on('touchmove.'+ self.__namespace +'-triggerOpen', function(event) {
+					self._touchRecordEvent(event);
+				});
+			}
+			
+			self
+				// prepare the tooltip when it gets created. This event must
+				// be fired by a plugin
+				._on('created', function() {
+					self.__prepareTooltip();
+				})
+				// save position information when it's sent by a plugin
+				._on('repositioned', function(e) {
+					self.__lastPosition = e.position;
+				});
+		}
+		else {
+			self.__options.disabled = true;
+		}
+	},
+	
+	/**
+	 * Insert the content into the appropriate HTML element of the tooltip
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__contentInsert: function() {
+		
+		var self = this,
+			$el = self._$tooltip.find('.tooltipster-content'),
+			formattedContent = self.__Content,
+			format = function(content) {
+				formattedContent = content;
+			};
+		
+		self._trigger({
+			type: 'format',
+			content: self.__Content,
+			format: format
+		});
+		
+		if (self.__options.functionFormat) {
+			
+			formattedContent = self.__options.functionFormat.call(
+				self,
+				self,
+				{ origin: self._$origin[0] },
+				self.__Content
+			);
+		}
+		
+		if (typeof formattedContent === 'string' && !self.__options.contentAsHTML) {
+			$el.text(formattedContent);
+		}
+		else {
+			$el
+				.empty()
+				.append(formattedContent);
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Save the content, cloning it beforehand if need be
+	 * 
+	 * @param content
+	 * @returns {self}
+	 * @private
+	 */
+	__contentSet: function(content) {
+		
+		// clone if asked. Cloning the object makes sure that each instance has its
+		// own version of the content (in case a same object were provided for several
+		// instances)
+		// reminder: typeof null === object
+		if (content instanceof $ && this.__options.contentCloning) {
+			content = content.clone(true);
+		}
+		
+		this.__Content = content;
+		
+		this._trigger({
+			type: 'updated',
+			content: content
+		});
+		
+		return this;
+	},
+	
+	/**
+	 * Error message about a method call made after destruction
+	 * 
+	 * @private
+	 */
+	__destroyError: function() {
+		throw new Error('This tooltip has been destroyed and cannot execute your method call.');
+	},
+	
+	/**
+	 * Gather all information about dimensions and available space,
+	 * called before every repositioning
+	 * 
+	 * @private
+	 * @returns {object}
+	 */
+	__geometry: function() {
+		
+		var	self = this,
+			$target = self._$origin,
+			originIsArea = self._$origin.is('area');
+		
+		// if this._$origin is a map area, the target we'll need
+		// the dimensions of is actually the image using the map,
+		// not the area itself
+		if (originIsArea) {
+			
+			var mapName = self._$origin.parent().attr('name');
+			
+			$target = $('img[usemap="#'+ mapName +'"]');
+		}
+		
+		var bcr = $target[0].getBoundingClientRect(),
+			$document = $(env.window.document),
+			$window = $(env.window),
+			$parent = $target,
+			// some useful properties of important elements
+			geo = {
+				// available space for the tooltip, see down below
+				available: {
+					document: null,
+					window: null
+				},
+				document: {
+					size: {
+						height: $document.height(),
+						width: $document.width()
+					}
+				},
+				window: {
+					scroll: {
+						// the second ones are for IE compatibility
+						left: env.window.scrollX || env.window.document.documentElement.scrollLeft,
+						top: env.window.scrollY || env.window.document.documentElement.scrollTop
+					},
+					size: {
+						height: $window.height(),
+						width: $window.width()
+					}
+				},
+				origin: {
+					// the origin has a fixed lineage if itself or one of its
+					// ancestors has a fixed position
+					fixedLineage: false,
+					// relative to the document
+					offset: {},
+					size: {
+						height: bcr.bottom - bcr.top,
+						width: bcr.right - bcr.left
+					},
+					usemapImage: originIsArea ? $target[0] : null,
+					// relative to the window
+					windowOffset: {
+						bottom: bcr.bottom,
+						left: bcr.left,
+						right: bcr.right,
+						top: bcr.top
+					}
+				}
+			},
+			geoFixed = false;
+		
+		// if the element is a map area, some properties may need
+		// to be recalculated
+		if (originIsArea) {
+			
+			var shape = self._$origin.attr('shape'),
+				coords = self._$origin.attr('coords');
+			
+			if (coords) {
+				
+				coords = coords.split(',');
+				
+				$.map(coords, function(val, i) {
+					coords[i] = parseInt(val);
+				});
+			}
+			
+			// if the image itself is the area, nothing more to do
+			if (shape != 'default') {
+				
+				switch(shape) {
+					
+					case 'circle':
+						
+						var circleCenterLeft = coords[0],
+							circleCenterTop = coords[1],
+							circleRadius = coords[2],
+							areaTopOffset = circleCenterTop - circleRadius,
+							areaLeftOffset = circleCenterLeft - circleRadius;
+						
+						geo.origin.size.height = circleRadius * 2;
+						geo.origin.size.width = geo.origin.size.height;
+						
+						geo.origin.windowOffset.left += areaLeftOffset;
+						geo.origin.windowOffset.top += areaTopOffset;
+						
+						break;
+					
+					case 'rect':
+						
+						var areaLeft = coords[0],
+							areaTop = coords[1],
+							areaRight = coords[2],
+							areaBottom = coords[3];
+						
+						geo.origin.size.height = areaBottom - areaTop;
+						geo.origin.size.width = areaRight - areaLeft;
+						
+						geo.origin.windowOffset.left += areaLeft;
+						geo.origin.windowOffset.top += areaTop;
+						
+						break;
+					
+					case 'poly':
+						
+						var areaSmallestX = 0,
+							areaSmallestY = 0,
+							areaGreatestX = 0,
+							areaGreatestY = 0,
+							arrayAlternate = 'even';
+						
+						for (var i = 0; i < coords.length; i++) {
+							
+							var areaNumber = coords[i];
+							
+							if (arrayAlternate == 'even') {
+								
+								if (areaNumber > areaGreatestX) {
+									
+									areaGreatestX = areaNumber;
+									
+									if (i === 0) {
+										areaSmallestX = areaGreatestX;
+									}
+								}
+								
+								if (areaNumber < areaSmallestX) {
+									areaSmallestX = areaNumber;
+								}
+								
+								arrayAlternate = 'odd';
+							}
+							else {
+								if (areaNumber > areaGreatestY) {
+									
+									areaGreatestY = areaNumber;
+									
+									if (i == 1) {
+										areaSmallestY = areaGreatestY;
+									}
+								}
+								
+								if (areaNumber < areaSmallestY) {
+									areaSmallestY = areaNumber;
+								}
+								
+								arrayAlternate = 'even';
+							}
+						}
+						
+						geo.origin.size.height = areaGreatestY - areaSmallestY;
+						geo.origin.size.width = areaGreatestX - areaSmallestX;
+						
+						geo.origin.windowOffset.left += areaSmallestX;
+						geo.origin.windowOffset.top += areaSmallestY;
+						
+						break;
+				}
+			}
+		}
+		
+		// user callback through an event
+		var edit = function(r) {
+			geo.origin.size.height = r.height,
+				geo.origin.windowOffset.left = r.left,
+				geo.origin.windowOffset.top = r.top,
+				geo.origin.size.width = r.width
+		};
+		
+		self._trigger({
+			type: 'geometry',
+			edit: edit,
+			geometry: {
+				height: geo.origin.size.height,
+				left: geo.origin.windowOffset.left,
+				top: geo.origin.windowOffset.top,
+				width: geo.origin.size.width
+			}
+		});
+		
+		// calculate the remaining properties with what we got
+		
+		geo.origin.windowOffset.right = geo.origin.windowOffset.left + geo.origin.size.width;
+		geo.origin.windowOffset.bottom = geo.origin.windowOffset.top + geo.origin.size.height;
+		
+		geo.origin.offset.left = geo.origin.windowOffset.left + geo.window.scroll.left;
+		geo.origin.offset.top = geo.origin.windowOffset.top + geo.window.scroll.top;
+		geo.origin.offset.bottom = geo.origin.offset.top + geo.origin.size.height;
+		geo.origin.offset.right = geo.origin.offset.left + geo.origin.size.width;
+		
+		// the space that is available to display the tooltip relatively to the document
+		geo.available.document = {
+			bottom: {
+				height: geo.document.size.height - geo.origin.offset.bottom,
+				width: geo.document.size.width
+			},
+			left: {
+				height: geo.document.size.height,
+				width: geo.origin.offset.left
+			},
+			right: {
+				height: geo.document.size.height,
+				width: geo.document.size.width - geo.origin.offset.right
+			},
+			top: {
+				height: geo.origin.offset.top,
+				width: geo.document.size.width
+			}
+		};
+		
+		// the space that is available to display the tooltip relatively to the viewport
+		// (the resulting values may be negative if the origin overflows the viewport)
+		geo.available.window = {
+			bottom: {
+				// the inner max is here to make sure the available height is no bigger
+				// than the viewport height (when the origin is off screen at the top).
+				// The outer max just makes sure that the height is not negative (when
+				// the origin overflows at the bottom).
+				height: Math.max(geo.window.size.height - Math.max(geo.origin.windowOffset.bottom, 0), 0),
+				width: geo.window.size.width
+			},
+			left: {
+				height: geo.window.size.height,
+				width: Math.max(geo.origin.windowOffset.left, 0)
+			},
+			right: {
+				height: geo.window.size.height,
+				width: Math.max(geo.window.size.width - Math.max(geo.origin.windowOffset.right, 0), 0)
+			},
+			top: {
+				height: Math.max(geo.origin.windowOffset.top, 0),
+				width: geo.window.size.width
+			}
+		};
+		
+		while ($parent[0].tagName.toLowerCase() != 'html') {
+			
+			if ($parent.css('position') == 'fixed') {
+				geo.origin.fixedLineage = true;
+				break;
+			}
+			
+			$parent = $parent.parent();
+		}
+		
+		return geo;
+	},
+	
+	/**
+	 * Some options may need to be formated before being used
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__optionsFormat: function() {
+		
+		if (typeof this.__options.animationDuration == 'number') {
+			this.__options.animationDuration = [this.__options.animationDuration, this.__options.animationDuration];
+		}
+		
+		if (typeof this.__options.delay == 'number') {
+			this.__options.delay = [this.__options.delay, this.__options.delay];
+		}
+		
+		if (typeof this.__options.delayTouch == 'number') {
+			this.__options.delayTouch = [this.__options.delayTouch, this.__options.delayTouch];
+		}
+		
+		if (typeof this.__options.theme == 'string') {
+			this.__options.theme = [this.__options.theme];
+		}
+		
+		// determine the future parent
+		if (this.__options.parent === null) {
+			this.__options.parent = $(env.window.document.body);
+		}
+		else if (typeof this.__options.parent == 'string') {
+			this.__options.parent = $(this.__options.parent);
+		}
+		
+		if (this.__options.trigger == 'hover') {
+			
+			this.__options.triggerOpen = {
+				mouseenter: true,
+				touchstart: true
+			};
+			
+			this.__options.triggerClose = {
+				mouseleave: true,
+				originClick: true,
+				touchleave: true
+			};
+		}
+		else if (this.__options.trigger == 'click') {
+			
+			this.__options.triggerOpen = {
+				click: true,
+				tap: true
+			};
+			
+			this.__options.triggerClose = {
+				click: true,
+				tap: true
+			};
+		}
+		
+		// for the plugins
+		this._trigger('options');
+		
+		return this;
+	},
+	
+	/**
+	 * Schedules or cancels the garbage collector task
+	 *
+	 * @returns {self}
+	 * @private
+	 */
+	__prepareGC: function() {
+		
+		var self = this;
+		
+		// in case the selfDestruction option has been changed by a method call
+		if (self.__options.selfDestruction) {
+			
+			// the GC task
+			self.__garbageCollector = setInterval(function() {
+				
+				var now = new Date().getTime();
+				
+				// forget the old events
+				self.__touchEvents = $.grep(self.__touchEvents, function(event, i) {
+					// 1 minute
+					return now - event.time > 60000;
+				});
+				
+				// auto-destruct if the origin is gone
+				if (!bodyContains(self._$origin)) {
+					
+					self.close(function(){
+						self.destroy();
+					});
+				}
+			}, 20000);
+		}
+		else {
+			clearInterval(self.__garbageCollector);
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Sets listeners on the origin if the open triggers require them.
+	 * Unlike the listeners set at opening time, these ones
+	 * remain even when the tooltip is closed. It has been made a
+	 * separate method so it can be called when the triggers are
+	 * changed in the options. Closing is handled in _open()
+	 * because of the bindings that may be needed on the tooltip
+	 * itself
+	 *
+	 * @returns {self}
+	 * @private
+	 */
+	__prepareOrigin: function() {
+		
+		var self = this;
+		
+		// in case we're resetting the triggers
+		self._$origin.off('.'+ self.__namespace +'-triggerOpen');
+		
+		// if the device is touch capable, even if only mouse triggers
+		// are asked, we need to listen to touch events to know if the mouse
+		// events are actually emulated (so we can ignore them)
+		if (env.hasTouchCapability) {
+			
+			self._$origin.on(
+				'touchstart.'+ self.__namespace +'-triggerOpen ' +
+				'touchend.'+ self.__namespace +'-triggerOpen ' +
+				'touchcancel.'+ self.__namespace +'-triggerOpen',
+				function(event){
+					self._touchRecordEvent(event);
+				}
+			);
+		}
+		
+		// mouse click and touch tap work the same way
+		if (	self.__options.triggerOpen.click
+			||	(self.__options.triggerOpen.tap && env.hasTouchCapability)
+		) {
+			
+			var eventNames = '';
+			if (self.__options.triggerOpen.click) {
+				eventNames += 'click.'+ self.__namespace +'-triggerOpen ';
+			}
+			if (self.__options.triggerOpen.tap && env.hasTouchCapability) {
+				eventNames += 'touchend.'+ self.__namespace +'-triggerOpen';
+			}
+			
+			self._$origin.on(eventNames, function(event) {
+				if (self._touchIsMeaningfulEvent(event)) {
+					self._open(event);
+				}
+			});
+		}
+		
+		// mouseenter and touch start work the same way
+		if (	self.__options.triggerOpen.mouseenter
+			||	(self.__options.triggerOpen.touchstart && env.hasTouchCapability)
+		) {
+			
+			var eventNames = '';
+			if (self.__options.triggerOpen.mouseenter) {
+				eventNames += 'mouseenter.'+ self.__namespace +'-triggerOpen ';
+			}
+			if (self.__options.triggerOpen.touchstart && env.hasTouchCapability) {
+				eventNames += 'touchstart.'+ self.__namespace +'-triggerOpen';
+			}
+			
+			self._$origin.on(eventNames, function(event) {
+				if (	self._touchIsTouchEvent(event)
+					||	!self._touchIsEmulatedEvent(event)
+				) {
+					self.__pointerIsOverOrigin = true;
+					self._openShortly(event);
+				}
+			});
+		}
+		
+		// info for the mouseleave/touchleave close triggers when they use a delay
+		if (	self.__options.triggerClose.mouseleave
+			||	(self.__options.triggerClose.touchleave && env.hasTouchCapability)
+		) {
+			
+			var eventNames = '';
+			if (self.__options.triggerClose.mouseleave) {
+				eventNames += 'mouseleave.'+ self.__namespace +'-triggerOpen ';
+			}
+			if (self.__options.triggerClose.touchleave && env.hasTouchCapability) {
+				eventNames += 'touchend.'+ self.__namespace +'-triggerOpen touchcancel.'+ self.__namespace +'-triggerOpen';
+			}
+			
+			self._$origin.on(eventNames, function(event) {
+				
+				if (self._touchIsMeaningfulEvent(event)) {
+					self.__pointerIsOverOrigin = false;
+				}
+			});
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Do the things that need to be done only once after the tooltip
+	 * HTML element it has been created. It has been made a separate
+	 * method so it can be called when options are changed. Remember
+	 * that the tooltip may actually exist in the DOM before it is
+	 * opened, and present after it has been closed: it's the display
+	 * plugin that takes care of handling it.
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__prepareTooltip: function() {
+		
+		var self = this,
+			p = self.__options.interactive ? 'auto' : '';
+		
+		// this will be useful to know quickly if the tooltip is in
+		// the DOM or not 
+		self._$tooltip
+			.attr('id', self.__namespace)
+			.css({
+				// pointer events
+				'pointer-events': p,
+				zIndex: self.__options.zIndex
+			});
+		
+		// themes
+		// remove the old ones and add the new ones
+		$.each(self.__previousThemes, function(i, theme) {
+			self._$tooltip.removeClass(theme);
+		});
+		$.each(self.__options.theme, function(i, theme) {
+			self._$tooltip.addClass(theme);
+		});
+		
+		self.__previousThemes = $.merge([], self.__options.theme);
+		
+		return self;
+	},
+	
+	/**
+	 * Handles the scroll on any of the parents of the origin (when the
+	 * tooltip is open)
+	 *
+	 * @param {object} event
+	 * @returns {self}
+	 * @private
+	 */
+	__scrollHandler: function(event) {
+		
+		var self = this;
+		
+		if (self.__options.triggerClose.scroll) {
+			self._close(event);
+		}
+		else {
+			
+			// if the origin or tooltip have been removed: do nothing, the tracker will
+			// take care of it later
+			if (bodyContains(self._$origin) && bodyContains(self._$tooltip)) {
+				
+				var geo = null;
+				
+				// if the scroll happened on the window
+				if (event.target === env.window.document) {
+					
+					// if the origin has a fixed lineage, window scroll will have no
+					// effect on its position nor on the position of the tooltip
+					if (!self.__Geometry.origin.fixedLineage) {
+						
+						// we don't need to do anything unless repositionOnScroll is true
+						// because the tooltip will already have moved with the window
+						// (and of course with the origin)
+						if (self.__options.repositionOnScroll) {
+							self.reposition(event);
+						}
+					}
+				}
+				// if the scroll happened on another parent of the tooltip, it means
+				// that it's in a scrollable area and now needs to have its position
+				// adjusted or recomputed, depending ont the repositionOnScroll
+				// option. Also, if the origin is partly hidden due to a parent that
+				// hides its overflow, we'll just hide (not close) the tooltip.
+				else {
+					
+					geo = self.__geometry();
+					
+					var overflows = false;
+					
+					// a fixed position origin is not affected by the overflow hiding
+					// of a parent
+					if (self._$origin.css('position') != 'fixed') {
+						
+						self.__$originParents.each(function(i, el) {
+							
+							var $el = $(el),
+								overflowX = $el.css('overflow-x'),
+								overflowY = $el.css('overflow-y');
+							
+							if (overflowX != 'visible' || overflowY != 'visible') {
+								
+								var bcr = el.getBoundingClientRect();
+								
+								if (overflowX != 'visible') {
+									
+									if (	geo.origin.windowOffset.left < bcr.left
+										||	geo.origin.windowOffset.right > bcr.right
+									) {
+										overflows = true;
+										return false;
+									}
+								}
+								
+								if (overflowY != 'visible') {
+									
+									if (	geo.origin.windowOffset.top < bcr.top
+										||	geo.origin.windowOffset.bottom > bcr.bottom
+									) {
+										overflows = true;
+										return false;
+									}
+								}
+							}
+							
+							// no need to go further if fixed, for the same reason as above
+							if ($el.css('position') == 'fixed') {
+								return false;
+							}
+						});
+					}
+					
+					if (overflows) {
+						self._$tooltip.css('visibility', 'hidden');
+					}
+					else {
+						
+						self._$tooltip.css('visibility', 'visible');
+						
+						// reposition
+						if (self.__options.repositionOnScroll) {
+							self.reposition(event);
+						}
+						// or just adjust offset
+						else {
+							
+							// we have to use offset and not windowOffset because this way,
+							// only the scroll distance of the scrollable areas are taken into
+							// account (the scrolltop value of the main window must be
+							// ignored since the tooltip already moves with it)
+							var offsetLeft = geo.origin.offset.left - self.__Geometry.origin.offset.left,
+								offsetTop = geo.origin.offset.top - self.__Geometry.origin.offset.top;
+							
+							// add the offset to the position initially computed by the display plugin
+							self._$tooltip.css({
+								left: self.__lastPosition.coord.left + offsetLeft,
+								top: self.__lastPosition.coord.top + offsetTop
+							});
+						}
+					}
+				}
+				
+				self._trigger({
+					type: 'scroll',
+					event: event,
+					geo: geo
+				});
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Changes the state of the tooltip
+	 *
+	 * @param {string} state
+	 * @returns {self}
+	 * @private
+	 */
+	__stateSet: function(state) {
+		
+		this.__state = state;
+		
+		this._trigger({
+			type: 'state',
+			state: state
+		});
+		
+		return this;
+	},
+	
+	/**
+	 * Clear appearance timeouts
+	 *
+	 * @returns {self}
+	 * @private
+	 */
+	__timeoutsClear: function() {
+		
+		// there is only one possible open timeout: the delayed opening
+		// when the mouseenter/touchstart open triggers are used
+		clearTimeout(this.__timeouts.open);
+		this.__timeouts.open = null;
+		
+		// ... but several close timeouts: the delayed closing when the
+		// mouseleave close trigger is used and the timer option
+		$.each(this.__timeouts.close, function(i, timeout) {
+			clearTimeout(timeout);
+		});
+		this.__timeouts.close = [];
+		
+		return this;
+	},
+	
+	/**
+	 * Start the tracker that will make checks at regular intervals
+	 * 
+	 * @returns {self}
+	 * @private
+	 */
+	__trackerStart: function() {
+		
+		var self = this,
+			$content = self._$tooltip.find('.tooltipster-content');
+		
+		// get the initial content size
+		if (self.__options.trackTooltip) {
+			self.__contentBcr = $content[0].getBoundingClientRect();
+		}
+		
+		self.__tracker = setInterval(function() {
+			
+			// if the origin or tooltip elements have been removed.
+			// Note: we could destroy the instance now if the origin has
+			// been removed but we'll leave that task to our garbage collector
+			if (!bodyContains(self._$origin) || !bodyContains(self._$tooltip)) {
+				self._close();
+			}
+			// if everything is alright
+			else {
+				
+				// compare the former and current positions of the origin to reposition
+				// the tooltip if need be
+				if (self.__options.trackOrigin) {
+					
+					var g = self.__geometry(),
+						identical = false;
+					
+					// compare size first (a change requires repositioning too)
+					if (areEqual(g.origin.size, self.__Geometry.origin.size)) {
+						
+						// for elements that have a fixed lineage (see __geometry()), we track the
+						// top and left properties (relative to window)
+						if (self.__Geometry.origin.fixedLineage) {
+							if (areEqual(g.origin.windowOffset, self.__Geometry.origin.windowOffset)) {
+								identical = true;
+							}
+						}
+						// otherwise, track total offset (relative to document)
+						else {
+							if (areEqual(g.origin.offset, self.__Geometry.origin.offset)) {
+								identical = true;
+							}
+						}
+					}
+					
+					if (!identical) {
+						
+						// close the tooltip when using the mouseleave close trigger
+						// (see https://github.com/iamceege/tooltipster/pull/253)
+						if (self.__options.triggerClose.mouseleave) {
+							self._close();
+						}
+						else {
+							self.reposition();
+						}
+					}
+				}
+				
+				if (self.__options.trackTooltip) {
+					
+					var currentBcr = $content[0].getBoundingClientRect();
+					
+					if (	currentBcr.height !== self.__contentBcr.height
+						||	currentBcr.width !== self.__contentBcr.width
+					) {
+						self.reposition();
+						self.__contentBcr = currentBcr;
+					}
+				}
+			}
+		}, self.__options.trackerInterval);
+		
+		return self;
+	},
+	
+	/**
+	 * Closes the tooltip (after the closing delay)
+	 * 
+	 * @param event
+	 * @param callback
+	 * @param force Set to true to override a potential refusal of the user's function
+	 * @returns {self}
+	 * @protected
+	 */
+	_close: function(event, callback, force) {
+		
+		var self = this,
+			ok = true;
+		
+		self._trigger({
+			type: 'close',
+			event: event,
+			stop: function() {
+				ok = false;
+			}
+		});
+		
+		// a destroying tooltip (force == true) may not refuse to close
+		if (ok || force) {
+			
+			// save the method custom callback and cancel any open method custom callbacks
+			if (callback) self.__callbacks.close.push(callback);
+			self.__callbacks.open = [];
+			
+			// clear open/close timeouts
+			self.__timeoutsClear();
+			
+			var finishCallbacks = function() {
+				
+				// trigger any close method custom callbacks and reset them
+				$.each(self.__callbacks.close, function(i,c) {
+					c.call(self, self, {
+						event: event,
+						origin: self._$origin[0]
+					});
+				});
+				
+				self.__callbacks.close = [];
+			};
+			
+			if (self.__state != 'closed') {
+				
+				var necessary = true,
+					d = new Date(),
+					now = d.getTime(),
+					newClosingTime = now + self.__options.animationDuration[1];
+				
+				// the tooltip may already already be disappearing, but if a new
+				// call to close() is made after the animationDuration was changed
+				// to 0 (for example), we ought to actually close it sooner than
+				// previously scheduled. In that case it should be noted that the
+				// browser will not adapt the animation duration to the new
+				// animationDuration that was set after the start of the closing
+				// animation.
+				// Note: the same thing could be considered at opening, but is not
+				// really useful since the tooltip is actually opened immediately
+				// upon a call to _open(). Since it would not make the opening
+				// animation finish sooner, its sole impact would be to trigger the
+				// state event and the open callbacks sooner than the actual end of
+				// the opening animation, which is not great.
+				if (self.__state == 'disappearing') {
+					
+					if (	newClosingTime > self.__closingTime
+						// in case closing is actually overdue because the script
+						// execution was suspended. See #679
+						&&	self.__options.animationDuration[1] > 0
+					) {
+						necessary = false;
+					}
+				}
+				
+				if (necessary) {
+					
+					self.__closingTime = newClosingTime;
+					
+					if (self.__state != 'disappearing') {
+						self.__stateSet('disappearing');
+					}
+					
+					var finish = function() {
+						
+						// stop the tracker
+						clearInterval(self.__tracker);
+						
+						// a "beforeClose" option has been asked several times but would
+						// probably useless since the content element is still accessible
+						// via ::content(), and because people can always use listeners
+						// inside their content to track what's going on. For the sake of
+						// simplicity, this has been denied. Bur for the rare people who
+						// really need the option (for old browsers or for the case where
+						// detaching the content is actually destructive, for file or
+						// password inputs for example), this event will do the work.
+						self._trigger({
+							type: 'closing',
+							event: event
+						});
+						
+						// unbind listeners which are no longer needed
+						
+						self._$tooltip
+							.off('.'+ self.__namespace +'-triggerClose')
+							.removeClass('tooltipster-dying');
+						
+						// orientationchange, scroll and resize listeners
+						$(env.window).off('.'+ self.__namespace +'-triggerClose');
+						
+						// scroll listeners
+						self.__$originParents.each(function(i, el) {
+							$(el).off('scroll.'+ self.__namespace +'-triggerClose');
+						});
+						// clear the array to prevent memory leaks
+						self.__$originParents = null;
+						
+						$(env.window.document.body).off('.'+ self.__namespace +'-triggerClose');
+						
+						self._$origin.off('.'+ self.__namespace +'-triggerClose');
+						
+						self._off('dismissable');
+						
+						// a plugin that would like to remove the tooltip from the
+						// DOM when closed should bind on this
+						self.__stateSet('closed');
+						
+						// trigger event
+						self._trigger({
+							type: 'after',
+							event: event
+						});
+						
+						// call our constructor custom callback function
+						if (self.__options.functionAfter) {
+							self.__options.functionAfter.call(self, self, {
+								event: event,
+								origin: self._$origin[0]
+							});
+						}
+						
+						// call our method custom callbacks functions
+						finishCallbacks();
+					};
+					
+					if (env.hasTransitions) {
+						
+						self._$tooltip.css({
+							'-moz-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'-ms-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'-o-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'-webkit-animation-duration': self.__options.animationDuration[1] + 'ms',
+							'animation-duration': self.__options.animationDuration[1] + 'ms',
+							'transition-duration': self.__options.animationDuration[1] + 'ms'
+						});
+						
+						self._$tooltip
+							// clear both potential open and close tasks
+							.clearQueue()
+							.removeClass('tooltipster-show')
+							// for transitions only
+							.addClass('tooltipster-dying');
+						
+						if (self.__options.animationDuration[1] > 0) {
+							self._$tooltip.delay(self.__options.animationDuration[1]);
+						}
+						
+						self._$tooltip.queue(finish);
+					}
+					else {
+						
+						self._$tooltip
+							.stop()
+							.fadeOut(self.__options.animationDuration[1], finish);
+					}
+				}
+			}
+			// if the tooltip is already closed, we still need to trigger
+			// the method custom callbacks
+			else {
+				finishCallbacks();
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 * 
+	 * @returns {self}
+	 * @protected
+	 */
+	_off: function() {
+		this.__$emitterPrivate.off.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @returns {self}
+	 * @protected
+	 */
+	_on: function() {
+		this.__$emitterPrivate.on.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * For internal use by plugins, if needed
+	 *
+	 * @returns {self}
+	 * @protected
+	 */
+	_one: function() {
+		this.__$emitterPrivate.one.apply(this.__$emitterPrivate, Array.prototype.slice.apply(arguments));
+		return this;
+	},
+	
+	/**
+	 * Opens the tooltip right away.
+	 *
+	 * @param event
+	 * @param callback Will be called when the opening animation is over
+	 * @returns {self}
+	 * @protected
+	 */
+	_open: function(event, callback) {
+		
+		var self = this;
+		
+		// if the destruction process has not begun and if this was not
+		// triggered by an unwanted emulated click event
+		if (!self.__destroying) {
+			
+			// check that the origin is still in the DOM
+			if (	bodyContains(self._$origin)
+				// if the tooltip is enabled
+				&&	self.__enabled
+			) {
+				
+				var ok = true;
+				
+				// if the tooltip is not open yet, we need to call functionBefore.
+				// otherwise we can jst go on
+				if (self.__state == 'closed') {
+					
+					// trigger an event. The event.stop function allows the callback
+					// to prevent the opening of the tooltip
+					self._trigger({
+						type: 'before',
+						event: event,
+						stop: function() {
+							ok = false;
+						}
+					});
+					
+					if (ok && self.__options.functionBefore) {
+						
+						// call our custom function before continuing
+						ok = self.__options.functionBefore.call(self, self, {
+							event: event,
+							origin: self._$origin[0]
+						});
+					}
+				}
+				
+				if (ok !== false) {
+					
+					// if there is some content
+					if (self.__Content !== null) {
+						
+						// save the method callback and cancel close method callbacks
+						if (callback) {
+							self.__callbacks.open.push(callback);
+						}
+						self.__callbacks.close = [];
+						
+						// get rid of any appearance timeouts
+						self.__timeoutsClear();
+						
+						var extraTime,
+							finish = function() {
+								
+								if (self.__state != 'stable') {
+									self.__stateSet('stable');
+								}
+								
+								// trigger any open method custom callbacks and reset them
+								$.each(self.__callbacks.open, function(i,c) {
+									c.call(self, self, {
+										origin: self._$origin[0],
+										tooltip: self._$tooltip[0]
+									});
+								});
+								
+								self.__callbacks.open = [];
+							};
+						
+						// if the tooltip is already open
+						if (self.__state !== 'closed') {
+							
+							// the timer (if any) will start (or restart) right now
+							extraTime = 0;
+							
+							// if it was disappearing, cancel that
+							if (self.__state === 'disappearing') {
+								
+								self.__stateSet('appearing');
+								
+								if (env.hasTransitions) {
+									
+									self._$tooltip
+										.clearQueue()
+										.removeClass('tooltipster-dying')
+										.addClass('tooltipster-show');
+									
+									if (self.__options.animationDuration[0] > 0) {
+										self._$tooltip.delay(self.__options.animationDuration[0]);
+									}
+									
+									self._$tooltip.queue(finish);
+								}
+								else {
+									// in case the tooltip was currently fading out, bring it back
+									// to life
+									self._$tooltip
+										.stop()
+										.fadeIn(finish);
+								}
+							}
+							// if the tooltip is already open, we still need to trigger the method
+							// custom callback
+							else if (self.__state == 'stable') {
+								finish();
+							}
+						}
+						// if the tooltip isn't already open, open it
+						else {
+							
+							// a plugin must bind on this and store the tooltip in this._$tooltip
+							self.__stateSet('appearing');
+							
+							// the timer (if any) will start when the tooltip has fully appeared
+							// after its transition
+							extraTime = self.__options.animationDuration[0];
+							
+							// insert the content inside the tooltip
+							self.__contentInsert();
+							
+							// reposition the tooltip and attach to the DOM
+							self.reposition(event, true);
+							
+							// animate in the tooltip. If the display plugin wants no css
+							// animations, it may override the animation option with a
+							// dummy value that will produce no effect
+							if (env.hasTransitions) {
+								
+								// note: there seems to be an issue with start animations which
+								// are randomly not played on fast devices in both Chrome and FF,
+								// couldn't find a way to solve it yet. It seems that applying
+								// the classes before appending to the DOM helps a little, but
+								// it messes up some CSS transitions. The issue almost never
+								// happens when delay[0]==0 though
+								self._$tooltip
+									.addClass('tooltipster-'+ self.__options.animation)
+									.addClass('tooltipster-initial')
+									.css({
+										'-moz-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'-ms-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'-o-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'-webkit-animation-duration': self.__options.animationDuration[0] + 'ms',
+										'animation-duration': self.__options.animationDuration[0] + 'ms',
+										'transition-duration': self.__options.animationDuration[0] + 'ms'
+									});
+								
+								setTimeout(
+									function() {
+										
+										// a quick hover may have already triggered a mouseleave
+										if (self.__state != 'closed') {
+											
+											self._$tooltip
+												.addClass('tooltipster-show')
+												.removeClass('tooltipster-initial');
+											
+											if (self.__options.animationDuration[0] > 0) {
+												self._$tooltip.delay(self.__options.animationDuration[0]);
+											}
+											
+											self._$tooltip.queue(finish);
+										}
+									},
+									0
+								);
+							}
+							else {
+								
+								// old browsers will have to live with this
+								self._$tooltip
+									.css('display', 'none')
+									.fadeIn(self.__options.animationDuration[0], finish);
+							}
+							
+							// checks if the origin is removed while the tooltip is open
+							self.__trackerStart();
+							
+							// NOTE: the listeners below have a '-triggerClose' namespace
+							// because we'll remove them when the tooltip closes (unlike
+							// the '-triggerOpen' listeners). So some of them are actually
+							// not about close triggers, rather about positioning.
+							
+							$(env.window)
+								// reposition on resize
+								.on('resize.'+ self.__namespace +'-triggerClose', function(e) {
+									
+									var $ae = $(document.activeElement);
+									
+									// reposition only if the resize event was not triggered upon the opening
+									// of a virtual keyboard due to an input field being focused within the tooltip
+									// (otherwise the repositioning would lose the focus)
+									if (	(!$ae.is('input') && !$ae.is('textarea'))
+										||	!$.contains(self._$tooltip[0], $ae[0])
+									) {
+										self.reposition(e);
+									}
+								})
+								// same as below for parents
+								.on('scroll.'+ self.__namespace +'-triggerClose', function(e) {
+									self.__scrollHandler(e);
+								});
+							
+							self.__$originParents = self._$origin.parents();
+							
+							// scrolling may require the tooltip to be moved or even
+							// repositioned in some cases
+							self.__$originParents.each(function(i, parent) {
+								
+								$(parent).on('scroll.'+ self.__namespace +'-triggerClose', function(e) {
+									self.__scrollHandler(e);
+								});
+							});
+							
+							if (	self.__options.triggerClose.mouseleave
+								||	(self.__options.triggerClose.touchleave && env.hasTouchCapability)
+							) {
+								
+								// we use an event to allow users/plugins to control when the mouseleave/touchleave
+								// close triggers will come to action. It allows to have more triggering elements
+								// than just the origin and the tooltip for example, or to cancel/delay the closing,
+								// or to make the tooltip interactive even if it wasn't when it was open, etc.
+								self._on('dismissable', function(event) {
+									
+									if (event.dismissable) {
+										
+										if (event.delay) {
+											
+											timeout = setTimeout(function() {
+												// event.event may be undefined
+												self._close(event.event);
+											}, event.delay);
+											
+											self.__timeouts.close.push(timeout);
+										}
+										else {
+											self._close(event);
+										}
+									}
+									else {
+										clearTimeout(timeout);
+									}
+								});
+								
+								// now set the listeners that will trigger 'dismissable' events
+								var $elements = self._$origin,
+									eventNamesIn = '',
+									eventNamesOut = '',
+									timeout = null;
+								
+								// if we have to allow interaction, bind on the tooltip too
+								if (self.__options.interactive) {
+									$elements = $elements.add(self._$tooltip);
+								}
+								
+								if (self.__options.triggerClose.mouseleave) {
+									eventNamesIn += 'mouseenter.'+ self.__namespace +'-triggerClose ';
+									eventNamesOut += 'mouseleave.'+ self.__namespace +'-triggerClose ';
+								}
+								if (self.__options.triggerClose.touchleave && env.hasTouchCapability) {
+									eventNamesIn += 'touchstart.'+ self.__namespace +'-triggerClose';
+									eventNamesOut += 'touchend.'+ self.__namespace +'-triggerClose touchcancel.'+ self.__namespace +'-triggerClose';
+								}
+								
+								$elements
+									// close after some time spent outside of the elements
+									.on(eventNamesOut, function(event) {
+										
+										// it's ok if the touch gesture ended up to be a swipe,
+										// it's still a "touch leave" situation
+										if (	self._touchIsTouchEvent(event)
+											||	!self._touchIsEmulatedEvent(event)
+										) {
+											
+											var delay = (event.type == 'mouseleave') ?
+												self.__options.delay :
+												self.__options.delayTouch;
+											
+											self._trigger({
+												delay: delay[1],
+												dismissable: true,
+												event: event,
+												type: 'dismissable'
+											});
+										}
+									})
+									// suspend the mouseleave timeout when the pointer comes back
+									// over the elements
+									.on(eventNamesIn, function(event) {
+										
+										// it's also ok if the touch event is a swipe gesture
+										if (	self._touchIsTouchEvent(event)
+											||	!self._touchIsEmulatedEvent(event)
+										) {
+											self._trigger({
+												dismissable: false,
+												event: event,
+												type: 'dismissable'
+											});
+										}
+									});
+							}
+							
+							// close the tooltip when the origin gets a mouse click (common behavior of
+							// native tooltips)
+							if (self.__options.triggerClose.originClick) {
+								
+								self._$origin.on('click.'+ self.__namespace + '-triggerClose', function(event) {
+									
+									// we could actually let a tap trigger this but this feature just
+									// does not make sense on touch devices
+									if (	!self._touchIsTouchEvent(event)
+										&&	!self._touchIsEmulatedEvent(event)
+									) {
+										self._close(event);
+									}
+								});
+							}
+							
+							// set the same bindings for click and touch on the body to close the tooltip
+							if (	self.__options.triggerClose.click
+								||	(self.__options.triggerClose.tap && env.hasTouchCapability)
+							) {
+								
+								// don't set right away since the click/tap event which triggered this method
+								// (if it was a click/tap) is going to bubble up to the body, we don't want it
+								// to close the tooltip immediately after it opened
+								setTimeout(function() {
+									
+									if (self.__state != 'closed') {
+										
+										var eventNames = '',
+											$body = $(env.window.document.body);
+										
+										if (self.__options.triggerClose.click) {
+											eventNames += 'click.'+ self.__namespace +'-triggerClose ';
+										}
+										if (self.__options.triggerClose.tap && env.hasTouchCapability) {
+											eventNames += 'touchend.'+ self.__namespace +'-triggerClose';
+										}
+										
+										$body.on(eventNames, function(event) {
+											
+											if (self._touchIsMeaningfulEvent(event)) {
+												
+												self._touchRecordEvent(event);
+												
+												if (!self.__options.interactive || !$.contains(self._$tooltip[0], event.target)) {
+													self._close(event);
+												}
+											}
+										});
+										
+										// needed to detect and ignore swiping
+										if (self.__options.triggerClose.tap && env.hasTouchCapability) {
+											
+											$body.on('touchstart.'+ self.__namespace +'-triggerClose', function(event) {
+												self._touchRecordEvent(event);
+											});
+										}
+									}
+								}, 0);
+							}
+							
+							self._trigger('ready');
+							
+							// call our custom callback
+							if (self.__options.functionReady) {
+								self.__options.functionReady.call(self, self, {
+									origin: self._$origin[0],
+									tooltip: self._$tooltip[0]
+								});
+							}
+						}
+						
+						// if we have a timer set, let the countdown begin
+						if (self.__options.timer > 0) {
+							
+							var timeout = setTimeout(function() {
+								self._close();
+							}, self.__options.timer + extraTime);
+							
+							self.__timeouts.close.push(timeout);
+						}
+					}
+				}
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * When using the mouseenter/touchstart open triggers, this function will
+	 * schedule the opening of the tooltip after the delay, if there is one
+	 *
+	 * @param event
+	 * @returns {self}
+	 * @protected
+ 	 */
+	_openShortly: function(event) {
+		
+		var self = this,
+			ok = true;
+		
+		if (self.__state != 'stable' && self.__state != 'appearing') {
+			
+			// if a timeout is not already running
+			if (!self.__timeouts.open) {
+				
+				self._trigger({
+					type: 'start',
+					event: event,
+					stop: function() {
+						ok = false;
+					}
+				});
+				
+				if (ok) {
+					
+					var delay = (event.type.indexOf('touch') == 0) ?
+						self.__options.delayTouch :
+						self.__options.delay;
+					
+					if (delay[0]) {
+						
+						self.__timeouts.open = setTimeout(function() {
+							
+							self.__timeouts.open = null;
+							
+							// open only if the pointer (mouse or touch) is still over the origin.
+							// The check on the "meaningful event" can only be made here, after some
+							// time has passed (to know if the touch was a swipe or not)
+							if (self.__pointerIsOverOrigin && self._touchIsMeaningfulEvent(event)) {
+								
+								// signal that we go on
+								self._trigger('startend');
+								
+								self._open(event);
+							}
+							else {
+								// signal that we cancel
+								self._trigger('startcancel');
+							}
+						}, delay[0]);
+					}
+					else {
+						// signal that we go on
+						self._trigger('startend');
+						
+						self._open(event);
+					}
+				}
+			}
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Meant for plugins to get their options
+	 * 
+	 * @param {string} pluginName The name of the plugin that asks for its options
+	 * @param {object} defaultOptions The default options of the plugin
+	 * @returns {object} The options
+	 * @protected
+	 */
+	_optionsExtract: function(pluginName, defaultOptions) {
+		
+		var self = this,
+			options = $.extend(true, {}, defaultOptions);
+		
+		// if the plugin options were isolated in a property named after the
+		// plugin, use them (prevents conflicts with other plugins)
+		var pluginOptions = self.__options[pluginName];
+		
+		// if not, try to get them as regular options
+		if (!pluginOptions){
+			
+			pluginOptions = {};
+			
+			$.each(defaultOptions, function(optionName, value) {
+				
+				var o = self.__options[optionName];
+				
+				if (o !== undefined) {
+					pluginOptions[optionName] = o;
+				}
+			});
+		}
+		
+		// let's merge the default options and the ones that were provided. We'd want
+		// to do a deep copy but not let jQuery merge arrays, so we'll do a shallow
+		// extend on two levels, that will be enough if options are not more than 1
+		// level deep
+		$.each(options, function(optionName, value) {
+			
+			if (pluginOptions[optionName] !== undefined) {
+				
+				if ((		typeof value == 'object'
+						&&	!(value instanceof Array)
+						&&	value != null
+					)
+					&&
+					(		typeof pluginOptions[optionName] == 'object'
+						&&	!(pluginOptions[optionName] instanceof Array)
+						&&	pluginOptions[optionName] != null
+					)
+				) {
+					$.extend(options[optionName], pluginOptions[optionName]);
+				}
+				else {
+					options[optionName] = pluginOptions[optionName];
+				}
+			}
+		});
+		
+		return options;
+	},
+	
+	/**
+	 * Used at instantiation of the plugin, or afterwards by plugins that activate themselves
+	 * on existing instances
+	 * 
+	 * @param {object} pluginName
+	 * @returns {self}
+	 * @protected
+	 */
+	_plug: function(pluginName) {
+		
+		var plugin = $.tooltipster._plugin(pluginName);
+		
+		if (plugin) {
+			
+			// if there is a constructor for instances
+			if (plugin.instance) {
+				
+				// proxy non-private methods on the instance to allow new instance methods
+				$.tooltipster.__bridge(plugin.instance, this, plugin.name);
+			}
+		}
+		else {
+			throw new Error('The "'+ pluginName +'" plugin is not defined');
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * This will return true if the event is a mouse event which was
+	 * emulated by the browser after a touch event. This allows us to
+	 * really dissociate mouse and touch triggers.
+	 * 
+	 * There is a margin of error if a real mouse event is fired right
+	 * after (within the delay shown below) a touch event on the same
+	 * element, but hopefully it should not happen often.
+	 * 
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchIsEmulatedEvent: function(event) {
+		
+		var isEmulated = false,
+			now = new Date().getTime();
+		
+		for (var i = this.__touchEvents.length - 1; i >= 0; i--) {
+			
+			var e = this.__touchEvents[i];
+			
+			// delay, in milliseconds. It's supposed to be 300ms in
+			// most browsers (350ms on iOS) to allow a double tap but
+			// can be less (check out FastClick for more info)
+			if (now - e.time < 500) {
+				
+				if (e.target === event.target) {
+					isEmulated = true;
+				}
+			}
+			else {
+				break;
+			}
+		}
+		
+		return isEmulated;
+	},
+	
+	/**
+	 * Returns false if the event was an emulated mouse event or
+	 * a touch event involved in a swipe gesture.
+	 * 
+	 * @param {object} event
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchIsMeaningfulEvent: function(event) {
+		return (
+				(this._touchIsTouchEvent(event) && !this._touchSwiped(event.target))
+			||	(!this._touchIsTouchEvent(event) && !this._touchIsEmulatedEvent(event))
+		);
+	},
+	
+	/**
+	 * Checks if an event is a touch event
+	 * 
+	 * @param {object} event
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchIsTouchEvent: function(event){
+		return event.type.indexOf('touch') == 0;
+	},
+	
+	/**
+	 * Store touch events for a while to detect swiping and emulated mouse events
+	 * 
+	 * @param {object} event
+	 * @returns {self}
+	 * @protected
+	 */
+	_touchRecordEvent: function(event) {
+		
+		if (this._touchIsTouchEvent(event)) {
+			event.time = new Date().getTime();
+			this.__touchEvents.push(event);
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Returns true if a swipe happened after the last touchstart event fired on
+	 * event.target.
+	 * 
+	 * We need to differentiate a swipe from a tap before we let the event open
+	 * or close the tooltip. A swipe is when a touchmove (scroll) event happens
+	 * on the body between the touchstart and the touchend events of an element.
+	 * 
+	 * @param {object} target The HTML element that may have triggered the swipe
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_touchSwiped: function(target) {
+		
+		var swiped = false;
+		
+		for (var i = this.__touchEvents.length - 1; i >= 0; i--) {
+			
+			var e = this.__touchEvents[i];
+			
+			if (e.type == 'touchmove') {
+				swiped = true;
+				break;
+			}
+			else if (
+				e.type == 'touchstart'
+				&&	target === e.target
+			) {
+				break;
+			}
+		}
+		
+		return swiped;
+	},
+	
+	/**
+	 * Triggers an event on the instance emitters
+	 * 
+	 * @returns {self}
+	 * @protected
+	 */
+	_trigger: function() {
+		
+		var args = Array.prototype.slice.apply(arguments);
+		
+		if (typeof args[0] == 'string') {
+			args[0] = { type: args[0] };
+		}
+		
+		// add properties to the event
+		args[0].instance = this;
+		args[0].origin = this._$origin ? this._$origin[0] : null;
+		args[0].tooltip = this._$tooltip ? this._$tooltip[0] : null;
+		
+		// note: the order of emitters matters
+		this.__$emitterPrivate.trigger.apply(this.__$emitterPrivate, args);
+		$.tooltipster._trigger.apply($.tooltipster, args);
+		this.__$emitterPublic.trigger.apply(this.__$emitterPublic, args);
+		
+		return this;
+	},
+	
+	/**
+	 * Deactivate a plugin on this instance
+	 * 
+	 * @returns {self}
+	 * @protected
+	 */
+	_unplug: function(pluginName) {
+		
+		var self = this;
+		
+		// if the plugin has been activated on this instance
+		if (self[pluginName]) {
+			
+			var plugin = $.tooltipster._plugin(pluginName);
+			
+			// if there is a constructor for instances
+			if (plugin.instance) {
+				
+				// unbridge
+				$.each(plugin.instance, function(methodName, fn) {
+					
+					// if the method exists (privates methods do not) and comes indeed from
+					// this plugin (may be missing or come from a conflicting plugin).
+					if (	self[methodName]
+						&&	self[methodName].bridged === self[pluginName]
+					) {
+						delete self[methodName];
+					}
+				});
+			}
+			
+			// destroy the plugin
+			if (self[pluginName].__destroy) {
+				self[pluginName].__destroy();
+			}
+			
+			// remove the reference to the plugin instance
+			delete self[pluginName];
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * @see self::_close
+	 * @returns {self}
+	 * @public
+	 */
+	close: function(callback) {
+		
+		if (!this.__destroyed) {
+			this._close(null, callback);
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Sets or gets the content of the tooltip
+	 * 
+	 * @returns {mixed|self}
+	 * @public
+	 */
+	content: function(content) {
+		
+		var self = this;
+		
+		// getter method
+		if (content === undefined) {
+			return self.__Content;
+		}
+		// setter method
+		else {
+			
+			if (!self.__destroyed) {
+				
+				// change the content
+				self.__contentSet(content);
+				
+				if (self.__Content !== null) {
+					
+					// update the tooltip if it is open
+					if (self.__state !== 'closed') {
+						
+						// reset the content in the tooltip
+						self.__contentInsert();
+						
+						// reposition and resize the tooltip
+						self.reposition();
+						
+						// if we want to play a little animation showing the content changed
+						if (self.__options.updateAnimation) {
+							
+							if (env.hasTransitions) {
+								
+								// keep the reference in the local scope
+								var animation = self.__options.updateAnimation;
+								
+								self._$tooltip.addClass('tooltipster-update-'+ animation);
+								
+								// remove the class after a while. The actual duration of the
+								// update animation may be shorter, it's set in the CSS rules
+								setTimeout(function() {
+									
+									if (self.__state != 'closed') {
+										
+										self._$tooltip.removeClass('tooltipster-update-'+ animation);
+									}
+								}, 1000);
+							}
+							else {
+								self._$tooltip.fadeTo(200, 0.5, function() {
+									if (self.__state != 'closed') {
+										self._$tooltip.fadeTo(200, 1);
+									}
+								});
+							}
+						}
+					}
+				}
+				else {
+					self._close();
+				}
+			}
+			else {
+				self.__destroyError();
+			}
+			
+			return self;
+		}
+	},
+	
+	/**
+	 * Destroys the tooltip
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	destroy: function() {
+		
+		var self = this;
+		
+		if (!self.__destroyed) {
+			
+			if(self.__state != 'closed'){
+				
+				// no closing delay
+				self.option('animationDuration', 0)
+					// force closing
+					._close(null, null, true);
+			}
+			else {
+				// there might be an open timeout still running
+				self.__timeoutsClear();
+			}
+			
+			// send event
+			self._trigger('destroy');
+			
+			self.__destroyed = true;
+			
+			self._$origin
+				.removeData(self.__namespace)
+				// remove the open trigger listeners
+				.off('.'+ self.__namespace +'-triggerOpen');
+			
+			// remove the touch listener
+			$(env.window.document.body).off('.' + self.__namespace +'-triggerOpen');
+			
+			var ns = self._$origin.data('tooltipster-ns');
+			
+			// if the origin has been removed from DOM, its data may
+			// well have been destroyed in the process and there would
+			// be nothing to clean up or restore
+			if (ns) {
+				
+				// if there are no more tooltips on this element
+				if (ns.length === 1) {
+					
+					// optional restoration of a title attribute
+					var title = null;
+					if (self.__options.restoration == 'previous') {
+						title = self._$origin.data('tooltipster-initialTitle');
+					}
+					else if (self.__options.restoration == 'current') {
+						
+						// old school technique to stringify when outerHTML is not supported
+						title = (typeof self.__Content == 'string') ?
+							self.__Content :
+							$('<div></div>').append(self.__Content).html();
+					}
+					
+					if (title) {
+						self._$origin.attr('title', title);
+					}
+					
+					// final cleaning
+					
+					self._$origin.removeClass('tooltipstered');
+					
+					self._$origin
+						.removeData('tooltipster-ns')
+						.removeData('tooltipster-initialTitle');
+				}
+				else {
+					// remove the instance namespace from the list of namespaces of
+					// tooltips present on the element
+					ns = $.grep(ns, function(el, i) {
+						return el !== self.__namespace;
+					});
+					self._$origin.data('tooltipster-ns', ns);
+				}
+			}
+			
+			// last event
+			self._trigger('destroyed');
+			
+			// unbind private and public event listeners
+			self._off();
+			self.off();
+			
+			// remove external references, just in case
+			self.__Content = null;
+			self.__$emitterPrivate = null;
+			self.__$emitterPublic = null;
+			self.__options.parent = null;
+			self._$origin = null;
+			self._$tooltip = null;
+			
+			// make sure the object is no longer referenced in there to prevent
+			// memory leaks
+			$.tooltipster.__instancesLatestArr = $.grep($.tooltipster.__instancesLatestArr, function(el, i) {
+				return self !== el;
+			});
+			
+			clearInterval(self.__garbageCollector);
+		}
+		else {
+			self.__destroyError();
+		}
+		
+		// we return the scope rather than true so that the call to
+		// .tooltipster('destroy') actually returns the matched elements
+		// and applies to all of them
+		return self;
+	},
+	
+	/**
+	 * Disables the tooltip
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	disable: function() {
+		
+		if (!this.__destroyed) {
+			
+			// close first, in case the tooltip would not disappear on
+			// its own (no close trigger)
+			this._close();
+			this.__enabled = false;
+			
+			return this;
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Returns the HTML element of the origin
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	elementOrigin: function() {
+		
+		if (!this.__destroyed) {
+			return this._$origin[0];
+		}
+		else {
+			this.__destroyError();
+		}
+	},
+	
+	/**
+	 * Returns the HTML element of the tooltip
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	elementTooltip: function() {
+		return this._$tooltip ? this._$tooltip[0] : null;
+	},
+	
+	/**
+	 * Enables the tooltip
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	enable: function() {
+		this.__enabled = true;
+		return this;
+	},
+	
+	/**
+	 * Alias, deprecated in 4.0.0
+	 * 
+	 * @param {function} callback
+	 * @returns {self}
+	 * @public
+	 */
+	hide: function(callback) {
+		return this.close(callback);
+	},
+	
+	/**
+	 * Returns the instance
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	instance: function() {
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_off() instead)
+	 * 
+	 * @returns {self}
+	 * @public
+	 */
+	off: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.off.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins (use ::_on() instead)
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	on: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.on.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	one: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.one.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * @see self::_open
+	 * @returns {self}
+	 * @public
+	 */
+	open: function(callback) {
+		
+		if (!this.__destroyed) {
+			this._open(null, callback);
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	},
+	
+	/**
+	 * Get or set options. For internal use and advanced users only.
+	 * 
+	 * @param {string} o Option name
+	 * @param {mixed} val optional A new value for the option
+	 * @return {mixed|self} If val is omitted, the value of the option
+	 * is returned, otherwise the instance itself is returned
+	 * @public
+	 */ 
+	option: function(o, val) {
+		
+		// getter
+		if (val === undefined) {
+			return this.__options[o];
+		}
+		// setter
+		else {
+			
+			if (!this.__destroyed) {
+				
+				// change value
+				this.__options[o] = val;
+				
+				// format
+				this.__optionsFormat();
+				
+				// re-prepare the triggers if needed
+				if ($.inArray(o, ['trigger', 'triggerClose', 'triggerOpen']) >= 0) {
+					this.__prepareOrigin();
+				}
+				
+				if (o === 'selfDestruction') {
+					this.__prepareGC();
+				}
+			}
+			else {
+				this.__destroyError();
+			}
+			
+			return this;
+		}
+	},
+	
+	/**
+	 * This method is in charge of setting the position and size properties of the tooltip.
+	 * All the hard work is delegated to the display plugin.
+	 * Note: The tooltip may be detached from the DOM at the moment the method is called 
+	 * but must be attached by the end of the method call.
+	 * 
+	 * @param {object} event For internal use only. Defined if an event such as
+	 * window resizing triggered the repositioning
+	 * @param {boolean} tooltipIsDetached For internal use only. Set this to true if you
+	 * know that the tooltip not being in the DOM is not an issue (typically when the
+	 * tooltip element has just been created but has not been added to the DOM yet).
+	 * @returns {self}
+	 * @public
+	 */
+	reposition: function(event, tooltipIsDetached) {
+		
+		var self = this;
+		
+		if (!self.__destroyed) {
+			
+			// if the tooltip is still open and the origin is still in the DOM
+			if (self.__state != 'closed' && bodyContains(self._$origin)) {
+				
+				// if the tooltip has not been removed from DOM manually (or if it
+				// has been detached on purpose)
+				if (tooltipIsDetached || bodyContains(self._$tooltip)) {
+					
+					if (!tooltipIsDetached) {
+						// detach in case the tooltip overflows the window and adds
+						// scrollbars to it, so __geometry can be accurate
+						self._$tooltip.detach();
+					}
+					
+					// refresh the geometry object before passing it as a helper
+					self.__Geometry = self.__geometry();
+					
+					// let a plugin fo the rest
+					self._trigger({
+						type: 'reposition',
+						event: event,
+						helper: {
+							geo: self.__Geometry
+						}
+					});
+				}
+			}
+		}
+		else {
+			self.__destroyError();
+		}
+		
+		return self;
+	},
+	
+	/**
+	 * Alias, deprecated in 4.0.0
+	 *
+	 * @param callback
+	 * @returns {self}
+	 * @public
+	 */
+	show: function(callback) {
+		return this.open(callback);
+	},
+	
+	/**
+	 * Returns some properties about the instance
+	 * 
+	 * @returns {object}
+	 * @public
+	 */
+	status: function() {
+		
+		return {
+			destroyed: this.__destroyed,
+			enabled: this.__enabled,
+			open: this.__state !== 'closed',
+			state: this.__state
+		};
+	},
+	
+	/**
+	 * For public use only, not to be used by plugins
+	 *
+	 * @returns {self}
+	 * @public
+	 */
+	triggerHandler: function() {
+		
+		if (!this.__destroyed) {
+			this.__$emitterPublic.triggerHandler.apply(this.__$emitterPublic, Array.prototype.slice.apply(arguments));
+		}
+		else {
+			this.__destroyError();
+		}
+		
+		return this;
+	}
+};
+
 $.fn.tooltipster = function() {
 	
 	// for using in closures
@@ -40252,7 +38200,11 @@ var EventCalendar = function($scope, $) {
 		selectable: false,
 		draggable: false,
 		firstDay: firstDay,
-		timeFormat: "hh:mm a",
+		eventTimeFormat: {
+			hour: '2-digit',
+			minute: '2-digit',
+			meridiem: 'short'
+		},
 		nextDayThreshold: "00:00:00",
 		header: {
 			left: "prev,next today",
@@ -40271,7 +38223,8 @@ var EventCalendar = function($scope, $) {
 				event = info.event;
 
 			element.attr("href", "javascript:void(0);");
-			element.click(function() {
+			element.click(function(e) {
+				e.preventDefault();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,
@@ -40289,7 +38242,13 @@ var EventCalendar = function($scope, $) {
 				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
 
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-					startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
+					var allDayTime = moment(startDate).format("MMM Do");
+					if (moment(startDate).isSame(Date.now(), "day") === true) {
+						allDayTime = 'Today';
+					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
+						allDayTime = 'Tomorrow';
+					}
+					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
 						startSelector.html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
@@ -40356,6 +38315,12 @@ var EventCalendar = function($scope, $) {
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
+				if(event.extendedProps.description.length<1){
+					$(".eaelec-modal-body").css("height", "auto");
+				}else {
+					$(".eaelec-modal-body").css("height", "300px");
+				}
+
 				$(".eaelec-modal-footer a").attr("href", event.url);
 				
 				if (event.extendedProps.external === "on") {
@@ -40391,6 +38356,107 @@ var FacebookFeed = function($scope, $) {
             itemSelector: ".eael-facebook-feed-item",
             percentPosition: true,
             columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
+    );
+});
+
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
         });
 
         $facebook_gallery.imagesLoaded().progress(function() {
@@ -41129,342 +39195,6 @@ function RunStickyPlayer(elem) {
     ovrplyer.start();
 }
 
-( function( $){
-    jQuery(document).ready(function() {
-
-        /**
-         * add ID in main content heading tag
-         * @param selector
-         * @param supportTag
-         */
-        function eael_toc_content( selector, supportTag ){
-            if(selector === null || supportTag === undefined){
-                return null;
-            }
-            var mainSelector = document.querySelector(selector),
-                allSupportTag = Array.prototype.slice.call( mainSelector.querySelectorAll( supportTag ) ),
-                c =0;
-
-            allSupportTag.forEach(function( el ) {
-                el.id = c+"-"+ eael_build_id( el.innerHTML );
-                el.classList.add("eael-heading-content");
-                c++
-            });
-            eael_list_hierarchy( selector, supportTag);
-            var  firstChild = $('ul.eael-toc-list > li');
-            if(firstChild.length<1){
-                document.getElementById("eael-toc").classList.add("eael-toc-disable");
-            }
-            firstChild.each(function(){
-                this.classList.add('eael-first-child');
-            });
-        }
-
-        /**
-         * Make toc list
-         * @param selector
-         * @param supportTag
-         */
-        function eael_list_hierarchy (selector, supportTag){
-            var tagList     = supportTag;
-            var listId      = document.getElementById('eael-toc-list');
-            var mainContent = document.querySelector(selector);
-
-
-            allHeadings = mainContent.querySelectorAll(tagList),
-                baseTag     = parentLevel = tagList.trim().split(',')[0].substr(1,1),
-                ListNode    = listId;
-            listId.innerHTML='';
-            if(allHeadings.length>0){
-                document.getElementById("eael-toc").classList.remove("eael-toc-disable");
-            }
-            for (var i = 0, len = allHeadings.length ; i < len ; ++i) {
-
-                var currentHeading  = allHeadings[i];
-                var latestLavel     = parseInt(currentHeading.tagName.substr(1,1));
-                var diff            = latestLavel - parentLevel;
-
-                if (diff > 0) {
-                    var containerLiNode = ListNode.lastChild;
-                    if(containerLiNode){
-                        var createUlNode = document.createElement('UL');
-
-                        containerLiNode.appendChild(createUlNode);
-                        ListNode = createUlNode;
-                        parentLevel = latestLavel;
-                    }
-                }
-
-                var sequenceParent = false;
-
-                if (diff < 0) {
-                    while (0 !== diff++) {
-                        if(ListNode.parentNode.parentNode){
-                            ListNode = ListNode.parentNode.parentNode;
-                        }
-                    }
-                    parentLevel = latestLavel;
-                    sequenceParent = true;
-                }
-
-                if(ListNode.tagName!=='UL'){
-                    ListNode = listId;
-                }
-
-                if(currentHeading.textContent.trim()===''){
-                    continue;
-                }
-                var liNode = document.createElement('LI');
-                var anchorTag = document.createElement('A');
-                var spanTag = document.createElement('SPAN');
-
-                if( baseTag === parentLevel || sequenceParent){
-                    liNode.setAttribute('itemscope', '');
-                    liNode.setAttribute('itemtype', 'http://schema.org/ListItem');
-                    liNode.setAttribute('itemprop', 'itemListElement');
-                }
-
-                Linkid = '#'+i+'-'+ eael_build_id( currentHeading.textContent );
-                anchorTag.className = 'eael-toc-link';
-                anchorTag.setAttribute('itemprop', 'item');
-                anchorTag.setAttribute('href', Linkid);
-                spanTag.appendChild(document.createTextNode(currentHeading.textContent));
-                anchorTag.appendChild(spanTag);
-                liNode.appendChild(anchorTag);
-                ListNode.appendChild(liNode);
-            }
-        }
-
-        var intSupportTag = $('#eael-toc').data('eaeltoctag');
-        if(intSupportTag!==''){
-            eael_toc_content(eael_toc_check_content(), intSupportTag );
-        }
-
-        $(document).on("click",'ul.eael-toc-list li a', function(e) {
-            e.preventDefault();
-            $(document).off("scroll");
-
-            var target = this.hash;
-            history.pushState("", document.title, window.location.pathname + window.location.search);
-            var parentLi = $(this).parent();
-            if( parentLi.is('.eael-highlight.active') ){
-                parentLi.removeClass('eael-highlight active');
-                window.location.hash = target;
-                return false;
-            }
-            $("ul.eael-toc-list li").removeClass("active");
-            $(".eael-first-child").removeClass( "eael-highlight" );
-            $(this).closest('.eael-first-child').addClass( "eael-highlight" );
-            $(this).parent().addClass( "active" );
-
-            window.location.hash = target;
-        });
-
-        window.onscroll = function() {eaelTocSticky()};
-
-        var eaelToc = document.getElementById("eael-toc");
-        var sticky = (eaelToc)?eaelToc.offsetTop:0;
-
-        /**
-         * check sticky
-         */
-        function eaelTocSticky() {
-            var eaelToc = document.getElementById("eael-toc");
-            if(!eaelToc){
-                return ;
-            }
-            if ( window.pageYOffset >= sticky ) {
-                eaelToc.classList.add("eael-sticky");
-            } else {
-                eaelToc.classList.remove("eael-sticky");
-            }
-        }
-
-        /**
-         *
-         * @param content
-         * @returns {string}
-         */
-        function eael_build_id( content ){
-            return 'eael-table-of-content';
-        }
-
-        /**
-         *
-         * @returns {null|selector}
-         */
-        function eael_toc_check_content(){
-            var contentSelectro = null;
-            if($('.elementor-inner')[0]){
-                contentSelectro =  '.elementor-inner';
-            }else if($('#site-content')[0]){
-                contentSelectro = '#site-content';
-            }
-            return contentSelectro;
-        }
-
-        //toc auto collapse
-        $('body').click(function(e) {
-            var target = $( e.target );
-            var eaToc = $('#eael-toc');
-            if (eaToc.hasClass('eael-toc-auto-collapse') && !eaToc.hasClass('expanded') && $(target).closest('#eael-toc').length === 0 ) {
-                eaToc.toggleClass('expanded');
-            }
-        });
-
-        $(document).on('click','.eael-toc-close ,.eael-toc-button',function(event){
-            event.stopPropagation();
-            $('.eael-toc').toggleClass('expanded');
-        });
-
-        function eael_build_toc( $settings ){
-            var pageSetting = $settings.settings,
-                title = pageSetting.eael_ext_toc_title,
-                toc_style_class     = 'eael-toc-list eael-toc-list-'+pageSetting.eael_ext_table_of_content_list_style,
-                support_tag         =  pageSetting.eael_ext_toc_supported_heading_tag.join(', '),
-                icon                =  pageSetting.eael_ext_table_of_content_header_icon.value,
-                el_class            = (pageSetting.eael_ext_toc_position ==='right')?' eael-toc-right':' ';
-                toc_style_class    += (pageSetting.eael_ext_toc_collapse_sub_heading ==='yes')?' eael-toc-collapse':' ';
-                toc_style_class    += (pageSetting.eael_ext_toc_list_icon ==='number')?' eael-toc-number':' ';
-
-
-            return '<div id="eael-toc" class="eael-toc eael-toc-disable '+el_class+'">' +
-                '<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">'+ title + '</h2></div>' +
-                '<div class="eael-toc-body"><ul id="eael-toc-list" class="'+toc_style_class+'"></ul></div>' +
-                '<button class="eael-toc-button"><i class="'+icon+'"></i><span>'+ title +'</span></button>' +
-                '</div>';
-
-        }
-
-        //editor mode
-        if (isEditMode) {
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_table_of_content",
-                function (newValue) {
-                    var tocGlobal = $('.eael-toc-global');
-                    if(tocGlobal.length>0){
-                        tocGlobal.attr('id', 'eael-toc-temp').removeClass('eael-toc').hide();
-                        $('.eael-toc-global #eael-toc-list').attr('id','');
-                    }
-                    $('#eael-toc').remove();
-                    if (newValue === "yes") {
-                        var $settings = elementor.settings.page.getSettings();
-                        $('body').append(eael_build_toc($settings));
-                        eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(', '));
-                    }else{
-                        if(tocGlobal.length>0){
-                            tocGlobal.addClass('eael-toc').attr('id', 'eael-toc').show();
-                        }
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_position",
-                function (newValue) {
-                    if (newValue === "right") {
-                        $("#eael-toc").addClass('eael-toc-right');
-                    }else{
-                        $("#eael-toc").removeClass('eael-toc-right');
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_table_of_content_list_style",
-                function (newValue) {
-                    var list  = $(".eael-toc-list");
-                    list.removeClass('eael-toc-list-style_2 eael-toc-list-style_3');
-                    if (newValue !== "style_1") {
-                        list.addClass('eael-toc-list-'+newValue);
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_collapse_sub_heading",
-                eael_toc_list_collapse
-                );
-
-            function eael_toc_list_collapse(newValue){
-                var list  = $(".eael-toc-list");
-                if (newValue === "yes") {
-                    list.addClass('eael-toc-collapse');
-                }else{
-                    list.removeClass('eael-toc-collapse');
-                }
-            }
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_table_of_content_header_icon",
-                function (newValue) {
-                    var iconElement = $('.eael-toc-button i');
-                    iconElement.removeClass().addClass(newValue.value);
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_list_icon",
-                function (newValue) {
-                    var list  = $(".eael-toc-list");
-                    if (newValue === "number") {
-                        list.addClass('eael-toc-number');
-                    }else{
-                        list.removeClass('eael-toc-number');
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_word_wrap",
-                function (newValue) {
-                    var list  = $(".eael-toc-list");
-                    if (newValue === "yes") {
-                        list.addClass('eael-toc-word-wrap');
-                    }else{
-                        list.removeClass('eael-toc-word-wrap');
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_close_button_text_style",
-                function (newValue) {
-                    var toc  = $("#eael-toc");
-                    if (newValue === "bottom_to_top") {
-                        toc.addClass('eael-bottom-to-top');
-                    }else{
-                        toc.removeClass('eael-bottom-to-top');
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_box_shadow",
-                function (newValue) {
-                    var toc  = $("#eael-toc");
-                    if (newValue === "yes") {
-                        toc.addClass('eael-box-shadow');
-                    }else{
-                        toc.removeClass('eael-box-shadow');
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback(
-                "eael_ext_toc_auto_collapse",
-                function (newValue) {
-                    var toc  = $("#eael-toc");
-                    if (newValue === "yes") {
-                        toc.addClass('eael-toc-auto-collapse');
-                    }else{
-                        toc.removeClass('eael-toc-auto-collapse');
-                    }
-                });
-
-            elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change );
-
-            function ea_toc_title_change ( newValue ) {
-                elementorFrontend.elements.$document.find('.eael-toc-title').text(newValue);
-                elementorFrontend.elements.$document.find('.eael-toc-button span').text(newValue);
-            }
-        }
-
-    });
-})(jQuery);
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
         $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
@@ -41495,3 +39225,345 @@ jQuery(window).on("elementor/frontend/init", function() {
         TwitterFeedHandler
     );
 });
+
+(function($) {
+	jQuery(document).ready(function() {
+		/**
+		 * add ID in main content heading tag
+		 * @param selector
+		 * @param supportTag
+		 */
+		function eael_toc_content(selector, supportTag) {
+			if (selector === null || supportTag === undefined) {
+				return null;
+			}
+			var mainSelector = document.querySelector(selector),
+				allSupportTag = Array.prototype.slice.call(mainSelector.querySelectorAll(supportTag)),
+				listIndex = 0;
+
+			allSupportTag.forEach(function(el) {
+				el.id = listIndex + "-" + eael_build_id();
+				el.classList.add("eael-heading-content");
+				listIndex++;
+			});
+			eael_list_hierarchy(selector, supportTag);
+			var firstChild = $("ul.eael-toc-list > li");
+			if (firstChild.length < 1) {
+				document.getElementById("eael-toc").classList.add("eael-toc-disable");
+			}
+			firstChild.each(function() {
+				this.classList.add("eael-first-child");
+			});
+		}
+
+		/**
+		 * Make toc list
+		 * @param selector
+		 * @param supportTag
+		 */
+		function eael_list_hierarchy(selector, supportTag) {
+			var tagList = supportTag;
+			var parentLevel = '';
+			var listId = document.getElementById("eael-toc-list");
+			var mainContent = document.querySelector(selector),
+
+			allHeadings = mainContent.querySelectorAll(tagList),
+				baseTag = parentLevel = tagList
+					.trim()
+					.split(",")[0]
+					.substr(1, 1),
+				ListNode = listId;
+
+			listId.innerHTML = "";
+			if (allHeadings.length > 0) {
+				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
+			}
+			for (var i = 0, len = allHeadings.length; i < len; ++i) {
+				var currentHeading = allHeadings[i];
+				var latestLavel = parseInt(currentHeading.tagName.substr(1, 1));
+				var diff = latestLavel - parentLevel;
+
+				if (diff > 0) {
+					var containerLiNode = ListNode.lastChild;
+					if (containerLiNode) {
+						var createUlNode = document.createElement("UL");
+
+						containerLiNode.appendChild(createUlNode);
+						ListNode = createUlNode;
+						parentLevel = latestLavel;
+					}
+				}
+
+				var sequenceParent = false;
+
+				if (diff < 0) {
+					while (0 !== diff++) {
+						if (ListNode.parentNode.parentNode) {
+							ListNode = ListNode.parentNode.parentNode;
+						}
+					}
+					parentLevel = latestLavel;
+					sequenceParent = true;
+				}
+
+				if (ListNode.tagName !== "UL") {
+					ListNode = listId;
+				}
+
+				if (currentHeading.textContent.trim() === "") {
+					continue;
+				}
+				var liNode = document.createElement("LI");
+				var anchorTag = document.createElement("A");
+				var spanTag = document.createElement("SPAN");
+
+				if (baseTag === parentLevel || sequenceParent) {
+					liNode.setAttribute("itemscope", "");
+					liNode.setAttribute("itemtype", "http://schema.org/ListItem");
+					liNode.setAttribute("itemprop", "itemListElement");
+				}
+
+				var Linkid = "#" + i + "-" + eael_build_id();
+				anchorTag.className = "eael-toc-link";
+				anchorTag.setAttribute("itemprop", "item");
+				anchorTag.setAttribute("href", Linkid);
+				spanTag.appendChild(document.createTextNode(currentHeading.textContent));
+				anchorTag.appendChild(spanTag);
+				liNode.appendChild(anchorTag);
+				ListNode.appendChild(liNode);
+			}
+		}
+
+		var intSupportTag = $("#eael-toc").data("eaeltoctag");
+		if (intSupportTag !== "") {
+			eael_toc_content(eael_toc_check_content(), intSupportTag);
+		}
+
+		// expand collapse
+		$(document).on("click", "ul.eael-toc-list a", function(e) {
+			e.preventDefault();
+
+			$(document).off("scroll");
+
+			var target = this.hash;
+			history.pushState("", document.title, window.location.pathname + window.location.search);
+
+			var parentLi = $(this).parent();
+
+			if (parentLi.is(".eael-highlight-parent.eael-highlight-active")) {
+				window.location.hash = target;
+				return false;
+			}
+
+			$(".eael-highlight-active, .eael-highlight-parent").removeClass("eael-highlight-active eael-highlight-parent");
+
+			$(this)
+				.closest(".eael-first-child")
+				.addClass("eael-highlight-parent");
+
+			$(this)
+				.parent()
+				.addClass("eael-highlight-active");
+
+			window.location.hash = target;
+		});
+
+		window.onscroll = function() {
+			eaelTocSticky();
+		};
+		var stickyScroll = $('#eael-toc').data('stickyscroll');
+
+		/**
+		 * check sticky
+		 */
+		function eaelTocSticky() {
+			var eaelToc = document.getElementById("eael-toc");
+			if (!eaelToc) {
+				return;
+			}
+			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
+			if (window.pageYOffset >= stickyScroll) {
+				eaelToc.classList.add("eael-sticky");
+			} else {
+				eaelToc.classList.remove("eael-sticky");
+			}
+		}
+
+		/**
+		 *
+		 * @param content
+		 * @returns {string}
+		 */
+		function eael_build_id() {
+			return "eael-table-of-content";
+		}
+
+		/**
+		 *
+		 * @returns {null|selector}
+		 */
+		function eael_toc_check_content() {
+			var contentSelectro = '.site-content';
+			if ($(".elementor-inner")[0]) {
+				contentSelectro = ".elementor-inner";
+			} else if ($("#site-content")[0]) {
+				contentSelectro = "#site-content";
+			}
+			return contentSelectro;
+		}
+
+		//toc auto collapse
+		$("body").click(function(e) {
+			var target = $(e.target);
+			var eaToc = $("#eael-toc");
+			if (eaToc.hasClass("eael-toc-auto-collapse") && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
+				eaToc.toggleClass("collapsed");
+			}
+		});
+
+		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function(event) {
+			event.stopPropagation();
+			$(".eael-toc").toggleClass("collapsed");
+		});
+
+		function eael_build_toc($settings) {
+			var pageSetting = $settings.settings,
+				title = pageSetting.eael_ext_toc_title,
+				toc_style_class = "eael-toc-list eael-toc-list-" + pageSetting.eael_ext_table_of_content_list_style,
+				support_tag = pageSetting.eael_ext_toc_supported_heading_tag.join(", "),
+				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
+				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
+			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
+			toc_style_class += pageSetting.eael_ext_toc_list_icon === "number" ? " eael-toc-number" : " eael-toc-bullet";
+
+			return (
+				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +
+				el_class +
+				'">' +
+				'<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">' +
+				title +
+				"</h2></div>" +
+				'<div class="eael-toc-body"><ul id="eael-toc-list" class="' +
+				toc_style_class +
+				'"></ul></div>' +
+				'<button class="eael-toc-button"><i class="' +
+				icon +
+				'"></i><span>' +
+				title +
+				"</span></button>" +
+				"</div>"
+			);
+		}
+
+		//editor mode
+		if (isEditMode) {
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function(newValue) {
+				var tocGlobal = $(".eael-toc-global");
+				if (tocGlobal.length > 0) {
+					tocGlobal
+						.attr("id", "eael-toc-temp")
+						.removeClass("eael-toc")
+						.hide();
+					$(".eael-toc-global #eael-toc-list").attr("id", "");
+				}
+				$("#eael-toc").remove();
+				if (newValue === "yes") {
+					var $settings = elementor.settings.page.getSettings();
+					$("body").append(eael_build_toc($settings));
+					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
+				} else {
+					if (tocGlobal.length > 0) {
+						tocGlobal
+							.addClass("eael-toc")
+							.attr("id", "eael-toc")
+							.show();
+					}
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function(newValue) {
+				if (newValue === "right") {
+					$("#eael-toc").addClass("eael-toc-right");
+				} else {
+					$("#eael-toc").removeClass("eael-toc-right");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function(newValue) {
+				var list = $(".eael-toc-list");
+				list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
+				if (newValue !== "none") {
+					list.addClass("eael-toc-list-" + newValue);
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_collapse_sub_heading", eael_toc_list_collapse);
+
+			function eael_toc_list_collapse(newValue) {
+				var list = $(".eael-toc-list");
+				if (newValue === "yes") {
+					list.addClass("eael-toc-collapse");
+				} else {
+					list.removeClass("eael-toc-collapse");
+				}
+			}
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function(newValue) {
+				var iconElement = $(".eael-toc-button i");
+				iconElement.removeClass().addClass(newValue.value);
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function(newValue) {
+				var list = $(".eael-toc-list");
+				if (newValue === "number") {
+					list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
+				} else {
+					list.addClass("eael-toc-bullet").removeClass("eael-toc-number");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function(newValue) {
+				var list = $(".eael-toc-list");
+				if (newValue === "yes") {
+					list.addClass("eael-toc-word-wrap");
+				} else {
+					list.removeClass("eael-toc-word-wrap");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function(newValue) {
+				var toc = $("#eael-toc");
+				if (newValue === "bottom_to_top") {
+					toc.addClass("eael-bottom-to-top");
+				} else {
+					toc.removeClass("eael-bottom-to-top");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function(newValue) {
+				var toc = $("#eael-toc");
+				if (newValue === "yes") {
+					toc.addClass("eael-box-shadow");
+				} else {
+					toc.removeClass("eael-box-shadow");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function(newValue) {
+				var toc = $("#eael-toc");
+				if (newValue === "yes") {
+					toc.addClass("eael-toc-auto-collapse");
+				} else {
+					toc.removeClass("eael-toc-auto-collapse");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change);
+
+			function ea_toc_title_change(newValue) {
+				elementorFrontend.elements.$document.find(".eael-toc-title").text(newValue);
+				elementorFrontend.elements.$document.find(".eael-toc-button span").text(newValue);
+			}
+		}
+	});
+})(jQuery);

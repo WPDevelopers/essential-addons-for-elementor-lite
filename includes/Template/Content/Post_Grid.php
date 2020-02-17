@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Post_Grid
 {
-    public static function __render_template($args, $settings)
+    public static function render_template_($args, $settings)
     {
         $query = new \WP_Query($args);
          

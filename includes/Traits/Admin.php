@@ -18,7 +18,7 @@ trait Admin
     public function admin_menu()
     {
         add_menu_page(
-            __('Essential Addons', 'Essential Addons'),
+            __('Essential Addons', 'essential-addons-for-elementor-lite'),
             __('Essential Addons', 'essential-addons-for-elementor-lite'),
             'manage_options',
             'eael-settings',

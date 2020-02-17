@@ -14,7 +14,11 @@ var EventCalendar = function($scope, $) {
 		selectable: false,
 		draggable: false,
 		firstDay: firstDay,
-		timeFormat: "hh:mm a",
+		eventTimeFormat: {
+			hour: '2-digit',
+			minute: '2-digit',
+			meridiem: 'short'
+		},
 		nextDayThreshold: "00:00:00",
 		header: {
 			left: "prev,next today",
@@ -33,7 +37,8 @@ var EventCalendar = function($scope, $) {
 				event = info.event;
 
 			element.attr("href", "javascript:void(0);");
-			element.click(function() {
+			element.click(function(e) {
+				e.preventDefault();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,
@@ -51,7 +56,13 @@ var EventCalendar = function($scope, $) {
 				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
 
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-					startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do"));
+					var allDayTime = moment(startDate).format("MMM Do");
+					if (moment(startDate).isSame(Date.now(), "day") === true) {
+						allDayTime = 'Today';
+					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
+						allDayTime = 'Tomorrow';
+					}
+					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
 						startSelector.html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
@@ -118,6 +129,12 @@ var EventCalendar = function($scope, $) {
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
+				if(event.extendedProps.description.length<1){
+					$(".eaelec-modal-body").css("height", "auto");
+				}else {
+					$(".eaelec-modal-body").css("height", "300px");
+				}
+
 				$(".eaelec-modal-footer a").attr("href", event.url);
 				
 				if (event.extendedProps.external === "on") {
