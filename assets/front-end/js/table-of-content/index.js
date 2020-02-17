@@ -185,7 +185,7 @@
 		$("body").click(function(e) {
 			var target = $(e.target);
 			var eaToc = $("#eael-toc");
-			if (eaToc.hasClass("eael-toc-auto-collapse") && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
+			if ((eaToc.hasClass("eael-toc-auto-collapse") && eaToc.hasClass("eael-sticky")) && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
 				eaToc.toggleClass("collapsed");
 			}
 		});
