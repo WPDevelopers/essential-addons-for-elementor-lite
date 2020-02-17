@@ -293,21 +293,23 @@ trait Helper
         );
 
         if ('eael-post-grid' === $this->get_name()) {
-            $this->add_control(
+            $this->add_responsive_control(
                 'eael_post_grid_columns',
                 [
-                    'label' => esc_html__('Number of Columns', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'eael-col-4',
                     'options' => [
-                        'eael-col-1' => esc_html__('Single Column', 'essential-addons-for-elementor-lite'),
-                        'eael-col-2' => esc_html__('Two Columns', 'essential-addons-for-elementor-lite'),
-                        'eael-col-3' => esc_html__('Three Columns', 'essential-addons-for-elementor-lite'),
-                        'eael-col-4' => esc_html__('Four Columns', 'essential-addons-for-elementor-lite'),
-                        'eael-col-5' => esc_html__('Five Columns', 'essential-addons-for-elementor-lite'),
-                        'eael-col-6' => esc_html__('Six Columns', 'essential-addons-for-elementor-lite'),
+                        'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+                        'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+                        'eael-col-3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+                        'eael-col-4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+                        'eael-col-5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+                        'eael-col-6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
                     ],
-                ]
+                    'prefix_class' => 'elementor-grid%s-',
+                    'frontend_available' => true,
+                ],
             );
         }
 
