@@ -5,6 +5,7 @@ html {
 .eael-toc {
 	z-index: 9999;
 	width: 300px;
+	display: none;
 
 	.eael-toc-button {
 		display: none;
@@ -22,6 +23,7 @@ html {
 		position: fixed;
 		top: 100px;
 		background: none;
+		display: block;
 	}
 
 	&.collapsed {
@@ -141,7 +143,7 @@ html {
 		background: #fff6f3;
 		min-width: 20vh;
 		max-height: 50vh;
-		overflow-y: hidden;
+		overflow-y: scroll;
 
 		&::-webkit-scrollbar {
 			width: 6px;
@@ -150,10 +152,6 @@ html {
 		&::-webkit-scrollbar-thumb {
 			background: #aaa;
 			border-radius: 10px;
-		}
-
-		&:hover {
-			overflow-y: auto;
 		}
 
 		ul.eael-toc-list {
