@@ -299,6 +299,8 @@ trait Helper
                     'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'eael-col-4',
+                    'tablet_default' => 'eael-col-2',
+                    'mobile_default' => 'eael-col-1',
                     'options' => [
                         'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
                         'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
@@ -311,6 +313,20 @@ trait Helper
                     'frontend_available' => true,
                 ],
             );
+
+            $this->add_control(
+                'layout_mode',
+                [
+                    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'masonry',
+                    'options' => [
+                        'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
+                        'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
+
         }
 
         if ('eael-post-block' === $this->get_name()) {
