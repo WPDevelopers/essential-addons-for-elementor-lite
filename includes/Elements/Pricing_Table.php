@@ -410,7 +410,23 @@ class Pricing_Table extends Widget_Base {
   			[
   				'label' => esc_html__( 'Button', 'essential-addons-for-elementor-lite')
   			]
-  		);
+		);  
+		
+		$this->add_control(
+			'eael_pricing_table_button_show',
+			[
+				'label' => __( 'Display Button', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'default' => 'yes',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing-button' => 'display: inline-block;',
+                ],
+			]
+		);
+
 
   		$this->add_control(
 			'eael_pricing_table_button_icon_new',
@@ -418,6 +434,9 @@ class Pricing_Table extends Widget_Base {
 				'label' => esc_html__( 'Button Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_pricing_table_button_icon',
+				'condition' => [
+					'eael_pricing_table_button_show' => 'yes',
+				],
 			]
 		);
 
@@ -433,6 +452,7 @@ class Pricing_Table extends Widget_Base {
 				],
 				'condition' => [
 					'eael_pricing_table_button_icon_new!' => '',
+					'eael_pricing_table_button_show' => 'yes',
 				],
 			]
 		);
@@ -449,6 +469,7 @@ class Pricing_Table extends Widget_Base {
 				],
 				'condition' => [
 					'eael_pricing_table_button_icon_new!' => '',
+					'eael_pricing_table_button_show' => 'yes',
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-pricing-button i.fa-icon-left' => 'margin-right: {{SIZE}}px;',
@@ -464,6 +485,9 @@ class Pricing_Table extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default'     => esc_html__( 'Choose Plan', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_pricing_table_button_show' => 'yes',
+				],
 			]
 		);
 
@@ -477,7 +501,10 @@ class Pricing_Table extends Widget_Base {
         			'url' => '#',
         			'is_external' => '',
      			],
-     			'show_external' => true,
+				 'show_external' => true,
+				 'condition' => [
+					'eael_pricing_table_button_show' => 'yes',
+				],
 			]
 		);
 
@@ -533,6 +560,8 @@ class Pricing_Table extends Widget_Base {
 				'selectors'   => [
 					'{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 					'{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
+					'{{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
+					'{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item.featured:before' => 'content: "{{VALUE}}";',
 				],
 				'condition' => [
 					'eael_pricing_table_featured_styles' => [ 'ribbon-2', 'ribbon-3' ],

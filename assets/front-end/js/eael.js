@@ -40230,72 +40230,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
 });
 
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
-});
-
 var EventCalendar = function($scope, $) {
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
@@ -40462,6 +40396,72 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
 });
 
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
+    );
+});
+
 var FancyText = function($scope, $) {
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
         $id =
@@ -40568,6 +40568,7 @@ var filterableGalleryHandler = function($scope, $) {
 
         // init isotope
         var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
+        var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
         var $isotope_gallery = $gallery.isotope({
             itemSelector: ".eael-filterable-gallery-item-wrap",
             layoutMode: $layout_mode,
@@ -40602,6 +40603,13 @@ var filterableGalleryHandler = function($scope, $) {
                 }
             },
             fixedContentPos: false,
+            image: {
+                titleSrc: function(item) {
+                            if(mfpCaption=='yes'){
+                                return item.el.parent().prev().prev().html();
+                            }
+                        }
+            }
         });
 
         // filter
@@ -40629,6 +40637,13 @@ var filterableGalleryHandler = function($scope, $) {
                     }
                 },
                 fixedContentPos: false,
+                image: {
+                    titleSrc: function(item) {
+                                if(mfpCaption=='yes'){
+                                    return item.el.parent().prev().prev().html();
+                                }
+                            }
+                }
             });
 
             $isotope_gallery.isotope();
@@ -40752,7 +40767,7 @@ var ImageAccordion = function($scope, $) {
             $imageAccordion.data("img-accordion-type") !== undefined
                 ? $imageAccordion.data("img-accordion-type")
                 : "";
-
+    
     if ("on-click" === $type) {
         $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
             if ($(this).hasClass("overlay-active") == false) {
@@ -40788,6 +40803,31 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
+    );
+});
+
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope),
+        $layout_mode = $gallery.data('layout-mode');
+        
+    if($layout_mode === 'masonry') {
+        $gallery.isotope({
+            itemSelector: ".eael-grid-post",
+            layoutMode: $layout_mode,
+            percentPosition: true
+        });
+
+        // layout gal, while images are loading
+        $gallery.imagesLoaded().progress(function() {
+            $gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
     );
 });
 
@@ -40835,31 +40875,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-pricing-table.default",
         PricingTooltip
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope),
-        $layout_mode = $gallery.data('layout-mode');
-        
-    if($layout_mode === 'masonry') {
-        $gallery.isotope({
-            itemSelector: ".eael-grid-post",
-            layoutMode: $layout_mode,
-            percentPosition: true
-        });
-
-        // layout gal, while images are loading
-        $gallery.imagesLoaded().progress(function() {
-            $gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
     );
 });
 
