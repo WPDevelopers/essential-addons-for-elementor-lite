@@ -1396,7 +1396,7 @@ class Advanced_Data_Table extends Widget_Base
 
         $this->add_render_attribute('ea-adv-data-table', [
             'class' => "ea-advanced-data-table ea-advanced-data-table-{$settings['ea_adv_data_table_source']} ea-advanced-data-table-{$this->get_id()}",
-            'data-id' => $this->get_id()
+            'data-id' => $this->get_id(),
         ]);
 
         if ($settings['ea_adv_data_table_sort'] == 'yes') {
