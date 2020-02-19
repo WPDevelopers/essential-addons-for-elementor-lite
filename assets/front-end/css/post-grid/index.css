@@ -1,11 +1,11 @@
 /*-----------------------------*/
 /* 15. Post Grid Style
 /*-----------------------------*/
-.eael-post-grid {
+.eael-post-grid-container .eael-post-grid {
   margin: 0 -10px;
 }
 
-.eael-grid-post {
+.eael-post-grid-container .eael-post-grid .eael-grid-post {
   float: left;
   padding: 10px;
 }

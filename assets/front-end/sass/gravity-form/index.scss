@@ -17,11 +17,6 @@
 	text-align: center;
 }
 
-.eael-gravity-form .gform_wrapper .gform_footer {
-	margin: 0;
-	padding: 0;
-}
-
 .gform_wrapper form li,
 .gform_wrapper li {
 	list-style: none;
@@ -29,10 +24,13 @@
 
 .eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
 	padding: 0;
+	padding-right:16px;
 }
 
 .eael-gravity-form .gform_wrapper textarea {
 	padding: 0;
+	font-weight:normal!important;
+	font-family: inherit;
 }
 
 .eael-gravity-form .gform_wrapper .gform_footer input.button,

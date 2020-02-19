@@ -441,7 +441,8 @@ class Post_Grid extends Widget_Base
         $settings = $this->get_settings_for_display();
         $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
-        $settings = [
+        
+        $settings_arry = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],
             'eael_show_title' => $settings['eael_show_title'],
@@ -469,15 +470,15 @@ class Post_Grid extends Widget_Base
                 ]
             ]
         );
-
+        
         echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
             <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="'.$settings["layout_mode"].'">
                 ' . self::render_template_($args, $settings) . '
             </div>
             <div class="clearfix"></div>
         </div>';
-		
-		if ('yes' == $settings['show_load_more']) {
+        
+        if ('yes' == $settings['show_load_more']) {
 			if ($args['posts_per_page'] != '-1') {
 				echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings) . '" data-layout="masonry" data-page="1">

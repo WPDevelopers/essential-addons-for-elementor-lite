@@ -17,7 +17,7 @@
 }
 
 .eael-pricing .eael-pricing-button {
-	display: inline-block;
+	display: none;
 	padding: 12px 25px;
 	background: #00C853;
 	font-size: 14px;
@@ -468,6 +468,18 @@
 }
 
 .eael-pricing-content-align-right .eael-pricing {
+	text-align: right;
+}
+
+.eael-pricing-content-align-center .eael-pricing.style-4 {
+	text-align: center;
+}
+
+.eael-pricing-content-align-left .eael-pricing.style-4 {
+	text-align: left;
+}
+
+.eael-pricing-content-align-right .eael-pricing.style-4 {
 	text-align: right;
 }
 

@@ -509,7 +509,6 @@ class Twitter_Feed extends Widget_Base
             .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                 margin-bottom: ' . $settings['eael_twitter_feed_column_spacing']['size'] . 'px;
             }
-
             @media only screen and (min-width: 768px) and (max-width: 992px) {
                 .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
                 .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
@@ -517,7 +516,6 @@ class Twitter_Feed extends Widget_Base
                 }
             }
         </style>';
-
         if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
             echo '<script type="text/javascript">
                 jQuery(document).ready(function($) {
