@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
+use Elementor\Core\Schemes\Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
@@ -1599,7 +1600,7 @@ trait Helper
             $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
         }
 
-        $html = $class::__render_template($args, $settings);
+        $html = $class::render_template_($args, $settings);
 
         echo $html;
         wp_die();
@@ -1883,5 +1884,258 @@ trait Helper
         }
 
         return $html;
+    }
+
+    /**
+     * @param $page_obj
+     * @param $key
+     * @return string
+     */
+    public function eael_get_extension_settings($page_settings_model = [], $global_settings = [], $extension, $key)
+    {
+        if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
+            return $page_settings_model->get_settings($key);
+        } else if (isset($global_settings[$extension]['enabled'])) {
+            return $global_settings[$extension][$key];
+        }
+
+        return '';
+    }
+
+    /**
+     * @param $post_css
+     * @param $elements
+     * @return string|void
+     */
+    public function eael_toc_global_css( $page_settings_model ,$global_settings ){
+
+	    $eael_toc = $global_settings['eael_ext_table_of_content'];
+	    $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
+	    $toc_list_separator_style = $eael_toc['eael_ext_table_of_content_list_separator_style'];
+	    $header_padding = $eael_toc['eael_ext_toc_header_padding'];
+	    $body_padding = $eael_toc['eael_ext_toc_body_padding'];
+	    $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography', $eael_toc);
+	    $list_typography = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal', $eael_toc);
+	    $box_shadow = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
+	    $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
+	    $bullet_size = $eael_toc['eael_ext_toc_box_list_bullet_size']['size'];
+	    $top_position = $eael_toc['eael_ext_toc_box_list_top_position']['size'];
+	    $indicator_size = $eael_toc['eael_ext_toc_indicator_size']['size'];
+	    $indicator_position = $eael_toc['eael_ext_toc_indicator_position']['size'];
+
+        $toc_global_css = "
+            .eael-toc-global .eael-toc-header,
+            .eael-toc-global.collapsed .eael-toc-button
+            {
+                background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};
+            }
+            
+            .eael-toc-global {
+                z-index:{$eael_toc['eael_ext_toc_sticky_z_index']['size']};
+            }
+            
+            .eael-toc-global.eael-sticky {
+                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']};
+            }
+            .eael-toc-global .eael-toc-header .eael-toc-title,
+            .eael-toc-global.collapsed .eael-toc-button
+            {
+                color:{$eael_toc['eael_ext_table_of_content_header_text_color']};
+                $header_typography
+            }
+            .eael-toc-global .eael-toc-header {
+                padding:{$header_padding['top']}px {$header_padding['right']}px {$header_padding['bottom']}px {$header_padding['left']}px;
+            }
+            
+            .eael-toc-global .eael-toc-body {
+                padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
+            }
+            
+            .eael-toc-global.eael-toc-close
+            {
+                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']};
+                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
+            }
+
+            .eael-toc-global.eael-toc:not(.collapsed)
+            {
+                box-shadow:{$box_shadow['horizontal']}px {$box_shadow['vertical']}px {$box_shadow['blur']}px {$box_shadow['spread']}px {$box_shadow['color']};
+            }
+            
+            .eael-toc-global .eael-toc-body
+            {
+                background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};
+            }
+            
+            .eael-toc-global .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before
+            {
+                width:{$bullet_size}px;
+                height:{$bullet_size}px;
+                top:{$top_position}px;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li a
+            {
+                color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li:before {
+                background-color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li:hover:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a
+            {
+                color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important; 
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:before {
+                border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li:hover:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:after {
+                background-color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-active:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-parent:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
+            {
+                color:$toc_list_color_active !important;
+            }
+            
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before
+            {
+                border-bottom-color:$toc_list_color_active !important;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-active:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-parent:before
+            {
+                background-color:$toc_list_color_active !important;
+            }
+            
+            .eael-toc-global ul.eael-toc-list > li
+            {
+                color:{$eael_toc['eael_ext_table_of_content_list_separator_color']} !important;
+                $list_typography
+            }
+            .eael-toc.eael-toc-global .eael-toc-body ul.eael-toc-list li:before {
+                $list_typography
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
+                height:{$indicator_size}px;
+            }
+            
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before,
+            .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
+                margin-top:{$indicator_position}px;
+            }
+            
+            
+            .eael-toc:not(.eael-toc-right)
+            {
+                border-top-right-radius:{$border_radius}px;
+                border-bottom-right-radius:{$border_radius}px;
+            }
+            
+            .eael-toc:not(.eael-toc-right) .eael-toc-header
+            {
+                border-top-right-radius:{$border_radius}px;
+            }
+            
+            .eael-toc:not(.eael-toc-right) .eael-toc-body {
+                border-bottom-right-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-right {
+                border-top-left-radius:{$border_radius}px;
+                border-bottom-left-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-right .eael-toc-header {
+                border-top-left-radius:{$border_radius}px;
+            }
+            
+            .eael-toc.eael-toc-right .eael-toc-body {
+                border-bottom-left-radius:{$border_radius}px;
+            }
+            
+            
+            #eael-toc.eael-toc-global ul.eael-toc-list > li
+            {
+                padding-top:{$eael_toc['eael_ext_toc_top_level_space']['size']}px;
+                padding-bottom:{$eael_toc['eael_ext_toc_top_level_space']['size']}px;
+            }
+            
+            #eael-toc.eael-toc-global ul.eael-toc-list>li ul li
+            {
+                padding-top:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
+                padding-bottom:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
+            }
+        ";
+        if($toc_list_separator_style!='none'){
+            $toc_global_css .= "
+            .eael-toc-global ul.eael-toc-list > li
+            {border-top: 0.5px $toc_list_separator_style !important;}
+            .eael-toc ul.eael-toc-list>li:first-child
+            {border: none !important;}";
+        }
+
+        if(isset($eael_toc['eael_ext_toc_border_border'])){
+            $border_width = $eael_toc['eael_ext_toc_border_width'];
+            $toc_global_css .= "
+            .eael-toc.eael-toc-global,.eael-toc-global button.eael-toc-button
+            {
+                border-style: {$eael_toc['eael_ext_toc_border_border']};
+                border-width: {$border_width['top']}px {$border_width['right']}px {$border_width['bottom']}px {$border_width['left']}px;
+                border-color: {$eael_toc['eael_ext_toc_border_color']};
+            }";
+        }
+
+        wp_register_style( 'eael-toc-global', false );
+        wp_enqueue_style( 'eael-toc-global' );
+        wp_add_inline_style( 'eael-toc-global', $toc_global_css );
+    }
+
+    /**
+     * @param $id
+     * @param $global_data
+     * @return string
+     */
+    public function eael_get_typography_data( $id, $global_data){
+        $typo_data = '';
+        $fields_keys = [
+            'font_family',
+            'font_weight',
+            'text_transform',
+            'font_style',
+            'text_decoration',
+            'font_size',
+            'letter_spacing',
+            'line_height'
+        ];
+        foreach( $fields_keys as $key => $field ){
+            $typo_attr = $global_data[$id.'_'.$field];
+            $attr = str_replace('_','-',$field);
+            if(in_array($field,['font_size','letter_spacing','line_height'])){
+                if(!empty($typo_attr['size'])){
+                    $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']} !important;";
+                }
+            }elseif(!empty($typo_attr)){
+	            $typo_data .= ($attr=='font-family')?"{$attr}:{$typo_attr}, sans-serif;":"{$attr}:{$typo_attr};";
+            }
+        }
+        return $typo_data;
     }
 }

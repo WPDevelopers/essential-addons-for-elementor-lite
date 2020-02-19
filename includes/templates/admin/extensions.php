@@ -39,6 +39,12 @@ $extensions = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
             ],
             [
+                'key'    => 'eael-table-of-content',
+                'title'  => __( 'Table of Content', 'essential-addons-for-elementor-lite' ),
+                'demo_link' => 'https://essential-addons.com/elementor/table-of-content/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/table-of-content',
+            ],
+            [
                 'key'    => 'eael-post-duplicator',
                 'title'  => __( 'Duplicator', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/duplicator/',

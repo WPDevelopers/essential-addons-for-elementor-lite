@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.7.2
+Stable tag: 3.8.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -178,6 +178,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.8.0 - 02/02/2020 =
+- Added: Table of Content global extension
+- Added: Event Calendar element
+- Fixed: Filterable Gallery | magnific popup background goes to top when closed
+- Fixed: Post Timeline | Overlay show hide with color choose option
+- Fixed: Gravity Forms | Thank you message color issue
+- Few minor bugfix and improvements
 
 = 3.7.2 - 23/01/2020 =
 - Fixed: Admin notice comes after clicking on "Never show again"

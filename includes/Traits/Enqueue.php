@@ -56,27 +56,28 @@ trait Enqueue
         }
 
         // Load fontawesome as fallback
-        wp_register_style(
-            'font-awesome-5-all',
-            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_style(
-            'font-awesome-4-shim',
-            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
-        wp_register_script(
-            'font-awesome-4-shim',
-            ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
-            false,
-            EAEL_PLUGIN_VERSION
-        );
-
+        if(defined('ELEMENTOR_ASSETS_URL')) {
+            wp_register_style(
+                'font-awesome-5-all',
+                ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
+                false,
+                EAEL_PLUGIN_VERSION
+            );
+    
+            wp_register_style(
+                'font-awesome-4-shim',
+                ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
+                false,
+                EAEL_PLUGIN_VERSION
+            );
+    
+            wp_register_script(
+                'font-awesome-4-shim',
+                ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
+                false,
+                EAEL_PLUGIN_VERSION
+            );
+        }
 
         // admin bar css
         if (is_admin_bar_showing()) {
