@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 trait Post_Timeline
 {
-    public static function __render_template($args, $settings)
+    public static function render_template_($args, $settings)
     {
         $html = '';
         $query = new \WP_Query($args);
