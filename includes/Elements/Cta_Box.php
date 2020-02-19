@@ -96,6 +96,22 @@ class Cta_Box extends Widget_Base {
 		  	]
 		);
 
+		$this->add_control(
+			'eael_cta_bg_overlay',
+			[
+				'label' => __( 'Background Overlay', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'prefix_class'	=> 'eael-cta-overlay-',
+				'condition'	=> [
+					'eael_cta_color_type!' => 'cta-bg-color'
+				]
+			]
+		);
+
 		/**
 		 * Condition: 'eael_cta_type' => 'cta-icon-flex'
 		 */
