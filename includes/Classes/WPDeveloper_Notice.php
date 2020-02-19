@@ -300,10 +300,10 @@ class WPDeveloper_Notice {
                         $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
                         $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
                         break;
-                    case 'update_400k' : 
-                        $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
-                        $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
-                        break;
+                    // case 'update_400k' : 
+                    //     $dismiss = ( isset( $plugin_action ) ) ? $plugin_action : false ;
+                    //     $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
+                    //     break;
                     case 'review' : 
                         $later_time = $this->makeTime( $this->timestamp,  $this->maybe_later_time );
                         break;
@@ -396,12 +396,12 @@ class WPDeveloper_Notice {
                 $this->get_thumbnail( 'update' );
                 $this->get_message( 'update' );
                 break;
-            case 'update_400k' : 
-                do_action( 'wpdeveloper_update_notice_for_' . $this->plugin_name );
-                $this->dismiss_button_scripts();
-                $this->get_thumbnail( 'update_400k' );
-                $this->get_message( 'update_400k' );
-                break;
+            // case 'update_400k' : 
+            //     do_action( 'wpdeveloper_update_notice_for_' . $this->plugin_name );
+            //     $this->dismiss_button_scripts();
+            //     $this->get_thumbnail( 'update_400k' );
+            //     $this->get_message( 'update_400k' );
+            //     break;
             case 'review' : 
                 do_action( 'wpdeveloper_review_notice_for_' . $this->plugin_name );
                 $this->get_thumbnail( 'review' );

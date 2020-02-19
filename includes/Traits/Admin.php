@@ -216,11 +216,11 @@ trait Admin
             $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
         }
 
-        if( ! $this->pro_enabled ) {
-            $notice->classes( 'update_400k', 'notice is-dismissible ' );
-            $notice->message( 'update_400k', '<p>'. __( 'Time to celebrate! EA for Elementor 400K+ happy users 🎉 Spin The Wheel & Try Your Luck <a href="https://wpdeveloper.net/ea-400k-giveaway" target="_blank">WIN PRO License</a>', $notice->text_domain ) .'</p>' );
-            $notice->thumbnail( 'update_400k', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
-        }
+        // if( ! $this->pro_enabled ) {
+        //     $notice->classes( 'update_400k', 'notice is-dismissible ' );
+        //     $notice->message( 'update_400k', '<p>'. __( 'Time to celebrate! EA for Elementor 400K+ happy users 🎉 Spin The Wheel & Try Your Luck <a href="https://wpdeveloper.net/ea-400k-giveaway" target="_blank">WIN PRO License</a>', $notice->text_domain ) .'</p>' );
+        //     $notice->thumbnail( 'update_400k', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
+        // }
 
         $notice->upsale_args = array(
             'slug'      => 'notificationx',
@@ -243,9 +243,9 @@ trait Admin
         if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) { 
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
-        if( ! $this->pro_enabled ) { 
-            $notice->options_args['notice_will_show']['update_400k'] = $notice->makeTime($notice->timestamp, '1 Hour');
-        }
+        // if( ! $this->pro_enabled ) { 
+        //     $notice->options_args['notice_will_show']['update_400k'] = $notice->makeTime($notice->timestamp, '1 Hour');
+        // }
 
         $notice->init();
     }
