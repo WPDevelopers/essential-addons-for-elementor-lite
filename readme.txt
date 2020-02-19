@@ -36,9 +36,9 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 35+ FREE WIDGETS AND COUNTING
+### 37+ FREE WIDGETS AND COUNTING
 
-We have designed 35 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 37 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -76,6 +76,7 @@ We have designed 35 of the most useful widgets to enhance your Elementor Page Bu
 34. [BetterDocs Category Box](https://essential-addons.com/elementor/betterdocs-category-box/) - Cretae custom box-style Knowledge Base layout with BetterDocs Category List.
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
 36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible freedon
+37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -114,6 +115,7 @@ Extensions (Free):
 
 1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add a reading progress bar to your page/post to indicate the current reading position.
 2. [Page/Post Duplicator](https://essential-addons.com/elementor/post-duplicator/) - Duplicate any page or post in a single click.
+3. [Table of Content](https://essential-addons.com/elementor/table-of-content/) - Display Table of Content automatically on any page, post or custom post type. You can control globally. 
 
 Extensions (Pro): 
 
@@ -179,7 +181,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 3.8.0 - 02/02/2020 =
+= 3.8.0 - 16/02/2020 =
 - Added: Table of Content global extension
 - Added: Event Calendar element
 - Fixed: Filterable Gallery | magnific popup background goes to top when closed
