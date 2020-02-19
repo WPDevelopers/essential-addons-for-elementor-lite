@@ -290,6 +290,7 @@ trait Eael_WPML {
 
         $widgets['eael-testimonial'] = [
             'conditions' => ['widgetType' => 'eael-testimonial'],
+            'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Team_Member',
             'fields' => [
                 [
                     'field'       => 'eael_testimonial_name',

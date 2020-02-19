@@ -455,11 +455,10 @@ class Post_Grid extends Widget_Base
             'eael_show_read_more_button' => $settings['eael_show_read_more_button'],
             'read_more_button_text' => $settings['read_more_button_text'],
             'read_more_button_text' => $settings['read_more_button_text'],
-            
-            'eael_post_grid_columns' => $settings['eael_post_grid_columns'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
-            'expanison_indicator'   => $settings['excerpt_expanison_indicator']
+            'expanison_indicator'   => $settings['excerpt_expanison_indicator'],
+            'layout_mode'   => $settings['layout_mode']
         ];
 
         $this->add_render_attribute(
@@ -467,16 +466,13 @@ class Post_Grid extends Widget_Base
             [
                 'id' => 'eael-post-grid-' . esc_attr($this->get_id()),
                 'class' => [
-                    'eael-post-grid-container',
-                    esc_attr($settings['eael_post_grid_columns']),
-                    'tablet-' . esc_attr($settings['eael_post_grid_columns_tablet']),
-                    'mobile-' . esc_attr($settings['eael_post_grid_columns_mobile']),
-                ],
+                    'eael-post-grid-container'
+                ]
             ]
         );
         
         echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
-            <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '">
+            <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="'.$settings["layout_mode"].'">
                 ' . self::render_template_($args, $settings) . '
             </div>
             <div class="clearfix"></div>
@@ -493,28 +489,36 @@ class Post_Grid extends Widget_Base
 			}
         }
         
-        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
-            echo '<script type="text/javascript">
-                jQuery(document).ready(function() {
+        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) { ?>
+            <script type="text/javascript">
+                jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
-                        var $scope = jQuery(".elementor-element-' . $this->get_id() . '");
+                        var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
+                            $gallery = $(this);
+                            $layout_mode = $gallery.data('layout-mode');
 
-                        // init isotope
-                        var $gallery = jQuery(".eael-post-grid", $scope).isotope({
-                            itemSelector: ".eael-grid-post",
-                            masonry: {
-                                columnWidth: ".eael-post-grid-column",
-                                percentPosition: true
-                            }
-                        });
-                    
-                        // layout gal, while images are loading
-                        $gallery.imagesLoaded().progress(function() {
-                            $gallery.isotope("layout");
-                        });
+                        if($layout_mode === 'masonry') {
+                            // init isotope
+                            var $isotope_gallery = $gallery.isotope({
+                                    itemSelector: ".eael-grid-post",
+                                    layoutMode: $layout_mode,
+                                    percentPosition: true
+                                });
+                        
+                            // layout gal, while images are loading
+                            $isotope_gallery.imagesLoaded().progress(function() {
+                                $isotope_gallery.isotope("layout");
+                            });
+                            
+                            $('.eael-grid-post', $gallery).resize(function() {
+                                $isotope_gallery.isotope('layout');
+                            });
+                        }
+
                     });
                 });
-            </script>';
+            </script>
+            <?php
         }
     }
 }

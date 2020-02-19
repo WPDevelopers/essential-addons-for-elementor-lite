@@ -5,6 +5,7 @@ html {
 .eael-toc {
   z-index: 9999;
   width: 300px;
+  display: none;
 }
 .eael-toc .eael-toc-button {
   display: none;
@@ -19,6 +20,7 @@ html {
   position: fixed;
   top: 100px;
   background: none;
+  display: block;
 }
 .eael-toc.collapsed {
   width: unset !important;
@@ -64,9 +66,6 @@ html {
 }
 .eael-toc.eael-toc-right {
   right: 0;
-}
-.eael-toc.eael-toc-right.collapsed {
-  width: inherit !important;
 }
 .eael-toc.eael-toc-right .eael-toc-close {
   left: -11px;
@@ -126,7 +125,7 @@ html {
   background: #fff6f3;
   min-width: 20vh;
   max-height: 50vh;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 .eael-toc .eael-toc-body::-webkit-scrollbar {
   width: 6px;
@@ -134,9 +133,6 @@ html {
 .eael-toc .eael-toc-body::-webkit-scrollbar-thumb {
   background: #aaa;
   border-radius: 10px;
-}
-.eael-toc .eael-toc-body:hover {
-  overflow-y: auto;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list {
   margin: 0;

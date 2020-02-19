@@ -56,7 +56,7 @@
   color: #fff;
 }
 
-.eael-call-to-action.bg-img:after {
+.eael-cta-overlay-yes .eael-call-to-action.bg-img:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -180,7 +180,7 @@
 
 .eael-call-to-action .cta-button.effect-1:hover::after {
   -webkit-transform: translateY(0);
-  transform: translateY(0);
+          transform: translateY(0);
 }
 
 /*--- Cta Button effect 2 ---*/
@@ -197,12 +197,12 @@
   transition: .5s;
   color: #fff;
   -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 
 .eael-call-to-action .cta-button.effect-2:hover::after {
   -webkit-transform: translateX(0);
-  transform: translateX(0);
+          transform: translateX(0);
 }
 
 /*--- Media Queries ---*/
