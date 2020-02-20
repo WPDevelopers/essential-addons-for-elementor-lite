@@ -6,8 +6,8 @@
 		 * @param supportTag
 		 */
 		function eael_toc_content(selector, supportTag) {
-
-			if (selector === null || supportTag === undefined) {
+			var listId = document.getElementById("eael-toc-list");
+			if (selector === null || supportTag === undefined || !listId) {
 				return null;
 			}
 			var mainSelector = document.querySelector(selector),
@@ -46,6 +46,7 @@
 					.split(",")[0]
 					.substr(1, 1),
 				ListNode = listId;
+
 			listId.innerHTML = "";
 			if (allHeadings.length > 0) {
 				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
