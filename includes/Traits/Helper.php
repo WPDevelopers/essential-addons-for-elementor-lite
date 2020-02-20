@@ -311,7 +311,7 @@ trait Helper
                     ],
                     'prefix_class' => 'elementor-grid%s-',
                     'frontend_available' => true,
-                ],
+                ]
             );
 
             $this->add_control(
