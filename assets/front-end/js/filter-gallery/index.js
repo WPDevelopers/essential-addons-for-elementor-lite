@@ -52,7 +52,6 @@ var filterableGalleryHandler = function($scope, $) {
             }
         });
 
-        //alert($settings.widget_id);
         // Popup
         $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
             type: "image",
@@ -61,7 +60,7 @@ var filterableGalleryHandler = function($scope, $) {
             },
             callbacks: {
                 close: function() {
-                    $("#elementor-lightbox").hide();
+                    $('#elementor-lightbox-slideshow-single-img').css('display', 'none');
                 }
             },
             fixedContentPos: false,
@@ -95,7 +94,8 @@ var filterableGalleryHandler = function($scope, $) {
                 },
                 callbacks: {
                     close: function() {
-                        $('#elementor-lightbox').hide();
+                        //$('#elementor-lightbox').hide();
+                        $('#elementor-lightbox-slideshow-single-img').css('display', 'none');
                     }
                 },
                 fixedContentPos: false,

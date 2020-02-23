@@ -3179,7 +3179,7 @@ class Filterable_Gallery extends Widget_Base
                         },
                         callbacks: {
                             close: function() {
-                                $('#elementor-lightbox').hide();
+                                $('#elementor-lightbox-slideshow-single-img').css('display', 'none');
                             }
                         },
                         fixedContentPos: false,
@@ -3213,7 +3213,7 @@ class Filterable_Gallery extends Widget_Base
                             },
                             callbacks: {
                                 close: function() {
-                                    $('#elementor-lightbox').hide();
+                                    $('#elementor-lightbox-slideshow-single-img').css('display', 'none');
                                 }
                             },
                             fixedContentPos: false,
