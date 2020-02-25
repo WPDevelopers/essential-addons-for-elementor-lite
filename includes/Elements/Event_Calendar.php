@@ -320,6 +320,30 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_event_global_bg_color',
+            [
+                'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#5725ff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_global_text_color',
+            [
+                'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -1363,12 +1387,15 @@ class Event_Calendar extends Widget_Base
             $i = 0;
 
             foreach ($events as $event) {
-                $start = $event["eael_event_start_date"];
-                $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
+
                 if ($event['eael_event_all_day'] == 'yes') {
                     $start = $event["eael_event_start_date_allday"];
                     $end = date('Y-m-d', strtotime("+1 days", strtotime($event["eael_event_end_date_allday"])));
+                }else{
+                    $start = $event["eael_event_start_date"];
+                    $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
                 }
+
                 $data[] = [
                     'id' => $i,
                     'title' => $event["eael_event_title"],
@@ -1483,8 +1510,8 @@ class Event_Calendar extends Widget_Base
                     'eael_event_start_date' => $ev_start_date,
                     'eael_event_end_date' => $ev_end_date,
                     'eael_event_border_color' => '#6231FF',
-                    'eael_event_text_color' => '#242424',
-                    'eael_event_bg_color' => '#FFF',
+                    'eael_event_text_color' => $settings['eael_event_global_text_color'],
+                    'eael_event_bg_color' => $settings['eael_event_global_bg_color'],
                     'eael_event_all_day' => $all_day,
                     'eael_event_link' => [
                         'is_external' => '',
@@ -1502,10 +1529,15 @@ class Event_Calendar extends Widget_Base
 
     public function get_the_events_calendar_events( $settings ){
         $arg = [
-            'posts_per_page'    => $settings['eael_the_events_calendar_max_result'],
-            'start_date'        => $settings['eael_the_events_calendar_start_date'],
-            'end_date'          => $settings['eael_the_events_calendar_end_date'],
+            'posts_per_page'    => $settings['eael_the_events_calendar_max_result']
         ];
+        if($settings['eael_the_events_calendar_max_result']=='date_range'){
+            $arg['start_date']  = $settings['eael_the_events_calendar_start_date'];
+            $arg['end_date']    = $settings['eael_the_events_calendar_end_date'];
+        }
+        if(!empty($settings['eael_the_events_calendar_category'])){
+           $arg['tax_query'] = [['taxonomy' => 'tribe_events_cat', 'field' => 'id', 'terms' => $settings['eael_the_events_calendar_category']]];
+        }
         $events = tribe_get_events( $arg );
         if(empty($events)){
             return [];
@@ -1523,8 +1555,8 @@ class Event_Calendar extends Widget_Base
                 'eael_event_start_date' => date($date_format, strtotime(tribe_get_start_date($event->ID))),
                 'eael_event_end_date' => date($date_format, strtotime(tribe_get_end_date($event->ID))),
                 'eael_event_border_color' => '#6231FF',
-                'eael_event_text_color' => '#242424',
-                'eael_event_bg_color' => '#FFF',
+                'eael_event_text_color' => $settings['eael_event_global_text_color'],
+                'eael_event_bg_color' => $settings['eael_event_global_bg_color'],
                 'eael_event_all_day' => '',
                 'eael_event_link' => [
                     'is_external' => '',

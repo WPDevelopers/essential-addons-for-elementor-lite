@@ -1529,13 +1529,15 @@ trait Helper
     /**
      * Get all Tags
      *
+     * @param  array  $args
+     *
      * @return array
      */
-    public function eael_get_tags()
+    public function eael_get_tags($args = array())
     {
-        $options = array();
-        $tags = get_tags();
-
+        //$args = wp_parse_args( $args, array( 'taxonomy' => 'post_tag' ));
+        $tags = get_tags($args);
+        $options = [];
         foreach ($tags as $tag) {
             $options[$tag->term_id] = $tag->name;
         }
