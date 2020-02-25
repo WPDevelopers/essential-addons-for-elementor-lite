@@ -1528,6 +1528,10 @@ class Event_Calendar extends Widget_Base
     }
 
     public function get_the_events_calendar_events( $settings ){
+
+        if(!function_exists('tribe_get_events')){
+            return [];
+        }
         $arg = [
             'posts_per_page'    => $settings['eael_the_events_calendar_max_result']
         ];
