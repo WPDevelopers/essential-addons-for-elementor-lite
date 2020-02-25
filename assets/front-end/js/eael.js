@@ -14109,6 +14109,54 @@ return ImagesLoaded;
         });
     }
 }));
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -19534,54 +19582,6 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -40297,7 +40297,7 @@ var EventCalendar = function($scope, $) {
 					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						startSelector.html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
+						startSelector.html('<i class="eicon-calendar"></i> Today ' + moment(event.start).format(timeFormate));
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -40305,7 +40305,7 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						startSelector.html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format(timeFormate));
+						startSelector.html('<i class="eicon-calendar"></i> Tomorrow ' + moment(event.start).format(timeFormate));
 					}
 
 					if (
@@ -40315,12 +40315,12 @@ var EventCalendar = function($scope, $) {
 								.add(1, "days")
 								.format("MM-DD-YYYY")
 					) {
-						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, " + timeFormate));
+						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do " + timeFormate));
 					}
 
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
-							endSelector.html("- Today, " + moment(endDate).format(timeFormate));
+							endSelector.html("- Today " + moment(endDate).format(timeFormate));
 						} else {
 							endSelector.html("- " + moment(endDate).format(timeFormate));
 						}
@@ -40336,7 +40336,7 @@ var EventCalendar = function($scope, $) {
 								.add(1, "days")
 								.format("MM-DD-YYYY")
 					) {
-						endSelector.html("- Tomorrow, " + moment(endDate).format(timeFormate));
+						endSelector.html("- Tomorrow " + moment(endDate).format(timeFormate));
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -40351,7 +40351,7 @@ var EventCalendar = function($scope, $) {
 						endSelector.html("- " + moment(endDate).format(timeFormate));
 					}
 					if (moment(endDate).diff(moment(startDate), "days") > 0 && endSelector.text().trim().length < 1) {
-						endSelector.html("- " + moment(endDate).format("MMM Do, " + timeFormate));
+						endSelector.html("- " + moment(endDate).format("MMM Do " + timeFormate));
 					}
 
 					if (moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
@@ -40394,72 +40394,6 @@ var EventCalendar = function($scope, $) {
 
 jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
-});
-
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
 });
 
 var FancyText = function($scope, $) {
@@ -40533,6 +40467,72 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-fancy-text.default",
         FancyText
+    );
+});
+
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
     );
 });
 

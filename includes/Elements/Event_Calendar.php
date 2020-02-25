@@ -1371,18 +1371,48 @@ class Event_Calendar extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $data = [];
-
         if ($settings['eael_event_calendar_type'] == 'google') {
-            $events = $this->get_google_calendar_events();
+            $data = $this->get_google_calendar_events();
         }  else if ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
-            $events = $this->get_the_events_calendar_events( $settings );
+            $data = $this->get_the_events_calendar_events( $settings );
         }  else {
-            $events = $settings['eael_event_items'];
+            $data = $this->get_manual_calendar_events( $settings );
         }
 
         echo '<div class="eael-event-calendar-wrapper">';
 
+        echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
+            data-cal_id = "' . $this->get_id() . '"
+            data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
+            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
+            ' . $this->eaelec_load_event_details() . '
+        </div>';
+    }
+
+    protected function eaelec_load_event_details()
+    {
+        return '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
+            <div class="eael-ec-modal-bg"></div>
+            <div class="eaelec-modal-content">
+                <div class="eaelec-modal-header">
+                    <div class="eaelec-modal-close"><span><i class="fas fa-times"></i></span></div>
+                    <h2 class="eael-ec-modal-title"></h2>
+                    <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
+                    <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
+                </div>
+                <div class="eaelec-modal-body">
+                    <p></p>
+                </div>
+                <div class="eaelec-modal-footer">
+                    <a class="eaelec-event-details-link">Event Details</a>
+                </div>
+            </div>
+        </div>';
+    }
+
+    public function get_manual_calendar_events( $settings ){
+        $events = $settings['eael_event_items'];
+        $data = [];
         if ($events) {
             $i = 0;
 
@@ -1414,34 +1444,7 @@ class Event_Calendar extends Widget_Base
                 $i++;
             }
         }
-
-        echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
-            data-cal_id = "' . $this->get_id() . '"
-            data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
-            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
-            ' . $this->eaelec_load_event_details() . '
-        </div>';
-    }
-
-    protected function eaelec_load_event_details()
-    {
-        return '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
-            <div class="eael-ec-modal-bg"></div>
-            <div class="eaelec-modal-content">
-                <div class="eaelec-modal-header">
-                    <div class="eaelec-modal-close"><span><i class="fas fa-times"></i></span></div>
-                    <h2 class="eael-ec-modal-title"></h2>
-                    <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
-                    <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
-                </div>
-                <div class="eaelec-modal-body">
-                    <p></p>
-                </div>
-                <div class="eaelec-modal-footer">
-                    <a class="eaelec-event-details-link">Event Details</a>
-                </div>
-            </div>
-        </div>';
+        return $data;
     }
 
     /**
@@ -1457,7 +1460,6 @@ class Event_Calendar extends Widget_Base
             return [];
         }
 
-        $api_key = $settings['eael_event_google_api_key'];
         $calendar_id = urlencode($settings['eael_event_calendar_id']);
         $base_url = "https://www.googleapis.com/calendar/v3/calendars/{$calendar_id}/events";
 
@@ -1489,35 +1491,33 @@ class Event_Calendar extends Widget_Base
         }
 
         $data = json_decode($data);
-
         if (isset($data->items)) {
             $calendar_data = [];
             foreach ($data->items as $key => $item) {
-                $all_day = '';
 
+                $all_day = '';
                 if (isset($item->start->date)) {
+                    $all_day = 'yes';
                     $ev_start_date = $item->start->date;
                     $ev_end_date = $item->end->date;
-                    $ev_end_date = date('Y-m-d', strtotime("-1 days", strtotime($ev_end_date)));
                 } else {
                     $ev_start_date = $item->start->dateTime;
                     $ev_end_date = $item->end->dateTime;
                 }
 
                 $calendar_data[] = [
-                    'eael_event_title' => $item->summary,
-                    'eael_event_description' => isset($item->description) ? $item->description : '',
-                    'eael_event_start_date' => $ev_start_date,
-                    'eael_event_end_date' => $ev_end_date,
-                    'eael_event_border_color' => '#6231FF',
-                    'eael_event_text_color' => $settings['eael_event_global_text_color'],
-                    'eael_event_bg_color' => $settings['eael_event_global_bg_color'],
-                    'eael_event_all_day' => $all_day,
-                    'eael_event_link' => [
-                        'is_external' => '',
-                        'nofollow' => '',
-                        'url' => $item->htmlLink,
-                    ],
+                    'id'            => ++$key,
+                    'title'         => $item->summary,
+                    'description'   => isset($item->description) ? $item->description : '',
+                    'start'         => $ev_start_date,
+                    'end'           => $ev_end_date,
+                    'borderColor'   => '#6231FF',
+                    'textColor'     => $settings['eael_event_global_text_color'],
+                    'color'         => $settings['eael_event_global_bg_color'],
+                    'url'           => $item->htmlLink,
+                    'allDay'        => $all_day,
+                    'external'      => 'on',
+                    'nofollow'      => 'on',
                 ];
             }
 
@@ -1531,7 +1531,7 @@ class Event_Calendar extends Widget_Base
         $arg = [
             'posts_per_page'    => $settings['eael_the_events_calendar_max_result']
         ];
-        if($settings['eael_the_events_calendar_max_result']=='date_range'){
+        if($settings['eael_the_events_calendar_fetch']=='date_range'){
             $arg['start_date']  = $settings['eael_the_events_calendar_start_date'];
             $arg['end_date']    = $settings['eael_the_events_calendar_end_date'];
         }
@@ -1543,29 +1543,28 @@ class Event_Calendar extends Widget_Base
             return [];
         }
         $calendar_data = [];
-        foreach ($events as $event){
+        foreach ($events as $key => $event){
             $date_format = 'Y-m-d';
-            $all_day = tribe_event_is_all_day($event->ID);
-            if($all_day){
+            $all_day = 'yes';
+            if(!tribe_event_is_all_day($event->ID)){
                 $date_format.=' H:i';
+                $all_day = '';
             }
             $calendar_data[] = [
-                'eael_event_title' => $event->post_title,
-                'eael_event_description' => $event->post_content,
-                'eael_event_start_date' => date($date_format, strtotime(tribe_get_start_date($event->ID))),
-                'eael_event_end_date' => date($date_format, strtotime(tribe_get_end_date($event->ID))),
-                'eael_event_border_color' => '#6231FF',
-                'eael_event_text_color' => $settings['eael_event_global_text_color'],
-                'eael_event_bg_color' => $settings['eael_event_global_bg_color'],
-                'eael_event_all_day' => '',
-                'eael_event_link' => [
-                    'is_external' => '',
-                    'nofollow' => '',
-                    'url' => get_the_permalink($event->ID),
-                ],
+                'id'            => ++$key,
+                'title'         => $event->post_title,
+                'description'   => $event->post_content,
+                'start'         => tribe_get_start_date($event->ID, true, $date_format),
+                'end'           => tribe_get_end_date($event->ID, true, $date_format),
+                'borderColor'   => '#6231FF',
+                'textColor'     => $settings['eael_event_global_text_color'],
+                'color'         => $settings['eael_event_global_bg_color'],
+                'url'           => get_the_permalink($event->ID),
+                'allDay'        => $all_day,
+                'external'      => 'on',
+                'nofollow'      => 'on',
             ];
         }
-
         return $calendar_data;
     }
 }
