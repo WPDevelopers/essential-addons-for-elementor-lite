@@ -23,8 +23,7 @@
   left: 50%;
   font-size: 90px;
   color: white;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
 
@@ -48,7 +47,6 @@
   min-height: 200px;
   margin: 0px;
   padding: 0px;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
   text-align: left;
   overflow: hidden;
@@ -86,8 +84,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .owp-play i {
@@ -95,7 +92,6 @@
   color: #fff;
   opacity: 0.8;
   text-shadow: 1px 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-transition: all .5s;
   transition: all .5s;
 }
 
@@ -128,13 +124,11 @@
 }
 
 .eaelsv-sticky-player-close:before {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .eaelsv-sticky-player-close:after {
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 /* For Box Shadow issue in astra bar */
