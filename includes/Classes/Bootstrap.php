@@ -13,6 +13,7 @@ class Bootstrap
     use \Essential_Addons_Elementor\Traits\Core;
     use \Essential_Addons_Elementor\Traits\Helper;
     use \Essential_Addons_Elementor\Traits\Generator;
+    use \Essential_Addons_Elementor\Traits\Extender;
     use \Essential_Addons_Elementor\Traits\Enqueue;
     use \Essential_Addons_Elementor\Traits\Admin;
     use \Essential_Addons_Elementor\Traits\Elements;
@@ -122,7 +123,10 @@ class Bootstrap
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_action('wp_footer', array($this, 'render_global_html'));
-        
+
+        add_filter('eael/event-calendar/source',[ $this,'event_calendar_source' ] );
+        add_action('eael/event-calendar/source/control',[ $this,'event_calendar_source_control' ] );
+
         // Admin
         if (is_admin()) {
             // Admin
