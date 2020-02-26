@@ -6,6 +6,7 @@ var EventCalendar = function($scope, $) {
 		eventAll = element.data("events"),
 		firstDay = element.data("first_day"),
 		calendarID = element.data("cal_id"),
+		locale = element.data("locale"),
 		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
 
 	var calendar = new Calendar(calendarEl, {
@@ -25,12 +26,13 @@ var EventCalendar = function($scope, $) {
 			center: "title",
 			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
 		},
-		buttonText: {
-			today: "Today"
-		},
+		// buttonText: {
+		// 	today: "today"
+		// },
 		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
+		locale:locale,
 		eventLimit: 3,
 		eventRender: function(info) {
 			var element = $(info.el),

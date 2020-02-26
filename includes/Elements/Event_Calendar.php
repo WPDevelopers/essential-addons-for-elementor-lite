@@ -302,25 +302,6 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
-            'eael_event_calendar_first_day',
-            [
-                'label' => __('First Day of Week', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    '0' => __('Sunday', 'essential-addons-for-elementor-lite'),
-                    '1' => __('Monday', 'essential-addons-for-elementor-lite'),
-                    '2' => __('Tuesday', 'essential-addons-for-elementor-lite'),
-                    '3' => __('Wednesday', 'essential-addons-for-elementor-lite'),
-                    '4' => __('Thursday', 'essential-addons-for-elementor-lite'),
-                    '5' => __('Friday', 'essential-addons-for-elementor-lite'),
-                    '6' => __('Saturday', 'essential-addons-for-elementor-lite'),
-                ],
-                'default' => '0',
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
             'eael_event_global_bg_color',
             [
                 'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
@@ -343,6 +324,37 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_event_calendar_language',
+            [
+                'label'     => __('Language', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SELECT,
+                'options'   => $this->eael_language_code_list(),
+                'default'   => 'en'
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_first_day',
+            [
+                'label' => __('First Day of Week', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    '0' => __('Sunday', 'essential-addons-for-elementor-lite'),
+                    '1' => __('Monday', 'essential-addons-for-elementor-lite'),
+                    '2' => __('Tuesday', 'essential-addons-for-elementor-lite'),
+                    '3' => __('Wednesday', 'essential-addons-for-elementor-lite'),
+                    '4' => __('Thursday', 'essential-addons-for-elementor-lite'),
+                    '5' => __('Friday', 'essential-addons-for-elementor-lite'),
+                    '6' => __('Saturday', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => '0',
+                'separator' => 'before',
+            ]
+        );
+
+
 
         $this->end_controls_section();
 
@@ -1379,10 +1391,13 @@ class Event_Calendar extends Widget_Base
             $data = $this->get_manual_calendar_events( $settings );
         }
 
+        $local = $settings['eael_event_calendar_language'];
+
         echo '<div class="eael-event-calendar-wrapper">';
 
         echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
+            data-locale = "' . $local . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
             ' . $this->eaelec_load_event_details() . '
