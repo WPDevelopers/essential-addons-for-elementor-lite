@@ -95,7 +95,6 @@ trait Extender
                 'label_block' => true,
                 'default'   => [],
                 'options'   => $this->eael_get_tags(['taxonomy'=>'tribe_events_cat','hide_empty' => false]),
-                'render_type' => 'none',
             ]
         );
 
