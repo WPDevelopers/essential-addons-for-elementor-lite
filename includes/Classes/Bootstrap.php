@@ -124,8 +124,9 @@ class Bootstrap
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_action('wp_footer', array($this, 'render_global_html'));
 
-        add_filter('eael/event-calendar/source',[ $this,'event_calendar_source' ] );
-        add_action('eael/event-calendar/source/control',[ $this,'event_calendar_source_control' ] );
+        add_filter('eael/event-calendar/source',[ $this,'eael_event_calendar_source' ] );
+        add_filter('eael/event-calendar/event_data',[ $this,'eael_event_calendar_event_data' ], 10, 2 );
+        add_action('eael/event-calendar/source/control',[ $this,'eael_event_calendar_source_control' ] );
 
         // Admin
         if (is_admin()) {
