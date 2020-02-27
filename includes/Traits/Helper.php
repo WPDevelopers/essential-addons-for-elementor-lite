@@ -1535,13 +1535,13 @@ trait Helper
      */
     public function eael_get_tags($args = array())
     {
-
-        $tags = get_tags( $args );
-
         $options = [];
-        if( is_wp_error( $tags ) ){
+        $tags = get_tags($args);
+
+        if (is_wp_error($tags)) {
             return [];
         }
+
         foreach ($tags as $tag) {
             $options[$tag->term_id] = $tag->name;
         }
