@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
-use \Elementor\Scheme_Typography;
 
 trait Extender
 {
@@ -17,7 +16,8 @@ trait Extender
      *
      * @return array
      */
-    public function eael_event_calendar_source( $source ){
+    public function eael_event_calendar_source($source)
+    {
 
         if (!function_exists('is_plugin_active')) {
             require_once ABSPATH . '/wp-admin/includes/plugin.php';
@@ -34,7 +34,8 @@ trait Extender
      * @since  3.8.2
      * @param $obj Event Calendar Widget object
      */
-    public function eael_event_calendar_source_control( $obj ){
+    public function eael_event_calendar_source_control($obj)
+    {
 
         $obj->start_controls_section(
             'eael_event_the_events_calendar',
@@ -50,11 +51,11 @@ trait Extender
         $obj->add_control(
             'eael_the_events_calendar_fetch',
             [
-                'label'     => __('Get Events', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::SELECT,
+                'label' => __('Get Events', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
                 'label_block' => true,
-                'default'   => ['all'],
-                'options'   => [
+                'default' => ['all'],
+                'options' => [
                     'all' => __('All', 'essential-addons-for-elementor-lite'),
                     'date_range' => __('Date Range', 'essential-addons-for-elementor-lite'),
                 ],
@@ -82,19 +83,19 @@ trait Extender
                 'default' => date('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
                 'condition' => [
                     'eael_the_events_calendar_fetch' => 'date_range',
-                ]
+                ],
             ]
         );
 
         $obj->add_control(
             'eael_the_events_calendar_category',
             [
-                'label'     => __('Event Category', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::SELECT2,
-                'multiple'  => true,
+                'label' => __('Event Category', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT2,
+                'multiple' => true,
                 'label_block' => true,
-                'default'   => [],
-                'options'   => $this->eael_get_tags(['taxonomy'=>'tribe_events_cat','hide_empty' => false]),
+                'default' => [],
+                'options' => $this->eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
             ]
         );
 
@@ -112,11 +113,12 @@ trait Extender
         $obj->end_controls_section();
     }
 
-    public function eael_event_calendar_event_data( $data , $settings ){
+    public function eael_event_calendar_event_data($data, $settings)
+    {
         if ($settings['eael_event_calendar_type'] == 'google') {
-            $data = $this->get_google_calendar_events( $settings );
-        }else if ($settings['eael_event_calendar_type'] == 'the_events_calendar'){
-            $data = $this->get_the_events_calendar_events( $settings );
+            $data = $this->get_google_calendar_events($settings);
+        } else if ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
+            $data = $this->get_the_events_calendar_events($settings);
         }
         return $data;
     }
@@ -128,7 +130,8 @@ trait Extender
      *
      * @return array
      */
-    public function get_google_calendar_events( $settings ) {
+    public function get_google_calendar_events($settings)
+    {
 
         if (empty($settings['eael_event_google_api_key']) && empty($settings['eael_event_calendar_id'])) {
             return [];
@@ -180,18 +183,18 @@ trait Extender
                 }
 
                 $calendar_data[] = [
-                    'id'            => ++$key,
-                    'title'         => $item->summary,
-                    'description'   => isset($item->description) ? $item->description : '',
-                    'start'         => $ev_start_date,
-                    'end'           => $ev_end_date,
-                    'borderColor'   => '#6231FF',
-                    'textColor'     => $settings['eael_event_global_text_color'],
-                    'color'         => $settings['eael_event_global_bg_color'],
-                    'url'           => $item->htmlLink,
-                    'allDay'        => $all_day,
-                    'external'      => 'on',
-                    'nofollow'      => 'on',
+                    'id' => ++$key,
+                    'title' => $item->summary,
+                    'description' => isset($item->description) ? $item->description : '',
+                    'start' => $ev_start_date,
+                    'end' => $ev_end_date,
+                    'borderColor' => '#6231FF',
+                    'textColor' => $settings['eael_event_global_text_color'],
+                    'color' => $settings['eael_event_global_bg_color'],
+                    'url' => $item->htmlLink,
+                    'allDay' => $all_day,
+                    'external' => 'on',
+                    'nofollow' => 'on',
                 ];
             }
 
@@ -207,46 +210,47 @@ trait Extender
      *
      * @return array
      */
-    public function get_the_events_calendar_events( $settings ){
+    public function get_the_events_calendar_events($settings)
+    {
 
-        if(!function_exists('tribe_get_events')){
+        if (!function_exists('tribe_get_events')) {
             return [];
         }
         $arg = [
-            'posts_per_page'    => $settings['eael_the_events_calendar_max_result']
+            'posts_per_page' => $settings['eael_the_events_calendar_max_result'],
         ];
-        if($settings['eael_the_events_calendar_fetch']=='date_range'){
-            $arg['start_date']  = $settings['eael_the_events_calendar_start_date'];
-            $arg['end_date']    = $settings['eael_the_events_calendar_end_date'];
+        if ($settings['eael_the_events_calendar_fetch'] == 'date_range') {
+            $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
+            $arg['end_date'] = $settings['eael_the_events_calendar_end_date'];
         }
-        if(!empty($settings['eael_the_events_calendar_category'])){
+        if (!empty($settings['eael_the_events_calendar_category'])) {
             $arg['tax_query'] = [['taxonomy' => 'tribe_events_cat', 'field' => 'id', 'terms' => $settings['eael_the_events_calendar_category']]];
         }
-        $events = tribe_get_events( $arg );
-        if(empty($events)){
+        $events = tribe_get_events($arg);
+        if (empty($events)) {
             return [];
         }
         $calendar_data = [];
-        foreach ($events as $key => $event){
+        foreach ($events as $key => $event) {
             $date_format = 'Y-m-d';
             $all_day = 'yes';
-            if(!tribe_event_is_all_day($event->ID)){
-                $date_format.=' H:i';
+            if (!tribe_event_is_all_day($event->ID)) {
+                $date_format .= ' H:i';
                 $all_day = '';
             }
             $calendar_data[] = [
-                'id'            => ++$key,
-                'title'         => $event->post_title,
-                'description'   => $event->post_content,
-                'start'         => tribe_get_start_date($event->ID, true, $date_format),
-                'end'           => tribe_get_end_date($event->ID, true, $date_format),
-                'borderColor'   => '#6231FF',
-                'textColor'     => $settings['eael_event_global_text_color'],
-                'color'         => $settings['eael_event_global_bg_color'],
-                'url'           => get_the_permalink($event->ID),
-                'allDay'        => $all_day,
-                'external'      => 'on',
-                'nofollow'      => 'on',
+                'id' => ++$key,
+                'title' => $event->post_title,
+                'description' => $event->post_content,
+                'start' => tribe_get_start_date($event->ID, true, $date_format),
+                'end' => tribe_get_end_date($event->ID, true, $date_format),
+                'borderColor' => '#6231FF',
+                'textColor' => $settings['eael_event_global_text_color'],
+                'color' => $settings['eael_event_global_bg_color'],
+                'url' => get_the_permalink($event->ID),
+                'allDay' => $all_day,
+                'external' => 'on',
+                'nofollow' => 'on',
             ];
         }
         return $calendar_data;
