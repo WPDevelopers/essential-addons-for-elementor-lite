@@ -124,7 +124,6 @@ class Bootstrap
         add_action('wp_footer', array($this, 'render_global_html'));
 
         add_filter('eael/event-calendar/source',[ $this,'eael_event_calendar_source' ] );
-        add_action('eael/event-calendar/source/control',[ $this,'eael_event_calendar_source_control' ] );
 
         // Admin
         if (is_admin()) {
