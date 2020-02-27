@@ -36,7 +36,6 @@ trait Extender
      */
     public function eael_event_calendar_source_control($obj)
     {
-
         $obj->start_controls_section(
             'eael_event_the_events_calendar',
             [
