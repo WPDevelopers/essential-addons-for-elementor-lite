@@ -302,30 +302,6 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
-            'eael_event_global_bg_color',
-            [
-                'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#5725ff',
-                'condition' => [
-                    'eael_event_calendar_type!' => 'manual',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_event_global_text_color',
-            [
-                'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
-                'condition' => [
-                    'eael_event_calendar_type!' => 'manual',
-                ],
-            ]
-        );
-
-        $this->add_control(
             'eael_event_calendar_language',
             [
                 'label'     => __('Language', 'essential-addons-for-elementor-lite'),
@@ -350,9 +326,34 @@ class Event_Calendar extends Widget_Base
                     '6' => __('Saturday', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => '0',
-                'separator' => 'before',
             ]
         );
+
+        $this->add_control(
+            'eael_event_global_bg_color',
+            [
+                'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#5725ff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_global_text_color',
+            [
+                'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+
+
 
 
 
