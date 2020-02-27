@@ -554,6 +554,7 @@ trait Helper
                 'default' => '10',
                 'condition' => [
                     'eael_show_excerpt' => 'yes',
+                    'eael_content_timeline_choose' => 'dynamic'
                 ],
             ]
         );
@@ -567,6 +568,7 @@ trait Helper
                 'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_show_excerpt' => 'yes',
+                    'eael_content_timeline_choose' => 'dynamic'
                 ],
             ]
         );
