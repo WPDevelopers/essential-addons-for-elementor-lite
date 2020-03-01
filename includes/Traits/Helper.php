@@ -1617,7 +1617,7 @@ trait Helper
         }
 
         if($class == '\Essential_Addons_Elementor\Elements\Post_Grid') {
-            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
+            $args['post__not_in'] = array_unique($settings['post__not_in']);
         }
 
         $html = $class::render_template_($args, $settings);
