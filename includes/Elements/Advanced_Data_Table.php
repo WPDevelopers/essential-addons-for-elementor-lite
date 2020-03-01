@@ -166,7 +166,7 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
+            'heading-import',
             [
                 'label' => __('Import', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,

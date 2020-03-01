@@ -386,29 +386,31 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+				if (row.length > 0) {
+					cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
-				if (cols.length > 0) {
-					if (enableHeader && index == 0) {
-						header += "<thead><tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								header += "<th>" + JSON.parse(col) + "</th>";
-							} else {
-								header += "<th>" + col + "</th>";
-							}
-						});
-						header += "</tr></thead>";
-					} else {
-						body += "<tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								body += "<td>" + JSON.parse(col) + "</td>";
-							} else {
-								body += "<td>" + col + "</td>";
-							}
-						});
-						body += "</tr>";
+					if (cols.length > 0) {
+						if (enableHeader && index == 0) {
+							header += "<thead><tr>";
+							cols.forEach(function(col) {
+								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+									header += "<th>" + JSON.parse(col) + "</th>";
+								} else {
+									header += "<th>" + col + "</th>";
+								}
+							});
+							header += "</tr></thead>";
+						} else {
+							body += "<tr>";
+							cols.forEach(function(col) {
+								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+									body += "<td>" + JSON.parse(col) + "</td>";
+								} else {
+									body += "<td>" + col + "</td>";
+								}
+							});
+							body += "</tr>";
+						}
 					}
 				}
 			});
