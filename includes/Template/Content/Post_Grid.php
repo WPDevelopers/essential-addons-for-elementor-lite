@@ -10,6 +10,8 @@ trait Post_Grid
 {
     public static function render_template_($args, $settings)
     {
+        error_log(print_r($settings, 1));
+
         $query = new \WP_Query($args);
          
         ob_start();
