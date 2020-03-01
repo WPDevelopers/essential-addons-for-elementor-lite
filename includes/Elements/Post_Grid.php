@@ -457,7 +457,7 @@ class Post_Grid extends Widget_Base
             'read_more_button_text' => $settings['read_more_button_text'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
-            'expanison_indicator'   => $settings['excerpt_expanison_indicator'],
+            'excerpt_expanison_indicator'   => $settings['excerpt_expanison_indicator'],
             'layout_mode'   => $settings['layout_mode']
         ];
 
