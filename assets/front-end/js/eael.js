@@ -1,274 +1,3 @@
-/*!
- * Countdown v0.1.0
- * https://github.com/fengyuanchen/countdown
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
-(function (factory) {
-    if (typeof define === "function" && define.amd) {
-        // AMD. Register as anonymous module.
-        define(["jquery"], factory);
-    } else {
-        // Browser globals.
-        factory(jQuery);
-    }
-})(function ($) {
-
-    "use strict";
-
-    var Countdown = function (element, options) {
-            this.$element = $(element);
-            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
-            this.init();
-        };
-
-    Countdown.prototype = {
-        constructor: Countdown,
-
-        init: function () {
-            var content = this.$element.html(),
-                date = new Date(this.defaults.date || content);
-
-            if (date.getTime()) {
-                this.content = content;
-                this.date = date;
-                this.find();
-
-                if (this.defaults.autoStart) {
-                    this.start();
-                }
-            }
-        },
-
-        find: function () {
-            var $element = this.$element;
-
-            this.$days = $element.find("[data-days]");
-            this.$hours = $element.find("[data-hours]");
-            this.$minutes = $element.find("[data-minutes]");
-            this.$seconds = $element.find("[data-seconds]");
-
-            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
-                this.found = true;
-            }
-        },
-
-        reset: function () {
-            if (this.found) {
-                this.output("days");
-                this.output("hours");
-                this.output("minutes");
-                this.output("seconds");
-            } else {
-                this.output();
-            }
-        },
-
-        ready: function () {
-            var date = this.date,
-                decisecond = 100,
-                second = 1000,
-                minute = 60000,
-                hour = 3600000,
-                day = 86400000,
-                remainder = {},
-                diff;
-
-            if (!date) {
-                return false;
-            }
-
-            diff = date.getTime() - (new Date()).getTime();
-
-            if (diff <= 0) {
-                this.end();
-                return false;
-            }
-
-            remainder.days = diff;
-            remainder.hours = remainder.days % day;
-            remainder.minutes = remainder.hours % hour;
-            remainder.seconds = remainder.minutes % minute;
-            remainder.milliseconds = remainder.seconds % second;
-
-            this.days = Math.floor(remainder.days / day);
-            this.hours = Math.floor(remainder.hours / hour);
-            this.minutes = Math.floor(remainder.minutes / minute);
-            this.seconds = Math.floor(remainder.seconds / second);
-            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
-
-            return true;
-        },
-
-        start: function () {
-            if (!this.active && this.ready()) {
-                this.active = true;
-                this.reset();
-                this.autoUpdate = this.defaults.fast ?
-                    setInterval($.proxy(this.fastUpdate, this), 100) :
-                    setInterval($.proxy(this.update, this), 1000);
-            }
-        },
-
-        stop: function () {
-            if (this.active) {
-                this.active = false;
-                clearInterval(this.autoUpdate);
-            }
-        },
-
-        end: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.days = 0;
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.deciseconds = 0;
-            this.reset();
-            this.defaults.end();
-        },
-
-        destroy: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.$days = null;
-            this.$hours = null;
-            this.$minutes = null;
-            this.$seconds = null;
-
-            this.$element.empty().html(this.content);
-            this.$element.removeData("countdown");
-        },
-
-        fastUpdate: function () {
-            if (--this.deciseconds >= 0) {
-                this.output("deciseconds");
-            } else {
-                this.deciseconds = 9;
-                this.update();
-            }
-        },
-
-        update: function () {
-            if (--this.seconds >= 0) {
-                this.output("seconds");
-            } else {
-                this.seconds = 59;
-
-                if (--this.minutes >= 0) {
-                    this.output("minutes");
-                } else {
-                    this.minutes = 59;
-
-                    if (--this.hours >= 0) {
-                        this.output("hours");
-                    } else {
-                        this.hours = 23;
-
-                        if (--this.days >= 0) {
-                            this.output("days");
-                        } else {
-                            this.end();
-                        }
-                    }
-                }
-            }
-        },
-
-        output: function (type) {
-            if (!this.found) {
-                this.$element.empty().html(this.template());
-                return;
-            }
-
-            switch (type) {
-                case "deciseconds":
-                    this.$seconds.text(this.getSecondsText());
-                    break;
-
-                case "seconds":
-                    this.$seconds.text(this.seconds);
-                    break;
-
-                case "minutes":
-                    this.$minutes.text(this.minutes);
-                    break;
-
-                case "hours":
-                    this.$hours.text(this.hours);
-                    break;
-
-                case "days":
-                    this.$days.text(this.days);
-                    break;
-
-                // No default
-            }
-        },
-
-        template: function () {
-            return this.defaults.text
-                    .replace("%s", this.days)
-                    .replace("%s", this.hours)
-                    .replace("%s", this.minutes)
-                    .replace("%s", this.getSecondsText());
-        },
-
-        getSecondsText: function () {
-            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
-        }
-    };
-
-    // Default settings
-    Countdown.defaults = {
-        autoStart: true,
-        date: null,
-        fast: false,
-        end: $.noop,
-        text: "%s days, %s hours, %s minutes, %s seconds"
-    };
-
-    // Set default settings
-    Countdown.setDefaults = function (options) {
-        $.extend(Countdown.defaults, options);
-    };
-
-    // Register as jQuery plugin
-    $.fn.countdown = function (options) {
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data("countdown");
-
-            if (!data) {
-                $this.data("countdown", (data = new Countdown(this, options)));
-            }
-
-            if (typeof options === "string" && $.isFunction(data[options])) {
-                data[options]();
-            }
-        });
-    };
-
-    $.fn.countdown.constructor = Countdown;
-    $.fn.countdown.setDefaults = Countdown.setDefaults;
-
-    $(function () {
-        $("[countdown]").countdown();
-    });
-
-});
-
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -12343,504 +12072,6 @@ Docs & License: https://fullcalendar.io/
 
 }));
 
-/*!
- * imagesLoaded PACKAGED v4.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-/**
- * EvEmitter v1.1.0
- * Lil' event emitter
- * MIT License
- */
-
-/* jshint unused: true, undef: true, strict: true */
-
-( function( global, factory ) {
-  // universal module definition
-  /* jshint strict: false */ /* globals define, module, window */
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD - RequireJS
-    define( 'ev-emitter/ev-emitter',factory );
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory();
-  } else {
-    // Browser globals
-    global.EvEmitter = factory();
-  }
-
-}( typeof window != 'undefined' ? window : this, function() {
-
-
-
-function EvEmitter() {}
-
-var proto = EvEmitter.prototype;
-
-proto.on = function( eventName, listener ) {
-  if ( !eventName || !listener ) {
-    return;
-  }
-  // set events hash
-  var events = this._events = this._events || {};
-  // set listeners array
-  var listeners = events[ eventName ] = events[ eventName ] || [];
-  // only add once
-  if ( listeners.indexOf( listener ) == -1 ) {
-    listeners.push( listener );
-  }
-
-  return this;
-};
-
-proto.once = function( eventName, listener ) {
-  if ( !eventName || !listener ) {
-    return;
-  }
-  // add event
-  this.on( eventName, listener );
-  // set once flag
-  // set onceEvents hash
-  var onceEvents = this._onceEvents = this._onceEvents || {};
-  // set onceListeners object
-  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
-  // set flag
-  onceListeners[ listener ] = true;
-
-  return this;
-};
-
-proto.off = function( eventName, listener ) {
-  var listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) {
-    return;
-  }
-  var index = listeners.indexOf( listener );
-  if ( index != -1 ) {
-    listeners.splice( index, 1 );
-  }
-
-  return this;
-};
-
-proto.emitEvent = function( eventName, args ) {
-  var listeners = this._events && this._events[ eventName ];
-  if ( !listeners || !listeners.length ) {
-    return;
-  }
-  // copy over to avoid interference if .off() in listener
-  listeners = listeners.slice(0);
-  args = args || [];
-  // once stuff
-  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
-
-  for ( var i=0; i < listeners.length; i++ ) {
-    var listener = listeners[i]
-    var isOnce = onceListeners && onceListeners[ listener ];
-    if ( isOnce ) {
-      // remove listener
-      // remove before trigger to prevent recursion
-      this.off( eventName, listener );
-      // unset once flag
-      delete onceListeners[ listener ];
-    }
-    // trigger listener
-    listener.apply( this, args );
-  }
-
-  return this;
-};
-
-proto.allOff = function() {
-  delete this._events;
-  delete this._onceEvents;
-};
-
-return EvEmitter;
-
-}));
-
-/*!
- * imagesLoaded v4.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-( function( window, factory ) { 'use strict';
-  // universal module definition
-
-  /*global define: false, module: false, require: false */
-
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD
-    define( [
-      'ev-emitter/ev-emitter'
-    ], function( EvEmitter ) {
-      return factory( window, EvEmitter );
-    });
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS
-    module.exports = factory(
-      window,
-      require('ev-emitter')
-    );
-  } else {
-    // browser global
-    window.imagesLoaded = factory(
-      window,
-      window.EvEmitter
-    );
-  }
-
-})( typeof window !== 'undefined' ? window : this,
-
-// --------------------------  factory -------------------------- //
-
-function factory( window, EvEmitter ) {
-
-
-
-var $ = window.jQuery;
-var console = window.console;
-
-// -------------------------- helpers -------------------------- //
-
-// extend objects
-function extend( a, b ) {
-  for ( var prop in b ) {
-    a[ prop ] = b[ prop ];
-  }
-  return a;
-}
-
-var arraySlice = Array.prototype.slice;
-
-// turn element or nodeList into an array
-function makeArray( obj ) {
-  if ( Array.isArray( obj ) ) {
-    // use object if already an array
-    return obj;
-  }
-
-  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
-  if ( isArrayLike ) {
-    // convert nodeList to array
-    return arraySlice.call( obj );
-  }
-
-  // array of single index
-  return [ obj ];
-}
-
-// -------------------------- imagesLoaded -------------------------- //
-
-/**
- * @param {Array, Element, NodeList, String} elem
- * @param {Object or Function} options - if function, use as callback
- * @param {Function} onAlways - callback function
- */
-function ImagesLoaded( elem, options, onAlways ) {
-  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
-  if ( !( this instanceof ImagesLoaded ) ) {
-    return new ImagesLoaded( elem, options, onAlways );
-  }
-  // use elem as selector string
-  var queryElem = elem;
-  if ( typeof elem == 'string' ) {
-    queryElem = document.querySelectorAll( elem );
-  }
-  // bail if bad element
-  if ( !queryElem ) {
-    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
-    return;
-  }
-
-  this.elements = makeArray( queryElem );
-  this.options = extend( {}, this.options );
-  // shift arguments if no options set
-  if ( typeof options == 'function' ) {
-    onAlways = options;
-  } else {
-    extend( this.options, options );
-  }
-
-  if ( onAlways ) {
-    this.on( 'always', onAlways );
-  }
-
-  this.getImages();
-
-  if ( $ ) {
-    // add jQuery Deferred object
-    this.jqDeferred = new $.Deferred();
-  }
-
-  // HACK check async to allow time to bind listeners
-  setTimeout( this.check.bind( this ) );
-}
-
-ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
-
-ImagesLoaded.prototype.options = {};
-
-ImagesLoaded.prototype.getImages = function() {
-  this.images = [];
-
-  // filter & find items if we have an item selector
-  this.elements.forEach( this.addElementImages, this );
-};
-
-/**
- * @param {Node} element
- */
-ImagesLoaded.prototype.addElementImages = function( elem ) {
-  // filter siblings
-  if ( elem.nodeName == 'IMG' ) {
-    this.addImage( elem );
-  }
-  // get background image on element
-  if ( this.options.background === true ) {
-    this.addElementBackgroundImages( elem );
-  }
-
-  // find children
-  // no non-element nodes, #143
-  var nodeType = elem.nodeType;
-  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
-    return;
-  }
-  var childImgs = elem.querySelectorAll('img');
-  // concat childElems to filterFound array
-  for ( var i=0; i < childImgs.length; i++ ) {
-    var img = childImgs[i];
-    this.addImage( img );
-  }
-
-  // get child background images
-  if ( typeof this.options.background == 'string' ) {
-    var children = elem.querySelectorAll( this.options.background );
-    for ( i=0; i < children.length; i++ ) {
-      var child = children[i];
-      this.addElementBackgroundImages( child );
-    }
-  }
-};
-
-var elementNodeTypes = {
-  1: true,
-  9: true,
-  11: true
-};
-
-ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
-  var style = getComputedStyle( elem );
-  if ( !style ) {
-    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
-    return;
-  }
-  // get url inside url("...")
-  var reURL = /url\((['"])?(.*?)\1\)/gi;
-  var matches = reURL.exec( style.backgroundImage );
-  while ( matches !== null ) {
-    var url = matches && matches[2];
-    if ( url ) {
-      this.addBackground( url, elem );
-    }
-    matches = reURL.exec( style.backgroundImage );
-  }
-};
-
-/**
- * @param {Image} img
- */
-ImagesLoaded.prototype.addImage = function( img ) {
-  var loadingImage = new LoadingImage( img );
-  this.images.push( loadingImage );
-};
-
-ImagesLoaded.prototype.addBackground = function( url, elem ) {
-  var background = new Background( url, elem );
-  this.images.push( background );
-};
-
-ImagesLoaded.prototype.check = function() {
-  var _this = this;
-  this.progressedCount = 0;
-  this.hasAnyBroken = false;
-  // complete if no images
-  if ( !this.images.length ) {
-    this.complete();
-    return;
-  }
-
-  function onProgress( image, elem, message ) {
-    // HACK - Chrome triggers event before object properties have changed. #83
-    setTimeout( function() {
-      _this.progress( image, elem, message );
-    });
-  }
-
-  this.images.forEach( function( loadingImage ) {
-    loadingImage.once( 'progress', onProgress );
-    loadingImage.check();
-  });
-};
-
-ImagesLoaded.prototype.progress = function( image, elem, message ) {
-  this.progressedCount++;
-  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
-  // progress event
-  this.emitEvent( 'progress', [ this, image, elem ] );
-  if ( this.jqDeferred && this.jqDeferred.notify ) {
-    this.jqDeferred.notify( this, image );
-  }
-  // check if completed
-  if ( this.progressedCount == this.images.length ) {
-    this.complete();
-  }
-
-  if ( this.options.debug && console ) {
-    console.log( 'progress: ' + message, image, elem );
-  }
-};
-
-ImagesLoaded.prototype.complete = function() {
-  var eventName = this.hasAnyBroken ? 'fail' : 'done';
-  this.isComplete = true;
-  this.emitEvent( eventName, [ this ] );
-  this.emitEvent( 'always', [ this ] );
-  if ( this.jqDeferred ) {
-    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
-    this.jqDeferred[ jqMethod ]( this );
-  }
-};
-
-// --------------------------  -------------------------- //
-
-function LoadingImage( img ) {
-  this.img = img;
-}
-
-LoadingImage.prototype = Object.create( EvEmitter.prototype );
-
-LoadingImage.prototype.check = function() {
-  // If complete is true and browser supports natural sizes,
-  // try to check for image status manually.
-  var isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    // report based on naturalWidth
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    return;
-  }
-
-  // If none of the checks above matched, simulate loading on detached element.
-  this.proxyImage = new Image();
-  this.proxyImage.addEventListener( 'load', this );
-  this.proxyImage.addEventListener( 'error', this );
-  // bind to image as well for Firefox. #191
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.proxyImage.src = this.img.src;
-};
-
-LoadingImage.prototype.getIsImageComplete = function() {
-  // check for non-zero, non-undefined naturalWidth
-  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
-  return this.img.complete && this.img.naturalWidth;
-};
-
-LoadingImage.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.img, message ] );
-};
-
-// ----- events ----- //
-
-// trigger specified handler for event type
-LoadingImage.prototype.handleEvent = function( event ) {
-  var method = 'on' + event.type;
-  if ( this[ method ] ) {
-    this[ method ]( event );
-  }
-};
-
-LoadingImage.prototype.onload = function() {
-  this.confirm( true, 'onload' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.onerror = function() {
-  this.confirm( false, 'onerror' );
-  this.unbindEvents();
-};
-
-LoadingImage.prototype.unbindEvents = function() {
-  this.proxyImage.removeEventListener( 'load', this );
-  this.proxyImage.removeEventListener( 'error', this );
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-// -------------------------- Background -------------------------- //
-
-function Background( url, element ) {
-  this.url = url;
-  this.element = element;
-  this.img = new Image();
-}
-
-// inherit LoadingImage prototype
-Background.prototype = Object.create( LoadingImage.prototype );
-
-Background.prototype.check = function() {
-  this.img.addEventListener( 'load', this );
-  this.img.addEventListener( 'error', this );
-  this.img.src = this.url;
-  // check if image is already complete
-  var isComplete = this.getIsImageComplete();
-  if ( isComplete ) {
-    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
-    this.unbindEvents();
-  }
-};
-
-Background.prototype.unbindEvents = function() {
-  this.img.removeEventListener( 'load', this );
-  this.img.removeEventListener( 'error', this );
-};
-
-Background.prototype.confirm = function( isLoaded, message ) {
-  this.isLoaded = isLoaded;
-  this.emitEvent( 'progress', [ this, this.element, message ] );
-};
-
-// -------------------------- jQuery -------------------------- //
-
-ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
-  jQuery = jQuery || window.jQuery;
-  if ( !jQuery ) {
-    return;
-  }
-  // set local variable
-  $ = jQuery;
-  // $().imagesLoaded()
-  $.fn.imagesLoaded = function( options, callback ) {
-    var instance = new ImagesLoaded( this, options, callback );
-    return instance.jqDeferred.promise( $(this) );
-  };
-};
-// try making plugin
-ImagesLoaded.makeJQueryPlugin();
-
-// --------------------------  -------------------------- //
-
-return ImagesLoaded;
-
-});
-
-
 !function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
 !function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
 
@@ -13967,6 +13198,646 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
+/*!
+ * imagesLoaded PACKAGED v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( 'ev-emitter/ev-emitter',factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+/*!
+ * imagesLoaded v4.1.4
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'ev-emitter/ev-emitter'
+    ], function( EvEmitter ) {
+      return factory( window, EvEmitter );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else {
+    // browser global
+    window.imagesLoaded = factory(
+      window,
+      window.EvEmitter
+    );
+  }
+
+})( typeof window !== 'undefined' ? window : this,
+
+// --------------------------  factory -------------------------- //
+
+function factory( window, EvEmitter ) {
+
+
+
+var $ = window.jQuery;
+var console = window.console;
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+var arraySlice = Array.prototype.slice;
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    return obj;
+  }
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
+}
+
+// -------------------------- imagesLoaded -------------------------- //
+
+/**
+ * @param {Array, Element, NodeList, String} elem
+ * @param {Object or Function} options - if function, use as callback
+ * @param {Function} onAlways - callback function
+ */
+function ImagesLoaded( elem, options, onAlways ) {
+  // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+  if ( !( this instanceof ImagesLoaded ) ) {
+    return new ImagesLoaded( elem, options, onAlways );
+  }
+  // use elem as selector string
+  var queryElem = elem;
+  if ( typeof elem == 'string' ) {
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
+    return;
+  }
+
+  this.elements = makeArray( queryElem );
+  this.options = extend( {}, this.options );
+  // shift arguments if no options set
+  if ( typeof options == 'function' ) {
+    onAlways = options;
+  } else {
+    extend( this.options, options );
+  }
+
+  if ( onAlways ) {
+    this.on( 'always', onAlways );
+  }
+
+  this.getImages();
+
+  if ( $ ) {
+    // add jQuery Deferred object
+    this.jqDeferred = new $.Deferred();
+  }
+
+  // HACK check async to allow time to bind listeners
+  setTimeout( this.check.bind( this ) );
+}
+
+ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
+
+ImagesLoaded.prototype.options = {};
+
+ImagesLoaded.prototype.getImages = function() {
+  this.images = [];
+
+  // filter & find items if we have an item selector
+  this.elements.forEach( this.addElementImages, this );
+};
+
+/**
+ * @param {Node} element
+ */
+ImagesLoaded.prototype.addElementImages = function( elem ) {
+  // filter siblings
+  if ( elem.nodeName == 'IMG' ) {
+    this.addImage( elem );
+  }
+  // get background image on element
+  if ( this.options.background === true ) {
+    this.addElementBackgroundImages( elem );
+  }
+
+  // find children
+  // no non-element nodes, #143
+  var nodeType = elem.nodeType;
+  if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
+    return;
+  }
+  var childImgs = elem.querySelectorAll('img');
+  // concat childElems to filterFound array
+  for ( var i=0; i < childImgs.length; i++ ) {
+    var img = childImgs[i];
+    this.addImage( img );
+  }
+
+  // get child background images
+  if ( typeof this.options.background == 'string' ) {
+    var children = elem.querySelectorAll( this.options.background );
+    for ( i=0; i < children.length; i++ ) {
+      var child = children[i];
+      this.addElementBackgroundImages( child );
+    }
+  }
+};
+
+var elementNodeTypes = {
+  1: true,
+  9: true,
+  11: true
+};
+
+ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+    return;
+  }
+  // get url inside url("...")
+  var reURL = /url\((['"])?(.*?)\1\)/gi;
+  var matches = reURL.exec( style.backgroundImage );
+  while ( matches !== null ) {
+    var url = matches && matches[2];
+    if ( url ) {
+      this.addBackground( url, elem );
+    }
+    matches = reURL.exec( style.backgroundImage );
+  }
+};
+
+/**
+ * @param {Image} img
+ */
+ImagesLoaded.prototype.addImage = function( img ) {
+  var loadingImage = new LoadingImage( img );
+  this.images.push( loadingImage );
+};
+
+ImagesLoaded.prototype.addBackground = function( url, elem ) {
+  var background = new Background( url, elem );
+  this.images.push( background );
+};
+
+ImagesLoaded.prototype.check = function() {
+  var _this = this;
+  this.progressedCount = 0;
+  this.hasAnyBroken = false;
+  // complete if no images
+  if ( !this.images.length ) {
+    this.complete();
+    return;
+  }
+
+  function onProgress( image, elem, message ) {
+    // HACK - Chrome triggers event before object properties have changed. #83
+    setTimeout( function() {
+      _this.progress( image, elem, message );
+    });
+  }
+
+  this.images.forEach( function( loadingImage ) {
+    loadingImage.once( 'progress', onProgress );
+    loadingImage.check();
+  });
+};
+
+ImagesLoaded.prototype.progress = function( image, elem, message ) {
+  this.progressedCount++;
+  this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+  // progress event
+  this.emitEvent( 'progress', [ this, image, elem ] );
+  if ( this.jqDeferred && this.jqDeferred.notify ) {
+    this.jqDeferred.notify( this, image );
+  }
+  // check if completed
+  if ( this.progressedCount == this.images.length ) {
+    this.complete();
+  }
+
+  if ( this.options.debug && console ) {
+    console.log( 'progress: ' + message, image, elem );
+  }
+};
+
+ImagesLoaded.prototype.complete = function() {
+  var eventName = this.hasAnyBroken ? 'fail' : 'done';
+  this.isComplete = true;
+  this.emitEvent( eventName, [ this ] );
+  this.emitEvent( 'always', [ this ] );
+  if ( this.jqDeferred ) {
+    var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+    this.jqDeferred[ jqMethod ]( this );
+  }
+};
+
+// --------------------------  -------------------------- //
+
+function LoadingImage( img ) {
+  this.img = img;
+}
+
+LoadingImage.prototype = Object.create( EvEmitter.prototype );
+
+LoadingImage.prototype.check = function() {
+  // If complete is true and browser supports natural sizes,
+  // try to check for image status manually.
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    // report based on naturalWidth
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    return;
+  }
+
+  // If none of the checks above matched, simulate loading on detached element.
+  this.proxyImage = new Image();
+  this.proxyImage.addEventListener( 'load', this );
+  this.proxyImage.addEventListener( 'error', this );
+  // bind to image as well for Firefox. #191
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.proxyImage.src = this.img.src;
+};
+
+LoadingImage.prototype.getIsImageComplete = function() {
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
+};
+
+LoadingImage.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.img, message ] );
+};
+
+// ----- events ----- //
+
+// trigger specified handler for event type
+LoadingImage.prototype.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+LoadingImage.prototype.onload = function() {
+  this.confirm( true, 'onload' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.onerror = function() {
+  this.confirm( false, 'onerror' );
+  this.unbindEvents();
+};
+
+LoadingImage.prototype.unbindEvents = function() {
+  this.proxyImage.removeEventListener( 'load', this );
+  this.proxyImage.removeEventListener( 'error', this );
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+// -------------------------- Background -------------------------- //
+
+function Background( url, element ) {
+  this.url = url;
+  this.element = element;
+  this.img = new Image();
+}
+
+// inherit LoadingImage prototype
+Background.prototype = Object.create( LoadingImage.prototype );
+
+Background.prototype.check = function() {
+  this.img.addEventListener( 'load', this );
+  this.img.addEventListener( 'error', this );
+  this.img.src = this.url;
+  // check if image is already complete
+  var isComplete = this.getIsImageComplete();
+  if ( isComplete ) {
+    this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+    this.unbindEvents();
+  }
+};
+
+Background.prototype.unbindEvents = function() {
+  this.img.removeEventListener( 'load', this );
+  this.img.removeEventListener( 'error', this );
+};
+
+Background.prototype.confirm = function( isLoaded, message ) {
+  this.isLoaded = isLoaded;
+  this.emitEvent( 'progress', [ this, this.element, message ] );
+};
+
+// -------------------------- jQuery -------------------------- //
+
+ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+  jQuery = jQuery || window.jQuery;
+  if ( !jQuery ) {
+    return;
+  }
+  // set local variable
+  $ = jQuery;
+  // $().imagesLoaded()
+  $.fn.imagesLoaded = function( options, callback ) {
+    var instance = new ImagesLoaded( this, options, callback );
+    return instance.jqDeferred.promise( $(this) );
+  };
+};
+// try making plugin
+ImagesLoaded.makeJQueryPlugin();
+
+// --------------------------  -------------------------- //
+
+return ImagesLoaded;
+
+});
+
+
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -19440,148 +19311,6 @@ var trim = String.prototype.trim ?
 		})
 	}
 }(jQuery));
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -34621,6 +34350,277 @@ typeof navigator === "object" && (function (global, factory) {
   return Plyr;
 
 }));
+/*!
+ * Countdown v0.1.0
+ * https://github.com/fengyuanchen/countdown
+ *
+ * Copyright 2014 Fengyuan Chen
+ * Released under the MIT license
+ */
+
+(function (factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD. Register as anonymous module.
+        define(["jquery"], factory);
+    } else {
+        // Browser globals.
+        factory(jQuery);
+    }
+})(function ($) {
+
+    "use strict";
+
+    var Countdown = function (element, options) {
+            this.$element = $(element);
+            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
+            this.init();
+        };
+
+    Countdown.prototype = {
+        constructor: Countdown,
+
+        init: function () {
+            var content = this.$element.html(),
+                date = new Date(this.defaults.date || content);
+
+            if (date.getTime()) {
+                this.content = content;
+                this.date = date;
+                this.find();
+
+                if (this.defaults.autoStart) {
+                    this.start();
+                }
+            }
+        },
+
+        find: function () {
+            var $element = this.$element;
+
+            this.$days = $element.find("[data-days]");
+            this.$hours = $element.find("[data-hours]");
+            this.$minutes = $element.find("[data-minutes]");
+            this.$seconds = $element.find("[data-seconds]");
+
+            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
+                this.found = true;
+            }
+        },
+
+        reset: function () {
+            if (this.found) {
+                this.output("days");
+                this.output("hours");
+                this.output("minutes");
+                this.output("seconds");
+            } else {
+                this.output();
+            }
+        },
+
+        ready: function () {
+            var date = this.date,
+                decisecond = 100,
+                second = 1000,
+                minute = 60000,
+                hour = 3600000,
+                day = 86400000,
+                remainder = {},
+                diff;
+
+            if (!date) {
+                return false;
+            }
+
+            diff = date.getTime() - (new Date()).getTime();
+
+            if (diff <= 0) {
+                this.end();
+                return false;
+            }
+
+            remainder.days = diff;
+            remainder.hours = remainder.days % day;
+            remainder.minutes = remainder.hours % hour;
+            remainder.seconds = remainder.minutes % minute;
+            remainder.milliseconds = remainder.seconds % second;
+
+            this.days = Math.floor(remainder.days / day);
+            this.hours = Math.floor(remainder.hours / hour);
+            this.minutes = Math.floor(remainder.minutes / minute);
+            this.seconds = Math.floor(remainder.seconds / second);
+            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
+
+            return true;
+        },
+
+        start: function () {
+            if (!this.active && this.ready()) {
+                this.active = true;
+                this.reset();
+                this.autoUpdate = this.defaults.fast ?
+                    setInterval($.proxy(this.fastUpdate, this), 100) :
+                    setInterval($.proxy(this.update, this), 1000);
+            }
+        },
+
+        stop: function () {
+            if (this.active) {
+                this.active = false;
+                clearInterval(this.autoUpdate);
+            }
+        },
+
+        end: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.days = 0;
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.deciseconds = 0;
+            this.reset();
+            this.defaults.end();
+        },
+
+        destroy: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.$days = null;
+            this.$hours = null;
+            this.$minutes = null;
+            this.$seconds = null;
+
+            this.$element.empty().html(this.content);
+            this.$element.removeData("countdown");
+        },
+
+        fastUpdate: function () {
+            if (--this.deciseconds >= 0) {
+                this.output("deciseconds");
+            } else {
+                this.deciseconds = 9;
+                this.update();
+            }
+        },
+
+        update: function () {
+            if (--this.seconds >= 0) {
+                this.output("seconds");
+            } else {
+                this.seconds = 59;
+
+                if (--this.minutes >= 0) {
+                    this.output("minutes");
+                } else {
+                    this.minutes = 59;
+
+                    if (--this.hours >= 0) {
+                        this.output("hours");
+                    } else {
+                        this.hours = 23;
+
+                        if (--this.days >= 0) {
+                            this.output("days");
+                        } else {
+                            this.end();
+                        }
+                    }
+                }
+            }
+        },
+
+        output: function (type) {
+            if (!this.found) {
+                this.$element.empty().html(this.template());
+                return;
+            }
+
+            switch (type) {
+                case "deciseconds":
+                    this.$seconds.text(this.getSecondsText());
+                    break;
+
+                case "seconds":
+                    this.$seconds.text(this.seconds);
+                    break;
+
+                case "minutes":
+                    this.$minutes.text(this.minutes);
+                    break;
+
+                case "hours":
+                    this.$hours.text(this.hours);
+                    break;
+
+                case "days":
+                    this.$days.text(this.days);
+                    break;
+
+                // No default
+            }
+        },
+
+        template: function () {
+            return this.defaults.text
+                    .replace("%s", this.days)
+                    .replace("%s", this.hours)
+                    .replace("%s", this.minutes)
+                    .replace("%s", this.getSecondsText());
+        },
+
+        getSecondsText: function () {
+            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+        }
+    };
+
+    // Default settings
+    Countdown.defaults = {
+        autoStart: true,
+        date: null,
+        fast: false,
+        end: $.noop,
+        text: "%s days, %s hours, %s minutes, %s seconds"
+    };
+
+    // Set default settings
+    Countdown.setDefaults = function (options) {
+        $.extend(Countdown.defaults, options);
+    };
+
+    // Register as jQuery plugin
+    $.fn.countdown = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data("countdown");
+
+            if (!data) {
+                $this.data("countdown", (data = new Countdown(this, options)));
+            }
+
+            if (typeof options === "string" && $.isFunction(data[options])) {
+                data[options]();
+            }
+        });
+    };
+
+    $.fn.countdown.constructor = Countdown;
+    $.fn.countdown.setDefaults = Countdown.setDefaults;
+
+    $(function () {
+        $("[countdown]").countdown();
+    });
+
+});
+
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -38981,67 +38981,6 @@ return $;
     });
 })(jQuery);
 
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -39137,6 +39076,134 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-adv-tabs.default",
         AdvanceTabHandler
+    );
+});
+
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
+});
+
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
     );
 });
 
@@ -39259,73 +39326,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -39402,832 +39402,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	}
 
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
-});
-
-var advanced_data_table_timeout,
-	advanced_data_table_active_cell = null,
-	advanced_data_table_drag_start_x,
-	advanced_data_table_drag_start_width,
-	advanced_data_table_drag_el,
-	advanced_data_table_dragging = false;
-
-var Advanced_Data_Table_Update_View = function(view, refresh, value) {
-	var model = view.model;
-
-	// disable elementor remote server render
-	model.remoteRender = refresh;
-
-	if (elementor.config.version > "2.7.6") {
-		var container = view.getContainer();
-		var settings = view.getContainer().settings.attributes;
-
-		Object.keys(value).forEach(function(key) {
-			settings[key] = value[key];
-		});
-
-		parent.window.$e.run("document/elements/settings", {
-			container: container,
-			settings: settings,
-			options: {
-				external: refresh
-			}
-		});
-	} else {
-		// update backbone model
-		Object.keys(value).forEach(function(key) {
-			model.setSetting(key, value[key]);
-		});
-	}
-
-	// enable elementor remote server render just after elementor throttle
-	// ignore multiple assign
-	advanced_data_table_timeout = setTimeout(function() {
-		model.remoteRender = true;
-	}, 1001);
-};
-
-var Advanced_Data_Table_Update_Model = function(model, container, refresh, value) {
-	// disable elementor remote server render
-	model.remoteRender = refresh;
-
-	if (elementor.config.version > "2.7.6") {
-		var settings = container.settings.attributes;
-
-		Object.keys(value).forEach(function(key) {
-			settings[key] = value[key];
-		});
-
-		parent.window.$e.run("document/elements/settings", {
-			container: container,
-			settings: settings,
-			options: {
-				external: refresh
-			}
-		});
-	} else {
-		// update backbone model
-		Object.keys(value).forEach(function(key) {
-			model.setSetting(key, value[key]);
-		});
-	}
-
-	// enable elementor remote server render just after elementor throttle
-	// ignore multiple assign
-	advanced_data_table_timeout = setTimeout(function() {
-		model.remoteRender = true;
-	}, 1001);
-};
-
-var Advanced_Data_Table = function($scope, $) {
-	var table = $scope.context.querySelector(".ea-advanced-data-table");
-	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
-	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
-	var classCollection = {};
-
-	if (isEditMode) {
-		var attr = "readonly";
-
-		// add edit class
-		table.classList.add("ea-advanced-data-table-editable");
-
-		if (table.classList.contains("ea-advanced-data-table-static")) {
-			attr = "";
-
-			// insert editable area
-			table.querySelectorAll("th, td").forEach(function(el) {
-				var value = el.innerHTML;
-
-				if (value.indexOf('<textarea rows="1">') !== 0) {
-					el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
-				}
-			});
-		}
-
-		// drag
-		table.addEventListener("mousedown", function(e) {
-			if (e.target.tagName.toLowerCase() === "th") {
-				e.stopPropagation();
-
-				advanced_data_table_dragging = true;
-				advanced_data_table_drag_el = e.target;
-				advanced_data_table_drag_start_x = e.pageX;
-				advanced_data_table_drag_start_width = e.target.offsetWidth;
-			}
-		});
-
-		document.addEventListener("mousemove", function(e) {
-			if (advanced_data_table_dragging) {
-				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
-			}
-		});
-		document.addEventListener("mouseup", function(e) {
-			if (advanced_data_table_dragging) {
-				advanced_data_table_dragging = false;
-			}
-		});
-	} else {
-		// search
-		if (search) {
-			search.addEventListener("input", function(e) {
-				var input = this.value.toLowerCase();
-				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
-				var offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-
-				if (table.rows.length > 1) {
-					if (input.length > 0) {
-						if (hasSort) {
-							table.classList.add("ea-advanced-data-table-unsortable");
-						}
-
-						if (pagination && pagination.innerHTML.length > 0) {
-							pagination.style.display = "none";
-						}
-
-						for (var i = offset; i < table.rows.length; i++) {
-							var matchFound = false;
-
-							if (table.rows[i].cells.length > 0) {
-								for (var j = 0; j < table.rows[i].cells.length; j++) {
-									if (table.rows[i].cells[j].textContent.toLowerCase().indexOf(input) > -1) {
-										matchFound = true;
-										break;
-									}
-								}
-							}
-
-							if (matchFound) {
-								table.rows[i].style.display = "table-row";
-							} else {
-								table.rows[i].style.display = "none";
-							}
-						}
-					} else {
-						if (hasSort) {
-							table.classList.remove("ea-advanced-data-table-unsortable");
-						}
-
-						if (pagination && pagination.innerHTML.length > 0) {
-							pagination.style.display = "";
-
-							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
-							var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-							var endIndex = currentPage * table.dataset.itemsPerPage;
-
-							for (var i = 1; i <= table.rows.length - 1; i++) {
-								if (i >= startIndex && i <= endIndex) {
-									table.rows[i].style.display = "table-row";
-								} else {
-									table.rows[i].style.display = "none";
-								}
-							}
-						} else {
-							for (var i = 1; i <= table.rows.length - 1; i++) {
-								table.rows[i].style.display = "table-row";
-							}
-						}
-					}
-				}
-			});
-		}
-
-		// sort
-		if (table.classList.contains("ea-advanced-data-table-sortable")) {
-			table.addEventListener("click", function(e) {
-				if (e.target.tagName.toLowerCase() === "th") {
-					var index = e.target.cellIndex;
-					var currentPage = 1;
-					var startIndex = 1;
-					var endIndex = table.rows.length - 1;
-					var sort = "";
-					var classList = e.target.classList;
-					var collection = [];
-					var origTable = table.cloneNode(true);
-
-					if (classList.contains("asc")) {
-						e.target.classList.remove("asc");
-						e.target.classList.add("desc");
-						sort = "desc";
-					} else if (classList.contains("desc")) {
-						e.target.classList.remove("desc");
-						e.target.classList.add("asc");
-						sort = "asc";
-					} else {
-						e.target.classList.add("asc");
-						sort = "asc";
-					}
-
-					if (pagination && pagination.innerHTML.length > 0) {
-						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
-						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-						endIndex =
-							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
-					}
-
-					// collect header class
-					classCollection[currentPage] = [];
-
-					table.querySelectorAll("th").forEach(function(el) {
-						if (el.cellIndex != index) {
-							el.classList.remove("asc", "desc");
-						}
-
-						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
-					});
-
-					// collect table cells value
-					for (var i = startIndex; i <= endIndex; i++) {
-						var value;
-						var cell = table.rows[i].cells[index];
-
-						if (isNaN(parseInt(cell.innerText))) {
-							value = cell.innerText.toLowerCase();
-						} else {
-							value = parseInt(cell.innerText);
-						}
-
-						collection.push({ index: i, value: value });
-					}
-
-					// sort collection array
-					if (sort == "asc") {
-						collection.sort(function(x, y) {
-							return x.value > y.value ? 1 : -1;
-						});
-					} else if (sort == "desc") {
-						collection.sort(function(x, y) {
-							return x.value < y.value ? 1 : -1;
-						});
-					}
-
-					// sort table
-					collection.forEach(function(row, index) {
-						table.rows[startIndex + index].innerHTML = origTable.rows[row.index].innerHTML;
-					});
-				}
-			});
-		}
-
-		// paginated table
-		if (table.classList.contains("ea-advanced-data-table-paginated")) {
-			var paginationHTML = "";
-			var currentPage = 1;
-			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-			var endIndex = currentPage * table.dataset.itemsPerPage;
-			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
-
-			// insert pagination
-			if (maxPages > 1) {
-				for (var i = 1; i <= maxPages; i++) {
-					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
-				}
-
-				pagination.insertAdjacentHTML(
-					"beforeend",
-					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
-				);
-			}
-
-			// make initial item visible
-			for (var i = 0; i <= endIndex; i++) {
-				if (i >= table.rows.length) {
-					break;
-				}
-
-				table.rows[i].style.display = "table-row";
-			}
-
-			// paginate on click
-			pagination.addEventListener("click", function(e) {
-				e.preventDefault();
-
-				if (e.target.tagName.toLowerCase() == "a") {
-					currentPage = e.target.dataset.page;
-					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
-					endIndex = currentPage * table.dataset.itemsPerPage;
-
-					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
-						el.classList.remove("ea-advanced-data-table-pagination-current");
-					});
-
-					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
-						el.classList.add("ea-advanced-data-table-pagination-current");
-					});
-
-					for (var i = offset; i <= table.rows.length - 1; i++) {
-						if (i >= startIndex && i <= endIndex) {
-							table.rows[i].style.display = "table-row";
-						} else {
-							table.rows[i].style.display = "none";
-						}
-					}
-
-					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("asc", "desc");
-
-						if (typeof classCollection[currentPage] != "undefined") {
-							if (classCollection[currentPage][index]) {
-								el.classList.add(classCollection[currentPage][index]);
-							}
-						}
-					});
-				}
-			});
-		}
-	}
-};
-
-var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
-	if (event.target.dataset.event == "ea:advTable:export") {
-		// export
-		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
-		var rows = table.querySelectorAll("table tr");
-		var csv = [];
-
-		// generate csv
-		for (var i = 0; i < rows.length; i++) {
-			var row = [];
-			var cols = rows[i].querySelectorAll("th, td");
-
-			if (table.classList.contains("ea-advanced-data-table-static")) {
-				for (var j = 0; j < cols.length; j++) {
-					row.push(
-						JSON.stringify(
-							cols[j]
-								.querySelector("textarea")
-								.value.replace(/(\r\n|\n|\r)/gm, " ")
-								.trim()
-						)
-					);
-				}
-			} else {
-				for (var j = 0; j < cols.length; j++) {
-					row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
-				}
-			}
-
-			csv.push(row.join(","));
-		}
-
-		// download
-		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-		var download_link = parent.document.createElement("a");
-
-		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
-		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
-		download_link.href = window.URL.createObjectURL(csv_file);
-		download_link.style.display = "none";
-		parent.document.body.appendChild(download_link);
-		download_link.click();
-
-		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
-	} else if (event.target.dataset.event == "ea:advTable:import") {
-		// import
-		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
-		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
-		var csvArr = textarea.value.split("\n");
-		var header = "";
-		var body = "";
-
-		if (textarea.value.length > 0) {
-			body += "<tbody>";
-			csvArr.forEach(function(row, index) {
-				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
-
-				if (cols.length > 0) {
-					if (enableHeader && index == 0) {
-						header += "<thead><tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								header += "<th>" + JSON.parse(col) + "</th>";
-							} else {
-								header += "<th>" + col + "</th>";
-							}
-						});
-						header += "</tr></thead>";
-					} else {
-						body += "<tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								body += "<td>" + JSON.parse(col) + "</td>";
-							} else {
-								body += "<td>" + col + "</td>";
-							}
-						});
-						body += "</tr>";
-					}
-				}
-			});
-			body += "</tbody>";
-
-			if (header.length > 0 || body.length > 0) {
-				Advanced_Data_Table_Update_View(view, true, {
-					ea_adv_data_table_static_html: header + body
-				});
-			}
-		}
-
-		textarea.value = "";
-	} else if (event.target.dataset.event == "ea:advTable:connect") {
-		var button = event.target;
-		button.innerHTML = "Connecting";
-
-		jQuery.ajax({
-			url: localize.ajaxurl,
-			type: "post",
-			data: {
-				action: "connect_remote_db",
-				security: localize.nonce,
-				host: model.attributes.settings.attributes.ea_adv_data_table_source_remote_host,
-				username: model.attributes.settings.attributes.ea_adv_data_table_source_remote_username,
-				password: model.attributes.settings.attributes.ea_adv_data_table_source_remote_password,
-				database: model.attributes.settings.attributes.ea_adv_data_table_source_remote_database
-			},
-			success: function(response) {
-				if (response.connected == true) {
-					button.innerHTML = "Connected";
-
-					Advanced_Data_Table_Update_View(view, true, {
-						ea_adv_data_table_source_remote_connected: true,
-						ea_adv_data_table_source_remote_tables: response.tables
-					});
-
-					// reload panel
-					panel.content.el.querySelector(".elementor-section-title").click();
-					panel.content.el.querySelector(".elementor-section-title").click();
-
-					var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
-					select.length = 0;
-					response.tables.forEach(function(opt, index) {
-						select[index] = new Option(opt, opt);
-					});
-				} else {
-					button.innerHTML = "Failed";
-				}
-			},
-			error: function() {
-				button.innerHTML = "Failed";
-			}
-		});
-
-		setTimeout(function() {
-			button.innerHTML = "Connect";
-		}, 2000);
-	} else if (event.target.dataset.event == "ea:advTable:disconnect") {
-		Advanced_Data_Table_Update_View(view, true, {
-			ea_adv_data_table_source_remote_connected: false,
-			ea_adv_data_table_source_remote_tables: []
-		});
-
-		// reload panel
-		panel.content.el.querySelector(".elementor-section-title").click();
-		panel.content.el.querySelector(".elementor-section-title").click();
-	}
-};
-
-// Inline edit
-var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
-	var localRender = function() {
-		var interval = setInterval(function() {
-			if (view.el.querySelector(".ea-advanced-data-table")) {
-				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
-
-				table.addEventListener("focusin", function(e) {
-					if (e.target.tagName.toLowerCase() == "textarea") {
-						advanced_data_table_active_cell = e.target;
-					}
-				});
-
-				table.addEventListener("input", function(e) {
-					if (e.target.tagName.toLowerCase() == "textarea") {
-						clearTimeout(advanced_data_table_timeout);
-
-						// clone current table
-						var origTable = table.cloneNode(true);
-
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function(el) {
-							var value = el.querySelector("textarea").value;
-							el.innerHTML = value;
-						});
-
-						// update table
-						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML
-						});
-					}
-				});
-
-				// drag
-				table.addEventListener("mouseup", function(e) {
-					clearTimeout(advanced_data_table_timeout);
-
-					if (e.target.tagName.toLowerCase() === "th") {
-						if (table.classList.contains("ea-advanced-data-table-static")) {
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update table
-							Advanced_Data_Table_Update_View(view, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						} else {
-							var widths = [];
-
-							// collect width of th
-							table.querySelectorAll("th").forEach(function(el, index) {
-								widths[index] = el.style.width;
-							});
-
-							// update table
-							Advanced_Data_Table_Update_View(view, false, {
-								ea_adv_data_table_dynamic_th_width: widths
-							});
-						}
-					}
-				});
-
-				// clear style
-				table.addEventListener("dblclick", function(e) {
-					if (e.target.tagName.toLowerCase() === "th") {
-						e.stopPropagation();
-
-						e.target.style.width = "";
-					}
-				});
-
-				clearInterval(interval);
-			}
-		}, 10);
-	};
-
-	// init
-	localRender();
-
-	// after render
-	model.on("remote:render", function() {
-		localRender();
-	});
-
-	// export import handler
-	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
-
-	panel.el.addEventListener("click", handler);
-
-	panel.currentPageView.on("destroy", function() {
-		panel.el.removeEventListener("click", handler);
-	});
-
-	// fill remote db list
-	var initRemoteTables = function() {
-		setTimeout(function() {
-			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
-
-			if (select != null && select.length == 0) {
-				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
-					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
-				});
-			}
-		}, 50);
-	};
-
-	initRemoteTables();
-
-	panel.el.addEventListener("mousedown", function(e) {
-		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
-			initRemoteTables();
-		}
-	});
-};
-
-Advanced_Data_Table_Context_Menu = function(groups, element) {
-	if (
-		element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
-		element.options.model.attributes.settings.attributes.ea_adv_data_table_source == "static"
-	) {
-		groups.push({
-			name: "ea_advanced_data_table",
-			actions: [
-				{
-					name: "add_row_above",
-					title: "Add Row Above",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
-							var row = table.insertRow(index);
-
-							for (var i = 0; i < table.rows[0].cells.length; i++) {
-								var cell = row.insertCell(i);
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "add_row_below",
-					title: "Add Row Below",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
-							var row = table.insertRow(index);
-
-							for (var i = 0; i < table.rows[0].cells.length; i++) {
-								var cell = row.insertCell(i);
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "add_column_left",
-					title: "Add Column Left",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex;
-
-							for (var i = 0; i < table.rows.length; i++) {
-								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
-									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
-								} else {
-									var cell = table.rows[i].insertCell(index);
-								}
-
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "add_column_right",
-					title: "Add Column Right",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
-
-							for (var i = 0; i < table.rows.length; i++) {
-								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
-									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
-								} else {
-									var cell = table.rows[i].insertCell(index);
-								}
-
-								cell.innerHTML = '<textarea rows="1"></textarea>';
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "delete_row",
-					title: "Delete Row",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
-
-							table.deleteRow(index);
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				},
-				{
-					name: "delete_column",
-					title: "Delete Column",
-					callback: function() {
-						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
-
-						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex;
-
-							for (var i = 0; i < table.rows.length; i++) {
-								table.rows[i].deleteCell(index);
-							}
-
-							advanced_data_table_active_cell = null;
-
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update model
-							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
-							});
-						}
-					}
-				}
-			]
-		});
-	}
-
-	return groups;
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-	if (isEditMode) {
-		elementor.hooks.addFilter("elements/widget/contextMenuGroups", Advanced_Data_Table_Context_Menu);
-		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", Advanced_Data_Table_Inline_Edit);
-	}
-
-	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
 var EventCalendar = function($scope, $) {
@@ -40396,6 +39570,72 @@ var EventCalendar = function($scope, $) {
 
 jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
+});
+
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
+    );
 });
 
 var FancyText = function($scope, $) {
@@ -40814,16 +40054,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
-    );
-});
-
 jQuery(document).ready(function() {
     // scroll func
     jQuery(window).scroll(function() {
@@ -40902,261 +40132,13 @@ jQuery(document).ready(function() {
     }
 });
 
-var eaelsvPosition = '';
-var eaelsvWidth = 0;
-var eaelsvHeight = 0;
-var eaelsvDomHeight = 0;
-var videoIsActive = 0;
-var eaelMakeItSticky = 0;
-var scrollHeight = 0;
-
-jQuery(window).on('elementor/frontend/init', function () {
-    
-    if (isEditMode) {
-        elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
-            var interval;
-
-            model.attributes.settings.on('change:eaelsv_sticky_width', function() {
-                clearTimeout(interval);
-
-                interval = setTimeout(function() {
-                    var height = Math.ceil(model.getSetting('eaelsv_sticky_width') / 1.78);
-
-                    model.attributes.settings.attributes.eaelsv_sticky_height = height;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_height"]').value = height;
-                }, 250);
-            });
-            
-            model.attributes.settings.on('change:eaelsv_sticky_height', function() {
-                clearTimeout(interval);
-
-                interval = setTimeout(function() {
-                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
-
-                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
-                }, 250);
-            });
-        });
-    }
-
-    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
-        $('.eaelsv-sticky-player-close', $scope).hide();
-
-        var element = $scope.find('.eael-sticky-video-player2');
-        var sticky = '';
-        var autoplay = '';
-        var overlay = '';
-
-        sticky = element.data('sticky');
-        autoplay = element.data('autoplay');
-        eaelsvPosition = element.data('position');
-        eaelsvHeight = element.data('sheight');
-        eaelsvWidth = element.data('swidth');
-        overlay = element.data('overlay');
-        scrollHeight = element.data('scroll_height');
-
-        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-
-        var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
-
-        // If element is Sticky video
-        if (sticky === 'yes') {
-            // If autoplay is enable
-            if ('yes' === autoplay && overlay === 'no') {
-                eaelsvDomHeight = GetDomElementHeight(element);
-                element.attr('id', 'videobox');
-
-                if (videoIsActive == 0) {
-                    videoIsActive = 1;
-                }
-            }
-
-            // When play event is cliked
-            // Do the sticky process
-            PlayerPlay(playerAbc, element);
-        }
-
-        // Overlay Operation Started
-        if (overlay === 'yes') {
-            var ovrlyElmnt = element.prev();
-
-            $(ovrlyElmnt).on('click', function () {
-                $(this).css('display', 'none');
-
-                if (
-                    $(this)
-                        .next()
-                        .data('autoplay') === 'yes'
-                ) {
-                    playerAbc.restart();
-                    eaelsvDomHeight = GetDomElementHeight(this);
-                    $(this)
-                        .next()
-                        .attr('id', 'videobox');
-                    videoIsActive = 1;
-                }
-            });
-        }
-        playerAbc.on('pause', function (event) {
-            if (videoIsActive == 1) {
-                videoIsActive = 0;
-            }
-        });
-
-        $('.eaelsv-sticky-player-close').on('click', function () {
-            element.removeClass('out').addClass('in');
-            $('.eael-sticky-video-player2').removeAttr('style');
-            videoIsActive = 0;
-        });
-
-        element.parent().css('height', element.height() + 'px');
-        $(window).resize(function() {
-            element.parent().css('height', element.height() + 'px');
-        });
-    });
-
-});
-
-jQuery(window).scroll(function () {
-    var scrollTop = jQuery(window).scrollTop();
-    var scrollBottom = jQuery(document).height() - scrollTop;
-
-    if (scrollBottom > jQuery(window).height() + 400) {
-        if (scrollTop >= eaelsvDomHeight) {
-            if (videoIsActive == 1) {
-                jQuery('#videobox')
-                    .find('.eaelsv-sticky-player-close')
-                    .css('display', 'block');
-                jQuery('#videobox')
-                    .removeClass('in')
-                    .addClass('out');
-                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-            }
-        } else {
-            jQuery('.eaelsv-sticky-player-close').hide();
-            jQuery('#videobox')
-                .removeClass('out')
-                .addClass('in');
-            jQuery('.eael-sticky-video-player2').removeAttr('style');
-        }
-    }
-});
-
-function GetDomElementHeight(elem) {
-    var contentHeight = jQuery(elem).parent().height();
-    var expHeight = ((scrollHeight * contentHeight) / 100);
-    var hght =
-        jQuery(elem)
-            .parent()
-            .offset().top + expHeight;
-
-    return hght;
-}
-
-function PositionStickyPlayer(p, h, w) {
-    if (p == 'top-left') {
-        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
-    }
-    if (p == 'top-right') {
-        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
-    }
-    if (p == 'bottom-right') {
-        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
-    }
-    if (p == 'bottom-left') {
-        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
-    }
-    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
-    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
-}
-
-function PlayerPlay(a, b) {
-    a.on('play', function (event) {
-        eaelsvDomHeight = GetDomElementHeight(b);
-        jQuery('.eael-sticky-video-player2').removeAttr('id');
-        jQuery('.eael-sticky-video-player2').removeClass('out');
-        b.attr('id', 'videobox');
-
-        videoIsActive = 1;
-        eaelsvPosition = b.data('position');
-        eaelsvHeight = b.data('sheight');
-        eaelsvWidth = b.data('swidth');
-    });
-}
-
-function RunStickyPlayer(elem) {
-    var ovrplyer = new Plyr('#' + elem);
-    ovrplyer.start();
-}
-
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
 };
-
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
     );
 });
 
@@ -41514,6 +40496,1026 @@ jQuery(window).on("elementor/frontend/init", function() {
 		}
 	});
 })(jQuery);
+
+var advanced_data_table_timeout,
+	advanced_data_table_active_cell = null,
+	advanced_data_table_drag_start_x,
+	advanced_data_table_drag_start_width,
+	advanced_data_table_drag_el,
+	advanced_data_table_dragging = false;
+
+var Advanced_Data_Table_Update_View = function(view, refresh, value) {
+	var model = view.model;
+
+	// disable elementor remote server render
+	model.remoteRender = refresh;
+
+	if (elementor.config.version > "2.7.6") {
+		var container = view.getContainer();
+		var settings = view.getContainer().settings.attributes;
+
+		Object.keys(value).forEach(function(key) {
+			settings[key] = value[key];
+		});
+
+		parent.window.$e.run("document/elements/settings", {
+			container: container,
+			settings: settings,
+			options: {
+				external: refresh
+			}
+		});
+	} else {
+		// update backbone model
+		Object.keys(value).forEach(function(key) {
+			model.setSetting(key, value[key]);
+		});
+	}
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	advanced_data_table_timeout = setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
+var Advanced_Data_Table_Update_Model = function(model, container, refresh, value) {
+	// disable elementor remote server render
+	model.remoteRender = refresh;
+
+	if (elementor.config.version > "2.7.6") {
+		var settings = container.settings.attributes;
+
+		Object.keys(value).forEach(function(key) {
+			settings[key] = value[key];
+		});
+
+		parent.window.$e.run("document/elements/settings", {
+			container: container,
+			settings: settings,
+			options: {
+				external: refresh
+			}
+		});
+	} else {
+		// update backbone model
+		Object.keys(value).forEach(function(key) {
+			model.setSetting(key, value[key]);
+		});
+	}
+
+	// enable elementor remote server render just after elementor throttle
+	// ignore multiple assign
+	advanced_data_table_timeout = setTimeout(function() {
+		model.remoteRender = true;
+	}, 1001);
+};
+
+var Advanced_Data_Table = function($scope, $) {
+	var table = $scope.context.querySelector(".ea-advanced-data-table");
+	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
+	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
+	var classCollection = {};
+
+	if (isEditMode) {
+		var attr = "readonly";
+
+		// add edit class
+		table.classList.add("ea-advanced-data-table-editable");
+
+		if (table.classList.contains("ea-advanced-data-table-static")) {
+			attr = "";
+
+			// insert editable area
+			table.querySelectorAll("th, td").forEach(function(el) {
+				var value = el.innerHTML;
+
+				if (value.indexOf('<textarea rows="1">') !== 0) {
+					el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				}
+			});
+		}
+
+		// drag
+		table.addEventListener("mousedown", function(e) {
+			if (e.target.tagName.toLowerCase() === "th") {
+				e.stopPropagation();
+
+				advanced_data_table_dragging = true;
+				advanced_data_table_drag_el = e.target;
+				advanced_data_table_drag_start_x = e.pageX;
+				advanced_data_table_drag_start_width = e.target.offsetWidth;
+			}
+		});
+
+		document.addEventListener("mousemove", function(e) {
+			if (advanced_data_table_dragging) {
+				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
+			}
+		});
+		document.addEventListener("mouseup", function(e) {
+			if (advanced_data_table_dragging) {
+				advanced_data_table_dragging = false;
+			}
+		});
+	} else {
+		// search
+		if (search) {
+			search.addEventListener("input", function(e) {
+				var input = this.value.toLowerCase();
+				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
+				var offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+
+				if (table.rows.length > 1) {
+					if (input.length > 0) {
+						if (hasSort) {
+							table.classList.add("ea-advanced-data-table-unsortable");
+						}
+
+						if (pagination && pagination.innerHTML.length > 0) {
+							pagination.style.display = "none";
+						}
+
+						for (var i = offset; i < table.rows.length; i++) {
+							var matchFound = false;
+
+							if (table.rows[i].cells.length > 0) {
+								for (var j = 0; j < table.rows[i].cells.length; j++) {
+									if (table.rows[i].cells[j].textContent.toLowerCase().indexOf(input) > -1) {
+										matchFound = true;
+										break;
+									}
+								}
+							}
+
+							if (matchFound) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
+					} else {
+						if (hasSort) {
+							table.classList.remove("ea-advanced-data-table-unsortable");
+						}
+
+						if (pagination && pagination.innerHTML.length > 0) {
+							pagination.style.display = "";
+
+							var currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+							var startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+							var endIndex = currentPage * table.dataset.itemsPerPage;
+
+							for (var i = 1; i <= table.rows.length - 1; i++) {
+								if (i >= startIndex && i <= endIndex) {
+									table.rows[i].style.display = "table-row";
+								} else {
+									table.rows[i].style.display = "none";
+								}
+							}
+						} else {
+							for (var i = 1; i <= table.rows.length - 1; i++) {
+								table.rows[i].style.display = "table-row";
+							}
+						}
+					}
+				}
+			});
+		}
+
+		// sort
+		if (table.classList.contains("ea-advanced-data-table-sortable")) {
+			table.addEventListener("click", function(e) {
+				if (e.target.tagName.toLowerCase() === "th") {
+					var index = e.target.cellIndex;
+					var currentPage = 1;
+					var startIndex = 1;
+					var endIndex = table.rows.length - 1;
+					var sort = "";
+					var classList = e.target.classList;
+					var collection = [];
+					var origTable = table.cloneNode(true);
+
+					if (classList.contains("asc")) {
+						e.target.classList.remove("asc");
+						e.target.classList.add("desc");
+						sort = "desc";
+					} else if (classList.contains("desc")) {
+						e.target.classList.remove("desc");
+						e.target.classList.add("asc");
+						sort = "asc";
+					} else {
+						e.target.classList.add("asc");
+						sort = "asc";
+					}
+
+					if (pagination && pagination.innerHTML.length > 0) {
+						currentPage = pagination.querySelector(".ea-advanced-data-table-pagination-current").dataset.page;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
+						endIndex =
+							endIndex - (currentPage - 1) * table.dataset.itemsPerPage >= table.dataset.itemsPerPage ? currentPage * table.dataset.itemsPerPage : endIndex;
+					}
+
+					// collect header class
+					classCollection[currentPage] = [];
+
+					table.querySelectorAll("th").forEach(function(el) {
+						if (el.cellIndex != index) {
+							el.classList.remove("asc", "desc");
+						}
+
+						classCollection[currentPage].push(el.classList.contains("asc") ? "asc" : el.classList.contains("desc") ? "desc" : "");
+					});
+
+					// collect table cells value
+					for (var i = startIndex; i <= endIndex; i++) {
+						var value;
+						var cell = table.rows[i].cells[index];
+
+						if (isNaN(parseInt(cell.innerText))) {
+							value = cell.innerText.toLowerCase();
+						} else {
+							value = parseInt(cell.innerText);
+						}
+
+						collection.push({ index: i, value: value });
+					}
+
+					// sort collection array
+					if (sort == "asc") {
+						collection.sort(function(x, y) {
+							return x.value > y.value ? 1 : -1;
+						});
+					} else if (sort == "desc") {
+						collection.sort(function(x, y) {
+							return x.value < y.value ? 1 : -1;
+						});
+					}
+
+					// sort table
+					collection.forEach(function(row, index) {
+						table.rows[startIndex + index].innerHTML = origTable.rows[row.index].innerHTML;
+					});
+				}
+			});
+		}
+
+		// paginated table
+		if (table.classList.contains("ea-advanced-data-table-paginated")) {
+			var paginationHTML = "";
+			var currentPage = 1;
+			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+			var endIndex = currentPage * table.dataset.itemsPerPage;
+			var maxPages = Math.ceil((table.rows.length - 1) / table.dataset.itemsPerPage);
+
+			// insert pagination
+			if (maxPages > 1) {
+				for (var i = 1; i <= maxPages; i++) {
+					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
+				}
+
+				pagination.insertAdjacentHTML(
+					"beforeend",
+					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
+				);
+			}
+
+			// make initial item visible
+			for (var i = 0; i <= endIndex; i++) {
+				if (i >= table.rows.length) {
+					break;
+				}
+
+				table.rows[i].style.display = "table-row";
+			}
+
+			// paginate on click
+			pagination.addEventListener("click", function(e) {
+				e.preventDefault();
+
+				if (e.target.tagName.toLowerCase() == "a") {
+					currentPage = e.target.dataset.page;
+					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+					endIndex = currentPage * table.dataset.itemsPerPage;
+
+					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+						el.classList.remove("ea-advanced-data-table-pagination-current");
+					});
+
+					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+						el.classList.add("ea-advanced-data-table-pagination-current");
+					});
+
+					for (var i = offset; i <= table.rows.length - 1; i++) {
+						if (i >= startIndex && i <= endIndex) {
+							table.rows[i].style.display = "table-row";
+						} else {
+							table.rows[i].style.display = "none";
+						}
+					}
+
+					table.querySelectorAll("th").forEach(function(el, index) {
+						el.classList.remove("asc", "desc");
+
+						if (typeof classCollection[currentPage] != "undefined") {
+							if (classCollection[currentPage][index]) {
+								el.classList.add(classCollection[currentPage][index]);
+							}
+						}
+					});
+				}
+			});
+		}
+	}
+};
+
+var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:advTable:export") {
+		// export
+		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			if (table.classList.contains("ea-advanced-data-table-static")) {
+				for (var j = 0; j < cols.length; j++) {
+					row.push(
+						JSON.stringify(
+							cols[j]
+								.querySelector("textarea")
+								.value.replace(/(\r\n|\n|\r)/gm, " ")
+								.trim()
+						)
+					);
+				}
+			} else {
+				for (var j = 0; j < cols.length; j++) {
+					row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+				}
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("ea-adv-data-table-download-" + model.attributes.id);
+		download_link.download = "ea-adv-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".ea-adv-data-table-download-" + model.attributes.id).remove();
+	} else if (event.target.dataset.event == "ea:advTable:import") {
+		// import
+		var textarea = panel.el.querySelector(".ea_adv_table_csv_string");
+		var enableHeader = panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
+		var csvArr = textarea.value.split("\n");
+		var header = "";
+		var body = "";
+
+		if (textarea.value.length > 0) {
+			body += "<tbody>";
+			csvArr.forEach(function(row, index) {
+				if (row.length > 0) {
+					cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+
+					if (cols.length > 0) {
+						if (enableHeader && index == 0) {
+							header += "<thead><tr>";
+							cols.forEach(function(col) {
+								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+									header += "<th>" + JSON.parse(col) + "</th>";
+								} else {
+									header += "<th>" + col + "</th>";
+								}
+							});
+							header += "</tr></thead>";
+						} else {
+							body += "<tr>";
+							cols.forEach(function(col) {
+								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+									body += "<td>" + JSON.parse(col) + "</td>";
+								} else {
+									body += "<td>" + col + "</td>";
+								}
+							});
+							body += "</tr>";
+						}
+					}
+				}
+			});
+			body += "</tbody>";
+
+			if (header.length > 0 || body.length > 0) {
+				Advanced_Data_Table_Update_View(view, true, {
+					ea_adv_data_table_static_html: header + body
+				});
+			}
+		}
+
+		textarea.value = "";
+	} else if (event.target.dataset.event == "ea:advTable:connect") {
+		var button = event.target;
+		button.innerHTML = "Connecting";
+
+		jQuery.ajax({
+			url: localize.ajaxurl,
+			type: "post",
+			data: {
+				action: "connect_remote_db",
+				security: localize.nonce,
+				host: model.attributes.settings.attributes.ea_adv_data_table_source_remote_host,
+				username: model.attributes.settings.attributes.ea_adv_data_table_source_remote_username,
+				password: model.attributes.settings.attributes.ea_adv_data_table_source_remote_password,
+				database: model.attributes.settings.attributes.ea_adv_data_table_source_remote_database
+			},
+			success: function(response) {
+				if (response.connected == true) {
+					button.innerHTML = "Connected";
+
+					Advanced_Data_Table_Update_View(view, true, {
+						ea_adv_data_table_source_remote_connected: true,
+						ea_adv_data_table_source_remote_tables: response.tables
+					});
+
+					// reload panel
+					panel.content.el.querySelector(".elementor-section-title").click();
+					panel.content.el.querySelector(".elementor-section-title").click();
+
+					var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+					select.length = 0;
+					response.tables.forEach(function(opt, index) {
+						select[index] = new Option(opt, opt);
+					});
+				} else {
+					button.innerHTML = "Failed";
+				}
+			},
+			error: function() {
+				button.innerHTML = "Failed";
+			}
+		});
+
+		setTimeout(function() {
+			button.innerHTML = "Connect";
+		}, 2000);
+	} else if (event.target.dataset.event == "ea:advTable:disconnect") {
+		Advanced_Data_Table_Update_View(view, true, {
+			ea_adv_data_table_source_remote_connected: false,
+			ea_adv_data_table_source_remote_tables: []
+		});
+
+		// reload panel
+		panel.content.el.querySelector(".elementor-section-title").click();
+		panel.content.el.querySelector(".elementor-section-title").click();
+	}
+};
+
+// Inline edit
+var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
+	var localRender = function() {
+		var interval = setInterval(function() {
+			if (view.el.querySelector(".ea-advanced-data-table")) {
+				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+
+				table.addEventListener("focusin", function(e) {
+					if (e.target.tagName.toLowerCase() == "textarea") {
+						advanced_data_table_active_cell = e.target;
+					}
+				});
+
+				table.addEventListener("input", function(e) {
+					if (e.target.tagName.toLowerCase() == "textarea") {
+						clearTimeout(advanced_data_table_timeout);
+
+						// clone current table
+						var origTable = table.cloneNode(true);
+
+						// remove editable area
+						origTable.querySelectorAll("th, td").forEach(function(el) {
+							var value = el.querySelector("textarea").value;
+							el.innerHTML = value;
+						});
+
+						// update table
+						Advanced_Data_Table_Update_View(view, false, {
+							ea_adv_data_table_static_html: origTable.innerHTML
+						});
+					}
+				});
+
+				// drag
+				table.addEventListener("mouseup", function(e) {
+					clearTimeout(advanced_data_table_timeout);
+
+					if (e.target.tagName.toLowerCase() === "th") {
+						if (table.classList.contains("ea-advanced-data-table-static")) {
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						} else {
+							var widths = [];
+
+							// collect width of th
+							table.querySelectorAll("th").forEach(function(el, index) {
+								widths[index] = el.style.width;
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_dynamic_th_width: widths
+							});
+						}
+					}
+				});
+
+				// clear style
+				table.addEventListener("dblclick", function(e) {
+					if (e.target.tagName.toLowerCase() === "th") {
+						e.stopPropagation();
+
+						e.target.style.width = "";
+					}
+				});
+
+				clearInterval(interval);
+			}
+		}, 10);
+	};
+
+	// init
+	localRender();
+
+	// after render
+	model.on("remote:render", function() {
+		localRender();
+	});
+
+	// export import handler
+	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
+	});
+
+	// fill remote db list
+	var initRemoteTables = function() {
+		setTimeout(function() {
+			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+
+			if (select != null && select.length == 0) {
+				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
+					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+				});
+			}
+		}, 50);
+	};
+
+	initRemoteTables();
+
+	panel.el.addEventListener("mousedown", function(e) {
+		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
+			initRemoteTables();
+		}
+	});
+};
+
+Advanced_Data_Table_Context_Menu = function(groups, element) {
+	if (
+		element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
+		element.options.model.attributes.settings.attributes.ea_adv_data_table_source == "static"
+	) {
+		groups.push({
+			name: "ea_advanced_data_table",
+			actions: [
+				{
+					name: "add_row_above",
+					title: "Add Row Above",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+							var row = table.insertRow(index);
+
+							for (var i = 0; i < table.rows[0].cells.length; i++) {
+								var cell = row.insertCell(i);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "add_row_below",
+					title: "Add Row Below",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
+							var row = table.insertRow(index);
+
+							for (var i = 0; i < table.rows[0].cells.length; i++) {
+								var cell = row.insertCell(i);
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "add_column_left",
+					title: "Add Column Left",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
+									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+								} else {
+									var cell = table.rows[i].insertCell(index);
+								}
+
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "add_column_right",
+					title: "Add Column Right",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
+									var cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+								} else {
+									var cell = table.rows[i].insertCell(index);
+								}
+
+								cell.innerHTML = '<textarea rows="1"></textarea>';
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "delete_row",
+					title: "Delete Row",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+
+							table.deleteRow(index);
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				},
+				{
+					name: "delete_column",
+					title: "Delete Column",
+					callback: function() {
+						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
+
+						if (advanced_data_table_active_cell !== null) {
+							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+
+							for (var i = 0; i < table.rows.length; i++) {
+								table.rows[i].deleteCell(index);
+							}
+
+							advanced_data_table_active_cell = null;
+
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function(el) {
+								var value = el.querySelector("textarea").value;
+								el.innerHTML = value;
+							});
+
+							// update model
+							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML
+							});
+						}
+					}
+				}
+			]
+		});
+	}
+
+	return groups;
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	if (isEditMode) {
+		elementor.hooks.addFilter("elements/widget/contextMenuGroups", Advanced_Data_Table_Context_Menu);
+		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", Advanced_Data_Table_Inline_Edit);
+	}
+
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
+});
+
+var eaelsvPosition = '';
+var eaelsvWidth = 0;
+var eaelsvHeight = 0;
+var eaelsvDomHeight = 0;
+var videoIsActive = 0;
+var eaelMakeItSticky = 0;
+var scrollHeight = 0;
+
+jQuery(window).on('elementor/frontend/init', function () {
+    
+    if (isEditMode) {
+        elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
+            var interval;
+
+            model.attributes.settings.on('change:eaelsv_sticky_width', function() {
+                clearTimeout(interval);
+
+                interval = setTimeout(function() {
+                    var height = Math.ceil(model.getSetting('eaelsv_sticky_width') / 1.78);
+
+                    model.attributes.settings.attributes.eaelsv_sticky_height = height;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_height"]').value = height;
+                }, 250);
+            });
+            
+            model.attributes.settings.on('change:eaelsv_sticky_height', function() {
+                clearTimeout(interval);
+
+                interval = setTimeout(function() {
+                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
+
+                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
+                }, 250);
+            });
+        });
+    }
+
+    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
+        $('.eaelsv-sticky-player-close', $scope).hide();
+
+        var element = $scope.find('.eael-sticky-video-player2');
+        var sticky = '';
+        var autoplay = '';
+        var overlay = '';
+
+        sticky = element.data('sticky');
+        autoplay = element.data('autoplay');
+        eaelsvPosition = element.data('position');
+        eaelsvHeight = element.data('sheight');
+        eaelsvWidth = element.data('swidth');
+        overlay = element.data('overlay');
+        scrollHeight = element.data('scroll_height');
+
+        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+
+        var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
+
+        // If element is Sticky video
+        if (sticky === 'yes') {
+            // If autoplay is enable
+            if ('yes' === autoplay && overlay === 'no') {
+                eaelsvDomHeight = GetDomElementHeight(element);
+                element.attr('id', 'videobox');
+
+                if (videoIsActive == 0) {
+                    videoIsActive = 1;
+                }
+            }
+
+            // When play event is cliked
+            // Do the sticky process
+            PlayerPlay(playerAbc, element);
+        }
+
+        // Overlay Operation Started
+        if (overlay === 'yes') {
+            var ovrlyElmnt = element.prev();
+
+            $(ovrlyElmnt).on('click', function () {
+                $(this).css('display', 'none');
+
+                if (
+                    $(this)
+                        .next()
+                        .data('autoplay') === 'yes'
+                ) {
+                    playerAbc.restart();
+                    eaelsvDomHeight = GetDomElementHeight(this);
+                    $(this)
+                        .next()
+                        .attr('id', 'videobox');
+                    videoIsActive = 1;
+                }
+            });
+        }
+        playerAbc.on('pause', function (event) {
+            if (videoIsActive == 1) {
+                videoIsActive = 0;
+            }
+        });
+
+        $('.eaelsv-sticky-player-close').on('click', function () {
+            element.removeClass('out').addClass('in');
+            $('.eael-sticky-video-player2').removeAttr('style');
+            videoIsActive = 0;
+        });
+
+        element.parent().css('height', element.height() + 'px');
+        $(window).resize(function() {
+            element.parent().css('height', element.height() + 'px');
+        });
+    });
+
+});
+
+jQuery(window).scroll(function () {
+    var scrollTop = jQuery(window).scrollTop();
+    var scrollBottom = jQuery(document).height() - scrollTop;
+
+    if (scrollBottom > jQuery(window).height() + 400) {
+        if (scrollTop >= eaelsvDomHeight) {
+            if (videoIsActive == 1) {
+                jQuery('#videobox')
+                    .find('.eaelsv-sticky-player-close')
+                    .css('display', 'block');
+                jQuery('#videobox')
+                    .removeClass('in')
+                    .addClass('out');
+                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+            }
+        } else {
+            jQuery('.eaelsv-sticky-player-close').hide();
+            jQuery('#videobox')
+                .removeClass('out')
+                .addClass('in');
+            jQuery('.eael-sticky-video-player2').removeAttr('style');
+        }
+    }
+});
+
+function GetDomElementHeight(elem) {
+    var contentHeight = jQuery(elem).parent().height();
+    var expHeight = ((scrollHeight * contentHeight) / 100);
+    var hght =
+        jQuery(elem)
+            .parent()
+            .offset().top + expHeight;
+
+    return hght;
+}
+
+function PositionStickyPlayer(p, h, w) {
+    if (p == 'top-left') {
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
+    }
+    if (p == 'top-right') {
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
+    }
+    if (p == 'bottom-right') {
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
+    }
+    if (p == 'bottom-left') {
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
+    }
+    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
+    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
+}
+
+function PlayerPlay(a, b) {
+    a.on('play', function (event) {
+        eaelsvDomHeight = GetDomElementHeight(b);
+        jQuery('.eael-sticky-video-player2').removeAttr('id');
+        jQuery('.eael-sticky-video-player2').removeClass('out');
+        b.attr('id', 'videobox');
+
+        videoIsActive = 1;
+        eaelsvPosition = b.data('position');
+        eaelsvHeight = b.data('sheight');
+        eaelsvWidth = b.data('swidth');
+    });
+}
+
+function RunStickyPlayer(elem) {
+    var ovrplyer = new Plyr('#' + elem);
+    ovrplyer.start();
+}
 
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
