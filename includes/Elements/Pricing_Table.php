@@ -9,7 +9,6 @@ if (!defined('ABSPATH')) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
@@ -1833,8 +1832,6 @@ foreach ($settings['eael_pricing_table_items'] as $item):
 
 	protected function render() {
 		$settings = $this->get_settings();
-		$pricing_table_image = $this->get_settings( 'eael_pricing_table_image' );
-		$pricing_table_image_url = Group_Control_Image_Size::get_attachment_image_src( $pricing_table_image['id'], 'thumbnail', $settings );
 		$target = $settings['eael_pricing_table_btn_link']['is_external'] ? 'target="_blank"' : '';
 		$nofollow = $settings['eael_pricing_table_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
 		$featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
