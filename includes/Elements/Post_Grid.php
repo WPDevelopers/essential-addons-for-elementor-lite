@@ -442,7 +442,7 @@ class Post_Grid extends Widget_Base
         $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
         
-        $settings_arry = [
+        $settings = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],
             'eael_show_title' => $settings['eael_show_title'],
