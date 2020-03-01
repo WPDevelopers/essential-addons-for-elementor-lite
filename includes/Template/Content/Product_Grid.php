@@ -10,10 +10,6 @@ trait Product_Grid
 {
     public static function render_template_($args, $settings)
     {
-        // error_log(print_r($args, 1));
-        var_dump($args);
-
-
         $query = new \WP_Query($args);
 
         ob_start();

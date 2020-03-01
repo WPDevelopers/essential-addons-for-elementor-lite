@@ -473,7 +473,7 @@ class Post_Grid extends Widget_Base
         
         echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
             <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="'.$settings["layout_mode"].'">
-                ' . self::render_template_($args, $settings) . '
+                ' . self::render_template_($args, $settings_arry) . '
             </div>
             <div class="clearfix"></div>
         </div>';
