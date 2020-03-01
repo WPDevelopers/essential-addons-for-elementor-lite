@@ -3,6 +3,7 @@
 }
 .eael-event-calendar-wrapper .fc table {
   margin: auto;
+  overflow: auto;
 }
 .eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td {
   border-top: 1px solid #ddd !important;

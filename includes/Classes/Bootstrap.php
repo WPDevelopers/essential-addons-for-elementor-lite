@@ -122,7 +122,9 @@ class Bootstrap
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_action('wp_footer', array($this, 'render_global_html'));
-        
+
+        add_filter('eael/event-calendar/source',[ $this,'eael_event_calendar_source' ] );
+
         // Admin
         if (is_admin()) {
             // Admin
