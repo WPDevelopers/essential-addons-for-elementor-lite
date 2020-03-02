@@ -1,4 +1,3 @@
-
 /*------------------------------*/
 /* 31. Advance Accordion
 /*------------------------------*/
@@ -314,118 +313,6 @@
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
   }
-}
-
-.ea-advanced-data-table-wrap * {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner {
-  width: 100%;
-  overflow-y: auto;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table th,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td {
-  background-color: transparent !important;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th {
-  position: relative;
-  cursor: pointer;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:before {
-  content: "";
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 5px solid #4d4d4d;
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  margin-top: -6px;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:after {
-  content: "";
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #4d4d4d;
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  margin-top: 1px;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.asc:before {
-  display: none;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.asc:after {
-  margin-top: -3px;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.desc:before {
-  margin-top: -3px;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.desc:after {
-  display: none;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th {
-  pointer-events: none;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th:before, .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th:after {
-  display: none;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-paginated tbody tr {
-  display: none;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th {
-  position: relative;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:before {
-  border: none;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:after {
-  content: "";
-  display: block;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 10px;
-  border: none;
-  cursor: col-resize;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th,
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td {
-  padding: 0;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th textarea,
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td textarea {
-  width: 100%;
-  min-width: 100px;
-  height: 100%;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  resize: none;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  vertical-align: middle;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
-  display: table-row;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-center {
-  text-align: center;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-right {
-  text-align: right;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table-pagination a {
-  display: inline-block;
 }
 
 /* ----------------------------------------- */
@@ -1826,6 +1713,7 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 }
 .eael-event-calendar-wrapper .fc table {
   margin: auto;
+  overflow: auto;
 }
 .eael-event-calendar-wrapper .fc-view table thead:first-child tr:first-child td {
   border-top: 1px solid #ddd !important;
@@ -9278,6 +9166,41 @@ span.eael-tooltip-content a {
   outline: none;
 }
 
+/*----------------------*/
+/* 12. weForm Styles
+/*----------------------*/
+.eael-weform-container input,
+.eael-weform-container textarea {
+  height: auto;
+  padding: 10px;
+}
+
+.eael-contact-form-btn-align-center .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  float: none;
+}
+
+.eael-contact-form-btn-align-left .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  float: left;
+  width: auto;
+}
+
+.eael-contact-form-btn-align-right .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
+  float: right;
+  width: auto;
+}
+
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
+.eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
+  max-width: 100%;
+}
+
 /* ------------------- */
 /* 23. WPForms
 /* ------------------- */
@@ -9320,39 +9243,116 @@ span.eael-tooltip-content a {
   width: 100%;
 }
 
-/*----------------------*/
-/* 12. weForm Styles
-/*----------------------*/
-.eael-weform-container input,
-.eael-weform-container textarea {
-  height: auto;
-  padding: 10px;
+.ea-advanced-data-table-wrap * {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
 }
-
-.eael-contact-form-btn-align-center .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
+.ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner {
+  width: 100%;
+  overflow-y: auto;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td {
+  background-color: transparent !important;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th {
+  position: relative;
+  cursor: pointer;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:before {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid #4d4d4d;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -6px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:after {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #4d4d4d;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: 1px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.asc:before {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.asc:after {
+  margin-top: -3px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.desc:before {
+  margin-top: -3px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.desc:after {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th {
+  pointer-events: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th:before, .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th:after {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-paginated tbody tr {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th {
+  position: relative;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:before {
+  border: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:after {
+  content: "";
   display: block;
-  float: none;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  border: none;
+  cursor: col-resize;
 }
-
-.eael-contact-form-btn-align-left .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  float: left;
-  width: auto;
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th,
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td {
+  padding: 0;
 }
-
-.eael-contact-form-btn-align-right .eael-weform-container ul.wpuf-form .wpuf-submit input[type="submit"] {
-  float: right;
-  width: auto;
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th textarea,
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td textarea {
+  width: 100%;
+  min-width: 100px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  resize: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  vertical-align: middle;
 }
-
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="text"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="password"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="email"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="url"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields input[type="number"],
-.eael-weform-container ul.wpuf-form li .wpuf-fields textarea {
-  max-width: 100%;
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
+  display: table-row;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-center {
+  text-align: center;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-right {
+  text-align: right;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-pagination a {
+  display: inline-block;
 }
 
 @charset "UTF-8";
