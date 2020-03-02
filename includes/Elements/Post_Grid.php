@@ -252,20 +252,20 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
-			'content_height',
-			[
-				'label' => esc_html__( 'Content Height', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units'	=> ['px', '%', 'em'],
-				'range' => [
-					'px' => [ 'max' => 300 ],
-					'%'	=> [ 'max'	=> 100 ]
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+            'content_height',
+            [
+                'label' => esc_html__('Content Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em'],
+                'range' => [
+                    'px' => ['max' => 300],
+                    '%' => ['max' => 100],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-grid-post-holder .eael-entry-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_post_grid_meta_style',
@@ -418,7 +418,7 @@ class Post_Grid extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-grid-post .eael-entry-overlay > i' => 'font-size: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-grid-post .eael-entry-overlay > img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .eael-grid-post .eael-entry-overlay > img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -441,7 +441,7 @@ class Post_Grid extends Widget_Base
         $settings = $this->get_settings();
         $settings = $this->fix_old_query($settings);
         $args = $this->eael_get_query_args($settings);
-        
+
         $settings_arry = [
             'eael_show_image' => $settings['eael_show_image'],
             'image_size' => $settings['image_size'],
@@ -457,9 +457,9 @@ class Post_Grid extends Widget_Base
             'read_more_button_text' => $settings['read_more_button_text'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
-            'excerpt_expanison_indicator'   => $settings['excerpt_expanison_indicator'],
-            'layout_mode'   => $settings['layout_mode'],
-            'orderby'       => $settings['orderby']
+            'excerpt_expanison_indicator' => $settings['excerpt_expanison_indicator'],
+            'layout_mode' => $settings['layout_mode'],
+            'orderby' => $settings['orderby'],
         ];
 
         $this->add_render_attribute(
@@ -467,30 +467,30 @@ class Post_Grid extends Widget_Base
             [
                 'id' => 'eael-post-grid-' . esc_attr($this->get_id()),
                 'class' => [
-                    'eael-post-grid-container'
-                ]
+                    'eael-post-grid-container',
+                ],
             ]
         );
-        
+
         echo '<div ' . $this->get_render_attribute_string('post_grid_wrapper') . '>
-            <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="'.$settings["layout_mode"].'">
+            <div class="eael-post-grid eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["layout_mode"] . '">
                 ' . self::render_template_($args, $settings_arry) . '
             </div>
             <div class="clearfix"></div>
         </div>';
-        
+
         if ('yes' == $settings['show_load_more']) {
-			if ($args['posts_per_page'] != '-1') {
-				echo '<div class="eael-load-more-button-wrap">
+            if ($args['posts_per_page'] != '-1') {
+                echo '<div class="eael-load-more-button-wrap">
 					<button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class($this) . '" data-args="' . http_build_query($args) . '" data-settings="' . http_build_query($settings_arry) . '" data-layout="masonry" data-page="1">
 						<div class="eael-btn-loader button__loader"></div>
 						<span>' . esc_html__($settings['show_load_more_text'], 'essential-addons-for-elementor-lite') . '</span>
 					</button>
 				</div>';
-			}
+            }
         }
-        
-        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) { ?>
+
+        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {?>
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
@@ -505,12 +505,12 @@ class Post_Grid extends Widget_Base
                                     layoutMode: $layout_mode,
                                     percentPosition: true
                                 });
-                        
+
                             // layout gal, while images are loading
                             $isotope_gallery.imagesLoaded().progress(function() {
                                 $isotope_gallery.isotope("layout");
                             });
-                            
+
                             $('.eael-grid-post', $gallery).resize(function() {
                                 $isotope_gallery.isotope('layout');
                             });
@@ -520,6 +520,6 @@ class Post_Grid extends Widget_Base
                 });
             </script>
             <?php
-        }
+}
     }
 }
