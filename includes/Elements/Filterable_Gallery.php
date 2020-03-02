@@ -2750,7 +2750,7 @@ class Filterable_Gallery extends Widget_Base
         if ($settings['pagination'] == 'yes') {?>
 			<div class="eael-filterable-gallery-loadmore">
 				<a href="#" <?php echo $this->get_render_attribute_string('load-more-button'); ?>>
-					<span class="eael-button-loader"></span>
+					<span class="eael-btn-loader"></span>
 					<?php if($settings['button_icon_position'] == 'before') {?>
                         <?php if($icon_is_new || $icon_migrated) { ?>
                             <?php if( isset($settings['load_more_icon_new']['value']['url']) ) : ?>
