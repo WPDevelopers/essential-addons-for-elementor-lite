@@ -2158,4 +2158,187 @@ trait Helper
         }
         return $typo_data;
     }
+
+    public function eael_language_code_list (){
+        return [
+            'af' => 'Afrikaans',
+            'sq' => 'Albanian',
+            'ar' => 'Arabic',
+            'eu' => 'Basque',
+            'bn' => 'Bengali',
+            'bs' => 'Bosnian',
+            'bg' => 'Bulgarian',
+            'ca' => 'Catalan',
+            'zh-cn' => 'Chinese',
+            'zh-tw' => 'Chinese-tw',
+            'hr' => 'Croatian',
+            'cs' => 'Czech',
+            'da' => 'Danish',
+            'nl' => 'Dutch',
+            'en' => 'English',
+            'et' => 'Estonian',
+            'fi' => 'Finnish',
+            'fr' => 'French',
+            'gl' => 'Galician',
+            'ka' => 'Georgian',
+            'de' => 'German',
+            'el' => 'Greek (Modern)',
+            'he' => 'Hebrew',
+            'hi' => 'Hindi',
+            'hu' => 'Hungarian',
+            'is' => 'Icelandic',
+            'io' => 'Ido',
+            'id' => 'Indonesian',
+            'it' => 'Italian',
+            'ja' => 'Japanese',
+            'kk' => 'Kazakh',
+            'ko' => 'Korean',
+            'lv' => 'Latvian',
+            'lb' => 'Letzeburgesch',
+            'lt' => 'Lithuanian',
+            'lu' => 'Luba-Katanga',
+            'mk' => 'Macedonian',
+            'mg' => 'Malagasy',
+            'ms' => 'Malay',
+            'ro' => 'Moldovan, Moldavian, Romanian',
+            'nb' => 'Norwegian Bokmål',
+            'nn' => 'Norwegian Nynorsk',
+            'fa' => 'Persian',
+            'pl' => 'Polish',
+            'pt' => 'Portuguese',
+            'ru' => 'Russian',
+            'sr' => 'Serbian',
+            'sk' => 'Slovak',
+            'sl' => 'Slovenian',
+            'es' => 'Spanish',
+            'sv' => 'Swedish',
+            'tr' => 'Turkish',
+            'uk' => 'Ukrainian',
+            'vi' => 'Vietnamese',
+        ];
+    }
+
+    /**
+     * @since  3.8.2
+     * @param $source
+     *
+     * @return array
+     */
+    public function eael_event_calendar_source($source)
+    {
+
+        if (!function_exists('is_plugin_active')) {
+            require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
+
+        if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
+            $source['the_events_calendar'] = __('The Events Calendar', 'essential-addons-for-elementor-lite');
+        }
+
+        return $source;
+    }
+
+    public function eael_adv_data_table_souce($source) {
+        if (!function_exists('is_plugin_active')) {
+            require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
+
+        if (is_plugin_active('ninja-tables/ninja-tables.php')) {
+            $source['ninja'] = __('Ninja Tables', 'essential-addons-for-elementor-lite');
+        }
+
+        return $source;
+    }
+
+    public function eael_list_ninja_tables()
+    {
+        if (!is_plugin_active('ninja-tables/ninja-tables.php')) {
+            return [];
+        }
+
+        $tables = get_posts([
+            'post_type' => 'ninja-table',
+            'post_status' => 'publish',
+            'posts_per_page' => '-1',
+        ]);
+
+        if (!empty($tables)) {
+            return wp_list_pluck($tables, 'post_title', 'ID');
+        }
+
+        return [];
+    }
+
+    public function advanced_data_table_source_control($wb) {
+        if (is_plugin_active('ninja-tables/ninja-tables.php')) {
+            $wb->add_control(
+                'ea_adv_data_table_source_ninja_table_id',
+                [
+                    'label' => esc_html__('Table ID', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => $this->eael_list_ninja_tables(),
+                    'condition' => [
+                        'ea_adv_data_table_source' => 'ninja',
+                    ],
+                ]
+            );
+        }
+    }
+
+    public function advanced_data_table_database_html($settings, $html)
+    {
+        global $wpdb;
+
+        $html = '';
+        $results = [];
+
+        if ($settings['ea_adv_data_table_source'] == 'ninja') {
+            $table_settings = get_post_meta($settings['ea_adv_data_table_source_ninja_table_id'], '_ninja_table_settings', true);
+            $table_headers = get_post_meta($settings['ea_adv_data_table_source_ninja_table_id'], '_ninja_table_columns', true);
+            $table_rows = $wpdb->get_results('SELECT `value` FROM `wp_ninja_table_items` WHERE `table_id`=' . $settings['ea_adv_data_table_source_ninja_table_id'], 'ARRAY_N');
+
+            if($table_headers) {
+                $results[] = wp_list_pluck($table_headers, 'name');
+            }
+            
+            if($table_rows) {
+                foreach($table_rows as $row) {
+                    $row = json_decode($row[0], true);
+
+                    array_push($results, array_values($row));
+                }
+            }
+        }
+        
+        if (!empty($results)) {
+            $html .= '<thead><tr>';
+            
+            if ($settings['ea_adv_data_table_source'] == 'ninja') {
+                if (!empty($table_settings) && isset($table_settings['hide_header_row']) && $table_settings['hide_header_row'] != true) {
+                    foreach ($results[0] as $key => $th) {
+                        $style = $settings['ea_adv_data_table_dynamic_th_width'] && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
+                        $html .= '<th' . $style . '>' . $th . '</th>';
+                    }
+                }
+            }
+
+            $html .= '</tr></thead><tbody>';
+
+            array_shift($results);
+
+            foreach ($results as $tr) {
+                $html .= '<tr>';
+                
+                foreach ($tr as $td) {
+                    $html .= '<td>' . $td . '</td>';
+                }
+
+                $html .= '</tr>';
+            }
+
+            $html .= '</tbody>';
+        }
+
+        return $html;
+    }
 }

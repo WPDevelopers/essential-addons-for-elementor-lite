@@ -1454,6 +1454,8 @@ class Advanced_Data_Table extends Widget_Base
 
         if ($settings['ea_adv_data_table_source'] == 'database' || $settings['ea_adv_data_table_source'] == 'remote' || $settings['ea_adv_data_table_source'] == 'google' || $settings['ea_adv_data_table_source'] == 'tablepress') {
             return apply_filters('eael/advanced-data-table/table_html/database', $settings, '');
+        } else if($settings['ea_adv_data_table_source'] == 'ninja') {
+            return apply_filters('eael/advanced-data-table/table_html/integration', $settings, '');
         }
 
         return $settings['ea_adv_data_table_static_html'];
