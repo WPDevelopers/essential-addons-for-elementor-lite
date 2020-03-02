@@ -1,41 +1,33 @@
 @-webkit-keyframes animateStripe {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
+    transform: translate(0, 0);
   }
   100% {
-    -webkit-transform: translate(35px, 0);
-            transform: translate(35px, 0);
+    transform: translate(35px, 0);
   }
 }
 @keyframes animateStripe {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
+    transform: translate(0, 0);
   }
   100% {
-    -webkit-transform: translate(35px, 0);
-            transform: translate(35px, 0);
+    transform: translate(35px, 0);
   }
 }
 @-webkit-keyframes animateStripeRTL {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
+    transform: translate(0, 0);
   }
   100% {
-    -webkit-transform: translate(-35px, 0);
-            transform: translate(-35px, 0);
+    transform: translate(-35px, 0);
   }
 }
 @keyframes animateStripeRTL {
   0% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
+    transform: translate(0, 0);
   }
   100% {
-    -webkit-transform: translate(-35px, 0);
-            transform: translate(-35px, 0);
+    transform: translate(-35px, 0);
   }
 }
 .eael-progressbar {
@@ -71,9 +63,7 @@
   width: 0;
   height: 12px;
   background-color: #000000;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  -webkit-transition: width 1500ms linear;
+  transform: translateY(-50%);
   transition: width 1500ms linear;
   overflow: hidden;
 }
@@ -133,13 +123,11 @@
 }
 
 .eael-progressbar-circle-half-left {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .eael-progressbar-circle-half-right {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
   visibility: hidden;
 }
 
@@ -147,8 +135,7 @@
   position: absolute;
   top: 50%;
   width: 100%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   text-align: center;
 }
 
@@ -165,18 +152,13 @@
 .eael-progressbar-half-circle .eael-progressbar-circle-half {
   -webkit-clip-path: inset(50% 0 0 0);
           clip-path: inset(50% 0 0 0);
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-  -webkit-transition: -webkit-transform 1500ms linear;
-  transition: -webkit-transform 1500ms linear;
+  transform: rotate(0deg);
   transition: transform 1500ms linear;
-  transition: transform 1500ms linear, -webkit-transform 1500ms linear;
 }
 .eael-progressbar-half-circle .eael-progressbar-circle-inner-content {
   top: initial;
   bottom: 0;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transform: translateY(0);
 }
 .eael-progressbar-half-circle .eael-progressbar-title {
   font-size: 16px;
