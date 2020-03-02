@@ -34,12 +34,9 @@
   top: 0;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   z-index: -1;
 }
 .eael-event-calendar-wrapper .eaelec-modal .eael-ec-modal-bg {
@@ -50,7 +47,6 @@
   width: 100%;
   background: #000000;
   opacity: 0;
-  -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
@@ -105,12 +101,9 @@
   height: 40px;
   width: 40px;
   text-align: center;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
 }
 .eael-event-calendar-wrapper .eaelec-modal-close > span {
@@ -281,8 +274,7 @@ span.fc-day-number {
 }
 .fc-unthemed .fc-timeGridDay-view .fc-time-grid .fc-event .fc-content,
 .fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
-  -webkit-box-pack: end;
-          justify-content: end;
+  justify-content: end;
 }
 .fc-unthemed .fc-timeGridWeek-view .fc-time-grid .fc-event .fc-content {
   display: inherit;
@@ -327,12 +319,9 @@ span.fc-day-number {
   min-height: 20px;
 }
 .fc-unthemed .fc-time-grid .fc-event .fc-content {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   height: 100%;
   width: 100%;
 }
@@ -347,27 +336,22 @@ span.fc-day-number {
 
 .eaelec-modal.eael-zoom-in {
   opacity: 0;
-  -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .eaelec-modal.eael-zoom-in .eaelec-modal-content {
   opacity: 0;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  -webkit-transform: scale(0.5);
-          transform: scale(0.5);
+  transform: scale(0.5);
 }
 .eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eael-ec-modal-bg {
   opacity: .7;
 }
 .eaelec-modal.eael-zoom-in.eael-ec-popup-ready .eaelec-modal-content {
   opacity: 1;
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
+  transform: scale(0.9);
 }
 .eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eaelec-modal-content {
-  -webkit-transform: scale(0.5);
-          transform: scale(0.5);
+  transform: scale(0.5);
   opacity: 0;
 }
 .eaelec-modal.eael-zoom-in.eael-ec-modal-removing .eael-ec-modal-bg {
