@@ -1,14 +1,14 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz, manzurahammed
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.8.0
+Stable tag: 3.8.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Ultimate elements library for Elementor WordPress Page Builder. 54+ Premium elements with endless customization options.
+The Essential plugin you install after Elementor! 65+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
 
 == Description ==
 
@@ -180,6 +180,21 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.8.2 - 01/03/2020 =
+- Added: [The Events Calendar](https://wordpress.org/plugins/the-events-calendar/) integration with [EA Event Calendar](https://essential-addons.com/elementor/event-calendar) element
+- Fixed : Post Grid warning
+- Fixed : Mailchimp button issue
+- Few minor bugfix and improvements
+
+= 3.8.1 - 24/02/2020 =
+- Added: Post Grid grid layout
+- Added: EA Pricing Table button show/hide option
+- Improvement: EA Gravity Form styling elements.
+- Fixed: EA Contact Form 7 issue with checkbox style
+- Fixed: EA Sticky Video issue with video bar in Astra theme
+- Fixed: Twitter Feed link redirect to 404
+- Fixed: Advanced Tabs support for EA Image Comparison Widget
 
 = 3.8.0 - 16/02/2020 =
 - Added: Table of Content global extension
