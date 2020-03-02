@@ -66,10 +66,10 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => [
+                'options' => apply_filters('eael/event-calendar/source', [
                     'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
-                    'google' => __('Google', 'essential-addons-for-elementor-lite'),
-                ],
+                    'google' => __('Google', 'essential-addons-for-elementor-lite')
+                ]),
                 'default' => 'manual',
             ]
         );
@@ -291,11 +291,102 @@ class Event_Calendar extends Widget_Base
 
         $this->end_controls_section();
 
+        //the events calendar
+
+        $this->start_controls_section(
+            'eael_event_the_events_calendar',
+            [
+                'label' => __('The Event Calendar', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+                'condition' => [
+                    'eael_event_calendar_type' => 'the_events_calendar',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_the_events_calendar_fetch',
+            [
+                'label' => __('Get Events', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'label_block' => true,
+                'default' => ['all'],
+                'options' => [
+                    'all' => __('All', 'essential-addons-for-elementor-lite'),
+                    'date_range' => __('Date Range', 'essential-addons-for-elementor-lite'),
+                ],
+                'render_type' => 'none',
+            ]
+        );
+
+
+
+        $this->add_control(
+            'eael_the_events_calendar_start_date',
+            [
+                'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'condition' => [
+                    'eael_the_events_calendar_fetch' => 'date_range',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_the_events_calendar_end_date',
+            [
+                'label' => __('End Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'default' => date('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
+                'condition' => [
+                    'eael_the_events_calendar_fetch' => 'date_range',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_the_events_calendar_category',
+            [
+                'label' => __('Event Category', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT2,
+                'multiple' => true,
+                'label_block' => true,
+                'default' => [],
+                'options' => $this->eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
+            ]
+        );
+
+        $this->add_control(
+            'eael_the_events_calendar_max_result',
+            [
+                'label' => __('Max Result', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 200,
+                'default' => 20,
+            ]
+        );
+
+        $this->end_controls_section();
+
+        do_action('eael/event-calendar/source/control', $this);
+
         $this->start_controls_section(
             'eael_event_calendar_section',
             [
                 'label' => __('Calendar', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_language',
+            [
+                'label'     => __('Language', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SELECT,
+                'options'   => $this->eael_language_code_list(),
+                'default'   => 'en'
             ]
         );
 
@@ -314,9 +405,36 @@ class Event_Calendar extends Widget_Base
                     '6' => __('Saturday', 'essential-addons-for-elementor-lite'),
                 ],
                 'default' => '0',
-                'separator' => 'before',
             ]
         );
+
+        $this->add_control(
+            'eael_event_global_bg_color',
+            [
+                'label' => __('Event Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#5725ff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_global_text_color',
+            [
+                'label' => __('Event Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'condition' => [
+                    'eael_event_calendar_type!' => 'manual',
+                ],
+            ]
+        );
+
+
+
+
 
         $this->end_controls_section();
 
@@ -1345,47 +1463,21 @@ class Event_Calendar extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $data = [];
-
         if ($settings['eael_event_calendar_type'] == 'google') {
-            $events = $this->get_google_calendar_events();
+            $data = $this->get_google_calendar_events($settings);
+        } else if ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
+            $data = $this->get_the_events_calendar_events($settings);
         } else {
-            $events = $settings['eael_event_items'];
+            $data = $this->get_manual_calendar_events( $settings );
         }
+
+        $local = $settings['eael_event_calendar_language'];
 
         echo '<div class="eael-event-calendar-wrapper">';
 
-        if ($events) {
-            $i = 0;
-
-            foreach ($events as $event) {
-                $start = $event["eael_event_start_date"];
-                $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
-                if ($event['eael_event_all_day'] == 'yes') {
-                    $start = $event["eael_event_start_date_allday"];
-                    $end = date('Y-m-d', strtotime("+1 days", strtotime($event["eael_event_end_date_allday"])));
-                }
-                $data[] = [
-                    'id' => $i,
-                    'title' => $event["eael_event_title"],
-                    'description' => $event["eael_event_description"],
-                    'start' => $start,
-                    'end' => $end,
-                    'borderColor' => !empty($event['eael_event_border_color']) ? $event['eael_event_border_color'] : '#10ecab',
-                    'textColor' => $event['eael_event_text_color'],
-                    'color' => $event['eael_event_bg_color'],
-                    'url' => $event["eael_event_link"]["url"],
-                    'allDay' => $event['eael_event_all_day'],
-                    'external' => $event['eael_event_link']['is_external'],
-                    'nofollow' => $event['eael_event_link']['nofollow'],
-                ];
-
-                $i++;
-            }
-        }
-
         echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
+            data-locale = "' . $local . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
             ' . $this->eaelec_load_event_details() . '
@@ -1413,20 +1505,57 @@ class Event_Calendar extends Widget_Base
         </div>';
     }
 
+    public function get_manual_calendar_events( $settings ){
+        $events = $settings['eael_event_items'];
+        $data = [];
+        if ($events) {
+            $i = 0;
+
+            foreach ($events as $event) {
+
+                if ($event['eael_event_all_day'] == 'yes') {
+                    $start = $event["eael_event_start_date_allday"];
+                    $end = date('Y-m-d', strtotime("+1 days", strtotime($event["eael_event_end_date_allday"])));
+                }else{
+                    $start = $event["eael_event_start_date"];
+                    $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
+                }
+
+                $data[] = [
+                    'id' => $i,
+                    'title' => $event["eael_event_title"],
+                    'description' => $event["eael_event_description"],
+                    'start' => $start,
+                    'end' => $end,
+                    'borderColor' => !empty($event['eael_event_border_color']) ? $event['eael_event_border_color'] : '#10ecab',
+                    'textColor' => $event['eael_event_text_color'],
+                    'color' => $event['eael_event_bg_color'],
+                    'url' => $event["eael_event_link"]["url"],
+                    'allDay' => $event['eael_event_all_day'],
+                    'external' => $event['eael_event_link']['is_external'],
+                    'nofollow' => $event['eael_event_link']['nofollow'],
+                ];
+
+                $i++;
+            }
+        }
+        return $data;
+    }
+
     /**
      * get google calendar events
      *
+     * @param $settings
+     *
      * @return array
      */
-    public function get_google_calendar_events()
+    public function get_google_calendar_events($settings)
     {
-        $settings = $this->get_settings_for_display();
 
         if (empty($settings['eael_event_google_api_key']) && empty($settings['eael_event_calendar_id'])) {
             return [];
         }
 
-        $api_key = $settings['eael_event_google_api_key'];
         $calendar_id = urlencode($settings['eael_event_calendar_id']);
         $base_url = "https://www.googleapis.com/calendar/v3/calendars/{$calendar_id}/events";
 
@@ -1458,41 +1587,91 @@ class Event_Calendar extends Widget_Base
         }
 
         $data = json_decode($data);
-
         if (isset($data->items)) {
             $calendar_data = [];
             foreach ($data->items as $key => $item) {
-                $all_day = '';
 
+                $all_day = '';
                 if (isset($item->start->date)) {
+                    $all_day = 'yes';
                     $ev_start_date = $item->start->date;
                     $ev_end_date = $item->end->date;
-                    $ev_end_date = date('Y-m-d', strtotime("-1 days", strtotime($ev_end_date)));
                 } else {
                     $ev_start_date = $item->start->dateTime;
                     $ev_end_date = $item->end->dateTime;
                 }
 
                 $calendar_data[] = [
-                    'eael_event_title' => $item->summary,
-                    'eael_event_description' => isset($item->description) ? $item->description : '',
-                    'eael_event_start_date' => $ev_start_date,
-                    'eael_event_end_date' => $ev_end_date,
-                    'eael_event_border_color' => '#6231FF',
-                    'eael_event_text_color' => '#242424',
-                    'eael_event_bg_color' => '#FFF',
-                    'eael_event_all_day' => $all_day,
-                    'eael_event_link' => [
-                        'is_external' => '',
-                        'nofollow' => '',
-                        'url' => $item->htmlLink,
-                    ],
+                    'id' => ++$key,
+                    'title' => $item->summary,
+                    'description' => isset($item->description) ? $item->description : '',
+                    'start' => $ev_start_date,
+                    'end' => $ev_end_date,
+                    'borderColor' => '#6231FF',
+                    'textColor' => $settings['eael_event_global_text_color'],
+                    'color' => $settings['eael_event_global_bg_color'],
+                    'url' => $item->htmlLink,
+                    'allDay' => $all_day,
+                    'external' => 'on',
+                    'nofollow' => 'on',
                 ];
             }
 
             set_transient($transient_key, $calendar_data, 1 * HOUR_IN_SECONDS);
         }
 
+        return $calendar_data;
+    }
+
+    /**
+     * @since  3.8.2
+     * @param $settings
+     *
+     * @return array
+     */
+    public function get_the_events_calendar_events($settings)
+    {
+
+        if (!function_exists('tribe_get_events')) {
+            return [];
+        }
+        $arg = [
+            'posts_per_page' => $settings['eael_the_events_calendar_max_result'],
+        ];
+        if ($settings['eael_the_events_calendar_fetch'] == 'date_range') {
+            $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
+            $arg['end_date'] = $settings['eael_the_events_calendar_end_date'];
+        }
+        if (!empty($settings['eael_the_events_calendar_category'])) {
+            $arg['tax_query'] = [['taxonomy' => 'tribe_events_cat', 'field' => 'id', 'terms' => $settings['eael_the_events_calendar_category']]];
+        }
+        $events = tribe_get_events($arg);
+        if (empty($events)) {
+            return [];
+        }
+        $calendar_data = [];
+        foreach ($events as $key => $event) {
+            $date_format = 'Y-m-d';
+            $all_day = 'yes';
+            if (!tribe_event_is_all_day($event->ID)) {
+                $date_format .= ' H:i';
+                $all_day = '';
+            }
+            $calendar_data[] = [
+                'id' => ++$key,
+                'title' => $event->post_title,
+                'description' => $event->post_content,
+                'start' => tribe_get_start_date($event->ID, true, $date_format),
+                'end' => tribe_get_end_date($event->ID, true, $date_format),
+                'borderColor' => '#6231FF',
+                'textColor' => $settings['eael_event_global_text_color'],
+                'color' => $settings['eael_event_global_bg_color'],
+                'url' => get_the_permalink($event->ID),
+                'allDay' => $all_day,
+                'external' => 'on',
+                'nofollow' => 'on',
+            ];
+        }
         return $calendar_data;
     }
 }
