@@ -10,6 +10,7 @@ trait Post_Grid
 {
     public static function render_template_($args, $settings)
     {
+
         $query = new \WP_Query($args);
          
         ob_start();
@@ -57,7 +58,7 @@ trait Post_Grid
                                     if ($settings['eael_show_excerpt']) {
                                         echo '<div class="eael-entry-content">
                                             <div class="eael-grid-post-excerpt">
-                                                <p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['expanison_indicator']) . '</p>';
+                                                <p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
                                                 if ($settings['eael_show_read_more_button']) {
                                                     echo '<a href="' . get_the_permalink() . '" class="eael-post-elements-readmore-btn">' . esc_attr($settings['read_more_button_text']) . '</a>';
                                                 }
