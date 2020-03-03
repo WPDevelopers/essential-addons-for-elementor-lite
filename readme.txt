@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.8.2
+Stable tag: 3.8.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -180,6 +180,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.8.3 - 03/03/2020 =
+- Added: CTA box spacing control
+- Improvement : EA CTA > Add option to change heading tag
+- Fixed : Post Grid issue
+- Fixed : EA Post Carousel & EA Post Timeline > are not showing excerpt
+- Fixed : EA Post Grid | Expansion indicator disappearing issue
+- Few minor bugfix and improvements
 
 = 3.8.2 - 01/03/2020 =
 - Added: [The Events Calendar](https://wordpress.org/plugins/the-events-calendar/) integration with [EA Event Calendar](https://essential-addons.com/elementor/event-calendar) element
