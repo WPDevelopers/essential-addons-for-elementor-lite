@@ -559,6 +559,20 @@ trait Helper
                     ],
                 ]
             );
+            
+            $this->add_control(
+                'excerpt_expanison_indicator',
+                [
+                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::TEXT,
+                    'label_block' => false,
+                    'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
+                    'condition' => [
+                        'eael_show_excerpt' => 'yes',
+                        'eael_content_timeline_choose' => 'dynamic'
+                    ],
+                ]
+            );
         }else {
             $this->add_control(
                 'eael_excerpt_length',
@@ -571,21 +585,20 @@ trait Helper
                     ]
                 ]
             );
-        }
 
-        $this->add_control(
-            'excerpt_expanison_indicator',
-            [
-                'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'label_block' => false,
-                'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'eael_show_excerpt' => 'yes',
-                    'eael_content_timeline_choose' => 'dynamic'
-                ],
-            ]
-        );
+            $this->add_control(
+                'excerpt_expanison_indicator',
+                [
+                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::TEXT,
+                    'label_block' => false,
+                    'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
+                    'condition' => [
+                        'eael_show_excerpt' => 'yes'
+                    ],
+                ]
+            );
+        }
 
         $this->add_control(
             'eael_show_read_more',
