@@ -284,8 +284,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Max Result', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'min' => 1,
-                'max' => 100,
-                'default' => 10,
+                'default' => 100,
             ]
         );
 
@@ -363,8 +362,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Max Result', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
                 'min' => 1,
-                'max' => 200,
-                'default' => 20,
+                'default' => 100,
             ]
         );
 
@@ -1566,7 +1564,8 @@ class Event_Calendar extends Widget_Base
             'key' => $settings['eael_event_google_api_key'],
             'maxResults' => $settings['eael_google_calendar_max_result'],
             'timeMin' => urlencode(date('c', $start_date)),
-            '$calendar_id' => urlencode($settings['eael_event_calendar_id']),
+            'singleEvents' => 'true',
+            'calendar_id' => urlencode($settings['eael_event_calendar_id']),
         ];
 
         if (!empty($end_date) && $end_date > $start_date) {
@@ -1579,7 +1578,9 @@ class Event_Calendar extends Widget_Base
         if (!empty($calendar_data)) {
             return $calendar_data;
         }
-
+        if(isset($arg['calendar_id'])){
+            unset($arg['calendar_id']);
+        }
         $data = wp_remote_retrieve_body(wp_remote_get(add_query_arg($arg, $base_url)));
 
         if (is_wp_error($data)) {
@@ -1589,8 +1590,11 @@ class Event_Calendar extends Widget_Base
         $data = json_decode($data);
         if (isset($data->items)) {
             $calendar_data = [];
-            foreach ($data->items as $key => $item) {
 
+            foreach ($data->items as $key => $item) {
+                if($item->status !== 'confirmed'){
+                    continue;
+                }
                 $all_day = '';
                 if (isset($item->start->date)) {
                     $all_day = 'yes';
