@@ -7,15 +7,20 @@
 }
 
 .eael-infobox .infobox-icon .infobox-icon-wrap {
+  display: -webkit-box;
   display: flex;
   width: 100%;
   height: auto;
+  -webkit-transition: .3s;
   transition: .3s;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
 }
 
 .eael-infobox .infobox-icon .infobox-icon-wrap i {
+  -webkit-transition: .3s;
   transition: .3s;
 }
 
@@ -57,9 +62,12 @@
 }
 
 .eael-infobox-icon-bg-shape-radius .infobox-icon .infobox-icon-wrap {
+  display: -webkit-box;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
 }
 
 .eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap,
@@ -70,13 +78,15 @@
 .eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap i,
 .eael-infobox-icon-bg-shape-circle .infobox-icon .infobox-icon-wrap i {
   margin-top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 
 /*--- Infobox Button ---*/
 .eael-infobox .infobox-button a.eael-infobox-button {
   display: inline-block;
   padding: 5px 10px;
+  -webkit-transition: all 300ms ease-in-out 0s;
   transition: all 300ms ease-in-out 0s;
 }
 
@@ -84,36 +94,46 @@
 .eael-infobox-content-align-left.eael-infobox-icon-bg-shape-square .infobox-icon,
 .eael-infobox-content-align-left.eael-infobox-icon-bg-shape-radius .infobox-icon,
 .eael-infobox-content-align-left.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: -webkit-box;
   display: flex;
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+          justify-content: flex-start;
 }
 
 .eael-infobox-content-align-center.eael-infobox-icon-bg-shape-square .infobox-icon,
 .eael-infobox-content-align-center.eael-infobox-icon-bg-shape-radius .infobox-icon,
 .eael-infobox-content-align-center.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: -webkit-box;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+          justify-content: center;
 }
 
 .eael-infobox-content-align-right.eael-infobox-icon-bg-shape-square .infobox-icon,
 .eael-infobox-content-align-right.eael-infobox-icon-bg-shape-radius .infobox-icon,
 .eael-infobox-content-align-right.eael-infobox-icon-bg-shape-circle .infobox-icon {
+  display: -webkit-box;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+          justify-content: flex-end;
 }
 
 /*--- Image/Icon On Left ---*/
 .eael-infobox.icon-on-left {
   position: relative;
   z-index: 0;
+  display: -webkit-box;
   display: flex;
 }
 
 .eael-infobox.icon-on-right .infobox-icon-wrap,
 .eael-infobox.icon-on-left .infobox-icon-wrap {
-  justify-content: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  display: -webkit-box !important;
   display: flex !important;
-  align-items: center;
+  -webkit-box-align: center;
+          align-items: center;
 }
 
 .eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap {
@@ -130,12 +150,14 @@
 
 .eael-infobox.icon-on-left .infobox-icon .infobox-icon-wrap i {
   margin-top: 0px;
-  transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
 }
 
 .eael-infobox.icon-on-left .infobox-content {
   padding-left: 15px;
-  flex: 1 1 auto;
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
 }
 
 .eael-infobox.icon-on-left .infobox-content .title {
@@ -147,8 +169,11 @@
 .eael-infobox.icon-on-right {
   position: relative;
   z-index: 0;
+  display: -webkit-box;
   display: flex;
-  flex-direction: row-reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+          flex-direction: row-reverse;
 }
 
 .eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap {
@@ -162,13 +187,15 @@
 
 .eael-infobox.icon-on-right .infobox-icon .infobox-icon-wrap i {
   margin-top: 0px;
-  transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
 }
 
 .eael-infobox.icon-on-right .infobox-content {
   padding-right: 15px;
   text-align: right;
-  flex: 1 1 auto;
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
   box-sizing: border-box;
 }
 
@@ -179,6 +206,7 @@
 
 /*--- Imgae Circle On Top ---*/
 .eael-infobox .infobox-icon img {
+  -webkit-transition: all 300ms ease-in-out 0s;
   transition: all 300ms ease-in-out 0s;
 }
 
