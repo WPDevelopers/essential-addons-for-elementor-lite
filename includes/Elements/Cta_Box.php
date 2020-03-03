@@ -452,6 +452,18 @@ class Cta_Box extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'eael_cta_title_margin',
+            [
+                'label' => esc_html__('Space', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_cta_content_heading',
             [
