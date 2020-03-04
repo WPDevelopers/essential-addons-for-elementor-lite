@@ -463,9 +463,8 @@ class Advanced_Data_Table extends Widget_Base
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-static) th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-static) th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-static) td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-editable) th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable:not(.ea-advanced-data-table-static) th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable th textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -843,7 +842,8 @@ class Advanced_Data_Table extends Widget_Base
                     'isLinked' => true,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-static) td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-editable) td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable:not(.ea-advanced-data-table-static) td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable td textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1140,12 +1140,12 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'desktop_default' => [
-                    'unit' => '%',
-                    'size' => 50,
+                    'unit' => 'px',
+                    'size' => 100,
                 ],
                 'tablet_default' => [
-                    'unit' => '%',
-                    'size' => 50,
+                    'unit' => 'px',
+                    'size' => 100,
                 ],
                 'mobile_default' => [
                     'unit' => '%',
@@ -1465,6 +1465,12 @@ class Advanced_Data_Table extends Widget_Base
             'data-id' => $this->get_id(),
         ]);
 
+        if (Plugin::$instance->editor->is_edit_mode()) {
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table-editable",
+            ]);
+        }
+
         if ($settings['ea_adv_data_table_sort'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-sortable",
@@ -1516,13 +1522,7 @@ class Advanced_Data_Table extends Widget_Base
                     </div>';
                 }
             } else {
-                if ($settings['ea_adv_data_table_pagination_type'] == 'button') {
-                    echo '<div class="ea-advanced-data-table-pagination clearfix"></div>';
-                } else {
-                    echo '<div class="ea-advanced-data-table-pagination clearfix">
-                        <select></select>
-                    </div>';
-                }
+                echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . $settings['ea_adv_data_table_pagination_type'] . ' clearfix"></div>';
             }
         }
 
