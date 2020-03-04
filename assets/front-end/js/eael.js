@@ -1,3 +1,274 @@
+/*!
+ * Countdown v0.1.0
+ * https://github.com/fengyuanchen/countdown
+ *
+ * Copyright 2014 Fengyuan Chen
+ * Released under the MIT license
+ */
+
+(function (factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD. Register as anonymous module.
+        define(["jquery"], factory);
+    } else {
+        // Browser globals.
+        factory(jQuery);
+    }
+})(function ($) {
+
+    "use strict";
+
+    var Countdown = function (element, options) {
+            this.$element = $(element);
+            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
+            this.init();
+        };
+
+    Countdown.prototype = {
+        constructor: Countdown,
+
+        init: function () {
+            var content = this.$element.html(),
+                date = new Date(this.defaults.date || content);
+
+            if (date.getTime()) {
+                this.content = content;
+                this.date = date;
+                this.find();
+
+                if (this.defaults.autoStart) {
+                    this.start();
+                }
+            }
+        },
+
+        find: function () {
+            var $element = this.$element;
+
+            this.$days = $element.find("[data-days]");
+            this.$hours = $element.find("[data-hours]");
+            this.$minutes = $element.find("[data-minutes]");
+            this.$seconds = $element.find("[data-seconds]");
+
+            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
+                this.found = true;
+            }
+        },
+
+        reset: function () {
+            if (this.found) {
+                this.output("days");
+                this.output("hours");
+                this.output("minutes");
+                this.output("seconds");
+            } else {
+                this.output();
+            }
+        },
+
+        ready: function () {
+            var date = this.date,
+                decisecond = 100,
+                second = 1000,
+                minute = 60000,
+                hour = 3600000,
+                day = 86400000,
+                remainder = {},
+                diff;
+
+            if (!date) {
+                return false;
+            }
+
+            diff = date.getTime() - (new Date()).getTime();
+
+            if (diff <= 0) {
+                this.end();
+                return false;
+            }
+
+            remainder.days = diff;
+            remainder.hours = remainder.days % day;
+            remainder.minutes = remainder.hours % hour;
+            remainder.seconds = remainder.minutes % minute;
+            remainder.milliseconds = remainder.seconds % second;
+
+            this.days = Math.floor(remainder.days / day);
+            this.hours = Math.floor(remainder.hours / hour);
+            this.minutes = Math.floor(remainder.minutes / minute);
+            this.seconds = Math.floor(remainder.seconds / second);
+            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
+
+            return true;
+        },
+
+        start: function () {
+            if (!this.active && this.ready()) {
+                this.active = true;
+                this.reset();
+                this.autoUpdate = this.defaults.fast ?
+                    setInterval($.proxy(this.fastUpdate, this), 100) :
+                    setInterval($.proxy(this.update, this), 1000);
+            }
+        },
+
+        stop: function () {
+            if (this.active) {
+                this.active = false;
+                clearInterval(this.autoUpdate);
+            }
+        },
+
+        end: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.days = 0;
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.deciseconds = 0;
+            this.reset();
+            this.defaults.end();
+        },
+
+        destroy: function () {
+            if (!this.date) {
+                return;
+            }
+
+            this.stop();
+
+            this.$days = null;
+            this.$hours = null;
+            this.$minutes = null;
+            this.$seconds = null;
+
+            this.$element.empty().html(this.content);
+            this.$element.removeData("countdown");
+        },
+
+        fastUpdate: function () {
+            if (--this.deciseconds >= 0) {
+                this.output("deciseconds");
+            } else {
+                this.deciseconds = 9;
+                this.update();
+            }
+        },
+
+        update: function () {
+            if (--this.seconds >= 0) {
+                this.output("seconds");
+            } else {
+                this.seconds = 59;
+
+                if (--this.minutes >= 0) {
+                    this.output("minutes");
+                } else {
+                    this.minutes = 59;
+
+                    if (--this.hours >= 0) {
+                        this.output("hours");
+                    } else {
+                        this.hours = 23;
+
+                        if (--this.days >= 0) {
+                            this.output("days");
+                        } else {
+                            this.end();
+                        }
+                    }
+                }
+            }
+        },
+
+        output: function (type) {
+            if (!this.found) {
+                this.$element.empty().html(this.template());
+                return;
+            }
+
+            switch (type) {
+                case "deciseconds":
+                    this.$seconds.text(this.getSecondsText());
+                    break;
+
+                case "seconds":
+                    this.$seconds.text(this.seconds);
+                    break;
+
+                case "minutes":
+                    this.$minutes.text(this.minutes);
+                    break;
+
+                case "hours":
+                    this.$hours.text(this.hours);
+                    break;
+
+                case "days":
+                    this.$days.text(this.days);
+                    break;
+
+                // No default
+            }
+        },
+
+        template: function () {
+            return this.defaults.text
+                    .replace("%s", this.days)
+                    .replace("%s", this.hours)
+                    .replace("%s", this.minutes)
+                    .replace("%s", this.getSecondsText());
+        },
+
+        getSecondsText: function () {
+            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
+        }
+    };
+
+    // Default settings
+    Countdown.defaults = {
+        autoStart: true,
+        date: null,
+        fast: false,
+        end: $.noop,
+        text: "%s days, %s hours, %s minutes, %s seconds"
+    };
+
+    // Set default settings
+    Countdown.setDefaults = function (options) {
+        $.extend(Countdown.defaults, options);
+    };
+
+    // Register as jQuery plugin
+    $.fn.countdown = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data("countdown");
+
+            if (!data) {
+                $this.data("countdown", (data = new Countdown(this, options)));
+            }
+
+            if (typeof options === "string" && $.isFunction(data[options])) {
+                data[options]();
+            }
+        });
+    };
+
+    $.fn.countdown.constructor = Countdown;
+    $.fn.countdown.setDefaults = Countdown.setDefaults;
+
+    $(function () {
+        $("[countdown]").countdown();
+    });
+
+});
+
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34350,277 +34621,6 @@ typeof navigator === "object" && (function (global, factory) {
   return Plyr;
 
 }));
-/*!
- * Countdown v0.1.0
- * https://github.com/fengyuanchen/countdown
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
-(function (factory) {
-    if (typeof define === "function" && define.amd) {
-        // AMD. Register as anonymous module.
-        define(["jquery"], factory);
-    } else {
-        // Browser globals.
-        factory(jQuery);
-    }
-})(function ($) {
-
-    "use strict";
-
-    var Countdown = function (element, options) {
-            this.$element = $(element);
-            this.defaults = $.extend({}, Countdown.defaults, this.$element.data(), $.isPlainObject(options) ? options : {});
-            this.init();
-        };
-
-    Countdown.prototype = {
-        constructor: Countdown,
-
-        init: function () {
-            var content = this.$element.html(),
-                date = new Date(this.defaults.date || content);
-
-            if (date.getTime()) {
-                this.content = content;
-                this.date = date;
-                this.find();
-
-                if (this.defaults.autoStart) {
-                    this.start();
-                }
-            }
-        },
-
-        find: function () {
-            var $element = this.$element;
-
-            this.$days = $element.find("[data-days]");
-            this.$hours = $element.find("[data-hours]");
-            this.$minutes = $element.find("[data-minutes]");
-            this.$seconds = $element.find("[data-seconds]");
-
-            if ((this.$days.length + this.$hours.length + this.$minutes.length + this.$seconds.length) > 0) {
-                this.found = true;
-            }
-        },
-
-        reset: function () {
-            if (this.found) {
-                this.output("days");
-                this.output("hours");
-                this.output("minutes");
-                this.output("seconds");
-            } else {
-                this.output();
-            }
-        },
-
-        ready: function () {
-            var date = this.date,
-                decisecond = 100,
-                second = 1000,
-                minute = 60000,
-                hour = 3600000,
-                day = 86400000,
-                remainder = {},
-                diff;
-
-            if (!date) {
-                return false;
-            }
-
-            diff = date.getTime() - (new Date()).getTime();
-
-            if (diff <= 0) {
-                this.end();
-                return false;
-            }
-
-            remainder.days = diff;
-            remainder.hours = remainder.days % day;
-            remainder.minutes = remainder.hours % hour;
-            remainder.seconds = remainder.minutes % minute;
-            remainder.milliseconds = remainder.seconds % second;
-
-            this.days = Math.floor(remainder.days / day);
-            this.hours = Math.floor(remainder.hours / hour);
-            this.minutes = Math.floor(remainder.minutes / minute);
-            this.seconds = Math.floor(remainder.seconds / second);
-            this.deciseconds = Math.floor(remainder.milliseconds / decisecond);
-
-            return true;
-        },
-
-        start: function () {
-            if (!this.active && this.ready()) {
-                this.active = true;
-                this.reset();
-                this.autoUpdate = this.defaults.fast ?
-                    setInterval($.proxy(this.fastUpdate, this), 100) :
-                    setInterval($.proxy(this.update, this), 1000);
-            }
-        },
-
-        stop: function () {
-            if (this.active) {
-                this.active = false;
-                clearInterval(this.autoUpdate);
-            }
-        },
-
-        end: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.days = 0;
-            this.hours = 0;
-            this.minutes = 0;
-            this.seconds = 0;
-            this.deciseconds = 0;
-            this.reset();
-            this.defaults.end();
-        },
-
-        destroy: function () {
-            if (!this.date) {
-                return;
-            }
-
-            this.stop();
-
-            this.$days = null;
-            this.$hours = null;
-            this.$minutes = null;
-            this.$seconds = null;
-
-            this.$element.empty().html(this.content);
-            this.$element.removeData("countdown");
-        },
-
-        fastUpdate: function () {
-            if (--this.deciseconds >= 0) {
-                this.output("deciseconds");
-            } else {
-                this.deciseconds = 9;
-                this.update();
-            }
-        },
-
-        update: function () {
-            if (--this.seconds >= 0) {
-                this.output("seconds");
-            } else {
-                this.seconds = 59;
-
-                if (--this.minutes >= 0) {
-                    this.output("minutes");
-                } else {
-                    this.minutes = 59;
-
-                    if (--this.hours >= 0) {
-                        this.output("hours");
-                    } else {
-                        this.hours = 23;
-
-                        if (--this.days >= 0) {
-                            this.output("days");
-                        } else {
-                            this.end();
-                        }
-                    }
-                }
-            }
-        },
-
-        output: function (type) {
-            if (!this.found) {
-                this.$element.empty().html(this.template());
-                return;
-            }
-
-            switch (type) {
-                case "deciseconds":
-                    this.$seconds.text(this.getSecondsText());
-                    break;
-
-                case "seconds":
-                    this.$seconds.text(this.seconds);
-                    break;
-
-                case "minutes":
-                    this.$minutes.text(this.minutes);
-                    break;
-
-                case "hours":
-                    this.$hours.text(this.hours);
-                    break;
-
-                case "days":
-                    this.$days.text(this.days);
-                    break;
-
-                // No default
-            }
-        },
-
-        template: function () {
-            return this.defaults.text
-                    .replace("%s", this.days)
-                    .replace("%s", this.hours)
-                    .replace("%s", this.minutes)
-                    .replace("%s", this.getSecondsText());
-        },
-
-        getSecondsText: function () {
-            return this.active && this.defaults.fast ? (this.seconds + "." + this.deciseconds) : this.seconds;
-        }
-    };
-
-    // Default settings
-    Countdown.defaults = {
-        autoStart: true,
-        date: null,
-        fast: false,
-        end: $.noop,
-        text: "%s days, %s hours, %s minutes, %s seconds"
-    };
-
-    // Set default settings
-    Countdown.setDefaults = function (options) {
-        $.extend(Countdown.defaults, options);
-    };
-
-    // Register as jQuery plugin
-    $.fn.countdown = function (options) {
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data("countdown");
-
-            if (!data) {
-                $this.data("countdown", (data = new Countdown(this, options)));
-            }
-
-            if (typeof options === "string" && $.isFunction(data[options])) {
-                data[options]();
-            }
-        });
-    };
-
-    $.fn.countdown.constructor = Countdown;
-    $.fn.countdown.setDefaults = Countdown.setDefaults;
-
-    $(function () {
-        $("[countdown]").countdown();
-    });
-
-});
-
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -38981,6 +38981,67 @@ return $;
     });
 })(jQuery);
 
+var AdvAccordionHandler = function($scope, $) {
+    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
+        $accordionHeader = $scope.find(".eael-accordion-header"),
+        $accordionType = $advanceAccordion.data("accordion-type"),
+        $accordionSpeed = $advanceAccordion.data("toogle-speed");
+
+    // Open default actived tab
+    $accordionHeader.each(function() {
+        if ($(this).hasClass("active-default")) {
+            $(this).addClass("show active");
+            $(this)
+                .next()
+                .slideDown($accordionSpeed);
+        }
+    });
+
+    // Remove multiple click event for nested accordion
+    $accordionHeader.unbind("click");
+
+    $accordionHeader.click(function(e) {
+        e.preventDefault();
+
+        var $this = $(this);
+
+        if ($accordionType === "accordion") {
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-header")
+                    .removeClass("show active");
+                $this
+                    .parent()
+                    .parent()
+                    .find(".eael-accordion-content")
+                    .slideUp($accordionSpeed);
+                $this.toggleClass("show active");
+                $this.next().slideToggle($accordionSpeed);
+            }
+        } else {
+            // For acccordion type 'toggle'
+            if ($this.hasClass("show")) {
+                $this.removeClass("show active");
+                $this.next().slideUp($accordionSpeed);
+            } else {
+                $this.addClass("show active");
+                $this.next().slideDown($accordionSpeed);
+            }
+        }
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-adv-accordion.default",
+        AdvAccordionHandler
+    );
+});
+
 var AdvanceTabHandler = function($scope, $) {
     var $currentTab = $scope.find(".eael-advance-tabs"),
         $currentTabId = "#" + $currentTab.attr("id").toString();
@@ -39078,1424 +39139,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         AdvanceTabHandler
     );
 });
-
-var AdvAccordionHandler = function($scope, $) {
-    var $advanceAccordion = $scope.find(".eael-adv-accordion"),
-        $accordionHeader = $scope.find(".eael-accordion-header"),
-        $accordionType = $advanceAccordion.data("accordion-type"),
-        $accordionSpeed = $advanceAccordion.data("toogle-speed");
-
-    // Open default actived tab
-    $accordionHeader.each(function() {
-        if ($(this).hasClass("active-default")) {
-            $(this).addClass("show active");
-            $(this)
-                .next()
-                .slideDown($accordionSpeed);
-        }
-    });
-
-    // Remove multiple click event for nested accordion
-    $accordionHeader.unbind("click");
-
-    $accordionHeader.click(function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        if ($accordionType === "accordion") {
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-header")
-                    .removeClass("show active");
-                $this
-                    .parent()
-                    .parent()
-                    .find(".eael-accordion-content")
-                    .slideUp($accordionSpeed);
-                $this.toggleClass("show active");
-                $this.next().slideToggle($accordionSpeed);
-            }
-        } else {
-            // For acccordion type 'toggle'
-            if ($this.hasClass("show")) {
-                $this.removeClass("show active");
-                $this.next().slideUp($accordionSpeed);
-            } else {
-                $this.addClass("show active");
-                $this.next().slideDown($accordionSpeed);
-            }
-        }
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-adv-accordion.default",
-        AdvAccordionHandler
-    );
-});
-
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
-var ContentTicker = function($scope, $) {
-    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-        $items =
-            $contentTicker.data("items") !== undefined
-                ? $contentTicker.data("items")
-                : 1,
-        $items_tablet =
-            $contentTicker.data("items-tablet") !== undefined
-                ? $contentTicker.data("items-tablet")
-                : 1,
-        $items_mobile =
-            $contentTicker.data("items-mobile") !== undefined
-                ? $contentTicker.data("items-mobile")
-                : 1,
-        $margin =
-            $contentTicker.data("margin") !== undefined
-                ? $contentTicker.data("margin")
-                : 10,
-        $margin_tablet =
-            $contentTicker.data("margin-tablet") !== undefined
-                ? $contentTicker.data("margin-tablet")
-                : 10,
-        $margin_mobile =
-            $contentTicker.data("margin-mobile") !== undefined
-                ? $contentTicker.data("margin-mobile")
-                : 10,
-        $effect =
-            $contentTicker.data("effect") !== undefined
-                ? $contentTicker.data("effect")
-                : "slide",
-        $speed =
-            $contentTicker.data("speed") !== undefined
-                ? $contentTicker.data("speed")
-                : 400,
-        $autoplay =
-            $contentTicker.data("autoplay") !== undefined
-                ? $contentTicker.data("autoplay")
-                : 5000,
-        $loop =
-            $contentTicker.data("loop") !== undefined
-                ? $contentTicker.data("loop")
-                : false,
-        $grab_cursor =
-            $contentTicker.data("grab-cursor") !== undefined
-                ? $contentTicker.data("grab-cursor")
-                : false,
-        $pagination =
-            $contentTicker.data("pagination") !== undefined
-                ? $contentTicker.data("pagination")
-                : ".swiper-pagination",
-        $arrow_next =
-            $contentTicker.data("arrow-next") !== undefined
-                ? $contentTicker.data("arrow-next")
-                : ".swiper-button-next",
-        $arrow_prev =
-            $contentTicker.data("arrow-prev") !== undefined
-                ? $contentTicker.data("arrow-prev")
-                : ".swiper-button-prev",
-        $pause_on_hover =
-            $contentTicker.data("pause-on-hover") !== undefined
-                ? $contentTicker.data("pause-on-hover")
-                : "",
-        $contentTickerOptions = {
-            direction: "horizontal",
-            loop: $loop,
-            speed: $speed,
-            effect: $effect,
-            slidesPerView: $items,
-            spaceBetween: $margin,
-            grabCursor: $grab_cursor,
-            paginationClickable: true,
-            autoHeight: true,
-            autoplay: {
-                delay: $autoplay
-            },
-            pagination: {
-                el: $pagination,
-                clickable: true
-            },
-            navigation: {
-                nextEl: $arrow_next,
-                prevEl: $arrow_prev
-            },
-            breakpoints: {
-                // when window width is <= 480px
-                480: {
-                    slidesPerView: $items_mobile,
-                    spaceBetween: $margin_mobile
-                },
-                // when window width is <= 640px
-                768: {
-                    slidesPerView: $items_tablet,
-                    spaceBetween: $margin_tablet
-                }
-            }
-        };
-
-    var $contentTickerSlider = new Swiper(
-        $contentTicker,
-        $contentTickerOptions
-    );
-    if ($autoplay === 0) {
-        $contentTickerSlider.autoplay.stop();
-    }
-    if ($pause_on_hover && $autoplay !== 0) {
-        $contentTicker.on("mouseenter", function() {
-            $contentTickerSlider.autoplay.stop();
-        });
-        $contentTicker.on("mouseleave", function() {
-            $contentTickerSlider.autoplay.start();
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-content-ticker.default",
-        ContentTicker
-    );
-});
-var dataTable = function($scope, $) {
-	var $_this = $scope.find(".eael-data-table-wrap"),
-		$id = $_this.data("table_id");
-
-	if (typeof enableProSorter !== "undefined" && $.isFunction(enableProSorter)) {
-		$(document).ready(function() {
-			enableProSorter(jQuery, $_this);
-		});
-	}
-
-	var responsive = $_this.data("custom_responsive");
-	if (true == responsive) {
-		var $th = $scope.find(".eael-data-table").find("th");
-		var $tbody = $scope.find(".eael-data-table").find("tbody");
-
-		$tbody.find("tr").each(function(i, item) {
-			$(item)
-				.find("td .td-content-wrapper")
-				.each(function(index, item) {
-					$(this).prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + "</div>");
-				});
-		});
-	}
-};
-
-var Data_Table_Click_Handler = function(panel, model, view) {
-	if (event.target.dataset.event == "ea:table:export") {
-		// export
-		var table = view.el.querySelector("#eael-data-table-" + model.attributes.id);
-		var rows = table.querySelectorAll("table tr");
-		var csv = [];
-
-		// generate csv
-		for (var i = 0; i < rows.length; i++) {
-			var row = [];
-			var cols = rows[i].querySelectorAll("th, td");
-
-			for (var j = 0; j < cols.length; j++) {
-				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
-			}
-
-			csv.push(row.join(","));
-		}
-
-		// download
-		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-		var download_link = parent.document.createElement("a");
-
-		download_link.classList.add("eael-data-table-download-" + model.attributes.id);
-		download_link.download = "eael-data-table-" + model.attributes.id + ".csv";
-		download_link.href = window.URL.createObjectURL(csv_file);
-		download_link.style.display = "none";
-		parent.document.body.appendChild(download_link);
-		download_link.click();
-
-		parent.document.querySelector(".eael-data-table-download-" + model.attributes.id).remove();
-	}
-};
-
-var data_table_panel = function(panel, model, view) {
-	var handler = Data_Table_Click_Handler.bind(this, panel, model, view);
-
-	panel.el.addEventListener("click", handler);
-
-	panel.currentPageView.on("destroy", function() {
-		panel.el.removeEventListener("click", handler);
-	});
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-	// export table
-	if (isEditMode) {
-		elementor.hooks.addAction("panel/open_editor/widget/eael-data-table", data_table_panel);
-	}
-
-	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
-});
-
-var EventCalendar = function($scope, $) {
-	var Calendar = FullCalendar.Calendar;
-	var element = $(".eael-event-calendar-cls", $scope),
-		CloseButton = $(".eaelec-modal-close", $scope).eq(0),
-		ecModal = $("#eaelecModal", $scope),
-		eventAll = element.data("events"),
-		firstDay = element.data("first_day"),
-		calendarID = element.data("cal_id"),
-		locale = element.data("locale"),
-		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
-
-	var calendar = new Calendar(calendarEl, {
-		plugins: ["dayGrid", "timeGrid", "list"],
-		editable: false,
-		selectable: false,
-		draggable: false,
-		firstDay: firstDay,
-		eventTimeFormat: {
-			hour: '2-digit',
-			minute: '2-digit',
-			meridiem: 'short'
-		},
-		nextDayThreshold: "00:00:00",
-		header: {
-			left: "prev,next today",
-			center: "title",
-			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
-		},
-		// buttonText: {
-		// 	today: "today"
-		// },
-		allDayText: "All day",
-		events: eventAll,
-		selectHelper: true,
-		locale:locale,
-		eventLimit: 3,
-		eventRender: function(info) {
-			var element = $(info.el),
-				event = info.event;
-
-			element.attr("href", "javascript:void(0);");
-			element.click(function(e) {
-				e.preventDefault();
-				var startDate = event.start,
-					timeFormate = "h:mm A",
-					endDate = event.end,
-					startSelector = $("span.eaelec-event-date-start"),
-					endSelector = $("span.eaelec-event-date-end");
-
-				if (event.allDay === "yes") {
-					var newEnd = moment(endDate).subtract(1, "days");
-					endDate = newEnd._d;
-					timeFormate = " ";
-				}
-
-				startSelector.html(" ");
-				endSelector.html(" ");
-				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
-
-				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-					var allDayTime = moment(startDate).format("MMM Do");
-					if (moment(startDate).isSame(Date.now(), "day") === true) {
-						allDayTime = 'Today';
-					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
-						allDayTime = 'Tomorrow';
-					}
-					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
-				} else {
-					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						startSelector.html('<i class="eicon-calendar"></i> Today ' + moment(event.start).format(timeFormate));
-					}
-					if (
-						moment(startDate).format("MM-DD-YYYY") ===
-						moment(new Date())
-							.add(1, "days")
-							.format("MM-DD-YYYY")
-					) {
-						startSelector.html('<i class="eicon-calendar"></i> Tomorrow ' + moment(event.start).format(timeFormate));
-					}
-
-					if (
-						moment(startDate).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
-						moment(startDate).format("MM-DD-YYYY") >
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
-					) {
-						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do " + timeFormate));
-					}
-
-					if (moment(endDate).isSame(Date.now(), "day") === true) {
-						if (moment(startDate).isSame(Date.now(), "day") !== true) {
-							endSelector.html("- Today " + moment(endDate).format(timeFormate));
-						} else {
-							endSelector.html("- " + moment(endDate).format(timeFormate));
-						}
-					}
-
-					if (
-						moment(startDate).format("MM-DD-YYYY") !==
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY") &&
-						moment(endDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
-					) {
-						endSelector.html("- Tomorrow " + moment(endDate).format(timeFormate));
-					}
-					if (
-						moment(startDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY") &&
-						moment(endDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
-					) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
-					}
-					if (moment(endDate).diff(moment(startDate), "days") > 0 && endSelector.text().trim().length < 1) {
-						endSelector.html("- " + moment(endDate).format("MMM Do " + timeFormate));
-					}
-
-					if (moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
-					}
-				}
-
-				$(".eaelec-modal-header h2").html(event.title);
-				$(".eaelec-modal-body p").html(event.extendedProps.description);
-				if(event.extendedProps.description.length<1){
-					$(".eaelec-modal-body").css("height", "auto");
-				}else {
-					$(".eaelec-modal-body").css("height", "300px");
-				}
-
-				$(".eaelec-modal-footer a").attr("href", event.url);
-				
-				if (event.extendedProps.external === "on") {
-					$(".eaelec-modal-footer a").attr("target", "_blank");
-				}
-				if (event.extendedProps.nofollow === "on") {
-					$(".eaelec-modal-footer a").attr("rel", "nofollow");
-				}
-				if (event.url == "") {
-					$(".eaelec-modal-footer a").css("display", "none");
-				}
-
-				// Popup color
-				$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
-			});
-		}
-	});
-
-	CloseButton.on("click", function() {
-		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
-	});
-
-	calendar.render();
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
-});
-
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
-});
-
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-
-    if(isEditMode) {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 800);
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
-
-var filterableGalleryHandler = function($scope, $) {
-
-    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
-        filterTrigger = $scope.find('#fg-filter-trigger'),
-        form = $scope.find('.fg-layout-3-search-box'),
-        input = $scope.find('#fg-search-box-input'),
-        searchRegex, buttonFilter, timer;
-    var delegateAbc = '';
-
-    if(form.length) {
-        form.on('submit', function(e) {
-            e.preventDefault();
-        });
-    }
-
-    filterTrigger.on('click', function() {
-        filterControls.toggleClass('open-filters');
-    }).blur(function() {
-        filterControls.toggleClass('open-filters');
-    });
-
-    if (!isEditMode) {
-        var $gallery = $(".eael-filter-gallery-container", $scope),
-            $settings = $gallery.data("settings"),
-            $gallery_items = $gallery.data("gallery-items"),
-            $layout_mode =
-                $settings.grid_style == "masonry" ? "masonry" : "fitRows",
-            $gallery_enabled =
-                $settings.gallery_enabled == "yes" ? true : false;
-
-        // init isotope
-        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
-        var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
-        var $isotope_gallery = $gallery.isotope({
-            itemSelector: ".eael-filterable-gallery-item-wrap",
-            layoutMode: $layout_mode,
-            percentPosition: true,
-            stagger: 30,
-            transitionDuration: $settings.duration + "ms",
-            filter: function() {
-                var $this = $(this);
-                var $result = searchRegex ? $this.text().match( searchRegex ) : true;
-                if(buttonFilter == undefined) {
-                    if(layoutMode != 'layout_3') {
-                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
-                    }else {
-                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
-                    }
-                }
-                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
-                return $result && buttonResult;
-            }
-        });
-
-        //alert($settings.widget_id);
-        // Popup
-        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: $gallery_enabled
-            },
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            },
-            fixedContentPos: false,
-            image: {
-                titleSrc: function(item) {
-                            if(mfpCaption=='yes'){
-                                return item.el.parent().prev().prev().html();
-                            }
-                        }
-            }
-        });
-
-        // filter
-        $scope.on("click", ".control", function() {
-
-            var $this = $(this);
-            buttonFilter = $( this ).attr('data-filter');
-            delegateAbc = $( this ).attr('data-filter') + ' a.eael-magnific-link';
-
-            if($scope.find('#fg-filter-trigger > span')) {
-                $scope.find('#fg-filter-trigger > span').text($this.text());
-            }
-
-            $this.siblings().removeClass("active");
-            $this.addClass("active");
-
-            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: $gallery_enabled,
-                },
-                callbacks: {
-                    close: function() {
-                        $('#elementor-lightbox').hide();
-                    }
-                },
-                fixedContentPos: false,
-                image: {
-                    titleSrc: function(item) {
-                                if(mfpCaption=='yes'){
-                                    return item.el.parent().prev().prev().html();
-                                }
-                            }
-                }
-            });
-
-            $isotope_gallery.isotope();
-        });
-
-
-
-        //quick search
-        input.on('input', function() {
-            var $this = $(this);
-
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                searchRegex = new RegExp($this.val(), 'gi');
-                $isotope_gallery.isotope();
-            }, 600);
-
-        });
-
-        // layout gal, while images are loading
-        $isotope_gallery.imagesLoaded().progress(function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        // layout gal, on click tabs
-        $isotope_gallery.on("arrangeComplete", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        // layout gal, after window loaded
-        $(window).on("load", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        
-
-        // popup
-        $($scope).magnificPopup({
-            delegate: ".eael-magnific-video-link",
-            type: "iframe",
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            }
-        });
-
-        // Load more button
-        $scope.on("click", ".eael-gallery-load-more", function(e) {
-            e.preventDefault();
-
-            var $this = $(this),
-                $init_show = $(
-                    ".eael-filter-gallery-container",
-                    $scope
-                ).children(".eael-filterable-gallery-item-wrap").length,
-                $total_items = $gallery.data("total-gallery-items"),
-                $images_per_page = $gallery.data("images-per-page"),
-                $nomore_text = $gallery.data("nomore-item-text"),
-                $items = [];
-
-            if ($init_show == $total_items) {
-                $this.html(
-                    '<div class="no-more-items-text">' + $nomore_text + "</div>"
-                );
-                setTimeout(function() {
-                    $this.fadeOut("slow");
-                }, 600);
-            }
-
-            // new items html
-            for (var i = $init_show; i < $init_show + $images_per_page; i++) {
-                $items.push($($gallery_items[i])[0]);
-            }
-
-            // append items
-            $gallery.append($items);
-            $isotope_gallery.isotope("appended", $items);
-            $isotope_gallery.imagesLoaded().progress(function() {
-                $isotope_gallery.isotope("layout");
-            });
-
-            // reinit magnificPopup
-            $(".eael-magnific-link", $scope).magnificPopup({
-                type: "image",
-                gallery: {
-                    enabled: $gallery_enabled
-                },
-                callbacks: {
-                    close: function() {
-                        $("#elementor-lightbox").hide();
-                    }
-                }
-            });
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-filterable-gallery.default",
-        filterableGalleryHandler
-    );
-});
-
-(function($) {
-    window.isEditMode = false;
-
-    $(window).on("elementor/frontend/init", function() {
-        window.isEditMode = elementorFrontend.isEditMode();
-    });
-})(jQuery);
-
-var ImageAccordion = function($scope, $) {
-    var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
-        $id =
-            $imageAccordion.data("img-accordion-id") !== undefined
-                ? $imageAccordion.data("img-accordion-id")
-                : "",
-        $type =
-            $imageAccordion.data("img-accordion-type") !== undefined
-                ? $imageAccordion.data("img-accordion-type")
-                : "";
-    
-    if ("on-click" === $type) {
-        $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
-            if ($(this).hasClass("overlay-active") == false) {
-                e.preventDefault();
-            }
-
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .addClass("overlay-active");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay-inner")
-                .addClass("overlay-inner-show");
-            $(this).css("flex", "3");
-        });
-        $("#eael-img-accordion-" + $id + " a").on("blur", function(e) {
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .removeClass("overlay-active");
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-image-accordion.default",
-        ImageAccordion
-    );
-});
-
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope),
-        $layout_mode = $gallery.data('layout-mode');
-        
-    if($layout_mode === 'masonry') {
-        $gallery.isotope({
-            itemSelector: ".eael-grid-post",
-            layoutMode: $layout_mode,
-            percentPosition: true
-        });
-
-        // layout gal, while images are loading
-        $gallery.imagesLoaded().progress(function() {
-            $gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
-    );
-});
-
-var PricingTooltip = function($scope, $) {
-    if ($.fn.tooltipster) {
-        var $tooltip = $scope.find(".tooltip"),
-            i;
-
-        for (i = 0; i < $tooltip.length; i++) {
-            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
-                $tooltipSide =
-                    $currentTooltip.data("side") !== undefined
-                        ? $currentTooltip.data("side")
-                        : false,
-                $tooltipTrigger =
-                    $currentTooltip.data("trigger") !== undefined
-                        ? $currentTooltip.data("trigger")
-                        : "hover",
-                $animation =
-                    $currentTooltip.data("animation") !== undefined
-                        ? $currentTooltip.data("animation")
-                        : "fade",
-                $anim_duration =
-                    $currentTooltip.data("animation_duration") !== undefined
-                        ? $currentTooltip.data("animation_duration")
-                        : 300,
-                $theme =
-                    $currentTooltip.data("theme") !== undefined
-                        ? $currentTooltip.data("theme")
-                        : "default",
-                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
-
-            $currentTooltip.tooltipster({
-                animation: $animation,
-                trigger: $tooltipTrigger,
-                side: $tooltipSide,
-                delay: $anim_duration,
-                arrow: $arrow,
-                theme: "tooltipster-" + $theme
-            });
-        }
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-pricing-table.default",
-        PricingTooltip
-    );
-});
-
-jQuery(document).ready(function() {
-    // scroll func
-    jQuery(window).scroll(function() {
-        var winScroll =
-            document.body.scrollTop || document.documentElement.scrollTop;
-        var height =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-
-        jQuery(".eael-reading-progress-fill").css({
-            width: scrolled + "%"
-        });
-    });
-
-    // live prev
-    if (isEditMode) {
-        elementor.settings.page.addChangeCallback(
-            "eael_ext_reading_progress",
-            function(newValue) {
-                var $settings = elementor.settings.page.getSettings();
-
-                if (newValue == "yes") {
-                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
-                        jQuery("body").append(
-                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
-                                $settings.settings
-                                    .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
-                                $settings.settings
-                                    .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div></div>'
-                        );
-                    }
-
-                    jQuery(".eael-reading-progress-wrap")
-                        .addClass("eael-reading-progress-wrap-local")
-                        .removeClass(
-                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
-                        );
-                } else {
-                    jQuery(".eael-reading-progress-wrap").removeClass(
-                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
-                    );
-
-                    if (
-                        $settings.settings
-                            .eael_ext_reading_progress_has_global == true
-                    ) {
-                        jQuery(".eael-reading-progress-wrap").addClass(
-                            "eael-reading-progress-wrap-global"
-                        );
-                    } else {
-                        jQuery(".eael-reading-progress-wrap").addClass(
-                            "eael-reading-progress-wrap-disabled"
-                        );
-                    }
-                }
-            }
-        );
-
-        elementor.settings.page.addChangeCallback(
-            "eael_ext_reading_progress_position",
-            function(newValue) {
-                elementor.settings.page.setSettings(
-                    "eael_ext_reading_progress_position",
-                    newValue
-                );
-                jQuery(".eael-reading-progress")
-                    .removeClass(
-                        "eael-reading-progress-top eael-reading-progress-bottom"
-                    )
-                    .addClass("eael-reading-progress-" + newValue);
-            }
-        );
-    }
-});
-
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
-    );
-});
-
-(function($) {
-	jQuery(document).ready(function() {
-		/**
-		 * add ID in main content heading tag
-		 * @param selector
-		 * @param supportTag
-		 */
-		function eael_toc_content(selector, supportTag) {
-			var listId = document.getElementById("eael-toc-list");
-			if (selector === null || supportTag === undefined || !listId) {
-				return null;
-			}
-			var mainSelector = document.querySelector(selector),
-				allSupportTag = Array.prototype.slice.call(mainSelector.querySelectorAll(supportTag)),
-				listIndex = 0;
-
-			allSupportTag.forEach(function(el) {
-				el.id = listIndex + "-" + eael_build_id();
-				el.classList.add("eael-heading-content");
-				listIndex++;
-			});
-			eael_list_hierarchy(selector, supportTag);
-			var firstChild = $("ul.eael-toc-list > li");
-			if (firstChild.length < 1) {
-				document.getElementById("eael-toc").classList.add("eael-toc-disable");
-			}
-			firstChild.each(function() {
-				this.classList.add("eael-first-child");
-			});
-		}
-
-		/**
-		 * Make toc list
-		 * @param selector
-		 * @param supportTag
-		 */
-		function eael_list_hierarchy(selector, supportTag) {
-			var tagList = supportTag;
-			var parentLevel = '';
-			var listId = document.getElementById("eael-toc-list");
-			var mainContent = document.querySelector(selector),
-
-			allHeadings = mainContent.querySelectorAll(tagList),
-				baseTag = parentLevel = tagList
-					.trim()
-					.split(",")[0]
-					.substr(1, 1),
-				ListNode = listId;
-
-			listId.innerHTML = "";
-			if (allHeadings.length > 0) {
-				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
-			}
-			for (var i = 0, len = allHeadings.length; i < len; ++i) {
-				var currentHeading = allHeadings[i];
-				var latestLavel = parseInt(currentHeading.tagName.substr(1, 1));
-				var diff = latestLavel - parentLevel;
-
-				if (diff > 0) {
-					var containerLiNode = ListNode.lastChild;
-					if (containerLiNode) {
-						var createUlNode = document.createElement("UL");
-
-						containerLiNode.appendChild(createUlNode);
-						ListNode = createUlNode;
-						parentLevel = latestLavel;
-					}
-				}
-
-				var sequenceParent = false;
-
-				if (diff < 0) {
-					while (0 !== diff++) {
-						if (ListNode.parentNode.parentNode) {
-							ListNode = ListNode.parentNode.parentNode;
-						}
-					}
-					parentLevel = latestLavel;
-					sequenceParent = true;
-				}
-
-				if (ListNode.tagName !== "UL") {
-					ListNode = listId;
-				}
-
-				if (currentHeading.textContent.trim() === "") {
-					continue;
-				}
-				var liNode = document.createElement("LI");
-				var anchorTag = document.createElement("A");
-				var spanTag = document.createElement("SPAN");
-
-				if (baseTag === parentLevel || sequenceParent) {
-					liNode.setAttribute("itemscope", "");
-					liNode.setAttribute("itemtype", "http://schema.org/ListItem");
-					liNode.setAttribute("itemprop", "itemListElement");
-				}
-
-				var Linkid = "#" + i + "-" + eael_build_id();
-				anchorTag.className = "eael-toc-link";
-				anchorTag.setAttribute("itemprop", "item");
-				anchorTag.setAttribute("href", Linkid);
-				spanTag.appendChild(document.createTextNode(currentHeading.textContent));
-				anchorTag.appendChild(spanTag);
-				liNode.appendChild(anchorTag);
-				ListNode.appendChild(liNode);
-			}
-		}
-
-
-
-		// expand collapse
-		$(document).on("click", "ul.eael-toc-list a", function(e) {
-			e.preventDefault();
-
-			$(document).off("scroll");
-
-			var target = this.hash;
-			history.pushState("", document.title, window.location.pathname + window.location.search);
-
-			var parentLi = $(this).parent();
-
-			if (parentLi.is(".eael-highlight-parent.eael-highlight-active")) {
-				window.location.hash = target;
-				return false;
-			}
-
-			$(".eael-highlight-active, .eael-highlight-parent").removeClass("eael-highlight-active eael-highlight-parent");
-
-			$(this)
-				.closest(".eael-first-child")
-				.addClass("eael-highlight-parent");
-
-			$(this)
-				.parent()
-				.addClass("eael-highlight-active");
-
-			window.location.hash = target;
-		});
-
-		window.onscroll = function() {
-			eaelTocSticky();
-		};
-		var stickyScroll = $('#eael-toc').data('stickyscroll');
-
-		/**
-		 * check sticky
-		 */
-		function eaelTocSticky() {
-			var eaelToc = document.getElementById("eael-toc");
-			if (!eaelToc) {
-				return;
-			}
-			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
-			if (window.pageYOffset >= stickyScroll && !eaelToc.classList.contains('eael-toc-disable')) {
-				eaelToc.classList.add("eael-sticky");
-			} else {
-				eaelToc.classList.remove("eael-sticky");
-			}
-		}
-
-		/**
-		 *
-		 * @param content
-		 * @returns {string}
-		 */
-		function eael_build_id() {
-			return "eael-table-of-content";
-		}
-
-		/**
-		 *
-		 * @returns {null|selector}
-		 */
-		function eael_toc_check_content() {
-			var contentSelectro = '.site-content';
-			if ($(".elementor-inner")[0]) {
-				contentSelectro = ".elementor-inner";
-			} else if ($("#site-content")[0]) {
-				contentSelectro = "#site-content";
-			}
-			return contentSelectro;
-		}
-
-		//toc auto collapse
-		$("body").click(function(e) {
-			var target = $(e.target);
-			var eaToc = $("#eael-toc");
-			if ((eaToc.hasClass("eael-toc-auto-collapse") && eaToc.hasClass("eael-sticky")) && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
-				eaToc.toggleClass("collapsed");
-			}
-		});
-
-		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function(event) {
-			event.stopPropagation();
-			$(".eael-toc").toggleClass("collapsed");
-		});
-
-		function eael_build_toc($settings) {
-			var pageSetting = $settings.settings,
-				title = pageSetting.eael_ext_toc_title,
-				toc_style_class = "eael-toc-list eael-toc-list-" + pageSetting.eael_ext_table_of_content_list_style,
-				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
-				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
-			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
-			toc_style_class += pageSetting.eael_ext_toc_list_icon === "number" ? " eael-toc-number" : " eael-toc-bullet";
-
-			return (
-				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +
-				el_class +
-				'">' +
-				'<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">' +
-				title +
-				"</h2></div>" +
-				'<div class="eael-toc-body"><ul id="eael-toc-list" class="' +
-				toc_style_class +
-				'"></ul></div>' +
-				'<button class="eael-toc-button"><i class="' +
-				icon +
-				'"></i><span>' +
-				title +
-				"</span></button>" +
-				"</div>"
-			);
-		}
-
-
-		var intSupportTag = $("#eael-toc").data("eaeltoctag");
-		if (intSupportTag !== "") {
-			eael_toc_content(eael_toc_check_content(), intSupportTag);
-		}
-
-
-		//editor mode
-		if (isEditMode) {
-
-			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
-				var exist = $('#eael-toc #eael-toc-list li');
-				if(exist.length<1){
-					var $settings = elementor.settings.page.getSettings();
-					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function(newValue) {
-				var tocGlobal = $(".eael-toc-global");
-				if (tocGlobal.length > 0) {
-					tocGlobal
-						.attr("id", "eael-toc-temp")
-						.removeClass("eael-toc")
-						.hide();
-					$(".eael-toc-global #eael-toc-list").attr("id", "");
-				}
-				$("#eael-toc").remove();
-				if (newValue === "yes") {
-					var $settings = elementor.settings.page.getSettings();
-					$("body").append(eael_build_toc($settings));
-					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
-				} else {
-					if (tocGlobal.length > 0) {
-						tocGlobal
-							.addClass("eael-toc")
-							.attr("id", "eael-toc")
-							.show();
-					}
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function(newValue) {
-				if (newValue === "right") {
-					$("#eael-toc").addClass("eael-toc-right");
-				} else {
-					$("#eael-toc").removeClass("eael-toc-right");
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function(newValue) {
-				var list = $(".eael-toc-list");
-				list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
-				if (newValue !== "none") {
-					list.addClass("eael-toc-list-" + newValue);
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_collapse_sub_heading", eael_toc_list_collapse);
-
-			function eael_toc_list_collapse(newValue) {
-				var list = $(".eael-toc-list");
-				if (newValue === "yes") {
-					list.addClass("eael-toc-collapse");
-				} else {
-					list.removeClass("eael-toc-collapse");
-				}
-			}
-
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function(newValue) {
-				var iconElement = $(".eael-toc-button i");
-				iconElement.removeClass().addClass(newValue.value);
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function(newValue) {
-				var list = $(".eael-toc-list");
-				if (newValue === "number") {
-					list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
-				} else {
-					list.addClass("eael-toc-bullet").removeClass("eael-toc-number");
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function(newValue) {
-				var list = $(".eael-toc-list");
-				if (newValue === "yes") {
-					list.addClass("eael-toc-word-wrap");
-				} else {
-					list.removeClass("eael-toc-word-wrap");
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function(newValue) {
-				var toc = $("#eael-toc");
-				if (newValue === "bottom_to_top") {
-					toc.addClass("eael-bottom-to-top");
-				} else {
-					toc.removeClass("eael-bottom-to-top");
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function(newValue) {
-				var toc = $("#eael-toc");
-				if (newValue === "yes") {
-					toc.addClass("eael-box-shadow");
-				} else {
-					toc.removeClass("eael-box-shadow");
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function(newValue) {
-				var toc = $("#eael-toc");
-				if (newValue === "yes") {
-					toc.addClass("eael-toc-auto-collapse");
-				} else {
-					toc.removeClass("eael-toc-auto-collapse");
-				}
-			});
-
-			elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change);
-
-			function ea_toc_title_change(newValue) {
-				elementorFrontend.elements.$document.find(".eael-toc-title").text(newValue);
-				elementorFrontend.elements.$document.find(".eael-toc-button span").text(newValue);
-			}
-		}
-	});
-})(jQuery);
 
 var advanced_data_table_timeout,
 	advanced_data_table_active_cell = null,
@@ -41325,6 +39968,1008 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
+var ContentTicker = function($scope, $) {
+    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+        $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
+        $items_tablet =
+            $contentTicker.data("items-tablet") !== undefined
+                ? $contentTicker.data("items-tablet")
+                : 1,
+        $items_mobile =
+            $contentTicker.data("items-mobile") !== undefined
+                ? $contentTicker.data("items-mobile")
+                : 1,
+        $margin =
+            $contentTicker.data("margin") !== undefined
+                ? $contentTicker.data("margin")
+                : 10,
+        $margin_tablet =
+            $contentTicker.data("margin-tablet") !== undefined
+                ? $contentTicker.data("margin-tablet")
+                : 10,
+        $margin_mobile =
+            $contentTicker.data("margin-mobile") !== undefined
+                ? $contentTicker.data("margin-mobile")
+                : 10,
+        $effect =
+            $contentTicker.data("effect") !== undefined
+                ? $contentTicker.data("effect")
+                : "slide",
+        $speed =
+            $contentTicker.data("speed") !== undefined
+                ? $contentTicker.data("speed")
+                : 400,
+        $autoplay =
+            $contentTicker.data("autoplay") !== undefined
+                ? $contentTicker.data("autoplay")
+                : 5000,
+        $loop =
+            $contentTicker.data("loop") !== undefined
+                ? $contentTicker.data("loop")
+                : false,
+        $grab_cursor =
+            $contentTicker.data("grab-cursor") !== undefined
+                ? $contentTicker.data("grab-cursor")
+                : false,
+        $pagination =
+            $contentTicker.data("pagination") !== undefined
+                ? $contentTicker.data("pagination")
+                : ".swiper-pagination",
+        $arrow_next =
+            $contentTicker.data("arrow-next") !== undefined
+                ? $contentTicker.data("arrow-next")
+                : ".swiper-button-next",
+        $arrow_prev =
+            $contentTicker.data("arrow-prev") !== undefined
+                ? $contentTicker.data("arrow-prev")
+                : ".swiper-button-prev",
+        $pause_on_hover =
+            $contentTicker.data("pause-on-hover") !== undefined
+                ? $contentTicker.data("pause-on-hover")
+                : "",
+        $contentTickerOptions = {
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
+                },
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
+                }
+            }
+        };
+
+    var $contentTickerSlider = new Swiper(
+        $contentTicker,
+        $contentTickerOptions
+    );
+    if ($autoplay === 0) {
+        $contentTickerSlider.autoplay.stop();
+    }
+    if ($pause_on_hover && $autoplay !== 0) {
+        $contentTicker.on("mouseenter", function() {
+            $contentTickerSlider.autoplay.stop();
+        });
+        $contentTicker.on("mouseleave", function() {
+            $contentTickerSlider.autoplay.start();
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-content-ticker.default",
+        ContentTicker
+    );
+});
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
+var dataTable = function($scope, $) {
+	var $_this = $scope.find(".eael-data-table-wrap"),
+		$id = $_this.data("table_id");
+
+	if (typeof enableProSorter !== "undefined" && $.isFunction(enableProSorter)) {
+		$(document).ready(function() {
+			enableProSorter(jQuery, $_this);
+		});
+	}
+
+	var responsive = $_this.data("custom_responsive");
+	if (true == responsive) {
+		var $th = $scope.find(".eael-data-table").find("th");
+		var $tbody = $scope.find(".eael-data-table").find("tbody");
+
+		$tbody.find("tr").each(function(i, item) {
+			$(item)
+				.find("td .td-content-wrapper")
+				.each(function(index, item) {
+					$(this).prepend('<div class="th-mobile-screen">' + $th.eq(index).html() + "</div>");
+				});
+		});
+	}
+};
+
+var Data_Table_Click_Handler = function(panel, model, view) {
+	if (event.target.dataset.event == "ea:table:export") {
+		// export
+		var table = view.el.querySelector("#eael-data-table-" + model.attributes.id);
+		var rows = table.querySelectorAll("table tr");
+		var csv = [];
+
+		// generate csv
+		for (var i = 0; i < rows.length; i++) {
+			var row = [];
+			var cols = rows[i].querySelectorAll("th, td");
+
+			for (var j = 0; j < cols.length; j++) {
+				row.push(JSON.stringify(cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+			}
+
+			csv.push(row.join(","));
+		}
+
+		// download
+		var csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
+		var download_link = parent.document.createElement("a");
+
+		download_link.classList.add("eael-data-table-download-" + model.attributes.id);
+		download_link.download = "eael-data-table-" + model.attributes.id + ".csv";
+		download_link.href = window.URL.createObjectURL(csv_file);
+		download_link.style.display = "none";
+		parent.document.body.appendChild(download_link);
+		download_link.click();
+
+		parent.document.querySelector(".eael-data-table-download-" + model.attributes.id).remove();
+	}
+};
+
+var data_table_panel = function(panel, model, view) {
+	var handler = Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function() {
+		panel.el.removeEventListener("click", handler);
+	});
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	// export table
+	if (isEditMode) {
+		elementor.hooks.addAction("panel/open_editor/widget/eael-data-table", data_table_panel);
+	}
+
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
+});
+
+var EventCalendar = function($scope, $) {
+	var Calendar = FullCalendar.Calendar;
+	var element = $(".eael-event-calendar-cls", $scope),
+		CloseButton = $(".eaelec-modal-close", $scope).eq(0),
+		ecModal = $("#eaelecModal", $scope),
+		eventAll = element.data("events"),
+		firstDay = element.data("first_day"),
+		calendarID = element.data("cal_id"),
+		locale = element.data("locale"),
+		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
+
+	var calendar = new Calendar(calendarEl, {
+		plugins: ["dayGrid", "timeGrid", "list"],
+		editable: false,
+		selectable: false,
+		draggable: false,
+		firstDay: firstDay,
+		eventTimeFormat: {
+			hour: '2-digit',
+			minute: '2-digit',
+			meridiem: 'short'
+		},
+		nextDayThreshold: "00:00:00",
+		header: {
+			left: "prev,next today",
+			center: "title",
+			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
+		},
+		// buttonText: {
+		// 	today: "today"
+		// },
+		allDayText: "All day",
+		events: eventAll,
+		selectHelper: true,
+		locale:locale,
+		eventLimit: 3,
+		eventRender: function(info) {
+			var element = $(info.el),
+				event = info.event;
+
+			element.attr("href", "javascript:void(0);");
+			element.click(function(e) {
+				e.preventDefault();
+				var startDate = event.start,
+					timeFormate = "h:mm A",
+					endDate = event.end,
+					startSelector = $("span.eaelec-event-date-start"),
+					endSelector = $("span.eaelec-event-date-end");
+
+				if (event.allDay === "yes") {
+					var newEnd = moment(endDate).subtract(1, "days");
+					endDate = newEnd._d;
+					timeFormate = " ";
+				}
+
+				startSelector.html(" ");
+				endSelector.html(" ");
+				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
+
+				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
+					var allDayTime = moment(startDate).format("MMM Do");
+					if (moment(startDate).isSame(Date.now(), "day") === true) {
+						allDayTime = 'Today';
+					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
+						allDayTime = 'Tomorrow';
+					}
+					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
+				} else {
+					if (moment(event.start).isSame(Date.now(), "day") === true) {
+						startSelector.html('<i class="eicon-calendar"></i> Today ' + moment(event.start).format(timeFormate));
+					}
+					if (
+						moment(startDate).format("MM-DD-YYYY") ===
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
+					) {
+						startSelector.html('<i class="eicon-calendar"></i> Tomorrow ' + moment(event.start).format(timeFormate));
+					}
+
+					if (
+						moment(startDate).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
+						moment(startDate).format("MM-DD-YYYY") >
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY")
+					) {
+						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do " + timeFormate));
+					}
+
+					if (moment(endDate).isSame(Date.now(), "day") === true) {
+						if (moment(startDate).isSame(Date.now(), "day") !== true) {
+							endSelector.html("- Today " + moment(endDate).format(timeFormate));
+						} else {
+							endSelector.html("- " + moment(endDate).format(timeFormate));
+						}
+					}
+
+					if (
+						moment(startDate).format("MM-DD-YYYY") !==
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY") &&
+						moment(endDate).format("MM-DD-YYYY") ===
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY")
+					) {
+						endSelector.html("- Tomorrow " + moment(endDate).format(timeFormate));
+					}
+					if (
+						moment(startDate).format("MM-DD-YYYY") ===
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY") &&
+						moment(endDate).format("MM-DD-YYYY") ===
+							moment(new Date())
+								.add(1, "days")
+								.format("MM-DD-YYYY")
+					) {
+						endSelector.html("- " + moment(endDate).format(timeFormate));
+					}
+					if (moment(endDate).diff(moment(startDate), "days") > 0 && endSelector.text().trim().length < 1) {
+						endSelector.html("- " + moment(endDate).format("MMM Do " + timeFormate));
+					}
+
+					if (moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
+						endSelector.html("- " + moment(endDate).format(timeFormate));
+					}
+				}
+
+				$(".eaelec-modal-header h2").html(event.title);
+				$(".eaelec-modal-body p").html(event.extendedProps.description);
+				if(event.extendedProps.description.length<1){
+					$(".eaelec-modal-body").css("height", "auto");
+				}else {
+					$(".eaelec-modal-body").css("height", "300px");
+				}
+
+				$(".eaelec-modal-footer a").attr("href", event.url);
+				
+				if (event.extendedProps.external === "on") {
+					$(".eaelec-modal-footer a").attr("target", "_blank");
+				}
+				if (event.extendedProps.nofollow === "on") {
+					$(".eaelec-modal-footer a").attr("rel", "nofollow");
+				}
+				if (event.url == "") {
+					$(".eaelec-modal-footer a").css("display", "none");
+				}
+
+				// Popup color
+				$(".eaelec-modal-header").css("border-left", "5px solid " + event.borderColor);
+			});
+		}
+	});
+
+	CloseButton.on("click", function() {
+		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+	});
+
+	calendar.render();
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
+});
+
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
+    );
+});
+
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+
+    if(isEditMode) {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 800);
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
+var filterableGalleryHandler = function($scope, $) {
+
+    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
+        filterTrigger = $scope.find('#fg-filter-trigger'),
+        form = $scope.find('.fg-layout-3-search-box'),
+        input = $scope.find('#fg-search-box-input'),
+        searchRegex, buttonFilter, timer;
+    var delegateAbc = '';
+
+    if(form.length) {
+        form.on('submit', function(e) {
+            e.preventDefault();
+        });
+    }
+
+    filterTrigger.on('click', function() {
+        filterControls.toggleClass('open-filters');
+    }).blur(function() {
+        filterControls.toggleClass('open-filters');
+    });
+
+    if (!isEditMode) {
+        var $gallery = $(".eael-filter-gallery-container", $scope),
+            $settings = $gallery.data("settings"),
+            $gallery_items = $gallery.data("gallery-items"),
+            $layout_mode =
+                $settings.grid_style == "masonry" ? "masonry" : "fitRows",
+            $gallery_enabled =
+                $settings.gallery_enabled == "yes" ? true : false;
+
+        // init isotope
+        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
+        var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
+        var $isotope_gallery = $gallery.isotope({
+            itemSelector: ".eael-filterable-gallery-item-wrap",
+            layoutMode: $layout_mode,
+            percentPosition: true,
+            stagger: 30,
+            transitionDuration: $settings.duration + "ms",
+            filter: function() {
+                var $this = $(this);
+                var $result = searchRegex ? $this.text().match( searchRegex ) : true;
+                if(buttonFilter == undefined) {
+                    if(layoutMode != 'layout_3') {
+                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
+                    }else {
+                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
+                    }
+                }
+                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
+                return $result && buttonResult;
+            }
+        });
+
+        //alert($settings.widget_id);
+        // Popup
+        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
+            type: "image",
+            gallery: {
+                enabled: $gallery_enabled
+            },
+            callbacks: {
+                close: function() {
+                    $("#elementor-lightbox").hide();
+                }
+            },
+            fixedContentPos: false,
+            image: {
+                titleSrc: function(item) {
+                            if(mfpCaption=='yes'){
+                                return item.el.parent().prev().prev().html();
+                            }
+                        }
+            }
+        });
+
+        // filter
+        $scope.on("click", ".control", function() {
+
+            var $this = $(this);
+            buttonFilter = $( this ).attr('data-filter');
+            delegateAbc = $( this ).attr('data-filter') + ' a.eael-magnific-link';
+
+            if($scope.find('#fg-filter-trigger > span')) {
+                $scope.find('#fg-filter-trigger > span').text($this.text());
+            }
+
+            $this.siblings().removeClass("active");
+            $this.addClass("active");
+
+            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: $gallery_enabled,
+                },
+                callbacks: {
+                    close: function() {
+                        $('#elementor-lightbox').hide();
+                    }
+                },
+                fixedContentPos: false,
+                image: {
+                    titleSrc: function(item) {
+                                if(mfpCaption=='yes'){
+                                    return item.el.parent().prev().prev().html();
+                                }
+                            }
+                }
+            });
+
+            $isotope_gallery.isotope();
+        });
+
+
+
+        //quick search
+        input.on('input', function() {
+            var $this = $(this);
+
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                searchRegex = new RegExp($this.val(), 'gi');
+                $isotope_gallery.isotope();
+            }, 600);
+
+        });
+
+        // layout gal, while images are loading
+        $isotope_gallery.imagesLoaded().progress(function() {
+            $isotope_gallery.isotope("layout");
+        });
+
+        // layout gal, on click tabs
+        $isotope_gallery.on("arrangeComplete", function() {
+            $isotope_gallery.isotope("layout");
+        });
+
+        // layout gal, after window loaded
+        $(window).on("load", function() {
+            $isotope_gallery.isotope("layout");
+        });
+
+        
+
+        // popup
+        $($scope).magnificPopup({
+            delegate: ".eael-magnific-video-link",
+            type: "iframe",
+            callbacks: {
+                close: function() {
+                    $("#elementor-lightbox").hide();
+                }
+            }
+        });
+
+        // Load more button
+        $scope.on("click", ".eael-gallery-load-more", function(e) {
+            e.preventDefault();
+
+            var $this = $(this),
+                $init_show = $(
+                    ".eael-filter-gallery-container",
+                    $scope
+                ).children(".eael-filterable-gallery-item-wrap").length,
+                $total_items = $gallery.data("total-gallery-items"),
+                $images_per_page = $gallery.data("images-per-page"),
+                $nomore_text = $gallery.data("nomore-item-text"),
+                $items = [];
+
+            if ($init_show == $total_items) {
+                $this.html(
+                    '<div class="no-more-items-text">' + $nomore_text + "</div>"
+                );
+                setTimeout(function() {
+                    $this.fadeOut("slow");
+                }, 600);
+            }
+
+            // new items html
+            for (var i = $init_show; i < $init_show + $images_per_page; i++) {
+                $items.push($($gallery_items[i])[0]);
+            }
+
+            // append items
+            $gallery.append($items);
+            $isotope_gallery.isotope("appended", $items);
+            $isotope_gallery.imagesLoaded().progress(function() {
+                $isotope_gallery.isotope("layout");
+            });
+
+            // reinit magnificPopup
+            $(".eael-magnific-link", $scope).magnificPopup({
+                type: "image",
+                gallery: {
+                    enabled: $gallery_enabled
+                },
+                callbacks: {
+                    close: function() {
+                        $("#elementor-lightbox").hide();
+                    }
+                }
+            });
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-filterable-gallery.default",
+        filterableGalleryHandler
+    );
+});
+
+(function($) {
+    window.isEditMode = false;
+
+    $(window).on("elementor/frontend/init", function() {
+        window.isEditMode = elementorFrontend.isEditMode();
+    });
+})(jQuery);
+
+var ImageAccordion = function($scope, $) {
+    var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
+        $id =
+            $imageAccordion.data("img-accordion-id") !== undefined
+                ? $imageAccordion.data("img-accordion-id")
+                : "",
+        $type =
+            $imageAccordion.data("img-accordion-type") !== undefined
+                ? $imageAccordion.data("img-accordion-type")
+                : "";
+    
+    if ("on-click" === $type) {
+        $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
+            if ($(this).hasClass("overlay-active") == false) {
+                e.preventDefault();
+            }
+
+            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $(this)
+                .find(".overlay")
+                .parent("a")
+                .addClass("overlay-active");
+            $("#eael-img-accordion-" + $id + " a")
+                .find(".overlay-inner")
+                .removeClass("overlay-inner-show");
+            $(this)
+                .find(".overlay-inner")
+                .addClass("overlay-inner-show");
+            $(this).css("flex", "3");
+        });
+        $("#eael-img-accordion-" + $id + " a").on("blur", function(e) {
+            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $("#eael-img-accordion-" + $id + " a")
+                .find(".overlay-inner")
+                .removeClass("overlay-inner-show");
+            $(this)
+                .find(".overlay")
+                .parent("a")
+                .removeClass("overlay-active");
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-image-accordion.default",
+        ImageAccordion
+    );
+});
+
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope),
+        $layout_mode = $gallery.data('layout-mode');
+        
+    if($layout_mode === 'masonry') {
+        $gallery.isotope({
+            itemSelector: ".eael-grid-post",
+            layoutMode: $layout_mode,
+            percentPosition: true
+        });
+
+        // layout gal, while images are loading
+        $gallery.imagesLoaded().progress(function() {
+            $gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
+var PricingTooltip = function($scope, $) {
+    if ($.fn.tooltipster) {
+        var $tooltip = $scope.find(".tooltip"),
+            i;
+
+        for (i = 0; i < $tooltip.length; i++) {
+            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
+                $tooltipSide =
+                    $currentTooltip.data("side") !== undefined
+                        ? $currentTooltip.data("side")
+                        : false,
+                $tooltipTrigger =
+                    $currentTooltip.data("trigger") !== undefined
+                        ? $currentTooltip.data("trigger")
+                        : "hover",
+                $animation =
+                    $currentTooltip.data("animation") !== undefined
+                        ? $currentTooltip.data("animation")
+                        : "fade",
+                $anim_duration =
+                    $currentTooltip.data("animation_duration") !== undefined
+                        ? $currentTooltip.data("animation_duration")
+                        : 300,
+                $theme =
+                    $currentTooltip.data("theme") !== undefined
+                        ? $currentTooltip.data("theme")
+                        : "default",
+                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
+
+            $currentTooltip.tooltipster({
+                animation: $animation,
+                trigger: $tooltipTrigger,
+                side: $tooltipSide,
+                delay: $anim_duration,
+                arrow: $arrow,
+                theme: "tooltipster-" + $theme
+            });
+        }
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-pricing-table.default",
+        PricingTooltip
+    );
+});
+
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
+    );
+});
+
+jQuery(document).ready(function() {
+    // scroll func
+    jQuery(window).scroll(function() {
+        var winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+        var height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+
+        jQuery(".eael-reading-progress-fill").css({
+            width: scrolled + "%"
+        });
+    });
+
+    // live prev
+    if (isEditMode) {
+        elementor.settings.page.addChangeCallback(
+            "eael_ext_reading_progress",
+            function(newValue) {
+                var $settings = elementor.settings.page.getSettings();
+
+                if (newValue == "yes") {
+                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
+                        jQuery("body").append(
+                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div></div>'
+                        );
+                    }
+
+                    jQuery(".eael-reading-progress-wrap")
+                        .addClass("eael-reading-progress-wrap-local")
+                        .removeClass(
+                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
+                        );
+                } else {
+                    jQuery(".eael-reading-progress-wrap").removeClass(
+                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
+                    );
+
+                    if (
+                        $settings.settings
+                            .eael_ext_reading_progress_has_global == true
+                    ) {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-global"
+                        );
+                    } else {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-disabled"
+                        );
+                    }
+                }
+            }
+        );
+
+        elementor.settings.page.addChangeCallback(
+            "eael_ext_reading_progress_position",
+            function(newValue) {
+                elementor.settings.page.setSettings(
+                    "eael_ext_reading_progress_position",
+                    newValue
+                );
+                jQuery(".eael-reading-progress")
+                    .removeClass(
+                        "eael-reading-progress-top eael-reading-progress-bottom"
+                    )
+                    .addClass("eael-reading-progress-" + newValue);
+            }
+        );
+    }
+});
+
 var eaelsvPosition = '';
 var eaelsvWidth = 0;
 var eaelsvHeight = 0;
@@ -41516,6 +41161,361 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
+
+(function($) {
+	jQuery(document).ready(function() {
+		/**
+		 * add ID in main content heading tag
+		 * @param selector
+		 * @param supportTag
+		 */
+		function eael_toc_content(selector, supportTag) {
+			var listId = document.getElementById("eael-toc-list");
+			if (selector === null || supportTag === undefined || !listId) {
+				return null;
+			}
+			var mainSelector = document.querySelector(selector),
+				allSupportTag = Array.prototype.slice.call(mainSelector.querySelectorAll(supportTag)),
+				listIndex = 0;
+
+			allSupportTag.forEach(function(el) {
+				el.id = listIndex + "-" + eael_build_id();
+				el.classList.add("eael-heading-content");
+				listIndex++;
+			});
+			eael_list_hierarchy(selector, supportTag);
+			var firstChild = $("ul.eael-toc-list > li");
+			if (firstChild.length < 1) {
+				document.getElementById("eael-toc").classList.add("eael-toc-disable");
+			}
+			firstChild.each(function() {
+				this.classList.add("eael-first-child");
+			});
+		}
+
+		/**
+		 * Make toc list
+		 * @param selector
+		 * @param supportTag
+		 */
+		function eael_list_hierarchy(selector, supportTag) {
+			var tagList = supportTag;
+			var parentLevel = '';
+			var listId = document.getElementById("eael-toc-list");
+			var mainContent = document.querySelector(selector),
+
+			allHeadings = mainContent.querySelectorAll(tagList),
+				baseTag = parentLevel = tagList
+					.trim()
+					.split(",")[0]
+					.substr(1, 1),
+				ListNode = listId;
+
+			listId.innerHTML = "";
+			if (allHeadings.length > 0) {
+				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
+			}
+			for (var i = 0, len = allHeadings.length; i < len; ++i) {
+				var currentHeading = allHeadings[i];
+				var latestLavel = parseInt(currentHeading.tagName.substr(1, 1));
+				var diff = latestLavel - parentLevel;
+
+				if (diff > 0) {
+					var containerLiNode = ListNode.lastChild;
+					if (containerLiNode) {
+						var createUlNode = document.createElement("UL");
+
+						containerLiNode.appendChild(createUlNode);
+						ListNode = createUlNode;
+						parentLevel = latestLavel;
+					}
+				}
+
+				var sequenceParent = false;
+
+				if (diff < 0) {
+					while (0 !== diff++) {
+						if (ListNode.parentNode.parentNode) {
+							ListNode = ListNode.parentNode.parentNode;
+						}
+					}
+					parentLevel = latestLavel;
+					sequenceParent = true;
+				}
+
+				if (ListNode.tagName !== "UL") {
+					ListNode = listId;
+				}
+
+				if (currentHeading.textContent.trim() === "") {
+					continue;
+				}
+				var liNode = document.createElement("LI");
+				var anchorTag = document.createElement("A");
+				var spanTag = document.createElement("SPAN");
+
+				if (baseTag === parentLevel || sequenceParent) {
+					liNode.setAttribute("itemscope", "");
+					liNode.setAttribute("itemtype", "http://schema.org/ListItem");
+					liNode.setAttribute("itemprop", "itemListElement");
+				}
+
+				var Linkid = "#" + i + "-" + eael_build_id();
+				anchorTag.className = "eael-toc-link";
+				anchorTag.setAttribute("itemprop", "item");
+				anchorTag.setAttribute("href", Linkid);
+				spanTag.appendChild(document.createTextNode(currentHeading.textContent));
+				anchorTag.appendChild(spanTag);
+				liNode.appendChild(anchorTag);
+				ListNode.appendChild(liNode);
+			}
+		}
+
+
+
+		// expand collapse
+		$(document).on("click", "ul.eael-toc-list a", function(e) {
+			e.preventDefault();
+
+			$(document).off("scroll");
+
+			var target = this.hash;
+			history.pushState("", document.title, window.location.pathname + window.location.search);
+
+			var parentLi = $(this).parent();
+
+			if (parentLi.is(".eael-highlight-parent.eael-highlight-active")) {
+				window.location.hash = target;
+				return false;
+			}
+
+			$(".eael-highlight-active, .eael-highlight-parent").removeClass("eael-highlight-active eael-highlight-parent");
+
+			$(this)
+				.closest(".eael-first-child")
+				.addClass("eael-highlight-parent");
+
+			$(this)
+				.parent()
+				.addClass("eael-highlight-active");
+
+			window.location.hash = target;
+		});
+
+		window.onscroll = function() {
+			eaelTocSticky();
+		};
+		var stickyScroll = $('#eael-toc').data('stickyscroll');
+
+		/**
+		 * check sticky
+		 */
+		function eaelTocSticky() {
+			var eaelToc = document.getElementById("eael-toc");
+			if (!eaelToc) {
+				return;
+			}
+			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
+			if (window.pageYOffset >= stickyScroll && !eaelToc.classList.contains('eael-toc-disable')) {
+				eaelToc.classList.add("eael-sticky");
+			} else {
+				eaelToc.classList.remove("eael-sticky");
+			}
+		}
+
+		/**
+		 *
+		 * @param content
+		 * @returns {string}
+		 */
+		function eael_build_id() {
+			return "eael-table-of-content";
+		}
+
+		/**
+		 *
+		 * @returns {null|selector}
+		 */
+		function eael_toc_check_content() {
+			var contentSelectro = '.site-content';
+			if ($(".elementor-inner")[0]) {
+				contentSelectro = ".elementor-inner";
+			} else if ($("#site-content")[0]) {
+				contentSelectro = "#site-content";
+			}
+			return contentSelectro;
+		}
+
+		//toc auto collapse
+		$("body").click(function(e) {
+			var target = $(e.target);
+			var eaToc = $("#eael-toc");
+			if ((eaToc.hasClass("eael-toc-auto-collapse") && eaToc.hasClass("eael-sticky")) && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
+				eaToc.toggleClass("collapsed");
+			}
+		});
+
+		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function(event) {
+			event.stopPropagation();
+			$(".eael-toc").toggleClass("collapsed");
+		});
+
+		function eael_build_toc($settings) {
+			var pageSetting = $settings.settings,
+				title = pageSetting.eael_ext_toc_title,
+				toc_style_class = "eael-toc-list eael-toc-list-" + pageSetting.eael_ext_table_of_content_list_style,
+				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
+				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
+			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
+			toc_style_class += pageSetting.eael_ext_toc_list_icon === "number" ? " eael-toc-number" : " eael-toc-bullet";
+
+			return (
+				'<div id="eael-toc" class="eael-toc eael-toc-disable ' +
+				el_class +
+				'">' +
+				'<div class="eael-toc-header"><span class="eael-toc-close">×</span><h2 class="eael-toc-title">' +
+				title +
+				"</h2></div>" +
+				'<div class="eael-toc-body"><ul id="eael-toc-list" class="' +
+				toc_style_class +
+				'"></ul></div>' +
+				'<button class="eael-toc-button"><i class="' +
+				icon +
+				'"></i><span>' +
+				title +
+				"</span></button>" +
+				"</div>"
+			);
+		}
+
+
+		var intSupportTag = $("#eael-toc").data("eaeltoctag");
+		if (intSupportTag !== "") {
+			eael_toc_content(eael_toc_check_content(), intSupportTag);
+		}
+
+
+		//editor mode
+		if (isEditMode) {
+
+			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
+				var exist = $('#eael-toc #eael-toc-list li');
+				if(exist.length<1){
+					var $settings = elementor.settings.page.getSettings();
+					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function(newValue) {
+				var tocGlobal = $(".eael-toc-global");
+				if (tocGlobal.length > 0) {
+					tocGlobal
+						.attr("id", "eael-toc-temp")
+						.removeClass("eael-toc")
+						.hide();
+					$(".eael-toc-global #eael-toc-list").attr("id", "");
+				}
+				$("#eael-toc").remove();
+				if (newValue === "yes") {
+					var $settings = elementor.settings.page.getSettings();
+					$("body").append(eael_build_toc($settings));
+					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
+				} else {
+					if (tocGlobal.length > 0) {
+						tocGlobal
+							.addClass("eael-toc")
+							.attr("id", "eael-toc")
+							.show();
+					}
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function(newValue) {
+				if (newValue === "right") {
+					$("#eael-toc").addClass("eael-toc-right");
+				} else {
+					$("#eael-toc").removeClass("eael-toc-right");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function(newValue) {
+				var list = $(".eael-toc-list");
+				list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
+				if (newValue !== "none") {
+					list.addClass("eael-toc-list-" + newValue);
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_collapse_sub_heading", eael_toc_list_collapse);
+
+			function eael_toc_list_collapse(newValue) {
+				var list = $(".eael-toc-list");
+				if (newValue === "yes") {
+					list.addClass("eael-toc-collapse");
+				} else {
+					list.removeClass("eael-toc-collapse");
+				}
+			}
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function(newValue) {
+				var iconElement = $(".eael-toc-button i");
+				iconElement.removeClass().addClass(newValue.value);
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function(newValue) {
+				var list = $(".eael-toc-list");
+				if (newValue === "number") {
+					list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
+				} else {
+					list.addClass("eael-toc-bullet").removeClass("eael-toc-number");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function(newValue) {
+				var list = $(".eael-toc-list");
+				if (newValue === "yes") {
+					list.addClass("eael-toc-word-wrap");
+				} else {
+					list.removeClass("eael-toc-word-wrap");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function(newValue) {
+				var toc = $("#eael-toc");
+				if (newValue === "bottom_to_top") {
+					toc.addClass("eael-bottom-to-top");
+				} else {
+					toc.removeClass("eael-bottom-to-top");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function(newValue) {
+				var toc = $("#eael-toc");
+				if (newValue === "yes") {
+					toc.addClass("eael-box-shadow");
+				} else {
+					toc.removeClass("eael-box-shadow");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function(newValue) {
+				var toc = $("#eael-toc");
+				if (newValue === "yes") {
+					toc.addClass("eael-toc-auto-collapse");
+				} else {
+					toc.removeClass("eael-toc-auto-collapse");
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_toc_title", ea_toc_title_change);
+
+			function ea_toc_title_change(newValue) {
+				elementorFrontend.elements.$document.find(".eael-toc-title").text(newValue);
+				elementorFrontend.elements.$document.find(".eael-toc-button span").text(newValue);
+			}
+		}
+	});
+})(jQuery);
 
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
