@@ -121,6 +121,22 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
+            'ea_adv_data_table_pagination_type',
+            [
+                'label' => esc_html__('Pagination Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'button' => esc_html__('Button', 'essential-addons-for-elementor-lite'),
+                    'select' => esc_html__('Select', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'button',
+                'condition' => [
+                    'ea_adv_data_table_pagination' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'ea_adv_data_table_items_per_page',
             [
                 'label' => esc_html__('Rows Per Page', 'essential-addons-for-elementor-lite'),
@@ -1105,6 +1121,45 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'ea_adv_data_table_pagination_select_width',
+            [
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 100,
+                        'max' => 10000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 10,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'desktop_default' => [
+                    'unit' => '%',
+                    'size' => 50,
+                ],
+                'tablet_default' => [
+                    'unit' => '%',
+                    'size' => 50,
+                ],
+                'mobile_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'width: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'ea_adv_data_table_pagination_type' => 'select',
+                ],
+            ]
+        );
+
         $this->add_control(
             'ea_adv_data_table_pagination_alignment',
             [
@@ -1144,7 +1199,7 @@ class Advanced_Data_Table extends Widget_Base
                 'name' => 'ea_adv_data_table_pagination_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a, {{WRAPPER}} .ea-advanced-data-table-pagination select',
             ]
         );
 
@@ -1171,6 +1226,7 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1198,6 +1254,7 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1214,6 +1271,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#666666',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1233,6 +1291,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1267,7 +1326,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '#eeeeee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a, {{WRAPPER}} .ea-advanced-data-table-pagination select',
             ]
         );
 
@@ -1286,6 +1345,7 @@ class Advanced_Data_Table extends Widget_Base
                 'size_units' => ['px'],
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1301,7 +1361,9 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1320,7 +1382,9 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fafafa',
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1355,7 +1419,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '#eeeeee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current, {{WRAPPER}} .ea-advanced-data-table-pagination select:hover',
             ]
         );
 
@@ -1373,7 +1437,9 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1434,14 +1500,29 @@ class Advanced_Data_Table extends Widget_Base
 
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {
             if (Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="ea-advanced-data-table-pagination clearfix">
-                    <a href="#">&laquo;</a>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">&raquo;</a>
-                </div>';
+                if ($settings['ea_adv_data_table_pagination_type'] == 'button') {
+                    echo '<div class="ea-advanced-data-table-pagination clearfix">
+                        <a href="#">&laquo;</a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">&raquo;</a>
+                    </div>';
+                } else {
+                    echo '<div class="ea-advanced-data-table-pagination clearfix">
+                        <select>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>';
+                }
             } else {
-                echo '<div class="ea-advanced-data-table-pagination clearfix"></div>';
+                if ($settings['ea_adv_data_table_pagination_type'] == 'button') {
+                    echo '<div class="ea-advanced-data-table-pagination clearfix"></div>';
+                } else {
+                    echo '<div class="ea-advanced-data-table-pagination clearfix">
+                        <select></select>
+                    </div>';
+                }
             }
         }
 
@@ -1454,7 +1535,7 @@ class Advanced_Data_Table extends Widget_Base
 
         if ($settings['ea_adv_data_table_source'] == 'database' || $settings['ea_adv_data_table_source'] == 'remote' || $settings['ea_adv_data_table_source'] == 'google' || $settings['ea_adv_data_table_source'] == 'tablepress') {
             return apply_filters('eael/advanced-data-table/table_html/database', $settings, '');
-        } else if($settings['ea_adv_data_table_source'] == 'ninja') {
+        } else if ($settings['ea_adv_data_table_source'] == 'ninja') {
             return apply_filters('eael/advanced-data-table/table_html/integration', $settings, '');
         }
 
