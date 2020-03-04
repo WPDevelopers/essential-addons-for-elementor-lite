@@ -235,10 +235,13 @@
 		if (isEditMode) {
 
 			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
-				var exist = $('#eael-toc #eael-toc-list li');
-				if(exist.length<1){
-					var $settings = elementor.settings.page.getSettings();
-					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
+				var tocLoad = $('#eael-toc #eael-toc-list');
+				var TocList = tocLoad.find('li.eael-first-child');
+				if(TocList.length<1 && tocLoad.length >=1 ){
+					var tagList = $("#eael-toc").data("eaeltoctag");
+					if(tagList){
+						eael_toc_content(eael_toc_check_content(), tagList);
+					}
 				}
 			});
 
