@@ -270,7 +270,11 @@ $config = [
             ],
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css'
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
                 ],
             ],
         ],
@@ -333,10 +337,10 @@ $config = [
         'betterdocs-category-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
         ],
-        'betterdocs-category-box'   => [
+        'betterdocs-category-box' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Box',
         ],
-        'betterdocs-search-form'   => [
+        'betterdocs-search-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Search_Form',
         ],
         'sticky-video' => [
@@ -398,8 +402,8 @@ $config = [
             ],
         ],
         'eael-post-duplicator' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator'
-        ]
+            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
+        ],
     ],
 ];
 
