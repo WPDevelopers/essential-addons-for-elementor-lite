@@ -2291,23 +2291,23 @@ trait Helper
         }
     }
 
-    public function advanced_data_table_database_html($settings, $html)
+    public function advanced_data_table_integration($settings, $html)
     {
         global $wpdb;
 
         $html = '';
         $results = [];
 
-        if ($settings['ea_adv_data_table_source'] == 'ninja') {
+        if ($settings['ea_adv_data_table_source'] == 'ninja' && !empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
             $table_settings = get_post_meta($settings['ea_adv_data_table_source_ninja_table_id'], '_ninja_table_settings', true);
             $table_headers = get_post_meta($settings['ea_adv_data_table_source_ninja_table_id'], '_ninja_table_columns', true);
             $table_rows = $wpdb->get_results('SELECT `value` FROM `wp_ninja_table_items` WHERE `table_id`=' . $settings['ea_adv_data_table_source_ninja_table_id'], 'ARRAY_N');
 
-            if($table_headers) {
+            if ($table_headers) {
                 $results[] = wp_list_pluck($table_headers, 'name');
             }
             
-            if($table_rows) {
+            if ($table_rows) {
                 foreach($table_rows as $row) {
                     $row = json_decode($row[0], true);
 
@@ -2317,20 +2317,24 @@ trait Helper
         }
         
         if (!empty($results)) {
-            $html .= '<thead><tr>';
-            
             if ($settings['ea_adv_data_table_source'] == 'ninja') {
-                if (!empty($table_settings) && isset($table_settings['hide_header_row']) && $table_settings['hide_header_row'] != true) {
+                if (isset($table_settings['hide_header_row']) && $table_settings['hide_header_row'] == true) {
+                    array_shift($results);
+                } else {
+                    $html .= '<thead><tr>';
+                    
                     foreach ($results[0] as $key => $th) {
                         $style = $settings['ea_adv_data_table_dynamic_th_width'] && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
                         $html .= '<th' . $style . '>' . $th . '</th>';
                     }
+        
+                    $html .= '</tr></thead>';
+        
+                    array_shift($results);
                 }
             }
 
-            $html .= '</tr></thead><tbody>';
-
-            array_shift($results);
+            $html .= '<tbody>';
 
             foreach ($results as $tr) {
                 $html .= '<tr>';

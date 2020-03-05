@@ -11,7 +11,6 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
-use \Elementor\Scheme_Typography;
 use \Elementor\Widget_Base;
 
 class Advanced_Data_Table extends Widget_Base
@@ -327,7 +326,6 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name' => 'ea_adv_data_table_head_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} th textarea, {{WRAPPER}} th',
             ]
         );
@@ -485,7 +483,6 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name' => 'ea_adv_data_table_body_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} td textarea, {{WRAPPER}} td',
             ]
         );
@@ -1012,7 +1009,6 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name' => 'ea_adv_data_table_search_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-search',
             ]
         );
@@ -1198,7 +1194,6 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name' => 'ea_adv_data_table_pagination_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a, {{WRAPPER}} .ea-advanced-data-table-pagination select',
             ]
         );
