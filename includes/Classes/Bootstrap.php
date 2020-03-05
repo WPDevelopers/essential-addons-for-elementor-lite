@@ -126,7 +126,7 @@ class Bootstrap
         add_filter('eael/event-calendar/source', [$this,'eael_event_calendar_source']);
         add_filter('eael/advanced-data-table/source', [$this,'eael_adv_data_table_souce']);
         add_action('eael/advanced-data-table/source/control', [$this,'advanced_data_table_source_control']);
-        add_action('eael/advanced-data-table/table_html/integration', [$this,'advanced_data_table_database_html'], 10, 2);
+        add_action('eael/advanced-data-table/table_html/integration', [$this,'advanced_data_table_integration'], 10, 2);
 
         // Admin
         if (is_admin()) {
