@@ -3,12 +3,9 @@
 /* -------------------------------- */
 .eael-pricing {
   -webkit-display: flex;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .eael-pricing .eael-pricing-item {
@@ -26,7 +23,6 @@
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  -webkit-transition: .3s;
   transition: .3s;
   border-radius: 4px;
 }
@@ -66,7 +62,6 @@
   border: 1px solid rgba(9, 9, 9, 0.1);
   padding: 30px;
   border-radius: 5px;
-  -webkit-transition: .5s;
   transition: .5s;
 }
 
@@ -305,25 +300,20 @@
   background: #00c853;
   border-radius: 50%;
   margin-bottom: 30px;
-  -webkit-transition: .5s;
   transition: .5s;
   overflow: hidden;
 }
 
 .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon,
 .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon i {
   font-size: 30px;
   color: #fff;
-  -webkit-transition: .5s;
   transition: .5s;
 }
 
@@ -520,19 +510,16 @@
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item .header:after {
-  -webkit-transform: translateX(-80%);
-          transform: translateX(-80%);
+  transform: translateX(-80%);
 }
 
 .eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item .header:after {
-  -webkit-transform: translateX(80%);
-          transform: translateX(80%);
+  transform: translateX(80%);
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-3 .eael-pricing-item:hover .header:after,
 .eael-pricing-content-align-right .eael-pricing.style-3 .eael-pricing-item:hover .header:after {
-  -webkit-transform: translateX(0%);
-          transform: translateX(0%);
+  transform: translateX(0%);
 }
 
 .eael-pricing-content-align-left .eael-pricing.style-1 .eael-pricing-item .header:after,
@@ -581,12 +568,9 @@
 .only-in-pro {
   width: 100%;
   -webkit-display: flex;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   padding: 15px;
   min-width: 200px;
   background: #EF5350;
