@@ -2,7 +2,7 @@ var eaelsvPosition = '';
 var eaelsvWidth = 0;
 var eaelsvHeight = 0;
 var eaelsvDomHeight = 0;
-var videoIsActive = 0;
+var videoIsActive = 'off';
 var eaelMakeItSticky = 0;
 var scrollHeight = 0;
 
@@ -57,26 +57,26 @@ jQuery(window).on('elementor/frontend/init', function () {
         var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
 
         // If element is Sticky video
-        if (sticky === 'yes') {
+        if (overlay === 'no') {
             // If autoplay is enable
-            if ('yes' === autoplay && overlay === 'no') {
+            if ('yes' === autoplay && sticky === 'yes') {
                 eaelsvDomHeight = GetDomElementHeight(element);
                 element.attr('id', 'videobox');
 
-                if (videoIsActive == 0) {
-                    videoIsActive = 1;
-                }
-            }
+                //if (videoIsActive == 'off') {
+                    videoIsActive = 'on';
+                //}
 
-            // When play event is cliked
-            // Do the sticky process
-            PlayerPlay(playerAbc, element);
+                // When play event is cliked
+                // Do the sticky process
+                PlayerPlay(playerAbc, element);
+            }
         }
 
         // Overlay Operation Started
         if (overlay === 'yes') {
             var ovrlyElmnt = element.prev();
-
+            videoIsActive = 'off';
             $(ovrlyElmnt).on('click', function () {
                 $(this).css('display', 'none');
 
@@ -87,23 +87,27 @@ jQuery(window).on('elementor/frontend/init', function () {
                 ) {
                     playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
-                    $(this)
-                        .next()
-                        .attr('id', 'videobox');
-                    videoIsActive = 1;
+                    
+                    if (sticky === 'yes') {
+                        $(this).next().attr('id', 'videobox');
+                        videoIsActive = 'on';
+                    }
                 }
             });
         }
+        
         playerAbc.on('pause', function (event) {
-            if (videoIsActive == 1) {
-                videoIsActive = 0;
-            }
+            videoIsActive = 'off';
+        });
+        
+        playerAbc.on('play', function (event) {
+            videoIsActive = 'on';
         });
 
         $('.eaelsv-sticky-player-close').on('click', function () {
             element.removeClass('out').addClass('in');
             $('.eael-sticky-video-player2').removeAttr('style');
-            videoIsActive = 0;
+            videoIsActive = 'off';
         });
 
         element.parent().css('height', element.height() + 'px');
@@ -112,15 +116,16 @@ jQuery(window).on('elementor/frontend/init', function () {
         });
     });
 
+    
+    
 });
 
-jQuery(window).scroll(function () {
+jQuery(window).scroll(function() {
     var scrollTop = jQuery(window).scrollTop();
     var scrollBottom = jQuery(document).height() - scrollTop;
-
     if (scrollBottom > jQuery(window).height() + 400) {
         if (scrollTop >= eaelsvDomHeight) {
-            if (videoIsActive == 1) {
+            if (videoIsActive == 'on') {
                 jQuery('#videobox')
                     .find('.eaelsv-sticky-player-close')
                     .css('display', 'block');
@@ -178,7 +183,7 @@ function PlayerPlay(a, b) {
         jQuery('.eael-sticky-video-player2').removeClass('out');
         b.attr('id', 'videobox');
 
-        videoIsActive = 1;
+        videoIsActive = 'on';
         eaelsvPosition = b.data('position');
         eaelsvHeight = b.data('sheight');
         eaelsvWidth = b.data('swidth');
