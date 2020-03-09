@@ -2348,7 +2348,7 @@ trait Helper
                     $html .= '<thead><tr>';
                     
                     foreach ($results[0] as $key => $th) {
-                        $style = $settings['ea_adv_data_table_dynamic_th_width'] && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
+                        $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
                         $html .= '<th' . $style . '>' . $th . '</th>';
                     }
         
