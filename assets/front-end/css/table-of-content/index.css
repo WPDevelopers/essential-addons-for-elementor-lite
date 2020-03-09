@@ -33,8 +33,10 @@ html {
   display: none;
 }
 .eael-toc.collapsed.eael-bottom-to-top .eael-toc-button {
-  transform: rotate(-90deg);
-  transform-origin: top left;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
   margin-top: 100%;
 }
 .eael-toc.collapsed .eael-toc-button {
@@ -50,8 +52,10 @@ html {
   padding: 10px 20px;
   border-radius: 3px;
   border: none;
-  transform: rotate(90deg);
-  transform-origin: bottom left;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
   cursor: pointer;
 }
 .eael-toc.collapsed .eael-toc-button:focus {
@@ -67,13 +71,17 @@ html {
   left: -11px;
 }
 .eael-toc.eael-toc-right.eael-bottom-to-top .eael-toc-button {
-  transform: rotate(-90deg);
-  transform-origin: bottom right;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
   margin-top: -100%;
 }
 .eael-toc.eael-toc-right .eael-toc-button {
-  transform: rotate(90deg);
-  transform-origin: top right;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
   margin-top: 100%;
 }
 .eael-toc .eael-toc-header {
@@ -174,7 +182,8 @@ html {
   border-bottom: 10px solid #ff7d50;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
   margin-top: 10px;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
@@ -190,6 +199,7 @@ html {
   display: none;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a {
+  display: -webkit-inline-box;
   display: inline-flex;
 }
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-word-wrap li a span {
