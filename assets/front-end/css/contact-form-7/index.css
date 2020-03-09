@@ -34,7 +34,6 @@
 .eael-contact-form-7 input[type="tel"],
 .eael-contact-form-7 input[type="color"],
 .eael-contact-form-7 .uneditable-input {
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
 
