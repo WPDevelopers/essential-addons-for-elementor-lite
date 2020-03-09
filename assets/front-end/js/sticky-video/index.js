@@ -63,9 +63,7 @@ jQuery(window).on('elementor/frontend/init', function () {
                 eaelsvDomHeight = GetDomElementHeight(element);
                 element.attr('id', 'videobox');
 
-                //if (videoIsActive == 'off') {
-                    videoIsActive = 'on';
-                //}
+                videoIsActive = 'on';
 
                 // When play event is cliked
                 // Do the sticky process
@@ -114,10 +112,7 @@ jQuery(window).on('elementor/frontend/init', function () {
         $(window).resize(function() {
             element.parent().css('height', element.height() + 'px');
         });
-    });
-
-    
-    
+    }); 
 });
 
 jQuery(window).scroll(function() {
