@@ -93,6 +93,13 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
   display: table-row;
 }
+.ea-advanced-data-table-wrap .ea-advanced-data-table .nt_add_cart_wrapper {
+  text-align: center;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table .nt_add_cart_wrapper .button {
+  display: block;
+  white-space: nowrap;
+}
 .ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-center {
   text-align: center;
 }

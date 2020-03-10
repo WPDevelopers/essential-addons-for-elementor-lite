@@ -365,6 +365,20 @@ var Advanced_Data_Table = function($scope, $) {
 				}
 			}
 		}
+
+		// woocommerce
+		table.querySelectorAll(".nt_button_woo").forEach(function(el) {
+			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
+		});
+
+		table.querySelectorAll(".nt_woo_quantity").forEach(function(el) {
+			el.addEventListener("input", function(e) {
+				var product_id = e.target.dataset.product_id;
+				var quantity = e.target.value;
+
+				$(".nt_add_to_cart_" + product_id, $(table)).data("quantity", quantity);
+			});
+		});
 	}
 };
 

@@ -138,6 +138,16 @@
 				}
 			}
 		}
+
+		// woocommerce
+		.nt_add_cart_wrapper {
+			text-align: center;
+
+			.button {
+				display: block;
+				white-space: nowrap;
+			}
+		}
 	}
 
 	// search
