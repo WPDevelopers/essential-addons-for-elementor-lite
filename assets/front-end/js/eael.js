@@ -17673,54 +17673,6 @@ var trim = String.prototype.trim ?
 }));
 
 
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -19582,6 +19534,54 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -39140,6 +39140,125 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var ContentTicker = function($scope, $) {
+    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+        $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
+        $items_tablet =
+            $contentTicker.data("items-tablet") !== undefined
+                ? $contentTicker.data("items-tablet")
+                : 1,
+        $items_mobile =
+            $contentTicker.data("items-mobile") !== undefined
+                ? $contentTicker.data("items-mobile")
+                : 1,
+        $margin =
+            $contentTicker.data("margin") !== undefined
+                ? $contentTicker.data("margin")
+                : 10,
+        $margin_tablet =
+            $contentTicker.data("margin-tablet") !== undefined
+                ? $contentTicker.data("margin-tablet")
+                : 10,
+        $margin_mobile =
+            $contentTicker.data("margin-mobile") !== undefined
+                ? $contentTicker.data("margin-mobile")
+                : 10,
+        $effect =
+            $contentTicker.data("effect") !== undefined
+                ? $contentTicker.data("effect")
+                : "slide",
+        $speed =
+            $contentTicker.data("speed") !== undefined
+                ? $contentTicker.data("speed")
+                : 400,
+        $autoplay =
+            $contentTicker.data("autoplay") !== undefined
+                ? $contentTicker.data("autoplay")
+                : 5000,
+        $loop =
+            $contentTicker.data("loop") !== undefined
+                ? $contentTicker.data("loop")
+                : false,
+        $grab_cursor =
+            $contentTicker.data("grab-cursor") !== undefined
+                ? $contentTicker.data("grab-cursor")
+                : false,
+        $pagination =
+            $contentTicker.data("pagination") !== undefined
+                ? $contentTicker.data("pagination")
+                : ".swiper-pagination",
+        $arrow_next =
+            $contentTicker.data("arrow-next") !== undefined
+                ? $contentTicker.data("arrow-next")
+                : ".swiper-button-next",
+        $arrow_prev =
+            $contentTicker.data("arrow-prev") !== undefined
+                ? $contentTicker.data("arrow-prev")
+                : ".swiper-button-prev",
+        $pause_on_hover =
+            $contentTicker.data("pause-on-hover") !== undefined
+                ? $contentTicker.data("pause-on-hover")
+                : "",
+        $contentTickerOptions = {
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
+                },
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
+                }
+            }
+        };
+
+    var $contentTickerSlider = new Swiper(
+        $contentTicker,
+        $contentTickerOptions
+    );
+    if ($autoplay === 0) {
+        $contentTickerSlider.autoplay.stop();
+    }
+    if ($pause_on_hover && $autoplay !== 0) {
+        $contentTicker.on("mouseenter", function() {
+            $contentTickerSlider.autoplay.stop();
+        });
+        $contentTicker.on("mouseleave", function() {
+            $contentTickerSlider.autoplay.start();
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-content-ticker.default",
+        ContentTicker
+    );
+});
 var advanced_data_table_timeout,
 	advanced_data_table_active_cell = null,
 	advanced_data_table_drag_start_x,
@@ -39968,6 +40087,73 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", Advanced_Data_Table);
 });
 
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -40046,192 +40232,72 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
 });
 
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
 
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
 
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
                 } else {
-                    //do nothing!
+                    $this.remove();
                 }
-            }
+            },
+            error: function() {}
         });
     });
 };
+
 jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
     );
 });
 
-var ContentTicker = function($scope, $) {
-    var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-        $items =
-            $contentTicker.data("items") !== undefined
-                ? $contentTicker.data("items")
-                : 1,
-        $items_tablet =
-            $contentTicker.data("items-tablet") !== undefined
-                ? $contentTicker.data("items-tablet")
-                : 1,
-        $items_mobile =
-            $contentTicker.data("items-mobile") !== undefined
-                ? $contentTicker.data("items-mobile")
-                : 1,
-        $margin =
-            $contentTicker.data("margin") !== undefined
-                ? $contentTicker.data("margin")
-                : 10,
-        $margin_tablet =
-            $contentTicker.data("margin-tablet") !== undefined
-                ? $contentTicker.data("margin-tablet")
-                : 10,
-        $margin_mobile =
-            $contentTicker.data("margin-mobile") !== undefined
-                ? $contentTicker.data("margin-mobile")
-                : 10,
-        $effect =
-            $contentTicker.data("effect") !== undefined
-                ? $contentTicker.data("effect")
-                : "slide",
-        $speed =
-            $contentTicker.data("speed") !== undefined
-                ? $contentTicker.data("speed")
-                : 400,
-        $autoplay =
-            $contentTicker.data("autoplay") !== undefined
-                ? $contentTicker.data("autoplay")
-                : 5000,
-        $loop =
-            $contentTicker.data("loop") !== undefined
-                ? $contentTicker.data("loop")
-                : false,
-        $grab_cursor =
-            $contentTicker.data("grab-cursor") !== undefined
-                ? $contentTicker.data("grab-cursor")
-                : false,
-        $pagination =
-            $contentTicker.data("pagination") !== undefined
-                ? $contentTicker.data("pagination")
-                : ".swiper-pagination",
-        $arrow_next =
-            $contentTicker.data("arrow-next") !== undefined
-                ? $contentTicker.data("arrow-next")
-                : ".swiper-button-next",
-        $arrow_prev =
-            $contentTicker.data("arrow-prev") !== undefined
-                ? $contentTicker.data("arrow-prev")
-                : ".swiper-button-prev",
-        $pause_on_hover =
-            $contentTicker.data("pause-on-hover") !== undefined
-                ? $contentTicker.data("pause-on-hover")
-                : "",
-        $contentTickerOptions = {
-            direction: "horizontal",
-            loop: $loop,
-            speed: $speed,
-            effect: $effect,
-            slidesPerView: $items,
-            spaceBetween: $margin,
-            grabCursor: $grab_cursor,
-            paginationClickable: true,
-            autoHeight: true,
-            autoplay: {
-                delay: $autoplay
-            },
-            pagination: {
-                el: $pagination,
-                clickable: true
-            },
-            navigation: {
-                nextEl: $arrow_next,
-                prevEl: $arrow_prev
-            },
-            breakpoints: {
-                // when window width is <= 480px
-                480: {
-                    slidesPerView: $items_mobile,
-                    spaceBetween: $margin_mobile
-                },
-                // when window width is <= 640px
-                768: {
-                    slidesPerView: $items_tablet,
-                    spaceBetween: $margin_tablet
-                }
-            }
-        };
-
-    var $contentTickerSlider = new Swiper(
-        $contentTicker,
-        $contentTickerOptions
-    );
-    if ($autoplay === 0) {
-        $contentTickerSlider.autoplay.stop();
-    }
-    if ($pause_on_hover && $autoplay !== 0) {
-        $contentTicker.on("mouseenter", function() {
-            $contentTickerSlider.autoplay.stop();
-        });
-        $contentTicker.on("mouseleave", function() {
-            $contentTickerSlider.autoplay.start();
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-content-ticker.default",
-        ContentTicker
-    );
-});
 var EventCalendar = function($scope, $) {
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
@@ -40398,72 +40464,6 @@ var EventCalendar = function($scope, $) {
 
 jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
-});
-
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
 });
 
 var FancyText = function($scope, $) {
@@ -40770,6 +40770,31 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope),
+        $layout_mode = $gallery.data('layout-mode');
+        
+    if($layout_mode === 'masonry') {
+        $gallery.isotope({
+            itemSelector: ".eael-grid-post",
+            layoutMode: $layout_mode,
+            percentPosition: true
+        });
+
+        // layout gal, while images are loading
+        $gallery.imagesLoaded().progress(function() {
+            $gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".tooltip"),
@@ -40817,31 +40842,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope),
-        $layout_mode = $gallery.data('layout-mode');
-        
-    if($layout_mode === 'masonry') {
-        $gallery.isotope({
-            itemSelector: ".eael-grid-post",
-            layoutMode: $layout_mode,
-            percentPosition: true
-        });
-
-        // layout gal, while images are loading
-        $gallery.imagesLoaded().progress(function() {
-            $gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
-    );
-});
-
 var ProgressBar = function($scope, $) {
     $(".eael-progressbar", $scope).eaelProgressBar();
 };
@@ -40852,197 +40852,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var eaelsvPosition = '';
-var eaelsvWidth = 0;
-var eaelsvHeight = 0;
-var eaelsvDomHeight = 0;
-var videoIsActive = 'off';
-var eaelMakeItSticky = 0;
-var scrollHeight = 0;
-
-jQuery(window).on('elementor/frontend/init', function () {
-    
-    if (isEditMode) {
-        elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
-            var interval;
-
-            model.attributes.settings.on('change:eaelsv_sticky_width', function() {
-                clearTimeout(interval);
-
-                interval = setTimeout(function() {
-                    var height = Math.ceil(model.getSetting('eaelsv_sticky_width') / 1.78);
-
-                    model.attributes.settings.attributes.eaelsv_sticky_height = height;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_height"]').value = height;
-                }, 250);
-            });
-            
-            model.attributes.settings.on('change:eaelsv_sticky_height', function() {
-                clearTimeout(interval);
-
-                interval = setTimeout(function() {
-                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
-
-                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
-                }, 250);
-            });
-        });
-    }
-
-    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
-        $('.eaelsv-sticky-player-close', $scope).hide();
-
-        var element = $scope.find('.eael-sticky-video-player2');
-        var sticky = '';
-        var autoplay = '';
-        var overlay = '';
-
-        sticky = element.data('sticky');
-        autoplay = element.data('autoplay');
-        eaelsvPosition = element.data('position');
-        eaelsvHeight = element.data('sheight');
-        eaelsvWidth = element.data('swidth');
-        overlay = element.data('overlay');
-        scrollHeight = element.data('scroll_height');
-
-        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-
-        var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
-
-        // If element is Sticky video
-        if (overlay === 'no') {
-            // If autoplay is enable
-            if ('yes' === autoplay && sticky === 'yes') {
-                eaelsvDomHeight = GetDomElementHeight(element);
-                element.attr('id', 'videobox');
-
-                videoIsActive = 'on';
-
-                // When play event is cliked
-                // Do the sticky process
-                PlayerPlay(playerAbc, element);
-            }
-        }
-
-        // Overlay Operation Started
-        if (overlay === 'yes') {
-            var ovrlyElmnt = element.prev();
-            videoIsActive = 'off';
-            $(ovrlyElmnt).on('click', function () {
-                $(this).css('display', 'none');
-
-                if (
-                    $(this)
-                        .next()
-                        .data('autoplay') === 'yes'
-                ) {
-                    playerAbc.restart();
-                    eaelsvDomHeight = GetDomElementHeight(this);
-                    
-                    if (sticky === 'yes') {
-                        $(this).next().attr('id', 'videobox');
-                        videoIsActive = 'on';
-                    }
-                }
-            });
-        }
-        
-        playerAbc.on('pause', function (event) {
-            videoIsActive = 'off';
-        });
-        
-        playerAbc.on('play', function (event) {
-            videoIsActive = 'on';
-        });
-
-        $('.eaelsv-sticky-player-close').on('click', function () {
-            element.removeClass('out').addClass('in');
-            $('.eael-sticky-video-player2').removeAttr('style');
-            videoIsActive = 'off';
-        });
-
-        element.parent().css('height', element.height() + 'px');
-        $(window).resize(function() {
-            element.parent().css('height', element.height() + 'px');
-        });
-    }); 
-});
-
-jQuery(window).scroll(function() {
-    var scrollTop = jQuery(window).scrollTop();
-    var scrollBottom = jQuery(document).height() - scrollTop;
-    if (scrollBottom > jQuery(window).height() + 400) {
-        if (scrollTop >= eaelsvDomHeight) {
-            if (videoIsActive == 'on') {
-                jQuery('#videobox')
-                    .find('.eaelsv-sticky-player-close')
-                    .css('display', 'block');
-                jQuery('#videobox')
-                    .removeClass('in')
-                    .addClass('out');
-                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-            }
-        } else {
-            jQuery('.eaelsv-sticky-player-close').hide();
-            jQuery('#videobox')
-                .removeClass('out')
-                .addClass('in');
-            jQuery('.eael-sticky-video-player2').removeAttr('style');
-        }
-    }
-});
-
-function GetDomElementHeight(elem) {
-    var contentHeight = jQuery(elem).parent().height();
-    var expHeight = ((scrollHeight * contentHeight) / 100);
-    var hght =
-        jQuery(elem)
-            .parent()
-            .offset().top + expHeight;
-
-    return hght;
-}
-
-function PositionStickyPlayer(p, h, w) {
-    if (p == 'top-left') {
-        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
-    }
-    if (p == 'top-right') {
-        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
-    }
-    if (p == 'bottom-right') {
-        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
-    }
-    if (p == 'bottom-left') {
-        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
-    }
-    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
-    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
-}
-
-function PlayerPlay(a, b) {
-    a.on('play', function (event) {
-        eaelsvDomHeight = GetDomElementHeight(b);
-        jQuery('.eael-sticky-video-player2').removeAttr('id');
-        jQuery('.eael-sticky-video-player2').removeClass('out');
-        b.attr('id', 'videobox');
-
-        videoIsActive = 'on';
-        eaelsvPosition = b.data('position');
-        eaelsvHeight = b.data('sheight');
-        eaelsvWidth = b.data('swidth');
-    });
-}
-
-function RunStickyPlayer(elem) {
-    var ovrplyer = new Plyr('#' + elem);
-    ovrplyer.start();
-}
 jQuery(document).ready(function() {
     // scroll func
     jQuery(window).scroll(function() {
@@ -41121,6 +40930,192 @@ jQuery(document).ready(function() {
     }
 });
 
+var eaelsvPosition = '';
+var eaelsvWidth = 0;
+var eaelsvHeight = 0;
+var eaelsvDomHeight = 0;
+var videoIsActive = 'off';
+var eaelMakeItSticky = 0;
+var scrollHeight = 0;
+
+jQuery(window).on('elementor/frontend/init', function () {
+    
+    if (isEditMode) {
+        elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
+            var interval;
+
+            model.attributes.settings.on('change:eaelsv_sticky_width', function() {
+                clearTimeout(interval);
+
+                interval = setTimeout(function() {
+                    var height = Math.ceil(model.getSetting('eaelsv_sticky_width') / 1.78);
+
+                    model.attributes.settings.attributes.eaelsv_sticky_height = height;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_height"]').value = height;
+                }, 250);
+            });
+            
+            model.attributes.settings.on('change:eaelsv_sticky_height', function() {
+                clearTimeout(interval);
+
+                interval = setTimeout(function() {
+                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
+
+                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
+                }, 250);
+            });
+        });
+    }
+
+    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
+        $('.eaelsv-sticky-player-close', $scope).hide();
+
+        var element = $scope.find('.eael-sticky-video-player2');
+        var sticky = '';
+        var autoplay = '';
+        var overlay = '';
+
+        sticky = element.data('sticky');
+        autoplay = element.data('autoplay');
+        eaelsvPosition = element.data('position');
+        eaelsvHeight = element.data('sheight');
+        eaelsvWidth = element.data('swidth');
+        overlay = element.data('overlay');
+        scrollHeight = element.data('scroll_height');
+        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+
+        var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
+
+        // If element is Sticky video
+        if (overlay === 'no') {
+            // If autoplay is enable
+            if ('yes' === autoplay && sticky === 'yes') {
+                eaelsvDomHeight = GetDomElementHeight(element);
+                element.attr('id', 'videobox');
+
+                videoIsActive = 'on';
+
+                // When play event is cliked
+                // Do the sticky process
+                PlayerPlay(playerAbc, element);
+            }
+        }
+
+        // Overlay Operation Started
+        if (overlay === 'yes') {
+            var ovrlyElmnt = element.prev();
+            videoIsActive = 'off';
+            $(ovrlyElmnt).on('click', function () {
+                $(this).css('display', 'none');
+
+                if ($(this).next().data('autoplay') === 'yes') {
+                    playerAbc.restart();
+                    eaelsvDomHeight = GetDomElementHeight(this);
+                    if (sticky === 'yes') {
+                        $(this).next().attr('id', 'videobox');
+                        videoIsActive = 'on';
+                    }
+                }
+            });
+        }
+        
+        playerAbc.on('pause', function (event) {
+            videoIsActive = 'off';
+        });
+        
+        playerAbc.on('play', function (event) {
+            videoIsActive = 'on';
+        });
+
+        $('.eaelsv-sticky-player-close').on('click', function () {
+            element.removeClass('out').addClass('in');
+            $('.eael-sticky-video-player2').removeAttr('style');
+            videoIsActive = 'off';
+        });
+
+        element.parent().css('height', element.height() + 'px');
+        $(window).resize(function() {
+            element.parent().css('height', element.height() + 'px');
+        });
+    }); 
+});
+
+jQuery(window).scroll(function() {
+    var scrollTop = jQuery(window).scrollTop();
+    var scrollBottom = jQuery(document).height() - scrollTop;
+    if (scrollBottom > jQuery(window).height() + 400) {
+        if (scrollTop >= eaelsvDomHeight) {
+            if (videoIsActive == 'on') {
+                jQuery('#videobox')
+                    .find('.eaelsv-sticky-player-close')
+                    .css('display', 'block');
+                jQuery('#videobox')
+                    .removeClass('in')
+                    .addClass('out');
+                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+            }
+        } else {
+            jQuery('.eaelsv-sticky-player-close').hide();
+            jQuery('#videobox')
+                .removeClass('out')
+                .addClass('in');
+            jQuery('.eael-sticky-video-player2').removeAttr('style');
+        }
+    }
+});
+
+function GetDomElementHeight(elem) {
+    var contentHeight = jQuery(elem).parent().height();
+    var expHeight = ((scrollHeight * contentHeight) / 100);
+    var hght =
+        jQuery(elem)
+            .parent()
+            .offset().top + expHeight;
+
+    return hght;
+}
+
+function PositionStickyPlayer(p, h, w) {
+    alert(h+w);
+    if (p == 'top-left') {
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
+    }
+    if (p == 'top-right') {
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
+    }
+    if (p == 'bottom-right') {
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
+    }
+    if (p == 'bottom-left') {
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
+    }
+    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
+    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
+}
+
+function PlayerPlay(a, b) {
+    a.on('play', function (event) {
+        eaelsvDomHeight = GetDomElementHeight(b);
+        jQuery('.eael-sticky-video-player2').removeAttr('id');
+        jQuery('.eael-sticky-video-player2').removeClass('out');
+        b.attr('id', 'videobox');
+
+        videoIsActive = 'on';
+        eaelsvPosition = b.data('position');
+        eaelsvHeight = b.data('sheight');
+        eaelsvWidth = b.data('swidth');
+    });
+}
+
+function RunStickyPlayer(elem) {
+    var ovrplyer = new Plyr('#' + elem);
+    ovrplyer.start();
+}
 (function($) {
 	jQuery(document).ready(function() {
 		/**
