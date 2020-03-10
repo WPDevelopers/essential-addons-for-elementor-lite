@@ -331,13 +331,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_head_horizontal_alignment',
             [
                 'label' => esc_html__('Text Alignment', 'essential-addons-for-elementor-lite'),
@@ -365,13 +358,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_head_color',
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
@@ -387,13 +373,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_head_background',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
@@ -402,13 +381,6 @@ class Advanced_Data_Table extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} thead' => 'background-color: {{VALUE}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -436,13 +408,6 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'selector' => '{{WRAPPER}} th',
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -488,13 +453,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_body_horizontal_alignment',
             [
                 'label' => esc_html__('Text Alignment', 'essential-addons-for-elementor-lite'),
@@ -522,13 +480,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_body_color',
             [
                 'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
@@ -542,9 +493,28 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
+            'ea_adv_data_table_body_link_color',
             [
-                'type' => Controls_Manager::DIVIDER,
+                'label' => __('Link Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} td textarea a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} td a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_body_link_hovercolor',
+            [
+                'label' => __('Link Hover Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} td textarea a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} td a:hover' => 'color: {{VALUE}};',
+                ],
             ]
         );
 
@@ -557,13 +527,6 @@ class Advanced_Data_Table extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} tbody' => 'background-color: {{VALUE}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -591,13 +554,6 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'selector' => '{{WRAPPER}} td',
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -817,13 +773,6 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
         $this->add_responsive_control(
             'ea_adv_data_table_body_cell_padding',
             [
@@ -888,13 +837,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_search_height',
             [
                 'label' => __('Height', 'essential-addons-for-elementor-lite'),
@@ -917,13 +859,6 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
         $this->add_responsive_control(
             'ea_adv_data_table_search_padding',
             [
@@ -933,13 +868,6 @@ class Advanced_Data_Table extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-search' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -967,13 +895,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_search_alignment',
             [
                 'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
@@ -997,26 +918,12 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_adv_data_table_search_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-search',
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1033,13 +940,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_search_background',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
@@ -1048,13 +948,6 @@ class Advanced_Data_Table extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-search' => 'background-color: {{VALUE}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1082,13 +975,6 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-search',
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1182,26 +1068,12 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_adv_data_table_pagination_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a, {{WRAPPER}} .ea-advanced-data-table-pagination select',
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1223,13 +1095,6 @@ class Advanced_Data_Table extends Widget_Base
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1272,13 +1137,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_pagination_background',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
@@ -1288,13 +1146,6 @@ class Advanced_Data_Table extends Widget_Base
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'background-color: {{VALUE}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1322,13 +1173,6 @@ class Advanced_Data_Table extends Widget_Base
                     ],
                 ],
                 'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a, {{WRAPPER}} .ea-advanced-data-table-pagination select',
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1364,13 +1208,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_pagination_background_hover',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
@@ -1381,13 +1218,6 @@ class Advanced_Data_Table extends Widget_Base
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'background-color: {{VALUE}};',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
             ]
         );
 
@@ -1419,13 +1249,6 @@ class Advanced_Data_Table extends Widget_Base
         );
 
         $this->add_control(
-            base64_encode(random_bytes(10)),
-            [
-                'type' => Controls_Manager::DIVIDER,
-            ]
-        );
-
-        $this->add_control(
             'ea_adv_data_table_pagination_border_radius_hover',
             [
                 'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
@@ -1442,6 +1265,153 @@ class Advanced_Data_Table extends Widget_Base
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'ea_section_adv_data_table_style_button',
+            [
+                'label' => __('Button', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'ea_adv_data_table_button_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} td textarea button, {{WRAPPER}} td button, {{WRAPPER}} td .button',
+            ]
+        );
+
+        $this->start_controls_tabs('ea_adv_data_table_button_tabs');
+
+        $this->start_controls_tab('ea_adv_data_table_button_tab_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_control(
+            'ea_adv_data_table_button_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} td textarea button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} td button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} td .button' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_button_background_color',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} td textarea button' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} td button' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} td .button' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('ea_adv_data_table_button_tab_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_control(
+            'ea_adv_data_table_button_color_hover',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} td textarea button:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} td button:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} td .button:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_button_background_color_hover',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} td textarea button:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} td button:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} td .button:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'ea_adv_data_table_button_border',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'fields_options' => [
+                    'border' => [
+                        'default' => '',
+                    ],
+                    'width' => [
+                        'default' => [
+                            'unit' => 'px',
+                            'isLinked' => true,
+                        ],
+                    ],
+                    'color' => [
+                        'default' => '',
+                    ],
+                ],
+                'selector' => '{{WRAPPER}} td textarea button, {{WRAPPER}} td button, {{WRAPPER}} td .button',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_button_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} td textarea button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} td button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} td .button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'ea_adv_data_table_button_box_shadow',
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} td textarea button, {{WRAPPER}} td button, {{WRAPPER}} td .button',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_button_border_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} td textarea button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} td button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} td .button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
     }

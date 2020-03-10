@@ -527,8 +527,6 @@ class Product_Grid extends Widget_Base
             'eael_product_grid_column' => $settings['eael_product_grid_column']
         ];
 
-        // eael-product-columns-' . $settings['eael_product_grid_column'] . '
-
         echo '<div class="eael-product-grid ' . $settings['eael_product_grid_style_preset'] . '">
 			<div class="woocommerce">
                 <ul class="products">
