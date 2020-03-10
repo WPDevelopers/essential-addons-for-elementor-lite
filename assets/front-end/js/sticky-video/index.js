@@ -9,6 +9,7 @@ var scrollHeight = 0;
 jQuery(window).on('elementor/frontend/init', function () {
     
     if (isEditMode) {
+        
         elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
             var interval;
 
@@ -78,14 +79,9 @@ jQuery(window).on('elementor/frontend/init', function () {
             $(ovrlyElmnt).on('click', function () {
                 $(this).css('display', 'none');
 
-                if (
-                    $(this)
-                        .next()
-                        .data('autoplay') === 'yes'
-                ) {
+                if ($(this).next().data('autoplay') === 'yes') {
                     playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
-                    
                     if (sticky === 'yes') {
                         $(this).next().attr('id', 'videobox');
                         videoIsActive = 'on';
