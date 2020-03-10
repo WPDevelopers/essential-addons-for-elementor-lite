@@ -125,7 +125,7 @@ class Progress_Bar extends Widget_Base
         );
 
         $this->add_control(
-            'progress_bar_dynamic_value_type',
+            'progress_bar_value_type',
             [
                 'label' => esc_html__('Counter Value Type', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
@@ -155,7 +155,7 @@ class Progress_Bar extends Widget_Base
                     'size' => 50,
                 ],
                 'condition' => [
-                    'progress_bar_dynamic_value_type' => 'static',
+                    'progress_bar_value_type' => 'static',
                 ],
             ]
         );
@@ -172,7 +172,7 @@ class Progress_Bar extends Widget_Base
                     'active' => true,
                 ],
                 'condition' => [
-                    'progress_bar_dynamic_value_type' => 'dynamic',
+                    'progress_bar_value_type' => 'dynamic',
                 ],
             ]
         );
@@ -754,7 +754,7 @@ class Progress_Bar extends Widget_Base
             $this->add_render_attribute('eael-progressbar-line', [
                 'class' => $wrap_classes,
                 'data-layout' => 'line',
-                'data-count' => $settings['progress_bar_dynamic_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic'],
+                'data-count' => $settings['progress_bar_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic'],
                 'data-duration' => $settings['progress_bar_animation_duration']['size'],
             ]);
 
@@ -782,7 +782,7 @@ class Progress_Bar extends Widget_Base
                 [
                     'class' => $wrap_classes,
                     'data-layout' => $settings['progress_bar_layout'],
-                    'data-count' => $settings['progress_bar_dynamic_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic'],
+                    'data-count' => $settings['progress_bar_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic'],
                     'data-duration' => $settings['progress_bar_animation_duration']['size'],
                 ]
             );
@@ -827,7 +827,7 @@ class Progress_Bar extends Widget_Base
                 [
                     'class' => $wrap_classes,
                     'data-layout' => $settings['progress_bar_layout'],
-                    'data-count' => $settings['progress_bar_dynamic_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic'],
+                    'data-count' => $settings['progress_bar_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic'],
                     'data-duration' => $settings['progress_bar_animation_duration']['size'],
                 ]
             );
@@ -842,7 +842,7 @@ class Progress_Bar extends Widget_Base
                     </div>
                     <div class="eael-progressbar-circle-inner-content">
                         ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', $settings['progress_bar_title_html_tag'], 'eael-progressbar-title') . $settings['progress_bar_title'] . sprintf('</%1$s>', $settings['progress_bar_title_html_tag']) : '') . '
-                        ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_dynamic_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic']['unit'] . '</span></span>' : '') . '
+                        ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . $settings['progress_bar_value_type'] == 'static' ? $settings['progress_bar_value']['size'] :  $settings['progress_bar_value_dynamic']['unit'] . '</span></span>' : '') . '
                     </div>
                 </div>
                 <div class="eael-progressbar-half-circle-after">
