@@ -2357,7 +2357,7 @@ trait Helper
                             if ($th['data_type'] == 'image') {
                                 $html .= '<td><a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '" alt="' . $tr[$th['key']]['alt_text'] . '"></a></td>';
                             } elseif ($th['data_type'] == 'selection') {
-                                $html .= '<td>' . implode($tr[$th['key']], ', ') . '</td>';
+                                $html .= '<td>' . implode((array) $tr[$th['key']], ', ') . '</td>';
                             } elseif ($th['data_type'] == 'button') {
                                 $html .= '<td><a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a></td>';
                             } else {
