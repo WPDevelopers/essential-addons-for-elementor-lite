@@ -2325,52 +2325,51 @@ trait Helper
     public function advanced_data_table_integration($settings, $html)
     {
         $html = '';
-        // $results = [];
-
-        if ($settings['ea_adv_data_table_source'] == 'ninja' && !empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
-            $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
-            $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
-            $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
-        }
 
         if ($settings['ea_adv_data_table_source'] == 'ninja') {
-            if (!empty($table_rows)) {
-                if (!isset($table_settings['hide_header_row']) || $table_settings['hide_header_row'] != true) {
-                    $html .= '<thead><tr>';
+            if (!empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
+                $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
+                $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
+                $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
 
-                    foreach ($table_headers as $key => $th) {
-                        $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
-                        $html .= '<th' . $style . '>' . $th['name'] . '</th>';
-                    }
-
-                    $html .= '</tr></thead>';
-                }
-
-                $html .= '<tbody>';
-
-                foreach ($table_rows as $key => $tr) {
-                    $html .= '<tr>';
+                if (!empty($table_rows)) {
+                    if (!isset($table_settings['hide_header_row']) || $table_settings['hide_header_row'] != true) {
+                        $html .= '<thead><tr>';
     
-                    foreach ($table_headers as $th) {
-                        if (!isset($th['data_type'])) {
-                            $th['data_type'] = '';
+                        foreach ($table_headers as $key => $th) {
+                            $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
+                            $html .= '<th' . $style . '>' . $th['name'] . '</th>';
                         }
-                        
-                        if ($th['data_type'] == 'image') {
-                            $html .= '<td><a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '" alt="' . $tr[$th['key']]['alt_text'] . '"></a></td>';
-                        } elseif ($th['data_type'] == 'selection') {
-                            $html .= '<td>' . implode($tr[$th['key']], ', ') . '</td>';
-                        } elseif ($th['data_type'] == 'button') {
-                            $html .= '<td><a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a></td>';
-                        } else {
-                            $html .= '<td>' . $tr[$th['key']] . '</td>';
-                        }
+    
+                        $html .= '</tr></thead>';
                     }
     
-                    $html .= '</tr>';
-                }
+                    $html .= '<tbody>';
     
-                $html .= '</tbody>';
+                    foreach ($table_rows as $key => $tr) {
+                        $html .= '<tr>';
+        
+                        foreach ($table_headers as $th) {
+                            if (!isset($th['data_type'])) {
+                                $th['data_type'] = '';
+                            }
+                            
+                            if ($th['data_type'] == 'image') {
+                                $html .= '<td><a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '" alt="' . $tr[$th['key']]['alt_text'] . '"></a></td>';
+                            } elseif ($th['data_type'] == 'selection') {
+                                $html .= '<td>' . implode($tr[$th['key']], ', ') . '</td>';
+                            } elseif ($th['data_type'] == 'button') {
+                                $html .= '<td><a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a></td>';
+                            } else {
+                                $html .= '<td>' . $tr[$th['key']] . '</td>';
+                            }
+                        }
+        
+                        $html .= '</tr>';
+                    }
+        
+                    $html .= '</tbody>';
+                }
             }
         }
 
