@@ -81,9 +81,6 @@ var Advanced_Data_Table = function($scope, $) {
 	if (isEditMode) {
 		var attr = "readonly";
 
-		// add edit class
-		table.classList.add("ea-advanced-data-table-editable");
-
 		if (table.classList.contains("ea-advanced-data-table-static")) {
 			attr = "";
 
@@ -264,6 +261,7 @@ var Advanced_Data_Table = function($scope, $) {
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			var paginationHTML = "";
+			var paginationType = pagination.classList.contains("ea-advanced-data-table-pagination-button") ? "button" : "select";
 			var currentPage = 1;
 			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			var endIndex = currentPage * table.dataset.itemsPerPage;
@@ -271,14 +269,22 @@ var Advanced_Data_Table = function($scope, $) {
 
 			// insert pagination
 			if (maxPages > 1) {
-				for (var i = 1; i <= maxPages; i++) {
-					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
-				}
+				if (paginationType == "button") {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
+					}
 
-				pagination.insertAdjacentHTML(
-					"beforeend",
-					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
-				);
+					pagination.insertAdjacentHTML(
+						"beforeend",
+						'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
+					);
+				} else {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<option value="' + i + '">' + i + "</option>";
+					}
+
+					pagination.insertAdjacentHTML("beforeend", "<select>" + paginationHTML + "</select>");
+				}
 			}
 
 			// make initial item visible
@@ -291,43 +297,88 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 
 			// paginate on click
-			pagination.addEventListener("click", function(e) {
-				e.preventDefault();
+			if (paginationType == "button") {
+				pagination.addEventListener("click", function(e) {
+					e.preventDefault();
 
-				if (e.target.tagName.toLowerCase() == "a") {
-					currentPage = e.target.dataset.page;
-					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
-					endIndex = currentPage * table.dataset.itemsPerPage;
+					if (e.target.tagName.toLowerCase() == "a") {
+						currentPage = e.target.dataset.page;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
 
-					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
-						el.classList.remove("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+							el.classList.remove("ea-advanced-data-table-pagination-current");
+						});
 
-					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
-						el.classList.add("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+							el.classList.add("ea-advanced-data-table-pagination-current");
+						});
 
-					for (var i = offset; i <= table.rows.length - 1; i++) {
-						if (i >= startIndex && i <= endIndex) {
-							table.rows[i].style.display = "table-row";
-						} else {
-							table.rows[i].style.display = "none";
-						}
-					}
-
-					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("asc", "desc");
-
-						if (typeof classCollection[currentPage] != "undefined") {
-							if (classCollection[currentPage][index]) {
-								el.classList.add(classCollection[currentPage][index]);
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
 							}
 						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
+					}
+				});
+			} else {
+				if (pagination.hasChildNodes()) {
+					pagination.querySelector("select").addEventListener("input", function(e) {
+						e.preventDefault();
+
+						currentPage = e.target.value;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
+
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
 					});
 				}
-			});
+			}
 		}
+
+		// woocommerce
+		table.querySelectorAll(".nt_button_woo").forEach(function(el) {
+			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
+		});
+
+		table.querySelectorAll(".nt_woo_quantity").forEach(function(el) {
+			el.addEventListener("input", function(e) {
+				var product_id = e.target.dataset.product_id;
+				var quantity = e.target.value;
+
+				$(".nt_add_to_cart_" + product_id, $(table)).data("quantity", quantity);
+			});
+		});
 	}
 };
 
