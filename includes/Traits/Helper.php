@@ -2355,11 +2355,11 @@ trait Helper
                             }
                             
                             if ($th['data_type'] == 'image') {
-                                $html .= '<td><a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '" alt="' . $tr[$th['key']]['alt_text'] . '"></a></td>';
+                                $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
                             } elseif ($th['data_type'] == 'selection') {
-                                $html .= '<td>' . implode((array) $tr[$th['key']], ', ') . '</td>';
+                                $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
                             } elseif ($th['data_type'] == 'button') {
-                                $html .= '<td><a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a></td>';
+                                $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                             } else {
                                 $html .= '<td>' . $tr[$th['key']] . '</td>';
                             }
