@@ -13967,6 +13967,148 @@ return ImagesLoaded;
 });
 
 
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -17531,148 +17673,6 @@ var trim = String.prototype.trim ?
 }));
 
 
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -19540,6 +19540,10 @@ var trim = String.prototype.trim ?
 		var $layout = $this.data('layout')
 		var $num = $this.data('count')
 		var $duration = $this.data('duration')
+
+		if($num > 100) {
+			$num = 100;
+		}
 
 		$this.one('inview', function() {
 			if ($layout == 'line') {
@@ -39227,9 +39231,6 @@ var Advanced_Data_Table = function($scope, $) {
 	if (isEditMode) {
 		var attr = "readonly";
 
-		// add edit class
-		table.classList.add("ea-advanced-data-table-editable");
-
 		if (table.classList.contains("ea-advanced-data-table-static")) {
 			attr = "";
 
@@ -39410,6 +39411,7 @@ var Advanced_Data_Table = function($scope, $) {
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			var paginationHTML = "";
+			var paginationType = pagination.classList.contains("ea-advanced-data-table-pagination-button") ? "button" : "select";
 			var currentPage = 1;
 			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			var endIndex = currentPage * table.dataset.itemsPerPage;
@@ -39417,14 +39419,22 @@ var Advanced_Data_Table = function($scope, $) {
 
 			// insert pagination
 			if (maxPages > 1) {
-				for (var i = 1; i <= maxPages; i++) {
-					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
-				}
+				if (paginationType == "button") {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
+					}
 
-				pagination.insertAdjacentHTML(
-					"beforeend",
-					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
-				);
+					pagination.insertAdjacentHTML(
+						"beforeend",
+						'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
+					);
+				} else {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<option value="' + i + '">' + i + "</option>";
+					}
+
+					pagination.insertAdjacentHTML("beforeend", "<select>" + paginationHTML + "</select>");
+				}
 			}
 
 			// make initial item visible
@@ -39437,43 +39447,88 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 
 			// paginate on click
-			pagination.addEventListener("click", function(e) {
-				e.preventDefault();
+			if (paginationType == "button") {
+				pagination.addEventListener("click", function(e) {
+					e.preventDefault();
 
-				if (e.target.tagName.toLowerCase() == "a") {
-					currentPage = e.target.dataset.page;
-					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
-					endIndex = currentPage * table.dataset.itemsPerPage;
+					if (e.target.tagName.toLowerCase() == "a") {
+						currentPage = e.target.dataset.page;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
 
-					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
-						el.classList.remove("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+							el.classList.remove("ea-advanced-data-table-pagination-current");
+						});
 
-					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
-						el.classList.add("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+							el.classList.add("ea-advanced-data-table-pagination-current");
+						});
 
-					for (var i = offset; i <= table.rows.length - 1; i++) {
-						if (i >= startIndex && i <= endIndex) {
-							table.rows[i].style.display = "table-row";
-						} else {
-							table.rows[i].style.display = "none";
-						}
-					}
-
-					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("asc", "desc");
-
-						if (typeof classCollection[currentPage] != "undefined") {
-							if (classCollection[currentPage][index]) {
-								el.classList.add(classCollection[currentPage][index]);
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
 							}
 						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
+					}
+				});
+			} else {
+				if (pagination.hasChildNodes()) {
+					pagination.querySelector("select").addEventListener("input", function(e) {
+						e.preventDefault();
+
+						currentPage = e.target.value;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
+
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
 					});
 				}
-			});
+			}
 		}
+
+		// woocommerce
+		table.querySelectorAll(".nt_button_woo").forEach(function(el) {
+			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
+		});
+
+		table.querySelectorAll(".nt_woo_quantity").forEach(function(el) {
+			el.addEventListener("input", function(e) {
+				var product_id = e.target.dataset.product_id;
+				var quantity = e.target.value;
+
+				$(".nt_add_to_cart_" + product_id, $(table)).data("quantity", quantity);
+			});
+		});
 	}
 };
 
@@ -40236,72 +40291,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
 });
 
-var FacebookFeed = function($scope, $) {
-    if (!isEditMode) {
-        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
-            itemSelector: ".eael-facebook-feed-item",
-            percentPosition: true,
-            columnWidth: ".eael-facebook-feed-item"
-        });
-
-        $facebook_gallery.imagesLoaded().progress(function() {
-            $facebook_gallery.isotope("layout");
-        });
-    }
-
-    // ajax load more
-    $(".eael-load-more-button", $scope).on("click", function(e) {
-        e.preventDefault();
-
-        $this = $(this);
-        $settings = $this.attr("data-settings");
-        $page = $this.attr("data-page");
-
-        // update load moer button
-        $this.addClass("button--loading");
-        $("span", $this).html("Loading...");
-
-        $.ajax({
-            url: localize.ajaxurl,
-            type: "post",
-            data: {
-                action: "facebook_feed_load_more",
-                security: localize.nonce,
-                settings: $settings,
-                page: $page
-            },
-            success: function(response) {
-                $html = $(response.html);
-
-                // append items
-                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
-                $(".eael-facebook-feed", $scope).append($html);
-                $facebook_gallery.isotope("appended", $html);
-                $facebook_gallery.imagesLoaded().progress(function() {
-                    $facebook_gallery.isotope("layout");
-                });
-
-                // update load more button
-                if (response.num_pages > $page) {
-                    $this.attr("data-page", parseInt($page) + 1);
-                    $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
-                } else {
-                    $this.remove();
-                }
-            },
-            error: function() {}
-        });
-    });
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-facebook-feed.default",
-        FacebookFeed
-    );
-});
-
 var EventCalendar = function($scope, $) {
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
@@ -40470,6 +40459,72 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
 });
 
+var FacebookFeed = function($scope, $) {
+    if (!isEditMode) {
+        $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            itemSelector: ".eael-facebook-feed-item",
+            percentPosition: true,
+            columnWidth: ".eael-facebook-feed-item"
+        });
+
+        $facebook_gallery.imagesLoaded().progress(function() {
+            $facebook_gallery.isotope("layout");
+        });
+    }
+
+    // ajax load more
+    $(".eael-load-more-button", $scope).on("click", function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $settings = $this.attr("data-settings");
+        $page = $this.attr("data-page");
+
+        // update load moer button
+        $this.addClass("button--loading");
+        $("span", $this).html("Loading...");
+
+        $.ajax({
+            url: localize.ajaxurl,
+            type: "post",
+            data: {
+                action: "facebook_feed_load_more",
+                security: localize.nonce,
+                settings: $settings,
+                page: $page
+            },
+            success: function(response) {
+                $html = $(response.html);
+
+                // append items
+                $facebook_gallery = $(".eael-facebook-feed", $scope).isotope();
+                $(".eael-facebook-feed", $scope).append($html);
+                $facebook_gallery.isotope("appended", $html);
+                $facebook_gallery.imagesLoaded().progress(function() {
+                    $facebook_gallery.isotope("layout");
+                });
+
+                // update load more button
+                if (response.num_pages > $page) {
+                    $this.attr("data-page", parseInt($page) + 1);
+                    $this.removeClass("button--loading");
+                    $("span", $this).html("Load more");
+                } else {
+                    $this.remove();
+                }
+            },
+            error: function() {}
+        });
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-facebook-feed.default",
+        FacebookFeed
+    );
+});
+
 var FancyText = function($scope, $) {
     var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
         $id =
@@ -40545,216 +40600,163 @@ jQuery(window).on("elementor/frontend/init", function() {
 });
 
 var filterableGalleryHandler = function($scope, $) {
+	var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
+		filterTrigger = $scope.find("#fg-filter-trigger"),
+		form = $scope.find(".fg-layout-3-search-box"),
+		input = $scope.find("#fg-search-box-input"),
+		searchRegex,
+		buttonFilter,
+		timer;
 
-    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
-        filterTrigger = $scope.find('#fg-filter-trigger'),
-        form = $scope.find('.fg-layout-3-search-box'),
-        input = $scope.find('#fg-search-box-input'),
-        searchRegex, buttonFilter, timer;
-    var delegateAbc = '';
+	if (form.length) {
+		form.on("submit", function(e) {
+			e.preventDefault();
+		});
+	}
 
-    if(form.length) {
-        form.on('submit', function(e) {
-            e.preventDefault();
-        });
-    }
+	filterTrigger
+		.on("click", function() {
+			filterControls.toggleClass("open-filters");
+		})
+		.blur(function() {
+			filterControls.toggleClass("open-filters");
+		});
 
-    filterTrigger.on('click', function() {
-        filterControls.toggleClass('open-filters');
-    }).blur(function() {
-        filterControls.toggleClass('open-filters');
-    });
+	if (!isEditMode) {
+		var $gallery = $(".eael-filter-gallery-container", $scope),
+			$settings = $gallery.data("settings"),
+			$gallery_items = $gallery.data("gallery-items"),
+			$layout_mode = $settings.grid_style == "masonry" ? "masonry" : "fitRows",
+			$gallery_enabled = $settings.gallery_enabled == "yes" ? true : false;
 
-    if (!isEditMode) {
-        var $gallery = $(".eael-filter-gallery-container", $scope),
-            $settings = $gallery.data("settings"),
-            $gallery_items = $gallery.data("gallery-items"),
-            $layout_mode =
-                $settings.grid_style == "masonry" ? "masonry" : "fitRows",
-            $gallery_enabled =
-                $settings.gallery_enabled == "yes" ? true : false;
+		// init isotope
+		var layoutMode = $(".eael-filter-gallery-wrapper").data("layout-mode");
+		var mfpCaption = $(".eael-filter-gallery-wrapper").data("mfp_caption");
+		var $isotope_gallery = $gallery.isotope({
+			itemSelector: ".eael-filterable-gallery-item-wrap",
+			layoutMode: $layout_mode,
+			percentPosition: true,
+			stagger: 30,
+			transitionDuration: $settings.duration + "ms",
+			filter: function() {
+				var $this = $(this);
+				var $result = searchRegex ? $this.text().match(searchRegex) : true;
+				if (buttonFilter == undefined) {
+					if (layoutMode != "layout_3") {
+						buttonFilter = $scope
+							.find(".eael-filter-gallery-control ul li")
+							.first()
+							.data("filter");
+					} else {
+						buttonFilter = $scope
+							.find(".fg-layout-3-filter-controls li")
+							.first()
+							.data("filter");
+					}
+				}
+				var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
+				return $result && buttonResult;
+			}
+		});
 
-        // init isotope
-        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
-        var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
-        var $isotope_gallery = $gallery.isotope({
-            itemSelector: ".eael-filterable-gallery-item-wrap",
-            layoutMode: $layout_mode,
-            percentPosition: true,
-            stagger: 30,
-            transitionDuration: $settings.duration + "ms",
-            filter: function() {
-                var $this = $(this);
-                var $result = searchRegex ? $this.text().match( searchRegex ) : true;
-                if(buttonFilter == undefined) {
-                    if(layoutMode != 'layout_3') {
-                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
-                    }else {
-                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
-                    }
-                }
-                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
-                return $result && buttonResult;
-            }
-        });
+		// Popup
+		$($scope).magnificPopup({
+			delegate: ".eael-magnific-link",
+			type: "image",
+			gallery: {
+				enabled: $gallery_enabled
+			},
+			image: {
+				titleSrc: function(item) {
+					if (mfpCaption == "yes") {
+						return item.el
+							.parent()
+							.parent()
+							.parent()
+							.parent()
+							.find(".fg-item-title")
+							.html();
+					}
+				}
+			}
+		});
 
-        //alert($settings.widget_id);
-        // Popup
-        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: $gallery_enabled
-            },
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            },
-            fixedContentPos: false,
-            image: {
-                titleSrc: function(item) {
-                            if(mfpCaption=='yes'){
-                                return item.el.parent().prev().prev().html();
-                            }
-                        }
-            }
-        });
+		// filter
+		$scope.on("click", ".control", function() {
+			var $this = $(this);
+			buttonFilter = $(this).attr("data-filter");
 
-        // filter
-        $scope.on("click", ".control", function() {
+			if ($scope.find("#fg-filter-trigger > span")) {
+				$scope.find("#fg-filter-trigger > span").text($this.text());
+			}
 
-            var $this = $(this);
-            buttonFilter = $( this ).attr('data-filter');
-            delegateAbc = $( this ).attr('data-filter') + ' a.eael-magnific-link';
+			$this.siblings().removeClass("active");
+			$this.addClass("active");
 
-            if($scope.find('#fg-filter-trigger > span')) {
-                $scope.find('#fg-filter-trigger > span').text($this.text());
-            }
+			$isotope_gallery.isotope();
+		});
 
-            $this.siblings().removeClass("active");
-            $this.addClass("active");
+		//quick search
+		input.on("input", function() {
+			var $this = $(this);
 
-            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: $gallery_enabled,
-                },
-                callbacks: {
-                    close: function() {
-                        $('#elementor-lightbox').hide();
-                    }
-                },
-                fixedContentPos: false,
-                image: {
-                    titleSrc: function(item) {
-                                if(mfpCaption=='yes'){
-                                    return item.el.parent().prev().prev().html();
-                                }
-                            }
-                }
-            });
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				searchRegex = new RegExp($this.val(), "gi");
+				$isotope_gallery.isotope();
+			}, 600);
+		});
 
-            $isotope_gallery.isotope();
-        });
+		// layout gal, while images are loading
+		$isotope_gallery.imagesLoaded().progress(function() {
+			$isotope_gallery.isotope("layout");
+		});
 
+		// layout gal, on click tabs
+		$isotope_gallery.on("arrangeComplete", function() {
+			$isotope_gallery.isotope("layout");
+		});
 
+		// layout gal, after window loaded
+		$(window).on("load", function() {
+			$isotope_gallery.isotope("layout");
+		});
 
-        //quick search
-        input.on('input', function() {
-            var $this = $(this);
+		// Load more button
+		$scope.on("click", ".eael-gallery-load-more", function(e) {
+			e.preventDefault();
 
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                searchRegex = new RegExp($this.val(), 'gi');
-                $isotope_gallery.isotope();
-            }, 600);
+			var $this = $(this),
+				$init_show = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+				$total_items = $gallery.data("total-gallery-items"),
+				$images_per_page = $gallery.data("images-per-page"),
+				$nomore_text = $gallery.data("nomore-item-text"),
+				$items = [];
 
-        });
+			if ($init_show == $total_items) {
+				$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+				setTimeout(function() {
+					$this.fadeOut("slow");
+				}, 600);
+			}
 
-        // layout gal, while images are loading
-        $isotope_gallery.imagesLoaded().progress(function() {
-            $isotope_gallery.isotope("layout");
-        });
+			// new items html
+			for (var i = $init_show; i < $init_show + $images_per_page; i++) {
+				$items.push($($gallery_items[i])[0]);
+			}
 
-        // layout gal, on click tabs
-        $isotope_gallery.on("arrangeComplete", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        // layout gal, after window loaded
-        $(window).on("load", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        
-
-        // popup
-        $($scope).magnificPopup({
-            delegate: ".eael-magnific-video-link",
-            type: "iframe",
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            }
-        });
-
-        // Load more button
-        $scope.on("click", ".eael-gallery-load-more", function(e) {
-            e.preventDefault();
-
-            var $this = $(this),
-                $init_show = $(
-                    ".eael-filter-gallery-container",
-                    $scope
-                ).children(".eael-filterable-gallery-item-wrap").length,
-                $total_items = $gallery.data("total-gallery-items"),
-                $images_per_page = $gallery.data("images-per-page"),
-                $nomore_text = $gallery.data("nomore-item-text"),
-                $items = [];
-
-            if ($init_show == $total_items) {
-                $this.html(
-                    '<div class="no-more-items-text">' + $nomore_text + "</div>"
-                );
-                setTimeout(function() {
-                    $this.fadeOut("slow");
-                }, 600);
-            }
-
-            // new items html
-            for (var i = $init_show; i < $init_show + $images_per_page; i++) {
-                $items.push($($gallery_items[i])[0]);
-            }
-
-            // append items
-            $gallery.append($items);
-            $isotope_gallery.isotope("appended", $items);
-            $isotope_gallery.imagesLoaded().progress(function() {
-                $isotope_gallery.isotope("layout");
-            });
-
-            // reinit magnificPopup
-            $(".eael-magnific-link", $scope).magnificPopup({
-                type: "image",
-                gallery: {
-                    enabled: $gallery_enabled
-                },
-                callbacks: {
-                    close: function() {
-                        $("#elementor-lightbox").hide();
-                    }
-                }
-            });
-        });
-    }
+			// append items
+			$gallery.append($items);
+			$isotope_gallery.isotope("appended", $items);
+			$isotope_gallery.imagesLoaded().progress(function() {
+				$isotope_gallery.isotope("layout");
+			});
+		});
+	}
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-filterable-gallery.default",
-        filterableGalleryHandler
-    );
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-filterable-gallery.default", filterableGalleryHandler);
 });
 
 (function($) {
@@ -41166,37 +41168,6 @@ function RunStickyPlayer(elem) {
     ovrplyer.start();
 }
 
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
-});
-
 (function($) {
 	jQuery(document).ready(function() {
 		/**
@@ -41554,3 +41525,34 @@ jQuery(window).on("elementor/frontend/init", function() {
 		}
 	});
 })(jQuery);
+
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
+    );
+});
