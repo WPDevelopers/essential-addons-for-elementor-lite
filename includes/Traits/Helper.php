@@ -2325,62 +2325,53 @@ trait Helper
     public function advanced_data_table_integration($settings, $html)
     {
         $html = '';
-        $results = [];
+        // $results = [];
 
         if ($settings['ea_adv_data_table_source'] == 'ninja' && !empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
             $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
             $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
             $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
-
-            if ($table_headers) {
-                $results[] = wp_list_pluck($table_headers, 'name');
-            }
-
-            if ($table_rows) {
-                foreach ($table_rows as $row) {
-                    unset($row['___id___']);
-                    array_push($results, array_values($row));
-                }
-            }
         }
 
-        if (!empty($results)) {
-            if ($settings['ea_adv_data_table_source'] == 'ninja') {
-                if (isset($table_settings['hide_header_row']) && $table_settings['hide_header_row'] == true) {
-                    array_shift($results);
-                } else {
+        if ($settings['ea_adv_data_table_source'] == 'ninja') {
+            if (!empty($table_rows)) {
+                if (!isset($table_settings['hide_header_row']) || $table_settings['hide_header_row'] != true) {
                     $html .= '<thead><tr>';
 
-                    foreach ($results[0] as $key => $th) {
+                    foreach ($table_headers as $key => $th) {
                         $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
-                        $html .= '<th' . $style . '>' . $th . '</th>';
+                        $html .= '<th' . $style . '>' . $th['name'] . '</th>';
                     }
 
                     $html .= '</tr></thead>';
-
-                    array_shift($results);
                 }
-            }
 
-            $html .= '<tbody>';
+                $html .= '<tbody>';
 
-            foreach ($results as $tr) {
-                $html .= '<tr>';
-
-                foreach ($tr as $td) {
-                    if (is_array($td)) {
-                        $html .= '<td><a href="' . $td['image_full'] . '"><img src="' . $td['image_thumb'] . '" alt="' . $td['alt_text'] . '"></a></td>';
-                    } else if (filter_var($td, FILTER_VALIDATE_URL)) {
-                        $html .= '<td><a href="' . $td . '">' . $td . '</a></td>';
-                    } else {
-                        $html .= '<td>' . $td . '</td>';
+                foreach ($table_rows as $key => $tr) {
+                    $html .= '<tr>';
+    
+                    foreach ($table_headers as $th) {
+                        if (!isset($th['data_type'])) {
+                            $th['data_type'] = '';
+                        }
+                        
+                        if ($th['data_type'] == 'image') {
+                            $html .= '<td><a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '" alt="' . $tr[$th['key']]['alt_text'] . '"></a></td>';
+                        } elseif ($th['data_type'] == 'selection') {
+                            $html .= '<td>' . implode($tr[$th['key']], ', ') . '</td>';
+                        } elseif ($th['data_type'] == 'button') {
+                            $html .= '<td><a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a></td>';
+                        } else {
+                            $html .= '<td>' . $tr[$th['key']] . '</td>';
+                        }
                     }
+    
+                    $html .= '</tr>';
                 }
-
-                $html .= '</tr>';
+    
+                $html .= '</tbody>';
             }
-
-            $html .= '</tbody>';
         }
 
         return $html;
