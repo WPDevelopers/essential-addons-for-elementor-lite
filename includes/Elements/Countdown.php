@@ -13,7 +13,6 @@ use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Countdown extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;

@@ -875,7 +875,7 @@ trait Helper
                 'label' => __('Load More Button Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'show_load_more' => ['yes', '1']
+                    'show_load_more' => ['yes', '1', 'true']
                 ],
             ]
         );
@@ -1642,6 +1642,7 @@ trait Helper
 
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
         $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
+
 
         if(isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
             $args['tax_query'] = [
