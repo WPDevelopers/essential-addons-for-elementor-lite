@@ -19541,6 +19541,10 @@ var trim = String.prototype.trim ?
 		var $num = $this.data('count')
 		var $duration = $this.data('duration')
 
+		if($num > 100) {
+			$num = 100;
+		}
+
 		$this.one('inview', function() {
 			if ($layout == 'line') {
 				$('.eael-progressbar-line-fill', $this).css({
@@ -38957,15 +38961,19 @@ return $;
                 ) {
                     $this.remove();
                 } else {
-                    $(".eael-post-appender", $scope).append($content);
+                    if($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
+                        $(".eael-product-grid .products", $scope).append($content);
+                    }else {
+                        $(".eael-post-appender", $scope).append($content);
 
-                    if ($layout == "masonry") {
-                        var $isotope = $(".eael-post-appender", $scope).isotope();
-                        $isotope.isotope("appended", $content).isotope("layout");
-
-                        $isotope.imagesLoaded().progress(function () {
-                            $isotope.isotope("layout");
-                        });
+                        if ($layout == "masonry") {
+                            var $isotope = $(".eael-post-appender", $scope).isotope();
+                            $isotope.isotope("appended", $content).isotope("layout");
+    
+                            $isotope.imagesLoaded().progress(function () {
+                                $isotope.isotope("layout");
+                            });
+                        }
                     }
 
                     $this.removeClass("button--loading");
@@ -39223,9 +39231,6 @@ var Advanced_Data_Table = function($scope, $) {
 	if (isEditMode) {
 		var attr = "readonly";
 
-		// add edit class
-		table.classList.add("ea-advanced-data-table-editable");
-
 		if (table.classList.contains("ea-advanced-data-table-static")) {
 			attr = "";
 
@@ -39406,6 +39411,7 @@ var Advanced_Data_Table = function($scope, $) {
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			var paginationHTML = "";
+			var paginationType = pagination.classList.contains("ea-advanced-data-table-pagination-button") ? "button" : "select";
 			var currentPage = 1;
 			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			var endIndex = currentPage * table.dataset.itemsPerPage;
@@ -39413,14 +39419,22 @@ var Advanced_Data_Table = function($scope, $) {
 
 			// insert pagination
 			if (maxPages > 1) {
-				for (var i = 1; i <= maxPages; i++) {
-					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
-				}
+				if (paginationType == "button") {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
+					}
 
-				pagination.insertAdjacentHTML(
-					"beforeend",
-					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
-				);
+					pagination.insertAdjacentHTML(
+						"beforeend",
+						'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
+					);
+				} else {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<option value="' + i + '">' + i + "</option>";
+					}
+
+					pagination.insertAdjacentHTML("beforeend", "<select>" + paginationHTML + "</select>");
+				}
 			}
 
 			// make initial item visible
@@ -39433,43 +39447,88 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 
 			// paginate on click
-			pagination.addEventListener("click", function(e) {
-				e.preventDefault();
+			if (paginationType == "button") {
+				pagination.addEventListener("click", function(e) {
+					e.preventDefault();
 
-				if (e.target.tagName.toLowerCase() == "a") {
-					currentPage = e.target.dataset.page;
-					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
-					endIndex = currentPage * table.dataset.itemsPerPage;
+					if (e.target.tagName.toLowerCase() == "a") {
+						currentPage = e.target.dataset.page;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
 
-					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
-						el.classList.remove("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+							el.classList.remove("ea-advanced-data-table-pagination-current");
+						});
 
-					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
-						el.classList.add("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+							el.classList.add("ea-advanced-data-table-pagination-current");
+						});
 
-					for (var i = offset; i <= table.rows.length - 1; i++) {
-						if (i >= startIndex && i <= endIndex) {
-							table.rows[i].style.display = "table-row";
-						} else {
-							table.rows[i].style.display = "none";
-						}
-					}
-
-					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("asc", "desc");
-
-						if (typeof classCollection[currentPage] != "undefined") {
-							if (classCollection[currentPage][index]) {
-								el.classList.add(classCollection[currentPage][index]);
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
 							}
 						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
+					}
+				});
+			} else {
+				if (pagination.hasChildNodes()) {
+					pagination.querySelector("select").addEventListener("input", function(e) {
+						e.preventDefault();
+
+						currentPage = e.target.value;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
+
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
 					});
 				}
-			});
+			}
 		}
+
+		// woocommerce
+		table.querySelectorAll(".nt_button_woo").forEach(function(el) {
+			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
+		});
+
+		table.querySelectorAll(".nt_woo_quantity").forEach(function(el) {
+			el.addEventListener("input", function(e) {
+				var product_id = e.target.dataset.product_id;
+				var quantity = e.target.value;
+
+				$(".nt_add_to_cart_" + product_id, $(table)).data("quantity", quantity);
+			});
+		});
 	}
 };
 
@@ -40541,216 +40600,163 @@ jQuery(window).on("elementor/frontend/init", function() {
 });
 
 var filterableGalleryHandler = function($scope, $) {
+	var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
+		filterTrigger = $scope.find("#fg-filter-trigger"),
+		form = $scope.find(".fg-layout-3-search-box"),
+		input = $scope.find("#fg-search-box-input"),
+		searchRegex,
+		buttonFilter,
+		timer;
 
-    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
-        filterTrigger = $scope.find('#fg-filter-trigger'),
-        form = $scope.find('.fg-layout-3-search-box'),
-        input = $scope.find('#fg-search-box-input'),
-        searchRegex, buttonFilter, timer;
-    var delegateAbc = '';
+	if (form.length) {
+		form.on("submit", function(e) {
+			e.preventDefault();
+		});
+	}
 
-    if(form.length) {
-        form.on('submit', function(e) {
-            e.preventDefault();
-        });
-    }
+	filterTrigger
+		.on("click", function() {
+			filterControls.toggleClass("open-filters");
+		})
+		.blur(function() {
+			filterControls.toggleClass("open-filters");
+		});
 
-    filterTrigger.on('click', function() {
-        filterControls.toggleClass('open-filters');
-    }).blur(function() {
-        filterControls.toggleClass('open-filters');
-    });
+	if (!isEditMode) {
+		var $gallery = $(".eael-filter-gallery-container", $scope),
+			$settings = $gallery.data("settings"),
+			$gallery_items = $gallery.data("gallery-items"),
+			$layout_mode = $settings.grid_style == "masonry" ? "masonry" : "fitRows",
+			$gallery_enabled = $settings.gallery_enabled == "yes" ? true : false;
 
-    if (!isEditMode) {
-        var $gallery = $(".eael-filter-gallery-container", $scope),
-            $settings = $gallery.data("settings"),
-            $gallery_items = $gallery.data("gallery-items"),
-            $layout_mode =
-                $settings.grid_style == "masonry" ? "masonry" : "fitRows",
-            $gallery_enabled =
-                $settings.gallery_enabled == "yes" ? true : false;
+		// init isotope
+		var layoutMode = $(".eael-filter-gallery-wrapper").data("layout-mode");
+		var mfpCaption = $(".eael-filter-gallery-wrapper").data("mfp_caption");
+		var $isotope_gallery = $gallery.isotope({
+			itemSelector: ".eael-filterable-gallery-item-wrap",
+			layoutMode: $layout_mode,
+			percentPosition: true,
+			stagger: 30,
+			transitionDuration: $settings.duration + "ms",
+			filter: function() {
+				var $this = $(this);
+				var $result = searchRegex ? $this.text().match(searchRegex) : true;
+				if (buttonFilter == undefined) {
+					if (layoutMode != "layout_3") {
+						buttonFilter = $scope
+							.find(".eael-filter-gallery-control ul li")
+							.first()
+							.data("filter");
+					} else {
+						buttonFilter = $scope
+							.find(".fg-layout-3-filter-controls li")
+							.first()
+							.data("filter");
+					}
+				}
+				var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
+				return $result && buttonResult;
+			}
+		});
 
-        // init isotope
-        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
-        var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
-        var $isotope_gallery = $gallery.isotope({
-            itemSelector: ".eael-filterable-gallery-item-wrap",
-            layoutMode: $layout_mode,
-            percentPosition: true,
-            stagger: 30,
-            transitionDuration: $settings.duration + "ms",
-            filter: function() {
-                var $this = $(this);
-                var $result = searchRegex ? $this.text().match( searchRegex ) : true;
-                if(buttonFilter == undefined) {
-                    if(layoutMode != 'layout_3') {
-                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
-                    }else {
-                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
-                    }
-                }
-                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
-                return $result && buttonResult;
-            }
-        });
+		// Popup
+		$($scope).magnificPopup({
+			delegate: ".eael-magnific-link",
+			type: "image",
+			gallery: {
+				enabled: $gallery_enabled
+			},
+			image: {
+				titleSrc: function(item) {
+					if (mfpCaption == "yes") {
+						return item.el
+							.parent()
+							.parent()
+							.parent()
+							.parent()
+							.find(".fg-item-title")
+							.html();
+					}
+				}
+			}
+		});
 
-        //alert($settings.widget_id);
-        // Popup
-        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: $gallery_enabled
-            },
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            },
-            fixedContentPos: false,
-            image: {
-                titleSrc: function(item) {
-                            if(mfpCaption=='yes'){
-                                return item.el.parent().prev().prev().html();
-                            }
-                        }
-            }
-        });
+		// filter
+		$scope.on("click", ".control", function() {
+			var $this = $(this);
+			buttonFilter = $(this).attr("data-filter");
 
-        // filter
-        $scope.on("click", ".control", function() {
+			if ($scope.find("#fg-filter-trigger > span")) {
+				$scope.find("#fg-filter-trigger > span").text($this.text());
+			}
 
-            var $this = $(this);
-            buttonFilter = $( this ).attr('data-filter');
-            delegateAbc = $( this ).attr('data-filter') + ' a.eael-magnific-link';
+			$this.siblings().removeClass("active");
+			$this.addClass("active");
 
-            if($scope.find('#fg-filter-trigger > span')) {
-                $scope.find('#fg-filter-trigger > span').text($this.text());
-            }
+			$isotope_gallery.isotope();
+		});
 
-            $this.siblings().removeClass("active");
-            $this.addClass("active");
+		//quick search
+		input.on("input", function() {
+			var $this = $(this);
 
-            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: $gallery_enabled,
-                },
-                callbacks: {
-                    close: function() {
-                        $('#elementor-lightbox').hide();
-                    }
-                },
-                fixedContentPos: false,
-                image: {
-                    titleSrc: function(item) {
-                                if(mfpCaption=='yes'){
-                                    return item.el.parent().prev().prev().html();
-                                }
-                            }
-                }
-            });
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				searchRegex = new RegExp($this.val(), "gi");
+				$isotope_gallery.isotope();
+			}, 600);
+		});
 
-            $isotope_gallery.isotope();
-        });
+		// layout gal, while images are loading
+		$isotope_gallery.imagesLoaded().progress(function() {
+			$isotope_gallery.isotope("layout");
+		});
 
+		// layout gal, on click tabs
+		$isotope_gallery.on("arrangeComplete", function() {
+			$isotope_gallery.isotope("layout");
+		});
 
+		// layout gal, after window loaded
+		$(window).on("load", function() {
+			$isotope_gallery.isotope("layout");
+		});
 
-        //quick search
-        input.on('input', function() {
-            var $this = $(this);
+		// Load more button
+		$scope.on("click", ".eael-gallery-load-more", function(e) {
+			e.preventDefault();
 
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                searchRegex = new RegExp($this.val(), 'gi');
-                $isotope_gallery.isotope();
-            }, 600);
+			var $this = $(this),
+				$init_show = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+				$total_items = $gallery.data("total-gallery-items"),
+				$images_per_page = $gallery.data("images-per-page"),
+				$nomore_text = $gallery.data("nomore-item-text"),
+				$items = [];
 
-        });
+			if ($init_show == $total_items) {
+				$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+				setTimeout(function() {
+					$this.fadeOut("slow");
+				}, 600);
+			}
 
-        // layout gal, while images are loading
-        $isotope_gallery.imagesLoaded().progress(function() {
-            $isotope_gallery.isotope("layout");
-        });
+			// new items html
+			for (var i = $init_show; i < $init_show + $images_per_page; i++) {
+				$items.push($($gallery_items[i])[0]);
+			}
 
-        // layout gal, on click tabs
-        $isotope_gallery.on("arrangeComplete", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        // layout gal, after window loaded
-        $(window).on("load", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        
-
-        // popup
-        $($scope).magnificPopup({
-            delegate: ".eael-magnific-video-link",
-            type: "iframe",
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            }
-        });
-
-        // Load more button
-        $scope.on("click", ".eael-gallery-load-more", function(e) {
-            e.preventDefault();
-
-            var $this = $(this),
-                $init_show = $(
-                    ".eael-filter-gallery-container",
-                    $scope
-                ).children(".eael-filterable-gallery-item-wrap").length,
-                $total_items = $gallery.data("total-gallery-items"),
-                $images_per_page = $gallery.data("images-per-page"),
-                $nomore_text = $gallery.data("nomore-item-text"),
-                $items = [];
-
-            if ($init_show == $total_items) {
-                $this.html(
-                    '<div class="no-more-items-text">' + $nomore_text + "</div>"
-                );
-                setTimeout(function() {
-                    $this.fadeOut("slow");
-                }, 600);
-            }
-
-            // new items html
-            for (var i = $init_show; i < $init_show + $images_per_page; i++) {
-                $items.push($($gallery_items[i])[0]);
-            }
-
-            // append items
-            $gallery.append($items);
-            $isotope_gallery.isotope("appended", $items);
-            $isotope_gallery.imagesLoaded().progress(function() {
-                $isotope_gallery.isotope("layout");
-            });
-
-            // reinit magnificPopup
-            $(".eael-magnific-link", $scope).magnificPopup({
-                type: "image",
-                gallery: {
-                    enabled: $gallery_enabled
-                },
-                callbacks: {
-                    close: function() {
-                        $("#elementor-lightbox").hide();
-                    }
-                }
-            });
-        });
-    }
+			// append items
+			$gallery.append($items);
+			$isotope_gallery.isotope("appended", $items);
+			$isotope_gallery.imagesLoaded().progress(function() {
+				$isotope_gallery.isotope("layout");
+			});
+		});
+	}
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-filterable-gallery.default",
-        filterableGalleryHandler
-    );
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-filterable-gallery.default", filterableGalleryHandler);
 });
 
 (function($) {
@@ -41399,10 +41405,13 @@ function RunStickyPlayer(elem) {
 		if (isEditMode) {
 
 			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
-				var exist = $('#eael-toc #eael-toc-list li');
-				if(exist.length<1){
-					var $settings = elementor.settings.page.getSettings();
-					eael_toc_content(eael_toc_check_content(), $settings.settings.eael_ext_toc_supported_heading_tag.join(", "));
+				var tocLoad = $('#eael-toc #eael-toc-list');
+				var TocList = tocLoad.find('li.eael-first-child');
+				if(TocList.length<1 && tocLoad.length >=1 ){
+					var tagList = $("#eael-toc").data("eaeltoctag");
+					if(tagList){
+						eael_toc_content(eael_toc_check_content(), tagList);
+					}
 				}
 			});
 

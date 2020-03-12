@@ -100,6 +100,7 @@ class Bootstrap
     {
         // Core
         add_action('init', [$this, 'i18n']);
+        add_filter('eael/active_plugins', [$this, 'active_plugins'], 10, 1);
         add_filter('wpml_elementor_widgets_to_translate', [$this, 'eael_translatable_widgets']);
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
@@ -123,7 +124,9 @@ class Bootstrap
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_action('wp_footer', array($this, 'render_global_html'));
 
-        add_filter('eael/event-calendar/source',[ $this,'eael_event_calendar_source' ] );
+        add_filter('eael/event-calendar/source', [$this,'eael_event_calendar_source']);
+        add_action('eael/advanced-data-table/source/control', [$this,'advanced_data_table_source_control']);
+        add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this,'advanced_data_table_ninja_integration'], 10, 1);
 
         // Admin
         if (is_admin()) {

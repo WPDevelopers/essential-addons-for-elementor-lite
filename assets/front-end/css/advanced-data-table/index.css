@@ -1,10 +1,3 @@
-.ea-advanced-data-table-wrap * {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-}
 .ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner {
   width: 100%;
   overflow-y: auto;
@@ -99,6 +92,13 @@
 }
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
   display: table-row;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table .nt_add_cart_wrapper {
+  text-align: center;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table .button {
+  display: block;
+  white-space: nowrap;
 }
 .ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-center {
   text-align: center;

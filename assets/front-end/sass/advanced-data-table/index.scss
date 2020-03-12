@@ -1,11 +1,11 @@
 .ea-advanced-data-table-wrap {
-	* {
-		background-color: transparent;
-		border: none;
-		box-shadow: none;
-		margin: 0;
-		padding: 0;
-	}
+	// *:not(a) {
+	// 	background-color: transparent;
+	// 	border: none;
+	// 	box-shadow: none;
+	// 	margin: 0;
+	// 	padding: 0;
+	// }
 
 	.ea-advanced-data-table-wrap-inner {
 		width: 100%;
@@ -137,6 +137,16 @@
 					}
 				}
 			}
+		}
+
+		// woocommerce
+		.nt_add_cart_wrapper {
+			text-align: center;
+		}
+
+		.button {
+			display: block;
+			white-space: nowrap;
 		}
 	}
 
