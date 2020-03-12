@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.8.3
+Stable tag: 3.8.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -18,8 +18,12 @@ Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building
 [Check the Demos](https://essential-addons.com/elementor/)
 
 
-### 100+ Ready Blocks
+### 100+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which comes with Essential Addons and design your website to stand out from the crowd.
+
+[Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
+
+[Templately](https://templately.com/) also offers saving your templates to cloud. Save all your designs with Templately & deploy in hundreds of websites with 1-click. Increase productivity and power up your whole team to build websites faster than ever before. 
 
 ### Completely Customizable
 Each element comes with bunch of options to control every possible things. You can achieve nearly any design with your imagination.
@@ -180,6 +184,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.8.4 - 12/03/2020 =
+- Added: [Ninja Tables](https://wordpress.org/plugins/ninja-tables/) integration with [EA Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table/) element
+- Few minor bugfix and improvements
 
 = 3.8.3 - 03/03/2020 =
 - Added: CTA box spacing control
