@@ -52,6 +52,53 @@ class Filterable_Gallery extends Widget_Base
             'font-awesome-4-shim'
         ];
     }
+	
+
+    /**
+     * This runs when exporting this element into JSON.
+     * We want to remove all the default URLs from this data because it causes issues when imported on a different domain.
+     * This basically means we want to remove any urls that have "EAEL_PLUGIN_URL" in the string.
+     *
+     * @param array $element
+     *
+     * @return array
+     */
+    public function on_export( $element ){
+	    // These two keys set default urls with "EAEL_PLUGIN_URL" in them below, these are the ones we want to remove if they are default.
+	    $keys_to_clear_default_url_from = array(
+		    'eael_fg_gallery_img',
+		    'fg_video_gallery_play_icon'
+	    );
+
+    	// We check if we have a settings element to export, and it has an array of gallery items:
+	    if(
+	    	!empty($element['settings'])
+		    && isset($element['settings']['eael_fg_gallery_items'])
+		    && is_array($element['settings']['eael_fg_gallery_items'])
+	    ){
+
+	    	// Now we loop over each gallery item in the exported data:
+		    foreach ( $element['settings']['eael_fg_gallery_items'] as $gallery_item_id => $gallery_item ) {
+
+		    	// No we loop over the keys we want to remove defaults from:
+			    foreach($keys_to_clear_default_url_from as $key_to_clear_default_url_from) {
+
+			    	// We check if this key exists in the export data, and if the 'url' value contains our default path:
+				    if (
+					    ! empty( $gallery_item[$key_to_clear_default_url_from] )
+					    && ! empty( $gallery_item[$key_to_clear_default_url_from]['url'] )
+					    && strpos( $gallery_item[$key_to_clear_default_url_from]['url'], EAEL_PLUGIN_URL ) !== false
+				    ) {
+
+				    	// The 'url' value is set to a default value, so we remove it from the exported JSON
+					    unset( $element['settings']['eael_fg_gallery_items'][$gallery_item_id][$key_to_clear_default_url_from] );
+				    }
+			    }
+		    }
+	    }
+	    return $element;
+    }
+
 
     protected function _register_controls()
     {
