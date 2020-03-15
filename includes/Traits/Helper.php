@@ -2262,26 +2262,8 @@ trait Helper
      */
     public function eael_event_calendar_source($source)
     {
-
-        if (!function_exists('is_plugin_active')) {
-            require_once ABSPATH . '/wp-admin/includes/plugin.php';
-        }
-
-        if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
+        if (apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
             $source['the_events_calendar'] = __('The Events Calendar', 'essential-addons-for-elementor-lite');
-        }
-
-        return $source;
-    }
-
-    public function eael_adv_data_table_souce($source)
-    {
-        if (!function_exists('is_plugin_active')) {
-            require_once ABSPATH . '/wp-admin/includes/plugin.php';
-        }
-
-        if (is_plugin_active('ninja-tables/ninja-tables.php')) {
-            $source['ninja'] = __('Ninja Tables', 'essential-addons-for-elementor-lite');
         }
 
         return $source;
@@ -2289,10 +2271,6 @@ trait Helper
 
     public function eael_list_ninja_tables()
     {
-        if (!is_plugin_active('ninja-tables/ninja-tables.php')) {
-            return [];
-        }
-
         $tables = get_posts([
             'post_type' => 'ninja-table',
             'post_status' => 'publish',
@@ -2308,7 +2286,7 @@ trait Helper
 
     public function advanced_data_table_source_control($wb)
     {
-        if (is_plugin_active('ninja-tables/ninja-tables.php')) {
+        if (apply_filters('eael/active_plugins', 'ninja-tables/ninja-tables.php')) {
             $wb->add_control(
                 'ea_adv_data_table_source_ninja_table_id',
                 [
@@ -2320,58 +2298,63 @@ trait Helper
                     ],
                 ]
             );
+        } else {
+            $wb->add_control(
+                'ea_adv_data_table_ninja_required',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __('<strong>Ninja Tables</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=Ninja+Tables&tab=search&type=term" target="_blank">Ninja Tables</a> first.', 'essential-addons-for-elementor-lite'),
+                    'content_classes' => 'eael-warning',
+                    'condition' => [
+                        'ea_adv_data_table_source' => 'ninja',
+                    ],
+                ]
+            );
         }
     }
 
-    public function advanced_data_table_integration($settings, $html)
+    public function advanced_data_table_ninja_integration($settings)
     {
+        if (empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
+            return;
+        }
+
         $html = '';
+        $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
+        $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
+        $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
 
-        if ($settings['ea_adv_data_table_source'] == 'ninja') {
-            if (!empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
-                $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
-                $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
-                $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
-
-                if (!empty($table_rows)) {
-                    if (!isset($table_settings['hide_header_row']) || $table_settings['hide_header_row'] != true) {
-                        $html .= '<thead><tr>';
-    
-                        foreach ($table_headers as $key => $th) {
-                            $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
-                            $html .= '<th' . $style . '>' . $th['name'] . '</th>';
-                        }
-    
-                        $html .= '</tr></thead>';
-                    }
-    
-                    $html .= '<tbody>';
-    
-                    foreach ($table_rows as $key => $tr) {
-                        $html .= '<tr>';
-        
-                        foreach ($table_headers as $th) {
-                            if (!isset($th['data_type'])) {
-                                $th['data_type'] = '';
-                            }
-                            
-                            if ($th['data_type'] == 'image') {
-                                $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
-                            } elseif ($th['data_type'] == 'selection') {
-                                $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
-                            } elseif ($th['data_type'] == 'button') {
-                                $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
-                            } else {
-                                $html .= '<td>' . (!empty($tr[$th['key']]) ? $tr[$th['key']] : '') . '</td>';
-                            }
-                        }
-        
-                        $html .= '</tr>';
-                    }
-        
-                    $html .= '</tbody>';
+        if (!empty($table_rows)) {
+            if (!isset($table_settings['hide_header_row']) || $table_settings['hide_header_row'] != true) {
+                $html .= '<thead><tr>';
+                foreach ($table_headers as $key => $th) {
+                    $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
+                    $html .= '<th' . $style . '>' . $th['name'] . '</th>';
                 }
+                $html .= '</tr></thead>';
             }
+
+            $html .= '<tbody>';
+            foreach ($table_rows as $key => $tr) {
+                $html .= '<tr>';
+                foreach ($table_headers as $th) {
+                    if (!isset($th['data_type'])) {
+                        $th['data_type'] = '';
+                    }
+                    
+                    if ($th['data_type'] == 'image') {
+                        $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
+                    } elseif ($th['data_type'] == 'selection') {
+                        $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
+                    } elseif ($th['data_type'] == 'button') {
+                        $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
+                    } else {
+                        $html .= '<td>' . (!empty($tr[$th['key']]) ? $tr[$th['key']] : '') . '</td>';
+                    }
+                }
+                $html .= '</tr>';
+            }
+            $html .= '</tbody>';
         }
 
         return $html;
