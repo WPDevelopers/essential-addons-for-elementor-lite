@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Image_Size as Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Utils as Utils;
 use \Elementor\Widget_Base as Widget_Base;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Testimonial extends Widget_Base {
 

@@ -12,7 +12,6 @@ use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Scheme_Typography as Scheme_Typography;
 use \Elementor\Widget_Base as Widget_Base;
 use \Elementor\Repeater;
-use \Essential_Addons_Elementor\Classes\Bootstrap;
 
 class Fancy_Text extends Widget_Base {
 

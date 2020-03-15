@@ -123,7 +123,10 @@ class Bootstrap
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
         add_action('wp_footer', array($this, 'render_global_html'));
 
-        add_filter('eael/event-calendar/source',[ $this,'eael_event_calendar_source' ] );
+        add_filter('eael/event-calendar/source', [$this,'eael_event_calendar_source']);
+        add_filter('eael/advanced-data-table/source', [$this,'eael_adv_data_table_souce']);
+        add_action('eael/advanced-data-table/source/control', [$this,'advanced_data_table_source_control']);
+        add_action('eael/advanced-data-table/table_html/integration', [$this,'advanced_data_table_integration'], 10, 2);
 
         // Admin
         if (is_admin()) {

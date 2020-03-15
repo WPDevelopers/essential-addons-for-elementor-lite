@@ -58,8 +58,9 @@ var filterableGalleryHandler = function($scope, $) {
 			}
 		});
 
-		// magnific popup
-		$(".eael-magnific-link", $scope).magnificPopup({
+		// Popup
+		$($scope).magnificPopup({
+			delegate: ".eael-magnific-link",
 			type: "image",
 			gallery: {
 				enabled: $gallery_enabled
@@ -67,15 +68,16 @@ var filterableGalleryHandler = function($scope, $) {
 			image: {
 				titleSrc: function(item) {
 					if (mfpCaption == "yes") {
-						return $(".fg-item-title", item.el.parents(".eael-filterable-gallery-item-wrap")).html();
+						return item.el
+							.parent()
+							.parent()
+							.parent()
+							.parent()
+							.find(".fg-item-title")
+							.html();
 					}
 				}
 			}
-		});
-
-		$($scope).magnificPopup({
-			delegate: ".eael-magnific-video-link",
-			type: "iframe"
 		});
 
 		// filter
@@ -93,7 +95,7 @@ var filterableGalleryHandler = function($scope, $) {
 			$isotope_gallery.isotope();
 		});
 
-		// quick search
+		//quick search
 		input.on("input", function() {
 			var $this = $(this);
 
@@ -147,21 +149,6 @@ var filterableGalleryHandler = function($scope, $) {
 			$isotope_gallery.isotope("appended", $items);
 			$isotope_gallery.imagesLoaded().progress(function() {
 				$isotope_gallery.isotope("layout");
-			});
-
-			// reinit popup
-			$(".eael-magnific-link", $scope).magnificPopup({
-				type: "image",
-				gallery: {
-					enabled: $gallery_enabled
-				},
-				image: {
-					titleSrc: function(item) {
-						if (mfpCaption == "yes") {
-							return $(".fg-item-title", item.el.parents(".eael-filterable-gallery-item-wrap")).html();
-						}
-					}
-				}
 			});
 		});
 	}

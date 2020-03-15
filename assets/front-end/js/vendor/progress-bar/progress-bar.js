@@ -5,6 +5,10 @@
 		var $num = $this.data('count')
 		var $duration = $this.data('duration')
 
+		if($num > 100) {
+			$num = 100;
+		}
+
 		$this.one('inview', function() {
 			if ($layout == 'line') {
 				$('.eael-progressbar-line-fill', $this).css({
