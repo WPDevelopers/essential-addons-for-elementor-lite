@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.8.4
+Stable tag: 3.8.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -184,6 +184,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.8.5 - 15/03/2020 =
+- Improved : Advanced Data Table structure
+- Few minor bugfix and improvements
 
 = 3.8.4 - 12/03/2020 =
 - Added : [Ninja Tables](https://wordpress.org/plugins/ninja-tables/) integration with [EA Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table/) element
