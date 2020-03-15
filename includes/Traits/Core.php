@@ -21,6 +21,22 @@ trait Core
     }
 
     /**
+     * Check if a plugin is active
+     *
+     * @since 3.0.0
+     */
+    public function active_plugins($plugin)
+    {
+        $plugins = get_option('active_plugins', []);
+
+        if (in_array($plugin, $plugins)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Extending plugin links
      *
      * @since 3.0.0
@@ -142,7 +158,7 @@ trait Core
         $eael_ext_reading_progress_global = $page_settings_model->get_settings('eael_ext_reading_progress_global');
         $global_settings = get_option('eael_global_settings');
 
-        if($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes') {
+        if ($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes') {
             $global_settings['reading_progress'] = [
                 'post_id' => $post_id,
                 'enabled' => ($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes' ? true : false),
@@ -154,13 +170,13 @@ trait Core
                 'animation_speed' => $page_settings_model->get_settings('eael_ext_reading_progress_animation_speed'),
             ];
         } else {
-            if(isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
+            if (isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
                 $global_settings['reading_progress'] = [];
             }
         }
 
         //save table of content global value
-        if($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' && $page_settings_model->get_settings('eael_ext_table_of_content') == 'yes') {
+        if ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' && $page_settings_model->get_settings('eael_ext_table_of_content') == 'yes') {
             $typography_fields = [
                 'font_family',
                 'font_weight',
@@ -169,70 +185,70 @@ trait Core
                 'text_decoration',
                 'font_size',
                 'letter_spacing',
-                'line_height'
+                'line_height',
             ];
             $global_settings['eael_ext_table_of_content'] = [
-                'post_id'                                           => $post_id,
-                'enabled'                                           => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
-                'display_condition'                                 => $page_settings_model->get_settings('eael_ext_toc_global_display_condition'),
-                'eael_ext_toc_title'                                => $page_settings_model->get_settings('eael_ext_toc_title'),
-                'eael_ext_toc_position'                             => $page_settings_model->get_settings('eael_ext_toc_position'),
-                'eael_ext_toc_supported_heading_tag'                => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag'),
-                'eael_ext_toc_collapse_sub_heading'                 => $page_settings_model->get_settings( 'eael_ext_toc_collapse_sub_heading'),
-                'eael_ext_toc_word_wrap'                            => $page_settings_model->get_settings( 'eael_ext_toc_word_wrap'),
-                'eael_ext_toc_box_shadow'                           => $page_settings_model->get_settings( 'eael_ext_toc_box_shadow'),
-                'eael_ext_toc_table_box_shadow_box_shadow'          => $page_settings_model->get_settings( 'eael_ext_toc_table_box_shadow_box_shadow'),
-                'eael_ext_toc_auto_collapse'                        => $page_settings_model->get_settings( 'eael_ext_toc_auto_collapse'),
-                'eael_ext_toc_border_border'                        => $page_settings_model->get_settings( 'eael_ext_toc_border_border'),
-                'eael_ext_toc_border_width'                         => $page_settings_model->get_settings( 'eael_ext_toc_border_width'),
-                'eael_ext_toc_border_color'                         => $page_settings_model->get_settings( 'eael_ext_toc_border_color'),
-                'eael_ext_toc_box_border_radius'                    => $page_settings_model->get_settings( 'eael_ext_toc_box_border_radius'),
-                'eael_ext_toc_sticky_offset'                        => $page_settings_model->get_settings( 'eael_ext_toc_sticky_offset'),
-                'eael_ext_toc_sticky_scroll'                        => $page_settings_model->get_settings( 'eael_ext_toc_sticky_scroll'),
-                'eael_ext_toc_sticky_z_index'                       => $page_settings_model->get_settings( 'eael_ext_toc_sticky_z_index'),
+                'post_id' => $post_id,
+                'enabled' => ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' ? true : false),
+                'display_condition' => $page_settings_model->get_settings('eael_ext_toc_global_display_condition'),
+                'eael_ext_toc_title' => $page_settings_model->get_settings('eael_ext_toc_title'),
+                'eael_ext_toc_position' => $page_settings_model->get_settings('eael_ext_toc_position'),
+                'eael_ext_toc_supported_heading_tag' => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag'),
+                'eael_ext_toc_collapse_sub_heading' => $page_settings_model->get_settings('eael_ext_toc_collapse_sub_heading'),
+                'eael_ext_toc_word_wrap' => $page_settings_model->get_settings('eael_ext_toc_word_wrap'),
+                'eael_ext_toc_box_shadow' => $page_settings_model->get_settings('eael_ext_toc_box_shadow'),
+                'eael_ext_toc_table_box_shadow_box_shadow' => $page_settings_model->get_settings('eael_ext_toc_table_box_shadow_box_shadow'),
+                'eael_ext_toc_auto_collapse' => $page_settings_model->get_settings('eael_ext_toc_auto_collapse'),
+                'eael_ext_toc_border_border' => $page_settings_model->get_settings('eael_ext_toc_border_border'),
+                'eael_ext_toc_border_width' => $page_settings_model->get_settings('eael_ext_toc_border_width'),
+                'eael_ext_toc_border_color' => $page_settings_model->get_settings('eael_ext_toc_border_color'),
+                'eael_ext_toc_box_border_radius' => $page_settings_model->get_settings('eael_ext_toc_box_border_radius'),
+                'eael_ext_toc_sticky_offset' => $page_settings_model->get_settings('eael_ext_toc_sticky_offset'),
+                'eael_ext_toc_sticky_scroll' => $page_settings_model->get_settings('eael_ext_toc_sticky_scroll'),
+                'eael_ext_toc_sticky_z_index' => $page_settings_model->get_settings('eael_ext_toc_sticky_z_index'),
 
                 //toc header setting
-                'eael_ext_table_of_content_header_bg'                   => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
-                'eael_ext_table_of_content_header_text_color'           => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
-                'eael_ext_table_of_content_header_icon'                 => $page_settings_model->get_settings('eael_ext_table_of_content_header_icon'),
-                'eael_ext_toc_header_padding'                           => $page_settings_model->get_settings('eael_ext_toc_header_padding'),
+                'eael_ext_table_of_content_header_bg' => $page_settings_model->get_settings('eael_ext_table_of_content_header_bg'),
+                'eael_ext_table_of_content_header_text_color' => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
+                'eael_ext_table_of_content_header_icon' => $page_settings_model->get_settings('eael_ext_table_of_content_header_icon'),
+                'eael_ext_toc_header_padding' => $page_settings_model->get_settings('eael_ext_toc_header_padding'),
 
                 //close button setting
-                'eael_ext_table_of_content_close_button_bg'         => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
+                'eael_ext_table_of_content_close_button_bg' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
                 'eael_ext_table_of_content_close_button_text_color' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_text_color'),
-                'eael_ext_toc_close_button_text_style'              => $page_settings_model->get_settings('eael_ext_toc_close_button_text_style'),
+                'eael_ext_toc_close_button_text_style' => $page_settings_model->get_settings('eael_ext_toc_close_button_text_style'),
 
                 //toc body setting
-                'eael_ext_table_of_content_body_bg'                 => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
-                'eael_ext_toc_body_padding'                         => $page_settings_model->get_settings('eael_ext_toc_body_padding'),
+                'eael_ext_table_of_content_body_bg' => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
+                'eael_ext_toc_body_padding' => $page_settings_model->get_settings('eael_ext_toc_body_padding'),
 
                 //list style setting
-                'eael_ext_table_of_content_list_style'              => $page_settings_model->get_settings('eael_ext_table_of_content_list_style'),
-                'eael_ext_toc_top_level_space'                      => $page_settings_model->get_settings('eael_ext_toc_top_level_space'),
-                'eael_ext_toc_subitem_level_space'                  => $page_settings_model->get_settings('eael_ext_toc_subitem_level_space'),
-                'eael_ext_toc_list_icon'                            => $page_settings_model->get_settings('eael_ext_toc_list_icon'),
-                'eael_ext_table_of_content_list_text_color'         => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color'),
-                'eael_ext_table_of_content_list_text_color_active'  => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color_active'),
-                'eael_ext_table_of_list_hover_color'  => $page_settings_model->get_settings('eael_ext_table_of_list_hover_color'),
-                'eael_ext_table_of_content_list_separator_style'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_style'),
-                'eael_ext_table_of_content_list_separator_color'    => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_color'),
-                'eael_ext_toc_box_list_bullet_size'                 => $page_settings_model->get_settings('eael_ext_toc_box_list_bullet_size'),
-                'eael_ext_toc_box_list_top_position'                => $page_settings_model->get_settings('eael_ext_toc_box_list_top_position'),
-                'eael_ext_toc_indicator_size'                       => $page_settings_model->get_settings('eael_ext_toc_indicator_size'),
-                'eael_ext_toc_indicator_position'                   => $page_settings_model->get_settings('eael_ext_toc_indicator_position'),
+                'eael_ext_table_of_content_list_style' => $page_settings_model->get_settings('eael_ext_table_of_content_list_style'),
+                'eael_ext_toc_top_level_space' => $page_settings_model->get_settings('eael_ext_toc_top_level_space'),
+                'eael_ext_toc_subitem_level_space' => $page_settings_model->get_settings('eael_ext_toc_subitem_level_space'),
+                'eael_ext_toc_list_icon' => $page_settings_model->get_settings('eael_ext_toc_list_icon'),
+                'eael_ext_table_of_content_list_text_color' => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color'),
+                'eael_ext_table_of_content_list_text_color_active' => $page_settings_model->get_settings('eael_ext_table_of_content_list_text_color_active'),
+                'eael_ext_table_of_list_hover_color' => $page_settings_model->get_settings('eael_ext_table_of_list_hover_color'),
+                'eael_ext_table_of_content_list_separator_style' => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_style'),
+                'eael_ext_table_of_content_list_separator_color' => $page_settings_model->get_settings('eael_ext_table_of_content_list_separator_color'),
+                'eael_ext_toc_box_list_bullet_size' => $page_settings_model->get_settings('eael_ext_toc_box_list_bullet_size'),
+                'eael_ext_toc_box_list_top_position' => $page_settings_model->get_settings('eael_ext_toc_box_list_top_position'),
+                'eael_ext_toc_indicator_size' => $page_settings_model->get_settings('eael_ext_toc_indicator_size'),
+                'eael_ext_toc_indicator_position' => $page_settings_model->get_settings('eael_ext_toc_indicator_position'),
             ];
-            foreach ($typography_fields as $typography_field){
-                $header_fields_attr = 'eael_ext_table_of_content_header_typography_'.$typography_field;
-                $list_fields_attr   = 'eael_ext_table_of_content_list_typography_normal_'.$typography_field;
-                $global_settings['eael_ext_table_of_content'][$header_fields_attr]   = $page_settings_model->get_settings($header_fields_attr);
-                $global_settings['eael_ext_table_of_content'][$list_fields_attr]     = $page_settings_model->get_settings($list_fields_attr);
+            foreach ($typography_fields as $typography_field) {
+                $header_fields_attr = 'eael_ext_table_of_content_header_typography_' . $typography_field;
+                $list_fields_attr = 'eael_ext_table_of_content_list_typography_normal_' . $typography_field;
+                $global_settings['eael_ext_table_of_content'][$header_fields_attr] = $page_settings_model->get_settings($header_fields_attr);
+                $global_settings['eael_ext_table_of_content'][$list_fields_attr] = $page_settings_model->get_settings($list_fields_attr);
             }
         } else {
-            if(isset($global_settings['eael_ext_table_of_content']['post_id']) && $global_settings['eael_ext_table_of_content']['post_id'] == $post_id) {
+            if (isset($global_settings['eael_ext_table_of_content']['post_id']) && $global_settings['eael_ext_table_of_content']['post_id'] == $post_id) {
                 $global_settings['eael_ext_table_of_content'] = [];
             }
         }
 
-        update_option('eael_global_settings', $global_settings );
+        update_option('eael_global_settings', $global_settings);
     }
 }
