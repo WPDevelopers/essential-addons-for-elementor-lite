@@ -83,7 +83,207 @@ trait Elements
     }
 
     /**
-     * Register extensions
+     * List pro widgets
+     *
+     * @since v3.1.4
+     */
+    public function pro_elements($config)
+    {
+
+        // if ($this->pro_enabled) {
+        //     return $config;
+        // }
+
+        $combine_array = array_merge($config['promotionWidgets'], [
+            [
+                'name' => 'eael-advanced-menu',
+                'title' => __('EA Advanced Menu', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-menu-bar',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-content-timeline',
+                'title' => __('EA Content Timeline', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-post-list',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-counter',
+                'title' => __('EA Counter', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-counter',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-divider',
+                'title' => __('EA Divider', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-divider',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-dynamic-filterable-gallery',
+                'title' => __('EA Dynamic Gallery', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-gallery-grid',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-flip-carousel',
+                'title' => __('EA Flip Carousel', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-carousel',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-google-map',
+                'title' => __('EA Google Map', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-google-maps',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-image-comparison',
+                'title' => __('EA Image Comparison', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-image-before-after',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-image-hotspots',
+                'title' => __('EA Image Hotspots', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-image-hotspot',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-image-scroller',
+                'title' => __('EA Image Scroller', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-image',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-instafeed',
+                'title' => __('EA Instagram Feed', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-instagram',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-interactive-card',
+                'title' => __('EA Interactive Card', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-menu-card',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-interactive-promo',
+                'title' => __('EA Interactive Promo', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-image-box',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-learn-dash-course-list',
+                'title' => __('EA LearnDash Course List', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-post-list',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-lightbox',
+                'title' => __('EA Lightbox &amp; Modal', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-eye',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-logo-carousel',
+                'title' => __('EA Logo Carousel', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-carousel',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-mailchimp',
+                'title' => __('EA Mailchimp', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-envelope-open',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-offcanvas',
+                'title' => __('EA Offcanvas', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-sidebar',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-one-page-nav',
+                'title' => __('EA One Page Navigation', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-navigation-vertical',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-post-block',
+                'title' => __('EA Post Block', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-posts-grid',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-post-carousel',
+                'title' => __('EA Post Carousel', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-slider-push',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-post-list',
+                'title' => __('EA Smart Post List', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-post-list',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-price-menu',
+                'title' => __('EA Price Menu', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-price-list',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-protected-content',
+                'title' => __('EA Protected Content', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-lock',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-static-product',
+                'title' => __('EA Static Product', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-image-box',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-team-member-carousel',
+                'title' => __('EA Team Member Carousel', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-user-o',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-testimonial-slider',
+                'title' => __('EA Testimonial Slider', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-comments-o',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-toggle',
+                'title' => __('EA Toggle', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-dual-button',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-twitter-feed-carousel',
+                'title' => __('EA Twitter Feed Carousel', 'essential-addons-for-elementor-lite'),
+                'icon' => 'fa fa-twitter',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
+                'name' => 'eael-woo-collections',
+                'title' => __('EA Woo Product Collections', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eicon-woocommerce',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+        ]);
+
+        $config['promotionWidgets'] = $combine_array;
+
+        return $config;
+    }
+
+    /**
+     * Inject global extension html.
      *
      * @since v3.1.4
      */
@@ -95,7 +295,7 @@ trait Elements
             $global_settings = get_option('eael_global_settings');
             $html = '';
             $reading_progress_html = '';
-            $table_of_content_html =  '';
+            $table_of_content_html = '';
 
             // Reading Progress Bar
             if ($this->get_settings('eael-reading-progress') == true) {
@@ -146,20 +346,20 @@ trait Elements
                         $this->eael_toc_global_css($page_settings_model, $global_settings);
                     }
                     $icon = 'fas fa-list';
-                    $support_tag = (array) $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_supported_heading_tag' );
+                    $support_tag = (array) $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_supported_heading_tag');
 
                     $support_tag = implode(',', array_filter($support_tag));
-                    $position = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_position' );
-                    $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_close_button_text_style' );
-                    $box_shadow = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_box_shadow' );
-                    $auto_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_auto_collapse' );
-                    $toc_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_table_of_content_list_style' );
-                    $toc_word_wrap = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_word_wrap' );
-                    $toc_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_collapse_sub_heading' );
-                    $list_icon = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_list_icon' );
-                    $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_title' );
-                    $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_table_of_content_header_icon' );
-                    $sticky_scroll = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content','eael_ext_toc_sticky_scroll' );
+                    $position = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_position');
+                    $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_close_button_text_style');
+                    $box_shadow = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_box_shadow');
+                    $auto_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_auto_collapse');
+                    $toc_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_list_style');
+                    $toc_word_wrap = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_word_wrap');
+                    $toc_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_collapse_sub_heading');
+                    $list_icon = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_list_icon');
+                    $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_title');
+                    $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_header_icon');
+                    $sticky_scroll = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_sticky_scroll');
 
                     $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                     $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
@@ -185,8 +385,6 @@ trait Elements
                         <button class='eael-toc-button'><i class='{$icon}'></i><span>{$toc_title}</span></button>
                     </div>";
                 }
-
-
 
                 if ($page_settings_model->get_settings('eael_ext_table_of_content') != 'yes' && isset($global_settings['eael_ext_table_of_content']['post_id'])) {
                     if (get_post_status($global_settings['eael_ext_table_of_content']['post_id']) != 'publish') {
