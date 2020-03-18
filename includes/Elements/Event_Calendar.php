@@ -61,8 +61,8 @@ class Event_Calendar extends Widget_Base {
                 'label'   => __('Source', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'options' => apply_filters('eael/event-calendar/source', [
-                    'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
-                    'google' => __('Google', 'essential-addons-for-elementor-lite'),
+                    'manual'  => __('Manual', 'essential-addons-for-elementor-lite'),
+                    'google'  => __('Google', 'essential-addons-for-elementor-lite'),
                     'eventon' => __('EventON(PRO)', 'essential-addons-for-elementor-lite')
                 ]),
                 'default' => 'manual',
@@ -1453,14 +1453,15 @@ class Event_Calendar extends Widget_Base {
 
     protected function render () {
         $settings = $this->get_settings_for_display();
-        if ($settings['eael_event_calendar_type'] == 'google') {
+
+        if (in_array($settings['eael_event_calendar_type'], ['eventon'])) {
+            $data = apply_filters('eael/event-calendar/integration', [], $settings);
+        } elseif ($settings['eael_event_calendar_type'] == 'google') {
             $data = $this->get_google_calendar_events($settings);
+        } elseif ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
+            $data = $this->get_the_events_calendar_events($settings);
         } else {
-            if ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
-                $data = $this->get_the_events_calendar_events($settings);
-            } else {
-                $data = $this->get_manual_calendar_events($settings);
-            }
+            $data = $this->get_manual_calendar_events($settings);
         }
 
         $local = $settings['eael_event_calendar_language'];
