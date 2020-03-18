@@ -56,21 +56,21 @@ trait Enqueue
         }
 
         // Load fontawesome as fallback
-        if(defined('ELEMENTOR_ASSETS_URL')) {
+        if (defined('ELEMENTOR_ASSETS_URL')) {
             wp_register_style(
                 'font-awesome-5-all',
                 ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
                 false,
                 EAEL_PLUGIN_VERSION
             );
-    
+
             wp_register_style(
                 'font-awesome-4-shim',
                 ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/v4-shims.min.css',
                 false,
                 EAEL_PLUGIN_VERSION
             );
-    
+
             wp_register_script(
                 'font-awesome-4-shim',
                 ELEMENTOR_ASSETS_URL . 'lib/font-awesome/js/v4-shims.min.js',
@@ -161,6 +161,14 @@ trait Enqueue
         wp_enqueue_style(
             'eael-editor-css',
             $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
+            false,
+            EAEL_PLUGIN_VERSION
+        );
+
+        // ea icon font
+        wp_enqueue_style(
+            'ea-icon',
+            EAEL_PLUGIN_URL . 'assets/fonts/eaicon.css',
             false,
             EAEL_PLUGIN_VERSION
         );
