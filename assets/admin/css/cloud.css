@@ -1,0 +1,75 @@
+.essential-addons_page_template-cloud #wpwrap, .essential-addons_page_template-cloud #wpcontent, .essential-addons_page_template-cloud #wpcontent #wpbody, .essential-addons_page_template-cloud #wpcontent #wpbody-content, .essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content, .essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap, .essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap .template-cloud,
+.essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap .template-cloud-body {
+    height: 100%;
+}
+.essential-addons_page_template-cloud #wpcontent {
+    padding-left: 0px;
+}
+.essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content {
+    padding-bottom: 0px;
+}
+.essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap {
+    margin: 0px;
+    padding: 0px;
+}
+
+.template-cloud-header {
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0px 0px 10px 0px #00000024;
+    overflow: visible;
+    z-index: 99;
+    position: relative;
+    background-color: #fff;
+    padding: 15px 20px;
+}
+
+.template-cloud-body { 
+    box-sizing: border-box;
+    height: calc(100% - 80px) !important;
+}
+.template-cloud-install {
+    display: flex;
+    width: 100%;
+    background-image: url(../images/templately/login-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.templately-left {
+    padding-right: 15px;
+}
+.templately-right {
+    padding-left: 15px;
+}
+.templately-admin-title, .templately-admin-install {
+    width: 70%;
+}
+.templately-admin-title {
+    float: right;
+    text-align: right;
+}
+.templately-admin-title h1 {
+    color: #fff;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.templately-admin-title p {
+    font-size: 16px;
+    line-height: 2;
+}
+
+.templately-admin-install {
+    background-color: #fff;
+    color: #000;
+    padding: 50px;
+    border-radius: 10px;
+    float: left;
+}
