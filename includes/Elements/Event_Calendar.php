@@ -63,7 +63,7 @@ class Event_Calendar extends Widget_Base {
                 'options' => apply_filters('eael/event-calendar/source', [
                     'manual'  => __('Manual', 'essential-addons-for-elementor-lite'),
                     'google'  => __('Google', 'essential-addons-for-elementor-lite'),
-                    'eventon' => __('EventON(PRO)', 'essential-addons-for-elementor-lite')
+
                 ]),
                 'default' => 'manual',
             ]
