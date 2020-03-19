@@ -87,14 +87,20 @@ trait Elements
      *
      * @since v3.1.4
      */
-    public function pro_elements($config)
+    public function promote_pro_elements($config)
     {
 
         if ($this->pro_enabled) {
             return $config;
         }
 
-        $combine_array = array_merge($config['promotionWidgets'], [
+        $promotion_widgets = [];
+
+        if(isset($config['promotionWidgets'])) {
+            $promotion_widgets = $config['promotionWidgets'];
+        }
+
+        $combine_array = array_merge($promotion_widgets, [
             [
                 'name' => 'eael-advanced-menu',
                 'title' => __('Advanced Menu', 'essential-addons-for-elementor-lite'),
@@ -181,7 +187,7 @@ trait Elements
             ],
             [
                 'name' => 'eael-lightbox',
-                'title' => __('Lightbox &amp; Modal', 'essential-addons-for-elementor-lite'),
+                'title' => __('Lightbox & Modal', 'essential-addons-for-elementor-lite'),
                 'icon' => 'eaicon-lightbox-modal',
                 'categories' => '["essential-addons-elementor"]',
             ],
