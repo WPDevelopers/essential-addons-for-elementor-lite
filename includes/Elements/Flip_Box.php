@@ -22,11 +22,11 @@ class Flip_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Flip Box', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Flip Box', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-flip-box';
+		return 'eaicon-flip-box';
 	}
 
    public function get_categories() {

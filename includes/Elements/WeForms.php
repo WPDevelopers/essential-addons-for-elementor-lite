@@ -25,12 +25,12 @@ class WeForms extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA weForm', 'essential-addons-for-elementor-lite');
+        return esc_html__('weForm', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-weforms';
     }
 
     public function get_categories()

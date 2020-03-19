@@ -23,12 +23,12 @@ class Post_Timeline extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Post Timeline', 'essential-addons-for-elementor-lite');
+        return __('Post Timeline', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-post-list';
+        return 'eaicon-post-timeline';
     }
 
     public function get_categories()

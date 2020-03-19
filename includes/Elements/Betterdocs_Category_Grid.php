@@ -36,7 +36,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-document-file';
+        return 'eaicon-betterdocs-category-grid';
     }
 
     /**

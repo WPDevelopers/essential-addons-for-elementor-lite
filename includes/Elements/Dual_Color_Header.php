@@ -20,11 +20,11 @@ class Dual_Color_Header extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Dual Color Heading', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Dual Color Heading', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-animated-headline';
+		return 'eaicon-dual-color-heading';
 	}
 
    public function get_categories() {

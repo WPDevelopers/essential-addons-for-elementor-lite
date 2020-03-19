@@ -25,12 +25,12 @@ class Filterable_Gallery extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Filterable Gallery', 'essential-addons-for-elementor-lite');
+        return esc_html__('Filterable Gallery', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-gallery-grid';
+        return 'eaicon-filterable-gallery';
     }
 
     public function get_categories()

@@ -22,11 +22,11 @@ class Data_Table extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Data Table', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Data Table', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-table';
+		return 'eaicon-data-table';
 	}
 
    public function get_categories() {

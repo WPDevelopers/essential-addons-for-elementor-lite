@@ -21,12 +21,12 @@ class Sticky_Video extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Sticky Video', 'essential-addons-for-elementor-lite');
+        return esc_html__('Sticky Video', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-youtube';
+        return 'eaicon-sticky-video';
     }
 
     public function get_categories()

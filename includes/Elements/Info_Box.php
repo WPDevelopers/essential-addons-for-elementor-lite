@@ -23,11 +23,11 @@ class Info_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Info Box', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Info Box', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-info-box';
+		return 'eaicon-info-box';
 	}
 
 	public function get_categories() {

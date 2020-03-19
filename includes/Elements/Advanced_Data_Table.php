@@ -22,12 +22,12 @@ class Advanced_Data_Table extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Advanced Data Table', 'essential-addons-for-elementor-lite');
+        return esc_html__('Advanced Data Table', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-table';
+        return 'eaicon-advanced-data-table';
     }
 
     public function get_categories()

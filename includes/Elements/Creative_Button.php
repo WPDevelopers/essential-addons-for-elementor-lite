@@ -23,11 +23,11 @@ class Creative_Button extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Creative Button', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Creative Button', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-button';
+		return 'eaicon-creative-button';
 	}
 
    	public function get_categories() {

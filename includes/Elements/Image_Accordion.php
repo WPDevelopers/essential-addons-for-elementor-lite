@@ -21,12 +21,12 @@ class Image_Accordion extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Image Accordion', 'essential-addons-for-elementor-lite');
+        return esc_html__('Image Accordion', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-call-to-action';
+        return 'eaicon-image-accrodion';
     }
 
     public function get_categories()

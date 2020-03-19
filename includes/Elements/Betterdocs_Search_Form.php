@@ -36,7 +36,7 @@ class Betterdocs_Search_Form extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-site-search';
+        return 'eaicon-betterdocs-search-form';
     }
 
     /**

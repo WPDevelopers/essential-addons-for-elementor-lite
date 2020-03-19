@@ -25,12 +25,12 @@ class Countdown extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Countdown', 'essential-addons-for-elementor-lite');
+        return esc_html__('Countdown', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-countdown';
+        return 'eaicon-countdown';
     }
 
     public function get_categories()

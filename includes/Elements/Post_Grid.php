@@ -25,12 +25,12 @@ class Post_Grid extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Post Grid', 'essential-addons-for-elementor-lite');
+        return __('Post Grid', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-posts-grid';
+        return 'eaicon-post-grid';
     }
 
     public function get_categories()
