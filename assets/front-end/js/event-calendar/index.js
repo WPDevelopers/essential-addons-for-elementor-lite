@@ -40,6 +40,7 @@ var EventCalendar = function($scope, $) {
 			element.attr("href", "javascript:void(0);");
 			element.click(function(e) {
 				e.preventDefault();
+				e.stopPropagation();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,
@@ -155,7 +156,16 @@ var EventCalendar = function($scope, $) {
 	});
 
 	CloseButton.on("click", function() {
+		event.stopPropagation();
 		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+	});
+
+	$(document).on('click',function(event){
+		if (event.target.closest(".eaelec-modal-content")) return;
+		if(ecModal.hasClass("eael-ec-popup-ready")){
+			ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+		}
+
 	});
 
 	calendar.render();

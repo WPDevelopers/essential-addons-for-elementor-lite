@@ -40333,6 +40333,7 @@ var EventCalendar = function($scope, $) {
 			element.attr("href", "javascript:void(0);");
 			element.click(function(e) {
 				e.preventDefault();
+				e.stopPropagation();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,
@@ -40448,7 +40449,16 @@ var EventCalendar = function($scope, $) {
 	});
 
 	CloseButton.on("click", function() {
+		event.stopPropagation();
 		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+	});
+
+	$(document).on('click',function(event){
+		if (event.target.closest(".eaelec-modal-content")) return;
+		if(ecModal.hasClass("eael-ec-popup-ready")){
+			ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+		}
+
 	});
 
 	calendar.render();
@@ -40523,6 +40533,88 @@ jQuery(window).on("elementor/frontend/init", function() {
         FacebookFeed
     );
 });
+
+var FancyText = function($scope, $) {
+    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
+        $id =
+            $fancyText.data("fancy-text-id") !== undefined
+                ? $fancyText.data("fancy-text-id")
+                : "",
+        $fancy_text =
+            $fancyText.data("fancy-text") !== undefined
+                ? $fancyText.data("fancy-text")
+                : "",
+        $transition_type =
+            $fancyText.data("fancy-text-transition-type") !== undefined
+                ? $fancyText.data("fancy-text-transition-type")
+                : "",
+        $fancy_text_speed =
+            $fancyText.data("fancy-text-speed") !== undefined
+                ? $fancyText.data("fancy-text-speed")
+                : "",
+        $fancy_text_delay =
+            $fancyText.data("fancy-text-delay") !== undefined
+                ? $fancyText.data("fancy-text-delay")
+                : "",
+        $fancy_text_cursor =
+            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
+        $fancy_text_loop =
+            $fancyText.data("fancy-text-loop") !== undefined
+                ? $fancyText.data("fancy-text-loop") == "yes"
+                    ? true
+                    : false
+                : false;
+    $fancy_text = $fancy_text.split("|");
+
+    if ($transition_type == "typing") {
+        $("#eael-fancy-text-" + $id).typed({
+            strings: $fancy_text,
+            typeSpeed: $fancy_text_speed,
+            backSpeed: 0,
+            startDelay: 300,
+            backDelay: $fancy_text_delay,
+            showCursor: $fancy_text_cursor,
+            loop: $fancy_text_loop
+        });
+    }
+
+    if ($transition_type != "typing") {
+        $("#eael-fancy-text-" + $id).Morphext({
+            animation: $transition_type,
+            separator: ", ",
+            speed: $fancy_text_delay,
+            complete: function() {
+                // Overrides default empty function
+            }
+        });
+    }
+
+    jQuery(window).on('load', function() {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 500);
+    });
+
+    if(isEditMode) {
+        setTimeout(function() {
+            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
+        }, 800);
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-fancy-text.default",
+        FancyText
+    );
+});
+
+(function($) {
+    window.isEditMode = false;
+
+    $(window).on("elementor/frontend/init", function() {
+        window.isEditMode = elementorFrontend.isEditMode();
+    });
+})(jQuery);
 
 var filterableGalleryHandler = function($scope, $) {
 	var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
@@ -40684,88 +40776,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-filterable-gallery.default", filterableGalleryHandler);
 });
 
-var FancyText = function($scope, $) {
-    var $fancyText = $scope.find(".eael-fancy-text-container").eq(0),
-        $id =
-            $fancyText.data("fancy-text-id") !== undefined
-                ? $fancyText.data("fancy-text-id")
-                : "",
-        $fancy_text =
-            $fancyText.data("fancy-text") !== undefined
-                ? $fancyText.data("fancy-text")
-                : "",
-        $transition_type =
-            $fancyText.data("fancy-text-transition-type") !== undefined
-                ? $fancyText.data("fancy-text-transition-type")
-                : "",
-        $fancy_text_speed =
-            $fancyText.data("fancy-text-speed") !== undefined
-                ? $fancyText.data("fancy-text-speed")
-                : "",
-        $fancy_text_delay =
-            $fancyText.data("fancy-text-delay") !== undefined
-                ? $fancyText.data("fancy-text-delay")
-                : "",
-        $fancy_text_cursor =
-            $fancyText.data("fancy-text-cursor") === 'yes' ? true : false,
-        $fancy_text_loop =
-            $fancyText.data("fancy-text-loop") !== undefined
-                ? $fancyText.data("fancy-text-loop") == "yes"
-                    ? true
-                    : false
-                : false;
-    $fancy_text = $fancy_text.split("|");
-
-    if ($transition_type == "typing") {
-        $("#eael-fancy-text-" + $id).typed({
-            strings: $fancy_text,
-            typeSpeed: $fancy_text_speed,
-            backSpeed: 0,
-            startDelay: 300,
-            backDelay: $fancy_text_delay,
-            showCursor: $fancy_text_cursor,
-            loop: $fancy_text_loop
-        });
-    }
-
-    if ($transition_type != "typing") {
-        $("#eael-fancy-text-" + $id).Morphext({
-            animation: $transition_type,
-            separator: ", ",
-            speed: $fancy_text_delay,
-            complete: function() {
-                // Overrides default empty function
-            }
-        });
-    }
-
-    jQuery(window).on('load', function() {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 500);
-    });
-
-    if(isEditMode) {
-        setTimeout(function() {
-            $('.eael-fancy-text-strings', $scope).css('display', 'inline-block');
-        }, 800);
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-fancy-text.default",
-        FancyText
-    );
-});
-
-(function($) {
-    window.isEditMode = false;
-
-    $(window).on("elementor/frontend/init", function() {
-        window.isEditMode = elementorFrontend.isEditMode();
-    });
-})(jQuery);
-
 var ImageAccordion = function($scope, $) {
     var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
         $id =
@@ -40812,6 +40822,53 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
+    );
+});
+
+var PricingTooltip = function($scope, $) {
+    if ($.fn.tooltipster) {
+        var $tooltip = $scope.find(".tooltip"),
+            i;
+
+        for (i = 0; i < $tooltip.length; i++) {
+            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
+                $tooltipSide =
+                    $currentTooltip.data("side") !== undefined
+                        ? $currentTooltip.data("side")
+                        : false,
+                $tooltipTrigger =
+                    $currentTooltip.data("trigger") !== undefined
+                        ? $currentTooltip.data("trigger")
+                        : "hover",
+                $animation =
+                    $currentTooltip.data("animation") !== undefined
+                        ? $currentTooltip.data("animation")
+                        : "fade",
+                $anim_duration =
+                    $currentTooltip.data("animation_duration") !== undefined
+                        ? $currentTooltip.data("animation_duration")
+                        : 300,
+                $theme =
+                    $currentTooltip.data("theme") !== undefined
+                        ? $currentTooltip.data("theme")
+                        : "default",
+                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
+
+            $currentTooltip.tooltipster({
+                animation: $animation,
+                trigger: $tooltipTrigger,
+                side: $tooltipSide,
+                delay: $anim_duration,
+                arrow: $arrow,
+                theme: "tooltipster-" + $theme
+            });
+        }
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-pricing-table.default",
+        PricingTooltip
     );
 });
 
@@ -40926,53 +40983,6 @@ jQuery(document).ready(function() {
             }
         );
     }
-});
-
-var PricingTooltip = function($scope, $) {
-    if ($.fn.tooltipster) {
-        var $tooltip = $scope.find(".tooltip"),
-            i;
-
-        for (i = 0; i < $tooltip.length; i++) {
-            var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
-                $tooltipSide =
-                    $currentTooltip.data("side") !== undefined
-                        ? $currentTooltip.data("side")
-                        : false,
-                $tooltipTrigger =
-                    $currentTooltip.data("trigger") !== undefined
-                        ? $currentTooltip.data("trigger")
-                        : "hover",
-                $animation =
-                    $currentTooltip.data("animation") !== undefined
-                        ? $currentTooltip.data("animation")
-                        : "fade",
-                $anim_duration =
-                    $currentTooltip.data("animation_duration") !== undefined
-                        ? $currentTooltip.data("animation_duration")
-                        : 300,
-                $theme =
-                    $currentTooltip.data("theme") !== undefined
-                        ? $currentTooltip.data("theme")
-                        : "default",
-                $arrow = "yes" == $currentTooltip.data("arrow") ? true : false;
-
-            $currentTooltip.tooltipster({
-                animation: $animation,
-                trigger: $tooltipTrigger,
-                side: $tooltipSide,
-                delay: $anim_duration,
-                arrow: $arrow,
-                theme: "tooltipster-" + $theme
-            });
-        }
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-pricing-table.default",
-        PricingTooltip
-    );
 });
 
 var eaelsvPosition = '';
@@ -41166,37 +41176,6 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
-
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
-});
 
 (function($) {
 	jQuery(document).ready(function() {
@@ -41555,3 +41534,34 @@ jQuery(window).on("elementor/frontend/init", function() {
 		}
 	});
 })(jQuery);
+
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
+    );
+});
