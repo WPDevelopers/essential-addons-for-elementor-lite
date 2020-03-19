@@ -385,6 +385,21 @@ class Event_Calendar extends Widget_Base {
         );
 
         $this->add_control(
+            'eael_event_calendar_default_view',
+            [
+                'label'   => __('Calendar Default View', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'options' => [
+                    'timeGridDay'  => __('Day', 'essential-addons-for-elementor-lite'),
+                    'timeGridWeek' => __('Week', 'essential-addons-for-elementor-lite'),
+                    'dayGridMonth' => __('Month', 'essential-addons-for-elementor-lite'),
+                    'listWeek'     => __('List', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'dayGridMonth',
+            ]
+        );
+
+        $this->add_control(
             'eael_event_calendar_first_day',
             [
                 'label'   => __('First Day of Week', 'essential-addons-for-elementor-lite'),
@@ -1465,12 +1480,14 @@ class Event_Calendar extends Widget_Base {
         }
 
         $local = $settings['eael_event_calendar_language'];
+        $default_view = $settings['eael_event_calendar_default_view'];
 
         echo '<div class="eael-event-calendar-wrapper">';
 
         echo '<div id="eael-event-calendar-'.$this->get_id().'" class="eael-event-calendar-cls"
             data-cal_id = "'.$this->get_id().'"
             data-locale = "'.$local.'"
+            data-defaultview = "'.$default_view.'"
             data-events="'.htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8').'"
             data-first_day="'.$settings['eael_event_calendar_first_day'].'"></div>
             '.$this->eaelec_load_event_details().'
