@@ -168,7 +168,7 @@ trait Enqueue
         // ea icon font
         wp_enqueue_style(
             'ea-icon',
-            EAEL_PLUGIN_URL . 'assets/fonts/eaicon.css',
+            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/eaicon.css'),
             false,
             EAEL_PLUGIN_VERSION
         );

@@ -23,12 +23,12 @@ class Content_Ticker extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Content Ticker', 'essential-addons-for-elementor-lite');
+        return esc_html__('Content Ticker', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-call-to-action';
+        return 'eaicon-content-ticker';
     }
 
     public function get_categories()

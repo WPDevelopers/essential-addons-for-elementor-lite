@@ -27,7 +27,7 @@ class FluentForm extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Fluent Form', 'essential-addons-for-elementor-lite');
+        return __('Fluent Form', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories()
@@ -37,7 +37,7 @@ class FluentForm extends Widget_Base
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-fluent-forms';
     }
 
     protected function _register_controls()

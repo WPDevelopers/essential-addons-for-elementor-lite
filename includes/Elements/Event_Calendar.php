@@ -30,11 +30,11 @@ class Event_Calendar extends Widget_Base {
     }
 
     public function get_title () {
-        return esc_html__('EA Event Calendar', 'essential-addons-for-elementor-lite');
+        return esc_html__('Event Calendar', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon () {
-        return 'eicon-calendar';
+        return 'eaicon-event-calendar';
     }
 
     public function get_categories () {

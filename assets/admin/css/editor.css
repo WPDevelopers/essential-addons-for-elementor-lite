@@ -49,3 +49,21 @@
 	display: block;
 	text-align: center;
 }
+
+#elementor-panel-category-essential-addons-elementor .elementor-element-wrapper:not(.elementor-element--promotion) .icon i:after {
+	content: "\e906";
+	font-family: "eaicon" !important;
+	speak: none;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	color: #cdcfd2;
+}

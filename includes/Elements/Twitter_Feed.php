@@ -23,12 +23,12 @@ class Twitter_Feed extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Twitter Feed', 'essential-addons-for-elementor-lite');
+        return esc_html__('Twitter Feed', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'fa fa-twitter';
+        return 'eaicon-twitter-feed';
     }
 
     public function get_categories()

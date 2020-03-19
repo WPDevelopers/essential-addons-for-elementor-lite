@@ -22,11 +22,11 @@ class Pricing_Table extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Pricing Table', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Pricing Table', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-price-table';
+		return 'eaicon-pricing-table';
 	}
 
    public function get_categories() {

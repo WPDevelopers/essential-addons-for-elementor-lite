@@ -21,7 +21,7 @@ class WpForms extends Widget_Base {
     }
 
     public function get_title() {
-        return __( 'EA WPForms', 'essential-addons-for-elementor-lite');
+        return __( 'WPForms', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories() {
@@ -29,7 +29,7 @@ class WpForms extends Widget_Base {
     }
 
     public function get_icon() {
-        return 'fa fa-envelope-o';
+        return 'eaicon-wpforms';
     }
 
     protected function _register_controls() {

@@ -20,11 +20,11 @@ class Testimonial extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Testimonial', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Testimonial', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-testimonial';
+		return 'eaicon-testimonial';
 	}
 
    	public function get_categories() {

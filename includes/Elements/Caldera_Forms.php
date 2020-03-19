@@ -25,7 +25,7 @@ class Caldera_Forms extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Caldera Forms', 'essential-addons-for-elementor-lite');
+        return __('Caldera Forms', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories()
@@ -35,7 +35,7 @@ class Caldera_Forms extends Widget_Base
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-caldera-forms';
     }
 
     protected function _register_controls()

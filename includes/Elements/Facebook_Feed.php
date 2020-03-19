@@ -22,12 +22,12 @@ class Facebook_Feed extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Facebook Feed', 'essential-addons-for-elementor-lite');
+        return esc_html__('Facebook Feed', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'fab fa-facebook';
+        return 'eaicon-facebook-feed';
     }
 
     public function get_categories()
