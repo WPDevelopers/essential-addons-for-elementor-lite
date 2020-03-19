@@ -1577,6 +1577,45 @@ trait Helper
     }
 
     /**
+     * Get all taxonomies by post
+     *
+     * @param  array   $args
+     *
+     * @param  string  $output
+     * @param  string  $operator
+     *
+     * @return array
+     */
+    public function eael_get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
+    {
+        global $wp_taxonomies;
+
+        $field = ( 'names' === $output ) ? 'name' : false;
+
+        // Handle 'object_type' separately.
+        if ( isset( $args['object_type'] ) ) {
+            $object_type = (array) $args['object_type'];
+            unset( $args['object_type'] );
+        }
+
+        $taxonomies = wp_filter_object_list( $wp_taxonomies, $args, $operator );
+
+        if ( isset( $object_type ) ) {
+            foreach ( $taxonomies as $tax => $tax_data ) {
+                if ( ! array_intersect( $object_type, $tax_data->object_type ) ) {
+                    unset( $taxonomies[ $tax ] );
+                }
+            }
+        }
+
+        if ( $field ) {
+            $taxonomies = wp_list_pluck( $taxonomies, $field );
+        }
+
+        return $taxonomies;
+    }
+
+    /**
      * Get all Posts
      *
      * @return array
