@@ -61,8 +61,8 @@ class Event_Calendar extends Widget_Base {
                 'label'   => __('Source', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'options' => apply_filters('eael/event-calendar/source', [
-                    'manual'  => __('Manual', 'essential-addons-for-elementor-lite'),
-                    'google'  => __('Google', 'essential-addons-for-elementor-lite'),
+                    'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
+                    'google' => __('Google', 'essential-addons-for-elementor-lite'),
 
                 ]),
                 'default' => 'manual',
@@ -1515,7 +1515,7 @@ class Event_Calendar extends Widget_Base {
 
                 $data[] = [
                     'id'          => $i,
-                    'title'       => $event["eael_event_title"],
+                    'title'       => !empty($event["eael_event_title"]) ? $event["eael_event_title"] : 'No Title',
                     'description' => $event["eael_event_description"],
                     'start'       => $start,
                     'end'         => $end,
@@ -1600,7 +1600,7 @@ class Event_Calendar extends Widget_Base {
 
                 $calendar_data[] = [
                     'id'          => ++$key,
-                    'title'       => $item->summary,
+                    'title'       => !empty($item->summary) ? $item->summary : 'No Title',
                     'description' => isset($item->description) ? $item->description : '',
                     'start'       => $ev_start_date,
                     'end'         => $ev_end_date,
@@ -1660,7 +1660,8 @@ class Event_Calendar extends Widget_Base {
             }
             $calendar_data[] = [
                 'id'          => ++$key,
-                'title'       => $event->post_title,
+                'title'       => !empty($event->post_title) ? $event->post_title : __('No Title',
+                    'essential-addons-for-elementor-lite'),
                 'description' => $event->post_content,
                 'start'       => tribe_get_start_date($event->ID, true, $date_format),
                 'end'         => tribe_get_end_date($event->ID, true, $date_format),
