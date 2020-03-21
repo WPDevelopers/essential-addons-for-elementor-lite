@@ -26,33 +26,34 @@ trait Admin
             $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
-        add_submenu_page( 
-            'eael-settings',
-            __('Templates Cloud', 'essential-addons-for-elementor-lite'),
-            __('Templates Cloud', 'essential-addons-for-elementor-lite'),
-            'manage_options',
-            'template-cloud',
-            [$this, 'templately_page']
-        );
+        $plugins = \get_option('active_plugins');
+        if ( ! in_array( 'templately/templately.php', $plugins ) ) {
+            add_submenu_page( 
+                'eael-settings',
+                __('Templates Cloud', 'essential-addons-for-elementor-lite'),
+                __('Templates Cloud', 'essential-addons-for-elementor-lite'),
+                'manage_options',
+                'template-cloud',
+                [$this, 'templately_page']
+            );
+        }
     }
     /**
      * Template Page Outputs
      *
      * @return void
      */
-    public function templately_page(){
-        $plugin_url = \wp_nonce_url( \self_admin_url('update.php?action=install-plugin&amp;plugin=templately'), 'install-plugin_templately' );
-        $button_text = 'Install Templately';
-
+    public function templately_page() {
+        $plugin_name = basename( EAEL_PLUGIN_BASENAME, '.php' );
+        $button_text = __( 'Install Templately', 'essential-addons-for-elementor-lite' );
         if ( ! function_exists( 'get_plugins' ) ) {
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
-
         $plugins = \get_plugins();
-
+        $installed = false;
         if (isset($plugins['templately/templately.php'])) {
-            $plugin_url = \wp_nonce_url( 'plugins.php?action=activate&amp;plugin=templately/templately.php', 'activate-plugin_templately/templately.php' );
-            $button_text = 'Activate Templately';
+            $installed = true;
+            $button_text = __( 'Activate Templately', 'essential-addons-for-elementor-lite' );
         }
 
         ?>
@@ -74,12 +75,42 @@ trait Admin
                             <div class="templately-right">
                                 <div class="templately-admin-install">
                                     <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
-                                    <a href="<?php echo $plugin_url; ?>"><?php echo __( $button_text, 'essential-addons-for-elementor-lite' ); ?></a>    
+                                    <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script type="text/javascript">
+                    ( function( $ ){
+                        $( document ).ready(function( $ ){
+                            $('body').on('click', '.eae-activate-templately', function( e ){
+                                var self = $(this);
+                                self.text('<?php echo ! $installed ? esc_js( 'Installing...' ) : esc_js( 'Activating...' ); ?>');
+                                e.preventDefault();
+                                $.ajax({
+                                    url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                                    type: 'POST',
+                                    data: {
+                                        action: 'wpdeveloper_upsale_core_install_<?php echo $plugin_name; ?>',
+                                        _wpnonce: '<?php echo wp_create_nonce( 'wpdeveloper_upsale_core_install_' . $plugin_name ); ?>',
+                                        slug : 'templately',
+                                        file : 'templately.php'
+                                    },
+                                    complete: function() {
+                                        self.attr('disabled', 'disabled');
+                                        self.removeClass('install-now updating-message');
+                                    }
+                                }).done(function(){
+                                    self.text('<?php echo esc_js( 'Installed' ); ?>').delay(3000);
+                                    window.location.href = '<?php echo admin_url( "admin.php?page=templately" ); ?>';
+                                }).fail(function(){
+                                    self.removeClass('install-now updating-message');
+                                });
+                            });
+                        });
+                    })( jQuery );
+                </script>
             </div>
         <?php
     }
