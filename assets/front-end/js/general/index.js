@@ -5,12 +5,14 @@
 		window.isEditMode = elementorFrontend.isEditMode();
 
 		if (isEditMode) {
-			var interval = setInterval(function() {
-				if (parent.document.querySelectorAll(".elementor-element--promotion").length > 0) {
-					parent.document.querySelectorAll(".elementor-element--promotion").forEach(function(widget) {
-						widget.addEventListener("click", function(e) {
+			parent.document.addEventListener("mousedown", function(e) {
+				var widgets = parent.document.querySelectorAll(".elementor-element--promotion");
+
+				if (widgets.length > 0) {
+					for (var i = 0; i < widgets.length; i++) {
+						if (widgets[i].contains(e.target)) {
 							var dialog = parent.document.querySelector("#elementor-element--promotion__dialog");
-							var icon = widget.querySelector(".icon > i");
+							var icon = widgets[i].querySelector(".icon > i");
 
 							if (icon.classList.toString().indexOf("eaicon") >= 0) {
 								dialog.querySelector(".dialog-buttons-action").style.display = "none";
@@ -42,12 +44,13 @@
 									dialog.querySelector(".ea-dialog-buttons-action").style.display = "none";
 								}
 							}
-						});
-					});
 
-					clearTimeout(interval);
+							// stop loop
+							break;
+						}
+					}
 				}
-			}, 500);
+			});
 		}
 	});
 })(jQuery);
