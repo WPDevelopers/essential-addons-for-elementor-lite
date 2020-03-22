@@ -62,6 +62,17 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+        if (!apply_filters('eael/active_plugins', 'woocommerce/woocommerce.php')) {
+            $this->add_control(
+                'ea_product_grid_woo_required',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __('<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite'),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
+        }
+
         $this->add_control(
             'eael_product_grid_product_filter',
             [
@@ -513,6 +524,10 @@ class Product_Grid extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+
+        if (!apply_filters('eael/active_plugins', 'woocommerce/woocommerce.php')) {
+            return;
+        }
 
         $args = [
             'post_type' => 'product',

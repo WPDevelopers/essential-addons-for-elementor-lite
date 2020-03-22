@@ -264,10 +264,6 @@ $config = [
         ],
         'product-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
-            'condition' => [
-                'function_exists',
-                'WC',
-            ],
             'dependency' => [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
