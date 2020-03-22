@@ -2307,7 +2307,7 @@ trait Helper
         if (apply_filters('eael/pro_enabled', false)) {
             $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
         }else{
-            $source['eventon'] = __('EventON(PRO)', 'essential-addons-for-elementor-lite');
+            $source['eventon'] = __('EventON (PRO) ', 'essential-addons-for-elementor-lite');
         }
 
         return $source;
