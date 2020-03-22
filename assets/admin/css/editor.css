@@ -50,7 +50,8 @@
 	text-align: center;
 }
 
-#elementor-panel-category-essential-addons-elementor .elementor-element-wrapper:not(.elementor-element--promotion) .icon i:after {
+.elementor-element-wrapper:not(.elementor-element--promotion) [class^="eaicon-"]:after,
+.elementor-element-wrapper:not(.elementor-element--promotion) [class*=" eaicon-"]:after {
 	content: "\e906";
 	font-family: "eaicon" !important;
 	speak: none;
