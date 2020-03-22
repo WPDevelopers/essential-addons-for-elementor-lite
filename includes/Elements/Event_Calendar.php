@@ -69,6 +69,8 @@ class Event_Calendar extends Widget_Base {
             ]
         );
 
+        do_action('eael/event-calendar/activation-notice', $this);
+
         $repeater = new Repeater;
         $repeater->start_controls_tabs('eael_event_content_tabs');
 
