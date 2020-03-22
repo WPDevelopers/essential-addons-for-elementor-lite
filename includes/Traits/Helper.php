@@ -2301,9 +2301,6 @@ trait Helper
      */
     public function eael_event_calendar_source($source)
     {
-        if (apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
-            $source['the_events_calendar'] = __('The Events Calendar', 'essential-addons-for-elementor-lite');
-        }
         if (apply_filters('eael/pro_enabled', false)) {
             $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
         }else{
