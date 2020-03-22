@@ -85,6 +85,20 @@ class Event_Calendar extends Widget_Base {
             );
         }
 
+        if (!apply_filters('eael/pro_enabled', false)) {
+            $this->add_control(
+                'eael_event_calendar_pro_enable_warning',
+                [
+                    'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::HEADING,
+                    'condition' => [
+                        'eael_event_calendar_type' => ['eventon'],
+                    ],
+                ]
+            );
+        }
+
+
         do_action('eael/event-calendar/activation-notice', $this);
 
         $repeater = new Repeater;
