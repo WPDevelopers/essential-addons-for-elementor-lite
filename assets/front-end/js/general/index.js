@@ -7,45 +7,12 @@
 		if (isEditMode) {
 			var interval = setInterval(function() {
 				if (parent.document.querySelectorAll(".elementor-element--promotion").length > 0) {
-					var collection = [
-						"Advanced Menu",
-						"Content Timeline",
-						"Counter",
-						"Divider",
-						"Dynamic Gallery",
-						"Flip Carousel",
-						"Google Map",
-						"Image Comparison",
-						"Image Hotspots",
-						"Image Scroller",
-						"Instagram Feed",
-						"Interactive Card",
-						"Interactive Promo",
-						"LearnDash Course List",
-						"Lightbox & Modal",
-						"Logo Carousel",
-						"Mailchimp",
-						"Offcanvas",
-						"One Page Navigation",
-						"Post Block",
-						"Post Carousel",
-						"Smart Post List",
-						"Price Menu",
-						"Protected Content",
-						"Static Product",
-						"Team Member Carousel",
-						"Testimonial Slider",
-						"Toggle",
-						"Twitter Feed Carousel",
-						"Woo Product Collections"
-					];
-
 					parent.document.querySelectorAll(".elementor-element--promotion").forEach(function(widget) {
 						widget.addEventListener("click", function(e) {
 							var dialog = parent.document.querySelector("#elementor-element--promotion__dialog");
-							var title = dialog.querySelector("#elementor-element--promotion__dialog__title").innerHTML.replace(" Widget", "");
+							var icon = widget.querySelector(".icon > i");
 
-							if (collection.includes(title)) {
+							if (icon.classList.toString().indexOf("eaicon") >= 0) {
 								dialog.querySelector(".dialog-buttons-action").style.display = "none";
 
 								if (dialog.querySelector(".ea-dialog-buttons-action") === null) {
