@@ -50,9 +50,6 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                // 'options' => apply_filters('eael/advanced-data-table/source', [
-                //     'static' => __('Static Data', 'essential-addons-for-elementor-lite'),
-                // ]),
                 'options' => call_user_func(function () {
                     $source = [];
                     $source['static'] = __('Static Data', 'essential-addons-for-elementor-lite');
