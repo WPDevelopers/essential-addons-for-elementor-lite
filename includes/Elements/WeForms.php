@@ -37,6 +37,21 @@ class WeForms extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/weforms/';
+    }
 
     protected function _register_controls()
     {

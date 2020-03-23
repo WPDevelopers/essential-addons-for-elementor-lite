@@ -34,6 +34,20 @@ class Facebook_Feed extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'Facebook',
+            'Social Media',
+            'Facebook Embed',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/facebook-feed/';
+    }
 
     public function get_style_depends()
     {

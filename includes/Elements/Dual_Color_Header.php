@@ -27,9 +27,23 @@ class Dual_Color_Header extends Widget_Base {
 		return 'eaicon-dual-color-heading';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'heading',
+			'headline',
+			'title',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/dual-color-headline/';
+    }
 
 	protected function _register_controls() {
 

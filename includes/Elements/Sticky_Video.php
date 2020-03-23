@@ -33,6 +33,27 @@ class Sticky_Video extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'video',
+            'sticky',
+            'youtube',
+            'vimeo',
+            'mp4',
+            'mpg',
+            'ogg',
+            'webm',
+            'mov',
+            'avi',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/sticky-video/';
+    }
 
     public function get_style_depends()
     {

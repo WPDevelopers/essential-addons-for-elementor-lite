@@ -37,6 +37,22 @@ class Caldera_Forms extends Widget_Base
     {
         return 'eaicon-caldera-forms';
     }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'calderaforms',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/caldera-forms/';
+    }
 
     protected function _register_controls()
     {

@@ -53,6 +53,22 @@ class GravityForms extends Widget_Base {
     public function get_categories() {
         return [ 'essential-addons-elementor' ];
     }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'gravityforms',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/gravity-forms/';
+    }
 
     /**
 	 * Retrieve gravity forms widget icon.

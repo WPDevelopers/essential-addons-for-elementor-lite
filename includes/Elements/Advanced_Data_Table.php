@@ -36,12 +36,24 @@ class Advanced_Data_Table extends Widget_Base
     }
 
     public function get_keywords() {
-        return [];
+        return [
+            'Table',
+            'CSV',
+            'Google Sheet',
+            'Spreadsheet',
+            'Excel',
+            'TablePress',
+            'Data Table',
+            'Comparison table',
+            'grid',
+            'ea',
+            'essential addons'
+        ];
     }
 
     public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/advanced-data-table/';
-	}
+        return 'https://essential-addons.com/elementor/docs/advanced-data-table/';
+    }
 
     protected function _register_controls()
     {
