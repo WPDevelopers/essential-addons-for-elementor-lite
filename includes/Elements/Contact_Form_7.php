@@ -67,6 +67,22 @@ class Contact_Form_7 extends Widget_Base
         return 'fa fa-envelope-o';
     }
 
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'cf7',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/contact-form-7/';
+    }
+
     /**
      * Register contact form 7 widget controls.
      *

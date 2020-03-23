@@ -33,6 +33,22 @@ class Creative_Button extends Widget_Base {
    	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'button',
+			'creative button',
+			'cta',
+			'call to action',
+			'ea',
+			'MARKETING BUTTON',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/creative-buttons/';
+    }
 
 
 	protected function _register_controls() {

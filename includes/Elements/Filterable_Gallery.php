@@ -52,6 +52,24 @@ class Filterable_Gallery extends Widget_Base
             'font-awesome-4-shim'
         ];
     }
+    
+    public function get_keywords() {
+        return [
+            'Gallery',
+            'Image Gallery',
+            'Media Gallery',
+            'Media',
+            'Photo Gallery',
+            'Portfolio',
+            'Media grid',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/';
+    }
 
     protected function _register_controls()
     {

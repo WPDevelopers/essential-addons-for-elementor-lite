@@ -31,6 +31,22 @@ class NinjaForms extends Widget_Base {
     public function get_icon() {
         return 'fa fa-envelope-o';
     }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'ninjaforrms',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/ninja-forms/';
+    }
 
     protected function _register_controls() {
 

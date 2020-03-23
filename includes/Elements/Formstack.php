@@ -43,7 +43,17 @@ class Formstack extends Widget_Base
 
     public function get_keywords()
     {
-        return ['forms', 'ea', 'ea formstack', 'ea forms', 'formstack'];
+        return [
+            'forms',
+            'ea',
+            'ea formstack',
+            'ea forms',
+            'formstack'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/formstack/';
     }
 
     private function access_token()

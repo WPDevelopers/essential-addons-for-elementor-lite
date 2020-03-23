@@ -29,9 +29,25 @@ class Data_Table extends Widget_Base {
 		return 'eicon-table';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'Table',
+			'Export Table',
+			'CSV',
+			'Comparison table',
+			'grid',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/data-table/';
+    }
 
 	protected function _register_controls() {
 
