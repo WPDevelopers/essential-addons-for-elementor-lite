@@ -35,6 +35,20 @@ class Post_Timeline extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'post',
+            'posts',
+            'timeline',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/post-timeline/';
+    }
 
     protected function _register_controls()
     {

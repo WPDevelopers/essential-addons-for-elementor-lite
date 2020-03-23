@@ -39,6 +39,22 @@ class Adv_Tabs extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_keywords() {
+        return [
+            'tab',
+            'tabs',
+            'panel',
+            'navigation',
+            'group',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/advanced-tabs/';
+    }
+
     protected function _register_controls()
     {
         /**

@@ -27,9 +27,24 @@ class Tooltip extends Widget_Base {
 		return 'eicon-alert';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'tooltip',
+			'popover',
+			'hover',
+			'hint',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/tooltip/';
+    }
 
 	protected function _register_controls() {
 		/**

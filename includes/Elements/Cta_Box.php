@@ -40,7 +40,18 @@ class Cta_Box extends Widget_Base
 
     public function get_keywords()
     {
-        return ['Call To Action', 'cta'];
+        return [
+            'call to action',
+            'CTA',
+            'button',
+            'buy button',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/call-to-action/';
     }
 
     protected function _register_controls()

@@ -37,6 +37,24 @@ class Post_Grid extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'post',
+            'posts',
+            'grid',
+            'blog post',
+            'article',
+            'custom posts',
+            'masonry',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/post-grid/';
+    }
 
     protected function _register_controls()
     {

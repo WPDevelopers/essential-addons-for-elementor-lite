@@ -33,6 +33,22 @@ class Image_Accordion extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'image',
+            'image effect',
+            'hover effect',
+            'creative image',
+            'gallery',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/image-accordion/';
+    }
 
     protected function _register_controls()
     {

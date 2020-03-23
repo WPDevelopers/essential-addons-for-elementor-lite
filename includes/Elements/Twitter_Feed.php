@@ -35,6 +35,20 @@ class Twitter_Feed extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'Twitter',
+            'Social Media',
+            'Twitter Embed',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/twitter-feed/';
+    }
 
     public function get_style_depends()
     {
