@@ -454,7 +454,7 @@ class Event_Calendar extends Widget_Base {
             $this->add_control(
                 'eael_event_on_featured_color',
                 [
-                    'label'     => __('EventON Featured  Color', 'essential-addons-for-elementor-lite'),
+                    'label'     => __('Featured Event Color', 'essential-addons-for-elementor-lite'),
                     'type'      => Controls_Manager::COLOR,
                     'default'   => '#ffcb55',
                     'condition' => [
