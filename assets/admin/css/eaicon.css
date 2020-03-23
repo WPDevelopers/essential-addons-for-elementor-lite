@@ -108,196 +108,147 @@
 .eaicon-fancy-text:before {
 	content: "\e91b";
 }
-.eaicon-fancy-text-2:before {
+.eaicon-feature-list:before {
 	content: "\e91c";
 }
-.eaicon-feature-list:before {
+.eaicon-filterable-gallery:before {
 	content: "\e91d";
 }
-.eaicon-filterable-gallery:before {
+.eaicon-flip-box:before {
 	content: "\e91e";
 }
-.eaicon-flip-box:before {
-	content: "\e920";
-}
 .eaicon-flip-carousel:before {
-	content: "\e921";
+	content: "\e91f";
 }
 .eaicon-fluent-forms:before {
-	content: "\e922";
+	content: "\e920";
 }
 .eaicon-gravity-form:before {
-	content: "\e923";
+	content: "\e921";
 }
 .eaicon-image-accrodion:before {
-	content: "\e924";
+	content: "\e922";
 }
 .eaicon-image-comparison:before {
-	content: "\e925";
+	content: "\e923";
 }
 .eaicon-image-hotspots:before {
-	content: "\e926";
+	content: "\e924";
 }
 .eaicon-image-scroller:before {
-	content: "\e927";
+	content: "\e925";
 }
 .eaicon-info-box:before {
-	content: "\e928";
+	content: "\e926";
 }
 .eaicon-instagram-feed:before {
-	content: "\e929";
-}
-.eaicon-interactive-promo:before {
-	content: "\e92a";
+	content: "\e927";
 }
 .eaicon-interactive-cards:before {
-	content: "\e92b";
+	content: "\e928";
 }
-.eaicon-interactive-promo1:before {
-	content: "\e92c";
+.eaicon-interactive-promo:before {
+	content: "\e929";
 }
 .eaicon-learndash:before {
-	content: "\e92d";
+	content: "\e92a";
 }
 .eaicon-lightbox-modal:before {
-	content: "\e92e";
+	content: "\e92b";
 }
 .eaicon-logo-carousel:before {
-	content: "\e92f";
+	content: "\e92c";
+}
+.eaicon-logo:before {
+	content: "\e92d";
 }
 .eaicon-mailchimp:before {
-	content: "\e930";
+	content: "\e92e";
 }
 .eaicon-ninja-forms:before {
-	content: "\e931";
+	content: "\e92f";
 }
 .eaicon-offcanvas:before {
-	content: "\e932";
+	content: "\e930";
 }
 .eaicon-one-page-navigaton:before {
-	content: "\e933";
+	content: "\e931";
 }
 .eaicon-parallax-effects:before {
-	content: "\e934";
+	content: "\e932";
 }
 .eaicon-particle-effects:before {
-	content: "\e935";
+	content: "\e933";
 }
 .eaicon-post-block:before {
-	content: "\e936";
+	content: "\e934";
 }
 .eaicon-post-carousel:before {
-	content: "\e937";
+	content: "\e935";
 }
 .eaicon-post-grid:before {
-	content: "\e938";
+	content: "\e936";
 }
 .eaicon-post-timeline:before {
-	content: "\e939";
+	content: "\e937";
 }
 .eaicon-price-menu:before {
-	content: "\e93a";
+	content: "\e938";
 }
 .eaicon-pricing-table:before {
-	content: "\e93b";
+	content: "\e939";
 }
 .eaicon-product-grid:before {
-	content: "\e93c";
+	content: "\e93a";
 }
 .eaicon-progress-bar:before {
-	content: "\e93d";
+	content: "\e93b";
 }
 .eaicon-protected-content:before {
-	content: "\e93e";
+	content: "\e93c";
 }
-.eaicon-reading-rogress-bar .path1:before {
-	content: "\e93f";
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path2:before {
-	content: "\e940";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path3:before {
-	content: "\e941";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path4:before {
-	content: "\e942";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path5:before {
-	content: "\e943";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path6:before {
-	content: "\e944";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path7:before {
-	content: "\e945";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path8:before {
-	content: "\e946";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path9:before {
-	content: "\e947";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
-}
-.eaicon-reading-rogress-bar .path10:before {
-	content: "\e948";
-	margin-left: -0.9423828125em;
-	color: rgb(85, 96, 104);
+.eaicon-reading-progress-bar:before {
+	content: "\e93d";
 }
 .eaicon-smart-post-list:before {
-	content: "\e949";
+	content: "\e93e";
 }
 .eaicon-static-product:before {
-	content: "\e94a";
+	content: "\e93f";
 }
 .eaicon-sticky-video:before {
-	content: "\e94b";
+	content: "\e940";
 }
 .eaicon-table-of-content:before {
-	content: "\e94c";
+	content: "\e941";
 }
 .eaicon-team-mamber:before {
-	content: "\e94d";
+	content: "\e942";
 }
 .eaicon-team-member-carousel:before {
-	content: "\e94e";
+	content: "\e943";
 }
 .eaicon-testimonial-slider:before {
-	content: "\e94f";
+	content: "\e944";
 }
 .eaicon-testimonial:before {
-	content: "\e950";
+	content: "\e945";
 }
 .eaicon-tooltip:before {
-	content: "\e951";
+	content: "\e946";
 }
 .eaicon-twitter-feed-carousel:before {
-	content: "\e952";
+	content: "\e947";
 }
 .eaicon-twitter-feed:before {
-	content: "\e953";
+	content: "\e948";
 }
 .eaicon-weforms:before {
-	content: "\e954";
+	content: "\e949";
 }
 .eaicon-woo-product-collections:before {
-	content: "\e955";
+	content: "\e94a";
 }
 .eaicon-wpforms:before {
-	content: "\e956";
+	content: "\e94b";
 }
