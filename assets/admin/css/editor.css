@@ -68,3 +68,17 @@
 	right: 6px;
 	color: #cdcfd2;
 }
+
+#elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
+	content: "\e92d";
+	font-family: "eaicon" !important;
+	font-size: 120%;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-right: 5px;
+}
