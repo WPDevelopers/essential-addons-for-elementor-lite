@@ -21,7 +21,7 @@
 									var button = document.createElement("a");
 									var buttonText = document.createTextNode("GO PRO");
 
-									button.setAttribute("href", "https://essential-addons.com/elementor/#pricing");
+									button.setAttribute("href", "https://wpdeveloper.net/upgrade/ea-pro");
 									button.setAttribute("target", "_blank");
 									button.classList.add(
 										"dialog-button",
