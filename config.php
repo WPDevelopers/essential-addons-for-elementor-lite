@@ -377,6 +377,9 @@ $config = [
                 ],
             ],
         ],
+        'woo-checkout' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
+        ],
     ],
     'extensions' => [
         'eael-reading-progress' => [
