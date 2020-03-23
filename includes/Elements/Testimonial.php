@@ -30,6 +30,24 @@ class Testimonial extends Widget_Base {
    	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'testimonial',
+			'testimony',
+			'review,',
+			' endorsement',
+			'recommendation',
+			'reference',
+			'appreciation',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/testimonials/';
+    }
 
 	public function get_style_depends()
     {

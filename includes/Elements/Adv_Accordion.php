@@ -38,6 +38,23 @@ class Adv_Accordion extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_keywords() {
+        return [
+            'accordion',
+            'toggle',
+            'collapsible',
+            'faq',
+            'group',
+            'expand collapse',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/advanced-accordion/';
+	}
+
     protected function _register_controls()
     {
         /**

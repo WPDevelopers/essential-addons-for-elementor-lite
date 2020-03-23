@@ -35,6 +35,22 @@ class Progress_Bar extends Widget_Base
     {
         return ['essential-addons-elementor'];
     }
+    
+    public function get_keywords() {
+        return [
+            'status bar',
+            'indicator',
+            'progress indicator',
+            'gradient',
+            'ea',
+            'SCROLL INDICATOR',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/progress-bar/';
+    }
 
     protected function _register_controls()
     {

@@ -27,10 +27,25 @@ class Team_Member extends Widget_Base {
 		return 'eaicon-team-mamber';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-	
+    
+    public function get_keywords() {
+        return [
+			'team',
+			'member',
+			'team member',
+			'person',
+			'card',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/team-members/';
+    }
 	
 	protected function _register_controls() {
 

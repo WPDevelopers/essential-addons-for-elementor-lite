@@ -50,8 +50,21 @@ class Betterdocs_Search_Form extends Widget_Base
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return [ 'better', 'doc', 'ea', 'betterdocs search form' ];
-	}
+		return [
+            'Knowledge Base',
+            'Documentation',
+            'Doc',
+            'KB',
+            'BetterDocs',
+            'Search',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/betterdocs-search-form/';
+    }
 
     protected function _register_controls()
     {

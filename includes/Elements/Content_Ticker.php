@@ -36,6 +36,24 @@ class Content_Ticker extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_keywords() {
+        return [
+            'ticker',
+            'news headline',
+            'news ticker',
+            'text rotate',
+            'text animation',
+            'text swing',
+            'text slide',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/content-ticker/';
+    }
+
     protected function _register_controls()
     {
         /**
