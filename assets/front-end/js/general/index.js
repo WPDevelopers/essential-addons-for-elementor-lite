@@ -19,7 +19,7 @@
 
 								if (dialog.querySelector(".ea-dialog-buttons-action") === null) {
 									var button = document.createElement("a");
-									var buttonText = document.createTextNode("GO PRO");
+									var buttonText = document.createTextNode("Upgrade Essential Addons");
 
 									button.setAttribute("href", "https://wpdeveloper.net/upgrade/ea-pro");
 									button.setAttribute("target", "_blank");
