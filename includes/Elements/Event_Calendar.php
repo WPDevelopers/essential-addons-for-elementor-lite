@@ -450,6 +450,20 @@ class Event_Calendar extends Widget_Base {
                 'default' => '0',
             ]
         );
+        if (apply_filters('eael/active_plugins', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
+            $this->add_control(
+                'eael_event_on_featured_color',
+                [
+                    'label'     => __('EventON Featured  Color', 'essential-addons-for-elementor-lite'),
+                    'type'      => Controls_Manager::COLOR,
+                    'default'   => '#ffcb55',
+                    'condition' => [
+                        'eael_event_calendar_type' => 'eventon',
+                    ],
+                ]
+            );
+        }
+
 
         $this->add_control(
             'eael_event_global_bg_color',
