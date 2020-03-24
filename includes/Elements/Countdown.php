@@ -38,19 +38,22 @@ class Countdown extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
-    public function get_keywords() {
+    public function get_keywords()
+    {
         return [
             'countdown',
             'count down',
             'timer',
             'chronometer',
             'stopwatch',
+            'clock',
             'ea',
             'essential addons'
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/countdown/';
     }
 

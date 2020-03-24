@@ -33,18 +33,23 @@ class Pricing_Table extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
     
-    public function get_keywords() {
+	public function get_keywords()
+	{
         return [
 			'Price menu',
 			'pricing',
 			'table',
 			'comparison table',
+			'pricing plan',
+			'dynamic price',
+			'woocommerce pricing',
 			'ea',
 			'essential addons'
 		];
     }
 
-    public function get_custom_help_url() {
+	public function get_custom_help_url()
+	{
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
     }
 

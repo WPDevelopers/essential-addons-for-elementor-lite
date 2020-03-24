@@ -36,7 +36,8 @@ class Product_Grid extends Widget_Base
         return ['essential-addons-elementor'];
     }
     
-    public function get_keywords() {
+    public function get_keywords()
+    {
         return [
             'WooCommerce',
             'Product Gallery',
@@ -47,7 +48,8 @@ class Product_Grid extends Widget_Base
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/';
     }
 

@@ -32,7 +32,8 @@ class WpForms extends Widget_Base {
         return 'eaicon-wpforms';
     }
     
-    public function get_keywords() {
+    public function get_keywords()
+    {
         return [
             'contact form',
             'form styler',
@@ -44,7 +45,8 @@ class WpForms extends Widget_Base {
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/wpforms/';
     }
 

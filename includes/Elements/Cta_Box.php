@@ -45,6 +45,7 @@ class Cta_Box extends Widget_Base
             'CTA',
             'button',
             'buy button',
+            'action box',
             'ea',
             'essential addons'
         ];

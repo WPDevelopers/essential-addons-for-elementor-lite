@@ -31,17 +31,20 @@ class Dual_Color_Header extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
     
-    public function get_keywords() {
+	public function get_keywords()
+	{
         return [
 			'heading',
 			'headline',
 			'title',
+			'animated heading',
 			'ea',
 			'essential addons'
 		];
     }
 
-    public function get_custom_help_url() {
+	public function get_custom_help_url()
+	{
         return 'https://essential-addons.com/elementor/docs/dual-color-headline/';
     }
 

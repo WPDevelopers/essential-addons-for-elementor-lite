@@ -39,7 +39,8 @@ class Fancy_Text extends Widget_Base {
 			'Typewriter',
 			'Text effect',
 			'Text animation',
-			'ea',
+			'animated heading',
+			' ea',
 			'essential addons'
 		];
     }
