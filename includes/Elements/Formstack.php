@@ -38,7 +38,7 @@ class Formstack extends Widget_Base
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-formstack';
     }
 
     public function get_keywords()
