@@ -30,7 +30,8 @@ class Feature_List extends Widget_Base
 		return 'eicon-bullet-list';
 	}
 
-	public function get_categories() {
+	public function get_categories()
+	{
 		return [ 'essential-addons-elementor' ];
 	}
     
@@ -40,12 +41,15 @@ class Feature_List extends Widget_Base
 			'feature',
 			'icon',
 			'connector',
+			'featured content',
+			'highlights',
 			'ea',
 			'essential addons'
 		];
     }
 
-    public function get_custom_help_url() {
+	public function get_custom_help_url()
+	{
         return 'https://essential-addons.com/elementor/docs/ea-feature-list/';
     }
 
