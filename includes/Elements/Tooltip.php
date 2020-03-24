@@ -37,6 +37,7 @@ class Tooltip extends Widget_Base {
 			'popover',
 			'hover',
 			'hint',
+			'floating text',
 			'ea',
 			'essential addons'
 		];

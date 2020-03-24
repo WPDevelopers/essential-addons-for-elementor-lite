@@ -35,8 +35,8 @@ class Testimonial extends Widget_Base {
         return [
 			'testimonial',
 			'testimony',
-			'review,',
-			' endorsement',
+			'review',
+			'endorsement',
 			'recommendation',
 			'reference',
 			'appreciation',
