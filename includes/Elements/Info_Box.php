@@ -23,16 +23,32 @@ class Info_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Info Box', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Info Box', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-info-box';
+		return 'eaicon-info-box';
 	}
 
 	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+	public function get_keywords()
+	{
+        return [
+			'info',
+			'box',
+			'info box',
+			'card',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/info-box/';
+    }
 
 	protected function _register_controls() {
 

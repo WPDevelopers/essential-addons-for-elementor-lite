@@ -7,6 +7,7 @@ var EventCalendar = function($scope, $) {
 		firstDay = element.data("first_day"),
 		calendarID = element.data("cal_id"),
 		locale = element.data("locale"),
+		defaultView = element.data("defaultview"),
 		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
 
 	var calendar = new Calendar(calendarEl, {
@@ -26,14 +27,12 @@ var EventCalendar = function($scope, $) {
 			center: "title",
 			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
 		},
-		// buttonText: {
-		// 	today: "today"
-		// },
 		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
 		locale:locale,
 		eventLimit: 3,
+		defaultView: defaultView,
 		eventRender: function(info) {
 			var element = $(info.el),
 				event = info.event;
@@ -41,6 +40,7 @@ var EventCalendar = function($scope, $) {
 			element.attr("href", "javascript:void(0);");
 			element.click(function(e) {
 				e.preventDefault();
+				e.stopPropagation();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,
@@ -156,7 +156,16 @@ var EventCalendar = function($scope, $) {
 	});
 
 	CloseButton.on("click", function() {
+		event.stopPropagation();
 		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+	});
+
+	$(document).on('click',function(event){
+		if (event.target.closest(".eaelec-modal-content")) return;
+		if(ecModal.hasClass("eael-ec-popup-ready")){
+			ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+		}
+
 	});
 
 	calendar.render();

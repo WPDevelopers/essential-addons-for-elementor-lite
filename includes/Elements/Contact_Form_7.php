@@ -38,7 +38,7 @@ class Contact_Form_7 extends Widget_Base
      */
     public function get_title()
     {
-        return __('EA Contact Form 7', 'essential-addons-for-elementor-lite');
+        return __('Contact Form 7', 'essential-addons-for-elementor-lite');
     }
 
     /**
@@ -64,7 +64,25 @@ class Contact_Form_7 extends Widget_Base
      */
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-contact-form-7';
+    }
+
+    public function get_keywords()
+    {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'cf7',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/contact-form-7/';
     }
 
     /**
