@@ -41,6 +41,10 @@ class Twitter_Feed extends Widget_Base
             'Twitter',
             'Social Media',
             'Twitter Embed',
+            'twitter feed',
+            'twitter marketing',
+            'tweet feed',
+            'tweet embed',
             'ea',
             'essential addons'
         ];

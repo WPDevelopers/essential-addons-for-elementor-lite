@@ -53,7 +53,8 @@ class Filterable_Gallery extends Widget_Base
         ];
     }
     
-    public function get_keywords() {
+    public function get_keywords()
+    {
         return [
             'Gallery',
             'Image Gallery',
@@ -62,13 +63,16 @@ class Filterable_Gallery extends Widget_Base
             'Photo Gallery',
             'Portfolio',
             'Media grid',
+            'responsive gallery',
+            'photo gallery',
             'ea',
             'essential addons'
         ];
     }
 
-    public function get_custom_help_url() {
-        return 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/';
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/filterable-gallery/';
     }
 
     protected function _register_controls()

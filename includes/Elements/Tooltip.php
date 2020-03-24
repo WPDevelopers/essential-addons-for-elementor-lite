@@ -31,19 +31,22 @@ class Tooltip extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
     
-    public function get_keywords() {
+	public function get_keywords()
+	{
         return [
 			'tooltip',
 			'popover',
 			'hover',
 			'hint',
 			'floating text',
+			'glossary',
 			'ea',
 			'essential addons'
 		];
     }
 
-    public function get_custom_help_url() {
+	public function get_custom_help_url()
+	{
         return 'https://essential-addons.com/elementor/docs/tooltip/';
     }
 

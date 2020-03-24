@@ -67,7 +67,8 @@ class Contact_Form_7 extends Widget_Base
         return 'fa fa-envelope-o';
     }
 
-    public function get_keywords() {
+    public function get_keywords()
+    {
         return [
             'contact form',
             'form styler',
@@ -79,7 +80,8 @@ class Contact_Form_7 extends Widget_Base
         ];
     }
 
-    public function get_custom_help_url() {
+    public function get_custom_help_url()
+    {
         return 'https://essential-addons.com/elementor/docs/contact-form-7/';
     }
 

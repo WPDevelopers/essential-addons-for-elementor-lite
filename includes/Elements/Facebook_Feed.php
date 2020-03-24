@@ -40,6 +40,9 @@ class Facebook_Feed extends Widget_Base
             'Facebook',
             'Social Media',
             'Facebook Embed',
+            'facebook feed',
+            'fb feed',
+            'facebook marketing',
             'ea',
             'essential addons'
         ];

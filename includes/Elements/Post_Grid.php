@@ -47,7 +47,11 @@ class Post_Grid extends Widget_Base
             'article',
             'custom posts',
             'masonry',
-            ' ea',
+            'Content Views',
+            'blog view',
+            'content marketing',
+            'blogger',
+            'ea',
             'essential addons'
         ];
     }

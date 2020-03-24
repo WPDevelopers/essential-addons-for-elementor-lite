@@ -31,19 +31,23 @@ class Team_Member extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
     
-    public function get_keywords() {
+	public function get_keywords()
+	{
         return [
 			'team',
 			'member',
 			'team member',
 			'person',
 			'card',
-			'ea',
+			'meet the team',
+			'team builder',
+			'our team ea',
 			'essential addons'
 		];
     }
 
-    public function get_custom_help_url() {
+	public function get_custom_help_url()
+	{
         return 'https://essential-addons.com/elementor/docs/team-members/';
     }
 	
