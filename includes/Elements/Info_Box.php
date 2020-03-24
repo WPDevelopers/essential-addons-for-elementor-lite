@@ -34,7 +34,8 @@ class Info_Box extends Widget_Base {
 		return [ 'essential-addons-elementor' ];
 	}
     
-    public function get_keywords() {
+	public function get_keywords()
+	{
         return [
 			'info',
 			'box',

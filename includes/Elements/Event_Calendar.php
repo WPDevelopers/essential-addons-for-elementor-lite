@@ -48,6 +48,10 @@ class Event_Calendar extends Widget_Base {
             'calendar',
             'eventon',
             'google calendar',
+            'event marketing',
+            'scheduled events',
+            'event calendar',
+            'modern events',
             'ea',
             'essential addons'
         ];
