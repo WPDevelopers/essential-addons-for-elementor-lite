@@ -264,10 +264,6 @@ $config = [
         ],
         'product-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
-            'condition' => [
-                'function_exists',
-                'WC',
-            ],
             'dependency' => [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
@@ -301,6 +297,14 @@ $config = [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
                 ],
             ],
+        ],
+        'formstack' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Formstack',
+            // 'dependency' => [
+            //     'css' => [
+            //         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
+            //     ],
+            // ],
         ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',

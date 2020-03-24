@@ -25,17 +25,33 @@ class Countdown extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Countdown', 'essential-addons-for-elementor-lite');
+        return esc_html__('Countdown', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-countdown';
+        return 'eaicon-countdown';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+
+    public function get_keywords() {
+        return [
+            'countdown',
+            'count down',
+            'timer',
+            'chronometer',
+            'stopwatch',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/countdown/';
     }
 
     protected function _register_controls()

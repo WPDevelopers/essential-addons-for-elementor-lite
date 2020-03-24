@@ -22,16 +22,33 @@ class Flip_Box extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Flip Box', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Flip Box', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-flip-box';
+		return 'eaicon-flip-box';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'flip',
+			'box',
+			'flip box',
+			'card',
+			'flip card',
+			'rotate',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/flip-box/';
+    }
 
 	protected function _register_controls() {
 

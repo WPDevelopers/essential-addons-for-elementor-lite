@@ -21,16 +21,32 @@ class Fancy_Text extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Fancy Text', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Fancy Text', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-animation-text';
+		return 'eaicon-fancy-text';
 	}
 
     public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'Animated Headline',
+			'Headline',
+			'Typewriter',
+			'Text effect',
+			'Text animation',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/fancy-text/';
+    }
 
 	protected function _register_controls() {
 
