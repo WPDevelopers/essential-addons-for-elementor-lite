@@ -69,9 +69,8 @@ trait Elements
     {
         $active_elements = (array) $this->get_settings();
 
-        if (empty($active_elements)) {
-            return;
-        }
+        // set promotion extension enabled
+        array_push($active_elements, 'eael-promotion');
 
         foreach ($this->registered_extensions as $key => $extension) {
             if (!in_array($key, $active_elements)) {
@@ -96,7 +95,7 @@ trait Elements
 
         $promotion_widgets = [];
 
-        if(isset($config['promotionWidgets'])) {
+        if (isset($config['promotionWidgets'])) {
             $promotion_widgets = $config['promotionWidgets'];
         }
 

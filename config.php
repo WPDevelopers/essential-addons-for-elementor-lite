@@ -383,6 +383,9 @@ $config = [
         ],
     ],
     'extensions' => [
+        'eael-promotion' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
+        ],
         'eael-reading-progress' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [

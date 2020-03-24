@@ -26,7 +26,7 @@ class Table_of_Content
         $element->start_controls_section(
             'eael_ext_table_of_content_section',
             [
-                'label' => esc_html__('EA Table of Content', 'essential-addons-for-elementor-lite'),
+                'label' => __('<i class="eaicon-logo"></i> Table of Content', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_SETTINGS,
             ]
         );
@@ -186,28 +186,28 @@ class Table_of_Content
             ]
         );
 
-	    $element->add_control(
-		    'eael_ext_toc_sticky_scroll',
-		    [
-			    'label' => __('Sticky Scroll Effect', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => 5,
-					    'max' => 2000,
-					    'step' => 10,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 200,
-			    ],
-			    'condition' => [
-				    'eael_ext_table_of_content' => 'yes',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_sticky_scroll',
+            [
+                'label' => __('Sticky Scroll Effect', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 5,
+                        'max' => 2000,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
 
         $element->add_control(
             'eael_ext_toc_sticky_offset',
@@ -235,31 +235,31 @@ class Table_of_Content
             ]
         );
 
-	    $element->add_control(
-		    'eael_ext_toc_sticky_z_index',
-		    [
-			    'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => 0,
-					    'max' => 9999,
-					    'step' => 10,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 9999,
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc' => 'z-index: {{SIZE}}',
-			    ],
-			    'condition' => [
-				    'eael_ext_table_of_content' => 'yes',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_sticky_z_index',
+            [
+                'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 9999,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 9999,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc' => 'z-index: {{SIZE}}',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
 
         $element->add_control(
             'eael_ext_toc_ad_warning_text',
