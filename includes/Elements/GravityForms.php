@@ -2357,7 +2357,7 @@ class GravityForms extends Widget_Base {
             $this->add_render_attribute( 'contact-form', 'class', 'title-description-hide' );
         }
         
-        if ( $settings['custom_radio_checkbox'] == 'yes' ) {
+        if ( isset($settings['custom_radio_checkbox']) && ( $settings['custom_radio_checkbox'] == 'yes' ) ) {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-custom-radio-checkbox' );
         }
 
