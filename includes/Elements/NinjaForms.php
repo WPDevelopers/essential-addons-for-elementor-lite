@@ -21,7 +21,7 @@ class NinjaForms extends Widget_Base {
     }
 
     public function get_title() {
-        return __( 'EA Ninja Forms', 'essential-addons-for-elementor-lite');
+        return __( 'Ninja Forms', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories() {
@@ -29,7 +29,23 @@ class NinjaForms extends Widget_Base {
     }
 
     public function get_icon() {
-        return 'fa fa-envelope-o';
+        return 'eaicon-ninja-forms';
+    }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'ninjaforrms',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/ninja-forms/';
     }
 
     protected function _register_controls() {

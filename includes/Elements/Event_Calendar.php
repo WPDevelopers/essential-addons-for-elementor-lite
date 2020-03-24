@@ -30,15 +30,31 @@ class Event_Calendar extends Widget_Base {
     }
 
     public function get_title () {
-        return esc_html__('EA Event Calendar', 'essential-addons-for-elementor-lite');
+        return esc_html__('Event Calendar', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon () {
-        return 'eicon-calendar';
+        return 'eaicon-event-calendar';
     }
 
     public function get_categories () {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords() {
+        return [
+            'event',
+            'events',
+            'calendar',
+            'eventon',
+            'google calendar',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/event-calendar/';
     }
 
     protected function _register_controls () {

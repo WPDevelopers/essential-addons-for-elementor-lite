@@ -38,7 +38,7 @@ class GravityForms extends Widget_Base {
 	 * @return string Widget title.
 	 */
     public function get_title() {
-        return __( 'EA Gravity Forms', 'essential-addons-for-elementor-lite');
+        return __( 'Gravity Forms', 'essential-addons-for-elementor-lite');
     }
 
     /**
@@ -53,6 +53,22 @@ class GravityForms extends Widget_Base {
     public function get_categories() {
         return [ 'essential-addons-elementor' ];
     }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'gravityforms',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/gravity-forms/';
+    }
 
     /**
 	 * Retrieve gravity forms widget icon.
@@ -62,7 +78,7 @@ class GravityForms extends Widget_Base {
 	 * @return string Widget icon.
 	 */
     public function get_icon() {
-        return 'fa fa-envelope-o';
+        return 'eaicon-gravity-form';
     }
 
     /**

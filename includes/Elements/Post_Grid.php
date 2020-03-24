@@ -25,17 +25,35 @@ class Post_Grid extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Post Grid', 'essential-addons-for-elementor-lite');
+        return __('Post Grid', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-posts-grid';
+        return 'eaicon-post-grid';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords() {
+        return [
+            'post',
+            'posts',
+            'grid',
+            'blog post',
+            'article',
+            'custom posts',
+            'masonry',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/post-grid/';
     }
 
     protected function _register_controls()

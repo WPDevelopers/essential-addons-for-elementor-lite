@@ -22,16 +22,32 @@ class Data_Table extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Data Table', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Data Table', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-table';
+		return 'eaicon-data-table';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'Table',
+			'Export Table',
+			'CSV',
+			'Comparison table',
+			'grid',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/data-table/';
+    }
 
 	protected function _register_controls() {
 
