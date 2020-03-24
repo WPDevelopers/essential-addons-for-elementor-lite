@@ -25,12 +25,12 @@ class Cta_Box extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Call to Action', 'essential-addons-for-elementor-lite');
+        return esc_html__('Call to Action', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-call-to-action';
+        return 'eaicon-call-to-action';
     }
 
     public function get_categories()
@@ -40,7 +40,19 @@ class Cta_Box extends Widget_Base
 
     public function get_keywords()
     {
-        return ['Call To Action', 'cta'];
+        return [
+            'call to action',
+            'CTA',
+            'button',
+            'buy button',
+            'action box',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/call-to-action/';
     }
 
     protected function _register_controls()

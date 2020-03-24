@@ -264,10 +264,6 @@ $config = [
         ],
         'product-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
-            'condition' => [
-                'function_exists',
-                'WC',
-            ],
             'dependency' => [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
@@ -379,6 +375,9 @@ $config = [
         ],
     ],
     'extensions' => [
+        'eael-promotion' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
+        ],
         'eael-reading-progress' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [

@@ -25,12 +25,12 @@ class Filterable_Gallery extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Filterable Gallery', 'essential-addons-for-elementor-lite');
+        return esc_html__('Filterable Gallery', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-gallery-grid';
+        return 'eaicon-filterable-gallery';
     }
 
     public function get_categories()
@@ -51,6 +51,28 @@ class Filterable_Gallery extends Widget_Base
         return [
             'font-awesome-4-shim'
         ];
+    }
+    
+    public function get_keywords()
+    {
+        return [
+            'Gallery',
+            'Image Gallery',
+            'Media Gallery',
+            'Media',
+            'Photo Gallery',
+            'Portfolio',
+            'Media grid',
+            'responsive gallery',
+            'photo gallery',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/filterable-gallery/';
     }
 
     protected function _register_controls()
@@ -2657,6 +2679,7 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);
+        $sorter_class = utf8_encode($sorter_class);
         return $sorter_class;
     }
 

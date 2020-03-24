@@ -1,45 +1,133 @@
 .eael-warning {
-    font-size: 13px;
-    line-height: 18px;
-    background-color: #f3f0ca;
-    color: #886726;
-    padding: 10px;
-    border-radius: 3px;
+	font-size: 13px;
+	line-height: 18px;
+	background-color: #f3f0ca;
+	color: #886726;
+	padding: 10px;
+	border-radius: 3px;
 }
 
-.elementor-panel .pro-feature, .elementor-panel .pro-feature a {
-    color: #a4afb7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    line-height: 1.8;
-    font-style: normal;
-  }
-  
-  .elementor-panel .pro-feature a {
-    text-decoration: underline;
-    color: #f54 !important;
-  }
-  
-  .elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
-  .elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
-  .elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
-  .elementor-control-data_table_header_img_pro_alert .elementor-control-title,
-  .elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
-  .elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
-  .elementor-control-data_table_content_template_pro_alert .elementor-control-title {
-    color: #f54;
-  }
-  
-  .elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
-    display: none !important;
-  }
-  
-  .elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
-  .elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
-  .elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
-  .elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
-  .elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
-  .elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
-  .elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
-    color: #f54;
-  }
+.elementor-panel .pro-feature,
+.elementor-panel .pro-feature a {
+	color: #a4afb7;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.8;
+	font-style: normal;
+}
+
+.elementor-panel .pro-feature a {
+	text-decoration: underline;
+	color: #f54 !important;
+}
+
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
+.elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_header_img_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_template_pro_alert .elementor-control-title {
+	color: #f54;
+}
+
+.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
+	display: none !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
+	color: #f54;
+}
+
+.ea-dialog-buttons-action {
+	display: block;
+	text-align: center;
+}
+
+.elementor-element-wrapper .icon {
+	max-height: 28px;
+	box-sizing: content-box;
+}
+
+.elementor-element-wrapper:not(.elementor-element--promotion) [class^="eaicon-"]:after,
+.elementor-element-wrapper:not(.elementor-element--promotion) [class*=" eaicon-"]:after {
+	content: "\e906";
+	font-family: "eaicon" !important;
+	speak: none;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	color: #cdcfd2;
+}
+
+#elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
+	content: "\e92e";
+	font-family: "eaicon" !important;
+	font-size: 190%;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-right: 5px;
+}
+
+/* section heading */
+.elementor-section-title [class^="eaicon-"],
+.elementor-section-title [class*=" eaicon-"] {
+	font-size: 13px;
+	position: relative;
+	top: 1px;
+}
+
+/* nerd box */
+.ea-nerd-box {
+	padding: 15px;
+	text-align: center;
+}
+.ea-nerd-box-icon img {
+	max-width: 120px !important;
+}
+.ea-nerd-box-title {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.4;
+	margin-top: 20px;
+}
+.ea-nerd-box-message {
+	line-height: 1.8;
+	font-size: 11px;
+	margin-top: 5px;
+}
+.ea-nerd-box .elementor-button.ea-nerd-box-link {
+	background-color: #d30c5c;
+	color: #fff;
+	padding: 7px 25px;
+	margin-top: 20px;
+	border: none;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+.ea-nerd-box .elementor-button.ea-nerd-box-link:hover {
+	background-color: #f22074;
+}

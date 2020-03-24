@@ -657,6 +657,53 @@ trait Helper
             );
         }
 
+        if ('eael-post-carousel' === $this->get_name()) {
+            $this->add_control(
+                'eael_show_post_terms',
+                [
+                    'label' => __('Show Post Terms', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                ]
+            );
+
+            $this->add_control(
+                'eael_post_terms',
+                [
+                    'label' => __('Show Terms From', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => [
+                        'category' => __('Category', 'essential-addons-for-elementor-lite'),
+                        'tags' => __('Tags', 'essential-addons-for-elementor-lite'),
+                    ],
+                    'default' => 'category',
+                    'condition' => [
+                        'eael_show_post_terms' => 'yes'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'eael_post_terms_max_length',
+                [
+                    'label' => __('Max Terms to Show', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'options' => [
+                        1 => __('1', 'essential-addons-for-elementor-lite'),
+                        2 => __('2', 'essential-addons-for-elementor-lite'),
+                        3 => __('3', 'essential-addons-for-elementor-lite'),
+                    ],
+                    'default' => 1,
+                    'condition' => [
+                        'eael_show_post_terms' => 'yes'
+                    ]
+                ]
+            );
+
+        }
+
         if ('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
 
             $this->add_control(
@@ -873,7 +920,7 @@ trait Helper
                 'label' => __('Load More Button Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'show_load_more' => ['yes', '1', 'true']
+                    'show_load_more' => ['yes', '1', 'true'],
                 ],
             ]
         );
@@ -1577,6 +1624,45 @@ trait Helper
     }
 
     /**
+     * Get all taxonomies by post
+     *
+     * @param  array   $args
+     *
+     * @param  string  $output
+     * @param  string  $operator
+     *
+     * @return array
+     */
+    public function eael_get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
+    {
+        global $wp_taxonomies;
+
+        $field = ( 'names' === $output ) ? 'name' : false;
+
+        // Handle 'object_type' separately.
+        if ( isset( $args['object_type'] ) ) {
+            $object_type = (array) $args['object_type'];
+            unset( $args['object_type'] );
+        }
+
+        $taxonomies = wp_filter_object_list( $wp_taxonomies, $args, $operator );
+
+        if ( isset( $object_type ) ) {
+            foreach ( $taxonomies as $tax => $tax_data ) {
+                if ( ! array_intersect( $object_type, $tax_data->object_type ) ) {
+                    unset( $taxonomies[ $tax ] );
+                }
+            }
+        }
+
+        if ( $field ) {
+            $taxonomies = wp_list_pluck( $taxonomies, $field );
+        }
+
+        return $taxonomies;
+    }
+
+    /**
      * Get all Posts
      *
      * @return array
@@ -1641,8 +1727,7 @@ trait Helper
         $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
         $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
 
-
-        if(isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
+        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
             $args['tax_query'] = [
                 $_REQUEST['taxonomy'],
             ];
@@ -1850,81 +1935,81 @@ trait Helper
                                 <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><p class="eael-facebook-feed-username">' . $item['from']['name'] . '</p></a>
                             </div>';
 
-                            if ($settings['eael_facebook_feed_date']) {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
-                            }
-                        $html .= '</header>';
+                if ($settings['eael_facebook_feed_date']) {
+                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
+                }
+                $html .= '</header>';
 
-                        if ($settings['eael_facebook_feed_message'] && !empty($message)) {
-                            $html .= '<div class="eael-facebook-feed-item-content">
+                if ($settings['eael_facebook_feed_message'] && !empty($message)) {
+                    $html .= '<div class="eael-facebook-feed-item-content">
                                         <p class="eael-facebook-feed-message">' . esc_html($message) . '</p>
                                     </div>';
-                        }
+                }
 
-                        if (!empty($photo) || isset($item['attachments']['data'])) {
-                            $html .= '<div class="eael-facebook-feed-preview-wrap">';
-                            if ($item['status_type'] == 'shared_story') {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">';
-                                if ($item['attachments']['data'][0]['media_type'] == 'video') {
-                                    $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
+                if (!empty($photo) || isset($item['attachments']['data'])) {
+                    $html .= '<div class="eael-facebook-feed-preview-wrap">';
+                    if ($item['status_type'] == 'shared_story') {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">';
+                        if ($item['attachments']['data'][0]['media_type'] == 'video') {
+                            $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
                                                     <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
-                                } else {
-                                    $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
-                                }
-                                $html .= '</a>';
+                        } else {
+                            $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">';
+                        }
+                        $html .= '</a>';
 
-                                $html .= '<div class="eael-facebook-feed-url-preview">
+                        $html .= '<div class="eael-facebook-feed-url-preview">
                                                 <p class="eael-facebook-feed-url-host">' . parse_url($item['attachments']['data'][0]['unshimmed_url'])['host'] . '</p>
                                                 <h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>
                                                 <p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>
                                             </div>';
-                            } else if ($item['status_type'] == 'added_video') {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
+                    } else if ($item['status_type'] == 'added_video') {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
                                                 <img class="eael-facebook-feed-img" src="' . $photo . '">
                                                 <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
                                             </a>';
-                            } else {
-                                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
+                    } else {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
                                                 <img class="eael-facebook-feed-img" src="' . $photo . '">
                                             </a>';
-                            }
-                            $html .= '</div>';
-                        }
+                    }
+                    $html .= '</div>';
+                }
 
-                        if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
-                            $html .= '<footer class="eael-facebook-feed-item-footer">
+                if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
+                    $html .= '<footer class="eael-facebook-feed-item-footer">
                                 <div class="clearfix">';
-                                    if ($settings['eael_facebook_feed_likes']) {
-                                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
-                                    }
-                                    if ($settings['eael_facebook_feed_comments']) {
-                                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
-                                    }
-                                $html .= '</div>
-                            </footer>';
-                        }
+                    if ($settings['eael_facebook_feed_likes']) {
+                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
+                    }
+                    if ($settings['eael_facebook_feed_comments']) {
+                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
+                    }
                     $html .= '</div>
+                            </footer>';
+                }
+                $html .= '</div>
                 </div>';
             } else {
                 $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
                         <img class="eael-facebook-feed-img" src="' . (empty($photo) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : $photo) . '">';
 
-                        if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
-                            $html .= '<div class="eael-facebook-feed-item-overlay">
+                if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
+                    $html .= '<div class="eael-facebook-feed-item-overlay">
                                         <div class="eael-facebook-feed-item-overlay-inner">
                                             <div class="eael-facebook-feed-meta">';
-                            if ($settings['eael_facebook_feed_likes']) {
-                                $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
-                            }
-                            if ($settings['eael_facebook_feed_comments']) {
-                                $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
-                            }
-                            $html .= '</div>
+                    if ($settings['eael_facebook_feed_likes']) {
+                        $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
+                    }
+                    if ($settings['eael_facebook_feed_comments']) {
+                        $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
+                    }
+                    $html .= '</div>
                                         </div>
                                     </div>';
-                        }
-                    $html .= '</div>
+                }
+                $html .= '</div>
                 </a>';
             }
         }
@@ -2262,8 +2347,10 @@ trait Helper
      */
     public function eael_event_calendar_source($source)
     {
-        if (apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
-            $source['the_events_calendar'] = __('The Events Calendar', 'essential-addons-for-elementor-lite');
+        if (apply_filters('eael/pro_enabled', false)) {
+            $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
+        }else{
+            $source['eventon'] = __('EventON (Pro) ', 'essential-addons-for-elementor-lite');
         }
 
         return $source;
@@ -2341,7 +2428,7 @@ trait Helper
                     if (!isset($th['data_type'])) {
                         $th['data_type'] = '';
                     }
-                    
+
                     if ($th['data_type'] == 'image') {
                         $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
                     } elseif ($th['data_type'] == 'selection') {
