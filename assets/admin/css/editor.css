@@ -87,3 +87,46 @@
 	-moz-osx-font-smoothing: grayscale;
 	margin-right: 5px;
 }
+
+/* section heading */
+.elementor-section-title [class^="eaicon-"],
+.elementor-section-title [class*=" eaicon-"] {
+	font-size: 13px;
+	position: relative;
+	top: 1px;
+}
+
+/* nerd box */
+.ea-nerd-box {
+	padding: 15px;
+	text-align: center;
+}
+.ea-nerd-box-icon img {
+	max-width: 120px !important;
+}
+.ea-nerd-box-title {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.4;
+	margin-top: 20px;
+}
+.ea-nerd-box-message {
+	line-height: 1.8;
+	font-size: 11px;
+	margin-top: 5px;
+}
+.ea-nerd-box .elementor-button.ea-nerd-box-link {
+	background-color: #d30c5c;
+	color: #fff;
+	padding: 7px 25px;
+	margin-top: 20px;
+	border: none;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+.ea-nerd-box .elementor-button.ea-nerd-box-link:hover {
+	background-color: #f22074;
+}
