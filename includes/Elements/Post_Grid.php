@@ -47,7 +47,7 @@ class Post_Grid extends Widget_Base
             'article',
             'custom posts',
             'masonry',
-            'ea',
+            ' ea',
             'essential addons'
         ];
     }
