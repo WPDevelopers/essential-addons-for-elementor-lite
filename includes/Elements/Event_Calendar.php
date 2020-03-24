@@ -82,11 +82,44 @@ class Event_Calendar extends Widget_Base {
                 'type'    => Controls_Manager::SELECT,
                 'options' => apply_filters('eael/event-calendar/source', [
                     'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
-                    'google' => __('Google', 'essential-addons-for-elementor-lite')
+                    'google' => __('Google', 'essential-addons-for-elementor-lite'),
+                    'the_events_calendar' => __('The Events Calendar', 'essential-addons-for-elementor-lite'),
+
                 ]),
                 'default' => 'manual',
             ]
         );
+
+        if (!apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
+            $this->add_control(
+                'eael_the_event_calendar_warning_text',
+                [
+                    'type'            => Controls_Manager::RAW_HTML,
+                    'raw'             => __('<strong>The Events Calendar</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=the-events-calendar&tab=search&type=term" target="_blank">The Events Calendar</a> first.',
+                        'essential-addons-for-elementor'),
+                    'content_classes' => 'eael-warning',
+                    'condition' => [
+                        'eael_event_calendar_type' => 'the_events_calendar',
+                    ],
+                ]
+            );
+        }
+
+        if (!apply_filters('eael/pro_enabled', false)) {
+            $this->add_control(
+                'eael_event_calendar_pro_enable_warning',
+                [
+                    'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::HEADING,
+                    'condition' => [
+                        'eael_event_calendar_type' => ['eventon'],
+                    ],
+                ]
+            );
+        }
+
+
+        do_action('eael/event-calendar/activation-notice', $this);
 
         $repeater = new Repeater;
         $repeater->start_controls_tabs('eael_event_content_tabs');
@@ -307,81 +340,83 @@ class Event_Calendar extends Widget_Base {
         $this->end_controls_section();
 
         //the events calendar
+        if (apply_filters('eael/active_plugins', 'the-events-calendar/the-events-calendar.php')) {
+            $this->start_controls_section(
+                'eael_event_the_events_calendar',
+                [
+                    'label'     => __('The Event Calendar', 'essential-addons-for-elementor-lite'),
+                    'tab'       => Controls_Manager::TAB_CONTENT,
+                    'condition' => [
+                        'eael_event_calendar_type' => 'the_events_calendar',
+                    ],
+                ]
+            );
 
-        $this->start_controls_section(
-            'eael_event_the_events_calendar',
-            [
-                'label'     => __('The Event Calendar', 'essential-addons-for-elementor-lite'),
-                'tab'       => Controls_Manager::TAB_CONTENT,
-                'condition' => [
-                    'eael_event_calendar_type' => 'the_events_calendar',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_the_events_calendar_fetch',
-            [
-                'label'       => __('Get Events', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::SELECT,
-                'label_block' => true,
-                'default'     => ['all'],
-                'options'     => [
-                    'all'        => __('All', 'essential-addons-for-elementor-lite'),
-                    'date_range' => __('Date Range', 'essential-addons-for-elementor-lite'),
-                ],
-                'render_type' => 'none',
-            ]
-        );
+            $this->add_control(
+                'eael_the_events_calendar_fetch',
+                [
+                    'label'       => __('Get Events', 'essential-addons-for-elementor-lite'),
+                    'type'        => Controls_Manager::SELECT,
+                    'label_block' => true,
+                    'default'     => ['all'],
+                    'options'     => [
+                        'all'        => __('All', 'essential-addons-for-elementor-lite'),
+                        'date_range' => __('Date Range', 'essential-addons-for-elementor-lite'),
+                    ],
+                    'render_type' => 'none',
+                ]
+            );
 
 
-        $this->add_control(
-            'eael_the_events_calendar_start_date',
-            [
-                'label'     => __('Start Date', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::DATE_TIME,
-                'default'   => date('Y-m-d H:i', current_time('timestamp', 0)),
-                'condition' => [
-                    'eael_the_events_calendar_fetch' => 'date_range',
-                ],
-            ]
-        );
+            $this->add_control(
+                'eael_the_events_calendar_start_date',
+                [
+                    'label'     => __('Start Date', 'essential-addons-for-elementor-lite'),
+                    'type'      => Controls_Manager::DATE_TIME,
+                    'default'   => date('Y-m-d H:i', current_time('timestamp', 0)),
+                    'condition' => [
+                        'eael_the_events_calendar_fetch' => 'date_range',
+                    ],
+                ]
+            );
 
-        $this->add_control(
-            'eael_the_events_calendar_end_date',
-            [
-                'label'     => __('End Date', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::DATE_TIME,
-                'default'   => date('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
-                'condition' => [
-                    'eael_the_events_calendar_fetch' => 'date_range',
-                ],
-            ]
-        );
+            $this->add_control(
+                'eael_the_events_calendar_end_date',
+                [
+                    'label'     => __('End Date', 'essential-addons-for-elementor-lite'),
+                    'type'      => Controls_Manager::DATE_TIME,
+                    'default'   => date('Y-m-d H:i', strtotime("+6 months", current_time('timestamp', 0))),
+                    'condition' => [
+                        'eael_the_events_calendar_fetch' => 'date_range',
+                    ],
+                ]
+            );
 
-        $this->add_control(
-            'eael_the_events_calendar_category',
-            [
-                'label'       => __('Event Category', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::SELECT2,
-                'multiple'    => true,
-                'label_block' => true,
-                'default'     => [],
-                'options'     => $this->eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
-            ]
-        );
+            $this->add_control(
+                'eael_the_events_calendar_category',
+                [
+                    'label'       => __('Event Category', 'essential-addons-for-elementor-lite'),
+                    'type'        => Controls_Manager::SELECT2,
+                    'multiple'    => true,
+                    'label_block' => true,
+                    'default'     => [],
+                    'options'     => $this->eael_get_tags(['taxonomy' => 'tribe_events_cat', 'hide_empty' => false]),
+                ]
+            );
 
-        $this->add_control(
-            'eael_the_events_calendar_max_result',
-            [
-                'label'   => __('Max Result', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::NUMBER,
-                'min'     => 1,
-                'default' => 100,
-            ]
-        );
+            $this->add_control(
+                'eael_the_events_calendar_max_result',
+                [
+                    'label'   => __('Max Result', 'essential-addons-for-elementor-lite'),
+                    'type'    => Controls_Manager::NUMBER,
+                    'min'     => 1,
+                    'default' => 100,
+                ]
+            );
 
-        $this->end_controls_section();
+            $this->end_controls_section();
+        }
+
 
         do_action('eael/event-calendar/source/control', $this);
 
@@ -404,6 +439,21 @@ class Event_Calendar extends Widget_Base {
         );
 
         $this->add_control(
+            'eael_event_calendar_default_view',
+            [
+                'label'   => __('Calendar Default View', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'options' => [
+                    'timeGridDay'  => __('Day', 'essential-addons-for-elementor-lite'),
+                    'timeGridWeek' => __('Week', 'essential-addons-for-elementor-lite'),
+                    'dayGridMonth' => __('Month', 'essential-addons-for-elementor-lite'),
+                    'listWeek'     => __('List', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'dayGridMonth',
+            ]
+        );
+
+        $this->add_control(
             'eael_event_calendar_first_day',
             [
                 'label'   => __('First Day of Week', 'essential-addons-for-elementor-lite'),
@@ -420,6 +470,20 @@ class Event_Calendar extends Widget_Base {
                 'default' => '0',
             ]
         );
+        if (apply_filters('eael/active_plugins', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
+            $this->add_control(
+                'eael_event_on_featured_color',
+                [
+                    'label'     => __('Featured Event Color', 'essential-addons-for-elementor-lite'),
+                    'type'      => Controls_Manager::COLOR,
+                    'default'   => '#ffcb55',
+                    'condition' => [
+                        'eael_event_calendar_type' => 'eventon',
+                    ],
+                ]
+            );
+        }
+
 
         $this->add_control(
             'eael_event_global_bg_color',
@@ -1472,23 +1536,26 @@ class Event_Calendar extends Widget_Base {
 
     protected function render () {
         $settings = $this->get_settings_for_display();
-        if ($settings['eael_event_calendar_type'] == 'google') {
+
+        if (in_array($settings['eael_event_calendar_type'], ['eventon'])) {
+            $data = apply_filters('eael/event-calendar/integration', [], $settings);
+        } elseif ($settings['eael_event_calendar_type'] == 'google') {
             $data = $this->get_google_calendar_events($settings);
+        } elseif ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
+            $data = $this->get_the_events_calendar_events($settings);
         } else {
-            if ($settings['eael_event_calendar_type'] == 'the_events_calendar') {
-                $data = $this->get_the_events_calendar_events($settings);
-            } else {
-                $data = $this->get_manual_calendar_events($settings);
-            }
+            $data = $this->get_manual_calendar_events($settings);
         }
 
         $local = $settings['eael_event_calendar_language'];
+        $default_view = $settings['eael_event_calendar_default_view'];
 
         echo '<div class="eael-event-calendar-wrapper">';
 
         echo '<div id="eael-event-calendar-'.$this->get_id().'" class="eael-event-calendar-cls"
             data-cal_id = "'.$this->get_id().'"
             data-locale = "'.$local.'"
+            data-defaultview = "'.$default_view.'"
             data-events="'.htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8').'"
             data-first_day="'.$settings['eael_event_calendar_first_day'].'"></div>
             '.$this->eaelec_load_event_details().'
@@ -1533,7 +1600,7 @@ class Event_Calendar extends Widget_Base {
 
                 $data[] = [
                     'id'          => $i,
-                    'title'       => $event["eael_event_title"],
+                    'title'       => !empty($event["eael_event_title"]) ? $event["eael_event_title"] : 'No Title',
                     'description' => $event["eael_event_description"],
                     'start'       => $start,
                     'end'         => $end,
@@ -1618,7 +1685,7 @@ class Event_Calendar extends Widget_Base {
 
                 $calendar_data[] = [
                     'id'          => ++$key,
-                    'title'       => $item->summary,
+                    'title'       => !empty($item->summary) ? $item->summary : 'No Title',
                     'description' => isset($item->description) ? $item->description : '',
                     'start'       => $ev_start_date,
                     'end'         => $ev_end_date,
@@ -1678,7 +1745,8 @@ class Event_Calendar extends Widget_Base {
             }
             $calendar_data[] = [
                 'id'          => ++$key,
-                'title'       => $event->post_title,
+                'title'       => !empty($event->post_title) ? $event->post_title : __('No Title',
+                    'essential-addons-for-elementor-lite'),
                 'description' => $event->post_content,
                 'start'       => tribe_get_start_date($event->ID, true, $date_format),
                 'end'         => tribe_get_end_date($event->ID, true, $date_format),

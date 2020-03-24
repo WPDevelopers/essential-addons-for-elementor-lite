@@ -146,7 +146,7 @@ trait Enqueue
                 $post_type = (is_singular() || is_home() ? 'post' : 'term');
                 $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
 
-                if (empty($elements)) {
+                if (empty(array_filter($elements))) {
                     return;
                 }
 
