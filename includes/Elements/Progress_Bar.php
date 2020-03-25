@@ -38,7 +38,10 @@ class Progress_Bar extends Widget_Base
     
     public function get_keywords() {
         return [
+            'ea progessbar',
+            'ea progess bar',
             'status bar',
+            'ea status bar',
             'indicator',
             'progress indicator',
             'gradient',

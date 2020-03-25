@@ -39,6 +39,8 @@ class Sticky_Video extends Widget_Base
         return [
             'video',
             'sticky',
+            'ea sticky video',
+            'ea video player',
             'youtube',
             'vimeo',
             'mp4',

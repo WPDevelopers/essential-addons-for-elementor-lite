@@ -42,8 +42,11 @@ class Countdown extends Widget_Base
     {
         return [
             'countdown',
+            'ea countdown',
             'count down',
+            'ea count down',
             'timer',
+            'ea timer',
             'chronometer',
             'stopwatch',
             'clock',
