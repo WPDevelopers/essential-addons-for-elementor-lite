@@ -232,7 +232,7 @@ class WPDeveloper_Notice {
                                 add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
                             }
                         } else {
-                            if( $this->is_ok( 'message', $current_notice ) ) {
+                            if( $this->is_ok( 'message', $current_notice ) || $current_notice === 'opt_in' ) {
                                 add_action( 'admin_notices', array( $this, 'admin_notices' ) );
                             }
                         }
