@@ -44,6 +44,7 @@ class Advanced_Data_Table extends Widget_Base
             'Spreadsheet',
             'Excel',
             'TablePress',
+            'ninja tables',
             'Data Table',
             'Comparison table',
             'grid',

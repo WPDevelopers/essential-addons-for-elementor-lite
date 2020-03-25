@@ -40,7 +40,7 @@ class Fancy_Text extends Widget_Base {
 			'Text effect',
 			'Text animation',
 			'animated heading',
-			' ea',
+			'ea',
 			'essential addons'
 		];
     }
