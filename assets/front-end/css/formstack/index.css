@@ -5,3 +5,8 @@
   font-size: inherit;
   line-height: initial;
 }
+.eael-formstack .vertical {
+  display: inherit;
+  border-left: none;
+  height: auto;
+}
