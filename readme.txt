@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.9.0
+Stable tag: 3.9.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -184,6 +184,9 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.9.1 - 25/03/2020 =
+- Improved Elements Keywords for better searchability
 
 = 3.9.0 - 25/03/2020 =
 - Updated: All widgets icon in elementor panel for better UI
