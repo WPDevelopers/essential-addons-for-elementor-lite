@@ -2,8 +2,15 @@
     .fsForm .fsCell {
         padding: 0 !important;
     }
+
     input {
         font-size: inherit;
         line-height: initial;
+    }
+
+    .vertical {
+        display: inherit;
+        border-left: none;
+        height: auto;
     }
 }
