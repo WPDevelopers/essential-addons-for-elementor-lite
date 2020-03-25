@@ -300,11 +300,11 @@ $config = [
         ],
         'formstack' => [
             'class' => '\Essential_Addons_Elementor\Elements\Formstack',
-            // 'dependency' => [
-            //     'css' => [
-            //         EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
-            //     ],
-            // ],
+             'dependency' => [
+                 'css' => [
+                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
+                 ],
+             ],
         ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',

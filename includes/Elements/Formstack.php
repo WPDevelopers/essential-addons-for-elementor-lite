@@ -160,7 +160,7 @@ class Formstack extends Widget_Base {
 
         if (!empty($forms['forms'])) {
             foreach ($forms['forms'] as $form) {
-                $keys["{$form->id}-{$form->viewkey}"] = $form->name;
+                $keys[$form->url] = $form->name;
             }
         }
 
@@ -277,10 +277,10 @@ class Formstack extends Widget_Base {
 
         $extras = $this->get_extra_params();
 
-        $wp = wp_remote_get("https://wpdeveloper.formstack.com/forms/a_test_form");
+        $wp = wp_remote_get($settings['form_key']);
 
         ?>
-        <div class="fs_wp_sidebar fsBody">
+        <div class="eael-formstack fs_wp_sidebar fsBody">
             <div class="fsForm">
                 <?php echo(wp_remote_retrieve_body($wp)); ?>
             </div>
