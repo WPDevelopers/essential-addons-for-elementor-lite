@@ -210,9 +210,9 @@ trait Admin
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         // Update Notice For PRO Version
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) {
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<' ) ) {
             $notice->classes( 'update', 'notice is-dismissible ' );
-            $notice->message( 'update', '<p>'. __( 'You are using an incompatible version of Essential Addons PRO. Please update to v3.4.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', $notice->text_domain ) .'</p>' );
+            $notice->message( 'update', '<p>'. __( 'You are using an incompatible version of Essential Addons PRO. Please update to v3.6.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', $notice->text_domain ) .'</p>' );
             $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
         }
 
@@ -240,7 +240,7 @@ trait Admin
                 'review' => $notice->makeTime($notice->timestamp, '7 Day'), // after 3 days
             ],
         );
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) { 
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<' ) ) { 
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
         // if( ! $this->pro_enabled ) { 

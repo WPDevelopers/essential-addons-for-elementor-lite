@@ -41,7 +41,8 @@ class Team_Member extends Widget_Base {
 			'card',
 			'meet the team',
 			'team builder',
-			'our team ea',
+			'our team',
+			'ea',
 			'essential addons'
 		];
     }

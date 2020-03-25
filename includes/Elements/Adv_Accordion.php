@@ -46,7 +46,8 @@ class Adv_Accordion extends Widget_Base
             'collapsible',
             'faq',
             'group',
-            'expand collapse',
+            'expand',
+            'collapse',
             'ea',
             'essential addons'
         ];
