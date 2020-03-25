@@ -43,7 +43,7 @@ class Progress_Bar extends Widget_Base
             'progress indicator',
             'gradient',
             'ea',
-            'SCROLL INDICATOR',
+            'scroll indicator',
             'essential addons'
         ];
     }

@@ -46,7 +46,8 @@ class Adv_Tabs extends Widget_Base
             'tabs',
             'panel',
             'navigation',
-            'group  tabs content',
+            'group',
+            'tabs content',
             'product tabs',
             'ea',
             'essential addons'

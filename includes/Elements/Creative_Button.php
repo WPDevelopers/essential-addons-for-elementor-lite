@@ -42,7 +42,7 @@ class Creative_Button extends Widget_Base {
 			'cta',
 			'call to action',
 			'ea',
-			'MARKETING BUTTON',
+			'marketing button',
 			'essential addons'
 		];
     }
