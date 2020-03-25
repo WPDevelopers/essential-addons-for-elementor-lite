@@ -41,10 +41,12 @@ class Caldera_Forms extends Widget_Base
     public function get_keywords() {
         return [
             'contact form',
+            'ea contact form',
             'form styler',
             'elementor form',
             'feedback',
             'calderaforms',
+            'ea calderaforms',
             'ea',
             'essential addons'
         ];

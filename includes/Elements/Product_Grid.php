@@ -39,10 +39,16 @@ class Product_Grid extends Widget_Base
     public function get_keywords()
     {
         return [
-            'WooCommerce',
-            'Product Gallery',
-            'WooCommerce Grid',
-            'Gallery',
+            'woo',
+            'woocommerce',
+            'ea woocommerce',
+            'ea woo product grid',
+            'ea woocommerce product grid',
+            'woo commerce',
+            'ea woo commerce',
+            'product gallery',
+            'woocommerce grid',
+            'gallery',
             'ea',
             'essential addons'
         ];

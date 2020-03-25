@@ -71,10 +71,13 @@ class Contact_Form_7 extends Widget_Base
     {
         return [
             'contact form',
+            'ea contact form',
             'form styler',
             'elementor form',
             'feedback',
             'cf7',
+            'ea cf7',
+            'ea contact form 7',
             'ea',
             'essential addons'
         ];

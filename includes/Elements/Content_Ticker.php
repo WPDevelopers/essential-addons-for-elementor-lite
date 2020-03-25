@@ -40,6 +40,8 @@ class Content_Ticker extends Widget_Base
     {
         return [
             'ticker',
+            'ea ticker',
+            'ea content ticker',
             'news headline',
             'news ticker',
             'text rotate',

@@ -38,9 +38,11 @@ class Twitter_Feed extends Widget_Base
     
     public function get_keywords() {
         return [
-            'Twitter',
-            'Social Media',
-            'Twitter Embed',
+            'twitter',
+            'ea twitter feed',
+            'ea twitter gallery',
+            'social media',
+            'twitter embed',
             'twitter feed',
             'twitter marketing',
             'tweet feed',

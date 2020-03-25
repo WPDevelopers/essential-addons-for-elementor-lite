@@ -42,6 +42,10 @@ class FluentForm extends Widget_Base
     
     public function get_keywords() {
         return [
+            'ea contact form',
+            'ea fluentform',
+            'ea fluent form',
+            'ea fluent forms',
             'contact form',
             'form styler',
             'elementor form',

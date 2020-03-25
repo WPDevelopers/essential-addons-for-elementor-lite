@@ -36,10 +36,13 @@ class Flip_Box extends Widget_Base {
     public function get_keywords() {
         return [
 			'flip',
+			'ea flipbox',
+			'ea flip box',
 			'box',
 			'flip box',
 			'card',
 			'flip card',
+			'ea flip card',
 			'rotate',
 			'ea',
 			'essential addons'

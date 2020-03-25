@@ -51,12 +51,15 @@ class Betterdocs_Search_Form extends Widget_Base
 	 */
 	public function get_keywords() {
 		return [
-            'Knowledge Base',
-            'Documentation',
-            'Doc',
-            'KB',
-            'BetterDocs',
-            'Search',
+            'knowledgebase',
+            'knowledge Base',
+            'documentation',
+            'doc',
+            'kb',
+            'betterdocs',
+            'ea betterdocs',
+            'search',
+            'search form',
             'ea',
             'essential addons'
         ];
