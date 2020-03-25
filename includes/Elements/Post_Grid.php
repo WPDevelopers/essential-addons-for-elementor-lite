@@ -47,7 +47,7 @@ class Post_Grid extends Widget_Base
             'article',
             'custom posts',
             'masonry',
-            'Content Views',
+            'content views',
             'blog view',
             'content marketing',
             'blogger',
