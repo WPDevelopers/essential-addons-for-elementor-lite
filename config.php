@@ -414,4 +414,9 @@ $config = [
     ],
 ];
 
+//add fake embedpress widget when EmbedPress are not install or active
+if(!is_plugin_active('embedpress/embedpress.php')){
+    $config['elements']['embedpress']['class'] = '\Essential_Addons_Elementor\Elements\EmbedPress';
+}
+
 return $config;
