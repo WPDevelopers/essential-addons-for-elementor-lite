@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -774,9 +774,7 @@ class Cta_Box extends Widget_Base
 		<?php elseif ('template' == $settings['eael_cta_title_content_type']): ?>
 			<?php
 				if (!empty($settings['eael_primary_templates'])) {
-					$eael_template_id = $settings['eael_primary_templates'];
-					$eael_frontend = new Frontend;
-					echo $eael_frontend->get_builder_content($eael_template_id, true);
+					echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
 				}
 			?>
 		<?php endif;?>
@@ -792,9 +790,7 @@ class Cta_Box extends Widget_Base
 			<?php elseif ('template' == $settings['eael_cta_title_content_type']): ?>
 			<?php
 				if (!empty($settings['eael_primary_templates'])) {
-					$eael_template_id = $settings['eael_primary_templates'];
-					$eael_frontend = new Frontend;
-					echo $eael_frontend->get_builder_content($eael_template_id, true);
+					echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
 				}
 			?>
 			<?php endif;?>
@@ -824,9 +820,7 @@ class Cta_Box extends Widget_Base
 			<?php elseif ('template' == $settings['eael_cta_title_content_type']): ?>
 				<?php
 					if (!empty($settings['eael_primary_templates'])) {
-						$eael_template_id = $settings['eael_primary_templates'];
-						$eael_frontend = new Frontend;
-						echo $eael_frontend->get_builder_content($eael_template_id, true);
+						echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
 					}
 				?>
 			<?php endif;?>

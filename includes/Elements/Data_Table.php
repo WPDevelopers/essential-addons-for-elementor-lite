@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
@@ -1168,10 +1168,7 @@ class Data_Table extends Widget_Base {
 										<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
 											<div class="td-content-wrapper">
 												<div <?php echo $this->get_render_attribute_string('td_content'); ?>>
-													<?php
-														$eael_frontend = new Frontend;
-														echo $eael_frontend->get_builder_content( intval($table_td[$j]['template']), true );
-													?>
+													<?php echo Plugin::$instance->frontend->get_builder_content(intval($table_td[$j]['template']), true); ?>
 												</div>
 											</div>
 										</td>
