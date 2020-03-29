@@ -34,11 +34,14 @@ class Fancy_Text extends Widget_Base {
     
     public function get_keywords() {
         return [
-			'Animated Headline',
+			'ea fancy text',
+			'ea typing text',
+			'animated headline',
 			'Headline',
-			'Typewriter',
-			'Text effect',
-			'Text animation',
+			'typewriter',
+			'text effect',
+			'text typing effect',
+			'text animation',
 			'animated heading',
 			'ea',
 			'essential addons'

@@ -35,10 +35,13 @@ class Data_Table extends Widget_Base {
     
     public function get_keywords() {
         return [
-			'Table',
-			'Export Table',
+			'table',
+			'ea table',
+			'data table',
+			'ea data table',
+			'export eable',
 			'CSV',
-			'Comparison table',
+			'comparison table',
 			'grid',
 			'ea',
 			'essential addons'

@@ -38,7 +38,9 @@ class Creative_Button extends Widget_Base {
 	{
         return [
 			'button',
+			'ea button',
 			'creative button',
+			'ea creative button',
 			'cta',
 			'call to action',
 			'ea',

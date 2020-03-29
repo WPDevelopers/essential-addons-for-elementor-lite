@@ -39,6 +39,8 @@ class Pricing_Table extends Widget_Base {
 			'price menu',
 			'pricing',
 			'table',
+			'ea table',
+			'ea pricing table',
 			'comparison table',
 			'pricing plan',
 			'dynamic price',
