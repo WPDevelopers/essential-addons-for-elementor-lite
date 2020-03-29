@@ -36,7 +36,11 @@ class WpForms extends Widget_Base {
     {
         return [
             'contact form',
+            'ea contact form',
+            'ea wp form',
+            'ea wpforms',
             'form styler',
+            'ea form styler',
             'elementor form',
             'feedback',
             'wp forms',

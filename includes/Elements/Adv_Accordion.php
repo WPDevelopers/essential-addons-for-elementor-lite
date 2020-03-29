@@ -42,6 +42,8 @@ class Adv_Accordion extends Widget_Base
     {
         return [
             'accordion',
+            'ea accordion',
+            'ea advanced accordion',
             'toggle',
             'collapsible',
             'faq',

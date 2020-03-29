@@ -34,6 +34,9 @@ class Dual_Color_Header extends Widget_Base {
 	public function get_keywords()
 	{
         return [
+			'ea header',
+			'ea dual header',
+			'ea dual color header',
 			'heading',
 			'headline',
 			'title',

@@ -58,6 +58,9 @@ class GravityForms extends Widget_Base {
     {
         return [
             'contact form',
+            'ea contact form',
+            'ea gravity form',
+            'ea form styler',
             'form styler',
             'elementor form',
             'feedback',

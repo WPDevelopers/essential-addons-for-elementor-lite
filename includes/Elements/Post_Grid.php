@@ -43,6 +43,8 @@ class Post_Grid extends Widget_Base
             'post',
             'posts',
             'grid',
+            'ea post grid',
+            'ea posts grid',
             'blog post',
             'article',
             'custom posts',

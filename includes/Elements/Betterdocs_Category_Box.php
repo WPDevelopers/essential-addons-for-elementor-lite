@@ -51,11 +51,13 @@ class Betterdocs_Category_Box extends Widget_Base
 	 */
 	public function get_keywords() {
 		return [
-            'Knowledge Base',
-            'Documentation',
-            'Doc',
-            'KB',
-            'BetterDocs',
+            'knowledgebase',
+            'knowledge Base',
+            'documentation',
+            'doc',
+            'kb',
+            'betterdocs',
+            'ea betterdocs',
             'ea',
             'essential addons'
         ];
