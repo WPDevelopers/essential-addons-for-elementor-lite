@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
@@ -945,9 +945,7 @@ class Countdown extends Widget_Base
 
         if ('template' == $settings['countdown_expire_type']) {
             if (!empty($settings['countdown_expiry_templates'])) {
-                $eael_template_id = $settings['countdown_expiry_templates'];
-                $eael_frontend = new Frontend;
-                $template = $eael_frontend->get_builder_content($eael_template_id, true);
+                echo Plugin::$instance->frontend->get_builder_content($settings['countdown_expiry_templates'], true);
             }
         }
 

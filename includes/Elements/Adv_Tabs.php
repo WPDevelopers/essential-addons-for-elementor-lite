@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -870,13 +870,9 @@ class Adv_Tabs extends Widget_Base
 		      				<?php if ('content' == $tab['eael_adv_tabs_text_type']): ?>
 								<?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 							<?php elseif ('template' == $tab['eael_adv_tabs_text_type']): ?>
-						<?php
-if (!empty($tab['eael_primary_templates'])) {
-            $eael_template_id = $tab['eael_primary_templates'];
-            $eael_frontend = new Frontend;
-            echo $eael_frontend->get_builder_content($eael_template_id, true);
-        }
-        ?>
+						<?php if (!empty($tab['eael_primary_templates'])) {
+                            echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+                        } ?>
 					<?php endif;?>
     			</div>
 			<?php endforeach;?>
