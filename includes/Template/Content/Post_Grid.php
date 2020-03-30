@@ -22,6 +22,11 @@ trait Post_Grid
                     <div class="eael-grid-post-holder">
                         <div class="eael-grid-post-holder-inner">';
                             if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+
+                                if($settings['eael_show_post_terms'] === 'yes') {                            
+                                    echo self::get_terms_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+                                }
+
                                 echo '<div class="eael-entry-media">';
                                     if ('none' !== $settings['eael_post_grid_hover_animation']) {
                                         echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
