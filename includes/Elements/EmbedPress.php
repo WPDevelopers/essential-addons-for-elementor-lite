@@ -20,7 +20,7 @@ class EmbedPress extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-flip-box';
+		return 'eaicon-embedpress';
 	}
 
    	public function get_categories() {
