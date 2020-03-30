@@ -42,7 +42,13 @@ class Formstack extends Widget_Base {
             'ea',
             'ea formstack',
             'ea forms',
-            'formstack'
+            'formstack',
+            'contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'ea',
+            'essential addons'
         ];
     }
 
@@ -278,6 +284,428 @@ class Formstack extends Widget_Base {
         );
 
         $this->end_controls_section();
+
+        /*-----------------------------------------------------------------------------------*/
+        /*    Style Tab
+        /*-----------------------------------------------------------------------------------*/
+
+        /**
+         * Style Tab: Form Container
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_container_style',
+            [
+                'label' => __('Form Container', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_form_background',
+            [
+                'label' => esc_html__('Form Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-formstack .fsForm' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_form_alignment',
+            [
+                'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'options' => [
+                    'default' => [
+                        'title' => __('Default', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-ban',
+                    ],
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'default' => 'default',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_form_max_width',
+            [
+                'label' => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 1500,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 80,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack' => 'width: {{SIZE}}{{UNIT}};'
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_form_margin',
+            [
+                'label' => esc_html__('Form Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_form_padding',
+            [
+                'label' => esc_html__('Form Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_form_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'separator' => 'before',
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_formstack_form_border',
+                'selector' => '{{WRAPPER}} .eael-formstack',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_formstack_form_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-formstack',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Form Title & Description
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_form_title_style',
+            [
+                'label' => __('Title & Description', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_formstack_custom_title_description' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_heading_alignment',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack-title' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-formstack-description' => 'text-align: {{VALUE}};',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_title_heading',
+            [
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_form_title_text_color',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack-title' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_formstack_form_title_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-formstack-title',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_form_title_margin',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'allowed_dimensions' => 'vertical',
+                'placeholder' => [
+                    'top' => '',
+                    'right' => 'auto',
+                    'bottom' => '',
+                    'left' => 'auto',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_description_heading',
+            [
+                'label' => __('Description', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_form_description_text_color',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack-description' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_formstack_form_description_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_4,
+                'selector' => '{{WRAPPER}} .eael-formstack-description'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_form_description_margin',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'allowed_dimensions' => 'vertical',
+                'placeholder' => [
+                    'top' => '',
+                    'right' => 'auto',
+                    'bottom' => '',
+                    'left' => 'auto',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack-description' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Section Break Style
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_break_style',
+            [
+                'label' => __('Section Break Style', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_section_break_label',
+            [
+                'label' => __('Label', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_section_break_label_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionHeading' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_formstack_section_break_label_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionHeading',
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_section_break_label_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionHeading' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_section_break_label_margin',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionHeading' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_section_break_description',
+            [
+                'label' => __('Description', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_section_break_description_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_formstack_section_break_description_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p',
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_section_break_description_padding',
+            [
+                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_section_break_description_margin',
+            [
+                'label' => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_section_break_alignment',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'prefix_class' => 'eael-formstack-section-break-content-'
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render () {
@@ -322,8 +750,38 @@ class Formstack extends Widget_Base {
             $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'placeholder-hide' );
         }
 
+        if( $settings['eael_formstack_labels_switch'] != 'yes' ) {
+            $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'eael-formstack-form-labels-hide' );
+        }
+
+        if( $settings['eael_formstack_error_messages'] == 'hide' ) {
+            $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'eael-formstack-error-message-hide' );
+        }
+
+        if( $settings['eael_formstack_validation_messages'] == 'hide' ) {
+            $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'eael-formstack-validation-message-hide' );
+        }
+
+        $alignment = $settings['eael_formstack_form_alignment'];
+        $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'eael-formstack-form-align-'.$alignment );
+
+
         ?>
         <div <?php echo $this->get_render_attribute_string('eael_formstack_wrapper'); ?>>
+            <?php if ( $settings['eael_formstack_custom_title_description'] == 'yes' ) { ?>
+                <div class="eael-formstack-heading">
+                    <?php if ( $settings['eael_formstack_form_title_custom'] != '' ) { ?>
+                        <h3 class="eael-contact-form-title eael-formstack-title">
+                            <?php echo esc_attr( $settings['eael_formstack_form_title_custom'] ); ?>
+                        </h3>
+                    <?php } ?>
+                    <?php if ( $settings['eael_formstack_form_description_custom'] != '' ) { ?>
+                        <div class="eael-contact-form-description eael-formstack-description">
+                            <?php echo $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ); ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
             <div class="fsForm">
                 <?php echo $form_data; ?>
             </div>

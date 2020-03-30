@@ -1,6 +1,11 @@
 .eael-formstack {
-    .fsForm .fsCell {
-        padding: 0 !important;
+    .fsForm {
+        .fsCell {
+            padding: 0 !important;
+        }
+        &.fsMaxCol1 {
+            width: inherit !important;
+        }
     }
 
     input {
@@ -12,5 +17,37 @@
         display: inherit;
         border-left: none;
         height: auto;
+    }
+    &.eael-formstack-form-labels-hide {
+        label {
+            display: none !important;
+        }
+    }
+    &.eael-formstack-validation-message-hide {
+        .fsError {
+            display: none;
+        }
+    }
+
+    &.eael-formstack-error-message-hide {
+        .fsValidationError {
+            background: unset !important;
+            box-shadow: none !important;
+            color: #595d64;
+            .fsRequiredLabel {
+                color: #595d64 !important;
+            }
+        }
+    }
+    &.eael-formstack-form-align-center {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &.eael-formstack-form-align-left {
+        float: left;
+    }
+    &.eael-formstack-form-align-right {
+        float: right;
     }
 }
