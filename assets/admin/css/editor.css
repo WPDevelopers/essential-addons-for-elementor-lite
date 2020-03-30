@@ -76,7 +76,7 @@
 }
 
 #elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
-	content: "\e92e";
+	content: "\e92f";
 	font-family: "eaicon" !important;
 	font-size: 190%;
 	font-style: normal;
