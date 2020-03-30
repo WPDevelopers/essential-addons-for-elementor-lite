@@ -1049,7 +1049,7 @@ class Formstack extends Widget_Base {
         );
 
         $this->add_control(
-            'eael_formstack_eael_formstack_custom_radio_checkbox',
+            'eael_formstack_custom_radio_checkbox',
             [
                 'label' => __('Custom Styles', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
@@ -1077,10 +1077,10 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
                 ],
                 'condition' => [
-                    'eael_formstack_eael_formstack_custom_radio_checkbox' => 'yes',
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1092,7 +1092,7 @@ class Formstack extends Widget_Base {
             [
                 'label' => __('Normal', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'eael_formstack_eael_formstack_custom_radio_checkbox' => 'yes',
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1104,10 +1104,10 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"]' => 'background: {{VALUE}}',
                 ],
                 'condition' => [
-                    'eael_formstack_eael_formstack_custom_radio_checkbox' => 'yes',
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1126,7 +1126,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'border-width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"]' => 'border-width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition' => [
                     'eael_formstack_custom_radio_checkbox' => 'yes',
@@ -1141,7 +1141,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"]' => 'border-color: {{VALUE}}',
                 ],
                 'condition' => [
                     'eael_formstack_custom_radio_checkbox' => 'yes',
@@ -1167,7 +1167,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_formstack_custom_radio_checkbox' => 'yes',
@@ -1193,7 +1193,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_formstack_custom_radio_checkbox' => 'yes',
@@ -1220,7 +1220,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:checked:before, {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:checked:before' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="checkbox"]:checked:before, {{WRAPPER}} .eael-formstack-custom-radio-checkbox input[type="radio"]:checked:before' => 'background: {{VALUE}}',
                 ],
                 'condition' => [
                     'eael_formstack_custom_radio_checkbox' => 'yes',
@@ -1287,6 +1287,10 @@ class Formstack extends Widget_Base {
 
         if( $settings['eael_formstack_validation_messages'] == 'hide' ) {
             $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'eael-formstack-validation-message-hide' );
+        }
+
+        if ( $settings['eael_formstack_custom_radio_checkbox'] == 'yes' ) {
+            $this->add_render_attribute( 'eael_formstack_wrapper', 'class', 'eael-formstack-custom-radio-checkbox' );
         }
 
         $alignment = $settings['eael_formstack_form_alignment'];
