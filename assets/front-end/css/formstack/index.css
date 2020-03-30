@@ -38,3 +38,18 @@
 .eael-formstack.eael-formstack-form-align-right {
   float: right;
 }
+
+.eael-formstack-section-break-content-center .fsSectionHeader .fsSectionHeading,
+.eael-formstack-section-break-content-center .fsSectionHeader .fsSectionText p {
+  text-align: center;
+}
+
+.eael-formstack-section-break-content-left .fsSectionHeader .fsSectionHeading,
+.eael-formstack-section-break-content-left .fsSectionHeader .fsSectionText p {
+  text-align: left !important;
+}
+
+.eael-formstack-section-break-content-right .fsSectionHeader .fsSectionHeading,
+.eael-formstack-section-break-content-right .fsSectionHeader .fsSectionText p {
+  text-align: right !important;
+}
