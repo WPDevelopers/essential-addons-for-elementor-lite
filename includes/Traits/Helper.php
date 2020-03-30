@@ -657,7 +657,7 @@ trait Helper
             );
         }
 
-        if ('eael-post-carousel' === $this->get_name()) {
+        if ('eael-post-carousel' === $this->get_name() || 'eael-post-grid' === $this->get_name()) {
             $this->add_control(
                 'eael_show_post_terms',
                 [
@@ -2445,5 +2445,36 @@ trait Helper
         }
 
         return $html;
+    }
+
+    protected static function get_terms_list( $term_type = 'category', $length = 1)
+    {
+
+        if($term_type === 'category' ) {
+            $terms = get_the_category();
+        }
+
+        if($term_type === 'tags' ){
+            $terms = get_the_tags();
+        }
+
+        if( empty($terms) ) return;
+
+        $html = '<ul class="post-carousel-categories">'; $count = 0;
+            foreach( $terms as $term) {
+                if($count === $length) { break; }
+                $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
+                $html .= '<li>';
+                    $html .= '<a href="'.esc_url($link).'">';
+                        $html .= $term->name;
+                    $html .= '</a>';
+                $html .= '</li>';
+                $count++;
+            }
+        $html .= '</ul>';
+
+
+        return $html;
+
     }
 }

@@ -482,6 +482,9 @@ class Post_Grid extends Widget_Base
             'excerpt_expanison_indicator' => $settings['excerpt_expanison_indicator'],
             'layout_mode' => $settings['layout_mode'],
             'orderby' => $settings['orderby'],
+            'eael_show_post_terms' => $settings['eael_show_post_terms'],
+            'eael_post_terms' => $settings['eael_post_terms'],
+            'eael_post_terms_max_length' => $settings['eael_post_terms_max_length']
         ];
 
         $this->add_render_attribute(
