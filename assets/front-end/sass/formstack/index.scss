@@ -51,3 +51,30 @@
         float: right;
     }
 }
+
+.eael-formstack-section-break-content-center {
+    .fsSectionHeader {
+        .fsSectionHeading ,
+        .fsSectionText p {
+            text-align: center;
+        }
+    }
+}
+
+.eael-formstack-section-break-content-left {
+    .fsSectionHeader {
+        .fsSectionHeading ,
+        .fsSectionText p {
+            text-align: left !important;
+        }
+    }
+}
+
+.eael-formstack-section-break-content-right {
+    .fsSectionHeader {
+        .fsSectionHeading ,
+        .fsSectionText p {
+            text-align: right !important;
+        }
+    }
+}
