@@ -753,32 +753,6 @@ class Formstack extends Widget_Base {
             ]
         );
 
-        $this->add_responsive_control(
-            'eael_formstack_input_alignment',
-            [
-                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
-                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
-                    ],
-                    'center' => [
-                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
-                    ],
-                    'right' => [
-                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
-                    ],
-                ],
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'text-align: {{VALUE}};',
-                ],
-            ]
-        );
-
         $this->start_controls_tabs('eael_formstack_tabs_fields_style');
 
         $this->start_controls_tab(
@@ -795,7 +769,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -807,7 +781,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -819,7 +793,7 @@ class Formstack extends Widget_Base {
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select',
+                'selector' => '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select',
                 'separator' => 'before',
             ]
         );
@@ -831,7 +805,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -855,7 +829,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'text-indent: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select' => 'text-indent: {{SIZE}}{{UNIT}}',
                 ],
                 'separator' => 'before',
             ]
@@ -875,7 +849,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody select' => 'width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -894,7 +868,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody select' => 'height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -913,7 +887,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack .fsRowBody textarea' => 'width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -932,7 +906,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea' => 'height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack .fsRowBody textarea' => 'height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -944,7 +918,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -963,7 +937,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack .fsFieldRow' => 'margin-bottom: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -973,7 +947,7 @@ class Formstack extends Widget_Base {
             [
                 'name' => 'eael_formstack_field_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select',
+                'selector' => '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select',
                 'separator' => 'before',
             ]
         );
@@ -982,7 +956,7 @@ class Formstack extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_formstack_field_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group select',
+                'selector' => '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-formstack .fsRowBody textarea, {{WRAPPER}} .eael-formstack .fsRowBody select',
                 'separator' => 'before',
             ]
         );
@@ -1003,7 +977,7 @@ class Formstack extends Widget_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea:focus' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-formstack .fsRowBody textarea:focus' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1015,7 +989,7 @@ class Formstack extends Widget_Base {
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea:focus',
+                'selector' => '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-formstack .fsRowBody textarea:focus',
             ]
         );
 
@@ -1023,8 +997,234 @@ class Formstack extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_formstack_focus_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea:focus',
+                'selector' => '{{WRAPPER}} .eael-formstack input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]):focus, {{WRAPPER}} .eael-formstack .fsRowBody textarea:focus',
                 'separator' => 'before',
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Placeholder
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_placeholder_style',
+            [
+                'label' => __('Placeholder', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_formstack_placeholder_switch' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_text_color_placeholder',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group input::-webkit-input-placeholder, {{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Radio & Checkbox
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_radio_checkbox_style',
+            [
+                'label' => __('Radio & Checkbox', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_eael_formstack_custom_radio_checkbox',
+            [
+                'label' => __('Custom Styles', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_radio_checkbox_size',
+            [
+                'label' => __('Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => '15',
+                    'unit' => 'px',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 80,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'eael_formstack_eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->start_controls_tabs('eael_formstack_tabs_radio_checkbox_style');
+
+        $this->start_controls_tab(
+            'eael_formstack_radio_checkbox_normal',
+            [
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_formstack_eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_radio_checkbox_color',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'background: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_formstack_eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_checkbox_border_width',
+            [
+                'label' => __('Border Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 15,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'border-width: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_checkbox_border_color',
+            [
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]' => 'border-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_checkbox_heading',
+            [
+                'label' => __('Checkbox', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_checkbox_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_radio_heading',
+            [
+                'label' => __('Radio Buttons', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_radio_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'eael_formstack_radio_checkbox_checked',
+            [
+                'label' => __('Checked', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_radio_checkbox_color_checked',
+            [
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:checked:before, {{WRAPPER}} .eael-custom-radio-checkbox input[type="radio"]:checked:before' => 'background: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_formstack_custom_radio_checkbox' => 'yes',
+                ],
             ]
         );
 
