@@ -58,6 +58,13 @@
     .fsProgress {
         display: none;
     }
+    #fsReferralBadge {
+        display: none !important;
+    }
+    .fsProgressText {
+        position: relative;
+        bottom: 50%;
+    }
 }
 
 .eael-formstack-section-break-content-center {

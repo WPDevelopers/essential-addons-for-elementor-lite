@@ -41,6 +41,16 @@
 .eael-formstack .fsRowBody .fsOptionLabel input[type=checkbox]:checked:before {
   background-color: #595d64 !important;
 }
+.eael-formstack .fsProgress {
+  display: none;
+}
+.eael-formstack #fsReferralBadge {
+  display: none !important;
+}
+.eael-formstack .fsProgressText {
+  position: relative;
+  bottom: 50%;
+}
 
 .eael-formstack-section-break-content-center .fsSectionHeader .fsSectionHeading,
 .eael-formstack-section-break-content-center .fsSectionHeader .fsSectionText p {
@@ -75,4 +85,8 @@
 
 .eael-formstack-form-button-left .fsSubmit .fsSubmitButton {
   float: left;
+}
+
+.eael-formstack-progressbar-yes .fsProgress {
+  display: inline-block !important;
 }

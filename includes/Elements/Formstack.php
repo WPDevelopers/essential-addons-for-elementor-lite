@@ -1200,6 +1200,42 @@ class Formstack extends Widget_Base {
         $this->end_controls_section();
 
         /**
+         * Style Tab: Rating
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_rating_style',
+            [
+                'label'     => __('Placeholder', 'essential-addons-for-elementor-lite'),
+                'tab'       => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_form_rating_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsRowBody input::-webkit-input-placeholder, {{WRAPPER}} .eael-formstack .fsRowBody textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_form_rating_unmarked_color',
+            [
+                'label'     => __('Unmarked Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsRowBody input::-webkit-input-placeholder, {{WRAPPER}} .eael-formstack .fsRowBody textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
          * Style Tab: Submit Button
          * -------------------------------------------------
          */
@@ -1627,10 +1663,10 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_pagination_button_color',
             [
-                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'label'     => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .step-nav button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-formstack .fsPagination button .fsFull' => 'color: {{VALUE}};',
                 ]
             ]
         );
@@ -1641,26 +1677,28 @@ class Formstack extends Widget_Base {
                 'name'     => 'eael_formstack_pagination_button_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .step-nav button',
+                'selector' => '{{WRAPPER}} .eael-formstack .fsPagination button .fsFull',
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
+        $this->add_control(
+            'eael_formstack_pagination_button_bg',
             [
-                'name'     => 'eael_formstack_pagination_button_bg',
-                'label'    => __('Background', 'essential-addons-for-elementor-lite'),
-                'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .step-nav button',
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsPagination button' => 'background-color: {{VALUE}} !important;',
+                ]
             ]
         );
+
 
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name'     => 'eael_formstack_pagination_button_border',
                 'label'    => __('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .step-nav button',
+                'selector' => '{{WRAPPER}} .eael-formstack .fsPagination button',
             ]
         );
 
@@ -1671,7 +1709,7 @@ class Formstack extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .step-nav button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsPagination button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -1683,7 +1721,7 @@ class Formstack extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .step-nav button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsPagination button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1703,20 +1741,22 @@ class Formstack extends Widget_Base {
                 'label'     => __('Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .step-nav button:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-formstack .fsPagination button:hover .fsFull' => 'color: {{VALUE}};',
                 ]
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
+        $this->add_control(
+            'eael_formstack_pagination_button_hover_bg',
             [
-                'name'     => 'eael_formstack_pagination_button_hover_bg',
-                'label'    => __('Background', 'essential-addons-for-elementor-lite'),
-                'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .step-nav button:hover',
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsPagination button:hover' => 'background-color: {{VALUE}} !important;',
+                ]
             ]
         );
+
 
         $this->add_control(
             'eael_formstack_pagination_button_border_hover_radius',
@@ -1725,7 +1765,7 @@ class Formstack extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .step-nav button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsPagination button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
         );
