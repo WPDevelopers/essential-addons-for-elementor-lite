@@ -1207,32 +1207,32 @@ class Formstack extends Widget_Base {
             'eael_formstack_section_submit_button_style',
             [
                 'label' => __('Submit Button', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_responsive_control(
             'eael_formstack_submit_button_align',
             [
-                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
+                'label'        => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::CHOOSE,
+                'options'      => [
+                    'left'   => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-h-align-left',
+                        'icon'  => 'eicon-h-align-left',
                     ],
                     'center' => [
                         'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-h-align-center',
+                        'icon'  => 'eicon-h-align-center',
                     ],
-                    'right' => [
+                    'right'  => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-h-align-right',
+                        'icon'  => 'eicon-h-align-right',
                     ],
                 ],
-                'default' => '',
+                'default'      => '',
                 'prefix_class' => 'eael-formstack-form-button-',
-                'condition' => [
+                'condition'    => [
                     'eael_formstack_button_width_type' => 'custom',
                 ],
             ]
@@ -1241,12 +1241,12 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_button_width_type',
             [
-                'label' => __('Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'custom',
-                'options' => [
+                'label'        => __('Width', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SELECT,
+                'default'      => 'custom',
+                'options'      => [
                     'full-width' => __('Full Width', 'essential-addons-for-elementor-lite'),
-                    'custom' => __('Custom', 'essential-addons-for-elementor-lite'),
+                    'custom'     => __('Custom', 'essential-addons-for-elementor-lite'),
                 ],
                 'prefix_class' => 'eael-formstack-form-button-',
             ]
@@ -1255,20 +1255,20 @@ class Formstack extends Widget_Base {
         $this->add_responsive_control(
             'eael_formstack_button_width',
             [
-                'label' => __('Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
+                'label'      => __('Width', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
                     'px' => [
-                        'min' => 0,
-                        'max' => 1200,
+                        'min'  => 0,
+                        'max'  => 1200,
                         'step' => 1,
                     ],
                 ],
                 'size_units' => ['px', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton' => 'width: {{SIZE}}{{UNIT}}',
                 ],
-                'condition' => [
+                'condition'  => [
                     'eael_formstack_button_width_type' => 'custom',
                 ],
             ]
@@ -1286,9 +1286,9 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_button_bg_color_normal',
             [
-                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#1c2f3a',
+                'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#1c2f3a',
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton' => 'background-color: {{VALUE}} !important;',
                 ],
@@ -1298,9 +1298,9 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_button_text_color_normal',
             [
-                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
+                'label'     => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton' => 'color: {{VALUE}} !important;',
                 ],
@@ -1310,21 +1310,21 @@ class Formstack extends Widget_Base {
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_formstack_button_border_normal',
-                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'name'        => 'eael_formstack_button_border_normal',
+                'label'       => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
-                'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton',
+                'default'     => '1px',
+                'selector'    => '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton',
             ]
         );
 
         $this->add_control(
             'eael_formstack_button_border_radius',
             [
-                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
@@ -1333,10 +1333,10 @@ class Formstack extends Widget_Base {
         $this->add_responsive_control(
             'eael_formstack_button_padding',
             [
-                'label' => __('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1345,17 +1345,17 @@ class Formstack extends Widget_Base {
         $this->add_responsive_control(
             'eael_formstack_button_margin',
             [
-                'label' => __('Margin Top', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
+                'label'      => __('Margin Top', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
                     'px' => [
-                        'min' => 0,
-                        'max' => 100,
+                        'min'  => 0,
+                        'max'  => 100,
                         'step' => 1,
                     ],
                 ],
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton' => 'margin-top: {{SIZE}}{{UNIT}}',
                 ],
             ]
@@ -1364,9 +1364,9 @@ class Formstack extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'eael_formstack_button_typography',
-                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton',
+                'name'      => 'eael_formstack_button_typography',
+                'label'     => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton',
                 'separator' => 'before',
             ]
         );
@@ -1374,8 +1374,8 @@ class Formstack extends Widget_Base {
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'eael_formstack_button_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton',
+                'name'      => 'eael_formstack_button_box_shadow',
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton',
                 'separator' => 'before',
             ]
         );
@@ -1392,9 +1392,9 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_button_bg_color_hover',
             [
-                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'label'     => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton:hover' => 'background-color: {{VALUE}} !important;',
                 ],
@@ -1404,9 +1404,9 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_button_text_color_hover',
             [
-                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'label'     => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton:hover' => 'color: {{VALUE}} !important;',
                 ],
@@ -1416,9 +1416,9 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_button_border_color_hover',
             [
-                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'label'     => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsSubmit .fsSubmitButton:hover' => 'border-color: {{VALUE}}',
                 ],
@@ -1428,6 +1428,516 @@ class Formstack extends Widget_Base {
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Pagination and progressbar
+         * -------------------------------------------------
+         */
+
+        $this->start_controls_section(
+            'eael_formstack_section_pagination_style',
+            [
+                'label' => __('Pagination', 'essential-addons-for-elementor-lite'),
+                'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->start_controls_tabs('eael_formstack_form_progressbar_style_tabs');
+
+        $this->start_controls_tab(
+            'eael_formstack_form_progressbar_normal',
+            [
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_progressbar_label',
+            [
+                'label' => __('Label', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::HEADING
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_show_label',
+            [
+                'label'        => __('Show Label', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'prefix_class' => 'eael-ff-step-header-'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_label_color',
+            [
+                'label'     => __('Label Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'scheme'    => [
+                    'type'  => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ff-el-progress-status' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_formstack_show_label' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      => 'eael_formstack_label_typography',
+                'label'     => __('Typography', 'essential-addons-for-elementor-lite'),
+                'scheme'    => Scheme_Typography::TYPOGRAPHY_1,
+                'selector'  => '{{WRAPPER}} .ff-el-progress-status',
+                'condition' => [
+                    'eael_formstack_show_label' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_label_space',
+            [
+                'label'      => __('Spacing', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .ff-el-progress-status' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_formstack_show_label' => 'yes'
+                ],
+                'separator'  => 'after'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_progressbar',
+            [
+                'label' => __('Progressbar', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_show_progressbar',
+            [
+                'label'        => __('Show Progressbar', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'prefix_class' => 'eael-ff-step-progressbar-'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_progressbar_height',
+            [
+                'label'      => __('Height', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .ff-el-progress' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_progressbar_color',
+            [
+                'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'scheme'    => [
+                    'type'  => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ff-el-progress-bar span' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'      => 'eael_formstack_progressbar_border',
+                'label'     => __('Border', 'essential-addons-for-elementor-lite'),
+                'selector'  => '{{WRAPPER}} .ff-el-progress',
+                'condition' => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_progressbar_border_radius',
+            [
+                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .ff-el-progress' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'eael_formstack_progressbar_bg',
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
+                'types'     => ['classic', 'gradient'],
+                'selector'  => '{{WRAPPER}} .ff-el-progress',
+                'condition' => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ],
+                'exclude'   => [
+                    'image'
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'eael_formstack_form_progressbar_filled',
+            [
+                'label' => __('Filled', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'eael_formstack_progressbar_bg_filled',
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
+                'types'     => ['classic', 'gradient'],
+                'selector'  => '{{WRAPPER}} .ff-el-progress-bar',
+                'condition' => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ],
+                'exclude'   => [
+                    'image'
+                ]
+            ]
+        );
+
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+
+        $this->start_controls_tabs(
+            'eael_formstack_form_pagination_button_style_tabs',
+            [
+                'separator' => 'before'
+            ]
+        );
+
+        $this->start_controls_tab(
+            'eael_formstack_form_pagination_button',
+            [
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_button_style',
+            [
+                'label' => __('Button', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::HEADING
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_button_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .step-nav button' => 'color: {{VALUE}};',
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_formstack_pagination_button_typography',
+                'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
+                'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .step-nav button',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'eael_formstack_pagination_button_bg',
+                'label'    => __('Background', 'essential-addons-for-elementor-lite'),
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .step-nav button',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_formstack_pagination_button_border',
+                'label'    => __('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .step-nav button',
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_button_border_radius',
+            [
+                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .step-nav button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_button_padding',
+            [
+                'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .step-nav button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'eael_formstack_form_pagination_button_hover',
+            [
+                'label' => __('Hover', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_button_hover_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .step-nav button:hover' => 'color: {{VALUE}};',
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'eael_formstack_pagination_button_hover_bg',
+                'label'    => __('Background', 'essential-addons-for-elementor-lite'),
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .step-nav button:hover',
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_pagination_button_border_hover_radius',
+            [
+                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .step-nav button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+
+        $this->end_controls_section();
+
+
+        /**
+         * Style Tab: Errors
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_error_style',
+            [
+                'label' => __('Errors', 'essential-addons-for-elementor-lite'),
+                'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_error_messages_heading',
+            [
+                'label'     => __('Error Messages', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_formstack_error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_error_message_background_color',
+            [
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsError' => 'background-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_formstack_error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_error_message_text_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsError' => 'color: {{VALUE}}; border: 1px solid {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_formstack_error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      => 'eael_formstack_error_message_typography',
+                'label'     => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsError',
+                'condition' => [
+                    'eael_formstack_error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_error_message_padding',
+            [
+                'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-formstack .fsError' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_formstack_error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_error_message_margin',
+            [
+                'label'      => __('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-formstack .fsError' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition'  => [
+                    'eael_formstack_error_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_validation_error_messages_heading',
+            [
+                'label'     => __('Validation Messages', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_formstack_validation_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_validation_message_background_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#fae9e9',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsValidationError' => 'background-color: {{VALUE}}; border: 1px solid {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_formstack_validation_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_validation_message_text_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#fae9e9',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsValidationError .fsLabel, {{WRAPPER}} .eael-formstack .fsValidationError .fsRequiredLabel, {{WRAPPER}} .eael-formstack .fsValidationError .fsRequiredMarker ' => 'color: {{VALUE}} !important;',
+                ],
+                'condition' => [
+                    'eael_formstack_validation_messages' => 'show',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'      => 'eael_formstack_validation_error_box_shadow',
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsValidationError',
+                'condition' => [
+                    'eael_formstack_validation_messages' => 'show',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
     }
