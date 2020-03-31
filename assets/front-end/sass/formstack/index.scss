@@ -50,6 +50,10 @@
     &.eael-formstack-form-align-right {
         float: right;
     }
+
+    .fsRowBody .fsOptionLabel input[type=checkbox]:checked:before {
+        background-color: #595d64 !important;
+    }
 }
 
 .eael-formstack-section-break-content-center {
@@ -77,4 +81,24 @@
             text-align: right !important;
         }
     }
+}
+
+.eael-formstack-form-button-full-width .fsSubmit .fsSubmitButton {
+    width: 100%;
+    display: block;
+}
+
+.eael-formstack-form-button-center .fsSubmit .fsSubmitButton {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eael-formstack-form-button-right .fsSubmit .fsSubmitButton {
+    float: right;
+}
+
+.eael-formstack-form-button-left .fsSubmit .fsSubmitButton {
+    float: left;
 }
