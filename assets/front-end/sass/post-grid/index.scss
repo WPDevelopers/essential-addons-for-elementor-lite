@@ -502,6 +502,9 @@
 	margin: 0;
 	padding: 15px;
 	text-align: left;
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
 	li {
 	  display: inline-block;
 	  text-transform: capitalize;
@@ -519,3 +522,10 @@
 	  }
 	}
   }
+
+.eael-entry-media:hover {
+	.post-carousel-categories {
+		visibility: visible;
+		opacity: 1;
+	}
+}
