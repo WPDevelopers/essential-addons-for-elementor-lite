@@ -1453,73 +1453,7 @@ class Formstack extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'eael_formstack_pagination_progressbar_label',
-            [
-                'label' => __('Label', 'essential-addons-for-elementor-lite'),
-                'type'  => Controls_Manager::HEADING
-            ]
-        );
 
-        $this->add_control(
-            'eael_formstack_show_label',
-            [
-                'label'        => __('Show Label', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
-                'default'      => 'yes',
-                'prefix_class' => 'eael-ff-step-header-'
-            ]
-        );
-
-        $this->add_control(
-            'eael_formstack_label_color',
-            [
-                'label'     => __('Label Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .ff-el-progress-status' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_formstack_show_label' => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'      => 'eael_formstack_label_typography',
-                'label'     => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'    => Scheme_Typography::TYPOGRAPHY_1,
-                'selector'  => '{{WRAPPER}} .ff-el-progress-status',
-                'condition' => [
-                    'eael_formstack_show_label' => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'eael_formstack_label_space',
-            [
-                'label'      => __('Spacing', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
-                'selectors'  => [
-                    '{{WRAPPER}} .ff-el-progress-status' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition'  => [
-                    'eael_formstack_show_label' => 'yes'
-                ],
-                'separator'  => 'after'
-            ]
-        );
 
         $this->add_control(
             'eael_formstack_pagination_progressbar',
@@ -1538,7 +1472,35 @@ class Formstack extends Widget_Base {
                 'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
-                'prefix_class' => 'eael-ff-step-progressbar-'
+                'prefix_class' => 'eael-formstack-progressbar-'
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_progressbar_color',
+            [
+                'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'scheme'    => [
+                    'type'  => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsProgressBarContainer .fsProgressText' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_formstack_show_progressbar' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      => 'eael_formstack_progressbar_title_typography',
+                'label'     => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsProgressBarContainer .fsProgressText',
+                'separator' => 'before',
             ]
         );
 
@@ -1556,7 +1518,7 @@ class Formstack extends Widget_Base {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .ff-el-progress' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsProgressBarContainer' => 'height: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_formstack_show_progressbar' => 'yes'
@@ -1564,30 +1526,14 @@ class Formstack extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'eael_formstack_progressbar_color',
-            [
-                'label'     => __('Title Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'scheme'    => [
-                    'type'  => Scheme_Color::get_type(),
-                    'value' => Scheme_Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .ff-el-progress-bar span' => 'color: {{VALUE}};',
-                ],
-                'condition' => [
-                    'eael_formstack_show_progressbar' => 'yes'
-                ]
-            ]
-        );
+
 
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name'      => 'eael_formstack_progressbar_border',
                 'label'     => __('Border', 'essential-addons-for-elementor-lite'),
-                'selector'  => '{{WRAPPER}} .ff-el-progress',
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsProgressBarContainer',
                 'condition' => [
                     'eael_formstack_show_progressbar' => 'yes'
                 ]
@@ -1601,7 +1547,7 @@ class Formstack extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .ff-el-progress' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsProgressBarContainer , {{WRAPPER}} .eael-formstack .fsProgressBarContainer .fsProgressBar' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'eael_formstack_show_progressbar' => 'yes'
@@ -1615,7 +1561,7 @@ class Formstack extends Widget_Base {
                 'name'      => 'eael_formstack_progressbar_bg',
                 'label'     => __('Background', 'essential-addons-for-elementor-lite'),
                 'types'     => ['classic', 'gradient'],
-                'selector'  => '{{WRAPPER}} .ff-el-progress',
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsProgressBarContainer',
                 'condition' => [
                     'eael_formstack_show_progressbar' => 'yes'
                 ],
@@ -1640,7 +1586,7 @@ class Formstack extends Widget_Base {
                 'name'      => 'eael_formstack_progressbar_bg_filled',
                 'label'     => __('Background', 'essential-addons-for-elementor-lite'),
                 'types'     => ['classic', 'gradient'],
-                'selector'  => '{{WRAPPER}} .ff-el-progress-bar',
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsProgressBarContainer .fsProgressBar',
                 'condition' => [
                     'eael_formstack_show_progressbar' => 'yes'
                 ],
