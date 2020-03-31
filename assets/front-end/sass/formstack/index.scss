@@ -54,6 +54,10 @@
     .fsRowBody .fsOptionLabel input[type=checkbox]:checked:before {
         background-color: #595d64 !important;
     }
+
+    .fsProgress {
+        display: none;
+    }
 }
 
 .eael-formstack-section-break-content-center {
@@ -101,4 +105,9 @@
 
 .eael-formstack-form-button-left .fsSubmit .fsSubmitButton {
     float: left;
+}
+.eael-formstack-progressbar-yes {
+    .fsProgress {
+        display: inline-block !important;
+    }
 }
