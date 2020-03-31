@@ -666,6 +666,9 @@ trait Helper
                     'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                     'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
+                    'condition' => [
+                        'eael_show_image'   => 'yes'
+                    ]
                 ]
             );
 
@@ -734,7 +737,127 @@ trait Helper
                 ]
             );
 
+            $this->add_control(
+                'eael_show_avatar',
+                [
+                    'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'default' => 'yes',
+                    'condition' => [
+                        'meta_position' => 'meta-entry-footer',
+                        'eael_show_meta' => 'yes'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'eael_show_author',
+                [
+                    'label' => __('Show Author Name', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'default' => 'yes',
+                    'condition' => [
+                        'eael_show_meta' => 'yes'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'eael_show_date',
+                [
+                    'label' => __('Show Date', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'default' => 'yes',
+                    'condition' => [
+                        'eael_show_meta' => 'yes'
+                    ]
+                ]
+            );
+
         }
+
+        $this->end_controls_section();
+    }
+
+    protected function terms_style()
+    {
+        $this->start_controls_section(
+            'section_terms_style',
+            [
+                'label' => __('Terms', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_post_terms'   => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'terms_color',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .post-carousel-categories li a, {{WRAPPER}} .post-carousel-categories li:after' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'terms_typography',
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'selector' => '{{WRAPPER}} .post-carousel-categories li a',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'terms_color_alignment',
+            [
+                'label' => __('Alignment', 'essential-addons-elementor'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .post-carousel-categories' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'terms_spacing',
+            [
+                'label' => __('Spacing', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .post-carousel-categories li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
     }
