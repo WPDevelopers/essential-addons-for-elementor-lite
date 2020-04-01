@@ -175,7 +175,7 @@ trait Core
             }
         }
 
-        //save table of content global value
+        //save table of contents global value
         if ($page_settings_model->get_settings('eael_ext_toc_global') == 'yes' && $page_settings_model->get_settings('eael_ext_table_of_content') == 'yes') {
             $typography_fields = [
                 'font_family',

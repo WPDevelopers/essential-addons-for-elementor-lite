@@ -335,7 +335,7 @@ trait Elements
                 $html .= $reading_progress_html;
             }
 
-            // Table of Content
+            // Table of Contents
             if ($this->get_settings('eael-table-of-content') == true) {
                 if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                     add_filter('eael/section/after_render', function ($extensions) {
