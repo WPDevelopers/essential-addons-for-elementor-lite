@@ -19,6 +19,8 @@ trait Generator
     {
         global $wp_query;
 
+        $uid = null;
+        
         if ($wp_query->is_home) {
             $uid = 'home';
         } else if ($wp_query->is_search) {
@@ -35,7 +37,9 @@ trait Generator
             }
         }
 
-        $this->request_uid = md5($uid);
+        if ($uid) {
+            $this->request_uid = md5($uid);
+        }
     }
 
     /**
