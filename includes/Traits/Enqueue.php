@@ -56,7 +56,7 @@ trait Enqueue
         }
 
         // Load fontawesome as fallback
-        if (defined('ELEMENTOR_ASSETS_URL')) {
+        if (apply_filters('eael/pro_enabled', false)) {
             wp_register_style(
                 'font-awesome-5-all',
                 ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
@@ -109,10 +109,10 @@ trait Enqueue
             // enqueue scripts
             if ($this->has_cache_files()) {
                 $css_file = EAEL_ASSET_URL . '/eael.min.css';
-                $js_file = EAEL_ASSET_URL . '/eael.min.js';
+                $js_file  = EAEL_ASSET_URL . '/eael.min.js';
             } else {
                 $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                $js_file = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
+                $js_file  = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
             }
 
             wp_enqueue_style(
@@ -136,21 +136,19 @@ trait Enqueue
             // localize script
             $this->localize_objects = apply_filters('eael/localize_objects', [
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('essential-addons-elementor'),
+                'nonce'   => wp_create_nonce('essential-addons-elementor'),
             ]);
 
             wp_localize_script('eael-backend', 'localize', $this->localize_objects);
         } else {
-            if (is_singular() || is_home() || is_archive() || is_404() || is_search()) {
-                $queried_object = get_queried_object_id();
-                $post_type = (is_singular() || is_home() ? 'post' : 'term');
-                $elements = (array) get_metadata($post_type, $queried_object, 'eael_transient_elements', true);
+            if ($this->request_uid) {
+                $elements = get_transient('eael_transient_elements_' . $this->request_uid);
 
-                if (empty(array_filter($elements))) {
+                if ($elements === false) {
                     return;
                 }
 
-                $this->enqueue_protocols($post_type, $queried_object);
+                $this->enqueue_protocols();
             }
         }
     }
@@ -175,14 +173,14 @@ trait Enqueue
     }
 
     // rules how css will be enqueued on front-end
-    protected function enqueue_protocols($post_type, $queried_object)
+    protected function enqueue_protocols()
     {
-        if ($this->has_cache_files($post_type, $queried_object)) {
-            $css_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.css';
-            $js_file = EAEL_ASSET_URL . '/eael-' . $post_type . '-' . $queried_object . '.min.js';
+        if ($this->has_cache_files($this->request_uid)) {
+            $css_file = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.css';
+            $js_file  = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.js';
         } else {
             $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
-            $js_file = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
+            $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
         }
 
         wp_enqueue_style(
@@ -201,12 +199,12 @@ trait Enqueue
         );
 
         // hook extended assets
-        do_action('eael/after_enqueue_scripts', $this->has_cache_files($post_type, $queried_object));
+        do_action('eael/after_enqueue_scripts', $this->has_cache_files($this->request_uid));
 
         // localize script
         $this->localize_objects = apply_filters('eael/localize_objects', [
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('essential-addons-elementor'),
+            'nonce'   => wp_create_nonce('essential-addons-elementor'),
         ]);
 
         wp_localize_script('eael-front-end', 'localize', $this->localize_objects);
