@@ -37,6 +37,7 @@ class Image_Accordion extends Widget_Base
     public function get_keywords() {
         return [
             'image',
+            'ea image accordion',
             'image effect',
             'hover effect',
             'creative image',

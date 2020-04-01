@@ -37,11 +37,13 @@ class Facebook_Feed extends Widget_Base
     
     public function get_keywords() {
         return [
-            'Facebook',
-            'Social Media',
-            'Facebook Embed',
+            'facebook',
+            'social media',
+            'facebook embed',
             'facebook feed',
+            'ea facebook feed',
             'fb feed',
+            'ea fb feed',
             'facebook marketing',
             'ea',
             'essential addons'

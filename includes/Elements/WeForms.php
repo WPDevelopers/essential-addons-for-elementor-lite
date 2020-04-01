@@ -41,7 +41,12 @@ class WeForms extends Widget_Base
     public function get_keywords() {
         return [
             'contact form',
+            'ea contact form',
+            'ea we form',
+            'ea weform',
+            'ea weforms',
             'form styler',
+            'ea form styler',
             'elementor form',
             'feedback',
             'ea',

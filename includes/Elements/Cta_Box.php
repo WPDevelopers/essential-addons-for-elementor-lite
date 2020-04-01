@@ -42,7 +42,9 @@ class Cta_Box extends Widget_Base
     {
         return [
             'call to action',
-            'CTA',
+            'ea call to action',
+            'cta',
+            'ea cta',
             'button',
             'buy button',
             'action box',

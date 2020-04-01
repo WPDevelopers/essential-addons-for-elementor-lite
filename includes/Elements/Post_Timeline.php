@@ -42,6 +42,8 @@ class Post_Timeline extends Widget_Base
             'post',
             'posts',
             'timeline',
+            'ea post timeline',
+            'ea posts timeline',
             'blog posts',
             'content marketing',
             'blogger',

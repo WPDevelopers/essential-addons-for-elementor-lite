@@ -46,6 +46,8 @@ class Event_Calendar extends Widget_Base {
             'event',
             'events',
             'calendar',
+            'ea calendar',
+            'ea event calendar',
             'eventon',
             'google calendar',
             'event marketing',
