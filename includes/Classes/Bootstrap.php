@@ -21,6 +21,9 @@ class Bootstrap
     // instance container
     private static $instance = null;
 
+    // request unique identifier
+    protected $request_uid = null;
+
     // registered elements container
     public $registered_elements;
 
@@ -105,8 +108,9 @@ class Bootstrap
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Generator
+        add_action('wp', [$this, 'generate_request_uid']);
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('wp_print_footer_scripts', array($this, 'generate_frontend_scripts'));
+        add_action('elementor/frontend/before_enqueue_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
