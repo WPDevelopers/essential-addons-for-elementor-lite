@@ -562,6 +562,59 @@ class Formstack extends Widget_Base {
         $this->end_controls_section();
 
         /**
+         * Style Tab: Field Description
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_field_description_style',
+            [
+                'label'                 => __( 'Field Description', 'essential-addons-for-elementor-lite'),
+                'tab'                   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_field_description_text_color',
+            [
+                'label'                 => __( 'Text Color', 'essential-addons-for-elementor-lite'),
+                'type'                  => Controls_Manager::COLOR,
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-formstack .fsSupporting' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'                  => 'eael_formstack_field_description_typography',
+                'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+                'selector'              => '{{WRAPPER}} .eael-formstack .fsSupporting',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_field_description_spacing',
+            [
+                'label'                 => __( 'Spacing', 'essential-addons-for-elementor-lite'),
+                'type'                  => Controls_Manager::SLIDER,
+                'range'                 => [
+                    'px'        => [
+                        'min'   => 0,
+                        'max'   => 100,
+                        'step'  => 1,
+                    ],
+                ],
+                'size_units'            => [ 'px', 'em', '%' ],
+                'selectors'             => [
+                    '{{WRAPPER}} .eael-formstack .fsSupporting' => 'padding-top: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
          * Style Tab: Section Break Style
          * -------------------------------------------------
          */
