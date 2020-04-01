@@ -1,5 +1,6 @@
 .eael-formstack {
     .fsForm {
+        padding: 0 !important;
         .fsCell {
             padding: 0 !important;
         }
@@ -19,7 +20,7 @@
         height: auto;
     }
     &.eael-formstack-form-labels-hide {
-        label {
+        .fsLabel {
             display: none !important;
         }
     }
@@ -70,7 +71,7 @@
 .eael-formstack-section-break-content-center {
     .fsSectionHeader {
         .fsSectionHeading ,
-        .fsSectionText p {
+        .fsSectionText {
             text-align: center;
         }
     }
@@ -79,7 +80,7 @@
 .eael-formstack-section-break-content-left {
     .fsSectionHeader {
         .fsSectionHeading ,
-        .fsSectionText p {
+        .fsSectionText {
             text-align: left !important;
         }
     }
@@ -88,7 +89,7 @@
 .eael-formstack-section-break-content-right {
     .fsSectionHeader {
         .fsSectionHeading ,
-        .fsSectionText p {
+        .fsSectionText {
             text-align: right !important;
         }
     }
