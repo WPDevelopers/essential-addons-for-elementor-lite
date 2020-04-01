@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.8.5
+Stable tag: 3.9.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -184,6 +184,20 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.9.1 - 25/03/2020 =
+- Improved Elements Keywords for better searchability
+
+= 3.9.0 - 25/03/2020 =
+- Updated: All widgets icon in elementor panel for better UI
+- Updated: Removed "EA" from all widgets name, you will see the "EA" icon instead
+- Added: Helper link in each widget sidebar for easy access to documentation
+- Added: WPML translation support for URL in Team Member
+- Added: <span> as tag support in Tooltip
+- Added: Option to change heading tag in CTA
+- Fixed: Expansion indicator disappearence bug in Post Grid
+- Fixed: Polish letters displaying bug for Filterable Gallery
+- Few minor bugfix and improvements
 
 = 3.8.5 - 15/03/2020 =
 - Improved : Advanced Data Table structure

@@ -35,6 +35,7 @@ class Tooltip extends Widget_Base {
 	{
         return [
 			'tooltip',
+			'ea tooltip',
 			'popover',
 			'hover',
 			'hint',

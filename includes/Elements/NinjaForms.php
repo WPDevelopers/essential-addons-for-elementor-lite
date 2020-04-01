@@ -36,10 +36,14 @@ class NinjaForms extends Widget_Base {
     {
         return [
             'contact form',
+            'ea contact form',
             'form styler',
+            'ea form styler',
+            'ea ninjaform styler',
+            'ea ninja form styler',
             'elementor form',
             'feedback',
-            'ninjaforrms',
+            'ninjaforms',
             'ea',
             'essential addons'
         ];

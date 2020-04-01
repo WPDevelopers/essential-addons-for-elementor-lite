@@ -38,6 +38,8 @@ class Feature_List extends Widget_Base
     public function get_keywords() {
         return [
 			'list',
+			'ea list',
+			'ea feature list',
 			'feature',
 			'icon',
 			'connector',

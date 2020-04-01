@@ -56,13 +56,16 @@ class Filterable_Gallery extends Widget_Base
     public function get_keywords()
     {
         return [
-            'Gallery',
-            'Image Gallery',
-            'Media Gallery',
-            'Media',
-            'Photo Gallery',
-            'Portfolio',
-            'Media grid',
+            'gallery',
+            'ea filter gallery',
+            'ea filterable gallery',
+            'image gallery',
+            'media gallery',
+            'media',
+            'photo gallery',
+            'portfolio',
+            'ea portfolio',
+            'media grid',
             'responsive gallery',
             'photo gallery',
             'ea',

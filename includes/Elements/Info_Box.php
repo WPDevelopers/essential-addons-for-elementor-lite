@@ -38,7 +38,10 @@ class Info_Box extends Widget_Base {
 	{
         return [
 			'info',
+			'ea infobox',
+			'ea info box',
 			'box',
+			'ea box',
 			'info box',
 			'card',
 			'ea',
