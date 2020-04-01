@@ -643,7 +643,7 @@ class Formstack extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -653,7 +653,7 @@ class Formstack extends Widget_Base {
             [
                 'name'      => 'eael_formstack_section_break_description_typography',
                 'label'     => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector'  => '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p',
+                'selector'  => '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText',
                 'separator' => 'before',
             ]
         );
@@ -665,7 +665,7 @@ class Formstack extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -677,7 +677,7 @@ class Formstack extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader .fsSectionText' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );

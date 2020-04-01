@@ -1,3 +1,6 @@
+.eael-formstack .fsForm {
+  padding: 0 !important;
+}
 .eael-formstack .fsForm .fsCell {
   padding: 0 !important;
 }
@@ -13,7 +16,7 @@
   border-left: none;
   height: auto;
 }
-.eael-formstack.eael-formstack-form-labels-hide label {
+.eael-formstack.eael-formstack-form-labels-hide .fsLabel {
   display: none !important;
 }
 .eael-formstack.eael-formstack-validation-message-hide .fsError {
@@ -53,17 +56,17 @@
 }
 
 .eael-formstack-section-break-content-center .fsSectionHeader .fsSectionHeading,
-.eael-formstack-section-break-content-center .fsSectionHeader .fsSectionText p {
+.eael-formstack-section-break-content-center .fsSectionHeader .fsSectionText {
   text-align: center;
 }
 
 .eael-formstack-section-break-content-left .fsSectionHeader .fsSectionHeading,
-.eael-formstack-section-break-content-left .fsSectionHeader .fsSectionText p {
+.eael-formstack-section-break-content-left .fsSectionHeader .fsSectionText {
   text-align: left !important;
 }
 
 .eael-formstack-section-break-content-right .fsSectionHeader .fsSectionHeading,
-.eael-formstack-section-break-content-right .fsSectionHeader .fsSectionText p {
+.eael-formstack-section-break-content-right .fsSectionHeader .fsSectionText {
   text-align: right !important;
 }
 
