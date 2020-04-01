@@ -37,10 +37,10 @@ trait Library
      *
      * @since 3.0.0
      */
-    public function remove_files($post_type = null, $post_id = null)
+    public function remove_files($uid = null)
     {
-        $css_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.css');
-        $js_path = $this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($post_type ? 'eael-' . $post_type : 'eael') . ($post_id ? '-' . $post_id : '') . '.min.js');
+        $css_path = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.css';
+        $js_path  = EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . ($uid ? $uid : 'eael') . '.min.js';
 
         if (file_exists($css_path)) {
             unlink($css_path);
@@ -80,9 +80,10 @@ trait Library
     {
         check_ajax_referer('essential-addons-elementor', 'security');
 
-        if(isset($_POST['pageID']) && 'post' === $_POST['actionType'] ) {
-            $this->remove_files($_POST['actionType'], $_POST['pageID']);
-        }else {
+        if (isset($_POST['pageID']) && 'post' === $_POST['actionType']) {
+            $uid = md5('post-' . $_POST['pageID']);
+            $this->remove_files($uid);
+        } else {
             // clear cache files
             $this->empty_dir(EAEL_ASSET_PATH);
         }
