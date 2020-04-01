@@ -344,7 +344,7 @@ class Formstack extends Widget_Base {
         $this->add_responsive_control(
             'eael_formstack_form_max_width',
             [
-                'label'      => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
+                'label'      => esc_html__('Form Width', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
                 'range'      => [
@@ -937,7 +937,7 @@ class Formstack extends Widget_Base {
                 ],
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-formstack .fsFieldRow' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-formstack .fsFieldRow' => 'margin-bottom: {{SIZE}}{{UNIT}} !important',
                 ],
             ]
         );
@@ -1199,41 +1199,6 @@ class Formstack extends Widget_Base {
 
         $this->end_controls_section();
 
-        /**
-         * Style Tab: Rating
-         * -------------------------------------------------
-         */
-        $this->start_controls_section(
-            'eael_formstack_section_rating_style',
-            [
-                'label'     => __('Placeholder', 'essential-addons-for-elementor-lite'),
-                'tab'       => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'eael_formstack_form_rating_color',
-            [
-                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-formstack .fsRowBody input::-webkit-input-placeholder, {{WRAPPER}} .eael-formstack .fsRowBody textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'eael_formstack_form_rating_unmarked_color',
-            [
-                'label'     => __('Unmarked Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-formstack .fsRowBody input::-webkit-input-placeholder, {{WRAPPER}} .eael-formstack .fsRowBody textarea::-webkit-input-placeholder' => 'color: {{VALUE}}',
-                ]
-            ]
-        );
-
-        $this->end_controls_section();
 
         /**
          * Style Tab: Submit Button
