@@ -153,6 +153,10 @@ trait Generator
             return;
         }
 
+        if (!Plugin::$instance->frontend->has_elementor_in_page()) {
+            return;
+        }
+
         $replace = [
             'eicon-woocommerce' => 'eael-product-grid',
             'eael-countdown' => 'eael-count-down',
