@@ -170,6 +170,9 @@
 .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-left .fc-button .fc-icon {
   font-size: 13px;
 }
+.eael-event-calendar-wrapper .eael-event-completed {
+  text-decoration: line-through;
+}
 
 .fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
   margin-left: 5px;

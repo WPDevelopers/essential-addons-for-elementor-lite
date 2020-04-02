@@ -37,6 +37,12 @@ var EventCalendar = function($scope, $) {
 			var element = $(info.el),
 				event = info.event;
 
+			// when event is finished event text are cross
+			if(event.extendedProps.eventHasComplete !==undefined && event.extendedProps.eventHasComplete ==='yes'){
+				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
+				element.find('td.fc-list-item-title').addClass('eael-event-completed');
+			}
+
 			element.attr("href", "javascript:void(0);");
 			element.click(function(e) {
 				e.preventDefault();
