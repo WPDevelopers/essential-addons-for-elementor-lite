@@ -183,13 +183,11 @@ trait Generator
      */
     public function generate_frontend_scripts()
     {
-        if (!Plugin::$instance->frontend->has_elementor_in_page()) {
+        if ($this->is_preview_mode()) {
             return;
         }
 
-        // Plugin::$instance->editor->is_edit_mode()
-        // if (Plugin::$instance->preview->is_preview_mode()) {
-        if ($this->is_preview_mode()) {
+        if (!Plugin::$instance->frontend->has_elementor_in_page()) {
             return;
         }
 
