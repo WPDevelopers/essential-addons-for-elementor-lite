@@ -1,98 +1,4 @@
 
-/*------------------------------*/
-/* 31. Advance Accordion
-/*------------------------------*/
-.eael-adv-accordion {
-  width: auto;
-  height: auto;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
-  transform: rotate(0deg);
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
-  transform: rotate(90deg);
-  z-index: 10;
-  transition: all 0.3s ease-in-out;
-}
-
-.fa-accordion-icon {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
-  display: none;
-  border: 1px solid #eee;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
-  display: block;
-}
-
-@-webkit-keyframes rotate-90 {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
-}
-
-@keyframes rotate-90 {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(-180deg);
-  }
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-  100% {
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
-  }
-}
-
 /*----------------------------*/
 /* 30. Advance Tabs
 /*----------------------------*/
@@ -273,6 +179,100 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top-color: #444 !important;
+  }
+}
+
+/*------------------------------*/
+/* 31. Advance Accordion
+/*------------------------------*/
+.eael-adv-accordion {
+  width: auto;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
+  transform: rotate(0deg);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+  transform: rotate(90deg);
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+
+.fa-accordion-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content {
+  display: none;
+  border: 1px solid #eee;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
+  margin: 0;
+}
+
+.eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
+  display: block;
+}
+
+@-webkit-keyframes rotate-90 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+@keyframes rotate-90 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -759,69 +759,6 @@
   left: 0;
 }
 
-.eael-ticker-wrap {
-  overflow: hidden;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-}
-
-.eael-ticker-wrap .ticker-badge {
-  flex: 0 0 auto;
-  padding: 8px 12px;
-}
-
-.eael-ticker-wrap .eael-ticker {
-  overflow: hidden;
-  flex: 1 1 auto;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content {
-  padding: 8px 12px;
-  line-height: 1.8;
-}
-
-.eael-ticker-wrap .eael-ticker .ticker-content p {
-  margin: 0;
-}
-
-.eael-ticker-wrap .swiper-button-prev {
-  left: auto !important;
-  right: 25px;
-}
-
-.eael-ticker-wrap div.swiper-slide,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
-.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
-  opacity: 0 !important;
-}
-
-.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
-  text-align: left;
-}
-
-@media only screen and (max-width: 767px) {
-  .eael-ticker-wrap {
-    flex-flow: row wrap;
-  }
-
-  .content-ticker-pagination {
-    display: none;
-  }
-}
-.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
-  background-image: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /*--------------------------------*/
 /* 11. Contact Form 7 Styles
 /*--------------------------------*/
@@ -918,6 +855,128 @@
 .eael-contact-form-7 .wpcf7-form p input.wpcf7-submit {
   font-family: inherit;
   font-weight: normal;
+}
+
+.eael-ticker-wrap {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.eael-ticker-wrap .ticker-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.eael-ticker-wrap .eael-ticker {
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content {
+  padding: 8px 12px;
+  line-height: 1.8;
+}
+
+.eael-ticker-wrap .eael-ticker .ticker-content p {
+  margin: 0;
+}
+
+.eael-ticker-wrap .swiper-button-prev {
+  left: auto !important;
+  right: 25px;
+}
+
+.eael-ticker-wrap div.swiper-slide,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-prev,
+.eael-ticker-wrap div.swiper-slide.swiper-slide-next {
+  opacity: 0 !important;
+}
+
+.eael-ticker-wrap div.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  .eael-ticker-wrap {
+    flex-flow: row wrap;
+  }
+
+  .content-ticker-pagination {
+    display: none;
+  }
+}
+.eael-ticker-wrap .swiper-button-next, .eael-ticker-wrap .swiper-button-prev {
+  background-image: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*---------------------------------*/
+/* 05. Countdown Styles
+/*---------------------------------*/
+/*--- General ---*/
+.eael-countdown-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.eael-countdown-items > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  position: relative;
+}
+
+.eael-countdown-item > div {
+  text-align: center;
+  padding: 20px;
+}
+
+.eael-countdown-label-block .eael-countdown-digits,
+.eael-countdown-label-block .eael-countdown-label {
+  display: block;
+  text-align: center;
+}
+
+.eael-countdown-digits {
+  font-size: 54px;
+  line-height: 1;
+}
+
+.eael-countdown-label {
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.eael-countdown-show-separator .eael-countdown-digits::after {
+  content: ":";
+  position: absolute;
+  left: 98%;
+  z-index: 9999;
+}
+
+.eael-countdown-item:last-child .eael-countdown-digits::after {
+  display: none;
+}
+
+/*--- Style 1 ---*/
+.eael-countdown-items.style-1 .eael-countdown-item > div {
+  background: #262625;
 }
 
 /*--------------------------------*/
@@ -1173,111 +1232,6 @@
 
 .eael-creative-button-icon-right {
   margin-left: 5px;
-}
-
-/*---------------------------------*/
-/* 05. Countdown Styles
-/*---------------------------------*/
-/*--- General ---*/
-.eael-countdown-items {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.eael-countdown-items > li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table-cell;
-  position: relative;
-}
-
-.eael-countdown-item > div {
-  text-align: center;
-  padding: 20px;
-}
-
-.eael-countdown-label-block .eael-countdown-digits,
-.eael-countdown-label-block .eael-countdown-label {
-  display: block;
-  text-align: center;
-}
-
-.eael-countdown-digits {
-  font-size: 54px;
-  line-height: 1;
-}
-
-.eael-countdown-label {
-  font-size: 18px;
-  line-height: 1;
-  color: #ffffff;
-}
-
-.eael-countdown-show-separator .eael-countdown-digits::after {
-  content: ":";
-  position: absolute;
-  left: 98%;
-  z-index: 9999;
-}
-
-.eael-countdown-item:last-child .eael-countdown-digits::after {
-  display: none;
-}
-
-/*--- Style 1 ---*/
-.eael-countdown-items.style-1 .eael-countdown-item > div {
-  background: #262625;
-}
-
-/* -------------------------------- */
-/* 20. Dual Color Heading
-/* -------------------------------- */
-.eael-dual-header {
-  display: block;
-  margin-bottom: 50px;
-}
-
-.eael-dual-header .title,
-.eael-dual-header .title span {
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 48px;
-  margin: 10px 0px;
-}
-
-.eael-dual-header .subtext {
-  font-size: 16px;
-  display: block;
-}
-
-.eael-dual-header i {
-  display: block;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
-  font-size: 36px;
-}
-
-.eael-dual-header .title span.lead {
-  color: #1abc9c;
-}
-
-/*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
-  text-align: center;
-}
-
-.eael-dual-header-content-align-left {
-  text-align: left;
-}
-
-.eael-dual-header-content-align-right {
-  text-align: right;
 }
 
 @charset "UTF-8";
@@ -1622,6 +1576,52 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   .eael-dt-td-align-mobile-right .eael-data-table tbody tr td {
     text-align: right;
   }
+}
+
+/* -------------------------------- */
+/* 20. Dual Color Heading
+/* -------------------------------- */
+.eael-dual-header {
+  display: block;
+  margin-bottom: 50px;
+}
+
+.eael-dual-header .title,
+.eael-dual-header .title span {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0px;
+}
+
+.eael-dual-header .subtext {
+  font-size: 16px;
+  display: block;
+}
+
+.eael-dual-header i {
+  display: block;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  font-size: 36px;
+}
+
+.eael-dual-header .title span.lead {
+  color: #1abc9c;
+}
+
+/*--- Builder Related Css ---*/
+.eael-dual-header-content-align-center {
+  text-align: center;
+}
+
+.eael-dual-header-content-align-left {
+  text-align: left;
+}
+
+.eael-dual-header-content-align-right {
+  text-align: right;
 }
 
 .elementor-panel .pro-feature, .elementor-panel .pro-feature a {
@@ -4076,7 +4076,7 @@ button.mfp-arrow:not(.toggle) {
   z-index: 2;
   width: 100%;
   height: 100%;
-  background: #0e9dd2;
+  background: #14bcc8;
   color: #ffffff;
   border-color: #000000;
   -webkit-display: flex;
@@ -4102,7 +4102,7 @@ button.mfp-arrow:not(.toggle) {
   left: 0px;
   width: 100%;
   height: 100%;
-  background: #444444;
+  background: #ff7e70;
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -4518,6 +4518,65 @@ button.mfp-arrow:not(.toggle) {
   margin: 0 0 0 auto;
 }
 
+/*----------------------*/
+/* 14. Gravity Form
+/*----------------------*/
+.eael-gravity-form-align-default,
+.eael-gravity-form-align-left,
+.eael-gravity-form-btn-align-left {
+  text-align: left;
+}
+
+.eael-gravity-form-align-right,
+.eael-gravity-form-btn-align-right {
+  text-align: right;
+}
+
+.eael-gravity-form-align-center,
+.eael-gravity-form-btn-align-center {
+  text-align: center;
+}
+
+.gform_wrapper form li,
+.gform_wrapper li {
+  list-style: none;
+}
+
+.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
+  padding: 0;
+  padding-right: 16px;
+}
+
+.eael-gravity-form .gform_wrapper textarea {
+  padding: 0;
+  font-weight: normal !important;
+  font-family: inherit;
+}
+
+.eael-gravity-form .gform_wrapper .gform_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
+.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
+.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
+  margin: 0;
+}
+
+.eael-gravity-form.title-description-hide .gform_heading {
+  display: none;
+}
+
+.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
+.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
+  display: none;
+}
+
+.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
+  width: 100%;
+}
+
+.eael-gravity-form .gform_wrapper .gf_scroll_text .gsection_description {
+  margin: 0;
+}
+
 /*------------------------------*/
 /* 34. Image accordion
 /*------------------------------*/
@@ -4607,65 +4666,6 @@ button.mfp-arrow:not(.toggle) {
   .eael-img-accordion a:hover .overlay {
     background-color: transparent;
   }
-}
-
-/*----------------------*/
-/* 14. Gravity Form
-/*----------------------*/
-.eael-gravity-form-align-default,
-.eael-gravity-form-align-left,
-.eael-gravity-form-btn-align-left {
-  text-align: left;
-}
-
-.eael-gravity-form-align-right,
-.eael-gravity-form-btn-align-right {
-  text-align: right;
-}
-
-.eael-gravity-form-align-center,
-.eael-gravity-form-btn-align-center {
-  text-align: center;
-}
-
-.gform_wrapper form li,
-.gform_wrapper li {
-  list-style: none;
-}
-
-.eael-gravity-form .gform_wrapper ul.gform_fields li.gfield {
-  padding: 0;
-  padding-right: 16px;
-}
-
-.eael-gravity-form .gform_wrapper textarea {
-  padding: 0;
-  font-weight: normal !important;
-  font-family: inherit;
-}
-
-.eael-gravity-form .gform_wrapper .gform_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_footer input[type=submit],
-.eael-gravity-form .gform_wrapper .gform_page_footer input.button,
-.eael-gravity-form .gform_wrapper .gform_page_footer input[type=submit] {
-  margin: 0;
-}
-
-.eael-gravity-form.title-description-hide .gform_heading {
-  display: none;
-}
-
-.eael-gravity-form.labels-hide .gform_wrapper .top_label .gfield_label,
-.eael-gravity-form.labels-hide .gform_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
-  display: none;
-}
-
-.eael-gravity-form-button-full-width .gform_wrapper .gform_footer input[type="submit"] {
-  width: 100%;
-}
-
-.eael-gravity-form .gform_wrapper .gf_scroll_text .gsection_description {
-  margin: 0;
 }
 
 /* ------------------------ */
