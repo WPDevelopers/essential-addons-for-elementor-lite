@@ -480,7 +480,7 @@ class Event_Calendar extends Widget_Base {
                 'type'         => Controls_Manager::SWITCHER,
                 'label_block'  => false,
                 'return_value' => 'yes',
-                'description'  => __('Event details link hide in event popup','essential-addons-for-elementor-lite')
+                'description'  => __('Hide Event Details link in event popup','essential-addons-for-elementor-lite')
             ]
         );
 
