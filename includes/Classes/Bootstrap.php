@@ -119,6 +119,9 @@ class Bootstrap
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
+        add_action( 'wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        add_action( 'wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));

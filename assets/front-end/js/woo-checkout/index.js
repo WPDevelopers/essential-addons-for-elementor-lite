@@ -16,7 +16,7 @@ var WooCheckout = function($scope, $) {
                     type:		'POST',
                     url:		localize.ajaxurl,
                     data:		{
-                        action: 'update_order_review_ea'
+                        action: 'woo_checkout_update_order_review'
                     },
                     success:	function( data ) {
                         $( ".ea-checkout-review-order-table" ).replaceWith( data.order_review);
