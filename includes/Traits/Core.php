@@ -199,6 +199,7 @@ trait Core
                 'eael_ext_toc_box_shadow' => $page_settings_model->get_settings('eael_ext_toc_box_shadow'),
                 'eael_ext_toc_table_box_shadow_box_shadow' => $page_settings_model->get_settings('eael_ext_toc_table_box_shadow_box_shadow'),
                 'eael_ext_toc_auto_collapse' => $page_settings_model->get_settings('eael_ext_toc_auto_collapse'),
+                'eael_ext_toc_hide_in_mobile' => $page_settings_model->get_settings('eael_ext_toc_hide_in_mobile'),
                 'eael_ext_toc_border_border' => $page_settings_model->get_settings('eael_ext_toc_border_border'),
                 'eael_ext_toc_border_width' => $page_settings_model->get_settings('eael_ext_toc_border_width'),
                 'eael_ext_toc_border_color' => $page_settings_model->get_settings('eael_ext_toc_border_color'),
