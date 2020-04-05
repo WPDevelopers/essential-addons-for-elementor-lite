@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
+use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
@@ -2358,5 +2359,20 @@ trait Helper
         }
 
         return $html;
+    }
+
+    /**
+     * Woo Checkout
+     */
+    public function woo_checkout_update_order_review(){
+        ob_start();
+        Woo_Checkout::order_review_template();
+        $woo_checkout_update_order_review = ob_get_clean();
+
+        wp_send_json(
+            array(
+                'order_review' =>  $woo_checkout_update_order_review
+            )
+        );
     }
 }
