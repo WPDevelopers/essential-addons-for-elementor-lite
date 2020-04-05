@@ -566,7 +566,7 @@ class Contact_Form_7 extends Widget_Base
                 'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => '20',
+                    'size' => '0',
                     'unit' => 'px',
                 ],
                 'range' => [
