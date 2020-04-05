@@ -142,7 +142,11 @@ var EventCalendar = function ($scope, $) {
 					}
 
 					endView = (yearDiff) ? endYear + ' ' + endView : endView;
-					endSelector.html("- " + endView);
+					if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
+						endSelector.html(" ");
+					}else{
+						endSelector.html("- " + endView);
+					}
 				}
 
 				$(".eaelec-modal-header h2").html(event.title);
