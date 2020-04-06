@@ -152,9 +152,10 @@
 			window.location.hash = target;
 		});
 
-		window.onscroll = function () {
+		//some site not working with **window.onscroll**
+		window.addEventListener('scroll', function(e) {
 			eaelTocSticky();
-		};
+		});
 		var stickyScroll = $('#eael-toc').data('stickyscroll');
 
 		/**
