@@ -115,18 +115,11 @@
 			td {
 				padding: 0;
 
-				textarea {
-					width: 100%;
-					min-width: 100px;
-					height: 100%;
+				&.inline-edit {
 					background-color: transparent;
-					border: none;
 					box-shadow: none;
-					resize: none;
-					margin: 0;
-					padding: 0;
 					outline: none;
-					vertical-align: middle;
+					padding: 5px;
 				}
 			}
 

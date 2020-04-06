@@ -5,7 +5,7 @@ var advanced_data_table_timeout,
 	advanced_data_table_drag_el,
 	advanced_data_table_dragging = false;
 
-var Advanced_Data_Table_Update_View = function(view, refresh, value) {
+var Advanced_Data_Table_Update_View = function (view, refresh, value) {
 	var model = view.model;
 
 	// disable elementor remote server render
@@ -15,7 +15,7 @@ var Advanced_Data_Table_Update_View = function(view, refresh, value) {
 		var container = view.getContainer();
 		var settings = view.getContainer().settings.attributes;
 
-		Object.keys(value).forEach(function(key) {
+		Object.keys(value).forEach(function (key) {
 			settings[key] = value[key];
 		});
 
@@ -23,31 +23,31 @@ var Advanced_Data_Table_Update_View = function(view, refresh, value) {
 			container: container,
 			settings: settings,
 			options: {
-				external: refresh
-			}
+				external: refresh,
+			},
 		});
 	} else {
 		// update backbone model
-		Object.keys(value).forEach(function(key) {
+		Object.keys(value).forEach(function (key) {
 			model.setSetting(key, value[key]);
 		});
 	}
 
 	// enable elementor remote server render just after elementor throttle
 	// ignore multiple assign
-	advanced_data_table_timeout = setTimeout(function() {
+	advanced_data_table_timeout = setTimeout(function () {
 		model.remoteRender = true;
 	}, 1001);
 };
 
-var Advanced_Data_Table_Update_Model = function(model, container, refresh, value) {
+var Advanced_Data_Table_Update_Model = function (model, container, refresh, value) {
 	// disable elementor remote server render
 	model.remoteRender = refresh;
 
 	if (elementor.config.version > "2.7.6") {
 		var settings = container.settings.attributes;
 
-		Object.keys(value).forEach(function(key) {
+		Object.keys(value).forEach(function (key) {
 			settings[key] = value[key];
 		});
 
@@ -55,24 +55,24 @@ var Advanced_Data_Table_Update_Model = function(model, container, refresh, value
 			container: container,
 			settings: settings,
 			options: {
-				external: refresh
-			}
+				external: refresh,
+			},
 		});
 	} else {
 		// update backbone model
-		Object.keys(value).forEach(function(key) {
+		Object.keys(value).forEach(function (key) {
 			model.setSetting(key, value[key]);
 		});
 	}
 
 	// enable elementor remote server render just after elementor throttle
 	// ignore multiple assign
-	advanced_data_table_timeout = setTimeout(function() {
+	advanced_data_table_timeout = setTimeout(function () {
 		model.remoteRender = true;
 	}, 1001);
 };
 
-var Advanced_Data_Table = function($scope, $) {
+var Advanced_Data_Table = function ($scope, $) {
 	var table = $scope.context.querySelector(".ea-advanced-data-table");
 	var search = $scope.context.querySelector(".ea-advanced-data-table-search");
 	var pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
@@ -85,20 +85,37 @@ var Advanced_Data_Table = function($scope, $) {
 			attr = "";
 
 			// insert editable area
-			table.querySelectorAll("th, td").forEach(function(el) {
+			table.querySelectorAll("th, td").forEach(function (el) {
 				var value = el.innerHTML;
 
-				if (value.indexOf('<textarea rows="1">') !== 0) {
-					el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				// if (value.indexOf('<div class="inline-edit">') !== 0) {
+				// el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
+				// el.innerHTML = '<div class="inline-edit">' + 'Hello' + "</div>";
+				// }
+
+				if (!el.classList.contains("inline-edit")) {
+					el.classList.add("inline-edit");
 				}
+			});
+
+			tinymce.init({
+				selector: ".inline-edit",
+				menubar: false,
+				inline: true,
+				plugins: ["lists", "link", "autolink"],
+				toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
 			});
 		}
 
 		// drag
-		table.addEventListener("mousedown", function(e) {
-			if (e.target.tagName.toLowerCase() === "th") {
-				e.stopPropagation();
+		table.addEventListener("mousedown", function (e) {
+			e.stopPropagation();
 
+			if (e.target.classList.contains("inline-edit")) {
+				jQuery(e.target).triggerHandler("click");
+			}
+
+			if (e.target.tagName.toLowerCase() === "th") {
 				advanced_data_table_dragging = true;
 				advanced_data_table_drag_el = e.target;
 				advanced_data_table_drag_start_x = e.pageX;
@@ -106,12 +123,12 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 		});
 
-		document.addEventListener("mousemove", function(e) {
+		document.addEventListener("mousemove", function (e) {
 			if (advanced_data_table_dragging) {
 				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
 			}
 		});
-		document.addEventListener("mouseup", function(e) {
+		document.addEventListener("mouseup", function (e) {
 			if (advanced_data_table_dragging) {
 				advanced_data_table_dragging = false;
 			}
@@ -119,7 +136,7 @@ var Advanced_Data_Table = function($scope, $) {
 	} else {
 		// search
 		if (search) {
-			search.addEventListener("input", function(e) {
+			search.addEventListener("input", function (e) {
 				var input = this.value.toLowerCase();
 				var hasSort = table.classList.contains("ea-advanced-data-table-sortable");
 				var offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
@@ -183,7 +200,7 @@ var Advanced_Data_Table = function($scope, $) {
 
 		// sort
 		if (table.classList.contains("ea-advanced-data-table-sortable")) {
-			table.addEventListener("click", function(e) {
+			table.addEventListener("click", function (e) {
 				if (e.target.tagName.toLowerCase() === "th") {
 					var index = e.target.cellIndex;
 					var currentPage = 1;
@@ -217,7 +234,7 @@ var Advanced_Data_Table = function($scope, $) {
 					// collect header class
 					classCollection[currentPage] = [];
 
-					table.querySelectorAll("th").forEach(function(el) {
+					table.querySelectorAll("th").forEach(function (el) {
 						if (el.cellIndex != index) {
 							el.classList.remove("asc", "desc");
 						}
@@ -241,17 +258,17 @@ var Advanced_Data_Table = function($scope, $) {
 
 					// sort collection array
 					if (sort == "asc") {
-						collection.sort(function(x, y) {
+						collection.sort(function (x, y) {
 							return x.value > y.value ? 1 : -1;
 						});
 					} else if (sort == "desc") {
-						collection.sort(function(x, y) {
+						collection.sort(function (x, y) {
 							return x.value < y.value ? 1 : -1;
 						});
 					}
 
 					// sort table
-					collection.forEach(function(row, index) {
+					collection.forEach(function (row, index) {
 						table.rows[startIndex + index].innerHTML = origTable.rows[row.index].innerHTML;
 					});
 				}
@@ -298,7 +315,7 @@ var Advanced_Data_Table = function($scope, $) {
 
 			// paginate on click
 			if (paginationType == "button") {
-				pagination.addEventListener("click", function(e) {
+				pagination.addEventListener("click", function (e) {
 					e.preventDefault();
 
 					if (e.target.tagName.toLowerCase() == "a") {
@@ -307,11 +324,11 @@ var Advanced_Data_Table = function($scope, $) {
 						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
 						endIndex = currentPage * table.dataset.itemsPerPage;
 
-						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function (el) {
 							el.classList.remove("ea-advanced-data-table-pagination-current");
 						});
 
-						pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+						pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function (el) {
 							el.classList.add("ea-advanced-data-table-pagination-current");
 						});
 
@@ -323,7 +340,7 @@ var Advanced_Data_Table = function($scope, $) {
 							}
 						}
 
-						table.querySelectorAll("th").forEach(function(el, index) {
+						table.querySelectorAll("th").forEach(function (el, index) {
 							el.classList.remove("asc", "desc");
 
 							if (typeof classCollection[currentPage] != "undefined") {
@@ -336,7 +353,7 @@ var Advanced_Data_Table = function($scope, $) {
 				});
 			} else {
 				if (pagination.hasChildNodes()) {
-					pagination.querySelector("select").addEventListener("input", function(e) {
+					pagination.querySelector("select").addEventListener("input", function (e) {
 						e.preventDefault();
 
 						currentPage = e.target.value;
@@ -352,7 +369,7 @@ var Advanced_Data_Table = function($scope, $) {
 							}
 						}
 
-						table.querySelectorAll("th").forEach(function(el, index) {
+						table.querySelectorAll("th").forEach(function (el, index) {
 							el.classList.remove("asc", "desc");
 
 							if (typeof classCollection[currentPage] != "undefined") {
@@ -367,12 +384,12 @@ var Advanced_Data_Table = function($scope, $) {
 		}
 
 		// woocommerce
-		table.querySelectorAll(".nt_button_woo").forEach(function(el) {
+		table.querySelectorAll(".nt_button_woo").forEach(function (el) {
 			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
 		});
 
-		table.querySelectorAll(".nt_woo_quantity").forEach(function(el) {
-			el.addEventListener("input", function(e) {
+		table.querySelectorAll(".nt_woo_quantity").forEach(function (el) {
+			el.addEventListener("input", function (e) {
 				var product_id = e.target.dataset.product_id;
 				var quantity = e.target.value;
 
@@ -382,7 +399,7 @@ var Advanced_Data_Table = function($scope, $) {
 	}
 };
 
-var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
+var Advanced_Data_Table_Click_Handler = function (panel, model, view) {
 	if (event.target.dataset.event == "ea:advTable:export") {
 		// export
 		var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
@@ -436,14 +453,14 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
-			csvArr.forEach(function(row, index) {
+			csvArr.forEach(function (row, index) {
 				if (row.length > 0) {
 					cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
 					if (cols.length > 0) {
 						if (enableHeader && index == 0) {
 							header += "<thead><tr>";
-							cols.forEach(function(col) {
+							cols.forEach(function (col) {
 								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
 									header += "<th>" + JSON.parse(col) + "</th>";
 								} else {
@@ -453,7 +470,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 							header += "</tr></thead>";
 						} else {
 							body += "<tr>";
-							cols.forEach(function(col) {
+							cols.forEach(function (col) {
 								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
 									body += "<td>" + JSON.parse(col) + "</td>";
 								} else {
@@ -469,7 +486,7 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 
 			if (header.length > 0 || body.length > 0) {
 				Advanced_Data_Table_Update_View(view, true, {
-					ea_adv_data_table_static_html: header + body
+					ea_adv_data_table_static_html: header + body,
 				});
 			}
 		}
@@ -488,15 +505,15 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 				host: model.attributes.settings.attributes.ea_adv_data_table_source_remote_host,
 				username: model.attributes.settings.attributes.ea_adv_data_table_source_remote_username,
 				password: model.attributes.settings.attributes.ea_adv_data_table_source_remote_password,
-				database: model.attributes.settings.attributes.ea_adv_data_table_source_remote_database
+				database: model.attributes.settings.attributes.ea_adv_data_table_source_remote_database,
 			},
-			success: function(response) {
+			success: function (response) {
 				if (response.connected == true) {
 					button.innerHTML = "Connected";
 
 					Advanced_Data_Table_Update_View(view, true, {
 						ea_adv_data_table_source_remote_connected: true,
-						ea_adv_data_table_source_remote_tables: response.tables
+						ea_adv_data_table_source_remote_tables: response.tables,
 					});
 
 					// reload panel
@@ -505,25 +522,25 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 
 					var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
 					select.length = 0;
-					response.tables.forEach(function(opt, index) {
+					response.tables.forEach(function (opt, index) {
 						select[index] = new Option(opt, opt);
 					});
 				} else {
 					button.innerHTML = "Failed";
 				}
 			},
-			error: function() {
+			error: function () {
 				button.innerHTML = "Failed";
-			}
+			},
 		});
 
-		setTimeout(function() {
+		setTimeout(function () {
 			button.innerHTML = "Connect";
 		}, 2000);
 	} else if (event.target.dataset.event == "ea:advTable:disconnect") {
 		Advanced_Data_Table_Update_View(view, true, {
 			ea_adv_data_table_source_remote_connected: false,
-			ea_adv_data_table_source_remote_tables: []
+			ea_adv_data_table_source_remote_tables: [],
 		});
 
 		// reload panel
@@ -533,19 +550,19 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 };
 
 // Inline edit
-var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
-	var localRender = function() {
-		var interval = setInterval(function() {
+var Advanced_Data_Table_Inline_Edit = function (panel, model, view) {
+	var localRender = function () {
+		var interval = setInterval(function () {
 			if (view.el.querySelector(".ea-advanced-data-table")) {
 				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
 
-				table.addEventListener("focusin", function(e) {
+				table.addEventListener("focusin", function (e) {
 					if (e.target.tagName.toLowerCase() == "textarea") {
 						advanced_data_table_active_cell = e.target;
 					}
 				});
 
-				table.addEventListener("input", function(e) {
+				table.addEventListener("input", function (e) {
 					if (e.target.tagName.toLowerCase() == "textarea") {
 						clearTimeout(advanced_data_table_timeout);
 
@@ -553,20 +570,20 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 						var origTable = table.cloneNode(true);
 
 						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function(el) {
+						origTable.querySelectorAll("th, td").forEach(function (el) {
 							var value = el.querySelector("textarea").value;
 							el.innerHTML = value;
 						});
 
 						// update table
 						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML
+							ea_adv_data_table_static_html: origTable.innerHTML,
 						});
 					}
 				});
 
 				// drag
-				table.addEventListener("mouseup", function(e) {
+				table.addEventListener("mouseup", function (e) {
 					clearTimeout(advanced_data_table_timeout);
 
 					if (e.target.tagName.toLowerCase() === "th") {
@@ -575,33 +592,33 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update table
 							Advanced_Data_Table_Update_View(view, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						} else {
 							var widths = [];
 
 							// collect width of th
-							table.querySelectorAll("th").forEach(function(el, index) {
+							table.querySelectorAll("th").forEach(function (el, index) {
 								widths[index] = el.style.width;
 							});
 
 							// update table
 							Advanced_Data_Table_Update_View(view, false, {
-								ea_adv_data_table_dynamic_th_width: widths
+								ea_adv_data_table_dynamic_th_width: widths,
 							});
 						}
 					}
 				});
 
 				// clear style
-				table.addEventListener("dblclick", function(e) {
+				table.addEventListener("dblclick", function (e) {
 					if (e.target.tagName.toLowerCase() === "th") {
 						e.stopPropagation();
 
@@ -618,7 +635,7 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 	localRender();
 
 	// after render
-	model.on("remote:render", function() {
+	model.on("remote:render", function () {
 		localRender();
 	});
 
@@ -627,17 +644,17 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 	panel.el.addEventListener("click", handler);
 
-	panel.currentPageView.on("destroy", function() {
+	panel.currentPageView.on("destroy", function () {
 		panel.el.removeEventListener("click", handler);
 	});
 
 	// fill remote db list
-	var initRemoteTables = function() {
-		setTimeout(function() {
+	var initRemoteTables = function () {
+		setTimeout(function () {
 			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
 
 			if (select != null && select.length == 0) {
-				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function(opt, index) {
+				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function (opt, index) {
 					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
 				});
 			}
@@ -646,14 +663,14 @@ var Advanced_Data_Table_Inline_Edit = function(panel, model, view) {
 
 	initRemoteTables();
 
-	panel.el.addEventListener("mousedown", function(e) {
+	panel.el.addEventListener("mousedown", function (e) {
 		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
 			initRemoteTables();
 		}
 	});
 };
 
-Advanced_Data_Table_Context_Menu = function(groups, element) {
+Advanced_Data_Table_Context_Menu = function (groups, element) {
 	if (
 		element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
 		element.options.model.attributes.settings.attributes.ea_adv_data_table_source == "static"
@@ -664,7 +681,7 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 				{
 					name: "add_row_above",
 					title: "Add Row Above",
-					callback: function() {
+					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
@@ -682,22 +699,22 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update model
 							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						}
-					}
+					},
 				},
 				{
 					name: "add_row_below",
 					title: "Add Row Below",
-					callback: function() {
+					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
@@ -715,22 +732,22 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update model
 							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						}
-					}
+					},
 				},
 				{
 					name: "add_column_left",
 					title: "Add Column Left",
-					callback: function() {
+					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
@@ -752,22 +769,22 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update model
 							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						}
-					}
+					},
 				},
 				{
 					name: "add_column_right",
 					title: "Add Column Right",
-					callback: function() {
+					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
@@ -789,22 +806,22 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update model
 							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						}
-					}
+					},
 				},
 				{
 					name: "delete_row",
 					title: "Delete Row",
-					callback: function() {
+					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
@@ -818,22 +835,22 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update model
 							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						}
-					}
+					},
 				},
 				{
 					name: "delete_column",
 					title: "Delete Column",
-					callback: function() {
+					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
@@ -849,26 +866,26 @@ Advanced_Data_Table_Context_Menu = function(groups, element) {
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function(el) {
+							origTable.querySelectorAll("th, td").forEach(function (el) {
 								var value = el.querySelector("textarea").value;
 								el.innerHTML = value;
 							});
 
 							// update model
 							Advanced_Data_Table_Update_Model(element.options.model, element.container, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML
+								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						}
-					}
-				}
-			]
+					},
+				},
+			],
 		});
 	}
 
 	return groups;
 };
 
-jQuery(window).on("elementor/frontend/init", function() {
+jQuery(window).on("elementor/frontend/init", function () {
 	if (isEditMode) {
 		elementor.hooks.addFilter("elements/widget/contextMenuGroups", Advanced_Data_Table_Context_Menu);
 		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", Advanced_Data_Table_Inline_Edit);
