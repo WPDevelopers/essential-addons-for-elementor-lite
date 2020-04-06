@@ -73,7 +73,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
                     &:after {
                         left: auto;
                         right: 5px;
-                        top: 30px;
+                        top: 50%;
                     }
                 }
             }
@@ -252,7 +252,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
 
                 &:before,
                 &:after {
-                    content: "";
+                    content: '';
                     position: absolute;
                     display: block;
                 }
@@ -268,7 +268,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
 
                 &:after {
                     left: 5px;
-                    top: 30px;
+                    top: 50%;
                     width: 23px;
                     display: block;
                     z-index: 2;
@@ -294,7 +294,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
                         &:after {
                             left: auto;
                             right: 5px;
-                            top: 30px;
+                            top: 50%;
                         }
 
                         .connector {
@@ -415,7 +415,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
 
                 &:after {
                     left: 5px;
-                    top: 30px;
+                    top: 50%;
                 }
             }
         }

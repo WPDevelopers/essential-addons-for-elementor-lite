@@ -26,7 +26,7 @@
 .elementor-widget-eael-feature-list.-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after, .elementor-widget-eael-feature-list.-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
   left: auto;
   right: 5px;
-  top: 30px;
+  top: 50%;
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items {
   list-style-type: none;
@@ -154,7 +154,7 @@
   }
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before, .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
-  content: "";
+  content: '';
   position: absolute;
   display: block;
 }
@@ -168,7 +168,7 @@
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
   left: 5px;
-  top: 30px;
+  top: 50%;
   width: 23px;
   display: block;
   z-index: 2;
@@ -189,7 +189,7 @@
   .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern.-icon-position-right .eael-feature-list-item:after {
     left: auto;
     right: 5px;
-    top: 30px;
+    top: 50%;
   }
   .elementor-widget-eael-feature-list .eael-feature-list-items.connector-type-modern.-icon-position-right .eael-feature-list-item .connector {
     display: none;
@@ -270,7 +270,7 @@
   .eael-feature-list-item:after, .elementor-widget-eael-feature-list.-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern
   .eael-feature-list-item:after {
     left: 5px;
-    top: 30px;
+    top: 50%;
   }
   .elementor-widget-eael-feature-list.-icon-position-left.-tablet-icon-position-top .eael-feature-list-content-box, .elementor-widget-eael-feature-list.-icon-position-right.-tablet-icon-position-top .eael-feature-list-content-box, .elementor-widget-eael-feature-list.-icon-position-top.-tablet-icon-position-top .eael-feature-list-content-box {
     margin-left: 0 !important;

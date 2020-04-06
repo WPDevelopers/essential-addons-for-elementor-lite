@@ -30,6 +30,7 @@
   "dependencies": {
     "compass": "^0.1.1",
     "graceful-fs": "^4.2.2",
+    "gulp-cli": "^2.2.0",
     "minimatch": "^3.0.4",
     "natives": "^1.1.6",
     "ruby": "^0.6.1",
