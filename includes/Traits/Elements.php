@@ -45,7 +45,13 @@ trait Elements
             }
 
             if (isset($this->registered_elements[$active_element]['condition'])) {
-                if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
+                $check = false;
+
+                if(isset($this->registered_elements[$active_element]['condition'][2])) {
+                    $check = $this->registered_elements[$active_element]['condition'][2];
+                }
+
+                if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == $check) {
                     continue;
                 }
             }
