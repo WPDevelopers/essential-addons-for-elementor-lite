@@ -59,12 +59,17 @@
     .fsProgress {
         display: none;
     }
-    #fsReferralBadge {
+    #fsReferralBadge,
+    .reportAbuse {
         display: none !important;
     }
     .fsProgressText {
         position: relative;
         bottom: 50%;
+    }
+    .fsRatingPipButton:hover ,
+    .fsRatingPipButton:focus {
+        background: none !important;
     }
 }
 
@@ -119,3 +124,4 @@
         display: inline-block !important;
     }
 }
+

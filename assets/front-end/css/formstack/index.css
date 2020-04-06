@@ -47,12 +47,17 @@
 .eael-formstack .fsProgress {
   display: none;
 }
-.eael-formstack #fsReferralBadge {
+.eael-formstack #fsReferralBadge,
+.eael-formstack .reportAbuse {
   display: none !important;
 }
 .eael-formstack .fsProgressText {
   position: relative;
   bottom: 50%;
+}
+.eael-formstack .fsRatingPipButton:hover,
+.eael-formstack .fsRatingPipButton:focus {
+  background: none !important;
 }
 
 .eael-formstack-section-break-content-center .fsSectionHeader .fsSectionHeading,
