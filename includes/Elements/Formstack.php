@@ -25,7 +25,7 @@ class Formstack extends Widget_Base {
     }
 
     public function get_title () {
-        return __('EA Formstack', 'essential-addons-for-elementor-lite');
+        return __('Formstack', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories () {
