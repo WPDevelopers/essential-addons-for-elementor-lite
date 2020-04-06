@@ -621,8 +621,20 @@ class Formstack extends Widget_Base {
         $this->start_controls_section(
             'eael_formstack_section_break_style',
             [
-                'label' => __('Section Break Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Section Heading Style', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_section_break_background_color',
+            [
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsSectionHeader' => 'background: {{VALUE}};',
+                ],
             ]
         );
 
@@ -754,6 +766,7 @@ class Formstack extends Widget_Base {
                         'icon'  => 'eicon-h-align-right',
                     ],
                 ],
+                'default'      => 'center',
                 'prefix_class' => 'eael-formstack-section-break-content-'
             ]
         );
@@ -1249,6 +1262,84 @@ class Formstack extends Widget_Base {
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Rating
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_formstack_section_rating_style',
+            [
+                'label' => __('Rating', 'essential-addons-for-elementor-lite'),
+                'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'eael_formstack_rating_size',
+            [
+                'label'      => __('Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1200,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-formstack .fsRatingFieldContainer .fsRatingPipButton .fsRatingShape .phx-Icon' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}}',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_formstack_rating_bg_color',
+            [
+                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#1c2f3a',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-formstack .fsRatingShape .phx-Icon' => 'fill: {{VALUE}} !important;',
+                ],
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'eael_formstack_rating_padding',
+            [
+                'label'      => __('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-formstack .fsRatingFieldContainer' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_formstack_rating_margin',
+            [
+                'label'      => __('Margin Top', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-formstack .fsRatingFieldContainer' => 'margin-top: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
 
         $this->end_controls_section();
 
@@ -1905,7 +1996,7 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_validation_message_background_color',
             [
-                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fae9e9',
                 'selectors' => [
@@ -1920,9 +2011,9 @@ class Formstack extends Widget_Base {
         $this->add_control(
             'eael_formstack_validation_message_text_color',
             [
-                'label'     => __('Color', 'essential-addons-for-elementor-lite'),
+                'label'     => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#fae9e9',
+                'default'   => '#ce5f6d',
                 'selectors' => [
                     '{{WRAPPER}} .eael-formstack .fsValidationError .fsLabel, {{WRAPPER}} .eael-formstack .fsValidationError .fsRequiredLabel, {{WRAPPER}} .eael-formstack .fsValidationError .fsRequiredMarker ' => 'color: {{VALUE}} !important;',
                 ],
