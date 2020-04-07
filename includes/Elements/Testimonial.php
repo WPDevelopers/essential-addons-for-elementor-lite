@@ -425,11 +425,11 @@ class Testimonial extends Widget_Base {
 
 		$this->end_controls_section();
 
-
+		// color, Typography & Spacing
 		$this->start_controls_section(
 			'eael_section_testimonial_typography',
 			[
-				'label' => esc_html__( 'Color &amp; Typography', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color, Typography &amp; Spacing', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -463,6 +463,18 @@ class Testimonial extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_testimonial_name_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-user' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_testimonial_company_heading',
 			[
 				'label' 	=> __( 'Company Name', 'essential-addons-for-elementor-lite'),
@@ -492,6 +504,18 @@ class Testimonial extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_testimonial_company_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-user-company' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_testimonial_description_heading',
 			[
 				'label' => __( 'Testimonial Text', 'essential-addons-for-elementor-lite'),
@@ -515,8 +539,53 @@ class Testimonial extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-             'name' => 'eael_testimonial_description_typography',
+             	'name' => 'eael_testimonial_description_typography',
 				'selector' => '{{WRAPPER}} .eael-testimonial-content .eael-testimonial-text',
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_description_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_rating_heading',
+			[
+				'label' => __( 'Rating', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::HEADING,
+				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_rating_item_distance',
+			[
+				'label' => esc_html__( 'Distance Between Rating Item', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating li' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_rating_margin',
+			[
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
