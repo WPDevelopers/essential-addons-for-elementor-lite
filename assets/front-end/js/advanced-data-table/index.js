@@ -79,58 +79,11 @@ var Advanced_Data_Table = function ($scope, $) {
 	var classCollection = {};
 
 	if (isEditMode) {
-		var attr = "readonly";
+		table.querySelectorAll("th, td").forEach(function (el) {
+			var value = el.innerHTML;
 
-		if (table.classList.contains("ea-advanced-data-table-static")) {
-			attr = "";
-
-			// insert editable area
-			table.querySelectorAll("th, td").forEach(function (el) {
-				var value = el.innerHTML;
-
-				// if (value.indexOf('<div class="inline-edit">') !== 0) {
-				// el.innerHTML = '<textarea rows="1" ' + attr + ">" + value + "</textarea>";
-				// el.innerHTML = '<div class="inline-edit">' + 'Hello' + "</div>";
-				// }
-
-				if (!el.classList.contains("inline-edit")) {
-					el.classList.add("inline-edit");
-				}
-			});
-
-			tinymce.init({
-				selector: ".inline-edit",
-				menubar: false,
-				inline: true,
-				plugins: ["lists", "link", "autolink"],
-				toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
-			});
-		}
-
-		// drag
-		table.addEventListener("mousedown", function (e) {
-			e.stopPropagation();
-
-			if (e.target.classList.contains("inline-edit")) {
-				jQuery(e.target).triggerHandler("click");
-			}
-
-			if (e.target.tagName.toLowerCase() === "th") {
-				advanced_data_table_dragging = true;
-				advanced_data_table_drag_el = e.target;
-				advanced_data_table_drag_start_x = e.pageX;
-				advanced_data_table_drag_start_width = e.target.offsetWidth;
-			}
-		});
-
-		document.addEventListener("mousemove", function (e) {
-			if (advanced_data_table_dragging) {
-				advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
-			}
-		});
-		document.addEventListener("mouseup", function (e) {
-			if (advanced_data_table_dragging) {
-				advanced_data_table_dragging = false;
+			if (value.indexOf('<div class="inline-edit">') !== 0) {
+				el.innerHTML = '<div class="inline-edit">' + value + "</div>";
 			}
 		});
 	} else {
@@ -399,6 +352,198 @@ var Advanced_Data_Table = function ($scope, $) {
 	}
 };
 
+// Inline edit
+var Advanced_Data_Table_Inline_Edit = function (panel, model, view) {
+	var localRender = function () {
+		var interval = setInterval(function () {
+			if (view.el.querySelector(".ea-advanced-data-table")) {
+				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
+
+				if (table.classList.contains("ea-advanced-data-table-editable")) {
+					// init tinymce
+					tinymce.init({
+						selector: ".inline-edit",
+						menubar: false,
+						inline: true,
+						plugins: ["lists", "link", "autolink"],
+						toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
+						forced_root_block: false,
+					});
+				}
+
+				// drag
+				table.addEventListener("mousedown", function (e) {
+					e.stopPropagation();
+
+					console.log("mos");
+
+					if (e.target.tagName.toLowerCase() === "th") {
+						advanced_data_table_dragging = true;
+						advanced_data_table_drag_el = e.target;
+						advanced_data_table_drag_start_x = e.pageX;
+						advanced_data_table_drag_start_width = e.target.offsetWidth;
+					}
+
+					if (e.target.tagName.toLowerCase() === "th" || e.target.tagName.toLowerCase() === "td") {
+						advanced_data_table_active_cell = e.target;
+					} else if (e.target.parentNode.tagName.toLowerCase() === "th" || e.target.parentNode.tagName.toLowerCase() === "td") {
+						advanced_data_table_active_cell = e.target.parentNode;
+					} else if (e.target.parentNode.parentNode.tagName.toLowerCase() === "th" || e.target.parentNode.parentNode.tagName.toLowerCase() === "td") {
+						advanced_data_table_active_cell = e.target.parentNode.parentNode;
+					}
+				});
+
+				table.addEventListener("mousemove", function (e) {
+					if (advanced_data_table_dragging) {
+						advanced_data_table_drag_el.style.width = advanced_data_table_drag_start_width + (event.pageX - advanced_data_table_drag_start_x) + "px";
+					}
+				});
+
+				table.addEventListener("mouseup", function (e) {
+					if (advanced_data_table_dragging) {
+						advanced_data_table_dragging = false;
+
+						clearTimeout(advanced_data_table_timeout);
+
+						if (table.classList.contains("ea-advanced-data-table-static")) {
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function (el) {
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML,
+							});
+						} else {
+							// th width store
+							var widths = [];
+
+							// collect width of th
+							table.querySelectorAll("th").forEach(function (el, index) {
+								widths[index] = el.style.width;
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_dynamic_th_width: widths,
+							});
+						}
+					}
+				});
+
+				table.addEventListener("input", function (e) {
+					if (table.classList.contains("ea-advanced-data-table-static")) {
+						clearTimeout(advanced_data_table_timeout);
+
+						// clone current table
+						var origTable = table.cloneNode(true);
+
+						// remove editable area
+						origTable.querySelectorAll("th, td").forEach(function (el) {
+							el.removeAttribute("id");
+							el.removeAttribute("class");
+							el.removeAttribute("contenteditable");
+							el.removeAttribute("spellcheck");
+						});
+
+						// update table
+						Advanced_Data_Table_Update_View(view, false, {
+							ea_adv_data_table_static_html: origTable.innerHTML,
+						});
+					}
+				});
+
+				// clear style
+				table.addEventListener("dblclick", function (e) {
+					if (e.target.tagName.toLowerCase() === "th") {
+						e.stopPropagation();
+
+						clearTimeout(advanced_data_table_timeout);
+
+						if (table.classList.contains("ea-advanced-data-table-static")) {
+							// clone current table
+							var origTable = table.cloneNode(true);
+
+							// remove editable area
+							origTable.querySelectorAll("th, td").forEach(function (el) {
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_static_html: origTable.innerHTML,
+							});
+						} else {
+							// th width store
+							var widths = [];
+
+							// collect width of th
+							table.querySelectorAll("th").forEach(function (el, index) {
+								widths[index] = el.style.width;
+							});
+
+							// update table
+							Advanced_Data_Table_Update_View(view, false, {
+								ea_adv_data_table_dynamic_th_width: widths,
+							});
+						}
+					}
+				});
+
+				clearInterval(interval);
+			}
+		}, 10);
+	};
+
+	// init
+	localRender();
+
+	// after render
+	model.on("remote:render", function () {
+		localRender();
+	});
+
+	// export import handler
+	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
+
+	panel.el.addEventListener("click", handler);
+
+	panel.currentPageView.on("destroy", function () {
+		panel.el.removeEventListener("click", handler);
+	});
+
+	// fill remote db list
+	var initRemoteTables = function () {
+		setTimeout(function () {
+			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+
+			if (select != null && select.length == 0) {
+				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function (opt, index) {
+					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+				});
+			}
+		}, 50);
+	};
+
+	initRemoteTables();
+
+	panel.el.addEventListener("mousedown", function (e) {
+		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
+			initRemoteTables();
+		}
+	});
+};
+
 var Advanced_Data_Table_Click_Handler = function (panel, model, view) {
 	if (event.target.dataset.event == "ea:advTable:export") {
 		// export
@@ -413,14 +558,7 @@ var Advanced_Data_Table_Click_Handler = function (panel, model, view) {
 
 			if (table.classList.contains("ea-advanced-data-table-static")) {
 				for (var j = 0; j < cols.length; j++) {
-					row.push(
-						JSON.stringify(
-							cols[j]
-								.querySelector("textarea")
-								.value.replace(/(\r\n|\n|\r)/gm, " ")
-								.trim()
-						)
-					);
+					row.push(JSON.stringify(cols[j].innerHTML.trim()));
 				}
 			} else {
 				for (var j = 0; j < cols.length; j++) {
@@ -549,127 +687,6 @@ var Advanced_Data_Table_Click_Handler = function (panel, model, view) {
 	}
 };
 
-// Inline edit
-var Advanced_Data_Table_Inline_Edit = function (panel, model, view) {
-	var localRender = function () {
-		var interval = setInterval(function () {
-			if (view.el.querySelector(".ea-advanced-data-table")) {
-				var table = view.el.querySelector(".ea-advanced-data-table-" + model.attributes.id);
-
-				table.addEventListener("focusin", function (e) {
-					if (e.target.tagName.toLowerCase() == "textarea") {
-						advanced_data_table_active_cell = e.target;
-					}
-				});
-
-				table.addEventListener("input", function (e) {
-					if (e.target.tagName.toLowerCase() == "textarea") {
-						clearTimeout(advanced_data_table_timeout);
-
-						// clone current table
-						var origTable = table.cloneNode(true);
-
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach(function (el) {
-							var value = el.querySelector("textarea").value;
-							el.innerHTML = value;
-						});
-
-						// update table
-						Advanced_Data_Table_Update_View(view, false, {
-							ea_adv_data_table_static_html: origTable.innerHTML,
-						});
-					}
-				});
-
-				// drag
-				table.addEventListener("mouseup", function (e) {
-					clearTimeout(advanced_data_table_timeout);
-
-					if (e.target.tagName.toLowerCase() === "th") {
-						if (table.classList.contains("ea-advanced-data-table-static")) {
-							// clone current table
-							var origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
-							});
-
-							// update table
-							Advanced_Data_Table_Update_View(view, false, {
-								ea_adv_data_table_static_html: origTable.innerHTML,
-							});
-						} else {
-							var widths = [];
-
-							// collect width of th
-							table.querySelectorAll("th").forEach(function (el, index) {
-								widths[index] = el.style.width;
-							});
-
-							// update table
-							Advanced_Data_Table_Update_View(view, false, {
-								ea_adv_data_table_dynamic_th_width: widths,
-							});
-						}
-					}
-				});
-
-				// clear style
-				table.addEventListener("dblclick", function (e) {
-					if (e.target.tagName.toLowerCase() === "th") {
-						e.stopPropagation();
-
-						e.target.style.width = "";
-					}
-				});
-
-				clearInterval(interval);
-			}
-		}, 10);
-	};
-
-	// init
-	localRender();
-
-	// after render
-	model.on("remote:render", function () {
-		localRender();
-	});
-
-	// export import handler
-	var handler = Advanced_Data_Table_Click_Handler.bind(this, panel, model, view);
-
-	panel.el.addEventListener("click", handler);
-
-	panel.currentPageView.on("destroy", function () {
-		panel.el.removeEventListener("click", handler);
-	});
-
-	// fill remote db list
-	var initRemoteTables = function () {
-		setTimeout(function () {
-			var select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
-
-			if (select != null && select.length == 0) {
-				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach(function (opt, index) {
-					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
-				});
-			}
-		}, 50);
-	};
-
-	initRemoteTables();
-
-	panel.el.addEventListener("mousedown", function (e) {
-		if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
-			initRemoteTables();
-		}
-	});
-};
-
 Advanced_Data_Table_Context_Menu = function (groups, element) {
 	if (
 		element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
@@ -684,24 +701,36 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 					callback: function () {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
-						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.parentNode.tagName.toLowerCase() != "th") {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+						if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.tagName.toLowerCase() != "th") {
+							var index = advanced_data_table_active_cell.parentNode.rowIndex;
 							var row = table.insertRow(index);
 
 							for (var i = 0; i < table.rows[0].cells.length; i++) {
 								var cell = row.insertCell(i);
-								cell.innerHTML = '<textarea rows="1"></textarea>';
+								cell.classList.add("inline-edit");
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// reinit tinymce
+							tinymce.init({
+								selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
+								menubar: false,
+								inline: true,
+								plugins: ["lists", "link", "autolink"],
+								toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
+								forced_root_block: false,
+							});
 
 							// clone current table
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
 							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
 							});
 
 							// update model
@@ -718,23 +747,35 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex + 1;
+							var index = advanced_data_table_active_cell.parentNode.rowIndex + 1;
 							var row = table.insertRow(index);
 
 							for (var i = 0; i < table.rows[0].cells.length; i++) {
 								var cell = row.insertCell(i);
-								cell.innerHTML = '<textarea rows="1"></textarea>';
+								cell.classList.add("inline-edit");
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// reinit tinymce
+							tinymce.init({
+								selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
+								menubar: false,
+								inline: true,
+								plugins: ["lists", "link", "autolink"],
+								toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
+								forced_root_block: false,
+							});
 
 							// clone current table
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
 							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
 							});
 
 							// update model
@@ -751,7 +792,7 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+							var index = advanced_data_table_active_cell.cellIndex;
 
 							for (var i = 0; i < table.rows.length; i++) {
 								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
@@ -760,18 +801,30 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 									var cell = table.rows[i].insertCell(index);
 								}
 
-								cell.innerHTML = '<textarea rows="1"></textarea>';
+								cell.classList.add("inline-edit");
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// reinit tinymce
+							tinymce.init({
+								selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
+								menubar: false,
+								inline: true,
+								plugins: ["lists", "link", "autolink"],
+								toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
+								forced_root_block: false,
+							});
 
 							// clone current table
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
 							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
 							});
 
 							// update model
@@ -788,7 +841,7 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex + 1;
+							var index = advanced_data_table_active_cell.cellIndex + 1;
 
 							for (var i = 0; i < table.rows.length; i++) {
 								if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
@@ -797,18 +850,30 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 									var cell = table.rows[i].insertCell(index);
 								}
 
-								cell.innerHTML = '<textarea rows="1"></textarea>';
+								cell.classList.add("inline-edit");
 							}
 
 							advanced_data_table_active_cell = null;
+
+							// reinit tinymce
+							tinymce.init({
+								selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
+								menubar: false,
+								inline: true,
+								plugins: ["lists", "link", "autolink"],
+								toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
+								forced_root_block: false,
+							});
 
 							// clone current table
 							var origTable = table.cloneNode(true);
 
 							// remove editable area
 							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
 							});
 
 							// update model
@@ -825,7 +890,7 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.parentNode.rowIndex;
+							var index = advanced_data_table_active_cell.parentNode.rowIndex;
 
 							table.deleteRow(index);
 
@@ -836,8 +901,10 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 
 							// remove editable area
 							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
 							});
 
 							// update model
@@ -854,7 +921,7 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 						var table = document.querySelector(".ea-advanced-data-table-" + element.options.model.attributes.id);
 
 						if (advanced_data_table_active_cell !== null) {
-							var index = advanced_data_table_active_cell.parentNode.cellIndex;
+							var index = advanced_data_table_active_cell.cellIndex;
 
 							for (var i = 0; i < table.rows.length; i++) {
 								table.rows[i].deleteCell(index);
@@ -867,8 +934,10 @@ Advanced_Data_Table_Context_Menu = function (groups, element) {
 
 							// remove editable area
 							origTable.querySelectorAll("th, td").forEach(function (el) {
-								var value = el.querySelector("textarea").value;
-								el.innerHTML = value;
+								el.removeAttribute("id");
+								el.removeAttribute("class");
+								el.removeAttribute("contenteditable");
+								el.removeAttribute("spellcheck");
 							});
 
 							// update model

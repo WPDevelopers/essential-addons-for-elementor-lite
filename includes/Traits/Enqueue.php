@@ -122,11 +122,10 @@ trait Enqueue
                 EAEL_PLUGIN_VERSION
             );
 
-            // wp_enqueue_style('quill', 'https://cdn.quilljs.com/1.3.6/quill.snow.css');
-            wp_enqueue_script('wp-tinymce');
-            wp_enqueue_script('wp-tinymce-list', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.4/plugins/lists/plugin.min.js', ['wp-tinymce'], false, true);
-            wp_enqueue_script('wp-tinymce-link', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.4/plugins/link/plugin.min.js', ['wp-tinymce'], false, true);
-            wp_enqueue_script('wp-tinymce-autolink', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.4/plugins/autolink/plugin.min.js', ['wp-tinymce'], false, true);
+            wp_enqueue_script('tinymce', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/tinymce.min.js', false, true);
+            wp_enqueue_script('tinymce-list', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/plugins/lists/plugin.min.js', [], false, true);
+            wp_enqueue_script('tinymce-link', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/plugins/link/plugin.min.js', [], false, true);
+            wp_enqueue_script('tinymce-autolink', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/plugins/autolink/plugin.min.js', [], false, true);
 
             wp_enqueue_script(
                 'eael-backend',
