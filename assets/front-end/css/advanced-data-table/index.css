@@ -72,17 +72,6 @@
   border: none;
   cursor: col-resize;
 }
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th,
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td {
-  padding: 0;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th.inline-edit,
-.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable td.inline-edit {
-  background-color: transparent;
-  box-shadow: none;
-  outline: none;
-  padding: 5px;
-}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
   display: table-row;
 }

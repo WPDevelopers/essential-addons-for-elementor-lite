@@ -371,7 +371,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name'     => 'ea_adv_data_table_head_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} th textarea, {{WRAPPER}} th',
+                'selector' => '{{WRAPPER}} th',
             ]
         );
 
@@ -396,7 +396,6 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'default'   => 'left',
                 'selectors' => [
-                    '{{WRAPPER}} th textarea' => 'text-align: {{VALUE}};',
                     '{{WRAPPER}} th'          => 'text-align: {{VALUE}};',
                 ],
             ]
@@ -409,7 +408,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#444444',
                 'selectors' => [
-                    '{{WRAPPER}} th textarea' => 'color: {{VALUE}};',
                     '{{WRAPPER}} th'          => 'color: {{VALUE}};',
                     '{{WRAPPER}} th:before'   => 'border-bottom-color: {{VALUE}};',
                     '{{WRAPPER}} th:after'    => 'border-top-color: {{VALUE}};',
@@ -471,9 +469,7 @@ class Advanced_Data_Table extends Widget_Base
                     'isLinked' => true,
                 ],
                 'selectors'       => [
-                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-editable) th'                               => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable:not(.ea-advanced-data-table-static) th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable th textarea'                            => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table th' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -493,7 +489,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name'     => 'ea_adv_data_table_body_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} td textarea, {{WRAPPER}} td',
+                'selector' => '{{WRAPPER}} td',
             ]
         );
 
@@ -518,7 +514,6 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'default'   => 'left',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea' => 'text-align: {{VALUE}};',
                     '{{WRAPPER}} td'          => 'text-align: {{VALUE}};',
                 ],
             ]
@@ -531,7 +526,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#666666',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea' => 'color: {{VALUE}};',
                     '{{WRAPPER}} td'          => 'color: {{VALUE}};',
                 ],
             ]
@@ -544,7 +538,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea a' => 'color: {{VALUE}};',
                     '{{WRAPPER}} td a'          => 'color: {{VALUE}};',
                 ],
             ]
@@ -557,7 +550,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea a:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} td a:hover'          => 'color: {{VALUE}};',
                 ],
             ]
@@ -629,7 +621,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:first-child'          => 'color: {{VALUE}}',
-                    '{{WRAPPER}} tbody td:first-child textarea' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'f-col',
@@ -645,7 +636,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:first-child'          => 'background-color: {{VALUE}} !important',
-                    '{{WRAPPER}} tbody td:first-child textarea' => 'background-color: {{VALUE}} !important',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'f-col',
@@ -662,7 +652,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:last-child'          => 'color: {{VALUE}}',
-                    '{{WRAPPER}} tbody td:last-child textarea' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'l-col',
@@ -678,7 +667,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:last-child'          => 'background-color: {{VALUE}} !important',
-                    '{{WRAPPER}} tbody td:last-child textarea' => 'background-color: {{VALUE}} !important',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'l-col',
@@ -695,7 +683,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(even)'          => 'color: {{VALUE}}',
-                    '{{WRAPPER}} tbody td:nth-child(even) textarea' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'e-col',
@@ -711,7 +698,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(even)'          => 'background-color: {{VALUE}} !important',
-                    '{{WRAPPER}} tbody td:nth-child(even) textarea' => 'background-color: {{VALUE}} !important',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'e-col',
@@ -728,7 +714,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(odd)'          => 'color: {{VALUE}}',
-                    '{{WRAPPER}} tbody td:nth-child(odd) textarea' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'o-col',
@@ -744,7 +729,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody td:nth-child(odd)'          => 'background-color: {{VALUE}} !important',
-                    '{{WRAPPER}} tbody td:nth-child(odd) textarea' => 'background-color: {{VALUE}} !important',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'o-col',
@@ -761,7 +745,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(even)'          => 'color: {{VALUE}}',
-                    '{{WRAPPER}} tbody tr:nth-child(even) textarea' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'e-row',
@@ -777,7 +760,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(even)'          => 'background-color: {{VALUE}} !important',
-                    '{{WRAPPER}} tbody tr:nth-child(even) textarea' => 'background-color: {{VALUE}} !important',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'e-row',
@@ -794,7 +776,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(odd)'          => 'color: {{VALUE}}',
-                    '{{WRAPPER}} tbody tr:nth-child(odd) textarea' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'o-row',
@@ -810,7 +791,6 @@ class Advanced_Data_Table extends Widget_Base
                 'default'   => '#fbfbfb',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(odd)'          => 'background-color: {{VALUE}} !important',
-                    '{{WRAPPER}} tbody tr:nth-child(odd) textarea' => 'background-color: {{VALUE}} !important',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'o-row',
@@ -833,9 +813,7 @@ class Advanced_Data_Table extends Widget_Base
                     'isLinked' => true,
                 ],
                 'selectors'       => [
-                    '{{WRAPPER}} .ea-advanced-data-table:not(.ea-advanced-data-table-editable) td'                               => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable:not(.ea-advanced-data-table-static) td' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table.ea-advanced-data-table-editable td textarea'                            => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1326,7 +1304,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name'     => 'ea_adv_data_table_button_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} td textarea button, {{WRAPPER}} td button, {{WRAPPER}} td .button',
+                'selector' => '{{WRAPPER}} td button, {{WRAPPER}} td .button',
             ]
         );
 
@@ -1341,7 +1319,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea button' => 'color: {{VALUE}};',
                     '{{WRAPPER}} td button'          => 'color: {{VALUE}};',
                     '{{WRAPPER}} td .button'         => 'color: {{VALUE}};',
                 ],
@@ -1355,7 +1332,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea button' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} td button'          => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} td .button'         => 'background-color: {{VALUE}};',
                 ],
@@ -1373,7 +1349,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea button:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} td button:hover'          => 'color: {{VALUE}};',
                     '{{WRAPPER}} td .button:hover'         => 'color: {{VALUE}};',
                 ],
@@ -1387,7 +1362,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} td textarea button:hover' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} td button:hover'          => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} td .button:hover'         => 'background-color: {{VALUE}};',
                 ],
@@ -1417,7 +1391,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '',
                     ],
                 ],
-                'selector'       => '{{WRAPPER}} td textarea button, {{WRAPPER}} td button, {{WRAPPER}} td .button',
+                'selector'       => '{{WRAPPER}} td button, {{WRAPPER}} td .button',
             ]
         );
 
@@ -1428,7 +1402,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors'  => [
-                    '{{WRAPPER}} td textarea button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} td button'          => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} td .button'         => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1440,7 +1413,7 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'name'     => 'ea_adv_data_table_button_box_shadow',
                 'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} td textarea button, {{WRAPPER}} td button, {{WRAPPER}} td .button',
+                'selector' => '{{WRAPPER}} td button, {{WRAPPER}} td .button',
             ]
         );
 
@@ -1451,7 +1424,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px'],
                 'selectors'  => [
-                    '{{WRAPPER}} td textarea button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} td button'          => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} td .button'         => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
