@@ -25,7 +25,7 @@ trait Post_Grid
 
                                 echo '<div class="eael-entry-media">';
                                     if($settings['eael_show_post_terms'] === 'yes') {                            
-                                        echo self::get_terms_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+                                        echo self::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
                                     }
 
                                     if ('none' !== $settings['eael_post_grid_hover_animation']) {
