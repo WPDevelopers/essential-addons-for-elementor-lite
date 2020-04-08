@@ -45,7 +45,13 @@ trait Elements
             }
 
             if (isset($this->registered_elements[$active_element]['condition'])) {
-                if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == false) {
+                $check = false;
+
+                if(isset($this->registered_elements[$active_element]['condition'][2])) {
+                    $check = $this->registered_elements[$active_element]['condition'][2];
+                }
+
+                if ($this->registered_elements[$active_element]['condition'][0]($this->registered_elements[$active_element]['condition'][1]) == $check) {
                     continue;
                 }
             }
@@ -335,7 +341,7 @@ trait Elements
                 $html .= $reading_progress_html;
             }
 
-            // Table of Content
+            // Table of Contents
             if ($this->get_settings('eael-table-of-content') == true) {
                 if ($page_settings_model->get_settings('eael_ext_table_of_content') == 'yes' || isset($global_settings['eael_ext_table_of_content']['enabled'])) {
                     add_filter('eael/section/after_render', function ($extensions) {
@@ -365,11 +371,14 @@ trait Elements
                     $toc_title = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_title');
                     $icon_check = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_header_icon');
                     $sticky_scroll = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_sticky_scroll');
+                    $hide_mobile = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_hide_in_mobile');
 
                     $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                     $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
                     $el_class .= ($auto_collapse == 'yes') ? ' eael-toc-auto-collapse' : ' ';
                     $el_class .= ($box_shadow == 'yes') ? ' eael-box-shadow' : ' ';
+                    $el_class .= ($hide_mobile == 'yes') ? ' eael-toc-mobile-hide' : ' ';
+
                     $toc_style_class = ' eael-toc-list-' . $toc_style;
                     $toc_style_class .= ($toc_collapse == 'yes') ? ' eael-toc-collapse' : ' ';
                     $toc_style_class .= ($list_icon == 'number') ? ' eael-toc-number' : ' eael-toc-bullet';
