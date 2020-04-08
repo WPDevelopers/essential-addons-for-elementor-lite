@@ -408,6 +408,17 @@ class Adv_Accordion extends Widget_Base
             ]
         );
         
+        $this->add_responsive_control(
+            'eael_adv_accordion_tab_distance',
+            [
+                'label' => esc_html__('Distance', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->add_responsive_control(
             'eael_adv_accordion_tab_padding',
