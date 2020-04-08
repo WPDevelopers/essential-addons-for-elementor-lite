@@ -206,4 +206,11 @@ trait Elements
             echo $html;
         }
     }
+
+    /**
+     * Register WC Hooks
+     */
+    public function register_wc_hooks() {
+        wc()->frontend_includes();
+    }
 }
