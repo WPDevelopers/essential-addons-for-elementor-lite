@@ -791,6 +791,34 @@ class Woo_Checkout extends Widget_Base
             ]
         );
 
+        // Privacy Policy
+        $this->add_control(
+            'ea_woo_checkout_privacy_policy',
+            [
+                'label' => __( 'Privacy Policy', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_control(
+            'ea_woo_checkout_privacy_policy_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#b8b6ca',
+                'selectors' => [
+                    '{{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'ea_woo_checkout_privacy_policy_typo',
+                'selector' => '{{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text',
+            ]
+        );
+
         // Button
         $this->add_control(
             'ea_woo_checkout_payment_button',
