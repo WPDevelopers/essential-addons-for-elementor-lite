@@ -60,6 +60,13 @@ class FluentForm extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/fluent-form/';
     }
 
+    public function get_style_depends() {
+		return [
+            'fluent-form-styles',
+            'fluentform-public-default'
+        ];
+	}
+
     protected function _register_controls()
     {
         /*-----------------------------------------------------------------------------------*/
