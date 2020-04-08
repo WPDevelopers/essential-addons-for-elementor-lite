@@ -207,6 +207,9 @@
 			}
 		}
 	}
+	.eael-event-completed {
+		text-decoration: line-through;
+	}
 
 }
 
@@ -517,6 +520,12 @@ span.fc-day-number {
 
 // For mobile
 @media only screen and (max-width: 767px) {
+	.eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event {
+		.fc-content {
+			font-size: 12px;
+		}
+		padding: 8px 0px 8px 0px !important;
+	}
 	.fc-right, .fc-left {
 		width: 100%;
 		text-align: center;

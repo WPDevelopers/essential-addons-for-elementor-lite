@@ -170,6 +170,9 @@
 .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-left .fc-button .fc-icon {
   font-size: 13px;
 }
+.eael-event-calendar-wrapper .eael-event-completed {
+  text-decoration: line-through;
+}
 
 .fc-toolbar.fc-header-toolbar .fc-button-group button:not(:first-child) {
   margin-left: 5px;
@@ -382,6 +385,13 @@ span.fc-day-number {
   }
 }
 @media only screen and (max-width: 767px) {
+  .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event {
+    padding: 8px 0px 8px 0px !important;
+  }
+  .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event .fc-content {
+    font-size: 12px;
+  }
+
   .fc-right, .fc-left {
     width: 100%;
     text-align: center;

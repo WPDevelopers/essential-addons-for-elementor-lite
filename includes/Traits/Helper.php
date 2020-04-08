@@ -2157,7 +2157,7 @@ trait Helper
         if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
             return $page_settings_model->get_settings($key);
         } else if (isset($global_settings[$extension]['enabled'])) {
-            return $global_settings[$extension][$key];
+            return isset($global_settings[$extension][$key])?$global_settings[$extension][$key]:'';
         }
 
         return '';

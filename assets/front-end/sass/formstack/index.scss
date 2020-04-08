@@ -1,0 +1,127 @@
+.eael-formstack {
+    .fsForm {
+        padding: 0 !important;
+        .fsCell {
+            padding: 0 !important;
+        }
+        &.fsMaxCol1 {
+            width: inherit !important;
+        }
+    }
+
+    input {
+        font-size: inherit;
+        line-height: initial;
+    }
+
+    .vertical {
+        display: inherit;
+        border-left: none;
+        height: auto;
+    }
+    &.eael-formstack-form-labels-hide {
+        .fsLabel {
+            display: none !important;
+        }
+    }
+    &.eael-formstack-validation-message-hide {
+        .fsError {
+            display: none;
+        }
+    }
+
+    &.eael-formstack-error-message-hide {
+        .fsValidationError {
+            background: unset !important;
+            box-shadow: none !important;
+            color: #595d64;
+            .fsRequiredLabel {
+                color: #595d64 !important;
+            }
+        }
+    }
+    &.eael-formstack-form-align-center {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &.eael-formstack-form-align-left {
+        float: left;
+    }
+    &.eael-formstack-form-align-right {
+        float: right;
+    }
+
+    .fsRowBody .fsOptionLabel input[type=checkbox]:checked:before {
+        background-color: #595d64 !important;
+    }
+
+    .fsProgress {
+        display: none;
+    }
+    #fsReferralBadge,
+    .reportAbuse {
+        display: none !important;
+    }
+    .fsProgressText {
+        position: relative;
+        bottom: 50%;
+    }
+    .fsRatingPipButton:hover ,
+    .fsRatingPipButton:focus {
+        background: none !important;
+    }
+}
+
+.eael-formstack-section-break-content-center {
+    .fsSectionHeader {
+        .fsSectionHeading ,
+        .fsSectionText {
+            text-align: center;
+        }
+    }
+}
+
+.eael-formstack-section-break-content-left {
+    .fsSectionHeader {
+        .fsSectionHeading ,
+        .fsSectionText {
+            text-align: left !important;
+        }
+    }
+}
+
+.eael-formstack-section-break-content-right {
+    .fsSectionHeader {
+        .fsSectionHeading ,
+        .fsSectionText {
+            text-align: right !important;
+        }
+    }
+}
+
+.eael-formstack-form-button-full-width .fsSubmit .fsSubmitButton {
+    width: 100%;
+    display: block;
+}
+
+.eael-formstack-form-button-center .fsSubmit .fsSubmitButton {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eael-formstack-form-button-right .fsSubmit .fsSubmitButton {
+    float: right;
+}
+
+.eael-formstack-form-button-left .fsSubmit .fsSubmitButton {
+    float: left;
+}
+.eael-formstack-progressbar-yes {
+    .fsProgress {
+        display: inline-block !important;
+    }
+}
+
