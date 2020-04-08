@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use Essential_Addons_Elementor\Classes\WPDeveloper_Dashboard_Widget;
+
 class Bootstrap
 {
     use \Essential_Addons_Elementor\Traits\Library;
@@ -140,6 +142,9 @@ class Bootstrap
                 // TODO: you have to call admin_notice for pro also.
             }
             $this->admin_notice(); // this line of code
+
+            // dashboard feed
+            WPDeveloper_Dashboard_Widget::instance();
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
