@@ -85,7 +85,6 @@ trait Order_Review {
                         <?php
                             WC()->cart->calculate_totals();
                             wc_cart_totals_shipping_html();
-
                         ?>
                         </div>
                         <?php do_action( 'woocommerce_review_order_after_shipping' ); ?>

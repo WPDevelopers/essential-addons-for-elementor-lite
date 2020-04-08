@@ -964,6 +964,12 @@ class Woo_Checkout extends Widget_Base
 
     protected function render()
     {
+        if( is_null( WC()->cart ) ) {
+            include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+            include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+            wc_load_cart();
+        }
+
         $settings = $this->get_settings();
 
         $this->add_render_attribute( 'container', 'class', [
