@@ -236,7 +236,11 @@ $base-font-size: 14px;
 				margin: 0;
 				padding: 13px 15%;
 				border: none;
-				text-transform: capitalize;
+				text-transform: capitalize!important;
+
+				&:hover {
+					text-decoration: none;
+				}
 			}
 		}
 
@@ -248,9 +252,34 @@ $base-font-size: 14px;
 			line-height: 1.5em;
 			font-weight: 400;
 			margin-bottom: 30px;
+			position: relative;
+			display: block;
+
+			.ea-login-icon {
+				width: 25px;
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				font-size: 25px;
+
+				i, svg {
+					width: 1em;
+					height: 1em;
+					position: relative;
+					display: block;
+				}
+			}
 
 			.form-row-first {
 				width: 48.5%;
+				float: left!important;
+			}
+			.form-row-last {
+				float: right!important;
+			}
+
+			.clear {
+				clear: both;
 			}
 
 			.woocommerce-form-login {
@@ -266,12 +295,10 @@ $base-font-size: 14px;
 				line-height: 1.5em;
 				font-weight: inherit;
 				margin-bottom: 0;
+				display: block;
 
 				&::before {
-					font-family: 'FontAwesome';
-					content: "\f2c0";
-					top: 0;
-					left: 0;
+					content: none;
 				}
 
 				a {
@@ -294,6 +321,7 @@ $base-font-size: 14px;
 			font-weight: 400;
 			margin-bottom: 30px;
 			position: relative;
+			display: block;
 
 			.ea-coupon-icon {
 				width: 25px;
@@ -318,7 +346,7 @@ $base-font-size: 14px;
 				margin: 15px 0 0!important;
 
 				.form-row-first {
-					width: 80%;
+					width: 78%;
 
 					input {
 						border-radius: 5px;
@@ -332,7 +360,7 @@ $base-font-size: 14px;
 					}
 				}
 				.form-row-last {
-					width: 18%;
+					width: 20%;
 					margin-left: 2%;
 				}
 
@@ -406,9 +434,13 @@ $base-font-size: 14px;
 
 			.col-1 {
 				padding-left: 0;
+				float: left;
+				width: 48%;
 			}
 			.col-2 {
 				padding-right: 0;
+				float: right;
+				width: 48%;
 			}
 
 			#ship-to-different-address label {

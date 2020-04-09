@@ -197,7 +197,10 @@
   margin: 0;
   padding: 13px 15%;
   border: none;
-  text-transform: capitalize;
+  text-transform: capitalize !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .button:hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover {
+  text-decoration: none;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login {
   border-radius: 5px;
@@ -207,9 +210,31 @@
   line-height: 1.5em;
   font-weight: 400;
   margin-bottom: 30px;
+  position: relative;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon {
+  width: 25px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 25px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i, .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  display: block;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .form-row-first {
   width: 48.5%;
+  float: left !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .form-row-last {
+  float: right !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .clear {
+  clear: both;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login {
   margin: 15px 0 0 !important;
@@ -223,12 +248,10 @@
   line-height: 1.5em;
   font-weight: inherit;
   margin-bottom: 0;
+  display: block;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info::before {
-  font-family: 'FontAwesome';
-  content: "\f2c0";
-  top: 0;
-  left: 0;
+  content: none;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info a {
   text-decoration: underline;
@@ -246,6 +269,7 @@
   font-weight: 400;
   margin-bottom: 30px;
   position: relative;
+  display: block;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon {
   width: 25px;
@@ -267,7 +291,7 @@
   margin: 15px 0 0 !important;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first {
-  width: 80%;
+  width: 78%;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first input {
   border-radius: 5px;
@@ -279,7 +303,7 @@
   outline-offset: 0;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
-  width: 18%;
+  width: 20%;
   margin-left: 2%;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .clear {
@@ -335,9 +359,13 @@
 }
 .ea-woo-checkout .woocommerce #customer_details .col-1 {
   padding-left: 0;
+  float: left;
+  width: 48%;
 }
 .ea-woo-checkout .woocommerce #customer_details .col-2 {
   padding-right: 0;
+  float: right;
+  width: 48%;
 }
 .ea-woo-checkout .woocommerce #customer_details #ship-to-different-address label {
   display: flex;
