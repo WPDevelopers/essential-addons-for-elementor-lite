@@ -12,6 +12,7 @@ trait Woo_Checkout_Default {
     use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Checkout_Coupon;
 
     public static function render_default_template_($checkout, $settings) {
+
         do_action('woocommerce_checkout_before_order_review_heading');
         ?>
         <h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
@@ -28,13 +29,13 @@ trait Woo_Checkout_Default {
         }
 
         // Login
-        self::checkout_login_template($settings);
+//        self::checkout_login_template($settings);
 
         // Coupon
-        self::checkout_coupon_template($settings);
+//        self::checkout_coupon_template($settings);
 
         ?>
-<!--        --><?php //do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
+        <?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
         <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
             <?php if ( $checkout->get_checkout_fields() ) : ?>
