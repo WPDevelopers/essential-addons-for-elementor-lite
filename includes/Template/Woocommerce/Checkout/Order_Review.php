@@ -61,7 +61,7 @@ trait Order_Review {
                 if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
                     <div class="back-to-shop">
                         <a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-                            <i class="fa fa-long-arrow-left"></i><?php echo $settings['ea_woo_checkout_shop_link_text']; ?>
+                            <i class="fas fa-long-arrow-alt-left"></i><?php echo $settings['ea_woo_checkout_shop_link_text']; ?>
                         </a>
                     </div>
                 <?php } ?>
