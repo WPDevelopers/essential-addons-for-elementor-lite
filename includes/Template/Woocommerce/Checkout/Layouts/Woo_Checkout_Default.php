@@ -16,7 +16,7 @@ trait Woo_Checkout_Default {
         ?>
         <h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
 
-        <div class="eael-order-review-wapper">
+        <div class="ea-woo-checkout-order-review">
             <?php self::order_review_template($settings); ?>
         </div>
 
@@ -31,7 +31,7 @@ trait Woo_Checkout_Default {
         self::checkout_login_template();
 
         // Coupon
-        self::checkout_coupon_template();
+        self::checkout_coupon_template($settings);
 
         ?>
 <!--        --><?php //do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
