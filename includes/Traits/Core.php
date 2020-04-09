@@ -218,6 +218,12 @@ trait Core
                 'eael_ext_table_of_content_close_button_bg' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
                 'eael_ext_table_of_content_close_button_text_color' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_text_color'),
                 'eael_ext_toc_close_button_text_style' => $page_settings_model->get_settings('eael_ext_toc_close_button_text_style'),
+                'eael_ext_table_of_content_close_button_icon_size' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_icon_size'),
+                'eael_ext_table_of_content_close_button_size' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_size'),
+                'eael_ext_table_of_content_close_button_line_height' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_line_height'),
+                'eael_ext_table_of_content_close_button_border_radius' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_border_radius'),
+                'eael_ext_table_of_content_close_button_box_shadow' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_box_shadow_box_shadow'),
+
 
                 //toc body setting
                 'eael_ext_table_of_content_body_bg' => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
