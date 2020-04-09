@@ -42,7 +42,7 @@ class WPDeveloper_Dashboard_Widget
      */
     public function add_dashboard_widgets()
     {
-        wp_add_dashboard_widget('wpdev_feed_widget', __('WPDeveloper Feed', 'wpdeveloper'), [$this, 'feed']);
+        wp_add_dashboard_widget('wpdev_feed_widget', __('WPDeveloper Feed', 'essential-addons-for-elementor-lite'), [$this, 'feed']);
     }
 
     /**
@@ -64,7 +64,7 @@ class WPDeveloper_Dashboard_Widget
         $rss = fetch_feed($url);
 
         if (is_wp_error($rss)) {
-            $output .= '<li>' . __('No items.', 'wpdeveloper') . '</li>';
+            $output .= '<li>' . __('No items.', 'essential-addons-for-elementor-lite') . '</li>';
         } else {
             // Figure out how many total items there are, but limit it to 5.
             $max = $rss->get_item_quantity($count);
@@ -74,13 +74,13 @@ class WPDeveloper_Dashboard_Widget
 
             foreach ($rss_items as $item) {
                 $output .= '<li>
-					<a href="' . esc_url($item->get_permalink()) . '" title="' . sprintf(__('Posted on %s', 'wpdeveloper'), $item->get_date('j F Y | g:i a')) . '">' . esc_html($item->get_title()) . '</a>
+					<a href="' . esc_url($item->get_permalink()) . '" title="' . sprintf(__('Posted on %s', 'essential-addons-for-elementor-lite'), $item->get_date('j F Y | g:i a')) . '">' . esc_html($item->get_title()) . '</a>
                 </li>';
             }
         }
 
         $output .= '</ul>';
-        $output .= '<p>' . __('Keep Your Eyes at', 'wpdeveloper') . ' <a href="https://wpdeveloper.net" target="_blank">WPDeveloper</a></p>';
+        $output .= '<p>' . __('Keep Your Eyes at', 'essential-addons-for-elementor-lite') . ' <a href="https://wpdeveloper.net" target="_blank">WPDeveloper</a></p>';
 
         echo $output;
     }
