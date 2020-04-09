@@ -2184,7 +2184,7 @@ trait Helper
         $top_position = $eael_toc['eael_ext_toc_box_list_top_position']['size'];
         $indicator_size = $eael_toc['eael_ext_toc_indicator_size']['size'];
         $indicator_position = $eael_toc['eael_ext_toc_indicator_position']['size'];
-
+        $close_bt_box_shadow = $eael_toc['eael_ext_table_of_content_close_button_box_shadow'];
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
             .eael-toc-global.collapsed .eael-toc-button
@@ -2213,10 +2213,16 @@ trait Helper
                 padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
             }
 
-            .eael-toc-global.eael-toc-close
+            .eael-toc-global .eael-toc-close
             {
-                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']};
-                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
+                font-size: {$eael_toc['eael_ext_table_of_content_close_button_icon_size']['size']}px !important;
+                height: {$eael_toc['eael_ext_table_of_content_close_button_size']['size']}px !important;
+                width: {$eael_toc['eael_ext_table_of_content_close_button_size']['size']}px !important;
+                line-height: {$eael_toc['eael_ext_table_of_content_close_button_line_height']['size']}px !important;
+                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']} !important;
+                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']} !important;
+                border-radius: {$eael_toc['eael_ext_table_of_content_close_button_border_radius']['size']}px !important;
+                box-shadow:{$close_bt_box_shadow['horizontal']}px {$close_bt_box_shadow['vertical']}px {$close_bt_box_shadow['blur']}px {$close_bt_box_shadow['spread']}px {$close_bt_box_shadow['color']} !important;
             }
 
             .eael-toc-global.eael-toc:not(.collapsed)

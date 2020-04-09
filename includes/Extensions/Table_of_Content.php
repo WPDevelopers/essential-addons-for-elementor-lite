@@ -551,6 +551,60 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_table_of_content_close_button_icon_size',
+            [
+                'label'      => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-close' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_table_of_content_close_button_size',
+            [
+                'label'      => __('Button Size', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-close' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_table_of_content_close_button_line_height',
+            [
+                'label'      => __('Line Height', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-close' => 'line-height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_table_of_content_close_button_bg',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
@@ -571,6 +625,33 @@ class Table_of_Content
                 'selectors' => [
                     '{{WRAPPER}} .eael-toc .eael-toc-close' => 'color: {{VALUE}}',
                 ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_table_of_content_close_button_border_radius',
+            [
+                'label'      => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ]
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-close' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $element->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'eael_ext_table_of_content_close_button_box_shadow',
+                'label'    => __('Box Shadow', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-toc .eael-toc-close',
             ]
         );
 
