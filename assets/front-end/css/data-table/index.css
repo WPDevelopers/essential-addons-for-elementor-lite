@@ -37,7 +37,7 @@ table.eael-data-table thead .sorting:after {
   font-weight: 700;
 }
 
-.eael-data-table-wrap .eael-data-tables_filter label input[type=search] {
+.eael-data-table-wrap .eael-data-tables_filter label input[type="search"] {
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0.09);
   outline: 0;
@@ -339,26 +339,61 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   .eael-dt-td-align-tablet-right .eael-data-table tbody tr td {
     text-align: right;
   }
+
+  .eael-dt-th-align-tablet-left .eael-data-table thead tr th {
+    text-align: left;
+  }
+  .eael-dt-th-align-tablet-left .eael-data-table .th-mobile-screen {
+    text-align: left;
+  }
+
+  .eael-dt-th-align-tablet-right .eael-data-table thead tr th {
+    text-align: right;
+    padding-right: 30px;
+  }
+  .eael-dt-th-align-tablet-right .eael-data-table .th-mobile-screen {
+    text-align: right;
+  }
+
+  .eael-dt-th-align-tablet-center .eael-data-table thead tr th {
+    text-align: center;
+  }
+  .eael-dt-th-align-tablet-center .eael-data-table .th-mobile-screen {
+    text-align: center;
+  }
 }
 @media (max-width: 767px) {
   .eael-dt-td-align-mobile-left .eael-data-table tbody tr td {
-    text-align: left;
-  }
-  .eael-dt-td-align-mobile-left .eael-data-table .th-mobile-screen {
     text-align: left;
   }
 
   .eael-dt-td-align-mobile-center .eael-data-table tbody tr td {
     text-align: center;
   }
-  .eael-dt-td-align-mobile-center .eael-data-table .th-mobile-screen {
-    text-align: center;
-  }
 
   .eael-dt-td-align-mobile-right .eael-data-table tbody tr td {
     text-align: right;
   }
-  .eael-dt-td-align-mobile-right .eael-data-table .th-mobile-screen {
+
+  .eael-dt-th-align-mobile-left .eael-data-table thead tr th {
+    text-align: left;
+  }
+  .eael-dt-th-align-mobile-left .eael-data-table .th-mobile-screen {
+    text-align: left;
+  }
+
+  .eael-dt-th-align-mobile-right .eael-data-table thead tr th {
     text-align: right;
+    padding-right: 30px;
+  }
+  .eael-dt-th-align-mobile-right .eael-data-table .th-mobile-screen {
+    text-align: right;
+  }
+
+  .eael-dt-th-align-mobile-center .eael-data-table thead tr th {
+    text-align: center;
+  }
+  .eael-dt-th-align-mobile-center .eael-data-table .th-mobile-screen {
+    text-align: center;
   }
 }
