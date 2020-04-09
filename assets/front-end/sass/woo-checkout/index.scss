@@ -34,15 +34,47 @@ $base-font-size: 14px;
 		}
 
 		// Section - Customer Details
-		#customer_details {
-			margin-bottom: 30px;
+		#customer_details.col2-set {
+			width: 100% !important;
+			padding: 0 !important;
+			float: none!important;
+			margin: 0 0 30px 0;
+
+			h3 {
+				border: none;
+				padding: 0;
+				font-size: 25px;
+			}
+
+			.col-1 {
+				padding-left: 0;
+				float: left!important;
+				width: 48%!important;
+			}
+			.col-2 {
+				padding-right: 0;
+				float: right!important;
+				width: 48% !important;
+			}
+
+			#ship-to-different-address label {
+				display: flex;
+				padding-top: 0;
+				padding-bottom: 0;
+
+				input {
+					align-self: start;
+					margin-top: 9px;
+					margin-right: 10px;
+				}
+			}
 		}
 
-		.woocommerce-checkout .woocommerce-NoticeGroup-checkout{
+		.woocommerce-checkout .woocommerce-NoticeGroup {
 			border-radius: 5px;
 			background-color: #FFF3F5;
 			color: #FF7E93;
-			padding: 30px;
+			padding: 20px;
 			font-size: 16px;
 			line-height: 1.5em;
 			font-weight: 400;
@@ -52,7 +84,7 @@ $base-font-size: 14px;
 				padding-left: 30px;
 				margin-bottom: 0;
 
-				::before {
+				&::before {
 					left: 0;
 					top: 04px;
 					font-size: 20px
@@ -256,11 +288,11 @@ $base-font-size: 14px;
 			display: block;
 
 			.ea-login-icon {
-				width: 25px;
+				width: 20px;
 				position: absolute;
 				top: 20px;
 				left: 20px;
-				font-size: 25px;
+				font-size: 20px;
 
 				i, svg {
 					width: 1em;
@@ -324,11 +356,11 @@ $base-font-size: 14px;
 			display: block;
 
 			.ea-coupon-icon {
-				width: 25px;
+				width: 20px;
 				position: absolute;
 				top: 20px;
 				left: 20px;
-				font-size: 25px;
+				font-size: 20px;
 
 				i, svg {
 					width: 1em;
@@ -344,9 +376,16 @@ $base-font-size: 14px;
 
 			.checkout_coupon {
 				margin: 15px 0 0!important;
+				padding: 0;
+				width: 100%;
+
+				p:first-child {
+					margin: 0 0 20px 0;
+				}
 
 				.form-row-first {
 					width: 78%;
+					float: left;
 
 					input {
 						border-radius: 5px;
@@ -362,6 +401,7 @@ $base-font-size: 14px;
 				.form-row-last {
 					width: 20%;
 					margin-left: 2%;
+					float: right;
 				}
 
 				.clear {
@@ -410,48 +450,32 @@ $base-font-size: 14px;
 		}
 
 		.woo-checkout-payment {
-			.payment_methods {
-				padding: 0 0 30px 0!important;
-				margin: 0;
+			clear: both;
 
-				.wc_payment_method {
+			#payment {
+				.payment_methods {
+					padding: 0 0 20px 0!important;
 					margin: 0;
-					padding: 0;
-				}
 
-				.payment_box {
-					p:first-child {
-						margin: 0!important;
+					.wc_payment_method {
+						margin: 0;
+						padding: 0;
+					}
+
+					.payment_box {
+						p:first-child {
+							margin: 0!important;
+						}
 					}
 				}
-			}
-		}
 
-		#customer_details {
-			width: 100%;
-			padding: 0;
-			float: none;
+				.place-order {
+					padding: 20px 0 0 0;
+					border: 1px solid #fff;
 
-			.col-1 {
-				padding-left: 0;
-				float: left;
-				width: 48%;
-			}
-			.col-2 {
-				padding-right: 0;
-				float: right;
-				width: 48%;
-			}
-
-			#ship-to-different-address label {
-				display: flex;
-				padding-top: 0;
-				padding-bottom: 0;
-
-				input {
-					align-self: start;
-					margin-top: 9px;
-					margin-right: 10px;
+					#place_order {
+						width: auto;
+					}
 				}
 			}
 		}

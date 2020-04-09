@@ -19,6 +19,7 @@ use \Elementor\Icons_Manager;
 class Woo_Checkout extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Layouts\Woo_Checkout_Default;
+	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Checkout_Login;
 
 	public function get_name() {
 		return 'eael-woo-checkout';
@@ -219,7 +220,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_section_title_typography',
-				'selector' => '{{WRAPPER}} h3, {{WRAPPER}} #ship-to-different-address span',
+				'selector' => '{{WRAPPER}} h3, {{WRAPPER}} #ship-to-different-address span, {{WRAPPER}} .ea-woo-checkout #customer_details h3',
 			]
 		);
 		$this->add_control(
@@ -248,7 +249,7 @@ class Woo_Checkout extends Widget_Base {
 					'size' => 20,
 				],
 				'selectors' => [
-					'{{WRAPPER}} h3, {{WRAPPER}} .woo-checkout-section-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} h3, {{WRAPPER}} .woo-checkout-section-title, {{WRAPPER}} .ea-woo-checkout #customer_details h3' => 'margin-bottom: {{SIZE}}{{UNIT}}!important;',
 				],
 			]
 		);
@@ -1101,6 +1102,17 @@ class Woo_Checkout extends Widget_Base {
 				'selector' => '{{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text',
 			]
 		);
+		$this->add_control(
+			'ea_woo_checkout_privacy_border_color',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#b8b6ca',
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment .place-order' => 'border-color: {{VALUE}}!important;',
+				],
+			]
+		);
 
 		// Button
 		$this->add_control(
@@ -1253,13 +1265,13 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	protected function render() {
+		$settings = $this->get_settings();
+
 		if ( is_null( WC()->cart ) ) {
 			include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
 			include_once WC_ABSPATH . 'includes/class-wc-cart.php';
 			wc_load_cart();
 		}
-
-		$settings = $this->get_settings();
 
 		$this->add_render_attribute( 'container', 'class', [
 			'ea-woo-checkout'
@@ -1274,6 +1286,14 @@ class Woo_Checkout extends Widget_Base {
                     }
                 </style>
 				<?php
+				remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
+				remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
+				add_action( 'woocommerce_before_checkout_form', [$this,'checkout_login_template'], 10 );
+//				add_action( 'woocommerce_before_checkout_form', [$this,'checkout_coupon_template'], 10 );
+
+				apply_filters( 'ea_checkout_login_template', $settings );
+
 				global $wp;
 				$checkout = WC()->checkout();
 				if ( $settings['ea_woo_checkout_layout'] == 'default' ) {
