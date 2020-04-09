@@ -670,7 +670,7 @@ class Data_Table extends Widget_Base {
 					],
 				],
 				'default' => 'left',
-				'prefix_class' => 'eael-dt-th-align-',
+				'prefix_class' => 'eael-dt-th-align%s-',
 			]
 		);
 
