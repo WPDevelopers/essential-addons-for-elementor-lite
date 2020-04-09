@@ -9,7 +9,9 @@ if (!defined('ABSPATH')) {
 
 trait Checkout_Coupon {
 
-    public static function checkout_coupon_template($settings) {
+    public static function checkout_coupon_template() {
+        $settings = self::get_settings();
+        
 	    ?>
         <div class="woo-checkout-coupon">
             <div class="ea-coupon-icon">
