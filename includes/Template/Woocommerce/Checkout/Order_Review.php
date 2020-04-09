@@ -12,11 +12,11 @@ trait Order_Review {
         <?php do_action('woocommerce_checkout_before_order_review'); ?>
 
         <div class="ea-checkout-review-order-table">
-            <ul class="order-review-table">
+            <ul class="ea-order-review-table">
                 <li class="table-header">
-                    <div class="table-col-1"><?php esc_html_e( 'Product', 'essential-addons-for-elementor-lite' ); ?></div>
-                    <div class="table-col-2"><?php esc_html_e( 'Quantity', 'essential-addons-for-elementor-lite' ); ?></div>
-                    <div class="table-col-3"><?php esc_html_e( 'Price', 'essential-addons-for-elementor-lite' ); ?></div>
+                    <div class="table-col-1"><?php echo $settings['ea_woo_checkout_table_product_text']; ?></div>
+                    <div class="table-col-2"><?php echo $settings['ea_woo_checkout_table_quantity_text']; ?></div>
+                    <div class="table-col-3"><?php echo $settings['ea_woo_checkout_table_price_text']; ?></div>
                 </li>
 
                 <?php
@@ -56,12 +56,12 @@ trait Order_Review {
                 ?>
             </ul>
 
-            <div class="order-review-table-footer">
+            <div class="ea-order-review-table-footer">
                 <?php
                 if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
                     <div class="back-to-shop">
                         <a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-                            <i class="fa fa-long-arrow-left"></i><?php esc_html_e( $settings['ea_woo_checkout_shop_link_text'], 'essential-addons-for-elementor-lite' ); ?>
+                            <i class="fa fa-long-arrow-left"></i><?php echo $settings['ea_woo_checkout_shop_link_text']; ?>
                         </a>
                     </div>
                 <?php } ?>
