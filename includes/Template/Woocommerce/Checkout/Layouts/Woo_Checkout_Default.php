@@ -28,7 +28,7 @@ trait Woo_Checkout_Default {
         }
 
         // Login
-        self::checkout_login_template();
+        self::checkout_login_template($settings);
 
         // Coupon
         self::checkout_coupon_template($settings);
