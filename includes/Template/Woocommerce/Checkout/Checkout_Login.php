@@ -9,23 +9,21 @@ if (!defined('ABSPATH')) {
 
 trait Checkout_Login {
 
-//	add_filter('ea_checkout_login_template', 'checkout_login_template');
-
     public static function checkout_login_template() {
-//	    parse_str($_REQUEST['settings'], $settings);
-	    $settings = $this->get_settings();
-	    var_dump($settings);
+	    $settings = self::get_settings();
+
+        if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_login_reminder' ) ) {
+            return;
+        }
 
         ?>
         <div class="woo-checkout-login">
             <div class="ea-login-icon">
-<!--	            --><?php //Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+	            <?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
             </div>
             <?php wc_get_template('checkout/form-login.php', array('checkout' => WC()->checkout(),)); ?>
         </div>
     <?php }
-
-
 
 }
 

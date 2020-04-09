@@ -20,6 +20,7 @@ class Woo_Checkout extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Layouts\Woo_Checkout_Default;
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Checkout_Login;
+	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Checkout_Coupon;
 
 	public function get_name() {
 		return 'eael-woo-checkout';
@@ -1290,9 +1291,9 @@ class Woo_Checkout extends Widget_Base {
 				remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 
 				add_action( 'woocommerce_before_checkout_form', [$this,'checkout_login_template'], 10 );
-//				add_action( 'woocommerce_before_checkout_form', [$this,'checkout_coupon_template'], 10 );
+				add_action( 'woocommerce_before_checkout_form', [$this,'checkout_coupon_template'], 10 );
 
-				apply_filters( 'ea_checkout_login_template', $settings );
+//				apply_filters( 'ea_checkout_login_template', $settings );
 
 				global $wp;
 				$checkout = WC()->checkout();
