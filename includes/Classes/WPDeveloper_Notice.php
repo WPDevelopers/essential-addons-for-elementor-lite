@@ -14,7 +14,7 @@ class WPDeveloper_Notice {
      * @var array
      */
     const ADMIN_UPDATE_NOTICE_KEY = 'wpdeveloper_notices_seen';
-    public $text_domain = 'wpdeveloper-notice-text-domain';
+
     /**
      * All Data
      * @var array
@@ -444,7 +444,7 @@ class WPDeveloper_Notice {
     private function upsale_button(){
         $upsale_args = $this->get_upsale_args();
         $plugin_slug = ( isset( $upsale_args['slug'] )) ? $upsale_args['slug'] : '' ;
-        $btn_text = ( isset( $upsale_args['btn_text'] )) ? $upsale_args['btn_text'] : __( 'Install Now!', $this->text_domain ) ;
+        $btn_text = ( isset( $upsale_args['btn_text'] )) ? $upsale_args['btn_text'] : __( 'Install Now!', 'essential-addons-for-elementor-lite' ) ;
         if( empty( $plugin_slug ) ) {
             return;
         }
