@@ -7,6 +7,7 @@ var EventCalendar = function ($scope, $) {
 		firstDay = element.data("first_day"),
 		calendarID = element.data("cal_id"),
 		locale = element.data("locale"),
+		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
 		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
 
@@ -36,7 +37,8 @@ var EventCalendar = function ($scope, $) {
 		eventRender: function (info) {
 			var element = $(info.el),
 				event = info.event;
-
+			console.log(translate);
+			console.log('test');
 			// when event is finished event text are cross
 			if (event.extendedProps.eventHasComplete !== undefined && event.extendedProps.eventHasComplete === 'yes') {
 				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
@@ -72,14 +74,14 @@ var EventCalendar = function ($scope, $) {
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
 					startView = moment(startDate).format("MMM Do");
 					if (moment(startDate).isSame(Date.now(), "day") === true) {
-						startView = 'Today';
+						startView = translate.today;
 					} else if (moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")) {
-						startView = 'Tomorrow';
+						startView = translate.tomorrow;
 					}
 
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						startView = 'Today ' + moment(event.start).format(timeFormate);
+						startView = translate.today+' ' + moment(event.start).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -87,7 +89,7 @@ var EventCalendar = function ($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						startView = 'Tomorrow ' + moment(event.start).format(timeFormate);
+						startView = translate.tomorrow+' ' + moment(event.start).format(timeFormate);
 					}
 
 					if (
@@ -103,7 +105,7 @@ var EventCalendar = function ($scope, $) {
 					startSelector.html('<i class="eicon-calendar"></i> ' + startView)
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
-							endView = " Today " + moment(endDate).format(timeFormate);
+							endView = translate.today+" " + moment(endDate).format(timeFormate);
 						} else {
 							endView = moment(endDate).format(timeFormate);
 						}
@@ -119,7 +121,7 @@ var EventCalendar = function ($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						endView = "Tomorrow " + moment(endDate).format(timeFormate);
+						endView = translate.tomorrow +" " + moment(endDate).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
