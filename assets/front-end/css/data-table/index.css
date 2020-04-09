@@ -315,6 +315,18 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   padding-right: 30px;
 }
 
+.eael-dt-td-align-left .eael-data-table .th-mobile-screen {
+  text-align: left;
+}
+
+.eael-dt-td-align-center .eael-data-table .th-mobile-screen {
+  text-align: center;
+}
+
+.eael-dt-td-align-right .eael-data-table .th-mobile-screen {
+  text-align: right;
+}
+
 @media (max-width: 1024px) {
   .eael-dt-td-align-tablet-left .eael-data-table tbody tr td {
     text-align: left;
@@ -332,12 +344,21 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   .eael-dt-td-align-mobile-left .eael-data-table tbody tr td {
     text-align: left;
   }
+  .eael-dt-td-align-mobile-left .eael-data-table .th-mobile-screen {
+    text-align: left;
+  }
 
   .eael-dt-td-align-mobile-center .eael-data-table tbody tr td {
     text-align: center;
   }
+  .eael-dt-td-align-mobile-center .eael-data-table .th-mobile-screen {
+    text-align: center;
+  }
 
   .eael-dt-td-align-mobile-right .eael-data-table tbody tr td {
+    text-align: right;
+  }
+  .eael-dt-td-align-mobile-right .eael-data-table .th-mobile-screen {
     text-align: right;
   }
 }
