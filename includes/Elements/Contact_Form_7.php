@@ -557,7 +557,7 @@ class Contact_Form_7 extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-date, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-date, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select, {{WRAPPER}} .eael-contact-form-7 .wpcf7-list-item-label' => 'color: {{VALUE}}',
                 ],
                 'separator' => 'before',
             ]
@@ -773,6 +773,7 @@ class Contact_Form_7 extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 label' => 'color: {{VALUE}}'
                 ],
                 'condition' => [
                     'labels_switch' => 'yes',
