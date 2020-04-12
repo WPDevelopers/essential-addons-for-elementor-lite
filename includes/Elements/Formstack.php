@@ -2051,7 +2051,7 @@ class Formstack extends Widget_Base {
         $settings = $this->get_settings_for_display();
         $key = 'eael_formstack_'.md5($settings['eael_form_key']);
         $form_data = get_transient($key);
-        if (empty($form_data)) {
+        if (empty($form_data) && $settings['eael_form_key']!='') {
             $wp = wp_remote_get(
                 $settings['eael_form_key'],
                 array(
