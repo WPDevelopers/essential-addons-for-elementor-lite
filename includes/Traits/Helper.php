@@ -2368,7 +2368,7 @@ trait Helper
         parse_str($_REQUEST['settings'], $settings);
 
         ob_start();
-        Woo_Checkout::order_review_template($settings);
+        Woo_Checkout::checkout_order_review_default($settings);
         $woo_checkout_update_order_review = ob_get_clean();
 
         wp_send_json(
