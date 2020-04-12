@@ -7,7 +7,6 @@ $theme-color: #443e6d;
 $base-font-size: 14px;
 
 .ea-woo-checkout {
-	//background: $theme-color;
 	font-size: $base-font-size;
 	line-height: 1.5em;
 	font-weight: 400;
@@ -27,29 +26,309 @@ $base-font-size: 14px;
 			font-weight: 500;
 		}
 
+		.woocommerce-error, .woocommerce-info, .woocommerce-message {
+			background-color: transparent;
+			padding: 0;
+			border: 1px solid inherit;
+		}
+
 		.woocommerce-notices-wrapper {
 			.woocommerce-error {
 				border-radius: 5px;
 				background-color: #FFF3F5;
 				color: #FF7E93;
-				padding: 20px 20px 20px 30px;
+				padding: 20px;
 				font-size: 16px;
 				line-height: 1.5em;
 				font-weight: 400;
 				margin-bottom: 30px;
 
 				&::before {
-					left: 0;
-					top: 0;
+					left: 20px;
+					top: 20px;
 					font-size: 20px
+				}
+
+				li {
+					margin-left: 30px!important;
 				}
 			}
 		}
 
-		.woocommerce-error, .woocommerce-info, .woocommerce-message {
-			background-color: transparent;
-			padding: 0;
-			border: none;
+		.woo-checkout-login, .woo-checkout-coupon {
+
+			a {
+				color: #7866ff;
+
+				:hover {
+					color: #443D6D;
+				}
+			}
+
+			label {
+				margin-bottom: 10px;
+			}
+
+			.input-text, select {
+				border-radius: 5px;
+				background-color: #ffffff;
+				padding: 13px;
+				border: 1px solid transparent;
+
+				:hover, :active {
+					border-color: inherit;
+				}
+
+				:focus {
+					outline: inherit;
+					outline-offset: 0;
+				}
+			}
+
+			.button {
+				background-color: #7866ff;
+				border-radius: 5px;
+				font-size: 16px;
+				line-height: 1.5em;
+				color: #ffffff;
+				font-weight: 400;
+				margin: 0;
+				padding: 13px 30px;
+				border: none;
+				text-transform: capitalize!important;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+		}
+
+		.woo-checkout-login {
+			border-radius: 5px;
+			background-color: #f1ebff;
+			padding: 30px;
+			font-size: 16px;
+			line-height: 1.5em;
+			font-weight: 400;
+			margin-bottom: 30px;
+			position: relative;
+			display: block;
+
+			.ea-login-icon {
+				width: 20px;
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				font-size: 20px;
+
+				i, svg {
+					width: 1em;
+					height: 1em;
+					position: relative;
+					display: block;
+				}
+			}
+
+			.woocommerce-form-login-toggle {
+				.woocommerce-error, .woocommerce-info, .woocommerce-message {
+					background-color: transparent!important;
+					padding: 10px 10px 10px 40px!important;
+					border: none;
+
+					&::before {
+						left: 20px;
+						top: 20px;
+						font-size: 20px
+					}
+				}
+
+				.woocommerce-info {
+					padding: 0 0 0 35px!important;
+				}
+			}
+
+			.form-row-first {
+				width: 48.5%;
+				float: left!important;
+			}
+			.form-row-last {
+				float: right!important;
+			}
+
+			.clear {
+				clear: both;
+			}
+
+			.woocommerce-form-login {
+				margin: 15px 0 0!important;
+
+				p:first-child {
+					margin-top: 0;
+				}
+
+				.woocommerce-form-login__submit {
+					margin-right: 30px;
+				}
+			}
+			.woocommerce-info {
+				padding-left: 30px;
+				font-size: inherit;
+				line-height: 1.5em;
+				font-weight: inherit;
+				margin-bottom: 0;
+				display: block;
+
+				&::before {
+					content: none;
+				}
+
+				a {
+					text-decoration: underline;
+				}
+			}
+
+			.lost_password {
+				margin-left: 3px;
+				margin-bottom: 0;
+			}
+		}
+
+		.woo-checkout-coupon {
+			border-radius: 5px;
+			background-color: #ebfaff;
+			padding: 30px;
+			font-size: 16px;
+			line-height: 1.5em;
+			font-weight: 400;
+			margin-bottom: 30px;
+			position: relative;
+			display: block;
+
+			.ea-coupon-icon {
+				width: 20px;
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				font-size: 20px;
+
+				i, svg {
+					width: 1em;
+					height: 1em;
+					position: relative;
+					display: block;
+				}
+			}
+
+			.woocommerce-form-coupon-toggle {
+				.woocommerce-error, .woocommerce-info, .woocommerce-message {
+					background-color: transparent!important;
+					padding: 10px 10px 10px 40px!important;
+					border: none;
+
+					&::before {
+						left: 20px;
+						top: 20px;
+						font-size: 20px
+					}
+				}
+
+				.woocommerce-info {
+					padding: 0 0 0 35px!important;
+				}
+			}
+
+			.form-row-first {
+				width: 48.5%;
+			}
+
+			.checkout_coupon {
+				margin: 15px 0 0!important;
+				padding: 20px;
+				width: 100%;
+
+				p:first-child {
+					margin: 0 0 20px 0;
+				}
+
+				.form-row-first {
+					width: 78%;
+					float: left;
+
+					input {
+						border-radius: 5px;
+						box-shadow: 0 12px 20px rgba(51,57,137,0.1);
+						background-color: #ffffff;
+
+						:focus {
+							outline: none;
+							outline-offset: 0;
+						}
+					}
+				}
+				.form-row-last {
+					width: 20%;
+					margin-left: 2%;
+					float: right;
+				}
+
+				.clear {
+					clear: both;
+				}
+
+				p {
+					margin-top: 0;
+				}
+
+				@media (max-width: 1024px) {
+					.form-row-first {
+						width: 50%;
+					}
+					.form-row-last {
+						width: 48%;
+					}
+				}
+				@media (max-width: 767px) {
+					.form-row-first, .form-row-last {
+						width: 100%;
+					}
+				}
+			}
+
+			.woocommerce-message, .woocommerce-error {
+				border: 1px solid;
+				border-radius: 3px;
+				padding: 10px 10px 10px 30px;
+				margin: 20px 0 0;
+				color: inherit;
+
+				&:before {
+					left: 10px;
+					top: 10px;
+				}
+			}
+
+			.woocommerce-info {
+				padding-left: 35px;
+				font-size: inherit;
+				line-height: 1.5em;
+				font-weight: inherit;
+				margin-bottom: 0;
+				color: inherit;
+				display: block;
+
+				&::before {
+					content: none;
+				}
+
+				a {
+					text-decoration: underline;
+				}
+			}
+
+			.lost_password {
+				margin-bottom: 0;
+			}
 		}
 
 		// Section - Customer Details
@@ -87,6 +366,13 @@ $base-font-size: 14px;
 					margin-right: 10px;
 				}
 			}
+
+			@media (max-width: 767px) {
+				.col-1, .col-2 {
+					width: 100%!important;
+					float: none!important;
+				}
+			}
 		}
 
 		.woocommerce-checkout .woocommerce-NoticeGroup {
@@ -104,9 +390,13 @@ $base-font-size: 14px;
 				margin-bottom: 0;
 
 				&::before {
-					left: 0;
-					top: 0;
+					left: 20px;
+					top: 20px;
 					font-size: 20px
+				}
+
+				li {
+					margin-left: 30px!important;
 				}
 			}
 		}
@@ -248,239 +538,6 @@ $base-font-size: 14px;
 			}
 		}
 
-		.woo-checkout-login, .woo-checkout-coupon {
-
-			a {
-				color: #7866ff;
-
-				:hover {
-					color: #443D6D;
-				}
-			}
-
-			label {
-				margin-bottom: 10px;
-			}
-
-			.input-text, select {
-				border-radius: 5px;
-				background-color: #ffffff;
-				padding: 13px;
-				border: 1px solid transparent;
-
-				:hover, :active {
-					border-color: inherit;
-				}
-
-				:focus {
-					outline: inherit;
-					outline-offset: 0;
-				}
-			}
-
-			.button {
-				background-color: #7866ff;
-				border-radius: 5px;
-				font-size: 16px;
-				line-height: 1.5em;
-				color: #ffffff;
-				font-weight: 400;
-				margin: 0;
-				padding: 13px 15%;
-				border: none;
-				text-transform: capitalize!important;
-
-				&:hover {
-					text-decoration: none;
-				}
-			}
-
-			.woocommerce-error, .woocommerce-info, .woocommerce-message {
-				background-color: transparent;
-				padding: 0;
-				border: none;
-
-				&::before {
-					left: 0;
-					top: 0;
-					font-size: 20px
-				}
-			}
-		}
-
-		.woo-checkout-login {
-			border-radius: 5px;
-			background-color: #f1ebff;
-			padding: 30px;
-			font-size: 16px;
-			line-height: 1.5em;
-			font-weight: 400;
-			margin-bottom: 30px;
-			position: relative;
-			display: block;
-
-			.ea-login-icon {
-				width: 20px;
-				position: absolute;
-				top: 20px;
-				left: 20px;
-				font-size: 20px;
-
-				i, svg {
-					width: 1em;
-					height: 1em;
-					position: relative;
-					display: block;
-				}
-			}
-
-			.form-row-first {
-				width: 48.5%;
-				float: left!important;
-			}
-			.form-row-last {
-				float: right!important;
-			}
-
-			.clear {
-				clear: both;
-			}
-
-			.woocommerce-form-login {
-				margin: 15px 0 0!important;
-
-				p:first-child {
-					margin-top: 0;
-				}
-			}
-			.woocommerce-info {
-				padding-left: 30px;
-				font-size: inherit;
-				line-height: 1.5em;
-				font-weight: inherit;
-				margin-bottom: 0;
-				display: block;
-
-				&::before {
-					content: none;
-				}
-
-				a {
-					text-decoration: underline;
-				}
-			}
-
-			.lost_password {
-				margin-left: 3px;
-				margin-bottom: 0;
-			}
-		}
-
-		.woo-checkout-coupon {
-			border-radius: 5px;
-			background-color: #ebfaff;
-			padding: 30px;
-			font-size: 16px;
-			line-height: 1.5em;
-			font-weight: 400;
-			margin-bottom: 30px;
-			position: relative;
-			display: block;
-
-			.ea-coupon-icon {
-				width: 20px;
-				position: absolute;
-				top: 20px;
-				left: 20px;
-				font-size: 20px;
-
-				i, svg {
-					width: 1em;
-					height: 1em;
-					position: relative;
-					display: block;
-				}
-			}
-
-			.form-row-first {
-				width: 48.5%;
-			}
-
-			.checkout_coupon {
-				margin: 15px 0 0!important;
-				padding: 0;
-				width: 100%;
-
-				p:first-child {
-					margin: 0 0 20px 0;
-				}
-
-				.form-row-first {
-					width: 78%;
-					float: left;
-
-					input {
-						border-radius: 5px;
-						box-shadow: 0 12px 20px rgba(51,57,137,0.1);
-						background-color: #ffffff;
-
-						:focus {
-							outline: none;
-							outline-offset: 0;
-						}
-					}
-				}
-				.form-row-last {
-					width: 20%;
-					margin-left: 2%;
-					float: right;
-				}
-
-				.clear {
-					clear: both;
-				}
-
-				p {
-					margin-top: 0;
-				}
-			}
-
-			.woocommerce-message, .woocommerce-error {
-				border: 1px solid;
-				border-radius: 3px;
-				padding: 10px 10px 10px 30px;
-				margin: 20px 0 0;
-				color: inherit;
-
-				&:before {
-					left: 10px;
-					top: 10px;
-				}
-			}
-
-			.woocommerce-info {
-				padding-left: 35px;
-				font-size: inherit;
-				line-height: 1.5em;
-				font-weight: inherit;
-				margin-bottom: 0;
-				color: inherit;
-				display: block;
-
-				&::before {
-					content: none;
-				}
-
-				a {
-					text-decoration: underline;
-				}
-			}
-
-			.lost_password {
-				margin-bottom: 0;
-			}
-		}
-
 		.woo-checkout-payment {
 			clear: both;
 
@@ -503,7 +560,11 @@ $base-font-size: 14px;
 
 				.place-order {
 					padding: 20px 0 0 0;
-					border: 1px solid #fff;
+					border-top: 1px solid #fff;
+
+					p {
+						margin-top: 0;
+					}
 
 					#place_order {
 						width: auto;
