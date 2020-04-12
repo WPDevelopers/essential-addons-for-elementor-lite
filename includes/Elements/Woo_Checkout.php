@@ -1268,38 +1268,6 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 
-		// Button
-		$this->add_control(
-			'ea_woo_checkout_payment_button',
-			[
-				'label' => __( 'Button', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_responsive_control(
-			'ea_woo_checkout_payment_button_align',
-			[
-				'label' => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
-						'icon' => 'eicon-text-align-left',
-					],
-					'right' => [
-						'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
-						'icon' => 'eicon-text-align-right',
-					],
-				],
-				'default' => 'right',
-				'selectors' => [
-					'{{WRAPPER}} #place_order' => 'float: {{VALUE}}!important;',
-				],
-			]
-		);
-
 		$this->end_controls_section();
 
 

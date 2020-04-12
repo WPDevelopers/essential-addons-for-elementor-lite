@@ -11,6 +11,7 @@
   line-height: 1.5em;
   font-weight: 600;
   margin-top: 0;
+  text-transform: capitalize;
 }
 .ea-woo-checkout .woocommerce label {
   font-size: 16px;
@@ -24,9 +25,11 @@
   text-align: left;
   background-color: transparent;
   border: 1px solid inherit;
+  text-transform: capitalize;
 }
 .ea-woo-checkout .woocommerce .woocommerce-error a, .ea-woo-checkout .woocommerce .woocommerce-info a, .ea-woo-checkout .woocommerce .woocommerce-message a {
   box-shadow: none !important;
+  text-transform: capitalize;
 }
 .ea-woo-checkout .woocommerce .woocommerce-notices-wrapper .woocommerce-error {
   border-radius: 5px;
@@ -190,6 +193,8 @@
   padding: 20px;
   width: 100%;
   text-align: left;
+  border: 1px solid inherit;
+  border-radius: 5px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon p:first-child {
   margin: 0 0 20px 0;
@@ -202,6 +207,7 @@
   border-radius: 5px;
   box-shadow: 0 12px 20px rgba(51, 57, 137, 0.1);
   background-color: #ffffff;
+  height: 50px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first input :focus {
   outline: none;
@@ -242,7 +248,7 @@
   font-size: 20px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info {
-  padding-left: 35px !important;
+  padding: 0 0 0 35px !important;
   font-size: inherit;
   line-height: 1.5em;
   font-weight: inherit;
@@ -471,6 +477,10 @@
   margin: 0;
   padding: 0;
 }
+.ea-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method > label {
+  padding: 0;
+  margin: 1rem 0;
+}
 .ea-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .payment_box p:first-child {
   margin: 0 !important;
 }
@@ -487,4 +497,7 @@
 }
 .ea-woo-checkout .woocommerce .woo-checkout-payment #payment .place-order #place_order {
   width: auto;
+  margin: 0 0 0 auto;
+  text-transform: capitalize;
+  letter-spacing: unset;
 }
