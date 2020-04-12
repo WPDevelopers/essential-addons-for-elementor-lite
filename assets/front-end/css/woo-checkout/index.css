@@ -17,25 +17,253 @@
   line-height: 1.5;
   font-weight: 500;
 }
+.ea-woo-checkout .woocommerce .woocommerce-error, .ea-woo-checkout .woocommerce .woocommerce-info, .ea-woo-checkout .woocommerce .woocommerce-message {
+  background-color: transparent;
+  padding: 0;
+  border: 1px solid inherit;
+}
 .ea-woo-checkout .woocommerce .woocommerce-notices-wrapper .woocommerce-error {
   border-radius: 5px;
   background-color: #FFF3F5;
   color: #FF7E93;
-  padding: 20px 20px 20px 30px;
+  padding: 20px;
   font-size: 16px;
   line-height: 1.5em;
   font-weight: 400;
   margin-bottom: 30px;
 }
 .ea-woo-checkout .woocommerce .woocommerce-notices-wrapper .woocommerce-error::before {
-  left: 0;
-  top: 0;
+  left: 20px;
+  top: 20px;
   font-size: 20px;
 }
-.ea-woo-checkout .woocommerce .woocommerce-error, .ea-woo-checkout .woocommerce .woocommerce-info, .ea-woo-checkout .woocommerce .woocommerce-message {
-  background-color: transparent;
-  padding: 0;
+.ea-woo-checkout .woocommerce .woocommerce-notices-wrapper .woocommerce-error li {
+  margin-left: 30px !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login a, .ea-woo-checkout .woocommerce .woo-checkout-coupon a {
+  color: #7866ff;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login a :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon a :hover {
+  color: #443D6D;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login label, .ea-woo-checkout .woocommerce .woo-checkout-coupon label {
+  margin-bottom: 10px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text, .ea-woo-checkout .woocommerce .woo-checkout-login select, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text, .ea-woo-checkout .woocommerce .woo-checkout-coupon select {
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 13px;
+  border: 1px solid transparent;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :hover, .ea-woo-checkout .woocommerce .woo-checkout-login .input-text :active, .ea-woo-checkout .woocommerce .woo-checkout-login select :hover, .ea-woo-checkout .woocommerce .woo-checkout-login select :active, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :active, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :active {
+  border-color: inherit;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :focus, .ea-woo-checkout .woocommerce .woo-checkout-login select :focus, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :focus, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :focus {
+  outline: inherit;
+  outline-offset: 0;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .button, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button {
+  background-color: #7866ff;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #ffffff;
+  font-weight: 400;
+  margin: 0;
+  padding: 13px 30px;
   border: none;
+  text-transform: capitalize !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .button:hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover {
+  text-decoration: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login {
+  border-radius: 5px;
+  background-color: #f1ebff;
+  padding: 30px;
+  font-size: 16px;
+  line-height: 1.5em;
+  font-weight: 400;
+  margin-bottom: 30px;
+  position: relative;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon {
+  width: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i, .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
+  background-color: transparent !important;
+  padding: 10px 10px 10px 40px !important;
+  border: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error::before, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info::before, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message::before {
+  left: 20px;
+  top: 20px;
+  font-size: 20px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info {
+  padding: 0 0 0 35px !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .form-row-first {
+  width: 48.5%;
+  float: left !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .form-row-last {
+  float: right !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .clear {
+  clear: both;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login {
+  margin: 15px 0 0 !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login p:first-child {
+  margin-top: 0;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login .woocommerce-form-login__submit {
+  margin-right: 30px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info {
+  padding-left: 30px;
+  font-size: inherit;
+  line-height: 1.5em;
+  font-weight: inherit;
+  margin-bottom: 0;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info::before {
+  content: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info a {
+  text-decoration: underline;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .lost_password {
+  margin-left: 3px;
+  margin-bottom: 0;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon {
+  border-radius: 5px;
+  background-color: #ebfaff;
+  padding: 30px;
+  font-size: 16px;
+  line-height: 1.5em;
+  font-weight: 400;
+  margin-bottom: 30px;
+  position: relative;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon {
+  width: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon i, .ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon svg {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message {
+  background-color: transparent !important;
+  padding: 10px 10px 10px 40px !important;
+  border: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message::before {
+  left: 20px;
+  top: 20px;
+  font-size: 20px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info {
+  padding: 0 0 0 35px !important;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .form-row-first {
+  width: 48.5%;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon {
+  margin: 15px 0 0 !important;
+  padding: 20px;
+  width: 100%;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon p:first-child {
+  margin: 0 0 20px 0;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first {
+  width: 78%;
+  float: left;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first input {
+  border-radius: 5px;
+  box-shadow: 0 12px 20px rgba(51, 57, 137, 0.1);
+  background-color: #ffffff;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first input :focus {
+  outline: none;
+  outline-offset: 0;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
+  width: 20%;
+  margin-left: 2%;
+  float: right;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .clear {
+  clear: both;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon p {
+  margin-top: 0;
+}
+@media (max-width: 1024px) {
+  .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first {
+    width: 50%;
+  }
+  .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
+    width: 48%;
+  }
+}
+@media (max-width: 767px) {
+  .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first, .ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
+    width: 100%;
+  }
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error {
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 10px 10px 10px 30px;
+  margin: 20px 0 0;
+  color: inherit;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message:before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error:before {
+  left: 10px;
+  top: 10px;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info {
+  padding-left: 35px;
+  font-size: inherit;
+  line-height: 1.5em;
+  font-weight: inherit;
+  margin-bottom: 0;
+  color: inherit;
+  display: block;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info::before {
+  content: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info a {
+  text-decoration: underline;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-coupon .lost_password {
+  margin-bottom: 0;
 }
 .ea-woo-checkout .woocommerce #customer_details.col2-set {
   width: 100% !important;
@@ -68,6 +296,12 @@
   margin-top: 9px;
   margin-right: 10px;
 }
+@media (max-width: 767px) {
+  .ea-woo-checkout .woocommerce #customer_details.col2-set .col-1, .ea-woo-checkout .woocommerce #customer_details.col2-set .col-2 {
+    width: 100% !important;
+    float: none !important;
+  }
+}
 .ea-woo-checkout .woocommerce .woocommerce-checkout .woocommerce-NoticeGroup {
   border-radius: 5px;
   background-color: #FFF3F5;
@@ -83,9 +317,12 @@
   margin-bottom: 0;
 }
 .ea-woo-checkout .woocommerce .woocommerce-checkout .woocommerce-NoticeGroup .woocommerce-error::before {
-  left: 0;
-  top: 0;
+  left: 20px;
+  top: 20px;
   font-size: 20px;
+}
+.ea-woo-checkout .woocommerce .woocommerce-checkout .woocommerce-NoticeGroup .woocommerce-error li {
+  margin-left: 30px !important;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review {
   margin-bottom: 30px;
@@ -208,199 +445,6 @@
     width: 100%;
   }
 }
-.ea-woo-checkout .woocommerce .woo-checkout-login a, .ea-woo-checkout .woocommerce .woo-checkout-coupon a {
-  color: #7866ff;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login a :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon a :hover {
-  color: #443D6D;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login label, .ea-woo-checkout .woocommerce .woo-checkout-coupon label {
-  margin-bottom: 10px;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .input-text, .ea-woo-checkout .woocommerce .woo-checkout-login select, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text, .ea-woo-checkout .woocommerce .woo-checkout-coupon select {
-  border-radius: 5px;
-  background-color: #ffffff;
-  padding: 13px;
-  border: 1px solid transparent;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :hover, .ea-woo-checkout .woocommerce .woo-checkout-login .input-text :active, .ea-woo-checkout .woocommerce .woo-checkout-login select :hover, .ea-woo-checkout .woocommerce .woo-checkout-login select :active, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :active, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :active {
-  border-color: inherit;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .input-text :focus, .ea-woo-checkout .woocommerce .woo-checkout-login select :focus, .ea-woo-checkout .woocommerce .woo-checkout-coupon .input-text :focus, .ea-woo-checkout .woocommerce .woo-checkout-coupon select :focus {
-  outline: inherit;
-  outline-offset: 0;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .button, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button {
-  background-color: #7866ff;
-  border-radius: 5px;
-  font-size: 16px;
-  line-height: 1.5em;
-  color: #ffffff;
-  font-weight: 400;
-  margin: 0;
-  padding: 13px 15%;
-  border: none;
-  text-transform: capitalize !important;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .button:hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover {
-  text-decoration: none;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-error, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-message, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message {
-  background-color: transparent;
-  padding: 0;
-  border: none;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-error::before, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info::before, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-message::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message::before {
-  left: 0;
-  top: 0;
-  font-size: 20px;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login {
-  border-radius: 5px;
-  background-color: #f1ebff;
-  padding: 30px;
-  font-size: 16px;
-  line-height: 1.5em;
-  font-weight: 400;
-  margin-bottom: 30px;
-  position: relative;
-  display: block;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon {
-  width: 20px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 20px;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i, .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
-  width: 1em;
-  height: 1em;
-  position: relative;
-  display: block;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .form-row-first {
-  width: 48.5%;
-  float: left !important;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .form-row-last {
-  float: right !important;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .clear {
-  clear: both;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login {
-  margin: 15px 0 0 !important;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login p:first-child {
-  margin-top: 0;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info {
-  padding-left: 30px;
-  font-size: inherit;
-  line-height: 1.5em;
-  font-weight: inherit;
-  margin-bottom: 0;
-  display: block;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info::before {
-  content: none;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info a {
-  text-decoration: underline;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-login .lost_password {
-  margin-left: 3px;
-  margin-bottom: 0;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon {
-  border-radius: 5px;
-  background-color: #ebfaff;
-  padding: 30px;
-  font-size: 16px;
-  line-height: 1.5em;
-  font-weight: 400;
-  margin-bottom: 30px;
-  position: relative;
-  display: block;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon {
-  width: 20px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 20px;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon i, .ea-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon svg {
-  width: 1em;
-  height: 1em;
-  position: relative;
-  display: block;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .form-row-first {
-  width: 48.5%;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon {
-  margin: 15px 0 0 !important;
-  padding: 0;
-  width: 100%;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon p:first-child {
-  margin: 0 0 20px 0;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first {
-  width: 78%;
-  float: left;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first input {
-  border-radius: 5px;
-  box-shadow: 0 12px 20px rgba(51, 57, 137, 0.1);
-  background-color: #ffffff;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-first input :focus {
-  outline: none;
-  outline-offset: 0;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .form-row-last {
-  width: 20%;
-  margin-left: 2%;
-  float: right;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon .clear {
-  clear: both;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .checkout_coupon p {
-  margin-top: 0;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error {
-  border: 1px solid;
-  border-radius: 3px;
-  padding: 10px 10px 10px 30px;
-  margin: 20px 0 0;
-  color: inherit;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message:before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error:before {
-  left: 10px;
-  top: 10px;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info {
-  padding-left: 35px;
-  font-size: inherit;
-  line-height: 1.5em;
-  font-weight: inherit;
-  margin-bottom: 0;
-  color: inherit;
-  display: block;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info::before {
-  content: none;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info a {
-  text-decoration: underline;
-}
-.ea-woo-checkout .woocommerce .woo-checkout-coupon .lost_password {
-  margin-bottom: 0;
-}
 .ea-woo-checkout .woocommerce .woo-checkout-payment {
   clear: both;
 }
@@ -417,7 +461,10 @@
 }
 .ea-woo-checkout .woocommerce .woo-checkout-payment #payment .place-order {
   padding: 20px 0 0 0;
-  border: 1px solid #fff;
+  border-top: 1px solid #fff;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-payment #payment .place-order p {
+  margin-top: 0;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-payment #payment .place-order #place_order {
   width: auto;
