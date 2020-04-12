@@ -57,14 +57,14 @@ class WPDeveloper_Core_Installer {
         check_ajax_referer( 'wpdeveloper_upsale_core_install_' . $this->plugin_basename );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( __( 'You don\'t have permission to install the plugins' ) );
+            wp_send_json_error( __( 'You don\'t have permission to install the plugins', 'essential-addons-for-elementor-lite' ) );
         }
 
         $plugin_slug = ( isset( $_POST['slug'] ) ) ? $_POST['slug'] : '';
         $plugin_file = ( isset( $_POST['file'] ) ) ? $_POST['file'] : '';
 
         if( empty( $plugin_file ) || empty( $plugin_slug ) ) {
-            wp_send_json_error( __( 'You don\'t have set any slug and file name to install the plugins' ) );
+            wp_send_json_error( __( 'You don\'t have set any slug and file name to install the plugins', 'essential-addons-for-elementor-lite' ) );
         }
 
         $plugin_status = $this->install_plugin( $plugin_slug, $plugin_file );
