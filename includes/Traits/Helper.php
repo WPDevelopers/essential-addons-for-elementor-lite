@@ -2576,7 +2576,7 @@ trait Helper
         return $html;
     }
 
-    protected static function get_terms_list( $term_type = 'category', $length = 1)
+    protected static function get_terms_as_list( $term_type = 'category', $length = 1)
     {
 
         if($term_type === 'category' ) {
