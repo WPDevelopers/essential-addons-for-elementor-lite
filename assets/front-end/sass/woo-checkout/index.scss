@@ -31,6 +31,7 @@ $base-font-size: 14px;
 		}
 
 		.woocommerce-error, .woocommerce-info, .woocommerce-message {
+			text-align: left;
 			background-color: transparent;
 			border: 1px solid inherit;
 
@@ -168,6 +169,7 @@ $base-font-size: 14px;
 			}
 
 			.woocommerce-form-login {
+				max-width: 100%;
 				margin: 15px 0 0!important;
 
 				p:first-child {
@@ -235,6 +237,7 @@ $base-font-size: 14px;
 				margin: 15px 0 0!important;
 				padding: 20px;
 				width: 100%;
+				text-align: left;
 
 				p:first-child {
 					margin: 0 0 20px 0;
@@ -288,7 +291,7 @@ $base-font-size: 14px;
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
 					background-color: transparent!important;
 					padding: 10px 10px 10px 40px!important;
-					border: none;
+					border: none!important;
 
 					&::before {
 						left: 20px;
@@ -298,12 +301,26 @@ $base-font-size: 14px;
 				}
 
 				.woocommerce-info {
-					padding: 0 0 0 35px!important;
+					padding-left: 35px!important;
+					font-size: inherit;
+					line-height: 1.5em;
+					font-weight: inherit;
+					margin-bottom: 0;
+					color: inherit;
+					display: block;
+
+					&::before {
+						content: none;
+					}
+
+					a {
+						text-decoration: underline;
+					}
 				}
 			}
 			.woocommerce-message, .woocommerce-error {
 				background-color: transparent!important;
-				border: 1px solid inherit;
+				border: 1px solid inherit!important;
 				border-radius: 3px;
 				padding: 10px 10px 10px 40px !important;
 				margin: 20px 0 0!important;
@@ -316,31 +333,17 @@ $base-font-size: 14px;
 				}
 			}
 
-
-			.woocommerce-info {
-				padding-left: 35px;
-				font-size: inherit;
-				line-height: 1.5em;
-				font-weight: inherit;
-				margin-bottom: 0;
-				color: inherit;
-				display: block;
-
-				&::before {
-					content: none;
-				}
-
-				a {
-					text-decoration: underline;
-				}
-			}
-
 			.lost_password {
 				margin-bottom: 0;
 			}
 		}
 
+
 		// Section - Customer Details
+		h3#order_review_heading {
+			float: none;
+			width: 100%;
+		}
 		#customer_details.col2-set {
 			width: 100% !important;
 			padding: 0 !important;
@@ -397,6 +400,7 @@ $base-font-size: 14px;
 			.woocommerce-error {
 				padding-left: 30px;
 				margin-bottom: 0;
+				border-top: 0;
 
 				&::before {
 					left: 20px;
@@ -554,6 +558,10 @@ $base-font-size: 14px;
 				.payment_methods {
 					padding: 0 0 20px 0!important;
 					margin: 0;
+
+					li {
+						background-color: transparent;
+					}
 
 					.wc_payment_method {
 						margin: 0;
