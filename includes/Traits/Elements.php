@@ -364,6 +364,7 @@ trait Elements
                     $close_bt_text_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_close_button_text_style');
                     $box_shadow = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_box_shadow');
                     $auto_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_auto_collapse');
+                    $title_to_url = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_use_title_in_url');
                     $toc_style = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_table_of_content_list_style');
                     $toc_word_wrap = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_word_wrap');
                     $toc_collapse = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_collapse_sub_heading');
@@ -383,12 +384,12 @@ trait Elements
                     $toc_style_class .= ($toc_collapse == 'yes') ? ' eael-toc-collapse' : ' ';
                     $toc_style_class .= ($list_icon == 'number') ? ' eael-toc-number' : ' eael-toc-bullet';
                     $toc_style_class .= ($toc_word_wrap == 'yes') ? ' eael-toc-word-wrap' : ' ';
-
+                    $title_url        = ($title_to_url=='yes')?'true':'false';
                     if (!empty($icon_check['value'])) {
                         $icon = $icon_check['value'];
                     }
 
-                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-stickyScroll='{$sticky_scroll['size']}' id='eael-toc' class='{$el_class} '>
+                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
                         <div class='eael-toc-header'>
                                 <span class='eael-toc-close'>×</span>
                                 <h2 class='eael-toc-title'>{$toc_title}</h2>

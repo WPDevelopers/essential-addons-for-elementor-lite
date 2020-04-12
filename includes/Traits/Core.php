@@ -195,6 +195,7 @@ trait Core
                 'eael_ext_toc_position' => $page_settings_model->get_settings('eael_ext_toc_position'),
                 'eael_ext_toc_supported_heading_tag' => $page_settings_model->get_settings('eael_ext_toc_supported_heading_tag'),
                 'eael_ext_toc_collapse_sub_heading' => $page_settings_model->get_settings('eael_ext_toc_collapse_sub_heading'),
+                'eael_ext_toc_use_title_in_url' => $page_settings_model->get_settings('eael_ext_toc_use_title_in_url'),
                 'eael_ext_toc_word_wrap' => $page_settings_model->get_settings('eael_ext_toc_word_wrap'),
                 'eael_ext_toc_box_shadow' => $page_settings_model->get_settings('eael_ext_toc_box_shadow'),
                 'eael_ext_toc_table_box_shadow_box_shadow' => $page_settings_model->get_settings('eael_ext_toc_table_box_shadow_box_shadow'),
