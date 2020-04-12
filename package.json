@@ -1,38 +1,47 @@
 {
-  "name": "essential-addons-for-elementor",
-  "version": "1.0.0",
-  "description": "=== Essential Addons for Elementor ===\r Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz\r Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form\r Requires at least: 4.0\r Tested up to: 5.2\r Requires PHP: 5.4\r Stable tag: 3.3.0\r License: GPLv3\r License URI: https://opensource.org/licenses/GPL-3.0",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rupok/essential-addons-for-elementor-lite.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rupok/essential-addons-for-elementor-lite/issues"
-  },
-  "homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-clean-css": "^4.2.0",
-    "gulp-compass": "^2.1.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-notify": "^3.2.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-uglify": "^3.0.2",
-    "gulp-watch": "^5.0.1"
-  },
-  "dependencies": {
-    "compass": "^0.1.1",
-    "graceful-fs": "^4.2.2",
-    "minimatch": "^3.0.4",
-    "natives": "^1.1.6",
-    "ruby": "^0.6.1",
-    "run-sequence": "^2.2.1"
-  }
+	"name": "essential-addons-for-elementor",
+	"version": "1.0.0",
+	"description": "=== Essential Addons for Elementor ===\r Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz\r Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form\r Requires at least: 4.0\r Tested up to: 5.2\r Requires PHP: 5.4\r Stable tag: 3.3.0\r License: GPLv3\r License URI: https://opensource.org/licenses/GPL-3.0",
+	"main": "gulpfile.js",
+	"scripts": {
+		"dev": "webpack --mode development",
+		"build": "webpack --mode production"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rupok/essential-addons-for-elementor-lite.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/rupok/essential-addons-for-elementor-lite/issues"
+	},
+	"homepage": "https://github.com/rupok/essential-addons-for-elementor-lite#readme",
+	"devDependencies": {
+		"@babel/cli": "^7.7.7",
+		"@babel/core": "^7.8.6",
+		"@babel/plugin-proposal-class-properties": "^7.8.3",
+		"@babel/preset-env": "^7.8.6",
+		"babel-loader": "^8.0.6",
+		"gulp": "^4.0.2",
+		"gulp-autoprefixer": "^6.1.0",
+		"gulp-clean-css": "^4.2.0",
+		"gulp-compass": "^2.1.0",
+		"gulp-concat": "^2.6.1",
+		"gulp-notify": "^3.2.0",
+		"gulp-rename": "^1.4.0",
+		"gulp-uglify": "^3.0.2",
+		"gulp-watch": "^5.0.1",
+		"webpack": "^4.41.4",
+		"webpack-cli": "^3.3.10"
+	},
+	"dependencies": {
+		"@wordpress/hooks": "^2.6.0",
+		"compass": "^0.1.1",
+		"graceful-fs": "^4.2.2",
+		"minimatch": "^3.0.4",
+		"natives": "^1.1.6",
+		"ruby": "^0.6.1",
+		"run-sequence": "^2.2.1"
+	}
 }

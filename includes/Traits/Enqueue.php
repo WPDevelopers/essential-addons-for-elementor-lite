@@ -99,6 +99,8 @@ trait Enqueue
             );
         }
 
+        wp_enqueue_script('eael', EAEL_PLUGIN_URL . 'assets/front-end/js/eael/index.min.js', ['jquery'], false, true);
+
         // My Assets
         if ($this->is_preview_mode()) {
             // generate fallback scripts
