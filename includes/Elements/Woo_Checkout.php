@@ -455,7 +455,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-login' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .woo-checkout-login, {{WRAPPER}} .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -561,7 +561,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon, {{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -860,7 +860,7 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce-error, {{WRAPPER}} .ea-woo-checkout .woocommerce-info, {{WRAPPER}} .ea-woo-checkout .woocommerce-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce-notices-wrapper .woocommerce-error, {{WRAPPER}} .ea-woo-checkout .woocommerce-info, {{WRAPPER}} .ea-woo-checkout .woocommerce-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .ea-woo-checkout .woocommerce-error::before, , {{WRAPPER}} .ea-woo-checkout .woocommerce-info::before, {{WRAPPER}} .ea-woo-checkout .woocommerce-message::before' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
 				],
 			]
@@ -875,7 +875,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->start_controls_section(
 			'ea_section_woo_checkout_customer_details',
 			[
-				'label' => esc_html__( 'Billing Details', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Customer Details', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1243,6 +1243,17 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'name' => 'ea_woo_checkout_privacy_policy_typo',
 				'selector' => '{{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text',
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_privacy_policy_link_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .woo-checkout-payment a.woocommerce-privacy-policy-link' => 'color: {{VALUE}}!important;',
+				],
 			]
 		);
 		$this->add_control(
