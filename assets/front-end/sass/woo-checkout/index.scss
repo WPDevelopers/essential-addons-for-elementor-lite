@@ -18,6 +18,7 @@ $base-font-size: 14px;
 			line-height: 1.5em;
 			font-weight: 600;
 			margin-top: 0;
+			text-transform: capitalize;
 		}
 
 		label {
@@ -34,9 +35,11 @@ $base-font-size: 14px;
 			text-align: left;
 			background-color: transparent;
 			border: 1px solid inherit;
+			text-transform: capitalize;
 
 			a {
 				box-shadow: none !important;
+				text-transform: capitalize;
 			}
 		}
 
@@ -238,6 +241,8 @@ $base-font-size: 14px;
 				padding: 20px;
 				width: 100%;
 				text-align: left;
+				border: 1px solid inherit;
+				border-radius: 5px;
 
 				p:first-child {
 					margin: 0 0 20px 0;
@@ -251,6 +256,7 @@ $base-font-size: 14px;
 						border-radius: 5px;
 						box-shadow: 0 12px 20px rgba(51,57,137,0.1);
 						background-color: #ffffff;
+						height: 50px;
 
 						:focus {
 							outline: none;
@@ -301,7 +307,7 @@ $base-font-size: 14px;
 				}
 
 				.woocommerce-info {
-					padding-left: 35px!important;
+					padding: 0 0 0 35px!important;
 					font-size: inherit;
 					line-height: 1.5em;
 					font-weight: inherit;
@@ -566,6 +572,11 @@ $base-font-size: 14px;
 					.wc_payment_method {
 						margin: 0;
 						padding: 0;
+
+						> label {
+							padding: 0;
+							margin: 1rem 0;
+						}
 					}
 
 					.payment_box {
@@ -589,6 +600,9 @@ $base-font-size: 14px;
 
 					#place_order {
 						width: auto;
+						margin: 0 0 0 auto;
+						text-transform: capitalize;
+						letter-spacing: unset;
 					}
 				}
 			}
