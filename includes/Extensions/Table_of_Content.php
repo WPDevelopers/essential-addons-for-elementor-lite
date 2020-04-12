@@ -157,6 +157,21 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_use_title_in_url',
+            [
+                'label' => __('Heading Text in URL', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'no',
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_word_wrap',
             [
                 'label' => __('Stop Word Wrap', 'essential-addons-for-elementor-lite'),

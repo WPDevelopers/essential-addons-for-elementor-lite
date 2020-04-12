@@ -10,20 +10,21 @@
 			if (selector === null || supportTag === undefined || !listId) {
 				return null;
 			}
-
+			var eaelToc = document.getElementById("eael-toc");
+			var titleUrl = typeof(eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
 			var allSupportTag = [];
 			var mainSelector = document.querySelectorAll(selector),
 				listIndex = 0;
 
-			for(var j = 0;j<mainSelector.length;j++){
-				var featchTag  = mainSelector[j].querySelectorAll(supportTag);
-				Array.prototype.push.apply(allSupportTag,featchTag);
+			for (var j = 0; j < mainSelector.length; j++) {
+				var featchTag = mainSelector[j].querySelectorAll(supportTag);
+				Array.prototype.push.apply(allSupportTag, featchTag);
 			}
 
 			allSupportTag = Array.prototype.slice.call(allSupportTag);
 
 			allSupportTag.forEach(function (el) {
-				el.id = listIndex + "-" + eael_build_id();
+				el.id = listIndex + "-" + eael_build_id( titleUrl ,el.textContent);
 				el.classList.add("eael-heading-content");
 				listIndex++;
 			});
@@ -48,6 +49,8 @@
 			var tagList = supportTag;
 			var parentLevel = '';
 			var allHeadings = [];
+			var eaelToc = document.getElementById("eael-toc");
+			var titleUrl = typeof(eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
 			var listId = document.getElementById("eael-toc-list");
 			var mainContent = document.querySelectorAll(selector),
 				baseTag = parentLevel = tagList
@@ -58,9 +61,9 @@
 
 			listId.innerHTML = "";
 
-			for(var j = 0;j<mainContent.length;j++){
-				var featchTag  = mainContent[j].querySelectorAll(tagList);
-				Array.prototype.push.apply(allHeadings,featchTag);
+			for (var j = 0; j < mainContent.length; j++) {
+				var featchTag = mainContent[j].querySelectorAll(tagList);
+				Array.prototype.push.apply(allHeadings, featchTag);
 			}
 
 			if (allHeadings.length > 0) {
@@ -111,7 +114,7 @@
 					liNode.setAttribute("itemprop", "itemListElement");
 				}
 
-				var Linkid = "#" + i + "-" + eael_build_id();
+				var Linkid = "#" + i + "-" + eael_build_id(titleUrl, currentHeading.textContent);
 				anchorTag.className = "eael-toc-link";
 				anchorTag.setAttribute("itemprop", "item");
 				anchorTag.setAttribute("href", Linkid);
@@ -153,7 +156,7 @@
 		});
 
 		//some site not working with **window.onscroll**
-		window.addEventListener('scroll', function(e) {
+		window.addEventListener('scroll', function (e) {
 			eaelTocSticky();
 		});
 		var stickyScroll = $('#eael-toc').data('stickyscroll');
@@ -179,8 +182,21 @@
 		 * @param content
 		 * @returns {string}
 		 */
-		function eael_build_id() {
-			return "eael-table-of-content";
+		function eael_build_id(showTitle, title) {
+			if (showTitle =='true' && title != '') {
+				//create slug from Heading text
+				return title.toString()
+					.toLowerCase()
+					.normalize('NFD')
+					.trim()
+					.replace(/[^a-z0-9 -]/g, '')
+					.replace(/\s+/g, '-')
+					.replace(/^-+/, "")
+					.replace(/-+$/, "")
+					.replace(/-+/g, '-');
+			} else {
+				return "eael-table-of-content";
+			}
 		}
 
 		/**

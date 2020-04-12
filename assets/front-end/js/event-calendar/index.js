@@ -37,8 +37,6 @@ var EventCalendar = function ($scope, $) {
 		eventRender: function (info) {
 			var element = $(info.el),
 				event = info.event;
-			console.log(translate);
-			console.log('test');
 			// when event is finished event text are cross
 			if (event.extendedProps.eventHasComplete !== undefined && event.extendedProps.eventHasComplete === 'yes') {
 				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
