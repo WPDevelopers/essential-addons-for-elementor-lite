@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.9.1
+Stable tag: 3.9.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -184,6 +184,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.9.2 - 12/04/2020 =
+- Added: FormStack Widget
+- Added: EmbedPress Widget
+- Fixed: Toc hide issue in theme builder
+- Improvement: Event Calendar show year in Event Calendar Widget
+- ADDED: Toc hide/show option in mobile device
+- Improvement: Post Grid added individual control over author/categories/date
+- FIXED: BetterDocs > Search Form's search icon size increase option fixed
+- Improvement: EA Dual Color Heading | Added multiple Tag support for headings
+- Improvements - EA Advanced Tabs
+- Few minor bugfix and improvements
 
 = 3.9.1 - 25/03/2020 =
 - Improved Elements Keywords for better searchability
