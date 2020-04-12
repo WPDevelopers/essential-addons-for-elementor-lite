@@ -271,17 +271,15 @@ trait Woo_Checkout_Helper {
 	/**
 	 * Show the order review.
 	 */
-	public static function checkout_order_review_default($settings) {
+	public static function checkout_order_review_default() {
 		?>
-		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
-        <div class="ea-woo-checkout-order-review">
             <div class="ea-checkout-review-order-table">
                 <ul class="ea-order-review-table">
                     <li class="table-header">
-                        <div class="table-col-1"><?php echo $settings['ea_woo_checkout_table_product_text']; ?></div>
-                        <div class="table-col-2"><?php echo $settings['ea_woo_checkout_table_quantity_text']; ?></div>
-                        <div class="table-col-3"><?php echo $settings['ea_woo_checkout_table_price_text']; ?></div>
+                        <div class="table-col-1"><?php esc_html_e( 'Product', 'essential-addons-for-elementor-lite' ); ?></div>
+                        <div class="table-col-2"><?php esc_html_e( 'Quantity', 'essential-addons-for-elementor-lite' ); ?></div>
+                        <div class="table-col-3"><?php esc_html_e( 'Price', 'essential-addons-for-elementor-lite' ); ?></div>
                     </li>
 
 					<?php
@@ -322,14 +320,11 @@ trait Woo_Checkout_Helper {
                 </ul>
 
                 <div class="ea-order-review-table-footer">
-					<?php
-					if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
-                        <div class="back-to-shop">
-                            <a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-                                <i class="fas fa-long-arrow-alt-left"></i><?php echo $settings['ea_woo_checkout_shop_link_text']; ?>
-                            </a>
-                        </div>
-					<?php } ?>
+                    <div class="back-to-shop">
+                        <a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+                            <i class="fas fa-long-arrow-alt-left"></i><?php esc_html_e( 'Continue Shopping', 'essential-addons-for-elementor-lite' ); ?>
+                        </a>
+                    </div>
 
                     <div class="footer-content">
                         <div class="cart-subtotal">
@@ -387,9 +382,7 @@ trait Woo_Checkout_Helper {
                     </div>
                 </div>
             </div>
-        </div>
 
-		<?php do_action('woocommerce_checkout_after_order_review'); ?>
 		<?php
 	}
 
@@ -402,7 +395,13 @@ trait Woo_Checkout_Helper {
 		?>
 		<h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
 
-		<?php self::checkout_order_review_default($settings); ?>
+		<?php do_action('woocommerce_checkout_before_order_review'); ?>
+
+		<div class="ea-woo-checkout-order-review">
+		<?php self::checkout_order_review_default(); ?>
+		</div>
+
+		<?php do_action('woocommerce_checkout_after_order_review'); ?>
 
 		<?php
 		// If checkout registration is disabled and not logged in, the user cannot checkout.
