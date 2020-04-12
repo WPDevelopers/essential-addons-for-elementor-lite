@@ -40153,73 +40153,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -40296,6 +40229,73 @@ jQuery(window).on("elementor/frontend/init", function() {
 	}
 
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
+});
+
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
 });
 
 var EventCalendar = function ($scope, $) {
@@ -40399,8 +40399,9 @@ var EventCalendar = function ($scope, $) {
 					) {
 						startView = moment(event.start).format("MMM Do " + timeFormate);
 					}
+
 					startView = (yearDiff) ? startYear + ' ' + startView : startView;
-					startSelector.html('<i class="eicon-calendar"></i> ' + startView)
+
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
 							endView = " Today " + moment(endDate).format(timeFormate);
@@ -40442,12 +40443,15 @@ var EventCalendar = function ($scope, $) {
 					}
 
 					endView = (yearDiff) ? endYear + ' ' + endView : endView;
-					if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
-						endSelector.html(" ");
-					}else{
-						endSelector.html("- " + endView);
-					}
+
 				}
+
+				if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
+					endSelector.html(" ");
+				}else{
+					endSelector.html((endView!='')?"- " + endView:'');
+				}
+				startSelector.html('<i class="eicon-calendar"></i> ' + startView)
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
@@ -40796,55 +40800,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-filterable-gallery.default", filterableGalleryHandler);
 });
 
-var ImageAccordion = function($scope, $) {
-    var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
-        $id =
-            $imageAccordion.data("img-accordion-id") !== undefined
-                ? $imageAccordion.data("img-accordion-id")
-                : "",
-        $type =
-            $imageAccordion.data("img-accordion-type") !== undefined
-                ? $imageAccordion.data("img-accordion-type")
-                : "";
-    
-    if ("on-click" === $type) {
-        $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
-            if ($(this).hasClass("overlay-active") == false) {
-                e.preventDefault();
-            }
-
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .addClass("overlay-active");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay-inner")
-                .addClass("overlay-inner-show");
-            $(this).css("flex", "3");
-        });
-        $("#eael-img-accordion-" + $id + " a").on("blur", function(e) {
-            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
-            $("#eael-img-accordion-" + $id + " a")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay")
-                .parent("a")
-                .removeClass("overlay-active");
-        });
-    }
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-image-accordion.default",
-        ImageAccordion
-    );
-});
-
 (function($) {
 	window.isEditMode = false;
 
@@ -40901,6 +40856,55 @@ jQuery(window).on("elementor/frontend/init", function() {
 		}
 	});
 })(jQuery);
+
+var ImageAccordion = function($scope, $) {
+    var $imageAccordion = $scope.find(".eael-img-accordion").eq(0),
+        $id =
+            $imageAccordion.data("img-accordion-id") !== undefined
+                ? $imageAccordion.data("img-accordion-id")
+                : "",
+        $type =
+            $imageAccordion.data("img-accordion-type") !== undefined
+                ? $imageAccordion.data("img-accordion-type")
+                : "";
+    
+    if ("on-click" === $type) {
+        $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
+            if ($(this).hasClass("overlay-active") == false) {
+                e.preventDefault();
+            }
+
+            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $(this)
+                .find(".overlay")
+                .parent("a")
+                .addClass("overlay-active");
+            $("#eael-img-accordion-" + $id + " a")
+                .find(".overlay-inner")
+                .removeClass("overlay-inner-show");
+            $(this)
+                .find(".overlay-inner")
+                .addClass("overlay-inner-show");
+            $(this).css("flex", "3");
+        });
+        $("#eael-img-accordion-" + $id + " a").on("blur", function(e) {
+            $("#eael-img-accordion-" + $id + " a").css("flex", "1");
+            $("#eael-img-accordion-" + $id + " a")
+                .find(".overlay-inner")
+                .removeClass("overlay-inner-show");
+            $(this)
+                .find(".overlay")
+                .parent("a")
+                .removeClass("overlay-active");
+        });
+    }
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-image-accordion.default",
+        ImageAccordion
+    );
+});
 
 var PostGrid = function($scope, $) {
     var $gallery = $(".eael-post-appender", $scope),
@@ -41062,6 +41066,193 @@ jQuery(document).ready(function() {
     }
 });
 
+var eaelsvPosition = '';
+var eaelsvWidth = 0;
+var eaelsvHeight = 0;
+var eaelsvDomHeight = 0;
+var videoIsActive = 'off';
+var eaelMakeItSticky = 0;
+var scrollHeight = 0;
+
+jQuery(window).on('elementor/frontend/init', function () {
+    
+    if (isEditMode) {
+        
+        elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
+            var interval;
+
+            model.attributes.settings.on('change:eaelsv_sticky_width', function() {
+                clearTimeout(interval);
+
+                interval = setTimeout(function() {
+                    var height = Math.ceil(model.getSetting('eaelsv_sticky_width') / 1.78);
+
+                    model.attributes.settings.attributes.eaelsv_sticky_height = height;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_height"]').value = height;
+                }, 250);
+            });
+            
+            model.attributes.settings.on('change:eaelsv_sticky_height', function() {
+                clearTimeout(interval);
+
+                interval = setTimeout(function() {
+                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
+
+                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
+                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
+                }, 250);
+            });
+        });
+    }
+
+    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
+        $('.eaelsv-sticky-player-close', $scope).hide();
+
+        var element = $scope.find('.eael-sticky-video-player2');
+        var sticky = '';
+        var autoplay = '';
+        var overlay = '';
+
+        sticky = element.data('sticky');
+        autoplay = element.data('autoplay');
+        eaelsvPosition = element.data('position');
+        eaelsvHeight = element.data('sheight');
+        eaelsvWidth = element.data('swidth');
+        overlay = element.data('overlay');
+        scrollHeight = element.data('scroll_height');
+
+        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+
+        var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
+
+        // If element is Sticky video
+        if (overlay === 'no') {
+            // If autoplay is enable
+            if ('yes' === autoplay && sticky === 'yes') {
+                eaelsvDomHeight = GetDomElementHeight(element);
+                element.attr('id', 'videobox');
+
+                videoIsActive = 'on';
+
+                // When play event is cliked
+                // Do the sticky process
+                PlayerPlay(playerAbc, element);
+            }
+        }
+
+        // Overlay Operation Started
+        if (overlay === 'yes') {
+            var ovrlyElmnt = element.prev();
+            videoIsActive = 'off';
+            $(ovrlyElmnt).on('click', function () {
+                $(this).css('display', 'none');
+
+                if ($(this).next().data('autoplay') === 'yes') {
+                    playerAbc.restart();
+                    eaelsvDomHeight = GetDomElementHeight(this);
+                    if (sticky === 'yes') {
+                        $(this).next().attr('id', 'videobox');
+                        videoIsActive = 'on';
+                    }
+                }
+            });
+        }
+        
+        playerAbc.on('pause', function (event) {
+            videoIsActive = 'off';
+        });
+        
+        playerAbc.on('play', function (event) {
+            videoIsActive = 'on';
+        });
+
+        $('.eaelsv-sticky-player-close').on('click', function () {
+            element.removeClass('out').addClass('in');
+            $('.eael-sticky-video-player2').removeAttr('style');
+            videoIsActive = 'off';
+        });
+
+        element.parent().css('height', element.height() + 'px');
+        $(window).resize(function() {
+            element.parent().css('height', element.height() + 'px');
+        });
+    }); 
+});
+
+jQuery(window).scroll(function() {
+    var scrollTop = jQuery(window).scrollTop();
+    var scrollBottom = jQuery(document).height() - scrollTop;
+    if (scrollBottom > jQuery(window).height() + 400) {
+        if (scrollTop >= eaelsvDomHeight) {
+            if (videoIsActive == 'on') {
+                jQuery('#videobox')
+                    .find('.eaelsv-sticky-player-close')
+                    .css('display', 'block');
+                jQuery('#videobox')
+                    .removeClass('in')
+                    .addClass('out');
+                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+            }
+        } else {
+            jQuery('.eaelsv-sticky-player-close').hide();
+            jQuery('#videobox')
+                .removeClass('out')
+                .addClass('in');
+            jQuery('.eael-sticky-video-player2').removeAttr('style');
+        }
+    }
+});
+
+function GetDomElementHeight(elem) {
+    var contentHeight = jQuery(elem).parent().height();
+    var expHeight = ((scrollHeight * contentHeight) / 100);
+    var hght =
+        jQuery(elem)
+            .parent()
+            .offset().top + expHeight;
+
+    return hght;
+}
+
+function PositionStickyPlayer(p, h, w) {
+    if (p == 'top-left') {
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
+    }
+    if (p == 'top-right') {
+        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
+    }
+    if (p == 'bottom-right') {
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
+    }
+    if (p == 'bottom-left') {
+        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
+        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
+    }
+    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
+    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
+}
+
+function PlayerPlay(a, b) {
+    a.on('play', function (event) {
+        eaelsvDomHeight = GetDomElementHeight(b);
+        jQuery('.eael-sticky-video-player2').removeAttr('id');
+        jQuery('.eael-sticky-video-player2').removeClass('out');
+        b.attr('id', 'videobox');
+
+        videoIsActive = 'on';
+        eaelsvPosition = b.data('position');
+        eaelsvHeight = b.data('sheight');
+        eaelsvWidth = b.data('swidth');
+    });
+}
+
+function RunStickyPlayer(elem) {
+    var ovrplyer = new Plyr('#' + elem);
+    ovrplyer.start();
+}
 (function ($) {
 	jQuery(document).ready(function () {
 		/**
@@ -41437,193 +41628,6 @@ jQuery(document).ready(function() {
 	});
 })(jQuery);
 
-var eaelsvPosition = '';
-var eaelsvWidth = 0;
-var eaelsvHeight = 0;
-var eaelsvDomHeight = 0;
-var videoIsActive = 'off';
-var eaelMakeItSticky = 0;
-var scrollHeight = 0;
-
-jQuery(window).on('elementor/frontend/init', function () {
-    
-    if (isEditMode) {
-        
-        elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
-            var interval;
-
-            model.attributes.settings.on('change:eaelsv_sticky_width', function() {
-                clearTimeout(interval);
-
-                interval = setTimeout(function() {
-                    var height = Math.ceil(model.getSetting('eaelsv_sticky_width') / 1.78);
-
-                    model.attributes.settings.attributes.eaelsv_sticky_height = height;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_height"]').value = height;
-                }, 250);
-            });
-            
-            model.attributes.settings.on('change:eaelsv_sticky_height', function() {
-                clearTimeout(interval);
-
-                interval = setTimeout(function() {
-                    var width = Math.ceil(model.getSetting('eaelsv_sticky_height') * 1.78);
-
-                    model.attributes.settings.attributes.eaelsv_sticky_width = width;
-                    panel.el.querySelector('[data-setting="eaelsv_sticky_width"]').value = width;
-                }, 250);
-            });
-        });
-    }
-
-    elementorFrontend.hooks.addAction('frontend/element_ready/eael-sticky-video.default', function ($scope, $) {
-        $('.eaelsv-sticky-player-close', $scope).hide();
-
-        var element = $scope.find('.eael-sticky-video-player2');
-        var sticky = '';
-        var autoplay = '';
-        var overlay = '';
-
-        sticky = element.data('sticky');
-        autoplay = element.data('autoplay');
-        eaelsvPosition = element.data('position');
-        eaelsvHeight = element.data('sheight');
-        eaelsvWidth = element.data('swidth');
-        overlay = element.data('overlay');
-        scrollHeight = element.data('scroll_height');
-
-        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-
-        var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
-
-        // If element is Sticky video
-        if (overlay === 'no') {
-            // If autoplay is enable
-            if ('yes' === autoplay && sticky === 'yes') {
-                eaelsvDomHeight = GetDomElementHeight(element);
-                element.attr('id', 'videobox');
-
-                videoIsActive = 'on';
-
-                // When play event is cliked
-                // Do the sticky process
-                PlayerPlay(playerAbc, element);
-            }
-        }
-
-        // Overlay Operation Started
-        if (overlay === 'yes') {
-            var ovrlyElmnt = element.prev();
-            videoIsActive = 'off';
-            $(ovrlyElmnt).on('click', function () {
-                $(this).css('display', 'none');
-
-                if ($(this).next().data('autoplay') === 'yes') {
-                    playerAbc.restart();
-                    eaelsvDomHeight = GetDomElementHeight(this);
-                    if (sticky === 'yes') {
-                        $(this).next().attr('id', 'videobox');
-                        videoIsActive = 'on';
-                    }
-                }
-            });
-        }
-        
-        playerAbc.on('pause', function (event) {
-            videoIsActive = 'off';
-        });
-        
-        playerAbc.on('play', function (event) {
-            videoIsActive = 'on';
-        });
-
-        $('.eaelsv-sticky-player-close').on('click', function () {
-            element.removeClass('out').addClass('in');
-            $('.eael-sticky-video-player2').removeAttr('style');
-            videoIsActive = 'off';
-        });
-
-        element.parent().css('height', element.height() + 'px');
-        $(window).resize(function() {
-            element.parent().css('height', element.height() + 'px');
-        });
-    }); 
-});
-
-jQuery(window).scroll(function() {
-    var scrollTop = jQuery(window).scrollTop();
-    var scrollBottom = jQuery(document).height() - scrollTop;
-    if (scrollBottom > jQuery(window).height() + 400) {
-        if (scrollTop >= eaelsvDomHeight) {
-            if (videoIsActive == 'on') {
-                jQuery('#videobox')
-                    .find('.eaelsv-sticky-player-close')
-                    .css('display', 'block');
-                jQuery('#videobox')
-                    .removeClass('in')
-                    .addClass('out');
-                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-            }
-        } else {
-            jQuery('.eaelsv-sticky-player-close').hide();
-            jQuery('#videobox')
-                .removeClass('out')
-                .addClass('in');
-            jQuery('.eael-sticky-video-player2').removeAttr('style');
-        }
-    }
-});
-
-function GetDomElementHeight(elem) {
-    var contentHeight = jQuery(elem).parent().height();
-    var expHeight = ((scrollHeight * contentHeight) / 100);
-    var hght =
-        jQuery(elem)
-            .parent()
-            .offset().top + expHeight;
-
-    return hght;
-}
-
-function PositionStickyPlayer(p, h, w) {
-    if (p == 'top-left') {
-        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
-    }
-    if (p == 'top-right') {
-        jQuery('.eael-sticky-video-player2.out').css('top', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
-    }
-    if (p == 'bottom-right') {
-        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('right', '40px');
-    }
-    if (p == 'bottom-left') {
-        jQuery('.eael-sticky-video-player2.out').css('bottom', '40px');
-        jQuery('.eael-sticky-video-player2.out').css('left', '40px');
-    }
-    jQuery('.eael-sticky-video-player2.out').css('width', w + 'px');
-    jQuery('.eael-sticky-video-player2.out').css('height', h + 'px');
-}
-
-function PlayerPlay(a, b) {
-    a.on('play', function (event) {
-        eaelsvDomHeight = GetDomElementHeight(b);
-        jQuery('.eael-sticky-video-player2').removeAttr('id');
-        jQuery('.eael-sticky-video-player2').removeClass('out');
-        b.attr('id', 'videobox');
-
-        videoIsActive = 'on';
-        eaelsvPosition = b.data('position');
-        eaelsvHeight = b.data('sheight');
-        eaelsvWidth = b.data('swidth');
-    });
-}
-
-function RunStickyPlayer(elem) {
-    var ovrplyer = new Plyr('#' + elem);
-    ovrplyer.start();
-}
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
         $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
