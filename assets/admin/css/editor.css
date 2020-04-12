@@ -43,3 +43,7 @@
   .elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
     color: #f54;
   }
+
+.elementor-control-ea_woo_checkout_notices_border_color {
+    display: none;
+}

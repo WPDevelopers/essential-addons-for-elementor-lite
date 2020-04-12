@@ -27,6 +27,25 @@ $base-font-size: 14px;
 			font-weight: 500;
 		}
 
+		.woocommerce-notices-wrapper {
+			.woocommerce-error {
+				border-radius: 5px;
+				background-color: #FFF3F5;
+				color: #FF7E93;
+				padding: 20px 20px 20px 30px;
+				font-size: 16px;
+				line-height: 1.5em;
+				font-weight: 400;
+				margin-bottom: 30px;
+
+				&::before {
+					left: 0;
+					top: 0;
+					font-size: 20px
+				}
+			}
+		}
+
 		.woocommerce-error, .woocommerce-info, .woocommerce-message {
 			background-color: transparent;
 			padding: 0;
@@ -86,7 +105,7 @@ $base-font-size: 14px;
 
 				&::before {
 					left: 0;
-					top: 04px;
+					top: 0;
 					font-size: 20px
 				}
 			}
@@ -242,6 +261,7 @@ $base-font-size: 14px;
 			label {
 				margin-bottom: 10px;
 			}
+
 			.input-text, select {
 				border-radius: 5px;
 				background-color: #ffffff;
@@ -272,6 +292,18 @@ $base-font-size: 14px;
 
 				&:hover {
 					text-decoration: none;
+				}
+			}
+
+			.woocommerce-error, .woocommerce-info, .woocommerce-message {
+				background-color: transparent;
+				padding: 0;
+				border: none;
+
+				&::before {
+					left: 0;
+					top: 0;
+					font-size: 20px
 				}
 			}
 		}

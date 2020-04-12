@@ -17,6 +17,21 @@
   line-height: 1.5;
   font-weight: 500;
 }
+.ea-woo-checkout .woocommerce .woocommerce-notices-wrapper .woocommerce-error {
+  border-radius: 5px;
+  background-color: #FFF3F5;
+  color: #FF7E93;
+  padding: 20px 20px 20px 30px;
+  font-size: 16px;
+  line-height: 1.5em;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+.ea-woo-checkout .woocommerce .woocommerce-notices-wrapper .woocommerce-error::before {
+  left: 0;
+  top: 0;
+  font-size: 20px;
+}
 .ea-woo-checkout .woocommerce .woocommerce-error, .ea-woo-checkout .woocommerce .woocommerce-info, .ea-woo-checkout .woocommerce .woocommerce-message {
   background-color: transparent;
   padding: 0;
@@ -69,7 +84,7 @@
 }
 .ea-woo-checkout .woocommerce .woocommerce-checkout .woocommerce-NoticeGroup .woocommerce-error::before {
   left: 0;
-  top: 04px;
+  top: 0;
   font-size: 20px;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review {
@@ -229,6 +244,16 @@
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .button:hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover {
   text-decoration: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-error, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-message, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}
+.ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-error::before, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-info::before, .ea-woo-checkout .woocommerce .woo-checkout-login .woocommerce-message::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info::before, .ea-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message::before {
+  left: 0;
+  top: 0;
+  font-size: 20px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login {
   border-radius: 5px;
