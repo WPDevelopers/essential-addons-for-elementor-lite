@@ -99,8 +99,9 @@ var EventCalendar = function ($scope, $) {
 					) {
 						startView = moment(event.start).format("MMM Do " + timeFormate);
 					}
+
 					startView = (yearDiff) ? startYear + ' ' + startView : startView;
-					startSelector.html('<i class="eicon-calendar"></i> ' + startView)
+
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
 							endView = translate.today+" " + moment(endDate).format(timeFormate);
@@ -142,12 +143,15 @@ var EventCalendar = function ($scope, $) {
 					}
 
 					endView = (yearDiff) ? endYear + ' ' + endView : endView;
-					if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
-						endSelector.html(" ");
-					}else{
-						endSelector.html("- " + endView);
-					}
+
 				}
+
+				if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
+					endSelector.html(" ");
+				}else{
+					endSelector.html((endView!='')?"- " + endView:'');
+				}
+				startSelector.html('<i class="eicon-calendar"></i> ' + startView)
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
