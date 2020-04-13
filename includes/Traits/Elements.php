@@ -422,7 +422,13 @@ trait Elements
     /**
      * Register WC Hooks
      */
-    public function register_wc_hooks() {
-        wc()->frontend_includes();
-    }
+
+	public function register_wc_hooks() {
+
+		if (class_exists( 'WooCommerce' )){
+			wc()->frontend_includes();
+		}
+
+	}
+
 }

@@ -391,10 +391,6 @@ $config = [
         ],
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
-            'condition' => [
-                'function_exists',
-                'WC',
-            ],
             'dependency' => [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/woo-checkout/index.css',
