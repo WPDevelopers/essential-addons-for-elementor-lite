@@ -2,7 +2,7 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz, manzurahammed
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor form
 Requires at least: 4.0
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.4
 Stable tag: 3.9.2
 License: GPLv3
@@ -80,7 +80,7 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
 34. [BetterDocs Category Box](https://essential-addons.com/elementor/betterdocs-category-box/) - Cretae custom box-style Knowledge Base layout with BetterDocs Category List.
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
-36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible freedon
+36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible free-addon
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 
@@ -91,7 +91,7 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create Modal Popup which opens after certain actions.
 3. [Testimonial Slider](https://essential-addons.com/elementor/testimonial-slider/) - Highlight how you customers love your business with sliders
 4. [Image Comparison](https://essential-addons.com/elementor/image-comparison/) - Let your viewers compare between two images 
-5. [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ ) - Showcare your content heading in amazing way
+5. [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ ) - Showcase your content heading in amazing way
 6. [Instagram Gallery & Feed](https://essential-addons.com/elementor/instagram-feed/) - Display your Instagram presence to leverage social proof
 7. [Advanced Google Map](https://essential-addons.com/elementor/advanced-google-map/) - Create powerful map with Polylines, Polygons, Overlay, Panorama and with Routes. Unlimited map themes.
 8. [Static Product](https://essential-addons.com/elementor/static-product/) - Present your static product just the way you want
@@ -102,7 +102,7 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 13. [Twitter Feed Carousel](https://essential-addons.com/elementor/twitter-feed/) - Exhibit the twitter feed in interactive styles 
 14. [Dynamic Filterable Gallery](https://essential-addons.com/elementor/filterable-gallery/) - Create filterable gallery from custom content or any post type.
 15. [Smart Post List](https://essential-addons.com/elementor/post-list/) - Design your blog page with modern post list
-16. [Mailchimp](https://essential-addons.com/elementor/mailchimp/) - Design your mailchimp form within Elementor with ease
+16. [Mailchimp](https://essential-addons.com/elementor/mailchimp/) - Design your Mailchimp form within Elementor with ease
 17. [Content Toggle](https://essential-addons.com/elementor/content-toggle/) - Show saved template or any content within Primary and Secondary content area
 18. [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/) - Create beautiful one page websites using this module
 19. [Price Menu](https://essential-addons.com/elementor/price-menu/) - Make beautiful Pricing menu for your brands without any hassle!
@@ -115,7 +115,7 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 26. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
 27. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
-29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
+29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panoromic or long height images within image scroller widget.
 
 Extensions (Free): 
 
@@ -134,6 +134,21 @@ Extensions (Pro):
 More coming soon (weekly update) ...
 
 
+### 🏆 FEATURED BY Top Reviewers
+
+**Adam Preiser did a Speed Test, Found Essential addons the Fastest**
+
+https://www.youtube.com/watch?v=K9BssSV-KC8
+
+**Kay Cinho loves it, made this 45-minutes low full review**
+
+https://www.youtube.com/watch?v=wvmteLgbbe4
+
+**Our friend Dave Swift highlighted the features he loves the most**
+
+https://www.youtube.com/watch?v=PhFb-LfG7h8
+
+
 ### Looking for a companion theme?
 
 Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options.  
@@ -144,11 +159,27 @@ Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Element
 - If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite).
 - For more information about features, FAQs and documentation, check out our website at [Essential Addons for Elementor](https://essential-addons.com/elementor/).
 
+https://www.youtube.com/watch?v=6811orBQcJc
+
+**[Elementor Loading Error - How to Solve - and more useful Elemntor guides](https://www.youtube.com/watch?v=6811orBQcJc&list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh&index=43)
+
+
 ### Happy User of Essential Addons?
 
 - Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/).
 - Learn from our tutorials on [Youtube Channel](https://wpdeveloper.net/go/youtube-channel).
 - Or rate us on [WordPress](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/?rate=5#new-post) :)
+
+### 🔥 WHAT’S NEXT
+If you like Essential Addons, then consider checking out our other WordPress Plugins:
+
+
+🔔**[NotificationX](https://notificationx.com/)** – Best Social Proof & FOMO Marketing Solution to increase conversion rates.
+
+🗒️ **[BetterDocs](https://betterdocs.co/)** – Best Documentation & Knowledge Base Plugin for WordPress, which also reduce your manual support request.
+
+⏰**[WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
+
 
 == Installation ==
 
