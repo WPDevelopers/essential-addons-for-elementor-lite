@@ -40,7 +40,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 37+ FREE WIDGETS AND COUNTING
+### 38+ FREE WIDGETS AND COUNTING
 
 We have designed 37 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -81,6 +81,7 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
 36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible freedon
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
+38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -186,7 +187,7 @@ Your existing elements/content will work with premium version. So you won't lose
 == Changelog ==
 
 = 3.9.2 - 12/04/2020 =
-- Added: FormStack Widget
+- Added: Formstack Widget
 - Added: EmbedPress Widget
 - Fixed: Toc hide issue in theme builder
 - Improvement: Event Calendar show year in Event Calendar Widget
