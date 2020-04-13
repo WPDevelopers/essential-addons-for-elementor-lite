@@ -140,7 +140,7 @@ More coming soon (weekly update) ...
 
 https://www.youtube.com/watch?v=K9BssSV-KC8
 
-**Kay Cinho loves it, made this 45-minutes low full review**
+**Kay Cinho loves it, made this 45-minutes long review**
 
 https://www.youtube.com/watch?v=wvmteLgbbe4
 
@@ -151,7 +151,7 @@ https://www.youtube.com/watch?v=PhFb-LfG7h8
 
 ### Looking for a companion theme?
 
-Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options.  
+Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options. **And fully Free.** 
 
 ### Documentation and Support
 
