@@ -298,6 +298,14 @@ $config = [
                 ],
             ],
         ],
+        'formstack' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Formstack',
+             'dependency' => [
+                 'css' => [
+                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
+                 ],
+             ],
+        ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
             'dependency' => [
@@ -372,6 +380,14 @@ $config = [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/event-calendar/index.min.js',
                 ],
             ],
+        ],
+        'embedpress' => [
+            'class' => '\Essential_Addons_Elementor\Elements\EmbedPress',
+            'condition' => [
+                'class_exists',
+                '\EmbedPress\Elementor\Embedpress_Elementor_Integration',
+                 true
+            ]
         ],
     ],
     'extensions' => [

@@ -30,14 +30,14 @@ trait Enqueue
         }
 
         if (defined('FLUENTFORM')) {
-            wp_enqueue_style(
+            wp_register_style(
                 'fluent-form-styles',
                 WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
                 array(),
                 FLUENTFORM_VERSION
             );
 
-            wp_enqueue_style(
+            wp_register_style(
                 'fluentform-public-default',
                 WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
                 array(),

@@ -399,6 +399,12 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/fluent-form/',
             ],
             [
+                'key'   => 'formstack',
+                'title' => __( 'Formstack', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/formstack/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/formstack/',
+            ],
+            [
                 'key'    => 'mailchimp',
                 'title'  => __( 'Mailchimp', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/mailchimp/',
