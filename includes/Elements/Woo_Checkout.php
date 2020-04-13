@@ -1482,6 +1482,7 @@ class Woo_Checkout extends Widget_Base {
 
 		global $wp;
 
+        $this->ea_woo_checkout_add_actions();
 
 		?>
         <div <?php echo $this->get_render_attribute_string( 'container' ); ?>>
