@@ -17,6 +17,7 @@ Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building
 
 [Check the Demos](https://essential-addons.com/elementor/)
 
+https://www.youtube.com/watch?v=uuyXfUDqRZM
 
 ### 100+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which comes with Essential Addons and design your website to stand out from the crowd.
