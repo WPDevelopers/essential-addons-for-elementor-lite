@@ -72,6 +72,31 @@ class Post_Grid extends Widget_Base
         $this->eael_layout_controls();
 
         /**
+         * Thumbnail Style Contols
+         */
+
+        $this->start_controls_section(
+            'eael_section_post_grid_thumbnail_style',
+            [
+                'label' => __('Thumbail Style', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_thumbnail_radius',
+            [
+                'label' => esc_html__('Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-post-grid .eael-grid-post .eael-entry-media img' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
          * Grid Style Controls!
          */
         $this->start_controls_section(
@@ -140,7 +165,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_typography',
             [
-                'label' => __('Color & Typography', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color, Typography & Spacing', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -214,6 +239,18 @@ class Post_Grid extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-entry-title',
             ]
         );
+
+        $this->add_responsive_control(
+			'eael_post_grid_title_margin',
+			[
+				'label' => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-entry-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
         $this->add_control(
             'eael_post_grid_excerpt_style',
@@ -290,6 +327,18 @@ class Post_Grid extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_responsive_control(
+			'eael_post_grid_excerpt_margin',
+			[
+				'label' => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-grid-post-excerpt p' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
         $this->add_control(
             'eael_post_grid_meta_style',
@@ -405,6 +454,17 @@ class Post_Grid extends Widget_Base
                     '{{WRAPPER}} .eael-grid-post .eael-entry-overlay' => 'background-color: {{VALUE}}',
                 ],
 
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_hover_bg_radius',
+            [
+                'label' => esc_html__('Cards Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-post-grid .eael-grid-post .eael-entry-media .eael-entry-overlay' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                ],
             ]
         );
 
