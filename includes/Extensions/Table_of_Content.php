@@ -26,7 +26,7 @@ class Table_of_Content
         $element->start_controls_section(
             'eael_ext_table_of_content_section',
             [
-                'label' => esc_html__('EA Table of Content', 'essential-addons-for-elementor-lite'),
+                'label' => __('<i class="eaicon-logo"></i> Table of Contents', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_SETTINGS,
             ]
         );
@@ -34,7 +34,7 @@ class Table_of_Content
         $element->add_control(
             'eael_ext_table_of_content',
             [
-                'label' => __('Enable Table of Content', 'essential-addons-for-elementor-lite'),
+                'label' => __('Enable Table of Contents', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'no',
                 'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
@@ -56,7 +56,7 @@ class Table_of_Content
                 'eael_ext_toc_global_warning_text',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('You can modify the Global Table of content by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
+                    'raw' => __('You can modify the Global Table of Contents by <strong><a href="' . get_bloginfo('url') . '/wp-admin/post.php?post=' . $global_settings['eael_ext_table_of_content']['post_id'] . '&action=elementor">Clicking Here</a></strong>', 'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
@@ -67,7 +67,7 @@ class Table_of_Content
             $element->add_control(
                 'eael_ext_toc_global',
                 [
-                    'label' => __('Enable Table of Content Globally', 'essential-addons-for-elementor-lite'),
+                    'label' => __('Enable Table of Contents Globally', 'essential-addons-for-elementor-lite'),
                     'description' => __('Enabling this option will effect on entire site.', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SWITCHER,
                     'default' => 'no',
@@ -104,7 +104,7 @@ class Table_of_Content
             [
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Table of Content', 'essential-addons-for-elementor-lite'),
+                'default' => __('Table of Contents', 'essential-addons-for-elementor-lite'),
                 'label_block' => false,
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
@@ -186,28 +186,43 @@ class Table_of_Content
             ]
         );
 
-	    $element->add_control(
-		    'eael_ext_toc_sticky_scroll',
-		    [
-			    'label' => __('Sticky Scroll Effect', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => 5,
-					    'max' => 2000,
-					    'step' => 10,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 200,
-			    ],
-			    'condition' => [
-				    'eael_ext_table_of_content' => 'yes',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_hide_in_mobile',
+            [
+                'label' => __('Hide TOC in mobile', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'no',
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_sticky_scroll',
+            [
+                'label' => __('Sticky Scroll Effect', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 5,
+                        'max' => 2000,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 200,
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
 
         $element->add_control(
             'eael_ext_toc_sticky_offset',
@@ -235,31 +250,31 @@ class Table_of_Content
             ]
         );
 
-	    $element->add_control(
-		    'eael_ext_toc_sticky_z_index',
-		    [
-			    'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SLIDER,
-			    'size_units' => ['px'],
-			    'range' => [
-				    'px' => [
-					    'min' => 0,
-					    'max' => 9999,
-					    'step' => 10,
-				    ],
-			    ],
-			    'default' => [
-				    'unit' => 'px',
-				    'size' => 9999,
-			    ],
-			    'selectors' => [
-				    '{{WRAPPER}} .eael-toc' => 'z-index: {{SIZE}}',
-			    ],
-			    'condition' => [
-				    'eael_ext_table_of_content' => 'yes',
-			    ],
-		    ]
-	    );
+        $element->add_control(
+            'eael_ext_toc_sticky_z_index',
+            [
+                'label' => __('Z Index', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 9999,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 9999,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc' => 'z-index: {{SIZE}}',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
 
         $element->add_control(
             'eael_ext_toc_ad_warning_text',

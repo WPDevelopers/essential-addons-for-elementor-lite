@@ -25,12 +25,12 @@ class Filterable_Gallery extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Filterable Gallery', 'essential-addons-for-elementor-lite');
+        return esc_html__('Filterable Gallery', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-gallery-grid';
+        return 'eaicon-filterable-gallery';
     }
 
     public function get_categories()
@@ -51,6 +51,31 @@ class Filterable_Gallery extends Widget_Base
         return [
             'font-awesome-4-shim'
         ];
+    }
+    
+    public function get_keywords()
+    {
+        return [
+            'gallery',
+            'ea filter gallery',
+            'ea filterable gallery',
+            'image gallery',
+            'media gallery',
+            'media',
+            'photo gallery',
+            'portfolio',
+            'ea portfolio',
+            'media grid',
+            'responsive gallery',
+            'photo gallery',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/filterable-gallery/';
     }
 
     protected function _register_controls()
@@ -246,8 +271,36 @@ class Filterable_Gallery extends Widget_Base
 				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'default' => ''
+            ]
+        );
+        
+        $this->add_control(
+			'eael_section_fg_full_image_clickable',
+			[
+				'label' => __( 'Full Image Clickable?', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'default' => ''
 			]
-		);
+        );
+        
+        $this->add_control(
+            'eael_section_fg_full_image_action',
+            [
+                'label' => esc_html__('Full Image Action', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'lightbox',
+                'options' => [
+                    'lightbox' => esc_html__('Lightbox', 'essential-addons-for-elementor-lite'),
+                    'link' => esc_html__('Link', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_section_fg_full_image_clickable'    => 'yes'
+                ]
+            ]
+        );
 
         $this->end_controls_section();
 
@@ -2657,6 +2710,7 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);
+        $sorter_class = utf8_encode($sorter_class);
         return $sorter_class;
     }
 
@@ -2831,17 +2885,16 @@ class Filterable_Gallery extends Widget_Base
             
                 echo '<span class="fg-item-icon-inner">';
                     if ($zoom_icon_is_new || $zoom_icon_migrated) {
-                        if( isset($settings['eael_section_fg_zoom_icon_new']['value']['url']) ) {
+                        if (isset($settings['eael_section_fg_zoom_icon_new']['value']['url'])) {
                             echo '<img src="' . $settings['eael_section_fg_zoom_icon_new']['value']['url'] . '" alt="'.esc_attr(get_post_meta($settings['eael_section_fg_zoom_icon_new']['value']['id'], '_wp_attachment_image_alt', true)).'" />';
-                        }else {
+                        } else {
                             echo '<i class="' . $settings['eael_section_fg_zoom_icon_new']['value'] . '" aria-hidden="true"></i>';
                         }
                     } else {
                         echo '<i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i>';
                     }
-                echo '</span>';
-
-            echo '</a>';
+                echo '</span>
+            </a>';
         }
 
         if ($item['maybe_link'] == 'true') {
@@ -2889,7 +2942,34 @@ class Filterable_Gallery extends Widget_Base
             $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . $item['controls'] . '" data-search-key="'.strtolower(str_replace(" ", "-", $item['title'])).'">';
                 $html .= '<div class="fg-layout-3-item eael-gallery-grid-item">';
 
+                    if ( $settings['eael_section_fg_full_image_clickable'] ) {
+
+                        if ( $settings['eael_section_fg_full_image_action'] === 'lightbox' ) {
+    
+                            $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
+    
+                        }
+    
+                        if ( $settings['eael_section_fg_full_image_action'] === 'link' ) {
+                            
+                            $fia_string = 'href="' . esc_url($item['link']['url']) . '"';
+    
+                            if ( $item['link']['nofollow'] ) {
+                                $fia_string .= 'rel="nofollow"';
+                            }
+                
+                            if ( $item['link']['is_external'] ) {
+                                $fia_string .= 'target="_blank"';
+                            }
+    
+                            $html .= '<a ' . $fia_string . '>';
+    
+                        }
+    
+                    }
+
                     $html .= '<div class="fg-layout-3-item-thumb">';
+
                         $html .= '<img src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '">';
                         
                             $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer">';
@@ -2910,11 +2990,19 @@ class Filterable_Gallery extends Widget_Base
                                         if (!empty($icon_url)) $html .= '<img src="' . esc_url($icon_url) . '">';
                                     $html .= '</a>';
                                 }else {
-                                    $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                    
+                                    if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
+                                        
+                                        $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                    
+                                    }
                                 }
+
                             $html .= '</div>';
 
                     $html .= '</div>';
+
+                    if ( $settings['eael_section_fg_full_image_clickable'] ) $html .= '</a>';
 
                     $html .= '<div class="fg-layout-3-item-content">';
 
@@ -2953,20 +3041,48 @@ class Filterable_Gallery extends Widget_Base
 				<div class="eael-gallery-grid-item">';
             }
 
-
                 if ($settings['eael_fg_caption_style'] === 'card'
                     && $item['video_gallery_switch'] === 'false'
                     && $settings['eael_fg_show_popup'] === 'media') {
                     $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
                 }
+
+                if ( $settings['eael_section_fg_full_image_clickable'] ) {
+
+                    if ( $settings['eael_section_fg_full_image_action'] === 'lightbox' ) {
+
+                        $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
+
+                    }
+
+                    if ( $settings['eael_section_fg_full_image_action'] === 'link' ) {
+                        
+                        $fia_string = 'href="' . esc_url($item['link']['url']) . '"';
+
+                        if ( $item['link']['nofollow'] ) {
+                            $fia_string .= 'rel="nofollow"';
+                        }
+            
+                        if ( $item['link']['is_external'] ) {
+                            $fia_string .= 'target="_blank"';
+                        }
+
+                        $html .= '<a ' . $fia_string . '>';
+
+                    }
+
+                }
                     $html .= '<div class="gallery-item-thumbnail-wrap">';
-
                         $html .= '<img src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
-
-                        if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
-                            $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">';
-                                $html .= ($this->eael_render_fg_buttons($settings, $item));
-                            $html .= '</div>';
+                        
+                        if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
+                            
+                            if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
+                                $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">';
+                                    $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                $html .= '</div>';
+                            }
+                        
                         }
 
                         if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
@@ -3008,7 +3124,11 @@ class Filterable_Gallery extends Widget_Base
                                     }
 
                                     if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
-                                        $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                        
+                                        if ( empty($settings['eael_section_fg_full_image_clickable']) ) {
+                                            $html .= ($this->eael_render_fg_buttons($settings, $item));
+                                        }
+
                                     }
                                 $html .= '</div>';
                                 
@@ -3196,7 +3316,7 @@ class Filterable_Gallery extends Widget_Base
                     $scope.on("click", ".control", function(){
                         var $this = $(this);
                         buttonFilter = $( this ).attr('data-filter');
-                        delegateAbc = $(this).attr('data-filter') + ' a.eael-magnific-link';
+                        //delegateAbc = $(this).attr('data-filter') + ' a.eael-magnific-link';
 
                         if($scope.find('#fg-filter-trigger > span')) {
                             $scope.find('#fg-filter-trigger > span').text($this.text());

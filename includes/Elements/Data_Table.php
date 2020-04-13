@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
@@ -22,16 +22,35 @@ class Data_Table extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Data Table', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Data Table', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-table';
+		return 'eaicon-data-table';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'table',
+			'ea table',
+			'data table',
+			'ea data table',
+			'export eable',
+			'CSV',
+			'comparison table',
+			'grid',
+			'ea',
+			'essential addons'
+		];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/data-table/';
+    }
 
 	protected function _register_controls() {
 
@@ -654,7 +673,7 @@ class Data_Table extends Widget_Base {
 					],
 				],
 				'default' => 'left',
-				'prefix_class' => 'eael-dt-th-align-',
+				'prefix_class' => 'eael-dt-th-align%s-',
 			]
 		);
 
@@ -1152,10 +1171,7 @@ class Data_Table extends Widget_Base {
 										<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
 											<div class="td-content-wrapper">
 												<div <?php echo $this->get_render_attribute_string('td_content'); ?>>
-													<?php
-														$eael_frontend = new Frontend;
-														echo $eael_frontend->get_builder_content( intval($table_td[$j]['template']), true );
-													?>
+													<?php echo Plugin::$instance->frontend->get_builder_content(intval($table_td[$j]['template']), true); ?>
 												</div>
 											</div>
 										</td>

@@ -25,17 +25,37 @@ class WeForms extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA weForm', 'essential-addons-for-elementor-lite');
+        return esc_html__('weForm', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-weforms';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'ea contact form',
+            'ea we form',
+            'ea weform',
+            'ea weforms',
+            'form styler',
+            'ea form styler',
+            'elementor form',
+            'feedback',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/weforms/';
     }
 
     protected function _register_controls()

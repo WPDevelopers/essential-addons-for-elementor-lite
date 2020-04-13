@@ -22,16 +22,38 @@ class Pricing_Table extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Pricing Table', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Pricing Table', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-price-table';
+		return 'eaicon-pricing-table';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+	public function get_keywords()
+	{
+        return [
+			'price menu',
+			'pricing',
+			'table',
+			'ea table',
+			'ea pricing table',
+			'comparison table',
+			'pricing plan',
+			'dynamic price',
+			'woocommerce pricing',
+			'ea',
+			'essential addons'
+		];
+    }
+
+	public function get_custom_help_url()
+	{
+        return 'https://essential-addons.com/elementor/docs/pricing-table/';
+    }
 
 	protected function _register_controls() {
 

@@ -18,6 +18,7 @@ var FacebookFeed = function($scope, $) {
         $this = $(this);
         $settings = $this.attr("data-settings");
         $page = $this.attr("data-page");
+        $loadmore_text = $this.attr("data-loadmore-text");
 
         // update load moer button
         $this.addClass("button--loading");
@@ -47,7 +48,7 @@ var FacebookFeed = function($scope, $) {
                 if (response.num_pages > $page) {
                     $this.attr("data-page", parseInt($page) + 1);
                     $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
+                    $("span", $this).html($loadmore_text);
                 } else {
                     $this.remove();
                 }

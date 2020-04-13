@@ -20,17 +20,39 @@ class Team_Member extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Team Member', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Team Member', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-person';
+		return 'eaicon-team-mamber';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-	
+    
+	public function get_keywords()
+	{
+        return [
+			'team',
+			'member',
+			'team member',
+			'ea team member',
+			'ea team members',
+			'person',
+			'card',
+			'meet the team',
+			'team builder',
+			'our team',
+			'ea',
+			'essential addons'
+		];
+    }
+
+	public function get_custom_help_url()
+	{
+        return 'https://essential-addons.com/elementor/docs/team-members/';
+    }
 	
 	protected function _register_controls() {
 

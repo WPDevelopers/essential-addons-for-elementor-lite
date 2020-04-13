@@ -23,17 +23,36 @@ class Progress_Bar extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Progress Bar', 'essential-addons-for-elementor-lite');
+        return esc_html__('Progress Bar', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'fa fa-tasks';
+        return 'eaicon-progress-bar';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords() {
+        return [
+            'ea progessbar',
+            'ea progess bar',
+            'status bar',
+            'ea status bar',
+            'indicator',
+            'progress indicator',
+            'gradient',
+            'ea',
+            'scroll indicator',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/progress-bar/';
     }
 
     protected function _register_controls()

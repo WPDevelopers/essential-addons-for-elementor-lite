@@ -23,16 +23,37 @@ class Feature_List extends Widget_Base
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Feature List', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Feature List', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-bullet-list';
+		return 'eaicon-feature-list';
 	}
 
-	public function get_categories() {
+	public function get_categories()
+	{
 		return [ 'essential-addons-elementor' ];
 	}
+    
+    public function get_keywords() {
+        return [
+			'list',
+			'ea list',
+			'ea feature list',
+			'feature',
+			'icon',
+			'connector',
+			'featured content',
+			'highlights',
+			'ea',
+			'essential addons'
+		];
+    }
+
+	public function get_custom_help_url()
+	{
+        return 'https://essential-addons.com/elementor/docs/ea-feature-list/';
+    }
 
 	protected function _register_controls() {
 		/**

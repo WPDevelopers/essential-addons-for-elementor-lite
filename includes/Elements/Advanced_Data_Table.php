@@ -22,17 +22,45 @@ class Advanced_Data_Table extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Advanced Data Table', 'essential-addons-for-elementor-lite');
+        return esc_html__('Advanced Data Table', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-table';
+        return 'eaicon-advanced-data-table';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+
+    public function get_keywords()
+    {
+        return [
+            'table',
+            'ea table',
+            'ea advanced table',
+            'ea advanced data table',
+            'CSV',
+            'google sheet',
+            'spreadsheet',
+            'excel',
+            'tablepress',
+            'ninja tables',
+            'data dable',
+            'comparison table',
+            'grid',
+            'import data',
+            'import table',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/advanced-data-table/';
     }
 
     protected function _register_controls()
@@ -50,9 +78,6 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                // 'options' => apply_filters('eael/advanced-data-table/source', [
-                //     'static' => __('Static Data', 'essential-addons-for-elementor-lite'),
-                // ]),
                 'options' => call_user_func(function () {
                     $source = [];
                     $source['static'] = __('Static Data', 'essential-addons-for-elementor-lite');

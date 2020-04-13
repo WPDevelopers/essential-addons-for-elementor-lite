@@ -21,17 +21,34 @@ class Image_Accordion extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Image Accordion', 'essential-addons-for-elementor-lite');
+        return esc_html__('Image Accordion', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-call-to-action';
+        return 'eaicon-image-accrodion';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords() {
+        return [
+            'image',
+            'ea image accordion',
+            'image effect',
+            'hover effect',
+            'creative image',
+            'gallery',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/image-accordion/';
     }
 
     protected function _register_controls()

@@ -21,17 +21,46 @@ class Sticky_Video extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Sticky Video', 'essential-addons-for-elementor-lite');
+        return esc_html__('Sticky Video', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-youtube';
+        return 'eaicon-sticky-video';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords()
+    {
+        return [
+            'video',
+            'sticky',
+            'ea sticky video',
+            'ea video player',
+            'youtube',
+            'vimeo',
+            'mp4',
+            'mpg',
+            'ogg',
+            'webm',
+            'mov',
+            'avi',
+            'scrollable video',
+            'sticky control',
+            'video player',
+            'youtube content',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/sticky-video/';
     }
 
     public function get_style_depends()

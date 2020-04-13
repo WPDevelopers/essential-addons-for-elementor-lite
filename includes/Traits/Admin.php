@@ -151,8 +151,6 @@ trait Admin
          */
         $notice->maybe_later_time = '21 Day';
 
-        $notice->text_domain = 'essential-addons-elementor';
-
         $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
         $url = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
@@ -206,19 +204,19 @@ trait Admin
          * Message message for showing.
          */
         $notice->classes( 'upsale', 'notice is-dismissible ' );
-        $notice->message( 'upsale', '<p>'. __( '10,000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', $notice->text_domain ) .'</p>' );
+        $notice->message( 'upsale', '<p>'. __( '10,000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', 'essential-addons-for-elementor-lite' ) .'</p>' );
         $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
 
         // Update Notice For PRO Version
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) {
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<' ) ) {
             $notice->classes( 'update', 'notice is-dismissible ' );
-            $notice->message( 'update', '<p>'. __( 'You are using an incompatible version of Essential Addons PRO. Please update to v3.4.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', $notice->text_domain ) .'</p>' );
+            $notice->message( 'update', '<p>'. __( 'You are using an incompatible version of Essential Addons PRO. Please update to v3.6.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite' ) .'</p>' );
             $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
         }
 
         // if( ! $this->pro_enabled ) {
         //     $notice->classes( 'update_400k', 'notice is-dismissible ' );
-        //     $notice->message( 'update_400k', '<p>'. __( 'Time to celebrate! EA for Elementor 400K+ happy users 🎉 Spin The Wheel & Try Your Luck <a href="https://wpdeveloper.net/ea-400k-giveaway" target="_blank">WIN PRO License</a>', $notice->text_domain ) .'</p>' );
+        //     $notice->message( 'update_400k', '<p>'. __( 'Time to celebrate! EA for Elementor 400K+ happy users 🎉 Spin The Wheel & Try Your Luck <a href="https://wpdeveloper.net/ea-400k-giveaway" target="_blank">WIN PRO License</a>', 'essential-addons-for-elementor-lite' ) .'</p>' );
         //     $notice->thumbnail( 'update_400k', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
         // }
 
@@ -240,7 +238,7 @@ trait Admin
                 'review' => $notice->makeTime($notice->timestamp, '7 Day'), // after 3 days
             ],
         );
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.4.0', '<' ) ) { 
+        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<' ) ) { 
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
         // if( ! $this->pro_enabled ) { 

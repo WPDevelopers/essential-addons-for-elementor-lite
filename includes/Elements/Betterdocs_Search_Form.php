@@ -36,7 +36,7 @@ class Betterdocs_Search_Form extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-site-search';
+        return 'eaicon-betterdocs-search-form';
     }
 
     /**
@@ -50,8 +50,24 @@ class Betterdocs_Search_Form extends Widget_Base
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return [ 'better', 'doc', 'ea', 'betterdocs search form' ];
-	}
+		return [
+            'knowledgebase',
+            'knowledge Base',
+            'documentation',
+            'doc',
+            'kb',
+            'betterdocs',
+            'ea betterdocs',
+            'search',
+            'search form',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/betterdocs-search-form/';
+    }
 
     protected function _register_controls()
     {

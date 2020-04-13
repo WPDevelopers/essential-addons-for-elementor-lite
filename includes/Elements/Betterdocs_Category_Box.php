@@ -36,7 +36,7 @@ class Betterdocs_Category_Box extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-document-file';
+        return 'eaicon-betterdocs-category-box';
     }
 
     /**
@@ -50,8 +50,22 @@ class Betterdocs_Category_Box extends Widget_Base
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return [ 'better', 'doc', 'ea', 'betterdocs category box' ];
-	}
+		return [
+            'knowledgebase',
+            'knowledge Base',
+            'documentation',
+            'doc',
+            'kb',
+            'betterdocs',
+            'ea betterdocs',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/betterdocs-category-box/';
+    }
 
     protected function _register_controls()
     {

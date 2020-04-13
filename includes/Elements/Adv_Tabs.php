@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -26,17 +26,39 @@ class Adv_Tabs extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Advanced Tabs', 'essential-addons-for-elementor-lite');
+        return esc_html__('Advanced Tabs', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-tabs';
+        return 'eaicon-advanced-tabs';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+
+    public function get_keywords()
+    {
+        return [
+            'tab',
+            'tabs',
+            'ea tabs',
+            'ea advanced tabs',
+            'panel',
+            'navigation',
+            'group',
+            'tabs content',
+            'product tabs',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/advanced-tabs/';
     }
 
     protected function _register_controls()
@@ -695,6 +717,17 @@ class Adv_Tabs extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
             ]
         );
+        $this->add_responsive_control(
+            'eael_adv_tabs_content_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-tabs-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -848,13 +881,9 @@ class Adv_Tabs extends Widget_Base
 		      				<?php if ('content' == $tab['eael_adv_tabs_text_type']): ?>
 								<?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 							<?php elseif ('template' == $tab['eael_adv_tabs_text_type']): ?>
-						<?php
-if (!empty($tab['eael_primary_templates'])) {
-            $eael_template_id = $tab['eael_primary_templates'];
-            $eael_frontend = new Frontend;
-            echo $eael_frontend->get_builder_content($eael_template_id, true);
-        }
-        ?>
+						<?php if (!empty($tab['eael_primary_templates'])) {
+                            echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+                        } ?>
 					<?php endif;?>
     			</div>
 			<?php endforeach;?>
