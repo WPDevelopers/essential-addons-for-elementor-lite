@@ -51,6 +51,29 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	protected function _register_controls() {
+	    if( !class_exists( 'woocommerce' ) ) {
+		    $this->start_controls_section(
+			    'eael_global_warning',
+			    [
+				    'label' => __('Warning!', 'essential-addons-for-elementor-lite'),
+			    ]
+		    );
+
+		    $this->add_control(
+			    'eael_global_warning_text',
+			    [
+				    'type'            => Controls_Manager::RAW_HTML,
+				    'raw'             => __('<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.',
+					    'essential-addons-for-elementor-lite'),
+				    'content_classes' => 'eael-warning',
+			    ]
+		    );
+
+		    $this->end_controls_section();
+		    return;
+        }
+
+
 		/**
 		 * General Settings
 		 */
@@ -1425,6 +1448,10 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	protected function render() {
+	    if( !class_exists('woocommerce') ) {
+	        return;
+        }
+
 		$settings = $this->get_settings();
 
 		$this->add_render_attribute( 'container', 'class', [
