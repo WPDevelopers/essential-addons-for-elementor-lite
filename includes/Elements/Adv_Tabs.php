@@ -717,6 +717,17 @@ class Adv_Tabs extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
             ]
         );
+        $this->add_responsive_control(
+            'eael_adv_tabs_content_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-tabs-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [

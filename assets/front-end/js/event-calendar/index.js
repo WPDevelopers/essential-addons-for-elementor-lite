@@ -1,4 +1,4 @@
-var EventCalendar = function($scope, $) {
+var EventCalendar = function ($scope, $) {
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
 		CloseButton = $(".eaelec-modal-close", $scope).eq(0),
@@ -30,15 +30,21 @@ var EventCalendar = function($scope, $) {
 		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
-		locale:locale,
+		locale: locale,
 		eventLimit: 3,
 		defaultView: defaultView,
-		eventRender: function(info) {
+		eventRender: function (info) {
 			var element = $(info.el),
 				event = info.event;
 
+			// when event is finished event text are cross
+			if (event.extendedProps.eventHasComplete !== undefined && event.extendedProps.eventHasComplete === 'yes') {
+				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
+				element.find('td.fc-list-item-title').addClass('eael-event-completed');
+			}
+
 			element.attr("href", "javascript:void(0);");
-			element.click(function(e) {
+			element.click(function (e) {
 				e.preventDefault();
 				e.stopPropagation();
 				var startDate = event.start,
@@ -53,21 +59,27 @@ var EventCalendar = function($scope, $) {
 					timeFormate = " ";
 				}
 
+				var startYear = moment(startDate).format("YYYY"),
+					endYear = moment(endDate).format("YYYY"),
+					yearDiff = endYear > startYear,
+					startView = '',
+					endView = '';
+
 				startSelector.html(" ");
 				endSelector.html(" ");
 				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
 
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-					var allDayTime = moment(startDate).format("MMM Do");
+					startView = moment(startDate).format("MMM Do");
 					if (moment(startDate).isSame(Date.now(), "day") === true) {
-						allDayTime = 'Today';
-					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
-						allDayTime = 'Tomorrow';
+						startView = 'Today';
+					} else if (moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")) {
+						startView = 'Tomorrow';
 					}
-					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
+
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						startSelector.html('<i class="eicon-calendar"></i> Today ' + moment(event.start).format(timeFormate));
+						startView = 'Today ' + moment(event.start).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -75,70 +87,82 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						startSelector.html('<i class="eicon-calendar"></i> Tomorrow ' + moment(event.start).format(timeFormate));
+						startView = 'Tomorrow ' + moment(event.start).format(timeFormate);
 					}
 
 					if (
 						moment(startDate).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
 						moment(startDate).format("MM-DD-YYYY") >
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
 					) {
-						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do " + timeFormate));
+						startView = moment(event.start).format("MMM Do " + timeFormate);
 					}
+
+					startView = (yearDiff) ? startYear + ' ' + startView : startView;
 
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
-							endSelector.html("- Today " + moment(endDate).format(timeFormate));
+							endView = " Today " + moment(endDate).format(timeFormate);
 						} else {
-							endSelector.html("- " + moment(endDate).format(timeFormate));
+							endView = moment(endDate).format(timeFormate);
 						}
 					}
 
 					if (
 						moment(startDate).format("MM-DD-YYYY") !==
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY") &&
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
 						moment(endDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
 					) {
-						endSelector.html("- Tomorrow " + moment(endDate).format(timeFormate));
+						endView = "Tomorrow " + moment(endDate).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY") &&
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
 						moment(endDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
 					) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
+						endView = moment(endDate).format(timeFormate);
 					}
 					if (moment(endDate).diff(moment(startDate), "days") > 0 && endSelector.text().trim().length < 1) {
-						endSelector.html("- " + moment(endDate).format("MMM Do " + timeFormate));
+						endView = moment(endDate).format("MMM Do " + timeFormate);
 					}
 
 					if (moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
+						endView = moment(endDate).format(timeFormate)
 					}
+
+					endView = (yearDiff) ? endYear + ' ' + endView : endView;
+
 				}
+
+				if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
+					endSelector.html(" ");
+				}else{
+					endSelector.html((endView!='')?"- " + endView:'');
+				}
+				startSelector.html('<i class="eicon-calendar"></i> ' + startView)
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
-				if(event.extendedProps.description.length<1){
+				if (event.extendedProps.description.length < 1) {
 					$(".eaelec-modal-body").css("height", "auto");
-				}else {
+				} else {
 					$(".eaelec-modal-body").css("height", "300px");
 				}
 
 				$(".eaelec-modal-footer a").attr("href", event.url);
-				
+
 				if (event.extendedProps.external === "on") {
 					$(".eaelec-modal-footer a").attr("target", "_blank");
 				}
@@ -155,14 +179,14 @@ var EventCalendar = function($scope, $) {
 		}
 	});
 
-	CloseButton.on("click", function() {
+	CloseButton.on("click", function () {
 		event.stopPropagation();
 		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
 	});
 
-	$(document).on('click',function(event){
+	$(document).on('click', function (event) {
 		if (event.target.closest(".eaelec-modal-content")) return;
-		if(ecModal.hasClass("eael-ec-popup-ready")){
+		if (ecModal.hasClass("eael-ec-popup-ready")) {
 			ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
 		}
 
@@ -171,6 +195,6 @@ var EventCalendar = function($scope, $) {
 	calendar.render();
 };
 
-jQuery(window).on("elementor/frontend/init", function() {
+jQuery(window).on("elementor/frontend/init", function () {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
 });
