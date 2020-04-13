@@ -272,7 +272,7 @@ class Plugin_Usage_Tracker
         if (empty($plugin)) {
             // We can't find the plugin data
             // Send a message back to our home site
-            $body['message'] .= __('We can\'t detect any plugin information. This is most probably because you have not included the code in the plugin main file.', 'plugin-usage-tracker');
+            $body['message'] .= __('We can\'t detect any plugin information. This is most probably because you have not included the code in the plugin main file.', 'essential-addons-for-elementor-lite');
             $body['status'] = 'Data not found'; // Never translated
         } else {
             if (isset($plugin['Name'])) {
@@ -665,10 +665,10 @@ class Plugin_Usage_Tracker
             // Decide on notice text
             if ($this->marketing != 1) {
                 // Standard notice text
-                $notice_text = __('Thank you for installing our plugin. We would like to track its usage on your site. We don\'t record any sensitive data, only information regarding the WordPress environment and plugin settings, which we will use to help us make improvements to the plugin. Tracking is completely optional.', 'plugin-usage-tracker');
+                $notice_text = __('Thank you for installing our plugin. We would like to track its usage on your site. We don\'t record any sensitive data, only information regarding the WordPress environment and plugin settings, which we will use to help us make improvements to the plugin. Tracking is completely optional.', 'essential-addons-for-elementor-lite');
             } else {
                 // If we have option 1 for marketing, we include reference to sending product information here
-                $notice_text = __('Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>10% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'plugin-usage-tracker');
+                $notice_text = __('Want to help make <strong>Essential Addons for Elementor</strong> even more awesome? You can get a <strong>10% discount coupon</strong> for Pro upgrade if you allow. <a class="insights-data-we-collect" href="#">What we collect.</a>', 'essential-addons-for-elementor-lite');
             }
             // And we allow you to filter the text anyway
             $notice_text = apply_filters('wpins_notice_text_' . esc_attr($this->plugin_name), $notice_text);?>
@@ -679,8 +679,8 @@ class Plugin_Usage_Tracker
 					<p><?php echo __('We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, I promise.'); ?></p>
 				</div>
 				<p>
-					<a href="<?php echo esc_url($url_yes); ?>" class="button-primary"><?php _e('Sure, I\'d like to help', 'plugin-usage-tracker');?></a>
-					<a href="<?php echo esc_url($url_no); ?>" class="button-secondary"><?php _e('No Thanks', 'plugin-usage-tracker');?></a>
+					<a href="<?php echo esc_url($url_yes); ?>" class="button-primary"><?php _e('Sure, I\'d like to help', 'essential-addons-for-elementor-lite');?></a>
+					<a href="<?php echo esc_url($url_no); ?>" class="button-secondary"><?php _e('No Thanks', 'essential-addons-for-elementor-lite');?></a>
 				</p>
 				<?php echo "<script type='text/javascript'>jQuery('.insights-data-we-collect').on('click', function(e) {
 						e.preventDefault();
@@ -720,15 +720,15 @@ class Plugin_Usage_Tracker
                 'marketing_optin' => 'no',
             ));
 
-            $marketing_text = __('Thank you for opting in to tracking. Would you like to receive occasional news about this plugin, including details of new features and special offers?', 'plugin-usage-tracker');
+            $marketing_text = __('Thank you for opting in to tracking. Would you like to receive occasional news about this plugin, including details of new features and special offers?', 'essential-addons-for-elementor-lite');
             $marketing_text = apply_filters('wpins_marketing_text_' . esc_attr($this->plugin_name), $marketing_text);?>
 
 			<div class="notice notice-info updated put-dismiss-notice">
 				<p><?php echo '<strong>' . esc_html($plugin_name) . '</strong>'; ?></p>
 				<p><?php echo esc_html($marketing_text); ?></p>
 				<p>
-					<a href="<?php echo esc_url($url_yes); ?>" data-putnotice="yes" class="button-secondary"><?php _e('Yes Please', 'plugin-usage-tracker');?></a>
-					<a href="<?php echo esc_url($url_no); ?>" data-putnotice="no" class="button-secondary"><?php _e('No Thank You', 'plugin-usage-tracker');?></a>
+					<a href="<?php echo esc_url($url_yes); ?>" data-putnotice="yes" class="button-secondary"><?php _e('Yes Please', 'essential-addons-for-elementor-lite');?></a>
+					<a href="<?php echo esc_url($url_no); ?>" data-putnotice="no" class="button-secondary"><?php _e('No Thank You', 'essential-addons-for-elementor-lite');?></a>
 				</p>
 			</div>
 			<?php }
@@ -762,21 +762,21 @@ class Plugin_Usage_Tracker
     public function form_default_text()
     {
         $form = array();
-        $form['heading'] = __('Sorry to see you go', 'plugin-usage-tracker');
-        $form['body'] = __('Before you deactivate the plugin, would you quickly give us your reason for doing so?', 'plugin-usage-tracker');
+        $form['heading'] = __('Sorry to see you go', 'essential-addons-for-elementor-lite');
+        $form['body'] = __('Before you deactivate the plugin, would you quickly give us your reason for doing so?', 'essential-addons-for-elementor-lite');
 
         $form['options'] = array(
-            __('I no longer need the plugin', 'plugin-usage-tracker'),
+            __('I no longer need the plugin', 'essential-addons-for-elementor-lite'),
             [
-                'label' => __('I found a better plugin', 'plugin-usage-tracker'),
-                'extra_field' => __('Please share which plugin', 'plugin-usage-tracker'),
+                'label' => __('I found a better plugin', 'essential-addons-for-elementor-lite'),
+                'extra_field' => __('Please share which plugin', 'essential-addons-for-elementor-lite'),
             ],
-            __("I couldn't get the plugin to work", 'plugin-usage-tracker'),
-            __('It\'s a temporary deactivation', 'plugin-usage-tracker'),
-            __('I have ' . $this->pro_plugin_name, 'plugin-usage-tracker'),
+            __("I couldn't get the plugin to work", 'essential-addons-for-elementor-lite'),
+            __('It\'s a temporary deactivation', 'essential-addons-for-elementor-lite'),
+            __('I have ' . $this->pro_plugin_name, 'essential-addons-for-elementor-lite'),
             [
-                'label' => __('Other', 'plugin-usage-tracker'),
-                'extra_field' => __('Please share the reason', 'plugin-usage-tracker'),
+                'label' => __('Other', 'essential-addons-for-elementor-lite'),
+                'extra_field' => __('Please share the reason', 'essential-addons-for-elementor-lite'),
                 'type' => 'textarea',
             ],
         );
@@ -837,7 +837,7 @@ class Plugin_Usage_Tracker
             $html .= '</ul></div><!-- .wpdev-' . esc_attr($this->plugin_name) . '-goodbye-options -->';
         }
         $html .= '</div><!-- .wpdev-put-goodbye-form-body -->';
-        $html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __('Submitting form', 'plugin-usage-tracker') . '</p>';
+        $html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __('Submitting form', 'essential-addons-for-elementor-lite') . '</p>';
         ?>
 		<style type="text/css">
 			.wpdev-put-form-active-<?php echo esc_attr($this->plugin_name); ?> .wpdev-put-goodbye-form-bg-<?php echo esc_attr($this->plugin_name); ?> {
@@ -962,7 +962,7 @@ class Plugin_Usage_Tracker
 					var url = document.getElementById("wpdev-put-goodbye-link-<?php echo esc_attr($this->plugin_name); ?>");
 					$('body').toggleClass('wpdev-put-form-active-<?php echo esc_attr($this->plugin_name); ?>');
 					$("#wpdev-put-goodbye-form-<?php echo esc_attr($this->plugin_name); ?>").fadeIn();
-					$("#wpdev-put-goodbye-form-<?php echo esc_attr($this->plugin_name); ?>").html( '<?php echo $html; ?>' + '<div class="wpdev-put-goodbye-form-footer"><div class="wpdev-put-goodbye-form-buttons"><a id="put-submit-form-<?php echo esc_attr($this->plugin_name); ?>" class="eael-put-submit-btn" href="#"><?php _e('Submit and Deactivate', 'plugin-usage-tracker');?></a>&nbsp;<a class="eael-put-deactivate-btn" href="'+url+'"><?php _e('Just Deactivate', 'plugin-usage-tracker');?></a></div></div>');
+					$("#wpdev-put-goodbye-form-<?php echo esc_attr($this->plugin_name); ?>").html( '<?php echo $html; ?>' + '<div class="wpdev-put-goodbye-form-footer"><div class="wpdev-put-goodbye-form-buttons"><a id="put-submit-form-<?php echo esc_attr($this->plugin_name); ?>" class="eael-put-submit-btn" href="#"><?php _e('Submit and Deactivate', 'essential-addons-for-elementor-lite');?></a>&nbsp;<a class="eael-put-deactivate-btn" href="'+url+'"><?php _e('Just Deactivate', 'essential-addons-for-elementor-lite');?></a></div></div>');
 					$('#put-submit-form-<?php echo esc_attr($this->plugin_name); ?>').on('click', function(e){
 						// As soon as we click, the body of the form should disappear
 						$("#wpdev-put-goodbye-form-<?php echo esc_attr($this->plugin_name); ?> .wpdev-put-goodbye-form-body").fadeOut();

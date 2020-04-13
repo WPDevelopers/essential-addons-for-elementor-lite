@@ -544,3 +544,38 @@
   display: inline-block;
   float: left;
 }
+
+.post-carousel-categories {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+  text-align: left;
+  visibility: hidden;
+  opacity: 0;
+  transition: 300ms;
+}
+.post-carousel-categories li {
+  display: inline-block;
+  text-transform: capitalize;
+  margin-right: 5px;
+  position: relative;
+}
+.post-carousel-categories li:after {
+  content: ",";
+  color: #ffffff;
+}
+.post-carousel-categories li:last-child:after {
+  display: none;
+}
+.post-carousel-categories li a {
+  color: #fff;
+}
+
+.eael-entry-media:hover .post-carousel-categories {
+  visibility: visible;
+  opacity: 1;
+}

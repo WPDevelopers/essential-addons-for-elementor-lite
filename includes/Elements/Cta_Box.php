@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
+use \Elementor\Plugin;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
