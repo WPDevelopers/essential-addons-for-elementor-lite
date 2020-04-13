@@ -161,7 +161,7 @@ Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Element
 
 https://www.youtube.com/watch?v=6811orBQcJc
 
-**[Elementor Loading Error - How to Solve - and more useful Elemntor guides](https://www.youtube.com/watch?v=6811orBQcJc&list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh&index=43)
+**[Elementor Loading Error - How to Solve - and more useful Elemntor guides](https://www.youtube.com/watch?v=6811orBQcJc&list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh&index=43)**
 
 
 ### Happy User of Essential Addons?
