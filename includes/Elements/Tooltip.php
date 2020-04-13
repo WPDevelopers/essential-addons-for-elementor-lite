@@ -20,16 +20,36 @@ class Tooltip extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'EA Tooltip', 'essential-addons-for-elementor-lite');
+		return esc_html__( 'Tooltip', 'essential-addons-for-elementor-lite');
 	}
 
 	public function get_icon() {
-		return 'eicon-alert';
+		return 'eaicon-tooltip';
 	}
 
-   public function get_categories() {
+   	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
+    
+	public function get_keywords()
+	{
+        return [
+			'tooltip',
+			'ea tooltip',
+			'popover',
+			'hover',
+			'hint',
+			'floating text',
+			'glossary',
+			'ea',
+			'essential addons'
+		];
+    }
+
+	public function get_custom_help_url()
+	{
+        return 'https://essential-addons.com/elementor/docs/tooltip/';
+    }
 
 	protected function _register_controls() {
 		/**

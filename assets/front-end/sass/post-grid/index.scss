@@ -492,3 +492,40 @@
 	display: inline-block;
 	float: left;
 }
+
+.post-carousel-categories {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 11;
+	width: 100%;
+	margin: 0;
+	padding: 15px;
+	text-align: left;
+	visibility: hidden;
+	opacity: 0;
+	transition: 300ms;
+	li {
+	  display: inline-block;
+	  text-transform: capitalize;
+	  margin-right: 5px;
+	  position: relative;
+	  &:after {
+		content: ",";
+		color: #ffffff;
+	  }
+	  &:last-child:after {
+		display: none;
+	  }
+	  a {
+		color: #fff;
+	  }
+	}
+  }
+
+.eael-entry-media:hover {
+	.post-carousel-categories {
+		visibility: visible;
+		opacity: 1;
+	}
+}

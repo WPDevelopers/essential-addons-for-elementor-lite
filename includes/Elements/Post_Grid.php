@@ -25,17 +25,41 @@ class Post_Grid extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Post Grid', 'essential-addons-for-elementor-lite');
+        return __('Post Grid', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-posts-grid';
+        return 'eaicon-post-grid';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords() {
+        return [
+            'post',
+            'posts',
+            'grid',
+            'ea post grid',
+            'ea posts grid',
+            'blog post',
+            'article',
+            'custom posts',
+            'masonry',
+            'content views',
+            'blog view',
+            'content marketing',
+            'blogger',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/post-grid/';
     }
 
     protected function _register_controls()
@@ -330,6 +354,8 @@ class Post_Grid extends Widget_Base
 
         $this->end_controls_section();
 
+        $this->terms_style();
+
         $this->start_controls_section(
             'eael_section_hover_card_styles',
             [
@@ -360,7 +386,7 @@ class Post_Grid extends Widget_Base
                 'type' => Controls_Manager::ICONS,
                 'fa4compatibility' => 'eael_post_grid_bg_hover_icon',
                 'default' => [
-                    'value' => 'fa fa-long-arrow-right',
+                    'value' => 'fas fa-long-arrow-alt-right',
                     'library' => 'fa-solid',
                 ],
                 'condition' => [
@@ -460,6 +486,12 @@ class Post_Grid extends Widget_Base
             'excerpt_expanison_indicator' => $settings['excerpt_expanison_indicator'],
             'layout_mode' => $settings['layout_mode'],
             'orderby' => $settings['orderby'],
+            'eael_show_post_terms' => $settings['eael_show_post_terms'],
+            'eael_post_terms' => $settings['eael_post_terms'],
+            'eael_post_terms_max_length' => $settings['eael_post_terms_max_length'],
+            'eael_show_avatar'  => $settings['eael_show_avatar'],
+            'eael_show_author'  => $settings['eael_show_author'],
+            'eael_show_date'    => $settings['eael_show_date']
         ];
 
         $this->add_render_attribute(

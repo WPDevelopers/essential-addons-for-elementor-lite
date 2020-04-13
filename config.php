@@ -264,10 +264,6 @@ $config = [
         ],
         'product-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
-            'condition' => [
-                'function_exists',
-                'WC',
-            ],
             'dependency' => [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
@@ -301,6 +297,14 @@ $config = [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
                 ],
             ],
+        ],
+        'formstack' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Formstack',
+             'dependency' => [
+                 'css' => [
+                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
+                 ],
+             ],
         ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
@@ -377,6 +381,14 @@ $config = [
                 ],
             ],
         ],
+        'embedpress' => [
+            'class' => '\Essential_Addons_Elementor\Elements\EmbedPress',
+            'condition' => [
+                'class_exists',
+                '\EmbedPress\Elementor\Embedpress_Elementor_Integration',
+                 true
+            ]
+        ],
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'condition' => [
@@ -394,6 +406,9 @@ $config = [
         ],
     ],
     'extensions' => [
+        'eael-promotion' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
+        ],
         'eael-reading-progress' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [

@@ -9,6 +9,7 @@ use \Elementor\Controls_Manager;
 
 class Reading_Progress
 {
+
     public function __construct()
     {
         add_action('elementor/documents/register_controls', [$this, 'register_controls'], 10);
@@ -21,7 +22,7 @@ class Reading_Progress
         $element->start_controls_section(
             'eael_ext_reading_progress_section',
             [
-                'label' => esc_html__('EA Reading Progress Bar', 'essential-addons-for-elementor-lite'),
+                'label' => __('<i class="eaicon-logo"></i> Reading Progress Bar', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_SETTINGS,
             ]
         );

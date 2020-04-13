@@ -38,7 +38,7 @@ class Contact_Form_7 extends Widget_Base
      */
     public function get_title()
     {
-        return __('EA Contact Form 7', 'essential-addons-for-elementor-lite');
+        return __('Contact Form 7', 'essential-addons-for-elementor-lite');
     }
 
     /**
@@ -64,7 +64,28 @@ class Contact_Form_7 extends Widget_Base
      */
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-contact-form-7';
+    }
+
+    public function get_keywords()
+    {
+        return [
+            'contact form',
+            'ea contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'cf7',
+            'ea cf7',
+            'ea contact form 7',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/contact-form-7/';
     }
 
     /**
@@ -536,7 +557,7 @@ class Contact_Form_7 extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-date, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-date, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select, {{WRAPPER}} .eael-contact-form-7 .wpcf7-list-item-label' => 'color: {{VALUE}}',
                 ],
                 'separator' => 'before',
             ]
@@ -548,7 +569,7 @@ class Contact_Form_7 extends Widget_Base
                 'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => '20',
+                    'size' => '0',
                     'unit' => 'px',
                 ],
                 'range' => [
@@ -752,6 +773,7 @@ class Contact_Form_7 extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-contact-form-7 label' => 'color: {{VALUE}}'
                 ],
                 'condition' => [
                     'labels_switch' => 'yes',

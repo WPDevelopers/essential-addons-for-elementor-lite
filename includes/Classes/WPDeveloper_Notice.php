@@ -14,7 +14,7 @@ class WPDeveloper_Notice {
      * @var array
      */
     const ADMIN_UPDATE_NOTICE_KEY = 'wpdeveloper_notices_seen';
-    public $text_domain = 'wpdeveloper-notice-text-domain';
+
     /**
      * All Data
      * @var array
@@ -232,7 +232,7 @@ class WPDeveloper_Notice {
                                 add_action( 'admin_notices', array( $this, 'upsale_notice' ) );
                             }
                         } else {
-                            if( $this->is_ok( 'message', $current_notice ) ) {
+                            if( $this->is_ok( 'message', $current_notice ) || $current_notice === 'opt_in' ) {
                                 add_action( 'admin_notices', array( $this, 'admin_notices' ) );
                             }
                         }
@@ -444,7 +444,7 @@ class WPDeveloper_Notice {
     private function upsale_button(){
         $upsale_args = $this->get_upsale_args();
         $plugin_slug = ( isset( $upsale_args['slug'] )) ? $upsale_args['slug'] : '' ;
-        $btn_text = ( isset( $upsale_args['btn_text'] )) ? $upsale_args['btn_text'] : __( 'Install Now!', $this->text_domain ) ;
+        $btn_text = ( isset( $upsale_args['btn_text'] )) ? $upsale_args['btn_text'] : __( 'Install Now!', 'essential-addons-for-elementor-lite' ) ;
         if( empty( $plugin_slug ) ) {
             return;
         }
@@ -754,9 +754,9 @@ class WPDeveloper_Notice {
      * This function is responsible for get_user_notices
      * @return void
      */
-	private function get_user_notices() {
+    private function get_user_notices() {
         $notices = get_user_meta( get_current_user_id(), self::ADMIN_UPDATE_NOTICE_KEY, true );
-		return ! $notices ? array() : $notices;
+        return ! $notices ? array() : $notices;
     }
     /**
      * This function is responsible for update meta information.

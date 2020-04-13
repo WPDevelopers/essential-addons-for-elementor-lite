@@ -25,7 +25,7 @@ class Caldera_Forms extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Caldera Forms', 'essential-addons-for-elementor-lite');
+        return __('Caldera Forms', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories()
@@ -35,7 +35,25 @@ class Caldera_Forms extends Widget_Base
 
     public function get_icon()
     {
-        return 'fa fa-envelope-o';
+        return 'eaicon-caldera-forms';
+    }
+    
+    public function get_keywords() {
+        return [
+            'contact form',
+            'ea contact form',
+            'form styler',
+            'elementor form',
+            'feedback',
+            'calderaforms',
+            'ea calderaforms',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url() {
+        return 'https://essential-addons.com/elementor/docs/caldera-forms/';
     }
 
     protected function _register_controls()

@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use Essential_Addons_Elementor\Classes\WPDeveloper_Dashboard_Widget;
+
 class Bootstrap
 {
     use \Essential_Addons_Elementor\Traits\Library;
@@ -20,6 +22,9 @@ class Bootstrap
 
     // instance container
     private static $instance = null;
+
+    // request unique identifier
+    protected $request_uid = null;
 
     // registered elements container
     public $registered_elements;
@@ -105,8 +110,9 @@ class Bootstrap
         add_action('elementor/editor/after_save', array($this, 'save_global_values'), 10, 2);
 
         // Generator
+        add_action('wp', [$this, 'generate_request_uid']);
         add_action('elementor/frontend/before_render', array($this, 'collect_transient_elements'));
-        add_action('wp_print_footer_scripts', array($this, 'generate_frontend_scripts'));
+        add_action('elementor/frontend/before_enqueue_scripts', array($this, 'generate_frontend_scripts'));
 
         // Enqueue
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
@@ -125,6 +131,7 @@ class Bootstrap
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_action('elementor/widgets/widgets_registered', array($this, 'register_elements'));
+        add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
         add_action('wp_footer', array($this, 'render_global_html'));
 
         add_filter('eael/event-calendar/source', [$this,'eael_event_calendar_source']);
@@ -138,6 +145,9 @@ class Bootstrap
                 // TODO: you have to call admin_notice for pro also.
             }
             $this->admin_notice(); // this line of code
+
+            // dashboard feed
+            WPDeveloper_Dashboard_Widget::instance();
 
             add_action('admin_menu', array($this, 'admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));

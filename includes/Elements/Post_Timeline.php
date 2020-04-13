@@ -23,17 +23,38 @@ class Post_Timeline extends Widget_Base
 
     public function get_title()
     {
-        return __('EA Post Timeline', 'essential-addons-for-elementor-lite');
+        return __('Post Timeline', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-post-list';
+        return 'eaicon-post-timeline';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords()
+    {
+        return [
+            'post',
+            'posts',
+            'timeline',
+            'ea post timeline',
+            'ea posts timeline',
+            'blog posts',
+            'content marketing',
+            'blogger',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/post-timeline/';
     }
 
     protected function _register_controls()

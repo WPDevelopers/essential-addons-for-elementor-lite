@@ -23,17 +23,40 @@ class Product_Grid extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('EA Product Grid', 'essential-addons-for-elementor-lite');
+        return esc_html__('Product Grid', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
     {
-        return 'eicon-woocommerce';
+        return 'eaicon-product-grid';
     }
 
     public function get_categories()
     {
         return ['essential-addons-elementor'];
+    }
+    
+    public function get_keywords()
+    {
+        return [
+            'woo',
+            'woocommerce',
+            'ea woocommerce',
+            'ea woo product grid',
+            'ea woocommerce product grid',
+            'woo commerce',
+            'ea woo commerce',
+            'product gallery',
+            'woocommerce grid',
+            'gallery',
+            'ea',
+            'essential addons'
+        ];
+    }
+
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/';
     }
 
     public function get_style_depends()
@@ -61,6 +84,17 @@ class Product_Grid extends Widget_Base
                 'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        if (!apply_filters('eael/active_plugins', 'woocommerce/woocommerce.php')) {
+            $this->add_control(
+                'ea_product_grid_woo_required',
+                [
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => __('<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite'),
+                    'content_classes' => 'eael-warning',
+                ]
+            );
+        }
 
         $this->add_control(
             'eael_product_grid_product_filter',
@@ -513,6 +547,10 @@ class Product_Grid extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+
+        if (!apply_filters('eael/active_plugins', 'woocommerce/woocommerce.php')) {
+            return;
+        }
 
         $args = [
             'post_type' => 'product',

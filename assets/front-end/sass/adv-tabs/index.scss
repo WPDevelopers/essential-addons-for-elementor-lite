@@ -62,6 +62,7 @@
 .eael-tabs-content {
 	display: flex;
 	flex: 1 1 auto;
+	overflow: hidden;
 }
 
 .eael-advance-tabs .eael-tabs-content>div {
