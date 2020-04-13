@@ -20,6 +20,28 @@ class Woo_Checkout extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
 	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 
+	public function __construct( $data = [], $args = null ) {
+		parent::__construct( $data, $args );
+
+		$is_type_instance = $this->is_type_instance();
+
+		if ( ! $is_type_instance && null === $args ) {
+			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
+		}
+
+		if ( $is_type_instance ) {
+
+			if ( is_null( WC()->cart ) ) {
+				include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+				include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+				wc_load_cart();
+			}
+
+			remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
+			remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+		}
+	}
+
 	public function get_name() {
 		return 'eael-woo-checkout';
 	}
@@ -1459,19 +1481,6 @@ class Woo_Checkout extends Widget_Base {
 		] );
 
 		global $wp;
-
-		if ( is_null( WC()->cart ) ) {
-			include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
-			include_once WC_ABSPATH . 'includes/class-wc-cart.php';
-			wc_load_cart();
-		}
-
-		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
-		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
-
-//        add_action( 'woocommerce_before_checkout_form', [$this,'checkout_order_review_template'], 9 );
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_login_template' ], 10 );
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_coupon_template' ], 10 );
 
 
 		?>
