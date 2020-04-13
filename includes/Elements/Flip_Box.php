@@ -14,6 +14,7 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Background;
 
 class Flip_Box extends Widget_Base {
 
@@ -261,6 +262,35 @@ class Flip_Box extends Widget_Base {
 
 		$this->end_controls_tabs();
 
+
+		$this->add_control(
+			'eael_flipbox_height',
+			[
+				'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SLIDER,
+				'size_units'	=> [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min'	=> 0,
+						'step'	=> 1,
+						'max'	=> 600,
+					],
+					'%'	=> [
+						'min'	=> 0,
+						'step'	=> 3,
+						'max'	=> 100
+					]
+				],
+				'default'	=> [
+					'unit'	=> 'px',
+					'size'	=> 300
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-elements-flip-box-container'	=> 'height: {{SIZE}}{{UNIT}};'
+				]
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -498,27 +528,23 @@ class Flip_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_flipbox_front_bg_color',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			[
+				'name' => 'eael_flipbox_front_bg_color',
 				'label' => esc_html__( 'Front Background Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#14bcc8',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-front-container' => 'background: {{VALUE}};',
-				],
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container'
 			]
 		);
 
-		$this->add_control(
-			'eael_flipbox_back_bg_color',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			[
+				'name' => 'eael_flipbox_back_bg_color',
 				'label' => esc_html__( 'Back Background Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#ff7e70',
-				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-rear-container' => 'background: {{VALUE}};',
-				],
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container'
 			]
 		);
 
@@ -548,24 +574,12 @@ class Flip_Box extends Widget_Base {
 			'eael_flipbox_border_radius',
 			[
 				'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units'	=> [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min'	=> 0,
-						'step'	=> 1,
-						'max'	=> 500,
-					],
-					'%'	=> [
-						'min'	=> 0,
-						'step'	=> 3,
-						'max'	=> 100
-					]
-				],
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-elements-flip-box-front-container'	=> 'border-radius: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-elements-flip-box-rear-container'	=> 'border-radius: {{SIZE}}{{UNIT}};',
-				],
+					'{{WRAPPER}} .eael-elements-flip-box-front-container' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-elements-flip-box-rear-container' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	 			]
 			]
 		);
 

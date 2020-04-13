@@ -842,7 +842,7 @@ class Facebook_Feed extends Widget_Base
 
         if (($settings['show_load_more'] == 'yes')) {
             echo '<div class="eael-load-more-button-wrap">
-                <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-settings="' . http_build_query($settings_var) . '" data-page="1">
+                <button class="eael-load-more-button" id="eael-load-more-btn-' . $this->get_id() . '" data-settings="' . http_build_query($settings_var) . '" data-page="1" data-loadmore-text="'.$settings['loadmore_text'].'">
                     <div class="eael-btn-loader button__loader"></div>
                     <span>' . $settings['loadmore_text'] . '</span>
                 </button>
