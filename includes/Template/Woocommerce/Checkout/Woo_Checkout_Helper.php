@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 trait Woo_Checkout_Helper {
-//	use \Essential_Addons_Elementor\Template\Woocommerce\Checkout\Layouts\Woo_Checkout_Default;
 
 	/**
 	 * Show the checkout.
