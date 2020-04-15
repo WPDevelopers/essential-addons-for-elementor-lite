@@ -29,7 +29,7 @@ class Woo_Checkout extends Widget_Base {
 			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
 		}
 
-		if ( $is_type_instance ) {
+		if ( $is_type_instance && class_exists('woocommerce')) {
 
 			if ( is_null( WC()->cart ) ) {
 				include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
@@ -69,7 +69,11 @@ class Woo_Checkout extends Widget_Base {
 	 *
 	 */
 	public function get_keywords() {
-		return [ 'woocommerce', 'checkout', 'ea', 'woocommerce checkout' ];
+		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'multi Step Checkout', 'split Checkout', 'ea', 'essential addons' ];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/woo-checkout/';
 	}
 
 	protected function _register_controls() {
