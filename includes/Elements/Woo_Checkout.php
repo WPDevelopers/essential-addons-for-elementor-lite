@@ -127,6 +127,84 @@ class Woo_Checkout extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
+		 * Order Review Settings
+		 */
+		$this->start_controls_section(
+			'ea_section_woo_checkout_order_review_settings',
+			[
+				'label' => esc_html__( 'Order Review', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		// Table Header
+		$this->add_control(
+			'ea_woo_checkout_table_header_text',
+			[
+				'label' => esc_html__( 'Change Header Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_table_product_text',
+			[
+				'label' => __( 'Product Column', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Product', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_woo_checkout_table_header_text' => 'yes',
+				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_table_quantity_text',
+			[
+				'label' => __( 'Quantity Column', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_woo_checkout_table_header_text' => 'yes',
+				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_table_price_text',
+			[
+				'label' => __( 'Price Column', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Price', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_woo_checkout_table_header_text' => 'yes',
+				],
+			]
+		);
+
+		// Shop Link
+		$this->add_control(
+			'ea_woo_checkout_shop_link',
+			[
+				'label' => esc_html__( 'Shop Link', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_shop_link_text',
+			[
+				'label' => __( 'Link Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Continue Shopping', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_woo_checkout_shop_link' => 'yes',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/**
 		 * -------------------------------------------
 		 * Coupon Settings
 		 * -------------------------------------------
