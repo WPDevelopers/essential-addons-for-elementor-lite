@@ -14,7 +14,6 @@ class advancedDataTable {
 		elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", this.initFrontend.bind(this));
 
 		if (ea.isEditMode) {
-			this.updateFromView.bind(this);
 			this.initInlineEdit.bind(this);
 			this.initPanelAction.bind(this);
 
@@ -23,6 +22,7 @@ class advancedDataTable {
 			ea.hooks.addFilter("advancedDataTable.parseHTML", "ea", this.parseHTML);
 			ea.hooks.addAction("advancedDataTable.initEditor", "ea", this.initEditor.bind(this));
 			ea.hooks.addAction("advancedDataTable.updateFromModel", "ea", this.updateFromModel.bind(this));
+			ea.hooks.addAction("advancedDataTable.updateFromView", "ea", this.updateFromView.bind(this));
 
 			elementor.hooks.addFilter("elements/widget/contextMenuGroups", this.initContextMenu);
 			elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", this.initPanel.bind(this));
@@ -304,14 +304,14 @@ class advancedDataTable {
 
 				// download
 				let csv_file = new Blob([csv.join("\n")], { type: "text/csv" });
-				let download_link = parent.document.createElement("a");
+				let downloadLink = parent.document.createElement("a");
 
-				download_link.classList.add(`ea-adv-data-table-download-${model.attributes.id}`);
-				download_link.download = `ea-adv-data-table-${model.attributes.id}.csv`;
-				download_link.href = window.URL.createObjectURL(csv_file);
-				download_link.style.display = "none";
-				parent.document.body.appendChild(download_link);
-				download_link.click();
+				downloadLink.classList.add(`ea-adv-data-table-download-${model.attributes.id}`);
+				downloadLink.download = `ea-adv-data-table-${model.attributes.id}.csv`;
+				downloadLink.href = window.URL.createObjectURL(csv_file);
+				downloadLink.style.display = "none";
+				parent.document.body.appendChild(downloadLink);
+				downloadLink.click();
 
 				parent.document.querySelector(`.ea-adv-data-table-download-${model.attributes.id}`).remove();
 			} else if (event.target.dataset.event == "ea:advTable:import") {
@@ -386,7 +386,8 @@ class advancedDataTable {
 						if (response.connected == true) {
 							button.innerHTML = "Connected";
 
-							this.updateFromView(
+							ea.hooks.doAction(
+								"advancedDataTable.updateFromView",
 								view,
 								{
 									ea_adv_data_table_source_remote_connected: true,
@@ -400,6 +401,7 @@ class advancedDataTable {
 							panel.content.el.querySelector(".elementor-section-title").click();
 
 							let select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+
 							select.length = 0;
 							response.tables.forEach((opt, index) => {
 								select[index] = new Option(opt, opt);
@@ -417,7 +419,8 @@ class advancedDataTable {
 					button.innerHTML = "Connect";
 				}, 2000);
 			} else if (event.target.dataset.event == "ea:advTable:disconnect") {
-				this.updateFromView(
+				ea.hooks.doAction(
+					"advancedDataTable.updateFromView",
 					view,
 					{
 						ea_adv_data_table_source_remote_connected: false,
@@ -443,6 +446,31 @@ class advancedDataTable {
 		model.on("remote:render", () => {
 			this.inlineEditInitiated = false;
 			this.initInlineEdit(model, view);
+		});
+
+		// init remote tables - TODO
+		setTimeout(() => {
+			let select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+
+			if (select != null && select.length == 0) {
+				model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach((opt, index) => {
+					select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+				});
+			}
+		}, 50);
+
+		panel.el.addEventListener("mousedown", function (e) {
+			if (e.target.classList.contains("elementor-section-title") || e.target.parentNode.classList.contains("elementor-panel-navigation-tab")) {
+				setTimeout(() => {
+					let select = panel.el.querySelector('[data-setting="ea_adv_data_table_source_remote_table"]');
+		
+					if (select != null && select.length == 0) {
+						model.attributes.settings.attributes.ea_adv_data_table_source_remote_tables.forEach((opt, index) => {
+							select[index] = new Option(opt, opt, false, opt == model.attributes.settings.attributes.ea_adv_data_table_source_remote_table);
+						});
+					}
+				}, 50);
+			}
 		});
 	}
 
