@@ -270,15 +270,15 @@ trait Woo_Checkout_Helper {
 	/**
 	 * Show the order review.
 	 */
-	public static function checkout_order_review_default() {
+	public static function checkout_order_review_default($settings) {
 		?>
 
             <div class="ea-checkout-review-order-table">
                 <ul class="ea-order-review-table">
                     <li class="table-header">
-                        <div class="table-col-1"><?php esc_html_e( 'Product', 'essential-addons-for-elementor-lite' ); ?></div>
-                        <div class="table-col-2"><?php esc_html_e( 'Quantity', 'essential-addons-for-elementor-lite' ); ?></div>
-                        <div class="table-col-3"><?php esc_html_e( 'Price', 'essential-addons-for-elementor-lite' ); ?></div>
+                        <div class="table-col-1"><?php echo $settings['ea_woo_checkout_table_product_text']; ?></div>
+                        <div class="table-col-2"><?php echo $settings['ea_woo_checkout_table_quantity_text']; ?></div>
+                        <div class="table-col-3"><?php echo $settings['ea_woo_checkout_table_price_text']; ?></div>
                     </li>
 
 					<?php
@@ -397,7 +397,7 @@ trait Woo_Checkout_Helper {
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
 		<div class="ea-woo-checkout-order-review">
-		<?php self::checkout_order_review_default(); ?>
+		<?php self::checkout_order_review_default($settings); ?>
 		</div>
 
 		<?php do_action('woocommerce_checkout_after_order_review'); ?>
