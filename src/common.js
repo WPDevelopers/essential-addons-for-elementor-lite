@@ -9,5 +9,5 @@ jQuery(window).on("elementor/frontend/init", function () {
 	window.ea.isEditMode = elementorFrontend.isEditMode();
 
 	// hooks
-	ea.hooks.doAction("ea.frontend.init", ea.isEditMode);
+	ea.hooks.doAction("init", ea.isEditMode);
 });
