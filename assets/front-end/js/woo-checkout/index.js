@@ -2,6 +2,8 @@ var WooCheckout = function($scope, $) {
     console.log('working');
     $.blockUI.defaults.overlayCSS.cursor = 'default';
     function render_order_review_template(){
+        var checkout = $('.ea-woo-checkout');
+        console.log(checkout.data('checkout'));
         setTimeout(
             function () {
                 $('.ea-checkout-review-order-table').addClass( 'processing' ).block({
@@ -16,7 +18,8 @@ var WooCheckout = function($scope, $) {
                     type:		'POST',
                     url:		localize.ajaxurl,
                     data:		{
-                        action: 'woo_checkout_update_order_review'
+                        action: 'woo_checkout_update_order_review',
+                        test : checkout.data('checkout')
                     },
                     success:	function( data ) {
                         $( ".ea-checkout-review-order-table" ).replaceWith( data.order_review);

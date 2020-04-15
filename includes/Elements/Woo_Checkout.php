@@ -1583,11 +1583,15 @@ class Woo_Checkout extends Widget_Base {
 		] );
 
 		global $wp;
-
+        $test_data = [
+            'ea_woo_checkout_table_product_text' => $settings['ea_woo_checkout_table_product_text'],
+            'ea_woo_checkout_table_quantity_text' => $settings['ea_woo_checkout_table_quantity_text'],
+            'ea_woo_checkout_table_price_text' => $settings['ea_woo_checkout_table_price_text'],
+        ];
         $this->ea_woo_checkout_add_actions();
 
 		?>
-        <div <?php echo $this->get_render_attribute_string( 'container' ); ?>>
+        <div data-checkout="<?php echo htmlspecialchars(json_encode($test_data), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $this->get_render_attribute_string( 'container' ); ?>>
             <div class="woocommerce">
                 <style>
                     .woocommerce .blockUI.blockOverlay:before {
