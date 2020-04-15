@@ -2611,8 +2611,9 @@ trait Helper
      * Woo Checkout
      */
     public function woo_checkout_update_order_review(){
+        $setting = $_POST['test'];
         ob_start();
-        Woo_Checkout::checkout_order_review_default();
+        Woo_Checkout::checkout_order_review_default($setting);
         $woo_checkout_update_order_review = ob_get_clean();
 
         wp_send_json(
