@@ -42,6 +42,7 @@
 		"minimatch": "^3.0.4",
 		"natives": "^1.1.6",
 		"ruby": "^0.6.1",
-		"run-sequence": "^2.2.1"
+		"run-sequence": "^2.2.1",
+		"tinymce": "^5.2.1"
 	}
 }

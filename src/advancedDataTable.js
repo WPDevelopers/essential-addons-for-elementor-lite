@@ -10,20 +10,27 @@ class advancedDataTable {
 		this.inlineEditInitiated = false;
 		this.panelActionInitiated = false;
 
-		// hooks
+		// register hooks
 		elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", this.initFrontend.bind(this));
 
 		if (ea.isEditMode) {
-			ea.hooks.addAction("ea.advDataTable.updateModel", "ea", this.updateModel.bind(this));
-			ea.hooks.addAction("ea.advDataTable.updateView", "ea", this.updateView.bind(this));
-			ea.hooks.addAction("ea.advDataTable.initInlineEdit", "ea", this.initInlineEdit.bind(this));
-			ea.hooks.addAction("ea.advDataTable.initPanelAction", "ea", this.initPanelAction.bind(this));
-			elementor.hooks.addFilter("elements/widget/contextMenuGroups", this.initContextMenu.bind(this));
+			this.updateFromView.bind(this);
+			this.initInlineEdit.bind(this);
+			this.initPanelAction.bind(this);
+
+			ea.hooks.addFilter("advancedDataTable.getClassProps", "ea", this.getClassProps.bind(this));
+			ea.hooks.addFilter("advancedDataTable.setClassProps", "ea", this.setClassProps.bind(this));
+			ea.hooks.addFilter("advancedDataTable.parseHTML", "ea", this.parseHTML);
+			ea.hooks.addAction("advancedDataTable.initEditor", "ea", this.initEditor.bind(this));
+			ea.hooks.addAction("advancedDataTable.updateFromModel", "ea", this.updateFromModel.bind(this));
+
+			elementor.hooks.addFilter("elements/widget/contextMenuGroups", this.initContextMenu);
 			elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", this.initPanel.bind(this));
 		}
 	}
 
-	updateModel(model, container, refresh, value) {
+	// update model from panel
+	updateFromModel(model, container, value, refresh = false) {
 		// disable elementor remote server render
 		model.remoteRender = refresh;
 
@@ -55,7 +62,8 @@ class advancedDataTable {
 		}, 1001);
 	}
 
-	updateView(view, refresh, value) {
+	// update model from view
+	updateFromView(view, value, refresh = false) {
 		let model = view.model;
 
 		// disable elementor remote server render
@@ -90,6 +98,46 @@ class advancedDataTable {
 		}, 1001);
 	}
 
+	// get class properties
+	getClassProps() {
+		return {
+			activeCell: this.activeCell,
+		};
+	}
+
+	// get class properties
+	setClassProps(props) {
+		Object.keys(props).forEach((key) => {
+			this[key] = props[key];
+		});
+	}
+
+	// parse table html
+	parseHTML(tableHTML) {
+		tableHTML.querySelectorAll("th, td").forEach((el) => {
+			if (el.querySelector(".inline-editor")) {
+				el.innerHTML = el.querySelector(".inline-editor").innerHTML;
+			}
+		});
+
+		return tableHTML;
+	}
+
+	// init editor
+	initEditor() {
+		tinymce.remove(".inline-editor");
+
+		tinymce.init({
+			selector: ".inline-editor",
+			menubar: false,
+			inline: true,
+			plugins: ["lists", "link", "autolink"],
+			toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
+			forced_root_block: false,
+		});
+	}
+
+	// init inline editing features
 	initInlineEdit(model, view) {
 		if (this.inlineEditInitiated) {
 			return;
@@ -100,23 +148,19 @@ class advancedDataTable {
 				this.inlineEditInitiated = true;
 				let table = view.el.querySelector(`.ea-advanced-data-table-${model.attributes.id}`);
 
+				// insert edit area
+				table.querySelectorAll("th, td").forEach((el) => {
+					el.innerHTML = `<div class="inline-editor">${el.innerHTML}</div>`;
+				});
+
 				// init tinymce
 				if (table.classList.contains("ea-advanced-data-table-editable")) {
-					tinymce.init({
-						selector: ".inline-edit",
-						menubar: false,
-						inline: true,
-						plugins: ["lists", "link", "autolink"],
-						toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
-						forced_root_block: false,
-					});
+					this.initEditor();
 				}
 
 				// mousedown
 				table.addEventListener("mousedown", (e) => {
 					e.stopPropagation();
-
-					console.log("mos");
 
 					if (e.target.tagName.toLowerCase() === "th") {
 						this.dragging = true;
@@ -149,19 +193,11 @@ class advancedDataTable {
 						clearTimeout(this.timeout);
 
 						if (table.classList.contains("ea-advanced-data-table-static")) {
-							// clone current table
-							let origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach((el) => {
-								el.removeAttribute("id");
-								el.removeAttribute("class");
-								el.removeAttribute("contenteditable");
-								el.removeAttribute("spellcheck");
-							});
+							// parse table html
+							let origTable = this.parseHTML(table.cloneNode(true));
 
 							// update table
-							ea.hooks.doAction("ea.advDataTable.updateView", view, false, {
+							this.updateFromView(view, {
 								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						} else {
@@ -174,7 +210,7 @@ class advancedDataTable {
 							});
 
 							// update table
-							ea.hooks.doAction("ea.advDataTable.updateView", view, false, {
+							this.updateFromView(view, {
 								ea_adv_data_table_dynamic_th_width: widths,
 							});
 						}
@@ -186,19 +222,11 @@ class advancedDataTable {
 					if (table.classList.contains("ea-advanced-data-table-static")) {
 						clearTimeout(this.timeout);
 
-						// clone current table
-						let origTable = table.cloneNode(true);
-
-						// remove editable area
-						origTable.querySelectorAll("th, td").forEach((el) => {
-							el.removeAttribute("id");
-							el.removeAttribute("class");
-							el.removeAttribute("contenteditable");
-							el.removeAttribute("spellcheck");
-						});
+						// parse table html
+						let origTable = this.parseHTML(table.cloneNode(true));
 
 						// update table
-						ea.hooks.doAction("ea.advDataTable.updateView", view, false, {
+						this.updateFromView(view, {
 							ea_adv_data_table_static_html: origTable.innerHTML,
 						});
 					}
@@ -212,19 +240,11 @@ class advancedDataTable {
 						clearTimeout(this.timeout);
 
 						if (table.classList.contains("ea-advanced-data-table-static")) {
-							// clone current table
-							let origTable = table.cloneNode(true);
-
-							// remove editable area
-							origTable.querySelectorAll("th, td").forEach((el) => {
-								el.removeAttribute("id");
-								el.removeAttribute("class");
-								el.removeAttribute("contenteditable");
-								el.removeAttribute("spellcheck");
-							});
+							// parse table html
+							let origTable = this.parseHTML(table.cloneNode(true));
 
 							// update table
-							ea.hooks.doAction("ea.advDataTable.updateView", view, false, {
+							this.updateFromView(view, {
 								ea_adv_data_table_static_html: origTable.innerHTML,
 							});
 						} else {
@@ -237,7 +257,7 @@ class advancedDataTable {
 							});
 
 							// update table
-							ea.hooks.doAction("ea.advDataTable.updateView", view, false, {
+							this.updateFromView(view, {
 								ea_adv_data_table_dynamic_th_width: widths,
 							});
 						}
@@ -249,6 +269,7 @@ class advancedDataTable {
 		}, 100);
 	}
 
+	// panel action
 	initPanelAction(panel, model, view) {
 		if (this.panelActionInitiated) {
 			return;
@@ -335,9 +356,13 @@ class advancedDataTable {
 					body += "</tbody>";
 
 					if (header.length > 0 || body.length > 0) {
-						ea.hooks.doAction("ea.advDataTable.updateView", view, true, {
-							ea_adv_data_table_static_html: header + body,
-						});
+						this.updateFromView(
+							view,
+							{
+								ea_adv_data_table_static_html: header + body,
+							},
+							true
+						);
 					}
 				}
 
@@ -361,10 +386,14 @@ class advancedDataTable {
 						if (response.connected == true) {
 							button.innerHTML = "Connected";
 
-							ea.hooks.doAction("ea.advDataTable.updateView", view, true, {
-								ea_adv_data_table_source_remote_connected: true,
-								ea_adv_data_table_source_remote_tables: response.tables,
-							});
+							this.updateFromView(
+								view,
+								{
+									ea_adv_data_table_source_remote_connected: true,
+									ea_adv_data_table_source_remote_tables: response.tables,
+								},
+								true
+							);
 
 							// reload panel
 							panel.content.el.querySelector(".elementor-section-title").click();
@@ -388,10 +417,14 @@ class advancedDataTable {
 					button.innerHTML = "Connect";
 				}, 2000);
 			} else if (event.target.dataset.event == "ea:advTable:disconnect") {
-				ea.hooks.doAction("ea.advDataTable.updateView", view, true, {
-					ea_adv_data_table_source_remote_connected: false,
-					ea_adv_data_table_source_remote_tables: [],
-				});
+				this.updateFromView(
+					view,
+					{
+						ea_adv_data_table_source_remote_connected: false,
+						ea_adv_data_table_source_remote_tables: [],
+					},
+					true
+				);
 
 				// reload panel
 				panel.content.el.querySelector(".elementor-section-title").click();
@@ -400,31 +433,27 @@ class advancedDataTable {
 		});
 	}
 
+	// init panel
 	initPanel(panel, model, view) {
 		// init inline edit for first time
-		ea.hooks.doAction("ea.advDataTable.initInlineEdit", model, view);
-		ea.hooks.doAction("ea.advDataTable.initPanelAction", panel, model, view);
+		this.initInlineEdit(model, view);
+		this.initPanelAction(panel, model, view);
 
 		// re init inline edit after render
 		model.on("remote:render", () => {
 			this.inlineEditInitiated = false;
-			ea.hooks.doAction("ea.advDataTable.initInlineEdit", model, view);
+			this.initInlineEdit(model, view);
 		});
 	}
 
+	// init frontend features
 	initFrontend($scope, $) {
 		let table = $scope.context.querySelector(".ea-advanced-data-table");
 		let search = $scope.context.querySelector(".ea-advanced-data-table-search");
 		let pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
 		let classCollection = {};
 
-		if (ea.isEditMode) {
-			table.querySelectorAll("th, td").forEach((el) => {
-				if (el.innerHTML.indexOf('<div class="inline-edit">') !== 0) {
-					el.innerHTML = `<div class="inline-edit">${el.innerHTML}</div>`;
-				}
-			});
-		} else {
+		if (!ea.isEditMode) {
 			// search
 			this.initTableSearch(table, search, pagination);
 
@@ -439,6 +468,7 @@ class advancedDataTable {
 		}
 	}
 
+	// frontend - search
 	initTableSearch(table, search, pagination) {
 		if (search) {
 			search.addEventListener("input", (e) => {
@@ -504,6 +534,7 @@ class advancedDataTable {
 		}
 	}
 
+	// frontend - sort
 	initTableSort(table, pagination, classCollection) {
 		if (table.classList.contains("ea-advanced-data-table-sortable")) {
 			table.addEventListener("click", (e) => {
@@ -582,6 +613,7 @@ class advancedDataTable {
 		}
 	}
 
+	// frontend - pagination
 	initTablePagination(table, pagination, classCollection) {
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			let paginationHTML = "";
@@ -688,6 +720,7 @@ class advancedDataTable {
 		}
 	}
 
+	// woocommerce features
 	initWooFeatures(table) {
 		table.querySelectorAll(".nt_button_woo").forEach((el) => {
 			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
@@ -703,6 +736,7 @@ class advancedDataTable {
 		});
 	}
 
+	// context menu
 	initContextMenu(groups, element) {
 		if (
 			element.options.model.attributes.widgetType == "eael-advanced-data-table" &&
@@ -716,41 +750,29 @@ class advancedDataTable {
 						title: "Add Row Above",
 						callback() {
 							let table = document.querySelector(`.ea-advanced-data-table-${element.options.model.attributes.id}`);
+							const { activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
 
-							if (advanced_data_table_active_cell !== null && advanced_data_table_active_cell.tagName.toLowerCase() != "th") {
-								let index = advanced_data_table_active_cell.parentNode.rowIndex;
+							if (activeCell !== null && activeCell.tagName.toLowerCase() != "th") {
+								let index = activeCell.parentNode.rowIndex;
 								let row = table.insertRow(index);
 
+								// insert cells in row
 								for (let i = 0; i < table.rows[0].cells.length; i++) {
 									let cell = row.insertCell(i);
-									cell.classList.add("inline-edit");
+									cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
 								}
 
-								advanced_data_table_active_cell = null;
+								// remove active cell
+								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// reinit tinymce
-								tinymce.init({
-									selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
-									menubar: false,
-									inline: true,
-									plugins: ["lists", "link", "autolink"],
-									toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
-									forced_root_block: false,
-								});
+								ea.hooks.doAction("advancedDataTable.initEditor");
 
-								// clone current table
-								let origTable = table.cloneNode(true);
-
-								// remove editable area
-								origTable.querySelectorAll("th, td").forEach((el) => {
-									el.removeAttribute("id");
-									el.removeAttribute("class");
-									el.removeAttribute("contenteditable");
-									el.removeAttribute("spellcheck");
-								});
+								// parse table html
+								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("ea.advDataTable.updateModel", element.options.model, element.container, false, {
+								ea.hooks.doAction("advancedDataTable.updateFromModel", element.options.model, element.container, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 							}
@@ -761,41 +783,28 @@ class advancedDataTable {
 						title: "Add Row Below",
 						callback() {
 							let table = document.querySelector(`.ea-advanced-data-table-${element.options.model.attributes.id}`);
+							const { activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
 
-							if (advanced_data_table_active_cell !== null) {
-								let index = advanced_data_table_active_cell.parentNode.rowIndex + 1;
+							if (activeCell !== null) {
+								let index = activeCell.parentNode.rowIndex + 1;
 								let row = table.insertRow(index);
 
 								for (let i = 0; i < table.rows[0].cells.length; i++) {
 									let cell = row.insertCell(i);
-									cell.classList.add("inline-edit");
+									cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
 								}
 
-								advanced_data_table_active_cell = null;
+								// remove active cell
+								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// reinit tinymce
-								tinymce.init({
-									selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
-									menubar: false,
-									inline: true,
-									plugins: ["lists", "link", "autolink"],
-									toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
-									forced_root_block: false,
-								});
+								ea.hooks.doAction("advancedDataTable.initEditor");
 
-								// clone current table
-								let origTable = table.cloneNode(true);
-
-								// remove editable area
-								origTable.querySelectorAll("th, td").forEach((el) => {
-									el.removeAttribute("id");
-									el.removeAttribute("class");
-									el.removeAttribute("contenteditable");
-									el.removeAttribute("spellcheck");
-								});
+								// parse table html
+								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("ea.advDataTable.updateModel", element.options.model, element.container, false, {
+								ea.hooks.doAction("advancedDataTable.updateFromModel", element.options.model, element.container, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 							}
@@ -806,45 +815,32 @@ class advancedDataTable {
 						title: "Add Column Left",
 						callback() {
 							let table = document.querySelector(`.ea-advanced-data-table-${element.options.model.attributes.id}`);
+							const { activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
 
-							if (advanced_data_table_active_cell !== null) {
-								let index = advanced_data_table_active_cell.cellIndex;
+							if (activeCell !== null) {
+								let index = activeCell.cellIndex;
 
 								for (let i = 0; i < table.rows.length; i++) {
 									if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
 										let cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+										cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
 									} else {
 										let cell = table.rows[i].insertCell(index);
+										cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
 									}
-
-									cell.classList.add("inline-edit");
 								}
 
-								advanced_data_table_active_cell = null;
+								// remove active cell
+								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// reinit tinymce
-								tinymce.init({
-									selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
-									menubar: false,
-									inline: true,
-									plugins: ["lists", "link", "autolink"],
-									toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
-									forced_root_block: false,
-								});
+								ea.hooks.doAction("advancedDataTable.initEditor");
 
-								// clone current table
-								let origTable = table.cloneNode(true);
-
-								// remove editable area
-								origTable.querySelectorAll("th, td").forEach((el) => {
-									el.removeAttribute("id");
-									el.removeAttribute("class");
-									el.removeAttribute("contenteditable");
-									el.removeAttribute("spellcheck");
-								});
+								// parse table html
+								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("ea.advDataTable.updateModel", element.options.model, element.container, false, {
+								ea.hooks.doAction("advancedDataTable.updateFromModel", element.options.model, element.container, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 							}
@@ -855,45 +851,32 @@ class advancedDataTable {
 						title: "Add Column Right",
 						callback() {
 							let table = document.querySelector(`.ea-advanced-data-table-${element.options.model.attributes.id}`);
+							const { activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
 
-							if (advanced_data_table_active_cell !== null) {
-								let index = advanced_data_table_active_cell.cellIndex + 1;
+							if (activeCell !== null) {
+								let index = activeCell.cellIndex + 1;
 
 								for (let i = 0; i < table.rows.length; i++) {
 									if (table.rows[i].cells[0].tagName.toLowerCase() == "th") {
 										let cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
+										cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
 									} else {
 										let cell = table.rows[i].insertCell(index);
+										cell.innerHTML = `<div class="inline-editor">${cell.innerHTML}</div>`;
 									}
-
-									cell.classList.add("inline-edit");
 								}
 
-								advanced_data_table_active_cell = null;
+								// remove active cell
+								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// reinit tinymce
-								tinymce.init({
-									selector: ".ea-advanced-data-table-editable th, .ea-advanced-data-table-editable td",
-									menubar: false,
-									inline: true,
-									plugins: ["lists", "link", "autolink"],
-									toolbar: "bold italic underline strikethrough link | alignleft aligncenter alignright | numlist bullist",
-									forced_root_block: false,
-								});
+								ea.hooks.doAction("advancedDataTable.initEditor");
 
-								// clone current table
-								let origTable = table.cloneNode(true);
-
-								// remove editable area
-								origTable.querySelectorAll("th, td").forEach((el) => {
-									el.removeAttribute("id");
-									el.removeAttribute("class");
-									el.removeAttribute("contenteditable");
-									el.removeAttribute("spellcheck");
-								});
+								// parse table html
+								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("ea.advDataTable.updateModel", element.options.model, element.container, false, {
+								ea.hooks.doAction("advancedDataTable.updateFromModel", element.options.model, element.container, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 							}
@@ -904,27 +887,25 @@ class advancedDataTable {
 						title: "Delete Row",
 						callback() {
 							let table = document.querySelector(`.ea-advanced-data-table-${element.options.model.attributes.id}`);
+							const { activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
 
-							if (advanced_data_table_active_cell !== null) {
-								let index = advanced_data_table_active_cell.parentNode.rowIndex;
+							if (activeCell !== null) {
+								let index = activeCell.parentNode.rowIndex;
 
+								// delete row
 								table.deleteRow(index);
 
-								advanced_data_table_active_cell = null;
+								// remove active cell
+								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
-								// clone current table
-								let origTable = table.cloneNode(true);
+								// reinit tinymce
+								ea.hooks.doAction("advancedDataTable.initEditor");
 
-								// remove editable area
-								origTable.querySelectorAll("th, td").forEach((el) => {
-									el.removeAttribute("id");
-									el.removeAttribute("class");
-									el.removeAttribute("contenteditable");
-									el.removeAttribute("spellcheck");
-								});
+								// parse table html
+								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("ea.advDataTable.updateModel", element.options.model, element.container, false, {
+								ea.hooks.doAction("advancedDataTable.updateFromModel", element.options.model, element.container, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 							}
@@ -935,29 +916,27 @@ class advancedDataTable {
 						title: "Delete Column",
 						callback() {
 							let table = document.querySelector(`.ea-advanced-data-table-${element.options.model.attributes.id}`);
+							const { activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
 
-							if (advanced_data_table_active_cell !== null) {
-								let index = advanced_data_table_active_cell.cellIndex;
+							if (activeCell !== null) {
+								let index = activeCell.cellIndex;
 
+								// delete columns
 								for (let i = 0; i < table.rows.length; i++) {
 									table.rows[i].deleteCell(index);
 								}
 
-								advanced_data_table_active_cell = null;
+								// remove active cell
+								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
-								// clone current table
-								let origTable = table.cloneNode(true);
+								// reinit tinymce
+								ea.hooks.doAction("advancedDataTable.initEditor");
 
-								// remove editable area
-								origTable.querySelectorAll("th, td").forEach((el) => {
-									el.removeAttribute("id");
-									el.removeAttribute("class");
-									el.removeAttribute("contenteditable");
-									el.removeAttribute("spellcheck");
-								});
+								// parse table html
+								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("ea.advDataTable.updateModel", element.options.model, element.container, false, {
+								ea.hooks.doAction("advancedDataTable.updateFromModel", element.options.model, element.container, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 							}
@@ -971,6 +950,6 @@ class advancedDataTable {
 	}
 }
 
-ea.hooks.addAction("ea.frontend.init", "ea", () => {
+ea.hooks.addAction("init", "ea", () => {
 	new advancedDataTable();
 });
