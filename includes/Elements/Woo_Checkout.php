@@ -118,13 +118,24 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::SELECT,
 				'default' => 'default',
 				'label_block' => false,
-				'options' => [
+				'options' => apply_filters('eael/woo-checkout/layout', [
 					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-//					'split' => esc_html__( 'Split', 'essential-addons-for-elementor-lite' ),
-//					'steps' => esc_html__( 'Steps', 'essential-addons-for-elementor-lite' ),
-				],
+				]),
 			]
 		);
+
+		if (!apply_filters('eael/pro_enabled', false)) {
+			$this->add_control(
+				'eael_woo_checkout_pro_enable_warning',
+				[
+					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
+					'type' => Controls_Manager::HEADING,
+					'condition' => [
+						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
+					],
+				]
+			);
+		}
 
 		$this->end_controls_section();
 

@@ -138,6 +138,8 @@ class Bootstrap
         add_action('eael/advanced-data-table/source/control', [$this,'advanced_data_table_source_control']);
         add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this,'advanced_data_table_ninja_integration'], 10, 1);
 
+	    add_filter('eael/woo-checkout/layout', [$this,'eael_woo_checkout_layout']);
+
         // Admin
         if (is_admin()) {
             // Admin
