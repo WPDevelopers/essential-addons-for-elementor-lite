@@ -37,6 +37,8 @@ class Woo_Checkout extends Widget_Base {
 				wc_load_cart();
 			}
 
+			add_filter('body_class' , [$this, 'add_checkout_body_class']);
+
 			remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
 			remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 		}
@@ -1549,6 +1551,13 @@ class Woo_Checkout extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+	}
+
+	public function add_checkout_body_class( $classes ){
+		if ( is_checkout() ) {
+			$classes[] = 'eael-woo-checkout';
+		}
+		return $classes;
 	}
 
 	protected function render() {
