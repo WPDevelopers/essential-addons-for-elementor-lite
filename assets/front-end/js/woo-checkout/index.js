@@ -1,9 +1,9 @@
 var WooCheckout = function($scope, $) {
-    console.log('working');
+    // console.log('working');
     $.blockUI.defaults.overlayCSS.cursor = 'default';
     function render_order_review_template(){
-        var checkout = $('.ea-woo-checkout');
-        console.log(checkout.data('checkout'));
+        var wooCheckout = $('.ea-woo-checkout');
+
         setTimeout(
             function () {
                 $('.ea-checkout-review-order-table').addClass( 'processing' ).block({
@@ -19,7 +19,7 @@ var WooCheckout = function($scope, $) {
                     url:		localize.ajaxurl,
                     data:		{
                         action: 'woo_checkout_update_order_review',
-                        test : checkout.data('checkout')
+                        orderReviewData : wooCheckout.data('checkout')
                     },
                     success:	function( data ) {
                         $( ".ea-checkout-review-order-table" ).replaceWith( data.order_review);
@@ -28,7 +28,7 @@ var WooCheckout = function($scope, $) {
                         }, 100000)
                     }
                 });
-            },3000
+            },2000
         );
     }
 
