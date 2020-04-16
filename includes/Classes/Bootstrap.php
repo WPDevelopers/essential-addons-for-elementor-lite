@@ -135,6 +135,8 @@ class Bootstrap
         add_action('eael/advanced-data-table/source/control', [$this,'advanced_data_table_source_control']);
         add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this,'advanced_data_table_ninja_integration'], 10, 1);
 
+        //rank math support
+        add_filter( 'rank_math/researches/toc_plugins', 'eael_toc_rank_math_support');
         // Admin
         if (is_admin()) {
             // Admin
