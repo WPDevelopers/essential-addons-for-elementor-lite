@@ -142,6 +142,19 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_content_selector',
+            [
+                'label' => __('Content Selector', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'description' => __('Which content are searched for heading tag, Provide unique selector to replace default selector', 'essential-addons-for-elementor-lite'),
+                'label_block' => false,
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_collapse_sub_heading',
             [
                 'label' => __('Keep Sub Heading Collapsed', 'essential-addons-for-elementor-lite'),

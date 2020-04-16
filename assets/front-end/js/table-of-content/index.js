@@ -204,6 +204,12 @@
 		 * @returns {null|selector}
 		 */
 		function eael_toc_check_content() {
+			var eaelToc = document.getElementById("eael-toc");
+
+			if(eaelToc.dataset.contentselector){
+				return eaelToc.dataset.contentselector;
+			}
+
 			var contentSelectro = '.site-content';
 			if ($(".site-content")[0]) {
 				contentSelectro = ".site-content";
