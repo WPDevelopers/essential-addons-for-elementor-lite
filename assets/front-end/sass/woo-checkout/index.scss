@@ -31,41 +31,6 @@ $base-font-size: 14px;
 			border-bottom: none;
 		}
 
-		.woocommerce-error, .woocommerce-info, .woocommerce-message {
-			text-align: left;
-			background-color: transparent;
-			border: 1px solid inherit;
-			text-transform: capitalize;
-
-			a {
-				box-shadow: none !important;
-				text-transform: capitalize;
-			}
-		}
-
-		.woocommerce-notices-wrapper {
-			.woocommerce-error {
-				border-radius: 5px;
-				background-color: #FFF3F5;
-				color: #FF7E93;
-				padding: 20px;
-				font-size: 16px;
-				line-height: 1.5em;
-				font-weight: 400;
-				margin-bottom: 30px;
-
-				&::before {
-					left: 20px;
-					top: 20px;
-					font-size: 20px
-				}
-
-				li {
-					margin-left: 30px!important;
-				}
-			}
-		}
-
 		.woo-checkout-login, .woo-checkout-coupon {
 
 			a {
@@ -141,24 +106,6 @@ $base-font-size: 14px;
 				}
 			}
 
-			.woocommerce-form-login-toggle {
-				.woocommerce-error, .woocommerce-info, .woocommerce-message {
-					background-color: transparent!important;
-					padding: 10px 10px 10px 40px!important;
-					border: none;
-
-					&::before {
-						left: 20px;
-						top: 20px;
-						font-size: 20px
-					}
-				}
-
-				.woocommerce-info {
-					padding: 0 0 0 35px!important;
-				}
-			}
-
 			.form-row-first {
 				width: 48.5%;
 				float: left!important;
@@ -183,22 +130,6 @@ $base-font-size: 14px;
 					margin-right: 30px;
 				}
 			}
-			.woocommerce-info {
-				padding-left: 30px;
-				font-size: inherit;
-				line-height: 1.5em;
-				font-weight: inherit;
-				margin-bottom: 0;
-				display: block;
-
-				&::before {
-					content: none;
-				}
-
-				a {
-					text-decoration: underline;
-				}
-			}
 
 			.lost_password {
 				margin-left: 3px;
@@ -207,30 +138,6 @@ $base-font-size: 14px;
 		}
 
 		.woo-checkout-coupon {
-			border-radius: 5px;
-			background-color: #ebfaff;
-			padding: 30px;
-			font-size: 16px;
-			line-height: 1.5em;
-			font-weight: 400;
-			margin-bottom: 30px;
-			position: relative;
-			display: block;
-
-			.ea-coupon-icon {
-				width: 20px;
-				position: absolute;
-				top: 20px;
-				left: 20px;
-				font-size: 20px;
-
-				i, svg {
-					width: 1em;
-					height: 1em;
-					position: relative;
-					display: block;
-				}
-			}
 
 			.form-row-first {
 				width: 48.5%;
@@ -293,52 +200,6 @@ $base-font-size: 14px;
 				}
 			}
 
-			.woocommerce-form-coupon-toggle {
-				.woocommerce-error, .woocommerce-info, .woocommerce-message {
-					background-color: transparent!important;
-					padding: 10px 10px 10px 40px!important;
-					border: none!important;
-
-					&::before {
-						left: 20px;
-						top: 20px;
-						font-size: 20px
-					}
-				}
-
-				.woocommerce-info {
-					padding: 0 0 0 35px!important;
-					font-size: inherit;
-					line-height: 1.5em;
-					font-weight: inherit;
-					margin-bottom: 0;
-					color: inherit;
-					display: block;
-
-					&::before {
-						content: none;
-					}
-
-					a {
-						text-decoration: underline;
-					}
-				}
-			}
-			.woocommerce-message, .woocommerce-error {
-				background-color: transparent!important;
-				border: 1px solid inherit!important;
-				border-radius: 3px;
-				padding: 10px 10px 10px 40px !important;
-				margin: 20px 0 0!important;
-				color: inherit;
-
-				&:before {
-					left: 10px;
-					top: 10px;
-					color: inherit;
-				}
-			}
-
 			.lost_password {
 				margin-bottom: 0;
 			}
@@ -389,33 +250,6 @@ $base-font-size: 14px;
 				.col-1, .col-2 {
 					width: 100%!important;
 					float: none!important;
-				}
-			}
-		}
-
-		.woocommerce-checkout .woocommerce-NoticeGroup {
-			border-radius: 5px;
-			background-color: #FFF3F5;
-			color: #FF7E93;
-			padding: 20px;
-			font-size: 16px;
-			line-height: 1.5em;
-			font-weight: 400;
-			margin-bottom: 30px;
-
-			.woocommerce-error {
-				padding-left: 30px;
-				margin-bottom: 0;
-				border-top: 0;
-
-				&::before {
-					left: 20px;
-					top: 20px;
-					font-size: 20px
-				}
-
-				li {
-					margin-left: 30px!important;
 				}
 			}
 		}
@@ -557,6 +391,167 @@ $base-font-size: 14px;
 			}
 		}
 
+
+	}
+}
+
+.eael-woo-checkout {
+	.woocommerce {
+		.woocommerce-error, .woocommerce-info, .woocommerce-message{
+			border: 0;
+			border-radius: 5px;
+			text-align: left;
+			background-color: transparent;
+			text-transform: capitalize;
+			padding: 20px;
+			font-size: 16px;
+			line-height: 1.5em;
+			font-weight: 400;
+			margin-bottom: 30px;
+
+			&::before {
+				left: 20px;
+				top: 20px;
+				font-size: 20px
+			}
+
+			li {
+				margin-left: 30px!important;
+			}
+
+			a {
+				box-shadow: none;
+				text-transform: capitalize;
+			}
+		}
+
+		.woocommerce-error {
+			background-color: #FFF3F5;
+			color: #FF7E93;
+		}
+		.woocommerce-info {
+			background-color: #d1ecf1;
+			color: #0c5460;
+		}
+		.woocommerce-message {
+			background-color: #d4edda;
+			color: #155724;
+		}
+
+		form.checkout_coupon {
+			border: 1px solid #404040;
+		}
+
+
+		.woo-checkout-login {
+			.woocommerce-form-login-toggle {
+				.woocommerce-error, .woocommerce-info, .woocommerce-message {
+					background-color: transparent!important;
+					padding: 0 0 0 40px!important;
+					border: none!important;
+					margin: 0;
+
+					&::before {
+						left: 20px;
+						top: 20px;
+						font-size: 20px
+					}
+				}
+			}
+
+			.woocommerce-info {
+				font-size: inherit;
+				line-height: 1.5em;
+				font-weight: inherit;
+				margin-bottom: 0;
+				display: block;
+
+				&::before {
+					content: none;
+				}
+
+				a {
+					text-decoration: underline;
+				}
+			}
+		}
+
+
+		.woo-checkout-coupon {
+			border-radius: 5px;
+			background-color: #ebfaff;
+			padding: 30px;
+			font-size: 16px;
+			line-height: 1.5em;
+			font-weight: 400;
+			margin-bottom: 30px;
+			position: relative;
+			display: block;
+
+			.ea-coupon-icon {
+				width: 20px;
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				font-size: 20px;
+
+				i, svg {
+					width: 1em;
+					height: 1em;
+					position: relative;
+					display: block;
+				}
+			}
+
+			.woocommerce-info, .woocommerce-message, .woocommerce-error {
+				//background-color: transparent;
+				border-width: 1px;
+				border-style: solid;
+				border-radius: 3px;
+				padding: 10px;
+				margin: 20px 0 0;
+				color: inherit;
+
+				&:before {
+					left: 10px;
+					top: 10px;
+					color: inherit;
+				}
+			}
+
+			.woocommerce-form-coupon-toggle {
+				.woocommerce-error, .woocommerce-info, .woocommerce-message {
+					background-color: transparent!important;
+					padding: 0 0 0 40px!important;
+					border: none!important;
+					margin: 0;
+
+					&::before {
+						left: 20px;
+						top: 20px;
+						font-size: 20px
+					}
+				}
+
+				.woocommerce-info {
+					font-size: inherit;
+					line-height: 1.5em;
+					font-weight: inherit;
+					margin-bottom: 0;
+					display: block;
+
+					&::before {
+						content: none;
+					}
+
+					a {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		// payment
 		.woo-checkout-payment {
 			clear: both;
 
@@ -564,6 +559,7 @@ $base-font-size: 14px;
 				.payment_methods {
 					padding: 0 0 20px 0!important;
 					margin: 0;
+					border: 0;
 
 					li {
 						background-color: transparent;
@@ -574,12 +570,71 @@ $base-font-size: 14px;
 						padding: 0;
 
 						> label {
+							font-size: 15px;
 							padding: 0;
-							margin: 1rem 0;
+							margin: 0;
+						}
+
+						input[type="radio"] {
+							display: none;
+							+label {
+								color: white;
+								font-weight: bold;
+								font-size: 1rem;
+								cursor: pointer;
+								user-select: none;
+								padding-left: 20px;
+								padding-right: 20px;
+								position: relative;
+								&::before {
+									transition: all 250ms cubic-bezier(.4,.25,.3,1);
+									content: "";
+									width: 12px;
+									height: 12px;
+									border-radius: 50%;
+									background-color: #b8b6ca;
+									border: 0 solid white;
+									font-size: 0;
+									position: absolute;
+									top: 47%;
+									left: 0;
+									transform: translateY(-50%);
+								}
+
+								&::after {
+									transition: all 250ms cubic-bezier(.4,.25,.3,1);
+									content: "";
+									width: 0;
+									height: 0;
+									border-radius: 50%;
+									background-color: white;
+									position: absolute;
+									top: 47%;
+									left: 0;
+									transform: translateY(-50%);
+								}
+							}
+							&:checked + label{
+								&::before {
+									background-color: transparent;
+									width: 12px;
+									height: 12px;
+									border-width: 2px;
+									border-color: #7362f0;
+								}
+
+								&::after {
+									width: 6px;
+									height: 6px;
+									left: 3px;
+									background-color: #fff;
+								}
+							}
 						}
 					}
 
 					.payment_box {
+						border-radius: 5px;
 						p:first-child {
 							margin: 0!important;
 						}

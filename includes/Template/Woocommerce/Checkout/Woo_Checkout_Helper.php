@@ -14,7 +14,7 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function ea_checkout($settings) {
 		// Show non-cart errors.
-//		do_action( 'woocommerce_before_checkout_form_cart_notices' );
+		do_action( 'woocommerce_before_checkout_form_cart_notices' );
 
 		// Check cart has contents.
 		if ( WC()->cart->is_empty() && ! is_customize_preview() && apply_filters( 'woocommerce_checkout_redirect_empty_cart', true ) ) {
@@ -268,6 +268,24 @@ trait Woo_Checkout_Helper {
 	<?php }
 
 	/**
+	 * Show the login.
+	 */
+	public static function checkout_order_review_template() {
+		$settings = self::get_settings();
+		?>
+		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
+		<h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
+
+		<?php do_action('woocommerce_checkout_before_order_review'); ?>
+
+		<div class="ea-woo-checkout-order-review">
+			<?php self::checkout_order_review_default($settings); ?>
+		</div>
+
+		<?php do_action('woocommerce_checkout_after_order_review'); ?>
+	<?php }
+
+	/**
 	 * Show the order review.
 	 */
 	public static function checkout_order_review_default($settings) {
@@ -392,19 +410,7 @@ trait Woo_Checkout_Helper {
 	 * Show the default layout.
 	 */
 	public static function render_default_template_($checkout, $settings) {
-
-		do_action('woocommerce_checkout_before_order_review_heading');
 		?>
-		<h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
-
-		<?php do_action('woocommerce_checkout_before_order_review'); ?>
-
-		<div class="ea-woo-checkout-order-review">
-		<?php self::checkout_order_review_default($settings); ?>
-		</div>
-
-		<?php do_action('woocommerce_checkout_after_order_review'); ?>
-
 		<?php
 		// If checkout registration is disabled and not logged in, the user cannot checkout.
 		if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
@@ -413,6 +419,7 @@ trait Woo_Checkout_Helper {
 		}
 		?>
 		<?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
+
 		<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
 			<?php if ( $checkout->get_checkout_fields() ) : ?>
@@ -452,6 +459,7 @@ trait Woo_Checkout_Helper {
 	public function ea_woo_checkout_add_actions() {
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_login_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_coupon_template' ], 10 );
+		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 11 );
     }
 
 }
