@@ -1220,7 +1220,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#443e6d',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment, {{WRAPPER}} #payment' => 'background-color: {{VALUE}};',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment, {{WRAPPER}} #payment' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1231,18 +1231,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment .woo-checkout-section-title' => 'color: {{VALUE}};',
-				],
-			]
-		);
-		$this->add_control(
-			'ea_woo_checkout_payment_color',
-			[
-				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment' => 'color: {{VALUE}};',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .woo-checkout-section-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1261,7 +1250,7 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1280,12 +1269,12 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
-		// Button
+		// Label
 		$this->add_control(
 			'ea_woo_checkout_payment_label',
 			[
@@ -1298,7 +1287,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_payment_label_typography',
-				'selector' => '{{WRAPPER}} #place_order',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} #place_order',
 			]
 		);
 
@@ -1317,7 +1306,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#b8b6ca',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .wc_payment_method label' => 'color: {{VALUE}};',
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method input[type="radio"] + label' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1338,7 +1327,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .wc_payment_method input[type=radio]:checked + label' => 'color: {{VALUE}};',
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method input[type="radio"]:checked + label' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1361,8 +1350,8 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#2d284b',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment .payment_box' => 'background-color: {{VALUE}}!important;',
-					'{{WRAPPER}} .woo-checkout-payment .payment_box::before' => 'border-bottom-color: {{VALUE}}!important;',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .payment_box' => 'background-color: {{VALUE}}!important;',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .payment_box::before' => 'border-bottom-color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1373,7 +1362,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment .payment_box' => 'color: {{VALUE}}!important;',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .payment_box' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1394,7 +1383,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#b8b6ca',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text' => 'color: {{VALUE}}!important;',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1402,17 +1391,17 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_privacy_policy_typo',
-				'selector' => '{{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .woocommerce-privacy-policy-text',
 			]
 		);
 		$this->add_control(
 			'ea_woo_checkout_privacy_policy_link_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment a.woocommerce-privacy-policy-link' => 'color: {{VALUE}}!important;',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment a.woocommerce-privacy-policy-link' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1423,7 +1412,42 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#b8b6ca',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-payment .place-order' => 'border-color: {{VALUE}}!important;',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .place-order' => 'border-color: {{VALUE}}!important;',
+				],
+			]
+		);
+		// Privacy Policy Btn
+		$this->add_control(
+			'ea_woo_checkout_payment_btn',
+			[
+				'label' => __( 'Button', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_payment_btn_typo',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .eael-woo-checkout .woocommerce #place_order',
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_payment_btn_padding',
+			[
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'default' => [
+					'top' => '15',
+					'right' => '20',
+					'bottom' => '15',
+					'left' => '20',
+					'unit' => 'px',
+					'isLinked' => true,
+				],
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'.eael-woo-checkout {{WRAPPER}} .eael-woo-checkout .woocommerce #place_order' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
