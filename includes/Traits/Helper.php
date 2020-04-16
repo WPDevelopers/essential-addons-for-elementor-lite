@@ -2611,4 +2611,17 @@ trait Helper
         return $html;
 
     }
+
+    /**
+     * Filter to add plugins to the TOC list.
+     *
+     * @since  3.9.3
+     * @param array TOC plugins.
+     *
+     * @return mixed
+     */
+    public function eael_toc_rank_math_support( $toc_plugins ){
+        $toc_plugins['essential-addons-for-elementor-lite/essential_adons_elementor.php'] = __('Essential Addons for Elementor', 'essential-addons-for-elementor-lite');
+        return $toc_plugins;
+    }
 }
