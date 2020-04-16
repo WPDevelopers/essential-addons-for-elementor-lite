@@ -295,16 +295,16 @@ $base-font-size: 14px;
 
 					.product-thumbnail {
 						width: 65px;
-						margin-right: 10px;
+						margin-right: 15px;
 
 						img {
 							display: block;
-							border-radius: 5px;
+							//border-radius: 5px;
 						}
 					}
 				}
 
-				.product-quantity, product-total {
+				.product-quantity, .product-total {
 					padding: 0 10px;
 				}
 
@@ -403,7 +403,7 @@ $base-font-size: 14px;
 			text-align: left;
 			background-color: transparent;
 			text-transform: capitalize;
-			padding: 20px;
+			padding: 20px 20px 20px 50px;
 			font-size: 16px;
 			line-height: 1.5em;
 			font-weight: 400;
@@ -415,9 +415,9 @@ $base-font-size: 14px;
 				font-size: 20px
 			}
 
-			li {
-				margin-left: 30px!important;
-			}
+			//li {
+			//	margin-left: 30px;
+			//}
 
 			a {
 				box-shadow: none;
@@ -508,7 +508,7 @@ $base-font-size: 14px;
 				border-width: 1px;
 				border-style: solid;
 				border-radius: 3px;
-				padding: 10px;
+				padding: 10px 10px 10px 40px!important;
 				margin: 20px 0 0;
 				color: inherit;
 
@@ -516,6 +516,10 @@ $base-font-size: 14px;
 					left: 10px;
 					top: 10px;
 					color: inherit;
+				}
+
+				li {
+					margin-left: 0;
 				}
 			}
 
@@ -573,18 +577,16 @@ $base-font-size: 14px;
 							font-size: 15px;
 							padding: 0;
 							margin: 0;
+							display: inline-block;
+							width: 100%;
 						}
 
 						input[type="radio"] {
 							display: none;
 							+label {
-								color: white;
-								font-weight: bold;
-								font-size: 1rem;
 								cursor: pointer;
 								user-select: none;
-								padding-left: 20px;
-								padding-right: 20px;
+								padding-left: 25px;
 								position: relative;
 								&::before {
 									transition: all 250ms cubic-bezier(.4,.25,.3,1);
@@ -663,5 +665,36 @@ $base-font-size: 14px;
 			}
 		}
 	}
+
+	// astra
+
+	&.theme-astra {
+		.woocommerce {
+			#customer_details.col2-set {
+				.col-1 {
+					width: 100% !important;
+					float: none!important;
+
+					@media (min-width: 1024px) {
+						.woocommerce-billing-fields {
+							float: left !important;
+							width: 48% !important;
+							padding-right: 2%;
+						}
+
+						.woocommerce-shipping-fields, .woocommerce-additional-fields {
+							float: left !important;
+							width: 48% !important;
+							padding-left: 2%;
+						}
+					}
+				}
+				.col-2 {
+					clear: both;
+				}
+			}
+
+        }
+    }
 }
 

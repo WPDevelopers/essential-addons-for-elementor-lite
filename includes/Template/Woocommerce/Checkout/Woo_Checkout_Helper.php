@@ -459,7 +459,7 @@ trait Woo_Checkout_Helper {
 	public function ea_woo_checkout_add_actions() {
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_login_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_coupon_template' ], 10 );
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 11 );
+		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
     }
 
 }
