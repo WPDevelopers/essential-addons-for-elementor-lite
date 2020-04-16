@@ -319,11 +319,14 @@ trait Woo_Checkout_Helper {
                 </ul>
 
                 <div class="ea-order-review-table-footer">
-                    <div class="back-to-shop">
-                        <a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-                            <i class="fas fa-long-arrow-alt-left"></i><?php esc_html_e( 'Continue Shopping', 'essential-addons-for-elementor-lite' ); ?>
-                        </a>
-                    </div>
+	                <?php
+	                if($settings['ea_woo_checkout_shop_link'] == 'yes') { ?>
+                        <div class="back-to-shop">
+                            <a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+                                <i class="fas fa-long-arrow-alt-left"></i><?php echo $settings['ea_woo_checkout_shop_link_text']; ?>
+                            </a>
+                        </div>
+	                <?php } ?>
 
                     <div class="footer-content">
                         <div class="cart-subtotal">

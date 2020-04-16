@@ -796,6 +796,26 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'ea_woo_checkout_coupon_form',
+			[
+				'label' => __( 'Form', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_coupon_form_border_color',
+			[
+				'label' => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#404040',
+				'selectors' => [
+					'{{WRAPPER}} .eael-woo-checkout .woocommerce form.checkout_coupon' => 'border: 1px solid {{VALUE}};',
+				],
+			]
+		);
 		$this->end_controls_section();
 
 		/**
@@ -1583,15 +1603,17 @@ class Woo_Checkout extends Widget_Base {
 		] );
 
 		global $wp;
-        $test_data = [
+        $order_review_change_data = [
             'ea_woo_checkout_table_product_text' => $settings['ea_woo_checkout_table_product_text'],
             'ea_woo_checkout_table_quantity_text' => $settings['ea_woo_checkout_table_quantity_text'],
             'ea_woo_checkout_table_price_text' => $settings['ea_woo_checkout_table_price_text'],
+            'ea_woo_checkout_shop_link' => $settings['ea_woo_checkout_shop_link'],
+            'ea_woo_checkout_shop_link_text' => $settings['ea_woo_checkout_shop_link_text'],
         ];
         $this->ea_woo_checkout_add_actions();
 
 		?>
-        <div data-checkout="<?php echo htmlspecialchars(json_encode($test_data), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $this->get_render_attribute_string( 'container' ); ?>>
+        <div data-checkout="<?php echo htmlspecialchars(json_encode($order_review_change_data), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $this->get_render_attribute_string( 'container' ); ?>>
             <div class="woocommerce">
                 <style>
                     .woocommerce .blockUI.blockOverlay:before {
