@@ -386,6 +386,13 @@ class Woo_Checkout extends Widget_Base {
 				'separator' => 'before',
 			]
 		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_order_review_header_typo',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .table-header',
+			]
+		);
 		$this->add_control(
 			'ea_woo_checkout_order_review_header_color',
 			[
@@ -393,7 +400,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout-order-review .table-header, {{WRAPPER}} .ea-woo-checkout-order-review .back-to-shopping' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout-order-review .table-header' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -476,7 +483,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_order_review_footer_color',
 			[
-				'label' => esc_html__( 'Content Color', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
@@ -528,9 +535,18 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Shop Link', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
+				'condition' => [
+					'ea_woo_checkout_shop_link' => 'yes',
+				],
 			]
 		);
-		$this->start_controls_tabs( 'ea_woo_checkout_shop_link_color_tabs');
+
+		$this->start_controls_tabs( 'ea_woo_checkout_shop_link_color_tabs', [
+			'condition' => [
+				'ea_woo_checkout_shop_link' => 'yes',
+			],
+
+		]);
 
 		$this->start_controls_tab( 'ea_woo_checkout_shop_link_color_tab_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
 
@@ -812,7 +828,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
-					'{{WRAPPER}} .eael-woo-checkout .woocommerce form.checkout_coupon' => 'border: 1px solid {{VALUE}};',
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce form.checkout_coupon' => 'border: 1px solid {{VALUE}};',
 				],
 			]
 		);
@@ -1020,7 +1036,7 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce-notices-wrapper .woocommerce-error, {{WRAPPER}} .ea-woo-checkout .woocommerce-info, {{WRAPPER}} .ea-woo-checkout .woocommerce-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce-notices-wrapper .woocommerce-error, {{WRAPPER}} .ea-woo-checkout .woocommerce-info, {{WRAPPER}} .ea-woo-checkout .woocommerce-message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} calc({{LEFT}}{{UNIT}} + 30px);',
 					'{{WRAPPER}} .ea-woo-checkout .woocommerce-error::before, , {{WRAPPER}} .ea-woo-checkout .woocommerce-info::before, {{WRAPPER}} .ea-woo-checkout .woocommerce-message::before' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
 				],
 			]
@@ -1107,7 +1123,7 @@ class Woo_Checkout extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woocommerce-checkout .form-row input.input-text, {{WRAPPER}} .ea-woo-checkout .woocommerce .woocommerce-checkout .form-row select'
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woocommerce-checkout .form-row input.input-text, {{WRAPPER}} .ea-woo-checkout .woocommerce .woocommerce-checkout .form-row select, .eael-woo-checkout {{WRAPPER}} .ea-woo-checkout .select2-container .select2-selection--single'
 					=> 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -1134,7 +1150,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#cccccc',
 				'selectors' => [
-					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details .select, {{WRAPPER}} #customer_details .select2-container--default .select2-selection--single, , {{WRAPPER}} #customer_details textarea' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details .select, {{WRAPPER}} #customer_details .select2-container--default .select2-selection--single, {{WRAPPER}} #customer_details textarea' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1287,7 +1303,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_payment_label_typography',
-				'selector' => '.eael-woo-checkout {{WRAPPER}} #place_order',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method > label',
 			]
 		);
 
@@ -1429,7 +1445,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ea_woo_checkout_payment_btn_typo',
-				'selector' => '.eael-woo-checkout {{WRAPPER}} .eael-woo-checkout .woocommerce #place_order',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woocommerce #place_order',
 			]
 		);
 		$this->add_responsive_control(
@@ -1447,7 +1463,26 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'.eael-woo-checkout {{WRAPPER}} .eael-woo-checkout .woocommerce #place_order' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce #place_order' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_payment_btn_top_spacing',
+			[
+				'label' => esc_html__( 'Top Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 20,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.eael-woo-checkout {{WRAPPER}} .woocommerce #place_order' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

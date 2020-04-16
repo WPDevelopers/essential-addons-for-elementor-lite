@@ -242,13 +242,12 @@
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-thum-name .product-thumbnail {
   width: 65px;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-thum-name .product-thumbnail img {
   display: block;
-  border-radius: 5px;
 }
-.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-quantity, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table product-total {
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-quantity, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-total {
   padding: 0 10px;
 }
 @media all and (max-width: 767px) {
@@ -330,7 +329,7 @@
   text-align: left;
   background-color: transparent;
   text-transform: capitalize;
-  padding: 20px;
+  padding: 20px 20px 20px 50px;
   font-size: 16px;
   line-height: 1.5em;
   font-weight: 400;
@@ -340,9 +339,6 @@
   left: 20px;
   top: 20px;
   font-size: 20px;
-}
-.eael-woo-checkout .woocommerce .woocommerce-error li, .eael-woo-checkout .woocommerce .woocommerce-info li, .eael-woo-checkout .woocommerce .woocommerce-message li {
-  margin-left: 30px !important;
 }
 .eael-woo-checkout .woocommerce .woocommerce-error a, .eael-woo-checkout .woocommerce .woocommerce-info a, .eael-woo-checkout .woocommerce .woocommerce-message a {
   box-shadow: none;
@@ -415,7 +411,7 @@
   border-width: 1px;
   border-style: solid;
   border-radius: 3px;
-  padding: 10px;
+  padding: 10px 10px 10px 40px !important;
   margin: 20px 0 0;
   color: inherit;
 }
@@ -423,6 +419,9 @@
   left: 10px;
   top: 10px;
   color: inherit;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info li, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message li, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error li {
+  margin-left: 0;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message {
   background-color: transparent !important;
@@ -467,21 +466,19 @@
   font-size: 15px;
   padding: 0;
   margin: 0;
+  display: inline-block;
+  width: 100%;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method input[type="radio"] {
   display: none;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method input[type="radio"] + label {
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 25px;
   position: relative;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method input[type="radio"] + label::before {
@@ -545,4 +542,23 @@
   margin: 0 0 0 auto;
   text-transform: capitalize;
   letter-spacing: unset;
+}
+.eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 {
+  width: 100% !important;
+  float: none !important;
+}
+@media (min-width: 1024px) {
+  .eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 .woocommerce-billing-fields {
+    float: left !important;
+    width: 48% !important;
+    padding-right: 2%;
+  }
+  .eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 .woocommerce-shipping-fields, .eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 .woocommerce-additional-fields {
+    float: left !important;
+    width: 48% !important;
+    padding-left: 2%;
+  }
+}
+.eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-2 {
+  clear: both;
 }
