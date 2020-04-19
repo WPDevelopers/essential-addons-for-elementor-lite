@@ -2853,7 +2853,11 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
-            $gallery_store[$counter]['video_link'] = $gallery['eael_fg_gallery_item_video_link'];
+
+            preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
+            $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
+            $gallery_store[$counter]['video_link'] = $video_link;
+
             $gallery_store[$counter]['show_lightbox'] = $gallery['eael_fg_gallery_lightbox'];
             $gallery_store[$counter]['play_icon'] = $gallery['fg_video_gallery_play_icon'];
             $gallery_store[$counter]['controls'] = $this->sorter_class($gallery['eael_fg_gallery_control_name']);
