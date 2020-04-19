@@ -3304,13 +3304,7 @@ class Filterable_Gallery extends Widget_Base
                         image: {
                             titleSrc: function(item) {
                                 if (mfpCaption == "yes") {
-                                    return item.el
-                                        .parent()
-                                        .parent()
-                                        .parent()
-                                        .parent()
-                                        .find(".fg-item-title")
-                                        .html();
+                                    return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parent('.eael-gallery-grid-item').find('.fg-item-title').html();
                                 }
                             }
                         }
