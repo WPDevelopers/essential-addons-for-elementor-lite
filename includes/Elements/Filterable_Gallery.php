@@ -2706,7 +2706,8 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace('&', 'and', $sorter_class);
         $sorter_class = str_replace('amp;', '', $sorter_class);
         $sorter_class = str_replace('/', 'slash', $sorter_class);
-        
+        $sorter_class = str_replace("'", 'apostrophe', $sorter_class);
+        $sorter_class = str_replace('"', 'apostrophe', $sorter_class);
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);
