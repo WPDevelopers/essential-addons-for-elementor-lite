@@ -49,7 +49,16 @@ trait Post_Grid
                                 echo '<div class="eael-entry-wrapper">
                                     <header class="eael-entry-header">';
                                         if ($settings['eael_show_title']) {
-                                            echo '<h2 class="eael-entry-title"><a class="eael-grid-post-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h2>';
+
+                                            echo '<h2 class="eael-entry-title">';
+                                                echo '<a
+                                                class="eael-grid-post-link"
+                                                href="' . get_the_permalink() . '"
+                                                title="' . get_the_title() . '"
+                                                '.($settings['title_link_nofollow'] ? 'rel="nofollow"' : '').'
+                                                '.($settings['title_link_target_blank'] ? 'target="_blank"' : '').'
+                                                >' . get_the_title() . '</a>';
+                                            echo '</h2>';
                                         }
 
                                         if ($settings['eael_show_meta'] && $settings['meta_position'] == 'meta-entry-header') {
@@ -69,7 +78,12 @@ trait Post_Grid
                                             <div class="eael-grid-post-excerpt">
                                                 <p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
                                                 if ($settings['eael_show_read_more_button']) {
-                                                    echo '<a href="' . get_the_permalink() . '" class="eael-post-elements-readmore-btn">' . esc_attr($settings['read_more_button_text']) . '</a>';
+                                                    echo '<a
+                                                    href="' . get_the_permalink() . '"
+                                                    class="eael-post-elements-readmore-btn"
+                                                    '.($settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '').'
+                                                    '.($settings['read_more_link_target_blank'] ? 'target="_blank"' : '').'
+                                                    >' . esc_attr($settings['read_more_button_text']) . '</a>';
                                                 }
                                             echo '</div>
                                         </div>';
