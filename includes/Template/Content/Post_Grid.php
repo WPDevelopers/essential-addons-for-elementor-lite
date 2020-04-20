@@ -35,7 +35,11 @@ trait Post_Grid
                                             }else {
                                                 echo '<i class="' . $settings['eael_post_grid_bg_hover_icon'] . '" aria-hidden="true"></i>';
                                             }
-                                            echo '<a href="' . get_the_permalink() . '"></a>';
+                                            echo '<a
+                                                href="' . get_the_permalink() . '"
+                                                '.($settings['image_link_nofollow'] ? 'rel="nofollow"' : '').'
+                                                '.($settings['image_link_target_blank'] ? 'target="_blank"' : '').'
+                                            ></a>';
                                         echo '</div>';
                                     }
 

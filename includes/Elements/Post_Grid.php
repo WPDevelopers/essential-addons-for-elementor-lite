@@ -82,13 +82,53 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+            'image_link',
+            [
+                'label' => __('Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_show_image'   => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'image_link_nofollow',
+			[
+				'label' => __( 'No Follow', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'true',
+                'condition' => [
+                    'eael_show_image'   => 'yes'
+                ]
+			]
+        );
+        
+        $this->add_control(
+			'image_link_target_blank',
+			[
+				'label' => __( 'Target Blank', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'true',
+                'condition' => [
+                    'eael_show_image'   => 'yes'
+                ]
+			]
+        );
+
+        $this->add_control(
             'title_link',
             [
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_show_title'   => 'yes'
-                ]
+                ],
+                'separator' => 'before'
             ]
         );
 
@@ -159,7 +199,7 @@ class Post_Grid extends Widget_Base
                     'eael_show_read_more_button'   => 'yes'
                 ]
 			]
-		);
+        );
 
 
         $this->end_controls_section();
@@ -588,7 +628,9 @@ class Post_Grid extends Widget_Base
             'title_link_nofollow' => $settings['title_link_nofollow'],
             'title_link_target_blank' => $settings['title_link_target_blank'],
             'read_more_link_nofollow' => $settings['read_more_link_nofollow'],
-            'read_more_link_target_blank' => $settings['read_more_link_target_blank']
+            'read_more_link_target_blank' => $settings['read_more_link_target_blank'],
+            'image_link_nofollow'   => $settings['image_link_nofollow'],
+            'image_link_target_blank' => $settings['image_link_target_blank']
         ];
 
         $this->add_render_attribute(
