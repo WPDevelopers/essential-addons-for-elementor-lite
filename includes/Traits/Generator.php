@@ -20,7 +20,7 @@ trait Generator
         global $wp_query;
 
         $uid = null;
-        
+
         if ($wp_query->is_home) {
             $uid = 'home';
         } else if ($wp_query->is_search) {
@@ -31,7 +31,11 @@ trait Generator
             $uid = 'post-' . get_queried_object_id();
         } elseif ($wp_query->is_archive) {
             if ($wp_query->is_post_type_archive) {
-                $uid = 'post-type-archive-' . $wp_query->query['post_type'];
+                if (isset($wp_query->query['post_type'])) {
+                    $uid = 'post-type-archive-' . $wp_query->query['post_type'];
+                } else if (isset($wp_query->query_vars['post_type'])) {
+                    $uid = 'post-type-archive-' . $wp_query->query_vars['post_type'];
+                }
             } else {
                 $uid = 'archive-' . $wp_query->queried_object_id;
             }

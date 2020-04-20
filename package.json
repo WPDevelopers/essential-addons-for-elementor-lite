@@ -22,27 +22,18 @@
 		"@babel/core": "^7.8.6",
 		"@babel/plugin-proposal-class-properties": "^7.8.3",
 		"@babel/preset-env": "^7.8.6",
+		"autoprefixer": "^9.7.6",
 		"babel-loader": "^8.0.6",
-		"gulp": "^4.0.2",
-		"gulp-autoprefixer": "^6.1.0",
-		"gulp-clean-css": "^4.2.0",
-		"gulp-compass": "^2.1.0",
-		"gulp-concat": "^2.6.1",
-		"gulp-notify": "^3.2.0",
-		"gulp-rename": "^1.4.0",
-		"gulp-uglify": "^3.0.2",
-		"gulp-watch": "^5.0.1",
-		"webpack": "^4.41.4",
+		"css-loader": "^3.5.2",
+		"cssnano": "^4.1.10",
+		"glob": "^7.1.6",
+		"mini-css-extract-plugin": "^0.9.0",
+		"postcss-loader": "^3.0.0",
+		"postcss-import": "^12.0.1",
+		"webpack": "^4.42.1",
 		"webpack-cli": "^3.3.10"
 	},
 	"dependencies": {
-		"@wordpress/hooks": "^2.6.0",
-		"compass": "^0.1.1",
-		"graceful-fs": "^4.2.2",
-		"minimatch": "^3.0.4",
-		"natives": "^1.1.6",
-		"ruby": "^0.6.1",
-		"run-sequence": "^2.2.1",
-		"tinymce": "^5.2.1"
+		"@wordpress/hooks": "^2.6.0"
 	}
 }
