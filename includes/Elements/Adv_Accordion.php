@@ -372,8 +372,8 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-right: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img'   => 'margin-right: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img'   => 'margin-left: {{SIZE}}{{UNIT}};'
                 ],
                 'condition' => [
                     'eael_adv_accordion_toggle_icon_postion' => 'right'

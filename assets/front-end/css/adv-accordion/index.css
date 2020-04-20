@@ -19,6 +19,12 @@
   align-items: center;
   cursor: pointer;
 }
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header > span {
+  flex-grow: 1;
+}
+.eael-adv-accordion .eael-accordion-list .eael-accordion-header > i {
+  margin-right: 10px;
+}
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle {
   transform: rotate(0deg);
@@ -26,7 +32,10 @@
   transition: all 0.3s ease-in-out;
 }
 
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
+.eael-adv-accordion
+.eael-accordion-list
+.eael-accordion-header.active
+.fa-toggle {
   transform: rotate(90deg);
   z-index: 10;
   transition: all 0.3s ease-in-out;
