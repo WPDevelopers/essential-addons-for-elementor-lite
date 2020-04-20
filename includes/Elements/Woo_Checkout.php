@@ -1658,7 +1658,8 @@ class Woo_Checkout extends Widget_Base {
 		$settings = $this->get_settings();
 
 		$this->add_render_attribute( 'container', 'class', [
-			'ea-woo-checkout'
+			'ea-woo-checkout',
+			'layout-'. $settings['ea_woo_checkout_layout']
 		] );
 
 		global $wp;
