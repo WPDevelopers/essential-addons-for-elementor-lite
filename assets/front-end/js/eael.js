@@ -17673,58 +17673,6 @@ var trim = String.prototype.trim ?
 }));
 
 
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		if($num > 100) {
-			$num = 100;
-		}
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -19586,6 +19534,58 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		if($num > 100) {
+			$num = 100;
+		}
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -40906,16 +40906,6 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var ProgressBar = function($scope, $) {
-    $(".eael-progressbar", $scope).eaelProgressBar();
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-progress-bar.default",
-        ProgressBar
-    );
-});
-
 var PostGrid = function($scope, $) {
     var $gallery = $(".eael-post-appender", $scope),
         $layout_mode = $gallery.data('layout-mode');
@@ -40985,6 +40975,16 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-pricing-table.default",
         PricingTooltip
+    );
+});
+
+var ProgressBar = function($scope, $) {
+    $(".eael-progressbar", $scope).eaelProgressBar();
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-progress-bar.default",
+        ProgressBar
     );
 });
 
@@ -41253,37 +41253,6 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
-});
-
 ;(function ($) {
     jQuery(document).ready(function () {
         /**
@@ -41737,3 +41706,34 @@ jQuery(window).on("elementor/frontend/init", function() {
         }
     })
 })(jQuery)
+
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
+    );
+});
