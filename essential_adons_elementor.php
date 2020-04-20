@@ -21,7 +21,6 @@ if (!defined('ABSPATH')) {
  *
  * @since 3.0.0
  */
-error_log(print_r('LITE', 1));
 define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));

@@ -8,8 +8,6 @@ module.exports = (ctx) => {
 		],
 	};
 
-	console.log();
-
 	if (ctx.webpack.mode === "production") {
 		config.plugins.push(
 			require("cssnano")({
