@@ -1051,8 +1051,7 @@ class Cta_Box extends Widget_Base
         // Button
         $target_primary     = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
         $nofollow_primary   = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
-        $target_secondary   = $settings['eael_cta_secondary_btn_link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow_secondary = $settings['eael_cta_secondary_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+        
 
         if ('cta-bg-color' == $settings['eael_cta_color_type']) {
             $cta_class = 'bg-lite';
@@ -1102,6 +1101,8 @@ class Cta_Box extends Widget_Base
         $buttonMarkup = '';
         $buttonMarkup .='<a href="'.esc_url($settings['eael_cta_btn_link']['url']).'" '.$target_primary.' '.$nofollow_primary.' class="cta-button '.esc_attr($cta_btn_effect).'">'.esc_html($settings['eael_cta_btn_text']).'</a>';
         if($settings['eael_cta_secondary_btn_is_show'] === 'yes'){
+            $target_secondary   = $settings['eael_cta_secondary_btn_link']['is_external'] ? 'target="_blank"' : '';
+            $nofollow_secondary = $settings['eael_cta_secondary_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
             $buttonMarkup .='<a href="'.esc_url($settings['eael_cta_secondary_btn_link']['url']).'" '.$target_secondary.' '.$nofollow_secondary.' class="cta-button cta-secondary-button '.esc_attr($cta_secondary_btn_effect).'">'.esc_html($settings['eael_cta_secondary_btn_text']).'</a>';
         }
     ?>
