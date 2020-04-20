@@ -292,6 +292,13 @@
   font-weight: inherit;
   line-height: inherit;
 }
+.ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .woocommerce-remove-coupon {
+  font-family: inherit;
+  font-size: 0.7em;
+  font-weight: inherit;
+  line-height: inherit;
+  transition: all .2s;
+}
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .shipping-area, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .order-total, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-subtotal, .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .cart-discount {
   display: flex;
   justify-content: space-between;
@@ -455,7 +462,7 @@
   margin: 0;
   border: 0;
 }
-.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods li {
+.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods li:not(.woocommerce-notice) {
   background-color: transparent;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method {
@@ -543,22 +550,22 @@
   text-transform: capitalize;
   letter-spacing: unset;
 }
-.eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 {
+.eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 {
   width: 100% !important;
   float: none !important;
 }
 @media (min-width: 1024px) {
-  .eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 .woocommerce-billing-fields {
+  .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-billing-fields {
     float: left !important;
     width: 48% !important;
     padding-right: 2%;
   }
-  .eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 .woocommerce-shipping-fields, .eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-1 .woocommerce-additional-fields {
+  .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-shipping-fields, .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-additional-fields {
     float: left !important;
     width: 48% !important;
     padding-left: 2%;
   }
 }
-.eael-woo-checkout.theme-astra .woocommerce #customer_details.col2-set .col-2 {
+.eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-2 {
   clear: both;
 }
