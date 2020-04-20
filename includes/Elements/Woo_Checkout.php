@@ -469,6 +469,13 @@ class Woo_Checkout extends Widget_Base {
 				'separator' => 'before',
 			]
 		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_order_review_footer_typography',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
+			]
+		);
 		$this->add_control(
 			'ea_woo_checkout_order_review_footer_bg_color',
 			[
@@ -491,13 +498,42 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->start_controls_tabs( 'ea_woo_checkout_order_review_footer_link_color_tabs');
+
+		$this->start_controls_tab( 'ea_woo_checkout_order_review_footer_link_color_tab_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'ea_woo_checkout_order_review_footer_link_color',
 			[
-				'name' => 'ea_woo_checkout_order_review_footer_typography',
-				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
+				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#443e6d',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content a' => 'color: {{VALUE}};',
+				],
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab( 'ea_woo_checkout_order_review_footer_link_color_tab_hover', [ 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'ea_woo_checkout_order_review_footer_link_color_hover',
+			[
+				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
 		$this->add_control(
 			'ea_woo_checkout_order_review_footer_border_color',
 			[
@@ -945,6 +981,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout .woocommerce-error, {{WRAPPER}} .woo-checkout-coupon .woocommerce-error, {{WRAPPER}} .woo-checkout-login .woocommerce-error' => 'border-color: {{VALUE}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_notices_border_border!' => '',
+				],
 			]
 		);
 
@@ -985,6 +1024,9 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#155724',
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout .woocommerce-message, {{WRAPPER}} .woo-checkout-coupon .woocommerce-message, {{WRAPPER}} .woo-checkout-login .woocommerce-message' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_notices_border_border!' => '',
 				],
 			]
 		);
