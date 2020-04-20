@@ -140,12 +140,12 @@ class Woo_Checkout extends Widget_Base {
 		$this->end_controls_section();
 
 		/**
-		 * Order Review Settings
+		 * Order Details Settings
 		 */
 		$this->start_controls_section(
 			'ea_section_woo_checkout_order_review_settings',
 			[
-				'label' => esc_html__( 'Order Review', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Order Details', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -319,13 +319,13 @@ class Woo_Checkout extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
-		 * Tab Style Order Review Style
+		 * Tab Style Order Details Style
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
 			'ea_section_woo_checkout_order_review_style',
 			[
-				'label' => esc_html__( 'Order Review', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Order Details', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
