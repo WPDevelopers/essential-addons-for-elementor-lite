@@ -28,8 +28,10 @@
 		"cssnano": "^4.1.10",
 		"glob": "^7.1.6",
 		"mini-css-extract-plugin": "^0.9.0",
-		"postcss-loader": "^3.0.0",
 		"postcss-import": "^12.0.1",
+		"postcss-loader": "^3.0.0",
+		"sass": "^1.26.3",
+		"sass-loader": "^8.0.2",
 		"webpack": "^4.42.1",
 		"webpack-cli": "^3.3.10"
 	},

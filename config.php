@@ -178,13 +178,13 @@ $config = [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/load-more.min.css',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filter-gallery.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filterable-gallery.min.css',
                 ],
                 'js' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/imagesloaded.pkgd.min.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/isotope.pkgd.min.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/jquery.magnific-popup.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/filter-gallery.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/filterable-gallery.min.js',
                 ],
             ],
         ],
@@ -223,10 +223,10 @@ $config = [
             'class' => '\Essential_Addons_Elementor\Elements\Adv_Accordion',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-accordion.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/advanced-accordion.min.css',
                 ],
                 'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-accordion.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/advanced-accordion.min.js',
                 ],
             ],
         ],
@@ -234,10 +234,10 @@ $config = [
             'class' => '\Essential_Addons_Elementor\Elements\Adv_Tabs',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-tabs.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/advanced-tabs.min.css',
                 ],
                 'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-tabs.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/advanced-tabs.min.js',
                 ],
             ],
         ],
