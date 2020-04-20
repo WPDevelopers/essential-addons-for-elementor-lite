@@ -153,7 +153,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_table_header_text',
 			[
-				'label' => esc_html__( 'Change Header Text', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Change Labels', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default' => 'yes',
@@ -162,7 +162,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_table_product_text',
 			[
-				'label' => __( 'Product Column', 'essential-addons-for-elementor-lite' ),
+				'label' => __( 'Product Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Product', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
@@ -173,7 +173,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_table_quantity_text',
 			[
-				'label' => __( 'Quantity Column', 'essential-addons-for-elementor-lite' ),
+				'label' => __( 'Quantity Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
@@ -184,7 +184,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_table_price_text',
 			[
-				'label' => __( 'Price Column', 'essential-addons-for-elementor-lite' ),
+				'label' => __( 'Price Text', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Price', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
