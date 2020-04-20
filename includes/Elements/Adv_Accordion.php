@@ -1035,9 +1035,9 @@ class Adv_Accordion extends Widget_Base
                             echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
                         }
                     }
-                    echo '<span>';
+                    // tab title
                     if($settings['eael_adv_accordion_toggle_icon_postion'] === ''){
-                        echo $tab['eael_adv_accordion_tab_title'];
+                        echo '<span>' . $tab['eael_adv_accordion_tab_title'] . '</span>';
                     }
                     // tab icon
                     if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
@@ -1051,10 +1051,10 @@ class Adv_Accordion extends Widget_Base
                             echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
                         }
                     }
+                    // tab title
                     if($settings['eael_adv_accordion_toggle_icon_postion'] === 'right' || $settings['eael_adv_accordion_toggle_icon_postion'] === null){
-                        echo $tab['eael_adv_accordion_tab_title'];
+                        echo '<span>' . $tab['eael_adv_accordion_tab_title'] . '</span>';
                     }
-                    echo '</span>';
                     // toggle icon
                     if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === 'right') {
                         if ($accordion_icon_is_new || $accordion_icon_migrated) {
