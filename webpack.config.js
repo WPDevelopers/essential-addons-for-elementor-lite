@@ -39,7 +39,6 @@ const removeEntry = () => {
 
 module.exports = (env, argv) => {
 	return {
-		watch: argv.mode === "development" ? true : false,
 		entry: outputEntry(),
 		output: {
 			path: path.resolve(__dirname, "assets/front-end"),

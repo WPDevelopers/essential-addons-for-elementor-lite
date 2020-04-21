@@ -37,7 +37,8 @@ $config = [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fancy-text.min.css',
                 ],
                 'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/fancy-text.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/morphext.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/typed.min.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/fancy-text.min.js',
                 ],
             ],
@@ -364,19 +365,19 @@ $config = [
             'class' => '\Essential_Addons_Elementor\Elements\Event_Calendar',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/calendar-main.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/daygrid.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/timegrid.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/listgrid.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/calendar-main.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/daygrid.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/timegrid.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/listgrid.min.css',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/event-calendar.min.css',
                 ],
                 'js' => [
-                    ///add moment.js code in calendar-main.js
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/locales-all.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/calendar-main.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/daygrid.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/timegrid.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/listgrid.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/moment.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/calendar-main.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/daygrid.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/timegrid.min.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/listgrid.min.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/event-calendar.min.js',
                 ],
             ],
