@@ -306,6 +306,9 @@ $config = [
                  ],
              ],
         ],
+        'type-form' => [
+            'class' => '\Essential_Addons_Elementor\Elements\TypeForm',
+        ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
             'dependency' => [
