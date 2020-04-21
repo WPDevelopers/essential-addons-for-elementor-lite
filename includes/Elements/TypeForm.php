@@ -18,7 +18,7 @@ use \Elementor\Scheme_Color;
 
 class TypeForm extends Widget_Base {
 
-    use \Essential_Addons_Elementor\Traits\Helper;
+    private $form_list = [];
 
     public function __construct ($data = [], $args = null) {
         parent::__construct($data, $args);
@@ -74,7 +74,37 @@ class TypeForm extends Widget_Base {
         return get_option('eael_save_typeform_personal_token');
     }
 
-    private function no_token_set(){
+    public function get_form_list () {
+
+        $token = $this->get_personal_token();
+        $key = 'eael_type_form_data';
+        $form_arr = get_transient($key);
+        if(empty($form_arr)){
+            $response = wp_remote_get(
+                'https://api.typeform.com/forms',
+                [
+                    'headers' => [
+                        'Authorization' => "Bearer $token",
+                    ]
+                ]
+            );
+
+            if (isset($response['response']['code']) && $response['response']['code'] == 200) {
+                $data = json_decode(wp_remote_retrieve_body($response));
+                if(isset($data->items)){
+                    $form_arr = $data->items;
+                    set_transient($key, $form_arr, 1 * HOUR_IN_SECONDS);
+                }
+            }
+        }
+
+        foreach ($form_arr as $item){
+            $this->form_list[$item->_links->display] = $item->title;
+        }
+        return $this->form_list;
+    }
+
+    private function no_token_set () {
         $this->start_controls_section(
             'eael_global_warning',
             [
@@ -88,7 +118,7 @@ class TypeForm extends Widget_Base {
                 'type'            => Controls_Manager::RAW_HTML,
                 'raw'             => __('Whoops! It\' seems like you didn\'t set TypeForm personal token. You can set from 
                                     Essential Addons &gt; Elements &gt; TypeForm (Settings)',
-                                    'essential-addons-for-elementor-lite'),
+                    'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
             ]
         );
@@ -100,7 +130,7 @@ class TypeForm extends Widget_Base {
 
         if ($this->get_personal_token() == '') {
             $this->no_token_set();
-            return ;
+            return;
         }
 
         $this->start_controls_section(
@@ -112,11 +142,10 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'type_form_color',
             [
-                'label'        => __('Custom Title & Description', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
+                'label'   => __('Error Messages', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'show',
+                'options' => $this->get_form_list()
             ]
         );
         $this->end_controls_section();
@@ -125,6 +154,7 @@ class TypeForm extends Widget_Base {
     protected function render () {
 
         $settings = $this->get_settings_for_display();
+        return ;
         ?>
         <div id="my-embedded-typeform"
              style="width: 100%; height: 300px;"></div>
