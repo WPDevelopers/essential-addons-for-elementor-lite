@@ -405,6 +405,12 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/formstack/',
             ],
             [
+                'key'   => 'type-form',
+                'title' => __( 'TypeForm', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/type-form/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/type-form/',
+            ],
+            [
                 'key'    => 'mailchimp',
                 'title'  => __( 'Mailchimp', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/mailchimp/',
@@ -518,7 +524,11 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
                                         } elseif($item['key'] === 'adv-google-map' && $this->pro_enabled) {
                                             echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="Google Map API Key" data-placeholder="Set API Key" data-target="#google-map-api">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
                                             <input type="hidden" name="google-map-api" id="google-map-api" class="google-map-api" value="' . get_option('eael_save_google_map_api') . '">';
+                                        } elseif($item['key'] === 'type-form') {
+                                            echo '<span style="font-size: 12px; font-style:italic;"><a href="#" class="eael-admin-settings-popup" data-title="TypeForm Personal Token" data-placeholder="Set Personal Token" data-target="#typeform-personal-token">'.__('Settings', 'essential-addons-for-elementor-lite').'</a></span>
+                                            <input type="hidden" name="typeform-personal-token" id="typeform-personal-token" class="typeform-personal-token" value="' . get_option('eael_save_typeform_personal_token') . '">';
                                         }
+
                                     ?>
                                 </p>
                                 <a  class="eael-element-info-link" href="<?php echo ($item['demo_link']);?>" target="_blank">
