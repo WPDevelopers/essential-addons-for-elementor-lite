@@ -45,6 +45,8 @@ trait Woo_Checkout_Helper {
 
 			if($settings['ea_woo_checkout_layout'] == 'default'){
 				echo self::render_default_template_($checkout, $settings);
+			}else {
+				do_action('eael_add_woo_checkout_pro_layout', $checkout, $settings);
 			}
 
 		}
