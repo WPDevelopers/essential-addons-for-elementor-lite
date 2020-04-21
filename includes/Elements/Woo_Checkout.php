@@ -53,7 +53,7 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-cart-medium';
+		return 'eaicon-woo-checkout';
 	}
 
 	public function get_categories() {
