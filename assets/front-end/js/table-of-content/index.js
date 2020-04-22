@@ -205,8 +205,7 @@
 		 */
 		function eael_toc_check_content() {
 			var eaelToc = document.getElementById("eael-toc");
-
-			if(eaelToc.dataset.contentselector){
+			if(eaelToc && eaelToc.dataset.contentselector){
 				return eaelToc.dataset.contentselector;
 			}
 
