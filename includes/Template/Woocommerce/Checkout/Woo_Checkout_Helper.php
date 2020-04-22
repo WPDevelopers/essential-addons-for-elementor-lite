@@ -484,6 +484,8 @@ trait Woo_Checkout_Helper {
 		$class = '';
 		if(\Elementor\Plugin::$instance->editor->is_edit_mode() || is_user_logged_in()){
 		    $class = 'woo-checkout-login-editor';
+        }elseif ('no' === get_option( 'woocommerce_enable_checkout_login_reminder')){
+		    return;
         }
 		?>
         <div class="woo-checkout-login <?php echo $class; ?>">
