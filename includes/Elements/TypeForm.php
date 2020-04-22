@@ -22,16 +22,6 @@ class TypeForm extends Widget_Base {
 
     public function __construct ($data = [], $args = null) {
         parent::__construct($data, $args);
-        $is_type_instance = $this->is_type_instance();
-
-        if (!$is_type_instance && null === $args) {
-            throw new \Exception('`$args` argument is required when initializing a full widget instance.');
-        }
-
-        if ($is_type_instance) {
-            echo '<script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>';
-        }
-
     }
 
     public function get_name () {
@@ -79,7 +69,7 @@ class TypeForm extends Widget_Base {
         $token = $this->get_personal_token();
         $key = 'eael_type_form_data';
         $form_arr = get_transient($key);
-        if(empty($form_arr)){
+        if (empty($form_arr)) {
             $response = wp_remote_get(
                 'https://api.typeform.com/forms',
                 [
@@ -91,14 +81,14 @@ class TypeForm extends Widget_Base {
 
             if (isset($response['response']['code']) && $response['response']['code'] == 200) {
                 $data = json_decode(wp_remote_retrieve_body($response));
-                if(isset($data->items)){
+                if (isset($data->items)) {
                     $form_arr = $data->items;
                     set_transient($key, $form_arr, 1 * HOUR_IN_SECONDS);
                 }
             }
         }
-        $this->form_list[''] = __('Select Form','essential-addons-for-elementor-lite');
-        foreach ($form_arr as $item){
+        $this->form_list[''] = __('Select Form', 'essential-addons-for-elementor-lite');
+        foreach ($form_arr as $item) {
             $this->form_list[$item->_links->display] = $item->title;
         }
         return $this->form_list;
@@ -140,11 +130,11 @@ class TypeForm extends Widget_Base {
             ]
         );
         $this->add_control(
-            'type_form_color',
+            'eael_typeform_list',
             [
-                'label'   => __('Error Messages', 'essential-addons-for-elementor-lite'),
+                'label'   => __('Form', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
-                'default' => 'show',
+                'default' => '',
                 'options' => $this->get_form_list()
             ]
         );
@@ -154,22 +144,27 @@ class TypeForm extends Widget_Base {
     protected function render () {
 
         $settings = $this->get_settings_for_display();
-        return ;
-        ?>
-        <div id="my-embedded-typeform"
-             style="width: 100%; height: 300px;"></div>
-
-        <script type="text/javascript">
-			jQuery(document).ready(function () {
-				var el = document.getElementById("my-embedded-typeform");
-				typeformEmbed.makeWidget(el, "https://admin.typeform.com/to/cVa5IG", {
-					hideFooter: true,
-					hideHeaders: true,
-					opacity: 0
-				});
-			});
-        </script>
-        <?php
+        if ($settings['eael_typeform_list'] == '') {
+            return;
+        }
+        $id = 'eael-type-form-'.$this->get_id();
+        $this->add_render_attribute(
+            'eael_typeform_wrapper',
+            [
+                'id'    => $id,
+                'class' => [
+                    'eael-typeform',
+                    'clearfix',
+                    'fs_wp_sidebar',
+                    'fsBody',
+                    'eael-contact-form'
+                ]
+            ]
+        );
+        $data = [
+                'url' => esc_url($settings['eael_typeform_list'])
+        ];
+        echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
     }
 
 }
