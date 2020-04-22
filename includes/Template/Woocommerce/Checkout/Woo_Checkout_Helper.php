@@ -421,6 +421,11 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function render_default_template_($checkout, $settings) {
 		?>
+
+		<?php if( 'yes' == $settings['ea_section_woo_login_show']) : ?>
+			<?php self::ea_render_login($settings); ?>
+		<?php endif; ?>
+
 		<?php
 		// If checkout registration is disabled and not logged in, the user cannot checkout.
 		if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
@@ -471,6 +476,27 @@ trait Woo_Checkout_Helper {
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_coupon_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
     }
+	public static function ea_render_login($settings){
+		ob_start();?>
+        <div class="woo-checkout-login">
+            <div class="ea-login-icon">
+				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+            </div>
+			<div class="woocommerce-form-login-toggle">
+            <?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'woocommerce' ) ) . ' <a href="#" class="showlogin">' . esc_html__( 'Click here to login', 'woocommerce' ) . '</a>', 'notice' ); ?>
+        </div>
+        <?php
+
+        woocommerce_login_form(
+            array(
+                'message'  => esc_html__( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'woocommerce' ),
+                'redirect' => wc_get_checkout_url(),
+                'hidden'   => true,
+            )
+        );?>
+        </div>
+		<?php echo ob_get_clean();
+	}
 
 }
 

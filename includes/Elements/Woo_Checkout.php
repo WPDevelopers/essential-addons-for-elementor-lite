@@ -253,6 +253,18 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_control(
+			'ea_section_woo_login_show',
+			[
+				'label' => __( 'Show Preview of Login', 'essential-addons-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'no',
+				'label_on' => __( 'Show', 'essential-addons-elementor' ),
+				'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+				'return_value' => 'yes',
+				'description' => 'You can force show login in order to style them properly.',
+			]
+		);
+		$this->add_control(
 			'ea_woo_checkout_login_icon',
 			[
 				'label' => __( 'Icon', 'elementor' ),
