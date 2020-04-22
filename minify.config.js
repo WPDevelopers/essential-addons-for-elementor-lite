@@ -1,3 +1,4 @@
+const args = process.argv.slice(2);
 const concat = require("concat-files");
 const cssEntry = (min = true) => {
 	let paths = [];
@@ -113,34 +114,36 @@ const jsEntry = (min = true) => {
 	return paths;
 };
 
-concat(cssEntry(), "./assets/front-end/css/eael.min.css", function (err) {
-	if (err) {
-		throw err;
-	}
+if (args[0] == "development") {
+	concat(cssEntry(false), "./assets/front-end/css/eael.css", function (err) {
+		if (err) {
+			throw err;
+		}
 
-	console.log("eael.min.css generated");
-});
+		console.log("eael.css generated");
+	});
 
-concat(cssEntry(false), "./assets/front-end/css/eael.css", function (err) {
-	if (err) {
-		throw err;
-	}
+	concat(jsEntry(false), "./assets/front-end/js/eael.js", function (err) {
+		if (err) {
+			throw err;
+		}
 
-	console.log("eael.css generated");
-});
+		console.log("eael.js generated");
+	});
+} else {
+	concat(cssEntry(), "./assets/front-end/css/eael.min.css", function (err) {
+		if (err) {
+			throw err;
+		}
 
-concat(jsEntry(), "./assets/front-end/js/eael.min.js", function (err) {
-	if (err) {
-		throw err;
-	}
+		console.log("eael.min.css generated");
+	});
 
-	console.log("eael.min.js generated");
-});
+	concat(jsEntry(), "./assets/front-end/js/eael.min.js", function (err) {
+		if (err) {
+			throw err;
+		}
 
-concat(jsEntry(false), "./assets/front-end/js/eael.js", function (err) {
-	if (err) {
-		throw err;
-	}
-
-	console.log("eael.js generated");
-});
+		console.log("eael.min.js generated");
+	});
+}

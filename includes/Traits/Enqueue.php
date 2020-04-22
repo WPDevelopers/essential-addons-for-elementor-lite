@@ -99,8 +99,6 @@ trait Enqueue
             );
         }
 
-        // wp_enqueue_script('eael', EAEL_PLUGIN_URL . 'assets/front-end/js/eael/index.min.js', ['jquery'], false, true);
-
         // My Assets
         if ($this->is_preview_mode()) {
             // generate fallback scripts
@@ -109,12 +107,12 @@ trait Enqueue
             }
 
             // enqueue scripts
-            if ($this->has_cache_files()) {
+            if (EAEL_DEV_MODE || !$this->has_cache_files()) {
+                $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
+                $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
+            } else {
                 $css_file = EAEL_ASSET_URL . '/eael.min.css';
                 $js_file  = EAEL_ASSET_URL . '/eael.min.js';
-            } else {
-                $css_file = EAEL_PLUGIN_URL . '/assets/front-end/css/eael.min.css';
-                $js_file  = EAEL_PLUGIN_URL . '/assets/front-end/js/eael.min.js';
             }
 
             wp_enqueue_style(
@@ -182,12 +180,12 @@ trait Enqueue
     // rules how css will be enqueued on front-end
     protected function enqueue_protocols()
     {
-        if ($this->has_cache_files($this->request_uid)) {
-            $css_file = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.css';
-            $js_file  = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.js';
-        } else {
+        if (EAEL_DEV_MODE || !$this->has_cache_files($this->request_uid)) {
             $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
             $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
+        } else {
+            $css_file = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.css';
+            $js_file  = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.js';
         }
 
         wp_enqueue_style(
