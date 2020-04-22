@@ -633,11 +633,18 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_login_typo',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-checkout-login',
+			]
+		);
+		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ea_woo_checkout_login_bg_color',
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-login-coupon',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-checkout-login',
 			]
 		);
 		$this->add_control(
@@ -721,6 +728,32 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .woo-checkout-login' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_login_form_label',
+			[
+				'label' => __( 'Form Label', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_login_form_label_typo',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-checkout-login label',
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_login_form_label_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#404040',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout .woo-checkout-login label' => 'color: {{VALUE}};',
 				],
 			]
 		);
