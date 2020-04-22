@@ -138,6 +138,42 @@ class TypeForm extends Widget_Base {
                 'options' => $this->get_form_list()
             ]
         );
+        $this->add_control(
+            'eael_typeform_hideheaders',
+            [
+                'label'        => __('Hide Headers', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'no',
+                'return_value' => 'yes',
+            ]
+        );
+        $this->add_control(
+            'eael_typeform_hidefooter',
+            [
+                'label'   => __('Hide Footer', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'no',
+                'return_value' => 'yes',
+            ]
+        );
+        $this->add_control(
+            'eael_typeform_opacity',
+            [
+                'label'   => __('Opacity', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SLIDER,
+                'size_units' => [ 'px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0,
+                ],
+            ]
+        );
         $this->end_controls_section();
     }
 
@@ -162,9 +198,13 @@ class TypeForm extends Widget_Base {
             ]
         );
         $data = [
-                'url' => esc_url($settings['eael_typeform_list'])
+            'url'         => esc_url($settings['eael_typeform_list']),
+            'hideFooter'  => esc_url($settings['eael_typeform_hidefooter']),
+            'hideHeaders' => esc_url($settings['eael_typeform_list_hideheaders']),
+            'opacity'     => esc_url($settings['eael_typeform_list_opacity'])
         ];
-        echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
+        echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
+                'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
     }
 
 }
