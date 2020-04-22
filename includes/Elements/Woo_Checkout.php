@@ -1143,6 +1143,26 @@ class Woo_Checkout extends Widget_Base {
 		);
 
 		$this->add_control(
+			'ea_woo_checkout_customer_details_field_required',
+			[
+				'label' => __( 'Required (*)', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_customer_details_required_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ff0000',
+				'selectors' => [
+					'{{WRAPPER}} #customer_details label .required' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'ea_woo_checkout_customer_details_fields',
 			[
 				'label' => __( 'Fields', 'essential-addons-for-elementor-lite' ),
