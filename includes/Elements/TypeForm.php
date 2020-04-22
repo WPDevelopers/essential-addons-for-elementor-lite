@@ -97,7 +97,7 @@ class TypeForm extends Widget_Base {
                 }
             }
         }
-
+        $this->form_list[''] = __('Select Form','essential-addons-for-elementor-lite');
         foreach ($form_arr as $item){
             $this->form_list[$item->_links->display] = $item->title;
         }
