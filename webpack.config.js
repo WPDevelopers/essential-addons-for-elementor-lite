@@ -1,6 +1,7 @@
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { exec } = require("child_process");
 const outputEntry = () => {
 	paths = {};
 
@@ -39,22 +40,30 @@ const removeEntry = () => {
 
 module.exports = (env, argv) => {
 	return {
+		stats: "minimal",
 		entry: outputEntry(),
 		output: {
 			path: path.resolve(__dirname, "assets/front-end"),
-			filename: argv.mode === "development" ? "[name].js" : "[name].min.js",
+			filename: argv.mode === "production" ? "[name].min.js" : "[name].js",
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
-				filename: argv.mode === "development" ? "[name].css" : "[name].min.css",
+				filename: argv.mode === "production" ? "[name].min.css" : "[name].css",
 			}),
 			{
 				apply(compiler) {
-					compiler.hooks.shouldEmit.tap("Remove styles from output", (compilation) => {
+					compiler.hooks.shouldEmit.tap("removeStylesFromOutput", (compilation) => {
 						removeEntry().forEach((entry) => {
 							delete compilation.assets[entry];
 						});
 						return true;
+					});
+				},
+			},
+			{
+				apply: (compiler) => {
+					compiler.hooks.afterEmit.tap("postBuild", (compilation) => {
+						exec(`node minify.config.js ${argv.mode}`);
 					});
 				},
 			},
