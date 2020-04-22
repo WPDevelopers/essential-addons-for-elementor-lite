@@ -7,9 +7,9 @@ var TypeFormHandler = function ($scope, $) {
 			var el = document.getElementById(id);
 			if(data.url){
 				typeformEmbed.makeWidget(el, data.url, {
-					hideFooter: true,
-					hideHeaders: true,
-					opacity: 0
+					hideFooter: data.hideHeaders,
+					hideHeaders: data.hideFooter,
+					opacity: data.opacity
 				});
 			}
 		}
