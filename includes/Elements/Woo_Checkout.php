@@ -772,6 +772,13 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_coupon_typo',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon',
+			]
+		);
+		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ea_woo_checkout_coupon_bg_color',
