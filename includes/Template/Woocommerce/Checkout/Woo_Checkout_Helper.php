@@ -472,7 +472,7 @@ trait Woo_Checkout_Helper {
 			add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_render_login' ], 10 );
 		endif;
 
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_login_template' ], 10 );
+		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_render_login' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_coupon_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
 	}
@@ -481,8 +481,12 @@ trait Woo_Checkout_Helper {
 	public static function ea_render_login(){
 		ob_start();
 		$settings = self::get_settings();
+		$class = '';
+		if(\Elementor\Plugin::$instance->editor->is_edit_mode() || is_user_logged_in()){
+		    $class = 'woo-checkout-login-editor';
+        }
 		?>
-        <div class="woo-checkout-login woo-checkout-login-editor">
+        <div class="woo-checkout-login <?php echo $class; ?>">
             <div class="ea-login-icon">
 				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
             </div>
