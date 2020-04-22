@@ -1,5 +1,5 @@
 var WooCheckout = function($scope, $) {
-    // console.log('working');
+
     $.blockUI.defaults.overlayCSS.cursor = 'default';
     function render_order_review_template(){
         var wooCheckout = $('.ea-woo-checkout');

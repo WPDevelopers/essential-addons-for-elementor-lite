@@ -402,6 +402,7 @@ $base-font-size: 14px;
 
 
 	}
+
 }
 
 .eael-woo-checkout {
@@ -453,6 +454,9 @@ $base-font-size: 14px;
 
 		// Login
 		.woo-checkout-login {
+			&.woo-checkout-login-editor {
+				display: none!important;
+			}
 			.woocommerce-form-login-toggle {
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
 					background-color: transparent!important;
@@ -704,5 +708,15 @@ $base-font-size: 14px;
 
         }
     }
+
+	&.elementor-editor-active {
+		.woocommerce {
+			.woo-checkout-login {
+				&.woo-checkout-login-editor {
+					display: block !important;
+				}
+			}
+		}
+	}
 }
 

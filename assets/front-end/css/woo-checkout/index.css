@@ -366,6 +366,9 @@
 .eael-woo-checkout .woocommerce form.checkout_coupon {
   border: 1px solid #404040;
 }
+.eael-woo-checkout .woocommerce .woo-checkout-login.woo-checkout-login-editor {
+  display: none !important;
+}
 .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
   background-color: transparent !important;
   padding: 0 0 0 40px !important;
@@ -568,4 +571,7 @@
 }
 .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-2 {
   clear: both;
+}
+.eael-woo-checkout.elementor-editor-active .woocommerce .woo-checkout-login.woo-checkout-login-editor {
+  display: block !important;
 }
