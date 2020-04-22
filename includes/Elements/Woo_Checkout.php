@@ -1784,7 +1784,7 @@ class Woo_Checkout extends Widget_Base {
             'ea_woo_checkout_shop_link' => $settings['ea_woo_checkout_shop_link'],
             'ea_woo_checkout_shop_link_text' => $settings['ea_woo_checkout_shop_link_text'],
         ];
-        $this->ea_woo_checkout_add_actions();
+        $this->ea_woo_checkout_add_actions($settings);
 
 		?>
         <div data-checkout="<?php echo htmlspecialchars(json_encode($order_review_change_data), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $this->get_render_attribute_string( 'container' ); ?>>
