@@ -385,8 +385,10 @@ class Feature_List extends Widget_Base
 					'connector-type-modern'  => esc_html__( 'Modern', 'essential-addons-for-elementor-lite'),
 				],
 				'condition'   => [
-					'eael_feature_list_connector'      => 'yes',
-					'eael_feature_list_icon_position!' => 'top',
+					'eael_feature_list_connector'     	      => 'yes',
+					'eael_feature_list_icon_position!' 		  => 'top',
+					// 'eael_feature_list_icon_position_tablet!' => 'top',
+					// 'eael_feature_list_icon_position_mobile!' => 'top',
 				],
 				'separator'   => 'before',
 			]
@@ -801,12 +803,16 @@ class Feature_List extends Widget_Base
 				'eael-feature-list-items',
 				$settings['eael_feature_list_icon_shape'],
 				$settings['eael_feature_list_icon_shape_view'],
-				$settings['eael_feature_list_connector_type'],
 			]
 		] );
-
-		if ( ( $settings['eael_feature_list_icon_position'] == 'top' ) && ( $settings['eael_feature_list_connector'] == 'yes' ) ) {
+		// connector class change by connector type
+		if ( 
+			( $settings['eael_feature_list_icon_position'] == 'top' || $settings['eael_feature_list_icon_position_tablet'] == 'top' || $settings['eael_feature_list_icon_position_mobile'] == 'top' ) && 
+			( $settings['eael_feature_list_connector'] == 'yes' ) 
+		) {
 			$this->add_render_attribute( 'eael_feature_list', 'class', 'connector-type-modern' );
+		} else {
+			$this->add_render_attribute( 'eael_feature_list', 'class', 'connector-type-classic' );
 		}
 
 		$this->add_render_attribute( 'eael_feature_list_item', 'class', 'eael-feature-list-item' );
@@ -823,9 +829,9 @@ class Feature_List extends Widget_Base
 
 		if ( $settings['eael_feature_list_icon_shape'] == 'rhombus' ) {
 		    $margin = 30;
-			$connector_width = $circle_size + $margin + $settings['eael_feature_list_connector_width']['size'];
+			$connector_width = $circle_size + $margin + (!empty($settings['eael_feature_list_connector_width']['size']) ? $settings['eael_feature_list_connector_width']['size'] : 0);
 		} else {
-			$connector_width = $circle_size + $settings['eael_feature_list_connector_width']['size'];
+			$connector_width = $circle_size + (!empty($settings['eael_feature_list_connector_width']['size']) ? $settings['eael_feature_list_connector_width']['size'] : 0);
 		}
 
 		// connector
