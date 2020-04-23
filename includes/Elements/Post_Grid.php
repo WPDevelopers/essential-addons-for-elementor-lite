@@ -630,7 +630,8 @@ class Post_Grid extends Widget_Base
             'read_more_link_nofollow' => $settings['read_more_link_nofollow'],
             'read_more_link_target_blank' => $settings['read_more_link_target_blank'],
             'image_link_nofollow'   => $settings['image_link_nofollow'],
-            'image_link_target_blank' => $settings['image_link_target_blank']
+            'image_link_target_blank' => $settings['image_link_target_blank'],
+            'eael_title_length' => $settings['eael_title_length']
         ];
 
         $this->add_render_attribute(

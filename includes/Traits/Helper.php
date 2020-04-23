@@ -532,6 +532,20 @@ trait Helper
             ]
         );
 
+        if ('eael-post-grid' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
+            $this->add_control(
+                'eael_title_length',
+                [
+                    'label' => __('Title Length', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::NUMBER,
+                    'default' => '10',
+                    'condition' => [
+                        'eael_show_title' => 'yes'
+                    ],
+                ]
+            );
+        }
+
         $this->add_control(
             'eael_show_excerpt',
             [
@@ -642,8 +656,8 @@ trait Helper
                     'return_value' => 'yes',
                     'default' => 'yes',
                     'condition' => [
-                        'post_type!'    => 'product'
-                    ]
+                        'post_type!' => 'product',
+                    ],
                 ]
             );
 
@@ -655,7 +669,7 @@ trait Helper
                     'default' => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!'    => 'product'
+                        'post_type!' => 'product',
                     ],
                 ]
             );
@@ -671,8 +685,8 @@ trait Helper
                     'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
                     'condition' => [
-                        'eael_show_image'   => 'yes'
-                    ]
+                        'eael_show_image' => 'yes',
+                    ],
                 ]
             );
 
@@ -687,8 +701,8 @@ trait Helper
                     ],
                     'default' => 'category',
                     'condition' => [
-                        'eael_show_post_terms' => 'yes'
-                    ]
+                        'eael_show_post_terms' => 'yes',
+                    ],
                 ]
             );
 
@@ -704,8 +718,8 @@ trait Helper
                     ],
                     'default' => 1,
                     'condition' => [
-                        'eael_show_post_terms' => 'yes'
-                    ]
+                        'eael_show_post_terms' => 'yes',
+                    ],
                 ]
             );
 
@@ -752,8 +766,8 @@ trait Helper
                     'default' => 'yes',
                     'condition' => [
                         'meta_position' => 'meta-entry-footer',
-                        'eael_show_meta' => 'yes'
-                    ]
+                        'eael_show_meta' => 'yes',
+                    ],
                 ]
             );
 
@@ -767,8 +781,8 @@ trait Helper
                     'return_value' => 'yes',
                     'default' => 'yes',
                     'condition' => [
-                        'eael_show_meta' => 'yes'
-                    ]
+                        'eael_show_meta' => 'yes',
+                    ],
                 ]
             );
 
@@ -782,8 +796,8 @@ trait Helper
                     'return_value' => 'yes',
                     'default' => 'yes',
                     'condition' => [
-                        'eael_show_meta' => 'yes'
-                    ]
+                        'eael_show_meta' => 'yes',
+                    ],
                 ]
             );
 
@@ -800,8 +814,8 @@ trait Helper
                 'label' => __('Terms', 'essential-addons-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'eael_show_post_terms'   => 'yes'
-                ]
+                    'eael_show_post_terms' => 'yes',
+                ],
             ]
         );
 
@@ -882,7 +896,7 @@ trait Helper
                     'tab' => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!'    => 'product'
+                        'post_type!' => 'product',
                     ],
                 ]
             );
@@ -1765,26 +1779,26 @@ trait Helper
     {
         global $wp_taxonomies;
 
-        $field = ( 'names' === $output ) ? 'name' : false;
+        $field = ('names' === $output) ? 'name' : false;
 
         // Handle 'object_type' separately.
-        if ( isset( $args['object_type'] ) ) {
+        if (isset($args['object_type'])) {
             $object_type = (array) $args['object_type'];
-            unset( $args['object_type'] );
+            unset($args['object_type']);
         }
 
-        $taxonomies = wp_filter_object_list( $wp_taxonomies, $args, $operator );
+        $taxonomies = wp_filter_object_list($wp_taxonomies, $args, $operator);
 
-        if ( isset( $object_type ) ) {
-            foreach ( $taxonomies as $tax => $tax_data ) {
-                if ( ! array_intersect( $object_type, $tax_data->object_type ) ) {
-                    unset( $taxonomies[ $tax ] );
+        if (isset($object_type)) {
+            foreach ($taxonomies as $tax => $tax_data) {
+                if (!array_intersect($object_type, $tax_data->object_type)) {
+                    unset($taxonomies[$tax]);
                 }
             }
         }
 
-        if ( $field ) {
-            $taxonomies = wp_list_pluck( $taxonomies, $field );
+        if ($field) {
+            $taxonomies = wp_list_pluck($taxonomies, $field);
         }
 
         return $taxonomies;
@@ -2162,7 +2176,7 @@ trait Helper
         if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
             return $page_settings_model->get_settings($key);
         } else if (isset($global_settings[$extension]['enabled'])) {
-            return isset($global_settings[$extension][$key])?$global_settings[$extension][$key]:'';
+            return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
         }
 
         return '';
@@ -2477,7 +2491,7 @@ trait Helper
     {
         if (apply_filters('eael/pro_enabled', false)) {
             $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
-        }else{
+        } else {
             $source['eventon'] = __('EventON (Pro) ', 'essential-addons-for-elementor-lite');
         }
 
@@ -2575,32 +2589,34 @@ trait Helper
         return $html;
     }
 
-    protected static function get_terms_as_list( $term_type = 'category', $length = 1)
+    protected static function get_terms_as_list($term_type = 'category', $length = 1)
     {
 
-        if($term_type === 'category' ) {
+        if ($term_type === 'category') {
             $terms = get_the_category();
         }
 
-        if($term_type === 'tags' ){
+        if ($term_type === 'tags') {
             $terms = get_the_tags();
         }
 
-        if( empty($terms) ) return;
+        if (empty($terms)) {
+            return;
+        }
 
-        $html = '<ul class="post-carousel-categories">'; $count = 0;
-            foreach( $terms as $term) {
-                if($count === $length) { break; }
-                $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
-                $html .= '<li>';
-                    $html .= '<a href="'.esc_url($link).'">';
-                        $html .= $term->name;
-                    $html .= '</a>';
-                $html .= '</li>';
-                $count++;
-            }
+        $html = '<ul class="post-carousel-categories">';
+        $count = 0;
+        foreach ($terms as $term) {
+            if ($count === $length) {break;}
+            $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
+            $html .= '<li>';
+            $html .= '<a href="' . esc_url($link) . '">';
+            $html .= $term->name;
+            $html .= '</a>';
+            $html .= '</li>';
+            $count++;
+        }
         $html .= '</ul>';
-
 
         return $html;
 
