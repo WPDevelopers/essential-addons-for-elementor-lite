@@ -53,7 +53,6 @@ trait Post_Grid
                                 echo '<div class="eael-entry-wrapper">
                                     <header class="eael-entry-header">';
                                         if ($settings['eael_show_title']) {
-
                                             echo '<h2 class="eael-entry-title">';
                                                 echo '<a
                                                 class="eael-grid-post-link"
@@ -61,7 +60,7 @@ trait Post_Grid
                                                 title="' . get_the_title() . '"
                                                 '.($settings['title_link_nofollow'] ? 'rel="nofollow"' : '').'
                                                 '.($settings['title_link_target_blank'] ? 'target="_blank"' : '').'
-                                                >' . get_the_title() . '</a>';
+                                                >'.implode(" ", array_slice(explode(" ", get_the_title() ), 0, $settings['eael_title_length'])).'</a>';
                                             echo '</h2>';
                                         }
 
