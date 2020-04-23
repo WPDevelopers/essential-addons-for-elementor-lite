@@ -814,7 +814,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
 			'responsive_vertical_layout',
 			[
-				'label'     => __( 'Vertical Layout', 'plugin-domain' ),
+				'label'     => __( 'Vertical Layout', 'essential-addons-elementor' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => __( 'Yes', 'your-plugin' ),
 				'label_off' => __( 'No', 'your-plugin' ),
