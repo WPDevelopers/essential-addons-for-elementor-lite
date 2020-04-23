@@ -132,9 +132,10 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'eael_typeform_list',
             [
-                'label'   => __('Form', 'essential-addons-for-elementor-lite'),
+                'label'   => __('TypeForm', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => '',
+                'label_block' => true,
                 'options' => $this->get_form_list()
             ]
         );
@@ -175,6 +176,173 @@ class TypeForm extends Widget_Base {
             ]
         );
         $this->end_controls_section();
+
+        /*-----------------------------------------------------------------------------------*/
+        /*    Style Tab
+        /*-----------------------------------------------------------------------------------*/
+
+        /**
+         * Style Tab: Form Container
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_container_style',
+            [
+                'label' => __('Form Container', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_typeform_background',
+            [
+                'label' => esc_html__('Form Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-typeform' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'eael_typeform_alignment',
+            [
+                'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'options' => [
+                    'default' => [
+                        'title' => __('Default', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'fa fa-ban',
+                    ],
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'default' => 'default',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_typeform_max_width',
+            [
+                'label' => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 1500,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 80,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-typeform' => 'width: {{SIZE}}{{UNIT}};'
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_typeform_margin',
+            [
+                'label' => esc_html__('Form Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-typeform' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_typeform_padding',
+            [
+                'label' => esc_html__('Form Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-typeform' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_type_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'separator' => 'before',
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-typeform' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_type_border',
+                'selector' => '{{WRAPPER}} .eael-typeform',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_typeform_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-typeform',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Labels
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_label_style',
+            [
+                'label' => __('Labels', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_typeform_text_color_lable',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group label' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_typeform_typography_label',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-contact-form.eael-fluent-form-wrapper .ff-el-group label',
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render () {
@@ -197,10 +365,12 @@ class TypeForm extends Widget_Base {
                 ]
             ]
         );
+        $alignment = $settings['eael_typeform_alignment'];
+        $this->add_render_attribute('eael_typeform_wrapper', 'class', 'eael-typeform-align-'.$alignment);
         $data = [
             'url'         => esc_url($settings['eael_typeform_list']),
             'hideFooter'  => ($settings['eael_typeform_hidefooter'] == 'yes'),
-            'hideHeaders' => ($settings['eael_typeform_list_hideheaders'] == 'yes'),
+            'hideHeaders' => ($settings['eael_typeform_hideheaders'] == 'yes'),
             'opacity'     => $settings['eael_typeform_opacity']['size']
         ];
         echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
