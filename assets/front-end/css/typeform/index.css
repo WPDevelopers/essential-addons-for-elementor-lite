@@ -2,3 +2,14 @@
   width: 100%;
   height: 700px;
 }
+.eael-typeform.eael-typeform-align-center {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.eael-typeform.eael-typeform-align-left {
+  float: left;
+}
+.eael-typeform.eael-typeform-align-right {
+  float: right;
+}
