@@ -306,18 +306,6 @@ $config = [
                  ],
              ],
         ],
-        'typeform' => [
-            'class' => '\Essential_Addons_Elementor\Elements\TypeForm',
-            'dependency' => [
-                'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/typeform/index.min.css',
-                ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/typeform/embed.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/typeform/index.min.js',
-                ],
-            ],
-        ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
             'dependency' => [
