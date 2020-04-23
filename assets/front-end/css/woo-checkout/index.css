@@ -222,7 +222,6 @@
   font-size: 16px;
   font-weight: 500;
   background-color: #ffffff;
-  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-col-1 {
   flex-basis: 70%;
@@ -276,7 +275,6 @@
   border-radius: 3px;
   padding: 20px 25px;
   background-color: #ffffff;
-  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   width: 40%;
   font-weight: 700;
   margin: 0 0 0 auto;
