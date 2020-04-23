@@ -396,6 +396,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Table Head', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
+                'condition' => [
+                    '!ea_woo_checkout_layout' => 'default',
+                ],
 			]
 		);
 		$this->add_group_control(
@@ -403,6 +406,9 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'name' => 'ea_woo_checkout_order_review_header_typo',
 				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .table-header',
+                'condition' => [
+                    '!ea_woo_checkout_layout' => 'default',
+                ],
 			]
 		);
 		$this->add_control(
@@ -414,6 +420,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .table-header' => 'color: {{VALUE}};',
 				],
+                'condition' => [
+                    '!ea_woo_checkout_layout' => 'default',
+                ],
 			]
 		);
 		$this->add_control(
@@ -577,6 +586,42 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 
+        $this->add_control(
+            'ea_woo_checkout_order_review_total',
+            [
+                'label' => __( 'Total', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'ea_woo_checkout_layout' => 'split',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'ea_woo_checkout_order_review_total_typo',
+                'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total',
+                'condition' => [
+                    'ea_woo_checkout_layout' => 'split',
+                ],
+            ]
+        );
+        $this->add_control(
+            'ea_woo_checkout_order_review_total_color',
+            [
+                'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#404040',
+                'selectors' => [
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'ea_woo_checkout_layout' => 'split',
+                ],
+            ]
+        );
+
 		$this->add_control(
 			'ea_woo_checkout_order_review_shop_link',
 			[
@@ -629,6 +674,26 @@ class Woo_Checkout extends Widget_Base {
 		$this->end_controls_tab();
 
 		$this->end_controls_tabs();
+
+        $this->add_responsive_control(
+            'ea_woo_checkout_shop_link_top_spacing',
+            [
+                'label' => __( 'Top Spacing', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 30,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .back-to-shopping' => 'margin-top: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
 		$this->end_controls_section();
 
