@@ -107,27 +107,32 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_dependency(array $elements, $type)
+    public function generate_dependency(array $elements, $type, $context)
     {
-        $paths = [];
+        $lib  = ['view' => [], 'edit' => []];
+        $self = ['view' => [], 'edit' => []];
 
         foreach ($elements as $element) {
             if (isset($this->registered_elements[$element])) {
                 if (!empty($this->registered_elements[$element]['dependency'][$type])) {
-                    foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
-                        $paths[] = $path;
+                    foreach ($this->registered_elements[$element]['dependency'][$type] as $file) {
+                        ${$file['type']}[$file['context']][] = $file['file'];
                     }
                 }
             } elseif (isset($this->registered_extensions[$element])) {
                 if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
                     foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
-                        $paths[] = $path;
+                        ${$file['type']}[$file['context']][] = $file['file'];
                     }
                 }
             }
         }
 
-        return array_unique($paths);
+        if ($context == 'view') {
+            return array_unique(array_merge($lib['view'], $self['view']));
+        }
+
+        return array_unique(array_merge($lib['view'], $lib['edit'], $self['view'], $self['edit']));
     }
 
     /**
@@ -135,7 +140,7 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_scripts($elements, $file_name = null)
+    public function generate_scripts($elements, $file_name = null, $context)
     {
         if (empty($elements)) {
             return;
@@ -156,8 +161,8 @@ trait Generator
         );
 
         // collect library scripts & styles
-        $js_paths  = array_merge($js_paths, $this->generate_dependency($elements, 'js'));
-        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css'));
+        $js_paths  = array_merge($js_paths, $this->generate_dependency($elements, 'js', $context));
+        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css', $context));
 
         // combine files
         $this->combine_files($css_paths, ($file_name ? $file_name : 'eael') . '.min.css');
@@ -237,7 +242,7 @@ trait Generator
 
             // if not empty elements, regenerate cache files
             if (!empty($elements)) {
-                $this->generate_scripts($elements, $this->request_uid);
+                $this->generate_scripts($elements, $this->request_uid, 'view');
 
                 // load generated files - fallback
                 $this->enqueue_protocols($this->request_uid);
@@ -246,7 +251,7 @@ trait Generator
 
         // // if no cache files, generate new
         if (!$this->has_cache_files($this->request_uid)) {
-            $this->generate_scripts($elements, $this->request_uid);
+            $this->generate_scripts($elements, $this->request_uid, 'view');
         }
 
         // // if no elements, remove cache files
