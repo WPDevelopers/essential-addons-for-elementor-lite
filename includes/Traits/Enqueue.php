@@ -29,6 +29,7 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
+        // Fluent forms compatibility
         if (defined('FLUENTFORM')) {
             wp_register_style(
                 'fluent-form-styles',
@@ -103,11 +104,11 @@ trait Enqueue
         if ($this->is_preview_mode()) {
             // generate fallback scripts
             if (!$this->has_cache_files()) {
-                $this->generate_scripts($this->get_settings());
+                $this->generate_scripts($this->get_settings(), null, 'edit');
             }
 
             // enqueue scripts
-            if (EAEL_DEV_MODE || !$this->has_cache_files()) {
+            if (!$this->has_cache_files()) {
                 $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
                 $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
             } else {
@@ -121,12 +122,7 @@ trait Enqueue
                 false,
                 EAEL_PLUGIN_VERSION
             );
-
-            wp_enqueue_script('tinymce', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/tinymce.min.js', false, true);
-            wp_enqueue_script('tinymce-list', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/plugins/lists/plugin.min.js', [], false, true);
-            wp_enqueue_script('tinymce-link', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/plugins/link/plugin.min.js', [], false, true);
-            wp_enqueue_script('tinymce-autolink', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/plugins/autolink/plugin.min.js', [], false, true);
-
+            
             wp_enqueue_script(
                 'eael-backend',
                 $this->safe_protocol($js_file),
