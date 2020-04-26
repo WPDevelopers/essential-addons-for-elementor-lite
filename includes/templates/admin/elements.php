@@ -478,6 +478,17 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-search-form/'
             ]
         ]
+    ],
+    'woocommerce-elements'   => [
+        'title' => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite'),
+        'elements'  => [
+            [
+                'key'   => 'woo-checkout',
+                'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-checkout/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-checkout/'
+            ],
+        ]
     ]
 ];
 
