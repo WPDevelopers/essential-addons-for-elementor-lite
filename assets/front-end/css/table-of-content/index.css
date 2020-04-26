@@ -131,6 +131,9 @@ html {
   padding: 0;
   list-style: none;
 }
+.eael-toc .eael-toc-body ul.eael-toc-list li {
+  list-style: none;
+}
 .eael-toc .eael-toc-body ul.eael-toc-list li ul {
   margin: 0;
   padding: 0;
