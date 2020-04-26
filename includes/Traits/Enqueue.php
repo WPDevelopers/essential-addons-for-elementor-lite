@@ -108,7 +108,7 @@ trait Enqueue
             }
 
             // enqueue scripts
-            if (!$this->has_cache_files()) {
+            if (EAEL_DEV_MODE || !$this->has_cache_files()) {
                 $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
                 $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
             } else {
