@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
+use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
 trait Helper
 {
@@ -2620,5 +2621,37 @@ trait Helper
 
         return $html;
 
+    }
+
+	/**
+	 * Woo Checkout Layout
+	 */
+	public function eael_woo_checkout_layout($layout)
+	{
+		if (apply_filters('eael/pro_enabled', false)) {
+			$layout['multi-steps'] = __('Multi Steps', 'essential-addons-for-elementor-lite');
+			$layout['split'] = __('Split', 'essential-addons-for-elementor-lite');
+		}else{
+			$layout['multi-steps'] = __('Multi Steps (Pro)', 'essential-addons-for-elementor-lite');
+			$layout['split'] = __('Split (Pro)', 'essential-addons-for-elementor-lite');
+		}
+
+		return $layout;
+	}
+
+    /**
+     * Woo Checkout
+     */
+    public function woo_checkout_update_order_review(){
+        $setting = $_POST['orderReviewData'];
+        ob_start();
+        Woo_Checkout::checkout_order_review_default($setting);
+        $woo_checkout_update_order_review = ob_get_clean();
+
+        wp_send_json(
+            array(
+                'order_review' =>  $woo_checkout_update_order_review
+            )
+        );
     }
 }
