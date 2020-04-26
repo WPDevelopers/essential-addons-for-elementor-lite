@@ -209,6 +209,12 @@ trait Elements
                 'categories' => '["essential-addons-elementor"]',
             ],
             [
+                'name' => 'eael-typeform',
+                'title' => __('TypeForm', 'essential-addons-for-elementor-lite'),
+                'icon' => 'eaicon-typeform',
+                'categories' => '["essential-addons-elementor"]',
+            ],
+            [
                 'name' => 'eael-offcanvas',
                 'title' => __('Offcanvas', 'essential-addons-for-elementor-lite'),
                 'icon' => 'eaicon-offcanvas',
