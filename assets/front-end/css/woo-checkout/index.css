@@ -563,7 +563,7 @@
     width: 48% !important;
     padding-right: 2%;
   }
-  .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-shipping-fields, .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-additional-fields {
+  .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-account-fields, .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-shipping-fields, .eael-woo-checkout.theme-astra:not(.elementor-editor-active) .woocommerce #customer_details.col2-set .col-1 .woocommerce-additional-fields {
     float: left !important;
     width: 48% !important;
     padding-left: 2%;
