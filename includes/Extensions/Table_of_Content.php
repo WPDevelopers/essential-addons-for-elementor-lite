@@ -331,6 +331,32 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_width',
+            [
+                'label' => __('Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 300,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_position',
             [
                 'label' => __('Position', 'essential-addons-for-elementor-lite'),
