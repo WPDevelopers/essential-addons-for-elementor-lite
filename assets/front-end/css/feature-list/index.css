@@ -425,7 +425,7 @@
     flex-direction: row;
   }
   .elementor-widget-eael-feature-list .-mobile-icon-position-right .eael-feature-list-item {
-    text-align: right;
+    text-align: right !important;
     flex-direction: row-reverse;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-content-box,

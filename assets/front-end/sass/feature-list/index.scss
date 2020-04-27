@@ -532,7 +532,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
         }
 
         .-mobile-icon-position-right .eael-feature-list-item {
-            text-align: right;
+            text-align: right !important;
             -webkit-box-orient: horizontal;
             -webkit-box-direction: reverse;
             -webkit-flex-direction: row-reverse;
