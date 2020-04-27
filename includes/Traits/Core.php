@@ -215,6 +215,7 @@ trait Core
                 'eael_ext_table_of_content_header_text_color' => $page_settings_model->get_settings('eael_ext_table_of_content_header_text_color'),
                 'eael_ext_table_of_content_header_icon' => $page_settings_model->get_settings('eael_ext_table_of_content_header_icon'),
                 'eael_ext_toc_header_padding' => $page_settings_model->get_settings('eael_ext_toc_header_padding'),
+                'eael_ext_toc_width' => $page_settings_model->get_settings('eael_ext_toc_width'),
 
                 //close button setting
                 'eael_ext_table_of_content_close_button_bg' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_bg'),
