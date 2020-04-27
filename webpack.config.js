@@ -1,35 +1,59 @@
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { exec } = require("child_process");
 const outputEntry = (argv) => {
 	let paths = {};
 
 	if (argv.single == "true") {
-		paths[path.join("js", "eael-view")] = [];
-		paths[path.join("css", "eael-view")] = [];
+		paths["js/view/view"] = [];
+		paths["js/edit/edit"] = [];
+		paths["css/view/view"] = [];
 	}
 
-	glob.sync("./src/js/*").reduce((acc, file) => {
+	glob.sync("./src/js/view/*").reduce((acc, file) => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
 			if (argv.single == "true") {
-				paths[path.join("js", "eael-view")].push(file);
+				if (fileName == "general") {
+					paths["js/view/view"].unshift(file);
+				} else {
+					paths["js/view/view"].push(file);
+				}
 			} else {
-				paths[path.join("js", fileName)] = file;
+				paths[path.join("js", "view", fileName)] = file;
 			}
 		}
 	}, {});
 
-	glob.sync("./src/css/*").reduce((acc, file) => {
+	glob.sync("./src/js/edit/*").reduce((acc, file) => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
 			if (argv.single == "true") {
-				paths[path.join("css", "eael-view")].push(file);
+				if (fileName == "general") {
+					paths["js/edit/edit"].unshift(file);
+				} else {
+					paths["js/edit/edit"].push(file);
+				}
 			} else {
-				paths[path.join("css", fileName)] = file;
+				paths[path.join("js", "edit", fileName)] = file;
+			}
+		}
+	}, {});
+
+	glob.sync("./src/css/view/*").reduce((acc, file) => {
+		let fileName = path.parse(file).name;
+
+		if (fileName.charAt(0) !== "_") {
+			if (argv.single == "true") {
+				if (fileName == "general") {
+					paths["css/view/view"].unshift(file);
+				} else {
+					paths["css/view/view"].push(file);
+				}
+			} else {
+				paths[path.join("css", "view", fileName)] = file;
 			}
 		}
 	}, {});
@@ -40,20 +64,21 @@ const removeEntry = (argv) => {
 	entry = [];
 
 	if (argv.single == "true") {
-		entry.push(path.join("css", "eael-view.js"));
-		entry.push(path.join("css", "eael-view.min.js"));
+		entry.push(path.join("css", "view", "view.js"));
+		entry.push(path.join("css", "view", "view.min.js"));
 
 		return entry;
 	}
 
-	glob.sync("./src/css/*").reduce((acc, file) => {
+	glob.sync("./src/css/view/*").reduce((acc, file) => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			entry.push(path.join("css", fileName.concat(".js")));
-			entry.push(path.join("css", fileName.concat(".min.js")));
+			entry.push(path.join("css", "view", fileName.concat(".js")));
+			entry.push(path.join("css", "view", fileName.concat(".min.js")));
 		}
 	}, {});
+
 
 	return entry;
 };
@@ -80,13 +105,13 @@ module.exports = (env, argv) => {
 					});
 				},
 			},
-			{
-				apply: (compiler) => {
-					compiler.hooks.afterEmit.tap("postBuild", (compilation) => {
-						// exec(`node minify.config.js ${argv.mode}`);
-					});
-				},
-			},
+			// {
+			// 	apply: (compiler) => {
+			// 		compiler.hooks.afterEmit.tap("postBuild", (compilation) => {
+			// 			exec(`node minify.config.js ${argv.mode}`);
+			// 		});
+			// 	},
+			// },
 		],
 		module: {
 			rules: [

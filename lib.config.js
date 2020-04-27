@@ -21,7 +21,7 @@ const cssEntry = (context, minified) => {
 			file = file.replace(".min", "");
 		}
 
-		paths.push("./assets/front-end/css/" + file);
+		paths.push("./assets/front-end/css/lib-" + context + "/" + file);
 	});
 
 	return paths;
@@ -55,7 +55,7 @@ const jsEntry = (context, minified) => {
 			file = file.replace(".min", "");
 		}
 
-		paths.push("./assets/front-end/js/" + file);
+		paths.push("./assets/front-end/js/lib-" + context + "/" + file);
 	});
 
 	return paths;
@@ -63,7 +63,7 @@ const jsEntry = (context, minified) => {
 
 // lib.view.min.css
 concat(cssEntry("view", true)).then((result) => {
-	fs.writeFile("./assets/front-end/css/eael-lib-view.min.css", result, (err) => {
+	fs.writeFile("./assets/front-end/css/lib-view/lib-view.min.css", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}
@@ -72,7 +72,7 @@ concat(cssEntry("view", true)).then((result) => {
 
 // lib.view.css
 concat(cssEntry("view", false)).then((result) => {
-	fs.writeFile("./assets/front-end/css/eael-lib-view.css", result, (err) => {
+	fs.writeFile("./assets/front-end/css/lib-view/lib-view.css", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}
@@ -81,7 +81,7 @@ concat(cssEntry("view", false)).then((result) => {
 
 // lib.view.min.js
 concat(jsEntry("view", true)).then((result) => {
-	fs.writeFile("./assets/front-end/js/eael-lib-view.min.js", result, (err) => {
+	fs.writeFile("./assets/front-end/js/lib-view/lib-view.min.js", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}
@@ -90,7 +90,7 @@ concat(jsEntry("view", true)).then((result) => {
 
 // lib.view.js
 concat(jsEntry("view", false)).then((result) => {
-	fs.writeFile("./assets/front-end/js/eael-lib-view.js", result, (err) => {
+	fs.writeFile("./assets/front-end/js/lib-view/lib-view.js", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}
@@ -99,7 +99,7 @@ concat(jsEntry("view", false)).then((result) => {
 
 // lib.edit.min.js
 concat(jsEntry("edit", true)).then((result) => {
-	fs.writeFile("./assets/front-end/js/eael-lib-edit.min.js", result, (err) => {
+	fs.writeFile("./assets/front-end/js/lib-edit/lib-edit.min.js", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}
@@ -108,7 +108,7 @@ concat(jsEntry("edit", true)).then((result) => {
 
 // lib.edit.js
 concat(jsEntry("view", false)).then((result) => {
-	fs.writeFile("./assets/front-end/js/eael-lib-edit.js", result, (err) => {
+	fs.writeFile("./assets/front-end/js/lib-edit/lib-edit.js", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}

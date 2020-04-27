@@ -153,11 +153,10 @@ trait Generator
 
         // collect eael js
         $js_paths = array(
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/common.min.js',
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/general.min.js',
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/view/general.min.js',
         );
         $css_paths = array(
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general.min.css",
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/view/general.min.css",
         );
 
         // collect library scripts & styles
