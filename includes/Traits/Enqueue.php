@@ -50,6 +50,14 @@ trait Enqueue
             time(),
             true,
         );
+        
+        wp_register_script(
+            'eael-edit',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/edit/edit.min.js'),
+            ['jquery'],
+            time(),
+            true,
+        );
 
         // Gravity forms Compatibility
         if (class_exists('GFCommon')) {
@@ -169,6 +177,7 @@ trait Enqueue
                 wp_enqueue_script('eael-lib-view');
                 wp_enqueue_script('eael-lib-edit');
                 wp_enqueue_script('eael-view');
+                wp_enqueue_script('eael-edit');
             }
 
             // hook extended assets
