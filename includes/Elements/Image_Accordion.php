@@ -85,8 +85,8 @@ class Image_Accordion extends Widget_Base
                 'default' => 'on-hover',
                 'label_block' => false,
                 'options' => [
-                    'accordion-direction-vertical' => esc_html__('Vertical', 'essential-addons-for-elementor-lite'),
-                    'accordion-direction-horizontal' => esc_html__('Horizontal', 'essential-addons-for-elementor-lite')
+                    'accordion-direction-horizontal' => esc_html__('Horizontal', 'essential-addons-for-elementor-lite'),
+                    'accordion-direction-vertical' => esc_html__('Vertical', 'essential-addons-for-elementor-lite')
                 ],
                 'default'   => 'accordion-direction-vertical'
             ]
