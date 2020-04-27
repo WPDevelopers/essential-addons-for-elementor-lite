@@ -323,6 +323,36 @@ class Feature_List extends Widget_Base
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_feature_list_icon_right_indicator_position',
+			[
+				'label' => __( 'Arrow Indicator Position', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 50,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after' => 'top: {{SIZE}}{{UNIT}};',
+				],
+				'condition'	=> [
+					'eael_feature_list_icon_position' => 'top'
+				]
+			]
+		);
+
 		$this->add_control(
 			'eael_feature_list_connector',
 			[
@@ -852,15 +882,20 @@ class Feature_List extends Widget_Base
 		}else {
 			$connector_mobile = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
 		}
-			
-		
-		
-		$desktop = '-icon-position-' . $settings['eael_feature_list_icon_position'];
-		$tablet = '-tablet-icon-position-' . $settings['eael_feature_list_icon_position_tablet'];
-		$mobile = '-mobile-icon-position-' . $settings['eael_feature_list_icon_position_mobile'];
+		// icon position for all mode
+		$this->add_render_attribute(
+			'eael_feature_list_wrapper',
+			[
+				'class' => [ 
+					'-icon-position-' . $settings['eael_feature_list_icon_position'], 
+					'-tablet-icon-position-' . $settings['eael_feature_list_icon_position_tablet'],
+					'-mobile-icon-position-' . $settings['eael_feature_list_icon_position_mobile']
+				],
+			]
+		);
 		
 		?>
-		<div class="<?php echo $desktop . ' ' . $tablet . ' ' .  $mobile; ?>">
+		<div <?php echo $this->get_render_attribute_string( 'eael_feature_list_wrapper' ); ?>>
 			<ul <?php echo $this->get_render_attribute_string( 'eael_feature_list' ); ?>>
 				<?php $i = 0;
 				foreach ( $settings['eael_feature_list'] as $index => $item ) :
