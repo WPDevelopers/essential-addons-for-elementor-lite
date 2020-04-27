@@ -336,9 +336,14 @@ $config = [
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/advanced-data-table.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-data-table.min.js',
                         'type'    => 'self',
                         'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/advanced-data-table.min.js',
+                        'type'    => 'self',
+                        'context' => 'edit',
                     ],
                 ],
             ],
