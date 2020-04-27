@@ -340,12 +340,8 @@ class Feature_List extends Widget_Base
 						'max' => 100,
 					],
 				],
-				'default' => [
-					'unit' => '%',
-					'size' => 50,
-				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after' => 'top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after' => 'top: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'	=> [
 					'eael_feature_list_icon_position' => 'top'
