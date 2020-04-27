@@ -10,6 +10,47 @@ trait Enqueue
 {
     public function enqueue_scripts()
     {
+
+        // Register our styles
+        wp_register_style(
+            'eael-lib-view',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/css/lib-view/lib-view.min.css'),
+            false,
+            time()
+        );
+
+        wp_register_style(
+            'eael-view',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/css/view/view.min.css'),
+            false,
+            time()
+        );
+
+        // Register our scripts
+        wp_register_script(
+            'eael-lib-view',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/lib-view/lib-view.min.js'),
+            ['jquery'],
+            time(),
+            true
+        );
+
+        wp_register_script(
+            'eael-lib-edit',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/lib-edit/lib-edit.min.js'),
+            ['jquery'],
+            time(),
+            true
+        );
+
+        wp_register_script(
+            'eael-view',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/view/view.min.js'),
+            ['jquery'],
+            time(),
+            true,
+        );
+
         // Gravity forms Compatibility
         if (class_exists('GFCommon')) {
             foreach ($this->eael_select_gravity_form() as $form_id => $form_name) {
@@ -80,7 +121,7 @@ trait Enqueue
             );
         }
 
-        // admin bar css
+        // admin bar
         if (is_admin_bar_showing()) {
             wp_enqueue_style(
                 'ea-admin-bar',
@@ -88,10 +129,7 @@ trait Enqueue
                 false,
                 EAEL_PLUGIN_VERSION
             );
-        }
 
-        // admin bar js
-        if (is_admin_bar_showing()) {
             wp_enqueue_script(
                 'ea-admin-bar',
                 EAEL_PLUGIN_URL . 'assets/admin/js/admin-bar.js',
@@ -102,34 +140,36 @@ trait Enqueue
 
         // My Assets
         if ($this->is_preview_mode()) {
-            // generate fallback scripts
-            if (!$this->has_cache_files()) {
-                $this->generate_scripts($this->get_settings(), null, 'edit');
-            }
-
             // enqueue scripts
-            if (EAEL_DEV_MODE || !$this->has_cache_files()) {
-                $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
-                $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
-            } else {
-                $css_file = EAEL_ASSET_URL . '/eael.min.css';
-                $js_file  = EAEL_ASSET_URL . '/eael.min.js';
-            }
+            if ($this->has_cache_files() && !EAEL_DEV_MODE) {
+                // enqueue
+                wp_enqueue_style(
+                    'eael-cache-edit',
+                    $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.css'),
+                    false,
+                    EAEL_PLUGIN_VERSION
+                );
 
-            wp_enqueue_style(
-                'eael-backend',
-                $this->safe_protocol($css_file),
-                false,
-                EAEL_PLUGIN_VERSION
-            );
-            
-            wp_enqueue_script(
-                'eael-backend',
-                $this->safe_protocol($js_file),
-                ['jquery'],
-                EAEL_PLUGIN_VERSION,
-                true
-            );
+                wp_enqueue_script(
+                    'eael-cache-edit',
+                    $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.js'),
+                    ['jquery'],
+                    EAEL_PLUGIN_VERSION,
+                    true
+                );
+            } else {
+                // generate fallback scripts
+                if (!EAEL_DEV_MODE) {
+                    $this->generate_scripts($this->get_settings(), null, 'edit');
+                }
+
+                // enqueue
+                wp_enqueue_style('eael-lib-view');
+                wp_enqueue_style('eael-view');
+                wp_enqueue_script('eael-lib-view');
+                wp_enqueue_script('eael-lib-edit');
+                wp_enqueue_script('eael-view');
+            }
 
             // hook extended assets
             do_action('eael/after_enqueue_scripts', $this->has_cache_files());
@@ -140,7 +180,8 @@ trait Enqueue
                 'nonce'   => wp_create_nonce('essential-addons-elementor'),
             ]);
 
-            wp_localize_script('eael-backend', 'localize', $this->localize_objects);
+            wp_localize_script('eael-cache-edit', 'localize', $this->localize_objects);
+            wp_localize_script('eael-view', 'localize', $this->localize_objects);
         } else {
             if ($this->request_uid) {
                 $elements = get_transient('eael_transient_elements_' . $this->request_uid);
@@ -159,45 +200,46 @@ trait Enqueue
     {
         wp_enqueue_style(
             'eael-editor-css',
-            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/editor.css'),
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/editor.css'),
             false,
-            EAEL_PLUGIN_VERSION
+            time()
         );
 
         // ea icon font
         wp_enqueue_style(
             'ea-icon',
-            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/css/eaicon.css'),
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
             false,
-            EAEL_PLUGIN_VERSION
+            time()
         );
     }
 
     // rules how css will be enqueued on front-end
     protected function enqueue_protocols()
     {
-        if (EAEL_DEV_MODE || !$this->has_cache_files($this->request_uid)) {
-            $css_file = EAEL_PLUGIN_URL . 'assets/front-end/css/eael.min.css';
-            $js_file  = EAEL_PLUGIN_URL . 'assets/front-end/js/eael.min.js';
+        if ($this->has_cache_files() && !EAEL_DEV_MODE) {
+            // enqueue
+            wp_enqueue_style(
+                'eael-cache-view',
+                $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->request_uid . '.min.css'),
+                false,
+                time()
+            );
+
+            wp_enqueue_script(
+                'eael-cache-view',
+                $this->safe_protocol(EAEL_ASSET_URL . '/' . $this->request_uid . '.min.js'),
+                ['jquery'],
+                time(),
+                true
+            );
         } else {
-            $css_file = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.css';
-            $js_file  = EAEL_ASSET_URL . '/' . $this->request_uid . '.min.js';
+            // enqueue
+            wp_enqueue_style('eael-lib-view');
+            wp_enqueue_style('eael-view');
+            wp_enqueue_script('eael-lib-view');
+            wp_enqueue_script('eael-view');
         }
-
-        wp_enqueue_style(
-            'eael-front-end',
-            $this->safe_protocol($css_file),
-            false,
-            time()
-        );
-
-        wp_enqueue_script(
-            'eael-front-end',
-            $this->safe_protocol($js_file),
-            ['jquery'],
-            time(),
-            true
-        );
 
         // hook extended assets
         do_action('eael/after_enqueue_scripts', $this->has_cache_files($this->request_uid));
@@ -208,6 +250,7 @@ trait Enqueue
             'nonce'   => wp_create_nonce('essential-addons-elementor'),
         ]);
 
-        wp_localize_script('eael-front-end', 'localize', $this->localize_objects);
+        wp_localize_script('eael-cache-view', 'localize', $this->localize_objects);
+        wp_localize_script('eael-view', 'localize', $this->localize_objects);
     }
 }
