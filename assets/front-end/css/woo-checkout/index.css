@@ -230,10 +230,13 @@
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-col-2 {
   flex-basis: 15%;
   max-width: 15%;
+  text-align: center;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-col-3 {
   flex-basis: 15%;
   max-width: 15%;
+  text-align: right;
+  padding-right: 25px !important;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-thum-name {
   align-items: center;
