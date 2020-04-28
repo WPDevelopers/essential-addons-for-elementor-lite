@@ -48,7 +48,7 @@ trait Enqueue
             $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/view/view.min.js'),
             ['jquery'],
             time(),
-            true,
+            true
         );
         
         wp_register_script(
@@ -56,7 +56,7 @@ trait Enqueue
             $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/edit/edit.min.js'),
             ['jquery'],
             time(),
-            true,
+            true
         );
 
         // Gravity forms Compatibility
@@ -158,6 +158,8 @@ trait Enqueue
                     EAEL_PLUGIN_VERSION
                 );
 
+                wp_enqueue_script('eael-lib-edit');
+
                 wp_enqueue_script(
                     'eael-cache-edit',
                     $this->safe_protocol(EAEL_ASSET_URL . '/eael.min.js'),
@@ -226,7 +228,7 @@ trait Enqueue
     // rules how css will be enqueued on front-end
     protected function enqueue_protocols()
     {
-        if ($this->has_cache_files() && !EAEL_DEV_MODE) {
+        if ($this->has_cache_files($this->request_uid) && !EAEL_DEV_MODE) {
             // enqueue
             wp_enqueue_style(
                 'eael-cache-view',

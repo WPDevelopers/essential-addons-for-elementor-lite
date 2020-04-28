@@ -311,27 +311,27 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-theme.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-theme.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-lists.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-lists.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-link.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-link.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-autolink.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-autolink.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
@@ -341,7 +341,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/view/advanced-data-table.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/advanced-data-table.min.js',
                         'type'    => 'self',
                         'context' => 'edit',
                     ],
