@@ -378,7 +378,7 @@ trait Woo_Checkout_Helper {
 							</div>
                             <?php if( $settings['ea_woo_checkout_layout'] == 'default' ) { ?>
 							<div class="table-col-2 product-quantity">
-								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . $cart_item['quantity'] . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', $cart_item['quantity'], $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
                             <?php } ?>
 							<div class="table-col-3 product-total">
