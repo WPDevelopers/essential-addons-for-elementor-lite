@@ -1,5 +1,6 @@
 ;(function ($) {
     jQuery(document).ready(function () {
+        console.log(elementor.settings)
         if (isEditMode) {
             elementor.settings.editorPreferences.addChangeCallback(
                 'eael_feature_list_icon_position',
