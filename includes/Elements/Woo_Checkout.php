@@ -429,6 +429,26 @@ class Woo_Checkout extends Widget_Base {
                 ],
 			]
 		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_order_review_header_top_spacing',
+			[
+				'label' => __( 'Top Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 12,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table li.table-header' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_control(
 			'ea_woo_checkout_order_review_body',
 			[
@@ -482,6 +502,25 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .table-row, {{WRAPPER}} .ea-woo-checkout-order-review .product-thumbnail img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_order_review_row_gap',
+			[
+				'label' => __( 'Row Gap', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 10,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table li.table-row' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -586,6 +625,25 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'ea_woo_checkout_order_review_footer_top_spacing',
+			[
+				'label' => __( 'Top Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 10,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -696,6 +754,9 @@ class Woo_Checkout extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .ea-woo-checkout-order-review .back-to-shopping' => 'margin-top: {{SIZE}}{{UNIT}};',
                 ],
+	            'condition' => [
+		            'ea_woo_checkout_layout!' => 'default',
+	            ],
             ]
         );
 
