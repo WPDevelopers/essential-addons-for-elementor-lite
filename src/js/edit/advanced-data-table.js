@@ -125,6 +125,7 @@ class advancedDataTableEdit {
 
 		tinymce.init({
 			selector: ".inline-editor",
+			skin: "oxide-dark",
 			menubar: false,
 			inline: true,
 			plugins: ["lists", "link", "autolink"],
@@ -214,7 +215,7 @@ class advancedDataTableEdit {
 				});
 
 				// input
-				table.addEventListener("input", (e) => {
+				table.addEventListener("DOMSubtreeModified", (e) => {
 					if (table.classList.contains("ea-advanced-data-table-static")) {
 						clearTimeout(this.timeout);
 
