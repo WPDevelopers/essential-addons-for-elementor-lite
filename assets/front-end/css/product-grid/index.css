@@ -372,19 +372,6 @@
   transform: translateY(0);
 }
 
-.eael-product-grid .woocommerce .products .product .button.add_to_cart_button {
-  position: relative;
-}
-.eael-product-grid .woocommerce .products .product .button.add_to_cart_button:before {
-  padding-right: 8px;
-  content: "\f217";
-  font-size: 14px;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  vertical-align: middle;
-  font-family: "Font Awesome 5 Free";
-}
-
 @media only screen and (min-width: 1025px) {
   .eael-product-grid-column-1 .eael-product-grid .woocommerce ul.products {
     grid-template-columns: 100%;
