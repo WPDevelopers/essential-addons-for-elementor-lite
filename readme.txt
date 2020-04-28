@@ -190,10 +190,14 @@ Your existing elements/content will work with premium version. So you won't lose
 == Changelog ==
 
 = 3.9.3 - 28/04/2020 =
-- Added: WooCommerce Checkout element
-- Few minor bugfix and improvements
-
-== Changelog ==
+- Added: EA Woo Checkout element
+- Added: Vertical Layout for Image Accordion
+- Added: Post Grid option to open links in new tab
+- Fixed: Filterable Gallery with Shortened YouTube URL
+- Fixed: Filterable Gallery caption issue
+- Fixed: Gravity Forms styling issue
+- Fixed: Post Grid title length issue
+- Few minor bug fix and improvements
 
 = 3.9.2 - 12/04/2020 =
 - Added: Formstack Widget
