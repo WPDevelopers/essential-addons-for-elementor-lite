@@ -1895,6 +1895,7 @@ class Woo_Checkout extends Widget_Base {
 
 		global $wp;
         $order_review_change_data = [
+            'ea_woo_checkout_layout' => $settings['ea_woo_checkout_layout'],
             'ea_woo_checkout_table_product_text' => $settings['ea_woo_checkout_table_product_text'],
             'ea_woo_checkout_table_quantity_text' => $settings['ea_woo_checkout_table_quantity_text'],
             'ea_woo_checkout_table_price_text' => $settings['ea_woo_checkout_table_price_text'],
