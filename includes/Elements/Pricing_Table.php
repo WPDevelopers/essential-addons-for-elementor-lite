@@ -109,6 +109,9 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        do_action('eael_pricing_table_after_pricing_style', $this);
+
+
         /**
          * Condition: 'eael_pricing_table_featured' => 'yes'
          */
@@ -776,7 +779,7 @@ class Pricing_Table extends Widget_Base
                     ],
                 ],
                 'default' => 'center',
-                'prefix_class' => 'eael-pricing-button-align-',
+                'prefix_class' => 'eael-pricing-button-align%s-',
             ]
         );
 
@@ -1468,10 +1471,12 @@ class Pricing_Table extends Widget_Base
                 'label' => esc_html__('Icon Settings', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'eael_pricing_table_style' => ['style-2', 'style-5'],
+                    'eael_pricing_table_style' => apply_filters( 'eael_pricing_table_icon_supported_style', ['style-2'] ),
                 ],
             ]
         );
+
+
 
         $this->add_control(
             'eael_pricing_table_icon_bg_show',
@@ -1547,16 +1552,22 @@ class Pricing_Table extends Widget_Base
             [
                 'label' => esc_html__('Icon Area Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
                 'default' => [
-                    'size' => 80,
+                    'unit'  => 'px',
+                    'size'  => 80,
                 ],
                 'range' => [
                     'px' => [
-                        'max' => 200,
+                        'max' => 500,
                     ],
+                    '%' => [
+						'min' => 0,
+						'max' => 100,
+					],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon, {{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item .eael-pricing-icon .icon' => 'width: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing.style-2 .eael-pricing-item .eael-pricing-icon .icon, {{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item .eael-pricing-icon .icon' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
