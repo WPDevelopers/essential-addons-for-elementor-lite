@@ -7,39 +7,39 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/load-more.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/post-grid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/post-grid.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/product-grid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/product-grid.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/load-more.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/post-grid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/post-grid.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -51,19 +51,19 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/load-more.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/post-timeline.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/post-timeline.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/load-more.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -75,24 +75,24 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/fancy-text.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/fancy-text.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/morphext.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/morphext.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/typed.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/typed.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/fancy-text.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/fancy-text.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -104,7 +104,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/creative-btn.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/creative-btn.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -116,19 +116,19 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/count-down.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/count-down.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/countdown.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/countdown.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/count-down.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/count-down.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -140,7 +140,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/team-members.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/team-members.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -152,7 +152,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/testimonials.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/testimonials.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -164,7 +164,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/info-box.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/info-box.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -176,7 +176,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/flip-box.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/flip-box.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -188,7 +188,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/call-to-action.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/call-to-action.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -200,7 +200,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/dual-header.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/dual-header.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -212,24 +212,24 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/tooltipster.bundle.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/tooltipster.bundle.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/price-table.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/price-table.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/tooltipster.bundle.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tooltipster.bundle.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/price-table.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/price-table.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -241,24 +241,24 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/twitter-feed.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/twitter-feed.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/twitter-feed.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/twitter-feed.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -270,29 +270,29 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/load-more.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/facebook-feed.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/facebook-feed.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/facebook-feed.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/facebook-feed.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -304,34 +304,34 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/advanced-data-table.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-data-table.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/tinymce.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/tinymce-theme.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-theme.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/tinymce-lists.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-lists.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/tinymce-link.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-link.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/tinymce-autolink.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tinymce-autolink.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
@@ -341,7 +341,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/advanced-data-table.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/view/advanced-data-table.min.js',
                         'type'    => 'self',
                         'context' => 'edit',
                     ],
@@ -353,14 +353,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/data-table.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/data-table.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/data-table.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/data-table.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -372,39 +372,39 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/load-more.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/magnific-popup.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/filterable-gallery.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/filterable-gallery.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/jquery.magnific-popup.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/jquery.magnific-popup.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/filterable-gallery.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/filterable-gallery.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -416,14 +416,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/image-accordion.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/image-accordion.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/image-accordion.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/image-accordion.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -435,14 +435,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/content-ticker.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/content-ticker.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/content-ticker.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/content-ticker.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -455,7 +455,7 @@ $config = [
                 'css' => [
 
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/tooltip.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/tooltip.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -467,14 +467,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/advanced-accordion.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-accordion.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/advanced-accordion.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-accordion.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -486,14 +486,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/advanced-tabs.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-tabs.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/advanced-tabs.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-tabs.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -505,19 +505,19 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/progress-bar.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/progress-bar.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/inview.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/inview.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/progress-bar.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/progress-bar.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -529,7 +529,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/feature-list.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/feature-list.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -541,19 +541,19 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/load-more.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/product-grid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/product-grid.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/load-more.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -565,7 +565,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/contact-form-7.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/contact-form-7.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -577,7 +577,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/weforms.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/weforms.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -589,7 +589,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/ninja-form.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/ninja-form.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -601,7 +601,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/formstack.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/formstack.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -613,7 +613,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/gravity-form.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/gravity-form.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -625,7 +625,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/caldera-form.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/caldera-form.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -637,7 +637,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/wpforms.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/wpforms.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -649,7 +649,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/fluentform.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/fluentform.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -670,24 +670,24 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/sticky-video-plyr.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/sticky-video-plyr.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/sticky-video.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/sticky-video.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/sticky-video-plyr.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/sticky-video-plyr.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/sticky-video.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/sticky-video.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -699,64 +699,64 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/calendar-main.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/calendar-main.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/daygrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/daygrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/timegrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/timegrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/listgrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/listgrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/event-calendar.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/event-calendar.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/locales-all.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/locales-all.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/moment.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/calendar-main.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/calendar-main.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/daygrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/daygrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/timegrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/timegrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/listgrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/listgrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/event-calendar.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/event-calendar.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -781,14 +781,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/reading-progress.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/reading-progress.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/reading-progress.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/reading-progress.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
@@ -800,14 +800,14 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/table-of-content.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/table-of-content.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/table-of-content.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/table-of-content.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
