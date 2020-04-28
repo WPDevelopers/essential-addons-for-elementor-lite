@@ -13,7 +13,6 @@ const cssEntry = (context, minified) => {
 			"timegrid.min.css",
 			"listgrid.min.css",
 		],
-		edit: [],
 	};
 
 	lib[context].forEach((file) => {
@@ -47,7 +46,6 @@ const jsEntry = (context, minified) => {
 			"timegrid.min.js",
 			"listgrid.min.js",
 		],
-		edit: ["tinymce.min.js", "tinymce-theme.min.js", "tinymce-lists.min.js", "tinymce-link.min.js", "tinymce-autolink.min.js"],
 	};
 
 	lib[context].forEach((file) => {
@@ -91,24 +89,6 @@ concat(jsEntry("view", true)).then((result) => {
 // lib.view.js
 concat(jsEntry("view", false)).then((result) => {
 	fs.writeFile("./assets/front-end/js/lib-view/lib-view.js", result, (err) => {
-		if (err) {
-			return console.log(err);
-		}
-	});
-});
-
-// lib.edit.min.js
-concat(jsEntry("edit", true)).then((result) => {
-	fs.writeFile("./assets/front-end/js/lib-edit/lib-edit.min.js", result, (err) => {
-		if (err) {
-			return console.log(err);
-		}
-	});
-});
-
-// lib.edit.js
-concat(jsEntry("view", false)).then((result) => {
-	fs.writeFile("./assets/front-end/js/lib-edit/lib-edit.js", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}

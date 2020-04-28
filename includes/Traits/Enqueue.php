@@ -36,8 +36,8 @@ trait Enqueue
         );
 
         wp_register_script(
-            'eael-lib-edit',
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/lib-edit/lib-edit.min.js'),
+            'eael-tinymce',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/lib-edit/tinymce/tinymce.min.js'),
             ['jquery'],
             time(),
             true
@@ -158,7 +158,7 @@ trait Enqueue
                     EAEL_PLUGIN_VERSION
                 );
 
-                wp_enqueue_script('eael-lib-edit');
+                wp_enqueue_script('eael-tinymce');
 
                 wp_enqueue_script(
                     'eael-cache-edit',
@@ -177,7 +177,7 @@ trait Enqueue
                 wp_enqueue_style('eael-lib-view');
                 wp_enqueue_style('eael-view');
                 wp_enqueue_script('eael-lib-view');
-                wp_enqueue_script('eael-lib-edit');
+                wp_enqueue_script('eael-tinymce');
                 wp_enqueue_script('eael-view');
                 wp_enqueue_script('eael-edit');
             }

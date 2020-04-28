@@ -311,27 +311,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce.min.js',
-                        'type'    => 'lib',
-                        'context' => 'edit',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-theme.min.js',
-                        'type'    => 'lib',
-                        'context' => 'edit',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-lists.min.js',
-                        'type'    => 'lib',
-                        'context' => 'edit',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-link.min.js',
-                        'type'    => 'lib',
-                        'context' => 'edit',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce-autolink.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce/tinymce.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
