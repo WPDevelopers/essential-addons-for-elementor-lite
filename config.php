@@ -259,9 +259,6 @@ $config = [
             'dependency' => [
                 'css' => [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/feature-list/index.min.css',
-                ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/feature-list/index.min.js',
                 ]
             ],
         ],
