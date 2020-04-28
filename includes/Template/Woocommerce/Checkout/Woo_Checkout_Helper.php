@@ -258,13 +258,13 @@ trait Woo_Checkout_Helper {
 		$class = '';
 		$status = true;
 		if('no' === get_option( 'woocommerce_enable_checkout_login_reminder')){
-            $status = false;
+            return '';
         }elseif(\Elementor\Plugin::$instance->editor->is_edit_mode() && 'yes' === $settings['ea_section_woo_login_show']){
 		    $class = 'woo-checkout-login-editor';
 		}elseif(!is_user_logged_in()){
             $class = 'eael-woo-checkout-login-page';
         }else{
-            $status = false;
+            return '';
         }
         ob_start();
 		?>
