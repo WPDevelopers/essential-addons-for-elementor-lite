@@ -751,7 +751,7 @@ class Pricing_Table extends Widget_Base
                     ],
                 ],
                 'default' => 'center',
-                'prefix_class' => 'eael-pricing-content-align-',
+                'prefix_class' => 'eael-pricing-content-align%s-',
             ]
         );
 
@@ -915,7 +915,7 @@ class Pricing_Table extends Widget_Base
 					'{{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item .header' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
-                    'eael_pricing_table_style' => ['style-5'],
+                    'eael_pricing_table_style' => apply_filters( 'eael_pricing_table_header_radius_supported_style', [] ),
                 ],
 			]
 		);
