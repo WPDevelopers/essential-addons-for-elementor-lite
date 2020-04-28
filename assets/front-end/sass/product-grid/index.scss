@@ -283,8 +283,8 @@
                                 &:after {
                                     content: "\f110";
                                     display: inline-block;
-                                    font: normal normal normal 14px/1
-                                        FontAwesome;
+									font-weight: normal;
+									font-family: "Font Awesome 5 Free";
                                     font-size: 14px;
                                     line-height: 38px;
                                     color: #fff;
@@ -304,7 +304,8 @@
 
                             &:after {
                                 content: "\f06e";
-                                font: normal normal normal 14px/1 FontAwesome;
+								font-weight: normal;
+								font-family: "Font Awesome 5 Free";
                                 font-size: 14px;
                                 line-height: 38px;
                                 color: #fff;
@@ -390,6 +391,27 @@
             }
         }
     }
+}
+
+.eael-product-grid {
+	.woocommerce {
+		.products {
+			.product {
+				.button.add_to_cart_button {
+					position: relative;
+					&:before {
+						padding-right: 8px;
+						content: "\f217";
+						font-size: 14px;
+						text-rendering: auto;
+						-webkit-font-smoothing: antialiased;
+						vertical-align: middle;
+						font-family: "Font Awesome 5 Free";
+					}
+				}
+			}
+		}
+	}
 }
 
 @media only screen and (min-width: 1025px) {
