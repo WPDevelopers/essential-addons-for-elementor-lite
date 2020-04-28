@@ -139,7 +139,8 @@ trait Generator
             return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
         }
 
-        return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
+        // TODO: $lib['edit']
+        return array_unique(array_merge($lib['view'], $self['general'], $self['edit'], $self['view']));
     }
 
     /**
@@ -161,8 +162,6 @@ trait Generator
         // collect library scripts & styles
         $js_paths  = $this->generate_dependency($elements, 'js', $context);
         $css_paths = $this->generate_dependency($elements, 'css', $context);
-
-        error_log(print_r($js_paths, 1));
 
         // combine files
         $this->combine_files($css_paths, ($file_name ? $file_name : 'eael') . '.min.css');
