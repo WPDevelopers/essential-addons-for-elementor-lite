@@ -110,7 +110,14 @@ trait Generator
     public function generate_dependency(array $elements, $type, $context)
     {
         $lib  = ['view' => [], 'edit' => []];
-        $self = ['view' => [], 'edit' => []];
+        $self = ['general' => [], 'view' => [], 'edit' => []];
+
+        if ($type == 'js') {
+            $self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
+            $self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
+        } else if ($type == 'css') {
+            $self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
+        }
 
         foreach ($elements as $element) {
             if (isset($this->registered_elements[$element])) {
@@ -129,10 +136,10 @@ trait Generator
         }
 
         if ($context == 'view') {
-            return array_unique(array_merge($lib['view'], $self['view']));
+            return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
         }
 
-        return array_unique(array_merge($lib['view'], $lib['edit'], $self['view'], $self['edit']));
+        return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
     }
 
     /**
@@ -151,17 +158,11 @@ trait Generator
             wp_mkdir_p(EAEL_ASSET_PATH);
         }
 
-        // collect eael js
-        $js_paths = array(
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/view/general.min.js',
-        );
-        $css_paths = array(
-            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/view/general.min.css",
-        );
-
         // collect library scripts & styles
-        $js_paths  = array_merge($js_paths, $this->generate_dependency($elements, 'js', $context));
-        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css', $context));
+        $js_paths  = $this->generate_dependency($elements, 'js', $context);
+        $css_paths = $this->generate_dependency($elements, 'css', $context);
+
+        error_log(print_r($js_paths, 1));
 
         // combine files
         $this->combine_files($css_paths, ($file_name ? $file_name : 'eael') . '.min.css');
