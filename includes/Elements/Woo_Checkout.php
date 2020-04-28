@@ -71,7 +71,7 @@ class Woo_Checkout extends Widget_Base {
 	 *
 	 */
 	public function get_keywords() {
-		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'multi Step Checkout', 'split Checkout', 'ea', 'essential addons' ];
+		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'ea', 'essential addons' ];
 	}
 
 	public function get_custom_help_url() {
@@ -123,19 +123,6 @@ class Woo_Checkout extends Widget_Base {
 				]),
 			]
 		);
-
-		if (!apply_filters('eael/pro_enabled', false)) {
-			$this->add_control(
-				'eael_woo_checkout_pro_enable_warning',
-				[
-					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
-					'type' => Controls_Manager::HEADING,
-					'condition' => [
-						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
-					],
-				]
-			);
-		}
 
 		do_action('eael_woo_checkout_pro_enabled_general_settings', $this);
 
@@ -655,7 +642,7 @@ class Woo_Checkout extends Widget_Base {
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
-                    'ea_woo_checkout_layout' => 'split',
+                    'ea_woo_checkout_layout!' => 'default',
                 ],
             ]
         );
@@ -665,7 +652,7 @@ class Woo_Checkout extends Widget_Base {
                 'name' => 'ea_woo_checkout_order_review_total_typo',
                 'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total',
                 'condition' => [
-                    'ea_woo_checkout_layout' => 'split',
+                    'ea_woo_checkout_layout!' => 'default',
                 ],
             ]
         );
@@ -679,7 +666,7 @@ class Woo_Checkout extends Widget_Base {
                     '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'ea_woo_checkout_layout' => 'split',
+                    'ea_woo_checkout_layout!' => 'default',
                 ],
             ]
         );
