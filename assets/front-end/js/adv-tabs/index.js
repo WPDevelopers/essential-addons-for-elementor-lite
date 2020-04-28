@@ -69,7 +69,7 @@ var AdvanceTabHandler = function($scope, $) {
             $paGallery = tabsContent.eq(currentTabIndex).find('.premium-gallery-container');
 
         if($postGridGallery.length) {
-            $postGridGallery.isotope();
+            $postGridGallery.isotope("layout");
         }
 
         if($twitterfeedGallery.length) {

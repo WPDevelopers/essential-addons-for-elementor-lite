@@ -2706,7 +2706,8 @@ class Filterable_Gallery extends Widget_Base
         $sorter_class = str_replace('&', 'and', $sorter_class);
         $sorter_class = str_replace('amp;', '', $sorter_class);
         $sorter_class = str_replace('/', 'slash', $sorter_class);
-        
+        $sorter_class = str_replace("'", 'apostrophe', $sorter_class);
+        $sorter_class = str_replace('"', 'apostrophe', $sorter_class);
         $sorter_class = str_replace(',-', ' eael-cf-', $sorter_class);
         $sorter_class = str_replace('.', '-', $sorter_class);
         $sorter_class = str_replace(',', ' ', $sorter_class);
@@ -2853,7 +2854,11 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
-            $gallery_store[$counter]['video_link'] = $gallery['eael_fg_gallery_item_video_link'];
+
+            preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
+            $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
+            $gallery_store[$counter]['video_link'] = $video_link;
+
             $gallery_store[$counter]['show_lightbox'] = $gallery['eael_fg_gallery_lightbox'];
             $gallery_store[$counter]['play_icon'] = $gallery['fg_video_gallery_play_icon'];
             $gallery_store[$counter]['controls'] = $this->sorter_class($gallery['eael_fg_gallery_control_name']);
@@ -3300,13 +3305,7 @@ class Filterable_Gallery extends Widget_Base
                         image: {
                             titleSrc: function(item) {
                                 if (mfpCaption == "yes") {
-                                    return item.el
-                                        .parent()
-                                        .parent()
-                                        .parent()
-                                        .parent()
-                                        .find(".fg-item-title")
-                                        .html();
+                                    return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parent('.eael-gallery-grid-item').find('.fg-item-title').html();
                                 }
                             }
                         }
