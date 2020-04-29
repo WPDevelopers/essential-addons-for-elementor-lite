@@ -685,6 +685,6 @@ class advancedDataTableEdit {
 	}
 }
 
-ea.hooks.addAction("advancedDataTable.initEdit", "ea", () => {
+ea.hooks.addAction("editMode.init", "ea", () => {
 	new advancedDataTableEdit();
 });

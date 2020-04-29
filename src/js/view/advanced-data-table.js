@@ -3,9 +3,9 @@ class advancedDataTable {
 		// register hooks
 		elementorFrontend.hooks.addAction("frontend/element_ready/eael-advanced-data-table.default", this.initFrontend.bind(this));
 
-		if (ea.isEditMode) {
-			ea.hooks.doAction("advancedDataTable.initEdit");
-		}
+		// if (ea.isEditMode) {
+		// 	ea.hooks.doAction("advancedDataTable.initEdit");
+		// }
 	}
 
 	// init frontend features
