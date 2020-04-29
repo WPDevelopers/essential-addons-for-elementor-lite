@@ -539,7 +539,6 @@ trait Helper
                 [
                     'label' => __('Title Length', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '10',
                     'condition' => [
                         'eael_show_title' => 'yes'
                     ],
@@ -565,7 +564,7 @@ trait Helper
                 [
                     'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '10',
+                    'default'   => 10,
                     'condition' => [
                         'eael_show_excerpt' => 'yes',
                         'eael_content_timeline_choose' => 'dynamic',
@@ -592,7 +591,7 @@ trait Helper
                 [
                     'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::NUMBER,
-                    'default' => '10',
+                    'default'   => 10,
                     'condition' => [
                         'eael_show_excerpt' => 'yes',
                     ],
