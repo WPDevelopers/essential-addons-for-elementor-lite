@@ -129,6 +129,7 @@
   padding: 5px 15px;
 }
 
+.eael-pricing .eael-pricing-item .eael-pricing-image.ribbon-4:before,
 .eael-pricing .eael-pricing-item.ribbon-4:before {
   content: 'Featured';
   position: absolute;
@@ -147,6 +148,9 @@
   white-space: nowrap;
 }
 
+.eael-pricing
+.eael-pricing-item
+.eael-pricing-image.ribbon-left.ribbon-4:before,
 .eael-pricing .eael-pricing-item.ribbon-left.ribbon-4:before {
   right: auto;
   left: -55px;
