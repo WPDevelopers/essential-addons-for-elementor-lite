@@ -1,6 +1,3 @@
-/*----------------------------*/
-/* 07. Team Members Styles
-/*----------------------------*/
 .eael-team-item {
 	overflow: hidden;
 	position: relative;
@@ -11,12 +8,12 @@
 	height: auto;
 }
 
-.eael-team-image>figure {
+.eael-team-image > figure {
 	margin: 0;
 	padding: 0;
 }
 
-.eael-team-image>figure img {
+.eael-team-image > figure img {
 	display: block;
 	margin: 0 auto;
 }
@@ -47,7 +44,7 @@
 	line-height: 1.5;
 }
 
-.eael-team-content>ul {
+.eael-team-content > ul {
 	margin: 0;
 	padding: 0;
 }
@@ -109,12 +106,12 @@
 	opacity: 1;
 }
 
-.eael-team-member-social-link>a {
+.eael-team-member-social-link > a {
 	display: inline-block;
 	-webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
 	transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
-.eael-team-member-social-link>a:focus {
+.eael-team-member-social-link > a:focus {
 	outline: none;
 }
