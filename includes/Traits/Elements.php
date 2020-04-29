@@ -374,6 +374,7 @@ trait Elements
                     $sticky_scroll = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_sticky_scroll');
                     $hide_mobile = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_hide_in_mobile');
                     $content_selector = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_ext_toc_content_selector');
+                    $exclude_selector = $this->eael_get_extension_settings($page_settings_model, $global_settings, 'eael_ext_table_of_content', 'eael_toc_exclude_selector');
 
                     $el_class .= ($position == 'right') ? ' eael-toc-right' : ' ';
                     $el_class .= ($close_bt_text_style == 'bottom_to_top') ? ' eael-bottom-to-top' : ' ';
@@ -391,7 +392,7 @@ trait Elements
                         $icon = $icon_check['value'];
                     }
 
-                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
+                    $table_of_content_html .= "<div data-eaelTocTag='{$support_tag}' data-contentSelector='{$content_selector}' data-excludeSelector='{$exclude_selector}' data-stickyScroll='{$sticky_scroll['size']}' data-titleUrl='{$title_url}' id='eael-toc' class='{$el_class} '>
                         <div class='eael-toc-header'>
                                 <span class='eael-toc-close'>×</span>
                                 <h2 class='eael-toc-title'>{$toc_title}</h2>

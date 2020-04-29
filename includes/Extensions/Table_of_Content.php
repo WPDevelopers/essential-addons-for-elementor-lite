@@ -112,6 +112,14 @@ class Table_of_Content
             ]
         );
 
+        $element->start_controls_tabs( 'eael_toc_include_exclude', [ 'separator' => 'before' ] );
+
+        $element->start_controls_tab( 'eael_toc_include',
+            [
+                'label' => __( 'Include', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
         $element->add_control(
             'eael_ext_toc_supported_heading_tag',
             [
@@ -153,6 +161,29 @@ class Table_of_Content
                 ],
             ]
         );
+
+        $element->end_controls_tab(); // include
+
+        $element->start_controls_tab( 'eael_toc_exclude',
+            [
+                'label' => __( 'Exclude', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $element->add_control(
+            'eael_toc_exclude_selector',
+            [
+                'label' => __( 'Exclude By Selector', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::TEXT,
+                'description' => __( 'CSS selectors, in a comma-separated list', 'essential-addons-for-elementor-lite' ),
+                'default' => [],
+                'label_block' => true
+            ]
+        );
+
+        $element->end_controls_tab(); // exclude
+
+        $element->end_controls_tabs(); // include_exclude_tags
 
         $element->add_control(
             'eael_ext_toc_collapse_sub_heading',

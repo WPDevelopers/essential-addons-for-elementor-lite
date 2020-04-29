@@ -269,1274 +269,6 @@
 
 });
 
-!function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
-!function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
-
-/*!
- * Morphext - Text Rotating Plugin for jQuery
- * https://github.com/MrSaints/Morphext
- *
- * Built on jQuery Boilerplate
- * http://jqueryboilerplate.com/
- *
- * Copyright 2014 Ian Lai and other contributors
- * Released under the MIT license
- * http://ian.mit-license.org/
- */
-
-/*eslint-env browser */
-/*global jQuery:false */
-/*eslint-disable no-underscore-dangle */
-
-(function ($) {
-    "use strict";
-
-    var pluginName = "Morphext",
-        defaults = {
-            animation: "bounceIn",
-            separator: ",",
-            speed: 2000,
-            complete: $.noop
-        };
-
-    function Plugin (element, options) {
-        this.element = $(element);
-
-        this.settings = $.extend({}, defaults, options);
-        this._defaults = defaults;
-        this._init();
-    }
-
-    Plugin.prototype = {
-        _init: function () {
-            var $that = this;
-            this.phrases = [];
-
-            this.element.addClass("morphext");
-
-            $.each(this.element.text().split(this.settings.separator), function (key, value) {
-                $that.phrases.push($.trim(value));
-            });
-
-            this.index = -1;
-            this.animate();
-            this.start();
-        },
-        animate: function () {
-            this.index = ++this.index % this.phrases.length;
-            this.element[0].innerHTML = "<span class=\"animated " + this.settings.animation + "\">" + this.phrases[this.index] + "</span>";
-
-            if ($.isFunction(this.settings.complete)) {
-                this.settings.complete.call(this);
-            }
-        },
-        start: function () {
-            var $that = this;
-            this._interval = setInterval(function () {
-                $that.animate();
-            }, this.settings.speed);
-        },
-        stop: function () {
-            this._interval = clearInterval(this._interval);
-        }
-    };
-
-    $.fn[pluginName] = function (options) {
-        return this.each(function() {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
-            }
-        });
-    };
-})(jQuery);
-
-/*!
- * 
- *   typed.js - A JavaScript Typing Animation Library
- *   Author: Matt Boldt <me@mattboldt.com>
- *   Version: v2.0.9
- *   Url: https://github.com/mattboldt/typed.js
- *   License(s): MIT
- * 
- */
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["Typed"] = factory();
-	else
-		root["Typed"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var _initializerJs = __webpack_require__(1);
-	
-	var _htmlParserJs = __webpack_require__(3);
-	
-	/**
-	 * Welcome to Typed.js!
-	 * @param {string} elementId HTML element ID _OR_ HTML element
-	 * @param {object} options options object
-	 * @returns {object} a new Typed object
-	 */
-	
-	var Typed = (function () {
-	  function Typed(elementId, options) {
-	    _classCallCheck(this, Typed);
-	
-	    // Initialize it up
-	    _initializerJs.initializer.load(this, options, elementId);
-	    // All systems go!
-	    this.begin();
-	  }
-	
-	  /**
-	   * Toggle start() and stop() of the Typed instance
-	   * @public
-	   */
-	
-	  _createClass(Typed, [{
-	    key: 'toggle',
-	    value: function toggle() {
-	      this.pause.status ? this.start() : this.stop();
-	    }
-	
-	    /**
-	     * Stop typing / backspacing and enable cursor blinking
-	     * @public
-	     */
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      if (this.typingComplete) return;
-	      if (this.pause.status) return;
-	      this.toggleBlinking(true);
-	      this.pause.status = true;
-	      this.options.onStop(this.arrayPos, this);
-	    }
-	
-	    /**
-	     * Start typing / backspacing after being stopped
-	     * @public
-	     */
-	  }, {
-	    key: 'start',
-	    value: function start() {
-	      if (this.typingComplete) return;
-	      if (!this.pause.status) return;
-	      this.pause.status = false;
-	      if (this.pause.typewrite) {
-	        this.typewrite(this.pause.curString, this.pause.curStrPos);
-	      } else {
-	        this.backspace(this.pause.curString, this.pause.curStrPos);
-	      }
-	      this.options.onStart(this.arrayPos, this);
-	    }
-	
-	    /**
-	     * Destroy this instance of Typed
-	     * @public
-	     */
-	  }, {
-	    key: 'destroy',
-	    value: function destroy() {
-	      this.reset(false);
-	      this.options.onDestroy(this);
-	    }
-	
-	    /**
-	     * Reset Typed and optionally restarts
-	     * @param {boolean} restart
-	     * @public
-	     */
-	  }, {
-	    key: 'reset',
-	    value: function reset() {
-	      var restart = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-	
-	      clearInterval(this.timeout);
-	      this.replaceText('');
-	      if (this.cursor && this.cursor.parentNode) {
-	        this.cursor.parentNode.removeChild(this.cursor);
-	        this.cursor = null;
-	      }
-	      this.strPos = 0;
-	      this.arrayPos = 0;
-	      this.curLoop = 0;
-	      if (restart) {
-	        this.insertCursor();
-	        this.options.onReset(this);
-	        this.begin();
-	      }
-	    }
-	
-	    /**
-	     * Begins the typing animation
-	     * @private
-	     */
-	  }, {
-	    key: 'begin',
-	    value: function begin() {
-	      var _this = this;
-	
-	      this.typingComplete = false;
-	      this.shuffleStringsIfNeeded(this);
-	      this.insertCursor();
-	      if (this.bindInputFocusEvents) this.bindFocusEvents();
-	      this.timeout = setTimeout(function () {
-	        // Check if there is some text in the element, if yes start by backspacing the default message
-	        if (!_this.currentElContent || _this.currentElContent.length === 0) {
-	          _this.typewrite(_this.strings[_this.sequence[_this.arrayPos]], _this.strPos);
-	        } else {
-	          // Start typing
-	          _this.backspace(_this.currentElContent, _this.currentElContent.length);
-	        }
-	      }, this.startDelay);
-	    }
-	
-	    /**
-	     * Called for each character typed
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'typewrite',
-	    value: function typewrite(curString, curStrPos) {
-	      var _this2 = this;
-	
-	      if (this.fadeOut && this.el.classList.contains(this.fadeOutClass)) {
-	        this.el.classList.remove(this.fadeOutClass);
-	        if (this.cursor) this.cursor.classList.remove(this.fadeOutClass);
-	      }
-	
-	      var humanize = this.humanizer(this.typeSpeed);
-	      var numChars = 1;
-	
-	      if (this.pause.status === true) {
-	        this.setPauseStatus(curString, curStrPos, true);
-	        return;
-	      }
-	
-	      // contain typing function in a timeout humanize'd delay
-	      this.timeout = setTimeout(function () {
-	        // skip over any HTML chars
-	        curStrPos = _htmlParserJs.htmlParser.typeHtmlChars(curString, curStrPos, _this2);
-	
-	        var pauseTime = 0;
-	        var substr = curString.substr(curStrPos);
-	        // check for an escape character before a pause value
-	        // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
-	        // single ^ are removed from string
-	        if (substr.charAt(0) === '^') {
-	          if (/^\^\d+/.test(substr)) {
-	            var skip = 1; // skip at least 1
-	            substr = /\d+/.exec(substr)[0];
-	            skip += substr.length;
-	            pauseTime = parseInt(substr);
-	            _this2.temporaryPause = true;
-	            _this2.options.onTypingPaused(_this2.arrayPos, _this2);
-	            // strip out the escape character and pause value so they're not printed
-	            curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
-	            _this2.toggleBlinking(true);
-	          }
-	        }
-	
-	        // check for skip characters formatted as
-	        // "this is a `string to print NOW` ..."
-	        if (substr.charAt(0) === '`') {
-	          while (curString.substr(curStrPos + numChars).charAt(0) !== '`') {
-	            numChars++;
-	            if (curStrPos + numChars > curString.length) break;
-	          }
-	          // strip out the escape characters and append all the string in between
-	          var stringBeforeSkip = curString.substring(0, curStrPos);
-	          var stringSkipped = curString.substring(stringBeforeSkip.length + 1, curStrPos + numChars);
-	          var stringAfterSkip = curString.substring(curStrPos + numChars + 1);
-	          curString = stringBeforeSkip + stringSkipped + stringAfterSkip;
-	          numChars--;
-	        }
-	
-	        // timeout for any pause after a character
-	        _this2.timeout = setTimeout(function () {
-	          // Accounts for blinking while paused
-	          _this2.toggleBlinking(false);
-	
-	          // We're done with this sentence!
-	          if (curStrPos >= curString.length) {
-	            _this2.doneTyping(curString, curStrPos);
-	          } else {
-	            _this2.keepTyping(curString, curStrPos, numChars);
-	          }
-	          // end of character pause
-	          if (_this2.temporaryPause) {
-	            _this2.temporaryPause = false;
-	            _this2.options.onTypingResumed(_this2.arrayPos, _this2);
-	          }
-	        }, pauseTime);
-	
-	        // humanized value for typing
-	      }, humanize);
-	    }
-	
-	    /**
-	     * Continue to the next string & begin typing
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'keepTyping',
-	    value: function keepTyping(curString, curStrPos, numChars) {
-	      // call before functions if applicable
-	      if (curStrPos === 0) {
-	        this.toggleBlinking(false);
-	        this.options.preStringTyped(this.arrayPos, this);
-	      }
-	      // start typing each new char into existing string
-	      // curString: arg, this.el.html: original text inside element
-	      curStrPos += numChars;
-	      var nextString = curString.substr(0, curStrPos);
-	      this.replaceText(nextString);
-	      // loop the function
-	      this.typewrite(curString, curStrPos);
-	    }
-	
-	    /**
-	     * We're done typing all strings
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'doneTyping',
-	    value: function doneTyping(curString, curStrPos) {
-	      var _this3 = this;
-	
-	      // fires callback function
-	      this.options.onStringTyped(this.arrayPos, this);
-	      this.toggleBlinking(true);
-	      // is this the final string
-	      if (this.arrayPos === this.strings.length - 1) {
-	        // callback that occurs on the last typed string
-	        this.complete();
-	        // quit if we wont loop back
-	        if (this.loop === false || this.curLoop === this.loopCount) {
-	          return;
-	        }
-	      }
-	      this.timeout = setTimeout(function () {
-	        _this3.backspace(curString, curStrPos);
-	      }, this.backDelay);
-	    }
-	
-	    /**
-	     * Backspaces 1 character at a time
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'backspace',
-	    value: function backspace(curString, curStrPos) {
-	      var _this4 = this;
-	
-	      if (this.pause.status === true) {
-	        this.setPauseStatus(curString, curStrPos, true);
-	        return;
-	      }
-	      if (this.fadeOut) return this.initFadeOut();
-	
-	      this.toggleBlinking(false);
-	      var humanize = this.humanizer(this.backSpeed);
-	
-	      this.timeout = setTimeout(function () {
-	        curStrPos = _htmlParserJs.htmlParser.backSpaceHtmlChars(curString, curStrPos, _this4);
-	        // replace text with base text + typed characters
-	        var curStringAtPosition = curString.substr(0, curStrPos);
-	        _this4.replaceText(curStringAtPosition);
-	
-	        // if smartBack is enabled
-	        if (_this4.smartBackspace) {
-	          // the remaining part of the current string is equal of the same part of the new string
-	          var nextString = _this4.strings[_this4.arrayPos + 1];
-	          if (nextString && curStringAtPosition === nextString.substr(0, curStrPos)) {
-	            _this4.stopNum = curStrPos;
-	          } else {
-	            _this4.stopNum = 0;
-	          }
-	        }
-	
-	        // if the number (id of character in current string) is
-	        // less than the stop number, keep going
-	        if (curStrPos > _this4.stopNum) {
-	          // subtract characters one by one
-	          curStrPos--;
-	          // loop the function
-	          _this4.backspace(curString, curStrPos);
-	        } else if (curStrPos <= _this4.stopNum) {
-	          // if the stop number has been reached, increase
-	          // array position to next string
-	          _this4.arrayPos++;
-	          // When looping, begin at the beginning after backspace complete
-	          if (_this4.arrayPos === _this4.strings.length) {
-	            _this4.arrayPos = 0;
-	            _this4.options.onLastStringBackspaced();
-	            _this4.shuffleStringsIfNeeded();
-	            _this4.begin();
-	          } else {
-	            _this4.typewrite(_this4.strings[_this4.sequence[_this4.arrayPos]], curStrPos);
-	          }
-	        }
-	        // humanized value for typing
-	      }, humanize);
-	    }
-	
-	    /**
-	     * Full animation is complete
-	     * @private
-	     */
-	  }, {
-	    key: 'complete',
-	    value: function complete() {
-	      this.options.onComplete(this);
-	      if (this.loop) {
-	        this.curLoop++;
-	      } else {
-	        this.typingComplete = true;
-	      }
-	    }
-	
-	    /**
-	     * Has the typing been stopped
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @param {boolean} isTyping
-	     * @private
-	     */
-	  }, {
-	    key: 'setPauseStatus',
-	    value: function setPauseStatus(curString, curStrPos, isTyping) {
-	      this.pause.typewrite = isTyping;
-	      this.pause.curString = curString;
-	      this.pause.curStrPos = curStrPos;
-	    }
-	
-	    /**
-	     * Toggle the blinking cursor
-	     * @param {boolean} isBlinking
-	     * @private
-	     */
-	  }, {
-	    key: 'toggleBlinking',
-	    value: function toggleBlinking(isBlinking) {
-	      if (!this.cursor) return;
-	      // if in paused state, don't toggle blinking a 2nd time
-	      if (this.pause.status) return;
-	      if (this.cursorBlinking === isBlinking) return;
-	      this.cursorBlinking = isBlinking;
-	      if (isBlinking) {
-	        this.cursor.classList.add('typed-cursor--blink');
-	      } else {
-	        this.cursor.classList.remove('typed-cursor--blink');
-	      }
-	    }
-	
-	    /**
-	     * Speed in MS to type
-	     * @param {number} speed
-	     * @private
-	     */
-	  }, {
-	    key: 'humanizer',
-	    value: function humanizer(speed) {
-	      return Math.round(Math.random() * speed / 2) + speed;
-	    }
-	
-	    /**
-	     * Shuffle the sequence of the strings array
-	     * @private
-	     */
-	  }, {
-	    key: 'shuffleStringsIfNeeded',
-	    value: function shuffleStringsIfNeeded() {
-	      if (!this.shuffle) return;
-	      this.sequence = this.sequence.sort(function () {
-	        return Math.random() - 0.5;
-	      });
-	    }
-	
-	    /**
-	     * Adds a CSS class to fade out current string
-	     * @private
-	     */
-	  }, {
-	    key: 'initFadeOut',
-	    value: function initFadeOut() {
-	      var _this5 = this;
-	
-	      this.el.className += ' ' + this.fadeOutClass;
-	      if (this.cursor) this.cursor.className += ' ' + this.fadeOutClass;
-	      return setTimeout(function () {
-	        _this5.arrayPos++;
-	        _this5.replaceText('');
-	
-	        // Resets current string if end of loop reached
-	        if (_this5.strings.length > _this5.arrayPos) {
-	          _this5.typewrite(_this5.strings[_this5.sequence[_this5.arrayPos]], 0);
-	        } else {
-	          _this5.typewrite(_this5.strings[0], 0);
-	          _this5.arrayPos = 0;
-	        }
-	      }, this.fadeOutDelay);
-	    }
-	
-	    /**
-	     * Replaces current text in the HTML element
-	     * depending on element type
-	     * @param {string} str
-	     * @private
-	     */
-	  }, {
-	    key: 'replaceText',
-	    value: function replaceText(str) {
-	      if (this.attr) {
-	        this.el.setAttribute(this.attr, str);
-	      } else {
-	        if (this.isInput) {
-	          this.el.value = str;
-	        } else if (this.contentType === 'html') {
-	          this.el.innerHTML = str;
-	        } else {
-	          this.el.textContent = str;
-	        }
-	      }
-	    }
-	
-	    /**
-	     * If using input elements, bind focus in order to
-	     * start and stop the animation
-	     * @private
-	     */
-	  }, {
-	    key: 'bindFocusEvents',
-	    value: function bindFocusEvents() {
-	      var _this6 = this;
-	
-	      if (!this.isInput) return;
-	      this.el.addEventListener('focus', function (e) {
-	        _this6.stop();
-	      });
-	      this.el.addEventListener('blur', function (e) {
-	        if (_this6.el.value && _this6.el.value.length !== 0) {
-	          return;
-	        }
-	        _this6.start();
-	      });
-	    }
-	
-	    /**
-	     * On init, insert the cursor element
-	     * @private
-	     */
-	  }, {
-	    key: 'insertCursor',
-	    value: function insertCursor() {
-	      if (!this.showCursor) return;
-	      if (this.cursor) return;
-	      this.cursor = document.createElement('span');
-	      this.cursor.className = 'typed-cursor';
-	      this.cursor.innerHTML = this.cursorChar;
-	      this.el.parentNode && this.el.parentNode.insertBefore(this.cursor, this.el.nextSibling);
-	    }
-	  }]);
-	
-	  return Typed;
-	})();
-	
-	exports['default'] = Typed;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var _defaultsJs = __webpack_require__(2);
-	
-	var _defaultsJs2 = _interopRequireDefault(_defaultsJs);
-	
-	/**
-	 * Initialize the Typed object
-	 */
-	
-	var Initializer = (function () {
-	  function Initializer() {
-	    _classCallCheck(this, Initializer);
-	  }
-	
-	  _createClass(Initializer, [{
-	    key: 'load',
-	
-	    /**
-	     * Load up defaults & options on the Typed instance
-	     * @param {Typed} self instance of Typed
-	     * @param {object} options options object
-	     * @param {string} elementId HTML element ID _OR_ instance of HTML element
-	     * @private
-	     */
-	
-	    value: function load(self, options, elementId) {
-	      // chosen element to manipulate text
-	      if (typeof elementId === 'string') {
-	        self.el = document.querySelector(elementId);
-	      } else {
-	        self.el = elementId;
-	      }
-	
-	      self.options = _extends({}, _defaultsJs2['default'], options);
-	
-	      // attribute to type into
-	      self.isInput = self.el.tagName.toLowerCase() === 'input';
-	      self.attr = self.options.attr;
-	      self.bindInputFocusEvents = self.options.bindInputFocusEvents;
-	
-	      // show cursor
-	      self.showCursor = self.isInput ? false : self.options.showCursor;
-	
-	      // custom cursor
-	      self.cursorChar = self.options.cursorChar;
-	
-	      // Is the cursor blinking
-	      self.cursorBlinking = true;
-	
-	      // text content of element
-	      self.elContent = self.attr ? self.el.getAttribute(self.attr) : self.el.textContent;
-	
-	      // html or plain text
-	      self.contentType = self.options.contentType;
-	
-	      // typing speed
-	      self.typeSpeed = self.options.typeSpeed;
-	
-	      // add a delay before typing starts
-	      self.startDelay = self.options.startDelay;
-	
-	      // backspacing speed
-	      self.backSpeed = self.options.backSpeed;
-	
-	      // only backspace what doesn't match the previous string
-	      self.smartBackspace = self.options.smartBackspace;
-	
-	      // amount of time to wait before backspacing
-	      self.backDelay = self.options.backDelay;
-	
-	      // Fade out instead of backspace
-	      self.fadeOut = self.options.fadeOut;
-	      self.fadeOutClass = self.options.fadeOutClass;
-	      self.fadeOutDelay = self.options.fadeOutDelay;
-	
-	      // variable to check whether typing is currently paused
-	      self.isPaused = false;
-	
-	      // input strings of text
-	      self.strings = self.options.strings.map(function (s) {
-	        return s.trim();
-	      });
-	
-	      // div containing strings
-	      if (typeof self.options.stringsElement === 'string') {
-	        self.stringsElement = document.querySelector(self.options.stringsElement);
-	      } else {
-	        self.stringsElement = self.options.stringsElement;
-	      }
-	
-	      if (self.stringsElement) {
-	        self.strings = [];
-	        self.stringsElement.style.display = 'none';
-	        var strings = Array.prototype.slice.apply(self.stringsElement.children);
-	        var stringsLength = strings.length;
-	
-	        if (stringsLength) {
-	          for (var i = 0; i < stringsLength; i += 1) {
-	            var stringEl = strings[i];
-	            self.strings.push(stringEl.innerHTML.trim());
-	          }
-	        }
-	      }
-	
-	      // character number position of current string
-	      self.strPos = 0;
-	
-	      // current array position
-	      self.arrayPos = 0;
-	
-	      // index of string to stop backspacing on
-	      self.stopNum = 0;
-	
-	      // Looping logic
-	      self.loop = self.options.loop;
-	      self.loopCount = self.options.loopCount;
-	      self.curLoop = 0;
-	
-	      // shuffle the strings
-	      self.shuffle = self.options.shuffle;
-	      // the order of strings
-	      self.sequence = [];
-	
-	      self.pause = {
-	        status: false,
-	        typewrite: true,
-	        curString: '',
-	        curStrPos: 0
-	      };
-	
-	      // When the typing is complete (when not looped)
-	      self.typingComplete = false;
-	
-	      // Set the order in which the strings are typed
-	      for (var i in self.strings) {
-	        self.sequence[i] = i;
-	      }
-	
-	      // If there is some text in the element
-	      self.currentElContent = this.getCurrentElContent(self);
-	
-	      self.autoInsertCss = self.options.autoInsertCss;
-	
-	      this.appendAnimationCss(self);
-	    }
-	  }, {
-	    key: 'getCurrentElContent',
-	    value: function getCurrentElContent(self) {
-	      var elContent = '';
-	      if (self.attr) {
-	        elContent = self.el.getAttribute(self.attr);
-	      } else if (self.isInput) {
-	        elContent = self.el.value;
-	      } else if (self.contentType === 'html') {
-	        elContent = self.el.innerHTML;
-	      } else {
-	        elContent = self.el.textContent;
-	      }
-	      return elContent;
-	    }
-	  }, {
-	    key: 'appendAnimationCss',
-	    value: function appendAnimationCss(self) {
-	      var cssDataName = 'data-typed-js-css';
-	      if (!self.autoInsertCss) {
-	        return;
-	      }
-	      if (!self.showCursor && !self.fadeOut) {
-	        return;
-	      }
-	      if (document.querySelector('[' + cssDataName + ']')) {
-	        return;
-	      }
-	
-	      var css = document.createElement('style');
-	      css.type = 'text/css';
-	      css.setAttribute(cssDataName, true);
-	
-	      var innerCss = '';
-	      if (self.showCursor) {
-	        innerCss += '\n        .typed-cursor{\n          opacity: 1;\n        }\n        .typed-cursor.typed-cursor--blink{\n          animation: typedjsBlink 0.7s infinite;\n          -webkit-animation: typedjsBlink 0.7s infinite;\n                  animation: typedjsBlink 0.7s infinite;\n        }\n        @keyframes typedjsBlink{\n          50% { opacity: 0.0; }\n        }\n        @-webkit-keyframes typedjsBlink{\n          0% { opacity: 1; }\n          50% { opacity: 0.0; }\n          100% { opacity: 1; }\n        }\n      ';
-	      }
-	      if (self.fadeOut) {
-	        innerCss += '\n        .typed-fade-out{\n          opacity: 0;\n          transition: opacity .25s;\n        }\n        .typed-cursor.typed-cursor--blink.typed-fade-out{\n          -webkit-animation: 0;\n          animation: 0;\n        }\n      ';
-	      }
-	      if (css.length === 0) {
-	        return;
-	      }
-	      css.innerHTML = innerCss;
-	      document.body.appendChild(css);
-	    }
-	  }]);
-	
-	  return Initializer;
-	})();
-	
-	exports['default'] = Initializer;
-	var initializer = new Initializer();
-	exports.initializer = initializer;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-	/**
-	 * Defaults & options
-	 * @returns {object} Typed defaults & options
-	 * @public
-	 */
-	
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	var defaults = {
-	  /**
-	   * @property {array} strings strings to be typed
-	   * @property {string} stringsElement ID of element containing string children
-	   */
-	  strings: ['These are the default values...', 'You know what you should do?', 'Use your own!', 'Have a great day!'],
-	  stringsElement: null,
-	
-	  /**
-	   * @property {number} typeSpeed type speed in milliseconds
-	   */
-	  typeSpeed: 0,
-	
-	  /**
-	   * @property {number} startDelay time before typing starts in milliseconds
-	   */
-	  startDelay: 0,
-	
-	  /**
-	   * @property {number} backSpeed backspacing speed in milliseconds
-	   */
-	  backSpeed: 0,
-	
-	  /**
-	   * @property {boolean} smartBackspace only backspace what doesn't match the previous string
-	   */
-	  smartBackspace: true,
-	
-	  /**
-	   * @property {boolean} shuffle shuffle the strings
-	   */
-	  shuffle: false,
-	
-	  /**
-	   * @property {number} backDelay time before backspacing in milliseconds
-	   */
-	  backDelay: 700,
-	
-	  /**
-	   * @property {boolean} fadeOut Fade out instead of backspace
-	   * @property {string} fadeOutClass css class for fade animation
-	   * @property {boolean} fadeOutDelay Fade out delay in milliseconds
-	   */
-	  fadeOut: false,
-	  fadeOutClass: 'typed-fade-out',
-	  fadeOutDelay: 500,
-	
-	  /**
-	   * @property {boolean} loop loop strings
-	   * @property {number} loopCount amount of loops
-	   */
-	  loop: false,
-	  loopCount: Infinity,
-	
-	  /**
-	   * @property {boolean} showCursor show cursor
-	   * @property {string} cursorChar character for cursor
-	   * @property {boolean} autoInsertCss insert CSS for cursor and fadeOut into HTML <head>
-	   */
-	  showCursor: true,
-	  cursorChar: '|',
-	  autoInsertCss: true,
-	
-	  /**
-	   * @property {string} attr attribute for typing
-	   * Ex: input placeholder, value, or just HTML text
-	   */
-	  attr: null,
-	
-	  /**
-	   * @property {boolean} bindInputFocusEvents bind to focus and blur if el is text input
-	   */
-	  bindInputFocusEvents: false,
-	
-	  /**
-	   * @property {string} contentType 'html' or 'null' for plaintext
-	   */
-	  contentType: 'html',
-	
-	  /**
-	   * All typing is complete
-	   * @param {Typed} self
-	   */
-	  onComplete: function onComplete(self) {},
-	
-	  /**
-	   * Before each string is typed
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  preStringTyped: function preStringTyped(arrayPos, self) {},
-	
-	  /**
-	   * After each string is typed
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onStringTyped: function onStringTyped(arrayPos, self) {},
-	
-	  /**
-	   * During looping, after last string is typed
-	   * @param {Typed} self
-	   */
-	  onLastStringBackspaced: function onLastStringBackspaced(self) {},
-	
-	  /**
-	   * Typing has been stopped
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onTypingPaused: function onTypingPaused(arrayPos, self) {},
-	
-	  /**
-	   * Typing has been started after being stopped
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onTypingResumed: function onTypingResumed(arrayPos, self) {},
-	
-	  /**
-	   * After reset
-	   * @param {Typed} self
-	   */
-	  onReset: function onReset(self) {},
-	
-	  /**
-	   * After stop
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onStop: function onStop(arrayPos, self) {},
-	
-	  /**
-	   * After start
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onStart: function onStart(arrayPos, self) {},
-	
-	  /**
-	   * After destroy
-	   * @param {Typed} self
-	   */
-	  onDestroy: function onDestroy(self) {}
-	};
-	
-	exports['default'] = defaults;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-	
-	/**
-	 * TODO: These methods can probably be combined somehow
-	 * Parse HTML tags & HTML Characters
-	 */
-	
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var HTMLParser = (function () {
-	  function HTMLParser() {
-	    _classCallCheck(this, HTMLParser);
-	  }
-	
-	  _createClass(HTMLParser, [{
-	    key: 'typeHtmlChars',
-	
-	    /**
-	     * Type HTML tags & HTML Characters
-	     * @param {string} curString Current string
-	     * @param {number} curStrPos Position in current string
-	     * @param {Typed} self instance of Typed
-	     * @returns {number} a new string position
-	     * @private
-	     */
-	
-	    value: function typeHtmlChars(curString, curStrPos, self) {
-	      if (self.contentType !== 'html') return curStrPos;
-	      var curChar = curString.substr(curStrPos).charAt(0);
-	      if (curChar === '<' || curChar === '&') {
-	        var endTag = '';
-	        if (curChar === '<') {
-	          endTag = '>';
-	        } else {
-	          endTag = ';';
-	        }
-	        while (curString.substr(curStrPos + 1).charAt(0) !== endTag) {
-	          curStrPos++;
-	          if (curStrPos + 1 > curString.length) {
-	            break;
-	          }
-	        }
-	        curStrPos++;
-	      }
-	      return curStrPos;
-	    }
-	
-	    /**
-	     * Backspace HTML tags and HTML Characters
-	     * @param {string} curString Current string
-	     * @param {number} curStrPos Position in current string
-	     * @param {Typed} self instance of Typed
-	     * @returns {number} a new string position
-	     * @private
-	     */
-	  }, {
-	    key: 'backSpaceHtmlChars',
-	    value: function backSpaceHtmlChars(curString, curStrPos, self) {
-	      if (self.contentType !== 'html') return curStrPos;
-	      var curChar = curString.substr(curStrPos).charAt(0);
-	      if (curChar === '>' || curChar === ';') {
-	        var endTag = '';
-	        if (curChar === '>') {
-	          endTag = '<';
-	        } else {
-	          endTag = '&';
-	        }
-	        while (curString.substr(curStrPos - 1).charAt(0) !== endTag) {
-	          curStrPos--;
-	          if (curStrPos < 0) {
-	            break;
-	          }
-	        }
-	        curStrPos--;
-	      }
-	      return curStrPos;
-	    }
-	  }]);
-	
-	  return HTMLParser;
-	})();
-	
-	exports['default'] = HTMLParser;
-	var htmlParser = new HTMLParser();
-	exports.htmlParser = htmlParser;
-
-/***/ })
-/******/ ])
-});
-;
-/**
- * author Christopher Blum
- *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
- *    - forked from http://github.com/zuk/jquery.inview/
- */
-(function (factory) {
-    if (typeof define == 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS
-        module.exports = factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-}(function ($) {
-
-    var inviewObjects = [], viewportSize, viewportOffset,
-        d = document, w = window, documentElement = d.documentElement, timer;
-
-    $.event.special.inview = {
-        add: function (data) {
-            inviewObjects.push({ data: data, $element: $(this), element: this });
-            // Use setInterval in order to also make sure this captures elements within
-            // "overflow:scroll" elements or elements that appeared in the dom tree due to
-            // dom manipulation and reflow
-            // old: $(window).scroll(checkInView);
-            //
-            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
-            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
-            //
-            // Don't waste cycles with an interval until we get at least one element that
-            // has bound to the inview event.
-            if (!timer && inviewObjects.length) {
-                timer = setInterval(checkInView, 250);
-            }
-        },
-
-        remove: function (data) {
-            for (var i = 0; i < inviewObjects.length; i++) {
-                var inviewObject = inviewObjects[i];
-                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
-                    inviewObjects.splice(i, 1);
-                    break;
-                }
-            }
-
-            // Clear interval when we no longer have any elements listening
-            if (!inviewObjects.length) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-    };
-
-    function getViewportSize() {
-        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
-
-        // if this is correct then return it. iPad has compat Mode, so will
-        // go into check clientHeight/clientWidth (which has the wrong value).
-        if (!size.height) {
-            mode = d.compatMode;
-            if (mode || !$.support.boxModel) { // IE, Gecko
-                domObject = mode === 'CSS1Compat' ?
-                    documentElement : // Standards
-                    d.body; // Quirks
-                size = {
-                    height: domObject.clientHeight,
-                    width: domObject.clientWidth
-                };
-            }
-        }
-
-        return size;
-    }
-
-    function getViewportOffset() {
-        return {
-            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
-            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
-        };
-    }
-
-    function checkInView() {
-        if (!inviewObjects.length) {
-            return;
-        }
-
-        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
-            var selector = inviewObject.data.selector,
-                $element = inviewObject.$element;
-            return selector ? $element.find(selector) : $element;
-        });
-
-        viewportSize = viewportSize || getViewportSize();
-        viewportOffset = viewportOffset || getViewportOffset();
-
-        for (; i < inviewObjects.length; i++) {
-            // Ignore elements that are not in the DOM tree
-            if (!$.contains(documentElement, $elements[i][0])) {
-                continue;
-            }
-
-            var $element = $($elements[i]),
-                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
-                elementOffset = $element.offset(),
-                inView = $element.data('inview');
-
-            // Don't ask me why because I haven't figured out yet:
-            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
-            // Even though it sounds weird:
-            // It seems that the execution of this function is interferred by the onresize/onscroll event
-            // where viewportOffset and viewportSize are unset
-            if (!viewportOffset || !viewportSize) {
-                return;
-            }
-
-            if (elementOffset.top + elementSize.height > viewportOffset.top &&
-                elementOffset.top < viewportOffset.top + viewportSize.height &&
-                elementOffset.left + elementSize.width > viewportOffset.left &&
-                elementOffset.left < viewportOffset.left + viewportSize.width) {
-                if (!inView) {
-                    $element.data('inview', true).trigger('inview', [true]);
-                }
-            } else if (inView) {
-                $element.data('inview', false).trigger('inview', [false]);
-            }
-        }
-    }
-
-    $(w).on("scroll resize scrollstop", function () {
-        viewportSize = viewportOffset = null;
-    });
-
-    // IE < 9 scrolls to focused elements without firing the "scroll" event
-    if (!documentElement.addEventListener && documentElement.attachEvent) {
-        documentElement.attachEvent("onfocusin", function () {
-            viewportOffset = null;
-        });
-    }
-}));
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -13611,6 +12343,1132 @@ Docs & License: https://fullcalendar.io/
 
 }));
 
+!function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
+!function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
+
+/*!
+ * Morphext - Text Rotating Plugin for jQuery
+ * https://github.com/MrSaints/Morphext
+ *
+ * Built on jQuery Boilerplate
+ * http://jqueryboilerplate.com/
+ *
+ * Copyright 2014 Ian Lai and other contributors
+ * Released under the MIT license
+ * http://ian.mit-license.org/
+ */
+
+/*eslint-env browser */
+/*global jQuery:false */
+/*eslint-disable no-underscore-dangle */
+
+(function ($) {
+    "use strict";
+
+    var pluginName = "Morphext",
+        defaults = {
+            animation: "bounceIn",
+            separator: ",",
+            speed: 2000,
+            complete: $.noop
+        };
+
+    function Plugin (element, options) {
+        this.element = $(element);
+
+        this.settings = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._init();
+    }
+
+    Plugin.prototype = {
+        _init: function () {
+            var $that = this;
+            this.phrases = [];
+
+            this.element.addClass("morphext");
+
+            $.each(this.element.text().split(this.settings.separator), function (key, value) {
+                $that.phrases.push($.trim(value));
+            });
+
+            this.index = -1;
+            this.animate();
+            this.start();
+        },
+        animate: function () {
+            this.index = ++this.index % this.phrases.length;
+            this.element[0].innerHTML = "<span class=\"animated " + this.settings.animation + "\">" + this.phrases[this.index] + "</span>";
+
+            if ($.isFunction(this.settings.complete)) {
+                this.settings.complete.call(this);
+            }
+        },
+        start: function () {
+            var $that = this;
+            this._interval = setInterval(function () {
+                $that.animate();
+            }, this.settings.speed);
+        },
+        stop: function () {
+            this._interval = clearInterval(this._interval);
+        }
+    };
+
+    $.fn[pluginName] = function (options) {
+        return this.each(function() {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+            }
+        });
+    };
+})(jQuery);
+
+/*!
+ * 
+ *   typed.js - A JavaScript Typing Animation Library
+ *   Author: Matt Boldt <me@mattboldt.com>
+ *   Version: v2.0.9
+ *   Url: https://github.com/mattboldt/typed.js
+ *   License(s): MIT
+ * 
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["Typed"] = factory();
+	else
+		root["Typed"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _initializerJs = __webpack_require__(1);
+	
+	var _htmlParserJs = __webpack_require__(3);
+	
+	/**
+	 * Welcome to Typed.js!
+	 * @param {string} elementId HTML element ID _OR_ HTML element
+	 * @param {object} options options object
+	 * @returns {object} a new Typed object
+	 */
+	
+	var Typed = (function () {
+	  function Typed(elementId, options) {
+	    _classCallCheck(this, Typed);
+	
+	    // Initialize it up
+	    _initializerJs.initializer.load(this, options, elementId);
+	    // All systems go!
+	    this.begin();
+	  }
+	
+	  /**
+	   * Toggle start() and stop() of the Typed instance
+	   * @public
+	   */
+	
+	  _createClass(Typed, [{
+	    key: 'toggle',
+	    value: function toggle() {
+	      this.pause.status ? this.start() : this.stop();
+	    }
+	
+	    /**
+	     * Stop typing / backspacing and enable cursor blinking
+	     * @public
+	     */
+	  }, {
+	    key: 'stop',
+	    value: function stop() {
+	      if (this.typingComplete) return;
+	      if (this.pause.status) return;
+	      this.toggleBlinking(true);
+	      this.pause.status = true;
+	      this.options.onStop(this.arrayPos, this);
+	    }
+	
+	    /**
+	     * Start typing / backspacing after being stopped
+	     * @public
+	     */
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      if (this.typingComplete) return;
+	      if (!this.pause.status) return;
+	      this.pause.status = false;
+	      if (this.pause.typewrite) {
+	        this.typewrite(this.pause.curString, this.pause.curStrPos);
+	      } else {
+	        this.backspace(this.pause.curString, this.pause.curStrPos);
+	      }
+	      this.options.onStart(this.arrayPos, this);
+	    }
+	
+	    /**
+	     * Destroy this instance of Typed
+	     * @public
+	     */
+	  }, {
+	    key: 'destroy',
+	    value: function destroy() {
+	      this.reset(false);
+	      this.options.onDestroy(this);
+	    }
+	
+	    /**
+	     * Reset Typed and optionally restarts
+	     * @param {boolean} restart
+	     * @public
+	     */
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      var restart = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+	
+	      clearInterval(this.timeout);
+	      this.replaceText('');
+	      if (this.cursor && this.cursor.parentNode) {
+	        this.cursor.parentNode.removeChild(this.cursor);
+	        this.cursor = null;
+	      }
+	      this.strPos = 0;
+	      this.arrayPos = 0;
+	      this.curLoop = 0;
+	      if (restart) {
+	        this.insertCursor();
+	        this.options.onReset(this);
+	        this.begin();
+	      }
+	    }
+	
+	    /**
+	     * Begins the typing animation
+	     * @private
+	     */
+	  }, {
+	    key: 'begin',
+	    value: function begin() {
+	      var _this = this;
+	
+	      this.typingComplete = false;
+	      this.shuffleStringsIfNeeded(this);
+	      this.insertCursor();
+	      if (this.bindInputFocusEvents) this.bindFocusEvents();
+	      this.timeout = setTimeout(function () {
+	        // Check if there is some text in the element, if yes start by backspacing the default message
+	        if (!_this.currentElContent || _this.currentElContent.length === 0) {
+	          _this.typewrite(_this.strings[_this.sequence[_this.arrayPos]], _this.strPos);
+	        } else {
+	          // Start typing
+	          _this.backspace(_this.currentElContent, _this.currentElContent.length);
+	        }
+	      }, this.startDelay);
+	    }
+	
+	    /**
+	     * Called for each character typed
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'typewrite',
+	    value: function typewrite(curString, curStrPos) {
+	      var _this2 = this;
+	
+	      if (this.fadeOut && this.el.classList.contains(this.fadeOutClass)) {
+	        this.el.classList.remove(this.fadeOutClass);
+	        if (this.cursor) this.cursor.classList.remove(this.fadeOutClass);
+	      }
+	
+	      var humanize = this.humanizer(this.typeSpeed);
+	      var numChars = 1;
+	
+	      if (this.pause.status === true) {
+	        this.setPauseStatus(curString, curStrPos, true);
+	        return;
+	      }
+	
+	      // contain typing function in a timeout humanize'd delay
+	      this.timeout = setTimeout(function () {
+	        // skip over any HTML chars
+	        curStrPos = _htmlParserJs.htmlParser.typeHtmlChars(curString, curStrPos, _this2);
+	
+	        var pauseTime = 0;
+	        var substr = curString.substr(curStrPos);
+	        // check for an escape character before a pause value
+	        // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
+	        // single ^ are removed from string
+	        if (substr.charAt(0) === '^') {
+	          if (/^\^\d+/.test(substr)) {
+	            var skip = 1; // skip at least 1
+	            substr = /\d+/.exec(substr)[0];
+	            skip += substr.length;
+	            pauseTime = parseInt(substr);
+	            _this2.temporaryPause = true;
+	            _this2.options.onTypingPaused(_this2.arrayPos, _this2);
+	            // strip out the escape character and pause value so they're not printed
+	            curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
+	            _this2.toggleBlinking(true);
+	          }
+	        }
+	
+	        // check for skip characters formatted as
+	        // "this is a `string to print NOW` ..."
+	        if (substr.charAt(0) === '`') {
+	          while (curString.substr(curStrPos + numChars).charAt(0) !== '`') {
+	            numChars++;
+	            if (curStrPos + numChars > curString.length) break;
+	          }
+	          // strip out the escape characters and append all the string in between
+	          var stringBeforeSkip = curString.substring(0, curStrPos);
+	          var stringSkipped = curString.substring(stringBeforeSkip.length + 1, curStrPos + numChars);
+	          var stringAfterSkip = curString.substring(curStrPos + numChars + 1);
+	          curString = stringBeforeSkip + stringSkipped + stringAfterSkip;
+	          numChars--;
+	        }
+	
+	        // timeout for any pause after a character
+	        _this2.timeout = setTimeout(function () {
+	          // Accounts for blinking while paused
+	          _this2.toggleBlinking(false);
+	
+	          // We're done with this sentence!
+	          if (curStrPos >= curString.length) {
+	            _this2.doneTyping(curString, curStrPos);
+	          } else {
+	            _this2.keepTyping(curString, curStrPos, numChars);
+	          }
+	          // end of character pause
+	          if (_this2.temporaryPause) {
+	            _this2.temporaryPause = false;
+	            _this2.options.onTypingResumed(_this2.arrayPos, _this2);
+	          }
+	        }, pauseTime);
+	
+	        // humanized value for typing
+	      }, humanize);
+	    }
+	
+	    /**
+	     * Continue to the next string & begin typing
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'keepTyping',
+	    value: function keepTyping(curString, curStrPos, numChars) {
+	      // call before functions if applicable
+	      if (curStrPos === 0) {
+	        this.toggleBlinking(false);
+	        this.options.preStringTyped(this.arrayPos, this);
+	      }
+	      // start typing each new char into existing string
+	      // curString: arg, this.el.html: original text inside element
+	      curStrPos += numChars;
+	      var nextString = curString.substr(0, curStrPos);
+	      this.replaceText(nextString);
+	      // loop the function
+	      this.typewrite(curString, curStrPos);
+	    }
+	
+	    /**
+	     * We're done typing all strings
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'doneTyping',
+	    value: function doneTyping(curString, curStrPos) {
+	      var _this3 = this;
+	
+	      // fires callback function
+	      this.options.onStringTyped(this.arrayPos, this);
+	      this.toggleBlinking(true);
+	      // is this the final string
+	      if (this.arrayPos === this.strings.length - 1) {
+	        // callback that occurs on the last typed string
+	        this.complete();
+	        // quit if we wont loop back
+	        if (this.loop === false || this.curLoop === this.loopCount) {
+	          return;
+	        }
+	      }
+	      this.timeout = setTimeout(function () {
+	        _this3.backspace(curString, curStrPos);
+	      }, this.backDelay);
+	    }
+	
+	    /**
+	     * Backspaces 1 character at a time
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'backspace',
+	    value: function backspace(curString, curStrPos) {
+	      var _this4 = this;
+	
+	      if (this.pause.status === true) {
+	        this.setPauseStatus(curString, curStrPos, true);
+	        return;
+	      }
+	      if (this.fadeOut) return this.initFadeOut();
+	
+	      this.toggleBlinking(false);
+	      var humanize = this.humanizer(this.backSpeed);
+	
+	      this.timeout = setTimeout(function () {
+	        curStrPos = _htmlParserJs.htmlParser.backSpaceHtmlChars(curString, curStrPos, _this4);
+	        // replace text with base text + typed characters
+	        var curStringAtPosition = curString.substr(0, curStrPos);
+	        _this4.replaceText(curStringAtPosition);
+	
+	        // if smartBack is enabled
+	        if (_this4.smartBackspace) {
+	          // the remaining part of the current string is equal of the same part of the new string
+	          var nextString = _this4.strings[_this4.arrayPos + 1];
+	          if (nextString && curStringAtPosition === nextString.substr(0, curStrPos)) {
+	            _this4.stopNum = curStrPos;
+	          } else {
+	            _this4.stopNum = 0;
+	          }
+	        }
+	
+	        // if the number (id of character in current string) is
+	        // less than the stop number, keep going
+	        if (curStrPos > _this4.stopNum) {
+	          // subtract characters one by one
+	          curStrPos--;
+	          // loop the function
+	          _this4.backspace(curString, curStrPos);
+	        } else if (curStrPos <= _this4.stopNum) {
+	          // if the stop number has been reached, increase
+	          // array position to next string
+	          _this4.arrayPos++;
+	          // When looping, begin at the beginning after backspace complete
+	          if (_this4.arrayPos === _this4.strings.length) {
+	            _this4.arrayPos = 0;
+	            _this4.options.onLastStringBackspaced();
+	            _this4.shuffleStringsIfNeeded();
+	            _this4.begin();
+	          } else {
+	            _this4.typewrite(_this4.strings[_this4.sequence[_this4.arrayPos]], curStrPos);
+	          }
+	        }
+	        // humanized value for typing
+	      }, humanize);
+	    }
+	
+	    /**
+	     * Full animation is complete
+	     * @private
+	     */
+	  }, {
+	    key: 'complete',
+	    value: function complete() {
+	      this.options.onComplete(this);
+	      if (this.loop) {
+	        this.curLoop++;
+	      } else {
+	        this.typingComplete = true;
+	      }
+	    }
+	
+	    /**
+	     * Has the typing been stopped
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @param {boolean} isTyping
+	     * @private
+	     */
+	  }, {
+	    key: 'setPauseStatus',
+	    value: function setPauseStatus(curString, curStrPos, isTyping) {
+	      this.pause.typewrite = isTyping;
+	      this.pause.curString = curString;
+	      this.pause.curStrPos = curStrPos;
+	    }
+	
+	    /**
+	     * Toggle the blinking cursor
+	     * @param {boolean} isBlinking
+	     * @private
+	     */
+	  }, {
+	    key: 'toggleBlinking',
+	    value: function toggleBlinking(isBlinking) {
+	      if (!this.cursor) return;
+	      // if in paused state, don't toggle blinking a 2nd time
+	      if (this.pause.status) return;
+	      if (this.cursorBlinking === isBlinking) return;
+	      this.cursorBlinking = isBlinking;
+	      if (isBlinking) {
+	        this.cursor.classList.add('typed-cursor--blink');
+	      } else {
+	        this.cursor.classList.remove('typed-cursor--blink');
+	      }
+	    }
+	
+	    /**
+	     * Speed in MS to type
+	     * @param {number} speed
+	     * @private
+	     */
+	  }, {
+	    key: 'humanizer',
+	    value: function humanizer(speed) {
+	      return Math.round(Math.random() * speed / 2) + speed;
+	    }
+	
+	    /**
+	     * Shuffle the sequence of the strings array
+	     * @private
+	     */
+	  }, {
+	    key: 'shuffleStringsIfNeeded',
+	    value: function shuffleStringsIfNeeded() {
+	      if (!this.shuffle) return;
+	      this.sequence = this.sequence.sort(function () {
+	        return Math.random() - 0.5;
+	      });
+	    }
+	
+	    /**
+	     * Adds a CSS class to fade out current string
+	     * @private
+	     */
+	  }, {
+	    key: 'initFadeOut',
+	    value: function initFadeOut() {
+	      var _this5 = this;
+	
+	      this.el.className += ' ' + this.fadeOutClass;
+	      if (this.cursor) this.cursor.className += ' ' + this.fadeOutClass;
+	      return setTimeout(function () {
+	        _this5.arrayPos++;
+	        _this5.replaceText('');
+	
+	        // Resets current string if end of loop reached
+	        if (_this5.strings.length > _this5.arrayPos) {
+	          _this5.typewrite(_this5.strings[_this5.sequence[_this5.arrayPos]], 0);
+	        } else {
+	          _this5.typewrite(_this5.strings[0], 0);
+	          _this5.arrayPos = 0;
+	        }
+	      }, this.fadeOutDelay);
+	    }
+	
+	    /**
+	     * Replaces current text in the HTML element
+	     * depending on element type
+	     * @param {string} str
+	     * @private
+	     */
+	  }, {
+	    key: 'replaceText',
+	    value: function replaceText(str) {
+	      if (this.attr) {
+	        this.el.setAttribute(this.attr, str);
+	      } else {
+	        if (this.isInput) {
+	          this.el.value = str;
+	        } else if (this.contentType === 'html') {
+	          this.el.innerHTML = str;
+	        } else {
+	          this.el.textContent = str;
+	        }
+	      }
+	    }
+	
+	    /**
+	     * If using input elements, bind focus in order to
+	     * start and stop the animation
+	     * @private
+	     */
+	  }, {
+	    key: 'bindFocusEvents',
+	    value: function bindFocusEvents() {
+	      var _this6 = this;
+	
+	      if (!this.isInput) return;
+	      this.el.addEventListener('focus', function (e) {
+	        _this6.stop();
+	      });
+	      this.el.addEventListener('blur', function (e) {
+	        if (_this6.el.value && _this6.el.value.length !== 0) {
+	          return;
+	        }
+	        _this6.start();
+	      });
+	    }
+	
+	    /**
+	     * On init, insert the cursor element
+	     * @private
+	     */
+	  }, {
+	    key: 'insertCursor',
+	    value: function insertCursor() {
+	      if (!this.showCursor) return;
+	      if (this.cursor) return;
+	      this.cursor = document.createElement('span');
+	      this.cursor.className = 'typed-cursor';
+	      this.cursor.innerHTML = this.cursorChar;
+	      this.el.parentNode && this.el.parentNode.insertBefore(this.cursor, this.el.nextSibling);
+	    }
+	  }]);
+	
+	  return Typed;
+	})();
+	
+	exports['default'] = Typed;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _defaultsJs = __webpack_require__(2);
+	
+	var _defaultsJs2 = _interopRequireDefault(_defaultsJs);
+	
+	/**
+	 * Initialize the Typed object
+	 */
+	
+	var Initializer = (function () {
+	  function Initializer() {
+	    _classCallCheck(this, Initializer);
+	  }
+	
+	  _createClass(Initializer, [{
+	    key: 'load',
+	
+	    /**
+	     * Load up defaults & options on the Typed instance
+	     * @param {Typed} self instance of Typed
+	     * @param {object} options options object
+	     * @param {string} elementId HTML element ID _OR_ instance of HTML element
+	     * @private
+	     */
+	
+	    value: function load(self, options, elementId) {
+	      // chosen element to manipulate text
+	      if (typeof elementId === 'string') {
+	        self.el = document.querySelector(elementId);
+	      } else {
+	        self.el = elementId;
+	      }
+	
+	      self.options = _extends({}, _defaultsJs2['default'], options);
+	
+	      // attribute to type into
+	      self.isInput = self.el.tagName.toLowerCase() === 'input';
+	      self.attr = self.options.attr;
+	      self.bindInputFocusEvents = self.options.bindInputFocusEvents;
+	
+	      // show cursor
+	      self.showCursor = self.isInput ? false : self.options.showCursor;
+	
+	      // custom cursor
+	      self.cursorChar = self.options.cursorChar;
+	
+	      // Is the cursor blinking
+	      self.cursorBlinking = true;
+	
+	      // text content of element
+	      self.elContent = self.attr ? self.el.getAttribute(self.attr) : self.el.textContent;
+	
+	      // html or plain text
+	      self.contentType = self.options.contentType;
+	
+	      // typing speed
+	      self.typeSpeed = self.options.typeSpeed;
+	
+	      // add a delay before typing starts
+	      self.startDelay = self.options.startDelay;
+	
+	      // backspacing speed
+	      self.backSpeed = self.options.backSpeed;
+	
+	      // only backspace what doesn't match the previous string
+	      self.smartBackspace = self.options.smartBackspace;
+	
+	      // amount of time to wait before backspacing
+	      self.backDelay = self.options.backDelay;
+	
+	      // Fade out instead of backspace
+	      self.fadeOut = self.options.fadeOut;
+	      self.fadeOutClass = self.options.fadeOutClass;
+	      self.fadeOutDelay = self.options.fadeOutDelay;
+	
+	      // variable to check whether typing is currently paused
+	      self.isPaused = false;
+	
+	      // input strings of text
+	      self.strings = self.options.strings.map(function (s) {
+	        return s.trim();
+	      });
+	
+	      // div containing strings
+	      if (typeof self.options.stringsElement === 'string') {
+	        self.stringsElement = document.querySelector(self.options.stringsElement);
+	      } else {
+	        self.stringsElement = self.options.stringsElement;
+	      }
+	
+	      if (self.stringsElement) {
+	        self.strings = [];
+	        self.stringsElement.style.display = 'none';
+	        var strings = Array.prototype.slice.apply(self.stringsElement.children);
+	        var stringsLength = strings.length;
+	
+	        if (stringsLength) {
+	          for (var i = 0; i < stringsLength; i += 1) {
+	            var stringEl = strings[i];
+	            self.strings.push(stringEl.innerHTML.trim());
+	          }
+	        }
+	      }
+	
+	      // character number position of current string
+	      self.strPos = 0;
+	
+	      // current array position
+	      self.arrayPos = 0;
+	
+	      // index of string to stop backspacing on
+	      self.stopNum = 0;
+	
+	      // Looping logic
+	      self.loop = self.options.loop;
+	      self.loopCount = self.options.loopCount;
+	      self.curLoop = 0;
+	
+	      // shuffle the strings
+	      self.shuffle = self.options.shuffle;
+	      // the order of strings
+	      self.sequence = [];
+	
+	      self.pause = {
+	        status: false,
+	        typewrite: true,
+	        curString: '',
+	        curStrPos: 0
+	      };
+	
+	      // When the typing is complete (when not looped)
+	      self.typingComplete = false;
+	
+	      // Set the order in which the strings are typed
+	      for (var i in self.strings) {
+	        self.sequence[i] = i;
+	      }
+	
+	      // If there is some text in the element
+	      self.currentElContent = this.getCurrentElContent(self);
+	
+	      self.autoInsertCss = self.options.autoInsertCss;
+	
+	      this.appendAnimationCss(self);
+	    }
+	  }, {
+	    key: 'getCurrentElContent',
+	    value: function getCurrentElContent(self) {
+	      var elContent = '';
+	      if (self.attr) {
+	        elContent = self.el.getAttribute(self.attr);
+	      } else if (self.isInput) {
+	        elContent = self.el.value;
+	      } else if (self.contentType === 'html') {
+	        elContent = self.el.innerHTML;
+	      } else {
+	        elContent = self.el.textContent;
+	      }
+	      return elContent;
+	    }
+	  }, {
+	    key: 'appendAnimationCss',
+	    value: function appendAnimationCss(self) {
+	      var cssDataName = 'data-typed-js-css';
+	      if (!self.autoInsertCss) {
+	        return;
+	      }
+	      if (!self.showCursor && !self.fadeOut) {
+	        return;
+	      }
+	      if (document.querySelector('[' + cssDataName + ']')) {
+	        return;
+	      }
+	
+	      var css = document.createElement('style');
+	      css.type = 'text/css';
+	      css.setAttribute(cssDataName, true);
+	
+	      var innerCss = '';
+	      if (self.showCursor) {
+	        innerCss += '\n        .typed-cursor{\n          opacity: 1;\n        }\n        .typed-cursor.typed-cursor--blink{\n          animation: typedjsBlink 0.7s infinite;\n          -webkit-animation: typedjsBlink 0.7s infinite;\n                  animation: typedjsBlink 0.7s infinite;\n        }\n        @keyframes typedjsBlink{\n          50% { opacity: 0.0; }\n        }\n        @-webkit-keyframes typedjsBlink{\n          0% { opacity: 1; }\n          50% { opacity: 0.0; }\n          100% { opacity: 1; }\n        }\n      ';
+	      }
+	      if (self.fadeOut) {
+	        innerCss += '\n        .typed-fade-out{\n          opacity: 0;\n          transition: opacity .25s;\n        }\n        .typed-cursor.typed-cursor--blink.typed-fade-out{\n          -webkit-animation: 0;\n          animation: 0;\n        }\n      ';
+	      }
+	      if (css.length === 0) {
+	        return;
+	      }
+	      css.innerHTML = innerCss;
+	      document.body.appendChild(css);
+	    }
+	  }]);
+	
+	  return Initializer;
+	})();
+	
+	exports['default'] = Initializer;
+	var initializer = new Initializer();
+	exports.initializer = initializer;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Defaults & options
+	 * @returns {object} Typed defaults & options
+	 * @public
+	 */
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var defaults = {
+	  /**
+	   * @property {array} strings strings to be typed
+	   * @property {string} stringsElement ID of element containing string children
+	   */
+	  strings: ['These are the default values...', 'You know what you should do?', 'Use your own!', 'Have a great day!'],
+	  stringsElement: null,
+	
+	  /**
+	   * @property {number} typeSpeed type speed in milliseconds
+	   */
+	  typeSpeed: 0,
+	
+	  /**
+	   * @property {number} startDelay time before typing starts in milliseconds
+	   */
+	  startDelay: 0,
+	
+	  /**
+	   * @property {number} backSpeed backspacing speed in milliseconds
+	   */
+	  backSpeed: 0,
+	
+	  /**
+	   * @property {boolean} smartBackspace only backspace what doesn't match the previous string
+	   */
+	  smartBackspace: true,
+	
+	  /**
+	   * @property {boolean} shuffle shuffle the strings
+	   */
+	  shuffle: false,
+	
+	  /**
+	   * @property {number} backDelay time before backspacing in milliseconds
+	   */
+	  backDelay: 700,
+	
+	  /**
+	   * @property {boolean} fadeOut Fade out instead of backspace
+	   * @property {string} fadeOutClass css class for fade animation
+	   * @property {boolean} fadeOutDelay Fade out delay in milliseconds
+	   */
+	  fadeOut: false,
+	  fadeOutClass: 'typed-fade-out',
+	  fadeOutDelay: 500,
+	
+	  /**
+	   * @property {boolean} loop loop strings
+	   * @property {number} loopCount amount of loops
+	   */
+	  loop: false,
+	  loopCount: Infinity,
+	
+	  /**
+	   * @property {boolean} showCursor show cursor
+	   * @property {string} cursorChar character for cursor
+	   * @property {boolean} autoInsertCss insert CSS for cursor and fadeOut into HTML <head>
+	   */
+	  showCursor: true,
+	  cursorChar: '|',
+	  autoInsertCss: true,
+	
+	  /**
+	   * @property {string} attr attribute for typing
+	   * Ex: input placeholder, value, or just HTML text
+	   */
+	  attr: null,
+	
+	  /**
+	   * @property {boolean} bindInputFocusEvents bind to focus and blur if el is text input
+	   */
+	  bindInputFocusEvents: false,
+	
+	  /**
+	   * @property {string} contentType 'html' or 'null' for plaintext
+	   */
+	  contentType: 'html',
+	
+	  /**
+	   * All typing is complete
+	   * @param {Typed} self
+	   */
+	  onComplete: function onComplete(self) {},
+	
+	  /**
+	   * Before each string is typed
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  preStringTyped: function preStringTyped(arrayPos, self) {},
+	
+	  /**
+	   * After each string is typed
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStringTyped: function onStringTyped(arrayPos, self) {},
+	
+	  /**
+	   * During looping, after last string is typed
+	   * @param {Typed} self
+	   */
+	  onLastStringBackspaced: function onLastStringBackspaced(self) {},
+	
+	  /**
+	   * Typing has been stopped
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onTypingPaused: function onTypingPaused(arrayPos, self) {},
+	
+	  /**
+	   * Typing has been started after being stopped
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onTypingResumed: function onTypingResumed(arrayPos, self) {},
+	
+	  /**
+	   * After reset
+	   * @param {Typed} self
+	   */
+	  onReset: function onReset(self) {},
+	
+	  /**
+	   * After stop
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStop: function onStop(arrayPos, self) {},
+	
+	  /**
+	   * After start
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStart: function onStart(arrayPos, self) {},
+	
+	  /**
+	   * After destroy
+	   * @param {Typed} self
+	   */
+	  onDestroy: function onDestroy(self) {}
+	};
+	
+	exports['default'] = defaults;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+	
+	/**
+	 * TODO: These methods can probably be combined somehow
+	 * Parse HTML tags & HTML Characters
+	 */
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var HTMLParser = (function () {
+	  function HTMLParser() {
+	    _classCallCheck(this, HTMLParser);
+	  }
+	
+	  _createClass(HTMLParser, [{
+	    key: 'typeHtmlChars',
+	
+	    /**
+	     * Type HTML tags & HTML Characters
+	     * @param {string} curString Current string
+	     * @param {number} curStrPos Position in current string
+	     * @param {Typed} self instance of Typed
+	     * @returns {number} a new string position
+	     * @private
+	     */
+	
+	    value: function typeHtmlChars(curString, curStrPos, self) {
+	      if (self.contentType !== 'html') return curStrPos;
+	      var curChar = curString.substr(curStrPos).charAt(0);
+	      if (curChar === '<' || curChar === '&') {
+	        var endTag = '';
+	        if (curChar === '<') {
+	          endTag = '>';
+	        } else {
+	          endTag = ';';
+	        }
+	        while (curString.substr(curStrPos + 1).charAt(0) !== endTag) {
+	          curStrPos++;
+	          if (curStrPos + 1 > curString.length) {
+	            break;
+	          }
+	        }
+	        curStrPos++;
+	      }
+	      return curStrPos;
+	    }
+	
+	    /**
+	     * Backspace HTML tags and HTML Characters
+	     * @param {string} curString Current string
+	     * @param {number} curStrPos Position in current string
+	     * @param {Typed} self instance of Typed
+	     * @returns {number} a new string position
+	     * @private
+	     */
+	  }, {
+	    key: 'backSpaceHtmlChars',
+	    value: function backSpaceHtmlChars(curString, curStrPos, self) {
+	      if (self.contentType !== 'html') return curStrPos;
+	      var curChar = curString.substr(curStrPos).charAt(0);
+	      if (curChar === '>' || curChar === ';') {
+	        var endTag = '';
+	        if (curChar === '>') {
+	          endTag = '<';
+	        } else {
+	          endTag = '&';
+	        }
+	        while (curString.substr(curStrPos - 1).charAt(0) !== endTag) {
+	          curStrPos--;
+	          if (curStrPos < 0) {
+	            break;
+	          }
+	        }
+	        curStrPos--;
+	      }
+	      return curStrPos;
+	    }
+	  }]);
+	
+	  return HTMLParser;
+	})();
+	
+	exports['default'] = HTMLParser;
+	var htmlParser = new HTMLParser();
+	exports.htmlParser = htmlParser;
+
+/***/ })
+/******/ ])
+});
+;
 /*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
@@ -14109,6 +13967,148 @@ return ImagesLoaded;
 });
 
 
+/**
+ * author Christopher Blum
+ *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ *    - forked from http://github.com/zuk/jquery.inview/
+ */
+(function (factory) {
+    if (typeof define == 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+
+    var inviewObjects = [], viewportSize, viewportOffset,
+        d = document, w = window, documentElement = d.documentElement, timer;
+
+    $.event.special.inview = {
+        add: function (data) {
+            inviewObjects.push({ data: data, $element: $(this), element: this });
+            // Use setInterval in order to also make sure this captures elements within
+            // "overflow:scroll" elements or elements that appeared in the dom tree due to
+            // dom manipulation and reflow
+            // old: $(window).scroll(checkInView);
+            //
+            // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+            // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+            //
+            // Don't waste cycles with an interval until we get at least one element that
+            // has bound to the inview event.
+            if (!timer && inviewObjects.length) {
+                timer = setInterval(checkInView, 250);
+            }
+        },
+
+        remove: function (data) {
+            for (var i = 0; i < inviewObjects.length; i++) {
+                var inviewObject = inviewObjects[i];
+                if (inviewObject.element === this && inviewObject.data.guid === data.guid) {
+                    inviewObjects.splice(i, 1);
+                    break;
+                }
+            }
+
+            // Clear interval when we no longer have any elements listening
+            if (!inviewObjects.length) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    };
+
+    function getViewportSize() {
+        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+        // if this is correct then return it. iPad has compat Mode, so will
+        // go into check clientHeight/clientWidth (which has the wrong value).
+        if (!size.height) {
+            mode = d.compatMode;
+            if (mode || !$.support.boxModel) { // IE, Gecko
+                domObject = mode === 'CSS1Compat' ?
+                    documentElement : // Standards
+                    d.body; // Quirks
+                size = {
+                    height: domObject.clientHeight,
+                    width: domObject.clientWidth
+                };
+            }
+        }
+
+        return size;
+    }
+
+    function getViewportOffset() {
+        return {
+            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+        };
+    }
+
+    function checkInView() {
+        if (!inviewObjects.length) {
+            return;
+        }
+
+        var i = 0, $elements = $.map(inviewObjects, function (inviewObject) {
+            var selector = inviewObject.data.selector,
+                $element = inviewObject.$element;
+            return selector ? $element.find(selector) : $element;
+        });
+
+        viewportSize = viewportSize || getViewportSize();
+        viewportOffset = viewportOffset || getViewportOffset();
+
+        for (; i < inviewObjects.length; i++) {
+            // Ignore elements that are not in the DOM tree
+            if (!$.contains(documentElement, $elements[i][0])) {
+                continue;
+            }
+
+            var $element = $($elements[i]),
+                elementSize = { height: $element[0].offsetHeight, width: $element[0].offsetWidth },
+                elementOffset = $element.offset(),
+                inView = $element.data('inview');
+
+            // Don't ask me why because I haven't figured out yet:
+            // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+            // Even though it sounds weird:
+            // It seems that the execution of this function is interferred by the onresize/onscroll event
+            // where viewportOffset and viewportSize are unset
+            if (!viewportOffset || !viewportSize) {
+                return;
+            }
+
+            if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                elementOffset.top < viewportOffset.top + viewportSize.height &&
+                elementOffset.left + elementSize.width > viewportOffset.left &&
+                elementOffset.left < viewportOffset.left + viewportSize.width) {
+                if (!inView) {
+                    $element.data('inview', true).trigger('inview', [true]);
+                }
+            } else if (inView) {
+                $element.data('inview', false).trigger('inview', [false]);
+            }
+        }
+    }
+
+    $(w).on("scroll resize scrollstop", function () {
+        viewportSize = viewportOffset = null;
+    });
+
+    // IE < 9 scrolls to focused elements without firing the "scroll" event
+    if (!documentElement.addEventListener && documentElement.attachEvent) {
+        documentElement.attachEvent("onfocusin", function () {
+            viewportOffset = null;
+        });
+    }
+}));
 /*!
  * Isotope PACKAGED v3.0.6
  *
@@ -40950,6 +40950,31 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
+var PostGrid = function($scope, $) {
+    var $gallery = $(".eael-post-appender", $scope),
+        $layout_mode = $gallery.data('layout-mode');
+        
+    if($layout_mode === 'masonry') {
+        $gallery.isotope({
+            itemSelector: ".eael-grid-post",
+            layoutMode: $layout_mode,
+            percentPosition: true
+        });
+
+        // layout gal, while images are loading
+        $gallery.imagesLoaded().progress(function() {
+            $gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-post-grid.default",
+        PostGrid
+    );
+});
+
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".tooltip"),
@@ -41007,29 +41032,82 @@ jQuery(window).on("elementor/frontend/init", function() {
     );
 });
 
-var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope),
-        $layout_mode = $gallery.data('layout-mode');
-        
-    if($layout_mode === 'masonry') {
-        $gallery.isotope({
-            itemSelector: ".eael-grid-post",
-            layoutMode: $layout_mode,
-            percentPosition: true
-        });
+jQuery(document).ready(function() {
+    // scroll func
+    jQuery(window).scroll(function() {
+        var winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+        var height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
 
-        // layout gal, while images are loading
-        $gallery.imagesLoaded().progress(function() {
-            $gallery.isotope("layout");
+        jQuery(".eael-reading-progress-fill").css({
+            width: scrolled + "%"
         });
+    });
+
+    // live prev
+    if (isEditMode) {
+        elementor.settings.page.addChangeCallback(
+            "eael_ext_reading_progress",
+            function(newValue) {
+                var $settings = elementor.settings.page.getSettings();
+
+                if (newValue == "yes") {
+                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
+                        jQuery("body").append(
+                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
+                                $settings.settings
+                                    .eael_ext_reading_progress_position +
+                                '"><div class="eael-reading-progress-fill"></div></div></div>'
+                        );
+                    }
+
+                    jQuery(".eael-reading-progress-wrap")
+                        .addClass("eael-reading-progress-wrap-local")
+                        .removeClass(
+                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
+                        );
+                } else {
+                    jQuery(".eael-reading-progress-wrap").removeClass(
+                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
+                    );
+
+                    if (
+                        $settings.settings
+                            .eael_ext_reading_progress_has_global == true
+                    ) {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-global"
+                        );
+                    } else {
+                        jQuery(".eael-reading-progress-wrap").addClass(
+                            "eael-reading-progress-wrap-disabled"
+                        );
+                    }
+                }
+            }
+        );
+
+        elementor.settings.page.addChangeCallback(
+            "eael_ext_reading_progress_position",
+            function(newValue) {
+                elementor.settings.page.setSettings(
+                    "eael_ext_reading_progress_position",
+                    newValue
+                );
+                jQuery(".eael-reading-progress")
+                    .removeClass(
+                        "eael-reading-progress-top eael-reading-progress-bottom"
+                    )
+                    .addClass("eael-reading-progress-" + newValue);
+            }
+        );
     }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-post-grid.default",
-        PostGrid
-    );
 });
 
 var eaelsvPosition = '';
@@ -41219,84 +41297,6 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
-jQuery(document).ready(function() {
-    // scroll func
-    jQuery(window).scroll(function() {
-        var winScroll =
-            document.body.scrollTop || document.documentElement.scrollTop;
-        var height =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-
-        jQuery(".eael-reading-progress-fill").css({
-            width: scrolled + "%"
-        });
-    });
-
-    // live prev
-    if (isEditMode) {
-        elementor.settings.page.addChangeCallback(
-            "eael_ext_reading_progress",
-            function(newValue) {
-                var $settings = elementor.settings.page.getSettings();
-
-                if (newValue == "yes") {
-                    if (jQuery(".eael-reading-progress-wrap").length == 0) {
-                        jQuery("body").append(
-                            '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-local"><div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' +
-                                $settings.settings
-                                    .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div><div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' +
-                                $settings.settings
-                                    .eael_ext_reading_progress_position +
-                                '"><div class="eael-reading-progress-fill"></div></div></div>'
-                        );
-                    }
-
-                    jQuery(".eael-reading-progress-wrap")
-                        .addClass("eael-reading-progress-wrap-local")
-                        .removeClass(
-                            "eael-reading-progress-wrap-global eael-reading-progress-wrap-disabled"
-                        );
-                } else {
-                    jQuery(".eael-reading-progress-wrap").removeClass(
-                        "eael-reading-progress-wrap-local eael-reading-progress-wrap-global"
-                    );
-
-                    if (
-                        $settings.settings
-                            .eael_ext_reading_progress_has_global == true
-                    ) {
-                        jQuery(".eael-reading-progress-wrap").addClass(
-                            "eael-reading-progress-wrap-global"
-                        );
-                    } else {
-                        jQuery(".eael-reading-progress-wrap").addClass(
-                            "eael-reading-progress-wrap-disabled"
-                        );
-                    }
-                }
-            }
-        );
-
-        elementor.settings.page.addChangeCallback(
-            "eael_ext_reading_progress_position",
-            function(newValue) {
-                elementor.settings.page.setSettings(
-                    "eael_ext_reading_progress_position",
-                    newValue
-                );
-                jQuery(".eael-reading-progress")
-                    .removeClass(
-                        "eael-reading-progress-top eael-reading-progress-bottom"
-                    )
-                    .addClass("eael-reading-progress-" + newValue);
-            }
-        );
-    }
-});
-
 (function ($) {
 	jQuery(document).ready(function () {
 		/**
@@ -41311,6 +41311,7 @@ jQuery(document).ready(function() {
 			}
 			var eaelToc = document.getElementById("eael-toc");
 			var titleUrl = typeof(eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
+			var excludeArr = typeof(eaelToc.dataset.excludeSelector) !== 'undefined' ? eaelToc.dataset.excludeSelector.replace(/^,|,$/g,'') : '';
 			var allSupportTag = [];
 			var mainSelector = document.querySelectorAll(selector),
 				listIndex = 0;
@@ -41323,6 +41324,9 @@ jQuery(document).ready(function() {
 			allSupportTag = Array.prototype.slice.call(allSupportTag);
 
 			allSupportTag.forEach(function (el) {
+				if(eaelTocExclude(excludeArr,el)){
+					return;
+				}
 				el.id = listIndex + "-" + eael_build_id( titleUrl ,el.textContent);
 				el.classList.add("eael-heading-content");
 				listIndex++;
@@ -41351,6 +41355,7 @@ jQuery(document).ready(function() {
 			var eaelToc = document.getElementById("eael-toc");
 			var titleUrl = typeof(eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
 			var listId = document.getElementById("eael-toc-list");
+			var excludeArr = typeof(eaelToc.dataset.excludeselector) !== 'undefined' ? eaelToc.dataset.excludeselector.replace(/^,|,$/g,'') : '';
 			var mainContent = document.querySelectorAll(selector),
 				baseTag = parentLevel = tagList
 					.trim()
@@ -41370,6 +41375,10 @@ jQuery(document).ready(function() {
 			}
 			for (var i = 0, len = allHeadings.length; i < len; ++i) {
 				var currentHeading = allHeadings[i];
+				if(eaelTocExclude(excludeArr,currentHeading)){
+					continue;
+				}
+
 				var latestLavel = parseInt(currentHeading.tagName.substr(1, 1));
 				var diff = latestLavel - parentLevel;
 
@@ -41459,6 +41468,17 @@ jQuery(document).ready(function() {
 			eaelTocSticky();
 		});
 		var stickyScroll = $('#eael-toc').data('stickyscroll');
+
+		/**
+		 * Check selector in array
+		 *
+		 * @param arr
+		 * @param el
+		 * @returns boolean
+		 */
+		function eaelTocExclude(excludes,el){
+			return $(el).closest(excludes).length;
+		}
 
 		/**
 		 * check sticky
@@ -41693,31 +41713,6 @@ jQuery(document).ready(function() {
 	});
 })(jQuery);
 
-var TypeFormHandler = function ($scope, $) {
-	if (typeformEmbed) {
-		var typeForm = $scope.find(".eael-typeform"),
-			id = typeForm.attr("id"),
-			data = typeForm.data('typeform');
-		if (typeof id != 'undefined' && typeof data !=='undefined') {
-			var el = document.getElementById(id);
-			if(data.url){
-				typeformEmbed.makeWidget(el, data.url, {
-					hideFooter: data.hideHeaders,
-					hideHeaders: data.hideFooter,
-					opacity: data.opacity
-				});
-			}
-		}
-	}
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-	elementorFrontend.hooks.addAction(
-		"frontend/element_ready/eael-typeform.default",
-		TypeFormHandler
-	);
-});
-
 var TwitterFeedHandler = function($scope, $) {
     if (!isEditMode) {
         $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
@@ -41747,4 +41742,29 @@ jQuery(window).on("elementor/frontend/init", function() {
         "frontend/element_ready/eael-twitter-feed.default",
         TwitterFeedHandler
     );
+});
+
+var TypeFormHandler = function ($scope, $) {
+	if (typeformEmbed) {
+		var typeForm = $scope.find(".eael-typeform"),
+			id = typeForm.attr("id"),
+			data = typeForm.data('typeform');
+		if (typeof id != 'undefined' && typeof data !=='undefined') {
+			var el = document.getElementById(id);
+			if(data.url){
+				typeformEmbed.makeWidget(el, data.url, {
+					hideFooter: data.hideHeaders,
+					hideHeaders: data.hideFooter,
+					opacity: data.opacity
+				});
+			}
+		}
+	}
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+	elementorFrontend.hooks.addAction(
+		"frontend/element_ready/eael-typeform.default",
+		TypeFormHandler
+	);
 });
