@@ -60,7 +60,14 @@ trait Post_Grid
                                                 title="' . get_the_title() . '"
                                                 '.($settings['title_link_nofollow'] ? 'rel="nofollow"' : '').'
                                                 '.($settings['title_link_target_blank'] ? 'target="_blank"' : '').'
-                                                >'.implode(" ", array_slice(explode(" ", get_the_title() ), 0, $settings['eael_title_length'])).'</a>';
+                                                >';
+                                                
+                                                if(empty($settings['eael_title_length'])) {
+                                                    echo get_the_title();
+                                                }else {
+                                                    echo implode(" ", array_slice(explode(" ", get_the_title() ), 0, $settings['eael_title_length']));
+                                                }
+                                                echo '</a>';
                                             echo '</h2>';
                                         }
 
@@ -78,8 +85,13 @@ trait Post_Grid
 
                                     if ($settings['eael_show_excerpt']) {
                                         echo '<div class="eael-entry-content">
-                                            <div class="eael-grid-post-excerpt">
-                                                <p>' . wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
+                                            <div class="eael-grid-post-excerpt">';
+                                                if(empty($settings['eael_excerpt_length'])) {
+                                                    echo '<p>'.strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()).'</p>';
+                                                }else {
+                                                    echo '<p>'.wp_trim_words(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']).'</p>';
+                                                }
+
                                                 if ($settings['eael_show_read_more_button']) {
                                                     echo '<a
                                                     href="' . get_the_permalink() . '"
