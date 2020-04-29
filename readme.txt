@@ -8,7 +8,7 @@ Stable tag: 3.9.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-The Essential plugin you install after Elementor! 65+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
+The Essential plugin you install after Elementor! 70+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
 
 == Description ==
 
@@ -43,7 +43,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 
 ### 39+ FREE WIDGETS AND COUNTING
 
-We have designed 38 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 39 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -80,7 +80,7 @@ We have designed 38 of the most useful widgets to enhance your Elementor Page Bu
 33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
 34. [BetterDocs Category Box](https://essential-addons.com/elementor/betterdocs-category-box/) - Cretae custom box-style Knowledge Base layout with BetterDocs Category List.
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
-36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible free-addon
+36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible free addon
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
@@ -116,7 +116,7 @@ We have designed 38 of the most useful widgets to enhance your Elementor Page Bu
 26. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
 27. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
-29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panoromic or long height images within image scroller widget.
+29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panoramic or long height images within image scroller widget.
 
 
 Extensions (Free): 
@@ -133,7 +133,7 @@ Extensions (Pro):
 4. [Content Protection](https://essential-addons.com/elementor/content-protection/) - Lock your content with password and allow only selected people to see it.
 
 
-More coming soon (weekly update) ...
+More features and improvements are coming on regular updates. 
 
 
 ### 🏆 FEATURED BY Top Reviewers
@@ -220,7 +220,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 3.9.3 - 28/04/2020 =
+= 3.9.3 - 29/04/2020 =
 - Added: EA Woo Checkout element
 - Added: Vertical Layout for Image Accordion
 - Added: Post Grid option to open links in new tab
