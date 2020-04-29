@@ -904,7 +904,7 @@ class Pricing_Table extends Widget_Base
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
-                    'eael_pricing_table_style!' => ['style-1', 'style-2'],
+                    'eael_pricing_table_style!' => apply_filters('eael_pricing_table_header_bg_supported_style', ['style-1', 'style-2'] ),
                 ],
             ]
         );
@@ -930,12 +930,14 @@ class Pricing_Table extends Widget_Base
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item .header, {{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item .header',
                 'condition' => [
-                    'eael_pricing_table_style' => ['style-4', 'style-5'],
+                    'eael_pricing_table_style' => apply_filters('eael_pricing_table_header_bg_supported_style', ['style-4'] ),
                 ],
             ]
         );
 
         $this->end_controls_section();
+
+        do_action( 'eael_pricing_table_control_header_extra_layout', $this );
 
         /**
          * -------------------------------------------
@@ -949,6 +951,7 @@ class Pricing_Table extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+
 
         $this->add_control(
             'eael_pricing_table_price_tag_onsale_heading',
