@@ -298,7 +298,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * Validate a namespace 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ \"./node_modules/@wordpress/hooks/build-module/index.js\");\n\nwindow.isEditMode = false;\nwindow.ea = {\n  hooks: Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__[\"createHooks\"])(),\n  isEditMode: false\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  window.isEditMode = elementorFrontend.isEditMode();\n  window.ea.isEditMode = elementorFrontend.isEditMode(); // hooks\n\n  ea.hooks.doAction(\"init\", ea.isEditMode); // init edit mode hook\n\n  if (ea.isEditMode) {\n    ea.hooks.doAction(\"editMode.init\");\n  }\n});\n\n//# sourceURL=webpack:///./src/js/view/general.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ \"./node_modules/@wordpress/hooks/build-module/index.js\");\n\nwindow.isEditMode = false;\nwindow.ea = {\n  hooks: Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__[\"createHooks\"])(),\n  isEditMode: false\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  window.isEditMode = elementorFrontend.isEditMode();\n  window.ea.isEditMode = elementorFrontend.isEditMode(); // hooks\n\n  ea.hooks.doAction(\"init\"); // init edit mode hook\n\n  if (ea.isEditMode) {\n    ea.hooks.doAction(\"editMode.init\");\n  }\n});\n\n//# sourceURL=webpack:///./src/js/view/general.js?");
 
 /***/ })
 
