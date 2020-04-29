@@ -6321,7 +6321,7 @@ button.mfp-close:hover {
   line-height: 30px;
   text-align: center;
   top: 50px;
-  z-index: 99;
+  z-index: 4;
   transition: all .5s;
 }
 
@@ -6337,7 +6337,7 @@ button.mfp-close:hover {
   text-align: center;
   top: 290px;
   width: 100px;
-  z-index: 99;
+  z-index: 4;
 }
 
 .eael-timeline-post time:before {
