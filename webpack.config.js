@@ -79,7 +79,6 @@ const removeEntry = (argv) => {
 		}
 	}, {});
 
-
 	return entry;
 };
 
