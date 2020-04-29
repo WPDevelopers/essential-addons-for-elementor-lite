@@ -1,8 +1,3 @@
-/* ------------------------ */
-/* 17. Infobox Style
-/* ------------------------ */
-
-/*--- Image/Icon On Top ---*/
 .eael-infobox .infobox-icon {
 	height: auto;
 }
@@ -11,16 +6,14 @@
 	display: flex;
 	width: 100%;
 	height: auto;
-	transition: .3s;
+	transition: 0.3s;
 	align-items: center;
 	justify-content: center;
-
 }
 
 .eael-infobox .infobox-icon .infobox-icon-wrap i {
-	transition: .3s;
+	transition: 0.3s;
 }
-
 
 /*--- For Content Alignment ---*/
 .eael-infobox-content-align-left .eael-infobox .infobox-icon,
@@ -40,7 +33,6 @@
 .eael-infobox-content-align-center .eael-infobox .infobox-button {
 	text-align: center;
 }
-
 
 /*--- For icon background shape ---*/
 .eael-infobox-icon-bg-shape-square .infobox-icon .infobox-icon-wrap,
@@ -108,7 +100,6 @@
 	justify-content: flex-end;
 }
 
-
 /*--- Image/Icon On Left ---*/
 .eael-infobox.icon-on-left {
 	position: relative;
@@ -150,7 +141,6 @@
 	margin: 0 0 10px 0;
 }
 
-
 /*--- Image/Icon On Right ---*/
 .eael-infobox.icon-on-right {
 	position: relative;
@@ -184,7 +174,6 @@
 	line-height: 1;
 	margin: 0 0 10px 0;
 }
-
 
 /*--- Imgae Circle On Top ---*/
 .eael-infobox .infobox-icon img {
