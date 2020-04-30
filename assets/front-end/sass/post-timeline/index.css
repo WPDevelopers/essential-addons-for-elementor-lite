@@ -63,7 +63,7 @@
 }
 
 .eael-timeline-post-inner {
-  background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   border: 8px solid #e5eaed;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   float: right;
@@ -121,6 +121,8 @@
   overflow: hidden;
   position: relative;
   opacity: 1;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
   transition: all .3s;
 }
 
@@ -146,6 +148,8 @@
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
   transition: all .3s;
 }
 
@@ -178,6 +182,8 @@
   text-align: center;
   top: 50px;
   z-index: 4;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
   transition: all .5s;
 }
 
@@ -233,69 +239,60 @@
   .eael-timeline-post-title h2 {
     font-size: 0.8em;
   }
-
   .eael-timeline-post-excerpt p {
     font-size: 13px;
   }
 }
+
 @media only screen and (max-width: 1169px) {
   .eael-timeline-post-inner {
     height: 320px;
   }
 }
+
 @media only screen and (max-width: 992px) {
   .eael-post-timeline {
     margin-left: 0;
   }
-
   .eael-timeline-bullet,
-  .eael-timeline-post:after,
-  .eael-timeline-post:before,
-  .eael-timeline-post-inner:after {
+.eael-timeline-post:after,
+.eael-timeline-post:before,
+.eael-timeline-post-inner:after {
     display: none;
   }
-
   .eael-timeline-post {
     display: inline-block;
     float: left !important;
     width: 50% !important;
     margin: 15px auto;
   }
-
   .eael-timeline-post-inner {
     height: 320px;
     padding-bottom: 30px;
   }
-
   .eael-timeline-post-title {
     bottom: 50px;
   }
-
   .eael-timeline-post-title h2 {
     font-size: 0.8em;
     line-height: 1.2em;
   }
-
   .eael-timeline-post .eael-timeline-post-inner {
     margin: 0 10px auto 0;
     width: 90%;
   }
-
   .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     margin: 0 auto 0 10px;
     width: 90%;
   }
-
   .eael-timeline-post-excerpt {
     opacity: 0 !important;
   }
-
   .eael-timeline-post-image {
     opacity: .3;
   }
-
   .eael-timeline-post time,
-  .eael-timeline-post:nth-child(2n) time {
+.eael-timeline-post:nth-child(2n) time {
     background-color: #fff;
     border-radius: 0;
     color: #444;
@@ -307,11 +304,11 @@
     top: 275px;
     width: 100%;
   }
-
   time:before {
     display: none;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .eael-timeline-post {
     display: block;
@@ -319,24 +316,23 @@
     margin: 20px auto;
     width: 100% !important;
   }
-
   .eael-timeline-post .eael-timeline-post-inner,
-  .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
+.eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     display: block;
     float: none;
     margin: 0 auto;
   }
 }
+
 @media only screen and (max-width: 479px) {
   .eael-timeline-post .eael-timeline-post-inner,
-  .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
+.eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     height: 250px;
     margin: 0 auto;
     width: 95%;
   }
-
   .eael-timeline-post time,
-  .eael-timeline-post:nth-child(2n) time {
+.eael-timeline-post:nth-child(2n) time {
     top: 205px;
   }
 }

@@ -528,13 +528,30 @@ class Flip_Box extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_flipbox_front_bg_heading',
+			[
+				'label' => __( 'Front Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_flipbox_front_bg_color',
-				'label' => esc_html__( 'Front Background Color', 'essential-addons-for-elementor-lite'),
+				'label' => __( 'Front Background Color', 'essential-addons-for-elementor-lite'),
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container'
+				'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container',
+			]
+		);
+
+		$this->add_control(
+			'eael_flipbox_back_bg_heading',
+			[
+				'label' => __( 'Back Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator'	=> 'before'
 			]
 		);
 
@@ -542,9 +559,10 @@ class Flip_Box extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_flipbox_back_bg_color',
-				'label' => esc_html__( 'Back Background Color', 'essential-addons-for-elementor-lite'),
+				'label' => __( 'Back Background Color', 'essential-addons-for-elementor-lite'),
 				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container'
+				'selector' => '{{WRAPPER}} .eael-elements-flip-box-rear-container',
+				'separator'	=> 'after'
 			]
 		);
 

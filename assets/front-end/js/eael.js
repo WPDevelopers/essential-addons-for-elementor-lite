@@ -19246,7 +19246,7 @@ var trim = String.prototype.trim ?
         options: {
             markup: '<div class="mfp-iframe-scaler">' +
                 '<div class="mfp-close"></div>' +
-                '<iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe>' +
+                '<iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen allow="autoplay"></iframe>' +
                 '</div>',
 
             srcAction: 'iframe_src',
@@ -39165,7 +39165,7 @@ var AdvanceTabHandler = function($scope, $) {
             $paGallery = tabsContent.eq(currentTabIndex).find('.premium-gallery-container');
 
         if($postGridGallery.length) {
-            $postGridGallery.isotope();
+            $postGridGallery.isotope("layout");
         }
 
         if($twitterfeedGallery.length) {
@@ -40754,13 +40754,7 @@ var filterableGalleryHandler = function($scope, $) {
 			image: {
 				titleSrc: function(item) {
 					if (mfpCaption == "yes") {
-						return item.el
-							.parent()
-							.parent()
-							.parent()
-							.parent()
-							.find(".fg-item-title")
-							.html();
+						return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parent('.eael-gallery-grid-item').find('.fg-item-title').html();
 					}
 				}
 			}
@@ -41767,4 +41761,54 @@ jQuery(window).on("elementor/frontend/init", function() {
 		"frontend/element_ready/eael-typeform.default",
 		TypeFormHandler
 	);
+});
+
+var WooCheckout = function($scope, $) {
+
+    $.blockUI.defaults.overlayCSS.cursor = 'default';
+    function render_order_review_template(){
+        var wooCheckout = $('.ea-woo-checkout');
+
+        setTimeout(
+            function () {
+                $('.ea-checkout-review-order-table').addClass( 'processing' ).block({
+                    message: null,
+                    overlayCSS: {
+                        background: '#fff',
+                        opacity: 0.6
+                    }
+                });
+
+                $.ajax({
+                    type:		'POST',
+                    url:		localize.ajaxurl,
+                    data:		{
+                        action: 'woo_checkout_update_order_review',
+                        orderReviewData : wooCheckout.data('checkout')
+                    },
+                    success:	function( data ) {
+                        $( ".ea-checkout-review-order-table" ).replaceWith( data.order_review);
+                        setTimeout(function () {
+                            $( '.ea-checkout-review-order-table' ).removeClass('processing').unblock();
+                        }, 100000)
+                    }
+                });
+            },2000
+        );
+    }
+
+    $(document).on('click', '.woocommerce-remove-coupon', function(e) {
+        render_order_review_template();
+    });
+
+    $( 'form.checkout_coupon' ).submit(function (event) {
+        render_order_review_template();
+    });
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-woo-checkout.default",
+        WooCheckout
+    );
 });
