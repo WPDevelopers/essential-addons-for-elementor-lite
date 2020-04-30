@@ -249,6 +249,9 @@
 .eaicon-weforms:before {
 	content: "\e94b";
 }
+.eaicon-woo-checkout:before {
+	content: "\e94e";
+}
 .eaicon-woo-product-collections:before {
 	content: "\e94c";
 }

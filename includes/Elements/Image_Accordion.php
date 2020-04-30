@@ -78,6 +78,21 @@ class Image_Accordion extends Widget_Base
         );
 
         $this->add_control(
+            'eael_img_accordion_direction',
+            [
+                'label' => esc_html__('Direction', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'on-hover',
+                'label_block' => false,
+                'options' => [
+                    'accordion-direction-horizontal' => esc_html__('Horizontal', 'essential-addons-for-elementor-lite'),
+                    'accordion-direction-vertical' => esc_html__('Vertical', 'essential-addons-for-elementor-lite')
+                ],
+                'default'   => 'accordion-direction-vertical'
+            ]
+        );
+
+        $this->add_control(
             'eael_img_accordions',
             [
                 'type' => Controls_Manager::REPEATER,
@@ -335,9 +350,18 @@ class Image_Accordion extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        $this->add_render_attribute('eael-image-accordion', 'class', 'eael-img-accordion');
+        $this->add_render_attribute(
+            'eael-image-accordion',
+            [
+                'class' => [
+                    'eael-img-accordion',
+                    $settings['eael_img_accordion_direction']
+                ]
+            ]
+        );
+
         $this->add_render_attribute('eael-image-accordion', 'data-img-accordion-id', esc_attr($this->get_id()));
-        $this->add_render_attribute('eael-image-accordion', 'data-img-accordion-type', $settings['eael_img_accordion_type']);
+        $this->add_render_attribute('eael-image-accordion', 'data-img-accordion-type', $settings['eael_img_accordion_type']);        
 
         if (!empty($settings['eael_img_accordions'])) {
             echo '<div ' . $this->get_render_attribute_string('eael-image-accordion') . ' id="eael-img-accordion-' . $this->get_id() . '">';
