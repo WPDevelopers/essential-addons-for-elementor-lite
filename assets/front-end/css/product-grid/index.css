@@ -303,7 +303,8 @@
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_cart_button.loading:after {
   content: '\f110';
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font-weight: normal;
+  font-family: 'Font Awesome 5 Free';
   font-size: 14px;
   line-height: 38px;
   color: #fff;
@@ -322,7 +323,8 @@
 .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:after,
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:after {
   content: '\f06e';
-  font: normal normal normal 14px/1 FontAwesome;
+  font-weight: normal;
+  font-family: 'Font Awesome 5 Free';
   font-size: 14px;
   line-height: 38px;
   color: #fff;

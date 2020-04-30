@@ -309,8 +309,8 @@
                                 &:after {
                                     content: '\f110';
                                     display: inline-block;
-                                    font: normal normal normal 14px/1
-                                        FontAwesome;
+                                    font-weight: normal;
+                                    font-family: 'Font Awesome 5 Free';
                                     font-size: 14px;
                                     line-height: 38px;
                                     color: #fff;
@@ -330,7 +330,8 @@
 
                             &:after {
                                 content: '\f06e';
-                                font: normal normal normal 14px/1 FontAwesome;
+                                font-weight: normal;
+                                font-family: 'Font Awesome 5 Free';
                                 font-size: 14px;
                                 line-height: 38px;
                                 color: #fff;
