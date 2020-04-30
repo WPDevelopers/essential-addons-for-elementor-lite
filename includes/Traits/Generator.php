@@ -237,23 +237,23 @@ trait Generator
         sort($old_elements);
 
         if ($old_elements != $elements) {
-            set_transient('eael_transient_elements_' . $this->request_uid, $elements, YEAR_IN_SECONDS);
+            set_transient('eael_transient_elements_' . $this->request_uid, $elements, MONTH_IN_SECONDS);
 
-            // if not empty elements, regenerate cache files
             if (!empty($elements)) {
-                $this->generate_scripts($elements, $this->request_uid, 'view');
-
-                // load generated files - fallback
+                // load fallback assets
                 $this->enqueue_protocols($this->request_uid);
+
+                // generate cache files
+                $this->generate_scripts($elements, $this->request_uid, 'view');
             }
         }
 
-        // // if no cache files, generate new
+        // if no cache files, generate new
         if (!$this->has_cache_files($this->request_uid)) {
             $this->generate_scripts($elements, $this->request_uid, 'view');
         }
 
-        // // if no elements, remove cache files
+        // if no elements, remove cache files
         if (empty($elements)) {
             $this->remove_files($this->request_uid);
         }
