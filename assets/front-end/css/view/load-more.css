@@ -1,4 +1,4 @@
-@-webkit-keyframes "loaderSpin" {
+@-webkit-keyframes loaderSpin {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -8,7 +8,7 @@
             transform: rotate(360deg);
   }
 }
-@keyframes "loaderSpin" {
+@keyframes loaderSpin {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
