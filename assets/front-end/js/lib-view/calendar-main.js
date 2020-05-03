@@ -1,9 +1,3 @@
-/*!
-FullCalendar Core Package v4.4.0
-Docs & License: https://fullcalendar.io/
-(c) 2019 Adam Shaw
-*/
-
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
