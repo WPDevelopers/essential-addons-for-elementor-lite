@@ -166,6 +166,8 @@
         var prepareOptions = {};
         var target = $(this).data('target');
         var val = $(target).val();
+        var docSelector = $(this).data('doc');
+        var docMarkup  = (docSelector)?$(docSelector).clone().css("display", "block"):false;
 
         if (Object.keys(options).length > 0) {
             prepareOptions['all'] = 'All';
@@ -181,6 +183,7 @@
             inputPlaceholder: placeholder,
             inputValue: val,
             inputOptions: prepareOptions,
+            footer: docMarkup,
             preConfirm: function(res) {
                 $(target).val(res);
 
