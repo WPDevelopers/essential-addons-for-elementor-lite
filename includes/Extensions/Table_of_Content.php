@@ -117,6 +117,9 @@ class Table_of_Content
         $element->start_controls_tab( 'eael_toc_include',
             [
                 'label' => __( 'Include', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ]
             ]
         );
 
@@ -167,6 +170,9 @@ class Table_of_Content
         $element->start_controls_tab( 'eael_toc_exclude',
             [
                 'label' => __( 'Exclude', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ]
             ]
         );
 
@@ -176,8 +182,11 @@ class Table_of_Content
                 'label' => __( 'Exclude By Selector', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::TEXT,
                 'description' => __( 'CSS selectors, in a comma-separated list', 'essential-addons-for-elementor-lite' ),
-                'default' => [],
-                'label_block' => true
+                'default' => '',
+                'label_block' => true,
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                ]
             ]
         );
 
