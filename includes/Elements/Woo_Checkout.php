@@ -71,7 +71,7 @@ class Woo_Checkout extends Widget_Base {
 	 *
 	 */
 	public function get_keywords() {
-		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'multi Step Checkout', 'split Checkout', 'ea', 'essential addons' ];
+		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'woocommerce split checkout', 'split checkout', 'ea', 'essential addons' ];
 	}
 
 	public function get_custom_help_url() {
@@ -131,7 +131,7 @@ class Woo_Checkout extends Widget_Base {
 					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::HEADING,
 					'condition' => [
-						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
+						'ea_woo_checkout_layout' => ['split'],
 					],
 				]
 			);
@@ -707,7 +707,7 @@ class Woo_Checkout extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ea_woo_checkout_order_review_total_typo',
-                'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total',
+                'selector' => '{{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total',
                 'condition' => [
                     'ea_woo_checkout_layout!' => 'default',
                 ],
@@ -1727,6 +1727,9 @@ class Woo_Checkout extends Widget_Base {
 				'label' => __( 'Button', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_group_control(
@@ -1734,6 +1737,9 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'name' => 'ea_woo_checkout_payment_btn_typo',
 				'selector' => '.eael-woo-checkout {{WRAPPER}} .woocommerce #place_order',
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_responsive_control(
@@ -1753,6 +1759,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'.eael-woo-checkout {{WRAPPER}} .woocommerce #place_order' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_responsive_control(
@@ -1771,6 +1780,9 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'selectors' => [
 					'.eael-woo-checkout {{WRAPPER}} .woocommerce #place_order' => 'margin-top: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
 				],
 			]
 		);
@@ -1795,7 +1807,7 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'name' => 'ea_woo_checkout_button_typo',
 				'label' => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .ea-woo-checkout .woocommerce-checkout #place_order, {{WRAPPER}} .ea-woo-checkout .split-buttons button',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woocommerce-checkout #place_order',
 			]
 		);
 
@@ -1922,7 +1934,6 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .ea-woo-checkout .split-buttons button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1936,6 +1947,8 @@ class Woo_Checkout extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		do_action('eael_woo_checkout_pro_enabled_steps_btn_styles', $this);
 	}
 
 	public function add_checkout_body_class( $classes ){
