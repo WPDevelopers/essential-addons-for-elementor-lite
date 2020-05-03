@@ -30,6 +30,7 @@
 }
 .template-cloud-install {
     display: flex;
+    flex-flow: column nowrap;
     width: 100%;
     background-image: url(../images/templately/login-bg.png);
     background-size: cover;
@@ -43,20 +44,29 @@
 }
 
 .templately-left {
-    padding-right: 15px;
+    padding: 10px;
 }
 .templately-right {
-    padding-left: 15px;
+    padding: 10px;
+    max-width: 550px;
 }
-.templately-admin-title, .templately-admin-install {
-    width: 70%;
-}
+
 .templately-admin-title {
-    float: right;
     font-size: 16px;
     text-align: left;
 }
-.templately-admin-title h1 {
+.templately-cloud-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.templately-installer-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.templately-cloud-title h1 {
     color: #fff;
     font-size: 50px;
     font-weight: 700;
@@ -64,18 +74,17 @@
     font-size: 60px;
 }
 
-.templately-admin-title p {
+.templately-cloud-title p {
     font-size: 18px;
     line-height: 1.6;
     color: #fff;
 }
 
 .templately-admin-install {
-    background-color: #5d53ff;
+    background-color: transparent;
     color: #fff;
     padding: 50px;
     border-radius: 10px;
-    float: left;
 }
 
 .templately-admin-install p {
@@ -86,7 +95,7 @@
 
 .templately-admin-install button.eae-activate-templately {
     background-color: #fff;
-    border: 1px solid rgb(96, 114, 255);
+    border: 1px solid rgb(96, 114, 255, 0);
     padding: 15px 30px;
     border-radius: 50px;
     color: rgb(96, 114, 255);
@@ -99,4 +108,15 @@
 .templately-admin-install button.eae-activate-templately:hover {
     background-color: rgb(250, 145, 150);
     color: rgb(255, 255, 255);
+}
+.templately-cloud-video-container {
+    background-color: #fff;
+    padding: 8px;
+    width: 620px;
+    max-width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 30px 5px rgba(0,0,0, .15);
+}
+.templately-cloud-video-container iframe {
+    width: 100%;
 }
