@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, page build
 Requires at least: 4.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.9.1
+Stable tag: 3.9.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -12,11 +12,12 @@ The Essential plugin you install after Elementor! 65+ Premium elements, includin
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 65+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 70+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
 
 [Check the Demos](https://essential-addons.com/elementor/)
 
+https://www.youtube.com/watch?v=uuyXfUDqRZM
 
 ### 100+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which comes with Essential Addons and design your website to stand out from the crowd.
@@ -40,7 +41,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 37+ FREE WIDGETS AND COUNTING
+### 39+ FREE WIDGETS AND COUNTING
 
 We have designed 37 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -81,6 +82,8 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
 36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible freedon
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
+38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
+39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -114,6 +117,7 @@ We have designed 37 of the most useful widgets to enhance your Elementor Page Bu
 27. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
 29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panaromic or long height images within image scroller widget.
+
 
 Extensions (Free): 
 
@@ -184,6 +188,28 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.9.3 - 28/04/2020 =
+- Added: EA Woo Checkout element
+- Added: Vertical Layout for Image Accordion
+- Added: Post Grid option to open links in new tab
+- Fixed: Filterable Gallery with Shortened YouTube URL
+- Fixed: Filterable Gallery caption issue
+- Fixed: Gravity Forms styling issue
+- Fixed: Post Grid title length issue
+- Few minor bug fix and improvements
+
+= 3.9.2 - 12/04/2020 =
+- Added: Formstack Widget
+- Added: EmbedPress Widget
+- Fixed: Toc hide issue in theme builder
+- Improvement: Event Calendar show year in Event Calendar Widget
+- ADDED: Toc hide/show option in mobile device
+- Improvement: Post Grid added individual control over author/categories/date
+- FIXED: BetterDocs > Search Form's search icon size increase option fixed
+- Improvement: EA Dual Color Heading | Added multiple Tag support for headings
+- Improvements - EA Advanced Tabs
+- Few minor bugfix and improvements
 
 = 3.9.1 - 25/03/2020 =
 - Improved Elements Keywords for better searchability

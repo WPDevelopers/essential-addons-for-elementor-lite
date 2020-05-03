@@ -18,6 +18,10 @@
   line-height: 1.5;
   font-weight: 500;
 }
+.ea-woo-checkout .woocommerce label.woocommerce-form__label-for-checkbox.checkbox {
+  display: flex;
+  align-items: center;
+}
 .ea-woo-checkout .woocommerce .checkout li.wc_payment_method {
   border-bottom: none;
 }
@@ -230,10 +234,13 @@
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-col-2 {
   flex-basis: 15%;
   max-width: 15%;
+  text-align: center;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .table-col-3 {
   flex-basis: 15%;
   max-width: 15%;
+  text-align: right;
+  padding-right: 25px !important;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table .product-thum-name {
   align-items: center;

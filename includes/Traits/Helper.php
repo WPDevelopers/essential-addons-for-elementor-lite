@@ -2622,22 +2622,6 @@ trait Helper
 
     }
 
-	/**
-	 * Woo Checkout Layout
-	 */
-	public function eael_woo_checkout_layout($layout)
-	{
-		if (apply_filters('eael/pro_enabled', false)) {
-			$layout['multi-steps'] = __('Multi Steps', 'essential-addons-for-elementor-lite');
-			$layout['split'] = __('Split', 'essential-addons-for-elementor-lite');
-		}else{
-			$layout['multi-steps'] = __('Multi Steps (Pro)', 'essential-addons-for-elementor-lite');
-			$layout['split'] = __('Split (Pro)', 'essential-addons-for-elementor-lite');
-		}
-
-		return $layout;
-	}
-
     /**
      * Woo Checkout
      */

@@ -254,14 +254,19 @@ trait Woo_Checkout_Helper {
 	 * Show the login.
 	 */
 	public static function ea_login_template(){
-		ob_start();
 		$settings = self::get_settings();
 		$class = '';
-		if(\Elementor\Plugin::$instance->editor->is_edit_mode() || is_user_logged_in()){
-			$class = 'woo-checkout-login-editor';
-		}elseif ('no' === get_option( 'woocommerce_enable_checkout_login_reminder')){
-			return;
-		}
+		$status = true;
+		if('no' === get_option( 'woocommerce_enable_checkout_login_reminder')){
+            return '';
+        }elseif(\Elementor\Plugin::$instance->editor->is_edit_mode() && 'yes' === $settings['ea_section_woo_login_show']){
+		    $class = 'woo-checkout-login-editor';
+		}elseif(!is_user_logged_in()){
+            $class = 'eael-woo-checkout-login-page';
+        }else{
+            return '';
+        }
+        ob_start();
 		?>
         <div class="woo-checkout-login <?php echo $class; ?>">
             <div class="ea-login-icon">
@@ -313,7 +318,11 @@ trait Woo_Checkout_Helper {
             </form>
 
         </div>
-		<?php echo ob_get_clean();
+		<?php
+        $content  = ob_get_clean();
+        if($status){
+            echo $content;
+        }
 	}
 
 	/**
@@ -378,7 +387,7 @@ trait Woo_Checkout_Helper {
 							</div>
                             <?php if( $settings['ea_woo_checkout_layout'] == 'default' ) { ?>
 							<div class="table-col-2 product-quantity">
-								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . $cart_item['quantity'] . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', $cart_item['quantity'], $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
                             <?php } ?>
 							<div class="table-col-3 product-total">
@@ -514,11 +523,6 @@ trait Woo_Checkout_Helper {
 	 * Added all actions
 	 */
 	public function ea_woo_checkout_add_actions($settings) {
-
-		if( 'yes' == $settings['ea_section_woo_login_show'] ) :
-			add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_login_template' ], 10 );
-		endif;
-
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_login_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_coupon_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
