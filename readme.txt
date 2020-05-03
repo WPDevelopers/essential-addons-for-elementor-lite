@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 3.9.3
+Stable tag: 3.9.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -219,6 +219,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 3.9.4 - 03/05/2020 =
+- Fixed: Image Accordion not showing 'Horizontal' layout
+- Fixed: Info Box not showing 'Margin' option in 'Advanced' tab
 
 = 3.9.3 - 29/04/2020 =
 - Added: EA Woo Checkout element
