@@ -273,6 +273,7 @@
   text-transform: capitalize;
   font-size: 15px;
   line-height: 1.5em;
+  display: inline-block;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .back-to-shopping i {
   margin-right: 5px;

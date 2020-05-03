@@ -71,7 +71,7 @@ class Woo_Checkout extends Widget_Base {
 	 *
 	 */
 	public function get_keywords() {
-		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'ea', 'essential addons' ];
+		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'multi Step Checkout', 'split Checkout', 'ea', 'essential addons' ];
 	}
 
 	public function get_custom_help_url() {
@@ -123,6 +123,19 @@ class Woo_Checkout extends Widget_Base {
 				]),
 			]
 		);
+
+		if (!apply_filters('eael/pro_enabled', false)) {
+			$this->add_control(
+				'eael_woo_checkout_pro_enable_warning',
+				[
+					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
+					'type' => Controls_Manager::HEADING,
+					'condition' => [
+						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
+					],
+				]
+			);
+		}
 
 		do_action('eael_woo_checkout_pro_enabled_general_settings', $this);
 
@@ -453,6 +466,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .table-row' => 'background-color: {{VALUE}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_control(
@@ -463,6 +479,23 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#404040',
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .table-row' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_order_review_row_color_split',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout-order-review .table-row' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'split',
 				],
 			]
 		);
@@ -490,6 +523,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .table-row, {{WRAPPER}} .ea-woo-checkout-order-review .product-thumbnail img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_responsive_control(
@@ -508,6 +544,7 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table li.table-row' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table .table-row' => 'padding-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -536,6 +573,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'background-color: {{VALUE}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_control(
@@ -546,6 +586,20 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#404040',
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		$this->add_control(
+			'ea_woo_checkout_order_review_footer_color_split',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'split',
 				],
 			]
 		);
@@ -613,6 +667,9 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_responsive_control(
@@ -661,7 +718,7 @@ class Woo_Checkout extends Widget_Base {
             [
                 'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#404040',
+                'default' => '#ffffff',
                 'selectors' => [
                     '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content .order-total' => 'color: {{VALUE}};',
                 ],
@@ -1738,7 +1795,7 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'name' => 'ea_woo_checkout_button_typo',
 				'label' => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-				'selector' => '{{WRAPPER}} .ea-woo-checkout .woocommerce-checkout #place_order',
+				'selector' => '{{WRAPPER}} .ea-woo-checkout .woocommerce-checkout #place_order, {{WRAPPER}} .ea-woo-checkout .split-buttons button',
 			]
 		);
 
@@ -1758,6 +1815,7 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#7866ff',
 				'selectors' => [
 					'{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1770,6 +1828,7 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#ffffff',
 				'selectors' => [
 					'{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1777,7 +1836,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [
 				'name' => 'ea_woo_checkout_button_border',
-				'selector' => '{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button',
+				'selector' => '{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button, {{WRAPPER}} .ea-woo-checkout .split-buttons button',
 			]
 		);
 
@@ -1798,6 +1857,7 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#7866ff',
 				'selectors' => [
 					'{{WRAPPER}} #place_order:hover, {{WRAPPER}} .ea-woo-checkout .woocommerce .button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1810,6 +1870,7 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#ffffff',
 				'selectors' => [
 					'{{WRAPPER}} #place_order:hover, {{WRAPPER}} .ea-woo-checkout .woocommerce .button:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1821,6 +1882,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #place_order:hover, {{WRAPPER}} .ea-woo-checkout .woocommerce .button:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button:hover' => 'border-color: {{VALUE}};',
 				],
 				'condition' => [
 					'ea_woo_checkout_button_border_border!' => '',
@@ -1847,6 +1909,7 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1859,6 +1922,7 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ea-woo-checkout .split-buttons button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1867,7 +1931,7 @@ class Woo_Checkout extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'ea_woo_checkout_button_box_shadow',
-				'selector' => '{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button',
+				'selector' => '{{WRAPPER}} #place_order, {{WRAPPER}} .ea-woo-checkout .woocommerce .button, {{WRAPPER}} .ea-woo-checkout .split-buttons button',
 			]
 		);
 
