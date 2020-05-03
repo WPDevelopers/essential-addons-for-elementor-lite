@@ -128,7 +128,7 @@ trait Generator
                 }
             } elseif (isset($this->registered_extensions[$element])) {
                 if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
-                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
+                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $file) {
                         ${$file['type']}[$file['context']][] = $file['file'];
                     }
                 }
