@@ -1,0 +1,102 @@
+.essential-addons_page_template-cloud #wpwrap, .essential-addons_page_template-cloud #wpcontent, .essential-addons_page_template-cloud #wpcontent #wpbody, .essential-addons_page_template-cloud #wpcontent #wpbody-content, .essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content, .essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap, .essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap .template-cloud,
+.essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap .template-cloud-body {
+    height: 100%;
+}
+.essential-addons_page_template-cloud #wpcontent {
+    padding-left: 0px;
+}
+.essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content {
+    padding-bottom: 0px;
+}
+.essential-addons_page_template-cloud #wpcontent #wpbody #wpbody-content .wrap {
+    margin: 0px;
+    padding: 0px;
+}
+
+.template-cloud-header {
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0px 0px 10px 0px #00000024;
+    overflow: visible;
+    z-index: 99;
+    position: relative;
+    background-color: #fff;
+    padding: 15px 20px;
+}
+
+.template-cloud-body { 
+    box-sizing: border-box;
+    height: calc(100% - 80px) !important;
+}
+.template-cloud-install {
+    display: flex;
+    width: 100%;
+    background-image: url(../images/templately/login-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    max-height: 88vh;
+}
+
+.templately-left {
+    padding-right: 15px;
+}
+.templately-right {
+    padding-left: 15px;
+}
+.templately-admin-title, .templately-admin-install {
+    width: 70%;
+}
+.templately-admin-title {
+    float: right;
+    font-size: 16px;
+    text-align: left;
+}
+.templately-admin-title h1 {
+    color: #fff;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 60px;
+}
+
+.templately-admin-title p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.templately-admin-install {
+    background-color: #5d53ff;
+    color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    float: left;
+}
+
+.templately-admin-install p {
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.templately-admin-install button.eae-activate-templately {
+    background-color: #fff;
+    border: 1px solid rgb(96, 114, 255);
+    padding: 15px 30px;
+    border-radius: 50px;
+    color: rgb(96, 114, 255);
+    font-size: 18px;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s;
+}
+.templately-admin-install button.eae-activate-templately:hover {
+    background-color: rgb(250, 145, 150);
+    color: rgb(255, 255, 255);
+}
