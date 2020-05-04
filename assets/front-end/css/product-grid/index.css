@@ -162,7 +162,7 @@
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button::before,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .button.add_to_cart_button::before,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .button.add_to_cart_button::before {
-  content: "\f07a";
+  content: "\f217";
   font-family: 'Font Awesome\ 5 Free';
   font-weight: 900;
   padding-right: 8px;
@@ -405,6 +405,13 @@
 .eael-post-grid.eael-product-overlay .woocommerce ul.products li.product:hover .overlay .add_to_cart_button {
   opacity: 1;
   transform: translateY(0);
+}
+.eael-product-grid.eael-product-default .button.add_to_cart_button::before,
+.eael-post-grid.eael-product-default .button.add_to_cart_button::before {
+  content: "\f217";
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 900;
+  padding-right: 8px;
 }
 
 @media only screen and (min-width: 1025px) {

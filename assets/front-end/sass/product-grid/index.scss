@@ -158,7 +158,7 @@
                         margin: 15px;
                         border-radius: 0;
                         &::before {
-                            content: "\f07a";
+                            content: "\f217";
                             font-family: 'Font Awesome\ 5 Free';
                             font-weight: 900;
                             padding-right: 8px;
@@ -419,6 +419,18 @@
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // default style
+    &.eael-product-default {
+        .button.add_to_cart_button {
+            &::before {
+                content: "\f217";
+                font-family: 'Font Awesome\ 5 Free';
+                font-weight: 900;
+                padding-right: 8px;
             }
         }
     }
