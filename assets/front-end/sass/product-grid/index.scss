@@ -157,7 +157,12 @@
                         padding: 0;
                         margin: 15px;
                         border-radius: 0;
-
+                        &::before {
+                            content: "\f07a";
+                            font-family: 'Font Awesome\ 5 Free';
+                            font-weight: 900;
+                            padding-right: 8px;
+                        }
                         &:focus {
                             outline: none;
                         }
