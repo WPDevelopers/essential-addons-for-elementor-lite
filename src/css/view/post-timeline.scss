@@ -178,10 +178,10 @@
 	line-height: 30px;
 	text-align: center;
 	top: 50px;
-	z-index: 99;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	transition: all 0.5s;
+	z-index: 4;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
 }
 
 .eael-timeline-post:nth-child(2n) time {
@@ -196,7 +196,7 @@
 	text-align: center;
 	top: 290px;
 	width: 100px;
-	z-index: 99;
+	z-index: 4;
 }
 
 .eael-timeline-post time:before {

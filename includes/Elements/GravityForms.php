@@ -1191,7 +1191,7 @@ class GravityForms extends Widget_Base {
         );
         
         $this->add_control(
-            'custom_checkbox',
+            'custom_radio_checkbox',
             [
                 'label'                 => __( 'Custom Styles', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::SWITCHER,
@@ -1222,7 +1222,7 @@ class GravityForms extends Widget_Base {
                     '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1234,7 +1234,7 @@ class GravityForms extends Widget_Base {
             [
                 'label'                 => __( 'Normal', 'essential-addons-for-elementor-lite'),
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1249,7 +1249,7 @@ class GravityForms extends Widget_Base {
                     '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]' => 'background: {{VALUE}}',
                 ],
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1271,7 +1271,7 @@ class GravityForms extends Widget_Base {
                     '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]' => 'border-width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1286,7 +1286,7 @@ class GravityForms extends Widget_Base {
                     '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]' => 'border-color: {{VALUE}}',
                 ],
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1297,7 +1297,7 @@ class GravityForms extends Widget_Base {
                 'label'                 => __( 'Checkbox', 'essential-addons-for-elementor-lite'),
                 'type'                  => Controls_Manager::HEADING,
 				'condition'             => [
-					'custom_checkbox' => 'yes',
+					'custom_radio_checkbox' => 'yes',
 				],
             ]
         );
@@ -1312,7 +1312,7 @@ class GravityForms extends Widget_Base {
 					'{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"], {{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
 			]
         );
@@ -1348,7 +1348,7 @@ class GravityForms extends Widget_Base {
             [
                 'label'                 => __( 'Checked', 'essential-addons-for-elementor-lite'),
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -1363,7 +1363,7 @@ class GravityForms extends Widget_Base {
                     '{{WRAPPER}} .eael-custom-radio-checkbox input[type="checkbox"]:checked:before' => 'background: {{VALUE}}',
                 ],
                 'condition'             => [
-                    'custom_checkbox' => 'yes',
+                    'custom_radio_checkbox' => 'yes',
                 ],
             ]
         );
@@ -2378,7 +2378,7 @@ class GravityForms extends Widget_Base {
             $this->add_render_attribute( 'contact-form', 'class', 'title-description-hide' );
         }
         
-        if ( isset($settings['custom_radio_checkbox']) && ( $settings['custom_radio_checkbox'] == 'yes' ) ) {
+        if ( $settings['custom_radio_checkbox'] == 'yes' || $settings['custom_radio_style'] == 'yes' ) {
             $this->add_render_attribute( 'contact-form', 'class', 'eael-custom-radio-checkbox' );
         }
 
