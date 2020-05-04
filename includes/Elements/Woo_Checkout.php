@@ -587,10 +587,13 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
 				],
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
 			]
 		);
 		$this->add_control(
-			'ea_woo_checkout_order_review_footer_color_split',
+			'ea_woo_checkout_order_review_footer_color_pro',
 			[
 				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
@@ -599,11 +602,16 @@ class Woo_Checkout extends Widget_Base {
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
 				],
 				'condition' => [
-					'ea_woo_checkout_layout' => 'split',
+					'ea_woo_checkout_layout!' => 'default',
 				],
 			]
 		);
-		$this->start_controls_tabs( 'ea_woo_checkout_order_review_footer_link_color_tabs');
+		$this->start_controls_tabs( 'ea_woo_checkout_order_review_footer_link_color_tabs',
+            [
+	            'condition' => [
+		            'ea_woo_checkout_layout' => 'default',
+	            ],
+            ]);
 
 		$this->start_controls_tab( 'ea_woo_checkout_order_review_footer_link_color_tab_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
 
@@ -625,6 +633,50 @@ class Woo_Checkout extends Widget_Base {
 
 		$this->add_control(
 			'ea_woo_checkout_order_review_footer_link_color_hover',
+			[
+				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content a:hover' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		// Not default
+		$this->start_controls_tabs( 'ea_woo_checkout_order_review_footer_link_color_tabs_pro',
+			[
+				'condition' => [
+					'ea_woo_checkout_layout!' => 'default',
+				],
+			]);
+
+		$this->start_controls_tab( 'ea_woo_checkout_order_review_footer_link_color_tab_normal_pro', [ 'label' =>
+            esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'ea_woo_checkout_order_review_footer_link_color_pro',
+			[
+				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#f1ecff',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content a' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab( 'ea_woo_checkout_order_review_footer_link_color_tab_hover_pro', [ 'label' =>
+            esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ) ] );
+
+		$this->add_control(
+			'ea_woo_checkout_order_review_footer_link_color_hover_pro',
 			[
 				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
