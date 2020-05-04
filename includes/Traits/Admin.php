@@ -65,16 +65,21 @@ trait Admin
                     </div> <!-- Logo -->
                     <div class="template-cloud-body">
                         <div class="template-cloud-install">
-                            <div class="templately-left">
-                                <div class="templately-admin-title">
-                                    <h1><?php echo __( 'Explore 100+', 'essential-addons-for-elementor-lite' ); ?><br><?php echo __( 'Free Templates', 'essential-addons-for-elementor-lite' ); ?></h1>
-                                    <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
-                                </div>
+                            <div class="templately-cloud-title">
+                                <h1><?php echo __( 'Explore 100+ Free Templates', 'essential-addons-for-elementor-lite' ); ?></h1>
+                                <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
                             </div>
-                            <div class="templately-right">
-                                <div class="templately-admin-install">
-                                    <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
-                                    <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
+                            <div class="templately-installer-wrapper">
+                                <div class="templately-left">
+                                    <div class="templately-admin-title">
+                                        <div class="templately-cloud-video-container"><iframe height="350" src="https://www.youtube.com/embed/coLxfjnrm3I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                    </div>
+                                </div>
+                                <div class="templately-right">
+                                    <div class="templately-admin-install">
+                                        <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                        <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
+                                    </div>
                                 </div>
                             </div>
                         </div>
