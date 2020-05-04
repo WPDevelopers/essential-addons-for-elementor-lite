@@ -4,7 +4,7 @@
  * Description: The Essential plugin you install after Elementor! 70+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid, Instagram Feed.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 3.9.3
+ * Version: 3.9.4
  * Author URI: https://wpdeveloper.net/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
