@@ -154,12 +154,6 @@ $elements = [
                 'doc_link' => 'https://essential-addons.com/elementor/docs/content-ticker/',
             ],
             [
-                'key'    => 'product-grid',
-                'title'  => __( 'Product Grid', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/woo-product-grid/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/',
-            ],
-            [
                 'key'   => 'adv-google-map',
                 'title' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/advanced-google-map/',
@@ -185,13 +179,6 @@ $elements = [
                 'title'  => __( 'Smart Post List', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/post-list/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/smart-post-list/',
-                'is_pro' => true
-            ],
-            [
-                'key'    => 'woo-collections',
-                'title'  => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/woocommerce-product-collections/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-woo-product-collections/',
                 'is_pro' => true
             ],
             [
@@ -476,6 +463,30 @@ $elements = [
                 'title' => __( 'BetterDocs Search Form', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/betterdocs-search-form/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/betterdocs-search-form/'
+            ]
+        ]
+    ],
+    'woocommerce-elements'   => [
+        'title' => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite'),
+        'elements'  => [
+            [
+                'key'    => 'product-grid',
+                'title'  => __( 'Product Grid', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-product-grid/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/',
+            ],
+            [
+                'key'    => 'woo-collections',
+                'title'  => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woocommerce-product-collections/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/ea-woo-product-collections/',
+                'is_pro' => true
+            ],
+            [
+                'key'   => 'woo-checkout',
+                'title' => __( 'Woo Checkout', 'essential-addons-for-elementor-lite'),
+                'demo_link' => 'https://essential-addons.com/elementor/woo-checkout/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/woo-checkout/'
             ]
         ]
     ]

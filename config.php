@@ -751,6 +751,17 @@ $config = [
                 true,
             ],
         ],
+        'woo-checkout' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
+            'dependency' => [
+                'css' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/woo-checkout/index.css',
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/woo-checkout/index.js',
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'eael-promotion'        => [
