@@ -779,10 +779,10 @@ $config = [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/woo-checkout/index.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/view/woo-checkout.css',
                 ],
                 'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/woo-checkout/index.js',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/view/woo-checkout.js',
                 ],
             ],
         ],
