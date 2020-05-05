@@ -45,6 +45,8 @@ const jsEntry = (context, minified) => {
 			"daygrid.min.js",
 			"timegrid.min.js",
 			"listgrid.min.js",
+			"embed.min.js",
+
 		],
 	};
 
