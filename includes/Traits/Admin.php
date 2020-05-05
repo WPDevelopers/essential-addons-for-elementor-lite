@@ -224,7 +224,7 @@ trait Admin
         $updated = update_option('eael_save_settings', $elements);
 
         // Build assets files
-        $this->generate_scripts(array_keys($elements));
+        $this->generate_scripts(array_keys($elements), null, 'edit');
 
         wp_send_json($updated);
     }
