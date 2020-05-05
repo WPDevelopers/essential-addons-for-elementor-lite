@@ -393,7 +393,7 @@ $elements = [
             ],
             [
                 'key'   => 'typeform',
-                'title' => __( 'TypeForm', 'essential-addons-for-elementor-lite'),
+                'title' => __( 'Typeform', 'essential-addons-for-elementor-lite'),
                 'demo_link' => 'https://essential-addons.com/elementor/typeform/',
                 'doc_link' => 'https://essential-addons.com/elementor/docs/typeform/',
             ],

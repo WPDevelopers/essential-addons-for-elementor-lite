@@ -26,7 +26,7 @@ class TypeForm extends Widget_Base {
     }
 
     public function get_title () {
-        return __('TypeForm', 'essential-addons-for-elementor-lite');
+        return __('Typeform', 'essential-addons-for-elementor-lite');
     }
 
     public function get_categories () {
@@ -123,13 +123,13 @@ class TypeForm extends Widget_Base {
         $this->start_controls_section(
             'section_info_box',
             [
-                'label' => __('TypeForm', 'essential-addons-for-elementor-lite'),
+                'label' => __('Typeform', 'essential-addons-for-elementor-lite'),
             ]
         );
         $this->add_control(
             'eael_typeform_list',
             [
-                'label'   => __('TypeForm', 'essential-addons-for-elementor-lite'),
+                'label'   => __('Typeform', 'essential-addons-for-elementor-lite'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => '',
                 'label_block' => true,
@@ -154,24 +154,7 @@ class TypeForm extends Widget_Base {
                 'return_value' => 'yes',
             ]
         );
-        $this->add_control(
-            'eael_typeform_opacity',
-            [
-                'label'      => __('Opacity', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
-                'size_units' => ['px'],
-                'range'      => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100
-                    ]
-                ],
-                'default'    => [
-                    'unit' => 'px',
-                    'size' => 0,
-                ],
-            ]
-        );
+
         $this->end_controls_section();
 
         /*-----------------------------------------------------------------------------------*/
@@ -248,6 +231,51 @@ class TypeForm extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-typeform' => 'width: {{SIZE}}{{UNIT}};'
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_typeform_max_height',
+            [
+                'label' => esc_html__('Form Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 1500,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 80,
+                    ],
+                ],
+                'default'    => [
+                    'size' => '700',
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-typeform' => 'height: {{SIZE}}{{UNIT}};'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_typeform_opacity',
+            [
+                'label'      => __('Opacity', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100
+                    ]
+                ],
+                'default'    => [
+                    'unit' => 'px',
+                    'size' => 50,
                 ],
             ]
         );
