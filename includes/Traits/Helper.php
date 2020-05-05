@@ -2191,7 +2191,7 @@ trait Helper
     {
 
         $eael_toc = $global_settings['eael_ext_table_of_content'];
-        $eael_toc_width = $eael_toc['eael_ext_toc_width']['size'];
+        $eael_toc_width = isset($eael_toc['eael_ext_toc_width']['size'])?$eael_toc['eael_ext_toc_width']['size']:300;
         $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style = $eael_toc['eael_ext_table_of_content_list_separator_style'];
         $header_padding = $eael_toc['eael_ext_toc_header_padding'];
