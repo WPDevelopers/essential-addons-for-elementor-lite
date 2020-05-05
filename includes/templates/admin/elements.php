@@ -394,8 +394,8 @@ $elements = [
             [
                 'key'   => 'typeform',
                 'title' => __( 'TypeForm', 'essential-addons-for-elementor-lite'),
-                'demo_link' => 'https://essential-addons.com/elementor/type-form/',
-                'doc_link' => 'https://essential-addons.com/elementor/docs/type-form/',
+                'demo_link' => 'https://essential-addons.com/elementor/typeform/',
+                'doc_link' => 'https://essential-addons.com/elementor/docs/typeform/',
             ],
             [
                 'key'    => 'mailchimp',
