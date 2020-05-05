@@ -640,12 +640,24 @@ $config = [
             'class' => '\Essential_Addons_Elementor\Elements\TypeForm',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/typeform/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/view/typeform.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/typeform/embed.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/typeform/index.min.js',
-                ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/lib-view/embed.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/view/typeform.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ]
             ],
         ],
         'betterdocs-category-grid' => [
