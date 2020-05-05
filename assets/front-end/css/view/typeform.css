@@ -5,7 +5,9 @@
 .eael-typeform.eael-typeform-align-center {
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 .eael-typeform.eael-typeform-align-left {
   float: left;
