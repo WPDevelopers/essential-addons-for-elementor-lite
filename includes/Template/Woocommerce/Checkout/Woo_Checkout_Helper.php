@@ -523,6 +523,9 @@ trait Woo_Checkout_Helper {
 	 * Added all actions
 	 */
 	public function ea_woo_checkout_add_actions($settings) {
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_login_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_coupon_template' ], 10 );
 
