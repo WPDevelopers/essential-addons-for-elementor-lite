@@ -24,12 +24,12 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -82,12 +82,12 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/morphext.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/fancy-text/morphext.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/typed.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/fancy-text/typed.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -123,7 +123,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/countdown.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/countdown/countdown.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -248,12 +248,12 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -282,12 +282,12 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -369,17 +369,17 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded.pkgd/imagesloaded.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope.pkgd/isotope.pkgd.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/jquery.magnific-popup.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/jquery.magnific-popup/jquery.magnific-popup.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -492,7 +492,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/inview.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/inview/inview.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -662,7 +662,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/sticky-video-plyr.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/sticky-video/sticky-video-plyr.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -706,32 +706,32 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/locales-all.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/locales-all.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/moment.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/calendar-main.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/calendar-main.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/daygrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/daygrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/timegrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/timegrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/listgrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/listgrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
