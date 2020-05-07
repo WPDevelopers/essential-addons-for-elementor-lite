@@ -1,6 +1,3 @@
-/*------------------------------*/
-/* 32. Tooltip
-/*------------------------------*/
 .eael-tooltip {
   position: relative;
   display: inline-block;
@@ -14,6 +11,7 @@
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 .eael-tooltip .eael-tooltip-text {
   display: block;
   width: 100%;
@@ -28,19 +26,24 @@
   font-size: 0.93rem;
   line-height: 1.3;
 }
+
 .eael-tooltip .eael-tooltip-text p {
   margin: 0;
 }
+
 .eael-tooltip .eael-tooltip-text::after {
   content: "";
   position: absolute;
   border-width: 5px;
   border-style: solid;
 }
+
 .eael-tooltip:hover .eael-tooltip-text {
   visibility: visible;
 }
+
 /*--- Left ---*/
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left {
   top: 50%;
   right: 100%;
@@ -49,17 +52,21 @@
           transform: translateY(-50%);
   margin-right: 10px;
 }
+
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left {
   -webkit-animation: tooltipLeftIn 300ms ease-in-out;
           animation: tooltipLeftIn 300ms ease-in-out;
 }
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left::after {
   top: -webkit-calc(50% - 5px);
   top: calc(50% - 5px);
   left: 100%;
   border-color: transparent transparent transparent black;
 }
+
 /*--- Right ---*/
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right {
   top: 50%;
   left: 100%;
@@ -71,17 +78,21 @@
   transition: all 0.3s ease-in-out;
   margin-left: 10px;
 }
+
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right {
   -webkit-animation: tooltipRightIn 300ms linear;
           animation: tooltipRightIn 300ms linear;
 }
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right::after {
   top: -webkit-calc(50% - 5px);
   top: calc(50% - 5px);
   right: 100%;
   border-color: transparent black transparent transparent;
 }
+
 /*--- Top ---*/
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-top {
   bottom: -webkit-calc(100%);
   bottom: calc(100%);
@@ -89,6 +100,7 @@
   right: 0;
   margin: 0 auto 10px auto;
 }
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-top::after {
   margin-top: 0px;
   top: 100%;
@@ -96,17 +108,21 @@
   left: calc( 50% - 5px);
   border-color: black transparent transparent transparent;
 }
+
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top {
   -webkit-animation: tooltipTopIn 300ms linear;
           animation: tooltipTopIn 300ms linear;
 }
+
 /*--- Bottom ---*/
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom {
   top: 100%;
   left: 0;
   right: 0;
   margin: 10px auto 0px auto;
 }
+
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
   margin-top: 0px;
   bottom: 100%;
@@ -114,11 +130,14 @@
   left: calc( 50% - 5px);
   border-color: transparent transparent black transparent;
 }
+
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom {
   -webkit-animation: tooltipBottomIn 300ms linear;
           animation: tooltipBottomIn 300ms linear;
 }
+
 /*--- Alignments ---*/
+
 .eael-tooltip-align-left {
   display: -webkit-box;
   display: -webkit-flex;
@@ -130,6 +149,7 @@
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
+
 .eael-tooltip-align-right {
   display: -webkit-box;
   display: -webkit-flex;
@@ -141,6 +161,7 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+
 .eael-tooltip-align-center {
   display: -webkit-box;
   display: -webkit-flex;
@@ -152,6 +173,7 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
+
 .eael-tooltip-align-justify .eael-tooltip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -166,7 +188,9 @@
       -ms-flex-align: center;
           align-items: center;
 }
+
 /*--- Tooltip Keyframes ---*/
+
 @-webkit-keyframes tooltipRightIn {
   0% {
     opacity: 0;
@@ -177,6 +201,7 @@
     left: 100%;
   }
 }
+
 @keyframes tooltipRightIn {
   0% {
     opacity: 0;
@@ -187,6 +212,7 @@
     left: 100%;
   }
 }
+
 @-webkit-keyframes tooltipLeftIn {
   0% {
     opacity: 0;
@@ -197,6 +223,7 @@
     right: 100%;
   }
 }
+
 @keyframes tooltipLeftIn {
   0% {
     opacity: 0;
@@ -207,6 +234,7 @@
     right: 100%;
   }
 }
+
 @-webkit-keyframes tooltipTopIn {
   0% {
     opacity: 0;
@@ -217,6 +245,7 @@
     bottom: 100%;
   }
 }
+
 @keyframes tooltipTopIn {
   0% {
     opacity: 0;
@@ -227,6 +256,7 @@
     bottom: 100%;
   }
 }
+
 @-webkit-keyframes tooltipBottomIn {
   0% {
     opacity: 0;
@@ -237,6 +267,7 @@
     top: 100%;
   }
 }
+
 @keyframes tooltipBottomIn {
   0% {
     opacity: 0;
@@ -247,21 +278,26 @@
     top: 100%;
   }
 }
+
 span.eael-tooltip-content,
 span.eael-tooltip-content a {
   width: 100%;
   display: block;
   text-align: center;
 }
+
 .eael-tooltip-text-align-left .eael-tooltip-text, .eael-tooltip-text-align-left .eael-tooltip-content a {
   text-align: left;
 }
+
 .eael-tooltip-text-align-right .eael-tooltip-text, .eael-tooltip-text-align-right .eael-tooltip-content a {
   text-align: right;
 }
+
 .eael-tooltip-text-align-center .eael-tooltip-text, .eael-tooltip-text-align-center .eael-tooltip-content a {
   text-align: center;
 }
+
 .eael-tooltip-text-align-justify .eael-tooltip-text, .eael-tooltip-text-align-justify .eael-tooltip-content a {
   text-align: justify;
 }

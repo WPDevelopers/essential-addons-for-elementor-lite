@@ -1493,37 +1493,6 @@ class Info_Box extends Widget_Base {
 			$this->end_controls_tabs();
 
 		$this->end_controls_section();
-		
-		$this->start_controls_section(
-			'_section_style',
-			[
-				'label' => esc_html__( 'Info Box Advanced', 'essential-addons-for-elementor-lite'),
-				'tab' => Controls_Manager::TAB_ADVANCED,
-				'name' => 'advanced',
-			]
-		);  // \Elementor\Controls_Manager::TAB_ADVANCED
-
-		$this->add_responsive_control(
-			'_margin',
-			[
-				'label' => __( '', 'elementor' ),
-				'name' => '_margin',
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_infobox_container_padding',
-			[
-				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors' => [
-	 					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-	 			],
-			]
-		);
-
-		$this->end_controls_section();
 
 	}
 

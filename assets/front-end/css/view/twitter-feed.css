@@ -103,7 +103,8 @@
   -webkit-box-orient: vertical;
 }
 
-.eael-twitter-feed.swiper-container .swiper-button-next, .eael-twitter-feed.swiper-container .swiper-button-prev {
+.eael-twitter-feed.swiper-container .swiper-button-next,
+.eael-twitter-feed.swiper-container .swiper-button-prev {
   background-image: none;
   outline: none;
 }

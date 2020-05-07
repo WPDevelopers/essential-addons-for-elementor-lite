@@ -1,9 +1,10 @@
-/*------------------------------*/
-/* 34. Image accordion
-/*------------------------------*/
 .eael-img-accordion {
 	display: flex;
 	height: 50vh;
+
+	&.accordion-direction-vertical {
+		flex-direction: column;
+	}
 }
 
 .eael-img-accordion a {

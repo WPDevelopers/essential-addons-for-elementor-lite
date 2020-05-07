@@ -1,11 +1,3 @@
-/*!
- * Countdown v0.1.0
- * https://github.com/fengyuanchen/countdown
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
 (function (factory) {
     if (typeof define === "function" && define.amd) {
         // AMD. Register as anonymous module.

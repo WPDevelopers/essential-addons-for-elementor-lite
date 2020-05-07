@@ -1,7 +1,4 @@
 @charset "UTF-8";
-/*--------------------------*/
-/* 09. Product Styles
-/*--------------------------*/
 .eael-product-grid .woocommerce ul.products,
 .eael-post-grid .woocommerce ul.products {
   display: grid;

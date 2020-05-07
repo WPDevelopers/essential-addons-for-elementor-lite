@@ -42,7 +42,8 @@
 .elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
 .elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
 .elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title,
-.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title {
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title {
 	color: #f54;
 }
 
@@ -130,4 +131,7 @@
 }
 .ea-nerd-box .elementor-button.ea-nerd-box-link:hover {
 	background-color: #f22074;
+}
+.elementor-control-ea_woo_checkout_notices_border_color {
+    display: none;
 }

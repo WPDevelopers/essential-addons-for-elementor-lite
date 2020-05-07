@@ -1,21 +1,21 @@
-/*----------------------------*/
-/* 06. Post Timeline Styles
-/*----------------------------*/
 .eael-post-timeline {
   margin-bottom: 0;
   min-height: 100%;
   overflow: hidden;
   position: relative;
 }
+
 .eael-timeline-column {
   width: 50%;
   margin-left: 0;
   float: left;
   margin-top: 0 !important;
 }
+
 .eael-timeline-post {
   position: relative;
 }
+
 .eael-timeline-post:after {
   background-color: rgba(83, 85, 86, 0.2);
   content: "";
@@ -25,9 +25,11 @@
   right: 0;
   top: 70px;
 }
+
 .eael-timeline-post:nth-child(2n):after {
   display: none;
 }
+
 .eael-timeline-bullet {
   background-color: #9fa9af;
   border: 5px solid #fff;
@@ -44,6 +46,7 @@
   z-index: 3;
   cursor: pointer;
 }
+
 .eael-timeline-post:nth-child(2n) .eael-timeline-bullet {
   background-color: #9fa9af;
   border: 5px solid #fff;
@@ -58,6 +61,7 @@
   width: 20px;
   z-index: 3;
 }
+
 .eael-timeline-post-inner {
   background: -o-linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -71,10 +75,12 @@
   width: -webkit-calc(100% - 40px);
   width: calc(100% - 40px);
 }
+
 .eael-timeline-post:nth-child(even) .eael-timeline-post-inner {
   float: left;
   margin-left: 40px;
 }
+
 .eael-timeline-post-inner:after {
   border-color: transparent transparent transparent #e5eaed;
   border-style: solid;
@@ -86,6 +92,7 @@
   top: 17px;
   width: 0;
 }
+
 .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner:after {
   border-color: transparent #e5eaed transparent transparent;
   border-style: solid;
@@ -97,14 +104,17 @@
   top: 257px;
   width: 0;
 }
+
 .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner::after {
   border-left-color: transparent !important;
 }
+
 .eael-timeline-post p {
   margin: 1.6rem 0 0 0;
   font-size: 0.9em;
   line-height: 1.6em;
 }
+
 .eael-timeline-post-image {
   background-size: cover;
   background-position: center center;
@@ -118,11 +128,13 @@
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 .eael-timeline-post-title {
   bottom: 40px;
   position: absolute;
   width: 100%;
 }
+
 .eael-timeline-post-title h2 {
   color: #fff;
   font-size: 20px;
@@ -133,6 +145,7 @@
   text-align: left;
   text-transform: uppercase;
 }
+
 .eael-timeline-post-excerpt {
   opacity: 0;
   position: absolute;
@@ -142,18 +155,22 @@
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 .eael-timeline-post-excerpt p {
   color: #fff;
   font-size: 14px;
   padding: 25px;
 }
+
 .eael-timeline-post-inner:hover .eael-timeline-post-excerpt {
   opacity: 1;
   top: 10px;
 }
+
 .eael-timeline-post-inner:hover .eael-timeline-post-image {
   opacity: 0.3;
 }
+
 .eael-timeline-post time {
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.7);
@@ -168,11 +185,12 @@
   line-height: 30px;
   text-align: center;
   top: 50px;
-  z-index: 99;
+  z-index: 4;
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
 }
+
 .eael-timeline-post:nth-child(2n) time {
   background-color: rgba(0, 0, 0, 0.7);
   -webkit-border-radius: 20px;
@@ -186,8 +204,9 @@
   text-align: center;
   top: 290px;
   width: 100px;
-  z-index: 99;
+  z-index: 4;
 }
+
 .eael-timeline-post time:before {
   border-bottom: 5px solid rgba(0, 0, 0, 0.7);
   border-left: 5px solid transparent;
@@ -199,25 +218,32 @@
   top: -5px;
   width: 0;
 }
+
 .eael-timeline-post:hover time {
   opacity: 1;
 }
+
 .eael-timeline-post::after {
   height: 100%;
 }
+
 .eael-post-timeline .eael-timeline-post:nth-last-child(2)::after {
   height: 245px;
 }
+
 .eael-post-timeline .eael-timeline-post:last-child::after {
   display: none;
 }
+
 .eael-load-more-button-wrap {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
+
 /*--- Responsive Style for Post Timeline ---*/
+
 @media only screen and (max-width: 1366px) {
   .eael-timeline-post-title h2 {
     font-size: 0.8em;
@@ -227,11 +253,13 @@
     font-size: 13px;
   }
 }
+
 @media only screen and (max-width: 1169px) {
   .eael-timeline-post-inner {
     height: 320px;
   }
 }
+
 @media only screen and (max-width: 992px) {
   .eael-post-timeline {
     margin-left: 0;
@@ -302,6 +330,7 @@
     display: none;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .eael-timeline-post {
     display: block;
@@ -317,6 +346,7 @@
     margin: 0 auto;
   }
 }
+
 @media only screen and (max-width: 479px) {
   .eael-timeline-post .eael-timeline-post-inner,
 .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {

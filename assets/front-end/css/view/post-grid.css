@@ -1,7 +1,4 @@
 @charset "UTF-8";
-/*-----------------------------*/
-/* 15. Post Grid Style
-/*-----------------------------*/
 .eael-post-grid-container .eael-post-grid {
   margin: 0 -10px;
 }
@@ -292,7 +289,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-eael-col-2 .eael-grid-post:nth-of-type(2n+1) {
+  .elementor-element.elementor-grid-eael-col-2 .eael-grid-post:nth-of-type(2n + 1) {
     clear: left;
   }
 
@@ -309,7 +306,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-eael-col-3 .eael-grid-post:nth-of-type(3n+1) {
+  .elementor-element.elementor-grid-eael-col-3 .eael-grid-post:nth-of-type(3n + 1) {
     clear: left;
   }
 
@@ -326,7 +323,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-eael-col-4 .eael-grid-post:nth-of-type(4n+1) {
+  .elementor-element.elementor-grid-eael-col-4 .eael-grid-post:nth-of-type(4n + 1) {
     clear: left;
   }
 
@@ -343,7 +340,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-eael-col-5 .eael-grid-post:nth-of-type(5n+1) {
+  .elementor-element.elementor-grid-eael-col-5 .eael-grid-post:nth-of-type(5n + 1) {
     clear: left;
   }
 
@@ -360,7 +357,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-eael-col-6 .eael-grid-post:nth-of-type(6n+1) {
+  .elementor-element.elementor-grid-eael-col-6 .eael-grid-post:nth-of-type(6n + 1) {
     clear: left;
   }
 }
@@ -388,7 +385,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-tablet-eael-col-2 .eael-grid-post:nth-of-type(2n+1) {
+  .elementor-element.elementor-grid-tablet-eael-col-2 .eael-grid-post:nth-of-type(2n + 1) {
     clear: left;
   }
 
@@ -405,7 +402,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-tablet-eael-col-3 .eael-grid-post:nth-of-type(3n+1) {
+  .elementor-element.elementor-grid-tablet-eael-col-3 .eael-grid-post:nth-of-type(3n + 1) {
     clear: left;
   }
 
@@ -422,7 +419,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-tablet-eael-col-4 .eael-grid-post:nth-of-type(4n+1) {
+  .elementor-element.elementor-grid-tablet-eael-col-4 .eael-grid-post:nth-of-type(4n + 1) {
     clear: left;
   }
 
@@ -439,7 +436,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-tablet-eael-col-5 .eael-grid-post:nth-of-type(5n+1) {
+  .elementor-element.elementor-grid-tablet-eael-col-5 .eael-grid-post:nth-of-type(5n + 1) {
     clear: left;
   }
 
@@ -456,7 +453,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-tablet-eael-col-6 .eael-grid-post:nth-of-type(6n+1) {
+  .elementor-element.elementor-grid-tablet-eael-col-6 .eael-grid-post:nth-of-type(6n + 1) {
     clear: left;
   }
 }
@@ -483,7 +480,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-mobile-eael-col-2 .eael-grid-post:nth-of-type(2n+1) {
+  .elementor-element.elementor-grid-mobile-eael-col-2 .eael-grid-post:nth-of-type(2n + 1) {
     clear: left;
   }
 
@@ -500,7 +497,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-mobile-eael-col-3 .eael-grid-post:nth-of-type(3n+1) {
+  .elementor-element.elementor-grid-mobile-eael-col-3 .eael-grid-post:nth-of-type(3n + 1) {
     clear: left;
   }
 
@@ -517,7 +514,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-mobile-eael-col-4 .eael-grid-post:nth-of-type(4n+1) {
+  .elementor-element.elementor-grid-mobile-eael-col-4 .eael-grid-post:nth-of-type(4n + 1) {
     clear: left;
   }
 
@@ -534,7 +531,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-mobile-eael-col-5 .eael-grid-post:nth-of-type(5n+1) {
+  .elementor-element.elementor-grid-mobile-eael-col-5 .eael-grid-post:nth-of-type(5n + 1) {
     clear: left;
   }
 
@@ -551,7 +548,7 @@
     margin-right: 0 !important;
   }
 
-  .elementor-element.elementor-grid-mobile-eael-col-6 .eael-grid-post:nth-of-type(6n+1) {
+  .elementor-element.elementor-grid-mobile-eael-col-6 .eael-grid-post:nth-of-type(6n + 1) {
     clear: left;
   }
 }
