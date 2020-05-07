@@ -82,12 +82,12 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/fancy-text/morphext.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/morphext/morphext.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/fancy-text/typed.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/typed/typed.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -650,7 +650,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/sticky-video/sticky-video-plyr.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/plyr/sticky-video-plyr.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -662,7 +662,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/sticky-video/sticky-video-plyr.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/plyr/sticky-video-plyr.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -679,22 +679,22 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/calendar-main.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/calendar-main/calendar-main.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/daygrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/daygrid/daygrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/timegrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/timegrid/timegrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/listgrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/listgrid/listgrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -706,32 +706,32 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/locales-all.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/locales/locales-all.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/moment.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment/moment.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/calendar-main.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/calendar-main/calendar-main.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/daygrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/daygrid/daygrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/timegrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/timegrid/timegrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/event-calendar/listgrid.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/listgrid/listgrid.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
