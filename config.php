@@ -679,22 +679,22 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/calendar-main/calendar-main.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/calendar-main.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/daygrid/daygrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/daygrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/timegrid/timegrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/timegrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/listgrid/listgrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/listgrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
