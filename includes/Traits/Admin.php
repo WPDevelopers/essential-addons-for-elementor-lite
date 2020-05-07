@@ -23,11 +23,96 @@ trait Admin
             'manage_options',
             'eael-settings',
             [$this, 'eael_admin_settings_page'],
-            $this->safe_protocol(EAEL_PLUGIN_URL . '/assets/admin/images/ea-icon-white.svg'),
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg'),
             '58.6'
         );
+        $plugins = \get_option('active_plugins');
+        if ( ! in_array( 'templately/templately.php', $plugins ) ) {
+            add_submenu_page( 
+                'eael-settings',
+                __('Templates Cloud', 'essential-addons-for-elementor-lite'),
+                __('Templates Cloud', 'essential-addons-for-elementor-lite'),
+                'manage_options',
+                'template-cloud',
+                [$this, 'templately_page']
+            );
+        }
     }
+    /**
+     * Template Page Outputs
+     *
+     * @return void
+     */
+    public function templately_page() {
+        $plugin_name = basename( EAEL_PLUGIN_BASENAME, '.php' );
+        $button_text = __( 'Install Templately', 'essential-addons-for-elementor-lite' );
+        if ( ! function_exists( 'get_plugins' ) ) {
+            include ABSPATH . '/wp-admin/includes/plugin.php';
+        }
+        $plugins = \get_plugins();
+        $installed = false;
+        if (isset($plugins['templately/templately.php'])) {
+            $installed = true;
+            $button_text = __( 'Activate Templately', 'essential-addons-for-elementor-lite' );
+        }
 
+        ?>
+            <div class="wrap">
+                <hr class="wp-header-end">
+                <div class="template-cloud">
+                    <div class="template-cloud-header">
+                        <svg width="200" enable-background="new 0 0 200 50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><circle cx="5.5" cy="44.1" fill="#ffb45a" r="5.5"/><circle cx="21.6" cy="44.1" fill="#ff7b8e" r="5.5"/><circle cx="37.6" cy="44.1" fill="#5ac0ff" r="5.5"/><path d="m31.3 9.3c-.3 0-.6 0-.9 0-1.2-5.3-5.9-9.2-11.5-9.2-1.5 0-2.9.3-4.2.8v3.9h5.7v5.6c-1.9 0-3.8 0-5.7 0v9.5h5.9c-.2.4-.4 1-.5 1.3-1.1 2.6-3.7 4-6.5 3.5-2.6-.5-4.5-2.7-4.7-5.5 0-.8 0-1.6 0-2.4 0-1.2 0-5.2 0-6.5-.7 0-1.3 0-2 0-4 1.9-6.9 6-6.9 10.7 0 6.5 5.3 11.8 11.8 11.8h19.6c6.5-.1 11.7-5.3 11.7-11.8 0-6.4-5.3-11.7-11.8-11.7z" fill="#5633d1"/><g fill="#424c5e"><path d="m64.6 29.5c-1.2 0-1.9-.7-1.9-2.1v-7h3.4v-3.1h-3.8l-.6-3h-2.9v14.2c0 2.8 1.3 4.1 3.8 4.1h3.4v-3.1z"/><path d="m75.3 17.3c-4.8 0-7.2 2.5-7.2 7.5 0 5.2 2.8 7.8 8.3 7.8 1.9 0 3.6-.1 4.9-.4v-3.1c-1.5.3-3.1.4-4.6.4-3.2 0-4.8-1.1-4.8-3.2h10.2c.1-.6.1-1.3.1-1.9.1-4.7-2.3-7.1-6.9-7.1zm-3.3 6.3c.2-2.2 1.3-3.3 3.3-3.3 2.1 0 3.2 1.1 3.2 3.2v.1z"/><path d="m102.4 17.3c-1.7 0-3.3.7-4.9 2.1-.7-1.4-2-2.1-4-2.1-1.9 0-3.6.7-4.9 2.2l-.5-2.2h-3v15.3h3.9v-10.6c1-1 2.1-1.5 3.2-1.5 1.4 0 2.1.9 2.1 2.6v9.6h3.9v-10.6c1.1-1 2.2-1.5 3.3-1.5 1.5 0 2.3.8 2.3 2.6v9.6h3.9v-9.5c0-4.1-1.8-6-5.3-6z"/><path d="m117.8 17.3c-2.3 0-4.4.2-6.4.6v21.1h3.9v-7.1c1 .5 2.1.7 3.1.7 4.8 0 7.3-2.7 7.3-8-.1-4.9-2.7-7.3-7.9-7.3zm.5 12.1c-1.1 0-2.1-.3-3.1-.8v-8c.7-.1 1.6-.2 2.7-.2 2.5 0 3.8 1.4 3.8 4.1.1 3.3-1.1 4.9-3.4 4.9z"/><path d="m128.5 11.7h3.9v20.8h-3.9z"/><path d="m142.1 17.3c-1.7 0-3.5.2-5.6.7v3.1c2-.5 3.9-.7 5.6-.7 2 0 3 .7 3 2.1v1.2c-1-.2-2.1-.3-3.1-.3-4.4 0-6.6 1.5-6.6 4.6 0 3.2 1.9 4.8 5.6 4.8 1.6 0 3.1-.5 4.4-1.4l1.4 1.4h2.2v-10.3c-.1-3.6-2.4-5.2-6.9-5.2zm-.6 12.5c-1.6 0-2.3-.7-2.3-2s.9-1.9 2.8-1.9c1.1 0 2.1.1 3.1.3v2.4c-1.2.8-2.4 1.2-3.6 1.2z"/><path d="m158 29.5c-1.2 0-1.9-.7-1.9-2.1v-7h3.4v-3.1h-3.8l-.6-3h-2.9v14.2c0 2.8 1.3 4.1 3.8 4.1h3.4v-3.1z"/><path d="m168.7 17.3c-4.8 0-7.2 2.5-7.2 7.5 0 5.2 2.8 7.8 8.3 7.8 1.9 0 3.6-.1 4.9-.4v-3.1c-1.5.3-3.1.4-4.6.4-3.2 0-4.8-1.1-4.8-3.2h10.2c.1-.6.1-1.3.1-1.9.1-4.8-2.3-7.1-6.9-7.1zm-3.3 6.3c.2-2.2 1.3-3.3 3.3-3.3 2.1 0 3.2 1.1 3.2 3.2v.1z"/><path d="m178.6 11.7h3.9v20.8h-3.9z"/><path d="m196 17.2-3.8 11-3.9-11h-4.1l5.9 15.4c-.8 1.7-2 2.9-3.7 3.7l1.9 2.6c2.5-1.2 4.3-3.2 5.4-5.9l6.3-15.8z"/></g></svg>
+                    </div> <!-- Logo -->
+                    <div class="template-cloud-body">
+                        <div class="template-cloud-install">
+                            <div class="templately-left">
+                                <div class="templately-admin-title">
+                                    <h1><?php echo __( 'Explore 100+', 'essential-addons-for-elementor-lite' ); ?><br><?php echo __( 'Free Templates', 'essential-addons-for-elementor-lite' ); ?></h1>
+                                    <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                </div>
+                            </div>
+                            <div class="templately-right">
+                                <div class="templately-admin-install">
+                                    <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                    <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    ( function( $ ){
+                        $( document ).ready(function( $ ){
+                            $('body').on('click', '.eae-activate-templately', function( e ){
+                                var self = $(this);
+                                self.text('<?php echo ! $installed ? esc_js( 'Installing...' ) : esc_js( 'Activating...' ); ?>');
+                                e.preventDefault();
+                                $.ajax({
+                                    url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                                    type: 'POST',
+                                    data: {
+                                        action: 'wpdeveloper_upsale_core_install_<?php echo $plugin_name; ?>',
+                                        _wpnonce: '<?php echo wp_create_nonce( 'wpdeveloper_upsale_core_install_' . $plugin_name ); ?>',
+                                        slug : 'templately',
+                                        file : 'templately.php'
+                                    },
+                                    complete: function() {
+                                        self.attr('disabled', 'disabled');
+                                        self.removeClass('install-now updating-message');
+                                    }
+                                }).done(function(){
+                                    self.text('<?php echo esc_js( 'Installed' ); ?>').delay(3000);
+                                    window.location.href = '<?php echo admin_url( "admin.php?page=templately" ); ?>';
+                                }).fail(function(){
+                                    self.removeClass('install-now updating-message');
+                                });
+                            });
+                        });
+                    })( jQuery );
+                </script>
+            </div>
+        <?php
+    }
     /**
      * Loading all essential scripts
      *
@@ -36,6 +121,10 @@ trait Admin
     public function admin_enqueue_scripts($hook)
     {
         wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/notice.css', false, EAEL_PLUGIN_VERSION);
+
+        if( $hook == 'essential-addons_page_template-cloud' ) {
+            wp_enqueue_style('essential_addons_elementor-template-cloud-css', EAEL_PLUGIN_URL . '/assets/admin/css/cloud.css', false, EAEL_PLUGIN_VERSION);
+        }
 
         if (isset($hook) && $hook == 'toplevel_page_eael-settings') {
             wp_enqueue_style('essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . '/assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION);

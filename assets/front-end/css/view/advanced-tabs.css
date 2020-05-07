@@ -1,9 +1,7 @@
-/*----------------------------*/
-/* 30. Advance Tabs
-/*----------------------------*/
 .eael-advance-tabs {
   display: block;
 }
+
 .eael-advance-tabs .eael-tabs-nav > ul {
   position: relative;
   padding: 0px;
@@ -23,6 +21,7 @@
           align-items: center;
   z-index: 1;
 }
+
 .eael-advance-tabs .eael-tabs-nav > ul li {
   position: relative;
   padding: 1em 1.5em;
@@ -46,6 +45,7 @@
   text-align: center;
   background-color: #f1f1f1;
 }
+
 .eael-advance-tabs .eael-tabs-nav > ul li:after {
   content: "";
   position: absolute;
@@ -62,19 +62,23 @@
   border-bottom: 0px;
   display: none;
 }
+
 .eael-advance-tabs .eael-tabs-nav > ul li:hover,
 .eael-advance-tabs .eael-tabs-nav > ul li.active,
 .eael-advance-tabs .eael-tabs-nav > ul li.active-default {
   background-color: #444;
 }
+
 .eael-advance-tabs.active-caret-on .eael-tabs-nav > ul li.active:after,
 .eael-advance-tabs.active-caret-on .eael-tabs-nav > ul li.active-default:after {
   display: none;
 }
+
 .eael-advance-tabs .eael-tabs-nav > ul li.active:after,
 .eael-advance-tabs .eael-tabs-nav > ul li.active-default:after {
   display: block;
 }
+
 .eael-tabs-content {
   display: -webkit-box;
   display: -webkit-flex;
@@ -86,10 +90,12 @@
           flex: 1 1 auto;
   overflow: hidden;
 }
+
 .eael-advance-tabs .eael-tabs-content > div {
   display: none;
   opacity: 0;
 }
+
 .eael-advance-tabs .eael-tabs-content > div.active,
 .eael-advance-tabs .eael-tabs-content > div.active-default {
   display: block;
@@ -99,11 +105,14 @@
   -webkit-animation: fadeIn linear 0.3s;
           animation: fadeIn linear 0.3s;
 }
+
 /*--- Inline Icon ---*/
+
 .eael-tab-inline-icon li a .fa {
   margin-right: 10px;
   line-height: 1;
 }
+
 .eael-tab-top-icon li {
   display: -webkit-box;
   display: -webkit-flex;
@@ -114,6 +123,7 @@
           flex-wrap: wrap;
   text-align: center;
 }
+
 .eael-tab-top-icon li a {
   display: -webkit-box;
   display: -webkit-flex;
@@ -124,6 +134,7 @@
           flex-wrap: wrap;
   text-align: center;
 }
+
 .eael-tab-top-icon li .fa,
 .eael-tab-top-icon li .eael-tab-title {
   -webkit-box-flex: 1;
@@ -132,22 +143,27 @@
           flex: 1 1 100%;
   line-height: 1;
 }
+
 .eael-tab-top-icon li a .eael-tab-title {
   margin-top: 10px;
 }
+
 /*--- Vertical Tabs ---*/
+
 .eael-advance-tabs.eael-tabs-vertical {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
+
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
 }
+
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -155,6 +171,7 @@
       -ms-flex-flow: column wrap;
           flex-flow: column wrap;
 }
+
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul > li {
   width: 100%;
   -webkit-box-pack: start;
@@ -162,6 +179,7 @@
       -ms-flex-pack: start;
           justify-content: start;
 }
+
 .eael-advance-tabs.eael-tabs-vertical .eael-tabs-nav > ul li::after {
   bottom: auto !important;
   right: -10px;
@@ -173,6 +191,7 @@
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
 }
+
 @media only screen and (max-width: 767px) {
   .eael-advance-tabs .eael-tabs-nav > ul {
     -webkit-flex-wrap: wrap;

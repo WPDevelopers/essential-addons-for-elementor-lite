@@ -64,7 +64,7 @@ class WPDeveloper_Dashboard_Widget
         $rss = fetch_feed($url);
 
         if (is_wp_error($rss)) {
-            $output .= '<li>' . __('No items.', 'essential-addons-for-elementor-lite') . '</li>';
+            $output .= '<li>' . __('No recent news.', 'essential-addons-for-elementor-lite') . '</li>';
         } else {
             // Figure out how many total items there are, but limit it to 5.
             $max = $rss->get_item_quantity($count);
@@ -80,7 +80,7 @@ class WPDeveloper_Dashboard_Widget
         }
 
         $output .= '</ul>';
-        $output .= '<p>' . __('Keep Your Eyes at', 'essential-addons-for-elementor-lite') . ' <a href="https://wpdeveloper.net" target="_blank">WPDeveloper</a></p>';
+        $output .= '<p>' . __('Keep Your Eyes on', 'essential-addons-for-elementor-lite') . ' <a href="https://wpdeveloper.net" target="_blank">WPDeveloper</a></p>';
 
         echo $output;
     }

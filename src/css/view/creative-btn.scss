@@ -1,43 +1,34 @@
-
-/*--------------------------------*/
-/* 08. Creative Button styles
-/*--------------------------------*/
-
 .eael-creative-button-align-center {
 	text-align: center;
 }
 .eael-creative-button-wrapper {
-  display: flex;
+	display: flex;
 }
 
 .eael-creative-button {
-  flex: 0 0 auto;
-  min-width: 150px;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
- 	border-radius: 2px;
+	flex: 0 0 auto;
+	min-width: 150px;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	border-radius: 2px;
 	padding: 20px 30px;
 	font-size: 16px;
 	line-height: 1;
-  -webkit-backface-visibility: hidden;
-  	backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .eael-creative-button:focus {
 	outline: none;
 }
 
-/*--------------------------------------------*/
-/* 09. Individual eael-creative-button styles
-/*--------------------------------------------*/
-
 /*--- Winona ---*/
 .eael-creative-button--winona {
 	overflow: hidden;
-	padding: 0!important;
+	padding: 0 !important;
 	-webkit-transition: border-color 0.3s, background-color 0.3s;
 	transition: border-color 0.3s, background-color 0.3s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -87,7 +78,7 @@
 }
 
 .eael-creative-button--ujarak::before {
-	content: '';
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -125,7 +116,7 @@
 }
 
 .eael-creative-button--wayra::before {
-	content: '';
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -151,19 +142,19 @@
 /* Tamaya */
 .eael-creative-button--tamaya {
 	float: left;
-    min-width: 150px;
-    max-width: 250px;
-    display: block;
-    margin: 1em;
-    padding: 1em 2em;
-    border: none;
-    background: none;
-    color: inherit;
-    vertical-align: middle;
-    position: relative;
-    z-index: 1;
-    -webkit-backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
+	min-width: 150px;
+	max-width: 250px;
+	display: block;
+	margin: 1em;
+	padding: 1em 2em;
+	border: none;
+	background: none;
+	color: inherit;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	-webkit-backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
 	overflow: hidden;
 	color: #7986cb;
 	min-width: 180px;
@@ -222,13 +213,13 @@
 	opacity: 1;
 	-webkit-transform: scale3d(1, 1, 1);
 	transform: scale3d(1, 1, 1);
-	content: 'Bangladesh';
+	content: "Bangladesh";
 }
 
 /*--- Rayen ---*/
 .eael-creative-button--rayen {
 	overflow: hidden;
-	padding: 0!important;
+	padding: 0 !important;
 }
 
 .eael-creative-button--rayen::before {
@@ -241,8 +232,8 @@
 	-webkit-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
 	display: flex;
-    align-items: center;
-    justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 
 .eael-creative-button--rayen::before,
@@ -265,8 +256,8 @@
 }
 
 .creative-button-inner {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }

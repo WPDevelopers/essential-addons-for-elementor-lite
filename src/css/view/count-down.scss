@@ -1,8 +1,3 @@
-/*---------------------------------*/
-/* 05. Countdown Styles
-/*---------------------------------*/
-
-
 /*--- General ---*/
 .eael-countdown-items {
 	list-style: none;
@@ -13,7 +8,7 @@
 	width: 100%;
 }
 
-.eael-countdown-items>li {
+.eael-countdown-items > li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -21,7 +16,7 @@
 	position: relative;
 }
 
-.eael-countdown-item>div {
+.eael-countdown-item > div {
 	text-align: center;
 	padding: 20px;
 }
@@ -54,9 +49,7 @@
 	display: none;
 }
 
-
 /*--- Style 1 ---*/
-
-.eael-countdown-items.style-1 .eael-countdown-item>div {
+.eael-countdown-items.style-1 .eael-countdown-item > div {
 	background: #262625;
 }
