@@ -212,7 +212,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/tooltipster.bundle.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/tooltipster/tooltipster.bundle.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -224,7 +224,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tooltipster.bundle.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tooltipster/tooltipster.bundle.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -357,7 +357,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup/magnific-popup.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -650,7 +650,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/sticky-video-plyr.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/sticky-video/sticky-video-plyr.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -679,22 +679,22 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/calendar-main.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/calendar-main.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/daygrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/daygrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/timegrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/timegrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/listgrid.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/event-calendar/listgrid.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
