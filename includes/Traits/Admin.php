@@ -375,7 +375,7 @@ trait Admin
             'href'  => '#',
             'meta'  => [
                 'class' => 'ea-clear-cache',
-                'html'   => '<div class="ea-clear-cache-id" data-pageid="'.get_queried_object_id().'">'
+                'html'   => '<div class="ea-clear-cache-id" data-pageid="'.get_queried_object_id().'"></div>'
             ],
             'title' => 'Regenerate Page Assets'
         ]);
