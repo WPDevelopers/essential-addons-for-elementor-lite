@@ -19,6 +19,8 @@ var ProgressBar = function ($scope, $) {
 			});
 		}
 
+		ea.hooks.doAction("progressBar.initValue", $this, $layout, $num);
+
 		$(".eael-progressbar-count", $this)
 			.prop({
 				counter: 0,
@@ -31,11 +33,13 @@ var ProgressBar = function ($scope, $) {
 					duration: $duration,
 					easing: "linear",
 					step: function (counter) {
-						if ($layout == "circle") {
+						if ($layout == "circle" || $layout == "circle_fill") {
 							var rotate = counter * 3.6;
+
 							$(".eael-progressbar-circle-half-left", $this).css({
 								transform: "rotate(" + rotate + "deg)",
 							});
+
 							if (rotate > 180) {
 								$(".eael-progressbar-circle-pie", $this).css({
 									"-webkit-clip-path": "inset(0)",

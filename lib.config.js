@@ -40,7 +40,7 @@ const jsEntry = (context, minified) => {
 			"inview/inview.min.js",
 			"plyr/plyr.min.js",
 			"full-calendar/locales-all.min.js",
-			"full-calendar/moment.min.js",
+			"moment/moment.min.js",
 			"full-calendar/calendar-main.min.js",
 			"full-calendar/daygrid.min.js",
 			"full-calendar/timegrid.min.js",
