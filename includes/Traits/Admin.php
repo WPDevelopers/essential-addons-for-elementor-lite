@@ -372,7 +372,7 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
             'href'   => '#',
             'meta'   => [
                 'class' => 'ea-clear-cache',
-                'html'  => '<div class="ea-clear-cache-id" data-pageid="' . get_queried_object_id() . '">',
+                'html'  => '<div class="ea-clear-cache-id" data-pageid="' . get_queried_object_id() . '"></div>',
             ],
             'title'  => 'Regenerate Page Assets',
         ]);
