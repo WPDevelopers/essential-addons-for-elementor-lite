@@ -192,6 +192,11 @@ trait Generator
      */
     public function generate_frontend_scripts()
     {
+
+        if (EAEL_DEV_MODE) {
+            return;
+        }
+
         if ($this->is_preview_mode()) {
             return;
         }
