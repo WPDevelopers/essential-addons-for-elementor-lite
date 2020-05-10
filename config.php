@@ -650,7 +650,7 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/plyr/sticky-video-plyr.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/plyr/plyr.min.css',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
@@ -662,7 +662,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/plyr/sticky-video-plyr.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/plyr/plyr.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
