@@ -2853,11 +2853,16 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['image_id'] = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
+
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
 
-            preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
-            $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
-            $gallery_store[$counter]['video_link'] = $video_link;
+            if(strpos($gallery['eael_fg_gallery_item_video_link'], 'youtu.be') != false) {
+                preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
+                $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
+                $gallery_store[$counter]['video_link'] = $video_link;
+            }else {
+                $gallery_store[$counter]['video_link'] = $gallery['eael_fg_gallery_item_video_link'];
+            }
 
             $gallery_store[$counter]['show_lightbox'] = $gallery['eael_fg_gallery_lightbox'];
             $gallery_store[$counter]['play_icon'] = $gallery['fg_video_gallery_play_icon'];
@@ -3047,7 +3052,7 @@ class Filterable_Gallery extends Widget_Base
             }
 
                 if ($settings['eael_fg_caption_style'] === 'card'
-                    && $item['video_gallery_switch'] === 'false'
+                    && $item['video_gallery_switch'] != 'true'
                     && $settings['eael_fg_show_popup'] === 'media') {
                     $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
                 }
@@ -3108,7 +3113,8 @@ class Filterable_Gallery extends Widget_Base
                 if ( $settings['eael_fg_show_popup'] == 'media'
                     && $settings['eael_fg_caption_style'] !== 'card' ) $html .= '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link media-content-wrap" data-elementor-open-lightbox="no">';
 
-                    if ($item['video_gallery_switch'] === 'false' || $settings['eael_fg_caption_style'] === 'card') {
+
+                    if ($item['video_gallery_switch'] != 'true' || $settings['eael_fg_caption_style'] == 'card') {
 
                         if ($settings['eael_fg_grid_hover_style'] !== 'eael-none') {
 
