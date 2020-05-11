@@ -232,7 +232,7 @@ trait Enqueue
     // rules how css will be enqueued on front-end
     protected function enqueue_protocols()
     {
-        if ($this->has_cache_files($this->request_uid) && !EAEL_DEV_MODE) {
+        if (!EAEL_DEV_MODE && $this->has_cache_files($this->request_uid)) {
             // enqueue
             wp_enqueue_style(
                 'eael-cache-view',
