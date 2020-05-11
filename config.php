@@ -711,7 +711,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/moment.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment/moment.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
