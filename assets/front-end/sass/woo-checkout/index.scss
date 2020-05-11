@@ -462,7 +462,7 @@ $base-font-size: 14px;
 		// Login
 		.woo-checkout-login {
 			&.woo-checkout-login-editor {
-				display: none!important;
+				display: none;
 			}
 			.woocommerce-form-login-toggle {
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
@@ -720,7 +720,7 @@ $base-font-size: 14px;
 		.woocommerce {
 			.woo-checkout-login {
 				&.woo-checkout-login-editor {
-					display: block !important;
+					display: block;
 				}
 			}
 		}
