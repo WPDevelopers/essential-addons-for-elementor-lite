@@ -54,7 +54,7 @@ class TypeForm extends Widget_Base {
     }
 
     public function get_custom_help_url () {
-        return 'https://essential-addons.com/elementor/docs/type-form/';
+        return 'https://essential-addons.com/elementor/docs/typeform/';
     }
 
     private function get_personal_token () {
