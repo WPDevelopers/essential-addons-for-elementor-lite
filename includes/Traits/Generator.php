@@ -42,7 +42,7 @@ trait Generator
         }
 
         if ($uid) {
-            $this->request_uid = md5($uid);
+            $this->request_uid = substr(md5($uid), 0, 16);
         }
     }
 
@@ -150,7 +150,7 @@ trait Generator
      */
     public function generate_scripts($elements, $file_name = null, $context)
     {
-        if (empty($elements)) {
+        if (empty($elements) || EAEL_DEV_MODE) {
             return;
         }
 
@@ -192,11 +192,6 @@ trait Generator
      */
     public function generate_frontend_scripts()
     {
-
-        if (EAEL_DEV_MODE) {
-            return;
-        }
-
         if ($this->is_preview_mode()) {
             return;
         }
