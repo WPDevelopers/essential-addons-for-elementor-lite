@@ -99,10 +99,10 @@ class Fancy_Text extends Widget_Base {
 						'eael_fancy_text_strings_text_field' => __( 'First string', 'essential-addons-for-elementor-lite'),
 					],
 					[
-						'eael_fancy_text_strings_text_field' => __( 'Second tring', 'essential-addons-for-elementor-lite'),
+						'eael_fancy_text_strings_text_field' => __( 'Second string', 'essential-addons-for-elementor-lite'),
 					],
 					[
-						'eael_fancy_text_strings_text_field' => __( 'Third tring', 'essential-addons-for-elementor-lite'),
+						'eael_fancy_text_strings_text_field' => __( 'Third string', 'essential-addons-for-elementor-lite'),
 					]
 				],
 			]
