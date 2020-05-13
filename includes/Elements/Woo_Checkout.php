@@ -483,7 +483,7 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 		$this->add_control(
-			'ea_woo_checkout_order_review_row_color_split',
+			'ea_woo_checkout_order_review_row_color_pro',
 			[
 				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
@@ -492,7 +492,7 @@ class Woo_Checkout extends Widget_Base {
 					'{{WRAPPER}} .ea-woo-checkout-order-review .table-row' => 'color: {{VALUE}};',
 				],
 				'condition' => [
-					'ea_woo_checkout_layout' => 'split',
+					'ea_woo_checkout_layout!' => 'default',
 				],
 			]
 		);
