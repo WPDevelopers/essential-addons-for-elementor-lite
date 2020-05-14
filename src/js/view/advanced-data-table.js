@@ -11,7 +11,7 @@ class advancedDataTable {
 		let pagination = $scope.context.querySelector(".ea-advanced-data-table-pagination");
 		let classCollection = {};
 
-		if (!ea.isEditMode) {
+		if (!ea.isEditMode && table !== null) {
 			// search
 			this.initTableSearch(table, search, pagination);
 
@@ -30,7 +30,7 @@ class advancedDataTable {
 	initTableSearch(table, search, pagination) {
 		if (search) {
 			search.addEventListener("input", (e) => {
-				let input = this.value.toLowerCase();
+				let input = e.target.value.toLowerCase();
 				let hasSort = table.classList.contains("ea-advanced-data-table-sortable");
 				let offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 

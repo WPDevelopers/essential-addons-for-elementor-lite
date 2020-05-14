@@ -136,8 +136,8 @@ class Bootstrap
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
-        add_action( 'wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
-        add_action( 'wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
@@ -186,8 +186,8 @@ class Bootstrap
 
         // On Editor - Register WooCommerce frontend hooks before the Editor init.
         // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
-        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] && is_admin() ) {
-            add_action( 'init', [$this, 'register_wc_hooks'], 5 );
+        if (!empty($_REQUEST['action']) && 'elementor' === $_REQUEST['action'] && is_admin()) {
+            add_action('init', [$this, 'register_wc_hooks'], 5);
         }
     }
 }

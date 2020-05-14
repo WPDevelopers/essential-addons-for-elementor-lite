@@ -38779,7 +38779,7 @@ typeof navigator === "object" && (function (global, factory) {
 }));
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@fullcalendar/core')) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../../daygrid/node_modules/@fullcalendar/core')) :
     typeof define === 'function' && define.amd ? define(['exports', '@fullcalendar/core'], factory) :
     (global = global || self, factory(global.FullCalendarList = {}, global.FullCalendar));
 }(this, function (exports, core) { 'use strict';
