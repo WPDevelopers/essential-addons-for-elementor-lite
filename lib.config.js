@@ -5,13 +5,13 @@ const cssEntry = (context, minified) => {
 	let paths = [];
 	let lib = {
 		view: [
-			"tooltipster.bundle.min.css",
-			"magnific-popup.min.css",
-			"sticky-video-plyr.min.css",
-			"calendar-main.min.css",
-			"daygrid.min.css",
-			"timegrid.min.css",
-			"listgrid.min.css",
+			"tooltipster/tooltipster.bundle.min.css",
+			"magnific-popup/magnific-popup.min.css",
+			"plyr/plyr.min.css",
+			"full-calendar/calendar-main.min.css",
+			"full-calendar/daygrid.min.css",
+			"full-calendar/timegrid.min.css",
+			"full-calendar/listgrid.min.css",
 		],
 	};
 
@@ -30,23 +30,22 @@ const jsEntry = (context, minified) => {
 	let paths = [];
 	let lib = {
 		view: [
-			"imagesloaded.pkgd.min.js",
-			"isotope.pkgd.min.js",
-			"morphext.min.js",
-			"typed.min.js",
-			"countdown.min.js",
-			"tooltipster.bundle.min.js",
-			"jquery.magnific-popup.min.js",
-			"inview.min.js",
-			"sticky-video-plyr.min.js",
-			"locales-all.min.js",
-			"moment.min.js",
-			"calendar-main.min.js",
-			"daygrid.min.js",
-			"timegrid.min.js",
-			"listgrid.min.js",
-			"embed.min.js",
-
+			"imagesloaded/imagesloaded.pkgd.min.js",
+			"isotope/isotope.pkgd.min.js",
+			"morphext/morphext.min.js",
+			"typed/typed.min.js",
+			"countdown/countdown.min.js",
+			"tooltipster/tooltipster.bundle.min.js",
+			"magnific-popup/jquery.magnific-popup.min.js",
+			"inview/inview.min.js",
+			"plyr/plyr.min.js",
+			"full-calendar/locales-all.min.js",
+			"moment/moment.min.js",
+			"full-calendar/calendar-main.min.js",
+			"full-calendar/daygrid.min.js",
+			"full-calendar/timegrid.min.js",
+			"full-calendar/listgrid.min.js",
+			"typeform/embed.min.js"
 		],
 	};
 
