@@ -912,7 +912,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce-form-coupon-toggle .woocommerce-info a' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-login a' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -923,7 +923,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce-form-coupon-toggle .woocommerce-info a:hover' => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-login a:hover' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
