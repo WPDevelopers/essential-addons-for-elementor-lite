@@ -465,7 +465,7 @@ class Fancy_Text extends Widget_Base {
 	}
 
 	public function fancy_text($settings) {
-		$fancy_text = array();
+		$fancy_text = array("");
 		foreach ( $settings as $item ) {
 			if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) )  {
 				$fancy_text[] = $item['eael_fancy_text_strings_text_field'] ;
@@ -502,12 +502,16 @@ class Fancy_Text extends Widget_Base {
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
-			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"><?php
-				$eael_fancy_text_strings_list = "";
-				foreach ( $settings['eael_fancy_text_strings'] as $item ) {
-					$eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
-				}
-				echo rtrim($eael_fancy_text_strings_list, ", "); ?>
+			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings">
+				<noscript>
+					<?php
+						$eael_fancy_text_strings_list = "";
+						foreach ( $settings['eael_fancy_text_strings'] as $item ) {
+							$eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
+						}
+						echo rtrim($eael_fancy_text_strings_list, ", ");
+					?>
+				</noscript>
 			</span>
 		<?php endif; ?>
 
