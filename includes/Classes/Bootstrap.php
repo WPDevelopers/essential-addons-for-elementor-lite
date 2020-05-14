@@ -23,6 +23,9 @@ class Bootstrap
     // instance container
     private static $instance = null;
 
+    // dev mode
+    public $dev_mode;
+
     // request unique identifier
     protected $request_uid = null;
 
@@ -68,6 +71,9 @@ class Bootstrap
      */
     private function __construct()
     {
+        // dev mode
+        add_filter('eael/dev_mode', [$this, 'dev_mode']);
+
         // before init hook
         do_action('eael/before_init');
 
@@ -82,11 +88,11 @@ class Bootstrap
 
         // additional settings
         $this->additional_settings = apply_filters('eael/additional_settings', [
-            'quick_tools' => true
+            'quick_tools' => true,
         ]);
 
         // initialize transient container
-        $this->transient_elements = [];
+        $this->transient_elements   = [];
         $this->transient_extensions = [];
 
         // start plugin tracking
@@ -99,6 +105,11 @@ class Bootstrap
 
         // register hooks
         $this->register_hooks();
+    }
+
+    protected function dev_mode()
+    {
+        return $_SERVER["REMOTE_ADDR"] == "127.0.0.1";
     }
 
     protected function register_hooks()
@@ -125,8 +136,8 @@ class Bootstrap
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
-        add_action( 'wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
-        add_action( 'wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        add_action('wp_ajax_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
+        add_action('wp_ajax_nopriv_woo_checkout_update_order_review', [$this, 'woo_checkout_update_order_review']);
 
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
@@ -134,9 +145,9 @@ class Bootstrap
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
         add_action('wp_footer', array($this, 'render_global_html'));
 
-        add_filter('eael/event-calendar/source', [$this,'eael_event_calendar_source']);
-        add_action('eael/advanced-data-table/source/control', [$this,'advanced_data_table_source_control']);
-        add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this,'advanced_data_table_ninja_integration'], 10, 1);
+        add_filter('eael/event-calendar/source', [$this, 'eael_event_calendar_source']);
+        add_action('eael/advanced-data-table/source/control', [$this, 'advanced_data_table_source_control']);
+        add_filter('eael/advanced-data-table/table_html/integration/ninja', [$this, 'advanced_data_table_ninja_integration'], 10, 1);
 
         // Admin
         if (is_admin()) {
@@ -167,14 +178,14 @@ class Bootstrap
 
         }
 
-        if(current_user_can('manage_options')) {
-            add_action( 'admin_bar_menu', [$this, 'admin_bar'], 900);
+        if (current_user_can('manage_options')) {
+            add_action('admin_bar_menu', [$this, 'admin_bar'], 900);
         }
 
         // On Editor - Register WooCommerce frontend hooks before the Editor init.
         // Priority = 5, in order to allow plugins remove/add their wc hooks on init.
-        if ( ! empty( $_REQUEST['action'] ) && 'elementor' === $_REQUEST['action'] && is_admin() ) {
-            add_action( 'init', [$this, 'register_wc_hooks'], 5 );
+        if (!empty($_REQUEST['action']) && 'elementor' === $_REQUEST['action'] && is_admin()) {
+            add_action('init', [$this, 'register_wc_hooks'], 5);
         }
     }
 }

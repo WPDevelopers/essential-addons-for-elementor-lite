@@ -8,7 +8,7 @@
  * Author URI: https://wpdeveloper.net/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
- * 
+ *
  * WC tested up to: 4.0.0
  */
 
@@ -21,6 +21,7 @@ if (!defined('ABSPATH')) {
  *
  * @since 3.0.0
  */
+define('EAEL_DEV_MODE', $_SERVER['REMOTE_ADDR'] == '127.0.0.1');
 define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));

@@ -27,8 +27,8 @@ trait Admin
             '58.6'
         );
         $plugins = \get_option('active_plugins');
-        if ( ! in_array( 'templately/templately.php', $plugins ) ) {
-            add_submenu_page( 
+        if (!in_array('templately/templately.php', $plugins)) {
+            add_submenu_page(
                 'eael-settings',
                 __('Templates Cloud', 'essential-addons-for-elementor-lite'),
                 __('Templates Cloud', 'essential-addons-for-elementor-lite'),
@@ -43,17 +43,18 @@ trait Admin
      *
      * @return void
      */
-    public function templately_page() {
-        $plugin_name = basename( EAEL_PLUGIN_BASENAME, '.php' );
-        $button_text = __( 'Install Templately', 'essential-addons-for-elementor-lite' );
-        if ( ! function_exists( 'get_plugins' ) ) {
+    public function templately_page()
+    {
+        $plugin_name = basename(EAEL_PLUGIN_BASENAME, '.php');
+        $button_text = __('Install Templately', 'essential-addons-for-elementor-lite');
+        if (!function_exists('get_plugins')) {
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
-        $plugins = \get_plugins();
+        $plugins   = \get_plugins();
         $installed = false;
         if (isset($plugins['templately/templately.php'])) {
-            $installed = true;
-            $button_text = __( 'Activate Templately', 'essential-addons-for-elementor-lite' );
+            $installed   = true;
+            $button_text = __('Activate Templately', 'essential-addons-for-elementor-lite');
         }
 
         ?>
@@ -67,14 +68,14 @@ trait Admin
                         <div class="template-cloud-install">
                             <div class="templately-left">
                                 <div class="templately-admin-title">
-                                    <h1><?php echo __( 'Explore 100+', 'essential-addons-for-elementor-lite' ); ?><br><?php echo __( 'Free Templates', 'essential-addons-for-elementor-lite' ); ?></h1>
-                                    <p><?php echo __( 'From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite' ); ?></p>
+                                    <h1><?php echo __('Explore 100+', 'essential-addons-for-elementor-lite'); ?><br><?php echo __('Free Templates', 'essential-addons-for-elementor-lite'); ?></h1>
+                                    <p><?php echo __('From multipurpose themes to niche templates, you’ll always find something that catches your eye.', 'essential-addons-for-elementor-lite'); ?></p>
                                 </div>
                             </div>
                             <div class="templately-right">
                                 <div class="templately-admin-install">
-                                    <p><?php echo __( 'Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite' ); ?></p>
-                                    <button class="eae-activate-templately"><?php echo $button_text; ?></button>    
+                                    <p><?php echo __('Install Templately by Essential Addons to get access to the templates library and cloud.', 'essential-addons-for-elementor-lite'); ?></p>
+                                    <button class="eae-activate-templately"><?php echo $button_text; ?></button>
                                 </div>
                             </div>
                         </div>
@@ -85,14 +86,14 @@ trait Admin
                         $( document ).ready(function( $ ){
                             $('body').on('click', '.eae-activate-templately', function( e ){
                                 var self = $(this);
-                                self.text('<?php echo ! $installed ? esc_js( 'Installing...' ) : esc_js( 'Activating...' ); ?>');
+                                self.text('<?php echo !$installed ? esc_js('Installing...') : esc_js('Activating...'); ?>');
                                 e.preventDefault();
                                 $.ajax({
-                                    url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+                                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
                                     type: 'POST',
                                     data: {
                                         action: 'wpdeveloper_upsale_core_install_<?php echo $plugin_name; ?>',
-                                        _wpnonce: '<?php echo wp_create_nonce( 'wpdeveloper_upsale_core_install_' . $plugin_name ); ?>',
+                                        _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_core_install_' . $plugin_name); ?>',
                                         slug : 'templately',
                                         file : 'templately.php'
                                     },
@@ -101,8 +102,8 @@ trait Admin
                                         self.removeClass('install-now updating-message');
                                     }
                                 }).done(function(){
-                                    self.text('<?php echo esc_js( 'Installed' ); ?>').delay(3000);
-                                    window.location.href = '<?php echo admin_url( "admin.php?page=templately" ); ?>';
+                                    self.text('<?php echo esc_js('Installed'); ?>').delay(3000);
+                                    window.location.href = '<?php echo admin_url("admin.php?page=templately"); ?>';
                                 }).fail(function(){
                                     self.removeClass('install-now updating-message');
                                 });
@@ -112,7 +113,7 @@ trait Admin
                 </script>
             </div>
         <?php
-    }
+}
     /**
      * Loading all essential scripts
      *
@@ -122,7 +123,7 @@ trait Admin
     {
         wp_enqueue_style('essential_addons_elementor-notice-css', EAEL_PLUGIN_URL . '/assets/admin/css/notice.css', false, EAEL_PLUGIN_VERSION);
 
-        if( $hook == 'essential-addons_page_template-cloud' ) {
+        if ($hook == 'essential-addons_page_template-cloud') {
             wp_enqueue_style('essential_addons_elementor-template-cloud-css', EAEL_PLUGIN_URL . '/assets/admin/css/cloud.css', false, EAEL_PLUGIN_VERSION);
         }
 
@@ -138,7 +139,7 @@ trait Admin
 
             wp_localize_script('essential_addons_elementor-admin-js', 'localize', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('essential-addons-elementor'),
+                'nonce'   => wp_create_nonce('essential-addons-elementor'),
             ));
         }
     }
@@ -175,14 +176,14 @@ trait Admin
                         <?php }?>
                     </ul>
                     <?php
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-                        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-                        if (!$this->pro_enabled) {
-                            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-                        }
-                    ?>
+include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
+        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
+        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
+        include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
+        if (!$this->pro_enabled) {
+            include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
+        }
+        ?>
                 </div>
             </form>
         </div>
@@ -207,21 +208,21 @@ trait Admin
 
         // Saving Google Map Api Key
         update_option('eael_save_google_map_api', @$settings['google-map-api']);
-        
+
         // Saving Mailchimp Api Key
         update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
-        
+
         // Saving Duplicator Settings
         update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
-        
+
         $defaults = array_fill_keys(array_keys(array_merge($this->registered_elements, $this->registered_extensions, $this->additional_settings)), false);
         $elements = array_merge($defaults, array_fill_keys(array_keys(array_intersect_key($settings, $defaults)), true));
-        
+
         // update new settings
         $updated = update_option('eael_save_settings', $elements);
 
         // Build assets files
-        $this->generate_scripts(array_keys($elements));
+        $this->generate_scripts(array_keys($elements), null, 'edit');
 
         wp_send_json($updated);
     }
@@ -240,42 +241,42 @@ trait Admin
          */
         $notice->maybe_later_time = '21 Day';
 
-        $scheme = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
-        $url = $_SERVER['REQUEST_URI'] . $scheme;
+        $scheme        = (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)) ? '&' : '?';
+        $url           = $_SERVER['REQUEST_URI'] . $scheme;
         $notice->links = [
             'review' => array(
-                'later' => array(
-                    'link' => 'https://wpdeveloper.net/review-essential-addons-elementor',
-                    'target' => '_blank',
-                    'label' => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
+                'later'            => array(
+                    'link'       => 'https://wpdeveloper.net/review-essential-addons-elementor',
+                    'target'     => '_blank',
+                    'label'      => __('Ok, you deserve it!', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-external',
                 ),
-                'allready' => array(
-                    'link' => $url,
-                    'label' => __('I already did', 'essential-addons-for-elementor-lite'),
+                'allready'         => array(
+                    'link'       => $url,
+                    'label'      => __('I already did', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-smiley',
-                    'data_args' => [
+                    'data_args'  => [
                         'dismiss' => true,
                     ],
                 ),
-                'maybe_later' => array(
-                    'link' => $url,
-                    'label' => __('Maybe Later', 'essential-addons-for-elementor-lite'),
+                'maybe_later'      => array(
+                    'link'       => $url,
+                    'label'      => __('Maybe Later', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-calendar-alt',
-                    'data_args' => [
+                    'data_args'  => [
                         'later' => true,
                     ],
                 ),
-                'support' => array(
-                    'link' => 'https://wpdeveloper.net/support',
-                    'label' => __('I need help', 'essential-addons-for-elementor-lite'),
+                'support'          => array(
+                    'link'       => 'https://wpdeveloper.net/support',
+                    'label'      => __('I need help', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-sos',
                 ),
                 'never_show_again' => array(
-                    'link' => $url,
-                    'label' => __('Never show again', 'essential-addons-for-elementor-lite'),
+                    'link'       => $url,
+                    'label'      => __('Never show again', 'essential-addons-for-elementor-lite'),
                     'icon_class' => 'dashicons dashicons-dismiss',
-                    'data_args' => [
+                    'data_args'  => [
                         'dismiss' => true,
                     ],
                 ),
@@ -289,18 +290,18 @@ trait Admin
         $notice->thumbnail('review', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
         /**
          * This is upsale notice settings
-         * classes for wrapper, 
+         * classes for wrapper,
          * Message message for showing.
          */
-        $notice->classes( 'upsale', 'notice is-dismissible ' );
-        $notice->message( 'upsale', '<p>'. __( '10,000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', 'essential-addons-for-elementor-lite' ) .'</p>' );
-        $notice->thumbnail( 'upsale', plugins_url( 'assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME ) );
+        $notice->classes('upsale', 'notice is-dismissible ');
+        $notice->message('upsale', '<p>' . __('10,000+ People already using <a href="https://wpdeveloper.net/ea/notificationX" target="_blank">NotificationX</a> to increase their Sales & Engagement!', 'essential-addons-for-elementor-lite') . '</p>');
+        $notice->thumbnail('upsale', plugins_url('assets/admin/images/nx-icon.svg', EAEL_PLUGIN_BASENAME));
 
         // Update Notice For PRO Version
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<' ) ) {
-            $notice->classes( 'update', 'notice is-dismissible ' );
-            $notice->message( 'update', '<p>'. __( 'You are using an incompatible version of Essential Addons PRO. Please update to v3.6.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite' ) .'</p>' );
-            $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
+        if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<')) {
+            $notice->classes('update', 'notice is-dismissible ');
+            $notice->message('update', '<p>' . __('You are using an incompatible version of Essential Addons PRO. Please update to v3.6.0+. <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite') . '</p>');
+            $notice->thumbnail('update', plugins_url('assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME));
         }
 
         // if( ! $this->pro_enabled ) {
@@ -313,10 +314,10 @@ trait Admin
             'slug'      => 'notificationx',
             'page_slug' => 'nx-builder',
             'file'      => 'notificationx.php',
-            'btn_text'  => __( 'Install Free', 'essential-addons-for-elementor-lite'),
+            'btn_text'  => __('Install Free', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'by' => 'class',
-                'class' => 'NotificationX'
+                'by'    => 'class',
+                'class' => 'NotificationX',
             ],
         );
 
@@ -327,54 +328,54 @@ trait Admin
                 'review' => $notice->makeTime($notice->timestamp, '7 Day'), // after 3 days
             ],
         );
-        if( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<' ) ) { 
+        if ($this->pro_enabled && \version_compare(EAEL_PRO_PLUGIN_VERSION, '3.6.0', '<')) {
             $notice->options_args['notice_will_show']['update'] = $notice->timestamp;
         }
-        // if( ! $this->pro_enabled ) { 
+        // if( ! $this->pro_enabled ) {
         //     $notice->options_args['notice_will_show']['update_400k'] = $notice->makeTime($notice->timestamp, '1 Hour');
         // }
 
         $notice->init();
     }
 
-    public function admin_bar($wp_admin_bar) {
-        if(is_admin()) {
+    public function admin_bar($wp_admin_bar)
+    {
+        if (is_admin()) {
             return;
         }
 
-        if(!$this->get_settings('quick_tools')) {
+        if (!$this->get_settings('quick_tools')) {
             return;
         }
 
         $wp_admin_bar->add_node([
             'id'    => 'ea-wp-admin-bar',
             'meta'  => [
-                'class' => 'ea-wp-admin-bar'
+                'class' => 'ea-wp-admin-bar',
             ],
-            'title' => 'EA Tools'
+            'title' => 'EA Tools',
         ]);
 
         $wp_admin_bar->add_node([
-            'parent'    => 'ea-wp-admin-bar',
-            'id'    => 'ea-all-cache-clear',
-            'href'  => '#',
-            'meta'  => [
-                'class' => 'ea-all-cache-clear'
+            'parent' => 'ea-wp-admin-bar',
+            'id'     => 'ea-all-cache-clear',
+            'href'   => '#',
+            'meta'   => [
+                'class' => 'ea-all-cache-clear',
             ],
-            'title' => 'Regenerate All Assets'
+            'title'  => 'Regenerate All Assets',
         ]);
 
         $wp_admin_bar->add_node([
-            'parent'    => 'ea-wp-admin-bar',
-            'id'    => 'ea-clear-cache-'.get_queried_object_id(),
-            'href'  => '#',
-            'meta'  => [
+            'parent' => 'ea-wp-admin-bar',
+            'id'     => 'ea-clear-cache-' . get_queried_object_id(),
+            'href'   => '#',
+            'meta'   => [
                 'class' => 'ea-clear-cache',
-                'html'   => '<div class="ea-clear-cache-id" data-pageid="'.get_queried_object_id().'">'
+                'html'  => '<div class="ea-clear-cache-id" data-pageid="' . get_queried_object_id() . '"></div>',
             ],
-            'title' => 'Regenerate Page Assets'
+            'title'  => 'Regenerate Page Assets',
         ]);
 
-        
     }
 }
