@@ -13,6 +13,7 @@ const cssEntry = (context, minified) => {
 			"full-calendar/timegrid.min.css",
 			"full-calendar/listgrid.min.css",
 		],
+		edit: ["quill/quill.bubble.min.css"],
 	};
 
 	lib[context].forEach((file) => {
@@ -46,6 +47,7 @@ const jsEntry = (context, minified) => {
 			"full-calendar/timegrid.min.js",
 			"full-calendar/listgrid.min.js",
 		],
+		edit: ["quill/quill.min.js"],
 	};
 
 	lib[context].forEach((file) => {
@@ -89,6 +91,42 @@ concat(jsEntry("view", true)).then((result) => {
 // lib.view.js
 concat(jsEntry("view", false)).then((result) => {
 	fs.writeFile("./assets/front-end/js/lib-view/lib-view.js", result, (err) => {
+		if (err) {
+			return console.log(err);
+		}
+	});
+});
+
+// lib.edit.min.css
+concat(cssEntry("edit", true)).then((result) => {
+	fs.writeFile("./assets/front-end/css/lib-edit/lib-edit.min.css", result, (err) => {
+		if (err) {
+			return console.log(err);
+		}
+	});
+});
+
+// lib.edit.css
+concat(cssEntry("edit", false)).then((result) => {
+	fs.writeFile("./assets/front-end/css/lib-edit/lib-edit.css", result, (err) => {
+		if (err) {
+			return console.log(err);
+		}
+	});
+});
+
+// lib.edit.min.js
+concat(jsEntry("edit", true)).then((result) => {
+	fs.writeFile("./assets/front-end/js/lib-edit/lib-edit.min.js", result, (err) => {
+		if (err) {
+			return console.log(err);
+		}
+	});
+});
+
+// lib.edit.js
+concat(jsEntry("edit", false)).then((result) => {
+	fs.writeFile("./assets/front-end/js/lib-edit/lib-edit.js", result, (err) => {
 		if (err) {
 			return console.log(err);
 		}
