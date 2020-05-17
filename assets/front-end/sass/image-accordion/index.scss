@@ -20,23 +20,47 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	transition: flex .4s;
+	overflow: hidden;
 }
 
 .eael-grow-accordion {
 	flex: 3;
 }
 
-.eael-img-accordion .overlay {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0 10px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	transition: background-color .4s;
+.eael-img-accordion {
+	.overlay {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 10px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: background-color .4s;
+	}
+	&-horizontal-align-left .overlay {
+		justify-content: flex-start;
+		text-align: left;
+	}
+	&-horizontal-align-center .overlay {
+		justify-content: center;
+		text-align: center;
+	}
+	&-horizontal-align-right .overlay {
+		justify-content: flex-end;
+		text-align: right;
+	}
+	&-vertical-align-top .overlay {
+		align-items: flex-start;
+	}
+	&-vertical-align-center .overlay {
+		align-items: center;
+	}
+	&-vertical-align-bottom .overlay {
+		align-items: flex-end;
+	}
 }
 
 .eael-img-accordion .overlay .overlay-inner {
@@ -69,6 +93,7 @@
 
 .eael-img-accordion .overlay p {
 	color: #fff;
+	margin-bottom: 0;
 	transform: translate3d(0, 60px, 0);
 }
 
@@ -78,7 +103,6 @@
 	transform: none !important;
 	transition: all .3s .3s;
 }
-
 @media screen and (max-width: 800px) {
 	.eael-img-accordion {
 		flex-direction: column;
