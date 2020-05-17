@@ -68,7 +68,7 @@ class Woo_Checkout extends Widget_Base {
 	 *
 	 */
 	public function get_keywords() {
-		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'woocommerce split checkout', 'split checkout', 'ea', 'essential addons' ];
+		return [ 'ea woo checkout', 'woocommerce', 'checkout', 'woocommerce checkout', 'woocommerce split checkout', 'split checkout', 'multi steps checkout', 'ea', 'essential addons' ];
 	}
 
 	public function get_custom_help_url() {
@@ -128,7 +128,7 @@ class Woo_Checkout extends Widget_Base {
 					'label' => esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite'),
 					'type' => Controls_Manager::HEADING,
 					'condition' => [
-						'ea_woo_checkout_layout' => ['split'],
+						'ea_woo_checkout_layout' => ['multi-steps', 'split'],
 					],
 				]
 			);
