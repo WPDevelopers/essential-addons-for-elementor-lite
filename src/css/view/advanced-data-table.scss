@@ -11,6 +11,26 @@
 		th,
 		td {
 			background-color: transparent !important;
+
+			.inline-editor {
+				&.ql-container {
+					font-family: inherit;
+					font-size: inherit;
+				}
+				
+				.ql-editor {
+					padding: 0;
+					padding-bottom: 30px;
+				}
+
+				.ql-toolbar {
+					min-width: 248px;
+				}
+			}
+
+			p {
+				margin-bottom: 0;
+			}
 		}
 
 		&.ea-advanced-data-table-sortable {
