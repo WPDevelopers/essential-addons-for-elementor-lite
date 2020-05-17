@@ -280,6 +280,24 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table td {
   background-color: transparent !important;
 }
+.ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor.ql-container,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor.ql-container {
+  font-family: inherit;
+  font-size: inherit;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor .ql-editor,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor .ql-editor {
+  padding: 0;
+  padding-bottom: 30px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor .ql-toolbar,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor .ql-toolbar {
+  min-width: 248px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th p,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td p {
+  margin-bottom: 0;
+}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th {
   position: relative;
   cursor: pointer;
