@@ -350,6 +350,27 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+
+        $this->add_control(
+            'title_tag',
+            [
+                'label' => __('Select Title Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'h5',
+                'options' => [
+                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p' => __('P', 'essential-addons-for-elementor-lite'),
+                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_fg_controls',
             [
@@ -3020,7 +3041,7 @@ class Filterable_Gallery extends Widget_Base
                             $html .= '<div class="fg-item-category"><span>'.$item['category'].'</span></div>';
                         }
 
-                        $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
+                        $html .= '<'.$settings['title_tag'].' class="fg-item-title">' . $item['title'] . '</'.$settings['title_tag'].'>';
                         $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
                     $html .= '</div>';
 
@@ -3127,7 +3148,7 @@ class Filterable_Gallery extends Widget_Base
                                 $html .= '<div class="gallery-item-caption-over">';
                                     if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
                                         if (!empty($item['title'])) {
-                                            $html .= '<h5 class="fg-item-title">' . $item['title'] . '</h5>';
+                                            $html .= '<'.$settings['title_tag'].' class="fg-item-title">' . $item['title'] . '</'.$settings['title_tag'].'>';
                                         }
                                         if (!empty($item['content'])) {
                                             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
