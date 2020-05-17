@@ -19,6 +19,7 @@
   background-position: center;
   background-repeat: no-repeat;
   transition: flex .4s;
+  overflow: hidden;
 }
 
 .eael-grow-accordion {
@@ -36,6 +37,27 @@
   bottom: 0;
   left: 0;
   transition: background-color .4s;
+}
+.eael-img-accordion-horizontal-align-left .overlay {
+  justify-content: flex-start;
+  text-align: left;
+}
+.eael-img-accordion-horizontal-align-center .overlay {
+  justify-content: center;
+  text-align: center;
+}
+.eael-img-accordion-horizontal-align-right .overlay {
+  justify-content: flex-end;
+  text-align: right;
+}
+.eael-img-accordion-vertical-align-top .overlay {
+  align-items: flex-start;
+}
+.eael-img-accordion-vertical-align-center .overlay {
+  align-items: center;
+}
+.eael-img-accordion-vertical-align-bottom .overlay {
+  align-items: flex-end;
 }
 
 .eael-img-accordion .overlay .overlay-inner {
@@ -68,6 +90,7 @@
 
 .eael-img-accordion .overlay p {
   color: #fff;
+  margin-bottom: 0;
   transform: translate3d(0, 60px, 0);
 }
 
