@@ -64,7 +64,7 @@ class TypeForm extends Widget_Base {
     public function get_form_list () {
 
         $token = $this->get_personal_token();
-        $key = 'eael_type_form_data';
+        $key = 'eael_typeform_'.md5(implode('', ['eael_type_form_data', $token]));
         $form_arr = get_transient($key);
         if (empty($form_arr)) {
             $response = wp_remote_get(
@@ -129,11 +129,11 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'eael_typeform_list',
             [
-                'label'   => __('Typeform', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => '',
+                'label'       => __('Typeform', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => '',
                 'label_block' => true,
-                'options' => $this->get_form_list()
+                'options'     => $this->get_form_list()
             ]
         );
         $this->add_control(
@@ -169,15 +169,15 @@ class TypeForm extends Widget_Base {
             'section_container_style',
             [
                 'label' => __('Form Container', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
             'eael_typeform_background',
             [
-                'label' => esc_html__('Form Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'label'     => esc_html__('Form Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-typeform' => 'background: {{VALUE}};',
                 ],
@@ -188,38 +188,38 @@ class TypeForm extends Widget_Base {
         $this->add_responsive_control(
             'eael_typeform_alignment',
             [
-                'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
+                'label'       => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::CHOOSE,
                 'label_block' => true,
-                'options' => [
+                'options'     => [
                     'default' => [
                         'title' => __('Default', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-ban',
+                        'icon'  => 'fa fa-ban',
                     ],
-                    'left' => [
+                    'left'    => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-h-align-left',
+                        'icon'  => 'eicon-h-align-left',
                     ],
-                    'center' => [
+                    'center'  => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-h-align-center',
+                        'icon'  => 'eicon-h-align-center',
                     ],
-                    'right' => [
+                    'right'   => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'eicon-h-align-right',
+                        'icon'  => 'eicon-h-align-right',
                     ],
                 ],
-                'default' => 'default',
+                'default'     => 'default',
             ]
         );
 
         $this->add_responsive_control(
             'eael_typeform_max_width',
             [
-                'label' => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
+                'label'      => esc_html__('Form Max Width', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
-                'range' => [
+                'range'      => [
                     'px' => [
                         'min' => 10,
                         'max' => 1500,
@@ -229,7 +229,7 @@ class TypeForm extends Widget_Base {
                         'max' => 80,
                     ],
                 ],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-typeform' => 'width: {{SIZE}}{{UNIT}};'
                 ],
             ]
@@ -238,10 +238,10 @@ class TypeForm extends Widget_Base {
         $this->add_responsive_control(
             'eael_typeform_max_height',
             [
-                'label' => esc_html__('Form Height', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
+                'label'      => esc_html__('Form Height', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', '%'],
-                'range' => [
+                'range'      => [
                     'px' => [
                         'min' => 10,
                         'max' => 1500,
@@ -255,7 +255,7 @@ class TypeForm extends Widget_Base {
                     'size' => '700',
                     'unit' => 'px',
                 ],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-typeform' => 'height: {{SIZE}}{{UNIT}};'
                 ],
             ]
@@ -283,10 +283,10 @@ class TypeForm extends Widget_Base {
         $this->add_responsive_control(
             'eael_typeform_margin',
             [
-                'label' => esc_html__('Form Margin', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => esc_html__('Form Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-typeform' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -295,10 +295,10 @@ class TypeForm extends Widget_Base {
         $this->add_responsive_control(
             'eael_typeform_padding',
             [
-                'label' => esc_html__('Form Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => esc_html__('Form Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-typeform' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -307,11 +307,11 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'eael_type_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'separator' => 'before',
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'separator'  => 'before',
                 'size_units' => ['px'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-typeform' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -320,7 +320,7 @@ class TypeForm extends Widget_Base {
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_type_border',
+                'name'     => 'eael_type_border',
                 'selector' => '{{WRAPPER}} .eael-typeform',
             ]
         );
@@ -328,7 +328,7 @@ class TypeForm extends Widget_Base {
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'eael_typeform_box_shadow',
+                'name'     => 'eael_typeform_box_shadow',
                 'selector' => '{{WRAPPER}} .eael-typeform',
             ]
         );
