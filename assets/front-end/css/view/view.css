@@ -297,6 +297,7 @@
 }
 .ea-advanced-data-table-wrap .ea-advanced-data-table th p,
 .ea-advanced-data-table-wrap .ea-advanced-data-table td p {
+  margin-top: 0;
   margin-bottom: 0;
 }
 .ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-center,
