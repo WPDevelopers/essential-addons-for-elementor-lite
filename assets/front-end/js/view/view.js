@@ -518,7 +518,7 @@ eval("var TwitterFeedHandler = function TwitterFeedHandler($scope, $) {\n  if (!
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var TypeFormHandler = function TypeFormHandler($scope, $) {\n  if (typeformEmbed) {\n    var typeForm = $scope.find(\".eael-typeform\"),\n        id = typeForm.attr(\"id\"),\n        data = typeForm.data('typeform');\n\n    if (typeof id != 'undefined' && typeof data !== 'undefined') {\n      var el = document.getElementById(id);\n\n      if (data.url) {\n        typeformEmbed.makeWidget(el, data.url, {\n          hideFooter: data.hideHeaders,\n          hideHeaders: data.hideFooter,\n          opacity: data.opacity\n        });\n      }\n    }\n  }\n};\n\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-typeform.default\", TypeFormHandler);\n});\n\n//# sourceURL=webpack:///./src/js/view/typeform.js?");
+eval("var TypeFormHandler = function TypeFormHandler($scope, $) {\n  if (typeformEmbed) {\n    var typeForm = $scope.find(\".eael-typeform\"),\n        id = typeForm.attr(\"id\"),\n        data = typeForm.data('typeform');\n\n    if (typeof id != 'undefined' && typeof data !== 'undefined') {\n      var el = document.getElementById(id);\n\n      if (data.url) {\n        typeformEmbed.makeWidget(el, data.url, {\n          hideFooter: data.hideFooter,\n          hideHeaders: data.hideHeaders,\n          opacity: data.opacity\n        });\n      }\n    }\n  }\n};\n\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-typeform.default\", TypeFormHandler);\n});\n\n//# sourceURL=webpack:///./src/js/view/typeform.js?");
 
 /***/ }),
 

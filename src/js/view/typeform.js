@@ -7,8 +7,8 @@ var TypeFormHandler = function ($scope, $) {
 			var el = document.getElementById(id);
 			if(data.url){
 				typeformEmbed.makeWidget(el, data.url, {
-					hideFooter: data.hideHeaders,
-					hideHeaders: data.hideFooter,
+					hideFooter: data.hideFooter,
+					hideHeaders: data.hideHeaders,
 					opacity: data.opacity
 				});
 			}
