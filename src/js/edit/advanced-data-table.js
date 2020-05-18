@@ -387,9 +387,13 @@ class advancedDataTableEdit {
 			let origTable = this.parseHTML(this.table.cloneNode(true));
 
 			// update table
-			this.updateFromView(this.view, {
-				ea_adv_data_table_static_html: origTable.innerHTML,
-			}, true);
+			this.updateFromView(
+				this.view,
+				{
+					ea_adv_data_table_static_html: origTable.innerHTML,
+				},
+				true
+			);
 
 			// reset flags
 			this.inlineEditInitiated = false;
