@@ -139,8 +139,7 @@ trait Generator
             return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
         }
 
-        // TODO: $lib['edit']
-        return array_unique(array_merge($lib['view'], $self['general'], $self['edit'], $self['view']));
+        return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
     }
 
     /**

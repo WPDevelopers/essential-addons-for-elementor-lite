@@ -11,6 +11,40 @@
 		th,
 		td {
 			background-color: transparent !important;
+
+			.inline-editor {
+				&.ql-container {
+					font-family: inherit;
+					font-size: inherit;
+				}
+
+				.ql-editor {
+					line-height: inherit;
+					padding: 0;
+				}
+
+				.ql-tooltip {
+					min-width: 248px;
+					z-index: 9999;
+				}
+			}
+
+			p {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+
+			.ql-align-center {
+				text-align: center;
+			}
+			
+			.ql-align-justify {
+				text-align: justify;
+			}
+			
+			.ql-align-right {
+				text-align: right;
+			}
 		}
 
 		&.ea-advanced-data-table-sortable {
