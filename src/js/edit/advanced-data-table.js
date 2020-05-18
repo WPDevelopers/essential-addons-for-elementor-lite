@@ -382,6 +382,20 @@ class advancedDataTableEdit {
 			ea.hooks.doAction("advancedDataTable.initInlineEdit");
 		});
 
+		model.once("editor:close", () => {
+			// parse table html
+			let origTable = this.parseHTML(this.table.cloneNode(true));
+
+			// update table
+			this.updateFromView(this.view, {
+				ea_adv_data_table_static_html: origTable.innerHTML,
+			}, true);
+
+			// reset flags
+			this.inlineEditInitiated = false;
+			this.panelActionInitiated = false;
+		});
+
 		// init panel action
 		ea.hooks.doAction("advancedDataTable.initPanelAction");
 
