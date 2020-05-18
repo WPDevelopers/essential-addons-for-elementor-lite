@@ -19,17 +19,30 @@
 				}
 
 				.ql-editor {
+					line-height: inherit;
 					padding: 0;
-					padding-bottom: 30px;
 				}
 
-				.ql-toolbar {
+				.ql-tooltip {
 					min-width: 248px;
+					z-index: 9999;
 				}
 			}
 
 			p {
 				margin-bottom: 0;
+			}
+
+			.ql-align-center {
+				text-align: center;
+			}
+			
+			.ql-align-justify {
+				text-align: justify;
+			}
+			
+			.ql-align-right {
+				text-align: right;
 			}
 		}
 
