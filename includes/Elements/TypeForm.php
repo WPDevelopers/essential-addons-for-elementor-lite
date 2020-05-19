@@ -85,8 +85,10 @@ class TypeForm extends Widget_Base {
             }
         }
         $this->form_list[''] = __('Select Form', 'essential-addons-for-elementor-lite');
-        foreach ($form_arr as $item) {
-            $this->form_list[$item->_links->display] = $item->title;
+        if (!empty($form_arr)) {
+            foreach ($form_arr as $item) {
+                $this->form_list[$item->_links->display] = $item->title;
+            }
         }
         return $this->form_list;
     }
@@ -139,7 +141,7 @@ class TypeForm extends Widget_Base {
         $this->add_control(
             'eael_typeform_hideheaders',
             [
-                'label'        => __('Hide Headers', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Hide Header', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'no',
                 'return_value' => 'yes',
