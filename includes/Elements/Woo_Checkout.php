@@ -496,6 +496,20 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+		$this->add_control(
+			'ea_woo_checkout_order_review_row_border_color_pro',
+			[
+				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#ab93f5',
+				'selectors' => [
+					'{{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table .table-row, {{WRAPPER}} .ea-woo-checkout.layout-multi-steps .layout-multi-steps-container .table-area .ea-woo-checkout-order-review .ea-order-review-table .table-row, {{WRAPPER}} .ea-woo-checkout.layout-split .layout-split-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total, {{WRAPPER}} .ea-woo-checkout.layout-multi-steps .layout-multi-steps-container .table-area .ea-woo-checkout-order-review .ea-order-review-table-footer .footer-content .order-total' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'ea_woo_checkout_layout!' => 'default',
+				],
+			]
+		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
