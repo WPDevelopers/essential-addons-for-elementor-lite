@@ -39,6 +39,16 @@
 	display: none !important;
 }
 
+@media (min-width: 768px) {
+	button.plyr__control.plyr__control--overlaid.plyr__control--pressed {
+		z-index: 9999;
+		height: 100%;
+		width: 100%;
+		visibility: visible;
+		opacity: 0;
+	}
+}
+
 @media (max-width: 767px) {
 	button.plyr__control.plyr__control--overlaid.plyr__control--pressed {
 		z-index: 9999;
