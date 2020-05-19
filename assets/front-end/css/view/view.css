@@ -2054,6 +2054,9 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: right;
 }
 @charset "UTF-8";
+.eael-event-calendar-wrapper {
+  font-family: Segoe UI;
+}
 .eael-event-calendar-wrapper .fc-row table {
   margin: 0px !important;
 }
@@ -8488,6 +8491,10 @@ html {
   list-style: none;
 }
 
+.eael-toc .eael-toc-body ul.eael-toc-list li {
+  list-style: none;
+}
+
 .eael-toc .eael-toc-body ul.eael-toc-list li ul {
   margin: 0;
   padding: 0;
@@ -9412,6 +9419,23 @@ span.eael-tooltip-content a {
 .eael-twitter-feed.swiper-container .swiper-button-prev {
   background-image: none;
   outline: none;
+}
+.eael-typeform {
+  width: 100%;
+  height: 700px;
+}
+.eael-typeform.eael-typeform-align-center {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.eael-typeform.eael-typeform-align-left {
+  float: left;
+}
+.eael-typeform.eael-typeform-align-right {
+  float: right;
 }
 .eael-weform-container input,
 .eael-weform-container textarea {
