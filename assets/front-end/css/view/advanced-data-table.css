@@ -22,7 +22,6 @@
 }
 .ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor .ql-tooltip,
 .ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor .ql-tooltip {
-  min-width: 248px;
   z-index: 9999;
 }
 .ea-advanced-data-table-wrap .ea-advanced-data-table th p,
