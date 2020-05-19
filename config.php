@@ -646,19 +646,19 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/view/typeform.min.css',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/typeform.min.css',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/lib-view/embed.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/embed/embed.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/view/typeform.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/typeform.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
