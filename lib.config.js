@@ -46,6 +46,7 @@ const jsEntry = (context, minified) => {
 			"full-calendar/daygrid.min.js",
 			"full-calendar/timegrid.min.js",
 			"full-calendar/listgrid.min.js",
+			"typeform/embed.min.js"
 		],
 		edit: ["quill/quill.min.js"],
 	};
