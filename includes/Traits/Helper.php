@@ -2,7 +2,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
-if (!defined('ABSPATH')) {
+if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
@@ -15,23 +15,21 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
 
-trait Helper
-{
+trait Helper {
     /**
      * Get all types of post.
      * @return array
      */
-    public function eael_get_all_types_post()
-    {
-        $posts = get_posts([
-            'post_type' => 'any',
-            'post_style' => 'all_types',
-            'post_status' => 'publish',
+    public function eael_get_all_types_post() {
+        $posts = get_posts( [
+            'post_type'      => 'any',
+            'post_style'     => 'all_types',
+            'post_status'    => 'publish',
             'posts_per_page' => '-1',
-        ]);
+        ] );
 
-        if (!empty($posts)) {
-            return wp_list_pluck($posts, 'post_title', 'ID');
+        if ( !empty( $posts ) ) {
+            return wp_list_pluck( $posts, 'post_title', 'ID' );
         }
 
         return [];
@@ -41,27 +39,26 @@ trait Helper
      * Query Controls
      *
      */
-    protected function eael_query_controls()
-    {
+    protected function eael_query_controls() {
         $post_types = $this->eael_get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
-        $taxonomies = get_taxonomies([], 'objects');
+        $post_types['by_id'] = __( 'Manual Selection', 'essential-addons-for-elementor-lite' );
+        $taxonomies = get_taxonomies( [], 'objects' );
 
-        if ('eael-content-ticker' === $this->get_name()) {
+        if ( 'eael-content-ticker' === $this->get_name() ) {
             $this->start_controls_section(
                 'eael_section_content_ticker_filters',
                 [
-                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
+                    'label'     => __( 'Dynamic Content Settings', 'essential-addons-for-elementor-lite' ),
                     'condition' => [
                         'eael_ticker_type' => 'dynamic',
                     ],
                 ]
             );
-        } else if ('eael-content-timeline' === $this->get_name()) {
+        } else if ( 'eael-content-timeline' === $this->get_name() ) {
             $this->start_controls_section(
                 'eael_section_timeline__filters',
                 [
-                    'label' => __('Dynamic Content Settings', 'essential-addons-for-elementor-lite'),
+                    'label'     => __( 'Dynamic Content Settings', 'essential-addons-for-elementor-lite' ),
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
                     ],
@@ -71,7 +68,7 @@ trait Helper
             $this->start_controls_section(
                 'eael_section_post__filters',
                 [
-                    'label' => __('Query', 'essential-addons-for-elementor-lite'),
+                    'label' => __( 'Query', 'essential-addons-for-elementor-lite' ),
                 ]
             );
         }
@@ -79,22 +76,22 @@ trait Helper
         $this->add_control(
             'post_type',
             [
-                'label' => __('Source', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
                 'options' => $post_types,
-                'default' => key($post_types),
+                'default' => key( $post_types ),
             ]
         );
 
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => $this->eael_get_all_types_post(),
+                'label'       => __( 'Search & Select', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SELECT2,
+                'options'     => $this->eael_get_all_types_post(),
                 'label_block' => true,
-                'multiple' => true,
-                'condition' => [
+                'multiple'    => true,
+                'condition'   => [
                     'post_type' => 'by_id',
                 ],
             ]
@@ -102,33 +99,33 @@ trait Helper
 
         $this->add_control(
             'authors', [
-                'label' => __('Author', 'essential-addons-for-elementor-lite'),
+                'label'       => __( 'Author', 'essential-addons-for-elementor-lite' ),
                 'label_block' => true,
-                'type' => Controls_Manager::SELECT2,
-                'multiple' => true,
-                'default' => [],
-                'options' => $this->eael_get_authors(),
-                'condition' => [
+                'type'        => Controls_Manager::SELECT2,
+                'multiple'    => true,
+                'default'     => [],
+                'options'     => $this->eael_get_authors(),
+                'condition'   => [
                     'post_type!' => 'by_id',
                 ],
             ]
         );
 
-        foreach ($taxonomies as $taxonomy => $object) {
-            if (!isset($object->object_type[0]) || !in_array($object->object_type[0], array_keys($post_types))) {
+        foreach ( $taxonomies as $taxonomy => $object ) {
+            if ( !isset( $object->object_type[0] ) || !in_array( $object->object_type[0], array_keys( $post_types ) ) ) {
                 continue;
             }
 
             $this->add_control(
                 $taxonomy . '_ids',
                 [
-                    'label' => $object->label,
-                    'type' => Controls_Manager::SELECT2,
+                    'label'       => $object->label,
+                    'type'        => Controls_Manager::SELECT2,
                     'label_block' => true,
-                    'multiple' => true,
+                    'multiple'    => true,
                     'object_type' => $taxonomy,
-                    'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
-                    'condition' => [
+                    'options'     => wp_list_pluck( get_terms( $taxonomy ), 'name', 'term_id' ),
+                    'condition'   => [
                         'post_type' => $object->object_type,
                     ],
                 ]
@@ -138,13 +135,13 @@ trait Helper
         $this->add_control(
             'post__not_in',
             [
-                'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => $this->eael_get_all_types_post(),
+                'label'       => __( 'Exclude', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SELECT2,
+                'options'     => $this->eael_get_all_types_post(),
                 'label_block' => true,
-                'post_type' => '',
-                'multiple' => true,
-                'condition' => [
+                'post_type'   => '',
+                'multiple'    => true,
+                'condition'   => [
                     'post_type!' => 'by_id',
                 ],
             ]
@@ -153,8 +150,8 @@ trait Helper
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::NUMBER,
+                'label'   => __( 'Posts Per Page', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::NUMBER,
                 'default' => '4',
             ]
         );
@@ -162,8 +159,8 @@ trait Helper
         $this->add_control(
             'offset',
             [
-                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::NUMBER,
+                'label'   => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::NUMBER,
                 'default' => '0',
             ]
         );
@@ -171,8 +168,8 @@ trait Helper
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'label'   => __( 'Order By', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
                 'options' => $this->eael_get_post_orderby_options(),
                 'default' => 'date',
 
@@ -182,10 +179,10 @@ trait Helper
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
                 'options' => [
-                    'asc' => 'Ascending',
+                    'asc'  => 'Ascending',
                     'desc' => 'Descending',
                 ],
                 'default' => 'desc',
@@ -196,8 +193,7 @@ trait Helper
         $this->end_controls_section();
     }
 
-    protected function eael_betterdocs_content_controls()
-    {
+    protected function eael_betterdocs_content_controls() {
         /**
          * ----------------------------------------------------------
          * Section: Content Area
@@ -206,15 +202,15 @@ trait Helper
         $this->start_controls_section(
             'section_content_area',
             [
-                'label' => __('Content Area', 'essential-addons-for-elementor-lite'),
+                'label' => __( 'Content Area', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'content_area_bg',
-                'types' => ['classic', 'gradient'],
+                'name'     => 'content_area_bg',
+                'types'    => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .betterdocs-categories-wrap',
             ]
         );
@@ -222,10 +218,10 @@ trait Helper
         $this->add_responsive_control(
             'content_area_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .betterdocs-categories-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -234,20 +230,20 @@ trait Helper
         $this->add_responsive_control(
             'content_area_width',
             [
-                'label' => __('Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
+                'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'default'    => [
                     'size' => 100,
                     'unit' => '%',
                 ],
                 'size_units' => ['%', 'px', 'em'],
-                'range' => [
+                'range'      => [
                     '%' => [
-                        'max' => 100,
+                        'max'  => 100,
                         'step' => 1,
                     ],
                 ],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .betterdocs-categories-wrap' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -256,20 +252,20 @@ trait Helper
         $this->add_responsive_control(
             'content_area_max_width',
             [
-                'label' => __('Max Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
+                'label'      => __( 'Max Width', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'default'    => [
                     'size' => 1600,
                     'unit' => 'px',
                 ],
                 'size_units' => ['px', 'em'],
-                'range' => [
+                'range'      => [
                     'px' => [
-                        'max' => 1600,
+                        'max'  => 1600,
                         'step' => 1,
                     ],
                 ],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .betterdocs-categories-wrap' => 'max-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
@@ -282,33 +278,32 @@ trait Helper
      * Layout Controls For Post Block
      *
      */
-    protected function eael_layout_controls()
-    {
+    protected function eael_layout_controls() {
         $this->start_controls_section(
             'eael_section_post_timeline_layout',
             [
-                'label' => __('Layout Settings', 'essential-addons-for-elementor-lite'),
+                'label' => __( 'Layout Settings', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
-        if ('eael-post-grid' === $this->get_name()) {
+        if ( 'eael-post-grid' === $this->get_name() ) {
             $this->add_responsive_control(
                 'eael_post_grid_columns',
                 [
-                    'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'default' => 'eael-col-4',
-                    'tablet_default' => 'eael-col-2',
-                    'mobile_default' => 'eael-col-1',
-                    'options' => [
-                        'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
-                        'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
-                        'eael-col-3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
-                        'eael-col-4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
-                        'eael-col-5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
-                        'eael-col-6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+                    'label'              => esc_html__( 'Column', 'essential-addons-for-elementor-lite' ),
+                    'type'               => Controls_Manager::SELECT,
+                    'default'            => 'eael-col-4',
+                    'tablet_default'     => 'eael-col-2',
+                    'mobile_default'     => 'eael-col-1',
+                    'options'            => [
+                        'eael-col-1' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
+                        'eael-col-2' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
+                        'eael-col-3' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
+                        'eael-col-4' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
+                        'eael-col-5' => esc_html__( '5', 'essential-addons-for-elementor-lite' ),
+                        'eael-col-6' => esc_html__( '6', 'essential-addons-for-elementor-lite' ),
                     ],
-                    'prefix_class' => 'elementor-grid%s-',
+                    'prefix_class'       => 'elementor-grid%s-',
                     'frontend_available' => true,
                 ]
             );
@@ -316,51 +311,51 @@ trait Helper
             $this->add_control(
                 'layout_mode',
                 [
-                    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
+                    'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+                    'type'    => Controls_Manager::SELECT,
                     'default' => 'masonry',
                     'options' => [
-                        'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
-                        'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+                        'grid'    => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+                        'masonry' => esc_html__( 'Masonry', 'essential-addons-for-elementor-lite' ),
                     ],
                 ]
             );
 
         }
 
-        if ('eael-post-block' === $this->get_name()) {
+        if ( 'eael-post-block' === $this->get_name() ) {
             $this->add_control(
                 'grid_style',
                 [
-                    'label' => esc_html__('Post Block Style Preset', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
+                    'label'   => esc_html__( 'Post Block Style Preset', 'essential-addons-for-elementor-lite' ),
+                    'type'    => Controls_Manager::SELECT,
                     'default' => 'post-block-style-default',
                     'options' => [
-                        'post-block-style-default' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
-                        'post-block-style-overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
+                        'post-block-style-default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+                        'post-block-style-overlay' => esc_html__( 'Overlay', 'essential-addons-for-elementor-lite' ),
                     ],
                 ]
             );
         }
 
-        if ('eael-post-carousel' !== $this->get_name()) {
+        if ( 'eael-post-carousel' !== $this->get_name() ) {
 
             /**
              * Show Read More
              * @uses ContentTimeLine Elements - EAE
              */
-            if ('eael-content-timeline' === $this->get_name()) {
+            if ( 'eael-content-timeline' === $this->get_name() ) {
 
                 $this->add_control(
                     'content_timeline_layout',
                     [
-                        'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
+                        'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::SELECT,
                         'default' => 'center',
                         'options' => [
-                            'left' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                            'center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'right' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                            'left'   => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+                            'center' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                            'right'  => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
                         ],
                         'default' => 'center',
                     ]
@@ -369,14 +364,14 @@ trait Helper
                 $this->add_control(
                     'date_position',
                     [
-                        'label' => esc_html__('Date Position', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'default' => 'inside',
-                        'options' => [
-                            'inside' => esc_html__('Inside', 'essential-addons-for-elementor-lite'),
-                            'outside' => esc_html__('Outside', 'essential-addons-for-elementor-lite'),
+                        'label'     => esc_html__( 'Date Position', 'essential-addons-for-elementor-lite' ),
+                        'type'      => Controls_Manager::SELECT,
+                        'default'   => 'inside',
+                        'options'   => [
+                            'inside'  => esc_html__( 'Inside', 'essential-addons-for-elementor-lite' ),
+                            'outside' => esc_html__( 'Outside', 'essential-addons-for-elementor-lite' ),
                         ],
-                        'default' => 'inside',
+                        'default'   => 'inside',
                         'condition' => [
                             'content_timeline_layout!' => 'center',
                         ],
@@ -387,23 +382,23 @@ trait Helper
                 $this->add_control(
                     'show_load_more',
                     [
-                        'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                        'label'        => __( 'Show Load More', 'essential-addons-for-elementor-lite' ),
+                        'type'         => Controls_Manager::SWITCHER,
+                        'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                        'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                         'return_value' => 'yes',
-                        'default' => '',
+                        'default'      => '',
                     ]
                 );
 
                 $this->add_control(
                     'show_load_more_text',
                     [
-                        'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
+                        'label'       => esc_html__( 'Label Text', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::TEXT,
                         'label_block' => false,
-                        'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
-                        'condition' => [
+                        'default'     => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
+                        'condition'   => [
                             'show_load_more' => 'yes',
                         ],
                     ]
@@ -412,25 +407,25 @@ trait Helper
 
         }
 
-        if ('eael-content-timeline' !== $this->get_name()) {
+        if ( 'eael-content-timeline' !== $this->get_name() ) {
             $this->add_control(
                 'eael_show_image',
                 [
-                    'label' => __('Show Image', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Image', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default' => 'yes',
+                    'default'      => 'yes',
                 ]
             );
 
             $this->add_group_control(
                 Group_Control_Image_Size::get_type(),
                 [
-                    'name' => 'image',
-                    'exclude' => ['custom'],
-                    'default' => 'medium',
+                    'name'      => 'image',
+                    'exclude'   => ['custom'],
+                    'default'   => 'medium',
                     'condition' => [
                         'eael_show_image' => 'yes',
                     ],
@@ -439,28 +434,28 @@ trait Helper
 
         }
 
-        if ('eael-content-timeline' === $this->get_name()) {
+        if ( 'eael-content-timeline' === $this->get_name() ) {
 
             $this->add_control(
                 'eael_show_image_or_icon',
                 [
-                    'label' => __('Show Circle Image / Icon', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::CHOOSE,
-                    'options' => [
-                        'img' => [
-                            'title' => __('Image', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-picture-o',
+                    'label'     => __( 'Show Circle Image / Icon', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::CHOOSE,
+                    'options'   => [
+                        'img'    => [
+                            'title' => __( 'Image', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'fa fa-picture-o',
                         ],
-                        'icon' => [
-                            'title' => __('Icon', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-info',
+                        'icon'   => [
+                            'title' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'fa fa-info',
                         ],
                         'bullet' => [
-                            'title' => __('Bullet', 'essential-addons-for-elementor-lite'),
-                            'icon' => 'fa fa-circle',
+                            'title' => __( 'Bullet', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'fa fa-circle',
                         ],
                     ],
-                    'default' => 'icon',
+                    'default'   => 'icon',
                     'condition' => [
                         'eael_content_timeline_choose' => 'dynamic',
                     ],
@@ -470,9 +465,9 @@ trait Helper
             $this->add_control(
                 'eael_icon_image',
                 [
-                    'label' => esc_html__('Icon Image', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::MEDIA,
-                    'default' => [
+                    'label'     => esc_html__( 'Icon Image', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::MEDIA,
+                    'default'   => [
                         'url' => Utils::get_placeholder_image_src(),
                     ],
                     'condition' => [
@@ -483,12 +478,12 @@ trait Helper
             $this->add_control(
                 'eael_icon_image_size',
                 [
-                    'label' => esc_html__('Icon Image Size', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SLIDER,
-                    'default' => [
+                    'label'     => esc_html__( 'Icon Image Size', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SLIDER,
+                    'default'   => [
                         'size' => 24,
                     ],
-                    'range' => [
+                    'range'     => [
                         'px' => [
                             'max' => 60,
                         ],
@@ -505,16 +500,16 @@ trait Helper
             $this->add_control(
                 'eael_content_timeline_circle_icon_new',
                 [
-                    'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                    'label'            => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
                     'fa4compatibility' => 'eael_content_timeline_circle_icon',
-                    'type' => Controls_Manager::ICONS,
-                    'default' => [
-                        'value' => 'fas fa-pencil-alt',
+                    'type'             => Controls_Manager::ICONS,
+                    'default'          => [
+                        'value'   => 'fas fa-pencil-alt',
                         'library' => 'fa-solid',
                     ],
-                    'condition' => [
+                    'condition'        => [
                         'eael_content_timeline_choose' => 'dynamic',
-                        'eael_show_image_or_icon' => 'icon',
+                        'eael_show_image_or_icon'      => 'icon',
                     ],
                 ]
             );
@@ -524,23 +519,23 @@ trait Helper
         $this->add_control(
             'eael_show_title',
             [
-                'label' => __('Show Title', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __( 'Show Title', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'default' => 'yes',
+                'default'      => 'yes',
             ]
         );
 
-        if ('eael-post-grid' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
+        if ( 'eael-post-grid' === $this->get_name() || 'eael-post-carousel' === $this->get_name() ) {
             $this->add_control(
                 'eael_title_length',
                 [
-                    'label' => __('Title Length', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::NUMBER,
+                    'label'     => __( 'Title Length', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::NUMBER,
                     'condition' => [
-                        'eael_show_title' => 'yes'
+                        'eael_show_title' => 'yes',
                     ],
                 ]
             );
@@ -549,24 +544,24 @@ trait Helper
         $this->add_control(
             'eael_show_excerpt',
             [
-                'label' => __('Show excerpt', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __( 'Show excerpt', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'default' => 'yes',
+                'default'      => 'yes',
             ]
         );
 
-        if ('eael-content-timeline' === $this->get_name()) {
+        if ( 'eael-content-timeline' === $this->get_name() ) {
             $this->add_control(
                 'eael_excerpt_length',
                 [
-                    'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::NUMBER,
+                    'label'     => __( 'Excerpt Words', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::NUMBER,
                     'default'   => 10,
                     'condition' => [
-                        'eael_show_excerpt' => 'yes',
+                        'eael_show_excerpt'            => 'yes',
                         'eael_content_timeline_choose' => 'dynamic',
                     ],
                 ]
@@ -575,12 +570,12 @@ trait Helper
             $this->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
+                    'label'       => esc_html__( 'Expanison Indicator', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::TEXT,
                     'label_block' => false,
-                    'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
-                    'condition' => [
-                        'eael_show_excerpt' => 'yes',
+                    'default'     => esc_html__( '...', 'essential-addons-for-elementor-lite' ),
+                    'condition'   => [
+                        'eael_show_excerpt'            => 'yes',
                         'eael_content_timeline_choose' => 'dynamic',
                     ],
                 ]
@@ -589,8 +584,8 @@ trait Helper
             $this->add_control(
                 'eael_excerpt_length',
                 [
-                    'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::NUMBER,
+                    'label'     => __( 'Excerpt Words', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::NUMBER,
                     'default'   => 10,
                     'condition' => [
                         'eael_show_excerpt' => 'yes',
@@ -601,11 +596,11 @@ trait Helper
             $this->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expanison Indicator', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
+                    'label'       => esc_html__( 'Expanison Indicator', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::TEXT,
                     'label_block' => false,
-                    'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
-                    'condition' => [
+                    'default'     => esc_html__( '...', 'essential-addons-for-elementor-lite' ),
+                    'condition'   => [
                         'eael_show_excerpt' => 'yes',
                     ],
                 ]
@@ -615,13 +610,13 @@ trait Helper
         $this->add_control(
             'eael_show_read_more',
             [
-                'label' => __('Show Read More', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __( 'Show Read More', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'default' => 'yes',
-                'condition' => [
+                'default'      => 'yes',
+                'condition'    => [
                     'eael_content_timeline_choose' => 'dynamic',
                 ],
             ]
@@ -630,13 +625,13 @@ trait Helper
         $this->add_control(
             'eael_read_more_text',
             [
-                'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__( 'Label Text', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
                 'label_block' => false,
-                'default' => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
-                'condition' => [
+                'default'     => esc_html__( 'Read More', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
                     'eael_content_timeline_choose' => 'dynamic',
-                    'eael_show_read_more' => 'yes',
+                    'eael_show_read_more'          => 'yes',
                 ],
             ]
         );
@@ -649,13 +644,13 @@ trait Helper
             $this->add_control(
                 'eael_show_read_more_button',
                 [
-                    'label' => __('Show Read More Button', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Read More Button', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default' => 'yes',
-                    'condition' => [
+                    'default'      => 'yes',
+                    'condition'    => [
                         'post_type!' => 'product',
                     ],
                 ]
@@ -664,27 +659,27 @@ trait Helper
             $this->add_control(
                 'read_more_button_text',
                 [
-                    'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
-                    'default' => __('Read More', 'essential-addons-for-elementor-lite'),
+                    'label'     => __( 'Button Text', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::TEXT,
+                    'default'   => __( 'Read More', 'essential-addons-for-elementor-lite' ),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!' => 'product',
+                        'post_type!'                 => 'product',
                     ],
                 ]
             );
         }
 
-        if ('eael-post-carousel' === $this->get_name() || 'eael-post-grid' === $this->get_name()) {
+        if ( 'eael-post-carousel' === $this->get_name() || 'eael-post-grid' === $this->get_name() ) {
             $this->add_control(
                 'eael_show_post_terms',
                 [
-                    'label' => __('Show Post Terms', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Post Terms', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'condition' => [
+                    'condition'    => [
                         'eael_show_image' => 'yes',
                     ],
                 ]
@@ -693,13 +688,13 @@ trait Helper
             $this->add_control(
                 'eael_post_terms',
                 [
-                    'label' => __('Show Terms From', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'options' => [
-                        'category' => __('Category', 'essential-addons-for-elementor-lite'),
-                        'tags' => __('Tags', 'essential-addons-for-elementor-lite'),
+                    'label'     => __( 'Show Terms From', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'options'   => [
+                        'category' => __( 'Category', 'essential-addons-for-elementor-lite' ),
+                        'tags'     => __( 'Tags', 'essential-addons-for-elementor-lite' ),
                     ],
-                    'default' => 'category',
+                    'default'   => 'category',
                     'condition' => [
                         'eael_show_post_terms' => 'yes',
                     ],
@@ -709,14 +704,14 @@ trait Helper
             $this->add_control(
                 'eael_post_terms_max_length',
                 [
-                    'label' => __('Max Terms to Show', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'options' => [
-                        1 => __('1', 'essential-addons-for-elementor-lite'),
-                        2 => __('2', 'essential-addons-for-elementor-lite'),
-                        3 => __('3', 'essential-addons-for-elementor-lite'),
+                    'label'     => __( 'Max Terms to Show', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'options'   => [
+                        1 => __( '1', 'essential-addons-for-elementor-lite' ),
+                        2 => __( '2', 'essential-addons-for-elementor-lite' ),
+                        3 => __( '3', 'essential-addons-for-elementor-lite' ),
                     ],
-                    'default' => 1,
+                    'default'   => 1,
                     'condition' => [
                         'eael_show_post_terms' => 'yes',
                     ],
@@ -725,29 +720,29 @@ trait Helper
 
         }
 
-        if ('eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
+        if ( 'eael-post-grid' === $this->get_name() || 'eael-post-block' === $this->get_name() || 'eael-post-carousel' === $this->get_name() ) {
 
             $this->add_control(
                 'eael_show_meta',
                 [
-                    'label' => __('Show Meta', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Meta', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default' => 'yes',
+                    'default'      => 'yes',
                 ]
             );
 
             $this->add_control(
                 'meta_position',
                 [
-                    'label' => esc_html__('Meta Position', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'default' => 'meta-entry-footer',
-                    'options' => [
-                        'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-for-elementor-lite'),
-                        'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-for-elementor-lite'),
+                    'label'     => esc_html__( 'Meta Position', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => 'meta-entry-footer',
+                    'options'   => [
+                        'meta-entry-header' => esc_html__( 'Entry Header', 'essential-addons-for-elementor-lite' ),
+                        'meta-entry-footer' => esc_html__( 'Entry Footer', 'essential-addons-for-elementor-lite' ),
                     ],
                     'condition' => [
                         'eael_show_meta' => 'yes',
@@ -758,14 +753,14 @@ trait Helper
             $this->add_control(
                 'eael_show_avatar',
                 [
-                    'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Avatar', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default' => 'yes',
-                    'condition' => [
-                        'meta_position' => 'meta-entry-footer',
+                    'default'      => 'yes',
+                    'condition'    => [
+                        'meta_position'  => 'meta-entry-footer',
                         'eael_show_meta' => 'yes',
                     ],
                 ]
@@ -774,13 +769,13 @@ trait Helper
             $this->add_control(
                 'eael_show_author',
                 [
-                    'label' => __('Show Author Name', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Author Name', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default' => 'yes',
-                    'condition' => [
+                    'default'      => 'yes',
+                    'condition'    => [
                         'eael_show_meta' => 'yes',
                     ],
                 ]
@@ -789,13 +784,13 @@ trait Helper
             $this->add_control(
                 'eael_show_date',
                 [
-                    'label' => __('Show Date', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __( 'Show Date', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default' => 'yes',
-                    'condition' => [
+                    'default'      => 'yes',
+                    'condition'    => [
                         'eael_show_meta' => 'yes',
                     ],
                 ]
@@ -806,13 +801,12 @@ trait Helper
         $this->end_controls_section();
     }
 
-    protected function terms_style()
-    {
+    protected function terms_style() {
         $this->start_controls_section(
             'section_terms_style',
             [
-                'label' => __('Terms', 'essential-addons-elementor'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'label'     => __( 'Terms', 'essential-addons-elementor' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_post_terms' => 'yes',
                 ],
@@ -822,9 +816,9 @@ trait Helper
         $this->add_control(
             'terms_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'label'     => __( 'Color', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .post-carousel-categories li a, {{WRAPPER}} .post-carousel-categories li:after' => 'color: {{VALUE}};',
                 ],
@@ -834,8 +828,8 @@ trait Helper
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'terms_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'name'     => 'terms_typography',
+                'label'    => __( 'Typography', 'essential-addons-elementor' ),
                 'selector' => '{{WRAPPER}} .post-carousel-categories li a',
             ]
         );
@@ -843,20 +837,20 @@ trait Helper
         $this->add_responsive_control(
             'terms_color_alignment',
             [
-                'label' => __('Alignment', 'essential-addons-elementor'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-left',
+                'label'     => __( 'Alignment', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'left'   => [
+                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-center',
+                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-center',
                     ],
-                    'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
-                        'icon' => 'fa fa-align-right',
+                    'right'  => [
+                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-right',
                     ],
                 ],
                 'selectors' => [
@@ -868,10 +862,10 @@ trait Helper
         $this->add_control(
             'terms_spacing',
             [
-                'label' => __('Spacing', 'essential-addons-elementor'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => __( 'Spacing', 'essential-addons-elementor' ),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .post-carousel-categories li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -880,8 +874,7 @@ trait Helper
         $this->end_controls_section();
     }
 
-    protected function eael_read_more_button_style()
-    {
+    protected function eael_read_more_button_style() {
         if (
             'eael-post-grid' === $this->get_name()
             || 'eael-post-block' === $this->get_name()
@@ -892,11 +885,11 @@ trait Helper
             $this->start_controls_section(
                 'eael_section_read_more_btn',
                 [
-                    'label' => __('Read More Button Style', 'essential-addons-for-elementor-lite'),
-                    'tab' => Controls_Manager::TAB_STYLE,
+                    'label'     => __( 'Read More Button Style', 'essential-addons-for-elementor-lite' ),
+                    'tab'       => Controls_Manager::TAB_STYLE,
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
-                        'post_type!' => 'product',
+                        'post_type!'                 => 'product',
                     ],
                 ]
             );
@@ -904,26 +897,26 @@ trait Helper
             $this->add_group_control(
                 Group_Control_Typography::get_type(),
                 [
-                    'name' => 'eael_post_read_more_btn_typography',
+                    'name'     => 'eael_post_read_more_btn_typography',
                     'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
                 ]
             );
 
-            $this->start_controls_tabs('read_more_button_tabs');
+            $this->start_controls_tabs( 'read_more_button_tabs' );
 
             $this->start_controls_tab(
                 'read_more_button_style_normal',
                 [
-                    'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+                    'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
                 ]
             );
 
             $this->add_control(
                 'eael_post_read_more_btn_color',
                 [
-                    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::COLOR,
-                    'default' => '#61ce70',
+                    'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::COLOR,
+                    'default'   => '#61ce70',
                     'selectors' => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'color: {{VALUE}};',
                     ],
@@ -933,11 +926,11 @@ trait Helper
             $this->add_group_control(
                 Group_Control_Background::get_type(),
                 [
-                    'name' => 'read_more_btn_background',
-                    'label' => __('Background', 'essential-addons-for-elementor-lite'),
-                    'types' => ['classic', 'gradient'],
+                    'name'     => 'read_more_btn_background',
+                    'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                    'types'    => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
-                    'exclude' => [
+                    'exclude'  => [
                         'image',
                     ],
                 ]
@@ -946,8 +939,8 @@ trait Helper
             $this->add_group_control(
                 Group_Control_Border::get_type(),
                 [
-                    'name' => 'read_more_btn_border',
-                    'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                    'name'     => 'read_more_btn_border',
+                    'label'    => __( 'Border', 'essential-addons-for-elementor-lite' ),
                     'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn',
                 ]
             );
@@ -955,10 +948,10 @@ trait Helper
             $this->add_responsive_control(
                 'read_more_btn_border_radius',
                 [
-                    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
+                    'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type'       => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
+                    'selectors'  => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
@@ -969,15 +962,15 @@ trait Helper
             $this->start_controls_tab(
                 'read_more_button_style_hover',
                 [
-                    'label' => __('Hover', 'essential-addons-for-elementor-lite'),
+                    'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
                 ]
             );
 
             $this->add_control(
                 'eael_post_read_more_btn_hover_color',
                 [
-                    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::COLOR,
+                    'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'color: {{VALUE}};',
                     ],
@@ -987,11 +980,11 @@ trait Helper
             $this->add_group_control(
                 Group_Control_Background::get_type(),
                 [
-                    'name' => 'read_more_btn_hover_background',
-                    'label' => __('Background', 'essential-addons-for-elementor-lite'),
-                    'types' => ['classic', 'gradient'],
+                    'name'     => 'read_more_btn_hover_background',
+                    'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                    'types'    => ['classic', 'gradient'],
                     'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
-                    'exclude' => [
+                    'exclude'  => [
                         'image',
                     ],
                 ]
@@ -1000,8 +993,8 @@ trait Helper
             $this->add_group_control(
                 Group_Control_Border::get_type(),
                 [
-                    'name' => 'read_more_btn_hover_border',
-                    'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                    'name'     => 'read_more_btn_hover_border',
+                    'label'    => __( 'Border', 'essential-addons-for-elementor-lite' ),
                     'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
                 ]
             );
@@ -1009,10 +1002,10 @@ trait Helper
             $this->add_responsive_control(
                 'read_more_btn_border_hover_radius',
                 [
-                    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
+                    'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type'       => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
+                    'selectors'  => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
@@ -1025,10 +1018,10 @@ trait Helper
             $this->add_responsive_control(
                 'eael_post_read_more_btn_padding',
                 [
-                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
+                    'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                    'type'       => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
+                    'selectors'  => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
@@ -1037,10 +1030,10 @@ trait Helper
             $this->add_responsive_control(
                 'read_more_btn_margin',
                 [
-                    'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
+                    'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                    'type'       => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
+                    'selectors'  => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
@@ -1054,13 +1047,12 @@ trait Helper
      * Load More Button Style
      *
      */
-    protected function eael_load_more_button_style()
-    {
+    protected function eael_load_more_button_style() {
         $this->start_controls_section(
             'eael_section_load_more_btn',
             [
-                'label' => __('Load More Button Style', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'label'     => __( 'Load More Button Style', 'essential-addons-for-elementor-lite' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_load_more' => ['yes', '1', 'true'],
                 ],
@@ -1070,10 +1062,10 @@ trait Helper
         $this->add_responsive_control(
             'eael_post_grid_load_more_btn_padding',
             [
-                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-load-more-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1082,10 +1074,10 @@ trait Helper
         $this->add_responsive_control(
             'eael_post_grid_load_more_btn_margin',
             [
-                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
+                'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
-                'selectors' => [
+                'selectors'  => [
                     '{{WRAPPER}} .eael-load-more-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1093,22 +1085,22 @@ trait Helper
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'eael_post_grid_load_more_btn_typography',
+                'name'     => 'eael_post_grid_load_more_btn_typography',
                 'selector' => '{{WRAPPER}} .eael-load-more-button',
             ]
         );
 
-        $this->start_controls_tabs('eael_post_grid_load_more_btn_tabs');
+        $this->start_controls_tabs( 'eael_post_grid_load_more_btn_tabs' );
 
         // Normal State Tab
-        $this->start_controls_tab('eael_post_grid_load_more_btn_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+        $this->start_controls_tab( 'eael_post_grid_load_more_btn_normal', ['label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' )] );
 
         $this->add_control(
             'eael_post_grid_load_more_btn_normal_text_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
+                'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-load-more-button' => 'color: {{VALUE}};',
                 ],
@@ -1118,9 +1110,9 @@ trait Helper
         $this->add_control(
             'eael_cta_btn_normal_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#29d8d8',
+                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#29d8d8',
                 'selectors' => [
                     '{{WRAPPER}} .eael-load-more-button' => 'background: {{VALUE}};',
                 ],
@@ -1130,8 +1122,8 @@ trait Helper
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_post_grid_load_more_btn_normal_border',
-                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'name'     => 'eael_post_grid_load_more_btn_normal_border',
+                'label'    => esc_html__( 'Border', 'essential-addons-for-elementor-lite' ),
                 'selector' => '{{WRAPPER}} .eael-load-more-button',
             ]
         );
@@ -1139,9 +1131,9 @@ trait Helper
         $this->add_control(
             'eael_post_grid_load_more_btn_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
+                'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SLIDER,
+                'range'     => [
                     'px' => [
                         'max' => 100,
                     ],
@@ -1154,8 +1146,8 @@ trait Helper
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'eael_post_grid_load_more_btn_shadow',
-                'selector' => '{{WRAPPER}} .eael-load-more-button',
+                'name'      => 'eael_post_grid_load_more_btn_shadow',
+                'selector'  => '{{WRAPPER}} .eael-load-more-button',
                 'separator' => 'before',
             ]
         );
@@ -1163,14 +1155,14 @@ trait Helper
         $this->end_controls_tab();
 
         // Hover State Tab
-        $this->start_controls_tab('eael_post_grid_load_more_btn_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+        $this->start_controls_tab( 'eael_post_grid_load_more_btn_hover', ['label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' )] );
 
         $this->add_control(
             'eael_post_grid_load_more_btn_hover_text_color',
             [
-                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
+                'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-load-more-button:hover' => 'color: {{VALUE}};',
                 ],
@@ -1180,9 +1172,9 @@ trait Helper
         $this->add_control(
             'eael_post_grid_load_more_btn_hover_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#27bdbd',
+                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#27bdbd',
                 'selectors' => [
                     '{{WRAPPER}} .eael-load-more-button:hover' => 'background: {{VALUE}};',
                 ],
@@ -1192,9 +1184,9 @@ trait Helper
         $this->add_control(
             'eael_post_grid_load_more_btn_hover_border_color',
             [
-                'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-load-more-button:hover' => 'border-color: {{VALUE}};',
                 ],
@@ -1204,8 +1196,8 @@ trait Helper
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'eael_post_grid_load_more_btn_hover_shadow',
-                'selector' => '{{WRAPPER}} .eael-load-more-button:hover',
+                'name'      => 'eael_post_grid_load_more_btn_hover_shadow',
+                'selector'  => '{{WRAPPER}} .eael-load-more-button:hover',
                 'separator' => 'before',
             ]
         );
@@ -1216,23 +1208,23 @@ trait Helper
         $this->add_responsive_control(
             'eael_post_grid_loadmore_button_alignment',
             [
-                'label' => __('Button Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
+                'label'     => __( 'Button Alignment', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
                     'flex-start' => [
-                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-align-left',
                     ],
-                    'center' => [
-                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                    'center'     => [
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-align-center',
                     ],
-                    'flex-end' => [
-                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                    'flex-end'   => [
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-align-right',
                     ],
                 ],
-                'default' => 'center',
+                'default'   => 'center',
                 'selectors' => [
                     '{{WRAPPER}} .eael-load-more-button-wrap' => 'justify-content: {{VALUE}};',
                 ],
@@ -1246,27 +1238,26 @@ trait Helper
      * Go Premium
      *
      */
-    protected function eael_go_premium()
-    {
+    protected function eael_go_premium() {
         $this->start_controls_section(
             'eael_section_pro',
             [
-                'label' => __('Go Premium for More Features', 'essential-addons-for-elementor-lite'),
+                'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
         $this->add_control(
             'eael_control_get_pro',
             [
-                'label' => __('Unlock more possibilities', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
+                'label'       => __( 'Unlock more possibilities', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'options'     => [
                     '1' => [
-                        'title' => __('', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-unlock-alt',
+                        'title' => __( '', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'fa fa-unlock-alt',
                     ],
                 ],
-                'default' => '1',
+                'default'     => '1',
                 'description' => '<span class="pro-feature"> Get the  <a href="http://essential-addons.com/elementor/#pricing" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
             ]
         );
@@ -1274,30 +1265,29 @@ trait Helper
         $this->end_controls_section();
     }
 
-    public function fix_old_query($settings)
-    {
+    public function fix_old_query( $settings ) {
         $update_query = false;
 
-        foreach ($settings as $key => $value) {
-            if (strpos($key, 'eaeposts_') !== false) {
-                $settings[str_replace('eaeposts_', '', $key)] = $value;
+        foreach ( $settings as $key => $value ) {
+            if ( strpos( $key, 'eaeposts_' ) !== false ) {
+                $settings[str_replace( 'eaeposts_', '', $key )] = $value;
                 $update_query = true;
             }
         }
 
-        if ($update_query) {
+        if ( $update_query ) {
             global $wpdb;
 
             $post_id = get_the_ID();
-            $data = get_post_meta($post_id, '_elementor_data', true);
-            $data = str_replace('eaeposts_', '', $data);
+            $data = get_post_meta( $post_id, '_elementor_data', true );
+            $data = str_replace( 'eaeposts_', '', $data );
             $wpdb->update(
                 $wpdb->postmeta,
                 [
                     'meta_value' => $data,
                 ],
                 [
-                    'post_id' => $post_id,
+                    'post_id'  => $post_id,
                     'meta_key' => '_elementor_data',
                 ]
             );
@@ -1306,60 +1296,59 @@ trait Helper
         return $settings;
     }
 
-    public function eael_get_query_args($settings = [])
-    {
-        $settings = wp_parse_args($settings, [
-            'post_type' => 'post',
-            'posts_ids' => [],
-            'orderby' => 'date',
-            'order' => 'desc',
+    public function eael_get_query_args( $settings = [] ) {
+        $settings = wp_parse_args( $settings, [
+            'post_type'      => 'post',
+            'posts_ids'      => [],
+            'orderby'        => 'date',
+            'order'          => 'desc',
             'posts_per_page' => 3,
-            'offset' => 0,
-            'post__not_in' => [],
-        ]);
+            'offset'         => 0,
+            'post__not_in'   => [],
+        ] );
 
         $args = [
-            'orderby' => $settings['orderby'],
-            'order' => $settings['order'],
+            'orderby'             => $settings['orderby'],
+            'order'               => $settings['order'],
             'ignore_sticky_posts' => 1,
-            'post_status' => 'publish',
-            'posts_per_page' => $settings['posts_per_page'],
-            'offset' => $settings['offset'],
+            'post_status'         => 'publish',
+            'posts_per_page'      => $settings['posts_per_page'],
+            'offset'              => $settings['offset'],
         ];
 
-        if ('by_id' === $settings['post_type']) {
+        if ( 'by_id' === $settings['post_type'] ) {
             $args['post_type'] = 'any';
-            $args['post__in'] = empty($settings['posts_ids']) ? [0] : $settings['posts_ids'];
+            $args['post__in'] = empty( $settings['posts_ids'] ) ? [0] : $settings['posts_ids'];
         } else {
             $args['post_type'] = $settings['post_type'];
 
-            if ($args['post_type'] !== 'page') {
+            if ( $args['post_type'] !== 'page' ) {
                 $args['tax_query'] = [];
-                $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
+                $taxonomies = get_object_taxonomies( $settings['post_type'], 'objects' );
 
-                foreach ($taxonomies as $object) {
+                foreach ( $taxonomies as $object ) {
                     $setting_key = $object->name . '_ids';
 
-                    if (!empty($settings[$setting_key])) {
+                    if ( !empty( $settings[$setting_key] ) ) {
                         $args['tax_query'][] = [
                             'taxonomy' => $object->name,
-                            'field' => 'term_id',
-                            'terms' => $settings[$setting_key],
+                            'field'    => 'term_id',
+                            'terms'    => $settings[$setting_key],
                         ];
                     }
                 }
 
-                if (!empty($args['tax_query'])) {
+                if ( !empty( $args['tax_query'] ) ) {
                     $args['tax_query']['relation'] = 'AND';
                 }
             }
         }
 
-        if (!empty($settings['authors'])) {
+        if ( !empty( $settings['authors'] ) ) {
             $args['author__in'] = $settings['authors'];
         }
 
-        if (!empty($settings['post__not_in'])) {
+        if ( !empty( $settings['post__not_in'] ) ) {
             $args['post__not_in'] = $settings['post__not_in'];
         }
 
@@ -1370,12 +1359,11 @@ trait Helper
      * Get All POst Types
      * @return array
      */
-    public function eael_get_post_types()
-    {
-        $post_types = get_post_types(['public' => true, 'show_in_nav_menus' => true], 'objects');
-        $post_types = wp_list_pluck($post_types, 'label', 'name');
+    public function eael_get_post_types() {
+        $post_types = get_post_types( ['public' => true, 'show_in_nav_menus' => true], 'objects' );
+        $post_types = wp_list_pluck( $post_types, 'label', 'name' );
 
-        return array_diff_key($post_types, ['elementor_library', 'attachment']);
+        return array_diff_key( $post_types, ['elementor_library', 'attachment'] );
     }
 
     /**
@@ -1383,10 +1371,9 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_thumbnail_sizes()
-    {
+    public function eael_get_thumbnail_sizes() {
         $sizes = get_intermediate_image_sizes();
-        foreach ($sizes as $s) {
+        foreach ( $sizes as $s ) {
             $ret[$s] = $s;
         }
 
@@ -1398,18 +1385,17 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_post_orderby_options()
-    {
+    public function eael_get_post_orderby_options() {
         $orderby = array(
-            'ID' => 'Post ID',
-            'author' => 'Post Author',
-            'title' => 'Title',
-            'date' => 'Date',
-            'modified' => 'Last Modified Date',
-            'parent' => 'Parent Id',
-            'rand' => 'Random',
+            'ID'            => 'Post ID',
+            'author'        => 'Post Author',
+            'title'         => 'Title',
+            'date'          => 'Date',
+            'modified'      => 'Last Modified Date',
+            'parent'        => 'Parent Id',
+            'rand'          => 'Random',
             'comment_count' => 'Comment Count',
-            'menu_order' => 'Menu Order',
+            'menu_order'    => 'Menu Order',
         );
 
         return $orderby;
@@ -1420,15 +1406,14 @@ trait Helper
      *
      * @return array
      */
-    public function eael_post_type_categories($type = 'term_id')
-    {
-        $terms = get_terms(array(
-            'taxonomy' => 'category',
+    public function eael_post_type_categories( $type = 'term_id' ) {
+        $terms = get_terms( array(
+            'taxonomy'   => 'category',
             'hide_empty' => true,
-        ));
+        ) );
 
-        if (!empty($terms) && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
+        if ( !empty( $terms ) && !is_wp_error( $terms ) ) {
+            foreach ( $terms as $term ) {
                 $options[$term->{$type}] = $term->name;
             }
         }
@@ -1441,15 +1426,14 @@ trait Helper
      *
      * @return array
      */
-    public function eael_woocommerce_product_categories()
-    {
-        $terms = get_terms(array(
-            'taxonomy' => 'product_cat',
+    public function eael_woocommerce_product_categories() {
+        $terms = get_terms( array(
+            'taxonomy'   => 'product_cat',
             'hide_empty' => true,
-        ));
+        ) );
 
-        if (!empty($terms) && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
+        if ( !empty( $terms ) && !is_wp_error( $terms ) ) {
+            foreach ( $terms as $term ) {
                 $options[$term->slug] = $term->name;
             }
             return $options;
@@ -1461,16 +1445,15 @@ trait Helper
      *
      * @return array
      */
-    public function eael_woocommerce_product_get_product_by_id()
-    {
-        $postlist = get_posts(array(
+    public function eael_woocommerce_product_get_product_by_id() {
+        $postlist = get_posts( array(
             'post_type' => 'product',
             'showposts' => 9999,
-        ));
+        ) );
         $options = array();
 
-        if (!empty($postlist) && !is_wp_error($postlist)) {
-            foreach ($postlist as $post) {
+        if ( !empty( $postlist ) && !is_wp_error( $postlist ) ) {
+            foreach ( $postlist as $post ) {
                 $options[$post->ID] = $post->post_title;
             }
             return $options;
@@ -1483,15 +1466,14 @@ trait Helper
      *
      * @return array
      */
-    public function eael_woocommerce_product_categories_by_id()
-    {
-        $terms = get_terms(array(
-            'taxonomy' => 'product_cat',
+    public function eael_woocommerce_product_categories_by_id() {
+        $terms = get_terms( array(
+            'taxonomy'   => 'product_cat',
             'hide_empty' => true,
-        ));
+        ) );
 
-        if (!empty($terms) && !is_wp_error($terms)) {
-            foreach ($terms as $term) {
+        if ( !empty( $terms ) && !is_wp_error( $terms ) ) {
+            foreach ( $terms as $term ) {
                 $options[$term->term_id] = $term->name;
             }
             return $options;
@@ -1502,22 +1484,21 @@ trait Helper
     /**
      * Get Contact Form 7 [ if exists ]
      */
-    public function eael_select_contact_form()
-    {
+    public function eael_select_contact_form() {
         $options = array();
 
-        if (function_exists('wpcf7')) {
-            $wpcf7_form_list = get_posts(array(
+        if ( function_exists( 'wpcf7' ) ) {
+            $wpcf7_form_list = get_posts( array(
                 'post_type' => 'wpcf7_contact_form',
                 'showposts' => 999,
-            ));
-            $options[0] = esc_html__('Select a Contact Form', 'essential-addons-for-elementor-lite');
-            if (!empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list)) {
-                foreach ($wpcf7_form_list as $post) {
+            ) );
+            $options[0] = esc_html__( 'Select a Contact Form', 'essential-addons-for-elementor-lite' );
+            if ( !empty( $wpcf7_form_list ) && !is_wp_error( $wpcf7_form_list ) ) {
+                foreach ( $wpcf7_form_list as $post ) {
                     $options[$post->ID] = $post->post_title;
                 }
             } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+                $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
             }
         }
         return $options;
@@ -1528,22 +1509,21 @@ trait Helper
      *
      * @return array
      */
-    public function eael_select_gravity_form()
-    {
+    public function eael_select_gravity_form() {
         $options = array();
 
-        if (class_exists('GFCommon')) {
-            $gravity_forms = \RGFormsModel::get_forms(null, 'title');
+        if ( class_exists( 'GFCommon' ) ) {
+            $gravity_forms = \RGFormsModel::get_forms( null, 'title' );
 
-            if (!empty($gravity_forms) && !is_wp_error($gravity_forms)) {
+            if ( !empty( $gravity_forms ) && !is_wp_error( $gravity_forms ) ) {
 
-                $options[0] = esc_html__('Select Gravity Form', 'essential-addons-for-elementor-lite');
-                foreach ($gravity_forms as $form) {
+                $options[0] = esc_html__( 'Select Gravity Form', 'essential-addons-for-elementor-lite' );
+                foreach ( $gravity_forms as $form ) {
                     $options[$form->id] = $form->title;
                 }
 
             } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+                $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
             }
         }
 
@@ -1555,22 +1535,21 @@ trait Helper
      *
      * @return array
      */
-    public function eael_select_weform()
-    {
-        $wpuf_form_list = get_posts(array(
+    public function eael_select_weform() {
+        $wpuf_form_list = get_posts( array(
             'post_type' => 'wpuf_contact_form',
             'showposts' => 999,
-        ));
+        ) );
 
         $options = array();
 
-        if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
-            $options[0] = esc_html__('Select weForm', 'essential-addons-for-elementor-lite');
-            foreach ($wpuf_form_list as $post) {
+        if ( !empty( $wpuf_form_list ) && !is_wp_error( $wpuf_form_list ) ) {
+            $options[0] = esc_html__( 'Select weForm', 'essential-addons-for-elementor-lite' );
+            foreach ( $wpuf_form_list as $post ) {
                 $options[$post->ID] = $post->post_title;
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
         }
 
         return $options;
@@ -1581,23 +1560,22 @@ trait Helper
      *
      * @return array
      */
-    public function eael_select_ninja_form()
-    {
+    public function eael_select_ninja_form() {
         $options = array();
 
-        if (class_exists('Ninja_Forms')) {
+        if ( class_exists( 'Ninja_Forms' ) ) {
             $contact_forms = Ninja_Forms()->form()->get_forms();
 
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
+            if ( !empty( $contact_forms ) && !is_wp_error( $contact_forms ) ) {
 
-                $options[0] = esc_html__('Select Ninja Form', 'essential-addons-for-elementor-lite');
+                $options[0] = esc_html__( 'Select Ninja Form', 'essential-addons-for-elementor-lite' );
 
-                foreach ($contact_forms as $form) {
-                    $options[$form->get_id()] = $form->get_setting('title');
+                foreach ( $contact_forms as $form ) {
+                    $options[$form->get_id()] = $form->get_setting( 'title' );
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
         }
 
         return $options;
@@ -1608,21 +1586,20 @@ trait Helper
      *
      * @return array
      */
-    public function eael_select_caldera_form()
-    {
+    public function eael_select_caldera_form() {
         $options = array();
 
-        if (class_exists('Caldera_Forms')) {
-            $contact_forms = \Caldera_Forms_Forms::get_forms(true, true);
+        if ( class_exists( 'Caldera_Forms' ) ) {
+            $contact_forms = \Caldera_Forms_Forms::get_forms( true, true );
 
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select Caldera Form', 'essential-addons-for-elementor-lite');
-                foreach ($contact_forms as $form) {
+            if ( !empty( $contact_forms ) && !is_wp_error( $contact_forms ) ) {
+                $options[0] = esc_html__( 'Select Caldera Form', 'essential-addons-for-elementor-lite' );
+                foreach ( $contact_forms as $form ) {
                     $options[$form['ID']] = $form['name'];
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
         }
 
         return $options;
@@ -1633,26 +1610,25 @@ trait Helper
      *
      * @return array
      */
-    public function eael_select_wpforms_forms()
-    {
+    public function eael_select_wpforms_forms() {
         $options = array();
 
-        if (class_exists('\WPForms\WPForms')) {
+        if ( class_exists( '\WPForms\WPForms' ) ) {
             $args = array(
-                'post_type' => 'wpforms',
+                'post_type'      => 'wpforms',
                 'posts_per_page' => -1,
             );
 
-            $contact_forms = get_posts($args);
+            $contact_forms = get_posts( $args );
 
-            if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
-                $options[0] = esc_html__('Select a WPForm', 'essential-addons-for-elementor-lite');
-                foreach ($contact_forms as $post) {
+            if ( !empty( $contact_forms ) && !is_wp_error( $contact_forms ) ) {
+                $options[0] = esc_html__( 'Select a WPForm', 'essential-addons-for-elementor-lite' );
+                foreach ( $contact_forms as $post ) {
                     $options[$post->ID] = $post->post_title;
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+            $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
         }
 
         return $options;
@@ -1663,22 +1639,21 @@ trait Helper
      *
      * @return array
      */
-    public static function eael_select_fluent_forms()
-    {
+    public static function eael_select_fluent_forms() {
 
         $options = array();
 
-        if (defined('FLUENTFORM')) {
+        if ( defined( 'FLUENTFORM' ) ) {
             global $wpdb;
 
-            $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fluentform_forms");
-            if ($result) {
-                $options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
-                foreach ($result as $form) {
+            $result = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}fluentform_forms" );
+            if ( $result ) {
+                $options[0] = esc_html__( 'Select a Fluent Form', 'essential-addons-for-elementor-lite' );
+                foreach ( $result as $form ) {
                     $options[$form->id] = $form->title;
                 }
             } else {
-                $options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
+                $options[0] = esc_html__( 'Create a Form First', 'essential-addons-for-elementor-lite' );
             }
         }
 
@@ -1691,28 +1666,27 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_page_templates($type = null)
-    {
+    public function eael_get_page_templates( $type = null ) {
         $args = [
-            'post_type' => 'elementor_library',
+            'post_type'      => 'elementor_library',
             'posts_per_page' => -1,
         ];
 
-        if ($type) {
+        if ( $type ) {
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'elementor_library_type',
-                    'field' => 'slug',
-                    'terms' => $type,
+                    'field'    => 'slug',
+                    'terms'    => $type,
                 ],
             ];
         }
 
-        $page_templates = get_posts($args);
+        $page_templates = get_posts( $args );
         $options = array();
 
-        if (!empty($page_templates) && !is_wp_error($page_templates)) {
-            foreach ($page_templates as $post) {
+        if ( !empty( $page_templates ) && !is_wp_error( $page_templates ) ) {
+            foreach ( $page_templates as $post ) {
                 $options[$post->ID] = $post->post_title;
             }
         }
@@ -1724,19 +1698,18 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_authors()
-    {
-        $users = get_users([
-            'who' => 'authors',
+    public function eael_get_authors() {
+        $users = get_users( [
+            'who'                 => 'authors',
             'has_published_posts' => true,
-            'fields' => [
+            'fields'              => [
                 'ID',
                 'display_name',
             ],
-        ]);
+        ] );
 
-        if (!empty($users)) {
-            return wp_list_pluck($users, 'display_name', 'ID');
+        if ( !empty( $users ) ) {
+            return wp_list_pluck( $users, 'display_name', 'ID' );
         }
 
         return [];
@@ -1749,16 +1722,15 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_tags($args = array())
-    {
+    public function eael_get_tags( $args = array() ) {
         $options = [];
-        $tags = get_tags($args);
+        $tags = get_tags( $args );
 
-        if (is_wp_error($tags)) {
+        if ( is_wp_error( $tags ) ) {
             return [];
         }
 
-        foreach ($tags as $tag) {
+        foreach ( $tags as $tag ) {
             $options[$tag->term_id] = $tag->name;
         }
 
@@ -1775,30 +1747,29 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_taxonomies_by_post($args = [], $output = 'names', $operator = 'and')
-    {
+    public function eael_get_taxonomies_by_post( $args = [], $output = 'names', $operator = 'and' ) {
         global $wp_taxonomies;
 
-        $field = ('names' === $output) ? 'name' : false;
+        $field = ( 'names' === $output ) ? 'name' : false;
 
         // Handle 'object_type' separately.
-        if (isset($args['object_type'])) {
+        if ( isset( $args['object_type'] ) ) {
             $object_type = (array) $args['object_type'];
-            unset($args['object_type']);
+            unset( $args['object_type'] );
         }
 
-        $taxonomies = wp_filter_object_list($wp_taxonomies, $args, $operator);
+        $taxonomies = wp_filter_object_list( $wp_taxonomies, $args, $operator );
 
-        if (isset($object_type)) {
-            foreach ($taxonomies as $tax => $tax_data) {
-                if (!array_intersect($object_type, $tax_data->object_type)) {
-                    unset($taxonomies[$tax]);
+        if ( isset( $object_type ) ) {
+            foreach ( $taxonomies as $tax => $tax_data ) {
+                if ( !array_intersect( $object_type, $tax_data->object_type ) ) {
+                    unset( $taxonomies[$tax] );
                 }
             }
         }
 
-        if ($field) {
-            $taxonomies = wp_list_pluck($taxonomies, $field);
+        if ( $field ) {
+            $taxonomies = wp_list_pluck( $taxonomies, $field );
         }
 
         return $taxonomies;
@@ -1809,19 +1780,18 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_posts()
-    {
-        $post_list = get_posts(array(
-            'post_type' => 'post',
-            'orderby' => 'date',
-            'order' => 'DESC',
+    public function eael_get_posts() {
+        $post_list = get_posts( array(
+            'post_type'      => 'post',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
             'posts_per_page' => -1,
-        ));
+        ) );
 
         $posts = array();
 
-        if (!empty($post_list) && !is_wp_error($post_list)) {
-            foreach ($post_list as $post) {
+        if ( !empty( $post_list ) && !is_wp_error( $post_list ) ) {
+            foreach ( $post_list as $post ) {
                 $posts[$post->ID] = $post->post_title;
             }
         }
@@ -1834,19 +1804,18 @@ trait Helper
      *
      * @return array
      */
-    public function eael_get_pages()
-    {
-        $page_list = get_posts(array(
-            'post_type' => 'page',
-            'orderby' => 'date',
-            'order' => 'DESC',
+    public function eael_get_pages() {
+        $page_list = get_posts( array(
+            'post_type'      => 'page',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
             'posts_per_page' => -1,
-        ));
+        ) );
 
         $pages = array();
 
-        if (!empty($page_list) && !is_wp_error($page_list)) {
-            foreach ($page_list as $page) {
+        if ( !empty( $page_list ) && !is_wp_error( $page_list ) ) {
+            foreach ( $page_list as $page ) {
                 $pages[$page->ID] = $page->post_title;
             }
         }
@@ -1861,25 +1830,24 @@ trait Helper
      * @return string of an html markup with AJAX call.
      * @return array of content and found posts count without AJAX call.
      */
-    public function eael_load_more_ajax()
-    {
-        parse_str($_REQUEST['args'], $args);
-        parse_str($_REQUEST['settings'], $settings);
+    public function eael_load_more_ajax() {
+        parse_str( $_REQUEST['args'], $args );
+        parse_str( $_REQUEST['settings'], $settings );
 
-        $class = '\\' . str_replace('\\\\', '\\', $_REQUEST['class']);
-        $args['offset'] = (int) $args['offset'] + (((int) $_REQUEST['page'] - 1) * (int) $args['posts_per_page']);
+        $class = '\\' . str_replace( '\\\\', '\\', $_REQUEST['class'] );
+        $args['offset'] = (int) $args['offset'] + (  ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
 
-        if (isset($_REQUEST['taxonomy']) && $_REQUEST['taxonomy']['taxonomy'] != 'all') {
+        if ( isset( $_REQUEST['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
             $args['tax_query'] = [
                 $_REQUEST['taxonomy'],
             ];
         }
 
-        if ($class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand') {
-            $args['post__not_in'] = array_unique($_REQUEST['post__not_in']);
+        if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand' ) {
+            $args['post__not_in'] = array_unique( $_REQUEST['post__not_in'] );
         }
 
-        $html = $class::render_template_($args, $settings);
+        $html = $class::render_template_( $args, $settings );
 
         echo $html;
         wp_die();
@@ -1890,117 +1858,116 @@ trait Helper
      *
      * @since 3.0.6
      */
-    public function twitter_feed_render_items($id, $settings, $class = '')
-    {
-        $token = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token');
-        $items = get_transient($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_cache');
+    public function twitter_feed_render_items( $id, $settings, $class = '' ) {
+        $token = get_option( $id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token' );
+        $items = get_transient( $id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_cache' );
         $html = '';
 
-        if (empty($settings['eael_twitter_feed_consumer_key']) || empty($settings['eael_twitter_feed_consumer_secret'])) {
+        if ( empty( $settings['eael_twitter_feed_consumer_key'] ) || empty( $settings['eael_twitter_feed_consumer_secret'] ) ) {
             return;
         }
 
-        if ($items === false) {
-            if (empty($token)) {
-                $credentials = base64_encode($settings['eael_twitter_feed_consumer_key'] . ':' . $settings['eael_twitter_feed_consumer_secret']);
+        if ( $items === false ) {
+            if ( empty( $token ) ) {
+                $credentials = base64_encode( $settings['eael_twitter_feed_consumer_key'] . ':' . $settings['eael_twitter_feed_consumer_secret'] );
 
-                add_filter('https_ssl_verify', '__return_false');
+                add_filter( 'https_ssl_verify', '__return_false' );
 
-                $response = wp_remote_post('https://api.twitter.com/oauth2/token', [
-                    'method' => 'POST',
+                $response = wp_remote_post( 'https://api.twitter.com/oauth2/token', [
+                    'method'      => 'POST',
                     'httpversion' => '1.1',
-                    'blocking' => true,
-                    'headers' => [
+                    'blocking'    => true,
+                    'headers'     => [
                         'Authorization' => 'Basic ' . $credentials,
-                        'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
+                        'Content-Type'  => 'application/x-www-form-urlencoded;charset=UTF-8',
                     ],
-                    'body' => ['grant_type' => 'client_credentials'],
-                ]);
+                    'body'        => ['grant_type' => 'client_credentials'],
+                ] );
 
-                $body = json_decode(wp_remote_retrieve_body($response));
+                $body = json_decode( wp_remote_retrieve_body( $response ) );
 
-                if ($body) {
-                    update_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token', $body->access_token);
+                if ( $body ) {
+                    update_option( $id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token', $body->access_token );
                     $token = $body->access_token;
                 }
             }
 
             $args = array(
                 'httpversion' => '1.1',
-                'blocking' => true,
-                'headers' => array(
+                'blocking'    => true,
+                'headers'     => array(
                     'Authorization' => "Bearer $token",
                 ),
             );
 
-            add_filter('https_ssl_verify', '__return_false');
+            add_filter( 'https_ssl_verify', '__return_false' );
 
-            $response = wp_remote_get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended', [
+            $response = wp_remote_get( 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended', [
                 'httpversion' => '1.1',
-                'blocking' => true,
-                'headers' => [
+                'blocking'    => true,
+                'headers'     => [
                     'Authorization' => "Bearer $token",
                 ],
-            ]);
+            ] );
 
-            if (!is_wp_error($response)) {
-                $items = json_decode(wp_remote_retrieve_body($response), true);
-                set_transient($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_cache', $items, 1800);
+            if ( !is_wp_error( $response ) ) {
+                $items = json_decode( wp_remote_retrieve_body( $response ), true );
+                set_transient( $id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_cache', $items, 1800 );
             }
         }
 
-        if (empty($items)) {
+        if ( empty( $items ) ) {
             return;
         }
 
-        if ($settings['eael_twitter_feed_hashtag_name']) {
-            foreach ($items as $key => $item) {
+        if ( $settings['eael_twitter_feed_hashtag_name'] ) {
+            foreach ( $items as $key => $item ) {
                 $match = false;
 
-                if ($item['entities']['hashtags']) {
-                    foreach ($item['entities']['hashtags'] as $tag) {
-                        if (strcasecmp($tag['text'], $settings['eael_twitter_feed_hashtag_name']) == 0) {
+                if ( $item['entities']['hashtags'] ) {
+                    foreach ( $item['entities']['hashtags'] as $tag ) {
+                        if ( strcasecmp( $tag['text'], $settings['eael_twitter_feed_hashtag_name'] ) == 0 ) {
                             $match = true;
                         }
                     }
                 }
 
-                if ($match == false) {
-                    unset($items[$key]);
+                if ( $match == false ) {
+                    unset( $items[$key] );
                 }
             }
         }
 
-        $items = array_splice($items, 0, $settings['eael_twitter_feed_post_limit']);
+        $items = array_splice( $items, 0, $settings['eael_twitter_feed_post_limit'] );
 
-        foreach ($items as $item) {
+        foreach ( $items as $item ) {
             $html .= '<div class="eael-twitter-feed-item ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
-            if ($settings['eael_twitter_feed_show_avatar'] == 'true') {
+            if ( $settings['eael_twitter_feed_show_avatar'] == 'true' ) {
                 $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
                                 <img src="' . $item['user']['profile_image_url_https'] . '">
                             </a>';
             }
             $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
-            if ($settings['eael_twitter_feed_show_icon'] == 'true') {
+            if ( $settings['eael_twitter_feed_show_icon'] == 'true' ) {
                 $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
             }
 
             $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
                         </a>';
-            if ($settings['eael_twitter_feed_show_date'] == 'true') {
-                $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
+            if ( $settings['eael_twitter_feed_show_date'] == 'true' ) {
+                $html .= '<span class="eael-twitter-feed-item-date">' . sprintf( __( '%s ago', 'essential-addons-for-elementor-lite' ), human_time_diff( strtotime( $item['created_at'] ) ) ) . '</span>';
             }
             $html .= '</div>
                     <div class="eael-twitter-feed-item-content">
-                        <p>' . substr(str_replace(@$item['entities']['urls'][0]['url'], '', $item['full_text']), 0, $settings['eael_twitter_feed_content_length']) . '...</p>';
+                        <p>' . substr( str_replace( @$item['entities']['urls'][0]['url'], '', $item['full_text'] ), 0, $settings['eael_twitter_feed_content_length'] ) . '...</p>';
 
-            if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
+            if ( $settings['eael_twitter_feed_show_read_more'] == 'true' ) {
                 $html .= '<a href="//twitter.com/' . @$item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
             }
             $html .= '</div>
-                    ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
+                    ' . ( isset( $item['extended_entities']['media'][0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '' ) : '' ) . '
                 </div>
 			</div>';
         }
@@ -2013,16 +1980,15 @@ trait Helper
      *
      * @since 3.4.0
      */
-    public function facebook_feed_render_items()
-    {
+    public function facebook_feed_render_items() {
         // check if ajax request
-        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'facebook_feed_load_more') {
+        if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) {
             // check ajax referer
-            check_ajax_referer('essential-addons-elementor', 'security');
+            check_ajax_referer( 'essential-addons-elementor', 'security' );
 
             // init vars
             $page = $_REQUEST['page'];
-            parse_str($_REQUEST['settings'], $settings);
+            parse_str( $_REQUEST['settings'], $settings );
         } else {
             // init vars
             $page = 0;
@@ -2033,66 +1999,66 @@ trait Helper
         $page_id = $settings['eael_facebook_feed_page_id'];
         $token = $settings['eael_facebook_feed_access_token'];
 
-        if (empty($page_id) || empty($token)) {
+        if ( empty( $page_id ) || empty( $token ) ) {
             return;
         }
 
-        $key = 'eael_facebook_feed_' . substr(str_rot13(str_replace('.', '', $page_id . $token)), 32);
+        $key = 'eael_facebook_feed_' . substr( str_rot13( str_replace( '.', '', $page_id . $token ) ), 32 );
 
-        if (get_transient($key) === false) {
-            $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v4.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}"));
-            set_transient($key, $facebook_data, 1800);
+        if ( get_transient( $key ) === false ) {
+            $facebook_data = wp_remote_retrieve_body( wp_remote_get( "https://graph.facebook.com/v4.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}" ) );
+            set_transient( $key, $facebook_data, 1800 );
         } else {
-            $facebook_data = get_transient($key);
+            $facebook_data = get_transient( $key );
         }
 
-        $facebook_data = json_decode($facebook_data, true);
+        $facebook_data = json_decode( $facebook_data, true );
 
-        if (isset($facebook_data['data'])) {
+        if ( isset( $facebook_data['data'] ) ) {
             $facebook_data = $facebook_data['data'];
         } else {
             return;
         }
 
-        switch ($settings['eael_facebook_feed_sort_by']) {
-            case 'least-recent':
-                $facebook_data = array_reverse($facebook_data);
-                break;
+        switch ( $settings['eael_facebook_feed_sort_by'] ) {
+        case 'least-recent':
+            $facebook_data = array_reverse( $facebook_data );
+            break;
         }
 
-        $items = array_splice($facebook_data, ($page * $settings['eael_facebook_feed_image_count']['size']), $settings['eael_facebook_feed_image_count']['size']);
+        $items = array_splice( $facebook_data, ( $page * $settings['eael_facebook_feed_image_count']['size'] ), $settings['eael_facebook_feed_image_count']['size'] );
 
-        foreach ($items as $item) {
-            $message = wp_trim_words((isset($item['message']) ? $item['message'] : (isset($item['story']) ? $item['story'] : '')), $settings['eael_facebook_feed_message_max_length']['size'], '...');
-            $photo = (isset($item['full_picture']) ? $item['full_picture'] : '');
-            $likes = (isset($item['reactions']) ? $item['reactions']['summary']['total_count'] : 0);
-            $comments = (isset($item['comments']) ? $item['comments']['summary']['total_count'] : 0);
+        foreach ( $items as $item ) {
+            $message = wp_trim_words(  ( isset( $item['message'] ) ? $item['message'] : ( isset( $item['story'] ) ? $item['story'] : '' ) ), $settings['eael_facebook_feed_message_max_length']['size'], '...' );
+            $photo = ( isset( $item['full_picture'] ) ? $item['full_picture'] : '' );
+            $likes = ( isset( $item['reactions'] ) ? $item['reactions']['summary']['total_count'] : 0 );
+            $comments = ( isset( $item['comments'] ) ? $item['comments']['summary']['total_count'] : 0 );
 
-            if ($settings['eael_facebook_feed_layout'] == 'card') {
+            if ( $settings['eael_facebook_feed_layout'] == 'card' ) {
                 $html .= '<div class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
                         <header class="eael-facebook-feed-item-header clearfix">
                             <div class="eael-facebook-feed-item-user clearfix">
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>
-                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '"><p class="eael-facebook-feed-username">' . $item['from']['name'] . '</p></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v4.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="eael-facebook-feed-avatar"></a>
+                                <a href="https://www.facebook.com/' . $page_id . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '"><p class="eael-facebook-feed-username">' . $item['from']['name'] . '</p></a>
                             </div>';
 
-                if ($settings['eael_facebook_feed_date']) {
-                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date("d M Y", strtotime($item['created_time'])) . '</a>';
+                if ( $settings['eael_facebook_feed_date'] ) {
+                    $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date( "d M Y", strtotime( $item['created_time'] ) ) . '</a>';
                 }
                 $html .= '</header>';
 
-                if ($settings['eael_facebook_feed_message'] && !empty($message)) {
+                if ( $settings['eael_facebook_feed_message'] && !empty( $message ) ) {
                     $html .= '<div class="eael-facebook-feed-item-content">
-                                        <p class="eael-facebook-feed-message">' . esc_html($message) . '</p>
+                                        <p class="eael-facebook-feed-message">' . esc_html( $message ) . '</p>
                                     </div>';
                 }
 
-                if (!empty($photo) || isset($item['attachments']['data'])) {
+                if ( !empty( $photo ) || isset( $item['attachments']['data'] ) ) {
                     $html .= '<div class="eael-facebook-feed-preview-wrap">';
-                    if ($item['status_type'] == 'shared_story') {
-                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">';
-                        if ($item['attachments']['data'][0]['media_type'] == 'video') {
+                    if ( $item['status_type'] == 'shared_story' ) {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">';
+                        if ( $item['attachments']['data'][0]['media_type'] == 'video' ) {
                             $html .= '<img class="eael-facebook-feed-img" src="' . $photo . '">
                                                     <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>';
                         } else {
@@ -2101,30 +2067,30 @@ trait Helper
                         $html .= '</a>';
 
                         $html .= '<div class="eael-facebook-feed-url-preview">
-                                                <p class="eael-facebook-feed-url-host">' . parse_url($item['attachments']['data'][0]['unshimmed_url'])['host'] . '</p>
+                                                <p class="eael-facebook-feed-url-host">' . parse_url( $item['attachments']['data'][0]['unshimmed_url'] )['host'] . '</p>
                                                 <h2 class="eael-facebook-feed-url-title">' . $item['attachments']['data'][0]['title'] . '</h2>
                                                 <p class="eael-facebook-feed-url-description">' . @$item['attachments']['data'][0]['description'] . '</p>
                                             </div>';
-                    } else if ($item['status_type'] == 'added_video') {
-                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
+                    } else if ( $item['status_type'] == 'added_video' ) {
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
                                                 <img class="eael-facebook-feed-img" src="' . $photo . '">
                                                 <div class="eael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
                                             </a>';
                     } else {
-                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self') . '" class="eael-facebook-feed-preview-img">
+                        $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] == 'yes' ? '_blank' : '_self' ) . '" class="eael-facebook-feed-preview-img">
                                                 <img class="eael-facebook-feed-img" src="' . $photo . '">
                                             </a>';
                     }
                     $html .= '</div>';
                 }
 
-                if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
+                if ( $settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments'] ) {
                     $html .= '<footer class="eael-facebook-feed-item-footer">
                                 <div class="clearfix">';
-                    if ($settings['eael_facebook_feed_likes']) {
+                    if ( $settings['eael_facebook_feed_likes'] ) {
                         $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
                     }
-                    if ($settings['eael_facebook_feed_comments']) {
+                    if ( $settings['eael_facebook_feed_comments'] ) {
                         $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
                     }
                     $html .= '</div>
@@ -2133,18 +2099,18 @@ trait Helper
                 $html .= '</div>
                 </div>';
             } else {
-                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ($settings['eael_facebook_feed_link_target'] ? '_blank' : '_self') . '" class="eael-facebook-feed-item">
+                $html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-item">
                     <div class="eael-facebook-feed-item-inner">
-                        <img class="eael-facebook-feed-img" src="' . (empty($photo) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : $photo) . '">';
+                        <img class="eael-facebook-feed-img" src="' . ( empty( $photo ) ? EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg' : $photo ) . '">';
 
-                if ($settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments']) {
+                if ( $settings['eael_facebook_feed_likes'] || $settings['eael_facebook_feed_comments'] ) {
                     $html .= '<div class="eael-facebook-feed-item-overlay">
                                         <div class="eael-facebook-feed-item-overlay-inner">
                                             <div class="eael-facebook-feed-meta">';
-                    if ($settings['eael_facebook_feed_likes']) {
+                    if ( $settings['eael_facebook_feed_likes'] ) {
                         $html .= '<span class="eael-facebook-feed-post-likes"><i class="far fa-thumbs-up" aria-hidden="true"></i> ' . $likes . '</span>';
                     }
-                    if ($settings['eael_facebook_feed_comments']) {
+                    if ( $settings['eael_facebook_feed_comments'] ) {
                         $html .= '<span class="eael-facebook-feed-post-comments"><i class="far fa-comments" aria-hidden="true"></i> ' . $comments . '</span>';
                     }
                     $html .= '</div>
@@ -2156,11 +2122,11 @@ trait Helper
             }
         }
 
-        if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'facebook_feed_load_more') {
-            wp_send_json([
-                'num_pages' => ceil(count($facebook_data) / $settings['eael_facebook_feed_image_count']['size']),
-                'html' => $html,
-            ]);
+        if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'facebook_feed_load_more' ) {
+            wp_send_json( [
+                'num_pages' => ceil( count( $facebook_data ) / $settings['eael_facebook_feed_image_count']['size'] ),
+                'html'      => $html,
+            ] );
         }
 
         return $html;
@@ -2171,12 +2137,11 @@ trait Helper
      * @param $key
      * @return string
      */
-    public function eael_get_extension_settings($page_settings_model = [], $global_settings = [], $extension, $key)
-    {
-        if (isset($page_settings_model) && $page_settings_model->get_settings($extension) == 'yes') {
-            return $page_settings_model->get_settings($key);
-        } else if (isset($global_settings[$extension]['enabled'])) {
-            return isset($global_settings[$extension][$key]) ? $global_settings[$extension][$key] : '';
+    public function eael_get_extension_settings( $page_settings_model = [], $global_settings = [], $extension, $key ) {
+        if ( isset( $page_settings_model ) && $page_settings_model->get_settings( $extension ) == 'yes' ) {
+            return $page_settings_model->get_settings( $key );
+        } else if ( isset( $global_settings[$extension]['enabled'] ) ) {
+            return isset( $global_settings[$extension][$key] ) ? $global_settings[$extension][$key] : '';
         }
 
         return '';
@@ -2187,16 +2152,15 @@ trait Helper
      * @param $elements
      * @return string|void
      */
-    public function eael_toc_global_css($page_settings_model, $global_settings)
-    {
+    public function eael_toc_global_css( $page_settings_model, $global_settings ) {
 
         $eael_toc = $global_settings['eael_ext_table_of_content'];
         $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style = $eael_toc['eael_ext_table_of_content_list_separator_style'];
         $header_padding = $eael_toc['eael_ext_toc_header_padding'];
         $body_padding = $eael_toc['eael_ext_toc_body_padding'];
-        $header_typography = $this->eael_get_typography_data('eael_ext_table_of_content_header_typography', $eael_toc);
-        $list_typography = $this->eael_get_typography_data('eael_ext_table_of_content_list_typography_normal', $eael_toc);
+        $header_typography = $this->eael_get_typography_data( 'eael_ext_table_of_content_header_typography', $eael_toc );
+        $list_typography = $this->eael_get_typography_data( 'eael_ext_table_of_content_list_typography_normal', $eael_toc );
         $box_shadow = $eael_toc['eael_ext_toc_table_box_shadow_box_shadow'];
         $border_radius = $eael_toc['eael_ext_toc_box_border_radius']['size'];
         $bullet_size = $eael_toc['eael_ext_toc_box_list_bullet_size']['size'];
@@ -2365,7 +2329,7 @@ trait Helper
                 padding-bottom:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
             }
         ";
-        if ($toc_list_separator_style != 'none') {
+        if ( $toc_list_separator_style != 'none' ) {
             $toc_global_css .= "
             .eael-toc-global ul.eael-toc-list > li
             {border-top: 0.5px $toc_list_separator_style !important;}
@@ -2373,7 +2337,7 @@ trait Helper
             {border: none !important;}";
         }
 
-        if (isset($eael_toc['eael_ext_toc_border_border'])) {
+        if ( isset( $eael_toc['eael_ext_toc_border_border'] ) ) {
             $border_width = $eael_toc['eael_ext_toc_border_width'];
             $toc_global_css .= "
             .eael-toc.eael-toc-global,.eael-toc-global button.eael-toc-button
@@ -2384,9 +2348,9 @@ trait Helper
             }";
         }
 
-        wp_register_style('eael-toc-global', false);
-        wp_enqueue_style('eael-toc-global');
-        wp_add_inline_style('eael-toc-global', $toc_global_css);
+        wp_register_style( 'eael-toc-global', false );
+        wp_enqueue_style( 'eael-toc-global' );
+        wp_add_inline_style( 'eael-toc-global', $toc_global_css );
     }
 
     /**
@@ -2394,8 +2358,7 @@ trait Helper
      * @param $global_data
      * @return string
      */
-    public function eael_get_typography_data($id, $global_data)
-    {
+    public function eael_get_typography_data( $id, $global_data ) {
         $typo_data = '';
         $fields_keys = [
             'font_family',
@@ -2407,77 +2370,76 @@ trait Helper
             'letter_spacing',
             'line_height',
         ];
-        foreach ($fields_keys as $key => $field) {
+        foreach ( $fields_keys as $key => $field ) {
             $typo_attr = $global_data[$id . '_' . $field];
-            $attr = str_replace('_', '-', $field);
-            if (in_array($field, ['font_size', 'letter_spacing', 'line_height'])) {
-                if (!empty($typo_attr['size'])) {
+            $attr = str_replace( '_', '-', $field );
+            if ( in_array( $field, ['font_size', 'letter_spacing', 'line_height'] ) ) {
+                if ( !empty( $typo_attr['size'] ) ) {
                     $typo_data .= "{$attr}:{$typo_attr['size']}{$typo_attr['unit']} !important;";
                 }
-            } elseif (!empty($typo_attr)) {
-                $typo_data .= ($attr == 'font-family') ? "{$attr}:{$typo_attr}, sans-serif;" : "{$attr}:{$typo_attr};";
+            } elseif ( !empty( $typo_attr ) ) {
+                $typo_data .= ( $attr == 'font-family' ) ? "{$attr}:{$typo_attr}, sans-serif;" : "{$attr}:{$typo_attr};";
             }
         }
         return $typo_data;
     }
 
-    public function eael_language_code_list()
-    {
+    public function eael_language_code_list() {
         return [
-            'af' => 'Afrikaans',
-            'sq' => 'Albanian',
-            'ar' => 'Arabic',
-            'eu' => 'Basque',
-            'bn' => 'Bengali',
-            'bs' => 'Bosnian',
-            'bg' => 'Bulgarian',
-            'ca' => 'Catalan',
+            'af'    => 'Afrikaans',
+            'sq'    => 'Albanian',
+            'ar'    => 'Arabic',
+            'eu'    => 'Basque',
+            'bn'    => 'Bengali',
+            'bs'    => 'Bosnian',
+            'bg'    => 'Bulgarian',
+            'ca'    => 'Catalan',
             'zh-cn' => 'Chinese',
             'zh-tw' => 'Chinese-tw',
-            'hr' => 'Croatian',
-            'cs' => 'Czech',
-            'da' => 'Danish',
-            'nl' => 'Dutch',
-            'en' => 'English',
-            'et' => 'Estonian',
-            'fi' => 'Finnish',
-            'fr' => 'French',
-            'gl' => 'Galician',
-            'ka' => 'Georgian',
-            'de' => 'German',
-            'el' => 'Greek (Modern)',
-            'he' => 'Hebrew',
-            'hi' => 'Hindi',
-            'hu' => 'Hungarian',
-            'is' => 'Icelandic',
-            'io' => 'Ido',
-            'id' => 'Indonesian',
-            'it' => 'Italian',
-            'ja' => 'Japanese',
-            'kk' => 'Kazakh',
-            'ko' => 'Korean',
-            'lv' => 'Latvian',
-            'lb' => 'Letzeburgesch',
-            'lt' => 'Lithuanian',
-            'lu' => 'Luba-Katanga',
-            'mk' => 'Macedonian',
-            'mg' => 'Malagasy',
-            'ms' => 'Malay',
-            'ro' => 'Moldovan, Moldavian, Romanian',
-            'nb' => 'Norwegian Bokmål',
-            'nn' => 'Norwegian Nynorsk',
-            'fa' => 'Persian',
-            'pl' => 'Polish',
-            'pt' => 'Portuguese',
-            'ru' => 'Russian',
-            'sr' => 'Serbian',
-            'sk' => 'Slovak',
-            'sl' => 'Slovenian',
-            'es' => 'Spanish',
-            'sv' => 'Swedish',
-            'tr' => 'Turkish',
-            'uk' => 'Ukrainian',
-            'vi' => 'Vietnamese',
+            'hr'    => 'Croatian',
+            'cs'    => 'Czech',
+            'da'    => 'Danish',
+            'nl'    => 'Dutch',
+            'en'    => 'English',
+            'et'    => 'Estonian',
+            'fi'    => 'Finnish',
+            'fr'    => 'French',
+            'gl'    => 'Galician',
+            'ka'    => 'Georgian',
+            'de'    => 'German',
+            'el'    => 'Greek (Modern)',
+            'he'    => 'Hebrew',
+            'hi'    => 'Hindi',
+            'hu'    => 'Hungarian',
+            'is'    => 'Icelandic',
+            'io'    => 'Ido',
+            'id'    => 'Indonesian',
+            'it'    => 'Italian',
+            'ja'    => 'Japanese',
+            'kk'    => 'Kazakh',
+            'ko'    => 'Korean',
+            'lv'    => 'Latvian',
+            'lb'    => 'Letzeburgesch',
+            'lt'    => 'Lithuanian',
+            'lu'    => 'Luba-Katanga',
+            'mk'    => 'Macedonian',
+            'mg'    => 'Malagasy',
+            'ms'    => 'Malay',
+            'ro'    => 'Moldovan, Moldavian, Romanian',
+            'nb'    => 'Norwegian Bokmål',
+            'nn'    => 'Norwegian Nynorsk',
+            'fa'    => 'Persian',
+            'pl'    => 'Polish',
+            'pt'    => 'Portuguese',
+            'ru'    => 'Russian',
+            'sr'    => 'Serbian',
+            'sk'    => 'Slovak',
+            'sl'    => 'Slovenian',
+            'es'    => 'Spanish',
+            'sv'    => 'Swedish',
+            'tr'    => 'Turkish',
+            'uk'    => 'Ukrainian',
+            'vi'    => 'Vietnamese',
         ];
     }
 
@@ -2487,41 +2449,38 @@ trait Helper
      *
      * @return array
      */
-    public function eael_event_calendar_source($source)
-    {
-        if (apply_filters('eael/pro_enabled', false)) {
-            $source['eventon'] = __('EventON', 'essential-addons-for-elementor-lite');
+    public function eael_event_calendar_source( $source ) {
+        if ( apply_filters( 'eael/pro_enabled', false ) ) {
+            $source['eventon'] = __( 'EventON', 'essential-addons-for-elementor-lite' );
         } else {
-            $source['eventon'] = __('EventON (Pro) ', 'essential-addons-for-elementor-lite');
+            $source['eventon'] = __( 'EventON (Pro) ', 'essential-addons-for-elementor-lite' );
         }
 
         return $source;
     }
 
-    public function eael_list_ninja_tables()
-    {
-        $tables = get_posts([
-            'post_type' => 'ninja-table',
-            'post_status' => 'publish',
+    public function eael_list_ninja_tables() {
+        $tables = get_posts( [
+            'post_type'      => 'ninja-table',
+            'post_status'    => 'publish',
             'posts_per_page' => '-1',
-        ]);
+        ] );
 
-        if (!empty($tables)) {
-            return wp_list_pluck($tables, 'post_title', 'ID');
+        if ( !empty( $tables ) ) {
+            return wp_list_pluck( $tables, 'post_title', 'ID' );
         }
 
         return [];
     }
 
-    public function advanced_data_table_source_control($wb)
-    {
-        if (apply_filters('eael/active_plugins', 'ninja-tables/ninja-tables.php')) {
+    public function advanced_data_table_source_control( $wb ) {
+        if ( apply_filters( 'eael/active_plugins', 'ninja-tables/ninja-tables.php' ) ) {
             $wb->add_control(
                 'ea_adv_data_table_source_ninja_table_id',
                 [
-                    'label' => esc_html__('Table ID', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'options' => $this->eael_list_ninja_tables(),
+                    'label'     => esc_html__( 'Table ID', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'options'   => $this->eael_list_ninja_tables(),
                     'condition' => [
                         'ea_adv_data_table_source' => 'ninja',
                     ],
@@ -2531,10 +2490,10 @@ trait Helper
             $wb->add_control(
                 'ea_adv_data_table_ninja_required',
                 [
-                    'type' => Controls_Manager::RAW_HTML,
-                    'raw' => __('<strong>Ninja Tables</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=Ninja+Tables&tab=search&type=term" target="_blank">Ninja Tables</a> first.', 'essential-addons-for-elementor-lite'),
+                    'type'            => Controls_Manager::RAW_HTML,
+                    'raw'             => __( '<strong>Ninja Tables</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=Ninja+Tables&tab=search&type=term" target="_blank">Ninja Tables</a> first.', 'essential-addons-for-elementor-lite' ),
                     'content_classes' => 'eael-warning',
-                    'condition' => [
+                    'condition'       => [
                         'ea_adv_data_table_source' => 'ninja',
                     ],
                 ]
@@ -2542,43 +2501,42 @@ trait Helper
         }
     }
 
-    public function advanced_data_table_ninja_integration($settings)
-    {
-        if (empty($settings['ea_adv_data_table_source_ninja_table_id'])) {
+    public function advanced_data_table_ninja_integration( $settings ) {
+        if ( empty( $settings['ea_adv_data_table_source_ninja_table_id'] ) ) {
             return;
         }
 
         $html = '';
-        $table_settings = ninja_table_get_table_settings($settings['ea_adv_data_table_source_ninja_table_id']);
-        $table_headers = ninja_table_get_table_columns($settings['ea_adv_data_table_source_ninja_table_id']);
-        $table_rows = ninjaTablesGetTablesDataByID($settings['ea_adv_data_table_source_ninja_table_id']);
+        $table_settings = ninja_table_get_table_settings( $settings['ea_adv_data_table_source_ninja_table_id'] );
+        $table_headers = ninja_table_get_table_columns( $settings['ea_adv_data_table_source_ninja_table_id'] );
+        $table_rows = ninjaTablesGetTablesDataByID( $settings['ea_adv_data_table_source_ninja_table_id'] );
 
-        if (!empty($table_rows)) {
-            if (!isset($table_settings['hide_header_row']) || $table_settings['hide_header_row'] != true) {
+        if ( !empty( $table_rows ) ) {
+            if ( !isset( $table_settings['hide_header_row'] ) || $table_settings['hide_header_row'] != true ) {
                 $html .= '<thead><tr>';
-                foreach ($table_headers as $key => $th) {
-                    $style = isset($settings['ea_adv_data_table_dynamic_th_width']) && isset($settings['ea_adv_data_table_dynamic_th_width'][$key]) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
+                foreach ( $table_headers as $key => $th ) {
+                    $style = isset( $settings['ea_adv_data_table_dynamic_th_width'] ) && isset( $settings['ea_adv_data_table_dynamic_th_width'][$key] ) ? ' style="width:' . $settings['ea_adv_data_table_dynamic_th_width'][$key] . '"' : '';
                     $html .= '<th' . $style . '>' . $th['name'] . '</th>';
                 }
                 $html .= '</tr></thead>';
             }
 
             $html .= '<tbody>';
-            foreach ($table_rows as $key => $tr) {
+            foreach ( $table_rows as $key => $tr ) {
                 $html .= '<tr>';
-                foreach ($table_headers as $th) {
-                    if (!isset($th['data_type'])) {
+                foreach ( $table_headers as $th ) {
+                    if ( !isset( $th['data_type'] ) ) {
                         $th['data_type'] = '';
                     }
 
-                    if ($th['data_type'] == 'image') {
-                        $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
-                    } elseif ($th['data_type'] == 'selection') {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
-                    } elseif ($th['data_type'] == 'button') {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
+                    if ( $th['data_type'] == 'image' ) {
+                        $html .= '<td>' . ( isset( $tr[$th['key']]['image_thumb'] ) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '' ) . '</td>';
+                    } elseif ( $th['data_type'] == 'selection' ) {
+                        $html .= '<td>' . ( !empty( $tr[$th['key']] ) ? implode( (array) $tr[$th['key']], ', ' ) : '' ) . '</td>';
+                    } elseif ( $th['data_type'] == 'button' ) {
+                        $html .= '<td>' . ( !empty( $tr[$th['key']] ) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '' ) . '</td>';
                     } else {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? $tr[$th['key']] : '') . '</td>';
+                        $html .= '<td>' . ( !empty( $tr[$th['key']] ) ? $tr[$th['key']] : '' ) . '</td>';
                     }
                 }
                 $html .= '</tr>';
@@ -2589,28 +2547,27 @@ trait Helper
         return $html;
     }
 
-    protected static function get_terms_as_list($term_type = 'category', $length = 1)
-    {
+    protected static function get_terms_as_list( $term_type = 'category', $length = 1 ) {
 
-        if ($term_type === 'category') {
+        if ( $term_type === 'category' ) {
             $terms = get_the_category();
         }
 
-        if ($term_type === 'tags') {
+        if ( $term_type === 'tags' ) {
             $terms = get_the_tags();
         }
 
-        if (empty($terms)) {
+        if ( empty( $terms ) ) {
             return;
         }
 
         $html = '<ul class="post-carousel-categories">';
         $count = 0;
-        foreach ($terms as $term) {
-            if ($count === $length) {break;}
-            $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
+        foreach ( $terms as $term ) {
+            if ( $count === $length ) {break;}
+            $link = ( $term_type === 'category' ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
             $html .= '<li>';
-            $html .= '<a href="' . esc_url($link) . '">';
+            $html .= '<a href="' . esc_url( $link ) . '">';
             $html .= $term->name;
             $html .= '</a>';
             $html .= '</li>';
@@ -2625,16 +2582,252 @@ trait Helper
     /**
      * Woo Checkout
      */
-    public function woo_checkout_update_order_review(){
+    public function woo_checkout_update_order_review() {
         $setting = $_POST['orderReviewData'];
         ob_start();
-        Woo_Checkout::checkout_order_review_default($setting);
+        Woo_Checkout::checkout_order_review_default( $setting );
         $woo_checkout_update_order_review = ob_get_clean();
 
         wp_send_json(
             array(
-                'order_review' =>  $woo_checkout_update_order_review
+                'order_review' => $woo_checkout_update_order_review,
             )
         );
+    }
+
+    public function eael_controls_custom_positioning( $prefix, $section_name, $css_selector, $condition = [] ) {
+        $selectors = '{{WRAPPER}} ' . $css_selector;
+        $this->start_controls_section(
+            $prefix . '_section_position',
+            [
+                'label'     => $section_name,
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => $condition,
+            ]
+        );
+
+        $this->add_control(
+            $prefix . '_position',
+            [
+                'label'     => __( 'Position', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => '',
+                'options'   => [
+                    ''         => __( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'absolute' => __( 'Absolute', 'essential-addons-for-elementor-lite' ),
+                ],
+                'selectors' => [
+                    $selectors => 'position: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $start = is_rtl() ? __( 'Right', 'essential-addons-for-elementor-lite' ) : __( 'Left', 'essential-addons-for-elementor-lite' );
+        $end = !is_rtl() ? __( 'Right', 'essential-addons-for-elementor-lite' ) : __( 'Left', 'essential-addons-for-elementor-lite' );
+
+        $this->add_control(
+            $prefix . '_offset_orientation_h',
+            [
+                'label'       => __( 'Horizontal Orientation', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'toggle'      => false,
+                'default'     => 'start',
+                'options'     => [
+                    'start' => [
+                        'title' => $start,
+                        'icon'  => 'eicon-h-align-left',
+                    ],
+                    'end'   => [
+                        'title' => $end,
+                        'icon'  => 'eicon-h-align-right',
+                    ],
+                ],
+                'classes'     => 'elementor-control-start-end',
+                'render_type' => 'ui',
+                'condition'   => [
+                    $prefix . '_position!' => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_x',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'size_units' => ['px', '%', 'vw', 'vh'],
+                'selectors'  => [
+                    'body:not(.rtl) ' . $selectors => 'left: {{SIZE}}{{UNIT}}',
+                    'body.rtl ' . $selectors       => 'right: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_h!' => 'end',
+                    $prefix . '_position!'             => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_x_end',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 0.1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'size_units' => ['px', '%', 'vw', 'vh'],
+                'selectors'  => [
+                    'body:not(.rtl) ' . $selectors => 'right: {{SIZE}}{{UNIT}}',
+                    'body.rtl ' . $selectors       => 'left: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_h' => 'end',
+                    $prefix . '_position!'            => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            $prefix . '_offset_orientation_v',
+            [
+                'label'       => __( 'Vertical Orientation', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'toggle'      => false,
+                'default'     => 'start',
+                'options'     => [
+                    'start' => [
+                        'title' => __( 'Top', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'end'   => [
+                        'title' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'render_type' => 'ui',
+                'condition'   => [
+                    $prefix . '_position!' => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_y',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'size_units' => ['px', '%', 'vh', 'vw'],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'selectors'  => [
+                    $selectors => 'top: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_v!' => 'end',
+                    $prefix . '_position!'             => '',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            $prefix . '_offset_y_end',
+            [
+                'label'      => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => -1000,
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%'  => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'size_units' => ['px', '%', 'vh', 'vw'],
+                'default'    => [
+                    'size' => '0',
+                ],
+                'selectors'  => [
+                    $selectors => 'bottom: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'  => [
+                    $prefix . '_offset_orientation_v' => 'end',
+                    $prefix . '_position!'            => '',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 }
