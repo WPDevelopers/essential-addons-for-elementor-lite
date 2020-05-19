@@ -18,8 +18,10 @@ trait Shared
         if (is_ssl()) {
             $url = wp_parse_url($url);
             $url['scheme'] = 'https';
+        
             return $this->unparse_url($url);
         }
+
         return $url;
     }
 
@@ -34,6 +36,7 @@ trait Shared
         $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
         $query = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
         $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
+
         return "$scheme$user$pass$host$port$path$query$fragment";
     }
 
