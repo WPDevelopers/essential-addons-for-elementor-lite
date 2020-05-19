@@ -17,10 +17,6 @@ class TypeForm extends Widget_Base {
 
     private $form_list = [];
 
-    public function __construct ($data = [], $args = null) {
-        parent::__construct($data, $args);
-    }
-
     public function get_name () {
         return 'eael-typeform';
     }
@@ -75,6 +71,9 @@ class TypeForm extends Widget_Base {
                     ]
                 ]
             );
+            if (is_wp_error($response)) {
+                return $this->form_list;
+            }
 
             if (isset($response['response']['code']) && $response['response']['code'] == 200) {
                 $data = json_decode(wp_remote_retrieve_body($response));
