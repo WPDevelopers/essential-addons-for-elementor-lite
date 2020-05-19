@@ -337,7 +337,7 @@ class Post_Timeline extends Widget_Base
             'eael_excerpt_length' => $settings['eael_excerpt_length'],
             'show_load_more' => $settings['show_load_more'],
             'show_load_more_text' => $settings['show_load_more_text'],
-            'excerpt_expanison_indicator'   => $settings['excerpt_expanison_indicator']
+            'expanison_indicator'   => $settings['excerpt_expanison_indicator']
         ];
 
         $this->add_render_attribute(
