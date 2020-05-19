@@ -641,8 +641,8 @@ $config = [
                 ],
             ],
         ],
-        'typeform' => [
-            'class' => '\Essential_Addons_Elementor\Elements\TypeForm',
+        'typeform'                 => [
+            'class'      => '\Essential_Addons_Elementor\Elements\TypeForm',
             'dependency' => [
                 'css' => [
                     [
@@ -662,7 +662,7 @@ $config = [
                         'type'    => 'self',
                         'context' => 'view',
                     ],
-                ]
+                ],
             ],
         ],
         'betterdocs-category-grid' => [
