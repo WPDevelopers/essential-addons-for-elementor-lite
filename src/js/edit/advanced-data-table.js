@@ -357,11 +357,17 @@ class advancedDataTableEdit {
 							true
 						);
 
+						// set flag
 						this.inlineEditInitiated = false;
 
-						setTimeout(() => {
-							ea.hooks.doAction("advancedDataTable.initInlineEdit");
-						}, 1002);
+						// init inline edit
+						let interval = setInterval(() => {
+							if (this.view.el.querySelector(".ea-advanced-data-table").innerHTML == header + body) {
+								clearInterval(interval);
+								
+								ea.hooks.doAction("advancedDataTable.initInlineEdit");
+							}
+						}, 500);
 					}
 				}
 
@@ -388,14 +394,6 @@ class advancedDataTableEdit {
 
 		// after panel init hook
 		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
-
-		// re init inline edit after render
-		// model.on("remote:render", () => {
-		// 	this.inlineEditInitiated = false;
-		// 	ea.hooks.doAction("advancedDataTable.initInlineEdit");
-		// });
-
-		// console.log(model);
 
 		model.once("editor:close", () => {
 			// parse table html
