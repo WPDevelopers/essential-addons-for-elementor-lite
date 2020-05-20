@@ -196,6 +196,9 @@
 .eael-entry-media.grid-hover-style-none .eael-entry-overlay {
   display: none;
 }
+.eael-entry-overlay.none {
+  opacity: 0;
+}
 .eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
   -webkit-transform: scale(0.4);
       -ms-transform: scale(0.4);

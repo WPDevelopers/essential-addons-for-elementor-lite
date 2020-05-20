@@ -193,6 +193,8 @@
 	display: none;
 }
 
+.eael-entry-overlay.none { opacity: 0; }
+
 .eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
 	transform: scale(0.4);
 	opacity: 0;
