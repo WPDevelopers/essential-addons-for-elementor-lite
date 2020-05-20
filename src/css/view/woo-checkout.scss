@@ -334,6 +334,7 @@ $base-font-size: 14px;
 					text-transform: capitalize;
 					font-size: 15px;
 					line-height: 1.5em;
+					display: inline-block;
 
 					i {
 						margin-right: 5px;
@@ -461,7 +462,7 @@ $base-font-size: 14px;
 		// Login
 		.woo-checkout-login {
 			&.woo-checkout-login-editor {
-				display: none!important;
+				display: none;
 			}
 			.woocommerce-form-login-toggle {
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
@@ -719,7 +720,7 @@ $base-font-size: 14px;
 		.woocommerce {
 			.woo-checkout-login {
 				&.woo-checkout-login-editor {
-					display: block !important;
+					display: block;
 				}
 			}
 		}

@@ -2054,6 +2054,9 @@ table.eael-data-table .sorting_asc.sorting-none:after {
   text-align: right;
 }
 @charset "UTF-8";
+.eael-event-calendar-wrapper {
+  font-family: Segoe UI;
+}
 .eael-event-calendar-wrapper .fc-row table {
   margin: 0px !important;
 }
@@ -5973,6 +5976,9 @@ button.mfp-arrow:not(.toggle) {
 .eael-entry-media.grid-hover-style-none .eael-entry-overlay {
   display: none;
 }
+.eael-entry-overlay.none {
+  opacity: 0;
+}
 .eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
   -webkit-transform: scale(0.4);
       -ms-transform: scale(0.4);
@@ -8488,6 +8494,10 @@ html {
   list-style: none;
 }
 
+.eael-toc .eael-toc-body ul.eael-toc-list li {
+  list-style: none;
+}
+
 .eael-toc .eael-toc-body ul.eael-toc-list li ul {
   margin: 0;
   padding: 0;
@@ -9413,6 +9423,23 @@ span.eael-tooltip-content a {
   background-image: none;
   outline: none;
 }
+.eael-typeform {
+  width: 100%;
+  height: 700px;
+}
+.eael-typeform.eael-typeform-align-center {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.eael-typeform.eael-typeform-align-left {
+  float: left;
+}
+.eael-typeform.eael-typeform-align-right {
+  float: right;
+}
 .eael-weform-container input,
 .eael-weform-container textarea {
   height: auto;
@@ -9761,6 +9788,7 @@ span.eael-tooltip-content a {
   text-transform: capitalize;
   font-size: 15px;
   line-height: 1.5em;
+  display: inline-block;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .back-to-shopping i {
   margin-right: 5px;
@@ -9874,7 +9902,7 @@ span.eael-tooltip-content a {
   border: 1px solid #404040;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-login.woo-checkout-login-editor {
-  display: none !important;
+  display: none;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
   background-color: transparent !important;
@@ -10093,7 +10121,7 @@ span.eael-tooltip-content a {
   clear: both;
 }
 .eael-woo-checkout.elementor-editor-active .woocommerce .woo-checkout-login.woo-checkout-login-editor {
-  display: block !important;
+  display: block;
 }
 .eael-wpforms .wpforms-container .wpforms-form input[type=submit],
 .eael-wpforms .wpforms-container .wpforms-form button[type=submit],
