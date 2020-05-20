@@ -356,6 +356,12 @@ class advancedDataTableEdit {
 							},
 							true
 						);
+
+						this.inlineEditInitiated = false;
+
+						setTimeout(() => {
+							ea.hooks.doAction("advancedDataTable.initInlineEdit");
+						}, 1002);
 					}
 				}
 
@@ -371,20 +377,31 @@ class advancedDataTableEdit {
 		this.panel = panel;
 		this.model = model;
 		this.view = view;
+		this.inlineEditInitiated = false;
+		this.panelActionInitiated = false;
 
 		// init inline edit
 		ea.hooks.doAction("advancedDataTable.initInlineEdit");
 
-		// re init inline edit after render
-		model.on("remote:render", () => {
-			this.inlineEditInitiated = false;
+		// init panel action
+		ea.hooks.doAction("advancedDataTable.initPanelAction");
 
-			ea.hooks.doAction("advancedDataTable.initInlineEdit");
-		});
+		// after panel init hook
+		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
+
+		// re init inline edit after render
+		// model.on("remote:render", () => {
+		// 	this.inlineEditInitiated = false;
+		// 	ea.hooks.doAction("advancedDataTable.initInlineEdit");
+		// });
+
+		// console.log(model);
 
 		model.once("editor:close", () => {
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
+
+			console.log(origTable.innerHTML);
 
 			// update table
 			this.updateFromView(
@@ -394,17 +411,7 @@ class advancedDataTableEdit {
 				},
 				true
 			);
-
-			// reset flags
-			this.inlineEditInitiated = false;
-			this.panelActionInitiated = false;
 		});
-
-		// init panel action
-		ea.hooks.doAction("advancedDataTable.initPanelAction");
-
-		// after panel init hook
-		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
 	}
 
 	// context menu
