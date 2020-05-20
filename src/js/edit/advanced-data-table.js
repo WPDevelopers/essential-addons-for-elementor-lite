@@ -399,8 +399,6 @@ class advancedDataTableEdit {
 			// parse table html
 			let origTable = this.parseHTML(this.table.cloneNode(true));
 
-			console.log(origTable.innerHTML);
-
 			// update table
 			this.updateFromView(
 				this.view,
