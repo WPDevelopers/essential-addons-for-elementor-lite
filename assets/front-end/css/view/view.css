@@ -299,18 +299,6 @@
   margin-top: 0;
   margin-bottom: 0;
 }
-.ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-center,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td .ql-align-center {
-  text-align: center;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-justify,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td .ql-align-justify {
-  text-align: justify;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-right,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td .ql-align-right {
-  text-align: right;
-}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th {
   position: relative;
   cursor: pointer;
