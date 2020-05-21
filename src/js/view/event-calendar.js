@@ -28,7 +28,6 @@ var EventCalendar = function ($scope, $) {
 			center: "title",
 			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
 		},
-		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
 		locale: locale,
