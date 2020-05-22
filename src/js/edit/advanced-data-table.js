@@ -12,8 +12,6 @@ class advancedDataTableEdit {
 		this.dragStartWidth = null;
 		this.dragEl = null;
 		this.dragging = false;
-		this.inlineEditInitiated = false;
-		this.panelActionInitiated = false;
 
 		// register hooks
 		ea.hooks.addFilter("advancedDataTable.getClassProps", "ea", this.getClassProps.bind(this));
@@ -105,19 +103,7 @@ class advancedDataTableEdit {
 		let quill = new Quill(cell.querySelector(".inline-editor"), {
 			theme: "bubble",
 			modules: {
-				toolbar: [
-					"bold",
-					"italic",
-					"underline",
-					"strike",
-					"link",
-					{ align: "" },
-					{ align: "center" },
-					{ align: "right" },
-					{ align: "justify" },
-					{ list: "ordered" },
-					{ list: "bullet" },
-				],
+				toolbar: ["bold", "italic", "underline", "strike", "link", { list: "ordered" }, { list: "bullet" }],
 			},
 		});
 
@@ -140,15 +126,8 @@ class advancedDataTableEdit {
 
 	// init inline editing features
 	initInlineEdit() {
-		if (this.inlineEditInitiated) {
-			return;
-		}
-
 		let interval = setInterval(() => {
 			if (this.view.el.querySelector(".ea-advanced-data-table")) {
-				// initiated
-				this.inlineEditInitiated = true;
-
 				// init table
 				if (this.table !== this.view.el.querySelector(".ea-advanced-data-table")) {
 					this.table = this.view.el.querySelector(".ea-advanced-data-table");
@@ -259,19 +238,12 @@ class advancedDataTableEdit {
 
 				clearInterval(interval);
 			}
-		}, 100);
+		}, 500);
 	}
 
 	// panel action
 	initPanelAction() {
-		if (this.panelActionInitiated) {
-			return;
-		}
-
-		// initiated
-		this.panelActionInitiated = true;
-
-		this.panel.el.addEventListener("click", (event) => {
+		this.panel.content.el.onclick = (event) => {
 			if (event.target.dataset.event == "ea:advTable:export") {
 				// export
 				let rows = this.table.querySelectorAll("table tr");
@@ -309,8 +281,8 @@ class advancedDataTableEdit {
 				parent.document.querySelector(`.ea-adv-data-table-download-${this.model.attributes.id}`).remove();
 			} else if (event.target.dataset.event == "ea:advTable:import") {
 				// import
-				let textarea = this.panel.el.querySelector(".ea_adv_table_csv_string");
-				let enableHeader = this.panel.el.querySelector(".ea_adv_table_csv_string_table").checked;
+				let textarea = this.panel.content.el.querySelector(".ea_adv_table_csv_string");
+				let enableHeader = this.panel.content.el.querySelector(".ea_adv_table_csv_string_table").checked;
 				let csletr = textarea.value.split("\n");
 				let header = "";
 				let body = "";
@@ -356,6 +328,15 @@ class advancedDataTableEdit {
 							},
 							true
 						);
+
+						// init inline edit
+						let interval = setInterval(() => {
+							if (this.view.el.querySelector(".ea-advanced-data-table").innerHTML == header + body) {
+								clearInterval(interval);
+
+								ea.hooks.doAction("advancedDataTable.initInlineEdit");
+							}
+						}, 500);
 					}
 				}
 
@@ -363,7 +344,7 @@ class advancedDataTableEdit {
 			}
 
 			ea.hooks.doAction("advancedDataTable.panelAction", this.panel, this.model, this.view, event);
-		});
+		};
 	}
 
 	// init panel
@@ -375,12 +356,11 @@ class advancedDataTableEdit {
 		// init inline edit
 		ea.hooks.doAction("advancedDataTable.initInlineEdit");
 
-		// re init inline edit after render
-		model.on("remote:render", () => {
-			this.inlineEditInitiated = false;
+		// init panel action
+		ea.hooks.doAction("advancedDataTable.initPanelAction");
 
-			ea.hooks.doAction("advancedDataTable.initInlineEdit");
-		});
+		// after panel init hook
+		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
 
 		model.once("editor:close", () => {
 			// parse table html
@@ -394,17 +374,7 @@ class advancedDataTableEdit {
 				},
 				true
 			);
-
-			// reset flags
-			this.inlineEditInitiated = false;
-			this.panelActionInitiated = false;
 		});
-
-		// init panel action
-		ea.hooks.doAction("advancedDataTable.initPanelAction");
-
-		// after panel init hook
-		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
 	}
 
 	// context menu

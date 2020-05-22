@@ -68,7 +68,7 @@ var filterableGalleryHandler = function($scope, $) {
 			image: {
 				titleSrc: function(item) {
 					if (mfpCaption == "yes") {
-						return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parent('.eael-gallery-grid-item').find('.fg-item-title').html();
+						return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parents('.gallery-item-caption-wrap').find('.fg-item-title').html() || item.el.parents('.eael-filterable-gallery-item-wrap').find('.fg-item-title').html();
 					}
 				}
 			}
