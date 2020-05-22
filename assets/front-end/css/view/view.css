@@ -299,18 +299,6 @@
   margin-top: 0;
   margin-bottom: 0;
 }
-.ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-center,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td .ql-align-center {
-  text-align: center;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-justify,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td .ql-align-justify {
-  text-align: justify;
-}
-.ea-advanced-data-table-wrap .ea-advanced-data-table th .ql-align-right,
-.ea-advanced-data-table-wrap .ea-advanced-data-table td .ql-align-right {
-  text-align: right;
-}
 .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th {
   position: relative;
   cursor: pointer;
@@ -5976,6 +5964,9 @@ button.mfp-arrow:not(.toggle) {
 .eael-entry-media.grid-hover-style-none .eael-entry-overlay {
   display: none;
 }
+.eael-entry-overlay.none {
+  opacity: 0;
+}
 .eael-entry-media.grid-hover-style-zoom-in .eael-entry-overlay {
   -webkit-transform: scale(0.4);
       -ms-transform: scale(0.4);
@@ -9785,6 +9776,7 @@ span.eael-tooltip-content a {
   text-transform: capitalize;
   font-size: 15px;
   line-height: 1.5em;
+  display: inline-block;
 }
 .ea-woo-checkout .woocommerce .ea-woo-checkout-order-review .ea-order-review-table-footer .back-to-shopping i {
   margin-right: 5px;
@@ -9898,7 +9890,7 @@ span.eael-tooltip-content a {
   border: 1px solid #404040;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-login.woo-checkout-login-editor {
-  display: none !important;
+  display: none;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
   background-color: transparent !important;
@@ -10117,7 +10109,7 @@ span.eael-tooltip-content a {
   clear: both;
 }
 .eael-woo-checkout.elementor-editor-active .woocommerce .woo-checkout-login.woo-checkout-login-editor {
-  display: block !important;
+  display: block;
 }
 .eael-wpforms .wpforms-container .wpforms-form input[type=submit],
 .eael-wpforms .wpforms-container .wpforms-form button[type=submit],
