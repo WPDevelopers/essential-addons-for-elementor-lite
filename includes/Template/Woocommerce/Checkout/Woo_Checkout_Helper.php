@@ -9,6 +9,16 @@ if (!defined('ABSPATH')) {
 
 trait Woo_Checkout_Helper {
 
+    public static $setting_data = [];
+
+
+    public static function ea_get_woo_checkout_settings(){
+        return self::$setting_data;
+    }
+
+    public static function ea_set_woo_checkout_settings($setting){
+        self::$setting_data = $setting;
+    }
 	/**
 	 * Show the checkout.
 	 */
@@ -239,8 +249,7 @@ trait Woo_Checkout_Helper {
 	 * Show the coupon.
 	 */
 	public static function ea_coupon_template() {
-		$settings = self::get_settings();
-
+        $settings = self::ea_get_woo_checkout_settings();
 		?>
 		<div class="woo-checkout-coupon">
 			<div class="ea-coupon-icon">
@@ -254,7 +263,7 @@ trait Woo_Checkout_Helper {
 	 * Show the login.
 	 */
 	public static function ea_login_template(){
-		$settings = self::get_settings();
+        $settings = self::ea_get_woo_checkout_settings();
 		$class = '';
 		$status = true;
 		if('no' === get_option( 'woocommerce_enable_checkout_login_reminder')){
@@ -329,7 +338,7 @@ trait Woo_Checkout_Helper {
 	 * Show the login.
 	 */
 	public static function checkout_order_review_template() {
-		$settings = self::get_settings();
+		$settings = self::ea_get_woo_checkout_settings();
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 		<h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
@@ -523,6 +532,7 @@ trait Woo_Checkout_Helper {
 	 * Added all actions
 	 */
 	public function ea_woo_checkout_add_actions($settings) {
+	    self::ea_set_woo_checkout_settings($settings);
 		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
 		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 
