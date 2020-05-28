@@ -28,7 +28,6 @@ var EventCalendar = function ($scope, $) {
 			center: "title",
 			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
 		},
-		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
 		locale: locale,
@@ -42,7 +41,7 @@ var EventCalendar = function ($scope, $) {
 				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
 				element.find('td.fc-list-item-title').addClass('eael-event-completed');
 			}
-
+			translate.today = info.event._calendar.dateEnv.locale.options.buttonText.today
 			element.attr("href", "javascript:void(0);");
 			element.click(function (e) {
 				e.preventDefault();
