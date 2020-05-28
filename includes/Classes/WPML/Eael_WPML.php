@@ -425,6 +425,11 @@ trait Eael_WPML {
             ],
         ];
 
+        $widgets['eael-event-calendar'] = [
+            'conditions' => ['widgetType' => 'eael-event-calendar'],
+            'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Event_Calendar'
+        ];
+
         return $widgets;
     }
 
