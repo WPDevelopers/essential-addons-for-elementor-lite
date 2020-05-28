@@ -1,0 +1,112 @@
+.ea-advanced-data-table-wrap .ea-advanced-data-table-wrap-inner {
+  width: 100%;
+  overflow-y: auto;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td {
+  background-color: transparent !important;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor.ql-container,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor.ql-container {
+  font-family: inherit;
+  font-size: inherit;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor .ql-editor,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor .ql-editor {
+  line-height: inherit;
+  padding: 0;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th .inline-editor .ql-tooltip,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td .inline-editor .ql-tooltip {
+  z-index: 9999;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table th p,
+.ea-advanced-data-table-wrap .ea-advanced-data-table td p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th {
+  position: relative;
+  cursor: pointer;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:before {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid #4d4d4d;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -6px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:after {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #4d4d4d;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: 1px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.asc:before {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.asc:after {
+  margin-top: -3px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.desc:before {
+  margin-top: -3px;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th.desc:after {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th {
+  pointer-events: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th:before, .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-unsortable th:after {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-paginated tbody tr {
+  display: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th {
+  position: relative;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:before {
+  border: none;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable th:after {
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  border: none;
+  cursor: col-resize;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-editable.ea-advanced-data-table-paginated tbody tr {
+  display: table-row;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table .nt_add_cart_wrapper {
+  text-align: center;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table .button {
+  display: block;
+  white-space: nowrap;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-center {
+  text-align: center;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-search-wrap.ea-advanced-data-table-search-right {
+  text-align: right;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-pagination a {
+  display: inline-block;
+}
