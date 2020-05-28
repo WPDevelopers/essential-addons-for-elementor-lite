@@ -304,6 +304,11 @@ $config = [
             'dependency' => [
                 'css' => [
                     [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-edit/quill/quill.bubble.min.css',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-data-table.min.css',
                         'type'    => 'self',
                         'context' => 'view',
@@ -311,7 +316,7 @@ $config = [
                 ],
                 'js'  => [
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/tinymce/tinymce.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/quill/quill.min.js',
                         'type'    => 'lib',
                         'context' => 'edit',
                     ],
@@ -636,6 +641,30 @@ $config = [
                 ],
             ],
         ],
+        'typeform'                 => [
+            'class'      => '\Essential_Addons_Elementor\Elements\TypeForm',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/typeform.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/embed/embed.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/typeform.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'betterdocs-category-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
         ],
@@ -751,14 +780,22 @@ $config = [
                 true,
             ],
         ],
-        'woo-checkout' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
+        'woo-checkout'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/view/woo-checkout.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-checkout.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/view/woo-checkout.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-checkout.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],

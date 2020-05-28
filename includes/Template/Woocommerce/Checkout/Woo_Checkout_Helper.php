@@ -9,6 +9,16 @@ if (!defined('ABSPATH')) {
 
 trait Woo_Checkout_Helper {
 
+    public static $setting_data = [];
+
+
+    public static function ea_get_woo_checkout_settings(){
+        return self::$setting_data;
+    }
+
+    public static function ea_set_woo_checkout_settings($setting){
+        self::$setting_data = $setting;
+    }
 	/**
 	 * Show the checkout.
 	 */
@@ -40,7 +50,7 @@ trait Woo_Checkout_Helper {
 			$non_js_checkout = ! empty( $_POST['woocommerce_checkout_update_totals'] ); // WPCS: input var ok, CSRF ok.
 
 			if ( wc_notice_count( 'error' ) === 0 && $non_js_checkout ) {
-				wc_add_notice( __( 'The order totals have been updated. Please confirm your order by pressing the "Place order" button at the bottom of the page.', 'woocommerce' ) );
+				wc_add_notice( __( 'The order totals have been updated. Please confirm your order by pressing the "Place order" button at the bottom of the page.', 'essential-addons-for-elementor-lite' ) );
 			}
 
 			if($settings['ea_woo_checkout_layout'] == 'default'){
@@ -202,7 +212,7 @@ trait Woo_Checkout_Helper {
 					array(
 						'order'              => $order,
 						'available_gateways' => $available_gateways,
-						'order_button_text'  => apply_filters( 'woocommerce_pay_order_button_text', __( 'Pay for order', 'woocommerce' ) ),
+						'order_button_text'  => apply_filters( 'woocommerce_pay_order_button_text', __( 'Pay for order', 'essential-addons-for-elementor-lite' ) ),
 					)
 				);
 
@@ -239,8 +249,7 @@ trait Woo_Checkout_Helper {
 	 * Show the coupon.
 	 */
 	public static function ea_coupon_template() {
-		$settings = self::get_settings();
-
+        $settings = self::ea_get_woo_checkout_settings();
 		?>
 		<div class="woo-checkout-coupon">
 			<div class="ea-coupon-icon">
@@ -254,7 +263,7 @@ trait Woo_Checkout_Helper {
 	 * Show the login.
 	 */
 	public static function ea_login_template(){
-		$settings = self::get_settings();
+        $settings = self::ea_get_woo_checkout_settings();
 		$class = '';
 		$status = true;
 		if('no' === get_option( 'woocommerce_enable_checkout_login_reminder')){
@@ -273,11 +282,11 @@ trait Woo_Checkout_Helper {
 				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
             </div>
             <div class="woocommerce-form-login-toggle">
-				<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'woocommerce' ) ) . ' <a href="#" class="showlogin">' . esc_html__( 'Click here to login', 'woocommerce' ) . '</a>', 'notice' ); ?>
+				<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'essential-addons-for-elementor-lite' ) ) . ' <a href="#" class="showlogin">' . esc_html__( 'Click here to login', 'essential-addons-for-elementor-lite' ) . '</a>', 'notice' ); ?>
             </div>
 
 			<?php
-			$message  = esc_html__( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'woocommerce' );
+			$message  = esc_html__( 'If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing section.', 'essential-addons-for-elementor-lite' );
 			$redirect = wc_get_checkout_url();
 			$hidden   = true;
 			?>
@@ -288,11 +297,11 @@ trait Woo_Checkout_Helper {
 				<?php echo ( $message ) ? wpautop( wptexturize( $message ) ) : ''; // @codingStandardsIgnoreLine ?>
 
                 <p class="form-row form-row-first">
-                    <label for="username"><?php esc_html_e( 'Username or email', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+                    <label for="username"><?php esc_html_e( 'Username or email', 'essential-addons-for-elementor-lite' ); ?>&nbsp;<span class="required">*</span></label>
                     <input type="text" class="input-text" name="username" id="username" autocomplete="username" />
                 </p>
                 <p class="form-row form-row-last">
-                    <label for="password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+                    <label for="password"><?php esc_html_e( 'Password', 'essential-addons-for-elementor-lite' ); ?>&nbsp;<span class="required">*</span></label>
                     <input class="input-text" type="password" name="password" id="password" autocomplete="current-password" />
                 </p>
                 <div class="clear"></div>
@@ -301,14 +310,14 @@ trait Woo_Checkout_Helper {
 
                 <p class="form-row">
                     <label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
-                        <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'woocommerce' ); ?></span>
+                        <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'essential-addons-for-elementor-lite' ); ?></span>
                     </label>
 					<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
                     <input type="hidden" name="redirect" value="<?php echo esc_url( $redirect ); ?>" />
-                    <button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>"><?php esc_html_e( 'Login', 'woocommerce' ); ?></button>
+                    <button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Login', 'essential-addons-for-elementor-lite' ); ?>"><?php esc_html_e( 'Login', 'essential-addons-for-elementor-lite' ); ?></button>
                 </p>
                 <p class="lost_password">
-                    <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
+                    <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'essential-addons-for-elementor-lite' ); ?></a>
                 </p>
 
                 <div class="clear"></div>
@@ -329,7 +338,7 @@ trait Woo_Checkout_Helper {
 	 * Show the login.
 	 */
 	public static function checkout_order_review_template() {
-		$settings = self::get_settings();
+		$settings = self::ea_get_woo_checkout_settings();
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 		<h3 id="order_review_heading" class="woo-checkout-section-title"><?php esc_html_e( 'Your order', 'essential-addons-for-elementor-lite' ); ?></h3>
@@ -480,7 +489,7 @@ trait Woo_Checkout_Helper {
 		<?php
 		// If checkout registration is disabled and not logged in, the user cannot checkout.
 		if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
-			echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
+			echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'essential-addons-for-elementor-lite' ) ) );
 			return;
 		}
 		?>
@@ -523,9 +532,16 @@ trait Woo_Checkout_Helper {
 	 * Added all actions
 	 */
 	public function ea_woo_checkout_add_actions($settings) {
+	    self::ea_set_woo_checkout_settings($settings);
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_login_template' ], 10 );
 		add_action( 'woocommerce_before_checkout_form', [ $this, 'ea_coupon_template' ], 10 );
-		add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
+
+		if( $settings['ea_woo_checkout_layout'] == 'default' ) {
+			add_action( 'woocommerce_before_checkout_form', [ $this, 'checkout_order_review_template' ], 9 );
+        }
 	}
 
 }

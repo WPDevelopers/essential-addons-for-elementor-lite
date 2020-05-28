@@ -10,20 +10,25 @@
 			if (selector === null || supportTag === undefined || !listId) {
 				return null;
 			}
-
+			var eaelToc = document.getElementById("eael-toc");
+			var titleUrl = typeof(eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
+			var excludeArr = typeof(eaelToc.dataset.excludeSelector) !== 'undefined' ? eaelToc.dataset.excludeSelector.replace(/^,|,$/g,'') : '';
 			var allSupportTag = [];
 			var mainSelector = document.querySelectorAll(selector),
 				listIndex = 0;
 
-			for(var j = 0;j<mainSelector.length;j++){
-				var featchTag  = mainSelector[j].querySelectorAll(supportTag);
-				Array.prototype.push.apply(allSupportTag,featchTag);
+			for (var j = 0; j < mainSelector.length; j++) {
+				var featchTag = mainSelector[j].querySelectorAll(supportTag);
+				Array.prototype.push.apply(allSupportTag, featchTag);
 			}
 
 			allSupportTag = Array.prototype.slice.call(allSupportTag);
 
 			allSupportTag.forEach(function (el) {
-				el.id = listIndex + "-" + eael_build_id();
+				if(eaelTocExclude(excludeArr,el)){
+					return;
+				}
+				el.id = listIndex + "-" + eael_build_id( titleUrl ,el.textContent);
 				el.classList.add("eael-heading-content");
 				listIndex++;
 			});
@@ -48,7 +53,10 @@
 			var tagList = supportTag;
 			var parentLevel = '';
 			var allHeadings = [];
+			var eaelToc = document.getElementById("eael-toc");
+			var titleUrl = typeof(eaelToc.dataset.titleurl) !== 'undefined' ? eaelToc.dataset.titleurl : 'false';
 			var listId = document.getElementById("eael-toc-list");
+			var excludeArr = typeof(eaelToc.dataset.excludeselector) !== 'undefined' ? eaelToc.dataset.excludeselector.replace(/^,|,$/g,'') : '';
 			var mainContent = document.querySelectorAll(selector),
 				baseTag = parentLevel = tagList
 					.trim()
@@ -58,9 +66,9 @@
 
 			listId.innerHTML = "";
 
-			for(var j = 0;j<mainContent.length;j++){
-				var featchTag  = mainContent[j].querySelectorAll(tagList);
-				Array.prototype.push.apply(allHeadings,featchTag);
+			for (var j = 0; j < mainContent.length; j++) {
+				var featchTag = mainContent[j].querySelectorAll(tagList);
+				Array.prototype.push.apply(allHeadings, featchTag);
 			}
 
 			if (allHeadings.length > 0) {
@@ -68,6 +76,10 @@
 			}
 			for (var i = 0, len = allHeadings.length; i < len; ++i) {
 				var currentHeading = allHeadings[i];
+				if(eaelTocExclude(excludeArr,currentHeading)){
+					continue;
+				}
+
 				var latestLavel = parseInt(currentHeading.tagName.substr(1, 1));
 				var diff = latestLavel - parentLevel;
 
@@ -111,7 +123,7 @@
 					liNode.setAttribute("itemprop", "itemListElement");
 				}
 
-				var Linkid = "#" + i + "-" + eael_build_id();
+				var Linkid = "#" + i + "-" + eael_build_id(titleUrl, currentHeading.textContent);
 				anchorTag.className = "eael-toc-link";
 				anchorTag.setAttribute("itemprop", "item");
 				anchorTag.setAttribute("href", Linkid);
@@ -153,10 +165,21 @@
 		});
 
 		//some site not working with **window.onscroll**
-		window.addEventListener('scroll', function(e) {
+		window.addEventListener('scroll', function (e) {
 			eaelTocSticky();
 		});
 		var stickyScroll = $('#eael-toc').data('stickyscroll');
+
+		/**
+		 * Check selector in array
+		 *
+		 * @param arr
+		 * @param el
+		 * @returns boolean
+		 */
+		function eaelTocExclude(excludes,el){
+			return $(el).closest(excludes).length;
+		}
 
 		/**
 		 * check sticky
@@ -179,8 +202,21 @@
 		 * @param content
 		 * @returns {string}
 		 */
-		function eael_build_id() {
-			return "eael-table-of-content";
+		function eael_build_id(showTitle, title) {
+			if (showTitle =='true' && title != '') {
+				//create slug from Heading text
+				return title.toString()
+					.toLowerCase()
+					.normalize('NFD')
+					.trim()
+					.replace(/[^a-z0-9 -]/g, '')
+					.replace(/\s+/g, '-')
+					.replace(/^-+/, "")
+					.replace(/-+$/, "")
+					.replace(/-+/g, '-');
+			} else {
+				return "eael-table-of-content";
+			}
 		}
 
 		/**
@@ -188,6 +224,11 @@
 		 * @returns {null|selector}
 		 */
 		function eael_toc_check_content() {
+			var eaelToc = document.getElementById("eael-toc");
+			if(eaelToc && eaelToc.dataset.contentselector){
+				return eaelToc.dataset.contentselector;
+			}
+
 			var contentSelectro = '.site-content';
 			if ($(".site-content")[0]) {
 				contentSelectro = ".site-content";

@@ -396,7 +396,8 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'default'   => 'left',
                 'selectors' => [
-                    '{{WRAPPER}} th'          => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} th'            => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} th .ql-editor' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -514,7 +515,8 @@ class Advanced_Data_Table extends Widget_Base
                 ],
                 'default'   => 'left',
                 'selectors' => [
-                    '{{WRAPPER}} td'          => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} td'            => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} td .ql-editor' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
