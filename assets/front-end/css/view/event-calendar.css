@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.eael-event-calendar-wrapper {
+  font-family: Segoe UI;
+}
 .eael-event-calendar-wrapper .fc-row table {
   margin: 0px !important;
 }

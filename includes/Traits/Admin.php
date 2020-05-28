@@ -212,6 +212,9 @@ include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/
         // Saving Mailchimp Api Key
         update_option('eael_save_mailchimp_api', @$settings['mailchimp-api']);
 
+        // Saving TYpeForm token
+        update_option('eael_save_typeform_personal_token', @$settings['typeform-personal-token']);
+
         // Saving Duplicator Settings
         update_option('eael_save_post_duplicator_post_type', @$settings['post-duplicator-post-type']);
 

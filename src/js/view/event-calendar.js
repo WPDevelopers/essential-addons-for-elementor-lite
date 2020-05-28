@@ -7,6 +7,7 @@ var EventCalendar = function ($scope, $) {
 		firstDay = element.data("first_day"),
 		calendarID = element.data("cal_id"),
 		locale = element.data("locale"),
+		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
 		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
 
@@ -27,7 +28,6 @@ var EventCalendar = function ($scope, $) {
 			center: "title",
 			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
 		},
-		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
 		locale: locale,
@@ -36,13 +36,12 @@ var EventCalendar = function ($scope, $) {
 		eventRender: function (info) {
 			var element = $(info.el),
 				event = info.event;
-
 			// when event is finished event text are cross
 			if (event.extendedProps.eventHasComplete !== undefined && event.extendedProps.eventHasComplete === 'yes') {
 				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
 				element.find('td.fc-list-item-title').addClass('eael-event-completed');
 			}
-
+			translate.today = info.event._calendar.dateEnv.locale.options.buttonText.today
 			element.attr("href", "javascript:void(0);");
 			element.click(function (e) {
 				e.preventDefault();
@@ -72,14 +71,14 @@ var EventCalendar = function ($scope, $) {
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
 					startView = moment(startDate).format("MMM Do");
 					if (moment(startDate).isSame(Date.now(), "day") === true) {
-						startView = 'Today';
+						startView = translate.today;
 					} else if (moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")) {
-						startView = 'Tomorrow';
+						startView = translate.tomorrow;
 					}
 
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						startView = 'Today ' + moment(event.start).format(timeFormate);
+						startView = translate.today+' ' + moment(event.start).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -87,7 +86,7 @@ var EventCalendar = function ($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						startView = 'Tomorrow ' + moment(event.start).format(timeFormate);
+						startView = translate.tomorrow+' ' + moment(event.start).format(timeFormate);
 					}
 
 					if (
@@ -104,7 +103,7 @@ var EventCalendar = function ($scope, $) {
 
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
-							endView = " Today " + moment(endDate).format(timeFormate);
+							endView = translate.today+" " + moment(endDate).format(timeFormate);
 						} else {
 							endView = moment(endDate).format(timeFormate);
 						}
@@ -120,7 +119,7 @@ var EventCalendar = function ($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						endView = "Tomorrow " + moment(endDate).format(timeFormate);
+						endView = translate.tomorrow +" " + moment(endDate).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===

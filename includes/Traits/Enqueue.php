@@ -20,6 +20,13 @@ trait Enqueue
         );
 
         wp_register_style(
+            'eael-lib-edit',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/css/lib-edit/lib-edit.min.css'),
+            false,
+            time()
+        );
+
+        wp_register_style(
             'eael-view',
             $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/css/view/view.min.css'),
             false,
@@ -36,8 +43,8 @@ trait Enqueue
         );
 
         wp_register_script(
-            'eael-tinymce',
-            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/lib-edit/tinymce/tinymce.min.js'),
+            'eael-lib-edit',
+            $this->safe_protocol(EAEL_PLUGIN_URL . 'assets/front-end/js/lib-edit/lib-edit.min.js'),
             ['jquery'],
             time(),
             true
@@ -177,11 +184,11 @@ trait Enqueue
 
                 // enqueue
                 wp_enqueue_style('eael-lib-view');
+                wp_enqueue_style('eael-lib-edit');
                 wp_enqueue_style('eael-view');
+
                 wp_enqueue_script('eael-lib-view');
-                if ($this->get_settings('advanced-data-table')) {
-                    wp_enqueue_script('eael-tinymce');
-                }
+                wp_enqueue_script('eael-lib-edit');
                 wp_enqueue_script('eael-view');
                 wp_enqueue_script('eael-edit');
             }
@@ -252,6 +259,7 @@ trait Enqueue
             // enqueue
             wp_enqueue_style('eael-lib-view');
             wp_enqueue_style('eael-view');
+            
             wp_enqueue_script('eael-lib-view');
             wp_enqueue_script('eael-view');
         }

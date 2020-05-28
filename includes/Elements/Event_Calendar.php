@@ -1563,12 +1563,17 @@ class Event_Calendar extends Widget_Base {
 
         $local = $settings['eael_event_calendar_language'];
         $default_view = $settings['eael_event_calendar_default_view'];
+        $translate_date = [
+            'today' =>__('Today', 'essential-addons-for-elementor-lite'),
+            'tomorrow' =>__('Tomorrow', 'essential-addons-for-elementor-lite'),
+        ];
 
         echo '<div class="eael-event-calendar-wrapper">';
 
         echo '<div id="eael-event-calendar-'.$this->get_id().'" class="eael-event-calendar-cls"
             data-cal_id = "'.$this->get_id().'"
             data-locale = "'.$local.'"
+            data-translate = "'.htmlspecialchars(json_encode($translate_date), ENT_QUOTES, 'UTF-8').'"
             data-defaultview = "'.$default_view.'"
             data-events="'.htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8').'"
             data-first_day="'.$settings['eael_event_calendar_first_day'].'"></div>
@@ -1590,7 +1595,7 @@ class Event_Calendar extends Widget_Base {
                     <p></p>
                 </div>
                 <div class="eaelec-modal-footer">
-                    <a class="eaelec-event-details-link">Event Details</a>
+                    <a class="eaelec-event-details-link">'.__("Event Details","essential-addons-for-elementor-lite").'</a>
                 </div>
             </div>
         </div>';
