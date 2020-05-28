@@ -1,0 +1,164 @@
+.ea-advanced-data-table-wrap {
+	.ea-advanced-data-table-wrap-inner {
+		width: 100%;
+		overflow-y: auto;
+	}
+
+	.ea-advanced-data-table {
+		width: 100%;
+		border-collapse: collapse;
+
+		th,
+		td {
+			background-color: transparent !important;
+
+			.inline-editor {
+				&.ql-container {
+					font-family: inherit;
+					font-size: inherit;
+				}
+
+				.ql-editor {
+					line-height: inherit;
+					padding: 0;
+				}
+
+				.ql-tooltip {
+					z-index: 9999;
+				}
+			}
+
+			p {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
+
+		&.ea-advanced-data-table-sortable {
+			th {
+				position: relative;
+				cursor: pointer;
+
+				&:before {
+					content: "";
+					border-left: 4px solid transparent;
+					border-right: 4px solid transparent;
+					border-bottom: 5px solid #4d4d4d;
+					position: absolute;
+					top: 50%;
+					right: 15px;
+					margin-top: -6px;
+				}
+
+				&:after {
+					content: "";
+					border-left: 4px solid transparent;
+					border-right: 4px solid transparent;
+					border-top: 5px solid #4d4d4d;
+					position: absolute;
+					top: 50%;
+					right: 15px;
+					margin-top: 1px;
+				}
+
+				&.asc {
+					&:before {
+						display: none;
+					}
+
+					&:after {
+						margin-top: -3px;
+					}
+				}
+
+				&.desc {
+					&:before {
+						margin-top: -3px;
+					}
+
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+
+		&.ea-advanced-data-table-unsortable {
+			th {
+				pointer-events: none;
+
+				&:before,
+				&:after {
+					display: none;
+				}
+			}
+		}
+
+		// paginated table
+		&.ea-advanced-data-table-paginated {
+			tbody {
+				tr {
+					display: none;
+				}
+			}
+		}
+
+		&.ea-advanced-data-table-editable {
+			th {
+				position: relative;
+
+				&:before {
+					border: none;
+				}
+
+				&:after {
+					content: "";
+					display: block;
+					height: 100%;
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: 10px;
+					border: none;
+					cursor: col-resize;
+				}
+			}
+
+			&.ea-advanced-data-table-paginated {
+				tbody {
+					tr {
+						display: table-row;
+					}
+				}
+			}
+		}
+
+		// woocommerce
+		.nt_add_cart_wrapper {
+			text-align: center;
+		}
+
+		.button {
+			display: block;
+			white-space: nowrap;
+		}
+	}
+
+	// search
+	.ea-advanced-data-table-search-wrap {
+		&.ea-advanced-data-table-search-center {
+			text-align: center;
+		}
+
+		&.ea-advanced-data-table-search-right {
+			text-align: right;
+		}
+	}
+
+	// pagination
+	.ea-advanced-data-table-pagination {
+		a {
+			display: inline-block;
+		}
+	}
+}

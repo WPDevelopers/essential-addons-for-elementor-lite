@@ -1,433 +1,848 @@
 <?php
 
 $config = [
-    'elements' => [
-        'post-grid' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Post_Grid',
+    'elements'   => [
+        'post-grid'                => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Post_Grid',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-grid/index.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/post-grid.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/product-grid.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/post-grid/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/post-grid.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'post-timeline' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Post_Timeline',
+        'post-timeline'            => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Post_Timeline',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/post-timeline/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/post-timeline.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'fancy-text' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Fancy_Text',
+        'fancy-text'               => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Fancy_Text',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fancy-text/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/fancy-text.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/fancy-text/fancy-text.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/fancy-text/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/morphext/morphext.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/typed/typed.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/fancy-text.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'creative-btn' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Creative_Button',
+        'creative-btn'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Creative_Button',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/creative-btn/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/creative-btn.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'count-down' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Countdown',
+        'count-down'               => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Countdown',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/count-down/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/count-down.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/count-down/countdown.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/count-down/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/countdown/countdown.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/count-down.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'team-members' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Team_Member',
+        'team-members'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Team_Member',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/team-members/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/team-members.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'testimonials' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Testimonial',
+        'testimonials'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Testimonial',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/testimonials/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/testimonials.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'info-box' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Info_Box',
+        'info-box'                 => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Info_Box',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/info-box/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/info-box.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'flip-box' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Flip_Box',
+        'flip-box'                 => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Flip_Box',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/flip-box/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/flip-box.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'call-to-action' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Cta_Box',
+        'call-to-action'           => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Cta_Box',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/call-to-action/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/call-to-action.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'dual-header' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Dual_Color_Header',
+        'dual-header'              => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Dual_Color_Header',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/dual-header/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/dual-header.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'price-table' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Pricing_Table',
+        'price-table'              => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Pricing_Table',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/tooltipster/tooltipster.bundle.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/price-table/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/tooltipster/tooltipster.bundle.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/price-table.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/tooltipster/tooltipster.bundle.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/price-table/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tooltipster/tooltipster.bundle.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/price-table.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'twitter-feed' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Twitter_Feed',
+        'twitter-feed'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Twitter_Feed',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/twitter-feed/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/twitter-feed.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/twitter-feed/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/twitter-feed.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'facebook-feed' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Facebook_Feed',
+        'facebook-feed'            => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Facebook_Feed',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/facebook-feed/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/facebook-feed.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/facebook-feed/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/facebook-feed.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'advanced-data-table' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Advanced_Data_Table',
+        'advanced-data-table'      => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Advanced_Data_Table',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/advanced-data-table/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-edit/quill/quill.bubble.min.css',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-data-table.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/advanced-data-table/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-edit/quill/quill.min.js',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-data-table.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/advanced-data-table.min.js',
+                        'type'    => 'self',
+                        'context' => 'edit',
+                    ],
                 ],
             ],
         ],
-        'data-table' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Data_Table',
+        'data-table'               => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Data_Table',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/data-table/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/data-table.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/data-table/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/data-table.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'filter-gallery' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Filterable_Gallery',
+        'filter-gallery'           => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Filterable_Gallery',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/magnific-popup/index.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/filter-gallery/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup/magnific-popup.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/filterable-gallery.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/imagesLoaded/imagesloaded.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/isotope/isotope.pkgd.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/magnific-popup/jquery.magnific-popup.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/filter-gallery/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/magnific-popup/jquery.magnific-popup.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/filterable-gallery.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'image-accordion' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Image_Accordion',
+        'image-accordion'          => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Image_Accordion',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/image-accordion/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/image-accordion.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/image-accordion/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/image-accordion.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'content-ticker' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Content_Ticker',
+        'content-ticker'           => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Content_Ticker',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/content-ticker/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/content-ticker.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/content-ticker/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/content-ticker.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'tooltip' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Tooltip',
+        'tooltip'                  => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Tooltip',
             'dependency' => [
                 'css' => [
 
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/tooltip/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/tooltip.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'adv-accordion' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Adv_Accordion',
+        'adv-accordion'            => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Adv_Accordion',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-accordion/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-accordion.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-accordion/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-accordion.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'adv-tabs' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Adv_Tabs',
+        'adv-tabs'                 => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Adv_Tabs',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/adv-tabs/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/advanced-tabs.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/adv-tabs/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-tabs.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'progress-bar' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Progress_Bar',
+        'progress-bar'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Progress_Bar',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/progress-bar/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/progress-bar.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/inview/inview.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/progress-bar/progress-bar.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/progress-bar/index.min.js',
-                ],
-            ],
-        ],
-        'feature-list' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Feature_List',
-            'dependency' => [
-                'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/feature-list/index.min.css',
-                ]
-            ],
-        ],
-        'product-grid' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
-            'dependency' => [
-                'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css'
-                ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/inview/inview.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/progress-bar.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'contact-form-7' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
+        'feature-list'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Feature_List',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/contact-form-7/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/feature-list.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'weforms' => [
-            'class' => '\Essential_Addons_Elementor\Elements\WeForms',
+        'product-grid'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Product_Grid',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/weforms/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/product-grid.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'ninja-form' => [
-            'class' => '\Essential_Addons_Elementor\Elements\NinjaForms',
+        'contact-form-7'           => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/contact-form-7.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'formstack' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Formstack',
-             'dependency' => [
-                 'css' => [
-                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
-                 ],
-             ],
-        ],
-        'gravity-form' => [
-            'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
+        'weforms'                  => [
+            'class'      => '\Essential_Addons_Elementor\Elements\WeForms',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/gravity-form/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/weforms.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'caldera-form' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Caldera_Forms',
+        'ninja-form'               => [
+            'class'      => '\Essential_Addons_Elementor\Elements\NinjaForms',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/caldera-form/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/ninja-form.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'wpforms' => [
-            'class' => '\Essential_Addons_Elementor\Elements\WpForms',
+        'formstack'                => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Formstack',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/wpforms/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/formstack.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'fluentform' => [
-            'class' => '\Essential_Addons_Elementor\Elements\FluentForm',
+        'gravity-form'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\GravityForms',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/fluentform/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/gravity-form.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'caldera-form'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Caldera_Forms',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/caldera-form.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'wpforms'                  => [
+            'class'      => '\Essential_Addons_Elementor\Elements\WpForms',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/wpforms.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'fluentform'               => [
+            'class'      => '\Essential_Addons_Elementor\Elements\FluentForm',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/fluentform.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'typeform'                 => [
+            'class'      => '\Essential_Addons_Elementor\Elements\TypeForm',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/typeform.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/embed/embed.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/typeform.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
         'betterdocs-category-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
         ],
-        'betterdocs-category-box' => [
+        'betterdocs-category-box'  => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Box',
         ],
-        'betterdocs-search-form' => [
+        'betterdocs-search-form'   => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Search_Form',
         ],
-        'sticky-video' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Sticky_Video',
+        'sticky-video'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Sticky_Video',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/sticky-video/sticky-video-plyr.min.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/sticky-video/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/plyr/plyr.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/sticky-video.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/sticky-video/sticky-video-plyr.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/sticky-video/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/plyr/plyr.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/sticky-video.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'event-calendar' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Event_Calendar',
+        'event-calendar'           => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Event_Calendar',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/event-calendar/calendar-main.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/event-calendar/daygrid.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/event-calendar/timegrid.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/vendor/event-calendar/listgrid.css',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/event-calendar/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/calendar-main.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/daygrid.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/timegrid.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/full-calendar/listgrid.min.css',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/event-calendar.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    ///add moment.js code in calendar-main.js
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/locales-all.min.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/calendar-main.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/daygrid.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/timegrid.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/listgrid.js',
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/event-calendar/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/locales-all.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment/moment.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/calendar-main.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/daygrid.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/timegrid.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/listgrid.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/event-calendar.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'embedpress' => [
-            'class' => '\Essential_Addons_Elementor\Elements\EmbedPress',
+        'embedpress'               => [
+            'class'     => '\Essential_Addons_Elementor\Elements\EmbedPress',
             'condition' => [
                 'class_exists',
                 '\EmbedPress\Elementor\Embedpress_Elementor_Integration',
-                 true
-            ]
+                true,
+            ],
         ],
-        'woo-checkout' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
+        'woo-checkout'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/woo-checkout/index.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-checkout.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/woo-checkout/index.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-checkout.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
     ],
     'extensions' => [
-        'eael-promotion' => [
+        'eael-promotion'        => [
             'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
         ],
         'eael-reading-progress' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
+            'class'      => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/reading-progress/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/reading-progress.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/reading-progress/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/reading-progress.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
         'eael-table-of-content' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
+            'class'      => '\Essential_Addons_Elementor\Extensions\Table_of_Content',
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/table-of-content/index.min.css',
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/table-of-content.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
-                'js' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/table-of-content/index.min.js',
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/table-of-content.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
                 ],
             ],
         ],
-        'eael-post-duplicator' => [
+        'eael-post-duplicator'  => [
             'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
         ],
     ],

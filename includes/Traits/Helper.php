@@ -2155,6 +2155,7 @@ trait Helper {
     public function eael_toc_global_css( $page_settings_model, $global_settings ) {
 
         $eael_toc = $global_settings['eael_ext_table_of_content'];
+        $eael_toc_width = isset( $eael_toc['eael_ext_toc_width']['size'] ) ? $eael_toc['eael_ext_toc_width']['size'] : 300;
         $toc_list_color_active = $eael_toc['eael_ext_table_of_content_list_text_color_active'];
         $toc_list_separator_style = $eael_toc['eael_ext_table_of_content_list_separator_style'];
         $header_padding = $eael_toc['eael_ext_toc_header_padding'];
@@ -2167,7 +2168,7 @@ trait Helper {
         $top_position = $eael_toc['eael_ext_toc_box_list_top_position']['size'];
         $indicator_size = $eael_toc['eael_ext_toc_indicator_size']['size'];
         $indicator_position = $eael_toc['eael_ext_toc_indicator_position']['size'];
-
+        $close_bt_box_shadow = $eael_toc['eael_ext_table_of_content_close_button_box_shadow'];
         $toc_global_css = "
             .eael-toc-global .eael-toc-header,
             .eael-toc-global.collapsed .eael-toc-button
@@ -2176,6 +2177,7 @@ trait Helper {
             }
 
             .eael-toc-global {
+                width:{$eael_toc_width}px;
                 z-index:{$eael_toc['eael_ext_toc_sticky_z_index']['size']};
             }
 
@@ -2196,10 +2198,16 @@ trait Helper {
                 padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
             }
 
-            .eael-toc-global.eael-toc-close
+            .eael-toc-global .eael-toc-close
             {
-                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']};
-                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']};
+                font-size: {$eael_toc['eael_ext_table_of_content_close_button_icon_size']['size']}px !important;
+                height: {$eael_toc['eael_ext_table_of_content_close_button_size']['size']}px !important;
+                width: {$eael_toc['eael_ext_table_of_content_close_button_size']['size']}px !important;
+                line-height: {$eael_toc['eael_ext_table_of_content_close_button_line_height']['size']}px !important;
+                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']} !important;
+                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']} !important;
+                border-radius: {$eael_toc['eael_ext_table_of_content_close_button_border_radius']['size']}px !important;
+                box-shadow:{$close_bt_box_shadow['horizontal']}px {$close_bt_box_shadow['vertical']}px {$close_bt_box_shadow['blur']}px {$close_bt_box_shadow['spread']}px {$close_bt_box_shadow['color']} !important;
             }
 
             .eael-toc-global.eael-toc:not(.collapsed)
@@ -2829,5 +2837,16 @@ trait Helper {
         );
 
         $this->end_controls_section();
+    }
+    /** Filter to add plugins to the TOC list.
+     *
+     * @since  3.9.3
+     * @param array TOC plugins.
+     *
+     * @return mixed
+     */
+    public function eael_toc_rank_math_support( $toc_plugins ) {
+        $toc_plugins['essential-addons-for-elementor-lite/essential_adons_elementor.php'] = __( 'Essential Addons for Elementor', 'essential-addons-for-elementor-lite' );
+        return $toc_plugins;
     }
 }
