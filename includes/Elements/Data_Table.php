@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
+use \Elementor\Repeater;
 
 class Data_Table extends Widget_Base {
 	use \Essential_Addons_Elementor\Traits\Helper;
@@ -79,6 +80,126 @@ class Data_Table extends Widget_Base {
 			);
 		}
 
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'eael_data_table_header_col',
+			[
+				'label' => esc_html__( 'Column Name', 'essential-addons-for-elementor-lite'),
+				'default' => 'Table Header',
+				'type' => Controls_Manager::TEXT,
+				'label_block' => false,
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_col_span',
+			[
+				'label' => esc_html__( 'Column Span', 'essential-addons-for-elementor-lite'),
+				'default' => '',
+				'type' => Controls_Manager::TEXT,
+				'label_block' => false,
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_col_icon_enabled',
+			[
+				'label' => esc_html__( 'Enable Header Icon', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'yes', 'essential-addons-for-elementor-lite'),
+				'label_off' => __( 'no', 'essential-addons-for-elementor-lite'),
+				'default' => 'false',
+				'return_value' => 'true',
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_icon_type',
+			[
+				'label'	=> esc_html__( 'Header Icon Type', 'essential-addons-for-elementor-lite'),
+				'type'	=> Controls_Manager::CHOOSE,
+				'options'               => [
+					'none'        => [
+						'title'   => esc_html__( 'None', 'essential-addons-for-elementor-lite'),
+						'icon'    => 'fa fa-ban',
+					],
+					'icon'        => [
+						'title'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+						'icon'    => 'fa fa-star',
+					],
+					'image'       => [
+						'title'   => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
+						'icon'    => 'fa fa-picture-o',
+					],
+				],
+				'default'               => 'icon',
+				'condition' => [
+					'eael_data_table_header_col_icon_enabled' => 'true'
+				]
+			],
+		);
+
+		// Comment on this control
+		$repeater->add_control(
+			'eael_data_table_header_col_icon_new',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'eael_data_table_header_col_icon',
+				'default' => '',
+				'condition' => [
+					'eael_data_table_header_col_icon_enabled' => 'true',
+					'eael_data_table_header_icon_type'	=> 'icon'
+				]
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_col_img',
+			[
+				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::MEDIA,
+				'default' => [
+					'url' => Utils::get_placeholder_image_src(),
+				],
+				'condition' => [
+					'eael_data_table_header_icon_type'	=> 'image'
+				]
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_col_img_size',
+			[
+				'label' => esc_html__( 'Image Size(px)', 'essential-addons-for-elementor-lite'),
+				'default' => '25',
+				'type' => Controls_Manager::NUMBER,
+				'label_block' => false,
+				'condition' => [
+					'eael_data_table_header_icon_type'	=> 'image'
+				]
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_css_class',
+			[
+				'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
+				'type'			=> Controls_Manager::TEXT,
+				'label_block' 	=> false,
+			],
+		);
+
+		$repeater->add_control(
+			'eael_data_table_header_css_id',
+			[
+				'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
+				'type'			=> Controls_Manager::TEXT,
+				'label_block'	=> false,
+			],
+		);
+
   		$this->add_control(
 			'eael_data_table_header_cols_data',
 			[
@@ -90,99 +211,7 @@ class Data_Table extends Widget_Base {
 					[ 'eael_data_table_header_col' => 'Table Header' ],
 					[ 'eael_data_table_header_col' => 'Table Header' ],
 				],
-				'fields' => [
-					[
-						'name' => 'eael_data_table_header_col',
-						'label' => esc_html__( 'Column Name', 'essential-addons-for-elementor-lite'),
-						'default' => 'Table Header',
-						'type' => Controls_Manager::TEXT,
-						'label_block' => false,
-					],
-					[
-						'name' => 'eael_data_table_header_col_span',
-						'label' => esc_html__( 'Column Span', 'essential-addons-for-elementor-lite'),
-						'default' => '',
-						'type' => Controls_Manager::TEXT,
-						'label_block' => false,
-					],
-					[
-						'name' => 'eael_data_table_header_col_icon_enabled',
-						'label' => esc_html__( 'Enable Header Icon', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::SWITCHER,
-						'label_on' => __( 'yes', 'essential-addons-for-elementor-lite'),
-						'label_off' => __( 'no', 'essential-addons-for-elementor-lite'),
-						'default' => 'false',
-						'return_value' => 'true',
-					],
-					[
-						'name'	=> 'eael_data_table_header_icon_type',
-						'label'	=> esc_html__( 'Header Icon Type', 'essential-addons-for-elementor-lite'),
-						'type'	=> Controls_Manager::CHOOSE,
-						'options'               => [
-							'none'        => [
-								'title'   => esc_html__( 'None', 'essential-addons-for-elementor-lite'),
-								'icon'    => 'fa fa-ban',
-							],
-							'icon'        => [
-								'title'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
-								'icon'    => 'fa fa-star',
-							],
-							'image'       => [
-								'title'   => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
-								'icon'    => 'fa fa-picture-o',
-							],
-						],
-						'default'               => 'icon',
-						'condition' => [
-							'eael_data_table_header_col_icon_enabled' => 'true'
-						]
-					],
-					[
-						'name' => 'eael_data_table_header_col_icon_new',
-						'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::ICONS,
-						'fa4compatibility' => 'eael_data_table_header_col_icon',
-						'default' => '',
-						'condition' => [
-							'eael_data_table_header_col_icon_enabled' => 'true',
-							'eael_data_table_header_icon_type'	=> 'icon'
-						]
-					],
-					[
-						'name' => 'eael_data_table_header_col_img',
-						'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::MEDIA,
-						'default' => [
-							'url' => Utils::get_placeholder_image_src(),
-						],
-						'condition' => [
-							'eael_data_table_header_icon_type'	=> 'image'
-						]
-					],
-					[
-						'name' => 'eael_data_table_header_col_img_size',
-						'label' => esc_html__( 'Image Size(px)', 'essential-addons-for-elementor-lite'),
-						'default' => '25',
-						'type' => Controls_Manager::NUMBER,
-						'label_block' => false,
-						'condition' => [
-							'eael_data_table_header_icon_type'	=> 'image'
-						]
-					],
-					[
-						'name'			=> 'eael_data_table_header_css_class',
-						'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
-						'type'			=> Controls_Manager::TEXT,
-						'label_block' 	=> false,
-					],
-					[
-						'name'			=> 'eael_data_table_header_css_id',
-						'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
-						'type'			=> Controls_Manager::TEXT,
-						'label_block'	=> false,
-					],
-
-				],
+				'fields'      => array_values( $repeater->get_controls() ),
 				'title_field' => '{{eael_data_table_header_col}}',
 			]
 		);
