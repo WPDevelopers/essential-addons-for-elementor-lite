@@ -2040,7 +2040,7 @@ trait Helper
         $key = 'eael_facebook_feed_' . substr(str_rot13(str_replace('.', '', $page_id . $token)), 32);
 
         if (get_transient($key) === false) {
-            $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v4.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}"));
+            $facebook_data = wp_remote_retrieve_body(wp_remote_get("https://graph.facebook.com/v7.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&access_token={$token}"));
             set_transient($key, $facebook_data, 1800);
         } else {
             $facebook_data = get_transient($key);
