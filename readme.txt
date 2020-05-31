@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 3.9.4
+Stable tag: 4.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -41,7 +41,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 39+ FREE WIDGETS AND COUNTING
+### 40+ FREE WIDGETS AND COUNTING
 
 We have designed 39 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -74,7 +74,7 @@ We have designed 39 of the most useful widgets to enhance your Elementor Page Bu
 27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
-30. [FluentForm](https://essential-addons.com/elementor/fluentform/) - Design your FluentForm container, fields and anything you want
+30. [Fluent Form](https://essential-addons.com/elementor/fluentform/) - Design your Fluent Form container, fields and anything you want
 31. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook post feed from your page
 32. [Sticky Video](https://essential-addons.com/elementor/sticky-video/) - Create cool video from YouTube, Vimeo or self-hosted that will be sticky on scroll while playing.
 33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
@@ -84,6 +84,7 @@ We have designed 39 of the most useful widgets to enhance your Elementor Page Bu
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
+40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor. 
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -176,11 +177,14 @@ https://www.youtube.com/watch?v=6811orBQcJc
 If you like Essential Addons, then consider checking out our other WordPress Plugins:
 
 
-🔔**[NotificationX](https://notificationx.com/)** – Best Social Proof & FOMO Marketing Solution to increase conversion rates.
+🔔 **[NotificationX](https://notificationx.com/)** – Best Social Proof & FOMO Marketing Solution to increase conversion rates.
 
 🗒️ **[BetterDocs](https://betterdocs.co/)** – Best Documentation & Knowledge Base Plugin for WordPress, which also reduce your manual support request.
 
-⏰**[WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
+⏰ **[WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
+
+
+⭐ **[ReviewX](https://wordpress.org/plugins/reviewx/)**  – Advanced multi criteria Rating & Reviews for WooCommerce that allows users to submit product review for multiple criteria.
 
 
 == Installation ==
@@ -219,6 +223,22 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.0.1 - 28/05/2020 =
+- Fixed: PHP 7.4 compatibility
+
+= 4.0.0 - 21/05/2020 =
+- Added: EA Typeform widget
+- Added: Compatibility with WooCommerce 4.1.0
+- Added: Heading Tags for EA Filterable Gallery
+- Added: Inline editing for EA Advanced Data Table
+- Added: Option to exclude/include Heading tags by Selector ID for EA TOC
+- Improvement: Code Splitting for better performance
+- Fixed: EA Filterable Gallery not playing Videos
+- Fixed: Conflict with WooCommerce Checkout
+- Fixed: PHP errors for EA Post Timeline
+- Fixed: Hover Card style issue with EA Post Grid
+- Lots of minor bugfix and improvements
 
 = 3.9.4 - 03/05/2020 =
 - Fixed: Image Accordion not showing 'Horizontal' layout
@@ -374,7 +394,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Few minor bugfix and improvements
 
 = 3.4.0 - 10/10/2019 =
-- Added: FluentForm styler
+- Added: Fluent Form styler
 - Added: "EA Duplicator" extension to duplicate any page/post
 - Fixed: New elements not active by default
 - Few minor bugfix and improvements
