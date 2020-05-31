@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
  *
  * @since 3.2.4
  */
-class Event_Calendar extends WPML_Elementor_Module_With_Items
+class Data_Table extends WPML_Elementor_Module_With_Items
 {
 
 	/**
@@ -25,7 +25,7 @@ class Event_Calendar extends WPML_Elementor_Module_With_Items
 	 * @return string
 	 */
 	public function get_items_field() {
-		return 'eael_event_items';
+		return 'eael_data_table_header_cols_data';
 	}
 
 	/**
@@ -35,9 +35,7 @@ class Event_Calendar extends WPML_Elementor_Module_With_Items
 	 */
 	public function get_fields() {
 		return array(
-            'eael_event_title',
-            'eael_event_link',
-            'eael_event_description'
+            'eael_data_table_header_col'
 		);
 	}
 
@@ -50,14 +48,8 @@ class Event_Calendar extends WPML_Elementor_Module_With_Items
      */
 	protected function get_title( $field ) {
 		switch($field) {
-			case 'eael_event_title':
-                return __( 'Event: Title', 'essential-addons-for-elementor-lite' );
-                
-            case 'eael_event_link':
-                return __( 'Event: Content', 'essential-addons-for-elementor-lite' );
-                
-            case 'eael_event_description':
-                return __( 'Event : Description', 'essential-addons-for-elementor-lite' );
+			case 'eael_data_table_header_col':
+                return __( 'Data Table: Header', 'essential-addons-for-elementor-lite' );
 
 			default:
 				return '';
@@ -73,14 +65,8 @@ class Event_Calendar extends WPML_Elementor_Module_With_Items
 	 */
 	protected function get_editor_type( $field ) {
 		switch($field) {
-			case 'eael_event_title':
+			case 'eael_data_table_header_col':
                 return 'LINE';
-                
-            case 'eael_event_link':
-                return 'LINE';
-                 
-            case 'eael_event_description':
-				return 'VISUAL';
 
 			default:
 				return '';
