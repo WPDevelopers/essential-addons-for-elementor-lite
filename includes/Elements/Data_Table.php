@@ -152,7 +152,7 @@ class Data_Table extends Widget_Base {
 					'eael_data_table_header_col_icon_enabled' => 'true',
 					'eael_data_table_header_icon_type'	=> 'icon'
 				]
-			],
+			]
 		);
 
 		$repeater->add_control(
