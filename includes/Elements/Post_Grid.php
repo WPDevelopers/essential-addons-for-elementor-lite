@@ -752,8 +752,128 @@ class Post_Grid extends Widget_Base {
 
         $this->end_controls_section();
 
-        $this->terms_style();
+        /**
+         * Style tab: terms style
+         */
+        $this->start_controls_section(
+            'section_meta_terms_style',
+            [
+                'label'     => __( 'Terms Style', 'essential-addons-elementor' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_post_grid_preset_style' => 'two',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_post_grid_terms_color',
+            [
+                'label'     => __( 'Terms Color', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .post-meta-categories li, {{WRAPPER}} .post-meta-categories li a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
 
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_post_grid_terms_typography',
+                'label'    => __( 'Meta Typography', 'essential-addons-elementor' ),
+                'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
+                'selector' => '{{WRAPPER}} .post-meta-categories li, {{WRAPPER}} .post-meta-categories li a',
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_carousel_terms_margin',
+            [
+                'label'      => __( 'Margin', 'essential-addons-elementor' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .post-meta-categories' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->end_controls_section();
+
+        // terms style
+        $this->start_controls_section(
+            'section_terms_style',
+            [
+                'label'     => __( 'Terms', 'essential-addons-elementor' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_post_terms'        => 'yes',
+                    'eael_post_grid_preset_style' => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'terms_color',
+            [
+                'label'     => __( 'Color', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .post-carousel-categories li a, {{WRAPPER}} .post-carousel-categories li:after' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'terms_typography',
+                'label'    => __( 'Typography', 'essential-addons-elementor' ),
+                'selector' => '{{WRAPPER}} .post-carousel-categories li a',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'terms_color_alignment',
+            [
+                'label'     => __( 'Alignment', 'essential-addons-elementor' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'left'   => [
+                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-center',
+                    ],
+                    'right'  => [
+                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'icon'  => 'fa fa-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .post-carousel-categories' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'terms_spacing',
+            [
+                'label'      => __( 'Spacing', 'essential-addons-elementor' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .post-carousel-categories li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Card Hover
         $this->start_controls_section(
             'eael_section_hover_card_styles',
             [
