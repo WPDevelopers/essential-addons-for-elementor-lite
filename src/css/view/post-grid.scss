@@ -563,13 +563,16 @@
       .post-meta-categories {
         list-style: none;
         display: inline-flex;
-        margin: 0;
+        margin: 0 0 0 15px;
         li {
           font-size: 12px;
           margin-right: 7px;
           &:last-child {
             margin-right: 0;
-          }
+		  }
+		  a {
+			  color: #929292;
+		  }
         }
       }
     }

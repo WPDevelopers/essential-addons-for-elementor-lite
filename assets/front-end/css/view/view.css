@@ -6728,7 +6728,7 @@ button.mfp-arrow:not(.toggle) {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: 0;
+  margin: 0 0 0 15px;
 }
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li {
   font-size: 12px;
@@ -6736,6 +6736,9 @@ button.mfp-arrow:not(.toggle) {
 }
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li:last-child {
   margin-right: 0;
+}
+.eael-post-grid-style-two .eael-entry-meta .post-meta-categories li a {
+  color: #929292;
 }
 .eael-post-timeline {
   margin-bottom: 0;

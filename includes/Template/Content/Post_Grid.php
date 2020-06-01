@@ -121,7 +121,7 @@ trait Post_Grid {
         if ( has_post_thumbnail() && $settings['eael_show_image'] == 'yes' ) {
 
             echo '<div class="eael-entry-media">';
-            if ( $settings['eael_show_post_terms'] === 'yes' ) {
+            if ( $style == null && $settings['eael_show_post_terms'] === 'yes' ) {
                 echo self::get_terms_as_list( $settings['eael_post_terms'], $settings['eael_post_terms_max_length'] );
             }
 
@@ -162,7 +162,7 @@ trait Post_Grid {
                         <div class="eael-grid-post-holder">
                             <div class="eael-grid-post-holder-inner">';
 
-                    self::render_template__thumbnail( $settings );
+                    self::render_template__thumbnail( $settings, 'two' );
 
                     if ( $settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt'] ) {
                         echo '<div class="eael-entry-wrapper">';
