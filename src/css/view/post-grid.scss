@@ -527,3 +527,51 @@
 		opacity: 1;
 	}
 }
+
+
+
+.eael-post-grid-style {
+	&-three {
+		.eael-meta-posted-on {
+			width: 60px;
+			height: 50px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 4px;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+			text-align: center;
+			font-size: 16px;
+			line-height: 18px;
+			margin-top: 12px;
+			margin-left: 12px;
+			span {
+				display: block;
+			}
+		}
+	}
+  &-two {
+    .eael-entry-meta {
+      align-items: center;
+      .eael-meta-posted-on {
+        padding: 0;
+        font-size: 12px;
+        i {
+          margin-right: 7px;
+        }
+      }
+      .post-meta-categories {
+        list-style: none;
+        display: inline-flex;
+        margin: 0;
+        li {
+          font-size: 12px;
+          margin-right: 7px;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
