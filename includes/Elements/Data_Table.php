@@ -89,7 +89,7 @@ class Data_Table extends Widget_Base {
 				'default' => 'Table Header',
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -99,7 +99,7 @@ class Data_Table extends Widget_Base {
 				'default' => '',
 				'type' => Controls_Manager::TEXT,
 				'label_block' => false,
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -111,7 +111,7 @@ class Data_Table extends Widget_Base {
 				'label_off' => __( 'no', 'essential-addons-for-elementor-lite'),
 				'default' => 'false',
 				'return_value' => 'true',
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -137,7 +137,7 @@ class Data_Table extends Widget_Base {
 				'condition' => [
 					'eael_data_table_header_col_icon_enabled' => 'true'
 				]
-			],
+			]
 		);
 
 		// Comment on this control
@@ -147,12 +147,15 @@ class Data_Table extends Widget_Base {
 				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_data_table_header_col_icon',
-				'default' => '',
+                'default' => [
+                    'value' => 'fas fa-star',
+                    'library' => 'solid',
+                ],
 				'condition' => [
 					'eael_data_table_header_col_icon_enabled' => 'true',
 					'eael_data_table_header_icon_type'	=> 'icon'
 				]
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -166,7 +169,7 @@ class Data_Table extends Widget_Base {
 				'condition' => [
 					'eael_data_table_header_icon_type'	=> 'image'
 				]
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -179,7 +182,7 @@ class Data_Table extends Widget_Base {
 				'condition' => [
 					'eael_data_table_header_icon_type'	=> 'image'
 				]
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -188,7 +191,7 @@ class Data_Table extends Widget_Base {
 				'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
 				'label_block' 	=> false,
-			],
+			]
 		);
 
 		$repeater->add_control(
@@ -197,7 +200,7 @@ class Data_Table extends Widget_Base {
 				'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
 				'label_block'	=> false,
-			],
+			]
 		);
 
   		$this->add_control(
