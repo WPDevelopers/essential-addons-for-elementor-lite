@@ -229,7 +229,162 @@ class Data_Table extends Widget_Base {
   			[
   				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite')
   			]
-  		);
+		  );
+		  
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'eael_data_table_content_row_type',
+			[
+				'label' => esc_html__( 'Row Type', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'row',
+				'label_block' => false,
+				'options' => [
+					'row' => esc_html__( 'Row', 'essential-addons-for-elementor-lite'),
+					'col' => esc_html__( 'Column', 'essential-addons-for-elementor-lite'),
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_colspan',
+			[
+				'label'			=> esc_html__( 'Col Span', 'essential-addons-for-elementor-lite'),
+				'type'			=> Controls_Manager::NUMBER,
+				'description'	=> esc_html__( 'Default: 1 (optional).'),
+				'default' 		=> 1,
+				'min'     		=> 1,
+				'label_block'	=> true,
+				'condition' 	=> [
+					'eael_data_table_content_row_type' => 'col'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_type',
+			[
+				'label'		=> esc_html__( 'Content Type', 'essential-addons-for-elementor-lite'),
+				'type'	=> Controls_Manager::CHOOSE,
+				'options'               => [
+					'textarea'        => [
+						'title'   => esc_html__( 'Textarea', 'essential-addons-for-elementor-lite'),
+						'icon'    => 'fa fa-text-width',
+					],
+					'editor'       => [
+						'title'   => esc_html__( 'Editor', 'essential-addons-for-elementor-lite'),
+						'icon'    => 'fa fa-pencil',
+					],
+					'template'        => [
+						'title'   => esc_html__( 'Templates', 'essential-addons-for-elementor-lite'),
+						'icon'    => 'fa fa-file',
+					]
+				],
+				'default'	=> 'textarea',
+				'condition' => [
+					'eael_data_table_content_row_type' => 'col'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_rowspan',
+			[
+				'label'			=> esc_html__( 'Row Span', 'essential-addons-for-elementor-lite'),
+				'type'			=> Controls_Manager::NUMBER,
+				'description'	=> esc_html__( 'Default: 1 (optional).'),
+				'default' 		=> 1,
+				'min'     		=> 1,
+				'label_block'	=> true,
+				'condition' 	=> [
+					'eael_data_table_content_row_type' => 'col'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_primary_templates_for_tables',
+			[
+				'label'                 => __( 'Choose Template', 'essential-addons-for-elementor-lite'),
+				'type'                  => Controls_Manager::SELECT,
+				'options'               => $this->eael_get_page_templates(),
+				'condition'             => [
+					'eael_data_table_content_type'      => 'template',
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_title',
+			[
+				'label' => esc_html__( 'Cell Text', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::TEXTAREA,
+				'label_block' => true,
+				'default' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_data_table_content_row_type' => 'col',
+					'eael_data_table_content_type' => 'textarea'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_content',
+			[
+				'label' => esc_html__( 'Cell Text', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::WYSIWYG,
+				'label_block' => true,
+				'default' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_data_table_content_row_type' => 'col',
+					'eael_data_table_content_type' => 'editor'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_title_link',
+			[
+				'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::URL,
+				'label_block' => true,
+				'default' => [
+						'url' => '',
+						'is_external' => '',
+					 ],
+					 'show_external' => true,
+					 'separator' => 'before',
+				 'condition' => [
+					'eael_data_table_content_row_type' => 'col',
+					'eael_data_table_content_type' => 'textarea'
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_css_class',
+			[
+				'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
+				'type'			=> Controls_Manager::TEXT,
+				'label_block'	=> false,
+				'condition' 	=> [
+					'eael_data_table_content_row_type' => 'col'
+				]
+			]
+		);
+
+		$repeater->add_control(
+			'eael_data_table_content_row_css_id',
+			[
+				'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
+				'type'			=> Controls_Manager::TEXT,
+				'label_block'	=> false,
+				'condition' 	=> [
+					'eael_data_table_content_row_type' => 'col'
+				]
+			]
+		);
 
   		$this->add_control(
 			'eael_data_table_content_rows',
@@ -243,131 +398,7 @@ class Data_Table extends Widget_Base {
 					[ 'eael_data_table_content_row_type' => 'col' ],
 					[ 'eael_data_table_content_row_type' => 'col' ],
 				],
-				'fields' => [
-					[
-						'name' => 'eael_data_table_content_row_type',
-						'label' => esc_html__( 'Row Type', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::SELECT,
-						'default' => 'row',
-						'label_block' => false,
-						'options' => [
-							'row' => esc_html__( 'Row', 'essential-addons-for-elementor-lite'),
-							'col' => esc_html__( 'Column', 'essential-addons-for-elementor-lite'),
-						]
-					],
-					[
-						'name'			=> 'eael_data_table_content_row_colspan',
-						'label'			=> esc_html__( 'Col Span', 'essential-addons-for-elementor-lite'),
-						'type'			=> Controls_Manager::NUMBER,
-						'description'	=> esc_html__( 'Default: 1 (optional).'),
-						'default' 		=> 1,
-						'min'     		=> 1,
-						'label_block'	=> true,
-						'condition' 	=> [
-							'eael_data_table_content_row_type' => 'col'
-						]
-					],
-					[
-						'name'			=> 'eael_data_table_content_row_rowspan',
-						'label'			=> esc_html__( 'Row Span', 'essential-addons-for-elementor-lite'),
-						'type'			=> Controls_Manager::NUMBER,
-						'description'	=> esc_html__( 'Default: 1 (optional).'),
-						'default' 		=> 1,
-						'min'     		=> 1,
-						'label_block'	=> true,
-						'condition' 	=> [
-							'eael_data_table_content_row_type' => 'col'
-						]
-					],
-					[
-						'name'		=> 'eael_data_table_content_type',
-						'label'		=> esc_html__( 'Content Type', 'essential-addons-for-elementor-lite'),
-						'type'	=> Controls_Manager::CHOOSE,
-						'options'               => [
-							'textarea'        => [
-								'title'   => esc_html__( 'Textarea', 'essential-addons-for-elementor-lite'),
-								'icon'    => 'fa fa-text-width',
-							],
-							'editor'       => [
-								'title'   => esc_html__( 'Editor', 'essential-addons-for-elementor-lite'),
-								'icon'    => 'fa fa-pencil',
-							],
-							'template'        => [
-								'title'   => esc_html__( 'Templates', 'essential-addons-for-elementor-lite'),
-								'icon'    => 'fa fa-file',
-							]
-						],
-						'default'	=> 'textarea',
-						'condition' => [
-							'eael_data_table_content_row_type' => 'col'
-						]
-					],
-					[
-		                'name'					=> 'eael_primary_templates_for_tables',
-		                'label'                 => __( 'Choose Template', 'essential-addons-for-elementor-lite'),
-		                'type'                  => Controls_Manager::SELECT,
-		                'options'               => $this->eael_get_page_templates(),
-						'condition'             => [
-							'eael_data_table_content_type'      => 'template',
-						],
-		            ],
-					[
-						'name' => 'eael_data_table_content_row_title',
-						'label' => esc_html__( 'Cell Text', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::TEXTAREA,
-						'label_block' => true,
-						'default' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
-						'condition' => [
-							'eael_data_table_content_row_type' => 'col',
-							'eael_data_table_content_type' => 'textarea'
-						]
-					],
-					[
-						'name' => 'eael_data_table_content_row_content',
-						'label' => esc_html__( 'Cell Text', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::WYSIWYG,
-						'label_block' => true,
-						'default' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
-						'condition' => [
-							'eael_data_table_content_row_type' => 'col',
-							'eael_data_table_content_type' => 'editor'
-						]
-					],
-					[
-						'name' => 'eael_data_table_content_row_title_link',
-						'label' => esc_html__( 'Link', 'essential-addons-for-elementor-lite'),
-						'type' => Controls_Manager::URL,
-						'label_block' => true,
-						'default' => [
-		        				'url' => '',
-		        				'is_external' => '',
-		     				],
-		     				'show_external' => true,
-		     				'separator' => 'before',
-		     			'condition' => [
-							'eael_data_table_content_row_type' => 'col',
-							'eael_data_table_content_type' => 'textarea'
-						],
-					],
-					[
-						'name'			=> 'eael_data_table_content_row_css_class',
-						'label'			=> esc_html__( 'CSS Class', 'essential-addons-for-elementor-lite'),
-						'type'			=> Controls_Manager::TEXT,
-						'label_block'	=> false,
-						'condition' 	=> [
-							'eael_data_table_content_row_type' => 'col'
-						]
-					],
-					[
-						'name'			=> 'eael_data_table_content_row_css_id',
-						'label'			=> esc_html__( 'CSS ID', 'essential-addons-for-elementor-lite'),
-						'type'			=> Controls_Manager::TEXT,
-						'label_block'	=> false,
-						'condition' 	=> [
-							'eael_data_table_content_row_type' => 'col'
-						]
-					]
-				],
+				'fields' => array_values( $repeater->get_controls() ),
 				'title_field' => '{{eael_data_table_content_row_type}}::{{eael_data_table_content_row_title || eael_data_table_content_row_content}}',
 			]
 		);

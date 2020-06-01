@@ -67,7 +67,7 @@ trait Eael_WPML {
         //Doesn't work properly
         $widgets['eael-data-table'] = [
             'conditions' => ['widgetType' => 'eael-data-table'],
-            'integration-class' => '\Essential_Addons_Elementor\Classes\WPML\Widgets\Data_Table'
+            'integration-class' => ['\Essential_Addons_Elementor\Classes\WPML\Widgets\Data_Table', '\Essential_Addons_Elementor\Classes\WPML\Widgets\Data_Table_Body']
         ];
 
         $widgets['eicon-animated-headline'] = [
