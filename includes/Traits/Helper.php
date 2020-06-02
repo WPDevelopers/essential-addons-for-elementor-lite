@@ -533,6 +533,29 @@ trait Helper
             ]
         );
 
+        $this->add_control(
+            'title_tag',
+            [
+                'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'h2',
+                'options' => [
+                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p' => __('P', 'essential-addons-for-elementor-lite'),
+                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_show_title'   => 'yes'
+                ]
+            ]
+        );
+
         if ('eael-post-grid' === $this->get_name() || 'eael-post-carousel' === $this->get_name()) {
             $this->add_control(
                 'eael_title_length',
