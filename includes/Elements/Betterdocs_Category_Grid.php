@@ -92,7 +92,43 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->end_controls_section();
         } else {
 
-            $this->eael_betterdocs_content_controls();
+            /**
+             * Query  Controls!
+             * @source includes/elementor-helper.php
+             */
+            $this->eael_betterdocs_query_controls();
+
+            /**
+             * Section 'Layout Options'
+             */
+            $this->start_controls_section(
+                'select_layout',
+                [
+                    'label' => __('Layout Options', 'essential-addons-for-elementor-lite'),
+                ]
+            );
+
+            $this->add_control(
+                'layout_template',
+                [
+                    'label' => __('Select Layout', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT2,
+                    'options' => [
+                        'default'   => __( 'Default', 'essential-addons-for-elementor-lite' )
+                    ],
+                    'default'   => 'default',
+                    'label_block' => true
+                ]
+            );
+
+            $this->end_controls_section(); #end of section 'Layout Options'
+
+
+            /**
+             * Optional Controls!
+             * @source includes/elementor-helper.php
+             */
+            $this->eael_better_docs_content_area_controls();
 
             /**
              * ----------------------------------------------------------
@@ -103,6 +139,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 'section_column_settings',
                 [
                     'label' => __('Column', 'essential-addons-for-elementor-lite'),
+                    'tab' => Controls_Manager::TAB_STYLE
                 ]
             );
 
@@ -263,6 +300,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 'section_article_settings',
                 [
                     'label' => __('Article', 'essential-addons-for-elementor-lite'),
+                    'tab' => Controls_Manager::TAB_STYLE
                 ]
             );
 
@@ -379,6 +417,7 @@ class Betterdocs_Category_Grid extends Widget_Base
                 'section_button_settings',
                 [
                     'label' => __('Button', 'essential-addons-for-elementor-lite'),
+                    'tab' => Controls_Manager::TAB_STYLE
                 ]
             );
 
@@ -498,36 +537,8 @@ class Betterdocs_Category_Grid extends Widget_Base
 
         if( ! defined('BETTERDOCS_URL') ) return;
         $settings = $this->get_settings_for_display();
-        $shortcode  = sprintf('[betterdocs_category_grid]', apply_filters('eael_betterdocs_category_grid_params', []));
-        echo do_shortcode( shortcode_unautop( $shortcode ) );
-        $this->load_js_on_editor();
-    }
 
-    protected function load_js_on_editor()
-    {
-        if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
-        ?>
-        	<script>
-                jQuery(document).ready(function($) {
-                    var $scope = $(".elementor-element-"+"<?php echo $this->get_id(); ?>"),
-                        masonryGrid = $(".betterdocs-categories-wrap.layout-masonry", $scope);
-                    if (masonryGrid.length) {
-                        var columnPerGrid = masonryGrid.attr('data-column'),
-                            masonryItem = $(".betterdocs-categories-wrap.layout-masonry .docs-single-cat-wrap"),
-                            doc_page_column_space = '<?php echo get_theme_mod('betterdocs_doc_page_column_space'); ?>',
-                            total_margin = columnPerGrid * doc_page_column_space;
 
-                        masonryItem.css("width", "calc((100% - "+total_margin+"px) / "+parseInt(columnPerGrid)+")");
-                        masonryGrid.masonry({
-                            itemSelector: ".docs-single-cat-wrap",
-                            percentPosition: true,
-                            gutter: doc_page_column_space
-                        });
-                    }
-                });
-            </script>
-            <?php
-        }
     }
 
 }
