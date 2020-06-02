@@ -281,7 +281,7 @@ class Post_Grid extends Widget_Base {
         $this->start_controls_section(
             'eael_section_post_grid_thumbnail_style',
             [
-                'label' => __( 'Thumbail Style', 'essential-addons-for-elementor-lite' ),
+                'label' => __( 'Thumbnail Style', 'essential-addons-for-elementor-lite' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
