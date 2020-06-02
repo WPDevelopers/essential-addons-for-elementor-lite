@@ -21,10 +21,10 @@ trait Helper
      * Get all types of post.
      * @return array
      */
-    public function eael_get_all_types_post()
+    public function eael_get_all_types_post($post_type = 'any')
     {
         $posts = get_posts([
-            'post_type' => 'any',
+            'post_type' => $post_type,
             'post_style' => 'all_types',
             'post_status' => 'publish',
             'posts_per_page' => '-1',
@@ -196,7 +196,154 @@ trait Helper
         $this->end_controls_section();
     }
 
-    protected function eael_betterdocs_content_controls()
+
+    /**
+     * Query Controls
+     *
+     */
+    protected function eael_betterdocs_query_controls()
+    {
+        $this->start_controls_section(
+            'eael_section_post__filters',
+            [
+                'label' => __('Query', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'fetch_docs',
+            [
+                'label' => __('Fetch Docs', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => [
+                    'regular'   => __( 'Regular', 'essential-addons-for-elementor-lite' ),
+                    'by_id'     => __( 'Manual Selection', 'essential-addons-for-elementor-lite' )
+                ],
+                'default'   => 'regular',
+                'label_block' => true
+            ]
+        );
+
+        $this->add_control(
+            'posts_ids',
+            [
+                'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_get_all_types_post('docs'),
+                'label_block' => true,
+                'multiple' => true,
+                'condition' => [
+                    'fetch_docs' => 'by_id',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'authors', [
+                'label' => __('Author', 'essential-addons-for-elementor-lite'),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+                'multiple' => true,
+                'default' => [],
+                'options' => $this->eael_get_authors(),
+                'condition' => [
+                    'fetch_docs!' => 'by_id'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'doc_categories',
+            [
+                'label' => __( 'Categories', 'essential-addons-for-elementor-lite' ),
+                'label_block'   => true,
+                'type'  => Controls_Manager::SELECT2,
+                'options'   => $this->eael_post_type_categories('slug', 'doc_category'),
+                'multiple'  => true,
+                'default'   => [],
+                'condition' => [
+                    'fetch_docs!' => 'by_id'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'doc_tag',
+            [
+                'label' => __( 'Tags', 'essential-addons-for-elementor-lite' ),
+                'label_block'   => true,
+                'type'  => Controls_Manager::SELECT2,
+                'options'   => $this->eael_post_type_categories('slug', 'doc_tag'),
+                'multiple'  => true,
+                'default'   => [],
+                'condition' => [
+                    'fetch_docs!' => 'by_id'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'post__not_in',
+            [
+                'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => $this->eael_get_all_types_post('docs'),
+                'label_block' => true,
+                'post_type' => '',
+                'multiple' => true,
+                'condition' => [
+                    'fetch_docs!' => 'by_id'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'posts_per_page',
+            [
+                'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => '8',
+            ]
+        );
+
+        $this->add_control(
+            'offset',
+            [
+                'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => '0',
+            ]
+        );
+
+        $this->add_control(
+            'orderby',
+            [
+                'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => $this->eael_get_post_orderby_options(),
+                'default' => 'date',
+
+            ]
+        );
+
+        $this->add_control(
+            'order',
+            [
+                'label' => __('Order', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'asc' => 'Ascending',
+                    'desc' => 'Descending',
+                ],
+                'default' => 'desc',
+
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    protected function eael_better_docs_content_area_controls()
     {
         /**
          * ----------------------------------------------------------
@@ -207,6 +354,7 @@ trait Helper
             'section_content_area',
             [
                 'label' => __('Content Area', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE
             ]
         );
 
@@ -1443,10 +1591,10 @@ trait Helper
      *
      * @return array
      */
-    public function eael_post_type_categories($type = 'term_id')
+    public function eael_post_type_categories($type = 'term_id', $term_key = 'category')
     {
         $terms = get_terms(array(
-            'taxonomy' => 'category',
+            'taxonomy' => $term_key,
             'hide_empty' => true,
         ));
 

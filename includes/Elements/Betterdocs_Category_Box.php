@@ -92,7 +92,7 @@ class Betterdocs_Category_Box extends Widget_Base
             $this->end_controls_section();
         } else {
 
-            $this->eael_betterdocs_content_controls();
+            $this->eael_better_docs_content_area_controls();
 
             /**
              * ----------------------------------------------------------
