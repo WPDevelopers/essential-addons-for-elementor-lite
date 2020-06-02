@@ -3,7 +3,8 @@
     /**
      * Eael Tabs
      */
-    $('.eael-tabs li a').on('click', function(e) {
+    // instead of adding a listener to all a tag of tab, lets add one listener to the parent.
+    $(document).on('click', '.eael-tabs li a', function(e) {
         e.preventDefault();
         $('.eael-tabs li a').removeClass('active');
         $(this).addClass('active');
@@ -14,7 +15,7 @@
             .addClass('active');
     });
 
-    $('.eael-get-pro').on('click', function() {
+    $(document).on('click', '.eael-get-pro', function() {
         Swal.fire({
             type: 'warning',
             title: '<h2><span>Go</span> Premium',
@@ -28,7 +29,8 @@
     // Save Button reacting on any changes
     var saveButton = $('.js-eael-settings-save');
 
-    $('.eael-checkbox input:enabled').on('click', function(e) {
+    // instead of adding a listener to all check box input, lets add one listener to the parent.
+    $(document).on('click', '.eael-checkbox input:enabled', function(e) {
         saveButton
             .addClass('save-now')
             .removeAttr('disabled')
@@ -36,7 +38,7 @@
     });
 
     // Saving Data With Ajax Request
-    $('.js-eael-settings-save').on('click', function(event) {
+    $(document).on('click', '.js-eael-settings-save', function(event) {
         event.preventDefault();
 
         var _this = $(this);
@@ -84,7 +86,7 @@
     });
 
     // Regenerate Assets
-    $('#eael-regenerate-files').on('click', function(e) {
+    $(document).on('click', '#eael-regenerate-files', function(e) {
         e.preventDefault();
         var _this = $(this);
 
