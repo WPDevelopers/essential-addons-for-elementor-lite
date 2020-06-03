@@ -537,8 +537,9 @@ class Betterdocs_Category_Grid extends Widget_Base
 
         if( ! defined('BETTERDOCS_URL') ) return;
         $settings = $this->get_settings_for_display();
+        $args = $this->eael_get_query_args($settings, 'docs');
 
-
+        
     }
 
 }
