@@ -125,6 +125,41 @@ class Betterdocs_Category_Grid extends Widget_Base
             );
 
             $this->add_control(
+                'layout_mode',
+                [
+                    'label' => __('Layout Mode', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT2,
+                    'options' => [
+                        'grid'   => __( 'Grid', 'essential-addons-for-elementor-lite' ),
+                        'masonry'   => __( 'Masonry', 'essential-addons-for-elementor-lite' )
+                    ],
+                    'default'   => 'grid',
+                    'label_block' => true
+                ]
+            );
+
+            $this->add_responsive_control(
+                'columns',
+                [
+                    'label' => __('Columns', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => '3',
+                    'tablet_default' => '2',
+                    'mobile_default' => '1',
+                    'options' => [
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4',
+                        '5' => '5',
+                        '6' => '6',
+                    ],
+                    'prefix_class' => 'elementor-grid%s-',
+                    'frontend_available' => true,
+                ]
+            );
+
+            $this->add_control(
                 'show_icon',
                 [
                     'label' => __( 'Show Icon', 'essential-addons-for-elementor-lite' ),
@@ -651,11 +686,12 @@ class Betterdocs_Category_Grid extends Widget_Base
             'show_title'    => $settings['show_title'],
             'title_tag'    => $settings['title_tag'],
             'show_button'    => $settings['show_button'],
-            'button_text'    => $settings['button_text']
+            'button_text'    => $settings['button_text'],
+            'layout_mode'   => $settings['layout_mode']
         ];
 
         $html = '<div '.$this->get_render_attribute_string('bd_category_grid_wrapper').'>';
-            $html .= '<div class="eael-better-docs-category-grid eael-post-appender eael-post-appender-' . $this->get_id() . '">';
+            $html .= '<div class="eael-better-docs-category-grid" data-layout-mode="'.$settings['layout_mode'].'" data-id="'.$this->get_id().'">';
                 $html .= self::render_template_($settings);
             $html .= '</div>';
             $html .= '<div class="clearfix"></div>';
