@@ -226,7 +226,7 @@ class Post_Grid extends Widget_Base {
                 'raw'             => __( 'Make sure to enable <strong>Show Date</strong> option from <strong>Layout Settings</strong>', 'essential-addons-for-elementor-lite' ),
                 'content_classes' => 'eael-warning',
                 'condition'       => [
-                    'eael_post_grid_preset_style' => 'three',
+                    'eael_post_grid_preset_style' => ['two', 'three'],
                     'eael_show_date'              => '',
                 ],
             ]
@@ -321,6 +321,7 @@ class Post_Grid extends Widget_Base {
                 'label'     => __( 'Meta Date Style', 'essential-addons-for-elementor-lite' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
+                    'eael_show_meta'              => 'yes',
                     'eael_post_grid_preset_style' => ['three'],
                 ],
             ]
@@ -337,7 +338,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_meta_date_color',
             [
-                'label'     => __( 'Meta Date Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -349,7 +350,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_post_grid_meta_date_typography',
-                'label'    => __( 'Meta Date Typography', 'essential-addons-for-elementor-lite' ),
+                'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
                 'selector' => '{{WRAPPER}} .eael-meta-posted-on',
             ]
@@ -387,6 +388,7 @@ class Post_Grid extends Widget_Base {
             __( 'Meta Date Position', 'essential-addons-for-elementor-lite' ),
             '.eael-meta-posted-on',
             [
+                'eael_show_meta'              => 'yes',
                 'eael_post_grid_preset_style' => ['three'],
             ]
         );
@@ -401,13 +403,14 @@ class Post_Grid extends Widget_Base {
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_post_grid_preset_style!' => 'three',
+                    'eael_show_meta'               => 'yes',
                 ],
             ]
         );
         $this->add_control(
             'eael_post_grid_meta_color',
             [
-                'label'     => __( 'Meta Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -419,7 +422,7 @@ class Post_Grid extends Widget_Base {
         $this->add_responsive_control(
             'eael_post_grid_meta_alignment',
             [
-                'label'     => __( 'Meta Alignment', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'flex-start' => [
@@ -446,7 +449,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_post_grid_meta_typography',
-                'label'     => __( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'    => Scheme_Typography::TYPOGRAPHY_3,
                 'selector'  => '{{WRAPPER}} .eael-entry-meta > span',
                 'condition' => [
@@ -458,7 +461,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_post_grid_meta_header_typography',
-                'label'     => __( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'    => Scheme_Typography::TYPOGRAPHY_3,
                 'selector'  => '{{WRAPPER}} .eael-entry-meta > span',
                 'condition' => [
@@ -506,6 +509,7 @@ class Post_Grid extends Widget_Base {
             __( 'Meta Position', 'essential-addons-for-elementor-lite' ),
             '.eael-grid-post .eael-entry-footer',
             [
+                'eael_show_meta'               => 'yes',
                 'meta_position'                => ['meta-entry-footer'],
                 'eael_post_grid_preset_style!' => 'three',
             ]
@@ -516,6 +520,7 @@ class Post_Grid extends Widget_Base {
             __( 'Meta Position', 'essential-addons-for-elementor-lite' ),
             '.eael-grid-post .eael-entry-meta',
             [
+                'eael_show_meta'               => 'yes',
                 'meta_position'                => ['meta-entry-header'],
                 'eael_post_grid_preset_style!' => 'three',
             ]
@@ -702,31 +707,38 @@ class Post_Grid extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'eael_post_grid_meta_style',
+        $this->end_controls_section();
+
+        /**
+         * Style tab: terms style
+         */
+        $this->start_controls_section(
+            'section_meta_terms_style',
             [
-                'label'     => __( 'Meta Style', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label'     => __( 'Terms Style', 'essential-addons-for-elementor-lite' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_post_grid_preset_style' => 'two',
+                    'eael_show_post_terms'        => 'yes',
+                ],
             ]
         );
-
         $this->add_control(
-            'eael_post_grid_meta_color',
+            'eael_post_grid_terms_color',
             [
-                'label'     => __( 'Meta Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Terms Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-entry-meta, .eael-entry-meta a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .post-meta-categories li, {{WRAPPER}} .post-meta-categories li a' => 'color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->add_responsive_control(
-            'eael_post_grid_meta_alignment',
+            'eael_post_grid_terms_alignment',
             [
-                'label'     => __( 'Meta Alignment', 'essential-addons-for-elementor-lite' ),
+                'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'flex-start' => [
@@ -741,51 +753,10 @@ class Post_Grid extends Widget_Base {
                         'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-right',
                     ],
-                    'stretch'    => [
-                        'title' => __( 'Justified', 'essential-addons-for-elementor-lite' ),
-                        'icon'  => 'fa fa-align-justify',
-                    ],
                 ],
+                'default'   => 'flex-start',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-entry-footer' => 'justify-content: {{VALUE}};',
-                    '{{WRAPPER}} .eael-entry-meta'   => 'justify-content: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'     => 'eael_post_grid_meta_typography',
-                'label'    => __( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
-                'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
-                'selector' => '{{WRAPPER}} .eael-entry-meta > div, {{WRAPPER}} .eael-entry-meta > span',
-            ]
-        );
-
-        $this->end_controls_section();
-
-        /**
-         * Style tab: terms style
-         */
-        $this->start_controls_section(
-            'section_meta_terms_style',
-            [
-                'label'     => __( 'Terms Style', 'essential-addons-for-elementor-lite' ),
-                'tab'       => Controls_Manager::TAB_STYLE,
-                'condition' => [
-                    'eael_post_grid_preset_style' => 'two',
-                ],
-            ]
-        );
-        $this->add_control(
-            'eael_post_grid_terms_color',
-            [
-                'label'     => __( 'Terms Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '',
-                'selectors' => [
-                    '{{WRAPPER}} .post-meta-categories li, {{WRAPPER}} .post-meta-categories li a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-grid-post .post-meta-categories' => 'justify-content: {{VALUE}}',
                 ],
             ]
         );
