@@ -253,7 +253,7 @@ trait Helper
         );
 
         $this->add_control(
-            'doc_categories',
+            'doc_category',
             [
                 'label' => __( 'Categories', 'essential-addons-for-elementor-lite' ),
                 'label_block'   => true,
@@ -1477,10 +1477,10 @@ trait Helper
         return $settings;
     }
 
-    public function eael_get_query_args($settings = [])
+    public function eael_get_query_args($settings = [], $requested_post_type = 'post')
     {
         $settings = wp_parse_args($settings, [
-            'post_type' => 'post',
+            'post_type' => $requested_post_type,
             'posts_ids' => [],
             'orderby' => 'date',
             'order' => 'desc',
@@ -1506,10 +1506,15 @@ trait Helper
 
             if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
-                $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
+
+                if($args['post_type'] === 'docs') {
+                    $taxonomies = get_object_taxonomies('docs', 'objects');
+                }else {
+                    $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
+                }
 
                 foreach ($taxonomies as $object) {
-                    $setting_key = $object->name . '_ids';
+                    $setting_key = $args['post_type'] === 'docs' ? $object->name : $object->name . '_ids';
 
                     if (!empty($settings[$setting_key])) {
                         $args['tax_query'][] = [
