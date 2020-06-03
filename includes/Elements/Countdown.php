@@ -1167,6 +1167,7 @@ class Countdown extends Widget_Base {
             //do nothing
         }
         // separator
+        $separator = '';
         if ( $settings['eael_countdown_separator'] === 'eael-countdown-show-separator' ) {
             $separator = 'eael-countdown-show-separator eael-countdown-separator-' . $settings['eael_countdown_separator_style'];
         }
