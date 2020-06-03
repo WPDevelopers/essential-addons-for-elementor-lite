@@ -258,7 +258,7 @@ trait Helper
                 'label' => __( 'Categories', 'essential-addons-for-elementor-lite' ),
                 'label_block'   => true,
                 'type'  => Controls_Manager::SELECT2,
-                'options'   => $this->eael_post_type_categories('slug', 'doc_category'),
+                'options'   => $this->eael_post_type_categories('term_id', 'doc_category'),
                 'multiple'  => true,
                 'default'   => [],
                 'condition' => [
@@ -273,7 +273,7 @@ trait Helper
                 'label' => __( 'Tags', 'essential-addons-for-elementor-lite' ),
                 'label_block'   => true,
                 'type'  => Controls_Manager::SELECT2,
-                'options'   => $this->eael_post_type_categories('slug', 'doc_tag'),
+                'options'   => $this->eael_post_type_categories('term_id', 'doc_tag'),
                 'multiple'  => true,
                 'default'   => [],
                 'condition' => [
