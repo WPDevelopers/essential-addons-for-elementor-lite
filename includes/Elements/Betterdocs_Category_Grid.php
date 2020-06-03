@@ -100,7 +100,9 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->eael_betterdocs_query_controls();
 
             /**
-             * Section 'Layout Options'
+             * ----------------------------------------------------------
+             * Section: Layout Options
+             * ----------------------------------------------------------
              */
             $this->start_controls_section(
                 'select_layout',
@@ -123,18 +125,6 @@ class Betterdocs_Category_Grid extends Widget_Base
             );
 
             $this->add_control(
-                'nested_subcategory',
-                [
-                    'label' => __( 'Enable Nested Subcategory', 'essential-addons-for-elementor-lite' ),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                    'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
-                    'return_value' => 'true',
-                    'default' => ''
-                ]
-            );
-
-            $this->add_control(
                 'show_icon',
                 [
                     'label' => __( 'Show Icon', 'essential-addons-for-elementor-lite' ),
@@ -143,6 +133,65 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'true',
                     'default' => 'true'
+                ]
+            );
+
+            $this->add_control(
+                'show_title',
+                [
+                    'label' => __( 'Show Title', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'true',
+                    'default' => 'true'
+                ]
+            );
+
+            $this->add_control(
+                'title_tag',
+                [
+                    'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'h2',
+                    'options' => [
+                        'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+                        'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+                        'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+                        'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+                        'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+                        'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+                        'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                        'p' => __('P', 'essential-addons-for-elementor-lite'),
+                        'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                    ],
+                    'condition' => [
+                        'show_title'    => 'true'
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'show_button',
+                [
+                    'label' => __( 'Show Button', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'true',
+                    'default' => 'true'
+                ]
+            );
+
+            $this->add_control(
+                'button_text',
+                [
+                    'label' => __( 'Button Text', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => __( 'Explore More', 'essential-addons-for-elementor-lite' ),
+                    'condition' => [
+                        'show_button'   => 'true'
+                    ]
                 ]
             );
 
@@ -586,9 +635,28 @@ class Betterdocs_Category_Grid extends Widget_Base
             ]
         );
 
+        $settings = [
+            'include'   => $settings['include'],
+            'exclude'   => $settings['exclude'],
+            'grid_per_page' => $settings['grid_per_page'],
+            'offset'    => $settings['offset'],
+            'orderby'   => $settings['orderby'],
+            'order'     => $settings['order'],
+            'post_per_page' => $settings['post_per_page'],
+            'post_orderby'  => $settings['post_orderby'],
+            'post_order'    => $settings['post_order'],
+            'nested_subcategory'    => $settings['nested_subcategory'],
+            'show_icon'    => $settings['show_icon'],
+            'show_count'    => $settings['show_count'],
+            'show_title'    => $settings['show_title'],
+            'title_tag'    => $settings['title_tag'],
+            'show_button'    => $settings['show_button'],
+            'button_text'    => $settings['button_text']
+        ];
+
         $html = '<div '.$this->get_render_attribute_string('bd_category_grid_wrapper').'>';
             $html .= '<div class="eael-better-docs-category-grid eael-post-appender eael-post-appender-' . $this->get_id() . '">';
-                $html .= self::render_template_($args, []);
+                $html .= self::render_template_($settings);
             $html .= '</div>';
             $html .= '<div class="clearfix"></div>';
         $html .= '</div>';
