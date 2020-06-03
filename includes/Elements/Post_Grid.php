@@ -30,7 +30,7 @@ class Post_Grid extends Widget_Base {
     }
 
     public function get_categories() {
-        return ['essential-addons-elementor'];
+        return ['essential-addons-for-elementor-lite'];
     }
 
     public function get_keywords() {
@@ -209,12 +209,25 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_preset_style',
             [
-                'label'   => __( 'Select Style', 'essential-addons-elementor' ),
+                'label'   => __( 'Select Style', 'essential-addons-for-elementor-lite' ),
                 'type'    => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    ''      => __( 'Default', 'essential-addons-elementor' ),
-                    'two'   => __( 'Style Two', 'essential-addons-elementor' ),
-                    'three' => __( 'Style Three', 'essential-addons-elementor' ),
+                    ''      => __( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'two'   => __( 'Style Two', 'essential-addons-for-elementor-lite' ),
+                    'three' => __( 'Style Three', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_style_three_alert',
+            [
+                'type'            => \Elementor\Controls_Manager::RAW_HTML,
+                'raw'             => __( 'Make sure to enable <strong>Show Date</strong> option from <strong>Layout Settings</strong>', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'eael_post_grid_preset_style' => 'three',
+                    'eael_show_date'              => '',
                 ],
             ]
         );
@@ -305,7 +318,7 @@ class Post_Grid extends Widget_Base {
         $this->start_controls_section(
             'section_meta_date_style',
             [
-                'label'     => __( 'Meta Date Style', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Date Style', 'essential-addons-for-elementor-lite' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_post_grid_preset_style' => ['three'],
@@ -316,7 +329,7 @@ class Post_Grid extends Widget_Base {
             \Elementor\Group_Control_Background::get_type(),
             [
                 'name'     => 'eael_post_grid_meta_date_background',
-                'label'    => __( 'Background', 'essential-addons-elementor' ),
+                'label'    => __( 'Background', 'essential-addons-for-elementor-lite' ),
                 'types'    => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .eael-meta-posted-on',
             ]
@@ -324,7 +337,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_meta_date_color',
             [
-                'label'     => __( 'Meta Date Color', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Date Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -336,7 +349,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_post_grid_meta_date_typography',
-                'label'    => __( 'Meta Date Typography', 'essential-addons-elementor' ),
+                'label'    => __( 'Meta Date Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
                 'selector' => '{{WRAPPER}} .eael-meta-posted-on',
             ]
@@ -345,7 +358,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_meta_date_margin',
             [
-                'label'      => __( 'Margin', 'essential-addons-elementor' ),
+                'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
@@ -357,7 +370,7 @@ class Post_Grid extends Widget_Base {
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
                 'name'      => 'eael_post_grid_meta_date_shadow',
-                'label'     => __( 'Shadow', 'essential-addons-elementor' ),
+                'label'     => __( 'Shadow', 'essential-addons-for-elementor-lite' ),
                 'selector'  => '{{WRAPPER}} .eael-meta-posted-on',
                 'condition' => [
                     'eael_post_grid_preset_style' => ['three'],
@@ -371,7 +384,7 @@ class Post_Grid extends Widget_Base {
          */
         $this->eael_controls_custom_positioning(
             'eael_meta_date_position_',
-            __( 'Meta Date Position', 'essential-addons-elementor' ),
+            __( 'Meta Date Position', 'essential-addons-for-elementor-lite' ),
             '.eael-meta-posted-on',
             [
                 'eael_post_grid_preset_style' => ['three'],
@@ -384,7 +397,7 @@ class Post_Grid extends Widget_Base {
         $this->start_controls_section(
             'section_meta_style_style',
             [
-                'label'     => __( 'Meta Style', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Style', 'essential-addons-for-elementor-lite' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_post_grid_preset_style!' => 'three',
@@ -394,7 +407,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_meta_color',
             [
-                'label'     => __( 'Meta Color', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -406,19 +419,19 @@ class Post_Grid extends Widget_Base {
         $this->add_responsive_control(
             'eael_post_grid_meta_alignment',
             [
-                'label'     => __( 'Meta Alignment', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'flex-start' => [
-                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-left',
                     ],
                     'center'     => [
-                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-center',
                     ],
                     'flex-end'   => [
-                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-right',
                     ],
                 ],
@@ -433,7 +446,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_post_grid_meta_typography',
-                'label'     => __( 'Meta Typography', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'    => Scheme_Typography::TYPOGRAPHY_3,
                 'selector'  => '{{WRAPPER}} .eael-entry-meta > span',
                 'condition' => [
@@ -445,7 +458,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_post_grid_meta_header_typography',
-                'label'     => __( 'Meta Typography', 'essential-addons-elementor' ),
+                'label'     => __( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'    => Scheme_Typography::TYPOGRAPHY_3,
                 'selector'  => '{{WRAPPER}} .eael-entry-meta > span',
                 'condition' => [
@@ -457,7 +470,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_meta_margin',
             [
-                'label'      => __( 'Margin', 'essential-addons-elementor' ),
+                'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
@@ -472,7 +485,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_meta_footer_margin',
             [
-                'label'      => __( 'Margin', 'essential-addons-elementor' ),
+                'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
@@ -490,7 +503,7 @@ class Post_Grid extends Widget_Base {
          */
         $this->eael_controls_custom_positioning(
             'eael_meta_footer_',
-            __( 'Meta Position', 'essential-addons-elementor' ),
+            __( 'Meta Position', 'essential-addons-for-elementor-lite' ),
             '.eael-grid-post .eael-entry-footer',
             [
                 'meta_position'                => ['meta-entry-footer'],
@@ -500,7 +513,7 @@ class Post_Grid extends Widget_Base {
 
         $this->eael_controls_custom_positioning(
             'eael_meta_header_',
-            __( 'Meta Position', 'essential-addons-elementor' ),
+            __( 'Meta Position', 'essential-addons-for-elementor-lite' ),
             '.eael-grid-post .eael-entry-meta',
             [
                 'meta_position'                => ['meta-entry-header'],
@@ -758,7 +771,7 @@ class Post_Grid extends Widget_Base {
         $this->start_controls_section(
             'section_meta_terms_style',
             [
-                'label'     => __( 'Terms Style', 'essential-addons-elementor' ),
+                'label'     => __( 'Terms Style', 'essential-addons-for-elementor-lite' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_post_grid_preset_style' => 'two',
@@ -768,7 +781,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_grid_terms_color',
             [
-                'label'     => __( 'Terms Color', 'essential-addons-elementor' ),
+                'label'     => __( 'Terms Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -781,7 +794,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_post_grid_terms_typography',
-                'label'    => __( 'Meta Typography', 'essential-addons-elementor' ),
+                'label'    => __( 'Meta Typography', 'essential-addons-for-elementor-lite' ),
                 'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
                 'selector' => '{{WRAPPER}} .post-meta-categories li, {{WRAPPER}} .post-meta-categories li a',
             ]
@@ -790,7 +803,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'eael_post_carousel_terms_margin',
             [
-                'label'      => __( 'Margin', 'essential-addons-elementor' ),
+                'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
@@ -804,7 +817,7 @@ class Post_Grid extends Widget_Base {
         $this->start_controls_section(
             'section_terms_style',
             [
-                'label'     => __( 'Terms', 'essential-addons-elementor' ),
+                'label'     => __( 'Terms', 'essential-addons-for-elementor-lite' ),
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_post_terms'        => 'yes',
@@ -816,7 +829,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'terms_color',
             [
-                'label'     => __( 'Color', 'essential-addons-elementor' ),
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -829,7 +842,7 @@ class Post_Grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'terms_typography',
-                'label'    => __( 'Typography', 'essential-addons-elementor' ),
+                'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
                 'selector' => '{{WRAPPER}} .post-carousel-categories li a',
             ]
         );
@@ -837,19 +850,19 @@ class Post_Grid extends Widget_Base {
         $this->add_responsive_control(
             'terms_color_alignment',
             [
-                'label'     => __( 'Alignment', 'essential-addons-elementor' ),
+                'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
-                        'title' => __( 'Left', 'essential-addons-elementor' ),
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-left',
                     ],
                     'center' => [
-                        'title' => __( 'Center', 'essential-addons-elementor' ),
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-center',
                     ],
                     'right'  => [
-                        'title' => __( 'Right', 'essential-addons-elementor' ),
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'fa fa-align-right',
                     ],
                 ],
@@ -862,7 +875,7 @@ class Post_Grid extends Widget_Base {
         $this->add_control(
             'terms_spacing',
             [
-                'label'      => __( 'Spacing', 'essential-addons-elementor' ),
+                'label'      => __( 'Spacing', 'essential-addons-for-elementor-lite' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
