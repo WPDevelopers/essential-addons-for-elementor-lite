@@ -142,7 +142,7 @@ trait Post_Grid {
                                 <img src="' . esc_url( wp_get_attachment_image_url( get_post_thumbnail_id(), $settings['image_size'] ) ) . '" alt="' . esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . '">
                             </div>';
             echo '</div>';
-            if ( $style === 'three' ) {
+            if ( $style === 'three' && $settings['eael_show_date'] === 'yes' ) {
                 echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date( 'd' ) . '</span>' . get_the_date( 'F' ) . '</time></span>';
             }
         }
