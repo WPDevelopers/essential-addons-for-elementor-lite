@@ -804,6 +804,9 @@ $config = [
         'eael-promotion'        => [
             'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
         ],
+        'eael-custom-js'        => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Custom_JS',
+        ],
         'eael-reading-progress' => [
             'class'      => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [

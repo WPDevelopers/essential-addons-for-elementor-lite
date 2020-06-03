@@ -103,12 +103,12 @@ trait Core
 
         if ($this->is_plugin_installed($elementor)) {
             $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $elementor . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $elementor);
-            $message = __('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite');
-            $button_text = __('Activate Elementor', 'essential-addons-for-elementor-lite');
+            $message        = __('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be active. Please activate Elementor to continue.', 'essential-addons-for-elementor-lite');
+            $button_text    = __('Activate Elementor', 'essential-addons-for-elementor-lite');
         } else {
             $activation_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=elementor'), 'install-plugin_elementor');
-            $message = sprintf(__('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>');
-            $button_text = __('Install Elementor', 'essential-addons-for-elementor-lite');
+            $message        = sprintf(__('<strong>Essential Addons for Elementor</strong> requires <strong>Elementor</strong> plugin to be installed and activated. Please install Elementor to continue.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>');
+            $button_text    = __('Install Elementor', 'essential-addons-for-elementor-lite');
         }
 
         $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
@@ -141,7 +141,7 @@ trait Core
     public function set_default_values()
     {
         $defaults = array_fill_keys(array_keys(array_merge($GLOBALS['eael_config']['elements'], $GLOBALS['eael_config']['extensions'])), 1);
-        $values = get_option('eael_save_settings');
+        $values   = get_option('eael_save_settings');
 
         return update_option('eael_save_settings', wp_parse_args($values, $defaults));
     }
@@ -153,21 +153,21 @@ trait Core
      */
     public function save_global_values($post_id, $editor_data)
     {
-        $page_settings_manager = \Elementor\Core\Settings\Manager::get_settings_managers('page');
-        $page_settings_model = $page_settings_manager->get_model($post_id);
+        $page_settings_manager            = \Elementor\Core\Settings\Manager::get_settings_managers('page');
+        $page_settings_model              = $page_settings_manager->get_model($post_id);
         $eael_ext_reading_progress_global = $page_settings_model->get_settings('eael_ext_reading_progress_global');
-        $global_settings = get_option('eael_global_settings');
+        $global_settings                  = get_option('eael_global_settings');
 
         if ($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes') {
             $global_settings['reading_progress'] = [
-                'post_id' => $post_id,
-                'enabled' => ($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes' ? true : false),
+                'post_id'           => $post_id,
+                'enabled'           => ($page_settings_model->get_settings('eael_ext_reading_progress_global') == 'yes' ? true : false),
                 'display_condition' => $page_settings_model->get_settings('eael_ext_reading_progress_global_display_condition'),
-                'position' => $page_settings_model->get_settings('eael_ext_reading_progress_position'),
-                'height' => $page_settings_model->get_settings('eael_ext_reading_progress_height'),
-                'bg_color' => $page_settings_model->get_settings('eael_ext_reading_progress_bg_color'),
-                'fill_color' => $page_settings_model->get_settings('eael_ext_reading_progress_fill_color'),
-                'animation_speed' => $page_settings_model->get_settings('eael_ext_reading_progress_animation_speed'),
+                'position'          => $page_settings_model->get_settings('eael_ext_reading_progress_position'),
+                'height'            => $page_settings_model->get_settings('eael_ext_reading_progress_height'),
+                'bg_color'          => $page_settings_model->get_settings('eael_ext_reading_progress_bg_color'),
+                'fill_color'        => $page_settings_model->get_settings('eael_ext_reading_progress_fill_color'),
+                'animation_speed'   => $page_settings_model->get_settings('eael_ext_reading_progress_animation_speed'),
             ];
         } else {
             if (isset($global_settings['reading_progress']['post_id']) && $global_settings['reading_progress']['post_id'] == $post_id) {
@@ -228,7 +228,6 @@ trait Core
                 'eael_ext_table_of_content_close_button_border_radius' => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_border_radius'),
                 'eael_ext_table_of_content_close_button_box_shadow'    => $page_settings_model->get_settings('eael_ext_table_of_content_close_button_box_shadow_box_shadow'),
 
-
                 //toc body setting
                 'eael_ext_table_of_content_body_bg'                    => $page_settings_model->get_settings('eael_ext_table_of_content_body_bg'),
                 'eael_ext_toc_body_padding'                            => $page_settings_model->get_settings('eael_ext_toc_body_padding'),
@@ -249,10 +248,10 @@ trait Core
                 'eael_ext_toc_indicator_position'                      => $page_settings_model->get_settings('eael_ext_toc_indicator_position'),
             ];
             foreach ($typography_fields as $typography_field) {
-                $header_fields_attr = 'eael_ext_table_of_content_header_typography_' . $typography_field;
-                $list_fields_attr = 'eael_ext_table_of_content_list_typography_normal_' . $typography_field;
+                $header_fields_attr                                                = 'eael_ext_table_of_content_header_typography_' . $typography_field;
+                $list_fields_attr                                                  = 'eael_ext_table_of_content_list_typography_normal_' . $typography_field;
                 $global_settings['eael_ext_table_of_content'][$header_fields_attr] = $page_settings_model->get_settings($header_fields_attr);
-                $global_settings['eael_ext_table_of_content'][$list_fields_attr] = $page_settings_model->get_settings($list_fields_attr);
+                $global_settings['eael_ext_table_of_content'][$list_fields_attr]   = $page_settings_model->get_settings($list_fields_attr);
             }
         } else {
             if (isset($global_settings['eael_ext_table_of_content']['post_id']) && $global_settings['eael_ext_table_of_content']['post_id'] == $post_id) {
@@ -260,6 +259,12 @@ trait Core
             }
         }
 
+        // update options
         update_option('eael_global_settings', $global_settings);
+
+        // update page elements
+        if ($this->request_uid) {
+            set_transient('eael_transient_elements_' . $this->request_uid, [], MONTH_IN_SECONDS);
+        }
     }
 }

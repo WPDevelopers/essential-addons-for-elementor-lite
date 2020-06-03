@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use \Elementor\Core\Settings\Manager as Settings_Manager;
 use \Elementor\Plugin;
 use \ReflectionClass;
 
@@ -91,12 +92,18 @@ trait Generator
      */
     public function combine_files($paths = array(), $file = 'eael.min.css')
     {
-        $output = '';
+        $output                = '';
+        $page_settings_manager = Settings_Manager::get_settings_managers('page');
+        $page_settings_model   = $page_settings_manager->get_model(get_the_ID());
 
         if (!empty($paths)) {
             foreach ($paths as $path) {
                 $output .= file_get_contents($this->safe_path($path));
             }
+        }
+
+        if (pathinfo($file, PATHINFO_EXTENSION) === 'js' && $page_settings_model->get_settings('eael_custom_js_print_method') == 'external') {
+            $output .= $page_settings_model->get_settings('eael_custom_js');
         }
 
         return file_put_contents($this->safe_path(EAEL_ASSET_PATH . DIRECTORY_SEPARATOR . $file), $output);

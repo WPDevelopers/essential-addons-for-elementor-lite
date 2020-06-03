@@ -23,9 +23,6 @@ class Bootstrap
     // instance container
     private static $instance = null;
 
-    // dev mode
-    public $dev_mode;
-
     // request unique identifier
     protected $request_uid = null;
 
@@ -105,11 +102,6 @@ class Bootstrap
 
         // register hooks
         $this->register_hooks();
-    }
-
-    protected function dev_mode()
-    {
-        return $_SERVER["REMOTE_ADDR"] == "127.0.0.1";
     }
 
     protected function register_hooks()
