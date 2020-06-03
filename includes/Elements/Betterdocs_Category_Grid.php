@@ -18,6 +18,7 @@ class Betterdocs_Category_Grid extends Widget_Base
 {
 
     use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Template\BetterDocs\Category_Grid;
 
     public function get_name()
     {
@@ -539,7 +540,24 @@ class Betterdocs_Category_Grid extends Widget_Base
         $settings = $this->get_settings_for_display();
         $args = $this->eael_get_query_args($settings, 'docs');
 
-        
+        $this->add_render_attribute(
+            'bd_category_grid_wrapper',
+            [
+                'id' => 'eael-bd-cat-grid-' . esc_attr($this->get_id()),
+                'class' => [
+                    'eael-better-docs-category-grid-wrapper'
+                ]
+            ]
+        );
+
+        $html = '<div '.$this->get_render_attribute_string('bd_category_grid_wrapper').'>';
+            $html .= '<div class="eael-better-docs-category-grid eael-post-appender eael-post-appender-' . $this->get_id() . '">';
+                $html .= self::render_template_($args, []);
+            $html .= '</div>';
+            $html .= '<div class="clearfix"></div>';
+        $html .= '</div>';
+
+        echo $html;
     }
 
 }
