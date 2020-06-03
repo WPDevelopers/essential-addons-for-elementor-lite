@@ -211,98 +211,43 @@ trait Helper
         );
 
         $this->add_control(
-            'fetch_docs',
-            [
-                'label' => __('Fetch Docs', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => [
-                    'regular'   => __( 'Regular', 'essential-addons-for-elementor-lite' ),
-                    'by_id'     => __( 'Manual Selection', 'essential-addons-for-elementor-lite' )
-                ],
-                'default'   => 'regular',
-                'label_block' => true
-            ]
-        );
+			'grid_query_heading',
+			[
+				'label' => __( 'Category Grid', 'plugin-name' ),
+				'type' => Controls_Manager::HEADING
+			]
+		);
 
         $this->add_control(
-            'posts_ids',
+            'include',
             [
-                'label' => __('Search & Select', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => $this->eael_get_all_types_post('docs'),
-                'label_block' => true,
-                'multiple' => true,
-                'condition' => [
-                    'fetch_docs' => 'by_id',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'authors', [
-                'label' => __('Author', 'essential-addons-for-elementor-lite'),
-                'label_block' => true,
-                'type' => Controls_Manager::SELECT2,
-                'multiple' => true,
-                'default' => [],
-                'options' => $this->eael_get_authors(),
-                'condition' => [
-                    'fetch_docs!' => 'by_id'
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'doc_category',
-            [
-                'label' => __( 'Categories', 'essential-addons-for-elementor-lite' ),
+                'label' => __( 'Include', 'essential-addons-for-elementor-lite' ),
                 'label_block'   => true,
                 'type'  => Controls_Manager::SELECT2,
                 'options'   => $this->eael_post_type_categories('term_id', 'doc_category'),
                 'multiple'  => true,
-                'default'   => [],
-                'condition' => [
-                    'fetch_docs!' => 'by_id'
-                ]
+                'default'   => []
             ]
         );
 
         $this->add_control(
-            'doc_tag',
-            [
-                'label' => __( 'Tags', 'essential-addons-for-elementor-lite' ),
-                'label_block'   => true,
-                'type'  => Controls_Manager::SELECT2,
-                'options'   => $this->eael_post_type_categories('term_id', 'doc_tag'),
-                'multiple'  => true,
-                'default'   => [],
-                'condition' => [
-                    'fetch_docs!' => 'by_id'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'post__not_in',
+            'exclude',
             [
                 'label' => __('Exclude', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => $this->eael_get_all_types_post('docs'),
+                'options' => $this->eael_post_type_categories('term_id', 'doc_category'),
                 'label_block' => true,
                 'post_type' => '',
-                'multiple' => true,
-                'condition' => [
-                    'fetch_docs!' => 'by_id'
-                ],
+                'multiple' => true
             ]
         );
 
         $this->add_control(
-            'posts_per_page',
+            'grid_per_page',
             [
-                'label' => __('Posts Per Page', 'essential-addons-for-elementor-lite'),
+                'label' => __('Grid Per Page', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::NUMBER,
-                'default' => '8',
+                'default' => '8'
             ]
         );
 
@@ -320,9 +265,16 @@ trait Helper
             [
                 'label' => __('Order By', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_post_orderby_options(),
-                'default' => 'date',
-
+                'options' => [
+                    'name'          => __('Name', 'essential-addons-for-elementor-lite'),
+                    'slug'          => __( 'Slug', 'essential-addons-for-elementor-lite'),
+                    'term_group'    => __( 'Term Group', 'essential-addons-for-elementor-lite'),
+                    'term_id'       => __('Term ID', 'essential-addons-for-elementor-lite'),
+                    'id'            => __('ID', 'essential-addons-for-elementor-lite'),
+                    'description'   => __('Description', 'essential-addons-for-elementor-lite'),
+                    'parent'        => __('Parent', 'essential-addons-for-elementor-lite')
+                ],
+                'default' => 'name'
             ]
         );
 
@@ -337,6 +289,60 @@ trait Helper
                 ],
                 'default' => 'desc',
 
+            ]
+        );
+
+        $this->add_control(
+			'grid_posts_query_heading',
+			[
+				'label' => __( 'Grid Posts', 'plugin-name' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before'
+			]
+        );
+
+        $this->add_control(
+            'post_per_page',
+            [
+                'label' => __('Post Per Page', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => '6'
+            ]
+        );
+
+        
+        $this->add_control(
+            'post_orderby',
+            [
+                'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => $this->eael_get_post_orderby_options(),
+                'default'   => 'date'
+            ]
+        );
+
+        $this->add_control(
+            'post_order',
+            [
+                'label' => __('Order', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'asc' => 'Ascending',
+                    'desc' => 'Descending',
+                ],
+                'default' => 'desc',
+            ]
+        );
+
+        $this->add_control(
+            'nested_subcategory',
+            [
+                'label' => __( 'Enable Nested Subcategory', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'true',
+                'default' => ''
             ]
         );
 
@@ -1501,20 +1507,17 @@ trait Helper
         if ('by_id' === $settings['post_type']) {
             $args['post_type'] = 'any';
             $args['post__in'] = empty($settings['posts_ids']) ? [0] : $settings['posts_ids'];
-        } else {
+        }
+        else {
             $args['post_type'] = $settings['post_type'];
 
             if ($args['post_type'] !== 'page') {
                 $args['tax_query'] = [];
 
-                if($args['post_type'] === 'docs') {
-                    $taxonomies = get_object_taxonomies('docs', 'objects');
-                }else {
-                    $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
-                }
+                $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
 
                 foreach ($taxonomies as $object) {
-                    $setting_key = $args['post_type'] === 'docs' ? $object->name : $object->name . '_ids';
+                    $setting_key = $object->name . '_ids';
 
                     if (!empty($settings[$setting_key])) {
                         $args['tax_query'][] = [
