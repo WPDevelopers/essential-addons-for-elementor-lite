@@ -122,6 +122,42 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->add_control(
+                'nested_subcategory',
+                [
+                    'label' => __( 'Enable Nested Subcategory', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'true',
+                    'default' => ''
+                ]
+            );
+
+            $this->add_control(
+                'show_icon',
+                [
+                    'label' => __( 'Show Icon', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'true',
+                    'default' => 'true'
+                ]
+            );
+
+            $this->add_control(
+                'show_count',
+                [
+                    'label' => __( 'Show Counter', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'true',
+                    'default' => 'true'
+                ]
+            );
+
             $this->end_controls_section(); #end of section 'Layout Options'
 
 
