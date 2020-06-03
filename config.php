@@ -667,6 +667,32 @@ $config = [
         ],
         'betterdocs-category-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
+            'dependency'    => [
+                'css'   => [
+                    [
+                        'file'  => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/betterdocs-category-grid.min.css',
+                        'type'  => 'self',
+                        'context'   => 'view'
+                    ]
+                ],
+                'js'    => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/betterdocs-category-grid.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/betterdocs-category-grid.min.js',
+                        'type'    => 'self',
+                        'context' => 'edit',
+                    ],
+                ]
+            ]
         ],
         'betterdocs-category-box'  => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Box',
