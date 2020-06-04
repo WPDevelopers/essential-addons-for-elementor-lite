@@ -98,12 +98,13 @@
 .eael-grid-post .eael-entry-footer {
   padding: 15px;
 }
-.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on {
-  padding-left: 5px;
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on {
+  padding-left: 15px;
 }
-.eael-post-grid .eael-entry-header .eael-entry-meta span.eael-posted-on::before {
+.eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before {
   content: "";
-  font-family: FontAwesome;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
   color: inherit;
   opacity: 0.4;
   font-size: 0.8em;
