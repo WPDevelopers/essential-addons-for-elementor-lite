@@ -26,7 +26,7 @@ trait Product_Grid
                             ' . $product->get_image('woocommerce_thumbnail') . '
                             <h2 class="woocommerce-loop-product__title">' . $product->get_title() . '</h2>
                             ' . ($settings['eael_product_grid_rating'] != 'yes' ? '' : wc_get_rating_html($product->get_average_rating(), $product->get_rating_count())) . '
-                            ' . ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') . '
+                            '.( ! $product->managing_stock() && ! $product->is_in_stock() ? '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>' : ($product->is_on_sale() ? '<span class="onsale">' . __('Sale!', 'essential-addons-for-elementor-lite') . '</span>' : '') ).'
                             <span class="price">' . $product->get_price_html() . '</span>
                         </a>';
                         woocommerce_template_loop_add_to_cart();
