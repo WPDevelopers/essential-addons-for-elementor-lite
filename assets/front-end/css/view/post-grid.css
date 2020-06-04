@@ -73,6 +73,7 @@
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
+  white-space: nowrap;
 }
 .eael-grid-post .eael-entry-footer .eael-entry-meta {
   -webkit-box-orient: vertical;
