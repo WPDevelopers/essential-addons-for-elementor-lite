@@ -85,51 +85,111 @@ class Login_Register extends Widget_Base {
 	 * It adds controls related to Login Form Fields section to the Widget Content Tab
 	 */
 	protected function init_content_login_fields_controls() {
-		$this->start_controls_section( 'eael_section_content_login_fields', [
-				'label' => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
-			]
-		);
+		$this->start_controls_section( 'section_content_login_fields', [
+			'label' => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
+		] );
 
-		$this->add_control(
-			'eael_login_label_types',
-			[
-				'label'   => __( 'Login Fields Label', EAEL_TEXTDOMAIN ),
-				'type'    => Controls_Manager::SELECT,
-				'options' => [
-					'default' => __( 'Default', EAEL_TEXTDOMAIN ),
-					'custom'  => __( 'Custom', EAEL_TEXTDOMAIN ),
-					'none'    => __( 'None', EAEL_TEXTDOMAIN ),
-				],
-				'default' => 'default',
-			]
-		);
+		$this->add_control( 'login_label_types', [
+			'label'   => __( 'Login Fields Label', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'default' => __( 'Default', EAEL_TEXTDOMAIN ),
+				'custom'  => __( 'Custom', EAEL_TEXTDOMAIN ),
+				'none'    => __( 'Hide', EAEL_TEXTDOMAIN ),
+			],
+			'default' => 'default',
+		] );
 
-		$this->add_control(
-			'eael_login_field_width',
-			[
-				'label' => esc_html__( 'Input Fields width', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 500,
-						'step' => 5,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
+		$this->add_control( 'login_labels_heading', [
+			'label'     => esc_html__( 'Labels', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+
+		$this->add_control( 'login_user_label', [
+			'label'       => __( 'Username Label', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Username or Email Address', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'login_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'login_password_label', [
+			'label'       => __( 'Password Label', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Password', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'login_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'login_placeholders_heading', [
+			'label'     => esc_html__( 'Placeholders', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'login_user_placeholder', [
+			'label'       => __( 'Username Placeholder', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Username or Email Address', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'login_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'login_password_placeholder', [
+			'label'       => __( 'Password Placeholder', EAEL_TEXTDOMAIN ),
+			'default'     => __( 'Password', EAEL_TEXTDOMAIN ),
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true, ],
+			'label_block' => true,
+			'condition'   => [ 'login_label_types' => 'custom', ],
+		] );
+
+		$this->add_control( 'login_field_width', [
+			'label'      => esc_html__( 'Input Fields width', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
 				],
-				'default' => [
-					'unit' => '%',
-					'size' => 100,
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
 				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-login-form input' => 'width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+			],
+			'default'    => [
+				'unit' => '%',
+				'size' => 100,
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-login-form input' => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'separator'  => 'before',
+		] );
+
+		$this->add_control( 'login_show_remember_me', [
+			'label'     => __( 'Remember Me Checkbox', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_control( 'login_enable_ajax', [
+			'label'   => __( 'Submit Login Form via AJAX', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => 'yes',
+		] );
 
 		$this->end_controls_section();
 	}
