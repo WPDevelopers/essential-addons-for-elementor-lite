@@ -76,6 +76,7 @@
 .eael-grid-post .eael-entry-meta {
 	display: flex;
 	flex-direction: row;
+	white-space: nowrap;
 }
 
 .eael-grid-post .eael-entry-footer .eael-entry-meta {
@@ -526,4 +527,60 @@
 		visibility: visible;
 		opacity: 1;
 	}
+}
+
+
+
+.eael-post-grid-style {
+	&-three {
+		.eael-meta-posted-on {
+			min-width: 60px;
+			height: 50px;
+			padding: 5px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 4px;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+			text-align: center;
+			font-size: 16px;
+			line-height: 18px;
+			margin-top: 12px;
+			margin-left: 12px;
+			span {
+				display: block;
+			}
+		}
+	}
+  &-two {
+    .eael-entry-meta {
+		align-items: baseline;
+      .eael-meta-posted-on {
+        padding: 0;
+		font-size: 12px;
+		margin-right: 15px;
+		color: #929292;
+        i {
+          margin-right: 7px;
+        }
+      }
+      .post-meta-categories {
+        list-style: none;
+        display: inline-flex;
+		flex-flow: wrap;
+		margin: 0;
+        li {
+          font-size: 12px;
+		  margin-right: 7px;
+		  color: #929292;
+          &:last-child {
+            margin-right: 0;
+		  }
+		  a {
+			  color: #929292;
+		  }
+        }
+      }
+    }
+  }
 }
