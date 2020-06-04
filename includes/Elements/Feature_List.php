@@ -826,6 +826,7 @@ class Feature_List extends Widget_Base {
                 'eael-feature-list-items',
                 $settings['eael_feature_list_icon_shape'],
                 $settings['eael_feature_list_icon_shape_view'],
+                $settings['eael_feature_list_connector_type'],
             ],
         ] );
         // connector class change by connector type
@@ -931,12 +932,12 @@ class Feature_List extends Widget_Base {
             }
 
             ?>
-									<li class="eael-feature-list-item">
-										<?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
-											<span class="connector" style="<?php echo $connector; ?>"></span>
-											<span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
-											<span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
-										<?php endif;?>
+												<li class="eael-feature-list-item">
+													<?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
+														<span class="connector" style="<?php echo $connector; ?>"></span>
+														<span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
+														<span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
+													<?php endif;?>
 
 
 						<div class="eael-feature-list-icon-box">
