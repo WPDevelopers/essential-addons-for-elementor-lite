@@ -11,6 +11,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border as Group_Control_Border;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
 use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Group_Control_Box_Shadow;
 
 class Betterdocs_Category_Grid extends Widget_Base
 {
@@ -303,6 +304,37 @@ class Betterdocs_Category_Grid extends Widget_Base
                 ]
             );
 
+            $this->add_group_control(
+                Group_Control_Box_Shadow::get_type(),
+                [
+                    'name' => 'grid_box_shadow',
+                    'label' => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner',
+                ]
+            );
+
+
+            $this->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name' => 'grid_border',
+                    'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+                    'selector' => '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner',
+                ]
+            );
+
+            $this->add_responsive_control(
+                'grid_border_radius',
+                [
+                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'em' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-better-docs-category-grid-wrapper .eael-bd-cg-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ]
+                ]
+            );
+
             $this->add_responsive_control(
                 'column_padding', // Legacy control id
                 [
@@ -344,7 +376,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_control(
                 'cat_title_color',
                 [
-                    'label' => esc_html__('Title Color', 'essential-addons-for-elementor-lite'),
+                    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .eael-docs-cat-title' => 'color: {{VALUE}};',
@@ -358,6 +390,19 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'name' => 'title_border', // Legacy control name change it with 'border_size' if anything happens.
                     'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
                     'selector' => '{{WRAPPER}} .eael-bd-cg-header-inner',
+                ]
+            );
+
+            $this->add_responsive_control(
+                'cat_title_padding',
+                [
+                    'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'allowed_dimensions' => 'vertical',
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-bd-cg-header-inner' => 'padding-top: {{TOP}}{{UNIT}}; padding-bottom: {{BOTTOM}}{{UNIT}};',
+                    ],
                 ]
             );
 
@@ -451,7 +496,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_control(
                 'count_border_radius',
                 [
-                    'label' => __( 'Border Radius', 'plugin-domain' ),
+                    'label' => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
