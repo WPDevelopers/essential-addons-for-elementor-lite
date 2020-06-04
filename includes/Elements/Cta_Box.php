@@ -88,10 +88,10 @@ class Cta_Box extends Widget_Base
         /**
          * Condition: 'eael_cta_type' => 'cta-basic'
          */
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_cta_content_type',
             [
-                'label' => esc_html__('Content Type', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'cta-default',
                 'label_block' => false,
@@ -100,6 +100,8 @@ class Cta_Box extends Widget_Base
                     'cta-center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
                     'cta-right' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
                 ],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'prefix_class' => 'content-align-%s',
                 'condition' => [
                     'eael_cta_type' => 'cta-basic',
                 ],
@@ -156,6 +158,15 @@ class Cta_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_cta_sub_title',
+            [
+                'label' => esc_html__('Sub Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'default' => '',
+            ]
+        );
         $this->add_control(
             'eael_cta_title',
             [
@@ -224,11 +235,11 @@ class Cta_Box extends Widget_Base
                 ],
             ]
         );
-
+        // primary button
         $this->add_control(
             'eael_cta_btn_text',
             [
-                'label' => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Primary Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
@@ -238,7 +249,7 @@ class Cta_Box extends Widget_Base
         $this->add_control(
             'eael_cta_btn_link',
             [
-                'label' => esc_html__('Button Link', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Primary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
                 'label_block' => true,
                 'default' => [
@@ -247,6 +258,47 @@ class Cta_Box extends Widget_Base
                 ],
                 'show_external' => true,
                 'separator' => 'after',
+            ]
+        );
+        // secondary button
+        $this->add_control(
+			'eael_cta_secondary_btn_is_show',
+			[
+				'label' => __( 'Show Secondary Button', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+        $this->add_control(
+            'eael_cta_secondary_btn_text',
+            [
+                'label' => esc_html__('Secondary Button Text', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'default' => esc_html__('Button Text Two', 'essential-addons-for-elementor-lite'),
+                'condition' => array(
+                    'eael_cta_secondary_btn_is_show' => 'yes'
+                )
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_secondary_btn_link',
+            [
+                'label' => esc_html__('Secondary Button Link', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::URL,
+                'label_block' => true,
+                'default' => [
+                    'url' => 'http://',
+                    'is_external' => '',
+                ],
+                'show_external' => true,
+                'separator' => 'after',
+                'condition' => array(
+                    'eael_cta_secondary_btn_is_show' => 'yes'
+                )
             ]
         );
 
@@ -477,7 +529,49 @@ class Cta_Box extends Widget_Base
                 ],
             ]
         );
+        // sub title
+        $this->add_control(
+            'eael_cta_sub_title_heading',
+            [
+                'label' => esc_html__('Sub Title Style', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
 
+        $this->add_control(
+            'eael_cta_sub_title_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .sub-title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_cta_sub_title_typography',
+                'selector' => '{{WRAPPER}} .eael-call-to-action .sub-title',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cta_sub_title_margin',
+            [
+                'label' => esc_html__('Space', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .sub-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // content
         $this->add_control(
             'eael_cta_content_heading',
             [
@@ -511,13 +605,13 @@ class Cta_Box extends Widget_Base
 
         /**
          * -------------------------------------------
-         * Tab Style (Button Style)
+         * Tab Style (Primary Button Style)
          * -------------------------------------------
          */
         $this->start_controls_section(
             'eael_section_cta_btn_style_settings',
             [
-                'label' => esc_html__('Button Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Primary Button Style', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -568,6 +662,17 @@ class Cta_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_cta_btn_is_used_gradient_bg',
+			[
+				'label' => __( 'Use Gradient Background', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'yes', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+        );
+
         $this->start_controls_tabs('eael_cta_button_tabs');
 
         // Normal State Tab
@@ -580,11 +685,13 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#4d4d4d',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)' => 'color: {{VALUE}};',
                 ],
             ]
         );
 
+        
+        
         $this->add_control(
             'eael_cta_btn_normal_bg_color',
             [
@@ -592,17 +699,32 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f9f9f9',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)' => 'background: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_cta_btn_is_used_gradient_bg' => ''
+                ]
             ]
         );
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_cta_btn_normal_gradient_bg_color',
+				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
+                'condition' => [
+                    'eael_cta_btn_is_used_gradient_bg' => 'yes'
+                ]
+			]
+		);
 
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_cat_btn_normal_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
             ]
         );
 
@@ -617,7 +739,7 @@ class Cta_Box extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)' => 'border-radius: {{SIZE}}px;',
                 ],
             ]
         );
@@ -634,7 +756,7 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f9f9f9',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover:not(.cta-secondary-button)' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -646,11 +768,26 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#3F51B5',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button:after' => 'background: {{VALUE}};',
-                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:after:not(.cta-secondary-button)' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover:not(.cta-secondary-button)' => 'background: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_cta_btn_is_used_gradient_bg' => ''
+                ]
             ]
         );
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_cta_btn_hover_gradient_bg_color',
+				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:hover:not(.cta-secondary-button)',
+                'condition' => [
+                    'eael_cta_btn_is_used_gradient_bg' => 'yes'
+                ]
+			]
+		);
 
         $this->add_control(
             'eael_cta_btn_hover_border_color',
@@ -659,7 +796,7 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:hover:not(.cta-secondary-button)' => 'border-color: {{VALUE}};',
                 ],
             ]
 
@@ -673,7 +810,7 @@ class Cta_Box extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_cta_button_shadow',
-                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button',
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
                 'separator' => 'before',
             ]
         );
@@ -682,7 +819,176 @@ class Cta_Box extends Widget_Base
 
         /**
          * -------------------------------------------
-         * Tab Style (Button Style)
+         * Tab Style (Secondary Button Style)
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_cta_secondary_btn_style_settings',
+            [
+                'label' => esc_html__('Secondary Button Style', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_cta_secondary_btn_is_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_secondary_btn_effect_type',
+            [
+                'label' => esc_html__('Effect', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'default',
+                'label_block' => false,
+                'options' => [
+                    'default' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+                    'top-to-bottom' => esc_html__('Top to Bottom', 'essential-addons-for-elementor-lite'),
+                    'left-to-right' => esc_html__('Left to Right', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cta_secondary_btn_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cta_secondary_btn_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_cta_secondary_btn_typography',
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button',
+            ]
+        );
+
+        $this->start_controls_tabs('eael_cta_secondary_button_tabs');
+
+        // Normal State Tab
+        $this->start_controls_tab('eael_cta_secondary_btn_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_control(
+            'eael_cta_secondary_btn_normal_text_color',
+            [
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#4d4d4d',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_cta_secondary_btn_normal_bg_color',
+				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button',
+			]
+		);
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_cat_secondary_btn_normal_border',
+                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button',
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_secondary_btn_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button' => 'border-radius: {{SIZE}}px;',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        // Hover State Tab
+        $this->start_controls_tab('eael_cta_secondary_btn_hover', ['label' => esc_html__('Hover', 'essential-addons-for-elementor-lite')]);
+
+        $this->add_control(
+            'eael_cta_secondary_btn_hover_text_color',
+            [
+                'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#f9f9f9',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_cta_secondary_btn_hover_bg_color',
+				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button:after, {{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button:hover',
+			]
+		);
+
+        $this->add_control(
+            'eael_cta_secondary_btn_hover_border_color',
+            [
+                'label' => esc_html__('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_cta_secondary_button_shadow',
+                'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button',
+                'separator' => 'before',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Tab Style (Icon Style)
          * -------------------------------------------
          */
         $this->start_controls_section(
@@ -736,10 +1042,13 @@ class Cta_Box extends Widget_Base
     {
 
         $settings = $this->get_settings_for_display();
-        $target = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $sub_title = $settings['eael_cta_sub_title'];
         $icon_migrated = isset($settings['__fa4_migrated']['eael_cta_flex_grid_icon_new']);
         $icon_is_new = empty($settings['eael_cta_flex_grid_icon']);
+        // Button
+        $target_primary     = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
+        $nofollow_primary   = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+        
 
         if ('cta-bg-color' == $settings['eael_cta_color_type']) {
             $cta_class = 'bg-lite';
@@ -750,55 +1059,69 @@ class Cta_Box extends Widget_Base
         } else {
             $cta_class = '';
         }
-        // Is Basic Cta Content Center or Not
-        if ('cta-center' === $settings['eael_cta_content_type']) {
-            $cta_alignment = 'cta-center';
-        } elseif ('cta-right' === $settings['eael_cta_content_type']) {
-            $cta_alignment = 'cta-right';
-        } else {
-            $cta_alignment = 'cta-left';
-        }
-        // Button Effect
+
+        // Primary Button Effect
+        $cta_btn_effect = '';
         if ('left-to-right' == $settings['eael_cta_btn_effect_type']) {
             $cta_btn_effect = 'effect-2';
         } elseif ('top-to-bottom' == $settings['eael_cta_btn_effect_type']) {
             $cta_btn_effect = 'effect-1';
-        } else {
-            $cta_btn_effect = '';
+        }
+        // Secondary Button Effect
+        $cta_secondary_btn_effect = '';
+        if ('left-to-right' == $settings['eael_cta_secondary_btn_effect_type']) {
+            $cta_secondary_btn_effect = 'effect-2';
+        } elseif ('top-to-bottom' == $settings['eael_cta_secondary_btn_effect_type']) {
+            $cta_secondary_btn_effect = 'effect-1';
         }
 
-        ?>
+        // Heading Markup
+        $headingMarkup = '';
+        if(!empty($sub_title)){
+            $headingMarkup .='<h4 class="sub-title">'.$sub_title.'</h4>';
+        }
+        $headingMarkup .='<'.$settings['title_tag'].' class="title">'.$settings['eael_cta_title'].'</'.$settings['title_tag'].'>';
+
+        // content markup
+        $contentMarkup = '';
+        if ('content' == $settings['eael_cta_title_content_type']) {
+            $contentMarkup .='<p>'.$settings['eael_cta_content'].'</p>';
+        }else if ('template' == $settings['eael_cta_title_content_type']){
+            if (!empty($settings['eael_primary_templates'])) {
+                $eael_template_id = $settings['eael_primary_templates'];
+                $eael_frontend = new Frontend;
+                $contentMarkup .= $eael_frontend->get_builder_content($eael_template_id, true);
+            }
+        }
+
+        // button markup
+        $buttonMarkup = '';
+        $buttonMarkup .='<a href="'.esc_url($settings['eael_cta_btn_link']['url']).'" '.$target_primary.' '.$nofollow_primary.' class="cta-button '.esc_attr($cta_btn_effect).'">'.esc_html($settings['eael_cta_btn_text']).'</a>';
+        if($settings['eael_cta_secondary_btn_is_show'] === 'yes'){
+            $target_secondary   = $settings['eael_cta_secondary_btn_link']['is_external'] ? 'target="_blank"' : '';
+            $nofollow_secondary = $settings['eael_cta_secondary_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
+            $buttonMarkup .='<a href="'.esc_url($settings['eael_cta_secondary_btn_link']['url']).'" '.$target_secondary.' '.$nofollow_secondary.' class="cta-button cta-secondary-button '.esc_attr($cta_secondary_btn_effect).'">'.esc_html($settings['eael_cta_secondary_btn_text']).'</a>';
+        }
+    ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action <?php echo esc_attr($cta_class); ?> <?php echo esc_attr($cta_alignment); ?>">
-	    <<?php echo $settings['title_tag']; ?> class="title"><?php echo $settings['eael_cta_title']; ?></<?php echo $settings['title_tag']; ?>>
-	    <?php if ('content' == $settings['eael_cta_title_content_type']): ?>
-	    <p><?php echo $settings['eael_cta_content']; ?></p>
-		<?php elseif ('template' == $settings['eael_cta_title_content_type']): ?>
-			<?php
-				if (!empty($settings['eael_primary_templates'])) {
-					echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
-				}
-			?>
-		<?php endif;?>
-	    <a href="<?php echo esc_url($settings['eael_cta_btn_link']['url']); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr($cta_btn_effect); ?>"><?php esc_html_e($settings['eael_cta_btn_text'], 'essential-addons-for-elementor-lite');?></a>
+	<div class="eael-call-to-action <?php echo esc_attr($cta_class); ?>">
+        <?php 
+            print $headingMarkup;
+            print $contentMarkup;
+            print $buttonMarkup; 
+        ?>
 	</div>
 	<?php endif;?>
 	<?php if ('cta-flex' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action cta-flex <?php echo esc_attr($cta_class); ?>">
 	    <div class="content">
-	        <<?php echo $settings['title_tag']; ?> class="title"><?php echo $settings['eael_cta_title']; ?></<?php echo $settings['title_tag']; ?>>
-	        <?php if ('content' == $settings['eael_cta_title_content_type']): ?>
-		    <p><?php echo $settings['eael_cta_content']; ?></p>
-			<?php elseif ('template' == $settings['eael_cta_title_content_type']): ?>
-			<?php
-				if (!empty($settings['eael_primary_templates'])) {
-					echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
-				}
-			?>
-			<?php endif;?>
+            <?php 
+                print $headingMarkup;
+                print $contentMarkup;
+            ?>            
 	    </div>
 	    <div class="action">
-	        <a href="<?php echo esc_url($settings['eael_cta_btn_link']['url']); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="cta-button <?php echo esc_attr($cta_btn_effect); ?>"><?php esc_html_e($settings['eael_cta_btn_text'], 'essential-addons-for-elementor-lite');?></a>
+	        <?php print $buttonMarkup; ?>
 	    </div>
 	</div>
 	<?php endif;?>
@@ -816,22 +1139,16 @@ class Cta_Box extends Widget_Base
 			<?php }?>
 	    </div>
 	    <div class="content">
-	        <<?php echo $settings['title_tag']; ?> class="title"><?php echo $settings['eael_cta_title']; ?></<?php echo $settings['title_tag']; ?>>
-	        <?php if ('content' == $settings['eael_cta_title_content_type']): ?>
-		    <p><?php echo $settings['eael_cta_content']; ?></p>
-			<?php elseif ('template' == $settings['eael_cta_title_content_type']): ?>
-				<?php
-					if (!empty($settings['eael_primary_templates'])) {
-						echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
-					}
-				?>
-			<?php endif;?>
+            <?php 
+                print $headingMarkup;
+                print $contentMarkup;
+            ?> 
 	    </div>
 	    <div class="action">
-	       <a href="<?php echo esc_url($settings['eael_cta_btn_link']['url']); ?>" <?php echo $target; ?> class="cta-button <?php echo esc_attr($cta_btn_effect); ?>"><?php esc_html_e($settings['eael_cta_btn_text'], 'essential-addons-for-elementor-lite');?></a>
+            <?php print $buttonMarkup; ?>
 	    </div>
 	</div>
 	<?php endif;?>
 	<?php
-}
+    }
 }
