@@ -191,6 +191,70 @@ class Login_Register extends Widget_Base {
 			'default' => 'yes',
 		] );
 
+		/*--Login Fields Button--*/
+		$this->add_control( 'login_button_heading', [
+			'label'     => esc_html__( 'Login Button', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::HEADING,
+			'separator' => 'before',
+		] );
+
+		$this->add_control( 'login_button_text', [
+			'label'   => __( 'Button Text', EAEL_TEXTDOMAIN ),
+			'type'    => Controls_Manager::TEXT,
+			'dynamic' => [ 'active' => true, ],
+			'default' => __( 'Log In', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_responsive_control( 'login_align', [
+			'label'        => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'type'         => Controls_Manager::CHOOSE,
+			'options'      => [
+				'start'   => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-left',
+				],
+				'center'  => [
+					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-center',
+				],
+				'end'     => [
+					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-right',
+				],
+				'stretch' => [
+					'title' => __( 'Justified', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-justify',
+				],
+			],
+			'prefix_class' => 'elementor%s-button-align-',
+			'default'      => '',
+		] );
+
+		$this->add_control( 'login_button_width', [
+			'label'      => esc_html__( 'Login Button width', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+
+			'selectors'  => [
+				'{{WRAPPER}} .eael-login-form button' => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'separator'  => 'before',
+		] );
+
 		$this->end_controls_section();
 	}
 
