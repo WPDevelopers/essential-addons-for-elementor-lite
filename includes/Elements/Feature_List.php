@@ -410,8 +410,6 @@ class Feature_List extends Widget_Base {
                 'condition'   => [
                     'eael_feature_list_connector'      => 'yes',
                     'eael_feature_list_icon_position!' => 'top',
-                    // 'eael_feature_list_icon_position_tablet!' => 'top',
-                    // 'eael_feature_list_icon_position_mobile!' => 'top',
                 ],
                 'separator'   => 'before',
             ]
@@ -830,13 +828,8 @@ class Feature_List extends Widget_Base {
             ],
         ] );
         // connector class change by connector type
-        if (
-            ( $settings['eael_feature_list_icon_position'] == 'top' || $settings['eael_feature_list_icon_position_tablet'] == 'top' || $settings['eael_feature_list_icon_position_mobile'] == 'top' ) &&
-            ( $settings['eael_feature_list_connector'] == 'yes' )
-        ) {
+        if ( $settings['eael_feature_list_icon_position'] == 'top' && $settings['eael_feature_list_connector'] == 'yes' ) {
             $this->add_render_attribute( 'eael_feature_list', 'class', 'connector-type-modern' );
-        } else {
-            $this->add_render_attribute( 'eael_feature_list', 'class', 'connector-type-classic' );
         }
 
         $this->add_render_attribute( 'eael_feature_list_item', 'class', 'eael-feature-list-item' );
@@ -930,14 +923,14 @@ class Feature_List extends Widget_Base {
                 }
                 $feature_icon_tag = 'a';
             }
-
+            // var_dump( $settings['eael_feature_list_connector_type'] );
             ?>
-												<li class="eael-feature-list-item">
-													<?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
-														<span class="connector" style="<?php echo $connector; ?>"></span>
-														<span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
-														<span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
-													<?php endif;?>
+									                <li class="eael-feature-list-item">
+									                    <?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
+									                        <span class="connector" style="<?php echo $connector; ?>"></span>
+									                        <span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
+									                        <span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
+									                    <?php endif;?>
 
 
 						<div class="eael-feature-list-icon-box">
