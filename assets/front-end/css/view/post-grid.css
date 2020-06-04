@@ -99,7 +99,7 @@
   padding: 15px;
 }
 .eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on {
-  padding-left: 15px;
+  padding-left: 5px;
 }
 .eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before {
   content: "";
