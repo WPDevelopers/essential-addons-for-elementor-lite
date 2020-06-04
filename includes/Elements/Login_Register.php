@@ -101,7 +101,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_labels_heading', [
-			'label'     => esc_html__( 'Labels', 'essential-addons-for-elementor-lite' ),
+			'label'     => esc_html__( 'Labels', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
@@ -126,7 +126,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_placeholders_heading', [
-			'label'     => esc_html__( 'Placeholders', 'essential-addons-for-elementor-lite' ),
+			'label'     => esc_html__( 'Placeholders', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
@@ -149,7 +149,7 @@ class Login_Register extends Widget_Base {
 			'condition'   => [ 'login_label_types' => 'custom', ],
 		] );
 
-		$this->add_control( 'login_field_width', [
+		$this->add_responsive_control( 'login_field_width', [
 			'label'      => esc_html__( 'Input Fields width', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
@@ -193,7 +193,7 @@ class Login_Register extends Widget_Base {
 
 		/*--Login Fields Button--*/
 		$this->add_control( 'login_button_heading', [
-			'label'     => esc_html__( 'Login Button', 'essential-addons-for-elementor-lite' ),
+			'label'     => esc_html__( 'Login Button', EAEL_TEXTDOMAIN ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
 		] );
@@ -230,7 +230,7 @@ class Login_Register extends Widget_Base {
 			'default'      => '',
 		] );
 
-		$this->add_control( 'login_button_width', [
+		$this->add_responsive_control( 'login_button_width', [
 			'label'      => esc_html__( 'Login Button width', EAEL_TEXTDOMAIN ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
