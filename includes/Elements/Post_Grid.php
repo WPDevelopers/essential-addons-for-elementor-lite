@@ -33,6 +33,13 @@ class Post_Grid extends Widget_Base {
         return ['essential-addons-for-elementor-lite'];
     }
 
+    public function get_style_depends() {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
+
     public function get_keywords() {
         return [
             'post',
