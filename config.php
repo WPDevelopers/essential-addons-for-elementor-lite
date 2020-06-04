@@ -685,12 +685,7 @@ $config = [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/betterdocs-category-grid.min.js',
                         'type'    => 'self',
                         'context' => 'view',
-                    ],
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/betterdocs-category-grid.min.js',
-                        'type'    => 'self',
-                        'context' => 'edit',
-                    ],
+                    ]
                 ]
             ]
         ],
