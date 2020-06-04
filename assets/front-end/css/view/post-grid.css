@@ -643,6 +643,8 @@
 .eael-post-grid-style-two .eael-entry-meta .eael-meta-posted-on {
   padding: 0;
   font-size: 12px;
+  margin-right: 15px;
+  color: #929292;
 }
 .eael-post-grid-style-two .eael-entry-meta .eael-meta-posted-on i {
   margin-right: 7px;
@@ -653,14 +655,15 @@
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: 0 0 0 15px;
   -webkit-flex-flow: wrap;
       -ms-flex-flow: wrap;
           flex-flow: wrap;
+  margin: 0;
 }
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li {
   font-size: 12px;
   margin-right: 7px;
+  color: #929292;
 }
 .eael-post-grid-style-two .eael-entry-meta .post-meta-categories li:last-child {
   margin-right: 0;
