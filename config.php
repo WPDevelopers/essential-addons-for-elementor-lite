@@ -799,6 +799,10 @@ $config = [
                 ],
             ],
         ],
+        'login-register'             => [
+            'class'      => '\Essential_Addons_Elementor\Elements\Login_Register',
+            //@TODO; add dependency later
+        ],
     ],
     'extensions' => [
         'eael-promotion'        => [
