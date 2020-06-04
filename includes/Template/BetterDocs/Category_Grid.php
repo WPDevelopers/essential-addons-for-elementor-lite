@@ -22,8 +22,6 @@ trait Category_Grid
     public static function render_template_($settings)
     {
 
-        $query = new \WP_Query($args);
-
         $terms_object = array(
             'parent' => 0,
             'taxonomy' => 'doc_category',
