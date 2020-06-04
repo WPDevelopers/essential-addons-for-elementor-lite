@@ -213,7 +213,7 @@ trait Helper
         $this->add_control(
 			'grid_query_heading',
 			[
-				'label' => __( 'Category Grid', 'plugin-name' ),
+				'label' => __( 'Category Grid', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING
 			]
 		);
@@ -295,7 +295,7 @@ trait Helper
         $this->add_control(
 			'grid_posts_query_heading',
 			[
-				'label' => __( 'Grid Posts', 'plugin-name' ),
+				'label' => __( 'Grid List Posts', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before'
 			]
