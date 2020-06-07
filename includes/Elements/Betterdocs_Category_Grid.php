@@ -959,6 +959,15 @@ class Betterdocs_Category_Grid extends Widget_Base
 
     }
 
+    protected static function get_doc_post_count($term_count = 0, $term_id) {
+        $tax_terms = get_terms( 'doc_category', ['child_of' => $term_id]);
+
+        foreach ($tax_terms as $tax_term) {
+            $term_count += $tax_term->count;
+        }
+        return $term_count;
+    }
+
     protected function render()
     {
 
@@ -1016,7 +1025,9 @@ class Betterdocs_Category_Grid extends Widget_Base
 
         $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
             $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
+
             $html .= self::render_template_($settings);
+
             $html .= '</div>';
             $html .= '<div class="clearfix"></div>';
 
