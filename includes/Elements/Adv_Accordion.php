@@ -93,6 +93,20 @@ class Adv_Accordion extends Widget_Base
                 'return_value' => 'yes',
             ]
         );
+        $this->add_control(
+            'eael_adv_accordion_toggle_icon_postion',
+            [
+                'label' => esc_html__('Toggle Icon Postion', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+                'default' => 'right',
+                'return_value' => 'right',
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes'
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_adv_accordion_icon_new',
@@ -358,11 +372,54 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-right: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img'   => 'margin-right: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img'   => 'margin-left: {{SIZE}}{{UNIT}};'
+                ],
+                'condition' => [
+                    'eael_adv_accordion_toggle_icon_postion' => 'right'
+                ]
+            ]
+        );
+        // after change toggle icon postion, tab icon will be also change postion then this control will be work
+        $this->add_responsive_control(
+            'eael_adv_accordion_tab_icon_gap_left',
+            [
+                'label' => __('Icon Gap', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 10,
+                    'unit' => 'px',
+                ],
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header i' => 'margin-left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header img'   => 'margin-left: {{SIZE}}{{UNIT}};'
+                ],
+                'condition' => [
+                    'eael_adv_accordion_toggle_icon_postion' => ''
+                ]
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'eael_adv_accordion_tab_distance',
+            [
+                'label' => esc_html__('Distance', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'eael_adv_accordion_tab_padding',
             [
@@ -729,6 +786,48 @@ class Adv_Accordion extends Widget_Base
                 ],
             ]
         );
+        $this->add_responsive_control(
+            'eael_adv_accordion_tab_toggle_icon_padding',
+            [
+                'label' => __('Icon Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle'    => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > img'         => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'eael_adv_accordion_tab_toggle_icon_radius',
+            [
+                'label' => __('Icon Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle'    => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header > img'         => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes',
+                ],
+            ]
+        );
+        
+        // caret tabs
+        $this->start_controls_tabs(
+			'eael_adv_accordion_tab_caret_tabs'
+		);
+
+		$this->start_controls_tab(
+			'eael_adv_accordion_tab_caret_tabs_normal',
+			[
+				'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
         $this->add_control(
             'eael_adv_tabs_tab_toggle_color',
             [
@@ -744,9 +843,87 @@ class Adv_Accordion extends Widget_Base
             ]
         );
         $this->add_control(
+            'eael_adv_tabs_tab_toggle_background_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes',
+                ],
+            ]
+        );
+        $this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_adv_tabs_tab_toggle_border',
+				'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle',
+			]
+		);
+        
+	
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'eael_adv_accordion_tab_caret_tabs_hover',
+			[
+				'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+        $this->add_control(
+            'eael_adv_tabs_tab_toggle_hover_color',
+            [
+                'label' => esc_html__('Caret Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle:hover' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_adv_tabs_tab_toggle_hover_background_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle:hover'   => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle:hover'    => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes',
+                ],
+            ]
+        );
+        $this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_adv_tabs_tab_toggle_border_hover',
+				'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header .fa-toggle:hover',
+			]
+		);
+	
+
+        $this->end_controls_tab();
+        
+        $this->start_controls_tab(
+			'eael_adv_accordion_tab_caret_tabs_active',
+			[
+				'label' => __( 'Active', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+        $this->add_control(
             'eael_adv_tabs_tab_toggle_active_color',
             [
-                'label' => esc_html__('Caret Color (Active)', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Caret Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -758,6 +935,37 @@ class Adv_Accordion extends Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'eael_adv_tabs_tab_toggle_active_background_color',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle'   => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list:hover .eael-accordion-header .fa-toggle'    => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_accordion_icon_show' => 'yes',
+                ],
+            ]
+        );
+        $this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_adv_tabs_tab_toggle_border_active',
+				'label' => __( 'Border', 'essential-addons-for-elementor-lite' ),
+				'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle',
+			]
+		);
+	
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+        // end caret tabs
+
+
         $this->end_controls_section();
     }
 
@@ -814,32 +1022,51 @@ class Adv_Accordion extends Widget_Base
             ]);
 
             echo '<div class="eael-accordion-list">
-                <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>
-                    <span>';
-            if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
-                if ($tab_icon_is_new || $tab_icon_migrated) {
-                    if( isset($tab['eael_adv_accordion_tab_title_icon_new']['value']['url']) ) {
-                        echo '<img src="' . $tab['eael_adv_accordion_tab_title_icon_new']['value']['url'] . '" />';
-                    }else {
-                        echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon_new']['value'] . ' fa-accordion-icon"></i>';
+                <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>';
+                     // toggle icon if user set position to left
+                    if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === '') {
+                        if ($accordion_icon_is_new || $accordion_icon_migrated) {
+                            if( isset($settings['eael_adv_accordion_icon_new']['value']['url']) ) {
+                                echo '<img src="' . $settings['eael_adv_accordion_icon_new']['value']['url'] . '" />';
+                            }else {
+                                echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
+                            }
+                        } else {
+                            echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
+                        }
                     }
-                } else {
-                    echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
-                }
-            }
-            echo $tab['eael_adv_accordion_tab_title'] .
-                '</span>';
-            if ($settings['eael_adv_accordion_icon_show'] === 'yes') {
-                if ($accordion_icon_is_new || $accordion_icon_migrated) {
-                    if( isset($settings['eael_adv_accordion_icon_new']['value']['url']) ) {
-                        echo '<img src="' . $settings['eael_adv_accordion_icon_new']['value']['url'] . '" />';
-                    }else {
-                        echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
+                    // tab title
+                    if($settings['eael_adv_accordion_toggle_icon_postion'] === ''){
+                        echo '<span>' . $tab['eael_adv_accordion_tab_title'] . '</span>';
                     }
-                } else {
-                    echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
-                }
-            }
+                    // tab icon
+                    if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
+                        if ($tab_icon_is_new || $tab_icon_migrated) {
+                            if( isset($tab['eael_adv_accordion_tab_title_icon_new']['value']['url']) ) {
+                                echo '<img src="' . $tab['eael_adv_accordion_tab_title_icon_new']['value']['url'] . '" />';
+                            }else {
+                                echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon_new']['value'] . ' fa-accordion-icon"></i>';
+                            }
+                        } else {
+                            echo '<i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i>';
+                        }
+                    }
+                    // tab title
+                    if($settings['eael_adv_accordion_toggle_icon_postion'] === 'right' || $settings['eael_adv_accordion_toggle_icon_postion'] === null){
+                        echo '<span>' . $tab['eael_adv_accordion_tab_title'] . '</span>';
+                    }
+                    // toggle icon
+                    if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === 'right') {
+                        if ($accordion_icon_is_new || $accordion_icon_migrated) {
+                            if( isset($settings['eael_adv_accordion_icon_new']['value']['url']) ) {
+                                echo '<img src="' . $settings['eael_adv_accordion_icon_new']['value']['url'] . '" />';
+                            }else {
+                                echo '<i class="' . $settings['eael_adv_accordion_icon_new']['value'] . ' fa-toggle"></i>';
+                            }
+                        } else {
+                            echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
+                        }
+                    }
             echo '</div>';
 
             echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
