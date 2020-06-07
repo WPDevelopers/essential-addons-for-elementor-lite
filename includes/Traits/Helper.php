@@ -894,6 +894,34 @@ trait Helper {
                 ]
             );
 
+            if ( 'eael-post-grid' === $this->get_name() ) {
+                $this->add_control(
+                    'eael_post_read_more_btn_alignment',
+                    [
+                        'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
+                        'type'      => \Elementor\Controls_Manager::CHOOSE,
+                        'options'   => [
+                            'left'   => [
+                                'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'fa fa-align-left',
+                            ],
+                            'center' => [
+                                'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'fa fa-align-center',
+                            ],
+                            'right'  => [
+                                'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'fa fa-align-right',
+                            ],
+                        ],
+                        'default'   => 'left',
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-wrap' => 'text-align: {{VALUE}};',
+                        ],
+                    ]
+                );
+            }
+
             $this->add_group_control(
                 Group_Control_Typography::get_type(),
                 [

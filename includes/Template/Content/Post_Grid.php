@@ -106,12 +106,12 @@ trait Post_Grid {
             }
 
             if ( $settings['eael_show_read_more_button'] ) {
-                echo '<a
+                echo '<div class="eael-post-elements-readmore-wrap"><a
                     href="' . get_the_permalink() . '"
                     class="eael-post-elements-readmore-btn"
                     ' . ( $settings['read_more_link_nofollow'] ? 'rel="nofollow"' : '' ) . '
                     ' . ( $settings['read_more_link_target_blank'] ? 'target="_blank"' : '' ) . '
-                    >' . esc_attr( $settings['read_more_button_text'] ) . '</a>';
+                    >' . esc_attr( $settings['read_more_button_text'] ) . '</a></div>';
             }
             echo '</div>
             </div>';

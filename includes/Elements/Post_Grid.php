@@ -539,7 +539,7 @@ class Post_Grid extends Widget_Base {
         $this->start_controls_section(
             'eael_section_typography',
             [
-                'label' => __( 'Color, Typography & Spacing', 'essential-addons-for-elementor-lite' ),
+                'label' => __( 'Color, Typography, alignment & Spacing', 'essential-addons-for-elementor-lite' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
             ]
         );
