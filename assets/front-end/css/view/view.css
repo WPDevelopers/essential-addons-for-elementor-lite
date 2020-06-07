@@ -2100,6 +2100,32 @@ table.eael-data-table .sorting_asc.sorting-none:after {
 .eael-dual-header-content-align-right {
   text-align: right;
 }
+
+.eael-dch-separator-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.eael-dch-separator-wrap .separator-one,
+.eael-dch-separator-wrap .separator-two {
+  display: inline-block;
+  width: 15%;
+  height: 5px;
+}
+
+.eael-dch-separator-wrap .separator-one {
+  background: #207eff;
+}
+
+.eael-dch-separator-wrap .separator-two {
+  background: #4f6592;
+}
 @charset "UTF-8";
 .eael-event-calendar-wrapper {
   font-family: Segoe UI;
