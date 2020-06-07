@@ -140,13 +140,24 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'default_form_type', [
 			'label'       => __( 'Default Form Type', EAEL_TEXTDOMAIN ),
-			'description' => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below. You will see option for that in other sections.', EAEL_TEXTDOMAIN ),
+			'description' => __( 'Choose the type of form you want to show by default. Note: you can show both form in a single page even if you select only login or registration from below.', EAEL_TEXTDOMAIN ),
 			'type'        => Controls_Manager::SELECT,
 			'options'     => [
 				'login'        => __( 'Login', EAEL_TEXTDOMAIN ),
 				'registration' => __( 'Registration', EAEL_TEXTDOMAIN ),
 			],
 			'default'     => 'login',
+		] );
+
+		$this->add_control( 'show_login_button', [
+			'label'     => __( 'Login Button', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+			'condition'       => [
+				'default_form_type' => 'registration',
+			],
 		] );
 
 		if ( ! $this->user_can_register ) {
@@ -156,10 +167,208 @@ class Login_Register extends Widget_Base {
 				'raw'             => sprintf( __( 'Registration is disabled on your site. Please enable it to use registration form. You can enable it from Dashboard » Settings » General » %1$sMembership%2$s.', EAEL_TEXTDOMAIN ), '<a href="' . esc_attr( esc_url( admin_url( 'options-general.php' ) ) ) . '" target="_blank">', '</a>' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 				'condition'       => [
+					'default_form_type' => 'registration',
+				],
+			] );
+		}
+
+
+		/*--show registration related control only if registration is enable on the site--*/
+		if ( $this->user_can_register ) {
+			$this->add_control( 'show_registration_button', [
+				'label'     => __( 'Registration Button', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
+				'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+				'condition'       => [
+					'default_form_type' => 'login',
+				],
+			] );
+
+			$this->add_control( 'registration_button_link', [
+				'label'     => __( 'Registration Text', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [
+					'active' => true,
+				],
+				'default'   => __( 'Register', EAEL_TEXTDOMAIN ),
+				'condition' => [
+					'show_registration_button' => 'yes',
+					'default_form_type' => 'login',
+				],
+			] );
+
+			$this->add_control( 'registration_button_action', [
+				'label'     => __( 'Registration Button Action', EAEL_TEXTDOMAIN ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
+					'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
+					'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
+				],
+				'default'   => 'default',
+				'condition' => [
+					'show_registration_button' => 'yes',
 					'default_form_type' => 'login',
 				],
 			] );
 		}
+
+		$this->add_control( 'footer_divider', [
+			'label'      => __( 'Divider', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::TEXT,
+			'default'    => '|',
+			'selectors'  => [
+				'{{WRAPPER}} .eael-login-form-footer a.eael-login-form-footer-link:not(:last-child) span:after' => 'content: "{{VALUE}}"; margin: 0 0.4em;',
+			],
+			'separator'  => 'after',
+			'conditions' => [
+				'relation' => 'and',
+				'terms'    => [
+					[
+						'name'     => 'show_lost_password',
+						'operator' => '==',
+						'value'    => 'yes',
+                        'relation' => 'or',
+                        'terms' => [
+	                        [
+		                        'name'     => 'show_login_button',
+		                        'operator' => '==',
+		                        'value'    => 'yes',
+	                        ],
+	                        [
+		                        'name'     => 'show_registration_button',
+		                        'operator' => '==',
+		                        'value'    => 'yes',
+	                        ],
+                        ]
+					],
+
+				],
+			],
+		] );
+
+		$this->add_control( 'show_logged_in_message', [
+			'label'     => __( 'Logged in Message', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+		] );
+
+		$this->add_responsive_control( 'footer_text_align', [
+			'label'      => __( 'Alignment', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::CHOOSE,
+			'options'    => [
+				'flex-start' => [
+					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-left',
+				],
+				'center'     => [
+					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-center',
+				],
+				'flex-end'   => [
+					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
+					'icon'  => 'eicon-text-align-right',
+				],
+			],
+			'separator'  => 'before',
+			'default'    => 'flex-start',
+			'selectors'  => [
+				'{{WRAPPER}} .eael-login-form-footer' => 'justify-content: {{VALUE}};',
+			],
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'     => 'show_lost_password',
+						'operator' => '==',
+						'value'    => 'yes',
+					],
+					[
+						'name'     => 'show_registration_button',
+						'operator' => '==',
+						'value'    => 'yes',
+					],
+				],
+			],
+		] );
+
+		$this->add_control( 'footer_text_color', [
+			'label'      => __( 'Text Color', EAEL_TEXTDOMAIN ),
+			'type'       => Controls_Manager::COLOR,
+			'scheme'     => [
+				'type'  => Color::get_type(),
+				'value' => Color::COLOR_4,
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-login-form-footer, {{WRAPPER}} .eael-login-form-footer a' => 'color: {{VALUE}};',
+			],
+			'conditions' => [
+				'relation' => 'or',
+				'terms'    => [
+					[
+						'name'     => 'show_lost_password',
+						'operator' => '==',
+						'value'    => 'yes',
+					],
+					[
+						'name'     => 'show_registration_button',
+						'operator' => '==',
+						'value'    => 'yes',
+					],
+				],
+			],
+		] );
+
+		$this->add_control( 'show_lost_password', [
+			'label'     => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SWITCHER,
+			'default'   => 'yes',
+			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
+			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
+		] );
+
+
+		$this->add_control( 'show_lost_password_text', [
+			'label'     => __( 'Text', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::TEXT,
+			'dynamic'   => [
+				'active' => true,
+			],
+			'default'   => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
+			'condition' => [
+				'show_lost_password' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'lost_password_select', [
+			'label'     => __( 'Link to', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::SELECT,
+			'options'   => [
+				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
+				'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
+			],
+			'default'   => 'default',
+			'condition' => [
+				'show_lost_password' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'lost_password_url', [
+			'label'     => __( 'Enter URL', EAEL_TEXTDOMAIN ),
+			'type'      => Controls_Manager::URL,
+			'dynamic'   => [
+				'active' => true,
+			],
+			'condition' => [
+				'lost_password_select' => 'custom',
+				'show_lost_password'   => 'yes',
+			],
+		] );
+
+
 
 		$this->end_controls_section();
 	}
@@ -392,188 +601,6 @@ class Login_Register extends Widget_Base {
 			],
 			'separator'     => 'after',
 		] );
-
-		$this->add_control( 'show_lost_password', [
-			'label'     => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
-			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-		] );
-
-
-		$this->add_control( 'show_lost_password_text', [
-			'label'     => __( 'Text', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::TEXT,
-			'dynamic'   => [
-				'active' => true,
-			],
-			'default'   => __( 'Lost your password?', EAEL_TEXTDOMAIN ),
-			'condition' => [
-				'show_lost_password' => 'yes',
-			],
-		] );
-
-		$this->add_control( 'lost_password_select', [
-			'label'     => __( 'Link to', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SELECT,
-			'options'   => [
-				'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
-				'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-			],
-			'default'   => 'default',
-			'condition' => [
-				'show_lost_password' => 'yes',
-			],
-		] );
-
-		$this->add_control( 'lost_password_url', [
-			'label'     => __( 'Enter URL', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::URL,
-			'dynamic'   => [
-				'active' => true,
-			],
-			'condition' => [
-				'lost_password_select' => 'custom',
-				'show_lost_password'   => 'yes',
-			],
-		] );
-
-		/*--show registration related control only if registration is enable on the site--*/
-		if ( $this->user_can_register ) {
-			$this->add_control( 'show_registration_button', [
-				'label'     => __( 'Registration Button', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'yes',
-				'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
-				'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-			] );
-
-			$this->add_control( 'registration_button_link', [
-				'label'     => __( 'Registration Text', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::TEXT,
-				'dynamic'   => [
-					'active' => true,
-				],
-				'default'   => __( 'Register', EAEL_TEXTDOMAIN ),
-				'condition' => [
-					'show_registration_button' => 'yes',
-				],
-			] );
-
-			$this->add_control( 'registration_button_action', [
-				'label'     => __( 'Registration Button Action', EAEL_TEXTDOMAIN ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => [
-					'default' => __( 'Default WordPress Page', EAEL_TEXTDOMAIN ),
-					'custom'  => __( 'Custom URL', EAEL_TEXTDOMAIN ),
-				],
-				'default'   => 'default',
-				'condition' => [
-					'show_registration_button' => 'yes',
-				],
-			] );
-		}
-
-		$this->add_control( 'footer_divider', [
-			'label'      => __( 'Divider', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::TEXT,
-			'default'    => '|',
-			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form-footer a.eael-login-form-footer-link:not(:last-child) span:after' => 'content: "{{VALUE}}"; margin: 0 0.4em;',
-			],
-			'separator'  => 'after',
-			'conditions' => [
-				'relation' => 'and',
-				'terms'    => [
-					[
-						'name'     => 'show_lost_password',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-					[
-						'name'     => 'show_registration_button',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-				],
-			],
-		] );
-
-		$this->add_control( 'show_logged_in_message', [
-			'label'     => __( 'Logged in Message', EAEL_TEXTDOMAIN ),
-			'type'      => Controls_Manager::SWITCHER,
-			'default'   => 'yes',
-			'label_off' => __( 'Hide', EAEL_TEXTDOMAIN ),
-			'label_on'  => __( 'Show', EAEL_TEXTDOMAIN ),
-		] );
-
-		$this->add_responsive_control( 'footer_text_align', [
-			'label'      => __( 'Alignment', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::CHOOSE,
-			'options'    => [
-				'flex-start' => [
-					'title' => __( 'Left', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-left',
-				],
-				'center'     => [
-					'title' => __( 'Center', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-center',
-				],
-				'flex-end'   => [
-					'title' => __( 'Right', EAEL_TEXTDOMAIN ),
-					'icon'  => 'eicon-text-align-right',
-				],
-			],
-			'separator'  => 'before',
-			'default'    => 'flex-start',
-			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form-footer' => 'justify-content: {{VALUE}};',
-			],
-			'conditions' => [
-				'relation' => 'or',
-				'terms'    => [
-					[
-						'name'     => 'show_lost_password',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-					[
-						'name'     => 'show_registration_button',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-				],
-			],
-		] );
-
-		$this->add_control( 'footer_text_color', [
-			'label'      => __( 'Text Color', EAEL_TEXTDOMAIN ),
-			'type'       => Controls_Manager::COLOR,
-			'scheme'     => [
-				'type'  => Color::get_type(),
-				'value' => Color::COLOR_4,
-			],
-			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form-footer, {{WRAPPER}} .eael-login-form-footer a' => 'color: {{VALUE}};',
-			],
-			'conditions' => [
-				'relation' => 'or',
-				'terms'    => [
-					[
-						'name'     => 'show_lost_password',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-					[
-						'name'     => 'show_registration_button',
-						'operator' => '==',
-						'value'    => 'yes',
-					],
-				],
-			],
-		] );
-
 
 		$this->end_controls_section();
 	}
