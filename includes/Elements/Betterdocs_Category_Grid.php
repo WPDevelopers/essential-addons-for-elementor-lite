@@ -17,7 +17,6 @@ class Betterdocs_Category_Grid extends Widget_Base
 {
 
     use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Template\BetterDocs\Category_Grid;
 
     public function get_name()
     {
@@ -126,9 +125,9 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'label' => __('Select Layout', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT2,
                     'options' => [
-                        'default' => __('Default', 'essential-addons-for-elementor-lite'),
+                        'Category_Grid_Layout_Default' => __('Default', 'essential-addons-for-elementor-lite'),
                     ],
-                    'default' => 'default',
+                    'default' => 'Category_Grid_Layout_Default',
                     'label_block' => true,
                 ]
             );
@@ -999,35 +998,11 @@ class Betterdocs_Category_Grid extends Widget_Base
             ]
         );
 
-        $settings = [
-            'include' => $settings['include'],
-            'exclude' => $settings['exclude'],
-            'grid_per_page' => $settings['grid_per_page'],
-            'offset' => $settings['offset'],
-            'orderby' => $settings['orderby'],
-            'order' => $settings['order'],
-            'post_per_page' => $settings['post_per_page'],
-            'post_orderby' => $settings['post_orderby'],
-            'post_order' => $settings['post_order'],
-            'nested_subcategory' => $settings['nested_subcategory'],
-            'show_header'   => $settings['show_header'],
-            'show_icon' => $settings['show_icon'],
-            'show_count' => $settings['show_count'],
-            'show_title' => $settings['show_title'],
-            'title_tag' => $settings['title_tag'],
-            'show_list' => $settings['show_list'],
-            'show_button' => $settings['show_button'],
-            'button_text' => $settings['button_text'],
-            'list_icon' => $settings['list_icon'],
-            'nested_list_title_closed_icon' => $settings['nested_list_title_closed_icon'],
-            'nested_list_title_open_icon'   => $settings['nested_list_title_open_icon']
-        ];
+        $file = sprintf('%sincludes/Template/BetterDocs/Category_Grid/%s.php', EAEL_PLUGIN_PATH, $settings['layout_template']);
 
         $html = '<div ' . $this->get_render_attribute_string('bd_category_grid_wrapper') . '>';
             $html .= '<div '.$this->get_render_attribute_string('bd_category_grid_inner').'>';
-
-            $html .= self::render_template_($settings);
-
+            $html .= include($file);
             $html .= '</div>';
             $html .= '<div class="clearfix"></div>';
 
