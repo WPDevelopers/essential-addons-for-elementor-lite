@@ -10,14 +10,7 @@ if (!defined('ABSPATH')) {
 
 trait Category_Grid
 {
-    protected static function get_doc_post_count($term_count = 0, $term_id) {
-        $tax_terms = get_terms( 'doc_category', ['child_of' => $term_id]);
-
-        foreach ($tax_terms as $tax_term) {
-            $term_count += $tax_term->count;
-        }
-        return $term_count;
-    }
+    
 
     public static function render_template_($settings)
     {
