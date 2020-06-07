@@ -6,6 +6,7 @@ use Elementor\Controls_Manager;
 use Elementor\Core\Schemes\Color;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Login_Registration;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -151,10 +152,10 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function init_content_login_fields_controls() {
 		$this->start_controls_section( 'section_content_login_fields', [
-			'label' => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
-            'condition' => [
-                    'default_form_type' => 'login'
-            ],
+			'label'     => __( 'Login Form Fields', EAEL_TEXTDOMAIN ),
+			'condition' => [
+				'default_form_type' => 'login',
+			],
 		] );
 
 		$this->add_control( 'login_label_types', [
@@ -329,9 +330,9 @@ class Login_Register extends Widget_Base {
 	protected function init_content_login_options_controls() {
 
 		$this->start_controls_section( 'section_content_login_actions', [
-			'label' => __( 'Login Form Actions', EAEL_TEXTDOMAIN ),
+			'label'     => __( 'Login Form Actions', EAEL_TEXTDOMAIN ),
 			'condition' => [
-				'default_form_type' => 'login'
+				'default_form_type' => 'login',
 			],
 		] );
 
@@ -462,7 +463,7 @@ class Login_Register extends Widget_Base {
 			'type'       => Controls_Manager::TEXT,
 			'default'    => '|',
 			'selectors'  => [
-				'{{WRAPPER}} .uael-login-form-footer a.uael-login-form-footer-link:not(:last-child) span:after' => 'content: "{{VALUE}}"; margin: 0 0.4em;',
+				'{{WRAPPER}} .eael-login-form-footer a.eael-login-form-footer-link:not(:last-child) span:after' => 'content: "{{VALUE}}"; margin: 0 0.4em;',
 			],
 			'separator'  => 'after',
 			'conditions' => [
@@ -510,7 +511,7 @@ class Login_Register extends Widget_Base {
 			'separator'  => 'before',
 			'default'    => 'flex-start',
 			'selectors'  => [
-				'{{WRAPPER}} .uael-login-form-footer' => 'justify-content: {{VALUE}};',
+				'{{WRAPPER}} .eael-login-form-footer' => 'justify-content: {{VALUE}};',
 			],
 			'conditions' => [
 				'relation' => 'or',
@@ -537,7 +538,7 @@ class Login_Register extends Widget_Base {
 				'value' => Color::COLOR_4,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .uael-login-form-footer, {{WRAPPER}} .uael-login-form-footer a' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .eael-login-form-footer, {{WRAPPER}} .eael-login-form-footer a' => 'color: {{VALUE}};',
 			],
 			'conditions' => [
 				'relation' => 'or',
@@ -579,17 +580,21 @@ class Login_Register extends Widget_Base {
 	protected function print_login_form() {
 		if ( $this->should_print_login_form ) { ?>
             <div class="login ">
-                <form name="loginform" id="loginform" action="/wp-login.php" method="post">
+                <form name="loginform" id="loginform" method="post">
+					<?php
+					// add login security nonce
+					wp_nonce_field( 'eael-login-action', 'eael-login-nonce' );
+					?>
                     <p>
-                        <label for="user_login">Username or Email Address</label>
-                        <input type="text" name="log" id="user_login" class="input" value="" size="20" autocapitalize="off" autocomplete="off" placeholder="Username or Email Address"
+                        <label for="eael-user-login">Username or Email Address</label>
+                        <input type="text" name="eael-user-login" id="eael-user-login" class="input" value="" size="20" autocapitalize="off" autocomplete="off" placeholder="Username or Email Address"
                         >
                     </p>
 
                     <div class="user-pass-wrap">
-                        <label for="user_pass">Password</label>
+                        <label for="eael-user-password">Password</label>
                         <div class="wp-pwd">
-                            <input type="password" name="pwd" id="user_pass" class="input password-input" value="" size="20" autocomplete="off" placeholder="Password"
+                            <input type="password" name="eael-user-password" id="eael-user-password" class="input password-input" value="" size="20" autocomplete="off" placeholder="Password"
                             >
                             <button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" aria-label="Show password">
                         <span class="dashicons dashicons-visibility"
@@ -602,11 +607,11 @@ class Login_Register extends Widget_Base {
                     </div>
 
                     <p class="forgetmenot">
-                        <input name="rememberme" type="checkbox" id="rememberme" value="forever">
-                        <label for="rememberme">Remember Me</label>
+                        <input name="eael-rememberme" type="checkbox" id="eael-rememberme" value="forever">
+                        <label for="eael-rememberme">Remember Me</label>
                     </p>
                     <p class="submit">
-                        <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Log In">
+                        <input type="submit" name="eael-login-submit" id="eael-login-submit" class="button button-primary button-large" value="Log In">
                         <input type="hidden" name="redirect_to" value="/wp-admin/">
                         <input type="hidden" name="testcookie" value="1">
                     </p>
@@ -619,7 +624,11 @@ class Login_Register extends Widget_Base {
 	protected function print_register_form() {
 		if ( $this->should_print_register_form ) { ?>
             <div class="register">
-                <form name="registerform" id="registerform" action="/wp-login.php?action=register" method="post" novalidate="novalidate">
+                <form name="registerform" id="registerform" method="post" novalidate="novalidate">
+					<?php
+					// add security nonce
+					wp_nonce_field( 'eael-register-action', 'eael-register-nonce' );
+					?>
                     <p>
                         <label for="user_login">Username</label>
                         <input type="text" name="user_login" id="user_login" class="input" value="" size="20" autocapitalize="off">
