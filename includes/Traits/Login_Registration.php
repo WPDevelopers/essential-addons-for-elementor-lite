@@ -33,10 +33,11 @@ trait Login_Registration {
 			return;
 		}
 
+
 		if ( ! session_id() && ! headers_sent() ) {
 			session_start();
 		}
-
+		do_action( 'eael/login-register/before-login');
 
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( false !== strpos( '@', $user_login ) ) {
@@ -58,19 +59,22 @@ trait Login_Registration {
 
 			if ( isset( $user_data->errors['invalid_email'][0] ) ) {
 
-				$_SESSION['eael_error'] = 'invalid_email';
+				$_SESSION['eael_login_error'] = 'invalid_email';
 
 			} elseif ( isset( $user_data->errors['invalid_username'][0] ) ) {
 
-				$_SESSION['eael_error'] = 'invalid_username';
+				$_SESSION['eael_login_error'] = 'invalid_username';
 
 			} elseif ( isset( $user_data->errors['incorrect_password'][0] ) ) {
 
-				$_SESSION['eael_error'] = 'incorrect_password';
+				$_SESSION['eael_login_error'] = 'incorrect_password';
 			}
 		} else {
+
 			wp_set_current_user( $user_data->ID, $user_login );
 			do_action( 'wp_login', $user_data->user_login, $user_data );
+			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
+
 			if ( !empty(  $_POST['redirect_to'] ) ) {
 				wp_safe_redirect( $_POST['redirect_to'] );
 				exit();
