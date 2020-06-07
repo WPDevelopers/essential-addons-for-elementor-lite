@@ -143,6 +143,36 @@
   padding: 5px 15px;
 }
 
+.eael-pricing .eael-pricing-item .eael-pricing-image.ribbon-4:before,
+.eael-pricing .eael-pricing-item.ribbon-4:before {
+  content: "Featured";
+  position: absolute;
+  width: auto;
+  background: #00c853;
+  color: #fff;
+  top: 30px;
+  right: -55px;
+  z-index: 10;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  width: 200px;
+  padding: 7px 0;
+  white-space: nowrap;
+}
+
+.eael-pricing .eael-pricing-item .eael-pricing-image.ribbon-left.ribbon-4:before,
+.eael-pricing .eael-pricing-item.ribbon-left.ribbon-4:before {
+  right: auto;
+  left: -55px;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
 .eael-pricing.style-1 .eael-pricing-item .header {
   display: block;
   position: relative;
