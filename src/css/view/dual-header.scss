@@ -40,3 +40,22 @@
 .eael-dual-header-content-align-right {
 	text-align: right;
 }
+
+
+// separator
+.eael-dch-separator-wrap {
+	display: flex;
+	justify-content: center;
+}
+.eael-dch-separator-wrap .separator-one,
+.eael-dch-separator-wrap .separator-two {
+	display: inline-block;
+	width: 15%;
+	height: 5px;
+}
+.eael-dch-separator-wrap .separator-one {
+	background: #207eff;
+}
+.eael-dch-separator-wrap .separator-two {
+	background: #4f6592;
+}
