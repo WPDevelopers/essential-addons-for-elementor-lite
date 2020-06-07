@@ -39,7 +39,24 @@ class Login_Register extends Widget_Base {
 	 * @var bool
 	 */
 	protected $should_print_register_form;
+	/**
+	 * It contains the message if user provides invalid username or email for login
+	 * @var string|void
+	 */
+	protected $invalid_login;
+	/**
+	 * It contains the message if user provides invalid password for login
+	 * @var string|void
+	 */
+	protected $invalid_password;
 
+	/**
+	 * Login_Register constructor.
+	 *
+	 * Initializing the Login_Register widget class.
+	 *
+	 * @inheritDoc
+	 */
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
 		$this->user_can_register = get_option( 'users_can_register' );
@@ -563,9 +580,11 @@ class Login_Register extends Widget_Base {
 
 
 	protected function render() {
+		//Note. forms are handled in Login_Registration Trait used in the Bootstrap class.
 		$settings                         = $this->get_settings_for_display();
 		$this->should_print_login_form    = ( ! empty( $settings['default_form_type'] ) && 'login' === $settings['default_form_type'] );
 		$this->should_print_register_form = ( $this->user_can_register && ( ! empty( $settings['default_form_type'] ) && 'registration' === $settings['default_form_type'] ) );
+
 		?>
         <div class="eael-login-registration-wrapper">
 			<?php
@@ -578,7 +597,9 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_login_form() {
-		if ( $this->should_print_login_form ) { ?>
+		if ( $this->should_print_login_form ) {
+			$this->check_login_validation_errors();
+			?>
             <div class="login ">
                 <form name="loginform" id="loginform" method="post">
 					<?php
@@ -587,15 +608,18 @@ class Login_Register extends Widget_Base {
 					?>
                     <p>
                         <label for="eael-user-login">Username or Email Address</label>
-                        <input type="text" name="eael-user-login" id="eael-user-login" class="input" value="" size="20" autocapitalize="off" autocomplete="off" placeholder="Username or Email Address"
-                        >
+                        <input type="text" name="eael-user-login" id="eael-user-login" class="input" value="" size="20" autocapitalize="off" autocomplete="off" placeholder="Username or Email Address" required>
+						<?php if ( $this->invalid_login ) { ?>
+                            <span class="eael-input-error">
+			                <?php echo esc_html( $this->invalid_login ); ?>
+                            </span>
+						<?php } ?>
                     </p>
 
                     <div class="user-pass-wrap">
                         <label for="eael-user-password">Password</label>
                         <div class="wp-pwd">
-                            <input type="password" name="eael-user-password" id="eael-user-password" class="input password-input" value="" size="20" autocomplete="off" placeholder="Password"
-                            >
+                            <input type="password" name="eael-user-password" id="eael-user-password" class="input password-input" value="" size="20" autocomplete="off" placeholder="Password" required>
                             <button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" aria-label="Show password">
                         <span class="dashicons dashicons-visibility"
                               aria-hidden="true"></span>
@@ -603,6 +627,11 @@ class Login_Register extends Widget_Base {
                                 <!-- <span class="dashicons dashicons-hidden"
 									aria-hidden="true"></span> -->
                             </button>
+							<?php if ( $this->invalid_password ) { ?>
+                                <span class="eael-input-error">
+                                    <?php echo esc_html( $this->invalid_password ); ?>
+                                </span>
+							<?php } ?>
                         </div>
                     </div>
 
@@ -647,6 +676,32 @@ class Login_Register extends Widget_Base {
                 </form>
             </div>
 			<?php
+		}
+	}
+
+	protected function check_login_validation_errors() {
+		// handle error message.
+		if ( session_id() && isset( $_SESSION['eael_login_error'] ) ) {
+
+			$login_error = isset( $_SESSION['eael_login_error'] ) ? $_SESSION['eael_login_error'] : '';
+
+			if ( $login_error ) {
+				switch ( $login_error ) {
+					//@TODO; in future, maybe let site-owner customize error messages.
+					case 'invalid_username':
+						$this->invalid_login = __( 'Invalid Username. Please check your username or try again with your email.', EAEL_TEXTDOMAIN );
+						break;
+					case 'invalid_email':
+						$this->invalid_login = __( 'Invalid Email. Please check your email or try again with your username.', EAEL_TEXTDOMAIN );
+						break;
+					case 'incorrect_password':
+						$this->invalid_password = __( 'Invalid Password. Please check your password and try again', EAEL_TEXTDOMAIN );
+						break;
+
+				}
+				unset( $_SESSION['eael_login_error'] );
+			}
+
 		}
 	}
 
